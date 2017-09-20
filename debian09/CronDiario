@@ -19,7 +19,7 @@ echo "------------------------------------------"
 echo "  AGREGANDO EL SCRIPT /etc/cron.daily..."
 echo "------------------------------------------"
 echo ""
-ln -s /root/nipescripts/debian9/CronDiario /etc/cron.daily/tareas
+ln -s /root/syscripts/debian09/CronDiario /etc/cron.daily/tareas
 
 echo ""
 echo "-------------------------------------"
