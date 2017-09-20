@@ -34,6 +34,7 @@ ln -s /root/syscripts/debian09/ExportarBaseDeDatos /root/syscripts/ebdd
 ln -s /root/syscripts/debian09/ExtraerSubtítuloDeMKV /root/syscripts/esdmkv
 ln -s /root/syscripts/debian09/HardwareInfoGráfica /root/syscripts/hardigra
 ln -s /root/syscripts/debian09/HardwareInfoRed /root/syscripts/hardired
+ln -s /root/syscripts/debian09/ImportarBaseDeDatos /root/syscripts/ibdd
 ln -s /root/syscripts/debian09/LanzarEscritorio /root/syscripts/escritorio
 ln -s /root/syscripts/debian09/ListarNodosTORQueEntran /root/syscripts/lisnodtor
 ln -s /root/syscripts/debian09/MonitorizarLog /root/syscripts/monlog
