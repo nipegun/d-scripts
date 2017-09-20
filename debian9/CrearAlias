@@ -32,8 +32,8 @@ ln -s /root/syscripts/debian9/CronSemanal /root/syscripts/cronse
 ln -s /root/syscripts/debian9/EnviarMailA /root/syscripts/ema
 ln -s /root/syscripts/debian9/ExportarBaseDeDatos /root/syscripts/ebdd
 ln -s /root/syscripts/debian9/ExtraerSubtítuloDeMKV /root/syscripts/esdmkv
-ln -s /root/syscripts/debian9/HardwareInfoGrafica /root/syscripts/hardigra
-ln -s /root/syscripts/debian9/HardwareInfoGrafica /root/syscripts/hardired
+ln -s /root/syscripts/debian9/HardwareInfoGráfica /root/syscripts/hardigra
+ln -s /root/syscripts/debian9/HardwareInfoRed /root/syscripts/hardired
 ln -s /root/syscripts/debian9/LanzarEscritorio /root/syscripts/escritorio
 ln -s /root/syscripts/debian9/ListarNodosTORQueEntran /root/syscripts/lisnodtor
 ln -s /root/syscripts/debian9/MonitorizarLog /root/syscripts/monlog
