@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#---------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA EJECUTAR TAREAS CRON UNA VEZ POR DÍA
+#---------------------------------------------------------------
+
+fechadeejecucion=$(date +A%YM%mD%d@%T)
+chmod +x /root/TareasUnaVezPorDía
+
+echo ""
+echo "------------------------------------------"
+echo "  AGREGANDO EL SCRIPT /etc/cron.daily..."
+echo "------------------------------------------"
+echo ""
+ln -s /root/nipescripts/debian9/CronDiario /etc/cron.daily/tareas
+
+echo ""
+echo "-------------------------------------"
+echo "  EJECUTANDO TAREAS CRON DIARIAS..."
+echo "-------------------------------------"
+echo ""
+/root/TareasUnaVezPorDía
+
+echo ""
+echo "--------------------"
+echo "  GUARDANDO LOG..."
+echo "--------------------"
+echo ""
+echo "Cron diario ejecutado el $fechadeejecucion ." >> /var/log/CronDiario.log
