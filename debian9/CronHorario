@@ -34,3 +34,4 @@ echo "  GUARDANDO LOG..."
 echo "--------------------"
 echo ""
 echo "Cron horario ejecutado el $fechadeejecucion ." >> /var/log/CronHorario.log
+
