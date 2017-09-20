@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#-------------------------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA MEDIR LA VELOCIDAD DE ESCRITURA DEL DISCO DE SISTEMA
+#  LA ESCRITURA SE EFECTÚA SOBRE LA CARPETA /var/tmp/ POR LO QUE ES NECESARIO
+# QUE /var/ NO ESTÉ EN OTRO DISCO
+#-------------------------------------------------------------------------------
+
+echo ""
+echo "---------------------------------------------------------"
+echo "Midiendo la velocidad para copiar 100MB en partes de 1MB:"
+echo "---------------------------------------------------------"
+echo ""
+dd if=/dev/zero of=/tmp/archivodeprueba conv=fdatasync bs=1M count=100; rm -f /tmp/archivodeprueba
+
+echo ""
+echo "-------------------------------------------------------"
+echo "Midiendo la velocidad para copiar 1GB en partes de 1MB:"
+echo "-------------------------------------------------------"
+echo ""
+dd if=/dev/zero of=/tmp/archivodeprueba conv=fdatasync bs=1M count=1000; rm -f /tmp/archivodeprueba
+
+echo ""
+echo "------------------------------------------------------"
+echo "Midiendo la velocidad para copiar 1GB de una sola vez:"
+echo "------------------------------------------------------"
+echo""
+dd if=/dev/zero of=/tmp/archivodeprueba conv=fdatasync bs=1G count=1; rm -f /tmp/archivodeprueba
+echo ""
