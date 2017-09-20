@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#-------------------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA CREAR LOS ALIAS DE LOS SYSCRIPTS PARA DEBIAN 9
+#-------------------------------------------------------------------------
+
+echo ""
+echo "---------------------------------------"
+echo "  CREANDO ALIAS PARA LOS SYSCRIPTS..."
+echo "---------------------------------------"
+echo ""
+
+ln -s /root/syscripts/debian9/externos/VelocidadDeInternet /root/syscripts/vdi
+
+ln -s /root/syscripts/debian9/ActualizarSistemaOperativo /root/syscripts/aso
+ln -s /root/syscripts/debian9/BloquearTráficoDeTOR /root/syscripts/blotrator
+ln -s /root/syscripts/debian9/BorrarDSStore /root/syscripts/bodss
+ln -s /root/syscripts/debian9/BorrarZoneIdentifier /root/syscripts/bozonid
+ln -s /root/syscripts/debian9/BuscarMódulosCargables /root/syscripts/busmodcar
+ln -s /root/syscripts/debian9/ComprobarSSD /root/syscripts/compssd
+ln -s /root/syscripts/debian9/CronDiario /root/syscripts/crondi
+ln -s /root/syscripts/debian9/CronHorario /root/syscripts/cronho
+ln -s /root/syscripts/debian9/CronMensual /root/syscripts/cronme
+ln -s /root/syscripts/debian9/CronSemanal /root/syscripts/cronse
+ln -s /root/syscripts/debian9/EnviarMailA /root/syscripts/ema
+ln -s /root/syscripts/debian9/ExportarBaseDeDatos /root/syscripts/ebdd
+ln -s /root/syscripts/debian9/ExtraerSubtítuloDeMKV /root/syscripts/esdmkv
+ln -s /root/syscripts/debian9/HardwareInfoGrafica /root/syscripts/hardigra
+ln -s /root/syscripts/debian9/HardwareInfoGrafica /root/syscripts/hardired
+ln -s /root/syscripts/debian9/LanzarEscritorio /root/syscripts/escritorio
+ln -s /root/syscripts/debian9/ListarNodosTORQueEntran /root/syscripts/lisnodtor
+ln -s /root/syscripts/debian9/MonitorizarLog /root/syscripts/monlog
+ln -s /root/syscripts/debian9/MostrarIPWAN /root/syscripts/ipwan
+ln -s /root/syscripts/debian9/MostrarReglasIPTablesActivas /root/syscripts/mosipt
+ln -s /root/syscripts/debian9/MostrarVersiónDeDebian /root/syscripts/ver
+ln -s /root/syscripts/debian9/NotificarFalloDeDisco /root/syscripts/nofadis
+ln -s /root/syscripts/debian9/NuevaWebVarWWW /root/syscripts/nuevawebvar
+ln -s /root/syscripts/debian9/Reiniciar /root/syscripts/rei
+ln -s /root/syscripts/debian9/RPMDeDisco /root/syscripts/rpmdis
+ln -s /root/syscripts/debian9/Sincronizarsyscripts /root/syscripts/sinnps
+ln -s /root/syscripts/debian9/TRIM /root/syscripts/trim
+ln -s /root/syscripts/debian9/UsuarioNuevoConShell /root/syscripts/usunushell
+ln -s /root/syscripts/debian9/UsuarioNuevoSinShell /root/syscripts/usununoshell
+ln -s /root/syscripts/debian9/Usuarios /root/syscripts/usu
+ln -s /root/syscripts/debian9/VelocidadDeDiscoDeSistema /root/syscripts/vddds
+ln -s /root/syscripts/debian9/WinDir /root/syscripts/windir
+
+echo ""
+echo "-------------------------------------------------------------------------"
+echo "  ALIAS CREADOS."
+echo "  DEBERÍAS PODER EJECUTAR LOS SCRIPTS ESCRIBIENDO EL NOMBRE DE SU ALIAS"
+echo "-------------------------------------------------------------------------"
+echo ""
