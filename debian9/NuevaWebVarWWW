@@ -1,0 +1,262 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#--------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA CREAR NUEVAS WEBS EN /var/www
+#--------------------------------------------------------
+
+total_param_corr=3
+
+if [ $# -ne $total_param_corr ]; then
+  clear
+  echo ""
+  echo "Se le deben pasar 3 parámetros obligatorios al script."
+  echo "Los parámetros deben estar en orden. Los parámetros son:"
+  echo ""
+  echo "ExtensionDelDominio NombreDeLaWeb Password"
+  echo ""
+  echo "Ejemplo: $0 .org unawebcualquiera 12345678"
+  echo ""
+  echo "NOTA: El nombre de la Web también se utilizará como nombre de usuario"
+  echo "MySQL."
+  echo ""
+  exit
+else
+  nombre_mysql_deseado=$2
+
+  # Comprobar si el nombre de usuario MySQL deseado tiene mas de 16 caracteres
+  if [ ${#nombre_mysql_deseado} -gt 16 ]; then
+
+    # Acortar nombre de usuario MySQL a 16 caracteres
+    nombre_mysql_ok=`expr substr $nombre_mysql_deseado 1 16`
+
+    # Advertir al usuario de que se va a usar un nombre de usuario MySQL acortado
+    clear
+    echo ""
+    echo "Has intentado usar $nombre_mysql_deseado como nombre para el usuario"
+    echo "de la base de datos pero MySQL no admite nombres de usuario"
+    echo "de más de 16 caracteres. En su lugar se utilizará $nombre_mysql_ok"
+    echo ""
+
+    # Crear la base de datos
+    echo ""
+    echo "$(tput setaf 1)Creando la base de datos con su usuario... $(tput sgr 0)"
+    echo ""
+    /root/scripts/crearbasededatosyusuario $2 $nombre_mysql_ok $3
+
+    # Crear las carpetas de la web
+    mkdir /var/www/$2$1/
+    mkdir /var/www/$2$1/logs/
+    echo "WEB OK" > /var/www/$2$1/index.html
+
+    # Crear la web en Apache
+    cp /etc/apache2/sites-available/nuevawebvar.conf /etc/apache2/sites-available/$2$1.conf
+    sed -i -e "s/nuevawebvar.com/$2$1/g" /etc/apache2/sites-available/$2$1.conf
+
+    # Crear el certificado SSL
+    echo ""
+    echo "$(tput setaf 1)Creando el certificado SSL... $(tput sgr 0)"
+    echo ""
+    service apache2 stop
+    /root/git/letsencrypt/letsencrypt-auto --apache -d $2$1 -d www.$2$1
+
+    # Activar el sitio y recargar apache
+    echo ""
+    echo "$(tput setaf 1)Activando la web en apache... $(tput sgr 0)"
+    echo ""
+    a2ensite $2$1
+    service apache2 start
+
+    # Crear el archivo .htaccess con algunas opciones
+    echo "# BEGIN Medidas de seguridad" > /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  # IMPEDIR ACCESO NO AUTORIZADO AL ARCHIVO .HTACCESS" >> /var/www/$2$1/.htaccess
+    echo '    <files ~ "^.*\.([Hh][Tt][Aa])">' >> /var/www/$2$1/.htaccess
+    echo "      order allow,deny" >> /var/www/$2$1/.htaccess
+    echo "      deny from all" >> /var/www/$2$1/.htaccess
+    echo "      satisfy all" >> /var/www/$2$1/.htaccess
+    echo "    </files>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  DESHABILITAR LA NAVEGACIÓN POR CARPETAS QUE NO TENGAN INDEX" >> /var/www/$2$1/.htaccess
+    echo "    Options -Indexes" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  # IMPEDIR EL ACCESO DE CIERTAS IPS" >> /var/www/$2$1/.htaccess
+    echo "    <Limit GET POST>" >> /var/www/$2$1/.htaccess
+    echo "      order allow,deny" >> /var/www/$2$1/.htaccess
+    echo "      deny from 45.45.45.45" >> /var/www/$2$1/.htaccess
+    echo "      allow from all" >> /var/www/$2$1/.htaccess
+    echo "    </Limit>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  # PROTEGER EL ARCHIVO DE CONFIGURACIÓN DE WORDPRESS" >> /var/www/$2$1/.htaccess
+    echo "    <files wp-config.php>" >> /var/www/$2$1/.htaccess
+    echo "      order allow,deny" >> /var/www/$2$1/.htaccess
+    echo "      deny from all" >> /var/www/$2$1/.htaccess
+    echo "    </files>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  <IfModule mod_rewrite.c>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "    RewriteEngine On" >> /var/www/$2$1/.htaccess
+    echo "    RewriteBase /" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "    # BLOQUEAR EL ESCANEO DE AUTORES EN WORDPRESS" >> /var/www/$2$1/.htaccess
+    echo "      RewriteCond %{QUERY_STRING} (author=\d+) [NC]" >> /var/www/$2$1/.htaccess
+    echo "      RewriteRule .* - [F]" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "    # IMPEDIR EL HOTLINKING DE IMÁGENES" >> /var/www/$2$1/.htaccess
+    echo "      RewriteCond %{HTTP_REFERER} !^$" >> /var/www/$2$1/.htaccess
+    echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?nuevaweb.com [NC]" >> /var/www/$2$1/.htaccess
+    echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?google.com [NC]" >> /var/www/$2$1/.htaccess
+    echo "      RewriteRule \.(jpg|jpeg|png|gif)$ – [NC,F,L]" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  </IfModule>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "# END Medidas de seguridad" > /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "# BEGIN Redirigir www. a sin www." >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  <IfModule mod_rewrite.c>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "      RewriteEngine On" >> /var/www/$2$1/.htaccess
+    echo "      RewriteBase /" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "      RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]" >> /var/www/$2$1/.htaccess
+    echo "      RewriteRule ^(.*)$ http://%1/$1 [R=301,L]" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  </IfModule>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "# END Redirigir www. a sin www." >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    
+    # Reparar permisos y propietario de la carpeta
+    chown www-data:www-data /var/www/$2$1/ -R -v
+
+    # Mostrar el resultado de la operacion
+    echo "--------------------------------"
+    echo ""
+    echo "Toda La operación de agregar una nueva web se completó correctamente. Los datos son los siguientes:"
+    echo ""
+    echo "BASE DE DATOS MYSQL:"
+    echo "Nombre: $2"
+    echo "Usuario: $nombre_mysql_ok"
+    echo "Contraseña: $3"
+    echo ""
+    echo "--------------------------------"
+    echo ""
+    exit
+
+  else
+
+    # Crear la base de datos
+    echo ""
+    echo "$(tput setaf 1)Creando la base de datos con su usuario... $(tput sgr 0)"
+    echo ""
+    /root/scripts/crearbasededatosyusuario $2 $2 $3
+
+    # Crear las carpetas de la web
+    mkdir /var/www/$2$1/
+    mkdir /var/www/$2$1/logs/
+    echo "WEB OK" > /var/www/$2$1/index.html
+    
+    # Crear la web en Apache
+    cp /etc/apache2/sites-available/nuevawebvar.conf /etc/apache2/sites-available/$2$1.conf
+    sed -i -e "s/nuevawebvar.com/$2$1/g" /etc/apache2/sites-available/$2$1.conf
+
+    # Crear el certificado SSL
+    echo ""
+    echo "$(tput setaf 1)Creando el certificado SSL... $(tput sgr 0)"
+    echo ""
+    service apache2 stop
+    /root/git/letsencrypt/letsencrypt-auto --apache -d $2$1 -d www.$2$1
+
+    # Activar el sitio y recargar apache
+    echo ""
+    echo "$(tput setaf 1)Activando la web en apache... $(tput sgr 0)"
+    echo ""
+    a2ensite $2$1
+    service apache2 start
+
+    # Crear el archivo .htaccess con algunas opciones
+    echo "# BEGIN Medidas de seguridad" > /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  # IMPEDIR ACCESO NO AUTORIZADO AL ARCHIVO .HTACCESS" >> /var/www/$2$1/.htaccess
+    echo '    <files ~ "^.*\.([Hh][Tt][Aa])">' >> /var/www/$2$1/.htaccess
+    echo "      order allow,deny" >> /var/www/$2$1/.htaccess
+    echo "      deny from all" >> /var/www/$2$1/.htaccess
+    echo "      satisfy all" >> /var/www/$2$1/.htaccess
+    echo "    </files>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  DESHABILITAR LA NAVEGACIÓN POR CARPETAS QUE NO TENGAN INDEX" >> /var/www/$2$1/.htaccess
+    echo "    Options -Indexes" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  # IMPEDIR EL ACCESO DE CIERTAS IPS" >> /var/www/$2$1/.htaccess
+    echo "    <Limit GET POST>" >> /var/www/$2$1/.htaccess
+    echo "      order allow,deny" >> /var/www/$2$1/.htaccess
+    echo "      deny from 45.45.45.45" >> /var/www/$2$1/.htaccess
+    echo "      allow from all" >> /var/www/$2$1/.htaccess
+    echo "    </Limit>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  # PROTEGER EL ARCHIVO DE CONFIGURACIÓN DE WORDPRESS" >> /var/www/$2$1/.htaccess
+    echo "    <files wp-config.php>" >> /var/www/$2$1/.htaccess
+    echo "      order allow,deny" >> /var/www/$2$1/.htaccess
+    echo "      deny from all" >> /var/www/$2$1/.htaccess
+    echo "    </files>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  <IfModule mod_rewrite.c>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "    RewriteEngine On" >> /var/www/$2$1/.htaccess
+    echo "    RewriteBase /" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "    # BLOQUEAR EL ESCANEO DE AUTORES EN WORDPRESS" >> /var/www/$2$1/.htaccess
+    echo "      RewriteCond %{QUERY_STRING} (author=\d+) [NC]" >> /var/www/$2$1/.htaccess
+    echo "      RewriteRule .* - [F]" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "    # IMPEDIR EL HOTLINKING DE IMÁGENES" >> /var/www/$2$1/.htaccess
+    echo "      RewriteCond %{HTTP_REFERER} !^$" >> /var/www/$2$1/.htaccess
+    echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?nuevaweb.com [NC]" >> /var/www/$2$1/.htaccess
+    echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?google.com [NC]" >> /var/www/$2$1/.htaccess
+    echo "      RewriteRule \.(jpg|jpeg|png|gif)$ – [NC,F,L]" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  </IfModule>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "# END Medidas de seguridad" > /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "# BEGIN Redirigir www. a sin www." >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  <IfModule mod_rewrite.c>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "      RewriteEngine On" >> /var/www/$2$1/.htaccess
+    echo "      RewriteBase /" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "      RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]" >> /var/www/$2$1/.htaccess
+    echo "      RewriteRule ^(.*)$ http://%1/$1 [R=301,L]" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "  </IfModule>" >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+    echo "# END Redirigir www. a sin www." >> /var/www/$2$1/.htaccess
+    echo "" >> /var/www/$2$1/.htaccess
+
+    # Reparar permisos y propietario de la carpeta
+    chown www-data:www-data /var/www/$2$1/ -R -v
+
+    # Mostrar el resultado de la operacion
+    echo ""
+    echo "--------------------------------"
+    echo ""
+    echo "Toda La operación de agregar una nueva web se completó correctamente. Los datos son los siguientes:"
+    echo ""
+    echo "BASE DE DATOS MYSQL:"
+    echo "Nombre: $2"
+    echo "Usuario: $2"
+    echo "Contraseña: $3"
+    echo ""
+    echo "--------------------------------"
+    echo ""
+  fi
+fi
+
