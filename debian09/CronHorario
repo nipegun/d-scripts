@@ -19,7 +19,7 @@ echo "-------------------------------------------"
 echo "  AGREGANDO EL SCRIPT /etc/cron.hourly..."
 echo "-------------------------------------------"
 echo ""
-ln -s /root/nipescripts/debian9/CronHorario /etc/cron.hourly/tareas
+ln -s /root/syscripts/debian09/CronHorario /etc/cron.hourly/tareas
 
 echo ""
 echo "--------------------------------------"
