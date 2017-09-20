@@ -19,7 +19,7 @@ echo "-------------------------------------------"
 echo "  AGREGANDO EL SCRIPT /etc/cron.weekly..."
 echo "-------------------------------------------"
 echo ""
-ln -s /root/nipescripts/debian9/CronSemanal /etc/cron.weekly/tareas
+ln -s /root/syscripts/debian09/CronSemanal /etc/cron.weekly/tareas
 
 echo ""
 echo "---------------------------------------"
