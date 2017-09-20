@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#--------------------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA BLOQUEAR PAQUETES ENTRANTES PROVENIENTES DE TOR
+#--------------------------------------------------------------------------
+
+echo ""
+echo "----------------------------------------"
+echo "  OBTENIENDO LA IP WAN DEL SERVIDOR..."
+echo "----------------------------------------"
+echo ""
+IPWANDelServidor=$(curl --silent ipinfo.io/ip)
+
+echo ""
+echo "---------------------------------------------------------"
+echo "  CREANDO UN NUEVO SET PARA LA LISTA DE IPS A BANEAR..."
+echo "---------------------------------------------------------"
+echo ""
+ipset --flush NodosTORQueEntran
+ipset --create NodosTORQueEntran iphash
+
+echo ""
+echo "--------------------------------------------------------------"
+echo "  OBTENIENDO UNA LISTA DE LAS IPS DE LOS NODOS TOR DE SALIDA"
+echo "  QUE PUEDEN ACCEDER A LA IP DEL SERVIDOR."
+echo "  AGREGANDO ESA LISTA AL SET CREADO ANTES..."
+echo "--------------------------------------------------------------"
+echo ""
+# Abajo, se borran del wget resultante las líneas comentadas y se lee línea por línea las IPs
+wget -q https://check.torproject.org/cgi-bin/TorBulkExitList.py?ip=$IPWANDelServidor -O -|sed '/^#/d' |while read IP
+  do
+    ipset -q -A NodosTORQueEntran $IP # -q silencia las advertencias para IPs previamente agregadas
+  done
+
+echo ""
+echo "---------------------------------------------------"
+echo "  AGREGANDO UNA REGLA INPUT A IPTABLES CON EL SET"
+echo "  DE IPS DE NODOS A BANEAR..."
+echo "---------------------------------------------------"
+echo ""
+iptables -A INPUT -m set --match-set NodosTORQueEntran src -j DROP
+
+echo ""
+echo "-----------------------------------"
+echo "  EJECUCIÓN DEL SCRIPT FINALIZADA"
+echo "-----------------------------------"
+echo ""
