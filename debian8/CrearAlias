@@ -12,9 +12,9 @@
 #-------------------------------------------------------------------------
 
 echo ""
-echo "-----------------------------------------"
-echo "  CREANDO ALIAS PARA LOS NIPESCRIPTS..."
-echo "-----------------------------------------"
+echo "---------------------------------------"
+echo "  CREANDO ALIAS PARA LOS SYSCRIPTS..."
+echo "---------------------------------------"
 echo ""
 
 ln -s /root/syscripts/debian8/externos/VelocidadDeInternet /root/syscripts/vdi
