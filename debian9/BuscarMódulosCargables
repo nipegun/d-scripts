@@ -30,3 +30,4 @@ if [ $# -ne $EXPECTED_ARGS ]
   else
     find /lib/modules/$(uname -r) -type f -name \*$1*.ko
 fi
+
