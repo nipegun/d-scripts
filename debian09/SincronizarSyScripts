@@ -23,7 +23,7 @@ git clone --depth=1 https://github.com/nipegun/syscripts
 rm /root/syscripts/.git -R
 rm /root/syscripts/*
 chmod +x /root/syscripts/* -R
-/root/syscripts/debian9/CrearAlias
+/root/syscripts/debian09/CrearAlias
 
 echo ""
 echo "-----------------------------------------"
