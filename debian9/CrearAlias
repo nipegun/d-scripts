@@ -44,7 +44,7 @@ ln -s /root/syscripts/debian9/NotificarFalloDeDisco /root/syscripts/nofadis
 ln -s /root/syscripts/debian9/NuevaWebVarWWW /root/syscripts/nuevawebvar
 ln -s /root/syscripts/debian9/Reiniciar /root/syscripts/rei
 ln -s /root/syscripts/debian9/RPMDeDisco /root/syscripts/rpmdis
-ln -s /root/syscripts/debian9/Sincronizarsyscripts /root/syscripts/sinnps
+ln -s /root/syscripts/debian9/SincronizarSyScripts /root/syscripts/sinnps
 ln -s /root/syscripts/debian9/TRIM /root/syscripts/trim
 ln -s /root/syscripts/debian9/UsuarioNuevoConShell /root/syscripts/usunushell
 ln -s /root/syscripts/debian9/UsuarioNuevoSinShell /root/syscripts/usununoshell
