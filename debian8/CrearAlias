@@ -19,7 +19,7 @@ echo ""
 
 ln -s /root/syscripts/debian8/externos/VelocidadDeInternet /root/syscripts/vdi
 
-ln -s /root/syscripts/debian8/SincronizarNiPeScripts /root/syscripts/scnps
+ln -s /root/syscripts/debian8/SincronizarSyScripts /root/syscripts/scnps
 ln -s /root/syscripts/debian8/HardwareInfoGrafica /root/syscripts/hingra
 
 echo ""
