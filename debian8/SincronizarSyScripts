@@ -25,3 +25,4 @@ rm /root/syscripts/.git -R
 rm /root/syscripts/*
 chmod +x /root/syscripts/* -R
 /root/syscripts/debian8/CrearAlias
+
