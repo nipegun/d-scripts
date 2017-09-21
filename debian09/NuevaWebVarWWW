@@ -48,7 +48,7 @@ else
     echo ""
     echo "$(tput setaf 1)Creando la base de datos con su usuario... $(tput sgr 0)"
     echo ""
-    /root/scripts/crearbasededatosyusuario $2 $nombre_mysql_ok $3
+    cbddyu $2 $nombre_mysql_ok $3
 
     # Crear las carpetas de la web
     mkdir /var/www/$2$1/
