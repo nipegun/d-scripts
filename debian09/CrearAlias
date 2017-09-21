@@ -25,6 +25,7 @@ ln -s /root/syscripts/debian09/BorrarDSStore /root/syscripts/bodss
 ln -s /root/syscripts/debian09/BorrarZoneIdentifier /root/syscripts/bozonid
 ln -s /root/syscripts/debian09/BuscarMódulosCargables /root/syscripts/busmodcar
 ln -s /root/syscripts/debian09/ComprobarSSD /root/syscripts/compssd
+ln -s /root/syscripts/debian09/CrearBaseDeDatosYUsuario /root/syscripts/cbddyu
 ln -s /root/syscripts/debian09/CronDiario /root/syscripts/crondi
 ln -s /root/syscripts/debian09/CronHorario /root/syscripts/cronho
 ln -s /root/syscripts/debian09/CronMensual /root/syscripts/cronme
