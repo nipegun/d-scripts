@@ -7,53 +7,53 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA CREAR LOS ALIAS DE LOS SYSCRIPTS PARA DEBIAN 9
-#-------------------------------------------------------------------------
+#---------------------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA CREAR LOS ALIAS DE LOS DEB-SCRIPTS PARA DEBIAN 9
+#---------------------------------------------------------------------------
 
 echo ""
-echo "---------------------------------------"
-echo "  CREANDO ALIAS PARA LOS SYSCRIPTS..."
-echo "---------------------------------------"
+echo "-----------------------------------------"
+echo "  CREANDO ALIAS PARA LOS DEB-SCRIPTS..."
+echo "-----------------------------------------"
 echo ""
 
 ln -s /root/syscripts/debian09/externos/VelocidadDeInternet /root/syscripts/vdi
 
-ln -s /root/syscripts/debian09/ActualizarSistemaOperativo /root/syscripts/aso
-ln -s /root/syscripts/debian09/BloquearTráficoDeTOR /root/syscripts/blotrator
-ln -s /root/syscripts/debian09/BorrarDSStore /root/syscripts/bodss
-ln -s /root/syscripts/debian09/BorrarZoneIdentifier /root/syscripts/bozonid
-ln -s /root/syscripts/debian09/BuscarMódulosCargables /root/syscripts/busmodcar
-ln -s /root/syscripts/debian09/ComprobarSSD /root/syscripts/compssd
-ln -s /root/syscripts/debian09/CrearBaseDeDatosYUsuario /root/syscripts/cbddyu
-ln -s /root/syscripts/debian09/CronDiario /root/syscripts/crondi
-ln -s /root/syscripts/debian09/CronHorario /root/syscripts/cronho
-ln -s /root/syscripts/debian09/CronMensual /root/syscripts/cronme
-ln -s /root/syscripts/debian09/CronSemanal /root/syscripts/cronse
-ln -s /root/syscripts/debian09/EnviarMailA /root/syscripts/ema
-ln -s /root/syscripts/debian09/ExportarBaseDeDatos /root/syscripts/ebdd
-ln -s /root/syscripts/debian09/ExtraerSubtítuloDeMKV /root/syscripts/esdmkv
-ln -s /root/syscripts/debian09/HardwareInfoGráfica /root/syscripts/hardigra
-ln -s /root/syscripts/debian09/HardwareInfoRed /root/syscripts/hardired
-ln -s /root/syscripts/debian09/ImportarBaseDeDatos /root/syscripts/ibdd
-ln -s /root/syscripts/debian09/LanzarEscritorio /root/syscripts/escritorio
-ln -s /root/syscripts/debian09/ListarNodosTORQueEntran /root/syscripts/lisnodtor
-ln -s /root/syscripts/debian09/MonitorizarLog /root/syscripts/monlog
-ln -s /root/syscripts/debian09/MostrarIPWAN /root/syscripts/ipwan
-ln -s /root/syscripts/debian09/MostrarReglasIPTablesActivas /root/syscripts/mosipt
-ln -s /root/syscripts/debian09/MostrarVersiónDeDebian /root/syscripts/ver
-ln -s /root/syscripts/debian09/NotificarFalloDeDisco /root/syscripts/nofadis
-ln -s /root/syscripts/debian09/NuevaWebVarWWW /root/syscripts/nuevawebvar
-ln -s /root/syscripts/debian09/Reiniciar /root/syscripts/rei
-ln -s /root/syscripts/debian09/RepararPermisosVarWWW /root/syscripts/permweb
-ln -s /root/syscripts/debian09/RPMDeDisco /root/syscripts/rpmdis
-ln -s /root/syscripts/debian09/SincronizarSyScripts /root/syscripts/sinsc
-ln -s /root/syscripts/debian09/TRIM /root/syscripts/trim
-ln -s /root/syscripts/debian09/UsuarioNuevoConShell /root/syscripts/usunushell
-ln -s /root/syscripts/debian09/UsuarioNuevoSinShell /root/syscripts/usununoshell
-ln -s /root/syscripts/debian09/Usuarios /root/syscripts/usu
-ln -s /root/syscripts/debian09/VelocidadDeDiscoDeSistema /root/syscripts/vddds
-ln -s /root/syscripts/debian09/WinDir /root/syscripts/windir
+ln -s /root/deb-scripts/debian09/ActualizarSistemaOperativo /root/deb-scripts/aso
+ln -s /root/deb-scripts/debian09/BloquearTráficoDeTOR /root/deb-scripts/blotrator
+ln -s /root/deb-scripts/debian09/BorrarDSStore /root/deb-scripts/bodss
+ln -s /root/deb-scripts/debian09/BorrarZoneIdentifier /root/deb-scripts/bozonid
+ln -s /root/deb-scripts/debian09/BuscarMódulosCargables /root/deb-scripts/busmodcar
+ln -s /root/deb-scripts/debian09/ComprobarSSD /root/deb-scripts/compssd
+ln -s /root/deb-scripts/debian09/CrearBaseDeDatosYUsuario /root/deb-scripts/cbddyu
+ln -s /root/deb-scripts/debian09/CronDiario /root/deb-scripts/crondi
+ln -s /root/deb-scripts/debian09/CronHorario /root/deb-scripts/cronho
+ln -s /root/deb-scripts/debian09/CronMensual /root/deb-scripts/cronme
+ln -s /root/deb-scripts/debian09/CronSemanal /root/deb-scripts/cronse
+ln -s /root/deb-scripts/debian09/EnviarMailA /root/deb-scripts/ema
+ln -s /root/deb-scripts/debian09/ExportarBaseDeDatos /root/deb-scripts/ebdd
+ln -s /root/deb-scripts/debian09/ExtraerSubtítuloDeMKV /root/deb-scripts/esdmkv
+ln -s /root/deb-scripts/debian09/HardwareInfoGráfica /root/deb-scripts/hardigra
+ln -s /root/deb-scripts/debian09/HardwareInfoRed /root/deb-scripts/hardired
+ln -s /root/deb-scripts/debian09/ImportarBaseDeDatos /root/deb-scripts/ibdd
+ln -s /root/deb-scripts/debian09/LanzarEscritorio /root/deb-scripts/escritorio
+ln -s /root/deb-scripts/debian09/ListarNodosTORQueEntran /root/deb-scripts/lisnodtor
+ln -s /root/deb-scripts/debian09/MonitorizarLog /root/deb-scripts/monlog
+ln -s /root/deb-scripts/debian09/MostrarIPWAN /root/deb-scripts/ipwan
+ln -s /root/deb-scripts/debian09/MostrarReglasIPTablesActivas /root/deb-scripts/mosipt
+ln -s /root/deb-scripts/debian09/MostrarVersiónDeDebian /root/deb-scripts/ver
+ln -s /root/deb-scripts/debian09/NotificarFalloDeDisco /root/deb-scripts/nofadis
+ln -s /root/deb-scripts/debian09/NuevaWebVarWWW /root/deb-scripts/nuevawebvar
+ln -s /root/deb-scripts/debian09/Reiniciar /root/deb-scripts/rei
+ln -s /root/deb-scripts/debian09/RepararPermisosVarWWW /root/deb-scripts/permweb
+ln -s /root/deb-scripts/debian09/RPMDeDisco /root/deb-scripts/rpmdis
+ln -s /root/deb-scripts/debian09/SincronizarDebScripts /root/deb-scripts/sinds
+ln -s /root/deb-scripts/debian09/TRIM /root/deb-scripts/trim
+ln -s /root/deb-scripts/debian09/UsuarioNuevoConShell /root/deb-scripts/usunushell
+ln -s /root/deb-scripts/debian09/UsuarioNuevoSinShell /root/deb-scripts/usununoshell
+ln -s /root/deb-scripts/debian09/Usuarios /root/deb-scripts/usu
+ln -s /root/deb-scripts/debian09/VelocidadDeDiscoDeSistema /root/deb-scripts/vddds
+ln -s /root/deb-scripts/debian09/WinDir /root/deb-scripts/windir
 
 echo ""
 echo "-------------------------------------------------------------------------"
