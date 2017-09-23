@@ -12,14 +12,21 @@
 #----------------------------------------------------------------------
 
 # Asignar propiedad de todo el contenido al usuario www-data 
+echo ""
 chown -R -v www-data:www-data /var/www
+echo ""
 
 # Poner los permisos correctos a carpetas
+echo ""
 find /var/www/html/ -type d -print -exec chmod 755 {} \;
+echo ""
 
 # Poner los permisos correctos a archivos
+echo ""
 find /var/www/html/ -type f -print -exec chmod 644 {} \;
+echo ""
 
 # Asignar la propiedad de /var/root al usuario root. (Necesario para enjaular Webs por SFTP)
-chown root:root /var/www
-
+echo ""
+chown -v root:root /var/www
+echo ""
