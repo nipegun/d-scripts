@@ -21,8 +21,8 @@ echo "" >> /root/TareasCronPorHora
 echo 'FechaDeEjecucion=$(date +A%YM%mD%d@%T)' >> /root/TareasCronPorHora
 echo 'echo "Cron horario ejecutado el $FechaDeEjecucion" >> /var/log/TareasCronPorHora.log' >> /root/TareasCronPorHora
 echo "" >> /root/TareasCronPorHora
-echo "  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA"  >> /root/TareasCronPorHora
-echo "▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/TareasCronPorHora
+echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA"  >> /root/TareasCronPorHora
+echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/TareasCronPorHora
 echo "" >> /root/TareasCronPorHora
 
 echo ""
@@ -53,8 +53,8 @@ echo "" >> /root/TareasCronPorDía
 echo 'FechaDeEjecucion=$(date +A%YM%mD%d@%T)' >> /root/TareasCronPorDía
 echo 'echo "Cron diario ejecutado el $FechaDeEjecucion" >> /var/log/TareasCronPorDía.log' >> /root/TareasCronPorDía
 echo "" >> /root/TareasCronPorDía
-echo "  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA DÍA"  >> /root/TareasCronPorDía
-echo "▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/TareasCronPorDía
+echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA DÍA"  >> /root/TareasCronPorDía
+echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/TareasCronPorDía
 echo "" >> /root/TareasCronPorDía
 
 echo ""
@@ -85,8 +85,8 @@ echo "" >> /root/TareasCronPorSemana
 echo 'FechaDeEjecucion=$(date +A%YM%mD%d@%T)' >> /root/TareasCronPorSemana
 echo 'echo "Cron semanal ejecutado el $FechaDeEjecucion" >> /var/log/TareasCronPorSemana.log' >> /root/TareasCronPorSemana
 echo "" >> /root/TareasCronPorSemana
-echo "  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA SEMANA"  >> /root/TareasCronPorSemana
-echo "▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/TareasCronPorSemana
+echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA SEMANA"  >> /root/TareasCronPorSemana
+echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/TareasCronPorSemana
 echo "" >> /root/TareasCronPorSemana
 
 echo ""
@@ -117,8 +117,8 @@ echo "" >> /root/TareasCronPorMes
 echo 'FechaDeEjecucion=$(date +A%YM%mD%d@%T)' >> /root/TareasCronPorMes
 echo 'echo "Cron mensual ejecutado el $FechaDeEjecucion" >> /var/log/TareasCronPorMes.log' >> /root/TareasCronPorMes
 echo "" >> /root/TareasCronPorMes
-echo "  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA MES"  >> /root/TareasCronPorMes
-echo "▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/TareasCronPorMes
+echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA MES"  >> /root/TareasCronPorMes
+echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/TareasCronPorMes
 echo "" >> /root/TareasCronPorMes
 
 echo ""
