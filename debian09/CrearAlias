@@ -26,10 +26,6 @@ ln -s /root/deb-scripts/debian09/BorrarZoneIdentifier /root/deb-scripts/bozonid
 ln -s /root/deb-scripts/debian09/BuscarMódulosCargables /root/deb-scripts/busmodcar
 ln -s /root/deb-scripts/debian09/ComprobarSSD /root/deb-scripts/compssd
 ln -s /root/deb-scripts/debian09/CrearBaseDeDatosYUsuario /root/deb-scripts/cbddyu
-ln -s /root/deb-scripts/debian09/CronDiario /root/deb-scripts/crondi
-ln -s /root/deb-scripts/debian09/CronHorario /root/deb-scripts/cronho
-ln -s /root/deb-scripts/debian09/CronMensual /root/deb-scripts/cronme
-ln -s /root/deb-scripts/debian09/CronSemanal /root/deb-scripts/cronse
 ln -s /root/deb-scripts/debian09/EnviarMailA /root/deb-scripts/ema
 ln -s /root/deb-scripts/debian09/ExportarBaseDeDatos /root/deb-scripts/ebdd
 ln -s /root/deb-scripts/debian09/ExtraerSubtítuloDeMKV /root/deb-scripts/esdmkv
