@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#----------------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA REPARAR LOS PERMISOS DE LA CARPETA /var/www
+#----------------------------------------------------------------------
+
+# Asignar propiedad de todo el contenido al usuario www-data 
+chown -R -v www-data:www-data /var/www
+
+# Poner los permisos correctos a carpetas
+find /var/www/html/ -type d -print -exec chmod 755 {} \;
+
+# Poner los permisos correctos a archivos
+find /var/www/html/ -type f -print -exec chmod 644 {} \;
+
+# Asignar la propiedad de /var/root al usuario root. (Necesario para enjaular Webs por SFTP)
+chown root:root /var/www
+
