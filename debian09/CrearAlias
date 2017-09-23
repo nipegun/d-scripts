@@ -17,7 +17,7 @@ echo "  CREANDO ALIAS PARA LOS DEB-SCRIPTS..."
 echo "-----------------------------------------"
 echo ""
 
-ln -s /root/syscripts/debian09/externos/VelocidadDeInternet /root/syscripts/vdi
+ln -s /root/deb-scripts/debian09/externos/VelocidadDeInternet /root/deb-scripts/vdi
 
 ln -s /root/deb-scripts/debian09/ActualizarSistemaOperativo /root/deb-scripts/aso
 ln -s /root/deb-scripts/debian09/BloquearTráficoDeTOR /root/deb-scripts/blotrator
