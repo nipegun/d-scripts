@@ -17,7 +17,7 @@
 #  hdparm -I /dev/sda | grep "TRIM supported"
 #--------------------------------------------------------------------------------
 
-LOG=/var/log/trim.log
+LOG=/var/log/TRIM.log
 echo "*** $(date -R) ***" >> $LOG
 
 echo ""
