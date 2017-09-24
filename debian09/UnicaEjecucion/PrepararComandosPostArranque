@@ -7,9 +7,9 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA ACTIVAR rc.local EN DEBIAN 9
-#-------------------------------------------------------
+#-----------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA ACTIVAR rc.local EN DEBIAN CON SYSTEMD
+#-----------------------------------------------------------------
 
 echo ""
 echo "----------------------------"
@@ -49,7 +49,14 @@ echo "----------------------------------------------"
 echo ""
 echo '#!/bin/bash' > /root/ComandosPostArranque
 echo "" >> /root/ComandosPostArranque
-chmod +x /etc/rc.local
+echo 'FechaDeEjecucion=$(date +A%YM%mD%d@%T)' >> /root/ComandosPostArranque
+echo "" >> /root/ComandosPostArranque
+echo 'echo "El script post-arranque se ejecutó el $FechaDeEjecucion" >> /var/log/PostArranque.log' >> /root/ComandosPostArranque
+echo "" >> /root/ComandosPostArranque
+echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"  >> /root/ComandosPostArranque
+echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/ComandosPostArranque
+echo "" >> /root/ComandosPostArranque
+chmod +x /root/ComandosPostArranque
 
 echo ""
 echo "--------------------------------------"
