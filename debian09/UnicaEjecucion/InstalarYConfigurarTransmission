@@ -1,0 +1,90 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#--------------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA INSTALAR Y CONFIGURAR transmission-daemon
+#--------------------------------------------------------------------
+
+EXPECTED_ARGS=4
+E_BADARGS=65
+
+if [ $# -ne $EXPECTED_ARGS ]
+  then
+    echo ""
+    echo "--------------------------------------------------------------------------------------------"
+    echo "  Mal uso del script."
+    echo ""
+    echo "  El uso correcto sería:"
+    echo "  InstalarYConfigurarTransmission CarpetaDeDescargas CarpetaDeIncompletos Password Usuario"
+    echo ""
+    echo "  Ejemplo:"
+    echo "  InstalarYConfigurarTransmission /home/nico/descargas /home/nico/temporales 12345678 nico"
+    echo "--------------------------------------------------------------------------------------------"
+    echo ""
+    exit $E_BADARGS
+  else
+
+    echo ""
+    echo "---------------------------------------------"
+    echo "  INSTALANDO EL PAQUETE transmission-daemon"
+    echo "---------------------------------------------"
+    echo ""
+    apt-get -y install transmission-daemon
+
+    echo ""
+    echo "---------------------------------------------"
+    echo "  DETENIENDO EL SERVICIO transmission-daemon"
+    echo "---------------------------------------------"
+    echo ""
+    service transmission-daemon stop
+
+    echo ""
+    echo "------------------------------------------"
+    echo "  REALIZANDO CAMBIOS EN LA CONFIGURACIÓN"
+    echo "------------------------------------------"
+    echo ""
+    cp /etc/transmission-daemon/settings.json /etc/transmission-daemon/settings.json.bak
+    sed -i -e 's|"download-dir": "/var/lib/transmission-daemon/downloads",|"download-dir": "'$1'",|g' /etc/transmission-daemon/settings.json
+    sed -i -e 's|"incomplete-dir": "/var/lib/transmission-daemon/Downloads",|"incomplete-dir": "'$2'",|g' /etc/transmission-daemon/settings.json
+    sed -i -e 's|"incomplete-dir-enabled": false,|"incomplete-dir-enabled": true,|g' /etc/transmission-daemon/settings.json
+    sed -i -e 's|"ratio-limit-enabled": false,|"ratio-limit-enabled": true,|g' /etc/transmission-daemon/settings.json
+    sed -i -e 's|^.*"rpc-password":.*|    "rpc-password": "'$3'",|g' /etc/transmission-daemon/settings.json
+    sed -i -e 's|"rpc-whitelist": "127.0.0.1",|"rpc-whitelist": "127.0.0.1, 192.168.*.*, 10.0.*.*",|g' /etc/transmission-daemon/settings.json
+    sed -i -e 's|"trash-original-torrent-files": false,|"trash-original-torrent-files": true,|g' /etc/transmission-daemon/settings.json
+    sed -i -e 's|"umask": 18,|"umask": 2,|g' /etc/transmission-daemon/settings.json
+
+    echo ""
+    echo "---------------------------------------------"
+    echo "  INICIANDO EL SERVICIO transmission-daemon"
+    echo "---------------------------------------------"
+    echo ""
+    service transmission-daemon start
+
+    echo ""
+    echo "-----------------------------------------------------"
+    echo "  AGREGANDO EL USUARIO AL GRUPO transmission-daemon"
+    echo "-----------------------------------------------------"
+    echo ""
+    usermod -a -G debian-transmission $4
+
+    echo ""
+    echo "---------------------------------------------------------"
+    echo "  EL DEMONIO TRANSMISSION HA SIDO INSTALADO E INICIADO."
+    echo ""
+    echo "  Deberías poder administrarlo mediante web en la IP de"
+    echo "  este ordenador seguida por :9091"
+    echo ""
+    echo "  Ejemplo: 192.160.0.120:9091"
+    echo ""
+    echo "  Nombre de usuario: transmission"
+    echo "  Contraseña: $3"
+    echo "---------------------------------------------------------"
+    echo ""
+fi
+
