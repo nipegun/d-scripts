@@ -28,9 +28,6 @@ dpkg-reconfigure mumble-server
 # Detener el servicio para hacerle cambios a la configuración
 service mumble-server stop
 
-# Borrar los datos del certificado SSL autogenerado
-murmurd -wipessl
-
 # Hacer copia de seguridad del archivo de configuración
 cp /etc/mumble-server.ini /etc/mumble-server.ini.bak
 
@@ -40,6 +37,18 @@ sed -i -e 's|#bonjour=True|bonjour=True|g' /etc/mumble-server.ini
 sed -i -e 's|#sslCert=|#sslCert=/etc/letsencrypt/live/dominioejemplo.com/cert.pem|g' /etc/mumble-server.ini
 sed -i -e 's|#sslKey=|#sslKey=/etc/letsencrypt/live/dominioejemplo.com/privkey.pem|g' /etc/mumble-server.ini
 sed -i "/#sslKey=/a #sslCA=/etc/letsencrypt/live/dominioejemplo.com/fullchain.pem" /etc/mumble-server.ini
+
+# Borrar los datos del certificado SSL autogenerado
+# Hacer siempre despùés de que se agregue el certificado en /etc/mumble-server.ini
+# De hecho, lo correcto, después de modificar /etc/mumble-server.ini, sera hacer:
+# service mumble-server stop
+# murmurd -wipessl
+# pkill murmurd
+# service mumble-server start
+murmurd -wipessl
+
+# Matar todos los procesos murmurd
+pkill murmurd
 
 # Re-arrancar el servicio
 service mumble-server start
