@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#------------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA INSTALAR Y CONFIGURAR EL SERVIDOR PLEX
+#-------------------------------------------------------------------
+
+menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
+  opciones=(1 "Instalar versión de 32 bits" off
+            2 "Instalar versión de 64 bits" off)
+  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+  clear
+
+  for choice in $choices
+
+    do
+
+      case $choice in
+
+        1)
+          echo ""
+          echo "-------------------------------------------------------------"
+          echo "  INSTALANDO PLEX MEDIA SERVER PARA ARQUITECTURA DE 32 BITS"
+          echo "-------------------------------------------------------------"
+          echo ""
+          mkdir /root/paquetes
+          cd /root/paquetes
+          wget http://hacks4geeks.com/_/premium/descargas/debian/root/paquetes/plex/plex32.deb
+          dpkg -i /root/paquetes/plex32.deb
+        ;;
+
+        2)
+          echo ""
+          echo "-------------------------------------------------------------"
+          echo "  INSTALANDO PLEX MEDIA SERVER PARA ARQUITECTURA DE 64 BITS"
+          echo "-------------------------------------------------------------"
+          echo ""
+           mkdir /root/paquetes
+          cd /root/paquetes
+          wget http://hacks4geeks.com/_/premium/descargas/debian/root/paquetes/plex/plex64.deb
+          dpkg -i /root/paquetes/plex64.deb
+        ;;
+
+      esac
+
+done
+
