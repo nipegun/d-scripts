@@ -21,15 +21,22 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "  Mal uso del script."
     echo ""
     echo "  El uso correcto sería:"
-    echo "  InstalarYConfigurarTransmission CarpetaDeDescargas CarpetaDeIncompletos Password Usuario"
+    echo "  $0 [CarpetaDeDescargas] [CarpetaDeIncompletos] [Password] [Usuario]"
     echo ""
     echo "  Ejemplo:"
-    echo "  InstalarYConfigurarTransmission /home/nico/descargas /home/nico/temporales 12345678 nico"
+    echo "  $0 /var/tmp/transmission/completos /var/tmp/transmission/incompletos 12345678 nico"
     echo "--------------------------------------------------------------------------------------------"
     echo ""
     exit $E_BADARGS
   else
-
+    echo ""
+    echo "---------------------------------------------"
+    echo "  CREANDO LAS CARPETAS PARA LAS DESCARGAS"
+    echo "---------------------------------------------"
+    echo ""
+    mkdir -p $1
+    mkdir -p $2
+    
     echo ""
     echo "---------------------------------------------"
     echo "  INSTALANDO EL PAQUETE transmission-daemon"
