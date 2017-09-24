@@ -29,8 +29,8 @@ echo "  timeout server 50000ms" >> /etc/haproxy.cfg
 echo "" >> /etc/haproxy.cfg
 echo "frontend http-in" >> /etc/haproxy.cfg
 echo "  bind *:80" >> /etc/haproxy.cfg
-echo "  acl is_site1 hdr_end(host) -i hacks4geeks.com" >> /etc/haproxy.cfg
-echo "  acl is_site2 hdr_end(host) -i nipegun.com" >> /etc/haproxy.cfg
+echo "  acl is_site1 hdr_end(host) -i sitio1.com" >> /etc/haproxy.cfg
+echo "  acl is_site2 hdr_end(host) -i sitio2.com" >> /etc/haproxy.cfg
 echo "" >> /etc/haproxy.cfg
 echo "  use_backend site1 if is_site1" >> /etc/haproxy.cfg
 echo "  use_backend site2 if is_site2" >> /etc/haproxy.cfg
