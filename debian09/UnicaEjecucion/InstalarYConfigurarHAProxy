@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#--------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA INSTALAR Y CONFIGURAR HAPROXY
+#--------------------------------------------------------
+
+apt-get -y update
+
+# Instalar el paquete necesario
+apt-get -y install haproxy
+
+# Realizar cambios en la configuración
+echo "global" > /etc/haproxy.cfg
+echo "  daemon" >> /etc/haproxy.cfg
+echo "  maxconn 4096" >> /etc/haproxy.cfg
+echo "" >> /etc/haproxy.cfg
+echo "defaults" >> /etc/haproxy.cfg
+echo "  mode http" >> /etc/haproxy.cfg
+echo "  timeout connect 5000ms" >> /etc/haproxy.cfg
+echo "  timeout client 50000ms" >> /etc/haproxy.cfg
+echo "  timeout server 50000ms" >> /etc/haproxy.cfg
+echo "" >> /etc/haproxy.cfg
+echo "frontend http-in" >> /etc/haproxy.cfg
+echo "  bind *:80" >> /etc/haproxy.cfg
+echo "  acl is_site1 hdr_end(host) -i hacks4geeks.com" >> /etc/haproxy.cfg
+echo "  acl is_site2 hdr_end(host) -i nipegun.com" >> /etc/haproxy.cfg
+echo "" >> /etc/haproxy.cfg
+echo "  use_backend site1 if is_site1" >> /etc/haproxy.cfg
+echo "  use_backend site2 if is_site2" >> /etc/haproxy.cfg
+echo "" >> /etc/haproxy.cfg
+echo "backend site1" >> /etc/haproxy.cfg
+echo "  balance roundrobin" >> /etc/haproxy.cfg
+echo "  option httpclose" >> /etc/haproxy.cfg
+echo "  option forwardfor" >> /etc/haproxy.cfg
+echo "  server s2 192.168.0.21:80 maxconn 32" >> /etc/haproxy.cfg
+echo "" >> /etc/haproxy.cfg >> /etc/haproxy.cfg
+echo "backend site2" >> /etc/haproxy.cfg
+echo "  balance roundrobin" >> /etc/haproxy.cfg
+echo "  option httpclose" >> /etc/haproxy.cfg
+echo "  option forwardfor" >> /etc/haproxy.cfg
+echo "  server s1 192.168.0.20:80 maxconn 32" >> /etc/haproxy.cfg
+echo "" >> /etc/haproxy.cfg
+echo "listen admin" >> /etc/haproxy.cfg
+echo "  bind 127.0.0.1:8080" >> /etc/haproxy.cfg
+echo "  stats enable" >> /etc/haproxy.cfg
+echo "" >> /etc/haproxy.cfg
+
+# Reiniciar HAProxy
+/usr/sbin/haproxy -f /etc/haproxy.cfg -D -p /var/run/haproxy.pid
+
