@@ -16,42 +16,85 @@ apt-get -y update
 # Instalar el paquete necesario
 apt-get -y install haproxy
 
+# Hacer copia de seguridad del archivo de configuración
+cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.bak
+
 # Realizar cambios en la configuración
-echo "global" > /etc/haproxy.cfg
-echo "  daemon" >> /etc/haproxy.cfg
-echo "  maxconn 4096" >> /etc/haproxy.cfg
-echo "" >> /etc/haproxy.cfg
-echo "defaults" >> /etc/haproxy.cfg
-echo "  mode http" >> /etc/haproxy.cfg
-echo "  timeout connect 5000ms" >> /etc/haproxy.cfg
-echo "  timeout client 50000ms" >> /etc/haproxy.cfg
-echo "  timeout server 50000ms" >> /etc/haproxy.cfg
-echo "" >> /etc/haproxy.cfg
-echo "frontend http-in" >> /etc/haproxy.cfg
-echo "  bind *:80" >> /etc/haproxy.cfg
-echo "  acl is_site1 hdr_end(host) -i sitio1.com" >> /etc/haproxy.cfg
-echo "  acl is_site2 hdr_end(host) -i sitio2.com" >> /etc/haproxy.cfg
-echo "" >> /etc/haproxy.cfg
-echo "  use_backend site1 if is_site1" >> /etc/haproxy.cfg
-echo "  use_backend site2 if is_site2" >> /etc/haproxy.cfg
-echo "" >> /etc/haproxy.cfg
-echo "backend site1" >> /etc/haproxy.cfg
-echo "  balance roundrobin" >> /etc/haproxy.cfg
-echo "  option httpclose" >> /etc/haproxy.cfg
-echo "  option forwardfor" >> /etc/haproxy.cfg
-echo "  server s2 192.168.0.21:80 maxconn 32" >> /etc/haproxy.cfg
-echo "" >> /etc/haproxy.cfg >> /etc/haproxy.cfg
-echo "backend site2" >> /etc/haproxy.cfg
-echo "  balance roundrobin" >> /etc/haproxy.cfg
-echo "  option httpclose" >> /etc/haproxy.cfg
-echo "  option forwardfor" >> /etc/haproxy.cfg
-echo "  server s1 192.168.0.20:80 maxconn 32" >> /etc/haproxy.cfg
-echo "" >> /etc/haproxy.cfg
-echo "listen admin" >> /etc/haproxy.cfg
-echo "  bind 127.0.0.1:8080" >> /etc/haproxy.cfg
-echo "  stats enable" >> /etc/haproxy.cfg
-echo "" >> /etc/haproxy.cfg
+echo "# FrontEnd HTTP" > /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "frontend wan-http-in" >> /etc/haproxy/haproxy.cfg
+echo "  bind *:80" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "  # Web 1" >> /etc/haproxy/haproxy.cfg
+echo "  acl acl-nipegun-http hdr_end(host) -i nipegun.com" >> /etc/haproxy/haproxy.cfg
+echo "  use_backend be-nipegun-http if acl-nipegun-http" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "  # Web 2" >> /etc/haproxy/haproxy.cfg
+echo "  acl acl-hacks4geeks-http hdr_end(host) -i hacks4geeks.com" >> /etc/haproxy/haproxy.cfg
+echo "  use_backend be-hacks4geeks-http if acl-hacks4geeks-http" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "# FrontEnd HTTPS" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "frontend wan-https-in" >> /etc/haproxy/haproxy.cfg
+echo "  bind *:443" >> /etc/haproxy/haproxy.cfg
+echo "  mode tcp" >> /etc/haproxy/haproxy.cfg
+echo "  option tcplog" >> /etc/haproxy/haproxy.cfg
+echo "  option socket-stats" >> /etc/haproxy/haproxy.cfg
+echo "  tcp-request inspect-delay 5s" >> /etc/haproxy/haproxy.cfg
+echo "  tcp-request content accept if { req_ssl_hello_type 1 }" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "  # Webs" >> /etc/haproxy/haproxy.cfg
+echo "  use_backend be-https-nipegun     if { req_ssl_sni -i nipegun.com }" >> /etc/haproxy/haproxy.cfg
+echo "  use_backend be-https-hacks4geeks if { req_ssl_sni -i hacks4geeks.com }" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "# BackEnds HTTP" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "backend be-nipegun-http" >> /etc/haproxy/haproxy.cfg
+echo "  balance roundrobin" >> /etc/haproxy/haproxy.cfg
+echo "  option httpclose" >> /etc/haproxy/haproxy.cfg
+echo "  option forwardfor" >> /etc/haproxy/haproxy.cfg
+echo "  server srv-nipegun-http 192.168.0.200:80 maxconn 32" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "backend be-hacks4geeks-http" >> /etc/haproxy/haproxy.cfg
+echo "  balance roundrobin" >> /etc/haproxy/haproxy.cfg
+echo "  option httpclose" >> /etc/haproxy/haproxy.cfg
+echo "  option forwardfor" >> /etc/haproxy/haproxy.cfg
+echo "  server srv-hacks4geeks-http 192.168.0.201:80 maxconn 32" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "# BackEnds HTTPS" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "backend be-https-nipegun" >> /etc/haproxy/haproxy.cfg
+echo "  mode tcp" >> /etc/haproxy/haproxy.cfg
+echo "  option tcplog" >> /etc/haproxy/haproxy.cfg
+echo "  stick-table type binary len 32 size 30k expire 30m" >> /etc/haproxy/haproxy.cfg
+echo "  acl clienthello req_ssl_hello_type 1" >> /etc/haproxy/haproxy.cfg
+echo "  acl serverhello rep_ssl_hello_type 2" >> /etc/haproxy/haproxy.cfg
+echo "  tcp-request inspect-delay 5s" >> /etc/haproxy/haproxy.cfg
+echo "  tcp-request content accept if clienthello" >> /etc/haproxy/haproxy.cfg
+echo "  tcp-response content accept if serverhello" >> /etc/haproxy/haproxy.cfg
+echo "  stick on payload_lv(43,1) if clienthello" >> /etc/haproxy/haproxy.cfg
+echo "  stick store-response payload_lv(43,1) if serverhello" >> /etc/haproxy/haproxy.cfg
+echo "  option ssl-hello-chk" >> /etc/haproxy/haproxy.cfg
+echo "  server srv-nipegun-https 192.168.0.200" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
+echo "backend be-https-hacks4geeks" >> /etc/haproxy/haproxy.cfg
+echo "  mode tcp" >> /etc/haproxy/haproxy.cfg
+echo "  option tcplog" >> /etc/haproxy/haproxy.cfg
+echo "  stick-table type binary len 32 size 30k expire 30m" >> /etc/haproxy/haproxy.cfg
+echo "  acl clienthello req_ssl_hello_type 1" >> /etc/haproxy/haproxy.cfg
+echo "  acl serverhello rep_ssl_hello_type 2" >> /etc/haproxy/haproxy.cfg
+echo "  tcp-request inspect-delay 5s" >> /etc/haproxy/haproxy.cfg
+echo "  tcp-request content accept if clienthello" >> /etc/haproxy/haproxy.cfg
+echo "  tcp-response content accept if serverhello" >> /etc/haproxy/haproxy.cfg
+echo "  stick on payload_lv(43,1) if clienthello" >> /etc/haproxy/haproxy.cfg
+echo "  stick store-response payload_lv(43,1) if serverhello" >> /etc/haproxy/haproxy.cfg
+echo "  option ssl-hello-chk" >> /etc/haproxy/haproxy.cfg
+echo "  server srv-nipegun-https 192.168.0.201" >> /etc/haproxy/haproxy.cfg
+echo "" >> /etc/haproxy/haproxy.cfg
 
 # Reiniciar HAProxy
-/usr/sbin/haproxy -f /etc/haproxy.cfg -D -p /var/run/haproxy.pid
+service haproxy restart
 
