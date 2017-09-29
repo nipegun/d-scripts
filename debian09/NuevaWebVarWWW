@@ -71,6 +71,7 @@ else
     echo ""
     echo "$(tput setaf 1)Creando el certificado SSL... $(tput sgr 0)"
     echo ""
+    iptables -A INPUT -p tcp --dport 443 -j ACCEPT
     service apache2 stop
     /root/git/letsencrypt/letsencrypt-auto --apache -d $2$1 -d www.$2$1
 
@@ -182,6 +183,7 @@ else
     echo ""
     echo "$(tput setaf 1)Creando el certificado SSL... $(tput sgr 0)"
     echo ""
+    iptables -A INPUT -p tcp --dport 443 -j ACCEPT
     service apache2 stop
     /root/git/letsencrypt/letsencrypt-auto --apache -d $2$1 -d www.$2$1
 
