@@ -28,16 +28,17 @@ if [ $# -ne $total_param_corr ]; then
   echo ""
   exit
 else
-   apt-get update
-   apt-get -y install build-essential gcc make git
-   mkdir /root/git/
-   cd /root/git/
-   rm /root/git/letsencrypt -R
-   git clone https://github.com/letsencrypt/letsencrypt
-
-  nombre_mysql_deseado=$2
+  # Asegurarse de que estén instalado los componentes necesarios
+  apt-get update
+  apt-get -y install build-essential gcc make git
+  mkdir /root/git/
+  cd /root/git/
+  rm /root/git/letsencrypt -R
+  git clone https://github.com/letsencrypt/letsencrypt
 
   # Comprobar si el nombre de usuario MySQL deseado tiene mas de 16 caracteres
+  nombre_mysql_deseado=$2
+  
   if [ ${#nombre_mysql_deseado} -gt 16 ]; then
 
     # Acortar nombre de usuario MySQL a 16 caracteres
@@ -158,12 +159,6 @@ else
     exit
 
   else
-    apt-get update
-    apt-get -y install build-essential gcc make git
-    mkdir /root/git/
-    cd /root/git/
-    rm /root/git/letsencrypt -R
-    git clone https://github.com/letsencrypt/letsencrypt
    
     # Crear la base de datos
     echo ""
