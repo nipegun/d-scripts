@@ -50,6 +50,7 @@ ln -s /root/deb-scripts/debian09/UsuarioNuevoConShell /root/deb-scripts/usunushe
 ln -s /root/deb-scripts/debian09/UsuarioNuevoSinShell /root/deb-scripts/usununoshell
 ln -s /root/deb-scripts/debian09/Usuarios /root/deb-scripts/usu
 ln -s /root/deb-scripts/debian09/VelocidadDeDiscoDeSistema /root/deb-scripts/vddds
+ln -s /root/deb-scripts/debian09/VerEstadoDeServicio /root/deb-scripts/servicio
 ln -s /root/deb-scripts/debian09/WinDir /root/deb-scripts/windir
 
 echo ""
