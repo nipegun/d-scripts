@@ -28,6 +28,6 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     exit $ArgsInsuficientes
   else
-    service $1 status -n50
+    systemctl status $1 -n50
     # journalctl -u $1.service -b
 fi
