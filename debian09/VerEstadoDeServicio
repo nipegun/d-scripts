@@ -29,5 +29,5 @@ if [ $# -ne $CantArgsCorrectos ]
     exit $ArgsInsuficientes
   else
     service $1 status -n50
-    journalctl -u $1.service -b
+    # journalctl -u $1.service -b
 fi
