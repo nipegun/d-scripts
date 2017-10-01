@@ -19,6 +19,7 @@ echo ""
 
 ln -s /root/deb-scripts/debian09/externos/VelocidadDeInternet /root/deb-scripts/vdi
 
+ln -s /root/deb-scripts/debian09/AbrirMidgnightCommander /root/deb-scripts/amc
 ln -s /root/deb-scripts/debian09/ActualizarSistemaOperativo /root/deb-scripts/aso
 ln -s /root/deb-scripts/debian09/BloquearTráficoDeTOR /root/deb-scripts/blotrator
 ln -s /root/deb-scripts/debian09/BorrarDSStore /root/deb-scripts/bodss
