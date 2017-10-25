@@ -28,6 +28,16 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     exit $ArgsInsuficientes
   else
-    echo "blacklist $1" >> /etc/modprobe.d/blacklist.conf
+    echo ""
+    echo "  Estás a punto de bloquear el módulo $1"
+    echo ""
+    echo "  Lo siguientes módulos dependen de él"
+    echo ""
+    modinfo -F depends $1
+    echo ""
+    echo "  No es bueno bloquear módulos que sirvan a otros módulos"
+    echo "blacklist $1" >> /etc/modprobe.d/$1.conf
+    update-initramfs -u
+    echo ""
 fi
 
