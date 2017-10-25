@@ -38,6 +38,7 @@ ln -s /root/deb-scripts/debian09/ListarNodosTORQueEntran /root/deb-scripts/lisno
 ln -s /root/deb-scripts/debian09/MonitorizarLog /root/deb-scripts/monlog
 ln -s /root/deb-scripts/debian09/MostrarIPLAN /root/deb-scripts/iplan
 ln -s /root/deb-scripts/debian09/MostrarIPWAN /root/deb-scripts/ipwan
+ln -s /root/deb-scripts/debian09/MostrarMódulosCargados /root/deb-scripts/mosmodcar
 ln -s /root/deb-scripts/debian09/MostrarReglasIPTablesActivas /root/deb-scripts/mosipt
 ln -s /root/deb-scripts/debian09/MostrarVersiónDeDebian /root/deb-scripts/ver
 ln -s /root/deb-scripts/debian09/NotificarFalloDeDisco /root/deb-scripts/nofadis
