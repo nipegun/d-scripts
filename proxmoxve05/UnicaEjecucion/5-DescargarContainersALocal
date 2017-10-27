@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#---------------------------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA DESCARGAR LOS CONTAINERS MÁS INTERESANTES DE PROXMOXVE
+#  Los containers son de TrunKey Linux y tienes ms info sobre ellos en:
+#  https://github.com/turnkeylinux-apps
+#---------------------------------------------------------------------------------
+
+# system
+
+pveam download local debian-8.0-standard_8.7-1_amd64.tar.gz
+pveam download local debian-9.0-standard_9.0-2_amd64.tar.gz
+pveam download local ubuntu-16.04-standard_16.04-1_amd64.tar.gz
+pveam download local ubuntu-17.04-standard_17.04-1_amd64.tar.gz
+
+# otros
+
+pveam download local debian-8-turnkey-etherpad_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-gitlab_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-gnusocial_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-icescrum_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-jenkins_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-lamp_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-lighttpd-php-fastcgi_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-limesurvey_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-mattermost_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-mediawiki_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-mibew_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-mongodb_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-mumble_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-mysql_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-nextcloud_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-nginx-php-fastcgi_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-observium_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-openvpn_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-oscommerce_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-otrs_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-owncloud_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-phpbb_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-phplist_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-piwik_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-prestashop_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-processmaker_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-simpleinvoices_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-simplemachines_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-sitracker_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-sugarcrm_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-suitecrm_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-symfony_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-tkldev_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-torrentserver_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-vanilla_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-vtiger_14.2-1_amd64.tar.gz
+pveam download local debian-8-turnkey-wordpress_14.2-1_amd64.tar.gz
+
