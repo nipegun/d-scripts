@@ -1,0 +1,108 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#----------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA INSTALAR ENTORNO GRÁFICO EN PROXMOXVE
+#----------------------------------------------------------------
+
+echo ""
+echo "----------------------------------------"
+echo "  ACTUALIZANDO EL SISTEMA OPERATIVO..."
+echo "----------------------------------------"
+echo ""
+apt-get -y update
+apt-get -y upgrade
+apt-get -y dist-upgrade
+apt-get -y autoremove
+
+menu=(dialog --timeout 5 --checklist "Elección de escritorio:" 22 76 16)
+    opciones=(1 "Cinnamon" off
+              2 "Gnome" off
+              3 "KDE" off
+              4 "LXDE" off
+              5 "Mate" on
+              6 "XFCE" off)
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+    clear
+
+    for choice in $choices
+      do
+        case $choice in
+
+          1)
+            echo ""
+            echo "----------------------------------"
+            echo "  INSTALANDO ESCRITORIO CINNAMON"
+            echo "----------------------------------"
+            echo ""
+            tasksel install cinnamon-dektop
+            apt-get -y install firefox-esr-l10n-es-es libreoffice-l10n-es
+          ;;
+
+          2)
+            echo ""
+            echo "-------------------------------"
+            echo "  INSTALANDO ESCRITORIO GNOME"
+            echo "-------------------------------"
+            echo ""
+            tasksel install gnome-dektop
+            apt-get -y install firefox-esr-l10n-es-es libreoffice-l10n-es
+          ;;
+
+          3)
+            echo ""
+            echo "-----------------------------"
+            echo "  INSTALANDO ESCRITORIO KDE"
+            echo "-----------------------------"
+            echo ""
+            tasksel install kde-dektop
+            apt-get -y install firefox-esr-l10n-es-es libreoffice-l10n-es
+          ;;
+          4)
+            echo ""
+            echo "------------------------------"
+            echo "  INSTALANDO ESCRITORIO LXDE"
+            echo "------------------------------"
+            echo ""
+            tasksel install lxde-dektop
+            apt-get -y install firefox-esr-l10n-es-es libreoffice-l10n-es
+          ;;
+
+          5)
+            echo ""
+            echo "------------------------------"
+            echo "  INSTALANDO ESCRITORIO MATE"
+            echo "------------------------------"
+            echo ""
+            tasksel install mate-dektop
+            apt-get -y install firefox-esr-l10n-es-es libreoffice-l10n-es
+            systemctl stop NetworkManager.service
+            systemctl disable NetworkManager.service
+          ;;
+
+          6)
+            echo ""
+            echo "------------------------------"
+            echo "  INSTALANDO ESCRITORIO XFCE"
+            echo "------------------------------"
+            echo ""
+            tasksel install xfce-dektop
+            apt-get -y install firefox-esr-l10n-es-es libreoffice-l10n-es
+          ;;
+
+        esac
+
+done
+
+echo ""
+echo "-----------------------------------"
+echo "  EJECUCIÓN DEL SCRIPT FINALIZADA"
+echo "-----------------------------------"
+echo ""
+
