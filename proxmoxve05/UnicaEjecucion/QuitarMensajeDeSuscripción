@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#---------------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA QUITAR EL MENSAJE DE SUSCRIPCIÓN NO VÁLIDA
+#  AL CONECTARSE A LA WEB DE ADMINISTRACIÓN DE PROXMOXVE 
+#---------------------------------------------------------------------
+
+
+sed -i.bak 's|status => "NotFound",|status => "Active",|g' /usr/share/perl5/PVE/API2/Subscription.pm
+systemctl restart pveproxy.service
+
