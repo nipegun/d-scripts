@@ -7,53 +7,53 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA CREAR LOS ALIAS DE LOS DEB-SCRIPTS PARA DEBIAN 9
-#---------------------------------------------------------------------------
+#----------------------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA CREAR LOS ALIAS DE LOS NIPE-SCRIPTS PARA DEBIAN 9
+#----------------------------------------------------------------------------
 
 echo ""
-echo "-----------------------------------------"
-echo "  CREANDO ALIAS PARA LOS DEB-SCRIPTS..."
-echo "-----------------------------------------"
+echo "------------------------------------------"
+echo "  CREANDO ALIAS PARA LOS NIPE-SCRIPTS..."
+echo "------------------------------------------"
 echo ""
 
-ln -s /root/deb-scripts/debian09/externos/VelocidadDeInternet /root/deb-scripts/vdi
+ln -s /root/nipe-scripts/debian09/externos/VelocidadDeInternet /root/nipe-scripts/vdi
 
-ln -s /root/deb-scripts/debian09/AbrirMidnightCommander /root/deb-scripts/amc
-ln -s /root/deb-scripts/debian09/ActualizarSistemaOperativo /root/deb-scripts/aso
-ln -s /root/deb-scripts/debian09/BloquearTráficoDeTOR /root/deb-scripts/blotrator
-ln -s /root/deb-scripts/debian09/BorrarDSStore /root/deb-scripts/bodss
-ln -s /root/deb-scripts/debian09/BorrarZoneIdentifier /root/deb-scripts/bozonid
-ln -s /root/deb-scripts/debian09/BuscarMódulosCargables /root/deb-scripts/busmodcar
-ln -s /root/deb-scripts/debian09/ComprobarSSD /root/deb-scripts/compssd
-ln -s /root/deb-scripts/debian09/CrearBaseDeDatosYUsuario /root/deb-scripts/cbddyu
-ln -s /root/deb-scripts/debian09/EnviarMailA /root/deb-scripts/ema
-ln -s /root/deb-scripts/debian09/ExportarBaseDeDatos /root/deb-scripts/ebdd
-ln -s /root/deb-scripts/debian09/ExtraerSubtítuloDeMKV /root/deb-scripts/esdmkv
-ln -s /root/deb-scripts/debian09/HardwareInfoGráfica /root/deb-scripts/hardigra
-ln -s /root/deb-scripts/debian09/HardwareInfoRed /root/deb-scripts/hardired
-ln -s /root/deb-scripts/debian09/ImportarBaseDeDatos /root/deb-scripts/ibdd
-ln -s /root/deb-scripts/debian09/LanzarEscritorio /root/deb-scripts/escritorio
-ln -s /root/deb-scripts/debian09/ListarNodosTORQueEntran /root/deb-scripts/lisnodtor
-ln -s /root/deb-scripts/debian09/MonitorizarLog /root/deb-scripts/monlog
-ln -s /root/deb-scripts/debian09/MostrarIPLAN /root/deb-scripts/iplan
-ln -s /root/deb-scripts/debian09/MostrarIPWAN /root/deb-scripts/ipwan
-ln -s /root/deb-scripts/debian09/MostrarMódulosCargados /root/deb-scripts/mosmodcar
-ln -s /root/deb-scripts/debian09/MostrarReglasIPTablesActivas /root/deb-scripts/mosipt
-ln -s /root/deb-scripts/debian09/MostrarVersiónDeDebian /root/deb-scripts/ver
-ln -s /root/deb-scripts/debian09/NotificarFalloDeDisco /root/deb-scripts/nofadis
-ln -s /root/deb-scripts/debian09/NuevaWebVarWWW /root/deb-scripts/nuevawebvar
-ln -s /root/deb-scripts/debian09/Reiniciar /root/deb-scripts/rei
-ln -s /root/deb-scripts/debian09/RepararPermisosVarWWW /root/deb-scripts/permweb
-ln -s /root/deb-scripts/debian09/RPMDeDisco /root/deb-scripts/rpmdis
-ln -s /root/deb-scripts/debian09/SincronizarDebScripts /root/deb-scripts/sinds
-ln -s /root/deb-scripts/debian09/TRIM /root/deb-scripts/trim
-ln -s /root/deb-scripts/debian09/UsuarioNuevoConShell /root/deb-scripts/usunushell
-ln -s /root/deb-scripts/debian09/UsuarioNuevoSinShell /root/deb-scripts/usununoshell
-ln -s /root/deb-scripts/debian09/Usuarios /root/deb-scripts/usu
-ln -s /root/deb-scripts/debian09/VelocidadDeDiscoDeSistema /root/deb-scripts/vddds
-ln -s /root/deb-scripts/debian09/VerEstadoDeServicio /root/deb-scripts/servicio
-ln -s /root/deb-scripts/debian09/WinDir /root/deb-scripts/windir
+ln -s /root/nipe-scripts/debian09/AbrirMidnightCommander /root/nipe-scripts/amc
+ln -s /root/nipe-scripts/debian09/ActualizarSistemaOperativo /root/nipe-scripts/aso
+ln -s /root/nipe-scripts/debian09/BloquearTráficoDeTOR /root/nipe-scripts/blotrator
+ln -s /root/nipe-scripts/debian09/BorrarDSStore /root/nipe-scripts/bodss
+ln -s /root/nipe-scripts/debian09/BorrarZoneIdentifier /root/nipe-scripts/bozonid
+ln -s /root/nipe-scripts/debian09/BuscarMódulosCargables /root/nipe-scripts/busmodcar
+ln -s /root/nipe-scripts/debian09/ComprobarSSD /root/nipe-scripts/compssd
+ln -s /root/nipe-scripts/debian09/CrearBaseDeDatosYUsuario /root/nipe-scripts/cbddyu
+ln -s /root/nipe-scripts/debian09/EnviarMailA /root/nipe-scripts/ema
+ln -s /root/nipe-scripts/debian09/ExportarBaseDeDatos /root/nipe-scripts/ebdd
+ln -s /root/nipe-scripts/debian09/ExtraerSubtítuloDeMKV /root/nipe-scripts/esdmkv
+ln -s /root/nipe-scripts/debian09/HardwareInfoGráfica /root/nipe-scripts/hardigra
+ln -s /root/nipe-scripts/debian09/HardwareInfoRed /root/nipe-scripts/hardired
+ln -s /root/nipe-scripts/debian09/ImportarBaseDeDatos /root/nipe-scripts/ibdd
+ln -s /root/nipe-scripts/debian09/LanzarEscritorio /root/nipe-scripts/escritorio
+ln -s /root/nipe-scripts/debian09/ListarNodosTORQueEntran /root/nipe-scripts/lisnodtor
+ln -s /root/nipe-scripts/debian09/MonitorizarLog /root/nipe-scripts/monlog
+ln -s /root/nipe-scripts/debian09/MostrarIPLAN /root/nipe-scripts/iplan
+ln -s /root/nipe-scripts/debian09/MostrarIPWAN /root/nipe-scripts/ipwan
+ln -s /root/nipe-scripts/debian09/MostrarMódulosCargados /root/nipe-scripts/mosmodcar
+ln -s /root/nipe-scripts/debian09/MostrarReglasIPTablesActivas /root/nipe-scripts/mosipt
+ln -s /root/nipe-scripts/debian09/MostrarVersiónDeDebian /root/nipe-scripts/ver
+ln -s /root/nipe-scripts/debian09/NotificarFalloDeDisco /root/nipe-scripts/nofadis
+ln -s /root/nipe-scripts/debian09/NuevaWebVarWWW /root/nipe-scripts/nuevawebvar
+ln -s /root/nipe-scripts/debian09/Reiniciar /root/nipe-scripts/rei
+ln -s /root/nipe-scripts/debian09/RepararPermisosVarWWW /root/nipe-scripts/permweb
+ln -s /root/nipe-scripts/debian09/RPMDeDisco /root/nipe-scripts/rpmdis
+ln -s /root/nipe-scripts/debian09/SincronizarDebScripts /root/nipe-scripts/sinds
+ln -s /root/nipe-scripts/debian09/TRIM /root/nipe-scripts/trim
+ln -s /root/nipe-scripts/debian09/UsuarioNuevoConShell /root/nipe-scripts/usunushell
+ln -s /root/nipe-scripts/debian09/UsuarioNuevoSinShell /root/nipe-scripts/usununoshell
+ln -s /root/nipe-scripts/debian09/Usuarios /root/nipe-scripts/usu
+ln -s /root/nipe-scripts/debian09/VelocidadDeDiscoDeSistema /root/nipe-scripts/vddds
+ln -s /root/nipe-scripts/debian09/VerEstadoDeServicio /root/nipe-scripts/servicio
+ln -s /root/nipe-scripts/debian09/WinDir /root/nipe-scripts/windir
 
 echo ""
 echo "-------------------------------------------------------------------------"
