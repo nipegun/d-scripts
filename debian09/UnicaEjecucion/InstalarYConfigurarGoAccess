@@ -37,6 +37,7 @@ if [ $# -ne $CantArgsCorrectos ]
     wget -O - http://deb.goaccess.io/gnugpg.key | apt-key add -
     apt-get -y update
     apt-get -y install goaccess
+    cp /etc/goaccess.conf /etc/goaccess.conf.bak
     sed -i -e 's|#time-format %H:%M:%S|time-format %H:%M:%S|g' /etc/goaccess.conf
     sed -i -e 's|#date-format %d/%b/%Y|date-format %d/%b/%Y|g' /etc/goaccess.conf
     sed -i -e 's|#log-format %h %^[%d:%t %^] "%r" %s %b "%R" "%u"|log-format %h %^[%d:%t %^] "%r" %s %b "%R" "%u"|g' /etc/goaccess.conf
