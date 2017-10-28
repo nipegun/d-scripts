@@ -46,7 +46,7 @@ ln -s /root/nipe-scripts/debian09/NuevaWebVarWWW /root/nipe-scripts/nuevawebvar
 ln -s /root/nipe-scripts/debian09/Reiniciar /root/nipe-scripts/rei
 ln -s /root/nipe-scripts/debian09/RepararPermisosVarWWW /root/nipe-scripts/permweb
 ln -s /root/nipe-scripts/debian09/RPMDeDisco /root/nipe-scripts/rpmdis
-ln -s /root/nipe-scripts/debian09/SincronizarDebScripts /root/nipe-scripts/sinds
+ln -s /root/nipe-scripts/debian09/SincronizarNiPeScripts /root/nipe-scripts/sinnps
 ln -s /root/nipe-scripts/debian09/TRIM /root/nipe-scripts/trim
 ln -s /root/nipe-scripts/debian09/UsuarioNuevoConShell /root/nipe-scripts/usunushell
 ln -s /root/nipe-scripts/debian09/UsuarioNuevoSinShell /root/nipe-scripts/usununoshell
