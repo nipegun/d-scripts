@@ -40,7 +40,7 @@ if [ $# -ne $CantArgsCorrectos ]
     sed -i -e 's|#time-format %H:%M:%S|time-format %H:%M:%S|g' /etc/goaccess.conf
     sed -i -e 's|#date-format %d/%b/%Y|date-format %d/%b/%Y|g' /etc/goaccess.conf
     sed -i -e 's|#log-format %h %^[%d:%t %^] "%r" %s %b "%R" "%u"|log-format %h %^[%d:%t %^] "%r" %s %b "%R" "%u"|g' /etc/goaccess.conf
-    sed -i -e 's|#html-prefs {"theme":"bright","perPage":5,"layout":"horizontal","showTables":true,"visitors":{"plot":{"chartType":"bar"}}}|html-prefs {"theme":"bright","perPage":20,"layout":"vertical","showTables":true,"visitors":{"p$
+    sed -i -e 's|#html-prefs {"theme":"bright","perPage":5,"layout":"horizontal","showTables":true,"visitors":{"plot":{"chartType":"bar"}}}|html-prefs {"theme":"bright","perPage":20,"layout":"vertical","showTables":true,"visitors":{"plot":{"chartType":"bar"}}}|g' /etc/goaccess.conf
     sed -i -e 's|#html-report-title My Awesome Web Stats|html-report-title Estadísticas de la Web|g' /etc/goaccess.conf
     sed -i -e 's|#daemonize false|daemonize true|g' /etc/goaccess.conf
     sed -i -e 's|ignore-crawlers false|ignore-crawlers true|g' /etc/goaccess.conf
