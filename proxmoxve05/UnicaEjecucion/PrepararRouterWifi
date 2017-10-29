@@ -148,13 +148,14 @@ echo "wpa_pairwise=TKIP" >> /etc/hostapd/hostapd.conf
 echo "rsn_pairwise=CCMP" >> /etc/hostapd/hostapd.conf
 echo "wpa_passphrase=RouterX86" >> /etc/hostapd/hostapd.conf
 
-
-echo ""
-echo "----------------------------------------------------"
+echo "----------------------------------------------------------------------"
 echo "  EJECUCIÓN DEL SCRIPT FINALIZADA"
 echo ""
 echo "  Para aplicar los cambios reincia el sistema con:"
 echo "  shutdown -r now"
-echo "----------------------------------------------------"
 echo ""
+echo "  DESPUÉS DE REINICIAR TU PROXMOXVE DEBERÍA ESTAR COMPARTIENDO"
+echo "  INALÁMBRICAMENTE LA CONEXIÓN DE LA PRIMERA INTERFAZ CABLEADA"
+echo "  Y OPERANDO COMO ROUTER."
+echo "----------------------------------------------------------------------"
 
