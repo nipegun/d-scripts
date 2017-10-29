@@ -153,3 +153,17 @@ echo "wpa_pairwise=TKIP" >> /etc/hostapd/hostapd.conf
 echo "rsn_pairwise=CCMP" >> /etc/hostapd/hostapd.conf
 echo "wpa_passphrase=RouterX86" >> /etc/hostapd/hostapd.conf
 
+echo ""
+echo "----------------------------------------------------------------------"
+echo "  EJECUCIÓN DEL SCRIPT FINALIZADA"
+echo ""
+echo "  Para aplicar los cambios reincia el sistema con:"
+echo "  shutdown -r now"
+echo ""
+echo "  DESPUÉS DE REINICIAR TU PROXMOXVE DEBERÍA ESTAR SIRVIENDO IPs EN LA"
+echo "  SEGUNDA INTERFAZ CABLEADA POR UN LADO E INALÁMBRICAMENTE POR EL OTRO."
+echo "  SI NECESITAS MÁS DE UNA CONEXIÓN ETHERNET PUEDES CONECTARLE UN"
+echo "  SWITCH EN MODO PUENTE A ESE SEGUNDO PUERTO ETHERNET."
+echo "----------------------------------------------------------------------"
+echo ""
+
