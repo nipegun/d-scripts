@@ -7,10 +7,10 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA INSTALAR EL JDOWNLOADER.
-#  HACE FALTA TENER INSTALADO UN ENTORNO GRÁFICO.
-----------------------------------------------------
+#----------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA INSTALAR JDOWNLOADER.
+#  ES NECESARIO TENER INSTALADO PREVIAMENTE UN ENTORNO GRÁFICO.
+-----------------------------------------------------------------
 
 cmd=(dialog --checklist "Instalación de JDownloader en Debian:" 22 76 16)
 options=(1 "Instalación en Debian 32 bits" off
