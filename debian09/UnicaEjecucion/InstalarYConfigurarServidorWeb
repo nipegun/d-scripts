@@ -12,8 +12,6 @@
 #  EN UN SERVIDOR WEB COMPLETO CON APACHE2. PHP7, PHPMYADMIN, Y OTROS
 #----------------------------------------------------------------------
 
-apt-get update
-apt-get -y install dialog
 cmd=(dialog --checklist "Script de hacks4geeks.com para instalación de servidor Web:" 22 76 16)
 options=(1 "Instalar con certificado SSL autofirmado" on
          2 "Agregar certificado LetsEncrypt encima (Requiere DDNS)" off
