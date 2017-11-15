@@ -37,6 +37,7 @@ ln -s /root/nipe-scripts/debian09/ImportarBaseDeDatos /root/nipe-scripts/ibdd
 ln -s /root/nipe-scripts/debian09/LanzarEscritorio /root/nipe-scripts/escritorio
 ln -s /root/nipe-scripts/debian09/ListarNodosTORQueEntran /root/nipe-scripts/lisnodtor
 ln -s /root/nipe-scripts/debian09/MonitorizarLog /root/nipe-scripts/monlog
+ln -s /root/nipe-scripts/debian09/MostrarAparatosConectadosEnLaInterfaz /root/nipe-scripts/maceli
 ln -s /root/nipe-scripts/debian09/MostrarIPLAN /root/nipe-scripts/iplan
 ln -s /root/nipe-scripts/debian09/MostrarIPWAN /root/nipe-scripts/ipwan
 ln -s /root/nipe-scripts/debian09/MostrarMódulosCargados /root/nipe-scripts/mosmodcar
