@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#-------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA MOSTRAR LOS APARATOS CONECTADOS AL
+#  ROUTER DEBIAN CORRIENDO EN EL ORDENADOR DONDE SE EJECUTA
+#  EL SCRIPT
+#-------------------------------------------------------------
+
+# Asignar a una variable el nombre de la interfaz en la que se routea obtenido del archivo correspondiente
+interfaz=$(sed -n 's/^Release:\s*\(.*\){?dist}/\1/p' /etc/default/isc-dhcp-server)
+
+string>![TEST[Extract this string]>/string>
+
+I want to get
+
+Extract this string 
+
+
+interfaznueva=$(sed -e 's|INTERFACESv4="\(.*\)"|\1|' /etc/default/isc-dhcp-server)
+
+#echo ""
+#echo "--------------------------------------------------"
+#echo "  Mostrando aparatos conectados al router Debian"
+#echo "  que corre en este ordenador..."
+#echo "---------------------------------------------------"
+#echo ""
+#arp-scan --interface=$interfaz --localnet
+
+echo $interfaznueva
+
