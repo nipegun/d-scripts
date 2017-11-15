@@ -29,6 +29,12 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     exit $ArgsInsuficientes
   else
+    echo ""
+    echo "---------------------------------------------------"
+    echo "  Mostrando aparatos conectados a la red a la que"
+    echo "  está conectada la interfaz $1..."
+    echo "---------------------------------------------------"
+    echo ""
     arp-scan --interface=$1 --localnet
 fi
 
