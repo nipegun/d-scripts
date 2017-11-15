@@ -7,10 +7,10 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA EXPLORAR LOS APARATOS CONECTADOS A LA
+#---------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA MOSTRAR LOS APARATOS CONECTADOS A LA
 #  MISMA RED A LA QUE ESTÁ CONECTADA LA INTERFAZ INDICADA
-#----------------------------------------------------------------
+#---------------------------------------------------------------
 
 CantArgsCorrectos=1
 ArgsInsuficientes=65
