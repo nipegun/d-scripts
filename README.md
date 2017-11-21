@@ -1,6 +1,6 @@
 # nipe-scripts
 
-Los "deb-scripts" son scripts en bash que, o he ido creado para paliar necesidades que han ido surgiendo en el dia a dia de administrar el sistema desde la terminal, o he ido descargando de internet (externos) porque me han parecido útiles.
+Los "nipe-scripts" son scripts en bash que, o he ido creado para paliar necesidades que han ido surgiendo en el dia a dia de administrar el sistema desde la terminal, o he ido descargando de internet (externos) porque me han parecido útiles.
 
 Si bien están pensados para ser ejecutados en Debian y ProxmoxVE, es probable que puedan ser ejecutados sin errores en derivados como Ubuntu y otros.
 
