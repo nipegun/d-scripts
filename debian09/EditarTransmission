@@ -11,7 +11,24 @@
 #  SCRIPT DE NIPEGUN PARA EDITAR LA CONFIGURACIÓN DE TRANSMISSION
 #------------------------------------------------------------------
 
+echo ""
+echo "-------------------------------------------------"
+echo "  DETENIENDO EL SERVICIO TRANSMISSION-DAEMON..."
+echo "-------------------------------------------------"
+echo ""
 service transmission-daemon stop
+
+echo ""
+echo "-------------------------------------------"
+echo "  EDITANDO EL ARCHIVO DE CONFIGURACIÓN..."
+echo "-------------------------------------------"
+echo ""
 nano /etc/transmission-daemon/settings.json
-service transmission-daemon-start
+
+echo ""
+echo "-------------------------------------------------"
+echo "  ARRANCANDO EL SERVICIO TRANSMISSION-DAEMON..."
+echo "-------------------------------------------------"
+echo ""
+service transmission-daemon start
 
