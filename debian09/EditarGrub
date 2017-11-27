@@ -11,5 +11,17 @@
 #  SCRIPT DE NIPEGUN PARA EDITAR LA CONFIGURACIÓN DE GRUB
 #----------------------------------------------------------
 
+echo ""
+echo "---------------------------------------------------"
+echo "  EDITANDO EL ARCHIVO DE CONFIGURACIÓN DE GRUB..."
+echo "---------------------------------------------------"
+echo ""
 nano /etc/default/grub
+
+echo ""
+echo "----------------------------"
+echo "  APLICANDO LOS CAMBIOS..."
+echo "----------------------------"
+echo ""
+update-grub
 
