@@ -47,6 +47,7 @@ ln -s /root/nipe-scripts/debian09/MostrarIPLAN /root/nipe-scripts/iplan
 ln -s /root/nipe-scripts/debian09/MostrarIPWAN /root/nipe-scripts/ipwan
 ln -s /root/nipe-scripts/debian09/MostrarMódulosCargados /root/nipe-scripts/mosmodcar
 ln -s /root/nipe-scripts/debian09/MostrarReglasIPTablesActivas /root/nipe-scripts/mosipt
+ln -s /root/nipe-scripts/debian09/MostrarSetsIPSet /root/nipe-scripts/ipsets
 ln -s /root/nipe-scripts/debian09/MostrarVersiónDeDebian /root/nipe-scripts/ver
 ln -s /root/nipe-scripts/debian09/NotificarFalloDeDisco /root/nipe-scripts/nofadis
 ln -s /root/nipe-scripts/debian09/NuevaWebVarWWW /root/nipe-scripts/nuevawebvar
