@@ -29,6 +29,7 @@ ln -s /root/nipe-scripts/debian09/ComprobarSSD /root/nipe-scripts/compssd
 ln -s /root/nipe-scripts/debian09/CrearBaseDeDatosYUsuario /root/nipe-scripts/cbddyu
 ln -s /root/nipe-scripts/debian09/EditarDHCP /root/nipe-scripts/edhcp
 ln -s /root/nipe-scripts/debian09/EditarGrub /root/nipe-scripts/egrub
+ln -s /root/nipe-scripts/debian09/EditarHAProxy /root/nipe-scripts/ehaproxy
 ln -s /root/nipe-scripts/debian09/EditarSamba /root/nipe-scripts/esamba
 ln -s /root/nipe-scripts/debian09/EditarTransmission /root/nipe-scripts/etransmission
 ln -s /root/nipe-scripts/debian09/EnviarMailA /root/nipe-scripts/ema
