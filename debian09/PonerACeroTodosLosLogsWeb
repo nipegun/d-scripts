@@ -14,18 +14,18 @@
 
 
 echo ""
-echo "--------------------------------------------------------------------------------"
-echo "  BORRANDO LOS ARCHIVOS access.log._.DS_Store DE TODO EL SISTEMA Y VOLÚMENES MONTADOS..."
-echo "--------------------------------------------------------------------------------"
+echo "--------------------------------------------------------------------------"
+echo "  BORRANDO LOS ARCHIVOS access.log DE TODO /var/www y sub-directorios..."
+echo "--------------------------------------------------------------------------"
 echo ""
-find /var/www/ -type f -name "access.log" -print -exec cat /dev/null > {} \;
+find /var/www/ -type f -name "access.log" -print -exec truncate -s 0 {} \;
 echo ""
 
 echo ""
-echo "------------------------------------------------------------------------------"
-echo "  BORRANDO LOS ARCHIVOS .DS_Store DE TODO EL SISTEMA Y VOLÚMENES MONTADOS..."
-echo "------------------------------------------------------------------------------"
+echo "-------------------------------------------------------------------------"
+echo "  BORRANDO LOS ARCHIVOS error.log DE TODO /var/www y sub-directorios..."
+echo "-------------------------------------------------------------------------"
 echo ""
-find /var/www/ -type f -name "error.log" -print -exec cat /dev/null > {} \;
+find /var/www/ -type f -name "error.log" -print -exec truncate -s 0 {} \;
 echo ""
 
