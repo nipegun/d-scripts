@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA PONER A CERO TODOS LOS LOGS
+#  DE TODAS LAS WEBS en /var/www
+#------------------------------------------------------------
+
+
+echo ""
+echo "--------------------------------------------------------------------------------"
+echo "  BORRANDO LOS ARCHIVOS access.log._.DS_Store DE TODO EL SISTEMA Y VOLÚMENES MONTADOS..."
+echo "--------------------------------------------------------------------------------"
+echo ""
+find /var/www/ -type f -name "access.log" -print -exec cat /dev/null > {} \;
+echo ""
+
+echo ""
+echo "------------------------------------------------------------------------------"
+echo "  BORRANDO LOS ARCHIVOS .DS_Store DE TODO EL SISTEMA Y VOLÚMENES MONTADOS..."
+echo "------------------------------------------------------------------------------"
+echo ""
+find /var/www/ -type f -name "error.log" -print -exec cat /dev/null > {} \;
+echo ""
+
