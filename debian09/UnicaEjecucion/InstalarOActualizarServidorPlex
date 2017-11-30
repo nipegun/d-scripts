@@ -32,7 +32,9 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           mkdir /root/paquetes
           cd /root/paquetes
           wget http://hacks4geeks.com/_/premium/descargas/debian/root/paquetes/plex/plex32.deb
+          service plexmediaserver stop
           dpkg -i /root/paquetes/plex32.deb
+          service plexmediaserver start
         ;;
 
         2)
@@ -44,7 +46,9 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
            mkdir /root/paquetes
           cd /root/paquetes
           wget http://hacks4geeks.com/_/premium/descargas/debian/root/paquetes/plex/plex64.deb
+          service plexmediaserver stop
           dpkg -i /root/paquetes/plex64.deb
+          service plexmediaserver start
         ;;
 
       esac
