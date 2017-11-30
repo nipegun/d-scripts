@@ -12,8 +12,8 @@
 #-------------------------------------------------------------------
 
 menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
-  opciones=(1 "Instalar versión de 32 bits" off
-            2 "Instalar versión de 64 bits" off)
+  opciones=(1 "Instalar o actualizar versión de 32 bits" off
+            2 "Instalar o actualizar versión de 64 bits" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
