@@ -42,8 +42,6 @@ echo "  daemon" >> /etc/haproxy/haproxy.cfg
 echo "" >> /etc/haproxy/haproxy.cfg
 echo "defaults" >> /etc/haproxy/haproxy.cfg
 echo "  log     global" >> /etc/haproxy/haproxy.cfg
-echo "  mode    tcp" >> /etc/haproxy/haproxy.cfg
-echo "  option  tcplog" >> /etc/haproxy/haproxy.cfg
 echo "  option  dontlognull" >> /etc/haproxy/haproxy.cfg
 echo "  timeout connect 15s" >> /etc/haproxy/haproxy.cfg
 echo "  timeout client  15s" >> /etc/haproxy/haproxy.cfg
@@ -63,8 +61,8 @@ echo "  redirect scheme https code 301 if !{ ssl_fc }" >> /etc/haproxy/haproxy.c
 echo "" >> /etc/haproxy/haproxy.cfg
 echo "frontend wan-https-in" >> /etc/haproxy/haproxy.cfg
 echo "  bind *:443" >> /etc/haproxy/haproxy.cfg
-echo "  option tcplog" >> /etc/haproxy/haproxy.cfg
 echo "  mode tcp" >> /etc/haproxy/haproxy.cfg
+echo "  option tcplog" >> /etc/haproxy/haproxy.cfg
 echo "  acl tls req.ssl_hello_type 1" >> /etc/haproxy/haproxy.cfg
 echo "  tcp-request inspect-delay 5s" >> /etc/haproxy/haproxy.cfg
 echo "  tcp-request content accept if tls" >> /etc/haproxy/haproxy.cfg
@@ -87,4 +85,6 @@ echo "" >> /etc/haproxy/haproxy.cfg
 
 # Reiniciar HAProxy
 service haproxy restart
+
+
 
