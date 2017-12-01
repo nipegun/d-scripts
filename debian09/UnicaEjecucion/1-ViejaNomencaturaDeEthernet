@@ -12,6 +12,17 @@
 #  A LA NOMENCLATURA VIEJA USADA EN DEBIAN 8 
 #------------------------------------------------------------------------
 
+echo ""
+echo "---------------------------------------------------"
+echo "  CAMBIANDO EL NOMBRE DE LAS INTERFACES DE RED..."
+echo "---------------------------------------------------"
+echo ""
 sudo -i -e 's|GRUB_CMDLINE_LINUX=""|GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"|g' /etc/default/grub
+
+echo ""
+echo "------------------------"
+echo "  ACTUALIZANDO GRUB..."
+echo "------------------------"
+echo ""
 update-grub
 
