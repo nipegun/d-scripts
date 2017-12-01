@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#------------------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA PREPARAR UN ORDENADOR O SERVIDOR CON DEBIAN 9
+#  RECIÉN INSTALADO Y DEJARLO A GUSTO DE NIPEGUN
+#------------------------------------------------------------------------
+
+/root/nipe-scripts/debian09/UnicaEjecucion/1-ViejaNomencaturaDeEthernet
+
+echo ""
+echo "-----------------------------------------"
+echo "  CONFIGURANDO LAS INTERFACES DE RED..."
+echo "-----------------------------------------"
+echo ""
+echo "auto lo" > /etc/network/interfaces
+echo "  iface lo inet loopback" >> /etc/network/interfaces
+echo "" >> /etc/network/interfaces
+echo "auto eth0" >> /etc/network/interfaces
+echo "  allow-hotplug eth0" >> /etc/network/interfaces
+echo "  iface eth0 inet dhcp" >> /etc/network/interfaces
+echo "" >> /etc/network/interfaces
+
+/root/nipe-scripts/debian09/UnicaEjecucion/2-PonerRepositoriosCompletos
+
+/root/nipe-scripts/debian09/UnicaEjecucion/3-PrepararComandosPostArranque
+
+/root/nipe-scripts/debian09/UnicaEjecucion/4-PrepararTareasCron
+
+shutdown -r now
