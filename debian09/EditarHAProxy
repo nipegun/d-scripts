@@ -26,9 +26,16 @@ echo ""
 nano /etc/haproxy/haproxy.cfg
 
 echo ""
-echo "-------------------------------------"
-echo "  ARRANCANDO EL SERVICOI HAPROXY..."
-echo "-------------------------------------"
+echo "------------------------------------"
+echo "  ARRANCANDO EL SERVICO HAPROXY..."
+echo "------------------------------------"
 echo ""
 service haproxy start
+
+echo ""
+echo "---------------------------------"
+echo "  ESTADO DEL SERVICO HAPROXY..."
+echo "---------------------------------"
+echo ""
+service haproxy status
 
