@@ -33,8 +33,11 @@ echo "" >> /etc/network/interfaces
 
 /root/nipe-scripts/debian09/UnicaEjecucion/4-PrepararTareasCron
 
-apt-get install mc
+echo "mc /root /root" > /root/MidnightCommander
+chmod +x /root/MidnightCommander
 
 /root/nipe-scripts/debian09/ActualizarSistemaOperativo
+
+apt-get -y install mc
 
 shutdown -r now
