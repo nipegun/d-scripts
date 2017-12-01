@@ -33,4 +33,8 @@ echo "" >> /etc/network/interfaces
 
 /root/nipe-scripts/debian09/UnicaEjecucion/4-PrepararTareasCron
 
+apt-get install mc
+
+/root/nipe-scripts/debian09/ActualizarSistemaOperativo
+
 shutdown -r now
