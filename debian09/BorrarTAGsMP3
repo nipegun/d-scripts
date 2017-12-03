@@ -30,7 +30,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     exit $E_BADARGS
   else
     echo ""
-    apt-get -y install eyed3
+    apt-get -qq -y install eyed3
     eyeD3 --remove-all $1
     echo ""
 fi
