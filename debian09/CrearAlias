@@ -25,6 +25,7 @@ ln -s /root/nipe-scripts/debian09/BloquearTráficoDeTORConIPTables /root/nipe-sc
 ln -s /root/nipe-scripts/debian09/BorrarDSStore /root/nipe-scripts/bodss
 ln -s /root/nipe-scripts/debian09/BorrarZoneIdentifier /root/nipe-scripts/bozonid
 ln -s /root/nipe-scripts/debian09/BuscarMódulosCargables /root/nipe-scripts/busmodcar
+ln -s /root/nipe-scripts/debian09/BuscarTextoEnArchivos /root/nipe-scripts/btea
 ln -s /root/nipe-scripts/debian09/ComprobarSSD /root/nipe-scripts/compssd
 ln -s /root/nipe-scripts/debian09/CrearBaseDeDatosYUsuario /root/nipe-scripts/cbddyu
 ln -s /root/nipe-scripts/debian09/EditarDHCP /root/nipe-scripts/edhcp
