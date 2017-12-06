@@ -49,5 +49,5 @@ echo "  DESCOMPRIMIENDO EL CÓDIGO FUENTE..."
 echo "---------------------------------------"
 echo ""
 NroUltKernel=$(echo $URLUltKernel | cut -d'-' -f 2)
-tar xjvf /kernels/laststable/linux-$NroUltKernel
+tar xf /kernels/laststable/linux-$NroUltKernel
 
