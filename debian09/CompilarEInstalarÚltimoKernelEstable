@@ -53,9 +53,10 @@ NroUltKernel=$(echo $URLUltKernel | cut -d'-' -f 2)
 tar xf /root/CodFuente/kernels/stable/linux-$NroUltKernel
 
 echo ""
-echo "-------------------------------------"
-echo "  LIMPIAR LAS FUENTES DEL KERNEL..."
-echo "-------------------------------------"
+echo "------------------------------------------------"
+echo "  LIMPIAR LAS FUENTES DEL KERNEL Y COMPILAR..."
+echo "------------------------------------------------"
 echo ""
+cd /root/CodFuente/kernels/stable/linux-$NroUltKernel
 #make mrproper
-
+#make menuconfig
