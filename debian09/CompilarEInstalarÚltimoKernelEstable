@@ -16,7 +16,7 @@ echo "---------------------------------"
 echo "  ACTUALIZANDO LOS REPOSITORIOS"
 echo "---------------------------------"
 echo ""
-apt- get -y update
+apt-get -y update
 
 echo ""
 echo "--------------------------------------"
@@ -47,7 +47,7 @@ echo "------------------------------------"
 echo "  DESCOMPRIMIENDO EL CÓDIGO FUENTE"
 echo "------------------------------------"
 echo ""
-NroUltKernel=echo $(wget -qO- --no-check-certificate https://www.kernel.org | grep tar | head -n1 | cut -d\" -f2)
+NroUltKernel=$(wget -qO- --no-check-certificate https://www.kernel.org | grep tar | head -n1 | cut -d\" -f2)
 echo $NroUltKernel
 #tar xjvf /kernels/laststable/linux-"version".tar.bz2
 
