@@ -51,3 +51,10 @@ echo ""
 NroUltKernel=$(echo $URLUltKernel | cut -d'-' -f 2)
 tar xf /kernels/laststable/linux-$NroUltKernel
 
+echo ""
+echo "-------------------------------------"
+echo "  LIMPIAR LAS FUENTES DEL KERNEL..."
+echo "-------------------------------------"
+echo ""
+make mrproper
+
