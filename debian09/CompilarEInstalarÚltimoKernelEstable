@@ -49,7 +49,7 @@ echo "---------------------------------------"
 echo "  DESCOMPRIMIENDO EL CÓDIGO FUENTE..."
 echo "---------------------------------------"
 echo ""
-NroUltKernel=$(eco $URLUltKernel | cut -d'-' -f 2)
+NroUltKernel=$(echo $URLUltKernel | cut -d'-' -f 2)
 echo $NroUltKernel
 #tar xjvf /kernels/laststable/linux-"version".tar.bz2
 
