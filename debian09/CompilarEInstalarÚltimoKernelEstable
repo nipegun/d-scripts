@@ -40,7 +40,7 @@ echo "-------------------------------------------------------------------"
 echo ""
 cd /kernels/laststable
 UltKernel=$(wget -qO- --no-check-certificate https://www.kernel.org | grep tar | head -n1 | cut -d\" -f2)
-wget --no-check-certificate UltKernel
+wget --no-check-certificate $UltKernel
 
 echo ""
 echo "------------------------------------"
