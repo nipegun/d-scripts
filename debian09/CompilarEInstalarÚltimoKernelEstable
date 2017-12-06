@@ -33,6 +33,7 @@ echo "-----------------------------------------------------"
 echo ""
 mkdir /kernels
 mkdir /kernels/laststable
+cd /
 cd /kernels/laststable
 
 echo ""
