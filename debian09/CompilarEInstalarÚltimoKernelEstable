@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#-----------------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA COMPILAR E INSTALAR EL ÚLTIMO KERNEL ESTABLE
+#-----------------------------------------------------------------------
+
+echo ""
+echo "---------------------------------"
+echo "  ACTUALIZANDO LOS REPOSITORIOS"
+echo "---------------------------------"
+echo ""
+apt- get -y update
+
+echo ""
+echo "--------------------------------------"
+echo "  INSTALANDO LOS PAQUETES NECESARIOS"
+echo "--------------------------------------"
+echo ""
+#apt-get -y install wget libncurses5-dev gcc make build-essential kernel-package
+
+echo ""
+echo "-----------------------------------------------------"
+echo "  CREANDO LAS CARPETAS PARA UBICAR EL CÓDIGO FUENTE"
+echo "-----------------------------------------------------"
+echo ""
+mkdir /kernels
+mkdir /kernels/laststable
+
+echo ""
+echo "-------------------------------------------------------------------"
+echo "  DESCARGANDO EL CÓDIGO FUENTE DE LA VERSIÓN ESTABLE MÁS RECIENTE"
+echo "-------------------------------------------------------------------"
+echo ""
+cd /kernels/laststable
+UltKernel=$(wget -qO- --no-check-certificate https://www.kernel.org | grep tar | head -n1 | cut -d\" -f2)
+wget --no-check-certificate UltKernel
+
+echo ""
+echo "------------------------------------"
+echo "  DESCOMPRIMIENDO EL CÓDIGO FUENTE"
+echo "------------------------------------"
+echo ""
+NroUltKernel=echo $(wget -qO- --no-check-certificate https://www.kernel.org | grep tar | head -n1 | cut -d\" -f2)
+echo $NroUltKernel
+#tar xjvf /kernels/laststable/linux-"version".tar.bz2
+
+
