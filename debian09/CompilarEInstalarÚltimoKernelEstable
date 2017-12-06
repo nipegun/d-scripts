@@ -33,7 +33,6 @@ echo "-----------------------------------------------------"
 echo ""
 mkdir /kernels
 mkdir /kernels/laststable
-cd /
 cd /kernels/laststable
 
 echo ""
@@ -50,6 +49,5 @@ echo "  DESCOMPRIMIENDO EL CÓDIGO FUENTE..."
 echo "---------------------------------------"
 echo ""
 NroUltKernel=$(echo $URLUltKernel | cut -d'-' -f 2)
-echo $NroUltKernel
-#tar xjvf /kernels/laststable/linux-"version".tar.bz2
+tar xjvf /kernels/laststable/linux-$NroUltKernel
 
