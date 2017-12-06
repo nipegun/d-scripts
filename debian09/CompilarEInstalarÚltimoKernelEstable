@@ -31,9 +31,10 @@ echo "  CREANDO LAS CARPETAS PARA UBICAR EL CÓDIGO FUENTE"
 echo "  Y POSICIONÁNDOSE EN ELLAS..."
 echo "-----------------------------------------------------"
 echo ""
-mkdir /kernels
-mkdir /kernels/laststable
-cd /kernels/laststable
+mkdir /root/CodFuente
+mkdir /root/CodFuente/kernels
+mkdir /root/CodFuente/kernels/stable
+cd /root/CodFuente/kernels/stable
 
 echo ""
 echo "----------------------------------------------------------------------"
@@ -49,12 +50,12 @@ echo "  DESCOMPRIMIENDO EL CÓDIGO FUENTE..."
 echo "---------------------------------------"
 echo ""
 NroUltKernel=$(echo $URLUltKernel | cut -d'-' -f 2)
-tar xf /kernels/laststable/linux-$NroUltKernel
+tar xf /root/CodFuente/kernels/stable/linux-$NroUltKernel
 
 echo ""
 echo "-------------------------------------"
 echo "  LIMPIAR LAS FUENTES DEL KERNEL..."
 echo "-------------------------------------"
 echo ""
-make mrproper
+#make mrproper
 
