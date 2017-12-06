@@ -57,6 +57,7 @@ echo "------------------------------------------------"
 echo "  LIMPIAR LAS FUENTES DEL KERNEL Y COMPILAR..."
 echo "------------------------------------------------"
 echo ""
-cd /root/CodFuente/kernels/stable/linux-$NroUltKernel
+CarpetaCodFuente=$(echo /root/CodFuente/kernels/stable/linux-$NroUltKernel | cut -d'.tar' -f 2)
+echo $CarpetaCodFuente
 #make mrproper
 #make menuconfig
