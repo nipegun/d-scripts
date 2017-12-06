@@ -39,8 +39,8 @@ echo "  DESCARGANDO EL CÓDIGO FUENTE DE LA VERSIÓN ESTABLE MÁS RECIENTE"
 echo "-------------------------------------------------------------------"
 echo ""
 cd /kernels/laststable
-UltKernel=$(wget -qO- --no-check-certificate https://www.kernel.org | grep tar | head -n1 | cut -d\" -f2)
-wget --no-check-certificate $UltKernel
+URLUltKernel=$(wget -qO- --no-check-certificate https://www.kernel.org | grep tar | head -n1 | cut -d\" -f2)
+wget --no-check-certificate $URLUltKernel
 
 echo ""
 echo "------------------------------------"
