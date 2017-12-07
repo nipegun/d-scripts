@@ -12,9 +12,9 @@
 #-----------------------------------------------------------------------
 
 echo ""
-echo "---------------------------------"
-echo "  ACTUALIZANDO LOS REPOSITORIOS"
-echo "---------------------------------"
+echo "------------------------------------"
+echo "  ACTUALIZANDO LOS REPOSITORIOS..."
+echo "------------------------------------"
 echo ""
 apt-get -y update
 
@@ -53,11 +53,26 @@ NroUltKernel=$(echo $URLUltKernel | cut -d'-' -f 2)
 tar xf /root/CodFuente/kernels/stable/linux-$NroUltKernel
 
 echo ""
-echo "------------------------------------------------"
-echo "  LIMPIAR LAS FUENTES DEL KERNEL Y COMPILAR..."
-echo "------------------------------------------------"
+echo "--------------------------------------------------------------------"
+echo "  LIMPIANDO LAS FUENTES DEL KERNEL Y CONFIGURANDO PARA COMPILAR..."
+echo "--------------------------------------------------------------------"
 echo ""
 CarpetaCodFuente=$(echo /root/CodFuente/kernels/stable/linux-$NroUltKernel | sed -e "s/.tar.xz//")
 cd $CarpetaCodFuente
 make mrproper
 make menuconfig
+
+echo ""
+echo "------------------------------"
+echo "  LIMPIANDO EL COMPILADOR..."
+echo "------------------------------"
+echo ""
+make-kpkg clean 
+
+echo ""
+echo "-----------------"
+echo "  COMPILANDO..."
+echo "-----------------"
+echo ""
+make-kpkg --initrd linux_image linux_headers linux_source --append-to-version=-usuariodebian -j2
+
