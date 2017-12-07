@@ -11,5 +11,24 @@
 #  SCRIPT DE NIPEGUN PARA EDITAR LA CONFIGURACIÓN DEL DEMONIO DHCPD
 #--------------------------------------------------------------------
 
+echo ""
+echo "-------------------------------------"
+echo "  DETENIENDO EL SERVICIO SMBD..."
+echo "------------------------------------"
+echo ""
+service smbd stop
+
+echo ""
+echo "-------------------------------------------"
+echo "  EDITANDO EL ARCHIVO DE CONFIGURACIÓN..."
+echo "-------------------------------------------"
+echo ""
 nano /etc/samba/smb.conf
+
+echo ""
+echo "-------------------------------------------"
+echo "  VOLVIENDO A INICIAR EL SERVICIO SMBD..."
+echo "-------------------------------------------"
+echo ""
+service smbd start
 
