@@ -46,6 +46,7 @@ ln -s /root/nipe-scripts/debian09/ListarNodosTORQueEntran /root/nipe-scripts/lis
 ln -s /root/nipe-scripts/debian09/MonitorizarLog /root/nipe-scripts/monlog
 ln -s /root/nipe-scripts/debian09/MostrarAparatosConectadosAlRouterDebian /root/nipe-scripts/macard
 ln -s /root/nipe-scripts/debian09/MostrarAparatosConectadosEnLaInterfaz /root/nipe-scripts/maceli
+ln -s /root/nipe-scripts/debian09/MostrarContenidoDelPaquete /root/nipe-scripts/mcdp
 ln -s /root/nipe-scripts/debian09/MostrarIPLAN /root/nipe-scripts/iplan
 ln -s /root/nipe-scripts/debian09/MostrarIPWAN /root/nipe-scripts/ipwan
 ln -s /root/nipe-scripts/debian09/MostrarMódulosCargados /root/nipe-scripts/mosmodcar
