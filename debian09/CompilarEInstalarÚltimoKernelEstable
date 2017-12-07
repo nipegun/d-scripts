@@ -74,5 +74,19 @@ echo "-----------------"
 echo "  COMPILANDO..."
 echo "-----------------"
 echo ""
-make-kpkg --initrd linux_image linux_headers linux_source --append-to-version=-usuariodebian -j2
+make-kpkg --initrd linux_image linux_headers linux_source --append-to-version=-$NroUltKernel -j2
+
+echo ""
+echo "--------------------------------------------------------------------"
+echo "  COPIANDO LOS PAQUETES DE INSTALACIÓN A LA CARPETA DE PAQUETES..."
+echo "--------------------------------------------------------------------"
+echo ""
+
+echo ""
+echo "-----------------------------------------------"
+echo "  INSTALANDO LOS PAQUETES DEL NUEVO KERNEL..."
+echo "-----------------------------------------------"
+echo ""
+dpkg -i /root/Paquetes/Kernels/linux-image-$NroUltKernel.deb
+dpkg -i /root/Paquetes/Kernels/linux-headers-$NroUltKernel.deb
 
