@@ -23,7 +23,8 @@ echo "-----------------------------------------"
 echo "  INSTALANDO LOS PAQUETES NECESARIOS..."
 echo "-----------------------------------------"
 echo ""
-apt-get install wget libncurses5-dev gcc make build-essential kernel-package
+apt-get install wget libncurses5-dev gcc make build-essential
+apt-get -y install kernel-package
 
 echo ""
 echo "----------------------------------------------------------------------------------"
