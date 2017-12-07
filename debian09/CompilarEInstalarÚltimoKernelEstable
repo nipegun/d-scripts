@@ -58,6 +58,6 @@ echo "  LIMPIAR LAS FUENTES DEL KERNEL Y COMPILAR..."
 echo "------------------------------------------------"
 echo ""
 CarpetaCodFuente=$(echo /root/CodFuente/kernels/stable/linux-$NroUltKernel | sed -e "s/.tar.xz//")
-echo $CarpetaCodFuente
+cd $CarpetaCodFuente
 #make mrproper
 #make menuconfig
