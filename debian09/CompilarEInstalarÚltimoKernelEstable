@@ -26,10 +26,9 @@ echo ""
 apt-get install wget libncurses5-dev gcc make build-essential kernel-package
 
 echo ""
-echo "-----------------------------------------------------"
-echo "  CREANDO LAS CARPETAS PARA UBICAR EL CÓDIGO FUENTE"
-echo "  Y POSICIONÁNDOSE EN ELLAS..."
-echo "-----------------------------------------------------"
+echo "----------------------------------------------------------------------------------"
+echo "  CREANDO LAS CARPETAS PARA UBICAR EL CÓDIGO FUENTE Y POSICIONÁNDOSE EN ELLAS..."
+echo "----------------------------------------------------------------------------------"
 echo ""
 mkdir /root/CodFuente
 mkdir /root/CodFuente/kernels
