@@ -14,7 +14,7 @@
 
 /root/nipe-scripts/debian09/UnicaEjecucion/1-ViejaNomencaturaDeEthernet
 
-/root/nipe-scripts/debian09/UnicaEjecucion/2-PonerNombreViejoAInterfacesDeRed
+/root/nipe-scripts/debian09/UnicaEjecucion/2-PonerNombresViejosAInterfacesDeRed
 
 /root/nipe-scripts/debian09/UnicaEjecucion/3-PonerRepositoriosCompletos
 
