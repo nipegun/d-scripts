@@ -41,7 +41,9 @@ if [ $# -ne $EXPECTED_ARGS ]
     grep -rnw /media -e $1
     grep -rnw /mnt -e $1
     grep -rnw /opt -e $1
-    grep -rnw /proc -e $1
-    #grep -rnw / -e $1
+    grep -rnw /root -e $1
+    grep -rnw /run -e $1
+    grep -rnw /sbin -e $1
+    grep -rnw /srv -e $1
     echo ""
 fi
