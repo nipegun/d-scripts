@@ -24,10 +24,10 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo ""
     echo "---------------------------------------------------------------"
     echo "Mal uso del script. El uso correcto sería:"
-    echo "InstalarYConfigurarServidorSamba GrupoDeTrabajo NombreNetBios Usuario"
+    echo "$0 [GrupoDeTrabajo] [NombreNetBios] [Usuario]"
     echo ""
     echo "Ejemplo:"
-    echo "InstalarYConfigurarServidorSamba oficina ordenador pepe"
+    echo "$0 oficina ordenador pepe"
     echo "---------------------------------------------------------------"
     echo ""
     exit $E_BADARGS
