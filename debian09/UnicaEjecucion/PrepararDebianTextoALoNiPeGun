@@ -16,11 +16,11 @@
 
 /root/nipe-scripts/debian09/UnicaEjecucion/2-PonerNombresViejosAInterfacesDeRed
 
-/root/nipe-scripts/debian09/UnicaEjecucion/3-PonerRepositoriosCompletos
+/root/nipe-scripts/debian09/UnicaEjecucion/3-PrepararTareasCron
 
 /root/nipe-scripts/debian09/UnicaEjecucion/4-PrepararComandosPostArranque
 
-/root/nipe-scripts/debian09/UnicaEjecucion/5-PrepararTareasCron
+/root/nipe-scripts/debian09/UnicaEjecucion/5-PonerRepositoriosCompletos
 
 echo "mc /root /root" > /root/MidnightCommander
 chmod +x /root/MidnightCommander
