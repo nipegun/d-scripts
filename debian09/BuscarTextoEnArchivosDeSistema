@@ -30,23 +30,23 @@ if [ $# -ne $EXPECTED_ARGS ]
     exit $E_BADARGS
   else
     echo ""
-    grep -rnw /bin -e $1
-    grep -rnw /boot -e $1
-    grep -rnw /dev -e $1
-    grep -rnw /etc -e $1
-    grep -rnw /home -e $1
-    grep -rnw /lib -e $1
-    grep -rnw /lib64 -e $1
-    grep -rnw /lost+found -e $1
-    grep -rnw /media -e $1
-    grep -rnw /mnt -e $1
-    grep -rnw /opt -e $1
-    grep -rnw /root -e $1
-    grep -rnw /run -e $1
-    grep -rnw /sbin -e $1
-    grep -rnw /srv -e $1
-    grep -rnw /tmp -e $1
-    grep -rnw /usr -e $1
-    grep -rnw /var -e $1
+    grep -rnw --color /bin -e $1
+    grep -rnw --color /boot -e $1
+    grep -rnw --color /dev -e $1
+    grep -rnw --color /etc -e $1
+    grep -rnw --color /home -e $1
+    grep -rnw --color /lib -e $1
+    grep -rnw --color /lib64 -e $1
+    grep -rnw --color /lost+found -e $1
+    grep -rnw --color /media -e $1
+    grep -rnw --color /mnt -e $1
+    grep -rnw --color /opt -e $1
+    grep -rnw --color /root -e $1
+    grep -rnw --color /run -e $1
+    grep -rnw --color /sbin -e $1
+    grep -rnw --color /srv -e $1
+    grep -rnw --color /tmp -e $1
+    grep -rnw --color /usr -e $1
+    grep -rnw --color /var -e $1
     echo ""
 fi
