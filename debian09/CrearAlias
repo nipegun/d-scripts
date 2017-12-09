@@ -27,6 +27,7 @@ ln -s /root/nipe-scripts/debian09/BorrarTAGsMP3 /root/nipe-scripts/btmp3
 ln -s /root/nipe-scripts/debian09/BorrarZoneIdentifier /root/nipe-scripts/bozonid
 ln -s /root/nipe-scripts/debian09/BuscarMódulosCargables /root/nipe-scripts/busmodcar
 ln -s /root/nipe-scripts/debian09/BuscarTextoEnArchivos /root/nipe-scripts/btea
+ln -s /root/nipe-scripts/debian09/BuscarTextoEnArchivosDeSistema /root/nipe-scripts/bteads
 ln -s /root/nipe-scripts/debian09/CompilarEInstalarÚltimoKernelEstable /root/nipe-scripts/ceiuke
 ln -s /root/nipe-scripts/debian09/ComprobarSSD /root/nipe-scripts/compssd
 ln -s /root/nipe-scripts/debian09/CrearBaseDeDatosYUsuario /root/nipe-scripts/cbddyu
