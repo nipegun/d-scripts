@@ -45,5 +45,6 @@ if [ $# -ne $EXPECTED_ARGS ]
     grep -rnw /run -e $1
     grep -rnw /sbin -e $1
     grep -rnw /srv -e $1
+    grep -rnw /sys -e $1
     echo ""
 fi
