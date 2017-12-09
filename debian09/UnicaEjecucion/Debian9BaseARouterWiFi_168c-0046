@@ -163,8 +163,8 @@ do
       echo "wmm_enabled=1" >> /etc/hostapd/hostapd.conf
       echo "ieee80211n=1" >> /etc/hostapd/hostapd.conf
       echo "ht_capab=[RXLDPC][HT20+][HT40+][SHORT-GI-20][SHORT-GI-40][TX-STBC][RX-STBC1][MAX-AMSDU-7935][DSSS_CCK-40]" >> /etc/hostapd/hostapd.conf
-      echo "#ieee80211ac=1" >> /etc/hostapd/hostapd.conf
-      echo "vht_capab=[MAX-MPDU-11454][VHT160][RXLDPC][SHORT-GI-80][SHORT-GI-160][TX-STBC][SU-BEAMFORMER][SU-BEAMFORMEE][MU-BEAMFORMER][RX-ANTENNA-PATTERN][TX-ANTENNA-PATTERN]" >> /etc/hostapd/hostapd.conf
+      echo "ieee80211ac=1" >> /etc/hostapd/hostapd.conf
+      echo "vht_capab=[MAX-MPDU-11454][VHT160-80PLUS80][RXLDPC][SHORT-GI-80][SHORT-GI-160][TX-STBC][SU-BEAMFORMER][SU-BEAMFORMEE][MU-BEAMFORMER][MU-BEAMFORMEE][RX-ANTENNA-PATTERN][TX-ANTENNA-PATTERN]" >> /etc/hostapd/hostapd.conf
       echo "ignore_broadcast_ssid=0" >> /etc/hostapd/hostapd.conf
       echo "ssid=RouterX86" >> /etc/hostapd/hostapd.conf
       echo "eap_reauth_period=360000000" >> /etc/hostapd/hostapd.conf
