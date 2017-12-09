@@ -30,7 +30,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     exit $E_BADARGS
   else
     echo ""
-    grep -rnw $1 -e $2
+    grep -rnw --color $1 -e $2
     echo ""
 fi
 
