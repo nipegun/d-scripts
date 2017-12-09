@@ -14,24 +14,13 @@
 
 /root/nipe-scripts/debian09/UnicaEjecucion/1-ViejaNomencaturaDeEthernet
 
-echo ""
-echo "-----------------------------------------"
-echo "  CONFIGURANDO LAS INTERFACES DE RED..."
-echo "-----------------------------------------"
-echo ""
-echo "auto lo" > /etc/network/interfaces
-echo "  iface lo inet loopback" >> /etc/network/interfaces
-echo "" >> /etc/network/interfaces
-echo "auto eth0" >> /etc/network/interfaces
-echo "  allow-hotplug eth0" >> /etc/network/interfaces
-echo "  iface eth0 inet dhcp" >> /etc/network/interfaces
-echo "" >> /etc/network/interfaces
+/root/nipe-scripts/debian09/UnicaEjecucion/2-PonerNombreViejoAInterfacesDeRed
 
-/root/nipe-scripts/debian09/UnicaEjecucion/2-PonerRepositoriosCompletos
+/root/nipe-scripts/debian09/UnicaEjecucion/3-PonerRepositoriosCompletos
 
-/root/nipe-scripts/debian09/UnicaEjecucion/3-PrepararComandosPostArranque
+/root/nipe-scripts/debian09/UnicaEjecucion/4-PrepararComandosPostArranque
 
-/root/nipe-scripts/debian09/UnicaEjecucion/4-PrepararTareasCron
+/root/nipe-scripts/debian09/UnicaEjecucion/5-PrepararTareasCron
 
 echo "mc /root /root" > /root/MidnightCommander
 chmod +x /root/MidnightCommander
