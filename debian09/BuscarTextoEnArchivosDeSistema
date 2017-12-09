@@ -30,18 +30,18 @@ if [ $# -ne $EXPECTED_ARGS ]
     exit $E_BADARGS
   else
     echo ""
-    grep -rnw /bin -e $2
-    grep -rnw /boot -e $2
-    grep -rnw /dev -e $2
-    grep -rnw /etc -e $2
-    grep -rnw /home -e $2
-    grep -rnw /lib -e $2
-    grep -rnw /lib64 -e $2
-    grep -rnw /lost+found -e $2
-    grep -rnw /media -e $2
-    grep -rnw /mnt -e $2
-    grep -rnw /opt -e $2
-    #grep -rnw / -e $2
-    #grep -rnw / -e $2
+    grep -rnw /bin -e $1
+    grep -rnw /boot -e $1
+    grep -rnw /dev -e $1
+    grep -rnw /etc -e $1
+    grep -rnw /home -e $1
+    grep -rnw /lib -e $1
+    grep -rnw /lib64 -e $1
+    grep -rnw /lost+found -e $1
+    grep -rnw /media -e $1
+    grep -rnw /mnt -e $1
+    grep -rnw /opt -e $1
+    #grep -rnw / -e $1
+    #grep -rnw / -e $1
     echo ""
 fi
