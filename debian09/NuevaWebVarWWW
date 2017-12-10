@@ -14,7 +14,6 @@
 total_param_corr=3
 
 if [ $# -ne $total_param_corr ]; then
-  clear
   echo ""
   echo "Se le deben pasar 3 parámetros obligatorios al script."
   echo "Los parámetros deben estar en orden. Los parámetros son:"
