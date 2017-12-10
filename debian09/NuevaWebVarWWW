@@ -67,7 +67,13 @@ else
     cp /etc/apache2/sites-available/nuevawebvar.conf /etc/apache2/sites-available/$2$1.conf
     sed -i -e "s/nuevawebvar.com/$2$1/g" /etc/apache2/sites-available/$2$1.conf
 
-    # Crear el certificado SSL
+    # Activar la configuración de la nueva Web en Apache
+    echo ""
+    echo "$(tput setaf 1)Activando la web en apache... $(tput sgr 0)"
+    echo ""
+    a2ensite $2$1
+
+    # Crear el certificado SSL, deteninendo Apache
     echo ""
     echo "$(tput setaf 1)Creando el certificado SSL... $(tput sgr 0)"
     echo ""
@@ -75,11 +81,10 @@ else
     service apache2 stop
     /root/git/letsencrypt/letsencrypt-auto --apache -d $2$1 -d www.$2$1
 
-    # Activar el sitio y recargar apache
+    # Volver a arrancar Apache
     echo ""
-    echo "$(tput setaf 1)Activando la web en apache... $(tput sgr 0)"
+    echo "$(tput setaf 1)Re-arrancando Apache... $(tput sgr 0)"
     echo ""
-    a2ensite $2$1
     service apache2 start
 
     # Crear el archivo .htaccess con algunas opciones
@@ -179,7 +184,13 @@ else
     cp /etc/apache2/sites-available/nuevawebvar.conf /etc/apache2/sites-available/$2$1.conf
     sed -i -e "s/nuevawebvar.com/$2$1/g" /etc/apache2/sites-available/$2$1.conf
 
-    # Crear el certificado SSL
+    # Activar la configuración de la nueva Web en Apache
+    echo ""
+    echo "$(tput setaf 1)Activando la web en apache... $(tput sgr 0)"
+    echo ""
+    a2ensite $2$1
+
+    # Crear el certificado SSL, deteninendo Apache
     echo ""
     echo "$(tput setaf 1)Creando el certificado SSL... $(tput sgr 0)"
     echo ""
@@ -187,11 +198,10 @@ else
     service apache2 stop
     /root/git/letsencrypt/letsencrypt-auto --apache -d $2$1 -d www.$2$1
 
-    # Activar el sitio y recargar apache
+    # Volver a arrancar Apache
     echo ""
-    echo "$(tput setaf 1)Activando la web en apache... $(tput sgr 0)"
+    echo "$(tput setaf 1)Re-arrancando Apache... $(tput sgr 0)"
     echo ""
-    a2ensite $2$1
     service apache2 start
 
     # Crear el archivo .htaccess con algunas opciones
