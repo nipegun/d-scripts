@@ -31,5 +31,7 @@ echo ""
 chown root:root /var/www
 echo "..."
 
+echo ""
 echo "Finalizado"
+echo ""
 
