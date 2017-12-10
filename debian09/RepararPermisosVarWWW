@@ -18,12 +18,12 @@ echo ""
 
 # Poner los permisos correctos a carpetas
 echo ""
-find /var/www/html/ -type d -exec chmod 755 {} \;
+find /var/www -type d -exec chmod 755 {} \;
 echo ""
 
 # Poner los permisos correctos a archivos
 echo ""
-find /var/www/html/ -type f -exec chmod 644 {} \;
+find /var/www -type f -exec chmod 644 {} \;
 echo ""
 
 # Asignar la propiedad de /var/root al usuario root. (Necesario para enjaular Webs por SFTP)
