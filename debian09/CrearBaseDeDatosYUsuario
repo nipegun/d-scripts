@@ -21,7 +21,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo ""
     echo "Mal uso del script."
     echo ""
-    echo "El uso correcto sería: $0 NombreBD UsuarioBD PasswordBD"
+    echo "El uso correcto sería: $0 [NombreBD] [UsuarioBD] [PasswordBD]"
     echo ""
     exit $E_BADARGS
   else
