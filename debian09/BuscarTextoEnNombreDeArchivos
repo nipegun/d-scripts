@@ -30,7 +30,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     exit $E_BADARGS
   else
     echo ""
-    find $1 -name "*$2g*" -print
+    find $1 -name *$2g* -print
     echo ""
 fi
 
