@@ -12,7 +12,7 @@
 #  DEL DISCO DE SISTEMA DEBIAN Y DE TODOS LOS VOLÚMENES MONTADOS
 #------------------------------------------------------------------
 
-cd /Discos
+cd /
 
 echo ""
 echo "-----------------------------------------------------"
