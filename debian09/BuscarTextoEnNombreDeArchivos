@@ -21,15 +21,10 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "##################################################"
     echo "Mal uso del script."
     echo ""
-    echo 'El uso correcto sería: btenda ruta "texto"'
+    echo 2El uso correcto sería: btenda ruta texto"
     echo ""
     echo "Ejemplo:"
-    echo 'btenda /etc/ "Perro loco"'
-    echo ""
-    echo "o"
-    echo ""
     echo "btenda /etc/ Perro"
-    
     echo "##################################################"
     echo ""
     exit $E_BADARGS
