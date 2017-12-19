@@ -26,8 +26,13 @@ echo "" >> /root/RepararPermisos
 echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS DE REPARACIÓN DE PERMISOS A EJECUTAR"  >> /root/RepararPermisos
 echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/RepararPermisos
 echo "" >> /root/RepararPermisos
-echo "#chown -Rv www-data:www-data /var/www" >> /root/RepararPermisos
-echo "#find /var/www -type d -print -exec chmod 755 {} \;" >> /root/RepararPermisos
-echo "#find /var/www -type f -print -exec chmod 644 {} \;" >> /root/RepararPermisos
+echo 'echo ""' >> /root/RepararPermisos
+echo 'echo "-------------------------"' >> /root/RepararPermisos
+echo 'echo "  Reparando permisos..."' >> /root/RepararPermisos
+echo 'echo "-------------------------"' >> /root/RepararPermisos
+echo 'echo ""' >> /root/RepararPermisos
+echo "#chown -R www-data:www-data /var/www" >> /root/RepararPermisos
+echo "#find /var/www -type d -exec chmod 755 {} \;" >> /root/RepararPermisos
+echo "#find /var/www -type f -exec chmod 644 {} \;" >> /root/RepararPermisos
 chmod +x /root/RepararPermisos
 
