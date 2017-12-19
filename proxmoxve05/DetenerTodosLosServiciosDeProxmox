@@ -26,7 +26,8 @@ service pve-ha-lrm stop
 service pvedaemon stop
 service pveproxy stop
 service pvestatd stop
-service pve-manager stop
 service pve-firewall stop
 service pvefw-logger stop
+
+service pve-manager stop
 
