@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#-----------------------------------------------------------------
+#  Script de NiPeGun para crear el archivo con las instrucciones
+#  de reparación de permisos del sistema
+#-----------------------------------------------------------------
+
+echo ""
+echo "----------------------------------------------"
+echo "  CREANDO EL ARCHIVO PARA METER LOS COMANDOS"
+echo "----------------------------------------------"
+echo ""
+echo '#!/bin/bash' > /root/RepararPermisos
+echo "" >> /root/RepararPermisos
+echo 'FechaDeEjecucion=$(date +A%YM%mD%d@%T)' >> /root/RepararPermisos
+echo "" >> /root/RepararPermisos
+echo 'echo "La reparación de permisos se ejecutó el $FechaDeEjecucion" >> /var/log/RepPermisos.log' >> /root/RepararPermisos
+echo "" >> /root/RepararPermisos
+echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS DE REPARACIÓN DE PERMISOS A EJECUTAR"  >> /root/RepararPermisos
+echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/RepararPermisos
+echo "" >> /root/RepararPermisos
+echo "#chown -Rv www-data:www-data /var/www" >> /root/RepararPermisos
+chmod +x /root/RepararPermisos
+
