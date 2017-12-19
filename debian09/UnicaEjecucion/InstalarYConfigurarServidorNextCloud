@@ -41,6 +41,7 @@ if [ $# -ne $CantArgsCorrectos ]
     apt-get -y install php7.0-xml php7.0-cgi php7.0-cli php7.0-gd php7.0-curl php7.0-zip php7.0-mysql php7.0-mbstring 
     systemctl start apache2
     systemctl start mysql
+    mysql_secure_installation
     cbddyu nextcloud nextcloud $1
     mkdir /var/www/html/nextcloud
     cd /var/www/html/nextcloud
