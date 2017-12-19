@@ -44,7 +44,7 @@ if [ $# -ne $CantArgsCorrectos ]
     mysql_secure_installation
     cbddyu nextcloud nextcloud $1
     mkdir /var/www/html/nextcloud
-    cd /var/www/html/nextcloud
+    cd /var/www/html
     apt-get -y install wget
     wget --no-check-certificate http://hacks4geeks.com/_/premium/descargas/debian/root/paquetes/nextcloud/nextcloud.zip
     apt-get -y install unzip
