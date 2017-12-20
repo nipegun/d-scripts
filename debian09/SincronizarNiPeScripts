@@ -11,8 +11,8 @@
 #  SCRIPT DE NIPEGUN PARA SINCRONIZAR LOS NIPE-SCRIPTS
 #-------------------------------------------------------
 
-# Ver si hay conexión a Internet
-wget -q --tries=10 --timeout=20 --spider http://google.com
+# Comprobar si hay conexión a Internet antes de sincronizar los nipe-scripts
+wget -q --tries=10 --timeout=20 --spider https://github.com
   if [[ $? -eq 0 ]]; then
     echo ""
     echo "------------------------------------------------------------"
