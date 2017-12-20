@@ -11,23 +11,34 @@
 #  SCRIPT DE NIPEGUN PARA SINCRONIZAR LOS NIPE-SCRIPTS
 #-------------------------------------------------------
 
-echo ""
-echo "------------------------------------------------------------"
-echo "  SINCRONIZANDO LOS NIPE-SCRIPTS CON LAS ÚLTIMAS VERSIONES"
-echo "    Y DESCARGANDO NUEVOS NIPE-SCRIPTS SI ES QUE EXISTEN"
-echo "------------------------------------------------------------"
-echo ""
-rm /root/nipe-scripts -R
-cd /root
-git clone --depth=1 https://github.com/nipegun/nipe-scripts
-rm /root/nipe-scripts/.git -R
-rm /root/nipe-scripts/*
-chmod +x /root/nipe-scripts/* -R
-/root/nipe-scripts/debian09/CrearAlias
+# Ver si hay conexión a Internet
+wget -q --tries=10 --timeout=20 --spider http://google.com
+  if [[ $? -eq 0 ]]; then
+    echo ""
+    echo "------------------------------------------------------------"
+    echo "  SINCRONIZANDO LOS NIPE-SCRIPTS CON LAS ÚLTIMAS VERSIONES"
+    echo "    Y DESCARGANDO NUEVOS NIPE-SCRIPTS SI ES QUE EXISTEN"
+    echo "------------------------------------------------------------"
+    echo ""
+    rm /root/nipe-scripts -R
+    cd /root
+    git clone --depth=1 https://github.com/nipegun/nipe-scripts
+    rm /root/nipe-scripts/.git -R
+    rm /root/nipe-scripts/*
+    chmod +x /root/nipe-scripts/* -R
+    /root/nipe-scripts/debian09/CrearAlias
 
-echo ""
-echo "--------------------------------------------"
-echo "  NIPE-SCRIPTS SINCRONIZADOS CORRECTAMENTE"
-echo "--------------------------------------------"
-echo ""
+    echo ""
+    echo "--------------------------------------------"
+    echo "  NIPE-SCRIPTS SINCRONIZADOS CORRECTAMENTE"
+    echo "--------------------------------------------"
+    echo ""
+  else
+    echo ""
+    echo "----"
+  else
+    echo "  No se pudo iniciar la sincronización de los nipe-scripts"
+  fi
+
+
 
