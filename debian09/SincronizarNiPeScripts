@@ -27,7 +27,6 @@ wget -q --tries=10 --timeout=20 --spider http://google.com
     rm /root/nipe-scripts/*
     chmod +x /root/nipe-scripts/* -R
     /root/nipe-scripts/debian09/CrearAlias
-
     echo ""
     echo "--------------------------------------------"
     echo "  NIPE-SCRIPTS SINCRONIZADOS CORRECTAMENTE"
@@ -35,9 +34,11 @@ wget -q --tries=10 --timeout=20 --spider http://google.com
     echo ""
   else
     echo ""
-    echo "----"
-  else
+    echo "------------------------------------------------------------"
     echo "  No se pudo iniciar la sincronización de los nipe-scripts"
+    echo "  porque no se detectó conexión a Internet"
+    echo "------------------------------------------------------------"
+    echo ""
   fi
 
 
