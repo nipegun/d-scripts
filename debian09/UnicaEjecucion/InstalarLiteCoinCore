@@ -1,0 +1,31 @@
+
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#------------------------------------------------------------------------------
+#  Script de NiPeGun para instalar la última versión estable de LiteCoin Core
+#------------------------------------------------------------------------------
+
+# Buscar en litecoin.org una posible URL del archivo para Linux,
+# quedarse con la versión de 64 bits,
+# cortar del texto resultante los datos que no nos sirvan,
+# dejar sólo la URL y asignarla a una variable
+URLArchUltVersLinux64=$(wget -qO- --no-check-certificate https://litecoin.org/ | grep x86_64-linux-gnu.tar.gz | grep 64bit | cut -d\" -f2)
+
+cd /root
+
+# Descargar el archivo desde la URL de esa variable
+wget --no-check-certificate $URLArchUltVersLinux64
+
+ArchivoDescargado=$(echo $URLArchUltVersLinux64 | cut -d'-' -f 2)
+
+echo $ArchivoDescargado
+
+#tar xzf 
+
