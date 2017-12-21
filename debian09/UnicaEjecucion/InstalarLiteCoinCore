@@ -32,13 +32,13 @@ echo ""
 NombreDelArchivo=${URLArchUltVersLinux64##*linux/}
 
 echo ""
-echo "  Descargando el archivo: ${ColorRojo} $NombreDelArchivo ${FinColor} ... "
+echo "  Descargando el archivo: $NombreDelArchivo"
 echo ""
 cd /root
 wget --no-check-certificate $URLArchUltVersLinux64
 
 echo ""
-echo "  Archivo: descargado correctamente"
+echo "  Archivo descargado correctamente"
 echo ""
 
 #tar xzf 
