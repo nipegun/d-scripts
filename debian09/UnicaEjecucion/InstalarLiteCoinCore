@@ -27,6 +27,7 @@ URLArchUltVersLinux64=$(wget -qO- --no-check-certificate https://litecoin.org/ |
 
 echo ""
 echo -e "  URL encontrada: ${ColorVerde}$URLArchUltVersLinux64${FinColor}"
+echo ""
 
 NombreDelArchivo=${URLArchUltVersLinux64##*linux/}
 
@@ -35,10 +36,11 @@ echo "  Intentando escargargar el archivo: $NombreDelArchivo"
 echo ""
 cd /root
 wget --no-check-certificate $URLArchUltVersLinux64
-
-echo ""
-echo "  Archivo descargado correctamente"
 echo ""
 
-#tar xzf 
+echo ""
+echo "  Archivo descargado correctamente. Intentando la descompresión..."
+echo ""
+
+tar xzf $NombreDelArchivo
 
