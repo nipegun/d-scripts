@@ -22,7 +22,7 @@ cd /root
 
 # Descargar el archivo desde la URL de esa variable
 echo ""
-echo "  Descargando el archivo $URLArchUltVersLinux64..."
+echo -e "Descargando el archivo ${GREEN}$URLArchUltVersLinux64${NC}"
 echo ""
 wget --no-check-certificate $URLArchUltVersLinux64
 
