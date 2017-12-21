@@ -36,15 +36,18 @@ echo "  Intentando escargargar el archivo: $NombreDelArchivo"
 echo ""
 cd /root
 wget --no-check-certificate $URLArchUltVersLinux64
-echo ""
 
 echo ""
 echo "  Archivo descargado correctamente. Intentando la descompresión..."
 echo ""
 
 mkdir /root/LitecoinCore
-rm /root/LitecoinCore/*
 tar xzf $NombreDelArchivo -C /root/LitecoinCore
+
+VersionDelCore=${NombreDelArchivo##x86*}
+
+echo $VersionDelCore
+
 
 echo ""
 echo "  Contenido del archivo descomprimido en la carpeta /root/LitecoinCore"
