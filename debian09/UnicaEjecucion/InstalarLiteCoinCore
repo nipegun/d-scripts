@@ -26,7 +26,7 @@ echo ""
 URLArchUltVersLinux64=$(wget -qO- --no-check-certificate https://litecoin.org/ | grep x86_64-linux-gnu.tar.gz | grep 64bit | cut -d\" -f2)
 
 echo ""
-echo -e "  URL encontrada: ${ColorVerde} $URLArchUltVersLinux64${FinColor}"
+echo -e "  URL encontrada: ${ColorVerde}$URLArchUltVersLinux64${FinColor}"
 echo ""
 
 cd /root
@@ -38,7 +38,7 @@ wget --no-check-certificate $URLArchUltVersLinux64
 
 ArchivoDescargado=${URLArchUltVersLinux64##*linux/}
 
-echo "Archivo $ArchivoDescargado descargado correctamente"
+echo "  Archivo $ArchivoDescargado ${ColorVerde}descargado correctamente${FinColor}"
 
 #tar xzf 
 
