@@ -29,7 +29,7 @@ cd /root
 
 # Descargar el archivo desde la URL de esa variable
 echo ""
-echo -e "${ColorVerde}  Descargando el archivo $URLArchUltVersLinux64..."
+echo -e "${ColorVerde}  Descargando el archivo $URLArchUltVersLinux64${FinColor}"
 echo ""
 wget --no-check-certificate $URLArchUltVersLinux64
 
