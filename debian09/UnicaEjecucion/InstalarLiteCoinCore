@@ -42,5 +42,10 @@ echo ""
 echo "  Archivo descargado correctamente. Intentando la descompresión..."
 echo ""
 
-tar xzf $NombreDelArchivo
+mkdir /root/LitecoinCore
+rm /root/LitecoinCore/*
+tar xzf $NombreDelArchivo -C /root/LitecoinCore
 
+echo ""
+echo "  Contenido del archivo descomprimido en la carpeta /root/LitecoinCore"
+echo ""
