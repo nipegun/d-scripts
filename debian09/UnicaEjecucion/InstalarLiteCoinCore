@@ -39,7 +39,7 @@ wget --no-check-certificate $URLArchUltVersLinux64
 ArchivoDescargado=${URLArchUltVersLinux64##*linux/}
 
 echo ""
-echo "  Archivo $ArchivoDescargado ${ColorVerde}descargado correctamente${FinColor}"
+echo "  Archivo: $ArchivoDescargado" "${ColorVerde}descargado correctamente${FinColor}"
 echo ""
 
 #tar xzf 
