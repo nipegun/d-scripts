@@ -33,8 +33,9 @@ echo -e "${ColorVerde}  Descargando el archivo $URLArchUltVersLinux64${FinColor}
 echo ""
 wget --no-check-certificate $URLArchUltVersLinux64
 
+ArchivoDescargado=${URLArchUltVersLinux64##*/linux}
 
-ArchivoDescargado=$(echo $URLArchUltVersLinux64 | cut -d'-' -f 1)
+#ArchivoDescargado=$(echo $URLArchUltVersLinux64 | cut -d'-' -f 1)
 
 echo $ArchivoDescargado
 
