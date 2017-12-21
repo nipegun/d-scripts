@@ -21,9 +21,13 @@ URLArchUltVersLinux64=$(wget -qO- --no-check-certificate https://litecoin.org/ |
 cd /root
 
 # Descargar el archivo desde la URL de esa variable
+echo ""
+echo "  Descargando el archivo $URLArchUltVersLinux64..."
+echo ""
 wget --no-check-certificate $URLArchUltVersLinux64
 
-ArchivoDescargado=$(echo $URLArchUltVersLinux64 | cut -d'-' -f 2)
+
+ArchivoDescargado=$(echo $URLArchUltVersLinux64 | cut -d'-' -f 1)
 
 echo $ArchivoDescargado
 
