@@ -41,7 +41,7 @@ echo ""
 echo "  Archivo descargado correctamente. Intentando la descompresión..."
 echo ""
 
-mkdir /root/LitecoinCore
+mkdir -p /root/LitecoinCore
 tar xzf $NombreDelArchivo -C /root/LitecoinCore
 
 VersionDelCore=${NombreDelArchivo%-x86*}
