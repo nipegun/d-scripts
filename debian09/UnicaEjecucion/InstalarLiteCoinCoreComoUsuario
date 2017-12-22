@@ -44,7 +44,7 @@ echo ""
 mkdir /root/LitecoinCore
 tar xzf $NombreDelArchivo -C /root/LitecoinCore
 
-VersionDelCore=${NombreDelArchivo##-x86*}
+VersionDelCore=${NombreDelArchivo%-x86*}
 
 echo $VersionDelCore
 
