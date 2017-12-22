@@ -46,9 +46,6 @@ tar xzf $NombreDelArchivo -C /root/LitecoinCore
 
 VersionDelCore=${NombreDelArchivo%-x86*}
 
-echo $VersionDelCore
-
-
 echo ""
-echo "  Contenido del archivo descomprimido en la carpeta /root/LitecoinCore"
+echo "  Contenido del archivo descomprimido en la carpeta /root/LitecoinCore/$VersionDelCore"
 echo ""
