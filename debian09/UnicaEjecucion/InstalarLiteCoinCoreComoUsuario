@@ -29,7 +29,7 @@ echo ""
 echo -e "  URL encontrada: ${ColorVerde}$URLArchUltVersLinux64${FinColor}"
 echo ""
 
-NombreDelArchivo=${URLArchUltVersLinux64%x86*}
+NombreDelArchivo=${URLArchUltVersLinux64##*linux/}
 
 echo ""
 echo "  Intentando escargargar el archivo: $NombreDelArchivo"
