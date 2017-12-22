@@ -49,3 +49,9 @@ VersionDelCore=${NombreDelArchivo%-x86*}
 echo ""
 echo "  Contenido del archivo descomprimido en la carpeta /root/LitecoinCore/$VersionDelCore"
 echo ""
+
+echo ""
+echo "  Borrando el archivo comprimido..."
+echo ""
+rm /root/$NombreDelArchivo
+
