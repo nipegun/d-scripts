@@ -52,7 +52,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     NombreDelArchivo=${URLArchUltVersLinux64##*linux/}
 
     echo ""
-    echo "  Intentando escargargar el archivo: $NombreDelArchivo"
+    echo "  Intentando descargar el archivo: $NombreDelArchivo"
     echo ""
     cd /root
     wget --no-check-certificate $URLArchUltVersLinux64
@@ -78,7 +78,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     mkdir -p /home/$1/Litecoin
     cp /root/LitecoinCore/$VersionDelCore/bin/litecoin-qt /home/$1/Litecoin
     
-    shown $1:$1 /home/$1/Litecoin -R
+    chown $1:$1 /home/$1/Litecoin -R
     chmod +x /home/$1/Litecoin/litecoin-qt
 
     echo ""
