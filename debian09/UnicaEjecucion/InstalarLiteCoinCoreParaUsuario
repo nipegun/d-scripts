@@ -75,8 +75,14 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo ""
     rm /root/$NombreDelArchivo
 
-    mkdir -p /home/$1/LiteCoin
-    cp /root/LitecoinCore/$VersionDelCore/bin/litecoin-qt /home/$1/LiteCoin
+    mkdir -p /home/$1/Litecoin
+    cp /root/LitecoinCore/$VersionDelCore/bin/litecoin-qt /home/$1/Litecoin
+    
+    shown $1:$1 /home/$1/Litecoin -R
+    chmod +x /home/$1/Litecoin/litecoin-qt
 
+    echo ""
+    echo "  Última versión de litecoin-qt instalada en /home/$1/Litecoin"
+    echo ""
 fi
 
