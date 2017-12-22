@@ -55,3 +55,6 @@ echo "  Borrando el archivo comprimido..."
 echo ""
 rm /root/$NombreDelArchivo
 
+mkdir -p /home/$1/LiteCoin
+cp /root/LitecoinCore/$VersionDelCore/bin/litecoin-qt /home/$1/LiteCoin
+
