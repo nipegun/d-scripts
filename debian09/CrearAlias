@@ -44,6 +44,7 @@ ln -s /root/nipe-scripts/debian09/ExtraerSubtítuloDeMKV /root/nipe-scripts/esdm
 ln -s /root/nipe-scripts/debian09/HardwareInfoGráfica /root/nipe-scripts/hardigra
 ln -s /root/nipe-scripts/debian09/HardwareInfoRed /root/nipe-scripts/hardired
 ln -s /root/nipe-scripts/debian09/ImportarBaseDeDatos /root/nipe-scripts/ibdd
+ln -s /root/nipe-scripts/debian09/InfoNodoLitecoin /root/nipe-scripts/inoli
 ln -s /root/nipe-scripts/debian09/LanzarEscritorio /root/nipe-scripts/escritorio
 ln -s /root/nipe-scripts/debian09/ListarNodosTORQueEntran /root/nipe-scripts/lisnodtor
 ln -s /root/nipe-scripts/debian09/MonitorizarLog /root/nipe-scripts/monlog
