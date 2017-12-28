@@ -60,10 +60,15 @@ echo ""
 install -m 0755 -o root -g root -t /usr/local/bin /root/LitecoinCore/$VersionDelCore/bin/*
 
 echo ""
+echo "  Creando la carpeta para el almacenamiento del nodo..."
+echo ""
+mkdir /root/NodoLitecoin
+
+echo ""
 echo "  Agregando una línea al archivo de ComandosPostArranque"
 echo "  para que se ejecute como demonio al arrancar el sistema..."
 echo ""
-echo "litecoind -daemon" >> /root/ComandosPostArranque
+echo "litecoind -daemon -datadir=/root/NodoLitecoin" >> /root/ComandosPostArranque
 
 echo ""
 echo "  Hecho. La próxima vez que arranques el sistema"
