@@ -71,6 +71,18 @@ echo ""
 echo "litecoind -daemon -datadir=/root/NodoLitecoin" >> /root/ComandosPostArranque
 
 echo ""
+echo "  Creando el archivo de configuración..."
+echo ""
+mkdir /root/.litecoin
+echo "rpcuser=litecoinuser" > /root/.litecoin/litecoin.conf
+echo "rpcpassword=password" >> /root/.litecoin/litecoin.conf
+echo "txindex=1" >> /root/.litecoin/litecoin.conf
+echo "server=1" >> /root/.litecoin/litecoin.conf
+echo "daemon=1" >> /root/.litecoin/litecoin.conf
+echo "rpcbind=127.0.0.1" >> /root/.litecoin/litecoin.conf
+echo "bind=127.0.0.1" >> /root/.litecoin/litecoin.conf
+
+echo ""
 echo "  Hecho. La próxima vez que arranques el sistema"
 echo "  el nodo Litecoin se iniciará de forma automática"
 echo ""
