@@ -81,6 +81,7 @@ echo "server=1" >> /root/.litecoin/litecoin.conf
 echo "daemon=1" >> /root/.litecoin/litecoin.conf
 echo "rpcbind=127.0.0.1" >> /root/.litecoin/litecoin.conf
 echo "bind=127.0.0.1" >> /root/.litecoin/litecoin.conf
+chmod 0600 /root/.litecoin/litecoin.conf 
 
 echo ""
 echo "  Hecho. La próxima vez que arranques el sistema"
