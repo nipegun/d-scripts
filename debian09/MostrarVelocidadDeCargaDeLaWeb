@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#------------------------------------------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA MEDIR LA VELOCIDAD DE CARGA DE UNA WEB (via eduardocollado.com)
+#------------------------------------------------------------------------------------------
+
+CantArgsCorrectos=1
+ArgsInsuficientes=65
+
+if [ $# -ne $CantArgsCorrectos ]
+  then
+    echo ""
+    echo "------------------------------------------------------------------------------"
+    echo "Se le debe pasar un (único) parámetro al script."
+    echo ""
+    echo "El uso correcto sería: MostrarVelocidadDeCargaDeWeb [URLDeLaWeb]"
+    echo ""
+    echo "Ejemplo:"
+    echo ' MostrarVelocidadDeCargaDeWeb http://nipegun.com'
+    echo "------------------------------------------------------------------------------"
+    echo ""
+    exit $ArgsInsuficientes
+  else
+    curl -s -w 'Velocidad de carga de la web:%{url_effective}\n\nLookup Time:\t\t%{time_namelookup}\nConnect Time:\t\t%{time_connect}\nAppCon Time:\t\t%{time_appconnect}\nRedirect Time:\t\t%{time_redirect}\nPre-transfer Time:\t%{time_pretransfer}\nStart-transfer Time:\t%{time_starttransfer}\nSpeed download (bytes/sec):\t%{speed_download}\nSize download (bytes):\t%{size_download}\n\nTotal Time:\t\t%{time_total}\n' -o /dev/null https://www.eduardocollado.com
+fi
+
