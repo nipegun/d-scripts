@@ -28,6 +28,6 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     exit $ArgsInsuficientes
   else
-    curl -s -w '\nMostrando velocidad de carga de la web: %{url_effective}\n\nTiempo consulta DNS:\t\t\t\t%{time_namelookup}s\nTiempo hasta conectar:\t\t\t%{time_connect}\nAppCon Time:\t\t\t\t%{time_appconnect}\nTiempo de redirección:\t\t\t\t%{time_redirect}\nPre-transfer Time:\t\t\t%{time_pretransfer}\nStart-transfer Time:\t\t\t%{time_starttransfer}\nVelocidad de descarga (bytes/sec):\t%{speed_download}\nTamaño descargado (bytes):\t\t%{size_download}\n\nTiempo total:\t\t\t\t%{time_total}\n' -o /dev/null $1
+    curl -s -w '\nMostrando velocidad de carga de la web: %{url_effective}\n\nTiempo consulta DNS:\t\t\t%{time_namelookup}s\nTiempo hasta conectar:\t\t\t%{time_connect}\nAppCon Time:\t\t\t\t%{time_appconnect}\nTiempo de redirección:\t\t\t%{time_redirect}\nPre-transfer Time:\t\t\t%{time_pretransfer}\nStart-transfer Time:\t\t\t%{time_starttransfer}\nVelocidad de descarga (bytes/sec):\t%{speed_download}\nTamaño descargado (bytes):\t\t%{size_download}\n\nTiempo total:\t\t\t\t%{time_total}\n' -o /dev/null $1
 fi
 
