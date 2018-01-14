@@ -38,7 +38,7 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "  El ping a google.com tiene una latencia de $pinggoogle ms"
     echo ""
 
-    anchobandteor=$($1 * 1024 * 8 / $pinggoogle)
+    anchobandteor=$($1 * 1024 * 8 )
     echo "Para una ventana de $1 KB, el ancho de banda teórico máximo sería de: $anchobandteor"
 fi
 
