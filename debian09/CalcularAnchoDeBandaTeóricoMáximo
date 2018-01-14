@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#-----------------------------------------------------------------------------
+#  Script de NiPeGun para calcular el ancho de banda teórico máximo a Google
+#  Tamaño-de-ventana-TCP-en-bits / Latencia-en-segundos = Bits-por-segundo-de-transferencia
+#-----------------------------------------------------------------------------
+
+echo ""
+echo "  Calculando la latencia del ping a google.com..."
+echo ""
+pinggoogle=$(ping -c 1 google.com | sed -ne '/.*time=/{;s///;s/\..*//;p;}')
+
+
+echo " 64KB = 65536 Bytes. 65536 * 8 = 524288 bits"
+echo "Para 64 el ancho de banda es: " 524288 * $pinggoogle
+
+echo $pinggoogle
+
