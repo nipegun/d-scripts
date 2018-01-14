@@ -36,7 +36,7 @@ if [ $# -ne $CantArgsCorrectos ]
     pinggoogle=$(ping -c 1 google.com | sed -ne '/.*time=/{;s///;s/\..*//;p;}')
     echo "  El ping a google.com tiene una latencia de $pinggoogle ms"
     pingenmssincero=$(echo "$pinggoogle/1000" | bc -l )
-    pingenmsconcero=$(printf '%.3f\n' $pingenmssincero
+    pingenmsconcero=$(printf '%.3f\n' $pingenmssincero)
     echo "  o lo que es lo mismo: $pingenmsconcero seg"
 
     anchobandteor=$(($1*1024*8/$pingenmsconcero))
