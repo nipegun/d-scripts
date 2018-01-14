@@ -35,9 +35,9 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     pinggoogle=$(ping -c 1 google.com | sed -ne '/.*time=/{;s///;s/\..*//;p;}')
     echo "  El ping a google.com tiene una latencia de $pinggoogle ms"
-    pingenseg="0.0$pinggoogle"
+    pingenseg=$(awk 'BEGIN { print (16/1000) }')
     echo "  o lo que es lo mismo: $pingenseg seg"
-    anchobandteor=$(($1*1024*8/$pingenseg))
+    anchobandteor=$(awk 'BEGIN { print ($1*1024*8/$pingenseg) }')
     echo "Para una ventana de $1 KB, el ancho de banda teórico máximo sería de: $anchobandteor"
     echo ""
 fi
