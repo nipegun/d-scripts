@@ -34,12 +34,11 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "  Calculando la latencia del ping a google.com..."
     echo ""
     pinggoogle=$(ping -c 1 google.com | sed -ne '/.*time=/{;s///;s/\..*//;p;}')
-    echo "  El ping a google.com tiene una latencia de $pinggoogle ms"
     pingenseg=$(awk 'BEGIN { print ("'$pinggoogle'"/1000) }')
-    echo "  o lo que es lo mismo: $pingenseg seg"
+    echo "  El ping a google.com tiene una latencia de $pinggoogle ms, o lo que es lo mismo: $pingenseg seg"
     anchobandteorbps=$(awk 'BEGIN { print ("'$1'"*1024*8/"'$pingenseg'") }')
     echo ""
     anchobandteormbps=$(awk 'BEGIN { print ("'$anchobandteorbps'"/1000000) }')
-    echo "Para una ventana de $1 KB, el ancho de banda teórico máximo sería de: $anchobandteormbps Mbps"
+    echo "  Para una ventana de $1 KB, el ancho de banda teórico máximo sería de: $anchobandteormbps Mbps"
     echo ""
 fi
