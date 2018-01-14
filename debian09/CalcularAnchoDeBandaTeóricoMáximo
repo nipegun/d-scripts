@@ -17,6 +17,9 @@ echo "  Calculando la latencia del ping a google.com..."
 echo ""
 pinggoogle=$(ping -c 1 google.com | sed -ne '/.*time=/{;s///;s/\..*//;p;}')
 
+echo ""
+echo "  El ping a google.com tiene una latencia de $pinggogle ms"
+echo ""
 
 echo " 64KB = 65536 Bytes. 65536 * 8 = 524288 bits"
 echo "Para 64 el ancho de banda es: " 524288 * $pinggoogle
