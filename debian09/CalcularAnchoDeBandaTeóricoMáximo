@@ -34,11 +34,13 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "  Calculando la latencia del ping a google.com..."
     echo ""
     pinggoogle=$(ping -c 1 google.com | sed -ne '/.*time=/{;s///;s/\..*//;p;}')
-
+    pingenms=$(($pinggoogle/1000))
+    
     echo "  El ping a google.com tiene una latencia de $pinggoogle ms"
-    echo ""
+    echo "  o lo que es lo mismo: $pingenms Seg"
 
-    anchobandteor=$(($1*1024*8/$pinggoogle))
+    anchobandteor=$(($1*1024*8/$pingenms))
     echo "Para una ventana de $1 KB, el ancho de banda teórico máximo sería de: $anchobandteor"
+    echo ""
 fi
 
