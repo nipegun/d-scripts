@@ -9,7 +9,8 @@
 
 #-----------------------------------------------------------------------------
 #  Script de NiPeGun para calcular el ancho de banda teórico máximo a Google
-#  Tamaño-de-ventana-TCP-en-bits / Latencia-en-segundos = Bits-por-segundo-de-transferencia
+#  via eduardocollado.com
+#  TamañoDeVentanaTCPenBits/LatenciaEnSegundos=BitsPorSegundoDeTransferencia
 #-----------------------------------------------------------------------------
 
 
