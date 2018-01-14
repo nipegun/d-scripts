@@ -39,8 +39,7 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "  o lo que es lo mismo: $pingenseg seg"
     anchobandteorbps=$(awk 'BEGIN { print ("'$1'"*1024*8/"'$pingenseg'") }')
     echo ""
-    echo "Para una ventana de $1 KB, el ancho de banda teórico máximo sería de: $anchobandteorbps bits por segundo"
     anchobandteormbps=$(awk 'BEGIN { print ("'$anchobandteorbps'"/1000000) }')
-    echo "o lo que sería lo mismo que $anchobandteormbps Mbps"
+    echo "Para una ventana de $1 KB, el ancho de banda teórico máximo sería de: $anchobandteormbps Mbps"
     echo ""
 fi
