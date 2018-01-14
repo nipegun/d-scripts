@@ -35,11 +35,11 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     pinggoogle=$(ping -c 1 google.com | sed -ne '/.*time=/{;s///;s/\..*//;p;}')
     echo "  El ping a google.com tiene una latencia de $pinggoogle ms"
-    #pingenms=$(echo "$pinggoogle/1000" | bc -l )
-    pingenms=$(printf '%.3f\n' $(echo "$pinggoogle/1000" | bc -l))
-    echo "  o lo que es lo mismo: $pingenms seg"
+    pingenmssincero=$(echo "$pinggoogle/1000" | bc -l )
+    pingenmsconcero=$(printf '%.3f\n' $pingenmssincero
+    echo "  o lo que es lo mismo: $pingenmsconcero seg"
 
-    anchobandteor=$(($1*1024*8/$pingenms))
+    anchobandteor=$(($1*1024*8/$pingenmsconcero))
     echo "Para una ventana de $1 KB, el ancho de banda teórico máximo sería de: $anchobandteor"
     echo ""
 fi
