@@ -38,6 +38,7 @@ if [ $# -ne $CantArgsCorrectos ]
     pingenseg=$(awk 'BEGIN { print (16/1000) }')
     echo "  o lo que es lo mismo: $pingenseg seg"
     anchobandteor=$(awk 'BEGIN { print ($1*1024*8/$pingenseg) }')
+    echo ""
     echo "Para una ventana de $1 KB, el ancho de banda teórico máximo sería de: $anchobandteor"
     echo ""
 fi
