@@ -37,8 +37,10 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "  El ping a google.com tiene una latencia de $pinggoogle ms"
     pingenseg=$(awk 'BEGIN { print ("'$pinggoogle'"/1000) }')
     echo "  o lo que es lo mismo: $pingenseg seg"
-    anchobandteor=$(awk 'BEGIN { print ("'$1'"*1024*8/"'$pingenseg'") }')
+    anchobandteorbps=$(awk 'BEGIN { print ("'$1'"*1024*8/"'$pingenseg'") }')
     echo ""
-    echo "Para una ventana de $1 KB, el ancho de banda teórico máximo sería de: $anchobandteor"
+    echo "Para una ventana de $1 KB, el ancho de banda teórico máximo sería de: $anchobandteorbps bits por segundo"
+    anchobandteormbps=$(awk 'BEGIN { print ("'$anchobandteorbps'"/1000000) }')
+    echo "o lo que sería lo mismo que $anchobandteormbps Mbps"
     echo ""
 fi
