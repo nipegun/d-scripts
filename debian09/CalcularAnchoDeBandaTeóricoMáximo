@@ -12,17 +12,33 @@
 #  Tamaño-de-ventana-TCP-en-bits / Latencia-en-segundos = Bits-por-segundo-de-transferencia
 #-----------------------------------------------------------------------------
 
-echo ""
-echo "  Calculando la latencia del ping a google.com..."
-echo ""
-pinggoogle=$(ping -c 1 google.com | sed -ne '/.*time=/{;s///;s/\..*//;p;}')
 
-echo ""
-echo "  El ping a google.com tiene una latencia de $pinggogle ms"
-echo ""
+CantArgsCorrectos=1
+ArgsInsuficientes=65
 
-echo " 64KB = 65536 Bytes. 65536 * 8 = 524288 bits"
-echo "Para 64 el ancho de banda es: " 524288 * $pinggoogle
+if [ $# -ne $CantArgsCorrectos ]
+  then
+    echo ""
+    echo "------------------------------------------------------------------------------"
+    echo "Mal uso del script."
+    echo ""
+    echo "El uso correcto sería: $0 [Tamaño en KB]"
+    echo ""
+    echo "Ejemplo:"
+    echo ' $0 64'
+    echo "------------------------------------------------------------------------------"
+    echo ""
+    exit $ArgsInsuficientes
+  else
+    echo ""
+    echo "  Calculando la latencia del ping a google.com..."
+    echo ""
+    pinggoogle=$(ping -c 1 google.com | sed -ne '/.*time=/{;s///;s/\..*//;p;}')
 
-echo $pinggoogle
+    echo "  El ping a google.com tiene una latencia de $pinggoogle ms"
+    echo ""
+
+    anchobandteor=($1 * 1024 * 8) / $pinggoogle
+    echo "Para una ventana de $1 KB, el ancho de banda teórico máximo sería de: "
+fi
 
