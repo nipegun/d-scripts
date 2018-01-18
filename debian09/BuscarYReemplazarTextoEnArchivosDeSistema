@@ -33,7 +33,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     #find /bin -type f -exec rename 's|$1|$2|g' {} \;
     #find /boot -type f -exec rename 's|$1|$2|g' {} \;
     #find /dev -type f -exec rename 's|$1|$2|g' {} \;
-    find /etc -type f -exec rename 's|$1|$2|g' {} \;
+    #find /etc -type f -exec rename 's|$1|$2|g' {} \;
     #find /home -type f -exec rename 's|$1|$2|g' {} \;
     #find /lib -type f -exec rename 's|$1|$2|g' {} \;
     #find /lib64 -type f -exec rename 's|$1|$2|g' {} \;
@@ -41,7 +41,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     #find /media -type f -exec rename 's|$1|$2|g' {} \;
     #find /mnt -type f -exec rename 's|$1|$2|g' {} \;
     #find /opt -type f -exec rename 's|$1|$2|g' {} \;
-    #find /root -type f -exec rename 's|$1|$2|g' {} \;
+    find /root -type f -exec rename 's|$1|$2|g' {} \;
     #find /run -type f -exec rename 's|$1|$2|g' {} \;
     #find /sbin -type f -exec rename 's|$1|$2|g' {} \;
     #find /srv -type f -exec rename 's|$1|$2|g' {} \;
