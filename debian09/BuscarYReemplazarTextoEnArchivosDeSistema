@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#-----------------------------------------------------------------------------
+#  Script de NiPeGun para encontrar una cadena específica dentro de archivos
+#  de todo el sistema y reemplazarla por otra cadena dada
+#-----------------------------------------------------------------------------
+
+EXPECTED_ARGS=2
+E_BADARGS=65
+
+if [ $# -ne $EXPECTED_ARGS ]
+  then
+    echo ""
+    echo "##################################################"
+    echo "Mal uso del script."
+    echo ""
+    echo "El uso correcto sería: byrteads texto"
+    echo ""
+    echo "Ejemplo:"
+    echo "byrteads perro gato"
+    echo "##################################################"
+    echo ""
+    exit $E_BADARGS
+  else
+    echo ""
+    #find /bin -type f -exec rename 's|$1|$2|g' {} \;
+    #find /boot -type f -exec rename 's|$1|$2|g' {} \;
+    #find /dev -type f -exec rename 's|$1|$2|g' {} \;
+    find /etc -type f -exec rename 's|$1|$2|g' {} \;
+    #find /home -type f -exec rename 's|$1|$2|g' {} \;
+    #find /lib -type f -exec rename 's|$1|$2|g' {} \;
+    #find /lib64 -type f -exec rename 's|$1|$2|g' {} \;
+    #find /lost+found -type f -exec rename 's|$1|$2|g' {} \;
+    #find /media -type f -exec rename 's|$1|$2|g' {} \;
+    #find /mnt -type f -exec rename 's|$1|$2|g' {} \;
+    #find /opt -type f -exec rename 's|$1|$2|g' {} \;
+    #find /root -type f -exec rename 's|$1|$2|g' {} \;
+    #find /run -type f -exec rename 's|$1|$2|g' {} \;
+    #find /sbin -type f -exec rename 's|$1|$2|g' {} \;
+    #find /srv -type f -exec rename 's|$1|$2|g' {} \;
+    #find /tmp -type f -exec rename 's|$1|$2|g' {} \;
+    #find /usr -type f -exec rename 's|$1|$2|g' {} \;
+    #find /var -type f -exec rename 's|$1|$2|g' {} \;
+    echo ""
+fi
