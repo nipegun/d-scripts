@@ -41,7 +41,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     #find /media -type f -exec rename 's|$1|$2|g' {} \;
     #find /mnt -type f -exec rename 's|$1|$2|g' {} \;
     #find /opt -type f -exec rename 's|$1|$2|g' {} \;
-    find /root -type f -exec rename 's|$1|$2|g' {} \;
+    find /root -type f -exec sed -i -e 's|$1|$2|g' {} \; 
     #find /run -type f -exec rename 's|$1|$2|g' {} \;
     #find /sbin -type f -exec rename 's|$1|$2|g' {} \;
     #find /srv -type f -exec rename 's|$1|$2|g' {} \;
