@@ -33,7 +33,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     #find /bin        -type f -print0 | xargs -0 sed -i 's|$1|$2|g'
     #find /boot       -type f -print0 | xargs -0 sed -i 's|$1|$2|g'
     #find /dev        -type f -print0 | xargs -0 sed -i 's|$1|$2|g'
-    find /etc        -type f -exec sed -i 's|$1|$2|g' {} \;
+    find /etc        -type f -exec sed -i -e 's|$1|$2|g' {} \;
     #find /home       -type f -print0 | xargs -0 sed -i 's|$1|$2|g'
     #find /lib        -type f -print0 | xargs -0 sed -i 's|$1|$2|g'
     #find /lib64      -type f -print0 | xargs -0 sed -i 's|$1|$2|g'
