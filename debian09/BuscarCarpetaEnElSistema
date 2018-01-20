@@ -20,7 +20,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "##################################################"
     echo "Mal uso del script."
     echo ""
-    echo "El uso correcto sería: bcees ruta texto"
+    echo "El uso correcto sería: bcees [NombreDeLaCarpeta]"
     echo ""
     echo "Ejemplo:"
     echo "bcees Perro"
