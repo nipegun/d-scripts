@@ -23,7 +23,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "El uso correcto sería: baees [NombreDelArchivo]"
     echo ""
     echo "Ejemplo:"
-    echo "baees "perro.txt"
+    echo "baees perro.txt"
     echo "##################################################"
     echo ""
     exit $E_BADARGS
