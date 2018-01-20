@@ -53,17 +53,3 @@ pkill murmurd
 # Re-arrancar el servicio
 service mumble-server start
 
-# Instalación de MumPi
-apt-get -y install zeroc-ice-all-runtime php-zeroc-ice
-sed -i -e 's|extension=php_xsl.dll|extension=php_xsl.dll\nextension=IcePHP.so|g' /etc/php/7.0/apache2/php.ini
-#sed -i -e 's|; UNIX: "/path1:/path2"|include_path = ".:/usr/share/Ice-3.6.3/php/lib"\n\n; UNIX: "/path1:/path2"|g' /etc/php/7.0/apache2/php.ini
-echo "ice.slice = /usr/share/slice/Murmur.ice" >> /etc/php/7.0/apache2/php.ini
-service apache2 restart
-
-slice2php -I /usr/share/Ice-3.6.3/slice /usr/share/slice/Murmur.ice
-
-sed -i -e 's|#ice="tcp -h 127.0.0.1 -p 6502"|ice="tcp -h 127.0.0.1 -p 6502"|g' /etc/mumble-server.ini
-sed -i -e 's|icesecretwrite=|icesecretwrite=clave|g' /etc/mumble-server.ini
-service mumble-server restart
-
-
