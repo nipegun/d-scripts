@@ -53,3 +53,7 @@ pkill murmurd
 # Re-arrancar el servicio
 service mumble-server start
 
+# Instalación de MumPi
+apt-get -y install php-zeroc-ice
+sed -i -e 's|extension=php_xsl.dll|extension=php_xsl.dll\nextension=IcePHP.so|g' /etc/php/7.0/apache2/php.ini
+
