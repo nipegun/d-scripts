@@ -12,9 +12,7 @@
 #-----------------------------------------------------------
 
 echo ""
-echo "----------------------------------"
-echo "  MOSTRANDO USUARIOS DEL SISTEMA"
-echo "----------------------------------"
+echo "  Mostrando los grupos en el sistema..."
 echo ""
 compgen -g
 echo ""
