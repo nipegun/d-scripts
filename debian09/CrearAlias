@@ -32,6 +32,7 @@ ln -s /root/nipe-scripts/debian09/BuscarTextoEnArchivos /root/nipe-scripts/btea
 ln -s /root/nipe-scripts/debian09/BuscarTextoEnArchivosDeSistema /root/nipe-scripts/bteads
 ln -s /root/nipe-scripts/debian09/BuscarTextoEnNombreDeArchivos /root/nipe-scripts/btenda
 ln -s /root/nipe-scripts/debian09/BuscarYReemplazarTextoEnArchivosDeSistema /root/nipe-scripts/byrteads
+ln -s /root/nipe-scripts/debian09/CambiarNombreDeUsuario /root/nipe-scripts/cndu
 ln -s /root/nipe-scripts/debian09/CompilarEInstalarÚltimoKernelEstable /root/nipe-scripts/ceiuke
 ln -s /root/nipe-scripts/debian09/ComprobarSSD /root/nipe-scripts/compssd
 ln -s /root/nipe-scripts/debian09/CrearBaseDeDatosYUsuario /root/nipe-scripts/cbddyu
