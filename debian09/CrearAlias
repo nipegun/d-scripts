@@ -45,6 +45,7 @@ ln -s /root/nipe-scripts/debian09/EditarTransmission /root/nipe-scripts/etransmi
 ln -s /root/nipe-scripts/debian09/EnviarMailA /root/nipe-scripts/ema
 ln -s /root/nipe-scripts/debian09/ExportarBaseDeDatos /root/nipe-scripts/ebdd
 ln -s /root/nipe-scripts/debian09/ExtraerSubtítuloDeMKV /root/nipe-scripts/esdmkv
+ln -s /root/nipe-scripts/debian09/Grupos /root/nipe-scripts/gru
 ln -s /root/nipe-scripts/debian09/HardwareInfoGráfica /root/nipe-scripts/hardigra
 ln -s /root/nipe-scripts/debian09/HardwareInfoRed /root/nipe-scripts/hardired
 ln -s /root/nipe-scripts/debian09/ImportarBaseDeDatos /root/nipe-scripts/ibdd
