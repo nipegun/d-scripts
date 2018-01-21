@@ -31,5 +31,6 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     usermod -l $2 $1
     usermod -d /home/$2 -m $2
+    groupmod -n $2 $1
     echo ""
 fi
