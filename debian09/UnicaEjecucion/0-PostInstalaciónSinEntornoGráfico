@@ -93,7 +93,7 @@ do
       echo "--------------------------------------"
       echo ""
       sleep 2
-      apt-get -y install hdparm ntfs-3g hfsplus hfsprogs hfsutils sshfs ecryptfs-utils
+      apt-get -y install hdparm ntfs-3g cifs-utils hfsplus hfsprogs hfsutils sshfs ecryptfs-utils
       apt-get -y install ntfsprogs
       echo ""
     ;;
