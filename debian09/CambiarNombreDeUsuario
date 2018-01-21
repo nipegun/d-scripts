@@ -30,6 +30,6 @@ if [ $# -ne $CantArgsCorrectos ]
   else
     echo ""
     usermod -l $2 $1
-    usermod -d /home/$1 -m $2
+    usermod -d /home/$2 -m $2
     echo ""
 fi
