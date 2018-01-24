@@ -66,7 +66,7 @@ ln -s /root/nipe-scripts/debian09/MostrarVersiónDeDebian /root/nipe-scripts/ver
 ln -s /root/nipe-scripts/debian09/NotificarFalloDeDisco /root/nipe-scripts/nofadis
 ln -s /root/nipe-scripts/debian09/NuevaWebVarWWW /root/nipe-scripts/nuevawebvar
 ln -s /root/nipe-scripts/debian09/PuertosAbiertos /root/nipe-scripts/pa
-ln -s /root/nipe-scripts/debian09/Reiniciar /root/nipe-scripts/rei
+ln -s /root/nipe-scripts/debian09/ReiniciarSistemaOperativo /root/nipe-scripts/rso
 ln -s /root/nipe-scripts/debian09/RepararPermisosVarWWW /root/nipe-scripts/permweb
 ln -s /root/nipe-scripts/debian09/RPMDeDisco /root/nipe-scripts/rpmdis
 ln -s /root/nipe-scripts/debian09/SincronizarNiPeScripts /root/nipe-scripts/sinnps
