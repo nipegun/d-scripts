@@ -11,6 +11,6 @@
 #  Script de NiPeGun para actualizar e inmediamente reiniciar el sistema operativo
 #-----------------------------------------------------------------------------------
 
-aso
-rei
+/root/nipe-scripts/debian09/ActualizarSistemaOperativo
+/root/nipe-scripts/debian09/ReiniciarSistemaOperativo
 
