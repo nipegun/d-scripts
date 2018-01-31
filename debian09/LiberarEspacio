@@ -11,7 +11,15 @@
 #  Script de NiPeGun para liberar espacio en Linux
 #---------------------------------------------------
 
-apt-get autoremove
+# Eliminar del cache los paquetes .deb con versiones anteriores
+# a los de los programas que tienes instalados.
 apt-get autoclean
+
+# Eliminar todos los paquetes del cache. El único inconveniente que podría resultar
+# es que si quieres reinstalar un paquete, tienes que volver a descargarlo.
 apt-get clean
+
+# Borrar los paquetes huérfanos, o las dependencias que quedan instaladas después
+# de haber instalado una aplicación y luego eliminarla, por lo que ya no son necesarias.
+apt-get autoremove
 
