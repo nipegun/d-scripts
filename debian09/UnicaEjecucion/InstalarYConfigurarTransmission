@@ -87,7 +87,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "  Deberías poder administrarlo mediante web en la IP de"
     echo "  este ordenador seguida por :9091"
     echo ""
-    echo "  Ejemplo: 192.160.0.120:9091"
+    echo "  Ejemplo: 192.168.0.120:9091"
     echo ""
     echo "  Nombre de usuario: transmission"
     echo "  Contraseña: $3"
