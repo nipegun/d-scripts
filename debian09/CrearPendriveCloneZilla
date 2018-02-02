@@ -44,5 +44,7 @@ if [ $# -ne $CantArgsCorrectos ]
     mkfs.vfat -F 32 $1
     mkdir -p /media/PenCloneZillaLive; mount $1 /media/PenCloneZillaLive/
     unzip clonezilla-live-2.4.2-32-i686-pae.zip -d /media/PenCloneZillaLive/
+    cd /media/PenCloneZillaLive/utils/linux
+    bash makeboot.sh $1
     echo ""
 fi
