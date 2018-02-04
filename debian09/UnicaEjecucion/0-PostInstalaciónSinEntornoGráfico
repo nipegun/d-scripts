@@ -121,6 +121,11 @@ do
       apt-get -y install testdisk dialog hddtemp manpages-es mc nano members sysv-rc-conf zip unzip elinks python rsync
       apt-get -y install hardinfo
       echo ""
+      
+      echo ""
+      echo "  Instalando herramientas para comprimir y descomprimir"
+      echo ""
+      apt-get -y install unace rar unrar unar p7zip-rar p7zip zip unzip 
     ;;
 
     8)
