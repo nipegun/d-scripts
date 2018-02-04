@@ -22,9 +22,10 @@ ln -s /root/nipe-scripts/debian09/externos/VelocidadDeInternet /root/nipe-script
 ln -s /root/nipe-scripts/debian09/AbrirMidnightCommander /root/nipe-scripts/amc
 ln -s /root/nipe-scripts/debian09/ActualizarSistemaOperativo /root/nipe-scripts/aso
 ln -s /root/nipe-scripts/debian09/BloquearTráficoDeTORConIPTables /root/nipe-scripts/blotratoript
-ln -s /root/nipe-scripts/debian09/BorrarDSStore /root/nipe-scripts/bodss
+ln -s /root/nipe-scripts/debian09/BorrarArchivosDSStore /root/nipe-scripts/badss
+ln -s /root/nipe-scripts/debian09/BorrarArchivosPuntoGuiónBajo /root/nipe-scripts/bapgb
+ln -s /root/nipe-scripts/debian09/BorrarArchivosZoneIdentifier /root/nipe-scripts/bazi
 ln -s /root/nipe-scripts/debian09/BorrarTAGsMP3 /root/nipe-scripts/btmp3
-ln -s /root/nipe-scripts/debian09/BorrarZoneIdentifier /root/nipe-scripts/bozonid
 ln -s /root/nipe-scripts/debian09/BuscarArchivoEnElSistema /root/nipe-scripts/baees
 ln -s /root/nipe-scripts/debian09/BuscarCarpetaEnElSistema /root/nipe-scripts/bcees
 ln -s /root/nipe-scripts/debian09/BuscarMódulosCargables /root/nipe-scripts/busmodcar
