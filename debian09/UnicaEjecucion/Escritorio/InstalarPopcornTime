@@ -17,7 +17,9 @@ echo ""
 ArchivoADescargar=$(wget --no-check-certificate -qO- https://get.popcorntime.sh/repo/build/ | grep Linux-64 | head -n 1 | cut -d\" -f2)
 mkdir /root/paquetes/
 cd /root/paquetes/
-wget --no-check-certificate https://get.popcorntime.sh/repo/build/$ArchivoADescargar | tar Jx -C /opt/popcorn-time
+wget --no-check-certificate https://get.popcorntime.sh/repo/build/$ArchivoADescargar
+mkdir /opt/popcorn-time
+tar -xvf $ArchivoADescargar -C /opt/popcorn-time
 ln -sf /opt/popcorn-time/Popcorn-Time /usr/bin/popcorn-time
 echo "[Desktop Entry]" > /usr/share/applications/popcorntime.desktop
 echo "Version = 1.0" >> /usr/share/applications/popcorntime.desktop
