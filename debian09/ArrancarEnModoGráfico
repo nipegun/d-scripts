@@ -26,3 +26,5 @@ echo "  EN EL PRÓXIMO INICIO DEBIAN ARRANCARÁ EN MODO GRÁFICO MULTI-USUARIO"
 echo "-----------------------------------------------------------------------"
 echo ""
 
+shutdown -r now
+
