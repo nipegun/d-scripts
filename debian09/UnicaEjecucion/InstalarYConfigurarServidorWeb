@@ -34,9 +34,9 @@ do
       echo ""
       apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get autoremove
       echo ""
-      echo "-----------------------------------------------"
-      echo " INSTALANDO EL SERVIDOR WEB CON APACHE2 Y PHP5"
-      echo "-----------------------------------------------"
+      echo "---------------------------------------------------"
+      echo " INSTALANDO EL SERVIDOR WEB CON APACHE2 Y PHP 7.0"
+      echo "---------------------------------------------------"
       echo ""
       apt-get install tasksel
       tasksel install ssh-server
