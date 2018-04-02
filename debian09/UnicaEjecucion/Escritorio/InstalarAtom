@@ -16,7 +16,13 @@ echo "  Instalando Atom..."
 echo ""
 mkdir -p /root/paquetes/atom
 cd /root/paquetes/atom
-URLArchivoDeb=$(curl --silent  https://github.com/atom/atom/releases/latest | cut -d\" -f2)
-wget --no-check-certificate $URLArchivoDeb/download/atom-amd64.deb
-gdebi atom-amd64.deb
+URLArchivoDebConTag=$(curl --silent  https://github.com/atom/atom/releases/latest | cut -d\" -f2)
+
+firstString="I love Suzi and Marry"
+PalabraAReemplazar="download"
+URLArchivoDeb="${URLArchivoDebConTag/tag/$PalabraAReemplazar}" 
+
+echo $URLArchivoDeb
+#wget --no-check-certificate $URLArchivoDeb/download/atom-amd64.deb
+#gdebi atom-amd64.deb
 
