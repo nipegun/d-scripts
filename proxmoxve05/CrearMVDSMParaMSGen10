@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#-------------------------------------------------------------
+#  Script de NiPeGun para crear una máquina virtual para DSM
+#-------------------------------------------------------------
+
+EXPECTED_ARGS=3
+E_BADARGS=65
+
+ColorAdvertencia='\033[1;31m'
+ColorArgumentos='\033[1;32m'
+FinColor='\033[0m'
+
+if [ $# -ne $EXPECTED_ARGS ]
+  then
+    echo ""
+    echo "-------------------------------------------------------------------------"
+    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo ""
+    echo -e "CrearMVParaDSM ${ColorArgumentos}[IDDeLaVM] [PuertoDelDisco] [GigasASumar]${FinColor}"
+    echo ""
+    echo "Ejemplo:"
+    echo "CrearMVParaDSM 206"
+    echo "-------------------------------------------------------------------------"
+    echo ""
+    exit $E_BADARGS
+  else
+    mkdir /var/lib/vz/images/$1
+    cd /var/lib/vz/images/$1
+    wget --no-check-certificate http://hacks4geeks.com/_/premium/descargas/dsm/JunsMod1.02b.img
+
+    echo "" > /etc/pve/qemu-server/$1.conf
+    echo "args: /var/lib/vz/images/$1/JunsMod1.02b.img" >> /etc/pve/qemu-server/$1.conf
+    echo "balloon: 0" >> /etc/pve/qemu-server/$1.conf
+    echo "boot: dc" >> /etc/pve/qemu-server/$1.conf
+    echo "cores: 2" >> /etc/pve/qemu-server/$1.conf
+    echo "keyboard: es" >> /etc/pve/qemu-server/$1.conf
+    echo "memory: 2048" >> /etc/pve/qemu-server/$1.conf
+    echo "name: DSM" >> /etc/pve/qemu-server/$1.conf
+    echo "net0: e1000=00:00:00:00:02:01,bridge=vmbr0" >> /etc/pve/qemu-server/$1.conf
+    echo "numa: 0" >> /etc/pve/qemu-server/$1.conf
+    echo "onboot: 1" >> /etc/pve/qemu-server/$1.conf
+    echo "ostype: l26" >> /etc/pve/qemu-server/$1.conf
+    echo "scsihw: virtio-scsi-pci" >> /etc/pve/qemu-server/$1.conf
+    echo "sockets: 1" >> /etc/pve/qemu-server/$1.conf
+
+    
+    echo ""
+    echo "  Archivo de configuración de la máquina virtual creado. Lo podrás encontrar en:"
+    echo "  /etc/pve/qemu-server/$1.conf"
+    echo ""
+fi
