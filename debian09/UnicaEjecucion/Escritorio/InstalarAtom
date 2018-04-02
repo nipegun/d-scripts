@@ -14,8 +14,8 @@
 echo ""
 echo "  Instalando Atom..."
 echo ""
-mkdir -p /root/paquetes/Atom
-cd /root/paquetes/Atom
+mkdir -p /root/paquetes/atom
+cd /root/paquetes/atom
 URLArchivoDeb=$(curl --silent  https://github.com/atom/atom/releases/latest | cut -d\" -f2)
 wget --no-check-certificate $URLArchivoDeb/atom-amd64.deb
 gdebi atom-amd64.deb
