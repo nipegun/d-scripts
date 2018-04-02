@@ -17,10 +17,8 @@ echo ""
 mkdir -p /root/paquetes/atom
 cd /root/paquetes/atom
 URLArchivoDebConTag=$(curl --silent  https://github.com/atom/atom/releases/latest | cut -d\" -f2)
-
-firstString="I love Suzi and Marry"
-PalabraAReemplazar="download"
-URLArchivoDeb="${URLArchivoDebConTag/tag/$PalabraAReemplazar}" 
+PalabraNueva="download"
+URLArchivoDeb="${URLArchivoDebConTag/tag/$PalabraNueva}" 
 wget --no-check-certificate $URLArchivoDeb/atom-amd64.deb
 gdebi atom-amd64.deb
 
