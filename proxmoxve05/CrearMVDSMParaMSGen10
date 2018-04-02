@@ -7,11 +7,11 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------
-#  Script de NiPeGun para crear una máquina virtual para DSM
-#-------------------------------------------------------------
+#-------------------------------------------------------------------------------------
+#  Script de NiPeGun para crear una máquina virtual para DSM en el MicroServer Gen10
+#-------------------------------------------------------------------------------------
 
-EXPECTED_ARGS=3
+EXPECTED_ARGS=1
 E_BADARGS=65
 
 ColorAdvertencia='\033[1;31m'
@@ -24,7 +24,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "-------------------------------------------------------------------------"
     echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo -e "CrearMVParaDSM ${ColorArgumentos}[IDDeLaVM] [PuertoDelDisco] [GigasASumar]${FinColor}"
+    echo -e "CrearMVParaDSM ${ColorArgumentos}[IDDeLaVM]${FinColor}"
     echo ""
     echo "Ejemplo:"
     echo "CrearMVParaDSM 206"
