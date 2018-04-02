@@ -11,7 +11,7 @@
 #  SCRIPT DE NIPEGUN PARA REPARAR LOS PERMISOS DE LA CARPETA /var/www
 #----------------------------------------------------------------------
 
-# Asignar propiedad de todo el contenido al usuario www-data 
+# Asignar propiedad de todo el contenido al usuario www-data
 echo ""
 chown www-data:www-data /var/www -R
 echo "..."
