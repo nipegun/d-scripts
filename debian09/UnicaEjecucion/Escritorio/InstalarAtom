@@ -21,8 +21,6 @@ URLArchivoDebConTag=$(curl --silent  https://github.com/atom/atom/releases/lates
 firstString="I love Suzi and Marry"
 PalabraAReemplazar="download"
 URLArchivoDeb="${URLArchivoDebConTag/tag/$PalabraAReemplazar}" 
-
-echo $URLArchivoDeb
-#wget --no-check-certificate $URLArchivoDeb/download/atom-amd64.deb
-#gdebi atom-amd64.deb
+wget --no-check-certificate $URLArchivoDeb/atom-amd64.deb
+gdebi atom-amd64.deb
 
