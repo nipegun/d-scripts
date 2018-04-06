@@ -28,7 +28,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo ""
     echo "Ejemplo:"
     echo ""
-    echo "CrearMVDSMParaMSGen10 206"
+    echo "CrearMVDSMParaMSGen10 200"
     echo "-------------------------------------------------------------------------"
     echo ""
     exit $E_BADARGS
