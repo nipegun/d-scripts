@@ -27,7 +27,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo -e "CrearMVParaDSM ${ColorArgumentos}[IDDeLaVM]${FinColor}"
     echo ""
     echo "Ejemplo:"
-    echo "CrearMVParaDSM 206"
+    echo "CrearMVDSMParaMSGen10 206"
     echo "-------------------------------------------------------------------------"
     echo ""
     exit $E_BADARGS
