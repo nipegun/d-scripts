@@ -52,7 +52,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "sockets: 1" >> /etc/pve/qemu-server/$1.conf
     echo "# sata0: /dev/disk/by-partlabel/DSM" >> /etc/pve/qemu-server/$1.conf
     echo ""
-    echo "  Archivo /etc/pve/qemu-server/$1.conf, CREADO.
+    echo "  Archivo /etc/pve/qemu-server/$1.conf, CREADO."
     echo ""
     
     echo "  Descargando el cargador de arranque..."
