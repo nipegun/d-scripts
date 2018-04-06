@@ -63,14 +63,13 @@ if [ $# -ne $EXPECTED_ARGS ]
     cd /var/lib/vz/images/$1
     wget --no-check-certificate http://hacks4geeks.com/_/premium/descargas/dsm/6.1.4/JunsMod1.02b.img
     echo ""
-    echo "  Cargador de arranque copiado a la carpeta correspondiente."
-    echo "  Lo podrás encontrar en: /var/lib/vz/images/$1/"
+    echo "  Cargador de arranque guardado en la carpeta /var/lib/vz/images/$1/"
     echo ""
     
     echo ""
-    echo "  Proceso de creación de la máquina virtual, FINALIZADO."
-    echo "  Ya puedes arrancar la máquina virtual normalmente."
-    echo "  Para que funcione el apagado ACPI tendrás que aplicar un parche."
-    echo "  Tienes más información al respecto en hacks4geeks.com"
+    echo -e "  ${ColorArgumentos}Proceso de creación de la máquina virtual, FINALIZADO.${FinColor}"
+    echo -e "  ${ColorArgumentos}Ya puedes arrancar la máquina virtual normalmente.${FinColor}"
+    echo -e "  ${ColorArgumentos}Para que funcione el apagado ACPI tendrás que aplicar un parche.${FinColor}"
+    echo -e "  ${ColorArgumentos}Tienes más información al respecto en hacks4geeks.com${FinColor}"
     echo ""
 fi
