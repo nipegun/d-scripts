@@ -34,7 +34,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     exit $E_BADARGS
   else
     echo ""
-    echo "  Creando la máquina virtual de DSM para ProxmoxVE en el MicroServer Gen10..."
+    echo "  Creando la máquina virtual para DSM en ProxmoxVE en el MicroServer Gen10..."
     echo ""
   
     mkdir /var/lib/vz/images/$1
