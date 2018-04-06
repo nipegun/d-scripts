@@ -60,10 +60,9 @@ if [ $# -ne $EXPECTED_ARGS ]
     mkdir /var/lib/vz/images/$1
     cd /var/lib/vz/images/$1
     wget --no-check-certificate http://hacks4geeks.com/_/premium/descargas/dsm/6.1.4/JunsMod1.02b.img
-    echo ""
-    echo -e "${ColorArgumentos}  Cargador de arranque guardado en la carpeta /var/lib/vz/images/$1/${FinColor}"
-    echo ""
     
+    echo -e "${ColorArgumentos}  Cargador de arranque guardado en la carpeta /var/lib/vz/images/$1/${FinColor}"
+        
     echo ""
     echo -e "  ${ColorArgumentos}Proceso de creación de la máquina virtual, FINALIZADO.${FinColor}"
     echo -e "  ${ColorArgumentos}Ya puedes arrancar la máquina virtual normalmente.${FinColor}"
