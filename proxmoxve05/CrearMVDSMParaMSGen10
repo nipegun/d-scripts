@@ -24,7 +24,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "-------------------------------------------------------------------------"
     echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo -e "CrearMVParaDSM ${ColorArgumentos}[IDDeLaVM]${FinColor}"
+    echo -e "CrearMVDSMParaMSGen10 ${ColorArgumentos}[IDDeLaVM]${FinColor}"
     echo ""
     echo "Ejemplo:"
     echo "CrearMVDSMParaMSGen10 206"
