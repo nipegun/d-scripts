@@ -27,7 +27,8 @@ apt-get -y remove pve-kernel-4.13.13-1-pve pve-headers-4.13.13-1-pve
 apt-get -y remove pve-kernel-4.13.13-4-pve pve-headers-4.13.13-4-pve
 apt-get -y remove pve-kernel-4.13.13-5-pve pve-headers-4.13.13-5-pve
 apt-get -y remove pve-kernel-4.13.13-6-pve pve-headers-4.13.13-6-pve
+apt-get -y remove pve-kernel-4.13.16-1-pve pve-headers-4.13.16-1-pve
+apt-get -y remove pve-kernel-4.13.16-2-pve pve-headers-4.13.16-2-pve
 
-
-#apt-get -y remove pve-kernel-4.13.16-1-pve pve-headers-4.13.16-1-pve
+# apt-get -y remove pve-kernel-4.15.15-1-pve pve-headers-4.15.15-1-pve
 
