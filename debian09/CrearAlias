@@ -59,6 +59,7 @@ ln -s /root/nipe-scripts/debian09/MostrarAparatosConectadosEnLaInterfaz /root/ni
 ln -s /root/nipe-scripts/debian09/MostrarContenidoDelPaquete /root/nipe-scripts/mcdp
 ln -s /root/nipe-scripts/debian09/MostrarIPLAN /root/nipe-scripts/iplan
 ln -s /root/nipe-scripts/debian09/MostrarIPWAN /root/nipe-scripts/ipwan
+ln -s /root/nipe-scripts/debian09/MostrarKernelsInstalados /root/nipe-scripts/mki
 ln -s /root/nipe-scripts/debian09/MostrarMódulosCargados /root/nipe-scripts/mosmodcar
 ln -s /root/nipe-scripts/debian09/MostrarReglasIPTablesActivas /root/nipe-scripts/mosipt
 ln -s /root/nipe-scripts/debian09/MostrarSetsIPSet /root/nipe-scripts/ipsets
