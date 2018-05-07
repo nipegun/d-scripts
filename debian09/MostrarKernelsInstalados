@@ -15,3 +15,7 @@ echo ""
 dpkg -l | grep linux-image | awk '{print$2}'
 echo ""
 
+# Para borrar un kernel
+# apt remove --purge linux-image-x.x.x-x-generic
+# apt remove --purge linux-image-x.x.x-x-amd64
+
