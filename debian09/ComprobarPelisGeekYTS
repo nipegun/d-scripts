@@ -11,5 +11,30 @@
 #  Script de NiPeGun para comprobar las nuevas pelis geek
 #  disponibles para descargar en YTS
 #----------------------------------------------------------
+#--------------------------------------------------------
+#  SCRIPT DE NIPEGUN PARA BLOQUEAR UN MÓDULO ESPECÍFICO
+#--------------------------------------------------------
 
-# curl https://yts.am/browse-movies/0/all/sci-fi/0/latest | grep movie/ | grep link
+CantArgsCorrectos=1
+ArgsInsuficientes=65
+
+if [ $# -ne $CantArgsCorrectos ]
+  then
+    echo ""
+    echo "------------------------------------------------------------------------------"
+    echo "Mal uso del script."
+    echo ""
+    echo "El uso correcto sería: $0 [NombreDelMódulo]"
+    echo ""
+    echo "Ejemplo:"
+    echo ' $0 igb'
+    echo "------------------------------------------------------------------------------"
+    echo ""
+    exit $ArgsInsuficientes
+  else
+    
+    curl https://yts.am/browse-movies/0/all/sci-fi/0/latest | grep movie/ | grep link
+    echo ""
+fi
+
+
