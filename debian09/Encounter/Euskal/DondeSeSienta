@@ -52,7 +52,7 @@ if [ $# -ne $CantArgsCorrectos ]
 
             # Mostrar, línea a línea, cada usuario procesado.
             echo A$FilaZonaA"_"$ColumnaZonaA":"$NickName
-echo $NickName
+            
             # Comprobar si el nombre de usuario hallado corresponde con el proporcionado como parámetro
             if [ $NickName = $1 ]; then
 
