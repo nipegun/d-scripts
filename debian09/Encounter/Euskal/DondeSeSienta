@@ -48,16 +48,15 @@ if [ $# -ne $CantArgsCorrectos ]
         for ColumnaZonaA in {1..11}
           do
 
-            NickName=$(curl -s https://eps.encounter.eus/ee'$2'/map/lookup/A$FilaZonaA"_"$ColumnaZonaA | jq -r '.user')
+            NickName=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/A$FilaZonaA"_"$ColumnaZonaA | jq -r '.user')
 
-echo $NickName
             # Mostrar, línea a línea, cada usuario procesado.
             echo A$FilaZonaA"_"$ColumnaZonaA":"$NickName
-
+echo $NickName
             # Comprobar si el nombre de usuario hallado corresponde con el proporcionado como parámetro
             if [ $NickName = $1 ]; then
 
-              Puesto=$(curl -s https://eps.encounter.eus/ee'$2'/map/lookup/A$FilaZonaA"_"$ColumnaZonaA | jq -r '.seat')
+              Puesto=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/A$FilaZonaA"_"$ColumnaZonaA | jq -r '.seat')
               echo ""
               echo "$NickName se sienta en el puesto $Puesto"
               echo ""
@@ -80,7 +79,7 @@ echo $NickName
         for ColumnaZonaB in {1..128}
           do
 
-            NickName=$(curl -s https://eps.encounter.eus/ee'$2'/map/lookup/B$FilaZonaB"_"$ColumnaZonaB | jq -r '.user')
+            NickName=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/B$FilaZonaB"_"$ColumnaZonaB | jq -r '.user')
 
             # Mostrar, línea a línea, cada usuario procesado.
             echo A$FilaZonaB"_"$ColumnaZonaB":"$NickName
@@ -88,7 +87,7 @@ echo $NickName
             # Comprobar si el nombre de usuario hallado corresponde con el proporcionado como parámetro
             if [ $NickName = $1 ]; then
 
-              Puesto=$(curl -s https://eps.encounter.eus/ee'$2'/map/lookup/B$FilaZonaB"_"$ColumnaZonaB | jq -r '.seat')
+              Puesto=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/B$FilaZonaB"_"$ColumnaZonaB | jq -r '.seat')
               echo ""
               echo "$NickName se sienta en el puesto $Puesto"
               echo ""
