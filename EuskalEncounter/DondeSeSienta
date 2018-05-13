@@ -51,7 +51,7 @@ if [ $# -ne $CantArgsCorrectos ]
             NickName=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/A$FilaZonaA"_"$ColumnaZonaA | jq -r '.user')
 
             # Mostrar, línea a línea, cada usuario procesado.
-            echo B$FilaZonaA"_"$ColumnaZonaA":"$NickName
+            echo A$FilaZonaA"_"$ColumnaZonaA":"$NickName
 
             # Comprobar si el nombre de usuario hallado corresponde con el proporcionado como parámetro
             if [ $NickName = $1 ]; then
@@ -82,7 +82,7 @@ if [ $# -ne $CantArgsCorrectos ]
             NickName=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/B$FilaZonaB"_"$ColumnaZonaB | jq -r '.user')
 
             # Mostrar, línea a línea, cada usuario procesado.
-            echo A$FilaZonaB"_"$ColumnaZonaB":"$NickName
+            echo B$FilaZonaB"_"$ColumnaZonaB":"$NickName
 
             # Comprobar si el nombre de usuario hallado corresponde con el proporcionado como parámetro
             if [ $NickName = $1 ]; then
