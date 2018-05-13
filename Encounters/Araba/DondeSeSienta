@@ -50,7 +50,21 @@ if [ $# -ne $CantArgsCorrectos ]
 
             NickName=$(curl -s https://eps.encounter.eus/ae$2/map/lookup/$Fila"_"$Columna | jq -r '.user')
 
-            echo $NickName
+            # Mostrar, línea a línea, cada usuario procesado.
+            echo $Fila"_"$Columna":"$NickName
+
+            # Comprobar si el nombre de usuario hallado corresponde con el proporcionado como parámetro
+            if [ $NickName = $1 ]; then
+
+              Puesto=$(curl -s https://eps.encounter.eus/ae$2/map/lookup/$Fila"_"$Columna | jq -r '.seat')
+              echo ""
+              echo "$NickName se sienta en el puesto $Puesto"
+              echo ""
+
+              # Terminar el script
+              exit 1
+
+            fi
 
             #if [ $NickName eq $1 ]; then
             #  echo "Se ha encontrado a $NickName en el puesto"
