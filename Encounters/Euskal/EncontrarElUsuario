@@ -7,9 +7,9 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------------------------------
-#  Script De NiPeGun para saber en que puesto se sienta un usuario cuyo NickName ya conocemos
-#----------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------
+#  Script De NiPeGun para encontrar un usuario de una EuskalEncounter cuyo NickName ya conocemos
+#-------------------------------------------------------------------------------------------------
 
 # Argumentos del script
 CantArgsCorrectos=2
@@ -27,11 +27,11 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "-------------------------------------------------------------------------"
     echo -e "${ColorAdvertencia}Mal uso del script!!${FinColor}"
     echo ""
-    echo -e "El uso correcto sería: DondeSeSienta ${ColorArgumentos}[NickName] [NroEuskalEncounter]${FinColor}"
+    echo -e "El uso correcto sería: EncontrarElUsuario ${ColorArgumentos}[NickName] [NroEuskalEncounter]${FinColor}"
     echo ""
-    echo "Ejemplo 1: DondeSeSienta Zordor 25"
+    echo "Ejemplo 1: EncontrarElUsuario Zordor 25"
     echo ""
-    echo "Ejemplo 2: DondeSeSienta zordor 25"
+    echo "Ejemplo 2: EncontrarElUsuario zordor 25"
     echo ""
     echo "-------------------------------------------------------------------------"
     echo ""
@@ -58,7 +58,7 @@ if [ $# -ne $CantArgsCorrectos ]
 
               Puesto=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/A$FilaZonaA"_"$ColumnaZonaA | jq -r '.seat')
               echo ""
-              echo "$NickName se sienta en el puesto $Puesto"
+              echo "$NickName está en el puesto $Puesto"
               echo ""
 
               # Terminar el script
@@ -89,7 +89,7 @@ if [ $# -ne $CantArgsCorrectos ]
 
               Puesto=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/B$FilaZonaB"_"$ColumnaZonaB | jq -r '.seat')
               echo ""
-              echo "$NickName se sienta en el puesto $Puesto"
+              echo "$NickName está en el puesto $Puesto"
               echo ""
 
               # Terminar el script
