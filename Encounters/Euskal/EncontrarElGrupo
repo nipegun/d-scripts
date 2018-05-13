@@ -43,7 +43,7 @@ if [ $# -ne $CantArgsCorrectos ]
 
     echo ""
     echo "  Buscando el grupo $1 en la EuskalEncounter $2"...
-    
+
     echo ""
     echo "Procesando la zona A..."
     echo ""
@@ -53,13 +53,13 @@ if [ $# -ne $CantArgsCorrectos ]
           do
 
             Grupo=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/A$FilaZonaA"_"$ColumnaZonaA | jq -r '.group')
-            
+
             # Mostrar, línea a línea, cada puesto procesado.
             echo A$FilaZonaA"_"$ColumnaZonaA":" $Grupo
 
             # Comprobar si el nombre del grupo hallado corresponde con el proporcionado como parámetro
             if [ $Grupo = $1 ]; then
-              
+
               echo ""
               echo "Podrás saber que puestos tiene asignados el grupo $Grupo"
               echo "si vas al mapa de puestos y haces click en el A$FilaZonaA$ColumnaZonaA"
@@ -85,7 +85,7 @@ if [ $# -ne $CantArgsCorrectos ]
           do
 
             Grupo=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/B$FilaZonaB"_"$ColumnaZonaB | jq -r '.group')
-            
+
             # Mostrar, línea a línea, cada puesto procesado.
             echo B$FilaZonaB"_"$ColumnaZonaB":" $Grupo
 
