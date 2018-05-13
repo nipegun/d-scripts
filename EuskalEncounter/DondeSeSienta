@@ -43,9 +43,9 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     echo "PROCESANDO LA ZONA A..."
     echo ""
-    for FilaZonaA in {S..T}
+    for FilaZonaA in {A..T}
       do
-        for ColumnaZonaA in {1..11}
+        for ColumnaZonaA in {1..128}
           do
 
             NickName=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/A$FilaZonaA"_"$ColumnaZonaA | jq -r '.user')
