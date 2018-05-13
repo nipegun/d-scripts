@@ -22,7 +22,9 @@ FinColor='\033[0m'
 
 # Comprobar que se hayan pasado los argumentos necesarios. Si no, advertir y salir del script
 if [ $# -ne $CantArgsCorrectos ]
+
   then
+
     echo ""
     echo "-------------------------------------------------------------------------"
     echo -e "${ColorAdvertencia}Mal uso del script!!${FinColor}"
@@ -36,7 +38,9 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "-------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
+
   else
+
     echo ""
     echo "  Buscando el grupo $1 en la EuskalEncounter $2"...
     
