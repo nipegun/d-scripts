@@ -53,7 +53,7 @@ if [ $# -ne $CantArgsCorrectos ]
             Puesto=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/A$FilaZonaA"_"$ColumnaZonaA | jq -r '.seat')
             
             # Mostrar, línea a línea, cada puesto procesado.
-            echo A$FilaZonaA"_"$ColumnaZonaA":"Grupo $Grupo
+            echo A$FilaZonaA"_"$ColumnaZonaA":" $Grupo
 
             # Comprobar si el nombre del grupo hallado corresponde con el proporcionado como parámetro
             if [ $Grupo = $1 ]; then
@@ -83,7 +83,7 @@ if [ $# -ne $CantArgsCorrectos ]
             Puesto=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/B$FilaZonaB"_"$ColumnaZonaB | jq -r '.seat')
             
             # Mostrar, línea a línea, cada puesto procesado.
-            echo B$FilaZonaB"_"$ColumnaZonaB":" Grupo $Grupo
+            echo B$FilaZonaB"_"$ColumnaZonaB":" $Grupo
 
             # Comprobar si el nombre del grupo hallado corresponde con el proporcionado como parámetro
             if [ $Grupo = $1 ]; then
