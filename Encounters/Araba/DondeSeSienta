@@ -66,11 +66,6 @@ if [ $# -ne $CantArgsCorrectos ]
 
             fi
 
-            #if [ $NickName eq $1 ]; then
-            #  echo "Se ha encontrado a $NickName en el puesto"
-            #  break
-            #fi
-
           # Esperar 5 segundos hasta hacer otra vez la consulta curl
           sleep 5
 
