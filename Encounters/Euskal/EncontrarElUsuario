@@ -22,7 +22,9 @@ FinColor='\033[0m'
 
 # Comprobar que se hayan pasado los argumentos necesarios. Si no, advertir y salir del script
 if [ $# -ne $CantArgsCorrectos ]
+
   then
+
     echo ""
     echo "-------------------------------------------------------------------------"
     echo -e "${ColorAdvertencia}Mal uso del script!!${FinColor}"
@@ -36,9 +38,8 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "-------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
+
   else
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
 
     echo ""
     echo "PROCESANDO LA ZONA A..."
@@ -49,7 +50,7 @@ if [ $# -ne $CantArgsCorrectos ]
           do
 
             NickName=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/A$FilaZonaA"_"$ColumnaZonaA | jq -r '.user')
-
+            
             # Mostrar, línea a línea, cada usuario procesado.
             echo A$FilaZonaA"_"$ColumnaZonaA":"$NickName
 
@@ -101,9 +102,6 @@ if [ $# -ne $CantArgsCorrectos ]
 
           done
       done
-
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
 
 fi
 
