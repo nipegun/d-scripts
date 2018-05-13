@@ -48,9 +48,7 @@ if [ $# -ne $CantArgsCorrectos ]
         for ColumnaZonaA in {1..128}
           do
 
-            NickName=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/A$FilaZonaA"_"$ColumnaZonaA | jq -r '.user')
             Grupo=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/A$FilaZonaA"_"$ColumnaZonaA | jq -r '.group')
-            Puesto=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/A$FilaZonaA"_"$ColumnaZonaA | jq -r '.seat')
             
             # Mostrar, línea a línea, cada puesto procesado.
             echo A$FilaZonaA"_"$ColumnaZonaA":" $Grupo
@@ -59,7 +57,7 @@ if [ $# -ne $CantArgsCorrectos ]
             if [ $Grupo = $1 ]; then
               
               echo ""
-              echo "El puesto $Puesto pertenece al grupo $Grupo"
+              echo El puesto A$FilaZonaA"_"$ColumnaZonaA pertenece al grupo $Grupo
               echo ""
 
             fi
@@ -78,9 +76,7 @@ if [ $# -ne $CantArgsCorrectos ]
         for ColumnaZonaB in {1..128}
           do
 
-            NickName=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/B$FilaZonaB"_"$ColumnaZonaB | jq -r '.user')
             Grupo=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/B$FilaZonaB"_"$ColumnaZonaB | jq -r '.group')
-            Puesto=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/B$FilaZonaB"_"$ColumnaZonaB | jq -r '.seat')
             
             # Mostrar, línea a línea, cada puesto procesado.
             echo B$FilaZonaB"_"$ColumnaZonaB":" $Grupo
@@ -89,7 +85,7 @@ if [ $# -ne $CantArgsCorrectos ]
             if [ $Grupo = $1 ]; then
 
               echo ""
-              echo "El puesto $Puesto pertenece al grupo $Grupo"
+              echo El puesto B$FilaZonaB"_"$ColumnaZonaB pertenece al grupo $Grupo
               echo ""
 
             fi
