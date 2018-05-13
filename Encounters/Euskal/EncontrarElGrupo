@@ -61,8 +61,12 @@ if [ $# -ne $CantArgsCorrectos ]
             if [ $Grupo = $1 ]; then
               
               echo ""
-              echo El puesto A$FilaZonaA"_"$ColumnaZonaA pertenece al grupo $Grupo
+              echo "Podrás saber que puestos tiene asignados el grupo $Grupo"
+              echo "si vas al mapa de puestos y haces click en el A$FilaZonaA$ColumnaZonaA"
               echo ""
+
+              # Terminar el script
+              exit 1
 
             fi
 
@@ -89,8 +93,12 @@ if [ $# -ne $CantArgsCorrectos ]
             if [ $Grupo = $1 ]; then
 
               echo ""
-              echo El puesto B$FilaZonaB"_"$ColumnaZonaB pertenece al grupo $Grupo
+              echo "Podrás saber que puestos tiene asignados el grupo $Grupo"
+              echo "si vas al mapa de puestos y haces click en el B$FilaZonaB$ColumnaZonaB"
               echo ""
+
+              # Terminar el script
+              exit 1
 
             fi
 
