@@ -37,11 +37,11 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     exit $ArgsInsuficientes
   else
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
-
     echo ""
-    echo "PROCESANDO LA ZONA A..."
+    echo "  Buscando el grupo $1 en la EuskalEncounter $2"...
+    
+    echo ""
+    echo "Procesando la zona A..."
     echo ""
     for FilaZonaA in {A..T}
       do
@@ -69,7 +69,7 @@ if [ $# -ne $CantArgsCorrectos ]
       done
 
     echo ""
-    echo "PROCESANDO LA ZONA B..."
+    echo "Procesando la zona B..."
     echo ""
     for FilaZonaB in {A..T}
       do
@@ -95,9 +95,6 @@ if [ $# -ne $CantArgsCorrectos ]
 
           done
       done
-
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
 
 fi
 
