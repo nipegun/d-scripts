@@ -13,14 +13,13 @@ echo "    <key>Rescan Prompt</key>" >> ~/MiISOdeChameleon/Extra/org.Chameleon.Bo
 echo "      <string>yes</string>" >> ~/MiISOdeChameleon/Extra/org.Chameleon.Boot.plist
 echo "  </dict>" >> ~/MiISOdeChameleon/Extra/org.Chameleon.Boot.plist
 echo "</plist>" >> ~/MiISOdeChameleon/Extra/org.Chameleon.Boot.plist
+hdiutil create -o ~/MiISOdeChameleon/Preboot.dmg -volname Preboot -size 95.4m -fs HFS -type UDIF -layout SPUD -ov -quiet
+hdiutil attach -owners on ~/MiISOdeChameleon/Preboot.dmg -noverify -mountpoint /Volumes/Preboot
+mkdir /Volumes/Preboot/Extra
+mkdir /Volumes/Preboot/Extra/Extensions
 
-#hdiutil create -volname Preboot -srcfolder /path/to/the/folder/you/want/to/create -ov -format UDZO ~/MiISOdeChameleon/Preboot.dmg
-hdiutil create -size 100m -volname Preboot -ov -format UDZO ~/MiISOdeChameleon/Preboot.dmg
-
-hdiutil create -o ~/MiISOdeChameleon/Preboot.dmg -size 100m -layout SPUD -fs HFS+J
-
-hdiutil create -o ~/MiISOdeChameleon/Preboot.dmg -volname Preboot -size 100m -fs HFS+J
+hdiutil detach /Volumes/Preboot/
 
 
-hdiutil makehybrid -o ~/MiISOdeChameleon.iso ~/MiISOdeChameleon/ -iso -hfs -joliet -eltorito-boot ~/MiISOdeChameleon/cdboot -no-emul-boot -hfs-volume-name "MiISOdeChameleon" -joliet-volume-name "MiISOdeChameleon"
+sudo hdiutil makehybrid -o ~/MiISOdeChameleon.iso ~/MiISOdeChameleon/ -iso -hfs -joliet -eltorito-boot ~/MiISOdeChameleon/cdboot -no-emul-boot -hfs-volume-name "MiISOdeChameleon" -joliet-volume-name "MiISOdeChameleon"
 
