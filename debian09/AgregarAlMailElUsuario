@@ -33,8 +33,6 @@ if [ $# -ne $CantArgsEsperados ]
     exit $ArgsInsuficientes
   else
     echo ""
-    echo "  Agregando el usuario $1 al mail..."
-    echo ""
     adduser $1 mail
     chmod ug+rw /var/mail/$1
     echo ""
