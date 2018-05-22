@@ -26,7 +26,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo "------------------------------------------------------------------------------"
     echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo -e "EnviarMailA ${ColorArgumentos}[DirecciónDeCorreo] [Asunto] [Texto]${FinColor}"
+    echo -e 'EnviarMailA ${ColorArgumentos}[DirecciónDeCorreo] ["Asunto"] ["Texto"]${FinColor}'
     echo ""
     echo "Ejemplo:"
     echo ' EnviarMailA pepe@pepe.com "Recordatorio de cita" "Acuérdate que quedamos para comer"'
