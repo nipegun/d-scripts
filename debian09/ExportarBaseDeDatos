@@ -8,11 +8,11 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA EXPORTAR BASES DE DATOS MYSQL
+#  Script de NiPeGun para exportar bases de datos MySQL
 #--------------------------------------------------------
 
-EXPECTED_ARGS=4
-E_BADARGS=65
+CantArgsEsperados=4
+ArgsInsuficientes=65
 
 ColorAdvertencia='\033[1;31m'
 ColorArgumentos='\033[1;32m'
@@ -20,7 +20,7 @@ FinColor='\033[0m'
 
 FechaDeExp=$(date +A%YM%mD%d@%T)
 
-if [ $# -ne $EXPECTED_ARGS ]
+if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
     echo "-------------------------------------------------------------------------"
@@ -36,7 +36,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo ""
     echo "-------------------------------------------------------------------------"
     echo ""
-    exit $E_BADARGS
+    exit $ArgsInsuficientes
   else
     mysqldump --opt --user=$1 --password=$2 $3 > $4
     echo "$FechaDeExp - Copia de seguridad de la base de datos $3." >> /var/log/CopiasDeSeguridad.log
