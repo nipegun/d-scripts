@@ -8,7 +8,7 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #----------------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA CREAR LOS ALIAS DE LOS NIPE-SCRIPTS PARA DEBIAN 9
+#  Script de NiPeGun para crear los alias de los nipe-scripts para Debian 9
 #----------------------------------------------------------------------------
 
 echo ""
