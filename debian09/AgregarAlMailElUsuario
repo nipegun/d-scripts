@@ -35,9 +35,8 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     echo "  Agregando el usuario $1 al mail..."
     echo ""
-    echo adduser $1 mail
-    #chmod ug+rw /var/mail/$1
-    echo /var/mail/$1
+    adduser $1 mail
+    chmod ug+rw /var/mail/$1
     echo ""
 fi
 
