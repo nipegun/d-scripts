@@ -7,28 +7,32 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA ENVIAR MAIL EN UNA SOLA LÍNEA
-#  PAQUETES ACONSEJADOS A INSTALAR ANTES:
+#----------------------------------------------------------
+#  Script de NiPeGun para enviar mail en una sola línea
+#  Asegúrate de tener instalados los siguientes paquetes:
 #  postfix mailutils
-#--------------------------------------------------------
+#----------------------------------------------------------
 
-EXPECTED_ARGS=3
-E_BADARGS=65
+CantArgsEsperados=3
+ArgsInsuficientes=65
 
-if [ $# -ne $EXPECTED_ARGS ]
+ColorAdvertencia='\033[1;31m'
+ColorArgumentos='\033[1;32m'
+FinColor='\033[0m'
+
+if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
     echo "------------------------------------------------------------------------------"
-    echo "Mal uso del script."
+    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo "El uso correcto sería: $0 DirecciónDeCorreo Asunto Texto"
+    echo -e "EnviarMailA ${ColorArgumentos}[DirecciónDeCorreo] [Asunto] [Texto]${FinColor}"
     echo ""
     echo "Ejemplo:"
-    echo ' $0 pepe@pepe.com "Recordatorio de cita" "Acuérdate que quedamos para comer"'
+    echo ' EnviarMailA pepe@pepe.com "Recordatorio de cita" "Acuérdate que quedamos para comer"'
     echo "------------------------------------------------------------------------------"
     echo ""
-    exit $E_BADARGS
+    exit $ArgsInsuficientes
   else
     echo "$3" | mail -a "Content-Type: text/plain; charset=UTF-8" -s "$2" $1
 fi
