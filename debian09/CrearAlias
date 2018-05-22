@@ -63,6 +63,7 @@ ln -s /root/nipe-scripts/debian09/MostrarKernelsInstalados /root/nipe-scripts/mk
 ln -s /root/nipe-scripts/debian09/MostrarMódulosCargados /root/nipe-scripts/mosmodcar
 ln -s /root/nipe-scripts/debian09/MostrarReglasIPTablesActivas /root/nipe-scripts/mosipt
 ln -s /root/nipe-scripts/debian09/MostrarSetsIPSet /root/nipe-scripts/ipsets
+ln -s /root/nipe-scripts/debian09/MostrarUsuariosDelGrupo /root/nipe-scripts/mudg
 ln -s /root/nipe-scripts/debian09/MostrarVelocidadDeCargaDeLaWeb /root/nipe-scripts/velcarweb
 ln -s /root/nipe-scripts/debian09/MostrarVersiónDeDebian /root/nipe-scripts/ver
 ln -s /root/nipe-scripts/debian09/NotificarFalloDeDisco /root/nipe-scripts/nofadis
