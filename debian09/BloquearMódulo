@@ -8,22 +8,26 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA BLOQUEAR UN MÓDULO ESPECÍFICO
+#  Script de NiPeGun para bloquear un módulo específico
 #--------------------------------------------------------
 
-CantArgsCorrectos=1
+CantArgsEsperados=3
 ArgsInsuficientes=65
 
-if [ $# -ne $CantArgsCorrectos ]
+ColorAdvertencia='\033[1;31m'
+ColorArgumentos='\033[1;32m'
+FinColor='\033[0m'
+
+if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
     echo "------------------------------------------------------------------------------"
-    echo "Mal uso del script."
+    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo "El uso correcto sería: $0 [NombreDelMódulo]"
+    echo -e "BloquearMódulo ${ColorArgumentos}[NombreDelMódulo]${FinColor}"
     echo ""
     echo "Ejemplo:"
-    echo ' $0 igb'
+    echo ' BloquearMódulo igb'
     echo "------------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
