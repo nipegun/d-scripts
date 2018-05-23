@@ -8,8 +8,8 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA CARGAR EL SCRIPT DE INICIO
-#  DE MIDNIGHT COMMANDER UBICADO EN /root/MidnightCommander
+#  Script de NiPeGun para cargar el script de inicio de
+#  Midnight Commander ubicado en /root/MidnightCommander
 #------------------------------------------------------------
 
 /root/MidnightCommander
