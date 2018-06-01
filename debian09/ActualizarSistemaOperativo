@@ -8,12 +8,12 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------
-#  SCRIPT DE NIPEGUN PARA ACTUALIZAR DEBIAN
+#  Script de NiPeGun para actualizar Debian
 #--------------------------------------------
 
 echo ""
 echo "----------------------------------------"
-echo "  ACTUALIZANDO EL SISTEMA OPERATIVO..."
+echo "  Actualizando el sistema operativo..."
 echo "----------------------------------------"
 echo ""
 apt-get -y update
@@ -23,7 +23,7 @@ apt-get -y autoremove
 
 echo ""
 echo "-----------------------------------"
-echo "  EJECUCIÓN DEL SCRIPT FINALIZADA"
+echo "  Ejecución de script finalizada"
 echo "-----------------------------------"
 echo ""
 
