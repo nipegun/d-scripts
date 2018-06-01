@@ -37,9 +37,9 @@ if [ $# -ne $CantArgsEsperados ]
     apt-get -y install mldonkey-server
     service mldonkey-server stop
     cp /var/lib/mldonkey/downloads.ini /var/lib/mldonkey/downloads.ini.bak
-    sed -i -e 's|  "127.0.0.1";]| |g' /var/lib/mldonkey/downloads.ini
-    sed -i -e 's| allowed_ips = [| allowed_ips = ["127.0.0.1"; "$1";]|g' /var/lib/mldonkey/downloads.ini
-    sed -i -e 's| nolimit_ips = [| nolimit_ips = ["127.0.0.1";]|g' /var/lib/mldonkey/downloads.ini
+    sed -i -e 's|  '"127.0.0.1"';]| |g' /var/lib/mldonkey/downloads.ini
+    sed -i -e 's| allowed_ips = [| allowed_ips = ['"127.0.0.1"'; '"$1"';]|g' /var/lib/mldonkey/downloads.ini
+    sed -i -e 's| nolimit_ips = [| nolimit_ips = ['"127.0.0.1"';]|g' /var/lib/mldonkey/downloads.ini
     service mldonkey-server start
     echo ""
 fi
