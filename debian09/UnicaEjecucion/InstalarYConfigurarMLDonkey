@@ -7,12 +7,47 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------
-#  Script de NiPeGun para instalar MLDonkey.
-#---------------------------------------------
+#---------------------------------------------------------
+#  Script de NiPeGun para instalar y configurar MLDonkey
+#---------------------------------------------------------
 
-apt-get update
-apt-get -y install mldonkey-server
-service mldonkey-server stop
-/var/lib/mldonkey/downloads.ini
+CantArgsEsperados=1
+ArgsInsuficientes=65
+
+ColorAdvertencia='\033[1;31m'
+ColorArgumentos='\033[1;32m'
+FinColor='\033[0m'
+
+if [ $# -ne $CantArgsEsperados ]
+  then
+    echo ""
+    echo "------------------------------------------------------------------------------"
+    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo ""
+    echo -e "InstalarYConfigurarMLDonkey ${ColorArgumentos}[IPDesdeLaQueSeVaAControlar]${FinColor}"
+    echo ""
+    echo "Ejemplo:"
+    echo ' InstalarYConfigurarMLDonkey 192.168.0.51'
+    echo "------------------------------------------------------------------------------"
+    echo ""
+    exit $ArgsInsuficientes
+  else
+    echo ""
+    apt-get update
+    apt-get -y install mldonkey-server
+    service mldonkey-server stop
+    cp /var/lib/mldonkey/downloads.ini /var/lib/mldonkey/downloads.ini.bak
+    sed 's|  "127.0.0.1";]| |g' /var/lib/mldonkey/downloads.ini
+    sed 's| allowed_ips = [| allowed_ips = ["127.0.0.1"; "$1";]|g' /var/lib/mldonkey/downloads.ini
+    sed 's| nolimit_ips = [| nolimit_ips = ["127.0.0.1";]|g' /var/lib/mldonkey/downloads.ini
+    service mldonkey-server start
+    echo ""
+fi
+
+
+
+
+
+
+
 
