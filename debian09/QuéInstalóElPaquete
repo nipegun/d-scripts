@@ -1,0 +1,30 @@
+#----------------------------------------------------------------------
+#  Script de NiPeGun para agregar un usuario específico a los buzones
+#----------------------------------------------------------------------
+
+CantArgsEsperados=1
+ArgsInsuficientes=65
+
+ColorAdvertencia='\033[1;31m'
+ColorArgumentos='\033[1;32m'
+FinColor='\033[0m'
+
+if [ $# -ne $CantArgsEsperados ]
+  then
+    echo ""
+    echo "------------------------------------------------------------------------------"
+    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo ""
+    echo -e "QuéInstalóElPaquete ${ColorArgumentos}[NombreDelPaquete]${FinColor}"
+    echo ""
+    echo "Ejemplo:"
+    echo ' QuéInstalóElPaquete /root/paquetes/plex/plex64.deb'
+    echo "------------------------------------------------------------------------------"
+    echo ""
+    exit $ArgsInsuficientes
+  else
+    echo ""
+    dpkg -L $1
+    echo ""
+fi
+
