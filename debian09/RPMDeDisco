@@ -8,7 +8,7 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #----------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA SABER LAS RPMs DE UN DISCO DURO
+#  Script de NiPeGun para saber las RPMs de un disco duro
 #----------------------------------------------------------
 
 EXPECTED_ARGS=1
