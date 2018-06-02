@@ -33,14 +33,28 @@ if [ $# -ne $CantArgsEsperados ]
     exit $ArgsInsuficientes
   else
     echo ""
+    echo "  Instalando el paquete mldonkey-server..."
+    echo ""
     apt-get update
     apt-get -y install mldonkey-server
+    echo ""
+    echo "  Deteninendo el servicio..."
+    echo ""
     service mldonkey-server stop
+    echo ""
+    echo "  Realizando cambios en la configuración..."
+    echo ""
     cp /var/lib/mldonkey/downloads.ini /var/lib/mldonkey/downloads.ini.bak
     sed -i -e 's|  "127.0.0.1";]| |g' /var/lib/mldonkey/downloads.ini
     sed -i -e 's| allowed_ips = \[| allowed_ips = ["127.0.0.1"; '"$1"';]|g' /var/lib/mldonkey/downloads.ini
     sed -i -e 's| nolimit_ips = \[| nolimit_ips = ["127.0.0.1";]|g' /var/lib/mldonkey/downloads.ini
+    echo ""
+    echo "  Re-arrancando el servicio..."
+    echo ""
     service mldonkey-server start
+    echo ""
+    echo "  Ejecución del script, finalizada."
+    echo "  Ya deberías ser capaz de controlar MLDonkey desde la IP $1."
     echo ""
 fi
 
