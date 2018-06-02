@@ -7,9 +7,9 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------------------
-#  Script de NiPeGun para mostrar información sobre el/los módulos de memoria RAM
-#----------------------------------------------------------------------------------
+#-------------------------------------------------------------------------
+#  Script de NiPeGun para mostrar información sobre el/los procesador/es
+#-------------------------------------------------------------------------
 
 echo ""
 echo "Cantidad de núcleos de proceso disponibles en el sistema:"
