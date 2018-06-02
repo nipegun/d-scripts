@@ -17,8 +17,11 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     echo -e "QuéInstalóElPaquete ${ColorArgumentos}[NombreDelPaquete]${FinColor}"
     echo ""
-    echo "Ejemplo:"
-    echo ' QuéInstalóElPaquete /root/paquetes/plex/plex64.deb'
+    echo "Ejemplo 1:"
+    echo ' QuéInstalóElPaquete plexmediaserver'
+    echo ""
+    echo "Ejemplo 2:"
+    echo ' QuéInstalóElPaquete mumble'
     echo "------------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
