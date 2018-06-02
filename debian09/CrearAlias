@@ -70,6 +70,8 @@ ln -s /root/nipe-scripts/debian09/MostrarVelocidadDeCargaDeLaWeb /root/nipe-scri
 ln -s /root/nipe-scripts/debian09/MostrarVersiónDeDebian /root/nipe-scripts/ver
 ln -s /root/nipe-scripts/debian09/NotificarFalloDeDisco /root/nipe-scripts/nofadis
 ln -s /root/nipe-scripts/debian09/NuevaWebVarWWW /root/nipe-scripts/nuevawebvar
+ln -s /root/nipe-scripts/debian09/ProcesosCorriendo /root/nipe-scripts/pc
+ln -s /root/nipe-scripts/debian09/ProcesosCorriendoEnÁrbol /root/nipe-scripts/pcea
 ln -s /root/nipe-scripts/debian09/PuertosAbiertos /root/nipe-scripts/pa
 ln -s /root/nipe-scripts/debian09/QuéInstalóElPaquete /root/nipe-scripts/qiep
 ln -s /root/nipe-scripts/debian09/ReiniciarSistemaOperativo /root/nipe-scripts/rso
