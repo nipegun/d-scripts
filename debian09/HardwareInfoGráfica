@@ -8,12 +8,10 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #-----------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA MOSTRAR INFORMACIÓN SOBRE LA TARJETA GRÁFICA
+#  Script de NiPeGun para mostrar información sobre la tarjeta gráfica
 #-----------------------------------------------------------------------
 
 echo ""
-
 lspci -knn | grep -EA2 'VGA|3D'
-
 echo ""
 
