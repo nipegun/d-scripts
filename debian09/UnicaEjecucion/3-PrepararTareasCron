@@ -136,9 +136,9 @@ echo ""
 ln -s /root/TareasCronPorMes /etc/cron.monthly/TareasCronPorMes
 
 echo ""
-echo "---------------------------------------------------------"
-echo "  Dando permisos de lectura y ejecución solo al root..."
-echo "---------------------------------------------------------"
+echo "-------------------------------------------------------------------------------"
+echo "  Dando permisos de lectura y ejecución solo al propietario de los scripts..."
+echo "-------------------------------------------------------------------------------"
 echo ""
 # Si esto no se hace las tareas no se ejecutarán.
 chmod 700 /root/TareasCronPorHora
