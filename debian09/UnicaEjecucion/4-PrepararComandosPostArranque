@@ -56,7 +56,7 @@ echo "" >> /root/ComandosPostArranque
 echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"  >> /root/ComandosPostArranque
 echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/ComandosPostArranque
 echo "" >> /root/ComandosPostArranque
-chmod +x /root/ComandosPostArranque
+chmod 700 /root/ComandosPostArranque
 
 echo ""
 echo "--------------------------------------"
