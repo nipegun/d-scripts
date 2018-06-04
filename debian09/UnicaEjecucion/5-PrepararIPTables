@@ -22,6 +22,6 @@ echo "" >> /root/ComandosIPTables
 echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE IPTABLES A EJECUTAR AL ARRANQUE"  >> /root/ComandosIPTables
 echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/ComandosIPTables
 echo "" >> /root/ComandosIPTables
-chmod +x /root/ComandosIPTables
+chmod 700 /root/ComandosIPTables
 echo "/root/ComandosIPTables" >> /root/ComandosPostArranque
 
