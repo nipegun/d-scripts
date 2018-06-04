@@ -27,6 +27,7 @@ ln -s /root/nipe-scripts/debian09/BloquearTráficoDeTORConIPTables /root/nipe-sc
 ln -s /root/nipe-scripts/debian09/BorrarArchivosDSStore /root/nipe-scripts/badss
 ln -s /root/nipe-scripts/debian09/BorrarArchivosPuntoGuiónBajo /root/nipe-scripts/bapgb
 ln -s /root/nipe-scripts/debian09/BorrarArchivosZoneIdentifier /root/nipe-scripts/bazi
+ln -s /root/nipe-scripts/debian09/BorrarKernelsViejos /root/nipe-scripts/bkv
 ln -s /root/nipe-scripts/debian09/BorrarTAGsMP3 /root/nipe-scripts/btmp3
 ln -s /root/nipe-scripts/debian09/BuscarArchivoEnElSistema /root/nipe-scripts/baees
 ln -s /root/nipe-scripts/debian09/BuscarCarpetaEnElSistema /root/nipe-scripts/bcees
