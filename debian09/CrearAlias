@@ -79,7 +79,7 @@ ln -s /root/nipe-scripts/debian09/ReiniciarSistemaOperativo /root/nipe-scripts/r
 ln -s /root/nipe-scripts/debian09/RepararPermisosVarWWW /root/nipe-scripts/rpvwww
 ln -s /root/nipe-scripts/debian09/RetenerKernels /root/nipe-scripts/rk
 ln -s /root/nipe-scripts/debian09/RPMDeDisco /root/nipe-scripts/rpmdd
-ln -s /root/nipe-scripts/debian09/SincronizarNiPeScripts /root/nipe-scripts/snps
+ln -s /root/nipe-scripts/debian09/SINcronizarNiPeScripts /root/nipe-scripts/sinnps
 ln -s /root/nipe-scripts/debian09/TRIM /root/nipe-scripts/trim
 ln -s /root/nipe-scripts/debian09/UsuarioNuevoConShell /root/nipe-scripts/uncs
 ln -s /root/nipe-scripts/debian09/UsuarioNuevoSinShell /root/nipe-scripts/unss
