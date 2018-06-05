@@ -30,14 +30,5 @@ if [ $# -ne $CantArgsCorrectos ]
   else
     apt-get -y install byobu
     purge-old-kernels --keep $1
-    
-    aso
-    
-    apt-get -y remove linux-image-4.9.0-1-amd64 linux-headers-4.9.0-1-amd64
-    apt-get -y remove linux-image-4.9.0-2-amd64 linux-headers-4.9.0-2-amd64
-    apt-get -y remove linux-image-4.9.0-3-amd64 linux-headers-4.9.0-3-amd64
-    apt-get -y remove linux-image-4.9.0-4-amd64 linux-headers-4.9.0-4-amd64
-    apt-get -y remove linux-image-4.9.0-5-amd64 linux-headers-4.9.0-5-amd64
-    # apt-get -y remove linux-image-4.9.0-6-amd64 linux-headers-4.9.0-6-amd64
 fi
 
