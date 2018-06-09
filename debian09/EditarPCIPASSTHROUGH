@@ -25,6 +25,6 @@ update-grub
 echo ""
 echo "  Editando la BlackList de los módulos..."
 echo ""
-/etc/modprobe.d/pcipassthrough.conf
+nano /etc/modprobe.d/pcipassthrough.conf
 update-initramfs -u
 
