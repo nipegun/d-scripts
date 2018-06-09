@@ -44,6 +44,7 @@ ln -s /root/nipe-scripts/debian09/EditarDHCP /root/nipe-scripts/edhcp
 ln -s /root/nipe-scripts/debian09/EditarGRUB /root/nipe-scripts/egrub
 ln -s /root/nipe-scripts/debian09/EditarHAPROXY /root/nipe-scripts/ehaproxy
 ln -s /root/nipe-scripts/debian09/EditarHOSTAPD /root/nipe-scripts/ehostapd
+ln -s /root/nipe-scripts/debian09/EditarPCIPASSTHROUGH //root/nipe-scripts/epcipassthrough
 ln -s /root/nipe-scripts/debian09/EditarSAMBA /root/nipe-scripts/esamba
 ln -s /root/nipe-scripts/debian09/EditarTRANSMISSION /root/nipe-scripts/etransmission
 ln -s /root/nipe-scripts/debian09/EnviarMailA /root/nipe-scripts/ema
