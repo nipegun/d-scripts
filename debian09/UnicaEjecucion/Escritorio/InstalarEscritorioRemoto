@@ -24,12 +24,12 @@ echo "  Activando XRDP como servicio..."
 echo ""
 systemctl enable xrdp
 
-echo "[Allow colord for all users]" > /etc/polkit-1/localauthority/50-local.d/allow-colord.pkla
-echo "Identity=unix-user:*" >> /etc/polkit-1/localauthority/50-local.d/allow-colord.pkla
-echo "Action=org.freedesktop.color-manager.create-device;org.freedesktop.color-manager.create-profile;org.freedesktop.color-manager.delete-device;org.freedesktop.color-manager.delete-profile;org.freedesktop.color-manager.modify-device;org.freedesktop.color-manager.modify-profile" >> /etc/polkit-1/localauthority/50-local.d/allow-colord.pkla
-echo "ResultAny=yes" >> /etc/polkit-1/localauthority/50-local.d/allow-colord.pkla
-echo "ResualtInactive=auth_admin" >> /etc/polkit-1/localauthority/50-local.d/allow-colord.pkla
-echo "ResultActive=yes" >> /etc/polkit-1/localauthority/50-local.d/allow-colord.pkla
+echo "[Allow Colord for all Users]" > /etc/polkit-1/localauthority/50-local.d/45-allow-colord.pkla
+echo "Identity=unix-user:*" >> /etc/polkit-1/localauthority/50-local.d/45-allow-colord.pkla
+echo "Action=org.freedesktop.color-manager.create-device;org.freedesktop.color-manager.create-profile;org.freedesktop.color-manager.delete-device;org.freedesktop.color-manager.delete-profile;org.freedesktop.color-manager.modify-device;org.freedesktop.color-manager.modify-profile" >> /etc/polkit-1/localauthority/50-local.d/45-allow-colord.pkla
+echo "ResultAny=no" >> /etc/polkit-1/localauthority/50-local.d/45-allow-colord.pkla
+echo "ResultInactive=no" >> /etc/polkit-1/localauthority/50-local.d/45-allow-colord.pkla
+echo "ResultActive=yes" >> /etc/polkit-1/localauthority/50-local.d/45-allow-colord.pkla
 
 echo ""
 echo "  Ejecución del script, finalizada."
