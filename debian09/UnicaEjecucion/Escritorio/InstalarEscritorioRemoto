@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#------------------------------------------------------------------------------------------------
+#  Script de NiPeGun para instalar y preparar la compartición remota del escritorio en Debian 9
+#------------------------------------------------------------------------------------------------
+
+
+
+echo ""
+echo "  Instalando el servidor xrdp..."
+echo ""
+apt-get -y update
+apt-get -y install xrdp
+
+echo ""
+echo "  Activando XRDP como servicio..."
+echo ""
+systemctl enable xrdp
+
+echo ""
+echo "  Ejecución del script, finalizada."
+echo ""
+echo "  Después de reiniciar el sistema deberías poder"
+echo "  conectarte a su escritorio remoto desde otro ordenador."
+echo ""
+
