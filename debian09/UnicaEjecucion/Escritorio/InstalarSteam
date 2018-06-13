@@ -20,4 +20,4 @@ mkdir -p /root/paquetes/steam
 cd /root/paquetes/steam
 wget https://steamcdn-a.akamaihd.net/client/installer/steam.deb
 gdebi /root/paquetes/steam/steam.deb
-
+apt-get -y install libgl1-mesa-dri libgl1-mesa-glx libc6 
