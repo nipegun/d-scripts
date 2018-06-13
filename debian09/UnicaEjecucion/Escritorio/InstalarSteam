@@ -8,13 +8,16 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #-----------------------------------------------------
-#  Script de NiPeGun para instalar Skype en Debian 9
+#  Script de NiPeGun para instalar Steam en Debian 9
 #-----------------------------------------------------
 
 echo ""
 echo "  Instalando Steam..."
 echo ""
-dpkg --add-architecture i386
 apt-get -y update
-apt-get -y install steam
+apt-get -y install wget gdebi
+mkdir -p /root/paquetes/steam
+cd /root/paquetes/steam
+wget https://steamcdn-a.akamaihd.net/client/installer/steam.deb
+gdebi /root/paquetes/steam/steam.deb
 
