@@ -16,7 +16,7 @@ echo "  Instalando Skype..."
 echo ""
 dpkg --add-architecture i386
 apt-get -y update
-apt-get -y install gdebi
+apt-get -y install gdebi wget
 mkdir /root/paquetes
 cd /root/paquetes
 PaqueteLibSSL=$(wget -qO- http://ftp.at.debian.org/debian/pool/main/o/openssl/ | grep libssl | grep deb8 | grep i386 | grep -v dbg | grep -v dev | cut -d\" $
