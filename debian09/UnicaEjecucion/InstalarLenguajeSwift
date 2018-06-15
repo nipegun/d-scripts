@@ -11,9 +11,86 @@
 #  Script de NiPeGun para instalar el lenguaje de prograación Swift
 #--------------------------------------------------------------------
 
-apt-get -y install curl
-mkdir /opt/swift
-cd /opt/swift/
-SwiftURL=$(curl --silent https://swift.org/download/ | grep -v DEVELOPMENT | grep -v SNAPSHOT | grep -v Signature | grep ubuntu 16.10)
-echo $SwiftURL
-#wget $SwiftURL
+apt-get update
+apt-get -y install dialog
+InstallFolder=~/Swift/
+SwiftLangURL=https://swift.org
+SwiftLangDownloadFolder=/download/
+VersUbuntu=16.10
+VersSwift3=3.1.1
+VersSwift4=4.1.2
+
+cmd=(dialog --checklist "¿Qué versión de Swift quieres instalar?:" 22 50 16)
+options=(1 "Swift 3 ($VersSwift3)" off
+         2 "Swift 4 ($VersSwift4)" on
+         3 "Swift 5" off)
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+for choice in $choices
+do
+  case $choice in
+
+    1)
+      mkdir $InstallFolder
+      cd $InstallFolder
+      echo ""
+      echo "  Instalando herramientas para el script y dependencias para el lenguaje Swift..."
+      echo ""
+      apt-get -y install curl tar clang libicu-dev
+      SwiftFileLocation=$(curl --silent $SwiftLangURL$SwiftLangDownloadFolder | grep -v DEVELOPMENT | grep -v SNAPSHOT | grep -v Signature | grep ubuntu$VersUbuntu | grep $VersSwift3 | sed 's/\.gz.*/.gz/' | cut -d\" -f2)
+      echo ""
+      echo "  Descargando la versión de Swift seleccionada..."
+      echo ""
+      wget $SwiftLangURL$SwiftFileLocation -O Swift-$VersSwift3.tar.gz
+      echo ""
+      echo "  Descomprimiendo el archivo..."
+      echo ""
+      tar -xzf Swift-$VersSwift3.tar.gz
+      rm -rf $VersSwift4
+      mv swift-$VersSwift3-RELEASE-ubuntu$VersUbuntu $VersSwift3
+      rm Swift-$VersSwift3.tar.gz
+      echo ""
+      echo "  Agregando la versión $VersSwift3 de Swift al Path..."
+      echo ""
+      cp ~/.bashrc ~/.bashrc.bak
+      sh -c "echo 'export PATH=$PATH:$InstallFolder$VersSwift3/usr/bin/' >> ~/.bashrc"
+      source  ~/.bashrc
+    ;;
+
+    2)
+      mkdir $InstallFolder
+      cd $InstallFolder
+      echo ""
+      echo "  Instalando herramientas para el script y dependencias para el lenguaje Swift..."
+      echo ""
+      apt-get -y install curl tar clang libicu-dev
+      SwiftFileLocation=$(curl --silent $SwiftLangURL$SwiftLangDownloadFolder | grep -v DEVELOPMENT | grep -v SNAPSHOT | grep -v Signature | grep ubuntu$VersUbuntu | grep $VersSwift4 | sed 's/\.gz.*/.gz/' | cut -d\" -f2)
+      echo ""
+      echo "  Descargando la versión de Swift seleccionada..."
+      echo ""
+      wget $SwiftLangURL$SwiftFileLocation -O Swift-$VersSwift4.tar.gz
+      echo ""
+      echo "  Descomprimiendo el archivo..."
+      echo ""
+      tar -xzf Swift-$VersSwift4.tar.gz
+      rm -rf $VersSwift4
+      mv swift-$VersSwift4-RELEASE-ubuntu$VersUbuntu $VersSwift4
+      rm Swift-$VersSwift4.tar.gz
+      echo ""
+      echo "  Agregando la versión $VersSwift4 de Swift al Path..."
+      echo ""
+      cp ~/.bashrc ~/.bashrc.bak
+      sh -c "echo 'export PATH=$PATH:$InstallFolder$VersSwift4/usr/bin/' >> ~/.bashrc"
+      source  ~/.bashrc
+    ;;
+
+    3)
+      echo ""
+      echo "  Swift 5 todavía no está disponible"
+      echo ""
+    ;;
+
+    esac
+
+done
+
