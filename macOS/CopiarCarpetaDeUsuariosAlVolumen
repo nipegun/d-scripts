@@ -14,6 +14,9 @@
 # Modificar 
 # Indicar -Rv para ver la copia archivo a archivo (Es más lento)
 #
+# Ejecutar con
+# sudo /Users/usuario/nipe-scripts/macOS/CopiarCarpetaDeUsuariosAlVolumen NombreDeVolumen
+#
 sudo mkdir /Volumes/$1/Usuarios
 sudo cp -Rv /Users/ /Volumes/$1/Usuarios
 
