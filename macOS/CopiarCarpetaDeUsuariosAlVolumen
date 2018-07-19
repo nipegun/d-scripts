@@ -7,9 +7,9 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------------------
-#  Script de NiPeGun para copiar toda la carpeta de usuarios a una comaprtición samba
-#--------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+#  Script de NiPeGun para copiar toda la carpeta de usuarios a un volumen dado
+#-------------------------------------------------------------------------------
 
 # Modificar 
 # Indicar -Rv para ver la copia archivo a archivo (Es más lento)
