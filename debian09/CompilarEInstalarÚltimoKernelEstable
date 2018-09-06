@@ -22,8 +22,8 @@ apt-get -y update
 echo ""
 echo -e "  ${ColorMensajes}Instalando los paquetes necesarios...${FinColor}"
 echo ""
-apt-get -y install wget make build-essential libncurses5-dev gcc libssl-dev bc
-apt-get -y install kernel-package
+apt-get -y purge gcclibssl-dev bc
+apt-get -y install wget build-essential make gcc libncurses5-dev pkg-config
 
 echo ""
 echo -e "  ${ColorMensajes}Creando las carpetas para ubicar el código fuente y posicionándose en ellas...${FinColor}"
