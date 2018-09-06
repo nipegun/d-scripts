@@ -40,6 +40,7 @@ ln -s /root/nipe-scripts/debian09/CambiarNombreDeUsuario /root/nipe-scripts/cndu
 ln -s /root/nipe-scripts/debian09/CompilarEInstalarÚltimoKernelEstable /root/nipe-scripts/ceiuke
 ln -s /root/nipe-scripts/debian09/ComprobarSSD /root/nipe-scripts/cssd
 ln -s /root/nipe-scripts/debian09/CrearBaseDeDatosYUsuario /root/nipe-scripts/cbddyu
+ln -s /root/nipe-scripts/debian09/DejarSóloElKernelMásReciente /root/nipe-scripts/dsekmr
 ln -s /root/nipe-scripts/debian09/EditarDHCP /root/nipe-scripts/edhcp
 ln -s /root/nipe-scripts/debian09/EditarGRUB /root/nipe-scripts/egrub
 ln -s /root/nipe-scripts/debian09/EditarHAPROXY /root/nipe-scripts/ehaproxy
