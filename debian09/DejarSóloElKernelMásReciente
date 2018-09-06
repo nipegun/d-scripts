@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#----------------------------------------------------------------------------------------------
+#  Script de NiPeGun para dejar sólo el último kernel estable en los repositorios de Debian 9
+#----------------------------------------------------------------------------------------------
+
+echo ""
+echo "  Borrando todos los Kernels..."
+echo ""
+apt-get -y purge linux-image* linux-headers*
+
+echo ""
+echo "  Actualizando la lista de paquetes disponibles en los repositorios..."
+echo ""
+apt-get -y update
+
+echo ""
+echo "  Instalando el último kernel..."
+echo ""
+apt-get -y install linux-image-amd64
+
