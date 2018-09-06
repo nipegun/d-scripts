@@ -34,14 +34,14 @@ apt-get -y install linux-image-amd64
 VersUltKern=$(ls /boot | grep vmlinuz | awk -F'z-' '{print $2}')
 
 echo ""
-echo "  Creando el nuevo initrd..."
-echo ""
-update-initramfs -v -c -k $VersUltKern
-
-echo ""
-echo "  Actualizando el nuevo initrd..."
+echo "  Actualizando el nuevo initrd (si existe)..."
 echo ""
 update-initramfs -v -u -k $VersUltKern
+
+echo ""
+echo "  Creando el nuevo initrd (si no existe)..."
+echo ""
+update-initramfs -v -c -k $VersUltKern
 
 echo ""
 echo "  Re-instalando grub..."
