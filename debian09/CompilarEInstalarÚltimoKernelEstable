@@ -51,7 +51,11 @@ echo -e "  ${ColorMensajes}Limpiando las fuentes del kernel y configurando para 
 echo ""
 CarpetaCodFuente=$(echo /root/CodFuente/Kernels/stable/linux-$NroUltKernel | sed -e "s/.tar.xz//")
 cd $CarpetaCodFuente
-make defconfig
+make defconfig # default configuration for the architecture
+# make localmodconfig # configuration based on the running kernel and the currently loaded modules
+# make oldconfig # text-based line-by-line configuration frontend
+# make nconfig # console-based menu configuration
+# make xconfig # graphical configuration frontend
 
 echo ""
 echo -e "  ${ColorMensajes}Limpiando el compilador...${FinColor}"
