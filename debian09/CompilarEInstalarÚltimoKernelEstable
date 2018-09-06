@@ -52,18 +52,17 @@ echo -e "  ${ColorMensajes}Limpiando las fuentes del kernel y configurando para 
 echo ""
 CarpetaCodFuente=$(echo /root/CodFuente/kernels/stable/linux-$NroUltKernel | sed -e "s/.tar.xz//")
 cd $CarpetaCodFuente
-make mrproper
-make menuconfig
+make defconfig
 
 echo ""
 echo -e "  ${ColorMensajes}Limpiando el compilador...${FinColor}"
 echo ""
-make-kpkg clean 
+#make-kpkg clean 
 
 echo ""
 echo -e "  ${ColorMensajes}Compilando...${FinColor}"
 echo ""
-make-kpkg --initrd linux_image linux_headers linux_source --append-to-version=-$NroUltKernel -j2
+#make-kpkg --initrd linux_image linux_headers linux_source --append-to-version=-$NroUltKernel -j2
 
 echo ""
 echo -e "  ${ColorMensajes}Copiando los paquetes de instalación a la carpeta de paquetes...${FinColor}"
@@ -72,6 +71,6 @@ echo ""
 echo ""
 echo -e "  ${ColorMensajes}Instalando los paquetes del nuevo kernel...${FinColor}"
 echo ""
-dpkg -i /root/Paquetes/Kernels/linux-image-$NroUltKernel.deb
-dpkg -i /root/Paquetes/Kernels/linux-headers-$NroUltKernel.deb
+#dpkg -i /root/Paquetes/Kernels/linux-image-$NroUltKernel.deb
+#dpkg -i /root/Paquetes/Kernels/linux-headers-$NroUltKernel.deb
 
