@@ -11,45 +11,48 @@
 #  Script de NiPeGun para dejar sólo el último kernel estable en los repositorios de Debian 9
 #----------------------------------------------------------------------------------------------
 
+ColorMensajes='\033[1;31m'
+FinColor='\033[0m'
+
 echo ""
-echo "  Borrando todos los Kernels..."
+echo -e "  ${ColorMensajes}Borrando todos los Kernels...${FinColor}"
 echo ""
 apt-get -y purge linux-image* linux-headers*
 
 echo ""
-echo "  Actualizando la lista de paquetes disponibles en los repositorios..."
+echo -e "  ${ColorMensajes}Actualizando la lista de paquetes disponibles en los repositorios...${FinColor}"
 echo ""
 apt-get -y update
 
 echo ""
-echo "  Borrando /boot/* ..."
+echo -e "  ${ColorMensajes}Borrando /boot/* ...${FinColor}"
 echo ""
 rm -f /boot/*
 
 echo ""
-echo "  Instalando el último kernel..."
+echo -e "  ${ColorMensajes}Instalando el último kernel...${FinColor}"
 echo ""
 apt-get -y install linux-image-amd64
 
 VersUltKern=$(ls /boot | grep vmlinuz | awk -F'z-' '{print $2}')
 
 echo ""
-echo "  Actualizando el nuevo initrd (si existe)..."
+echo -e "  ${ColorMensajes}Actualizando el nuevo initrd (si existe)...${FinColor}"
 echo ""
 update-initramfs -v -u -k $VersUltKern
 
 echo ""
-echo "  Creando el nuevo initrd (si no existe)..."
+echo -e "  ${ColorMensajes}Creando el nuevo initrd (si no existe)...${FinColor}"
 echo ""
 update-initramfs -v -c -k $VersUltKern
 
 echo ""
-echo "  Re-instalando grub..."
+echo -e "  ${ColorMensajes}Re-instalando grub...${FinColor}"
 echo ""
 grub-install --recheck /dev/sda
 
 echo ""
-echo "  Actualizando grub..."
+echo -e "  ${ColorMensajes}Actualizando grub...${FinColor}"
 echo ""
 update-grub
 
