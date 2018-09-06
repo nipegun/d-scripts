@@ -22,10 +22,10 @@ apt-get -y update
 echo ""
 echo -e "  ${ColorMensajes}Instalando los paquetes necesarios...${FinColor}"
 echo ""
-apt-get -y purge gcclibssl-dev bc pkg-config libssl-dev
+apt-get -y purge gcclibssl-dev bc pkg-config libssl-dev libelf-dev
 apt-get -y purge wget build-essential make gcc libncurses5-dev bison flex
 apt-get -y autoremove
-apt-get -y install wget build-essential make gcc libncurses5-dev bison flex
+apt-get -y install wget build-essential make gcc libncurses5-dev bison flex libelf-dev
 #apt-get -y install libssl-dev
 
 echo ""
@@ -58,11 +58,12 @@ make defconfig
 echo ""
 echo -e "  ${ColorMensajes}Limpiando el compilador...${FinColor}"
 echo ""
-#make-kpkg clean 
+make clean 
 
 echo ""
 echo -e "  ${ColorMensajes}Compilando...${FinColor}"
 echo ""
+make deb-pkg
 #make-kpkg --initrd linux_image linux_headers linux_source --append-to-version=-$NroUltKernel -j2
 
 echo ""
