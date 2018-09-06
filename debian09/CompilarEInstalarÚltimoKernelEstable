@@ -22,7 +22,7 @@ apt-get -y update
 echo ""
 echo -e "  ${ColorMensajes}Instalando los paquetes necesarios...${FinColor}"
 echo ""
-apt-get -y install wget libncurses5-dev gcc make build-essential
+apt-get -y install wget make build-essential libncurses5-dev gcc libssl-dev bc
 apt-get -y install kernel-package
 
 echo ""
