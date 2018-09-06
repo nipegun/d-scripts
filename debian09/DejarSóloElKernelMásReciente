@@ -11,7 +11,7 @@
 #  Script de NiPeGun para dejar sólo el último kernel estable en los repositorios de Debian 9
 #----------------------------------------------------------------------------------------------
 
-ColorMensajes='\033[0;34m'
+ColorMensajes='\033[1;34m'
 FinColor='\033[0m'
 
 echo ""
