@@ -31,7 +31,7 @@ apt-get -y install wget build-essential make gcc libncurses5-dev bison flex libe
 echo ""
 echo -e "  ${ColorMensajes}Creando las carpetas para ubicar el código fuente y posicionándose en ellas...${FinColor}"
 echo ""
-mkdir -P /root/CodFuente/Kernels/stable
+mkdir -p /root/CodFuente/Kernels/stable
 cd /root/CodFuente/Kernels/stable
 
 echo ""
@@ -71,7 +71,7 @@ make deb-pkg
 echo ""
 echo -e "  ${ColorMensajes}Copiando los paquetes de instalación a la carpeta de paquetes...${FinColor}"
 echo ""
-mkdir -P /root/Paquetes/Kernels/
+mkdir -p /root/Paquetes/Kernels/
 cp /root/CodFuente/Kernels/stable/linux-image-$NroUltKernel.deb /root/Paquetes/Kernels/
 cp /root/CodFuente/Kernels/stable/linux-headers-$NroUltKernel.deb /root/Paquetes/Kernels/
 
