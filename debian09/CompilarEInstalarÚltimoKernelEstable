@@ -31,10 +31,8 @@ apt-get -y install wget build-essential make gcc libncurses5-dev bison flex libe
 echo ""
 echo -e "  ${ColorMensajes}Creando las carpetas para ubicar el código fuente y posicionándose en ellas...${FinColor}"
 echo ""
-mkdir /root/CodFuente
-mkdir /root/CodFuente/kernels
-mkdir /root/CodFuente/kernels/stable
-cd /root/CodFuente/kernels/stable
+mkdir -P /root/CodFuente/Kernels/stable
+cd /root/CodFuente/Kernels/stable
 
 echo ""
 echo -e "  ${ColorMensajes}Descargando el código fuente de la versión estable más reciente...${FinColor}"
@@ -46,12 +44,12 @@ echo ""
 echo -e "  ${ColorMensajes}Descomprimiendo el código fuente...${FinColor}"
 echo ""
 NroUltKernel=$(echo $URLUltKernel | cut -d'-' -f 2)
-tar xf /root/CodFuente/kernels/stable/linux-$NroUltKernel
+tar xf /root/CodFuente/Kernels/stable/linux-$NroUltKernel
 
 echo ""
 echo -e "  ${ColorMensajes}Limpiando las fuentes del kernel y configurando para compilar...${FinColor}"
 echo ""
-CarpetaCodFuente=$(echo /root/CodFuente/kernels/stable/linux-$NroUltKernel | sed -e "s/.tar.xz//")
+CarpetaCodFuente=$(echo /root/CodFuente/Kernels/stable/linux-$NroUltKernel | sed -e "s/.tar.xz//")
 cd $CarpetaCodFuente
 make defconfig
 
@@ -69,6 +67,9 @@ make deb-pkg
 echo ""
 echo -e "  ${ColorMensajes}Copiando los paquetes de instalación a la carpeta de paquetes...${FinColor}"
 echo ""
+mkdir -P /root/Paquetes/Kernels/
+cp /root/CodFuente/Kernels/stable/linux-image-$NroUltKernel.deb /root/Paquetes/Kernels/
+cp /root/CodFuente/Kernels/stable/linux-headers-$NroUltKernel.deb /root/Paquetes/Kernels/
 
 echo ""
 echo -e "  ${ColorMensajes}Instalando los paquetes del nuevo kernel...${FinColor}"
