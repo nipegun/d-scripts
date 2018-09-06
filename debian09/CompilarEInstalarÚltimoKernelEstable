@@ -8,28 +8,25 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #-----------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA COMPILAR E INSTALAR EL ÚLTIMO KERNEL ESTABLE
+#  Script de NiPeGun para compilar e instalar el último kernel estable
 #-----------------------------------------------------------------------
 
+ColorMensajes='\033[1;34m'
+FinColor='\033[0m'
+
 echo ""
-echo "------------------------------------"
-echo "  ACTUALIZANDO LOS REPOSITORIOS..."
-echo "------------------------------------"
+echo -e "  ${ColorMensajes}Actualizando la lista de paquetes disponibles en los repositorios...${FinColor}"
 echo ""
 apt-get -y update
 
 echo ""
-echo "-----------------------------------------"
-echo "  INSTALANDO LOS PAQUETES NECESARIOS..."
-echo "-----------------------------------------"
+echo -e "  ${ColorMensajes}Instalando los paquetes necesarios...${FinColor}"
 echo ""
-apt-get install wget libncurses5-dev gcc make build-essential
+apt-get -y install wget libncurses5-dev gcc make build-essential
 apt-get -y install kernel-package
 
 echo ""
-echo "----------------------------------------------------------------------------------"
-echo "  CREANDO LAS CARPETAS PARA UBICAR EL CÓDIGO FUENTE Y POSICIONÁNDOSE EN ELLAS..."
-echo "----------------------------------------------------------------------------------"
+echo -e "  ${ColorMensajes}Creando las carpetas para ubicar el código fuente y posicionándose en ellas...${FinColor}"
 echo ""
 mkdir /root/CodFuente
 mkdir /root/CodFuente/kernels
@@ -37,25 +34,19 @@ mkdir /root/CodFuente/kernels/stable
 cd /root/CodFuente/kernels/stable
 
 echo ""
-echo "----------------------------------------------------------------------"
-echo "  DESCARGANDO EL CÓDIGO FUENTE DE LA VERSIÓN ESTABLE MÁS RECIENTE..."
-echo "----------------------------------------------------------------------"
+echo -e "  ${ColorMensajes}Descargando el código fuente de la versión estable más reciente...${FinColor}"
 echo ""
 URLUltKernel=$(wget -qO- --no-check-certificate https://www.kernel.org | grep tar | head -n1 | cut -d\" -f2)
 wget --no-check-certificate $URLUltKernel
 
 echo ""
-echo "---------------------------------------"
-echo "  DESCOMPRIMIENDO EL CÓDIGO FUENTE..."
-echo "---------------------------------------"
+echo -e "  ${ColorMensajes}Descomprimiendo el código fuente...${FinColor}"
 echo ""
 NroUltKernel=$(echo $URLUltKernel | cut -d'-' -f 2)
 tar xf /root/CodFuente/kernels/stable/linux-$NroUltKernel
 
 echo ""
-echo "--------------------------------------------------------------------"
-echo "  LIMPIANDO LAS FUENTES DEL KERNEL Y CONFIGURANDO PARA COMPILAR..."
-echo "--------------------------------------------------------------------"
+echo -e "  ${ColorMensajes}Limpiando las fuentes del kernel y configurando para compilar...${FinColor}"
 echo ""
 CarpetaCodFuente=$(echo /root/CodFuente/kernels/stable/linux-$NroUltKernel | sed -e "s/.tar.xz//")
 cd $CarpetaCodFuente
@@ -63,29 +54,21 @@ make mrproper
 make menuconfig
 
 echo ""
-echo "------------------------------"
-echo "  LIMPIANDO EL COMPILADOR..."
-echo "------------------------------"
+echo -e "  ${ColorMensajes}Limpiando el compilador...${FinColor}"
 echo ""
 make-kpkg clean 
 
 echo ""
-echo "-----------------"
-echo "  COMPILANDO..."
-echo "-----------------"
+echo -e "  ${ColorMensajes}Compilando...${FinColor}"
 echo ""
 make-kpkg --initrd linux_image linux_headers linux_source --append-to-version=-$NroUltKernel -j2
 
 echo ""
-echo "--------------------------------------------------------------------"
-echo "  COPIANDO LOS PAQUETES DE INSTALACIÓN A LA CARPETA DE PAQUETES..."
-echo "--------------------------------------------------------------------"
+echo -e "  ${ColorMensajes}Copiando los paquetes de instalación a la carpeta de paquetes...${FinColor}"
 echo ""
 
 echo ""
-echo "-----------------------------------------------"
-echo "  INSTALANDO LOS PAQUETES DEL NUEVO KERNEL..."
-echo "-----------------------------------------------"
+echo -e "  ${ColorMensajes}Instalando los paquetes del nuevo kernel...${FinColor}"
 echo ""
 dpkg -i /root/Paquetes/Kernels/linux-image-$NroUltKernel.deb
 dpkg -i /root/Paquetes/Kernels/linux-headers-$NroUltKernel.deb
