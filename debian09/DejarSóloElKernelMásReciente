@@ -38,8 +38,18 @@ echo "  Creando el nuevo initrd..."
 echo ""
 update-initramfs -v -c -k $VersUltKern
 
-#echo ""
-#echo "  Actualizando el nuevo initrd..."
-#echo ""
-#update-initramfs -v -u -k $VersUltKern
+echo ""
+echo "  Actualizando el nuevo initrd..."
+echo ""
+update-initramfs -v -u -k $VersUltKern
+
+echo ""
+echo "  Re-instalando grub..."
+echo ""
+grub-install --recheck /dev/sda
+
+echo ""
+echo "  Actualizando grub..."
+echo ""
+update-grub
 
