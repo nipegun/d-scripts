@@ -11,13 +11,18 @@
 #  Script de NiPeGun para dejar sólo el último kernel estable en los repositorios de Debian 9
 #----------------------------------------------------------------------------------------------
 
-ColorMensajes='\033[1;31m'
+ColorMensajes='\033[0;34m'
 FinColor='\033[0m'
 
 echo ""
 echo -e "  ${ColorMensajes}Borrando todos los Kernels...${FinColor}"
 echo ""
-apt-get -y purge linux-image* linux-headers*
+apt-get -y purge linux-image* linux-headers* linux-support*
+
+echo ""
+echo -e "  ${ColorMensajes}Borrando paquetes no utilizados...${FinColor}"
+echo ""
+apt-get -y autoremove
 
 echo ""
 echo -e "  ${ColorMensajes}Actualizando la lista de paquetes disponibles en los repositorios...${FinColor}"
@@ -52,7 +57,7 @@ echo ""
 grub-install --recheck /dev/sda
 
 echo ""
-echo -e "  ${ColorMensajes}Actualizando grub...${FinColor}"
+echo -e "  ${ColorMensajes}Actualizando la configuración de grub...${FinColor}"
 echo ""
 update-grub
 
