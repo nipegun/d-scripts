@@ -12,10 +12,14 @@
 #------------------------------------------------------------
 
 aso
-apt-get -y remove linux-image-4.9.0-1-amd64 linux-headers-4.9.0-1-amd64
-apt-get -y remove linux-image-4.9.0-2-amd64 linux-headers-4.9.0-2-amd64
-apt-get -y remove linux-image-4.9.0-3-amd64 linux-headers-4.9.0-3-amd64
-apt-get -y remove linux-image-4.9.0-4-amd64 linux-headers-4.9.0-4-amd64
-apt-get -y remove linux-image-4.9.0-5-amd64 linux-headers-4.9.0-5-amd64
-# apt-get -y remove linux-image-4.9.0-6-amd64 linux-headers-4.9.0-6-amd64
+apt-get -y purge linux-image-4.9.0-1-amd64 linux-headers-4.9.0-1-amd64
+apt-get -y purge linux-image-4.9.0-2-amd64 linux-headers-4.9.0-2-amd64
+apt-get -y purge linux-image-4.9.0-3-amd64 linux-headers-4.9.0-3-amd64
+apt-get -y purge linux-image-4.9.0-4-amd64 linux-headers-4.9.0-4-amd64
+apt-get -y purge linux-image-4.9.0-5-amd64 linux-headers-4.9.0-5-amd64
+apt-get -y purge linux-image-4.9.0-6-amd64 linux-headers-4.9.0-6-amd64
+apt-get -y purge linux-image-4.9.0-7-amd64 linux-headers-4.9.0-7-amd64
+apt-get -y purge linux-image-4.9.0-8-amd64 linux-headers-4.9.0-8-amd64
+
+apt-get -y install linux-image-amd64
 
