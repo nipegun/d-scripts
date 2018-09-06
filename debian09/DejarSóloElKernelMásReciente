@@ -44,12 +44,12 @@ VersUltKern=$(ls /boot | grep vmlinuz | awk -F'z-' '{print $2}')
 echo ""
 echo -e "  ${ColorMensajes}Actualizando el nuevo initrd (si existe)...${FinColor}"
 echo ""
-update-initramfs -v -u -k $VersUltKern
+update-initramfs -v -u -t -k $VersUltKern
 
 echo ""
 echo -e "  ${ColorMensajes}Creando el nuevo initrd (si no existe)...${FinColor}"
 echo ""
-update-initramfs -v -c -k $VersUltKern
+update-initramfs -v -c -t -k $VersUltKern
 
 echo ""
 echo -e "  ${ColorMensajes}Re-instalando grub...${FinColor}"
