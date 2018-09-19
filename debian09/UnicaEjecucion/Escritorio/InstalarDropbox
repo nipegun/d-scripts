@@ -13,8 +13,7 @@
 
 mkdir -p /root/paquetes/dropbox/
 cd /root/paquetes/dropbox/
-#wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64"
-wget https://www.dropbox.com/download?plat=lnx.x86_64
-#tar xzf
+wget -O /root/paquetes/dropbox/dropbox.tar https://www.dropbox.com/download?plat=lnx.x86_64
+tar xzf /root/paquetes/dropbox/dropbox.tar
 #~/.dropbox-dist/dropboxd
 
