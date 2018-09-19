@@ -11,7 +11,7 @@
 #  Script de NiPeGun para crear certificado SSL para un usuario de mumble-server
 #---------------------------------------------------------------------------------
 
-CantArgsEsperados=1
+CantArgsEsperados=2
 ArgsInsuficientes=65
 
 ColorAdvertencia='\033[1;31m'
