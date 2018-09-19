@@ -49,7 +49,7 @@ if [ $# -ne $CantArgsEsperados ]
 
     echo "  Creando el certificado..."
     echo ""
-    openssl req -x509 -nodes -days 365 -newkey rsa:4096 -out /root/Mumble/CertificadosSSL/$1.pem -keyout /root/Mumble/CertificadosSSL/$1.key
+    openssl req -x509 -nodes -days 3650 -newkey rsa:4096 -out /root/Mumble/CertificadosSSL/$1.pem -keyout /root/Mumble/CertificadosSSL/$1.key
 
     echo ""
     echo "  Convirtiendo el certificado al formato PKCS12..."
