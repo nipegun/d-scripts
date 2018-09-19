@@ -11,9 +11,11 @@
 #  Script de NiPeGun para instalar Dropbox en Debian 9
 #-------------------------------------------------------
 
-mkdir -p /root/paquetes/dropbox/
-cd /root/paquetes/dropbox/
-wget -O /root/paquetes/dropbox/dropbox.tar https://www.dropbox.com/download?plat=lnx.x86_64
-tar xzf /root/paquetes/dropbox/dropbox.tar
+echo ""
+mkdir -p /~/paquetes/dropbox/
+cd /~/paquetes/dropbox/
+wget -O /~/paquetes/dropbox/dropbox.tar https://www.dropbox.com/download?plat=lnx.x86_64
+tar xzf /~/paquetes/dropbox/dropbox.tar -C /~/
 #~/.dropbox-dist/dropboxd
+echo ""
 
