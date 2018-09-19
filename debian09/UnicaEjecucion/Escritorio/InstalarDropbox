@@ -12,10 +12,10 @@
 #-------------------------------------------------------
 
 echo ""
-mkdir -p /~/paquetes/dropbox/
-cd /~/paquetes/dropbox/
-wget -O /~/paquetes/dropbox/dropbox.tar https://www.dropbox.com/download?plat=lnx.x86_64
-tar xzf /~/paquetes/dropbox/dropbox.tar -C /~/
+mkdir -p ~/paquetes/dropbox/
+cd ~/paquetes/dropbox/
+wget -O ~/paquetes/dropbox/dropbox.tar https://www.dropbox.com/download?plat=lnx.x86_64
+tar xzf ~/paquetes/dropbox/dropbox.tar -C ~/
 #~/.dropbox-dist/dropboxd
 echo ""
 
