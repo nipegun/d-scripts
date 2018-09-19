@@ -32,9 +32,28 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     exit $ArgsInsuficientes
   else
-    mkdir -p /root/Mumble/CertificadosSSL/
+    echo ""
+    echo "  Instalando los paquetes necesarios..."
+    echo ""
     apt-get -y install openssl ssl-cert
+
+    echo ""
+    echo "  Creando la carpeta para los certificados..."
+    echo ""
+    mkdir -p /root/Mumble/CertificadosSSL/
+    
+    echo ""
+    echo "  Creando el certificado..."
+    echo ""
     openssl req -x509 -nodes -days 365 -newkey rsa:4096 -out /root/Mumble/CertificadosSSL/$1.pem -keyout /root/Mumble/CertificadosSSL/$1.key
+    
+    echo ""
+    echo "  Convirtiendo el certificado al formato PKCS12..."
+    echo ""
     openssl pkcs12 -export -certfile /root/Mumble/CertificadosSSL/$1.pem -inkey /root/Mumble/CertificadosSSL/$1.key -out /root/Mumble/CertificadosSSL/$1.p12
+    
+    echo ""
+    echo "  Enviado el certificado en formato PKCS12 al usuario..."
+    echo ""
 fi
 
