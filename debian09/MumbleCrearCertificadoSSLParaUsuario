@@ -32,7 +32,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     exit $ArgsInsuficientes
   else
-    mkdir -P /root/Mumble/CertificadosSSL/
+    mkdir -p /root/Mumble/CertificadosSSL/
     apt-get -y install openssl ssl-cert
     openssl req -x509 -nodes -days 365 -newkey rsa:4096 -out /root/Mumble/CertificadosSSL/$1.pem -keyout /root/Mumble/CertificadosSSL/$1.key
     openssl pkcs12 -export -certfile /root/Mumble/CertificadosSSL/$1.pem -inkey /root/Mumble/CertificadosSSL/$1.key -out /root/Mumble/CertificadosSSL/$1.p12
