@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#---------------------------------------------------------------------------------
+#  Script de NiPeGun para crear certificado SSL para un usuario de mumble-server
+#---------------------------------------------------------------------------------
+
+CantArgsEsperados=1
+ArgsInsuficientes=65
+
+ColorAdvertencia='\033[1;31m'
+ColorArgumentos='\033[1;32m'
+FinColor='\033[0m'
+
+if [ $# -ne $CantArgsEsperados ]
+  then
+    echo ""
+    echo "------------------------------------------------------------------------------"
+    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo ""
+    echo -e "MumbleCrearCertificadoSSLParaUsuario ${ColorArgumentos}[NombreDeUsuario] [MailDeUsuario]${FinColor}"
+    echo ""
+    echo "Ejemplo:"
+    echo ' MumbleCrearCertificadoSSLParaUsuario pepito70 pepito70@nipegun.com'
+    echo "------------------------------------------------------------------------------"
+    echo ""
+    exit $ArgsInsuficientes
+  else
+    mkdir -P /root/Mumble/CertificadosSSL/
+    apt-get -y install openssl ssl-cert
+    openssl req -x509 -nodes -days 365 -newkey rsa:4096 -out /root/Mumble/CertificadosSSL/$1.pem -keyout /root/Mumble/CertificadosSSL/$1.key
+    openssl pkcs12 -export -certfile /root/Mumble/CertificadosSSL/$1.pem -inkey /root/Mumble/CertificadosSSL/$1.key -out /root/Mumble/CertificadosSSL/$1.p12
+fi
+
