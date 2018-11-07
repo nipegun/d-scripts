@@ -64,6 +64,7 @@ menu=(dialog --timeout 5 --checklist "Elección de escritorio:" 22 76 16)
             tasksel install kde-dektop
             apt-get -y install firefox-esr-l10n-es-es libreoffice-l10n-es
           ;;
+
           4)
             echo ""
             echo "------------------------------"
