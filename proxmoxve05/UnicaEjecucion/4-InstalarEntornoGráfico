@@ -81,7 +81,7 @@ menu=(dialog --timeout 5 --checklist "Elección de escritorio:" 22 76 16)
             echo "------------------------------"
             echo ""
             tasksel install mate-dektop
-            apt-get -y install firefox-esr-l10n-es-es libreoffice-l10n-es thunderbird-l10n-es-es lightning-l10n-es-es
+            apt-get -y install firefox-esr-l10n-es-es libreoffice-l10n-es thunderbird-l10n-es-es lightning-l10n-es-es gnome-disk-utility
             systemctl stop NetworkManager.service
             systemctl disable NetworkManager.service
           ;;
