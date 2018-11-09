@@ -53,6 +53,7 @@ ln -s /root/nipe-scripts/debian09/ExportarBaseDeDatos /root/nipe-scripts/ebdd
 ln -s /root/nipe-scripts/debian09/ExtraerSubtítuloDeMKV /root/nipe-scripts/esdmkv
 ln -s /root/nipe-scripts/debian09/Grupos /root/nipe-scripts/g
 ln -s /root/nipe-scripts/debian09/HardwareInfoGráfica /root/nipe-scripts/hig
+ln -s /root/nipe-scripts/debian09/HardwareInfoRAM /root/nipe-scripts/hiram
 ln -s /root/nipe-scripts/debian09/HardwareInfoRed /root/nipe-scripts/hir
 ln -s /root/nipe-scripts/debian09/ImportarBaseDeDatos /root/nipe-scripts/ibdd
 ln -s /root/nipe-scripts/debian09/InfoNodoLitecoin /root/nipe-scripts/inl
