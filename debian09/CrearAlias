@@ -22,6 +22,7 @@ ln -s /root/nipe-scripts/debian09/externos/VelocidadDeInternet /root/nipe-script
 ln -s /root/nipe-scripts/debian09/APagarSistemaOperativo /root/nipe-scripts/apso
 ln -s /root/nipe-scripts/debian09/AbrirMidnightCommander /root/nipe-scripts/amc
 ln -s /root/nipe-scripts/debian09/ActualizarSistemaOperativo /root/nipe-scripts/aso
+ln -s /root/nipe-scripts/debian09/ActualizarYReiniciar /root/nipe-scripts/ayr
 ln -s /root/nipe-scripts/debian09/AgregarAlMailElUsuario /root/nipe-scripts/aameu
 ln -s /root/nipe-scripts/debian09/BloquearTráficoDeTORConIPTables /root/nipe-scripts/btdtorcipt
 ln -s /root/nipe-scripts/debian09/BorrarArchivosDSStore /root/nipe-scripts/badss
