@@ -20,7 +20,7 @@ dpkg -r plexmediaserver
 echo ""
 echo "  Borrando la carpeta Plex Media Server..."
 echo ""
-rm -R "/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/"
+rm -R /var/lib/plexmediaserver/
 
 echo ""
 
