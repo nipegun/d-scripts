@@ -11,5 +11,13 @@
 #  SCRIPT DE NIPEGUN PARA EDITAR LA CONFIGURACIÓN DEL DEMONIO DHCPD
 #--------------------------------------------------------------------
 
+echo ""
+echo "  Editando la configuración de DHCP..."
+echo ""
 nano /etc/dhcp/dhcpd.conf
+
+echo ""
+echo "  Reiniciando el servicio isc-dhcp-server"
+echo ""
+service isc-dhcp-server restart
 
