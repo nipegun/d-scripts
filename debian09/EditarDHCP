@@ -17,7 +17,7 @@ echo ""
 nano /etc/dhcp/dhcpd.conf
 
 echo ""
-echo "  Reiniciando el servicio isc-dhcp-server"
+echo "  Reiniciando el servicio isc-dhcp-server..."
 echo ""
 service isc-dhcp-server restart
 
