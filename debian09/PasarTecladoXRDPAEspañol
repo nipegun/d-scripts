@@ -1,5 +1,5 @@
-echo "[noshift]
-echo "Key8=65406:0
+echo "[noshift]" > /etc/xrdp/km-040a.ini
+echo "Key8=65406:0" >> /etc/xrdp/km-040a.ini
 echo "Key9=65307:27
 echo "Key10=49:49
 echo "Key11=50:50
@@ -657,3 +657,5 @@ echo "Key134=0:0
 echo "Key135=0:0
 echo "Key136=0:0
 echo "Key137=0:0
+
+chown xrdp:xrdp /etc/xrdp/km-040a.ini 
