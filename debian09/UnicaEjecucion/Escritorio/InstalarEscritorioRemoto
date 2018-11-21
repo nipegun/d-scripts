@@ -36,7 +36,9 @@ menu=(dialog --timeout 5 --checklist "Elección dl Sistema Operativo:" 22 76 16)
           echo ""
           echo "  Activando XRDP como servicio..."
           echo ""
+          xrdp-genkeymap /etc/xrdp/km-0C0A.ini
           systemctl enable xrdp
+          service xrdp restart
         ;;
 
         2)
