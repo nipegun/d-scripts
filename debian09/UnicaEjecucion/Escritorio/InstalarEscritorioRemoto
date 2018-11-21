@@ -33,12 +33,11 @@ menu=(dialog --timeout 5 --checklist "Elección dl Sistema Operativo:" 22 76 16)
           echo ""
           apt-get -y update
           apt-get -y install xrdp
+          /root/nipe-scripts/debian09/PasarTecladoXRDPAEspañol          
           echo ""
           echo "  Activando XRDP como servicio..."
           echo ""
-          xrdp-genkeymap /etc/xrdp/km-0C0A.ini
           systemctl enable xrdp
-          service xrdp restart
         ;;
 
         2)
