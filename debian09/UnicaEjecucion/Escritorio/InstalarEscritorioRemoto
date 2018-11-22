@@ -36,6 +36,7 @@ menu=(dialog --timeout 5 --checklist "Elección dl Sistema Operativo:" 22 76 16)
           cp /etc/xrdp/xrdp_keyboard.ini /etc/xrdp/xrdp_keyboard.ini.bak
           sed -i -e 's|rdp_layout_de=0x00000407|rdp_layout_de=0x00000407\nrdp_layout_es=0x0000040A|g' /etc/xrdp/xrdp_keyboard.ini
           sed -i -e 's|rdp_layout_de=de|rdp_layout_de=de\nrdp_layout_es=es|g' /etc/xrdp/xrdp_keyboard.ini
+          sed -i -e 's|allowed_users=console|allowed_users=anybody|g' /etc/X11/Xwrapper.config
           #/root/nipe-scripts/debian09/PasarTecladoXRDPAEspañol          
           echo ""
           echo "  Activando XRDP como servicio..."
