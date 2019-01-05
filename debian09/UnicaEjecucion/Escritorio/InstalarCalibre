@@ -22,10 +22,24 @@ apt-get -y update
 echo ""
 echo "  Instalando los paquetes necesarios..."
 echo ""
-apt-get -y install xdg-utils wget xz-utils python
+apt-get -y install xdg-utils wget xz-utils python xvfb imagemagick
 
 mkdir /root/paquetes/calibre
 cd /root/paquetes/calibre
 wget --no-check-certificate https://download.calibre-ebook.com/linux-installer.sh
 sh /root/paquetes/calibre/linux-installer.sh
 
+echo "[Unit]" > /etc/systemd/system/calibre.service
+echo " Description=Servidor Calibre" >> /etc/systemd/system/calibre.service
+echo " After=network.target" >> /etc/systemd/system/calibre.service
+echo "" >> /etc/systemd/system/calibre.service
+echo "[Service]" >> /etc/systemd/system/calibre.service
+echo "Type=simple" >> /etc/systemd/system/calibre.service
+echo "User=root" >> /etc/systemd/system/calibre.service
+echo "Group=root" >> /etc/systemd/system/calibre.service
+echo 'ExecStart=/opt/calibre/calibre-server "/Calibre"' >> /etc/systemd/system/calibre.service
+echo "" >> /etc/systemd/system/calibre.service
+echo "[Install]" >> /etc/systemd/system/calibre.service
+echo "WantedBy=default.target" >> /etc/systemd/system/calibre.service
+
+systemctl enable calibre
