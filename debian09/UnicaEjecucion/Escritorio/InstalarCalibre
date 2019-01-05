@@ -29,17 +29,18 @@ cd /root/paquetes/calibre
 wget --no-check-certificate https://download.calibre-ebook.com/linux-installer.sh
 sh /root/paquetes/calibre/linux-installer.sh
 
-echo "[Unit]" > /etc/systemd/system/servidor-calibre.service
-echo " Description=Servidor Calibre" >> /etc/systemd/system/servidor-calibre.service
-echo " After=network.target" >> /etc/systemd/system/servidor-calibre.service
-echo "" >> /etc/systemd/system/servidor-calibre.service
-echo "[Service]" >> /etc/systemd/system/servidor-calibre.service
-echo " Type=simple" >> /etc/systemd/system/servidor-calibre.service
-echo " User=root" >> /etc/systemd/system/servidor-calibre.service
-echo " Group=root" >> /etc/systemd/system/servidor-calibre.service
-echo ' ExecStart=/opt/calibre/calibre-server "/Calibre"' >> /etc/systemd/system/servidor-calibre.service
-echo "" >> /etc/systemd/system/servidor-calibre.service
-echo "[Install]" >> /etc/systemd/system/servidor-calibre.service
-echo " WantedBy=default.target" >> /etc/systemd/system/servidor-calibre.service
+echo "[Unit]" > /etc/systemd/system/calibre-server.service
+echo " Description=Servidor Calibre" >> /etc/systemd/system/calibre-server.service
+echo " After=network.target" >> /etc/systemd/system/calibre-server.service
+echo "" >> /etc/systemd/system/calibre-server.service
+echo "[Service]" >> /etc/systemd/system/calibre-server.service
+echo " Type=simple" >> /etc/systemd/system/calibre-server.service
+echo " User=root" >> /etc/systemd/system/calibre-server.service
+echo " Group=root" >> /etc/systemd/system/calibre-server.service
+echo ' ExecStart=/opt/calibre/calibre-server "/Calibre"' >> /etc/systemd/system/calibre-server.service
+#echo ' ExecStart=/opt/calibre/calibre-server "/Calibre" --enable-auth --access-log /Calibre/Access.log' >> /etc/systemd/system/calibre-server.service
+echo "" >> /etc/systemd/system/calibre-server.service
+echo "[Install]" >> /etc/systemd/system/calibre-server.service
+echo " WantedBy=default.target" >> /etc/systemd/system/calibre-server.service
 
-systemctl enable servidor-calibre
+systemctl enable calibre-server
