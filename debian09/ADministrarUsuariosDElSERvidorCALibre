@@ -15,6 +15,6 @@ echo "--------------------------------------------------"
 echo "  Administrando usuarios del servidor Calibre..."
 echo "--------------------------------------------------"
 echo ""
-echo "Opciones:"
+echo "Acciones:"
 calibre-server --manage-users
 
