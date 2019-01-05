@@ -29,5 +29,6 @@ echo ""
 echo "-----------------------------------------------"
 echo "  Re-arrancando el servicio calibre-srever..."
 echo "-----------------------------------------------"
+echo ""
 systemctl start calibre-server
 
