@@ -24,6 +24,7 @@ ln -s /root/nipe-scripts/debian09/AbrirMidnightCommander /root/nipe-scripts/amc
 ln -s /root/nipe-scripts/debian09/ActualizarSistemaOperativo /root/nipe-scripts/aso
 ln -s /root/nipe-scripts/debian09/ActualizarSistemaOperativoYApagar /root/nipe-scripts/asoya
 ln -s /root/nipe-scripts/debian09/ActualizarSistemaOperativoYReiniciar /root/nipe-scripts/asoyr
+ln -s /root/nipe-scripts/debian09/ADministrarUsuariosDElSERvidorCALibre /root/nipe-scripts/adudelsercal
 ln -s /root/nipe-scripts/debian09/AgregarAlMailElUsuario /root/nipe-scripts/aameu
 ln -s /root/nipe-scripts/debian09/BloquearTráficoDeTORConIPTables /root/nipe-scripts/btdtorcipt
 ln -s /root/nipe-scripts/debian09/BorrarArchivosDSStore /root/nipe-scripts/badss
