@@ -11,6 +11,7 @@
 #  Script de NiPeGun para administrar usuarios del servidor Calibre
 #--------------------------------------------------------------------
 
+echo ""
 echo "--------------------------------------------"
 echo "  Deteniendo el servicio calibre-server..."
 echo "--------------------------------------------"
