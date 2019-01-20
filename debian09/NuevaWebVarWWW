@@ -38,7 +38,7 @@ else
 
   # Comprobar si el nombre de usuario MySQL deseado tiene mas de 16 caracteres
   nombre_mysql_deseado=$2
-  
+
   if [ ${#nombre_mysql_deseado} -gt 16 ]; then
 
     # Acortar nombre de usuario MySQL a 16 caracteres
@@ -146,13 +146,13 @@ else
     echo "" >> /var/www/$2$1/.htaccess
     echo "# END Redirigir www. a sin www." >> /var/www/$2$1/.htaccess
     echo "" >> /var/www/$2$1/.htaccess
-    
+
     # Reparar permisos y propietario de la carpeta
     chown www-data:www-data /var/www/$2$1/ -R
     find /var/www/$2$1/ -type d -exec chmod 755 {} \;
     find /var/www/$2$1/ -type f -exec chmod 644 {} \;
     chown -v root:root /var/www
-    
+
     # Mostrar el resultado de la operacion
     echo "--------------------------------"
     echo ""
@@ -168,7 +168,7 @@ else
     exit
 
   else
-   
+ 
     # Crear la base de datos
     echo ""
     echo "$(tput setaf 1)Creando la base de datos con su usuario... $(tput sgr 0)"
@@ -179,7 +179,7 @@ else
     mkdir /var/www/$2$1/
     mkdir /var/www/$2$1/logs/
     echo "WEB OK" > /var/www/$2$1/index.html
-    
+
     # Crear la web en Apache
     cp /etc/apache2/sites-available/nuevawebvar.conf /etc/apache2/sites-available/$2$1.conf
     sed -i -e "s/nuevawebvar.com/$2$1/g" /etc/apache2/sites-available/$2$1.conf
