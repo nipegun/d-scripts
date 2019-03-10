@@ -50,5 +50,8 @@ apt-get -y remove pve-kernel-4.15.18-3-pve pve-headers-4.15.18-3-pve
 apt-get -y remove pve-kernel-4.15.18-4-pve pve-headers-4.15.18-4-pve
 apt-get -y remove pve-kernel-4.15.18-5-pve pve-headers-4.15.18-5-pve
 apt-get -y remove pve-kernel-4.15.18-6-pve pve-headers-4.15.18-6-pve
+apt-get -y remove pve-kernel-4.15.18-7-pve pve-headers-4.15.18-7-pve
+apt-get -y remove pve-kernel-4.15.18-8-pve pve-headers-4.15.18-8-pve
+apt-get -y remove pve-kernel-4.15.18-9-pve pve-headers-4.15.18-9-pve
+apt-get -y remove pve-kernel-4.15.18-10-pve pve-headers-4.15.18-10-pve
 
-#apt-get -y remove pve-kernel-4.15.18-2-pve pve-headers-4.15.18-2-pve
