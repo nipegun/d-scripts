@@ -11,6 +11,10 @@
 #  Script de NiPeGun para enviar mensajes de Telegram desde Bash usando un bot
 #-------------------------------------------------------------------------------
 
+ColorAdvertencia='\033[1;31m'
+ColorArgumentos='\033[1;32m'
+FinColor='\033[0m'
+
 CantArgsCorrectos=3
 ArgsInsuficientes=65
 
@@ -18,9 +22,9 @@ if [ $# -ne $CantArgsCorrectos ]
   then
     echo ""
     echo "------------------------------------------------------------------------------"
-    echo "Mal uso del script."
+    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo 'El uso correcto sería: '$0' [TokenDelBot] [IdDelChatDeDestino] ["Mensaje"]'
+    echo 'El uso correcto sería: '$0' ${ColorArgumentos}[TokenDelBot] [IdDelChatDeDestino] ["Mensaje"]${FinColor}'
     echo ""
     echo "Ejemplo:"
     echo ' '$0' 123456789:AAAAAAAAAA_AAAAAAAAAAAAAAA_AAAAAA_A "Mensaje de prueba"'
