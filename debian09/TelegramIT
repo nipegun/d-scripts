@@ -28,10 +28,20 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     exit $ArgsInsuficientes
   else
-    TokenBot="$1"
-    URL="https://api.telegram.org/bot$TokenBot/sendMessage"
-    IdDestino="$2"
-    Mensaje="$3"
-    curl -s -X POST $URL -d chat_id=$IdDestino -d text="$Mensaje"
-    echo ""
+    wget -q --tries=10 --timeout=20 --spider https://api.telegram.org
+    if [[ $? -eq 0 ]]; then
+      TokenBot="$1"
+      URL="https://api.telegram.org/bot$TokenBot/sendMessage"
+      IdDestino="$2"
+      Mensaje="$3"
+      curl -s -X POST $URL -d chat_id=$IdDestino -d text="$Mensaje" > /dev/null
+      echo ""
+    else
+      echo ""
+      echo "-----------------------------------------------------------------"
+      echo "  No se pudo enviar el mensaje porque no se pudo contactar con:"
+      echo "  https://api.telegram.org"
+      echo "------------------------------------------------------------"
+      echo ""
+    fi
 fi
