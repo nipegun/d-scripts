@@ -23,7 +23,7 @@ if [ $# -ne $CantArgsCorrectos ]
     echo 'El uso correcto sería: $0 [TokenDelBot] [IdDelChatDeDestino] ["Mensaje"]'
     echo ""
     echo "Ejemplo:"
-    echo ' $0 123456789:AAAAAAAAAA_AAAAAAAAAAAAAAA_AAAAAA_A "Mensaje de prueba"'
+    echo ' /$0 123456789:AAAAAAAAAA_AAAAAAAAAAAAAAA_AAAAAA_A "Mensaje de prueba"'
     echo "------------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
