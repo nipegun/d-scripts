@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#--------------------------------------------------------------------
+#  Script de NiPeGun para enviar mensajes de Telegram usando un bot
+#--------------------------------------------------------------------
+
+CantArgsCorrectos=3
+ArgsInsuficientes=65
+
+if [ $# -ne $CantArgsCorrectos ]
+  then
+    echo ""
+    echo "------------------------------------------------------------------------------"
+    echo "Mal uso del script."
+    echo ""
+    echo 'El uso correcto sería: $0 [TokenDelBot] [IdDelChatDeDestino] ["Mensaje"]'
+    echo ""
+    echo "Ejemplo:"
+    echo ' $0 123456789:AAAAAAAAAA_AAAAAAAAAAAAAAA_AAAAAA_A "Mensaje de prueba"'
+    echo "------------------------------------------------------------------------------"
+    echo ""
+    exit $ArgsInsuficientes
+  else
+    TokenBot="$1"
+    URL="https://api.telegram.org/bot$TokenBot/sendMessage"
+    IdDestino="$2"
+    Mensaje="$3"
+    curl -s -X POST $URL -d chat_id=$IdDestino -d text="$Mensaje"
+    echo ""
+fi
