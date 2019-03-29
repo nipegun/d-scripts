@@ -7,9 +7,9 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------
-#  Script de NiPeGun para enviar mensajes de Telegram usando un bot
-#--------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+#  Script de NiPeGun para enviar mensajes de Telegram desde Bash usando un bot
+#-------------------------------------------------------------------------------
 
 CantArgsCorrectos=3
 ArgsInsuficientes=65
@@ -38,10 +38,7 @@ if [ $# -ne $CantArgsCorrectos ]
       echo ""
     else
       echo ""
-      echo "-----------------------------------------------------------------"
-      echo "  No se pudo enviar el mensaje porque no se pudo contactar con:"
-      echo "  https://api.telegram.org"
-      echo "------------------------------------------------------------"
+      echo "  No se pudo enviar el mensaje porque no se pudo contactar con https://api.telegram.org"
       echo ""
     fi
 fi
