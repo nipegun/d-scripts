@@ -41,7 +41,7 @@ if [ $# -ne $CantArgsCorrectos ]
       echo ""
     else
       echo ""
-      echo "  No se pudo enviar el mensaje porque no se pudo contactar con https://api.telegram.org"
+      echo -e "${ColorAdvertencia}No se pudo enviar el mensaje porque no se pudo contactar con https://api.telegram.org${FinColor}"
       echo ""
     fi
 fi
