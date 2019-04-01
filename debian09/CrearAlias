@@ -12,9 +12,7 @@
 #----------------------------------------------------------------------------
 
 echo ""
-echo "------------------------------------------"
-echo "  Creando alias para los nipe-scripts..."
-echo "------------------------------------------"
+echo "Creando alias para los nipe-scripts..."
 echo ""
 
 ln -s /root/nipe-scripts/debian09/externos/VelocidadDeInternet /root/nipe-scripts/vdi
@@ -59,6 +57,7 @@ ln -s /root/nipe-scripts/debian09/HardwareInfoGráfica /root/nipe-scripts/hig
 ln -s /root/nipe-scripts/debian09/HardwareInfoRAM /root/nipe-scripts/hiram
 ln -s /root/nipe-scripts/debian09/HardwareInfoRed /root/nipe-scripts/hir
 ln -s /root/nipe-scripts/debian09/ImportarBaseDeDatos /root/nipe-scripts/ibdd
+ln -s /root/nipe-scripts/debian09/IMPrimir /root/nipe-scripts/imp
 ln -s /root/nipe-scripts/debian09/InfoNodoLitecoin /root/nipe-scripts/inl
 ln -s /root/nipe-scripts/debian09/LanzarEscritorio /root/nipe-scripts/le
 ln -s /root/nipe-scripts/debian09/ListarNodosTORQueEntran /root/nipe-scripts/lntorqe
@@ -96,9 +95,6 @@ ln -s /root/nipe-scripts/debian09/VerEstadoDeServicio /root/nipe-scripts/veds
 ln -s /root/nipe-scripts/debian09/WinDir /root/nipe-scripts/wd
 
 echo ""
-echo "-------------------------------------------------------------------------"
-echo "  ALIAS CREADOS."
-echo "  DEBERÍAS PODER EJECUTAR LOS SCRIPTS ESCRIBIENDO EL NOMBRE DE SU ALIAS"
-echo "-------------------------------------------------------------------------"
+echo "Alias creados. Deberías poder ejecutar los scripts escribiendo el nombre de su alias."
 echo ""
 
