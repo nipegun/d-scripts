@@ -60,6 +60,7 @@ ln -s /root/nipe-scripts/debian09/HardwareInfoGráfica /root/nipe-scripts/hig
 ln -s /root/nipe-scripts/debian09/HardwareInfoRAM /root/nipe-scripts/hiram
 ln -s /root/nipe-scripts/debian09/HardwareInfoRed /root/nipe-scripts/hir
 ln -s /root/nipe-scripts/debian09/ImportarBaseDeDatos /root/nipe-scripts/ibdd
+ln -s /root/nipe-scripts/debian09/IMPrimir /root/nipe-scripts/imp
 ln -s /root/nipe-scripts/debian09/IMPrimirArchivo /root/nipe-scripts/impa
 ln -s /root/nipe-scripts/debian09/InfoNodoLitecoin /root/nipe-scripts/inl
 ln -s /root/nipe-scripts/debian09/LanzarEscritorio /root/nipe-scripts/le
