@@ -15,7 +15,7 @@ ColorNotificacion="\033[1;32m"
 FinColor="\033[0m"
 
 echo ""
-echo -e "${ColorAdvertencia}Creando alias para los nipe-scripts...${FinColor}"
+echo -e "${ColorNotificacion}Creando alias para los nipe-scripts...${FinColor}"
 echo ""
 
 ln -s /root/nipe-scripts/debian09/externos/VelocidadDeInternet /root/nipe-scripts/vdi
@@ -98,6 +98,6 @@ ln -s /root/nipe-scripts/debian09/VerEstadoDeServicio /root/nipe-scripts/veds
 ln -s /root/nipe-scripts/debian09/WinDir /root/nipe-scripts/wd
 
 echo ""
-echo -e "${ColorAdvertencia}Alias creados. Deberías poder ejecutar los scripts escribiendo el nombre de su alias.${FinColor}"
+echo -e "${ColorNotificacion}Alias creados. Deberías poder ejecutar los scripts escribiendo el nombre de su alias.${FinColor}"
 echo ""
 
