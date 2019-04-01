@@ -98,6 +98,6 @@ ln -s /root/nipe-scripts/debian09/VerEstadoDeServicio /root/nipe-scripts/veds
 ln -s /root/nipe-scripts/debian09/WinDir /root/nipe-scripts/wd
 
 echo ""
-echo -e "${ColorNotificacion}Alias creados. Deberías poder ejecutar los scripts escribiendo el nombre de su alias.${FinColor}"
+echo -e "${ColorNotificacion}Alias creados. Deberías poder ejecutar los nipe-scripts escribiendo el nombre de su alias.${FinColor}"
 echo ""
 
