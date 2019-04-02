@@ -199,6 +199,11 @@ do
       echo "  netmask 255.255.255.0" >> /etc/network/interfaces
       echo "  broadcast 192.168.1.255" >> /etc/network/interfaces
       echo "  bridge-ports $interfazcableada2 $interfazinalambrica1" >> /etc/network/interfaces
+
+      echo ""
+      echo "Descargando archivo de nombres de fabricantes..."
+      echo ""
+      wget -O /usr/local/etc/oui.txt http://standards-oui.ieee.org/oui/oui.txt
     ;;
 
     5)
