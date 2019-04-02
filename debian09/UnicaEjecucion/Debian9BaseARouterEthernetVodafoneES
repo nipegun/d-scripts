@@ -217,6 +217,11 @@ echo "  }" >> /etc/dhcp/dhcpd.conf
 echo "}" >> /etc/dhcp/dhcpd.conf
 
 echo ""
+echo "Descargando archivo de nombres de fabricantes..."
+echo ""
+wget -O /usr/local/etc/oui.txt http://standards-oui.ieee.org/oui/oui.txt
+
+echo ""
 echo "----------------------------------------------------------------------"
 echo "  FINALIZADO."
 echo "  AHORA, EL CABLE ETHERNET QUE VA DEL ORDENADOR AL ROUTER SERCOMM,"
