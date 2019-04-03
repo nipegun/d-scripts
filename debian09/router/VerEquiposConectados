@@ -15,12 +15,12 @@ ColorVerde="\033[1;32m"
 FinColor="\033[0m"
 
 echo ""
-echo -e "${ColorVerde}Mostrando equipos con el método dhcp-lease-list...${FinColor}"
+echo -e "${ColorVerde}Usando dhcp-lease-list para mostrar equipos...${FinColor}"
 echo ""
 dhcp-lease-list --all
 
 echo ""
-echo -e "${ColorVerde}Mostrando equipos con el método arp-scan...${FinColor}"
+echo -e "${ColorVerde}Usando arp-scan para mostrar equipos...${FinColor}"
 echo ""
 interfaz=$(sed -n 's|INTERFACESv4="\(.*\)"|\1|p' /etc/default/isc-dhcp-server)
 arp-scan --interface=$interfaz --localnet
