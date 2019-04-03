@@ -19,7 +19,7 @@ apt-get -y update
 apt-get -y install gdebi wget
 mkdir /root/paquetes
 cd /root/paquetes
-PaqueteLibSSL=$(wget -qO- http://ftp.at.debian.org/debian/pool/main/o/openssl/ | grep libssl | grep deb8 | grep i386 | grep -v dbg | grep -v dev | cut -d\" $
+PaqueteLibSSL=$(wget -qO- http://ftp.at.debian.org/debian/pool/main/o/openssl/ | grep libssl | grep deb8 | grep i386 | grep -v dbg | grep -v dev | cut -d\" $)
 wget http://ftp.at.debian.org/debian/pool/main/o/openssl/$PaqueteLibSSL
 gdebi /root/paquetes/$PaqueteLibSSL
 wget -O skype.deb http://www.skype.com/go/getskype-linux-deb
