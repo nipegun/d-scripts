@@ -14,7 +14,6 @@
 echo ""
 echo "  Instalando Skype..."
 echo ""
-dpkg --add-architecture i386
 apt-get -y update
 apt-get -y install gdebi wget
 mkdir /root/paquetes
@@ -31,7 +30,4 @@ cd /root/paquetes
 
 wget https://go.skype.com/skypeforlinux-64.deb
 gdebi skypeforlinux-64.deb
-
-# apt-get purge ".*:i386"
-# dpkg --remove-architecture i386
 
