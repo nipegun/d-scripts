@@ -28,5 +28,5 @@ wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libs
 gdebi /root/paquetes/libssl1.0.0_1.0.1t-1+deb8u11_i386.deb
 
 wget -O skype.deb http://www.skype.com/go/getskype-linux-deb
-gdebi -i skype.deb
+gdebi skype.deb
 
