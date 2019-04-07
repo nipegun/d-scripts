@@ -23,10 +23,15 @@ cd /root/paquetes
 #PaqueteLibSSL=$(wget -qO- http://ftp.at.debian.org/debian/pool/main/o/openssl/ | grep libssl | grep deb9 | grep i386 | grep -v dbg | grep -v dev | grep -v udeb | sed -n 's/.*href="\([^"]*\).*/\1/p')
 #wget http://ftp.at.debian.org/debian/pool/main/o/openssl/$PaqueteLibSSL
 #gdebi /root/paquetes/$PaqueteLibSSL
+#wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u11_i386.deb
+#gdebi libssl1.0.0_1.0.1t-1+deb8u11_i386.deb
 
-wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u11_i386.deb
-gdebi libssl1.0.0_1.0.1t-1+deb8u11_i386.deb
+#wget -O skype.deb http://www.skype.com/go/getskype-linux-deb
+#gdebi skype.deb
 
-wget -O skype.deb http://www.skype.com/go/getskype-linux-deb
-gdebi skype.deb
+wget https://go.skype.com/skypeforlinux-64.deb
+gdebi skypeforlinux-64.deb
+
+# apt-get purge ".*:i386"
+# dpkg --remove-architecture i386
 
