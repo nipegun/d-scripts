@@ -23,5 +23,5 @@ PaqueteLibSSL=$(wget -qO- http://ftp.at.debian.org/debian/pool/main/o/openssl/ |
 wget http://ftp.at.debian.org/debian/pool/main/o/openssl/$PaqueteLibSSL
 gdebi /root/paquetes/$PaqueteLibSSL
 wget -O skype.deb http://www.skype.com/go/getskype-linux-deb
-gdebi skype.deb
+dpkg -i skype.deb
 
