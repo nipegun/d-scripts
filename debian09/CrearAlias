@@ -45,7 +45,6 @@ ln -s /root/nipe-scripts/debian09/CompilarEInstalarElÚltimoKernelEstable /root/
 ln -s /root/nipe-scripts/debian09/ComprobarSSD /root/nipe-scripts/cssd
 ln -s /root/nipe-scripts/debian09/CrearBaseDeDatosYUsuario /root/nipe-scripts/cbddyu
 ln -s /root/nipe-scripts/debian09/DejarSóloElKernelMásReciente /root/nipe-scripts/dsekmr
-ln -s /root/nipe-scripts/debian09/EditarDHCP /root/nipe-scripts/edhcp
 ln -s /root/nipe-scripts/debian09/EditarGRUB /root/nipe-scripts/egrub
 ln -s /root/nipe-scripts/debian09/EditarHAPROXY /root/nipe-scripts/ehaproxy
 ln -s /root/nipe-scripts/debian09/EditarHOSTAPD /root/nipe-scripts/ehostapd
@@ -97,6 +96,8 @@ ln -s /root/nipe-scripts/debian09/Usuarios /root/nipe-scripts/u
 ln -s /root/nipe-scripts/debian09/VelocidadDeDiscoDeSistema /root/nipe-scripts/vddds
 ln -s /root/nipe-scripts/debian09/VerEstadoDeServicio /root/nipe-scripts/veds
 ln -s /root/nipe-scripts/debian09/WinDir /root/nipe-scripts/wd
+
+ln -s /root/nipe-scripts/debian09/router/EditarDHCP /root/nipe-scripts/edhcp
 
 echo ""
 echo -e "${ColorNotificacion}Alias creados. Deberías poder ejecutar los nipe-scripts escribiendo el nombre de su alias.${FinColor}"
