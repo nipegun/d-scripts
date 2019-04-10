@@ -98,6 +98,7 @@ ln -s /root/nipe-scripts/debian09/VerEstadoDeServicio /root/nipe-scripts/veds
 ln -s /root/nipe-scripts/debian09/WinDir /root/nipe-scripts/wd
 
 ln -s /root/nipe-scripts/debian09/router/EditarDHCP /root/nipe-scripts/edhcp
+ln -s /root/nipe-scripts/debian09/router/MostrarAparatosConectados /root/nipe-scripts/mac
 
 echo ""
 echo -e "${ColorNotificacion}Alias creados. Deberías poder ejecutar los nipe-scripts escribiendo el nombre de su alias.${FinColor}"
