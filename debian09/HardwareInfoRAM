@@ -10,7 +10,8 @@
 #----------------------------------------------------------------------------------
 #  Script de NiPeGun para mostrar información sobre el/los módulos de memoria RAM
 #----------------------------------------------------------------------------------
-
+echo ""
+echo "Mostrando información sobre la memoria RAM..."
 echo ""
 dmidecode --type 17
 echo ""
