@@ -10,8 +10,12 @@
 #----------------------------------------------------------------------------------
 #  Script de NiPeGun para mostrar información sobre el/los módulos de memoria RAM
 #----------------------------------------------------------------------------------
+
+ColorNotificacion="\033[1;32m"
+FinColor="\033[0m"
+
 echo ""
-echo "Mostrando información sobre la memoria RAM..."
+echo -e "${ColorNotificacion}Mostrando información sobre la memoria RAM...${FinColor}"
 echo ""
 dmidecode --type 17
 echo ""
