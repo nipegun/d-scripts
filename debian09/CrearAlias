@@ -55,9 +55,11 @@ ln -s /root/nipe-scripts/debian09/EnviarMailA /root/nipe-scripts/ema
 ln -s /root/nipe-scripts/debian09/ExportarBaseDeDatos /root/nipe-scripts/ebdd
 ln -s /root/nipe-scripts/debian09/ExtraerSubtítuloDeMKV /root/nipe-scripts/esdmkv
 ln -s /root/nipe-scripts/debian09/Grupos /root/nipe-scripts/g
-ln -s /root/nipe-scripts/debian09/HardwareInfoGráfica /root/nipe-scripts/hig
+ln -s /root/nipe-scripts/debian09/HardwareInfo /root/nipe-scripts/hi
+ln -s /root/nipe-scripts/debian09/HardwareInfoGráfica /root/nipe-scripts/higraf
+ln -s /root/nipe-scripts/debian09/HardwareInfoProcesador /root/nipe-scripts/hiproc
 ln -s /root/nipe-scripts/debian09/HardwareInfoRAM /root/nipe-scripts/hiram
-ln -s /root/nipe-scripts/debian09/HardwareInfoRed /root/nipe-scripts/hir
+ln -s /root/nipe-scripts/debian09/HardwareInfoRed /root/nipe-scripts/hired
 ln -s /root/nipe-scripts/debian09/ImportarBaseDeDatos /root/nipe-scripts/ibdd
 ln -s /root/nipe-scripts/debian09/IMPrimir /root/nipe-scripts/imp
 ln -s /root/nipe-scripts/debian09/IMPrimirArchivo /root/nipe-scripts/impa
