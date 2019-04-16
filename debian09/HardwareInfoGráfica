@@ -11,8 +11,11 @@
 #  Script de NiPeGun para mostrar información sobre la tarjeta gráfica
 #-----------------------------------------------------------------------
 
+ColorNotificacion="\033[1;32m"
+FinColor="\033[0m"
+
 echo ""
-echo "Mostrando información sobre la tarjeta gráfica..."
+echo -e "${ColorNotificacion}Mostrando información sobre la tarjeta gráfica...${FinColor}"
 echo ""
 lspci -knn | grep -EA2 'VGA|3D'
 echo ""
