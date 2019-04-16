@@ -12,6 +12,8 @@
 #----------------------------------------------------------------
 
 echo ""
+echo "Mostrando información sobre el hardware..."
+echo ""
 lshw
 echo ""
 
