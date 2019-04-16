@@ -12,6 +12,8 @@
 #-----------------------------------------------------------------------
 
 echo ""
+echo "Mostrando información sobre la tarjeta gráfica..."
+echo ""
 lspci -knn | grep -EA2 'VGA|3D'
 echo ""
 
