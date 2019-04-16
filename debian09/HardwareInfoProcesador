@@ -12,6 +12,8 @@
 #-------------------------------------------------------------------------
 
 echo ""
+echo "Mostrando información sobre el procesador..."
+echo ""
 echo "Cantidad de núcleos de proceso disponibles en el sistema:"
 echo ""
 grep -c processor /proc/cpuinfo
