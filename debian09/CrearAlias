@@ -51,6 +51,7 @@ ln -s /root/nipe-scripts/debian09/EditarHOSTAPD /root/nipe-scripts/ehostapd
 ln -s /root/nipe-scripts/debian09/EditarPCIPASSTHROUGH //root/nipe-scripts/epcipassthrough
 ln -s /root/nipe-scripts/debian09/EditarSAMBA /root/nipe-scripts/esamba
 ln -s /root/nipe-scripts/debian09/EditarTRANSMISSION /root/nipe-scripts/etransmission
+ln -s /root/nipe-scripts/debian09/EjecutarComo /root/nipe-scripts/ec
 ln -s /root/nipe-scripts/debian09/EnviarMailA /root/nipe-scripts/ema
 ln -s /root/nipe-scripts/debian09/ExportarBaseDeDatos /root/nipe-scripts/ebdd
 ln -s /root/nipe-scripts/debian09/ExtraerSubtítuloDeMKV /root/nipe-scripts/esdmkv
