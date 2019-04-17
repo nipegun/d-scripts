@@ -21,7 +21,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "  Mal uso del script."
     echo ""
     echo "  El uso correcto sería:"
-    echo "  $0 [Usuario] [Comando]"
+    echo '  $0 [Usuario] ["Comando"]'
     echo ""
     echo "  Ejemplo:"
     echo "  $0 nico ls -n ~"
