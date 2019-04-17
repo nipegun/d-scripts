@@ -7,10 +7,9 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------
-#  Script de NiPeGun para instalar eMule como demonio en Debian 9
-#  aceptando distintas configuraciones
-#------------------------------------------------------------------
+#----------------------------------------------------------------
+#  Script de NiPeGun para ejecutar un comando como otro usuario
+#----------------------------------------------------------------
 
 EXPECTED_ARGS=4
 E_BADARGS=65
