@@ -29,6 +29,6 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo ""
     exit $E_BADARGS
   else
-    runuser -l $1 -c '$2'
+    runuser -l $1 -c "$2"
 fi
 
