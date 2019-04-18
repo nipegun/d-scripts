@@ -33,6 +33,7 @@ ln -s /root/nipe-scripts/debian09/BorrarArchivosPuntoGuiónBajo /root/nipe-scrip
 ln -s /root/nipe-scripts/debian09/BorrarArchivosZoneIdentifier /root/nipe-scripts/bazi
 ln -s /root/nipe-scripts/debian09/BorrarKernelsViejos /root/nipe-scripts/bkv
 ln -s /root/nipe-scripts/debian09/BorrarTAGsMP3 /root/nipe-scripts/btagmp3
+ln -s /root/nipe-scripts/debian09/BorrarUsuarioYHome /root/nipe-scripts/buyh
 ln -s /root/nipe-scripts/debian09/BuscarArchivoEnElSistema /root/nipe-scripts/baees
 ln -s /root/nipe-scripts/debian09/BuscarCarpetaEnElSistema /root/nipe-scripts/bcees
 ln -s /root/nipe-scripts/debian09/BuscarMódulosCargables /root/nipe-scripts/bmc
