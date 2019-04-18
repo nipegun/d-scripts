@@ -53,6 +53,9 @@ service amule-daemon start
 #echo ""
 #usermod -a -G debian-amule debian-amule
 
+#bajar el IPFilter desde aqui:
+#https://89f8c187-a-62cb3a1a-s-sites.googlegroups.com/site/ircemulespanish/descargas-2/ipfilter.zip
+
 echo ""
 echo "--------------------------------------------------------------"
 echo "  El demonio amule ha sido instalado, configurado e inciado."
