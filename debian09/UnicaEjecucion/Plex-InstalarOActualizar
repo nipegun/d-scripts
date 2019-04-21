@@ -25,35 +25,124 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
 
         1)
           echo ""
-          echo "-------------------------------------------------------------"
-          echo "  INSTALANDO PLEX MEDIA SERVER PARA ARQUITECTURA DE 32 BITS"
-          echo "-------------------------------------------------------------"
+          echo "Instalando Plex para arquitectura x86 de 32 bits..."
           echo ""
           mkdir /root/paquetes
-          mkdir /root/paquetes/plex
+          mkdir /root/paquetes/plex 
           cd /root/paquetes/plex
-          rm -f /root/paquetes/plex/plex32.deb
-          wget http://hacks4geeks.com/_/premium/descargas/debian/root/paquetes/plex/plex32.deb
+          rm -f /root/paquetes/plex/plex32x86.deb
+
+          echo ""
+          echo "Descargando el paquete de instalación..."
+          echo ""
+          wget http://hacks4geeks.com/_/premium/descargas/debian/root/paquetes/plex/plex32x86.deb
+
+          echo ""
+          echo "Deteniendo el servicio plexmediaserver (si es que está activo)..."
+          echo ""
           service plexmediaserver stop
-          dpkg -i /root/paquetes/plex/plex32.deb
+
+          echo ""
+          echo ""
+          echo ""
+          dpkg -i /root/paquetes/plex/plex32x86.deb
+          
+          echo ""
+          echo "Arrancando el servicio plexmediaserver..."
+          echo ""
           service plexmediaserver start
         ;;
 
         2)
           echo ""
-          echo "-------------------------------------------------------------"
-          echo "  INSTALANDO PLEX MEDIA SERVER PARA ARQUITECTURA DE 64 BITS"
-          echo "-------------------------------------------------------------"
+          echo "Instalando Plex para arquitectura x86 de 64 bits..."
           echo ""
           mkdir /root/paquetes
           mkdir /root/paquetes/plex 
           cd /root/paquetes/plex
-          rm -f /root/paquetes/plex/plex64.deb
-          wget http://hacks4geeks.com/_/premium/descargas/debian/root/paquetes/plex/plex64.deb
+          rm -f /root/paquetes/plex/plex64x86.deb
+
+          echo ""
+          echo "Descargando el paquete de instalación..."
+          echo ""
+          wget http://hacks4geeks.com/_/premium/descargas/debian/root/paquetes/plex/plex64x86.deb
+
+          echo ""
+          echo "Deteniendo el servicio plexmediaserver (si es que está activo)..."
+          echo ""
           service plexmediaserver stop
-          dpkg -i /root/paquetes/plex/plex64.deb
+
+          echo ""
+          echo ""
+          echo ""
+          dpkg -i /root/paquetes/plex/plex64x86.deb
+          
+          echo ""
+          echo "Arrancando el servicio plexmediaserver..."
+          echo ""
           service plexmediaserver start
         ;;
+
+        3)
+          echo ""
+          echo "Instalando Plex para arquitectura ARMv7..."
+          echo ""
+          mkdir /root/paquetes
+          mkdir /root/paquetes/plex 
+          cd /root/paquetes/plex
+          rm -f /root/paquetes/plex/plexARMv7.deb
+
+          echo ""
+          echo "Descargando el paquete de instalación..."
+          echo ""
+          wget http://hacks4geeks.com/_/premium/descargas/debian/root/paquetes/plex/plexARMv7.deb
+
+          echo ""
+          echo "Deteniendo el servicio plexmediaserver (si es que está activo)..."
+          echo ""
+          service plexmediaserver stop
+
+          echo ""
+          echo ""
+          echo ""
+          dpkg -i /root/paquetes/plex/plexARMv7.deb
+          
+          echo ""
+          echo "Arrancando el servicio plexmediaserver..."
+          echo ""
+          service plexmediaserver start
+        ;;
+
+        4)
+          echo ""
+          echo "Instalando Plex para arquitectura ARMv8..."
+          echo ""
+          mkdir /root/paquetes
+          mkdir /root/paquetes/plex 
+          cd /root/paquetes/plex
+          rm -f /root/paquetes/plex/plexARMv8.deb
+
+          echo ""
+          echo "Descargando el paquete de instalación..."
+          echo ""
+          wget http://hacks4geeks.com/_/premium/descargas/debian/root/paquetes/plex/plexARMv8.deb
+
+          echo ""
+          echo "Deteniendo el servicio plexmediaserver (si es que está activo)..."
+          echo ""
+          service plexmediaserver stop
+
+          echo ""
+          echo ""
+          echo ""
+          dpkg -i /root/paquetes/plex/plexARMv8.deb
+          
+          echo ""
+          echo "Arrancando el servicio plexmediaserver..."
+          echo ""
+          service plexmediaserver start
+        ;;
+
 
       esac
 
