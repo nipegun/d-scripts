@@ -7,28 +7,27 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA EDITAR LA CONFIGURACIÓN DEL DEMONIO DHCPD
-#--------------------------------------------------------------------
+#----------------------------------------------------------------------
+#  Script de NiPeGun para editar la configuración del demonio hostapd
+#----------------------------------------------------------------------
 
 echo ""
-echo "-------------------------------------"
-echo "  DETENIENDO EL SERVICIO HOSTAPD..."
-echo "-------------------------------------"
+echo "  Deteniendo el servicio hostapd..."
 echo ""
 service hostapd stop
 
 echo ""
-echo "-------------------------------------------"
-echo "  EDITANDO EL ARCHIVO DE CONFIGURACIÓN..."
-echo "-------------------------------------------"
+echo "  Editando el archivo de configuración..."
 echo ""
 nano /etc/hostapd/hostapd.conf
 
 echo ""
-echo "----------------------------------------------"
-echo "  VOLVIENDO A INICIAR EL SERVICIO HOSTAPD..."
-echo "----------------------------------------------"
+echo "  Volviendo a iniciar el servicio hostapd..."
 echo ""
 service hostapd start
+
+echo ""
+echo "  Mostrando el estado del servicio hostapd..."
+echo ""
+service hostapd status
 
