@@ -29,5 +29,6 @@ service hostapd start
 echo ""
 echo "  Mostrando el estado del servicio hostapd..."
 echo ""
+sleep 5
 service hostapd status
 
