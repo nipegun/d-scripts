@@ -31,10 +31,11 @@ echo 'echo "-------------------------"' >> /root/RepararPermisos
 echo 'echo "  Reparando permisos..."' >> /root/RepararPermisos
 echo 'echo "-------------------------"' >> /root/RepararPermisos
 echo 'echo ""' >> /root/RepararPermisos
-echo 'echo "  Reparando permisos web..."' >> /root/RepararPermisos
+echo 'echo "Reparando permisos web..."' >> /root/RepararPermisos
 echo 'echo ""' >> /root/RepararPermisos
 echo "chown -R www-data:www-data /var/www" >> /root/RepararPermisos
 echo "find /var/www -type d -exec chmod 755 {} \;" >> /root/RepararPermisos
 echo "find /var/www -type f -exec chmod 644 {} \;" >> /root/RepararPermisos
+echo "chown root:root /var/www # Necesario para enjaular las cuentas" >> /root/RepararPermisos
 chmod 700 /root/RepararPermisos
 
