@@ -11,7 +11,7 @@
 #  Script de NiPeGun para hacer una copia de seguridad de una web específica
 #-----------------------------------------------------------------------------
 
-CantArgsEsperados=1
+CantArgsEsperados=5
 ArgsInsuficientes=65
 
 ColorAdvertencia='\033[1;31m'
@@ -24,7 +24,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo "------------------------------------------------------------------------------"
     echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo -e "$0 ${ColorArgumentos}[NombreDeLaWebEnApache][NombreDeLaBaseDeDatos]${FinColor}"
+    echo -e "$0 ${ColorArgumentos}[NombreDeLaWebEnApache] [UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
     echo ""
     echo "Ejemplo:"
     echo ' $0 pepe.org pepe'
@@ -35,10 +35,11 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     echo -e "${ColorArgumentos}Ejecutando la copia de seguridad...${FinColor}"
     echo ""
-    mkdir -p /CopSeg/$1/etc/apache2/sites-enabled/
-    cp /etc/apache2/sites-enabled/$1.conf /CopSeg/$1/etc/apache2/sites-enabled/
-    cp /etc/apache2/sites-enabled/$1-le-ssl.conf /CopSeg/$1/etc/apache2/sites-enabled/
-    mkdir -p /CopSeg/$1/var/www/$1/
-    cp -R /var/www/$1/* /CopSeg/$1/var/www/$1/
+    #mkdir -p /CopSeg/$1/etc/apache2/sites-enabled/
+    #cp /etc/apache2/sites-enabled/$1.conf /CopSeg/$1/etc/apache2/sites-enabled/
+    #cp /etc/apache2/sites-enabled/$1-le-ssl.conf /CopSeg/$1/etc/apache2/sites-enabled/
+    #mkdir -p /CopSeg/$1/var/www/$1/
+    #cp -R /var/www/$1/* /CopSeg/$1/var/www/$1/
+    /root/nipe-scripts/debian09/ExportarBaseDeDatos $2 $3 $4 /CopSeg/$1/BaseDeDatos.sql
 fi
 
