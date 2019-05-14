@@ -11,7 +11,7 @@
 #  Script de NiPeGun para hacer una copia de seguridad de una web específica
 #-----------------------------------------------------------------------------
 
-CantArgsEsperados=5
+CantArgsEsperados=4
 ArgsInsuficientes=65
 
 ColorAdvertencia='\033[1;31m'
@@ -24,7 +24,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo "------------------------------------------------------------------------------"
     echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo -e "$0 ${ColorArgumentos}[NombreDeLaWebEnApache] [UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
+    echo -e "$0 ${ColorArgumentos}[NombreDeLaWebEnApache] [UsuarioBD] [PasswordBD] [NombreBD]${FinColor}"
     echo ""
     echo "Ejemplo:"
     echo ' $0 pepe.org pepe'
