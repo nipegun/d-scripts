@@ -91,7 +91,7 @@ ln -s /root/nipe-scripts/debian09/ReiniciarSistemaOperativo                 /roo
 ln -s /root/nipe-scripts/debian09/RepararPermisosVarWWW                     /root/nipe-scripts/rpvwww
 ln -s /root/nipe-scripts/debian09/RetenerKernels                            /root/nipe-scripts/rk
 ln -s /root/nipe-scripts/debian09/RPMDeDisco                                /root/nipe-scripts/rpmdd
-ln -s /root/nipe-scripts/debian09/ServiciosEnEjecución                      /root/nipe-scripts/see
+ln -s /root/nipe-scripts/debian09/ServiciosEnEJecución                      /root/nipe-scripts/seej
 ln -s /root/nipe-scripts/debian09/SINcronizarNiPeScripts                    /root/nipe-scripts/sinnps
 ln -s /root/nipe-scripts/debian09/TelegramIT                                /root/nipe-scripts/tit
 ln -s /root/nipe-scripts/debian09/TRIM                                      /root/nipe-scripts/trim
