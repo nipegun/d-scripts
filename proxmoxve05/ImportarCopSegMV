@@ -29,11 +29,11 @@ if [ $# -ne $CantArgsEsperados ]
     echo "Ejemplo:"
     echo "$0 windowsxp.vma.gz"
     echo ""
-    echo "------------------------------------------------------------------------------"
-    echo ""
     echo "Tienes disponibles las siguientes copias de seguridad:"
     echo ""
-    ls -n /var/lib/vz/dump/
+    ls /var/lib/vz/dump/
+    echo ""
+    echo "------------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
   else
