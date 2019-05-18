@@ -27,7 +27,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo -e "$0 ${ColorArgumentos}[NombreCompletoDelArchivo] [IDDeLaMV]${FinColor}"
     echo ""
     echo "Ejemplo:"
-    echo " $0 windowsxp.vma.gz"
+    echo "$0 windowsxp.vma.gz"
     echo ""
     echo "------------------------------------------------------------------------------"
     echo ""
