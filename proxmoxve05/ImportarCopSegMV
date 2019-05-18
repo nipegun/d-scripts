@@ -31,6 +31,10 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     echo "------------------------------------------------------------------------------"
     echo ""
+    echo "Tienes disponibles las siguientes copias de seguridad:"
+    echo ""
+    ls -n /var/lib/vz/dump/
+    echo ""
     exit $ArgsInsuficientes
   else
     echo ""
