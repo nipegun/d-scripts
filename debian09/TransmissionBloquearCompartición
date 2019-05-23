@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#----------------------------------------------------------------------------------------
+#  Script de NiPeGun para bloquear la compartición que quiera hacer transmission-daemon
+#----------------------------------------------------------------------------------------
+
+echo ""
+echo "Bloqueando la comnpartición de archivos que quiera hacer transmission-daemon..."
+echo ""
+
+iptables -F OUTPUT
+
+iptables -A OUTPUT -p udp --sport 51413 -j LOG --log-prefix 'Descartado Torrent OUT UDP '
+iptables -A OUTPUT -p udp --sport 51413 -j DROP
+
+iptables -A OUTPUT -p tcp --sport 51413 -j LOG --log-prefix 'Descartado Torrent OUT TCP '
+iptables -A OUTPUT -p tcp --sport 51413 -j DROP
+
+echo "" > /etc/rsyslog.d/torrentout.conf
+echo ':msg, startswith, ”Descartado” /var/log/TorrentOUT.log' >> /etc/rsyslog.d/torrentout.conf
+echo "&~" >> /etc/rsyslog.d/torrentout.conf
+
+rm /var/log/TorrentOUT.log
+
+service rsyslog restart
+
+iptables --list
+
