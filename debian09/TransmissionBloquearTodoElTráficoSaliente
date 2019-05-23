@@ -18,11 +18,11 @@ echo ""
 iptables -F OUTPUT
 
 idu=$(id -u debian-transmission)
-iptables -A OUTPUT -m owner --uid-owner $idu -j LOG --log-prefix 'Descartado OUT uid debian-transmission '
+iptables -A OUTPUT -m owner --uid-owner $idu -j LOG --log-prefix 'Descartado OUT por UID '
 iptables -A OUTPUT -m owner --uid-owner $idu -j DROP
 
 idg=$(id -g debian-transmission)
-iptables -A OUTPUT -m owner --gid-owner $idg -j LOG --log-prefix 'Descartado OUT gid debian-transmission '
+iptables -A OUTPUT -m owner --gid-owner $idg -j LOG --log-prefix 'Descartado OUT por GID '
 iptables -A OUTPUT -m owner --gid-owner $idg -j DROP
 
 echo "" > /etc/rsyslog.d/transmissionout.conf
