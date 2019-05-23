@@ -14,16 +14,15 @@
 echo ""
 echo "Bloqueando todo el tráfico saliente de transmission-daemon..."
 echo ""
-
-iptables -F OUTPUT
-
 idu=$(id -u debian-transmission)
+iptables -A OUTPUT -m owner --uid-owner $idu -p tcp --sport 9091 -j ACCEPT
 iptables -A OUTPUT -m owner --uid-owner $idu -j LOG --log-prefix 'Descartado OUT por UID '
 iptables -A OUTPUT -m owner --uid-owner $idu -j DROP
 
-idg=$(id -g debian-transmission)
-iptables -A OUTPUT -m owner --gid-owner $idg -j LOG --log-prefix 'Descartado OUT por GID '
-iptables -A OUTPUT -m owner --gid-owner $idg -j DROP
+# No debería ser necesario bloquear por id de grupo, pero aquí lo dejo por las dudas
+#idg=$(id -g debian-transmission)
+#iptables -A OUTPUT -m owner --gid-owner $idg -j LOG --log-prefix 'Descartado OUT por GID '
+#iptables -A OUTPUT -m owner --gid-owner $idg -j DROP
 
 echo "" > /etc/rsyslog.d/transmissionout.conf
 echo ':msg, startswith, ”Descartado” /var/log/TransmissionOut.log' >> /etc/rsyslog.d/transmissionout.conf
