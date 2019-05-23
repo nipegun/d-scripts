@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#-----------------------------------------------------------------------------------
+#  Script de NiPeGun para bloquear todo el tráfico saliente de transmission-daemon
+#-----------------------------------------------------------------------------------
+
+echo ""
+echo "Bloqueando todo el tráfico saliente de transmission-daemon..."
+echo ""
+
+iptables -F OUTPUT
+
+idu=$(id -u debian-transmission)
+iptables -A OUTPUT --uid-owner $idu -j LOG --log-prefix 'Descartado Torrent OUT UDP '
+iptables -A OUTPUT --uid-owner $idu -j DROP
+
+idg=$(id -g debian-transmission)
+iptables -A OUTPUT --gid-owner $idg -J LOG --log-prefix 'Descartado Torrent OUT UDP '
+iptables -A OUTPUT --gid-owner $idg -j DROP
+
+echo "" > /etc/rsyslog.d/transmissionout.conf
+echo ':msg, startswith, ”Descartado” /var/log/TorrentOUT.log' >> /etc/rsyslog.d/transmissionout.conf
+echo "&~" >> /etc/rsyslog.d/transmissionout.conf
+rm /var/log/TransmissionOut.log
+service rsyslog restart
+iptables --list
+
