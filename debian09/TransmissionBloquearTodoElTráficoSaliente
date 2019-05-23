@@ -18,12 +18,12 @@ echo ""
 iptables -F OUTPUT
 
 idu=$(id -u debian-transmission)
-iptables -A OUTPUT --uid-owner $idu -j LOG --log-prefix 'Descartado Torrent OUT UDP '
-iptables -A OUTPUT --uid-owner $idu -j DROP
+iptables -A OUTPUT -m owner --uid-owner $idu -j LOG --log-prefix 'Descartado Torrent OUT UDP '
+iptables -A OUTPUT -m owner --uid-owner $idu -j DROP
 
 idg=$(id -g debian-transmission)
-iptables -A OUTPUT --gid-owner $idg -J LOG --log-prefix 'Descartado Torrent OUT UDP '
-iptables -A OUTPUT --gid-owner $idg -j DROP
+iptables -A OUTPUT -m owner --gid-owner $idg -J LOG --log-prefix 'Descartado Torrent OUT UDP '
+iptables -A OUTPUT -m owner --gid-owner $idg -j DROP
 
 echo "" > /etc/rsyslog.d/transmissionout.conf
 echo ':msg, startswith, ”Descartado” /var/log/TorrentOUT.log' >> /etc/rsyslog.d/transmissionout.conf
