@@ -15,8 +15,6 @@ echo ""
 echo "Bloqueando la comnpartición de archivos que quiera hacer transmission-daemon..."
 echo ""
 
-iptables -F OUTPUT
-
 iptables -A OUTPUT -p udp --sport 51413 -j LOG --log-prefix 'Descartado Torrent OUT UDP '
 iptables -A OUTPUT -p udp --sport 51413 -j DROP
 
