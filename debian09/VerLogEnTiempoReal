@@ -14,17 +14,17 @@
 CantArgsEsperados=1
 ArgsInsuficientes=65
 
-ColorAdvertencia='\033[1;31m'
-ColorArgumentos='\033[1;32m'
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
     echo "------------------------------------------------------------------------------"
-    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo -e "$0 ${ColorArgumentos}[UbicaciónDelArchivoDeLog]${FinColor}"
+    echo -e "$0 ${ColorVerde}[UbicaciónDelArchivoDeLog]${FinColor}"
     echo ""
     echo "Ejemplo:"
     echo ' $0 /var/logs/apache.log'
@@ -33,7 +33,7 @@ if [ $# -ne $CantArgsEsperados ]
     exit $ArgsInsuficientes
   else
     echo ""
-    echo "Mostrando el archivo $1 en tiempo real, según se va modificando ..."
+    echo -e "${ColorVerde}Mostrando el archivo $1 en tiempo real, según se va modificando ...${FinColor}"
     echo ""
     tailf $1
 fi
