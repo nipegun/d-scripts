@@ -15,10 +15,10 @@ echo ""
 echo "Bloqueando la comnpartición de archivos que quiera hacer transmission-daemon..."
 echo ""
 
-iptables -A OUTPUT -p udp --sport 51413 -j LOG --log-prefix 'Descartado Torrent OUT UDP '
+iptables -A OUTPUT -p udp --sport 51413 -j LOG --log-prefix 'Descartado 51413 OUT UDP '
 iptables -A OUTPUT -p udp --sport 51413 -j DROP
 
-iptables -A OUTPUT -p tcp --sport 51413 -j LOG --log-prefix 'Descartado Torrent OUT TCP '
+iptables -A OUTPUT -p tcp --sport 51413 -j LOG --log-prefix 'Descartado 51413 OUT TCP '
 iptables -A OUTPUT -p tcp --sport 51413 -j DROP
 
 echo "" > /etc/rsyslog.d/transmissionout.conf
