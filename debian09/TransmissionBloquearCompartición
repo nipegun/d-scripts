@@ -21,11 +21,11 @@ iptables -A OUTPUT -p udp --sport 51413 -j DROP
 iptables -A OUTPUT -p tcp --sport 51413 -j LOG --log-prefix 'Descartado Torrent OUT TCP '
 iptables -A OUTPUT -p tcp --sport 51413 -j DROP
 
-echo "" > /etc/rsyslog.d/torrentout.conf
-echo ':msg, startswith, ”Descartado” /var/log/TorrentOUT.log' >> /etc/rsyslog.d/torrentout.conf
-echo "&~" >> /etc/rsyslog.d/torrentout.conf
+echo "" > /etc/rsyslog.d/transmissionout.conf
+echo ':msg, startswith, ”Descartado” /var/log/TransmissionOut.log' >> /etc/rsyslog.d/transmissionout.conf
+echo "&~" >> /etc/rsyslog.d/transmissionout.conf
 
-rm /var/log/TorrentOUT.log
+rm /var/log/TransmissionOut.log
 
 service rsyslog restart
 
