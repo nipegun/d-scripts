@@ -12,7 +12,7 @@
 #----------------------------------------------------------------------------------------
 
 echo ""
-echo "Bloqueando la comnpartición de archivos que quiera hacer transmission-daemon..."
+echo "Bloqueando la compartición de archivos que quiera hacer transmission-daemon..."
 echo ""
 
 iptables -A OUTPUT -p udp --sport 51413 -j LOG --log-prefix 'Descartado 51413 OUT UDP '
