@@ -100,6 +100,7 @@ ln -s /root/nipe-scripts/debian09/UsuarioNuevoSinShell                      /roo
 ln -s /root/nipe-scripts/debian09/Usuarios                                  /root/nipe-scripts/u
 ln -s /root/nipe-scripts/debian09/VelocidadDeDiscoDeSistema                 /root/nipe-scripts/vddds
 ln -s /root/nipe-scripts/debian09/VerEstadoDeServicio                       /root/nipe-scripts/veds
+ln -s /root/nipe-scripts/debian09/VerLogEnTiempoReal                        /root/nipe-scripts/vletr
 ln -s /root/nipe-scripts/debian09/WinDir                                    /root/nipe-scripts/wd
 
 ln -s /root/nipe-scripts/debian09/router/EditarDHCP /root/nipe-scripts/edhcp
