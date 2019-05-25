@@ -27,7 +27,10 @@ iptables -A OUTPUT -m owner --uid-owner $idu -j DROP
 echo "" > /etc/rsyslog.d/transmissionout.conf
 echo ':msg, startswith, ”Descartado” /var/log/TransmissionOut.log' >> /etc/rsyslog.d/transmissionout.conf
 echo "&~" >> /etc/rsyslog.d/transmissionout.conf
+
 rm /var/log/TransmissionOut.log
+
 service rsyslog restart
+
 iptables --list
 
