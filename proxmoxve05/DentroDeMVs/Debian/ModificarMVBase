@@ -38,28 +38,30 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     echo "Cambiando el nombre de la MV a $1"
     echo ""
-    find /bin        -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /boot       -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /dev        -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /etc        -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /home       -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /lib        -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /lib64      -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /lost+found -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /media      -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /mnt        -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /opt        -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /root       -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /run        -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /sbin       -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /srv        -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /tmp        -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /usr        -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
-    find /var        -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
+    find /bin        -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /boot       -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /dev        -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /etc        -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /home       -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /lib        -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /lib64      -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /lost+found -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /media      -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /mnt        -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /opt        -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /root       -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /run        -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /sbin       -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /srv        -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /tmp        -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /usr        -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    find /var        -type f -exec sed -i -e "s|DebianBase|$1|g" {} \;
+    
     echo ""
     echo "Poniendo todos los logs a cero..."
     echo ""
     find /var/log/   -type f -exec truncate -s 0 {} \;
+    
     echo ""
     echo "Cambiando el nombre y la carpeta del usuario no root..."
     echo ""
