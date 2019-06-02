@@ -68,6 +68,7 @@ if [ $# -ne $CantArgsEsperados ]
     usermod -l $2 usuario
     usermod -d /home/$2 -m $2
     groupmod -n $2 usuario
+    echo -e "$2\n$2" | passwd $2
     echo ""
     echo "Nuevo nombre: $2"
     echo "Nuevo password: $2"
