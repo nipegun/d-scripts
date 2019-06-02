@@ -11,7 +11,7 @@
 #  Script de NiPeGun para modificr una MV Base para adaptarla a una nueva MV Clonada
 #-------------------------------------------------------------------------------------
 
-CantArgsEsperados=1
+CantArgsEsperados=2
 ArgsInsuficientes=65
 
 ColorRojo='\033[1;31m'
