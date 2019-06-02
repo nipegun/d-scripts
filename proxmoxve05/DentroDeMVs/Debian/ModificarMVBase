@@ -61,7 +61,7 @@ if [ $# -ne $CantArgsEsperados ]
     find /tmp        -type f -print -exec sed -i -e "s|DebianBase|$1|g" {} \;
     find /usr        -type f -print -exec sed -i -e "s|DebianBase|$1|g" {} \;
     find /var        -type f -print -exec sed -i -e "s|DebianBase|$1|g" {} \;
-    
+
     echo ""
     echo -e "${ColorVerde}Cambiando el nombre y la carpeta del usuario no root...${FinColor}"
     echo ""
@@ -72,10 +72,10 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     echo -e "Nuevo nombre: ${ColorVerde}$2${FinColor}"
     echo -e "Nuevo password: ${ColorVerde}$2${FinColor}"
-    
+
     echo ""
     echo -e "${ColorVerde}Reconfigurando las interfaces de red...${FinColor}"
-    echo ""    
+    echo ""
     echo "auto lo" > /etc/network/interfaces
     echo "  iface lo inet loopback" >> /etc/network/interfaces
     echo "" >> /etc/network/interfaces
@@ -83,7 +83,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo "  allow-hotplug eth0" >> /etc/network/interfaces
     echo "  iface eth0 inet dhcp" >> /etc/network/interfaces
     echo "" >> /etc/network/interfaces
-    
+
     echo ""
     echo -e "${ColorVerde}Reseteando SSH...${FinColor}"
     echo ""
