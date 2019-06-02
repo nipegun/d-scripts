@@ -1,0 +1,98 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#----------------------------------------------------------------
+#  Script de NiPeGun para instalar y configurar el servidor VPN
+#----------------------------------------------------------------
+
+CantArgsEsperados=3
+ArgsInsuficientes=65
+
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
+
+if [ $# -ne $CantArgsEsperados ]
+  then
+    echo ""
+    echo "------------------------------------------------------------------------------"
+    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo ""
+    echo -e "  $0${ColorVerde}[NombreDelUsuario]${FinColor}"
+    echo ""
+    echo "Ejemplo:"
+    echo "  $0 pepe"
+    echo "------------------------------------------------------------------------------"
+    echo ""
+    exit $ArgsInsuficientes
+  else
+    apt-get update
+    apt-get -y install strongswan libcharon-extra-plugins
+    apt-get -y install build-essential gcc make git
+    mkdir /root/git/
+    cd /root/git/
+    git clone https://github.com/letsencrypt/letsencrypt
+    cd /root/git/letsencrypt
+    iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+    service apache2 stop
+    /root/git/letsencrypt/letsencrypt-auto certonly --standalone
+    cp /etc/letsencrypt/live/ejemplodedominio.com/fullchain.pem /etc/ipsec.d/certs/
+    cp /etc/letsencrypt/live/ejemplodedominio.com/privkey.pem /etc/ipsec.d/private/
+ 	
+    ipsec listall
+
+    echo "" > /etc/ipsec.conf
+    echo "config setup" >> /etc/ipsec.conf
+    echo ""
+    echo "conn %default" >> /etc/ipsec.conf
+    echo "    keyexchange=ikev2" >> /etc/ipsec.conf
+    echo "    auto=add" >> /etc/ipsec.conf
+    echo ""
+    echo "    # LADO DEL SERVIDOR" >> /etc/ipsec.conf
+    echo "    leftid=dominioejemplo.com" >> /etc/ipsec.conf
+    echo "    leftcert=fullchain.pem # Nombre del certificado ubicado en /etc/ipsec.d/certs/" >> /etc/ipsec.conf
+    echo "    leftsubnet=0.0.0.0/0  # Routes pushed to clients." >> /etc/ipsec.conf
+    echo "    leftsendcert=always" >> /etc/ipsec.conf
+    echo ""
+    echo "    # LADO DEL CLIENTE" >> /etc/ipsec.conf
+    echo "    right=%any" >> /etc/ipsec.conf
+    echo "    rightsourceip=10.11.12.0/24 # Subnet asignada a los clientes" >> /etc/ipsec.conf
+    echo "    rightdns=1.1.1.1" >> /etc/ipsec.conf
+    echo "    dpdaction=clear" >> /etc/ipsec.conf
+    echo "    eap_identity=%identity" >> /etc/ipsec.conf
+    echo ""
+    echo "# CLIENTES" >> /etc/ipsec.conf
+    echo "conn ikev2-mschapv2" >> /etc/ipsec.conf
+    echo "    rightauth=eap-mschapv2" >> /etc/ipsec.conf
+    echo "" >> /etc/ipsec.conf
+
+    echo ": RSA privkey.pem" /etc/ipsec.secrets
+    echo 'usuario1 : EAP "clave"' /etc/ipsec.secrets
+    ipsec rereadsecrets
+
+    sed -i -e 's|# net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
+
+    echo "iptables -A INPUT -p udp --dport 500 -j ACCEPT" >> /root/ComandosIPTables
+    echo "iptables -A INPUT -p udp --dport 4500 -j ACCEPT" >> /root/ComandosIPTables
+    echo "iptables -A INPUT -p 50 -j ACCEPT" >> /root/ComandosIPTables
+    echo "iptables -A INPUT -p 51 -j ACCEPT" >> /root/ComandosIPTables
+    echo "iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> /root/ComandosIPTables
+
+    echo ""
+    echo "Activando el servicio strongswan..."
+    echo ""
+    systemctl enable strongswan
+
+    echo ""
+    echo "Reiniciando el sistema..."
+    echo ""
+    shutdown -r now
+
+fi
+
