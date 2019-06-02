@@ -82,13 +82,13 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     echo -e "${ColorVerde}Reseteando SSH...${FinColor}"
     echo ""
-    rm -v /etc/ssh/ssh_host_*
+    rm /etc/ssh/ssh_host_*
     dpkg-reconfigure openssh-server
 
     echo ""
     echo -e "${ColorVerde}Poniendo todos los logs a cero...${FinColor}"
     echo ""
-    find /var/log/   -type f -exec truncate -s 0 {} \;
+    find /var/log/ -type f -exec truncate -s 0 {} \;
 
     echo ""
     echo -e "${ColorVerde}Reiniciando el sistema...${FinColor}"
