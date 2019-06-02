@@ -89,7 +89,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     rm -v /etc/ssh/ssh_host_*
     dpkg-reconfigure openssh-server
-    
+
     echo ""
     echo -e "${ColorVerde}Reiniciando el sistema...${FinColor}"
     echo ""
