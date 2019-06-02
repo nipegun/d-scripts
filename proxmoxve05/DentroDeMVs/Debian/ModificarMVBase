@@ -91,6 +91,12 @@ if [ $# -ne $CantArgsEsperados ]
     find /var/log/ -type f -exec truncate -s 0 {} \;
 
     echo ""
+    echo -e "${ColorVerde}Borrando el historial de bash...${FinColor}"
+    echo ""
+    rm /root/.bash_history
+    rm /home/$2/.bash_history
+
+    echo ""
     echo -e "${ColorVerde}Reiniciando el sistema...${FinColor}"
     echo ""
     shutdown -r now
