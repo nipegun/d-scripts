@@ -11,7 +11,7 @@
 #  Script de NiPeGun para instalar y configurar el servidor VPN
 #----------------------------------------------------------------
 
-CantArgsEsperados=3
+CantArgsEsperados=1
 ArgsInsuficientes=65
 
 ColorRojo='\033[1;31m'
