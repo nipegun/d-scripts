@@ -80,6 +80,7 @@ if [ $# -ne $CantArgsEsperados ]
             echo "  rightdns=1.1.1.1,1.0.0.1" >> /etc/ipsec.conf
             echo "  rightsendcert=never" >> /etc/ipsec.conf
             echo "  eap_identity=%identity" >> /etc/ipsec.conf
+
             echo ""
             echo "Configurando los usuarios..."
             echo ""
@@ -90,11 +91,16 @@ if [ $# -ne $CantArgsEsperados ]
             echo "Su clave es: passwordprueba"
             echo ""
             echo "Si quieres agregar o modificar usuarios, modifica el archivo /etc/ipsec.secrets"
+            
             echo ""
+            echo "Re-leyendo los cambios hechos en los usuarios..."
+            ipsec rereadsecrets
+
             echo ""
             echo "Activando el forwarding..."
             echo ""
             sed -i -e 's|# net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
+
             echo ""
             echo "Creando los comandos para IPTables..."
             echo ""
@@ -103,6 +109,7 @@ if [ $# -ne $CantArgsEsperados ]
             echo "iptables -A INPUT -p 50 -j ACCEPT" >> /root/ComandosIPTables
             echo "iptables -A INPUT -p 51 -j ACCEPT" >> /root/ComandosIPTables
             echo "iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> /root/ComandosIPTables
+
             echo ""
             echo "Reiniciando StrongSwan..."
             echo ""
