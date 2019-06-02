@@ -29,7 +29,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo -e "$0 ${ColorVerde}[NombreDeLaNuevaMV] [NombreDelUsuarioNoRoot]${FinColor}"
     echo ""
     echo "Ejemplo:"
-    echo ' $0 debianpepe '
+    echo " $0 debianpepe pepe"
     echo "------------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
