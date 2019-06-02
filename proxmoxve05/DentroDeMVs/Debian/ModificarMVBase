@@ -36,7 +36,7 @@ if [ $# -ne $CantArgsEsperados ]
     exit $ArgsInsuficientes
   else
     echo ""
-    echo "Cambiando el nombre de la MV a $!"
+    echo "Cambiando el nombre de la MV a $1"
     echo ""
     find /bin        -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
     find /boot       -type f -exec sed -i -e "s|DebianBase|$2|g" {} \;
