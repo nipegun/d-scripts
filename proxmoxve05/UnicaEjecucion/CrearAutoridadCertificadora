@@ -24,4 +24,4 @@ sed -i -e 's|#set_var EASYRSA_REQ_OU         "My Organizational Unit"|set_var EA
 cd /root/EasyRSA/
 /root/EasyRSA/easyrsa init-pki
 /root/EasyRSA/easyrsa build-ca nopass
-
+mkdir /root/EasyRSA/imported/
