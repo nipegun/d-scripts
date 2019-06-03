@@ -106,18 +106,30 @@ if [ $# -ne $CantArgsEsperados ]
             ipsec rereadsecrets
 
             echo ""
-            echo -e "${ColorRojo}Activando el forwarding...${FinColor}"
+            echo -e "${ColorRojo}Modificando strongswan.conf para activar los logs...${FinColor}"
             echo ""
-            sed -i -e 's|#net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
-
-            echo ""
-            echo -e "${ColorRojo}Creando los comandos para IPTables...${FinColor}"
-            echo ""
-            echo "iptables -A INPUT -p udp --dport 500 -j ACCEPT" >> /root/ComandosIPTables
-            echo "iptables -A INPUT -p udp --dport 4500 -j ACCEPT" >> /root/ComandosIPTables
-            echo "iptables -A INPUT -p 50 -j ACCEPT" >> /root/ComandosIPTables
-            echo "iptables -A INPUT -p 51 -j ACCEPT" >> /root/ComandosIPTables
-            echo "iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> /root/ComandosIPTables
+            cp /etc/strongswan.conf /etc/strongswan.conf.bak
+            touch /var/log/StrongSwan.log
+            echo "charon {" > /etc/strongswan.conf
+            echo "" >> /etc/strongswan.conf
+            echo "  load_modular = yes" >> /etc/strongswan.conf
+            echo "" >> /etc/strongswan.conf
+            echo "  plugins {" >> /etc/strongswan.conf
+            echo "    include strongswan.d/charon/*.conf" >> /etc/strongswan.conf
+            echo "  }" >> /etc/strongswan.conf
+            echo "" >> /etc/strongswan.conf
+            echo "  filelog {" >> /etc/strongswan.conf
+            echo "    /var/log/StrongSwan.log {" >> /etc/strongswan.conf
+            echo "      time_format = %Y-%m-%dT%T%z" >> /etc/strongswan.conf
+            echo "      append = yes" >> /etc/strongswan.conf
+            echo "      default = 1" >> /etc/strongswan.conf
+            echo "      flush_line = yes" >> /etc/strongswan.conf
+            echo "    }" >> /etc/strongswan.conf
+            echo "  }" >> /etc/strongswan.conf
+            echo "" >> /etc/strongswan.conf
+            echo "}" >> /etc/strongswan.conf
+            echo "" >> /etc/strongswan.conf
+            echo "include strongswan.d/*.conf" >> /etc/strongswan.conf
 
             echo ""
             echo -e "${ColorRojo}Reiniciando StrongSwan...${FinColor}"
@@ -134,6 +146,24 @@ if [ $# -ne $CantArgsEsperados ]
             echo "Su contenido es:"
             cat /root/VPN/CertificadoVPN.pem
             echo ""
+            
+            echo ""
+            echo -e "${ColorRojo}Activando el forwarding...${FinColor}"
+            echo ""
+            sed -i -e 's|#net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
+
+            echo ""
+            echo -e "${ColorRojo}Creando los comandos para IPTables...${FinColor}"
+            echo ""
+            echo "iptables -A INPUT -p udp --dport 500 -j ACCEPT" >> /root/ComandosIPTables
+            echo "iptables -A INPUT -p udp --dport 4500 -j ACCEPT" >> /root/ComandosIPTables
+            echo "iptables -A INPUT -p 50 -j ACCEPT" >> /root/ComandosIPTables
+            echo "iptables -A INPUT -p 51 -j ACCEPT" >> /root/ComandosIPTables
+            echo "iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> /root/ComandosIPTables
+            
+
+            
+            
           ;;
 
           2)
