@@ -50,15 +50,15 @@ if [ $# -ne $CantArgsEsperados ]
             mkdir -p /root/pki/{cacerts,certs,private}
             chmod 700 /root/pki
             ipsec pki --gen --type rsa --size 4096 --outform pem > /root/pki/private/ca-key.pem
-            ipsec pki --self --ca --lifetime 3650 --in /root/pki/private/ca-key.pem --type rsa --dn "CN=VPN root CA" --outform pem > /root/pki/cacerts/ca-cert.pem
+            ipsec pki --self --ca --lifetime 3650 --in /root/pki/private/ca-key.pem --type rsa --dn "CN=StrongSwan" --outform pem > /root/pki/cacerts/ca-cert.pem
             ipsec pki --gen --type rsa --size 4096 --outform pem > /root/pki/private/server-key.pem
             ipsec pki --pub --in /root/pki/private/server-key.pem --type rsa | ipsec pki --issue --lifetime 1825 --cacert /root/pki/cacerts/ca-cert.pem --cakey /root/pki/private/ca-key.pem --dn "CN=$1" --san "$1" --flag serverAuth --flag ikeIntermediate --outform pem > /root/pki/certs/server-cert.pem
             cp -r /root/pki/* /etc/ipsec.d/
-            mv /etc/ipsec.conf{,.original}
             
             echo ""
             echo "haciendo cambios en el archivo de configuración..."
             echo ""
+            mv /etc/ipsec.conf{,.original}
             echo "config setup" > /etc/ipsec.conf
             echo '  charondebug="ike 1, knl 1, cfg 0"' >> /etc/ipsec.conf
             echo "  uniqueids=no" >> /etc/ipsec.conf
@@ -93,10 +93,10 @@ if [ $# -ne $CantArgsEsperados ]
             echo "Configurando los usuarios..."
             echo ""
             echo ': RSA "server-key.pem"' >> /etc/ipsec.secrets
-            echo 'usuarioprueba : EAP "passwordprueba"' >> /etc/ipsec.secrets
+            echo 'usuario : EAP "password"' >> /etc/ipsec.secrets
             echo ""
-            echo "Se ha creado un usuario de prueba llamado: usuarioprueba"
-            echo "Su clave es: passwordprueba"
+            echo "Se ha creado un usuario de prueba llamado: usuario"
+            echo "Su clave es: password"
             echo ""
             echo "Si quieres agregar o modificar usuarios, modifica el archivo /etc/ipsec.secrets"
             
