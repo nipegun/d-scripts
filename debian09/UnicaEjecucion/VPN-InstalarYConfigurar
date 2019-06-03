@@ -55,6 +55,10 @@ if [ $# -ne $CantArgsEsperados ]
             ipsec pki --pub --in /root/pki/private/server-key.pem --type rsa | ipsec pki --issue --lifetime 1825 --cacert /root/pki/cacerts/ca-cert.pem --cakey /root/pki/private/ca-key.pem --dn "CN=$1" --san "$1" --flag serverAuth --flag ikeIntermediate --outform pem > /root/pki/certs/server-cert.pem
             cp -r /root/pki/* /etc/ipsec.d/
             mv /etc/ipsec.conf{,.original}
+            
+            echo ""
+            echo "haciendo cambios en el archivo de configuración..."
+            echo ""
             echo "config setup" > /etc/ipsec.conf
             echo '  charondebug="ike 1, knl 1, cfg 0"' >> /etc/ipsec.conf
             echo "  uniqueids=no" >> /etc/ipsec.conf
@@ -68,15 +72,19 @@ if [ $# -ne $CantArgsEsperados ]
             echo "  dpdaction=clear" >> /etc/ipsec.conf
             echo "  dpddelay=300s" >> /etc/ipsec.conf
             echo "  rekey=no" >> /etc/ipsec.conf
+            echo "" >> /etc/ipsec.conf
+            echo "  # Lado del servidor" >> /etc/ipsec.conf
             echo "  left=%any" >> /etc/ipsec.conf
             echo "  leftid=$1" >> /etc/ipsec.conf # Si es dominio va con la arroba, si es IP sin la arroba.
             echo "  leftcert=server-cert.pem" >> /etc/ipsec.conf
             echo "  leftsendcert=always" >> /etc/ipsec.conf
             echo "  leftsubnet=0.0.0.0/0" >> /etc/ipsec.conf
+            echo "" >> /etc/ipsec.conf
+            echo "  # Lado del cliente" >> /etc/ipsec.conf
             echo "  right=%any" >> /etc/ipsec.conf
             echo "  rightid=%any" >> /etc/ipsec.conf
             echo "  rightauth=eap-mschapv2" >> /etc/ipsec.conf
-            echo "  rightsourceip=10.10.10.0/24" >> /etc/ipsec.conf
+            echo "  rightsourceip=10.10.10.0/24" >> /etc/ipsec.conf # Subnet asignada a los clientes
             echo "  rightdns=1.1.1.1,1.0.0.1" >> /etc/ipsec.conf
             echo "  rightsendcert=never" >> /etc/ipsec.conf
             echo "  eap_identity=%identity" >> /etc/ipsec.conf
