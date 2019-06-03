@@ -56,7 +56,7 @@ if [ $# -ne $CantArgsEsperados ]
             cp -r /root/pki/* /etc/ipsec.d/
             
             echo ""
-            echo "haciendo cambios en el archivo de configuración..."
+            echo -e "${ColorRojo}Haciendo cambios en el archivo de configuración...${FinColor}"
             echo ""
             mv /etc/ipsec.conf{,.original}
             echo "config setup" > /etc/ipsec.conf
@@ -90,7 +90,7 @@ if [ $# -ne $CantArgsEsperados ]
             echo "  eap_identity=%identity" >> /etc/ipsec.conf
 
             echo ""
-            echo "Configurando los usuarios..."
+            echo -e "${ColorRojo}Configurando los usuarios...${FinColor}"
             echo ""
             echo ': RSA "server-key.pem"' >> /etc/ipsec.secrets
             echo 'usuario : EAP "password"' >> /etc/ipsec.secrets
@@ -101,16 +101,17 @@ if [ $# -ne $CantArgsEsperados ]
             echo "Si quieres agregar o modificar usuarios, modifica el archivo /etc/ipsec.secrets"
             
             echo ""
-            echo "Re-leyendo los cambios hechos en los usuarios..."
+            echo -e "${ColorRojo}Re-leyendo los cambios hechos en los usuarios...${FinColor}"
+            echo ""
             ipsec rereadsecrets
 
             echo ""
-            echo "Activando el forwarding..."
+            echo -e "${ColorRojo}Activando el forwarding...${FinColor}"
             echo ""
-            sed -i -e 's|# net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
+            sed -i -e 's|#net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
 
             echo ""
-            echo "Creando los comandos para IPTables..."
+            echo -e "${ColorRojo}Creando los comandos para IPTables...${FinColor}"
             echo ""
             echo "iptables -A INPUT -p udp --dport 500 -j ACCEPT" >> /root/ComandosIPTables
             echo "iptables -A INPUT -p udp --dport 4500 -j ACCEPT" >> /root/ComandosIPTables
@@ -119,9 +120,16 @@ if [ $# -ne $CantArgsEsperados ]
             echo "iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> /root/ComandosIPTables
 
             echo ""
-            echo "Reiniciando StrongSwan..."
+            echo -e "${ColorRojo}Reiniciando StrongSwan...${FinColor}"
             echo ""
             systemctl restart strongswan
+            
+            echo ""
+            echo -e "${ColorRojo}Preparando el certificado para importar en los dispositivos...${FinColor}"
+            echo ""
+            mkdir /root/VPN
+            cp /etc/ipsec.d/cacerts/ca-cert.pem /root/VPN/CertificadoVPN.pem
+            echo "Certificado listo. Lo puedes encontrar en /root/VPN/CertificadoVPN.pem"
           ;;
 
           2)
