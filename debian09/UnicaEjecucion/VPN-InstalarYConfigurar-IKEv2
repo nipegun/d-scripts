@@ -35,8 +35,7 @@ if [ $# -ne $CantArgsEsperados ]
     menu=(dialog --timeout 5 --checklist "Que VPN quieres instalar:" 22 76 16)
     opciones=(1 "IKEv2 basada en IP" off
               2 "IKEv2 basada en nombre de dominio" off
-              3 "IKEv2 basada en nombre de dominio con LetsEncrypt" off
-              4 "otra" off)
+              3 "IKEv2 basada en nombre de dominio con LetsEncrypt" off)
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
     clear
 
@@ -161,9 +160,6 @@ if [ $# -ne $CantArgsEsperados ]
             echo "iptables -A INPUT -p 51 -j ACCEPT" >> /root/ComandosIPTables
             echo "iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> /root/ComandosIPTables
             
-
-            
-            
           ;;
 
           2)
@@ -286,9 +282,6 @@ if [ $# -ne $CantArgsEsperados ]
             echo "Reiniciando el sistema..."
             echo ""
             shutdown -r now
-          ;;
-
-          4)
           ;;
 
         esac
