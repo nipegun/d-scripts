@@ -130,6 +130,10 @@ if [ $# -ne $CantArgsEsperados ]
             mkdir /root/VPN
             cp /etc/ipsec.d/cacerts/ca-cert.pem /root/VPN/CertificadoVPN.pem
             echo "Certificado listo. Lo puedes encontrar en /root/VPN/CertificadoVPN.pem"
+            echo ""
+            echo "Su contenido es:"
+            cat /root/VPN/CertificadoVPN.pem
+            echo ""
           ;;
 
           2)
