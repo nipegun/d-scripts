@@ -27,7 +27,7 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     echo "Ejemplo:"
     echo ""
-    echo ''$0' 123456789:AAAAAAAAAA_AAAAAAAAAAAAAAA_AAAAAA_A 000000000 "Mensaje de prueba"'
+    echo ''$0' 123456789:AAAAAAAAAA_AAAAAAAAAAAAAAA_AAAAAA_A 000000000 "Mensaje de prueba" "/root/archivo.png"'
     echo ""
     exit $ArgsInsuficientes
   else
