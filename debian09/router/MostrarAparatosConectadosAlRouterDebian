@@ -7,11 +7,9 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA MOSTRAR LOS APARATOS CONECTADOS AL
-#  ROUTER DEBIAN CORRIENDO EN EL ORDENADOR DONDE SE EJECUTA
-#  EL SCRIPT
-#-------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------------------
+#  Script de NiPeGun para mostrar los aparatos conectados al router debian corriendo en el ordenador donde se ejecuta este script
+#----------------------------------------------------------------------------------------------------------------------------------
 
 # Asignar a una variable el nombre de la interfaz en la que se routea obtenido del archivo correspondiente
 interfaz=$(sed -n 's|INTERFACESv4="\(.*\)"|\1|p' /etc/default/isc-dhcp-server)
