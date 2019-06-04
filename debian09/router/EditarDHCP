@@ -8,7 +8,7 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA EDITAR LA CONFIGURACIÓN DEL DEMONIO DHCPD
+#  Script de NiPeGun para editar la configuración del demonio dhcpd
 #--------------------------------------------------------------------
 
 echo ""
