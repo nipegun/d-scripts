@@ -26,6 +26,7 @@ if [ $# -ne $CantArgsCorrectos ]
     echo -e "  $0 ${ColorVerde}[NúmeroDeCliente]${FinColor}"
     echo ""
     echo "Ejemplo:"
+    echo ""
     echo "  $0 2"
     echo ""
     exit $ArgsInsuficientes
