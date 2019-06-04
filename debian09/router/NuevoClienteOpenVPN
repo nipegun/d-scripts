@@ -14,12 +14,17 @@
 CantArgsCorrectos=1
 ArgsInsuficientes=65
 
-if [ $# -ne $CantArgsCorrectos ]
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
+
+if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
     echo "------------------------------------------------------------------------------"
-    echo "Mal uso del script. El uso correcto sería:"
-    echo "  $0 [NúmeroDeCliente]"
+    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo ""
+    echo -e "$0 ${ColorVerde}[NúmeroDeCliente]${FinColor}"
     echo ""
     echo "Ejemplo:"
     echo " $0 2"
