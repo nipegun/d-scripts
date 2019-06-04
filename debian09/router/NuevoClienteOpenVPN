@@ -28,7 +28,7 @@ if [ $# -ne $CantArgsCorrectos ]
     exit $ArgsInsuficientes
   else
     echo ""
-    echo "  Creando un nuevo cliente para OpenVPN...
+    echo "  Creando un nuevo cliente para OpenVPN..."
     echo ""
     cd /root/EasyRSA/
     /root/EasyRSA/easyrsa gen-req client$1 nopass
