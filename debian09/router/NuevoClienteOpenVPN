@@ -22,7 +22,7 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "  $0 [NúmeroDeCliente]"
     echo ""
     echo "Ejemplo:"
-    echo ' $0 2'
+    echo " $0 2"
     echo "------------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
