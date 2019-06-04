@@ -37,7 +37,7 @@ if [ $# -ne $CantArgsEsperados ]
     exit $ArgsInsuficientes
   else
     menu=(dialog --timeout 5 --checklist "Que VPN quieres instalar:" 22 76 16)
-    opciones=(1 "OpenVPN en solitario" off
+    opciones=(1 "OpenVPN con Autoridad Certificadora en la misma máquina" off
               2 "OpenVPN con Autoridad Certificadora en otra máquina" off
               3 "otra" off)
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
