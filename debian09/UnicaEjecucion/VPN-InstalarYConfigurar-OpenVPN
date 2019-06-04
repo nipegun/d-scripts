@@ -48,12 +48,23 @@ if [ $# -ne $CantArgsEsperados ]
         case $choice in
 
           1)
-            aso
+            echo ""
+            echo "Borrando archivos y configuraciones antiguas..."
+            echo ""
             apt-get -y purge openvpn easy-rsa
             apt-get -y autoremove
             rm -r /etc/openvpn/*
             rm -r /root/EasyRSA/*
+
+            echo ""
+            echo "Instalando OpenVPN..."
+            echo ""
+            aso
             apt-get -y install openvpn
+            
+            echo ""
+            echo "Descargando EasyRSA..."
+            echo ""
             wget --no-check-certificate -P /root/ https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.6/EasyRSA-unix-v3.0.6.tgz
             tar xvf /root/EasyRSA-unix-v3.0.6.tgz -C /root/
             mv /root/EasyRSA-v3.0.6 /root/EasyRSA
