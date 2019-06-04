@@ -7,9 +7,11 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar el servidor OpenVPN
-#--------------------------------------------------------------------
+#
+#  Basado en el artículo: digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-debian-9
+#-----------------------------------------------------------------------------------------------------------
 
 CantArgsEsperados=1
 ArgsInsuficientes=65
@@ -111,7 +113,47 @@ if [ $# -ne $CantArgsEsperados ]
             echo "Activando el servicio..."
             echo ""
             systemctl enable openvpn
-
+            
+            echo ""
+            echo "Creando la infraestructura de configuración de clientes..."
+            echo ""
+            mkdir -p /root/VPN/client-configs/files
+            cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /root/VPN/client-configs/base.conf
+            sed -i -e's|;user nobody|user nobody|g' /root/VPN/client-configs/base.conf
+            sed -i -e's|;group nogroup|group nogroup|g' /root/VPN/client-configs/base.conf
+            sed -i -e's|ca ca.crt|#ca ca.crt|g' /root/VPN/client-configs/base.conf
+            sed -i -e's|cert client.crt|#cert client.crt|g' /root/VPN/client-configs/base.conf
+            sed -i -e's|key client.key|#key client.key|g' /root/VPN/client-configs/base.conf
+            sed -i -e's|tls-auth ta.key 1|#tls-auth ta.key 1|g' /root/VPN/client-configs/base.conf
+            sed -i -e's|cipher AES-256-CBC|cipher AES-256-CBC\nauth SHA256|g' /root/VPN/client-configs/base.conf
+            sed -i -e's|;mute 20|;mute 20\nkey-direction 1|g' /root/VPN/client-configs/base.conf
+            echo "# script-security 2" >> /root/VPN/client-configs/base.conf
+            echo "# up /etc/openvpn/update-resolv-conf" >> /root/VPN/client-configs/base.conf
+            echo "# down /etc/openvpn/update-resolv-conf" >> /root/VPN/client-configs/base.conf
+            
+            echo ""
+            echo "Creando el script para agregar usuarios..."
+            echo ""
+            echo '#!/bin/bash' > /root/VPN/client-configs/make_config.sh
+            echo "" >> /root/VPN/client-configs/make_config.sh
+            echo "# First argument: Client identifier" >> /root/VPN/client-configs/make_config.sh
+            echo "" >> /root/VPN/client-configs/make_config.sh
+            echo "KEY_DIR=/root/VPN/client-configs/keys" >> /root/VPN/client-configs/make_config.sh
+            echo "OUTPUT_DIR=/root/VPN/client-configs/files" >> /root/VPN/client-configs/make_config.sh
+            echo "BASE_CONFIG=/root/VPN/client-configs/base.conf" >> /root/VPN/client-configs/make_config.sh
+            echo "" >> /root/VPN/client-configs/make_config.sh
+            echo 'cat ${BASE_CONFIG}      <(echo -e '"'"'<ca>'"'"') \' >> /root/VPN/client-configs/make_config.sh
+            echo '    ${KEY_DIR}/ca.crt   <(echo -e '"'"'</ca>\n<cert>'"'"') \' >> /root/VPN/client-configs/make_config.sh
+            echo '    ${KEY_DIR}/${1}.crt <(echo -e '"'"'</cert>\n<key>'"'"') \' >> /root/VPN/client-configs/make_config.sh
+            echo '    ${KEY_DIR}/${1}.key <(echo -e '"'"'</key>\n<tls-auth>'"'"') \' >> /root/VPN/client-configs/make_config.sh
+            echo '    ${KEY_DIR}/ta.key   <(echo -e '"'"'</tls-auth>'"'"')> \' >> /root/VPN/client-configs/make_config.sh
+            echo '    ${OUTPUT_DIR}/${1}.ovpn' >> /root/VPN/client-configs/make_config.sh
+            chmod 700 /root/VPN/client-configs/make_config.sh
+            
+            echo ""
+            echo "Agregando usuarios con..."
+            echo ""
+            /root/VPN/client-configs/make_config.sh client1
           ;;
 
           2)
