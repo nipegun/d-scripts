@@ -48,7 +48,6 @@ ln -s /root/nipe-scripts/debian09/CrearBaseDeDatosYUsuario                  /roo
 ln -s /root/nipe-scripts/debian09/DejarSóloElKernelMásReciente              /root/nipe-scripts/dsekmr
 ln -s /root/nipe-scripts/debian09/EditarGRUB                                /root/nipe-scripts/egrub
 ln -s /root/nipe-scripts/debian09/EditarHAPROXY                             /root/nipe-scripts/ehaproxy
-ln -s /root/nipe-scripts/debian09/EditarHOSTAPD                             /root/nipe-scripts/ehostapd
 ln -s /root/nipe-scripts/debian09/EditarPCIPASSTHROUGH                      /root/nipe-scripts/epcipassthrough
 ln -s /root/nipe-scripts/debian09/EditarSAMBA                               /root/nipe-scripts/esamba
 ln -s /root/nipe-scripts/debian09/EditarTRANSMISSION                        /root/nipe-scripts/etransmission
@@ -104,8 +103,10 @@ ln -s /root/nipe-scripts/debian09/VerEstadoDeServicio                       /roo
 ln -s /root/nipe-scripts/debian09/VerLogEnTiempoReal                        /root/nipe-scripts/vletr
 ln -s /root/nipe-scripts/debian09/WinDir                                    /root/nipe-scripts/wd
 
-ln -s /root/nipe-scripts/debian09/router/EditarDHCP /root/nipe-scripts/edhcp
+ln -s /root/nipe-scripts/debian09/router/EditarDHCP                /root/nipe-scripts/edhcp
+ln -s /root/nipe-scripts/debian09/router/EditarHOSTAPD             /root/nipe-scripts/ehostapd
 ln -s /root/nipe-scripts/debian09/router/MostrarAparatosConectados /root/nipe-scripts/mac
+ln -s /root/nipe-scripts/debian09/router/EditarOpenVPN             /root/nipe-scripts/eovpn
 
 echo ""
 echo -e "${ColorNotificacion}Alias creados. Deberías poder ejecutar los nipe-scripts escribiendo el nombre de su alias.${FinColor}"
