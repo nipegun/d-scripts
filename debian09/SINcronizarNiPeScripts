@@ -8,16 +8,20 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #-------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA SINCRONIZAR LOS NIPE-SCRIPTS
+#  Script de NiPeGun para sincronizar los nipe-scripts
 #-------------------------------------------------------
+
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
 
 # Comprobar si hay conexión a Internet antes de sincronizar los nipe-scripts
 wget -q --tries=10 --timeout=20 --spider https://github.com
   if [[ $? -eq 0 ]]; then
     echo ""
     echo "------------------------------------------------------------"
-    echo "  SINCRONIZANDO LOS NIPE-SCRIPTS CON LAS ÚLTIMAS VERSIONES"
-    echo "    Y DESCARGANDO NUEVOS NIPE-SCRIPTS SI ES QUE EXISTEN"
+    echo -e "${ColorVerde}Sincronizando los nipe-scripts con las últimas versiones${FinColor}"
+    echo -e "${ColorVerde} y descargando nuevos nipe-scripts si es que existen...${FinColor}"
     echo "------------------------------------------------------------"
     echo ""
     rm /root/nipe-scripts -R
@@ -29,17 +33,14 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     /root/nipe-scripts/debian09/CrearAlias
     echo ""
     echo "--------------------------------------------"
-    echo "  NIPE-SCRIPTS SINCRONIZADOS CORRECTAMENTE"
+    echo -e "${ColorVerde}nipe-scripts sincronizados correctamente${FinColor}"
     echo "--------------------------------------------"
     echo ""
   else
     echo ""
-    echo "------------------------------------------------------------"
-    echo "  No se pudo iniciar la sincronización de los nipe-scripts"
-    echo "  porque no se detectó conexión a Internet"
-    echo "------------------------------------------------------------"
+    echo "---------------------------------------------------------------------------------------------------"
+    echo -e "${ColorRojo}No se pudo iniciar la sincronización de los nipe-scripts porque no se detectó conexión a Internet.${FinColor}"
+    echo "---------------------------------------------------------------------------------------------------"
     echo ""
   fi
-
-
 
