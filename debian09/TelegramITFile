@@ -23,7 +23,7 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     echo -e "${ColorAdvertencia}Mal uso del script!${FinColor}"
     echo ""
-    echo -e 'El uso correcto sería: '$0' '${ColorArgumentos}'[TokenDelBot] [IdDelChatDeDestino] ["Mensaje"]'${FinColor}''
+    echo -e 'El uso correcto sería: '$0' '${ColorArgumentos}'[TokenDelBot] [IdDelChatDeDestino] ["Mensaje"] ["RutaArchivo"]'${FinColor}''
     echo ""
     echo "Ejemplo:"
     echo ""
