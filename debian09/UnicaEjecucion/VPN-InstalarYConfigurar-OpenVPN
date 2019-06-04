@@ -57,15 +57,30 @@ if [ $# -ne $CantArgsEsperados ]
             wget --no-check-certificate -P /root/ https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.6/EasyRSA-unix-v3.0.6.tgz
             tar xvf /root/EasyRSA-unix-v3.0.6.tgz -C /root/
             mv /root/EasyRSA-v3.0.6 /root/EasyRSA
+            
+            echo ""
+            echo "Preparando EasyRSA..."
+            echo ""
             cd /root/EasyRSA/
             /root/EasyRSA/easyrsa init-pki
+            
+            echo ""
+            echo "Generando el certificado del servidor OpenVPN"
+            echo ""
             /root/EasyRSA/easyrsa gen-req server nopass
             cp /root/EasyRSA/pki/private/server.key /etc/openvpn/
+            /root/EasyRSA/easyrsa sign-req server server
+            cp /root/EasyRSA/pki/issued/server.crt /etc/openvpn/
+            
+            echo ""
+            echo "Construyendo la Autoridad Certificadora..."
+            echo ""
             /root/EasyRSA/easyrsa build-ca nopass
             /root/EasyRSA/easyrsa import-req /root/EasyRSA/pki/reqs/server.req server-ca
             /root/EasyRSA/easyrsa sign-req server server-ca
             cp /root/EasyRSA/pki/ca.crt /etc/openvpn/
             cp /root/EasyRSA/pki/issued/server-ca.crt /etc/openvpn/
+            
             /root/EasyRSA/easyrsa gen-dh
             openvpn --genkey --secret ta.key
             cp /root/EasyRSA/ta.key /etc/openvpn/
