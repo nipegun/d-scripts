@@ -47,5 +47,6 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     echo -e "${ColorVerde}El archivo de configuración para el cliente$1 se guardó en: /root/VPN/client-configs/files/client$1.ovpn${FinColor}"
     echo ""
+    ls -n /root/VPN/client-configs/files/
 fi
 
