@@ -33,7 +33,7 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     /root/nipe-scripts/debian09/CrearAlias
     echo ""
     echo "--------------------------------------------"
-    echo -e "${ColorVerde}nipe-scripts sincronizados correctamente${FinColor}"
+    echo -e "  ${ColorVerde}nipe-scripts sincronizados correctamente${FinColor}"
     echo "--------------------------------------------"
     echo ""
   else
