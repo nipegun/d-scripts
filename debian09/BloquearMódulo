@@ -14,20 +14,20 @@
 CantArgsEsperados=3
 ArgsInsuficientes=65
 
-ColorAdvertencia='\033[1;31m'
-ColorArgumentos='\033[1;32m'
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
     echo "------------------------------------------------------------------------------"
-    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo -e "BloquearMódulo ${ColorArgumentos}[NombreDelMódulo]${FinColor}"
+    echo -e "$0 ${ColorVerde}[NombreDelMódulo]${FinColor}"
     echo ""
     echo "Ejemplo:"
-    echo ' BloquearMódulo igb'
+    echo " $0 igb"
     echo "------------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
