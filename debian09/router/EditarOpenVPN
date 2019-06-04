@@ -12,7 +12,7 @@
 #----------------------------------------------------------------------
 
 echo ""
-echo "  Deteniendo el servicio hostapd..."
+echo "  Deteniendo el servicio openvpn..."
 echo ""
 service openvpn stop
 
@@ -22,12 +22,12 @@ echo ""
 nano /etc/openvpn/server.conf
 
 echo ""
-echo "  Volviendo a iniciar el servicio hostapd..."
+echo "  Volviendo a iniciar el servicio openvpn..."
 echo ""
 service openvpn start
 
 echo ""
-echo "  Mostrando el estado del servicio hostapd..."
+echo "  Mostrando el estado del servicio openvpn..."
 echo ""
 sleep 5
 service openvpn status
