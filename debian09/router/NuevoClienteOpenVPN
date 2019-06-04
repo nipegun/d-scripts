@@ -44,7 +44,7 @@ if [ $# -ne $CantArgsCorrectos ]
     cp /root/EasyRSA/ta.key /root/VPN/client-configs/keys/
     cp /etc/openvpn/ca.crt /root/VPN/client-configs/keys/
     echo ""
-    echo -e "  $0 ${ColorVerde}El archivo de configuración para el cliente$1 se guardó en: /root/VPN/client-configs/files/cliente$1.ovpn${FinColor}"
+    echo -e "  $0 ${ColorVerde}El archivo de configuración para el cliente$1 se guardó en: /root/VPN/client-configs/files/client$1.ovpn${FinColor}"
     echo ""
 fi
 
