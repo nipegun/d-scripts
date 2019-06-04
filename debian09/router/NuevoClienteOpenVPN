@@ -21,6 +21,7 @@ FinColor='\033[0m'
 if [ $# -ne $CantArgsCorrectos ]
   then
     echo ""
+    echo "-----------------------------------------------------------"
     echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
     echo -e "  $0 ${ColorVerde}[NúmeroDeCliente]${FinColor}"
