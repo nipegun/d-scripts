@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software
+# de dominio público". Puedes hacer lo que te salga de los huevos con él
+# porque es libre de verdad; no libre con condiciones como las licencias GNU
+# y otras patrañas similares. Si se te llena la boca hablando de libertad
+# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
+# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#------------------------------------------------------------------------
+#  Script de NiPeGun para crear un nuevo cliente OpenVPN en el servidor
+#------------------------------------------------------------------------
+
+CantArgsCorrectos=1
+ArgsInsuficientes=65
+
+if [ $# -ne $CantArgsCorrectos ]
+  then
+    echo ""
+    echo "------------------------------------------------------------------------------"
+    echo "Mal uso del script. El uso correcto sería:"
+    echo "  $0 [NúmeroDeCliente]"
+    echo ""
+    echo "Ejemplo:"
+    echo ' $0 2'
+    echo "------------------------------------------------------------------------------"
+    echo ""
+    exit $ArgsInsuficientes
+  else
+    echo ""
+    echo "  Creando un nuevo cliente para OpenVPN...
+    echo ""
+    cd /root/EasyRSA/
+    /root/EasyRSA/easyrsa gen-req client$1 nopass
+    cp /root/EasyRSA/pki/private/client$1.key /root/VPN/client-configs/keys/
+    /root/EasyRSA/easyrsa sign-req client client$1
+    cp /root/EasyRSA/pki/issued/client$1.crt /root/VPN/client-configs/keys/
+    cp /root/EasyRSA/ta.key /root/VPN/client-configs/keys/
+    cp /etc/openvpn/ca.crt /root/VPN/client-configs/keys/
+    echo ""
+    echo "El archivo de configuración para el cliente$1 se guardó en:"
+    echo "/root/VPN/client-configs/files/cliente$1.ovpn"
+    echo ""
+fi
+
