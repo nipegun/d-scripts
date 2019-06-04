@@ -20,8 +20,8 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
   if [[ $? -eq 0 ]]; then
     echo ""
     echo "------------------------------------------------------------"
-    echo -e "${ColorVerde}Sincronizando los nipe-scripts con las últimas versiones${FinColor}"
-    echo -e "${ColorVerde} y descargando nuevos nipe-scripts si es que existen...${FinColor}"
+    echo -e "  ${ColorVerde}Sincronizando los nipe-scripts con las últimas versiones${FinColor}"
+    echo -e "  ${ColorVerde} y descargando nuevos nipe-scripts si es que existen...${FinColor}"
     echo "------------------------------------------------------------"
     echo ""
     rm /root/nipe-scripts -R
