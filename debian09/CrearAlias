@@ -94,7 +94,7 @@ ln -s /root/nipe-scripts/debian09/RPMDeDisco                                /roo
 ln -s /root/nipe-scripts/debian09/ServiciosEnEJecución                      /root/nipe-scripts/seej
 ln -s /root/nipe-scripts/debian09/SINcronizarNiPeScripts                    /root/nipe-scripts/sinnps
 ln -s /root/nipe-scripts/debian09/TelegramIT                                /root/nipe-scripts/tit
-ln -s /root/nipe-scripts/debian09/TelegramITFile.                           /root/nipe-scripts/titf
+ln -s /root/nipe-scripts/debian09/TelegramITFile                            /root/nipe-scripts/titf
 ln -s /root/nipe-scripts/debian09/TRIM                                      /root/nipe-scripts/trim
 ln -s /root/nipe-scripts/debian09/UsuarioNuevoConShell                      /root/nipe-scripts/uncs
 ln -s /root/nipe-scripts/debian09/UsuarioNuevoSinShell                      /root/nipe-scripts/unss
