@@ -18,6 +18,11 @@ FinColor='\033[0m'
 IPDelServidor=$(hostname -I)
 
 echo ""
+echo -e "${ColorVerde}Instalando paquetes requeridos...${FinColor}"
+echo ""
+apt-get -y install net-tools
+
+echo ""
 echo -e "${ColorVerde}Instalando OpenVPN Access Server...${FinColor}"
 echo ""
 mkdir -p /root/Paquetes
