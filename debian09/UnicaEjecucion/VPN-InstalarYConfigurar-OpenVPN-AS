@@ -15,6 +15,8 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
+IPDelServidor=$(hostname -I)
+
 echo ""
 echo -e "${ColorVerde}Instalando OpenVPN Access Server...${FinColor}"
 echo ""
@@ -26,8 +28,12 @@ echo -e "openvpn\nopenvpn" | passwd openvpn
 echo ""
 echo -e "${ColorVerde}OpenVPN Access Server se ha terminado de instalar...${FinColor}"
 echo ""
-echo "  Podrás conectarte en la IP y puertos indicados arriba."
+echo "  Podrás conectarte al Web UI de OpenVPN Access Server mediante las siguientes direcciones:"
+echo "  $IPDelServidor:993       (para los usuarios normales)"
+echo "  $IPDelServidor:993/admin (para los administradores)"
+echo ""
 echo "  Para la primera conexión utiliza el usuario openvpn y el password openvpn."
 echo ""
 echo "  Cambia el password en cuanto puedas."
+echo ""
 
