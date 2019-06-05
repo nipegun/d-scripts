@@ -22,7 +22,7 @@ find /var/log/ -type f -name "*.4" -print -exec rm {} \;
 find /var/log/ -type f -name "*.5" -print -exec rm {} \;
 
 echo ""
-echo "  Poniendo a cero todos los logs de /var/log/..."
+echo "Poniendo a cero todos los logs de /var/log/..."
 echo ""
 find /var/log/ -type f -print -exec truncate -s 0 {} \;
 
