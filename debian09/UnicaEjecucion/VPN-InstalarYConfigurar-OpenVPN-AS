@@ -20,7 +20,6 @@ echo -e "  $0${ColorVerde}Instalando OpenVPN Access Server...${FinColor}"
 echo ""
 mkdir -p /root/Paquetes
 wget --no-check-certificate -P /root/Paquetes/ https://openvpn.net/downloads/openvpn-as-latest-debian9.amd_64.deb
-apt-get -y install libmysqlclient-dev
 dpkg -i /root/Paquetes/openvpn-as-latest-debian9.amd_64.deb
 echo -e "openvpn\nopenvpn" | passwd openvpn
 echo ""
