@@ -12,15 +12,20 @@
 #------------------------------------------------------------------
 
 echo ""
-echo "  Poniendo a cero todos los logs de /var/log/..."
+echo "Borrando archivos sobrantes..."
 echo ""
-find /var/log/ -type f -print -exec truncate -s 0 {} \;
 find /var/log/ -type f -name "*.gz" -print -exec rm {} \;
 find /var/log/ -type f -name "*.1" -print -exec rm {} \;
 find /var/log/ -type f -name "*.2" -print -exec rm {} \;
 find /var/log/ -type f -name "*.3" -print -exec rm {} \;
 find /var/log/ -type f -name "*.4" -print -exec rm {} \;
 find /var/log/ -type f -name "*.5" -print -exec rm {} \;
+
+echo ""
+echo "  Poniendo a cero todos los logs de /var/log/..."
+echo ""
+find /var/log/ -type f -print -exec truncate -s 0 {} \;
+
 echo ""
 echo "Estado en el que quedaron los logs:"
 echo ""
