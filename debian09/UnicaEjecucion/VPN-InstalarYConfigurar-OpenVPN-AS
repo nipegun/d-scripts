@@ -41,4 +41,6 @@ echo "  Para la primera conexión utiliza el usuario openvpn y el password openv
 echo ""
 echo "  Cambia el password en cuanto puedas."
 echo ""
+echo "  Para ver el log ejecuta tailf /var/log/openvpnas.log"
+echo ""
 
