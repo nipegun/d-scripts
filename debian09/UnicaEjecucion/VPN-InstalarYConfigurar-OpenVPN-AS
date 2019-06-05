@@ -16,14 +16,15 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 echo ""
-echo -e "  $0${ColorVerde}Instalando OpenVPN Access Server...${FinColor}"
+echo -e "${ColorVerde}Instalando OpenVPN Access Server...${FinColor}"
 echo ""
 mkdir -p /root/Paquetes
 wget --no-check-certificate -P /root/Paquetes/ https://openvpn.net/downloads/openvpn-as-latest-debian9.amd_64.deb
 dpkg -i /root/Paquetes/openvpn-as-latest-debian9.amd_64.deb
 echo -e "openvpn\nopenvpn" | passwd openvpn
+
 echo ""
-echo -e "  $0${ColorVerde}OpenVPN Access Server se ha terminado de instalar...${FinColor}"
+echo -e "${ColorVerde}OpenVPN Access Server se ha terminado de instalar...${FinColor}"
 echo ""
 echo "  Podrás conectarte en la IP y puertos indicados arriba."
 echo "  Para la primera conexión utiliza el usuario openvpn y el password openvpn."
