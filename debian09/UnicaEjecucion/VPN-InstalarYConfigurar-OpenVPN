@@ -53,8 +53,8 @@ if [ $# -ne $CantArgsEsperados ]
             echo ""
             apt-get -y purge openvpn easy-rsa
             apt-get -y autoremove
-            rm -r /etc/openvpn/*
-            rm -r /root/EasyRSA/*
+            rm -rf /etc/openvpn
+            rm -rf /root/EasyRSA
 
             echo ""
             echo "Instalando OpenVPN..."
