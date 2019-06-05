@@ -76,14 +76,6 @@ if [ $# -ne $CantArgsEsperados ]
             /root/EasyRSA/easyrsa init-pki
             
             echo ""
-            echo "Generando el certificado del servidor OpenVPN"
-            echo ""
-            /root/EasyRSA/easyrsa gen-req server nopass
-            cp /root/EasyRSA/pki/private/server.key /etc/openvpn/
-            /root/EasyRSA/easyrsa sign-req server server
-            cp /root/EasyRSA/pki/issued/server.crt /etc/openvpn/
-            
-            echo ""
             echo "Construyendo la Autoridad Certificadora..."
             echo ""
             /root/EasyRSA/easyrsa build-ca nopass
@@ -91,6 +83,14 @@ if [ $# -ne $CantArgsEsperados ]
             /root/EasyRSA/easyrsa sign-req server server-ca
             cp /root/EasyRSA/pki/ca.crt /etc/openvpn/
             cp /root/EasyRSA/pki/issued/server-ca.crt /etc/openvpn/
+            
+            echo ""
+            echo "Generando el certificado del servidor OpenVPN"
+            echo ""
+            /root/EasyRSA/easyrsa gen-req server nopass
+            cp /root/EasyRSA/pki/private/server.key /etc/openvpn/
+            /root/EasyRSA/easyrsa sign-req server server
+            cp /root/EasyRSA/pki/issued/server.crt /etc/openvpn/
             
             /root/EasyRSA/easyrsa gen-dh
             openvpn --genkey --secret ta.key
