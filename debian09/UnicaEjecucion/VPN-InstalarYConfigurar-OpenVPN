@@ -55,6 +55,7 @@ if [ $# -ne $CantArgsEsperados ]
             apt-get -y autoremove
             rm -rf /etc/openvpn
             rm -rf /root/EasyRSA
+            rm -rf /root/VPN
 
             echo ""
             echo "Instalando OpenVPN..."
