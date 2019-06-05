@@ -29,6 +29,5 @@ echo ""
 echo "  Podrás conectarte en la IP y puertos indicados arriba."
 echo "  Para la primera conexión utiliza el usuario openvpn y el password openvpn."
 echo ""
-echo "  Cambia el password en cuando puedas."
-echo ""
+echo "  Cambia el password en cuanto puedas."
 
