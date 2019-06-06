@@ -25,6 +25,9 @@ IPDeIvoox=$(getent hosts ivoox.com | awk '{ print $1 }')
 # Agregar la IP obtenida al set creado anteriormente
 ipset -q -A IPsDeIvoox $IPDeIvoox # -q silencia las advertencias para IPs previamente agregadas
 
+# Agregar otras posibles IPs de Ivoox 77.73.80.1 a 77.73.87.255
+ipset -q -A IPsDeIvoox 77.73.80.1/21
+
 # Agregar una regla INPUT a iptables con el set de IPs a banear
 iptables -A INPUT -m set --match-set IPsDeIvoox src -j DROP
 
