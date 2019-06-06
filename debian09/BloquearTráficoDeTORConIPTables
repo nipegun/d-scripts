@@ -8,30 +8,23 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA BLOQUEAR PAQUETES ENTRANTES PROVENIENTES DE TOR
+#  Script de NiPeGun para bloquear paquetes entrantes provenientes de Tor
 #--------------------------------------------------------------------------
 
 echo ""
-echo "----------------------------------------"
-echo "  OBTENIENDO LA IP WAN DEL SERVIDOR..."
-echo "----------------------------------------"
+echo "Obteniendo la IP WAN del servidor..."
 echo ""
 IPWANDelServidor=$(curl --silent ipinfo.io/ip)
 
 echo ""
-echo "---------------------------------------------------------"
-echo "  CREANDO UN NUEVO SET PARA LA LISTA DE IPS A BANEAR..."
-echo "---------------------------------------------------------"
+echo "Creando un nuevo set para la lista de IPs a banear..."
 echo ""
 ipset --flush NodosTORQueEntran
 ipset --create NodosTORQueEntran iphash
 
 echo ""
-echo "--------------------------------------------------------------"
-echo "  OBTENIENDO UNA LISTA DE LAS IPS DE LOS NODOS TOR DE SALIDA"
-echo "  QUE PUEDEN ACCEDER A LA IP DEL SERVIDOR."
-echo "  AGREGANDO ESA LISTA AL SET CREADO ANTES..."
-echo "--------------------------------------------------------------"
+echo "Obteniendo una lista de las IPs de los nodos Tor de salida que pueden acceder"
+echo "a la IP del servidor y agregando esa lista al set creado antes..."
 echo ""
 # Abajo, se borran del wget resultante las líneas comentadas y se lee línea por línea las IPs
 wget -q https://check.torproject.org/cgi-bin/TorBulkExitList.py?ip=$IPWANDelServidor -O -|sed '/^#/d' |while read IP
@@ -40,16 +33,11 @@ wget -q https://check.torproject.org/cgi-bin/TorBulkExitList.py?ip=$IPWANDelServ
   done
 
 echo ""
-echo "---------------------------------------------------"
-echo "  AGREGANDO UNA REGLA INPUT A IPTABLES CON EL SET"
-echo "  DE IPS DE NODOS A BANEAR..."
-echo "---------------------------------------------------"
+echo "Agregando una regla input a IPTables con el set de IPs de nodos a banear..."
 echo ""
 iptables -A INPUT -m set --match-set NodosTORQueEntran src -j DROP
 
 echo ""
-echo "-----------------------------------"
-echo "  EJECUCIÓN DEL SCRIPT FINALIZADA"
-echo "-----------------------------------"
+echo "Ejecución del script finalizada."
 echo ""
 
