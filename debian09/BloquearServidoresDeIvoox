@@ -15,18 +15,18 @@ echo ""
 echo "Bloqueando los servidores de Ivoox..."
 echo ""
 
+# Obtener la IP de Ivoox.com
+IPDeIvooxCom=$(getent hosts ivoox.com | awk '{ print $1 }')
+# Agregar la IP obtenida al set creado anteriormente
+iptables -A INPUT -s $IPDeIvooxCom -j DROP
+
+
 # Crear un nuevo set para la lista de IPs a banear
 ipset --flush IPsDeIvoox
 ipset --create IPsDeIvoox iphash
 
-# Obtener la IP de Ivoox
-IPDeIvoox=$(getent hosts ivoox.com | awk '{ print $1 }')
-
-# Agregar la IP obtenida al set creado anteriormente
-ipset -q -A IPsDeIvoox $IPDeIvoox # -q silencia las advertencias para IPs previamente agregadas
-
-# Agregar otras posibles IPs de Ivoox 77.73.80.1 a 77.73.87.255
-ipset -q -A IPsDeIvoox 77.73.80.1/21
+# Agregar todas las posibles IPs de Ivoox al set (77.73.80.1 a 77.73.87.255)
+ipset -q -A IPsDeIvoox 77.73.80.0/21 # -q silencia las advertencias para IPs previamente agregadas
 
 # Agregar una regla INPUT a iptables con el set de IPs a banear
 iptables -A INPUT -m set --match-set IPsDeIvoox src -j DROP
