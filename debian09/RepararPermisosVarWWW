@@ -8,7 +8,7 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #----------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA REPARAR LOS PERMISOS DE LA CARPETA /var/www
+#  Script de NiPeGun para reparar los permisos de la carpeta /var/www
 #----------------------------------------------------------------------
 
 # Asignar propiedad de todo el contenido al usuario www-data
