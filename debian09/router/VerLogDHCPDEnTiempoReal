@@ -7,8 +7,9 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------
-#  Script de NiPeGun para ver los logs de dhcpd
-#------------------------------------------------
+#---------------------------------------------------------------
+#  Script de NiPeGun para ver los logs de dhcpd en tiempo real
+#---------------------------------------------------------------
 
 tailf /var/log/syslog | grep dhcpd
+
