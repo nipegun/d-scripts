@@ -7,10 +7,9 @@
 # entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA PREPARAR UN ORDENADOR O SERVIDOR CON DEBIAN 9
-#  RECIÉN INSTALADO Y SIN ENTORNO GRÁFICO
-#------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------
+#  Script de NiPeGun para preparar un ordenador o servidor con Debian 9 recién instalado y sin entorno gráfico
+#---------------------------------------------------------------------------------------------------------------
 
 cmd=(dialog --checklist "Script de NiPeGun para para post instalación de Debian 9 sin entorno gráfico:" 22 76 16)
 options=(1 "Poner repositorios correctos" off
