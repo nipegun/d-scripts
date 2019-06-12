@@ -17,7 +17,8 @@
 echo ""
 echo "Comprobando si falta algún paquete e instálándolo..."
 echo ""
-apt-get install certbot python-certbot-apache -t stretch-backports
+# apt-get -t stretch-backports
+apt-get install certbot python-certbot-apache
 
 echo ""
 echo "Ejecutando el bot de certificados para apache..."
