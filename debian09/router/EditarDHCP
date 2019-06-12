@@ -21,3 +21,9 @@ echo "  Reiniciando el servicio isc-dhcp-server..."
 echo ""
 service isc-dhcp-server restart
 
+echo ""
+echo "  Mostrando el estado del servicio isc-dhcp-server..."
+echo ""
+sleep 5
+service isc-dhcp-server status
+
