@@ -149,6 +149,14 @@ do
       htpasswd -c /etc/phpmyadmin/.htpasswd phpmyadmin
       echo ""
       echo "-----------------------------------------"
+      echo " Instalando MemCacheD..."
+      echo "-----------------------------------------"
+      echo ""
+      apt-get -y install memcached php-memcached
+      phpenmod memcached
+      service apache2 restart
+      echo ""
+      echo "-----------------------------------------"
       echo " INSTALANDO ALGUNOS PAQUETES ADICIONALES"
       echo "-----------------------------------------"
       echo ""
