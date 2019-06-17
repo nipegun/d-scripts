@@ -11,15 +11,18 @@
 #  Script de NiPeGun para bloquear los servidores de Ivoox
 #-----------------------------------------------------------
 
+ColorVerde="\033[1;32m"
+FinColor="\033[0m"
+
 echo ""
-echo "Bloqueando los servidores de Ivoox..."
+echo -e "${ColorVerde}Bloqueando los servidores de Ivoox...${FinColor}"
 echo ""
 
 # Obtener la IP de Ivoox.com
 IPDeIvooxCom=$(getent hosts ivoox.com | awk '{ print $1 }')
+
 # Agregar la IP obtenida al set creado anteriormente
 iptables -A INPUT -s $IPDeIvooxCom -j DROP
-
 
 # Crear un nuevo set para la lista de IPs a banear
 ipset --flush IPsDeIvoox
