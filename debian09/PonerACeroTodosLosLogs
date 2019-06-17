@@ -21,13 +21,13 @@ echo ""
 echo ""
 echo -e "${ColorAzul}Borrando archivos sobrantes...${FinColor}"
 echo ""
-
 find /var/log/ -type f -name "*.gz" -print -exec rm {} \;
-find /var/log/ -type f -name "*.1" -print -exec rm {} \;
-find /var/log/ -type f -name "*.2" -print -exec rm {} \;
-find /var/log/ -type f -name "*.3" -print -exec rm {} \;
-find /var/log/ -type f -name "*.4" -print -exec rm {} \;
-find /var/log/ -type f -name "*.5" -print -exec rm {} \;
+for ContExt in {0..100}
+  do
+    find /var/log/ -type f -name "*.$ContExt" -print -exec rm {} \;
+    find /var/log/ -type f -name "*.$ContExt.log" -print -exec rm {} \;
+  done
+
 
 echo ""
 echo -e "${ColorAzul}Poniendo a cero todos los logs de /var/log/...${FinColor}"
