@@ -28,7 +28,6 @@ for ContExt in {0..100}
     find /var/log/ -type f -name "*.$ContExt.log" -print -exec rm {} \;
   done
 
-
 echo ""
 echo -e "${ColorAzul}Poniendo a cero todos los logs de /var/log/...${FinColor}"
 echo ""
