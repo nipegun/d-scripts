@@ -26,6 +26,7 @@ for ContExt in {0..100}
   do
     find /var/log/ -type f -name "*.$ContExt" -print -exec rm {} \;
     find /var/log/ -type f -name "*.$ContExt.log" -print -exec rm {} \;
+    find /var/log/ -type f -name "*.old" -print -exec rm {} \;
   done
 
 echo ""
