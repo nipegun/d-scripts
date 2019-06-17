@@ -11,11 +11,11 @@
 #  Script de NiPeGun para crear los alias de los nipe-scripts para Debian 9
 #----------------------------------------------------------------------------
 
-ColorNotificacion="\033[1;32m"
+ColorVerde="\033[1;32m"
 FinColor="\033[0m"
 
 echo ""
-echo -e "${ColorNotificacion}Creando alias para los nipe-scripts...${FinColor}"
+echo -e "${ColorVerde}Creando alias para los nipe-scripts...${FinColor}"
 echo ""
 
 ln -s /root/nipe-scripts/debian09/externos/VelocidadDeInternet              /root/nipe-scripts/vdi
@@ -110,6 +110,6 @@ ln -s /root/nipe-scripts/debian09/router/MostrarAparatosConectados /root/nipe-sc
 ln -s /root/nipe-scripts/debian09/router/EditarOpenVPN             /root/nipe-scripts/eovpn
 
 echo ""
-echo -e "${ColorNotificacion}Alias creados. Deberías poder ejecutar los nipe-scripts escribiendo el nombre de su alias.${FinColor}"
+echo -e "${ColorVerde}Alias creados. Deberías poder ejecutar los nipe-scripts escribiendo el nombre de su alias.${FinColor}"
 echo ""
 
