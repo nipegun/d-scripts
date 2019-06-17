@@ -10,10 +10,18 @@
 #------------------------------------------------------------------
 #  Script de NiPeGun para poner a cero todos los logs de /var/log
 #------------------------------------------------------------------
+ColorVerde="\033[1;32m"
+ColorAzul="\033[0;34m" 
+FinColor="\033[0m"
 
 echo ""
-echo "Borrando archivos sobrantes..."
+echo -e "${ColorVerde}Poniendo a cero todos los logs...${FinColor}"
 echo ""
+
+echo ""
+echo -e "${ColorAzul}Borrando archivos sobrantes...${FinColor}"
+echo ""
+
 find /var/log/ -type f -name "*.gz" -print -exec rm {} \;
 find /var/log/ -type f -name "*.1" -print -exec rm {} \;
 find /var/log/ -type f -name "*.2" -print -exec rm {} \;
@@ -22,12 +30,12 @@ find /var/log/ -type f -name "*.4" -print -exec rm {} \;
 find /var/log/ -type f -name "*.5" -print -exec rm {} \;
 
 echo ""
-echo "Poniendo a cero todos los logs de /var/log/..."
+echo -e "${ColorAzul}Poniendo a cero todos los logs de /var/log/...${FinColor}"
 echo ""
 find /var/log/ -type f -print -exec truncate -s 0 {} \;
 
 echo ""
-echo "Estado en el que quedaron los logs:"
+echo -e "${ColorAzul}Estado en el que quedaron los logs...${FinColor}"
 echo ""
 ls -n /var/log/
 echo ""
