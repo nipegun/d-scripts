@@ -122,25 +122,25 @@ do
       # ----------------------------------------------------------------------------------------------
       # --------------- CÓDIGO SIN PROBAR PORQUE PHPMYADMIN TODAVIA NO ESTÁ DISPONIBLE ---------------
       # ----------------------------------------------------------------------------------------------
-      echo -e "${ColorVerde}Instalando phpmyadmin para administrar las bases de datos...${FinColor}"
-      echo ""
-      apt-get -y install phpmyadmin
-      sed -i "7 a AllowOverride All" /etc/apache2/conf-available/phpmyadmin.conf
-      service apache2 restart
-      echo ""
-      echo -e "${ColorVerde}Asegurando phpmyadmin con bloqueo web...${FinColor}"
-      echo ""
-      echo " Si quieres agregar un usuario adicional al bloqueo web"
-      echo " de phpmyadmin ejecuta el comando sin -c. Por ej:"
-      echo ""
-      echo " htpasswd /etc/phpmyadmin/.htpasswd usuarioadicional"
-      echo ""
-      echo 'AuthType Basic' > /usr/share/phpmyadmin/.htaccess
-      echo 'AuthName "Restricted Files"' >> /usr/share/phpmyadmin/.htaccess
-      echo 'AuthUserFile /etc/phpmyadmin/.htpasswd' >> /usr/share/phpmyadmin/.htaccess
-      echo 'Require valid-user' >> /usr/share/phpmyadmin/.htaccess
-      htpasswd -c /etc/phpmyadmin/.htpasswd phpmyadmin
-      echo ""
+      # echo -e "${ColorVerde}Instalando phpmyadmin para administrar las bases de datos...${FinColor}"
+      # echo ""
+      # apt-get -y install phpmyadmin
+      # sed -i "7 a AllowOverride All" /etc/apache2/conf-available/phpmyadmin.conf
+      # service apache2 restart
+      # echo ""
+      # echo -e "${ColorVerde}Asegurando phpmyadmin con bloqueo web...${FinColor}"
+      # echo ""
+      # echo " Si quieres agregar un usuario adicional al bloqueo web"
+      # echo " de phpmyadmin ejecuta el comando sin -c. Por ej:"
+      # echo ""
+      # echo " htpasswd /etc/phpmyadmin/.htpasswd usuarioadicional"
+      # echo ""
+      # echo 'AuthType Basic' > /usr/share/phpmyadmin/.htaccess
+      # echo 'AuthName "Restricted Files"' >> /usr/share/phpmyadmin/.htaccess
+      # echo 'AuthUserFile /etc/phpmyadmin/.htpasswd' >> /usr/share/phpmyadmin/.htaccess
+      # echo 'Require valid-user' >> /usr/share/phpmyadmin/.htaccess
+      # htpasswd -c /etc/phpmyadmin/.htpasswd phpmyadmin
+      # echo ""
       # ----------------------------------------------------------------------------------------------
       # --------------------------------- FIN DEL CÓDIGO SIN PROBAR ----------------------------------
       # ----------------------------------------------------------------------------------------------
