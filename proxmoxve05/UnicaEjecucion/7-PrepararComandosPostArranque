@@ -1,20 +1,20 @@
 #!/bin/bash
 
-# Pongo a disposición pública este script bajo el término de "software
-# de dominio público". Puedes hacer lo que te salga de los huevos con él
-# porque es libre de verdad; no libre con condiciones como las licencias GNU
-# y otras patrañas similares. Si se te llena la boca hablando de libertad
-# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
-# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+# Pongo a disposición pública este script bajo el término de "software de dominio público".
+# Puedes hacer lo que quieras con él porque es libre de verdad; no libre con condiciones como las licencias GNU y otras patrañas similares.
+# Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
+# No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA ACTIVAR rc.local EN DEBIAN CON SYSTEMD
-#-----------------------------------------------------------------
+#--------------------------------------------------------
+#  Script de NiPeGun para activar rc.local en ProxmoxVE
+#--------------------------------------------------------
+
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
 
 echo ""
-echo "----------------------------"
-echo "  CONFIGURANDO EL SERVICIO"
-echo "----------------------------"
+echo -e "${ColorVerde}Configurando el servicio...${FinColor}"
 echo ""
 echo "[Unit]" > /etc/systemd/system/rc-local.service
 echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
@@ -32,9 +32,7 @@ echo "[Install]" >> /etc/systemd/system/rc-local.service
 echo "WantedBy=multi-user.target" >> /etc/systemd/system/rc-local.service
 
 echo ""
-echo "------------------------------------"
-echo "  CREANDO EL ARCHIVO /etc/rc.local"
-echo "------------------------------------"
+echo -e "${ColorVerde}Creando el archivo /etc/rc.local...${FinColor}"
 echo ""
 echo '#!/bin/bash' > /etc/rc.local
 echo "" >> /etc/rc.local
@@ -43,9 +41,7 @@ echo "exit 0" >> /etc/rc.local
 chmod +x /etc/rc.local
 
 echo ""
-echo "----------------------------------------------"
-echo "  CREANDO EL ARCHIVO PARA METER LOS COMANDOS"
-echo "----------------------------------------------"
+echo -e "${ColorVerde}Creando el archivo para meter los comandos...${FinColor}"
 echo ""
 echo '#!/bin/bash' > /root/ComandosPostArranque
 echo "" >> /root/ComandosPostArranque
@@ -59,9 +55,7 @@ echo "" >> /root/ComandosPostArranque
 chmod 700 /root/ComandosPostArranque
 
 echo ""
-echo "--------------------------------------"
-echo "  ACTIVANDO Y ARRANCANDO EL SERVICIO"
-echo "--------------------------------------"
+echo -e "${ColorVerde}Activando y arrancando el servicio...${FinColor}"
 echo ""
 systemctl enable rc-local
 systemctl start rc-local.service
