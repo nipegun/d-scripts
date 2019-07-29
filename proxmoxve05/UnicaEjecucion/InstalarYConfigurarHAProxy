@@ -1,23 +1,20 @@
 
 #!/bin/bash
 
-# Pongo a disposición pública este script bajo el término de "software
-# de dominio público". Puedes hacer lo que te salga de los huevos con él
-# porque es libre de verdad; no libre con condiciones como las licencias GNU
-# y otras patrañas similares. Si se te llena la boca hablando de libertad
-# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
-# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+# Pongo a disposición pública este script bajo el término de "software de dominio público".
+# Puedes hacer lo que quieras con él porque es libre de verdad; no libre con condiciones como las licencias GNU y otras patrañas similares.
+# Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
+# No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA INSTALAR Y CONFIGURAR HAPROXY EN PROXMOXVE.
-#  EL OBJETIVO ES CORRER MUCHOS SERVIDORES WEBS EN HAPROXY Y ROUTEAR
-#  EL TRÁFICO QUE LLEGA AL HYPERVISOR HACIA CADA SERVIDOR WEB
-#  CORRESPONDIENTE BASÁNDOSE EN EL NOMBRE DE DOMINIO (SNI).
+#----------------------------------------------------------------------------------------------------------------------------
+#  Script de NiPeGun para instalar y configurar HAProxy en ProxmoxVE.
 #
-#  DEBERÁS MODIFICAR EL SCRIPT CAMBIANDO web1 y web2 POR LOS CORRES-
-#  PONDIENTE DOMINIOS. EN EL CASO DE NECESITAR MÁS, SIMPLEMENTE
-#  AGRÉGALOS SIGUIENDO LA LÓGICA.
-#----------------------------------------------------------------------
+#  El objetivo es correr muchos serviores web en PVE y routear el tráfico que llega al host Proxmox hacia cada servidor web
+#  correspondiente basándose en el nombre de dominio (SNI).
+#
+#  Deberás modificar el script cambiando web1 y web2 por los correspondientes dominios. En el caso de necesitar más,
+#  simplemente agrégalos siguiéndo la lógica.
+#----------------------------------------------------------------------------------------------------------------------------
 
 # Actualizar los repositorios
 apt-get -y update
@@ -85,6 +82,4 @@ echo "" >> /etc/haproxy/haproxy.cfg
 
 # Reiniciar HAProxy
 service haproxy restart
-
-
 
