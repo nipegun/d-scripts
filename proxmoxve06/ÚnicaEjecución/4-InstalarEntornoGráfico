@@ -71,10 +71,9 @@ menu=(dialog --timeout 5 --checklist "Elección de escritorio:" 22 76 16)
             echo -e "${ColorVerde}Instalando escritorio Mate...${FinColor}"
             echo ""
             tasksel install mate-dektop
-            apt-get -y remove xterm reportbug
             apt-get -y install filezilla vlc clamav clamtk audacity obs-studio openshot htop remmina etherape
             apt-get -y install firefox-esr-l10n-es-es libreoffice-l10n-es thunderbird-l10n-es-es lightning-l10n-es-es
-            #apt-get -y install gnome-disk-utility
+            apt-get -y remove xterm reportbug blender imagemagick inkscape gnome-disk-utility
             systemctl disable NetworkManager.service
           ;;
 
