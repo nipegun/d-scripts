@@ -56,9 +56,8 @@ if [ $# -ne $EXPECTED_ARGS ]
           echo ""
           mkdir /home/$1/
           chown $1:$1 /home/$1/ -R
-          find /home/$1 -type d -print0 | xargs -0 chmod 0775
-          echo "hacks4geeks rules da net" > /home/$1/$1 
-          find /home/$1 -type f -print0 | xargs -0 chmod 0664
+          find /home/$1 -type d -exec chmod 775 {} \;
+          find /home/$1 -type f -exec chmod 664 {} \;
         ;;
 
         3)
@@ -67,9 +66,8 @@ if [ $# -ne $EXPECTED_ARGS ]
           echo "  DENEGANDO EL ACCESO A LA CARPETA /home/$1 A LOS OTROS USUARIOS"
           echo "----------------------------------------------------------------------"
           echo ""
-          find /home/$1 -type d -print0 | xargs -0 chmod 0750
-          echo "hacks4geeks rules da net" > /home/$1/$1
-          find /home/$1 -type f -print0 | xargs -0 chmod 0664
+          find /home/$1 -type d -exec chmod 750 {} \;
+          find /home/$1 -type f -exec chmod 664 {} \;
         ;;
     
         4)
