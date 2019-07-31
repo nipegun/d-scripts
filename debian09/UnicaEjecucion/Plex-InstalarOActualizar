@@ -1,17 +1,15 @@
 #!/bin/bash
 
-# Pongo a disposición pública este script bajo el término de "software
-# de dominio público". Puedes hacer lo que te salga de los huevos con él
-# porque es libre de verdad; no libre con condiciones como las licencias GNU
-# y otras patrañas similares. Si se te llena la boca hablando de libertad
-# entonces hazlo realmente libre. No tienes que aceptar ningún tipo de términos
-# de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+# Pongo a disposición pública este script bajo el término de "software de dominio público".
+# Puedes hacer lo que quieras con él porque es libre de verdad; no libre con condiciones como las licencias GNU y otras patrañas similares.
+# Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
+# No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #-----------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar el servidor Plex
 #-----------------------------------------------------------------
 
-ColorNotificacion="\033[1;32m"
+ColorVerde="\033[1;32m"
 FinColor="\033[0m"
 
 menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
@@ -28,7 +26,7 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
 
         1)
           echo ""
-          echo -e "${ColorNotificacion}Instalando Plex para arquitectura x86 de 32 bits...${FinColor}"
+          echo -e "${ColorVerde}Instalando Plex para arquitectura x86 de 32 bits...${FinColor}"
           echo ""
           mkdir /root/paquetes
           mkdir /root/paquetes/plex 
@@ -36,29 +34,29 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           rm -f /root/paquetes/plex/plex32x86.deb
 
           echo ""
-          echo "Descargando el paquete de instalación..."
+          echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
           echo ""
           wget http://hacks4geeks.com/_/premium/descargas/Debian/root/paquetes/plex/plex32x86.deb
 
           echo ""
-          echo "Deteniendo el servicio plexmediaserver (si es que está activo)..."
+          echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
           echo ""
           service plexmediaserver stop
 
           echo ""
-          echo ""
+          echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
           echo ""
           dpkg -i /root/paquetes/plex/plex32x86.deb
           
           echo ""
-          echo "Arrancando el servicio plexmediaserver..."
+          echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
           echo ""
           service plexmediaserver start
         ;;
 
         2)
           echo ""
-          echo -e "${ColorNotificacion}Instalando Plex para arquitectura x86 de 64 bits...${FinColor}"
+          echo -e "${ColorVerde}Instalando Plex para arquitectura x86 de 64 bits...${FinColor}"
           echo ""
           mkdir /root/paquetes
           mkdir /root/paquetes/plex 
@@ -66,29 +64,29 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           rm -f /root/paquetes/plex/plex64x86.deb
 
           echo ""
-          echo "Descargando el paquete de instalación..."
+          echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
           echo ""
           wget http://hacks4geeks.com/_/premium/descargas/Debian/root/paquetes/plex/plex64x86.deb
 
           echo ""
-          echo "Deteniendo el servicio plexmediaserver (si es que está activo)..."
+          echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
           echo ""
           service plexmediaserver stop
 
           echo ""
-          echo ""
+          echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
           echo ""
           dpkg -i /root/paquetes/plex/plex64x86.deb
           
           echo ""
-          echo "Arrancando el servicio plexmediaserver..."
+          echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
           echo ""
           service plexmediaserver start
         ;;
 
         3)
           echo ""
-          echo -e "${ColorNotificacion}Instalando Plex para arquitectura ARMv7 (armhf)...${FinColor}"
+          echo -e "${ColorVerde}Instalando Plex para arquitectura ARMv7 (armhf)...${FinColor}"
           echo ""
           mkdir /root/paquetes
           mkdir /root/paquetes/plex 
@@ -101,24 +99,24 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           wget http://hacks4geeks.com/_/premium/descargas/Debian/root/paquetes/plex/plexARMv7.deb
 
           echo ""
-          echo "Deteniendo el servicio plexmediaserver (si es que está activo)..."
+          echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
           echo ""
           service plexmediaserver stop
 
           echo ""
-          echo ""
+          echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
           echo ""
           dpkg -i /root/paquetes/plex/plexARMv7.deb
           
           echo ""
-          echo "Arrancando el servicio plexmediaserver..."
+          echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
           echo ""
           service plexmediaserver start
         ;;
 
         4)
           echo ""
-          echo -e "${ColorNotificacion}Instalando Plex para arquitectura ARMv7 (arm64)...${FinColor}"
+          echo -e "${ColorVerde}Instalando Plex para arquitectura ARMv7 (arm64)...${FinColor}"
           echo ""
           mkdir /root/paquetes
           mkdir /root/paquetes/plex 
@@ -126,22 +124,22 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           rm -f /root/paquetes/plex/plexARMv8.deb
 
           echo ""
-          echo "Descargando el paquete de instalación..."
+          echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
           echo ""
           wget http://hacks4geeks.com/_/premium/descargas/Debian/root/paquetes/plex/plexARMv8.deb
 
           echo ""
-          echo "Deteniendo el servicio plexmediaserver (si es que está activo)..."
+          echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
           echo ""
           service plexmediaserver stop
 
           echo ""
-          echo ""
+          echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
           echo ""
           dpkg -i /root/paquetes/plex/plexARMv8.deb
           
           echo ""
-          echo "Arrancando el servicio plexmediaserver..."
+          echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
           echo ""
           service plexmediaserver start
         ;;
