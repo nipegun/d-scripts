@@ -6,20 +6,23 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA INSTALAR Y CONFIGURAR transmission-daemon
+#  Script de NiPeGun para instalar y configurar transmission-daemon
 #--------------------------------------------------------------------
 
 EXPECTED_ARGS=4
 E_BADARGS=65
 
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
+
 if [ $# -ne $EXPECTED_ARGS ]
   then
     echo ""
     echo "--------------------------------------------------------------------------------------------"
-    echo "  Mal uso del script."
+    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo "  El uso correcto sería:"
-    echo "  $0 [CarpetaDeDescargas] [CarpetaDeIncompletos] [Password] [Usuario]"
+    echo -e "$0 ${ColorVerde}[CarpetaDeDescargas] [CarpetaDeIncompletos] [Password] [Usuario]${FinColor}"
     echo ""
     echo "  Ejemplo:"
     echo "  $0 /var/tmp/transmission/completos /var/tmp/transmission/incompletos 12345678 nico"
@@ -28,31 +31,23 @@ if [ $# -ne $EXPECTED_ARGS ]
     exit $E_BADARGS
   else
     echo ""
-    echo "---------------------------------------------"
-    echo "  CREANDO LAS CARPETAS PARA LAS DESCARGAS"
-    echo "---------------------------------------------"
+    echo -e "${ColorVerde}Creando las carpetas para las descargas...${FinColor}"
     echo ""
     mkdir -p $1
     mkdir -p $2
     
     echo ""
-    echo "---------------------------------------------"
-    echo "  INSTALANDO EL PAQUETE transmission-daemon"
-    echo "---------------------------------------------"
+    echo -e "${ColorVerde}Instalando el paquete transission-daemon...${FinColor}"
     echo ""
     apt-get -y install transmission-daemon
 
     echo ""
-    echo "---------------------------------------------"
-    echo "  DETENIENDO EL SERVICIO transmission-daemon"
-    echo "---------------------------------------------"
+    echo -e "${ColorVerde}Deteniendo el servicio transmission-daemon${FinColor}"
     echo ""
     service transmission-daemon stop
 
     echo ""
-    echo "------------------------------------------"
-    echo "  REALIZANDO CAMBIOS EN LA CONFIGURACIÓN"
-    echo "------------------------------------------"
+    echo -e "${ColorVerde}Realizando cambios en la configuración...${FinColor}"
     echo ""
     cp /etc/transmission-daemon/settings.json /etc/transmission-daemon/settings.json.bak
     sed -i -e 's|"download-dir": "/var/lib/transmission-daemon/downloads",|"download-dir": "'$1'",|g' /etc/transmission-daemon/settings.json
@@ -65,16 +60,12 @@ if [ $# -ne $EXPECTED_ARGS ]
     sed -i -e 's|"umask": 18,|"umask": 2,|g' /etc/transmission-daemon/settings.json
 
     echo ""
-    echo "---------------------------------------------"
-    echo "  INICIANDO EL SERVICIO transmission-daemon"
-    echo "---------------------------------------------"
+    echo -e "${ColorVerde}Iniciando el servicio transmission-daemon...${FinColor}"
     echo ""
     service transmission-daemon start
 
     echo ""
-    echo "-----------------------------------------------------"
-    echo "  AGREGANDO EL USUARIO AL GRUPO transmission-daemon"
-    echo "-----------------------------------------------------"
+    echo -e "${ColorVerde}Agregando el usuario al grupo transmission-daemon...${FinColor}"
     echo ""
     usermod -a -G debian-transmission $4
 
