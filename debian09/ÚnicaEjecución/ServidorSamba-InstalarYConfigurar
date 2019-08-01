@@ -6,13 +6,18 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA INSTALAR Y CONFIGURAR EL SERVIDOR SAMBA
+#  Script de NiPeGun para instalar y configurar el servidor Samba
+#
 #  Para que los usuarios puedan utilizar samba es necesario crearles
 #  una contraseña para samba al usuario con:
 #  smbpasswd -a NombreDeUsuario
 #  La contraseña samba puede ser distinta a la de la propia cuenta
 #  de usuario
 #-------------------------------------------------------------------
+
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
 
 EXPECTED_ARGS=3
 E_BADARGS=65
@@ -21,8 +26,8 @@ if [ $# -ne $EXPECTED_ARGS ]
   then
     echo ""
     echo "---------------------------------------------------------------"
-    echo "Mal uso del script. El uso correcto sería:"
-    echo "$0 [GrupoDeTrabajo] [NombreNetBios] [Usuario]"
+    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo -e "$0 ${ColorVerde}[GrupoDeTrabajo] [NombreNetBios] [Usuario]${FinColor}"
     echo ""
     echo "Ejemplo:"
     echo "$0 oficina ordenador pepe"
@@ -48,19 +53,15 @@ if [ $# -ne $EXPECTED_ARGS ]
 
           1)
             echo ""
-            echo "---------------------------------------"
-            echo "  INSTALANDO LOS PAQUETES NECESARIOS"
-            echo "---------------------------------------"
+            echo -e "${ColorVerde}Instalando los paquetes necesarios...${FinColor}"
             echo ""
             apt-get -y install libcups2 samba samba-common cups
-            mv /etc/samba/smb.conf /etc/samba/smb.conf.bak
+            cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
           ;;
 
           2)
             echo ""
-            echo "--------------------------------------"
-            echo "  CONFIGURANDO LAS OPCIONES GLOBALES"
-            echo "--------------------------------------"
+            echo -e "${ColorVerde}Configurando las opciones globales...${FinColor}"
             echo ""
             echo "[global]" > /etc/samba/smb.conf
             echo "  workgroup = $1" >> /etc/samba/smb.conf
@@ -80,9 +81,7 @@ if [ $# -ne $EXPECTED_ARGS ]
 
           3)
             echo ""
-            echo "---------------------------------------------------"
-            echo "  CREANDO LA COMPARTICIÓN PARA LA CARPETA PÚBLICA"
-            echo "---------------------------------------------------"
+            echo -e "${ColorVerde}Creando la compartición para la carpeta pública...${FinColor}"
             echo ""
             echo "[publica]" >> /etc/samba/smb.conf
             mkdir /publica/
@@ -98,9 +97,7 @@ if [ $# -ne $EXPECTED_ARGS ]
           ;;
           4)
             echo ""
-            echo "-------------------------------------------------------"
-            echo "  CREANDO LA COMPARTICIÓN PARA LA CARPETA DEL USUARIO"
-            echo "-------------------------------------------------------"
+            echo -e "${ColorVerde}Creando la compartición para la carpeta del usuario...${FinColor}"
             echo ""
             echo "[Usuario $3]" >> /etc/samba/smb.conf
             echo "  path = /home/$3/" >> /etc/samba/smb.conf
@@ -108,14 +105,11 @@ if [ $# -ne $EXPECTED_ARGS ]
             echo "  browsable = yes" >> /etc/samba/smb.conf
             echo "  read only = no" >> /etc/samba/smb.conf
             echo "  valid users = $3" >> /etc/samba/smb.conf
-
           ;;
 
           5)
             echo ""
-            echo "---------------------------------------------------------"
-            echo "  CREANDO LA COMPARTICIÓN DE UNA CARPETA CON MULTIMEDIA"
-            echo "---------------------------------------------------------"
+            echo -e "${ColorVerde}Creando la compartición de una carpeta Multimedia...${FinColor}"
             echo ""
             echo "[Multimedia]" >> /etc/samba/smb.conf
             echo "  path = /Multimedia/" >> /etc/samba/smb.conf
@@ -129,9 +123,7 @@ if [ $# -ne $EXPECTED_ARGS ]
 
           6)
             echo ""
-            echo "-----------------------------------------------------"
-            echo "  CREANDO LA COMPARTICIÓN DE LA CARPETA DE LAS WEBS"
-            echo "-----------------------------------------------------"
+            echo -e "${ColorVerde}Creando la compartición de la carpeta de las Webs...${FinColor}"
             echo ""
             echo "[Webs]" >> /etc/samba/smb.conf
             echo "  path = /var/www/" >> /etc/samba/smb.conf
