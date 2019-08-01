@@ -9,19 +9,15 @@
 #  Script de NiPeGun para actualizar Debian
 #--------------------------------------------
 
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
+
 echo ""
-echo "----------------------------------------"
-echo "  Actualizando el sistema operativo..."
-echo "----------------------------------------"
+echo -e "${ColorVerde}Actualizando sistema operativo...${FinColor}"
 echo ""
 apt-get -y update
 apt-get -y upgrade
 apt-get -y dist-upgrade
 apt-get -y autoremove
-
-echo ""
-echo "-----------------------------------"
-echo "  Ejecución de script finalizada"
-echo "-----------------------------------"
-echo ""
 
