@@ -45,9 +45,13 @@ echo -e "${ColorVerde}Creando el archivo para meter los comandos...${FinColor}"
 echo ""
 echo '#!/bin/bash' > /root/ComandosPostArranque
 echo "" >> /root/ComandosPostArranque
-echo 'FechaDeEjecucion=$(date +A%YM%mD%d@%T)' >> /root/ComandosPostArranque
+echo "ColorRojo='\033[1;31m'" >> /root/ComandosPostArranque
+echo "ColorVerde='\033[1;32m'" >> /root/ComandosPostArranque
+echo "FinColor='\033[0m'" >> /root/ComandosPostArranque
 echo "" >> /root/ComandosPostArranque
-echo 'echo "El script post-arranque se ejecutó el $FechaDeEjecucion" >> /var/log/PostArranque.log' >> /root/ComandosPostArranque
+echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)' >> /root/ComandosPostArranque
+echo "" >> /root/ComandosPostArranque
+echo 'echo "El script post-arranque se ejecutó el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/ComandosPostArranque
 echo "" >> /root/ComandosPostArranque
 echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"  >> /root/ComandosPostArranque
 echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/ComandosPostArranque
