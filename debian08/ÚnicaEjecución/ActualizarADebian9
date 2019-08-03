@@ -5,9 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------
-#  SCRIPT DE NIPEGUN ACTUALIZAR DE DEBIAN 8 A DEBIAN 9
-#-------------------------------------------------------
+#------------------------------------------------------------
+#  Script de NiPeGun para actualizar de Debian 8 a Debian 9
+#------------------------------------------------------------
 
 apt-get -y update
 apt-get -y upgrade
