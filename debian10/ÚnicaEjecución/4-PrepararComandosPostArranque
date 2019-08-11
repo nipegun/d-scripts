@@ -36,27 +36,27 @@ echo -e "${ColorVerde}Creando el archivo /etc/rc.local ...${FinColor}"
 echo ""
 echo '#!/bin/bash' > /etc/rc.local
 echo "" >> /etc/rc.local
-echo "/root/ComandosPostArranque" >> /etc/rc.local
+echo "/root/scripts/ComandosPostArranque.sh" >> /etc/rc.local
 echo "exit 0" >> /etc/rc.local
 chmod +x /etc/rc.local
 
 echo ""
 echo -e "${ColorVerde}Creando el archivo para meter los comandos...${FinColor}"
 echo ""
-echo '#!/bin/bash' > /root/ComandosPostArranque
-echo "" >> /root/ComandosPostArranque
-echo "ColorRojo='\033[1;31m'" >> /root/ComandosPostArranque
-echo "ColorVerde='\033[1;32m'" >> /root/ComandosPostArranque
-echo "FinColor='\033[0m'" >> /root/ComandosPostArranque
-echo "" >> /root/ComandosPostArranque
-echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)' >> /root/ComandosPostArranque
-echo "" >> /root/ComandosPostArranque
-echo 'echo "El script post-arranque se ejecutó el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/ComandosPostArranque
-echo "" >> /root/ComandosPostArranque
-echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"  >> /root/ComandosPostArranque
-echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/ComandosPostArranque
-echo "" >> /root/ComandosPostArranque
-chmod 700 /root/ComandosPostArranque
+echo '#!/bin/bash' > /root/ComandosPostArranque.sh
+echo "" >> /root/ComandosPostArranque.sh
+echo "ColorRojo='\033[1;31m'" >> /root/ComandosPostArranque.sh
+echo "ColorVerde='\033[1;32m'" >> /root/ComandosPostArranque.sh
+echo "FinColor='\033[0m'" >> /root/ComandosPostArranque.sh
+echo "" >> /root/ComandosPostArranque.sh
+echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)' >> /root/ComandosPostArranque.sh
+echo "" >> /root/ComandosPostArranque.sh
+echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/ComandosPostArranque.sh
+echo "" >> /root/ComandosPostArranque.sh
+echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"  >> /root/ComandosPostArranque.sh
+echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/ComandosPostArranque.sh
+echo "" >> /root/ComandosPostArranque.sh
+chmod 700 /root/ComandosPostArranque.sh
 
 echo ""
 echo -e "${ColorVerde}Activando y arrancando el servicio...${FinColor}"
