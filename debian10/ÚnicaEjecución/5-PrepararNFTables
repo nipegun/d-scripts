@@ -22,5 +22,5 @@ echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL A
 echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ComandosNFTables.sh
 echo "" >> /root/scripts/ComandosNFTables.sh
 chmod 700 /root/scripts/ComandosNFTables.sh
-echo "/root/ComandosNFTables" >> /root/scripts/ComandosPostArranque.sh
+echo "/root/scripts/ComandosNFTables.sh" >> /root/scripts/ComandosPostArranque.sh
 
