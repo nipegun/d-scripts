@@ -71,7 +71,7 @@ echo ""
 echo '#!/bin/bash' > /root/scripts/TareasCronPorSemana.sh
 echo "" >> /root/scripts/TareasCronPorSemana.sh
 echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)' >> /root/scripts/TareasCronPorSemana.sh
-echo 'echo "Cron semanal ejecutado el $FechaDeEjec" >> /var/log/TareasCronPorSemana.log' >> /root/scripts/TareasCronPorSemana.sh
+echo 'echo "Iniciada la ejecución del cron semanal el $FechaDeEjec" >> /var/log/TareasCronPorSemana.log' >> /root/scripts/TareasCronPorSemana.sh
 echo "" >> /root/scripts/TareasCronPorSemana.sh
 echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA SEMANA"  >> /root/scripts/TareasCronPorSemana.sh
 echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/TareasCronPorSemana.sh
@@ -97,7 +97,7 @@ echo ""
 echo '#!/bin/bash' > /root/scripts/TareasCronPorMes.sh
 echo "" >> /root/scripts/TareasCronPorMes.sh
 echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)' >> /root/scripts/TareasCronPorMes.sh
-echo 'echo "Cron mensual ejecutado el $FechaDeEjec" >> /var/log/TareasCronPorMes.log' >> /root/scripts/TareasCronPorMes.sh
+echo 'echo "Iniciada la ejecución del cron mensual el $FechaDeEjec" >> /var/log/TareasCronPorMes.log' >> /root/scripts/TareasCronPorMes.sh
 echo "" >> /root/scripts/TareasCronPorMes.sh
 echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA MES"  >> /root/scripts/TareasCronPorMes.sh
 echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/TareasCronPorMes.sh
