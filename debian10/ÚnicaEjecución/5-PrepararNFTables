@@ -16,11 +16,11 @@ FinColor='\033[0m'
 echo ""
 echo -e "${ColorVerde}Creando el archivo para meter los comandos...${FinColor}"
 echo ""
-echo '#!/bin/bash' > /root/ComandosNFTables
-echo "" >> /root/ComandosNFTables
-echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"  >> /root/ComandosNFTables
-echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/ComandosNFTables
-echo "" >> /root/ComandosNFTables
-chmod 700 /root/ComandosNFTables
-echo "/root/ComandosNFTables" >> /root/ComandosPostArranque
+echo '#!/bin/bash' > /root/scripts/ComandosNFTables.sh
+echo "" >> /root/scripts/ComandosNFTables.sh
+echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"  >> /root/scripts/ComandosNFTables.sh
+echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ComandosNFTables.sh
+echo "" >> /root/scripts/ComandosNFTables.sh
+chmod 700 /root/scripts/ComandosNFTables.sh
+echo "/root/ComandosNFTables" >> /root/scripts/ComandosPostArranque.sh
 
