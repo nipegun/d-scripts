@@ -15,7 +15,7 @@ FinColor='\033[0m'
 
 echo ""
 echo -e "${ColorVerde}Vaciando las reglas de NFTables...${FinColor}"
-nft flush table filter table
+nft flush ruleset
 echo ""
 
 # También se puede hacer por familia de reglas
