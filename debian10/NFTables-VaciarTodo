@@ -18,3 +18,10 @@ echo -e "${ColorVerde}Vaciando las reglas de NFTables...${FinColor}"
 nft flush table filter table
 echo ""
 
+# También se puede hacer por familia de reglas
+# nft flush ruleset arp
+# nft flush ruleset bridge
+# nft flush ruleset inet
+# nft flush ruleset ip
+# nft flush ruleset ip6 
+
