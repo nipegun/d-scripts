@@ -8,20 +8,22 @@
 # de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA CREAR NUEVAS WEBS EN /var/www
+#  Script de NiPeGun para crear nuevas webs en /var/www
 #--------------------------------------------------------
 
 total_param_corr=3
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
 
 if [ $# -ne $total_param_corr ]; then
   echo ""
-  echo "Se le deben pasar los siguientes 3 parámetros obligatorios al script."
+  echo -e "${ColorRojo}Mal uso del script.${FinColor}"
+  echo -e "${ColorRojo}Se le deben pasar tres parámetros obligatorios.${FinColor}"
   echo ""
-  echo "[ExtensionDelDominio] [NombreDeLaWeb] [Password]"
+  echo -e "${ColorVerde}[ExtensionDelDominio] [NombreDeLaWeb] [Password].${FinColor}"
   echo ""
-  echo "Los parámetros deben estar en mostrado arriba:"
-  echo ""
-  echo "Ejemplo: NuevaWebVarWWW .org unawebcualquiera 12345678"
+  echo -e "Ejemplo: $0 ${ColorVerde}.org unawebcualquiera 12345678${FinColor}"
   echo ""
   echo "NOTA: El nombre de la Web también se utilizará como nombre de usuario"
   echo "MySQL."
