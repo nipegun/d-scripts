@@ -18,8 +18,7 @@ FinColor='\033[0m'
 
 if [ $# -ne $total_param_corr ]; then
   echo ""
-  echo -e "${ColorRojo}Mal uso del script.${FinColor}"
-  echo -e "${ColorRojo}Se le deben pasar tres parámetros obligatorios.${FinColor}"
+  echo -e "${ColorRojo}Mal uso del script. Se le deben pasar tres parámetros obligatorios:${FinColor}"
   echo ""
   echo -e "${ColorVerde}[ExtensionDelDominio] [NombreDeLaWeb] [Password].${FinColor}"
   echo ""
