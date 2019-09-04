@@ -23,10 +23,10 @@ if [ $# -ne $total_param_corr ]; then
   echo -e "${ColorVerde}[ExtensionDelDominio] [NombreDeLaWeb] y [Password]${FinColor}"
   echo ""
   echo "Ejemplo:"
+  echo ""
   echo -e "$0 ${ColorVerde}.org unawebcualquiera 12345678${FinColor}"
   echo ""
-  echo "NOTA: El nombre de la Web también se utilizará como nombre de usuario"
-  echo "MySQL."
+  echo "NOTA: El nombre de la Web también se utilizará como nombre de usuario MySQL."
   echo ""
   exit
 else
