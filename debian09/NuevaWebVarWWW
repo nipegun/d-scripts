@@ -20,7 +20,7 @@ if [ $# -ne $total_param_corr ]; then
   echo ""
   echo -e "${ColorRojo}Mal uso del script. Se le deben pasar tres parámetros obligatorios:${FinColor}"
   echo ""
-  echo -e"${ColorVerde}[ExtensionDelDominio] [NombreDeLaWeb] y [Password]${FinColor}"
+  echo -e "${ColorVerde}[ExtensionDelDominio] [NombreDeLaWeb] y [Password]${FinColor}"
   echo ""
   echo "Ejemplo:"
   echo -e "$0 ${ColorVerde}.org unawebcualquiera 12345678${FinColor}"
