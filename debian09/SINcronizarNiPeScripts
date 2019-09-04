@@ -24,13 +24,13 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     echo -e "  ${ColorVerde} y descargando nuevos nipe-scripts si es que existen...${FinColor}"
     echo "------------------------------------------------------------"
     echo ""
-    rm /root/nipe-scripts -R
-    cd /root
+    rm /root/scripts/nipe-scripts -R
+    cd /root/scripts/
     git clone --depth=1 https://github.com/nipegun/nipe-scripts
-    rm /root/nipe-scripts/.git -R
-    rm /root/nipe-scripts/*
-    chmod +x /root/nipe-scripts/* -R
-    /root/nipe-scripts/debian09/CrearAlias
+    rm /root/scripts/nipe-scripts/.git -R
+    rm /root/scripts/nipe-scripts/*
+    chmod +x /root/scripts/nipe-scripts/* -R
+    /root/scripts/nipe-scripts/debian09/CrearAlias
     echo ""
     echo "--------------------------------------------"
     echo -e "  ${ColorVerde}nipe-scripts sincronizados correctamente${FinColor}"
