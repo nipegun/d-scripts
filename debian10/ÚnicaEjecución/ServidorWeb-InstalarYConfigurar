@@ -42,7 +42,7 @@ do
       tasksel install ssh-server
       tasksel install web-server
       apt-get -y install apache2-utils redis-server imagemagick
-      apt-get -y install php7.3-common php7.3-gd php-imagick php7.3-curl php-intl php-redis php-pear php7.3-dev php7.3-json php7.3-mysql libapache2-mod-php7.3 php7.3-cli
+      apt-get -y install php7.3-common php7.3-gd php-imagick php7.3-curl php-intl php-redis php-pear php7.3-dev php7.3-json php7.3-mysql libapache2-mod-php7.3 php7.3-cli php7.3-mbstring
       apt-get -y install php7.3-mcrypt
       a2enmod rewrite
       a2enmod ssl
@@ -52,6 +52,7 @@ do
       a2enmod mime
       a2ensite default-ssl
       phpenmod mcrypt
+      phpenmod mbstring
       sed -i -e 's|max_execution_time = 30|max_execution_time = 300|g' /etc/php/7.3/apache2/php.ini
       sed -i -e 's|memory_limit = 128M|memory_limit = 300M|g' /etc/php/7.3/apache2/php.ini
       sed -i -e 's|post_max_size = 8M|post_max_size = 64M|g' /etc/php/7.3/apache2/php.ini
