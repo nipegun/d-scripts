@@ -16,7 +16,8 @@ FinColor='\033[0m'
 cmd=(dialog --checklist "Script de hacks4geeks.com para instalación de servidor Web:" 22 76 16)
 options=(1 "Instalar con certificado SSL autofirmado" on
          2 "Agregar certificado LetsEncrypt encima (Requiere DDNS)" off
-         3 "Servidor de correo (Requiere DDNS)" off)
+         3 "Configurar y activar el módulo remoteip para estar detrás de un proxy inverso" off
+         4 "Servidor de correo (Requiere DDNS)" off)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
 for choice in $choices
@@ -207,17 +208,37 @@ do
     ;;
 
     3)
-      # ----------------------------------------------------------------------------------------------
-      # -------------------------------------- CÓDIGO SIN PROBAR -------------------------------------
-      # ----------------------------------------------------------------------------------------------
-      # echo ""
-      # echo -e "${ColorVerde}Instalando el servidor de correo postfix.${FinColor}"
-      # echo -e "${ColorVerde}Cuando te lo pregunte indícale la dirección DDNS que le indicaste a letsencrypt.${FinColor}"
-      # echo ""
-      # apt-get -y install postfix
-      # ----------------------------------------------------------------------------------------------
-      # --------------------------------- FIN DEL CÓDIGO SIN PROBAR ----------------------------------
-      # ----------------------------------------------------------------------------------------------
+      a2enmod remoteip
+      a2enmod headers
+      echo "RemoteIPHeader X-Forwarded-For" > /etc/apache2/conf-available/remoteip.conf
+      echo "#RemoteIPInternalProxy 0.0.0.0" >> /etc/apache2/conf-available/remoteip.conf
+      echo "#RemoteIPTrustedProxy 0.0.0.0" >> /etc/apache2/conf-available/remoteip.conf
+      echo 'LogFormat "%a %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined' >> /etc/apache2/conf-available/remoteip.conf
+      a2enconf remoteip
+      service apache2 restart
+      echo ""
+      echo "El modulo remoteip está activado. Para configurarlo edita el archivo:"
+      echo ""
+      echo "/etc/apache2/conf-available/remoteip.conf"
+      echo ""
+      echo "descomenta la línea que te interese de las dos que están comentadas,"
+      echo "reemplaza la ip que aparece como 0.0.0.0 con la ip del host del proxy inverso"
+      echo "y reinicia apache 2 ejecutando:"
+      echo ""
+      echo "service apache2 restart"
+      echo ""
+      echo "Para más información sobre este punto, revisa:"
+      echo ""
+      echo "http://hacks4geeks.com/pasar-ips-reales-de-clientes-http-de-haproxy-a-backends-con-apache/"
+      echo ""
+    ;;
+
+    4)
+      echo ""
+      echo -e "${ColorVerde}Instalando el servidor de correo postfix.${FinColor}"
+      echo -e "${ColorVerde}Cuando te lo pregunte indícale la dirección DDNS que le indicaste a letsencrypt.${FinColor}"
+      echo ""
+      apt-get -y install postfix
     ;;
 
     esac
