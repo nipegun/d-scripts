@@ -9,5 +9,6 @@
 #  Script de NiPeGun para mostrar si el shell que se está ejecutando es completo de login o no
 #-----------------------------------------------------------------------------------------------
 
-shopt -q login_shell && echo 'Shell completo, con variables de entorno' || echo "Shell incompleto, sin variables de entorno"
-
+echo ""
+shopt -q login_shell && echo 'Shell login. Variables de entorno del usuario cargadas' || echo "Shell no-login. variables de entorno del usuario NO cargadas."
+echo ""
