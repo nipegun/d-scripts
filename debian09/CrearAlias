@@ -63,6 +63,7 @@ ln -s /root/scripts/nipe-scripts/debian09/ImportarBaseDeDatos                   
 ln -s /root/scripts/nipe-scripts/debian09/IMPrimir                                  /root/scripts/nipe-scripts/imp
 ln -s /root/scripts/nipe-scripts/debian09/IMPrimirArchivo                           /root/scripts/nipe-scripts/impa
 ln -s /root/scripts/nipe-scripts/debian09/InfoNodoLitecoin                          /root/scripts/nipe-scripts/inl
+ln -s /root/scripts/nipe-scripts/debian09/InfoShell                                 /root/scripts/nipe-scripts/is
 ln -s /root/scripts/nipe-scripts/debian09/LanzarEscritorio                          /root/scripts/nipe-scripts/le
 ln -s /root/scripts/nipe-scripts/debian09/ListarNodosTORQueEntran                   /root/scripts/nipe-scripts/lntorqe
 ln -s /root/scripts/nipe-scripts/debian09/MonitorizarLog                            /root/scripts/nipe-scripts/ml
