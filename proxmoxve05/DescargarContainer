@@ -22,7 +22,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo "------------------------------------------------------------------------------"
     echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo -e "$0 ${ColorArgumentos}[NombreDelUsuario]${FinColor}"
+    echo -e "$0 ${ColorArgumentos}[NombreDelContainer]${FinColor}"
     echo ""
     echo "Ejemplo:"
     echo ' $0 debian-9.0-standard_9.7-1_amd64.tar.gz'
