@@ -57,6 +57,13 @@ do
       apt-get -y install php-imagick
       apt-get -y install php-pear
       apt-get -y install libapache2-mod-php7.3
+      phpenmod gd
+      phpenmod curl
+      phpenmod json
+      phpenmod mbstring
+      phpenmod intl
+      phpenmod redis
+      phpenmod imagick
       a2enmod rewrite
       a2enmod ssl
       a2enmod headers
