@@ -9,8 +9,15 @@
 #  Script de NiPeGun para volver a activar el power saving
 #-----------------------------------------------------------
 
+# Sleep
 systemctl unmask sleep.target
+
+# Suspender
 systemctl unmask suspend.target
+
+# Hibernar
 systemctl unmask hibernate.target
+
+# Hybrid Sleep
 systemctl unmask hybrid-sleep.target
 
