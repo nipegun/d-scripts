@@ -43,8 +43,20 @@ do
       tasksel install ssh-server
       tasksel install web-server
       apt-get -y install apache2-utils redis-server imagemagick
-      apt-get -y install php7.3-common php7.3-gd php-imagick php7.3-curl php-intl php-redis php-pear php7.3-dev php7.3-json php7.3-mysql libapache2-mod-php7.3 php7.3-cli php7.3-mbstring
+      apt-get -y install php7.3-common
+      apt-get -y install php7.3-gd
+      apt-get -y install php7.3-curl
+      apt-get -y install php7.3-cli
+      apt-get -y install php7.3-dev
+      apt-get -y install php7.3-json
+      apt-get -y install php7.3-mysql
       apt-get -y install php7.3-mcrypt
+      apt-get -y install php7.3-mbstring
+      apt-get -y install php-intl
+      apt-get -y install php-redis
+      apt-get -y install php-imagick
+      apt-get -y install php-pear
+      apt-get -y install libapache2-mod-php7.3
       a2enmod rewrite
       a2enmod ssl
       a2enmod headers
