@@ -62,6 +62,14 @@ do
       apt-get -y install php-pear
       apt-get -y install libapache2-mod-php5
       apt-get -y install phpsysinfo
+      phpenmod gd
+      phpenmod curl
+      phpenmod json
+      phpenmod mbstring
+      phpenmod mcrypt
+      phpenmod intl
+      phpenmod redis
+      phpenmod imagick
       a2enmod rewrite
       a2enmod ssl
       a2enmod headers
@@ -69,7 +77,6 @@ do
       a2enmod dir
       a2enmod mime
       a2ensite default-ssl
-      php5enmod mcrypt
       sed -i -e 's|max_execution_time = 30|max_execution_time = 300|g' /etc/php5/apache2/php.ini
       sed -i -e 's|memory_limit = 128M|memory_limit = 300M|g' /etc/php5/apache2/php.ini
       sed -i -e 's|post_max_size = 8M|post_max_size = 64M|g' /etc/php5/apache2/php.ini
