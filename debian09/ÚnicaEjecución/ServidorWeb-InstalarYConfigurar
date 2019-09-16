@@ -59,6 +59,7 @@ do
       phpenmod curl
       phpenmod json
       phpenmod mbstring
+      phpenmod mcrypt
       phpenmod intl
       phpenmod redis
       phpenmod imagick
