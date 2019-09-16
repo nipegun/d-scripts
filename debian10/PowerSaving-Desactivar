@@ -9,8 +9,15 @@
 #  Script de NiPeGun para desactivar el power saving
 #-----------------------------------------------------
 
+# Sleep
 systemctl mask sleep.target
+
+# Suspender
 systemctl mask suspend.target
+
+# Hibernar
 systemctl mask hibernate.target
+
+# Hybrid Sleep
 systemctl mask hybrid-sleep.target
 
