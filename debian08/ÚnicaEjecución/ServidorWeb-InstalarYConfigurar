@@ -47,7 +47,21 @@ do
       tasksel install ssh-server
       tasksel install web-server
       apt-get -y install apache2-utils redis-server imagemagick
-      apt-get -y install php5-common php5-gd php5-imagick php5-curl php5-intl php5-redis php-pear php5-dev php5-json php5-mcrypt php5-mysql libapache2-mod-php5 php5-cli phpsysinfo
+      apt-get -y install php5-common
+      apt-get -y install php5-gd
+      apt-get -y install php5-curl
+      apt-get -y install php5-cli
+      apt-get -y install php5-dev
+      apt-get -y install php5-json
+      apt-get -y install php5-mysql
+      apt-get -y install php5-mcrypt
+      apt-get -y install php5-mbstring
+      apt-get -y install php5-intl
+      apt-get -y install php5-redis
+      apt-get -y install php5-imagick
+      apt-get -y install php-pear
+      apt-get -y install libapache2-mod-php5
+      apt-get -y install phpsysinfo
       a2enmod rewrite
       a2enmod ssl
       a2enmod headers
