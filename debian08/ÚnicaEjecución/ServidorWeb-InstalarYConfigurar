@@ -55,7 +55,7 @@ do
       apt-get -y install php5-json
       apt-get -y install php5-mysql
       apt-get -y install php5-mcrypt
-      apt-get -y install php5-mbstring
+      apt-get -y install php-mbstring
       apt-get -y install php5-intl
       apt-get -y install php5-redis
       apt-get -y install php5-imagick
