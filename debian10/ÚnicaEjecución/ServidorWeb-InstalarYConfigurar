@@ -236,19 +236,19 @@ do
       a2enconf remoteip
       service apache2 restart
       echo ""
-      echo "El modulo remoteip está activado. Para configurarlo edita el archivo:"
+      echo -e "${ColorVerde}El módulo remoteip está activado. Para configurarlo edita el archivo:${FinColor}"
       echo ""
-      echo "/etc/apache2/conf-available/remoteip.conf"
+      echo -e "${ColorVerde}/etc/apache2/conf-available/remoteip.conf${FinColor}"
       echo ""
-      echo "descomenta la línea que te interese de las dos que están comentadas,"
-      echo "reemplaza la ip que aparece como 0.0.0.0 con la ip del host del proxy inverso"
-      echo "y reinicia apache 2 ejecutando:"
+      echo -e "${ColorVerde}descomenta la línea que te interese de las dos que están comentadas,${FinColor}"
+      echo -e "${ColorVerde}reemplaza la ip que aparece como 0.0.0.0 con la ip del host del proxy inverso${FinColor}"
+      echo -e "${ColorVerde}y reinicia apache 2 ejecutando:${FinColor}"
       echo ""
-      echo "service apache2 restart"
+      echo -e "${ColorVerde}service apache2 restart${FinColor}"
       echo ""
-      echo "Para más información sobre este punto, revisa:"
+      echo -e "${ColorVerde}Para más información sobre este punto, revisa:${FinColor}"
       echo ""
-      echo "http://hacks4geeks.com/pasar-ips-reales-de-clientes-http-de-haproxy-a-backends-con-apache/"
+      echo -e "${ColorVerde}http://hacks4geeks.com/pasar-ips-reales-de-clientes-http-de-haproxy-a-backends-con-apache${FinColor}"
       echo ""
     ;;
 
