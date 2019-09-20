@@ -9,6 +9,12 @@
 #  Script de NiPeGun para reparar los permisos de la carpeta /var/www
 #----------------------------------------------------------------------
 
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
+
+FechaDeEjec=$(date +A%YM%mD%d@%T)
+
 # Asignar propiedad de todo el contenido al usuario www-data
 echo ""
 chown www-data:www-data /var/www -R
@@ -30,6 +36,7 @@ chown root:root /var/www
 echo "..."
 
 echo ""
-echo "Finalizado"
+echo "La reparación de permisos se terminó de ejecutar el $FechaDeEjec" >> /var/log/RepPermisos.log
+echo -e "${ColorVerde}Proceso de reparación de permisos de /var/www, finalizado.${FinColor}"
 echo ""
 
