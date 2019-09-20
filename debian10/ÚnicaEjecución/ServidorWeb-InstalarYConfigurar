@@ -185,10 +185,11 @@ do
       echo ""
       apt-get -y install nftables
       systemctl enable nftables.service
-      echo "#nft chain inet filter input { policy drop \; }"      >> /root/scripts/ComandosNFTables.sh
-      echo "#nft add rule inet filter input tcp dport 22 accept"  >> /root/scripts/ComandosNFTables.sh
-      echo "#nft add rule inet filter input tcp dport 80 accept"  >> /root/scripts/ComandosNFTables.sh
-      echo "#nft add rule inet filter input tcp dport 443 accept" >> /root/scripts/ComandosNFTables.sh
+      echo "# Reglas NFTables para servidor Web"                   >> /root/scripts/ComandosNFTables.sh
+      echo "# nft chain inet filter input { policy drop \; }"      >> /root/scripts/ComandosNFTables.sh
+      echo "# nft add rule inet filter input tcp dport 22 accept"  >> /root/scripts/ComandosNFTables.sh
+      echo "# nft add rule inet filter input tcp dport 80 accept"  >> /root/scripts/ComandosNFTables.sh
+      echo "# nft add rule inet filter input tcp dport 443 accept" >> /root/scripts/ComandosNFTables.sh
       
       echo -e "${ColorVerde}El script ha terminado de ejecutarse.${FinColor}"
       echo ""
