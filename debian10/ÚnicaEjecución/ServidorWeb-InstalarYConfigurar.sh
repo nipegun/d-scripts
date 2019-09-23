@@ -139,7 +139,7 @@ do
       echo ""
       mysql_secure_installation
       echo ""
-      
+
       # ----------------------------------------------------------------------------------------------
       # --------------- CÓDIGO SIN PROBAR PORQUE PHPMYADMIN TODAVIA NO ESTÁ DISPONIBLE ---------------
       # ----------------------------------------------------------------------------------------------
@@ -165,7 +165,7 @@ do
       # ----------------------------------------------------------------------------------------------
       # --------------------------------- FIN DEL CÓDIGO SIN PROBAR ----------------------------------
       # ----------------------------------------------------------------------------------------------
-      
+
       echo ""
       echo -e "${ColorVerde}Instalando MemCacheD...${FinColor}"
       echo ""
@@ -173,14 +173,14 @@ do
       phpenmod memcached
       service apache2 restart
       echo ""
-      
+
       echo -e "${ColorVerde}Instalando paquetes adicionales...${FinColor}"
       echo ""
       apt-get -y remove manpages
       apt-get -y install nmap nbtscan
       apt-get -y install manpages-es mc nano members sysv-rc-conf zip unzip elinks
       echo ""
-      
+
       echo -e "${ColorVerde}Instalando el cortafuegos NFTables...${FinColor}"
       echo ""
       apt-get -y install nftables
@@ -190,13 +190,13 @@ do
       echo "# nft add rule inet filter input tcp dport 22 accept"  >> /root/scripts/ComandosNFTables.sh
       echo "# nft add rule inet filter input tcp dport 80 accept"  >> /root/scripts/ComandosNFTables.sh
       echo "# nft add rule inet filter input tcp dport 443 accept" >> /root/scripts/ComandosNFTables.sh
-      
+
       echo -e "${ColorVerde}El script ha terminado de ejecutarse.${FinColor}"
       echo ""
       echo -e "${ColorVerde}Reinicia el sistema ejecutando: shutdown -r now${FinColor}"
       echo ""
     ;;
-    
+
     2)
       # ----------------------------------------------------------------------------------------------
       # -------------------------------------- CÓDIGO SIN PROBAR -------------------------------------
