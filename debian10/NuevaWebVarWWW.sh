@@ -247,7 +247,7 @@ else
     echo "" >> /var/www/$2$1/.htaccess
     echo "  </IfModule>" >> /var/www/$2$1/.htaccess
     echo "" >> /var/www/$2$1/.htaccess
-    echo "# END Medidas de seguridad" > /var/www/$2$1/.htaccess
+    echo "# END Medidas de seguridad" >> /var/www/$2$1/.htaccess
     echo "" >> /var/www/$2$1/.htaccess
     echo "# BEGIN Redirigir www. a sin www." >> /var/www/$2$1/.htaccess
     echo "" >> /var/www/$2$1/.htaccess
