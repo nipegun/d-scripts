@@ -10,6 +10,7 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 apt-get -y install caja-open-terminal
+apt-get -y install caja-admin
 apt-get -y install firefox-esr-l10n-es-es
 apt-get -y install libreoffice-l10n-es
 apt-get -y install thunderbird
