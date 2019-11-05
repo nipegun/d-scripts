@@ -16,3 +16,10 @@ FinColor='\033[0m'
 echo ""
 echo -e "${ColorVerde}Instalando Fail2Ban...${FinColor}"
 apt-get -y install fail2ban
+service fail2ban stop
+echo "maxretry = 3" >> /etc/fail2ban/jail.d/defaults-debian.conf
+echo "bantime = 10m" >> /etc/fail2ban/jail.d/defaults-debian.conf
+echo "findtime = 10m" >> /etc/fail2ban/jail.d/defaults-debian.conf
+service fail2ban start
+# tail -f /var/log/fail2ban.log
+
