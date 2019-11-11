@@ -29,6 +29,7 @@ apt-get -y install htop
 apt-get -y install remmina
 apt-get -y install etherape
 apt-get -y install sshpass
+apt-get -y install easytag
 
 apt-get -y remove xterm reportbug blender imagemagick inkscape gnome-disk-utility
 apt-get -y autoremove
