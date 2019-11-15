@@ -30,6 +30,7 @@ apt-get -y install remmina
 apt-get -y install etherape
 apt-get -y install sshpass
 apt-get -y install easytag
+/root/scripts/nipe-scripts/debian10/ÚnicaEjecución/Escritorio/InstalarTorBrowser.sh
 
 apt-get -y remove xterm reportbug blender imagemagick inkscape gnome-disk-utility
 apt-get -y autoremove
