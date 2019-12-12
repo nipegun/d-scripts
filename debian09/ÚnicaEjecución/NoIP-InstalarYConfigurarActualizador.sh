@@ -5,9 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA INSTALAR Y CONFIGURAR EL CLIENTE NoIP PARA LINUX
-#---------------------------------------------------------------------------
+#--------------------------------------------------------------------------
+#  Script de NiPeGun para instalar y configurar el cliente NoIP en Debian
+#--------------------------------------------------------------------------
 
 # Actualizar los paquetes de los repositorios
 apt-get update
