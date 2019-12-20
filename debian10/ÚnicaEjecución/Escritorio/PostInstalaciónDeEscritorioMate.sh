@@ -16,6 +16,8 @@ apt-get -y install libreoffice-l10n-es
 apt-get -y install thunderbird
 apt-get -y install thunderbird-l10n-es-es
 apt-get -y install lightning-l10n-es-es
+apt-get -y install chromium
+apt-get -y install chromium-l10n 
 apt-get -y install filezilla
 apt-get -y install vlc
 apt-get -y install virt-viewer
