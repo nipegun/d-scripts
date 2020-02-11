@@ -20,6 +20,7 @@ apt-get -y install chromium
 apt-get -y install chromium-l10n 
 apt-get -y install filezilla
 apt-get -y install vlc
+apt-get -y install vlc-plugin-vlsub
 apt-get -y install virt-viewer
 apt-get -y install unrar
 apt-get -y install clamav
