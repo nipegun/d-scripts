@@ -35,6 +35,8 @@ apt-get -y install sshpass
 apt-get -y install easytag
 apt-get -y install simple-scan
 apt-get -y install subtitleeditor
+apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
+
 /root/scripts/nipe-scripts/debian10/ÚnicaEjecución/Escritorio/InstalarTorBrowser.sh
 
 apt-get -y remove xterm reportbug blender imagemagick inkscape gnome-disk-utility
