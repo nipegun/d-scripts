@@ -37,6 +37,7 @@ apt-get -y install simple-scan
 apt-get -y install subtitleeditor
 apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
 apt-get -y install android-tools-fastboot
+apt-get -y install wireshark
 apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
 
 /root/scripts/nipe-scripts/debian10/ÚnicaEjecución/Escritorio/InstalarTorBrowser.sh
