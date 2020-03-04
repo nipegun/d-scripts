@@ -108,6 +108,7 @@ do
       sleep 2
       apt-get -y install whois nmap nbtscan mailutils wireless-tools wpasupplicant
       apt-get -y install arp-scan
+      apt-get -y install tshark # WireShark para terminal
       echo ""
     ;;
 
