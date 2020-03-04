@@ -91,8 +91,11 @@ do
       echo "--------------------------------------"
       echo ""
       sleep 2
-      apt-get -y install hdparm ntfs-3g cifs-utils hfsplus hfsprogs hfsutils sshfs ecryptfs-utils
-      apt-get -y install ntfsprogs
+      apt-get -y install hdparm
+      apt-get -y install cifs-utils sshfs ecryptfs-utils
+      apt-get -y install ntfs-3g ntfsprogs                # Para manejar sistemas de archivos NTFS
+      apt-get -y install hfsplus hfsprogs hfsutils        # Para manejar sistemas de archivos HFS
+      apt-get -y install libguestfs-tools                 # Para montar VHDs
       echo ""
     ;;
 
