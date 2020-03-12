@@ -92,7 +92,9 @@ do
       echo ""
       sleep 2
       apt-get -y install hdparm
-      apt-get -y install cifs-utils sshfs ecryptfs-utils
+      apt-get -y install cifs-utils
+      apt-get -y sshfs
+      apt-get -y ecryptfs-utils
       apt-get -y install ntfs-3g ntfsprogs                # Para manejar sistemas de archivos NTFS
       apt-get -y install hfsplus hfsprogs hfsutils        # Para manejar sistemas de archivos HFS
       apt-get -y install libguestfs-tools                 # Para montar VHDs
@@ -106,7 +108,12 @@ do
       echo "----------------------------------"
       echo ""
       sleep 2
-      apt-get -y install whois nmap nbtscan mailutils wireless-tools wpasupplicant
+      apt-get -y install whois
+      apt-get -y nmap
+      apt-get -y nbtscan
+      apt-get -y mailutils
+      apt-get -y wireless-tools
+      apt-get -y wpasupplicant
       apt-get -y install arp-scan
       apt-get -y install tshark # WireShark para terminal
       echo ""
@@ -120,14 +127,34 @@ do
       echo ""
       sleep 2
       apt-get -y remove manpages
-      apt-get -y install testdisk dialog hddtemp manpages-es mc nano members sysv-rc-conf zip unzip elinks python rsync
+      apt-get -y install testdisk
+      apt-get -y dialog
+      apt-get -y hddtemp
+      apt-get -y manpages-es
+      apt-get -y mc
+      apt-get -y nano
+      apt-get -y members
+      apt-get -y sysv-rc-conf
+      apt-get -y zip
+      apt-get -y unzip
+      apt-get -y elinks
+      apt-get -y python
+      apt-get -y rsync
       apt-get -y install hardinfo
+      apt-get -y install genisoimage
       echo ""
       
       echo ""
       echo "  Instalando herramientas para comprimir y descomprimir"
       echo ""
-      apt-get -y install unace rar unrar unar p7zip-rar p7zip zip unzip 
+      apt-get -y install unace
+      apt-get -y rar
+      apt-get -y unrar
+      apt-get -y unar
+      apt-get -y p7zip-rar
+      apt-get -y p7zip
+      apt-get -y zip
+      apt-get -y unzip 
     ;;
 
     8)
