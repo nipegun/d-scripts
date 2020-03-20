@@ -149,6 +149,9 @@ do
       echo "wpa_pairwise=TKIP" >> /etc/hostapd/hostapd.conf
       echo "rsn_pairwise=CCMP" >> /etc/hostapd/hostapd.conf
       echo "wpa_passphrase=RouterX86" >> /etc/hostapd/hostapd.conf
+      systemctl unmask hostapd
+      systemctl enable hostapd
+      systemctl start hostapd
 
       echo ""
       echo "----------------------------------"
