@@ -25,11 +25,12 @@ if [ $# -ne $CantArgsEsperados ]
     echo -e "  $0 ${ColorVerde}[ArchivoRAW] [CarpetaDeMontaje]${FinColor}"
     echo ""
     echo "Ejemplo:"
-    echo "  $0 pepe"
+    echo "  $0 /Discos/DiscosDeMVs/images/241/vm-241-disk-0.raw"
     echo "------------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
   else
+    apt-get -y install kpartx
     mkdir -p $2
     losetup /dev/loop0 $1
     kpartx -a /dev/loop0  
