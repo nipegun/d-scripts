@@ -130,25 +130,29 @@ do
       echo "-----------------------------------"
       echo ""
       echo "#/etc/hostapd/hostapd.conf" > /etc/hostapd/hostapd.conf
-      echo "interface=$interfazinalambrica1" >> /etc/hostapd/hostapd.conf
+      echo "" >> /etc/hostapd/hostapd.conf
       echo "driver=nl80211" >> /etc/hostapd/hostapd.conf
-      echo "bridge=br0" >> /etc/hostapd/hostapd.conf
-      echo "hw_mode=a" >> /etc/hostapd/hostapd.conf
+      echo "channel=0                     # El canal a usar. 0 significa que buscará automáticamente el canal con menos interferencias" >> /etc/hostapd/hostapd.conf
+      echo "hw_mode=g" >> /etc/hostapd/hostapd.conf
       echo "wme_enabled=1" >> /etc/hostapd/hostapd.conf
       echo "ieee80211n=1" >> /etc/hostapd/hostapd.conf
-      echo "ieee80211d=1" >> /etc/hostapd/hostapd.conf
-      echo "channel=0" >> /etc/hostapd/hostapd.conf
+      echo "wmm_enabled=1                 # Soporte para QoS" >> /etc/hostapd/hostapd.conf
+      echo "ieee80211d=1                  # Limitar las frecuencias sólo a las disponibles en el país" >> /etc/hostapd/hostapd.conf
       echo "country_code=ES" >> /etc/hostapd/hostapd.conf
-      echo "wmm_enabled=1" >> /etc/hostapd/hostapd.conf
-      echo "ht_capab=[RXLDPC][HT20+][HT40+][SHORT-GI-20][SHORT-GI-40][TX-STBC][RX-STBC1][MAX-AMSDU-3839][DSSS_CCK-40]" >> /etc/hostapd/hostapd.conf
-      echo "ignore_broadcast_ssid=0" >> /etc/hostapd/hostapd.conf
+      echo "ht_capab=[RXLDPC][HT20+][SHORT-GI-20][SHORT-GI-40][TX-STBC][RX-STBC1][MAX-AMSDU-3839][DSSS_CCK-40]" >> /etc/hostapd/hostapd.conf
+      echo "#[HT40-][HT40+]" >> /etc/hostapd/hostapd.conf
+      echo "" >> /etc/hostapd/hostapd.conf
+      echo "# Primer punto de acceso" >> /etc/hostapd/hostapd.conf
+      echo "interface=$interfazinalambrica1" >> /etc/hostapd/hostapd.conf
+      echo "bridge=br0" >> /etc/hostapd/hostapd.conf
       echo "ssid=RouterX86" >> /etc/hostapd/hostapd.conf
-      echo "eap_reauth_period=360000000" >> /etc/hostapd/hostapd.conf
+      echo "ignore_broadcast_ssid=0" >> /etc/hostapd/hostapd.conf
       echo "wpa=2" >> /etc/hostapd/hostapd.conf
       echo "wpa_key_mgmt=WPA-PSK" >> /etc/hostapd/hostapd.conf
       echo "wpa_pairwise=TKIP" >> /etc/hostapd/hostapd.conf
       echo "rsn_pairwise=CCMP" >> /etc/hostapd/hostapd.conf
       echo "wpa_passphrase=RouterX86" >> /etc/hostapd/hostapd.conf
+      echo "eap_reauth_period=360000000" >> /etc/hostapd/hostapd.conf
       systemctl unmask hostapd
       systemctl enable hostapd
       systemctl start hostapd
