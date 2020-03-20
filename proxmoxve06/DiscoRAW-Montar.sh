@@ -31,6 +31,10 @@ if [ $# -ne $CantArgsEsperados ]
     exit $ArgsInsuficientes
   else
     apt-get -y install kpartx
+
+    echo ""
+    echo -e "  $0 ${ColorVerde}Montando disco RAW en el loop0...${FinColor}"
+    echo ""
     mkdir -p $2
     losetup /dev/loop0 $1
     kpartx -a /dev/loop0  
