@@ -9,6 +9,10 @@
 #  Script de NiPeGun para instalar y configurar Jitsi en Debian 10
 #-------------------------------------------------------------------
 
+HostName=$(cat /etc/hostname)
+
+echo "127.0.0.1 $HostName" >> /etc/hosts
+
 # Instalar la llave del repositorio
 wget -qO - https://download.jitsi.org/jitsi-key.gpg.key | apt-key add -
 
