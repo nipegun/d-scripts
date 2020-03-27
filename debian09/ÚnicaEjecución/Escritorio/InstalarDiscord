@@ -18,9 +18,8 @@ echo "  Instalando Discord..."
 echo ""
 apt-get update
 apt-get -y install gdebi wget
-mkdir /root/paquetes
-cd /root/paquetes
-wget --no-check-certificate -O discord https://discordapp.com/api/download?platform=linux&format=deb
+mkdir -p /root/paquetes/Discord
+wget -q --no-check-certificate -O /root/paquetes/Discord/discord.deb https://discordapp.com/api/download?platform=linux&format=deb
 apt-get -y install libappindicator1
-gdebi discord.deb
+gdebi /root/paquetes/Discord/discord.deb
 
