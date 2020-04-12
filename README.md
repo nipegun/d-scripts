@@ -1,12 +1,12 @@
-# nipe-scripts
+# d-scripts
 
-Los "nipe-scripts" son scripts en bash que, o he ido creado para paliar necesidades que han ido surgiendo en el dia a dia de administrar el sistema desde la terminal, o he ido descargando de internet (externos) porque me han parecido útiles.
+Los "d-scripts" son scripts en bash que, o he ido creado para paliar necesidades que han ido surgiendo en el dia a dia de administrar el sistema desde la terminal, o he ido descargando de internet (externos) porque me han parecido útiles.
 
-Si bien están pensados para ser ejecutados en Debian y ProxmoxVE, es probable que puedan ser ejecutados sin errores en derivados como Ubuntu y otros.
+Si bien están pensados para ser ejecutados en Debian es probable que puedan ser ejecutados sin errores en derivados como Ubuntu, Mint u otros.
 
 ## INSTALACIÓN
 
-Para instalar los nipe-scripts en la ubicación aconsejada sigue las instrucciones de este artículo: http://hacks4geeks.com/instalacion-de-los-nipe-scripts
+Para instalar los nipe-scripts en la ubicación aconsejada sigue las instrucciones de este artículo: http://hacks4geeks.com/instalacion-de-los-d-scripts
 
 ### ACLARACIÓN!!
-Los scripts de dentro de las carpetas "UnicaEjecucion" están diseñados (por ahora) para ser ejecutados una ÚNICA vez después de instalar el sistema operativo sin entorno gráfico y sin paquetes extra (como web-server, ssh-server o cualquier otro). Si la ejecución de alguno de esos scripts falla o es interrumpida, no se debería volver a ejecutar el mismo script y habría que recurrir a una revisión manual de lo que pudo haber fallado y de las cosas que podrían haber sido modificadas de forma errónea para corregirlas. En esos casos aconsejo la re-instalación de Debian, la posterior re-sincronización con este repositorio y la re-ejecución del paquete que pudo haber fallado.
+Los scripts de dentro de las carpetas "ÚnicaEjecución" están diseñados (por ahora) para ser ejecutados una ÚNICA vez después de instalar el sistema operativo sin entorno gráfico y sin paquetes extra (como web-server, ssh-server o cualquier otro). Si la ejecución de alguno de esos scripts falla o es interrumpida, no se debería volver a ejecutar el mismo script y habría que recurrir a una revisión manual de lo que pudo haber fallado y de las cosas que podrían haber sido modificadas de forma errónea para corregirlas. En esos casos aconsejo la re-instalación de Debian, la posterior re-sincronización con este repositorio y la re-ejecución del paquete que pudo haber fallado.
