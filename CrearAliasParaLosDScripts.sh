@@ -90,7 +90,7 @@ ln -s /root/scripts/d-scripts/RepararPermisosVarWWW.sh                     /root
 ln -s /root/scripts/d-scripts/RetenerKernels.sh                            /root/scripts/d-scripts/Alias/rk
 ln -s /root/scripts/d-scripts/RPMDeDisco.sh                                /root/scripts/d-scripts/Alias/rpmdd
 ln -s /root/scripts/d-scripts/ServiciosEnEJecución.sh                      /root/scripts/d-scripts/Alias/seej
-ln -s /root/scripts/d-scripts/SINcronizarNiPeScripts.sh                    /root/scripts/d-scripts/Alias/sinnps
+ln -s /root/scripts/d-scripts/SINcronizarDScripts.sh                       /root/scripts/d-scripts/Alias/sinds
 ln -s /root/scripts/d-scripts/TelegramIT.sh                                /root/scripts/d-scripts/Alias/tit
 ln -s /root/scripts/d-scripts/TelegramITFile.sh                            /root/scripts/d-scripts/Alias/titf
 ln -s /root/scripts/d-scripts/TRIM.sh                                      /root/scripts/d-scripts/Alias/trim
