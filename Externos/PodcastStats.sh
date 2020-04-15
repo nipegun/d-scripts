@@ -19,7 +19,7 @@ REGEX="$2"
 
 for f in $LOGGLOB; do
     if [ "${f:(-3)}" = ".gz" ]; then gunzip -c $f; else cat $f; fi;
-done | /root/nipe-scripts/debian09/externos/PodcastStatsFiltro "$REGEX" > $TMPFILE
+done | /root/scrips/d-scripts/externos/PodcastStatsFiltro.sh "$REGEX" > $TMPFILE
 
 printf "\n--- Descargas únicas del episodio\n\n"
 cat $TMPFILE | cut -f1 | sort | uniq -c
