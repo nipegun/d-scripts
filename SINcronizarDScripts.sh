@@ -17,27 +17,27 @@ FinColor='\033[0m'
 wget -q --tries=10 --timeout=20 --spider https://github.com
   if [[ $? -eq 0 ]]; then
     echo ""
-    echo "------------------------------------------------------------"
-    echo -e "  ${ColorVerde}Sincronizando los nipe-scripts con las últimas versiones${FinColor}"
-    echo -e "  ${ColorVerde} y descargando nuevos nipe-scripts si es que existen...${FinColor}"
-    echo "------------------------------------------------------------"
+    echo "----------------------------------------------------------"
+    echo -e "  ${ColorVerde}Sincronizando los d-scripts con las últimas versiones${FinColor}"
+    echo -e "  ${ColorVerde} y descargando nuevos d-scripts si es que existen...${FinColor}"
+    echo "----------------------------------------------------------"
     echo ""
-    rm /root/scripts/nipe-scripts -R
+    rm /root/scripts/d-scripts -R
     cd /root/scripts/
-    git clone --depth=1 https://github.com/nipegun/nipe-scripts
-    rm /root/scripts/nipe-scripts/.git -R
-    rm /root/scripts/nipe-scripts/*
-    chmod +x /root/scripts/nipe-scripts/* -R
-    /root/scripts/nipe-scripts/debian09/CrearAlias
+    git clone --depth=1 https://github.com/nipegun/d-scripts
+    rm /root/scripts/d-scripts/.git -R
+    chmod +x /root/scripts/d-scripts/*.sh -R
+    /root/scripts/d-scripts/CrearAliasParaLosDScripts.sh
+    chmod +x /root/scripts/d-scripts/Alias/* -R
     echo ""
     echo "--------------------------------------------"
-    echo -e "  ${ColorVerde}nipe-scripts sincronizados correctamente${FinColor}"
+    echo -e "  ${ColorVerde}d-scripts sincronizados correctamente${FinColor}"
     echo "--------------------------------------------"
     echo ""
   else
     echo ""
     echo "---------------------------------------------------------------------------------------------------"
-    echo -e "${ColorRojo}No se pudo iniciar la sincronización de los nipe-scripts porque no se detectó conexión a Internet.${FinColor}"
+    echo -e "${ColorRojo}No se pudo iniciar la sincronización de los d-scripts porque no se detectó conexión a Internet.${FinColor}"
     echo "---------------------------------------------------------------------------------------------------"
     echo ""
   fi
