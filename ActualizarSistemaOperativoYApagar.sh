@@ -9,6 +9,6 @@
 #  Script de NiPeGun para actualizar e inmediamente apagar el sistema operativo
 #-----------------------------------------------------------------------------------
 
-/root/scripts/nipe-scripts/debian09/ActualizarSistemaOperativo
-/root/scripts/nipe-scripts/debian09/APagarSistemaOperativo
+/root/scripts/d-scripts/ActualizarSistemaOperativo.sh
+/root/scripts/d-scripts/APagarSistemaOperativo.sh
 
