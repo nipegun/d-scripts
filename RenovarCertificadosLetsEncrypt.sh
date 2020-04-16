@@ -31,5 +31,5 @@ certbot --apache certonly # Te premite configurar el .conf de apache manualemnte
 # for your certificates by running this command:
 # certbot renew --dry-run
 
-echo "certbot renew" >> /root/TareasCronPorSemana
+echo "certbot renew" >> /root/scripts/TareasCronPorSemana.sh
 
