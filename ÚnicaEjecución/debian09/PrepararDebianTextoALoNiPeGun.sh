@@ -10,20 +10,20 @@
 #  RECIÉN INSTALADO Y DEJARLO A GUSTO DE NIPEGUN
 #------------------------------------------------------------------------
 
-/root/nipe-scripts/debian09/UnicaEjecucion/1-ViejaNomencaturaDeEthernet
+/root/scripts/d-scripts/ÚnicaEjecución/debian09/1-ViejaNomencaturaDeEthernet.sh
 
-/root/nipe-scripts/debian09/UnicaEjecucion/2-PonerNombresViejosAInterfacesDeRed
+/root/scripts/d-scripts/ÚnicaEjecución/debian09/2-PonerNombresViejosAInterfacesDeRed.sh
 
-/root/nipe-scripts/debian09/UnicaEjecucion/3-PrepararTareasCron
+/root/scripts/d-scripts/ÚnicaEjecución/debian09/3-PrepararTareasCron.sh
 
-/root/nipe-scripts/debian09/UnicaEjecucion/4-PrepararComandosPostArranque
+/root/scripts/d-scripts/ÚnicaEjecución/debian09/4-PrepararComandosPostArranque.sh
 
-/root/nipe-scripts/debian09/UnicaEjecucion/5-PonerRepositoriosCompletos
+/root/scripts/d-scripts/ÚnicaEjecución/debian09/5-PonerRepositoriosCompletos.sh
 
-echo "mc /root /root" > /root/MidnightCommander
-chmod +x /root/MidnightCommander
+echo "mc /root /root" > /root/scripts/MidnightCommander.sh
+chmod +x /root/scripts/MidnightCommander.sh
 
-/root/nipe-scripts/debian09/ActualizarSistemaOperativo
+/root/scripts/d-scripts/ActualizarSistemaOperativo.sh
 
 apt-get -y install mc
 
