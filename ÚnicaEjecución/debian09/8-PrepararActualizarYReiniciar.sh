@@ -14,7 +14,7 @@
 crontab -l > /root/CronTemporal
 
 # Cargar la nueva tarea dentro del CronTemporal
-echo "30 05 * * 1 /root/nipe-scripts/debian09/ActualizarYReiniciar" >> /root/CronTemporal
+echo "30 05 * * 1 /root/scripts/d-scripts/ActualizarYReiniciar.sh" >> /root/CronTemporal
 
 #      *  * * * * "Comando a ejecutar"
 #      -  - - - -
