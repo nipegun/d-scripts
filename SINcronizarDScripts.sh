@@ -23,7 +23,7 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     echo "----------------------------------------------------------"
     echo ""
     rm /root/scripts/d-scripts -R 2> /dev/null
-    mkdir /root/scripts /dev/null
+    mkdir /root/scripts 2> /dev/null
     cd /root/scripts
     git clone --depth=1 https://github.com/nipegun/d-scripts
     mkdir -p /root/scripts/d-scripts/Alias/
