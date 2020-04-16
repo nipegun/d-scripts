@@ -45,6 +45,6 @@ a2enmod dir
 a2enmod mime
 service apache2 restart
 mkdir -p /root/scripts/
-sh /root/nipe-scripts/debian08/CrearBaseDeDatosYUsuario nextcloud nextcloud $contraseña
+sh /root/scripts/d-scripts/CrearBaseDeDatosYUsuario.sh nextcloud nextcloud $contraseña
 chown -v -R www-data:www-data /Nube/
 
