@@ -41,7 +41,7 @@ apt-get -y install wireshark
 apt-get -y install mumble
 apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
 
-/root/scripts/nipe-scripts/debian10/ÚnicaEjecución/Escritorio/InstalarTorBrowser.sh
+/root/scripts/d-scripts/ÚnicaEjecución/debian10/Escritorio/TorBrowser-Instalar.sh
 
 apt-get -y remove xterm reportbug blender imagemagick inkscape gnome-disk-utility
 apt-get -y autoremove
