@@ -15,11 +15,12 @@ echo "----------------------------------------------"
 echo "  CREANDO EL ARCHIVO PARA METER LOS COMANDOS"
 echo "----------------------------------------------"
 echo ""
-echo '#!/bin/bash' > /root/ComandosIPTables
-echo "" >> /root/ComandosIPTables
-echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE IPTABLES A EJECUTAR AL ARRANQUE"  >> /root/ComandosIPTables
-echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/ComandosIPTables
-echo "" >> /root/ComandosIPTables
-chmod 700 /root/ComandosIPTables
-echo "/root/ComandosIPTables" >> /root/ComandosPostArranque
+mkdir -p /root/scripts/ 2> /dev/null
+echo '#!/bin/bash' > /root/scripts/ComandosIPTables.sh
+echo "" >> /root/scripts/ComandosIPTables.sh
+echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE IPTABLES A EJECUTAR AL ARRANQUE"  >> /root/scripts/ComandosIPTables.sh
+echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ComandosIPTables.sh
+echo "" >> /root/scripts/ComandosIPTables.sh
+chmod 700 /root/scripts/ComandosIPTables.sh
+echo "/root/ComandosIPTables" >> /root/scripts/ComandosIPTables.sh
 
