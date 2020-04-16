@@ -14,6 +14,7 @@ echo "-----------------------------------------------"
 echo "  CREANDO EL ARCHIVO PARA LAS TAREAS HORARIAS"
 echo "-----------------------------------------------"
 echo ""
+mkdir -p /root/scripts/ 2> /dev/null
 echo '#!/bin/bash' > /root/scripts/TareasCronPorHora.sh
 echo "" >> /root/scripts/TareasCronPorHora.sh
 echo 'FechaDeEjecucion=$(date +A%YM%mD%d@%T)' >> /root/scripts/TareasCronPorHora.sh
