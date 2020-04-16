@@ -9,5 +9,5 @@
 #  Script de NiPeGun para cargar el script de inicio de Midnight Commander ubicado en /root/MidnightCommander
 #--------------------------------------------------------------------------------------------------------------
 
-/root/MidnightCommander
+/root/scripts/MidnightCommander.sh
 
