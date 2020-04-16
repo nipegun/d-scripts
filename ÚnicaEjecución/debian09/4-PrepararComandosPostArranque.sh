@@ -45,6 +45,7 @@ echo "----------------------------------------------"
 echo "  CREANDO EL ARCHIVO PARA METER LOS COMANDOS"
 echo "----------------------------------------------"
 echo ""
+mkdir -p /root/scripts/ 2> /dev/null
 echo '#!/bin/bash' > /root/scripts/ComandosPostArranque.sh
 echo "" >> /root/scripts/ComandosPostArranque.sh
 echo 'FechaDeEjecucion=$(date +A%YM%mD%d@%T)' >> /root/scripts/ComandosPostArranque.sh
