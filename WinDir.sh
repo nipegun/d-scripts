@@ -9,7 +9,7 @@
 #  SCRIPT DE NIPEGUN PARA MOSTRAR DIRECTORIOS COMO EL DIR DE WINDOWS
 #---------------------------------------------------------------------
 
-varParam="--group-directories-first --color=auto -1 -lh -F -X --time-style=long-iso"
+varParam=" -lha1FX --group-directories-first --color=auto --time-style=long-iso"
 echo ""
 ls $varParam
 echo ""
