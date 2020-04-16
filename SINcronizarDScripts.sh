@@ -17,10 +17,10 @@ FinColor='\033[0m'
 wget -q --tries=10 --timeout=20 --spider https://github.com
   if [[ $? -eq 0 ]]; then
     echo ""
-    echo "----------------------------------------------------------"
+    echo "---------------------------------------------------------"
     echo -e "  ${ColorVerde}Sincronizando los d-scripts con las últimas versiones${FinColor}"
     echo -e "  ${ColorVerde} y descargando nuevos d-scripts si es que existen...${FinColor}"
-    echo "----------------------------------------------------------"
+    echo "---------------------------------------------------------"
     echo ""
     rm /root/scripts/d-scripts -R 2> /dev/null
     mkdir /root/scripts 2> /dev/null
@@ -31,9 +31,9 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     chmod +x /root/scripts/d-scripts/*.sh -R
     /root/scripts/d-scripts/CrearAliasParaLosDScripts.sh
     echo ""
-    echo "--------------------------------------------"
+    echo "------------------------------------------"
     echo -e "  ${ColorVerde}d-scripts sincronizados correctamente${FinColor}"
-    echo "--------------------------------------------"
+    echo "------------------------------------------"
     echo ""
   else
     echo ""
