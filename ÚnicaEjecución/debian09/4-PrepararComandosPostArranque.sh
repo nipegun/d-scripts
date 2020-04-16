@@ -36,7 +36,7 @@ echo "------------------------------------"
 echo ""
 echo '#!/bin/bash' > /etc/rc.local
 echo "" >> /etc/rc.local
-echo "/root/ComandosPostArranque" >> /etc/rc.local
+echo "/root/scripts/ComandosPostArranque.sh" >> /etc/rc.local
 echo "exit 0" >> /etc/rc.local
 chmod +x /etc/rc.local
 
