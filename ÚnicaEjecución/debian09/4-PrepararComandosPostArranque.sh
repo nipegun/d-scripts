@@ -45,16 +45,16 @@ echo "----------------------------------------------"
 echo "  CREANDO EL ARCHIVO PARA METER LOS COMANDOS"
 echo "----------------------------------------------"
 echo ""
-echo '#!/bin/bash' > /root/ComandosPostArranque
-echo "" >> /root/ComandosPostArranque
-echo 'FechaDeEjecucion=$(date +A%YM%mD%d@%T)' >> /root/ComandosPostArranque
-echo "" >> /root/ComandosPostArranque
-echo 'echo "El script post-arranque se ejecutó el $FechaDeEjecucion" >> /var/log/PostArranque.log' >> /root/ComandosPostArranque
-echo "" >> /root/ComandosPostArranque
-echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"  >> /root/ComandosPostArranque
-echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/ComandosPostArranque
-echo "" >> /root/ComandosPostArranque
-chmod 700 /root/ComandosPostArranque
+echo '#!/bin/bash' > /root/scripts/ComandosPostArranque.sh
+echo "" >> /root/scripts/ComandosPostArranque.sh
+echo 'FechaDeEjecucion=$(date +A%YM%mD%d@%T)' >> /root/scripts/ComandosPostArranque.sh
+echo "" >> /root/scripts/ComandosPostArranque.sh
+echo 'echo "El script post-arranque se ejecutó el $FechaDeEjecucion" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
+echo "" >> /root/scripts/ComandosPostArranque.sh
+echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"  >> /root/scripts/ComandosPostArranque.sh
+echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ComandosPostArranque.sh
+echo "" >> /root/scripts/ComandosPostArranque.sh
+chmod 700 /root/scripts/ComandosPostArranque.sh
 
 echo ""
 echo "--------------------------------------"
