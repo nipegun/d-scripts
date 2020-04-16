@@ -20,20 +20,20 @@ echo ""
 wget -O ~/paquetes/dropbox/dropbox.tar https://www.dropbox.com/download?plat=lnx.x86_64
 
 echo ""
-echo "  Descomprimiento el paquete..."
+echo "  Descomprimiendo el paquete..."
 echo ""
 tar xzf ~/paquetes/dropbox/dropbox.tar -C ~/
 
 echo ""
 echo "  Descargando el script de python para controlar Dropbox desde la terminal"
 echo ""
-wget -O ~/DemonioDropbox "https://www.dropbox.com/download?dl=packages/dropbox.py"
-chmod +x ~/DemonioDropbox
+wget -O ~/scripts/DemonioDropbox.py "https://www.dropbox.com/download?dl=packages/dropbox.py"
+chmod +x ~/scripts/DemonioDropbox.py
 
 echo ""
 echo "  Configurando dropbox para que se inicie con el sistema..."
 echo ""
-echo "/root/DemonioDropbox start" >> /root/ComandosPostArranque
+echo "~/scripts/DemonioDropbox.py start" >> /root/scripts/ComandosPostArranque.sh
 
 echo ""
 echo "  Arrancando el daemon por primera vez..."
