@@ -188,7 +188,7 @@ if [ $# -ne $CantArgsEsperados ]
           2)
             echo ""
             echo "Asegúrate de haber primero ejecutado en el ordenador con la Autoridad Certificadora el archivo:"
-            echo "/root/nipe-scripts/proxmoxve05/UnicaEjecución/CrearAutoridadCertificadora"
+            echo "/root/scripts/d-scripts/ÚnicaEjecución/CrearAutoridadCertificadora.sh"
             echo ""
             echo "Si NO lo has ejecutado presiona Ctrl-C"
             read -p "Si SI lo has ejecutado, presiona ENTER."
