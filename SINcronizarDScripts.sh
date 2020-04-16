@@ -31,9 +31,9 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     chmod +x /root/scripts/d-scripts/*.sh -R
     /root/scripts/d-scripts/CrearAliasParaLosDScripts.sh
     echo ""
-    echo "------------------------------------------"
+    echo "-----------------------------------------"
     echo -e "  ${ColorVerde}d-scripts sincronizados correctamente${FinColor}"
-    echo "------------------------------------------"
+    echo "-----------------------------------------"
     echo ""
   else
     echo ""
