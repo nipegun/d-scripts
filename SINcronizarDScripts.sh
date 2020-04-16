@@ -22,13 +22,14 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     echo -e "  ${ColorVerde} y descargando nuevos d-scripts si es que existen...${FinColor}"
     echo "----------------------------------------------------------"
     echo ""
-    rm /root/scripts/d-scripts -R
-    cd /root/scripts/
+    rm /root/scripts/d-scripts -R 2> /dev/null
+    mkdir /root/scripts /dev/null
+    cd /root/scripts
     git clone --depth=1 https://github.com/nipegun/d-scripts
-    rm /root/scripts/d-scripts/.git -R
+    mkdir -p /root/scripts/d-scripts/Alias/
+    rm /root/scripts/d-scripts/.git -R 2> /dev/null
     chmod +x /root/scripts/d-scripts/*.sh -R
     /root/scripts/d-scripts/CrearAliasParaLosDScripts.sh
-    chmod +x /root/scripts/d-scripts/Alias/* -R
     echo ""
     echo "--------------------------------------------"
     echo -e "  ${ColorVerde}d-scripts sincronizados correctamente${FinColor}"
