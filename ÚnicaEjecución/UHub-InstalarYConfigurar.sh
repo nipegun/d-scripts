@@ -9,8 +9,14 @@
 #  SCRIPT DE NIPEGUN PARA INSTALAR Y CONFIGURAR EL SERVIDOR DC++ UHUB
 #----------------------------------------------------------------------
 
+echo ""
+echo "Instalando uHub..."
+echo ""
+
 # Agregar el repositorio
-echo "deb http://ppa.launchpad.net/tehnick/tehnick/ubuntu vivid main" > /etc/apt/sources.list.d/uhub.list
+apt-get -y update 2> /dev/mull
+apt-get -y install software-properties-common 2> /dev/mull
+add-apt-repository -y 'deb http://ppa.launchpad.net/tehnick/tehnick/ubuntu vivid main'
 
 # Actualizar
 apt-get update
