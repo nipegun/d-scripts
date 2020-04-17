@@ -9,9 +9,6 @@
 #  Script de NiPeGun para instalar y configurar ZeroTier
 #---------------------------------------------------------
 
-EXPECTED_ARGS=4
-E_BADARGS=65
-
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
