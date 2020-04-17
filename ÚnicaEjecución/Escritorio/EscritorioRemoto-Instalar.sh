@@ -14,8 +14,9 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 menu=(dialog --timeout 5 --checklist "Elección dl Sistema Operativo:" 22 76 16)
-  opciones=(1 "Instalar Para Debian 9" on
-            2 "Instalar para Ubuntu 18.04" off)
+  opciones=(1 "Instalar Para Debian 9" off
+  
+            3 "Instalar para Ubuntu 18.04" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -46,6 +47,14 @@ menu=(dialog --timeout 5 --checklist "Elección dl Sistema Operativo:" 22 76 16)
         ;;
 
         2)
+          echo ""
+          echo "---------------------------------------------------------------"
+          echo "  Instalando y preparando el escritorio remoto para Debian10"
+          echo "---------------------------------------------------------------"
+          echo ""
+          apt-get -y update 2> /dev/null
+          apt-get -y install xrdp
+        3)
           echo ""
           echo "------------------------------------------------------------------"
           echo "  Instalando y preparando el escritorio remoto para Ubuntu 18.04"
