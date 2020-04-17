@@ -14,12 +14,12 @@ echo "Instalando uHub..."
 echo ""
 
 # Agregar el repositorio
-apt-get -y update 2> /dev/mull
-apt-get -y install software-properties-common 2> /dev/mull
-add-apt-repository -y 'deb http://ppa.launchpad.net/tehnick/tehnick/ubuntu vivid main'
+# apt-get -y update 2> /dev/mull
+# apt-get -y install software-properties-common 2> /dev/mull
+# add-apt-repository -y 'deb http://ppa.launchpad.net/tehnick/tehnick/ubuntu vivid main'
 
 # Actualizar
-apt-get update
+apt-get -y update 2> /dev/mull
 
 # Instalar uHub
 apt-get -y install uhub
