@@ -11,8 +11,8 @@
 
 if [ $# -eq 0 ]
   then
-    systemctl
+    journalctl
   else
-    systemctl -$1
+    journalctl -$1
 fi
 
