@@ -18,6 +18,7 @@ echo ""
 
 ln -s /root/scripts/d-scripts/externos/VelocidadDeInternet                 /root/scripts/d-scripts/Alias/vdi
 
+ln -s /root/scripts/d-scripts/EditarUHUB.sh                                /root/scripts/d-scripts/Alias/euhub
 ln -s /root/scripts/d-scripts/APagarSistemaOperativo.sh                    /root/scripts/d-scripts/Alias/apso
 ln -s /root/scripts/d-scripts/AbrirMidnightCommander.sh                    /root/scripts/d-scripts/Alias/amc
 ln -s /root/scripts/d-scripts/ActualizarSistemaOperativo.sh                /root/scripts/d-scripts/Alias/aso
