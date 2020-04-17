@@ -10,7 +10,7 @@
 #----------------------------------------------------------------------
 
 # Agregar el repositorio
-add-apt-repository -y 'deb http://ppa.launchpad.net/tehnick/tehnick/ubuntu vivid main'
+echo "deb http://ppa.launchpad.net/tehnick/tehnick/ubuntu vivid main" > /etc/apt/sources.list.d/uhub.list
 
 # Actualizar
 apt-get update
