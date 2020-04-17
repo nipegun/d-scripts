@@ -66,6 +66,7 @@ ln -s /root/scripts/d-scripts/InfoNodoLitecoin.sh                          /root
 ln -s /root/scripts/d-scripts/InfoShell.sh                                 /root/scripts/d-scripts/Alias/is
 ln -s /root/scripts/d-scripts/LanzarEscritorio.sh                          /root/scripts/d-scripts/Alias/le
 ln -s /root/scripts/d-scripts/ListarNodosTORQueEntran.sh                   /root/scripts/d-scripts/Alias/lntorqe
+ln -s /root/scripts/d-scripts/LogsDelSistema-Mostrar.sh                    /root/scripts/d-scripts/Alias/slog
 ln -s /root/scripts/d-scripts/MonitorizarLog.sh                            /root/scripts/d-scripts/Alias/ml
 ln -s /root/scripts/d-scripts/MostrarAparatosConectadosAlRouterDebian.sh   /root/scripts/d-scripts/Alias/macard
 ln -s /root/scripts/d-scripts/MostrarAparatosConectadosEnLaInterfaz.sh     /root/scripts/d-scripts/Alias/maceli
