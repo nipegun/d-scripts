@@ -9,7 +9,7 @@
 #  Script de NiPeGun para mostrar los logs del sistema
 #-------------------------------------------------------
 
-if [ $# -eq f ]
+if [ $# -eq "f" ]
   then
     echo ""
     echo "##################################################"
