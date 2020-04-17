@@ -9,13 +9,10 @@
 #  Script de NiPeGun para mostrar los logs del sistema
 #-------------------------------------------------------
 
-if [ $# -eq 'f' ]
+if [ $# -eq 0 ]
   then
-    echo ""
-    echo "##################################################"
-    echo "Mal uso del script."
-    systemctl -f
-  else
     systemctl
+  else
+    systemctl -$1
 fi
 
