@@ -170,9 +170,19 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo 'tls_private_key="/etc/uhub/sslpriv.key"' >> /etc/uhub/uhub.conf
           echo 'tls_certificate="/etc/uhub/sslown.crt"' >> /etc/uhub/uhub.conf
           echo 'tls_enable=yes' >> /etc/uhub/uhub.conf
-          #echo 'tls_require=yes' >> /etc/uhub/uhub.conf
-          
-          chmod +x /etc/init.d/uhub
+          echo '#tls_require=yes' >> /etc/uhub/uhub.conf
+          echo "[Unit]"                         > /etc/systemd/system/uhub.service
+          echo "Description=uHub DC Hub"       >> /etc/systemd/system/uhub.service
+          echo "After=network.target"          >> /etc/systemd/system/uhub.service
+          echo ""                              >> /etc/systemd/system/uhub.service
+          echo "[Service]"                     >> /etc/systemd/system/uhub.service
+          echo "Type=simple"                   >> /etc/systemd/system/uhub.service
+          echo "Restart=always"                >> /etc/systemd/system/uhub.service
+          echo "ExecStart=/usr/local/bin/uhub" >> /etc/systemd/system/uhub.service
+          echo ""                              >> /etc/systemd/system/uhub.service
+          echo "[Install]"                     >> /etc/systemd/system/uhub.service
+          echo "WantedBy=multi-user.target"    >> /etc/systemd/system/uhub.service
+          systemctl start uhub.service
           systemctl enable uhub.service
         ;;
 
