@@ -80,3 +80,11 @@ echo "# For example by invoking: 'killall -HUP uhub'" >> /etc/uhub/users.conf
 
 echo "Bienvenido a este Hub" > /etc/uhub/motd.txt
 uhub-passwd /etc/uhub/users.db create
+
+# TLS
+openssl genrsa -out /etc/uhub/sslpriv.key 8192
+openssl req -new -x509 -nodes -sha512 -days 365 -key /etc/uhub/sslpriv.key > /etc/uhub/sslown.crt
+echo 'tls_private_key="/etc/uhub/sslpriv.key"' >> /etc/uhub/uhub.conf
+echo 'tls_certificate="/etc/uhub/sslown.crt"' >> /etc/uhub/uhub.conf
+echo 'tls_enable=yes' >> /etc/uhub/uhub.conf
+#echo 'tls_require=yes' >> /etc/uhub/uhub.conf
