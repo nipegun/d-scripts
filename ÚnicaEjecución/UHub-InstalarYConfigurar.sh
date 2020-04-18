@@ -172,6 +172,8 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo 'tls_enable=yes' >> /etc/uhub/uhub.conf
           #echo 'tls_require=yes' >> /etc/uhub/uhub.conf
           
+          chmod +x /etc/init.d/uhub
+          systemctl enable uhub.service
         ;;
 
       esac
