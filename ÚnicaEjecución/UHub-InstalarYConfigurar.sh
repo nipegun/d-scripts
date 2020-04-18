@@ -83,14 +83,14 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo "# to uHub so that it will re-read the configuration files." >> /etc/uhub/users.conf
           echo "# For example by invoking: 'killall -HUP uhub'" >> /etc/uhub/users.conf
           echo "Bienvenido a este Hub" > /etc/uhub/motd.txt
-          uhub-passwd /etc/uhub/users.db create
-          uhub-passwd /etc/uhub/users.db add UsuarioPrueba PasswordPrueba
           openssl genrsa -out /etc/uhub/sslpriv.key 8192
           openssl req -new -x509 -nodes -sha512 -days 365 -key /etc/uhub/sslpriv.key > /etc/uhub/sslown.crt
           echo 'tls_private_key="/etc/uhub/sslpriv.key"' >> /etc/uhub/uhub.conf
           echo 'tls_certificate="/etc/uhub/sslown.crt"' >> /etc/uhub/uhub.conf
           echo 'tls_enable=yes' >> /etc/uhub/uhub.conf
           #echo 'tls_require=yes' >> /etc/uhub/uhub.conf
+          uhub-passwd /etc/uhub/users.db create
+          uhub-passwd /etc/uhub/users.db add UsuarioPrueba PasswordPrueba
         ;;
 
         2)
@@ -102,6 +102,8 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           add-apt-repository -y 'deb http://ppa.launchpad.net/tehnick/tehnick/ubuntu vivid main'
           apt-get -y update 2> /dev/mull
           apt-get -y install uhub
+          uhub-passwd /etc/uhub/users.db create
+          uhub-passwd /etc/uhub/users.db add UsuarioPrueba PasswordPrueba
 
         ;;
 
@@ -182,6 +184,8 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo ""                              >> /etc/systemd/system/uhub.service
           echo "[Install]"                     >> /etc/systemd/system/uhub.service
           echo "WantedBy=multi-user.target"    >> /etc/systemd/system/uhub.service
+          uhub-passwd /etc/uhub/users.db create
+          uhub-passwd /etc/uhub/users.db add UsuarioPrueba PasswordPrueba
           systemctl start uhub.service
           systemctl enable uhub.service
         ;;
