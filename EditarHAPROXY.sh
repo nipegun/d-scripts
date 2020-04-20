@@ -6,34 +6,26 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #-------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA EDITAR LA CONFIGURACIÓN DE HAPROXY
+#  Script de NiPeGun para editar la configuración de HAProxy
 #-------------------------------------------------------------
 
 echo ""
-echo "----------------------------------"
-echo "  PARANDO EL SERVICIO HAPROXY..."
-echo "----------------------------------"
+echo "  Deteniendo el servicio HAProxy..."
 echo ""
 service haproxy stop
 
 echo ""
-echo "------------------------------------------------------"
-echo "  EDITANDO EL ARCHIVO DE CONFIGURACIÓN DE HAPROXY..."
-echo "------------------------------------------------------"
+echo "  Editando el archivo de configuración de HAProxy..."
 echo ""
 nano /etc/haproxy/haproxy.cfg
 
 echo ""
-echo "------------------------------------"
-echo "  ARRANCANDO EL SERVICO HAPROXY..."
-echo "------------------------------------"
+echo "  Re-arrancando el servicio HAProxy..."
 echo ""
 service haproxy start
 
 echo ""
-echo "---------------------------------"
-echo "  ESTADO DEL SERVICO HAPROXY..."
-echo "---------------------------------"
+echo "  Estado del servicio:"
 echo ""
 service haproxy status
 
