@@ -32,3 +32,23 @@ apt-get -y install steamcmd
 # bash linuxgsm.sh cod4server
 # ./cod4server install
 
+
+# Cómo administrarlo
+
+# Todos los comandos de aquí abajo se pueden ver ejecutando ./cod4server
+
+
+#./cod4server start
+#./cod4server stop
+#./cod4server restart
+#./cod4server details
+#./cod4server debug
+#./cod4server backup
+#./cod4server monitor
+#./cod4server console 
+#  To exit the console press CTRL+b d. Pressing CTRL+c will terminate the server.
+#  
+#Logs
+#Server logs are available to monitor and diagnose your server. Script, console and game server (if available) logs are created for the server.
+#/home/cod4server/logs
+
