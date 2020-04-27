@@ -31,6 +31,7 @@ cp /etc/mumble-server.ini /etc/mumble-server.ini.bak
 
 # Modificar el archivo de configuración
 sed -i -e 's|welcometext="<br />Welcome to this server running <b>Murmur</b>.<br />Enjoy your stay!<br />"|welcometext="<br />Bienvenido al servidor <b>Mumble</b>.<br />"|g' /etc/mumble-server.ini
+sed -i -e 's|bandwidth=72000|bandwidth=128000|g' /etc/mumble-server.ini
 sed -i -e 's|;bonjour=True|bonjour=True|g' /etc/mumble-server.ini
 sed -i -e 's|;sslCert=|;sslCert=/etc/letsencrypt/live/dominioejemplo.com/cert.pem|g' /etc/mumble-server.ini
 sed -i -e 's|;sslKey=|;sslKey=/etc/letsencrypt/live/dominioejemplo.com/privkey.pem|g' /etc/mumble-server.ini
