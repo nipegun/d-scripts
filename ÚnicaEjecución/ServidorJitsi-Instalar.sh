@@ -105,10 +105,13 @@ menu=(dialog --timeout 5 --checklist "Instalación y configuración de jitsi-mee
           echo ""
           echo "  Modificando título y descripción..."
           echo ""
-          ArchivoTemporal=$(mktemp)
-          jq '.welcomepage.title = "'"$1"'"' /usr/share/jitsi-meet/lang/main-es.json > "$ArchivoTemporal" && mv "$ArchivoTemporal" /usr/share/jitsi-meet/lang/main-es.json
-          ArchivoTemporal=$(mktemp)
-          jq '.welcomepage.appDescription = "---"' /usr/share/jitsi-meet/lang/main-es.json > "$ArchivoTemporal" && mv "$ArchivoTemporal" /usr/share/jitsi-meet/lang/main-es.json
+          for ArchivoReal in /usr/share/jitsi-meet/lang/main-*.json
+            do
+              ArchivoTemporalTitle=$(mktemp)
+              jq '.welcomepage.title = "'"$1"'"' $ArchivoReal > $ArchivoTemporalTitle && mv $ArchivoTemporalTitle $ArchivoReal
+              ArchivoTemporalDesc=$(mktemp)
+              jq '.welcomepage.appDescription = "---"' $ArchivoReal > $ArchivoTemporalDesc && mv $ArchivoTemporalDesc $ArchivoReal
+            done
           service prosody            restart
           service jicofo             restart
           service jitsi-videobridge2 restart
