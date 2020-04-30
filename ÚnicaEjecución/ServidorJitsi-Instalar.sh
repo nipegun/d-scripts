@@ -22,7 +22,9 @@ menu=(dialog --timeout 5 --checklist "Instalación y configuración de jitsi-mee
   opciones=(1 "Instalar jitsi-meet" on
             2 "Instalar certificado de LetsEncrypt" off
             3 "Activar autentificación para crear salas" off
-            4 "Modificar título y descripción" off)
+            4 "Modificar título y descripción" off
+            5 "Poner logo transparente" off
+            6 "Cambiar lenguaje por defecto a Español" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
