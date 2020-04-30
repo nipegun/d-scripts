@@ -22,8 +22,8 @@ apt-get -y purge prosody
 apt-get -y purge jicofo
 apt-get -y purge jitsi*
 apt-get -y autoremove
-rm /etc/jitsi -R > /dev/null
-rm /etc/prosody -R > /dev/null
+rm /etc/jitsi -R 2> /dev/null
+rm /etc/prosody -R 2> /dev/null
 rm -f /etc/apt/sources.list.d/jitsi-stable.list > /dev/null
 apt-get -y update > /dev/null
 
