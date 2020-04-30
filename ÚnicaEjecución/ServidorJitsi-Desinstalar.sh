@@ -9,6 +9,14 @@
 #  Script de NiPeGun para instalar y configurar Jitsi en Debian 10
 #-------------------------------------------------------------------
 
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
+
+echo ""
+echo -e "${ColorVerde}Desinstalando jitsi-meet...${FinColor}"
+echo ""
+
 apt-get -y remove jitsi-meet
 apt-get -y remove prosody
 apt-get -y remove jicofo
