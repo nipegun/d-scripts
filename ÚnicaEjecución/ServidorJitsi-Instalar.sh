@@ -81,7 +81,7 @@ menu=(dialog --timeout 5 --checklist "Instalación y configuración de jitsi-mee
         ;;
        
         2)
-          # Certificado de LetsEncrypt
+          /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh
         ;;
 
         3)
