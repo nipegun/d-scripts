@@ -16,4 +16,5 @@ apt-get -y purge jitsi*
 apt-get -y autoremove
 rm /etc/jitsi -R
 rm /etc/prosody -R
-
+rm -f /etc/apt/sources.list.d/jitsi-stable.list
+apt-get -y update > /dev/null
