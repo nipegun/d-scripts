@@ -129,7 +129,7 @@ menu=(dialog --timeout 5 --checklist "Instalación y configuración de jitsi-mee
           echo ""
           echo "  Poniendo lenguaje en español de España..."
           echo ""
-          sed -i -e "s|// defaultLanguage: 'en',|defaultLanguage: 'es',|g" /etc/jitsi/meet/video.hacks4geeks.com-config.js
+          sed -i -e "s|// defaultLanguage: 'en',|defaultLanguage: 'es',|g" /etc/jitsi/meet/$1-config.js
         ;;
         
       esac
