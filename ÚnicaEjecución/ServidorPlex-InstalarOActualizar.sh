@@ -12,6 +12,9 @@
 ColorVerde="\033[1;32m"
 FinColor="\033[0m"
 
+apt-get -y update 2> /dev/null
+apt-get -y install dialog 2> /dev/null
+
 menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
   opciones=(1 "Instalar o actualizar versión x86 de 32 bits" off
             2 "Instalar o actualizar versión x86 de 64 bits" off
