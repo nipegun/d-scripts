@@ -30,5 +30,9 @@ if [ $# -ne $total_param_corr ]; then
 else
 
   prosodyctl register $1 $2 $3
+  service prosody            restart
+  service jicofo             restart
+  service jitsi-videobridge2 restart
 
 fi
+
