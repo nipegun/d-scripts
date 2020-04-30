@@ -105,7 +105,7 @@ menu=(dialog --timeout 5 --checklist "Instalación y configuración de jitsi-mee
           echo ""
           echo "  Modificando título y descripción..."
           echo ""
-          for ArchivoReal in /usr/share/jitsi-meet/lang/main-*.json
+          for ArchivoReal in /usr/share/jitsi-meet/lang/main*.json
             do
               ArchivoTemporalTitle=$(mktemp)
               jq '.welcomepage.title = "'"$1"'"' $ArchivoReal > $ArchivoTemporalTitle && mv $ArchivoTemporalTitle $ArchivoReal
