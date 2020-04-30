@@ -17,9 +17,9 @@ echo ""
 echo -e "${ColorVerde}Desinstalando jitsi-meet...${FinColor}"
 echo ""
 
-apt-get -y remove jitsi-meet
-apt-get -y remove prosody
-apt-get -y remove jicofo
+apt-get -y purge jitsi-meet
+apt-get -y purge prosody
+apt-get -y purge jicofo
 apt-get -y purge jitsi*
 apt-get -y autoremove
 rm /etc/jitsi -R
