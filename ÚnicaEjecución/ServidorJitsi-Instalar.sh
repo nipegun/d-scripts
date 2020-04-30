@@ -5,27 +5,107 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar Jitsi en Debian 10
-#-------------------------------------------------------------------
+#-----------------------------------------------------------
+#  Script de NiPeGun para instalar y configurar jitsi-meet
+#-----------------------------------------------------------
 
-HostName=$(cat /etc/hostname)
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
 
-echo "127.0.0.1 $HostName" >> /etc/hosts
+total_param_corr=1
+apt-get -y update > /dev/null
+apt-get -y install jq dialog > /dev/null
+  
+menu=(dialog --timeout 5 --checklist "Instalación y configuración de jitsi-meet:" 22 76 16)
+  opciones=(1 "Instalar jitsi-meet" on
+            2 "Instalar certificado de LetsEncrypt" off
+            3 "Activar autentificación para crear salas" off
+            4 "Modificar título y descripción" off)
+  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+  clear
 
-# Instalar la llave del repositorio
-wget -qO - https://download.jitsi.org/jitsi-key.gpg.key | apt-key add -
+  for choice in $choices
+    do
+      case $choice in
 
-# Crear un archivo de fuentes con el repositorio
-sh -c "echo 'deb https://download.jitsi.org stable/' > /etc/apt/sources.list.d/jitsi-stable.list"
+        1)
+          if [ $# -ne $total_param_corr ]; then
 
-# Actualizar la lista de paquetes:
-apt-get -y update
+            echo ""
+            echo -e "${ColorRojo}Mal uso del script. Se le debe pasar un parámetro obligatorio:${FinColor}"
+            echo ""
+            echo -e "${ColorVerde}[Dominio]${FinColor}"
+            echo ""
+            echo "Ejemplo:"
+            echo ""
+            echo -e "$0 ${ColorVerde}video.dominio.com${FinColor}"
+            echo ""
+            echo "Recuerda que antes debes crear y activar el dominio en apache."
+            echo ""
+            exit
 
-#Instalar la suite
-apt-get -y install jitsi-meet
+          else
 
-# Si no necesitas la suite completa puedes instalar paquetes individuales
-# apt-get -y install jitsi-videobridge
-# apt-get -y install jicofo
-# apt-get -y install jigasi
+            echo ""
+            echo -e "${ColorVerde}Instalando jitsi-meet...${FinColor}"
+            echo ""
+  
+            HostName=$(cat /etc/hostname)
+            echo "127.0.0.1 $HostName" >> /etc/hosts
+
+            # Instalar la llave del repositorio
+            wget -qO - https://download.jitsi.org/jitsi-key.gpg.key | apt-key add -
+
+            # Crear un archivo de fuentes con el repositorio
+            sh -c "echo 'deb https://download.jitsi.org stable/' > /etc/apt/sources.list.d/jitsi-stable.list"
+
+            # Actualizar la lista de paquetes:
+            apt-get -y update
+
+            #Instalar la suite
+            apt-get -y install jitsi-meet
+
+            # Si no necesitas la suite completa puedes instalar paquetes individuales
+            # apt-get -y install jitsi-videobridge
+            # apt-get -y install jicofo
+            # apt-get -y install jigasi
+
+            service prosody            restart
+            service jicofo             restart
+            service jitsi-videobridge2 restart
+
+          fi
+        ;;
+       
+        2)
+          # Certificado de LetsEncrypt
+        ;;
+
+        3)
+          sed -i -e 's|authentication = "anonymous"|authentication = "internal_plain"|g' /etc/prosody/conf.avail/$1.cfg.lua
+          echo "" >> /etc/prosody/conf.avail/$1.cfg.lua
+          echo 'VirtualHost "guest.$1"'           >> /etc/prosody/conf.avail/$1.cfg.lua
+          echo '  authentication = "anonymous"'   >> /etc/prosody/conf.avail/$1.cfg.lua
+          echo "  c2s_require_encryption = false" >> /etc/prosody/conf.avail/$1.cfg.lua
+          echo "org.jitsi.jicofo.auth.URL=XMPP:$1" >>  /etc/jitsi/jicofo/sip-communicator.properties
+          service prosody            restart
+          service jicofo             restart
+          service jitsi-videobridge2 restart
+        ;;
+
+        4)
+          # Modificar título y descripción
+          ArchivoTemporal=$(mktemp)
+          jq '.welcomepage.title = "$1"' /usr/share/jitsi-meet/lang/main-es.json > "$ArchivoTemporal" && mv "$ArchivoTemporal" /usr/share/jitsi-meet/lang/main-es.json
+          ArchivoTemporal=$(mktemp)
+          jq '.welcomepage.appDescription = "---"' /usr/share/jitsi-meet/lang/main-es.json > "$ArchivoTemporal" && mv "$ArchivoTemporal" /usr/share/jitsi-meet/lang/main-es.json
+          service prosody            restart
+          service jicofo             restart
+          service jitsi-videobridge2 restart
+        ;;
+
+      esac
+
+done
+
