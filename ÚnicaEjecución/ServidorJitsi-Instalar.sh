@@ -112,6 +112,21 @@ menu=(dialog --timeout 5 --checklist "Instalación y configuración de jitsi-mee
           service jitsi-videobridge2 restart
         ;;
 
+        5)
+          echo ""
+          echo "  Poniendo logo transparente..."
+          echo ""
+          cp /usr/share/jitsi-meet/images/watermark.png /usr/share/jitsi-meet/images/watermark.png.bak
+          truncate -s 0 /usr/share/jitsi-meet/images/watermark.png
+        ;;
+        
+        6)
+          echo ""
+          echo "  Poniendo lenguaje en español de España..."
+          echo ""
+          sed -i -e "s|// defaultLanguage: 'en',|defaultLanguage: 'es',|g" /etc/jitsi/meet/video.hacks4geeks.com-config.js
+        ;;
+        
       esac
 
 done
