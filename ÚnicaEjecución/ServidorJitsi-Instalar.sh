@@ -15,7 +15,8 @@ FinColor='\033[0m'
 
 total_param_corr=1
 apt-get -y update > /dev/null
-apt-get -y install jq dialog > /dev/null
+# Paquetes necesarios
+apt-get -y install jq dialog software-properties-common > /dev/null
   
 menu=(dialog --timeout 5 --checklist "Instalación y configuración de jitsi-meet:" 22 76 16)
   opciones=(1 "Instalar jitsi-meet" on
@@ -51,8 +52,9 @@ menu=(dialog --timeout 5 --checklist "Instalación y configuración de jitsi-mee
             echo -e "${ColorVerde}Instalando jitsi-meet...${FinColor}"
             echo ""
   
-            HostName=$(cat /etc/hostname)
-            echo "127.0.0.1 $HostName" >> /etc/hosts
+            #HostName=$(cat /etc/hostname)
+            #echo "127.0.0.1 $HostName" >> /etc/hosts
+            echo "127.0.0.1 $1" >> /etc/hosts
 
             # Instalar la llave del repositorio
             wget -qO - https://download.jitsi.org/jitsi-key.gpg.key | apt-key add -
@@ -88,7 +90,7 @@ menu=(dialog --timeout 5 --checklist "Instalación y configuración de jitsi-mee
           echo ""
           sed -i -e 's|authentication = "anonymous"|authentication = "internal_plain"|g' /etc/prosody/conf.avail/$1.cfg.lua
           echo "" >> /etc/prosody/conf.avail/$1.cfg.lua
-          echo 'VirtualHost "guest.$1"'           >> /etc/prosody/conf.avail/$1.cfg.lua
+          echo 'VirtualHost "guest.\$1"'           >> /etc/prosody/conf.avail/$1.cfg.lua
           echo '  authentication = "anonymous"'   >> /etc/prosody/conf.avail/$1.cfg.lua
           echo "  c2s_require_encryption = false" >> /etc/prosody/conf.avail/$1.cfg.lua
           echo "org.jitsi.jicofo.auth.URL=XMPP:$1" >>  /etc/jitsi/jicofo/sip-communicator.properties
