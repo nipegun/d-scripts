@@ -25,5 +25,4 @@ apt-get -y autoremove
 rm /etc/jitsi -R 2> /dev/null
 rm /etc/prosody -R 2> /dev/null
 rm -f /etc/apt/sources.list.d/jitsi-stable.list > /dev/null
-apt-get -y update > /dev/null
 
