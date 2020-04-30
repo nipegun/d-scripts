@@ -10,6 +10,8 @@
 #-------------------------------------------------------------------
 
 apt-get -y remove jitsi-meet
+apt-get -y remove prosody
+apt-get -y remove jicofo
 apt-get -y purge jitsi*
 apt-get -y autoremove
 rm /etc/jitsi -R
