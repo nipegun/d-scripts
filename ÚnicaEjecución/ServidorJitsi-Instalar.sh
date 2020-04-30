@@ -83,6 +83,9 @@ menu=(dialog --timeout 5 --checklist "Instalación y configuración de jitsi-mee
         ;;
 
         3)
+          echo ""
+          echo "  Agregando autentificación para crear canales..."
+          echo ""
           sed -i -e 's|authentication = "anonymous"|authentication = "internal_plain"|g' /etc/prosody/conf.avail/$1.cfg.lua
           echo "" >> /etc/prosody/conf.avail/$1.cfg.lua
           echo 'VirtualHost "guest.$1"'           >> /etc/prosody/conf.avail/$1.cfg.lua
@@ -95,7 +98,9 @@ menu=(dialog --timeout 5 --checklist "Instalación y configuración de jitsi-mee
         ;;
 
         4)
-          # Modificar título y descripción
+          echo ""
+          echo "  Modificando título y descripción..."
+          echo ""
           ArchivoTemporal=$(mktemp)
           jq '.welcomepage.title = "$1"' /usr/share/jitsi-meet/lang/main-es.json > "$ArchivoTemporal" && mv "$ArchivoTemporal" /usr/share/jitsi-meet/lang/main-es.json
           ArchivoTemporal=$(mktemp)
