@@ -16,5 +16,5 @@ echo ""
 echo -e "${ColorVerde}...${FinColor}"
 echo ""
 
-zerotier-cli
+zerotier-cli $1 $2 $3 $4 $5
 
