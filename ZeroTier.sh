@@ -12,9 +12,6 @@
 ColorVerde="\033[1;32m"
 FinColor="\033[0m"
 
-echo ""
-echo -e "${ColorVerde}...${FinColor}"
-echo ""
-
+echo -e "${ColorVerde}${FinColor}"
 zerotier-cli $1 $2 $3 $4 $5
-
+echo ""
