@@ -18,6 +18,7 @@ echo ""
 
 ln -s /root/scripts/d-scripts/externos/VelocidadDeInternet                 /root/scripts/d-scripts/Alias/vdi
 
+ln -s /root/scripts/d-scripts/ZeroTier.sh                                  /root/scripts/d-scripts/Alias/zt
 ln -s /root/scripts/d-scripts/MumbleServer-Editar.sh                       /root/scripts/d-scripts/Alias/emumble
 ln -s /root/scripts/d-scripts/EditarUHUB.sh                                /root/scripts/d-scripts/Alias/euhub
 ln -s /root/scripts/d-scripts/APagarSistemaOperativo.sh                    /root/scripts/d-scripts/Alias/apso
