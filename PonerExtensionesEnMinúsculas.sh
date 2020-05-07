@@ -27,7 +27,7 @@ if [ $# -ne $ArgumentosEsperados ]
     exit $ArgumentosInsuficientes
   else
     echo ""
-    find $1 -type f -print -exec sh -c 'a=$(echo "$0" | sed -r "s/([^.]*)\$/\L\1/"); [ "$a" != "$0" ] && mv "$0" "$a" ' {} \;
+    find $1 -type f -exec sh -c 'a=$(echo "$0" | sed -r "s/([^.]*)\$/\L\1/"); [ "$a" != "$0" ] && mv "$0" "$a" ' {} \;
     echo ""
 fi
 
