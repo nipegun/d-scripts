@@ -31,9 +31,9 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "  INSTALANDO Y CONFIGURANDO GOACCESS"
     echo "--------------------------------------"
     echo ""
-   # echo "deb http://deb.goaccess.io/ buster main" | tee -a /etc/apt/sources.list.d/goaccess.list
-   # wget -O - http://deb.goaccess.io/gnugpg.key | apt-key add -
-   # apt-get -y update
+    echo "deb http://deb.goaccess.io/ buster main" | tee -a /etc/apt/sources.list.d/goaccess.list
+    wget -O - http://deb.goaccess.io/gnugpg.key | apt-key add -
+    apt-get -y update
     mkdir -p /root/paquetes/libssl/
     ArchivoDeb=$(curl -s http://ftp.debian.org/debian/pool/main/o/openssl1.0/ | grep amd64 | grep -v crypto | grep -v dev | grep -v udeb | cut -d\" -f8)
     wget -O /root/paquetes/libssl/$ArchivoDeb http://ftp.debian.org/debian/pool/main/o/openssl1.0/$ArchivoDeb
