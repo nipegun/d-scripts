@@ -31,29 +31,29 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "  INSTALANDO Y CONFIGURANDO GOACCESS"
     echo "--------------------------------------"
     echo ""
-    echo "deb http://deb.goaccess.io/ buster main" | tee -a /etc/apt/sources.list.d/goaccess.list
-    wget -O - http://deb.goaccess.io/gnugpg.key | apt-key add -
-    apt-get -y update
+   # echo "deb http://deb.goaccess.io/ buster main" | tee -a /etc/apt/sources.list.d/goaccess.list
+   # wget -O - http://deb.goaccess.io/gnugpg.key | apt-key add -
+   # apt-get -y update
     mkdir -p /root/paquetes/libssl/
     ArchivoDeb=$(curl -s http://ftp.debian.org/debian/pool/main/o/openssl1.0/ | grep amd64 | grep -v crypto | grep -v dev | grep -v udeb | cut -d\" -f8)
     wget -O /root/paquetes/libssl/$ArchivoDeb http://ftp.debian.org/debian/pool/main/o/openssl1.0/$ArchivoDeb
     dpkg -i /root/paquetes/libssl/$ArchivoDeb
     apt-get -y install goaccess
-    cp /etc/goaccess/goaccess.conf /etc/goaccess/goaccess.conf.bak
-    sed -i -e 's|#time-format %H:%M:%S|time-format %H:%M:%S|g' /etc/goaccess/goaccess.conf
-    sed -i -e 's|#date-format %d/%b/%Y|date-format %d/%b/%Y|g' /etc/goaccess/goaccess.conf
-    sed -i -e 's|#log-format %h %^\[%d:%t %^] "%r" %s %b "%R" "%u"|log-format %h %^[%d:%t %^] "%r" %s %b "%R" "%u"|g' /etc/goaccess/goaccess.conf
-    #sed -i -e '/NCSA Combined Log Format/!b;n;clog-format %h %^[%d:%t %^] "%r" %s %b "%R" "%u"' /etc/goaccess/goaccess.conf
-    sed -i -e 's|#html-prefs {"theme":"bright","perPage":5,"layout":"horizontal","showTables":true,"visitors":{"plot":{"chartType":"bar"}}}|html-prefs {"theme":"bright","perPage":20,"layout":"vertical","showTables":true,"visitors":{"plot":{"chartType":"bar"}}}|g' /etc/goaccess/goaccess.conf
-    sed -i -e 's|#html-report-title My Awesome Web Stats|html-report-title Estadísticas de la Web|g' /etc/goaccess/goaccess.conf
-    sed -i -e 's|#daemonize false|daemonize true|g' /etc/goaccess/goaccess.conf
-    sed -i -e 's|ignore-crawlers false|ignore-crawlers true|g' /etc/goaccess/goaccess.conf
-    sed -i -e 's|ignore-panel REFERRERS|#ignore-panel REFERRERS|g' /etc/goaccess/goaccess.conf
-    sed -i -e 's|ignore-panel KEYPHRASES|#ignore-panel KEYPHRASES|g' /etc/goaccess/goaccess.conf
-    echo "#!/bin/bash" > /root/scripts/ArrancarStats.sh
-    echo "" >> /root/scripts/ArrancarStats.sh
-    echo "goaccess -p /etc/goaccess/goaccess.conf -f $1/access.log -o $2/index.html --real-time-html" >> /root/scripts/ArrancarStats.sh
-    chmod +x /root/scripts/ArrancarStats.sh
-    /root/scripts/ArrancarStats.sh
+    #cp /etc/goaccess/goaccess.conf /etc/goaccess/goaccess.conf.bak
+    #sed -i -e 's|#time-format %H:%M:%S|time-format %H:%M:%S|g' /etc/goaccess/goaccess.conf
+    #sed -i -e 's|#date-format %d/%b/%Y|date-format %d/%b/%Y|g' /etc/goaccess/goaccess.conf
+    #sed -i -e 's|#log-format %h %^\[%d:%t %^] "%r" %s %b "%R" "%u"|log-format %h %^[%d:%t %^] "%r" %s %b "%R" "%u"|g' /etc/goaccess/goaccess.conf
+    ##sed -i -e '/NCSA Combined Log Format/!b;n;clog-format %h %^[%d:%t %^] "%r" %s %b "%R" "%u"' /etc/goaccess/goaccess.conf
+    #sed -i -e 's|#html-prefs {"theme":"bright","perPage":5,"layout":"horizontal","showTables":true,"visitors":{"plot":{"chartType":"bar"}}}|html-prefs {"theme":"bright","perPage":20,"layout":"vertical","showTables":true,"visitors":{"plot":{"chartType":"bar"}}}|g' /etc/goaccess/goaccess.conf
+    #sed -i -e 's|#html-report-title My Awesome Web Stats|html-report-title Estadísticas de la Web|g' /etc/goaccess/goaccess.conf
+    #sed -i -e 's|#daemonize false|daemonize true|g' /etc/goaccess/goaccess.conf
+    #sed -i -e 's|ignore-crawlers false|ignore-crawlers true|g' /etc/goaccess/goaccess.conf
+    #sed -i -e 's|ignore-panel REFERRERS|#ignore-panel REFERRERS|g' /etc/goaccess/goaccess.conf
+    #sed -i -e 's|ignore-panel KEYPHRASES|#ignore-panel KEYPHRASES|g' /etc/goaccess/goaccess.conf
+    #echo "#!/bin/bash" > /root/scripts/ArrancarStats.sh
+    #echo "" >> /root/scripts/ArrancarStats.sh
+    #echo "goaccess -p /etc/goaccess/goaccess.conf -f $1/access.log -o $2/index.html --real-time-html" >> /root/scripts/ArrancarStats.sh
+    #chmod +x /root/scripts/ArrancarStats.sh
+    #/root/scripts/ArrancarStats.sh
 fi
 
