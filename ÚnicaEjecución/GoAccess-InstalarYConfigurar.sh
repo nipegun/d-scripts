@@ -59,5 +59,20 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "# Arrancar estadísticas de la web" >> /root/scripts/ComandosPostArranque.sh
     echo "/root/scripts/ArrancarStats.sh" >> /root/scripts/ComandosPostArranque.sh
     echo "" >> /root/scripts/ComandosPostArranque.sh
+    
+    echo "RewriteEngine On" > $2/.htaccess
+    echo "" >> $2/.htaccess
+    echo "# Si alguien llega a la web desde otro lugar que no sea nipegun.com" >> $2/.htaccess
+    echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?nipegun\.com/ [NC]" >> $2/.htaccess
+    echo "" >> $2/.htaccess
+    echo "#, pide directamente por un archivo con extensión .html" >> $2/.htaccess
+    echo "RewriteCond %{REQUEST_URI} !hotlink\.(html) [NC]" >> $2/.htaccess
+    echo "" >> $2/.htaccess
+    echo "# y no tiene la sesión iniciada en WordPress" >> $2/.htaccess
+    echo "RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in.*$ [NC]" >> $2/.htaccess
+    echo "" >> $2/.htaccess
+    echo "# Redirigirlo a google.com" >> $2/.htaccess
+    echo "RewriteRule .*\.(log)$ http://google.com/ [NC]" >> $2/.htaccess
+
 fi
 
