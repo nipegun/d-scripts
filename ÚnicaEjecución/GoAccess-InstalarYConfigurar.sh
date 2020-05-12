@@ -62,8 +62,8 @@ if [ $# -ne $CantArgsCorrectos ]
     
     echo "RewriteEngine On" > $2/.htaccess
     echo "" >> $2/.htaccess
-    echo "# Si alguien llega a la web desde otro lugar que no sea nipegun.com" >> $2/.htaccess
-    echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?nipegun\.com/ [NC]" >> $2/.htaccess
+    echo "# Si alguien llega a la web desde otro lugar que no sea lapropiaweb.com" >> $2/.htaccess
+    echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?lapropiaweb\.com/ [NC]" >> $2/.htaccess
     echo "" >> $2/.htaccess
     echo "#, pide directamente por un archivo con extensión .html" >> $2/.htaccess
     echo "RewriteCond %{REQUEST_URI} !hotlink\.(html) [NC]" >> $2/.htaccess
@@ -73,6 +73,11 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "" >> $2/.htaccess
     echo "# Redirigirlo a google.com" >> $2/.htaccess
     echo "RewriteRule .*\.(log)$ http://google.com/ [NC]" >> $2/.htaccess
+    echo ""
+    
+    echo ""
+    echo "GoAcces instalado. Recuerda editar el archivo $2/.htaccess para poner la web correcta"
+    echo ""
 
 fi
 
