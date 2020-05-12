@@ -35,8 +35,9 @@ if [ $# -ne $CantArgsCorrectos ]
     wget -O - http://deb.goaccess.io/gnugpg.key | apt-key add -
     apt-get -y update
     mkdir -p /root/paquetes/libssl/
-    wget -O /root/paquetes/libssl/libssl1.0.2_1.0.2r-1~deb9u1_amd64.deb http://ftp.debian.org/debian/pool/main/o/openssl1.0/libssl1.0.2_1.0.2s-1~deb9u1_amd64.deb
-    dpkg -i /root/paquetes/libssl/libssl1.0.2_1.0.2r-1~deb9u1_amd64.deb
+    ArchivoDeb=$(curl -s http://ftp.debian.org/debian/pool/main/o/openssl1.0/ | grep amd64 | grep -v crypto | grep -v dev | grep -v udeb | cut -d\" -f8)
+    wget -O /root/paquetes/libssl/$ArchivoDeb http://ftp.debian.org/debian/pool/main/o/openssl1.0/$ArchivoDeb
+    dpkg -i /root/paquetes/libssl/$ArchivoDeb
     apt-get -y install goaccess
     cp /etc/goaccess/goaccess.conf /etc/goaccess/goaccess.conf.bak
     sed -i -e 's|#time-format %H:%M:%S|time-format %H:%M:%S|g' /etc/goaccess/goaccess.conf
