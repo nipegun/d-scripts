@@ -55,5 +55,9 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "goaccess -p /etc/goaccess/goaccess.conf -f $1/access.log -o $2/index.html --real-time-html" >> /root/scripts/ArrancarStats.sh
     chmod +x /root/scripts/ArrancarStats.sh
     /root/scripts/ArrancarStats.sh
+    echo "" >> /root/scripts/ComandosPostArranque.sh
+    echo "# Arrancar estadísticas de la web" >> /root/scripts/ComandosPostArranque.sh
+    echo "/root/scripts/ArrancarStats.sh" >> /root/scripts/ComandosPostArranque.sh
+    echo "" >> /root/scripts/ComandosPostArranque.sh
 fi
 
