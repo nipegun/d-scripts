@@ -40,6 +40,7 @@ apt-get -y install android-tools-fastboot
 apt-get -y install wireshark
 apt-get -y install mumble
 apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
+apt-get -y install scid
 
 /root/scripts/d-scripts/ÚnicaEjecución/debian10/Escritorio/TorBrowser-Instalar.sh
 
