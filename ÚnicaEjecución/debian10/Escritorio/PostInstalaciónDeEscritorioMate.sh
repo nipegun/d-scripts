@@ -43,6 +43,7 @@ apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, 
 apt-get -y install scid
 apt-get -y install scid-rating-data
 apt-get -y install scid-spell-data
+apt-get -y install stockfish
 apt-get -y install dosbox
 apt-get -y install scummvm
 
