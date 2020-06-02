@@ -47,7 +47,7 @@ ln -s /root/scripts/d-scripts/BuscarYReemplazarTextoEnArchivosDeSistema.sh /root
 ln -s /root/scripts/d-scripts/CambiarNombreDeUsuario.sh                    /root/scripts/d-scripts/Alias/cndu
 ln -s /root/scripts/d-scripts/CompilarEInstalarElÚltimoKernelEstable.sh    /root/scripts/d-scripts/Alias/ceieuke
 ln -s /root/scripts/d-scripts/ComprobarSSD.sh                              /root/scripts/d-scripts/Alias/cssd
-ln -s /root/scripts/d-scripts/MySQL-CrearBaseDeDatosYUsuario.sh                  /root/scripts/d-scripts/Alias/cbddyu
+ln -s /root/scripts/d-scripts/MySQL-CrearBaseDeDatosYUsuario.sh            /root/scripts/d-scripts/Alias/cbddyu
 ln -s /root/scripts/d-scripts/DejarSóloElKernelMásReciente.sh              /root/scripts/d-scripts/Alias/dsekmr
 ln -s /root/scripts/d-scripts/EditarGRUB.sh                                /root/scripts/d-scripts/Alias/egrub
 ln -s /root/scripts/d-scripts/EditarHAPROXY.sh                             /root/scripts/d-scripts/Alias/ehaproxy
