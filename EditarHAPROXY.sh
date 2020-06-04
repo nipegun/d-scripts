@@ -10,11 +10,6 @@
 #-------------------------------------------------------------
 
 echo ""
-echo "  Deteniendo el servicio HAProxy..."
-echo ""
-service haproxy stop
-
-echo ""
 echo "  Editando el archivo de configuración de HAProxy..."
 echo ""
 nano /etc/haproxy/haproxy.cfg
@@ -22,7 +17,7 @@ nano /etc/haproxy/haproxy.cfg
 echo ""
 echo "  Re-arrancando el servicio HAProxy..."
 echo ""
-service haproxy start
+service haproxy restart
 
 echo ""
 echo "  Estado del servicio:"
