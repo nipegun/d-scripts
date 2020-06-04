@@ -47,11 +47,16 @@ echo -e "impresora\tIN\tA\t192.168.1.11" >> /etc/bind/db.prueba.com
 #echo ""
 #echo "Corrigiendo los posibles errores de IPv6..."
 #echo ""
-#sed -i -e 's|RESOLVCONF=no|RESOLVCONF=yes|g' /etc/default/bind9
-#sed -i -e 's|OPTIONS="-u bind"|OPTIONS="-4 -u bind"|g' /etc/default/bind9
+sed -i -e 's|RESOLVCONF=no|RESOLVCONF=yes|g' /etc/default/bind9
+sed -i -e 's|OPTIONS="-u bind"|OPTIONS="-4 -u bind"|g' /etc/default/bind9
 
 echo ""
 echo "Volviendo a reiniciar el servidor DNS..."
 echo ""
 service bind9 restart
+
+echo ""
+echo "Mostrando el estado del servidor DNS..."
+echo ""
+service bind9 status
 
