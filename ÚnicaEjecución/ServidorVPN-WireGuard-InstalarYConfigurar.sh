@@ -13,7 +13,9 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
+echo "Iniciando ..."
 apt-get -y update > /dev/null
+echo "..."
 apt-get -y install dialog > /dev/null
 menu=(dialog --timeout 5 --checklist "¿En que versión de Debian quieres instalar xxx?:" 22 76 16)
   opciones=(1 "Debian  8, Jessie" off
