@@ -41,15 +41,27 @@ if [ $# -ne $CantArgsCorrectos ]
           case $choice in
 
             1)
+              echo ""
+              echo -e "${ColorVerde}Script para Debian 8 (Jessie) todavía no disponible.${FinColor}"
+              echo ""
             ;;
 
             2)
+              echo ""
+              echo -e "${ColorVerde}Script para Debian 9 (Stretch) todavía no disponible.${FinColor}"
+              echo ""
             ;;
 
             3)
+              echo ""
+              echo -e "${ColorVerde}Script para Debian 10 (Buster) todavía no disponible.${FinColor}"
+              echo ""
             ;;
 
             4)
+              echo ""
+              echo -e "${ColorVerde}Script para Debian 11 (Bullseye) todavía no disponible.${FinColor}"
+              echo ""
             ;;
         
           esac
