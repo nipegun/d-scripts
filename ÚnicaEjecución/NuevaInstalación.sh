@@ -18,10 +18,10 @@ if [ $# -ne $CantArgsCorrectos ]
     echo "------------------------------------------------------------------------------"
     echo "Mal uso del script."
     echo ""
-    echo "El uso correcto sería: $0 [NombreDelMódulo]"
+    echo "El uso correcto sería: $0 [x]"
     echo ""
     echo "Ejemplo:"
-    echo ' $0 igb'
+    echo ' $0 x'
     echo "------------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
