@@ -73,10 +73,10 @@ menu=(dialog --timeout 5 --checklist "¿En que versión de Debian quieres instal
             echo "#AllowedIPs = 0.0.0.0/0" >> /etc/wireguard/wg0.conf
           # Agregar la dirección IP del servidor al archivo de configuración
             DirIP=$(ip a | grep eth0 | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
-            sed -i -e 's|Address =|Address = $DirIP|g' /etc/wireguard/wg0.conf
+            sed -i -e 's|Address =|Address = '$DirIP'|g' /etc/wireguard/wg0.conf
           # Agregar la clave privada al archivo de configuración
-            ClavePub$(cat /etc/wireguard/private.key)
-            sed -i -e 's|PrivateKey =|PrivateKey = $ClavePub|g' /etc/wireguard/wg0.conf
+            ClavePub=$(cat /etc/wireguard/private.key)
+            sed -i -e 's|PrivateKey =|PrivateKey = '$ClavePub'|g' /etc/wireguard/wg0.conf
           # Habilitar el forwarding
             sysctl -w net.ipv4.ip_forward=1
             #sysctl -w net.ipv6.conf.all.forwarding=1
