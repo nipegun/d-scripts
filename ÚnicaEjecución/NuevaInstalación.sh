@@ -29,10 +29,10 @@ if [ $# -ne $CantArgsCorrectos ]
     apt-get -y update 2> /dev/null
     apt-get -y install dialog 2> /dev/null
     menu=(dialog --timeout 5 --checklist "¿En que versión de Debian quieres instalar xxx?:" 22 76 16)
-      opciones=(1 "Debian  8" off
-                2 "Debian  9" off
-                3 "Debian 10" off
-                4 "Debian 11" off)
+      opciones=(1 "Debian  8, Jessie" off
+                2 "Debian  9, Stretch" off
+                3 "Debian 10, Buster" off
+                4 "Debian 11, Bullseye" off)
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
