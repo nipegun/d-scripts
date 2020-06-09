@@ -9,8 +9,8 @@
 #  Script de NiPeGun para instalar y configurar WireGuard
 #----------------------------------------------------------
 
-apt-get -y update 2> /dev/null
-apt-get -y install dialog 2> /dev/null
+apt-get -y update > /dev/null
+apt-get -y install dialog > /dev/null
 menu=(dialog --timeout 5 --checklist "¿En que versión de Debian quieres instalar xxx?:" 22 76 16)
   opciones=(1 "Debian  8, Jessie" off
             2 "Debian  9, Stretch" off
