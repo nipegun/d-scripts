@@ -85,9 +85,17 @@ menu=(dialog --timeout 5 --checklist "¿En que versión de Debian quieres instal
             sed -i -e 's|#net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
             #sed -i -e 's|#net.ipv6.conf.all.forwarding=1|net.ipv6.conf.all.forwarding=1|g' /etc/sysctl.conf
           # Levantar la conexión
+            echo ""
+            echo "Levantando la interfaz..."
+            echo ""
             wg-quick up wg0
-          # Activar el servicio                
+            echo ""
+          # Activar el servicio
+            echo ""
+            echo "Activando el servicio..."
+            echo ""
             systemctl enable wg-quick@wg0.service
+            echo ""
         ;;
 
         4)
