@@ -9,6 +9,10 @@
 #  Script de NiPeGun para instalar y configurar WireGuard
 #----------------------------------------------------------
 
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
+
 apt-get -y update > /dev/null
 apt-get -y install dialog > /dev/null
 menu=(dialog --timeout 5 --checklist "¿En que versión de Debian quieres instalar xxx?:" 22 76 16)
@@ -25,13 +29,13 @@ menu=(dialog --timeout 5 --checklist "¿En que versión de Debian quieres instal
 
         1)
           echo ""
-          echo -e "${ColorVerde}Script para Debian 8 (Jessie) todavía no disponible.${FinColor}"
+          echo -e "${ColorRojo}Script para Debian 8 (Jessie) todavía no disponible.${FinColor}"
           echo ""
         ;;
 
         2)
           echo ""
-          echo -e "${ColorVerde}Script para Debian 9 (Stretch) todavía no disponible.${FinColor}"
+          echo -e "${ColorRojo}Script para Debian 9 (Stretch) todavía no disponible.${FinColor}"
           echo ""
         ;;
 
@@ -85,7 +89,7 @@ menu=(dialog --timeout 5 --checklist "¿En que versión de Debian quieres instal
 
         4)
           echo ""
-          echo -e "${ColorVerde}Script para Debian 11 (Bullseye) todavía no disponible.${FinColor}"
+          echo -e "${ColorRojo}Script para Debian 11 (Bullseye) todavía no disponible.${FinColor}"
           echo ""
           #apt-get -y update
           #apt-get -y install wireguard
