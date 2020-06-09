@@ -46,7 +46,8 @@ menu=(dialog --timeout 5 --checklist "¿En que versión de Debian quieres instal
           echo -e "${ColorVerde}Instalando WireGuard en Debian 10 (Buster)...${FinColor}"
           echo ""
           echo "deb http://deb.debian.org/debian buster-backports main" > /etc/apt/sources.list.d/backports.list
-          apt-get update
+          apt-get -y update > /dev/null
+          apt-get -y autoremove > /dev/null
           apt-get -y -t buster-backports install wireguard
           # Generar la llave Privada
             cd /etc/wireguard
