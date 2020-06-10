@@ -64,7 +64,7 @@ menu=(dialog --timeout 5 --checklist "¿En que versión de Debian quieres instal
             echo "ListenPort = 51820" >> /etc/wireguard/wg0.conf
             echo "PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> /etc/wireguard/wg0.conf
             echo "PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE" >> /etc/wireguard/wg0.conf
-            echo "SaveConfig = true" >> /etc/wireguard/wg0.conf
+            echo "SaveConfig = true # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos" >> /etc/wireguard/wg0.conf
           # Agregar la dirección IP del servidor al archivo de configuración
             DirIP=$(ip a | grep eth0 | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
             sed -i -e 's|Address =|Address = '$DirIP'|g' /etc/wireguard/wg0.conf
