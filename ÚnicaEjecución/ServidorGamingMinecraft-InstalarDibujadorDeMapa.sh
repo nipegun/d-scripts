@@ -26,3 +26,6 @@ cd Minecraft-Overviewer
 python3 setup.py build
 ln -s /root/git/Minecraft-Overviewer/overviewer.py /usr/local/bin/mcoverviewer
 
+ServerVersion=1.15
+mkdir -p /root/.minecraft/versions/${ServerVersion}/
+wget https://overviewer.org/textures/${ServerVersion} -O /root/.minecraft/versions/${ServerVersion}/${ServerVersion}.jar
