@@ -36,7 +36,8 @@ menu=(dialog --timeout 5 --checklist "Elige la versión de Debian:" 22 76 16)
         ;;
 
         3)
-          apt-get -y install exim
+          apt-get -y install exim4
+          dpkg-reconfigure exim4-config
         ;;
 
         4)
