@@ -89,12 +89,12 @@ do
       sed -i -e 's|#net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
       echo ""
       echo "------------------------------------"
-      echo "    INDICANDO LA UBICACIÓN DE LA"
-      echo "  CONFIGURACIÓN DEL DAEMON HOSTAPD"
+      echo "    INDICANDO LA UBICACIÓN DE LA CONFIGURACIÓN DEL DAEMON HOSTAPD"
       echo "------------------------------------"
       echo ""
       cp /etc/default/hostapd /etc/default/hostapd.bak
       sed -i -e 's|#DAEMON_CONF=""|DAEMON_CONF="/etc/hostapd/hostapd.conf"|g' /etc/default/hostapd
+      sed -i -e 's|#DAEMON_OPTS=""|DAEMON_OPTS="-dd -t -f /var/log/hostapd.log"|g' /etc/default/hostapd
       echo ""
       echo "--------------------------------------------"
       echo "   INDICANDO LA UBICACIÓN DEL ARCHIVO DE"
