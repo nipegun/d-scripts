@@ -33,6 +33,6 @@ if [ $# -ne $CantArgsEsperados ]
     echo -e "${ColorVerde}Agregando el nuevo usuario a uHub...${FinColor}"
     echo ""
     uhub-passwd /etc/uhub/users.db add $1 $2
-    #systemctl restart uhub.service
+    systemctl restart uhub.service
 fi
 
