@@ -46,6 +46,7 @@ apt-get -y install scid-spell-data
 apt-get -y install stockfish
 apt-get -y install dosbox
 apt-get -y install scummvm
+apt-get -y install eiskaltdcpp
 
 /root/scripts/d-scripts/ÚnicaEjecución/debian10/Escritorio/TorBrowser-Instalar.sh
 
