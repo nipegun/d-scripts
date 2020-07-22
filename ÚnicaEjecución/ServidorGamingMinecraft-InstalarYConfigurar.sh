@@ -39,6 +39,7 @@ apt-get -y install binutils
 apt-get -y install bc
 apt-get -y install jq
 apt-get -y install tmux
+apt-get -y install netcat
 apt-get -y install default-jre
 
 # Comandos a ejecutar manualmente
