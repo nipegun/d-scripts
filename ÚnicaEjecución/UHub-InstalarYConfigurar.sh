@@ -15,9 +15,9 @@ FinColor="\033[0m"
 apt-get -y install dialog 2> /dev/null
 
 menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
-  opciones=(1 "Instalar la versión disponible en los repos de Debian" off
-            2 "Instalar los paquetes binarios de Tehnick" off
-            3 "Bajar, compilar e instalar la versión de GitHub" on)
+  opciones=(1 "Instalar desde los repos de Debian" on
+            2 "Instalar desde los binarios de Tehnick -- Mejor para Ubuntu --" off
+            3 "Bajar, compilar e instalar la versión de GitHub --todavía no está listo --" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -114,7 +114,12 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           apt-get -y install cmake make gcc git libsqlite3-dev libssl-dev
           mkdir /root/git/ 2> /dev/null
           cd /root/git/
+          rm /root/git/uhub/ -R
           git clone https://github.com/janvidar/uhub.git
+          #
+          # Aquí van el make y el install
+          #
+          mkdir -p /etc/uhub/
           echo "# uHub access control lists." > /etc/uhub/users.conf
           echo "#" >> /etc/uhub/users.conf
           echo "# Syntax: <command> [data]" >> /etc/uhub/users.conf
