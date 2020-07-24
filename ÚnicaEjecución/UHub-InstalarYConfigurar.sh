@@ -90,7 +90,8 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo 'tls_enable=yes' >> /etc/uhub/uhub.conf
           #echo 'tls_require=yes' >> /etc/uhub/uhub.conf
           uhub-passwd /etc/uhub/users.db create
-          uhub-passwd /etc/uhub/users.db add UsuarioPrueba PasswordPrueba
+          systemctl enable uhub.service
+          systemctl start uhub.service
         ;;
 
         2)
@@ -190,9 +191,9 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo "[Install]"                     >> /etc/systemd/system/uhub.service
           echo "WantedBy=multi-user.target"    >> /etc/systemd/system/uhub.service
           uhub-passwd /etc/uhub/users.db create
-          uhub-passwd /etc/uhub/users.db add UsuarioPrueba PasswordPrueba
-          systemctl start uhub.service
           systemctl enable uhub.service
+          systemctl start uhub.service
+
         ;;
 
       esac
