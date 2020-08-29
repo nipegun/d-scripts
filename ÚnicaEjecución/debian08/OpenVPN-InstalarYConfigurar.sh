@@ -20,8 +20,8 @@ apt-get -y install openvpn
 gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz > /etc/openvpn/server.conf
 sed -i -e 's|dh dh1024.pem|dh dh2048.pem|g' /etc/openvpn/server.conf
 sed -i -e 's|;push "redirect-gateway def1 bypass-dhcp"|push "redirect-gateway def1 bypass-dhcp"|g' /etc/openvpn/s$
-sed -i -e 's|;push "dhcp-option DNS 208.67.222.222"|push "dhcp-option DNS 8.8.8.8"|g' /etc/openvpn/server.$
-sed -i -e 's|;push "dhcp-option DNS 208.67.220.220"|push "dhcp-option DNS 8.8.4.4"|g' /etc/openvpn/server.$
+sed -i -e 's|;push "dhcp-option DNS 208.67.222.222"|push "dhcp-option DNS 1.1.1.1"|g' /etc/openvpn/server.$
+sed -i -e 's|;push "dhcp-option DNS 208.67.220.220"|push "dhcp-option DNS 1.0.0.1"|g' /etc/openvpn/server.$
 sed -i -e 's|;user nobody|user nobody|g' /etc/openvpn/server.conf
 sed -i -e 's|;group nogroup|group nogroup|g' /etc/openvpn/server.conf
 
