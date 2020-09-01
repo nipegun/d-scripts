@@ -47,6 +47,7 @@ apt-get -y install stockfish
 apt-get -y install dosbox
 apt-get -y install scummvm
 apt-get -y install eiskaltdcpp
+apt-get -y install amule
 
 /root/scripts/d-scripts/ÚnicaEjecución/debian10/Escritorio/TorBrowser-Instalar.sh
 
