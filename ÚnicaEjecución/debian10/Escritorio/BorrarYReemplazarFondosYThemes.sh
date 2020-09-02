@@ -52,6 +52,38 @@ rm '/usr/share/backgrounds/mate/nature/YellowFlower.jpg'
 rm -R /usr/share/backgrounds/mate/nature
 
 # Themes
+apt-get -y purge adapta-gtk-theme
+apt-get -y purge albatross-gtk-theme
+apt-get -y purge blackbird-gtk-theme
+apt-get -y purge bluebird-gtk-theme
+apt-get -y purge breeze-gtk-theme
+apt-get -y purge darkcold-gtk-theme
+apt-get -y purge darkmint-gtk-theme
+apt-get -y purge greybird-gtk-theme
+apt-get -y purge materia-gtk-theme
+apt-get -y purge numix-gtk-theme
+
+rm -rf '/usr/share/themes/Blackbird'
+rm -rf '/usr/share/themes/BlackMATE'
+rm -rf '/usr/share/themes/Bluebird'
+rm -rf '/usr/share/themes/Blue-Submarine'
+rm -rf '/usr/share/themes/BlueMenta'
+rm -rf '/usr/share/themes/ContrastHigh'
+rm -rf '/usr/share/themes/GreenLaguna'
+rm -rf '/usr/share/themes/Green-Submarine'
+rm -rf '/usr/share/themes/Greybird'
+rm -rf' /usr/share/themes/Greybird-accessibility'
+rm -rf '/usr/share/themes/Greybird-bright'
+rm -rf '/usr/share/themes/Greybird-compact'
+rm -rf '/usr/share/themes/TraditionalOk' 
+
+apt-get -y install materia-gtk-theme
+
+rm -rf '/usr/share/themes/Materia-compact'
+rm -rf '/usr/share/themes/Materia-dark-compact'
+rm -rf '/usr/share/themes/Materia-light-compact'
+rm -rf '/usr/share/themes/Materia-light'
+
 rm -R /usr/share/desktop-base/joy-inksplat-theme
 rm -R /usr/share/desktop-base/joy-theme
 rm -R /usr/share/desktop-base/lines-theme
