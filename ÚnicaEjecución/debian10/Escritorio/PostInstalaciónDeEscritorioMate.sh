@@ -48,6 +48,7 @@ apt-get -y install dosbox
 apt-get -y install scummvm
 apt-get -y install eiskaltdcpp
 apt-get -y install amule
+apt-get -y install materia-gtk-theme
 
 /root/scripts/d-scripts/ÚnicaEjecución/debian10/Escritorio/TorBrowser-Instalar.sh
 
