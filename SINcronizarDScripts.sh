@@ -28,7 +28,8 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     git clone --depth=1 https://github.com/nipegun/d-scripts
     mkdir -p /root/scripts/d-scripts/Alias/
     rm /root/scripts/d-scripts/.git -R 2> /dev/null
-    chmod +x /root/scripts/d-scripts/*.sh -R
+    #chmod +x /root/scripts/d-scripts/*.sh -R
+    find /root/scripts/d-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
     /root/scripts/d-scripts/CrearAliasParaLosDScripts.sh
     echo ""
     echo "-----------------------------------------"
