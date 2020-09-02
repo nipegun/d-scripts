@@ -75,6 +75,9 @@ rm -rf '/usr/share/themes/Greybird'
 rm -rf' /usr/share/themes/Greybird-accessibility'
 rm -rf '/usr/share/themes/Greybird-bright'
 rm -rf '/usr/share/themes/Greybird-compact'
+rm -rf '/usr/share/themes/HighContrast'
+rm -rf '/usr/share/themes/HighContrastInverse'
+rm -rf '/usr/share/themes/Menta'
 rm -rf '/usr/share/themes/TraditionalOk' 
 
 apt-get -y install materia-gtk-theme
