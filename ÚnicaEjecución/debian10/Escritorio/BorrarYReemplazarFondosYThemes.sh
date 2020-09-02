@@ -52,6 +52,7 @@ rm '/usr/share/backgrounds/mate/nature/YellowFlower.jpg'
 rm -R /usr/share/backgrounds/mate/nature
 
 # Themes
+apt-get -y purge arc-theme
 apt-get -y purge adapta-gtk-theme
 apt-get -y purge albatross-gtk-theme
 apt-get -y purge blackbird-gtk-theme
