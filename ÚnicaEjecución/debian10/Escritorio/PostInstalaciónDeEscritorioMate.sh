@@ -48,33 +48,9 @@ apt-get -y install dosbox
 apt-get -y install scummvm
 apt-get -y install eiskaltdcpp
 apt-get -y install amule
-apt-get -y install materia-gtk-theme
 
 /root/scripts/d-scripts/ÚnicaEjecución/debian10/Escritorio/TorBrowser-Instalar.sh
 
 apt-get -y remove xterm reportbug blender imagemagick inkscape gnome-disk-utility
-rm -rf '/usr/share/themes/Blackbird'
-rm -rf '/usr/share/themes/BlackMATE'
-rm -rf '/usr/share/themes/Bluebird'
-rm -rf '/usr/share/themes/Blue-Submarine'
-rm -rf '/usr/share/themes/BlueMenta'
-rm -rf '/usr/share/themes/ContrastHigh'
-rm -rf '/usr/share/themes/GreenLaguna'
-rm -rf '/usr/share/themes/Green-Submarine'
-rm -rf' /usr/share/themes/Greybird-accessibility'
-rm -rf '/usr/share/themes/Greybird-bright'
-rm -rf '/usr/share/themes/Greybird-compact'
-
-rm -rf
-rm -rf
-rm -rf
-rm -rf
-
-rm -rf '/usr/share/themes/TraditionalOk' 
-rm -rf '/usr/share/themes/Materia-compact'
-rm -rf '/usr/share/themes/Materia-dark-compact'
-rm -rf '/usr/share/themes/Materia-light-compact'
-rm -rf '/usr/share/themes/Materia-light'
-
 apt-get -y autoremove
 
