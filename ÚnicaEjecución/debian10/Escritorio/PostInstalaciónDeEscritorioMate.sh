@@ -59,13 +59,22 @@ rm -rf '/usr/share/themes/Bluebird'
 rm -rf '/usr/share/themes/Blue-Submarine'
 rm -rf '/usr/share/themes/BlueMenta'
 rm -rf '/usr/share/themes/ContrastHigh'
+rm -rf '/usr/share/themes/GreenLaguna'
 rm -rf '/usr/share/themes/Green-Submarine'
+rm -rf' /usr/share/themes/Greybird-accessibility'
+rm -rf '/usr/share/themes/Greybird-bright'
+rm -rf '/usr/share/themes/Greybird-compact'
+
 rm -rf
+rm -rf
+rm -rf
+rm -rf
+
 rm -rf '/usr/share/themes/TraditionalOk' 
-
-
-
+rm -rf '/usr/share/themes/Materia-compact'
 rm -rf '/usr/share/themes/Materia-dark-compact'
 rm -rf '/usr/share/themes/Materia-light-compact'
+rm -rf '/usr/share/themes/Materia-light'
+
 apt-get -y autoremove
 
