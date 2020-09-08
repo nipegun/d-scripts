@@ -6,25 +6,28 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #---------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA AGREGAR USUARIOS NUEVOS SIN SHELL A DEBIAN
+#  Script de NiPeGun para agregar usuarios nuevos sin shell a Debian
 #---------------------------------------------------------------------
 
-EXPECTED_ARGS=1
-E_BADARGS=65
+ArgumentosEsperados=1
+ArgumentosInsuficientes=65
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
 
-if [ $# -ne $EXPECTED_ARGS ]
+if [ $# -ne $ArgumentosEsperados ]
   then
     echo ""
     echo "------------------------------------------------------------------"
-    echo "Mal uso del script."
+    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo "El uso correcto sería: $0 nombredeusuario"
+    echo -e "$0 ${ColorVerde}[NombreDelUsuario]${FinColor}"
     echo ""
     echo "Ejemplo:"
-    echo "$0 pepe"
+    echo " $0 pepe"
     echo "------------------------------------------------------------------"
     echo ""
-    exit $E_BADARGS
+    exit $ArgumentosInsuficientes
   else
     cmd=(dialog --checklist "Opciones del script:" 22 76 16)
     options=(1 "Crear el usuario" on
@@ -39,18 +42,14 @@ if [ $# -ne $EXPECTED_ARGS ]
       case $choice in
         1)
           echo ""
-          echo "---------------------"
-          echo " CREANDO EL USUARIO"
-          echo "---------------------"
+          echo -e "${ColorVerde}Creando el usuario $1...${FinColor}"
           echo ""
           useradd -d /home/$1/ -s /bin/false $1
         ;;
 
         2)
           echo ""
-          echo "-------------------------------------------------------"
-          echo " CREANDO LA CARPETA DEL USUARIO CON PERMISOS ESTÁNDAR"
-          echo "-------------------------------------------------------"
+          echo -e "${ColorVerde}Creando la carpeta del usuario con permisos estándar...${FinColor}"
           echo ""
           mkdir /home/$1/
           chown $1:$1 /home/$1/ -R
@@ -61,9 +60,7 @@ if [ $# -ne $EXPECTED_ARGS ]
 
         3)
           echo ""
-          echo "----------------------------------------------------------------------"
-          echo "  DENEGANDO EL ACCESO A LA CARPETA /home/$1 A LOS OTROS USUARIOS"
-          echo "----------------------------------------------------------------------"
+          echo -e "${ColorVerde}Denegando el acceso a la carpeta /home/$1 a los otros usuarios...${FinColor}"
           echo ""
           find /home/$1 -type d -print0 | xargs -0 chmod 0750
           echo "hacks4geeks rules da net" > /home/$1/$1
@@ -72,9 +69,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     
         4)
           echo ""
-          echo "------------------------------------------------------------"
-          echo "  CREANDO LA COMPARTICIÓN SAMBA PARA LA CARPETA DE USUARIO"
-          echo "------------------------------------------------------------"
+          echo -e "${ColorVerde}Creando la compartición Samba para la carpeta de usuario...${FinColor}"
           echo ""
           echo "[$1]" >> /etc/samba/smb.conf
           echo "  path = /home/$1/" >> /etc/samba/smb.conf
@@ -83,10 +78,10 @@ if [ $# -ne $EXPECTED_ARGS ]
           echo "  read only = no" >> /etc/samba/smb.conf
           echo "  valid users = $1" >> /etc/samba/smb.conf
           echo ""
-          echo "  AHORA DEBERÁS INGRESAR 2 VECES LA NUEVA CONTRASEÑA SAMBA PARA EL USUARIO $1."
-          echo "  PUEDE SER DISTINTA A LA DE LA PROPIA CUENTA DE USUARIO PERO SI PONES UNA"
-          echo "  DISTINTA, CUANDO TE CONECTES A LA CARPETA COMPARTIDA, ACUÉRDATE DE UTILIZAR"
-          echo "  LA CONTRASEÑA QUE PONGAS AHORA Y NO LA DE LA CUENTA DE USUARIO."
+          echo -e "${ColorRojo}Ahora deberás ingresar 2 veces la nueva contraseña samba para el usuario $1.${FinColor}"
+          echo -e "${ColorRojo}Puede ser distinta a la de la propia cuenta de usuario pero si pones una${FinColor}"
+          echo -e "${ColorRojo}distinta, cuando te conectes a la carpeta compartida, acuérdate de utilizar${FinColor}"
+          echo -e "${ColorRojo}la contraseña que pongas ahora y no la de la cuenta de usuario.${FinColor}"
           echo ""
           smbpasswd -a $1
         ;;
