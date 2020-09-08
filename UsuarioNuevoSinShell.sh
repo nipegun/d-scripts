@@ -79,7 +79,7 @@ if [ $# -ne $ArgumentosEsperados ]
           echo "  valid users = $1" >> /etc/samba/smb.conf
           echo ""
           echo -e "${ColorRojo}Ahora deberás ingresar 2 veces la nueva contraseña samba para el usuario $1.${FinColor}"
-          echo -e "${ColorRojo}Puede ser distinta a la de la propia cuenta de usuario pero si pones una${FinColor}"
+          echo -e "${ColorRojo}Puede ser distinta a la de la propia cuenta de usuario. Pero si pones una${FinColor}"
           echo -e "${ColorRojo}distinta, cuando te conectes a la carpeta compartida, acuérdate de utilizar${FinColor}"
           echo -e "${ColorRojo}la contraseña que pongas ahora y no la de la cuenta de usuario.${FinColor}"
           echo ""
