@@ -22,7 +22,7 @@ if [ $# -ne $ArgumentosEsperados ]
     echo "------------------------------------------------------------------"
     echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo -e "$0 ${ColorVerde}[NombreDelUsuario]${FinColor}"
+    echo -e "$0 ${ColorVerde}[NombreDeUsuario]${FinColor}"
     echo ""
     echo "Ejemplo:"
     echo " $0 pepe"
