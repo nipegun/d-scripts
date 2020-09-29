@@ -34,7 +34,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo "  Estás a punto de borrar el dispositivo $1"
     echo ""
     umount $1?*
-    shred -v -n1 -z $1
+    shred -vz -n1 $1
     echo ""
 fi
 
