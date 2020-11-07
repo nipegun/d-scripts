@@ -205,14 +205,10 @@ do
       echo "----------------------------------------------"
       echo ""
       apt-get update
-      apt-get -y install build-essential gcc make git
-      mkdir /root/git/
-      cd /root/git/
-      git clone https://github.com/letsencrypt/letsencrypt
-      cd /root/git/letsencrypt
+      apt-get -y install certbot python3-certbot-apache
       iptables -A INPUT -p tcp --dport 443 -j ACCEPT
       service apache2 stop
-      /root/git/letsencrypt/letsencrypt-auto certonly --standalone
+      certbot --apache
       dominio_servidor=$(dialog --title "Actualizar la configuración de default-ssl.conf" --inputbox "Ingresa el nombre de dominio exactamente como se lo pusiste a LetsEncrypt:" 8 60 3>&1 1>&2 2>&3 3>&- )
       echo ""
       echo "SE ACTUALIZARÁ EL ARCHIVO default-ssl.conf con el dominio $dominio_servidor"
