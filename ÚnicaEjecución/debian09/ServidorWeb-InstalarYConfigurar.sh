@@ -70,12 +70,15 @@ do
       a2enmod dir
       a2enmod mime
       a2ensite default-ssl
+      cp /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini.bak
       sed -i -e 's|max_execution_time = 30|max_execution_time = 300|g' /etc/php/7.0/apache2/php.ini
       sed -i -e 's|memory_limit = 128M|memory_limit = 300M|g' /etc/php/7.0/apache2/php.ini
       sed -i -e 's|post_max_size = 8M|post_max_size = 64M|g' /etc/php/7.0/apache2/php.ini
       sed -i -e 's|upload_max_filesize = 2M|upload_max_filesize = 64M|g' /etc/php/7.0/apache2/php.ini
       mkdir /var/www/html/logs
+      cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf.bak
       sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/logs|g' /etc/apache2/sites-available/000-default.conf
+      cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
       echo "" >> /etc/ssh/sshd_config
       echo "Match Group webmasters" >> /etc/ssh/sshd_config
       echo "  ChrootDirectory /var/www" >> /etc/ssh/sshd_config
@@ -126,6 +129,7 @@ do
       mkdir -p /etc/apache2/ssl/
       openssl req -x509 -nodes -days 365 -newkey rsa:8192 -out /etc/apache2/ssl/autocertssl.pem -keyout /etc/apache2/ssl/autocertssl.key
       chmod 600 /etc/apache2/ssl/*
+      cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.bak
       sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/logs|g' /etc/apache2/sites-available/default-ssl.conf
       sed -i -e 's|ssl/certs/ssl-cert-snakeoil.pem|apache2/ssl/autocertssl.pem|g' /etc/apache2/sites-available/default-ssl.conf
       sed -i -e 's|ssl/private/ssl-cert-snakeoil.key|apache2/ssl/autocertssl.key|g' /etc/apache2/sites-available/default-ssl.conf
@@ -148,6 +152,7 @@ do
       echo "-----------------------------------------------------------"
       echo ""
       apt-get -y install phpmyadmin
+      cp /etc/apache2/conf-available/phpmyadmin.conf /etc/apache2/conf-available/phpmyadmin.conf.bak
       sed -i "7 a AllowOverride All" /etc/apache2/conf-available/phpmyadmin.conf
       service apache2 restart
       echo ""
