@@ -28,14 +28,6 @@ if [ $# -ne $total_param_corr ]; then
   echo ""
   exit
 else
-  # Asegurarse de que estén instalado los componentes necesarios
-  apt-get update
-  apt-get -y install build-essential gcc make git
-  mkdir /root/git/
-  cd /root/git/
-  rm /root/git/letsencrypt -R
-  git clone https://github.com/letsencrypt/letsencrypt
-
   # Comprobar si el nombre de usuario MySQL deseado tiene mas de 16 caracteres
   nombre_mysql_deseado=$2
 
@@ -79,8 +71,10 @@ else
     echo ""
     iptables -A INPUT -p tcp --dport 443 -j ACCEPT
     service apache2 stop
-    /root/git/letsencrypt/letsencrypt-auto --apache -d $2$1 -d www.$2$1
-
+    apt-get update
+    apt-get -y install certbot python3-certbot-apache
+    certbot --apache -d $2$1 -d www.$2$1
+    
     # Volver a arrancar Apache
     echo ""
     echo "$(tput setaf 1)Re-arrancando Apache... $(tput sgr 0)"
@@ -196,7 +190,9 @@ else
     echo ""
     iptables -A INPUT -p tcp --dport 443 -j ACCEPT
     service apache2 stop
-    /root/git/letsencrypt/letsencrypt-auto --apache -d $2$1 -d www.$2$1
+    apt-get update
+    apt-get -y install certbot python3-certbot-apache
+    certbot --apache -d $2$1 -d www.$2$1
 
     # Volver a arrancar Apache
     echo ""
