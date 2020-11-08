@@ -38,6 +38,7 @@ do
       apt-get -y dist-upgrade
       apt-get -y autoremove
       echo ""
+      
       echo -e "${ColorVerde}Instalando el servidor web con Apache y PHP 7.3...${FinColor}"
       echo ""
       apt-get install tasksel
@@ -85,6 +86,7 @@ do
       echo "RewriteEngine On" > /var/www/html/logs/.htaccess
       echo '  RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]' >> /var/www/html/logs/.htaccess
       echo "  RewriteRule .*\.(log)$ http://google.com [NC]" >> /var/www/html/logs/.htaccess
+      
       cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
       echo "" >> /etc/ssh/sshd_config
       echo "Match Group webmasters" >> /etc/ssh/sshd_config
@@ -93,6 +95,7 @@ do
       echo "  X11Forwarding no" >> /etc/ssh/sshd_config
       echo "  ForceCommand internal-sftp" >> /etc/ssh/sshd_config
       echo ""
+      
       echo -e "${ColorVerde}Ahora tendrás que ingresar veces en nuevo password para el usuario www-data.${FinColor}"
       echo -e "${ColorVerde}Acuérdate de apuntarlo en un lugar seguro porque tendrás que loguearte con él mediante sftp.${FinColor}"
       echo ""
@@ -101,7 +104,8 @@ do
       groupadd webmasters
       usermod -a -G webmasters www-data
       chown root:root /var/www
-      service apache2 restart
+      service ssh restart
+      
       echo "" > /etc/apache2/sites-available/nuevawebvar.conf
       echo "<VirtualHost *:80>" >> /etc/apache2/sites-available/nuevawebvar.conf
       echo "" >> /etc/apache2/sites-available/nuevawebvar.conf
@@ -123,8 +127,8 @@ do
       echo "" >> /etc/apache2/sites-available/nuevawebvar.conf
       echo "</VirtualHost>" >> /etc/apache2/sites-available/nuevawebvar.conf
       echo "" >> /etc/apache2/sites-available/nuevawebvar.conf
-      service ssh restart
       echo ""
+      
       echo -e "${ColorVerde}Instalando el certificado SSL autofirmado para https...${FinColor}"
       echo ""
       mkdir -p /etc/apache2/ssl/
@@ -135,6 +139,7 @@ do
       sed -i -e 's|ssl/certs/ssl-cert-snakeoil.pem|apache2/ssl/autocertssl.pem|g' /etc/apache2/sites-available/default-ssl.conf
       sed -i -e 's|ssl/private/ssl-cert-snakeoil.key|apache2/ssl/autocertssl.key|g' /etc/apache2/sites-available/default-ssl.conf
       service apache2 restart
+      
       echo ""
       echo -e "${ColorVerde}Instalando el servidor de bases de datos...${FinColor}"
       echo ""
