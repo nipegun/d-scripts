@@ -5,19 +5,20 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para transformar un Debian 10 recién instalado en un servidor Web completo con Apache, PHP7, PHPMyAdmin y otros
-#-------------------------------------------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------------------------------
+#  Script de NiPeGun para transformar un Debian 10 recién instalado en un servidor Web completo con Apache, PHP y MySQL
+#------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
+apt-get -y update > /dev/null
+apt-get -y install dialog > /dev/null
 cmd=(dialog --checklist "Script de hacks4geeks.com para instalación de servidor Web:" 22 76 16)
 options=(1 "Instalar con certificado SSL autofirmado" on
          2 "Agregar certificado LetsEncrypt encima (Requiere DDNS)" off
-         3 "Configurar y activar el módulo remoteip para estar detrás de un proxy inverso" off
-         4 "Servidor de correo (Requiere DDNS)" off)
+         3 "Configurar y activar el módulo remoteip para estar detrás de un proxy inverso" off)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
 for choice in $choices
@@ -73,15 +74,18 @@ do
       a2ensite default-ssl
       phpenmod mcrypt
       phpenmod mbstring
+      cp /etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2/php.ini.bak
       sed -i -e 's|max_execution_time = 30|max_execution_time = 300|g' /etc/php/7.3/apache2/php.ini
       sed -i -e 's|memory_limit = 128M|memory_limit = 300M|g' /etc/php/7.3/apache2/php.ini
       sed -i -e 's|post_max_size = 8M|post_max_size = 64M|g' /etc/php/7.3/apache2/php.ini
       sed -i -e 's|upload_max_filesize = 2M|upload_max_filesize = 64M|g' /etc/php/7.3/apache2/php.ini
       mkdir /var/www/html/logs
+      cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
       sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/logs|g' /etc/apache2/sites-available/000-default.conf
       echo "RewriteEngine On" > /var/www/html/logs/.htaccess
       echo '  RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]' >> /var/www/html/logs/.htaccess
       echo "  RewriteRule .*\.(log)$ http://google.com [NC]" >> /var/www/html/logs/.htaccess
+      cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
       echo "" >> /etc/ssh/sshd_config
       echo "Match Group webmasters" >> /etc/ssh/sshd_config
       echo "  ChrootDirectory /var/www" >> /etc/ssh/sshd_config
@@ -126,6 +130,7 @@ do
       mkdir -p /etc/apache2/ssl/
       openssl req -x509 -nodes -days 365 -newkey rsa:8192 -out /etc/apache2/ssl/autocertssl.pem -keyout /etc/apache2/ssl/autocertssl.key
       chmod 600 /etc/apache2/ssl/*
+      cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.bak
       sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/logs|g' /etc/apache2/sites-available/default-ssl.conf
       sed -i -e 's|ssl/certs/ssl-cert-snakeoil.pem|apache2/ssl/autocertssl.pem|g' /etc/apache2/sites-available/default-ssl.conf
       sed -i -e 's|ssl/private/ssl-cert-snakeoil.key|apache2/ssl/autocertssl.key|g' /etc/apache2/sites-available/default-ssl.conf
@@ -140,45 +145,11 @@ do
       mysql_secure_installation
       echo ""
 
-      # ----------------------------------------------------------------------------------------------
-      # --------------- CÓDIGO SIN PROBAR PORQUE PHPMYADMIN TODAVIA NO ESTÁ DISPONIBLE ---------------
-      # ----------------------------------------------------------------------------------------------
-      # echo -e "${ColorVerde}Instalando phpmyadmin para administrar las bases de datos...${FinColor}"
-      # echo ""
-      # apt-get -y install phpmyadmin
-      # sed -i "7 a AllowOverride All" /etc/apache2/conf-available/phpmyadmin.conf
-      # service apache2 restart
-      # echo ""
-      # echo -e "${ColorVerde}Asegurando phpmyadmin con bloqueo web...${FinColor}"
-      # echo ""
-      # echo " Si quieres agregar un usuario adicional al bloqueo web"
-      # echo " de phpmyadmin ejecuta el comando sin -c. Por ej:"
-      # echo ""
-      # echo " htpasswd /etc/phpmyadmin/.htpasswd usuarioadicional"
-      # echo ""
-      # echo 'AuthType Basic' > /usr/share/phpmyadmin/.htaccess
-      # echo 'AuthName "Restricted Files"' >> /usr/share/phpmyadmin/.htaccess
-      # echo 'AuthUserFile /etc/phpmyadmin/.htpasswd' >> /usr/share/phpmyadmin/.htaccess
-      # echo 'Require valid-user' >> /usr/share/phpmyadmin/.htaccess
-      # htpasswd -c /etc/phpmyadmin/.htpasswd phpmyadmin
-      # echo ""
-      # ----------------------------------------------------------------------------------------------
-      # --------------------------------- FIN DEL CÓDIGO SIN PROBAR ----------------------------------
-      # ----------------------------------------------------------------------------------------------
-
-      echo ""
       echo -e "${ColorVerde}Instalando MemCacheD...${FinColor}"
       echo ""
       apt-get -y install memcached php-memcached
       phpenmod memcached
       service apache2 restart
-      echo ""
-
-      echo -e "${ColorVerde}Instalando paquetes adicionales...${FinColor}"
-      echo ""
-      apt-get -y remove manpages
-      apt-get -y install nmap nbtscan
-      apt-get -y install manpages-es mc nano members sysv-rc-conf zip unzip elinks
       echo ""
 
       echo -e "${ColorVerde}Instalando el cortafuegos NFTables...${FinColor}"
@@ -251,14 +222,6 @@ do
       echo ""
       echo -e "${ColorVerde}http://hacks4geeks.com/pasar-ips-reales-de-clientes-http-de-haproxy-a-backends-con-apache${FinColor}"
       echo ""
-    ;;
-
-    4)
-      echo ""
-      echo -e "${ColorVerde}Instalando el servidor de correo postfix.${FinColor}"
-      echo -e "${ColorVerde}Cuando te lo pregunte indícale la dirección DDNS que le indicaste a letsencrypt.${FinColor}"
-      echo ""
-      apt-get -y install postfix
     ;;
 
     esac
