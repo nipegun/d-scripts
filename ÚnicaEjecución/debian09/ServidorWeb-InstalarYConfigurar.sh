@@ -148,7 +148,14 @@ do
       echo ""
       mysql_secure_installation
       echo ""
-      
+
+      echo -e "${ColorVerde}Instalando MemCacheD...${FinColor}"
+      echo ""
+      apt-get -y install memcached php-memcached
+      phpenmod memcached
+      service apache2 restart
+      echo ""
+
       echo -e "${ColorVerde}Instalando PHPMyAdmin para administrar bases de datos...${FinColor}"
       echo ""
       apt-get -y install phpmyadmin
@@ -171,14 +178,9 @@ do
       echo 'AuthUserFile /etc/phpmyadmin/.htpasswd' >> /usr/share/phpmyadmin/.htaccess
       echo 'Require valid-user' >> /usr/share/phpmyadmin/.htaccess
       htpasswd -c /etc/phpmyadmin/.htpasswd phpmyadmin
-      
-      echo -e "${ColorVerde}Instalando MemCacheD...${FinColor}"
-      echo ""
-      apt-get -y install memcached php-memcached
-      phpenmod memcached
       service apache2 restart
       echo ""
-
+      
       echo -e "${ColorVerde}El script ha terminado de ejecutarse.${FinColor}"
       echo ""
       echo -e "${ColorVerde}Reinicia el sistema ejecutando: shutdown -r now${FinColor}"
