@@ -5,16 +5,20 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA INSTALAR Y CONFIGURAR EL SERVIDOR WEB CON APACHE EN DEBIAN 8
-#---------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------
+#  Script de NiPeGun para transformar un Debian 8 recién instalado en un servidor Web completo con Apache, PHP, MySQL y PHPMyAdmin
+#-----------------------------------------------------------------------------------------------------------------------------------
 
-apt-get update
-apt-get -y install dialog
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
+
+apt-get -y update > /dev/null
+apt-get -y install dialog > /dev/null
 cmd=(dialog --checklist "Script de hacks4geeks.com para instalación de servidor Web:" 22 76 16)
 options=(1 "Instalar con certificado SSL autofirmado" on
-         2 "Agregar certificado SSL de LetsEncrypt" off
-         3 "Instalar y configurar servidor ftp (vsftpd)" off)
+         2 "Agregar certificado LetsEncrypt encima (Requiere DDNS)" off        
+         3 "Configurar y activar el módulo remoteip para estar detrás de un proxy inverso" off)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
 for choice in $choices
@@ -23,25 +27,19 @@ do
 
     1)
       echo ""
-      echo "---------------------------------------------------------"
-      echo " INSTALANDO SERVIDOR WEB CON CERTIFICADO SSL AUTOFIRMADO"
-      echo "---------------------------------------------------------"
+      echo -e "${ColorVerde}----------------------------------------------------------${FinColor}"
+      echo -e "${ColorVerde}Instalando servidor web con certificado SSL autofirmado...${FinColor}"
+      echo -e "${ColorVerde}----------------------------------------------------------${FinColor}"
       echo ""
-      
-      echo ""
-      echo "-------------------------"
-      echo " ACTUALIZANDO EL SISTEMA"
-      echo "-------------------------"
+      echo -e "${ColorVerde}Actualizando el sistema...${FinColor}"
       echo ""
       apt-get -y update
       apt-get -y upgrade
       apt-get -y dist-upgrade
       apt-get -y autoremove
-      
       echo ""
-      echo "-----------------------------------------------"
-      echo " INSTALANDO EL SERVIDOR WEB CON APACHE2 Y PHP5"
-      echo "-----------------------------------------------"
+
+      echo -e "${ColorVerde}Instalando el servidor web con Apache y PHP 5...${FinColor}"
       echo ""
       apt-get install tasksel
       tasksel install ssh-server
@@ -77,12 +75,19 @@ do
       a2enmod dir
       a2enmod mime
       a2ensite default-ssl
+      cp /etc/php5/apache2/php.ini /etc/php5/apache2/php.ini.bak
       sed -i -e 's|max_execution_time = 30|max_execution_time = 300|g' /etc/php5/apache2/php.ini
       sed -i -e 's|memory_limit = 128M|memory_limit = 300M|g' /etc/php5/apache2/php.ini
       sed -i -e 's|post_max_size = 8M|post_max_size = 64M|g' /etc/php5/apache2/php.ini
       sed -i -e 's|upload_max_filesize = 2M|upload_max_filesize = 64M|g' /etc/php5/apache2/php.ini
       mkdir /var/www/html/logs
+      cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf.bak
       sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/logs|g' /etc/apache2/sites-available/000-default.conf
+      echo "RewriteEngine On" > /var/www/html/logs/.htaccess
+      echo '  RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]' >> /var/www/html/logs/.htaccess
+      echo "  RewriteRule .*\.(log)$ http://google.com [NC]" >> /var/www/html/logs/.htaccess
+      
+      cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
       echo "" >> /etc/ssh/sshd_config
       echo "Match Group webmasters" >> /etc/ssh/sshd_config
       echo "  ChrootDirectory /var/www" >> /etc/ssh/sshd_config
@@ -90,19 +95,17 @@ do
       echo "  X11Forwarding no" >> /etc/ssh/sshd_config
       echo "  ForceCommand internal-sftp" >> /etc/ssh/sshd_config
       echo ""
-      echo "----------------------------------------------------"
-      echo " AHORA TENDRÁS QUE INGRESAR DOS VECES"
-      echo " EL NUEVO PASSWORD PARA EL USUARIO www-data."
-      echo " ACUÉRDATE TAMBIÉN DE APUNTARLO EN UN LUGAR SEGURO"
-      echo " PORQUE TENDRÁS QUE LOGUEARTE CON ÉL MEDIANTE SFTP."
-      echo "----------------------------------------------------"
+      
+      echo -e "${ColorVerde}Ahora tendrás que ingresar veces en nuevo password para el usuario www-data.${FinColor}"
+      echo -e "${ColorVerde}Acuérdate de apuntarlo en un lugar seguro porque tendrás que loguearte con él mediante sftp.${FinColor}"
       echo ""
       passwd www-data
       usermod -s /bin/bash www-data
       groupadd webmasters
       usermod -a -G webmasters www-data
       chown root:root /var/www
-      service apache2 restart
+      service ssh restart
+      
       echo "" > /etc/apache2/sites-available/nuevawebvar.conf
       echo "<VirtualHost *:80>" >> /etc/apache2/sites-available/nuevawebvar.conf
       echo "" >> /etc/apache2/sites-available/nuevawebvar.conf
@@ -124,44 +127,35 @@ do
       echo "" >> /etc/apache2/sites-available/nuevawebvar.conf
       echo "</VirtualHost>" >> /etc/apache2/sites-available/nuevawebvar.conf
       echo "" >> /etc/apache2/sites-available/nuevawebvar.conf
-      service ssh restart
-      
       echo ""
-      echo "------------------------------------------------------------------"
-      echo " INSTALANDO EL CERTIFICADO SSL AUTOFIRMADO ALTERNATIVO PARA HTTPS"
-      echo "------------------------------------------------------------------"
+      
+      echo -e "${ColorVerde}Instalando el certificado SSL autofirmado para https...${FinColor}"
       echo ""
       mkdir -p /etc/apache2/ssl/
       openssl req -x509 -nodes -days 365 -newkey rsa:8192 -out /etc/apache2/ssl/autocertssl.pem -keyout /etc/apache2/ssl/autocertssl.key
       chmod 600 /etc/apache2/ssl/*
+      cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.bak
       sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/logs|g' /etc/apache2/sites-available/default-ssl.conf
       sed -i -e 's|ssl/certs/ssl-cert-snakeoil.pem|apache2/ssl/autocertssl.pem|g' /etc/apache2/sites-available/default-ssl.conf
       sed -i -e 's|ssl/private/ssl-cert-snakeoil.key|apache2/ssl/autocertssl.key|g' /etc/apache2/sites-available/default-ssl.conf
       service apache2 restart
       
       echo ""
-      echo "------------------------------------------"
-      echo " INSTALANDO EL SERVIDOR DE BASES DE DATOS"
-      echo "------------------------------------------"
+      echo -e "${ColorVerde}Instalando el servidor de bases de datos...${FinColor}"
       echo ""
-      apt-get -y install mysql-server
-      
+      apt-get -y install mariadb-server
       echo ""
-      echo "------------------------------------------"
-      echo " ASEGURANDO EL SERVIDOR DE BASES DE DATOS"
-      echo "------------------------------------------"
+      echo -e "${ColorVerde}Asegurando el servidor de bases de datos...${FinColor}"
       echo ""
       mysql_secure_installation
-      
       echo ""
-      echo "-----------------------------------------------------------"
-      echo " INSTALANDO PHPMYADMIN PARA ADMINISTRAR LAS BASES DE DATOS"
-      echo "-----------------------------------------------------------"
+      
+      echo -e "${ColorVerde}Instalando PHPMyAdmin para administrar bases de datos...${FinColor}"
       echo ""
       apt-get -y install phpmyadmin
+      cp /etc/apache2/conf-available/phpmyadmin.conf /etc/apache2/conf-available/phpmyadmin.conf.bak
       sed -i "7 a AllowOverride All" /etc/apache2/conf-available/phpmyadmin.conf
       service apache2 restart
-      
       echo ""
       echo "--------------------------------------------------------"
       echo " ASEGURANDO PHPMYADMIN CON BLOQUEO WEB"
@@ -179,31 +173,22 @@ do
       echo 'Require valid-user' >> /usr/share/phpmyadmin/.htaccess
       htpasswd -c /etc/phpmyadmin/.htpasswd phpmyadmin
       
+      echo -e "${ColorVerde}Instalando MemCacheD...${FinColor}"
       echo ""
-      echo "-----------------------------------------"
-      echo " INSTALANDO ALGUNOS PAQUETES ADICIONALES"
-      echo "-----------------------------------------"
+      apt-get -y install memcached php-memcached
+      phpenmod memcached
+      service apache2 restart
       echo ""
-      apt-get -y remove manpages
-      apt-get -y install nmap nbtscan
-      apt-get -y install manpages-es mc nano members sysv-rc-conf zip unzip elinks
       
+      echo -e "${ColorVerde}El script ha terminado de ejecutarse.${FinColor}"
       echo ""
-      echo "--------------------------------------"
-      echo " EL SCRIPT HA TERMINADO DE EJECUTARSE"
-      echo ""
-      echo " REINICIA EL SISTEMA EJECUTANDO:"
-      echo " shutdown -r now"
-      echo "--------------------------------------"
+      echo -e "${ColorVerde}Reinicia el sistema ejecutando: shutdown -r now${FinColor}"
       echo ""
     ;;
     
     2)
       echo ""
-      echo "----------------------------------------------"
-      echo " INSTALANDO EL CERTIFICADO SSL DE LETSENCRYPT"
-      echo " Y CONFIGURANDO APACHE PARA QUE LO USE"
-      echo "----------------------------------------------"
+      echo -e "${ColorVerde}Instalando el certificado SSL de letsencrypt y configurando Apache para que lo use...${FinColor}"
       echo ""
       apt-get update
       apt-get -y install build-essential gcc make git
@@ -227,7 +212,29 @@ do
     ;;
 
     3)
-
+      a2enmod remoteip
+      a2enmod headers
+      echo "RemoteIPHeader X-Forwarded-For" > /etc/apache2/conf-available/remoteip.conf
+      echo "#RemoteIPInternalProxy 0.0.0.0" >> /etc/apache2/conf-available/remoteip.conf
+      echo "#RemoteIPTrustedProxy 0.0.0.0" >> /etc/apache2/conf-available/remoteip.conf
+      echo 'LogFormat "%a %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined' >> /etc/apache2/conf-available/remoteip.conf
+      a2enconf remoteip
+      service apache2 restart
+      echo ""
+      echo "El modulo remoteip está activado. Para configurarlo edita el archivo:"
+      echo ""
+      echo "/etc/apache2/conf-available/remoteip.conf"
+      echo ""
+      echo "descomenta la línea que te interese de las dos que están comentadas,"
+      echo "reemplaza la ip que aparece como 0.0.0.0 con la ip del host del proxy inverso"
+      echo "y reinicia apache 2 ejecutando:"
+      echo ""
+      echo "service apache2 restart"
+      echo ""
+      echo "Para más información sobre este punto, revisa:"
+      echo ""
+      echo "http://hacks4geeks.com/pasar-ips-reales-de-clientes-http-de-haproxy-a-backends-con-apache/"
+      echo ""
     ;;
 
     esac
