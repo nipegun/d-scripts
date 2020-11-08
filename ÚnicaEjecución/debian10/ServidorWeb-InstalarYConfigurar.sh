@@ -174,33 +174,23 @@ do
     ;;
 
     2)
-      # ----------------------------------------------------------------------------------------------
-      # -------------------------------------- CÓDIGO SIN PROBAR -------------------------------------
-      # ----------------------------------------------------------------------------------------------
       echo ""
       echo -e "${ColorVerde}Instalando el certificado SSL de letsencrypt y configurando Apache para que lo use...${FinColor}"
       echo ""
       apt-get update
-      apt-get -y install build-essential gcc make git
-      mkdir /root/git/
-      cd /root/git/
-      git clone https://github.com/letsencrypt/letsencrypt
-      cd /root/git/letsencrypt
-      nft add rule inet filter input tcp dport 443 accept
+      apt-get -y install certbot python3-certbot-apache
+      iptables -A INPUT -p tcp --dport 443 -j ACCEPT
       service apache2 stop
-      # /root/git/letsencrypt/letsencrypt-auto certonly --standalone
-      # dominio_servidor=$(dialog --title "Actualizar la configuración de default-ssl.conf" --inputbox "Ingresa el nombre de dominio exactamente como se lo pusiste a LetsEncrypt:" 8 60 3>&1 1>&2 2>&3 3>&- )
-      # echo ""
-      # echo "SE ACTUALIZARÁ EL ARCHIVO default-ssl.conf con el dominio $dominio_servidor"
-      # echo ""
-      # sed -i -e 's|apache2/ssl/autocertssl.pem|letsencrypt/live/'"$dominio_servidor"'/fullchain.pem|g' /etc/apache2/sites-available/default-ssl.conf
-      # sed -i -e 's|apache2/ssl/autocertssl.key|letsencrypt/live/'"$dominio_servidor"'/privkey.pem|g' /etc/apache2/sites-available/default-ssl.conf
-      # chmod 600 /etc/letsencrypt/live/$dominio_servidor/*
-      # sed -i -e 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html\n        Redirect permanent / https://'"$dominio_servidor"'/|g' /etc/apache2/sites-available/000-default.conf
-      # service apache2 start
-      # ----------------------------------------------------------------------------------------------
-      # --------------------------------- FIN DEL CÓDIGO SIN PROBAR ----------------------------------
-      # ----------------------------------------------------------------------------------------------
+      certbot --apache
+      dominio_servidor=$(dialog --title "Actualizar la configuración de default-ssl.conf" --inputbox "Ingresa el nombre de dominio exactamente como se lo pusiste a LetsEncrypt:" 8 60 3>&1 1>&2 2>&3 3>&- )
+      echo ""
+      echo "SE ACTUALIZARÁ EL ARCHIVO default-ssl.conf con el dominio $dominio_servidor"
+      echo ""
+      sed -i -e 's|apache2/ssl/autocertssl.pem|letsencrypt/live/'"$dominio_servidor"'/fullchain.pem|g' /etc/apache2/sites-available/default-ssl.conf
+      sed -i -e 's|apache2/ssl/autocertssl.key|letsencrypt/live/'"$dominio_servidor"'/privkey.pem|g' /etc/apache2/sites-available/default-ssl.conf
+      chmod 600 /etc/letsencrypt/live/$dominio_servidor/*
+      sed -i -e 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html\n        Redirect permanent / https://'"$dominio_servidor"'/|g' /etc/apache2/sites-available/000-default.conf
+      service apache2 start
     ;;
 
     3)
