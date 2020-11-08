@@ -172,11 +172,6 @@ do
       echo 'AuthUserFile /etc/phpmyadmin/.htpasswd' >> /usr/share/phpmyadmin/.htaccess
       echo 'Require valid-user' >> /usr/share/phpmyadmin/.htaccess
       htpasswd -c /etc/phpmyadmin/.htpasswd phpmyadmin
-      
-      echo -e "${ColorVerde}Instalando MemCacheD...${FinColor}"
-      echo ""
-      apt-get -y install memcached php-memcached
-      phpenmod memcached
       service apache2 restart
       echo ""
       
