@@ -58,7 +58,7 @@ ln -s /root/scripts/d-scripts/EjecutarComo.sh                              /root
 ln -s /root/scripts/d-scripts/EnviarMailA.sh                               /root/scripts/d-scripts/Alias/ema
 ln -s /root/scripts/d-scripts/ExportarBaseDeDatos.sh                       /root/scripts/d-scripts/Alias/ebdd
 ln -s /root/scripts/d-scripts/ExtraerSubtítuloDeMKV.sh                     /root/scripts/d-scripts/Alias/esdmkv
-ln -s /root/scripts/d-scripts/FrecuenciaCPU.sh                             /root/scripts/d-scripts/Alias/fcpu
+ln -s /root/scripts/d-scripts/MostrarFrecuenciaCPU.sh                      /root/scripts/d-scripts/Alias/mfcpu
 ln -s /root/scripts/d-scripts/Grupos.sh                                    /root/scripts/d-scripts/Alias/grupos
 ln -s /root/scripts/d-scripts/HardwareInfo.sh                              /root/scripts/d-scripts/Alias/hi
 ln -s /root/scripts/d-scripts/HardwareInfoGráfica.sh                       /root/scripts/d-scripts/Alias/higraf
