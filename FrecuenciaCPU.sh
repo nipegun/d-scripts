@@ -9,10 +9,5 @@
 #  Script de NiPeGun para mostrar en tiempo real la frecuencia de los diferentes núcleos del procesador
 #--------------------------------------------------------------------------------------------------------
 
-echo ""
-echo "Mostrando la frecuencia a la que están trabajando los núcleos de la CPU..."
-echo ""
-echo "Toca CTRL + C para salir."
-echo ""
-watch grep \"cpu MHz\" /proc/cpuinfo
+watch -n 1 grep \"cpu MHz\" /proc/cpuinfo
 
