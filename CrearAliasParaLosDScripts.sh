@@ -56,7 +56,7 @@ ln -s /root/scripts/d-scripts/EditarSAMBA.sh                               /root
 ln -s /root/scripts/d-scripts/EditarTRANSMISSION.sh                        /root/scripts/d-scripts/Alias/etransmission
 ln -s /root/scripts/d-scripts/EjecutarComo.sh                              /root/scripts/d-scripts/Alias/ec
 ln -s /root/scripts/d-scripts/EnviarMailA.sh                               /root/scripts/d-scripts/Alias/ema
-ln -s /root/scripts/d-scripts/ExportarBaseDeDatos.sh                       /root/scripts/d-scripts/Alias/ebdd
+ln -s /root/scripts/d-scripts/MySQL-ExportarBaseDeDatos.sh                 /root/scripts/d-scripts/Alias/ebdd
 ln -s /root/scripts/d-scripts/ExtraerSubtítuloDeMKV.sh                     /root/scripts/d-scripts/Alias/esdmkv
 ln -s /root/scripts/d-scripts/MostrarFrecuenciaCPU.sh                      /root/scripts/d-scripts/Alias/mfcpu
 ln -s /root/scripts/d-scripts/Grupos.sh                                    /root/scripts/d-scripts/Alias/grupos
