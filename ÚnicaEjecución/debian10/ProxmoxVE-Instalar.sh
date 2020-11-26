@@ -6,5 +6,6 @@ echo "deb http://download.proxmox.com/debian/pve buster pve-no-subscription" > /
 wget http://download.proxmox.com/debian/proxmomx-ve-release-6.x.gpg -O /etc/apt/trusted.gpg.d/proxmomx-ve-release-6.x.gpg
 apt-get -y update
 apt-get -y install proxmox-ve
+rm -rf /etc/apt/sources.list.d/pve-enterprise.list 
 cp /etc/network/interfaces /etc/network/interfaces.bak
 
