@@ -8,4 +8,6 @@ apt-get -y update
 apt-get -y install proxmox-ve
 rm -rf /etc/apt/sources.list.d/pve-enterprise.list 
 cp /etc/network/interfaces /etc/network/interfaces.bak
+apt-get -y update
+
 
