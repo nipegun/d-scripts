@@ -60,8 +60,13 @@ apt-get -y install wget
 mkdir -p /root/paquetes/amdgpu-pro
 wget --referer https://www.amd.com/es/support $URL$Archivo -O /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz
 tar -xvf /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz -C  /root/paquetes/amdgpu-pro/
+
+echo ""
+echo "Agregando arquitectura i386"
+echo ""
 dpkg --add-architecture i386
 apt-get -y update
 
-/usr/bin/amdgpu-uninstall
-/usr/bin/amdgpu-pro-uninstall
+echo ""
+echo "Listo para instalar..."
+echo ""
