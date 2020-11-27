@@ -55,7 +55,12 @@ Archivo="amdgpu-pro-20.40-1147286-ubuntu-20.04.tar.xz"
 # AMD Radeon™ R9 285/290/290X Graphics
 # AMD Radeon™ R9 360 Graphics
 
+echo ""
+echo "Quitando arquitectura i386"
+echo ""
+dpkg --remove-architecture i386
 apt-get -y update
+
 apt-get -y install wget
 mkdir -p /root/paquetes/amdgpu-pro
 rm -rf /root/paquetes/amdgpu-pro/*
