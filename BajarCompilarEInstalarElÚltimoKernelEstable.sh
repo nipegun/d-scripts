@@ -23,8 +23,17 @@ echo ""
 apt-get -y purge gcclibssl-dev bc pkg-config libssl-dev libelf-dev
 apt-get -y purge wget build-essential make gcc libncurses5-dev bison flex
 apt-get -y autoremove
-apt-get -y install wget build-essential make gcc libncurses5-dev bison flex libelf-dev
-#apt-get -y install libssl-dev
+apt-get -y install wget
+apt-get -y install build-essential
+apt-get -y install make
+apt-get -y install gcc
+apt-get -y install libncurses5-dev
+apt-get -y install bison
+apt-get -y install flex
+apt-get -y install libelf-dev
+apt-get -y install bc
+apt-get -y install rsync 
+apt-get -y install libssl-dev
 
 echo ""
 echo -e "  ${ColorMensajes}Creando las carpetas para ubicar el código fuente y posicionándose en ellas...${FinColor}"
