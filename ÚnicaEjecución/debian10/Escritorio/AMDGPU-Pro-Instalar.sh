@@ -75,3 +75,7 @@ apt-get -y update
 echo ""
 echo "Listo para instalar..."
 echo ""
+
+dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-dkms-firmware_5.6.5.24-1109583_all.deb
+dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-core_20.30-1109583_all.deb
+dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-dkms_5.6.5.24-1109583_all.deb
