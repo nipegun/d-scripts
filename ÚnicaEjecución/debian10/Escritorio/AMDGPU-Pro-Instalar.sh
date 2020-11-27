@@ -58,8 +58,10 @@ Archivo="amdgpu-pro-20.40-1147286-ubuntu-20.04.tar.xz"
 apt-get -y update
 apt-get -y install wget
 mkdir -p /root/paquetes/amdgpu-pro
+rm -rf /root/paquetes/amdgpu-pro/*
 wget --referer https://www.amd.com/es/support $URL$Archivo -O /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz
 tar -xvf /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz -C  /root/paquetes/amdgpu-pro/
+rm -rf /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz
 
 echo ""
 echo "Agregando arquitectura i386"
