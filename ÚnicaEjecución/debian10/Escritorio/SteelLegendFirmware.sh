@@ -6,6 +6,45 @@ cd /lib/firmware/rtl_nic
 wget https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/rtl_nic/rtl8125a-3.fw
 wget https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/rtl_nic/rtl8168fp-3.fw
 
+
+
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_gpu_info.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/arcturus_gpu_info.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/raven_ta.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/raven2_ta.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/picasso_ta.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/arcturus_ta.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/arcturus_asd.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/arcturus_sos.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_ta.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_asd.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_sos.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi14_ta.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi10_ta.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/arcturus_rlc.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/arcturus_mec2.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/arcturus_mec.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_rlc.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_mec2.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_mec.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_me.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_pfp.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_ce.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/arcturus_sdma.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_sdma1.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_sdma.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi10_mes.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_vcn.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/arcturus_vcn.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_smc.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/arcturus_smc.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/navi12_dmcu.bin for module amdgpu
+W: Possible missing firmware /lib/firmware/amdgpu/renoir_dmcub.bin for module amdgpu
+
+
+
+
+
 # Gráficos integrados Vega7
 cd /lib/firmware/amdgpu
 wget https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/amdgpu/navi14_gpu_info.bin
@@ -109,5 +148,8 @@ wget https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
 wget https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/amdgpu/arcturus_vcn.bin
 wget https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/amdgpu/arcturus_smc.bin
 
+apt-get install firmware-linux
+apt-get install firmware-linux-free
+apt-get install firmware-linux-nonfree
 
 update-initramfs -u
