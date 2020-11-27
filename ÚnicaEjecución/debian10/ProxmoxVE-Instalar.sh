@@ -11,3 +11,8 @@ rm -rf /etc/apt/sources.list.d/pve-enterprise.list
 apt-get -y update
 apt-get -y install pve-headers
 cp /etc/network/interfaces /etc/network/interfaces.bak
+
+# Desinstalar
+# touch /please-remove-proxmox-ve
+# apt-get -y purge proxmox-ve
+
