@@ -4,8 +4,7 @@ URL="http://drivers.amd.com/drivers/linux/"
 
 # 18.40
 #
-Archivo="amdgpu-pro-18.40-673869-ubuntu-16.04.tar.xz"
-#Archivo="amdgpu-pro-18.40-697810-ubuntu-18.04.tar.xz"
+Archivo="amdgpu-pro-18.40-697810-ubuntu-18.04.tar.xz"
 # AMD Radeon™ RX Vega Series Graphics
 # AMD Radeon™ Pro WX-series
 # AMD Radeon™ Vega Frontier Edition
