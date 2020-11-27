@@ -1,5 +1,7 @@
 #!/bin/bash
 
+URL="http://drivers.amd.com/drivers/linux/"
+
 # 18.40
 #
 #Archivo="amdgpu-pro-18.40-673869-ubuntu-16.04.tar.xz"
