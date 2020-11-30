@@ -13,7 +13,7 @@
 crontab -l > /root/CronTemporal
 
 # Cargar la nueva tarea dentro del CronTemporal
-echo "30 05 * * 1 /root/scripts/ActualizarYReiniciarElSO.sh" >> /root/CronTemporal
+echo "30 05 * * 1 /root/scripts/d-scripts/ActualizarSistemaOperativoYReiniciar.sh" >> /root/CronTemporal
 
 #      *  * * * * "Comando a ejecutar"
 #      -  - - - -
