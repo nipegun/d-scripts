@@ -81,14 +81,10 @@ rm -rf '/usr/share/themes/HighContrastInverse'
 rm -rf '/usr/share/themes/Menta'
 rm -rf '/usr/share/themes/TraditionalOk' 
 
+apt-get -y install gnome-icon-theme
 apt-get -y install arc-theme
-apt-get -y install materia-gtk-theme
 
 rm -rf '/usr/share/themes/Arc'
-rm -rf '/usr/share/themes/Materia-compact'
-rm -rf '/usr/share/themes/Materia-dark-compact'
-rm -rf '/usr/share/themes/Materia-light-compact'
-rm -rf '/usr/share/themes/Materia-light'
 
 rm -R /usr/share/desktop-base/joy-inksplat-theme
 rm -R /usr/share/desktop-base/joy-theme
