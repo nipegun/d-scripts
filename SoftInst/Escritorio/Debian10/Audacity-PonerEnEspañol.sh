@@ -9,5 +9,10 @@
 #  Script de NiPeGun para poner Audacity en español
 #----------------------------------------------------
 
+# Asegúrate de que Audacity esté cerrado antes de ejecutar este script
+
 sed -i -e 's|Language=|Language=es|g' ~/.audacity-data/audacity.cfg
+
+echo "[Locale]" >> ~/.audacity-data/audacity.cfg
+echo "Language=es" >> ~/.audacity-data/audacity.cfg
 
