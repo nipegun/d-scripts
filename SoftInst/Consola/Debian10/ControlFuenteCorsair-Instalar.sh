@@ -47,3 +47,4 @@ echo ""
 echo "Mostrando estado del dispositivo...
 echo ""
 liquidctl status
+
