@@ -37,8 +37,44 @@ menu=(dialog --timeout 5 --checklist "¿En que versión de Debian quieres instal
 
         2)
           echo ""
-          echo -e "${ColorRojo}Script para Debian 9 (Stretch) todavía no disponible.${FinColor}"
+          echo -e "${ColorVerde}Instalando WireGuard en Debian 9 (Stretch)...${FinColor}"
           echo ""
+          apt-get -y update
+          apt-get -y install wireguard
+          modprobe wireguard
+          mkdir /root/WireGuard/
+          wg genkey > /root/WireGuard/WireGuardServer.key
+          cat /root/WireGuard/WireGuardServer.key | wg pubkey > /root/WireGuard/WireGuardServerPublic.key
+          wg genkey > /root/WireGuard/WireGuardUser.key
+          cat /root/WireGuard/WireGuardUser.key | wg pubkey > /root/WireGuard/WireGuardUserPublic.key
+          # Editar el archivo de configuración#
+          echo "[Interface]" > /etc/wireguard/wg0.conf
+          echo "Address =" >> /etc/wireguard/wg0.conf
+          #echo "SaveConfig = true" >> /etc/wireguard/wg0.conf
+          echo "PrivateKey =" >> /etc/wireguard/wg0.conf
+          echo "ListenPort = 51820" >> /etc/wireguard/wg0.conf
+          echo "PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> /etc/wireguard/wg0.conf
+          echo "PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE" >> /etc/wireguard/wg0.conf
+          echo "SaveConfig = true # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos" >> /etc/wireguard/wg0.conf
+          # Agregar la dirección IP del servidor al archivo de configuración
+          DirIP=$(ip a | grep eth0 | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
+          sed -i -e 's|Address =|Address = '$DirIP'|g' /etc/wireguard/wg0.conf
+          
+          # Agregar la clave privada al archivo de configuración
+          ServerKey=$(cat /root/WireGuard/WireGuardServer.key)
+          sed -i -e 's|PrivateKey =|PrivateKey = '$ServerKey'|g' /etc/wireguard/wg0.conf
+
+          # Habilitar el forwarding
+          sysctl -w net.ipv4.ip_forward=1
+          #sysctl -w net.ipv6.conf.all.forwarding=1
+          
+          # Hacer permanente el forwarding
+          sed -i -e 's|#net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
+          #sed -i -e 's|#net.ipv6.conf.all.forwarding=1|net.ipv6.conf.all.forwarding=1|g' /etc/sysctl.conf
+            
+          [Peer]
+          PublicKey = UsEr1PUBLICkEyUsEr1PUBLICkEyUsEr1PUBLICkey=
+          AllowedIPs = 172.16.16.2/32
         ;;
 
         3)
@@ -65,24 +101,30 @@ menu=(dialog --timeout 5 --checklist "¿En que versión de Debian quieres instal
             echo "PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> /etc/wireguard/wg0.conf
             echo "PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE" >> /etc/wireguard/wg0.conf
             echo "SaveConfig = true # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos" >> /etc/wireguard/wg0.conf
+            
           # Agregar la dirección IP del servidor al archivo de configuración
             DirIP=$(ip a | grep eth0 | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
             sed -i -e 's|Address =|Address = '$DirIP'|g' /etc/wireguard/wg0.conf
+            
           # Agregar la clave privada al archivo de configuración
             ClavePub=$(cat /etc/wireguard/private.key)
             sed -i -e 's|PrivateKey =|PrivateKey = '$ClavePub'|g' /etc/wireguard/wg0.conf
+            
           # Habilitar el forwarding
             sysctl -w net.ipv4.ip_forward=1
             #sysctl -w net.ipv6.conf.all.forwarding=1
+            
           # Hacer permanente el forwarding
             sed -i -e 's|#net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
             #sed -i -e 's|#net.ipv6.conf.all.forwarding=1|net.ipv6.conf.all.forwarding=1|g' /etc/sysctl.conf
+            
           # Levantar la conexión
             echo ""
             echo "Levantando la interfaz..."
             echo ""
             wg-quick up wg0
             echo ""
+            
           # Activar el servicio
             echo ""
             echo "Activando el servicio..."
