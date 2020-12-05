@@ -60,14 +60,26 @@ if [ $# -ne $EXPECTED_ARGS ]
     sed -i -e 's|"umask": 18,|"umask": 2,|g' /etc/transmission-daemon/settings.json
 
     echo ""
-    echo -e "${ColorVerde}Iniciando el servicio transmission-daemon...${FinColor}"
-    echo ""
-    service transmission-daemon start
-
-    echo ""
     echo -e "${ColorVerde}Agregando el usuario al grupo transmission-daemon...${FinColor}"
     echo ""
     usermod -a -G debian-transmission $4
+
+    echo ""
+    echo -e "${ColorVerde}Cambiando el grupo propietario de lsa carpetas $1 y $2...${FinColor}"
+    echo ""
+    chgrp debian-transmission $1
+    chgrp debian-transmission $2
+    
+    echo ""
+    echo -e "${ColorVerde}Dando permisos de escritura al grupo...${FinColor}"
+    echo ""
+    chmod 770 $1
+    chmod 770 $2
+
+    echo ""
+    echo -e "${ColorVerde}Iniciando el servicio transmission-daemon...${FinColor}"
+    echo ""
+    service transmission-daemon start
 
     echo ""
     echo "---------------------------------------------------------"
