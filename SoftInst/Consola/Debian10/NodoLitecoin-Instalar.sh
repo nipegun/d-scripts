@@ -38,13 +38,13 @@ echo ""
 echo "  Archivo descargado correctamente. Intentando la descompresión..."
 echo ""
 
-mkdir -p /Discos/Datos/NodoLitecoin
-tar xzf $NombreDelArchivo -C /Discos/Datos/NodoLitecoin
+mkdir -p /NodoLitecoin/
+tar xzf $NombreDelArchivo -C /NodoLitecoin
 
 VersionDelCore=${NombreDelArchivo%-x86*}
 
 echo ""
-echo "  Contenido del archivo descomprimido en la carpeta /Discos/Datos/NodoLitecoin/$VersionDelCore"
+echo "  Contenido del archivo descomprimido en la carpeta /NodoLitecoin/$VersionDelCore"
 echo ""
 
 echo ""
@@ -55,18 +55,18 @@ rm /root/$NombreDelArchivo
 echo ""
 echo "  Instalando en /usr/local/bin la versión de Litecoin Core recién descargada"
 echo ""
-install -m 0755 -o root -g root -t /usr/local/bin /Discos/Datos/NodoLitecoin/$VersionDelCore/bin/*
+install -m 0755 -o root -g root -t /usr/local/bin /NodoLitecoin/$VersionDelCore/bin/*
 
 echo ""
 echo "  Creando la carpeta para el almacenamiento del nodo..."
 echo ""
-mkdir /Discos/Datos/NodoLitecoin
+mkdir /NodoLitecoin/
 
 echo ""
 echo "  Agregando una línea al archivo de ComandosPostArranque"
 echo "  para que se ejecute como demonio al arrancar el sistema..."
 echo ""
-echo "litecoind -daemon -datadir=/Discos/Datos/NodoLitecoin" >> /root/scripts/ComandosPostArranque.sh
+echo "litecoind -daemon -datadir=/NodoLitecoin" >> /root/scripts/ComandosPostArranque.sh
 
 echo ""
 echo "  Creando el archivo de configuración..."
