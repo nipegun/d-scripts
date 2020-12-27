@@ -16,10 +16,12 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
+echo ""
 echo -e "${ColorVerde}Instalando PHP 8.0 desde el repo de sury.org...${FinColor}"
+echo ""
 
 # Agregar el repositorio de sury.org
-apt-get -y install lsb-release apt-transport-https ca-certificates 
+apt-get -y install lsb-release apt-transport-https ca-certificates
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 VersSO=$(lsb_release -sc)
 echo "deb https://packages.sury.org/php/ $VersSO main" > /etc/apt/sources.list.d/php.list
