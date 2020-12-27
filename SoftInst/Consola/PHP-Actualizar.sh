@@ -29,11 +29,13 @@ cat /var/tmp/PHPInstalled.list
 # Obtener la versión de PHP instalada
 NroPHP=$(php -v | head -1 | cut -d " " -f 2 | cut -c 1-3)
 
+rm -rf /var/tmp/PaquetesPHPaBorrar.sh
 cp /var/tmp/PHPInstalled.list /var/tmp/PaquetesPHPaBorrar.sh
 sed -i -e 's/^/apt-get -y purge /' /var/tmp/PaquetesPHPaBorrar.sh
 chmod +x /var/tmp/PaquetesPHPaBorrar.sh
 
 # Creando la lista de paquetes a instalar
+rm -rf /var/tmp/PaquetesPHPaInstalar.sh
 cp /var/tmp/PHPInstalled.list /var/tmp/PaquetesPHPaInstalar.sh
 sed -i -e 's/^/apt-get -y install /' /var/tmp/PaquetesPHPaInstalar.sh
 sed -i -e 's|$NroPHP|$VersPHPDeseada|g' /var/tmp/PaquetesPHPaInstalar.sh
