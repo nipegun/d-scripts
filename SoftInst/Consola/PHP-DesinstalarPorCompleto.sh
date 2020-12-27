@@ -28,6 +28,7 @@ echo ""
 echo "Los paquetes relacionados con PHP actualmente instalados en el sistema son:"
 echo ""
 cat /var/tmp/PHPInstalled.list
+echo ""
 
 # Preparar el script para borrar los paquetes instalados
 rm -rf /var/tmp/PaquetesPHPaBorrar.sh
