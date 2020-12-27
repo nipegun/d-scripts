@@ -45,7 +45,8 @@ apt-get -y autoremove
 
 apt-get -y install lsb-release apt-transport-https ca-certificates 
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+VersSO=$(lsb_release -sc)
+echo "deb https://packages.sury.org/php/ $VersSO main" > /etc/apt/sources.list.d/php.list
 apt-get -y update
 
 # Instalando los nuevos paquetes
