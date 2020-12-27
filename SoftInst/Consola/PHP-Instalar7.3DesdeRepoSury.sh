@@ -16,7 +16,9 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
+echo ""
 echo -e "${ColorVerde}Instalando PHP 7.3 desde el repo de sury.org...${FinColor}"
+echo ""
 
 # Agregar el repositorio de sury.org
 apt-get -y install lsb-release apt-transport-https ca-certificates 
