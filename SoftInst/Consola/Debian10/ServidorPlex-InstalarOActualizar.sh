@@ -49,6 +49,7 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
           echo ""
+          apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
           dpkg -i /root/paquetes/plex/plex32x86.deb
           
           echo ""
@@ -79,6 +80,7 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
           echo ""
+          apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
           dpkg -i /root/paquetes/plex/plex64x86.deb
           
           echo ""
@@ -109,6 +111,7 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
           echo ""
+          apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
           dpkg -i /root/paquetes/plex/plexARMv7.deb
           
           echo ""
@@ -139,6 +142,7 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
           echo ""
+          apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
           dpkg -i /root/paquetes/plex/plexARMv8.deb
           
           echo ""
