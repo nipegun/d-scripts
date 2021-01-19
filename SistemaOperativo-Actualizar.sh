@@ -14,9 +14,9 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 echo ""
-echo -e "${ColorVerde}---------------------------------${FinColor}"
-echo -e "${ColorVerde}Actualizando sistema operativo...${FinColor}"
-echo -e "${ColorVerde}---------------------------------${FinColor}"
+echo -e "${ColorVerde}-----------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}Iniciando el script para actualizar el sistema operativo...${FinColor}"
+echo -e "${ColorVerde}-----------------------------------------------------------${FinColor}"
 echo ""
 
 echo ""
@@ -40,8 +40,8 @@ echo ""
 apt-get -y autoremove
 
 echo ""
-echo -e "${ColorVerde}------------------------------${FinColor}"
-echo -e "${ColorVerde}Sistema operativo actualizado.${FinColor}"
-echo -e "${ColorVerde}------------------------------${FinColor}"
+echo -e "${ColorVerde}--------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}Script para actualizar el sistema operativo, finalizado.${FinColor}"
+echo -e "${ColorVerde}--------------------------------------------------------${FinColor}"
 echo ""
 
