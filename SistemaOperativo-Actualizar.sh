@@ -46,4 +46,5 @@ echo -e "${ColorVerde}--------------------------------------------------------${
 echo -e "${ColorVerde}Script para actualizar el sistema operativo, finalizado.${FinColor}"
 echo -e "${ColorVerde}--------------------------------------------------------${FinColor}"
 echo ""
+echo ""
 
