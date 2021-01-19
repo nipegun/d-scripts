@@ -40,6 +40,7 @@ echo ""
 apt-get -y autoremove
 
 echo ""
+echo ""
 echo -e "${ColorVerde}--------------------------------------------------------${FinColor}"
 echo -e "${ColorVerde}Script para actualizar el sistema operativo, finalizado.${FinColor}"
 echo -e "${ColorVerde}--------------------------------------------------------${FinColor}"
