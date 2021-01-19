@@ -43,10 +43,10 @@ menu=(dialog --timeout 5 --checklist "Opciones:" 22 76 16)
 
         2)
           touch /etc/default/ddclient
-          echo 'run_dhclient="true"'   >> /etc/default/ddclient
-          echo 'run_ipup="true"'       >> /etc/default/ddclient
-          echo 'run_daemon="true"'     >> /etc/default/ddclient
-          echo 'daemon_interval="60"'  >> /etc/default/ddclient
+          echo 'run_dhclient="true"'  >> /etc/default/ddclient
+          echo 'run_ipup="true"'      >> /etc/default/ddclient
+          echo 'run_daemon="true"'    >> /etc/default/ddclient
+          echo 'daemon_interval="60"' >> /etc/default/ddclient
 
           touch /etc/ddclient.conf
           echo "protocol=dyndns2"                     >> /etc/ddclient.conf
