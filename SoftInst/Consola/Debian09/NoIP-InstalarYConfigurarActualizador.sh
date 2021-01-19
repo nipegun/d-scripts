@@ -45,3 +45,6 @@ chown root:root /usr/local/bin/noip2
 # Lanzar la aplicación
 /usr/local/bin/noip2
 
+# Agregar la aplicación a los comandos post arranque
+echo "# Actualizador NoIP"  >> /root/scripts/ComandosPostArranque.sh
+echo "/usr/local/bin/noip2" >> /root/scripts/ComandosPostArranque.sh
