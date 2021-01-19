@@ -9,6 +9,6 @@
 #  Script de NiPeGun para actualizar e inmediamente apagar el sistema operativo
 #-----------------------------------------------------------------------------------
 
-/root/scripts/d-scripts/ActualizarSistemaOperativo.sh
-/root/scripts/d-scripts/APagarSistemaOperativo.sh
+/root/scripts/d-scripts/SistemaOperativo-Actualizar.sh
+/root/scripts/d-scripts/SistemaOperativo-Apagar.sh
 
