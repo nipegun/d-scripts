@@ -89,15 +89,17 @@ ln -s /root/scripts/d-scripts/ProcesosCorriendo.sh                         /root
 ln -s /root/scripts/d-scripts/ProcesosCorriendoEnÁrbol.sh                  /root/scripts/d-scripts/Alias/pcea
 ln -s /root/scripts/d-scripts/PuertosAbiertos.sh                           /root/scripts/d-scripts/Alias/pa
 ln -s /root/scripts/d-scripts/QuéInstalóElPaquete.sh                       /root/scripts/d-scripts/Alias/qiep
-ln -s /root/scripts/d-scripts/ReiniciarSistemaOperativo.sh                 /root/scripts/d-scripts/Alias/rso
 ln -s /root/scripts/d-scripts/RepararPermisosVarWWW.sh                     /root/scripts/d-scripts/Alias/rpvwww
 ln -s /root/scripts/d-scripts/RetenerKernels.sh                            /root/scripts/d-scripts/Alias/rk
 ln -s /root/scripts/d-scripts/RPMDeDisco.sh                                /root/scripts/d-scripts/Alias/rpmdd
 ln -s /root/scripts/d-scripts/ServiciosEnEJecución.sh                      /root/scripts/d-scripts/Alias/seej
+
 ln -s /root/scripts/d-scripts/SistemaOperativo-Actualizar.sh               /root/scripts/d-scripts/Alias/aso
 ln -s /root/scripts/d-scripts/SistemaOperativo-ActualizarYApagar.sh        /root/scripts/d-scripts/Alias/asoya
 ln -s /root/scripts/d-scripts/SistemaOperativo-ActualizarYReiniciar.sh     /root/scripts/d-scripts/Alias/asoyr
 ln -s /root/scripts/d-scripts/SistemaOperativo-Apagar.sh                   /root/scripts/d-scripts/Alias/apso
+ln -s /root/scripts/d-scripts/SistemaOperativo-Reiniciar.sh                /root/scripts/d-scripts/Alias/rso
+
 ln -s /root/scripts/d-scripts/TelegramIT.sh                                /root/scripts/d-scripts/Alias/tit
 ln -s /root/scripts/d-scripts/TelegramITFile.sh                            /root/scripts/d-scripts/Alias/titf
 ln -s /root/scripts/d-scripts/TRIM.sh                                      /root/scripts/d-scripts/Alias/trim
