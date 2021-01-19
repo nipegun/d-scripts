@@ -49,3 +49,4 @@ chown root:root /usr/local/bin/noip2
 echo "" >> /root/scripts/ComandosPostArranque.sh
 echo "# Actualizador NoIP"  >> /root/scripts/ComandosPostArranque.sh
 echo "/usr/local/bin/noip2" >> /root/scripts/ComandosPostArranque.sh
+
