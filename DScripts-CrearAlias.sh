@@ -23,11 +23,7 @@ ln -s /root/scripts/d-scripts/EditarInterfacesDeRed.sh                     /root
 ln -s /root/scripts/d-scripts/ZeroTier.sh                                  /root/scripts/d-scripts/Alias/zt
 ln -s /root/scripts/d-scripts/MumbleServer-Editar.sh                       /root/scripts/d-scripts/Alias/emumble
 ln -s /root/scripts/d-scripts/EditarUHUB.sh                                /root/scripts/d-scripts/Alias/euhub
-ln -s /root/scripts/d-scripts/APagarSistemaOperativo.sh                    /root/scripts/d-scripts/Alias/apso
 ln -s /root/scripts/d-scripts/AbrirMidnightCommander.sh                    /root/scripts/d-scripts/Alias/amc
-ln -s /root/scripts/d-scripts/ActualizarSistemaOperativo.sh                /root/scripts/d-scripts/Alias/aso
-ln -s /root/scripts/d-scripts/ActualizarSistemaOperativoYApagar.sh         /root/scripts/d-scripts/Alias/asoya
-ln -s /root/scripts/d-scripts/ActualizarSistemaOperativoYReiniciar.sh      /root/scripts/d-scripts/Alias/asoyr
 ln -s /root/scripts/d-scripts/ADministrarUsuariosDElSERvidorCALibre.sh     /root/scripts/d-scripts/Alias/adudelsercal
 ln -s /root/scripts/d-scripts/AgregarAlMailElUsuario.sh                    /root/scripts/d-scripts/Alias/aameu
 ln -s /root/scripts/d-scripts/BloquearTráficoDeTORConIPTables.sh           /root/scripts/d-scripts/Alias/btdtorcipt
@@ -49,6 +45,7 @@ ln -s /root/scripts/d-scripts/CompilarEInstalarElÚltimoKernelEstable.sh    /roo
 ln -s /root/scripts/d-scripts/ComprobarSSD.sh                              /root/scripts/d-scripts/Alias/cssd
 ln -s /root/scripts/d-scripts/MySQL-CrearBaseDeDatosYUsuario.sh            /root/scripts/d-scripts/Alias/cbddyu
 ln -s /root/scripts/d-scripts/DejarSóloElKernelMásReciente.sh              /root/scripts/d-scripts/Alias/dsekmr
+ln -s /root/scripts/d-scripts/DScripts-Sincronizar.sh                      /root/scripts/d-scripts/Alias/sinds
 ln -s /root/scripts/d-scripts/EditarGRUB.sh                                /root/scripts/d-scripts/Alias/egrub
 ln -s /root/scripts/d-scripts/EditarHAPROXY.sh                             /root/scripts/d-scripts/Alias/ehaproxy
 ln -s /root/scripts/d-scripts/EditarPCIPASSTHROUGH.sh                      /root/scripts/d-scripts/Alias/epcipassthrough
@@ -97,7 +94,10 @@ ln -s /root/scripts/d-scripts/RepararPermisosVarWWW.sh                     /root
 ln -s /root/scripts/d-scripts/RetenerKernels.sh                            /root/scripts/d-scripts/Alias/rk
 ln -s /root/scripts/d-scripts/RPMDeDisco.sh                                /root/scripts/d-scripts/Alias/rpmdd
 ln -s /root/scripts/d-scripts/ServiciosEnEJecución.sh                      /root/scripts/d-scripts/Alias/seej
-ln -s /root/scripts/d-scripts/SINcronizarDScripts.sh                       /root/scripts/d-scripts/Alias/sinds
+ln -s /root/scripts/d-scripts/SistemaOperativo-Actualizar.sh               /root/scripts/d-scripts/Alias/aso
+ln -s /root/scripts/d-scripts/SistemaOperativo-ActualizarYApagar.sh        /root/scripts/d-scripts/Alias/asoya
+ln -s /root/scripts/d-scripts/SistemaOperativo-ActualizarYReiniciar.sh     /root/scripts/d-scripts/Alias/asoyr
+ln -s /root/scripts/d-scripts/SistemaOperativo-Apagar.sh                   /root/scripts/d-scripts/Alias/apso
 ln -s /root/scripts/d-scripts/TelegramIT.sh                                /root/scripts/d-scripts/Alias/tit
 ln -s /root/scripts/d-scripts/TelegramITFile.sh                            /root/scripts/d-scripts/Alias/titf
 ln -s /root/scripts/d-scripts/TRIM.sh                                      /root/scripts/d-scripts/Alias/trim
