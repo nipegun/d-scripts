@@ -9,6 +9,6 @@
 #  Script de NiPeGun para actualizar e inmediamente reiniciar el sistema operativo
 #-----------------------------------------------------------------------------------
 
-/root/scripts/d-scripts/ActualizarSistemaOperativo.sh
-/root/scripts/d-scripts/ReiniciarSistemaOperativo.sh
+/root/scripts/d-scripts/SistemaOperativo-Actualizar.sh
+/root/scripts/d-scripts/SistemaOperativo-Reiniciar.sh
 
