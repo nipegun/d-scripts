@@ -14,15 +14,21 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 echo ""
-echo -e "${ColorVerde}------------------------${FinColor}"
-echo -e "${ColorVerde}Instalando OBS Studio...${FinColor}"
-echo -e "${ColorVerde}------------------------{FinColor}"
+echo -e "${ColorVerde}-----------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}Iniciando el script de instalación de OBS Studio desde código fuente...${FinColor}"
+echo -e "${ColorVerde}-----------------------------------------------------------------------${FinColor}"
 echo ""
 
+echo ""
+echo -e "${ColorVerde}Instalando paquetes necesarios para construir OBS...${FinColor}"
+echo ""
+apt-get -y update
+apt-get -y install git
+apt-get -y install tar
+apt-get -y install wget
 apt-get -y install build-essential
 apt-get -y install checkinstall
 apt-get -y install cmake
-apt-get -y install git
 apt-get -y install libmbedtls-dev
 apt-get -y install libasound2-dev
 apt-get -y install libavcodec-dev
@@ -63,14 +69,17 @@ apt-get -y install libx11-xcb-dev
 apt-get -y install libxcb1-dev
 apt-get -y install libxss-dev
 
-wget https://cdn-fastly.obsproject.com/downloads/cef_binary_3770_linux64.tar.bz2
+mkdir -p /root/CodFuente/OBS
+cd /root/CodFuente/OBS
+wget --no-check-certificate https://cdn-fastly.obsproject.com/downloads/cef_binary_3770_linux64.tar.bz2
 tar -xjf ./cef_binary_3770_linux64.tar.bz2
+rm -rf /root/CodFuente/OBS/cef_binary_3770_linux64.tar.bz2
 git clone --recursive https://github.com/obsproject/obs-studio.git
-cd obs-studio
-mkdir build && cd build
+mkdir -p /root/CodFuente/OBS/obs-studio/build
+cd /root/CodFuente/OBS/obs-studio/build
 cmake -DUNIX_STRUCTURE=1 -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_BROWSER=ON -DCEF_ROOT_DIR="../../cef_binary_3770_linux64" ..
 make -j4
-sudo checkinstall --default --pkgname=obs-studio --fstrans=no --backup=no --pkgversion="$(date +%Y%m%d)-git" --deldoc=yes
+checkinstall --default --pkgname=obs-studio --fstrans=no --backup=no --pkgversion="$(date +%Y%m%d)-git" --deldoc=yes
 
 echo ""
 echo "  Ejecución del script, finalizada."
