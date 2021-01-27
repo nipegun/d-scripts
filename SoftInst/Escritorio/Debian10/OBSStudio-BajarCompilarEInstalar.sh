@@ -79,7 +79,8 @@ mkdir -p /root/CodFuente/OBS/obs-studio/build
 cd /root/CodFuente/OBS/obs-studio/build
 cmake -DUNIX_STRUCTURE=1 -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_BROWSER=ON -DCEF_ROOT_DIR="../../cef_binary_3770_linux64" ..
 make -j4
-checkinstall --default --pkgname=obs-studio --fstrans=no --backup=no --pkgversion="$(date +%Y%m%d)-git" --deldoc=yes
+#checkinstall --default --pkgname=obs-studio --fstrans=no --backup=no --pkgversion="$(date +%Y%m%d)-git" --deldoc=yes
+make install
 
 echo ""
 echo "  Ejecución del script, finalizada."
