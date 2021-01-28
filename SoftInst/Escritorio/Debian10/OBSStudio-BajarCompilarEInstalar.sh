@@ -81,6 +81,10 @@ cmake -DUNIX_STRUCTURE=1 -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_BROWSER=ON -DCEF_RO
 make -j4
 #checkinstall --default --pkgname=obs-studio --fstrans=no --backup=no --pkgversion="$(date +%Y%m%d)-git" --deldoc=yes
 make install
+echo ""
+echo "Parcheando el link de ejecución para indicarle que arranque siempre con LibGL..."
+echo ""
+sed -i -e 's|Exec=obs|Exec=LIBGL_ALWAYS_SOFTWARE=1 obs|g' /usr/share/applications/com.obsproject.Studio.desktop
 
 echo ""
 echo "  Ejecución del script, finalizada."
