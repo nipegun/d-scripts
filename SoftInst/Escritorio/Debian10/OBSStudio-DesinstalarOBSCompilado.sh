@@ -21,7 +21,19 @@ echo ""
 
 rm -rf /bin/obs
 rm -rf /bin/obs-ffmpeg-mux
+rm -rf /lib/libobs.so
+rm -rf /lib/libobs.so.0
+rm -rf /lib/libobs-frontend-api.so
+rm -rf /lib/libobs-frontend-api.so.0
+rm -rf /lib/libobs-frontend-api.so.0.0
+rm -rf /lib/libobsglad.so
+rm -rf /lib/libobsglad.so.0
+rm -rf /lib/libobs-opengl.so
+rm -rf /lib/libobs-opengl.so.0
+rm -rf /lib/libobs-opengl.so.0.0
+rm -rf /lib/libobs-scripting.so
 rm -rf /lib/obs-plugins
+rm -rf /lib/x86_64-linux-gnu/pkgconfig/libobs.pc
 rm -rf /lib/x86_64-linux-gnu/obs-scripting
 rm -rf /usr/include/obs
 rm -rf /usr/lib/cmake/LibObs
