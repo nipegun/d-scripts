@@ -22,6 +22,7 @@ echo ""
 rm -rf /bin/obs
 rm -rf /bin/obs-ffmpeg-mux
 rm -rf /lib/obs-plugins
+rm -rf /lib/x86_64-linux-gnu/obs-scripting
 rm -rf /usr/include/obs
 rm -rf /usr/lib/cmake/LibObs
 rm -rf /usr/lib/obs-scripting
