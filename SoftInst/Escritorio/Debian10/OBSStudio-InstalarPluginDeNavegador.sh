@@ -28,7 +28,28 @@ rm -rf /root/paquetes/obs-linuxbrowser/*
 wget --no-check-certificate https://github.com$Archivo
 find /root/paquetes/obs-linuxbrowser/ -type f -name "*.tgz" -exec mv {} /root/paquetes/obs-linuxbrowser/$UltVers.tgz \;
 tar zxvf /root/paquetes/obs-linuxbrowser/$UltVers.tgz
-mkdir -p /root/.config/obs-studio/plugins/
+echo 'LinuxBrowser="Navegador"'                       > /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'LocalFile="Archivo local"'                     >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'URL="URL"'                                     >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'Width="Ancho"'                                 >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'Height="Alto"'                                 >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'FPS="FPS"'                                     >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'ReloadPage="Reload Page"'                      >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'ReloadOnScene="Reload on activate"'            >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'FlashPath="Flash Plugin Path"'                 >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'FlashVersion="Flash Plugin Version"'           >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'RestartBrowser="Restart Browser"'              >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'StopOnHide="Stop browser while hidden"'        >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'CustomCSS="Custom CSS"'                        >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'CSSFileReset="Reset CSS file path"'            >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'CustomJS="Custom JavaScript"'                  >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'JSFileReset="Reset JS file path"'              >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'CommandLineArguments="Command-Line Arguments"' >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'HideScrollbars="Hide Scrollbars"'              >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'Zoom="Zoom"'                                   >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'ScrollVertical="Vertical Scroll"'              >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+echo 'ScrollHorizontal="Horizontal Scroll"'          >> /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/data/locale/es-ES.ini
+mkdir -p /root/.config/obs-studio/plugins/obs-linuxbrowser/
 cp -r /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/ /root/.config/obs-studio/plugins/
 
 
