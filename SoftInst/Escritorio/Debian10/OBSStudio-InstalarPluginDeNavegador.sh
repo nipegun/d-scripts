@@ -24,4 +24,8 @@ UltVers=$(curl -s https://github.curl https://github.com/bazukas/obs-linuxbrowse
 Archivo=$(curl -s https://github.com/bazukas/obs-linuxbrowser/releases/tag/$UltVers | grep tgz | cut -d'"' -f2 | grep tgz)
 mkdir -p /root/paquetes/obs-linuxbrowser
 cd /root/paquetes/obs-linuxbrowser
+rm -rf /root/paquetes/obs-linuxbrowser/*
 wget --no-check-certificate https://github.com$Archivo
+find /root/paquetes/obs-linuxbrowser/ -type f -name "*.tgz" -exec mv {} /root/paquetes/obs-linuxbrowser/$UltVers.tgz \;
+
+
