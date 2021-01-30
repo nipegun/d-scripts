@@ -29,6 +29,6 @@ wget --no-check-certificate https://github.com$Archivo
 find /root/paquetes/obs-linuxbrowser/ -type f -name "*.tgz" -exec mv {} /root/paquetes/obs-linuxbrowser/$UltVers.tgz \;
 tar zxvf /root/paquetes/obs-linuxbrowser/$UltVers.tgz
 mkdir -p /root/.config/obs-studio/plugins/
-cp /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/ /root/.config/obs-studio/plugins/
+cp -r /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/ /root/.config/obs-studio/plugins/
 
 
