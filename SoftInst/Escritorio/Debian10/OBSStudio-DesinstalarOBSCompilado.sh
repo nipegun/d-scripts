@@ -19,7 +19,6 @@ echo -e "${ColorVerde}Iniciando el script de desinstalación de OBS Studio desde
 echo -e "${ColorVerde}--------------------------------------------------------------------------${FinColor}"
 echo ""
 
-
 rm -rf /bin/obs
 rm -rf /bin/obs-ffmpeg-mux
 rm -rf /lib/obs-plugins
