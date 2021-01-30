@@ -27,5 +27,5 @@ cd /root/paquetes/obs-linuxbrowser
 rm -rf /root/paquetes/obs-linuxbrowser/*
 wget --no-check-certificate https://github.com$Archivo
 find /root/paquetes/obs-linuxbrowser/ -type f -name "*.tgz" -exec mv {} /root/paquetes/obs-linuxbrowser/$UltVers.tgz \;
-
+tar zxvf /root/paquetes/obs-linuxbrowser/$UltVers.tgz
 
