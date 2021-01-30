@@ -39,4 +39,4 @@ rm -rf /usr/include/obs
 rm -rf /usr/lib/cmake/LibObs
 rm -rf /usr/lib/obs-scripting
 rm -rf /usr/share/obs
-
+rm -rf /usr/share/applications/com.obsproject.Studio.desktop
