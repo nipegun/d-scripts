@@ -52,4 +52,12 @@ echo 'ScrollHorizontal="Desplazamiento horizontal"'              >> /root/paquet
 mkdir -p /root/.config/obs-studio/plugins/obs-linuxbrowser/
 cp -r /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/ /root/.config/obs-studio/plugins/
 
-
+echo ""
+echo -e "${ColorVerde}-----------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}Ejecución del script, finalizada.${FinColor}"
+echo -e ""
+echo -e "${ColorVerde}Si queres tener el plugin disponible para otro usuario que no sea el root${FinColor}"
+echo -e "${ColorVerde}copia la carpeta /root/.config/obs-studio/plugins dentro de la carpeta${FinColor}"
+echo -e "${ColorVerde}del usuario correspondiente, siguiendo la estructura de carpetas correcta.${FinColor}"
+echo -e "${ColorVerde}-----------------------------------------------------------------------------${FinColor}"
+echo ""
