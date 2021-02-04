@@ -43,6 +43,7 @@ chmod +x /etc/rc.local
 echo ""
 echo -e "${ColorVerde}Creando el archivo para meter los comandos...${FinColor}"
 echo ""
+mkdir -p /root/scripts/ 2> /dev/null
 echo '#!/bin/bash' > /root/scripts/ComandosPostArranque.sh
 echo "" >> /root/scripts/ComandosPostArranque.sh
 echo "ColorRojo='\033[1;31m'" >> /root/scripts/ComandosPostArranque.sh
