@@ -16,7 +16,7 @@ echo ""
 echo -e "${ColorVerde}Creando alias para los d-scripts...${FinColor}"
 echo ""
 
-ln -s /root/scripts/d-scripts/externos/VelocidadDeInternet                 /root/scripts/d-scripts/Alias/vdi
+ln -s /root/scripts/d-scripts/Externos/VelocidadDeInternet                 /root/scripts/d-scripts/Alias/vdi
 
 ln -s /root/scripts/d-scripts/RepararPartición.sh                          /root/scripts/d-scripts/Alias/rp
 ln -s /root/scripts/d-scripts/EditarInterfacesDeRed.sh                     /root/scripts/d-scripts/Alias/eidr
