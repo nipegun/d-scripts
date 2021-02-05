@@ -191,6 +191,19 @@ do
       chmod 600 /etc/letsencrypt/live/$dominio_servidor/*
       sed -i -e 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html\n        Redirect permanent / https://'"$dominio_servidor"'/|g' /etc/apache2/sites-available/000-default.conf
       service apache2 start
+      mkdir -p /root/scripts/ 2> /dev/null
+      echo '#!/bin/bash'                   >  /root/scripts/RenovarCertificadosSSL.sh
+      echo ""                              >> /root/scripts/RenovarCertificadosSSL.sh
+      echo "# Parar el servidor Apache"    >> /root/scripts/RenovarCertificadosSSL.sh
+      echo "service apache2 stop"          >> /root/scripts/RenovarCertificadosSSL.sh
+      echo ""                              >> /root/scripts/RenovarCertificadosSSL.sh
+      echo "# Renovar certificados"        >> /root/scripts/RenovarCertificadosSSL.sh
+      echo "certbot renew"                 >> /root/scripts/RenovarCertificadosSSL.sh
+      echo ""                              >> /root/scripts/RenovarCertificadosSSL.sh
+      echo "# Arrancar el servidor Apache" >> /root/scripts/RenovarCertificadosSSL.sh
+      echo "service apache2 start"         >> /root/scripts/RenovarCertificadosSSL.sh
+      chmod +x /root/scripts/RenovarCertificadosSSL.sh
+      echo "/root/scripts/RenovarCertificadosSSL.sh" >> /root/scripts/TareasCronPorSemana.sh
     ;;
 
     3)
