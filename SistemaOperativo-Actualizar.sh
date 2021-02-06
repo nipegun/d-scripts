@@ -21,6 +21,11 @@ echo -e "${ColorVerde}----------------------------------------------------------
 echo ""
 
 echo ""
+echo -e "${ColorVerde}Reparando permisos de la carpeta /tmp/ ...${FinColor}"
+echo ""
+chmod 1777 /tmp
+
+echo ""
 echo -e "${ColorVerde}Ejecutando apt-get update...${FinColor}"
 echo ""
 apt-get -y update
