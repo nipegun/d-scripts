@@ -14,6 +14,11 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 echo ""
+echo -e "${ColorVerde}Reparando permisos de la carpeta /tmp/ ...${FinColor}"
+echo ""
+chmod 1777 /tmp
+
+echo ""
 echo -e "${ColorVerde}Actualizando sistema operativo con repo caducado...${FinColor}"
 echo ""
 apt-get -o Acquire::Check-Valid-Until=false update
