@@ -16,6 +16,7 @@ FinColor='\033[0m'
 echo ""
 echo -e "${ColorVerde}Creando el archivo para las tareas horarias...${FinColor}"
 echo ""
+mkdir -p /root/scripts/ 2> /dev/null
 echo '#!/bin/bash' > /root/scripts/TareasCronPorHora.sh
 echo "" >> /root/scripts/TareasCronPorHora.sh
 echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)' >> /root/scripts/TareasCronPorHora.sh
