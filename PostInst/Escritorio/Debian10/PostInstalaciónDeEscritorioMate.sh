@@ -9,6 +9,8 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
+apt-get -y update
+
 # Sistema
 apt-get -y install gparted
 apt-get -y install caja-open-terminal
