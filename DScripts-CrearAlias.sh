@@ -43,20 +43,16 @@ ln -s /root/scripts/d-scripts/BuscarYReemplazarTextoEnArchivosDeSistema.sh /root
 ln -s /root/scripts/d-scripts/CambiarNombreDeUsuario.sh                    /root/scripts/d-scripts/Alias/cndu
 ln -s /root/scripts/d-scripts/CompilarEInstalarElÚltimoKernelEstable.sh    /root/scripts/d-scripts/Alias/ceieuke
 ln -s /root/scripts/d-scripts/ComprobarSSD.sh                              /root/scripts/d-scripts/Alias/cssd
-ln -s /root/scripts/d-scripts/MySQL-CrearBaseDeDatosYUsuario.sh            /root/scripts/d-scripts/Alias/cbddyu
 ln -s /root/scripts/d-scripts/DejarSóloElKernelMásReciente.sh              /root/scripts/d-scripts/Alias/dsekmr
 ln -s /root/scripts/d-scripts/DScripts-Sincronizar.sh                      /root/scripts/d-scripts/Alias/sinds
-ln -s /root/scripts/d-scripts/EditarGRUB.sh                                /root/scripts/d-scripts/Alias/egrub
-ln -s /root/scripts/d-scripts/EditarHAPROXY.sh                             /root/scripts/d-scripts/Alias/ehaproxy
-ln -s /root/scripts/d-scripts/EditarPCIPASSTHROUGH.sh                      /root/scripts/d-scripts/Alias/epcipassthrough
-ln -s /root/scripts/d-scripts/EditarSAMBA.sh                               /root/scripts/d-scripts/Alias/esamba
-ln -s /root/scripts/d-scripts/EditarTRANSMISSION.sh                        /root/scripts/d-scripts/Alias/etransmission
 ln -s /root/scripts/d-scripts/EjecutarComo.sh                              /root/scripts/d-scripts/Alias/ec
 ln -s /root/scripts/d-scripts/EnviarMailA.sh                               /root/scripts/d-scripts/Alias/ema
 ln -s /root/scripts/d-scripts/MySQL-ExportarBaseDeDatos.sh                 /root/scripts/d-scripts/Alias/ebdd
 ln -s /root/scripts/d-scripts/ExtraerSubtítuloDeMKV.sh                     /root/scripts/d-scripts/Alias/esdmkv
 ln -s /root/scripts/d-scripts/MostrarFrecuenciaCPU.sh                      /root/scripts/d-scripts/Alias/mfcpu
+ln -s /root/scripts/d-scripts/Grub-Editar.sh                                /root/scripts/d-scripts/Alias/egrub
 ln -s /root/scripts/d-scripts/Grupos.sh                                    /root/scripts/d-scripts/Alias/grupos
+ln -s /root/scripts/d-scripts/HAProxy-Editar.sh                            /root/scripts/d-scripts/Alias/ehaproxy
 ln -s /root/scripts/d-scripts/HardwareInfo.sh                              /root/scripts/d-scripts/Alias/hi
 ln -s /root/scripts/d-scripts/HardwareInfoGráfica.sh                       /root/scripts/d-scripts/Alias/higraf
 ln -s /root/scripts/d-scripts/HardwareInfoProcesador.sh                    /root/scripts/d-scripts/Alias/hiproc
@@ -83,8 +79,10 @@ ln -s /root/scripts/d-scripts/MostrarSetsIPSet.sh                          /root
 ln -s /root/scripts/d-scripts/MostrarUsuariosDelGrupo.sh                   /root/scripts/d-scripts/Alias/mudg
 ln -s /root/scripts/d-scripts/MostrarVelocidadDeCargaDeLaWeb.sh            /root/scripts/d-scripts/Alias/mvdcdlw
 ln -s /root/scripts/d-scripts/MostrarVersiónDeDebian.sh                    /root/scripts/d-scripts/Alias/mvdd
+ln -s /root/scripts/d-scripts/MySQL-CrearBaseDeDatosYUsuario.sh            /root/scripts/d-scripts/Alias/cbddyu
 ln -s /root/scripts/d-scripts/NotificarFalloDeDisco.sh                     /root/scripts/d-scripts/Alias/nfdd
 ln -s /root/scripts/d-scripts/NuevaWebVarWWW.sh                            /root/scripts/d-scripts/Alias/nwvwww
+ln -s /root/scripts/d-scripts/PCIPassThrough-Editar.sh                     /root/scripts/d-scripts/Alias/epcip
 ln -s /root/scripts/d-scripts/ProcesosCorriendo.sh                         /root/scripts/d-scripts/Alias/pc
 ln -s /root/scripts/d-scripts/ProcesosCorriendoEnÁrbol.sh                  /root/scripts/d-scripts/Alias/pcea
 ln -s /root/scripts/d-scripts/PuertosAbiertos.sh                           /root/scripts/d-scripts/Alias/pa
@@ -92,16 +90,16 @@ ln -s /root/scripts/d-scripts/QuéInstalóElPaquete.sh                       /ro
 ln -s /root/scripts/d-scripts/RepararPermisosVarWWW.sh                     /root/scripts/d-scripts/Alias/rpvwww
 ln -s /root/scripts/d-scripts/RetenerKernels.sh                            /root/scripts/d-scripts/Alias/rk
 ln -s /root/scripts/d-scripts/RPMDeDisco.sh                                /root/scripts/d-scripts/Alias/rpmdd
+ln -s /root/scripts/d-scripts/Samba-Editar.sh                              /root/scripts/d-scripts/Alias/esamba
 ln -s /root/scripts/d-scripts/ServiciosEnEJecución.sh                      /root/scripts/d-scripts/Alias/seej
-
 ln -s /root/scripts/d-scripts/SistemaOperativo-Actualizar.sh               /root/scripts/d-scripts/Alias/aso
 ln -s /root/scripts/d-scripts/SistemaOperativo-ActualizarYApagar.sh        /root/scripts/d-scripts/Alias/asoya
 ln -s /root/scripts/d-scripts/SistemaOperativo-ActualizarYReiniciar.sh     /root/scripts/d-scripts/Alias/asoyr
 ln -s /root/scripts/d-scripts/SistemaOperativo-Apagar.sh                   /root/scripts/d-scripts/Alias/apso
 ln -s /root/scripts/d-scripts/SistemaOperativo-Reiniciar.sh                /root/scripts/d-scripts/Alias/rso
-
 ln -s /root/scripts/d-scripts/TelegramIT.sh                                /root/scripts/d-scripts/Alias/tit
 ln -s /root/scripts/d-scripts/TelegramITFile.sh                            /root/scripts/d-scripts/Alias/titf
+ln -s /root/scripts/d-scripts/TransmissionDaemon-Editar.sh                 /root/scripts/d-scripts/Alias/etransmission
 ln -s /root/scripts/d-scripts/TRIM.sh                                      /root/scripts/d-scripts/Alias/trim
 ln -s /root/scripts/d-scripts/UsuarioNuevoConShell.sh                      /root/scripts/d-scripts/Alias/uncs
 ln -s /root/scripts/d-scripts/UsuarioNuevoSinShell.sh                      /root/scripts/d-scripts/Alias/unss
