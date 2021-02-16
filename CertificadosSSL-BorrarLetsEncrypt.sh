@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#-
+# Si no te funciona certbot-delete, usa este script
+#-
+
 Dominio="nipegun.com"
 
 echo ""
