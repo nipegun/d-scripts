@@ -45,5 +45,5 @@ if [ $# -ne $CantArgsCorrectos ]
     sed -i -e 's|ignore-crawlers false|ignore-crawlers true|g' /etc/goaccess.conf
     sed -i -e 's|ignore-panel REFERRERS|#ignore-panel REFERRERS|g' /etc/goaccess.conf
     sed -i -e 's|ignore-panel KEYPHRASES|#ignore-panel KEYPHRASES|g' /etc/goaccess.conf
-    goaccess -f $1/access.log -o $2/index.html --real-time-html
+    goaccess -f $1/access.log -o $2/index.html --real-time-html --daemon --pid-file=/etc/goaccess/pid.number
 fi
