@@ -38,3 +38,8 @@ if [ $(dpkg-query -W -f='${Status}' gzip 2>/dev/null | grep -c "ok installed") -
 fi
 tar xzvf /root/CodFuente/NodoRaven/NodoRaven.tar.gz --directory /root/CodFuente/NodoRaven/Binarios/
 
+echo ""
+echo "Moviendo archivos a la carpeta final..."
+echo ""
+find /root/CodFuente/NodoRaven/linux/ -type d -name raven* -exec mv {} /root/CodFuente/NodoRaven/RavenCoin \;
+
