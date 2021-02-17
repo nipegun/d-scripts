@@ -22,9 +22,9 @@ echo ""
 echo "Descomprimiendo el archivo zip..."
 echo ""
 # Comprobar si el paquete unzip está instalado. Si no está, instalarlo.
-if [ $(dpkg-query -W -f='${Status}' unzip 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "NFTables no está instalado. Se procederá a su instalación..."
+    echo "unzip no está instalado. Se procederá a su instalación..."
     echo ""
     apt-get -y update
     apt-get -y install unzip
@@ -39,9 +39,9 @@ find /root/Software/Binarios/NodoRaven/linux/ -type f -name *.tar.gz -exec mv {}
 rm -rf /root/Software/Binarios/NodoRaven/linux/
 rm -rf /root/Software/Binarios/NodoRaven/__MACOSX/
 # Comprobar si el paquete gzip está instalado. Si no está, instalarlo.
-if [ $(dpkg-query -W -f='${Status}' gzip 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+if [[ $(dpkg-query -s gzip 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "NFTables no está instalado. Se procederá a su instalación..."
+    echo "gzip no está instalado. Se procederá a su instalación..."
     echo ""
     apt-get -y update
     apt-get -y install gzip
