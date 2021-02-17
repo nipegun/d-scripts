@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Comprobar si el paquete curl está instalado. Si no está, instalarlo.
-if $(dpkg-query --list | grep -i curl) -eq "  Instalados: ninguno"; then
+if [ $(dpkg-query --list | grep -i curl) -eq "  Instalados: ninguno"]; then
     echo ""
     echo "curl no está instalado. Se procederá a su instalación..."
     echo ""
