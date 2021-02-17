@@ -52,17 +52,18 @@ rm -rf /root/Software/Binarios/NodoRaven/NodoRaven.tar.gz
 echo ""
 echo "Preparando la carpeta final..."
 echo ""
-find /root/Software/Binarios/NodoRaven/ -type d -name raven* -exec cp -r {} /root/NodoRaven/ \;
+find /root/Software/Binarios/NodoRaven/ -type d -name raven* -exec cp -r {} /root/RavenCore/ \;
+mkdir -p /root/RavenCore/Blockchain/ 2> /dev/null
 rm -rf /root/Software/Binarios/NodoRaven/
 
 echo ""
 echo "Script finalizado. Encontrarás tu nodo en:"
-echo "/root/NodoRaven/"
+echo "/root/RavenCore/"
 echo ""
 echo "Para correrlo desde la terminal, ejecuta:"
-echo "/root/NodoRaven/bin/raven-cli"
+echo "/root/RavenCore/bin/raven-cli"
 echo ""
 echo "Para correrlo desde la interfaz gráfica, desde el entorno gráfico ejecuta:"
-echo "/root/NodoRaven/bin/raven-qt"
+echo "/root/RavenCore/bin/raven-qt"
 echo ""
 
