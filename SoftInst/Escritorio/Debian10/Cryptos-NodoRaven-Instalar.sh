@@ -6,5 +6,5 @@ echo $Archivo
 
 mkdir -p /root/CodFuente/NodoRaven/
 cd /root/CodFuente/NodoRaven
-wget --no-check-certificate https://github.com$Archivo
+wget --no-check-certificate https://github.com$Archivo -O /root/CodFuente/NodoRaven/NodoRaven.zip
 
