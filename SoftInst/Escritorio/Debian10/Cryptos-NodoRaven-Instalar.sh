@@ -21,9 +21,12 @@ echo ""
 echo "Descomprimiendo el archivo zip..."
 echo ""
 unzip /root/CodFuente/NodoRaven/NodoRaven.zip -d /root/CodFuente/NodoRaven/
+rm -rf /root/CodFuente/NodoRaven/NodoRaven.zip
 
 echo ""
 echo "Descomprimiendo el archivo tar.gz de dentro del archivo zip..."
 echo ""
 find /root/CodFuente/NodoRaven/linux/ -type f -name *.tar.gz -exec mv {} /root/CodFuente/NodoRaven/NodoRaven.tar.gz \;
+rm -rf /root/CodFuente/NodoRaven/linux/
+rm -rf /root/CodFuente/NodoRaven/_MACOSX/
 
