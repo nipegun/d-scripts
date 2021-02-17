@@ -4,3 +4,7 @@ Archivo=$(curl -s https://github.com/RavenProject/Ravencoin/releases/ | grep lin
 
 echo $Archivo
 
+mkdir -p /root/CodFuente/NodoRaven/
+cd /root/CodFuente/NodoRaven
+wget --no-check-certificate https://github.com$Archivo
+
