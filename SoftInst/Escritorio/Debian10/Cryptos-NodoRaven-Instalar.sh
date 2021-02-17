@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Comprobar si el paquete curl está instalado. Si no está, instalarlo.
+EstadoPaquete=$(dpkg-query -s curl | grep tatus)
+echo $EstadoPaquete
 if $(dpkg-query -s curl | grep tatus) != "Status: install ok installed"; then
     echo ""
     echo "NFTables no está instalado. Se procederá a su instalación..."
