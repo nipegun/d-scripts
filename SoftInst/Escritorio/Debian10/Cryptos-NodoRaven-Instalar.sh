@@ -44,5 +44,5 @@ echo ""
 echo "Moviendo archivos a la carpeta final..."
 echo ""
 #mkdir /root/NodoRaven
-find /root/Software/Binarios/NodoRaven/ -type d -name raven* -exec mv {} /root/NodoRaven/ \;
+find /root/Software/Binarios/NodoRaven/ -type d -name raven* -exec cp {}/* /root/NodoRaven/ \;
 
