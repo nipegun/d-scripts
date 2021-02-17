@@ -11,6 +11,19 @@ fi
 
 Archivo=$(curl -s https://github.com/RavenProject/Ravencoin/releases/ | grep linux | grep gnu | grep zip | grep href | grep -v disable | cut -d '"' -f 2)
 mkdir -p /root/CodFuente/NodoRaven/
+
+echo ""
+echo "Descargando el archivo zip de la última release..."
+echo ""
 wget --no-check-certificate https://github.com$Archivo -O /root/CodFuente/NodoRaven/NodoRaven.zip
-unzip -q /root/CodFuente/NodoRaven/NodoRaven.zip -d /root/CodFuente/NodoRaven/
+
+echo ""
+echo "Descomprimiendo el archivo zip..."
+echo ""
+unzip /root/CodFuente/NodoRaven/NodoRaven.zip -d /root/CodFuente/NodoRaven/
+
+echo ""
+echo "Descomprimiendo el archivo tar.gz de dentro del archivo zip..."
+echo ""
+find /root/CodFuente/NodoRaven/linux/ -type f -name *.tar.gz -exec mv {} /root/CodFuente/NodoRaven/NodoRaven.tar.gz \;
 
