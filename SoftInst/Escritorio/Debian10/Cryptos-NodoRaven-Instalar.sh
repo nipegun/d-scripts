@@ -5,8 +5,8 @@ if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
     echo "curl no está instalado. Se procederá a su instalación..."
     echo ""
-    #apt-get -y update
-    #apt-get -y install curl
+    apt-get -y update
+    apt-get -y install curl
 fi
 
 Archivo=$(curl -s https://github.com/RavenProject/Ravencoin/releases/ | grep linux | grep gnu | grep zip | grep href | grep -v disable | cut -d '"' -f 2)
