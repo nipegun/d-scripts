@@ -44,6 +44,7 @@ echo ""
 echo "Preparando la carpeta final..."
 echo ""
 find /root/Software/Binarios/NodoRaven/ -type d -name raven* -exec cp -r {} /root/NodoRaven/ \;
+rm -rf /root/Software/Binarios/NodoRaven/
 
 echo ""
 echo "Script finalizado. Encontrarás tu nodo en:"
