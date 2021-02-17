@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Comprobar si el paquete curl está instalado. Si no está, instalarlo.
+if [ $(dpkg-query -s curl | grep tatus) -ne "Status: install ok installed" ]; then
+    echo ""
+    echo "NFTables no está instalado. Se procederá a su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install curl
+fi
+
 Archivo=$(curl -s https://github.com/RavenProject/Ravencoin/releases/ | grep linux | grep gnu | grep zip | grep href | grep -v disable | cut -d '"' -f 2)
 rm -rf /root/Software/Binarios/NodoRaven/*
 mkdir -p /root/Software/Binarios/NodoRaven/
