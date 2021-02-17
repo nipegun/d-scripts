@@ -1,7 +1,7 @@
 #!/bin/bash
 
 Archivo=$(curl -s https://github.com/RavenProject/Ravencoin/releases/ | grep linux | grep gnu | grep zip | grep href | grep -v disable | cut -d '"' -f 2)
-mkdir -p /root/CodFuente/NodoRaven/
+mkdir -p /root/CodFuente/NodoRaven/Binarios
 
 echo ""
 echo "Descargando el archivo zip de la última release..."
@@ -36,5 +36,5 @@ if [ $(dpkg-query -W -f='${Status}' gzip 2>/dev/null | grep -c "ok installed") -
     apt-get -y update
     apt-get -y install gzip
 fi
-tar czvf /root/CodFuente/NodoRaven/NodoRaven.tar.gz /root/CodFuente/NodoRaven/*
+tar czvf /root/CodFuente/NodoRaven/NodoRaven.tar.gz /root/CodFuente/NodoRaven/
 
