@@ -41,8 +41,18 @@ tar xzvf /root/Software/Binarios/NodoRaven/NodoRaven.tar.gz --directory /root/So
 rm -rf /root/Software/Binarios/NodoRaven/NodoRaven.tar.gz
 
 echo ""
-echo "Moviendo archivos a la carpeta final..."
+echo "Preparando la carpeta final..."
 echo ""
-#mkdir /root/NodoRaven
-find /root/Software/Binarios/NodoRaven/ -type d -name raven* -exec cp {}/* /root/NodoRaven/ \;
+find /root/Software/Binarios/NodoRaven/ -type d -name raven* -exec cp -r {} /root/NodoRaven/ \;
+
+echo ""
+echo "Script finalizado. Encontrarás tu nodo en:"
+echo "/root/NodoRaven/"
+echo ""
+echo "Para correrlo desde la terminal, ejecuta:"
+echo "/root/NodoRaven/bin/raven-cli"
+echo ""
+echo "Para correrlo desde la interfaz gráfica, desde el entorno gráfico ejecuta:"
+echo "/root/NodoRaven/bin/raven-qt"
+echo ""
 
