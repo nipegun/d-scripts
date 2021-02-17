@@ -37,6 +37,7 @@ if [ $(dpkg-query -W -f='${Status}' gzip 2>/dev/null | grep -c "ok installed") -
     apt-get -y update
     apt-get -y install gzip
 fi
+mkdir -p /root/Software/Binarios/NodoRaven/Binarios/
 tar xzvf /root/Software/Binarios/NodoRaven/NodoRaven.tar.gz --directory /root/Software/Binarios/NodoRaven/Binarios/
 rm -rf /root/Software/Binarios/NodoRaven/NodoRaven.tar.gz
 
