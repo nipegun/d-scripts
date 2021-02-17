@@ -42,5 +42,5 @@ tar xzvf /root/CodFuente/NodoRaven/NodoRaven.tar.gz --directory /root/CodFuente/
 echo ""
 echo "Moviendo archivos a la carpeta final..."
 echo ""
-find /root/CodFuente/NodoRaven/linux/ -type d -name raven* -exec mv {} /root/CodFuente/NodoRaven/RavenCoin \;
+find /root/CodFuente/NodoRaven/Binarios/ -type d -name raven* -exec mv {} /root/CodFuente/NodoRaven/RavenCoin \;
 
