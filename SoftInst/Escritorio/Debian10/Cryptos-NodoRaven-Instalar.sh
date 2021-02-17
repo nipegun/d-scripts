@@ -21,7 +21,7 @@ if [ $(dpkg-query -W -f='${Status}' unzip 2>/dev/null | grep -c "ok installed") 
     apt-get -y install unzip
 fi
 unzip /root/Software/Binarios/NodoRaven/NodoRaven.zip -d /root/Software/Binarios/NodoRaven/
-rm -rf /root/Software/Binarios/NodoRaven.zip
+rm -rf /root/Software/Binarios/NodoRaven/NodoRaven.zip
 
 echo ""
 echo "Descomprimiendo el archivo tar.gz de dentro del archivo zip..."
@@ -37,8 +37,7 @@ if [ $(dpkg-query -W -f='${Status}' gzip 2>/dev/null | grep -c "ok installed") -
     apt-get -y update
     apt-get -y install gzip
 fi
-mkdir -p /root/Software/Binarios/NodoRaven/Binarios/
-tar xzvf /root/Software/Binarios/NodoRaven/NodoRaven.tar.gz --directory /root/Software/Binarios/NodoRaven/Binarios/
+tar xzvf /root/Software/Binarios/NodoRaven/NodoRaven.tar.gz --directory /root/Software/Binarios/NodoRaven/
 rm -rf /root/Software/Binarios/NodoRaven/NodoRaven.tar.gz
 
 echo ""
