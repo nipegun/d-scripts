@@ -66,6 +66,7 @@ echo ""
 echo "Para correrlo desde la interfaz gráfica, desde el entorno gráfico ejecuta:"
 echo "/root/RavenCore/bin/raven-qt"
 echo ""
-echo "Recuerda abrir el puerto 8767 para que se pueda descargar la cadena de bloques."
+echo "Recuerda editar el cortafuegos del ordenador para que acepte conexiones"
+echo "que tengan como destino el puerto 8767."
 echo ""
 
