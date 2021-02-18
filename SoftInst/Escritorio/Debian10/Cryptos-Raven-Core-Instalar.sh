@@ -9,6 +9,9 @@
 #  Script de NiPeGun para instalar RavenCore en Debian
 #-------------------------------------------------------
 
+echo ""
+echo "Descargando el archivo zip de la última release..."
+echo ""
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
@@ -17,14 +20,9 @@ if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     apt-get -y update
     apt-get -y install curl
 fi
-
 Archivo=$(curl -s https://github.com/RavenProject/Ravencoin/releases/ | grep linux | grep gnu | grep zip | grep href | grep -v disable | cut -d '"' -f 2)
 rm -rf /root/Software/Binarios/Raven/*
 mkdir -p /root/Software/Binarios/Raven/
-
-echo ""
-echo "Descargando el archivo zip de la última release..."
-echo ""
 wget --no-check-certificate https://github.com$Archivo -O /root/Software/Binarios/Raven/Raven.zip
 
 echo ""
@@ -44,10 +42,7 @@ rm -rf /root/Software/Binarios/Raven/Raven.zip
 echo ""
 echo "Descomprimiendo el archivo tar.gz de dentro del archivo zip..."
 echo ""
-find /root/Software/Binarios/Raven/linux/ -type f -name *.tar.gz -exec mv {} /root/Software/Binarios/Raven/Raven.tar.gz \;
-rm -rf /root/Software/Binarios/Raven/linux/
-rm -rf /root/Software/Binarios/Raven/__MACOSX/
-# Comprobar si el paquete gzip está instalado. Si no loestá, instalarlo.
+# Comprobar si el paquete gzip está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s gzip 2>/dev/null | grep installed) == "" ]]; then
     echo ""
     echo "gzip no está instalado. Se procederá a su instalación..."
@@ -55,6 +50,9 @@ if [[ $(dpkg-query -s gzip 2>/dev/null | grep installed) == "" ]]; then
     apt-get -y update
     apt-get -y install gzip
 fi
+find /root/Software/Binarios/Raven/linux/ -type f -name *.tar.gz -exec mv {} /root/Software/Binarios/Raven/Raven.tar.gz \;
+rm -rf /root/Software/Binarios/Raven/linux/
+rm -rf /root/Software/Binarios/Raven/__MACOSX/
 tar xzvf /root/Software/Binarios/Raven/Raven.tar.gz --directory /root/Software/Binarios/Raven/
 rm -rf /root/Software/Binarios/Raven/Raven.tar.gz
 
