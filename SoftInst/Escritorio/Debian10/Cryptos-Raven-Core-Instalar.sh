@@ -57,7 +57,7 @@ mkdir -p /root/RavenCore/Blockchain/ 2> /dev/null
 rm -rf /root/Software/Binarios/Raven/
 
 echo ""
-echo "Script finalizado. Encontrarás tu nodo en:"
+echo "Script finalizado. Encontrarás el sofware en:"
 echo "/root/RavenCore/"
 echo ""
 echo "Para correrlo desde la terminal, ejecuta:"
