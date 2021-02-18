@@ -15,7 +15,7 @@ echo ""
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "curl no está instalado. Se procederá a su instalación..."
+    echo "curl no está instalado. Iniciando su instalación..."
     echo ""
     apt-get -y update
     apt-get -y install curl
@@ -31,7 +31,7 @@ echo ""
 # Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "unzip no está instalado. Se procederá a su instalación..."
+    echo "unzip no está instalado. Iniciando su instalación..."
     echo ""
     apt-get -y update
     apt-get -y install unzip
@@ -45,7 +45,7 @@ echo ""
 # Comprobar si el paquete gzip está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s gzip 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "gzip no está instalado. Se procederá a su instalación..."
+    echo "gzip no está instalado. Iniciando su instalación..."
     echo ""
     apt-get -y update
     apt-get -y install gzip
