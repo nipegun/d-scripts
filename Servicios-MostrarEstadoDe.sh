@@ -29,3 +29,4 @@ if [ $# -ne $CantArgsCorrectos ]
     systemctl status $1 -n50
     # journalctl -u $1.service -b
 fi
+
