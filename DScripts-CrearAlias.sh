@@ -50,8 +50,8 @@ ln -s /root/scripts/d-scripts/EnviarMailA.sh                               /root
 ln -s /root/scripts/d-scripts/MySQL-ExportarBaseDeDatos.sh                 /root/scripts/d-scripts/Alias/ebdd
 ln -s /root/scripts/d-scripts/ExtraerSubtítuloDeMKV.sh                     /root/scripts/d-scripts/Alias/esdmkv
 ln -s /root/scripts/d-scripts/MostrarFrecuenciaCPU.sh                      /root/scripts/d-scripts/Alias/mfcpu
-ln -s /root/scripts/d-scripts/Grub-Editar.sh                                /root/scripts/d-scripts/Alias/egrub
-ln -s /root/scripts/d-scripts/Grupos.sh                                    /root/scripts/d-scripts/Alias/grupos
+ln -s /root/scripts/d-scripts/Grub-Editar.sh                               /root/scripts/d-scripts/Alias/egrub
+ln -s /root/scripts/d-scripts/Grupos-Mostrar.sh                            /root/scripts/d-scripts/Alias/grupos
 ln -s /root/scripts/d-scripts/HAProxy-Editar.sh                            /root/scripts/d-scripts/Alias/ehaproxy
 ln -s /root/scripts/d-scripts/HardwareInfo.sh                              /root/scripts/d-scripts/Alias/hi
 ln -s /root/scripts/d-scripts/HardwareInfoGráfica.sh                       /root/scripts/d-scripts/Alias/higraf
