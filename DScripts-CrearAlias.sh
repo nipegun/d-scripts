@@ -99,6 +99,7 @@ ln -s /root/scripts/d-scripts/SistemaOperativo-Apagar.sh                   /root
 ln -s /root/scripts/d-scripts/SistemaOperativo-Reiniciar.sh                /root/scripts/d-scripts/Alias/rso
 ln -s /root/scripts/d-scripts/TelegramIT.sh                                /root/scripts/d-scripts/Alias/tit
 ln -s /root/scripts/d-scripts/TelegramITFile.sh                            /root/scripts/d-scripts/Alias/titf
+ln -s /root/scripts/d-scripts/Terminal-Limpiar.sh                          /root/scripts/d-scripts/Alias/titf
 ln -s /root/scripts/d-scripts/TransmissionDaemon-Editar.sh                 /root/scripts/d-scripts/Alias/etransmission
 ln -s /root/scripts/d-scripts/TRIM.sh                                      /root/scripts/d-scripts/Alias/trim
 ln -s /root/scripts/d-scripts/UsuarioNuevoConShell.sh                      /root/scripts/d-scripts/Alias/uncs
