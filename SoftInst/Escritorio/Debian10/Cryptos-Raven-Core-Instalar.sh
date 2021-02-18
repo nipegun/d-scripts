@@ -46,8 +46,8 @@ if [[ $(dpkg-query -s gzip 2>/dev/null | grep installed) == "" ]]; then
     apt-get -y update
     apt-get -y install gzip
 fi
-tar xzvf /root/Software/Binarios/Raven/NodoRaven.tar.gz --directory /root/Software/Binarios/Raven/
-rm -rf /root/Software/Binarios/Raven/NodoRaven.tar.gz
+tar xzvf /root/Software/Binarios/Raven/Raven.tar.gz --directory /root/Software/Binarios/Raven/
+rm -rf /root/Software/Binarios/Raven/Raven.tar.gz
 
 echo ""
 echo "Preparando la carpeta final..."
