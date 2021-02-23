@@ -41,22 +41,22 @@ rm -rf /root/Software/Binarios/Monero/monero.tar.bz2
 echo ""
 echo "Preparando la carpeta final..."
 echo ""
-find /root/Software/Binarios/Monero/ -type d -name monero* -exec cp -r {} /root/MoneroCore/ \;
-mkdir -p /root/MoneroCore/data/ 2> /dev/null
+find /root/Software/Binarios/Monero/ -type d -name monero* -exec cp -r {} /root/Cryptos/Monero/ \;
+mkdir -p /root/Cryptos/Monero/blockchain/ 2> /dev/null
 rm -rf /root/Software/Binarios/Monero/
 
 echo ""
 echo "Script finalizado. Encontrarás el sofware en:"
-echo "/root/MoneroCore/"
+echo "/root/Cryptos/Monero/"
 echo ""
 echo "Para correrlo desde la terminal, ejecuta:"
-echo "/root/MoneroCore/bin/raven-cli"
+echo "/root/Cryptos/Monero/bin/"
 echo ""
 echo "Para correrlo desde desde el entorno gráfico ejecuta:"
-echo "/root/MoneroCore/bin/raven-qt"
+echo "/root/Cryptos/Monero/bin/"
 echo ""
-echo "Es aconsejable que guardes los datos de la cartera en la carpeta:"
-echo "/root/MoneroCore/data/"
+echo "Es aconsejable que guardes la cadena de bloques en la carpeta:"
+echo "/root/Cryptos/Monero/blockchain/"
 echo ""
 echo "Recuerda editar el cortafuegos del ordenador para que acepte conexiones TCP en el puerto 8767."
 echo "Si has instalado RavenCore en una MV de Proxmox agrega una regla a su cortauegos indicando:"
