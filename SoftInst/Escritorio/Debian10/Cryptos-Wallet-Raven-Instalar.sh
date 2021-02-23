@@ -59,22 +59,22 @@ rm -rf /root/Software/Binarios/Raven/Raven.tar.gz
 echo ""
 echo "Preparando la carpeta final..."
 echo ""
-find /root/Software/Binarios/Raven/ -type d -name raven* -exec cp -r {} /root/RavenCore/ \;
-mkdir -p /root/RavenCore/data/ 2> /dev/null
+find /root/Software/Binarios/Raven/ -type d -name raven* -exec cp -r {} /root/Cryptos/Raven/ \;
+mkdir -p /root/Cryptos/Raven/blockchain/ 2> /dev/null
 rm -rf /root/Software/Binarios/Raven/
 
 echo ""
 echo "Script finalizado. Encontrarás el sofware en:"
-echo "/root/RavenCore/"
+echo "/root/Cryptos/Raven/"
 echo ""
 echo "Para correrlo desde la terminal, ejecuta:"
-echo "/root/RavenCore/bin/raven-cli"
+echo "/root/Cryptos/Raven/bin/raven-cli"
 echo ""
 echo "Para correrlo desde desde el entorno gráfico ejecuta:"
-echo "/root/RavenCore/bin/raven-qt"
+echo "/root/Cryptos/Raven/bin/raven-qt"
 echo ""
 echo "Es aconsejable que guardes los datos de la cartera en la carpeta:"
-echo "/root/RavenCore/data/"
+echo "/root/Cryptos/Raven/blockchain/"
 echo ""
 echo "Recuerda editar el cortafuegos del ordenador para que acepte conexiones TCP en el puerto 8767."
 echo "Si has instalado RavenCore en una MV de Proxmox agrega una regla a su cortauegos indicando:"
