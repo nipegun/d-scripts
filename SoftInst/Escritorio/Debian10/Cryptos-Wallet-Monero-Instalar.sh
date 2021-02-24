@@ -41,9 +41,30 @@ rm -rf /root/Software/Binarios/Monero/monero.tar.bz2
 echo ""
 echo "Preparando la carpeta final..."
 echo ""
-find /root/Software/Binarios/Monero/ -type d -name monero* -exec cp -r {} /root/Cryptos/Monero/ \;
 mkdir -p /root/Cryptos/Monero/blockchain/ 2> /dev/null
+mkdir -p /root/Cryptos/Monero/wallet/ 2> /dev/null
+find /root/Software/Binarios/Monero/ -type d -name monero* -exec cp -r {} /root/Cryptos/Monero/ \;
 rm -rf /root/Software/Binarios/Monero/
+echo "[General]"                                          > /root/monero-storage/settings.ini
+echo "account_name=root"                                 >> /root/monero-storage/settings.ini
+echo "askPasswordBeforeSending=true"                     >> /root/monero-storage/settings.ini
+echo "autosave=true"                                     >> /root/monero-storage/settings.ini
+echo "autosaveMinutes=10"                                >> /root/monero-storage/settings.ini
+echo "blackTheme=true"                                   >> /root/monero-storage/settings.ini
+echo "blockchainDataDir=/root/Cryptos/Monero/blockchain" >> /root/monero-storage/settings.ini
+echo "checkForUpdates=true"                              >> /root/monero-storage/settings.ini
+echo "customDecorations=true"                            >> /root/monero-storage/settings.ini
+echo "fiatPriceEnabled=true"                             >> /root/monero-storage/settings.ini
+echo "fiatPriceProvider=kraken"                          >> /root/monero-storage/settings.ini
+echo "language=Espa\xf1ol"                               >> /root/monero-storage/settings.ini
+echo "language_wallet=Espa\xf1ol"                        >> /root/monero-storage/settings.ini
+echo "locale=es_ES"                                      >> /root/monero-storage/settings.ini
+echo "lockOnUserInActivity=true"                         >> /root/monero-storage/settings.ini
+echo "lockOnUserInActivityInterval=1"                    >> /root/monero-storage/settings.ini
+echo "transferShowAdvanced=true"                         >> /root/monero-storage/settings.ini
+echo "useRemoteNode=false"                               >> /root/monero-storage/settings.ini
+echo "walletMode=2"                                      >> /root/monero-storage/settings.ini
+echo "wallet_path=/root/Cryptos/Monero/wallet"           >> /root/monero-storage/settings.ini
 
 echo ""
 echo "Script finalizado. Encontrarás el sofware en:"
