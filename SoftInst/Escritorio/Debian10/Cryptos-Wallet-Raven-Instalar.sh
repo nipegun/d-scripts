@@ -57,10 +57,21 @@ tar xzvf /root/Software/Binarios/Raven/Raven.tar.gz --directory /root/Software/B
 rm -rf /root/Software/Binarios/Raven/Raven.tar.gz
 
 echo ""
+echo "Creando copia de seguridad de archivos anteriores..."
+echo ""
+mkdir -p /root/CopSegRaven/.config/autostart 2> /dev/null
+# Copia de seguridad de los archivos típicos de una instalación normal
+mv /root/.config/QtProject.conf           /root/CopSegRaven/.config/
+mv /root/.config/Raven/                   /root/CopSegRaven/.config/
+mv /root/.config/autostart/raven.desktop  /root/CopSegRaven/.config/autostart/
+# Copia de seguridad de las ubicaciones personalizadas
+mv /root/Cryptos/Raven/Datos/ /root/CopSegRaven/
+
+echo ""
 echo "Preparando la carpeta final..."
 echo ""
 find /root/Software/Binarios/Raven/ -type d -name raven* -exec cp -r {} /root/Cryptos/Raven/ \;
-mkdir -p /root/Cryptos/Raven/CadenaDeBloques/ 2> /dev/null
+mkdir -p /root/Cryptos/Raven/Datos/ 2> /dev/null
 rm -rf /root/Software/Binarios/Raven/
 
 echo ""
@@ -73,8 +84,8 @@ echo ""
 echo "Para correrlo desde desde el entorno gráfico ejecuta:"
 echo "/root/Cryptos/Raven/bin/raven-qt"
 echo ""
-echo "Es aconsejable que guardes los datos de la cartera en la carpeta:"
-echo "/root/Cryptos/Raven/CadenaDeBloques/"
+echo "Es aconsejable que guardes los datos en la carpeta:"
+echo "/root/Cryptos/Raven/Datos/"
 echo ""
 echo "Recuerda editar el cortafuegos del ordenador para que acepte conexiones TCP en el puerto 8767."
 echo "Si has instalado RavenCore en una MV de Proxmox agrega una regla a su cortauegos indicando:"
