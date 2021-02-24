@@ -45,47 +45,46 @@ mkdir -p /root/Cryptos/Monero/blockchain/ 2> /dev/null
 mkdir -p /root/Cryptos/Monero/wallet/ 2> /dev/null
 find /root/Software/Binarios/Monero/ -type d -name monero* -exec cp -r {}/. /root/Cryptos/Monero/ \;
 rm -rf /root/Software/Binarios/Monero/
-mkdir -p /root/monero-storage/ 2> /dev/null
-echo "[General]"                                          > /root/monero-storage/settings.ini
-echo "account_name=root"                                 >> /root/monero-storage/settings.ini
-echo "askPasswordBeforeSending=true"                     >> /root/monero-storage/settings.ini
-echo "autosave=true"                                     >> /root/monero-storage/settings.ini
-echo "autosaveMinutes=10"                                >> /root/monero-storage/settings.ini
-echo "blackTheme=true"                                   >> /root/monero-storage/settings.ini
-echo "blockchainDataDir=/root/Cryptos/Monero/blockchain" >> /root/monero-storage/settings.ini
-echo "checkForUpdates=true"                              >> /root/monero-storage/settings.ini
-echo "customDecorations=true"                            >> /root/monero-storage/settings.ini
-echo "fiatPriceEnabled=true"                             >> /root/monero-storage/settings.ini
-echo "fiatPriceProvider=kraken"                          >> /root/monero-storage/settings.ini
-echo "language=Espa\xf1ol"                               >> /root/monero-storage/settings.ini
-echo "language_wallet=Espa\xf1ol"                        >> /root/monero-storage/settings.ini
-echo "locale=es_ES"                                      >> /root/monero-storage/settings.ini
-echo "lockOnUserInActivity=true"                         >> /root/monero-storage/settings.ini
-echo "lockOnUserInActivityInterval=1"                    >> /root/monero-storage/settings.ini
-echo "transferShowAdvanced=true"                         >> /root/monero-storage/settings.ini
-echo "useRemoteNode=false"                               >> /root/monero-storage/settings.ini
-echo "walletMode=2"                                      >> /root/monero-storage/settings.ini
-echo "wallet_path=/root/Cryptos/Monero/wallet"           >> /root/monero-storage/settings.ini
+rm -rf /root/monero-storage/
+rm -rf /root/.bitmonero/
+#mkdir -p /root/monero-storage/ 2> /dev/null
+#echo "[General]"                                          > /root/monero-storage/settings.ini
+#echo "account_name=root"                                 >> /root/monero-storage/settings.ini
+#echo "askPasswordBeforeSending=true"                     >> /root/monero-storage/settings.ini
+#echo "autosave=true"                                     >> /root/monero-storage/settings.ini
+#echo "autosaveMinutes=10"                                >> /root/monero-storage/settings.ini
+#echo "blackTheme=true"                                   >> /root/monero-storage/settings.ini
+#echo "blockchainDataDir=/root/Cryptos/Monero/blockchain" >> /root/monero-storage/settings.ini
+#echo "checkForUpdates=true"                              >> /root/monero-storage/settings.ini
+#echo "customDecorations=true"                            >> /root/monero-storage/settings.ini
+#echo "fiatPriceEnabled=true"                             >> /root/monero-storage/settings.ini
+#echo "fiatPriceProvider=kraken"                          >> /root/monero-storage/settings.ini
+#echo "language=Espa\xf1ol"                               >> /root/monero-storage/settings.ini
+#echo "language_wallet=Espa\xf1ol"                        >> /root/monero-storage/settings.ini
+#echo "locale=es_ES"                                      >> /root/monero-storage/settings.ini
+#echo "lockOnUserInActivity=true"                         >> /root/monero-storage/settings.ini
+#echo "lockOnUserInActivityInterval=1"                    >> /root/monero-storage/settings.ini
+#echo "transferShowAdvanced=true"                         >> /root/monero-storage/settings.ini
+#echo "useRemoteNode=false"                               >> /root/monero-storage/settings.ini
+#echo "walletMode=2"                                      >> /root/monero-storage/settings.ini
+#echo "wallet_path=/root/Cryptos/Monero/wallet"           >> /root/monero-storage/settings.ini
 
 echo ""
 echo "Script finalizado. Encontrarás el sofware en:"
 echo "/root/Cryptos/Monero/"
 echo ""
-echo "Para correrlo desde la terminal, ejecuta:"
-echo "/root/Cryptos/Monero/bin/"
-echo ""
 echo "Para correrlo desde desde el entorno gráfico ejecuta:"
-echo "/root/Cryptos/Monero/bin/"
+echo "/root/Cryptos/Monero/monero-wallet-gui"
 echo ""
 echo "Es aconsejable que guardes la cadena de bloques en la carpeta:"
 echo "/root/Cryptos/Monero/blockchain/"
 echo ""
-echo "Recuerda editar el cortafuegos del ordenador para que acepte conexiones TCP en el puerto 8767."
-echo "Si has instalado RavenCore en una MV de Proxmox agrega una regla a su cortauegos indicando:"
+echo "Recuerda editar el cortafuegos del ordenador para que acepte conexiones TCP en el puerto 18080."
+echo "Si has instalado Monero en una MV de Proxmox agrega una regla a su cortauegos indicando:"
 echo ""
 echo "Dirección: out"
 echo "Acción: ACCEPT"
 echo "Protocolo: tcp"
-echo "Puerto destino: 8767"
+echo "Puerto destino: 18080"
 echo ""
 
