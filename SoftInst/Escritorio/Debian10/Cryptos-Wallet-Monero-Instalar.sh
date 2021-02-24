@@ -42,10 +42,13 @@ echo ""
 echo "Creando copia de seguridad de archivos anteriores..."
 echo ""
 mkdir -p /root/CopSegMonero/.config/ 2> /dev/null
+# Copia de seguridad si has elegido una cartera portable
+mv /root/monero-storage/                 /root/CopSegMonero/
+# Copia de seguridad de los archivos típicos de una instalación normal
 mv /root/.config/monero-project/         /root/CopSegMonero/.config/
 mv /root/Monero/                         /root/CopSegMonero/
-mv /root/monero-storage/                 /root/CopSegMonero/
 mv /root/.bitmonero/                     /root/CopSegMonero/
+# Copia de seguridad de las ubicaciones personalizadas
 mv /root/Cryptos/Monero/CadenaDeBloques/ /root/CopSegMonero/
 mv /root/Cryptos/Monero/Carteras/        /root/CopSegMonero/
 
