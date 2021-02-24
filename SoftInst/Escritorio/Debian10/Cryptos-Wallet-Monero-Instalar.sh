@@ -88,3 +88,4 @@ echo "Acción: ACCEPT"
 echo "Protocolo: tcp"
 echo "Puerto destino: 8767"
 echo ""
+
