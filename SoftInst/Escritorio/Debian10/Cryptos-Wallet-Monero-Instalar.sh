@@ -42,11 +42,12 @@ echo ""
 echo "Creando copia de seguridad de archivos anteriores..."
 echo ""
 mkdir -p /root/CopSegMonero/.config/ 2> /dev/null
-mv /root/.config/monero-project/    /root/CopSegMonero/.config/
-mv /root/Monero/                    /root/CopSegMonero/
-mv /root/monero-storage/            /root/CopSegMonero/
-mv /root/.bitmonero/                /root/CopSegMonero/
-mv /root/Cryptos/Monero/BlockChain/ /root/CopSegMonero/
+mv /root/.config/monero-project/         /root/CopSegMonero/.config/
+mv /root/Monero/                         /root/CopSegMonero/
+mv /root/monero-storage/                 /root/CopSegMonero/
+mv /root/.bitmonero/                     /root/CopSegMonero/
+mv /root/Cryptos/Monero/CadenaDeBloques/ /root/CopSegMonero/
+mv /root/Cryptos/Monero/Carteras/        /root/CopSegMonero/
 
 echo ""
 echo "Preparando la carpeta final..."
@@ -75,7 +76,6 @@ echo "lockOnUserInActivityInterval=1"                         >> /root/.config/m
 echo "transferShowAdvanced=true"                              >> /root/.config/monero-project/monero-core.conf
 echo "useRemoteNode=false"                                    >> /root/.config/monero-project/monero-core.conf
 echo "walletMode=2"                                           >> /root/.config/monero-project/monero-core.conf
-echo "wallet_path=/root/Cryptos/Monero/Carteras"              >> /root/.config/monero-project/monero-core.conf
 
 echo ""
 echo "Script finalizado. Encontrarás el sofware en:"
@@ -87,7 +87,7 @@ echo ""
 echo "Es aconsejable que guardes la cadena de bloques en la carpeta:"
 echo "/root/Cryptos/Monero/CadenaDeBloques/"
 echo "y las carteras en la carpeta:"
-echo "/root/Cryptos/Monero/CadenaDeBloques/"
+echo "/root/Cryptos/Monero/Carteras/"
 echo ""
 echo "Recuerda editar el cortafuegos del ordenador para que acepte conexiones TCP en el puerto 18080."
 echo "Si has instalado Monero en una MV de Proxmox agrega una regla a su cortauegos indicando:"
