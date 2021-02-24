@@ -45,6 +45,7 @@ mkdir -p /root/Cryptos/Monero/blockchain/ 2> /dev/null
 mkdir -p /root/Cryptos/Monero/wallet/ 2> /dev/null
 find /root/Software/Binarios/Monero/ -type d -name monero* -exec cp -r {}/* /root/Cryptos/Monero/ \;
 rm -rf /root/Software/Binarios/Monero/
+mkdir -p /root/monero-storage/ 2> /dev/null
 echo "[General]"                                          > /root/monero-storage/settings.ini
 echo "account_name=root"                                 >> /root/monero-storage/settings.ini
 echo "askPasswordBeforeSending=true"                     >> /root/monero-storage/settings.ini
