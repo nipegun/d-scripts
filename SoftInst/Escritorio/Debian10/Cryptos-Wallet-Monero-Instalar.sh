@@ -55,8 +55,6 @@ mkdir -p /root/Cryptos/Monero/CadenaDeBloques/ 2> /dev/null
 mkdir -p /root/Cryptos/Monero/Carteras/ 2> /dev/null
 find /root/Software/Binarios/Monero/ -type d -name monero* -exec cp -r {}/. /root/Cryptos/Monero/ \;
 rm -rf /root/Software/Binarios/Monero/
-rm -rf /root/monero-storage/
-rm -rf /root/.bitmonero/
 mkdir -p /root/.config/monero-project/ 2> /dev/null
 echo "[General]"                                               > /root/.config/monero-project/monero-core.conf
 echo "account_name=root"                                      >> /root/.config/monero-project/monero-core.conf
