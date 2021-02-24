@@ -49,36 +49,34 @@ mv /root/.config/monero-project/         /root/CopSegMonero/.config/
 mv /root/Monero/                         /root/CopSegMonero/
 mv /root/.bitmonero/                     /root/CopSegMonero/
 # Copia de seguridad de las ubicaciones personalizadas
-mv /root/Cryptos/Monero/CadenaDeBloques/ /root/CopSegMonero/
-mv /root/Cryptos/Monero/Carteras/        /root/CopSegMonero/
+mv /root/Cryptos/Monero/Datos/ /root/CopSegMonero/
 
 echo ""
 echo "Preparando la carpeta final..."
 echo ""
-mkdir -p /root/Cryptos/Monero/CadenaDeBloques/ 2> /dev/null
-mkdir -p /root/Cryptos/Monero/Carteras/ 2> /dev/null
+mkdir -p /root/Cryptos/Monero/Datos/ 2> /dev/null
 find /root/Software/Binarios/Monero/ -type d -name monero* -exec cp -r {}/. /root/Cryptos/Monero/ \;
 rm -rf /root/Software/Binarios/Monero/
 mkdir -p /root/.config/monero-project/ 2> /dev/null
-echo "[General]"                                               > /root/.config/monero-project/monero-core.conf
-echo "account_name=root"                                      >> /root/.config/monero-project/monero-core.conf
-echo "askPasswordBeforeSending=true"                          >> /root/.config/monero-project/monero-core.conf
-echo "autosave=true"                                          >> /root/.config/monero-project/monero-core.conf
-echo "autosaveMinutes=10"                                     >> /root/.config/monero-project/monero-core.conf
-echo "blackTheme=true"                                        >> /root/.config/monero-project/monero-core.conf
-echo "blockchainDataDir=/root/Cryptos/Monero/CadenaDeBloques" >> /root/.config/monero-project/monero-core.conf
-echo "checkForUpdates=true"                                   >> /root/.config/monero-project/monero-core.conf
-echo "customDecorations=true"                                 >> /root/.config/monero-project/monero-core.conf
-echo "fiatPriceEnabled=true"                                  >> /root/.config/monero-project/monero-core.conf
-echo "fiatPriceProvider=kraken"                               >> /root/.config/monero-project/monero-core.conf
-echo "language=Espa\xf1ol"                                    >> /root/.config/monero-project/monero-core.conf
-echo "language_wallet=Espa\xf1ol"                             >> /root/.config/monero-project/monero-core.conf
-echo "locale=es_ES"                                           >> /root/.config/monero-project/monero-core.conf
-echo "lockOnUserInActivity=true"                              >> /root/.config/monero-project/monero-core.conf
-echo "lockOnUserInActivityInterval=1"                         >> /root/.config/monero-project/monero-core.conf
-echo "transferShowAdvanced=true"                              >> /root/.config/monero-project/monero-core.conf
-echo "useRemoteNode=false"                                    >> /root/.config/monero-project/monero-core.conf
-echo "walletMode=2"                                           >> /root/.config/monero-project/monero-core.conf
+echo "[General]"                                     > /root/.config/monero-project/monero-core.conf
+echo "account_name=root"                            >> /root/.config/monero-project/monero-core.conf
+echo "askPasswordBeforeSending=true"                >> /root/.config/monero-project/monero-core.conf
+echo "autosave=true"                                >> /root/.config/monero-project/monero-core.conf
+echo "autosaveMinutes=10"                           >> /root/.config/monero-project/monero-core.conf
+echo "blackTheme=true"                              >> /root/.config/monero-project/monero-core.conf
+echo "blockchainDataDir=/root/Cryptos/Monero/Datos" >> /root/.config/monero-project/monero-core.conf
+echo "checkForUpdates=true"                         >> /root/.config/monero-project/monero-core.conf
+echo "customDecorations=true"                       >> /root/.config/monero-project/monero-core.conf
+echo "fiatPriceEnabled=true"                        >> /root/.config/monero-project/monero-core.conf
+echo "fiatPriceProvider=kraken"                     >> /root/.config/monero-project/monero-core.conf
+echo "language=Espa\xf1ol"                          >> /root/.config/monero-project/monero-core.conf
+echo "language_wallet=Espa\xf1ol"                   >> /root/.config/monero-project/monero-core.conf
+echo "locale=es_ES"                                 >> /root/.config/monero-project/monero-core.conf
+echo "lockOnUserInActivity=true"                    >> /root/.config/monero-project/monero-core.conf
+echo "lockOnUserInActivityInterval=1"               >> /root/.config/monero-project/monero-core.conf
+echo "transferShowAdvanced=true"                    >> /root/.config/monero-project/monero-core.conf
+echo "useRemoteNode=false"                          >> /root/.config/monero-project/monero-core.conf
+echo "walletMode=2"                                 >> /root/.config/monero-project/monero-core.conf
 
 echo ""
 echo "Script finalizado. Encontrarás el sofware en:"
@@ -87,10 +85,8 @@ echo ""
 echo "Para correrlo desde desde el entorno gráfico ejecuta:"
 echo "/root/Cryptos/Monero/monero-wallet-gui"
 echo ""
-echo "Es aconsejable que guardes la cadena de bloques en la carpeta:"
-echo "/root/Cryptos/Monero/CadenaDeBloques/"
-echo "y las carteras en la carpeta:"
-echo "/root/Cryptos/Monero/Carteras/"
+echo "Es aconsejable que guardes la cadena de bloques y las carteras en la carpeta:"
+echo "/root/Cryptos/Monero/Datos/"
 echo ""
 echo "Recuerda editar el cortafuegos del ordenador para que acepte conexiones TCP en el puerto 18080."
 echo "Si has instalado Monero en una MV de Proxmox agrega una regla a su cortauegos indicando:"
