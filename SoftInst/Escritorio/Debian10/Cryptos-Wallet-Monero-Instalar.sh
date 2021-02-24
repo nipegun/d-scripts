@@ -79,6 +79,27 @@ echo "useRemoteNode=false"                          >> /root/.config/monero-proj
 echo "walletMode=2"                                 >> /root/.config/monero-project/monero-core.conf
 
 echo ""
+echo "Creando el archivo de autoejecución..."
+echo ""
+echo "[Desktop Entry]"                                  > /root/.config/autostart/monero.desktop
+echo "Type=Application"                                >> /root/.config/autostart/monero.desktop
+echo "Name=Monero"                                     >> /root/.config/autostart/monero.desktop
+echo "Exec=/root/Cryptos/Monero/monero-wallet-gui %u"  >> /root/.config/autostart/monero.desktop
+echo "Terminal=false"                                  >> /root/.config/autostart/monero.desktop
+echo "Hidden=false"                                    >> /root/.config/autostart/monero.desktop
+
+echo ""
+echo "Instalando paquetes necesarios para ejecutar la cartera..."
+echo ""
+apt-get -y install libxcb-icccm4
+apt-get -y install libxcb-image0
+apt-get -y install libxcb-keysyms1
+apt-get -y install libxcb-randr0
+apt-get -y install libxcb-render-util0
+apt-get -y install libxcb-xkb1
+apt-get -y install libxkbcommon-x11-0
+
+echo ""
 echo "Script finalizado. Encontrarás el sofware en:"
 echo "/root/Cryptos/Monero/"
 echo ""
