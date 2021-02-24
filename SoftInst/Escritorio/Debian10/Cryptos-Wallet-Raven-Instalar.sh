@@ -75,6 +75,16 @@ mkdir -p /root/Cryptos/Raven/Datos/ 2> /dev/null
 rm -rf /root/Software/Binarios/Raven/
 
 echo ""
+echo "Creando el archivo de autoejecución..."
+echo ""
+echo "[Desktop Entry]"                                                    > /root/.config/autostart/raven.desktop
+echo "Type=Application"                                                  >> /root/.config/autostart/raven.desktop
+echo "Name=Raven"                                                        >> /root/.config/autostart/raven.desktop
+echo "Exec=/root/Cryptos/Raven/bin/raven-qt -min -testnet=0 -regtest=0"  >> /root/.config/autostart/raven.desktop
+echo "Terminal=false"                                                    >> /root/.config/autostart/raven.desktop
+echo "Hidden=false"                                                      >> /root/.config/autostart/raven.desktop
+
+echo ""
 echo "Script finalizado. Encontrarás el sofware en:"
 echo "/root/Cryptos/Raven/"
 echo ""
