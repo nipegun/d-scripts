@@ -5,27 +5,22 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------
-#  Script de NiPeGun para editar la configuración de HAProxy
-#-------------------------------------------------------------
+#-------------------------------------------------------------------
+#  Script de NiPeGun para editar la configuración de mumble-server
+#-------------------------------------------------------------------
 
 echo ""
-echo "  Deteniendo el servicio mumble-server..."
-echo ""
-service mumble-server stop
-
-echo ""
-echo "  Editando el archivo de configuración de mumble-server..."
+echo "Editando el archivo de configuración..."
 echo ""
 nano /etc/mumble-server.ini
 
 echo ""
-echo "  Re-arrancando el servicio mumble-server..."
+echo "Indicando al servicio que vuelva a cargar el archivo de configuración..."
 echo ""
-service mumble-server start
+service mumble-server reload
 
 echo ""
-echo "  Estado del servicio:"
+echo "Estado del servicio:"
 echo ""
 service mumble-server status
 
