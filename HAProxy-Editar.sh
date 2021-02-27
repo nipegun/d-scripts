@@ -6,21 +6,21 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #-------------------------------------------------------------
-#  Script de NiPeGun para editar la configuración de HAProxy
+#  Script de NiPeGun para editar la configuración de haproxy
 #-------------------------------------------------------------
 
 echo ""
-echo "  Editando el archivo de configuración de HAProxy..."
+echo "Editando el archivo de configuración..."
 echo ""
 nano /etc/haproxy/haproxy.cfg
 
 echo ""
-echo "  Re-arrancando el servicio HAProxy..."
+echo "Indicando al servicio que vuelva a cargar el archivo de configuración..."
 echo ""
 service haproxy reload
 
 echo ""
-echo "  Estado del servicio:"
+echo "Estado del servicio:"
 echo ""
 service haproxy status
 
