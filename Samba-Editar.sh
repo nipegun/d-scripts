@@ -6,27 +6,21 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA EDITAR LA CONFIGURACIÓN DEL DEMONIO DHCPD
+#  Script de NiPeGun para editar la configuración del demonio dhcpd
 #--------------------------------------------------------------------
 
 echo ""
-echo "-------------------------------------"
-echo "  DETENIENDO EL SERVICIO SMBD..."
-echo "------------------------------------"
-echo ""
-service smbd stop
-
-echo ""
-echo "-------------------------------------------"
-echo "  EDITANDO EL ARCHIVO DE CONFIGURACIÓN..."
-echo "-------------------------------------------"
+echo "Editando el archivo de configuración..."
 echo ""
 nano /etc/samba/smb.conf
 
 echo ""
-echo "-------------------------------------------"
-echo "  VOLVIENDO A INICIAR EL SERVICIO SMBD..."
-echo "-------------------------------------------"
+echo "Indicando al servicio que vuelva a cargar el archivo de configuración..."
 echo ""
-service smbd start
+service smbd reload
+
+echo ""
+echo "Estado del servicio:"
+echo ""
+service smbd status
 
