@@ -17,7 +17,7 @@ nano /etc/haproxy/haproxy.cfg
 echo ""
 echo "  Re-arrancando el servicio HAProxy..."
 echo ""
-service haproxy restart
+service haproxy reload
 
 echo ""
 echo "  Estado del servicio:"
