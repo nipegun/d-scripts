@@ -10,22 +10,17 @@
 #----------------------------------------------------------
 
 echo ""
-echo "  Parando el servicio..."
-echo ""
-service uhub stop
-
-echo ""
-echo "  Editando el archivo de configuración......"
+echo "Editando el archivo de configuración..."
 echo ""
 nano /etc/uhub/uhub.conf
 
 echo ""
-echo "  Re-arrancando el servicio..."
+echo "Indicando al servicio que vuelva a cargar el archivo de configuración..."
 echo ""
-service uhub start
+service uhub reload
 
 echo ""
-echo "  Estado del servicio:"
+echo "Estado del servicio:"
 echo ""
 service uhub status
 
