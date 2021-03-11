@@ -84,6 +84,7 @@ echo "logpath = /var/log/fail2ban.log"                                          
 #echo "#mta = sendmail"             >> /etc/fail2ban/jail.d/defaults-debian.conf
 #echo "#action = %(action_mwl)s"    >> /etc/fail2ban/jail.d/defaults-debian.conf
 
+service fail2ban reload
 service fail2ban restart
 # tail -f /var/log/fail2ban.log
 
