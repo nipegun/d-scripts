@@ -24,6 +24,11 @@ echo "server {"                                                         > /etc/n
 echo "  listen 80 default_server;"                                     >> /etc/nginx/sites-available/default
 echo "  listen [::]:80 default_server;"                                >> /etc/nginx/sites-available/default
 echo ""                                                                >> /etc/nginx/sites-available/default
+echo "  #listen 443 ssl default_server;"                               >> /etc/nginx/sites-available/default
+echo "  #listen [::]:443 ssl default_server;"                          >> /etc/nginx/sites-available/default
+echo ""                                                                >> /etc/nginx/sites-available/default
+echo "  #include snippets/snakeoil.conf;"                              >> /etc/nginx/sites-available/default
+echo ""                                                                >> /etc/nginx/sites-available/default
 echo "  root /var/www/html;"                                           >> /etc/nginx/sites-available/default
 echo ""                                                                >> /etc/nginx/sites-available/default
 echo "  index index.php index.html index.htm index.nginx-debian.html;" >> /etc/nginx/sites-available/default
