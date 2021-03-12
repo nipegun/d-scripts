@@ -68,50 +68,50 @@ else
   echo ""
   echo "$(tput setaf 2)Creando el archivo .htaccess... $(tput sgr 0)"
   echo ""
-  echo "# BEGIN Medidas de seguridad" > /var/www/$1$2$3/.htaccess
-  echo "" >> /var/www/$1$2$3/.htaccess
-  echo "  # IMPEDIR ACCESO NO AUTORIZADO AL ARCHIVO .HTACCESS" >> /var/www/$1$2$3/.htaccess
-  echo '    <files ~ "^.*\.([Hh][Tt][Aa])">' >> /var/www/$1$2$3/.htaccess
-  echo "      order allow,deny" >> /var/www/$1$2$3/.htaccess
-  echo "      deny from all" >> /var/www/$1$2$3/.htaccess
-  echo "      satisfy all" >> /var/www/$1$2$3/.htaccess
-  echo "    </files>" >> /var/www/$1$2$3/.htaccess
-  echo "" >> /var/www/$1$2$3/.htaccess
-  echo "  DESHABILITAR LA NAVEGACIÓN POR CARPETAS QUE NO TENGAN INDEX" >> /var/www/$1$2$3/.htaccess
-  echo "    Options -Indexes" >> /var/www/$1$2$3/.htaccess
-  echo "" >> /var/www/$1$2$3/.htaccess
-  echo "  # IMPEDIR EL ACCESO DE CIERTAS IPS" >> /var/www/$1$2$3/.htaccess
-  echo "    <Limit GET POST>" >> /var/www/$1$2$3/.htaccess
-  echo "      order allow,deny" >> /var/www/$1$2$3/.htaccess
-  echo "      deny from 45.45.45.45" >> /var/www/$1$2$3/.htaccess
-  echo "      allow from all" >> /var/www/$1$2$3/.htaccess
-  echo "    </Limit>" >> /var/www/$1$2$3/.htaccess
-  echo "" >> /var/www/$1$2$3/.htaccess
-  echo "# END Medidas de seguridad" > /var/www/$1$2$3/.htaccess
-  echo "" >> /var/www/$1$2$3/.htaccess
+  echo "# BEGIN Medidas de seguridad"                                     > /var/www/$1$2$3/.htaccess
+  echo ""                                                                >> /var/www/$1$2$3/.htaccess
+  echo "  # IMPEDIR ACCESO NO AUTORIZADO AL ARCHIVO .HTACCESS"           >> /var/www/$1$2$3/.htaccess
+  echo '    <files ~ "^.*\.([Hh][Tt][Aa])">'                             >> /var/www/$1$2$3/.htaccess
+  echo "      order allow,deny"                                          >> /var/www/$1$2$3/.htaccess
+  echo "      deny from all"                                             >> /var/www/$1$2$3/.htaccess
+  echo "      satisfy all"                                               >> /var/www/$1$2$3/.htaccess
+  echo "    </files>"                                                    >> /var/www/$1$2$3/.htaccess
+  echo ""                                                                >> /var/www/$1$2$3/.htaccess
+  echo "  # DESHABILITAR LA NAVEGACIÓN POR CARPETAS QUE NO TENGAN INDEX" >> /var/www/$1$2$3/.htaccess
+  echo "    Options -Indexes"                                            >> /var/www/$1$2$3/.htaccess
+  echo ""                                                                >> /var/www/$1$2$3/.htaccess
+  echo "  # IMPEDIR EL ACCESO DE CIERTAS IPS"                            >> /var/www/$1$2$3/.htaccess
+  echo "    <Limit GET POST>"                                            >> /var/www/$1$2$3/.htaccess
+  echo "      order allow,deny"                                          >> /var/www/$1$2$3/.htaccess
+  echo "      deny from 45.45.45.45"                                     >> /var/www/$1$2$3/.htaccess
+  echo "      allow from all"                                            >> /var/www/$1$2$3/.htaccess
+  echo "    </Limit>"                                                    >> /var/www/$1$2$3/.htaccess
+  echo ""                                                                >> /var/www/$1$2$3/.htaccess
+  echo "# END Medidas de seguridad"                                      >> /var/www/$1$2$3/.htaccess
+  echo ""                                                                >> /var/www/$1$2$3/.htaccess
    
   # Proteger los logs
   echo ""
   echo "$(tput setaf 2)Protegiendo los logs con un .htaccess específico... $(tput sgr 0)"
   echo ""
-  echo "#<Files *>" > /var/www/$1$2$3/logs/.htaccess
-  echo "#" >> /var/www/$1$2$3/logs/.htaccess
-  echo "#  Order Deny,Allow" >> /var/www/$1$2$3/logs/.htaccess
-  echo "#  #Allow from 127.0.0.1" >> /var/www/$1$2$3/logs/.htaccess
-  echo "#  Deny from all" >> /var/www/$1$2$3/logs/.htaccess
-  echo "#" >> /var/www/$1$2$3/logs/.htaccess
-  echo "#</Files>" >> /var/www/$1$2$3/logs/.htaccess
-  echo "" >> /var/www/$1$2$3/logs/.htaccess
-  echo "RewriteEngine On" >> /var/www/$1$2$3/logs/.htaccess
-  echo "" >> /var/www/$1$2$3/logs/.htaccess
+  echo "#<Files *>"                                                      > /var/www/$1$2$3/logs/.htaccess
+  echo "#"                                                              >> /var/www/$1$2$3/logs/.htaccess
+  echo "#  Order Deny,Allow"                                            >> /var/www/$1$2$3/logs/.htaccess
+  echo "#  #Allow from 127.0.0.1"                                       >> /var/www/$1$2$3/logs/.htaccess
+  echo "#  Deny from all"                                               >> /var/www/$1$2$3/logs/.htaccess
+  echo "#"                                                              >> /var/www/$1$2$3/logs/.htaccess
+  echo "#</Files>"                                                      >> /var/www/$1$2$3/logs/.htaccess
+  echo ""                                                               >> /var/www/$1$2$3/logs/.htaccess
+  echo "RewriteEngine On"                                               >> /var/www/$1$2$3/logs/.htaccess
+  echo ""                                                               >> /var/www/$1$2$3/logs/.htaccess
   echo "# Si alguien llega a la web desde otro lugar que no sea $1$2$3" >> /var/www/$1$2$3/logs/.htaccess
-  echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?$2\\$1/ [NC]" >> /var/www/$1$2$3/logs/.htaccess
-  echo "" >> /var/www/$1$2$3/logs/.htaccess
-  echo "y pide directamente por un archivo con extension log" >> /var/www/$1$2$3/logs/.htaccess
-  echo "RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]" >> /var/www/$1$2$3/logs/.htaccess
-  echo "" >> /var/www/$1$2$3/logs/.htaccess
-  echo "# Redirigirlo a google.com" >> /var/www/$1$2$3/logs/.htaccess
-  echo "RewriteRule .*\.(log)$ http://google.com/ [NC]" >> /var/www/$1$2$3/logs/.htaccess
+  echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?$2\\$1/ [NC]"      >> /var/www/$1$2$3/logs/.htaccess
+  echo ""                                                               >> /var/www/$1$2$3/logs/.htaccess
+  echo "y pide directamente por un archivo con extension log"           >> /var/www/$1$2$3/logs/.htaccess
+  echo "RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]"                >> /var/www/$1$2$3/logs/.htaccess
+  echo ""                                                               >> /var/www/$1$2$3/logs/.htaccess
+  echo "# Redirigirlo a google.com"                                     >> /var/www/$1$2$3/logs/.htaccess
+  echo "RewriteRule .*\.(log)$ http://google.com/ [NC]"                 >> /var/www/$1$2$3/logs/.htaccess
 
   # Reparar permisos y propietario de la carpeta
   echo ""
