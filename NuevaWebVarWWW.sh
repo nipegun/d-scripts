@@ -91,7 +91,7 @@ else
     echo "      satisfy all" >> /var/www/$2$1/.htaccess
     echo "    </files>" >> /var/www/$2$1/.htaccess
     echo "" >> /var/www/$2$1/.htaccess
-    echo "  DESHABILITAR LA NAVEGACIÓN POR CARPETAS QUE NO TENGAN INDEX" >> /var/www/$2$1/.htaccess
+    echo "  # DESHABILITAR LA NAVEGACIÓN POR CARPETAS QUE NO TENGAN INDEX" >> /var/www/$2$1/.htaccess
     echo "    Options -Indexes" >> /var/www/$2$1/.htaccess
     echo "" >> /var/www/$2$1/.htaccess
     echo "  # IMPEDIR EL ACCESO DE CIERTAS IPS" >> /var/www/$2$1/.htaccess
@@ -210,7 +210,7 @@ else
     echo "      satisfy all" >> /var/www/$2$1/.htaccess
     echo "    </files>" >> /var/www/$2$1/.htaccess
     echo "" >> /var/www/$2$1/.htaccess
-    echo "  DESHABILITAR LA NAVEGACIÓN POR CARPETAS QUE NO TENGAN INDEX" >> /var/www/$2$1/.htaccess
+    echo "  # DESHABILITAR LA NAVEGACIÓN POR CARPETAS QUE NO TENGAN INDEX" >> /var/www/$2$1/.htaccess
     echo "    Options -Indexes" >> /var/www/$2$1/.htaccess
     echo "" >> /var/www/$2$1/.htaccess
     echo "  # IMPEDIR EL ACCESO DE CIERTAS IPS" >> /var/www/$2$1/.htaccess
