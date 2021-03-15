@@ -47,7 +47,6 @@ ln -s /root/scripts/d-scripts/DejarSóloElKernelMásReciente.sh              /ro
 ln -s /root/scripts/d-scripts/DScripts-Sincronizar.sh                      /root/scripts/d-scripts/Alias/sinds
 ln -s /root/scripts/d-scripts/EjecutarComo.sh                              /root/scripts/d-scripts/Alias/ec
 ln -s /root/scripts/d-scripts/EnviarMailA.sh                               /root/scripts/d-scripts/Alias/ema
-ln -s /root/scripts/d-scripts/MySQL-ExportarBaseDeDatos.sh                 /root/scripts/d-scripts/Alias/ebdd
 ln -s /root/scripts/d-scripts/ExtraerSubtítuloDeMKV.sh                     /root/scripts/d-scripts/Alias/esdmkv
 ln -s /root/scripts/d-scripts/MostrarFrecuenciaCPU.sh                      /root/scripts/d-scripts/Alias/mfcpu
 ln -s /root/scripts/d-scripts/Grub-Editar.sh                               /root/scripts/d-scripts/Alias/egrub
@@ -58,7 +57,6 @@ ln -s /root/scripts/d-scripts/HardwareInfoGráfica.sh                       /roo
 ln -s /root/scripts/d-scripts/HardwareInfoProcesador.sh                    /root/scripts/d-scripts/Alias/hiproc
 ln -s /root/scripts/d-scripts/HardwareInfoRAM.sh                           /root/scripts/d-scripts/Alias/hiram
 ln -s /root/scripts/d-scripts/HardwareInfoRed.sh                           /root/scripts/d-scripts/Alias/hired
-ln -s /root/scripts/d-scripts/ImportarBaseDeDatos.sh                       /root/scripts/d-scripts/Alias/ibdd
 ln -s /root/scripts/d-scripts/IMPrimir.sh                                  /root/scripts/d-scripts/Alias/imp
 ln -s /root/scripts/d-scripts/IMPrimirArchivo.sh                           /root/scripts/d-scripts/Alias/impa
 ln -s /root/scripts/d-scripts/InfoNodoLitecoin.sh                          /root/scripts/d-scripts/Alias/inl
@@ -79,7 +77,9 @@ ln -s /root/scripts/d-scripts/MostrarSetsIPSet.sh                          /root
 ln -s /root/scripts/d-scripts/MostrarUsuariosDelGrupo.sh                   /root/scripts/d-scripts/Alias/mudg
 ln -s /root/scripts/d-scripts/MostrarVelocidadDeCargaDeLaWeb.sh            /root/scripts/d-scripts/Alias/mvdcdlw
 ln -s /root/scripts/d-scripts/MostrarVersiónDeDebian.sh                    /root/scripts/d-scripts/Alias/mvdd
-ln -s /root/scripts/d-scripts/MySQL-CrearBaseDeDatosYUsuario.sh            /root/scripts/d-scripts/Alias/cbddyu
+ln -s /root/scripts/d-scripts/MySQL-BaseDeDatos-Crear.sh                   /root/scripts/d-scripts/Alias/cbddyu
+ln -s /root/scripts/d-scripts/MySQL-BaseDeDatos-Exportar.sh                /root/scripts/d-scripts/Alias/ebdd
+ln -s /root/scripts/d-scripts/MySQL-BaseDeDatos-Importar.sh                /root/scripts/d-scripts/Alias/ibdd
 ln -s /root/scripts/d-scripts/NotificarFalloDeDisco.sh                     /root/scripts/d-scripts/Alias/nfdd
 ln -s /root/scripts/d-scripts/NuevaWebVarWWW.sh                            /root/scripts/d-scripts/Alias/nwvwww
 ln -s /root/scripts/d-scripts/PCIPassThrough-Editar.sh                     /root/scripts/d-scripts/Alias/epcip
