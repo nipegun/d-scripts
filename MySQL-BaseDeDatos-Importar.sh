@@ -5,15 +5,15 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA EXPORTAR BASES DE DATOS MYSQL
-#--------------------------------------------------------
+#--------------------------------------------------------------
+#  Script de NiPeGun para exprotar una base de datos de MySQL
+#--------------------------------------------------------------
 
 EXPECTED_ARGS=4
 E_BADARGS=65
 
-ColorAdvertencia='\033[1;31m'
-ColorArgumentos='\033[1;32m'
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 FechaDeExp=$(date +A%YM%mD%d@%T)
@@ -22,9 +22,9 @@ if [ $# -ne $EXPECTED_ARGS ]
   then
     echo ""
     echo "-------------------------------------------------------------------------"
-    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo -e "ibdd ${ColorArgumentos}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
+    echo -e "ibdd ${ColorVerde}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
     echo ""
     echo "Ejemplo 1:"
     echo "ibdd pepe 12345678 Cuentas Cuentas.sql"
