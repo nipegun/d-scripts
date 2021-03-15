@@ -5,9 +5,9 @@ Crear#!/bin/bash
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA CREAR BASES DE DATOS MYSQL DESDE LA LÍNEA DE COMANDOS
-#--------------------------------------------------------------------------------
+#-----------------------------------------------------
+#  Script de NiPeGun para crear bases de datos MySQL
+#-----------------------------------------------------
 
 #!/bin/bash
 
