@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------------
-#  Script de NiPeGun para exprotar una base de datos de MySQL
+#  Script de NiPeGun para importar una base de datos de MySQL
 #--------------------------------------------------------------
 
 EXPECTED_ARGS=4
@@ -36,6 +36,6 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo ""
     exit $E_BADARGS
   else
-    mysql -u $1 -p$2 $3 < $4
+    mysql -u$1 -p$2 $3 < $4
 fi
 
