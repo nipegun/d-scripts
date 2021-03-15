@@ -35,7 +35,6 @@ ln -s /root/scripts/d-scripts/BorrarTAGsMP3.sh                             /root
 ln -s /root/scripts/d-scripts/BorrarUsuarioYHome.sh                        /root/scripts/d-scripts/Alias/buyh
 ln -s /root/scripts/d-scripts/BuscarArchivoEnElSistema.sh                  /root/scripts/d-scripts/Alias/baees
 ln -s /root/scripts/d-scripts/BuscarCarpetaEnElSistema.sh                  /root/scripts/d-scripts/Alias/bcees
-ln -s /root/scripts/d-scripts/BuscarMódulosCargables.sh                    /root/scripts/d-scripts/Alias/bmc
 ln -s /root/scripts/d-scripts/BuscarTextoEnArchivos.sh                     /root/scripts/d-scripts/Alias/btea
 ln -s /root/scripts/d-scripts/BuscarTextoEnArchivosDeSistema.sh            /root/scripts/d-scripts/Alias/bteads
 ln -s /root/scripts/d-scripts/BuscarTextoEnNombreDeArchivos.sh             /root/scripts/d-scripts/Alias/btenda
