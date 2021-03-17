@@ -16,7 +16,7 @@ FinColor='\033[0m'
 echo ""
 echo -e "${ColorVerde}------------------------${FinColor}"
 echo -e "${ColorVerde}Instalando OBS Studio...${FinColor}"
-echo -e "${ColorVerde}------------------------{FinColor}"
+echo -e "${ColorVerde}------------------------${FinColor}"
 echo ""
 apt-get -y install build-essential
 apt-get -y install checkinstall
