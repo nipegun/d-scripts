@@ -49,7 +49,7 @@ apt-get -y install amule
 apt-get -y install mumble
 apt-get -y install obs-studio
 apt-get -y install chromium
-apt-get -y install chromium-l10n 
+apt-get -y install chromium-l10n
 apt-get -y install filezilla
 
 # Programación
