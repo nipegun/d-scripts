@@ -50,13 +50,13 @@ rm -rf /root/Software/Binarios/Argentum/Argentum.tar.gz
 echo ""
 echo "Creando copia de seguridad de archivos anteriores..."
 echo ""
-#mkdir -p /root/CopSegArgentum/.config/autostart 2> /dev/null
+mkdir -p /root/CopSegArgentum/.config/autostart 2> /dev/null
 ## Copia de seguridad de los archivos típicos de una instalación normal
-#mv /root/.config/QtProject.conf           /root/CopSegRaven/.config/
-#mv /root/.config/Raven/                   /root/CopSegRaven/.config/
-#mv /root/.config/autostart/raven.desktop  /root/CopSegRaven/.config/autostart/
+mv /root/.config/QtProject.conf             /root/CopSegArgentum/.config/
+mv /root/.config/Argentum/                  /root/CopSegArgentum/.config/
+mv /root/.config/autostart/argentum.desktop /root/CopSegArgentum/.config/autostart/
 ## Copia de seguridad de las ubicaciones personalizadas
-#mv /root/Cryptos/Raven/Datos/ /root/CopSegRaven/
+mv /root/Cryptos/Argentum/Datos/ /root/CopSegArgentum/
 
 echo ""
 echo "Preparando la carpeta final..."
@@ -88,11 +88,12 @@ echo ""
 echo "Es aconsejable que guardes los datos en la carpeta:"
 echo "/root/Cryptos/Argentum/Datos/"
 echo ""
-echo "Recuerda editar el cortafuegos del ordenador para que acepte conexiones TCP en el puerto 8767."
-echo "Si has instalado RavenCore en una MV de Proxmox agrega una regla a su cortauegos indicando:"
+echo "Recuerda editar el cortafuegos del ordenador para que acepte conexiones TCP en el puerto 13580."
+echo "Si has instalado Argentum en una MV de Proxmox agrega una regla a su cortauegos indicando:"
 echo ""
 echo "Dirección: out"
 echo "Acción: ACCEPT"
 echo "Protocolo: tcp"
-echo "Puerto destino: 8767"
+echo "Puerto destino: 13580"
 echo ""
+
