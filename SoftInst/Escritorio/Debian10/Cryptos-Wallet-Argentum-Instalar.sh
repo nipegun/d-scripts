@@ -1,18 +1,18 @@
 #!/bin/bash
 
-# Pongo a disposición pública este script bajo el término de "software de dominio público".
-# Puedes hacer lo que quieras con él porque es libre de verdad; no libre con condiciones como las licencias GNU y otras patrañas similares.
-# Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
-# No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+## Pongo a disposición pública este script bajo el término de "software de dominio público".
+## Puedes hacer lo que quieras con él porque es libre de verdad; no libre con condiciones como las licencias GNU y otras patrañas similares.
+## Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
+## No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------
-#  Script de NiPeGun para instalar el nodo Argentum en Debian
-#--------------------------------------------------------------
+##--------------------------------------------------------------
+##  Script de NiPeGun para instalar el nodo Argentum en Debian
+##--------------------------------------------------------------
 
 echo ""
-echo "Descargando el archivo zip de la última release..."
+echo "Descargando el archivo tar.gz de la última release..."
 echo ""
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
     echo "curl no está instalado. Iniciando su instalación..."
@@ -20,18 +20,23 @@ if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     apt-get -y update
     apt-get -y install curl
 fi
-
-
-
 Archivo=$(curl -s https://github.com/argentumproject/argentum/releases/ | grep linux | grep gnu | grep tar | grep href | cut -d '"' -f 2 | sed -n 1p)
 rm -rf /root/Software/Binarios/Argentum/*
 mkdir -p /root/Software/Binarios/Argentum/
+## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "wget no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install wget
+fi
 wget --no-check-certificate https://github.com$Archivo -O /root/Software/Binarios/Argentum/Argentum.tar.gz
 
 echo ""
 echo "Descomprimiendo el archivo tar.gz..."
 echo ""
-# Comprobar si el paquete gzip está instalado. Si no lo está, instalarlo.
+## Comprobar si el paquete gzip está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s gzip 2>/dev/null | grep installed) == "" ]]; then
     echo ""
     echo "gzip no está instalado. Iniciando su instalación..."
@@ -39,16 +44,13 @@ if [[ $(dpkg-query -s gzip 2>/dev/null | grep installed) == "" ]]; then
     apt-get -y update
     apt-get -y install gzip
 fi
-#find /root/Software/Binarios/Argentum/linux/ -type f -name *.tar.gz -exec mv {} /root/Software/Binarios/Raven/Raven.tar.gz \;
-#rm -rf /root/Software/Binarios/Raven/linux/
-#rm -rf /root/Software/Binarios/Raven/__MACOSX/
 tar xzvf /root/Software/Binarios/Argentum/Argentum.tar.gz --directory /root/Software/Binarios/Argentum/
 rm -rf /root/Software/Binarios/Argentum/Argentum.tar.gz
 
-#echo ""
-#echo "Creando copia de seguridad de archivos anteriores..."
-#echo ""
-#mkdir -p /root/CopSegRaven/.config/autostart 2> /dev/null
+echo ""
+echo "Creando copia de seguridad de archivos anteriores..."
+echo ""
+#mkdir -p /root/CopSegArgentum/.config/autostart 2> /dev/null
 ## Copia de seguridad de los archivos típicos de una instalación normal
 #mv /root/.config/QtProject.conf           /root/CopSegRaven/.config/
 #mv /root/.config/Raven/                   /root/CopSegRaven/.config/
@@ -56,12 +58,12 @@ rm -rf /root/Software/Binarios/Argentum/Argentum.tar.gz
 ## Copia de seguridad de las ubicaciones personalizadas
 #mv /root/Cryptos/Raven/Datos/ /root/CopSegRaven/
 
-#echo ""
-#echo "Preparando la carpeta final..."
-#echo ""
-#find /root/Software/Binarios/Raven/ -type d -name raven* -exec cp -r {} /root/Cryptos/Raven/ \;
-#mkdir -p /root/Cryptos/Raven/Datos/ 2> /dev/null
-#rm -rf /root/Software/Binarios/Raven/
+echo ""
+echo "Preparando la carpeta final..."
+echo ""
+find /root/Software/Binarios/Argentum/ -type d -name argentum* -exec cp -r {} /root/Cryptos/Argentum/ \;
+mkdir -p /root/Cryptos/Argentum/Datos/ 2> /dev/null
+rm -rf /root/Software/Binarios/Argentum/
 
 echo ""
 echo "Creando el archivo de autoejecución..."
