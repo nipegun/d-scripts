@@ -14,10 +14,7 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 echo ""
-echo ""
-echo -e "${ColorVerde}-----------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}Iniciando el script para actualizar el sistema operativo...${FinColor}"
-echo -e "${ColorVerde}-----------------------------------------------------------${FinColor}"
+echo "$(tput setab 7)$(tput setaf 2)Iniciando el script de actualización del sistema operativo...$(tput sgr 0)"
 echo ""
 
 echo ""
