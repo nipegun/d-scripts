@@ -14,7 +14,7 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 echo ""
-echo "$(tput setab 4)$(tput setaf 7)Iniciando el script de actualización del sistema operativo...$(tput sgr 0)"
+echo "$(tput setab 2)$(tput setaf 7)Iniciando el script de actualización del sistema operativo...$(tput sgr 0)"
 echo ""
 
 echo ""
