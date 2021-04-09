@@ -25,6 +25,9 @@ echo "Se procederá con la instalación."
 echo ""
 echo 'En la primera ventana elige "Basic Install" y acepta la advertencia'
 echo ""
+echo "Luego, si quieres instalar el emulador de PSP ve al manejo de paquetes e instala:"
+echo "lr-ppsspp"
+echo ""
 /root/SoftInst/RetroPie/retropie_setup.sh
 mv /root/RetroPie/ /RetroPie/
 sed -i -e 's|/root/RetroPie/|/RetroPie/|g' /etc/emulationstation/es_systems.cfg
