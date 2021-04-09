@@ -95,3 +95,4 @@ unlink /usr/share/desktop-base/active-theme
 ln -s /usr/share/desktop-base/moonlight-theme /usr/share/desktop-base/active-theme
 
 echo ""
+
