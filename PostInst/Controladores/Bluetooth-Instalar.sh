@@ -15,7 +15,7 @@ FinColor="\033[0m"
 apt-get -y update 2> /dev/null
 apt-get -y install dialog 2> /dev/null
 
-menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
+menu=(dialog --timeout 5 --checklist "Elección del adaptador:" 22 76 16)
   opciones=(1 "Bluetoth Intel - Tarjeta Centrino 7260 (8087:07dc)" off
             2 "2" off
             3 "3" off
