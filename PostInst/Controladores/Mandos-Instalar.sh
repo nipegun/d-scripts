@@ -13,9 +13,9 @@ ColorVerde="\033[1;32m"
 FinColor="\033[0m"
 
 apt-get -y update 2> /dev/null
-apt-get -y install git dialog 2> /dev/null
+apt-get -y install dialog 2> /dev/null
 
-menu=(dialog --timeout 5 --checklist "Elección del adaptador:" 22 76 16)
+menu=(dialog --timeout 5 --checklist "Elección del mando a instalar:" 22 76 16)
   opciones=(1 "XBox One USB Wireless Adapter" off
             2 "2" off
             3 "3" off
