@@ -60,6 +60,7 @@ echo "Modificando archivos para adaptador a la nueva ubicación..."
 echo ""
 find /RetroPie/ -type f -exec sed -i -e "s|/opt/retropie|/RetroPie/opt|g" {} \;
 sed -i -e 's|/root/RetroPie/|/RetroPie/|g' /etc/emulationstation/es_systems.cfg
+chown nobody:nogroup /RetroPie/ -R
 
 echo ""
 echo "RetroPie se ha instalado."
