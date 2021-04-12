@@ -16,6 +16,9 @@ touch         /tmp/YTS/URLPagPelis.txt
 truncate -s 0 /tmp/YTS/URLPagPelis.txt
 for NroPag in $(seq $NroPagIni $NroPagFin);
   do
+    echo ""
+    echo "Revisando la página nro $NroPag..."
+    echo ""
     curl --insecure --silent https://yts.mx/browse-movies/0/all/sci-fi/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2 >> /tmp/YTS/URLPagPelis.txt
 
     ## Comprobar si el resultado del curl es un 404 y si lo es, terminar el bucle
