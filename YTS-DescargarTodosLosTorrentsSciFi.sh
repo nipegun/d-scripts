@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# Pongo a disposición pública este script bajo el término de "software de dominio público".
+# Puedes hacer lo que quieras con él porque es libre de verdad; no libre con condiciones como las licencias GNU y otras patrañas similares.
+# Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
+# No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#----------------------------------------------------------------------------
+#  Script de NiPeGun descargar todos los torrents sci-fi disponibles en YTS
+#----------------------------------------------------------------------------
+
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
+
 DominioYTS=yts.mx
 CalidadDeseada=720p
 Genero="sci-fi"
@@ -9,7 +22,7 @@ NroPagFin=500
 
 ## Construir el archivo con todas las URLs de las páginas de cada peli
 echo ""
-echo "Construyendo el archivo con todas las URLs de cada peli..."
+echo -e "${ColorVerde}Construyendo el archivo con todas las URLs de cada peli...${FinColor}"
 echo ""
 mkdir -p $CarpetaDeDescarga 2>/dev/null
 touch         $CarpetaDeDescarga/URLsPagPelis.txt
@@ -17,7 +30,7 @@ truncate -s 0 $CarpetaDeDescarga/URLsPagPelis.txt
 for NroPag in $(seq $NroPagIni $NroPagFin);
   do
     echo ""
-    echo "Revisando la página de resultados nro $NroPag..."
+    echo -e "${ColorVerde}Revisando la página de resultados nro $NroPag...${FinColor}"
     echo ""
     curl --insecure --silent https://$DominioYTS/browse-movies/0/all/$Genero/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2 >> $CarpetaDeDescarga/URLsPagPelis.txt
 
@@ -26,7 +39,7 @@ for NroPag in $(seq $NroPagIni $NroPagFin);
     if [ "$ResultadoDelCurl" = "" ]
       then
         echo ""
-        echo "La página $NroPag ya no tiene resultados. Parando la búsqueda..."
+        echo -e "${ColorRojo}La página $NroPag ya no tiene resultados. Parando la búsqueda...${FinColor}"
         echo ""
 
         ## Terminar el bucle for
