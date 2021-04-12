@@ -29,8 +29,8 @@ apt-get install -y git dialog unzip xmlstarlet
 echo ""
 echo "Borrando instalación anterior, si es que existe..."
 echo ""
-unlink /root/.emulationstation/
-unlink /root/.config/retroarch/
+unlink /root/.emulationstation
+unlink /root/.config/retroarch
 rm -rf /root/RetroPie
 rm -rf /opt/retropie
 
@@ -47,18 +47,19 @@ echo "Luego, si quieres instalar el emulador de PSP ve al manejo de paquetes e i
 echo "lr-ppsspp"
 echo ""
 
-#sed -i -e 's|scriptdir="$(dirname "$0")"||g'                                              /root/SoftInst/RetroPie/retropie_setup.sh
-#sed -i -e 's|scriptdir="$(cd "$scriptdir" && pwd)"|scriptdir="/root/SoftInst/RetroPie"|g' /root/SoftInst/RetroPie/retropie_setup.sh
-
 ## Packages
 sed -i -e 's|rootdir="/opt/retropie"|rootdir="/RetroPie/opt"|g'                           /root/SoftInst/RetroPie/retropie_packages.sh
 sed -i -e 's|datadir="$home/RetroPie"|datadir="/RetroPie"|g'                              /root/SoftInst/RetroPie/retropie_packages.sh
 sed -i -e 's|scriptdir="$(dirname "$0")"||g'                                              /root/SoftInst/RetroPie/retropie_packages.sh
 sed -i -e 's|scriptdir="$(cd "$scriptdir" && pwd)"|scriptdir="/root/SoftInst/RetroPie"|g' /root/SoftInst/RetroPie/retropie_packages.sh
 
-mkdir /RetroPie/
-
 /root/SoftInst/RetroPie/retropie_setup.sh
-mv /root/RetroPie/ /RetroPie/
+
 sed -i -e 's|/root/RetroPie/|/RetroPie/|g' /etc/emulationstation/es_systems.cfg
+
+echo ""
+echo "RetroPie se ha instalado."
+echo "Recuerda meter las roms en la carpeta /RetroPie/roms/"
+echo "antes de ejecutarlo por primera vez"
+echo ""
 
