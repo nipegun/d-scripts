@@ -3,7 +3,7 @@
 DominioYTS=yts.mx
 CalidadDeseada=720p
 Genero="sci-fi"
-CarpetaDeDescarga="/tmp/YTS/"
+CarpetaDeDescarga="/tmp/YTS"
 NroPagIni=135
 NroPagFin=500
 
@@ -12,14 +12,14 @@ echo ""
 echo "Construyendo el archivo con todas las URLs de cada peli..."
 echo ""
 mkdir -p $CarpetaDeDescarga 2>/dev/null
-touch         /tmp/YTS/URLPagPelis.txt
-truncate -s 0 /tmp/YTS/URLPagPelis.txt
+touch         $CarpetaDeDescarga/URLsPagPelis.txt
+truncate -s 0 $CarpetaDeDescarga/URLsPagPelis.txt
 for NroPag in $(seq $NroPagIni $NroPagFin);
   do
     echo ""
     echo "Revisando la página de resultados nro $NroPag..."
     echo ""
-    curl --insecure --silent https://$DominioYTS/browse-movies/0/all/$Genero/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2 >> /tmp/YTS/URLPagPelis.txt
+    curl --insecure --silent https://$DominioYTS/browse-movies/0/all/$Genero/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2 >> $CarpetaDeDescarga/URLsPagPelis.txt
 
     ## Comprobar si la página de resultados ya no muestra pelis y, si eso, parar el buble for
     ResultadoDelCurl=$(curl --insecure --silent https://$DominioYTS/browse-movies/0/all/$Genero/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2)
@@ -41,11 +41,12 @@ for NroPag in $(seq $NroPagIni $NroPagFin);
 echo ""
 echo "Revisando una a una las URLs de las pelis para buscar enlaces a torrents..."
 echo ""
-for URLPeli in $(cat /tmp/YTS/URLPagPelis.txt)
+for URLPeli in $(cat $CarpetaDeDescarga/URLsPagPelis.txt)
   do
     echo ""
     echo "Buscando enlaces a torrents en: ${URLPeli}"
     echo ""
+    #curl --insecure --silent ${URLPeli} | grep href | grep "torrent/download" | grep -v class | grep $CalidadDeseada >> 
     sleep 1
   done
 
