@@ -13,10 +13,28 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
+echo ""
+echo "-------------------------------------------------"
+echo "Iniciando el script de instalación de RetroPie..."
+echo "-------------------------------------------------"
+echo ""
+
+echo ""
+echo "Instalando paquetes necesarios..."
+echo ""
 apt-get update -y
 apt-get upgrade -y
 apt-get install -y git dialog unzip xmlstarlet
-mkdir /root/SoftInst/
+
+echo ""
+echo "Borrando instalación anterior, si es que existe..."
+echo ""
+unlink /root/.emulationstation/
+unlink /root/.config/retroarch/
+rm -rf /root/RetroPie
+rm -rf /opt/retropie
+
+mkdir /root/SoftInst/ 2> /dev/null
 cd /root/SoftInst/
 git clone --depth=1 https://github.com/RetroPie/RetroPie-Setup.git
 mv /root/SoftInst/RetroPie-Setup/ /root/SoftInst/RetroPie/
