@@ -17,12 +17,12 @@ truncate -s 0 /tmp/YTS/URLPagPelis.txt
 for NroPag in $(seq $NroPagIni $NroPagFin);
   do
     echo ""
-    echo "Revisando la página nro $NroPag..."
+    echo "Revisando la página de resultados nro $NroPag..."
     echo ""
-    curl --insecure --silent https://yts.mx/browse-movies/0/all/sci-fi/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2 >> /tmp/YTS/URLPagPelis.txt
+    curl --insecure --silent https://$DominioYTS/browse-movies/0/all/$Genero/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2 >> /tmp/YTS/URLPagPelis.txt
 
     ## Comprobar si la página de resultados ya no muestra pelis y, si eso, parar el buble for
-    ResultadoDelCurl=$(curl --insecure --silent https://yts.mx/browse-movies/0/all/sci-fi/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2)
+    ResultadoDelCurl=$(curl --insecure --silent https://$DominioYTS/browse-movies/0/all/$Genero/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2)
     if [ "$ResultadoDelCurl" = "" ]
       then
         echo ""
@@ -33,7 +33,12 @@ for NroPag in $(seq $NroPagIni $NroPagFin);
         break
     fi
 
-    # Esperar 1 segundo hasta hacer otra vez la consulta curl
+    ## Esperar 1 segundo hasta hacer otra vez la consulta curl
     sleep 1
-done
+  done
 
+## Revisar una a una cada URL de cada peli para extraer los enlaces de descarga de los torrents
+for URLPeli in $(cat /tmp/YTS/URLPagPelis.txt)
+  do
+    echo ${URLPeli}
+  done
