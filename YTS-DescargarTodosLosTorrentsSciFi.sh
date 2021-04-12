@@ -51,4 +51,8 @@ for URLPeli in $(cat $CarpetaDeDescarga/URLsPagPelis.txt)
     curl --insecure --silent ${URLPeli} | grep href | grep "torrent/download" | grep -v class | grep $CalidadDeseada >> $CarpetaDeDescarga/EnlacesEnURLsPagPelis.txt
     sleep 1
   done
+touch         $CarpetaDeDescarga/EnlacesATorrents.txt
+truncate -s 0 $CarpetaDeDescarga/EnlacesATorrents.txt
+cat $CarpetaDeDescarga/EnlacesEnURLsPagPelis.txt | cut -d '"' -f 2 > $CarpetaDeDescarga/EnlacesATorrents.txt
+cat $CarpetaDeDescarga/EnlacesATorrents.txt
 
