@@ -41,4 +41,6 @@ for NroPag in $(seq $NroPagIni $NroPagFin);
 for URLPeli in $(cat /tmp/YTS/URLPagPelis.txt)
   do
     echo ${URLPeli}
+    sleep 1
   done
+
