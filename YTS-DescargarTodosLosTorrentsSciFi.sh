@@ -54,7 +54,6 @@ for URLPeli in $(cat $CarpetaDeDescarga/URLsPagPelis.txt)
 touch         $CarpetaDeDescarga/EnlacesATorrents.txt
 truncate -s 0 $CarpetaDeDescarga/EnlacesATorrents.txt
 cat $CarpetaDeDescarga/EnlacesEnURLsPagPelis.txt | cut -d '"' -f 2 > $CarpetaDeDescarga/EnlacesATorrents.txt
-cat $CarpetaDeDescarga/EnlacesATorrents.txt
 
 ## Guardar los archivos torrent en una carpeta
 echo ""
@@ -70,3 +69,4 @@ for EnlaceAlTorrent in $(cat $CarpetaDeDescarga/EnlacesATorrents.txt)
     wget ${EnlaceAlTorrent}
     sleep 1
   done
+
