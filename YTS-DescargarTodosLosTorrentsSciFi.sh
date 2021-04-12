@@ -22,11 +22,15 @@ for NroPag in $(seq $NroPagIni $NroPagFin);
     curl --insecure --silent https://yts.mx/browse-movies/0/all/sci-fi/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2 >> /tmp/YTS/URLPagPelis.txt
 
     ## Comprobar si el resultado del curl es un 404 y si lo es, terminar el bucle
+    ## Esperar 1 segundo hasta hacer otra vez la consulta curl
+    sleep 1
+    ResultadoCurl=$(curl --insecure --silent https://yts.mx/browse-movies/0/all/sci-fi/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2)
+    echo $ResultadoCurl
     #if [ $NickName = $1 ]; then
       #
       #Puesto=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/B$FilaZonaB"_"$ColumnaZonaB | jq -r '.seat')
       #echo ""
-      #echo "$NickName está en el puesto $Puesto"
+      #echo "La página $NroPag ya no tiene resultados. Parando la búsqueda..."
       #echo ""
       #
       ##Terminar el script
