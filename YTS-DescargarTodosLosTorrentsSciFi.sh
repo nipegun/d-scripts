@@ -41,12 +41,14 @@ for NroPag in $(seq $NroPagIni $NroPagFin);
 echo ""
 echo "Revisando una a una las URLs de las pelis para buscar enlaces a torrents..."
 echo ""
+touch         $CarpetaDeDescarga/EnlacesEnURLsPagPelis.txt
+truncate -s 0 $CarpetaDeDescarga/EnlacesEnURLsPagPelis.txt
 for URLPeli in $(cat $CarpetaDeDescarga/URLsPagPelis.txt)
   do
     echo ""
     echo "Buscando enlaces a torrents en: ${URLPeli}"
     echo ""
-    #curl --insecure --silent ${URLPeli} | grep href | grep "torrent/download" | grep -v class | grep $CalidadDeseada >> 
+    curl --insecure --silent ${URLPeli} | grep href | grep "torrent/download" | grep -v class | grep $CalidadDeseada >> $CarpetaDeDescarga/EnlacesEnURLsPagPelis.txt
     sleep 1
   done
 
