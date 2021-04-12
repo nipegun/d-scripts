@@ -56,3 +56,17 @@ truncate -s 0 $CarpetaDeDescarga/EnlacesATorrents.txt
 cat $CarpetaDeDescarga/EnlacesEnURLsPagPelis.txt | cut -d '"' -f 2 > $CarpetaDeDescarga/EnlacesATorrents.txt
 cat $CarpetaDeDescarga/EnlacesATorrents.txt
 
+## Guardar los archivos torrent en una carpeta
+echo ""
+echo "Guardando archivos torrent..."
+echo ""
+mkdir -p $CarpetaDeDescarga/Torrents/$Genero/ 2> /dev/null
+cd $CarpetaDeDescarga/Torrents/$Genero/
+for EnlaceAlTorrent in $(cat $CarpetaDeDescarga/EnlacesATorrents.txt)
+  do
+    echo ""
+    echo "Buscando archivo torrent en: ${EnlaceAlTorrent}"
+    echo ""
+    wget ${EnlaceAlTorrent}
+    sleep 1
+  done
