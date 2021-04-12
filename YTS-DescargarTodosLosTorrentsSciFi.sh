@@ -80,7 +80,8 @@ for EnlaceAlTorrent in $(cat $CarpetaDeDescarga/EnlacesATorrents.txt)
     echo "Buscando archivo torrent en: ${EnlaceAlTorrent}"
     echo ""
     NombreDelTorrent=$(curl -I ${EnlaceAlTorrent} | grep filename | cut -d '"' -f 2)
-    curl ${EnlaceAlTorrent} -o $CarpetaDeDescarga/Torrents/$Genero/$NombreDelTorrent
+    echo $NombreDelTorrent
+    #curl ${EnlaceAlTorrent} -o $CarpetaDeDescarga/Torrents/$Genero/$NombreDelTorrent
     sleep 1
   done
 
