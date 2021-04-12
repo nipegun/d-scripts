@@ -25,14 +25,14 @@ for NroPag in $(seq $NroPagIni $NroPagFin);
     ## Esperar 1 segundo hasta hacer otra vez la consulta curl
     sleep 1
     ResultadoDelCurl=$(curl --insecure --silent https://yts.mx/browse-movies/0/all/sci-fi/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2)
-    if [ $ResultadoDelCurl == "" ]; then
-      #
-      echo ""
-      echo "La página $NroPag ya no tiene resultados. Parando la búsqueda..."
-      echo ""
-      #
-      ## Terminar el bucle for
-      break
+    if [ "$ResultadoDelCurl" = "" ]
+      then
+        echo ""
+        echo "La página $NroPag ya no tiene resultados. Parando la búsqueda..."
+        echo ""
+
+        ## Terminar el bucle for
+        break
     fi
 
     # Esperar 1 segundo hasta hacer otra vez la consulta curl
