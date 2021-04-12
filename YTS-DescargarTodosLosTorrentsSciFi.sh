@@ -38,9 +38,14 @@ for NroPag in $(seq $NroPagIni $NroPagFin);
   done
 
 ## Revisar una a una cada URL de cada peli para extraer los enlaces de descarga de los torrents
+echo ""
+echo "Revisando una a una las URLs de las pelis para buscar enlaces a torrents..."
+echo ""
 for URLPeli in $(cat /tmp/YTS/URLPagPelis.txt)
   do
-    echo ${URLPeli}
+    echo ""
+    echo "Buscando enlaces a torrents en: ${URLPeli}"
+    echo ""
     sleep 1
   done
 
