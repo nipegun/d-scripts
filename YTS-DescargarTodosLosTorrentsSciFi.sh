@@ -4,7 +4,7 @@ DominioYTS=yts.mx
 CalidadDeseada=720p
 Genero="sci-fi"
 CarpetaDeDescarga="/tmp/YTS/"
-NroPagIni=2
+NroPagIni=135
 NroPagFin=500
 
 ## Construir el archivo con todas las URLs de las páginas de cada peli
@@ -24,18 +24,17 @@ for NroPag in $(seq $NroPagIni $NroPagFin);
     ## Comprobar si el resultado del curl es un 404 y si lo es, terminar el bucle
     ## Esperar 1 segundo hasta hacer otra vez la consulta curl
     sleep 1
-    ResultadoCurl=$(curl --insecure --silent https://yts.mx/browse-movies/0/all/sci-fi/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2)
-    echo $ResultadoCurl
-    #if [ $NickName = $1 ]; then
+    ResultadoDelCurl=$(curl --insecure --silent https://yts.mx/browse-movies/0/all/sci-fi/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2)
+    echo 
+    if [ $ResultadoDelCurl = "" ]; then
       #
-      #Puesto=$(curl -s https://eps.encounter.eus/ee$2/map/lookup/B$FilaZonaB"_"$ColumnaZonaB | jq -r '.seat')
-      #echo ""
-      #echo "La página $NroPag ya no tiene resultados. Parando la búsqueda..."
-      #echo ""
+      echo ""
+      echo "La página $NroPag ya no tiene resultados. Parando la búsqueda..."
+      echo ""
       #
-      ##Terminar el script
-      #exit 1
-    #fi
+      ## Terminar el bucle for
+      break
+    fi
 
     # Esperar 1 segundo hasta hacer otra vez la consulta curl
     sleep 1
