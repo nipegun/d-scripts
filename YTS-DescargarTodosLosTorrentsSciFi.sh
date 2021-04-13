@@ -89,6 +89,16 @@ for EnlaceAlTorrent in $(cat $CarpetaDeDescarga/EnlacesATorrents.txt)
     sleep 1
   done
   
+
+## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "El paquete zip no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install zip
+fi
+
 ## Comprimir todos los archivos en un solo archivo
 zip $CarpetaDeDescarga/Torrents/$Genero.zip $CarpetaDeDescarga/Torrents/$Genero/*
 
