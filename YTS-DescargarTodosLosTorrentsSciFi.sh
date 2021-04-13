@@ -84,4 +84,6 @@ for EnlaceAlTorrent in $(cat $CarpetaDeDescarga/EnlacesATorrents.txt)
     curl --insecure --silent ${EnlaceAlTorrent} -o $CarpetaDeDescarga/Torrents/$Genero/"$NombreDelTorrent"
     sleep 1
   done
-
+  
+## Comprimir todos los archivos en un solo archivo
+$CarpetaDeDescarga/Torrents/$Genero/
