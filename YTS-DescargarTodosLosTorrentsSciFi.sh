@@ -17,7 +17,7 @@ DominioYTS=yts.mx
 CalidadDeseada=720p
 Genero="sci-fi"
 CarpetaDeDescarga="/tmp/YTS"
-NroPagIni=135
+NroPagIni=2
 NroPagFin=500
 
 echo ""
