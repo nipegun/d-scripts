@@ -103,7 +103,7 @@ fi
 echo ""
 echo "Comprimiendo torrents en un archivo zip..."
 echo ""
-zip $CarpetaDeDescarga/Torrents/$Genero.zip $CarpetaDeDescarga/Torrents/$Genero/*
+zip -9 -r $CarpetaDeDescarga/Torrents/$Genero.zip $CarpetaDeDescarga/Torrents/$Genero/
 
 echo ""
 echo -e "${ColorVerde}Script de descarga de torrents de YTS, finalizado...${FinColor}"
