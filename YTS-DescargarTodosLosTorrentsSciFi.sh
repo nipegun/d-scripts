@@ -86,4 +86,5 @@ for EnlaceAlTorrent in $(cat $CarpetaDeDescarga/EnlacesATorrents.txt)
   done
   
 ## Comprimir todos los archivos en un solo archivo
-$CarpetaDeDescarga/Torrents/$Genero/
+zip $CarpetaDeDescarga/Torrents/$Genero.zip $CarpetaDeDescarga/Torrents/$Genero/*
+
