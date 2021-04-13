@@ -20,9 +20,13 @@ CarpetaDeDescarga="/tmp/YTS"
 NroPagIni=135
 NroPagFin=500
 
+echo ""
+echo -e "${ColorVerde}Iniciando script de descarga de torrents de YTS...${FinColor}"
+echo ""
+
 ## Construir el archivo con todas las URLs de las páginas de cada peli
 echo ""
-echo -e "${ColorVerde}Construyendo el archivo con todas las URLs de cada peli...${FinColor}"
+echo "Construyendo el archivo con todas las URLs de cada peli..."
 echo ""
 mkdir -p $CarpetaDeDescarga 2>/dev/null
 touch         $CarpetaDeDescarga/URLsPagPelis.txt
@@ -30,7 +34,7 @@ truncate -s 0 $CarpetaDeDescarga/URLsPagPelis.txt
 for NroPag in $(seq $NroPagIni $NroPagFin);
   do
     echo ""
-    echo -e "${ColorVerde}Revisando la página de resultados nro $NroPag...${FinColor}"
+    echo "Revisando la página de resultados nro $NroPag..."
     echo ""
     curl --insecure --silent https://$DominioYTS/browse-movies/0/all/$Genero/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2 >> $CarpetaDeDescarga/URLsPagPelis.txt
 
@@ -87,4 +91,10 @@ for EnlaceAlTorrent in $(cat $CarpetaDeDescarga/EnlacesATorrents.txt)
   
 ## Comprimir todos los archivos en un solo archivo
 zip $CarpetaDeDescarga/Torrents/$Genero.zip $CarpetaDeDescarga/Torrents/$Genero/*
+
+echo ""
+echo -e "${ColorVerde}Script de descarga de torrents de YTS, finalizado...${FinColor}"
+echo ""
+echo "Deberías encontrar el archivo .zip con los torrents en: $CarpetaDeDescarga/Torrents/$Genero/"
+echo ""
 
