@@ -100,6 +100,9 @@ if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
 fi
 
 ## Comprimir todos los archivos en un solo archivo
+echo ""
+echo "Comprimiendo torrents en un archivo zip..."
+echo ""
 zip $CarpetaDeDescarga/Torrents/$Genero.zip $CarpetaDeDescarga/Torrents/$Genero/*
 
 echo ""
