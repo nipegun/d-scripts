@@ -22,7 +22,7 @@ echo ""
 echo -e "${ColorVerde}Actualizando sistema operativo con repo caducado...${FinColor}"
 echo ""
 apt-get -o Acquire::Check-Valid-Until=false update
-apt-get -y upgrade
-apt-get -y dist-upgrade
+apt-get -y --allow-downgrades upgrade
+apt-get -y --allow-downgrades dist-upgrade
 apt-get -y autoremove
 
