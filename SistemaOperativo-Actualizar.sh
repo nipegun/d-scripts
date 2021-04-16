@@ -33,12 +33,12 @@ apt-get -y update
 echo ""
 echo -e "${ColorVerde}Ejecutando apt-get -y upgrade...${FinColor}"
 echo ""
-apt-get -y upgrade
+apt-get -y --allow-downgrades upgrade
 
 echo ""
 echo -e "${ColorVerde}Ejecutando apt-get -y dist-upgrade...${FinColor}"
 echo ""
-apt-get -y dist-upgrade
+apt-get -y --allow-downgrades dist-upgrade
 
 echo ""
 echo -e "${ColorVerde}Ejecutando apt-get -y autoremove...${FinColor}"
