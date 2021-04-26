@@ -30,5 +30,14 @@ if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     apt-get -y install curl
 fi
 
+## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "dialog no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install dialog
+fi
+
 curl https://raw.githubusercontent.com/cryptopool-builders/Multi-Pool-Installer/master/bootstrap.sh | bash
 
