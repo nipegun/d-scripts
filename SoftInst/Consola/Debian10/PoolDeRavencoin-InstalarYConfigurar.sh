@@ -43,7 +43,8 @@ echo ""
 echo ""
 echo "Intentando descargar el archivo comprimido de la última versión..."
 echo ""
-mkdir -p /root/SoftInst/Ravencoin/
+mkdir -p /root/SoftInst/Ravencoin/ 2> /dev/null
+rm -rf /root/SoftInst/Ravencoin/*
 cd /root/SoftInst/Ravencoin/
 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
@@ -77,6 +78,7 @@ unzip /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
 mv /root/SoftInst/Ravencoin/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Ravencoin/
 rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
 rm -rf /root/SoftInst/Ravencoin/linux/
+rm -rf /root/SoftInst/Ravencoin/__MACOSX/
 ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
   echo ""
