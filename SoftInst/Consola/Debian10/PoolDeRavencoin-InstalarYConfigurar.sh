@@ -106,6 +106,7 @@ echo ""
   echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.raven/raven.conf
   echo "prune=550"         >> /home/$UsuarioDaemon/.raven/raven.conf
   echo "daemon=1"          >> /home/$UsuarioDaemon/.raven/raven.conf
+  rm -rf /home/$UsuarioDaemon/Ravencoin/
   mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioDaemon/Ravencoin/
   chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
   find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
