@@ -66,28 +66,28 @@ wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/
 echo ""
 echo "Descomprimiendo el archivo..."
 echo ""
-## Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
-if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
-  echo ""
-  echo "zip no está instalado. Iniciando su instalación..."
-  echo ""
-  apt-get -y update
-  apt-get -y install zip
-fi
-unzip /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
-mv /root/SoftInst/Ravencoin/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Ravencoin/
-rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
-rm -rf /root/SoftInst/Ravencoin/linux/
-rm -rf /root/SoftInst/Ravencoin/__MACOSX/
-## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
-if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
-  echo ""
-  echo "tar no está instalado. Iniciando su instalación..."
-  echo ""
-  apt-get -y update
-  apt-get -y install tar
-fi
-   # tar -xf raven-4.1.0.0-x86_64-linux-gnu.tar.gz
+  ## Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "zip no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install zip
+  fi
+  unzip /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
+  mv /root/SoftInst/Ravencoin/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Ravencoin/
+  rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
+  rm -rf /root/SoftInst/Ravencoin/linux/
+  rm -rf /root/SoftInst/Ravencoin/__MACOSX/
+  ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "tar no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install tar
+  fi
+  tar -xf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
    # rm raven*gz
    # cd raven-4.1.0.0/bin
    # mkdir -p ~/.raven/
