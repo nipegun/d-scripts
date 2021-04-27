@@ -43,7 +43,8 @@ echo ""
 echo ""
 echo "Intentando descargar el archivo comprimido de la última versión..."
 echo ""
-cd /root
+mkdir -p /root/SoftInst/Ravencoin/
+cd /root/SoftInst/Ravencoin/
 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
   echo ""
