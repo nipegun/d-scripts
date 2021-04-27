@@ -73,7 +73,7 @@ if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
   apt-get -y update
   apt-get -y install zip
 fi
-unzip /root/raven-$UltVersRaven-x86_64-linux-gnu.zip
+unzip /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
 mv /root/SoftInst/Ravencoin/linux/raven-4.3.2.1-x86_64-linux-gnu.tar.gz /root/SoftInst/Ravencoin/
 ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
