@@ -26,13 +26,6 @@ echo ""
 echo ""
 
 echo ""
-echo "Instalando el demonio raven..."
-echo ""
-#adduser pool
-#usermod -aG sudo pool
-#su - pool
-
-echo ""
 echo "Determinando la última versión de ravencoin..."
 echo ""
 ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
@@ -59,7 +52,9 @@ if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
   apt-get -y update
   apt-get -y install wget
 fi
+echo "Intentando descargar archivo en formato zip..."
 wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.zip
+echo "Intentando descargar archivo en formato tar.gz..."
 wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
 
 echo ""
@@ -91,6 +86,16 @@ fi
    # echo "rpcpassword=pass1" >> ~/.raven/raven.conf
    # echo "prune=550" >> ~/.raven/raven.conf
    # echo "daemon=1" >> ~/.raven/raven.conf
+   
+echo ""
+echo "Creando el usuario para ejecutar el demonio..."
+echo ""
+#adduser pool
+#usermod -aG sudo pool
+#su - pool
+   
+   
+
    # ./ravend
    # ./raven-cli getnewaddress
    
