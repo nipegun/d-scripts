@@ -25,7 +25,6 @@ echo -e "${ColorVerde}----------------------------------------------------------
 echo ""
 echo ""
 
-echo ""
 echo "Determinando la última versión de ravencoin..."
 echo ""
 ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
@@ -42,7 +41,7 @@ echo "La última versión de raven es la $UltVersRaven"
 echo ""
 
 echo ""
-echo "Descargando el archivo comprimido de la última versión..."
+echo "Intentando descargar el archivo comprimido de la última versión..."
 echo ""
 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
@@ -52,9 +51,13 @@ if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
   apt-get -y update
   apt-get -y install wget
 fi
-echo "Intentando descargar archivo en formato zip..."
+echo ""
+echo "Probando descarga en formato zip..."
+echo ""
 wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.zip
-echo "Intentando descargar archivo en formato tar.gz..."
+echo ""
+echo "Probando descarga en formato tar.gz..."
+echo ""
 wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
 
 echo ""
