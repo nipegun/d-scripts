@@ -113,7 +113,7 @@ echo ""
   find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
   find /home/poolravencoin/Ravencoin/bin -type f -exec chmod +x {} \;
   su $UsuarioDaemon -c /home/$UsuarioDaemon/Ravencoin/bin/ravend
-  su $UsuarioDaemon -c "/home/$UsuarioDaemon/Ravencoin/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/Ravencoin/pooladdress.txt
+  #su $UsuarioDaemon -c "/home/$UsuarioDaemon/Ravencoin/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/Ravencoin/pooladdress.txt
   echo ""
   echo "La dirección de la cartera es:"
   cat /home/$UsuarioDaemon/Ravencoin/pooladdress.txt
@@ -124,5 +124,5 @@ echo ""
   echo "Conteo de bloques:"
   su $UsuarioDaemon -c "/home/$UsuarioDaemon/Ravencoin/bin/raven-cli getblockcount"
   echo ""
-
+  su $UsuarioDaemon -c '/home/$UsuarioDaemon/Ravencoin/bin/raven-cli getaddressesbyaccount ""'
    
