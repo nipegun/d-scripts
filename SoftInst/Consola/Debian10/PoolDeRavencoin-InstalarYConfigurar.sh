@@ -13,10 +13,8 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-VersPHP="7.3"
-ContraRootMySQL=root
-ContraBD="mpos"
-UsuarioDaemon="poolravencoin"
+UsuarioDaemon="pool"
+CarpetaSoft="Ravencoin"
 
 echo ""
 echo ""
@@ -106,23 +104,44 @@ echo ""
   echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.raven/raven.conf
   echo "prune=550"         >> /home/$UsuarioDaemon/.raven/raven.conf
   echo "daemon=1"          >> /home/$UsuarioDaemon/.raven/raven.conf
-  rm -rf /home/$UsuarioDaemon/Ravencoin/
-  mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioDaemon/Ravencoin/
+  rm -rf /home/$UsuarioDaemon/$CarpetaSoft/
+  mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioDaemon/$CarpetaSoft/
   chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
   find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
   find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
-  find /home/poolravencoin/Ravencoin/bin -type f -exec chmod +x {} \;
-  su $UsuarioDaemon -c /home/$UsuarioDaemon/Ravencoin/bin/ravend
-  #su $UsuarioDaemon -c "/home/$UsuarioDaemon/Ravencoin/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/Ravencoin/pooladdress.txt
+  find /home/$UsuarioDaemon/$CarpetaSoft/bin -type f -exec chmod +x {} \;
+  su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoft/bin/ravend
+  #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress.txt
   echo ""
   echo "La dirección de la cartera es:"
-  cat /home/$UsuarioDaemon/Ravencoin/pooladdress.txt
+  cat /home/$UsuarioDaemon/pooladdress.txt
   echo ""
   echo "Información de la cartera:"
-  su $UsuarioDaemon -c "/home/$UsuarioDaemon/Ravencoin/bin/raven-cli getwalletinfo"
+  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getwalletinfo"
   echo ""
   echo "Conteo de bloques:"
-  su $UsuarioDaemon -c "/home/$UsuarioDaemon/Ravencoin/bin/raven-cli getblockcount"
+  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getblockcount"
   echo ""
-  su $UsuarioDaemon -c '/home/$UsuarioDaemon/Ravencoin/bin/raven-cli getaddressesbyaccount ""'
+  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getaddressesbyaccount ''"
    
+echo ""
+echo "Instalando la pool..."
+echo ""
+  ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "git no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install git
+  fi
+  cd /root/SoftInst/
+  git clone https://github.com/notminerproduction/rvn-kawpow-pool.git
+  mv /root/SoftInst/rvn-kawpow-pool/ /home/$UsuarioDaemon/
+  chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+  find /home/$UsuarioDaemon/rvn-kawpow-pool/ -type d -exec chmod 775 {} \;
+  find /home/$UsuarioDaemon/rvn-kawpow-pool/ -type f -exec chmod 664 {} \;
+  find /home/$UsuarioDaemon/rvn-kawpow-pool/ -type f -iname "*.sh" -exec chmod +x {} \;
+  su $UsuarioDaemon -c "/home/$UsuarioDaemon/rvn-kawpow-pool/install.sh"
+
+
