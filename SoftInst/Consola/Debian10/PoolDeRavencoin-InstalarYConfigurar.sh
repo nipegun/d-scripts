@@ -52,11 +52,11 @@ if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
   apt-get -y install wget
 fi
 echo ""
-echo "Probando descarga en formato zip..."
+echo "  Pidiendo el archivo en formato zip..."
 echo ""
 wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.zip
 echo ""
-echo "Probando descarga en formato tar.gz..."
+echo "  Pidiendo el archivo en formato tar.gz..."
 echo ""
 wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
 
