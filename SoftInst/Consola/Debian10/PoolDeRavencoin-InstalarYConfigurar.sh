@@ -111,7 +111,7 @@ echo ""
   find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
   find /home/$UsuarioDaemon/$CarpetaSoft/bin -type f -exec chmod +x {} \;
   su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoft/bin/ravend
-  #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress.txt
+  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress.txt
   echo ""
   echo "La dirección de la cartera es:"
   cat /home/$UsuarioDaemon/pooladdress.txt
@@ -142,6 +142,7 @@ echo ""
   find /home/$UsuarioDaemon/rvn-kawpow-pool/ -type d -exec chmod 775 {} \;
   find /home/$UsuarioDaemon/rvn-kawpow-pool/ -type f -exec chmod 664 {} \;
   find /home/$UsuarioDaemon/rvn-kawpow-pool/ -type f -iname "*.sh" -exec chmod +x {} \;
-  su $UsuarioDaemon -c "/home/$UsuarioDaemon/rvn-kawpow-pool/install.sh"
+  su - pool
+  /home/$UsuarioDaemon/rvn-kawpow-pool/install.sh
 
 
