@@ -118,4 +118,11 @@ echo ""
   echo "La dirección de la cartera es:"
   cat /home/$UsuarioDaemon/Ravencoin/pooladdress.txt
   echo ""
+  echo "Información de la cartera:"
+  su $UsuarioDaemon -c "/home/$UsuarioDaemon/Ravencoin/bin/raven-cli getwalletinfo"
+  echo ""
+  echo "Conteo de bloques:"
+  su $UsuarioDaemon -c "/home/$UsuarioDaemon/Ravencoin/bin/raven-cli getblockcount"
+  echo ""
+
    
