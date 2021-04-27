@@ -110,11 +110,15 @@ echo ""
   find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
   find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
   find /home/$UsuarioDaemon/$CarpetaSoft/bin -type f -exec chmod +x {} \;
+  ## Denegar el acceso a la carpeta a los otros usuarios del sistema
+  # find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
+  # find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
   su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoft/bin/ravend
   su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress.txt
   echo ""
   echo "La dirección de la cartera es:"
   cat /home/$UsuarioDaemon/pooladdress.txt
+  DirCart=$(cat /home/$UsuarioDaemon/pooladdress.txt)
   echo ""
   echo "Información de la cartera:"
   su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getwalletinfo"
@@ -144,5 +148,10 @@ echo ""
   find /home/$UsuarioDaemon/rvn-kawpow-pool/ -type f -iname "*.sh" -exec chmod +x {} \;
   su - pool
   /home/$UsuarioDaemon/rvn-kawpow-pool/install.sh
-
-
+  sed -i -e 's|"stratumHost": "192.168.0.200",|"stratumHost": "localhost",|g' /home/$UsuarioDaemon/rvn-kawpow-pool/config.json
+  sed -i -e 's|"address": "RKopFydExeQXSZZiSTtg66sRAWvMzFReUj",|"address": "$DirCart",|g' /home/$UsuarioDaemon/rvn-kawpow-pool/pool_configs/ravencoin.json
+  sed -i -e 's|"donateaddress": "RKopFydExeQXSZZiSTtg66sRAWvMzFReUj",|"donateaddress": "RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy",|g' /home/$UsuarioDaemon/rvn-kawpow-pool/pool_configs/ravencoin.json
+  sed -i -e 's|RL5SUNMHmjXtN1AzCRFQrFEhjnf7QQY7Tz|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g' /home/$UsuarioDaemon/rvn-kawpow-pool/pool_configs/ravencoin.json
+  sed -i -e 's|Ta26x9axaDQWaV2bt2z8Dk3R3dN7gHw9b6|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g' /home/$UsuarioDaemon/rvn-kawpow-pool/pool_configs/ravencoin.json
+  
+  
