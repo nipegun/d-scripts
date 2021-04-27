@@ -157,6 +157,10 @@ echo ""
   find /home/$UsuarioDaemon/rvn-kawpow-pool/ -type d -exec chmod 775 {} \;
   find /home/$UsuarioDaemon/rvn-kawpow-pool/ -type f -exec chmod 664 {} \;
   find /home/$UsuarioDaemon/rvn-kawpow-pool/ -type f -iname "*.sh" -exec chmod +x {} \;
+  
+  find /home/$UsuarioDaemon/rvn-kawpow-pool/install.sh -type f -exec sed -i -e "s|sudo ||g" {} \;
+  apt-get -y install npm
+  
   su - pool
   /home/$UsuarioDaemon/rvn-kawpow-pool/install.sh
   sed -i -e 's|"stratumHost": "192.168.0.200",|"stratumHost": "localhost",|g' /home/$UsuarioDaemon/rvn-kawpow-pool/config.json
