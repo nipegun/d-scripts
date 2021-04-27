@@ -110,13 +110,8 @@ echo ""
   chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
   find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
   find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
-
-   
-#adduser pool
-#usermod -aG sudo pool
-#su - pool
-   
-   
+  find /home/poolravencoin/Ravencoin/bin -type f -exec chmod +x {} \;
+  #su $UsuarioDaemon -c /home/$UsuarioDaemon/Ravencoin/ravend
 
    # ./ravend
    # ./raven-cli getnewaddress
