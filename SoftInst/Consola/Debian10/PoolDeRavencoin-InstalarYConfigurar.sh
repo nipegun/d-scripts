@@ -114,6 +114,7 @@ echo ""
   # find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
   # find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
   su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoft/bin/ravend
+  sleep 2
   su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress.txt
   echo ""
   echo "La dirección de la cartera es:"
@@ -127,7 +128,14 @@ echo ""
   su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getblockcount"
   echo ""
   su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getaddressesbyaccount ''"
-   
+  echo ""
+  echo "Ejecuta las siguientes órdenes para obtener información del nodo ravencoin:"
+  echo ""
+  echo "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getwalletinfo"
+  echo "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getblockcount"
+  echo "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getaddressesbyaccount ''"
+  echo ""
+
 echo ""
 echo "Instalando la pool..."
 echo ""
