@@ -116,6 +116,6 @@ echo ""
   su $UsuarioDaemon -c "/home/$UsuarioDaemon/Ravencoin/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/Ravencoin/address.txt
   echo ""
   echo "La dirección de la cartera es:"
-  cat /home/$UsuarioDaemon/Ravencoin/address.txt
+  cat /home/$UsuarioDaemon/Ravencoin/pooladdress.txt
   echo ""
    
