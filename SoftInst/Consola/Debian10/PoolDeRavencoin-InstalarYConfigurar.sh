@@ -113,28 +113,31 @@ echo ""
   ## Denegar el acceso a la carpeta a los otros usuarios del sistema
   # find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
   # find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
+  echo ""
+  echo "Arrancando el daemon..."
+  echo ""
   su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoft/bin/ravend
-  sleep 2
+  sleep 3
   su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress.txt
   echo ""
   echo "La dirección de la cartera es:"
+  echo ""
   cat /home/$UsuarioDaemon/pooladdress.txt
   DirCart=$(cat /home/$UsuarioDaemon/pooladdress.txt)
   echo ""
   echo "Información de la cartera:"
+  echo ""
   su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getwalletinfo"
   echo ""
-  echo "Conteo de bloques:"
-  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getblockcount"
+  echo "Direcciones de recepción disponibles:"
   echo ""
   su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getaddressesbyaccount ''"
   echo ""
-  echo "Ejecuta las siguientes órdenes para obtener información del nodo ravencoin:"
+  echo "Conteo actual de bloques:"
   echo ""
-  echo "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getwalletinfo"
-  echo "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getblockcount"
-  echo "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getaddressesbyaccount ''"
+  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getblockcount"
   echo ""
+
 
 echo ""
 echo "Instalando la pool..."
