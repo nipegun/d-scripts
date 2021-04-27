@@ -43,6 +43,7 @@ echo ""
 echo ""
 echo "Intentando descargar el archivo comprimido de la última versión..."
 echo ""
+cd /root
 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
   echo ""
@@ -71,7 +72,7 @@ if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
   apt-get -y update
   apt-get -y install zip
 fi
-
+unzip /root/raven-$UltVersRaven-x86_64-linux-gnu.zip
 ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
   echo ""
