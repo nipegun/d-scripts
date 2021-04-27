@@ -114,6 +114,7 @@ fi
    sed -i -e 's|$config['wallet']['username'] = 'testnet';|$config['wallet']['username'] = 'testnet';|g'                         /var/www/MPOS/include/config/global.inc.php
    sed -i -e 's|$config['wallet']['password'] = 'testnet';|$config['wallet']['password'] = 'testnet';|g'                         /var/www/MPOS/include/config/global.inc.php
    sed -i -e 's|$config['gettingstarted']['stratumurl'] = 'localhost';|$config['gettingstarted']['stratumurl'] = 'localhost';|g' /var/www/MPOS/include/config/global.inc.php
+   sed -i -e 's|$config['check_valid_coinaddress'] = true;|$config['check_valid_coinaddress'] = false;|g'                        /var/www/MPOS/include/config/global.inc.php
    #sed -i -e 's|$config['SALT']||g'                                        /var/www/MPOS/include/config/global.inc.php
    #sed -i -e 's|$config['SALTY']||g'                                       /var/www/MPOS/include/config/global.inc.php
    #SALT and SALTY must be a minimum of 24 characters or you will get an error message:
@@ -127,7 +128,7 @@ fi
    apache2ctl -k start
 
 ## Base de datos
-   /root/scripts/d-scripts/MySQL-BaseDeDatos-Crear.sh mpos mpos $ContraBD
+
    # Borrar la base de datos anterior de mpos, si es que existe
    mysql -e "drop database if exists mpos"
    # Borrar el usuario mpos, si es que existe
@@ -163,7 +164,9 @@ fi
    echo "Los usuarios MySQL disponibles actualmente en el sistema son:"
    echo ""
    mysql -e "select user,host from mysql.user"
-   
+
+   # Importar la estructura de la base de datos
+   mysql -p mpos < /var/www/MPOS/sql/000_base_structure.sql
    
 ## Litecoin
    cd ~
