@@ -141,6 +141,10 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo"
           echo ""
+          echo "Direcciones de recepción disponibles:"
+          echo ""
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getaddressesbylabel ''"
+          echo ""
         ;;
 
         3)
