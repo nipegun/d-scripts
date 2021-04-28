@@ -38,7 +38,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
             2 "Instalar nodo Litecoin" on
             3 "Instalar nodo Litecoin desde código fuente" off
             4 "Instalar nodo Ravencoin" on
-            5 "Instalar nodo Ravencoin desde código fuente" off)
+            5 "Instalar nodo Ravencoin desde código fuente" off
             6 "Instalar MPOS" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
