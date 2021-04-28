@@ -338,9 +338,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Crear el sitio web en Apache
              echo "<VirtualHost *:80>"                                  > /etc/apache2/sites-available/pool.conf
              echo ""                                                   >> /etc/apache2/sites-available/pool.conf
-             echo "  #Redirect permanent / https://pool.sitioweb.com/" >> /etc/apache2/sites-available/pool.conf
+             echo "  #Redirect permanent / https://$DominioPool/"      >> /etc/apache2/sites-available/pool.conf
              echo ""                                                   >> /etc/apache2/sites-available/pool.conf
-             echo "  ServerName pool.sitioweb.com"                     >> /etc/apache2/sites-available/pool.conf
+             echo "  ServerName $DominioPool"                          >> /etc/apache2/sites-available/pool.conf
              echo "  DocumentRoot /var/www/MPOS/public"                >> /etc/apache2/sites-available/pool.conf
              echo ""                                                   >> /etc/apache2/sites-available/pool.conf
              echo '  <Directory "/var/www/MPOS/public">'               >> /etc/apache2/sites-available/pool.conf
