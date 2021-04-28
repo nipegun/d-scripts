@@ -14,7 +14,8 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 UsuarioDaemon="pooladmin"
-CarpetaSoft="Litecoin"
+CarpetaSoftLTC="Litecoin"
+CarpetaSoftRVN="Ravencoin"
 DominioPool="localhost"
 VersPHP="7.3"
 
@@ -115,21 +116,21 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.litecoin/raven.conf
           echo "prune=550"         >> /home/$UsuarioDaemon/.litecoin/raven.conf
           echo "daemon=1"          >> /home/$UsuarioDaemon/.litecoin/raven.conf
-          rm -rf /home/$UsuarioDaemon/$CarpetaSoft/
-          mv /root/SoftInst/Litecoin/litecoin-$UltVersLite/ /home/$UsuarioDaemon/$CarpetaSoft/
+          rm -rf /home/$UsuarioDaemon/$CarpetaSoftLTC/
+          mv /root/SoftInst/Litecoin/litecoin-$UltVersLite/ /home/$UsuarioDaemon/$CarpetaSoftLTC/
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
           find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
           find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
-          find /home/$UsuarioDaemon/$CarpetaSoft/bin -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/$CarpetaSoftLTC/bin -type f -exec chmod +x {} \;
           ## Denegar el acceso a la carpeta a los otros usuarios del sistema
              #find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
              #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
           echo ""
           echo "Arrancando el daemon..."
           echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoind -daemon"
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon"
           sleep 3
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoin-cli getnewaddress" > /home/$UsuarioDaemon/ltc-pooladdress.txt
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getnewaddress" > /home/$UsuarioDaemon/ltc-pooladdress.txt
           echo ""
           echo "La dirección para recibir litecoins es:"
           echo ""
@@ -138,7 +139,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "Información de la cartera:"
           echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoin-cli getwalletinfo"
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo"
           echo ""
         ;;
 
@@ -220,8 +221,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           unzip /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
           mv /root/SoftInst/Ravencoin/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Ravencoin/
           rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
-          #rm -rf /root/SoftInst/Ravencoin/linux/
-          #rm -rf /root/SoftInst/Ravencoin/__MACOSX/
+          rm -rf /root/SoftInst/Ravencoin/linux/
+          rm -rf /root/SoftInst/Ravencoin/__MACOSX/
           ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                echo ""
@@ -243,12 +244,12 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.raven/raven.conf
           echo "prune=550"         >> /home/$UsuarioDaemon/.raven/raven.conf
           echo "daemon=1"          >> /home/$UsuarioDaemon/.raven/raven.conf
-          rm -rf /home/$UsuarioDaemon/$CarpetaSoft/
-          mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioDaemon/$CarpetaSoft/
+          rm -rf /home/$UsuarioDaemon/$CarpetaSoftRVN/
+          mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioDaemon/$CarpetaSoftRVN/
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
           find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
           find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
-          find /home/$UsuarioDaemon/$CarpetaSoft/bin -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/$CarpetaSoftRVN/bin -type f -exec chmod +x {} \;
           ## Denegar el acceso a la carpeta a los otros usuarios del sistema
              #find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
              #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
@@ -256,9 +257,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "Arrancando el daemon..."
           echo ""
-          su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoft/bin/ravend
+          su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend
           sleep 3
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/rvn-pooladdress.txt
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/rvn-pooladdress.txt
           echo ""
           echo "La dirección para recibir ravencoins es:"
           echo ""
@@ -267,11 +268,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "Información de la cartera:"
           echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getwalletinfo"
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo"
           echo ""
           echo "Direcciones de recepción disponibles:"
           echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getaddressesbylabel ''"
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getaddressesbylabel ''"
           echo ""
         ;;
 
