@@ -158,8 +158,8 @@ echo ""
   find /home/$UsuarioDaemon/rvn-kawpow-pool/ -type d -exec chmod 775 {} \;
   find /home/$UsuarioDaemon/rvn-kawpow-pool/ -type f -exec chmod 664 {} \;
   find /home/$UsuarioDaemon/rvn-kawpow-pool/ -type f -iname "*.sh" -exec chmod +x {} \;
-  sed -i -e 's|"stratumHost": "192.168.0.200",|"stratumHost": "$DominioPool",|g'                                                /home/$UsuarioDaemon/rvn-kawpow-pool/config.json
-  sed -i -e 's|"address": "RKopFydExeQXSZZiSTtg66sRAWvMzFReUj",|"address": "$DirCart",|g'                                       /home/$UsuarioDaemon/rvn-kawpow-pool/pool_configs/ravencoin.json
+  sed -i -e 's|"stratumHost": "192.168.0.200",|"stratumHost": "'"$DominioPool"'",|g'                                            /home/$UsuarioDaemon/rvn-kawpow-pool/config.json
+  sed -i -e 's|"address": "RKopFydExeQXSZZiSTtg66sRAWvMzFReUj",|"address": "'"$DirCart"'",|g'                                   /home/$UsuarioDaemon/rvn-kawpow-pool/pool_configs/ravencoin.json
   sed -i -e 's|"donateaddress": "RKopFydExeQXSZZiSTtg66sRAWvMzFReUj",|"donateaddress": "RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy",|g' /home/$UsuarioDaemon/rvn-kawpow-pool/pool_configs/ravencoin.json
   sed -i -e 's|RL5SUNMHmjXtN1AzCRFQrFEhjnf7QQY7Tz|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g'                                         /home/$UsuarioDaemon/rvn-kawpow-pool/pool_configs/ravencoin.json
   sed -i -e 's|Ta26x9axaDQWaV2bt2z8Dk3R3dN7gHw9b6|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g'                                         /home/$UsuarioDaemon/rvn-kawpow-pool/pool_configs/ravencoin.json
