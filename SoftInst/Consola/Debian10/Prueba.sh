@@ -150,7 +150,12 @@ echo ""
   sed -i -e 's|Ta26x9axaDQWaV2bt2z8Dk3R3dN7gHw9b6|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g'                                         ~/rvn-kawpow-pool/pool_configs/ravencoin.json
   apt-get -y install npm
   
+  # Modificar el archivo de instalación
   find ~/rvn-kawpow-pool/install.sh -type f -exec sed -i -e "s|sudo ||g" {} \;
+  sed -i -e 's|apt upgrade -y|apt -y upgrade\napt install -y libssl-dev libboost-all-dev libminiupnpc-dev libtool autotools-dev redis-server|g'                                         ~/rvn-kawpow-pool/install.sh
+  sed -i -e 's|add-apt-repository -y ppa:chris-lea/redis-server|#add-apt-repository -y ppa:chris-lea/redis-server|g'                                                                    ~/rvn-kawpow-pool/install.sh
+  sed -i -e 's|add-apt-repository -y ppa:bitcoin/bitcoin|#add-apt-repository -y ppa:bitcoin/bitcoin|g'                                                                                  ~/rvn-kawpow-pool/install.sh
+  sed -i -e 's|apt install -y libdb4.8-dev libdb4.8++-dev libssl-dev libboost-all-dev libminiupnpc-dev libtool autotools-dev redis-server|apt install -y libdb4.8-dev libdb4.8++-dev|g' ~/rvn-kawpow-pool/install.sh
   
   ~/rvn-kawpow-pool/install.sh
   
