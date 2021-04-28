@@ -358,6 +358,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              touch /var/www/MPOS/logs/error.log
              touch /var/www/MPOS/logs/access.log
              a2ensite pool
+             a2dissite 000-default
+             a2dissite default-ssl
+             service apache2 reload
+             sleep 3
+             service apache2 restart
 
           ## Permisos
              chown -Rv www-data /var/www/MPOS/templates/compile
