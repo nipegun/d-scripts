@@ -49,17 +49,16 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         1)
           echo ""
-          echo -e "${ColorVerde}Creando el usuario para ejecutar y administrar la pool...${FinColor}"
+          echo -e "${ColorVerde}  Creando el usuario para ejecutar y administrar la pool...${FinColor}"
           echo ""
           useradd -d /home/$UsuarioDaemon/ -s /bin/bash $UsuarioDaemon
         ;;
 
         2)
           echo ""
-          echo -e "${ColorVerde}Instalando el nodo litecoin...${FinColor}"
+          echo -e "${ColorVerde}  Instalando el nodo litecoin...${FinColor}"
           echo ""
 
-          echo ""
           echo "Determinando la última versión de litecoin core..."
           echo ""
           ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
@@ -88,7 +87,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
               apt-get -y update
               apt-get -y install wget
             fi
-          echo "  Pidiendo el archivo en formato tar.gz..."
+          echo "Pidiendo el archivo en formato tar.gz..."
           echo ""
           wget https://download.litecoin.org/litecoin-$UltVersLite/linux/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
           
@@ -145,7 +144,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         3)
           echo ""
-          echo -e "${ColorVerde}Instalando el nodo litecoin desde código fuente...${FinColor}"
+          echo -e "${ColorVerde}  Instalando el nodo litecoin desde código fuente...${FinColor}"
           echo ""
           ## Si se quiere instalar litecoin compilando
           #
@@ -166,10 +165,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         4)
           echo ""
-          echo -e "${ColorVerde}Instalando el nodo ravencoin...${FinColor}"
+          echo -e "${ColorVerde}  Instalando el nodo ravencoin...${FinColor}"
           echo ""
 
-          echo ""
           echo "Determinando la última versión de ravencoin core..."
           echo ""
           ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
@@ -279,13 +277,13 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         5)
           echo ""
-          echo -e "${ColorVerde}Instalando el nodo ravencoin desde código fuente...${FinColor}"
+          echo -e "${ColorVerde}  Instalando el nodo ravencoin desde código fuente...${FinColor}"
           echo ""
         ;;
 
         6)
           echo ""
-          echo -e "${ColorVerde}Instalando la pool MPOS...${FinColor}"
+          echo -e "${ColorVerde}  Instalando la pool MPOS...${FinColor}"
           echo ""
 
           ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
