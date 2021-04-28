@@ -357,6 +357,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "</VirtualHost>"                                     >> /etc/apache2/sites-available/pool.conf
              touch /var/www/MPOS/logs/error.log
              touch /var/www/MPOS/logs/access.log
+             a2ensite pool
 
           ## Permisos
              chown -Rv www-data /var/www/MPOS/templates/compile
@@ -426,8 +427,10 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                 echo ""
                 mysql -e "select user,host from mysql.user"
 
-                ## Importar la estructura de la base de datos
-                   mysql -p mpos < /var/www/MPOS/sql/000_base_structure.sql
+                echo ""
+                echo "Importando la estructura de la base de datos..."
+                echo ""
+                mysql -p mpos < /var/www/MPOS/sql/000_base_structure.sql
         ;;
 
       esac
