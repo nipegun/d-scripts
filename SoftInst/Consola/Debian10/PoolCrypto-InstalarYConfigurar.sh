@@ -1,0 +1,420 @@
+#!/bin/bash
+
+# Pongo a disposición pública este script bajo el término de "software de dominio público".
+# Puedes hacer lo que quieras con él porque es libre de verdad; no libre con condiciones como las licencias GNU y otras patrañas similares.
+# Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
+# No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+
+#---------------------------------------------------------------------------------------
+#  Script de NiPeGun para instalar y configurar un pool de litecoin (LTC) en Debian10
+#---------------------------------------------------------------------------------------
+
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
+
+UsuarioDaemon="pooladmin"
+CarpetaSoft="Litecoin"
+DominioPool="localhost"
+VersPHP="7.3"
+
+echo ""
+echo -e "${ColorVerde}-----------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}Iniciando el script de instalación de una pool de minería de criptomonedas...${FinColor}"
+echo -e "${ColorVerde}-----------------------------------------------------------------------------${FinColor}"
+echo ""
+
+## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+   if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+     echo ""
+     echo "dialog no está instalado. Iniciando su instalación..."
+     echo ""
+     apt-get -y update
+     apt-get -y install dialog
+   fi
+
+menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
+  opciones=(1 "Crear usuario para administrar la pool" on
+            2 "Instalar nodo Litecoin" on
+            3 "Instalar nodo Litecoin desde código fuente" off
+            4 "Instalar nodo Ravencoin" on
+            5 "Instalar nodo Ravencoin desde código fuente" off)
+            6 "Instalar MPOS" off)
+  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+  clear
+
+  for choice in $choices
+    do
+      case $choice in
+
+        1)
+          echo ""
+          echo "Creando el usuario para ejecutar y administrar la pool..."
+          echo ""
+          useradd -d /home/$UsuarioDaemon/ -s /bin/bash $UsuarioDaemon
+        ;;
+
+        2)
+          echo ""
+          echo "Determinando la última versión de litecoin core..."
+          echo ""
+          ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo "curl no está instalado. Iniciando su instalación..."
+              echo ""
+              apt-get -y update
+              apt-get -y install curl
+            fi
+          UltVersLite=$(curl --silent https://litecoin.org | grep linux-gnu | grep x86_64 | grep -v in64 | cut -d '"' -f 2 | sed 2d | cut -d '-' -f 3)
+          echo ""
+          echo "La última versión de raven es la $UltVersLite"
+          
+          echo ""
+          echo "Intentando descargar el archivo comprimido de la última versión..."
+          echo ""
+          mkdir -p /root/SoftInst/Litecoin/ 2> /dev/null
+          rm -rf /root/SoftInst/Litecoin/*
+          cd /root/SoftInst/Litecoin/
+          ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo "wget no está instalado. Iniciando su instalación..."
+              echo ""
+              apt-get -y update
+              apt-get -y install wget
+            fi
+          echo "  Pidiendo el archivo en formato tar.gz..."
+          echo ""
+          wget https://download.litecoin.org/litecoin-$UltVersLite/linux/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
+          
+          echo ""
+          echo "Descomprimiendo el archivo..."
+          echo ""
+          ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo "tar no está instalado. Iniciando su instalación..."
+              echo ""
+              apt-get -y update
+              apt-get -y install tar
+            fi
+          tar -xf /root/SoftInst/Litecoin/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
+          rm -rf /root/SoftInst/Litecoin/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
+          
+          echo ""
+          echo "Creando carpetas y archivos necesarios para ese usuario..."
+          echo ""
+          mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
+          mkdir -p /home/$UsuarioDaemon/.litecoin/
+          touch /home/$UsuarioDaemon/.litecoin/raven.conf
+          echo "rpcuser=user1"      > /home/$UsuarioDaemon/.litecoin/raven.conf
+          echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.litecoin/raven.conf
+          echo "prune=550"         >> /home/$UsuarioDaemon/.litecoin/raven.conf
+          echo "daemon=1"          >> /home/$UsuarioDaemon/.litecoin/raven.conf
+          rm -rf /home/$UsuarioDaemon/$CarpetaSoft/
+          mv /root/SoftInst/Litecoin/litecoin-$UltVersLite/ /home/$UsuarioDaemon/$CarpetaSoft/
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+          find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
+          find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
+          find /home/$UsuarioDaemon/$CarpetaSoft/bin -type f -exec chmod +x {} \;
+          ## Denegar el acceso a la carpeta a los otros usuarios del sistema
+             #find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
+             #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
+          echo ""
+          echo "Arrancando el daemon..."
+          echo ""
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoind -daemon"
+          sleep 3
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoin-cli getnewaddress" > /home/$UsuarioDaemon/ltc-pooladdress.txt
+          echo ""
+          echo "La dirección de la cartera es:"
+          echo ""
+          cat /home/$UsuarioDaemon/ltc-pooladdress.txt
+          DirCart=$(cat /home/$UsuarioDaemon/ltc-pooladdress.txt)
+          echo ""
+          echo "Información de la cartera:"
+          echo ""
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoin-cli getwalletinfo"
+          echo ""
+          echo "Direcciones de recepción disponibles:"
+          echo ""
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoin-cli getaddressesbylabel ''"
+        ;;
+
+        3)
+          ## Si se quiere instalar litecoin compilando
+          #
+          #mkdir -p ~/SoftInst/ 2> /dev/null
+          #cd ~/SoftInst/
+          #rm -rf ~/SoftInst/Litecoin
+          #git clone git://github.com/litecoin-project/litecoin.git
+          #mv ~/SoftInst/litecoin/ ~/SoftInst/Litecoin/
+          #cd ~/SoftInst/Litecoin/
+          #apt-get -y install autoconf
+          #~/SoftInst/Litecoin/autogen.sh
+          #apt-get -y install libevent-dev doxygen libzmq3-dev
+          #~/SoftInst/Litecoin/configure --with-incompatible-bdb
+          #make
+          #make check
+          #make install
+        ;;
+
+        4)
+          echo ""
+          echo "Determinando la última versión de ravencoin core..."
+          echo ""
+          ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "curl no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install curl
+             fi
+          UltVersRaven=$(curl --silent https://github.com/RavenProject/Ravencoin/releases/latest | cut -d '/' -f 8 | cut -d '"' -f 1 | cut -c2-)
+          echo ""
+          echo "La última versión de raven es la $UltVersRaven"
+          echo ""
+
+          echo ""
+          echo "Intentando descargar el archivo comprimido de la última versión..."
+          echo ""
+          mkdir -p /root/SoftInst/Ravencoin/ 2> /dev/null
+          rm -rf /root/SoftInst/Ravencoin/*
+          cd /root/SoftInst/Ravencoin/
+          ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "wget no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install wget
+             fi
+          echo ""
+          echo "  Pidiendo el archivo en formato zip..."
+          echo ""
+          wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.zip
+          echo ""
+          echo "  Pidiendo el archivo en formato tar.gz..."
+          echo ""
+          wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+
+          echo ""
+          echo "Descomprimiendo el archivo..."
+          echo ""
+          ## Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "zip no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install zip
+             fi
+          unzip /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
+          mv /root/SoftInst/Ravencoin/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Ravencoin/
+          rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
+          rm -rf /root/SoftInst/Ravencoin/linux/
+          rm -rf /root/SoftInst/Ravencoin/__MACOSX/
+          ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "tar no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install tar
+             fi
+          tar -xf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+          rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+
+          echo ""
+          echo "Creando carpetas y archivos necesarios para ese usuario..."
+          echo ""
+          mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
+          mkdir -p /home/$UsuarioDaemon/.raven/
+          touch /home/$UsuarioDaemon/.raven/raven.conf
+          echo "rpcuser=user1"      > /home/$UsuarioDaemon/.raven/raven.conf
+          echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.raven/raven.conf
+          echo "prune=550"         >> /home/$UsuarioDaemon/.raven/raven.conf
+          echo "daemon=1"          >> /home/$UsuarioDaemon/.raven/raven.conf
+          rm -rf /home/$UsuarioDaemon/$CarpetaSoft/
+          mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioDaemon/$CarpetaSoft/
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+          find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
+          find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
+          find /home/$UsuarioDaemon/$CarpetaSoft/bin -type f -exec chmod +x {} \;
+          ## Denegar el acceso a la carpeta a los otros usuarios del sistema
+             #find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
+             #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
+
+          echo ""
+          echo "Arrancando el daemon..."
+          echo ""
+          su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoft/bin/ravend
+          sleep 3
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/rvn-pooladdress.txt
+          echo ""
+          echo "La dirección de la cartera es:"
+          echo ""
+          cat /home/$UsuarioDaemon/rvn-pooladdress.txt
+          DirCart=$(cat /home/$UsuarioDaemon/rvn-pooladdress.txt)
+          echo ""
+          echo "Información de la cartera:"
+          echo ""
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getwalletinfo"
+          echo ""
+          echo "Direcciones de recepción disponibles:"
+          echo ""
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getaddressesbylabel ''"
+          echo ""
+        ;;
+
+        5)
+
+        ;;
+
+        6)
+          echo ""
+          echo "Instalando la pool MPOS..."
+          echo ""
+
+          ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "tasksel no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install tasksel
+             fi
+
+          ## Instalar servidor Web
+             tasksel install web-server
+
+          ## Instalar paquetes necesarios
+             apt-get -y update
+             apt-get -y install build-essential libcurl4-openssl-dev libdb5.3-dev libdb5.3++-dev mariadb-server
+             apt-get -y install memcached zip
+             apt-get -y install php-dom php-mbstring php-memcached php-zip
+             apt-get -y install libapache2-mod-php$VersPHP
+             apt-get -y install php$VersPHP-curl php$VersPHP-mysqlnd php$VersPHP-json php$VersPHP-xml 
+
+          apache2ctl -k stop
+          cd /var/www/
+
+          ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "git no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install git
+             fi
+          git clone git://github.com/MPOS/php-mpos.git MPOS
+          cd MPOS
+          git checkout master
+          php composer.phar install
+          ## Crear el sitio web en Apache
+             echo "<VirtualHost *:80>"                                  > /etc/apache2/sites-available/pool.conf
+             echo ""                                                   >> /etc/apache2/sites-available/pool.conf
+             echo "  #Redirect permanent / https://pool.sitioweb.com/" >> /etc/apache2/sites-available/pool.conf
+             echo ""                                                   >> /etc/apache2/sites-available/pool.conf
+             echo "  ServerName pool.sitioweb.com"                     >> /etc/apache2/sites-available/pool.conf
+             echo "  DocumentRoot /var/www/MPOS/public"                >> /etc/apache2/sites-available/pool.conf
+             echo ""                                                   >> /etc/apache2/sites-available/pool.conf
+             echo '  <Directory "/var/www/MPOS/public">'               >> /etc/apache2/sites-available/pool.conf
+             echo "    Require all granted"                            >> /etc/apache2/sites-available/pool.conf
+             echo "    Options FollowSymLinks"                         >> /etc/apache2/sites-available/pool.conf
+             echo "    AllowOverride All"                              >> /etc/apache2/sites-available/pool.conf
+             echo "  </Directory>"                                     >> /etc/apache2/sites-available/pool.conf
+             echo ""                                                   >> /etc/apache2/sites-available/pool.conf
+             echo "  ServerAdmin mail@gmail.com"                       >> /etc/apache2/sites-available/pool.conf
+             echo ""                                                   >> /etc/apache2/sites-available/pool.conf
+             echo "  ErrorLog  /var/www/MPOS/logs/error.log"           >> /etc/apache2/sites-available/pool.conf
+             echo "  CustomLog /var/www/MPOS/logs/access.log combined" >> /etc/apache2/sites-available/pool.conf
+             echo ""                                                   >> /etc/apache2/sites-available/pool.conf
+             echo "</VirtualHost>"                                     >> /etc/apache2/sites-available/pool.conf
+             touch /var/www/MPOS/logs/error.log
+             touch /var/www/MPOS/logs/access.log
+
+          ## Permisos
+             chown -Rv www-data /var/www/MPOS/templates/compile
+             chown -Rv www-data /var/www/MPOS/templates/cache
+             chown -Rv www-data /var/www/MPOS/logs
+
+          ## Archivo de configuración
+             cp /var/www/MPOS/include/config/global.inc.dist.php /var/www/MPOS/include/config/global.inc.php
+             sed -i -e 's|$config['db']['host'] = 'localhost';|$config['db']['host'] = 'localhost';|g'                                     /var/www/MPOS/include/config/global.inc.php
+             sed -i -e 's|$config['db']['user'] = 'root';|$config['db']['user'] = 'root';|g'                                               /var/www/MPOS/include/config/global.inc.php
+             sed -i -e 's|$config['db']['pass'] = 'root';|$config['db']['pass'] = 'root';|g'                                               /var/www/MPOS/include/config/global.inc.php
+             sed -i -e 's|$config['db']['port'] = 3306;|$config['db']['port'] = 3306;|g'                                                   /var/www/MPOS/include/config/global.inc.php
+             sed -i -e 's|$config['db']['name'] = 'mpos';|$config['db']['name'] = 'mpos';|g'                                               /var/www/MPOS/include/config/global.inc.php
+             sed -i -e 's|$config['wallet']['type'] = 'http';|$config['wallet']['type'] = 'http';|g'                                       /var/www/MPOS/include/config/global.inc.php
+             sed -i -e 's|$config['wallet']['host'] = 'localhost:19334';|$config['wallet']['host'] = 'localhost:19334';|g'                 /var/www/MPOS/include/config/global.inc.php
+             sed -i -e 's|$config['wallet']['username'] = 'testnet';|$config['wallet']['username'] = 'testnet';|g'                         /var/www/MPOS/include/config/global.inc.php
+             sed -i -e 's|$config['wallet']['password'] = 'testnet';|$config['wallet']['password'] = 'testnet';|g'                         /var/www/MPOS/include/config/global.inc.php
+             sed -i -e 's|$config['gettingstarted']['stratumurl'] = 'localhost';|$config['gettingstarted']['stratumurl'] = 'localhost';|g' /var/www/MPOS/include/config/global.inc.php
+             sed -i -e 's|$config['check_valid_coinaddress'] = true;|$config['check_valid_coinaddress'] = false;|g'                        /var/www/MPOS/include/config/global.inc.php
+             #sed -i -e 's|$config['SALT']||g'                                        /var/www/MPOS/include/config/global.inc.php
+             #sed -i -e 's|$config['SALTY']||g'                                       /var/www/MPOS/include/config/global.inc.php
+             #SALT and SALTY must be a minimum of 24 characters or you will get an error message:
+             #'SALT or SALTY is too short, they should be more than 24 characters and changing them will require registering a
+   
+             ## Servidor Stratum
+   
+             ## Web socket
+                sed -i -e 's|from autobahn.websocket import WebSocketServerProtocol, WebSocketServerFactory|from autobahn.twisted.websocket import WebSocketServerProtocol, WebSocketServerFactory|g' /usr/local/lib/python2.7/dist-packages/stratum-0.2.13-py2.7.egg/stratum/websocket_transport.py
+                apache2ctl -k start
+
+             ## Base de datos
+
+                ## Borrar la base de datos anterior de mpos, si es que existe
+                   mysql -e "drop database if exists mpos"
+
+                ## Borrar el usuario mpos, si es que existe
+                   mysql -e "drop user if exists mpos@localhost"
+
+                echo ""
+                echo "Las bases de datos MySQL disponibles actualmente en el sistema son:"
+                echo ""
+                mysql -e "show databases"
+                echo ""
+                echo "Los usuarios MySQL disponibles actualmente en el sistema son:"
+                echo ""
+                mysql -e "select user,host from mysql.user"
+
+                echo ""
+                echo "Creando la base de datos mpos..."
+                echo ""
+                mysql -e "create database mpos"
+                echo ""
+                echo "Creando el usuario mpos@localhost..."
+                echo ""
+                mysql -e "create user mpos@localhost"
+                echo ""
+                echo "Dando permisos al usuario mpos para que administre la base de datos mpos..."
+                echo ""
+                mysql -e "grant all privileges on mpos.* to mpos@localhost identified by '$ContraBD'"
+                
+                echo ""
+                echo "Las bases de datos MySQL disponibles actualmente en el sistema son:"
+                echo ""
+                mysql -e "show databases"
+                echo ""
+                echo "Los usuarios MySQL disponibles actualmente en el sistema son:"
+                echo ""
+                mysql -e "select user,host from mysql.user"
+
+                ## Importar la estructura de la base de datos
+                   mysql -p mpos < /var/www/MPOS/sql/000_base_structure.sql
+        ;;
+
+      esac
+
+done
+
+echo ""
+echo -e "${ColorVerde}----------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}Script de instalación de una pool de minería de criptomonedas, finalzaado...${FinColor}"
+echo -e "${ColorVerde}----------------------------------------------------------------------------${FinColor}"
+echo ""
+
