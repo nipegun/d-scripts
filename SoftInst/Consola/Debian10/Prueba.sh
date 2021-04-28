@@ -107,7 +107,7 @@ echo ""
   echo ""
   ~/$CarpetaSoft/bin/ravend
   sleep 3
-  ~/$CarpetaSoft/bin/raven-cli getnewaddress > ~/$UsuarioDaemon/pooladdress.txt
+  ~/$CarpetaSoft/bin/raven-cli getnewaddress > ~/pooladdress.txt
   echo ""
   echo "La dirección de la cartera es:"
   echo ""
@@ -116,11 +116,11 @@ echo ""
   echo ""
   echo "Información de la cartera:"
   echo ""
-  ~/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getwalletinfo
+  ~/$CarpetaSoft/bin/raven-cli getwalletinfo
   echo ""
   echo "Direcciones de recepción disponibles:"
   echo ""
-  ~/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getaddressesbyaccount ""
+  ~/$CarpetaSoft/bin/raven-cli getaddressesbyaccount ""
   echo ""
   echo "Conteo actual de bloques:"
   echo ""
