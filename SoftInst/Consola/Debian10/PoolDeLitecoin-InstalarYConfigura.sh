@@ -56,24 +56,11 @@ if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
 fi
 echo "  Pidiendo el archivo en formato tar.gz..."
 echo ""
-https://download.litecoin.org/litecoin-$UltVersLite/linux/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
+wget https://download.litecoin.org/litecoin-$UltVersLite/linux/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
 
 echo ""
 echo "Descomprimiendo el archivo..."
 echo ""
-  ## Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo "zip no está instalado. Iniciando su instalación..."
-    echo ""
-    apt-get -y update
-    apt-get -y install zip
-  fi
-  unzip /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
-  mv /root/SoftInst/Ravencoin/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Ravencoin/
-  rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
-  rm -rf /root/SoftInst/Ravencoin/linux/
-  rm -rf /root/SoftInst/Ravencoin/__MACOSX/
   ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
     echo ""
@@ -82,8 +69,8 @@ echo ""
     apt-get -y update
     apt-get -y install tar
   fi
-  tar -xf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
-  rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+  tar -xf /root/SoftInst/Litecoin/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
+  rm -rf /root/SoftInst/Litecoin/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
 
 echo ""
 echo "Creando el usuario para ejecutar el demonio..."
