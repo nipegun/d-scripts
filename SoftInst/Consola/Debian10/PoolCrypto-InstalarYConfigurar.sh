@@ -285,7 +285,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "Direcciones de recepción disponibles:"
           echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getaddressesbylabel ''"
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getaddressesbyaccount ''"
           echo ""
         ;;
 
