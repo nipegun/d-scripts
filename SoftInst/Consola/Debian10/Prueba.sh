@@ -152,7 +152,6 @@ echo ""
   
   find ~/rvn-kawpow-pool/install.sh -type f -exec sed -i -e "s|sudo ||g" {} \;
   
-  ~/rvn-kawpow-pool/install.sh"
-
+  ~/rvn-kawpow-pool/install.sh
   
   
