@@ -158,5 +158,6 @@ echo ""
   sed -i -e 's|apt install -y libdb4.8-dev libdb4.8++-dev libssl-dev libboost-all-dev libminiupnpc-dev libtool autotools-dev redis-server|apt install -y libdb4.8-dev libdb4.8++-dev|g' ~/rvn-kawpow-pool/install.sh
   
   ~/rvn-kawpow-pool/install.sh
+  find ~/rvn-kawpow-pool/pool-start.sh -type f -exec sed -i -e "s|sudo ||g" {} \;
   
   
