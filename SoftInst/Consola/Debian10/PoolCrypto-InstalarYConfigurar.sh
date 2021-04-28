@@ -49,12 +49,16 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         1)
           echo ""
-          echo "Creando el usuario para ejecutar y administrar la pool..."
+          echo -e "${ColorVerde}Creando el usuario para ejecutar y administrar la pool...${FinColor}"
           echo ""
           useradd -d /home/$UsuarioDaemon/ -s /bin/bash $UsuarioDaemon
         ;;
 
         2)
+          echo ""
+          echo -e "${ColorVerde}Instalando el nodo litecoin...${FinColor}"
+          echo ""
+
           echo ""
           echo "Determinando la última versión de litecoin core..."
           echo ""
@@ -128,7 +132,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           sleep 3
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoin-cli getnewaddress" > /home/$UsuarioDaemon/ltc-pooladdress.txt
           echo ""
-          echo "La dirección de la cartera es:"
+          echo "La dirección para recibir litecoins es:"
           echo ""
           cat /home/$UsuarioDaemon/ltc-pooladdress.txt
           DirCart=$(cat /home/$UsuarioDaemon/ltc-pooladdress.txt)
@@ -137,12 +141,12 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoin-cli getwalletinfo"
           echo ""
-          echo "Direcciones de recepción disponibles:"
-          echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoin-cli getaddressesbylabel ''"
         ;;
 
         3)
+          echo ""
+          echo -e "${ColorVerde}Instalando el nodo litecoin desde código fuente...${FinColor}"
+          echo ""
           ## Si se quiere instalar litecoin compilando
           #
           #mkdir -p ~/SoftInst/ 2> /dev/null
@@ -161,6 +165,10 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         ;;
 
         4)
+          echo ""
+          echo -e "${ColorVerde}Instalando el nodo ravencoin...${FinColor}"
+          echo ""
+
           echo ""
           echo "Determinando la última versión de ravencoin core..."
           echo ""
@@ -254,7 +262,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           sleep 3
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/rvn-pooladdress.txt
           echo ""
-          echo "La dirección de la cartera es:"
+          echo "La dirección para recibir ravencoins es:"
           echo ""
           cat /home/$UsuarioDaemon/rvn-pooladdress.txt
           DirCart=$(cat /home/$UsuarioDaemon/rvn-pooladdress.txt)
@@ -270,12 +278,14 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         ;;
 
         5)
-
+          echo ""
+          echo -e "${ColorVerde}Instalando el nodo ravencoin desde código fuente...${FinColor}"
+          echo ""
         ;;
 
         6)
           echo ""
-          echo "Instalando la pool MPOS..."
+          echo -e "${ColorVerde}Instalando la pool MPOS...${FinColor}"
           echo ""
 
           ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
