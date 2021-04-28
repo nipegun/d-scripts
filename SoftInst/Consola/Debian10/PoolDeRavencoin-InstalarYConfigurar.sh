@@ -170,6 +170,11 @@ echo ""
   #find /home/$UsuarioDaemon/rvn-kawpow-pool/install.sh -type f -exec sed -i -e "s|sudo ||g" {} \;
   
   echo ""
+  echo "Cambiando la contraseña para el usuario $UsuarioDaemon..."
+  echo ""
+  passwd pool
+  
+  echo ""
   echo "Ahora tendrás que ejecutar el siguiente comando:"
   echo ""
   echo "/home/$UsuarioDaemon/rvn-kawpow-pool/install.sh"
