@@ -119,12 +119,12 @@ echo ""
   echo ""
   su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoft/bin/ravend
   sleep 3
-  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress.txt
+  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/rvn-pooladdress.txt
   echo ""
   echo "La dirección de la cartera es:"
   echo ""
-  cat /home/$UsuarioDaemon/pooladdress.txt
-  DirCart=$(cat /home/$UsuarioDaemon/pooladdress.txt)
+  cat /home/$UsuarioDaemon/rvn-pooladdress.txt
+  DirCart=$(cat /home/$UsuarioDaemon/rvn-pooladdress.txt)
   echo ""
   echo "Información de la cartera:"
   echo ""
