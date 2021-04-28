@@ -146,14 +146,14 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           cat /home/$UsuarioDaemon/ltc-pooladdress.txt
           DirCart=$(cat /home/$UsuarioDaemon/ltc-pooladdress.txt)
           echo ""
-          echo "Información de la cartera:"
-          echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo"
-          echo ""
-          echo "Direcciones de recepción disponibles:"
-          echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getaddressesbylabel ''"
-          echo ""
+          #echo "Información de la cartera:"
+          #echo ""
+          #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo"
+          #echo ""
+          #echo "Direcciones de recepción disponibles:"
+          #echo ""
+          #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getaddressesbylabel ''"
+          #echo ""
         ;;
 
         4)
@@ -279,14 +279,14 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           cat /home/$UsuarioDaemon/rvn-pooladdress.txt
           DirCart=$(cat /home/$UsuarioDaemon/rvn-pooladdress.txt)
           echo ""
-          echo "Información de la cartera:"
-          echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo"
-          echo ""
-          echo "Direcciones de recepción disponibles:"
-          echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getaddressesbyaccount ''"
-          echo ""
+          #echo "Información de la cartera:"
+          #echo ""
+          #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo"
+          #echo ""
+          #echo "Direcciones de recepción disponibles:"
+          #echo ""
+          #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getaddressesbyaccount ''"
+          #echo ""
         ;;
 
         6)
