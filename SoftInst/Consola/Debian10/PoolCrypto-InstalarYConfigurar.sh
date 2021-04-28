@@ -126,7 +126,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              #find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
              #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
           echo ""
-          echo "Arrancando el daemon..."
+          echo "Arrancando litecoind..."
           echo ""
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon"
           sleep 3
@@ -259,7 +259,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
 
           echo ""
-          echo "Arrancando el daemon..."
+          echo "Arrancando ravencoind..."
           echo ""
           su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend
           sleep 3
