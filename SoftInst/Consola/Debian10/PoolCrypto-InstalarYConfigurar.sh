@@ -62,6 +62,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           rm -rf /home/$UsuarioDaemon/.litecoin/
           rm -rf /home/$UsuarioDaemon/.raven/
+          rm -rf /var/www/MPOS/
         ;;
 
         3)
@@ -380,7 +381,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              sed -i -e 's|$config['wallet']['host'] = 'localhost:19334';|$config['wallet']['host'] = 'localhost:19334';|g'                 /var/www/MPOS/include/config/global.inc.php
              sed -i -e 's|$config['wallet']['username'] = 'testnet';|$config['wallet']['username'] = 'testnet';|g'                         /var/www/MPOS/include/config/global.inc.php
              sed -i -e 's|$config['wallet']['password'] = 'testnet';|$config['wallet']['password'] = 'testnet';|g'                         /var/www/MPOS/include/config/global.inc.php
-             sed -i -e 's|$config['gettingstarted']['stratumurl'] = 'localhost';|$config['gettingstarted']['stratumurl'] = 'localhost';|g' /var/www/MPOS/include/config/global.inc.php
+             sed -i -e 's|$config['gettingstarted']['stratumurl'] = '';|$config['gettingstarted']['stratumurl'] = 'localhost';|g'          /var/www/MPOS/include/config/global.inc.php
              sed -i -e 's|$config['check_valid_coinaddress'] = true;|$config['check_valid_coinaddress'] = false;|g'                        /var/www/MPOS/include/config/global.inc.php
              #sed -i -e 's|$config['SALT']||g'                                        /var/www/MPOS/include/config/global.inc.php
              #sed -i -e 's|$config['SALTY']||g'                                       /var/www/MPOS/include/config/global.inc.php
