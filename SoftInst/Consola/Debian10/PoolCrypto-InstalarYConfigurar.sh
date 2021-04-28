@@ -35,12 +35,13 @@ echo ""
    fi
 
 menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
-  opciones=(1 "Crear usuario para administrar la pool" on
-            2 "Instalar nodo Litecoin" on
-            3 "Instalar nodo Litecoin desde código fuente" off
-            4 "Instalar nodo Ravencoin" on
-            5 "Instalar nodo Ravencoin desde código fuente" off
-            6 "Instalar MPOS" off)
+  opciones=(1 "Crear usuario sin privilegios para ejecutar la pool (obligatorio)" on
+            2 "Borrar todas las carteras y configuraciones ya existentes" off
+            3 "Instalar nodo Litecoin" on
+            4 "Instalar nodo Litecoin desde código fuente" off
+            5 "Instalar nodo Ravencoin" on
+            6 "Instalar nodo Ravencoin desde código fuente" off
+            7 "Instalar MPOS" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -56,6 +57,14 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         ;;
 
         2)
+          echo ""
+          echo -e "${ColorVerde}  Borrando carteras y configuraciones anteriores...${FinColor}"
+          echo ""
+          rm -rf /home/$UsuarioDaemon/.litecoin/
+          rm -rf /home/$UsuarioDaemon/.raven/
+        ;;
+
+        3)
           echo ""
           echo -e "${ColorVerde}  Instalando el nodo litecoin...${FinColor}"
           echo ""
@@ -147,7 +156,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
         ;;
 
-        3)
+        4)
           echo ""
           echo -e "${ColorVerde}  Instalando el nodo litecoin desde código fuente...${FinColor}"
           echo ""
@@ -168,7 +177,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #make install
         ;;
 
-        4)
+        5)
           echo ""
           echo -e "${ColorVerde}  Instalando el nodo ravencoin...${FinColor}"
           echo ""
@@ -280,13 +289,13 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
         ;;
 
-        5)
+        6)
           echo ""
           echo -e "${ColorVerde}  Instalando el nodo ravencoin desde código fuente...${FinColor}"
           echo ""
         ;;
 
-        6)
+        7)
           echo ""
           echo -e "${ColorVerde}  Instalando la pool MPOS...${FinColor}"
           echo ""
