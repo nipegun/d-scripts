@@ -115,22 +115,22 @@ echo ""
   echo ""
   echo "Arrancando el daemon..."
   echo ""
-  su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoft/bin/ravend
+  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoind -daemon"
   sleep 3
-  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress.txt
+  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoin-cli getnewaddress" > /home/$UsuarioDaemon/ltc-pooladdress.txt
   echo ""
   echo "La dirección de la cartera es:"
   echo ""
-  cat /home/$UsuarioDaemon/pooladdress.txt
-  DirCart=$(cat /home/$UsuarioDaemon/pooladdress.txt)
+  cat /home/$UsuarioDaemon/ltc-pooladdress.txt
+  DirCart=$(cat /home/$UsuarioDaemon/ltc-pooladdress.txt)
   echo ""
   echo "Información de la cartera:"
   echo ""
-  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getwalletinfo"
+  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoin-cli getwalletinfo"
   echo ""
   echo "Direcciones de recepción disponibles:"
   echo ""
-  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/raven-cli getaddressesbyaccount ''"
+  su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoft/bin/litecoin-cli getaddressesbyaccount ''"
   echo ""
   echo "Conteo actual de bloques:"
   echo ""
