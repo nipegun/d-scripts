@@ -160,7 +160,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "Agregar litecoind a los ComandosPostArranque..."
           echo ""
-          echo 'su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon"' >> /root/scripts/ComandosPostArranque.sh
+          echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/"$CarpetaSoftLTC"/bin/litecoind -daemon'" >> /root/scripts/ComandosPostArranque.sh
 
           #echo ""
           #echo "Creando el servicio para systemd..."
@@ -324,7 +324,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "Agregar litecoind a los ComandosPostArranque..."
           echo ""
-          echo 'su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"' >> /root/scripts/ComandosPostArranque.sh
+          echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftRVN"/bin/ravend'" >> /root/scripts/ComandosPostArranque.sh
 
           #echo ""
           #echo "Creando el servicio para systemd..."
