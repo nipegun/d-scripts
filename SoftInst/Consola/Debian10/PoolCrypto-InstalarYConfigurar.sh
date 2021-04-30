@@ -169,7 +169,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "Group=$UsuarioDaemon"                                                 >> /etc/systemd/system/litecoind.service
           echo ""                                                                     >> /etc/systemd/system/litecoind.service
           echo "Type=forking"                                                         >> /etc/systemd/system/litecoind.service
-          echo "PIDFile=/home/$UsuarioDaemon/litecoin.pid.txt"                        >> /etc/systemd/system/litecoind.service
+          echo "PIDFile=/home/$UsuarioDaemon/litecoin-pid.txt"                        >> /etc/systemd/system/litecoind.service
           echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon" >> /etc/systemd/system/litecoind.service
           echo "Restart=always"                                                       >> /etc/systemd/system/litecoind.service
           echo "PrivateTmp=true"                                                      >> /etc/systemd/system/litecoind.service
@@ -179,6 +179,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "StartLimitBurst=5"                                                    >> /etc/systemd/system/litecoind.service
           echo "[Install]"                                                            >> /etc/systemd/system/litecoind.service
           echo "WantedBy=multi-user.target"                                           >> /etc/systemd/system/litecoind.service
+          touch /home/$UsuarioDaemon/litecoind-pid.txt
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/litecoind-pid.txt
           systemctl enable litecoind.service
         ;;
 
@@ -337,6 +339,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "StartLimitBurst=5"                                                 >> /etc/systemd/system/ravend.service
           echo "[Install]"                                                         >> /etc/systemd/system/ravend.service
           echo "WantedBy=multi-user.target"                                        >> /etc/systemd/system/ravend.service
+          touch /home/$UsuarioDaemon/ravend-pid.txt
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ravend-pid.txt
           systemctl enable ravend.service
         ;;
 
