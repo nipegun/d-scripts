@@ -326,7 +326,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "Group=$UsuarioDaemon"                                              >> /etc/systemd/system/ravend.service
           echo ""                                                                  >> /etc/systemd/system/ravend.service
           echo "Type=forking"                                                      >> /etc/systemd/system/ravend.service
-          echo "PIDFile=/home/$UsuarioDaemon/ravend.pid.txt"                       >> /etc/systemd/system/ravend.service
+          echo "PIDFile=/home/$UsuarioDaemon/ravend-pid.txt"                       >> /etc/systemd/system/ravend.service
           #echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend -daemon -pid=/home/$UsuarioDaemon/ravend.pid.txt -conf=/home/$UsuarioDaemon/.raven/raven.conf -datadir=/var/lib/ravend -disablewallet"
           echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend -daemon" >> /etc/systemd/system/ravend.service
           echo "Restart=always"                                                    >> /etc/systemd/system/ravend.service
