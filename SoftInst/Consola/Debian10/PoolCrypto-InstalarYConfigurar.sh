@@ -42,7 +42,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
             5 "Instalar nodo Ravencoin" on
             6 "Instalar nodo Ravencoin desde código fuente" off
             7 "Instalar MPOS" off
-            8 "Reniciar el sistema" off)
+            8 "Crear contraseña para el usuario $UsuarioDaemon" on
+            9 "Crear comandos para administrar la pool" on
+           10 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -507,10 +509,36 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         8)
           echo ""
+          echo -e "${ColorVerde}  Cambiando la contraseña del usuario $UsuarioDaemon...${FinColor}"
+          echo ""
+          paswd $UsuarioDaemon
+        ;;
+
+        9)
+          echo ""
+          echo -e "${ColorVerde}  Creando comandos para administrar la pool...${FinColor}"
+          echo ""
+          
+          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/litecoin-info-cartera.sh
+          echo ""                                                                    >> /home/$UsuarioDaemon/litecoin-info-cartera.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo" >> /home/$UsuarioDaemon/litecoin-info-cartera.sh
+          chmod +x                                                                      /home/$UsuarioDaemon/litecoin-info-cartera.sh
+          
+          echo '#!/bin/bash'                                                       > /home/$UsuarioDaemon/ravencoin-info-cartera.sh
+          echo ""                                                                 >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo" >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
+          chmod +x                                                                   /home/$UsuarioDaemon/ravencoin-info-cartera.sh
+          
+          
+        ;;
+
+        10)
+          echo ""
           echo -e "${ColorVerde}  Reiniciando el sistema...${FinColor}"
           echo ""
           shutdown -r now
         ;;
+
       esac
 
 done
