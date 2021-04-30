@@ -160,6 +160,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "Agregar litecoind a los ComandosPostArranque..."
           echo ""
+          echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind"
           echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/"$CarpetaSoftLTC"/bin/litecoind -daemon'" >> /root/scripts/ComandosPostArranque.sh
 
           #echo ""
@@ -324,6 +325,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "Agregar litecoind a los ComandosPostArranque..."
           echo ""
+          echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"
           echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftRVN"/bin/ravend'" >> /root/scripts/ComandosPostArranque.sh
 
           #echo ""
