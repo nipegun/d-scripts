@@ -160,25 +160,25 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "Creando el servicio para systemd..."
           echo ""
-          echo "[Unit]"                                                                > /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "Description=Litecoin daemon"                                          >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "After=network.target"                                                 >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo ""                                                                     >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "[Service]"                                                            >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "User=$UsuarioDaemon"                                                  >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "Group=$UsuarioDaemon"                                                 >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo ""                                                                     >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "Type=forking"                                                         >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "PIDFile=/home/$UsuarioDaemon/litecoin.pid.txt"                        >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon" >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "Restart=always"                                                       >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "PrivateTmp=true"                                                      >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "TimeoutStopSec=60s"                                                   >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "TimeoutStartSec=2s"                                                   >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "StartLimitInterval=120s"                                              >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "StartLimitBurst=5"                                                    >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "[Install]"                                                            >> /etc/systemd/system/multi-user.target.wants/litecoind.service
-          echo "WantedBy=multi-user.target"                                           >> /etc/systemd/system/multi-user.target.wants/litecoind.service
+          echo "[Unit]"                                                                > /etc/systemd/system/litecoind.service
+          echo "Description=Litecoin daemon"                                          >> /etc/systemd/system/litecoind.service
+          echo "After=network.target"                                                 >> /etc/systemd/system/litecoind.service
+          echo ""                                                                     >> /etc/systemd/system/litecoind.service
+          echo "[Service]"                                                            >> /etc/systemd/system/litecoind.service
+          echo "User=$UsuarioDaemon"                                                  >> /etc/systemd/system/litecoind.service
+          echo "Group=$UsuarioDaemon"                                                 >> /etc/systemd/system/litecoind.service
+          echo ""                                                                     >> /etc/systemd/system/litecoind.service
+          echo "Type=forking"                                                         >> /etc/systemd/system/litecoind.service
+          echo "PIDFile=/home/$UsuarioDaemon/litecoin.pid.txt"                        >> /etc/systemd/system/litecoind.service
+          echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon" >> /etc/systemd/system/litecoind.service
+          echo "Restart=always"                                                       >> /etc/systemd/system/litecoind.service
+          echo "PrivateTmp=true"                                                      >> /etc/systemd/system/litecoind.service
+          echo "TimeoutStopSec=60s"                                                   >> /etc/systemd/system/litecoind.service
+          echo "TimeoutStartSec=2s"                                                   >> /etc/systemd/system/litecoind.service
+          echo "StartLimitInterval=120s"                                              >> /etc/systemd/system/litecoind.service
+          echo "StartLimitBurst=5"                                                    >> /etc/systemd/system/litecoind.service
+          echo "[Install]"                                                            >> /etc/systemd/system/litecoind.service
+          echo "WantedBy=multi-user.target"                                           >> /etc/systemd/system/litecoind.service
           systemctl enable litecoind.service
         ;;
 
@@ -317,26 +317,26 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "Creando el servicio para systemd..."
           echo ""
-          echo "[Unit]"                                                             > /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "Description=Ravencoin daemon"                                      >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "After=network.target"                                              >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo ""                                                                  >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "[Service]"                                                         >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "User=$UsuarioDaemon"                                               >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "Group=$UsuarioDaemon"                                              >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo ""                                                                  >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "Type=forking"                                                      >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "PIDFile=/home/$UsuarioDaemon/ravend.pid.txt"                       >> /etc/systemd/system/multi-user.target.wants/ravend.service
+          echo "[Unit]"                                                             > /etc/systemd/system/ravend.service
+          echo "Description=Ravencoin daemon"                                      >> /etc/systemd/system/ravend.service
+          echo "After=network.target"                                              >> /etc/systemd/system/ravend.service
+          echo ""                                                                  >> /etc/systemd/system/ravend.service
+          echo "[Service]"                                                         >> /etc/systemd/system/ravend.service
+          echo "User=$UsuarioDaemon"                                               >> /etc/systemd/system/ravend.service
+          echo "Group=$UsuarioDaemon"                                              >> /etc/systemd/system/ravend.service
+          echo ""                                                                  >> /etc/systemd/system/ravend.service
+          echo "Type=forking"                                                      >> /etc/systemd/system/ravend.service
+          echo "PIDFile=/home/$UsuarioDaemon/ravend.pid.txt"                       >> /etc/systemd/system/ravend.service
           #echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend -daemon -pid=/home/$UsuarioDaemon/ravend.pid.txt -conf=/home/$UsuarioDaemon/.raven/raven.conf -datadir=/var/lib/ravend -disablewallet"
-          echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend -daemon" >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "Restart=always"                                                    >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "PrivateTmp=true"                                                   >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "TimeoutStopSec=60s"                                                >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "TimeoutStartSec=2s"                                                >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "StartLimitInterval=120s"                                           >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "StartLimitBurst=5"                                                 >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "[Install]"                                                         >> /etc/systemd/system/multi-user.target.wants/ravend.service
-          echo "WantedBy=multi-user.target"                                        >> /etc/systemd/system/multi-user.target.wants/ravend.service
+          echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend -daemon" >> /etc/systemd/system/ravend.service
+          echo "Restart=always"                                                    >> /etc/systemd/system/ravend.service
+          echo "PrivateTmp=true"                                                   >> /etc/systemd/system/ravend.service
+          echo "TimeoutStopSec=60s"                                                >> /etc/systemd/system/ravend.service
+          echo "TimeoutStartSec=2s"                                                >> /etc/systemd/system/ravend.service
+          echo "StartLimitInterval=120s"                                           >> /etc/systemd/system/ravend.service
+          echo "StartLimitBurst=5"                                                 >> /etc/systemd/system/ravend.service
+          echo "[Install]"                                                         >> /etc/systemd/system/ravend.service
+          echo "WantedBy=multi-user.target"                                        >> /etc/systemd/system/ravend.service
           systemctl enable ravend.service
         ;;
 
