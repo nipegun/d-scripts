@@ -169,7 +169,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "Group=$UsuarioDaemon"                                                 >> /etc/systemd/system/litecoind.service
           echo ""                                                                     >> /etc/systemd/system/litecoind.service
           echo "Type=forking"                                                         >> /etc/systemd/system/litecoind.service
-          echo "PIDFile=/home/$UsuarioDaemon/litecoin-pid.txt"                        >> /etc/systemd/system/litecoind.service
+          echo "PIDFile=/home/$UsuarioDaemon/litecoind-pid.txt"                       >> /etc/systemd/system/litecoind.service
           echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon" >> /etc/systemd/system/litecoind.service
           echo "Restart=always"                                                       >> /etc/systemd/system/litecoind.service
           echo "PrivateTmp=true"                                                      >> /etc/systemd/system/litecoind.service
