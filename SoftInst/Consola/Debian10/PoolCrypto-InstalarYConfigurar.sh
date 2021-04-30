@@ -518,12 +518,20 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}  Creando comandos para administrar la pool...${FinColor}"
           echo ""
-          
+
+          ## Comandos para litecoin
+
+          chmod +x /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/*
+
           echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/litecoin-info-cartera.sh
           echo ""                                                                    >> /home/$UsuarioDaemon/litecoin-info-cartera.sh
           echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo" >> /home/$UsuarioDaemon/litecoin-info-cartera.sh
           chmod +x                                                                      /home/$UsuarioDaemon/litecoin-info-cartera.sh
-          
+
+          ## Comandos para ravencoin
+
+          chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/*
+
           echo '#!/bin/bash'                                                       > /home/$UsuarioDaemon/ravencoin-info-cartera.sh
           echo ""                                                                 >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
           echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo" >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
