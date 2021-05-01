@@ -326,7 +326,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           rm -rf /root/SoftInst/Monerocoin/*
           mkdir -p /home/$UsuarioDaemon/.config/monero-project/ 2> /dev/null
           echo "[General]"                                       > /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "account_name=root"                              >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "account_name=$UsuarioDaemon"                    >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
           echo "askPasswordBeforeSending=true"                  >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
           echo "autosave=true"                                  >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
           echo "autosaveMinutes=10"                             >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
