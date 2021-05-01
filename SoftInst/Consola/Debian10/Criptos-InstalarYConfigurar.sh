@@ -355,6 +355,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           apt-get -y install libxcb-render-util0
           apt-get -y install libxcb-xkb1
           apt-get -y install libxkbcommon-x11-0
+          
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/$CarpetaSoftXMR/ -R
         ;;
 
         7)
@@ -526,6 +528,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""                                                                    >> /home/$UsuarioDaemon/litecoin-info-cartera.sh
           echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo" >> /home/$UsuarioDaemon/litecoin-info-cartera.sh
           chmod +x                                                                      /home/$UsuarioDaemon/litecoin-info-cartera.sh
+          chown $UsuarioDaemon:$UsuarioDaemon                                           /home/$UsuarioDaemon/litecoin-info-cartera.sh
 
           ## Comandos para ravencoin
 
@@ -535,6 +538,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""                                                                 >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
           echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo" >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
           chmod +x                                                                   /home/$UsuarioDaemon/ravencoin-info-cartera.sh
+          $UsuarioDaemon:$UsuarioDaemon                                              /home/$UsuarioDaemon/ravencoin-info-cartera.sh
 
         ;;
 
