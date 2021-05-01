@@ -47,9 +47,10 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
             8 "Instalar la pool MPOS" off
             9 "Crear contraseña para el usuario $UsuarioDaemon" on
            10 "Crear comandos para administrar la pool" on
-           11 "Activar auto-ejecución de carteras" off
-           12 "Reparar permisos" on
-           13 "Reniciar el sistema" off)
+           11 "Activar auto-ejecución de carteras cli" on
+           12 "Activar auto-ejecución de carteras gui" on
+           13 "Reparar permisos" on
+           14 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -569,7 +570,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         11)
           echo ""
-          echo -e "${ColorVerde}  Activando auto-ejecución de carteras...${FinColor}"
+          echo -e "${ColorVerde}  Activando auto-ejecución de carteras cli...${FinColor}"
           echo ""
 
           ## Autoejecución de Litecoin
@@ -612,17 +613,6 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"
              echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftRVN"/bin/ravend'" >> /root/scripts/ComandosPostArranque.sh
 
-             echo ""
-             echo "Creando el archivo de autoejecución de raven-qt para escritorio..."
-             echo ""
-             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-             echo "[Desktop Entry]"                                                                     > /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Type=Application"                                                                   >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Name=Raven"                                                                         >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Exec=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-qt -min -testnet=0 -regtest=0"  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Terminal=false"                                                                     >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Hidden=false"                                                                       >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-
              #echo ""
              #echo "Creando el servicio para systemd..."
              #echo ""
@@ -652,7 +642,37 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Autoejecución de monero
              echo ""
-             echo "Creando el archivo de autoejecución..."
+             echo "Agregar monerod a los ComandosPostArranque..."
+             echo ""
+             echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monerod"
+             echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftXMR"/bin/monerod --detach'" >> /root/scripts/ComandosPostArranque.sh
+
+          ## Reparación de permisos
+             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+        ;;
+
+        12)
+          echo ""
+          echo -e "${ColorVerde}  Activando auto-ejecución de carteras gui...${FinColor}"
+          echo ""
+
+          ## Autoejecución de Litecoin
+
+          ## Autoejecución de Ravencoin
+             echo ""
+             echo "Creando el archivo de autoejecución de raven-qt para escritorio..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                                                     > /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Type=Application"                                                                   >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Name=Raven"                                                                         >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Exec=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-qt -min -testnet=0 -regtest=0"  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Terminal=false"                                                                     >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Hidden=false"                                                                       >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+
+          ## Autoejecución de monero
+             echo ""
+             echo "Creando el archivo de autoejecución de monero-wallet-gui para el escritorio..."
              echo ""
              mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
              echo "[Desktop Entry]"                                                 > /home/$UsuarioDaemon/.config/autostart/monero.desktop
@@ -663,10 +683,10 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "Hidden=false"                                                   >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
 
           ## Reparación de permisos
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
-        12)
+        13)
           echo ""
           echo -e "${ColorVerde}  Reparando permisos...${FinColor}"
           echo ""
@@ -680,7 +700,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           find /home/$UsuarioDaemon/ -type f -iname "*.sh" -exec chmod +x {} \;
         ;;
 
-        13)
+        14)
           echo ""
           echo -e "${ColorVerde}  Reiniciando el sistema...${FinColor}"
           echo ""
