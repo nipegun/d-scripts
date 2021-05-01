@@ -319,8 +319,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              fi
           mkdir -p /root/SoftInst/Monerocoin/ 2> /dev/null
           rm -rf /root/SoftInst/Monerocoin/*
-          #wget https://downloads.getmonero.org/gui/linux64 -O /root/SoftInst/Monerocoin/monero.tar.bz2
-          wget https://downloads.getmonero.org/cli/linux64 -O /root/SoftInst/Monerocoin/monero.tar.bz2
+          wget https://downloads.getmonero.org/gui/linux64 -O /root/SoftInst/Monerocoin/monero.tar.bz2
+          #wget https://downloads.getmonero.org/cli/linux64 -O /root/SoftInst/Monerocoin/monero.tar.bz2
 
           echo ""
           echo "Descomprimiendo el archivo..."
