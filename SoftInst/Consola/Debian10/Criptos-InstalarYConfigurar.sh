@@ -37,14 +37,17 @@ echo ""
 menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
   opciones=(1 "Crear usuario sin privilegios para ejecutar la pool (obligatorio)" on
             2 "Borrar todas las carteras y configuraciones ya existentes" off
-            3 "Instalar nodo Litecoin" on
-            4 "Instalar nodo Litecoin desde código fuente" off
-            5 "Instalar nodo Ravencoin" on
-            6 "Instalar nodo Ravencoin desde código fuente" off
-            7 "Instalar MPOS" off
-            8 "Crear contraseña para el usuario $UsuarioDaemon" on
-            9 "Crear comandos para administrar la pool" on
-           10 "Reniciar el sistema" off)
+            3 "Instalar cartera de Litecoin" on
+            4 "Instalar cartera de Litecoin desde código fuente" off
+            5 "Instalar cartera de Ravencoin" on
+            6 "Instalar cartera de Ravencoin desde código fuente" off
+            7 "Instalar cartera de Argentum" on
+            8 "Instalar cartera de Argentum desde código fuente" off
+            9 "Instalar MPOS" off
+           10 "Crear contraseña para el usuario $UsuarioDaemon" on
+           11 "Crear comandos para administrar la pool" on
+           12 "Activar auto-ejecución de carteras" on
+           13 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -65,6 +68,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           rm -rf /home/$UsuarioDaemon/.litecoin/
           rm -rf /home/$UsuarioDaemon/.raven/
+          rm -rf /home/$UsuarioDaemon/.argentum/
           rm -rf /var/www/MPOS/
         ;;
 
@@ -158,43 +162,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #echo ""
           #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getaddressesbylabel ''"
           #echo ""
-
-          echo ""
-          echo "Agregar litecoind a los ComandosPostArranque..."
-          echo ""
-          echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind"
-          echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/"$CarpetaSoftLTC"/bin/litecoind -daemon'" >> /root/scripts/ComandosPostArranque.sh
-
-          #echo ""
-          #echo "Creando el servicio para systemd..."
-          #echo ""
-          #echo "[Unit]"                                                                > /etc/systemd/system/litecoind.service
-          #echo "Description=Litecoin daemon"                                          >> /etc/systemd/system/litecoind.service
-          #echo "After=network.target"                                                 >> /etc/systemd/system/litecoind.service
-          #echo ""                                                                     >> /etc/systemd/system/litecoind.service
-          #echo "[Service]"                                                            >> /etc/systemd/system/litecoind.service
-          #echo "User=$UsuarioDaemon"                                                  >> /etc/systemd/system/litecoind.service
-          #echo "Group=$UsuarioDaemon"                                                 >> /etc/systemd/system/litecoind.service
-          #echo ""                                                                     >> /etc/systemd/system/litecoind.service
-          #echo "Type=forking"                                                         >> /etc/systemd/system/litecoind.service
-          #echo "PIDFile=/home/$UsuarioDaemon/litecoind-pid.txt"                       >> /etc/systemd/system/litecoind.service
-          #echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon" >> /etc/systemd/system/litecoind.service
-          #echo "Restart=always"                                                       >> /etc/systemd/system/litecoind.service
-          #echo "PrivateTmp=true"                                                      >> /etc/systemd/system/litecoind.service
-          #echo "TimeoutStopSec=60s"                                                   >> /etc/systemd/system/litecoind.service
-          #echo "TimeoutStartSec=2s"                                                   >> /etc/systemd/system/litecoind.service
-          #echo "StartLimitInterval=120s"                                              >> /etc/systemd/system/litecoind.service
-          #echo "StartLimitBurst=5"                                                    >> /etc/systemd/system/litecoind.service
-          #echo "[Install]"                                                            >> /etc/systemd/system/litecoind.service
-          #echo "WantedBy=multi-user.target"                                           >> /etc/systemd/system/litecoind.service
-          #touch /home/$UsuarioDaemon/litecoind-pid.txt
-          #chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/litecoind-pid.txt
-          #systemctl enable litecoind.service
         ;;
 
         4)
           echo ""
-          echo -e "${ColorVerde}  Instalando el nodo litecoin desde código fuente...${FinColor}"
+          echo -e "${ColorVerde}  Instalando la cartera de litecoin desde código fuente...${FinColor}"
           echo ""
           ## Si se quiere instalar litecoin compilando
           #
@@ -215,7 +187,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         5)
           echo ""
-          echo -e "${ColorVerde}  Instalando el nodo ravencoin...${FinColor}"
+          echo -e "${ColorVerde}  Instalando la cartera de ravencoin...${FinColor}"
           echo ""
 
           echo "Determinando la última versión de ravencoin core..."
@@ -323,48 +295,27 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #echo ""
           #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getaddressesbyaccount ''"
           #echo ""
-
-          echo ""
-          echo "Agregar litecoind a los ComandosPostArranque..."
-          echo ""
-          echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"
-          echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftRVN"/bin/ravend'" >> /root/scripts/ComandosPostArranque.sh
-
-          #echo ""
-          #echo "Creando el servicio para systemd..."
-          #echo ""
-          #echo "[Unit]"                                                             > /etc/systemd/system/ravend.service
-          #echo "Description=Ravencoin daemon"                                      >> /etc/systemd/system/ravend.service
-          #echo "After=network.target"                                              >> /etc/systemd/system/ravend.service
-          #echo ""                                                                  >> /etc/systemd/system/ravend.service
-          #echo "[Service]"                                                         >> /etc/systemd/system/ravend.service
-          #echo "User=$UsuarioDaemon"                                               >> /etc/systemd/system/ravend.service
-          #echo "Group=$UsuarioDaemon"                                              >> /etc/systemd/system/ravend.service
-          #echo ""                                                                  >> /etc/systemd/system/ravend.service
-          #echo "Type=forking"                                                      >> /etc/systemd/system/ravend.service
-          #echo "PIDFile=/home/$UsuarioDaemon/ravend-pid.txt"                       >> /etc/systemd/system/ravend.service
-          #echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend -daemon -pid=/home/$UsuarioDaemon/ravend.pid.txt -conf=/home/$UsuarioDaemon/.raven/raven.conf -datadir=/var/lib/ravend -disablewallet"
-          #echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend -daemon" >> /etc/systemd/system/ravend.service
-          #echo "Restart=always"                                                    >> /etc/systemd/system/ravend.service
-          #echo "PrivateTmp=true"                                                   >> /etc/systemd/system/ravend.service
-          #echo "TimeoutStopSec=60s"                                                >> /etc/systemd/system/ravend.service
-          #echo "TimeoutStartSec=2s"                                                >> /etc/systemd/system/ravend.service
-          #echo "StartLimitInterval=120s"                                           >> /etc/systemd/system/ravend.service
-          #echo "StartLimitBurst=5"                                                 >> /etc/systemd/system/ravend.service
-          #echo "[Install]"                                                         >> /etc/systemd/system/ravend.service
-          #echo "WantedBy=multi-user.target"                                        >> /etc/systemd/system/ravend.service
-          #touch /home/$UsuarioDaemon/ravend-pid.txt
-          #chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ravend-pid.txt
-          #systemctl enable ravend.service
         ;;
 
         6)
           echo ""
-          echo -e "${ColorVerde}  Instalando el nodo ravencoin desde código fuente...${FinColor}"
+          echo -e "${ColorVerde}  Instalando la cartera de ravencoin desde código fuente...${FinColor}"
           echo ""
         ;;
 
         7)
+          echo ""
+          echo -e "${ColorVerde}  Instalando la cartera de argentum...${FinColor}"
+          echo ""
+        ;;
+
+        8)
+          echo ""
+          echo -e "${ColorVerde}  Instalando la cartera de argentum desde código fuente...${FinColor}"
+          echo ""
+        ;;
+
+        9)
           echo ""
           echo -e "${ColorVerde}  Instalando la pool MPOS...${FinColor}"
           echo ""
@@ -507,14 +458,14 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                 mysql -p mpos < /var/www/MPOS/sql/000_base_structure.sql
         ;;
 
-        8)
+        10)
           echo ""
           echo -e "${ColorVerde}  Cambiando la contraseña del usuario $UsuarioDaemon...${FinColor}"
           echo ""
           paswd $UsuarioDaemon
         ;;
 
-        9)
+        11)
           echo ""
           echo -e "${ColorVerde}  Creando comandos para administrar la pool...${FinColor}"
           echo ""
@@ -536,11 +487,94 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""                                                                 >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
           echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo" >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
           chmod +x                                                                   /home/$UsuarioDaemon/ravencoin-info-cartera.sh
-          
-          
+
         ;;
 
-        10)
+        12)
+          echo ""
+          echo -e "${ColorVerde}  Activando auto-ejecución de carteras...${FinColor}"
+          echo ""
+
+          ## Autoejecución de Litecoin
+             echo ""
+             echo "Agregar litecoind a los ComandosPostArranque..."
+             echo ""
+             echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind"
+             echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/"$CarpetaSoftLTC"/bin/litecoind -daemon'" >> /root/scripts/ComandosPostArranque.sh
+
+             #echo ""
+             #echo "Creando el servicio para systemd..."
+             #echo ""
+             #echo "[Unit]"                                                                > /etc/systemd/system/litecoind.service
+             #echo "Description=Litecoin daemon"                                          >> /etc/systemd/system/litecoind.service
+             #echo "After=network.target"                                                 >> /etc/systemd/system/litecoind.service
+             #echo ""                                                                     >> /etc/systemd/system/litecoind.service
+             #echo "[Service]"                                                            >> /etc/systemd/system/litecoind.service
+             #echo "User=$UsuarioDaemon"                                                  >> /etc/systemd/system/litecoind.service
+             #echo "Group=$UsuarioDaemon"                                                 >> /etc/systemd/system/litecoind.service
+             #echo ""                                                                     >> /etc/systemd/system/litecoind.service
+             #echo "Type=forking"                                                         >> /etc/systemd/system/litecoind.service
+             #echo "PIDFile=/home/$UsuarioDaemon/litecoind-pid.txt"                       >> /etc/systemd/system/litecoind.service
+             #echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon" >> /etc/systemd/system/litecoind.service
+             #echo "Restart=always"                                                       >> /etc/systemd/system/litecoind.service
+             #echo "PrivateTmp=true"                                                      >> /etc/systemd/system/litecoind.service
+             #echo "TimeoutStopSec=60s"                                                   >> /etc/systemd/system/litecoind.service
+             #echo "TimeoutStartSec=2s"                                                   >> /etc/systemd/system/litecoind.service
+             #echo "StartLimitInterval=120s"                                              >> /etc/systemd/system/litecoind.service
+             #echo "StartLimitBurst=5"                                                    >> /etc/systemd/system/litecoind.service
+             #echo "[Install]"                                                            >> /etc/systemd/system/litecoind.service
+             #echo "WantedBy=multi-user.target"                                           >> /etc/systemd/system/litecoind.service
+             #touch /home/$UsuarioDaemon/litecoind-pid.txt
+             #chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/litecoind-pid.txt
+             #systemctl enable litecoind.service
+
+          ## Autoejecución de Ravencoin
+             echo ""
+             echo "Agregar ravend a los ComandosPostArranque..."
+             echo ""
+             echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"
+             echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftRVN"/bin/ravend'" >> /root/scripts/ComandosPostArranque.sh
+
+             echo ""
+             echo "Creando el archivo de autoejecución de raven-qt para escritorio..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                                                     > /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Type=Application"                                                                   >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Name=Raven"                                                                         >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Exec=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-qt -min -testnet=0 -regtest=0"  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Terminal=false"                                                                     >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Hidden=false"                                                                       >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+
+             #echo ""
+             #echo "Creando el servicio para systemd..."
+             #echo ""
+             #echo "[Unit]"                                                             > /etc/systemd/system/ravend.service
+             #echo "Description=Ravencoin daemon"                                      >> /etc/systemd/system/ravend.service
+             #echo "After=network.target"                                              >> /etc/systemd/system/ravend.service
+             #echo ""                                                                  >> /etc/systemd/system/ravend.service
+             #echo "[Service]"                                                         >> /etc/systemd/system/ravend.service
+             #echo "User=$UsuarioDaemon"                                               >> /etc/systemd/system/ravend.service
+             #echo "Group=$UsuarioDaemon"                                              >> /etc/systemd/system/ravend.service
+             #echo ""                                                                  >> /etc/systemd/system/ravend.service
+             #echo "Type=forking"                                                      >> /etc/systemd/system/ravend.service
+             #echo "PIDFile=/home/$UsuarioDaemon/ravend-pid.txt"                       >> /etc/systemd/system/ravend.service
+             #echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend -daemon -pid=/home/$UsuarioDaemon/ravend.pid.txt -conf=/home/$UsuarioDaemon/.raven/raven.conf -datadir=/var/lib/ravend -disablewallet"
+             #echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend -daemon" >> /etc/systemd/system/ravend.service
+             #echo "Restart=always"                                                    >> /etc/systemd/system/ravend.service
+             #echo "PrivateTmp=true"                                                   >> /etc/systemd/system/ravend.service
+             #echo "TimeoutStopSec=60s"                                                >> /etc/systemd/system/ravend.service
+             #echo "TimeoutStartSec=2s"                                                >> /etc/systemd/system/ravend.service
+             #echo "StartLimitInterval=120s"                                           >> /etc/systemd/system/ravend.service
+             #echo "StartLimitBurst=5"                                                 >> /etc/systemd/system/ravend.service
+             #echo "[Install]"                                                         >> /etc/systemd/system/ravend.service
+             #echo "WantedBy=multi-user.target"                                        >> /etc/systemd/system/ravend.service
+             #touch /home/$UsuarioDaemon/ravend-pid.txt
+             #chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ravend-pid.txt
+             #systemctl enable ravend.service
+        ;;
+
+        13)
           echo ""
           echo -e "${ColorVerde}  Reiniciando el sistema...${FinColor}"
           echo ""
@@ -555,5 +589,25 @@ echo ""
 echo -e "${ColorVerde}--------------------------------------------------------------------------${FinColor}"
 echo -e "${ColorVerde}Script de instalación de una pool de minería de criptomonedas, finalzaado.${FinColor}"
 echo -e "${ColorVerde}--------------------------------------------------------------------------${FinColor}"
+echo ""
+
+echo "RAVEN:"
+echo "Recuerda editar el cortafuegos del ordenador para que acepte conexiones TCP en el puerto 8767."
+echo "Si has instalado RavenCore en una MV de Proxmox agrega una regla a su cortauegos indicando:"
+echo ""
+echo "Dirección: out"
+echo "Acción: ACCEPT"
+echo "Protocolo: tcp"
+echo "Puerto destino: 8767"
+echo ""
+
+echo "MONERO:"
+echo "Recuerda editar el cortafuegos del ordenador para que acepte conexiones TCP en el puerto 18080."
+echo "Si has instalado Monero en una MV de Proxmox agrega una regla a su cortauegos indicando:"
+echo ""
+echo "Dirección: out"
+echo "Acción: ACCEPT"
+echo "Protocolo: tcp"
+echo "Puerto destino: 18080"
 echo ""
 
