@@ -62,6 +62,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}  Creando el usuario para ejecutar y administrar la pool...${FinColor}"
           echo ""
           useradd -d /home/$UsuarioDaemon/ -s /bin/bash $UsuarioDaemon
+
+          ## Reparación de permisos
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         2)
@@ -72,6 +75,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           rm -rf /home/$UsuarioDaemon/.raven/
           rm -rf /home/$UsuarioDaemon/.argentum/
           rm -rf /var/www/MPOS/
+
+          ## Reparación de permisos
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         3)
@@ -165,6 +171,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #echo ""
           #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getaddressesbylabel ''"
           #echo ""
+
+          ## Reparación de permisos
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         4)
@@ -278,12 +287,18 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #echo ""
           #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getaddressesbyaccount ''"
           #echo ""
+
+          ## Reparación de permisos
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         5)
           echo ""
           echo -e "${ColorVerde}  Instalando la cartera de argentum...${FinColor}"
           echo ""
+
+          ## Reparación de permisos
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         6)
@@ -357,14 +372,18 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           apt-get -y install libxcb-render-util0
           apt-get -y install libxcb-xkb1
           apt-get -y install libxkbcommon-x11-0
-          
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/$CarpetaSoftXMR/ -R
+
+          ## Reparación de permisos
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         7)
           echo ""
           echo -e "${ColorVerde}  Instalando la cartera de chia...${FinColor}"
           echo ""
+
+          ## Reparación de permisos
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         8)
@@ -508,6 +527,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                 echo "Importando la estructura de la base de datos..."
                 echo ""
                 mysql -p mpos < /var/www/MPOS/sql/000_base_structure.sql
+
+          ## Reparación de permisos
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
          9)
@@ -530,7 +552,6 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""                                                                    >> /home/$UsuarioDaemon/litecoin-info-cartera.sh
           echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo" >> /home/$UsuarioDaemon/litecoin-info-cartera.sh
           chmod +x                                                                      /home/$UsuarioDaemon/litecoin-info-cartera.sh
-          chown $UsuarioDaemon:$UsuarioDaemon                                           /home/$UsuarioDaemon/litecoin-info-cartera.sh
 
           ## Comandos para ravencoin
 
@@ -540,8 +561,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""                                                                 >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
           echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo" >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
           chmod +x                                                                   /home/$UsuarioDaemon/ravencoin-info-cartera.sh
-          chown $UsuarioDaemon:$UsuarioDaemon                                        /home/$UsuarioDaemon/ravencoin-info-cartera.sh
-
+          
+          ## Reparación de permisos
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         11)
@@ -638,6 +660,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "Exec=/home/$UsuarioDaemon/Monerocoin/bin/monero-wallet-gui %u"  >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
              echo "Terminal=false"                                                 >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
              echo "Hidden=false"                                                   >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+
+          ## Reparación de permisos
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         12)
