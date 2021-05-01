@@ -14,8 +14,10 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 UsuarioDaemon="pooladmin"
-CarpetaSoftLTC="Litecoin"
-CarpetaSoftRVN="Ravencoin"
+CarpetaSoftLTC="LiteCoin"
+CarpetaSoftRVN="RavenCoin"
+CarpetaSoftARG="ArgentumCoin"
+CarpetaSoftXMR="MoneroCoin"
 DominioPool="localhost"
 VersPHP="7.3"
 
@@ -319,8 +321,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "Preparando la carpeta final..."
           echo ""
-          mkdir -p /home/$UsuarioDaemon/Monerocoin/bin/ 2> /dev/null
-          find /root/SoftInst/Monerocoin/ -type d -name monero* -exec cp -r {}/. /home/$UsuarioDaemon/Monerocoin/bin/ \;
+          mkdir -p /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/ 2> /dev/null
+          find /root/SoftInst/Monerocoin/ -type d -name monero* -exec cp -r {}/. /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/ \;
           rm -rf /root/SoftInst/Monerocoin/*
           mkdir -p /home/$UsuarioDaemon/.config/monero-project/ 2> /dev/null
           echo "[General]"                                       > /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
@@ -641,6 +643,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
           find /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/ -type f -exec chmod +x {} \;
           find /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/$CarpetaSoftARG/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/ -type f -exec chmod +x {} \;
         ;;
 
         13)
