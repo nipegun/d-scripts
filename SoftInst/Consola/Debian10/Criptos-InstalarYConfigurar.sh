@@ -44,7 +44,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
             5 "Instalar cartera de Argentum" off
             6 "Instalar cartera de Monero" off
             7 "Instalar cartera de Chia" off
-            8 "Instalar la pool MPOS" off
+            8 "Instalar la pool php-mpos" off
             9 "Crear contraseña para el usuario $UsuarioDaemon" on
            10 "Crear comandos para administrar las carteras" on
            11 "Activar auto-ejecución de carteras cli" on
