@@ -45,8 +45,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
             8 "Instalar la pool MPOS" off
             9 "Crear contraseña para el usuario $UsuarioDaemon" on
            10 "Crear comandos para administrar la pool" on
-           11 "Activar auto-ejecución de carteras" on
-           12 "Reniciar el sistema" off)
+           11 "Activar auto-ejecución de carteras" off
+           12 "Reparar permisos" on
+           13 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -315,19 +316,6 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           tar xjfv /root/SoftInst/Monerocoin/monero.tar.bz2 -C /root/SoftInst/Monerocoin/
           rm -rf /root/SoftInst/Monerocoin/monero.tar.bz2
 
-echo ""
-echo "Creando copia de seguridad de archivos anteriores..."
-echo ""
-mkdir -p /root/CopSegMonero/.config/ 2> /dev/null
-# Copia de seguridad si has elegido una cartera portable
-mv /root/monero-storage/                 /root/CopSegMonero/
-# Copia de seguridad de los archivos típicos de una instalación normal
-mv /root/.config/monero-project/         /root/CopSegMonero/.config/
-mv /root/Monero/                         /root/CopSegMonero/
-mv /root/.bitmonero/                     /root/CopSegMonero/
-# Copia de seguridad de las ubicaciones personalizadas
-mv /root/Cryptos/Monero/Datos/ /root/CopSegMonero/
-
           echo ""
           echo "Preparando la carpeta final..."
           echo ""
@@ -335,25 +323,25 @@ mv /root/Cryptos/Monero/Datos/ /root/CopSegMonero/
           find /root/SoftInst/Monerocoin/ -type d -name monero* -exec cp -r {}/. /home/$UsuarioDaemon/Monerocoin/bin/ \;
           rm -rf /root/SoftInst/Monerocoin/*
           mkdir -p /home/$UsuarioDaemon/.config/monero-project/ 2> /dev/null
-          echo "[General]"                                     > /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "account_name=root"                            >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "askPasswordBeforeSending=true"                >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "autosave=true"                                >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "autosaveMinutes=10"                           >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "blackTheme=true"                              >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "blockchainDataDir=/root/Cryptos/Monero/Datos" >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "checkForUpdates=true"                         >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "customDecorations=true"                       >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "fiatPriceEnabled=true"                        >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "fiatPriceProvider=kraken"                     >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "language=Espa\xf1ol"                          >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "language_wallet=Espa\xf1ol"                   >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "locale=es_ES"                                 >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "lockOnUserInActivity=true"                    >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "lockOnUserInActivityInterval=1"               >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "transferShowAdvanced=true"                    >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "useRemoteNode=false"                          >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "walletMode=2"                                 >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "[General]"                                       > /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "account_name=root"                              >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "askPasswordBeforeSending=true"                  >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "autosave=true"                                  >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "autosaveMinutes=10"                             >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "blackTheme=true"                                >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "blockchainDataDir=/home/$UsuarioDaemon/.monero" >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "checkForUpdates=true"                           >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "customDecorations=true"                         >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "fiatPriceEnabled=true"                          >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "fiatPriceProvider=kraken"                       >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "language=Espa\xf1ol"                            >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "language_wallet=Espa\xf1ol"                     >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "locale=es_ES"                                   >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "lockOnUserInActivity=true"                      >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "lockOnUserInActivityInterval=1"                 >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "transferShowAdvanced=true"                      >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "useRemoteNode=false"                            >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          echo "walletMode=2"                                   >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
 
           echo ""
           echo "Instalando paquetes necesarios para ejecutar la cartera..."
@@ -516,14 +504,14 @@ mv /root/Cryptos/Monero/Datos/ /root/CopSegMonero/
                 mysql -p mpos < /var/www/MPOS/sql/000_base_structure.sql
         ;;
 
-        10)
+         9)
           echo ""
           echo -e "${ColorVerde}  Cambiando la contraseña del usuario $UsuarioDaemon...${FinColor}"
           echo ""
           paswd $UsuarioDaemon
         ;;
 
-        11)
+        10)
           echo ""
           echo -e "${ColorVerde}  Creando comandos para administrar la pool...${FinColor}"
           echo ""
@@ -548,7 +536,7 @@ mv /root/Cryptos/Monero/Datos/ /root/CopSegMonero/
 
         ;;
 
-        12)
+        11)
           echo ""
           echo -e "${ColorVerde}  Activando auto-ejecución de carteras...${FinColor}"
           echo ""
@@ -632,30 +620,30 @@ mv /root/Cryptos/Monero/Datos/ /root/CopSegMonero/
              #systemctl enable ravend.service
 
           ## Autoejecución de monero
-          echo ""
-          echo "Creando el archivo de autoejecución..."
-          echo ""
-          /home/$UsuarioDaemon/.config/autostart/
-          echo "[Desktop Entry]"                                                 > /home/$UsuarioDaemon/.config/autostart/monero.desktop
-          echo "Type=Application"                                               >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
-          echo "Name=Monero"                                                    >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
-          echo "Exec=/home/$UsuarioDaemon/Monerocoin/bin/monero-wallet-gui %u"  >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
-          echo "Terminal=false"                                                 >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
-          echo "Hidden=false"                                                   >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             echo ""
+             echo "Creando el archivo de autoejecución..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                                 > /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             echo "Type=Application"                                               >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             echo "Name=Monero"                                                    >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             echo "Exec=/home/$UsuarioDaemon/Monerocoin/bin/monero-wallet-gui %u"  >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             echo "Terminal=false"                                                 >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             echo "Hidden=false"                                                   >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
         ;;
 
-        13)
+        12)
           echo ""
           echo -e "${ColorVerde}  Reparando permisos...${FinColor}"
           echo ""
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/
           find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
           find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
-          find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
-          
+          find /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ -type f -exec chmod +x {} \;
         ;;
 
-        14)
+        13)
           echo ""
           echo -e "${ColorVerde}  Reiniciando el sistema...${FinColor}"
           echo ""
