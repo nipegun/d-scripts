@@ -538,7 +538,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""                                                                 >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
           echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo" >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
           chmod +x                                                                   /home/$UsuarioDaemon/ravencoin-info-cartera.sh
-          $UsuarioDaemon:$UsuarioDaemon                                              /home/$UsuarioDaemon/ravencoin-info-cartera.sh
+          chown $UsuarioDaemon:$UsuarioDaemon                                        /home/$UsuarioDaemon/ravencoin-info-cartera.sh
 
         ;;
 
