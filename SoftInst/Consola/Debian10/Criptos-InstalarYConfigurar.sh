@@ -563,7 +563,15 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""                                                                 >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
           echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo" >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
           chmod +x                                                                   /home/$UsuarioDaemon/ravencoin-info-cartera.sh
-          
+
+          ## Comandos para monero
+
+          chmod +x /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/*
+
+          echo '#!/bin/bash'                                                   > /home/$UsuarioDaemon/monero-daemon-parar.sh
+          echo ""                                                             >> /home/$UsuarioDaemon/monero-daemon-parar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monerod stop_daemon" >> /home/$UsuarioDaemon/monero-daemon-parar.sh
+          chmod +x                                                               /home/$UsuarioDaemon/monero-daemon-parar.sh
           ## Reparación de permisos
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
