@@ -14,10 +14,10 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 UsuarioDaemon="pooladmin"
-CarpetaSoftLTC="LiteCoin"
-CarpetaSoftRVN="RavenCoin"
-CarpetaSoftARG="ArgentumCoin"
-CarpetaSoftXMR="MoneroCoin"
+CarpetaSoftLTC="CoreLTC"
+CarpetaSoftRVN="CoreRVN"
+CarpetaSoftARG="CoreARG"
+CarpetaSoftXMR="CoreXMR"
 DominioPool="localhost"
 VersPHP="7.3"
 
