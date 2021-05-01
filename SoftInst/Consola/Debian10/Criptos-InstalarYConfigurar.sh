@@ -46,9 +46,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
             7 "Instalar cartera de Chia" off
             8 "Instalar la pool MPOS" off
             9 "Crear contraseña para el usuario $UsuarioDaemon" on
-           10 "Crear comandos para administrar la pool" on
+           10 "Crear comandos para administrar las carteras" on
            11 "Activar auto-ejecución de carteras cli" on
-           12 "Activar auto-ejecución de carteras gui" on
+           12 "Activar auto-ejecución de carteras gui" off
            13 "Reparar permisos" on
            14 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -543,7 +543,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         10)
           echo ""
-          echo -e "${ColorVerde}  Creando comandos para administrar la pool...${FinColor}"
+          echo -e "${ColorVerde}  Creando comandos para administrar las carteras...${FinColor}"
           echo ""
 
           ## Comandos para litecoin
