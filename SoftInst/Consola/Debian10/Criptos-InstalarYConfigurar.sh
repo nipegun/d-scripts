@@ -38,16 +38,15 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
   opciones=(1 "Crear usuario sin privilegios para ejecutar la pool (obligatorio)" on
             2 "Borrar todas las carteras y configuraciones ya existentes" off
             3 "Instalar cartera de Litecoin" on
-            4 "Instalar cartera de Litecoin desde código fuente" off
-            5 "Instalar cartera de Ravencoin" on
-            6 "Instalar cartera de Ravencoin desde código fuente" off
-            7 "Instalar cartera de Argentum" on
-            8 "Instalar cartera de Argentum desde código fuente" off
-            9 "Instalar MPOS" off
-           10 "Crear contraseña para el usuario $UsuarioDaemon" on
-           11 "Crear comandos para administrar la pool" on
-           12 "Activar auto-ejecución de carteras" on
-           13 "Reniciar el sistema" off)
+            4 "Instalar cartera de Ravencoin" on
+            5 "Instalar cartera de Argentum" off
+            6 "Instalar cartera de Monero" off
+            7 "Instalar cartera de Chia" off
+            8 "Instalar la pool MPOS" off
+            9 "Crear contraseña para el usuario $UsuarioDaemon" on
+           10 "Crear comandos para administrar la pool" on
+           11 "Activar auto-ejecución de carteras" on
+           12 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -166,27 +165,6 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         4)
           echo ""
-          echo -e "${ColorVerde}  Instalando la cartera de litecoin desde código fuente...${FinColor}"
-          echo ""
-          ## Si se quiere instalar litecoin compilando
-          #
-          #mkdir -p ~/SoftInst/ 2> /dev/null
-          #cd ~/SoftInst/
-          #rm -rf ~/SoftInst/Litecoin
-          #git clone git://github.com/litecoin-project/litecoin.git
-          #mv ~/SoftInst/litecoin/ ~/SoftInst/Litecoin/
-          #cd ~/SoftInst/Litecoin/
-          #apt-get -y install autoconf
-          #~/SoftInst/Litecoin/autogen.sh
-          #apt-get -y install libevent-dev doxygen libzmq3-dev
-          #~/SoftInst/Litecoin/configure --with-incompatible-bdb
-          #make
-          #make check
-          #make install
-        ;;
-
-        5)
-          echo ""
           echo -e "${ColorVerde}  Instalando la cartera de ravencoin...${FinColor}"
           echo ""
 
@@ -297,25 +275,25 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #echo ""
         ;;
 
-        6)
-          echo ""
-          echo -e "${ColorVerde}  Instalando la cartera de ravencoin desde código fuente...${FinColor}"
-          echo ""
-        ;;
-
-        7)
+        5)
           echo ""
           echo -e "${ColorVerde}  Instalando la cartera de argentum...${FinColor}"
           echo ""
         ;;
 
-        8)
+        6)
           echo ""
-          echo -e "${ColorVerde}  Instalando la cartera de argentum desde código fuente...${FinColor}"
+          echo -e "${ColorVerde}  Instalando la cartera de monero...${FinColor}"
           echo ""
         ;;
 
-        9)
+        7)
+          echo ""
+          echo -e "${ColorVerde}  Instalando la cartera de chia...${FinColor}"
+          echo ""
+        ;;
+
+        8)
           echo ""
           echo -e "${ColorVerde}  Instalando la pool MPOS...${FinColor}"
           echo ""
