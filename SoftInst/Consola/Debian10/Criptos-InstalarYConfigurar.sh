@@ -150,6 +150,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon"
           sleep 5
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-ltc.txt
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-ltc.txt
           echo ""
           echo "La dirección para recibir litecoins es:"
           echo ""
@@ -262,6 +263,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend
           sleep 5
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-rvn.txt
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-rvn.txt
           echo ""
           echo "La dirección para recibir ravencoins es:"
           echo ""
