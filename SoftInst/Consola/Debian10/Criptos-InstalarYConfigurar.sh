@@ -149,12 +149,12 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon"
           sleep 5
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getnewaddress" > /home/$UsuarioDaemon/ltc-pooladdress.txt
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-ltc.txt
           echo ""
           echo "La dirección para recibir litecoins es:"
           echo ""
-          cat /home/$UsuarioDaemon/ltc-pooladdress.txt
-          DirCart=$(cat /home/$UsuarioDaemon/ltc-pooladdress.txt)
+          cat /home/$UsuarioDaemon/pooladdress-ltc.txt
+          DirCart=$(cat /home/$UsuarioDaemon/pooladdress-ltc.txt)
           echo ""
           #echo "Información de la cartera:"
           #echo ""
@@ -261,12 +261,12 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend
           sleep 5
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/rvn-pooladdress.txt
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-rvn.txt
           echo ""
           echo "La dirección para recibir ravencoins es:"
           echo ""
-          cat /home/$UsuarioDaemon/rvn-pooladdress.txt
-          DirCart=$(cat /home/$UsuarioDaemon/rvn-pooladdress.txt)
+          cat /home/$UsuarioDaemon/pooladdress-rvn.txt
+          DirCart=$(cat /home/$UsuarioDaemon/pooladdress-rvn.txt)
           echo ""
           #echo "Información de la cartera:"
           #echo ""
