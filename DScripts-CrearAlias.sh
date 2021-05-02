@@ -51,11 +51,12 @@ ln -s /root/scripts/d-scripts/MostrarFrecuenciaCPU.sh                      /root
 ln -s /root/scripts/d-scripts/Grub-Editar.sh                               /root/scripts/d-scripts/Alias/egrub
 ln -s /root/scripts/d-scripts/Grupos-Mostrar.sh                            /root/scripts/d-scripts/Alias/grupos
 ln -s /root/scripts/d-scripts/HAProxy-Editar.sh                            /root/scripts/d-scripts/Alias/ehaproxy
-ln -s /root/scripts/d-scripts/HardwareInfo.sh                              /root/scripts/d-scripts/Alias/hi
-ln -s /root/scripts/d-scripts/HardwareInfoGráfica.sh                       /root/scripts/d-scripts/Alias/higraf
-ln -s /root/scripts/d-scripts/HardwareInfoProcesador.sh                    /root/scripts/d-scripts/Alias/hiproc
-ln -s /root/scripts/d-scripts/HardwareInfoRAM.sh                           /root/scripts/d-scripts/Alias/hiram
-ln -s /root/scripts/d-scripts/HardwareInfoRed.sh                           /root/scripts/d-scripts/Alias/hired
+ln -s /root/scripts/d-scripts/Hardware-Info.sh                              /root/scripts/d-scripts/Alias/hi
+ln -s /root/scripts/d-scripts/Hardware-InfoDisco.sh                         /root/scripts/d-scripts/Alias/hidis
+ln -s /root/scripts/d-scripts/Hardware-InfoGráfica.sh                       /root/scripts/d-scripts/Alias/higra
+ln -s /root/scripts/d-scripts/Hardware-InfoProcesador.sh                    /root/scripts/d-scripts/Alias/hipro
+ln -s /root/scripts/d-scripts/Hardware-InfoRAM.sh                           /root/scripts/d-scripts/Alias/hiram
+ln -s /root/scripts/d-scripts/Hardware-InfoRed.sh                           /root/scripts/d-scripts/Alias/hired
 ln -s /root/scripts/d-scripts/IMPrimir.sh                                  /root/scripts/d-scripts/Alias/imp
 ln -s /root/scripts/d-scripts/IMPrimirArchivo.sh                           /root/scripts/d-scripts/Alias/impa
 ln -s /root/scripts/d-scripts/InfoNodoLitecoin.sh                          /root/scripts/d-scripts/Alias/inl
