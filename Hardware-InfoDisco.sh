@@ -26,6 +26,8 @@ echo ""
    fi
 
 echo ""
+echo "Mostrando info de discos IDE y SATA..."
+echo ""
 lshw -class disk
 echo ""
 
@@ -38,6 +40,8 @@ echo ""
      apt-get -y install nvme-cli
    fi
 
+echo ""
+echo "Mostrando info de discos NVMe..."
 echo ""
 nvme list
 echo ""
