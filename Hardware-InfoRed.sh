@@ -9,6 +9,22 @@
 #  Script de NiPeGun para mostrar información sobre el hardware de red 
 #-----------------------------------------------------------------------
 
+ColorVerde="\033[1;32m"
+FinColor="\033[0m"
+
+echo ""
+echo -e "${ColorVerde}Mostrando información sobre el hardware de red...${FinColor}"
+echo ""
+
+## Comprobar si el paquete lshw está instalado. Si no lo está, instalarlo.
+   if [[ $(dpkg-query -s lshw 2>/dev/null | grep installed) == "" ]]; then
+     echo ""
+     echo "lshw no está instalado. Iniciando su instalación..."
+     echo ""
+     apt-get -y update
+     apt-get -y install lshw
+   fi
+
 echo ""
 lshw -class network
 echo ""
