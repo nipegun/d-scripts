@@ -29,3 +29,16 @@ echo ""
 lshw -class disk
 echo ""
 
+## Comprobar si el paquete nvme-cli está instalado. Si no lo está, instalarlo.
+   if [[ $(dpkg-query -s nvme-cli 2>/dev/null | grep installed) == "" ]]; then
+     echo ""
+     echo "nvme-cli no está instalado. Iniciando su instalación..."
+     echo ""
+     apt-get -y update
+     apt-get -y install nvme-cli
+   fi
+
+echo ""
+nvme list
+echo ""
+
