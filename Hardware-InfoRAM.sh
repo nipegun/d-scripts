@@ -9,12 +9,22 @@
 #  Script de NiPeGun para mostrar información sobre el/los módulos de memoria RAM
 #----------------------------------------------------------------------------------
 
-ColorNotificacion="\033[1;32m"
+ColorVerde="\033[1;32m"
 FinColor="\033[0m"
 
 echo ""
-echo -e "${ColorNotificacion}Mostrando información sobre la memoria RAM...${FinColor}"
+echo -e "${ColorVerde}Mostrando información sobre la memoria RAM...${FinColor}"
 echo ""
+
+## Comprobar si el paquete lshw está instalado. Si no lo está, instalarlo.
+   if [[ $(dpkg-query -s lshw 2>/dev/null | grep installed) == "" ]]; then
+     echo ""
+     echo "lshw no está instalado. Iniciando su instalación..."
+     echo ""
+     apt-get -y update
+     apt-get -y install lshw
+   fi
+
 dmidecode --type 17
 echo ""
 
