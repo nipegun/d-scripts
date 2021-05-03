@@ -9,11 +9,11 @@
 #  Script de NiPeGun para mostrar información sobre el/los procesador/es
 #-------------------------------------------------------------------------
 
-ColorNotificacion="\033[1;32m"
+ColorVerde="\033[1;32m"
 FinColor="\033[0m"
 
 echo ""
-echo -e "${ColorNotificacion}Mostrando información sobre el procesador...${FinColor}"
+echo -e "${ColorVerde}Mostrando información sobre el procesador...${FinColor}"
 echo ""
 echo "Cantidad de núcleos de proceso disponibles en el sistema:"
 echo ""
