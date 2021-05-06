@@ -763,12 +763,12 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
              echo ""
              mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-             echo "[Desktop Entry]"                                            > /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Name=Chia"                                                 >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Type=Application"                                          >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Exec=/home/$UsuarioDaemon/Chiacoin/bin/chia-blockchain %U" >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Terminal=false"                                            >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Hidden=false"                                              >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "[Desktop Entry]"                                                   > /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Name=Chia"                                                        >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Type=Application"                                                 >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Exec=/home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chia-blockchain %U" >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Terminal=false"                                                   >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Hidden=false"                                                     >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
 
           ## Reparación de permisos
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
@@ -784,6 +784,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           find /home/$UsuarioDaemon/$CarpetaSoftARG/bin/ -type f -exec chmod +x {} \;
           find /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/ -type f -exec chmod +x {} \;
           find /home/$UsuarioDaemon/ -type f -iname "*.sh" -exec chmod +x {} \;
+          
+          chown root:root /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
+          chmod 4755 /home/pooladmin/CoreXCH/bin/chrome-sandbox
         ;;
 
         14)
