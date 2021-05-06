@@ -766,7 +766,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "[Desktop Entry]"                                            > /home/$UsuarioDaemon/.config/autostart/chia.desktop
              echo "Name=Chia"                                                 >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
              echo "Type=Application"                                          >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Exec=/home/$UsuarioDaemon/Chiacoin/bin/chi-blockchain %U"  >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Exec=/home/$UsuarioDaemon/Chiacoin/bin/chia-blockchain %U" >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
              echo "Terminal=false"                                            >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
              echo "Hidden=false"                                              >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
 
