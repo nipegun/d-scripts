@@ -451,9 +451,22 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           rm -rf /home/$UsuarioDaemon/$CarpetaSoftXCH/*
           mv /root/SoftInst/Chiacoin/usr/lib/chia-blockchain/ /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/
           rm -rf /root/SoftInst/Chiacoin/usr/
+          
+          ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "tasksel no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install tasksel
+             fi
+
+          tasksel install mate-desktop
 
           ## Reparación de permisos
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+          chown root:root /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
+          chmod 4755 /home/pooladmin/CoreXCH/bin/chrome-sandbox
         ;;
 
         8)
@@ -640,6 +653,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""                                                             >> /home/$UsuarioDaemon/monero-daemon-parar.sh
           echo "/home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monerod stop_daemon" >> /home/$UsuarioDaemon/monero-daemon-parar.sh
           chmod +x                                                               /home/$UsuarioDaemon/monero-daemon-parar.sh
+
           ## Reparación de permisos
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
