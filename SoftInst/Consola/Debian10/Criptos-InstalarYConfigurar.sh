@@ -420,7 +420,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "dpkg-deb -c /root/SoftInst/Chiacoin/chia-blockchain.deb"
           mkdir -p /home/$UsuarioDaemon/$CarpetaSoftXCH/ 2> /dev/null
           rm -rf /home/$UsuarioDaemon/$CarpetaSoftXCH/*
-          cp /usr/lib/chia-blockchain/ /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/
+          cp -r /usr/lib/chia-blockchain/ /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/
 
 
           ## Reparación de permisos
