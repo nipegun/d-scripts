@@ -40,15 +40,15 @@ echo ""
 menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
   opciones=(1 "Crear usuario sin privilegios para ejecutar la pool (obligatorio)" on
             2 "Borrar todas las carteras y configuraciones ya existentes" off
-            3 "Instalar cartera de Litecoin" on
-            4 "Instalar cartera de Ravencoin" on
+            3 "Instalar cartera de Litecoin" off
+            4 "Instalar cartera de Ravencoin" off
             5 "Instalar cartera de Argentum" off
             6 "Instalar cartera de Monero" off
             7 "Instalar cartera de Chia" off
             8 "Instalar la pool php-mpos" off
             9 "Crear contraseña para el usuario $UsuarioDaemon" on
            10 "Crear comandos para administrar las carteras" on
-           11 "Activar auto-ejecución de carteras cli" on
+           11 "Activar auto-ejecución de carteras cli" off
            12 "Activar auto-ejecución de carteras gui" off
            13 "Reparar permisos" on
            14 "Reniciar el sistema" off)
