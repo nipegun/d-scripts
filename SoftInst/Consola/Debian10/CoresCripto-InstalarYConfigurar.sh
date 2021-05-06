@@ -606,7 +606,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}  Cambiando la contraseña del usuario $UsuarioDaemon...${FinColor}"
           echo ""
-          paswd $UsuarioDaemon
+          passwd $UsuarioDaemon
         ;;
 
         10)
