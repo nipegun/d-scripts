@@ -397,8 +397,37 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           mkdir -p /root/SoftInst/Chiacoin/ 2> /dev/null
           rm -rf /root/SoftInst/Chiacoin/*
           cd /root/SoftInst/Chiacoin/
+          echo ""
+          echo "Descargando el paquete .deb de la instalación de core de Chia..."
+          echo ""
           wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Chiacoin/chia-blockchain.deb
-          dpkg: problemas de dependencias impiden la configuración de chia-blockchain:
+          echo ""
+          echo "Extrayendo los archivos de dentro del paquete .deb..."
+          echo ""
+          ## Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "binutils no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install binutils
+             fi
+          ar x /root/SoftInst/Chiacoin/chia-blockchain.deb
+          rm -rf /root/SoftInst/Chiacoin/debian-binary
+          rm -rf /root/SoftInst/Chiacoin/control.tar.xz
+          ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "tar no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install tar
+             fi
+          tar -xf /root/SoftInst/Chiacoin/data.tar.xz
+          rm -rf /root/SoftInst/Chiacoin/data.tar.xz
+          echo ""
+          echo "Instalando dependencias necesarias para ejecutar el core de Chia..."
+          echo ""
           apt-get -y install libgtk-3-0
           apt-get -y install libnotify4
           apt-get -y install libnss3
@@ -413,15 +442,15 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           apt-get -y install trash-cli
           apt-get -y install libglib2.0-bin
           apt-get -y install gvfs-bin
-          dpkg -i /root/SoftInst/Chiacoin/chia-blockchain.deb
-          echo ""
-          echo "Para ver que archivos instaló el paquete, ejecuta:"
-          echo ""
-          echo "dpkg-deb -c /root/SoftInst/Chiacoin/chia-blockchain.deb"
+          #dpkg -i /root/SoftInst/Chiacoin/chia-blockchain.deb
+          #echo ""
+          #echo "Para ver que archivos instaló el paquete, ejecuta:"
+          #echo ""
+          #echo "dpkg-deb -c /root/SoftInst/Chiacoin/chia-blockchain.deb"
           mkdir -p /home/$UsuarioDaemon/$CarpetaSoftXCH/ 2> /dev/null
           rm -rf /home/$UsuarioDaemon/$CarpetaSoftXCH/*
-          cp -r /usr/lib/chia-blockchain/ /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/
-
+          mv /root/SoftInst/Chiacoin/usr/lib/chia-blockchain/ /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/
+          rm -rf /root/SoftInst/Chiacoin/usr/
 
           ## Reparación de permisos
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
