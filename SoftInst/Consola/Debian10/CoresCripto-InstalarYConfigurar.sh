@@ -779,8 +779,6 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}  Reparando permisos...${FinColor}"
           echo ""
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/
-          find /home/$UsuarioDaemon/ -type d -exec chmod 775 {} \;
-          find /home/$UsuarioDaemon/ -type f -exec chmod 664 {} \;
           find /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/ -type f -exec chmod +x {} \;
           find /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ -type f -exec chmod +x {} \;
           find /home/$UsuarioDaemon/$CarpetaSoftARG/bin/ -type f -exec chmod +x {} \;
