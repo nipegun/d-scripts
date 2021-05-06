@@ -18,6 +18,7 @@ CarpetaSoftLTC="CoreLTC"
 CarpetaSoftRVN="CoreRVN"
 CarpetaSoftARG="CoreARG"
 CarpetaSoftXMR="CoreXMR"
+CarpetaSoftXCH="CoreXCH"
 DominioPool="localhost"
 VersPHP="7.3"
 
@@ -384,6 +385,44 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}  Instalando la cartera de chia...${FinColor}"
           echo ""
 
+          ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "git no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install git
+             fi
+
+          mkdir -p /root/SoftInst/Chiacoin/ 2> /dev/null
+          rm -rf /root/SoftInst/Chiacoin/*
+          cd /root/SoftInst/Chiacoin/
+          wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Chiacoin/chia-blockchain.deb
+          dpkg: problemas de dependencias impiden la configuración de chia-blockchain:
+          apt-get -y install libgtk-3-0
+          apt-get -y install libnotify4
+          apt-get -y install libnss3
+          apt-get -y install libxtst6
+          apt-get -y install xdg-utils
+          apt-get -y install libatspi2.0-0
+          apt-get -y install libdrm2
+          apt-get -y install libgbm1
+          apt-get -y install libxcb-dri3-0
+          apt-get -y install kde-cli-tools
+          apt-get -y install kde-runtime
+          apt-get -y install trash-cli
+          apt-get -y install libglib2.0-bin
+          apt-get -y install gvfs-bin
+          dpkg -i /root/SoftInst/Chiacoin/chia-blockchain.deb
+          echo ""
+          echo "Para ver que archivos instaló el paquete, ejecuta:"
+          echo ""
+          echo "dpkg-deb -c /root/SoftInst/Chiacoin/chia-blockchain.deb"
+          mkdir -p /home/$UsuarioDaemon/$CarpetaSoftXCH/ 2> /dev/null
+          rm -rf /home/$UsuarioDaemon/$CarpetaSoftXCH/*
+          cp /usr/lib/chia-blockchain/ /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/
+
+
           ## Reparación de permisos
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
@@ -672,8 +711,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
              echo "[Desktop Entry]"                                                                     > /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Type=Application"                                                                   >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
              echo "Name=Raven"                                                                         >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Type=Application"                                                                   >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
              echo "Exec=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-qt -min -testnet=0 -regtest=0"  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
              echo "Terminal=false"                                                                     >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
              echo "Hidden=false"                                                                       >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
@@ -684,11 +723,23 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
              echo "[Desktop Entry]"                                                 > /home/$UsuarioDaemon/.config/autostart/monero.desktop
-             echo "Type=Application"                                               >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
              echo "Name=Monero"                                                    >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             echo "Type=Application"                                               >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
              echo "Exec=/home/$UsuarioDaemon/Monerocoin/bin/monero-wallet-gui %u"  >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
              echo "Terminal=false"                                                 >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
              echo "Hidden=false"                                                   >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+
+          ## Autoejecución de chia
+             echo ""
+             echo "Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                            > /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Name=Chia"                                                 >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Type=Application"                                          >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Exec=/home/$UsuarioDaemon/Chiacoin/bin/chi-blockchain %U"  >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Terminal=false"                                            >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Hidden=false"                                              >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
 
           ## Reparación de permisos
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
