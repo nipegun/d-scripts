@@ -665,7 +665,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Autoejecución de Litecoin
              echo ""
-             echo "Agregar litecoind a los ComandosPostArranque..."
+             echo "  Agregar litecoind a los ComandosPostArranque..."
              echo ""
              echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind"
              echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/"$CarpetaSoftLTC"/bin/litecoind -daemon'" >> /root/scripts/ComandosPostArranque.sh
@@ -698,7 +698,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Autoejecución de Ravencoin
              echo ""
-             echo "Agregar ravend a los ComandosPostArranque..."
+             echo "  Agregar ravend a los ComandosPostArranque..."
              echo ""
              echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"
              echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftRVN"/bin/ravend'" >> /root/scripts/ComandosPostArranque.sh
@@ -732,7 +732,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Autoejecución de monero
              echo ""
-             echo "Agregar monerod a los ComandosPostArranque..."
+             echo "  Agregar monerod a los ComandosPostArranque..."
              echo ""
              echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monerod"
              echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftXMR"/bin/monerod --detach'" >> /root/scripts/ComandosPostArranque.sh
