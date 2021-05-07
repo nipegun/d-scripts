@@ -631,19 +631,29 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           chmod +x /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/*
 
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/litecoin-info-cartera.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/litecoin-info-cartera.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo" >> /home/$UsuarioDaemon/litecoin-info-cartera.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/litecoin-info-cartera.sh
+          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/litecoin-cartera-info.sh
+          echo ""                                                                    >> /home/$UsuarioDaemon/litecoin-cartera-info.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo" >> /home/$UsuarioDaemon/litecoin-cartera-info.sh
+          chmod +x                                                                      /home/$UsuarioDaemon/litecoin-cartera-info.sh
+
+          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/litecoin-daemon-parar.sh
+          echo ""                                                                    >> /home/$UsuarioDaemon/litecoin-daemon-parar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli stop"          >> /home/$UsuarioDaemon/litecoin-daemon-parar.sh
+          chmod +x                                                                      /home/$UsuarioDaemon/litecoin-daemon-parar.sh
 
           ## Comandos para ravencoin
 
           chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/*
 
-          echo '#!/bin/bash'                                                       > /home/$UsuarioDaemon/ravencoin-info-cartera.sh
-          echo ""                                                                 >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo" >> /home/$UsuarioDaemon/ravencoin-info-cartera.sh
-          chmod +x                                                                   /home/$UsuarioDaemon/ravencoin-info-cartera.sh
+          echo '#!/bin/bash'                                                       > /home/$UsuarioDaemon/ravencoin-cartera-info.sh
+          echo ""                                                                 >> /home/$UsuarioDaemon/ravencoin-cartera-info.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo" >> /home/$UsuarioDaemon/ravencoin-cartera-info.sh
+          chmod +x                                                                   /home/$UsuarioDaemon/ravencoin-cartera-info.sh
+
+          echo '#!/bin/bash'                                                       > /home/$UsuarioDaemon/ravencoin-daemon-parar.sh
+          echo ""                                                                 >> /home/$UsuarioDaemon/ravencoin-daemon-parar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli stop"          >> /home/$UsuarioDaemon/ravencoin-daemon-parar.sh
+          chmod +x                                                                   /home/$UsuarioDaemon/ravencoin-daemon-parar.sh
 
           ## Comandos para monero
 
