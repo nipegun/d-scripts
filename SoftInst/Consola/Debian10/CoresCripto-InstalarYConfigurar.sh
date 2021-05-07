@@ -462,6 +462,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              fi
 
           tasksel install mate-desktop
+          apt-get -y install xrdp
 
           ## Reparación de permisos
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
