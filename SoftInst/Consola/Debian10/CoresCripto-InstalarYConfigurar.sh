@@ -451,6 +451,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           rm -rf /home/$UsuarioDaemon/$CarpetaSoftXCH/*
           mv /root/SoftInst/Chiacoin/usr/lib/chia-blockchain/ /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/
           rm -rf /root/SoftInst/Chiacoin/usr/
+          mkdir -p /home/$UsuarioDaemon/.config/Chia Blockchain/ 2> /dev/null
+          echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > /home/$UsuarioDaemon/.config/Chia Blockchain/Preferences
           
           ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
