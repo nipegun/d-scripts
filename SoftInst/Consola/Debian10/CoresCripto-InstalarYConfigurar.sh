@@ -73,13 +73,20 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}  Borrando carteras y configuraciones anteriores...${FinColor}"
           echo ""
-          rm -rf /home/$UsuarioDaemon/.litecoin/
-          rm -rf /home/$UsuarioDaemon/.raven/
-          rm -rf /home/$UsuarioDaemon/.argentum/
-          rm -rf /var/www/MPOS/
+          ## Litecoin
+             rm -rf /home/$UsuarioDaemon/.litecoin/
+          ## Raven
+             rm -rf /home/$UsuarioDaemon/.raven/
+          ## Argentum
+             rm -rf /home/$UsuarioDaemon/.argentum/
+          ## Chia
+             rm -rf /home/$UsuarioDaemon/.chia/
+             rm -rf /home/$UsuarioDaemon/.config/Chia Blockchain/
+          ## Pool MPOS
+             rm -rf /var/www/MPOS/
 
           ## Reparación de permisos
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         3)
