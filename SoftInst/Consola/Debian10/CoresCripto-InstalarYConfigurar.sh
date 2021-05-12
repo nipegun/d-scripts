@@ -359,12 +359,16 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "  Creando carpetas y archivos necesarios para ese usuario..."
           echo ""
           mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
-          #mkdir -p /home/$UsuarioDaemon/.raven/
-          #touch /home/$UsuarioDaemon/.raven/raven.conf
-          #echo "rpcuser=user1"      > /home/$UsuarioDaemon/.raven/raven.conf
-          #echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.raven/raven.conf
-          #echo "prune=550"         >> /home/$UsuarioDaemon/.raven/raven.conf
-          #echo "daemon=1"          >> /home/$UsuarioDaemon/.raven/raven.conf
+          ## Archivo argentum.conf
+             mkdir -p /home/$UsuarioDaemon/.argentum/
+             touch /home/$UsuarioDaemon/.argentum/argentum.conf
+             echo "daemon=1"                       > /home/$UsuarioDaemon/.argentum/argentum.conf
+             echo "addnode=31.25.241.224:13580"   >> /home/$UsuarioDaemon/.argentum/argentum.conf
+             echo "addnode=52.27.168.5:13580"     >> /home/$UsuarioDaemon/.argentum/argentum.conf
+             echo "addnode=46.105.63.132:13580"   >> /home/$UsuarioDaemon/.argentum/argentum.conf
+             echo "addnode=85.15.179.171:13580"   >> /home/$UsuarioDaemon/.argentum/argentum.conf
+             echo "addnode=95.79.35.133:13580"    >> /home/$UsuarioDaemon/.argentum/argentum.conf
+             echo "addnode=172.104.110.155:13580" >> /home/$UsuarioDaemon/.argentum/argentum.conf
           rm -rf /home/$UsuarioDaemon/$CarpetaSoftARG/
           mv /root/SoftInst/Argentumcoin/argentum-$UltVersArgentum/ /home/$UsuarioDaemon/$CarpetaSoftARG/
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
@@ -765,55 +769,76 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}  Creando comandos para administrar las carteras...${FinColor}"
           echo ""
+          mkdir -p /home/$UsuarioDaemon/ComandosCli/ 2> /dev/null
 
           ## Comandos para litecoin
 
           chmod +x /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/*
 
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/litecoin-cartera-info.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/litecoin-cartera-info.sh
-          echo 'echo "Mostrando info de la cartera Litecoin..."'                     >> /home/$UsuarioDaemon/litecoin-cartera-info.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/litecoin-cartera-info.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/litecoin-cartera-info.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo" >> /home/$UsuarioDaemon/litecoin-cartera-info.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/litecoin-cartera-info.sh
+          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+          echo 'echo "Mostrando info de la cartera Litecoin..."'                     >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo" >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
 
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/litecoin-daemon-parar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/litecoin-daemon-parar.sh
-          echo 'echo "Parando el daemon litecoind..."'                               >> /home/$UsuarioDaemon/litecoin-daemon-parar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/litecoin-daemon-parar.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/litecoin-daemon-parar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli stop"          >> /home/$UsuarioDaemon/litecoin-daemon-parar.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/litecoin-daemon-parar.sh
+          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+          echo 'echo "Parando el daemon litecoind..."'                               >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli stop"          >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
 
           ## Comandos para ravencoin
 
           chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/*
 
-          echo '#!/bin/bash'                                                       > /home/$UsuarioDaemon/ravencoin-cartera-info.sh
-          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ravencoin-cartera-info.sh
-          echo 'echo "Mostrando info de la cartera Ravencoin..."'                 >> /home/$UsuarioDaemon/ravencoin-cartera-info.sh
-          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ravencoin-cartera-info.sh
-          echo ""                                                                 >> /home/$UsuarioDaemon/ravencoin-cartera-info.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo" >> /home/$UsuarioDaemon/ravencoin-cartera-info.sh
-          chmod +x                                                                   /home/$UsuarioDaemon/ravencoin-cartera-info.sh
+          echo '#!/bin/bash'                                                       > /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+          echo 'echo "Mostrando info de la cartera Ravencoin..."'                 >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+          echo ""                                                                 >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo" >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+          chmod +x                                                                   /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
 
-          echo '#!/bin/bash'                                                       > /home/$UsuarioDaemon/ravencoin-daemon-parar.sh
-          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ravencoin-daemon-parar.sh
-          echo 'echo "Parando el daemon ravend..."'                               >> /home/$UsuarioDaemon/ravencoin-daemon-parar.sh
-          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ravencoin-daemon-parar.sh
-          echo ""                                                                 >> /home/$UsuarioDaemon/ravencoin-daemon-parar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli stop"          >> /home/$UsuarioDaemon/ravencoin-daemon-parar.sh
-          chmod +x                                                                   /home/$UsuarioDaemon/ravencoin-daemon-parar.sh
+          echo '#!/bin/bash'                                                       > /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+          echo 'echo "Parando el daemon ravend..."'                               >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+          echo ""                                                                 >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli stop"          >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+          chmod +x                                                                   /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+
+          ## Comandos para argentum
+
+          chmod +x /home/$UsuarioDaemon/$CarpetaSoftARG/bin/*
+
+          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo 'echo "Mostrando info de la cartera Argentumcoin..."'                 >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getwalletinfo" >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+
+          echo '#!/bin/bash'                                                       > /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo 'echo "Parando el daemon argentumd..."'                            >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo ""                                                                 >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli stop"       >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          chmod +x                                                                   /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
 
           ## Comandos para monero
 
           chmod +x /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/*
 
-          echo '#!/bin/bash'                                                   > /home/$UsuarioDaemon/monero-daemon-parar.sh
-          echo ""                                                             >> /home/$UsuarioDaemon/monero-daemon-parar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monerod stop_daemon" >> /home/$UsuarioDaemon/monero-daemon-parar.sh
-          chmod +x                                                               /home/$UsuarioDaemon/monero-daemon-parar.sh
+          echo '#!/bin/bash'                                                   > /home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh
+          echo ""                                                             >> /home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monerod stop_daemon" >> /home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh
+          chmod +x                                                               /home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh
 
           ## Reparación de permisos
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
