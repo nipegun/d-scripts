@@ -917,6 +917,13 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              #chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ravend-pid.txt
              #systemctl enable ravend.service
 
+          ## Autoejecución de Argentum
+             echo ""
+             echo "  Agregando argentumd a los ComandosPostArranque..."
+             echo ""
+             echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentumd"
+             echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftARG"/bin/argentumd'" >> /root/scripts/ComandosPostArranque.sh
+
           ## Autoejecución de monero
              echo ""
              echo "  Agregando monerod a los ComandosPostArranque..."
