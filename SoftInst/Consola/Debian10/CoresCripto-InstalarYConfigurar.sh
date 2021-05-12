@@ -52,7 +52,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
            12 "Activar auto-ejecución de carteras cli" off
            13 "Activar auto-ejecución de carteras gui" off
            14 "Reparar permisos" on
-           15 "Reniciar el sistema" off)
+           15 "Instalar escritorio" on
+           16 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -95,7 +96,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}  Instalando el nodo litecoin...${FinColor}"
           echo ""
 
-          echo "Determinando la última versión de litecoin core..."
+          echo "  Determinando la última versión de litecoin core..."
           echo ""
           ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
@@ -107,10 +108,10 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
             fi
           UltVersLite=$(curl --silent https://litecoin.org | grep linux-gnu | grep x86_64 | grep -v in64 | cut -d '"' -f 2 | sed 2d | cut -d '-' -f 3)
           echo ""
-          echo "La última versión de raven es la $UltVersLite"
+          echo "  La última versión de raven es la $UltVersLite"
           
           echo ""
-          echo "Intentando descargar el archivo comprimido de la última versión..."
+          echo "  Intentando descargar el archivo comprimido de la última versión..."
           echo ""
           mkdir -p /root/SoftInst/Litecoin/ 2> /dev/null
           rm -rf /root/SoftInst/Litecoin/*
@@ -123,12 +124,12 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
               apt-get -y update
               apt-get -y install wget
             fi
-          echo "Pidiendo el archivo en formato tar.gz..."
+          echo "  Pidiendo el archivo en formato tar.gz..."
           echo ""
           wget https://download.litecoin.org/litecoin-$UltVersLite/linux/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
           
           echo ""
-          echo "Descomprimiendo el archivo..."
+          echo "  Descomprimiendo el archivo..."
           echo ""
           ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
@@ -142,7 +143,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           rm -rf /root/SoftInst/Litecoin/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
           
           echo ""
-          echo "Creando carpetas y archivos necesarios para ese usuario..."
+          echo "  Creando carpetas y archivos necesarios para ese usuario..."
           echo ""
           mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
           mkdir -p /home/$UsuarioDaemon/.litecoin/
@@ -161,14 +162,14 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              #find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
              #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
           echo ""
-          echo "Arrancando litecoind..."
+          echo "  Arrancando litecoind..."
           echo ""
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon"
           sleep 5
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-ltc.txt
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-ltc.txt
           echo ""
-          echo "La dirección para recibir litecoins es:"
+          echo "  La dirección para recibir litecoins es:"
           echo ""
           cat /home/$UsuarioDaemon/pooladdress-ltc.txt
           DirCart=$(cat /home/$UsuarioDaemon/pooladdress-ltc.txt)
@@ -191,7 +192,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}  Instalando la cartera de ravencoin...${FinColor}"
           echo ""
 
-          echo "Determinando la última versión de ravencoin core..."
+          echo "  Determinando la última versión de ravencoin core..."
           echo ""
           ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
@@ -203,11 +204,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              fi
           UltVersRaven=$(curl --silent https://github.com/RavenProject/Ravencoin/releases/latest | cut -d '/' -f 8 | cut -d '"' -f 1 | cut -c2-)
           echo ""
-          echo "La última versión de raven es la $UltVersRaven"
+          echo "  La última versión de raven es la $UltVersRaven"
           echo ""
 
           echo ""
-          echo "Intentando descargar el archivo comprimido de la última versión..."
+          echo "  Intentando descargar el archivo comprimido de la última versión..."
           echo ""
           mkdir -p /root/SoftInst/Ravencoin/ 2> /dev/null
           rm -rf /root/SoftInst/Ravencoin/*
@@ -257,7 +258,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
 
           echo ""
-          echo "Creando carpetas y archivos necesarios para ese usuario..."
+          echo "  Creando carpetas y archivos necesarios para ese usuario..."
           echo ""
           mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
           mkdir -p /home/$UsuarioDaemon/.raven/
@@ -277,14 +278,14 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
 
           echo ""
-          echo "Arrancando ravencoind..."
+          echo "  Arrancando ravencoind..."
           echo ""
           su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend
           sleep 5
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-rvn.txt
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-rvn.txt
           echo ""
-          echo "La dirección para recibir ravencoins es:"
+          echo "  La dirección para recibir ravencoins es:"
           echo ""
           cat /home/$UsuarioDaemon/pooladdress-rvn.txt
           DirCart=$(cat /home/$UsuarioDaemon/pooladdress-rvn.txt)
@@ -307,7 +308,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}  Instalando la cartera de argentum...${FinColor}"
           echo ""
 
-          echo "Determinando la última versión de argentum core..."
+          echo "  Determinando la última versión de argentum core..."
           echo ""
           ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
@@ -320,11 +321,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           UltVersArgentum=$(curl -s https://github.com/argentumproject/argentum/releases/ | grep linux | grep gnu | grep tar | grep href | cut -d '"' -f 2 | sed -n 1p | cut -d'-' -f 2)
           echo ""
-          echo "La última versión de argentum core es la $UltVersArgentum"
+          echo "  La última versión de argentum core es la $UltVersArgentum"
           echo ""
 
           echo ""
-          echo "Intentando descargar el archivo comprimido de la última versión..."
+          echo "  Intentando descargar el archivo comprimido de la última versión..."
           echo ""
           mkdir -p /root/SoftInst/Argentumcoin/ 2> /dev/null
           rm -rf /root/SoftInst/Argentumcoin/*
@@ -341,7 +342,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           wget --no-check-certificate https://github.com$ArchUltVersAgentum -O /root/SoftInst/Argentumcoin/Argentum.tar.gz
 
           echo ""
-          echo "Descomprimiendo el archivo..."
+          echo "  Descomprimiendo el archivo..."
           echo ""
           ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
@@ -355,7 +356,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           rm -rf /root/SoftInst/Argentumcoin/Argentum.tar.gz
 
           echo ""
-          echo "Creando carpetas y archivos necesarios para ese usuario..."
+          echo "  Creando carpetas y archivos necesarios para ese usuario..."
           echo ""
           mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
           #mkdir -p /home/$UsuarioDaemon/.raven/
@@ -375,14 +376,14 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
 
           echo ""
-          echo "Arrancando argentumd..."
+          echo "  Arrancando argentumd..."
           echo ""
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentumd -daemon"
           sleep 5
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-arg.txt
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-arg.txt
           echo ""
-          echo "La dirección para recibir argentum es:"
+          echo "  La dirección para recibir argentum es:"
           echo ""
           cat /home/$UsuarioDaemon/pooladdress-arg.txt
           DirCartARG=$(cat /home/$UsuarioDaemon/pooladdress-arg.txt)
@@ -406,7 +407,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           
           echo ""
-          echo "Descargando el archivo comprimido de la última release..."
+          echo "  Descargando el archivo comprimido de la última release..."
           echo ""
           ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
@@ -422,7 +423,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #wget https://downloads.getmonero.org/cli/linux64 -O /root/SoftInst/Monerocoin/monero.tar.bz2
 
           echo ""
-          echo "Descomprimiendo el archivo..."
+          echo "  Descomprimiendo el archivo..."
           echo ""
           ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
@@ -436,7 +437,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           rm -rf /root/SoftInst/Monerocoin/monero.tar.bz2
 
           echo ""
-          echo "Preparando la carpeta final..."
+          echo "  Preparando la carpeta final..."
           echo ""
           mkdir -p /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/ 2> /dev/null
           find /root/SoftInst/Monerocoin/ -type d -name monero* -exec cp -r {}/. /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/ \;
@@ -463,7 +464,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "walletMode=2"                                   >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
 
           echo ""
-          echo "Instalando paquetes necesarios para ejecutar la cartera..."
+          echo "  Instalando paquetes necesarios para ejecutar la cartera..."
           echo ""
           apt-get -y install libxcb-icccm4
           apt-get -y install libxcb-image0
@@ -495,11 +496,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           rm -rf /root/SoftInst/Chiacoin/*
           cd /root/SoftInst/Chiacoin/
           echo ""
-          echo "Descargando el paquete .deb de la instalación de core de Chia..."
+          echo "  Descargando el paquete .deb de la instalación de core de Chia..."
           echo ""
           wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Chiacoin/chia-blockchain.deb
           echo ""
-          echo "Extrayendo los archivos de dentro del paquete .deb..."
+          echo "  Extrayendo los archivos de dentro del paquete .deb..."
           echo ""
           ## Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
@@ -523,7 +524,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           tar -xf /root/SoftInst/Chiacoin/data.tar.xz
           rm -rf /root/SoftInst/Chiacoin/data.tar.xz
           echo ""
-          echo "Instalando dependencias necesarias para ejecutar el core de Chia..."
+          echo "  Instalando dependencias necesarias para ejecutar el core de Chia..."
           echo ""
           apt-get -y install libgtk-3-0
           apt-get -y install libnotify4
@@ -559,9 +560,6 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                apt-get -y update
                apt-get -y install tasksel
              fi
-
-          tasksel install mate-desktop
-          apt-get -y install xrdp
 
           ## Reparación de permisos
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
@@ -707,7 +705,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                 mysql -e "select user,host from mysql.user"
 
                 echo ""
-                echo "Importando la estructura de la base de datos..."
+                echo "  Importando la estructura de la base de datos..."
                 echo ""
                 mysql -p mpos < /var/www/MPOS/sql/000_base_structure.sql
 
@@ -829,7 +827,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Autoejecución de Litecoin
              echo ""
-             echo "  Agregar litecoind a los ComandosPostArranque..."
+             echo "  Agregando litecoind a los ComandosPostArranque..."
              echo ""
              echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind"
              echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/"$CarpetaSoftLTC"/bin/litecoind -daemon'" >> /root/scripts/ComandosPostArranque.sh
@@ -862,7 +860,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Autoejecución de Ravencoin
              echo ""
-             echo "  Agregar ravend a los ComandosPostArranque..."
+             echo "  Agregando ravend a los ComandosPostArranque..."
              echo ""
              echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"
              echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftRVN"/bin/ravend'" >> /root/scripts/ComandosPostArranque.sh
@@ -896,7 +894,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Autoejecución de monero
              echo ""
-             echo "  Agregar monerod a los ComandosPostArranque..."
+             echo "  Agregando monerod a los ComandosPostArranque..."
              echo ""
              echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monerod"
              echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftXMR"/bin/monerod --detach'" >> /root/scripts/ComandosPostArranque.sh
@@ -914,7 +912,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Autoejecución de Ravencoin
              echo ""
-             echo "Creando el archivo de autoejecución de raven-qt para escritorio..."
+             echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."
              echo ""
              mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
              echo "[Desktop Entry]"                                                                     > /home/$UsuarioDaemon/.config/autostart/raven.desktop
@@ -926,7 +924,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Autoejecución de monero
              echo ""
-             echo "Creando el archivo de autoejecución de monero-wallet-gui para el escritorio..."
+             echo "  Creando el archivo de autoejecución de monero-wallet-gui para el escritorio..."
              echo ""
              mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
              echo "[Desktop Entry]"                                                 > /home/$UsuarioDaemon/.config/autostart/monero.desktop
@@ -938,7 +936,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Autoejecución de chia
              echo ""
-             echo "Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
+             echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
              echo ""
              mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
              echo "[Desktop Entry]"                                                   > /home/$UsuarioDaemon/.config/autostart/chia.desktop
@@ -968,6 +966,14 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         ;;
 
         15)
+          echo ""
+          echo -e "${ColorVerde}  Instalando escritorio...${FinColor}"
+          echo ""
+          tasksel install mate-desktop
+          apt-get -y install xrdp
+        ;;
+
+        16)
           echo ""
           echo -e "${ColorVerde}  Reiniciando el sistema...${FinColor}"
           echo ""
