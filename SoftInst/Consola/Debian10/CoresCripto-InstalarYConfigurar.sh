@@ -46,12 +46,13 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
             6 "Instalar cartera de Monero" off
             7 "Instalar cartera de Chia" off
             8 "Instalar la pool php-mpos" off
-            9 "Crear contraseña para el usuario $UsuarioDaemon" on
-           10 "Crear comandos para administrar las carteras" on
-           11 "Activar auto-ejecución de carteras cli" off
-           12 "Activar auto-ejecución de carteras gui" off
-           13 "Reparar permisos" on
-           14 "Reniciar el sistema" off)
+            9 "Instalar la pool rvn-kawpow-pool" off
+           10 "Crear contraseña para el usuario $UsuarioDaemon" on
+           11 "Crear comandos para administrar las carteras" on
+           12 "Activar auto-ejecución de carteras cli" off
+           13 "Activar auto-ejecución de carteras gui" off
+           14 "Reparar permisos" on
+           15 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -627,12 +628,52 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
          9)
           echo ""
-          echo -e "${ColorVerde}  Cambiando la contraseña del usuario $UsuarioDaemon...${FinColor}"
+          echo -e "${ColorVerde}  Instalando la pool rvn-kawpow-pool...${FinColor}"
           echo ""
-          passwd $UsuarioDaemon
+
+          ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "git no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install git
+             fi
+
+          cd ~/SoftInst/
+          git clone https://github.com/notminerproduction/rvn-kawpow-pool.git
+          mv ~/SoftInst/rvn-kawpow-pool/ ~/
+          find ~/rvn-kawpow-pool/ -type f -iname "*.sh" -exec chmod +x {} \;
+          sed -i -e 's|"stratumHost": "192.168.0.200",|"stratumHost": "'"$DominioPool"'",|g'                                            ~/rvn-kawpow-pool/config.json
+          sed -i -e 's|"address": "RKopFydExeQXSZZiSTtg66sRAWvMzFReUj",|"address": "'"$DirCart"'",|g'                                   ~/rvn-kawpow-pool/pool_configs/ravencoin.json
+          sed -i -e 's|"donateaddress": "RKopFydExeQXSZZiSTtg66sRAWvMzFReUj",|"donateaddress": "RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy",|g' ~/rvn-kawpow-pool/pool_configs/ravencoin.json
+          sed -i -e 's|RL5SUNMHmjXtN1AzCRFQrFEhjnf7QQY7Tz|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g'                                         ~/rvn-kawpow-pool/pool_configs/ravencoin.json
+          sed -i -e 's|Ta26x9axaDQWaV2bt2z8Dk3R3dN7gHw9b6|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g'                                         ~/rvn-kawpow-pool/pool_configs/ravencoin.json
+          apt-get -y install npm
+  
+          # Modificar el archivo de instalación
+            find ~/rvn-kawpow-pool/install.sh -type f -exec sed -i -e "s|sudo ||g" {} \;
+            sed -i -e 's|apt upgrade -y|apt -y upgrade\napt install -y libssl-dev libboost-all-dev libminiupnpc-dev libtool autotools-dev redis-server|g'                                         ~/rvn-kawpow-pool/install.sh
+            sed -i -e 's|add-apt-repository -y ppa:chris-lea/redis-server|#add-apt-repository -y ppa:chris-lea/redis-server|g'                                                                    ~/rvn-kawpow-pool/install.sh
+            sed -i -e 's|add-apt-repository -y ppa:bitcoin/bitcoin|#add-apt-repository -y ppa:bitcoin/bitcoin|g'                                                                                  ~/rvn-kawpow-pool/install.sh
+            sed -i -e 's|apt install -y libdb4.8-dev libdb4.8++-dev libssl-dev libboost-all-dev libminiupnpc-dev libtool autotools-dev redis-server|apt install -y libdb4.8-dev libdb4.8++-dev|g' ~/rvn-kawpow-pool/install.sh
+  
+          ~/rvn-kawpow-pool/install.sh
+          find ~/rvn-kawpow-pool/pool-start.sh -type f -exec sed -i -e "s|sudo ||g" {} \;
+
         ;;
 
         10)
+
+          echo ""
+          echo -e "${ColorVerde}  Cambiando la contraseña del usuario $UsuarioDaemon...${FinColor}"
+          echo ""
+          passwd $UsuarioDaemon
+
+        ;;
+
+        11)
+
           echo ""
           echo -e "${ColorVerde}  Creando comandos para administrar las carteras...${FinColor}"
           echo ""
@@ -687,10 +728,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           chmod +x                                                               /home/$UsuarioDaemon/monero-daemon-parar.sh
 
           ## Reparación de permisos
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+
         ;;
 
-        11)
+        12)
           echo ""
           echo -e "${ColorVerde}  Activando auto-ejecución de carteras cli...${FinColor}"
           echo ""
@@ -773,7 +815,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
-        12)
+        13)
           echo ""
           echo -e "${ColorVerde}  Activando auto-ejecución de carteras gui...${FinColor}"
           echo ""
@@ -820,7 +862,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
-        13)
+        14)
           echo ""
           echo -e "${ColorVerde}  Reparando permisos...${FinColor}"
           echo ""
@@ -835,7 +877,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           chmod 4755 /home/pooladmin/CoreXCH/bin/chrome-sandbox
         ;;
 
-        14)
+        15)
           echo ""
           echo -e "${ColorVerde}  Reiniciando el sistema...${FinColor}"
           echo ""
