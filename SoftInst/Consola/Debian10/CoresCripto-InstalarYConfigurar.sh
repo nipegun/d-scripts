@@ -382,7 +382,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Arrancando argentumd..."
           echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentumd -daemon"
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentumd"
           sleep 5
           su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-arg.txt
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-arg.txt
