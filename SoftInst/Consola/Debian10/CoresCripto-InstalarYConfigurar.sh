@@ -307,8 +307,97 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}  Instalando la cartera de argentum...${FinColor}"
           echo ""
 
-          ## Reparación de permisos
+          echo "Determinando la última versión de argentum core..."
+          echo ""
+          ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "curl no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install curl
+             fi
+
+          UltVersAgentum=$(curl -s https://github.com/argentumproject/argentum/releases/ | grep linux | grep gnu | grep tar | grep href | cut -d '"' -f 2 | sed -n 1p | cut -d'-' -f 2)
+          echo ""
+          echo "La última versión de argentum core es la $UltVersArgentum"
+          echo ""
+
+          echo ""
+          echo "Intentando descargar el archivo comprimido de la última versión..."
+          echo ""
+          mkdir -p /root/SoftInst/Argentumcoin/ 2> /dev/null
+          rm -rf /root/SoftInst/Argentumcoin/*
+          cd /root/SoftInst/Argentumcoin/
+          ArchUltVersAgentum=$(curl -s https://github.com/argentumproject/argentum/releases/ | grep linux | grep gnu | grep tar | grep href | cut -d '"' -f 2 | sed -n 1p)
+          ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "wget no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install wget
+             fi
+          wget --no-check-certificate https://github.com$ArchUltVersAgentum -O /root/SoftInst/Argentumcoin/Argentum.tar.gz
+
+          echo ""
+          echo "Descomprimiendo el archivo..."
+          echo ""
+          ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "tar no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install tar
+             fi
+          tar -xf /root/SoftInst/Argentumcoin/Argentum.tar.gz
+          rm -rf /root/SoftInst/Argentumcoin/Argentum.tar.gz
+
+          echo ""
+          echo "Creando carpetas y archivos necesarios para ese usuario..."
+          echo ""
+          mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
+          #mkdir -p /home/$UsuarioDaemon/.raven/
+          #touch /home/$UsuarioDaemon/.raven/raven.conf
+          #echo "rpcuser=user1"      > /home/$UsuarioDaemon/.raven/raven.conf
+          #echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.raven/raven.conf
+          #echo "prune=550"         >> /home/$UsuarioDaemon/.raven/raven.conf
+          #echo "daemon=1"          >> /home/$UsuarioDaemon/.raven/raven.conf
+          rm -rf /home/$UsuarioDaemon/$CarpetaSoftARG/
+          mv /root/SoftInst/Argentumcoin/argentum-$UltVersArgentum/ /home/$UsuarioDaemon/$CarpetaSoftARG/
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+          find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
+          find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
+          find /home/$UsuarioDaemon/$CarpetaSoftARG/bin -type f -exec chmod +x {} \;
+          ## Denegar el acceso a la carpeta a los otros usuarios del sistema
+             #find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
+             #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
+
+          echo ""
+          echo "Arrancando argentumd..."
+          echo ""
+          su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentumd
+          sleep 5
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-arg.txt
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-arg.txt
+          echo ""
+          echo "La dirección para recibir argentum es:"
+          echo ""
+          cat /home/$UsuarioDaemon/pooladdress-arg.txt
+          DirCartARG=$(cat /home/$UsuarioDaemon/pooladdress-arg.txt)
+          echo ""
+          #echo "Información de la cartera:"
+          #echo ""
+          #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getwalletinfo"
+          #echo ""
+          #echo "Direcciones de recepción disponibles:"
+          #echo ""
+          #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getaddressesbyaccount ''"
+          #echo ""
+
+          ## Reparación de permisos
+             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         6)
@@ -893,6 +982,16 @@ echo ""
 echo -e "${ColorVerde}--------------------------------------------------------------------------${FinColor}"
 echo -e "${ColorVerde}Script de instalación de una pool de minería de criptomonedas, finalzaado.${FinColor}"
 echo -e "${ColorVerde}--------------------------------------------------------------------------${FinColor}"
+echo ""
+
+echo "ARGENTUM:"
+echo "Recuerda editar el cortafuegos del ordenador para que acepte conexiones TCP en el puerto xxx."
+echo "Si has instalado ArgentumCore en una MV de Proxmox agrega una regla a su cortauegos indicando:"
+echo ""
+echo "Dirección: out"
+echo "Acción: ACCEPT"
+echo "Protocolo: tcp"
+echo "Puerto destino: xxxx"
 echo ""
 
 echo "RAVEN:"
