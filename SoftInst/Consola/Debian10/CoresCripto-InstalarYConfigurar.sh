@@ -623,10 +623,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                 mysql -p mpos < /var/www/MPOS/sql/000_base_structure.sql
 
           ## Reparación de permisos
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
          9)
+
           echo ""
           echo -e "${ColorVerde}  Instalando la pool rvn-kawpow-pool...${FinColor}"
           echo ""
