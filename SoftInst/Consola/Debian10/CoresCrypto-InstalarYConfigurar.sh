@@ -237,6 +237,21 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              echo "chmod +x /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh"
              echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/litecoin-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+             
+          ## Icono de lanzamiento en el menú gráfico
+
+             echo ""
+             echo "  Agregando la aplicación gráfica al menú..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
+             echo "[Desktop Entry]"                                               > /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
+             echo "Name=Litecoin GUI"                                            >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
+             echo "Type=Application"                                             >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
+             echo "Exec=/home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh" >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
+             echo "Terminal=false"                                               >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
+             echo "Hidden=false"                                                 >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
+             echo "Categories=Cryptos"                                           >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
+             #echo "Icon="                                                       >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
 
           ## Autoejecución gráfica de Litecoin
 
@@ -245,7 +260,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
              echo "[Desktop Entry]"                                               > /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
-             echo "Name=Litecoin"                                                >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
+             echo "Name=Litecoin GUI"                                            >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
              echo "Type=Application"                                             >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
              echo "Exec=/home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh" >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
              echo "Terminal=false"                                               >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
@@ -423,6 +438,21 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "chmod +x /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh"
              echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/raven-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
+          ## Icono de lanzamiento en el menú gráfico
+
+             echo ""
+             echo "  Agregando la aplicación gráfica al menú..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
+             echo "[Desktop Entry]"                                            > /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+             echo "Name=Raven GUI"                                            >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+             echo "Type=Application"                                          >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+             echo "Exec=/home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh" >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+             echo "Terminal=false"                                            >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+             echo "Hidden=false"                                              >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+             echo "Categories=Cryptos"                                        >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+             #echo "Icon="                                                    >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+
           ## Autoejecución gráfica de Ravencoin
 
              echo ""
@@ -430,7 +460,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
              echo "[Desktop Entry]"                                             > /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Name=Raven"                                                 >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Name=Raven GUI"                                             >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
              echo "Type=Application"                                           >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
              echo "Exec=/home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh"  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
              echo "Terminal=false"                                             >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
@@ -594,6 +624,21 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "chmod +x /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh"
              echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/argentum-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
+          ## Icono de lanzamiento en el menú gráfico
+
+             echo ""
+             echo "  Agregando la aplicación gráfica al menú..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
+             echo "[Desktop Entry]"                                               > /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
+             echo "Name=Argentum GUI"                                            >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
+             echo "Type=Application"                                             >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
+             echo "Exec=/home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh" >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
+             echo "Terminal=false"                                               >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
+             echo "Hidden=false"                                                 >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
+             echo "Categories=Cryptos"                                           >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
+             #echo "Icon="                                                       >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
+
           ## Autoejecución gráfica de Argentum
 
              echo ""
@@ -601,7 +646,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
              echo "[Desktop Entry]"                                               > /home/$UsuarioDaemon/.config/autostart/argentum.desktop
-             echo "Name=Argentum"                                                >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
+             echo "Name=Argentum GUI"                                            >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
              echo "Type=Application"                                             >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
              echo "Exec=/home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh" >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
              echo "Terminal=false"                                               >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
@@ -731,6 +776,21 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "chmod +x /home/$UsuarioDaemon/ComandosCli/monero-daemon-iniciar"
              echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/ComandosCli/monero-daemon-iniciar'" >> /root/scripts/ComandosPostArranque.sh
 
+          ## Icono de lanzamiento en el menú gráfico
+
+             echo ""
+             echo "  Agregando la aplicación gráfica al menú..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
+             echo "[Desktop Entry]"                                              > /home/$UsuarioDaemon/.local/share/applications/monero.desktop
+             echo "Name=Monero GUI"                                             >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
+             echo "Type=Application"                                            >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
+             echo "Exec=/home/$UsuarioDaemon/ComandosCli/monero-gui-iniciar.sh" >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
+             echo "Terminal=false"                                              >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
+             echo "Hidden=false"                                                >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
+             echo "Categories=Cryptos"                                          >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
+             #echo "Icon="                                                      >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
+
           ## Autoejecución gráfica de monero
 
              echo ""
@@ -738,7 +798,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
              echo "[Desktop Entry]"                                              > /home/$UsuarioDaemon/.config/autostart/monero.desktop
-             echo "Name=Monero"                                                 >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             echo "Name=Monero GUI"                                             >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
              echo "Type=Application"                                            >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
              echo "Exec=/home/$UsuarioDaemon/ComandosCli/monero-gui-iniciar.sh" >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
              echo "Terminal=false"                                              >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
@@ -831,18 +891,47 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           mkdir -p /home/$UsuarioDaemon/.config/Chia Blockchain/ 2> /dev/null
           echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > /home/$UsuarioDaemon/.config/Chia Blockchain/Preferences
 
+          ## Comandos de terminal para Chia
+
+             mkdir -p /home/$UsuarioDaemon/ComandosCli/ 2> /dev/mull
+
+             echo '#!/bin/bash'                                                  > /home/$UsuarioDaemon/ComandosCli/chia-gui-iniciar.sh
+             echo ""                                                            >> /home/$UsuarioDaemon/ComandosCli/chia-gui-iniciar.sh
+             echo 'echo ""'                                                     >> /home/$UsuarioDaemon/ComandosCli/chia-gui-iniciar.sh
+             echo 'echo "  Iniciando chia-blockchain..."'                       >> /home/$UsuarioDaemon/ComandosCli/chia-gui-iniciar.sh
+             echo 'echo ""'                                                     >> /home/$UsuarioDaemon/ComandosCli/chia-gui-iniciar.sh
+             echo "/home/$UsuarioDaemon/ComandosCli/chia-daemon-parar.sh"       >> /home/$UsuarioDaemon/ComandosCli/chia-gui-iniciar.sh
+             echo "sleep 5"                                                     >> /home/$UsuarioDaemon/ComandosCli/chia-gui-iniciar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chia-blockchain %U" >> /home/$UsuarioDaemon/ComandosCli/chia-gui-iniciar.sh
+             chmod +x                                                              /home/$UsuarioDaemon/ComandosCli/chia-gui-iniciar.sh
+
+          ## Icono de lanzamiento en el menú gráfico
+
+             echo ""
+             echo "  Agregando la aplicación gráfica al menú..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
+             echo "[Desktop Entry]"                                            > /home/$UsuarioDaemon/.local/share/applications/chia.desktop
+             echo "Name=Chia GUI"                                             >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
+             echo "Type=Application"                                          >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
+             echo "Exec=/home/$UsuarioDaemon/ComandosCli/chia-gui-iniciar.sh" >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
+             echo "Terminal=false"                                            >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
+             echo "Hidden=false"                                              >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
+             echo "Categories=Cryptos"                                        >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
+             #echo "Icon="                                                    >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
+
           ## Autoejecución de chia
 
              echo ""
              echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
              echo ""
              mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-             echo "[Desktop Entry]"                                                   > /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Name=Chia"                                                        >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Type=Application"                                                 >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Exec=/home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chia-blockchain %U" >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Terminal=false"                                                   >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Hidden=false"                                                     >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "[Desktop Entry]"                                            > /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Name=Chia GUI"                                             >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Type=Application"                                          >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Exec=/home/$UsuarioDaemon/ComandosCli/chia-gui-iniciar.sh" >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Terminal=false"                                            >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Hidden=false"                                              >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
 
           ## Reparación de permisos
 
