@@ -156,11 +156,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
           mkdir -p /home/$UsuarioDaemon/.litecoin/
-          touch /home/$UsuarioDaemon/.litecoin/raven.conf
-          echo "rpcuser=user1"      > /home/$UsuarioDaemon/.litecoin/raven.conf
-          echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.litecoin/raven.conf
-          echo "prune=550"         >> /home/$UsuarioDaemon/.litecoin/raven.conf
-          echo "daemon=1"          >> /home/$UsuarioDaemon/.litecoin/raven.conf
+          touch /home/$UsuarioDaemon/.litecoin/litecoin.conf
+          echo "rpcuser=user1"      > /home/$UsuarioDaemon/.litecoin/litecoin.conf
+          echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.litecoin/litecoin.conf
+          echo "prune=550"         >> /home/$UsuarioDaemon/.litecoin/litecoin.conf
+          echo "daemon=1"          >> /home/$UsuarioDaemon/.litecoin/litecoin.conf
           rm -rf /home/$UsuarioDaemon/$CarpetaSoftLTC/
           mv /root/SoftInst/Litecoin/litecoin-$UltVersLite/ /home/$UsuarioDaemon/$CarpetaSoftLTC/
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
@@ -255,17 +255,22 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
              chmod +x /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/*
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+
+          ## Parar el daemon
+
+             su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh"
+             
         ;;
 
         4)
 
           echo ""
-          echo -e "${ColorVerde}-----------------------------------------${FinColor}"
-          echo -e "${ColorVerde}  Instalando la cartera de ravencoin...${FinColor}"
-          echo -e "${ColorVerde}-----------------------------------------${FinColor}"
+          echo -e "${ColorVerde}-------------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Instalando la cartera de raven...${FinColor}"
+          echo -e "${ColorVerde}-------------------------------------${FinColor}"
           echo ""
 
-          echo "  Determinando la última versión de ravencoin core..."
+          echo "  Determinando la última versión de raven core..."
           echo ""
           ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
@@ -372,50 +377,50 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getaddressesbyaccount ''"
           #echo ""
 
-          ## Comandos de terminal para ravencoin
+          ## Comandos de terminal para raven
 
              mkdir -p /home/$UsuarioDaemon/ComandosCli/ 2> /dev/null
 
-             echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
-             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
-             echo 'echo "Iniciando el daemon ravend..."'                                         >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
-             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
-             echo ""                                                                             >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"                              >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
-             chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
+             echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
+             echo 'echo "Iniciando el daemon ravend..."'                                         >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
+             echo ""                                                                             >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"                              >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
+             chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
 
-             echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
-             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
-             echo 'echo "Mostrando info de la cartera Ravencoin..."'                             >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
-             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
-             echo ""                                                                             >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo"             >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
-             chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+             echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
+             echo 'echo "Mostrando info de la cartera Raven..."'                                 >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
+             echo ""                                                                             >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo"             >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
+             chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
 
-             echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
-             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
-             echo 'echo "Parando el daemon ravend..."'                                           >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
-             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
-             echo ""                                                                             >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli stop"                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
-             chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+             echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
+             echo 'echo "Parando el daemon ravend..."'                                           >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
+             echo ""                                                                             >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli stop"                      >> /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
+             chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
 
-             echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
-             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
-             echo 'echo "Iniciando raven-qt..."'                                                 >> /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
-             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
-             echo "/home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh"                   >> /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
-             echo "sleep 5"                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-qt -min -testnet=0 -regtest=0" >> /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
-             chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
+             echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
+             echo 'echo "Iniciando raven-qt..."'                                                 >> /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
+             echo "/home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh"                       >> /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
+             echo "sleep 5"                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-qt -min -testnet=0 -regtest=0" >> /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
+             chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh
 
           ## Autoejecución de Ravencoin al iniciar el sistema
 
              echo ""
              echo "  Agregando ravend a los ComandosPostArranque..."
              echo ""
-             echo "chmod +x /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh"
-             echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/ravencoincoin-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+             echo "chmod +x /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh"
+             echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/raven-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
           ## Autoejecución gráfica de Ravencoin
 
@@ -423,17 +428,22 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."
              echo ""
              mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-             echo "[Desktop Entry]"                                                 > /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Name=Raven"                                                     >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Type=Application"                                               >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Exec=/home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh"  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Terminal=false"                                                 >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Hidden=false"                                                   >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "[Desktop Entry]"                                             > /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Name=Raven"                                                 >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Type=Application"                                           >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Exec=/home/$UsuarioDaemon/ComandosCli/raven-qt-iniciar.sh"  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Terminal=false"                                             >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Hidden=false"                                               >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
 
           ## Reparación de permisos
 
              chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/*
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+
+          ## Parar el daemon
+
+             su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh"
+
         ;;
 
         5)
@@ -551,7 +561,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
           echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-          echo 'echo "Mostrando info de la cartera Argentumcoin..."'                 >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo 'echo "Mostrando info de la cartera Argentum..."'                     >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
           echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
           echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
           echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getwalletinfo" >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
@@ -580,8 +590,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              echo "  Agregando argentumd a los ComandosPostArranque..."
              echo ""
-             echo "chmod +x /home/$UsuarioDaemon/ComandosCli/argentumcoin-daemon-iniciar.sh"
-             echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/argentumcoin-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+             echo "chmod +x /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh"
+             echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/argentum-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
           ## Autoejecución gráfica de Argentumcoin
 
@@ -600,6 +610,10 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
              chmod +x /home/$UsuarioDaemon/$CarpetaSoftARG/bin/*
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+
+          ## Parar el daemon
+
+             su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh"
         ;;
 
         6)
@@ -727,6 +741,10 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
              chmod +x /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/*
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+
+          ## Parar el daemon
+
+             su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh"
         ;;
 
         7)
@@ -820,9 +838,15 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "Hidden=false"                                                     >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
 
           ## Reparación de permisos
+
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
              chown root:root /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
              chmod 4755 /home/pooladmin/CoreXCH/bin/chrome-sandbox
+
+          ## Parar el daemon
+
+             su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/chia-daemon-parar.sh"
+
         ;;
 
         8)
