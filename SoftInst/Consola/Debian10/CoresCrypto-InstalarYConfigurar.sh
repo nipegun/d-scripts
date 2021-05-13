@@ -196,39 +196,39 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
              mkdir -p /home/$UsuarioDaemon/ComandosCli/ 2> /dev/null
 
-             echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
-             echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
-             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
-             echo 'echo "  Iniciando el daemon litecoind..."'                           >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
-             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon"          >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
-             chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+             echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+             echo ""                                                                         >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+             echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+             echo 'echo "  Iniciando el daemon litecoind..."'                                >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+             echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon"               >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+             chmod +x                                                                           /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
 
-             echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
-             echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
-             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
-             echo 'echo "  Mostrando info de la cartera Litecoin..."'                   >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
-             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo" >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
-             chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+             echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+             echo ""                                                                         >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+             echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+             echo 'echo "  Mostrando info de la cartera Litecoin..."'                        >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+             echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo | jq" >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+             chmod +x                                                                           /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
 
-             echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
-             echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
-             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
-             echo 'echo "  Parando el daemon litecoind..."'                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
-             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli stop"          >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
-             chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+             echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+             echo ""                                                                         >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+             echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+             echo 'echo "  Parando el daemon litecoind..."'                                  >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+             echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli stop"               >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+             chmod +x                                                                           /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
 
-             echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
-             echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
-             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
-             echo 'echo "  Iniciando litecoin-qt..."'                                   >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
-             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
-             echo "/home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh"           >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
-             echo "sleep 5"                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-qt"                >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
-             chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo ""                                                                         >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo 'echo "  Iniciando litecoin-qt..."'                                        >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo "/home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh"                >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo "sleep 5"                                                                  >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-qt"                     >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             chmod +x                                                                           /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
 
           ## Autoejecución de Litecoin al iniciar el sistema
 
@@ -394,7 +394,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
              echo 'echo "  Mostrando info de la cartera Raven..."'                               >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
              echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo"             >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo | jq"        >> /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
              chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/raven-cartera-info.sh
 
              echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh
@@ -552,39 +552,39 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           mkdir -p /home/$UsuarioDaemon/ComandosCli/ 2> /dev/null
 
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
-          echo 'echo "  Iniciando el daemon argentumd..."'                           >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentumd"                  >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+          echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+          echo ""                                                                         >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+          echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+          echo 'echo "  Iniciando el daemon argentumd..."'                                >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+          echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentumd"                       >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+          chmod +x                                                                           /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
 
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-          echo 'echo "  Mostrando info de la cartera Argentum..."'                   >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getwalletinfo" >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo ""                                                                         >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo 'echo "  Mostrando info de la cartera Argentum..."'                        >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getwalletinfo | jq" >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          chmod +x                                                                           /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
 
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
-          echo 'echo "  Parando el daemon argentumd..."'                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli stop"          >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo ""                                                                         >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo 'echo "  Parando el daemon argentumd..."'                                  >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli stop"               >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          chmod +x                                                                           /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
 
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          echo 'echo "  Iniciando argentum-qt..."'                                   >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          echo "/home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh"           >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          echo "sleep 5"                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-qt"                >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo ""                                                                         >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo 'echo "  Iniciando argentum-qt..."'                                        >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo "/home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh"                >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo "sleep 5"                                                                  >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-qt"                     >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          chmod +x                                                                           /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
 
           ## Autoejecución de Argentum al iniciar el sistema
 
@@ -594,7 +594,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "chmod +x /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh"
              echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/argentum-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
-          ## Autoejecución gráfica de Argentumcoin
+          ## Autoejecución gráfica de Argentum
 
              echo ""
              echo "  Creando el archivo de autoejecución de argentum-qt para escritorio..."
