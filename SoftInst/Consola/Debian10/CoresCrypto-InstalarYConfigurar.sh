@@ -52,7 +52,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
            12 "Activar auto-ejecución de carteras cli" off
            13 "Activar auto-ejecución de carteras gui" off
            14 "Reparar permisos" on
-           15 "Instalar escritorio" on
+           15 "Instalar escritorio" off
            16 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
