@@ -48,12 +48,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
             8 "Instalar la pool php-mpos" off
             9 "Instalar la pool rvn-kawpow-pool" off
            10 "Crear contraseña para el usuario $UsuarioDaemon" on
-           11 "Crear comandos para administrar las carteras" on
-           12 "Activar auto-ejecución de carteras cli" off
-           13 "Activar auto-ejecución de carteras gui" off
-           14 "Reparar permisos" on
-           15 "Instalar escritorio y algunas utilidades de terminal" off
-           16 "Reniciar el sistema" off)
+           11 "Reparar permisos" on
+           12 "Instalar escritorio y algunas utilidades de terminal" off
+           13 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -62,19 +59,28 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
       case $choice in
 
         1)
+
           echo ""
+          echo -e "${ColorVerde}-------------------------------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Creando el usuario para ejecutar y administrar la pool...${FinColor}"
+          echo -e "${ColorVerde}-------------------------------------------------------------${FinColor}"
           echo ""
+
           useradd -d /home/$UsuarioDaemon/ -s /bin/bash $UsuarioDaemon
 
           ## Reparación de permisos
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+ 
+             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         2)
+
           echo ""
+          echo -e "${ColorVerde}-----------------------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Borrando carteras y configuraciones anteriores...${FinColor}"
+          echo -e "${ColorVerde}-----------------------------------------------------${FinColor}"
           echo ""
+
           ## Litecoin
              rm -rf /home/$UsuarioDaemon/.litecoin/
           ## Raven
@@ -92,8 +98,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         ;;
 
         3)
+
           echo ""
-          echo -e "${ColorVerde}  Instalando el nodo litecoin...${FinColor}"
+          echo -e "${ColorVerde}-------------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Instalando la cartera litecoin...${FinColor}"
+          echo -e "${ColorVerde}-------------------------------------${FinColor}"
           echo ""
 
           echo "  Determinando la última versión de litecoin core..."
@@ -182,14 +191,78 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #echo ""
           #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getaddressesbylabel ''"
           #echo ""
+          
+          ## Comandos de terminal para Litecoin
+
+             mkdir -p /home/$UsuarioDaemon/ComandosCli/ 2> /dev/null
+
+             echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+             echo 'echo "Iniciando el daemon litecoind..."'                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+             echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon"          >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+             chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
+
+             echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+             echo 'echo "Mostrando info de la cartera Litecoin..."'                     >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+             echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo" >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+             chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
+
+             echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+             echo 'echo "Parando el daemon litecoind..."'                               >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+             echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli stop"          >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+             chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
+
+             echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo 'echo "Iniciando litecoin-qt..."'                                     >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo "/home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh"           >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo "sleep 5"                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-qt"                >> /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+             chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh
+
+          ## Autoejecución de Litecoin al iniciar el sistema
+
+             echo ""
+             echo "  Agregando litecoind a los ComandosPostArranque..."
+             echo ""
+             echo "chmod +x /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh"
+             echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/litecoin-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+
+          ## Autoejecución gráfica de Litecoin
+
+             echo ""
+             echo "  Creando el archivo de autoejecución de litecoin-qt para escritorio..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                               > /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
+             echo "Name=Litecoin"                                                >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
+             echo "Type=Application"                                             >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
+             echo "Exec=/home/$UsuarioDaemon/ComandosCli/litecoin-qt-iniciar.sh" >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
+             echo "Terminal=false"                                               >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
+             echo "Hidden=false"                                                 >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
 
           ## Reparación de permisos
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+
+             chmod +x /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/*
+             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         4)
+
           echo ""
+          echo -e "${ColorVerde}-----------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando la cartera de ravencoin...${FinColor}"
+          echo -e "${ColorVerde}-----------------------------------------${FinColor}"
           echo ""
 
           echo "  Determinando la última versión de ravencoin core..."
@@ -299,13 +372,76 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getaddressesbyaccount ''"
           #echo ""
 
+          ## Comandos de terminal para ravencoin
+
+             mkdir -p /home/$UsuarioDaemon/ComandosCli/ 2> /dev/null
+
+             echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
+             echo 'echo "Iniciando el daemon ravend..."'                                         >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
+             echo ""                                                                             >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"                              >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
+             chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
+
+             echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+             echo 'echo "Mostrando info de la cartera Ravencoin..."'                             >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+             echo ""                                                                             >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo"             >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+             chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
+
+             echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+             echo 'echo "Parando el daemon ravend..."'                                           >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+             echo ""                                                                             >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli stop"                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+             chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
+
+             echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
+             echo 'echo "Iniciando raven-qt..."'                                                 >> /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
+             echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
+             echo "/home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh"                   >> /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
+             echo "sleep 5"                                                                      >> /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-qt -min -testnet=0 -regtest=0" >> /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
+             chmod +x                                                                               /home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh
+
+          ## Autoejecución de Ravencoin al iniciar el sistema
+
+             echo ""
+             echo "  Agregando ravend a los ComandosPostArranque..."
+             echo ""
+             echo "chmod +x /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh"
+             echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/ravencoincoin-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+
+          ## Autoejecución gráfica de Ravencoin
+
+             echo ""
+             echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                                 > /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Name=Raven"                                                     >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Type=Application"                                               >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Exec=/home/$UsuarioDaemon/ComandosCli/ravencoin-qt-iniciar.sh"  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Terminal=false"                                                 >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             echo "Hidden=false"                                                   >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+
           ## Reparación de permisos
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+
+             chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/*
+             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         5)
+
           echo ""
+          echo -e "${ColorVerde}----------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando la cartera de argentum...${FinColor}"
+          echo -e "${ColorVerde}----------------------------------------${FinColor}"
           echo ""
 
           echo "  Determinando la última versión de argentum core..."
@@ -401,13 +537,77 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getaddressesbyaccount ''"
           #echo ""
 
+          ## Comandos de terminal para argentum
+
+          mkdir -p /home/$UsuarioDaemon/ComandosCli/ 2> /dev/null
+
+          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+          echo 'echo "Iniciando el daemon argentumd..."'                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentumd"                  >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
+
+          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo 'echo "Mostrando info de la cartera Argentumcoin..."'                 >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getwalletinfo" >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
+
+          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo 'echo "Parando el daemon argentumd..."'                               >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli stop"          >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
+
+          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo 'echo "Iniciando argentum-qt..."'                                     >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo "/home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh"           >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo "sleep 5"                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-qt"                >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
+
+          ## Autoejecución de Argentum al iniciar el sistema
+
+             echo ""
+             echo "  Agregando argentumd a los ComandosPostArranque..."
+             echo ""
+             echo "chmod +x /home/$UsuarioDaemon/ComandosCli/argentumcoin-daemon-iniciar.sh"
+             echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/argentumcoin-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+
+          ## Autoejecución gráfica de Argentumcoin
+
+             echo ""
+             echo "  Creando el archivo de autoejecución de argentum-qt para escritorio..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                               > /home/$UsuarioDaemon/.config/autostart/argentum.desktop
+             echo "Name=Argentum"                                                >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
+             echo "Type=Application"                                             >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
+             echo "Exec=/home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh" >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
+             echo "Terminal=false"                                               >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
+             echo "Hidden=false"                                                 >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
+
           ## Reparación de permisos
+
+             chmod +x /home/$UsuarioDaemon/$CarpetaSoftARG/bin/*
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         6)
+
           echo ""
+          echo -e "${ColorVerde}--------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando la cartera de monero...${FinColor}"
+          echo -e "${ColorVerde}--------------------------------------${FinColor}"
           echo ""
           
           echo ""
@@ -478,13 +678,63 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           apt-get -y install libxcb-xkb1
           apt-get -y install libxkbcommon-x11-0
 
+          ## Comandos de terminal para monero
+
+             mkdir -p /home/$UsuarioDaemon/ComandosCli/ 2> /dev/mull
+
+             echo '#!/bin/bash'                                                     > /home/$UsuarioDaemon/ComandosCli/monero-daemon-iniciar.sh
+             echo ""                                                               >> /home/$UsuarioDaemon/ComandosCli/monero-daemon-iniciar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monerod --detach"      >> /home/$UsuarioDaemon/ComandosCli/monero-daemon-iniciar.sh
+             chmod +x                                                                 /home/$UsuarioDaemon/ComandosCli/monero-daemon-iniciar.sh
+
+             echo '#!/bin/bash'                                                     > /home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh
+             echo ""                                                               >> /home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monerod stop_daemon"   >> /home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh
+             chmod +x                                                                 /home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh
+
+             echo '#!/bin/bash'                                                     > /home/$UsuarioDaemon/ComandosCli/monero-gui-iniciar.sh
+             echo 'echo ""'                                                        >> /home/$UsuarioDaemon/ComandosCli/monero-gui-iniciar.sh
+             echo 'echo "Iniciando monero-gui..."'                                 >> /home/$UsuarioDaemon/ComandosCli/monero-gui-iniciar.sh
+             echo 'echo ""'                                                        >> /home/$UsuarioDaemon/ComandosCli/monero-gui-iniciar.sh
+             echo ""                                                               >> /home/$UsuarioDaemon/ComandosCli/monero-gui-iniciar.sh
+             echo "/home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh"        >> /home/$UsuarioDaemon/ComandosCli/monero-gui-iniciar.sh
+             echo "sleep 5"                                                        >> /home/$UsuarioDaemon/ComandosCli/monero-gui-iniciar.sh
+             echo "/home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monero-wallet-gui %u"  >> /home/$UsuarioDaemon/ComandosCli/monero-gui-iniciar.sh
+             chmod +x                                                                 /home/$UsuarioDaemon/ComandosCli/monero-gui-iniciar.sh
+
+          ## Autoejecución de Monero al iniciar el sistema
+
+             echo ""
+             echo "  Agregando monerod a los ComandosPostArranque..."
+             echo ""
+             echo "chmod +x /home/$UsuarioDaemon/ComandosCli/monero-daemon-iniciar"
+             echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/ComandosCli/monero-daemon-iniciar'" >> /root/scripts/ComandosPostArranque.sh
+
+          ## Autoejecución gráfica de monero
+
+             echo ""
+             echo "  Creando el archivo de autoejecución de monero-wallet-gui para el escritorio..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                              > /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             echo "Name=Monero"                                                 >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             echo "Type=Application"                                            >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             echo "Exec=/home/$UsuarioDaemon/ComandosCli/monero-gui-iniciar.sh" >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             echo "Terminal=false"                                              >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             echo "Hidden=false"                                                >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+
           ## Reparación de permisos
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+
+             chmod +x /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/*
+             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         7)
+
           echo ""
+          echo -e "${ColorVerde}------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando la cartera de chia...${FinColor}"
+          echo -e "${ColorVerde}------------------------------------${FinColor}"
           echo ""
 
           ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
@@ -555,25 +805,32 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           rm -rf /root/SoftInst/Chiacoin/usr/
           mkdir -p /home/$UsuarioDaemon/.config/Chia Blockchain/ 2> /dev/null
           echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > /home/$UsuarioDaemon/.config/Chia Blockchain/Preferences
-          
-          ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
-             if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
-               echo ""
-               echo "tasksel no está instalado. Iniciando su instalación..."
-               echo ""
-               apt-get -y update
-               apt-get -y install tasksel
-             fi
+
+          ## Autoejecución de chia
+
+             echo ""
+             echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
+             echo ""
+             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                                   > /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Name=Chia"                                                        >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Type=Application"                                                 >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Exec=/home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chia-blockchain %U" >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Terminal=false"                                                   >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             echo "Hidden=false"                                                     >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
 
           ## Reparación de permisos
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
-          chown root:root /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
-          chmod 4755 /home/pooladmin/CoreXCH/bin/chrome-sandbox
+             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+             chown root:root /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
+             chmod 4755 /home/pooladmin/CoreXCH/bin/chrome-sandbox
         ;;
 
         8)
+
           echo ""
+          echo -e "${ColorVerde}------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando la pool MPOS...${FinColor}"
+          echo -e "${ColorVerde}------------------------------${FinColor}"
           echo ""
 
           ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
@@ -720,7 +977,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
          9)
 
           echo ""
+          echo -e "${ColorVerde}-----------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando la pool rvn-kawpow-pool...${FinColor}"
+          echo -e "${ColorVerde}-----------------------------------------${FinColor}"
           echo ""
 
           ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
@@ -758,8 +1017,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         10)
 
           echo ""
+          echo -e "${ColorVerde}-------------------------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Cambiando la contraseña del usuario $UsuarioDaemon...${FinColor}"
+          echo -e "${ColorVerde}-------------------------------------------------------${FinColor}"
           echo ""
+
           passwd $UsuarioDaemon
 
         ;;
@@ -767,258 +1029,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         11)
 
           echo ""
-          echo -e "${ColorVerde}  Creando comandos para administrar las carteras...${FinColor}"
-          echo ""
-          mkdir -p /home/$UsuarioDaemon/ComandosCli/ 2> /dev/null
-
-          ## Comandos para litecoin
-
-          chmod +x /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/*
-
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
-          echo 'echo "Iniciando el daemon litecoind..."'                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon"          >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh
-
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
-          echo 'echo "Mostrando info de la cartera Litecoin..."'                     >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo" >> /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/litecoin-cartera-info.sh
-
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
-          echo 'echo "Parando el daemon litecoind..."'                               >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli stop"          >> /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh
-
-          ## Comandos para ravencoin
-
-          chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/*
-
-          echo '#!/bin/bash'                                       > /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
-          echo 'echo ""'                                          >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
-          echo 'echo "Iniciando el daemon ravend..."'             >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
-          echo 'echo ""'                                          >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
-          echo ""                                                 >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"  >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
-          chmod +x                                                   /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-iniciar.sh
-
-          echo '#!/bin/bash'                                                       > /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
-          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
-          echo 'echo "Mostrando info de la cartera Ravencoin..."'                 >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
-          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
-          echo ""                                                                 >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo" >> /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
-          chmod +x                                                                   /home/$UsuarioDaemon/ComandosCli/ravencoin-cartera-info.sh
-
-          echo '#!/bin/bash'                                                       > /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
-          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
-          echo 'echo "Parando el daemon ravend..."'                               >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
-          echo 'echo ""'                                                          >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
-          echo ""                                                                 >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli stop"          >> /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
-          chmod +x                                                                   /home/$UsuarioDaemon/ComandosCli/ravencoin-daemon-parar.sh
-
-          ## Comandos para argentum
-
-          chmod +x /home/$UsuarioDaemon/$CarpetaSoftARG/bin/*
-
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
-          echo 'echo "Iniciando el daemon argentumd..."'                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentumd"                  >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/argentum-daemon-iniciar.sh
-
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-          echo 'echo "Mostrando info de la cartera Argentumcoin..."'                 >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getwalletinfo" >> /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/argentum-cartera-info.sh
-
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
-          echo 'echo "Parando el daemon argentumd..."'                               >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli stop"          >> /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh
-
-          echo '#!/bin/bash'                                                          > /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          echo 'echo "Iniciando argentum qt..."'                                     >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          echo 'echo ""'                                                             >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          echo ""                                                                    >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          echo "/home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh"           >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-qt"                >> /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-          chmod +x                                                                      /home/$UsuarioDaemon/ComandosCli/argentum-qt-iniciar.sh
-
-          ## Comandos para monero
-
-          chmod +x /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/*
-
-          echo '#!/bin/bash'                                                   > /home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh
-          echo ""                                                             >> /home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monerod stop_daemon" >> /home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh
-          chmod +x                                                               /home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh
-
-          ## Reparación de permisos
-             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
-
-        ;;
-
-        12)
-          echo ""
-          echo -e "${ColorVerde}  Activando auto-ejecución de carteras cli...${FinColor}"
-          echo ""
-
-          ## Autoejecución de Litecoin
-             echo ""
-             echo "  Agregando litecoind a los ComandosPostArranque..."
-             echo ""
-             echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind"
-             echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/"$CarpetaSoftLTC"/bin/litecoind -daemon'" >> /root/scripts/ComandosPostArranque.sh
-
-             #echo ""
-             #echo "Creando el servicio para systemd..."
-             #echo ""
-             #echo "[Unit]"                                                                > /etc/systemd/system/litecoind.service
-             #echo "Description=Litecoin daemon"                                          >> /etc/systemd/system/litecoind.service
-             #echo "After=network.target"                                                 >> /etc/systemd/system/litecoind.service
-             #echo ""                                                                     >> /etc/systemd/system/litecoind.service
-             #echo "[Service]"                                                            >> /etc/systemd/system/litecoind.service
-             #echo "User=$UsuarioDaemon"                                                  >> /etc/systemd/system/litecoind.service
-             #echo "Group=$UsuarioDaemon"                                                 >> /etc/systemd/system/litecoind.service
-             #echo ""                                                                     >> /etc/systemd/system/litecoind.service
-             #echo "Type=forking"                                                         >> /etc/systemd/system/litecoind.service
-             #echo "PIDFile=/home/$UsuarioDaemon/litecoind-pid.txt"                       >> /etc/systemd/system/litecoind.service
-             #echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon" >> /etc/systemd/system/litecoind.service
-             #echo "Restart=always"                                                       >> /etc/systemd/system/litecoind.service
-             #echo "PrivateTmp=true"                                                      >> /etc/systemd/system/litecoind.service
-             #echo "TimeoutStopSec=60s"                                                   >> /etc/systemd/system/litecoind.service
-             #echo "TimeoutStartSec=2s"                                                   >> /etc/systemd/system/litecoind.service
-             #echo "StartLimitInterval=120s"                                              >> /etc/systemd/system/litecoind.service
-             #echo "StartLimitBurst=5"                                                    >> /etc/systemd/system/litecoind.service
-             #echo "[Install]"                                                            >> /etc/systemd/system/litecoind.service
-             #echo "WantedBy=multi-user.target"                                           >> /etc/systemd/system/litecoind.service
-             #touch /home/$UsuarioDaemon/litecoind-pid.txt
-             #chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/litecoind-pid.txt
-             #systemctl enable litecoind.service
-
-          ## Autoejecución de Ravencoin
-             echo ""
-             echo "  Agregando ravend a los ComandosPostArranque..."
-             echo ""
-             echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"
-             echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftRVN"/bin/ravend'" >> /root/scripts/ComandosPostArranque.sh
-
-             #echo ""
-             #echo "Creando el servicio para systemd..."
-             #echo ""
-             #echo "[Unit]"                                                             > /etc/systemd/system/ravend.service
-             #echo "Description=Ravencoin daemon"                                      >> /etc/systemd/system/ravend.service
-             #echo "After=network.target"                                              >> /etc/systemd/system/ravend.service
-             #echo ""                                                                  >> /etc/systemd/system/ravend.service
-             #echo "[Service]"                                                         >> /etc/systemd/system/ravend.service
-             #echo "User=$UsuarioDaemon"                                               >> /etc/systemd/system/ravend.service
-             #echo "Group=$UsuarioDaemon"                                              >> /etc/systemd/system/ravend.service
-             #echo ""                                                                  >> /etc/systemd/system/ravend.service
-             #echo "Type=forking"                                                      >> /etc/systemd/system/ravend.service
-             #echo "PIDFile=/home/$UsuarioDaemon/ravend-pid.txt"                       >> /etc/systemd/system/ravend.service
-             #echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend -daemon -pid=/home/$UsuarioDaemon/ravend.pid.txt -conf=/home/$UsuarioDaemon/.raven/raven.conf -datadir=/var/lib/ravend -disablewallet"
-             #echo "ExecStart=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend -daemon" >> /etc/systemd/system/ravend.service
-             #echo "Restart=always"                                                    >> /etc/systemd/system/ravend.service
-             #echo "PrivateTmp=true"                                                   >> /etc/systemd/system/ravend.service
-             #echo "TimeoutStopSec=60s"                                                >> /etc/systemd/system/ravend.service
-             #echo "TimeoutStartSec=2s"                                                >> /etc/systemd/system/ravend.service
-             #echo "StartLimitInterval=120s"                                           >> /etc/systemd/system/ravend.service
-             #echo "StartLimitBurst=5"                                                 >> /etc/systemd/system/ravend.service
-             #echo "[Install]"                                                         >> /etc/systemd/system/ravend.service
-             #echo "WantedBy=multi-user.target"                                        >> /etc/systemd/system/ravend.service
-             #touch /home/$UsuarioDaemon/ravend-pid.txt
-             #chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ravend-pid.txt
-             #systemctl enable ravend.service
-
-          ## Autoejecución de Argentum
-             echo ""
-             echo "  Agregando argentumd a los ComandosPostArranque..."
-             echo ""
-             echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentumd"
-             echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftARG"/bin/argentumd'" >> /root/scripts/ComandosPostArranque.sh
-
-          ## Autoejecución de monero
-             echo ""
-             echo "  Agregando monerod a los ComandosPostArranque..."
-             echo ""
-             echo "chmod +x /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monerod"
-             echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/"$CarpetaSoftXMR"/bin/monerod --detach'" >> /root/scripts/ComandosPostArranque.sh
-
-          ## Reparación de permisos
-             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
-        ;;
-
-        13)
-          echo ""
-          echo -e "${ColorVerde}  Activando auto-ejecución de carteras gui...${FinColor}"
-          echo ""
-
-          ## Autoejecución de Litecoin
-
-          ## Autoejecución de Ravencoin
-             echo ""
-             echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."
-             echo ""
-             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-             echo "[Desktop Entry]"                                                                     > /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Name=Raven"                                                                         >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Type=Application"                                                                   >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Exec=/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-qt -min -testnet=0 -regtest=0"  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Terminal=false"                                                                     >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Hidden=false"                                                                       >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-
-          ## Autoejecución de monero
-             echo ""
-             echo "  Creando el archivo de autoejecución de monero-wallet-gui para el escritorio..."
-             echo ""
-             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-             echo "[Desktop Entry]"                                                 > /home/$UsuarioDaemon/.config/autostart/monero.desktop
-             echo "Name=Monero"                                                    >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
-             echo "Type=Application"                                               >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
-             echo "Exec=/home/$UsuarioDaemon/Monerocoin/bin/monero-wallet-gui %u"  >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
-             echo "Terminal=false"                                                 >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
-             echo "Hidden=false"                                                   >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
-
-          ## Autoejecución de chia
-             echo ""
-             echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
-             echo ""
-             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-             echo "[Desktop Entry]"                                                   > /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Name=Chia"                                                        >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Type=Application"                                                 >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Exec=/home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chia-blockchain %U" >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Terminal=false"                                                   >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Hidden=false"                                                     >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-
-          ## Reparación de permisos
-             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
-        ;;
-
-        14)
-          echo ""
+          echo -e "${ColorVerde}-------------------------${FinColor}"
           echo -e "${ColorVerde}  Reparando permisos...${FinColor}"
+          echo -e "${ColorVerde}-------------------------${FinColor}"
           echo ""
+
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/
           find /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/ -type f -exec chmod +x {} \;
           find /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ -type f -exec chmod +x {} \;
@@ -1030,20 +1045,37 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           chmod 4755 /home/pooladmin/CoreXCH/bin/chrome-sandbox
         ;;
 
-        15)
+        12)
+
           echo ""
+          echo -e "${ColorVerde}----------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando escritorio...${FinColor}"
+          echo -e "${ColorVerde}----------------------------${FinColor}"
           echo ""
+
+          ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "tasksel no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install tasksel
+             fi
           tasksel install mate-desktop
           apt-get -y install xrdp jq
           systemctl set-default -f multi-user.target
         ;;
 
-        16)
+        13)
+
           echo ""
+          echo -e "${ColorVerde}-----------------------------${FinColor}"
           echo -e "${ColorVerde}  Reiniciando el sistema...${FinColor}"
+          echo -e "${ColorVerde}-----------------------------${FinColor}"
           echo ""
+
           shutdown -r now
+
         ;;
 
       esac
