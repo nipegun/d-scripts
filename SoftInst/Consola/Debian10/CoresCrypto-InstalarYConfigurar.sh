@@ -52,7 +52,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
            12 "Activar auto-ejecución de carteras cli" off
            13 "Activar auto-ejecución de carteras gui" off
            14 "Reparar permisos" on
-           15 "Instalar escritorio" off
+           15 "Instalar escritorio y algunas utilidades de terminal" off
            16 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
@@ -1002,7 +1002,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}  Instalando escritorio...${FinColor}"
           echo ""
           tasksel install mate-desktop
-          apt-get -y install xrdp
+          apt-get -y install xrdp jq
+          systemctl set-default -f multi-user.target
         ;;
 
         16)
