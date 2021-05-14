@@ -937,7 +937,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
              chown root:root /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
-             chmod 4755 /home/pooladmin/CoreXCH/bin/chrome-sandbox
+             chmod 4755 /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
 
           ## Parar el daemon
 
