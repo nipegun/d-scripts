@@ -1162,7 +1162,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           find /home/$UsuarioDaemon/ -type f -iname "*.sh" -exec chmod +x {} \;
           
           chown root:root /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
-          chmod 4755 /home/pooladmin/CoreXCH/bin/chrome-sandbox
+          chmod 4755 /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
         ;;
 
         12)
