@@ -1111,15 +1111,16 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                apt-get -y install git
              fi
 
-          cd ~/SoftInst/
+          mkdir -p /root/SoftInst/ 2> /dev/null
+          cd /root/SoftInst/
           git clone https://github.com/notminerproduction/rvn-kawpow-pool.git
-          mv ~/SoftInst/rvn-kawpow-pool/ ~/
-          find ~/rvn-kawpow-pool/ -type f -iname "*.sh" -exec chmod +x {} \;
-          sed -i -e 's|"stratumHost": "192.168.0.200",|"stratumHost": "'"$DominioPool"'",|g'                                            ~/rvn-kawpow-pool/config.json
-          sed -i -e 's|"address": "RKopFydExeQXSZZiSTtg66sRAWvMzFReUj",|"address": "'"$DirCart"'",|g'                                   ~/rvn-kawpow-pool/pool_configs/ravencoin.json
-          sed -i -e 's|"donateaddress": "RKopFydExeQXSZZiSTtg66sRAWvMzFReUj",|"donateaddress": "RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy",|g' ~/rvn-kawpow-pool/pool_configs/ravencoin.json
-          sed -i -e 's|RL5SUNMHmjXtN1AzCRFQrFEhjnf7QQY7Tz|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g'                                         ~/rvn-kawpow-pool/pool_configs/ravencoin.json
-          sed -i -e 's|Ta26x9axaDQWaV2bt2z8Dk3R3dN7gHw9b6|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g'                                         ~/rvn-kawpow-pool/pool_configs/ravencoin.json
+          mv /root/SoftInst/rvn-kawpow-pool/ /root/
+          find /root/rvn-kawpow-pool/ -type f -iname "*.sh" -exec chmod +x {} \;
+          sed -i -e 's|"stratumHost": "192.168.0.200",|"stratumHost": "'"$DominioPool"'",|g'                                            /root/rvn-kawpow-pool/config.json
+          sed -i -e 's|"address": "RKopFydExeQXSZZiSTtg66sRAWvMzFReUj",|"address": "'"$DirCartRVN"'",|g'                                /root/rvn-kawpow-pool/pool_configs/ravencoin.json
+          sed -i -e 's|"donateaddress": "RKopFydExeQXSZZiSTtg66sRAWvMzFReUj",|"donateaddress": "RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy",|g' /root/rvn-kawpow-pool/pool_configs/ravencoin.json
+          sed -i -e 's|RL5SUNMHmjXtN1AzCRFQrFEhjnf7QQY7Tz|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g'                                         /root/rvn-kawpow-pool/pool_configs/ravencoin.json
+          sed -i -e 's|Ta26x9axaDQWaV2bt2z8Dk3R3dN7gHw9b6|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g'                                         /root/rvn-kawpow-pool/pool_configs/ravencoin.json
           apt-get -y install npm
   
           # Modificar el archivo de instalación
