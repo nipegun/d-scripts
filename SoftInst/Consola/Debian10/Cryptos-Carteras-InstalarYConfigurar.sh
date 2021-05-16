@@ -19,7 +19,6 @@ CarpetaSoftRVN="CoreRVN"
 CarpetaSoftARG="CoreARG"
 CarpetaSoftXMR="CoreXMR"
 CarpetaSoftXCH="CoreXCH"
-DominioPool="localhost"
 
 echo ""
 echo -e "${ColorVerde}-----------------------------------------------------------------------------${FinColor}"
