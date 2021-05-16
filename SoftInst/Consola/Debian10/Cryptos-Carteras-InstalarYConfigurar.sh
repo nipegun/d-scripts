@@ -21,9 +21,9 @@ CarpetaSoftXMR="CoreXMR"
 CarpetaSoftXCH="CoreXCH"
 
 echo ""
-echo -e "${ColorVerde}-----------------------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}Iniciando el script de instalación de una pool de minería de criptomonedas...${FinColor}"
-echo -e "${ColorVerde}-----------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}---------------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}Iniciando el script de instalación de las diferentes carteras de criptomonedas...${FinColor}"
+echo -e "${ColorVerde}---------------------------------------------------------------------------------${FinColor}"
 echo ""
 
 ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -36,7 +36,7 @@ echo ""
    fi
 
 menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
-  opciones=(1 "Crear usuario sin privilegios para ejecutar la pool (obligatorio)" on
+  opciones=(1 "Crear usuario sin privilegios para ejecutar la pool (Obligatorio)" on
             2 "Borrar todas las carteras y configuraciones ya existentes" off
             3 "Instalar cartera de Litecoin" off
             4 "Instalar cartera de Ravencoin" off
@@ -48,8 +48,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
            10 "(Todavía no disponible)" off
            11 "(Todavía no disponible)" off
            12 "Crear contraseña para el usuario $UsuarioDaemon" on
-           13 "Reparar permisos" on
-           14 "Instalar escritorio y algunas utilidades de terminal" off
+           13 "Instalar escritorio y algunas utilidades de terminal" off
+           14 "Reparar permisos (Obligatorio)" on
            15 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
@@ -366,9 +366,6 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
           find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
           find /home/$UsuarioDaemon/$CarpetaSoftRVN/bin -type f -exec chmod +x {} \;
-          ## Denegar el acceso a la carpeta a los otros usuarios del sistema
-             #find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
-             #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
 
           echo ""
           echo "  Arrancando ravencoind..."
@@ -383,14 +380,6 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           cat /home/$UsuarioDaemon/pooladdress-rvn.txt
           DirCartRVN=$(cat /home/$UsuarioDaemon/pooladdress-rvn.txt)
           echo ""
-          #echo "Información de la cartera:"
-          #echo ""
-          #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo"
-          #echo ""
-          #echo "Direcciones de recepción disponibles:"
-          #echo ""
-          #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getaddressesbyaccount ''"
-          #echo ""
 
           ## Comandos de terminal para raven
 
@@ -1000,26 +989,6 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         13)
 
           echo ""
-          echo -e "${ColorVerde}-------------------------${FinColor}"
-          echo -e "${ColorVerde}  Reparando permisos...${FinColor}"
-          echo -e "${ColorVerde}-------------------------${FinColor}"
-          echo ""
-
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/
-          find /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioDaemon/$CarpetaSoftARG/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioDaemon/ -type f -iname "*.sh" -exec chmod +x {} \;
-          
-          chown root:root /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
-          chmod 4755 /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
-
-        ;;
-
-        14)
-
-          echo ""
           echo -e "${ColorVerde}----------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando escritorio...${FinColor}"
           echo -e "${ColorVerde}----------------------------${FinColor}"
@@ -1036,6 +1005,32 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           tasksel install mate-desktop
           apt-get -y install xrdp jq
           systemctl set-default -f multi-user.target
+
+        ;;
+
+        14)
+
+          echo ""
+          echo -e "${ColorVerde}-------------------------${FinColor}"
+          echo -e "${ColorVerde}  Reparando permisos...${FinColor}"
+          echo -e "${ColorVerde}-------------------------${FinColor}"
+          echo ""
+
+          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/
+
+          ## Denegar a los otros usuarios del sistema el acceso a la carpeta del usuario 
+             find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
+             find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
+
+          find /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/$CarpetaSoftARG/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/ -type f -iname "*.sh" -exec chmod +x {} \;
+
+          ## Reparar permisos para pemitir la ejecución de la cartera de Chia
+             chown root:root /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
+             chmod 4755 /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
 
         ;;
 
