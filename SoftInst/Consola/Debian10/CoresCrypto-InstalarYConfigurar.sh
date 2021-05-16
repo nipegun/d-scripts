@@ -181,7 +181,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "  La dirección para recibir litecoins es:"
           echo ""
           cat /home/$UsuarioDaemon/pooladdress-ltc.txt
-          DirCart=$(cat /home/$UsuarioDaemon/pooladdress-ltc.txt)
+          DirCartLTC=$(cat /home/$UsuarioDaemon/pooladdress-ltc.txt)
           echo ""
           #echo "Información de la cartera:"
           #echo ""
@@ -381,7 +381,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "  La dirección para recibir ravencoins es:"
           echo ""
           cat /home/$UsuarioDaemon/pooladdress-rvn.txt
-          DirCart=$(cat /home/$UsuarioDaemon/pooladdress-rvn.txt)
+          DirCartRVN=$(cat /home/$UsuarioDaemon/pooladdress-rvn.txt)
           echo ""
           #echo "Información de la cartera:"
           #echo ""
