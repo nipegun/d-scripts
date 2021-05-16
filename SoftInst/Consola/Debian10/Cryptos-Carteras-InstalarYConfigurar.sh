@@ -69,7 +69,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           useradd -d /home/$UsuarioDaemon/ -s /bin/bash $UsuarioDaemon
 
           ## Reparación de permisos
- 
+
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
@@ -118,7 +118,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           UltVersLite=$(curl --silent https://litecoin.org | grep linux-gnu | grep x86_64 | grep -v in64 | cut -d '"' -f 2 | sed 2d | cut -d '-' -f 3)
           echo ""
           echo "  La última versión de raven es la $UltVersLite"
-          
+
           echo ""
           echo "  Intentando descargar el archivo comprimido de la última versión..."
           echo ""
@@ -136,7 +136,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "  Pidiendo el archivo en formato tar.gz..."
           echo ""
           wget https://download.litecoin.org/litecoin-$UltVersLite/linux/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
-          
+
           echo ""
           echo "  Descomprimiendo el archivo..."
           echo ""
@@ -150,7 +150,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
             fi
           tar -xf /root/SoftInst/Litecoin/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
           rm -rf /root/SoftInst/Litecoin/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
-          
+
           echo ""
           echo "  Creando carpetas y archivos necesarios para ese usuario..."
           echo ""
@@ -167,9 +167,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
           find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
           find /home/$UsuarioDaemon/$CarpetaSoftLTC/bin -type f -exec chmod +x {} \;
-          ## Denegar el acceso a la carpeta a los otros usuarios del sistema
-             #find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
-             #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
+
           echo ""
           echo "  Arrancando litecoind..."
           echo ""
@@ -183,15 +181,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           cat /home/$UsuarioDaemon/pooladdress-ltc.txt
           DirCartLTC=$(cat /home/$UsuarioDaemon/pooladdress-ltc.txt)
           echo ""
-          #echo "Información de la cartera:"
-          #echo ""
-          #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo"
-          #echo ""
-          #echo "Direcciones de recepción disponibles:"
-          #echo ""
-          #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getaddressesbylabel ''"
-          #echo ""
-          
+
           ## Comandos de terminal para Litecoin
 
              mkdir -p /home/$UsuarioDaemon/ComandosCli/ 2> /dev/null
@@ -237,7 +227,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              echo "chmod +x /home/$UsuarioDaemon/ComandosCli/litecoin-daemon-iniciar.sh"
              echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/litecoin-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
-             
+
           ## Icono de lanzamiento en el menú gráfico
 
              echo ""
@@ -274,7 +264,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Parar el daemon
 
              su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh"
-             
+
         ;;
 
         4)
@@ -558,14 +548,6 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           cat /home/$UsuarioDaemon/pooladdress-arg.txt
           DirCartARG=$(cat /home/$UsuarioDaemon/pooladdress-arg.txt)
           echo ""
-          #echo "Información de la cartera:"
-          #echo ""
-          #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getwalletinfo"
-          #echo ""
-          #echo "Direcciones de recepción disponibles:"
-          #echo ""
-          #su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getaddressesbyaccount ''"
-          #echo ""
 
           ## Comandos de terminal para argentum
 
@@ -658,7 +640,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}  Instalando la cartera de monero...${FinColor}"
           echo -e "${ColorVerde}--------------------------------------${FinColor}"
           echo ""
-          
+
           echo ""
           echo "  Descargando el archivo comprimido de la última release..."
           echo ""
@@ -801,6 +783,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Parar el daemon
 
              su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh"
+
         ;;
 
         7)
