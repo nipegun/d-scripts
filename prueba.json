@@ -33,7 +33,7 @@
             "host": "127.0.0.1",
             "port": 5432,
             "user": "miningcore",
-            "password": "-Your-Miningcore-SQL-Password-Here-",
+            "password": "12345678",
             "database": "miningcore"
         }
     },
