@@ -35,8 +35,8 @@ echo ""
 menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
   opciones=(1 "Instalar la pool rvn-kawpow-pool (Para Ravencoin)" on
             2 "Instalar la pool php-mpos" off
-            3 "" off
-            4 "" off
+            3 "Instalar NodeJS" off
+            4 "Instalar node-multi-hashing" off
             5 "Reparar permisos" off
             6 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -237,12 +237,41 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         3)
 
+          echo ""
+          echo -e "${ColorVerde}------------------------${FinColor}"
+          echo -e "${ColorVerde}  Instalando NodeJS...${FinColor}"
+          echo -e "${ColorVerde}------------------------${FinColor}"
+          echo ""
+
+          apt-get -y update
+          apt-get -y install nodejs npm
+
         ;;
 
         4)
 
+          echo ""
+          echo -e "${ColorVerde}------------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Instalando node-multi-hashing...${FinColor}"
+          echo -e "${ColorVerde}------------------------------------${FinColor}"
+          echo ""
+
+          npm install multi-hashing
+
         ;;
 
+        5)
+
+          echo ""
+          echo -e "${ColorVerde}-------------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Instalando kawpow-stratum-pool...${FinColor}"
+          echo -e "${ColorVerde}-------------------------------------${FinColor}"
+          echo ""
+
+          cd /root/
+          git clone https://github.com/RavenCommunity/kawpow-stratum-pool
+
+        ;;
         5)
 
           echo ""
