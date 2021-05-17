@@ -59,7 +59,7 @@
 
         "jobRebroadcastTimeout": 10,
         "clientConnectionTimeout": 600,
-    
+
     "banning": {
             "enabled": false,
             "time": 600,
