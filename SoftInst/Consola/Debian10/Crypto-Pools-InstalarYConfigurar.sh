@@ -640,7 +640,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Ejecutar MiningCore
              cd /root/miningcore/build/
-             dotnet Miningcore.dll -c config.json
+             dotnet Miningcore.dll -c /root/miningcore/build/config-rvn.json
 
         ;;
 
