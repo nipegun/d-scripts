@@ -17,6 +17,8 @@ UsuarioDaemon="pooladmin"
 DominioPool="localhost"
 MiningCoreDBPass="12345678"
 VersPHP="7.3"
+UsuarioRPCrvn="rvnrpc"
+PassRPCrvn="rvnrpcpass"
 
 echo ""
 echo -e "${ColorVerde}-----------------------------------------------------------------------------${FinColor}"
@@ -601,9 +603,9 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo '        },'                                                   >> /root/miningcore/build/config-rvn.json
              echo '        "daemons": [{'                                        >> /root/miningcore/build/config-rvn.json
              echo '            "host": "127.0.0.1",'                             >> /root/miningcore/build/config-rvn.json
-             echo '            "port": 42068,'                                   >> /root/miningcore/build/config-rvn.json
-             echo '            "user": "user",'                                  >> /root/miningcore/build/config-rvn.json
-             echo '            "password": "*-Your-Special-Password-*",'         >> /root/miningcore/build/config-rvn.json
+             echo '            "port": 8766,'                                    >> /root/miningcore/build/config-rvn.json
+             echo '            "user": "$UsuarioRPCrvn",'                        >> /root/miningcore/build/config-rvn.json
+             echo '            "password": "$PassRPCrvn",'                       >> /root/miningcore/build/config-rvn.json
              echo '        "zmqBlockNotifySocket": "tcp://127.0.0.1:8767",'      >> /root/miningcore/build/config-rvn.json
              echo '        }],'                                                  >> /root/miningcore/build/config-rvn.json
              echo '        "paymentProcessing": {'                               >> /root/miningcore/build/config-rvn.json
