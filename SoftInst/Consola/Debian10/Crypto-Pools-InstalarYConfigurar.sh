@@ -38,7 +38,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
             3 "Instalar NodeJS" off
             4 "Instalar node-multi-hashing" off
             5 "Reparar permisos" off
-            6 "Reniciar el sistema" off)
+            6 "Instalar MiningCore" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -295,12 +295,254 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
         6)
 
           echo ""
-          echo -e "${ColorVerde}-----------------------------${FinColor}"
-          echo -e "${ColorVerde}  Reiniciando el sistema...${FinColor}"
-          echo -e "${ColorVerde}-----------------------------${FinColor}"
+          echo -e "${ColorVerde}----------------------------${FinColor}"
+          echo -e "${ColorVerde}  Instalando MiningCore...${FinColor}"
+          echo -e "${ColorVerde}----------------------------${FinColor}"
           echo ""
 
-          shutdown -r now
+          ## Instalar .NET Core 2.2 SDK para Linux (Necesario para correr el motor Stratum)
+             mkdir -p /root/SoftInst/MS.NETCore/ 2> /dev/null
+             cd /root/
+             wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb -O /root/SoftInst/MS.NETCore/packages-microsoft-prod.deb
+             dpkg -i /root/SoftInst/MS.NETCore/packages-microsoft-prod.deb
+             apt-get -y update
+             apt-get -y install apt-transport-https
+             apt-get update
+             apt-get -y install dotnet-sdk-2.2
+
+          ## Instalar MiningCore
+             apt-get -y install cmake build-essential libssl-dev pkg-config libboost-all-dev libsodium-dev libzmq5
+             cd /root/
+             git clone https://github.com/coinfoundry/miningcore.git
+             cd /root/miningcore/src/Miningcore/
+             dotnet publish -c Release --framework netcoreapp2.2  -o ../../build
+
+          ## Crear el archivo de configuración json de MiningCore
+             echo '{'                                                                                                                                        > /root/miningcore/build/config.json
+             echo '    "logging": {'                                                                                                                        >> /root/miningcore/build/config.json
+             echo '        "level": "info",'                                                                                                                >> /root/miningcore/build/config.json
+             echo '        "enableConsoleLog": true,'                                                                                                       >> /root/miningcore/build/config.json
+             echo '        "enableConsoleColors": true,'                                                                                                    >> /root/miningcore/build/config.json
+             echo '        // Log file name (full log) - can be null in which case log events are written to console (stdout)'                              >> /root/miningcore/build/config.json
+             echo '        "logFile": "core.log",'                                                                                                          >> /root/miningcore/build/config.json
+             echo '        // Log file name for API-requests - can be null in which case log events are written to either main logFile or console (stdout)' >> /root/miningcore/build/config.json
+             echo '        "apiLogFile": "api.log",'                                                                                                        >> /root/miningcore/build/config.json
+             echo '        // Folder to store log file(s)'                                                                                                  >> /root/miningcore/build/config.json
+             echo '        "logBaseDirectory": "/path/to/logs", // or c:\path\to\logs on Windows'                                                           >> /root/miningcore/build/config.json
+             echo '        // If enabled, separate log file will be stored for each pool as <pool id>.log'                                                  >> /root/miningcore/build/config.json
+             echo '        // in the above specific folder.'                                                                                                >> /root/miningcore/build/config.json
+             echo '        "perPoolLogFile": false'                                                                                                         >> /root/miningcore/build/config.json
+             echo '    },'                                                                                                                                  >> /root/miningcore/build/config.json
+             echo '    "banning": {'                                                                                                                        >> /root/miningcore/build/config.json
+             echo '        // "integrated" or "iptables" (linux only - not yet implemented)'                                                                >> /root/miningcore/build/config.json
+             echo '        "manager": "integrated",'                                                                                                        >> /root/miningcore/build/config.json
+             echo '        "banOnJunkReceive": true,'                                                                                                       >> /root/miningcore/build/config.json
+             echo '        "banOnInvalidShares": false'                                                                                                     >> /root/miningcore/build/config.json
+             echo '    },'                                                                                                                                  >> /root/miningcore/build/config.json
+             echo '    "notifications": {'                                                                                                                  >> /root/miningcore/build/config.json
+             echo '        "enabled": true,'                                                                                                                >> /root/miningcore/build/config.json
+             echo '        "email": {'                                                                                                                      >> /root/miningcore/build/config.json
+             echo '            "host": "smtp.example.com",'                                                                                                 >> /root/miningcore/build/config.json
+             echo '            "port": 587,'                                                                                                                >> /root/miningcore/build/config.json
+             echo '            "user": "user",'                                                                                                             >> /root/miningcore/build/config.json
+             echo '            "password": "password",'                                                                                                     >> /root/miningcore/build/config.json
+             echo '            "fromAddress": "info@yourpool.org",'                                                                                         >> /root/miningcore/build/config.json
+             echo '            "fromName": "pool support"'                                                                                                  >> /root/miningcore/build/config.json
+             echo '        },'                                                                                                                              >> /root/miningcore/build/config.json
+             echo '        "admin": '                                                                                                                       >> /root/miningcore/build/config.json
+             echo '            "enabled": false,'                                                                                                           >> /root/miningcore/build/config.json
+             echo '            "emailAddress": "user@example.com",'                                                                                         >> /root/miningcore/build/config.json
+             echo '            "notifyBlockFound": true'                                                                                                    >> /root/miningcore/build/config.json
+             echo '        }'                                                                                                                               >> /root/miningcore/build/config.json
+             echo '    },'                                                                                                                                  >> /root/miningcore/build/config.json
+             echo '    // Where to persist shares and blocks to'                                                                                            >> /root/miningcore/build/config.json
+             echo '    "persistence": {'                                                                                                                    >> /root/miningcore/build/config.json
+             echo '        // Persist to postgresql database'                                                                                               >> /root/miningcore/build/config.json
+             echo '        "postgres": {'                                                                                                                   >> /root/miningcore/build/config.json
+             echo '            "host": "127.0.0.1",'                                                                                                        >> /root/miningcore/build/config.json
+             echo '            "port": 5432,'                                                                                                               >> /root/miningcore/build/config.json
+             echo '            "user": "miningcore",'                                                                                                       >> /root/miningcore/build/config.json
+             echo '            "password": "yourpassword",'                                                                                                 >> /root/miningcore/build/config.json
+             echo '            "database": "miningcore"'                                                                                                    >> /root/miningcore/build/config.json
+             echo '        }'                                                                                                                               >> /root/miningcore/build/config.json
+             echo '    },'                                                                                                                                  >> /root/miningcore/build/config.json
+             echo '    // Generate payouts for recorded shares and blocks'                                                                                  >> /root/miningcore/build/config.json
+             echo '    "paymentProcessing": {'                                                                                                              >> /root/miningcore/build/config.json
+             echo '        "enabled": true,'                                                                                                                >> /root/miningcore/build/config.json
+             echo '        // How often to process payouts, in milliseconds'                                                                                >> /root/miningcore/build/config.json
+             echo '        "interval": 600,'                                                                                                                >> /root/miningcore/build/config.json
+             echo '        // Path to a file used to backup shares under emergency conditions, such as'                                                     >> /root/miningcore/build/config.json
+             echo '        // database outage'                                                                                                              >> /root/miningcore/build/config.json
+             echo '        "shareRecoveryFile": "recovered-shares.txt"'                                                                                     >> /root/miningcore/build/config.json
+             echo '    },'                                                                                                                                  >> /root/miningcore/build/config.json
+             echo '    // API Settings'                                                                                                                     >> /root/miningcore/build/config.json
+             echo '    "api": {'                                                                                                                            >> /root/miningcore/build/config.json
+             echo '        "enabled": true,'                                                                                                                >> /root/miningcore/build/config.json
+             echo '        // Binding address (Default: 127.0.0.1)'                                                                                         >> /root/miningcore/build/config.json
+             echo '        "listenAddress": "127.0.0.1",'                                                                                                   >> /root/miningcore/build/config.json
+             echo '        // Binding port (Default: 4000)'                                                                                                 >> /root/miningcore/build/config.json
+             echo '        "port": 4000,'                                                                                                                   >> /root/miningcore/build/config.json
+             echo '        // IP address whitelist for requests to Prometheus Metrics (default 127.0.0.1)'                                                  >> /root/miningcore/build/config.json
+             echo '        "metricsIpWhitelist": [],'                                                                                                       >> /root/miningcore/build/config.json
+             echo '        // Limit rate of requests to API on a per-IP basis'                                                                              >> /root/miningcore/build/config.json
+             echo '        "rateLimiting": {'                                                                                                               >> /root/miningcore/build/config.json
+             echo '            "disabled": false, // disable rate-limiting all-together, be careful'                                                        >> /root/miningcore/build/config.json
+             echo '            // override default rate-limit rules, refer to https://github.com/stefanprodan/AspNetCoreRateLimit/wiki/IpRateLimitMiddleware#defining-rate-limit-rules' >> /root/miningcore/build/config.json
+             echo '            "rules": ['                                                                                                                  >> /root/miningcore/build/config.json
+             echo '                {'                                                                                                                       >> /root/miningcore/build/config.json
+             echo '                    "Endpoint": "*",'                                                                                                    >> /root/miningcore/build/config.json
+             echo '                    "Period": "1s",'                                                                                                     >> /root/miningcore/build/config.json
+             echo '                    "Limit": 5'                                                                                                          >> /root/miningcore/build/config.json
+             echo '                }'                                                                                                                       >> /root/miningcore/build/config.json
+             echo '            ],'                                                                                                                          >> /root/miningcore/build/config.json
+             echo '            // List of IP addresses excempt from rate-limiting (default: none)'                                                          >> /root/miningcore/build/config.json
+             echo '            "ipWhitelist": []'                                                                                                           >> /root/miningcore/build/config.json
+             echo '        }'                                                                                                                               >> /root/miningcore/build/config.json
+             echo '    },'                                                                                                                                  >> /root/miningcore/build/config.json
+             echo '    "pools": ['                                                                                                                          >> /root/miningcore/build/config.json
+             echo '        {'                                                                                                                               >> /root/miningcore/build/config.json
+             echo '            // DONT change the id after a production pool has begun collecting shares!'                                                  >> /root/miningcore/build/config.json
+             echo '            "id": "dash1",'                                                                                                              >> /root/miningcore/build/config.json
+             echo '            "enabled": true,'                                                                                                            >> /root/miningcore/build/config.json
+             echo '            "coin": "dash",'                                                                                                             >> /root/miningcore/build/config.json
+             echo '            // Address to where block rewards are given (pool wallet)'                                                                   >> /root/miningcore/build/config.json
+             echo '            "address": "yiZodEgQLbYDrWzgBXmfUUHeBVXBNr8rwR",'                                                                            >> /root/miningcore/build/config.json
+             echo '            // Block rewards go to the configured pool wallet address to later be paid out'                                              >> /root/miningcore/build/config.json
+             echo '            // to miners, except for a percentage that can go to, for examples,'                                                         >> /root/miningcore/build/config.json
+             echo '            // pool operator(s) as pool fees or or to donations address. Addresses or hashed'                                            >> /root/miningcore/build/config.json
+             echo '            // public keys can be used. Here is an example of rewards going to the main pool'                                            >> /root/miningcore/build/config.json
+             echo '            // "op"'                                                                                                                     >> /root/miningcore/build/config.json
+             echo '            "rewardRecipients": ['                                                                                                       >> /root/miningcore/build/config.json
+             echo '                {'                                                                                                                       >> /root/miningcore/build/config.json
+             echo '                    // Pool wallet'                                                                                                      >> /root/miningcore/build/config.json
+             echo '                    "address": "yiZodEgQLbYDrWzgBXmfUUHeBVXBNr8rwR",'                                                                    >> /root/miningcore/build/config.json
+             echo '                    "percentage": 1.5'                                                                                                   >> /root/miningcore/build/config.json
+             echo '                }'                                                                                                                       >> /root/miningcore/build/config.json
+             echo '            ],'                                                                                                                          >> /root/miningcore/build/config.json
+             echo '            // How often to poll RPC daemons for new blocks, in milliseconds'                                                            >> /root/miningcore/build/config.json
+             echo '            "blockRefreshInterval": 400,'                                                                                                >> /root/miningcore/build/config.json
+             echo '            // Some miner apps will consider the pool dead/offline if it doesnt receive'                                                 >> /root/miningcore/build/config.json
+             echo '            // anything new jobs for around a minute, so every time we broadcast jobs,'                                                  >> /root/miningcore/build/config.json
+             echo '            // set a timeout to rebroadcast in this many seconds unless we find a new job.'                                              >> /root/miningcore/build/config.json
+             echo '            // Set to zero to disable. (Default: 0)'                                                                                     >> /root/miningcore/build/config.json
+             echo '            "jobRebroadcastTimeout": 10,'                                                                                                >> /root/miningcore/build/config.json
+             echo '            // Remove workers that havent been in contact for this many seconds.'                                                        >> /root/miningcore/build/config.json
+             echo '            // Some attackers will create thousands of workers that use up all available'                                                >> /root/miningcore/build/config.json
+             echo '            // socket connections, usually the workers are zombies and dont submit shares'                                               >> /root/miningcore/build/config.json
+             echo '            // after connecting. This features detects those and disconnects them.'                                                      >> /root/miningcore/build/config.json
+             echo '            "clientConnectionTimeout": 600,'                                                                                             >> /root/miningcore/build/config.json
+             echo '            // If a worker is submitting a high threshold of invalid shares, we can'                                                     >> /root/miningcore/build/config.json
+             echo '            // temporarily ban their IP to reduce system/network load.'                                                                  >> /root/miningcore/build/config.json
+             echo '            "banning": {'                                                                                                                >> /root/miningcore/build/config.json
+             echo '                "enabled": true,'                                                                                                        >> /root/miningcore/build/config.json
+             echo '                // How many seconds to ban worker for'                                                                                   >> /root/miningcore/build/config.json
+             echo '                "time": 600,'                                                                                                            >> /root/miningcore/build/config.json
+             echo '                // What percent of invalid shares triggers ban'                                                                          >> /root/miningcore/build/config.json
+             echo '                "invalidPercent": 50,'                                                                                                   >> /root/miningcore/build/config.json
+             echo '                // Check invalid percent when this many shares have been submitted'                                                      >> /root/miningcore/build/config.json
+             echo '                "checkThreshold": 50'                                                                                                    >> /root/miningcore/build/config.json
+             echo '            },'                                                                                                                          >> /root/miningcore/build/config.json
+             echo '            // Each pool can have as many ports for your miners to connect to as you wish.'                                              >> /root/miningcore/build/config.json
+             echo '            // Each port can be configured to use its own pool difficulty and variable'                                                  >> /root/miningcore/build/config.json
+             echo '            // difficulty settings. "varDiff" is optional and will only be used for the ports'                                           >> /root/miningcore/build/config.json
+             echo '            // you configure it for.'                                                                                                    >> /root/miningcore/build/config.json
+             echo '            "ports": {'                                                                                                                  >> /root/miningcore/build/config.json
+             echo '                // Binding port for your miners to connect to'                                                                           >> /root/miningcore/build/config.json
+             echo '                "3052": {'                                                                                                               >> /root/miningcore/build/config.json
+             echo '                    // Binding address (Default: 127.0.0.1)'                                                                             >> /root/miningcore/build/config.json
+             echo '                    "listenAddress": "0.0.0.0",'                                                                                         >> /root/miningcore/build/config.json
+             echo '                    // Pool difficulty'                                                                                                  >> /root/miningcore/build/config.json
+             echo '                    "difficulty": 0.02,'                                                                                                 >> /root/miningcore/build/config.json
+             echo '                    // TLS/SSL configuration'                                                                                            >> /root/miningcore/build/config.json
+             echo '                    "tls": false,'                                                                                                       >> /root/miningcore/build/config.json
+             echo '                    "tlsPfxFile": "/var/lib/certs/mycert.pfx",'                                                                          >> /root/miningcore/build/config.json
+             echo '                    // Variable difficulty is a feature that will automatically adjust difficulty'                                       >> /root/miningcore/build/config.json
+             echo '                    // for individual miners based on their hash rate in order to lower'                                                 >> /root/miningcore/build/config.json
+             echo '                    // networking overhead'                                                                                              >> /root/miningcore/build/config.json
+             echo '                    "varDiff": {'                                                                                                        >> /root/miningcore/build/config.json
+             echo '                        // Minimum difficulty'                                                                                           >> /root/miningcore/build/config.json
+             echo '                        "minDiff": 0.01,'                                                                                                >> /root/miningcore/build/config.json
+             echo '                        // Maximum difficulty. Network difficulty will be used if it is lower than'                                      >> /root/miningcore/build/config.json
+             echo '                        // this. Set to null to disable.'                                                                                >> /root/miningcore/build/config.json
+             echo '                        "maxDiff": null,'                                                                                                >> /root/miningcore/build/config.json
+             echo '                        // Try to get 1 share per this many seconds'                                                                     >> /root/miningcore/build/config.json
+             echo '                        "targetTime": 15,'                                                                                               >> /root/miningcore/build/config.json
+             echo '                        // Check to see if we should retarget every this many seconds'                                                   >> /root/miningcore/build/config.json
+             echo '                        "retargetTime": 90,'                                                                                             >> /root/miningcore/build/config.json
+             echo '                        // Allow time to very this % from target without retargeting'                                                    >> /root/miningcore/build/config.json
+             echo '                        "variancePercent": 30,'                                                                                          >> /root/miningcore/build/config.json
+             echo '                        // Do not alter difficulty by more than this during a single retarget in'                                        >> /root/miningcore/build/config.json
+             echo '                        // either direction'                                                                                             >> /root/miningcore/build/config.json
+             echo '                        "maxDelta": 500'                                                                                                 >> /root/miningcore/build/config.json
+             echo '                    }'                                                                                                                   >> /root/miningcore/build/config.json
+             echo '                }'                                                                                                                       >> /root/miningcore/build/config.json
+             echo '            },'                                                                                                                          >> /root/miningcore/build/config.json
+             echo '            // Recommended to have at least two daemon instances running in case one drops'                                              >> /root/miningcore/build/config.json
+             echo '            // out-of-sync or offline. For redundancy, all instances will be polled for'                                                 >> /root/miningcore/build/config.json
+             echo '            // block/transaction updates and be used for submitting blocks. Creating a backup'                                           >> /root/miningcore/build/config.json
+             echo '            // daemon involves spawning a daemon using the "-datadir=/backup" argument which'                                            >> /root/miningcore/build/config.json
+             echo '            // creates a new daemon instance with its own RPC config. For more info on this,'                                            >> /root/miningcore/build/config.json
+             echo '            // visit: https:// en.bitcoin.it/wiki/Data_directory and'                                                                    >> /root/miningcore/build/config.json
+             echo '            // https:// en.bitcoin.it/wiki/Running_bitcoind'                                                                             >> /root/miningcore/build/config.json
+             echo '            "daemons": ['                                                                                                                >> /root/miningcore/build/config.json
+             echo '                {'                                                                                                                       >> /root/miningcore/build/config.json
+             echo '                    "host": "127.0.0.1",'                                                                                                >> /root/miningcore/build/config.json
+             echo '                    "port": 15001,'                                                                                                      >> /root/miningcore/build/config.json
+             echo '                    "user": "user",'                                                                                                     >> /root/miningcore/build/config.json
+             echo '                    "password": "pass",'                                                                                                 >> /root/miningcore/build/config.json
+             echo '                    // Enable streaming Block Notifications via ZeroMQ messaging from Bitcoin'                                           >> /root/miningcore/build/config.json
+             echo '                    // Family daemons. Using this is highly recommended. The value of this option'                                       >> /root/miningcore/build/config.json
+             echo '                    // is a string that should match the value of the -zmqpubhashblock parameter'                                        >> /root/miningcore/build/config.json
+             echo '                    // passed to the coin daemon. If you enable this, you should lower'                                                  >> /root/miningcore/build/config.json
+             echo '                    // "blockRefreshInterval" to 1000 or 0 to disable polling entirely.'                                                 >> /root/miningcore/build/config.json
+             echo '                    "zmqBlockNotifySocket": "tcp://127.0.0.1:15101",'                                                                    >> /root/miningcore/build/config.json
+             echo '                    // Enable streaming Block Notifications via WebSocket messaging from Ethereum'                                       >> /root/miningcore/build/config.json
+             echo '                    // family Parity daemons. Using this is highly recommended. The value of this'                                       >> /root/miningcore/build/config.json
+             echo '                    // option is a string that should  match the value of the --ws-port parameter'                                       >> /root/miningcore/build/config.json
+             echo '                    // passed to the parity coin daemon. When using --ws-port, you should also'                                          >> /root/miningcore/build/config.json
+             echo '                    // specify --ws-interface all and'                                                                                   >> /root/miningcore/build/config.json
+             echo '                    // --jsonrpc-apis "eth,net,web3,personal,parity,parity_pubsub,rpc"'                                                  >> /root/miningcore/build/config.json
+             echo '                    // If you enable this, you should lower "blockRefreshInterval" to 1000 or 0'                                         >> /root/miningcore/build/config.json
+             echo '                    // to disable polling entirely.'                                                                                     >> /root/miningcore/build/config.json
+             echo '                    "portWs": 18545,'                                                                                                    >> /root/miningcore/build/config.json
+             echo '                }'                                                                                                                       >> /root/miningcore/build/config.json
+             echo '            ],'                                                                                                                          >> /root/miningcore/build/config.json
+             echo '            // Generate payouts for recorded shares'                                                                                     >> /root/miningcore/build/config.json
+             echo '            "paymentProcessing": {'                                                                                                      >> /root/miningcore/build/config.json
+             echo '                "enabled": true,'                                                                                                        >> /root/miningcore/build/config.json
+             echo '                // Minimum payment in pool-base-currency (ie. Bitcoin, NOT Satoshis)'                                                    >> /root/miningcore/build/config.json
+             echo '                "minimumPayment": 0.01,'                                                                                                 >> /root/miningcore/build/config.json
+             echo '                "payoutScheme": "PPLNS",'                                                                                                >> /root/miningcore/build/config.json
+             echo '                "payoutSchemeConfig": {'                                                                                                 >> /root/miningcore/build/config.json
+             echo '                    "factor": 2.0'                                                                                                       >> /root/miningcore/build/config.json
+             echo '                }'                                                                                                                       >> /root/miningcore/build/config.json
+             echo '            }'                                                                                                                           >> /root/miningcore/build/config.json
+             echo '        }'                                                                                                                               >> /root/miningcore/build/config.json
+             echo '    ]'                                                                                                                                   >> /root/miningcore/build/config.json
+             echo '}'                                                                                                                                       >> /root/miningcore/build/config.json
+
+          ## Instalar base de datos PostgreSQL
+             apt-get -y install postgresql
+
+          ## Crear la base de datos PostgreSQL
+             ## Una forma de crearla
+                su - postgres -c "createuser miningcore -d -P"
+             ## Otra
+             su - postgres -c "createuser miningcore"
+             su - postgres -c "createdb miningcore"
+             su - postgres -c "psql"             
+               alter user miningcore with encrypted password '12345678';
+               grant all privileges on database miningcore to miningcore;
+             ## Importar el formato básico de la base de datos
+                su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb.sql -O /tmp/miningcore-basic.sql"
+                su - postgres -c "psql -d miningcore -U miningcore -f /tmp/miningcore-basic.sql -W"
+             ## Mejorar a formato multi-pool
+                su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb_postgresql_11_appendix.sql -O /tmp/miningcore-advanced.sql"
+                su - postgres -c "psql -d miningcore -U miningcore -f /tmp/miningcore-advanced.sql -W"
+
+          ## Ejecutar MiningCore
+             cd /root/miningcore/build/
+             dotnet Miningcore.dll -c config.json
 
         ;;
 
@@ -313,237 +555,4 @@ echo -e "${ColorVerde}----------------------------------------------------------
 echo -e "${ColorVerde}Script de instalación de una pool de minería de criptomonedas, finalizaado.${FinColor}"
 echo -e "${ColorVerde}---------------------------------------------------------------------------${FinColor}"
 echo ""
-
-## Instalar Base de datos PostgreSQL
-   apt-get -y install postgresql
-
-## Instalar .NET Core 2.2 SDK para Linux (Necesario para correr el motor Stratum)
-   mkdir -p /root/SoftInst/MS.NETCore/ 2> /dev/null
-   cd /root/
-   wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb -O /root/SoftInst/MS.NETCore/packages-microsoft-prod.deb
-   dpkg -i /root/SoftInst/MS.NETCore/packages-microsoft-prod.deb
-   apt-get -y update
-   apt-get -y install apt-transport-https
-   apt-get update
-   apt-get -y install dotnet-sdk-2.2
-
-## Instalar MiningCore
-   apt-get -y install cmake build-essential libssl-dev pkg-config libboost-all-dev libsodium-dev libzmq5
-   cd /root/
-   git clone https://github.com/coinfoundry/miningcore.git
-   cd /root/miningcore/src/Miningcore/
-   dotnet publish -c Release --framework netcoreapp2.2  -o ../../build
-
-## Crear el archivo de configuración json de MiningCore
-    
-    > /root/miningcore/build/config.json
-
-   echo '{'                                                                                                                                        > /root/miningcore/build/config.json
-   echo '    "logging": {'                                                                                                                        >> /root/miningcore/build/config.json
-   echo '        "level": "info",'                                                                                                                >> /root/miningcore/build/config.json
-   echo '        "enableConsoleLog": true,'                                                                                                       >> /root/miningcore/build/config.json
-   echo '        "enableConsoleColors": true,'                                                                                                    >> /root/miningcore/build/config.json
-   echo '        // Log file name (full log) - can be null in which case log events are written to console (stdout)'                              >> /root/miningcore/build/config.json
-   echo '        "logFile": "core.log",'                                                                                                          >> /root/miningcore/build/config.json
-   echo '        // Log file name for API-requests - can be null in which case log events are written to either main logFile or console (stdout)' >> /root/miningcore/build/config.json
-   echo '        "apiLogFile": "api.log",'                                                                                                        >> /root/miningcore/build/config.json
-   echo '        // Folder to store log file(s)'                                                                                                  >> /root/miningcore/build/config.json
-   echo '        "logBaseDirectory": "/path/to/logs", // or c:\path\to\logs on Windows'                                                           >> /root/miningcore/build/config.json
-   echo '        // If enabled, separate log file will be stored for each pool as <pool id>.log'                                                  >> /root/miningcore/build/config.json
-   echo '        // in the above specific folder.'                                                                                                >> /root/miningcore/build/config.json
-   echo '        "perPoolLogFile": false'                                                                                                         >> /root/miningcore/build/config.json
-   echo '    },'                                                                                                                                  >> /root/miningcore/build/config.json
-   echo '    "banning": {'                                                                                                                        >> /root/miningcore/build/config.json
-   echo '        // "integrated" or "iptables" (linux only - not yet implemented)'                                                                >> /root/miningcore/build/config.json
-   echo '        "manager": "integrated",'                                                                                                        >> /root/miningcore/build/config.json
-   echo '        "banOnJunkReceive": true,'                                                                                                       >> /root/miningcore/build/config.json
-   echo '        "banOnInvalidShares": false'                                                                                                     >> /root/miningcore/build/config.json
-   echo '    },'                                                                                                                                  >> /root/miningcore/build/config.json
-   echo '    "notifications": {'                                                                                                                  >> /root/miningcore/build/config.json
-   echo '        "enabled": true,'                                                                                                                >> /root/miningcore/build/config.json
-   echo '        "email": {'                                                                                                                      >> /root/miningcore/build/config.json
-   echo '            "host": "smtp.example.com",'                                                                                                 >> /root/miningcore/build/config.json
-   echo '            "port": 587,'                                                                                                                >> /root/miningcore/build/config.json
-   echo '            "user": "user",'                                                                                                             >> /root/miningcore/build/config.json
-   echo '            "password": "password",'                                                                                                     >> /root/miningcore/build/config.json
-   echo '            "fromAddress": "info@yourpool.org",'                                                                                         >> /root/miningcore/build/config.json
-   echo '            "fromName": "pool support"'                                                                                                  >> /root/miningcore/build/config.json
-   echo '        },'                                                                                                                              >> /root/miningcore/build/config.json
-   echo '        "admin": '                                                                                                                       >> /root/miningcore/build/config.json
-   echo '            "enabled": false,'                                                                                                           >> /root/miningcore/build/config.json
-   echo '            "emailAddress": "user@example.com",'                                                                                         >> /root/miningcore/build/config.json
-   echo '            "notifyBlockFound": true'                                                                                                    >> /root/miningcore/build/config.json
-   echo '        }'                                                                                                                               >> /root/miningcore/build/config.json
-   echo '    },'                                                                                                                                  >> /root/miningcore/build/config.json
-   echo '    // Where to persist shares and blocks to'                                                                                            >> /root/miningcore/build/config.json
-   echo '    "persistence": {'                                                                                                                    >> /root/miningcore/build/config.json
-   echo '        // Persist to postgresql database'                                                                                               >> /root/miningcore/build/config.json
-   echo '        "postgres": {'                                                                                                                   >> /root/miningcore/build/config.json
-   echo '            "host": "127.0.0.1",'                                                                                                        >> /root/miningcore/build/config.json
-   echo '            "port": 5432,'                                                                                                               >> /root/miningcore/build/config.json
-   echo '            "user": "miningcore",'                                                                                                       >> /root/miningcore/build/config.json
-   echo '            "password": "yourpassword",'                                                                                                 >> /root/miningcore/build/config.json
-   echo '            "database": "miningcore"'                                                                                                    >> /root/miningcore/build/config.json
-   echo '        }'                                                                                                                               >> /root/miningcore/build/config.json
-   echo '    },'                                                                                                                                  >> /root/miningcore/build/config.json
-   echo '    // Generate payouts for recorded shares and blocks'                                                                                  >> /root/miningcore/build/config.json
-   echo '    "paymentProcessing": {'                                                                                                              >> /root/miningcore/build/config.json
-   echo '        "enabled": true,'                                                                                                                >> /root/miningcore/build/config.json
-   echo '        // How often to process payouts, in milliseconds'                                                                                >> /root/miningcore/build/config.json
-   echo '        "interval": 600,'                                                                                                                >> /root/miningcore/build/config.json
-   echo '        // Path to a file used to backup shares under emergency conditions, such as'                                                     >> /root/miningcore/build/config.json
-   echo '        // database outage'                                                                                                              >> /root/miningcore/build/config.json
-   echo '        "shareRecoveryFile": "recovered-shares.txt"'                                                                                     >> /root/miningcore/build/config.json
-   echo '    },'                                                                                                                                  >> /root/miningcore/build/config.json
-   echo '    // API Settings'                                                                                                                     >> /root/miningcore/build/config.json
-   echo '    "api": {'                                                                                                                            >> /root/miningcore/build/config.json
-   echo '        "enabled": true,'                                                                                                                >> /root/miningcore/build/config.json
-   echo '        // Binding address (Default: 127.0.0.1)'                                                                                         >> /root/miningcore/build/config.json
-   echo '        "listenAddress": "127.0.0.1",'                                                                                                   >> /root/miningcore/build/config.json
-   echo '        // Binding port (Default: 4000)'                                                                                                 >> /root/miningcore/build/config.json
-   echo '        "port": 4000,'                                                                                                                   >> /root/miningcore/build/config.json
-   echo '        // IP address whitelist for requests to Prometheus Metrics (default 127.0.0.1)'                                                  >> /root/miningcore/build/config.json
-   echo '        "metricsIpWhitelist": [],'                                                                                                       >> /root/miningcore/build/config.json
-   echo '        // Limit rate of requests to API on a per-IP basis'                                                                              >> /root/miningcore/build/config.json
-   echo '        "rateLimiting": {'                                                                                                               >> /root/miningcore/build/config.json
-   echo '            "disabled": false, // disable rate-limiting all-together, be careful'                                                        >> /root/miningcore/build/config.json
-   echo '            // override default rate-limit rules, refer to https://github.com/stefanprodan/AspNetCoreRateLimit/wiki/IpRateLimitMiddleware#defining-rate-limit-rules' >> /root/miningcore/build/config.json
-   echo '            "rules": ['                                                                                                                  >> /root/miningcore/build/config.json
-   echo '                {'                                                                                                                       >> /root/miningcore/build/config.json
-   echo '                    "Endpoint": "*",'                                                                                                    >> /root/miningcore/build/config.json
-   echo '                    "Period": "1s",'                                                                                                     >> /root/miningcore/build/config.json
-   echo '                    "Limit": 5'                                                                                                          >> /root/miningcore/build/config.json
-   echo '                }'                                                                                                                       >> /root/miningcore/build/config.json
-   echo '            ],'                                                                                                                          >> /root/miningcore/build/config.json
-   echo '            // List of IP addresses excempt from rate-limiting (default: none)'                                                          >> /root/miningcore/build/config.json
-   echo '            "ipWhitelist": []'                                                                                                           >> /root/miningcore/build/config.json
-   echo '        }'                                                                                                                               >> /root/miningcore/build/config.json
-   echo '    },'                                                                                                                                  >> /root/miningcore/build/config.json
-   echo '    "pools": ['                                                                                                                          >> /root/miningcore/build/config.json
-   echo '        {'                                                                                                                               >> /root/miningcore/build/config.json
-   echo '            // DONT change the id after a production pool has begun collecting shares!'                                                  >> /root/miningcore/build/config.json
-   echo '            "id": "dash1",'                                                                                                              >> /root/miningcore/build/config.json
-   echo '            "enabled": true,'                                                                                                            >> /root/miningcore/build/config.json
-   echo '            "coin": "dash",'                                                                                                             >> /root/miningcore/build/config.json
-   echo '            // Address to where block rewards are given (pool wallet)'                                                                   >> /root/miningcore/build/config.json
-   echo '            "address": "yiZodEgQLbYDrWzgBXmfUUHeBVXBNr8rwR",'                                                                            >> /root/miningcore/build/config.json
-   echo '            // Block rewards go to the configured pool wallet address to later be paid out'                                              >> /root/miningcore/build/config.json
-   echo '            // to miners, except for a percentage that can go to, for examples,'                                                         >> /root/miningcore/build/config.json
-   echo '            // pool operator(s) as pool fees or or to donations address. Addresses or hashed'                                            >> /root/miningcore/build/config.json
-   echo '            // public keys can be used. Here is an example of rewards going to the main pool'                                            >> /root/miningcore/build/config.json
-   echo '            // "op"'                                                                                                                     >> /root/miningcore/build/config.json
-   echo '            "rewardRecipients": ['                                                                                                       >> /root/miningcore/build/config.json
-   echo '                {'                                                                                                                       >> /root/miningcore/build/config.json
-   echo '                    // Pool wallet'                                                                                                      >> /root/miningcore/build/config.json
-   echo '                    "address": "yiZodEgQLbYDrWzgBXmfUUHeBVXBNr8rwR",'                                                                    >> /root/miningcore/build/config.json
-   echo '                    "percentage": 1.5'                                                                                                   >> /root/miningcore/build/config.json
-   echo '                }'                                                                                                                       >> /root/miningcore/build/config.json
-   echo '            ],'                                                                                                                          >> /root/miningcore/build/config.json
-   echo '            // How often to poll RPC daemons for new blocks, in milliseconds'                                                            >> /root/miningcore/build/config.json
-   echo '            "blockRefreshInterval": 400,'                                                                                                >> /root/miningcore/build/config.json
-   echo '            // Some miner apps will consider the pool dead/offline if it doesnt receive'                                                 >> /root/miningcore/build/config.json
-   echo '            // anything new jobs for around a minute, so every time we broadcast jobs,'                                                  >> /root/miningcore/build/config.json
-   echo '            // set a timeout to rebroadcast in this many seconds unless we find a new job.'                                              >> /root/miningcore/build/config.json
-   echo '            // Set to zero to disable. (Default: 0)'                                                                                     >> /root/miningcore/build/config.json
-   echo '            "jobRebroadcastTimeout": 10,'                                                                                                >> /root/miningcore/build/config.json
-   echo '            // Remove workers that havent been in contact for this many seconds.'                                                        >> /root/miningcore/build/config.json
-   echo '            // Some attackers will create thousands of workers that use up all available'                                                >> /root/miningcore/build/config.json
-   echo '            // socket connections, usually the workers are zombies and dont submit shares'                                               >> /root/miningcore/build/config.json
-   echo '            // after connecting. This features detects those and disconnects them.'                                                      >> /root/miningcore/build/config.json
-   echo '            "clientConnectionTimeout": 600,'                                                                                             >> /root/miningcore/build/config.json
-   echo '            // If a worker is submitting a high threshold of invalid shares, we can'                                                     >> /root/miningcore/build/config.json
-   echo '            // temporarily ban their IP to reduce system/network load.'                                                                  >> /root/miningcore/build/config.json
-   echo '            "banning": {'                                                                                                                >> /root/miningcore/build/config.json
-   echo '                "enabled": true,'                                                                                                        >> /root/miningcore/build/config.json
-   echo '                // How many seconds to ban worker for'                                                                                   >> /root/miningcore/build/config.json
-   echo '                "time": 600,'                                                                                                            >> /root/miningcore/build/config.json
-   echo '                // What percent of invalid shares triggers ban'                                                                          >> /root/miningcore/build/config.json
-   echo '                "invalidPercent": 50,'                                                                                                   >> /root/miningcore/build/config.json
-   echo '                // Check invalid percent when this many shares have been submitted'                                                      >> /root/miningcore/build/config.json
-   echo '                "checkThreshold": 50'                                                                                                    >> /root/miningcore/build/config.json
-   echo '            },'                                                                                                                          >> /root/miningcore/build/config.json
-   echo '            // Each pool can have as many ports for your miners to connect to as you wish.'                                              >> /root/miningcore/build/config.json
-   echo '            // Each port can be configured to use its own pool difficulty and variable'                                                  >> /root/miningcore/build/config.json
-   echo '            // difficulty settings. "varDiff" is optional and will only be used for the ports'                                           >> /root/miningcore/build/config.json
-   echo '            // you configure it for.'                                                                                                    >> /root/miningcore/build/config.json
-   echo '            "ports": {'                                                                                                                  >> /root/miningcore/build/config.json
-   echo '                // Binding port for your miners to connect to'                                                                           >> /root/miningcore/build/config.json
-   echo '                "3052": {'                                                                                                               >> /root/miningcore/build/config.json
-   echo '                    // Binding address (Default: 127.0.0.1)'                                                                             >> /root/miningcore/build/config.json
-   echo '                    "listenAddress": "0.0.0.0",'                                                                                         >> /root/miningcore/build/config.json
-   echo '                    // Pool difficulty'                                                                                                  >> /root/miningcore/build/config.json
-   echo '                    "difficulty": 0.02,'                                                                                                 >> /root/miningcore/build/config.json
-   echo '                    // TLS/SSL configuration'                                                                                            >> /root/miningcore/build/config.json
-   echo '                    "tls": false,'                                                                                                       >> /root/miningcore/build/config.json
-   echo '                    "tlsPfxFile": "/var/lib/certs/mycert.pfx",'                                                                          >> /root/miningcore/build/config.json
-   echo '                    // Variable difficulty is a feature that will automatically adjust difficulty'                                       >> /root/miningcore/build/config.json
-   echo '                    // for individual miners based on their hash rate in order to lower'                                                 >> /root/miningcore/build/config.json
-   echo '                    // networking overhead'                                                                                              >> /root/miningcore/build/config.json
-   echo '                    "varDiff": {'                                                                                                        >> /root/miningcore/build/config.json
-   echo '                        // Minimum difficulty'                                                                                           >> /root/miningcore/build/config.json
-   echo '                        "minDiff": 0.01,'                                                                                                >> /root/miningcore/build/config.json
-   echo '                        // Maximum difficulty. Network difficulty will be used if it is lower than'                                      >> /root/miningcore/build/config.json
-   echo '                        // this. Set to null to disable.'                                                                                >> /root/miningcore/build/config.json
-   echo '                        "maxDiff": null,'                                                                                                >> /root/miningcore/build/config.json
-   echo '                        // Try to get 1 share per this many seconds'                                                                     >> /root/miningcore/build/config.json
-   echo '                        "targetTime": 15,'                                                                                               >> /root/miningcore/build/config.json
-   echo '                        // Check to see if we should retarget every this many seconds'                                                   >> /root/miningcore/build/config.json
-   echo '                        "retargetTime": 90,'                                                                                             >> /root/miningcore/build/config.json
-   echo '                        // Allow time to very this % from target without retargeting'                                                    >> /root/miningcore/build/config.json
-   echo '                        "variancePercent": 30,'                                                                                          >> /root/miningcore/build/config.json
-   echo '                        // Do not alter difficulty by more than this during a single retarget in'                                        >> /root/miningcore/build/config.json
-   echo '                        // either direction'                                                                                             >> /root/miningcore/build/config.json
-   echo '                        "maxDelta": 500'                                                                                                 >> /root/miningcore/build/config.json
-   echo '                    }'                                                                                                                   >> /root/miningcore/build/config.json
-   echo '                }'                                                                                                                       >> /root/miningcore/build/config.json
-   echo '            },'                                                                                                                          >> /root/miningcore/build/config.json
-   echo '            // Recommended to have at least two daemon instances running in case one drops'                                              >> /root/miningcore/build/config.json
-   echo '            // out-of-sync or offline. For redundancy, all instances will be polled for'                                                 >> /root/miningcore/build/config.json
-   echo '            // block/transaction updates and be used for submitting blocks. Creating a backup'                                           >> /root/miningcore/build/config.json
-   echo '            // daemon involves spawning a daemon using the "-datadir=/backup" argument which'                                            >> /root/miningcore/build/config.json
-   echo '            // creates a new daemon instance with its own RPC config. For more info on this,'                                            >> /root/miningcore/build/config.json
-   echo '            // visit: https:// en.bitcoin.it/wiki/Data_directory and'                                                                    >> /root/miningcore/build/config.json
-   echo '            // https:// en.bitcoin.it/wiki/Running_bitcoind'                                                                             >> /root/miningcore/build/config.json
-   echo '            "daemons": ['                                                                                                                >> /root/miningcore/build/config.json
-   echo '                {'                                                                                                                       >> /root/miningcore/build/config.json
-   echo '                    "host": "127.0.0.1",'                                                                                                >> /root/miningcore/build/config.json
-   echo '                    "port": 15001,'                                                                                                      >> /root/miningcore/build/config.json
-   echo '                    "user": "user",'                                                                                                     >> /root/miningcore/build/config.json
-   echo '                    "password": "pass",'                                                                                                 >> /root/miningcore/build/config.json
-   echo '                    // Enable streaming Block Notifications via ZeroMQ messaging from Bitcoin'                                           >> /root/miningcore/build/config.json
-   echo '                    // Family daemons. Using this is highly recommended. The value of this option'                                       >> /root/miningcore/build/config.json
-   echo '                    // is a string that should match the value of the -zmqpubhashblock parameter'                                        >> /root/miningcore/build/config.json
-   echo '                    // passed to the coin daemon. If you enable this, you should lower'                                                  >> /root/miningcore/build/config.json
-   echo '                    // "blockRefreshInterval" to 1000 or 0 to disable polling entirely.'                                                 >> /root/miningcore/build/config.json
-   echo '                    "zmqBlockNotifySocket": "tcp://127.0.0.1:15101",'                                                                    >> /root/miningcore/build/config.json
-   echo '                    // Enable streaming Block Notifications via WebSocket messaging from Ethereum'                                       >> /root/miningcore/build/config.json
-   echo '                    // family Parity daemons. Using this is highly recommended. The value of this'                                       >> /root/miningcore/build/config.json
-   echo '                    // option is a string that should  match the value of the --ws-port parameter'                                       >> /root/miningcore/build/config.json
-   echo '                    // passed to the parity coin daemon. When using --ws-port, you should also'                                          >> /root/miningcore/build/config.json
-   echo '                    // specify --ws-interface all and'                                                                                   >> /root/miningcore/build/config.json
-   echo '                    // --jsonrpc-apis "eth,net,web3,personal,parity,parity_pubsub,rpc"'                                                  >> /root/miningcore/build/config.json
-   echo '                    // If you enable this, you should lower "blockRefreshInterval" to 1000 or 0'                                         >> /root/miningcore/build/config.json
-   echo '                    // to disable polling entirely.'                                                                                     >> /root/miningcore/build/config.json
-   echo '                    "portWs": 18545,'                                                                                                    >> /root/miningcore/build/config.json
-   echo '                }'                                                                                                                       >> /root/miningcore/build/config.json
-   echo '            ],'                                                                                                                          >> /root/miningcore/build/config.json
-   echo '            // Generate payouts for recorded shares'                                                                                     >> /root/miningcore/build/config.json
-   echo '            "paymentProcessing": {'                                                                                                      >> /root/miningcore/build/config.json
-   echo '                "enabled": true,'                                                                                                        >> /root/miningcore/build/config.json
-   echo '                // Minimum payment in pool-base-currency (ie. Bitcoin, NOT Satoshis)'                                                    >> /root/miningcore/build/config.json
-   echo '                "minimumPayment": 0.01,'                                                                                                 >> /root/miningcore/build/config.json
-   echo '                "payoutScheme": "PPLNS",'                                                                                                >> /root/miningcore/build/config.json
-   echo '                "payoutSchemeConfig": {'                                                                                                 >> /root/miningcore/build/config.json
-   echo '                    "factor": 2.0'                                                                                                       >> /root/miningcore/build/config.json
-   echo '                }'                                                                                                                       >> /root/miningcore/build/config.json
-   echo '            }'                                                                                                                           >> /root/miningcore/build/config.json
-   echo '        }'                                                                                                                               >> /root/miningcore/build/config.json
-   echo '    ]'                                                                                                                                   >> /root/miningcore/build/config.json
-   echo '}'                                                                                                                                       >> /root/miningcore/build/config.json
-
-
-## Ejecutar MiningCore
-   cd ../../build
-   dotnet Miningcore.dll -c config.json
-   
    
