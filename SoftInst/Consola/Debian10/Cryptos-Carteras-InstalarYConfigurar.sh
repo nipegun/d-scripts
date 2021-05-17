@@ -346,15 +346,15 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
           mkdir -p /home/$UsuarioDaemon/.raven/
           touch /home/$UsuarioDaemon/.raven/raven.conf
-          echo "rpcuser=rvnrpc"         > /home/$UsuarioDaemon/.raven/raven.conf
-          echo "rpcpassword=rvnrpcpas" >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "rpcallowip=127.0.0.1"  >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "rpcport=42068"         >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "server=1"              >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "listen=1"              >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "prune=550"             >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "daemon=1"              >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "gen=0"                 >> /home/$UsuarioDaemon/.raven/raven.conf
+          echo "rpcuser=rvnrpc"          > /home/$UsuarioDaemon/.raven/raven.conf
+          echo "rpcpassword=rvnrpcpass" >> /home/$UsuarioDaemon/.raven/raven.conf
+          echo "rpcallowip=127.0.0.1"   >> /home/$UsuarioDaemon/.raven/raven.conf
+          echo "rpcport=42068"          >> /home/$UsuarioDaemon/.raven/raven.conf
+          echo "server=1"               >> /home/$UsuarioDaemon/.raven/raven.conf
+          echo "listen=1"               >> /home/$UsuarioDaemon/.raven/raven.conf
+          echo "prune=550"              >> /home/$UsuarioDaemon/.raven/raven.conf
+          echo "daemon=1"               >> /home/$UsuarioDaemon/.raven/raven.conf
+          echo "gen=0"                  >> /home/$UsuarioDaemon/.raven/raven.conf
           rm -rf /home/$UsuarioDaemon/$CarpetaSoftRVN/
           mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioDaemon/$CarpetaSoftRVN/
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
