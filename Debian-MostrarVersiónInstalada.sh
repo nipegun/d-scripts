@@ -15,3 +15,7 @@ cat /etc/*-release
 
 echo ""
 
+cat /etc/debian_version
+
+echo ""
+
