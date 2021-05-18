@@ -14,6 +14,12 @@ ColorAzul="\033[0;34m"
 FinColor="\033[0m"
 
 echo ""
+echo -e "${ColorVerde}-----------------------------------------------${FinColor}"
+echo -e "${ColorVerde}  Iniciando el script de borrado de rastro...${FinColor}"
+echo -e "${ColorVerde}-----------------------------------------------${FinColor}"
+echo ""
+
+echo ""
 echo -e "${ColorVerde}  Borrando todos los logs de /var/log...${FinColor}"
 echo ""
 
