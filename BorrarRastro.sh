@@ -89,6 +89,10 @@ echo ""
     find /var/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
 
 echo ""
-echo "  Script finalizado. Vuelve a ejecutar history -c manualmente para borrar la ejecución de este script."
+echo "  Script finalizado. Vuelve a ejecutar:"
+echo ""
+echo "history -c"
+echo ""
+echo "manualmente para borrar la ejecución de este script."
 echo ""
 
