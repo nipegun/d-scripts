@@ -36,38 +36,45 @@
    fi
 
 
-echo $OS_NAME
-echo $OS_VERS
+if [ $OS_VERS == "7" ]; then
 
-if [ $OS_VERS == '7' ]; then
+  echo ""
+  echo "--------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de WireGuard para Debian 7..."
+  echo "--------------------------------------------------------------------"
+  echo ""
 
-  echo "---------------------------------------"
-  echo "  Instalando WireGuard en Debian 7..."
-  echo "---------------------------------------"
+elif [ $OS_VERS == "8" ]; then
 
-elif [ $OS_VERS == '8' ]; then
+  echo ""
+  echo "--------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de WireGuard para Debian 8..."
+  echo "--------------------------------------------------------------------"
+  echo ""
 
-  echo "---------------------------------------"
-  echo "  Instalando WireGuard en Debian 8..."
-  echo "---------------------------------------"
+elif [ $OS_VERS == "9" ]; then
 
-elif [ $OS_VERS == '9' ]; then
+  echo ""
+  echo "--------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de WireGuard para Debian 9..."
+  echo "--------------------------------------------------------------------"
+  echo ""
 
-  echo "---------------------------------------"
-  echo "  Instalando WireGuard en Debian 9..."
-  echo "---------------------------------------"
+elif [ $OS_VERS == "10" ]; then
 
-elif [ $OS_VERS == '10' ]; then
+  echo ""
+  echo "---------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de WireGuard para Debian 10..."
+  echo "---------------------------------------------------------------------"
+  echo ""
 
-  echo "----------------------------------------"
-  echo "  Instalando WireGuard en Debian 10..."
-  echo "----------------------------------------"
+elif [ $OS_VERS == "11" ]; then
 
-elif [ $OS_VERS == '11' ]; then
-
-  echo "----------------------------------------"
-  echo "  Instalando WireGuard en Debian 11..."
-  echo "----------------------------------------"
+  echo ""
+  echo "---------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de WireGuard para Debian 11..."
+  echo "---------------------------------------------------------------------"
+  echo ""
 
 fi
 
