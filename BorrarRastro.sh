@@ -43,7 +43,7 @@ echo ""
      history -c
 
 echo ""
-echo -e "${ColorVerde}Poniendo a cero todos los achivos de logs que se encuentren...${FinColor}"
+echo -e "${ColorVerde}Poniendo a cero todos los achivos de logs que se encuentren en las carpetas de todo el sistema...${FinColor}"
 echo ""
 
     find /bin/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
@@ -66,7 +66,7 @@ echo ""
     find /var/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
 
 echo ""
-echo -e "${ColorVerde}Borrando todos los achivos comprimidos de logs que se encuentren...${FinColor}"
+echo -e "${ColorVerde}Borrando todos los achivos comprimidos de logs que se encuentren en las carpetas de todo el sistema...${FinColor}"
 echo ""
 
     find /bin/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
