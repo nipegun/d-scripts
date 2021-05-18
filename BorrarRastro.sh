@@ -89,7 +89,7 @@ echo ""
     find /var/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
 
 echo ""
-echo "  Script finalizado. Vuelve a ejecutar:"
+echo "Script finalizado. Vuelve a ejecutar:"
 echo ""
 echo "history -c"
 echo ""
