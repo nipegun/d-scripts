@@ -43,7 +43,7 @@ echo ""
      history -c
 
 echo ""
-echo -e "${ColorVerde}Borrando todos los achivos de logs que se encuentren...${FinColor}"
+echo -e "${ColorVerde}Poniendo a cero todos los achivos de logs que se encuentren...${FinColor}"
 echo ""
 
     find /bin/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
@@ -64,6 +64,29 @@ echo ""
     find /tmp/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
     find /usr/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
     find /var/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+
+echo ""
+echo -e "${ColorVerde}Borrando todos los achivos comprimidos de logs que se encuentren...${FinColor}"
+echo ""
+
+    find /bin/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /boot/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /dev/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /etc/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /home/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /lib/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /lib64/      -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /lost+found/ -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /media/      -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /mnt/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /opt/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /root/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /run/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /sbin/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /srv/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /tmp/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /usr/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+    find /var/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
 
 echo ""
 echo "Script finalizado. Vuelve a ejecutar history -c manualmente para borrar la ejecución de este script."
