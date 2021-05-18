@@ -9,8 +9,8 @@
 #  Script de NiPeGun para instalar y configurar WireGuard en Debian
 #--------------------------------------------------------------------
 
-#InterfazEthernet="eth0"
-InterfazEthernet="venet0"
+InterfazEthernet="eth0"
+#InterfazEthernet="venet0"
 
 ## Determinar la versión de Debian
 
