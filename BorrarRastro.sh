@@ -94,11 +94,11 @@ echo ""
     find /usr/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
     find /var/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
 
+echo -e "${ColorVerde}----------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}Script finalizado. Vuelve a ejecutar:${FinColor}"
 echo ""
-echo "Script finalizado. Vuelve a ejecutar:"
+echo -e "${ColorVerde}history -c${FinColor}"
 echo ""
-echo "history -c"
-echo ""
-echo "manualmente para borrar la ejecución de este script."
-echo ""
+echo -e "${ColorVerde}manualmente para borrar la ejecución de este script.${FinColor}"
+echo -e "${ColorVerde}----------------------------------------------------${FinColor}"
 
