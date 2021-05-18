@@ -39,41 +39,41 @@
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de WireGuard para Debian 7..."
-  echo "--------------------------------------------------------------------"
+  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de WireGuard para Debian 7 (Wheezy)..."
+  echo "-----------------------------------------------------------------------------"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de WireGuard para Debian 8..."
-  echo "--------------------------------------------------------------------"
+  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de WireGuard para Debian 8 (Jessie)..."
+  echo "-----------------------------------------------------------------------------"
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de WireGuard para Debian 9..."
-  echo "--------------------------------------------------------------------"
+  echo "------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de WireGuard para Debian 9 (Stretch)..."
+  echo "------------------------------------------------------------------------------"
   echo ""
 
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de WireGuard para Debian 10..."
-  echo "---------------------------------------------------------------------"
+  echo "------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de WireGuard para Debian 10 (Buster)..."
+  echo "------------------------------------------------------------------------------"
   echo ""
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de WireGuard para Debian 11..."
-  echo "---------------------------------------------------------------------"
+  echo "--------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de WireGuard para Debian 11 (Bullseye)..."
+  echo "--------------------------------------------------------------------------------"
   echo ""
 
 fi
