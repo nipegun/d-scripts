@@ -14,7 +14,7 @@ ColorAzul="\033[0;34m"
 FinColor="\033[0m"
 
 echo ""
-echo -e "${ColorVerde}Borrando todos los logs de /var/log...${FinColor}"
+echo -e "${ColorVerde}  Borrando todos los logs de /var/log...${FinColor}"
 echo ""
 
    ## Borrar archivos sobrantes
@@ -30,7 +30,7 @@ echo ""
       find /var/log/ -type f -print -exec truncate -s 0 {} \;
 
 echo ""
-echo -e "${ColorVerde}Borrando todos los historiales de comandos...${FinColor}"
+echo -e "${ColorVerde}  Borrando todos los historiales de comandos...${FinColor}"
 echo ""
 
   ## Comandos ejecutados por el root
@@ -43,7 +43,7 @@ echo ""
      history -c
 
 echo ""
-echo -e "${ColorVerde}Poniendo a cero todos los achivos de logs que se encuentren en las carpetas de todo el sistema...${FinColor}"
+echo -e "${ColorVerde}  Poniendo a cero todos los achivos de logs que se encuentren en las carpetas de todo el sistema...${FinColor}"
 echo ""
 
     find /bin/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
@@ -66,7 +66,7 @@ echo ""
     find /var/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
 
 echo ""
-echo -e "${ColorVerde}Borrando todos los achivos comprimidos de logs que se encuentren en las carpetas de todo el sistema...${FinColor}"
+echo -e "${ColorVerde}  Borrando todos los achivos comprimidos de logs que se encuentren en las carpetas de todo el sistema...${FinColor}"
 echo ""
 
     find /bin/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
@@ -89,6 +89,6 @@ echo ""
     find /var/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
 
 echo ""
-echo "Script finalizado. Vuelve a ejecutar history -c manualmente para borrar la ejecución de este script."
+echo "  Script finalizado. Vuelve a ejecutar history -c manualmente para borrar la ejecución de este script."
 echo ""
 
