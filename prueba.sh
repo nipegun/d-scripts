@@ -13,6 +13,10 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
+# Variables MiningCore
+MiningCoreDBPass="12345678"
+
+# Variables RVN
 PuertoRPCrvn="20401"
 UsuarioRPCrvn="rvnrpc"
 PassRPCrvn="rvnrpcpass"
@@ -52,7 +56,7 @@ PassRPCrvn="rvnrpcpass"
              echo '            "host": "127.0.0.1",'                             >> /root/miningcore/build/config-rvn.json
              echo '            "port": 5432,'                                    >> /root/miningcore/build/config-rvn.json
              echo '            "user": "miningcore",'                            >> /root/miningcore/build/config-rvn.json
-             echo '            "password": "'"$MiningCoreDBPass"'",'                 >> /root/miningcore/build/config-rvn.json
+             echo '            "password": "'"$MiningCoreDBPass"'",'             >> /root/miningcore/build/config-rvn.json
              echo '            "database": "miningcore"'                         >> /root/miningcore/build/config-rvn.json
              echo '        }'                                                    >> /root/miningcore/build/config-rvn.json
              echo '    },'                                                       >> /root/miningcore/build/config-rvn.json
@@ -96,9 +100,9 @@ PassRPCrvn="rvnrpcpass"
              echo '        },'                                                   >> /root/miningcore/build/config-rvn.json
              echo '        "daemons": [{'                                        >> /root/miningcore/build/config-rvn.json
              echo '            "host": "127.0.0.1",'                             >> /root/miningcore/build/config-rvn.json
-             echo '            "port": "'"$PuertoRPCrvn"'",'                           >> /root/miningcore/build/config-rvn.json
-             echo '            "user": "'"$UsuarioRPCrvn"'",'                        >> /root/miningcore/build/config-rvn.json
-             echo '            "password": "'"$PassRPCrvn"'",'                       >> /root/miningcore/build/config-rvn.json
+             echo '            "port": "'"$PuertoRPCrvn"'",'                     >> /root/miningcore/build/config-rvn.json
+             echo '            "user": "'"$UsuarioRPCrvn"'",'                    >> /root/miningcore/build/config-rvn.json
+             echo '            "password": "'"$PassRPCrvn"'",'                   >> /root/miningcore/build/config-rvn.json
              echo '        "zmqBlockNotifySocket": "tcp://127.0.0.1:8767",'      >> /root/miningcore/build/config-rvn.json
              echo '        }],'                                                  >> /root/miningcore/build/config-rvn.json
              echo '        "paymentProcessing": {'                               >> /root/miningcore/build/config-rvn.json
