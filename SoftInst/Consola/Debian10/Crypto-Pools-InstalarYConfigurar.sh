@@ -15,9 +15,12 @@ FinColor='\033[0m'
 
 UsuarioDaemon="pooladmin"
 DominioPool="localhost"
-MiningCoreDBPass="12345678"
 VersPHP="7.3"
 
+# Variables MiningCore
+MiningCoreDBPass="12345678"
+
+# Variables RVN
 PuertoRPCrvn="20401"
 UsuarioRPCrvn="rvnrpc"
 PassRPCrvn="rvnrpcpass"
