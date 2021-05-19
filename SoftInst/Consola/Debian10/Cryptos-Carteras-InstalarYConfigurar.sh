@@ -13,7 +13,7 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-UsuarioDaemon="crypto"
+UsuarioDaemon="pooladmin"
 CarpetaSoftLTC="CoreLTC"
 CarpetaSoftRVN="CoreRVN"
 CarpetaSoftARG="CoreARG"
