@@ -622,21 +622,30 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Instalar base de datos PostgreSQL
              apt-get -y install postgresql
 
-          ## Crear la base de datos PostgreSQL
-             ## Una forma de crearla
-                su - postgres -c "createuser miningcore -d -P"
-             ## Otra
-             su - postgres -c "createuser miningcore"
-             su - postgres -c "createdb miningcore"
-             su - postgres -c "psql"             
-               alter user miningcore with encrypted password '12345678';
-               grant all privileges on database miningcore to miningcore;
+          ## Crear la base de datos PostgreSQL y el usuario
+             ## Crear rol
+                echo ""
+                echo "  Creando el nuevo usuario/rol para la base de datos PostgreSQL..."
+                echo ""
+                su - postgres -c "createuser --interactive --pwprompt miningcore"
+
+             ## Crear base de datos
+                su - postgres -c "createdb -O miningcore miningcore"
+
+                #su - postgres -c "createuser miningcore -d -P"
+                #su - postgres -c "createuser miningcore"
+                #su - postgres -c "createdb miningcore"
+                #su - postgres -c "psql"             
+                  #alter user miningcore with encrypted password '12345678';
+                  #grant all privileges on database miningcore to miningcore;
+
              ## Importar el formato básico de la base de datos
                 su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb.sql -O /tmp/miningcore-basic.sql"
                 su - postgres -c "psql -d miningcore -U miningcore -f /tmp/miningcore-basic.sql -W"
+
              ## Mejorar a formato multi-pool
-                su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb_postgresql_11_appendix.sql -O /tmp/miningcore-advanced.sql"
-                su - postgres -c "psql -d miningcore -U miningcore -f /tmp/miningcore-advanced.sql -W"
+                #su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb_postgresql_11_appendix.sql -O /tmp/miningcore-advanced.sql"
+                #su - postgres -c "psql -d miningcore -U miningcore -f /tmp/miningcore-advanced.sql -W"
 
           ## Ejecutar MiningCore
              cd /root/miningcore/build/
