@@ -17,6 +17,8 @@ UsuarioDaemon="pooladmin"
 DominioPool="localhost"
 MiningCoreDBPass="12345678"
 VersPHP="7.3"
+
+PuertoRPCrvn="20401"
 UsuarioRPCrvn="rvnrpc"
 PassRPCrvn="rvnrpcpass"
 
