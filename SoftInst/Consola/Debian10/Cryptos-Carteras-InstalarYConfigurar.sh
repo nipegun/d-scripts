@@ -350,7 +350,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "rpcpassword=rvnrpcpass"  >> /home/$UsuarioDaemon/.raven/raven.conf
           echo "rpcallowip=127.0.0.1"    >> /home/$UsuarioDaemon/.raven/raven.conf
           echo "#Default RPC port 8766"  >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "#rpcport=42068"          >> /home/$UsuarioDaemon/.raven/raven.conf
+          echo "rpcport=20401"           >> /home/$UsuarioDaemon/.raven/raven.conf
           echo "server=1"                >> /home/$UsuarioDaemon/.raven/raven.conf
           echo "listen=1"                >> /home/$UsuarioDaemon/.raven/raven.conf
           echo "prune=550"               >> /home/$UsuarioDaemon/.raven/raven.conf
