@@ -603,7 +603,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo '        },'                                                   >> /root/miningcore/build/config-rvn.json
              echo '        "daemons": [{'                                        >> /root/miningcore/build/config-rvn.json
              echo '            "host": "127.0.0.1",'                             >> /root/miningcore/build/config-rvn.json
-             echo '            "port": 8766,'                                    >> /root/miningcore/build/config-rvn.json
+             echo '            "port": $PuertoRPCrvn,'                           >> /root/miningcore/build/config-rvn.json
              echo '            "user": "$UsuarioRPCrvn",'                        >> /root/miningcore/build/config-rvn.json
              echo '            "password": "$PassRPCrvn",'                       >> /root/miningcore/build/config-rvn.json
              echo '        "zmqBlockNotifySocket": "tcp://127.0.0.1:8767",'      >> /root/miningcore/build/config-rvn.json
