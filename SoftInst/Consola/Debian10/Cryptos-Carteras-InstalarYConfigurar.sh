@@ -263,7 +263,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Parar el daemon
 
-             su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh"
+             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-parar.sh"
 
         ;;
 
@@ -420,7 +420,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              echo "  Agregando ravend a los ComandosPostArranque..."
              echo ""
-             echo "chmod +x /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh"
+             chmod +x /home/$UsuarioDaemon/ComandosCli/raven-daemon-iniciar.sh
              echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/ComandosCli/raven-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
           ## Icono de lanzamiento en el menú gráfico
@@ -458,7 +458,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Parar el daemon
 
-             su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh"
+             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-parar.sh"
 
         ;;
 
@@ -636,7 +636,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Parar el daemon
 
-             su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh"
+             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-parar.sh"
         ;;
 
         6)
@@ -788,7 +788,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Parar el daemon
 
-             su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh"
+             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-parar.sh"
 
         ;;
 
@@ -919,7 +919,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Parar el daemon
 
-             su $UsuarioDaemon -c "/home/$UsuarioDaemon/ComandosCli/chia-daemon-parar.sh"
+             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/ComandosCli/chia-daemon-parar.sh"
 
         ;;
 
