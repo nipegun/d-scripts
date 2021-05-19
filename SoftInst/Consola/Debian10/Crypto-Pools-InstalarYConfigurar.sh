@@ -36,7 +36,7 @@ echo ""
    fi
 
 menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
-  opciones=(1 "Instalar la pool rvn-kawpow-pool (Para Ravencoin)" on
+  opciones=(1 "Instalar la pool rvn-kawpow-pool (Para Ravencoin)" off
             2 "Instalar la pool php-mpos" off
             3 "Instalar NodeJS" off
             4 "Instalar node-multi-hashing" off
