@@ -646,6 +646,9 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
                   #grant all privileges on database miningcore to miningcore;
 
              ## Importar el formato básico de la base de datos
+                echo ""
+                echo "  Importando la estructura de la base de datos..."
+                echo ""
                 su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb.sql -O /tmp/miningcore-basic.sql"
                 su - postgres -c "psql -d miningcore -U miningcore -f /tmp/miningcore-basic.sql -W"
 
