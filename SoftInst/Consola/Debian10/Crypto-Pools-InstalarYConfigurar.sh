@@ -622,18 +622,19 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Instalar base de datos PostgreSQL
              apt-get -y install postgresql
 
-          ## Crear la base de datos PostgreSQL y el usuario
-             ## Crear rol
+          ## Crear la base de datos PostgreSQL
+
+             ## Crear rol para la base de datos
                 echo ""
                 echo "  Creando el nuevo usuario/rol para la base de datos PostgreSQL..."
                 echo ""
                 su - postgres -c "createuser --interactive --pwprompt miningcore"
 
-             ## Crear base de datos
+             ## Crear la base de datos con el rol recién creado
                 su - postgres -c "createdb -O miningcore miningcore"
 
+             ## Si se quiere que el propietario de la base de datos sea postgres y no el rol de arriba
                 #su - postgres -c "createuser miningcore -d -P"
-                #su - postgres -c "createuser miningcore"
                 #su - postgres -c "createdb miningcore"
                 #su - postgres -c "psql"             
                   #alter user miningcore with encrypted password '12345678';
