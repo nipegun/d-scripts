@@ -92,7 +92,7 @@ echo ""
 echo -e "${ColorVerde}Instalando la tarea en crontab...${FinColor}"
 echo ""
 crontab -l > /tmp/CronTemporal
-echo "* 1-23/2 * * * /root/scripts/TareasCronCadaHoraImpar.sh" >> /tmp/CronTemporal
+echo "0 1-23/2 * * * /root/scripts/TareasCronCadaHoraImpar.sh" >> /tmp/CronTemporal
 crontab /tmp/CronTemporal
 rm /tmp/CronTemporal
 
@@ -121,7 +121,7 @@ echo ""
 echo -e "${ColorVerde}Instalando la tarea en crontab...${FinColor}"
 echo ""
 crontab -l > /tmp/CronTemporal
-echo "* */2 * * * /root/scripts/TareasCronCadaHoraPar.sh" >> /tmp/CronTemporal
+echo "0 */2 * * * /root/scripts/TareasCronCadaHoraPar.sh" >> /tmp/CronTemporal
 crontab /tmp/CronTemporal
 rm /tmp/CronTemporal
 
