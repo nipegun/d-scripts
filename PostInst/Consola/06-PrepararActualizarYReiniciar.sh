@@ -30,38 +30,41 @@ crontab /root/CronTemporal
 # Borrar el archivo temporal
 rm /root/CronTemporal
 
-# Cada minuto                             * * * * *	
-# Cada 1 minuto                           * * * * *	
-# Cada 2 minutos                        */2 * * * *	
-# En los minutos pares                  */2 * * * *	
-# En los minutos impares             1-59/2 * * * *	
-# Cada 3 minutos                        */3 * * * *	
-# Cada 4 minutos                        */4 * * * *	
-# Cada 5 minutos                        */5 * * * *	
-# Cada 6 minutos                        */6 * * * *	
-# Cada 10 minutos                      */10 * * * *	
-# Cada 15 minutos                      */15 * * * *	
-# Cada 30 minutos                      */30 * * * *	
-# Cada hora                             * */1 * * *	
-# Cada 2 horas                          * */2 * * *	
-# En horas pares                        * */2 * * *	
-# En horas impares                   * 1-23/2 * * *	
-# Primer minuto de cada hora del rango 0 9-17 * * *	
-# Cada día                                0 0 * * *
-# Cada día a la 1                         0 1 * * *
-# Cada día a las 8                        0 8 * * *
-# Cada Domingo                            0 0 * * 0
-# Cada Lunes                              0 0 * * 1
-# Cada Martes                             0 0 * * 2
-# Cada Miercoles                          0 0 * * 3
-# Cada Jueves                             0 0 * * 4
-# Cada Viernes                            0 0 * * 5
-# Cada Sábado                             0 0 * * 6
-# Días laborales                          0 0 * * 1-5
-# Fines de semana                         0 0 * * 6,0
-# Cada 7 días                             0 0 * * 0
-# El día 1 de cada mes                    0 0 1 * *
-# El día uno cada dos meses             0 0 */2 * *
-# Cada trimestre                        0 0 */3 * *
-# Cada 6 meses                          0 0 */6 * *
+# Cada minuto                       * * * * *	
+# Cada 1 minuto                     * * * * *	
+# Cada 2 minutos                  */2 * * * *	
+# En los minutos pares            */2 * * * *	
+# En los minutos impares       1-59/2 * * * *	
+# Cada 3 minutos                  */3 * * * *	
+# Cada 4 minutos                  */4 * * * *	
+# Cada 5 minutos                  */5 * * * *	
+# Cada 6 minutos                  */6 * * * *	
+# Cada 10 minutos                */10 * * * *	
+# Cada 15 minutos                */15 * * * *	
+# Cada 30 minutos                */30 * * * *
+
+# Cada hora                       0 */1 * * *	
+# Cada 2 horas                    0 */2 * * *	
+# En horas pares                  0 */2 * * *	
+# En horas impares             0 1-23/2 * * *		
+
+# Cada día                          0 0 * * *
+# Cada día a la 1                   0 1 * * *
+# Cada día a las 8                  0 8 * * *
+
+# Cada Domingo                      0 0 * * 0
+# Cada Lunes                        0 0 * * 1
+# Cada Martes                       0 0 * * 2
+# Cada Miercoles                    0 0 * * 3
+# Cada Jueves                       0 0 * * 4
+# Cada Viernes                      0 0 * * 5
+# Cada Sábado                       0 0 * * 6
+# Días laborales                    0 0 * * 1-5
+# Fines de semana                   0 0 * * 6,0
+# Cada 7 días                       0 0 * * 0
+
+# El día 1 de cada mes              0 0 1 * *
+# El día uno cada dos meses       0 0 */2 * *
+# Cada trimestre                  0 0 */3 * *
+# Cada 6 meses                    0 0 */6 * *
 
