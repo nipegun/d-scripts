@@ -211,7 +211,6 @@ chmod 700 /root/scripts/TareasCronCadaMinuto.sh
 chmod 700 /root/scripts/TareasCronCadaHora.sh
 chmod 700 /root/scripts/TareasCronCadaHoraImpar.sh
 chmod 700 /root/scripts/TareasCronCadaHoraPar.sh
-chmod 700 /root/scripts/TareasCronCadaDosHoras.sh
 chmod 700 /root/scripts/TareasCronCadaDía.sh
 chmod 700 /root/scripts/TareasCronCadaSemana.sh
 chmod 700 /root/scripts/TareasCronCadaMes.sh
