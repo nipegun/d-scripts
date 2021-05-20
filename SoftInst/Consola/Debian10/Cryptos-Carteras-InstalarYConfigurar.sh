@@ -14,11 +14,6 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 UsuarioDaemon="pooladmin"
-CarpetaSoftLTC="CoreLTC"
-CarpetaSoftRVN="CoreRVN"
-CarpetaSoftARG="CoreARG"
-CarpetaSoftXMR="CoreXMR"
-CarpetaSoftXCH="CoreXCH"
 
 echo ""
 echo -e "${ColorVerde}---------------------------------------------------------------------------------${FinColor}"
@@ -161,19 +156,19 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.litecoin/litecoin.conf
           echo "prune=550"         >> /home/$UsuarioDaemon/.litecoin/litecoin.conf
           echo "daemon=1"          >> /home/$UsuarioDaemon/.litecoin/litecoin.conf
-          rm -rf /home/$UsuarioDaemon/$CarpetaSoftLTC/
-          mv /root/SoftInst/Litecoin/litecoin-$UltVersLite/ /home/$UsuarioDaemon/$CarpetaSoftLTC/
+          rm -rf /home/$UsuarioDaemon/CoresCrypto/LTC/
+          mv /root/SoftInst/Litecoin/litecoin-$UltVersLite/ /home/$UsuarioDaemon/CoresCrypto/LTC/
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
           find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
           find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
-          find /home/$UsuarioDaemon/$CarpetaSoftLTC/bin -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/CoresCrypto/LTC/bin -type f -exec chmod +x {} \;
 
           echo ""
           echo "  Arrancando litecoind..."
           echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon"
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/CoresCrypto/LTC/bin/litecoind -daemon"
           sleep 5
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-ltc.txt
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/CoresCrypto/LTC/bin/litecoin-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-ltc.txt
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-ltc.txt
           echo ""
           echo "  La dirección para recibir litecoins es:"
@@ -191,7 +186,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-iniciar.sh
              echo 'echo "  Iniciando el daemon litecoind..."'                                >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-iniciar.sh
              echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-iniciar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoind -daemon"               >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-iniciar.sh
+             echo "/home/$UsuarioDaemon/CoresCrypto/LTC/bin/litecoind -daemon"               >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-iniciar.sh
              chmod +x                                                                           /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-iniciar.sh
 
              echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-cartera-info.sh
@@ -199,7 +194,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-cartera-info.sh
              echo 'echo "  Mostrando info de la cartera Litecoin..."'                        >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-cartera-info.sh
              echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-cartera-info.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli getwalletinfo | jq" >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-cartera-info.sh
+             echo "/home/$UsuarioDaemon/CoresCrypto/LTC/bin/litecoin-cli getwalletinfo | jq" >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-cartera-info.sh
              chmod +x                                                                           /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-cartera-info.sh
 
              echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-parar.sh
@@ -207,7 +202,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-parar.sh
              echo 'echo "  Parando el daemon litecoind..."'                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-parar.sh
              echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-parar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-cli stop"               >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-parar.sh
+             echo "/home/$UsuarioDaemon/CoresCrypto/LTC/bin/litecoin-cli stop"               >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-parar.sh
              chmod +x                                                                           /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-daemon-parar.sh
 
              echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-qt-iniciar.sh
@@ -217,7 +212,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-qt-iniciar.sh
              echo "/home/$UsuarioDaemon/ComandosCli/litecoin-daemon-parar.sh"                >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-qt-iniciar.sh
              echo "sleep 5"                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-qt-iniciar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftLTC/bin/litecoin-qt"                     >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-qt-iniciar.sh
+             echo "/home/$UsuarioDaemon/CoresCrypto/LTC/bin/litecoin-qt"                     >> /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-qt-iniciar.sh
              chmod +x                                                                           /home/$UsuarioDaemon/scripts/ComandosCli/litecoin-qt-iniciar.sh
 
           ## Autoejecución de Litecoin al iniciar el sistema
@@ -258,7 +253,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Reparación de permisos
 
-             chmod +x /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/*
+             chmod +x /home/$UsuarioDaemon/CoresCrypto/LTC/bin/*
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
 
           ## Parar el daemon
@@ -356,19 +351,19 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "prune=550"               >> /home/$UsuarioDaemon/.raven/raven.conf
           echo "daemon=1"                >> /home/$UsuarioDaemon/.raven/raven.conf
           echo "gen=0"                   >> /home/$UsuarioDaemon/.raven/raven.conf
-          rm -rf /home/$UsuarioDaemon/$CarpetaSoftRVN/
-          mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioDaemon/$CarpetaSoftRVN/
+          rm -rf /home/$UsuarioDaemon/CoresCrypto/RVN/
+          mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioDaemon/CoresCrypto/RVN/
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
           find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
           find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
-          find /home/$UsuarioDaemon/$CarpetaSoftRVN/bin -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/CoresCrypto/RVN/bin -type f -exec chmod +x {} \;
 
           echo ""
           echo "  Arrancando ravencoind..."
           echo ""
-          su $UsuarioDaemon -c /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend
+          su $UsuarioDaemon -c /home/$UsuarioDaemon/CoresCrypto/RVN/bin/ravend
           sleep 5
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-rvn.txt
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/CoresCrypto/RVN/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-rvn.txt
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-rvn.txt
           echo ""
           echo "  La dirección para recibir ravencoins es:"
@@ -386,7 +381,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-iniciar.sh
              echo 'echo "  Iniciando el daemon ravend..."'                                       >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-iniciar.sh
              echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-iniciar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ravend"                              >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-iniciar.sh
+             echo "/home/$UsuarioDaemon/CoresCrypto/RVN/bin/ravend"                              >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-iniciar.sh
              chmod +x                                                                               /home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-iniciar.sh
 
              echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/scripts/ComandosCli/raven-cartera-info.sh
@@ -394,7 +389,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-cartera-info.sh
              echo 'echo "  Mostrando info de la cartera Raven..."'                               >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-cartera-info.sh
              echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-cartera-info.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli getwalletinfo | jq"        >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-cartera-info.sh
+             echo "/home/$UsuarioDaemon/CoresCrypto/RVN/bin/raven-cli getwalletinfo | jq"        >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-cartera-info.sh
              chmod +x                                                                               /home/$UsuarioDaemon/scripts/ComandosCli/raven-cartera-info.sh
 
              echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-parar.sh
@@ -402,7 +397,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-parar.sh
              echo 'echo "  Parando el daemon ravend..."'                                         >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-parar.sh
              echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-parar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-cli stop"                      >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-parar.sh
+             echo "/home/$UsuarioDaemon/CoresCrypto/RVN/bin/raven-cli stop"                      >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-parar.sh
              chmod +x                                                                               /home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-parar.sh
 
              echo '#!/bin/bash'                                                                   > /home/$UsuarioDaemon/scripts/ComandosCli/raven-qt-iniciar.sh
@@ -412,7 +407,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo 'echo ""'                                                                      >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-qt-iniciar.sh
              echo "/home/$UsuarioDaemon/ComandosCli/raven-daemon-parar.sh"                       >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-qt-iniciar.sh
              echo "sleep 5"                                                                      >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-qt-iniciar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftRVN/bin/raven-qt -min -testnet=0 -regtest=0" >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-qt-iniciar.sh
+             echo "/home/$UsuarioDaemon/CoresCrypto/RVN/bin/raven-qt -min -testnet=0 -regtest=0" >> /home/$UsuarioDaemon/scripts/ComandosCli/raven-qt-iniciar.sh
              chmod +x                                                                               /home/$UsuarioDaemon/scripts/ComandosCli/raven-qt-iniciar.sh
 
           ## Autoejecución de Ravencoin al iniciar el sistema
@@ -453,7 +448,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Reparación de permisos
 
-             chmod +x /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/*
+             chmod +x /home/$UsuarioDaemon/CoresCrypto/RVN/bin/*
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
 
           ## Parar el daemon
@@ -531,12 +526,12 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "addnode=85.15.179.171:13580"   >> /home/$UsuarioDaemon/.argentum/argentum.conf
              echo "addnode=95.79.35.133:13580"    >> /home/$UsuarioDaemon/.argentum/argentum.conf
              echo "addnode=172.104.110.155:13580" >> /home/$UsuarioDaemon/.argentum/argentum.conf
-          rm -rf /home/$UsuarioDaemon/$CarpetaSoftARG/
-          mv /root/SoftInst/Argentumcoin/argentum-$UltVersArgentum/ /home/$UsuarioDaemon/$CarpetaSoftARG/
+          rm -rf /home/$UsuarioDaemon/CoresCrypto/ARG/
+          mv /root/SoftInst/Argentumcoin/argentum-$UltVersArgentum/ /home/$UsuarioDaemon/CoresCrypto/ARG/
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
           find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
           find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
-          find /home/$UsuarioDaemon/$CarpetaSoftARG/bin -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/CoresCrypto/ARG/bin -type f -exec chmod +x {} \;
           ## Denegar el acceso a la carpeta a los otros usuarios del sistema
              #find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
              #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
@@ -544,9 +539,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Arrancando argentumd..."
           echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentumd"
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/CoresCrypto/ARG/bin/argentumd"
           sleep 5
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-arg.txt
+          su $UsuarioDaemon -c "/home/$UsuarioDaemon/CoresCrypto/ARG/bin/argentum-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-arg.txt
           chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-arg.txt
           echo ""
           echo "  La dirección para recibir argentum es:"
@@ -564,7 +559,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-iniciar.sh
           echo 'echo "  Iniciando el daemon argentumd..."'                                >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-iniciar.sh
           echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-iniciar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentumd"                       >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-iniciar.sh
+          echo "/home/$UsuarioDaemon/CoresCrypto/ARG/bin/argentumd"                       >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-iniciar.sh
           chmod +x                                                                           /home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-iniciar.sh
 
           echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/scripts/ComandosCli/argentum-cartera-info.sh
@@ -572,7 +567,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-cartera-info.sh
           echo 'echo "  Mostrando info de la cartera Argentum..."'                        >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-cartera-info.sh
           echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-cartera-info.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli getwalletinfo | jq" >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-cartera-info.sh
+          echo "/home/$UsuarioDaemon/CoresCrypto/ARG/bin/argentum-cli getwalletinfo | jq" >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-cartera-info.sh
           chmod +x                                                                           /home/$UsuarioDaemon/scripts/ComandosCli/argentum-cartera-info.sh
 
           echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-parar.sh
@@ -580,7 +575,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-parar.sh
           echo 'echo "  Parando el daemon argentumd..."'                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-parar.sh
           echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-parar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-cli stop"               >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-parar.sh
+          echo "/home/$UsuarioDaemon/CoresCrypto/ARG/bin/argentum-cli stop"               >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-parar.sh
           chmod +x                                                                           /home/$UsuarioDaemon/scripts/ComandosCli/argentum-daemon-parar.sh
 
           echo '#!/bin/bash'                                                               > /home/$UsuarioDaemon/scripts/ComandosCli/argentum-qt-iniciar.sh
@@ -590,7 +585,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo 'echo ""'                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-qt-iniciar.sh
           echo "/home/$UsuarioDaemon/ComandosCli/argentum-daemon-parar.sh"                >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-qt-iniciar.sh
           echo "sleep 5"                                                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-qt-iniciar.sh
-          echo "/home/$UsuarioDaemon/$CarpetaSoftARG/bin/argentum-qt"                     >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-qt-iniciar.sh
+          echo "/home/$UsuarioDaemon/CoresCrypto/ARG/bin/argentum-qt"                     >> /home/$UsuarioDaemon/scripts/ComandosCli/argentum-qt-iniciar.sh
           chmod +x                                                                           /home/$UsuarioDaemon/scripts/ComandosCli/argentum-qt-iniciar.sh
 
           ## Autoejecución de Argentum al iniciar el sistema
@@ -631,7 +626,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Reparación de permisos
 
-             chmod +x /home/$UsuarioDaemon/$CarpetaSoftARG/bin/*
+             chmod +x /home/$UsuarioDaemon/CoresCrypto/ARG/bin/*
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
 
           ## Parar el daemon
@@ -680,8 +675,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Preparando la carpeta final..."
           echo ""
-          mkdir -p /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/ 2> /dev/null
-          find /root/SoftInst/Monerocoin/ -type d -name monero* -exec cp -r {}/. /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/ \;
+          mkdir -p /home/$UsuarioDaemon/CoresCrypto/XMR/bin/ 2> /dev/null
+          find /root/SoftInst/Monerocoin/ -type d -name monero* -exec cp -r {}/. /home/$UsuarioDaemon/CoresCrypto/XMR/bin/ \;
           rm -rf /root/SoftInst/Monerocoin/*
           mkdir -p /home/$UsuarioDaemon/.config/monero-project/ 2> /dev/null
           echo "[General]"                                       > /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
@@ -724,7 +719,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo 'echo ""'                                                        >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-iniciar.sh
              echo 'echo "  Iniciando monerod..."'                                  >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-iniciar.sh
              echo 'echo ""'                                                        >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-iniciar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monerod --detach"      >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-iniciar.sh
+             echo "/home/$UsuarioDaemon/CoresCrypto/XMR/bin/monerod --detach"      >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-iniciar.sh
              chmod +x                                                                 /home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-iniciar.sh
 
              echo '#!/bin/bash'                                                     > /home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-parar.sh
@@ -732,7 +727,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo 'echo ""'                                                        >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-parar.sh
              echo 'echo "  Parando monerod..."'                                    >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-parar.sh
              echo 'echo ""'                                                        >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-parar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monerod stop_daemon"   >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-parar.sh
+             echo "/home/$UsuarioDaemon/CoresCrypto/XMR/bin/monerod stop_daemon"   >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-parar.sh
              chmod +x                                                                 /home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-parar.sh
 
              echo '#!/bin/bash'                                                     > /home/$UsuarioDaemon/scripts/ComandosCli/monero-gui-iniciar.sh
@@ -742,7 +737,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo 'echo ""'                                                        >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-gui-iniciar.sh
              echo "/home/$UsuarioDaemon/ComandosCli/monero-daemon-parar.sh"        >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-gui-iniciar.sh
              echo "sleep 5"                                                        >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-gui-iniciar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftXMR/bin/monero-wallet-gui %u"  >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-gui-iniciar.sh
+             echo "/home/$UsuarioDaemon/CoresCrypto/XMR/bin/monero-wallet-gui %u"  >> /home/$UsuarioDaemon/scripts/ComandosCli/monero-gui-iniciar.sh
              chmod +x                                                                 /home/$UsuarioDaemon/scripts/ComandosCli/monero-gui-iniciar.sh
 
           ## Autoejecución de Monero al iniciar el sistema
@@ -783,7 +778,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Reparación de permisos
 
-             chmod +x /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/*
+             chmod +x /home/$UsuarioDaemon/CoresCrypto/XMR/bin/*
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
 
           ## Parar el daemon
@@ -862,9 +857,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #echo "Para ver que archivos instaló el paquete, ejecuta:"
           #echo ""
           #echo "dpkg-deb -c /root/SoftInst/Chiacoin/chia-blockchain.deb"
-          mkdir -p /home/$UsuarioDaemon/$CarpetaSoftXCH/ 2> /dev/null
-          rm -rf /home/$UsuarioDaemon/$CarpetaSoftXCH/*
-          mv /root/SoftInst/Chiacoin/usr/lib/chia-blockchain/ /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/
+          mkdir -p /home/$UsuarioDaemon/CoresCrypto/XCH/ 2> /dev/null
+          rm -rf /home/$UsuarioDaemon/CoresCrypto/XCH/*
+          mv /root/SoftInst/Chiacoin/usr/lib/chia-blockchain/ /home/$UsuarioDaemon/CoresCrypto/XCH/bin/
           rm -rf /root/SoftInst/Chiacoin/usr/
           mkdir -p /home/$UsuarioDaemon/.config/Chia Blockchain/ 2> /dev/null
           echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > /home/$UsuarioDaemon/.config/Chia Blockchain/Preferences
@@ -880,7 +875,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo 'echo ""'                                                     >> /home/$UsuarioDaemon/scripts/ComandosCli/chia-gui-iniciar.sh
              echo "/home/$UsuarioDaemon/ComandosCli/chia-daemon-parar.sh"       >> /home/$UsuarioDaemon/scripts/ComandosCli/chia-gui-iniciar.sh
              echo "sleep 5"                                                     >> /home/$UsuarioDaemon/scripts/ComandosCli/chia-gui-iniciar.sh
-             echo "/home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chia-blockchain %U" >> /home/$UsuarioDaemon/scripts/ComandosCli/chia-gui-iniciar.sh
+             echo "/home/$UsuarioDaemon/CoresCrypto/XCH/bin/chia-blockchain %U" >> /home/$UsuarioDaemon/scripts/ComandosCli/chia-gui-iniciar.sh
              chmod +x                                                              /home/$UsuarioDaemon/scripts/ComandosCli/chia-gui-iniciar.sh
 
           ## Icono de lanzamiento en el menú gráfico
@@ -914,8 +909,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Reparación de permisos
 
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
-             chown root:root /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
-             chmod 4755 /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
+             chown root:root /home/$UsuarioDaemon/CoresCrypto/XCH/bin/chrome-sandbox
+             chmod 4755 /home/$UsuarioDaemon/CoresCrypto/XCH/bin/chrome-sandbox
 
           ## Parar el daemon
 
@@ -1011,15 +1006,15 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
              find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
 
-          find /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioDaemon/$CarpetaSoftARG/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/CoresCrypto/LTC/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/CoresCrypto/RVN/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/CoresCrypto/ARG/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/CoresCrypto/XMR/bin/ -type f -exec chmod +x {} \;
           find /home/$UsuarioDaemon/ -type f -iname "*.sh" -exec chmod +x {} \;
 
           ## Reparar permisos para pemitir la ejecución de la cartera de Chia
-             chown root:root /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
-             chmod 4755 /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
+             chown root:root /home/$UsuarioDaemon/CoresCrypto/XCH/bin/chrome-sandbox
+             chmod 4755 /home/$UsuarioDaemon/CoresCrypto/XCH/bin/chrome-sandbox
 
         ;;
 
@@ -1074,4 +1069,3 @@ echo "Acción: ACCEPT"
 echo "Protocolo: tcp"
 echo "Puerto destino: 18080"
 echo ""
-
