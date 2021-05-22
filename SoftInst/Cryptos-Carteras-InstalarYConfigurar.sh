@@ -32,20 +32,21 @@ echo ""
 
 menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
   opciones=(1 "Crear usuario sin privilegios para ejecutar la pool (Obligatorio)" on
-            2 "Borrar todas las carteras y configuraciones ya existentes" off
-            3 "Instalar cartera de Litecoin" off
-            4 "Instalar cartera de Ravencoin" off
-            5 "Instalar cartera de Argentum" off
-            6 "Instalar cartera de Monero" off
-            7 "Instalar cartera de Chia" off
-            8 "Instalar cartera de Bitcoin BCH (Todavía no disponible)" off
-            9 "Instalar cartera de Bitcoin BTC (Todavía no disponible)" off
-           10 "(Todavía no disponible)" off
+            2 "Instalar los c-scripts (Obligatorio)" on
+            3 "Borrar todas las carteras y configuraciones ya existentes" off
+            4 "Instalar cartera de Litecoin" off
+            5 "Instalar cartera de Ravencoin" off
+            6 "Instalar cartera de Argentum" off
+            7 "Instalar cartera de Monero" off
+            8 "Instalar cartera de Chia" off
+            9 "Instalar cartera de Bitcoin BCH (Todavía no disponible)" off
+           10 "Instalar cartera de Bitcoin BTC (Todavía no disponible)" off
            11 "(Todavía no disponible)" off
-           12 "Crear contraseña para el usuario $UsuarioDaemon" on
-           13 "Instalar escritorio y algunas utilidades de terminal" off
-           14 "Reparar permisos (Obligatorio)" on
-           15 "Reniciar el sistema" off)
+           12 "(Todavía no disponible)" off
+           13 "Crear contraseña para el usuario $UsuarioDaemon" on
+           14 "Instalar escritorio y algunas utilidades de terminal" off
+           15 "Reparar permisos (Obligatorio)" on
+           16 "Reniciar el sistema" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -71,6 +72,18 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         2)
 
           echo ""
+          echo -e "${ColorVerde}-------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Instalando los c-scripts...${FinColor}"
+          echo -e "${ColorVerde}-------------------------------${FinColor}"
+          echo ""
+
+          curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash
+
+        ;;
+
+        3)
+
+          echo ""
           echo -e "${ColorVerde}-----------------------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Borrando carteras y configuraciones anteriores...${FinColor}"
           echo -e "${ColorVerde}-----------------------------------------------------${FinColor}"
@@ -92,7 +105,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
-        3)
+        4)
 
           echo ""
           echo -e "${ColorVerde}-------------------------------------${FinColor}"
@@ -224,7 +237,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         ;;
 
-        4)
+        5)
 
           echo ""
           echo -e "${ColorVerde}-------------------------------------${FinColor}"
@@ -381,7 +394,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         ;;
 
-        5)
+        6)
 
           echo ""
           echo -e "${ColorVerde}----------------------------------------${FinColor}"
@@ -520,7 +533,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/c-scripts/argentum-daemon-parar.sh"
         ;;
 
-        6)
+        7)
 
           echo ""
           echo -e "${ColorVerde}--------------------------------------${FinColor}"
@@ -643,7 +656,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         ;;
 
-        7)
+        8)
 
           echo ""
           echo -e "${ColorVerde}------------------------------------${FinColor}"
@@ -760,16 +773,6 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         ;;
 
-        8)
-
-          echo ""
-          echo -e "${ColorVerde}------------------------------${FinColor}"
-          echo -e "${ColorVerde}  (Todavía no disponible)...${FinColor}"
-          echo -e "${ColorVerde}------------------------------${FinColor}"
-          echo ""
-
-        ;;
-
         9)
 
           echo ""
@@ -803,6 +806,16 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         12)
 
           echo ""
+          echo -e "${ColorVerde}------------------------------${FinColor}"
+          echo -e "${ColorVerde}  (Todavía no disponible)...${FinColor}"
+          echo -e "${ColorVerde}------------------------------${FinColor}"
+          echo ""
+
+        ;;
+
+        13)
+
+          echo ""
           echo -e "${ColorVerde}-------------------------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Cambiando la contraseña del usuario $UsuarioDaemon...${FinColor}"
           echo -e "${ColorVerde}-------------------------------------------------------${FinColor}"
@@ -812,7 +825,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         ;;
 
-        13)
+        14)
 
           echo ""
           echo -e "${ColorVerde}----------------------------${FinColor}"
@@ -834,7 +847,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         ;;
 
-        14)
+        15)
 
           echo ""
           echo -e "${ColorVerde}-------------------------${FinColor}"
@@ -860,7 +873,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
         ;;
 
-        15)
+        16)
 
           echo ""
           echo -e "${ColorVerde}-----------------------------${FinColor}"
