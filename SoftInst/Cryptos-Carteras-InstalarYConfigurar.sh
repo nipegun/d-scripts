@@ -69,7 +69,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              passwd $UsuarioDaemon
 
           ## Reparación de permisos
-             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+             chown :$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         2)
@@ -80,7 +80,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}-------------------------------${FinColor}"
           echo ""
 
-          curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash
+          su $UsuarioDaemon -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
 
         ;;
 
