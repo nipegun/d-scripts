@@ -377,7 +377,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Parar el daemon
 
-             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/ComandosCli/raven-daemon-parar.sh"
+             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/c-scripts/raven-daemon-parar.sh"
 
         ;;
 
@@ -639,7 +639,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Parar el daemon
 
-             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/ComandosCli/monero-daemon-parar.sh"
+             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/c-scripts/monero-daemon-parar.sh"
 
         ;;
 
