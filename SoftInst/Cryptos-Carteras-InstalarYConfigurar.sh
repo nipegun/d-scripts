@@ -43,7 +43,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
            10 "Instalar cartera de Bitcoin BTC (Todavía no disponible)" off
            11 "(Todavía no disponible)" off
            12 "(Todavía no disponible)" off
-           13 "Crear contraseña para el usuario $UsuarioDaemon" on
+           13 "(Todavía no disponible)" off
            14 "Instalar escritorio y algunas utilidades de terminal" off
            15 "Reparar permisos (Obligatorio)" on
            16 "Reniciar el sistema" off)
@@ -62,10 +62,13 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}-------------------------------------------------------------${FinColor}"
           echo ""
 
-          useradd -d /home/$UsuarioDaemon/ -s /bin/bash $UsuarioDaemon
+          ## Agregar el usuario
+             useradd -d /home/$UsuarioDaemon/ -s /bin/bash $UsuarioDaemon
+
+          ## Crear la contraseña
+             passwd $UsuarioDaemon
 
           ## Reparación de permisos
-
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
@@ -816,12 +819,10 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         13)
 
           echo ""
-          echo -e "${ColorVerde}-------------------------------------------------------${FinColor}"
-          echo -e "${ColorVerde}  Cambiando la contraseña del usuario $UsuarioDaemon...${FinColor}"
-          echo -e "${ColorVerde}-------------------------------------------------------${FinColor}"
+          echo -e "${ColorVerde}------------------------------${FinColor}"
+          echo -e "${ColorVerde}  (Todavía no disponible)...${FinColor}"
+          echo -e "${ColorVerde}------------------------------${FinColor}"
           echo ""
-
-          passwd $UsuarioDaemon
 
         ;;
 
