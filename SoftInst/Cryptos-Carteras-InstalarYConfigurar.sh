@@ -866,6 +866,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           find /home/$UsuarioDaemon/CoresCripto/RVN/bin/ -type f -exec chmod +x {} \;
           find /home/$UsuarioDaemon/CoresCripto/ARG/bin/ -type f -exec chmod +x {} \;
           find /home/$UsuarioDaemon/CoresCripto/XMR/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioDaemon/CoresCripto/XCH/bin/ -type f -exec chmod +x {} \;
           find /home/$UsuarioDaemon/ -type f -iname "*.sh" -exec chmod +x {} \;
 
           ## Reparar permisos para pemitir la ejecución de la cartera de Chia
