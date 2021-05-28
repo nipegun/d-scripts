@@ -51,7 +51,7 @@ for DiscoSSD in "${ArrayDiscosSSDSATA[@]}"
     hdparm -I /dev/$DiscoSSD | grep odel
     smartctl /dev/$DiscoSSD --all | grep "ector" | grep -v "eall"
     ## Mostrar el último campo de 241
-    smartctl /dev/$DiscoSSD --all | grep 241 | awk '{print $(NF)}'
+    echo "GiB escritos: " && smartctl /dev/$DiscoSSD --all | grep 241 | awk '{print $(NF)}'
     echo ""
   done
   
