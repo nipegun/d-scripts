@@ -30,15 +30,13 @@ echo ""
      done
 
 echo ""
-echo "  Hay ${#ArrayDiscosSSDSATA[@]} discos SATA instalados en el sistema:"
+echo "  Hay ${#ArrayDiscosSSDSATA[@]} disco/s SATA instalado/s en el sistema:"
 echo ""
 
 for i in "${ArrayDiscosSSDSATA[@]}"
   do
     echo $i
     DispActual=$(echo $i | cut -d' ' -f1)
-    nvme smart-log "$DispActual" | grep ercentage
-    nvme smart-log "$DispActual" | grep ritten
     echo ""
   done
   
