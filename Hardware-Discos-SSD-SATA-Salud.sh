@@ -50,7 +50,8 @@ for DiscoSSD in "${ArrayDiscosSSDSATA[@]}"
     echo ""
     hdparm -I /dev/$DiscoSSD | grep odel
     smartctl /dev/$DiscoSSD --all | grep "ector" | grep -v "eall"
-    smartctl /dev/$DiscoSSD --all | grep 241
+    ## Mostrar el último campo de 241
+    smartctl /dev/$DiscoSSD --all | grep 241 | awk '{print $(NF)}'
     echo ""
   done
   
