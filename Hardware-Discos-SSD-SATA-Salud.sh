@@ -30,7 +30,7 @@ echo ""
      done
 
 echo ""
-echo "    Hay ${#ArrayDiscosSSDSATA[@]} disco/s SATA instalado/s en el sistema:"
+echo "    Mostrando estado de salud de todos los discos SSD SATA instalados en el sistema (Total: ${#ArrayDiscosSSDSATA[@]})..."
 echo ""
 
 for i in "${ArrayDiscosSSDSATA[@]}"
