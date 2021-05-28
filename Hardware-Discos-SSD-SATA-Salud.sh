@@ -25,7 +25,7 @@ echo ""
      do
        if [[ $(cat /sys/block/sd$LetraDiscoSATA/queue/rotational 2> /dev/null) == "0" ]]; then
          echo "    El disco sd$LetraDiscoSATA es un disco SSD"
-         ArrayDiscosSSDSATA[$LetraDiscoSATA]=$(hdparm -I /dev/sd$LetraDiscoSATA | grep odel)
+         ArrayDiscosSSDSATA[$LetraDiscoSATA]=$(echo "sd$LetraDiscoSATA")
        fi
      done
 
