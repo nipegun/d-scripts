@@ -36,7 +36,7 @@ echo ""
 for i in "${ArrayDiscosSSDSATA[@]}"
   do
     echo $i
-    DispActual=$(echo $i | cut -d' ' -f1)
+    DispActual=$(echo   $i | cut -d' ' -f1)
     echo ""
   done
   
