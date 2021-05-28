@@ -33,10 +33,20 @@ echo ""
 echo "  Mostrando estado de salud de todos los discos SSD SATA instalados en el sistema (Total: ${#ArrayDiscosSSDSATA[@]})..."
 echo ""
 
+## Comprobar si el paquete hdparm está instalado. Si no lo está, instalarlo.
+   if [[ $(dpkg-query -s hdparm 2>/dev/null | grep installed) == "" ]]; then
+     echo ""
+     echo "hdparm no está instalado. Iniciando su instalación..."
+     echo ""
+     apt-get -y update
+     apt-get -y install hdparm
+   fi
+
+
 for DiscoSSD in "${ArrayDiscosSSDSATA[@]}"
   do
     echo ""
-    echo "  Disco $DiscoSSD"
+    echo "    Disco $DiscoSSD"
     echo ""
     hdparm -I /dev/$DiscoSSD | grep odel
     #DispActual=$(echo   $i | cut -d' ' -f1)
