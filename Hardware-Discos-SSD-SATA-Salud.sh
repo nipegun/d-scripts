@@ -35,8 +35,11 @@ echo ""
 
 for DiscoSSD in "${ArrayDiscosSSDSATA[@]}"
   do
-    echo $DiscoSSD
-    DispActual=$(echo   $i | cut -d' ' -f1)
+    echo ""
+    echo "  Disco $DiscoSSD"
+    echo ""
+    hdparm -I /dev/$DiscoSSD | grep odel
+    #DispActual=$(echo   $i | cut -d' ' -f1)
     echo ""
   done
   
