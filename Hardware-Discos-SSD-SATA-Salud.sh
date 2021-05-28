@@ -23,9 +23,9 @@ echo ""
 ## Obtener la cantidad de discos SSD SATA que hay instalados en el sistema
    for LetraDiscoSATA in {a..x}
      do
-       if [[ $(cat /sys/block/sd$LetraDiscoSATA/queue/rotational ) == "0" ]]; then
-         #ArrayDiscosSSDSATA[$LetraDiscoSATA]=$(nvme list | grep nvme$NroDiscoNVMe)
-         echo "El disco sd$LetraDiscoSATA es un disco SSD"
+       if [[ $(cat /sys/block/sd$LetraDiscoSATA/queue/rotational > /dev/null) == "0" ]]; then
+         #ArrayDiscosSSDSATA[$LetraDiscoSATA]=$(hdparm -I /dev/sd$LetraDiscoSATA | grep odel)
+         echo "  El disco sd$LetraDiscoSATA es un disco SSD"
        fi
      done
 
