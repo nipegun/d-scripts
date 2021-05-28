@@ -49,7 +49,8 @@ for DiscoSSD in "${ArrayDiscosSSDSATA[@]}"
     echo "    Disco /dev/$DiscoSSD"
     echo ""
     hdparm -I /dev/$DiscoSSD | grep odel
-    #DispActual=$(echo   $i | cut -d' ' -f1)
+    smartctl /dev/$DiscoSSD --all | grep "ector" | grep -v "eall"
+    smartctl /dev/$DiscoSSD --all | grep 241
     echo ""
   done
   
