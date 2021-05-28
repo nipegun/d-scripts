@@ -30,12 +30,12 @@ echo ""
      done
 
 echo ""
-echo "    Mostrando estado de salud de todos los discos SSD SATA instalados en el sistema (Total: ${#ArrayDiscosSSDSATA[@]})..."
+echo "  Mostrando estado de salud de todos los discos SSD SATA instalados en el sistema (Total: ${#ArrayDiscosSSDSATA[@]})..."
 echo ""
 
-for i in "${ArrayDiscosSSDSATA[@]}"
+for DiscoSSD in "${ArrayDiscosSSDSATA[@]}"
   do
-    echo $i
+    echo $DiscoSSD
     DispActual=$(echo   $i | cut -d' ' -f1)
     echo ""
   done
