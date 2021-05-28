@@ -24,7 +24,7 @@ echo ""
    for LetraDiscoSATA in {a..x}
      do
        if [[ $(cat /sys/block/sd$LetraDiscoSATA/queue/rotational 2> /dev/null) == "0" ]]; then
-         echo "    El disco sd$LetraDiscoSATA es un disco SSD"
+         echo "    El disco /dev/sd$LetraDiscoSATA es un SSD"
          ArrayDiscosSSDSATA[$LetraDiscoSATA]=$(echo "sd$LetraDiscoSATA")
        fi
      done
@@ -46,7 +46,7 @@ echo "  Mostrando estado de salud de todos los discos SSD SATA instalados en el 
 for DiscoSSD in "${ArrayDiscosSSDSATA[@]}"
   do
     echo ""
-    echo "    Disco $DiscoSSD"
+    echo "    Disco /dev/$DiscoSSD"
     echo ""
     hdparm -I /dev/$DiscoSSD | grep odel
     #DispActual=$(echo   $i | cut -d' ' -f1)
