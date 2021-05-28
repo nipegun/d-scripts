@@ -24,16 +24,16 @@ echo ""
    for LetraDiscoSATA in {a..x}
      do
        if [[ $(cat /sys/block/sd$LetraDiscoSATA/queue/rotational ) == "0" ]]; then
-         ArrayDiscosSSDSATA[$LetraDiscoSATA]=$(nvme list | grep nvme$NroDiscoNVMe)
+         #ArrayDiscosSSDSATA[$LetraDiscoSATA]=$(nvme list | grep nvme$NroDiscoNVMe)
          echo "El disco sd$LetraDiscoSATA es un disco SSD"
        fi
      done
 
 echo ""
-echo "  Hay ${#ArrayDiscosTotales[@]} discos NVMe instalados en el sistema:"
+echo "  Hay ${#ArrayDiscosSSDSATA[@]} discos SATA instalados en el sistema:"
 echo ""
 
-for i in "${ArrayDiscosTotales[@]}"
+for i in "${ArrayDiscosSSDSATA[@]}"
   do
     echo $i
     DispActual=$(echo $i | cut -d' ' -f1)
