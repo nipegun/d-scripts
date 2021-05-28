@@ -24,8 +24,8 @@ echo ""
    for LetraDiscoSATA in {a..x}
      do
        if [[ $(cat /sys/block/sd$LetraDiscoSATA/queue/rotational 2> /dev/null) == "0" ]]; then
-         #ArrayDiscosSSDSATA[$LetraDiscoSATA]=$(hdparm -I /dev/sd$LetraDiscoSATA | grep odel)
-         echo "  El disco sd$LetraDiscoSATA es un disco SSD"
+         ArrayDiscosSSDSATA[$LetraDiscoSATA]=$(hdparm -I /dev/sd$LetraDiscoSATA | grep odel)
+         echo "    El disco sd$LetraDiscoSATA es un disco SSD"
        fi
      done
 
@@ -41,3 +41,4 @@ for i in "${ArrayDiscosSSDSATA[@]}"
     nvme smart-log "$DispActual" | grep ritten
     echo ""
   done
+  
