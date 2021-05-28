@@ -13,7 +13,7 @@ ColorVerde="\033[1;32m"
 FinColor="\033[0m"
 
 echo ""
-echo -e "${ColorVerde}Mostrando información sobre discos...${FinColor}"
+echo -e "${ColorVerde}  Mostrando información sobre discos...${FinColor}"
 echo ""
 
 ## Comprobar si el paquete lshw está instalado. Si no lo está, instalarlo.
@@ -26,7 +26,7 @@ echo ""
    fi
 
 echo ""
-echo "Mostrando info de discos IDE y SATA..."
+echo "  Mostrando info de discos IDE y SATA..."
 echo ""
 lshw -class disk
 echo ""
@@ -41,7 +41,7 @@ echo ""
    fi
 
 echo ""
-echo "Mostrando info de discos NVMe..."
+echo "  Mostrando info de discos NVMe..."
 echo ""
 nvme list
 echo ""
