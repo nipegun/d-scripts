@@ -16,6 +16,7 @@
        echo ""
        apt-get -y update
        apt-get -y install nvme-cli
+       echo ""
    fi
 
 ## Obtener la cantidad de discos NVMe que hay instalados en el sistema
