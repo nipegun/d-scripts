@@ -68,6 +68,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Crear la contraseña
              passwd $UsuarioDaemon
 
+          ## Crear la carpeta
+             mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
+
           ## Reparación de permisos
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
