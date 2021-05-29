@@ -23,6 +23,7 @@ echo ""
      echo ""
      apt-get -y update
      apt-get -y install lshw
+     echo ""
    fi
 
 dmidecode --type 17
