@@ -20,6 +20,7 @@ if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
     echo ""
     apt-get -y update
     apt-get -y install wget
+    echo ""
 fi
 
 # Comprobar si hay conexión a Internet antes de sincronizar los d-scripts
