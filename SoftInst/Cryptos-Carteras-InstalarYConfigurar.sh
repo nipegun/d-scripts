@@ -95,6 +95,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              fi
 
           su $UsuarioDaemon -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
+          find /home/$UsuarioDaemon/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 
         ;;
 
@@ -252,7 +253,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
 
           ## Parar el daemon
-
+             chmod +x /home/$UsuarioDaemon/scripts/c-scripts/litecoin-daemon-parar.sh
              su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/c-scripts/litecoin-daemon-parar.sh"
 
         ;;
@@ -413,7 +414,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
 
           ## Parar el daemon
-
+             chmod +x /home/$UsuarioDaemon/scripts/c-scripts/raven-daemon-parar.sh
              su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/c-scripts/raven-daemon-parar.sh"
 
         ;;
@@ -556,7 +557,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
 
           ## Parar el daemon
-
+             chmod +x /home/$UsuarioDaemon/scripts/c-scripts/argentum-daemon-parar.sh
              su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/c-scripts/argentum-daemon-parar.sh"
         ;;
 
@@ -680,7 +681,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
 
           ## Parar el daemon
-
+             chmod +x /home/$UsuarioDaemon/scripts/c-scripts/monero-daemon-parar.sh
              su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/c-scripts/monero-daemon-parar.sh"
 
         ;;
@@ -800,7 +801,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              chmod 4755 /home/$UsuarioDaemon/CoresCripto/XCH/bin/chrome-sandbox
 
           ## Parar el daemon
-
+             chmod +x /home/$UsuarioDaemon/scripts/c-scripts/chia-daemon-parar.sh
              su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/c-scripts/chia-daemon-parar.sh"
 
         ;;
