@@ -38,6 +38,7 @@ echo ""
      echo ""
      apt-get -y update
      apt-get -y install dialog
+     echo ""
    fi
 
 menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
@@ -68,6 +69,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install git
+               echo ""
              fi
 
           mkdir -p /root/SoftInst/ 2> /dev/null
@@ -108,6 +110,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install tasksel
+               echo ""
              fi
 
           ## Instalar servidor Web
@@ -131,6 +134,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install git
+               echo ""
              fi
           git clone git://github.com/MPOS/php-mpos.git MPOS
           cd MPOS
