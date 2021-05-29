@@ -28,6 +28,7 @@ echo ""
      echo ""
      apt-get -y update
      apt-get -y install dialog
+     echo ""
    fi
 
 menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
@@ -90,6 +91,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install curl
+               echo ""
              fi
 
           su $UsuarioDaemon -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
@@ -137,6 +139,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
               echo ""
               apt-get -y update
               apt-get -y install curl
+              echo ""
             fi
           UltVersLite=$(curl --silent https://litecoin.org | grep linux-gnu | grep x86_64 | grep -v in64 | cut -d '"' -f 2 | sed 2d | cut -d '-' -f 3)
           echo ""
@@ -155,6 +158,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
               echo ""
               apt-get -y update
               apt-get -y install wget
+              echo ""
             fi
           echo "  Pidiendo el archivo en formato tar.gz..."
           echo ""
@@ -170,6 +174,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
               echo ""
               apt-get -y update
               apt-get -y install tar
+              echo ""
             fi
           tar -xf /root/SoftInst/Litecoin/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
           rm -rf /root/SoftInst/Litecoin/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
@@ -269,6 +274,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install curl
+               echo ""
              fi
           UltVersRaven=$(curl --silent https://github.com/RavenProject/Ravencoin/releases/latest | cut -d '/' -f 8 | cut -d '"' -f 1 | cut -c2-)
           echo ""
@@ -288,6 +294,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install wget
+               echo ""
              fi
           echo ""
           echo "  Pidiendo el archivo en formato zip..."
@@ -308,6 +315,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install zip
+               echo ""
              fi
           unzip /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
           mv /root/SoftInst/Ravencoin/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Ravencoin/
@@ -321,6 +329,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install tar
+               echo ""
              fi
           tar -xf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
           rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
@@ -426,6 +435,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install curl
+               echo ""
              fi
 
           UltVersArgentum=$(curl -s https://github.com/argentumproject/argentum/releases/ | grep linux | grep gnu | grep tar | grep href | cut -d '"' -f 2 | sed -n 1p | cut -d'-' -f 2)
@@ -447,6 +457,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install wget
+               echo ""
              fi
           wget --no-check-certificate https://github.com$ArchUltVersAgentum -O /root/SoftInst/Argentumcoin/Argentum.tar.gz
 
@@ -460,6 +471,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install tar
+               echo ""
              fi
           tar -xf /root/SoftInst/Argentumcoin/Argentum.tar.gz
           rm -rf /root/SoftInst/Argentumcoin/Argentum.tar.gz
@@ -566,6 +578,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install wget
+               echo ""
              fi
           mkdir -p /root/SoftInst/Monerocoin/ 2> /dev/null
           rm -rf /root/SoftInst/Monerocoin/*
@@ -582,6 +595,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install tar
+               echo ""
              fi
           tar xjfv /root/SoftInst/Monerocoin/monero.tar.bz2 -C /root/SoftInst/Monerocoin/
           rm -rf /root/SoftInst/Monerocoin/monero.tar.bz2
@@ -686,6 +700,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install git
+               echo ""
              fi
 
           mkdir -p /root/SoftInst/Chiacoin/ 2> /dev/null
@@ -705,6 +720,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install binutils
+               echo ""
              fi
           ar x /root/SoftInst/Chiacoin/chia-blockchain.deb
           rm -rf /root/SoftInst/Chiacoin/debian-binary
@@ -716,6 +732,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install tar
+               echo ""
              fi
           tar -xf /root/SoftInst/Chiacoin/data.tar.xz
           rm -rf /root/SoftInst/Chiacoin/data.tar.xz
@@ -853,6 +870,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
                apt-get -y update
                apt-get -y install tasksel
+               echo ""
              fi
           tasksel install mate-desktop
           apt-get -y install xrdp jq
