@@ -23,6 +23,7 @@ echo ""
      echo ""
      apt-get -y update
      apt-get -y install lshw
+     echo ""
    fi
 
 echo ""
@@ -38,6 +39,7 @@ echo ""
      echo ""
      apt-get -y update
      apt-get -y install nvme-cli
+     echo ""
    fi
 
 echo ""
