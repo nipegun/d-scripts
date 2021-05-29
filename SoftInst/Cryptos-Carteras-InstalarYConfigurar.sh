@@ -69,7 +69,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              passwd $UsuarioDaemon
 
           ## Reparación de permisos
-             chown :$UsuarioDaemon /home/$UsuarioDaemon/ -R
+             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
         ;;
 
         2)
@@ -79,6 +79,15 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}  Instalando los c-scripts...${FinColor}"
           echo -e "${ColorVerde}-------------------------------${FinColor}"
           echo ""
+
+          ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "  curl no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install curl
+             fi
 
           su $UsuarioDaemon -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
 
