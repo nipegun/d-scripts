@@ -182,7 +182,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Creando carpetas y archivos necesarios para ese usuario..."
           echo ""
-          mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
+          mkdir -p /home/$UsuarioDaemon/CoresCripto/LTC/ 2> /dev/null
           mkdir -p /home/$UsuarioDaemon/.litecoin/
           touch /home/$UsuarioDaemon/.litecoin/litecoin.conf
           echo "rpcuser=user1"      > /home/$UsuarioDaemon/.litecoin/litecoin.conf
@@ -337,7 +337,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Creando carpetas y archivos necesarios para ese usuario..."
           echo ""
-          mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
+          mkdir -p /home/$UsuarioDaemon/CoresCripto/RVN/ 2> /dev/null
           mkdir -p /home/$UsuarioDaemon/.raven/
           touch /home/$UsuarioDaemon/.raven/raven.conf
           echo "rpcuser=rvnrpc"           > /home/$UsuarioDaemon/.raven/raven.conf
@@ -479,7 +479,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Creando carpetas y archivos necesarios para ese usuario..."
           echo ""
-          mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
+          mkdir -p /home/$UsuarioDaemon/CoresCripto/ARG/ 2> /dev/null
           ## Archivo argentum.conf
              mkdir -p /home/$UsuarioDaemon/.argentum/
              touch /home/$UsuarioDaemon/.argentum/argentum.conf
@@ -922,9 +922,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 done
 
 echo ""
-echo -e "${ColorVerde}--------------------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}Script de instalación de una pool de minería de criptomonedas, finalzaado.${FinColor}"
-echo -e "${ColorVerde}--------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}----------------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}  Script de instalación de las diferentes carteras de criptomonedas, finalizado.${FinColor}"
+echo -e "${ColorVerde}----------------------------------------------------------------------------------${FinColor}"
 echo ""
 
 echo "ARGENTUM:"
