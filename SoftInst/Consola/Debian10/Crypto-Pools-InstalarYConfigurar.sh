@@ -83,14 +83,14 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
           sed -i -e 's|RL5SUNMHmjXtN1AzCRFQrFEhjnf7QQY7Tz|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g'                                         /root/rvn-kawpow-pool/pool_configs/ravencoin.json
           sed -i -e 's|Ta26x9axaDQWaV2bt2z8Dk3R3dN7gHw9b6|RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy|g'                                         /root/rvn-kawpow-pool/pool_configs/ravencoin.json
           apt-get -y install npm
-  
+
           # Modificar el archivo de instalación
             find  /root/rvn-kawpow-pool/install.sh -type f -exec sed -i -e "s|sudo ||g" {} \;
             sed -i -e 's|apt upgrade -y|apt -y upgrade\napt install -y libssl-dev libboost-all-dev libminiupnpc-dev libtool autotools-dev redis-server|g'                                         /root/rvn-kawpow-pool/install.sh
             sed -i -e 's|add-apt-repository -y ppa:chris-lea/redis-server|#add-apt-repository -y ppa:chris-lea/redis-server|g'                                                                    /root/rvn-kawpow-pool/install.sh
             sed -i -e 's|add-apt-repository -y ppa:bitcoin/bitcoin|#add-apt-repository -y ppa:bitcoin/bitcoin|g'                                                                                  /root/rvn-kawpow-pool/install.sh
             sed -i -e 's|apt install -y libdb4.8-dev libdb4.8++-dev libssl-dev libboost-all-dev libminiupnpc-dev libtool autotools-dev redis-server|apt install -y libdb4.8-dev libdb4.8++-dev|g' /root/rvn-kawpow-pool/install.sh
-  
+
           /root/rvn-kawpow-pool/install.sh
           find /root/rvn-kawpow-pool/pool-start.sh -type f -exec sed -i -e "s|sudo ||g" {} \;
 
@@ -191,9 +191,9 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
              #sed -i -e 's|$config['SALTY']||g'                                       /var/www/MPOS/include/config/global.inc.php
              #SALT and SALTY must be a minimum of 24 characters or you will get an error message:
              #'SALT or SALTY is too short, they should be more than 24 characters and changing them will require registering a
-   
+
              ## Servidor Stratum
-   
+
              ## Web socket
                 sed -i -e 's|from autobahn.websocket import WebSocketServerProtocol, WebSocketServerFactory|from autobahn.twisted.websocket import WebSocketServerProtocol, WebSocketServerFactory|g' /usr/local/lib/python2.7/dist-packages/stratum-0.2.13-py2.7.egg/stratum/websocket_transport.py
                 apache2ctl -k start
@@ -227,7 +227,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
                 echo "Dando permisos al usuario mpos para que administre la base de datos mpos..."
                 echo ""
                 mysql -e "grant all privileges on mpos.* to mpos@localhost identified by '$ContraBD'"
-                
+
                 echo ""
                 echo "Las bases de datos MySQL disponibles actualmente en el sistema son:"
                 echo ""
@@ -284,6 +284,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
           git clone https://github.com/RavenCommunity/kawpow-stratum-pool
 
         ;;
+
         5)
 
           echo ""
@@ -298,7 +299,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
           find /home/$UsuarioDaemon/$CarpetaSoftARG/bin/ -type f -exec chmod +x {} \;
           find /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/ -type f -exec chmod +x {} \;
           find /home/$UsuarioDaemon/ -type f -iname "*.sh" -exec chmod +x {} \;
-          
+
           chown root:root /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
           chmod 4755 /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
 
@@ -645,7 +646,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
              ## Si se quiere que el propietario de la base de datos sea postgres y no el rol de arriba
                 #su - postgres -c "createuser miningcore -d -P"
                 #su - postgres -c "createdb miningcore"
-                #su - postgres -c "psql"             
+                #su - postgres -c "psql"
                   #alter user miningcore with encrypted password '12345678';
                   #grant all privileges on database miningcore to miningcore;
 
@@ -675,4 +676,4 @@ echo -e "${ColorVerde}----------------------------------------------------------
 echo -e "${ColorVerde}Script de instalación de una pool de minería de criptomonedas, finalizaado.${FinColor}"
 echo -e "${ColorVerde}---------------------------------------------------------------------------${FinColor}"
 echo ""
-   
+
