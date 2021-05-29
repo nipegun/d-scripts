@@ -16,6 +16,7 @@ FinColor='\033[0m'
 UsuarioDaemon="pooladmin"
 DominioPool="localhost"
 VersPHP="7.3"
+VersPostgre="11"
 
 # Variables MiningCore
 MiningCoreDBPass="12345678"
@@ -636,11 +637,14 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
              ## Crear rol para la base de datos
                 echo ""
-                echo "  Creando el nuevo usuario/rol para la base de datos PostgreSQL..."
+                echo "  Creando el rol miningcore..."
                 echo ""
                 su - postgres -c "createuser --interactive --pwprompt miningcore"
 
              ## Crear la base de datos con el rol recién creado
+                echo ""
+                echo "  Creando la base de datos miningcore para el rol miningcore..."
+                echo ""
                 su - postgres -c "createdb -O miningcore miningcore"
 
              ## Si se quiere que el propietario de la base de datos sea postgres y no el rol de arriba
@@ -650,16 +654,32 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
                   #alter user miningcore with encrypted password '12345678';
                   #grant all privileges on database miningcore to miningcore;
 
+             ## Cambiar la autentificación a MD5
+                sed -i -e 's/local   all             all                                peer/local   all             all                                md5/g' /etc/postgresql/$VersPostgre/main/pg_hba.conf
+
+             ## Reiniciar PostgreSQL
+                service postgresql restart
+
              ## Importar el formato básico de la base de datos
                 echo ""
                 echo "  Importando la estructura de la base de datos..."
                 echo ""
                 su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb.sql -O /tmp/miningcore-basic.sql"
+                chmod 777 /tmp/miningcore-basic.sql
+                echo ""
+                echo "  Ingresa la contraseña del rol miningcore:"
+                echo ""
                 su - postgres -c "psql -d miningcore -U miningcore -f /tmp/miningcore-basic.sql -W"
 
              ## Mejorar a formato multi-pool
                 #su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb_postgresql_11_appendix.sql -O /tmp/miningcore-advanced.sql"
                 #su - postgres -c "psql -d miningcore -U miningcore -f /tmp/miningcore-advanced.sql -W"
+          echo ""
+          echo "  Instalación de MiningCore finalizada."
+          echo ""
+          echo "Para ver si la base de datos fue creada correctamente, ejecuta:"
+          echo ""
+          echo 'su - postgres -c "psql -h localhost --username=miningcore --list"'
 
           ## Ejecutar MiningCore
              cd /root/miningcore/build/
