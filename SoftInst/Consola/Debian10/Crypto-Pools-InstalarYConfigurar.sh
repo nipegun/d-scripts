@@ -580,6 +580,12 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo '    "interval": 600,'                                   >> /root/miningcore/build/config-rvn.json
              echo '    "shareRecoveryFile": "recovered-shares.txt"'        >> /root/miningcore/build/config-rvn.json
              echo '  },'                                                   >> /root/miningcore/build/config-rvn.json
+             echo '  "api": {'                                             >> /root/miningcore/build/config-rvn.json
+             echo '    "enabled": false,'                                  >> /root/miningcore/build/config-rvn.json
+             echo '    "listenAddress": "0.0.0.0",'                        >> /root/miningcore/build/config-rvn.json
+             echo '    "port": 4000,'                                      >> /root/miningcore/build/config-rvn.json
+             echo '    "adminPort": 4010'                                  >> /root/miningcore/build/config-rvn.json
+             echo '  },'                                                   >> /root/miningcore/build/config-rvn.json
              echo '  "pools": [{'                                          >> /root/miningcore/build/config-rvn.json
              echo '    "id": "RVN",'                                       >> /root/miningcore/build/config-rvn.json
              echo '    "enabled": true,'                                   >> /root/miningcore/build/config-rvn.json
