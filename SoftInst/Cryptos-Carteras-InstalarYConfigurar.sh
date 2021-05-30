@@ -16,15 +16,15 @@ FinColor='\033[0m'
 UsuarioDaemon="pooladmin"
 
 echo ""
-echo -e "${ColorVerde}---------------------------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}Iniciando el script de instalación de las diferentes carteras de criptomonedas...${FinColor}"
-echo -e "${ColorVerde}---------------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}-------------------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}  Iniciando el script de instalación de las diferentes carteras de criptomonedas...${FinColor}"
+echo -e "${ColorVerde}-------------------------------------------------------------------------------------${FinColor}"
 echo ""
 
 ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "dialog no está instalado. Iniciando su instalación..."
+     echo "  dialog no está instalado. Iniciando su instalación..."
      echo ""
      apt-get -y update
      apt-get -y install dialog
@@ -136,7 +136,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "curl no está instalado. Iniciando su instalación..."
+              echo "  curl no está instalado. Iniciando su instalación..."
               echo ""
               apt-get -y update
               apt-get -y install curl
@@ -155,7 +155,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "wget no está instalado. Iniciando su instalación..."
+              echo "  wget no está instalado. Iniciando su instalación..."
               echo ""
               apt-get -y update
               apt-get -y install wget
@@ -171,7 +171,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "tar no está instalado. Iniciando su instalación..."
+              echo "  tar no está instalado. Iniciando su instalación..."
               echo ""
               apt-get -y update
               apt-get -y install tar
@@ -271,7 +271,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "curl no está instalado. Iniciando su instalación..."
+               echo "  curl no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install curl
@@ -291,7 +291,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "wget no está instalado. Iniciando su instalación..."
+               echo "  wget no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install wget
@@ -307,12 +307,12 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
 
           echo ""
-          echo "Descomprimiendo el archivo..."
+          echo "  Descomprimiendo el archivo..."
           echo ""
           ## Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "zip no está instalado. Iniciando su instalación..."
+               echo "  zip no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install zip
@@ -326,7 +326,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "tar no está instalado. Iniciando su instalación..."
+               echo "  tar no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install tar
@@ -432,7 +432,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "curl no está instalado. Iniciando su instalación..."
+               echo "  curl no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install curl
@@ -454,7 +454,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "wget no está instalado. Iniciando su instalación..."
+               echo "  wget no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install wget
@@ -468,7 +468,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "tar no está instalado. Iniciando su instalación..."
+               echo "  tar no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install tar
@@ -575,7 +575,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "wget no está instalado. Iniciando su instalación..."
+               echo "  wget no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install wget
@@ -592,7 +592,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "tar no está instalado. Iniciando su instalación..."
+               echo "  tar no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install tar
@@ -697,7 +697,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "git no está instalado. Iniciando su instalación..."
+               echo "  git no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install git
@@ -717,7 +717,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "binutils no está instalado. Iniciando su instalación..."
+               echo "  binutils no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install binutils
@@ -729,7 +729,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "tar no está instalado. Iniciando su instalación..."
+               echo "  tar no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install tar
@@ -867,7 +867,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "tasksel no está instalado. Iniciando su instalación..."
+               echo "  tasksel no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install tasksel
