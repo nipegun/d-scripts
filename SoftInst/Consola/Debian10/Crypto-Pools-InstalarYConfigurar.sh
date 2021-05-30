@@ -27,15 +27,15 @@ UsuarioRPCrvn="rvnrpc"
 PassRPCrvn="rvnrpcpass"
 
 echo ""
-echo -e "${ColorVerde}-----------------------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}Iniciando el script de instalación de una pool de minería de criptomonedas...${FinColor}"
-echo -e "${ColorVerde}-----------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}---------------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}  Iniciando el script de instalación de una pool de minería de criptomonedas...${FinColor}"
+echo -e "${ColorVerde}---------------------------------------------------------------------------------${FinColor}"
 echo ""
 
 ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "dialog no está instalado. Iniciando su instalación..."
+     echo "  dialog no está instalado. Iniciando su instalación..."
      echo ""
      apt-get -y update
      apt-get -y install dialog
@@ -66,7 +66,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "git no está instalado. Iniciando su instalación..."
+               echo "  git no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install git
@@ -107,7 +107,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "tasksel no está instalado. Iniciando su instalación..."
+               echo "  tasksel no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install tasksel
@@ -131,7 +131,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "git no está instalado. Iniciando su instalación..."
+               echo "  git no está instalado. Iniciando su instalación..."
                echo ""
                apt-get -y update
                apt-get -y install git
@@ -208,33 +208,33 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
                    mysql -e "drop user if exists mpos@localhost"
 
                 echo ""
-                echo "Las bases de datos MySQL disponibles actualmente en el sistema son:"
+                echo "  Las bases de datos MySQL disponibles actualmente en el sistema son:"
                 echo ""
                 mysql -e "show databases"
                 echo ""
-                echo "Los usuarios MySQL disponibles actualmente en el sistema son:"
+                echo "  Los usuarios MySQL disponibles actualmente en el sistema son:"
                 echo ""
                 mysql -e "select user,host from mysql.user"
 
                 echo ""
-                echo "Creando la base de datos mpos..."
+                echo "  Creando la base de datos mpos..."
                 echo ""
                 mysql -e "create database mpos"
                 echo ""
-                echo "Creando el usuario mpos@localhost..."
+                echo "  Creando el usuario mpos@localhost..."
                 echo ""
                 mysql -e "create user mpos@localhost"
                 echo ""
-                echo "Dando permisos al usuario mpos para que administre la base de datos mpos..."
+                echo "  Dando permisos al usuario mpos para que administre la base de datos mpos..."
                 echo ""
                 mysql -e "grant all privileges on mpos.* to mpos@localhost identified by '$ContraBD'"
 
                 echo ""
-                echo "Las bases de datos MySQL disponibles actualmente en el sistema son:"
+                echo "  Las bases de datos MySQL disponibles actualmente en el sistema son:"
                 echo ""
                 mysql -e "show databases"
                 echo ""
-                echo "Los usuarios MySQL disponibles actualmente en el sistema son:"
+                echo "  Los usuarios MySQL disponibles actualmente en el sistema son:"
                 echo ""
                 mysql -e "select user,host from mysql.user"
 
@@ -678,7 +678,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Instalación de MiningCore finalizada."
           echo ""
-          echo "Para ver si la base de datos fue creada correctamente, ejecuta:"
+          echo "  Para ver si la base de datos fue creada correctamente, ejecuta:"
           echo ""
           echo 'su - postgres -c "psql -h localhost --username=miningcore --list"'
 
