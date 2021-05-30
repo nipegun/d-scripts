@@ -637,15 +637,15 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
              ## Crear rol para la base de datos
                 echo ""
-                echo "  Creando el rol miningcore..."
+                echo "  Creando el rol $UsuarioDaemon..."
                 echo ""
-                su - postgres -c "createuser --interactive --pwprompt miningcore"
+                su - postgres -c "createuser --interactive --pwprompt $UsuarioDaemon"
 
              ## Crear la base de datos con el rol recién creado
                 echo ""
-                echo "  Creando la base de datos miningcore para el rol miningcore..."
+                echo "  Creando la base de datos miningcore para el rol $UsuarioDaemon..."
                 echo ""
-                su - postgres -c "createdb -O miningcore miningcore"
+                su - postgres -c "createdb -O $UsuarioDaemon miningcore"
 
              ## Si se quiere que el propietario de la base de datos sea postgres y no el rol de arriba
                 #su - postgres -c "createuser miningcore -d -P"
@@ -666,10 +666,11 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
                 echo ""
                 su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb.sql -O /tmp/miningcore-basic.sql"
                 chmod 777 /tmp/miningcore-basic.sql
+                sed -i -e 's|SET ROLE miningcore;|SET ROLE "'$UsuarioDaemon'";|g' /tmp/miningcore-basic.sql
                 echo ""
-                echo "  Ingresa la contraseña del rol miningcore:"
+                echo "  Ingresa la contraseña del rol $UsuarioDaemon:"
                 echo ""
-                su - postgres -c "psql -d miningcore -U miningcore -f /tmp/miningcore-basic.sql -W"
+                #su - postgres -c "psql -d miningcore -U $UsuarioDaemon -f /tmp/miningcore-basic.sql -W"
 
              ## Mejorar a formato multi-pool
                 #su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb_postgresql_11_appendix.sql -O /tmp/miningcore-advanced.sql"
@@ -683,7 +684,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Ejecutar MiningCore
              cd /root/miningcore/build/
-             dotnet Miningcore.dll -c /root/miningcore/build/config-rvn.json
+             #dotnet Miningcore.dll -c /root/miningcore/build/config-rvn.json
 
         ;;
 
