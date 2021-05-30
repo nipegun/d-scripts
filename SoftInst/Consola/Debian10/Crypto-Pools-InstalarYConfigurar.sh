@@ -535,100 +535,105 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo '    ]'                                                                                                                                   >> /root/miningcore/build/config.json
              echo '}'                                                                                                                                       >> /root/miningcore/build/config.json
 
-             echo '{'                                                             > /root/miningcore/build/config-rvn.json
-             echo '    "logging": {'                                             >> /root/miningcore/build/config-rvn.json
-             echo '        "level": "info",'                                     >> /root/miningcore/build/config-rvn.json
-             echo '        "enableConsoleLog": true,'                            >> /root/miningcore/build/config-rvn.json
-             echo '        "enableConsoleColors": true,'                         >> /root/miningcore/build/config-rvn.json
-             echo '        "logFile": "",'                                       >> /root/miningcore/build/config-rvn.json
-             echo '        "logBaseDirectory": "",'                              >> /root/miningcore/build/config-rvn.json
-             echo '        "perPoolLogFile": false'                              >> /root/miningcore/build/config-rvn.json
-             echo '    },'                                                       >> /root/miningcore/build/config-rvn.json
-             echo '    "banning": {'                                             >> /root/miningcore/build/config-rvn.json
-             echo '        "manager": "integrated",'                             >> /root/miningcore/build/config-rvn.json
-             echo '        "banOnJunkReceive": false,'                           >> /root/miningcore/build/config-rvn.json
-             echo '        "banOnInvalidShares": false'                          >> /root/miningcore/build/config-rvn.json
-             echo '    },'                                                       >> /root/miningcore/build/config-rvn.json
-             echo '    "notifications": {'                                       >> /root/miningcore/build/config-rvn.json
-             echo '        "enabled": false,'                                    >> /root/miningcore/build/config-rvn.json
-             echo '            "email": {'                                       >> /root/miningcore/build/config-rvn.json
-             echo '            "host": "smtp.example.com",'                      >> /root/miningcore/build/config-rvn.json
-             echo '            "port": 587,'                                     >> /root/miningcore/build/config-rvn.json
-             echo '            "user": "user",'                                  >> /root/miningcore/build/config-rvn.json
-             echo '            "password": "password",'                          >> /root/miningcore/build/config-rvn.json
-             echo '            "fromAddress": "info@yourpool.org",'              >> /root/miningcore/build/config-rvn.json
-             echo '            "fromName": "support"'                            >> /root/miningcore/build/config-rvn.json
-             echo '        },'                                                   >> /root/miningcore/build/config-rvn.json
-             echo '        "admin": {'                                           >> /root/miningcore/build/config-rvn.json
-             echo '            "enabled": false,'                                >> /root/miningcore/build/config-rvn.json
-             echo '            "emailAddress": "user@example.com",'              >> /root/miningcore/build/config-rvn.json
-             echo '            "notifyBlockFound": true'                         >> /root/miningcore/build/config-rvn.json
-             echo '        }'                                                    >> /root/miningcore/build/config-rvn.json
-             echo '    },'                                                       >> /root/miningcore/build/config-rvn.json
-             echo '    "persistence": {'                                         >> /root/miningcore/build/config-rvn.json
-             echo '        "postgres": {'                                        >> /root/miningcore/build/config-rvn.json
-             echo '            "host": "127.0.0.1",'                             >> /root/miningcore/build/config-rvn.json
-             echo '            "port": 5432,'                                    >> /root/miningcore/build/config-rvn.json
-             echo '            "user": "miningcore",'                            >> /root/miningcore/build/config-rvn.json
-             echo '            "password": "'"$MiningCoreDBPass"'",'             >> /root/miningcore/build/config-rvn.json
-             echo '            "database": "miningcore"'                         >> /root/miningcore/build/config-rvn.json
-             echo '        }'                                                    >> /root/miningcore/build/config-rvn.json
-             echo '    },'                                                       >> /root/miningcore/build/config-rvn.json
-             echo '    "paymentProcessing": {'                                   >> /root/miningcore/build/config-rvn.json
-             echo '        "enabled": false,'                                    >> /root/miningcore/build/config-rvn.json
-             echo '        "interval": 600,'                                     >> /root/miningcore/build/config-rvn.json
-             echo '        "shareRecoveryFile": "recovered-shares.txt"'          >> /root/miningcore/build/config-rvn.json
-             echo '    },'                                                       >> /root/miningcore/build/config-rvn.json
-             echo '    "pools": [{'                                              >> /root/miningcore/build/config-rvn.json
-             echo '        "id": "RVN",'                                         >> /root/miningcore/build/config-rvn.json
-             echo '        "enabled": true,'                                     >> /root/miningcore/build/config-rvn.json
-             echo '        "coin": "ravencoin",'                                 >> /root/miningcore/build/config-rvn.json
-             echo '        "address": "RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy",'     >> /root/miningcore/build/config-rvn.json
-             echo '        "rewardRecipients": [{'                               >> /root/miningcore/build/config-rvn.json
-             echo '            "address": "RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy",' >> /root/miningcore/build/config-rvn.json
-             echo '            "percentage": 0'                                  >> /root/miningcore/build/config-rvn.json
-             echo '        }],'                                                  >> /root/miningcore/build/config-rvn.json
-             echo '    "blockRefreshInterval": 1000,'                            >> /root/miningcore/build/config-rvn.json
-             echo '    "jobRebroadcastTimeout": 10,'                             >> /root/miningcore/build/config-rvn.json
-             echo '    "clientConnectionTimeout": 600,'                          >> /root/miningcore/build/config-rvn.json
-             echo '        "jobRebroadcastTimeout": 10,'                         >> /root/miningcore/build/config-rvn.json
-             echo '        "clientConnectionTimeout": 600,'                      >> /root/miningcore/build/config-rvn.json
-             echo '    "banning": {'                                             >> /root/miningcore/build/config-rvn.json
-             echo '            "enabled": false,'                                >> /root/miningcore/build/config-rvn.json
-             echo '            "time": 600,'                                     >> /root/miningcore/build/config-rvn.json
-             echo '            "invalidPercent": 50,'                            >> /root/miningcore/build/config-rvn.json
-             echo '            "checkThreshold": 50'                             >> /root/miningcore/build/config-rvn.json
-             echo '        },'                                                   >> /root/miningcore/build/config-rvn.json
-             echo '        "ports": {'                                           >> /root/miningcore/build/config-rvn.json
-             echo '            "42061": {'                                       >> /root/miningcore/build/config-rvn.json
-             echo '                "listenAddress": "127.0.0.1",'                >> /root/miningcore/build/config-rvn.json
-             echo '                "difficulty": 16,'                            >> /root/miningcore/build/config-rvn.json
-             echo '                "name": "Solo Mining",'                       >> /root/miningcore/build/config-rvn.json
-             echo '                "varDiff": {'                                 >> /root/miningcore/build/config-rvn.json
-             echo '                    "minDiff": 1,'                            >> /root/miningcore/build/config-rvn.json
-             echo '                    "targetTime": 15,'                        >> /root/miningcore/build/config-rvn.json
-             echo '                    "retargetTime": 90,'                      >> /root/miningcore/build/config-rvn.json
-             echo '                    "variancePercent": 30'                    >> /root/miningcore/build/config-rvn.json
-             echo '                }'                                            >> /root/miningcore/build/config-rvn.json
-             echo '            }'                                                >> /root/miningcore/build/config-rvn.json
-             echo '        },'                                                   >> /root/miningcore/build/config-rvn.json
-             echo '        "daemons": [{'                                        >> /root/miningcore/build/config-rvn.json
-             echo '            "host": "127.0.0.1",'                             >> /root/miningcore/build/config-rvn.json
-             echo '            "port": "'"$PuertoRPCrvn"'",'                     >> /root/miningcore/build/config-rvn.json
-             echo '            "user": "'"$UsuarioRPCrvn"'",'                    >> /root/miningcore/build/config-rvn.json
-             echo '            "password": "'"$PassRPCrvn"'",'                   >> /root/miningcore/build/config-rvn.json
-             echo '        "zmqBlockNotifySocket": "tcp://127.0.0.1:8767",'      >> /root/miningcore/build/config-rvn.json
-             echo '        }],'                                                  >> /root/miningcore/build/config-rvn.json
-             echo '        "paymentProcessing": {'                               >> /root/miningcore/build/config-rvn.json
-             echo '            "enabled": true,'                                 >> /root/miningcore/build/config-rvn.json
-             echo '            "minimumPayment": 0.5,'                           >> /root/miningcore/build/config-rvn.json
-             echo '            "payoutScheme": "PPLNS",'                         >> /root/miningcore/build/config-rvn.json
-             echo '            "payoutSchemeConfig": {'                          >> /root/miningcore/build/config-rvn.json
-             echo '            "factor": 2.0'                                    >> /root/miningcore/build/config-rvn.json
-             echo '            }'                                                >> /root/miningcore/build/config-rvn.json
-             echo '        }'                                                    >> /root/miningcore/build/config-rvn.json
-             echo '   }]'                                                        >> /root/miningcore/build/config-rvn.json
-             echo '}'                                                            >> /root/miningcore/build/config-rvn.json
+             echo '{'                                                       > /root/miningcore/build/config-rvn.json
+             echo '  "logging": {'                                         >> /root/miningcore/build/config-rvn.json
+             echo '    "level": "info",'                                   >> /root/miningcore/build/config-rvn.json
+             echo '    "enableConsoleLog": true,'                          >> /root/miningcore/build/config-rvn.json
+             echo '    "enableConsoleColors": true,'                       >> /root/miningcore/build/config-rvn.json
+             echo '    "logFile": "pool.log",'                             >> /root/miningcore/build/config-rvn.json
+             echo '    "apiLogFile": "poolapi.log",'                       >> /root/miningcore/build/config-rvn.json
+             echo '    "logBaseDirectory": "/var/log/pool",'               >> /root/miningcore/build/config-rvn.json
+             echo '    "perPoolLogFile": false'                            >> /root/miningcore/build/config-rvn.json
+             echo '  },'                                                   >> /root/miningcore/build/config-rvn.json
+             echo '  "banning": {'                                         >> /root/miningcore/build/config-rvn.json
+             echo '    "manager": "integrated",'                           >> /root/miningcore/build/config-rvn.json
+             echo '    "banOnJunkReceive": true,'                          >> /root/miningcore/build/config-rvn.json
+             echo '    "banOnInvalidShares": false'                        >> /root/miningcore/build/config-rvn.json
+             echo '  },'                                                   >> /root/miningcore/build/config-rvn.json
+             echo '  "notifications": {'                                   >> /root/miningcore/build/config-rvn.json
+             echo '    "enabled": false,'                                  >> /root/miningcore/build/config-rvn.json
+             echo '    "email": {'                                         >> /root/miningcore/build/config-rvn.json
+             echo '      "host": "smtp.example.com",'                      >> /root/miningcore/build/config-rvn.json
+             echo '      "port": 587,'                                     >> /root/miningcore/build/config-rvn.json
+             echo '      "user": "user",'                                  >> /root/miningcore/build/config-rvn.json
+             echo '      "password": "password",'                          >> /root/miningcore/build/config-rvn.json
+             echo '      "fromAddress": "info@yourpool.org",'              >> /root/miningcore/build/config-rvn.json
+             echo '      "fromName": "support"'                            >> /root/miningcore/build/config-rvn.json
+             echo '    },'                                                 >> /root/miningcore/build/config-rvn.json
+             echo '    "admin": {'                                         >> /root/miningcore/build/config-rvn.json
+             echo '      "enabled": false,'                                >> /root/miningcore/build/config-rvn.json
+             echo '      "emailAddress": "user@example.com",'              >> /root/miningcore/build/config-rvn.json
+             echo '      "notifyBlockFound": true'                         >> /root/miningcore/build/config-rvn.json
+             echo '    }'                                                  >> /root/miningcore/build/config-rvn.json
+             echo '  },'                                                   >> /root/miningcore/build/config-rvn.json
+             echo '  "persistence": {'                                     >> /root/miningcore/build/config-rvn.json
+             echo '    "postgres": {'                                      >> /root/miningcore/build/config-rvn.json
+             echo '      "host": "127.0.0.1",'                             >> /root/miningcore/build/config-rvn.json
+             echo '      "port": 5432,'                                    >> /root/miningcore/build/config-rvn.json
+             echo '      "user": "'"$UsuarioDaemon"'",'                    >> /root/miningcore/build/config-rvn.json
+             echo '      "password": "'"$MiningCoreDBPass"'",'             >> /root/miningcore/build/config-rvn.json
+             echo '      "database": "miningcore"'                         >> /root/miningcore/build/config-rvn.json
+             echo '    }'                                                  >> /root/miningcore/build/config-rvn.json
+             echo '  },'                                                   >> /root/miningcore/build/config-rvn.json
+             echo '  "paymentProcessing": {'                               >> /root/miningcore/build/config-rvn.json
+             echo '    "enabled": false,'                                  >> /root/miningcore/build/config-rvn.json
+             echo '    "interval": 600,'                                   >> /root/miningcore/build/config-rvn.json
+             echo '    "shareRecoveryFile": "recovered-shares.txt"'        >> /root/miningcore/build/config-rvn.json
+             echo '  },'                                                   >> /root/miningcore/build/config-rvn.json
+             echo '  "pools": [{'                                          >> /root/miningcore/build/config-rvn.json
+             echo '    "id": "RVN",'                                       >> /root/miningcore/build/config-rvn.json
+             echo '    "enabled": true,'                                   >> /root/miningcore/build/config-rvn.json
+             echo '    "coin": "ravencoin",'                               >> /root/miningcore/build/config-rvn.json
+             echo '    "address": "DirCarteraPoolRVN",'                    >> /root/miningcore/build/config-rvn.json
+             echo '    "rewardRecipients": [{'                             >> /root/miningcore/build/config-rvn.json
+             echo '      "address": "RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy",' >> /root/miningcore/build/config-rvn.json
+             echo '      "percentage": 5'                                  >> /root/miningcore/build/config-rvn.json
+             echo '    }],'                                                >> /root/miningcore/build/config-rvn.json
+             echo '    "blockRefreshInterval": 1000,'                      >> /root/miningcore/build/config-rvn.json
+             echo '    "jobRebroadcastTimeout": 10,'                       >> /root/miningcore/build/config-rvn.json
+             echo '    "clientConnectionTimeout": 600,'                    >> /root/miningcore/build/config-rvn.json
+             echo '    "jobRebroadcastTimeout": 10,'                       >> /root/miningcore/build/config-rvn.json
+             echo '    "clientConnectionTimeout": 600,'                    >> /root/miningcore/build/config-rvn.json
+             echo '    "banning": {'                                       >> /root/miningcore/build/config-rvn.json
+             echo '      "enabled": false,'                                >> /root/miningcore/build/config-rvn.json
+             echo '      "time": 600,'                                     >> /root/miningcore/build/config-rvn.json
+             echo '      "invalidPercent": 50,'                            >> /root/miningcore/build/config-rvn.json
+             echo '      "checkThreshold": 50'                             >> /root/miningcore/build/config-rvn.json
+             echo '    },'                                                 >> /root/miningcore/build/config-rvn.json
+             echo '    "ports": {'                                         >> /root/miningcore/build/config-rvn.json
+             echo '      "42061": {'                                       >> /root/miningcore/build/config-rvn.json
+             echo '        "listenAddress": "127.0.0.1",'                  >> /root/miningcore/build/config-rvn.json
+             echo '        "difficulty": 16,'                              >> /root/miningcore/build/config-rvn.json
+             echo '        "name": "Solo Mining",'                         >> /root/miningcore/build/config-rvn.json
+             echo '        "varDiff": {'                                   >> /root/miningcore/build/config-rvn.json
+             echo '          "minDiff": 1,'                                >> /root/miningcore/build/config-rvn.json
+             echo '          "targetTime": 15,'                            >> /root/miningcore/build/config-rvn.json
+             echo '          "retargetTime": 90,'                          >> /root/miningcore/build/config-rvn.json
+             echo '          "variancePercent": 30'                        >> /root/miningcore/build/config-rvn.json
+             echo '        }'                                              >> /root/miningcore/build/config-rvn.json
+             echo '      }'                                                >> /root/miningcore/build/config-rvn.json
+             echo '    },'                                                 >> /root/miningcore/build/config-rvn.json
+             echo '    "daemons": [{'                                      >> /root/miningcore/build/config-rvn.json
+             echo '      "host": "127.0.0.1",'                             >> /root/miningcore/build/config-rvn.json
+             echo '      "port": "'"$PuertoRPCrvn"'",'                     >> /root/miningcore/build/config-rvn.json
+             echo '      "user": "'"$UsuarioRPCrvn"'",'                    >> /root/miningcore/build/config-rvn.json
+             echo '      "password": "'"$PassRPCrvn"'",'                   >> /root/miningcore/build/config-rvn.json
+             echo '      "zmqBlockNotifySocket": "tcp://127.0.0.1:8767",'  >> /root/miningcore/build/config-rvn.json
+             echo '    }],'                                                >> /root/miningcore/build/config-rvn.json
+             echo '    "paymentProcessing": {'                             >> /root/miningcore/build/config-rvn.json
+             echo '      "enabled": true,'                                 >> /root/miningcore/build/config-rvn.json
+             echo '      "minimumPayment": 5,'                             >> /root/miningcore/build/config-rvn.json
+             echo '      "payoutScheme": "PPLNS",'                         >> /root/miningcore/build/config-rvn.json
+             echo '      "payoutSchemeConfig": {'                          >> /root/miningcore/build/config-rvn.json
+             echo '        "factor": 2.0'                                  >> /root/miningcore/build/config-rvn.json
+             echo '      }'                                                >> /root/miningcore/build/config-rvn.json
+             echo '    }'                                                  >> /root/miningcore/build/config-rvn.json
+             echo ' }]'                                                    >> /root/miningcore/build/config-rvn.json
+             echo '}'                                                      >> /root/miningcore/build/config-rvn.json
+
+          ## Asignar dirección de cartera al archivo de configuración
+             DirCartRVNtxt=$(cat /home/pooladmin/pooladdress-rvn.txt)
+             sed -i -e 's|DirCarteraPoolRVN|'$DirCartRVNtxt'|g' /root/miningcore/build/config-rvn.json
 
           ## Instalar base de datos PostgreSQL
              apt-get -y install postgresql
@@ -655,7 +660,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
                   #grant all privileges on database miningcore to miningcore;
 
              ## Cambiar la autentificación a MD5
-                sed -i -e 's/local   all             all                                peer/local   all             all                                md5/g' /etc/postgresql/$VersPostgre/main/pg_hba.conf
+                sed -i -e 's|local   all             all                                     peer|local   all             all                                     md5|g' /etc/postgresql/$VersPostgre/main/pg_hba.conf
 
              ## Reiniciar PostgreSQL
                 service postgresql restart
@@ -664,13 +669,14 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
                 echo ""
                 echo "  Importando la estructura de la base de datos..."
                 echo ""
+                rm /tmp/miningcore-basic.sql
                 su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb.sql -O /tmp/miningcore-basic.sql"
                 chmod 777 /tmp/miningcore-basic.sql
-                sed -i -e 's|SET ROLE miningcore;|SET ROLE "'$UsuarioDaemon'";|g' /tmp/miningcore-basic.sql
+                sed -i -e 's|SET ROLE miningcore;|SET ROLE '$UsuarioDaemon';|g' /tmp/miningcore-basic.sql
                 echo ""
                 echo "  Ingresa la contraseña del rol $UsuarioDaemon:"
                 echo ""
-                #su - postgres -c "psql -d miningcore -U $UsuarioDaemon -f /tmp/miningcore-basic.sql -W"
+                su - postgres -c "psql -d miningcore -U $UsuarioDaemon -f /tmp/miningcore-basic.sql -W"
 
              ## Mejorar a formato multi-pool
                 #su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb_postgresql_11_appendix.sql -O /tmp/miningcore-advanced.sql"
@@ -684,7 +690,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Ejecutar MiningCore
              cd /root/miningcore/build/
-             #dotnet Miningcore.dll -c /root/miningcore/build/config-rvn.json
+             dotnet Miningcore.dll -c /root/miningcore/build/config-rvn.json
 
         ;;
 
