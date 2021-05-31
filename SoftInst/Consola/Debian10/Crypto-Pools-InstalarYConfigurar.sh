@@ -48,7 +48,9 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
             3 "Instalar NodeJS" off
             4 "Instalar node-multi-hashing" off
             5 "Reparar permisos" off
-            6 "Instalar MiningCore" off)
+            6 "Instalar servidor Web" off
+            7 "Instalar MiningCore" off
+            8 "Instalar MiningCore WebUI" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -307,6 +309,28 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
         ;;
 
         6)
+
+          echo ""
+          echo -e "${ColorVerde}------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Instalando servidor Web...${FinColor}"
+          echo -e "${ColorVerde}------------------------------${FinColor}"
+          echo ""
+
+          ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
+             if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
+               echo ""
+               echo "  tasksel no está instalado. Iniciando su instalación..."
+               echo ""
+               apt-get -y update
+               apt-get -y install tasksel
+               echo ""
+             fi
+
+          tasksel install web-server
+
+        ;;
+
+        7)
 
           echo ""
           echo -e "${ColorVerde}----------------------------${FinColor}"
@@ -697,6 +721,29 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Ejecutar MiningCore
              cd /root/miningcore/build/
              dotnet Miningcore.dll -c /root/miningcore/build/config-rvn.json
+
+        ;;
+
+        8)
+
+          echo ""
+          echo -e "${ColorVerde}----------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Instalando MiningCore WebUI...${FinColor}"
+          echo -e "${ColorVerde}----------------------------------${FinColor}"
+          echo ""
+
+          cd /root
+          git clone https://github.com/minernl/Miningcore.WebUI
+          rm -rf /root/Miningcore.WebUI/.git/
+          
+          var WebURL = window.location.protocol + "//" + window.location.hostname + "/";
+          var API = WebURL + "api/";
+          var stratumAddress = "stratum+tcp://" + window.location.hostname + ":";
+
+sed -i -e 's|||g'
+          var WebURL = "https://domain-name.com/";
+          var API = "https://domain-name.com/api/";
+          var stratumAddress = "stratum+tcp://domain-name.com:";
 
         ;;
 
