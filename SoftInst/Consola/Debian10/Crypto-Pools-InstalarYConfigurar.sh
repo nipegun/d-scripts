@@ -349,7 +349,7 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
              apt-get -y install dotnet-sdk-2.2
 
           ## Instalar MiningCore
-             apt-get -y install cmake build-essential libssl-dev pkg-config libboost-all-dev libsodium-dev libzmq5
+             apt-get -y install cmake build-essential libssl-dev pkg-config libboost-all-dev libsodium-dev libzmq5 libzmq3-dev
              cd /root/
              git clone https://github.com/coinfoundry/miningcore.git
              cd /root/miningcore/src/Miningcore/
@@ -736,14 +736,10 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
           git clone https://github.com/minernl/Miningcore.WebUI
           rm -rf /root/Miningcore.WebUI/.git/
           
-          var WebURL = window.location.protocol + "//" + window.location.hostname + "/";
-          var API = WebURL + "api/";
-          var stratumAddress = "stratum+tcp://" + window.location.hostname + ":";
-
-sed -i -e 's|||g'
-          var WebURL = "https://domain-name.com/";
-          var API = "https://domain-name.com/api/";
-          var stratumAddress = "stratum+tcp://domain-name.com:";
+          ## Modificar las carpetas por defecto
+             sed -i -e 's|window.location.protocol + "//" + window.location.hostname + "/";|"https://domain-name.com/";|g' /var/www/html/js/miningcore.js
+             sed -i -e 's|WebURL + "api/"; /var/www/html/js/miningcore.js|"https://domain-name.com/api/";|g'
+             sed -i -e 's|"stratum+tcp://" + window.location.hostname + ":";|"stratum+tcp://domain-name.com:";|g' /var/www/html/js/miningcore.js
 
         ;;
 
