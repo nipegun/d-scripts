@@ -20,6 +20,9 @@ VersPostgre="11"
 
 # Variables MiningCore
 MiningCoreDBPass="12345678"
+MiningCoreDomain="https://domain-name.com/"
+MiningCoreAPI="https://domain-name.com/api/"
+MiningCoreStratum="stratum+tcp://domain-name.com"
 
 # Variables RVN
 PuertoRPCrvn="20401"
@@ -732,15 +735,20 @@ menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}----------------------------------${FinColor}"
           echo ""
 
-          cd /root
-          git clone https://github.com/minernl/Miningcore.WebUI
-          rm -rf /root/Miningcore.WebUI/.git/
-          
-          ## Modificar las carpetas por defecto
-             sed -i -e 's|window.location.protocol + "//" + window.location.hostname + "/";|"https://domain-name.com/";|g' /var/www/html/js/miningcore.js
-             sed -i -e 's|WebURL + "api/"; /var/www/html/js/miningcore.js|"https://domain-name.com/api/";|g'
-             sed -i -e 's|"stratum+tcp://" + window.location.hostname + ":";|"stratum+tcp://domain-name.com:";|g' /var/www/html/js/miningcore.js
+          ## Descargar MiningCore.WebUI
+             cd /root
+             rm -rf /root/Miningcore.WebUI/
+             git clone https://github.com/minernl/Miningcore.WebUI
+             rm -rf /root/Miningcore.WebUI/.git/
+             rm -rf /root/Miningcore.WebUI/README.md
 
+          ## Modificar las carpetas por defecto
+             sed -i -e 's|window.location.protocol + "//" + window.location.hostname + "/";|"'$MiningCoreDomain'";|g' /root/Miningcore.WebUI/js/miningcore.js
+             sed -i -e 's|WebURL + "api/";|"'$MiningCoreAPI'";|g'                                                     /root/Miningcore.WebUI/js/miningcore.js
+             sed -i -e 's|var stratumAddress = window.location.hostname;|"'$MiningCoreStratum':";|g'                  /root/Miningcore.WebUI/js/miningcore.js
+
+          ## Mover archivos de MiningCore a su ubicación final
+             
         ;;
 
       esac
