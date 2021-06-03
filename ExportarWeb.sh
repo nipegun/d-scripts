@@ -38,7 +38,7 @@ if [ $# -ne $CantArgsEsperados ]
     cp /etc/apache2/sites-available/$1-le-ssl.conf /CopSeg/$1/etc/apache2/sites-available/
     mkdir -p /CopSeg/$1/var/www/$1/
     cp -R /var/www/$1/* /CopSeg/$1/var/www/$1/
-    /root/scripts/d-scripts/ExportarBaseDeDatos.sh $2 $3 $4 /CopSeg/$1/BaseDeDatos.sql
+    /root/scripts/d-scripts/MySQL-BaseDeDatos-Exportar.sh $2 $3 $4 /CopSeg/$1/BaseDeDatos.sql
     tar -czvf /CopSeg/$1.tar.gz /CopSeg/$1/
 fi
 
