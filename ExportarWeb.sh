@@ -33,7 +33,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     echo -e "${ColorArgumentos}Ejecutando la copia de seguridad...${FinColor}"
     echo ""
-    mkdir -p /CopSeg/$1/etc/apache2/sites-enabled/
+    mkdir -p /CopSeg/$1/etc/apache2/sites-available/
     cp /etc/apache2/sites-available/$1.conf /CopSeg/$1/etc/apache2/sites-available/
     cp /etc/apache2/sites-available/$1-le-ssl.conf /CopSeg/$1/etc/apache2/sites-available/
     mkdir -p /CopSeg/$1/var/www/$1/
