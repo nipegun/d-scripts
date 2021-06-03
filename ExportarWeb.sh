@@ -40,5 +40,6 @@ if [ $# -ne $CantArgsEsperados ]
     cp -R /var/www/$1/* /CopSeg/$1/var/www/$1/
     /root/scripts/d-scripts/MySQL-BaseDeDatos-Exportar.sh $2 $3 $4 /CopSeg/$1/BaseDeDatos.sql
     tar -czvf /CopSeg/$1.tar.gz /CopSeg/$1/
+    rm -rf /CopSeg/$1/
 fi
 
