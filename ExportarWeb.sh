@@ -41,5 +41,7 @@ if [ $# -ne $CantArgsEsperados ]
     /root/scripts/d-scripts/MySQL-BaseDeDatos-Exportar.sh $2 $3 $4 /CopSeg/$1/BaseDeDatos.sql
     tar -czvf /CopSeg/$1.tar.gz /CopSeg/$1/
     rm -rf /CopSeg/$1/
+    FechaDeEjec=$(date +A%Y-M%m-D%d@%T)
+    mv /CopSeg/$1.tar.gz /CopSeg/$1-$FechaDeEjec.tar.gz
 fi
 
