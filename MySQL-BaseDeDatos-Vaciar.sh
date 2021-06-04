@@ -9,16 +9,16 @@
 #  Script de NiPeGun para borrar una base de datos antes de importar una copia de seguridad de la misma
 #--------------------------------------------------------------------------------------------------------
 
-EXPECTED_ARGS=3
-E_BADARGS=65
+FechaDeExp=$(date +A%YM%mD%d@%T)
+
+CantArgsEsperados=4
+ArgsInsuficientes=65
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-FechaDeExp=$(date +A%YM%mD%d@%T)
-
-if [ $# -ne $EXPECTED_ARGS ]
+if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
     echo "-------------------------------------------------------------------------"
@@ -31,7 +31,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo ""
     echo "-------------------------------------------------------------------------"
     echo ""
-    exit $E_BADARGS
+    exit $ArgsInsuficientes
   else
     mysqldump -u$1 -p$2 --add-drop-table --no-data $3 | grep ^DROP | sed -e 's/DROP TABLE IF EXISTS/TRUNCATE TABLE/g' | mysql -u$1 -p$2 $3
 fi
