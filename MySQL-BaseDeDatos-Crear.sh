@@ -20,9 +20,9 @@ if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
     echo "-------------------------------------------------------------------------"
-    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo -e "$0 ${ColorArgumentos}[NombreBD] [UsuarioBD] [PasswordBD]${FinColor}"
+    echo -e "$0 ${ColorVerde}[NombreBD] [UsuarioBD] [PasswordBD]${FinColor}"
     echo ""
     echo "Ejemplo:"
     echo "$0 wordpress usuariowp 12345678"
