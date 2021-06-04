@@ -1,4 +1,4 @@
-Crear#!/bin/bash
+#!/bin/bash
 
 # Pongo a disposición pública este script bajo el término de "software de dominio público".
 # Puedes hacer lo que quieras con él porque es libre de verdad; no libre con condiciones como las licencias GNU y otras patrañas similares.
@@ -9,20 +9,27 @@ Crear#!/bin/bash
 #  Script de NiPeGun para crear bases de datos MySQL
 #-----------------------------------------------------
 
-#!/bin/bash
+CantArgsEsperados=4
+ArgsInsuficientes=65
 
-EXPECTED_ARGS=3
-E_BADARGS=65
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
 
-if [ $# -ne $EXPECTED_ARGS ]
+if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
-    echo "Mal uso del script."
+    echo "-------------------------------------------------------------------------"
+    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo "El uso correcto sería:"
-    echo "CrearBaseDeDatosYUsuario [NombreBD] [UsuarioBD] [PasswordBD]"
+    echo -e "$0 ${ColorArgumentos}[NombreBD] [UsuarioBD] [PasswordBD]${FinColor}"
     echo ""
-    exit $E_BADARGS
+    echo "Ejemplo:"
+    echo "$0 wordpress usuariowp 12345678"
+    echo ""
+    echo "-------------------------------------------------------------------------"
+    echo ""
+    exit $ArgsInsuficientes
   else
     echo ""
     echo "" Ingresa el password del root de MySQL
