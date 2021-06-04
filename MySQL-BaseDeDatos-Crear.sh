@@ -9,7 +9,7 @@
 #  Script de NiPeGun para crear bases de datos MySQL
 #-----------------------------------------------------
 
-CantArgsEsperados=4
+CantArgsEsperados=3
 ArgsInsuficientes=65
 
 ColorRojo='\033[1;31m'
