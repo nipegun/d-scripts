@@ -9,8 +9,6 @@
 #  Script de NiPeGun para importar una base de datos de MySQL
 #--------------------------------------------------------------
 
-FechaDeExp=$(date +A%YM%mD%d@%T)
-
 CantArgsEsperados=4
 ArgsInsuficientes=65
 
