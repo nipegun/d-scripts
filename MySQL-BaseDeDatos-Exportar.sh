@@ -9,6 +9,8 @@
 #  Script de NiPeGun para exportar bases de datos MySQL
 #--------------------------------------------------------
 
+FechaDeExp=$(date +A%YM%mD%d@%T)
+
 CantArgsEsperados=4
 ArgsInsuficientes=65
 
@@ -16,21 +18,19 @@ ColorAdvertencia='\033[1;31m'
 ColorArgumentos='\033[1;32m'
 FinColor='\033[0m'
 
-FechaDeExp=$(date +A%YM%mD%d@%T)
-
 if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
     echo "-------------------------------------------------------------------------"
     echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
-    echo -e "ebdd ${ColorArgumentos}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
+    echo -e "$0 ${ColorArgumentos}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
     echo ""
     echo "Ejemplo 1:"
-    echo "ebdd pepe 12345678 Cuentas Cuentas.sql"
+    echo "$0 pepe 12345678 Cuentas Cuentas.sql"
     echo ""
     echo "Ejemplo 2:"
-    echo "ebdd pepe 12345678 Cuentas '\Copias de seguridad\Base de datos.sql'"   
+    echo "$0 pepe 12345678 Cuentas '\Copias de seguridad\Base de datos.sql'"   
     echo ""
     echo "-------------------------------------------------------------------------"
     echo ""
