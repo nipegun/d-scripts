@@ -9,16 +9,16 @@
 #  Script de NiPeGun para importar una base de datos de MySQL
 #--------------------------------------------------------------
 
-EXPECTED_ARGS=4
-E_BADARGS=65
+FechaDeExp=$(date +A%YM%mD%d@%T)
+
+CantArgsEsperados=4
+ArgsInsuficientes=65
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-FechaDeExp=$(date +A%YM%mD%d@%T)
-
-if [ $# -ne $EXPECTED_ARGS ]
+if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
     echo "-------------------------------------------------------------------------"
@@ -27,14 +27,14 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo -e "ibdd ${ColorVerde}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
     echo ""
     echo "Ejemplo 1:"
-    echo "ibdd pepe 12345678 Cuentas Cuentas.sql"
+    echo "$0 pepe 12345678 Cuentas Cuentas.sql"
     echo ""
     echo "Ejemplo 2:"
-    echo "ibdd pepe 12345678 Cuentas '\Copias de seguridad\Base de datos.sql'"   
+    echo "$0 pepe 12345678 Cuentas '\Copias de seguridad\Base de datos.sql'"   
     echo ""
     echo "-------------------------------------------------------------------------"
     echo ""
-    exit $E_BADARGS
+    exit $ArgsInsuficientes
   else
     mysql -u$1 -p$2 $3 < $4
 fi
