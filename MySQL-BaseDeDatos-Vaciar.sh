@@ -9,8 +9,6 @@
 #  Script de NiPeGun para borrar una base de datos antes de importar una copia de seguridad de la misma
 #--------------------------------------------------------------------------------------------------------
 
-FechaDeExp=$(date +A%YM%mD%d@%T)
-
 CantArgsEsperados=4
 ArgsInsuficientes=65
 
