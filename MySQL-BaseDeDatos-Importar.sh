@@ -19,7 +19,6 @@ FinColor='\033[0m'
 if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
-    echo "-------------------------------------------------------------------------"
     echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
     echo -e "ibdd ${ColorVerde}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
@@ -29,8 +28,6 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     echo "Ejemplo 2:"
     echo "$0 pepe 12345678 Cuentas '\Copias de seguridad\Base de datos.sql'"   
-    echo ""
-    echo "-------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
   else
