@@ -19,9 +19,10 @@ FinColor='\033[0m'
 if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
-    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo -e "${ColorRojo}Mal uso del script.${FinColor}"
     echo ""
-    echo -e "ibdd ${ColorVerde}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
+    echo "El uso correcto sería:"
+    echo -e "$0 ${ColorVerde}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
     echo ""
     echo "Ejemplo 1:"
     echo "$0 pepe 12345678 Cuentas Cuentas.sql"
