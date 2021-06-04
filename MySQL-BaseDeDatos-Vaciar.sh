@@ -19,15 +19,12 @@ FinColor='\033[0m'
 if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
-    echo "-------------------------------------------------------------------------"
     echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
     echo -e "$0 ${ColorVerde}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
     echo ""
     echo "Ejemplo 1:"
     echo "$0 pepe 12345678 Cuentas"
-    echo ""
-    echo "-------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
   else
