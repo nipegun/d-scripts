@@ -57,6 +57,12 @@ menu=(dialog --timeout 5 --checklist "Opciones:" 22 76 16)
           echo "web.com"                              >> /etc/ddclient.conf
           
           apt-get -y install ddclient
+          
+          echo ""
+          echo "  Instalación finalizada."
+          echo "  Edita el archivo /etc/ddclient.conf para indicar tus credenciales."
+          echo ""
+
         ;;
 
       esac
