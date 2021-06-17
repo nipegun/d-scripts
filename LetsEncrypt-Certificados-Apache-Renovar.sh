@@ -16,6 +16,7 @@ echo ""
 echo "Comprobando si falta algún paquete e instálándolo..."
 echo ""
 # apt-get -t stretch-backports
+apt-get -y update
 apt-get install certbot python-certbot-apache
 
 echo ""
@@ -31,5 +32,5 @@ certbot --apache certonly # Te premite configurar el .conf de apache manualemnte
 # for your certificates by running this command:
 # certbot renew --dry-run
 
-echo "certbot renew" >> /root/scripts/TareasCronPorSemana.sh
+echo "certbot renew" >> /root/scripts/TareasCronCadaSemana.sh
 
