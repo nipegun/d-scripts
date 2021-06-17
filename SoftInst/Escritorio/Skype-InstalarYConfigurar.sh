@@ -98,9 +98,12 @@ elif [ $OS_VERS == "10" ]; then
   echo "------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "Instalación para Debian 10 todavía no preparada. Prueba instalarlo en otra versión de Debian"
-  echo ""
+  apt-get -y update
+  apt-get -y install gdebi wget
+  mkdir -p /root/SoftInst/Skype
+  cd /root/SoftInst/Skype
+  wget https://go.skype.com/skypeforlinux-64.deb
+  gdebi skypeforlinux-64.deb
 
 elif [ $OS_VERS == "11" ]; then
 
