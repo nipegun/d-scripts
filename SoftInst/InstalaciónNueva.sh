@@ -44,12 +44,20 @@ if [ $OS_VERS == "7" ]; then
   echo "-----------------------------------------------------------------------------"
   echo ""
 
+  echo ""
+  echo "Instalación para Debian 7 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo ""
+
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."
   echo "-----------------------------------------------------------------------------"
+  echo ""
+
+  echo ""
+  echo "Instalación para Debian 8 todavía no preparada. Prueba instalarlo en otra versión de Debian"
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
@@ -60,6 +68,10 @@ elif [ $OS_VERS == "9" ]; then
   echo "------------------------------------------------------------------------------"
   echo ""
 
+  echo ""
+  echo "Instalación para Debian 9 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo ""
+
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
@@ -68,12 +80,20 @@ elif [ $OS_VERS == "10" ]; then
   echo "------------------------------------------------------------------------------"
   echo ""
 
+  echo ""
+  echo "Instalación para Debian 10 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo ""
+
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
   echo "--------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."
   echo "--------------------------------------------------------------------------------"
+  echo ""
+
+  echo ""
+  echo "Instalación para Debian 11 todavía no preparada. Prueba instalarlo en otra versión de Debian"
   echo ""
 
 fi
