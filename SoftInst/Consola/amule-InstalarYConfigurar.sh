@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar amule en Debian
+#  Script de NiPeGun para instalar y configurar amule-daemon en Debian
 #--------------------------------------------------------------------
 
 ## Determinar la versión de Debian
