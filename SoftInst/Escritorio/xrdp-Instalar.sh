@@ -73,10 +73,12 @@ elif [ $OS_VERS == "9" ]; then
 
   apt-get -y update
   apt-get -y install xrdp
+
   cp /etc/xrdp/xrdp_keyboard.ini /etc/xrdp/xrdp_keyboard.ini.bak
   sed -i -e 's|rdp_layout_de=0x00000407|rdp_layout_de=0x00000407\nrdp_layout_es=0x0000040A|g' /etc/xrdp/xrdp_keyboard.ini
   sed -i -e 's|rdp_layout_de=de|rdp_layout_de=de\nrdp_layout_es=es|g' /etc/xrdp/xrdp_keyboard.ini
-  sed -i -e 's|allowed_users=console|allowed_users=anybody|g' /etc/X11/Xwrapper.config        
+  sed -i -e 's|allowed_users=console|allowed_users=anybody|g' /etc/X11/Xwrapper.config    
+
   echo ""
   echo "  Activando XRDP como servicio..."
   echo ""
@@ -90,9 +92,13 @@ elif [ $OS_VERS == "10" ]; then
   echo "------------------------------------------------------------------------------"
   echo ""
 
+  apt-get -y update 2> /dev/null
+  apt-get -y install xrdp
+
   echo ""
-  echo "Instalación para Debian 10 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "  Activando XRDP como servicio..."
   echo ""
+  systemctl enable xrdp
 
 elif [ $OS_VERS == "11" ]; then
 
