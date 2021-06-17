@@ -68,64 +68,89 @@ elif [ $OS_VERS == "9" ]; then
   echo "------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "Instalando el paquete amule-daemon..."
-  echo ""
-  apt-get -y install amule-daemon
+  ArgumentosRequeridos=4
+  ArgumentosInsuficientes=65
 
-  echo ""
-  echo "Agregando el usuario debian-amule..."
-  echo ""
-  adduser debian-amule
+  if [ $# -ne $ArgumentosRequeridos ]
+    then
+      echo ""
+      echo "--------------------------------------------------------------------------------------------"
+      echo "  Mal uso del script."
+      echo ""
+      echo "  El uso correcto sería:"
+      echo "  $0 [CarpetaDeDescargas] [CarpetaDeIncompletos] [Usuario] [Password] [AdminPassword]"
+      echo ""
+      echo "  Ejemplo:"
+      echo "  $0 /var/tmp/amule/completos /var/tmp/amule/incompletos 12345678 debian-amule"
+      echo "--------------------------------------------------------------------------------------------"
+      echo ""
+      exit $ArgumentosInsuficientes
+    else
+      echo ""
+      echo "Creando las carpetas para las descargas..."
+      echo ""
+      mkdir -p $1
+      mkdir -p $2
+    
+      echo ""
+      echo "Instalando el paquete amule-daemon..."
+      echo ""
+      apt-get -y install amule-daemon
 
-  echo ""
-  echo "Corriendo el comando amuled por primera vez para el usuario debian-amule..."
-  echo ""
-  runuser -l debian-amule -c 'amuled'
+      echo ""
+      echo "Agregando el usuario $3..."
+      echo ""
+      adduser $3
 
-  echo ""
-  echo "Deteniendo el servicio amule-daemon..."
-  echo ""
-  service amule-daemon stop
+      echo ""
+      echo "Corriendo el comando amuled por primera vez para el usuario $3..."
+      echo ""
+      runuser -l $3 -c 'amuled'
 
-  echo ""
-  echo "Realizando cambios en la configuración..."
-  echo ""
+      echo ""
+      echo "Deteniendo el servicio amule-daemon..."
+      echo ""
+      service amule-daemon stop
 
-  runuser -l debian-amule -c 'amuleweb --write-config --host=localhost --password=password --admin-pass=adminpassword'
-  AdminPassword=$(echo -n adminpassword | md5sum | cut -d ' ' -f 1)
-  sed -i -e 's|AcceptExternalConnections=0|AcceptExternalConnections=1|g' /home/debian-emule/.aMule/amule.conf
-  sed -i -e 's|ECPassword=|ECPassword=$AdminPassword|g' /home/debian-amule/.aMule/amule.conf
-  sed -i '/WebServer]/{n;s/.*/Enabled=1/}' /home/debian-amule/.aMule/amule.conf
-  sed -i -e 's|^Password=|Password=5f4dcc3b5aa765d61d8327deb882cf99|g' /home/debian-amule/.aMule/amule.conf
-  sed -i -e 's|AMULED_USER=""|AMULED_USER="debian-amule"|g' /etc/default/amule-daemon
+      echo ""
+      echo "Realizando cambios en la configuración..."
+      echo ""
+      sed -i -e 's|TempDir=/home/debian-amule/.aMule/Temp|TempDir="'$1'"|g' /home/$3/.aMule/amule.conf
+      sed -i -e 's|IncomingDir=/home/debian-amule/.aMule/Incoming|IncomingDir="'$2'"|g' /home/$3/.aMule/amule.conf
 
-  echo ""
-  echo "Iniciando el servicio amule-daemon..."
-  echo ""
-  service amule-daemon start
+      runuser -l $3 -c 'amuleweb --write-config --host=localhost --password=$4 --admin-pass=$5'
+      AdminPassword=$(echo -n $5 | md5sum | cut -d ' ' -f 1)
+      sed -i -e 's|AcceptExternalConnections=0|AcceptExternalConnections=1|g' /home/$3/.aMule/amule.conf
+      sed -i -e 's|ECPassword=|ECPassword=$AdminPassword|g' /home/$3/.aMule/amule.conf
+      sed -i '/WebServer]/{n;s/.*/Enabled=1/}' /home/$3/.aMule/amule.conf
+      WebPassword=$(echo -n $4 | md5sum | cut -d ' ' -f 1)
+      sed -i -e 's|^Password=|Password=$WebPassword|g' /home/$3/.aMule/amule.conf
+      sed -i -e 's|AMULED_USER=""|AMULED_USER="$3"|g' /etc/default/amule-daemon
 
-  #echo ""
-  #echo "Agregando el usuario al grupo amule-daemon..."
-  #echo ""
-  #usermod -a -G debian-amule debian-amule
+      echo ""
+      echo "Iniciando el servicio amule-daemon..."
+      echo ""
+      service amule-daemon start
 
-  #bajar el IPFilter desde aqui:
-  #https://89f8c187-a-62cb3a1a-s-sites.googlegroups.com/site/ircemulespanish/descargas-2/ipfilter.zip
+      #echo ""
+      #echo "Agregando el usuario al grupo amule-daemon..."
+      #echo ""
+      #usermod -a -G debian-amule $3
 
-  echo ""
-  echo "--------------------------------------------------------------"
-  echo "  El demonio amule ha sido instalado, configurado e inciado."
-  echo ""
-  echo "  Deberías poder administrarlo mediante web en la IP de"
-  echo "  este ordenador seguida por :4711"
-  echo ""
-  echo "  Ejemplo: 192.168.0.120:4711"
-  echo ""
-  echo "  Nombre de usuario: debian-amule"
-  echo "  Contraseña: password"
-  echo "---------------------------------------------------------"
-  echo ""
+      echo ""
+      echo "--------------------------------------------------------------"
+      echo "  El demonio amule ha sido instalado, configurado e inciado."
+      echo ""
+      echo "  Deberías poder administrarlo mediante web en la IP de"
+      echo "  este ordenador seguida por :4711"
+      echo ""
+      echo "  Ejemplo: 192.168.0.120:4711"
+      echo ""
+      echo "  Nombre de usuario: debian-amule"
+      echo "  Contraseña: password"
+      echo "---------------------------------------------------------"
+      echo ""
+  fi
 
 elif [ $OS_VERS == "10" ]; then
 
