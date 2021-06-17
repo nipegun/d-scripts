@@ -9,6 +9,10 @@
 #  Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
 #--------------------------------------------------------------------
 
+ColorRojo='\033[1;31m'
+ColorVerde='\033[1;32m'
+FinColor='\033[0m'
+
 ## Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
