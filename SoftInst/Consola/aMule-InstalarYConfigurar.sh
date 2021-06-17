@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar amule-daemon en Debian
+#  Script de NiPeGun para instalar y configurar aMule en Debian
 #--------------------------------------------------------------------
 
 ## Determinar la versión de Debian
@@ -40,7 +40,7 @@ if [ $OS_VERS == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de amule-daemon para Debian 7 (Wheezy)..."
+  echo "  Iniciando el script de instalación de amule para Debian 7 (Wheezy)..."
   echo "-----------------------------------------------------------------------------"
   echo ""
 
@@ -52,7 +52,7 @@ elif [ $OS_VERS == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de amule-daemon para Debian 8 (Jessie)..."
+  echo "  Iniciando el script de instalación de amule para Debian 8 (Jessie)..."
   echo "-----------------------------------------------------------------------------"
   echo ""
 
@@ -64,7 +64,7 @@ elif [ $OS_VERS == "9" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de amule-daemon para Debian 9 (Stretch)..."
+  echo "  Iniciando el script de instalación de amule para Debian 9 (Stretch)..."
   echo "------------------------------------------------------------------------------"
   echo ""
 
@@ -131,7 +131,7 @@ elif [ $OS_VERS == "10" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de amule-daemon para Debian 10 (Buster)..."
+  echo "  Iniciando el script de instalación de amule para Debian 10 (Buster)..."
   echo "------------------------------------------------------------------------------"
   echo ""
 
@@ -143,7 +143,7 @@ elif [ $OS_VERS == "11" ]; then
 
   echo ""
   echo "--------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de amule-daemon para Debian 11 (Bullseye)..."
+  echo "  Iniciando el script de instalación de amule para Debian 11 (Bullseye)..."
   echo "--------------------------------------------------------------------------------"
   echo ""
 
