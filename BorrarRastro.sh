@@ -10,7 +10,7 @@
 #------------------------------------------------------------------
 
 #
-# Correr ejecutando:
+# Ejecución remota:
 #
 # curl --silent https://raw.githubusercontent.com/nipegun/d-scripts/master/BorrarRastro.sh | bash
 #
