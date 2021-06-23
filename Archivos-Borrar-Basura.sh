@@ -16,5 +16,5 @@
 echo ""
 echo "  Borrando todas las papeleras de reciclaje..."
 echo ""
-find / -type d -name ".Trash*" -print -exec rm -rf {} \;
+find / -type d -name ".Trash-*" -print -exec rm -rf {} \;
 
