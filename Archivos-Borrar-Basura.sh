@@ -9,7 +9,7 @@
 #  Script de NiPeGun para borrar todos los archivos basura del sistema
 #-----------------------------------------------------------------------
 
-/root/scripts/d-scripts/BorrarArchivosDSStore.sh
-/root/scripts/d-scripts/BorrarArchivosPuntoGuiónBajo.sh
-/root/scripts/d-scripts/BorrarArchivosZoneIdentifier.sh
+/root/scripts/d-scripts/Archivos-Borrar-DSStore.sh
+/root/scripts/d-scripts/Archivos-Borrar-PuntoGuiónBajo.sh
+/root/scripts/d-scripts/Archivos-Borrar-ZoneIdentifier.sh
 
