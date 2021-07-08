@@ -46,6 +46,7 @@ cd build
 apt-get -y install cmake
 apt-get -y install libhwloc-dev
 apt-get -y install libuv1-dev
+apt-get -y install libssl-dev
 #cmake .. -DWITH_HWLOC=OFF
 cmake ..
 make -j $(nproc)
