@@ -44,6 +44,7 @@ echo ""
 mkdir build
 cd build
 apt-get -y install cmake
+apt-get -y install libhwloc-dev
 #cmake .. -DWITH_HWLOC=OFF
 cmake ..
 make -j $(nproc)
@@ -60,6 +61,6 @@ echo ""
 echo ""
 echo "  Ejecutando minero..."
 echo ""
-./xmrig -o pool.minexmr.com:4444 --rig-id=$Dispositivo -u 451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr
+./xmrig -o pool.minexmr.com:4444 --rig-id=$Dispositivo -u $DirWallet
 #/data/data/com.termux/files/home/xmrig/build/xmrig
 
