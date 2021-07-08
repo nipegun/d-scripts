@@ -45,6 +45,7 @@ mkdir build
 cd build
 apt-get -y install cmake
 apt-get -y install libhwloc-dev
+apt-get -y install libuv1-dev
 #cmake .. -DWITH_HWLOC=OFF
 cmake ..
 make -j $(nproc)
