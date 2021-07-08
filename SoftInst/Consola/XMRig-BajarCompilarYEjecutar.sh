@@ -14,7 +14,7 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 DirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"
-Hilos=8
+Hilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)
 
 echo ""
 echo -e "${ColorVerde}--------------------------------------------------${FinColor}"
