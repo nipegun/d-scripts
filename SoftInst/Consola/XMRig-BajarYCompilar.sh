@@ -63,6 +63,12 @@ echo ""
 echo ""
 echo "  Ejecutando minero..."
 echo ""
-./xmrig -o pool.minexmr.com:443 --rig-id=$Dispositivo -u $DirWallet
+
+## Con TLS
+./xmrig -o pool.minexmr.com:443 --tls --rig-id=$Dispositivo -u $DirWallet
+
+## Sin TLS
+   #./xmrig -o pool.minexmr.com:4444 --rig-id=$Dispositivo -u $DirWallet
+
 #/data/data/com.termux/files/home/xmrig/build/xmrig
 
