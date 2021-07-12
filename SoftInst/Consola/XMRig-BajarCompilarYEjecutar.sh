@@ -55,7 +55,8 @@ make -j $(nproc)
 echo ""
 echo "  Generando un identificador de dispositivo con la MAC de la WiFi..."
 echo ""
-Dispositivo=$(ip addr show wlan0 | grep link/ether | cut -d " " -f6)
+DirMACWlan0=$(ip addr show wlan0 | grep link/ether | cut -d" " -f6)
+Dispositivo=$(echo -n $DirMACWlan0 | md5sum | cut -d" " -f1)
 echo ""
 echo "El identificador del dispositivo es:"
 echo "$Dispositivo"
