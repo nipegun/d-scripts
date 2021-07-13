@@ -27,7 +27,7 @@ echo ""
            # DiscoActual=$(echo "sd$LetraDiscoSATA")
            # ArrayDiscosSATA+=("${DiscoActual}")
          ## Nuevo
-            ArrayDiscosSATA+=("${echo "sd$LetraDiscoSATA"}")
+            ArrayDiscosSATA+=("${echo sd$LetraDiscoSATA}")
        fi
      done
 
