@@ -22,19 +22,19 @@ echo ""
      do
        if [[ -d "/sys/block/sd$LetraDiscoSATA" ]]; then
          ArrayDiscosSATA[$LetraDiscoSATA]=$(echo "sd$LetraDiscoSATA")
-         echo ${ArrayDiscosSATA[*]}
+        # echo ${ArrayDiscosSATA[*]}
        fi
      done
 
 echo ""
 echo "  Total de discos SATA instalados en el sistema: ${#ArrayDiscosSATA[@]}"
 
-             echo "sd$LetraDiscoSATA"
-             echo "  Array: ${ArrayDiscosSATA[@]}"
-         for NroDisco in {0..50}
-           do
-             ArrayDiscosSATA[$NroDisco]=$(echo "sd$LetraDiscoSATA")
-           done
+      #       echo "sd$LetraDiscoSATA"
+      #       echo "  Array: ${ArrayDiscosSATA[@]}"
+      #   for NroDisco in {0..50}
+      #     do
+      #       ArrayDiscosSATA[$NroDisco]=$(echo "sd$LetraDiscoSATA")
+      #     done
 
 
 
