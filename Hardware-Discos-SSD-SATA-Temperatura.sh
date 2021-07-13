@@ -21,10 +21,8 @@ echo ""
    for LetraDiscoSATA in {a..x}
      do
        if [[ -d "/sys/block/sd$LetraDiscoSATA" ]]; then
-         for NroDisco in {0..50}
-           do
-             ArrayDiscosSATA[$NroDisco]=$(echo "sd$LetraDiscoSATA")
-           done
+         ArrayDiscosSATA[$LetraDiscoSATA]=$(echo "sd$LetraDiscoSATA")
+         echo ${ArrayDiscosSATA[*]}
        fi
      done
 
@@ -33,6 +31,12 @@ echo "  Total de discos SATA instalados en el sistema: ${#ArrayDiscosSATA[@]}"
 
              echo "sd$LetraDiscoSATA"
              echo "  Array: ${ArrayDiscosSATA[@]}"
+         for NroDisco in {0..50}
+           do
+             ArrayDiscosSATA[$NroDisco]=$(echo "sd$LetraDiscoSATA")
+           done
+
+
 
 ## Comprobar si el paquete hddtemp está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s hddtemp 2>/dev/null | grep installed) == "" ]]; then
