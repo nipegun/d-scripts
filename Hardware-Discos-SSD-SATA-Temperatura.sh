@@ -22,9 +22,12 @@ echo ""
        if [[ -d "/sys/block/sd$LetraDiscoSATA" ]]; then
          #ArrayDiscosSATA[$LetraDiscoSATA]=$(echo "sd$LetraDiscoSATA")
          #ArrayDiscosSATA+=$(echo "sd$LetraDiscoSATA")
-         DiscoActual=$(echo "sd$LetraDiscoSATA")
-         ArrayDiscosSATA+=("${DiscoActual}")
-        # echo ${ArrayDiscosSATA[*]}
+
+         ## Agregar la unidad al último índice libre en el array
+           # DiscoActual=$(echo "sd$LetraDiscoSATA")
+           # ArrayDiscosSATA+=("${DiscoActual}")
+         ## Nuevo
+            ArrayDiscosSATA+=("${echo "sd$LetraDiscoSATA"}")
        fi
      done
 
