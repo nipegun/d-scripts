@@ -23,6 +23,7 @@ echo ""
        if [[ -d "/sys/block/sd$LetraDiscoSATA" ]]; then
          ArrayDiscosSATA[$LetraDiscoSATA]=$(echo "sd$LetraDiscoSATA")
          echo "sd$LetraDiscoSATA"
+         echo "  Array: ${ArrayDiscosSATA[@]}"
        fi
      done
 
