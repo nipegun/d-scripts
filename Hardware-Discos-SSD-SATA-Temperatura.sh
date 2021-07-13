@@ -27,6 +27,11 @@ echo ""
        fi
      done
 
+for value in "${ArrayDiscosSATA[@]}"
+do
+     echo $value
+done
+
 echo ""
 echo "  Total de discos SATA instalados en el sistema: ${#ArrayDiscosSATA[@]}"
 
