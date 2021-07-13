@@ -44,6 +44,6 @@ for DiscoSATA in "${ArrayDiscosSATA[@]}"
     echo ""
     echo "    Disco /dev/$DiscoSATA"
     echo ""
-    hddtemp /dev/$DiscoSATA | grep odel
+    hddtemp /dev/$DiscoSATA
   done
 
