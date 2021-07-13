@@ -58,9 +58,9 @@ echo "  Total de discos SATA instalados en el sistema: ${#ArrayDiscosSATA[@]}"
 ## Mostrar la temperatura de cada disco detectado
    for DiscoSATA in "${ArrayDiscosSATA[@]}"
      do
-       echo ""
-       echo "    Disco /dev/$DiscoSATA"
-       echo ""
+       #echo ""
+       #echo "    Disco /dev/$DiscoSATA"
+       #echo ""
        hddtemp /dev/$DiscoSATA
      done
 
