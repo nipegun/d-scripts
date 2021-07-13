@@ -16,8 +16,6 @@ echo ""
 echo -e "${ColorVerde}  Mostrando temperatura de los discos duros SATA...${FinColor}"
 echo ""
 
-#declare -a ArrayDiscosSATA
-
 ## Obtener la cantidad de discos SATA que hay instalados en el sistema
    for LetraDiscoSATA in {a..x}
      do
@@ -30,20 +28,9 @@ echo ""
        fi
      done
 
-for value in "${ArrayDiscosSATA[@]}"
-do
-     echo $value
-done
-
 echo ""
 echo "  Total de discos SATA instalados en el sistema: ${#ArrayDiscosSATA[@]}"
-
-      #       echo "sd$LetraDiscoSATA"
-      #       echo "  Array: ${ArrayDiscosSATA[@]}"
-      #   for NroDisco in {0..50}
-      #     do
-      #       ArrayDiscosSATA[$NroDisco]=$(echo "sd$LetraDiscoSATA")
-      #     done
+echo ""
 
 ## Comprobar si el paquete hddtemp está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s hddtemp 2>/dev/null | grep installed) == "" ]]; then
