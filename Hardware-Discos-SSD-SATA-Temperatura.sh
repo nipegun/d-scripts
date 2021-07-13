@@ -16,6 +16,7 @@ echo ""
 echo -e "${ColorVerde}  Mostrando temperatura de los discos duros SATA...${FinColor}"
 echo ""
 
+declare -a ArrayDiscosSATA
 
 ## Obtener la cantidad de discos SATA que hay instalados en el sistema
    for LetraDiscoSATA in {a..x}
