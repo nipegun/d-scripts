@@ -23,7 +23,8 @@ declare -a ArrayDiscosSATA
      do
        if [[ -d "/sys/block/sd$LetraDiscoSATA" ]]; then
          #ArrayDiscosSATA[$LetraDiscoSATA]=$(echo "sd$LetraDiscoSATA")
-         ArrayDiscosSATA+=$(echo "sd$LetraDiscoSATA")
+         #ArrayDiscosSATA+=$(echo "sd$LetraDiscoSATA")
+         ArrayDiscosSATA+=("${echo "sd$LetraDiscoSATA"}")
         # echo ${ArrayDiscosSATA[*]}
        fi
      done
