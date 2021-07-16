@@ -53,37 +53,21 @@ apt-get -y install libssl-dev
 cmake ..
 make -j $(nproc)
 
-#echo ""
-#echo "  Obteniendo dirección mac de la tarjeta inalámbrica..."
-#echo ""
-#DirMACWlan0=$(ip addr show wlan0 | grep link/ether | cut -d" " -f6)
-#echo ""
-#echo "  La dirección MAC de la tarjeta inalámbrica es: $DirMACWlan0"
-#echo ""
-
-#echo ""
-#echo "  Generando un identificador del minero a partir de la MAC $DirMACWlan0..."
-#echo ""
-#IdMinero=$(echo -n $DirMACWlan0 | md5sum | cut -d" " -f1)
-#echo ""
-#echo "  El identificador del dispositivo es: $IdMinero"
-#echo ""
-
 echo ""
-echo "  Obteniendo identificador del procesador..."
-echo ""
-IdProc=$(dmidecode -t 4 | grep ID | cut -d":" -f2 | sed 's/ //g')
-echo ""
-echo "  El identificador del procesador es: $IdProc"
+echo "  Creando ID para el minero..."
 echo ""
 
-echo ""
-echo "  Generando un identificador del minero a partir del identificador del procesador..."
-echo ""
-IdMinero=$(echo -n $IdProc | md5sum | cut -d" " -f1)
-echo ""
-echo "  El identificador del dispositivo es: $IdMinero"
-echo ""
+## A partir de la MAC WiFi
+   ## Obtener MAC de la WiFi
+      #DirMACwlan0=$(ip addr show wlan0 | grep link/ether | cut -d" " -f6 | sed 's/://g')
+   ## Generar un identificador del minero a partir de la MAC de la WiFi...
+      #IdMinero=$(echo -n $DirMACwlan0 | md5sum | cut -d" " -f1)
+
+## A partir del ID del procesador
+   ## Obtener ID del procesador
+      IdProc=$(dmidecode -t 4 | grep ID | cut -d":" -f2 | sed 's/ //g')
+   ## Generar un identificador del minero a partir del ID del procesador...
+      IdMinero=$(echo -n $IdProc | md5sum | cut -d" " -f1)
 
 echo ""
 echo "  Ejecutando minero con identificador $IdMinero..."
