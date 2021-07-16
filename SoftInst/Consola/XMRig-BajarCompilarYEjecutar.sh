@@ -53,24 +53,40 @@ apt-get -y install libssl-dev
 cmake ..
 make -j $(nproc)
 
+#echo ""
+#echo "  Obteniendo dirección mac de la tarjeta inalámbrica..."
+#echo ""
+#DirMACWlan0=$(ip addr show wlan0 | grep link/ether | cut -d" " -f6)
+#echo ""
+#echo "  La dirección MAC de la tarjeta inalámbrica es: $DirMACWlan0"
+#echo ""
+
+#echo ""
+#echo "  Generando un identificador de dispositivo a partir de la MAC $DirMACWlan0..."
+#echo ""
+#IdDispositivo=$(echo -n $DirMACWlan0 | md5sum | cut -d" " -f1)
+#echo ""
+#echo "  El identificador del dispositivo es: $IdDispositivo"
+#echo ""
+
 echo ""
-echo "  Obteniendo dirección mac de la tarjeta inalámbrica..."
+echo "  Obteniendo identificador del procesador..."
 echo ""
-DirMACWlan0=$(ip addr show wlan0 | grep link/ether | cut -d" " -f6)
+IdProc=$(dmidecode -t 4 | grep ID | cut -d":" -f2 | sed 's/ //g')
 echo ""
-echo "  La dirección MAC de la tarjeta inalámbrica es: $DirMACWlan0"
+echo "  El identificador del procesador es: $IdProc"
 echo ""
 
 echo ""
-echo "  Generando un identificador de dispositivo a partir de la MAC $DirMACWlan0..."
+echo "  Generando un identificador de dispositivo a partir del identificador del procesador..."
 echo ""
-Dispositivo=$(echo -n $DirMACWlan0 | md5sum | cut -d" " -f1)
+IdDispositivo=$(echo -n $IdProc | md5sum | cut -d" " -f1)
 echo ""
-echo "  El identificador del dispositivo es: $Dispositivo"
+echo "  El identificador del dispositivo es: $IdDispositivo"
 echo ""
 
 echo ""
-echo "  Ejecutando minero con identificador $Dispositivo..."
+echo "  Ejecutando minero con identificador $IdDispositivo..."
 echo ""
 
 ## Con TLS
