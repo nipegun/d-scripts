@@ -28,9 +28,9 @@ echo ""
 DirMACWlan0=$(ip addr show wlan0 | grep link/ether | cut -d" " -f6)
 Dispositivo=$(echo -n $DirMACWlan0 | md5sum | cut -d" " -f1)
 echo ""
-echo "El identificador del dispositivo es:"
+echo "  El identificador del dispositivo es:"
 echo ""
-echo "$Dispositivo"
+echo "  $Dispositivo"
 echo ""
 
 echo ""
