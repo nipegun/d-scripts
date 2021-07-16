@@ -74,10 +74,10 @@ echo "  Ejecutando minero con identificador $IdMinero..."
 echo ""
 
 ## Con TLS
-./xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-id=$Dispositivo -u $DirWallet --tls 
+./xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet --tls 
 
 ## Sin TLS
-   #./xmrig -o pool.minexmr.com:4444 --threads=$Hilos --rig-id=$Dispositivo -u $DirWallet
+   #./xmrig -o pool.minexmr.com:4444 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet
 
 #/data/data/com.termux/files/home/xmrig/build/xmrig
 
