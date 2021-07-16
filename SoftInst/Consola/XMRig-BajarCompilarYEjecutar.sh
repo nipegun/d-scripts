@@ -54,9 +54,16 @@ cmake ..
 make -j $(nproc)
 
 echo ""
-echo "  Generando un identificador de dispositivo a partir de la MAC de la WiFi..."
+echo "  Obteniendo dirección mac de la tarjeta inalámbrica..."
 echo ""
 DirMACWlan0=$(ip addr show wlan0 | grep link/ether | cut -d" " -f6)
+echo ""
+echo "  La dirección MAC de la tarjeta inalámbrica es: $DirMACWlan0"
+echo ""
+
+echo ""
+echo "  Generando un identificador de dispositivo a partir de la MAC $DirMACWlan0..."
+echo ""
 Dispositivo=$(echo -n $DirMACWlan0 | md5sum | cut -d" " -f1)
 echo ""
 echo "  El identificador del dispositivo es: $Dispositivo"
