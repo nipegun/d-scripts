@@ -21,6 +21,7 @@ echo -e "${ColorVerde}----------------------------------------------${FinColor}"
 echo -e "${ColorVerde}  Iniciando scripts de ejecución de XMRig...${FinColor}"
 echo -e "${ColorVerde}----------------------------------------------${FinColor}"
 echo ""
+
 #echo ""
 #echo "  Obteniendo dirección mac de la tarjeta inalámbrica..."
 #echo ""
@@ -30,11 +31,11 @@ echo ""
 #echo ""
 
 #echo ""
-#echo "  Generando un identificador de dispositivo a partir de la MAC $DirMACWlan0..."
+#echo "  Generando un identificador del minero a partir de la MAC $DirMACWlan0..."
 #echo ""
-#IdDispositivo=$(echo -n $DirMACWlan0 | md5sum | cut -d" " -f1)
+#IdMinero=$(echo -n $DirMACWlan0 | md5sum | cut -d" " -f1)
 #echo ""
-#echo "  El identificador del dispositivo es: $IdDispositivo"
+#echo "  El identificador del dispositivo es: $IdMinero"
 #echo ""
 
 echo ""
@@ -46,15 +47,15 @@ echo "  El identificador del procesador es: $IdProc"
 echo ""
 
 echo ""
-echo "  Generando un identificador de dispositivo a partir del identificador del procesador..."
+echo "  Generando un identificador del minero a partir del identificador del procesador..."
 echo ""
-IdDispositivo=$(echo -n $IdProc | md5sum | cut -d" " -f1)
+IdMinero=$(echo -n $IdProc | md5sum | cut -d" " -f1)
 echo ""
-echo "  El identificador del dispositivo es: $IdDispositivo"
+echo "  El identificador del dispositivo es: $IdMinero"
 echo ""
 
 echo ""
-echo "  Ejecutando minero con identificador $IdDispositivo..."
+echo "  Ejecutando minero con identificador $IdMinero..."
 echo ""
 
 ## Con TLS
