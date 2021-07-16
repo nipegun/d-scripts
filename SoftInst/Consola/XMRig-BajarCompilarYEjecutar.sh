@@ -35,6 +35,7 @@ echo ""
 echo ""
 echo "  Descargando el repositorio de XMRig..."
 echo ""
+rm -rf ~/xmrig/
 cd ~
 git clone https://github.com/xmrig/xmrig.git
 cd xmrig
