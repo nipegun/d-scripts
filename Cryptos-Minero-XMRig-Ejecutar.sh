@@ -54,7 +54,7 @@ echo "  El identificador del dispositivo es: $IdDispositivo"
 echo ""
 
 echo ""
-echo "  Ejecutando minero con identificador $Dispositivo..."
+echo "  Ejecutando minero con identificador $IdDispositivo..."
 echo ""
 
 ## Con TLS
