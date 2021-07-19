@@ -47,6 +47,6 @@ echo ""
      apt-get -y install tar
      echo ""
    fi
-tar -xf ~/Cryptos/Mineros/GPU/NBMiner_$UltVers_Linux.tgz
+tar -xf ~/Cryptos/Mineros/GPU/NBMiner_"$UltVers"_Linux.tgz
 mv ~/Cryptos/Mineros/GPU/NBMiner_Linux/ ~/Cryptos/Mineros/GPU/NBMiner/
-rm -rf ~/Cryptos/Mineros/GPU/NBMiner_$UltVers_Linux.tgz
+rm -rf ~/Cryptos/Mineros/GPU/NBMiner_"$UltVers"_Linux.tgz
