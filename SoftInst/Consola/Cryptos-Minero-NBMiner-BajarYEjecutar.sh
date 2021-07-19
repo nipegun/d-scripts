@@ -53,6 +53,21 @@ rm -rf ~/Cryptos/Mineros/GPU/NBMiner_"$UltVers"_Linux.tgz
 echo ""
 
 echo ""
+echo "  Instalando OpenCL..."
+echo ""
+apt-get -y install build-essential dkms
+dpkg -i amdgpu-pro-core
+dpkg -i libopencl1-amdgpu-pro *
+dpkg -i clinfo-amdgpu-pro
+dpkg -i opencl-amdgpu-pro-icd *
+dpkg -i amdgpu-pro-dkms
+dpkg -i libdrm2-amdgpu-pro
+dpkg -i ids-amdgpu-pro
+dpkg -i libdrm-amdgpu-pro-amdgpu1
+
+
+
+echo ""
 echo "  Ejecutando minero para minar RVN..."
 echo ""
 ~/Cryptos/Mineros/GPU/NBMiner/nbminer -a kawpow -o stratum+tcp://eu.ravenminer.com:3838 -u RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy.worker:passwd
