@@ -43,15 +43,20 @@ cd xmrig
 echo ""
 echo "  Compilando..."
 echo ""
-mkdir build
-cd build
-apt-get -y install cmake
-apt-get -y install libhwloc-dev
-apt-get -y install libuv1-dev
-apt-get -y install libssl-dev
-#cmake .. -DWITH_HWLOC=OFF
-cmake ..
-make -j $(nproc)
+## Crear la carpeta
+   mkdir build
+   cd build
+## Instalar el softare para poder compilar
+   apt-get -y install cmake
+   apt-get -y install libhwloc-dev
+   apt-get -y install libuv1-dev
+   apt-get -y install libssl-dev
+   apt-get -y install g++
+   #apt-get -y install build-essential
+## Compilar
+   #cmake .. -DWITH_HWLOC=OFF
+   cmake ..
+   make -j $(nproc)
 
 echo ""
 echo "  Creando ID para el minero..."
