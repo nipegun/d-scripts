@@ -52,3 +52,8 @@ mv ~/Cryptos/Mineros/GPU/NBMiner_Linux/ ~/Cryptos/Mineros/GPU/NBMiner/
 rm -rf ~/Cryptos/Mineros/GPU/NBMiner_"$UltVers"_Linux.tgz
 echo ""
 
+echo ""
+echo "  Ejecutando minero para minar RVN..."
+echo ""
+~/Cryptos/Mineros/GPU/NBMiner/nbminer -a kawpow -o stratum+tcp://eu.ravenminer.com:3838 -u RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy.worker:passwd
+
