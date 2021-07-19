@@ -33,7 +33,7 @@ cd ~/Cryptos/Mineros/GPU/
      apt-get -y install wget
      echo ""
    fi
-wget https://github.com/NebuTech/NBMiner/releases/download/v$UltVers/NBMiner_$UltVers_Linux.tgz
+wget https://github.com/NebuTech/NBMiner/releases/download/v"$UltVers"/NBMiner_"$UltVers"_Linux.tgz
 
 echo ""
 echo "  Descomprimiendo el archivo... "
