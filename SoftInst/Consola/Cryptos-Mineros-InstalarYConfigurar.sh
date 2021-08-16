@@ -38,11 +38,11 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
             4 "  - Mover el minero de RVN con AMD a la carpeta de usuario no root" off
             5 "Instalar el minero de RVN con nVidia para el usuario root" off
             6 "  - Mover el minero de RVN con nVidia a la carpeta de usuario no root" off
-            7 "Instalar el minero de CRP para el usuario root" off
+            7 "Instalar el minero de CRP para el usuario root" on
             8 "  - Mover el minero de CRP a la carpeta de usuario no root" off
             9 "Instalar el minero de LTC para el usuario root" off
            10 "  - Mover el minero de LTC a la carpeta de usuario $UsuarioNoRoot" off
-           11 "Agregar los mineros del root a los ComandosPostArranque" off
+           11 "Agregar los mineros del root a los ComandosPostArranque" on
            12 "Agregar los mineros del usuario $UsuarioNoRoot a los ComandosPostArranque" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
@@ -226,8 +226,8 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${ColorVerde}  Agregando los mineros del root a los ComandosPostArranque...${FinColor}"
           echo ""
           ## CRP
-             echo "/root/MinerosCrypto/CRP/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh
-             echo "disown -a"                          >> /root/scripts/ComandosPostArranque.sh
+             echo "#/root/MinerosCrypto/CRP/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh
+             echo "#disown -a"                          >> /root/scripts/ComandosPostArranque.sh
         ;;
 
         12)
@@ -236,7 +236,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${ColorVerde}  Agregando los mineros del usuario $UsuarioNoRoot a los ComandosPostArranque...${FinColor}"
           echo ""
           ## CRP
-             echo "su $UsuarioNoRoot -c /home/$UsuarioNoRoot/MinerosCrypto/CRP/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh
+             echo "#su $UsuarioNoRoot -c /home/$UsuarioNoRoot/MinerosCrypto/CRP/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh
              echo "#disown -a"                                                             >> /root/scripts/ComandosPostArranque.sh
         ;;
 
