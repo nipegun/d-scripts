@@ -215,6 +215,8 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
           echo -e "${ColorVerde}  Agregando los mineros del root a los ComandosPostArranque...${FinColor}"
           echo ""
+          ## CRP
+             echo "/root/MinerosCrypto/CRP/Minar.sh" >> /root/scripts/ComandosPostArranque.sh
 
         ;;
 
@@ -223,6 +225,8 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
           echo -e "${ColorVerde}  Agregando los mineros del usuario $UsuarioNoRoot a los ComandosPostArranque...${FinColor}"
           echo ""
+          ## CRP
+             echo "su $UsuarioNoRoot -c /home/$UsuarioNoRoot/MinerosCrypto/CRP/Minar.sh" >> /root/scripts/ComandosPostArranque.sh
 
         ;;
 
