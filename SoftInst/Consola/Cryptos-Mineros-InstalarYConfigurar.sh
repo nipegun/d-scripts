@@ -161,6 +161,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
                   echo ""
                 fi
                 tar xfv /root/MinerosCrypto/CRP/data.tar.xz
+                echo ""
                 mv /root/MinerosCrypto/CRP/opt/uam/* /root/MinerosCrypto/CRP/
              ## Borrar archivos sobrantes
                 rm -rf /root/MinerosCrypto/CRP/opt/
