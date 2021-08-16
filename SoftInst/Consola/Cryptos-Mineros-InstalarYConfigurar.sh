@@ -68,6 +68,8 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${ColorVerde}  Moviendo el minero de XMR a la carpeta del usuario $UsuarioNoRoot...${FinColor}"
           echo ""
 
+          ## Mover carpeta de mineros
+             mv /root/MinerosCrypto/ /home/$UsuarioNoRoot//MinerosCrypto/
           ## Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
@@ -90,6 +92,8 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${ColorVerde}  Moviendo el minero de RVN con AMD a la carpeta del usuario $UsuarioNoRoot...${FinColor}"
           echo ""
 
+          ## Mover carpeta de mineros
+             mv /root/MinerosCrypto/ /home/$UsuarioNoRoot//MinerosCrypto/
           ## Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
@@ -112,6 +116,8 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${ColorVerde}  Moviendo el minero de RVN con nVidia a la carpeta del usuario $UsuarioNoRoot...${FinColor}"
           echo ""
 
+          ## Mover carpeta de mineros
+             mv /root/MinerosCrypto/ /home/$UsuarioNoRoot//MinerosCrypto/
           ## Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
@@ -183,6 +189,8 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${ColorVerde}  Moviendo el minero de CRP a la carpeta del usuario $UsuarioNoRoot...${FinColor}"
           echo ""
 
+          ## Mover carpeta de mineros
+             mv /root/MinerosCrypto/ /home/$UsuarioNoRoot//MinerosCrypto/
           ## Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
@@ -205,6 +213,8 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${ColorVerde}  Moviendo el minero de LTC a la carpeta del usuario $UsuarioNoRoot...${FinColor}"
           echo ""
 
+          ## Mover carpeta de mineros
+             mv /root/MinerosCrypto/ /home/$UsuarioNoRoot//MinerosCrypto/
           ## Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
