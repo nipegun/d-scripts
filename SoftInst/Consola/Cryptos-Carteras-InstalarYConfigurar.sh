@@ -35,14 +35,14 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
   opciones=(1 "Crear usuario sin privilegios para ejecutar la pool (Obligatorio)" on
             2 "Instalar los c-scripts (Obligatorio)" on
             3 "Borrar todas las carteras y configuraciones ya existentes" off
-            4 "Instalar cartera de Litecoin" off
-            5 "Instalar cartera de Ravencoin" off
-            6 "Instalar cartera de Argentum" off
-            7 "Instalar cartera de Monero" off
-            8 "Instalar cartera de Chia" off
-            9 "Instalar cartera de Bitcoin BCH (Todavía no disponible)" off
-           10 "Instalar cartera de Bitcoin BTC (Todavía no disponible)" off
-           11 "(Todavía no disponible)" off
+            4 "Instalar core de Litecoin" off
+            5 "Instalar core de Ravencoin" off
+            6 "Instalar core de Argentum" off
+            7 "Instalar core de Monero" off
+            8 "Instalar core de Chia" off
+            9 "Instalar core de Bitcoin BCH (Todavía no disponible)" off
+           10 "Instalar core de Bitcoin BTC (Todavía no disponible)" off
+           11 "Instalar core de Utopia" off
            12 "(Todavía no disponible)" off
            13 "(Todavía no disponible)" off
            14 "Instalar escritorio y algunas utilidades de terminal" off
@@ -810,7 +810,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           echo ""
           echo -e "${ColorVerde}------------------------------${FinColor}"
-          echo -e "${ColorVerde}  (Todavía no disponible)...${FinColor}"
+          echo -e "${ColorVerde}  Instalando core de BCH (Todavía no disponible)...${FinColor}"
           echo -e "${ColorVerde}------------------------------${FinColor}"
           echo ""
 
@@ -820,7 +820,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           echo ""
           echo -e "${ColorVerde}------------------------------${FinColor}"
-          echo -e "${ColorVerde}  (Todavía no disponible)...${FinColor}"
+          echo -e "${ColorVerde}  Instalando core de BTC (Todavía no disponible)...${FinColor}"
           echo -e "${ColorVerde}------------------------------${FinColor}"
           echo ""
 
@@ -829,9 +829,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         11)
 
           echo ""
-          echo -e "${ColorVerde}------------------------------${FinColor}"
-          echo -e "${ColorVerde}  (Todavía no disponible)...${FinColor}"
-          echo -e "${ColorVerde}------------------------------${FinColor}"
+          echo -e "${ColorVerde}--------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Instalando core de Utopia...${FinColor}"
+          echo -e "${ColorVerde}-------------------------------${FinColor}"
           echo ""
 
         ;;
