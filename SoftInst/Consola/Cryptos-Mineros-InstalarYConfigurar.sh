@@ -31,17 +31,17 @@ echo ""
      echo ""
    fi
 
-menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 22 76 16)
+menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 22 96 16)
   opciones=(1 "Instalar el minero de XMR para el root" off
-            2 "  Mover el minero de XMR a la carpeta de usuario no root" off
+            2 "  - Mover el minero de XMR a la carpeta de usuario no root" off
             3 "Instalar el minero de RVN con AMD para el root" off
-            4 "  Mover el minero de RVN con AMD a la carpeta de usuario no root" off
+            4 "  - Mover el minero de RVN con AMD a la carpeta de usuario no root" off
             5 "Instalar el minero de RVN con nVidia para el root" off
-            6 "  Mover el minero de RVN con nVidia a la carpeta de usuario no root" off
+            6 "  - Mover el minero de RVN con nVidia a la carpeta de usuario no root" off
             7 "Instalar el minero de CRP" off
-            8 "  Mover el minero de CRP a la carpeta de usuario no root" off
+            8 "  - Mover el minero de CRP a la carpeta de usuario no root" off
             9 "Instalar el minero de LTC para el root" off
-           10 "  Mover el minero de LTC a la carpeta de usuario $UsuarioNoRoot" off
+           10 "  - Mover el minero de LTC a la carpeta de usuario $UsuarioNoRoot" off
            11 "Agregar los mineros del root a los ComandosPostArranque" off
            12 "Agregar los mineros del usuario $UsuarioNoRoot a los ComandosPostArranque" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -150,8 +150,23 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
                   echo ""
                 fi
              ar x /root/MinerosCrypto/CRP/uam-latest_amd64.deb
-
-
+             ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo "  tar no está instalado. Iniciando su instalación..."
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install tar
+                  echo ""
+                fi
+                tar xfv /root/MinerosCrypto/CRP/data.tar.xz
+                mv /root/MinerosCrypto/CRP/opt/uam/* /root/MinerosCrypto/CRP/
+             ## Borrar archivos sobrantes
+                rm -rf /root/MinerosCrypto/CRP/opt/
+                rm -rf /root/MinerosCrypto/CRP/control.tar.gz
+                rm -rf /root/MinerosCrypto/CRP/data.tar.xz
+                rm -rf /root/MinerosCrypto/CRP/debian-binary
+                rm -rf /root/MinerosCrypto/CRP/uam-latest_amd64.deb
 
         ;;
 
