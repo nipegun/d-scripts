@@ -64,5 +64,4 @@ echo -e "${ColorVerde}Activando y arrancando el servicio...${FinColor}"
 echo ""
 systemctl enable rc-local
 systemctl start rc-local.service
-systemctl status rc-local.service
 
