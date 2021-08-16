@@ -41,7 +41,9 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
             7 "Instalar el minero de CRP" off
             8 "  Mover el minero de CRP a la carpeta de usuario no root" off
             9 "Instalar el minero de LTC para el root" off
-           10 "  Mover el minero de LTC a la carpeta de usuario $UsuarioNoRoot" off)
+           10 "  Mover el minero de LTC a la carpeta de usuario $UsuarioNoRoot" off
+           11 "Agregar los mineros del root a los ComandosPostArranque" off
+           12 "Agregar los mineros del usuario $UsuarioNoRoot a los ComandosPostArranque" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -124,6 +126,33 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           ## Crear la carpeta
              mkdir -p /root/MinerosCrypto/CRP/ 2> /dev/null
 
+          ## Descargar la última versión del minero
+             cd /root/MinerosCrypto/CRP/
+             ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo "  wget no está instalado. Iniciando su instalación..."
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install wget
+                  echo ""
+                fi
+             wget https://update.u.is/downloads/uam/linux/uam-latest_amd64.deb
+
+          ## Extraer los archivos de dentro del .deb
+             ## Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo "  binutils no está instalado. Iniciando su instalación..."
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install binutils
+                  echo ""
+                fi
+             ar x /root/MinerosCrypto/CRP/uam-latest_amd64.deb
+
+
+
         ;;
 
         8)
@@ -159,6 +188,21 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
 
         ;;
 
+        11)
+
+          echo ""
+          echo -e "${ColorVerde}  Agregando los mineros del root a los ComandosPostArranque...${FinColor}"
+          echo ""
+
+        ;;
+
+        12)
+
+          echo ""
+          echo -e "${ColorVerde}  Agregando los mineros del usuario $UsuarioNoRoot a los ComandosPostArranque...${FinColor}"
+          echo ""
+
+        ;;
 
       esac
 
