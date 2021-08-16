@@ -124,6 +124,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
 
           ## Crear la carpeta
+             rm -rf /root/MinerosCrypto/CRP/ 2> /dev/null
              mkdir -p /root/MinerosCrypto/CRP/ 2> /dev/null
 
           ## Descargar la última versión del minero
