@@ -126,7 +126,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
         7)
 
           echo ""
-          echo -e "${ColorVerde}  Instalando el minero de CRP (Cryptons) para el usuario root...${FinColor}"
+          echo -e "${ColorVerde}  Instalando el minero de CRP (Crypton) para el usuario root...${FinColor}"
           echo ""
 
           ## Crear la carpeta
@@ -144,6 +144,9 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
                   apt-get -y install wget
                   echo ""
                 fi
+             echo ""
+             echo "  Descargando el archivo .deb..."
+             echo ""
              wget https://update.u.is/downloads/uam/linux/uam-latest_amd64.deb
 
           ## Extraer los archivos de dentro del .deb
@@ -156,6 +159,9 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
                   apt-get -y install binutils
                   echo ""
                 fi
+             echo ""
+             echo "  Descomprimiendo el archivo .deb..."
+             echo ""
              ar x /root/MinerosCrypto/CRP/uam-latest_amd64.deb
              ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
@@ -166,10 +172,16 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
                   apt-get -y install tar
                   echo ""
                 fi
+                echo ""
+                echo "  Descomprimiendo el archivo data.tar.xz..."
+                echo ""
                 tar xfv /root/MinerosCrypto/CRP/data.tar.xz
                 echo ""
                 mv /root/MinerosCrypto/CRP/opt/uam/* /root/MinerosCrypto/CRP/
              ## Borrar archivos sobrantes
+                echo ""
+                echo "  Borrando archivos sobrantes..."
+                echo ""
                 rm -rf /root/MinerosCrypto/CRP/opt/
                 rm -rf /root/MinerosCrypto/CRP/control.tar.gz
                 rm -rf /root/MinerosCrypto/CRP/data.tar.xz
