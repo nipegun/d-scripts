@@ -14,6 +14,7 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 UsuarioDaemon="pooladmin"
+UsuarioNoRoot=eduardo
 
 echo ""
 echo -e "${ColorVerde}-------------------------------------------------------------------------------------${FinColor}"
@@ -42,9 +43,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
             8 "Instalar core de Chia" off
             9 "Instalar core de Bitcoin BCH (Todavía no disponible)" off
            10 "Instalar core de Bitcoin BTC (Todavía no disponible)" off
-           11 "Instalar core de Utopia" off
+           11 "Instalar messenger de Utopia" off
            12 "(Todavía no disponible)" off
-           13 "(Todavía no disponible)" off
+           13 "Mover todo hacia la carpeta del usuario no root" off
            14 "Instalar escritorio y algunas utilidades de terminal" off
            15 "Reparar permisos (Obligatorio)" on
            16 "Reniciar el sistema" off)
@@ -829,10 +830,99 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         11)
 
           echo ""
-          echo -e "${ColorVerde}--------------------------------${FinColor}"
-          echo -e "${ColorVerde}  Instalando core de Utopia...${FinColor}"
-          echo -e "${ColorVerde}-------------------------------${FinColor}"
+          echo -e "${ColorVerde}----------------------------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Instalando o actualizando messenger de Utopia...${FinColor}"
+          echo -e "${ColorVerde}----------------------------------------------------${FinColor}"
           echo ""
+
+          ## Crear la carpeta
+             rm -rf /root/Cryptos/CRP/messenger/ 2> /dev/null
+             mkdir -p /root/Cryptos/CRP/ 2> /dev/null
+
+          ## Descargar la última versión del messenger
+             ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo "  wget no está instalado. Iniciando su instalación..."
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install wget
+                  echo ""
+                fi
+             echo ""
+             echo "  Descargando el archivo .deb..."
+             echo ""
+             cd /root/Cryptos/CRP/
+             wget https://update.u.is/downloads/linux/utopia-latest.amd64.deb
+
+          ## Extraer los archivos de dentro del archivo .deb
+             ## Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo "  binutils no está instalado. Iniciando su instalación..."
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install binutils
+                  echo ""
+                fi
+             echo ""
+             echo "  Descomprimiendo el archivo .deb..."
+             echo ""
+             ar xv /root/Cryptos/CRP/utopia-latest.amd64.deb
+
+          ## Extraer los archivos de dentro del archivo data.tar.xz
+             ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo "  tar no está instalado. Iniciando su instalación..."
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install tar
+                  echo ""
+                fi
+             echo ""
+             echo "  Descomprimiendo el archivo data.tar.xz..."
+             echo ""
+             tar xfv /root/Cryptos/CRP/data.tar.xz
+             echo ""
+
+          ## Mover la carpeta de messenger a la raíz de CRP
+             mv /root/Cryptos/CRP/opt/utopia/* /root/Cryptos/CRP/
+
+          ## Crear icono para el menu gráfico
+             rm -rf /usr/share/applications/utopia.desktop 2> /dev/null
+             rm -rf /root/.local/share/applications/utopia.desktop 2> /dev/null
+             mv /root/Cryptos/CRP/usr/share/applications/utopia.desktop    /root/.local/share/applications/
+             mv /root/Cryptos/CRP/usr/share/pixmaps/utopia.png             /root/Cryptos/CRP/messenger/
+             sed -i -e 's|/usr/share/pixmaps/utopia.png|/root/Cryptos/CRP/messenger/utopia.png|g' /root/.local/share/applications/utopia.desktop
+             sed -i -e 's|/opt/utopia/messenger|/root/Cryptos/CRP/messenger|g'                    /root/.local/share/applications/utopia.desktop
+
+          ## Crear icono para auto-ejecución gráfica
+             mkdir -p /root/.config/autostart/ 2> /dev/null
+             cp /root/.local/share/applications/utopia.desktop /root/.config/autostart/utopia.desktop
+
+          ## Borrar archivos sobrantes
+             echo ""
+             echo "  Borrando archivos sobrantes..."
+             echo ""
+             rm -rf /root/Cryptos/CRP/opt/
+             rm -rf /root/Cryptos/CRP/usr/
+             rm -rf /root/Cryptos/CRP/control.tar.gz
+             rm -rf /root/Cryptos/CRP/data.tar.xz
+             rm -rf /root/Cryptos/CRP/debian-binary
+             rm -rf /root/Cryptos/CRP/utopia-latest.amd64.deb
+
+          ## Crear el archivo de auto-ejecución gráfica
+             echo ""
+             echo "  Creando el archivo de auto-ejecución gráfica..."
+             echo ""
+             mkdir -p /root/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                           > /root/.config/autostart/utopia.desktop
+             echo "Name=utopia"                                              >> /root/.config/autostart/utopia.desktop
+             echo "Type=Application"                                         >> /root/.config/autostart/utopia.desktop
+             echo 'Exec=sh -c "/root/Cryptos/CRP/messenger/utopia --url %u"' >> /root/.config/autostart/utopia.desktop
+             echo "Terminal=false"                                           >> /root/.config/autostart/utopia.desktop
+             echo "Hidden=false"                                             >> /root/.config/autostart/utopia.desktop
 
         ;;
 
