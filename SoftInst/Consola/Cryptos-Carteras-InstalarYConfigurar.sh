@@ -13,7 +13,7 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-UsuarioDaemon="pooladmin"
+UsuarioNoRoot="pooladmin"
 UsuarioNoRoot=eduardo
 
 echo ""
@@ -65,16 +65,16 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
 
           ## Agregar el usuario
-             useradd -d /home/$UsuarioDaemon/ -s /bin/bash $UsuarioDaemon
+             useradd -d /home/$UsuarioNoRoot/ -s /bin/bash $UsuarioNoRoot
 
           ## Crear la contraseña
-             passwd $UsuarioDaemon
+             passwd $UsuarioNoRoot
 
           ## Crear la carpeta
-             mkdir -p /home/$UsuarioDaemon/ 2> /dev/null
+             mkdir -p /home/$UsuarioNoRoot/ 2> /dev/null
 
           ## Reparación de permisos
-             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+             chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
         ;;
 
         2)
@@ -95,8 +95,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
              fi
 
-          su $UsuarioDaemon -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
-          find /home/$UsuarioDaemon/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+          su $UsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
+          find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 
         ;;
 
@@ -109,19 +109,19 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
 
           ## Litecoin
-             rm -rf /home/$UsuarioDaemon/.litecoin/
+             rm -rf /home/$UsuarioNoRoot/.litecoin/
           ## Raven
-             rm -rf /home/$UsuarioDaemon/.raven/
+             rm -rf /home/$UsuarioNoRoot/.raven/
           ## Argentum
-             rm -rf /home/$UsuarioDaemon/.argentum/
+             rm -rf /home/$UsuarioNoRoot/.argentum/
           ## Chia
-             rm -rf /home/$UsuarioDaemon/.chia/
-             rm -rf /home/$UsuarioDaemon/.config/Chia Blockchain/
+             rm -rf /home/$UsuarioNoRoot/.chia/
+             rm -rf /home/$UsuarioNoRoot/.config/Chia Blockchain/
           ## Pool MPOS
              rm -rf /var/www/MPOS/
 
           ## Reparación de permisos
-             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+             chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
         ;;
 
         4)
@@ -184,32 +184,32 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Creando carpetas y archivos necesarios para ese usuario..."
           echo ""
-          mkdir -p /home/$UsuarioDaemon/CoresCripto/LTC/ 2> /dev/null
-          mkdir -p /home/$UsuarioDaemon/.litecoin/
-          touch /home/$UsuarioDaemon/.litecoin/litecoin.conf
-          echo "rpcuser=user1"      > /home/$UsuarioDaemon/.litecoin/litecoin.conf
-          echo "rpcpassword=pass1" >> /home/$UsuarioDaemon/.litecoin/litecoin.conf
-          echo "prune=550"         >> /home/$UsuarioDaemon/.litecoin/litecoin.conf
-          echo "daemon=1"          >> /home/$UsuarioDaemon/.litecoin/litecoin.conf
-          rm -rf /home/$UsuarioDaemon/CoresCripto/LTC/
-          mv /root/SoftInst/Litecoin/litecoin-$UltVersLite/ /home/$UsuarioDaemon/CoresCripto/LTC/
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
-          find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
-          find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
-          find /home/$UsuarioDaemon/CoresCripto/LTC/bin -type f -exec chmod +x {} \;
+          mkdir -p /home/$UsuarioNoRoot/Cryptos/LTC/ 2> /dev/null
+          mkdir -p /home/$UsuarioNoRoot/.litecoin/
+          touch /home/$UsuarioNoRoot/.litecoin/litecoin.conf
+          echo "rpcuser=user1"      > /home/$UsuarioNoRoot/.litecoin/litecoin.conf
+          echo "rpcpassword=pass1" >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
+          echo "prune=550"         >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
+          echo "daemon=1"          >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
+          rm -rf /home/$UsuarioNoRoot/Cryptos/LTC/
+          mv /root/SoftInst/Litecoin/litecoin-$UltVersLite/ /home/$UsuarioNoRoot/Cryptos/LTC/
+          chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
+          find /home/$UsuarioNoRoot -type d -exec chmod 775 {} \;
+          find /home/$UsuarioNoRoot -type f -exec chmod 664 {} \;
+          find /home/$UsuarioNoRoot/Cryptos/LTC/bin -type f -exec chmod +x {} \;
 
           echo ""
           echo "  Arrancando litecoind..."
           echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/CoresCripto/LTC/bin/litecoind -daemon"
+          su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/LTC/bin/litecoind -daemon"
           sleep 5
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/CoresCripto/LTC/bin/litecoin-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-ltc.txt
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-ltc.txt
+          su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/LTC/bin/litecoin-cli getnewaddress" > /home/$UsuarioNoRoot/pooladdress-ltc.txt
+          chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/pooladdress-ltc.txt
           echo ""
           echo "  La dirección para recibir litecoins es:"
           echo ""
-          cat /home/$UsuarioDaemon/pooladdress-ltc.txt
-          DirCartLTC=$(cat /home/$UsuarioDaemon/pooladdress-ltc.txt)
+          cat /home/$UsuarioNoRoot/pooladdress-ltc.txt
+          DirCartLTC=$(cat /home/$UsuarioNoRoot/pooladdress-ltc.txt)
           echo ""
 
           ## Autoejecución de Litecoin al iniciar el sistema
@@ -217,45 +217,45 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              echo "  Agregando litecoind a los ComandosPostArranque..."
              echo ""
-             echo "chmod +x /home/$UsuarioDaemon/scripts/c-scripts/litecoin-daemon-iniciar.sh"
-             echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/scripts/c-scripts/litecoin-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+             echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/litecoin-daemon-iniciar.sh"
+             echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/litecoin-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
           ## Icono de lanzamiento en el menú gráfico
 
              echo ""
              echo "  Agregando la aplicación gráfica al menú..."
              echo ""
-             mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
-             echo "[Desktop Entry]"                                                     > /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
-             echo "Name=Litecoin GUI"                                                  >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
-             echo "Type=Application"                                                   >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
-             echo "Exec=/home/$UsuarioDaemon/scripts/c-scripts/litecoin-qt-iniciar.sh" >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
-             echo "Terminal=false"                                                     >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
-             echo "Hidden=false"                                                       >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
-             echo "Categories=Cryptos"                                                 >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
-             #echo "Icon="                                                             >> /home/$UsuarioDaemon/.local/share/applications/litecoin.desktop
+             mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
+             echo "[Desktop Entry]"                                                     > /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
+             echo "Name=Litecoin GUI"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
+             echo "Type=Application"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/litecoin-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
+             echo "Terminal=false"                                                     >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
+             echo "Hidden=false"                                                       >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
+             echo "Categories=Cryptos"                                                 >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
+             #echo "Icon="                                                             >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
 
           ## Autoejecución gráfica de Litecoin
 
              echo ""
              echo "  Creando el archivo de autoejecución de litecoin-qt para escritorio..."
              echo ""
-             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-             echo "[Desktop Entry]"                                                     > /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
-             echo "Name=Litecoin GUI"                                                  >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
-             echo "Type=Application"                                                   >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
-             echo "Exec=/home/$UsuarioDaemon/scripts/c-scripts/litecoin-qt-iniciar.sh" >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
-             echo "Terminal=false"                                                     >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
-             echo "Hidden=false"                                                       >> /home/$UsuarioDaemon/.config/autostart/litecoin.desktop
+             mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                                     > /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
+             echo "Name=Litecoin GUI"                                                  >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
+             echo "Type=Application"                                                   >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/litecoin-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
+             echo "Terminal=false"                                                     >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
+             echo "Hidden=false"                                                       >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
 
           ## Reparación de permisos
 
-             chmod +x /home/$UsuarioDaemon/CoresCripto/LTC/bin/*
-             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+             chmod +x /home/$UsuarioNoRoot/Cryptos/LTC/bin/*
+             chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
           ## Parar el daemon
-             chmod +x /home/$UsuarioDaemon/scripts/c-scripts/litecoin-daemon-parar.sh
-             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/c-scripts/litecoin-daemon-parar.sh"
+             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/litecoin-daemon-parar.sh
+             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/litecoin-daemon-parar.sh"
 
         ;;
 
@@ -339,38 +339,38 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Creando carpetas y archivos necesarios para ese usuario..."
           echo ""
-          mkdir -p /home/$UsuarioDaemon/CoresCripto/RVN/ 2> /dev/null
-          mkdir -p /home/$UsuarioDaemon/.raven/
-          touch /home/$UsuarioDaemon/.raven/raven.conf
-          echo "rpcuser=rvnrpc"           > /home/$UsuarioDaemon/.raven/raven.conf
-          echo "rpcpassword=rvnrpcpass"  >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "rpcallowip=127.0.0.1"    >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "#Default RPC port 8766"  >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "rpcport=20401"           >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "server=1"                >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "listen=1"                >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "prune=550"               >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "daemon=1"                >> /home/$UsuarioDaemon/.raven/raven.conf
-          echo "gen=0"                   >> /home/$UsuarioDaemon/.raven/raven.conf
-          rm -rf /home/$UsuarioDaemon/CoresCripto/RVN/
-          mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioDaemon/CoresCripto/RVN/
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
-          find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
-          find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
-          find /home/$UsuarioDaemon/CoresCripto/RVN/bin -type f -exec chmod +x {} \;
+          mkdir -p /home/$UsuarioNoRoot/Cryptos/RVN/ 2> /dev/null
+          mkdir -p /home/$UsuarioNoRoot/.raven/
+          touch /home/$UsuarioNoRoot/.raven/raven.conf
+          echo "rpcuser=rvnrpc"           > /home/$UsuarioNoRoot/.raven/raven.conf
+          echo "rpcpassword=rvnrpcpass"  >> /home/$UsuarioNoRoot/.raven/raven.conf
+          echo "rpcallowip=127.0.0.1"    >> /home/$UsuarioNoRoot/.raven/raven.conf
+          echo "#Default RPC port 8766"  >> /home/$UsuarioNoRoot/.raven/raven.conf
+          echo "rpcport=20401"           >> /home/$UsuarioNoRoot/.raven/raven.conf
+          echo "server=1"                >> /home/$UsuarioNoRoot/.raven/raven.conf
+          echo "listen=1"                >> /home/$UsuarioNoRoot/.raven/raven.conf
+          echo "prune=550"               >> /home/$UsuarioNoRoot/.raven/raven.conf
+          echo "daemon=1"                >> /home/$UsuarioNoRoot/.raven/raven.conf
+          echo "gen=0"                   >> /home/$UsuarioNoRoot/.raven/raven.conf
+          rm -rf /home/$UsuarioNoRoot/Cryptos/RVN/
+          mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioNoRoot/Cryptos/RVN/
+          chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
+          find /home/$UsuarioNoRoot -type d -exec chmod 775 {} \;
+          find /home/$UsuarioNoRoot -type f -exec chmod 664 {} \;
+          find /home/$UsuarioNoRoot/Cryptos/RVN/bin -type f -exec chmod +x {} \;
 
           echo ""
           echo "  Arrancando ravencoind..."
           echo ""
-          su $UsuarioDaemon -c /home/$UsuarioDaemon/CoresCripto/RVN/bin/ravend
+          su $UsuarioNoRoot -c /home/$UsuarioNoRoot/Cryptos/RVN/bin/ravend
           sleep 5
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/CoresCripto/RVN/bin/raven-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-rvn.txt
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-rvn.txt
+          su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/RVN/bin/raven-cli getnewaddress" > /home/$UsuarioNoRoot/pooladdress-rvn.txt
+          chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/pooladdress-rvn.txt
           echo ""
           echo "  La dirección para recibir ravencoins es:"
           echo ""
-          cat /home/$UsuarioDaemon/pooladdress-rvn.txt
-          DirCartRVN=$(cat /home/$UsuarioDaemon/pooladdress-rvn.txt)
+          cat /home/$UsuarioNoRoot/pooladdress-rvn.txt
+          DirCartRVN=$(cat /home/$UsuarioNoRoot/pooladdress-rvn.txt)
           echo ""
 
           ## Autoejecución de Ravencoin al iniciar el sistema
@@ -378,45 +378,45 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              echo "  Agregando ravend a los ComandosPostArranque..."
              echo ""
-             chmod +x /home/$UsuarioDaemon/scripts/c-scripts/raven-daemon-iniciar.sh
-             echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/scripts/c-scripts/raven-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/raven-daemon-iniciar.sh
+             echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/raven-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
           ## Icono de lanzamiento en el menú gráfico
 
              echo ""
              echo "  Agregando la aplicación gráfica al menú..."
              echo ""
-             mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
-             echo "[Desktop Entry]"                                                  > /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             echo "Name=Raven GUI"                                                  >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             echo "Type=Application"                                                >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             echo "Exec=/home/$UsuarioDaemon/scripts/c-scripts/raven-qt-iniciar.sh" >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             echo "Terminal=false"                                                  >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             echo "Hidden=false"                                                    >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             echo "Categories=Cryptos"                                              >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
-             #echo "Icon="                                                          >> /home/$UsuarioDaemon/.local/share/applications/raven.desktop
+             mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
+             echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
+             echo "Name=Raven GUI"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
+             echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/raven-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
+             echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
+             echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
+             echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
+             #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
 
           ## Autoejecución gráfica de Ravencoin
 
              echo ""
              echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."
              echo ""
-             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-             echo "[Desktop Entry]"                                                  > /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Name=Raven GUI"                                                  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Type=Application"                                                >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Exec=/home/$UsuarioDaemon/scripts/c-scripts/raven-qt-iniciar.sh" >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Terminal=false"                                                  >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
-             echo "Hidden=false"                                                    >> /home/$UsuarioDaemon/.config/autostart/raven.desktop
+             mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/raven.desktop
+             echo "Name=Raven GUI"                                                  >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
+             echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/raven-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
+             echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
+             echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
 
           ## Reparación de permisos
 
-             chmod +x /home/$UsuarioDaemon/CoresCripto/RVN/bin/*
-             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+             chmod +x /home/$UsuarioNoRoot/Cryptos/RVN/bin/*
+             chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
           ## Parar el daemon
-             chmod +x /home/$UsuarioDaemon/scripts/c-scripts/raven-daemon-parar.sh
-             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/c-scripts/raven-daemon-parar.sh"
+             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/raven-daemon-parar.sh
+             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/raven-daemon-parar.sh"
 
         ;;
 
@@ -481,39 +481,39 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Creando carpetas y archivos necesarios para ese usuario..."
           echo ""
-          mkdir -p /home/$UsuarioDaemon/CoresCripto/ARG/ 2> /dev/null
+          mkdir -p /home/$UsuarioNoRoot/Cryptos/ARG/ 2> /dev/null
           ## Archivo argentum.conf
-             mkdir -p /home/$UsuarioDaemon/.argentum/
-             touch /home/$UsuarioDaemon/.argentum/argentum.conf
-             echo "daemon=1"                       > /home/$UsuarioDaemon/.argentum/argentum.conf
-             echo "addnode=31.25.241.224:13580"   >> /home/$UsuarioDaemon/.argentum/argentum.conf
-             echo "addnode=52.27.168.5:13580"     >> /home/$UsuarioDaemon/.argentum/argentum.conf
-             echo "addnode=46.105.63.132:13580"   >> /home/$UsuarioDaemon/.argentum/argentum.conf
-             echo "addnode=85.15.179.171:13580"   >> /home/$UsuarioDaemon/.argentum/argentum.conf
-             echo "addnode=95.79.35.133:13580"    >> /home/$UsuarioDaemon/.argentum/argentum.conf
-             echo "addnode=172.104.110.155:13580" >> /home/$UsuarioDaemon/.argentum/argentum.conf
-          rm -rf /home/$UsuarioDaemon/CoresCripto/ARG/
-          mv /root/SoftInst/Argentumcoin/argentum-$UltVersArgentum/ /home/$UsuarioDaemon/CoresCripto/ARG/
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
-          find /home/$UsuarioDaemon -type d -exec chmod 775 {} \;
-          find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
-          find /home/$UsuarioDaemon/CoresCripto/ARG/bin -type f -exec chmod +x {} \;
+             mkdir -p /home/$UsuarioNoRoot/.argentum/
+             touch /home/$UsuarioNoRoot/.argentum/argentum.conf
+             echo "daemon=1"                       > /home/$UsuarioNoRoot/.argentum/argentum.conf
+             echo "addnode=31.25.241.224:13580"   >> /home/$UsuarioNoRoot/.argentum/argentum.conf
+             echo "addnode=52.27.168.5:13580"     >> /home/$UsuarioNoRoot/.argentum/argentum.conf
+             echo "addnode=46.105.63.132:13580"   >> /home/$UsuarioNoRoot/.argentum/argentum.conf
+             echo "addnode=85.15.179.171:13580"   >> /home/$UsuarioNoRoot/.argentum/argentum.conf
+             echo "addnode=95.79.35.133:13580"    >> /home/$UsuarioNoRoot/.argentum/argentum.conf
+             echo "addnode=172.104.110.155:13580" >> /home/$UsuarioNoRoot/.argentum/argentum.conf
+          rm -rf /home/$UsuarioNoRoot/Cryptos/ARG/
+          mv /root/SoftInst/Argentumcoin/argentum-$UltVersArgentum/ /home/$UsuarioNoRoot/Cryptos/ARG/
+          chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
+          find /home/$UsuarioNoRoot -type d -exec chmod 775 {} \;
+          find /home/$UsuarioNoRoot -type f -exec chmod 664 {} \;
+          find /home/$UsuarioNoRoot/Cryptos/ARG/bin -type f -exec chmod +x {} \;
           ## Denegar el acceso a la carpeta a los otros usuarios del sistema
-             #find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
-             #find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
+             #find /home/$UsuarioNoRoot -type d -exec chmod 750 {} \;
+             #find /home/$UsuarioNoRoot -type f -exec chmod 664 {} \;
 
           echo ""
           echo "  Arrancando argentumd..."
           echo ""
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/CoresCripto/ARG/bin/argentumd"
+          su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/ARG/bin/argentumd"
           sleep 5
-          su $UsuarioDaemon -c "/home/$UsuarioDaemon/CoresCripto/ARG/bin/argentum-cli getnewaddress" > /home/$UsuarioDaemon/pooladdress-arg.txt
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/pooladdress-arg.txt
+          su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/ARG/bin/argentum-cli getnewaddress" > /home/$UsuarioNoRoot/pooladdress-arg.txt
+          chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/pooladdress-arg.txt
           echo ""
           echo "  La dirección para recibir argentum es:"
           echo ""
-          cat /home/$UsuarioDaemon/pooladdress-arg.txt
-          DirCartARG=$(cat /home/$UsuarioDaemon/pooladdress-arg.txt)
+          cat /home/$UsuarioNoRoot/pooladdress-arg.txt
+          DirCartARG=$(cat /home/$UsuarioNoRoot/pooladdress-arg.txt)
           echo ""
 
           ## Autoejecución de Argentum al iniciar el sistema
@@ -521,45 +521,45 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              echo "  Agregando argentumd a los ComandosPostArranque..."
              echo ""
-             echo "chmod +x /home/$UsuarioDaemon/scripts/c-scripts/argentum-daemon-iniciar.sh"
-             echo "su "$UsuarioDaemon" -c '/home/"$UsuarioDaemon"/scripts/c-scripts/argentum-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+             echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/argentum-daemon-iniciar.sh"
+             echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/argentum-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
           ## Icono de lanzamiento en el menú gráfico
 
              echo ""
              echo "  Agregando la aplicación gráfica al menú..."
              echo ""
-             mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
-             echo "[Desktop Entry]"                                                     > /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
-             echo "Name=Argentum GUI"                                                  >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
-             echo "Type=Application"                                                   >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
-             echo "Exec=/home/$UsuarioDaemon/scripts/c-scripts/argentum-qt-iniciar.sh" >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
-             echo "Terminal=false"                                                     >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
-             echo "Hidden=false"                                                       >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
-             echo "Categories=Cryptos"                                                 >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
-             #echo "Icon="                                                             >> /home/$UsuarioDaemon/.local/share/applications/argentum.desktop
+             mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
+             echo "[Desktop Entry]"                                                     > /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
+             echo "Name=Argentum GUI"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
+             echo "Type=Application"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/argentum-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
+             echo "Terminal=false"                                                     >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
+             echo "Hidden=false"                                                       >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
+             echo "Categories=Cryptos"                                                 >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
+             #echo "Icon="                                                             >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
 
           ## Autoejecución gráfica de Argentum
 
              echo ""
              echo "  Creando el archivo de autoejecución de argentum-qt para escritorio..."
              echo ""
-             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-             echo "[Desktop Entry]"                                                     > /home/$UsuarioDaemon/.config/autostart/argentum.desktop
-             echo "Name=Argentum GUI"                                                  >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
-             echo "Type=Application"                                                   >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
-             echo "Exec=/home/$UsuarioDaemon/scripts/c-scripts/argentum-qt-iniciar.sh" >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
-             echo "Terminal=false"                                                     >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
-             echo "Hidden=false"                                                       >> /home/$UsuarioDaemon/.config/autostart/argentum.desktop
+             mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                                     > /home/$UsuarioNoRoot/.config/autostart/argentum.desktop
+             echo "Name=Argentum GUI"                                                  >> /home/$UsuarioNoRoot/.config/autostart/argentum.desktop
+             echo "Type=Application"                                                   >> /home/$UsuarioNoRoot/.config/autostart/argentum.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/argentum-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/argentum.desktop
+             echo "Terminal=false"                                                     >> /home/$UsuarioNoRoot/.config/autostart/argentum.desktop
+             echo "Hidden=false"                                                       >> /home/$UsuarioNoRoot/.config/autostart/argentum.desktop
 
           ## Reparación de permisos
 
-             chmod +x /home/$UsuarioDaemon/CoresCripto/ARG/bin/*
-             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+             chmod +x /home/$UsuarioNoRoot/Cryptos/ARG/bin/*
+             chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
           ## Parar el daemon
-             chmod +x /home/$UsuarioDaemon/scripts/c-scripts/argentum-daemon-parar.sh
-             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/c-scripts/argentum-daemon-parar.sh"
+             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/argentum-daemon-parar.sh
+             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/argentum-daemon-parar.sh"
         ;;
 
         7)
@@ -605,29 +605,29 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Preparando la carpeta final..."
           echo ""
-          mkdir -p /home/$UsuarioDaemon/CoresCripto/XMR/bin/ 2> /dev/null
-          find /root/SoftInst/Monerocoin/ -type d -name monero* -exec cp -r {}/. /home/$UsuarioDaemon/CoresCripto/XMR/bin/ \;
+          mkdir -p /home/$UsuarioNoRoot/Cryptos/XMR/bin/ 2> /dev/null
+          find /root/SoftInst/Monerocoin/ -type d -name monero* -exec cp -r {}/. /home/$UsuarioNoRoot/Cryptos/XMR/bin/ \;
           rm -rf /root/SoftInst/Monerocoin/*
-          mkdir -p /home/$UsuarioDaemon/.config/monero-project/ 2> /dev/null
-          echo "[General]"                                       > /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "account_name=$UsuarioDaemon"                    >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "askPasswordBeforeSending=true"                  >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "autosave=true"                                  >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "autosaveMinutes=10"                             >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "blackTheme=true"                                >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "blockchainDataDir=/home/$UsuarioDaemon/.monero" >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "checkForUpdates=true"                           >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "customDecorations=true"                         >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "fiatPriceEnabled=true"                          >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "fiatPriceProvider=kraken"                       >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "language=Espa\xf1ol"                            >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "language_wallet=Espa\xf1ol"                     >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "locale=es_ES"                                   >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "lockOnUserInActivity=true"                      >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "lockOnUserInActivityInterval=1"                 >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "transferShowAdvanced=true"                      >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "useRemoteNode=false"                            >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
-          echo "walletMode=2"                                   >> /home/$UsuarioDaemon/.config/monero-project/monero-core.conf
+          mkdir -p /home/$UsuarioNoRoot/.config/monero-project/ 2> /dev/null
+          echo "[General]"                                       > /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "account_name=$UsuarioNoRoot"                    >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "askPasswordBeforeSending=true"                  >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "autosave=true"                                  >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "autosaveMinutes=10"                             >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "blackTheme=true"                                >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "blockchainDataDir=/home/$UsuarioNoRoot/.monero" >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "checkForUpdates=true"                           >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "customDecorations=true"                         >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "fiatPriceEnabled=true"                          >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "fiatPriceProvider=kraken"                       >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "language=Espa\xf1ol"                            >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "language_wallet=Espa\xf1ol"                     >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "locale=es_ES"                                   >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "lockOnUserInActivity=true"                      >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "lockOnUserInActivityInterval=1"                 >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "transferShowAdvanced=true"                      >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "useRemoteNode=false"                            >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+          echo "walletMode=2"                                   >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
 
           echo ""
           echo "  Instalando paquetes necesarios para ejecutar la cartera..."
@@ -645,45 +645,45 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              echo "  Agregando monerod a los ComandosPostArranque..."
              echo ""
-             echo "chmod +x /home/$UsuarioDaemon/scripts/c-scripts/monero-daemon-iniciar"
-             echo "su $UsuarioDaemon -c '/home/"$UsuarioDaemon"/scripts/c-scripts/monero-daemon-iniciar'" >> /root/scripts/ComandosPostArranque.sh
+             echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/monero-daemon-iniciar"
+             echo "su $UsuarioNoRoot -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/monero-daemon-iniciar'" >> /root/scripts/ComandosPostArranque.sh
 
           ## Icono de lanzamiento en el menú gráfico
 
              echo ""
              echo "  Agregando la aplicación gráfica al menú..."
              echo ""
-             mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
-             echo "[Desktop Entry]"                                                    > /home/$UsuarioDaemon/.local/share/applications/monero.desktop
-             echo "Name=Monero GUI"                                                   >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
-             echo "Type=Application"                                                  >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
-             echo "Exec=/home/$UsuarioDaemon/scripts/c-scripts/monero-gui-iniciar.sh" >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
-             echo "Terminal=false"                                                    >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
-             echo "Hidden=false"                                                      >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
-             echo "Categories=Cryptos"                                                >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
-             #echo "Icon="                                                            >> /home/$UsuarioDaemon/.local/share/applications/monero.desktop
+             mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
+             echo "[Desktop Entry]"                                                    > /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+             echo "Name=Monero GUI"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+             echo "Type=Application"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/monero-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+             echo "Terminal=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+             echo "Hidden=false"                                                      >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+             echo "Categories=Cryptos"                                                >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+             #echo "Icon="                                                            >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
 
           ## Autoejecución gráfica de monero
 
              echo ""
              echo "  Creando el archivo de autoejecución de monero-wallet-gui para el escritorio..."
              echo ""
-             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-             echo "[Desktop Entry]"                                                    > /home/$UsuarioDaemon/.config/autostart/monero.desktop
-             echo "Name=Monero GUI"                                                   >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
-             echo "Type=Application"                                                  >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
-             echo "Exec=/home/$UsuarioDaemon/scripts/c-scripts/monero-gui-iniciar.sh" >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
-             echo "Terminal=false"                                                    >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
-             echo "Hidden=false"                                                      >> /home/$UsuarioDaemon/.config/autostart/monero.desktop
+             mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                                    > /home/$UsuarioNoRoot/.config/autostart/monero.desktop
+             echo "Name=Monero GUI"                                                   >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
+             echo "Type=Application"                                                  >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/monero-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
+             echo "Terminal=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
+             echo "Hidden=false"                                                      >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
 
           ## Reparación de permisos
 
-             chmod +x /home/$UsuarioDaemon/CoresCripto/XMR/bin/*
-             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+             chmod +x /home/$UsuarioNoRoot/Cryptos/XMR/bin/*
+             chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
           ## Parar el daemon
-             chmod +x /home/$UsuarioDaemon/scripts/c-scripts/monero-daemon-parar.sh
-             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/c-scripts/monero-daemon-parar.sh"
+             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/monero-daemon-parar.sh
+             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/monero-daemon-parar.sh"
 
         ;;
 
@@ -724,7 +724,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                apt-get -y install binutils
                echo ""
              fi
-          ar x /root/SoftInst/Chiacoin/chia-blockchain.deb
+          ar xv /root/SoftInst/Chiacoin/chia-blockchain.deb
           rm -rf /root/SoftInst/Chiacoin/debian-binary
           rm -rf /root/SoftInst/Chiacoin/control.tar.xz
           ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
@@ -736,7 +736,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                apt-get -y install tar
                echo ""
              fi
-          tar -xf /root/SoftInst/Chiacoin/data.tar.xz
+          tar -xfv /root/SoftInst/Chiacoin/data.tar.xz
           rm -rf /root/SoftInst/Chiacoin/data.tar.xz
           echo ""
           echo "  Instalando dependencias necesarias para ejecutar el core de Chia..."
@@ -760,50 +760,50 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #echo "Para ver que archivos instaló el paquete, ejecuta:"
           #echo ""
           #echo "dpkg-deb -c /root/SoftInst/Chiacoin/chia-blockchain.deb"
-          mkdir -p /home/$UsuarioDaemon/CoresCripto/XCH/ 2> /dev/null
-          rm -rf /home/$UsuarioDaemon/CoresCripto/XCH/*
-          mv /root/SoftInst/Chiacoin/usr/lib/chia-blockchain/ /home/$UsuarioDaemon/CoresCripto/XCH/bin/
+          mkdir -p /home/$UsuarioNoRoot/Cryptos/XCH/ 2> /dev/null
+          rm -rf /home/$UsuarioNoRoot/Cryptos/XCH/*
+          mv /root/SoftInst/Chiacoin/usr/lib/chia-blockchain/ /home/$UsuarioNoRoot/Cryptos/XCH/bin/
           rm -rf /root/SoftInst/Chiacoin/usr/
-          #mkdir -p /home/$UsuarioDaemon/.config/Chia Blockchain/ 2> /dev/null
-          #echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > /home/$UsuarioDaemon/.config/Chia Blockchain/Preferences
+          #mkdir -p /home/$UsuarioNoRoot/.config/Chia Blockchain/ 2> /dev/null
+          #echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > /home/$UsuarioNoRoot/.config/Chia Blockchain/Preferences
 
           ## Icono de lanzamiento en el menú gráfico
 
              echo ""
              echo "  Agregando la aplicación gráfica al menú..."
              echo ""
-             mkdir -p /home/$UsuarioDaemon/.local/share/applications/ 2> /dev/null
-             echo "[Desktop Entry]"                                                 > /home/$UsuarioDaemon/.local/share/applications/chia.desktop
-             echo "Name=Chia GUI"                                                  >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
-             echo "Type=Application"                                               >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
-             echo "Exec=/home/$UsuarioDaemon/scipts/c-scripts/chia-gui-iniciar.sh" >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
-             echo "Terminal=false"                                                 >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
-             echo "Hidden=false"                                                   >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
-             echo "Categories=Cryptos"                                             >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
-             #echo "Icon="                                                         >> /home/$UsuarioDaemon/.local/share/applications/chia.desktop
+             mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
+             echo "[Desktop Entry]"                                                 > /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+             echo "Name=Chia GUI"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+             echo "Type=Application"                                               >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scipts/c-scripts/chia-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+             echo "Terminal=false"                                                 >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+             echo "Hidden=false"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+             echo "Categories=Cryptos"                                             >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+             #echo "Icon="                                                         >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
 
           ## Autoejecución de chia
 
              echo ""
              echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
              echo ""
-             mkdir -p /home/$UsuarioDaemon/.config/autostart/ 2> /dev/null
-             echo "[Desktop Entry]"                                                  > /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Name=Chia GUI"                                                   >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Type=Application"                                                >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Exec=/home/$UsuarioDaemon/scripts/c-scripts/chia-gui-iniciar.sh" >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Terminal=false"                                                  >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
-             echo "Hidden=false"                                                    >> /home/$UsuarioDaemon/.config/autostart/chia.desktop
+             mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
+             echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/chia.desktop
+             echo "Name=Chia GUI"                                                   >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
+             echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/chia-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
+             echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
+             echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
 
           ## Reparación de permisos
 
-             chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
-             chown root:root /home/$UsuarioDaemon/CoresCripto/XCH/bin/chrome-sandbox
-             chmod 4755 /home/$UsuarioDaemon/CoresCripto/XCH/bin/chrome-sandbox
+             chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
+             chown root:root /home/$UsuarioNoRoot/Cryptos/XCH/bin/chrome-sandbox
+             chmod 4755 /home/$UsuarioNoRoot/Cryptos/XCH/bin/chrome-sandbox
 
           ## Parar el daemon
-             chmod +x /home/$UsuarioDaemon/scripts/c-scripts/chia-daemon-parar.sh
-             su $UsuarioDaemon -c "/home/$UsuarioDaemon/scripts/c-scripts/chia-daemon-parar.sh"
+             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/chia-daemon-parar.sh
+             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/chia-daemon-parar.sh"
 
         ;;
 
@@ -979,22 +979,22 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${ColorVerde}-------------------------${FinColor}"
           echo ""
 
-          chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/
+          chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/
 
           ## Denegar a los otros usuarios del sistema el acceso a la carpeta del usuario 
-             find /home/$UsuarioDaemon -type d -exec chmod 750 {} \;
-             find /home/$UsuarioDaemon -type f -exec chmod 664 {} \;
+             find /home/$UsuarioNoRoot -type d -exec chmod 750 {} \;
+             find /home/$UsuarioNoRoot -type f -exec chmod 664 {} \;
 
-          find /home/$UsuarioDaemon/CoresCripto/LTC/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioDaemon/CoresCripto/RVN/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioDaemon/CoresCripto/ARG/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioDaemon/CoresCripto/XMR/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioDaemon/CoresCripto/XCH/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioDaemon/ -type f -iname "*.sh" -exec chmod +x {} \;
+          find /home/$UsuarioNoRoot/Cryptos/LTC/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioNoRoot/Cryptos/RVN/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioNoRoot/Cryptos/ARG/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioNoRoot/Cryptos/XMR/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioNoRoot/Cryptos/XCH/bin/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
 
-          ## Reparar permisos para pemitir la ejecución de la cartera de Chia
-             chown root:root /home/$UsuarioDaemon/CoresCripto/XCH/bin/chrome-sandbox
-             chmod 4755 /home/$UsuarioDaemon/CoresCripto/XCH/bin/chrome-sandbox
+          ## Reparar permisos para permitir la ejecución de la cartera de Chia
+             chown root:root /home/$UsuarioNoRoot/Cryptos/XCH/bin/chrome-sandbox
+             chmod 4755 /home/$UsuarioNoRoot/Cryptos/XCH/bin/chrome-sandbox
 
         ;;
 
