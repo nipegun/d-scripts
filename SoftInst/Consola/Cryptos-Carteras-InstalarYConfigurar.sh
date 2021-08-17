@@ -888,6 +888,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           ## Mover la carpeta de messenger a la raíz de CRP
              mv /root/Cryptos/CRP/opt/utopia/* /root/Cryptos/CRP/
+             mkdir -p /root/Cryptos/CRP/container/
 
           ## Crear icono para el menu gráfico
              rm -rf /usr/share/applications/utopia.desktop 2> /dev/null
