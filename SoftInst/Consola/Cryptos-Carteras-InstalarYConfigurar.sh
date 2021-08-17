@@ -892,6 +892,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Crear icono para el menu gráfico
              rm -rf /usr/share/applications/utopia.desktop 2> /dev/null
              rm -rf /root/.local/share/applications/utopia.desktop 2> /dev/null
+             mkdir -p /root/.local/share/applications/ 2> /dev/null
              mv /root/Cryptos/CRP/usr/share/applications/utopia.desktop    /root/.local/share/applications/
              mv /root/Cryptos/CRP/usr/share/pixmaps/utopia.png             /root/Cryptos/CRP/messenger/
              sed -i -e 's|/usr/share/pixmaps/utopia.png|/root/Cryptos/CRP/messenger/utopia.png|g' /root/.local/share/applications/utopia.desktop
@@ -913,16 +914,16 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              rm -rf /root/Cryptos/CRP/utopia-latest.amd64.deb
 
           ## Crear el archivo de auto-ejecución gráfica
-             echo ""
-             echo "  Creando el archivo de auto-ejecución gráfica..."
-             echo ""
-             mkdir -p /root/.config/autostart/ 2> /dev/null
-             echo "[Desktop Entry]"                                           > /root/.config/autostart/utopia.desktop
-             echo "Name=utopia"                                              >> /root/.config/autostart/utopia.desktop
-             echo "Type=Application"                                         >> /root/.config/autostart/utopia.desktop
-             echo 'Exec=sh -c "/root/Cryptos/CRP/messenger/utopia --url %u"' >> /root/.config/autostart/utopia.desktop
-             echo "Terminal=false"                                           >> /root/.config/autostart/utopia.desktop
-             echo "Hidden=false"                                             >> /root/.config/autostart/utopia.desktop
+             #echo ""
+             #echo "  Creando el archivo de auto-ejecución gráfica..."
+             #echo ""
+             #mkdir -p /root/.config/autostart/ 2> /dev/null
+             #echo "[Desktop Entry]"                                           > /root/.config/autostart/utopia.desktop
+             #echo "Name=utopia"                                              >> /root/.config/autostart/utopia.desktop
+             #echo "Type=Application"                                         >> /root/.config/autostart/utopia.desktop
+             #echo 'Exec=sh -c "/root/Cryptos/CRP/messenger/utopia --url %u"' >> /root/.config/autostart/utopia.desktop
+             #echo "Terminal=false"                                           >> /root/.config/autostart/utopia.desktop
+             #echo "Hidden=false"                                             >> /root/.config/autostart/utopia.desktop
 
         ;;
 
