@@ -127,3 +127,13 @@ echo ""
    #echo 'Exec=sh -c "/root/Cryptos/CRP/messenger/utopia --url %u"' >> /root/.config/autostart/utopia.desktop
    #echo "Terminal=false"                                           >> /root/.config/autostart/utopia.desktop
    #echo "Hidden=false"                                             >> /root/.config/autostart/utopia.desktop
+
+## Reparar permisos
+   echo ""
+   echo "  Reparando permisos..."
+   echo ""
+   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
+   ## Denegar a los otros usuarios del sistema el acceso a la carpeta del usuario 
+      find /home/$UsuarioNoRoot -type d -exec chmod 750 {} \;
+   find /home/$UsuarioNoRoot/                             -type f -iname "*.sh" -exec chmod +x {} \;
+
