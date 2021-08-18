@@ -987,16 +987,16 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              find /home/$UsuarioNoRoot -type d -exec chmod 750 {} \;
              find /home/$UsuarioNoRoot -type f -exec chmod 664 {} \;
 
-          find /home/$UsuarioNoRoot/Cryptos/LTC/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioNoRoot/Cryptos/RVN/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioNoRoot/Cryptos/ARG/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioNoRoot/Cryptos/XMR/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioNoRoot/Cryptos/XCH/bin/ -type f -exec chmod +x {} \;
-          find /home/$UsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
+          find /home/$UsuarioNoRoot/Cryptos/LTC/bin/             -type f -exec chmod +x {} \;
+          find /home/$UsuarioNoRoot/Cryptos/RVN/bin/             -type f -exec chmod +x {} \;
+          find /home/$UsuarioNoRoot/Cryptos/ARG/bin/             -type f -exec chmod +x {} \;
+          find /home/$UsuarioNoRoot/Cryptos/XMR/bin/             -type f -exec chmod +x {} \;
+          find /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/ -type f -exec chmod +x {} \;
+          find /home/$UsuarioNoRoot/                             -type f -iname "*.sh" -exec chmod +x {} \;
 
           ## Reparar permisos para permitir la ejecución de la cartera de Chia
-             chown root:root /home/$UsuarioNoRoot/Cryptos/XCH/bin/chrome-sandbox
-             chmod 4755 /home/$UsuarioNoRoot/Cryptos/XCH/bin/chrome-sandbox
+             chown root:root /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
+             chmod 4755 /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
 
         ;;
 
