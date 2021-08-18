@@ -689,9 +689,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         8)
 
           echo ""
-          echo -e "${ColorVerde}------------------------------------${FinColor}"
-          echo -e "${ColorVerde}  Instalando la cartera de chia...${FinColor}"
-          echo -e "${ColorVerde}------------------------------------${FinColor}"
+          echo -e "${ColorVerde}---------------------------------------------------------------${FinColor}"
+          echo -e "${ColorVerde}  Instalando la cadena de bloques de chia y sus utilidades...${FinColor}"
+          echo -e "${ColorVerde}---------------------------------------------------------------${FinColor}"
           echo ""
 
           ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
@@ -704,13 +704,13 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                echo ""
              fi
 
-          mkdir -p /root/SoftInst/Chiacoin/ 2> /dev/null
-          rm -rf /root/SoftInst/Chiacoin/*
-          cd /root/SoftInst/Chiacoin/
+          mkdir -p /root/SoftInst/Cryptos/XCH/ 2> /dev/null
+          rm -rf /root/SoftInst/Cryptos/XCH/*
+          cd /root/SoftInst/Cryptos/XCH/
           echo ""
           echo "  Descargando el paquete .deb de la instalación de core de Chia..."
           echo ""
-          wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Chiacoin/chia-blockchain.deb
+          wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
           echo ""
           echo "  Extrayendo los archivos de dentro del paquete .deb..."
           echo ""
@@ -723,9 +723,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                apt-get -y install binutils
                echo ""
              fi
-          ar xv /root/SoftInst/Chiacoin/chia-blockchain.deb
-          rm -rf /root/SoftInst/Chiacoin/debian-binary
-          rm -rf /root/SoftInst/Chiacoin/control.tar.xz
+          ar xv /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+          rm -rf /root/SoftInst/Cryptos/XCH/debian-binary
+          rm -rf /root/SoftInst/Cryptos/XCH/control.tar.xz
           ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                echo ""
@@ -735,8 +735,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                apt-get -y install tar
                echo ""
              fi
-          tar -xfv /root/SoftInst/Chiacoin/data.tar.xz
-          rm -rf /root/SoftInst/Chiacoin/data.tar.xz
+          tar -xfv /root/SoftInst/Cryptos/XCH/data.tar.xz
+          rm -rf /root/SoftInst/Cryptos/XCH/data.tar.xz
           echo ""
           echo "  Instalando dependencias necesarias para ejecutar el core de Chia..."
           echo ""
@@ -754,15 +754,15 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           apt-get -y install trash-cli
           apt-get -y install libglib2.0-bin
           apt-get -y install gvfs-bin
-          #dpkg -i /root/SoftInst/Chiacoin/chia-blockchain.deb
+          #dpkg -i /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
           #echo ""
           #echo "Para ver que archivos instaló el paquete, ejecuta:"
           #echo ""
-          #echo "dpkg-deb -c /root/SoftInst/Chiacoin/chia-blockchain.deb"
+          #echo "dpkg-deb -c /root/SoftInst/Cryptos/XCH/chia-blockchain.deb"
           mkdir -p /home/$UsuarioNoRoot/Cryptos/XCH/ 2> /dev/null
-          rm -rf /home/$UsuarioNoRoot/Cryptos/XCH/*
-          mv /root/SoftInst/Chiacoin/usr/lib/chia-blockchain/ /home/$UsuarioNoRoot/Cryptos/XCH/bin/
-          rm -rf /root/SoftInst/Chiacoin/usr/
+          rm -rf /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/
+          mv /root/SoftInst/Cryptos/XCH/usr/lib/chia-blockchain/ /home/$UsuarioNoRoot/Cryptos/XCH/bin/
+          rm -rf /root/SoftInst/Cryptos/XCH/usr/
           #mkdir -p /home/$UsuarioNoRoot/.config/Chia Blockchain/ 2> /dev/null
           #echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > /home/$UsuarioNoRoot/.config/Chia Blockchain/Preferences
 
@@ -797,8 +797,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ## Reparación de permisos
 
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
-             chown root:root /home/$UsuarioNoRoot/Cryptos/XCH/bin/chrome-sandbox
-             chmod 4755 /home/$UsuarioNoRoot/Cryptos/XCH/bin/chrome-sandbox
+             chown root:root /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
+             chmod 4755 /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
 
           ## Parar el daemon
              chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/chia-daemon-parar.sh
