@@ -142,7 +142,7 @@ chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/
 ## Denegar a los otros usuarios del sistema el acceso a la carpeta del usuario 
    find /home/$UsuarioNoRoot -type d -exec chmod 750 {} \;
    find /home/$UsuarioNoRoot -type f -exec chmod 664 {} \;
-find /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/ -type f -exec chmod +x {} \;
+#find /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/ -type f -exec chmod +x {} \;
 find /home/$UsuarioNoRoot/                             -type f -iname "*.sh" -exec chmod +x {} \;
 ## Reparar permisos para permitir la ejecución de la cartera de Chia
    chown root:root /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
