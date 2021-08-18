@@ -105,12 +105,12 @@ echo ""
    echo ""
    echo "  Borrando archivos sobrantes..."
    echo ""
-   rm -rf /root/SoftInst/Cryptos/CRP/opt/
-   rm -rf /root/SoftInst/Cryptos/CRP/usr/
-   rm -rf /root/SoftInst/Cryptos/CRP/control.tar.gz
-   rm -rf /root/SoftInst/Cryptos/CRP/data.tar.xz
-   rm -rf /root/SoftInst/Cryptos/CRP/debian-binary
-   rm -rf /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
+   #rm -rf /root/SoftInst/Cryptos/CRP/opt/
+   #rm -rf /root/SoftInst/Cryptos/CRP/usr/
+   #rm -rf /root/SoftInst/Cryptos/CRP/control.tar.gz
+   #rm -rf /root/SoftInst/Cryptos/CRP/data.tar.xz
+   #rm -rf /root/SoftInst/Cryptos/CRP/debian-binary
+   #rm -rf /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
 
 ## Crear el archivo de auto-ejecución gráfica
    #echo ""
