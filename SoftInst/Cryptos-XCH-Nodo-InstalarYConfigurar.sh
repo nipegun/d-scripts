@@ -102,14 +102,14 @@ echo ""
 echo "  Agregando la aplicación gráfica al menú..."
 echo ""
 mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-echo "[Desktop Entry]"                                                 > /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-echo "Name=Chia GUI"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-echo "Type=Application"                                               >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-echo "Exec=/home/$UsuarioNoRoot/scipts/c-scripts/chia-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-echo "Terminal=false"                                                 >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-echo "Hidden=false"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-echo "Categories=Cryptos"                                             >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-#echo "Icon="                                                         >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+echo "Name=Chia GUI"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/chia-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+#echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
 
 echo ""
 echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
@@ -136,12 +136,17 @@ chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/chia-daemon-parar.sh
 su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/chia-daemon-parar.sh"
 
 echo ""
+echo "  Instalando los c-scripts..."
+echo ""
+su $UsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
+find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+          
+echo ""
 echo "  Reparando permisos..."
 echo ""
 chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/
 ## Denegar a los otros usuarios del sistema el acceso a la carpeta del usuario 
    find /home/$UsuarioNoRoot -type d -exec chmod 750 {} \;
-   find /home/$UsuarioNoRoot -type f -exec chmod 664 {} \;
 find /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/ -type f -exec chmod +x {} \;
 find /home/$UsuarioNoRoot/                             -type f -iname "*.sh" -exec chmod +x {} \;
 ## Reparar permisos para permitir la ejecución de la cartera de Chia
