@@ -91,6 +91,10 @@ echo ""
    mkdir -p /home/$UsuarioNoRoot/Cryptos/CRP/ 2> /dev/null
    mv /root/SoftInst/Cryptos/CRP/opt/utopia/* /home/$UsuarioNoRoot/Cryptos/CRP/
    mkdir -p /home/$UsuarioNoRoot/Cryptos/CRP/container
+   rm -rf "/home/$UsuarioNoRoot/.local/share/Utopia/Utopia Client/"
+   mkdir -p "/home/$UsuarioNoRoot/.local/share/Utopia/Utopia Client/" 2> /dev/null
+   echo "[General]"          > "/home/$UsuarioNoRoot/.local/share/Utopia/Utopia Client/messenger.ini"
+   echo "languageCode=1034" >> "/home/$UsuarioNoRoot/.local/share/Utopia/Utopia Client/messenger.ini"
 
 ## Crear icono para el menu gráfico
    rm -rf /usr/share/applications/utopia.desktop 2> /dev/null
