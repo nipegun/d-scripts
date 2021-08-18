@@ -16,64 +16,76 @@ FinColor='\033[0m'
 UsuarioNoRoot="NiPeGun"
 
 echo ""
-echo -e "${ColorVerde}----------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}  Instalando o actualizando messenger de Utopia...${FinColor}"
-echo -e "${ColorVerde}----------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}-----------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}  Iniciando el script de instalación del messenger de Utopia...${FinColor}"
+echo -e "${ColorVerde}-----------------------------------------------------------------${FinColor}"
 echo ""
 
-## Crear la carpeta
-   rm -rf /root/Cryptos/CRP/messenger/ 2> /dev/null
-   mkdir -p /root/Cryptos/CRP/ 2> /dev/null
-
-## Descargar la última versión del messenger
+## Crear carpeta de descarga
+   echo ""
+   echo "  Creando carpeta de descarga..."
+   echo ""
+   mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
+   rm -rf /root/SoftInst/Cryptos/CRP/*
+   
+## Descargar y descomprimir todos los archivos
+   echo ""
+   echo "  Descargando el paquete .deb de la instalación..."
+   echo ""
    ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
         echo ""
         echo "  wget no está instalado. Iniciando su instalación..."
         echo ""
-        apt-get -y update
+        apt-get -y update > /dev/null
         apt-get -y install wget
         echo ""
       fi
-   echo ""
-   echo "  Descargando el archivo .deb..."
-   echo ""
-   cd /root/Cryptos/CRP/
+   cd /root/SoftInst/Cryptos/CRP/
    wget https://update.u.is/downloads/linux/utopia-latest.amd64.deb
 
-## Extraer los archivos de dentro del archivo .deb
+   echo ""
+   echo "  Extrayendo los archivos de dentro del paquete .deb..."
+   echo ""
    ## Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
         echo ""
         echo "  binutils no está instalado. Iniciando su instalación..."
         echo ""
-        apt-get -y update
+        apt-get -y update > /dev/null
         apt-get -y install binutils
         echo ""
       fi
-   echo ""
-   echo "  Descomprimiendo el archivo .deb..."
-   echo ""
-   ar xv /root/Cryptos/CRP/utopia-latest.amd64.deb
+   ar xv /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
 
-## Extraer los archivos de dentro del archivo data.tar.xz
+   echo ""
+   echo "  Descomprimiendo el archivo data.tar.xz..."
+   echo ""
    ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
         echo ""
         echo "  tar no está instalado. Iniciando su instalación..."
         echo ""
-        apt-get -y update
+        apt-get -y update > /dev/null
         apt-get -y install tar
         echo ""
       fi
-   echo ""
-   echo "  Descomprimiendo el archivo data.tar.xz..."
-   echo ""
-   tar xfv /root/Cryptos/CRP/data.tar.xz
+   tar xfv /root/SoftInst/Cryptos/CRP/data.tar.xz
    echo ""
 
-## Mover la carpeta de messenger a la raíz de CRP
-   mv /root/Cryptos/CRP/opt/utopia/* /root/Cryptos/CRP/
+## Instalar dependencias
+   echo ""
+   echo "  Instalando dependencias necesarias..."
+   echo ""
+   apt-get -y install mc
+
+## Crear la carpeta para el usuario no root
+   echo ""
+   echo "  Creando la carpeta para el usuario no root..."
+   echo ""
+   rm -rf /root/Cryptos/CRP/messenger/ 2> /dev/null
+   mkdir -p /root/Cryptos/CRP/ 2> /dev/null
+   mv /root/SoftInst/Cryptos/CRP/opt/utopia/* /root/Cryptos/CRP/
    mkdir -p /root/Cryptos/CRP/container/
 
 ## Crear icono para el menu gráfico
@@ -93,12 +105,12 @@ echo ""
    echo ""
    echo "  Borrando archivos sobrantes..."
    echo ""
-   rm -rf /root/Cryptos/CRP/opt/
-   rm -rf /root/Cryptos/CRP/usr/
-   rm -rf /root/Cryptos/CRP/control.tar.gz
-   rm -rf /root/Cryptos/CRP/data.tar.xz
-   rm -rf /root/Cryptos/CRP/debian-binary
-   rm -rf /root/Cryptos/CRP/utopia-latest.amd64.deb
+   rm -rf /root/SoftInst/Cryptos/CRP/opt/
+   rm -rf /root/SoftInst/Cryptos/CRP/usr/
+   rm -rf /root/SoftInst/Cryptos/CRP/control.tar.gz
+   rm -rf /root/SoftInst/Cryptos/CRP/data.tar.xz
+   rm -rf /root/SoftInst/Cryptos/CRP/debian-binary
+   rm -rf /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
 
 ## Crear el archivo de auto-ejecución gráfica
    #echo ""
