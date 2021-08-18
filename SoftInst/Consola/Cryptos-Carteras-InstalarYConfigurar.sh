@@ -726,6 +726,9 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           ar xv /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
           rm -rf /root/SoftInst/Cryptos/XCH/debian-binary
           rm -rf /root/SoftInst/Cryptos/XCH/control.tar.xz
+          echo ""
+          echo "  Descomprimiendo el archivo data.tar.xz"
+          echo ""
           ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                echo ""
@@ -735,7 +738,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
                apt-get -y install tar
                echo ""
              fi
-          tar -xfv /root/SoftInst/Cryptos/XCH/data.tar.xz
+          tar -xvf /root/SoftInst/Cryptos/XCH/data.tar.xz
           rm -rf /root/SoftInst/Cryptos/XCH/data.tar.xz
           echo ""
           echo "  Instalando dependencias necesarias para ejecutar el core de Chia..."
