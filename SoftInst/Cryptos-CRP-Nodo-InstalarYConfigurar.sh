@@ -87,33 +87,33 @@ echo ""
    echo ""
    echo "  Creando la carpeta para el usuario no root..."
    echo ""
-   rm -rf /root/Cryptos/CRP/messenger/ 2> /dev/null
-   mkdir -p /root/Cryptos/CRP/ 2> /dev/null
-   mv /root/SoftInst/Cryptos/CRP/opt/utopia/* /root/Cryptos/CRP/
-   mkdir -p /root/Cryptos/CRP/container/
+   rm -rf /home/$UsuarioNoRoot/Cryptos/CRP/messenger/ 2> /dev/null
+   mkdir -p /home/$UsuarioNoRoot/Cryptos/CRP/ 2> /dev/null
+   mv /root/SoftInst/Cryptos/CRP/opt/utopia/* /home/$UsuarioNoRoot/Cryptos/CRP/
+   mkdir -p /home/$UsuarioNoRoot/Cryptos/CRP/container
 
 ## Crear icono para el menu gráfico
    rm -rf /usr/share/applications/utopia.desktop 2> /dev/null
-   rm -rf /root/.local/share/applications/utopia.desktop 2> /dev/null
-   mkdir -p /root/.local/share/applications/ 2> /dev/null
-   mv /root/Cryptos/CRP/usr/share/applications/utopia.desktop    /root/.local/share/applications/
-   mv /root/Cryptos/CRP/usr/share/pixmaps/utopia.png             /root/Cryptos/CRP/messenger/
-   sed -i -e 's|/usr/share/pixmaps/utopia.png|/root/Cryptos/CRP/messenger/utopia.png|g' /root/.local/share/applications/utopia.desktop
-   sed -i -e 's|/opt/utopia/messenger|/root/Cryptos/CRP/messenger|g'                    /root/.local/share/applications/utopia.desktop
+   rm -rf /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop 2> /dev/null
+   mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
+   mv /root/SoftInst/Cryptos/CRP/usr/share/applications/utopia.desktop                                 /home/$UsuarioNoRoot/.local/share/applications/
+   mv /root/SoftInst/Cryptos/CRP/usr/share/pixmaps/utopia.png                                          /home/$UsuarioNoRoot/Cryptos/CRP/messenger/
+   sed -i -e "s|/usr/share/pixmaps/utopia.png|/home/$UsuarioNoRoot/Cryptos/CRP/messenger/utopia.png|g" /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop
+   sed -i -e "s|/opt/utopia/messenger|/home/$UsuarioNoRoot/Cryptos/CRP/messenger|g"                    /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop
 
 ## Crear icono para auto-ejecución gráfica
-   mkdir -p /root/.config/autostart/ 2> /dev/null
-   cp /root/.local/share/applications/utopia.desktop /root/.config/autostart/utopia.desktop
+   mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
+   cp /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop /home/$UsuarioNoRoot/.config/autostart/utopia.desktop
 
 ## Borrar archivos sobrantes
    echo ""
    echo "  Borrando archivos sobrantes..."
    echo ""
-   #rm -rf /root/SoftInst/Cryptos/CRP/opt/
-   #rm -rf /root/SoftInst/Cryptos/CRP/usr/
-   #rm -rf /root/SoftInst/Cryptos/CRP/control.tar.gz
-   #rm -rf /root/SoftInst/Cryptos/CRP/data.tar.xz
-   #rm -rf /root/SoftInst/Cryptos/CRP/debian-binary
+   rm -rf /root/SoftInst/Cryptos/CRP/opt/
+   rm -rf /root/SoftInst/Cryptos/CRP/usr/
+   rm -rf /root/SoftInst/Cryptos/CRP/control.tar.gz
+   rm -rf /root/SoftInst/Cryptos/CRP/data.tar.xz
+   rm -rf /root/SoftInst/Cryptos/CRP/debian-binary
    #rm -rf /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
 
 ## Crear el archivo de auto-ejecución gráfica
