@@ -763,7 +763,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           #echo ""
           #echo "dpkg-deb -c /root/SoftInst/Cryptos/XCH/chia-blockchain.deb"
           mkdir -p /home/$UsuarioNoRoot/Cryptos/XCH/ 2> /dev/null
-          rm -rf /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/
+          rm -rf /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/ 2> /dev/null
           mv /root/SoftInst/Cryptos/XCH/usr/lib/chia-blockchain/ /home/$UsuarioNoRoot/Cryptos/XCH/
           rm -rf /root/SoftInst/Cryptos/XCH/usr/
           #mkdir -p /home/$UsuarioNoRoot/.config/Chia Blockchain/ 2> /dev/null
