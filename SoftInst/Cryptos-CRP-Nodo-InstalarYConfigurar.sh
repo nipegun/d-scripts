@@ -77,7 +77,11 @@ echo ""
    echo ""
    echo "  Instalando dependencias necesarias..."
    echo ""
-   apt-get -y install mc
+   apt-get -y install libpulse-mainloop-glib0
+   apt-get -y install gstreamer*-plugins-base
+   apt-get -y install gstreamer*-plugins-good
+   apt-get -y install gstreamer*-plugins-bad
+   apt-get -y install gstreamer*-plugins-ugly
 
 ## Crear la carpeta para el usuario no root
    echo ""
