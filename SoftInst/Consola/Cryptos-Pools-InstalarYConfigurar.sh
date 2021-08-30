@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar Pools Cripto en Debian
 #--------------------------------------------------------------------
 
-UsuarioDaemon="pooladmin"
+UsuarioNoRoot="pooladmin"
 DominioPool="localhost"
 VersPHP="7.3"
 VersPostgre="11"
@@ -316,7 +316,7 @@ elif [ $OS_VERS == "10" ]; then
                   mysql -p mpos < /var/www/MPOS/sql/000_base_structure.sql
 
             ## Reparación de permisos
-               chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/ -R
+               chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
           ;;
 
@@ -366,15 +366,15 @@ elif [ $OS_VERS == "10" ]; then
             echo -e "${ColorVerde}-------------------------${FinColor}"
             echo ""
 
-            chown $UsuarioDaemon:$UsuarioDaemon /home/$UsuarioDaemon/
-            find /home/$UsuarioDaemon/$CarpetaSoftLTC/bin/ -type f -exec chmod +x {} \;
-            find /home/$UsuarioDaemon/$CarpetaSoftRVN/bin/ -type f -exec chmod +x {} \;
-            find /home/$UsuarioDaemon/$CarpetaSoftARG/bin/ -type f -exec chmod +x {} \;
-            find /home/$UsuarioDaemon/$CarpetaSoftXMR/bin/ -type f -exec chmod +x {} \;
-            find /home/$UsuarioDaemon/ -type f -iname "*.sh" -exec chmod +x {} \;
+            chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/
+            find /home/$UsuarioNoRoot/$CarpetaSoftLTC/bin/ -type f -exec chmod +x {} \;
+            find /home/$UsuarioNoRoot/$CarpetaSoftRVN/bin/ -type f -exec chmod +x {} \;
+            find /home/$UsuarioNoRoot/$CarpetaSoftARG/bin/ -type f -exec chmod +x {} \;
+            find /home/$UsuarioNoRoot/$CarpetaSoftXMR/bin/ -type f -exec chmod +x {} \;
+            find /home/$UsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
 
-            chown root:root /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
-            chmod 4755 /home/$UsuarioDaemon/$CarpetaSoftXCH/bin/chrome-sandbox
+            chown root:root /home/$UsuarioNoRoot/$CarpetaSoftXCH/bin/chrome-sandbox
+            chmod 4755 /home/$UsuarioNoRoot/$CarpetaSoftXCH/bin/chrome-sandbox
 
           ;;
 
@@ -664,7 +664,7 @@ elif [ $OS_VERS == "10" ]; then
                echo '    "postgres":{'                                          >> /root/miningcore/build/config-rvn.json
                echo '      "host":"127.0.0.1",'                                 >> /root/miningcore/build/config-rvn.json
                echo '      "port":5432,'                                        >> /root/miningcore/build/config-rvn.json
-               echo '      "user":"'"$UsuarioDaemon"'",'                        >> /root/miningcore/build/config-rvn.json
+               echo '      "user":"'"$UsuarioNoRoot"'",'                        >> /root/miningcore/build/config-rvn.json
                echo '      "password":"'"$MiningCoreDBPass"'",'                 >> /root/miningcore/build/config-rvn.json
                echo '      "database":"miningcore"'                             >> /root/miningcore/build/config-rvn.json
                echo '    }'                                                     >> /root/miningcore/build/config-rvn.json
@@ -746,15 +746,15 @@ elif [ $OS_VERS == "10" ]; then
 
                ## Crear rol para la base de datos
                   echo ""
-                  echo "  Creando el rol $UsuarioDaemon..."
+                  echo "  Creando el rol $UsuarioNoRoot..."
                   echo ""
-                  su - postgres -c "createuser --interactive --pwprompt $UsuarioDaemon"
+                  su - postgres -c "createuser --interactive --pwprompt $UsuarioNoRoot"
 
                ## Crear la base de datos con el rol recién creado
                   echo ""
-                  echo "  Creando la base de datos miningcore para el rol $UsuarioDaemon..."
+                  echo "  Creando la base de datos miningcore para el rol $UsuarioNoRoot..."
                   echo ""
-                  su - postgres -c "createdb -O $UsuarioDaemon miningcore"
+                  su - postgres -c "createdb -O $UsuarioNoRoot miningcore"
 
                ## Si se quiere que el propietario de la base de datos sea postgres y no el rol de arriba
                   #su - postgres -c "createuser miningcore -d -P"
@@ -776,11 +776,11 @@ elif [ $OS_VERS == "10" ]; then
                   rm /tmp/miningcore-basic.sql
                   su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb.sql -O /tmp/miningcore-basic.sql"
                   chmod 777 /tmp/miningcore-basic.sql
-                  sed -i -e 's|SET ROLE miningcore;|SET ROLE '$UsuarioDaemon';|g' /tmp/miningcore-basic.sql
+                  sed -i -e 's|SET ROLE miningcore;|SET ROLE '$UsuarioNoRoot';|g' /tmp/miningcore-basic.sql
                   echo ""
-                  echo "  Ingresa la contraseña del rol $UsuarioDaemon:"
+                  echo "  Ingresa la contraseña del rol $UsuarioNoRoot:"
                   echo ""
-                  su - postgres -c "psql -d miningcore -U $UsuarioDaemon -f /tmp/miningcore-basic.sql -W"
+                  su - postgres -c "psql -d miningcore -U $UsuarioNoRoot -f /tmp/miningcore-basic.sql -W"
 
                ## Mejorar a formato multi-pool
                   #su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb_postgresql_11_appendix.sql -O /tmp/miningcore-advanced.sql"
