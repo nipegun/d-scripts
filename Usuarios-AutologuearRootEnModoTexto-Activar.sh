@@ -16,6 +16,8 @@
 # en el archivo
 # /lib/systemd/system/getty@.service
 
+# Esta solución es temporal y puede que se revierta en alguna actualización del sistema
+
 ## Borrar la línea que empieza por ExecStart
    sed -i '/^ExecStart/d' /lib/systemd/system/getty@.service
 ## Reemplazar la línea Type=idle por la línea de ejecucion, un saldo de línea y nuevamente type idle
