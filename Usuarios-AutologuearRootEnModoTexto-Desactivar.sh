@@ -16,7 +16,7 @@
 # en el archivo
 # /lib/systemd/system/getty@.service
 
-sed -i -e 's|ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear -a root %I $TERM|ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear %I $TERM|g' /lib/systemd/system/getty@.service
+# Esta solución es temporal y puede que se revierta en alguna actualización del sistema
 
 ## Borrar la línea que empieza por ExecStart
    sed -i '/^ExecStart/d' /lib/systemd/system/getty@.service
