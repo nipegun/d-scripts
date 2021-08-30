@@ -216,8 +216,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              echo "  Agregando litecoind a los ComandosPostArranque..."
              echo ""
-             echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/litecoin-daemon-iniciar.sh"
-             echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/litecoin-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+             echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/ltc-daemon-iniciar.sh"
+             echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/ltc-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
           ## Icono de lanzamiento en el menú gráfico
 
@@ -228,7 +228,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "[Desktop Entry]"                                                     > /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
              echo "Name=Litecoin GUI"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
              echo "Type=Application"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
-             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/litecoin-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/ltc-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
              echo "Terminal=false"                                                     >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
              echo "Hidden=false"                                                       >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
              echo "Categories=Cryptos"                                                 >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
@@ -243,7 +243,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "[Desktop Entry]"                                                     > /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
              echo "Name=Litecoin GUI"                                                  >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
              echo "Type=Application"                                                   >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
-             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/litecoin-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/ltc-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
              echo "Terminal=false"                                                     >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
              echo "Hidden=false"                                                       >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
 
@@ -253,8 +253,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
           ## Parar el daemon
-             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/litecoin-daemon-parar.sh
-             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/litecoin-daemon-parar.sh"
+             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/ltc-daemon-parar.sh
+             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/ltc-daemon-parar.sh"
 
         ;;
 
@@ -377,8 +377,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              echo "  Agregando ravend a los ComandosPostArranque..."
              echo ""
-             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/raven-daemon-iniciar.sh
-             echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/raven-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh
+             echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
           ## Icono de lanzamiento en el menú gráfico
 
@@ -389,7 +389,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
              echo "Name=Raven GUI"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
              echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
-             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/raven-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/rvn-qt-iniciar.sh"   >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
              echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
              echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
              echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
@@ -404,7 +404,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/raven.desktop
              echo "Name=Raven GUI"                                                  >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
              echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
-             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/raven-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/rvn-qt-iniciar.sh"   >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
              echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
              echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
 
@@ -414,8 +414,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
           ## Parar el daemon
-             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/raven-daemon-parar.sh
-             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/raven-daemon-parar.sh"
+             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/rvn-daemon-parar.sh
+             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/rvn-daemon-parar.sh"
 
         ;;
 
@@ -520,8 +520,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              echo "  Agregando argentumd a los ComandosPostArranque..."
              echo ""
-             echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/argentum-daemon-iniciar.sh"
-             echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/argentum-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+             echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/arg-daemon-iniciar.sh"
+             echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/arg-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
           ## Icono de lanzamiento en el menú gráfico
 
@@ -532,7 +532,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "[Desktop Entry]"                                                     > /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
              echo "Name=Argentum GUI"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
              echo "Type=Application"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
-             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/argentum-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/arg-qt-iniciar.sh"      >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
              echo "Terminal=false"                                                     >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
              echo "Hidden=false"                                                       >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
              echo "Categories=Cryptos"                                                 >> /home/$UsuarioNoRoot/.local/share/applications/argentum.desktop
@@ -547,7 +547,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "[Desktop Entry]"                                                     > /home/$UsuarioNoRoot/.config/autostart/argentum.desktop
              echo "Name=Argentum GUI"                                                  >> /home/$UsuarioNoRoot/.config/autostart/argentum.desktop
              echo "Type=Application"                                                   >> /home/$UsuarioNoRoot/.config/autostart/argentum.desktop
-             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/argentum-qt-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/argentum.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/arg-qt-iniciar.sh"      >> /home/$UsuarioNoRoot/.config/autostart/argentum.desktop
              echo "Terminal=false"                                                     >> /home/$UsuarioNoRoot/.config/autostart/argentum.desktop
              echo "Hidden=false"                                                       >> /home/$UsuarioNoRoot/.config/autostart/argentum.desktop
 
@@ -557,8 +557,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
           ## Parar el daemon
-             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/argentum-daemon-parar.sh
-             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/argentum-daemon-parar.sh"
+             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/arg-daemon-parar.sh
+             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/arg-daemon-parar.sh"
         ;;
 
         7)
@@ -644,8 +644,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo ""
              echo "  Agregando monerod a los ComandosPostArranque..."
              echo ""
-             echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/monero-daemon-iniciar"
-             echo "su $UsuarioNoRoot -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/monero-daemon-iniciar'" >> /root/scripts/ComandosPostArranque.sh
+             echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/xmr-daemon-iniciar"
+             echo "su $UsuarioNoRoot -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/xmr-daemon-iniciar'" >> /root/scripts/ComandosPostArranque.sh
 
           ## Icono de lanzamiento en el menú gráfico
 
@@ -656,7 +656,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "[Desktop Entry]"                                                    > /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
              echo "Name=Monero GUI"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
              echo "Type=Application"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
-             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/monero-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xmr-gui-iniciar.sh"    >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
              echo "Terminal=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
              echo "Hidden=false"                                                      >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
              echo "Categories=Cryptos"                                                >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
@@ -671,7 +671,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "[Desktop Entry]"                                                    > /home/$UsuarioNoRoot/.config/autostart/monero.desktop
              echo "Name=Monero GUI"                                                   >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
              echo "Type=Application"                                                  >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
-             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/monero-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xmr-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
              echo "Terminal=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
              echo "Hidden=false"                                                      >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
 
@@ -681,8 +681,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
           ## Parar el daemon
-             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/monero-daemon-parar.sh
-             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/monero-daemon-parar.sh"
+             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/xmr-daemon-parar.sh
+             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/xmr-daemon-parar.sh"
 
         ;;
 
@@ -778,7 +778,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "[Desktop Entry]"                                                 > /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
              echo "Name=Chia GUI"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
              echo "Type=Application"                                               >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-             echo "Exec=/home/$UsuarioNoRoot/scipts/c-scripts/chia-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scipts/c-scripts/xch-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
              echo "Terminal=false"                                                 >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
              echo "Hidden=false"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
              echo "Categories=Cryptos"                                             >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
@@ -793,7 +793,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/chia.desktop
              echo "Name=Chia GUI"                                                   >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
              echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
-             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/chia-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
+             echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
              echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
              echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
 
@@ -804,8 +804,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              chmod 4755 /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
 
           ## Parar el daemon
-             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/chia-daemon-parar.sh
-             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/chia-daemon-parar.sh"
+             chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh
+             su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh"
 
         ;;
 
