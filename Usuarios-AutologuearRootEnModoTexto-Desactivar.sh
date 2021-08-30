@@ -13,6 +13,8 @@
 # ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear -a root %I $TERM
 # por
 # ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear %I $TERM
+# en el archivo
+# /lib/systemd/system/getty@.service
 
 sed -i -e 's|ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear -a root %I $TERM|ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear %I $TERM|g' /lib/systemd/system/getty@.service
 
