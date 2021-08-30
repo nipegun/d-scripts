@@ -10,11 +10,14 @@
 #-------------------------------------------------------------------------------------------------------
 
 # Se debe reemplazar la línea
-# ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear -a root %I $TERM
+# ExecStart=-/sbin/agetty --noclear -a root %I $TERM
 # por
 # ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear %I $TERM
 # en el archivo
 # /lib/systemd/system/getty@.service
+#
+# Nota:
+# -o '-p -- \\u' es para que pida el password
 
 # Esta solución es temporal y puede que se revierta en alguna actualización del sistema
 
