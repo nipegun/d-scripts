@@ -12,14 +12,17 @@
 # Se debe reemplazar la línea
 # ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear %I $TERM
 # por
-# ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear -a root %I $TERM
+# ExecStart=-/sbin/agetty --noclear -a root %I $TERM
 # en el archivo
 # /lib/systemd/system/getty@.service
+#
+# Nota:
+# -o '-p -- \\u' es para que pida el password
 
 # Esta solución es temporal y puede que se revierta en alguna actualización del sistema
 
 ## Borrar la línea que empieza por ExecStart
    sed -i '/^ExecStart/d' /lib/systemd/system/getty@.service
 ## Reemplazar la línea Type=idle por la línea de ejecucion, un saldo de línea y nuevamente type idle
-   sed -i -e 's|Type=idle|ExecStart=-/sbin/agetty -o '"'-p -- \\\\\\\u'"' --noclear -a root %I $TERM\nType=idle|g' /lib/systemd/system/getty@.service
+   sed -i -e 's|Type=idle|ExecStart=-/sbin/agetty -o --noclear -a root %I $TERM\nType=idle|g' /lib/systemd/system/getty@.service
    
