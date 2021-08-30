@@ -9,5 +9,10 @@
 #  Script de NiPeGun para desactivar el logueo automático del root en modo texto (terminal no gráfico)
 #-------------------------------------------------------------------------------------------------------
 
+# Se debe reemplazar la línea
+# ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear -a root %I $TERM
+# por
+# ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear %I $TERM
+
 sed -i -e 's|ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear -a root %I $TERM|ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear %I $TERM|g' /lib/systemd/system/getty@.service
 
