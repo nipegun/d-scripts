@@ -18,3 +18,8 @@
 
 sed -i -e 's|ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear -a root %I $TERM|ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear %I $TERM|g' /lib/systemd/system/getty@.service
 
+## Borrar la línea que empieza por ExecStart
+   sed -i '/^ExecStart/d' /lib/systemd/system/getty@.service
+## Reemplazar la línea Type=idle por la línea de ejecucion, un saldo de línea y nuevamente type idle
+   sed -i -e 's|Type=idle|ExecStart=-/sbin/agetty -o '"'-p -- \\\\\\\u'"' --noclear %I $TERM\nType=idle|g' /lib/systemd/system/getty@.service
+
