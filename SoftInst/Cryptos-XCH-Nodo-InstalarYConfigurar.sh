@@ -121,33 +121,33 @@ echo ""
    echo "  Agregando la aplicación gráfica al menú..."
    echo ""
    mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   echo "Name=Chia GUI"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/chia-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+   echo "[Desktop Entry]"                                                 > /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+   echo "Name=Chia GUI"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+   echo "Type=Application"                                               >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+   echo "Terminal=false"                                                 >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+   echo "Hidden=false"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+   echo "Categories=Cryptos"                                             >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+   #echo "Icon="                                                         >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
 
 ## Crear el archivo de auto-ehecución
    echo ""
    echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
    echo ""
    mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
-   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/chia.desktop
-   echo "Name=Chia GUI"                                                   >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
-   echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
-   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/chia-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
-   echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
-   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
+   echo "[Desktop Entry]"                                                 > /home/$UsuarioNoRoot/.config/autostart/chia.desktop
+   echo "Name=Chia GUI"                                                  >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
+   echo "Type=Application"                                               >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
+   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
+   echo "Terminal=false"                                                 >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
+   echo "Hidden=false"                                                   >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
 
 ## Parar el daemon
    echo ""
    echo "  Parando el daemon (si es que está activo)..."
    echo ""
-   chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/chia-daemon-parar.sh
-   su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/chia-daemon-parar.sh"
+   chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh
+   su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh"
 
 ## Instalar los c-scripts
    echo ""
