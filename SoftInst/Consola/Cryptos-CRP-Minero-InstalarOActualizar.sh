@@ -130,7 +130,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           ## Borrar el minero ya instalado
              rm -rf /home/$UsuarioNoRoot/Cryptos/CRP/minero/
           ## Mover carpeta de mineros
-             mv /root/Crypto/CRP/minero/ /home/$UsuarioNoRoot/Cryptos/CRP/
+             mv /root/Cryptos/CRP/minero/ /home/$UsuarioNoRoot/Cryptos/CRP/
           ## Modificar la ubicación del ejecutable en el script
              sed -i -e "s|/root/Cryptos/CRP/minero/uam|/home/$UsuarioNoRoot/Cryptos/CRP/minero/uam|g" /home/$UsuarioNoRoot/Cryptos/CRP/minero/Minar.sh
           ## Reparación de permisos
