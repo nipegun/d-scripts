@@ -134,7 +134,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           ## Modificar la ubicación del ejecutable en el script
              sed -i -e "s|/root/Cryptos/CRP/minero/uam|/home/$UsuarioNoRoot/Cryptos/CRP/minero/uam|g" /home/$UsuarioNoRoot/Cryptos/CRP/minero/Minar.sh
           ## Reparación de permisos
-             chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
+             chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R 2> /dev/null
 
         ;;
 
