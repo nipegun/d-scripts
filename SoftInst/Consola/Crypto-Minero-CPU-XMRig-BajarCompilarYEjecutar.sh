@@ -35,10 +35,12 @@ echo ""
 echo ""
 echo "  Descargando el repositorio de XMRig..."
 echo ""
-rm -rf ~/xmrig/
-cd ~
+rm -rf ~/Cryptos/XMR/minero/
+mkdir -p ~/Cryptos/XMR/
+cd ~/Cryptos/XMR/
 git clone https://github.com/xmrig/xmrig.git
-cd xmrig
+mv xmrig minero
+cd minero
 
 echo ""
 echo "  Compilando..."
@@ -79,7 +81,7 @@ echo "  Ejecutando minero con identificador $IdMinero..."
 echo ""
 
 ## Con TLS
-./xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet --tls 
+~/Cryptos/XMR/minero/xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet --tls 
 
 ## Sin TLS
    #./xmrig -o pool.minexmr.com:4444 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet
