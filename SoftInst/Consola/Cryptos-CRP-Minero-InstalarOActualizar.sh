@@ -111,7 +111,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           ## Crear el archivo para minar
              echo '#!/bin/bash'                                                                   > /root/Cryptos/CRP/minero/Minar.sh
              echo ""                                                                             >> /root/Cryptos/CRP/minero/Minar.sh
-             echo 'PubicKey="C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415"'  >> /root/Cryptos/CRP/minero/Minar.sh
+             echo "PublicKey=C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415"   >> /root/Cryptos/CRP/minero/Minar.sh
              echo ""                                                                             >> /root/Cryptos/CRP/minero/Minar.sh
              echo 'echo ""'                                                                      >> /root/Cryptos/CRP/minero/Minar.sh
              echo 'echo "  Ejecutando el minero de Utopia..."'                                   >> /root/Cryptos/CRP/minero/Minar.sh
