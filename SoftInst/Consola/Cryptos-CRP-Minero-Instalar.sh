@@ -115,7 +115,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
              echo 'echo ""'                                                                      >> /root/Cryptos/CRP/minero/Minar.sh
              echo 'echo "  Ejecutando el minero de Utopia..."'                                   >> /root/Cryptos/CRP/minero/Minar.sh
              echo 'echo ""'                                                                      >> /root/Cryptos/CRP/minero/Minar.sh
-             echo "/root/Cryptos/CRP/minero/uam --pk $PublicKey --http [127.0.0.1]:8090 --no-ui" >> /root/Cryptos/CRP/minero/Minar.sh
+             echo '/root/Cryptos/CRP/minero/uam --pk $PublicKey --http [127.0.0.1]:8090 --no-ui' >> /root/Cryptos/CRP/minero/Minar.sh
              chmod +x                                                                               /root/Cryptos/CRP/minero/Minar.sh
         ;;
 
