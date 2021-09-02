@@ -59,7 +59,7 @@ echo ""
    cmake ..
    make -j $(nproc)
 
-mv ~/Cryptos/XMR/xmrig/build/ ~/Cryptos/XMR/xmrig/minero/
+mv ~/Cryptos/XMR/xmrig/build/ ~/Cryptos/XMR/minero/
 
 echo ""
 echo "  Creando ID para el minero..."
