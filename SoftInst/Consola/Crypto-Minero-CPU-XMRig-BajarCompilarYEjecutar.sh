@@ -59,7 +59,9 @@ echo ""
    cmake ..
    make -j $(nproc)
 
-mv ~/Cryptos/XMR/xmrig/build/ ~/Cryptos/XMR/minero/
+## Preparar la carpeta del minero
+   mv ~/Cryptos/XMR/xmrig/build/ ~/Cryptos/XMR/minero/
+   rm -rf ~/Cryptos/XMR/xmrig/
 
 echo ""
 echo "  Creando ID para el minero..."
