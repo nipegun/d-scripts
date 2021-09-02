@@ -39,8 +39,7 @@ rm -rf ~/Cryptos/XMR/minero/
 mkdir -p ~/Cryptos/XMR/
 cd ~/Cryptos/XMR/
 git clone https://github.com/xmrig/xmrig.git
-mv xmrig minero
-cd minero
+cd xmrig
 
 echo ""
 echo "  Compilando..."
@@ -59,6 +58,8 @@ echo ""
    #cmake .. -DWITH_HWLOC=OFF
    cmake ..
    make -j $(nproc)
+
+mv ~/Cryptos/XMR/xmrig/build/ ~/Cryptos/XMR/xmrig/minero/
 
 echo ""
 echo "  Creando ID para el minero..."
