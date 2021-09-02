@@ -58,7 +58,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
 
           ## Crear la carpeta
-             mkdir -p /root/MinerosCrypto/XMR/ 2> /dev/null
+             mkdir -p /root/Cryptos/XMR/minero/ 2> /dev/null
 
         ;;
 
@@ -69,7 +69,8 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
 
           ## Mover carpeta de mineros
-             mv /root/MinerosCrypto/ /home/$UsuarioNoRoot//MinerosCrypto/
+             mkdir -p /home/$UsuarioNoRoot/Cryptos/XMR/ 2> /dev/null
+             mv /root/Cryptos/XMR/minero/ /home/$UsuarioNoRoot/Cryptos/XMR/minero/
           ## Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
@@ -82,7 +83,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
 
           ## Crear la carpeta
-             mkdir -p /root/MinerosCrypto/RVN/ 2> /dev/null
+             mkdir -p /root/Cryptos/RVN/minero/amd/ 2> /dev/null
 
         ;;
 
@@ -93,7 +94,8 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
 
           ## Mover carpeta de mineros
-             mv /root/MinerosCrypto/ /home/$UsuarioNoRoot//MinerosCrypto/
+             mkdir -p /home/$UsuarioNoRoot/Cryptos/RVN/minero/ 2> /dev/null
+             mv /root/Cryptos/RVN/minero/amd/ /home/$UsuarioNoRoot/Cryptos/RVN/minero/amd/
           ## Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
@@ -106,7 +108,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
 
           ## Crear la carpeta
-             mkdir -p /root/MinerosCrypto/RVN/ 2> /dev/null
+             mkdir -p /root/Cryptos/RVN/minero/nvidia/ 2> /dev/null
 
         ;;
 
@@ -117,7 +119,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
 
           ## Mover carpeta de mineros
-             mv /root/MinerosCrypto/ /home/$UsuarioNoRoot//MinerosCrypto/
+             mv /root/Cryptos/RVN/minero/nvidia/ /home/$UsuarioNoRoot/Cryptos/RVN/minero/
           ## Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
