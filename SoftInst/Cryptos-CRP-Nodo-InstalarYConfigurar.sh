@@ -27,7 +27,7 @@ echo ""
    echo ""
    mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
    rm -rf /root/SoftInst/Cryptos/CRP/*
-   
+
 ## Descargar y descomprimir todos los archivos
    echo ""
    echo "  Descargando el paquete .deb de la instalación..."
@@ -137,7 +137,7 @@ echo ""
    echo "  Reparando permisos..."
    echo ""
    chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
-   ## Denegar a los otros usuarios del sistema el acceso a la carpeta del usuario 
+   ## Denegar a los otros usuarios del sistema el acceso a la carpeta del usuario
       find /home/$UsuarioNoRoot -type d -exec chmod 750 {} \;
    find /home/$UsuarioNoRoot/                             -type f -iname "*.sh" -exec chmod +x {} \;
 
