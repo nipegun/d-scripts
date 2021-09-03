@@ -94,17 +94,17 @@ elif [ $OS_VERS == "10" ]; then
   apt-get -y python3-setuptools
   apt-get -y python3-pip
   apt-get -y python3-pytest
-  mkdir /root/CodFuente
-  cd /root/CodFuente
+  mkdir -p /root/SoftInst/ 2> /dev/null
+  cd /root/SoftInst/
   git clone https://github.com/jonasmalacofilho/liquidctl
   cd liquidctl
   python3 setup.py install
   echo ""
-  echo "Instalación terminada. Para ver la ayuda ejecuta..."
+  echo "  Instalación terminada. Para ver la ayuda ejecuta..."
   echo ""
-  echo "liquidctl --help"
+  echo "  liquidctl --help"
   echo ""
-  echo "Mostrando dispositivos compatibles..."
+  echo "  Mostrando dispositivos compatibles..."
   liquidctl list --verbose
   echo "Iniciando comunicación con los dispositivos..."
   liquidctl initialize
