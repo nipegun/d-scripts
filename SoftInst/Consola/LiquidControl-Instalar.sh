@@ -94,6 +94,7 @@ elif [ $OS_VERS == "10" ]; then
   apt-get -y python3-setuptools
   apt-get -y python3-pip
   apt-get -y python3-pytest
+  rm -rf /root/SoftInst/liquidctl/ 2> /dev/null
   mkdir -p /root/SoftInst/ 2> /dev/null
   cd /root/SoftInst/
   git clone https://github.com/jonasmalacofilho/liquidctl
@@ -121,8 +122,35 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
+  apt-get -y update
+  apt-get -y install python3
+  apt-get -y install libusb-1.0-0
+  apt-get -y python3-pkg-resources
+  apt-get -y python3-docopt
+  apt-get -y python3-usb
+  apt-get -y python3-hid
+  apt-get -y python3-smbus
+  apt-get -y python3-setuptools
+  apt-get -y python3-pip
+  apt-get -y python3-pytest
+  rm -rf /root/SoftInst/liquidctl/ 2> /dev/null
+  mkdir -p /root/SoftInst/ 2> /dev/null
+  cd /root/SoftInst/
+  git clone https://github.com/jonasmalacofilho/liquidctl
+  cd liquidctl
+  python3 setup.py install
   echo ""
-  echo "Instalación para Debian 11 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "  Instalación terminada. Para ver la ayuda ejecuta..."
   echo ""
+  echo "  liquidctl --help"
+  echo ""
+  echo "  Mostrando dispositivos compatibles..."
+  liquidctl list --verbose
+  echo "Iniciando comunicación con los dispositivos..."
+  liquidctl initialize
+  echo ""
+  echo "Mostrando estado del dispositivo..."
+  echo ""
+  liquidctl status
 
 fi
