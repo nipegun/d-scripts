@@ -109,15 +109,16 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
                 rm -rf /root/Cryptos/CRP/uam-latest_amd64.deb
 
           ## Crear el archivo para minar
-             echo '#!/bin/bash'                                                                   > /root/Cryptos/CRP/minero/Minar.sh
-             echo ""                                                                             >> /root/Cryptos/CRP/minero/Minar.sh
-             echo "PublicKey=C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415"   >> /root/Cryptos/CRP/minero/Minar.sh
-             echo ""                                                                             >> /root/Cryptos/CRP/minero/Minar.sh
-             echo 'echo ""'                                                                      >> /root/Cryptos/CRP/minero/Minar.sh
-             echo 'echo "  Ejecutando el minero de Utopia..."'                                   >> /root/Cryptos/CRP/minero/Minar.sh
-             echo 'echo ""'                                                                      >> /root/Cryptos/CRP/minero/Minar.sh
-             echo '/root/Cryptos/CRP/minero/uam --pk $PublicKey --http [127.0.0.1]:8090 --no-ui' >> /root/Cryptos/CRP/minero/Minar.sh
-             chmod +x                                                                               /root/Cryptos/CRP/minero/Minar.sh
+             echo '#!/bin/bash'                                                                           > /root/Cryptos/CRP/minero/Minar.sh
+             echo ""                                                                                     >> /root/Cryptos/CRP/minero/Minar.sh
+             echo "PublicKey=C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415"           >> /root/Cryptos/CRP/minero/Minar.sh
+             echo 'IPLocalDelMinero=$(hostname -I)'                                                      >> /root/Cryptos/CRP/minero/Minar.sh
+             echo ""                                                                                     >> /root/Cryptos/CRP/minero/Minar.sh
+             echo 'echo ""'                                                                              >> /root/Cryptos/CRP/minero/Minar.sh
+             echo 'echo "  Ejecutando el minero de Utopia..."'                                           >> /root/Cryptos/CRP/minero/Minar.sh
+             echo 'echo ""'                                                                              >> /root/Cryptos/CRP/minero/Minar.sh
+             echo '/root/Cryptos/CRP/minero/uam --pk $PublicKey --http [$IPLocalDelMinero]:8090 --no-ui' >> /root/Cryptos/CRP/minero/Minar.sh
+             chmod +x                                                                                       /root/Cryptos/CRP/minero/Minar.sh
         ;;
 
         2)
