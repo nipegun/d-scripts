@@ -45,11 +45,14 @@ echo ""
 echo -e "${ColorVerde}  Borrando todos los historiales de comandos...${FinColor}"
 echo ""
 
-  ## Comandos ejecutados por el root
+  ## Comandos ejecutados en bash por el root
      find /root/ -type f -name ".bash_history" -print -exec truncate -s 0 {} \;
 
-  ## Comandos ejecutados por otros usuarios
+  ## Comandos ejecutados en bash por otros usuarios
      find /home/ -type f -name ".bash_history" -print -exec truncate -s 0 {} \;
+
+  ## Comandos ejecutados en Midnight Commander por el root
+     find /root/.local/share/mc/ -type f -name "history" -print -exec truncate -s 0 {} \;
 
   ## Este propio script
      history -c
