@@ -5,9 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar LiquidControl en Debian
-#--------------------------------------------------------------------
+#---------------------------------------------------------------
+#  Script de NiPeGun para activar el logueo como root en Gnome
+#---------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
