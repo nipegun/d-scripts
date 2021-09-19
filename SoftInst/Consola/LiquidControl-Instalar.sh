@@ -86,14 +86,14 @@ elif [ $OS_VERS == "10" ]; then
   apt-get -y update
   apt-get -y install python3
   apt-get -y install libusb-1.0-0
-  apt-get -y python3-pkg-resources
-  apt-get -y python3-docopt
-  apt-get -y python3-usb
-  apt-get -y python3-hid
-  apt-get -y python3-smbus
-  apt-get -y python3-setuptools
-  apt-get -y python3-pip
-  apt-get -y python3-pytest
+  apt-get -y install python3-pkg-resources
+  apt-get -y install python3-docopt
+  apt-get -y install python3-usb
+  apt-get -y install python3-hid
+  apt-get -y install python3-smbus
+  apt-get -y install python3-setuptools
+  apt-get -y install python3-pip
+  apt-get -y install python3-pytest
   rm -rf /root/SoftInst/liquidctl/ 2> /dev/null
   mkdir -p /root/SoftInst/ 2> /dev/null
   cd /root/SoftInst/
@@ -126,14 +126,14 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y update
   apt-get -y install python3
   apt-get -y install libusb-1.0-0
-  apt-get -y python3-pkg-resources
-  apt-get -y python3-docopt
-  apt-get -y python3-usb
-  apt-get -y python3-hid
-  apt-get -y python3-smbus
-  apt-get -y python3-setuptools
-  apt-get -y python3-pip
-  apt-get -y python3-pytest
+  apt-get -y install python3-pkg-resources
+  apt-get -y install python3-docopt
+  apt-get -y install python3-usb
+  apt-get -y install python3-hid
+  apt-get -y install python3-smbus
+  apt-get -y install python3-setuptools
+  apt-get -y install python3-pip
+  apt-get -y install python3-pytest
   rm -rf /root/SoftInst/liquidctl/ 2> /dev/null
   mkdir -p /root/SoftInst/ 2> /dev/null
   cd /root/SoftInst/
