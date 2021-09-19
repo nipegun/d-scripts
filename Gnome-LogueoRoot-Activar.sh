@@ -82,8 +82,10 @@ elif [ $OS_VERS == "10" ]; then
   echo "  Activando el logueo root en Gnome para Debian 10 (Buster)..."
   echo "----------------------------------------------------------------"
   echo ""
-  cp /etc/pam.d/gdm-password /etc/pam.d/gdm-password.bak
-  sed -i -e 's|*root*|#auth required pam_succeed_if.so user != root quiet_success|g' /etc/pam.d/gdm-password
+  ## Hacer copia de seguridad antes de reemplazar
+     cp /etc/pam.d/gdm-password /etc/pam.d/gdm-password.bak
+  ## Reemplazar toda la línea que tenga la palabra root
+     sed -i -e 's|root=.*|#auth required pam_succeed_if.so user != root quiet_success|g' /etc/pam.d/gdm-password
 
 elif [ $OS_VERS == "11" ]; then
 
@@ -92,8 +94,10 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Activando el logueo root en Gnome para Debian 11 (Bullseye)..."
   echo "------------------------------------------------------------------"
   echo ""
-  cp /etc/pam.d/gdm-password /etc/pam.d/gdm-password.bak
-  sed -i -e 's|*root*|#auth required pam_succeed_if.so user != root quiet_success|g' /etc/pam.d/gdm-password
+  ## Hacer copia de seguridad antes de reemplazar
+     cp /etc/pam.d/gdm-password /etc/pam.d/gdm-password.bak
+  ## Reemplazar toda la línea que tenga la palabra root
+     sed -i -e 's|root=.*|#auth required pam_succeed_if.so user != root quiet_success|g' /etc/pam.d/gdm-password
 
 fi
 
