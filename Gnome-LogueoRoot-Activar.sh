@@ -85,7 +85,7 @@ elif [ $OS_VERS == "10" ]; then
   ## Hacer copia de seguridad antes de reemplazar
      cp /etc/pam.d/gdm-password /etc/pam.d/gdm-password.bak
   ## Reemplazar toda la línea que tenga la palabra root
-     sed -i -e 's|*root=.*|#auth required pam_succeed_if.so user != root quiet_success|g' /etc/pam.d/gdm-password
+     sed -i -e 's|root|c#auth required pam_succeed_if.so user != root quiet_success|g' /etc/pam.d/gdm-password
 
 elif [ $OS_VERS == "11" ]; then
 
@@ -97,7 +97,7 @@ elif [ $OS_VERS == "11" ]; then
   ## Hacer copia de seguridad antes de reemplazar
      cp /etc/pam.d/gdm-password /etc/pam.d/gdm-password.bak
   ## Reemplazar toda la línea que tenga la palabra root
-     sed -i -e 's|*root=.*|#auth required pam_succeed_if.so user != root quiet_success|g' /etc/pam.d/gdm-password
+     sed -i -e 's|root|c#auth required pam_succeed_if.so user != root quiet_success|g' /etc/pam.d/gdm-password
 
 fi
 
