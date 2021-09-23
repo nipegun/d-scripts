@@ -83,6 +83,10 @@ echo ""
    apt-get -y install gstreamer*-plugins-bad
    apt-get -y install gstreamer*-plugins-ugly
 
+   #apt-get -y install libxcb-screensaver0
+   #apt-get -y install libqt5xmlpatterns5
+   #apt-get -y install libqt5websockets5
+
 ## Crear la carpeta para el usuario no root
    echo ""
    echo "  Creando la carpeta para el usuario no root..."
