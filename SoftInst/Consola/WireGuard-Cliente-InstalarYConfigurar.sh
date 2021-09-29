@@ -338,8 +338,21 @@ elif [ $OS_VERS == "11" ]; then
   ## Instalar el paquete WireGuard
      apt-get -y update
      apt-get -y install wireguard
-  
-  ## Crear el archivo de configuración
+
+     echo ""
+     echo "  Ingresa la IP o el dominio del servidor al que quieras conectarte y presiona Enter."
+     echo ""
+     echo "  La información se guardará en el archivo /etc/wireguard/wg0.conf"
+     echo "  Si te equivocas, puedes modificar ese archivo a posteriori."
+     echo ""
+     echo "Dirección:"
+     echo ""
+     read IPoDominio
+
+     echo "La IP o dominio que ingresaste es: $IPoDominio"
+     echo ""
+
+     ## Crear el archivo de configuración
      echo "[Interface]"                                  > /etc/wireguard/wg0.conf
      echo "PrivateKey = <Client Private Key>"           >> /etc/wireguard/wg0.conf
      echo "Address = 10.0.0.2/24, fd86:ea04:1115::5/64" >> /etc/wireguard/wg0.conf
@@ -355,6 +368,8 @@ elif [ $OS_VERS == "11" ]; then
      #touch /root/scripts/ComandosPostArranque.sh
      #echo "/root/scripts/ReglasIPTablesWireGuard.sh" >> /root/scripts/ComandosPostArranque.sh
      #chmod +x /root/scripts/ComandosPostArranque.sh
+
+
 
      ## Arrancar wireguard
         wg-quick up wg0
