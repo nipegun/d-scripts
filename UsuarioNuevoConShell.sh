@@ -30,6 +30,15 @@ if [ $# -ne $ArgumentosEsperados ]
     echo ""
     exit $ArgumentosInsuficientes
   else
+    ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+       if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+         echo ""
+         echo "  dialog no está instalado. Iniciando su instalación..."
+         echo ""
+         apt-get -y update > /dev/null
+         apt-get -y install dialog
+         echo ""
+       fi
     cmd=(dialog --checklist "Opciones del script:" 22 76 16)
     options=(1 "Crear el usuario" on
              2 "Crear la carpeta del usuario con permisos estándar usuario" on
