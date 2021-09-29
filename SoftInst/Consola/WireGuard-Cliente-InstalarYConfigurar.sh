@@ -349,6 +349,7 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      read IPoDominio
 
+     echo ""
      echo "La IP o dominio que ingresaste es: $IPoDominio"
      echo ""
 
