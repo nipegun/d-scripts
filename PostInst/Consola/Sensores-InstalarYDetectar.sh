@@ -17,7 +17,7 @@ echo ""
 echo -e "${ColorVerde}  Instalando el paquete sensors...${FinColor}"
 echo ""
 apt-get -y update
-apt-get -y install sensors
+apt-get -y install lm-sensors
 
 echo ""
 echo -e "${ColorVerde}  Instalando el paquete hddtemp...${FinColor}"
