@@ -339,6 +339,16 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y update
      apt-get -y install wireguard
 
+  ## Crear las claves pública y privada del cliente
+     mkdir /root/WireGuard/
+     wg genkey >                                                  /root/WireGuard/WireGuardClientPrivate.key
+     cat /root/WireGuard/WireGuardClientPrivate.key | wg pubkey > /root/WireGuard/WireGuardClientPublic.key
+     chmod 600 /root/WireGuard/WireGuardClientPrivate.key
+
+  ## Agregar la clave privada al archivo de configuración
+     VarClientPrivKey=$(cat /root/WireGuard/WireGuardClientPrivate.key)
+     sed -i -e 's|PrivateKey =|PrivateKey = '$VarClientPrivKey'|g' /etc/wireguard/wg0.conf
+
      echo ""
      echo "  Ingresa la IP o el dominio del servidor al que quieras conectarte y presiona Enter."
      echo ""
@@ -354,9 +364,23 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
 
      ## Crear el archivo de configuración
-     echo "[Interface]"                                  > /etc/wireguard/wg0.conf
-     echo "PrivateKey = <Client Private Key>"           >> /etc/wireguard/wg0.conf
-     echo "Address = 10.0.0.2/24, fd86:ea04:1115::5/64" >> /etc/wireguard/wg0.conf
+        echo "# Datos del cliente"                          > /etc/wireguard/wg0.conf
+        echo "[Interface]"                                 >> /etc/wireguard/wg0.conf
+        echo "# Clave privada del cliente"                 >> /etc/wireguard/wg0.conf
+        echo "PrivateKey = $VarClientPrivKey"              >> /etc/wireguard/wg0.conf
+        echo "# IP deseada por el cliente"                 >> /etc/wireguard/wg0.conf
+        echo "Address = 10.0.0.2/24"                       >> /etc/wireguard/wg0.conf
+        echo ""                                            >> /etc/wireguard/wg0.conf
+        echo "# Datos del servidor"                        >> /etc/wireguard/wg0.conf
+        echo "[Peer]"                                      >> /etc/wireguard/wg0.conf
+        echo "# Clave pública del servidor"                >> /etc/wireguard/wg0.conf
+        echo "PublicKey = $ClavePubServidor"               >> /etc/wireguard/wg0.conf
+        echo "# Lista de control de acceso"                >> /etc/wireguard/wg0.conf
+        echo "AllowedIPs = 192.168.10.0/24"                >> /etc/wireguard/wg0.conf
+        echo " Dirección IP pública y puerto del servidor" >> /etc/wireguard/wg0.conf
+        echo "Endpoint = $IPPubServ"                       >> /etc/wireguard/wg0.conf #172.105.112.120:51194
+        echo "# Key connection alive"                      >> /etc/wireguard/wg0.conf
+        echo "PersistentKeepalive = 20"                    >> /etc/wireguard/wg0.conf
 
   ## Agregar las reglas del cortafuego a los ComandosPostArranque
      #touch /root/scripts/ReglasIPTablesWireGuard.sh
@@ -369,8 +393,6 @@ elif [ $OS_VERS == "11" ]; then
      #touch /root/scripts/ComandosPostArranque.sh
      #echo "/root/scripts/ReglasIPTablesWireGuard.sh" >> /root/scripts/ComandosPostArranque.sh
      #chmod +x /root/scripts/ComandosPostArranque.sh
-
-
 
      ## Arrancar wireguard
         wg-quick up wg0
