@@ -355,9 +355,7 @@ elif [ $OS_VERS == "11" ]; then
      echo "  La información se guardará en el archivo /etc/wireguard/wg0.conf"
      echo "  Si te equivocas, puedes modificar ese archivo a posteriori."
      echo ""
-     echo "Dirección:"
-     echo ""
-     read IPoDominio
+     read -p "IP o nombre de dominio: "
 
      echo ""
      echo "La IP o dominio que ingresaste es: $IPoDominio"
