@@ -362,23 +362,23 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
 
      ## Crear el archivo de configuración
-        echo "# Datos del cliente"                          > /etc/wireguard/wg0.conf
-        echo "[Interface]"                                 >> /etc/wireguard/wg0.conf
-        echo "# Clave privada del cliente"                 >> /etc/wireguard/wg0.conf
-        echo "PrivateKey = $VarClientPrivKey"              >> /etc/wireguard/wg0.conf
-        echo "# IP deseada por el cliente"                 >> /etc/wireguard/wg0.conf
-        echo "Address = 10.0.0.2/24"                       >> /etc/wireguard/wg0.conf
-        echo ""                                            >> /etc/wireguard/wg0.conf
-        echo "# Datos del servidor"                        >> /etc/wireguard/wg0.conf
-        echo "[Peer]"                                      >> /etc/wireguard/wg0.conf
-        echo "# Clave pública del servidor"                >> /etc/wireguard/wg0.conf
-        echo "PublicKey = $ClavePubServidor"               >> /etc/wireguard/wg0.conf
-        echo "# Lista de control de acceso"                >> /etc/wireguard/wg0.conf
-        echo "AllowedIPs = 192.168.10.0/24"                >> /etc/wireguard/wg0.conf
-        echo " Dirección IP pública y puerto del servidor" >> /etc/wireguard/wg0.conf
-        echo "Endpoint = $IPPubServ"                       >> /etc/wireguard/wg0.conf #172.105.112.120:51194
-        echo "# Key connection alive"                      >> /etc/wireguard/wg0.conf
-        echo "PersistentKeepalive = 20"                    >> /etc/wireguard/wg0.conf
+        echo "# Datos del cliente"                           > /etc/wireguard/wg0.conf
+        echo "[Interface]"                                  >> /etc/wireguard/wg0.conf
+        echo "# Clave privada del cliente"                  >> /etc/wireguard/wg0.conf
+        echo "PrivateKey = $VarClientPrivKey"               >> /etc/wireguard/wg0.conf
+        echo "# IP deseada por el cliente"                  >> /etc/wireguard/wg0.conf
+        echo "Address = 10.0.0.2/24"                        >> /etc/wireguard/wg0.conf
+        echo ""                                             >> /etc/wireguard/wg0.conf
+        echo "# Datos del servidor"                         >> /etc/wireguard/wg0.conf
+        echo "[Peer]"                                       >> /etc/wireguard/wg0.conf
+        echo "# Clave pública del servidor"                 >> /etc/wireguard/wg0.conf
+        echo "PublicKey = $ClavePubServidor"                >> /etc/wireguard/wg0.conf
+        echo "# Lista de control de acceso"                 >> /etc/wireguard/wg0.conf
+        echo "AllowedIPs = 192.168.10.0/24"                 >> /etc/wireguard/wg0.conf
+        echo "# Dirección IP pública y puerto del servidor" >> /etc/wireguard/wg0.conf
+        echo "Endpoint = $IPPubServ"                        >> /etc/wireguard/wg0.conf #172.105.112.120:51194
+        echo "# Key connection alive"                       >> /etc/wireguard/wg0.conf
+        echo "PersistentKeepalive = 20"                     >> /etc/wireguard/wg0.conf
 
   ## Agregar las reglas del cortafuego a los ComandosPostArranque
      #touch /root/scripts/ReglasIPTablesWireGuard.sh
