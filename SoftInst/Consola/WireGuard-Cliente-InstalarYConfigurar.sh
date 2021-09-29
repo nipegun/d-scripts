@@ -249,7 +249,7 @@ elif [ $OS_VERS == "10" ]; then
      apt-get -y autoremove > /dev/null
      apt-get -y -t buster-backports install wireguard
 
-  ## Crear el archivo de configuración#
+  ## Crear el archivo de configuración
      echo "[Interface]" > /etc/wireguard/wg0.conf
      echo "Address =" >> /etc/wireguard/wg0.conf
      echo "PrivateKey =" >> /etc/wireguard/wg0.conf
@@ -334,6 +334,15 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Iniciando el script de instalación de WireGuard para Debian 11 (Bullseye)..."
   echo "--------------------------------------------------------------------------------"
   echo ""
+
+  ## Instalar el paquete WireGuard
+     apt-get -y update
+     apt-get -y install wireguard
+  
+  ## Crear el archivo de configuración
+     echo "[Interface]"                                  > /etc/wireguard/wg0.conf
+     echo "PrivateKey = <Client Private Key>"           >> /etc/wireguard/wg0.conf
+     echo "Address = 10.0.0.2/24, fd86:ea04:1115::5/64" >> /etc/wireguard/wg0.conf
 
 fi
 
