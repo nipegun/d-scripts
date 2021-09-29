@@ -293,7 +293,7 @@ elif [ $OS_VERS == "10" ]; then
      iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
      iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
 
-  ## Agregar las reglas a los ComandosPostArranque
+  ## Agregar las reglas del cortafuego a los ComandosPostArranque
      touch /root/scripts/ReglasIPTablesWireGuard.sh
      echo "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                        > /root/scripts/ReglasIPTablesWireGuard.sh
      echo "iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                     >> /root/scripts/ReglasIPTablesWireGuard.sh
@@ -343,6 +343,21 @@ elif [ $OS_VERS == "11" ]; then
      echo "[Interface]"                                  > /etc/wireguard/wg0.conf
      echo "PrivateKey = <Client Private Key>"           >> /etc/wireguard/wg0.conf
      echo "Address = 10.0.0.2/24, fd86:ea04:1115::5/64" >> /etc/wireguard/wg0.conf
+
+  ## Agregar las reglas del cortafuego a los ComandosPostArranque
+     touch /root/scripts/ReglasIPTablesWireGuard.sh
+     echo "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                        > /root/scripts/ReglasIPTablesWireGuard.sh
+     echo "iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                     >> /root/scripts/ReglasIPTablesWireGuard.sh
+     echo "iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT"           >> /root/scripts/ReglasIPTablesWireGuard.sh
+     echo "iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+     echo "iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+     chmod +x /root/scripts/ReglasIPTablesWireGuard.sh
+     touch /root/scripts/ComandosPostArranque.sh
+     echo "/root/scripts/ReglasIPTablesWireGuard.sh" >> /root/scripts/ComandosPostArranque.sh
+     chmod +x /root/scripts/ComandosPostArranque.sh
+
+     ## Arrancar wireguard
+        wg-quick up wg0
 
 fi
 
