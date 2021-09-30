@@ -1,0 +1,8 @@
+      apt-get -y install whois
+      apt-get -y nmap
+      apt-get -y nbtscan
+      apt-get -y mailutils
+      apt-get -y wireless-tools
+      apt-get -y wpasupplicant
+      apt-get -y install arp-scan
+      apt-get -y install tshark # WireShark para terminal
