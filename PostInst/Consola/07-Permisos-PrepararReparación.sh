@@ -37,3 +37,4 @@ echo "find /var/www -type d -exec chmod 755 {} \;"                              
 echo "find /var/www -type f -exec chmod 644 {} \;"                                                  >> /root/scripts/RepararPermisos.sh
 echo "chown root:root /var/www # Necesario para enjaular las cuentas"                               >> /root/scripts/RepararPermisos.sh
 chmod 700                                                                                              /root/scripts/RepararPermisos.sh
+
