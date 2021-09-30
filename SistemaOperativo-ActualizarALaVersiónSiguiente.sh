@@ -80,9 +80,18 @@ elif [ $OS_VERS == "9" ]; then
   echo "----------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Script para Debian 9 todavía no preparado. Prueba ejecutarlo en otra versión de Debian"
-  echo ""
+  apt-get -y update
+  apt-get -y upgrade
+  apt-get -y dist-upgrade
+  dpkg -C
+  apt-mark showhold
+  cp /etc/apt/sources.list /etc/apt/sources.list.deb9
+  sed -i -e 's|stretch|buster|g' /etc/apt/sources.list
+  apt-get -y update
+  apt-get -y upgrade
+  apt-get -y dist-upgrade
+  apt-get autoremove
+  shutdown -r now
 
 elif [ $OS_VERS == "10" ]; then
 
