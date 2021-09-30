@@ -101,8 +101,17 @@ elif [ $OS_VERS == "10" ]; then
   echo "------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Script para Debian 10 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  cp /etc/apt/sources.list /etc/apt/sources.list.bak
+
+  echo "deb http://deb.debian.org/debian/ buster main contrib non-free" > /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian/ buster main contrib non-free" >> /etc/apt/sources.list
+  echo "" >> /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian/ buster-updates main contrib non-free" >> /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian/ buster-updates main contrib non-free" >> /etc/apt/sources.list
+  echo "" >> /etc/apt/sources.list
+  echo "deb http://security.debian.org/ buster/updates main contrib non-free" >> /etc/apt/sources.list
+  echo "deb-src http://security.debian.org/ buster/updates main contrib non-free" >> /etc/apt/sources.list
+  echo "" >> /etc/apt/sources.list
   echo ""
 
 elif [ $OS_VERS == "11" ]; then
