@@ -5,9 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
-#--------------------------------------------------------------------
+#------------------------------------------------------------------------------------
+#  Script de NiPeGun para instalar y configurar el controlador AMDGPU-Pro en Debian
+#------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -42,9 +42,9 @@ FinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "-------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 7 (Wheezy)..."
+  echo "-------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -54,9 +54,9 @@ if [ $OS_VERS == "7" ]; then
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "-------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 8 (Jessie)..."
+  echo "-------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -66,9 +66,9 @@ elif [ $OS_VERS == "8" ]; then
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  echo "--------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 9 (Stretch)..."
+  echo "--------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -78,9 +78,9 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  echo "--------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 10 (Buster)..."
+  echo "--------------------------------------------------------------------------------------------"
   echo ""
 
   URL="http://drivers.amd.com/drivers/linux/"
@@ -166,9 +166,9 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  echo "----------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 11 (Bullseye)..."
+  echo "----------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
