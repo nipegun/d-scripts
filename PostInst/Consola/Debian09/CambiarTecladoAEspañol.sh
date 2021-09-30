@@ -10,13 +10,13 @@
 #------------------------------------------------------
 
 # Poner el teclado en español de España
-echo 'XKBMODEL="pc105"' > /etc/default/keyboard
-echo 'XKBLAYOUT="es"' >> /etc/default/keyboard
-echo 'XKBVARIANT=""' >> /etc/default/keyboard
-echo 'XKBOPTIONS=""' >> /etc/default/keyboard
-echo '' >> /etc/default/keyboard
+echo 'XKBMODEL="pc105"'   > /etc/default/keyboard
+echo 'XKBLAYOUT="es"'    >> /etc/default/keyboard
+echo 'XKBVARIANT=""'     >> /etc/default/keyboard
+echo 'XKBOPTIONS=""'     >> /etc/default/keyboard
+echo ''                  >> /etc/default/keyboard
 echo 'BACKSPACE="guess"' >> /etc/default/keyboard
-echo '' >> /etc/default/keyboard
+echo ''                  >> /etc/default/keyboard
 
 echo ""
 echo "-------------------------------------------------"
