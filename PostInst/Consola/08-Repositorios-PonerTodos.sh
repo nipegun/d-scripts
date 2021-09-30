@@ -80,8 +80,17 @@ elif [ $OS_VERS == "9" ]; then
   echo "-----------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Script para Debian 9 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  cp /etc/apt/sources.list /etc/apt/sources.list.bak
+
+  echo "deb http://ftp.debian.org/debian/ stretch main contrib non-free" > /etc/apt/sources.list
+  echo "deb-src http://ftp.debian.org/debian/ stretch main contrib non-free" >> /etc/apt/sources.list
+  echo "" >> /etc/apt/sources.list
+  echo "deb http://ftp.debian.org/debian/ stretch-updates main contrib non-free" >> /etc/apt/sources.list
+  echo "deb-src http://ftp.debian.org/debian/ stretch-updates main contrib non-free" >> /etc/apt/sources.list
+  echo "" >> /etc/apt/sources.list
+  echo "deb http://security.debian.org/ stretch/updates main contrib non-free" >> /etc/apt/sources.list
+  echo "deb-src http://security.debian.org/ stretch/updates main contrib non-free" >> /etc/apt/sources.list
+  echo "" >> /etc/apt/sources.list
   echo ""
 
 elif [ $OS_VERS == "10" ]; then
