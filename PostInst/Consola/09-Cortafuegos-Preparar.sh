@@ -71,9 +71,14 @@ elif [ $OS_VERS == "9" ]; then
   echo "-----------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Script para Debian 9 todavía no preparado. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+  mkdir -p /root/scripts/ 2> /dev/null
+  echo '#!/bin/bash'                                                                         > /root/scripts/ComandosIPTables.sh
+  echo ""                                                                                   >> /root/scripts/ComandosIPTables.sh
+  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE IPTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/ComandosIPTables.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ComandosIPTables.sh
+  echo ""                                                                                   >> /root/scripts/ComandosIPTables.sh
+  chmod 700                                                                                    /root/scripts/ComandosIPTables.sh
+  echo "/root/scripts/ComandosIPTables.sh" >> /root/scripts/ComandosPostArranque.sh
 
 elif [ $OS_VERS == "10" ]; then
 
