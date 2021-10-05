@@ -73,6 +73,7 @@ echo "#Hilos=3"                                                                 
 echo 'IdMinero=$(cat ~/Cryptos/XMR/minero/IdMinero.txt)'                                                           >> ~/Cryptos/XMR/minero/Minar.sh
 echo 'DirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"' >> ~/Cryptos/XMR/minero/Minar.sh
 echo '~/Cryptos/XMR/minero/xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet --tls'  >> ~/Cryptos/XMR/minero/Minar.sh
+chmod +x  ~/Cryptos/XMR/minero/Minar.sh
 
 echo ""
 echo "  Creando ID para el minero..."
