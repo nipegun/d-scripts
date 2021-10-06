@@ -103,7 +103,7 @@ elif [ $OS_VERS == "8" ]; then
      echo "  Agregando la ip del ordenador/servidor al archivo de configuración..."
      echo ""
      DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
-     sed -i -e 's|Address =|Address = '$DirIP'|g' /etc/wireguard/wg0.conf
+     sed -i -e 's|Address =|Address = "$DirIP"|g' /etc/wireguard/wg0.conf
 
   ## Crear las claves pública y privada del servidor
      echo ""
@@ -118,7 +118,7 @@ elif [ $OS_VERS == "8" ]; then
      echo "  Agregando la clave privada del servidor al archivo de configuración..."
      echo ""
      VarServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
-     sed -i -e 's|PrivateKey =|PrivateKey = '$VarServerPrivKey'|g' /etc/wireguard/wg0.conf
+     sed -i -e 's|PrivateKey =|PrivateKey = "$VarServerPrivKey"|g' /etc/wireguard/wg0.conf
 
   ## Crear las claves para el primer usuario
      echo ""
@@ -141,7 +141,7 @@ elif [ $OS_VERS == "8" ]; then
      echo "  Agregando la clave pública del primer usuario al archivo de configuración..."
      echo ""
      VarUser0PubKey=$(cat /root/WireGuard/WireGuardUser0Public.key)
-     sed -i -e 's|User0PublicKey =|PublicKey = '$VarUser0PubKey'|g' /etc/wireguard/wg0.conf
+     sed -i -e 's|User0PublicKey =|PublicKey = "$VarUser0PubKey"|g' /etc/wireguard/wg0.conf
 
   ## Agregar las reglas para tener salida a Internet desde el servidor
      echo ""
@@ -232,7 +232,7 @@ elif [ $OS_VERS == "9" ]; then
 
   ## Agregar la dirección IP del servidor al archivo de configuración
      DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
-     sed -i -e 's|Address =|Address = '$DirIP'|g' /etc/wireguard/wg0.conf
+     sed -i -e 's|Address =|Address = "$DirIP"|g' /etc/wireguard/wg0.conf
 
   ## Crear las claves pública y privada del servidor
      mkdir /root/WireGuard/
@@ -241,7 +241,7 @@ elif [ $OS_VERS == "9" ]; then
 
   ## Agregar la clave privada al archivo de configuración
      VarServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
-     sed -i -e 's|PrivateKey =|PrivateKey = '$VarServerPrivKey'|g' /etc/wireguard/wg0.conf
+     sed -i -e 's|PrivateKey =|PrivateKey = "$VarServerPrivKey"|g' /etc/wireguard/wg0.conf
 
   ## Crear las claves para el primer usuario
      wg genkey >                                                 /root/WireGuard/WireGuardUser0Private.key
@@ -255,7 +255,7 @@ elif [ $OS_VERS == "9" ]; then
 
   ## Agregar la clave pública del primer usuario al archivo de configuración
      VarUser0PubKey=$(cat /root/WireGuard/WireGuardUser0Public.key)
-     sed -i -e 's|User0PublicKey =|PublicKey = '$VarUser0PubKey'|g' /etc/wireguard/wg0.conf
+     sed -i -e 's|User0PublicKey =|PublicKey = "$VarUser0PubKey"|g' /etc/wireguard/wg0.conf
 
   ## Agregar las reglas para tener salida a Internet desde el servidor
      iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
@@ -286,14 +286,14 @@ elif [ $OS_VERS == "9" ]; then
 
   ## Levantar la conexión
      echo ""
-     echo "Levantando la interfaz..."
+     echo "  Levantando la interfaz..."
      echo ""
      wg-quick up wg0
      echo ""
 
   ## Activar el servicio
       echo ""
-      echo "Activando el servicio..."
+      echo "  Activando el servicio..."
       echo ""
       systemctl enable wg-quick@wg0.service
       echo ""
@@ -335,7 +335,7 @@ elif [ $OS_VERS == "10" ]; then
 
   ## Agregar la dirección IP del servidor al archivo de configuración
      DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
-     sed -i -e 's|Address =|Address = '$DirIP'|g' /etc/wireguard/wg0.conf
+     sed -i -e 's|Address =|Address = "$DirIP"|g' /etc/wireguard/wg0.conf
 
   ## Crear las claves pública y privada del servidor
      mkdir /root/WireGuard/
@@ -345,7 +345,7 @@ elif [ $OS_VERS == "10" ]; then
 
   ## Agregar la clave privada al archivo de configuración
      VarServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
-     sed -i -e 's|PrivateKey =|PrivateKey = '$VarServerPrivKey'|g' /etc/wireguard/wg0.conf
+     sed -i -e 's|PrivateKey =|PrivateKey = "$VarServerPrivKey"|g' /etc/wireguard/wg0.conf
 
   ## Crear las claves para el primer usuario
      wg genkey >                                                 /root/WireGuard/WireGuardUser0Private.key
@@ -359,7 +359,7 @@ elif [ $OS_VERS == "10" ]; then
 
   ## Agregar la clave pública del primer usuario al archivo de configuración
      VarUser0PubKey=$(cat /root/WireGuard/WireGuardUser0Public.key)
-     sed -i -e 's|User0PublicKey =|PublicKey = '$VarUser0PubKey'|g' /etc/wireguard/wg0.conf
+     sed -i -e 's|User0PublicKey =|PublicKey = "$VarUser0PubKey"|g' /etc/wireguard/wg0.conf
 
 ## Agregar las reglas para tener salida a Internet desde el servidor
      iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
@@ -390,14 +390,14 @@ elif [ $OS_VERS == "10" ]; then
 
   ## Levantar la conexión
      echo ""
-     echo "Levantando la interfaz..."
+     echo "  Levantando la interfaz..."
      echo ""
      wg-quick up wg0
      echo ""
 
   ## Activar el servicio
       echo ""
-      echo "Activando el servicio..."
+      echo "  Activando el servicio..."
       echo ""
       systemctl enable wg-quick@wg0.service
       echo ""
