@@ -55,11 +55,11 @@ elif [ $OS_VERS == "8" ]; then
   echo ""
 
   ## Borrar WireGuard si ya está instalado
-     cp /etc/wireguard/wg0.conf /etc/wireguard/wg0.conf.bak
-     cp /root/WireGuard/WireGuardServerPrivate.key /root/WireGuard/WireGuardServerPrivate.key.bak
-     cp /root/WireGuard/WireGuardServerPublic.key  /root/WireGuard/WireGuardServerPublic.key.bak
-     cp /root/WireGuard/WireGuardUser0Private.key  /root/WireGuard/WireGuardUser0Private.key
-     cp /root/WireGuard/WireGuardUser0Public.key   /root/WireGuard/WireGuardUser0Public.key
+     mv /etc/wireguard/wg0.conf /etc/wireguard/wg0.conf.bak 2> /dev/null
+     mv /root/WireGuard/WireGuardServerPrivate.key /root/WireGuard/WireGuardServerPrivate.key.bak 2> /dev/null
+     mv /root/WireGuard/WireGuardServerPublic.key  /root/WireGuard/WireGuardServerPublic.key.bak  2> /dev/null
+     mv /root/WireGuard/WireGuardUser0Private.key  /root/WireGuard/WireGuardUser0Private.key      2> /dev/null
+     mv /root/WireGuard/WireGuardUser0Public.key   /root/WireGuard/WireGuardUser0Public.key       2> /dev/null
      apt-get -y purge wireguard
      apt-get -y purge
      apt-get -y autoremove
@@ -160,11 +160,11 @@ elif [ $OS_VERS == "9" ]; then
   echo ""
 
   ## Borrar WireGuard si ya está instalado
-     cp /etc/wireguard/wg0.conf /etc/wireguard/wg0.conf.bak
-     cp /root/WireGuard/WireGuardServerPrivate.key /root/WireGuard/WireGuardServerPrivate.key.bak
-     cp /root/WireGuard/WireGuardServerPublic.key  /root/WireGuard/WireGuardServerPublic.key.bak
-     cp /root/WireGuard/WireGuardUser0Private.key  /root/WireGuard/WireGuardUser0Private.key
-     cp /root/WireGuard/WireGuardUser0Public.key   /root/WireGuard/WireGuardUser0Public.key
+     mv /etc/wireguard/wg0.conf /etc/wireguard/wg0.conf.bak 2> /dev/null
+     mv /root/WireGuard/WireGuardServerPrivate.key /root/WireGuard/WireGuardServerPrivate.key.bak 2> /dev/null
+     mv /root/WireGuard/WireGuardServerPublic.key  /root/WireGuard/WireGuardServerPublic.key.bak  2> /dev/null
+     mv /root/WireGuard/WireGuardUser0Private.key  /root/WireGuard/WireGuardUser0Private.key      2> /dev/null
+     mv /root/WireGuard/WireGuardUser0Public.key   /root/WireGuard/WireGuardUser0Public.key       2> /dev/null
      apt-get -y purge wireguard
      apt-get -y purge
      apt-get -y autoremove
@@ -262,11 +262,11 @@ elif [ $OS_VERS == "10" ]; then
   echo ""
 
   ## Borrar WireGuard si ya está instalado
-     cp /etc/wireguard/wg0.conf /etc/wireguard/wg0.conf.bak
-     cp /root/WireGuard/WireGuardServerPrivate.key /root/WireGuard/WireGuardServerPrivate.key.bak
-     cp /root/WireGuard/WireGuardServerPublic.key  /root/WireGuard/WireGuardServerPublic.key.bak
-     cp /root/WireGuard/WireGuardUser0Private.key  /root/WireGuard/WireGuardUser0Private.key
-     cp /root/WireGuard/WireGuardUser0Public.key   /root/WireGuard/WireGuardUser0Public.key
+     mv /etc/wireguard/wg0.conf /etc/wireguard/wg0.conf.bak 2> /dev/null
+     mv /root/WireGuard/WireGuardServerPrivate.key /root/WireGuard/WireGuardServerPrivate.key.bak 2> /dev/null
+     mv /root/WireGuard/WireGuardServerPublic.key  /root/WireGuard/WireGuardServerPublic.key.bak  2> /dev/null
+     mv /root/WireGuard/WireGuardUser0Private.key  /root/WireGuard/WireGuardUser0Private.key      2> /dev/null
+     mv /root/WireGuard/WireGuardUser0Public.key   /root/WireGuard/WireGuardUser0Public.key       2> /dev/null
      apt-get -y purge wireguard
      apt-get -y purge
      apt-get -y autoremove
@@ -366,11 +366,11 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   ## Borrar WireGuard si ya está instalado
-     cp /etc/wireguard/wg0.conf /etc/wireguard/wg0.conf.bak
-     cp /root/WireGuard/WireGuardServerPrivate.key /root/WireGuard/WireGuardServerPrivate.key.bak
-     cp /root/WireGuard/WireGuardServerPublic.key  /root/WireGuard/WireGuardServerPublic.key.bak
-     cp /root/WireGuard/WireGuardUser0Private.key  /root/WireGuard/WireGuardUser0Private.key
-     cp /root/WireGuard/WireGuardUser0Public.key   /root/WireGuard/WireGuardUser0Public.key
+     mv /etc/wireguard/wg0.conf /etc/wireguard/wg0.conf.bak 2> /dev/null
+     mv /root/WireGuard/WireGuardServerPrivate.key /root/WireGuard/WireGuardServerPrivate.key.bak 2> /dev/null
+     mv /root/WireGuard/WireGuardServerPublic.key  /root/WireGuard/WireGuardServerPublic.key.bak  2> /dev/null
+     mv /root/WireGuard/WireGuardUser0Private.key  /root/WireGuard/WireGuardUser0Private.key      2> /dev/null
+     mv /root/WireGuard/WireGuardUser0Public.key   /root/WireGuard/WireGuardUser0Public.key       2> /dev/null
      apt-get -y purge wireguard
      apt-get -y purge
      apt-get -y autoremove
