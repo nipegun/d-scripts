@@ -54,6 +54,16 @@ elif [ $OS_VERS == "8" ]; then
   echo "-----------------------------------------------------------------------------"
   echo ""
 
+  ## Borrar WireGuard si ya está instalado
+     cp /etc/wireguard/wg0.conf /etc/wireguard/wg0.conf.bak
+     cp /root/WireGuard/WireGuardServerPrivate.key /root/WireGuard/WireGuardServerPrivate.key.bak
+     cp /root/WireGuard/WireGuardServerPublic.key  /root/WireGuard/WireGuardServerPublic.key.bak
+     cp /root/WireGuard/WireGuardUser0Private.key  /root/WireGuard/WireGuardUser0Private.key
+     cp /root/WireGuard/WireGuardUser0Public.key   /root/WireGuard/WireGuardUser0Public.key
+     apt-get -y purge wireguard
+     apt-get -y purge
+     apt-get -y autoremove
+
   ## Agregar el repositorio inestable
      echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable.list
 
@@ -149,6 +159,16 @@ elif [ $OS_VERS == "9" ]; then
   echo "------------------------------------------------------------------------------"
   echo ""
 
+  ## Borrar WireGuard si ya está instalado
+     cp /etc/wireguard/wg0.conf /etc/wireguard/wg0.conf.bak
+     cp /root/WireGuard/WireGuardServerPrivate.key /root/WireGuard/WireGuardServerPrivate.key.bak
+     cp /root/WireGuard/WireGuardServerPublic.key  /root/WireGuard/WireGuardServerPublic.key.bak
+     cp /root/WireGuard/WireGuardUser0Private.key  /root/WireGuard/WireGuardUser0Private.key
+     cp /root/WireGuard/WireGuardUser0Public.key   /root/WireGuard/WireGuardUser0Public.key
+     apt-get -y purge wireguard
+     apt-get -y purge
+     apt-get -y autoremove
+
   ## Instalar el paquete WireGuard
      apt-get -y update
      apt-get -y install wireguard
@@ -240,6 +260,16 @@ elif [ $OS_VERS == "10" ]; then
   echo "  Iniciando el script de instalación de WireGuard para Debian 10 (Buster)..."
   echo "------------------------------------------------------------------------------"
   echo ""
+
+  ## Borrar WireGuard si ya está instalado
+     cp /etc/wireguard/wg0.conf /etc/wireguard/wg0.conf.bak
+     cp /root/WireGuard/WireGuardServerPrivate.key /root/WireGuard/WireGuardServerPrivate.key.bak
+     cp /root/WireGuard/WireGuardServerPublic.key  /root/WireGuard/WireGuardServerPublic.key.bak
+     cp /root/WireGuard/WireGuardUser0Private.key  /root/WireGuard/WireGuardUser0Private.key
+     cp /root/WireGuard/WireGuardUser0Public.key   /root/WireGuard/WireGuardUser0Public.key
+     apt-get -y purge wireguard
+     apt-get -y purge
+     apt-get -y autoremove
 
   ## Agregar el repositorio back-ports
      echo "deb http://deb.debian.org/debian buster-backports main" > /etc/apt/sources.list.d/backports.lis
@@ -334,6 +364,16 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Iniciando el script de instalación de WireGuard para Debian 11 (Bullseye)..."
   echo "--------------------------------------------------------------------------------"
   echo ""
+
+  ## Borrar WireGuard si ya está instalado
+     cp /etc/wireguard/wg0.conf /etc/wireguard/wg0.conf.bak
+     cp /root/WireGuard/WireGuardServerPrivate.key /root/WireGuard/WireGuardServerPrivate.key.bak
+     cp /root/WireGuard/WireGuardServerPublic.key  /root/WireGuard/WireGuardServerPublic.key.bak
+     cp /root/WireGuard/WireGuardUser0Private.key  /root/WireGuard/WireGuardUser0Private.key
+     cp /root/WireGuard/WireGuardUser0Public.key   /root/WireGuard/WireGuardUser0Public.key
+     apt-get -y purge wireguard
+     apt-get -y purge
+     apt-get -y autoremove
 
 fi
 
