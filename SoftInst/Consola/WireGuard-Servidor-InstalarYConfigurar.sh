@@ -65,13 +65,13 @@ elif [ $OS_VERS == "8" ]; then
      modprobe wireguard
 
   ## Crear el archivo de configuración#
-     echo "[Interface]" > /etc/wireguard/wg0.conf
-     echo "Address =" >> /etc/wireguard/wg0.conf
-     echo "PrivateKey =" >> /etc/wireguard/wg0.conf
-     echo "ListenPort = 51820" >> /etc/wireguard/wg0.conf
-     echo "PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
+     echo "[Interface]"                                                                                                                                             > /etc/wireguard/wg0.conf
+     echo "Address ="                                                                                                                                              >> /etc/wireguard/wg0.conf
+     echo "PrivateKey ="                                                                                                                                           >> /etc/wireguard/wg0.conf
+     echo "ListenPort = 51820"                                                                                                                                     >> /etc/wireguard/wg0.conf
+     echo "PostUp =   iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
      echo "PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
-     echo "SaveConfig = true    # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos" >> /etc/wireguard/wg0.conf
+     echo "SaveConfig = true"                                                                                                                                      >> /etc/wireguard/wg0.conf  # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"
 
   ## Agregar la dirección IP del servidor al archivo de configuración
      DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
@@ -91,9 +91,9 @@ elif [ $OS_VERS == "8" ]; then
      cat /root/WireGuard/WireGuardUser0Private.key | wg pubkey > /root/WireGuard/WireGuardUser0Public.key
 
   ## Agregar el primer usuario al archivo de configuración
-     echo ""  >> /etc/wireguard/wg0.conf
-     echo "[Peer]" >> /etc/wireguard/wg0.conf
-     echo "User0PublicKey =" >> /etc/wireguard/wg0.conf
+     echo ""                       >> /etc/wireguard/wg0.conf
+     echo "[Peer]"                 >> /etc/wireguard/wg0.conf
+     echo "User0PublicKey ="       >> /etc/wireguard/wg0.conf
      echo "AllowedIPs = 0.0.0.0/0" >> /etc/wireguard/wg0.conf
 
   ## Agregar la clave pública del primer usuario al archivo de configuración
@@ -157,13 +157,13 @@ elif [ $OS_VERS == "9" ]; then
      modprobe wireguard
 
   ## Crear el archivo de configuración#
-     echo "[Interface]" > /etc/wireguard/wg0.conf
-     echo "Address =" >> /etc/wireguard/wg0.conf
-     echo "PrivateKey =" >> /etc/wireguard/wg0.conf
-     echo "ListenPort = 51820" >> /etc/wireguard/wg0.conf
-     echo "PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
+     echo "[Interface]"                                                                                                                                             > /etc/wireguard/wg0.conf
+     echo "Address ="                                                                                                                                              >> /etc/wireguard/wg0.conf
+     echo "PrivateKey ="                                                                                                                                           >> /etc/wireguard/wg0.conf
+     echo "ListenPort = 51820"                                                                                                                                     >> /etc/wireguard/wg0.conf
+     echo "PostUp =   iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
      echo "PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
-     echo "SaveConfig = true    # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos" >> /etc/wireguard/wg0.conf
+     echo "SaveConfig = true # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                 >> /etc/wireguard/wg0.conf
 
   ## Agregar la dirección IP del servidor al archivo de configuración
      DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
@@ -183,9 +183,9 @@ elif [ $OS_VERS == "9" ]; then
      cat /root/WireGuard/WireGuardUser0Private.key | wg pubkey > /root/WireGuard/WireGuardUser0Public.key
 
   ## Agregar el primer usuario al archivo de configuración
-     echo ""  >> /etc/wireguard/wg0.conf
-     echo "[Peer]" >> /etc/wireguard/wg0.conf
-     echo "User0PublicKey =" >> /etc/wireguard/wg0.conf
+     echo ""                       >> /etc/wireguard/wg0.conf
+     echo "[Peer]"                 >> /etc/wireguard/wg0.conf
+     echo "User0PublicKey ="       >> /etc/wireguard/wg0.conf
      echo "AllowedIPs = 0.0.0.0/0" >> /etc/wireguard/wg0.conf
 
   ## Agregar la clave pública del primer usuario al archivo de configuración
@@ -250,13 +250,13 @@ elif [ $OS_VERS == "10" ]; then
      apt-get -y -t buster-backports install wireguard
 
   ## Crear el archivo de configuración#
-     echo "[Interface]" > /etc/wireguard/wg0.conf
-     echo "Address =" >> /etc/wireguard/wg0.conf
-     echo "PrivateKey =" >> /etc/wireguard/wg0.conf
-     echo "ListenPort = 51820" >> /etc/wireguard/wg0.conf
-     echo "PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
+     echo "[Interface]"                                                                                                                                             > /etc/wireguard/wg0.conf
+     echo "Address ="                                                                                                                                              >> /etc/wireguard/wg0.conf
+     echo "PrivateKey ="                                                                                                                                           >> /etc/wireguard/wg0.conf
+     echo "ListenPort = 51820"                                                                                                                                     >> /etc/wireguard/wg0.conf
+     echo "PostUp =   iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
      echo "PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
-     echo "SaveConfig = true    # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos" >> /etc/wireguard/wg0.conf
+     echo "SaveConfig = true    # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                              >> /etc/wireguard/wg0.conf
 
   ## Agregar la dirección IP del servidor al archivo de configuración
      DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
@@ -277,9 +277,9 @@ elif [ $OS_VERS == "10" ]; then
      cat /root/WireGuard/WireGuardUser0Private.key | wg pubkey > /root/WireGuard/WireGuardUser0Public.key
 
   ## Agregar el primer usuario al archivo de configuración
-     echo ""  >> /etc/wireguard/wg0.conf
-     echo "[Peer]" >> /etc/wireguard/wg0.conf
-     echo "User0PublicKey =" >> /etc/wireguard/wg0.conf
+     echo ""                       >> /etc/wireguard/wg0.conf
+     echo "[Peer]"                 >> /etc/wireguard/wg0.conf
+     echo "User0PublicKey ="       >> /etc/wireguard/wg0.conf
      echo "AllowedIPs = 0.0.0.0/0" >> /etc/wireguard/wg0.conf
 
   ## Agregar la clave pública del primer usuario al archivo de configuración
