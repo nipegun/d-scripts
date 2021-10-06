@@ -10,7 +10,7 @@
 #--------------------------------------------------------------------
 
 InterfazEthernet="eth0"
-InterfazEthernet="venet0"
+#InterfazEthernet="venet0"
 
 ## Determinar la versión de Debian
 
@@ -78,6 +78,7 @@ elif [ $OS_VERS == "8" ]; then
      echo "  Instalando el paquete wireguard..."
      echo ""
      apt-get -y update
+     apt-get -y install linux-headers-"$(uname -r)" 
      apt-get -y install wireguard
 
   ## Cargar elmódulo
