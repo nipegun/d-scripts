@@ -87,6 +87,9 @@ echo ""
    #apt-get -y install libqt5xmlpatterns5
    #apt-get -y install libqt5websockets5
 
+## Pedir el nombre del usuario no-root
+   read -p "Ingresa el nombre del usuario no root: " -s UsuarioNoRoot
+
 ## Crear la carpeta para el usuario no root
    echo ""
    echo "  Creando la carpeta para el usuario no root..."
