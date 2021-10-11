@@ -13,8 +13,19 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-UsuarioNoRoot=usuariox
+## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+   if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+     echo ""
+     echo "  dialog no está instalado. Iniciando su instalación..."
+     echo ""
+     apt-get -y update > /dev/null
+     apt-get -y install dialog
+     echo ""
+   fi
 
+## Pedir el nombre del usuario no-root
+   UsuarioNoRoot=$(dialog --keep-tite --title "Ingresa el nombre para el usuario no-root" --inputbox "Nombre de usuario:" 8 60 3>&1 1>&2 2>&3 3>&- )
+     
 echo ""
 echo -e "${ColorVerde}------------------------------------------------------------------------------------${FinColor}"
 echo -e "${ColorVerde}  Iniciando el script de instalación de los diferentes mineros de criptomonedas...${FinColor}"
