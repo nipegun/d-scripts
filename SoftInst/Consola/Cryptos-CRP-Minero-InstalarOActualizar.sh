@@ -137,16 +137,25 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
           echo -e "${ColorVerde}  Moviendo el minero de CRP a la carpeta del usuario $UsuarioCRPNoRoot...${FinColor}"
           echo ""
-          ## Crear la carpeta
-             mkdir -p  /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/ 2> /dev/null
-          ## Borrar el minero ya instalado
-             rm -rf /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/
-          ## Mover carpeta de mineros
-             mv /root/Cryptos/CRP/minero/ /home/$UsuarioCRPNoRoot/Cryptos/CRP/
-          ## Modificar la ubicación del ejecutable en el script
-             sed -i -e "s|/root/Cryptos/CRP/minero/uam|/home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/uam|g" /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/Minar.sh
-          ## Reparación de permisos
-             chown $UsuarioCRPNoRoot:$UsuarioCRPNoRoot /home/$UsuarioCRPNoRoot/ -R 2> /dev/null
+          if id "$UsuarioCRPNoRoot" &>/dev/null; then
+            ## Crear la carpeta
+               mkdir -p  /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/ 2> /dev/null
+            ## Borrar el minero ya instalado
+               rm -rf /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/
+            ## Mover carpeta de mineros
+               mv /root/Cryptos/CRP/minero/ /home/$UsuarioCRPNoRoot/Cryptos/CRP/
+            ## Modificar la ubicación del ejecutable en el script
+               sed -i -e "s|/root/Cryptos/CRP/minero/uam|/home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/uam|g" /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/Minar.sh
+            ## Reparación de permisos
+               chown $UsuarioCRPNoRoot:$UsuarioCRPNoRoot /home/$UsuarioCRPNoRoot/ -R 2> /dev/null
+          else
+            echo ""
+            echo "  El usuario $UsuarioCRPNoRoot no existe. Abortando script..."
+            echo ""
+            echo "  El minero ha quedado instalado sólo para el usuario root."
+            echo ""
+            exit
+          fi
 
         ;;
 
