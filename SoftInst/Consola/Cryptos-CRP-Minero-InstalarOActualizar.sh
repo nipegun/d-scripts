@@ -159,6 +159,8 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
                cp /root/.uam/uam.ini /home/$UsuarioCRPNoRoot/.uam/uam.ini
             ## Reparación de permisos
                chown $UsuarioCRPNoRoot:$UsuarioCRPNoRoot /home/$UsuarioCRPNoRoot/ -R 2> /dev/null
+            ## Borrar el minero de la carpeta del root
+               rm -rf /root/Cryptos/CRP/
           else
             echo ""
             echo "  El usuario $UsuarioCRPNoRoot no existe. Abortando script..."
