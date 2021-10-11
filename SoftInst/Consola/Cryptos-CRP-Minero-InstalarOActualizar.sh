@@ -24,12 +24,12 @@ FinColor='\033[0m'
    fi
 
 ## Pedir el nombre del usuario no-root
-   UsuarioNoRoot=$(dialog --keep-tite --title "Ingresa el nombre para el usuario no-root" --inputbox "Nombre de usuario:" 8 60 3>&1 1>&2 2>&3 3>&- )
+   UsuarioCRPNoRoot=$(dialog --keep-tite --title "Ingresa el nombre para el usuario no-root" --inputbox "Nombre de usuario:" 8 60 3>&1 1>&2 2>&3 3>&- )
      
 echo ""
-echo -e "${ColorVerde}------------------------------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}  Iniciando el script de instalación de los diferentes mineros de criptomonedas...${FinColor}"
-echo -e "${ColorVerde}------------------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}-----------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}  Iniciando el script de instalación de del minero de Utopia...${FinColor}"
+echo -e "${ColorVerde}-----------------------------------------------------------------${FinColor}"
 echo ""
 
 ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -46,7 +46,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
   opciones=(1 "Instalar el minero de CRP para el usuario root" on
             2 "  Mover el minero de CRP a la carpeta del usuario no root" on
             3 "Agregar los mineros del root a los ComandosPostArranque" off
-            4 "Agregar los mineros del usuario $UsuarioNoRoot a los ComandosPostArranque" off)
+            4 "Agregar los mineros del usuario $UsuarioCRPNoRoot a los ComandosPostArranque" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -135,18 +135,18 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
         2)
 
           echo ""
-          echo -e "${ColorVerde}  Moviendo el minero de CRP a la carpeta del usuario $UsuarioNoRoot...${FinColor}"
+          echo -e "${ColorVerde}  Moviendo el minero de CRP a la carpeta del usuario $UsuarioCRPNoRoot...${FinColor}"
           echo ""
           ## Crear la carpeta
-             mkdir -p  /home/$UsuarioNoRoot/Cryptos/CRP/minero/ 2> /dev/null
+             mkdir -p  /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/ 2> /dev/null
           ## Borrar el minero ya instalado
-             rm -rf /home/$UsuarioNoRoot/Cryptos/CRP/minero/
+             rm -rf /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/
           ## Mover carpeta de mineros
-             mv /root/Cryptos/CRP/minero/ /home/$UsuarioNoRoot/Cryptos/CRP/
+             mv /root/Cryptos/CRP/minero/ /home/$UsuarioCRPNoRoot/Cryptos/CRP/
           ## Modificar la ubicación del ejecutable en el script
-             sed -i -e "s|/root/Cryptos/CRP/minero/uam|/home/$UsuarioNoRoot/Cryptos/CRP/minero/uam|g" /home/$UsuarioNoRoot/Cryptos/CRP/minero/Minar.sh
+             sed -i -e "s|/root/Cryptos/CRP/minero/uam|/home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/uam|g" /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/Minar.sh
           ## Reparación de permisos
-             chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R 2> /dev/null
+             chown $UsuarioCRPNoRoot:$UsuarioCRPNoRoot /home/$UsuarioCRPNoRoot/ -R 2> /dev/null
 
         ;;
 
@@ -163,11 +163,11 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
         4)
 
           echo ""
-          echo -e "${ColorVerde}  Agregando los mineros del usuario $UsuarioNoRoot a los ComandosPostArranque...${FinColor}"
+          echo -e "${ColorVerde}  Agregando el minero del usuario $UsuarioCRPNoRoot a los ComandosPostArranque...${FinColor}"
           echo ""
           ## CRP
-             echo "#su $UsuarioNoRoot -c /home/$UsuarioNoRoot/Cryptos/CRP/minero/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh
-             echo "#disown -a"                                                              >> /root/scripts/ComandosPostArranque.sh
+             echo "#su $UsuarioCRPNoRoot -c /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh
+             echo "#disown -a"                                                                     >> /root/scripts/ComandosPostArranque.sh
         ;;
 
       esac
