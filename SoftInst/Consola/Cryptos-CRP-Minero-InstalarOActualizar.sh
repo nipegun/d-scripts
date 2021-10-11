@@ -130,6 +130,14 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
              echo 'echo ""'                                                                                >> /root/Cryptos/CRP/minero/Minar.sh
              echo '/root/Cryptos/CRP/minero/uam --pk $PublicKey --http ["$IPLocalDelMinero"]:8090 --no-ui' >> /root/Cryptos/CRP/minero/Minar.sh
              chmod +x                                                                                         /root/Cryptos/CRP/minero/Minar.sh
+
+          ## Crear la configuración de conexión por defecto
+             IPLocal=$(hostname -I)
+             PuertoCentena=$(echo $IPLocal | cut -d'.' -f4)
+             mkdir -p /root/.uam/ > /dev/null
+             echo "[net]"                                > /root/.uam/uam.ini
+             echo "listens=[$IPLocal]:60$PuertoCentena" >> /root/.uam/uam.ini
+             sed -i -e 's| ]|]|g' /root/.uam/uam.ini
         ;;
 
         2)
@@ -146,6 +154,9 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
                mv /root/Cryptos/CRP/minero/ /home/$UsuarioCRPNoRoot/Cryptos/CRP/
             ## Modificar la ubicación del ejecutable en el script
                sed -i -e "s|/root/Cryptos/CRP/minero/uam|/home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/uam|g" /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/Minar.sh
+            ## Pasar el archivo de conexión por defecto
+               mkdir -p /home/$UsuarioCRPNoRoot/.uam/ > /dev/null
+               cp /root/.uam/uam.ini /home/$UsuarioCRPNoRoot/.uam/uam.ini
             ## Reparación de permisos
                chown $UsuarioCRPNoRoot:$UsuarioCRPNoRoot /home/$UsuarioCRPNoRoot/ -R 2> /dev/null
           else
