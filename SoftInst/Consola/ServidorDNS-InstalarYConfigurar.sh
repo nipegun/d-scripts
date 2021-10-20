@@ -240,6 +240,8 @@ elif [ $OS_VERS == "11" ]; then
      chattr -i /etc/resolv.conf
      rm -rf /var/cache/bind/ 2> /dev/null
      rm -rf /etc/bind/ 2> /dev/null
+     systemctl stop bind9.service
+     systemctl disable bind9.service
      apt-get -y purge bind9 dnsutils
 
   echo ""
