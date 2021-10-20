@@ -235,8 +235,11 @@ elif [ $OS_VERS == "11" ]; then
 
   ## Desinstalar cualquier posible paquete previamente instalado
      mkdir -p /CopSegInt/ 2> /dev/null
-     mkdir -p /CopSegInt/DNS/ 2> /dev/null
+     mkdir -p /CopSegInt/DNS/etc/ 2> /dev/null
+     mv /etc/bind/ /CopSegInt/DNS/etc/
      chattr -i /etc/resolv.conf
+     rm -rf /var/cache/bind/ 2> /dev/null
+     rm -rf /etc/bind/ 2> /dev/null
      apt-get -y purge bind9 dnsutils
 
   echo ""
