@@ -60,8 +60,43 @@ elif [ $OS_VERS == "8" ]; then
   echo ""
 
   echo ""
-  echo "Instalación para Debian 8 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "-----------------------------------"
+  echo "  INSTALANDO Y CONFIGURANDO bind9"
+  echo "-----------------------------------"
   echo ""
+  apt-get -y install bind9 dnsutils
+
+  echo "//DIRECTA"
+  echo "zone "dnsbind.com" {"
+  echo "        type master;"
+  echo "        file "/etc/bind/miszonas/db.directa";"
+  echo "};"
+  echo ""
+  echo "//INVERSA"
+  echo "zone "1.168.192.in-addr-arpa" {"
+  echo "        type master;"
+  echo "        file "/etc/bind/miszonas/db.inversa";"
+  echo "};"
+
+  mkdir /etc/bind/miszonas/
+  cp /etc/bind/db.local /etc/bind/miszonas/db.directa
+
+  named-checkzone dnsbind.com /etc/bind/miszonas/db.directa
+
+  cp /etc/bind/db.127 /etc/bind/miszonas/db.inversa
+  named-checkzone 1.168.192.in-addr-arpa /etc/bind/miszonas/db.inversa
+
+  # FORWARDERS
+  nano /etc/bind/named.conf.options
+
+  # RESOLV
+  echo "nameserver 212.166.132.117" > /etc/resolv.conf
+  echo "domain dnsbind.com" >> /etc/resolv.conf
+  echo "search dnsbind.com" >> /etc/resolv.conf
+  echo ""
+  cat /etc/resolv.conf
+  echo ""
+  chattr +i /etc/resolv.conf
 
 elif [ $OS_VERS == "9" ]; then
 
@@ -201,6 +236,7 @@ elif [ $OS_VERS == "11" ]; then
   ## Desinstalar cualquier posible paquete previamente instalado
      mkdir -p /CopSegInt/ 2> /dev/null
      mkdir -p /CopSegInt/DNS/ 2> /dev/null
+     chattr -i /etc/resolv.conf
      apt-get -y purge bind9 dnsutils
 
   echo ""
@@ -299,6 +335,8 @@ elif [ $OS_VERS == "11" ]; then
 
   mkdir /var/log/named
   chown -R bind:bind /var/log/named
+
+  chattr +i /etc/resolv.conf
 
   echo ""
   echo "Reiniciando el servidor DNS..."
