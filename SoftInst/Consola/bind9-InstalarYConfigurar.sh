@@ -198,6 +198,11 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
+  ## Desinstalar cualquier posible paquete previamente instalado
+     mkdir -p /CopSegInt/ 2> /dev/null
+     mkdir -p /CopSegInt/DNS/ 2> /dev/null
+     apt-get -y purge bind9 dnsutils
+
   echo ""
   echo "Instalando paquetes necesarios..."
   echo ""
