@@ -76,6 +76,19 @@ echo '~/Cryptos/XMR/minero/xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-
 chmod +x  ~/Cryptos/XMR/minero/Minar.sh
 
 echo ""
+echo "  Creando el script para ejecutar manualmente el minero en background..."
+echo ""
+echo '#!/bin/bash'                                                                                                              > ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo ""                                                                                                                        >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo 'Hilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)'                              >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo "#Hilos=3"                                                                                                                >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo 'IdMinero=$(cat ~/Cryptos/XMR/minero/IdMinero.txt)'                                                                       >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo 'DirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"'             >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo '~/Cryptos/XMR/minero/xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet --tls --background' >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+chmod +x  ~/Cryptos/XMR/minero/MinarEnBackground.sh
+
+
+echo ""
 echo "  Creando ID para el minero..."
 echo ""
 
