@@ -25,4 +25,4 @@
    sed -i '/^ExecStart/d' /lib/systemd/system/getty@.service
 ## Reemplazar la línea Type=idle por la línea de ejecucion, un saldo de línea y nuevamente type idle
    sed -i -e 's|Type=idle|ExecStart=-/sbin/agetty --noclear -a usuariox %I $TERM\nType=idle|g' /lib/systemd/system/getty@.service
-   
+
