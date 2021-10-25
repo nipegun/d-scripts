@@ -16,9 +16,9 @@ FinColor='\033[0m'
 UsuarioNoRoot="NiPeGun"
 
 echo ""
-echo -e "${ColorVerde}-----------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}  Iniciando el script de instalación del messenger de Utopia...${FinColor}"
-echo -e "${ColorVerde}-----------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}---------------------------------------------------------------------------------${FinColor}"
+echo -e "${ColorVerde}  Iniciando el script de instalación o actualización del messenger de Utopia...${FinColor}"
+echo -e "${ColorVerde}---------------------------------------------------------------------------------${FinColor}"
 echo ""
 
 ## Crear carpeta de descarga
@@ -88,7 +88,8 @@ echo ""
    #apt-get -y install libqt5websockets5
 
 ## Pedir el nombre del usuario no-root
-   read -p "Ingresa el nombre del usuario no root: " -s UsuarioNoRoot
+   echo ""
+   read -p "Ingresa el nombre del usuario no root: " UsuarioNoRoot
 
 ## Crear la carpeta para el usuario no root
    echo ""
