@@ -7,6 +7,10 @@
 
 #----------------------------------------------------------
 #  Script de NiPeGun para cambiar el nombre de un usuario
+#
+#  Ejecución con curl:
+#  curl --silent https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-CambiarNombre.sh | bash -s -- UsuarioViejo UsuarioNuevo
+#
 #----------------------------------------------------------
 
 CantArgsCorrectos=2
