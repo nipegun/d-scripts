@@ -141,7 +141,7 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      echo "  Reiniciando el sistema..."
      echo ""
-     #shutdown -r now
+     shutdown -r now
 
   fi
   
