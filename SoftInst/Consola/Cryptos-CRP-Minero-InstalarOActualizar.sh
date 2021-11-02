@@ -65,6 +65,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
              echo ""
              echo "  Descargando el archivo .deb..."
              echo ""
+             rm -rf /root/Cryptos/CRP/uam-latest_amd64.deb 2> /dev/null
              wget https://update.u.is/downloads/uam/linux/uam-latest_amd64.deb
 
           ## Extraer los archivos de dentro del .deb
