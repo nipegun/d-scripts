@@ -47,18 +47,17 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${ColorVerde}  Instalando el minero de CRP (Crypton) para el usuario root...${FinColor}"
           echo ""
 
-          ## Comprobar si el paquete psmisc está instalado. Si no lo está, instalarlo.
-             if [[ $(dpkg-query -s psmisc 2>/dev/null | grep installed) == "" ]]; then
-               echo ""
-               echo "  psmisc no está instalado. Iniciando su instalación..."
-               echo ""
-               apt-get -y update
-               apt-get -y install psmisc
-               echo ""
-             fi
-
           ## Detener todos los posibles procesos activos del minero
-             killall -9 minerocrp
+             ## Comprobar si el paquete psmisc está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s psmisc 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo "  psmisc no está instalado. Iniciando su instalación..."
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install psmisc
+                  echo ""
+                fi
+             killall -9 uam
 
           ## Crear la carpeta
              rm -rf /root/Cryptos/CRP/minero/ 2> /dev/null
