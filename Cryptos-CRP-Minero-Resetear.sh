@@ -97,38 +97,51 @@ elif [ $OS_VERS == "11" ]; then
   echo "-----------------------------------------------------------------------------------------------"
   echo ""
 
-  ## Comprobar si el paquete psmisc está instalado. Si no lo está, instalarlo.
-     if [[ $(dpkg-query -s psmisc 2>/dev/null | grep installed) == "" ]]; then
-       echo ""
-       echo "  psmisc no está instalado. Iniciando su instalación..."
-       echo ""
-       apt-get -y update
-       apt-get -y install psmisc
-       echo ""
-     fi
-
   ## Terminar cualquier proceso del minero que pueda estar ejecutándose
+     echo ""
+     echo "  Terminando posibles procesos activos del antiguo minero..."
+     echo ""
+     ## Comprobar si el paquete psmisc está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s psmisc 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo "  psmisc no está instalado. Iniciando su instalación..."
+          echo ""
+          apt-get -y update
+          apt-get -y install psmisc
+          echo ""
+        fi
      killall -9 uam
 
   ## Hacer copia de seguridad del archio uam.ini
      mv /home/$UsuarioNoRoot/.uam/uam.ini /home/$UsuarioNoRoot/
 
   ## Borrar todos los datos del anterior minero
+     echo ""
+     echo "  Borrando todos los datos del anterior minero..."
+     echo ""
      rm -rf /home/$UsuarioNoRoot/.uam/*
 
-  ## Modificar el archivo uam.ini para adaptarlo al nuevo minero
+  ## Preparar el archivo .ini del nuevo minero
+     echo ""
+     echo "  Preparando el archivo .ini del nuevo minero..."
+     echo ""
      IPYPuerto=$(cat /home/$UsuarioNoRoot/uam.ini | grep listens)
      echo "[net]"       > /home/$UsuarioNoRoot/uam.ini
      echo "$IPYPuerto" >> /home/$UsuarioNoRoot/uam.ini
-     
-  ## Mover el archivo uam.ini a su ubicación final
      mv /home/$UsuarioNoRoot/uam.ini /home/$UsuarioNoRoot/.uam/
 
-  ## Activar el autoinicio
-     sed -i -e 's|#~/Cryptos/CRP/minero/Minar.sh|~/Cryptos/CRP/minero/Minar.sh|g'
+  ## Activar la auto-ejecución
+     echo ""
+     echo "  Activando la auto-ejecución..."
+     echo ""
+     #sed -i -e 's|#~/Cryptos/CRP/minero/Minar.sh|~/Cryptos/CRP/minero/Minar.sh|g' /home/$UsuarioNoRoot/.bash_profile
+     echo "~/Cryptos/CRP/minero/Minar.sh" /home/$UsuarioNoRoot/.bash_profile
 
   ## Reiniciar el sistema
-     shutdown -r now
+     echo ""
+     echo "  Reiniciando el sistema..."
+     echo ""
+     #shutdown -r now
 
   fi
   
