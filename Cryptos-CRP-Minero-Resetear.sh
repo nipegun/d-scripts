@@ -14,6 +14,7 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 UsuarioNoRoot="minerocrp"
+DirCartera="C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415"
 
 ## Determinar la versión de Debian
 
@@ -136,6 +137,9 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      #sed -i -e 's|#~/Cryptos/CRP/minero/Minar.sh|~/Cryptos/CRP/minero/Minar.sh|g' /home/$UsuarioNoRoot/.bash_profile
      echo "~/Cryptos/CRP/minero/Minar.sh" /home/$UsuarioNoRoot/.bash_profile
+
+  ## Re-escribir la dirección de cartera
+     sed -i -e "s|C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415|$DirCartera|g" /home/$UsuarioNoRoot/Cryptos/CRP/minero/Minar.sh
 
   ## Reiniciar el sistema
      echo ""
