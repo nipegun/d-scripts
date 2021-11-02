@@ -141,6 +141,10 @@ elif [ $OS_VERS == "11" ]; then
   ## Re-escribir la dirección de cartera
      sed -i -e "s|C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415|$DirCartera|g" /home/$UsuarioNoRoot/Cryptos/CRP/minero/Minar.sh
 
+  ## Borrando archivos del root
+     rm -rf /root/Cryptos/ 2> /dev/null
+     rm -rf /root/.uam/ 2> /dev/null
+
   ## Reiniciar el sistema
      echo ""
      echo "  Apagando el sistema..."
