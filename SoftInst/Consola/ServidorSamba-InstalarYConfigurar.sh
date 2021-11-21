@@ -187,14 +187,14 @@ elif [ $OS_VERS == "10" ]; then
               echo ""
               echo -e "${ColorVerde}Creando la compartición de una carpeta Multimedia...${FinColor}"
               echo ""
-              echo "[Multimedia]"                                  >> /etc/samba/smb.conf
-              echo "  path = /Multimedia/"                         >> /etc/samba/smb.conf
-              echo "  comment = Pelis, Serie, Música, libros, etc" >> /etc/samba/smb.conf
-              echo "  browseable = yes"                            >> /etc/samba/smb.conf
-              echo "  public = yes"                                >> /etc/samba/smb.conf
-              echo "  writeable = no"                              >> /etc/samba/smb.conf
-              echo "  guest ok = yes"                              >> /etc/samba/smb.conf
-              echo ""                                              >> /etc/samba/smb.conf
+              echo "[Multimedia]"                                   >> /etc/samba/smb.conf
+              echo "  path = /Discos/HDD-Multimedia/"               >> /etc/samba/smb.conf
+              echo "  comment = Pelis, series, música, libros, etc" >> /etc/samba/smb.conf
+              echo "  browseable = yes"                             >> /etc/samba/smb.conf
+              echo "  public = no"                                  >> /etc/samba/smb.conf
+              echo "  guest ok = no"                                >> /etc/samba/smb.conf
+              echo "  write list = $1"                              >> /etc/samba/smb.conf
+              echo ""                                               >> /etc/samba/smb.conf
             ;;
 
             6)
@@ -341,14 +341,14 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo -e "${ColorVerde}Creando la compartición de una carpeta Multimedia...${FinColor}"
               echo ""
-              echo "[Multimedia]"                                  >> /etc/samba/smb.conf
-              echo "  path = /Multimedia/"                         >> /etc/samba/smb.conf
-              echo "  comment = Pelis, Serie, Música, libros, etc" >> /etc/samba/smb.conf
-              echo "  browseable = yes"                            >> /etc/samba/smb.conf
-              echo "  public = yes"                                >> /etc/samba/smb.conf
-              echo "  writeable = no"                              >> /etc/samba/smb.conf
-              echo "  guest ok = yes"                              >> /etc/samba/smb.conf
-              echo ""                                              >> /etc/samba/smb.conf
+              echo "[Multimedia]"                                   >> /etc/samba/smb.conf
+              echo "  path = /Discos/HDD-Multimedia/"               >> /etc/samba/smb.conf
+              echo "  comment = Pelis, series, música, libros, etc" >> /etc/samba/smb.conf
+              echo "  browseable = yes"                             >> /etc/samba/smb.conf
+              echo "  public = no"                                  >> /etc/samba/smb.conf
+              echo "  guest ok = no"                                >> /etc/samba/smb.conf
+              echo "  write list = $1"                              >> /etc/samba/smb.conf
+              echo ""                                               >> /etc/samba/smb.conf
             ;;
 
             6)
