@@ -96,3 +96,4 @@ elif [ $OS_VERS == "11" ]; then
   curl -s https://install.zerotier.com | bash
 
 fi
+
