@@ -38,7 +38,7 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
           echo ""
-          wget http://hacks4geeks.com/_/premium/descargas/Debian/root/paquetes/plex/plex32x86.deb
+          wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/plex/plex32x86.deb
 
           echo ""
           echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
@@ -68,7 +68,7 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
           echo ""
-          wget http://hacks4geeks.com/_/premium/descargas/Debian/root/paquetes/plex/plex64x86.deb
+          wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/plex/plex64x86.deb
 
           echo ""
           echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
@@ -98,7 +98,7 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo ""
           echo "Descargando el paquete de instalación..."
           echo ""
-          wget http://hacks4geeks.com/_/premium/descargas/Debian/root/paquetes/plex/plexARMv7.deb
+          wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/plex/plexARMv7.deb
 
           echo ""
           echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
@@ -128,7 +128,7 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
           echo ""
-          wget http://hacks4geeks.com/_/premium/descargas/Debian/root/paquetes/plex/plexARMv8.deb
+          wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/plex/plexARMv8.deb
 
           echo ""
           echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
