@@ -93,8 +93,6 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "Instalación para Debian 11 todavía no preparada. Prueba instalarlo en otra versión de Debian"
-  echo ""
+  curl -s https://install.zerotier.com | bash
 
 fi
