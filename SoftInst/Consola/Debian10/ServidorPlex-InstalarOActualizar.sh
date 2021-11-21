@@ -31,10 +31,9 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}Instalando Plex para arquitectura x86 de 32 bits...${FinColor}"
           echo ""
-          mkdir /root/paquetes
-          mkdir /root/paquetes/plex 
-          cd /root/paquetes/plex
-          rm -f /root/paquetes/plex/plex32x86.deb
+          mkdir -p /root/SoftInst/Plex/
+          cd /root/SoftInst/Plex/
+          rm -f /root/SoftInst/Plex/plex32x86.deb
 
           echo ""
           echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
@@ -50,7 +49,7 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
           echo ""
           apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
-          dpkg -i /root/paquetes/plex/plex32x86.deb
+          dpkg -i /root/SoftInst/Plex/plex32x86.deb
           
           echo ""
           echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
@@ -62,10 +61,9 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}Instalando Plex para arquitectura x86 de 64 bits...${FinColor}"
           echo ""
-          mkdir /root/paquetes
-          mkdir /root/paquetes/plex 
-          cd /root/paquetes/plex
-          rm -f /root/paquetes/plex/plex64x86.deb
+          mkdir -p /root/SoftInst/Plex/
+          cd /root/SoftInst/Plex/
+          rm -f /root/SoftInst/Plex/plex64x86.deb
 
           echo ""
           echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
@@ -81,7 +79,7 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
           echo ""
           apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
-          dpkg -i /root/paquetes/plex/plex64x86.deb
+          dpkg -i /root/SoftInst/Plex/plex64x86.deb
           
           echo ""
           echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
@@ -93,10 +91,9 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}Instalando Plex para arquitectura ARMv7 (armhf)...${FinColor}"
           echo ""
-          mkdir /root/paquetes
-          mkdir /root/paquetes/plex 
-          cd /root/paquetes/plex
-          rm -f /root/paquetes/plex/plexARMv7.deb
+          mkdir -p /root/SoftInst/Plex/
+          cd /root/SoftInst/Plex/
+          rm -f /root/SoftInst/Plex/plexARMv7.deb
 
           echo ""
           echo "Descargando el paquete de instalación..."
@@ -112,7 +109,7 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
           echo ""
           apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
-          dpkg -i /root/paquetes/plex/plexARMv7.deb
+          dpkg -i /root/SoftInst/Plex/plexARMv7.deb
           
           echo ""
           echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
@@ -124,10 +121,9 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo ""
           echo -e "${ColorVerde}Instalando Plex para arquitectura ARMv7 (arm64)...${FinColor}"
           echo ""
-          mkdir /root/paquetes
-          mkdir /root/paquetes/plex 
-          cd /root/paquetes/plex
-          rm -f /root/paquetes/plex/plexARMv8.deb
+          mkdir /root/SoftInst/Plex/
+          cd /root/SoftInst/Plex/
+          rm -f /root/SoftInst/Plex/plexARMv8.deb
 
           echo ""
           echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
@@ -143,7 +139,7 @@ menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
           echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
           echo ""
           apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
-          dpkg -i /root/paquetes/plex/plexARMv8.deb
+          dpkg -i /root/SoftInst/Plex/plexARMv8.deb
           
           echo ""
           echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
