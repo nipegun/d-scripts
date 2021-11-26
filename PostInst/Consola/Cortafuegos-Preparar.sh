@@ -115,3 +115,4 @@ elif [ $OS_VERS == "11" ]; then
   echo "/root/scripts/ComandosNFTables.sh" >> /root/scripts/ComandosPostArranque.sh
 
 fi
+
