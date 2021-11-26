@@ -105,8 +105,13 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Script para Debian 11 todavía no preparado. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+  mkdir -p /root/scripts/ 2> /dev/null
+  echo '#!/bin/bash'                                                                         > /root/scripts/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/ComandosNFTables.sh
+  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/ComandosNFTables.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/ComandosNFTables.sh
+  chmod 700                                                                                    /root/scripts/ComandosNFTables.sh
+  echo "/root/scripts/ComandosNFTables.sh" >> /root/scripts/ComandosPostArranque.sh
 
 fi
