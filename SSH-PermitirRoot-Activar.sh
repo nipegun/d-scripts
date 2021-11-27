@@ -96,8 +96,6 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   sed -i -e 's|^#PermitRootLogin.*|PermitRootLogin yes|g' /etc/ssh/sshd_config
-
-  fi
   
 fi
 
