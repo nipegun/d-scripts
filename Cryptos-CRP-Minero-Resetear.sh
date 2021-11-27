@@ -127,6 +127,15 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      echo "  Actualizando el minero a la última versión..."
      echo ""
+     ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo "  curl no está instalado. Iniciando su instalación..."
+          echo ""
+          apt-get -y update
+          apt-get -y install curl
+          echo ""
+        fi
      curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/Cryptos-CRP-Minero-InstalarOActualizar.sh | bash
 
 ## Preparar el archivo .ini del nuevo minero
