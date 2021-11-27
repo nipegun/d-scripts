@@ -14,9 +14,9 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 UsuarioNoRoot="minerocrp"
-DirCartera="C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415" #npg
+#DirCartera="C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415" #npg
 #DirCartera="02BA53D255C31B626D32EB14C57AC71B65B387BBE7E7F4A5290F849824DBB15A" #abru
-
+DirCartera="F62FF04B8849C4ADD45CC5980499168A1B8ADF2C329C602443CD34AA97B55727" #edpik
 ## Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
@@ -123,7 +123,13 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      rm -rf /home/$UsuarioNoRoot/.uam/*
 
-  ## Preparar el archivo .ini del nuevo minero
+  ## Actualizar el minero a la última versión
+     echo ""
+     echo "  Actualizando el minero a la última versión..."
+     echo ""
+     curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/Cryptos-CRP-Minero-InstalarOActualizar.sh | bash
+
+## Preparar el archivo .ini del nuevo minero
      echo ""
      echo "  Preparando el archivo .ini del nuevo minero..."
      echo ""
