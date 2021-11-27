@@ -31,7 +31,7 @@ echo ""
 
 menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 22 96 16)
   opciones=(1 "Instalar el minero de CRP para el usuario root" on
-            2 "  Mover el minero de CRP a la carpeta del usuario no root" on
+            2 "  Mover el minero de CRP a la carpeta del usuario no root" off
             3 "Agregar los mineros del root a los ComandosPostArranque" off
             4 "Agregar los mineros del usuario $UsuarioCRPNoRoot a los ComandosPostArranque" off)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -138,6 +138,10 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
              echo "[net]"                                > /root/.uam/uam.ini
              echo "listens=[$IPLocal]:60$PuertoCentena" >> /root/.uam/uam.ini
              sed -i -e 's| ]|]|g' /root/.uam/uam.ini
+
+          ## Auto-arrancar el minero cada vez que se inicia sesión como root
+             echo "~/Cryptos/CRP/minero/Minar.sh" > /root/.bash_profile
+
         ;;
 
         2)
@@ -192,7 +196,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
              echo "#disown -a"                                                                     >> /root/scripts/ComandosPostArranque.sh
         ;;
 
-      esac
+    esac
 
 done
 
