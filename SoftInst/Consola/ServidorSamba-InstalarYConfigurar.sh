@@ -148,7 +148,7 @@ elif [ $OS_VERS == "10" ]; then
               echo "  map to guest = bad user"                                   >> /etc/samba/smb.conf
               echo "  dns proxy = no"                                            >> /etc/samba/smb.conf
               echo "  hosts allow = 192.168.0. 192.168.1. 192.168.2. 192.168.3." >> /etc/samba/smb.conf
-              echo "  hosts deny = 192.168.1.255"                                >> /etc/samba/smb.conf
+              echo "  hosts deny = 192.168.1.254"                                >> /etc/samba/smb.conf
               echo "  #interfaces = lo eth1 wlan0 br0"                           >> /etc/samba/smb.conf
               echo "  #bind interfaces only = yes"                               >> /etc/samba/smb.conf
               echo ""                                                            >> /etc/samba/smb.conf
@@ -302,7 +302,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "  map to guest = bad user"                                   >> /etc/samba/smb.conf
               echo "  dns proxy = no"                                            >> /etc/samba/smb.conf
               echo "  hosts allow = 192.168.0. 192.168.1. 192.168.2. 192.168.3." >> /etc/samba/smb.conf
-              echo "  hosts deny = 192.168.1.255"                                >> /etc/samba/smb.conf
+              echo "  hosts deny = 192.168.1.254"                                >> /etc/samba/smb.conf
               echo "  #interfaces = lo eth1 wlan0 br0"                           >> /etc/samba/smb.conf
               echo "  #bind interfaces only = yes"                               >> /etc/samba/smb.conf
               echo ""                                                            >> /etc/samba/smb.conf
