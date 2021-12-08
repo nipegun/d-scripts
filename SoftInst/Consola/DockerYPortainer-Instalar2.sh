@@ -115,12 +115,13 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Descargando la clave PGP del KeyRing..."
   echo ""
   wget -O- https://download.docker.com/linux/debian/gpg | gpg --dearmor | tee /usr/share/keyrings/docker-archive-keyring.gpg
-
+  #curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  
   echo ""
   echo "  Agregando el repositorio..."
   echo ""
   # add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
-  curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
   apt-get update
 
   echo ""
