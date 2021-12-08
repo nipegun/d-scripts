@@ -119,7 +119,8 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Agregando el repositorio..."
   echo ""
-  add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+  # add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+  curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
   apt-get update
 
   echo ""
