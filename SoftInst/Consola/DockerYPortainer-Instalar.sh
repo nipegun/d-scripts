@@ -114,7 +114,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Descargando la clave PGP del KeyRing..."
   echo ""
-  wget -O- https://download.docker.com/linux/debian/gpg  gpg --dearmor | tee /usr/share/keyrings/docker-archive-keyring.gpg
+  wget -O- https://download.docker.com/linux/debian/gpg | gpg --dearmor | tee /usr/share/keyrings/docker-archive-keyring.gpg
 
   echo ""
   echo "  Agregando el repositorio..."
