@@ -109,7 +109,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Instalando paquetes necesarios..."
   echo ""
-  apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+  apt-get -y install wget apt-transport-https ca-certificates curl gnupg2 software-properties-common
 
   echo ""
   echo "  Descargando la clave PGP del KeyRing..."
