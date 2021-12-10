@@ -238,7 +238,7 @@ elif [ $OS_VERS == "11" ]; then
             echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
             echo ""
             apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
-            dpkg -i /root/InstSoft/Plex/plexARMv8.deb
+            dpkg -i /root/SoftInst/Plex/plexARMv8.deb
           
             echo ""
             echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
