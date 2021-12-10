@@ -38,6 +38,15 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     rm /root/scripts/d-scripts -R 2> /dev/null
     mkdir /root/scripts 2> /dev/null
     cd /root/scripts
+    ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+       if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+         echo ""
+         echo "  git no está instalado. Iniciando su instalación..."
+         echo ""
+         apt-get -y update > /dev/null
+         apt-get -y install git
+         echo ""
+       fi
     git clone --depth=1 https://github.com/nipegun/d-scripts
     mkdir -p /root/scripts/d-scripts/Alias/
     rm /root/scripts/d-scripts/.git -R 2> /dev/null
