@@ -112,7 +112,8 @@ elif [ $OS_VERS == "11" ]; then
     opciones=(1 "Instalar o actualizar versión x86 de 32 bits" off
               2 "Instalar o actualizar versión x86 de 64 bits" off
               3 "Instalar o actualizar versión ARMv7" off
-              4 "Instalar o actualizar versión ARMv8" off)
+              4 "Instalar o actualizar versión ARMv8" off
+              5 "Cambiar la carpeta por defecto de Plex" off)
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
@@ -247,6 +248,26 @@ elif [ $OS_VERS == "11" ]; then
             echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
             echo ""
             service plexmediaserver start
+
+          ;;
+
+          5)
+
+           systemctl stop plexmediaserver.service
+           #mkdir -p /etc/systemd/system/plexmediaserver.service.d/ 2> /dev/null
+           #echo "[Service]"                                                      > /etc/systemd/system/plexmediaserver.service.d/override.conf
+           #echo 'Environment="TMPDIR=/tmp"'                                     >> /etc/systemd/system/plexmediaserver.service.d/override.conf
+           #echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/Plex"' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
+           #echo "User=plex"                                                     >> /etc/systemd/system/plexmediaserver.service.d/override.conf
+           #echo "Group=plex"                                                    >> /etc/systemd/system/plexmediaserver.service.d/override.conf
+           sed -i -e 's|/var/lib/plexmediaserver/Library/Application Support|/Plex|g' /lib/systemd/system/plexmediaserver.service
+           systemctl daemon-reload
+           systemctl start plexmediaserver.service
+           systemctl status plexmediaserver.service
+           
+           # En un contenedor
+           # usermod -u 1000 plex
+           # groupmod -g 1000 plex
 
           ;;
 
