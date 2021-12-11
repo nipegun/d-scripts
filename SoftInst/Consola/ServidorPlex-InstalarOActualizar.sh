@@ -16,6 +16,8 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
+CarpetaAlternativa="/Discos/HDD-Datos/Plex"
+
 ## Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
@@ -260,7 +262,7 @@ elif [ $OS_VERS == "11" ]; then
            #echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/Plex"' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
            #echo "User=plex"                                                     >> /etc/systemd/system/plexmediaserver.service.d/override.conf
            #echo "Group=plex"                                                    >> /etc/systemd/system/plexmediaserver.service.d/override.conf
-           sed -i -e 's|/var/lib/plexmediaserver/Library/Application Support|/Plex|g' /lib/systemd/system/plexmediaserver.service
+           sed -i -e "s|/var/lib/plexmediaserver/Library/Application Support|$CarpetaAlternativa|g" /lib/systemd/system/plexmediaserver.service
            systemctl daemon-reload
            systemctl start plexmediaserver.service
            systemctl status plexmediaserver.service
