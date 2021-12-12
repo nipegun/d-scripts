@@ -104,6 +104,8 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y install git
      echo ""
    fi
+  cd /
+  rm -rf /root/SoftInst/TorGhost/ 2> /dev/null
   mkdir -p /root/SoftInst/TorGhost/
   cd /root/SoftInst/TorGhost/
   git clone https://github.com/SusmithKrishnan/torghost.git
@@ -111,10 +113,13 @@ elif [ $OS_VERS == "11" ]; then
   cd GitHub
   chmod +x build.sh
   apt-get -y install cython3
+  UltVersDevel=$(apt-cache search python3. | grep 3.9 | grep eader | cut -d ' ' -f1 | grep -v lib)
+  apt-get -y install $UltVersDevel
+  VersDevInst=$(echo $UltVersDevel | cut -d '-' -f1 | cut -d 'n' -f2)
+  VersDevScript=$(cat /root/SoftInst/TorGhost/GitHub/build.sh | grep gcc | cut -d '/' -f4 | cut -d ' ' -f1 | cut -d 'n' -f2)
+  sed -i -e "s|python$VersDevScript|python$VersDevInst|g" /root/SoftInst/TorGhost/GitHub/build.sh
   find /root/SoftInst/TorGhost/GitHub/ -type f -exec sed -i 's/sudo//g' {} +
-  #UltVersDevel=$(apt-cache search python3. | grep 3.9 | grep eader | cut -d ' ' -f1 | grep -v lib)
-  #apt-get -y install python-dev python3-dev
-  #apt-get -y install $UltVersDevel
   ./build.sh
 
 fi
+
