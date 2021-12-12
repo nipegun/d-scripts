@@ -167,19 +167,21 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      echo -e "${ColorVerde}  Estableciendo reglas del cortafuegos con IPTables...${FinColor}"
      echo ""
-     iptables -t nat -A OUTPUT -p tcp -m tcp -j REDIRECT --to-ports 9040
-     iptables -t nat -A OUTPUT -p udp -m udp --dport 53 -j REDIRECT --to-ports 4053
+     echo '#!/bin/bash'                                                                     > /root/scripts/ReglasIPTablesRoutearPorTOR.sh
+     echo ""                                                                               >> /root/scripts/ReglasIPTablesRoutearPorTOR.sh
+     echo "iptables -t nat -A OUTPUT -p tcp -m tcp -j REDIRECT --to-ports 9040"            >> /root/scripts/ReglasIPTablesRoutearPorTOR.sh
+     echo "iptables -t nat -A OUTPUT -p udp -m udp --dport 53 -j REDIRECT --to-ports 4053" >> /root/scripts/ReglasIPTablesRoutearPorTOR.sh
+     echo ""                                                                               >> /root/scripts/ReglasIPTablesRoutearPorTOR.sh
+     echo 'echo ""'                                                                        >> /root/scripts/ReglasIPTablesRoutearPorTOR.sh
+     echo 'echo "  La tabla nat ahora ha quedado de la siguiente manera:"'                 >> /root/scripts/ReglasIPTablesRoutearPorTOR.sh
+     echo 'echo ""'                                                                        >> /root/scripts/ReglasIPTablesRoutearPorTOR.sh
+     echo "iptables -t nat -L -n -v"                                                       >> /root/scripts/ReglasIPTablesRoutearPorTOR.sh
+     echo 'echo ""'                                                                        >> /root/scripts/ReglasIPTablesRoutearPorTOR.sh
+     chmod +x                                                                                 /root/scripts/ReglasIPTablesRoutearPorTOR.sh
 
   ## Crear reglas de IP tables para un usuario sólo
      #iptables -t nat -A OUTPUT -p tcp -m owner --uid-owner usuariox -m tcp -j REDIRECT --to-ports 9040
      #iptables -t nat -A OUTPUT -p udp -m owner --uid-owner usuariox -m udp --dport 53 -j REDIRECT --to-ports 4053
-
-  ## Mostrar estado de la tabla net
-     echo ""
-     echo -e "${ColorVerde}  La tabla nat ahora ha quedado de la siguiente manera:${FinColor}"
-     echo ""
-     iptables -t nat -L -n -v
-     echo ""
 
   ## Re-leer los archivos de configuración de los daemons
      systemctl daemon-reload
