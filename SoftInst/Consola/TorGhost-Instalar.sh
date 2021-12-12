@@ -95,8 +95,26 @@ elif [ $OS_VERS == "11" ]; then
   echo "-------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "Script para Debian 11 todavía no preparado. Prueba instalarlo en otra versión de Debian"
-  echo ""
+  ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+   if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+     echo ""
+     echo "  git no está instalado. Iniciando su instalación..."
+     echo ""
+     apt-get -y update
+     apt-get -y install git
+     echo ""
+   fi
+  mkdir -p /root/SoftInst/TorGhost/
+  cd /root/SoftInst/TorGhost/
+  git clone https://github.com/SusmithKrishnan/torghost.git
+  mv torghost GitHub
+  cd GitHub
+  chmod +x build.sh
+  apt-get -y install cython3
+  find /root/SoftInst/TorGhost/GitHub/ -type f -exec sed -i 's/sudo//g' {} +
+  #UltVersDevel=$(apt-cache search python3. | grep 3.9 | grep eader | cut -d ' ' -f1 | grep -v lib)
+  #apt-get -y install python-dev python3-dev
+  #apt-get -y install $UltVersDevel
+  ./build.sh
 
 fi
