@@ -110,19 +110,19 @@ elif [ $OS_VERS == "11" ]; then
         fi
      IPWAN=$(curl --silent ipinfo.io/ip)
      echo ""
-     echo "  La IP pública de este equipo es: $IPWAN "
+     echo -e "${ColorVerde}  La IP pública de este equipo es: $IPWAN ${FinColor}"
      echo ""
 
   ## Mostrar el estado de los puertos actuales del sistema
      echo ""
-     echo "  Ahora mismo el sistema tiene en funcionamiento los siguientes puertos:"
+     echo -e "${ColorVerde}  Ahora mismo el sistema tiene en funcionamiento los siguientes puertos:${FinColor}"
      echo ""
      nmap 127.0.0.1 -p 1-65535
      echo ""
 
   ## Purgar TOR
      echo ""
-     echo "  Eliminando toda la instalación de TOR..."
+     echo -e "${ColorVerde}  Eliminando toda la instalación de TOR...${FinColor}"
      echo ""
      systemctl stop tor.service
      rm -f /etc/tor/tor.rc 2> /dev/null
@@ -141,7 +141,7 @@ elif [ $OS_VERS == "11" ]; then
 
   ## Mostrar el estado de los puertos actuales del sistema
      echo ""
-     echo "  Después de instalar TOR el sistema tiene en funcionamiento los siguientes puertos:"
+     echo -e "${ColorVerde}  Después de instalar TOR el sistema tiene en funcionamiento los siguientes puertos:${FinColor}"
      echo ""
      nmap 127.0.0.1 -p 1-65535
      echo ""
@@ -165,7 +165,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
         fi
      echo ""
-     echo "  Estableciendo reglas del cortafuegos con IPTables..."
+     echo -e "${ColorVerde}  Estableciendo reglas del cortafuegos con IPTables...${FinColor}"
      echo ""
      iptables -t nat -A OUTPUT -p tcp -m tcp -j REDIRECT --to-ports 9040
      iptables -t nat -A OUTPUT -p udp -m udp --dport 53 -j REDIRECT --to-ports 4053
@@ -176,7 +176,7 @@ elif [ $OS_VERS == "11" ]; then
 
   ## Mostrar estado de la tabla net
      echo ""
-     echo "  La tabla nat ahora ha quedado de la siguiente manera:"
+     echo -e "${ColorVerde}  La tabla nat ahora ha quedado de la siguiente manera:${FinColor}"
      echo ""
      iptables -t nat -L -n -v
      echo ""
@@ -188,7 +188,7 @@ elif [ $OS_VERS == "11" ]; then
   ## Volver a determinar la IP pública del equipo
      IPWAN=$(curl --silent ipinfo.io/ip)
      echo ""
-     echo "  La IP pública de este equipo ahora es: $IPWAN "
+     echo -e "${ColorVerde}  La IP pública de este equipo ahora es: $IPWAN ${FinColor}"
      echo ""
 
 fi
