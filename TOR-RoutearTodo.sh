@@ -113,6 +113,13 @@ elif [ $OS_VERS == "11" ]; then
      echo "  La IP pública de este equipo es: $IPWAN "
      echo ""
 
+  ## Mostrar el estado de los puertos actuales del sistema
+     echo ""
+     echo "  El sistema tiene en funcionamiento los siguientes puertos:"
+     echo ""
+     nmap 127.0.0.1 -p 1-65535
+     echo ""
+
   ## Comprobar si el paquete tor está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s tor 2>/dev/null | grep installed) == "" ]]; then
        echo ""
