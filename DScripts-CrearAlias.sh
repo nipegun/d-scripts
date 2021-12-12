@@ -38,6 +38,7 @@ ln -s /root/scripts/d-scripts/BuscarCarpetaEnElSistema.sh                  /root
 ln -s /root/scripts/d-scripts/BuscarTextoEnArchivos.sh                     /root/scripts/d-scripts/Alias/btea
 ln -s /root/scripts/d-scripts/BuscarTextoEnArchivosDeSistema.sh            /root/scripts/d-scripts/Alias/bteads
 ln -s /root/scripts/d-scripts/BuscarTextoEnNombreDeArchivos.sh             /root/scripts/d-scripts/Alias/btenda
+ln -s /root/scripts/d-scripts/BuscarTextoEnScripts.sh                      /root/scripts/d-scripts/Alias/btes
 ln -s /root/scripts/d-scripts/BuscarYReemplazarTextoEnArchivosDeSistema.sh /root/scripts/d-scripts/Alias/byrteads
 ln -s /root/scripts/d-scripts/CambiarNombreDeUsuario.sh                    /root/scripts/d-scripts/Alias/cndu
 ln -s /root/scripts/d-scripts/CompilarEInstalarElÚltimoKernelEstable.sh    /root/scripts/d-scripts/Alias/ceieuke
