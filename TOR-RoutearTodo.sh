@@ -120,6 +120,11 @@ elif [ $OS_VERS == "11" ]; then
      nmap 127.0.0.1 -p 1-65535
      echo ""
 
+  ## Purgar TOR
+     rm -f /etc/tor/tor.rc 2> /dev/null
+     apt-get -y purge tor tor-geoipdb torsocks > /dev/null
+     apt-get -y autoremove > /dev/null
+
   ## Comprobar si el paquete tor está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s tor 2>/dev/null | grep installed) == "" ]]; then
        echo ""
@@ -129,6 +134,13 @@ elif [ $OS_VERS == "11" ]; then
        apt-get -y install tor
        echo ""
      fi
+
+  ## Mostrar el estado de los puertos actuales del sistema
+     echo ""
+     echo "  Después de instalar TOR el sistema tiene en funcionamiento los siguientes puertos:"
+     echo ""
+     nmap 127.0.0.1 -p 1-65535
+     echo ""
 
   ## Parar el servicio tor
      systemctl stop tor.service
