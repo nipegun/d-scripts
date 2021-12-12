@@ -164,6 +164,7 @@ elif [ $OS_VERS == "11" ]; then
 
   ## Re-leer los archivos de configuración de los daemons
      systemctl daemon-reload
+     systemctl restart tor.service
 
   ## Volver a determinar la IP pública del equipo
      IPWAN=$(curl --silent ipinfo.io/ip)
