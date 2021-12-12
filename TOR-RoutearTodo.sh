@@ -98,6 +98,21 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------------------"
   echo ""
 
+  ## Determinar IP Pública del equipo
+     ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s cul 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo "  curl no está instalado. Iniciando su instalación..."
+          echo ""
+          apt-get -y update > /dev/null
+          apt-get -y install curl
+          echo ""
+        fi
+     IPWAN=$(curl --silent ipinfo.io/ip)
+     echo ""
+     echo "  La IP pública de este equipo es: $IPWAN "
+     echo ""
+
   ## Comprobar si el paquete tor está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s tor 2>/dev/null | grep installed) == "" ]]; then
        echo ""
@@ -108,6 +123,23 @@ elif [ $OS_VERS == "11" ]; then
        echo ""
      fi
 
-  ##
+  ## Modificar archivo de configuraciónm
+     echo "AutomapHostsOnResolve 1" >> /etc/tor/torrc
+     echo "TransPort 9040"          >> /etc/tor/torrc
+     echo "DNSPort 4053"            >> /etc/tor/torrc
+
+  ## Crear reglas de IP Tables para todo el tráfico
+     iptables -t nat -A OUTPUT -p tcp -m tcp -j REDIRECT --to-ports 9040
+     iptables -t nat -A OUTPUT -p udp -m udp --dport 53 -j REDIRECT --to-ports 4053
+
+  ## Crear reglas de IP tables para un usuario sólo
+     #iptables -t nat -A OUTPUT -p tcp -m owner --uid-owner usuariox -m tcp -j REDIRECT --to-ports 9040
+     #iptables -t nat -A OUTPUT -p udp -m owner --uid-owner usuariox -m udp --dport 53 -j REDIRECT --to-ports 4053
+
+  ## Volver a determinar la IP pública del equipo
+     IPWAN=$(curl --silent ipinfo.io/ip)
+     echo ""
+     echo "  La IP pública de este equipo ahora es: $IPWAN "
+     echo ""
 
 fi
