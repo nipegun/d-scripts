@@ -130,8 +130,11 @@ elif [ $OS_VERS == "11" ]; then
        echo ""
      fi
 
+  ## Parar el servicio tor
+     systemctl stop tor.service
+
   ## Modificar archivo de configuraciónm
-     echo "AutomapHostsOnResolve 1" >> /etc/tor/torrc
+     echo "AutomapHostsOnResolve 1"  > /etc/tor/torrc
      echo "TransPort 9040"          >> /etc/tor/torrc
      echo "DNSPort 4053"            >> /etc/tor/torrc
 
