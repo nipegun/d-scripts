@@ -129,12 +129,24 @@ elif [ $OS_VERS == "11" ]; then
      echo "DNSPort 4053"            >> /etc/tor/torrc
 
   ## Crear reglas de IP Tables para todo el tráfico
+     ## Comprobar si el paquete iptables está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s iptables 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo "  iptables no está instalado. Iniciando su instalación..."
+          echo ""
+          apt-get -y update > /dev/null
+          apt-get -y install iptables
+          echo ""
+        fi
      iptables -t nat -A OUTPUT -p tcp -m tcp -j REDIRECT --to-ports 9040
      iptables -t nat -A OUTPUT -p udp -m udp --dport 53 -j REDIRECT --to-ports 4053
 
   ## Crear reglas de IP tables para un usuario sólo
      #iptables -t nat -A OUTPUT -p tcp -m owner --uid-owner usuariox -m tcp -j REDIRECT --to-ports 9040
      #iptables -t nat -A OUTPUT -p udp -m owner --uid-owner usuariox -m udp --dport 53 -j REDIRECT --to-ports 4053
+
+  ## Re-leer los archivos de configuración de los daemons
+     systemctl daemon-reload
 
   ## Volver a determinar la IP pública del equipo
      IPWAN=$(curl --silent ipinfo.io/ip)
