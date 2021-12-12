@@ -100,7 +100,7 @@ elif [ $OS_VERS == "11" ]; then
 
   ## Determinar IP Pública del equipo
      ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s cul 2>/dev/null | grep installed) == "" ]]; then
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
           echo ""
           echo "  curl no está instalado. Iniciando su instalación..."
           echo ""
@@ -138,6 +138,9 @@ elif [ $OS_VERS == "11" ]; then
           apt-get -y install iptables
           echo ""
         fi
+     echo ""
+     echo "  Estableciendo reglas del cortafuegos con IPTables..."
+     echo ""
      iptables -t nat -A OUTPUT -p tcp -m tcp -j REDIRECT --to-ports 9040
      iptables -t nat -A OUTPUT -p udp -m udp --dport 53 -j REDIRECT --to-ports 4053
 
