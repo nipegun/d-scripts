@@ -142,7 +142,7 @@ elif [ $OS_VERS == "11" ]; then
      echo "  Estableciendo reglas del cortafuegos con IPTables..."
      echo ""
      iptables -t nat -A OUTPUT -p tcp -m tcp -j REDIRECT --to-ports 9040
-     iptables -t nat -A OUTPUT -p udp -m udp --dport 53 -j REDIRECT --to-ports 4053
+     #iptables -t nat -A OUTPUT -p udp -m udp --dport 53 -j REDIRECT --to-ports 4053
 
   ## Crear reglas de IP tables para un usuario sólo
      #iptables -t nat -A OUTPUT -p tcp -m owner --uid-owner usuariox -m tcp -j REDIRECT --to-ports 9040
