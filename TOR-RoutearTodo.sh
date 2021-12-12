@@ -115,12 +115,16 @@ elif [ $OS_VERS == "11" ]; then
 
   ## Mostrar el estado de los puertos actuales del sistema
      echo ""
-     echo "  El sistema tiene en funcionamiento los siguientes puertos:"
+     echo "  Ahora mismo el sistema tiene en funcionamiento los siguientes puertos:"
      echo ""
      nmap 127.0.0.1 -p 1-65535
      echo ""
 
   ## Purgar TOR
+     echo ""
+     echo "  Eliminando toda la instalación de TOR..."
+     echo ""
+     systemctl stop tor.service
      rm -f /etc/tor/tor.rc 2> /dev/null
      apt-get -y purge tor tor-geoipdb torsocks > /dev/null
      apt-get -y autoremove > /dev/null
