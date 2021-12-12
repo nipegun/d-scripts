@@ -142,11 +142,18 @@ elif [ $OS_VERS == "11" ]; then
      echo "  Estableciendo reglas del cortafuegos con IPTables..."
      echo ""
      iptables -t nat -A OUTPUT -p tcp -m tcp -j REDIRECT --to-ports 9040
-     #iptables -t nat -A OUTPUT -p udp -m udp --dport 53 -j REDIRECT --to-ports 4053
+     iptables -t nat -A OUTPUT -p udp -m udp --dport 53 -j REDIRECT --to-ports 4053
 
   ## Crear reglas de IP tables para un usuario sólo
      #iptables -t nat -A OUTPUT -p tcp -m owner --uid-owner usuariox -m tcp -j REDIRECT --to-ports 9040
      #iptables -t nat -A OUTPUT -p udp -m owner --uid-owner usuariox -m udp --dport 53 -j REDIRECT --to-ports 4053
+
+  ## Mostrar estado de la tabla net
+     echo ""
+     echo "  La tabla nat ahora ha quedado de la siguiente manera:"
+     echo ""
+     iptables -t nat -L -n -v
+     echo ""
 
   ## Re-leer los archivos de configuración de los daemons
      systemctl daemon-reload
