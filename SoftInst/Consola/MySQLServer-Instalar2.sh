@@ -130,6 +130,15 @@ elif [ $OS_VERS == "11" ]; then
        echo ""
      fi
   dpkg -i /root/SoftInst/MySQLServer/$NomArchivo
-
+  apt-get update
+  apt-get -y install mysql-server
+  #mysql-secure-installation
+  echo ""
+  echo "  Entrando como root a la línea de comandos de MySQL..."
+  echo ""
+  echo "  Para crear un nuevo usuario ejecuta:"
+  echo "  CREATE USER 'username' IDENTIFIED BY 'password';"
+  echo ""
+  mysql -u root -p
 fi
 
