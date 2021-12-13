@@ -119,6 +119,7 @@ elif [ $OS_VERS == "11" ]; then
   VersDevScript=$(cat /root/SoftInst/TorGhost/GitHub/build.sh | grep gcc | cut -d '/' -f4 | cut -d ' ' -f1 | cut -d 'n' -f2)
   sed -i -e "s|python$VersDevScript|python$VersDevInst|g" /root/SoftInst/TorGhost/GitHub/build.sh
   find /root/SoftInst/TorGhost/GitHub/ -type f -exec sed -i 's/sudo//g' {} +
+  pip3 install packaging
   ./build.sh
 
 fi
