@@ -112,7 +112,8 @@ elif [ $OS_VERS == "11" ]; then
   mkdir -p /root/SoftInst/MySQLServer/ 2> /dev/null
   cd /root/SoftInst/MySQLServer/
   NomArchivo=$(curl -s https://dev.mysql.com/downloads/repo/apt/ | grep href | grep deb | cut -d'?' -f2 | cut -d'=' -f2 | cut -d'&' -f1)
-  wget -O- https://dev.mysql.com/get/$NomArchivo
+  wget https://dev.mysql.com/get/$NomArchivo
   
 
 fi
+
