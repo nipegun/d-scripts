@@ -120,6 +120,7 @@ elif [ $OS_VERS == "11" ]; then
        apt-get -y install gnupg
        echo ""
      fi
+  dpkg -i /root/SoftInst/MySQLServer/$NomArchivo
 
 fi
 
