@@ -120,6 +120,15 @@ elif [ $OS_VERS == "11" ]; then
        apt-get -y install gnupg
        echo ""
      fi
+  ## Comprobar si el paquete lsb-release está instalado. Si no lo está, instalarlo.
+     if [[ $(dpkg-query -s lsb-release 2>/dev/null | grep installed) == "" ]]; then
+       echo ""
+       echo "  lsb-release no está instalado. Iniciando su instalación..."
+       echo ""
+       apt-get -y update
+       apt-get -y install lsb-release
+       echo ""
+     fi
   dpkg -i /root/SoftInst/MySQLServer/$NomArchivo
 
 fi
