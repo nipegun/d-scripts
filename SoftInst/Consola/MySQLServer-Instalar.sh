@@ -98,8 +98,9 @@ elif [ $OS_VERS == "11" ]; then
   echo "-----------------------------------------------------------------------------------------"
   echo ""
 
-  apt-get update
-  apt-get -y install gnupg
+  mkdir -p /root/SoftInst/MySQLServer/ 2> /dev/null
+  cd /root/SoftInst/MySQLServer/
+  NomArchivo=$(curl -s https://dev.mysql.com/downloads/repo/apt/ | grep href | grep deb | cut -d'?' -f2 | cut -d'=' -f2 | cut -d'&' -f1)
   ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
        echo ""
@@ -109,11 +110,16 @@ elif [ $OS_VERS == "11" ]; then
        apt-get -y install wget
        echo ""
      fi
-  mkdir -p /root/SoftInst/MySQLServer/ 2> /dev/null
-  cd /root/SoftInst/MySQLServer/
-  NomArchivo=$(curl -s https://dev.mysql.com/downloads/repo/apt/ | grep href | grep deb | cut -d'?' -f2 | cut -d'=' -f2 | cut -d'&' -f1)
   wget https://dev.mysql.com/get/$NomArchivo
-  
+  ## Comprobar si el paquete gnupg está instalado. Si no lo está, instalarlo.
+     if [[ $(dpkg-query -s gnupg 2>/dev/null | grep installed) == "" ]]; then
+       echo ""
+       echo "  gnupg no está instalado. Iniciando su instalación..."
+       echo ""
+       apt-get -y update
+       apt-get -y install gnupg
+       echo ""
+     fi
 
 fi
 
