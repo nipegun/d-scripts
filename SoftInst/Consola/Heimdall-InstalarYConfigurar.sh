@@ -102,10 +102,27 @@ elif [ $OS_VERS == "11" ]; then
   ## Instalar el servidor web
      apt-get -y update
      tasksel install web-server
+  ## Instalar el motor de bases de datos de sqlite
+     apt-get -y install sqlite3
   ## Instalar PHP
      apt-get -y install libapache2-mod-php
   ## Instalar dependencias php para heimdall
-     
+     apt-get -y install php-mbstring
+     apt-get -y install php-tokenizer
+     apt-get -y install php-xml
+     apt-get -y install php-json
+     apt-get -y install php-sqlite3
+     apt-get -y install php-zip
+     #phpenmod openssl
+     phpenmod pdo
+     #phpenmod filter
+     phpenmod mbstring
+     phpenmod tokenizer
+     phpenmod xml
+     phpenmod json
+     phpenmod sqlite3
+     phpenmod zip
+
   ## Borrar posible archivo de código fuente viejo
      rm -f /root/SoftInst/Heimdall/source.zip 2> /dev/null
   ## Crear carpeta y posicionarse
@@ -142,4 +159,7 @@ elif [ $OS_VERS == "11" ]; then
      rm -f /var/www/html/index.html 2> /dev/null
      cp -r /root/SoftInst/Heimdall/CodFuente/public/* /var/www/html/
      chown www-data:www-data /var/www/html/ -R
+     sed -i -e "s|} elseif ('-' === |//} elseif ('-' === |g" /root/SoftInst/Heimdall/CodFuente/vendor/symfony/console/Input/ArrayInput.php
+     sed -i -e 's|$this->addShortOption(substr($key, 1), $value);|//$this->addShortOption(substr($key, 1), $value);|g' /root/SoftInst/Heimdall/CodFuente/vendor/symfony/console/Input/ArrayInput.php
+     php artisan SERVE
 fi
