@@ -100,28 +100,30 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   ## Instalar el servidor web
-     apt-get -y update
-     tasksel install web-server
+     #apt-get -y update
+     #tasksel install web-server
   ## Instalar el motor de bases de datos de sqlite
-     apt-get -y install sqlite3
+     #apt-get -y install sqlite3
   ## Instalar PHP
-     apt-get -y install libapache2-mod-php
+     VersPHP=$(apt-cache search php | grep server-side | grep meta | cut -d ' ' -f1)
+     apt-get -y install $VersPHP
+     #apt-get -y install libapache2-mod-php
   ## Instalar dependencias php para heimdall
-     apt-get -y install php-mbstring
-     apt-get -y install php-tokenizer
-     apt-get -y install php-xml
-     apt-get -y install php-json
+     #apt-get -y install php-mbstring
+     #apt-get -y install php-tokenizer
+     #apt-get -y install php-xml
+     #apt-get -y install php-json
      apt-get -y install php-sqlite3
      apt-get -y install php-zip
      #phpenmod openssl
-     phpenmod pdo
+     #phpenmod pdo
      #phpenmod filter
-     phpenmod mbstring
-     phpenmod tokenizer
-     phpenmod xml
-     phpenmod json
-     phpenmod sqlite3
-     phpenmod zip
+     #phpenmod mbstring
+     #phpenmod tokenizer
+     #phpenmod xml
+     #phpenmod json
+     #phpenmod sqlite3
+     #phpenmod zip
 
   ## Borrar posible archivo de código fuente viejo
      rm -f /root/SoftInst/Heimdall/source.zip 2> /dev/null
@@ -130,7 +132,6 @@ elif [ $OS_VERS == "11" ]; then
      cd /root/SoftInst/Heimdall/
   ## Determinar último archivo de código fuente
      UltArchivoZip=$(curl -s https://github.com/linuxserver/Heimdall/releases/ | grep href | grep .zip | cut -d '"' -f2 | head -n1)
-     #https://github.com/linuxserver/Heimdall/archive/refs/tags/2.2.2.zip
   ## Descargar archivo de código fuente nuevo
      ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
@@ -142,7 +143,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
         fi
      wget https://github.com$UltArchivoZip -O /root/SoftInst/Heimdall/source.zip
-  ## Desccomprimir archivo con código fuente nuevo
+  ## Descomprimir archivo con código fuente nuevo
      ## Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
           echo ""
@@ -154,12 +155,28 @@ elif [ $OS_VERS == "11" ]; then
         fi
      unzip /root/SoftInst/Heimdall/source.zip
      CarpetaConCodFuente=$(find /root/SoftInst/Heimdall/ -maxdepth 1 -type d -print | sed 1d)
-     mv $CarpetaConCodFuente /root/SoftInst/Heimdall/CodFuente/
+     mv $CarpetaConCodFuente /var/www/heimdall/
   ## Copiar archivos a la carpeta pública de html de Apache
-     rm -f /var/www/html/index.html 2> /dev/null
-     cp -r /root/SoftInst/Heimdall/CodFuente/public/* /var/www/html/
-     chown www-data:www-data /var/www/html/ -R
-     sed -i -e "s|} elseif ('-' === |//} elseif ('-' === |g" /root/SoftInst/Heimdall/CodFuente/vendor/symfony/console/Input/ArrayInput.php
-     sed -i -e 's|$this->addShortOption(substr($key, 1), $value);|//$this->addShortOption(substr($key, 1), $value);|g' /root/SoftInst/Heimdall/CodFuente/vendor/symfony/console/Input/ArrayInput.php
-     php artisan SERVE
+     chown www-data:www-data /var/www/heimdall/ -R
+     sed -i -e "s|} elseif ('-' === |//} elseif ('-' === |g" /var/www/heimdall/vendor/symfony/console/Input/ArrayInput.php
+     sed -i -e 's|$this->addShortOption(substr($key, 1), $value);|//$this->addShortOption(substr($key, 1), $value);|g' /var/www/heimdall/vendor/symfony/console/Input/ArrayInput.php
+  ## Crear el servicio de systemd
+     echo "[Unit]"                                                             > /etc/systemd/system/heimdall.service
+     echo "Description=Heimdall"                                              >> /etc/systemd/system/heimdall.service
+     echo "After=network.target"                                              >> /etc/systemd/system/heimdall.service
+     echo ""                                                                  >> /etc/systemd/system/heimdall.service
+     echo "[Service]"                                                         >> /etc/systemd/system/heimdall.service
+     echo "Restart=always"                                                    >> /etc/systemd/system/heimdall.service
+     echo "RestartSec=5"                                                      >> /etc/systemd/system/heimdall.service
+     echo "Type=simple"                                                       >> /etc/systemd/system/heimdall.service
+     echo "User=www-data"                                                     >> /etc/systemd/system/heimdall.service
+     echo "Group=www-data"                                                    >> /etc/systemd/system/heimdall.service
+     echo "WorkingDirectory=/var/www/heimdall"                                >> /etc/systemd/system/heimdall.service
+     echo 'ExecStart="/usr/bin/php" artisan serve --port 7889 --host 0.0.0.0' >> /etc/systemd/system/heimdall.service
+     echo "TimeoutStopSec=30"                                                 >> /etc/systemd/system/heimdall.service
+     echo ""                                                                  >> /etc/systemd/system/heimdall.service
+     echo "[Install]"                                                         >> /etc/systemd/system/heimdall.service
+     echo "WantedBy=multi-user.target"                                        >> /etc/systemd/system/heimdall.service
+     systemctl enable --now heimdall.service
+     
 fi
