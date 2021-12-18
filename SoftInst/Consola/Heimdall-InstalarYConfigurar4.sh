@@ -99,6 +99,13 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
+  ## Instalar el servidor web
+     apt-get -y update
+     tasksel install web-server
+  ## Instalar PHP
+     apt-get -y install libapache2-mod-php
+  ## Instalar dependencias php para heimdall
+     
   ## Borrar posible archivo de código fuente viejo
      rm -f /root/SoftInst/Heimdall/source.zip 2> /dev/null
   ## Crear carpeta y posicionarse
@@ -131,4 +138,8 @@ elif [ $OS_VERS == "11" ]; then
      unzip /root/SoftInst/Heimdall/source.zip
      CarpetaConCodFuente=$(find /root/SoftInst/Heimdall/ -maxdepth 1 -type d -print | sed 1d)
      mv $CarpetaConCodFuente /root/SoftInst/Heimdall/CodFuente/
+  ## Copiar archivos a la carpeta pública de html de Apache
+     rm -f /var/www/html/index.html 2> /dev/null
+     cp -r /root/SoftInst/Heimdall/CodFuente/public/* /var/www/html/
+     chown www-data:www-data /var/www/html/ -R
 fi
