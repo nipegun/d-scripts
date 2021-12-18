@@ -7,6 +7,10 @@
 
 #-----------------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar Heimdall Dashboard en Debian
+#
+#  Ejecución remota:
+#  curl -s | bash
+#
 #-----------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
