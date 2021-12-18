@@ -88,7 +88,7 @@ elif [ $OS_VERS == "10" ]; then
   echo ""
 
   echo ""
-  echo "Instalación para Debian 11 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "Instalación para Debian 10 todavía no preparada. Prueba instalarlo en otra versión de Debian"
   echo ""
 
 elif [ $OS_VERS == "11" ]; then
@@ -114,6 +114,6 @@ elif [ $OS_VERS == "11" ]; then
           apt-get -y install wget
           echo ""
         fi
-     wget https://github.com$UltArchivoZip
+     wget https://github.com$UltArchivoZip -O /root/SoftInst/Heimdall/source.zip
 
 fi
