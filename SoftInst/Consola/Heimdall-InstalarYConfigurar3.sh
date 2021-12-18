@@ -129,5 +129,6 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
         fi
      unzip /root/SoftInst/Heimdall/source.zip
-     find /root/SoftInst/Heimdall/ -maxdepth 1 -type f -print
+     CarpetaConCodFuente=$(find /root/SoftInst/Heimdall/ -maxdepth 1 -type d -print | sed 1d)
+     mv $CarpetaConCodFuente /root/SoftInst/Heimdall/CodFuente/
 fi
