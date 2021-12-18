@@ -115,5 +115,16 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
         fi
      wget https://github.com$UltArchivoZip -O /root/SoftInst/Heimdall/source.zip
-
+  ## Desccomprimir archivo con código fuente nuevo
+     ## Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo "  unzip no está instalado. Iniciando su instalación..."
+          echo ""
+          apt-get -y update > /dev/null
+          apt-get -y install unzip
+          echo ""
+        fi
+     mkdir -p /root/SoftInst/Heimdall/CodFuente/ 2> /dev/null
+     unzip /root/SoftInst/Heimdall/source.zip -d /root/SoftInst/Heimdall/CodFuente/
 fi
