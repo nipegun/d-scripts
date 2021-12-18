@@ -100,10 +100,10 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   ## Borrar posible archivo de código fuente viejo
-     rm -f /root/SoftInst/Heimdall/CodFuente/source.zip 2> /dev/null
+     rm -f /root/SoftInst/Heimdall/source.zip 2> /dev/null
   ## Crear carpeta y posicionarse
-     mkdir -p /root/SoftInst/Heimdall/CodFuente/ 2> /dev/null
-     cd /root/SoftInst/Heimdall/CodFuente/
+     mkdir -p /root/SoftInst/Heimdall/ 2> /dev/null
+     cd /root/SoftInst/Heimdall/
   ## Determinar último archivo de código fuente
      UltArchivoZip=$(curl -s https://github.com/linuxserver/Heimdall/releases/ | grep href | grep .zip | cut -d '"' -f2 | head -n1)
      #https://github.com/linuxserver/Heimdall/archive/refs/tags/2.2.2.zip
@@ -117,7 +117,7 @@ elif [ $OS_VERS == "11" ]; then
           apt-get -y install wget
           echo ""
         fi
-     wget https://github.com$UltArchivoZip -O /root/SoftInst/Heimdall/CodFuente/source.zip
+     wget https://github.com$UltArchivoZip -O /root/SoftInst/Heimdall/source.zip
   ## Desccomprimir archivo con código fuente nuevo
      ## Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
@@ -128,5 +128,6 @@ elif [ $OS_VERS == "11" ]; then
           apt-get -y install unzip
           echo ""
         fi
-     unzip /root/SoftInst/Heimdall/CodFuente/source.zip
+     unzip /root/SoftInst/Heimdall/source.zip
+     find /root/SoftInst/Heimdall/ -maxdepth 1 -type f -print
 fi
