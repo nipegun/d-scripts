@@ -106,6 +106,7 @@ elif [ $OS_VERS == "11" ]; then
      cd /root/SoftInst/Heimdall/CodFuente/
   ## Determinar último archivo de código fuente
      UltArchivoZip=$(curl -s https://github.com/linuxserver/Heimdall/releases/ | grep href | grep .zip | cut -d '"' -f2 | head -n1)
+     #https://github.com/linuxserver/Heimdall/archive/refs/tags/2.2.2.zip
   ## Descargar archivo de código fuente nuevo
      ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
