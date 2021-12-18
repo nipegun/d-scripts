@@ -104,6 +104,8 @@ elif [ $OS_VERS == "11" ]; then
   ## Crear carpeta y posicionarse
      mkdir -p /root/SoftInst/Heimdall/CodFuente/ 2> /dev/null
      cd /root/SoftInst/Heimdall/CodFuente/
+  ## Determinar último archivo de código fuente
+     UltArchivoZip=$(curl -s https://github.com/linuxserver/Heimdall/releases/ | grep href | grep .zip | cut -d '"' -f2 | head -n1)
   ## Descargar archivo de código fuente nuevo
      ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
