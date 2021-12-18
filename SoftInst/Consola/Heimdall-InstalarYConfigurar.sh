@@ -99,19 +99,21 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
-  UltArchivoZip=$(curl -s https://github.com/linuxserver/Heimdall/releases/ | grep href | grep .zip | cut -d '"' -f2 | head -n1)
-  https://github.com/linuxserver/Heimdall/archive/refs/tags/2.2.2.zip
-  mkdir -p /root/SoftInst/Heimdall/
-  cd -p /root/SoftInst/Heimdall/
-  ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-       echo ""
-       echo "  wget no está instalado. Iniciando su instalación..."
-       echo ""
-       apt-get -y update > /dev/null
-       apt-get -y install wget
-       echo ""
-     fi
-  wget https://github.com$UltArchivoZip
+  ## Borrar posible archivo de código fuente viejo
+     rm -f /root/SoftInst/Heimdall/source.zip 2> /dev/null
+  ## Crear carpeta y posicionarse
+     mkdir -p /root/SoftInst/Heimdall/ 2> /dev/null
+     cd /root/SoftInst/Heimdall/
+  ## Descargar archivo de código fuente nuevo
+     ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo "  wget no está instalado. Iniciando su instalación..."
+          echo ""
+          apt-get -y update > /dev/null
+          apt-get -y install wget
+          echo ""
+        fi
+     wget https://github.com$UltArchivoZip
 
 fi
