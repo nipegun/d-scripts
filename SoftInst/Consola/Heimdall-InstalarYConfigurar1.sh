@@ -153,7 +153,7 @@ elif [ $OS_VERS == "11" ]; then
           apt-get -y install unzip
           echo ""
         fi
-     unzip /root/SoftInst/Heimdall/source.zip
+     unzip -qq /root/SoftInst/Heimdall/source.zip
      CarpetaConCodFuente=$(find /root/SoftInst/Heimdall/ -maxdepth 1 -type d -print | sed 1d)
      mv $CarpetaConCodFuente /var/www/heimdall/
   ## Copiar archivos a la carpeta pública de html de Apache
