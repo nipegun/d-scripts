@@ -178,5 +178,7 @@ elif [ $OS_VERS == "11" ]; then
      echo "[Install]"                                                         >> /etc/systemd/system/heimdall.service
      echo "WantedBy=multi-user.target"                                        >> /etc/systemd/system/heimdall.service
      systemctl enable --now heimdall.service
-     
+  ## Reiniciar el sistema
+     shutdown -r now
 fi
+
