@@ -180,6 +180,7 @@ elif [ $OS_VERS == "11" ]; then
      systemctl enable --now heimdall.service
      cd /var/www/heimdall
      /usr/bin/php artisan key:generate
+     rm -rf /var/www/heimdall/storage/framework/sessions/* 2> /dev/null
   ## Reiniciar el sistema
      shutdown -r now
 fi
