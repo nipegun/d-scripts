@@ -99,32 +99,12 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
-  ## Instalar el servidor web
-     #apt-get -y update
-     #tasksel install web-server
-  ## Instalar el motor de bases de datos de sqlite
-     #apt-get -y install sqlite3
   ## Instalar PHP
      VersPHP=$(apt-cache search php | grep server-side | grep meta | cut -d ' ' -f1)
      apt-get -y install $VersPHP
-     #apt-get -y install libapache2-mod-php
   ## Instalar dependencias php para heimdall
-     #apt-get -y install php-mbstring
-     #apt-get -y install php-tokenizer
-     #apt-get -y install php-xml
-     #apt-get -y install php-json
      apt-get -y install php-sqlite3
      apt-get -y install php-zip
-     #phpenmod openssl
-     #phpenmod pdo
-     #phpenmod filter
-     #phpenmod mbstring
-     #phpenmod tokenizer
-     #phpenmod xml
-     #phpenmod json
-     #phpenmod sqlite3
-     #phpenmod zip
-
   ## Borrar posible archivo de código fuente viejo
      rm -f /root/SoftInst/Heimdall/source.zip 2> /dev/null
   ## Crear carpeta y posicionarse
