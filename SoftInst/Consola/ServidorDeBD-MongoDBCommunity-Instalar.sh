@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar el servidor de bases MongoDB en Debian
 #
 # Ejecución remota
-# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorMongoDBCommunity-Instalar.sh | bash
+# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-MongoDBCommunity-Instalar.sh | bash
 #
 #--------------------------------------------------------------------------------------------------------------------------------
 
