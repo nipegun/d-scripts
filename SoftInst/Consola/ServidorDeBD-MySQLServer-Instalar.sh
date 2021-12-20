@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar MuSQL Servern en Debian
 #
 # Ejecución remota
-# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorMySQL-Instalar.sh | bash
+# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-MySQLServer-Instalar.sh | bash
 #---------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
