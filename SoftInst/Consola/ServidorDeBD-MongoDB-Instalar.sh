@@ -188,6 +188,11 @@ elif [ $OS_VERS == "10" ]; then
   echo ""
   echo "  Se ha creado el usuario root con contraseña rootMySQL."
   echo ""
+  echo "  Para cambiarle la contraseña lanza mongosh como root ejecuta:"
+  echo ""
+  echo "  use admin"
+  echo '  db.changeUserPassword("root", passwordPrompt())'
+  echo ""
 
 elif [ $OS_VERS == "11" ]; then
 
