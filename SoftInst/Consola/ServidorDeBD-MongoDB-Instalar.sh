@@ -5,13 +5,13 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar el servidor de bases MongoDB en Debian
 #
 # Ejecución remota
-# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-MongoDB-InstalarYConfigurar.sh | bash
+# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-MongoDB-Instalar.sh | bash
 #
-#---------------------------------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -186,7 +186,8 @@ elif [ $OS_VERS == "10" ]; then
   echo '})'                                  >> /tmp/CrearUsuariosMongoDB.js
   mongosh --quiet < /tmp/CrearUsuariosMongoDB.js
   echo ""
-
+  echo "  Se ha creado el usuario root con contraseña rootMySQL."
+  echo ""
 
 elif [ $OS_VERS == "11" ]; then
 
