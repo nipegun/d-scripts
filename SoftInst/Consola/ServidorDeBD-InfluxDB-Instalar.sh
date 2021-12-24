@@ -87,7 +87,18 @@ elif [ $OS_VERS == "10" ]; then
   echo "---------------------------------------------------------------------------------------"
   echo ""
 
+  echo ""
+  echo "  Instalando paquetes..."
+  echo ""
+  apt-get -y update
+  apt-get -y install influxdb
+  apt-get -y install influxdb-client
+  apt-get -y install python3-influxdb
 
+  echo ""
+  echo "  Activando el servicio"
+  echo ""
+  systemctl enable influxdb.service --now
 
 elif [ $OS_VERS == "11" ]; then
 
@@ -97,7 +108,18 @@ elif [ $OS_VERS == "11" ]; then
   echo "----------------------------------------------------------------------------------------"
   echo ""
 
+  echo ""
+  echo "  Instalando paquetes..."
+  echo ""
+  apt-get -y update
+  apt-get -y install influxdb
+  apt-get -y install influxdb-client
+  apt-get -y install python3-influxdb
 
+  echo ""
+  echo "  Activando el servicio"
+  echo ""
+  systemctl enable influxdb.service --now
 
 fi
 
