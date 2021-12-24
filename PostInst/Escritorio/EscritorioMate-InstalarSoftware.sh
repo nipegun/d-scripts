@@ -7,6 +7,9 @@
 
 #----------------------------------------------------------------------------
 #  Script de NiPeGun para instalar software en el escritorio Mate de Debian
+#
+#  Ejecución remota:
+#  curl -s | bash
 #----------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
