@@ -182,6 +182,66 @@ elif [ $OS_VERS == "11" ]; then
   ## x 
      echo -n mem > /sys/power/state
 
+  ## ComandosPostArranque
+     echo ""
+     echo -e "${ColorVerde}Configurando el servicio...${FinColor}"
+     echo ""
+     echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
+     echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
+     echo "ConditionPathExists=/etc/rc.local"       >> /etc/systemd/system/rc-local.service
+     echo ""                                        >> /etc/systemd/system/rc-local.service
+     echo "[Service]"                               >> /etc/systemd/system/rc-local.service
+     echo "Type=forking"                            >> /etc/systemd/system/rc-local.service
+     echo "ExecStart=/etc/rc.local start"           >> /etc/systemd/system/rc-local.service
+     echo "TimeoutSec=0"                            >> /etc/systemd/system/rc-local.service
+     echo "StandardOutput=tty"                      >> /etc/systemd/system/rc-local.service
+     echo "RemainAfterExit=yes"                     >> /etc/systemd/system/rc-local.service
+     echo "SysVStartPriority=99"                    >> /etc/systemd/system/rc-local.service
+     echo ""                                        >> /etc/systemd/system/rc-local.service
+     echo "[Install]"                               >> /etc/systemd/system/rc-local.service
+     echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
+     echo ""
+     echo -e "${ColorVerde}Creando el archivo /etc/rc.local ...${FinColor}"
+     echo ""
+     echo '#!/bin/bash'                            > /etc/rc.local
+     echo ""                                      >> /etc/rc.local
+     echo "/root/scripts/ComandosPostArranque.sh" >> /etc/rc.local
+     echo "exit 0"                                >> /etc/rc.local
+     chmod +x                                        /etc/rc.local
+     echo ""
+     echo -e "${ColorVerde}Creando el archivo para meter los comandos...${FinColor}"
+     echo ""
+     mkdir -p /root/scripts/ 2> /dev/null
+     echo '#!/bin/bash'                                                                                         > /root/scripts/ComandosPostArranque.sh
+     echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
+     echo "ColorRojo='\033[1;31m'"                                                                             >> /root/scripts/ComandosPostArranque.sh
+     echo "ColorVerde='\033[1;32m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
+     echo "FinColor='\033[0m'"                                                                                 >> /root/scripts/ComandosPostArranque.sh
+     echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
+     echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                  >> /root/scripts/ComandosPostArranque.sh
+     echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
+     echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
+     echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
+     echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                    >> /root/scripts/ComandosPostArranque.sh
+     echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                  >> /root/scripts/ComandosPostArranque.sh
+     echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
+     chmod 700                                                                                                    /root/scripts/ComandosPostArranque.sh
+     echo ""
+     echo -e "${ColorVerde}Activando y arrancando el servicio...${FinColor}"
+     echo ""
+     systemctl enable rc-local
+     systemctl start rc-local.service
+
+  ## Agregar comandos post arranque
+     echo "mount -t auto /dev/sda1 /Particiones/sda1/" >> /root/scripts/ComandosPostArranque.sh
+     echo "mount -t auto /dev/sda2 /Particiones/sda2/" >> /root/scripts/ComandosPostArranque.sh
+     echo "mount -t auto /dev/sda3 /Particiones/sda3/" >> /root/scripts/ComandosPostArranque.sh
+     echo "mount -t auto /dev/sda4 /Particiones/sda4/" >> /root/scripts/ComandosPostArranque.sh
+     echo "mount -t auto /dev/sdb1 /Particiones/sdb1/" >> /root/scripts/ComandosPostArranque.sh
+     echo "mount -t auto /dev/sdb2 /Particiones/sdb2/" >> /root/scripts/ComandosPostArranque.sh
+     echo "mount -t auto /dev/sdb3 /Particiones/sdb3/" >> /root/scripts/ComandosPostArranque.sh
+     echo "mount -t auto /dev/sdb4 /Particiones/sdb4/" >> /root/scripts/ComandosPostArranque.sh
+
   ## Documentos
   
      mkdir -p /root/Documents/ 2> /dev/null
@@ -214,15 +274,5 @@ elif [ $OS_VERS == "11" ]; then
          echo "# BORRAR /dev/sdb"                                                       >> /root/Documents/BorrarSSD.txt
          echo "hdparm --user-master u --security-set-pass hacks4geeks /dev/sdb"         >> /root/Documents/BorrarSSD.txt
          echo "hdparm --user-master u --security-erase hacks4geeks /dev/sdb"            >> /root/Documents/BorrarSSD.txt
-
-      ## Agregar comandos post arranque
-         echo "mount -t auto /dev/sda1 /Particiones/sda1/" >> /root/scripts/ComandosPostArranque.sh
-         echo "mount -t auto /dev/sda2 /Particiones/sda2/" >> /root/scripts/ComandosPostArranque.sh
-         echo "mount -t auto /dev/sda3 /Particiones/sda3/" >> /root/scripts/ComandosPostArranque.sh
-         echo "mount -t auto /dev/sda4 /Particiones/sda4/" >> /root/scripts/ComandosPostArranque.sh
-         echo "mount -t auto /dev/sdb1 /Particiones/sdb1/" >> /root/scripts/ComandosPostArranque.sh
-         echo "mount -t auto /dev/sdb2 /Particiones/sdb2/" >> /root/scripts/ComandosPostArranque.sh
-         echo "mount -t auto /dev/sdb3 /Particiones/sdb3/" >> /root/scripts/ComandosPostArranque.sh
-         echo "mount -t auto /dev/sdb4 /Particiones/sdb4/" >> /root/scripts/ComandosPostArranque.sh
          
 fi
