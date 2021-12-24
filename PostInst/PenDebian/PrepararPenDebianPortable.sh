@@ -244,35 +244,35 @@ elif [ $OS_VERS == "11" ]; then
 
   ## Documentos
   
-     mkdir -p /root/Documents/ 2> /dev/null
+     mkdir -p /root/Documentos/ 2> /dev/null
 
      ## Chameleon desde Grub
-         echo "gedit /boot/grub/grub.cfg"         > /root/Documents/BootearChameleonDesdeGrub.txt
-         echo ""                                 >> /root/Documents/BootearChameleonDesdeGrub.txt
-         echo 'menuentry "macOS" {'              >> /root/Documents/BootearChameleonDesdeGrub.txt
-         echo "  insmod hfsplus"                 >> /root/Documents/BootearChameleonDesdeGrub.txt
-         echo "  search --file --set=root /boot" >> /root/Documents/BootearChameleonDesdeGrub.txt
-         echo "  multiboot /boot"                >> /root/Documents/BootearChameleonDesdeGrub.txt
-         echo "}"                                >> /root/Documents/BootearChameleonDesdeGrub.txt
+         echo "gedit /boot/grub/grub.cfg"         > /root/Documentos/BootearChameleonDesdeGrub.txt
+         echo ""                                 >> /root/Documentos/BootearChameleonDesdeGrub.txt
+         echo 'menuentry "macOS" {'              >> /root/Documentos/BootearChameleonDesdeGrub.txt
+         echo "  insmod hfsplus"                 >> /root/Documentos/BootearChameleonDesdeGrub.txt
+         echo "  search --file --set=root /boot" >> /root/Documentos/BootearChameleonDesdeGrub.txt
+         echo "  multiboot /boot"                >> /root/Documentos/BootearChameleonDesdeGrub.txt
+         echo "}"                                >> /root/Documentos/BootearChameleonDesdeGrub.txt
 
       ## Actualizar ClamTK
-         echo '#!/bin/bash' > /root/Documents/ActualizarClamAV.txt
-         echo "freshclam"  >> /root/Documents/ActualizarClamAV.txt
+         echo '#!/bin/bash' > /root/Documentos/ActualizarClamAV.txt
+         echo "freshclam"  >> /root/Documentos/ActualizarClamAV.txt
 
       ## Borrar SSD
-         echo '#!/bin/bash'                                                              > /root/Documents/BorrarSSD.txt
-         echo ""                                                                        >> /root/Documents/BorrarSSD.txt
-         echo "# Cerrar la tapa del portátil (para hibernar Linux) y volver a abrirla." >> /root/Documents/BorrarSSD.txt
-         echo "# Cuando rearranque ejecutar"                                            >> /root/Documents/BorrarSSD.txt
-         echo ""                                                                        >> /root/Documents/BorrarSSD.txt
-         echo "hdparm -I /dev/sda | grep frozen"                                        >> /root/Documents/BorrarSSD.txt
-         echo ""                                                                        >> /root/Documents/BorrarSSD.txt
-         echo "# BORRAR /dev/sda"                                                       >> /root/Documents/BorrarSSD.txt
-         echo "hdparm --user-master u --security-set-pass hacks4geeks /dev/sda"         >> /root/Documents/BorrarSSD.txt
-         echo "hdparm --user-master u --security-erase hacks4geeks /dev/sda"            >> /root/Documents/BorrarSSD.txt
-         echo ""                                                                        >> /root/Documents/BorrarSSD.txt
-         echo "# BORRAR /dev/sdb"                                                       >> /root/Documents/BorrarSSD.txt
-         echo "hdparm --user-master u --security-set-pass hacks4geeks /dev/sdb"         >> /root/Documents/BorrarSSD.txt
-         echo "hdparm --user-master u --security-erase hacks4geeks /dev/sdb"            >> /root/Documents/BorrarSSD.txt
-         
+         echo '#!/bin/bash'                                                              > /root/Documentos/BorrarSSD.txt
+         echo ""                                                                        >> /root/Documentos/BorrarSSD.txt
+         echo "# Cerrar la tapa del portátil (para hibernar Linux) y volver a abrirla." >> /root/Documentos/BorrarSSD.txt
+         echo "# Cuando rearranque ejecutar"                                            >> /root/Documentos/BorrarSSD.txt
+         echo ""                                                                        >> /root/Documentos/BorrarSSD.txt
+         echo "hdparm -I /dev/sda | grep frozen"                                        >> /root/Documentos/BorrarSSD.txt
+         echo ""                                                                        >> /root/Documentos/BorrarSSD.txt
+         echo "# BORRAR /dev/sda"                                                       >> /root/Documentos/BorrarSSD.txt
+         echo "hdparm --user-master u --security-set-pass hacks4geeks /dev/sda"         >> /root/Documentos/BorrarSSD.txt
+         echo "hdparm --user-master u --security-erase hacks4geeks /dev/sda"            >> /root/Documentos/BorrarSSD.txt
+         echo ""                                                                        >> /root/Documentos/BorrarSSD.txt
+         echo "# BORRAR /dev/sdb"                                                       >> /root/Documentos/BorrarSSD.txt
+         echo "hdparm --user-master u --security-set-pass hacks4geeks /dev/sdb"         >> /root/Documentos/BorrarSSD.txt
+         echo "hdparm --user-master u --security-erase hacks4geeks /dev/sdb"            >> /root/Documentos/BorrarSSD.txt
+
 fi
