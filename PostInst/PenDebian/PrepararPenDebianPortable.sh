@@ -98,6 +98,10 @@ elif [ $OS_VERS == "11" ]; then
   echo "----------------------------------------------------------------------------------------"
   echo ""
 
+  ## Modificar el grub
+     sed -i -e 's|GRUB_TIMEOUT=5|GRUB_TIMEOUT=1|g' /etc/default/grub
+     sed -i -e 's|GRUB_CMDLINE_LINUX=""|GRUB_CMDLINE_LINUX="net.ifnames=0" biosdevname=0|g' /etc/default/grub
+
   ## Agregar repositorios
      cp /etc/apt/sources.list /etc/apt/sources.list.bak
      echo "deb http://deb.debian.org/debian bullseye main contrib non-free"                         > /etc/apt/sources.list
