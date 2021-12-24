@@ -109,12 +109,19 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   echo ""
-  echo "  Instalando paquetes..."
+  echo "  Instalando paquetes de InfluxDB..."
   echo ""
   apt-get -y update
   apt-get -y install influxdb
   apt-get -y install influxdb-client
+
+  echo ""
+  echo "  Instalando paquetes de Python..."
+  echo ""
+  apt-get -y install python3-dev
+  apt-get -y install python3-pip
   apt-get -y install python3-influxdb
+  pip3 install pip3 install influxdb
 
   echo ""
   echo "  Activando el servicio"
