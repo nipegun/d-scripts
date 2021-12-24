@@ -7,6 +7,9 @@
 
 #---------------------------------------------------
 #  Script de NiPeGun para preparar las tareas cron
+#
+#  Ejecución remota:
+#  curl -s | bash
 #---------------------------------------------------
 
 ColorRojo='\033[1;31m'
