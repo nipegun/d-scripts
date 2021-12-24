@@ -118,14 +118,18 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y install nmap
      apt-get -y install mc
      apt-get -y install smartmontools
+     apt-get -y install coreutils
 
   ## Antivirus
      apt-get -y install clamtk
+     apt-get -y install clamav-freshclam
      apt-get -y install clamav-daemon
      mkdir /var/log/clamav/ 2> /dev/null
-     touch /var/log/clamav/freshclam.log
-     chown clamav:clamav /var/log/clamav/freshclam.log
-     chmod 640 /var/log/clamav/freshclam.log
+     #touch /var/log/clamav/freshclam.log
+     #chown clamav:clamav /var/log/clamav/freshclam.log
+     #chmod 640 /var/log/clamav/freshclam.log
+     rm -rf /var/log/clamav/freshclam.log
+     freshclam
 
   ## Instalación de firmwares
      apt-get -y install firmware-linux-free
@@ -162,36 +166,21 @@ elif [ $OS_VERS == "11" ]; then
      mkdir -p /Discos/NVMe/ 2> /dev/null
      mkdir -p /Particiones/Windows/ 2> /dev/null
      mkdir -p /Particiones/macOS/   2> /dev/null
+     mkdir -p /Particiones/sda1/    2> /dev/null
+     mkdir -p /Particiones/sda2/    2> /dev/null
+     mkdir -p /Particiones/sda3/    2> /dev/null
+     mkdir -p /Particiones/sda4/    2> /dev/null
+     mkdir -p /Particiones/sdb1/    2> /dev/null
+     mkdir -p /Particiones/sdb2/    2> /dev/null
+     mkdir -p /Particiones/sdb3/    2> /dev/null
+     mkdir -p /Particiones/sdb4/    2> /dev/null
 
   ## Actualizar el sistema
      apt-get -y upgrade
      apt-get -y dist-upgrade
 
-echo -n mem > /sys/power/state
-
-
-
-apt-get install materia
-
-apt-get install arc-theme
-apt-get install gnome-icon-theme
-apt-get install coreutils
-shred
-mkdir /Discos
-mkdir /Discos/Win
-mount -t auto /dev/sda1 /Discos/Win
-apt-get install clamav
-clamav
-clam
-apt-get install clamav-freshclam
-clamav-freshclam
-freshclam
-rm /var/log/clamav/freshclam.log
-rm -rf /var/log/clamav/freshclam.log
-freshclam
-mount -t auto /d
-
-
+  ## x 
+     echo -n mem > /sys/power/state
 
   ## Documentos
   
@@ -226,4 +215,14 @@ mount -t auto /d
          echo "hdparm --user-master u --security-set-pass hacks4geeks /dev/sdb"         >> /root/Documents/BorrarSSD.txt
          echo "hdparm --user-master u --security-erase hacks4geeks /dev/sdb"            >> /root/Documents/BorrarSSD.txt
 
+      ## Agregar comandos post arranque
+         echo "mount -t auto /dev/sda1 /Particiones/sda1/" >> /root/scripts/ComandosPostArranque.sh
+         echo "mount -t auto /dev/sda2 /Particiones/sda2/" >> /root/scripts/ComandosPostArranque.sh
+         echo "mount -t auto /dev/sda3 /Particiones/sda3/" >> /root/scripts/ComandosPostArranque.sh
+         echo "mount -t auto /dev/sda4 /Particiones/sda4/" >> /root/scripts/ComandosPostArranque.sh
+         echo "mount -t auto /dev/sdb1 /Particiones/sdb1/" >> /root/scripts/ComandosPostArranque.sh
+         echo "mount -t auto /dev/sdb2 /Particiones/sdb2/" >> /root/scripts/ComandosPostArranque.sh
+         echo "mount -t auto /dev/sdb3 /Particiones/sdb3/" >> /root/scripts/ComandosPostArranque.sh
+         echo "mount -t auto /dev/sdb4 /Particiones/sdb4/" >> /root/scripts/ComandosPostArranque.sh
+         
 fi
