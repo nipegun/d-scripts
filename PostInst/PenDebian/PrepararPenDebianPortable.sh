@@ -117,6 +117,7 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y install curl
      apt-get -y install nmap
      apt-get -y install mc
+     apt-get -y install smartmontools
 
   ## Antivirus
      apt-get -y install clamtk
@@ -169,7 +170,7 @@ elif [ $OS_VERS == "11" ]; then
 echo -n mem > /sys/power/state
 
 
-apt-get install smartmontools
+
 apt-get install materia
 
 apt-get install arc-theme
