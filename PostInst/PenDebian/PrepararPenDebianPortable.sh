@@ -101,6 +101,7 @@ elif [ $OS_VERS == "11" ]; then
   ## Modificar el grub
      sed -i -e 's|GRUB_TIMEOUT=5|GRUB_TIMEOUT=1|g' /etc/default/grub
      sed -i -e 's|GRUB_CMDLINE_LINUX=""|GRUB_CMDLINE_LINUX="net.ifnames=0" biosdevname=0|g' /etc/default/grub
+     update-grub
 
   ## Agregar repositorios
      cp /etc/apt/sources.list /etc/apt/sources.list.bak
