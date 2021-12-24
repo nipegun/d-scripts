@@ -121,7 +121,7 @@ elif [ $OS_VERS == "11" ]; then
   ## Antivirus
      apt-get -y install clamtk
      apt-get -y install clamav-daemon
-     mkdir /var/log/clamav/
+     mkdir /var/log/clamav/ 2> /dev/null
      touch /var/log/clamav/freshclam.log
      chown clamav:clamav /var/log/clamav/freshclam.log
      chmod 640 /var/log/clamav/freshclam.log
