@@ -7,6 +7,9 @@
 
 #----------------------------------------------------------------------------------
 #  Script de NiPeGun para personalizar el escritorio Mate al acabar de instalarlo
+#
+#  Ejecución remota:
+# curl -s | bash
 #----------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
