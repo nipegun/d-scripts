@@ -6,7 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------
-#  Script de NiPeGun para preparar el cortafuegos 
+#  Script de NiPeGun para preparar el cortafuegos
+#
+#  Ejecución remota:
+#  curl -s | bash
 #--------------------------------------------------
 
 ColorRojo='\033[1;31m'
