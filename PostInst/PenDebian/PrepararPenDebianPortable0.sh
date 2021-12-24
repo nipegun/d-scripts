@@ -178,7 +178,7 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y install firmware-brcm80211
      apt-get -y install firmware-cavium
      apt-get -y install firmware-intelwimax
-     apt-get -y install firmware-ipw2x00
+     #apt-get -y install firmware-ipw2x00
      apt-get -y install firmware-iwlwifi
      apt-get -y install firmware-linux
      apt-get -y install firmware-linux-nonfree
