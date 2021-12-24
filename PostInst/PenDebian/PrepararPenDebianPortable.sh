@@ -110,7 +110,7 @@ elif [ $OS_VERS == "11" ]; then
      echo "deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free"            >> /etc/apt/sources.list
      echo ""                                                                                       >> /etc/apt/sources.list
 
-  ## Instalación de paquetes
+  ## Herramientas de terminal
      apt-get -y update
      apt-get -y install gparted
      apt-get -y install wget
@@ -119,9 +119,36 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y install mc
      apt-get -y install smartmontools
      apt-get -y install coreutils
+     apt-get -y install sshpass
+     apt-get -y install unrar
+     apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
+     apt-get -y install android-tools-fastboot
+
+  ## Herramientas gráficas
+     apt-get -y install caja-open-terminal
+     apt-get -y install caja-admin
+     apt-get -y install vlc
+     apt-get -y install vlc-plugin-vlsub
+     apt-get -y install audacity
+     apt-get -y install subtitleeditor
+     apt-get -y install easytag
+     apt-get -y install wireshark
+     apt-get -y install etherape
+     apt-get -y install thunderbird
+     apt-get -y install thunderbird-l10n-es-es
+     apt-get -y install lightning-l10n-es-es
+     apt-get -y install eiskaltdcpp
+     apt-get -y install amule
+     apt-get -y install chromium
+     apt-get -y install chromium-l10n
+     apt-get -y install filezilla
+     apt-get -y install htop
+     apt-get -y install simple-scan
+     apt-get -y install ghex
 
   ## Antivirus
      apt-get -y install clamtk
+     apt-get -y install clamav
      apt-get -y install clamav-freshclam
      apt-get -y install clamav-daemon
      mkdir /var/log/clamav/ 2> /dev/null
@@ -179,6 +206,10 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y upgrade
      apt-get -y dist-upgrade
 
+  ## Borrar paquetes
+     apt-get -y remove xterm reportbug blender imagemagick inkscape gnome-disk-utility
+     apt-get -y autoremove
+
   ## x 
      echo -n mem > /sys/power/state
 
@@ -200,6 +231,9 @@ elif [ $OS_VERS == "11" ]; then
      echo "mount -t auto /dev/sdb2 /Particiones/sdb2/" >> /root/scripts/ComandosPostArranque.sh
      echo "mount -t auto /dev/sdb3 /Particiones/sdb3/" >> /root/scripts/ComandosPostArranque.sh
      echo "mount -t auto /dev/sdb4 /Particiones/sdb4/" >> /root/scripts/ComandosPostArranque.sh
+
+  ## Escritorio mate
+     curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioMate-Personalizar.sh| bash
 
   ## Documentos
   
