@@ -7,6 +7,9 @@
 
 #------------------------------------------------------------------
 #  Script de NiPeGun para preparar el Pendrive de Debian Portable
+#
+#  Ejecución remota:
+#  curl -s | bash
 #------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
@@ -95,8 +98,41 @@ elif [ $OS_VERS == "11" ]; then
   echo "----------------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+  ## Instalación de paquetes
+  apt-get -y update
+  apt-get -y install gparted
+  apt-get -y install wget
+  apt-get -y install curl
+  apt-get -y install nmap
+  apt-get -y install mc
+
+  ## Instalación de firmwares
+  apt-get -y install firmware-linux-free
+  apt-get -y install firmware-ath9k-htc
+  apt-get -y install firmware-ath9k-htc-dbgsym
+  apt-get -y install firmware-b43-installer
+  apt-get -y install firmware-b43legacy-installer
+  apt-get -y install atmel-firmware
+  apt-get -y install bluez-firmware
+  apt-get -y install firmware-amd-graphics
+  apt-get -y install firmware-atheros
+  apt-get -y install firmware-bnx2
+  apt-get -y install firmware-bnx2x
+  apt-get -y install firmware-brcm80211
+  apt-get -y install firmware-cavium
+  apt-get -y install firmware-intelwimax
+  apt-get -y install firmware-ipw2x00
+  apt-get -y install firmware-iwlwifi
+  apt-get -y install firmware-linux
+  apt-get -y install firmware-linux-nonfree
+  apt-get -y install firmware-misc-nonfree
+  apt-get -y install firmware-myricom
+  apt-get -y install firmware-netronome
+  apt-get -y install firmware-netxen
+  apt-get -y install firmware-qcom-media
+  apt-get -y install firmware-ralink
+  apt-get -y install firmware-realtek
+  apt-get -y install firmware-ti-connectivity
+  apt-get -y install firmware-zd1211
 
 fi
