@@ -5,13 +5,13 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar Grafana en Debian
 #
 # Ejecución remota
-# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-InfluxDB-Instalar.sh | bash
+# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/Grafana-Instalar.sh | bash
 #
-#-----------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -99,35 +99,55 @@ elif [ $OS_VERS == "11" ]; then
   echo "------------------------------------------------------------------------------"
   echo ""
 
- apt-get update
-   apt-get -y install apt-transport-https software-properties-common wget
-   ## Importar clave de repositorio
-      #mkdir -p /root/aptkeys/
-      #wget -q -O- https://packages.grafana.com/gpg.key > /root/aptkeys/grafana.key
-      #gpg --dearmor /root/aptkeys/grafana.key
-      #cp /root/aptkeys/grafana.key.gpg /usr/share/keyrings/grafana.gpg
-   
+  echo ""
+  echo "  Instalando dependencias o paquetes necesarios para el script..."
+  echo ""
+  apt-get update
+  apt-get -y insall wget
+  apt-get -y install gnupg
+  #apt-get -y install apt-transport-https
+  #apt-get -y install software-properties-common
+
+  echo ""
+  echo "  Importando clave del repositorio.."
+  echo ""
+  ## Para cuando apt-key quede obsoleto:
+     # mkdir -p /root/aptkeys/
+     # wget -q -O- https://packages.grafana.com/gpg.key > /root/aptkeys/grafana.key
+     # gpg --dearmor /root/aptkeys/grafana.key
+     # cp /root/aptkeys/grafana.key.gpg /usr/share/keyrings/grafana.gpg
    wget -q -O - https://packages.grafana.com/gpg.key | apt-key add -
-   echo "deb https://packages.grafana.com/enterprise/deb stable main" > /etc/apt/sources.list.d/grafana.list
-   apt-get update
-   apt-get -y install grafana-enterprise
-      ## Preparar para https
-      #cd /etc/grafana
-      #openssl genrsa -out grafana.key 2048
-      #openssl req -new -key grafana.key -out grafana.csr
-      #openssl x509 -req -days 365 -in grafana.csr -signkey grafana.key -out grafana.crt
-      #chown grafana:grafana grafana.crt
-      #chown grafana:grafana grafana.key
-      #chmod 400 grafana.key grafana.crt
-      #sed -i -e 's|;protocol = http|protocol = https|g'                 /etc/grafana/grafana.ini
-      #sed -i -e 's|;cert_file =|cert_key = /etc/grafana/grafana.key|g'  /etc/grafana/grafana.ini
-      #sed -i -e 's|;key_file =|cert_file = /etc/grafana/grafana.crt|g'  /etc/grafana/grafana.ini
-   ## Permitir embedded
-      sed -i -e 's|;allow_embedding = false|allow_embedding = true|g'    /etc/grafana/grafana.ini
-      sed -i -e 's|;cookie_samesite = lax|cookie_samesite = disabled|g' /etc/grafana/grafana.ini
-   service grafana-server restart
-   systemctl daemon-reload
-   systemctl start grafana-server.service
-   systemctl enable grafana-server.service
+
+  echo ""
+  echo "  Agregando repositorio..."
+  echo ""
+  echo "deb https://packages.grafana.com/enterprise/deb stable main" > /etc/apt/sources.list.d/grafana.list
+
+  echo ""
+  echo "  Instalando paquetes..."
+  echo ""
+  apt-get update
+  apt-get -y install grafana-enterprise
+
+  ## Preparar para https
+     #cd /etc/grafana
+     #openssl genrsa -out grafana.key 2048
+     #openssl req -new -key grafana.key -out grafana.csr
+     #openssl x509 -req -days 365 -in grafana.csr -signkey grafana.key -out grafana.crt
+     #chown grafana:grafana grafana.crt
+     #chown grafana:grafana grafana.key
+     #chmod 400 grafana.key grafana.crt
+     #sed -i -e 's|;protocol = http|protocol = https|g'                 /etc/grafana/grafana.ini
+     #sed -i -e 's|;cert_file =|cert_key = /etc/grafana/grafana.key|g'  /etc/grafana/grafana.ini
+     #sed -i -e 's|;key_file =|cert_file = /etc/grafana/grafana.crt|g'  /etc/grafana/grafana.ini
+     
+  ## Permitir embedded
+     sed -i -e 's|;allow_embedding = false|allow_embedding = true|g'   /etc/grafana/grafana.ini
+     sed -i -e 's|;cookie_samesite = lax|cookie_samesite = disabled|g' /etc/grafana/grafana.ini
+
+  echo ""
+  echo "  Activando el servicio..."
+  echo ""
+  systemctl enable grafana-server --now
 
 fi
