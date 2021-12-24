@@ -235,6 +235,9 @@ elif [ $OS_VERS == "11" ]; then
   ## Escritorio mate
      curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioMate-Personalizar.sh| bash
 
+  ## d-scripts
+     curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar.sh | bash
+
   ## Documentos
   
      mkdir -p /root/Documentos/ 2> /dev/null
