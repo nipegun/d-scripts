@@ -143,6 +143,12 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y install firmware-ti-connectivity
      apt-get -y install firmware-zd1211
 
+  ## Otros cambios
+     mkdir -p /Discos/LVM/  2> /dev/null
+     mkdir -p /Discos/SATA/ 2> /dev/null
+     mkdir -p /Discos/NVMe/ 2> /dev/null
+     mkdir -p /Particiones/Windows/ 2> /dev/null
+     mkdir -p /Particiones/macOS/   2> /dev/null
 
 apt-get dist-upgrade
 
