@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar software en el escritorio Mate de Debian
 #
 #  Ejecución remota:
-#  curl -s | bash
-#----------------------------------------------------------------------------
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioMate-InstalarSoftware.sh | bash
+#----------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -97,16 +97,16 @@ elif [ $OS_VERS == "10" ]; then
      apt-get -y install vlc
      apt-get -y install vlc-plugin-vlsub
      apt-get -y install audacity
-     apt-get -y install openshot
      apt-get -y install subtitleeditor
      apt-get -y install easytag
+     apt-get -y install openshot
 
   ## Redes
      apt-get -y install wireshark
-     apt-get -y install virt-viewer
-     apt-get -y install remmina
      apt-get -y install etherape
      apt-get -y install sshpass
+     apt-get -y install virt-viewer
+     apt-get -y install remmina
 
   ## Juegos
      apt-get -y install scid
@@ -123,11 +123,12 @@ elif [ $OS_VERS == "10" ]; then
      apt-get -y install lightning-l10n-es-es
      apt-get -y install eiskaltdcpp
      apt-get -y install amule
-     apt-get -y install mumble
-     apt-get -y install obs-studio
      apt-get -y install chromium
      apt-get -y install chromium-l10n
      apt-get -y install filezilla
+     apt-get -y install mumble
+     apt-get -y install obs-studio
+
 
   ## Programación
      apt-get -y install ghex
