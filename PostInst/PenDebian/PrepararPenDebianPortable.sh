@@ -129,7 +129,7 @@ elif [ $OS_VERS == "11" ]; then
   ## Instalación de firmwares
      apt-get -y install firmware-linux-free
      apt-get -y install firmware-ath9k-htc
-     apt-get -y install firmware-ath9k-htc-dbgsym
+     #apt-get -y install firmware-ath9k-htc-dbgsym
      apt-get -y install firmware-b43-installer
      apt-get -y install firmware-b43legacy-installer
      apt-get -y install atmel-firmware
@@ -162,7 +162,9 @@ elif [ $OS_VERS == "11" ]; then
      mkdir -p /Particiones/Windows/ 2> /dev/null
      mkdir -p /Particiones/macOS/   2> /dev/null
 
-apt-get dist-upgrade
+  ## Actualizar el sistema
+     apt-get -y upgrade
+     apt-get -y dist-upgrade
 
 echo -n mem > /sys/power/state
 
