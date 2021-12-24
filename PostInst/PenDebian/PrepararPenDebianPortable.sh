@@ -99,40 +99,110 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   ## Instalación de paquetes
-  apt-get -y update
-  apt-get -y install gparted
-  apt-get -y install wget
-  apt-get -y install curl
-  apt-get -y install nmap
-  apt-get -y install mc
+     apt-get -y update
+     apt-get -y install gparted
+     apt-get -y install wget
+     apt-get -y install curl
+     apt-get -y install nmap
+     apt-get -y install mc
+
+  ## Antivirus
+     apt-get -y install clamtk
+     apt-get -y install clamav-daemon
+     mkdir /var/log/clamav/
+     touch /var/log/clamav/freshclam.log
+     chown clamav:clamav /var/log/clamav/freshclam.log
+     chmod 640 /var/log/clamav/freshclam.log
 
   ## Instalación de firmwares
-  apt-get -y install firmware-linux-free
-  apt-get -y install firmware-ath9k-htc
-  apt-get -y install firmware-ath9k-htc-dbgsym
-  apt-get -y install firmware-b43-installer
-  apt-get -y install firmware-b43legacy-installer
-  apt-get -y install atmel-firmware
-  apt-get -y install bluez-firmware
-  apt-get -y install firmware-amd-graphics
-  apt-get -y install firmware-atheros
-  apt-get -y install firmware-bnx2
-  apt-get -y install firmware-bnx2x
-  apt-get -y install firmware-brcm80211
-  apt-get -y install firmware-cavium
-  apt-get -y install firmware-intelwimax
-  apt-get -y install firmware-ipw2x00
-  apt-get -y install firmware-iwlwifi
-  apt-get -y install firmware-linux
-  apt-get -y install firmware-linux-nonfree
-  apt-get -y install firmware-misc-nonfree
-  apt-get -y install firmware-myricom
-  apt-get -y install firmware-netronome
-  apt-get -y install firmware-netxen
-  apt-get -y install firmware-qcom-media
-  apt-get -y install firmware-ralink
-  apt-get -y install firmware-realtek
-  apt-get -y install firmware-ti-connectivity
-  apt-get -y install firmware-zd1211
+     apt-get -y install firmware-linux-free
+     apt-get -y install firmware-ath9k-htc
+     apt-get -y install firmware-ath9k-htc-dbgsym
+     apt-get -y install firmware-b43-installer
+     apt-get -y install firmware-b43legacy-installer
+     apt-get -y install atmel-firmware
+     apt-get -y install bluez-firmware
+     apt-get -y install firmware-amd-graphics
+     apt-get -y install firmware-atheros
+     apt-get -y install firmware-bnx2
+     apt-get -y install firmware-bnx2x
+     apt-get -y install firmware-brcm80211
+     apt-get -y install firmware-cavium
+     apt-get -y install firmware-intelwimax
+     apt-get -y install firmware-ipw2x00
+     apt-get -y install firmware-iwlwifi
+     apt-get -y install firmware-linux
+     apt-get -y install firmware-linux-nonfree
+     apt-get -y install firmware-misc-nonfree
+     apt-get -y install firmware-myricom
+     apt-get -y install firmware-netronome
+     apt-get -y install firmware-netxen
+     apt-get -y install firmware-qcom-media
+     apt-get -y install firmware-ralink
+     apt-get -y install firmware-realtek
+     apt-get -y install firmware-ti-connectivity
+     apt-get -y install firmware-zd1211
+
+
+apt-get dist-upgrade
+
+echo -n mem > /sys/power/state
+
+
+apt-get install smartmontools
+apt-get install materia
+
+apt-get install arc-theme
+apt-get install gnome-icon-theme
+apt-get install coreutils
+shred
+mkdir /Discos
+mkdir /Discos/Win
+mount -t auto /dev/sda1 /Discos/Win
+apt-get install clamav
+clamav
+clam
+apt-get install clamav-freshclam
+clamav-freshclam
+freshclam
+rm /var/log/clamav/freshclam.log
+rm -rf /var/log/clamav/freshclam.log
+freshclam
+mount -t auto /d
+
+
+
+  ## Documentos
+  
+     mkdir -p /root/Documents/ 2> /dev/null
+
+     ## Chameleon desde Grub
+         echo "gedit /boot/grub/grub.cfg"         > /root/Documents/BootearChameleonDesdeGrub.txt
+         echo ""                                 >> /root/Documents/BootearChameleonDesdeGrub.txt
+         echo 'menuentry "macOS" {'              >> /root/Documents/BootearChameleonDesdeGrub.txt
+         echo "  insmod hfsplus"                 >> /root/Documents/BootearChameleonDesdeGrub.txt
+         echo "  search --file --set=root /boot" >> /root/Documents/BootearChameleonDesdeGrub.txt
+         echo "  multiboot /boot"                >> /root/Documents/BootearChameleonDesdeGrub.txt
+         echo "}"                                >> /root/Documents/BootearChameleonDesdeGrub.txt
+
+      ## Actualizar ClamTK
+         echo '#!/bin/bash' > /root/Documents/ActualizarClamAV.txt
+         echo "freshclam"  >> /root/Documents/ActualizarClamAV.txt
+
+      ## Borrar SSD
+         echo '#!/bin/bash'                                                              > /root/Documents/BorrarSSD.txt
+         echo ""                                                                        >> /root/Documents/BorrarSSD.txt
+         echo "# Cerrar la tapa del portátil (para hibernar Linux) y volver a abrirla." >> /root/Documents/BorrarSSD.txt
+         echo "# Cuando rearranque ejecutar"                                            >> /root/Documents/BorrarSSD.txt
+         echo ""                                                                        >> /root/Documents/BorrarSSD.txt
+         echo "hdparm -I /dev/sda | grep frozen"                                        >> /root/Documents/BorrarSSD.txt
+         echo ""                                                                        >> /root/Documents/BorrarSSD.txt
+         echo "# BORRAR /dev/sda"                                                       >> /root/Documents/BorrarSSD.txt
+         echo "hdparm --user-master u --security-set-pass hacks4geeks /dev/sda"         >> /root/Documents/BorrarSSD.txt
+         echo "hdparm --user-master u --security-erase hacks4geeks /dev/sda"            >> /root/Documents/BorrarSSD.txt
+         echo ""                                                                        >> /root/Documents/BorrarSSD.txt
+         echo "# BORRAR /dev/sdb"                                                       >> /root/Documents/BorrarSSD.txt
+         echo "hdparm --user-master u --security-set-pass hacks4geeks /dev/sdb"         >> /root/Documents/BorrarSSD.txt
+         echo "hdparm --user-master u --security-erase hacks4geeks /dev/sdb"            >> /root/Documents/BorrarSSD.txt
 
 fi
