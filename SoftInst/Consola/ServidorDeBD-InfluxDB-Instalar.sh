@@ -121,7 +121,7 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install python3-dev
   apt-get -y install python3-pip
   apt-get -y install python3-influxdb
-  pip3 install pip3 install influxdb
+  pip3 install influxdb
 
   echo ""
   echo "  Activando el servicio"
