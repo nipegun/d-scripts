@@ -47,7 +47,7 @@ if [ $# -ne $CantArgsEsperados ]
          apt-get -y install tree
          echo ""
        fi
-    ArchivoTree=$(tree $1 | grep iles | grep , | cut -d',' -f2 | cut -d' ' -f2)
+    ArchivosTree=$(tree $1 | grep iles | grep , | cut -d',' -f2 | cut -d' ' -f2)
     echo "  Contados con tree: $ArchivosTree"
     echo ""
     
