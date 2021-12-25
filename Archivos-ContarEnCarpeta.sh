@@ -33,8 +33,22 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     exit $ArgsInsuficientes
   else
-    echo ""
+    echo "  Contandos con find:"
     find $1 -type f | wc -l
     echo ""
+
+    ## Comprobar si el paquete tree está instalado. Si no lo está, instalarlo.
+       if [[ $(dpkg-query -s tree 2>/dev/null | grep installed) == "" ]]; then
+         echo ""
+         echo "  tree no está instalado. Iniciando su instalación..."
+         echo ""
+         apt-get -y update > /dev/null
+         apt-get -y install tree
+         echo ""
+       fi
+    echo " Contados por tree:"
+    tree $1 | grep iles | grep , | cut -d',' -f2 | cut -d' ' -f2
+    echo ""
+    
 fi
 
