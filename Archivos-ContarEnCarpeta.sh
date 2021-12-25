@@ -33,7 +33,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     exit $ArgsInsuficientes
   else
-    echo "  Contandos con find:"
+    echo "  Contados con find:"
     find $1 -type f | wc -l
     echo ""
 
@@ -46,7 +46,7 @@ if [ $# -ne $CantArgsEsperados ]
          apt-get -y install tree
          echo ""
        fi
-    echo " Contados por tree:"
+    echo "  Contados con tree:"
     tree $1 | grep iles | grep , | cut -d',' -f2 | cut -d' ' -f2
     echo ""
     
