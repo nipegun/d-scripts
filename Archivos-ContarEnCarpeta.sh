@@ -33,8 +33,9 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     exit $ArgsInsuficientes
   else
-    echo "  Contados con find:"
-    find $1 -type f | wc -l
+    ArchivosFind=$(find $1 -type f | wc -l)
+    echo "  Contados con find: $ArchivosFind"
+    
     echo ""
 
     ## Comprobar si el paquete tree está instalado. Si no lo está, instalarlo.
@@ -46,8 +47,8 @@ if [ $# -ne $CantArgsEsperados ]
          apt-get -y install tree
          echo ""
        fi
-    echo "  Contados con tree:"
-    tree $1 | grep iles | grep , | cut -d',' -f2 | cut -d' ' -f2
+    ArchivoTree=$(tree $1 | grep iles | grep , | cut -d',' -f2 | cut -d' ' -f2)
+    echo "  Contados con tree: $ArchivosTree"
     echo ""
     
 fi
