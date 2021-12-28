@@ -5,9 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA HACER QUE DEBIAN ARRANQUE EN MODO GRÁFICO
-#--------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
+#  Script de NiPeGun para hacer que Debian arranque en modo gráfico
+#
+#  Ejecución remota:
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/ArrancarEnModoGrafico.sh | bash
+#----------------------------------------------------------------------------------------------------
 
 echo ""
 echo "-------------------------"
