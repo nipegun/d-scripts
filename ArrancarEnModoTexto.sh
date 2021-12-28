@@ -6,7 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA HACER QUE DEBIAN ARRANQUE EN MODO TEXTO
+#  Script de NiPeGun para hacer que Debian arranque en modo texto
+#
+#  Ejecución remota:
+#  curl -s | bash
 #------------------------------------------------------------------
 
 echo ""
