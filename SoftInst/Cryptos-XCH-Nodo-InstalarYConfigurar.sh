@@ -145,19 +145,19 @@ echo ""
    echo "Terminal=false"                                                 >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
    echo "Hidden=false"                                                   >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
 
-## Parar el daemon
-   echo ""
-   echo "  Parando el daemon (si es que está activo)..."
-   echo ""
-   chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh
-   su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh"
-
 ## Instalar los c-scripts
    echo ""
    echo "  Instalando los c-scripts..."
    echo ""
    su $UsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
    find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+
+## Parar el daemon
+   echo ""
+   echo "  Parando el daemon (si es que está activo)..."
+   echo ""
+   chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh
+   su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh"
 
 ## Reparar permisos
    echo ""
@@ -166,8 +166,8 @@ echo ""
    chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
    ## Denegar a los otros usuarios del sistema el acceso a la carpeta del usuario 
       find /home/$UsuarioNoRoot -type d -exec chmod 750 {} \;
-   find /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/ -type f -exec chmod +x {} \;
-   find /home/$UsuarioNoRoot/                             -type f -iname "*.sh" -exec chmod +x {} \;
+      find /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/ -type f -exec chmod +x {} \;
+      find /home/$UsuarioNoRoot/                             -type f -iname "*.sh" -exec chmod +x {} \;
    ## Reparar permisos para permitir la ejecución de la cartera de Chia
       chown root:root /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
       chmod 4755 /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
