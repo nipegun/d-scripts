@@ -49,7 +49,7 @@ if [ $OS_VERS == "7" ]; then
   echo ""
 
   echo ""
-  echo "Instalación para Debian 7 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
@@ -61,7 +61,7 @@ elif [ $OS_VERS == "8" ]; then
   echo ""
 
   echo ""
-  echo "Instalación para Debian 8 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
@@ -87,19 +87,19 @@ elif [ $OS_VERS == "9" ]; then
   wget --no-check-certificate https://download.calibre-ebook.com/linux-installer.sh
   sh /root/SoftInst/Calibre/linux-installer.sh
 
-  echo "[Unit]" > /etc/systemd/system/calibre-server.service
-  echo " Description=Servidor Calibre" >> /etc/systemd/system/calibre-server.service
-  echo " After=network.target" >> /etc/systemd/system/calibre-server.service
-  echo "" >> /etc/systemd/system/calibre-server.service
-  echo "[Service]" >> /etc/systemd/system/calibre-server.service
-  echo " Type=simple" >> /etc/systemd/system/calibre-server.service
-  echo " User=root" >> /etc/systemd/system/calibre-server.service
-  echo " Group=root" >> /etc/systemd/system/calibre-server.service
+  echo "[Unit]"                                             > /etc/systemd/system/calibre-server.service
+  echo " Description=Servidor Calibre"                     >> /etc/systemd/system/calibre-server.service
+  echo " After=network.target"                             >> /etc/systemd/system/calibre-server.service
+  echo ""                                                  >> /etc/systemd/system/calibre-server.service
+  echo "[Service]"                                         >> /etc/systemd/system/calibre-server.service
+  echo " Type=simple"                                      >> /etc/systemd/system/calibre-server.service
+  echo " User=root"                                        >> /etc/systemd/system/calibre-server.service
+  echo " Group=root"                                       >> /etc/systemd/system/calibre-server.service
   echo ' ExecStart=/opt/calibre/calibre-server "/Calibre"' >> /etc/systemd/system/calibre-server.service
   #echo ' ExecStart=/opt/calibre/calibre-server "/Calibre" --enable-auth --access-log /Calibre/Access.log' >> /etc/systemd/system/calibre-server.service
-  echo "" >> /etc/systemd/system/calibre-server.service
-  echo "[Install]" >> /etc/systemd/system/calibre-server.service
-  echo " WantedBy=default.target" >> /etc/systemd/system/calibre-server.service
+  echo ""                                                  >> /etc/systemd/system/calibre-server.service
+  echo "[Install]"                                         >> /etc/systemd/system/calibre-server.service
+  echo " WantedBy=default.target"                          >> /etc/systemd/system/calibre-server.service
 
   systemctl enable calibre-server
 
@@ -126,19 +126,19 @@ elif [ $OS_VERS == "10" ]; then
   wget --no-check-certificate https://download.calibre-ebook.com/linux-installer.sh
   sh /root/SoftInst/Calibre/linux-installer.sh
 
-  echo "[Unit]" > /etc/systemd/system/calibre-server.service
-  echo " Description=Servidor Calibre" >> /etc/systemd/system/calibre-server.service
-  echo " After=network.target" >> /etc/systemd/system/calibre-server.service
-  echo "" >> /etc/systemd/system/calibre-server.service
-  echo "[Service]" >> /etc/systemd/system/calibre-server.service
-  echo " Type=simple" >> /etc/systemd/system/calibre-server.service
-  echo " User=root" >> /etc/systemd/system/calibre-server.service
-  echo " Group=root" >> /etc/systemd/system/calibre-server.service
+  echo "[Unit]"                                             > /etc/systemd/system/calibre-server.service
+  echo " Description=Servidor Calibre"                     >> /etc/systemd/system/calibre-server.service
+  echo " After=network.target"                             >> /etc/systemd/system/calibre-server.service
+  echo ""                                                  >> /etc/systemd/system/calibre-server.service
+  echo "[Service]"                                         >> /etc/systemd/system/calibre-server.service
+  echo " Type=simple"                                      >> /etc/systemd/system/calibre-server.service
+  echo " User=root"                                        >> /etc/systemd/system/calibre-server.service
+  echo " Group=root"                                       >> /etc/systemd/system/calibre-server.service
   echo ' ExecStart=/opt/calibre/calibre-server "/Calibre"' >> /etc/systemd/system/calibre-server.service
   #echo ' ExecStart=/opt/calibre/calibre-server "/Calibre" --enable-auth --access-log /Calibre/Access.log' >> /etc/systemd/system/calibre-server.service
-  echo "" >> /etc/systemd/system/calibre-server.service
-  echo "[Install]" >> /etc/systemd/system/calibre-server.service
-  echo " WantedBy=default.target" >> /etc/systemd/system/calibre-server.service
+  echo ""                                                  >> /etc/systemd/system/calibre-server.service
+  echo "[Install]"                                         >> /etc/systemd/system/calibre-server.service
+  echo " WantedBy=default.target"                          >> /etc/systemd/system/calibre-server.service
 
   systemctl enable calibre-server
 
@@ -151,7 +151,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   echo ""
-  echo "Instalación para Debian 11 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 fi
