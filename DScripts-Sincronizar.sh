@@ -19,7 +19,7 @@ FinColor='\033[0m'
 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "wget no está instalado. Iniciando su instalación..."
+    echo "  wget no está instalado. Iniciando su instalación..."
     echo ""
     apt-get -y update
     apt-get -y install wget
@@ -30,7 +30,7 @@ fi
 wget -q --tries=10 --timeout=20 --spider https://github.com
   if [[ $? -eq 0 ]]; then
     echo ""
-    echo -e "  ${ColorVerde}Sincronizando los d-scripts con las últimas versiones y descargando nuevos d-scripts si es que existen...${FinColor}"
+    echo -e "${ColorVerde}  Sincronizando los d-scripts con las últimas versiones y descargando nuevos d-scripts si es que existen...${FinColor}"
     echo ""
     rm /root/scripts/d-scripts -R 2> /dev/null
     mkdir /root/scripts 2> /dev/null
@@ -52,11 +52,11 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     find /root/scripts/d-scripts/Alias -type f -exec chmod +x {} \;
     
     echo ""
-    echo -e "  ${ColorVerde}d-scripts sincronizados correctamente${FinColor}"
+    echo -e "${ColorVerde}  d-scripts sincronizados correctamente${FinColor}"
     echo ""
   else
     echo ""
-    echo -e "${ColorRojo}No se pudo iniciar la sincronización de los d-scripts porque no se detectó conexión a Internet.${FinColor}"
+    echo -e "${ColorRojo}  No se pudo iniciar la sincronización de los d-scripts porque no se detectó conexión a Internet.${FinColor}"
     echo ""
   fi
 
