@@ -48,7 +48,7 @@ if [ $OS_VERS == "7" ]; then
   echo ""
 
   echo ""
-  echo "Instalación para Debian 7 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
@@ -60,7 +60,7 @@ elif [ $OS_VERS == "8" ]; then
   echo ""
 
   echo ""
-  echo "Instalación para Debian 8 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
@@ -76,7 +76,7 @@ elif [ $OS_VERS == "9" ]; then
 
   cp /etc/xrdp/xrdp_keyboard.ini /etc/xrdp/xrdp_keyboard.ini.bak
   sed -i -e 's|rdp_layout_de=0x00000407|rdp_layout_de=0x00000407\nrdp_layout_es=0x0000040A|g' /etc/xrdp/xrdp_keyboard.ini
-  sed -i -e 's|rdp_layout_de=de|rdp_layout_de=de\nrdp_layout_es=es|g' /etc/xrdp/xrdp_keyboard.ini
+  sed -i -e 's|rdp_layout_de=de|rdp_layout_de=de\nrdp_layout_es=es|g'                         /etc/xrdp/xrdp_keyboard.ini
   sed -i -e 's|allowed_users=console|allowed_users=anybody|g' /etc/X11/Xwrapper.config    
 
   echo ""
@@ -98,7 +98,7 @@ elif [ $OS_VERS == "10" ]; then
   echo ""
   echo "  Activando XRDP como servicio..."
   echo ""
-  systemctl enable xrdp
+  systemctl enable xrdp --now
 
 elif [ $OS_VERS == "11" ]; then
 
@@ -109,7 +109,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   echo ""
-  echo "Instalación para Debian 11 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 fi
