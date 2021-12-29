@@ -52,7 +52,7 @@ if [ $OS_VERS == "7" ]; then
   echo ""
 
   echo ""
-  echo "Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
@@ -64,7 +64,7 @@ elif [ $OS_VERS == "8" ]; then
   echo ""
 
   echo ""
-  echo "Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
@@ -76,7 +76,7 @@ elif [ $OS_VERS == "9" ]; then
   echo ""
 
   echo ""
-  echo "Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 
@@ -175,7 +175,6 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
-
   ColorRojo='\033[1;31m'
   ColorVerde='\033[1;32m'
   FinColor='\033[0m'
@@ -254,7 +253,6 @@ elif [ $OS_VERS == "11" ]; then
   service fail2ban reload
   service fail2ban restart
   # tail -f /var/log/fail2ban.log
-
 
 fi
 
