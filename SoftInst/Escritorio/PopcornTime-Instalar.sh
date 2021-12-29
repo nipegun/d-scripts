@@ -48,7 +48,7 @@ if [ $OS_VERS == "7" ]; then
   echo ""
 
   echo ""
-  echo "Instalación para Debian 7 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
@@ -60,7 +60,7 @@ elif [ $OS_VERS == "8" ]; then
   echo ""
 
   echo ""
-  echo "Instalación para Debian 8 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
@@ -72,7 +72,7 @@ elif [ $OS_VERS == "9" ]; then
   echo ""
 
   echo ""
-  echo "Instalación para Debian 9 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $OS_VERS == "10" ]; then
@@ -92,14 +92,14 @@ elif [ $OS_VERS == "10" ]; then
   mkdir /opt/popcorn-time
   tar -xvf $ArchivoADescargar -C /opt/popcorn-time
   ln -sf /opt/popcorn-time/Popcorn-Time /usr/bin/popcorn-time
-  echo "[Desktop Entry]" > /usr/share/applications/popcorntime.desktop
-  echo "Version = 1.0" >> /usr/share/applications/popcorntime.desktop
-  echo "Type = Application" >> /usr/share/applications/popcorntime.desktop
-  echo "Terminal = false" >> /usr/share/applications/popcorntime.desktop
-  echo "Name = Popcorn Time" >> /usr/share/applications/popcorntime.desktop
-  echo "Exec = /usr/bin/popcorn-time" >> /usr/share/applications/popcorntime.desktop
+  echo "[Desktop Entry]"                           > /usr/share/applications/popcorntime.desktop
+  echo "Version = 1.0"                            >> /usr/share/applications/popcorntime.desktop
+  echo "Type = Application"                       >> /usr/share/applications/popcorntime.desktop
+  echo "Terminal = false"                         >> /usr/share/applications/popcorntime.desktop
+  echo "Name = Popcorn Time"                      >> /usr/share/applications/popcorntime.desktop
+  echo "Exec = /usr/bin/popcorn-time"             >> /usr/share/applications/popcorntime.desktop
   echo "Icon = /opt/popcorn-time/popcorntime.png" >> /usr/share/applications/popcorntime.desktop
-  echo "Categories = Application;" >> /usr/share/applications/popcorntime.desktop
+  echo "Categories = Application;"                >> /usr/share/applications/popcorntime.desktop
   wget -q -O /opt/popcorn-time/popcorntime.png https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png
 
 elif [ $OS_VERS == "11" ]; then
@@ -111,7 +111,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   echo ""
-  echo "Instalación para Debian 11 todavía no preparada. Prueba instalarlo en otra versión de Debian"
+  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 fi
