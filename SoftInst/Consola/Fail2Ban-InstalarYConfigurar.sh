@@ -93,7 +93,8 @@ elif [ $OS_VERS == "10" ]; then
   FinColor='\033[0m'
 
   echo ""
-  echo -e "${ColorVerde}Instalando Fail2Ban...${FinColor}"
+  echo -e "${ColorVerde} Instalando Fail2Ban...${FinColor}"
+  echo ""
   apt-get -y install fail2ban sendmail
 
   echo "[INCLUDES]"                                             > /etc/fail2ban/filter.d/JaulaInCrescendo.conf
@@ -181,6 +182,7 @@ elif [ $OS_VERS == "11" ]; then
 
   echo ""
   echo -e "${ColorVerde}Instalando Fail2Ban...${FinColor}"
+  echo ""
   apt-get -y install fail2ban sendmail
 
   echo "[INCLUDES]"                                             > /etc/fail2ban/filter.d/JaulaInCrescendo.conf
