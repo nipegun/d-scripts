@@ -48,7 +48,7 @@ if [ $OS_VERS == "7" ]; then
   echo ""
 
   echo ""
-  echo "  Script para Debian 7 todavía no preparado. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
