@@ -13,7 +13,7 @@ ColorVerde="\033[1;32m"
 FinColor="\033[0m"
 
 echo ""
-echo -e "${ColorVerde}Creando alias para los d-scripts...${FinColor}"
+echo -e "${ColorVerde}  Creando alias para los d-scripts...${FinColor}"
 echo ""
 
 ln -s /root/scripts/d-scripts/Externos/VelocidadDeInternet.sh              /root/scripts/d-scripts/Alias/vdi
@@ -118,6 +118,6 @@ ln -s /root/scripts/d-scripts/router/MostrarAparatosConectados.sh /root/scripts/
 ln -s /root/scripts/d-scripts/router/EditarOpenVPN.sh             /root/scripts/d-scripts/Alias/eovpn
 
 echo ""
-echo -e "${ColorVerde}Alias creados. Deberías poder ejecutar los d-scripts escribiendo el nombre de su alias.${FinColor}"
+echo -e "${ColorVerde}  Alias creados. Deberías poder ejecutar los d-scripts escribiendo el nombre de su alias.${FinColor}"
 echo ""
 
