@@ -30,10 +30,7 @@ fi
 wget -q --tries=10 --timeout=20 --spider https://github.com
   if [[ $? -eq 0 ]]; then
     echo ""
-    echo "---------------------------------------------------------"
-    echo -e "  ${ColorVerde}Sincronizando los d-scripts con las últimas versiones${FinColor}"
-    echo -e "  ${ColorVerde} y descargando nuevos d-scripts si es que existen...${FinColor}"
-    echo "---------------------------------------------------------"
+    echo -e "  ${ColorVerde}Sincronizando los d-scripts con las últimas versiones y descargando nuevos d-scripts si es que existen...${FinColor}"
     echo ""
     rm /root/scripts/d-scripts -R 2> /dev/null
     mkdir /root/scripts 2> /dev/null
@@ -55,15 +52,11 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     find /root/scripts/d-scripts/Alias -type f -exec chmod +x {} \;
     
     echo ""
-    echo "-----------------------------------------"
     echo -e "  ${ColorVerde}d-scripts sincronizados correctamente${FinColor}"
-    echo "-----------------------------------------"
     echo ""
   else
     echo ""
-    echo "---------------------------------------------------------------------------------------------------"
     echo -e "${ColorRojo}No se pudo iniciar la sincronización de los d-scripts porque no se detectó conexión a Internet.${FinColor}"
-    echo "---------------------------------------------------------------------------------------------------"
     echo ""
   fi
 
