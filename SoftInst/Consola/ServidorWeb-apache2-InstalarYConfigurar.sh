@@ -114,7 +114,7 @@ elif [ $OS_VERS == "10" ]; then
       
         echo -e "${ColorVerde}Instalando el servidor web con Apache y PHP 7.3...${FinColor}"
         echo ""
-        apt-get install tasksel
+        apt-get -y install tasksel
         tasksel install ssh-server
         tasksel install web-server
         apt-get -y install apache2-utils redis-server imagemagick
@@ -149,23 +149,23 @@ elif [ $OS_VERS == "10" ]; then
         phpenmod mcrypt
         phpenmod mbstring
         cp /etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2/php.ini.bak
-        sed -i -e 's|max_execution_time = 30|max_execution_time = 300|g' /etc/php/7.3/apache2/php.ini
-        sed -i -e 's|memory_limit = 128M|memory_limit = 300M|g' /etc/php/7.3/apache2/php.ini
-        sed -i -e 's|post_max_size = 8M|post_max_size = 64M|g' /etc/php/7.3/apache2/php.ini
+        sed -i -e 's|max_execution_time = 30|max_execution_time = 300|g'   /etc/php/7.3/apache2/php.ini
+        sed -i -e 's|memory_limit = 128M|memory_limit = 300M|g'            /etc/php/7.3/apache2/php.ini
+        sed -i -e 's|post_max_size = 8M|post_max_size = 64M|g'             /etc/php/7.3/apache2/php.ini
         sed -i -e 's|upload_max_filesize = 2M|upload_max_filesize = 64M|g' /etc/php/7.3/apache2/php.ini
         mkdir /var/www/html/logs
-        cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
+        cp /etc/apache2/sites-available/000-default.conf     /etc/apache2/sites-available/000-default.conf
         sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/logs|g' /etc/apache2/sites-available/000-default.conf
-        echo "RewriteEngine On" > /var/www/html/logs/.htaccess
+        echo "RewriteEngine On"                                   > /var/www/html/logs/.htaccess
         echo '  RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]' >> /var/www/html/logs/.htaccess
-        echo "  RewriteRule .*\.(log)$ http://google.com [NC]" >> /var/www/html/logs/.htaccess
+        echo "  RewriteRule .*\.(log)$ http://google.com [NC]"   >> /var/www/html/logs/.htaccess
     
         cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
-        echo "" >> /etc/ssh/sshd_config
-        echo "Match Group webmasters" >> /etc/ssh/sshd_config
-        echo "  ChrootDirectory /var/www" >> /etc/ssh/sshd_config
-        echo "  AllowTCPForwarding no" >> /etc/ssh/sshd_config
-        echo "  X11Forwarding no" >> /etc/ssh/sshd_config
+        echo ""                             >> /etc/ssh/sshd_config
+        echo "Match Group webmasters"       >> /etc/ssh/sshd_config
+        echo "  ChrootDirectory /var/www"   >> /etc/ssh/sshd_config
+        echo "  AllowTCPForwarding no"      >> /etc/ssh/sshd_config
+        echo "  X11Forwarding no"           >> /etc/ssh/sshd_config
         echo "  ForceCommand internal-sftp" >> /etc/ssh/sshd_config
         echo ""
       
@@ -179,27 +179,27 @@ elif [ $OS_VERS == "10" ]; then
         chown root:root /var/www
         service ssh restart
       
-        echo "" > /etc/apache2/sites-available/nuevawebvar.conf
-        echo "<VirtualHost *:80>" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "  ServerName nuevawebvar.com" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "  ServerAlias www.nuevawebvar.com" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "  DocumentRoot /var/www/nuevawebvar.com" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "  #Redirect permanent / https://nuevawebvar.com/" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo '  <Directory "/var/www/nuevawebvar.com">' >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "    Require all granted" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "    Options FollowSymLinks" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "    AllowOverride All" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "  </Directory>" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "  ServerAdmin webmaster@nuevawebvar.com" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "  ErrorLog /var/www/nuevawebvar.com/logs/error.log" >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo ""                                                               > /etc/apache2/sites-available/nuevawebvar.conf
+        echo "<VirtualHost *:80>"                                            >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo ""                                                              >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo "  ServerName nuevawebvar.com"                                  >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo "  ServerAlias www.nuevawebvar.com"                             >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo "  DocumentRoot /var/www/nuevawebvar.com"                       >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo ""                                                              >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo "  #Redirect permanent / https://nuevawebvar.com/"              >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo ""                                                              >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo '  <Directory "/var/www/nuevawebvar.com">'                      >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo "    Require all granted"                                       >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo "    Options FollowSymLinks"                                    >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo "    AllowOverride All"                                         >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo "  </Directory>"                                                >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo ""                                                              >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo "  ServerAdmin webmaster@nuevawebvar.com"                       >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo "  ErrorLog /var/www/nuevawebvar.com/logs/error.log"            >> /etc/apache2/sites-available/nuevawebvar.conf
         echo "  CustomLog /var/www/nuevawebvar.com/logs/access.log combined" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "</VirtualHost>" >> /etc/apache2/sites-available/nuevawebvar.conf
-        echo "" >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo ""                                                              >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo "</VirtualHost>"                                                >> /etc/apache2/sites-available/nuevawebvar.conf
+        echo ""                                                              >> /etc/apache2/sites-available/nuevawebvar.conf
         echo ""
       
         echo -e "${ColorVerde}Instalando el certificado SSL autofirmado para https...${FinColor}"
@@ -208,8 +208,8 @@ elif [ $OS_VERS == "10" ]; then
         openssl req -x509 -nodes -days 365 -newkey rsa:8192 -out /etc/apache2/ssl/autocertssl.pem -keyout /etc/apache2/ssl/autocertssl.key
         chmod 600 /etc/apache2/ssl/*
         cp /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf.bak
-        sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/logs|g' /etc/apache2/sites-available/default-ssl.conf
-        sed -i -e 's|ssl/certs/ssl-cert-snakeoil.pem|apache2/ssl/autocertssl.pem|g' /etc/apache2/sites-available/default-ssl.conf
+        sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/logs|g'                          /etc/apache2/sites-available/default-ssl.conf
+        sed -i -e 's|ssl/certs/ssl-cert-snakeoil.pem|apache2/ssl/autocertssl.pem|g'   /etc/apache2/sites-available/default-ssl.conf
         sed -i -e 's|ssl/private/ssl-cert-snakeoil.key|apache2/ssl/autocertssl.key|g' /etc/apache2/sites-available/default-ssl.conf
         service apache2 restart
       
@@ -260,7 +260,7 @@ elif [ $OS_VERS == "10" ]; then
         echo "SE ACTUALIZARÁ EL ARCHIVO default-ssl.conf con el dominio $dominio_servidor"
         echo ""
         sed -i -e 's|apache2/ssl/autocertssl.pem|letsencrypt/live/'"$dominio_servidor"'/fullchain.pem|g' /etc/apache2/sites-available/default-ssl.conf
-        sed -i -e 's|apache2/ssl/autocertssl.key|letsencrypt/live/'"$dominio_servidor"'/privkey.pem|g' /etc/apache2/sites-available/default-ssl.conf
+        sed -i -e 's|apache2/ssl/autocertssl.key|letsencrypt/live/'"$dominio_servidor"'/privkey.pem|g'   /etc/apache2/sites-available/default-ssl.conf
         chmod 600 /etc/letsencrypt/live/$dominio_servidor/*
         sed -i -e 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html\n        Redirect permanent / https://'"$dominio_servidor"'/|g' /etc/apache2/sites-available/000-default.conf
         service apache2 start
@@ -282,9 +282,9 @@ elif [ $OS_VERS == "10" ]; then
       3)
         a2enmod remoteip
         a2enmod headers
-        echo "RemoteIPHeader X-Forwarded-For" > /etc/apache2/conf-available/remoteip.conf
-        echo "#RemoteIPInternalProxy 0.0.0.0" >> /etc/apache2/conf-available/remoteip.conf
-        echo "#RemoteIPTrustedProxy 0.0.0.0" >> /etc/apache2/conf-available/remoteip.conf
+        echo "RemoteIPHeader X-Forwarded-For"                                                     > /etc/apache2/conf-available/remoteip.conf
+        echo "#RemoteIPInternalProxy 0.0.0.0"                                                    >> /etc/apache2/conf-available/remoteip.conf
+        echo "#RemoteIPTrustedProxy 0.0.0.0"                                                     >> /etc/apache2/conf-available/remoteip.conf
         echo 'LogFormat "%a %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined' >> /etc/apache2/conf-available/remoteip.conf
         a2enconf remoteip
         service apache2 restart
