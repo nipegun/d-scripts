@@ -151,3 +151,4 @@ elif [ $OS_VERS == "11" ]; then
   systemctl enable grafana-server --now
 
 fi
+
