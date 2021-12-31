@@ -151,8 +151,55 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Instalando dependencias..."
   echo ""
+  dpkg --add-architecture i386
+  apt-get -y update
+  apt-get -y install mailutils
+  apt-get -y install postfix
+  apt-get -y install curl
+  apt-get -y install wget
+  apt-get -y install file
+  apt-get -y install tar
+  apt-get -y install bzip2
+  apt-get -y install gzip
+  apt-get -y install unzip
+  apt-get -y install bsdmainutils
+  apt-get -y install python
+  apt-get -y install util-linux
+  apt-get -y install ca-certificates
+  apt-get -y install binutils
+  apt-get -y install bc
+  apt-get -y install jq
+  apt-get -y install tmux
+  apt-get -y install lib32gcc-s1
+  apt-get -y install libstdc++6
+  apt-get -y install lib32stdc++6
+  apt-get -y install steamcmd
+
+  # A partir de aquí, ejecución manual
+  # adduser cod4server
+  # su - cod4server
+  # wget -O linuxgsm.sh https://linuxgsm.sh
+  # chmod +x linuxgsm.sh
+  # bash linuxgsm.sh cod4server
+  # ./cod4server install
+
+  # Cómo administrarlo
+  #
+  #./cod4server start
+  #./cod4server stop
+  #./cod4server restart
+  #./cod4server details
+  #./cod4server debug
+  #./cod4server backup
+  #./cod4server monitor
+  #./cod4server console 
+  #  To exit the console press CTRL+b d. Pressing CTRL+c will terminate the server.
+  #  
+  #Logs
+  #Server logs are available to monitor and diagnose your server. Script, console and game server (if available) logs are created for the server.
+  #/home/cod4server/logs
 
 fi
 
