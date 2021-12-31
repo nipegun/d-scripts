@@ -7,6 +7,9 @@
 
 #------------------------------------------------------------------------
 #  Script de NiPeGun para instalar el servidor gaming de Call of Duty 4
+#
+#  Ejecución remota:
+#  curl -s | bash
 #------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
