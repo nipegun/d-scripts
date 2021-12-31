@@ -122,7 +122,7 @@ elif [ $OS_VERS == "10" ]; then
   echo ""
   echo "  Dependencias instaladas."
   echo "  Revisa el script porque hay comandos que tendrás que ejecutar manualmente"
-  echo "  para terminar de instalar el servidor de MinecraftJE."
+  echo "  para terminar de instalar el servidor de Day of Defeat Source."
   echo ""
 
   # comandos a ejecutar manualmente
@@ -177,7 +177,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Dependencias instaladas."
   echo "  Revisa el script porque hay comandos que tendrás que ejecutar manualmente"
-  echo "  para terminar de instalar el servidor de MinecraftJE."
+  echo "  para terminar de instalar el servidor de Day of Defeat Source."
   echo ""
 
   # comandos a ejecutar manualmente
