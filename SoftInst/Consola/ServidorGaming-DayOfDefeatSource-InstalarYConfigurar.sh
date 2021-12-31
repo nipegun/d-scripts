@@ -94,7 +94,7 @@ elif [ $OS_VERS == "10" ]; then
   echo "  Instalando dependencias..."
   echo ""
   dpkg --add-architecture i386
-  apt-get update
+  apt-get -y update
   apt-get -y install mailutils
   apt-get -y install postfix
   apt-get -y install curl
@@ -102,8 +102,8 @@ elif [ $OS_VERS == "10" ]; then
   apt-get -y install file
   apt-get -y install tar
   apt-get -y install bzip2
-  apt-get -y insta ll gzip
-  apt-get -y installunzip
+  apt-get -y install gzip
+  apt-get -y install unzip
   apt-get -y install bsdmainutils
   apt-get -y install python
   apt-get -y install util-linux
@@ -116,6 +116,8 @@ elif [ $OS_VERS == "10" ]; then
   apt-get -y install libstdc++6
   apt-get -y install lib32stdc++6
   apt-get -y install steamcmd
+  apt-get -y install libsdl2-2.0-0:i386
+  apt-get -y install netcat
 
   # comandos a ejecutar manualmente
   # adduser dodsserver
@@ -134,8 +136,50 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${ColorVerde}  Instalando el servidor dodsserver...${FinColor}"
   echo ""
+
+
+  echo ""
+  echo "  Borrando archivos del servidor anterior, si es que existen..."
+  echo ""
+
+  echo ""
+  echo "  Instalando dependencias..."
+  echo ""
+  dpkg --add-architecture i386
+  apt-get -y update
+  apt-get -y install mailutils
+  apt-get -y install postfix
+  apt-get -y install curl
+  apt-get -y install wget
+  apt-get -y install file
+  apt-get -y install tar
+  apt-get -y install bzip2
+  apt-get -y install gzip
+  apt-get -y install unzip
+  apt-get -y install bsdmainutils
+  apt-get -y install python
+  apt-get -y install util-linux
+  apt-get -y install ca-certificates
+  apt-get -y install binutils
+  apt-get -y install bc
+  apt-get -y install jq
+  apt-get -y install tmux
+  apt-get -y install lib32gcc-s1
+  apt-get -y install libstdc++6
+  apt-get -y install lib32stdc++6
+  apt-get -y install steamcmd
+  apt-get -y install libsdl2-2.0-0:i386
+  apt-get -y install netcat
+
+  # comandos a ejecutar manualmente
+  # adduser dodsserver
+  # su - dodsserver
+  # wget -O linuxgsm.sh https://linuxgsm.sh
+  # chmod +x linuxgsm.sh
+  # bash linuxgsm.sh dodsserver
+  #./dodsserver install
 
 fi
 
