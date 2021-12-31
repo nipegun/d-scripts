@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar el dibujador del mapa para el servidor gaming de MinecraftJE
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorGaming-MinecraftJE-InstalarDibujadorDeMapa.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorGaming-MinecraftJE-DibujadorDeMapa-Instalar.sh | bash
 #--------------------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
