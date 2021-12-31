@@ -89,9 +89,13 @@ elif [ $OS_VERS == "10" ]; then
   echo ""
   echo "  Instalando y configurando PvPGN..."
   echo ""
-  apt-get -y install pvpgn wget
+  apt-get -y update
+  apt-get -y install pvpgn
+  apt-get -y install wget
+  service pvpgn stop
   wget http://downloads.sourceforge.net/project/pvpgn.berlios/pvpgn-support-1.3.tar.gz -P /tmp/
   pvpgn-support-installer -l /tmp/pvpgn-support-1.3.tar.gz
+  service pvpgn start
 
 elif [ $OS_VERS == "11" ]; then
 
@@ -102,8 +106,18 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Instalando y configurando PvPGN..."
   echo ""
+  apt-get -y update
+  apt-get -y install pvpgn
+  apt-get -y install wget
+  service pvpgn stop
+  wget http://downloads.sourceforge.net/project/pvpgn.berlios/pvpgn-support-1.3.tar.gz -P /tmp/
+  pvpgn-support-installer -l /tmp/pvpgn-support-1.3.tar.gz
+  service pvpgn start
+
+  # Comandos a ejecutar manualmente
+  # adduser pvpgn
 
 fi
 
