@@ -118,6 +118,12 @@ elif [ $OS_VERS == "10" ]; then
   apt-get -y install lib32stdc++6
   apt-get -y install steamcmd
 
+  echo ""
+  echo "  Dependencias instaladas."
+  echo "  Revisa el script porque hay comandos que tendrás que ejecutar manualmente"
+  echo "  para terminar de instalar el servidor de CoD4MW."
+  echo ""
+
   # A partir de aquí, ejecución manual
   # adduser cod4server
   # su - cod4server
@@ -176,6 +182,12 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install libstdc++6
   apt-get -y install lib32stdc++6
   apt-get -y install steamcmd
+
+  echo ""
+  echo "  Dependencias instaladas."
+  echo "  Revisa el script porque hay comandos que tendrás que ejecutar manualmente"
+  echo "  para terminar de instalar el servidor de CoD4MW."
+  echo ""
 
   # A partir de aquí, ejecución manual
   # adduser cod4server
