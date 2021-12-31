@@ -119,6 +119,12 @@ elif [ $OS_VERS == "10" ]; then
   apt-get -y install libsdl2-2.0-0:i386
   apt-get -y install netcat
 
+  echo ""
+  echo "  Dependencias instaladas."
+  echo "  Revisa el script porque hay comandos que tendrás que ejecutar manualmente"
+  echo "  para terminar de instalar el servidor de MinecraftJE."
+  echo ""
+
   # comandos a ejecutar manualmente
   # adduser dodsserver
   # su - dodsserver
@@ -137,11 +143,6 @@ elif [ $OS_VERS == "11" ]; then
 
   echo ""
   echo -e "${ColorVerde}  Instalando el servidor dodsserver...${FinColor}"
-  echo ""
-
-
-  echo ""
-  echo "  Borrando archivos del servidor anterior, si es que existen..."
   echo ""
 
   echo ""
@@ -172,6 +173,12 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install steamcmd
   apt-get -y install libsdl2-2.0-0:i386
   apt-get -y install netcat
+
+  echo ""
+  echo "  Dependencias instaladas."
+  echo "  Revisa el script porque hay comandos que tendrás que ejecutar manualmente"
+  echo "  para terminar de instalar el servidor de MinecraftJE."
+  echo ""
 
   # comandos a ejecutar manualmente
   # adduser dodsserver
