@@ -7,6 +7,9 @@
 
 #------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar el servidor PvPGN
+#
+#  Ejecución remota:
+#  curl -s | bash
 #------------------------------------------------------------------
 
 echo ""
