@@ -6,7 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar el servidor gaming de DayOfDefeatSource.sh
+#  Script de NiPeGun para instalar el servidor gaming de Day of Defeat Source
+#
+#  Ejecución remota:
+#  curl -s | bash
 #------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
