@@ -45,9 +45,9 @@ FinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de Day of Defeat Source para Debian 7 (Wheezy)..."
+  echo "------------------------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -57,9 +57,9 @@ if [ $OS_VERS == "7" ]; then
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de Day of Defeat Source para Debian 8 (Jessie)..."
+  echo "------------------------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -69,9 +69,9 @@ elif [ $OS_VERS == "8" ]; then
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  echo "-------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de Day of Defeat Source para Debian 9 (Stretch)..."
+  echo "-------------------------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -81,9 +81,9 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  echo "-------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de Day of Defeat Source para Debian 10 (Buster)..."
+  echo "-------------------------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -128,9 +128,9 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  echo "---------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de Day of Defeat Source para Debian 11 (Bullseye)..."
+  echo "---------------------------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
