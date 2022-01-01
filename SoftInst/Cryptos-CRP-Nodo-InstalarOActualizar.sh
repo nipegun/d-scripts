@@ -147,5 +147,5 @@ echo ""
    chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
    ## Denegar a los otros usuarios del sistema el acceso a la carpeta del usuario
       find /home/$UsuarioNoRoot -type d -exec chmod 750 {} \;
-   find /home/$UsuarioNoRoot/                             -type f -iname "*.sh" -exec chmod +x {} \;
+      find /home/$UsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
 
