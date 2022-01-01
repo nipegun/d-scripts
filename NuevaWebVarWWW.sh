@@ -48,7 +48,7 @@ else
     echo ""
     echo "$(tput setaf 1)Creando la base de datos con su usuario... $(tput sgr 0)"
     echo ""
-    cbddyu $2 $nombre_mysql_ok $3
+    /root/scripts/d-scripts/MySQL-BaseDeDatos-Crear.sh $2 $nombre_mysql_ok $3
 
     # Crear las carpetas de la web
     mkdir /var/www/$2$1/
@@ -72,7 +72,9 @@ else
     iptables -A INPUT -p tcp --dport 443 -j ACCEPT
     service apache2 stop
     apt-get update
-    apt-get -y install certbot python3-certbot-apache
+    apt-get -y install
+    apt-get -y install certbot
+    apt-get -y install python3-certbot-apache
     certbot --apache -d $2$1 -d www.$2$1
     
     # Volver a arrancar Apache
@@ -190,7 +192,7 @@ else
     echo ""
     echo "$(tput setaf 1)Creando la base de datos con su usuario... $(tput sgr 0)"
     echo ""
-    cbddyu $2 $2 $3
+    /root/scripts/d-scripts/MySQL-BaseDeDatos-Crear.sh $2 $2 $3
 
     # Crear las carpetas de la web
     mkdir /var/www/$2$1/
@@ -214,7 +216,8 @@ else
     iptables -A INPUT -p tcp --dport 443 -j ACCEPT
     service apache2 stop
     apt-get update
-    apt-get -y install certbot python3-certbot-apache
+    apt-get -y install certbot
+    apt-get -y install python3-certbot-apache
     certbot --apache -d $2$1 -d www.$2$1
 
     # Volver a arrancar Apache
