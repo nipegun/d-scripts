@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar Transmission en Debian
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/Transmission-InstalarYConfigurar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/Transmission-InstalarYConfigurar.sh | bash -s -- /var/tmp/transmission/completos /var/tmp/transmission/incompletos 12345678 nico
 #--------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
