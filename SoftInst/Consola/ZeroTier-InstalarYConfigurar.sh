@@ -84,6 +84,7 @@ elif [ $OS_VERS == "10" ]; then
   echo ""
 
   curl -s https://install.zerotier.com | bash
+  systemctl enable zerotier-one.service --now
 
 elif [ $OS_VERS == "11" ]; then
 
@@ -94,6 +95,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   curl -s https://install.zerotier.com | bash
+  systemctl enable zerotier-one.service --now
 
 fi
 
