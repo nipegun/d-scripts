@@ -98,9 +98,15 @@ elif [ $OS_VERS == "11" ]; then
   echo "---------------------------------------------------------------------------------"
   echo ""
 
-  apt-get -y update
-  apt-get -y install phpmyadmin 
-
+  ## Determinar la versión de PHP disponible para instalar
+     apt-get -y update
+     VersPHP=$(apt-cache search php | grep server | grep metapackage | cut -d' ' -f1 | tail -n1)
+  ## Instalar PHP
+     apt-get -y install $VersPHP
+  ## Instalar el mod de php para apache2
+     apt-get -y install libapache2-mod-php  
+  ## Instalar PHPMyAdmin
+     apt-get -y install phpmyadmin
   fi
 
 fi
