@@ -74,8 +74,9 @@ elif [ $OS_VERS == "9" ]; then
   echo "-------------------------------------------------------------------------------"
   echo ""
 
-  apt-get -y update
-  apt-get -y install phpmyadmin
+  echo ""
+  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
 
 elif [ $OS_VERS == "10" ]; then
 
@@ -98,8 +99,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   apt-get -y update
-  apt-get -y install phpmyadmin
-  apt-get -y 
+  apt-get -y install phpmyadmin 
 
   fi
 
