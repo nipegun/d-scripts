@@ -107,7 +107,6 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y install libapache2-mod-php  
   ## Instalar PHPMyAdmin
      apt-get -y install phpmyadmin
-  fi
 
 fi
 
