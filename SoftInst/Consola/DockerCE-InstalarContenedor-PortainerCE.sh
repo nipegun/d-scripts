@@ -124,10 +124,8 @@ elif [ $OS_VERS == "11" ]; then
               echo -e "${ColorVerde}  Instalando PortainerCE en un ordenador o máquina virtual...${FinColor}"
               echo ""
               mkdir -p /root/portainer/data 2> /dev/null
-              #      docker run -d -p 8000:8000 -p 9443:9443 -v /root/portainer/data:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
-              #echo "docker run -d -p 8000:8000 -p 9443:9443 -v /root/portainer/data:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer" >> /root/scripts/ComandosPostArranque.sh         
-                    docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /root/portainer/data:/data cr.portainer.io/portainer/portainer-ce:2.9.3
-              echo "docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /root/portainer/data:/data cr.portainer.io/portainer/portainer-ce:2.9.3" >> /root/scripts/ComandosPostArranque.sh 
+                    docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /root/portainer/data:/data cr.portainer.io/portainer/portainer-ce
+              echo "docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /root/portainer/data:/data cr.portainer.io/portainer/portainer-ce" >> /root/scripts/ComandosPostArranque.sh 
             ;;
 
             2)
@@ -135,10 +133,6 @@ elif [ $OS_VERS == "11" ]; then
               echo -e "${ColorVerde}  Instalando PortainerCE en un contenedor LXC...${FinColor}"
               echo ""
               mkdir -p /Host/PortainerCE/ 2> /dev/null
-              #      docker run -d -p 8000:8000 -p 9443:9443 -v /Host/PortainerCE:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
-              #echo "docker run -d -p 8000:8000 -p 9443:9443 -v /Host/PortainerCE:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer" >> /root/scripts/ComandosPostArranque.sh
-              #      docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Host/PortainerCE:/data cr.portainer.io/portainer/portainer-ce:2.9.3
-              #echo "docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Host/PortainerCE:/data cr.portainer.io/portainer/portainer-ce:2.9.3" >> /root/scripts/ComandosPostArranque.sh 
                     docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Host/PortainerCE:/data cr.portainer.io/portainer/portainer-ce
               echo "docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Host/PortainerCE:/data cr.portainer.io/portainer/portainer-ce" >> /root/scripts/ComandosPostArranque.sh 
             ;;
