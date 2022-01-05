@@ -13,7 +13,7 @@
 #------------------------------------------------------------------------------------------------------------
 
 NombreContenedor="portainer"
-NuevaIP="172.17.0.1"
+NuevaIP="172.17.0.10" # No puede ser 172.17.0.1, porque esa es la IP de la interfaz de Docker. Tiene que ser a partir de la 172.17.0.2
 
 ## Comprobar si el contenedor está corriendo. Si no lo está, abortar.
    if [[ $(docker ps 2>/dev/null | grep $NombreContenedor) == "" ]]; then
