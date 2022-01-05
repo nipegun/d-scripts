@@ -98,12 +98,60 @@ elif [ $OS_VERS == "11" ]; then
   echo "-----------------------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Instalando PortainerCE en DockerCE..."
-  echo ""
-  mkdir -p /root/portainer/data 2> /dev/null
-  docker run -d -p 9000:9000 -v /root/portainer/data:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
-  echo "docker run -d -p 9000:9000 -v /root/portainer/data:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer" >> /root/scripts/ComandosPostArranque.sh
+  ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+       echo ""
+       echo "  dialog no está instalado. Iniciando su instalación..."
+       echo ""
+       apt-get -y update > /dev/null
+       apt-get -y install dialog
+       echo ""
+     fi
+  menu=(dialog --timeout 5 --checklist "¿Donde quieres instalar PortainerCE?:" 22 76 16)
+    opciones=(1 "En un ordenador o máquina virtual" on
+              2 "En un contenedor LXC de Proxmox" off
+              3 "..." off
+              4 "..." off)
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+      clear
+
+      for choice in $choices
+        do
+          case $choice in
+
+            1)
+              echo ""
+              echo -e "${ColorVerde}  Instalando PortainerCE en un ordenador o máquina virtual...${FinColor}"
+              echo ""
+              mkdir -p /root/portainer/data 2> /dev/null
+              docker run -d -p 9000:9000 -v /root/portainer/data:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+              echo "docker run -d -p 9000:9000 -v /root/portainer/data:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer" >> /root/scripts/ComandosPostArranque.sh
+            ;;
+
+            2)
+              echo ""
+              echo -e "${ColorVerde}  Instalando PortainerCE en un contenedor LXC...${FinColor}"
+              echo ""
+              mkdir -p /Host/Portainer/ 2> /dev/null
+              docker run -d -p 9000:9000 -v /Host/Portainer:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+              echo "docker run -d -p 9000:9000 -v /root/portainer/data:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer" >> /root/scripts/ComandosPostArranque.sh
+            ;;
+
+            3)
+              echo ""
+              echo -e "${ColorVerde}  ...${FinColor}"
+              echo ""
+            ;;
+
+            4)
+              echo ""
+              echo -e "${ColorVerde}  ...${FinColor}"
+              echo ""
+            ;;
+        
+          esac
+
+        done
 
 fi
 
