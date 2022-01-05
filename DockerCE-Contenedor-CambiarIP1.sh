@@ -32,11 +32,18 @@ NuevaIP="172.17.0.1"
           echo ""
         fi
      Red=$(docker inspect $NombreContenedor -f "{{json .NetworkSettings.Networks }}" | jq .bridge.NetworkID | cut -d'"' -f2)
-     echo ""
-     echo " El contenedor $NombreContenedor está conectado a la red $Red"
-     echo ""
-     #docker network ls
-     docker network disconnect $Red $NombreContenedor
-     docker network connect --ip $NuevaIP $Red $NombreContenedor
+     ## Comprobar que la red no sea null, si es null, abortar.
+        if [[ $Red == "null" ]]; then
+          echo ""
+          echo "  La red es $Red, abortando..."
+          echo ""
+        else
+          echo ""
+          echo " El contenedor $NombreContenedor está conectado a la red $Red"
+          echo ""
+          #docker network ls
+          docker network disconnect $Red $NombreContenedor
+          docker network connect --ip $NuevaIP $Red $NombreContenedor
+        fi
    fi
 
