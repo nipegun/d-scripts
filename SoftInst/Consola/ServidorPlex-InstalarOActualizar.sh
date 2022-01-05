@@ -254,22 +254,14 @@ elif [ $OS_VERS == "11" ]; then
           ;;
 
           5)
-
            systemctl stop plexmediaserver.service
-           #mkdir -p /etc/systemd/system/plexmediaserver.service.d/ 2> /dev/null
-           #echo "[Service]"                                                      > /etc/systemd/system/plexmediaserver.service.d/override.conf
-           #echo 'Environment="TMPDIR=/tmp"'                                     >> /etc/systemd/system/plexmediaserver.service.d/override.conf
-           #echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/Plex"' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
-           #echo "User=plex"                                                     >> /etc/systemd/system/plexmediaserver.service.d/override.conf
-           #echo "Group=plex"                                                    >> /etc/systemd/system/plexmediaserver.service.d/override.conf
-           sed -i -e "s|/var/lib/plexmediaserver/Library/Application Support|$CarpetaAlternativa|g" /lib/systemd/system/plexmediaserver.service
+           mkdir -p /etc/systemd/system/plexmediaserver.service.d/ 2> /dev/null
+           touch /etc/systemd/system/plexmediaserver.service.d/override.conf
+           echo "[Service]" > /etc/systemd/system/plexmediaserver.service.d/override.conf
+           echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=$CarpetaAlternativa"' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
            systemctl daemon-reload
            systemctl start plexmediaserver.service
            systemctl status plexmediaserver.service
-           
-           # En un contenedor
-           # usermod -u 1000 plex
-           # groupmod -g 1000 plex
 
           ;;
 
