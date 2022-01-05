@@ -403,7 +403,11 @@ elif [ $OS_VERS == "11" ]; then
 
           3)
             echo ""
-            echo -e "${ColorVerde}Bajando, compilando e instalando la versión de GitHub...${FinColor}"
+            echo -e "${ColorVerde}Iniciando el script para bajar, compilar e instalar la versión de GitHub de uhub...${FinColor}"
+            echo ""
+
+            echo ""
+            echo "  Instalando dependencias y paquetes necesarios..."
             echo ""
             apt-get -y install cmake
             apt-get -y install make
@@ -411,14 +415,39 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y install git
             apt-get -y install libsqlite3-dev
             apt-get -y install libssl-dev
+
+            echo ""
+            echo "  Bajando el código fuente..."
+            echo ""
             mkdir -p /root/SoftInst/ 2> /dev/null
             cd /root/SoftInst/
             rm /root/SoftInst/uhub/ -R 2> /dev/null
+            ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+               if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+                 echo ""
+                 echo "  git no está instalado. Iniciando su instalación..."
+                 echo ""
+                 apt-get -y update > /dev/null
+                 apt-get -y install git
+                 echo ""
+               fi
             git clone https://github.com/janvidar/uhub.git
+
+            echo ""
+            echo "  Compilando ..."
+            echo ""
             cd /root/SoftInst/uhub/
             cmake .
             make
+
+            echo ""
+            echo "  Instalando..."
+            echo ""
             make install
+
+            echo ""
+            echo "  Creando el archivo de configuración de usuarios..."
+            echo ""
             echo "# uHub access control lists."                                                                                   > /etc/uhub/users.conf
             echo "#"                                                                                                             >> /etc/uhub/users.conf
             echo "# Syntax: <command> [data]"                                                                                    >> /etc/uhub/users.conf
@@ -470,13 +499,22 @@ elif [ $OS_VERS == "11" ]; then
             echo "# If you have made changes to this file, you must send a HANGUP signal"                                        >> /etc/uhub/users.conf
             echo "# to uHub so that it will re-read the configuration files."                                                    >> /etc/uhub/users.conf
             echo "# For example by invoking: 'killall -HUP uhub'"                                                                >> /etc/uhub/users.conf
+
             echo "Bienvenido a este Hub" > /etc/uhub/motd.txt
+
+            echo ""
+            echo "  Creando el certificado SSL..."
+            echo ""
             openssl genrsa -out /etc/uhub/sslpriv.key 8192
             openssl req -new -x509 -nodes -sha512 -days 365 -key /etc/uhub/sslpriv.key > /etc/uhub/sslown.crt
             echo 'tls_private_key="/etc/uhub/sslpriv.key"' >> /etc/uhub/uhub.conf
             echo 'tls_certificate="/etc/uhub/sslown.crt"'  >> /etc/uhub/uhub.conf
             echo 'tls_enable=yes'                          >> /etc/uhub/uhub.conf
             echo '#tls_require=yes'                        >> /etc/uhub/uhub.conf
+
+            echo ""
+            echo "  Creando el servicio..."
+            echo ""
             echo "[Unit]"                         > /etc/systemd/system/uhub.service
             echo "Description=uHub DC Hub"       >> /etc/systemd/system/uhub.service
             echo "After=network.target"          >> /etc/systemd/system/uhub.service
@@ -488,9 +526,18 @@ elif [ $OS_VERS == "11" ]; then
             echo ""                              >> /etc/systemd/system/uhub.service
             echo "[Install]"                     >> /etc/systemd/system/uhub.service
             echo "WantedBy=multi-user.target"    >> /etc/systemd/system/uhub.service
+
+            echo ""
+            echo "  Creando la base de datos de usuarios..."
+            echo ""
             uhub-passwd /etc/uhub/users.db create
+
+            echo ""
+            echo "  Activando e iniciando el servicio..."
+            echo ""
             systemctl enable uhub.service
             systemctl start uhub.service
+
           ;;
 
         esac
