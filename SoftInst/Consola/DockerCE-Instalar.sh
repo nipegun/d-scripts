@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar Docker y Portainer en Debian
 #
 # Ejecución remota
-# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/DockerYPortainer-Instalar.sh | bash
-#------------------------------------------------------------------------------------------------------------------------
+# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/DockerCE-Instalar.sh | bash
+#----------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -45,9 +45,9 @@ FinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Docker y Portainer para Debian 7 (Wheezy)..."
-  echo "--------------------------------------------------------------------------------------"
+  echo "----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de DockerCE para Debian 7 (Wheezy)..."
+  echo "----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -57,9 +57,9 @@ if [ $OS_VERS == "7" ]; then
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Docker y Portainer para Debian 8 (Jessie)..."
-  echo "--------------------------------------------------------------------------------------"
+  echo "----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de DockerCE para Debian 8 (Jessie)..."
+  echo "----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -69,9 +69,9 @@ elif [ $OS_VERS == "8" ]; then
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Docker y Portainer para Debian 9 (Stretch)..."
-  echo "---------------------------------------------------------------------------------------"
+  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de DockerCE para Debian 9 (Stretch)..."
+  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -81,9 +81,9 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Docker y Portainer para Debian 10 (Buster)..."
-  echo "---------------------------------------------------------------------------------------"
+  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de DockerCE para Debian 10 (Buster)..."
+  echo "-----------------------------------------------------------------------------"
   echo ""
 
   apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common
@@ -92,24 +92,26 @@ elif [ $OS_VERS == "10" ]; then
   add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
   apt-get update
   apt-get -y install docker-ce
-  mkdir -p /root/portainer/data 2> /dev/null
-  docker run -d -p 9000:9000 -v /root/portainer/data:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
-  echo "docker run -d -p 9000:9000 -v /root/portainer/data:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer" >> /root/scripts/ComandosPostArranque.sh
   systemctl enable docker
   systemctl start docker
  
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Docker y Portainer para Debian 11 (Bullseye)..."
-  echo "-----------------------------------------------------------------------------------------"
+  echo "-------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de DockerCE para Debian 11 (Bullseye)..."
+  echo "-------------------------------------------------------------------------------"
   echo ""
 
   echo ""
   echo "  Instalando paquetes necesarios..."
   echo ""
-  apt-get -y install wget apt-transport-https ca-certificates curl gnupg2 software-properties-common
+  apt-get -y install wget
+  apt-get -y install apt-transport-https
+  apt-get -y install ca-certificates
+  apt-get -y install curl
+  apt-get -y install gnupg2
+  apt-get -y install software-properties-common
 
   echo ""
   echo "  Descargando la clave PGP del KeyRing..."
@@ -126,13 +128,6 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Instalando docker-ce..."
   echo ""
   apt-get -y install docker-ce
-
-  echo ""
-  echo "  Instalando Portainer..."
-  echo ""
-  mkdir -p /root/portainer/data 2> /dev/null
-  docker run -d -p 9000:9000 -v /root/portainer/data:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
-  echo "docker run -d -p 9000:9000 -v /root/portainer/data:/data -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer" >> /root/scripts/ComandosPostArranque.sh
 
   echo ""
   echo "  Activando y arrancando el servicio de docker..."
