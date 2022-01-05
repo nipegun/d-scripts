@@ -12,7 +12,7 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/DockerCE-Contenedor-CambiarIP.sh | bash
 #------------------------------------------------------------------------------------------------------------
 
-NombreContenedor="portainers"
+NombreContenedor="portainer"
 NuevaIP="172.17.0.1"
 
 ## Comprobar si el contenedor está corriendo. Si no lo está, abortar.
