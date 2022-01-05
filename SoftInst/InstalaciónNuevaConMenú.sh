@@ -26,8 +26,15 @@ if [ $# -ne $CantArgsCorrectos ]
     echo ""
     exit $ArgsInsuficientes
   else
-    apt-get -y update 2> /dev/null
-    apt-get -y install dialog 2> /dev/null
+    ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+       if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+         echo ""
+         echo "  dialog no está instalado. Iniciando su instalación..."
+         echo ""
+         apt-get -y update > /dev/null
+         apt-get -y install dialog
+         echo ""
+       fi
     menu=(dialog --timeout 5 --checklist "¿En que versión de Debian quieres instalar xxx?:" 22 76 16)
       opciones=(1 "Debian  8, Jessie" off
                 2 "Debian  9, Stretch" off
