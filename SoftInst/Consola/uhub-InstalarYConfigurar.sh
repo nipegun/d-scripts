@@ -202,9 +202,9 @@ elif [ $OS_VERS == "10" ]; then
             apt-get -y install git
             apt-get -y install libsqlite3-dev
             apt-get -y install libssl-dev
-            mkdir -p /root/SofInst/ 2> /dev/null
+            mkdir -p /root/SoftInst/ 2> /dev/null
             cd /root/SoftInst/
-            rm /root/SoftInst/uhub/ -R
+            rm /root/SoftInst/uhub/ -R 2> /dev/null
             git clone https://github.com/janvidar/uhub.git
             cd /root/SoftInst/uhub/
             cmake .
@@ -411,9 +411,9 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y install git
             apt-get -y install libsqlite3-dev
             apt-get -y install libssl-dev
-            mkdir -p /root/SofInst/ 2> /dev/null
+            mkdir -p /root/SoftInst/ 2> /dev/null
             cd /root/SoftInst/
-            rm /root/SoftInst/uhub/ -R
+            rm /root/SoftInst/uhub/ -R 2> /dev/null
             git clone https://github.com/janvidar/uhub.git
             cd /root/SoftInst/uhub/
             cmake .
