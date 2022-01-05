@@ -44,6 +44,7 @@ NuevaIP="172.17.0.10" # No puede ser 172.17.0.1, porque esa es la IP de la inter
           #docker network ls
           docker network disconnect $Red $NombreContenedor
           docker network connect --ip $NuevaIP $Red $NombreContenedor
+          echo ""
         fi
    fi
 
