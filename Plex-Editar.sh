@@ -11,7 +11,7 @@
 
 service plexmediaserver stop
 
-#ComandoParaConfigurar
+nano /lib/systemd/system/plexmediaserver.service
 
 service plexmediaserver start
 
