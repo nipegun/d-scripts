@@ -150,6 +150,13 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y install htop
      apt-get -y install simple-scan
      apt-get -y install ghex
+     
+     apt-get -y install hardinfo
+     apt-get -y install bleachbit
+     apt-get -y install fonts-freefont-ttf
+     apt-get -y install fonts-freefont-otf
+     apt-get -y install ttf-mscorefonts-installer
+     apt-get -y install gufw
 
   ## Antivirus
      apt-get -y install clamtk
