@@ -111,11 +111,18 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install virtualenv
   apt-get -y install libjpeg-dev
   apt-get -y install libxslt1-dev
+  apt-get -y install libpq5
+  apt-get -y install postgresql
   wget -O /usr/share/keyrings/matrix-org-archive-keyring.gpg https://packages.matrix.org/debian/matrix-org-archive-keyring.gpg
   echo "deb [signed-by=/usr/share/keyrings/matrix-org-archive-keyring.gpg] https://packages.matrix.org/debian/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/matrix-org.list
   apt-get -y update
   apt-get -y install matrix-synapse-py3
-
+  ## Comandos a ejecutar manualmente
+    su - postgres
+    create database synapse;
+    create user synapse with encrypted password 'password';
+    grant all privileges on database synapse to synapse;
+  
 fi
 
 
