@@ -117,12 +117,27 @@ elif [ $OS_VERS == "11" ]; then
   echo "deb [signed-by=/usr/share/keyrings/matrix-org-archive-keyring.gpg] https://packages.matrix.org/debian/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/matrix-org.list
   apt-get -y update
   apt-get -y install matrix-synapse-py3
-  ## Comandos a ejecutar manualmente
-    su - postgres
-    create database synapse;
-    create user synapse with encrypted password 'password';
-    grant all privileges on database synapse to synapse;
+  echo ""
+  echo "  Instalación finalizada."
+  echo "  Revisa el script porque hay comandos que tendrás que ejecutar manualmente."
+  echo ""
+  ## Base de datos PostGreSQL
+     ## Crear usuario
+        su - postgres -c "createuser synapse"
+     ## Crear base de datos
+        su - postgres -c "createdb synapse"
+     echo ""
+     echo "  Se han creado el usuario y la base de datos para Synnapse."
+     echo ""
+     echo "  Ahora tendrás que agregar el password y los privilegios manualmente."
+     echo "  Para ello, simplemente copia, pega y ejecuta estas dos líneas:"
+     echo ""
+     echo "alter user synapse with encrypted password 'password';"
+     echo "grant all privileges on database synapse to synapse;"
+     echo ""
+     echo "  Luego sal con: exit"
+     echo ""
+  su - postgres -c "psql"
   
 fi
-
 
