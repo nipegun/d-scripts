@@ -98,9 +98,19 @@ elif [ $OS_VERS == "11" ]; then
   echo "-------------------------------------------------------------------------------------"
   echo ""
 
-  apt-get install -y lsb-release
+  apt-get -y install lsb-release
   apt-get -y install wget
   apt-get -y install apt-transport-https
+  apt-get -y install build-essential
+  apt-get -y install python3-dev
+  apt-get -y install libffi-dev
+  apt-get -y install python3-pip
+  apt-get -y install python3-setuptools
+  apt-get -y install sqlite3
+  apt-get -y install libssl-dev
+  apt-get -y install virtualenv
+  apt-get -y install libjpeg-dev
+  apt-get -y install libxslt1-dev
   wget -O /usr/share/keyrings/matrix-org-archive-keyring.gpg https://packages.matrix.org/debian/matrix-org-archive-keyring.gpg
   echo "deb [signed-by=/usr/share/keyrings/matrix-org-archive-keyring.gpg] https://packages.matrix.org/debian/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/matrix-org.list
   apt-get -y update
