@@ -92,6 +92,8 @@ elif [ $OS_VERS == "10" ]; then
      apt-get -y install gparted
      apt-get -y install caja-open-terminal
      apt-get -y install caja-admin
+     apt-get -y install hardinfo
+     apt-get -y install bleachbit
 
   ## Multimedia
      apt-get -y install vlc
@@ -102,6 +104,7 @@ elif [ $OS_VERS == "10" ]; then
      apt-get -y install openshot
 
   ## Redes
+     apt-get -y install gufw
      apt-get -y install wireshark
      apt-get -y install etherape
      apt-get -y install sshpass
@@ -116,6 +119,11 @@ elif [ $OS_VERS == "10" ]; then
      apt-get -y install dosbox
      apt-get -y install scummvm
 
+  ## Fuentes
+     apt-get -y install fonts-freefont-ttf
+     apt-get -y install fonts-freefont-otf
+     apt-get -y install ttf-mscorefonts-installer
+
   ## Internet
      apt-get -y install firefox-esr-l10n-es-es
      apt-get -y install thunderbird
@@ -128,7 +136,6 @@ elif [ $OS_VERS == "10" ]; then
      apt-get -y install filezilla
      apt-get -y install mumble
      apt-get -y install obs-studio
-
 
   ## Programación
      apt-get -y install ghex
