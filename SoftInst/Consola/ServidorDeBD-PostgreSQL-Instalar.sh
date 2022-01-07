@@ -122,6 +122,8 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Luego sal con: exit"
   echo ""
+  echo "  También recuerda abrir el puerto 5432 en el cortafuegos."
+  echo ""
   su - postgres -c "psql"
 
 fi
