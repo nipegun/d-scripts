@@ -8,8 +8,11 @@
 #--------------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar el servidor de bases de datos PostgreSQL en Debian
 #
-#  Ejecución remota
+#  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-PostgreSQL-Instalar.sh | bash
+#
+#  Ejecución remota con cambio de nombre:
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-PostgreSQL-Instalar.sh | sed 's/UsuarioPrueba/nipegun/g' | sed 's/BDPrueba/nipegun/g' | bash
 #--------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
