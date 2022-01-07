@@ -127,17 +127,20 @@ elif [ $OS_VERS == "11" ]; then
      ## Crear base de datos
         su - postgres -c "createdb synapse"
      echo ""
-     echo "  Se han creado el usuario y la base de datos para Synapse."
+     echo "  Se han creado el usuario y la base de datos para synapse."
      echo ""
      echo "  Ahora tendrás que agregar el password y los privilegios manualmente."
-     echo "  Para ello, simplemente copia, pega y ejecuta estas dos líneas:"
+     echo "  Para ello, arranca la línea de comandos de PostgreSQL con:"
+     echo ""
+     echo 'su - postgres -c "psql"'
+     echo ""
+     echo "  y luego simplemente copia, pega y ejecuta estas dos líneas:"
      echo ""
      echo "alter user synapse with encrypted password 'password';"
      echo "grant all privileges on database synapse to synapse;"
      echo ""
-     echo "  Luego sal con: exit"
+     echo "  Para salir ejecuta exit y no te olvides de abrir el puerto 5432 en el cortafuegos."
      echo ""
-  su - postgres -c "psql"
   
 fi
 
