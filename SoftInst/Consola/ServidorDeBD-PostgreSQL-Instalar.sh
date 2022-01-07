@@ -115,16 +115,17 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Se han creado el usuario y la base de datos de prueba."
   echo ""
   echo "  Ahora tendrás que agregar el password y los privilegios manualmente."
-  echo "  Para ello, simplemente copia, pega y ejecuta estas dos líneas:"
+  echo "  Para ello, arranca la línea de comandos de PostgreSQL con:"
+  echo ""
+  echo 'su - postgres -c "psql"'
+  echo ""
+  echo "  y luego simplemente copia, pega y ejecuta estas dos líneas:"
   echo ""
   echo "alter user $UsuarioPSQL with encrypted password 'password';"
   echo "grant all privileges on database $BaseDeDatosPSQL to $UsuarioPSQL;"
   echo ""
-  echo "  Luego sal con: exit"
+  echo "  Para salir ejecuta exit y no te olvides de abrir el puerto 5432 en el cortafuegos."
   echo ""
-  echo "  También recuerda abrir el puerto 5432 en el cortafuegos."
-  echo ""
-  su - postgres -c "psql"
 
 fi
 
