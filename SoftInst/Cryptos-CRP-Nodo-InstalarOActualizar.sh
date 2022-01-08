@@ -6,7 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #-----------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar la cadena de bloques de Chia (XCH)
+#  Script de NiPeGun para instalar y configurar el messenger de Utopia
+#
+#  Ejecución remota:
+#  curl -s | bash
 #-----------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
