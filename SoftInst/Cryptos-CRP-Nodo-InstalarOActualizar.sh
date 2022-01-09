@@ -116,6 +116,9 @@ echo ""
    sed -i -e "s|/usr/share/pixmaps/utopia.png|/home/$UsuarioNoRoot/Cryptos/CRP/messenger/utopia.png|g" /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop
    sed -i -e "s|/opt/utopia/messenger|/home/$UsuarioNoRoot/Cryptos/CRP/messenger|g"                    /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop
    mv /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop /home/$UsuarioNoRoot/.local/share/applications/crp.desktop
+   sed -i -e 's|Name[en_US]=utopia||g' /home/$UsuarioNoRoot/.local/share/applications/crp.desktop
+   sed -i -e 's|Name=utopia|Name=crp GUI|g' /home/$UsuarioNoRoot/.local/share/applications/crp.desktop
+   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.local/share/applications/crp.desktop
 
 ## Crear icono para auto-ejecución gráfica
    mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
@@ -148,8 +151,8 @@ echo ""
    echo ""
    echo "  Reparando permisos..."
    echo ""
-   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
+   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/CRP/ -R
    ## Denegar a los otros usuarios del sistema el acceso a la carpeta del usuario
-      find /home/$UsuarioNoRoot -type d -exec chmod 750 {} \;
-      find /home/$UsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
+      find /home/$UsuarioNoRoot/Cryptos/CRP/ -type d -exec chmod 750 {} \;
+      find /home/$UsuarioNoRoot/Cryptos/CRP/ -type f -iname "*.sh" -exec chmod +x {} \;
 
