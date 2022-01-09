@@ -124,26 +124,26 @@ echo ""
    echo "  Agregando la aplicación gráfica al menú..."
    echo ""
    mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-   echo "[Desktop Entry]"                                                 > /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   echo "Name=Chia GUI"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   echo "Type=Application"                                               >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   echo "Terminal=false"                                                 >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   echo "Hidden=false"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   echo "Categories=Cryptos"                                             >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
-   #echo "Icon="                                                         >> /home/$UsuarioNoRoot/.local/share/applications/chia.desktop
+   echo "[Desktop Entry]"                                                 > /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
+   echo "Name=xch GUI"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
+   echo "Type=Application"                                               >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
+   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
+   echo "Terminal=false"                                                 >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
+   echo "Hidden=false"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
+   echo "Categories=Cryptos"                                             >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
+   #echo "Icon="                                                         >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
 
 ## Crear el archivo de auto-ehecución
    echo ""
    echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
    echo ""
    mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
-   echo "[Desktop Entry]"                                                 > /home/$UsuarioNoRoot/.config/autostart/chia.desktop
-   echo "Name=Chia GUI"                                                  >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
-   echo "Type=Application"                                               >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
-   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
-   echo "Terminal=false"                                                 >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
-   echo "Hidden=false"                                                   >> /home/$UsuarioNoRoot/.config/autostart/chia.desktop
+   echo "[Desktop Entry]"                                                 > /home/$UsuarioNoRoot/.config/autostart/xch.desktop
+   echo "Name=xch GUI"                                                   >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
+   echo "Type=Application"                                               >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
+   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
+   echo "Terminal=false"                                                 >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
+   echo "Hidden=false"                                                   >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
 
 ## Instalar los c-scripts
    echo ""
