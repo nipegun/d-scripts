@@ -6,7 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #------------------------------------------------------------
-#  Script de NiPeGun para mostrar info de los volúmenes LVM
+#  Script de NiPeGun para mostrar info de los volúmenes físicos LVM
+#
+#  Ejecución remota:
+#  curl -s | bash
 #------------------------------------------------------------
 
 echo ""
@@ -21,27 +24,6 @@ echo ""
 pvdisplay
 echo ""
 
-echo ""
-echo "  Mostrando info de grupos de volúmenes..."
-echo ""
-vgs
-echo ""
 
-echo ""
-echo "  Mostrando info de grupos de volúmenes..."
-echo ""
-vgdisplay
-echo ""
 
-echo ""
-echo "  Mostrando info de volúmenes lógicos del sistema..."
-echo ""
-lvs
-echo ""
-
-echo ""
-echo "  Mostrando info de volúmenes lógicos del sistema (más completo)..."
-echo ""
-lvdisplay
-echo ""
 
