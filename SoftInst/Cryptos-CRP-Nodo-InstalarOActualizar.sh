@@ -89,14 +89,15 @@ echo ""
    #apt-get -y install gstreamer*-plugins-bad
    #apt-get -y install gstreamer*-plugins-ugly
    
-   #apt-get -y install libxcb-screensaver0
-   #apt-get -y install libqt5multimedia5
-   #apt-get -y install libqt5printsupport5
-   #apt-get -y install libqt5x11extras5
-   #apt-get -y install libqt5xmlpatterns5
-   #apt-get -y install libqt5websockets5
-   #apt-get -y install libqt5concurrent5
-   #apt-get -y install libqt5sql5
+   apt-get -y install libxcb-screensaver0
+   apt-get -y install libqt5multimedia5
+   apt-get -y install libqt5printsupport5
+   apt-get -y install libqt5quick5
+   apt-get -y install libqt5x11extras5
+   apt-get -y install libqt5xmlpatterns5
+   apt-get -y install libqt5websockets5
+   apt-get -y install libqt5concurrent5
+   apt-get -y install libqt5sql5
  
    #ln -sf /usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
 
