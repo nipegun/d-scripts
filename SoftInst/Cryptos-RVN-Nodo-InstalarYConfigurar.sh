@@ -111,9 +111,9 @@ echo "daemon=1"                >> /home/$UsuarioNoRoot/.raven/raven.conf
 echo "gen=0"                   >> /home/$UsuarioNoRoot/.raven/raven.conf
 rm -rf /home/$UsuarioNoRoot/Cryptos/RVN/
 mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioNoRoot/Cryptos/RVN/
-chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
-find /home/$UsuarioNoRoot -type d -exec chmod 775 {} \;
-find /home/$UsuarioNoRoot -type f -exec chmod 664 {} \;
+chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/RVN/ -R
+find /home/$UsuarioNoRoot/Cryptos/RVN/ -type d -exec chmod 775 {} \;
+find /home/$UsuarioNoRoot/Cryptos/RVN/ -type f -exec chmod 664 {} \;
 find /home/$UsuarioNoRoot/Cryptos/RVN/bin -type f -exec chmod +x {} \;
 
 #echo ""
@@ -165,7 +165,7 @@ find /home/$UsuarioNoRoot/Cryptos/RVN/bin -type f -exec chmod +x {} \;
 
 ## Reparación de permisos
    chmod +x /home/$UsuarioNoRoot/Cryptos/RVN/bin/*
-   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
+   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/RVN/ -R
 
 ## Instalar los c-scripts
    echo ""
