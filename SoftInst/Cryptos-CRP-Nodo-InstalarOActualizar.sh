@@ -92,7 +92,8 @@ echo ""
    apt-get -y install libqt5concurrent5
    apt-get -y install libqt5printsupport5
    apt-get -y install libqt5x11extras5
-   apt-get -y install libqt5sql5 
+   apt-get -y install libqt5sql5
+   ln -sf /usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
 
 ## Pedir el nombre del usuario no-root
    echo ""
