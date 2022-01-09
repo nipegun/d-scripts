@@ -7,13 +7,16 @@
 
 #-------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar diferentes carteras de criptomonedas en Debian10
+#
+#  Ejecución remota:
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/Cryptos-Carteras-InstalarYConfigurar.sh @bash
 #-------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-UsuarioNoRoot="NiPeGun"
+UsuarioNoRoot="nipegun"
 
 echo ""
 echo -e "${ColorVerde}-------------------------------------------------------------------------------------${FinColor}"
