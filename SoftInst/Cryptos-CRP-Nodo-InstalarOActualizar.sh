@@ -118,7 +118,7 @@ echo ""
 
 ## Crear icono para auto-ejecución gráfica
    mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
-   cp /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop /home/$UsuarioNoRoot/.config/autostart/utopia.desktop
+   cp /home/$UsuarioNoRoot/.local/share/applications/crp.desktop /home/$UsuarioNoRoot/.config/autostart/crp.desktop
 
 ## Borrar archivos sobrantes
    echo ""
@@ -136,12 +136,12 @@ echo ""
    #echo "  Creando el archivo de auto-ejecución gráfica..."
    #echo ""
    #mkdir -p /root/.config/autostart/ 2> /dev/null
-   #echo "[Desktop Entry]"                                           > /root/.config/autostart/utopia.desktop
-   #echo "Name=utopia"                                              >> /root/.config/autostart/utopia.desktop
-   #echo "Type=Application"                                         >> /root/.config/autostart/utopia.desktop
-   #echo 'Exec=sh -c "/root/Cryptos/CRP/messenger/utopia --url %u"' >> /root/.config/autostart/utopia.desktop
-   #echo "Terminal=false"                                           >> /root/.config/autostart/utopia.desktop
-   #echo "Hidden=false"                                             >> /root/.config/autostart/utopia.desktop
+   #echo "[Desktop Entry]"                                           > /root/.config/autostart/crp.desktop
+   #echo "Name=crp GUI"                                             >> /root/.config/autostart/crp.desktop
+   #echo "Type=Application"                                         >> /root/.config/autostart/crp.desktop
+   #echo 'Exec=sh -c "/root/Cryptos/CRP/messenger/utopia --url %u"' >> /root/.config/autostart/crp.desktop
+   #echo "Terminal=false"                                           >> /root/.config/autostart/crp.desktop
+   #echo "Hidden=false"                                             >> /root/.config/autostart/crp.desktop
 
 ## Reparar permisos
    echo ""
