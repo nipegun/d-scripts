@@ -19,7 +19,7 @@ vgs
 echo ""
 
 echo ""
-echo "  Mostrando info de grupos de volúmenes..."
+echo "  Mostrando info de grupos de volúmenes (más completo)..."
 echo ""
 vgdisplay
 echo ""
