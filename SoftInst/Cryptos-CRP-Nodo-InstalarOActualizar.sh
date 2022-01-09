@@ -10,6 +10,9 @@
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Cryptos-CRP-Nodo-InstalarOActualizar.sh | bash
+#
+#  Cambiando el nombre de usuario
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Cryptos-CRP-Nodo-InstalarOActualizar.sh | sed 's/nipegun/usuarionuevo/g' | bash
 #----------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
@@ -96,10 +99,6 @@ echo ""
    #apt-get -y install libqt5sql5
  
    #ln -sf /usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
-
-## Pedir el nombre del usuario no-root
-   echo ""
-   read -p "Ingresa el nombre del usuario no root: " UsuarioNoRoot
 
 ## Crear la carpeta para el usuario no root
    echo ""
