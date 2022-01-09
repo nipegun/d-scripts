@@ -115,6 +115,7 @@ echo ""
    mv /root/SoftInst/Cryptos/CRP/usr/share/pixmaps/utopia.png                                          /home/$UsuarioNoRoot/Cryptos/CRP/messenger/
    sed -i -e "s|/usr/share/pixmaps/utopia.png|/home/$UsuarioNoRoot/Cryptos/CRP/messenger/utopia.png|g" /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop
    sed -i -e "s|/opt/utopia/messenger|/home/$UsuarioNoRoot/Cryptos/CRP/messenger|g"                    /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop
+   mv /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop /home/$UsuarioNoRoot/.local/share/applications/crp.desktop
 
 ## Crear icono para auto-ejecución gráfica
    mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
