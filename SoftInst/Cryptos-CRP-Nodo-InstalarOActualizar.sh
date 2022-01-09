@@ -85,10 +85,11 @@ echo ""
    apt-get -y install gstreamer*-plugins-good
    apt-get -y install gstreamer*-plugins-bad
    apt-get -y install gstreamer*-plugins-ugly
-
-   #apt-get -y install libxcb-screensaver0
-   #apt-get -y install libqt5xmlpatterns5
-   #apt-get -y install libqt5websockets5
+   apt-get -y install libxcb-screensaver0
+   apt-get -y install libqt5xmlpatterns5
+   apt-get -y install libqt5websockets5
+   apt-get -y install libqt5multimedia5
+   apt-get -y install libqt5concurrent5 
 
 ## Pedir el nombre del usuario no-root
    echo ""
@@ -115,10 +116,9 @@ echo ""
    mv /root/SoftInst/Cryptos/CRP/usr/share/pixmaps/utopia.png                                          /home/$UsuarioNoRoot/Cryptos/CRP/messenger/
    sed -i -e "s|/usr/share/pixmaps/utopia.png|/home/$UsuarioNoRoot/Cryptos/CRP/messenger/utopia.png|g" /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop
    sed -i -e "s|/opt/utopia/messenger|/home/$UsuarioNoRoot/Cryptos/CRP/messenger|g"                    /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop
+   sed -i -e 's|=utopia|=crp GUI|g'                                                                    /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop
    mv /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop /home/$UsuarioNoRoot/.local/share/applications/crp.desktop
-   sed -i -e 's|Name[en_US]=utopia||g' /home/$UsuarioNoRoot/.local/share/applications/crp.desktop
-   sed -i -e 's|Name=utopia|Name=crp GUI|g' /home/$UsuarioNoRoot/.local/share/applications/crp.desktop
-   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.local/share/applications/crp.desktop
+   chown $UsuarioNoRoot:$UsuarioNoRoot      /home/$UsuarioNoRoot/.local/share/applications/crp.desktop
 
 ## Crear icono para auto-ejecución gráfica
    mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
@@ -134,18 +134,6 @@ echo ""
    rm -rf /root/SoftInst/Cryptos/CRP/data.tar.xz
    rm -rf /root/SoftInst/Cryptos/CRP/debian-binary
    #rm -rf /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
-
-## Crear el archivo de auto-ejecución gráfica
-   #echo ""
-   #echo "  Creando el archivo de auto-ejecución gráfica..."
-   #echo ""
-   #mkdir -p /root/.config/autostart/ 2> /dev/null
-   #echo "[Desktop Entry]"                                           > /root/.config/autostart/crp.desktop
-   #echo "Name=crp GUI"                                             >> /root/.config/autostart/crp.desktop
-   #echo "Type=Application"                                         >> /root/.config/autostart/crp.desktop
-   #echo 'Exec=sh -c "/root/Cryptos/CRP/messenger/utopia --url %u"' >> /root/.config/autostart/crp.desktop
-   #echo "Terminal=false"                                           >> /root/.config/autostart/crp.desktop
-   #echo "Hidden=false"                                             >> /root/.config/autostart/crp.desktop
 
 ## Reparar permisos
    echo ""
