@@ -10,6 +10,15 @@
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/LVM-VolumLogi-Reducir.sh | bash
+#
+#  Ejemplo:
+#
+#    df -h /testfs/
+#
+#    Filesystem            Size  Used Avail Use% Mounted on
+#    /dev/mapper/vg01-lv01 492M   33M  435M   8% /testfs
+#
+#    lvreduce /dev/vg01/lv01 -L-235M -r
 #----------------------------------------------------------------------------------------------------
 
 lvreduce $1
