@@ -35,7 +35,7 @@ if [ $# -ne $CantArgsCorrectos ]
       URL="https://api.telegram.org/bot$TokenDelBot/sendMessage"
       IdDestino="$2"
       Mensaje="$3"
-      curl -s -X POST $URL -d chat_id=$IdDestino -d parse_mode='MarkdownV2' -d text="$Mensaje" > /dev/null
+      curl -s -X POST $URL -d chat_id=$IdDestino -d parse_mode=MarkdownV2 -d text="$Mensaje" > /dev/null
       echo ""
     else
       echo ""
