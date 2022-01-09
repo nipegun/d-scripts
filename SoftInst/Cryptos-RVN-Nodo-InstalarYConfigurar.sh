@@ -142,26 +142,26 @@ find /home/$UsuarioNoRoot/Cryptos/RVN/bin -type f -exec chmod +x {} \;
    echo "  Agregando la aplicación gráfica al menú..."
    echo ""
    mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
-   echo "Name=Raven GUI"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
-   echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
-   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/rvn-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
-   echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
-   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
-   echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
-   #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/raven.desktop
+   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+   echo "Name=rvn GUI"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+   echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/rvn-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+   echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+   echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+   #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
 
 ## Autoejecución gráfica de Ravencoin
    echo ""
    echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."
    echo ""
    mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
-   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/raven.desktop
-   echo "Name=Raven GUI"                                                  >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
-   echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
-   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/rvn-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
-   echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
-   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/raven.desktop
+   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
+   echo "Name=rvn GUI"                                                    >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
+   echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
+   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/rvn-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
+   echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
+   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
 
 ## Reparación de permisos
    chmod +x /home/$UsuarioNoRoot/Cryptos/RVN/bin/*
