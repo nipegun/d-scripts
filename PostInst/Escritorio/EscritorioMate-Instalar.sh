@@ -94,6 +94,20 @@ elif [ $OS_VERS == "10" ]; then
   apt-get -y install firefox-esr-l10n-es-es
   apt-get -y install libreoffice-l10n-es
 
+  ## Permitir caja como root
+     mkdir -p /root/.config/autostart/ 2> /dev/null
+     echo "[Desktop Entry]"                > /root/.config/autostart/caja.desktop
+     echo "Type=Application"              >> /root/.config/autostart/caja.desktop
+     echo "Exec=caja --force-desktop"     >> /root/.config/autostart/caja.desktop
+     echo "Hidden=false"                  >> /root/.config/autostart/caja.desktop
+     echo "X-MATE-Autostart-enabled=true" >> /root/.config/autostart/caja.desktop
+     echo "Name[es_ES]=Caja"              >> /root/.config/autostart/caja.desktop
+     echo "Name=Caja"                     >> /root/.config/autostart/caja.desktop
+     echo "Comment[es_ES]="               >> /root/.config/autostart/caja.desktop
+     echo "Comment="                      >> /root/.config/autostart/caja.desktop
+     echo "X-MATE-Autostart-Delay=0"      >> /root/.config/autostart/caja.desktop
+     gio set /root/.config/autostart/caja.desktop "metadata::trusted" yes
+
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
@@ -111,18 +125,18 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install libreoffice-l10n-es
 
   ## Permitir caja como root
-  mkdir -p /root/.config/autostart/ 2> /dev/null
-  echo "[Desktop Entry]"                > /root/.config/autostart/caja.desktop
-  echo "Type=Application"              >> /root/.config/autostart/caja.desktop
-  echo "Exec=caja --force-desktop"     >> /root/.config/autostart/caja.desktop
-  echo "Hidden=false"                  >> /root/.config/autostart/caja.desktop
-  echo "X-MATE-Autostart-enabled=true" >> /root/.config/autostart/caja.desktop
-  echo "Name[es_ES]=Caja"              >> /root/.config/autostart/caja.desktop
-  echo "Name=Caja"                     >> /root/.config/autostart/caja.desktop
-  echo "Comment[es_ES]="               >> /root/.config/autostart/caja.desktop
-  echo "Comment="                      >> /root/.config/autostart/caja.desktop
-  echo "X-MATE-Autostart-Delay=0"      >> /root/.config/autostart/caja.desktop
-  gio set /root/.config/autostart/caja.desktop "metadata::trusted" yes
+     mkdir -p /root/.config/autostart/ 2> /dev/null
+     echo "[Desktop Entry]"                > /root/.config/autostart/caja.desktop
+     echo "Type=Application"              >> /root/.config/autostart/caja.desktop
+     echo "Exec=caja --force-desktop"     >> /root/.config/autostart/caja.desktop
+     echo "Hidden=false"                  >> /root/.config/autostart/caja.desktop
+     echo "X-MATE-Autostart-enabled=true" >> /root/.config/autostart/caja.desktop
+     echo "Name[es_ES]=Caja"              >> /root/.config/autostart/caja.desktop
+     echo "Name=Caja"                     >> /root/.config/autostart/caja.desktop
+     echo "Comment[es_ES]="               >> /root/.config/autostart/caja.desktop
+     echo "Comment="                      >> /root/.config/autostart/caja.desktop
+     echo "X-MATE-Autostart-Delay=0"      >> /root/.config/autostart/caja.desktop
+     gio set /root/.config/autostart/caja.desktop "metadata::trusted" yes
 
 fi
 
