@@ -98,7 +98,17 @@ echo ""
    apt-get -y install libqt5websockets5
    apt-get -y install libqt5concurrent5
    apt-get -y install libqt5sql5
- 
+   
+   apt-get -y install libxcb-icccm4
+   apt-get -y install libxcb-image0
+   apt-get -y install libxcb-keysyms1
+   apt-get -y install libxcb-randr0
+   apt-get -y install libxcb-render-util0
+   apt-get -y install libxcb-xinerama0
+   apt-get -y install libxcb-xkb1
+   apt-get -y install libxcb-xinput0
+   apt-get -y install libxkbcommon-x11-0
+
    #ln -sf /usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
 
 ## Crear la carpeta para el usuario no root
