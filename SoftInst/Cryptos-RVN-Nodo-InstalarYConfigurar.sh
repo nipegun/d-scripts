@@ -150,6 +150,7 @@ find /home/$UsuarioNoRoot/Cryptos/RVN/bin -type f -exec chmod +x {} \;
    echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
    echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
    #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+   gio set /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop "metadata::trusted" yes
 
 ## Autoejecución gráfica de Ravencoin
    echo ""
@@ -162,6 +163,7 @@ find /home/$UsuarioNoRoot/Cryptos/RVN/bin -type f -exec chmod +x {} \;
    echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/rvn-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
    echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
    echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
+   gio set /home/$UsuarioNoRoot/.config/autostart/rvn.desktop "metadata::trusted" yes
 
 ## Reparación de permisos
    chmod +x /home/$UsuarioNoRoot/Cryptos/RVN/bin/*
