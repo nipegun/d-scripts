@@ -134,7 +134,6 @@ echo ""
    #echo "Icon="                                                         >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
    gio set /home/$UsuarioNoRoot/.local/share/applications/xch.desktop "metadata::trusted" yes
 
-
 ## Crear el archivo de auto-ehecución
    echo ""
    echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
