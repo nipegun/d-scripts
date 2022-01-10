@@ -135,10 +135,12 @@ echo ""
    sed -i -e 's|=utopia|=crp GUI|g'                                                                    /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop
    mv /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop /home/$UsuarioNoRoot/.local/share/applications/crp.desktop
    chown $UsuarioNoRoot:$UsuarioNoRoot      /home/$UsuarioNoRoot/.local/share/applications/crp.desktop
+   gio set /home/$UsuarioNoRoot/.local/share/applications/crp.desktop "metadata::trusted" yes
 
 ## Crear icono para auto-ejecución gráfica
    mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
    cp /home/$UsuarioNoRoot/.local/share/applications/crp.desktop /home/$UsuarioNoRoot/.config/autostart/crp.desktop
+   gio set /home/$UsuarioNoRoot/.config/autostart/crp.desktop "metadata::trusted" yes
 
 ## Borrar archivos sobrantes
    echo ""
