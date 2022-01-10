@@ -160,3 +160,6 @@ echo ""
       find /home/$UsuarioNoRoot/Cryptos/CRP/ -type d -exec chmod 750 {} \;
       find /home/$UsuarioNoRoot/Cryptos/CRP/ -type f -iname "*.sh" -exec chmod +x {} \;
 
+## Para debuggear la utilización de los plugins de qt, antes de abrir el messenger, ejecuta:
+# export QT_DEBUG_PLUGINS=1
+
