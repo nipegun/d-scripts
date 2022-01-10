@@ -132,6 +132,8 @@ echo ""
    echo "Hidden=false"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
    echo "Categories=Cryptos"                                             >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
    #echo "Icon="                                                         >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
+   gio set /home/$UsuarioNoRoot/.local/share/applications/xch.desktop "metadata::trusted" yes
+
 
 ## Crear el archivo de auto-ehecución
    echo ""
@@ -144,6 +146,7 @@ echo ""
    echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
    echo "Terminal=false"                                                 >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
    echo "Hidden=false"                                                   >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
+   gio set /home/$UsuarioNoRoot/.config/autostart/xch.desktop "metadata::trusted" yes
 
 ## Instalar los c-scripts
    echo ""
