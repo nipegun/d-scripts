@@ -109,6 +109,14 @@ echo ""
    apt-get -y install libxcb-xinput0
    apt-get -y install libxkbcommon-x11-0
 
+   ## headless
+      apt-get -y install libx11-xcb1
+      apt-get -y install libgl1-mesa-glx
+      apt-get -y install libpulse-mainloop-glib0
+      apt-get -y install libpulse0
+      apt-get -y install libglib2.0-0
+      apt-get -y install libfontconfig
+
    #ln -sf /usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
 
 ## Crear la carpeta para el usuario no root
@@ -164,4 +172,6 @@ echo ""
 
 ## Para debuggear la utilización de los plugins de qt, antes de abrir el messenger, ejecuta:
 # export QT_DEBUG_PLUGINS=1
+rm -f /home/$UsuarioNoRoot/Cryptos/CRP/messenger/package.json
+rm -f /home/$UsuarioNoRoot/Cryptos/CRP/messenger/version
 
