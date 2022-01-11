@@ -158,6 +158,20 @@ elif [ $OS_VERS == "11" ]; then
                  echo "  Instalando dependencias..."
                  echo ""
 
+                 ## Actualizar cache de paquetes
+                    apt-get -y update
+
+                 ## libxcb
+                    apt-get -y install libxcb-icccm4
+                    apt-get -y install libxcb-image0
+                    apt-get -y install libxcb-keysyms1
+                    apt-get -y install libxcb-randr0
+                    apt-get -y install libxcb-render-util0
+                    apt-get -y install libxcb-xinerama0
+                    apt-get -y install libxcb-xkb1
+                    apt-get -y install libxcb-xinput0
+                    apt-get -y install libxkbcommon-x11-0
+
               ## Instalar paquete .deb
                  echo ""
                  echo "  Instalando paquete .deb..."
