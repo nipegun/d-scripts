@@ -125,12 +125,54 @@ elif [ $OS_VERS == "11" ]; then
           case $choice in
 
             1)
+
               echo ""
               echo -e "${ColorVerde}  Instalando Utopia Messenger en ubicación por defecto...${FinColor}"
               echo ""
+
+              ## Crear carpeta de descarga
+                 echo ""
+                 echo "  Creando carpeta de descarga..."
+                 echo ""
+                 mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
+                 rm -rf /root/SoftInst/Cryptos/CRP/*
+
+              ## Descargar y descomprimir todos los archivos
+                 echo ""
+                 echo "  Descargando el paquete .deb de la instalación..."
+                 echo ""
+                 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."
+                      echo ""
+                      apt-get -y update > /dev/null
+                      apt-get -y install wget
+                      echo ""
+                    fi
+                 cd /root/SoftInst/Cryptos/CRP/
+                 wget https://update.u.is/downloads/linux/utopia-latest.amd64.deb
+
+              ## Instalar dependencias
+                 echo ""
+                 echo "  Instalando dependencias..."
+                 echo ""
+
+              ## Instalar paquete .deb
+                 echo ""
+                 echo "  Instalando paquete .deb..."
+                 echo ""
+                 dpkg -i /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
+
+              ## Fin de la ejecución del script
+                 echo ""
+                 echo "  Ejecución del script, finalizada."
+                 echo ""
+
             ;;
 
             2)
+
               echo ""
               echo -e "${ColorVerde}  Instalando Utopia Messenger en ubicación personalizada...${FinColor}"
               echo ""
