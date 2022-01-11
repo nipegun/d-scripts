@@ -182,6 +182,9 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Ejecución del script, finalizada."
                  echo ""
+                 echo "  Si en algún momento quieres desinstalarlo, ejecuta:"
+                 echo "  dpkg -r utopia"
+                 echo ""
 
             ;;
 
