@@ -83,31 +83,28 @@ echo ""
    echo ""
    echo "  Instalando dependencias necesarias..."
    echo ""
-   #apt-get -y install libpulse-mainloop-glib0
-   #apt-get -y install gstreamer*-plugins-base
-   #apt-get -y install gstreamer*-plugins-good
-   #apt-get -y install gstreamer*-plugins-bad
-   #apt-get -y install gstreamer*-plugins-ugly
-   
-   apt-get -y install libxcb-screensaver0
-   apt-get -y install libqt5multimedia5
-   apt-get -y install libqt5printsupport5
-   apt-get -y install libqt5quick5
-   apt-get -y install libqt5x11extras5
-   apt-get -y install libqt5xmlpatterns5
-   apt-get -y install libqt5websockets5
-   apt-get -y install libqt5concurrent5
-   apt-get -y install libqt5sql5
-   
-   apt-get -y install libxcb-icccm4
-   apt-get -y install libxcb-image0
-   apt-get -y install libxcb-keysyms1
-   apt-get -y install libxcb-randr0
-   apt-get -y install libxcb-render-util0
-   apt-get -y install libxcb-xinerama0
-   apt-get -y install libxcb-xkb1
-   apt-get -y install libxcb-xinput0
-   apt-get -y install libxkbcommon-x11-0
+
+   ## Por orden de requerimiento
+      apt-get -y install libxcb-screensaver0
+      apt-get -y install libqt5multimedia5
+      apt-get -y install libqt5printsupport5
+      apt-get -y install libqt5quick5
+      apt-get -y install libqt5x11extras5
+      apt-get -y install libqt5xmlpatterns5
+      apt-get -y install libqt5websockets5
+      apt-get -y install libqt5concurrent5
+      apt-get -y install libqt5sql5
+
+   ## libxcb
+      apt-get -y install libxcb-icccm4
+      apt-get -y install libxcb-image0
+      apt-get -y install libxcb-keysyms1
+      apt-get -y install libxcb-randr0
+      apt-get -y install libxcb-render-util0
+      apt-get -y install libxcb-xinerama0
+      apt-get -y install libxcb-xkb1
+      apt-get -y install libxcb-xinput0
+      apt-get -y install libxkbcommon-x11-0
 
    ## headless
       apt-get -y install libx11-xcb1
@@ -116,6 +113,12 @@ echo ""
       apt-get -y install libpulse0
       apt-get -y install libglib2.0-0
       apt-get -y install libfontconfig
+ 
+   ## Otros 
+      apt-get -y install gstreamer*-plugins-base
+      apt-get -y install gstreamer*-plugins-good
+      apt-get -y install gstreamer*-plugins-bad
+      apt-get -y install gstreamer*-plugins-ugly
 
    #ln -sf /usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
 
@@ -131,10 +134,12 @@ echo ""
    mkdir -p "/home/$UsuarioNoRoot/.local/share/Utopia/Utopia Client/" 2> /dev/null
    echo "[General]"          > "/home/$UsuarioNoRoot/.local/share/Utopia/Utopia Client/messenger.ini"
    echo "languageCode=1034" >> "/home/$UsuarioNoRoot/.local/share/Utopia/Utopia Client/messenger.ini"
+   rm -f /home/$UsuarioNoRoot/Cryptos/CRP/messenger/package.json
+   rm -f /home/$UsuarioNoRoot/Cryptos/CRP/messenger/version
 
 ## Crear icono para el menu gráfico
-   rm -rf /usr/share/applications/utopia.desktop 2> /dev/null
-   rm -rf /home/$UsuarioNoRoot/.local/share/applications/utopia.desktop 2> /dev/null
+   rm -f /usr/share/applications/utopia.desktop 2> /dev/null
+   rm -f /home/$UsuarioNoRoot/.local/share/applications/crp.desktop 2> /dev/null
    mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
    mv /root/SoftInst/Cryptos/CRP/usr/share/applications/utopia.desktop                                 /home/$UsuarioNoRoot/.local/share/applications/
    mv /root/SoftInst/Cryptos/CRP/usr/share/pixmaps/utopia.png                                          /home/$UsuarioNoRoot/Cryptos/CRP/messenger/
@@ -147,6 +152,7 @@ echo ""
 
 ## Crear icono para auto-ejecución gráfica
    mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
+   rm -f /home/$UsuarioNoRoot/.config/autostart/crp.desktop
    cp /home/$UsuarioNoRoot/.local/share/applications/crp.desktop /home/$UsuarioNoRoot/.config/autostart/crp.desktop
    gio set /home/$UsuarioNoRoot/.config/autostart/crp.desktop "metadata::trusted" yes
 
@@ -166,12 +172,18 @@ echo ""
    echo "  Reparando permisos..."
    echo ""
    chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/CRP/ -R
-   ## Denegar a los otros usuarios del sistema el acceso a la carpeta del usuario
-      find /home/$UsuarioNoRoot/Cryptos/CRP/ -type d -exec chmod 750 {} \;
-      find /home/$UsuarioNoRoot/Cryptos/CRP/ -type f -iname "*.sh" -exec chmod +x {} \;
+   #find /home/$UsuarioNoRoot/Cryptos/CRP/ -type d -exec chmod 750 {} \;
+   #find /home/$UsuarioNoRoot/Cryptos/CRP/ -type f -iname "*.sh" -exec chmod +x {} \;
 
-## Para debuggear la utilización de los plugins de qt, antes de abrir el messenger, ejecuta:
-# export QT_DEBUG_PLUGINS=1
-rm -f /home/$UsuarioNoRoot/Cryptos/CRP/messenger/package.json
-rm -f /home/$UsuarioNoRoot/Cryptos/CRP/messenger/version
+echo ""
+echo "  Para debuggear la utilización de los plugins de qt, antes de abrir el messenger, ejecuta:"
+echo ""
+echo "export QT_DEBUG_PLUGINS=1"
+echo ""
+
+echo ""
+echo "  Para corregir la ubicación de las liberías ejecuta:"
+echo ""
+echo "export LD_LIBRARY_PATH=/home/$UsuarioNoRoot/Cryptos/CRP/messenger/lib"
+echo ""
 
