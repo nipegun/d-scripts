@@ -116,11 +116,11 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
                 echo ""
                 echo "  Borrando archivos sobrantes..."
                 echo ""
-                rm -rf /root/Cryptos/CRP/opt/
-                rm -rf /root/Cryptos/CRP/control.tar.gz
-                rm -rf /root/Cryptos/CRP/data.tar.xz
-                rm -rf /root/Cryptos/CRP/debian-binary
-                rm -rf /root/Cryptos/CRP/uam-latest_amd64.deb
+                #rm -rf /root/Cryptos/CRP/opt/
+                #rm -rf /root/Cryptos/CRP/control.tar.gz
+                #rm -rf /root/Cryptos/CRP/data.tar.xz
+                #rm -rf /root/Cryptos/CRP/debian-binary
+                #rm -rf /root/Cryptos/CRP/uam-latest_amd64.deb
 
           ## Crear el archivo para minar
              echo '#!/bin/bash'                                                                         > /root/Cryptos/CRP/minero/Minar.sh
