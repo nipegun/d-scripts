@@ -115,8 +115,6 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
-
-
   ## Instalar paquetes necesarios
      echo ""
      echo "  Instalando paquetes necesarios..."
@@ -156,5 +154,11 @@ elif [ $OS_VERS == "11" ]; then
      cd /root/SoftInst/VirtualBox/
      wget https://download.virtualbox.org/virtualbox/6.1.24/Oracle_VM_VirtualBox_Extension_Pack-6.1.24.vbox-extpack
      vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VM_VirtualBox_Extension_Pack-6.1.24.vbox-extpack
+
+   ## Agregar el usuario 1000 al grupo virtualbox
+      echo ""
+      echo "  Agregando el usuario 1000 en el grupo virtualbox..."
+      echo ""
+      usermod -a G vboxusers 1000
 fi
 
