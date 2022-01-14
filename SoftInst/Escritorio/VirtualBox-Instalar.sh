@@ -139,7 +139,7 @@ elif [ $OS_VERS == "11" ]; then
         fi
      wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
      wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
-     echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bullseye contrib" > /etc/apt/sources.list.d/virtualbox.list
+     echo "deb [arch=$(dpkg --print-architecture)] http://download.virtualbox.org/virtualbox/debian bullseye contrib" > /etc/apt/sources.list.d/virtualbox.list
      apt-get -y update
 
   ## Instalar virtualbox
