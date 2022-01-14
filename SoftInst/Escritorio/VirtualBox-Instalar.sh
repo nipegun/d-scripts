@@ -137,8 +137,8 @@ elif [ $OS_VERS == "11" ]; then
           apt-get -y install wget
           echo ""
         fi
-     wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-     wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+     wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
+     wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
      echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bullseye contrib" > /etc/apt/sources.list.d/virtualbox.list
      apt-get -y update
 
@@ -146,19 +146,25 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      echo "  Instalando el paquete virtualbox..."
      echo ""
+     PaqueteAInstalar=$(apt-cache search virtualbox | grep "virtualbox-" | tail -n1 | cut -d' ' -f1)
+     apt-get -y install $PaqueteAInstalar
 
   ## Instalar el pack de extensiones
      echo ""
      echo "  Instalando el pack de extensiones..."
      echo ""
+     mkdir -p /root/SoftInst/VirtualBox/
      cd /root/SoftInst/VirtualBox/
-     wget https://download.virtualbox.org/virtualbox/6.1.24/Oracle_VM_VirtualBox_Extension_Pack-6.1.24.vbox-extpack
-     vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VM_VirtualBox_Extension_Pack-6.1.24.vbox-extpack
+     VersDeVBoxInstalada=$(virtualbox -h | grep elector | cut -d'v' -f2)
+     wget https://download.virtualbox.org/virtualbox/$VersDeVBoxInstalada/Oracle_VM_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
+     vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VM_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
 
    ## Agregar el usuario 1000 al grupo virtualbox
       echo ""
       echo "  Agregando el usuario 1000 en el grupo virtualbox..."
       echo ""
-      usermod -a G vboxusers 1000
+      Usuario1000=$(id 1000 | cut -d'(' -f2 | cut -d')' -f1)
+      usermod -a -G vboxusers $Usuario1000
+ 
 fi
 
