@@ -112,9 +112,46 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
 
+
+  ## Instalar paquetes necesarios
+     echo ""
+     echo "  Instalando paquetes necesarios..."
+     echo ""
+     apt-get -y update
+     apt-get -y install linux-headers-$(uname -r)
+     apt-get -y install dkms
+
+  ## Agregar repositorio
+     echo ""
+     echo "  Agregando repositorio de VirtualBox..."
+     echo ""
+     apt-get -y install gnupg2
+     ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo "  wget no está instalado. Iniciando su instalación..."
+          echo ""
+          apt-get -y update > /dev/null
+          apt-get -y install wget
+          echo ""
+        fi
+     wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+     wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+     echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bullseye contrib" > /etc/apt/sources.list.d/virtualbox.list
+     apt-get -y update
+
+  ## Instalar virtualbox
+     echo ""
+     echo "  Instalando el paquete virtualbox..."
+     echo ""
+
+  ## Instalar el pack de extensiones
+     echo ""
+     echo "  Instalando el pack de extensiones..."
+     echo ""
+     cd /root/SoftInst/VirtualBox/
+     wget https://download.virtualbox.org/virtualbox/6.1.24/Oracle_VM_VirtualBox_Extension_Pack-6.1.24.vbox-extpack
+     vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VM_VirtualBox_Extension_Pack-6.1.24.vbox-extpack
 fi
 
