@@ -105,6 +105,7 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y update
      apt-get -y install libaio1
      apt-get -y install bc
+     apt-get -y install alien
      apt-get -y install ksh
      apt-get -y install gawk
 
@@ -128,6 +129,9 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      cd /root/SoftInst/OracleXE/
      wget $URLDelPaquete -O oracle-xe.rpm
+
+  ## Instalando el paquete
+     alien --scripts -i '/root/SoftInst/OracleXE/oracle-xe.rpm'
 
   ## Agregar el grupo dba
      #groupadd dba
