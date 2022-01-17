@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar MuSQL Servern en Debian
+#  Script de NiPeGun para instalar MySQL Server en Debian
 #
 # Ejecución remota
 # curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-MySQL-Instalar.sh | bash
@@ -93,9 +93,9 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Docker y Portainer para Debian 11 (Bullseye)..."
-  echo "-----------------------------------------------------------------------------------------"
+  echo "-----------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de MySQL Server para Debian 11 (Bullseye)..."
+  echo "-----------------------------------------------------------------------------------"
   echo ""
 
   mkdir -p /root/SoftInst/MySQLServer/ 2> /dev/null
