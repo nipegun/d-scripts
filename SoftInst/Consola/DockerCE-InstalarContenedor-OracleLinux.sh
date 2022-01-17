@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar Oracle Linux en el DockerCE de Debian
+#  Script de NiPeGun para instalar OracleLinux en el DockerCE de Debian
 #
 # Ejecución remota
 # curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/DockerCE-InstalarContenedor-OracleLinux.sh | bash
@@ -139,7 +139,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "  --volume /Contenedores/OracleLinux/data:/data oraclelinux:$VerOLDeseada \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  --publish 22001:22 \\"                                                      >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  --publish 1521:9444 \\"                                                     >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-              echo "  --publish 1630:1630 \\"                                                     >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --publish 1630:1630"                                                        >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               chmod +x /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
 
               echo ""
@@ -172,7 +172,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "  --volume /Host/OracleLinux/data:/data oraclelinux:$VerOLDeseada \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  --publish 22001:22 \\"                                              >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  --publish 1521:9444 \\"                                             >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-              echo "  --publish 1630:1630 \\"                                             >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --publish 1630:1630"                                                >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               chmod +x /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
 
               echo ""
