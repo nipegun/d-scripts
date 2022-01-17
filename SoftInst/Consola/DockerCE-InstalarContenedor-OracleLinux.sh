@@ -12,6 +12,8 @@
 # curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/DockerCE-InstalarContenedor-OracleLinux.sh | bash
 #--------------------------------------------------------------------------------------------------------------------------------------
 
+VerOLDeseada=8
+
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
@@ -124,8 +126,8 @@ elif [ $OS_VERS == "11" ]; then
               echo -e "${ColorVerde}  Instalando OracleLinux en un ordenador o máquina virtual...${FinColor}"
               echo ""
               mkdir -p /root/portainer/data 2> /dev/null
-                    docker run -d -p 8001:8001 -p 9443:9444 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Contenedores/OracleLinux/data:/data oraclelinux
-              echo "docker run -d -p 8001:8001 -p 9443:9444 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Contenedores/OracleLinux/data:/data oraclelinux" >> /root/scripts/ComandosPostArranque.sh 
+                    docker run -d -p 8001:8001 -p 9443:9444 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Contenedores/OracleLinux/data:/data oraclelinux:$VerOLDeseada
+              echo "docker run -d -p 8001:8001 -p 9443:9444 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Contenedores/OracleLinux/data:/data oraclelinux:$VerOLDeseada" >> /root/scripts/ComandosPostArranque.sh 
             ;;
 
             2)
@@ -133,8 +135,8 @@ elif [ $OS_VERS == "11" ]; then
               echo -e "${ColorVerde}  Instalando OracleLinux en un contenedor LXC...${FinColor}"
               echo ""
               mkdir -p /Host/PortainerCE/ 2> /dev/null
-                    docker run -d -p 8001:8001 -p 9444:9444 --name oraclelinux --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Host/OracleLinux:/data oraclelinux
-              echo "docker run -d -p 8001:8001 -p 9444:9444 --name oraclelinux --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Host/OracleLinux:/data oraclelinux" >> /root/scripts/ComandosPostArranque.sh 
+                    docker run -d -p 8001:8001 -p 9444:9444 --name oraclelinux --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Host/OracleLinux:/data oraclelinux:$VerOLDeseada
+              echo "docker run -d -p 8001:8001 -p 9444:9444 --name oraclelinux --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Host/OracleLinux:/data oraclelinux:$VerOLDeseada" >> /root/scripts/ComandosPostArranque.sh 
             ;;
 
             3)
