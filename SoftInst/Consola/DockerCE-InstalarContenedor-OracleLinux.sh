@@ -133,7 +133,7 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo '#!/bin/bash'                                                                   > /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo ""                                                                             >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-              echo "docker run --detach --restart=always \\"                                      >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "docker run --detach --restart always \\"                                      >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  --name OracleLinux \\"                                                      >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  --volume /var/run/docker.sock:/var/run/docker.sock \\"                      >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  --volume /Contenedores/OracleLinux/data:/data oraclelinux:$VerOLDeseada \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
@@ -166,7 +166,7 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo '#!/bin/bash'                                                           > /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo ""                                                                     >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-              echo "docker run --detach --restart=always \\"                              >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "docker run --detach --restart always \\"                              >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  --name OracleLinux \\"                                              >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  --volume /var/run/docker.sock:/var/run/docker.sock \\"              >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  --volume /Host/OracleLinux/data:/data oraclelinux:$VerOLDeseada \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
