@@ -122,33 +122,85 @@ elif [ $OS_VERS == "11" ]; then
           case $choice in
 
             1)
+
               echo ""
               echo -e "${ColorVerde}  Instalando OracleLinux en un ordenador o máquina virtual...${FinColor}"
               echo ""
-              mkdir -p /root/portainer/data 2> /dev/null
-                    docker run --detach --publish 22001:22 --publish 1521:1521 --publish 1630:1630 --name oraclelinux --restart=always --volume /var/run/docker.sock:/var/run/docker.sock --volume /Contenedores/OracleLinux/data:/data oraclelinux:$VerOLDeseada
-              echo "docker run --detach --publish 22001:22 --publish 1521:9444 --publish 1630:1630 --name oraclelinux --restart=always --volume /var/run/docker.sock:/var/run/docker.sock --volume /Contenedores/OracleLinux/data:/data oraclelinux:$VerOLDeseada" >> /root/scripts/ComandosPostArranque.sh 
+              mkdir -p /Contenedores/OracleLinux/data 2> /dev/null
+
+              echo ""
+              echo "  Creando el comando para lanzar en contenedor..."
+              echo ""
+              echo '#!/bin/bash'                                                                   > /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo ""                                                                             >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "docker run --detach --restart=always \\"                                      >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --name oraclelinux \\"                                                      >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --volume /var/run/docker.sock:/var/run/docker.sock \\"                      >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --volume /Contenedores/OracleLinux/data:/data oraclelinux:$VerOLDeseada \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --publish 22001:22 \\"                                                      >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --publish 1521:9444 \\"                                                     >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --publish 1630:1630 \\"                                                     >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              chmod +x /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+
+              echo ""
+              echo "  Creando el comando post arranque..."
+              echo ""
+              echo "/root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh" >> /root/scripts/ComandosPostArranque.sh
+
+              echo ""
+              echo "  Iniciando el container por primera vez..."
+              echo ""
+              /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+
             ;;
 
             2)
+
               echo ""
               echo -e "${ColorVerde}  Instalando OracleLinux en un contenedor LXC...${FinColor}"
               echo ""
-              mkdir -p /Host/PortainerCE/ 2> /dev/null
-                    docker run --detach --publish 22001:22 --publish 1521:1521 --publish 1630:1630 --name oraclelinux --restart=always --volume /var/run/docker.sock:/var/run/docker.sock --volume /Host/OracleLinux:/data oraclelinux:$VerOLDeseada
-              echo "docker run --detach --publish 22001:22 --publish 1521:1521 --publish 1630:1630 --name oraclelinux --restart=always --volume /var/run/docker.sock:/var/run/docker.sock --volume /Host/OracleLinux:/data oraclelinux:$VerOLDeseada" >> /root/scripts/ComandosPostArranque.sh 
+              mkdir -p /Host/OracleLinux/data 2> /dev/null
+
+              echo ""
+              echo "  Creando el comando para lanzar en contenedor..."
+              echo ""
+              echo '#!/bin/bash'                                                           > /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo ""                                                                     >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "docker run --detach --restart=always \\"                              >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --name oraclelinux \\"                                              >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --volume /var/run/docker.sock:/var/run/docker.sock \\"              >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --volume /Host/OracleLinux/data:/data oraclelinux:$VerOLDeseada \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --publish 22001:22 \\"                                              >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --publish 1521:9444 \\"                                             >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  --publish 1630:1630 \\"                                             >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              chmod +x /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+
+              echo ""
+              echo "  Creando el comando post arranque..."
+              echo ""
+              echo "/root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh" >> /root/scripts/ComandosPostArranque.sh
+
+              echo ""
+              echo "  Iniciando el container por primera vez..."
+              echo ""
+              /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+
             ;;
 
             3)
+
               echo ""
               echo -e "${ColorVerde}  ...${FinColor}"
               echo ""
+
             ;;
 
             4)
+
               echo ""
               echo -e "${ColorVerde}  ...${FinColor}"
               echo ""
+
             ;;
         
           esac
