@@ -126,8 +126,8 @@ elif [ $OS_VERS == "11" ]; then
               echo -e "${ColorVerde}  Instalando OracleLinux en un ordenador o máquina virtual...${FinColor}"
               echo ""
               mkdir -p /root/portainer/data 2> /dev/null
-                    docker run --detach --publish 8001:8001 --publish 9443:9444 --name portainer --restart=always --volume /var/run/docker.sock:/var/run/docker.sock --volume /Contenedores/OracleLinux/data:/data oraclelinux:$VerOLDeseada
-              echo "docker run --detach --publish 8001:8001 --publish 9443:9444 --name portainer --restart=always --volume /var/run/docker.sock:/var/run/docker.sock --volume /Contenedores/OracleLinux/data:/data oraclelinux:$VerOLDeseada" >> /root/scripts/ComandosPostArranque.sh 
+                    docker run --detach --publish 22001:22 --publish 1521:1521 --publish 1630:1630 --name oraclelinux --restart=always --volume /var/run/docker.sock:/var/run/docker.sock --volume /Contenedores/OracleLinux/data:/data oraclelinux:$VerOLDeseada
+              echo "docker run --detach --publish 22001:22 --publish 1521:9444 --publish 1630:1630 --name oraclelinux --restart=always --volume /var/run/docker.sock:/var/run/docker.sock --volume /Contenedores/OracleLinux/data:/data oraclelinux:$VerOLDeseada" >> /root/scripts/ComandosPostArranque.sh 
             ;;
 
             2)
@@ -135,8 +135,8 @@ elif [ $OS_VERS == "11" ]; then
               echo -e "${ColorVerde}  Instalando OracleLinux en un contenedor LXC...${FinColor}"
               echo ""
               mkdir -p /Host/PortainerCE/ 2> /dev/null
-                    docker run --detach --publish 8001:8001 --publish 9444:9444 --name oraclelinux --restart=always --volume /var/run/docker.sock:/var/run/docker.sock --volume /Host/OracleLinux:/data oraclelinux:$VerOLDeseada
-              echo "docker run --detach --publish 8001:8001 --publish 9444:9444 --name oraclelinux --restart=always --volume /var/run/docker.sock:/var/run/docker.sock --volume /Host/OracleLinux:/data oraclelinux:$VerOLDeseada" >> /root/scripts/ComandosPostArranque.sh 
+                    docker run --detach --publish 22001:22 --publish 1521:1521 --publish 1630:1630 --name oraclelinux --restart=always --volume /var/run/docker.sock:/var/run/docker.sock --volume /Host/OracleLinux:/data oraclelinux:$VerOLDeseada
+              echo "docker run --detach --publish 22001:22 --publish 1521:1521 --publish 1630:1630 --name oraclelinux --restart=always --volume /var/run/docker.sock:/var/run/docker.sock --volume /Host/OracleLinux:/data oraclelinux:$VerOLDeseada" >> /root/scripts/ComandosPostArranque.sh 
             ;;
 
             3)
