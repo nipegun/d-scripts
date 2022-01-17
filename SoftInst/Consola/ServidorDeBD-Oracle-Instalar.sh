@@ -98,7 +98,61 @@ elif [ $OS_VERS == "11" ]; then
   echo "---------------------------------------------------------------------------------------"
   echo ""
 
-.
+  ## Instalar dependencias
+     echo ""
+     echo "  Instalando dependencias...."
+     echo ""
+     apt-get -y update
+     apt-get -y install libaio1
+     apt-get -y install bc
+     apt-get -y install ksh
+     apt-get -y install gawk
+
+  ## Determinar URL del paquete
+     URLDelPaquete=$(curl -s https://www.oracle.com/database/technologies/xe-downloads.html | sed 's/>/>\n/g' | sed 's-//-\n-g' | grep .rpm | grep -v preinst | head -n1 | cut -d"'" -f1)
+ 
+  ## Guardar archivo con número de versión
+     echo $URLDelPaquete > /tmp/versoraclexe.txt
+     sed -i -e 's|xe-|\n|g' /tmp/versoraclexe.txt
+     sed -i -e 's|.rpm||g' /tmp/versoraclexe.txt
+     touch /root/SoftInst/OracleXE/version.txt
+     mkdir -p root /SoftInst/OracleXE/ 2> /dev/null
+     cat /tmp/versoraclexe.txt | grep x86 > /root/SoftInst/OracleXE/version.txt
+     echo ""
+     echo "  La versión que se va a descargar es la $(cat /root/SoftInst/OracleXE/version.txt)"
+     echo ""
+
+  ## Descargar el paquete
+     echo ""
+     echo "  Descargando el paquete..."
+     echo ""
+     cd /root/SoftInst/OracleXE/
+     wget $URLDelPaquete -O oracle-xe.rpm
+
+  ## Agregar el grupo dba
+     #groupadd dba
+
+  ## Agregar el usuario
+     #useradd -b -s /bin/bash -g dba oracle
+
+  ## maximum stack size limitation
+     ulimit -s 1024
+
+  ## values for database user deployment
+     # echo "deployment soft nofile  1024"       > /etc/security/limits.conf
+     # echo "deployment hard nofile  65536"     >> /etc/security/limits.conf
+     # echo "deployment soft nproc   16384"     >> /etc/security/limits.conf
+     # echo "deployment hard nproc   16384"     >> /etc/security/limits.conf
+     # echo "deployment soft stack   10240"     >> /etc/security/limits.conf
+     # echo "deployment hard stack   32768"     >> /etc/security/limits.conf
+     # echo "deployment hard memlock 134217728" >> /etc/security/limits.conf
+     # echo "deployment soft memlock 134217728" >> /etc/security/limits.conf
+
+  ## .
+     #echo "session include system-auth" >> /etc/pam.d/login
+
+  ## .
+     #echo "session required pam_limits.so" >> /etc/pam.d/system-auth
 
 fi
 
