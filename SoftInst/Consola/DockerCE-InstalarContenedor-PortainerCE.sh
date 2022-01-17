@@ -127,17 +127,18 @@ elif [ $OS_VERS == "11" ]; then
               mkdir -p /Contenedores/PortainerCE/data 2> /dev/null
 
               echo ""
-              echo "  Creando el comando para lanzar en contenedor..."
+              echo "  Creando el comando para lanzar el contenedor..."
               echo ""
-              echo '#!/bin/bash'                                                                                > /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo ""                                                                                          >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "docker run --detach --restart always \\"                                                   >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  --name PortainerCE \\"                                                                   >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  --volume /var/run/docker.sock:/var/run/docker.sock \\"                                   >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  --volume /Contenedores/PortainerCE/data:/data cr.portainer.io/portainer/portainer-ce \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  --publish 8000:8000 \\"                                                                  >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  --publish 9443:9443"                                                                     >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              chmod +x /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo ""                                                  >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  --name PortainerCE                           \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  -v /Contenedores/PortainerCE/data:/data      \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  -p 8000:8000                                 \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  -p 9443:9443                                 \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  cr.portainer.io/portainer/portainer-ce"          >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              chmod +x                                                    /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               
               echo ""
               echo "  Creando el comando post arranque..."
@@ -159,17 +160,18 @@ elif [ $OS_VERS == "11" ]; then
               mkdir -p /Host/PortainerCE/data 2> /dev/null
 
               echo ""
-              echo "  Creando el comando para lanzar en contenedor..."
+              echo "  Creando el comando para lanzar el contenedor..."
               echo ""
-              echo '#!/bin/bash'                                                                        > /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo ""                                                                                  >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "docker run --detach --restart always \\"                                           >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  --name PortainerCE \\"                                                           >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  --volume /var/run/docker.sock:/var/run/docker.sock \\"                           >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  --volume /Host/PortainerCE/data:/data cr.portainer.io/portainer/portainer-ce \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  --publish 8000:8000 \\"                                                          >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  --publish 9443:9443"                                                             >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              chmod +x /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo ""                                                  >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  --name PortainerCE                           \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  -v /Host/PortainerCE/data:/data              \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  -p 8000:8000                                 \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  -p 9443:9443                                 \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  cr.portainer.io/portainer/portainer-ce"          >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              chmod +x                                                    /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
 
               echo ""
               echo "  Creando el comando post arranque..."
