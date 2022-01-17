@@ -131,7 +131,7 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo '#!/bin/bash'                                                                                > /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo ""                                                                                          >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "docker run --detach --restart=always \\"                                                   >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "docker run --detach --restart always \\"                                                   >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  --name PortainerCE \\"                                                                   >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  --volume /var/run/docker.sock:/var/run/docker.sock \\"                                   >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  --volume /Contenedores/PortainerCE/data:/data cr.portainer.io/portainer/portainer-ce \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
@@ -163,7 +163,7 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo '#!/bin/bash'                                                                        > /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo ""                                                                                  >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "docker run --detach --restart=always \\"                                           >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "docker run --detach --restart always \\"                                           >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  --name PortainerCE \\"                                                           >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  --volume /var/run/docker.sock:/var/run/docker.sock \\"                           >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  --volume /Host/PortainerCE/data:/data cr.portainer.io/portainer/portainer-ce \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
