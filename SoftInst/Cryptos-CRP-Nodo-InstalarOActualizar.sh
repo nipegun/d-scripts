@@ -261,6 +261,14 @@ elif [ $OS_VERS == "11" ]; then
                        apt-get -y install libqt5websockets5
                        apt-get -y install libqt5concurrent5
                        apt-get -y install libqt5sql5
+                       #apt-get -y install libqt5multimedia5-plugins
+                       #apt-get -y install libgstreamer1.0-dev
+                       #apt-get -y install gstreamer1.0-tools
+                       #apt-get -y install gstreamer*-plugins-base
+                       #apt-get -y install gstreamer*-plugins-good
+                       #apt-get -y install gstreamer*-plugins-bad
+                       #apt-get -y install gstreamer*-plugins-ugly
+                       #apt-get -y install gstreamer1.0-plugins-base-apps
 
                     ## libxcb
                        apt-get -y install libxcb-icccm4
@@ -280,12 +288,6 @@ elif [ $OS_VERS == "11" ]; then
                        apt-get -y install libpulse0
                        apt-get -y install libglib2.0-0
                        apt-get -y install libfontconfig
- 
-                    ## Otros 
-                       apt-get -y install gstreamer*-plugins-base
-                       apt-get -y install gstreamer*-plugins-good
-                       apt-get -y install gstreamer*-plugins-bad
-                       apt-get -y install gstreamer*-plugins-ugly
 
                     #ln -sf /usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
 
