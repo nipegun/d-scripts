@@ -106,8 +106,8 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y install libaio1
      apt-get -y install bc
      apt-get -y install alien
-     apt-get -y install ksh
-     apt-get -y install gawk
+     #apt-get -y install ksh
+     #apt-get -y install gawk
 
   ## Determinar URL del paquete
      URLDelPaquete=$(curl -s https://www.oracle.com/database/technologies/xe-downloads.html | sed 's/>/>\n/g' | sed 's-//-\n-g' | grep .rpm | grep -v preinst | head -n1 | cut -d"'" -f1)
