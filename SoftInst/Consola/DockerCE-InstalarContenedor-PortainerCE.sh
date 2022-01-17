@@ -127,7 +127,7 @@ elif [ $OS_VERS == "11" ]; then
               mkdir -p /Contenedores/PortainerCE/data 2> /dev/null
 
               echo ""
-              echo "  Creando el comando para lanzar el contenedor..."
+              echo "  Creando el comando para iniciar el contenedor docker..."
               echo ""
               echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo ""                                                  >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
@@ -160,7 +160,7 @@ elif [ $OS_VERS == "11" ]; then
               mkdir -p /Host/PortainerCE/data 2> /dev/null
 
               echo ""
-              echo "  Creando el comando para lanzar el contenedor..."
+              echo "  Creando el comando para iniciar el contenedor docker..."
               echo ""
               echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo ""                                                  >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
