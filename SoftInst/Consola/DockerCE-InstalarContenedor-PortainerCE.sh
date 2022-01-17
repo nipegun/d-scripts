@@ -124,8 +124,8 @@ elif [ $OS_VERS == "11" ]; then
               echo -e "${ColorVerde}  Instalando PortainerCE en un ordenador o máquina virtual...${FinColor}"
               echo ""
               mkdir -p /root/portainer/data 2> /dev/null
-                    docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /root/portainer/data:/data cr.portainer.io/portainer/portainer-ce
-              echo "docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /root/portainer/data:/data cr.portainer.io/portainer/portainer-ce" >> /root/scripts/ComandosPostArranque.sh 
+                    docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Contenedores/PortainerCE/data:/data cr.portainer.io/portainer/portainer-ce
+              echo "docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /Contenedores/PortainerCE/data:/data cr.portainer.io/portainer/portainer-ce" >> /root/scripts/ComandosPostArranque.sh 
             ;;
 
             2)
