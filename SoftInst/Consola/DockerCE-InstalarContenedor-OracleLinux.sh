@@ -129,7 +129,7 @@ elif [ $OS_VERS == "11" ]; then
               mkdir -p /Contenedores/OracleLinux/data 2> /dev/null
 
               echo ""
-              echo "  Creando el comando para iniciar el contenedor OracleLinux..."
+              echo "  Creando el comando para iniciar el contenedor docker..."
               echo ""
               echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo ""                                                  >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
@@ -163,7 +163,7 @@ elif [ $OS_VERS == "11" ]; then
               mkdir -p /Host/OracleLinux/data 2> /dev/null
 
               echo ""
-              echo "  Creando el comando para iniciar el contenedor OracleLinux..."
+              echo "  Creando el comando para iniciar el contenedor docker..."
               echo ""
               echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo ""                                                  >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
