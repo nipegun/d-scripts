@@ -130,8 +130,17 @@ elif [ $OS_VERS == "11" ]; then
      cd /root/SoftInst/OracleXE/
      wget $URLDelPaquete -O oracle-xe.rpm
 
-  ## Instalando el paquete
-     alien --scripts -i '/root/SoftInst/OracleXE/oracle-xe.rpm'
+  ## Convertir el .rpm a un .deb
+     echo ""
+     echo "  Convirtiendo el paquete .rpm a .deb..."
+     echo ""
+     alien --scripts --verbose /root/SoftInst/OracleXE/oracle-xe.rpm
+
+  ## Instalar el paquete
+     echo ""
+     echo "  Instalando el paquete RPM..."
+     echo ""
+     #alien --scripts -i /root/SoftInst/OracleXE/oracle-xe.rpm
 
   ## Agregar el grupo dba
      #groupadd dba
@@ -140,7 +149,7 @@ elif [ $OS_VERS == "11" ]; then
      #useradd -b -s /bin/bash -g dba oracle
 
   ## maximum stack size limitation
-     ulimit -s 1024
+     #ulimit -s 1024
 
   ## values for database user deployment
      # echo "deployment soft nofile  1024"       > /etc/security/limits.conf
