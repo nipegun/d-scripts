@@ -134,13 +134,13 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      echo "  Convirtiendo el paquete .rpm a .deb..."
      echo ""
-     alien --scripts --verbose /root/SoftInst/OracleXE/oracle-xe.rpm
+     alien --scripts --verbose -d /root/SoftInst/OracleXE/oracle-xe.rpm
 
   ## Instalar el paquete
      echo ""
      echo "  Instalando el paquete RPM..."
      echo ""
-     #alien --scripts -i /root/SoftInst/OracleXE/oracle-xe.rpm
+     #alien --scripts --verbose -i /root/SoftInst/OracleXE/oracle-xe.rpm
 
   ## Agregar el grupo dba
      #groupadd dba
