@@ -135,11 +135,11 @@ elif [ $OS_VERS == "11" ]; then
               echo ""                                                  >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  --name OracleLinux                           \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-              echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-              echo "  -v /Contenedores/OracleLinux/data:/data      \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  -p 22001:22                                  \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  -p 1521:9444                                 \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  -p 1630:1630                                 \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+              echo "  -v /Contenedores/OracleLinux/data:/data      \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               echo "  oraclelinux:$VerOLDeseada"                       >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
               chmod +x                                                    /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
 
