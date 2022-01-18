@@ -133,10 +133,10 @@ elif [ $OS_VERS == "11" ]; then
               echo ""                                                  >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  --name PortainerCE                           \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  -v /Contenedores/PortainerCE/data:/data      \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  -p 8000:8000                                 \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  -p 9443:9443                                 \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  -v /Contenedores/PortainerCE/data:/data      \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  cr.portainer.io/portainer/portainer-ce"          >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               chmod +x                                                    /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               
@@ -166,10 +166,10 @@ elif [ $OS_VERS == "11" ]; then
               echo ""                                                  >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  --name PortainerCE                           \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
-              echo "  -v /Host/PortainerCE/data:/data              \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  -p 8000:8000                                 \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  -p 9443:9443                                 \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+              echo "  -v /Host/PortainerCE/data:/data              \\" >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               echo "  cr.portainer.io/portainer/portainer-ce"          >> /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
               chmod +x                                                    /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
 
