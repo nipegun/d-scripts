@@ -131,6 +131,7 @@ elif [ $OS_VERS == "11" ]; then
   ## Convertir el .rpm a un .deb
      echo ""
      echo "  Convirtiendo el paquete .rpm a .deb..."
+     echo "  El proceso puede tardar hasta una hora. Déjalo terminar."ç
      echo ""
      ## Comprobar si el paquete alien está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s alien 2>/dev/null | grep installed) == "" ]]; then
@@ -153,7 +154,7 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      echo "  Agregando el usuario oracle y metiéndolo en el grupo dba.."
      echo ""
-     useradd -b -s /bin/bash -g dba oracle
+     useradd -m -s /bin/bash -g dba oracle
 
   ## Poner contraseña al usuario oracle
      echo ""
@@ -163,7 +164,7 @@ elif [ $OS_VERS == "11" ]; then
 
   ## Instalar dependencias
      echo ""
-     echo "  Instalando dependencias...."
+     echo "  Instalando dependencias y paquetes necesarios...."
      echo ""
      apt-get -y update
      apt-get -y install libaio1
@@ -178,12 +179,22 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      find /root/SoftInst/OracleXE/ -type f -name *.deb -exec dpkg -i {} \;
 
+  ## Creando variables de entorno
+      cat $ArchivoInit | grep "export ORACLE_HOME" >> /home/oracle/.bashrc
+      cat $ArchivoInit | grep "export ORACLE_SID"  >> /home/oracle/.bashrc
+      echo 'export PATH=$ORACLE_HOME/bin:$PATH'    >> /home/oracle/.bashrc
+
   ## Configurar instancia
      echo ""
      echo "  Configurando instancia..."
      echo ""
      ArchivoInit=$(find /etc/init.d/ -type f -name oracle-xe*)
      $ArchivoInit configure
+
+  ## Informar de instalación finalizada
+     echo ""
+     echo "  Instalación finalizada..."
+     echo ""
 
   ## maximum stack size limitation
      #ulimit -s 1024
