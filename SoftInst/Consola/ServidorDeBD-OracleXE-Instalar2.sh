@@ -17,7 +17,6 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 ## Determinar la versión de Debian
-
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
        . /etc/os-release
@@ -45,9 +44,9 @@ FinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Oracle DB Server para Debian 7 (Wheezy)..."
-  echo "------------------------------------------------------------------------------------"
+  echo -e "${ColorVerde}-------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de OracleDB XE para Debian 7 (Wheezy)...${FinColor}"
+  echo -e "${ColorVerde}-------------------------------------------------------------------------------${FinColor}"
   echo ""
 
   echo ""
@@ -57,9 +56,9 @@ if [ $OS_VERS == "7" ]; then
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Oracle DB Server para Debian 8 (Jessie)..."
-  echo "------------------------------------------------------------------------------------"
+  echo -e "${ColorVerde}-------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de OracleDB XE para Debian 8 (Jessie)...${FinColor}"
+  echo -e "${ColorVerde}-------------------------------------------------------------------------------${FinColor}"
   echo ""
 
   echo ""
@@ -69,9 +68,9 @@ elif [ $OS_VERS == "8" ]; then
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Oracle DB Server para Debian 9 (Stretch)..."
-  echo "-------------------------------------------------------------------------------------"
+  echo -e "${ColorVerde}--------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de OracleDB XE para Debian 9 (Stretch)...${FinColor}"
+  echo -e "${ColorVerde}--------------------------------------------------------------------------------${FinColor}"
   echo ""
 
   echo ""
@@ -81,9 +80,9 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Oracle DB Server para Debian 10 (Buster)..."
-  echo "-------------------------------------------------------------------------------------"
+  echo -e "${ColorVerde}--------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de OracleDB XE para Debian 10 (Buster)...${FinColor}"
+  echo -e "${ColorVerde}--------------------------------------------------------------------------------${FinColor}"
   echo ""
 
   echo ""
@@ -93,30 +92,30 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Oracle DB Server para Debian 11 (Bullseye)..."
-  echo "---------------------------------------------------------------------------------------"
+  echo -e "${ColorVerde}----------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de OracleDB XE para Debian 11 (Bullseye)...${FinColor}"
+  echo -e "${ColorVerde}----------------------------------------------------------------------------------${FinColor}"
   echo ""
 
   ## Determinar URL del paquete
      URLDelPaquete=$(curl -s https://www.oracle.com/database/technologies/xe-downloads.html | sed 's/>/>\n/g' | sed 's-//-\n-g' | grep .rpm | grep -v preinst | head -n1 | cut -d"'" -f1)
  
   ## Guardar archivo con número de versión
-     echo $URLDelPaquete > /tmp/versoraclexe.txt
+     echo $URLDelPaquete >  /tmp/versoraclexe.txt
      sed -i -e 's|xe-|\n|g' /tmp/versoraclexe.txt
-     sed -i -e 's|.rpm||g' /tmp/versoraclexe.txt
-     mkdir -p /root/SoftInst/OracleXE/ 2> /dev/null
-     touch /root/SoftInst/OracleXE/version.txt
-     cat /tmp/versoraclexe.txt | grep x86 > /root/SoftInst/OracleXE/version.txt
+     sed -i -e 's|.rpm||g'  /tmp/versoraclexe.txt
+     mkdir -p /root/SoftInst/OracleDBXE/ 2> /dev/null
+     touch /root/SoftInst/OracleDBXE/version.txt
+     cat /tmp/versoraclexe.txt | grep x86 > /root/SoftInst/OracleDBXE/version.txt
      echo ""
-     echo "  La versión que se va a descargar es la $(cat /root/SoftInst/OracleXE/version.txt)"
+     echo "  La versión que se va a descargar es la $(cat /root/SoftInst/OracleDBXE/version.txt)"
      echo ""
 
   ## Descargar el paquete
      echo ""
      echo "  Descargando el paquete..."
      echo ""
-     cd /root/SoftInst/OracleXE/
+     cd /root/SoftInst/OracleDBXE/
      ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
           echo ""
@@ -126,7 +125,7 @@ elif [ $OS_VERS == "11" ]; then
           apt-get -y install wget
           echo ""
         fi
-     wget $URLDelPaquete -O oracle-xe.rpm
+     wget $URLDelPaquete -O oracledb-xe.rpm
 
   ## Convertir el .rpm a un .deb
      echo ""
@@ -142,7 +141,7 @@ elif [ $OS_VERS == "11" ]; then
           apt-get -y install alien
           echo ""
         fi
-     alien --scripts --verbose -d /root/SoftInst/OracleXE/oracle-xe.rpm
+     alien --scripts --verbose -d /root/SoftInst/OracleDBXE/oracledb-xe.rpm
 
   ## Agregar el grupo dba
      echo ""
@@ -177,7 +176,7 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      echo "  Instalando paquete .deb..."
      echo ""
-     find /root/SoftInst/OracleXE/ -type f -name *.deb -exec dpkg -i {} \;
+     find /root/SoftInst/OracleDBXE/ -type f -name *.deb -exec dpkg -i {} \;
 
   ## Creando variables de entorno
       cat $ArchivoInit | grep "export ORACLE_HOME" >> /home/oracle/.bashrc
