@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar el servidor de bases de datos de Oracle en Debian
 #
 # Ejecución remota
-# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-OracleDBXE-Instalar.sh | bash
-#-------------------------------------------------------------------------------------------------------------------------------
+# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-OracleDB-XE-Instalar.sh | bash
+#--------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -129,21 +129,21 @@ elif [ $OS_VERS == "11" ]; then
                  URLDelPaquete=$(curl -s https://www.oracle.com/database/technologies/xe-downloads.html | sed 's/>/>\n/g' | sed 's-//-\n-g' | grep .rpm | grep -v preinst | head -n1 | cut -d"'" -f1)
  
               ## Guardar archivo con número de versión
-                 echo $URLDelPaquete >  /tmp/versoraclexe.txt
-                 sed -i -e 's|xe-|\n|g' /tmp/versoraclexe.txt
-                 sed -i -e 's|.rpm||g'  /tmp/versoraclexe.txt
-                 mkdir -p /root/SoftInst/OracleDBXE/ 2> /dev/null
-                 touch /root/SoftInst/OracleDBXE/version.txt
-                 cat /tmp/versoraclexe.txt | grep x86 > /root/SoftInst/OracleDBXE/version.txt
+                 echo $URLDelPaquete >  /tmp/versoracle-xe.txt
+                 sed -i -e 's|xe-|\n|g' /tmp/versoracle-xe.txt
+                 sed -i -e 's|.rpm||g'  /tmp/versoracle-xe.txt
+                 mkdir -p /root/SoftInst/OracleDB-XE/ 2> /dev/null
+                 touch /root/SoftInst/OracleDB-XE/version.txt
+                 cat /tmp/versoracle-xe.txt | grep x86 > /root/SoftInst/OracleDB-XE/version.txt
                  echo ""
-                 echo "  La versión que se va a descargar es la $(cat /root/SoftInst/OracleDBXE/version.txt)"
+                 echo "  La versión que se va a descargar es la $(cat /root/SoftInst/OracleDB-XE/version.txt)"
                  echo ""
 
               ## Descargar el paquete
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 cd /root/SoftInst/OracleDBXE/
+                 cd /root/SoftInst/OracleDB-XE/
                  ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
@@ -173,7 +173,7 @@ elif [ $OS_VERS == "11" ]; then
                       apt-get -y install alien
                       echo ""
                     fi
-                 alien --scripts --verbose -d /root/SoftInst/OracleDBXE/oracledb-xe.rpm
+                 alien --scripts --verbose -d /root/SoftInst/OracleDB-XE/oracledb-xe.rpm
 
             ;;
 
@@ -218,7 +218,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Instalando paquete .deb..."
                  echo ""
-                 find /root/SoftInst/OracleDBXE/ -type f -name *.deb -exec dpkg -i {} \;
+                 find /root/SoftInst/OracleDB-XE/ -type f -name *.deb -exec dpkg -i {} \;
 
             ;;
 
