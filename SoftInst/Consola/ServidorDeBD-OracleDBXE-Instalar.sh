@@ -108,7 +108,7 @@ elif [ $OS_VERS == "11" ]; then
      fi
   menu=(dialog --timeout 5 --checklist "Instalación de la base de datos Oracle XE:" 22 76 16)
     opciones=(1 "Descargar paquete" on
-              2 "Convedrtir .rpm a .deb" on
+              2 "Convertir .rpm a .deb" on
               3 "Crear el grupo dba" on
               4 "Crear el usuario oracle y agregarlo al grupo dba" on
               5 "Instalar dependencias y paquetes necesarios" on
