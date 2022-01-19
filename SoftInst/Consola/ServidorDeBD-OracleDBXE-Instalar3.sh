@@ -111,9 +111,9 @@ elif [ $OS_VERS == "11" ]; then
               2 "Convedrtir .rpm a .deb" on
               3 "Crear el grupo dba" on
               4 "Crear el usuario oracle y agregarlo al grupo dba" on
-              5 "Instalar dependencias y paquetes necesarios"
-              6 "Instalar paquete"
-              7 "Crear variables de entorno"
+              5 "Instalar dependencias y paquetes necesarios" on
+              6 "Instalar paquete" on
+              7 "Crear variables de entorno" on
               8 "Configurar instancia" off
               9 "Añadir contraseña al usuario oracle" off)
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
