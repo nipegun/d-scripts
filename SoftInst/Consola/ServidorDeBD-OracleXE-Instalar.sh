@@ -98,17 +98,6 @@ elif [ $OS_VERS == "11" ]; then
   echo "---------------------------------------------------------------------------------------"
   echo ""
 
-  ## Instalar dependencias
-     echo ""
-     echo "  Instalando dependencias...."
-     echo ""
-     apt-get -y update
-     apt-get -y install libaio1
-     apt-get -y install bc
-     apt-get -y install alien
-     #apt-get -y install ksh
-     #apt-get -y install gawk
-
   ## Determinar URL del paquete
      URLDelPaquete=$(curl -s https://www.oracle.com/database/technologies/xe-downloads.html | sed 's/>/>\n/g' | sed 's-//-\n-g' | grep .rpm | grep -v preinst | head -n1 | cut -d"'" -f1)
  
@@ -128,25 +117,73 @@ elif [ $OS_VERS == "11" ]; then
      echo "  Descargando el paquete..."
      echo ""
      cd /root/SoftInst/OracleXE/
+     ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo "  wget no está instalado. Iniciando su instalación..."
+          echo ""
+          apt-get -y update > /dev/null
+          apt-get -y install wget
+          echo ""
+        fi
      wget $URLDelPaquete -O oracle-xe.rpm
 
   ## Convertir el .rpm a un .deb
      echo ""
      echo "  Convirtiendo el paquete .rpm a .deb..."
      echo ""
+     ## Comprobar si el paquete alien está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s alien 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo "  alien no está instalado. Iniciando su instalación..."
+          echo ""
+          apt-get -y update > /dev/null
+          apt-get -y install alien
+          echo ""
+        fi
      alien --scripts --verbose -d /root/SoftInst/OracleXE/oracle-xe.rpm
 
-  ## Instalar el paquete
-     echo ""
-     echo "  Instalando el paquete RPM..."
-     echo ""
-     #alien --scripts --verbose -i /root/SoftInst/OracleXE/oracle-xe.rpm
-
   ## Agregar el grupo dba
-     #groupadd dba
+     echo ""
+     echo "  Agregando el grupo dba..."
+     echo ""
+     groupadd dba
 
-  ## Agregar el usuario
-     #useradd -b -s /bin/bash -g dba oracle
+  ## Agregar el usuario oracle
+     echo ""
+     echo "  Agregando el usuario oracle y metiéndolo en el grupo dba.."
+     echo ""
+     useradd -b -s /bin/bash -g dba oracle
+
+  ## Poner contraseña al usuario oracle
+     echo ""
+     echo "  Estableciendo la contraseña del usuario oracle..."
+     echo ""
+     passwd oracle
+
+  ## Instalar dependencias
+     echo ""
+     echo "  Instalando dependencias...."
+     echo ""
+     apt-get -y update
+     apt-get -y install libaio1
+     apt-get -y install bc
+     apt-get -y install net-tools
+     #apt-get -y install ksh
+     #apt-get -y install gawk
+
+  ## Instalar paquete
+     echo ""
+     echo "  Instalando paquete .deb..."
+     echo ""
+     find /root/SoftInst/OracleXE/ -type f -name *.deb -exec dpkg -i {} \;
+
+  ## Configurar instancia
+     echo ""
+     echo "  Configurando instancia..."
+     echo ""
+     ArchivoInit=$(find /etc/init.d/ -type f -name oracle-xe*)
+     $ArchivoInit configure
 
   ## maximum stack size limitation
      #ulimit -s 1024
