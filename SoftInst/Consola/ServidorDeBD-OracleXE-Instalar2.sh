@@ -105,8 +105,8 @@ elif [ $OS_VERS == "11" ]; then
      echo $URLDelPaquete > /tmp/versoraclexe.txt
      sed -i -e 's|xe-|\n|g' /tmp/versoraclexe.txt
      sed -i -e 's|.rpm||g' /tmp/versoraclexe.txt
-     touch /root/SoftInst/OracleXE/version.txt
      mkdir -p /root/SoftInst/OracleXE/ 2> /dev/null
+     touch /root/SoftInst/OracleXE/version.txt
      cat /tmp/versoraclexe.txt | grep x86 > /root/SoftInst/OracleXE/version.txt
      echo ""
      echo "  La versión que se va a descargar es la $(cat /root/SoftInst/OracleXE/version.txt)"
