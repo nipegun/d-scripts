@@ -5,9 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------------
-#  Script de NiPeGun para resetear el minero de Crypton instalado en Debian
-#----------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------
+#  Script de NiPeGun para resetear el minero de Crypton del usuario root en Debian
+#
+#  Ejecución remota:
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Cryptos-CRP-Minero-ResetearRoot.sh | bash
+#--------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -123,6 +126,14 @@ elif [ $OS_VERS == "11" ]; then
      echo "  Borrando todos los datos del anterior minero..."
      echo ""
      rm -rf /root/.uam/*
+
+## Preparar el archivo .ini del nuevo minero
+     echo ""
+     echo "  Preparando el archivo .ini del nuevo minero..."
+     echo ""
+     IPYPuerto=$(cat /root/uam.ini | grep listens)
+     echo "[net]"       > /root/uam.ini
+     echo "$IPYPuerto" >> /root/uam.ini
      mv /root/uam.ini /root/.uam/
 
   ## Re-escribir la dirección de cartera
