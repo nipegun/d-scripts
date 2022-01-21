@@ -234,8 +234,8 @@ elif [ $OS_VERS == "11" ]; then
                  echo "  Creando variables de entorno..."
                  echo ""
                  ArchivoInitD=$(cat /root/SoftInst/OracleDB-XE/ScriptDeArranque.txt)
-                 cat $ArchivoInit | grep "export ORACLE_HOME" >> /home/oracle/.bashrc
-                 cat $ArchivoInit | grep "export ORACLE_SID"  >> /home/oracle/.bashrc
+                 cat $ArchivoInitD | grep "export ORACLE_HOME" >> /home/oracle/.bashrc
+                 cat $ArchivoInitD | grep "export ORACLE_SID"  >> /home/oracle/.bashrc
                  echo 'export PATH=$ORACLE_HOME/bin:$PATH'    >> /home/oracle/.bashrc
 
             ;;
@@ -292,7 +292,7 @@ elif [ $OS_VERS == "11" ]; then
               ## Hacer cambios necesarios en el sistema
 
                 ## maximum stack size limitation
-                   #ulimit -s 1024
+                   #ulimit -s 10240
 
                 ## values for database user deployment
                    # echo "deployment soft nofile  1024"       > /etc/security/limits.conf
