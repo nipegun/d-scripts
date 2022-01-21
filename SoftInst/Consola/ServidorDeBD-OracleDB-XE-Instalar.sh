@@ -276,7 +276,8 @@ elif [ $OS_VERS == "11" ]; then
                  $ArchivoInitD configure
                  echo ""
                  echo "  Instancia configurada."
-                 echo "  Repuerda que para administrar la base de datos puedes conectarte con:"
+                 echo ""
+                 echo "  Recuerda que para administrar la base de datos puedes conectarte con:"
                  echo ""
                  echo "  Nombre de usuario: system"
                  echo "  Contraseña: La que acabas de ingresar"
