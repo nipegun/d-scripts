@@ -223,6 +223,8 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  find /root/SoftInst/OracleDB-XE/ -type f -name *.deb -exec dpkg -i {} \;
                  find /etc/init.d/ -type f -name oracle-xe* > /root/SoftInst/OracleDB-XE/ScriptDeArranque.txt
+                 # nano /etc/sysconfig/oracle-xe-21c.conf
+
             ;;
 
             7)
