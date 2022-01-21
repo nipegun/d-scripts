@@ -231,6 +231,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Creando variables de entorno..."
                  echo ""
+                 ArchivoInitD=$(cat /root/SoftInst/OracleDB-XE/ScriptDeArranque.txt)
                  cat $ArchivoInit | grep "export ORACLE_HOME" >> /home/oracle/.bashrc
                  cat $ArchivoInit | grep "export ORACLE_SID"  >> /home/oracle/.bashrc
                  echo 'export PATH=$ORACLE_HOME/bin:$PATH'    >> /home/oracle/.bashrc
