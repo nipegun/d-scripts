@@ -274,6 +274,13 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  ArchivoInitD=$(cat /root/SoftInst/OracleDB-XE/ScriptDeArranque.txt)
                  $ArchivoInitD configure
+                 echo ""
+                 echo "  Instancia configurada."
+                 echo "  Repuerda que para administrar la base de datos puedes conectarte con:"
+                 echo ""
+                 echo "  Nombre de usuario: system"
+                 echo "  Contraseña: La que acabas de ingresar"
+                 echo ""
 
             ;;
 
