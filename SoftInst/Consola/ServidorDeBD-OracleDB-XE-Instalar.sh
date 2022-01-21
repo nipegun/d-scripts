@@ -114,8 +114,11 @@ elif [ $OS_VERS == "11" ]; then
               5 "Instalar dependencias y paquetes necesarios" on
               6 "Instalar paquete" on
               7 "Crear variables de entorno" on
-              8 "Configurar instancia" off
-              9 "Añadir contraseña al usuario oracle" off)
+              8 "Crear el servicio en systemd" on
+              9 "Añadir contraseña al usuario oracle" off
+             10 "Configurar instancia" off
+             11 "Activar e iniciar el servicio" off
+             12 "Realizar cambios en el sistema -- no terminados --" off)
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
@@ -219,7 +222,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo "  Instalando paquete .deb..."
                  echo ""
                  find /root/SoftInst/OracleDB-XE/ -type f -name *.deb -exec dpkg -i {} \;
-
+                 find /etc/init.d/ -type f -name oracle-xe* > /root/SoftInst/OracleDB-XE/ScriptDeArranque.txt
             ;;
 
             7)
@@ -236,13 +239,17 @@ elif [ $OS_VERS == "11" ]; then
 
             8)
 
-              ## Configurar instancia
+              ## Crear el servicio en systemd
                  echo ""
-                 echo "  Configurando instancia..."
+                 echo "  Creando el servicio en systemd..."
                  echo ""
-                 find /etc/init.d/ -type f -name oracle-xe* > /tmp/archivoinitd.txt
-                 ArchivoInitD=$(cat /tmp/archivoinitd.txt)
-                 $ArchivoInitD configure
+                 ArchivoInitD=$(cat /root/SoftInst/OracleDB-XE/ScriptDeArranque.txt)
+                 echo "[Unit]"                           > /etc/systemd/system/oracledb-xe.service
+                 echo "  Description=OracleDB-XE"       >> /etc/systemd/system/oracledb-xe.service
+                 echo "[Service]"                       >> /etc/systemd/system/oracledb-xe.service
+                 echo "  ExecStart=$ArchivoInitD start" >> /etc/systemd/system/oracledb-xe.service
+                 echo "[Install]"                       >> /etc/systemd/system/oracledb-xe.service
+                 echo "  WantedBy=default.target"       >> /etc/systemd/system/oracledb-xe.service
 
             ;;
 
@@ -256,29 +263,55 @@ elif [ $OS_VERS == "11" ]; then
 
             ;;
 
+            10)
+
+              ## Configurar instancia
+                 echo ""
+                 echo "  Configurando instancia..."
+                 echo ""
+                 ArchivoInitD=$(cat /root/SoftInst/OracleDB-XE/ScriptDeArranque.txt)
+                 $ArchivoInitD configure
+
+            ;;
+
+            11)
+
+              ## Activar e iniciar el servicio
+                 echo ""
+                 echo "  Activando e iniciando el servicio..."
+                 echo ""
+                 systemctl enable oracledb-xe.service --now
+
+            ;;
+
+            12)
+
+              ## Hacer cambios necesarios en el sistema
+
+                ## maximum stack size limitation
+                   #ulimit -s 1024
+
+                ## values for database user deployment
+                   # echo "deployment soft nofile  1024"       > /etc/security/limits.conf
+                   # echo "deployment hard nofile  65536"     >> /etc/security/limits.conf
+                   # echo "deployment soft nproc   16384"     >> /etc/security/limits.conf
+                   # echo "deployment hard nproc   16384"     >> /etc/security/limits.conf
+                   # echo "deployment soft stack   10240"     >> /etc/security/limits.conf
+                   # echo "deployment hard stack   32768"     >> /etc/security/limits.conf
+                   # echo "deployment hard memlock 134217728" >> /etc/security/limits.conf
+                   # echo "deployment soft memlock 134217728" >> /etc/security/limits.conf
+
+                ## .
+                   #echo "session include system-auth" >> /etc/pam.d/login
+
+                ## .
+                   #echo "session required pam_limits.so" >> /etc/pam.d/system-auth    
+
+            ;;
+
           esac
 
         done
 
 fi
-
-
-  ## maximum stack size limitation
-     #ulimit -s 1024
-
-  ## values for database user deployment
-     # echo "deployment soft nofile  1024"       > /etc/security/limits.conf
-     # echo "deployment hard nofile  65536"     >> /etc/security/limits.conf
-     # echo "deployment soft nproc   16384"     >> /etc/security/limits.conf
-     # echo "deployment hard nproc   16384"     >> /etc/security/limits.conf
-     # echo "deployment soft stack   10240"     >> /etc/security/limits.conf
-     # echo "deployment hard stack   32768"     >> /etc/security/limits.conf
-     # echo "deployment hard memlock 134217728" >> /etc/security/limits.conf
-     # echo "deployment soft memlock 134217728" >> /etc/security/limits.conf
-
-  ## .
-     #echo "session include system-auth" >> /etc/pam.d/login
-
-  ## .
-     #echo "session required pam_limits.so" >> /etc/pam.d/system-auth        
 
