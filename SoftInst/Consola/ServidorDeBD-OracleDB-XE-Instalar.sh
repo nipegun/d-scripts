@@ -297,6 +297,18 @@ elif [ $OS_VERS == "11" ]; then
 
             12)
 
+              echo ""
+              echo "  Servidor Instalado. Para conectarte desde Oracle SQL Developer:"
+              echo ""
+              echo "  Nueva conexión:"
+              echo "    Usuario: sys"
+              echo "    Contraseña: LaElegida"
+              echo "    Rol: SYSDBA"
+              echo "    Nombre del servicio: XEPDB1"
+              echo ""
+              echo "  Y ahí ya podrás crear los usuarios que te hagan falta."
+              echo ""
+
               ## Hacer cambios necesarios en el sistema
 
                 ## maximum stack size limitation
