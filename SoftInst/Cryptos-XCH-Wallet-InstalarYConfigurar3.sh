@@ -173,3 +173,10 @@ echo ""
    chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh
    su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh"
    echo ""
+
+## Reparar permisos
+   echo ""
+   echo "  Reparando permisos..."
+   echo ""
+   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/XCH/ -R
+
