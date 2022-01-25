@@ -130,7 +130,7 @@ elif [ $OS_VERS == "11" ]; then
 
   ## Comprobar si el archivo descargado es el correcto
      echo ""
-     echo " Comprobando si el archivo descargado es correcto"
+     echo "  Comprobando si el archivo descargado es correcto..."
      echo ""
      if [[ $(find /root/SoftInst/Oracle/SQLDeveloper/ -type f -iname *.rpm -size -10M 2>/dev/null) ]]; then
        echo ""
@@ -144,7 +144,7 @@ elif [ $OS_VERS == "11" ]; then
        wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Oracle/SQLDeveloper/sqldeveloper.rpm
      else
        echo ""
-       echo " El archivo descargado es correcto."
+       echo "  El archivo descargado es correcto."
        echo ""
      fi
 
