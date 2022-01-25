@@ -115,9 +115,9 @@ elif [ $OS_VERS == "11" ]; then
               6 "Instalar paquete" on
               7 "Crear variables de entorno" on
               8 "Crear el servicio en systemd" on
-              9 "Añadir contraseña al usuario oracle" off
-             10 "Configurar instancia" off
-             11 "Activar e iniciar el servicio" off
+              9 "Añadir contraseña al usuario oracle" on
+             10 "Configurar instancia" on
+             11 "Activar e iniciar el servicio" on
              12 "Realizar cambios en el sistema -- no terminados --" off)
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
@@ -274,14 +274,15 @@ elif [ $OS_VERS == "11" ]; then
                  echo "  Configurando instancia..."
                  echo ""
                  ArchivoInitD=$(cat /root/SoftInst/Oracle/DB-XE/ScriptDeArranque.txt)
-                 $ArchivoInitD configure
+                 #$ArchivoInitD delete
+                 echo -e "Oracle0\nOracle0" | $ArchivoInitD configure
                  echo ""
                  echo "  Instancia configurada."
                  echo ""
                  echo "  Recuerda que para administrar la base de datos puedes conectarte con:"
                  echo ""
                  echo "  Nombre de usuario: system"
-                 echo "  Contraseña: La que acabas de ingresar"
+                 echo "  Contraseña: Oracle0"
                  echo ""
 
             ;;
