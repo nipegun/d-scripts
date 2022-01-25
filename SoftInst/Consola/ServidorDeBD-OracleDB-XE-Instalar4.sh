@@ -261,6 +261,9 @@ elif [ $OS_VERS == "11" ]; then
                  echo "  Estableciendo la contraseña del usuario oracle..."
                  echo ""
                  echo -e "oracle\noracle" | passwd oracle
+                 echo ""
+                 echo "  Se le ha puesto la contraseña oracle al usuario oracle."
+                 echo ""
 
             ;;
 
