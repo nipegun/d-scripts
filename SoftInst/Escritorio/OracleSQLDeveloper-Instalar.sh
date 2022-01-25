@@ -82,7 +82,6 @@ elif [ $OS_VERS == "10" ]; then
   echo "------------------------------------------------------------------------------------"
   echo ""
 
-
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
@@ -95,6 +94,16 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------------"
   echo ""
 
-
-
+  ## Descargar el archivo zip
+     ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo "  curl no está instalado. Iniciando su instalación..."
+          echo ""
+          apt-get -y update > /dev/null
+          apt-get -y install curl
+          echo ""
+        fi
+     curl https://www.oracle.com/tools/downloads/sqldev-downloads.html | sed 's-//-\n-g' | sed 's-.zip-.zip\n-g' | sed 's-.rpm-.rpm\n-g' | grep "download.oracle"
 fi
+
