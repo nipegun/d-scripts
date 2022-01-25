@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar Oracle SQL Developer en Debian
 #
 #  Ejecución remota:
-#  curl -s  | bash
-#--------------------------------------------------------------------------
+#  curl -s  https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Escritorio/OracleSQLDeveloper-Instalar.sh | bash
+#-------------------------------------------------------------------------------------------------------------------------------
 
 ## Determinar la versión de Debian
 
@@ -38,12 +38,11 @@
        OS_VERS=$(uname -r)
    fi
 
-
 if [ $OS_VERS == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de MySQL Workbench para Debian 7 (Wheezy)..."
+  echo "  Iniciando el script de instalación de Oracle SQL Developer para Debian 7 (Wheezy)..."
   echo "-----------------------------------------------------------------------------------"
   echo ""
 
@@ -55,7 +54,7 @@ elif [ $OS_VERS == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de MySQL Workbench para Debian 8 (Jessie)..."
+  echo "  Iniciando el script de instalación de Oracle SQL Developer para Debian 8 (Jessie)..."
   echo "-----------------------------------------------------------------------------------"
   echo ""
 
@@ -67,7 +66,7 @@ elif [ $OS_VERS == "9" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de MySQL Workbench para Debian 9 (Stretch)..."
+  echo "  Iniciando el script de instalación de Oracle SQL Developer para Debian 9 (Stretch)..."
   echo "------------------------------------------------------------------------------------"
   echo ""
 
@@ -79,50 +78,23 @@ elif [ $OS_VERS == "10" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de MySQL Workbench para Debian 10 (Buster)..."
+  echo "  Iniciando el script de instalación de Oracle SQL Developer para Debian 10 (Buster)..."
   echo "------------------------------------------------------------------------------------"
   echo ""
 
-  ## Actualizar el sistema
-     apt-get -y update
-     apt-get -y upgrade
-     apt-get -y dist-upgrade
 
-  ## Instalar dependencias necesarias
-     apt-get -y install libatkmm-1.6-1v5
-     apt-get -y install libglibmm-2.4-1v5
-     apt-get -y install libgtkmm-3.0-1v5
-     apt-get -y install libsigc++-2.0-0v5
-     apt-get -y install libtinfo5
-     apt-get -y install libcairomm-1.0-1v5
-     apt-get -y install libpangomm-1.4-1v5
-     apt-get -y install libpcrecpp0v5
-     apt-get -y install libproj-dev
-     apt-get -y install proj-bin
-
-  ## Descargar el archivo .deb
-     mkdir -p /root/InstSoft/MySQLWorkbench
-     cd /root/InstSoft/MySQLWorkbench
-     wget https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community-dbgsym_8.0.27-1ubuntu20.04_amd64.deb
-
-  ## Instalar el archivo .deb
-     dpkg -i /root/InstSoft/MySQLWorkbench/mysql-workbench-community_8.0.23-1ubuntu18.04_amd64.deb
+  echo ""
+  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
   echo "--------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de MySQL Workbench para Debian 11 (Bullseye)..."
+  echo "  Iniciando el script de instalación de Oracle SQL Developer para Debian 11 (Bullseye)..."
   echo "--------------------------------------------------------------------------------------"
   echo ""
 
-  apt-get -y install snapd
-  snap install core
-  snap install mysql-workbench-community
-  
-  #snap run mysql-workbench-community
-  
-  #ln -s /etc/profile.d/apps-bin-path.sh /etc/X11/Xsession.d/99snap
-  #echo "ENV_PATH PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin" >> /etc/login.defs
+
 
 fi
