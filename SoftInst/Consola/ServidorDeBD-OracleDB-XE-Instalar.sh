@@ -296,7 +296,7 @@ elif [ $OS_VERS == "11" ]; then
             12)
 
               echo ""
-              echo "  Servidor Instalado. Para conectarte desde Oracle SQL Developer:"
+              echo "  Servidor instalado. Para conectarte desde Oracle SQL Developer:"
               echo ""
               echo "  Nueva conexión:"
               echo "    Usuario: sys"
