@@ -108,6 +108,9 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
         fi
      URLDelPaquete=$(curl -s https://www.oracle.com/tools/downloads/sqldev-downloads.html | sed 's-//-\n-g' | sed 's-.zip-.zip\n-g' | sed 's-.rpm-.rpm\n-g' | grep "download.oracle" | grep rpm)
+     echo ""
+     echo "  La URL del archivo a descargar es: $URLDelPaquete"
+     echo ""
 
   ## Descargar el archivo .rpm
      echo ""
