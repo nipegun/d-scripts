@@ -150,7 +150,7 @@ elif [ $OS_VERS == "11" ]; then
 
   ## Convertir el archivo .rpm a .deb
      echo ""
-     echo "  Convirtiendo el .rpm a .deb"
+     echo "  Convirtiendo el .rpm a .deb..."
      echo ""
      ## Comprobar si el paquete alien está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s alien 2>/dev/null | grep installed) == "" ]]; then
