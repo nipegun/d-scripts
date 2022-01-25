@@ -94,7 +94,10 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------------"
   echo ""
 
-  ## Descargar el archivo zip
+  ## Descargar el archivo .rpm
+     echo ""
+     echo "  Descargando el archivo .rpm..."
+     echo ""
      ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
           echo ""
@@ -105,5 +108,26 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
         fi
      curl https://www.oracle.com/tools/downloads/sqldev-downloads.html | sed 's-//-\n-g' | sed 's-.zip-.zip\n-g' | sed 's-.rpm-.rpm\n-g' | grep "download.oracle"
+
+  ## Convertir el archivo .rpm a .deb
+     echo ""
+     echo "  Convirtiendo el .rpm a .deb"
+     echo ""
+     ## Comprobar si el paquete alien está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s alien 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo "  alien no está instalado. Iniciando su instalación..."
+          echo ""
+          apt-get -y update > /dev/null
+          apt-get -y install alien
+          echo ""
+        fi
+     alien --scripts --verbose -d /root/SoftInst/Oracle/SQLDev/sqldev.rpm
+
+   ## Instalar el archivo .deb
+      echo ""
+      echo "  Instalando el archivo .deb..."
+      echo ""
+      dpkg
 fi
 
