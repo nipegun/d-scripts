@@ -121,10 +121,10 @@ echo ""
    mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
    mv /root/SoftInst/Cryptos/XCH/usr/share/applications/chia-blockchain.desktop /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain
    rm -rf /root/SoftInst/Cryptos/XCH/usr/
-   mkdir -p /home/$UsuarioNoRoot/.config/Chia Wallet Beta/ 2> /dev/null
-   echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > /home/$UsuarioNoRoot/.config/Chia Wallet Beta/Preferences
-   mkdir -p /home/$UsuarioNoRoot/.config/Chia Wallet/ 2> /dev/null
-   echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > /home/$UsuarioNoRoot/.config/Chia Wallet/Preferences
+   mkdir -p "/home/$UsuarioNoRoot/.config/Chia Wallet Beta/" 2> /dev/null
+   echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > "/home/$UsuarioNoRoot/.config/Chia Wallet Beta/Preferences"
+   mkdir -p "/home/$UsuarioNoRoot/.config/Chia Wallet/" 2> /dev/null
+   echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > "/home/$UsuarioNoRoot/.config/Chia Wallet/Preferences"
 
 ## Borrar archivos sobrantes
    echo ""
@@ -170,9 +170,6 @@ echo ""
    find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 
 ## Parar el daemon
-   echo ""
-   echo "  Parando el daemon (si es que está activo)..."
-   echo ""
    chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh
    su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh"
-
+   echo ""
