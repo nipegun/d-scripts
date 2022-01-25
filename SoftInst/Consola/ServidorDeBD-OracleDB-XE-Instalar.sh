@@ -118,7 +118,7 @@ elif [ $OS_VERS == "11" ]; then
               9 "Añadir contraseña al usuario oracle" on
              10 "Configurar instancia" on
              11 "Activar e iniciar el servicio" on
-             12 "Realizar cambios en el sistema -- no terminados --" off)
+             12 "Realizar cambios en el sistema -- no terminados --" on)
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
@@ -304,7 +304,7 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "  Nueva conexión:"
               echo "    Usuario: sys"
-              echo "    Contraseña: LaElegida"
+              echo "    Contraseña: Oracle0"
               echo "    Rol: SYSDBA"
               echo "    Nombre del servicio: XEPDB1"
               echo ""
