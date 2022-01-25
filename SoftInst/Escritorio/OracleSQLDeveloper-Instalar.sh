@@ -161,7 +161,15 @@ elif [ $OS_VERS == "11" ]; then
           apt-get -y install alien
           echo ""
         fi
+     mkdir -p /root/sqldeveloper-21.4.2/debian/sqldeveloper/usr/local/bin/sqldeveloper/
      alien --scripts --verbose -d /root/SoftInst/Oracle/SQLDeveloper/sqldeveloper.rpm
+
+  ## Instlalar OpenJDK 11
+     echo ""
+     echo "  Instalando OpenJDK 11..."
+     echo ""
+     apt-get -y update
+     apt-get -y install openjdk-11-jdk
 
   ## Instalar el archivo .deb
      echo ""
