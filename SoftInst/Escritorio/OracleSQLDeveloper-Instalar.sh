@@ -176,12 +176,13 @@ elif [ $OS_VERS == "11" ]; then
      echo "  Creando icono en el menú"
      echo ""
      mkdir -p ~/.local/share/applications/ 2> /dev/null
-     echo "[Desktop Entry]"                  > ~/.local/share/applications/sqldeveloper.desktop
-     echo "Type=Application"                >> ~/.local/share/applications/sqldeveloper.desktop
-     echo "Name=Oracle SQL Developer"       >> ~/.local/share/applications/sqldeveloper.desktop
-     echo "Exec=sqldeveloper"               >> ~/.local/share/applications/sqldeveloper.desktop
-     echo "Icon=/opt/sqldeveloper/icon.png" >> ~/.local/share/applications/sqldeveloper.desktop
-     echo "Terminal=false"                  >> ~/.local/share/applications/sqldeveloper.desktop
+     echo "[Desktop Entry]"                         > ~/.local/share/applications/sqldeveloper.desktop
+     echo "Type=Application"                       >> ~/.local/share/applications/sqldeveloper.desktop
+     echo "Name=Oracle SQL Developer"              >> ~/.local/share/applications/sqldeveloper.desktop
+     echo "Exec=/opt/sqldeveloper/sqldeveloper.sh" >> ~/.local/share/applications/sqldeveloper.desktop
+     echo "Icon=/opt/sqldeveloper/icon.png"        >> ~/.local/share/applications/sqldeveloper.desktop
+     echo "Terminal=false"                         >> ~/.local/share/applications/sqldeveloper.desktop
+     gio set ~/.local/share/applications/sqldeveloper.desktop "metadata::trusted" yes
 
 fi
 
