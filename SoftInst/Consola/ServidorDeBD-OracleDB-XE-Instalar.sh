@@ -135,18 +135,18 @@ elif [ $OS_VERS == "11" ]; then
                  echo $URLDelPaquete >  /tmp/versoracle-xe.txt
                  sed -i -e 's|xe-|\n|g' /tmp/versoracle-xe.txt
                  sed -i -e 's|.rpm||g'  /tmp/versoracle-xe.txt
-                 mkdir -p /root/SoftInst/OracleDB-XE/ 2> /dev/null
-                 touch /root/SoftInst/OracleDB-XE/version.txt
-                 cat /tmp/versoracle-xe.txt | grep x86 > /root/SoftInst/OracleDB-XE/version.txt
+                 mkdir -p /root/SoftInst/Oracle/DB-XE/ 2> /dev/null
+                 touch /root/SoftInst/Oracle/DB-XE/version.txt
+                 cat /tmp/versoracle-xe.txt | grep x86 > /root/SoftInst/Oracle/DB-XE/version.txt
                  echo ""
-                 echo "  La versión que se va a descargar es la $(cat /root/SoftInst/OracleDB-XE/version.txt)"
+                 echo "  La versión que se va a descargar es la $(cat /root/SoftInst/Oracle/DB-XE/version.txt)"
                  echo ""
 
               ## Descargar el paquete
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 cd /root/SoftInst/OracleDB-XE/
+                 cd /root/SoftInst/Oracle/DB-XE/
                  ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
@@ -176,7 +176,7 @@ elif [ $OS_VERS == "11" ]; then
                       apt-get -y install alien
                       echo ""
                     fi
-                 alien --scripts --verbose -d /root/SoftInst/OracleDB-XE/oracledb-xe.rpm
+                 alien --scripts --verbose -d /root/SoftInst/Oracle/DB-XE/oracledb-xe.rpm
 
             ;;
 
@@ -210,8 +210,6 @@ elif [ $OS_VERS == "11" ]; then
                  apt-get -y install libaio1
                  apt-get -y install bc
                  apt-get -y install net-tools
-                 #apt-get -y install ksh
-                 #apt-get -y install gawk
 
             ;;
 
@@ -221,8 +219,8 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Instalando paquete .deb..."
                  echo ""
-                 find /root/SoftInst/OracleDB-XE/ -type f -name *.deb -exec dpkg -i {} \;
-                 find /etc/init.d/ -type f -name oracle-xe* > /root/SoftInst/OracleDB-XE/ScriptDeArranque.txt
+                 find /root/SoftInst/Oracle/DB-XE/ -type f -name *.deb -exec dpkg -i {} \;
+                 find /etc/init.d/ -type f -name oracle-xe* > /root/SoftInst/Oracle/DB-XE/ScriptDeArranque.txt
                  # nano /etc/sysconfig/oracle-xe-21c.conf
 
             ;;
@@ -233,7 +231,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Creando variables de entorno..."
                  echo ""
-                 ArchivoInitD=$(cat /root/SoftInst/OracleDB-XE/ScriptDeArranque.txt)
+                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DB-XE/ScriptDeArranque.txt)
                  cat $ArchivoInitD | grep "export ORACLE_HOME" >> /home/oracle/.bashrc
                  cat $ArchivoInitD | grep "export ORACLE_SID"  >> /home/oracle/.bashrc
                  echo 'export PATH=$ORACLE_HOME/bin:$PATH'    >> /home/oracle/.bashrc
@@ -246,7 +244,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Creando el servicio en systemd..."
                  echo ""
-                 ArchivoInitD=$(cat /root/SoftInst/OracleDB-XE/ScriptDeArranque.txt)
+                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DB-XE/ScriptDeArranque.txt)
                  echo "[Unit]"                           > /etc/systemd/system/oracledb-xe.service
                  echo "  Description=OracleDB-XE"       >> /etc/systemd/system/oracledb-xe.service
                  echo "[Service]"                       >> /etc/systemd/system/oracledb-xe.service
@@ -272,7 +270,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Configurando instancia..."
                  echo ""
-                 ArchivoInitD=$(cat /root/SoftInst/OracleDB-XE/ScriptDeArranque.txt)
+                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DB-XE/ScriptDeArranque.txt)
                  $ArchivoInitD configure
                  echo ""
                  echo "  Instancia configurada."
