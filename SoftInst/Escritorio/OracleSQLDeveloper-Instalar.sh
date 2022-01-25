@@ -175,6 +175,7 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      echo "  Creando icono en el menú"
      echo ""
+     mkdir -p ~/.local/share/applications/ 2> /dev/null
      echo "[Desktop Entry]"                  > ~/.local/share/applications/sqldeveloper.desktop
      echo "Type=Application"                >> ~/.local/share/applications/sqldeveloper.desktop
      echo "Name=Oracle SQL Developer"       >> ~/.local/share/applications/sqldeveloper.desktop
