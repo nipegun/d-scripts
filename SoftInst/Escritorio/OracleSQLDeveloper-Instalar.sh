@@ -177,5 +177,16 @@ elif [ $OS_VERS == "11" ]; then
      echo ""
      find /root/SoftInst/Oracle/SQLDeveloper/ -type f -name *.deb -exec dpkg -i {} \;
 
+  ## Crear icono en el menú
+     echo ""
+     echo "  Creando icono en el menú"
+     echo ""
+     echo "[Desktop Entry]"                  > ~/.local/share/applications/sqldeveloper.desktop
+     echo "Type=Application"                >> ~/.local/share/applications/sqldeveloper.desktop
+     echo "Name=Oracle SQL Developer"       >> ~/.local/share/applications/sqldeveloper.desktop
+     echo "Exec=sqldeveloper"               >> ~/.local/share/applications/sqldeveloper.desktop
+     echo "Icon=/opt/sqldeveloper/icon.png" >> ~/.local/share/applications/sqldeveloper.desktop
+     echo "Terminal=false"                  >> ~/.local/share/applications/sqldeveloper.desktop
+
 fi
 
