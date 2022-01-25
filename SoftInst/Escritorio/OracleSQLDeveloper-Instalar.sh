@@ -94,9 +94,9 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------------"
   echo ""
 
-  ## Descargar el archivo .rpm
+  ## Determinar URL del archivo a descargar
      echo ""
-     echo "  Descargando el archivo .rpm..."
+     echo "  Determinando URL del archivo a descargar..."
      echo ""
      ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
@@ -107,7 +107,43 @@ elif [ $OS_VERS == "11" ]; then
           apt-get -y install curl
           echo ""
         fi
-     curl https://www.oracle.com/tools/downloads/sqldev-downloads.html | sed 's-//-\n-g' | sed 's-.zip-.zip\n-g' | sed 's-.rpm-.rpm\n-g' | grep "download.oracle"
+     URLDelPaquete=$(curl -s https://www.oracle.com/tools/downloads/sqldev-downloads.html | sed 's-//-\n-g' | sed 's-.zip-.zip\n-g' | sed 's-.rpm-.rpm\n-g' | grep "download.oracle" | grep rpm)
+
+  ## Descargar el archivo .rpm
+     echo ""
+     echo "  Descargando el archivo .rpm..."
+     echo ""
+     mkdir -p /root/SoftInst/Oracle/SQLDeveloper/ 2> /dev/null
+     ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo "  wget no está instalado. Iniciando su instalación..."
+          echo ""
+          apt-get -y update > /dev/null
+          apt-get -y install wget
+          echo ""
+        fi
+     wget $URLDelPaquete -O /root/SoftInst/Oracle/SQLDeveloper/sqldeveloper.rpm
+
+  ## Comprobar si el archivo descargado es el correcto
+     echo ""
+     echo " Comprobando si el archivo descargado es correcto"
+     echo ""
+     if [[ $(find /root/SoftInst/Oracle/SQLDeveloper/ -type f -iname *.rpm -size -10M 2>/dev/null) ]]; then
+       echo ""
+       echo "  El .rpm descargado ocupa menos de 10 megas"
+       echo "  Seguramente la descarga no funcionó correctamente."
+       echo ""
+       echo "  Descargando directamente el .rpm desde hacks4geeks.com..."
+       echo ""
+       rm -f /root/SoftInst/Oracle/SQLDeveloper/sqldeveloper.rpm
+       cd /root/SoftInst/Oracle/SQLDeveloper/
+       wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Oracle/SQLDeveloper/sqldeveloper.rpm
+     else
+       echo ""
+       echo " El archivo descargado es correcto."
+       echo ""
+     fi
 
   ## Convertir el archivo .rpm a .deb
      echo ""
@@ -122,12 +158,13 @@ elif [ $OS_VERS == "11" ]; then
           apt-get -y install alien
           echo ""
         fi
-     alien --scripts --verbose -d /root/SoftInst/Oracle/SQLDev/sqldev.rpm
+     alien --scripts --verbose -d /root/SoftInst/Oracle/SQLDeveloper/sqldeveloper.rpm
 
-   ## Instalar el archivo .deb
-      echo ""
-      echo "  Instalando el archivo .deb..."
-      echo ""
-      dpkg
+  ## Instalar el archivo .deb
+     echo ""
+     echo "  Instalando el archivo .deb..."
+     echo ""
+     find /root/SoftInst/Oracle/SQLDeveloper/ -type f -name *.deb -exec dpkg -i {} \;
+
 fi
 
