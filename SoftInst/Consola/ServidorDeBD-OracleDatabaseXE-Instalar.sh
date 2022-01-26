@@ -147,6 +147,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
+                 mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
                  cd /root/SoftInst/Oracle/DatabaseXE/
                  ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
@@ -177,6 +178,7 @@ elif [ $OS_VERS == "11" ]; then
                       apt-get -y install alien
                       echo ""
                     fi
+                 mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
                  alien --scripts --verbose -d /root/SoftInst/Oracle/DatabaseXE/OracleDatabaseXE.rpm
 
             ;;
@@ -220,6 +222,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Instalando paquete .deb..."
                  echo ""
+                 mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
                  find /root/ -type f -name oracle*.deb -exec mv {} /root/SoftInst/Oracle/DatabaseXE/ \; 2> /dev/null
                  find /root/SoftInst/Oracle/DatabaseXE/ -type f -name *.deb -exec dpkg -i {} \;
                  touch /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt
