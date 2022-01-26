@@ -281,6 +281,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Configurando instancia ejecutando:"
                  echo ""
+                 sed -i -e 's|LISTENER_PORT=|LISTENER_PORT=1521|g' /etc/sysconfig/oracle-xe-21c.conf
                  echo "  $ArchivoInitD configure"
                  echo ""
                  echo -e "Oracle0\nOracle0" | $ArchivoInitD configure
