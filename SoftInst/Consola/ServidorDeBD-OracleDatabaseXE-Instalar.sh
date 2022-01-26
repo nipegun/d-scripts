@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar el servidor de bases de datos de Oracle en Debian
+#--------------------------------------------------------------------------------------------------------------------------------------
+#  Script de NiPeGun para instalar el servidor de bases de datos de Oracle Database XE en Debian
 #
 #  Ejecución remota
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-OracleDB-XE-Instalar.sh | bash
-#---------------------------------------------------------------------------------------------------------------------------------
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-OracleDatabaseXE-Instalar.sh | bash
+#--------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -44,9 +44,9 @@ FinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo -e "${ColorVerde}-------------------------------------------------------------------------------${FinColor}"
-  echo -e "${ColorVerde}  Iniciando el script de instalación de OracleDB XE para Debian 7 (Wheezy)...${FinColor}"
-  echo -e "${ColorVerde}-------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}--------------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 7 (Wheezy)...${FinColor}"
+  echo -e "${ColorVerde}--------------------------------------------------------------------------------------${FinColor}"
   echo ""
 
   echo ""
@@ -56,9 +56,9 @@ if [ $OS_VERS == "7" ]; then
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo -e "${ColorVerde}-------------------------------------------------------------------------------${FinColor}"
-  echo -e "${ColorVerde}  Iniciando el script de instalación de OracleDB XE para Debian 8 (Jessie)...${FinColor}"
-  echo -e "${ColorVerde}-------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}--------------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 8 (Jessie)...${FinColor}"
+  echo -e "${ColorVerde}--------------------------------------------------------------------------------------${FinColor}"
   echo ""
 
   echo ""
@@ -68,9 +68,9 @@ elif [ $OS_VERS == "8" ]; then
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo -e "${ColorVerde}--------------------------------------------------------------------------------${FinColor}"
-  echo -e "${ColorVerde}  Iniciando el script de instalación de OracleDB XE para Debian 9 (Stretch)...${FinColor}"
-  echo -e "${ColorVerde}--------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}---------------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 9 (Stretch)...${FinColor}"
+  echo -e "${ColorVerde}---------------------------------------------------------------------------------------${FinColor}"
   echo ""
 
   echo ""
@@ -80,9 +80,9 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo -e "${ColorVerde}--------------------------------------------------------------------------------${FinColor}"
-  echo -e "${ColorVerde}  Iniciando el script de instalación de OracleDB XE para Debian 10 (Buster)...${FinColor}"
-  echo -e "${ColorVerde}--------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}---------------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 10 (Buster)...${FinColor}"
+  echo -e "${ColorVerde}---------------------------------------------------------------------------------------${FinColor}"
   echo ""
 
   echo ""
@@ -92,9 +92,9 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${ColorVerde}----------------------------------------------------------------------------------${FinColor}"
-  echo -e "${ColorVerde}  Iniciando el script de instalación de OracleDB XE para Debian 11 (Bullseye)...${FinColor}"
-  echo -e "${ColorVerde}----------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}-----------------------------------------------------------------------------------------${FinColor}"
+  echo -e "${ColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 11 (Bullseye)...${FinColor}"
+  echo -e "${ColorVerde}-----------------------------------------------------------------------------------------${FinColor}"
   echo ""
 
   ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -106,7 +106,7 @@ elif [ $OS_VERS == "11" ]; then
        apt-get -y install dialog
        echo ""
      fi
-  menu=(dialog --timeout 5 --checklist "Instalación de la base de datos Oracle XE:" 22 76 16)
+  menu=(dialog --timeout 5 --checklist "Instalación del servidor Oracle Database XE:" 22 76 16)
     opciones=(1 "Descargar paquete" on
               2 "Convertir .rpm a .deb" on
               3 "Crear el grupo dba" on
@@ -132,21 +132,22 @@ elif [ $OS_VERS == "11" ]; then
                  URLDelPaquete=$(curl -s https://www.oracle.com/database/technologies/xe-downloads.html | sed 's/>/>\n/g' | sed 's-//-\n-g' | grep .rpm | grep -v preinst | head -n1 | cut -d"'" -f1)
  
               ## Guardar archivo con número de versión
-                 echo $URLDelPaquete >  /tmp/versoracle-xe.txt
-                 sed -i -e 's|xe-|\n|g' /tmp/versoracle-xe.txt
-                 sed -i -e 's|.rpm||g'  /tmp/versoracle-xe.txt
-                 mkdir -p /root/SoftInst/Oracle/DB-XE/ 2> /dev/null
-                 touch /root/SoftInst/Oracle/DB-XE/version.txt
-                 cat /tmp/versoracle-xe.txt | grep x86 > /root/SoftInst/Oracle/DB-XE/version.txt
+                 touch /tmp/VersOracleDatabaseXE.txt
+                 echo $URLDelPaquete >  /tmp/VersOracleDatabaseXE.txt
+                 sed -i -e 's|xe-|\n|g' /tmp/VersOracleDatabaseXE.txt
+                 sed -i -e 's|.rpm||g'  /tmp/VersOracleDatabaseXE.txt
+                 mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
+                 touch /root/SoftInst/Oracle/DatabaseXE/VersOracleDatabaseXE.txt
+                 cat /tmp/VersOracleDatabaseXE.txt | grep x86 > /root/SoftInst/Oracle/DatabaseXE/VersOracleDatabaseXE.txt
                  echo ""
-                 echo "  La versión que se va a descargar es la $(cat /root/SoftInst/Oracle/DB-XE/version.txt)"
+                 echo "  La versión que se va a descargar es la $(cat /root/SoftInst/Oracle/DatabaseXE/VersOracleDatabaseXE.txt)"
                  echo ""
 
               ## Descargar el paquete
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 cd /root/SoftInst/Oracle/DB-XE/
+                 cd /root/SoftInst/Oracle/DatabaseXE/
                  ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
@@ -156,7 +157,7 @@ elif [ $OS_VERS == "11" ]; then
                       apt-get -y install wget
                       echo ""
                     fi
-                 wget $URLDelPaquete -O oracledb-xe.rpm
+                 wget $URLDelPaquete -O OracleDatabaseXE.rpm
 
             ;;
 
@@ -176,7 +177,7 @@ elif [ $OS_VERS == "11" ]; then
                       apt-get -y install alien
                       echo ""
                     fi
-                 alien --scripts --verbose -d /root/SoftInst/Oracle/DB-XE/oracledb-xe.rpm
+                 alien --scripts --verbose -d /root/SoftInst/Oracle/DatabaseXE/OracleDatabaseXE.rpm
 
             ;;
 
@@ -219,8 +220,9 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Instalando paquete .deb..."
                  echo ""
-                 find /root/SoftInst/Oracle/DB-XE/ -type f -name *.deb -exec dpkg -i {} \;
-                 find /etc/init.d/ -type f -name oracle-xe* > /root/SoftInst/Oracle/DB-XE/ScriptDeArranque.txt
+                 find /root/SoftInst/Oracle/DatabaseXE/ -type f -name *.deb -exec dpkg -i {} \;
+                 touch /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt
+                 find /etc/init.d/ -type f -name oracle-xe* > /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt
                  # nano /etc/sysconfig/oracle-xe-21c.conf
 
             ;;
@@ -231,10 +233,10 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Creando variables de entorno..."
                  echo ""
-                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DB-XE/ScriptDeArranque.txt)
+                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt)
                  cat $ArchivoInitD | grep "export ORACLE_HOME" >> /home/oracle/.bashrc
                  cat $ArchivoInitD | grep "export ORACLE_SID"  >> /home/oracle/.bashrc
-                 echo 'export PATH=$ORACLE_HOME/bin:$PATH'    >> /home/oracle/.bashrc
+                 echo 'export PATH=$ORACLE_HOME/bin:$PATH'     >> /home/oracle/.bashrc
 
             ;;
 
@@ -244,13 +246,13 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Creando el servicio en systemd..."
                  echo ""
-                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DB-XE/ScriptDeArranque.txt)
-                 echo "[Unit]"                           > /etc/systemd/system/oracledb-xe.service
-                 echo "  Description=OracleDB-XE"       >> /etc/systemd/system/oracledb-xe.service
-                 echo "[Service]"                       >> /etc/systemd/system/oracledb-xe.service
-                 echo "  ExecStart=$ArchivoInitD start" >> /etc/systemd/system/oracledb-xe.service
-                 echo "[Install]"                       >> /etc/systemd/system/oracledb-xe.service
-                 echo "  WantedBy=default.target"       >> /etc/systemd/system/oracledb-xe.service
+                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt)
+                 echo "[Unit]"                            > /etc/systemd/system/OracleDatabaseXE.service
+                 echo "  Description=Oracle Database XE" >> /etc/systemd/system/OracleDatabaseXE.service
+                 echo "[Service]"                        >> /etc/systemd/system/OracleDatabaseXE.service
+                 echo "  ExecStart=$ArchivoInitD start"  >> /etc/systemd/system/OracleDatabaseXE.service
+                 echo "[Install]"                        >> /etc/systemd/system/OracleDatabaseXE.service
+                 echo "  WantedBy=default.target"        >> /etc/systemd/system/OracleDatabaseXE.service
 
             ;;
 
@@ -260,9 +262,9 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Estableciendo la contraseña del usuario oracle..."
                  echo ""
-                 echo -e "oracle\noracle" | passwd oracle
+                 echo -e "Oracle0\nOracle0" | passwd oracle
                  echo ""
-                 echo "  Se le ha puesto la contraseña oracle al usuario oracle."
+                 echo "  Se le ha puesto la contraseña Oracle0 al usuario oracle."
                  echo ""
 
             ;;
@@ -270,14 +272,16 @@ elif [ $OS_VERS == "11" ]; then
             10)
 
               ## Configurar instancia
-                 echo ""
-                 echo "  Configurando instancia..."
-                 echo ""
-                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DB-XE/ScriptDeArranque.txt)
+                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt)
                  #$ArchivoInitD delete
+                 echo ""
+                 echo "  Configurando instancia ejecutando:"
+                 echo ""
+                 echo "  $ArchivoInitD configure"
+                 echo ""
                  echo -e "Oracle0\nOracle0" | $ArchivoInitD configure
                  echo ""
-                 echo "  Instancia configurada."
+                 echo "  Fin de configuración de instancia."
                  echo ""
                  echo "  Recuerda que para administrar la base de datos puedes conectarte con:"
                  echo ""
@@ -293,7 +297,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Activando e iniciando el servicio..."
                  echo ""
-                 systemctl enable oracledb-xe.service --now
+                 systemctl enable OracleDatabaseXE.service --now
 
             ;;
 
