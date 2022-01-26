@@ -113,12 +113,12 @@ elif [ $OS_VERS == "11" ]; then
               4 "Crear el usuario oracle y agregarlo al grupo dba" on
               5 "Instalar dependencias y paquetes necesarios" on
               6 "Instalar paquete" on
-              7 "Crear variables de entorno" on
-              8 "Crear el servicio en systemd" on
-              9 "Añadir contraseña al usuario oracle" on
-             10 "Configurar instancia" on
-             11 "Activar e iniciar el servicio" on
-             12 "Realizar cambios en el sistema -- no terminados --" on)
+              7 "  Crear variables de entorno" on
+              8 "  Crear el servicio en systemd" on
+              9 "  Añadir contraseña al usuario oracle" on
+             10 "  Configurar instancia" on
+             11 "  Activar e iniciar el servicio" on
+             12 "  Realizar cambios en el sistema -- no terminados --" on)
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
