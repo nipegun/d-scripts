@@ -129,6 +129,7 @@ elif [ $OS_VERS == "11" ]; then
                  URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep i386 | grep -v side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
+                 echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
@@ -161,6 +162,7 @@ elif [ $OS_VERS == "11" ]; then
                  URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep amd64 | grep -v side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
+                 echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
@@ -193,6 +195,7 @@ elif [ $OS_VERS == "11" ]; then
                  URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep armhf | grep -v side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
+                 echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
@@ -225,6 +228,7 @@ elif [ $OS_VERS == "11" ]; then
                  URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep arm64 | grep -v side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
+                 echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
@@ -257,6 +261,7 @@ elif [ $OS_VERS == "11" ]; then
                  URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep i386 | grep side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
+                 echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
@@ -289,6 +294,7 @@ elif [ $OS_VERS == "11" ]; then
                  URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep amd64 | grep side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
+                 echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
@@ -321,6 +327,7 @@ elif [ $OS_VERS == "11" ]; then
                  URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep armhf | grep side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
+                 echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
@@ -353,6 +360,7 @@ elif [ $OS_VERS == "11" ]; then
                  URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep arm64 | grep side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
+                 echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
