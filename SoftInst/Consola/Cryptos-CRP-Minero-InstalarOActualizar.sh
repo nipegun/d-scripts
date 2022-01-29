@@ -82,8 +82,13 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
              echo ""
              echo "  Descargando el archivo .deb..."
              echo ""
-             rm -rf /root/Cryptos/CRP/uam-latest_amd64.deb 2> /dev/null
-             wget https://update.u.is/downloads/uam/linux/uam-latest_amd64.deb
+             rm -rf /root/Cryptos/CRP/opt/ 2> /dev/null
+             rm -f /root/Cryptos/CRP/control.tar.gz 2> /dev/null
+             rm -f /root/Cryptos/CRP/data.tar.xz 2> /dev/null
+             rm -f /root/Cryptos/CRP/debian-binary 2> /dev/null
+             rm -f /root/Cryptos/CRP/uam-latest_amd64.deb 2> /dev/null
+             rm -f /root/Cryptos/CRP/*.deb 2> /dev/null
+             wget https://update.u.is/downloads/uam/linux/uam-latest_amd64.deb 2> /dev/null
 
           ## Extraer los archivos de dentro del .deb
              ## Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
@@ -118,11 +123,11 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
                 echo ""
                 echo "  Borrando archivos sobrantes..."
                 echo ""
-                #rm -rf /root/Cryptos/CRP/opt/
-                #rm -rf /root/Cryptos/CRP/control.tar.gz
-                #rm -rf /root/Cryptos/CRP/data.tar.xz
-                #rm -rf /root/Cryptos/CRP/debian-binary
-                #rm -rf /root/Cryptos/CRP/uam-latest_amd64.deb
+                rm -rf /root/Cryptos/CRP/opt/
+                rm -rf /root/Cryptos/CRP/control.tar.gz
+                rm -rf /root/Cryptos/CRP/data.tar.xz
+                rm -rf /root/Cryptos/CRP/debian-binary
+                rm -rf /root/Cryptos/CRP/uam-latest_amd64.deb
 
           ## Crear el archivo para minar
              echo '#!/bin/bash'                                                                         > /root/Cryptos/CRP/minero/Minar.sh
