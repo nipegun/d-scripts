@@ -12,7 +12,7 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/Cryptos-CRP-Minero-InstalarOActualizar.sh | bash
 #
 #  Ejecución remota con cambio de llave pública:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/Cryptos-CRP-Minero-InstalarOActualizar.sh | sed 's/^PublicKey/PublicKey=TuClave/g' | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/Cryptos-CRP-Minero-InstalarOActualizar.sh | sed 's/^PublicKey.*/PublicKey=TuClave/g' | bash
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 PublicKey=C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415
@@ -20,7 +20,7 @@ PublicKey=C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
- 
+
 echo ""
 echo -e "${ColorVerde}------------------------------------------------------------------------------${FinColor}"
 echo -e "${ColorVerde}  Iniciando el script de instalación o actualización del minero de Utopia...${FinColor}"
