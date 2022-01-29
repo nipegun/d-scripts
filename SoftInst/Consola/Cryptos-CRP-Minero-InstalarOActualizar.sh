@@ -146,7 +146,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
              PuertoCentena=$(echo $IPLocal | cut -d'.' -f4)
              mkdir -p /root/.uam/ > /dev/null
              echo "[net]"                                > /root/.uam/uam.ini
-             echo "listens=[$IPLocal]:60$PuertoCentena" >> /root/.uam/uam.ini
+             echo "listens=[$IPLocal]:609$PuertoCentena" >> /root/.uam/uam.ini
              sed -i -e 's| ]|]|g' /root/.uam/uam.ini
 
           ## Auto-arrancar el minero cada vez que se inicia sesión como root
