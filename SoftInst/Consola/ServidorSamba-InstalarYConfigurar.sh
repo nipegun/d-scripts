@@ -5,9 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar el servidor Samba en Debian
-#----------------------------------------------------------------------------
+#
+#  Ejecución remota:
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorSamba-InstalarYConfigurar.sh | bash
+#-----------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -284,7 +287,10 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo -e "${ColorVerde}Instalando los paquetes necesarios...${FinColor}"
               echo ""
-              apt-get -y install libcups2 samba samba-common cups
+              apt-get -y install libcups2
+              apt-get -y install samba
+              apt-get -y install samba-common
+              apt-get -y install cups
               cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
             ;;
 
