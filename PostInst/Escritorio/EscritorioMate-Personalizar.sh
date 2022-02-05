@@ -266,6 +266,10 @@ elif [ $OS_VERS == "11" ]; then
   ln -s /usr/share/desktop-base/moonlight-theme /usr/share/desktop-base/active-theme
 
   echo ""
+  echo "  Instalando las fuentes de Ubuntu..."
+  echo ""
+  apt-get install fonts-ubuntu
+  echo ""
 
 fi
 
