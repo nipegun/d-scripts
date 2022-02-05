@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar el servidor Samba en Debian
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorSamba-InstalarYConfigurar.sh | bash
-#-----------------------------------------------------------------------------------------------------------------------------------
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorSamba-InstalarYConfigurar.sh | bash -s NombreDeGrupo NombreDeEquipo nipegun
+#------------------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -285,7 +285,7 @@ elif [ $OS_VERS == "11" ]; then
 
             1)
               echo ""
-              echo -e "${ColorVerde}Instalando los paquetes necesarios...${FinColor}"
+              echo -e "${ColorVerde}  Instalando los paquetes necesarios...${FinColor}"
               echo ""
               apt-get -y install libcups2
               apt-get -y install samba
@@ -296,7 +296,7 @@ elif [ $OS_VERS == "11" ]; then
 
             2)
               echo ""
-              echo -e "${ColorVerde}Configurando las opciones globales...${FinColor}"
+              echo -e "${ColorVerde}  Configurando las opciones globales...${FinColor}"
               echo ""
               echo "[global]"                                                     > /etc/samba/smb.conf
               echo "  workgroup = $1"                                            >> /etc/samba/smb.conf
@@ -316,7 +316,7 @@ elif [ $OS_VERS == "11" ]; then
 
             3)
               echo ""
-              echo -e "${ColorVerde}Creando la compartición para la carpeta pública...${FinColor}"
+              echo -e "${ColorVerde}  Creando la compartición para la carpeta pública...${FinColor}"
               echo ""
               mkdir /publica/
               chown nobody:nogroup /publica/
@@ -333,7 +333,7 @@ elif [ $OS_VERS == "11" ]; then
 
             4)
               echo ""
-              echo -e "${ColorVerde}Creando la compartición para la carpeta del usuario...${FinColor}"
+              echo -e "${ColorVerde}  Creando la compartición para la carpeta del usuario...${FinColor}"
               echo ""
               echo "[Usuario $3]"                       >> /etc/samba/smb.conf
               echo "  path = /home/$3/"                 >> /etc/samba/smb.conf
@@ -345,7 +345,7 @@ elif [ $OS_VERS == "11" ]; then
 
             5)
               echo ""
-              echo -e "${ColorVerde}Creando la compartición de una carpeta Multimedia...${FinColor}"
+              echo -e "${ColorVerde}  Creando la compartición de una carpeta Multimedia...${FinColor}"
               echo ""
               echo "[Multimedia]"                                   >> /etc/samba/smb.conf
               echo "  path = /Discos/HDD-Multimedia/"               >> /etc/samba/smb.conf
@@ -359,7 +359,7 @@ elif [ $OS_VERS == "11" ]; then
 
             6)
               echo ""
-              echo -e "${ColorVerde}Creando la compartición de la carpeta de las Webs...${FinColor}"
+              echo -e "${ColorVerde}  Creando la compartición de la carpeta de las Webs...${FinColor}"
               echo ""
               echo "[Webs]"                  >> /etc/samba/smb.conf
               echo "  path = /var/www/"      >> /etc/samba/smb.conf
