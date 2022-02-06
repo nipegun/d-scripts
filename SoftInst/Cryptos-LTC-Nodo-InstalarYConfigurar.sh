@@ -110,7 +110,7 @@ echo "prune=550"               >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
 echo "daemon=1"                >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
 echo "gen=0"                   >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
 rm -rf /home/$UsuarioNoRoot/Cryptos/LTC/
-mv /root/SoftInst/Cryptos/LTC/litecoin-$UltVersRaven/ /home/$UsuarioNoRoot/Cryptos/LTC/
+mv /root/SoftInst/Cryptos/LTC/litecoin-$UltVersLTC/ /home/$UsuarioNoRoot/Cryptos/LTC/
 chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/LTC/ -R
 find /home/$UsuarioNoRoot/Cryptos/LTC/ -type d -exec chmod 775 {} \;
 find /home/$UsuarioNoRoot/Cryptos/LTC/ -type f -exec chmod 664 {} \;
@@ -152,7 +152,7 @@ find /home/$UsuarioNoRoot/Cryptos/LTC/bin -type f -exec chmod +x {} \;
    #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
    gio set /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop "metadata::trusted" yes
 
-## Autoejecución gráfica de Ravencoin
+## Autoejecución gráfica de Litecoin
    echo ""
    echo "  Creando el archivo de autoejecución de litecoin-qt para escritorio..."
    echo ""
