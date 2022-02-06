@@ -150,7 +150,7 @@ find /home/$UsuarioNoRoot/Cryptos/LTC/bin -type f -exec chmod +x {} \;
    echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
    echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
    #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
-   gio set /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop "metadata::trusted" yes
+   gio set /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop "metadata::trusted" yes
 
 ## Autoejecución gráfica de Ravencoin
    echo ""
