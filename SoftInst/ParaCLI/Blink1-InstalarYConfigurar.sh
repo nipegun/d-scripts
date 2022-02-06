@@ -59,9 +59,12 @@ elif [ $OS_VERS == "8" ]; then
   echo "-----------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+  apt-get -y install pkg-config libusb-1.0-0-dev
+  mkdir /root/git/
+  cd /root/git/
+  git clone https://github.com/todbot/blink1.git
+  cd /root/git/blink1/commandline
+  make
 
 elif [ $OS_VERS == "9" ]; then
 
