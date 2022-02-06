@@ -1,7 +1,0 @@
-      apt-get -y install hdparm
-      apt-get -y install cifs-utils
-      apt-get -y sshfs
-      apt-get -y ecryptfs-utils
-      apt-get -y install ntfs-3g ntfsprogs                # Para manejar sistemas de archivos NTFS
-      apt-get -y install hfsplus hfsprogs hfsutils        # Para manejar sistemas de archivos HFS
-      apt-get -y install libguestfs-tools                 # Para montar VHDs
