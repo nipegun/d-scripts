@@ -6,8 +6,11 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #-----------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA MOSTRAR AISLAMIENTO/AGRUPAMIENTO IOMMU
-#-----------------------------------------------------------------
+#  Script de NiPeGun para mostrar el aislamiento/agrupamiento IOMMU en Debian
+#
+#  Ejecución remota:
+#  curl -s x | bash
+#------------------------------------------------------------------------------
 
 echo ""
 echo "-------------------------------------------"
