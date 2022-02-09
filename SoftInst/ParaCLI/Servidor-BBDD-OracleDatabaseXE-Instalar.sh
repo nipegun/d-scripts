@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar el servidor de bases de datos de Oracle Database XE en Debian
 #
 #  Ejecución remota
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-OracleDatabaseXE-Instalar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-OracleDatabaseXE-Instalar.sh | bash
 #--------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
