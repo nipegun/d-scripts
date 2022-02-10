@@ -17,7 +17,7 @@ echo "  Loqueando conexiones xrdp..."
 echo ""
 
 # Crear el archivo de log, en caso de que no exista
-  if [ ! -f touch /var/log/XRDPWatch.log ]; then
+  if [ ! -f /var/log/XRDPWatch.log ]; then
     echo ""
     echo "  El archivo de log no existe, creando uno nuevo..."
     echo ""
