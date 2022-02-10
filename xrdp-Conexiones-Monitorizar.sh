@@ -24,7 +24,7 @@
   echo ""
   echo "  Monitorizando las conexiones xrdp..."
   echo ""
-  tail -f /var/log/xrdp.log | grep --line-buffered -E "onnected client"\|"onnection established"\|"ogin success" | while read line
+  tail -f /var/log/xrdp.log | grep --line-buffered -E "onnected client"\|"onnection established" | while read line
     do
       # Eliminar los brackets
         LineaGrep1=$(echo "${line}" | sed 's-[][]--g')
