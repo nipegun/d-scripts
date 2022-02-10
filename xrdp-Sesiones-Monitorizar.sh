@@ -9,12 +9,8 @@
 #  Script de NiPeGun para monitorizar las conexiones xrdp
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/xrdp-Conexiones-Monitorizar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/xrdp-Sesiones-Monitorizar.sh | bash
 #---------------------------------------------------------------------------------------------------------
-
-echo ""
-echo "  Monitorizando conexiones xrdp..."
-echo ""
 
 # Crear el archivo de log, en caso de que no exista
   if [ ! -f /var/log/XRDPWatcher.log ]; then
@@ -25,6 +21,9 @@ echo ""
   fi
 
 # Monitorizar las sesiones
+  echo ""
+  echo "  Monitorizando las sesiones xrdp..."
+  echo ""
   tail -f /var/log/xrdp-sesman.log | grep "reated session" | while read line;
     do
       echo "${line}" >> touch /var/log/XRDPWatcher.log
@@ -34,3 +33,4 @@ echo ""
     done
 
 #tail -f /var/log/xrdp.log | grep -E "onnected client"\|"onnection established"\|"ogin success" >> /var/log/XRDPWatcher.log &
+
