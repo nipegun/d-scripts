@@ -26,8 +26,17 @@
   echo ""
   tail -f /var/log/xrdp-sesman.log | grep --line-buffered "reated session" | while read line
     do
-      echo "${line}" | tee -a /var/log/XRDPWatcher.log
-      TextoAEnviar=$(echo "${line}" | sed 's-[INFO]--g')
-      /root/scripts/xrdp-NotificarSes.sh "$TextoAEnviar"
+      # Eliminar los brackets
+        LineaGrep1=$(echo "${line}" | sed 's-[][]--g')
+      # Borrar INFO
+        LineaGrep2=$(echo "$LineaGrep1" | sed 's/INFO /-/g')
+      # Reemplazar texto
+        LineaGrep3=$(echo "$LineaGrep2" | sed 's-++ created session-!!-g')
+      # Mostrar línea en consola y enviar también al log 
+        echo "$LineaGrep3" | tee -a /var/log/XRDPWatcher.log
+      # Preparar cadena para notificar por Telegram
+        TextoAEnviar=$(echo "$LineaGrep3")
+      # Notificar por Telegram
+        /root/scripts/xrdp-NotificarCon.sh "$TextoAEnviar"
     done
 
