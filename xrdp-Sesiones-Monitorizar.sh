@@ -31,7 +31,7 @@
       # Borrar INFO
         LineaGrep2=$(echo "$LineaGrep1" | sed 's/INFO /-/g')
       # Reemplazar texto
-        LineaGrep3=$(echo "$LineaGrep2" | sed 's-++ created session (access granted)-SUCCESFUL ACCESS!!-g')
+        LineaGrep3=$(echo "$LineaGrep2" | sed 's-++ created session (access granted)-SESSION GRANTED-g')
       # Mostrar línea en consola y enviar también al log 
         echo "$LineaGrep3" | tee -a /var/log/XRDPWatcher.log
       # Preparar cadena para notificar por Telegram
