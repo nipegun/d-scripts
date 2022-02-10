@@ -25,12 +25,12 @@ echo ""
   fi
 
 # Monitorizar las sesiones
-#  tail -f /var/log/xrdp-sesman.log | grep "reated session" | while read line;
-#    do
-#      echo "${line}" >> touch /var/log/XRDPWatch.log
+  tail -f /var/log/xrdp-sesman.log | grep "reated session" | while read line;
+    do
+      echo "${line}" >> touch /var/log/XRDPWatch.log
       #if [ $? = 0 ] ; then
       #  echo "${line}" | mailx -s "error in messages file" your@emailaddress.com
       #fi
- #   done
+    done
 
 #tail -f /var/log/xrdp.log | grep -E "onnected client"\|"onnection established"\|"ogin success" >> /var/log/XRDPWatch.log &
