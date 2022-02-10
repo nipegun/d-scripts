@@ -29,7 +29,7 @@
       #echo "${line}" | tee -a /var/log/XRDPWatcher.log
       LineaGrep1=$(echo "${line}")
       echo "$LineaGrep1" | tee -a /var/log/XRDPWatcher.log
-      LineaGrep2=$(echo "$LineaGrep1" | sed 's-\\[--g' | 's-]--g' | sed 's-INFO--g')
+      LineaGrep2=$(echo "$LineaGrep1" | sed 's-\\[--g' | 's-\\]--g' | sed 's-INFO--g')
       echo "$LineaGrep2" | tee -a /var/log/XRDPWatcher.log
       TextoAEnviar=$(echo "$LineaGrep2" | sed 's-connected client computer name-Host intentando conectarse por xrdp-g')
       /root/scripts/xrdp-NotificarCon.sh "$TextoAEnviar"
