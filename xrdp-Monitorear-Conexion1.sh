@@ -25,7 +25,7 @@ touch /var/log/XRDPWatch.log
 echo ""
 echo "  Loqueando conexiones xrdp..."
 echo ""
-disown tail -f /var/log/xrdp.log | grep -E "onnected client"\|"onnection established"\|"ogin success" >> /var/log/XRDPWatch.log
-disown tail -f /var/log/xrdp-sesman.log | grep "reated session"                                       >> /var/log/XRDPWatch.log
+tail -f /var/log/xrdp.log | grep -E "onnected client"\|"onnection established"\|"ogin success" >> /var/log/XRDPWatch.log &
+tail -f /var/log/xrdp-sesman.log | grep "reated session"                                       >> /var/log/XRDPWatch.log &
 
 
