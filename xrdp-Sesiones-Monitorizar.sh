@@ -24,7 +24,7 @@
   echo ""
   echo "  Monitorizando las sesiones xrdp..."
   echo ""
-  tail -f /var/log/xrdp-sesman.log | grep "reated session" | while read line
+  tail -f /var/log/xrdp-sesman.log | grep --line-buffered "reated session" | while read line
     do
       echo "${line}" #>> touch /var/log/XRDPWatcher.log
       #if [ $? = 0 ] ; then
