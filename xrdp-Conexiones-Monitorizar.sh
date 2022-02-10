@@ -9,18 +9,9 @@
 #  Script de NiPeGun para monitorizar las conexiones xrdp
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/xrdp-Monitorear-Conexion.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/xrdp-Conexiones-Monitorizar.sh | bash
 #---------------------------------------------------------------------------------------------------------
 
-## Comprobar si el paquete disown está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s disown 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  disown no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install disown
-     echo ""
-   fi
 touch /var/log/XRDPWatch.log
 echo ""
 echo "  Loqueando conexiones xrdp..."
