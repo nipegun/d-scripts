@@ -26,7 +26,7 @@
   echo ""
   tail -f /var/log/xrdp-sesman.log | grep --line-buffered "reated session" | while read line
     do
-      echo "${line}" #>> touch /var/log/XRDPWatcher.log
+      echo "${line}" | tee -a /var/log/XRDPWatcher.log
       #if [ $? = 0 ] ; then
       #  echo "${line}" | mailx -s "error in messages file" your@emailaddress.com
       #fi
