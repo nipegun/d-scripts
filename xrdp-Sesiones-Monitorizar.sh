@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #---------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para monitorizar las conexiones xrdp
+#  Script de NiPeGun para monitorizar las sesiones xrdp
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/xrdp-Sesiones-Monitorizar.sh | bash
@@ -31,6 +31,4 @@
       #  echo "${line}" | mailx -s "error in messages file" your@emailaddress.com
       #fi
     done
-
-#tail -f /var/log/xrdp.log | grep -E "onnected client"\|"onnection established"\|"ogin success" >> /var/log/XRDPWatcher.log &
 
