@@ -26,7 +26,7 @@
   echo ""                                                                           >> /etc/systemd/system/xrdpMonitorCon.service
   echo "[Install]"                                                                  >> /etc/systemd/system/xrdpMonitorCon.service
   echo "WantedBy=default.target"                                                    >> /etc/systemd/system/xrdpMonitorCon.service
-  
+
 # Recargar cambios
   systemctl daemon-reload
 
