@@ -27,7 +27,7 @@
   tail -f /var/log/xrdp.log | grep --line-buffered -E "onnected client"\|"onnection established"\|"ogin success" | while read line
     do
       echo "${line}" | tee -a /var/log/XRDPWatcher.log
-      TextoAEnviar=$(echo "${line}" | sed 's-[INFO]--g')
+      TextoAEnviar=$(echo "${line}" | sed 's-connected client computer name-Host intentando conectarse por xrdp-g')
       /root/scripts/xrdp-NotificarCon.sh "$TextoAEnviar"
     done
 
