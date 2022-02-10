@@ -31,7 +31,7 @@
       # Borrar INFO
         LineaGrep2=$(echo "$LineaGrep1" | sed 's/INFO /-/g')
       # Reemplazar texto
-        LineaGrep3=$(echo "$LineaGrep2" | sed 's-connected client computer name-Host intentando conectarse por xrdp-g')
+        LineaGrep3=$(echo "$LineaGrep2" | sed 's-connected client computer name-New hostname trying to connect through xrdp-g')
       # Mostrar línea en consola y enviar también al log 
         echo "$LineaGrep3" | tee -a /var/log/XRDPWatcher.log
       # Preparar cadena para notificar por Telegram
