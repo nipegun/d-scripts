@@ -27,7 +27,7 @@
   tail -f /var/log/xrdp-sesman.log | grep --line-buffered "reated session" | while read line
     do
       echo "${line}" | tee -a /var/log/XRDPWatcher.log
-      TextoAEnviar=$(echo "${line}")
+      TextoAEnviar=$(echo "${line}" | sed 's-[INFO]--g')
       /root/scripts/xrdp-NotificarSes.sh "$TextoAEnviar"
     done
 
