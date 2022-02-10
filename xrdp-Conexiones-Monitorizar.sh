@@ -13,24 +13,24 @@
 #---------------------------------------------------------------------------------------------------------
 
 echo ""
-echo "  Loqueando conexiones xrdp..."
+echo "  Monitorizando conexiones xrdp..."
 echo ""
 
 # Crear el archivo de log, en caso de que no exista
-  if [ ! -f /var/log/XRDPWatch.log ]; then
+  if [ ! -f /var/log/XRDPWatcher.log ]; then
     echo ""
     echo "  El archivo de log no existe, creando uno nuevo..."
     echo ""
-    touch /var/log/XRDPWatch.log
+    touch /var/log/XRDPWatcher.log
   fi
 
 # Monitorizar las sesiones
   tail -f /var/log/xrdp-sesman.log | grep "reated session" | while read line;
     do
-      echo "${line}" >> touch /var/log/XRDPWatch.log
+      echo "${line}" >> touch /var/log/XRDPWatcher.log
       #if [ $? = 0 ] ; then
       #  echo "${line}" | mailx -s "error in messages file" your@emailaddress.com
       #fi
     done
 
-#tail -f /var/log/xrdp.log | grep -E "onnected client"\|"onnection established"\|"ogin success" >> /var/log/XRDPWatch.log &
+#tail -f /var/log/xrdp.log | grep -E "onnected client"\|"onnection established"\|"ogin success" >> /var/log/XRDPWatcher.log &
