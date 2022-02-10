@@ -27,6 +27,6 @@
   tail -f /var/log/xrdp-sesman.log | grep --line-buffered "reated session" | while read line
     do
       echo "${line}" | tee -a /var/log/XRDPWatcher.log
-      /root/scripts/xrdp-NotificarSes.sh '"${line}"'
+      /root/scripts/xrdp-NotificarSes.sh ""${line}""
     done
 
