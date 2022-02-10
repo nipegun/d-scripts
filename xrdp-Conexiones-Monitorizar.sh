@@ -26,9 +26,9 @@
   echo ""
   tail -f /var/log/xrdp.log | grep --line-buffered -E "onnected client"\|"onnection established"\|"ogin success" | while read line
     do
-      #echo "${line}" | tee -a /var/log/XRDPWatcher.log
-      LineaGrep1=$(echo "${line}")
-      echo "$LineaGrep1" | tee -a /var/log/XRDPWatcher.log
+      # Eliminar los brackets
+        LineaGrep1=$(echo "${line}" | sed 's-[][]--g') | tee -a /var/log/XRDPWatcher.log
+        echo "$LineaGrep1" | tee -a /var/log/XRDPWatcher.log
       #LineaGrep2=$(echo "$LineaGrep1" | sed 's-\[--g' | 's-[]]--g' | sed 's-INFO--g')
       LineaGrep2=$(echo "$LineaGrep1" | sed 's-[][]--g' | sed 's-INFO--g')
       
