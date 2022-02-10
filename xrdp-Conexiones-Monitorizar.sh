@@ -27,6 +27,7 @@
   tail -f /var/log/xrdp.log | grep --line-buffered -E "onnected client"\|"onnection established"\|"ogin success" | while read line
     do
       echo "${line}" | tee -a /var/log/XRDPWatcher.log
-      /root/scripts/xrdp-NotificarCon.sh "${line}"
+      TextoAEnviar=$(echo "${line}")
+      /root/scripts/xrdp-NotificarCon.sh "$TextoAEnviar"
     done
 
