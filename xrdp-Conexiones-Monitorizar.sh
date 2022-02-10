@@ -28,10 +28,15 @@
     do
       # Eliminar los brackets
         LineaGrep1=$(echo "${line}" | sed 's-[][]--g')
-      # Reemplazar texto
+      # Borrar INFO
         LineaGrep2=$(echo "$LineaGrep1" | sed 's/INFO /-/g')
-        echo "$LineaGrep2" | tee -a /var/log/XRDPWatcher.log
-      TextoAEnviar=$(echo "$LineaGrep2" | sed 's-connected client computer name-Host intentando conectarse por xrdp-g')
-      /root/scripts/xrdp-NotificarCon.sh "$TextoAEnviar"
+      # Reemplazar texto
+        LineaGrep3=$(echo "$LineaGrep2" | sed 's-connected client computer name-Host intentando conectarse por xrdp-g')
+      # Mostrar línea en consola y enviar también al log 
+        echo "$LineaGrep3" | tee -a /var/log/XRDPWatcher.log
+      # Preparar cadena para notificar por Telegram
+        TextoAEnviar=$(echo "$LineaGrep3")
+      # Notificar por Telegram
+        /root/scripts/xrdp-NotificarCon.sh "$TextoAEnviar"
     done
 
