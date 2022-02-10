@@ -26,10 +26,11 @@
   echo ""
   tail -f /var/log/xrdp.log | grep --line-buffered -E "onnected client"\|"onnection established"\|"ogin success" | while read line
     do
-      echo "${line}" | tee -a /var/log/XRDPWatcher.log
+      #echo "${line}" | tee -a /var/log/XRDPWatcher.log
       LineaGrep1=$(echo "${line}")
-      LineaGrep2=$(echo "$LineaGrep1" | sed 's-[--g' | 's-]--g' | sed 's-INFO--g')
       echo "$LineaGrep1" | tee -a /var/log/XRDPWatcher.log
+      LineaGrep2=$(echo "$LineaGrep1" | sed 's-[--g' | 's-]--g' | sed 's-INFO--g')
+      
       echo "$LineaGrep2" | tee -a /var/log/XRDPWatcher.log
       TextoAEnviar=$(echo "$LineaGrep2" | sed 's-connected client computer name-Host intentando conectarse por xrdp-g')
       /root/scripts/xrdp-NotificarCon.sh "$TextoAEnviar"
