@@ -154,7 +154,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dkpg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               ## Crear el lanzador para el usuario root
                  echo ""
@@ -211,7 +211,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dkpg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               ## Crear el lanzador para el usuario root
                  echo ""
@@ -268,7 +268,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dkpg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               ## Crear el lanzador para el usuario root
                  echo ""
@@ -325,7 +325,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dkpg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               ## Crear el lanzador para el usuario root
                  echo ""
@@ -382,7 +382,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dkpg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               ## Crear el lanzador para el usuario root
                  echo ""
@@ -439,7 +439,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dkpg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               ## Crear el lanzador para el usuario root
                  echo ""
@@ -496,7 +496,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dkpg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               ## Crear el lanzador para el usuario root
                  echo ""
@@ -553,7 +553,7 @@ elif [ $OS_VERS == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dkpg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               ## Crear el lanzador para el usuario root
                  echo ""
