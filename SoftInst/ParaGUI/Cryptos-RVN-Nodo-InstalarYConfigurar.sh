@@ -44,9 +44,9 @@ echo ""
 echo ""
 echo "  Intentando descargar el archivo comprimido de la última versión..."
 echo ""
-mkdir -p /root/SoftInst/Ravencoin/ 2> /dev/null
-rm -rf /root/SoftInst/Ravencoin/*
-cd /root/SoftInst/Ravencoin/
+mkdir -p /root/SoftInst/Cryptos/RVN/ 2> /dev/null
+rm -rf /root/SoftInst/Cryptos/RVN/*
+cd /root/SoftInst/Cryptos/RVN/
 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
      echo ""
@@ -76,11 +76,11 @@ echo ""
      apt-get -y install zip
      echo ""
    fi
-unzip /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
-mv /root/SoftInst/Ravencoin/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Ravencoin/
-rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.zip
-rm -rf /root/SoftInst/Ravencoin/linux/
-rm -rf /root/SoftInst/Ravencoin/__MACOSX/
+unzip /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.zip
+mv /root/SoftInst/Cryptos/RVN/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Ravencoin/
+rm -rf /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.zip
+rm -rf /root/SoftInst/Cryptos/RVN/linux/
+rm -rf /root/SoftInst/Cryptos/RVN/__MACOSX/
 ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
      echo ""
@@ -90,8 +90,8 @@ rm -rf /root/SoftInst/Ravencoin/__MACOSX/
      apt-get -y install tar
      echo ""
    fi
-tar -xf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
-rm -rf /root/SoftInst/Ravencoin/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+tar -xf /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+rm -rf /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
 
 echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."
