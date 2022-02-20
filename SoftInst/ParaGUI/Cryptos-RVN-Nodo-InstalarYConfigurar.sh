@@ -77,7 +77,7 @@ echo ""
      echo ""
    fi
 unzip /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.zip
-mv /root/SoftInst/Cryptos/RVN/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Ravencoin/
+mv /root/SoftInst/Cryptos/RVN/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Cryptos/XMR/
 rm -rf /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.zip
 rm -rf /root/SoftInst/Cryptos/RVN/linux/
 rm -rf /root/SoftInst/Cryptos/RVN/__MACOSX/
