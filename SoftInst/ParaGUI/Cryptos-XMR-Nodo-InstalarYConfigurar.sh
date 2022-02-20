@@ -98,34 +98,35 @@ apt-get -y install libxkbcommon-x11-0
   echo ""
   echo "  Agregando monerod a los ComandosPostArranque..."
   echo ""
-  echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/xmr-daemon-iniciar"
-  echo "su $UsuarioNoRoot -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/xmr-daemon-iniciar'" >> /root/scripts/ComandosPostArranque.sh
+  echo "su $UsuarioNoRoot -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/xmr-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
 # Icono de lanzamiento en el menú gráfico
   echo ""
   echo "  Agregando la aplicación gráfica al menú..."
   echo ""
   mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-  echo "[Desktop Entry]"                                                    > /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
-  echo "Name=Monero GUI"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
-  echo "Type=Application"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
-  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xmr-gui-iniciar.sh"    >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
-  echo "Terminal=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
-  echo "Hidden=false"                                                      >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
-  echo "Categories=Cryptos"                                                >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
-  #echo "Icon="                                                            >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+  echo "[Desktop Entry]"                                                    > /home/$UsuarioNoRoot/.local/share/applications/xmr.desktop
+  echo "Name=xmr GUI"                                                      >> /home/$UsuarioNoRoot/.local/share/applications/xmr.desktop
+  echo "Type=Application"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/xmr.desktop
+  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xmr-gui-iniciar.sh"    >> /home/$UsuarioNoRoot/.local/share/applications/xmr.desktop
+  echo "Terminal=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/xmr.desktop
+  echo "Hidden=false"                                                      >> /home/$UsuarioNoRoot/.local/share/applications/xmr.desktop
+  echo "Categories=Cryptos"                                                >> /home/$UsuarioNoRoot/.local/share/applications/xmr.desktop
+  #echo "Icon="                                                            >> /home/$UsuarioNoRoot/.local/share/applications/xmr.desktop
+  gio set /home/$UsuarioNoRoot/.local/share/applications/xmr.desktop "metadata::trusted" yes
 
 # Autoejecución gráfica de monero
   echo ""
   echo "  Creando el archivo de autoejecución de monero-wallet-gui para el escritorio..."
   echo ""
   mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
-  echo "[Desktop Entry]"                                                    > /home/$UsuarioNoRoot/.config/autostart/monero.desktop
-  echo "Name=Monero GUI"                                                   >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
-  echo "Type=Application"                                                  >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
-  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xmr-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
-  echo "Terminal=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
-  echo "Hidden=false"                                                      >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
+  echo "[Desktop Entry]"                                                 > /home/$UsuarioNoRoot/.config/autostart/xmr.desktop
+  echo "Name=xmr GUI"                                                   >> /home/$UsuarioNoRoot/.config/autostart/xmr.desktop
+  echo "Type=Application"                                               >> /home/$UsuarioNoRoot/.config/autostart/xmr.desktop
+  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xmr-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/xmr.desktop
+  echo "Terminal=false"                                                 >> /home/$UsuarioNoRoot/.config/autostart/xmr.desktop
+  echo "Hidden=false"                                                   >> /home/$UsuarioNoRoot/.config/autostart/xmr.desktop
+  gio set /home/$UsuarioNoRoot/.config/autostart/xmr.desktop "metadata::trusted" yes
 
 # Reparación de permisos
   chmod +x /home/$UsuarioNoRoot/Cryptos/XMR/bin/*
