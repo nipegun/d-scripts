@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar la cadena de bloques de Monero (XMR)
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Cryptos-XMR-Nodo-InstalarYConfigurar.sh | bash
-#----------------------------------------------------------------------------------------------------------------------------
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-XMR-Nodo-InstalarYConfigurar.sh | bash
+#--------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -36,10 +36,10 @@ echo ""
     apt-get -y install wget
     echo ""
   fi
-mkdir -p /root/SoftInst/Monerocoin/ 2> /dev/null
-rm -rf /root/SoftInst/Monerocoin/*
-wget https://downloads.getmonero.org/gui/linux64 -O /root/SoftInst/Monerocoin/monero.tar.bz2
-#wget https://downloads.getmonero.org/cli/linux64 -O /root/SoftInst/Monerocoin/monero.tar.bz2
+mkdir -p /root/SoftInst/Cryptos/XMR/ 2> /dev/null
+rm -rf /root/SoftInst/Cryptos/XMR/*
+wget https://downloads.getmonero.org/gui/linux64 -O /root/SoftInst/Cryptos/XMR/monero.tar.bz2
+#wget https://downloads.getmonero.org/cli/linux64 -O /root/SoftInst/Cryptos/XMR/monero.tar.bz2
 
 echo ""
 echo "  Descomprimiendo el archivo..."
@@ -53,15 +53,15 @@ echo ""
     apt-get -y install tar
     echo ""
   fi
-tar xjfv /root/SoftInst/Monerocoin/monero.tar.bz2 -C /root/SoftInst/Monerocoin/
-rm -rf /root/SoftInst/Monerocoin/monero.tar.bz2
+tar xjfv /root/SoftInst/Cryptos/XMR/monero.tar.bz2 -C /root/SoftInst/Cryptos/XMR/
+rm -rf /root/SoftInst/Cryptos/XMR/monero.tar.bz2
 
 echo ""
 echo "  Preparando la carpeta final..."
 echo ""
 mkdir -p /home/$UsuarioNoRoot/Cryptos/XMR/bin/ 2> /dev/null
-find /root/SoftInst/Monerocoin/ -type d -name monero* -exec cp -r {}/. /home/$UsuarioNoRoot/Cryptos/XMR/bin/ \;
-rm -rf /root/SoftInst/Monerocoin/*
+find /root/SoftInst/Cryptos/XMR/ -type d -name monero* -exec cp -r {}/. /home/$UsuarioNoRoot/Cryptos/XMR/bin/ \;
+rm -rf /root/SoftInst/Cryptos/XMR/*
 mkdir -p /home/$UsuarioNoRoot/.config/monero-project/ 2> /dev/null
 echo "[General]"                                       > /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
 echo "account_name=$UsuarioNoRoot"                    >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
