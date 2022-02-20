@@ -20,162 +20,118 @@ UsuarioNoRoot="nipegun"
 
 echo ""
 echo -e "${ColorVerde}------------------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}  Iniciando el script de instalación de la cadena de bloques de LTC...${FinColor}"
+echo -e "${ColorVerde}  Iniciando el script de instalación de la cadena de bloques de XMR...${FinColor}"
 echo -e "${ColorVerde}------------------------------------------------------------------------${FinColor}"
 echo ""
 
 echo ""
-echo "  Determinando la última versión de litecoin core..."
+echo "  Descargando el archivo comprimido de la última release..."
 echo ""
-## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  curl no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install curl
-     echo ""
-   fi
-UltVersLTC=$(curl -s https://litecoin.org | sed 's-//-\n-g' | sed 's-" -\n-g' | grep linux | grep 64 | grep -v ">" | head -n1 | cut -d "-" -f2 | cut -d "/" -f1)
-echo ""
-echo "  La última versión de litecoin es la $UltVersLTC"
-echo ""
+# Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "  wget no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install wget
+    echo ""
+  fi
+mkdir -p /root/SoftInst/Monerocoin/ 2> /dev/null
+rm -rf /root/SoftInst/Monerocoin/*
+wget https://downloads.getmonero.org/gui/linux64 -O /root/SoftInst/Monerocoin/monero.tar.bz2
+#wget https://downloads.getmonero.org/cli/linux64 -O /root/SoftInst/Monerocoin/monero.tar.bz2
 
-echo ""
-echo "  Intentando descargar el archivo comprimido de la última versión..."
-echo ""
-mkdir -p /root/SoftInst/Cryptos/LTC/ 2> /dev/null
-rm -rf /root/SoftInst/Cryptos/LTC/*
-cd /root/SoftInst/Cryptos/LTC/
-## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  wget no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install wget
-     echo ""
-   fi
-echo ""
-echo "  Pidiendo el archivo en formato zip..."
-echo ""
-wget https://download.litecoin.org/litecoin-$UltVersLTC/linux/litecoin-$UltVersLTC-x86_64-linux-gnu.zip
-echo ""
-echo "  Pidiendo el archivo en formato tar.gz..."
-echo ""
-wget https://download.litecoin.org/litecoin-$UltVersLTC/linux/litecoin-$UltVersLTC-x86_64-linux-gnu.tar.gz
 echo ""
 echo "  Descomprimiendo el archivo..."
 echo ""
-## Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  zip no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install zip
-     echo ""
-   fi
-unzip /root/SoftInst/Cryptos/LTC/litecoin-$UltVersLTC-x86_64-linux-gnu.zip
-mv /root/SoftInst/Cryptos/LTC/linux/litecoin-$UltVersLTC-x86_64-linux-gnu.tar.gz /root/SoftInst/Cryptos/LTC/
-rm -rf /root/SoftInst/Cryptos/LTC/litecoin-$UltVersLTC-x86_64-linux-gnu.zip
-rm -rf /root/SoftInst/Cryptos/LTC/linux/
-rm -rf /root/SoftInst/Cryptos/LTC/__MACOSX/
-## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  tar no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install tar
-     echo ""
-   fi
-tar -xf /root/SoftInst/Cryptos/LTC/litecoin-$UltVersLTC-x86_64-linux-gnu.tar.gz
-rm -rf /root/SoftInst/Cryptos/LTC/litecoin-$UltVersLTC-x86_64-linux-gnu.tar.gz
+# Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "  tar no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install tar
+    echo ""
+  fi
+tar xjfv /root/SoftInst/Monerocoin/monero.tar.bz2 -C /root/SoftInst/Monerocoin/
+rm -rf /root/SoftInst/Monerocoin/monero.tar.bz2
 
 echo ""
-echo "  Creando carpetas y archivos necesarios para ese usuario..."
+echo "  Preparando la carpeta final..."
 echo ""
-mkdir -p /home/$UsuarioNoRoot/Cryptos/LTC/ 2> /dev/null
-mkdir -p /home/$UsuarioNoRoot/.litecoin/
-touch /home/$UsuarioNoRoot/.litecoin/litecoin.conf
-echo "rpcuser=ltcrpc"           > /home/$UsuarioNoRoot/.litecoin/litecoin.conf
-echo "rpcpassword=ltcrpcpass"  >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
-echo "rpcallowip=127.0.0.1"    >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
-echo "#Default RPC port 8766"  >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
-echo "rpcport=20401"           >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
-echo "server=1"                >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
-echo "listen=1"                >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
-echo "prune=550"               >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
-echo "daemon=1"                >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
-echo "gen=0"                   >> /home/$UsuarioNoRoot/.litecoin/litecoin.conf
-rm -rf /home/$UsuarioNoRoot/Cryptos/LTC/
-mv /root/SoftInst/Cryptos/LTC/litecoin-$UltVersLTC/ /home/$UsuarioNoRoot/Cryptos/LTC/
-chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/LTC/ -R
-find /home/$UsuarioNoRoot/Cryptos/LTC/ -type d -exec chmod 775 {} \;
-find /home/$UsuarioNoRoot/Cryptos/LTC/ -type f -exec chmod 664 {} \;
-find /home/$UsuarioNoRoot/Cryptos/LTC/bin -type f -exec chmod +x {} \;
+mkdir -p /home/$UsuarioNoRoot/Cryptos/XMR/bin/ 2> /dev/null
+find /root/SoftInst/Monerocoin/ -type d -name monero* -exec cp -r {}/. /home/$UsuarioNoRoot/Cryptos/XMR/bin/ \;
+rm -rf /root/SoftInst/Monerocoin/*
+mkdir -p /home/$UsuarioNoRoot/.config/monero-project/ 2> /dev/null
+echo "[General]"                                       > /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "account_name=$UsuarioNoRoot"                    >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "askPasswordBeforeSending=true"                  >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "autosave=true"                                  >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "autosaveMinutes=10"                             >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "blackTheme=true"                                >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "blockchainDataDir=/home/$UsuarioNoRoot/.monero" >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "checkForUpdates=true"                           >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "customDecorations=true"                         >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "fiatPriceEnabled=true"                          >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "fiatPriceProvider=kraken"                       >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "language=Espa\xf1ol"                            >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "language_wallet=Espa\xf1ol"                     >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "locale=es_ES"                                   >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "lockOnUserInActivity=true"                      >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "lockOnUserInActivityInterval=1"                 >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "transferShowAdvanced=true"                      >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "useRemoteNode=false"                            >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
+echo "walletMode=2"                                   >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
 
-#echo ""
-#echo "  Arrancando litecoind..."
-#echo ""
-#su $UsuarioNoRoot -c /home/$UsuarioNoRoot/Cryptos/LTC/bin/litecoind
-#sleep 5
-#su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/LTC/bin/litecoin-cli getnewaddress" > /home/$UsuarioNoRoot/pooladdress-ltc.txt
-#chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/pooladdress-ltc.txt
-#echo ""
-#echo "  La dirección para recibir litecoin es:"
-#echo ""
-#cat /home/$UsuarioNoRoot/pooladdress-ltc.txt
-#DirCartLTC=$(cat /home/$UsuarioNoRoot/pooladdress-ltc.txt)
-#echo ""
+echo ""
+echo "  Instalando paquetes necesarios para ejecutar la cartera..."
+echo ""
+apt-get -y install libxcb-icccm4
+apt-get -y install libxcb-image0
+apt-get -y install libxcb-keysyms1
+apt-get -y install libxcb-randr0
+apt-get -y install libxcb-render-util0
+apt-get -y install libxcb-xkb1
+apt-get -y install libxkbcommon-x11-0
 
-## Autoejecución de Litecoin al iniciar el sistema
-   #echo ""
-   #echo "  Agregando litecoind a los ComandosPostArranque..."
-   #echo ""
-   #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/ltc-daemon-iniciar.sh
-   #echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/ltc-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+# Autoejecución de Monero al iniciar el sistema
+  echo ""
+  echo "  Agregando monerod a los ComandosPostArranque..."
+  echo ""
+  echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/xmr-daemon-iniciar"
+  echo "su $UsuarioNoRoot -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/xmr-daemon-iniciar'" >> /root/scripts/ComandosPostArranque.sh
 
-## Icono de lanzamiento en el menú gráfico
-   echo ""
-   echo "  Agregando la aplicación gráfica al menú..."
-   echo ""
-   mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
-   echo "Name=ltc GUI"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
-   echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
-   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/ltc-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
-   echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
-   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
-   echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
-   #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
-   gio set /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop "metadata::trusted" yes
+# Icono de lanzamiento en el menú gráfico
+  echo ""
+  echo "  Agregando la aplicación gráfica al menú..."
+  echo ""
+  mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
+  echo "[Desktop Entry]"                                                    > /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+  echo "Name=Monero GUI"                                                   >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+  echo "Type=Application"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xmr-gui-iniciar.sh"    >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+  echo "Terminal=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+  echo "Hidden=false"                                                      >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+  echo "Categories=Cryptos"                                                >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
+  #echo "Icon="                                                            >> /home/$UsuarioNoRoot/.local/share/applications/monero.desktop
 
-## Autoejecución gráfica de Litecoin
-   echo ""
-   echo "  Creando el archivo de autoejecución de litecoin-qt para escritorio..."
-   echo ""
-   mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
-   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/ltc.desktop
-   echo "Name=ltc GUI"                                                    >> /home/$UsuarioNoRoot/.config/autostart/ltc.desktop
-   echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.config/autostart/ltc.desktop
-   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/ltc-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.config/autostart/ltc.desktop
-   echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/ltc.desktop
-   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/ltc.desktop
-   gio set /home/$UsuarioNoRoot/.config/autostart/ltc.desktop "metadata::trusted" yes
+# Autoejecución gráfica de monero
+  echo ""
+  echo "  Creando el archivo de autoejecución de monero-wallet-gui para el escritorio..."
+  echo ""
+  mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
+  echo "[Desktop Entry]"                                                    > /home/$UsuarioNoRoot/.config/autostart/monero.desktop
+  echo "Name=Monero GUI"                                                   >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
+  echo "Type=Application"                                                  >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
+  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xmr-gui-iniciar.sh" >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
+  echo "Terminal=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
+  echo "Hidden=false"                                                      >> /home/$UsuarioNoRoot/.config/autostart/monero.desktop
 
-## Reparación de permisos
-   chmod +x /home/$UsuarioNoRoot/Cryptos/LTC/bin/*
-   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/LTC/ -R
+# Reparación de permisos
+  chmod +x /home/$UsuarioNoRoot/Cryptos/XMR/bin/*
+  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
-## Instalar los c-scripts
-   echo ""
-   echo "  Instalando los c-scripts..."
-   echo ""
-   su $UsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
-   find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+# Parar el daemon
+  chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/xmr-daemon-parar.sh
+  su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/xmr-daemon-parar.sh"
 
-## Parar el daemon
-   #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/ltc-daemon-parar.sh
-   #su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/ltc-daemon-parar.sh"
