@@ -110,7 +110,7 @@ echo "prune=550"               >> /home/$UsuarioNoRoot/.raven/raven.conf
 echo "daemon=1"                >> /home/$UsuarioNoRoot/.raven/raven.conf
 echo "gen=0"                   >> /home/$UsuarioNoRoot/.raven/raven.conf
 rm -rf /home/$UsuarioNoRoot/Cryptos/RVN/
-mv /root/SoftInst/Ravencoin/raven-$UltVersRaven/ /home/$UsuarioNoRoot/Cryptos/RVN/
+mv /root/SoftInst/Cryptos/XMR/raven-$UltVersRaven/ /home/$UsuarioNoRoot/Cryptos/RVN/
 chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/RVN/ -R
 find /home/$UsuarioNoRoot/Cryptos/RVN/ -type d -exec chmod 775 {} \;
 find /home/$UsuarioNoRoot/Cryptos/RVN/ -type f -exec chmod 664 {} \;
