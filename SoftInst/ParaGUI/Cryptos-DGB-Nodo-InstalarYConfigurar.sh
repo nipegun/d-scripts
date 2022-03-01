@@ -111,7 +111,7 @@ echo "prune=550"               >> /home/$UsuarioNoRoot/.raven/raven.conf
 echo "daemon=1"                >> /home/$UsuarioNoRoot/.raven/raven.conf
 echo "gen=0"                   >> /home/$UsuarioNoRoot/.raven/raven.conf
 rm -rf /home/$UsuarioNoRoot/Cryptos/DGB/
-mv /root/SoftInst/Cryptos/XMR/digibyte-$UltVersUltVersDGB/ /home/$UsuarioNoRoot/Cryptos/DGB/
+mv /root/SoftInst/Cryptos/XMR/digibyte-$UltVersDGB/ /home/$UsuarioNoRoot/Cryptos/DGB/
 chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/DGB/ -R
 find /home/$UsuarioNoRoot/Cryptos/DGB/ -type d -exec chmod 775 {} \;
 find /home/$UsuarioNoRoot/Cryptos/DGB/ -type f -exec chmod 664 {} \;
