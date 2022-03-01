@@ -127,7 +127,8 @@ echo ""
 echo ""
 echo "  Arrancando digibyted..."
 echo ""
-su $UsuarioNoRoot -c /home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyted
+chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.digibyte/ -R
+su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyted"
 sleep 5
 su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyte-cli getnewaddress" > /home/$UsuarioNoRoot/dgb-address.txt
 chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/dgb-address.txt
