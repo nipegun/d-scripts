@@ -77,7 +77,7 @@ echo ""
      echo ""
    fi
 unzip /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.zip
-mv /root/SoftInst/Cryptos/RVN/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Cryptos/XMR/
+mv /root/SoftInst/Cryptos/RVN/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Cryptos/RVN/
 rm -rf /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.zip
 rm -rf /root/SoftInst/Cryptos/RVN/linux/
 rm -rf /root/SoftInst/Cryptos/RVN/__MACOSX/
@@ -110,7 +110,7 @@ echo "prune=550"               >> /home/$UsuarioNoRoot/.raven/raven.conf
 echo "daemon=1"                >> /home/$UsuarioNoRoot/.raven/raven.conf
 echo "gen=0"                   >> /home/$UsuarioNoRoot/.raven/raven.conf
 rm -rf /home/$UsuarioNoRoot/Cryptos/RVN/
-mv /root/SoftInst/Cryptos/XMR/raven-$UltVersRaven/ /home/$UsuarioNoRoot/Cryptos/RVN/
+mv /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven/ /home/$UsuarioNoRoot/Cryptos/RVN/
 chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/RVN/ -R
 find /home/$UsuarioNoRoot/Cryptos/RVN/ -type d -exec chmod 775 {} \;
 find /home/$UsuarioNoRoot/Cryptos/RVN/ -type f -exec chmod 664 {} \;
