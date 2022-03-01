@@ -97,87 +97,94 @@ rm -rf /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB-x86_64-linux-gnu.tar.gz
 echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."
 echo ""
-mkdir -p /home/$UsuarioNoRoot/Cryptos/DGB/ 2> /dev/null
-mkdir -p /home/$UsuarioNoRoot/.digibyte/
-touch /home/$UsuarioNoRoot/.digibyte/digibyte.conf
-echo "rpcuser=dgbrpc"           > /home/$UsuarioNoRoot/.digibyte/digibyte.conf
-echo "rpcpassword=dgbrpcpass"  >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
-echo "rpcallowip=127.0.0.1"    >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
-echo "#Default RPC port 8766"  >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
-echo "rpcport=20401"           >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
-echo "server=1"                >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
-echo "listen=1"                >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
-echo "prune=550"               >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
-echo "daemon=1"                >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
-echo "gen=0"                   >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
-rm -rf /home/$UsuarioNoRoot/Cryptos/DGB/
-mv /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB/ /home/$UsuarioNoRoot/Cryptos/DGB/
-chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/DGB/ -R
-find /home/$UsuarioNoRoot/Cryptos/DGB/ -type d -exec chmod 775 {} \;
-find /home/$UsuarioNoRoot/Cryptos/DGB/ -type f -exec chmod 664 {} \;
-find /home/$UsuarioNoRoot/Cryptos/DGB/bin -type f -exec chmod +x {} \;
+# Crear la carpeta en la home del usuario no root
+  mkdir -p /home/$UsuarioNoRoot/Cryptos/DGB/ 2> /dev/null
+  rm -rf /home/$UsuarioNoRoot/Cryptos/DGB/
+  mv /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB/ /home/$UsuarioNoRoot/Cryptos/DGB/
+# Crear archivo de configuración cli
+  mkdir -p /home/$UsuarioNoRoot/.digibyte/ 2> /dev/null
+  #touch /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+  #echo "rpcuser=dgbrpc"           > /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+  #echo "rpcpassword=dgbrpcpass"  >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+  #echo "rpcallowip=127.0.0.1"    >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+  #echo "#Default RPC port xxxx"  >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+  #echo "rpcport=20410"           >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+  #echo "server=1"                >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+  #echo "listen=1"                >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+  #echo "prune=550"               >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+  #echo "daemon=1"                >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+  #echo "gen=0"                   >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+# Crear archivo de configuración gráfica
+  mkdir -p /home/$UsuarioNoRoot/.config/DigiByte/ 2> /dev/null
+  touch /home/$UsuarioNoRoot/.config/DigiByte/DigiByte-Qt.conf
+  echo "strDataDir=/home/nipegun/.digibyte" > /home/$UsuarioNoRoot/.config/DigiByte/DigiByte-Qt.conf
+# Reparar permisos
+  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/DGB/ -R
+  find /home/$UsuarioNoRoot/Cryptos/DGB/ -type d -exec chmod 775 {} \;
+  find /home/$UsuarioNoRoot/Cryptos/DGB/ -type f -exec chmod 664 {} \;
+  find /home/$UsuarioNoRoot/Cryptos/DGB/bin -type f -exec chmod +x {} \;
 
-#echo ""
-#echo "  Arrancando DigiByted..."
-#echo ""
-#su $UsuarioNoRoot -c /home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyted
-#sleep 5
-#su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyte-cli getnewaddress" > /home/$UsuarioNoRoot/pooladdress-dgb.txt
-#chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/pooladdress-dgb.txt
-#echo ""
-#echo "  La dirección para recibir DigiBytes es:"
-#echo ""
-#cat /home/$UsuarioNoRoot/pooladdress-dgb.txt
-#DirCartDGB=$(cat /home/$UsuarioNoRoot/pooladdress-dgb.txt)
-#echo ""
+echo ""
+echo "  Arrancando digibyted..."
+echo ""
+su $UsuarioNoRoot -c /home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyted
+sleep 5
+su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyte-cli getnewaddress" > /home/$UsuarioNoRoot/dgb-address.txt
+chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/dgb-address.txt
+echo ""
+echo "  La dirección para recibir DigiBytes es:"
+echo ""
+cat /home/$UsuarioNoRoot/dgb-address.txt
+DirCartDGB=$(cat /home/$UsuarioNoRoot/dgb-address.txt)
+echo ""
 
-## Autoejecución de DigiByte al iniciar el sistema
-   #echo ""
-   #echo "  Agregando digibyted a los ComandosPostArranque..."
-   #echo ""
-   #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-iniciar.sh
-   #echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/dgb-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+# Autoejecución de DigiByte al iniciar el sistema
+  #echo ""
+  #echo "  Agregando digibyted a los ComandosPostArranque..."
+  #echo ""
+  #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-iniciar.sh
+  #echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/dgb-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
-## Icono de lanzamiento en el menú gráfico
-   echo ""
-   echo "  Agregando la aplicación gráfica al menú..."
-   echo ""
-   mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-   echo "Name=dgb GUI"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-   echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/dgb-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-   echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-   echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-   #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-   gio set /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop "metadata::trusted" yes
+# Icono de lanzamiento en el menú gráfico
+  echo ""
+  echo "  Agregando la aplicación gráfica al menú..."
+  echo ""
+  mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
+  echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
+  echo "Name=dgb GUI"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
+  echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
+  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/dgb-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
+  echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
+  echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
+  echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
+  #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
+  gio set /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop "metadata::trusted" yes
 
-## Autoejecución gráfica de DigiByte
-   echo ""
-   echo "  Creando el archivo de autoejecución de digibyte-qt para escritorio..."
-   echo ""
-   mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
-   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
-   echo "Name=dgb GUI"                                                    >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
-   echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
-   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/dgb-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
-   echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
-   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
-   gio set /home/$UsuarioNoRoot/.config/autostart/dgb.desktop "metadata::trusted" yes
+# Autoejecución gráfica de DigiByte
+  echo ""
+  echo "  Creando el archivo de autoejecución de digibyte-qt para escritorio..."
+  echo ""
+  mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
+  echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
+  echo "Name=dgb GUI"                                                    >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
+  echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
+  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/dgb-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
+  echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
+  echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
+  gio set /home/$UsuarioNoRoot/.config/autostart/dgb.desktop "metadata::trusted" yes
 
-## Reparación de permisos
+# Reparación de permisos
    chmod +x /home/$UsuarioNoRoot/Cryptos/DGB/bin/*
    chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/DGB/ -R
 
-## Instalar los c-scripts
-   echo ""
-   echo "  Instalando los c-scripts..."
-   echo ""
-   su $UsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
-   find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+# Instalar los c-scripts
+  echo ""
+  echo "  Instalando los c-scripts..."
+  echo ""
+  su $UsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
+  find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 
-## Parar el daemon
-   #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh
-   #su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh"
+# Parar el daemon
+  #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh
+  #su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh"
 
