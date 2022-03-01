@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar la cadena de bloques de Chia (XCH)
+#  Script de NiPeGun para instalar y configurar la cadena de bloques de DigiByte (DGB)
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-DGB-Nodo-InstalarYConfigurar.sh | bash
@@ -25,7 +25,7 @@ echo -e "${ColorVerde}----------------------------------------------------------
 echo ""
 
 echo ""
-echo "  Determinando la última versión de raven core..."
+echo "  Determinando la última versión de digibyte core..."
 echo ""
 ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
@@ -36,9 +36,9 @@ echo ""
      apt-get -y install curl
      echo ""
    fi
-UltVersRaven=$(curl --silent https://github.com/RavenProject/DigiByte/releases/latest | cut -d '/' -f 8 | cut -d '"' -f 1 | cut -c2-)
+UltVersDGB=$(curl -s https://github.com/DigiByte-Core/digibyte/releases/ | grep href | grep linux | grep -v aarch64 | head -n1 | cut -d '"' -f2 | sed 's-/v-\n-g' | grep -v down | cut -d'/' -f1)
 echo ""
-echo "  La última versión de raven es la $UltVersRaven"
+echo "  La última versión de DigiByte core es la $UltVersDGB"
 echo ""
 
 echo ""
@@ -47,6 +47,7 @@ echo ""
 mkdir -p /root/SoftInst/Cryptos/DGB/ 2> /dev/null
 rm -rf /root/SoftInst/Cryptos/DGB/*
 cd /root/SoftInst/Cryptos/DGB/
+vLinkArchivoDentroGithub=$(curl -s https://github.com/DigiByte-Core/digibyte/releases/ | grep href | grep linux | grep -v aarch64 | head -n1 | cut -d '"' -f2 | sed 's-.tar.gz--g' | sed 's-.zip--g')
 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
      echo ""
@@ -59,11 +60,11 @@ cd /root/SoftInst/Cryptos/DGB/
 echo ""
 echo "  Pidiendo el archivo en formato zip..."
 echo ""
-wget https://github.com/RavenProject/DigiByte/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.zip
+wget https://github.com/$vLinkArchivoDentroGithub.zip
 echo ""
 echo "  Pidiendo el archivo en formato tar.gz..."
 echo ""
-wget https://github.com/RavenProject/DigiByte/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+wget https://github.com/$vLinkArchivoDentroGithub.tar.gz
 echo ""
 echo "  Descomprimiendo el archivo..."
 echo ""
@@ -76,9 +77,9 @@ echo ""
      apt-get -y install zip
      echo ""
    fi
-unzip /root/SoftInst/Cryptos/DGB/raven-$UltVersRaven-x86_64-linux-gnu.zip
-mv /root/SoftInst/Cryptos/DGB/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Cryptos/XMR/
-rm -rf /root/SoftInst/Cryptos/DGB/raven-$UltVersRaven-x86_64-linux-gnu.zip
+unzip /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB-x86_64-linux-gnu.zip
+mv /root/SoftInst/Cryptos/DGB/linux/digibyte-$UltVersDGB-x86_64-linux-gnu.tar.gz /root/SoftInst/Cryptos/DGB/
+rm -rf /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB-x86_64-linux-gnu.zip
 rm -rf /root/SoftInst/Cryptos/DGB/linux/
 rm -rf /root/SoftInst/Cryptos/DGB/__MACOSX/
 ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
@@ -90,8 +91,8 @@ rm -rf /root/SoftInst/Cryptos/DGB/__MACOSX/
      apt-get -y install tar
      echo ""
    fi
-tar -xf /root/SoftInst/Cryptos/DGB/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
-rm -rf /root/SoftInst/Cryptos/DGB/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+tar -xf /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB-x86_64-linux-gnu.tar.gz
+rm -rf /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB-x86_64-linux-gnu.tar.gz
 
 echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."
