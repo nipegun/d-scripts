@@ -150,6 +150,7 @@ find /home/$UsuarioNoRoot/Cryptos/LTC/bin -type f -exec chmod +x {} \;
    echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
    echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
    #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
+   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
    gio set /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop "metadata::trusted" yes
 
 ## Autoejecución gráfica de Litecoin
@@ -163,6 +164,7 @@ find /home/$UsuarioNoRoot/Cryptos/LTC/bin -type f -exec chmod +x {} \;
    echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/ltc-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.config/autostart/ltc.desktop
    echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/ltc.desktop
    echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/ltc.desktop
+   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.config/autostart/ltc.desktop
    gio set /home/$UsuarioNoRoot/.config/autostart/ltc.desktop "metadata::trusted" yes
 
 ## Reparación de permisos
