@@ -159,6 +159,7 @@ echo ""
   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
   echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
   #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
+  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
   gio set /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop "metadata::trusted" yes
 
 # Autoejecución gráfica de DigiByte
@@ -172,6 +173,7 @@ echo ""
   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/dgb-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
   echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
+  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
   gio set /home/$UsuarioNoRoot/.config/autostart/dgb.desktop "metadata::trusted" yes
 
 # Reparación de permisos
