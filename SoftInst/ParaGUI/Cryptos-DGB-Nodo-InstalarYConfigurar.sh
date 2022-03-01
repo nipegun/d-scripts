@@ -98,18 +98,18 @@ echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."
 echo ""
 mkdir -p /home/$UsuarioNoRoot/Cryptos/DGB/ 2> /dev/null
-mkdir -p /home/$UsuarioNoRoot/.raven/
-touch /home/$UsuarioNoRoot/.raven/raven.conf
-echo "rpcuser=dgbrpc"           > /home/$UsuarioNoRoot/.raven/raven.conf
-echo "rpcpassword=dgbrpcpass"  >> /home/$UsuarioNoRoot/.raven/raven.conf
-echo "rpcallowip=127.0.0.1"    >> /home/$UsuarioNoRoot/.raven/raven.conf
-echo "#Default RPC port 8766"  >> /home/$UsuarioNoRoot/.raven/raven.conf
-echo "rpcport=20401"           >> /home/$UsuarioNoRoot/.raven/raven.conf
-echo "server=1"                >> /home/$UsuarioNoRoot/.raven/raven.conf
-echo "listen=1"                >> /home/$UsuarioNoRoot/.raven/raven.conf
-echo "prune=550"               >> /home/$UsuarioNoRoot/.raven/raven.conf
-echo "daemon=1"                >> /home/$UsuarioNoRoot/.raven/raven.conf
-echo "gen=0"                   >> /home/$UsuarioNoRoot/.raven/raven.conf
+mkdir -p /home/$UsuarioNoRoot/.digibyte/
+touch /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+echo "rpcuser=dgbrpc"           > /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+echo "rpcpassword=dgbrpcpass"  >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+echo "rpcallowip=127.0.0.1"    >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+echo "#Default RPC port 8766"  >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+echo "rpcport=20401"           >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+echo "server=1"                >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+echo "listen=1"                >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+echo "prune=550"               >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+echo "daemon=1"                >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
+echo "gen=0"                   >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
 rm -rf /home/$UsuarioNoRoot/Cryptos/DGB/
 mv /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB/ /home/$UsuarioNoRoot/Cryptos/DGB/
 chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/DGB/ -R
@@ -120,9 +120,9 @@ find /home/$UsuarioNoRoot/Cryptos/DGB/bin -type f -exec chmod +x {} \;
 #echo ""
 #echo "  Arrancando DigiByted..."
 #echo ""
-#su $UsuarioNoRoot -c /home/$UsuarioNoRoot/Cryptos/DGB/bin/ravend
+#su $UsuarioNoRoot -c /home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyted
 #sleep 5
-#su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/DGB/bin/raven-cli getnewaddress" > /home/$UsuarioNoRoot/pooladdress-dgb.txt
+#su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyte-cli getnewaddress" > /home/$UsuarioNoRoot/pooladdress-dgb.txt
 #chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/pooladdress-dgb.txt
 #echo ""
 #echo "  La dirección para recibir DigiBytes es:"
@@ -133,7 +133,7 @@ find /home/$UsuarioNoRoot/Cryptos/DGB/bin -type f -exec chmod +x {} \;
 
 ## Autoejecución de DigiByte al iniciar el sistema
    #echo ""
-   #echo "  Agregando ravend a los ComandosPostArranque..."
+   #echo "  Agregando digibyted a los ComandosPostArranque..."
    #echo ""
    #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-iniciar.sh
    #echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/dgb-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
@@ -155,7 +155,7 @@ find /home/$UsuarioNoRoot/Cryptos/DGB/bin -type f -exec chmod +x {} \;
 
 ## Autoejecución gráfica de DigiByte
    echo ""
-   echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."
+   echo "  Creando el archivo de autoejecución de digibyte-qt para escritorio..."
    echo ""
    mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
    echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
