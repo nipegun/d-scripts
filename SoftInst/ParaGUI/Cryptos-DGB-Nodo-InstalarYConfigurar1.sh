@@ -189,3 +189,8 @@ echo ""
   chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh
   su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh"
 
+echo ""
+echo "Nodo instalado."
+echo "El puerto a abrir es el 12024"
+echo ""
+
