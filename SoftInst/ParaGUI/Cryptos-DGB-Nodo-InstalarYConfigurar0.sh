@@ -128,7 +128,7 @@ echo ""
 echo "  Arrancando digibyted..."
 echo ""
 chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.digibyte/ -R
-su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyted"
+su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyted -daemon"
 sleep 5
 su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyte-cli getnewaddress" > /home/$UsuarioNoRoot/dgb-address.txt
 chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/dgb-address.txt
@@ -186,6 +186,6 @@ echo ""
   find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Parar el daemon
-  #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh
-  #su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh"
+  chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh
+  su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh"
 
