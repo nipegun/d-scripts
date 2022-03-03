@@ -116,9 +116,20 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install snapd
   snap install core
   snap install mysql-workbench-community
-  
-  #snap run mysql-workbench-community
-  
+
+  # Crear icono en el menú
+    echo ""
+    echo "  Creando icono en el menú"
+    echo ""
+    mkdir -p ~/.local/share/applications/ 2> /dev/null
+    echo "[Desktop Entry]"                                                   > ~/.local/share/applications/MySQLWorkbench.desktop
+    echo "Type=Application"                                                 >> ~/.local/share/applications/MySQLWorkbench.desktop
+    echo "Name=MySQL Workbench"                                             >> ~/.local/share/applications/MySQLWorkbench.desktop
+    echo "Exec=snap run mysql-workbench-community"                          >> ~/.local/share/applications/MySQLWorkbench.desktop
+    echo "Icon=/snap/mysql-workbench-community/current/mysql-workbench.png" >> ~/.local/share/applications/MySQLWorkbench.desktop
+    echo "Terminal=false"                                                   >> ~/.local/share/applications/MySQLWorkbench.desktop
+    gio set ~/.local/share/applications/MySQLWorkbench.desktop "metadata::trusted" yes
+
   #ln -s /etc/profile.d/apps-bin-path.sh /etc/X11/Xsession.d/99snap
   #echo "ENV_PATH PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin" >> /etc/login.defs
 
