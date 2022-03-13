@@ -116,6 +116,16 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Instalando odoo..."
   echo ""
   apt-get -y install odoo
- 
+
+  echo ""
+  echo "  Activando el servicio"
+  echo ""
+  systemctl enable --now odoo
+
+  echo ""
+  echo "  Información de puerto:"
+  echo ""
+  ss -tunelp | grep 8069
+
 fi
 
