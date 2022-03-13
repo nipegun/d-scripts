@@ -131,9 +131,7 @@ elif [ $OS_VERS == "11" ]; then
         apt-get -y install curl
         echo ""
       fi
-    vSubURL=$(curl -s https://github.com/wkhtmltopdf/packaging/releases | grep href | grep .deb | grep amd64 | grep stretch | head -n1 | cut -d '"' -f2)
-    mkdir -p /root/SoftInst/wkhtmltopdf/
-    cd /root/SoftInst/wkhtmltopdf/
+    vSubURL=$(curl -s https://github.com/wkhtmltopdf/packaging/releases | grep href | grep .deb | grep amd64 | grep buster | head -n1 | cut -d '"' -f2)
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
         echo ""
@@ -143,6 +141,10 @@ elif [ $OS_VERS == "11" ]; then
         apt-get -y install wget
         echo ""
       fi
+    rm -rf /root/SoftInst/wkhtmltopdf/
+    mkdir -p /root/SoftInst/wkhtmltopdf/ 2> /dev/null
+    cd /root/SoftInst/wkhtmltopdf/
     wget https://github.com/$vSubURL -O wkhtmltopdf.deb
+    dpkg -i /root/SoftInst/wkhtmltopdf/wkhtmltopdf.deb
 fi
 
