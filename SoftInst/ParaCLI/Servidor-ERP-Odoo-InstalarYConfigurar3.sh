@@ -119,7 +119,7 @@ elif [ $OS_VERS == "11" ]; then
     #su - postgres -c "createdb $BaseDeDatosPSQL"
 
   echo ""
-  echo "Instalando wkhtmltopdf..."
+  echo "Iniciando la instalación de wkhtmltopdf..."
   echo ""
   # Determinar la URL del archivo a bajar
     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
@@ -144,7 +144,13 @@ elif [ $OS_VERS == "11" ]; then
     rm -rf /root/SoftInst/wkhtmltopdf/
     mkdir -p /root/SoftInst/wkhtmltopdf/ 2> /dev/null
     cd /root/SoftInst/wkhtmltopdf/
+    echo ""
+    echo "  Descargando el .deb de wkhtmltopdf..."
+    echo ""
     wget https://github.com/$vSubURL -O wkhtmltopdf.deb
+    echo ""
+    echo "  Instalando el .deb de wkhtmltopdf..."
+    echo ""
     dpkg -i /root/SoftInst/wkhtmltopdf/wkhtmltopdf.deb
 fi
 
