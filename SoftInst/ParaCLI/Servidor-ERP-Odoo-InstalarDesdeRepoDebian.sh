@@ -92,13 +92,13 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de nginx para Debian 11 (Bullseye)..."
-  echo "----------------------------------------------------------------------------"
+  echo "---------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Odoo para Debian 11 (Bullseye)..."
+  echo "---------------------------------------------------------------------------"
   echo ""
 
   echo ""
-  echo "  Iniciando la instalación de la base de datos PostgreSQL para Odoo..."
+  echo "  Instalando la base de datos PostgreSQL..."
   echo ""
   apt-get -y update
   apt-get -y install postgresql
@@ -108,12 +108,12 @@ elif [ $OS_VERS == "11" ]; then
     su - postgres -c "createdb odoo"
 
   echo ""
-  echo "  Iniciando la instalación de wkhtmltopdf..."
+  echo "  Instalando wkhtmltopdf..."
   echo ""
   apt-get -y install wkhtmltopdf
 
   echo ""
-  echo "  Iniciando la instalación de Odoo..."
+  echo "  Instalando odoo..."
   echo ""
   apt-get -y install odoo
  
