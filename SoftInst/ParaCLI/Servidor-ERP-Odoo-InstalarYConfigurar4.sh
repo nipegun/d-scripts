@@ -101,25 +101,35 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   echo ""
-  echo "Actualizando la lista de paquetes..."
+  echo "  Iniciando la instalación de la base de datos PostgreSQL para Odoo..."
   echo ""
-  apt-get -y update
-
-  echo ""
-  echo "Instalando la base de datos PostgreSQL..."
-  echo ""
-  #apt-get -y install postgresql
-
-  echo ""
-  echo "Creando el usuario y la base de datos para Odoo..."
-  echo ""
+  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo "  wget no está instalado. Iniciando su instalación..."
+      echo ""
+      apt-get -y update > /dev/null
+      apt-get -y install wget
+      echo ""
+    fi
+  # Descargar la llave para firmar el repositorio
+    mkdir -p /root/aptkeys/ 2> /dev/null
+    wget -q -O- https://www.postgresql.org/media/keys/ACCC4CF8.asc -O /root/aptkeys/postgresql.key
+    gpg --dearmor /root/aptkeys/postgresql.key
+    cp /root/aptkeys/postgresql.key.gpg /usr/share/keyrings/postgresql.gpg
+  # Crear el archivo de repositorio
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/postgresql.list
+  # Actualizar el cache de paquetes
+    apt-get -y update
+  # Instalar la última versión de PostreSQL
+    apt-get -y install postgresql
   # Crear usuario
     #su - postgres -c "createuser $UsuarioPSQL"
   # Crear base de datos
     #su - postgres -c "createdb $BaseDeDatosPSQL"
 
   echo ""
-  echo "Iniciando la instalación de wkhtmltopdf..."
+  echo "  Iniciando la instalación de wkhtmltopdf..."
   echo ""
   # Determinar la URL del archivo a bajar
     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
@@ -132,15 +142,6 @@ elif [ $OS_VERS == "11" ]; then
         echo ""
       fi
     vSubURL=$(curl -s https://github.com/wkhtmltopdf/packaging/releases | grep href | grep .deb | grep amd64 | grep buster | head -n1 | cut -d '"' -f2)
-    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo "  wget no está instalado. Iniciando su instalación..."
-        echo ""
-        apt-get -y update > /dev/null
-        apt-get -y install wget
-        echo ""
-      fi
     rm -rf /root/SoftInst/wkhtmltopdf/
     mkdir -p /root/SoftInst/wkhtmltopdf/ 2> /dev/null
     cd /root/SoftInst/wkhtmltopdf/
@@ -152,5 +153,31 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Instalando el .deb de wkhtmltopdf..."
     echo ""
     dpkg -i /root/SoftInst/wkhtmltopdf/wkhtmltopdf.deb
+
+  echo ""
+  echo "  Iniciando la instalación de Odoo..."
+  echo ""
+  # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo "  gnupg2 no está instalado. Iniciando su instalación..."
+      echo ""
+      apt-get -y update > /dev/null
+      apt-get -y install gnupg2
+      echo ""
+    fi
+  # Agregar llave para firmar repositorio
+    mkdir -p /root/aptkeys/ 2> /dev/null
+    wget -q -O- https://nightly.odoo.com/odoo.key -O /root/aptkeys/odoo.key
+    gpg --dearmor /root/aptkeys/odoo.key
+    cp /root/aptkeys/odoo.key.gpg /usr/share/keyrings/odoo.gpg
+  # Agregar repositorio
+    vUltVersOdoo=$(curl -s http://nightly.odoo.com/ | grep blob | grep -v master | head -n1 | cut -d '"' -f2 | sed 's-blob/-\n-g' | grep -v http | cut -d '/' -f1)
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/odoo.gpg] http://nightly.odoo.com/$vUltVersOdoo/nightly/deb/ ./" > /etc/apt/sources.list.d/odoo.list
+  # Actualizar el cache de paquetes
+    apt-get -y update
+  # Instalar la última versión de Odoo
+    apt-get -y install odoo
+
 fi
 
