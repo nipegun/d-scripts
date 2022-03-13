@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar la "cartera liviana" de Chia (XCH)
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Cryptos-XCH-Wallet-InstalarYConfigurar.sh | bash
-#------------------------------------------------------------------------------------------------------------------------------
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-XCH-Wallet-InstalarYConfigurar.sh | bash
+#----------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -28,7 +28,7 @@ echo ""
    echo ""
    echo "  Obteniendo URL de descarga del archivo .deb..."
    echo ""
-   URLDelArchivoDeb=$(curl -s https://www.chia.net/download/ | grep .deb | grep -v ARM | grep cats | cut -d'"' -f2)
+   URLDelArchivoDeb=$(https://www.chia.net/download/ | grep .deb | grep -v ARM | cut -d'"' -f2)
    echo ""
    echo "  La URL de descarga es: $URLDelArchivoDeb."
    echo ""
