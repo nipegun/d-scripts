@@ -96,11 +96,20 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Iniciando el script de instalación de Odoo para Debian 11 (Bullseye)..."
   echo "---------------------------------------------------------------------------"
   echo ""
+  apt-get -y update 2> /dev/null
+  vVersPostgre=$(apt-cache depends postgresql | grep pen | cut -d '-' -f2)
+  vVersWkHTMLtoPDF=$(apt-cache policy wkhtmltopdf | grep and | cut -d':' -f2 | sed 's- --g')
+  vVersOdoo=$(apt-cache search odoo | grep -v Voo | grep -v python | grep odoo | cut -d '-' -f2)
+  echo "Este script instalará el siguiente software:"
+  echo "  PostgreSQL v$vVersPostgre"
+  echo "  wkhtmltopdf v$vVersWkHTMLtoPDF"
+  echo "  Odoo v$vVersOdoo"
+  echo ""
+  sleep 5
 
   echo ""
   echo "  Instalando la base de datos PostgreSQL..."
   echo ""
-  apt-get -y update
   apt-get -y install postgresql
   # Crear usuario
     #su - postgres -c "createuser odoo"
@@ -116,16 +125,23 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Instalando odoo..."
   echo ""
   apt-get -y install odoo
+ # sed -i -e 's|db_host = False|db_host = localhost|g' /etc/odoo/odoo.conf
+ # sed -i -e 's|db_name = False|db_name = odoo|g' /etc/odoo/odoo.conf
+ # sed -i -e 's|db_password = False|db_password = False|g' /etc/odoo/odoo.conf
+ # sed -i -e 's|db_port = False|db_port = False|g' /etc/odoo/odoo.conf
+ # sed -i -e 's|db_user = odoo|db_user = odoo|g' /etc/odoo/odoo.conf
 
   echo ""
   echo "  Activando el servicio"
   echo ""
-  systemctl enable --now odoo
+  #systemctl enable --now odoo
 
   echo ""
   echo "  Información de puerto:"
   echo ""
-  ss -tunelp | grep 8069
+  #ss -tunelp | grep 8069
+
+
 
 fi
 
