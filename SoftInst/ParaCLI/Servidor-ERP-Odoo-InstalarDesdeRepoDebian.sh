@@ -111,10 +111,6 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Instalando la base de datos PostgreSQL..."
   echo ""
   apt-get -y install postgresql
-  # Crear usuario
-    #su - postgres -c "createuser odoo"
-  # Crear base de datos
-    #su - postgres -c "createdb odoo"
 
   echo ""
   echo "  Instalando wkhtmltopdf..."
@@ -125,23 +121,16 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Instalando odoo..."
   echo ""
   apt-get -y install odoo
- # sed -i -e 's|db_host = False|db_host = localhost|g' /etc/odoo/odoo.conf
- # sed -i -e 's|db_name = False|db_name = odoo|g' /etc/odoo/odoo.conf
- # sed -i -e 's|db_password = False|db_password = False|g' /etc/odoo/odoo.conf
- # sed -i -e 's|db_port = False|db_port = False|g' /etc/odoo/odoo.conf
- # sed -i -e 's|db_user = odoo|db_user = odoo|g' /etc/odoo/odoo.conf
 
   echo ""
   echo "  Activando el servicio"
   echo ""
-  #systemctl enable --now odoo
+  systemctl enable --now odoo
 
   echo ""
   echo "  Información de puerto:"
   echo ""
-  #ss -tunelp | grep 8069
-
-
+  ss -tunelp | grep 8069
 
 fi
 
