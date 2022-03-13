@@ -16,31 +16,34 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-## Determinar la versión de Debian
+UsuarioPSQL="odoo"
+BaseDeDatosPSQL="odoo"
 
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
-   fi
+# Determinar la versión de Debian
+
+  if [ -f /etc/os-release ]; then
+      # Para systemd y freedesktop.org
+      . /etc/os-release
+      OS_NAME=$NAME
+      OS_VERS=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then
+      # linuxbase.org
+      OS_NAME=$(lsb_release -si)
+      OS_VERS=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then
+      # Para algunas versiones de Debian sin el comando lsb_release
+      . /etc/lsb-release
+      OS_NAME=$DISTRIB_ID
+      OS_VERS=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then
+      # Para versiones viejas de Debian.
+      OS_NAME=Debian
+      OS_VERS=$(cat /etc/debian_version)
+  else
+      # Para el viejo uname (También funciona para BSD)
+      OS_NAME=$(uname -s)
+      OS_VERS=$(uname -r)
+  fi
 
 if [ $OS_VERS == "7" ]; then
 
@@ -102,5 +105,44 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   apt-get -y update
 
+  echo ""
+  echo "Instalando la base de datos PostgreSQL..."
+  echo ""
+  #apt-get -y install postgresql
+
+  echo ""
+  echo "Creando el usuario y la base de datos para Odoo..."
+  echo ""
+  # Crear usuario
+    #su - postgres -c "createuser $UsuarioPSQL"
+  # Crear base de datos
+    #su - postgres -c "createdb $BaseDeDatosPSQL"
+
+  echo ""
+  echo "Instalando wkhtmltopdf..."
+  echo ""
+  # Determinar la URL del archivo a bajar
+    # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "  curl no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update > /dev/null
+        apt-get -y install curl
+        echo ""
+      fi
+    vSubURL=$(curl -s https://github.com/wkhtmltopdf/packaging/releases | grep href | grep .deb | grep amd64 | grep stretch | head -n1 | cut -d '"' -f2)
+    mkdir -p /root/SoftInst/wkhtmltopdf/
+    cd /root/SoftInst/wkhtmltopdf/
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "  wget no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update > /dev/null
+        apt-get -y install wget
+        echo ""
+      fi
+    wget https://github.com/$vSubURL wkhtmltopdf.deb
 fi
 
