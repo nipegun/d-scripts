@@ -143,6 +143,6 @@ elif [ $OS_VERS == "11" ]; then
         apt-get -y install wget
         echo ""
       fi
-    wget https://github.com/$vSubURL wkhtmltopdf.deb
+    wget https://github.com/$vSubURL -O wkhtmltopdf.deb
 fi
 
