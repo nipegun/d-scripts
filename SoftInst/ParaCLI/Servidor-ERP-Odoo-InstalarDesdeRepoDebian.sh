@@ -103,9 +103,9 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y update
   apt-get -y install postgresql
   # Crear usuario
-    su - postgres -c "createuser odoo"
+    #su - postgres -c "createuser odoo"
   # Crear base de datos
-    su - postgres -c "createdb odoo"
+    #su - postgres -c "createdb odoo"
 
   echo ""
   echo "  Instalando wkhtmltopdf..."
