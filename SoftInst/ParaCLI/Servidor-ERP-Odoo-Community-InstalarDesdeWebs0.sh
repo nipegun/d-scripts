@@ -115,6 +115,15 @@ elif [ $OS_VERS == "11" ]; then
   # Descargar la llave para firmar el repositorio
     mkdir -p /root/aptkeys/ 2> /dev/null
     wget -q -O- https://www.postgresql.org/media/keys/ACCC4CF8.asc -O /root/aptkeys/postgresql.key
+    # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "  gnupg2 no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update > /dev/null
+        apt-get -y install gnupg2
+        echo ""
+      fi
     gpg --dearmor /root/aptkeys/postgresql.key
     cp /root/aptkeys/postgresql.key.gpg /usr/share/keyrings/postgresql.gpg
   # Crear el archivo de repositorio
