@@ -127,7 +127,7 @@ elif [ $OS_VERS == "11" ]; then
     gpg --dearmor /root/aptkeys/postgresql.key
     cp /root/aptkeys/postgresql.key.gpg /usr/share/keyrings/postgresql.gpg
   # Crear el archivo de repositorio
-    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/postgresql.list
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt bullseye-pgdg main" > /etc/apt/sources.list.d/postgresql.list
   # Actualizar el cache de paquetes
     apt-get -y update
   # Instalar la última versión de PostreSQL
