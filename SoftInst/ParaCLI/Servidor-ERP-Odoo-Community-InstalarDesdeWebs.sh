@@ -140,6 +140,8 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Instalando wkhtmltopdf..."
   echo ""
+  # Instalar paquetes necesarios
+    
   # Determinar la URL del archivo a bajar
     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
