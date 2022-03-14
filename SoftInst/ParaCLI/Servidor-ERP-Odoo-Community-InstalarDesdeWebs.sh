@@ -141,7 +141,10 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Instalando wkhtmltopdf..."
   echo ""
   # Instalar paquetes necesarios
-    
+    apt-get -y install fontconfig
+    apt-get -y install libjpeg62-turbo
+    apt-get -y install xfonts-75dpi
+    apt-get -y install xfonts-base
   # Determinar la URL del archivo a bajar
     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
