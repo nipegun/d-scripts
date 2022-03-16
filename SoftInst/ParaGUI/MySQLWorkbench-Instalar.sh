@@ -130,6 +130,10 @@ elif [ $OS_VERS == "11" ]; then
     echo "Terminal=false"                                                   >> ~/.local/share/applications/MySQLWorkbench.desktop
     gio set ~/.local/share/applications/MySQLWorkbench.desktop "metadata::trusted" yes
 
+  # Habilitar conexiones SSH y password manager
+    snap connect mysql-workbench-community:password-manager-service
+    snap connect mysql-workbench-community:ssh-keys
+
   #ln -s /etc/profile.d/apps-bin-path.sh /etc/X11/Xsession.d/99snap
   #echo "ENV_PATH PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin" >> /etc/login.defs
 
