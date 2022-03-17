@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar Proxmox Backup Server en Debian
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/Proxmox-BackupServer-Instalar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Proxmox-BackupServer-Instalar.sh | bash
 #-------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
@@ -98,6 +98,38 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------------------"
   echo ""
 
+  # Bajar e instalar la llave
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "  wget no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update
+        apt-get -y install wget
+        echo ""
+      fi
+  wget https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
+
+  # Agregar el repositorio enterprise y comentarlo
+    echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
+
+  # Agregar el repositorio para no suscriptores
+    echo "deb http://download.proxmox.com/debian/pbs bullseye pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
+
+  # Agregar el repositorio test y comentarlo
+    echo "#deb http://download.proxmox.com/debian/pbs bullseye pbstest" > /etc/apt/sources.list.d/pbstest.list
+
+  # Agregar el repositorio client y comentarlo
+    echo "#deb http://download.proxmox.com/debian/pbs-client bullseye main" > /etc/apt/sources.list.d/pbs-client.list
+
+  # Actualizar el caché de paquetes
+    apt-get -y update
+
+  # Instalar Proxmox Backup Server manteniendo el kernel instalado (Apto para contenedores)
+    apt-get -y install proxmox-backup-server
+
+  # Instalar cambiando el kernel (Agrega soporte ZFS) (Igual que la instalación del ISO)
+    #apt-get -y install proxmox-backup
 
 fi
 
