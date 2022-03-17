@@ -94,7 +94,20 @@ elif [ $OS_VERS == "11" ]; then
   echo "------------------------------------------------------------------------------------"
   echo ""
 
+  # Instalar dependencias
+    apt-get -y install libenchant1c2a
+    apt-get -y install libexpat1
+    apt-get -y install libgtk-3-0
+    apt-get -y install libwxbase3.0-0v5
+    apt-get -y install libwxgtk3.0-gtk3-0v5
+    apt-get -y install libxerces-c3.2
+    apt-get -y install libxslt1.1
 
+  # Descargar paquete
+    URLArchivo=$(curl -s https://xml-copy-editor.sourceforge.io/ | grep .deb | grep href | cut -d'"' -f2 | head -n1)
+    mkdir-p /root/SoftInst/XMLCopyEditor/ 2> /dev/null
+    curl -s -L $URLArchivo --output /root/SoftInst/XMLCopyEditor/XMLCopyEditor.deb
+    dpkg -i /root/SoftInst/XMLCopyEditor/XMLCopyEditor.deb
 
 fi
 
