@@ -94,6 +94,9 @@ elif [ $OS_VERS == "11" ]; then
   echo "------------------------------------------------------------------------------------"
   echo ""
 
+  # Desde repositorio
+    apt-get -y update && apt-get -y install xmlcopyeditor
+
   # Instalar dependencias
     apt-get -y install libenchant1c2a
     apt-get -y install libexpat1
