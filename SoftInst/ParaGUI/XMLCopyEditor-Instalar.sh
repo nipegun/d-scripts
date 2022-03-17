@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar XMLCopyEditor en Debian
 #
 #  Ejecución remota:
-#  curl - x | bash
-#------------------------------------------------------------------------
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/XMLCopyEditor-Instalar.sh | bash
+#------------------------------------------------------------------------------------------------------------------------
 
 ## Determinar la versión de Debian
 
