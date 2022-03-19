@@ -7,6 +7,9 @@
 
 #--------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
+#
+#  Ejecución remota:
+#  curl -s x | bash
 #--------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
