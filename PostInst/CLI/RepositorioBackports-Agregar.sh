@@ -7,7 +7,15 @@
 
 #--------------------------------------------------------------------
 #  Script de NiPeGun para agregar el repositorio backports a Debian
+#
+#  Ejecución remota:
+#  curl -s x | bash
+#
+#  Para instalar un paquete desde backports:
+#  apt-get -y install -t bullseye-backports NombreDelPaquete
 #--------------------------------------------------------------------
+
+RepoActual="bullseye"
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -47,9 +55,8 @@ if [ $OS_VERS == "7" ]; then
   echo "------------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+  echo "deb http://deb.debian.org/debian $RepoActual-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
+  apt-get update
 
 elif [ $OS_VERS == "8" ]; then
 
@@ -59,9 +66,8 @@ elif [ $OS_VERS == "8" ]; then
   echo "------------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+  echo "deb http://deb.debian.org/debian $RepoActual-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
+  apt-get update
 
 elif [ $OS_VERS == "9" ]; then
 
@@ -71,9 +77,8 @@ elif [ $OS_VERS == "9" ]; then
   echo "-------------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+  echo "deb http://deb.debian.org/debian $RepoActual-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
+  apt-get update
 
 elif [ $OS_VERS == "10" ]; then
 
@@ -83,7 +88,7 @@ elif [ $OS_VERS == "10" ]; then
   echo "-------------------------------------------------------------------------------------"
   echo ""
 
-  echo "deb http://deb.debian.org/debian buster-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
+  echo "deb http://deb.debian.org/debian $RepoActual-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
   apt-get update
 
 elif [ $OS_VERS == "11" ]; then
@@ -94,9 +99,8 @@ elif [ $OS_VERS == "11" ]; then
   echo "---------------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+  echo "deb http://deb.debian.org/debian $RepoActual-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
+  apt-get update
 
 fi
 
