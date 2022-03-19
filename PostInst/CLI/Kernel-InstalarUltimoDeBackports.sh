@@ -5,9 +5,14 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar el último kernel disponible en backports
-#----------------------------------------------------------------------------
+#
+#  Ejecución remota:
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Kernel-InstalarUltimoDeBackports.sh | bash
+#------------------------------------------------------------------------------------------------------------------------------
+
+RepoActual="bullseye"
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -47,8 +52,8 @@ if [ $OS_VERS == "7" ]; then
   echo "----------------------------------------------------------------------------------------------------------"
   echo ""
 
-  apt-get -y install -t buster-backports linux-image-amd64
-  apt-get -y install -t buster-backports linux-headers-amd64
+  apt-get -y install -t $RepoActual-backports linux-image-amd64
+  apt-get -y install -t $RepoActual-backports linux-headers-amd64
 
 elif [ $OS_VERS == "8" ]; then
 
@@ -58,8 +63,8 @@ elif [ $OS_VERS == "8" ]; then
   echo "----------------------------------------------------------------------------------------------------------"
   echo ""
 
-  apt-get -y install -t buster-backports linux-image-amd64
-  apt-get -y install -t buster-backports linux-headers-amd64
+  apt-get -y install -t $RepoActual-backports linux-image-amd64
+  apt-get -y install -t $RepoActual-backports linux-headers-amd64
 
 elif [ $OS_VERS == "9" ]; then
 
@@ -69,8 +74,8 @@ elif [ $OS_VERS == "9" ]; then
   echo "-----------------------------------------------------------------------------------------------------------"
   echo ""
 
-  apt-get -y install -t buster-backports linux-image-amd64
-  apt-get -y install -t buster-backports linux-headers-amd64
+  apt-get -y install -t $RepoActual-backports linux-image-amd64
+  apt-get -y install -t $RepoActual-backports linux-headers-amd64
 
 elif [ $OS_VERS == "10" ]; then
 
@@ -80,8 +85,8 @@ elif [ $OS_VERS == "10" ]; then
   echo "-----------------------------------------------------------------------------------------------------------"
   echo ""
 
-  apt-get -y install -t buster-backports linux-image-amd64
-  apt-get -y install -t buster-backports linux-headers-amd64
+  apt-get -y install -t $RepoActual-backports linux-image-amd64
+  apt-get -y install -t $RepoActual-backports linux-headers-amd64
 
 elif [ $OS_VERS == "11" ]; then
 
@@ -91,8 +96,8 @@ elif [ $OS_VERS == "11" ]; then
   echo "-------------------------------------------------------------------------------------------------------------"
   echo ""
 
-  apt-get -y install -t buster-backports linux-image-amd64
-  apt-get -y install -t buster-backports linux-headers-amd64
+  apt-get -y install -t $RepoActual-backports linux-image-amd64
+  apt-get -y install -t $RepoActual-backports linux-headers-amd64
 
 fi
 
