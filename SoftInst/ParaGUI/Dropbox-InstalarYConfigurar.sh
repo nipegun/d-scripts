@@ -7,6 +7,9 @@
 
 #--------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar Dropbox en Debian
+#
+#  Ejecución remota:
+#  curl -s x | bash
 #--------------------------------------------------------------------
 
 ## Determinar la versión de Debian
