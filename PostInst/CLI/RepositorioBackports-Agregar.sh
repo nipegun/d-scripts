@@ -5,15 +5,15 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para agregar el repositorio backports a Debian
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/RepositorioBackports-Agregar.sh | bash
 #
 #  Para instalar un paquete desde backports:
 #  apt-get -y install -t bullseye-backports NombreDelPaquete
-#--------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------
 
 RepoActual="bullseye"
 
