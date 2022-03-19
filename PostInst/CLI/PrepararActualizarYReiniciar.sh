@@ -5,9 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para crear la tarea cron de actualización y reinicio cada lunes a las 05:30 de la mañana
-#--------------------------------------------------------------------------------------------------------------
+#
+#  Ejecución remota:
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/PrepararActualizarYReiniciar.sh | bash
+#--------------------------------------------------------------------------------------------------------------------------
 
 # Exportar las tareas cron actuales al CronTemporal 
 crontab -l > /root/CronTemporal
