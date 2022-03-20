@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar Docker y Portainer en Debian
 #
 # Ejecución remota
-# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/DockerCE-Instalar.sh | bash
+# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Instalar.sh | bash
 #----------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
