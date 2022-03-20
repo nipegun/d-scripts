@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar Fail2Ban en Debian
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/Fail2Ban-InstalarYConfigurar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Fail2Ban-InstalarYConfigurar.sh | bash
 #----------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
