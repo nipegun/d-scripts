@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar la compartición NFS en Debian
 #
 #  Ejecución remota:
-#  curl -s bash x | bash
-#-----------------------------------------------------------------------------
+#  curl -s bash https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-NFS-InstalarYConfigurar.sh | bash
+#---------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
