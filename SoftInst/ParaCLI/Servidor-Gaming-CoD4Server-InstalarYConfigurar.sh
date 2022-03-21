@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Pongo a disposición pública este script bajo el término de "software de dominio público".
@@ -6,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar el servidor gaming de Call of Duty 4 Modern Warfare
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorGaming-CoD4Server-InstalarYConfigurar.sh | bash
-#---------------------------------------------------------------------------------------------------------------------------------------------
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Gaming-CoD4Server-InstalarYConfigurar.sh | bash
+#------------------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
