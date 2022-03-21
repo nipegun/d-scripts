@@ -5,15 +5,15 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar el servidor de bases de datos PostgreSQL en Debian
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-PostgreSQL-Instalar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-PostgreSQL-Instalar.sh | bash
 #
 #  Ejecución remota con cambio de nombre:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/ServidorDeBD-PostgreSQL-Instalar.sh | sed 's/UsuarioPrueba/nipegun/g' | sed 's/BDPrueba/nipegun/g' | bash
-#--------------------------------------------------------------------------------------------------------------------------------
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-PostgreSQL-Instalar.sh | sed 's/UsuarioPrueba/nipegun/g' | sed 's/BDPrueba/nipegun/g' | bash
+#-----------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
