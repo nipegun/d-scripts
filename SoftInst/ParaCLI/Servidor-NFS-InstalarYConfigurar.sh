@@ -6,7 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #-----------------------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA INSTALAR Y CONFIGURAR EL SERVIDOR NFS EN PROXMOXVE
+#  Script de NiPeGun para instalar y configurar la compartición NFS en Debian
+#
+#  Ejecución remota:
+#  curl -s bash x | bash
 #-----------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
