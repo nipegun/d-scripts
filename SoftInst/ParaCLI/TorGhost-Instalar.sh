@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar DDClient en Debian
+#  Script de NiPeGun para instalar y configurar TORGhost en Debian
 #--------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
@@ -43,7 +43,7 @@ if [ $OS_VERS == "7" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de TorGhost para Debian 7 (Wheezy)..."
+  echo "  Iniciando el script de instalación de TORGhost para Debian 7 (Wheezy)..."
   echo "----------------------------------------------------------------------------"
   echo ""
 
@@ -55,7 +55,7 @@ elif [ $OS_VERS == "8" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de TorGhost para Debian 8 (Jessie)..."
+  echo "  Iniciando el script de instalación de TORGhost para Debian 8 (Jessie)..."
   echo "----------------------------------------------------------------------------"
   echo ""
 
@@ -67,7 +67,7 @@ elif [ $OS_VERS == "9" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de TorGhost para Debian 9 (Stretch)..."
+  echo "  Iniciando el script de instalación de TORGhost para Debian 9 (Stretch)..."
   echo "-----------------------------------------------------------------------------"
   echo ""
 
@@ -79,7 +79,7 @@ elif [ $OS_VERS == "10" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de TorGhost para Debian 10 (Buster)..."
+  echo "  Iniciando el script de instalación de TORGhost para Debian 10 (Buster)..."
   echo "-----------------------------------------------------------------------------"
   echo ""
 
@@ -91,7 +91,7 @@ elif [ $OS_VERS == "11" ]; then
 
   echo ""
   echo "-------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de TorGhost para Debian 11 (Bullseye)..."
+  echo "  Iniciando el script de instalación de TORGhost para Debian 11 (Bullseye)..."
   echo "-------------------------------------------------------------------------------"
   echo ""
 
