@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar ProxmoxVE en Debian
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/Consola/Proxmox-VirtualizationEnvironment-Instalar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Proxmox-VirtualizationEnvironment-Instalar.sh | bash
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
