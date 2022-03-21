@@ -7,6 +7,9 @@
 
 #--------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar WireGuard en Debian
+#
+#  Ejecución remota:
+#  curl -s x | bash
 #--------------------------------------------------------------------
 
 InterfazEthernet="eth0"
