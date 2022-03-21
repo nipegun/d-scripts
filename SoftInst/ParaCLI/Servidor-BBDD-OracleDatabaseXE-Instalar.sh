@@ -109,16 +109,17 @@ elif [ $OS_VERS == "11" ]; then
   menu=(dialog --timeout 5 --checklist "Instalación del servidor Oracle Database XE:" 22 76 16)
     opciones=(1 "Descargar paquete" on
               2 "Convertir .rpm a .deb" on
-              3 "Crear el grupo dba" on
-              4 "Crear el usuario oracle y agregarlo al grupo dba" on
-              5 "Instalar dependencias y paquetes necesarios" on
-              6 "Instalar paquete" on
-              7 "  Crear variables de entorno" on
-              8 "  Crear el servicio en systemd" on
-              9 "  Añadir contraseña al usuario oracle" on
-             10 "  Configurar instancia" on
-             11 "  Activar e iniciar el servicio" on
-             12 "  Realizar cambios en el sistema -- no terminados --" on)
+              3 "Intentar descargar el .deb desde hacks4geeks" off
+              4 "Crear el grupo dba" on
+              5 "Crear el usuario oracle y agregarlo al grupo dba" on
+              6 "Instalar dependencias y paquetes necesarios" on
+              7 "Instalar paquete" on
+              8 "  Crear variables de entorno" on
+              9 "  Crear el servicio en systemd" on
+             10 "  Añadir contraseña al usuario oracle" on
+             11 "  Configurar instancia" on
+             12 "  Activar e iniciar el servicio" on
+             13 "  Realizar cambios en el sistema -- no terminados --" on)
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
@@ -185,129 +186,140 @@ elif [ $OS_VERS == "11" ]; then
 
             3)
 
-              ## Crear el grupo dba
-                 echo ""
-                 echo "  Creando el grupo dba..."
-                 echo ""
-                 groupadd dba
+              # Intentar descargar el paquete desde hacks4geeks
+                echo ""
+                echo "  Intentando descargar el paquete. deb desde hacks4geeks..."
+                echo ""
+                mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
+                wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Oracle/DatabaseXE/OracleDatabaseXE.deb -o /root/SoftInst/Oracle/DatabaseXE/OracleDatabaseXE.deb
 
             ;;
 
             4)
 
-              ## Crear el usuario oracle y agregarlo al grupo dba
-                 echo ""
-                 echo "  Agregando el usuario oracle y metiéndolo en el grupo dba.."
-                 echo ""
-                 useradd -m -s /bin/bash -g dba oracle
+              # Crear el grupo dba
+                echo ""
+                echo "  Creando el grupo dba..."
+                echo ""
+                groupadd dba
 
             ;;
 
             5)
 
-              ## Instalar dependencias y paquetes necesarios
-                 echo ""
-                 echo "  Instalando dependencias y paquetes necesarios...."
-                 echo ""
-                 apt-get -y update
-                 apt-get -y install libaio1
-                 apt-get -y install bc
-                 apt-get -y install net-tools
+              # Crear el usuario oracle y agregarlo al grupo dba
+                echo ""
+                echo "  Agregando el usuario oracle y metiéndolo en el grupo dba.."
+                echo ""
+                useradd -m -s /bin/bash -g dba oracle
 
             ;;
 
             6)
 
-              ## Instalar paquete
-                 echo ""
-                 echo "  Instalando paquete .deb..."
-                 echo ""
-                 mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
-                 find /root/ -type f -name oracle*.deb -exec mv {} /root/SoftInst/Oracle/DatabaseXE/ \; 2> /dev/null
-                 find /root/SoftInst/Oracle/DatabaseXE/ -type f -name *.deb -exec dpkg -i {} \;
-                 touch /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt
-                 find /etc/init.d/ -type f -name oracle-xe* > /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt
-                 # nano /etc/sysconfig/oracle-xe-21c.conf
+              # Instalar dependencias y paquetes necesarios
+                echo ""
+                echo "  Instalando dependencias y paquetes necesarios...."
+                echo ""
+                apt-get -y update
+                apt-get -y install libaio1
+                apt-get -y install bc
+                apt-get -y install net-tools
 
             ;;
 
             7)
 
-              ## Crear variables de entorno
-                 echo ""
-                 echo "  Creando variables de entorno..."
-                 echo ""
-                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt)
-                 cat $ArchivoInitD | grep "export ORACLE_HOME" >> /home/oracle/.bashrc
-                 cat $ArchivoInitD | grep "export ORACLE_SID"  >> /home/oracle/.bashrc
-                 echo 'export PATH=$ORACLE_HOME/bin:$PATH'     >> /home/oracle/.bashrc
+              # Instalar paquete
+                echo ""
+                echo "  Instalando paquete .deb..."
+                echo ""
+                mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
+                find /root/ -type f -name oracle*.deb -exec mv {} /root/SoftInst/Oracle/DatabaseXE/ \; 2> /dev/null
+                find /root/SoftInst/Oracle/DatabaseXE/ -type f -name *.deb -exec dpkg -i {} \;
+                touch /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt
+                find /etc/init.d/ -type f -name oracle-xe* > /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt
+                # nano /etc/sysconfig/oracle-xe-21c.conf
 
             ;;
 
             8)
 
-              ## Crear el servicio en systemd
-                 echo ""
-                 echo "  Creando el servicio en systemd..."
-                 echo ""
-                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt)
-                 echo "[Unit]"                            > /etc/systemd/system/OracleDatabaseXE.service
-                 echo "  Description=Oracle Database XE" >> /etc/systemd/system/OracleDatabaseXE.service
-                 echo "[Service]"                        >> /etc/systemd/system/OracleDatabaseXE.service
-                 echo "  ExecStart=$ArchivoInitD start"  >> /etc/systemd/system/OracleDatabaseXE.service
-                 echo "[Install]"                        >> /etc/systemd/system/OracleDatabaseXE.service
-                 echo "  WantedBy=default.target"        >> /etc/systemd/system/OracleDatabaseXE.service
+              # Crear variables de entorno
+                echo ""
+                echo "  Creando variables de entorno..."
+                echo ""
+                ArchivoInitD=$(cat /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt)
+                cat $ArchivoInitD | grep "export ORACLE_HOME" >> /home/oracle/.bashrc
+                cat $ArchivoInitD | grep "export ORACLE_SID"  >> /home/oracle/.bashrc
+                echo 'export PATH=$ORACLE_HOME/bin:$PATH'     >> /home/oracle/.bashrc
 
             ;;
 
             9)
 
-              ## Poner contraseña al usuario oracle
-                 echo ""
-                 echo "  Estableciendo la contraseña del usuario oracle..."
-                 echo ""
-                 echo -e "Oracle0\nOracle0" | passwd oracle
-                 echo ""
-                 echo "  Se le ha puesto la contraseña Oracle0 al usuario oracle."
-                 echo ""
+              # Crear el servicio en systemd
+                echo ""
+                echo "  Creando el servicio en systemd..."
+                echo ""
+                ArchivoInitD=$(cat /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt)
+                echo "[Unit]"                            > /etc/systemd/system/OracleDatabaseXE.service
+                echo "  Description=Oracle Database XE" >> /etc/systemd/system/OracleDatabaseXE.service
+                echo "[Service]"                        >> /etc/systemd/system/OracleDatabaseXE.service
+                echo "  ExecStart=$ArchivoInitD start"  >> /etc/systemd/system/OracleDatabaseXE.service
+                echo "[Install]"                        >> /etc/systemd/system/OracleDatabaseXE.service
+                echo "  WantedBy=default.target"        >> /etc/systemd/system/OracleDatabaseXE.service
 
             ;;
 
             10)
 
-              ## Configurar instancia
-                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt)
-                 #$ArchivoInitD delete
-                 echo ""
-                 echo "  Configurando instancia ejecutando:"
-                 echo ""
-                 sed -i -e 's|127.0.1.1|127.0.0.1|g' /etc/hosts
-                 sed -i -e 's|LISTENER_PORT=|LISTENER_PORT=1521|g' /etc/sysconfig/oracle-xe-21c.conf
-                 echo "  $ArchivoInitD configure"
-                 echo ""
-                 echo -e "Oracle0\nOracle0" | $ArchivoInitD configure
-                 echo ""
-                 echo "  Fin de configuración de instancia."
-                 echo ""
-                 echo "  Recuerda que para administrar la base de datos puedes conectarte con:"
-                 echo ""
-                 echo "  Nombre de usuario: system"
-                 echo "  Contraseña: Oracle0"
-                 echo ""
+              # Poner contraseña al usuario oracle
+                echo ""
+                echo "  Estableciendo la contraseña del usuario oracle..."
+                echo ""
+                echo -e "Oracle0\nOracle0" | passwd oracle
+                echo ""
+                echo "  Se le ha puesto la contraseña Oracle0 al usuario oracle."
+                echo ""
 
             ;;
 
             11)
 
-              ## Activar e iniciar el servicio
-                 echo ""
-                 echo "  Activando e iniciando el servicio..."
-                 echo ""
-                 systemctl enable OracleDatabaseXE.service --now
+              # Configurar instancia
+                ArchivoInitD=$(cat /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt)
+                #$ArchivoInitD delete
+                echo ""
+                echo "  Configurando instancia ejecutando:"
+                echo ""
+                sed -i -e 's|127.0.1.1|127.0.0.1|g' /etc/hosts
+                sed -i -e 's|LISTENER_PORT=|LISTENER_PORT=1521|g' /etc/sysconfig/oracle-xe-21c.conf
+                echo "  $ArchivoInitD configure"
+                echo ""
+                echo -e "Oracle0\nOracle0" | $ArchivoInitD configure
+                echo ""
+                echo "  Fin de configuración de instancia."
+                echo ""
+                echo "  Recuerda que para administrar la base de datos puedes conectarte con:"
+                echo ""
+                echo "  Nombre de usuario: system"
+                echo "  Contraseña: Oracle0"
+                echo ""
 
             ;;
 
             12)
+
+              # Activar e iniciar el servicio
+                echo ""
+                echo "  Activando e iniciando el servicio..."
+                echo ""
+                systemctl enable OracleDatabaseXE.service --now
+
+            ;;
+
+            13)
 
               echo ""
               echo "  Servidor instalado. Para conectarte desde Oracle SQL Developer:"
