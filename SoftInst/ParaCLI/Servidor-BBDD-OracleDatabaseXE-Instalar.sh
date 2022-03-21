@@ -191,7 +191,7 @@ elif [ $OS_VERS == "11" ]; then
                 echo "  Intentando descargar el paquete. deb desde hacks4geeks..."
                 echo ""
                 mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
-                wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Oracle/DatabaseXE/OracleDatabaseXE.deb -o /root/SoftInst/Oracle/DatabaseXE/OracleDatabaseXE.deb
+                wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Oracle/DatabaseXE/OracleDatabaseXE.deb -O /root/SoftInst/Oracle/DatabaseXE/OracleDatabaseXE.deb
 
             ;;
 
