@@ -7,12 +7,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para bajar, compilar y ejecutar KawPowMiner para minar RVN en Debian
 #
 #  Ejecución remota:
-#  curl -s x | bash
-#---------------------------------------------------------------------------------------------
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-Minero-GPU-KawPowMiner-BajarCompilarYEjecutar.sh | bash
+#-------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
