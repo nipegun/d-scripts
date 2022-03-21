@@ -108,8 +108,12 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
+  apt-get -y update 2> /dev/null
+  apt-get -y install xrdp
+
   echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Activando XRDP como servicio..."
   echo ""
+  systemctl enable xrdp --now
 
 fi
