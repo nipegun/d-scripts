@@ -54,6 +54,7 @@ echo ""
         echo ""
       fi
    cd /root/SoftInst/Cryptos/XCH/
+   rm -f /root/SoftInst/Cryptos/XCH/chia-light-wallet.deb
    wget $URLDelArchivoDeb -O /root/SoftInst/Cryptos/XCH/chia-light-wallet.deb
 
    echo ""
