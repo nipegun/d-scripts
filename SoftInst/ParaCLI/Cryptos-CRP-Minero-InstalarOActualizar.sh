@@ -38,10 +38,14 @@ echo ""
    fi
 
 menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 22 96 16)
-  opciones=(1 "Instalar el minero de CRP para el usuario root" on
-            2 "  Mover el minero de CRP a la carpeta del usuario no root" off
-            3 "Agregar los mineros del root a los ComandosPostArranque" off
-            4 "Agregar los mineros del usuario $UsuarioCRPNoRoot a los ComandosPostArranque" off)
+  opciones=
+    (
+      1 "Instalar el minero de CRP para el usuario root" on
+      2 "  Mover el minero de CRP a la carpeta del usuario no root" off
+      3 "Agregar los mineros del root a los ComandosPostArranque" off
+      4 "Agregar los mineros del usuario $UsuarioCRPNoRoot a los ComandosPostArranque" off
+      5 "Activar auto-logueo de root en modo texto" on
+    )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -204,10 +208,17 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
           echo -e "${ColorVerde}  Agregando el minero del usuario $UsuarioCRPNoRoot a los ComandosPostArranque...${FinColor}"
           echo ""
-          ## CRP
+          # CRP
              echo "#su $UsuarioCRPNoRoot -c /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh
              echo "#disown -a"                                                                     >> /root/scripts/ComandosPostArranque.sh
         ;;
+
+        5)
+
+          curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-Root-AutologuearEnModoTexto-Activar.sh | bash
+
+        ;;
+
 
     esac
 
