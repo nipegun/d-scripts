@@ -251,6 +251,21 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
      apt-get -y install comix
 
+  # Lanzador de chromium para el root
+    mkdir -p /root/.local/share/applications/ 2> /dev/null
+    echo "[Desktop Entry]"                      > /root/.local/share/applications/chromiumroot.desktop
+    echo "Name=Chromium (para root)"           >> /root/.local/share/applications/chromiumroot.desktop
+    echo "Comment=Accede a Internet"           >> /root/.local/share/applications/chromiumroot.desktop
+    echo "GenericName=Navegador web"           >> /root/.local/share/applications/chromiumroot.desktop
+    echo "Exec=/usr/bin/chromium --no-sandbox" >> /root/.local/share/applications/chromiumroot.desktop
+    echo "Icon=chromium"                       >> /root/.local/share/applications/chromiumroot.desktop
+    echo "Type=Application"                    >> /root/.local/share/applications/chromiumroot.desktop
+    echo "StartupNotify=false"                 >> /root/.local/share/applications/chromiumroot.desktop
+    echo "StartupWMClass=Code"                 >> /root/.local/share/applications/chromiumroot.desktop
+    echo "Categories=Network;WebBrowser;"      >> /root/.local/share/applications/chromiumroot.desktop
+    echo "MimeType=text/html;text/xml;application/xhtml_xml;application/x-mimearchive;x-scheme-handler/http;x-scheme-handler/https;" >> /root/.local/share/applications/chromiumroot.desktop
+    gio set /root/.local/share/applications/chromiumroot.desktop "metadata::trusted" yes
+
   /root/scripts/d-scripts/SoftInst/Escritorio/TorBrowser-Instalar.sh
 
   apt-get -y remove xterm reportbug blender imagemagick inkscape gnome-disk-utility
