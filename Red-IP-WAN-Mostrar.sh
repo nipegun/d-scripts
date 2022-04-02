@@ -5,16 +5,20 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------
+#---------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para mostrar la IP de la WAN
 #
 #  Ejecución remota:
-#  curl -s x | bash
-#--------------------------------------------------
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Red-IP-WAN-Mostrar.sh | bash
+#---------------------------------------------------------------------------------------------------
 
-echo ""
+# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+    apt-get -y update         > /dev/null
+    apt-get -y install curl   > /dev/null
+  fi
 
-curl --silent ipinfo.io/ip
+vIPWan=$(curl --silent ipinfo.io/ip)
 
-echo ""
+echo "$vIPWan"
 
