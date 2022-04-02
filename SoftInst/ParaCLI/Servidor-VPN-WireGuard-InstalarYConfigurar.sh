@@ -139,6 +139,8 @@ elif [ $OS_VERS == "8" ]; then
      echo "[Peer]"                      >> /etc/wireguard/wg0.conf
      echo "User0PublicKey ="            >> /etc/wireguard/wg0.conf
      echo "AllowedIPs = 192.168.0.0/16" >> /etc/wireguard/wg0.conf # No poner nunca 0.0.0.0/0. wg-quick añade rutas para las IPs permitidas en los peers. Al añadir 0.0.0.0/0 intentará enrutar todo internet a través de ese peer y el servidor se quedará sin conexión.
+     echo ""                                                                                                                                                                                                                              >> /etc/wireguard/wg0.conf
+     echo "# AllowedIPs = 192.168.0.0/16"                                                                                                                                                                                                 >> /etc/wireguard/wg0.conf
 
   ## Agregar la clave pública del primer usuario al archivo de configuración
      echo ""
@@ -233,6 +235,8 @@ elif [ $OS_VERS == "9" ]; then
      echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
      echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
      echo "SaveConfig = true # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                        >> /etc/wireguard/wg0.conf
+     echo ""                                                                                                                                                                                                                              >> /etc/wireguard/wg0.conf
+     echo "# AllowedIPs = 192.168.0.0/16"                                                                                                                                                                                                 >> /etc/wireguard/wg0.conf
 
   ## Agregar la dirección IP del servidor al archivo de configuración
      DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
@@ -336,6 +340,8 @@ elif [ $OS_VERS == "10" ]; then
      echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
      echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
      echo "SaveConfig = true    # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                     >> /etc/wireguard/wg0.conf
+     echo ""                                                                                                                                                                                                                              >> /etc/wireguard/wg0.conf
+     echo "# AllowedIPs = 192.168.0.0/16"                                                                                                                                                                                                 >> /etc/wireguard/wg0.conf
 
   ## Agregar la dirección IP del servidor al archivo de configuración
      DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
@@ -437,6 +443,8 @@ elif [ $OS_VERS == "11" ]; then
     echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
     echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
     echo "SaveConfig = true    # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                     >> /etc/wireguard/wg0.conf
+    echo ""                                                                                                                                                                                                                              >> /etc/wireguard/wg0.conf
+    echo "# AllowedIPs = 192.168.0.0/16"                                                                                                                                                                                                 >> /etc/wireguard/wg0.conf
 
   # Agregar la dirección IP del servidor al archivo de configuración
     DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
