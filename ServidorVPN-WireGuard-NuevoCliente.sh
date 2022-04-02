@@ -21,7 +21,13 @@ for i in {0..9}
       echo "El peer User$i ya existe. Intentando crear el peer User$(($i+1))..."
     else
       # Generar claves para el nuevo usuario
+        echo ""
+        echo "  Generando la clave privada para el peer User$i"
+        echo ""
         wg genkey >                                                    /root/WireGuard/WireGuardUser"$i"Private.key
+        echo ""
+        echo "  Generando la clave pública para el peer User$i"
+        echo ""
         cat /root/WireGuard/WireGuardUser"$i"Private.key | wg pubkey > /root/WireGuard/WireGuardUser"$i"Public.key
       # Agregar la configuración a /etc/wireguard/wg0.conf
         echo ""                             >> /etc/wireguard/wg0.conf
