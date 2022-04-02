@@ -17,6 +17,7 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 vIPsPermitidas=$(cat /etc/wireguard/wg0.conf | grep Allowed | head -n1 | cut -d'=' -f2 | sed 's- --g')
+vIPsClientes="192.168.255./32"
 
 for i in {1..9}
   do
@@ -38,7 +39,7 @@ for i in {1..9}
         echo ""                             >> /etc/wireguard/wg0.conf
         echo "[Peer]"                       >> /etc/wireguard/wg0.conf
         echo "TempPublicKey ="              >> /etc/wireguard/wg0.conf
-        echo "AllowedIPs = $vIPsPermitidas" >> /etc/wireguard/wg0.conf
+        echo "AllowedIPs = $vIPsClientes$i" >> /etc/wireguard/wg0.conf
       # Agregar la clave pública del primer usuario al archivo de configuración
         vClavePubNuevoUsuario=$(cat /root/WireGuard/WireGuardUser"$i"Public.key)
         sed -i -e "s|TempPublicKey =|PublicKey = $vClavePubNuevoUsuario|g" /etc/wireguard/wg0.conf
