@@ -20,6 +20,7 @@ for i in {0..9}
     if -f [ /root/WireGuard/WireGuardUser"$i"Private.key ] and -f [ /root/WireGuard/WireGuardUser"$i"Public.key ]
       echo "El peer User$i ya existe. Intentando crear el peer User$(($i+1))"
     else
+      echo ""
      # wg genkey >                                                    /root/WireGuard/WireGuardUser"$i"Private.key
      # cat /root/WireGuard/WireGuardUser"$i"Private.key | wg pubkey > /root/WireGuard/WireGuardUser"$i"Public.key
     fi
