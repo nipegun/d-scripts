@@ -39,6 +39,17 @@ for i in {0..9}
       # Agregar la clave pública del primer usuario al archivo de configuración
         vClavePubNuevoUsuario=$(cat /root/WireGuard/WireGuardUser"$i"Public.key)
         sed -i -e "s|TempPublicKey =|PublicKey = $vClavePubNuevoUsuario|g" /etc/wireguard/wg0.conf
+      # Crear el códido QR para el nuevo peer
+        # Comprobar si el paquete qrencode está instalado. Si no lo está, instalarlo.
+          if [[ $(dpkg-query -s qrencode 2>/dev/null | grep installed) == "" ]]; then
+            echo ""
+            echo "  qrencode no está instalado. Iniciando su instalación..."
+            echo ""
+            apt-get -y update
+            apt-get -y install qrencode
+            echo ""
+          fi
+        qrencode
       # Terminar el script
         exit
     fi
