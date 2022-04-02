@@ -38,7 +38,7 @@ for i in {0..9}
         echo "AllowedIPs = $vIPsPermitidas" >> /etc/wireguard/wg0.conf
       # Agregar la clave pública del primer usuario al archivo de configuración
         vUser"$i"PubKey=$(cat /root/WireGuard/WireGuardUser"$i"Public.key)
-        sed -i -e "s|User"$i"PublicKey =|PublicKey = $vUser"$i"PubKey|g" /etc/wireguard/wg0.conf
+        sed -i -e "s|User'$i'PublicKey =|PublicKey = $vUser'$i'PubKey|g" /etc/wireguard/wg0.conf
       # Terminar el script
         exit
     fi
