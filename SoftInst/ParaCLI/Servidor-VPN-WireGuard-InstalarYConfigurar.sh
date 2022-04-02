@@ -451,5 +451,15 @@ elif [ $OS_VERS == "11" ]; then
     systemctl enable wg-quick@wg0.service
     echo ""
 
+  # Mostrar info sobre como crear el primer cliente
+    echo ""
+    echo "  Instalación finalizada."
+    echo "  Para crear el primer cliente ejecuta:"
+    echo ""
+    echo "  /root/scripts/d-scripts/ServidorVPN-WireGuard-NuevoCliente.sh"
+    echo "  o"
+    echo ""
+    echo ""
+    
 fi
 
