@@ -83,6 +83,7 @@ elif [ $OS_VERS == "8" ]; then
      apt-get -y update
      apt-get -y install linux-headers-"$(uname -r)" 
      apt-get -y install wireguard
+     apt-get -y install qrencode
 
   ## Cargar elmódulo
      echo ""
@@ -223,6 +224,7 @@ elif [ $OS_VERS == "9" ]; then
   ## Instalar el paquete WireGuard
      apt-get -y update
      apt-get -y install wireguard
+     apt-get -y install qrencode
 
   ## Cargar elmódulo
      modprobe wireguard
@@ -331,6 +333,7 @@ elif [ $OS_VERS == "10" ]; then
      apt-get -y update > /dev/null
      apt-get -y autoremove > /dev/null
      apt-get -y -t buster-backports install wireguard
+     apt-get -y install qrencode
 
   ## Crear el archivo de configuración#
      echo "[Interface]"                                                                                                                                                                                                                    > /etc/wireguard/wg0.conf
@@ -434,6 +437,7 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y update > /dev/null
     apt-get -y autoremove > /dev/null
     apt-get -y install wireguard
+    apt-get -y install qrencode
 
   # Crear el archivo de configuración#
     echo "[Interface]"                                                                                                                                                                                                                    > /etc/wireguard/wg0.conf
