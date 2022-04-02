@@ -5,35 +5,30 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA MOSTRAR LAS REGLAS IPTABLES ACTIVAS
-#--------------------------------------------------------------
+#-----------------------------------------------------------------
+#  Script de NiPeGun para mostrar las reglas activas de IPTables
+#
+#  Ejecución remota:
+#  curl -s x | bash
+#-----------------------------------------------------------------
 
 echo ""
-echo "--------------"
 echo "  Tablas NAT"
-echo "--------------"
 echo ""
 /sbin/iptables -nL -v --line-numbers -t nat
 
 echo ""
-echo "-----------------"
 echo "  Tablas FILTER"
-echo "-----------------"
 echo ""
 /sbin/iptables -nL -v --line-numbers -t filter
 
 echo ""
-echo "-----------------"
 echo "  Tablas MANGLE"
-echo "-----------------"
 echo ""
 /sbin/iptables -nL -v --line-numbers -t mangle
 
 echo ""
-echo "--------------"
 echo "  Tablas RAW"
-echo "--------------"
 echo ""
 /sbin/iptables -nL -v --line-numbers -t raw
 
