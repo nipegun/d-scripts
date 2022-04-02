@@ -17,6 +17,7 @@ ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
 vIPsClientes="192.168.255."
+vMascaraClientes="/32"
 
 for i in {1..9}
   do
@@ -35,10 +36,10 @@ for i in {1..9}
         echo ""
         cat /root/WireGuard/WireGuardUser"$i"Private.key | wg pubkey > /root/WireGuard/WireGuardUser"$i"Public.key
       # Agregar la configuración a /etc/wireguard/wg0.conf
-        echo ""                                >> /etc/wireguard/wg0.conf
-        echo "[Peer]"                          >> /etc/wireguard/wg0.conf
-        echo "TempPublicKey ="                 >> /etc/wireguard/wg0.conf
-        echo "AllowedIPs = $vIPsClientes$i/32" >> /etc/wireguard/wg0.conf # Direcciones IPs que se le permiten pedir al cliente
+        echo ""                                              >> /etc/wireguard/wg0.conf
+        echo "[Peer]"                                        >> /etc/wireguard/wg0.conf
+        echo "TempPublicKey ="                               >> /etc/wireguard/wg0.conf
+        echo "AllowedIPs = $vIPsClientes$i$vMascaraClientes" >> /etc/wireguard/wg0.conf # Direcciones IPs que se le permiten pedir al cliente
       # Agregar la clave pública del primer usuario al archivo de configuración
         vClavePubNuevoUsuario=$(cat /root/WireGuard/WireGuardUser"$i"Public.key)
         sed -i -e "s|TempPublicKey =|PublicKey = $vClavePubNuevoUsuario|g" /etc/wireguard/wg0.conf
@@ -46,15 +47,15 @@ for i in {1..9}
         vPeerPrivateKey=$(cat /root/WireGuard/WireGuardUser"$i"Private.key)
         vSerPubKey=$(cat /root/WireGuard/WireGuardServerPublic.key)
         vServIPWAN=$(curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Red-IP-WAN-Mostrar.sh | bash)
-        echo "[Interface]"                    > /root/WireGuard/WireGuardUser"$i".conf
-        echo "PrivateKey = $vPeerPrivateKey" >> /root/WireGuard/WireGuardUser"$i".conf
-        echo "Address = $vIPsClientes$i/32"  >> /root/WireGuard/WireGuardUser"$i".conf
-        echo "DNS = 1.1.1.1, 1.0.0.1"        >> /root/WireGuard/WireGuardUser"$i".conf
-        echo ""                              >> /root/WireGuard/WireGuardUser"$i".conf
-        echo "[Peer]"                        >> /root/WireGuard/WireGuardUser"$i".conf
-        echo "PublicKey = $vSerPubKey"       >> /root/WireGuard/WireGuardUser"$i".conf
-        echo "AllowedIPs = 0.0.0.0/0, ::/0"  >> /root/WireGuard/WireGuardUser"$i".conf
-        echo "Endpoint = $vServIPWAN:51820"  >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "[Interface]"                                 > /root/WireGuard/WireGuardUser"$i".conf
+        echo "PrivateKey = $vPeerPrivateKey"              >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "Address = $vIPsClientes$i$vMascaraClientes" >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "DNS = 1.1.1.1, 1.0.0.1"                     >> /root/WireGuard/WireGuardUser"$i".conf
+        echo ""                                           >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "[Peer]"                                     >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "PublicKey = $vSerPubKey"                    >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "AllowedIPs = 0.0.0.0/0, ::/0"               >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "Endpoint = $vServIPWAN:51820"               >> /root/WireGuard/WireGuardUser"$i".conf
         # Comprobar si el paquete qrencode está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s qrencode 2>/dev/null | grep installed) == "" ]]; then
             echo ""
