@@ -40,6 +40,18 @@ for i in {0..9}
         vClavePubNuevoUsuario=$(cat /root/WireGuard/WireGuardUser"$i"Public.key)
         sed -i -e "s|TempPublicKey =|PublicKey = $vClavePubNuevoUsuario|g" /etc/wireguard/wg0.conf
       # Crear el códido QR para el nuevo peer
+        vPeerPrivateKey=$(cat /root/WireGuard/WireGuardUser"$i"Private.key)
+        vSerPubKey=$(cat /root/WireGuard/WireGuardServerPublic.key)
+        vServIPWAN=$(curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Red-IP-WAN-Mostrar.sh | bash)
+        echo "[Interface]"                    > /root/WireGuard/WireGuardUser"$i".conf
+        echo "PrivateKey = $vPeerPrivateKey" >> /root/WireGuard/WireGuardUser"$i".conf
+        echo 'Address = 192.168.255."$i"/16' >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "DNS = 1.1.1.1, 1.0.0.1"        >> /root/WireGuard/WireGuardUser"$i".conf
+        echo ""                              >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "[Peer]"                        >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "PublicKey = $vSerPubKey"       >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "AllowedIPs = $vIPsPermitidas"  >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "Endpoint = $vServIPWAN:51820"  >> /root/WireGuard/WireGuardUser"$i".conf
         # Comprobar si el paquete qrencode está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s qrencode 2>/dev/null | grep installed) == "" ]]; then
             echo ""
@@ -49,11 +61,15 @@ for i in {0..9}
             apt-get -y install qrencode
             echo ""
           fi
-        qrencode
+        qrencode -t png -o /root/WireGuard/WireGuardUser"$i"QR.png -r /root/WireGuard/WireGuardUser"$i".conf
+        qrencode -t ansiutf8 < /root/WireGuard/WireGuardUser"$i".conf
       # Terminar el script
         exit
     fi
   done
+
+
+
 
 # Otra forma de crear peers
 # ClavePúblicaDelNuevoCliente IPDelCliente 
