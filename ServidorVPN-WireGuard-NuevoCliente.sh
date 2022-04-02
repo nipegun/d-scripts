@@ -18,7 +18,7 @@ FinColor='\033[0m'
 
 vIPsPermitidas=$(cat /etc/wireguard/wg0.conf | grep Allowed | head -n1 | cut -d'=' -f2 | sed 's- --g')
 
-for i in {0..9}
+for i in {1..9}
   do
     if [ -f /root/WireGuard/WireGuardUser"$i"Private.key ] && [ -f /root/WireGuard/WireGuardUser"$i"Public.key ]; then
       echo ""
