@@ -7,6 +7,9 @@
 
 #--------------------------------------------------
 #  Script de NiPeGun para mostrar la IP de la WAN
+#
+#  Ejecución remota:
+#  curl -s x | bash
 #--------------------------------------------------
 
 echo ""
