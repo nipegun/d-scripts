@@ -34,11 +34,11 @@ for i in {0..9}
       # Agregar la configuración a /etc/wireguard/wg0.conf
         echo ""                             >> /etc/wireguard/wg0.conf
         echo "[Peer]"                       >> /etc/wireguard/wg0.conf
-        echo 'User"$i"PublicKey ='          >> /etc/wireguard/wg0.conf
+        echo "TempPublicKey ="              >> /etc/wireguard/wg0.conf
         echo "AllowedIPs = $vIPsPermitidas" >> /etc/wireguard/wg0.conf
       # Agregar la clave pública del primer usuario al archivo de configuración
-        vUser"$i"PubKey=$(cat /root/WireGuard/WireGuardUser"$i"Public.key)
-        sed -i -e "s|User'$i'PublicKey =|PublicKey = $vUser'$i'PubKey|g" /etc/wireguard/wg0.conf
+        vClavePubNuevoUsuario=$(cat /root/WireGuard/WireGuardUser"$i"Public.key)
+        sed -i -e "s|TempPublicKey =|PublicKey = $vClavePubNuevoUsuario|g" /etc/wireguard/wg0.conf
       # Terminar el script
         exit
     fi
