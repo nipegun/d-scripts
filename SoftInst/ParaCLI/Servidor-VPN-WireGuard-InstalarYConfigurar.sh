@@ -102,7 +102,8 @@ elif [ $OS_VERS == "8" ]; then
      echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
      echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
      echo "SaveConfig = true # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                        >> /etc/wireguard/wg0.conf
-
+     echo "# AllowedIPs = 192.168.0.0/16 # No poner nunca 0.0.0.0/0 poreque wg-quick añade rutas para las IPs permitidas en los peers. Al añadir 0.0.0.0/0 intentará enrutar todo internet a través de ese peer y el servidor se quedará sin conexión." >> /etc/wireguard/wg0.conf
+    
   ## Agregar la dirección IP del servidor al archivo de configuración
      echo ""
      echo "  Agregando la ip del ordenador/servidor al archivo de configuración..."
@@ -124,31 +125,6 @@ elif [ $OS_VERS == "8" ]; then
      echo ""
      VarServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
      sed -i -e 's|PrivateKey =|PrivateKey = "$VarServerPrivKey"|g' /etc/wireguard/wg0.conf
-
-  ## Crear las claves para el primer usuario
-     echo ""
-     echo "  Creando las claves para el primer usuario..."
-     echo ""
-     wg genkey >                                                 /root/WireGuard/WireGuardUser0Private.key
-     cat /root/WireGuard/WireGuardUser0Private.key | wg pubkey > /root/WireGuard/WireGuardUser0Public.key
-
-  ## Agregar el primer usuario al archivo de configuración
-     echo ""
-     echo "  Agregando el primer usuario al archivo de configuración"
-     echo ""
-     echo ""                            >> /etc/wireguard/wg0.conf
-     echo "[Peer]"                      >> /etc/wireguard/wg0.conf
-     echo "User0PublicKey ="            >> /etc/wireguard/wg0.conf
-     echo "AllowedIPs = 192.168.0.0/16" >> /etc/wireguard/wg0.conf # No poner nunca 0.0.0.0/0. wg-quick añade rutas para las IPs permitidas en los peers. Al añadir 0.0.0.0/0 intentará enrutar todo internet a través de ese peer y el servidor se quedará sin conexión.
-     echo ""                                                                                                                                                                                                                              >> /etc/wireguard/wg0.conf
-     echo "# AllowedIPs = 192.168.0.0/16"                                                                                                                                                                                                 >> /etc/wireguard/wg0.conf
-
-  ## Agregar la clave pública del primer usuario al archivo de configuración
-     echo ""
-     echo "  Agregando la clave pública del primer usuario al archivo de configuración..."
-     echo ""
-     VarUser0PubKey=$(cat /root/WireGuard/WireGuardUser0Public.key)
-     sed -i -e 's|User0PublicKey =|PublicKey = "$VarUser0PubKey"|g' /etc/wireguard/wg0.conf
 
   ## Agregar las reglas para tener salida a Internet desde el servidor
      echo ""
@@ -237,8 +213,7 @@ elif [ $OS_VERS == "9" ]; then
      echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
      echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
      echo "SaveConfig = true # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                        >> /etc/wireguard/wg0.conf
-     echo ""                                                                                                                                                                                                                              >> /etc/wireguard/wg0.conf
-     echo "# AllowedIPs = 192.168.0.0/16"                                                                                                                                                                                                 >> /etc/wireguard/wg0.conf
+     echo "# AllowedIPs = 192.168.0.0/16 # No poner nunca 0.0.0.0/0 poreque wg-quick añade rutas para las IPs permitidas en los peers. Al añadir 0.0.0.0/0 intentará enrutar todo internet a través de ese peer y el servidor se quedará sin conexión." >> /etc/wireguard/wg0.conf
 
   ## Agregar la dirección IP del servidor al archivo de configuración
      DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
@@ -252,20 +227,6 @@ elif [ $OS_VERS == "9" ]; then
   ## Agregar la clave privada al archivo de configuración
      VarServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
      sed -i -e 's|PrivateKey =|PrivateKey = "$VarServerPrivKey"|g' /etc/wireguard/wg0.conf
-
-  ## Crear las claves para el primer usuario
-     wg genkey >                                                 /root/WireGuard/WireGuardUser0Private.key
-     cat /root/WireGuard/WireGuardUser0Private.key | wg pubkey > /root/WireGuard/WireGuardUser0Public.key
-
-  ## Agregar el primer usuario al archivo de configuración
-     echo ""                            >> /etc/wireguard/wg0.conf
-     echo "[Peer]"                      >> /etc/wireguard/wg0.conf
-     echo "User0PublicKey ="            >> /etc/wireguard/wg0.conf
-     echo "AllowedIPs = 192.168.0.0/16" >> /etc/wireguard/wg0.conf # No poner nunca 0.0.0.0/0. wg-quick añade rutas para las IPs permitidas en los peers. Al añadir 0.0.0.0/0 intentará enrutar todo internet a través de ese peer y el servidor se quedará sin conexión.
-
-  ## Agregar la clave pública del primer usuario al archivo de configuración
-     VarUser0PubKey=$(cat /root/WireGuard/WireGuardUser0Public.key)
-     sed -i -e 's|User0PublicKey =|PublicKey = "$VarUser0PubKey"|g' /etc/wireguard/wg0.conf
 
   ## Agregar las reglas para tener salida a Internet desde el servidor
      iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
@@ -343,8 +304,7 @@ elif [ $OS_VERS == "10" ]; then
      echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
      echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
      echo "SaveConfig = true    # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                     >> /etc/wireguard/wg0.conf
-     echo ""                                                                                                                                                                                                                              >> /etc/wireguard/wg0.conf
-     echo "# AllowedIPs = 192.168.0.0/16"                                                                                                                                                                                                 >> /etc/wireguard/wg0.conf
+     echo "# AllowedIPs = 192.168.0.0/16 # No poner nunca 0.0.0.0/0 poreque wg-quick añade rutas para las IPs permitidas en los peers. Al añadir 0.0.0.0/0 intentará enrutar todo internet a través de ese peer y el servidor se quedará sin conexión." >> /etc/wireguard/wg0.conf
 
   ## Agregar la dirección IP del servidor al archivo de configuración
      DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
@@ -359,20 +319,6 @@ elif [ $OS_VERS == "10" ]; then
   ## Agregar la clave privada al archivo de configuración
      VarServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
      sed -i -e 's|PrivateKey =|PrivateKey = "$VarServerPrivKey"|g' /etc/wireguard/wg0.conf
-
-  ## Crear las claves para el primer usuario
-     wg genkey >                                                 /root/WireGuard/WireGuardUser0Private.key
-     cat /root/WireGuard/WireGuardUser0Private.key | wg pubkey > /root/WireGuard/WireGuardUser0Public.key
-
-  ## Agregar el primer usuario al archivo de configuración
-     echo ""                            >> /etc/wireguard/wg0.conf
-     echo "[Peer]"                      >> /etc/wireguard/wg0.conf
-     echo "User0PublicKey ="            >> /etc/wireguard/wg0.conf
-     echo "AllowedIPs = 192.168.0.0/16" >> /etc/wireguard/wg0.conf # No poner nunca 0.0.0.0/0. wg-quick añade rutas para las IPs permitidas en los peers. Al añadir 0.0.0.0/0 intentará enrutar todo internet a través de ese peer y el servidor se quedará sin conexión.
-
-  ## Agregar la clave pública del primer usuario al archivo de configuración
-     VarUser0PubKey=$(cat /root/WireGuard/WireGuardUser0Public.key)
-     sed -i -e 's|User0PublicKey =|PublicKey = "$VarUser0PubKey"|g' /etc/wireguard/wg0.conf
 
 ## Agregar las reglas para tener salida a Internet desde el servidor
      iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
@@ -447,8 +393,8 @@ elif [ $OS_VERS == "11" ]; then
     echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
     echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
     echo "SaveConfig = true    # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                     >> /etc/wireguard/wg0.conf
-    echo ""                                                                                                                                                                                                                              >> /etc/wireguard/wg0.conf
-    echo "# AllowedIPs = 192.168.0.0/16"                                                                                                                                                                                                 >> /etc/wireguard/wg0.conf
+    echo "# AllowedIPs = 192.168.0.0/16 # No poner nunca 0.0.0.0/0 poreque wg-quick añade rutas para las IPs permitidas en los peers. Al añadir 0.0.0.0/0 intentará enrutar todo internet a través de ese peer y el servidor se quedará sin conexión." >> /etc/wireguard/wg0.conf
+
 
   # Agregar la dirección IP del servidor al archivo de configuración
     DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
@@ -463,20 +409,6 @@ elif [ $OS_VERS == "11" ]; then
   # Agregar la clave privada al archivo de configuración
     VarServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
     sed -i -e 's|PrivateKey =|PrivateKey = "$VarServerPrivKey"|g' /etc/wireguard/wg0.conf
-
-  # Crear las claves para el primer usuario
-    wg genkey >                                                 /root/WireGuard/WireGuardUser0Private.key
-    cat /root/WireGuard/WireGuardUser0Private.key | wg pubkey > /root/WireGuard/WireGuardUser0Public.key
-
-  # Agregar el primer usuario al archivo de configuración
-    echo ""                            >> /etc/wireguard/wg0.conf
-    echo "[Peer]"                      >> /etc/wireguard/wg0.conf
-    echo "User0PublicKey ="            >> /etc/wireguard/wg0.conf
-    echo "AllowedIPs = 192.168.0.0/16" >> /etc/wireguard/wg0.conf # No poner nunca 0.0.0.0/0. wg-quick añade rutas para las IPs permitidas en los peers. Al añadir 0.0.0.0/0 intentará enrutar todo internet a través de ese peer y el servidor se quedará sin conexión.
-
-  # Agregar la clave pública del primer usuario al archivo de configuración
-    VarUser0PubKey=$(cat /root/WireGuard/WireGuardUser0Public.key)
-    sed -i -e 's|User0PublicKey =|PublicKey = "$VarUser0PubKey"|g' /etc/wireguard/wg0.conf
 
   # Agregar las reglas para tener salida a Internet desde el servidor
     iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
