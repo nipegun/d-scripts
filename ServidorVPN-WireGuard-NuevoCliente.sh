@@ -57,6 +57,7 @@ for i in {1..9}
         echo "PublicKey = $vSerPubKey"                    >> /root/WireGuard/WireGuardUser"$i".conf
         echo "AllowedIPs = 0.0.0.0/0, ::/0"               >> /root/WireGuard/WireGuardUser"$i".conf
         echo "Endpoint = $vServIPWAN:51820"               >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "PersistentKeepalive = 30"                   >> /root/WireGuard/WireGuardUser"$i".conf
         # Comprobar si el paquete qrencode está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s qrencode 2>/dev/null | grep installed) == "" ]]; then
             echo ""
