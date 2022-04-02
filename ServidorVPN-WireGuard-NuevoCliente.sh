@@ -17,7 +17,7 @@ vIPsPermitidas=$(cat /etc/wireguard/wg0.conf | grep Allowed | head -n1 | cut -d'
 
 for i in {0..9}
   do
-    if [ -f /root/WireGuard/WireGuardUser"$i"Private.key ] and [ -f /root/WireGuard/WireGuardUser"$i"Public.key ]; then
+    if [ -f /root/WireGuard/WireGuardUser"$i"Private.key ] && [ -f /root/WireGuard/WireGuardUser"$i"Public.key ]; then
       echo "El peer User$i ya existe. Intentando crear el peer User$(($i+1))..."
     else
       # Generar claves para el nuevo usuario
