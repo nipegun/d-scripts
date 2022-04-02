@@ -6,7 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #------------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA MOSTRAR LA DIRECCIÓN IP DE LA WAN
+#  Script de NiPeGun para mostrar la dirección IP en la LAN
+#
+#  Ejecución remota:
+#  curl -s x | bash
 #------------------------------------------------------------
 
 echo ""
