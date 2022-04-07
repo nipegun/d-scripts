@@ -6,9 +6,9 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #---------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA CREAR UN NUEVO CLIENTE OPENVPN
+#  Script de NiPeGun para crear un nuevo cliente OpenVPN
 #---------------------------------------------------------
 
-TERMINARLO SIGUIENDO LAS INSTRUCCIONES ESTAS:
-https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-debian-8#step-8-—-generate-ce$
+# TERMINARLO SIGUIENDO LAS INSTRUCCIONES ESTAS:
+# https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-debian-8#step-8-—-generate-ce$
 
