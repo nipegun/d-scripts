@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para agregar un nuevo cliente al servidor WireGuard
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/ServidorVPN-WireGuard-NuevoCliente.sh | bash
-#-------------------------------------------------------------------------------------------------------------------
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-NuevoCliente.sh | bash
+#-----------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -51,7 +51,7 @@ for i in {1..9}
         echo "[Interface]"                                 > /root/WireGuard/WireGuardUser"$i".conf
         echo "PrivateKey = $vPeerPrivateKey"              >> /root/WireGuard/WireGuardUser"$i".conf
         echo "Address = $vIPsClientes$i$vMascaraClientes" >> /root/WireGuard/WireGuardUser"$i".conf
-        echo "DNS = 1.1.1.1, 1.0.0.1"                     >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "DNS = 192.168.1.1"                          >> /root/WireGuard/WireGuardUser"$i".conf
         echo ""                                           >> /root/WireGuard/WireGuardUser"$i".conf
         echo "[Peer]"                                     >> /root/WireGuard/WireGuardUser"$i".conf
         echo "PublicKey = $vSerPubKey"                    >> /root/WireGuard/WireGuardUser"$i".conf
