@@ -183,9 +183,9 @@ elif [ $OS_VERS == "8" ]; then
     echo "  Instalación finalizada."
     echo "  Para crear el primer cliente ejecuta:"
     echo ""
-    echo "  /root/scripts/d-scripts/ServidorVPN-WireGuard-NuevoCliente.sh"
+    echo "  /root/scripts/d-scripts/VPN-WireGuard-NuevoCliente.sh"
     echo "  o"
-    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/ServidorVPN-WireGuard-NuevoCliente.sh | bash"
+    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-NuevoCliente.sh | bash"
     echo ""
 
 elif [ $OS_VERS == "9" ]; then
@@ -282,9 +282,9 @@ elif [ $OS_VERS == "9" ]; then
     echo "  Instalación finalizada."
     echo "  Para crear el primer cliente ejecuta:"
     echo ""
-    echo "  /root/scripts/d-scripts/ServidorVPN-WireGuard-NuevoCliente.sh"
+    echo "  /root/scripts/d-scripts/VPN-WireGuard-NuevoCliente.sh"
     echo "  o"
-    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/ServidorVPN-WireGuard-NuevoCliente.sh | bash"
+    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-NuevoCliente.sh | bash"
     echo ""
 
 elif [ $OS_VERS == "10" ]; then
@@ -383,9 +383,9 @@ elif [ $OS_VERS == "10" ]; then
     echo "  Instalación finalizada."
     echo "  Para crear el primer cliente ejecuta:"
     echo ""
-    echo "  /root/scripts/d-scripts/ServidorVPN-WireGuard-NuevoCliente.sh"
+    echo "  /root/scripts/d-scripts/VPN-WireGuard-NuevoCliente.sh"
     echo "  o"
-    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/ServidorVPN-WireGuard-NuevoCliente.sh | bash"
+    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-NuevoCliente.sh | bash"
     echo ""
 
 elif [ $OS_VERS == "11" ]; then
@@ -481,9 +481,9 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Instalación finalizada."
     echo "  Para crear el primer cliente ejecuta:"
     echo ""
-    echo "  /root/scripts/d-scripts/ServidorVPN-WireGuard-NuevoCliente.sh"
+    echo "  /root/scripts/d-scripts/VPN-WireGuard-NuevoCliente.sh"
     echo "  o"
-    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/ServidorVPN-WireGuard-NuevoCliente.sh | bash"
+    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-NuevoCliente.sh | bash"
     echo ""
 
 fi
