@@ -115,8 +115,26 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
+  echo 'run_dhclient="true"'   > /etc/default/ddclient
+  echo 'run_ipup="true"'      >> /etc/default/ddclient
+  echo 'run_daemon="true"'    >> /etc/default/ddclient
+  echo 'daemon_interval="60"' >> /etc/default/ddclient
+
+  touch /etc/ddclient.conf
+  echo "protocol=dyndns2"                     >> /etc/ddclient.conf
+  echo "use=web, web=checkip.dyndns.org"      >> /etc/ddclient.conf
+  echo "ssl=yes"                              >> /etc/ddclient.conf
+  echo "server=dyndns.strato.com/nic/update"  >> /etc/ddclient.conf
+  echo "login=x"                              >> /etc/ddclient.conf
+  echo "password='x'"                         >> /etc/ddclient.conf
+  echo "web.com"                              >> /etc/ddclient.conf
+          
+  apt-get -y install net-tools
+  apt-get -y install ddclient
+          
   echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Instalación finalizada."
+  echo "  Edita el archivo /etc/ddclient.conf para indicar tus credenciales."
   echo ""
 
 fi
