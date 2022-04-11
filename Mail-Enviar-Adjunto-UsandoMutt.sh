@@ -22,14 +22,14 @@ FinColor='\033[0m'
 if [ $# -ne $CantArgsEsperados ]
   then
     echo ""
-    echo "-----------------------------------------------------------------------------------------------------------"
+    echo "-----------------------------------------------------------------------------------------------------------------------------------------"
     echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
     echo ""
     echo -e "EnviarMailA ${ColorArgumentos}[DirecciónDeCorreo] [Asunto] [Texto] [RutaAlArchivoAAdjuntar]${FinColor}"
     echo ""
     echo "Ejemplo:"
-    echo ' Mail-Enviar-UsandoMutt.sh pepe@pepe.com "Recordatorio de cita" "Acuérdate que quedamos para comer"'
-    echo "-----------------------------------------------------------------------------------------------------------"
+    echo ' Mail-Enviar-Adjunto-UsandoMutt.sh pepe@pepe.com "Recordatorio de cita" "Acuérdate que quedamos para comer" "/home/usuario/archivo.zip"'
+    echo "-----------------------------------------------------------------------------------------------------------------------------------------"
     echo ""
     exit $ArgsInsuficientes
   else
