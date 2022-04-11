@@ -115,9 +115,11 @@ elif [ $OS_VERS == "11" ]; then
      echo "deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free"            >> /etc/apt/sources.list
      echo ""                                                                                       >> /etc/apt/sources.list
 
-  ## Herramientas de terminal
-     apt-get -y update
-     apt-get -y install gparted
+  # Herramientas de terminal
+    apt-get -y update
+    apt-get -y install shellcheck
+    apt-get -y install grub2
+    apt-get -y install lvm2
      apt-get -y install wget
      apt-get -y install curl
      apt-get -y install nmap
@@ -129,7 +131,8 @@ elif [ $OS_VERS == "11" ]; then
      apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
      apt-get -y install android-tools-fastboot
 
-  ## Herramientas gráficas
+  # Herramientas gráficas
+    apt-get -y install gparted
      apt-get -y install caja-open-terminal
      apt-get -y install caja-admin
      apt-get -y install vlc
