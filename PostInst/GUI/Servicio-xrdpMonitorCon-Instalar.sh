@@ -9,7 +9,7 @@
 #  Servicio de NiPeGun para monitorizar las conexiones xrdp
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Servicio-xrdpMonitorCon-Instalar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Servicio-xrdpMonitorCon-Instalar.sh | bash
 #------------------------------------------------------------------------------------------------------------------------------
 
 # Crear el servicio
