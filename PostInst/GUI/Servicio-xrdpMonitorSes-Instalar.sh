@@ -9,7 +9,7 @@
 #  Servicio de NiPeGun para monitorizar las sesiones xrdp
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Servicio-xrdpMonitorSes-Instalar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Servicio-xrdpMonitorSes-Instalar.sh | bash
 #------------------------------------------------------------------------------------------------------------------------------
 
 # Crear el servicio
