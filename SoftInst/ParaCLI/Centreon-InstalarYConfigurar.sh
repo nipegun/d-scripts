@@ -234,5 +234,18 @@ elif [ $OS_VERS == "11" ]; then
   echo "  apt-get install centreon-plugin-NombreDelPlugin"
   echo ""
 
+
+  echo "In my lab environment, I had to adapt the groups for the centreon-engine and centreon-gorgone user"
+  echo ""
+  echo "adduser centreon-gorgone centreon-engine"
+  echo "adduser centreon-gorgone centreon-broker"
+  echo "adduser centreon-engine centreon"
+  echo "adduser centreon-engine centreon-broker"
+  echo "After plugin installed, I had to create and change the ownership of the  directory  /var/lib/centreon/centplugins"
+  echo ""
+  echo "mkdir -p /var/lib/centreon/centplugins"
+  echo "chown centreon: /var/lib/centreon/centplugins"
+  echo "chmod 775 /var/lib/centreon/centplugins"
+
 fi
 
