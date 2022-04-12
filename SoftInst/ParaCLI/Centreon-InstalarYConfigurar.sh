@@ -247,5 +247,10 @@ elif [ $OS_VERS == "11" ]; then
   echo "chmod 775 /var/lib/centreon/centplugins"
   echo "finally, I had to change the permissions of all Centreon plugins that are not executable during their installation"
 
+centreon-plugin-applications-protocol-http : Depends: liblwp-useragent-perl but it is not installable
+                                              Depends: libhttp-proxypac-perl but it is not installable
+ centreon-plugin-applications-protocol-smtp : Depends: libemail-send-smtp-gmail-perl but it is not installable
+ centreon-plugin-applications-protocol-ssh : Depends: libssh-session-perl but it is not installable
+
 fi
 
