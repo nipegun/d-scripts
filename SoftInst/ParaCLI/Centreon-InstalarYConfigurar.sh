@@ -130,7 +130,82 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo " Instalando centreon..."
   echo ""
-  apt-get -y install centreon
+  apt-get -y install centreon-broker
+  apt-get -y install centreon-broker-cbmod
+  apt-get -y install centreon-broker-core
+  apt-get -y install centreon-clib
+  apt-get -y install centreon-common
+  apt-get -y install centreon-connector
+  apt-get -y install centreon-connector-perl
+  apt-get -y install centreon-connector-ssh
+  apt-get -y install centreon-engine
+  apt-get -y install centreon-engine-extcommands
+  apt-get -y install centreon-gorgone
+  apt-get -y install centreon-perl-libs
+  apt-get -y install libzmq-constants-perl
+  apt-get -y install zmq-libzmq4-perl
+
+  echo ""
+  echo "  Activando los servicios en systemd..."
+  echo ""
+  systemctl enable centreon
+  systemctl enable centengine
+
+  echo ""
+  echo "  Agregando el usuario centreon a sudoers..."
+  echo ""
+  echo "## BEGIN: CENTREON SUDO"                                            >> /etc/sudoers
+  echo ""                                                                   >> /etc/sudoers
+  echo "User_Alias      CENTREON=%centreon"                                 >> /etc/sudoers
+  echo "Defaults:CENTREON !requiretty"                                      >> /etc/sudoers
+  echo ""                                                                   >> /etc/sudoers
+  echo "# centreontrapd"                                                    >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /sbin/service centreontrapd start"       >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /sbin/service centreontrapd stop"        >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /sbin/service centreontrapd restart"     >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /sbin/service centreontrapd reload"      >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/sbin/service centreontrapd start"   >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/sbin/service centreontrapd stop"    >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/sbin/service centreontrapd restart" >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/sbin/service centreontrapd reload"  >> /etc/sudoers
+  echo ""                                                                   >> /etc/sudoers
+  echo "# Centreon Engine"                                                  >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /sbin/service centengine start"          >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /sbin/service centengine stop"           >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /sbin/service centengine restart"        >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /sbin/service centengine reload"         >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/sbin/service centengine start"      >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/sbin/service centengine stop"       >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/sbin/service centengine restart"    >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/sbin/service centengine reload"     >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /bin/systemctl start centengine"         >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /bin/systemctl stop centengine"          >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /bin/systemctl restart centengine"       >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /bin/systemctl reload centengine"        >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/bin/systemctl start centengine"     >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/bin/systemctl stop centengine"      >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/bin/systemctl restart centengine"   >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/bin/systemctl reload centengine"    >> /etc/sudoers
+  echo ""                                                                   >> /etc/sudoers
+  echo "# Centreon Broker"                                                  >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /sbin/service cbd start"                 >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /sbin/service cbd stop"                  >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /sbin/service cbd restart"               >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /sbin/service cbd reload"                >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/sbin/service cbd start"             >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/sbin/service cbd stop"              >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/sbin/service cbd restart"           >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/sbin/service cbd reload"            >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /bin/systemctl start cbd"                >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /bin/systemctl stop cbd"                 >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /bin/systemctl restart cbd"              >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /bin/systemctl reload cbd"               >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/bin/systemctl start cbd"            >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/bin/systemctl stop cbd"             >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/bin/systemctl restart cbd"          >> /etc/sudoers
+  echo "CENTREON   ALL = NOPASSWD: /usr/bin/systemctl reload cbd"           >> /etc/sudoers
+  echo ""                                                                   >> /etc/sudoers
+  echo "## END: CENTREON SUDO"                                              >> /etc/sudoers
 
 fi
 
