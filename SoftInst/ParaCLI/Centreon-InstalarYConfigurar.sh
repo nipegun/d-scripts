@@ -207,5 +207,21 @@ elif [ $OS_VERS == "11" ]; then
   echo ""                                                                   >> /etc/sudoers
   echo "## END: CENTREON SUDO"                                              >> /etc/sudoers
 
+  echo ""
+  echo "  Corrigiendo permisos..."
+  echo ""
+  chown -R centreon-engine:centreon-gorgone /etc/centreon-engine/
+  chmod -R g+w /etc/centreon-engine/
+  chown -R centreon-broker:centreon-gorgone /etc/centreon-broker/
+  chmod -R g+w /etc/centreon-broker/
+  chown -R centreon:centreon /var/cache/centreon
+  chmod -R g+w /var/cache/centreon
+
+  echo ""
+  echo "  Reiniciando los servicios..."
+  echo ""
+  systemctl restart centengine
+  systemctl restart gorgoned
+
 fi
 
