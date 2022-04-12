@@ -234,7 +234,6 @@ elif [ $OS_VERS == "11" ]; then
   echo "  apt-get install centreon-plugin-NombreDelPlugin"
   echo ""
 
-
   echo "In my lab environment, I had to adapt the groups for the centreon-engine and centreon-gorgone user"
   echo ""
   echo "adduser centreon-gorgone centreon-engine"
@@ -246,6 +245,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "mkdir -p /var/lib/centreon/centplugins"
   echo "chown centreon: /var/lib/centreon/centplugins"
   echo "chmod 775 /var/lib/centreon/centplugins"
+  echo "finally, I had to change the permissions of all Centreon plugins that are not executable during their installation"
 
 fi
 
