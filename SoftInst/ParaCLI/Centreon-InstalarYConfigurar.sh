@@ -223,5 +223,16 @@ elif [ $OS_VERS == "11" ]; then
   systemctl restart centengine
   systemctl restart gorgoned
 
+  echo ""
+  echo "  Centreon instalado"
+  echo "  No te olvides de agregar un Poller siguiendo estas instrucciones:"
+  echo "  Más info aquí: https://docs.centreon.com/docs/monitoring/monitoring-servers/add-a-poller-to-configuration/"
+  echo ". Then Add a Poller to configuration by selecting Add a Centreon Poller then Create new Poller  from the Centreon official documentation."
+
+  echo ""
+  echo "  Si quieres instalar plug-ins puedes hacerlo de la siguiente forma:"
+  echo "  apt-get install centreon-plugin-NombreDelPlugin"
+  echo ""
+
 fi
 
