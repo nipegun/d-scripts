@@ -172,7 +172,7 @@ elif [ $OS_VERS == "11" ]; then
 
             echo ""
             echo -e "${ColorVerde}  $PaqueteEnRepos instalado desde los repos de Debian.${FinColor}"
-            echo -e "${ColorVerde}  Accede $(hostname -I)/$PaqueteEnRepos para conectarte.${FinColor}"
+            echo -e "${ColorVerde}  Accede $(hostname -I | sed 's- --g')/$PaqueteEnRepos para conectarte.${FinColor}"
             echo ""
           ;;
 
