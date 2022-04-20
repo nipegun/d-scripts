@@ -113,10 +113,10 @@ elif [ $OS_VERS == "11" ]; then
     fi
   menu=(dialog --timeout 5 --checklist "Instalación de Nagios" 22 76 16)
     opciones=(
-      1 "Instalar Nagios desde los repos de Debian" off
-      2 "Instalar la última versión de Nagios Core desde la web Oficial" off
-      3 "Instalar la última versión de Nagios Core desde GitHub" off
-      4 "Instalar plugins" off
+      1 "Instalar Nagios desde los repos de Debian" on
+      2 "Instalar la última versión de Nagios Core desde la web Oficial (no terminado)" off
+      3 "Instalar la última versión de Nagios Core desde GitHub (no terminado)" off
+      4 "Instalar plugins (no terminado)" off
       5 "x" off
     )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -174,6 +174,30 @@ elif [ $OS_VERS == "11" ]; then
             echo -e "${ColorVerde}  $PaqueteEnRepos instalado desde los repos de Debian.${FinColor}"
             echo -e "${ColorVerde}  Accede $(hostname -I | sed 's- --g')/$PaqueteEnRepos para conectarte.${FinColor}"
             echo ""
+
+            echo ""
+            
+            # Impresoras
+              sed -i -e 's|#cfg_dir=/etc/nagios4/printers|cfg_dir=/etc/nagios4/printers|g' /etc/nagios4/nagios.cfg
+              mkdir -p            /etc/nagios4/printers/
+              chmod 775           /etc/nagios4/printers/
+              chown nagios:nagios /etc/nagios4/printers/
+            # Routers
+              sed -i -e 's|#cfg_dir=/etc/nagios4/routers|cfg_dir=/etc/nagios4/routers|g' /etc/nagios4/nagios.cfg
+              mkdir -p            /etc/nagios4/routers/
+              chmod 775           /etc/nagios4/routers/
+              chown nagios:nagios /etc/nagios4/routers/
+            # Servidores
+              sed -i -e 's|#cfg_dir=/etc/nagios4/servers|cfg_dir=/etc/nagios4/servers|g' /etc/nagios4/nagios.cfg
+              mkdir -p            /etc/nagios4/servers/
+              chmod 775           /etc/nagios4/servers/
+              chown nagios:nagios /etc/nagios4/servers/
+            # Switches
+              sed -i -e 's|#cfg_dir=/etc/nagios4/switches|cfg_dir=/etc/nagios4/switches|g' /etc/nagios4/nagios.cfg
+              mkdir -p            /etc/nagios4/switches/
+              chmod 775           /etc/nagios4/switches/
+              chown nagios:nagios /etc/nagios4/switches/
+
           ;;
 
           2)
