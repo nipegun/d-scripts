@@ -113,10 +113,11 @@ elif [ $OS_VERS == "11" ]; then
     fi
   menu=(dialog --timeout 5 --checklist "Instalación de Nagios" 22 76 16)
     opciones=(
-      1 "Instalar Nagios Core desde la web Oficial" off
-      2 "Instalar Nagios Core desde GitHub" on
-      3 "Instalar plugins" off
-      4 "x" off
+      1 "Instalar Nagios Core desde los repos de Debian" off
+      2 "Instalar la última versión de Nagios Core desde la web Oficial" off
+      3 "Instalar la última versión de Nagios Core desde GitHub" off
+      4 "Instalar plugins" off
+      5 "x" off
     )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
     clear
@@ -126,6 +127,24 @@ elif [ $OS_VERS == "11" ]; then
         case $choice in
 
           1)
+            echo ""
+            echo -e "${ColorAzul}  Instalando nagios desde los repos de Debian...${FinColor}"
+            echo ""
+
+            echo ""
+            echo -e "${ColorAzul}    Determinando la versión disponible en los repos...${FinColor}"
+            echo ""
+            PaqueteEnRepos=$(apt-cache search nagios | grep ^nagios | grep core | cut -d'-' -f1)
+            UltVersiRepos=$(apt-cache show $PaqueteEnRepos | grep ersion | cut -d':' -f2) 
+            echo -e "${ColorAzul}      La última versión disponible en los repos de debian es la $UltVersiRepos...${FinColor}"
+
+            echo ""
+            echo -e "${ColorAzul}    Instalando el paquete $PaqueteEnRepos...${FinColor}"
+            echo ""
+            apt-get -y install $PaqueteEnRepos
+          ;;
+
+          2)
             echo ""
             echo -e "${ColorAzul}  Iniciando la instalación de Nagios Core desde la web oficial...${FinColor}"
             echo ""
@@ -181,6 +200,7 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y install libgd-dev
             apt-get -y install openssl
             apt-get -y install libssl-dev
+            apt-get -y install unzip
 
             echo ""
             echo -e "${ColorAzul}    Compilando...${FinColor}"
@@ -224,7 +244,7 @@ elif [ $OS_VERS == "11" ]; then
             # systemctl status nagios.service
           ;;
 
-          2)
+          3)
             echo ""
             echo -e "${ColorAzul}  Iniciando la instalación de Nagios Core desde la web de GitHub...${FinColor}"
             echo ""
@@ -289,6 +309,7 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y install libgd-dev
             apt-get -y install openssl
             apt-get -y install libssl-dev
+            apt-get -y install unzip
 
             echo ""
             echo -e "${ColorAzul}  Compilando...${FinColor}"
@@ -332,7 +353,7 @@ elif [ $OS_VERS == "11" ]; then
             # systemctl status nagios.service
           ;;
 
-          3)
+          4)
             echo ""
             echo -e "${ColorAzul}  Instalando plugins de Nagios...${FinColor}"
             echo ""
@@ -405,7 +426,7 @@ elif [ $OS_VERS == "11" ]; then
             # systemctl status nagios.service
           ;;
 
-          4)
+          5)
             # HTML URL:  http://localhost/nagios/
             # CGI URL:  http://localhost/nagios/cgi-bin/
             # Traceroute (used by WAP):  /usr/sbin/traceroute
