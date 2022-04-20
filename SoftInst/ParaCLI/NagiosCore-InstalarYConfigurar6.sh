@@ -154,8 +154,8 @@ elif [ $OS_VERS == "11" ]; then
       apt-get -y install tar
       echo ""
     fi
-  tar -xfv /root/SoftInst/NagiosCore/nagiosweb.tar.gz -C /root/SoftInst/NagiosCore/
-  tar -xfv /root/SoftInst/NagiosCore/nagiosgithub.tar.gz -C /root/SoftInst/NagiosCore/
+  tar -xv -f /root/SoftInst/NagiosCore/nagiosweb.tar.gz    -C /root/SoftInst/NagiosCore/
+  tar -xv -f /root/SoftInst/NagiosCore/nagiosgithub.tar.gz -C /root/SoftInst/NagiosCore/
 
 fi
 
