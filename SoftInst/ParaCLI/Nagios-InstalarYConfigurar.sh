@@ -12,6 +12,8 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Nagios-InstalarYConfigurar.sh | bash
 #----------------------------------------------------------------------------------------------------------------------------
 
+NagiosAdmin="nipegun"
+
 ColorAzul="\033[0;34m"
 ColorVerde='\033[1;32m'
 ColorRojo='\033[1;31m'
@@ -163,7 +165,7 @@ elif [ $OS_VERS == "11" ]; then
                 apt-get -y install tar
                 echo ""
               fi
-            tar -xv -f /root/SoftInst/NagiosCore/nagiosweb.tar.gz -C /root/SoftInst/NagiosCore/
+            tar -x -f /root/SoftInst/NagiosCore/nagiosweb.tar.gz -C /root/SoftInst/NagiosCore/
 
             echo ""
             echo -e "${ColorAzul}    Instalando paquetes necesarios...${FinColor}"
@@ -199,7 +201,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo -e "${ColorAzul}    Creando la cuenta en apache para poder loguearse en nagios...${FinColor}"
             echo ""
-            htpasswd -c             /usr/local/nagios/etc/htpasswd.users nagiosadmin
+            htpasswd -c             /usr/local/nagios/etc/htpasswd.users $NagiosAdmin
             chown www-data:www-data /usr/local/nagios/etc/htpasswd.users
             chmod 640               /usr/local/nagios/etc/htpasswd.users
 
@@ -307,7 +309,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo -e "${ColorAzul}  Creando la cuenta en apache para poder loguearse en nagios...${FinColor}"
             echo ""
-            htpasswd -c             /usr/local/nagios/etc/htpasswd.users nagiosadmin
+            htpasswd -c             /usr/local/nagios/etc/htpasswd.users $NagiosAdmin
             chown www-data:www-data /usr/local/nagios/etc/htpasswd.users
             chmod 640               /usr/local/nagios/etc/htpasswd.users
 
