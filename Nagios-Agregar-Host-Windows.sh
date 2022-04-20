@@ -22,10 +22,10 @@ IPDelHost=$3
 # cp /etc/nagios4/objects/windows.cfg /etc/nagios4/servers/$NombreDelHost.cfg
 
 echo "define host {"                                                                                        > /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  use        windows-server    ; Valor heredado de la plantilla"                                     >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  host_name  $NombreDelHost    ; Nombre del host"                                                    >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  alias      My Windows Server ; Nombre largo pàra identificar el Windows"                           >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  address    255.255.255.255   ; Dirección IP del Windows"                                           >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  use        windows-server ; Valor heredado de la plantilla"                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  host_name  $NombreDelHost ; Nombre del host"                                                       >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  alias      $AliasDelHost  ; Nombre largo para identificar el Windows"                              >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  address    $IPDelHost     ; Dirección IP del Windows"                                              >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "}"                                                                                                   >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo ""                                                                                                    >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "# Todos los hosts que usen la plantilla windows-server formarán parte de este grupo"                 >> /etc/nagios4/servers/$NombreDelHost.cfg
