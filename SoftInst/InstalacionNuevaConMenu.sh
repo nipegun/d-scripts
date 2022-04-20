@@ -12,6 +12,11 @@
 #  curl -s x | bash
 #---------------------------------------------------------------------------------------
 
+ColorAzul="\033[0;34m"
+ColorVerde='\033[1;32m'
+ColorRojo='\033[1;31m'
+FinColor='\033[0m'
+
 CantArgsCorrectos=1
 ArgsInsuficientes=65
 
