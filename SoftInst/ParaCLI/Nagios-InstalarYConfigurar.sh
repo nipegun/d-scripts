@@ -12,7 +12,7 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Nagios-InstalarYConfigurar.sh | bash
 #----------------------------------------------------------------------------------------------------------------------------
 
-NagiosAdmin="nipegun"
+NagiosAdmin="nagiosadmin"
 
 ColorAzul="\033[0;34m"
 ColorVerde='\033[1;32m'
@@ -142,6 +142,39 @@ elif [ $OS_VERS == "11" ]; then
             echo -e "${ColorAzul}    Instalando el paquete $PaqueteEnRepos...${FinColor}"
             echo ""
             apt-get -y install $PaqueteEnRepos
+
+            echo ""
+            echo -e "${ColorAzul}    Activando el servicio $PaqueteEnRepos...${FinColor}"
+            echo ""
+            systemctl enable $PaqueteEnRepos --now
+
+            echo ""
+            echo -e "${ColorAzul}    Activando módulos de apache...${FinColor}"
+            echo ""
+            a2enmod rewrite
+            a2enmod cgi
+
+            echo ""
+            echo -e "${ColorAzul}    Activando autenticación...${FinColor}"
+            echo ""
+            a2enmod auth_digest
+            a2enmod authz_groupfile
+            htdigest -c /etc/nagios4/htdigest.users "Restricted Nagios4 Access" $NagiosAdmin
+
+            echo ""
+            echo -e "${ColorAzul}    Reiniciando apache...${FinColor}"
+            echo ""
+            systemctl restart apache2
+
+            echo ""
+            echo -e "${ColorAzul}    Reiniciando el servicio $PaqueteEnRepos...${FinColor}"
+            echo ""
+            systemctl restart $PaqueteEnRepos
+
+            echo ""
+            echo -e "${ColorVerde}    $PaqueteEnRepos instalado desde los repos de Debian.${FinColor}"
+            echo -e "${ColorVerde}    Accede a la IP/$PaqueteEnRepos para conectarte.${FinColor}"
+            echo ""
           ;;
 
           2)
