@@ -110,16 +110,16 @@ elif [ $OS_VERS == "11" ]; then
     fi
 
   echo ""
-  echo "  Determinando la última versión según la web..."
+  echo "  Determinando la última versión disponible en la web oficial..."
   echo ""
   UltVersNagiosCoreWeb=$(curl -s https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f2)
   echo "    La última versión según la web oficial es la $UltVersNagiosCoreWeb."
 
   echo ""
-  echo "  Determinando la última versión según GitHub..."
+  echo "  Determinando la última versión según la web de GitHub..."
   echo ""
   UltVersNagiosCoreGitHub=$(curl -s https://github.com/NagiosEnterprises/nagioscore/releases/ | grep href | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f2)
-  echo "    La última versión según GitHub es la $UltVersNagiosCoreGitHub."
+  echo "    La última versión según la web de GitHub es la $UltVersNagiosCoreGitHub."
 
   echo ""
   echo "  Descargando archivo de la última versión..."
@@ -139,6 +139,23 @@ elif [ $OS_VERS == "11" ]; then
       echo ""
     fi
   wget https://github.com$ArchUltVersNagiosCoreGitHub -O /root/SoftInst/NagiosCore/nagiosgithub.tar.gz
+
+  echo ""
+  echo "  Descomprimiendo archivo descargado..."
+  echo ""
+  mkdir -p /root/SoftInst/NagiosCore/Web/
+  mkdir -p /root/SoftInst/NagiosCore/GitHub/
+  # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo "  tar no está instalado. Iniciando su instalación..."
+      echo ""
+      apt-get -y update
+      apt-get -y install tar
+      echo ""
+    fi
+  tar -xf /root/SoftInst/NagiosCore/nagiosweb.tar.gz -C /root/SoftInst/NagiosCore/Web/
+  tar -xf /root/SoftInst/NagiosCore/nagiosgithub.tar.gz -C /root/SoftInst/NagiosCore/GitHub/
 
 fi
 
