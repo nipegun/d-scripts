@@ -86,3 +86,5 @@ echo "}"                                                                        
 
 chown nagios:nagios /etc/nagios4/servers/$NombreDelHost.cfg
 
+systemctl restart nagios4
+
