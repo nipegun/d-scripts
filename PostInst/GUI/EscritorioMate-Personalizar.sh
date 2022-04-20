@@ -271,5 +271,28 @@ elif [ $OS_VERS == "11" ]; then
   apt-get install fonts-ubuntu
   echo ""
 
+  echo ""
+  echo "  Personalizando LightDM..."
+  echo ""
+  cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
+  
+  cp /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.old
+
+  # Cambiar el tema
+    sed -i -e 's|#theme-name=|theme-name=Arc-Darker|g' /etc/lightdm/lightdm-gtk-greeter.conf
+  # Cambiar la imagen de fondo
+    sed -i -e 's|#background=|#background=#000000\nbackground=/usr/share/pixmaps/LightDMWallpaper.jpg|g' /etc/lightdm/lightdm-gtk-greeter.conf
+    wget -O /usr/share/pixmaps/LightDMWallpaper.jpg
+    chmod 777 /usr/share/pixmaps/LightDMWallpaper.jpg
+  # Cambiar la fuente
+    sed -i -e 's|#font-name=|font-name=ubuntu|g' /etc/lightdm/lightdm-gtk-greeter.conf
+  # Cambiar el escritorio por defecto
+    sed -i -e 's|Exec=default|Exec=mate-session|g' /usr/share/xsessions/lightdm-xsession.desktop
+    #sed -i -e 's|Exec=default|Exec=startxfce4|g' /usr/share/xsessions/lightdm-xsession.desktop
+    #sed -i -e 's|Exec=default|Exec=startkde|g' /usr/share/xsessions/lightdm-xsession.desktop
+    #sed -i -e 's|Exec=default|Exec=gnome-session|g' /usr/share/xsessions/lightdm-xsession.desktop
+    #sed -i -e 's|Exec=default|Exec=enlightenment_start|g' /usr/share/xsessions/lightdm-xsession.desktop
+    #sed -i -e 's|Exec=default|Exec=startlxde|g' /usr/share/xsessions/lightdm-xsession.desktop
+
 fi
 
