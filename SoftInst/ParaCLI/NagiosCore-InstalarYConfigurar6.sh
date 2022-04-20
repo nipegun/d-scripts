@@ -12,8 +12,9 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/NagiosCore-InstalarYConfigurar.sh | bash
 #--------------------------------------------------------------------------------------------------------------------------------
 
-ColorRojo='\033[1;31m'
+ColorAzul="\033[0;34m"
 ColorVerde='\033[1;32m'
+ColorRojo='\033[1;31m'
 FinColor='\033[0m'
 
 # Determinar la versión de Debian
@@ -93,10 +94,16 @@ elif [ $OS_VERS == "10" ]; then
 
 elif [ $OS_VERS == "11" ]; then
 
+  echo ""
+  echo "--------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Nagios Core para Debian 11 (Bullseye)..."
+  echo "--------------------------------------------------------------------------------"
+  echo ""
+
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo "  dialog no está instalado. Iniciando su instalación..."
+      echo -e "${ColorRojo}  dialog no está instalado. Iniciando su instalación...${FinColor}"
       echo ""
       apt-get -y update > /dev/null
       apt-get -y install dialog
@@ -118,26 +125,26 @@ elif [ $OS_VERS == "11" ]; then
 
           1)
             echo ""
-            echo -e "${ColorVerde}  Iniciando la instalación de Nagios Core desde la web oficial...${FinColor}"
+            echo -e "${ColorAzul}  Iniciando la instalación de Nagios Core desde la web oficial...${FinColor}"
             echo ""
 
             echo ""
-            echo "    Determinando la última versión disponible en la web oficial..."
+            echo -e "${ColorAzul}    Determinando la última versión disponible en la web oficial...${FinColor}"
             echo ""
             # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo "    curl no está instalado. Iniciando su instalación..."
+                echo -e "${ColorRojo}      curl no está instalado. Iniciando su instalación...${FinColor}"
                 echo ""
                 apt-get -y update
                 apt-get -y install curl
                 echo ""
               fi
             UltVersNagiosCoreWeb=$(curl -s https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f2)
-            echo "      La última versión según la web oficial es la $UltVersNagiosCoreWeb."
+            echo -e "${ColorAzul}      La última versión según la web oficial es la $UltVersNagiosCoreWeb.${FinColor}"
 
             echo ""
-            echo "    Descargando archivo de la última versión..."
+            echo -e "${ColorAzul}    Descargando archivo de la última versión...${FinColor}"
             echo ""
             ArchUltVersNagiosCoreWeb=$(curl -s https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2)
             mkdir -p /root/SoftInst/NagiosCore/
@@ -145,12 +152,12 @@ elif [ $OS_VERS == "11" ]; then
             curl --silent $ArchUltVersNagiosCoreWeb --output /root/SoftInst/NagiosCore/nagiosweb.tar.gz
 
             echo ""
-            echo "    Descomprimiendo archivo descargado..."
+            echo -e "${ColorAzul}    Descomprimiendo archivo descargado...${FinColor}"
             echo ""
             # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo "    tar no está instalado. Iniciando su instalación..."
+                echo -e "${ColorRojo}    tar no está instalado. Iniciando su instalación...${FinColor}"
                 echo ""
                 apt-get -y update
                 apt-get -y install tar
@@ -159,7 +166,7 @@ elif [ $OS_VERS == "11" ]; then
             tar -xv -f /root/SoftInst/NagiosCore/nagiosweb.tar.gz -C /root/SoftInst/NagiosCore/
 
             echo ""
-            echo "    Instalando paquetes necesarios..."
+            echo -e "${ColorAzul}    Instalando paquetes necesarios...${FinColor}"
             echo ""
             apt-get -y update
             apt-get -y install autoconf
@@ -174,7 +181,7 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y install libssl-dev
 
             echo ""
-            echo "    Compilando..."
+            echo -e "${ColorAzul}    Compilando...${FinColor}"
             echo ""
             cd /root/SoftInst/NagiosCore/nagios-$UltVersNagiosCoreWeb/
             ./configure --with-httpd-conf=/etc/apache2/sites-enabled
@@ -190,24 +197,24 @@ elif [ $OS_VERS == "11" ]; then
             a2enmod cgi
 
             echo ""
-            echo "    Creando la cuenta en apache para poder loguearse en nagios..."
+            echo -e "${ColorAzul}    Creando la cuenta en apache para poder loguearse en nagios...${FinColor}"
             echo ""
             htpasswd -c             /usr/local/nagios/etc/htpasswd.users nagiosadmin
             chown www-data:www-data /usr/local/nagios/etc/htpasswd.users
             chmod 640               /usr/local/nagios/etc/htpasswd.users
 
             echo ""
-            echo "    Re-arrancando el servicio de Apache..."
+            echo -e "${ColorAzul}    Re-arrancando el servicio de Apache...${FinColor}"
             echo ""
             systemctl restart apache2.service
 
             echo ""
-            echo "  Activando el servicio de Nagios..."
+            echo -e "${ColorAzul}  Activando el servicio de Nagios...${FinColor}"
             echo ""
             systemctl enable nagios.service --now
 
             echo ""
-            echo "  Arrancando el servicio de nagios..."
+            echo -e "${ColorAzul}  Arrancando el servicio de Nagios...${FinColor}"
             echo ""
             systemctl start nagios.service
             systemctl stop nagios.service
@@ -217,26 +224,26 @@ elif [ $OS_VERS == "11" ]; then
 
           2)
             echo ""
-            echo -e "${ColorVerde}  Iniciando la instalación de Nagios Core desde la web de GitHub...${FinColor}"
+            echo -e "${ColorAzul}  Iniciando la instalación de Nagios Core desde la web de GitHub...${FinColor}"
             echo ""
 
             echo ""
-            echo "  Determinando la última versión según la web de GitHub..."
+            echo -e "${ColorAzul}  Determinando la última versión según la web de GitHub...${FinColor}"
             echo ""
             # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo "  curl no está instalado. Iniciando su instalación..."
+                echo -e "${ColorRojo}  curl no está instalado. Iniciando su instalación...${FinColor}"
                 echo ""
                 apt-get -y update
                 apt-get -y install curl
                 echo ""
               fi
             UltVersNagiosCoreGitHub=$(curl -s https://github.com/NagiosEnterprises/nagioscore/releases/ | grep href | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f3)
-            echo "    La última versión según la web de GitHub es la $UltVersNagiosCoreGitHub."
+            echo -e "${ColorAzul}    La última versión según la web de GitHub es la $UltVersNagiosCoreGitHub.${FinColor}"
 
             echo ""
-            echo "  Descargando archivo de la última versión..."
+            echo -e "${ColorAzul}  Descargando archivo de la última versión...${FinColor}"
             echo ""
             ArchUltVersNagiosCoreGitHub=$(curl -s https://github.com/NagiosEnterprises/nagioscore/releases/ | grep href | grep "tar.gz" | head -n1 | cut -d'"' -f2)
             mkdir -p /root/SoftInst/NagiosCore/
@@ -244,7 +251,7 @@ elif [ $OS_VERS == "11" ]; then
             # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo "  wget no está instalado. Iniciando su instalación..."
+                echo -e "${ColorRojo}  wget no está instalado. Iniciando su instalación...${FinColor}"
                 echo ""
                 apt-get -y update
                 apt-get -y install wget
@@ -253,12 +260,12 @@ elif [ $OS_VERS == "11" ]; then
             wget https://github.com$ArchUltVersNagiosCoreGitHub -O /root/SoftInst/NagiosCore/nagiosgithub.tar.gz
 
             echo ""
-            echo "  Descomprimiendo archivo descargado..."
+            echo -e "${ColorAzul}  Descomprimiendo archivo descargado...${FinColor}"
             echo ""
             # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo "  tar no está instalado. Iniciando su instalación..."
+                echo -e "${ColorRojo}  tar no está instalado. Iniciando su instalación...${FinColor}"
                 echo ""
                 apt-get -y update
                 apt-get -y install tar
@@ -267,7 +274,7 @@ elif [ $OS_VERS == "11" ]; then
             tar -xv -f /root/SoftInst/NagiosCore/nagiosgithub.tar.gz -C /root/SoftInst/NagiosCore/
 
             echo ""
-            echo "  Instalando paquetes necesarios..."
+            echo -e "${ColorAzul}  Instalando paquetes necesarios...${FinColor}"
             echo ""
             apt-get -y update
             apt-get -y install autoconf
@@ -282,7 +289,7 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y install libssl-dev
 
             echo ""
-            echo "  Compilando..."
+            echo -e "${ColorAzul}  Compilando...${FinColor}"
             echo ""
             cd /root/SoftInst/NagiosCore/nagios-$UltVersNagiosCoreGitHub/
             ./configure --with-httpd-conf=/etc/apache2/sites-enabled
@@ -298,24 +305,24 @@ elif [ $OS_VERS == "11" ]; then
             a2enmod cgi
 
             echo ""
-            echo "  Creando la cuenta en apache para poder loguearse en nagios..."
+            echo -e "${ColorAzul}  Creando la cuenta en apache para poder loguearse en nagios...${FinColor}"
             echo ""
             htpasswd -c             /usr/local/nagios/etc/htpasswd.users nagiosadmin
             chown www-data:www-data /usr/local/nagios/etc/htpasswd.users
             chmod 640               /usr/local/nagios/etc/htpasswd.users
 
             echo ""
-            echo "  Re-arrancando el servicio de Apache..."
+            echo -e "${ColorAzul}  Re-arrancando el servicio de Apache...${FinColor}"
             echo ""
             systemctl restart apache2.service
 
             echo ""
-            echo "  Activando el servicio de Nagios..."
+            echo -e "${ColorAzul}  Activando el servicio de Nagios...${FinColor}"
             echo ""
             systemctl enable nagios.service --now
 
             echo ""
-            echo "  Arrancando el servicio de nagios..."
+            echo -e "${ColorAzul}  Arrancando el servicio de nagios...${FinColor}"
             echo ""
             systemctl start nagios.service
             systemctl stop nagios.service
@@ -325,11 +332,11 @@ elif [ $OS_VERS == "11" ]; then
 
           3)
             echo ""
-            echo -e "${ColorVerde}  Instalando plugins de Nagios...${FinColor}"
+            echo -e "${ColorAzul}  Instalando plugins de Nagios...${FinColor}"
             echo ""
 
             echo ""
-            echo "    Instalando paquetes necesarios para que funcionen los plugins..."
+            echo -e "${ColorAzul}    Instalando paquetes necesarios para que funcionen los plugins...${FinColor}"
             echo ""
             apt-get -y install libmcrypt-dev
             apt-get -y install bc
@@ -352,18 +359,18 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y install qmail-tools
 
             echo ""
-            echo "    Determinando la última versión de los plugins..."
+            echo -e "${ColorAzul}    Determinando la última versión de los plugins...${FinColor}"
             echo ""
             UltVersPlugIns=$(curl -s https://github.com/nagios-plugins/nagios-plugins/releases/ | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2)
 
             echo ""
-            echo "    Descargando la última versión de los plugins..."
+            echo -e "${ColorAzul}    Descargando la última versión de los plugins...${FinColor}"
             echo ""
             ArchUltVersPlugIns=$(curl -s https://github.com/nagios-plugins/nagios-plugins/releases/ | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2)
             # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo "  wget no está instalado. Iniciando su instalación..."
+                echo -e "${ColorRojo}    wget no está instalado. Iniciando su instalación...${FinColor}"
                 echo ""
                 apt-get -y update
                 apt-get -y install wget
@@ -373,13 +380,13 @@ elif [ $OS_VERS == "11" ]; then
             tar -xv -f /root/SoftInst/NagiosCore/nagiosplugins.tar.gz -C /root/SoftInst/NagiosCore/
 
             echo ""
-            echo "    Compilando e instalando plugins..."
+            echo -e "${ColorAzul}    Compilando e instalando plugins...${FinColor}"
             echo ""
             cd /root/SoftInst/NagiosCore/nagios-plugins$UltVersPlugIns/
             ./configure --with-nagios-user=nagios --with-nagios-group=nagios
             make
             make install
-            echo "    Plugins instalaos en /usr/local/nagios/libexec/"
+            echo -e "${ColorAzul}    Plugins instalaos en /usr/local/nagios/libexec/${FinColor}"
             echo ""
 
             # state_retention_file=/usr/local/nagios/var/retention.dat /usr/local/nagios/etc/nagios.cfg
@@ -388,7 +395,7 @@ elif [ $OS_VERS == "11" ]; then
             # touch /usr/local/nagios/var/status.dat
 
             echo ""
-            echo "  Re-arrancando el servicio de nagios..."
+            echo -e "${ColorAzul}  Re-arrancando el servicio de nagios...${FinColor}"
             echo ""
             systemctl start nagios.service
             systemctl stop nagios.service
