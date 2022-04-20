@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar Nagios en Debian
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Nagios-InstalarYConfigurar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Nagios6-InstalarYConfigurar.sh | bash
 #----------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
