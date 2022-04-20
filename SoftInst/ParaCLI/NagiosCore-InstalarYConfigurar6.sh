@@ -173,7 +173,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Compilando..."
   echo ""
-  cd /root/SoftInst/NagiosCore/nagios-$$UltVersNagiosCoreGitHub/
+  cd /root/SoftInst/NagiosCore/nagios-$UltVersNagiosCoreGitHub/
   ./configure --with-httpd-conf=/etc/apache2/sites-enabled
   make all
   make install-groups-users
@@ -182,7 +182,6 @@ elif [ $OS_VERS == "11" ]; then
   make install-daemoninit
   make install-commandmode
   make install-config
-
   make install-webconf
   a2enmod rewrite
   a2enmod cgi
@@ -190,7 +189,9 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Creando la cuenta en apache para poder loguearse en nagios..."
   echo ""
-  htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+  htpasswd -c             /usr/local/nagios/etc/htpasswd.users nagiosadmin
+  chown www-data:www-data /usr/local/nagios/etc/htpasswd.users
+  chmod 640               /usr/local/nagios/etc/htpasswd.users
 
   echo ""
   echo "  Re-arrancando el servicio de Apache..."
@@ -204,6 +205,10 @@ elif [ $OS_VERS == "11" ]; then
 
   echo ""
   echo "  Comenzando la instalación de plugins..."
+  echo ""
+
+  echo ""
+  echo "    Instalando paquetes necesarios para que funcionen los plugins..."
   echo ""
   apt-get -y install libmcrypt-dev
   apt-get -y install bc
@@ -224,6 +229,42 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install qstat
   apt-get -y install fping
   apt-get -y install qmail-tools
+
+  echo ""
+  echo "    Determinando la última versión de los plugins..."
+  echo ""
+  UltVersPlugIns=$(curl -s https://github.com/nagios-plugins/nagios-plugins/releases/ | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2)
+
+  echo ""
+  echo "    Descargando la última versión de los plugins..."
+  echo ""
+  ArchUltVersPlugIns=$(curl -s https://github.com/nagios-plugins/nagios-plugins/releases/ | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2)
+  wget https://github.com$ArchUltVersPlugIns -O /root/SoftInst/NagiosCore/nagiosplugins.tar.gz
+  tar -xv -f /root/SoftInst/NagiosCore/nagiosplugins.tar.gz -C /root/SoftInst/NagiosCore/
+
+  echo ""
+  echo "    Compilando e instalando plugins..."
+  echo ""
+  cd /root/SoftInst/NagiosCore/nagios-plugins$UltVersPlugIns/
+  ./configure --with-nagios-user=nagios --with-nagios-group=nagios
+  make
+  make install
+  echo "    Plugins instalaos en /usr/local/nagios/libexec/"
+  echo ""
+
+
+state_retention_file=/usr/local/nagios/var/retention.dat /usr/local/nagios/etc/nagios.cfg
+status_file=/usr/local/nagios/var/status.dat             /usr/local/nagios/etc/nagios.cfg
+touch /usr/local/nagios/var/retention.da
+touch /usr/local/nagios/var/status.dat
+
+  echo ""
+  echo "  Re-arrancando el servicio de nagios..."
+  echo ""
+  systemctl start nagios.service
+  systemctl stop nagios.service
+  systemctl restart nagios.service
+  systemctl status nagios.service
 
 fi
 
