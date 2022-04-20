@@ -113,7 +113,7 @@ elif [ $OS_VERS == "11" ]; then
     fi
   menu=(dialog --timeout 5 --checklist "Instalación de Nagios" 22 76 16)
     opciones=(
-      1 "Instalar Nagios Core desde los repos de Debian" off
+      1 "Instalar Nagios desde los repos de Debian" off
       2 "Instalar la última versión de Nagios Core desde la web Oficial" off
       3 "Instalar la última versión de Nagios Core desde GitHub" off
       4 "Instalar plugins" off
@@ -128,14 +128,13 @@ elif [ $OS_VERS == "11" ]; then
 
           1)
             echo ""
-            echo -e "${ColorAzul}  Instalando nagios desde los repos de Debian...${FinColor}"
+            echo -e "${ColorAzul}  Instalando Nagios desde los repos de Debian...${FinColor}"
             echo ""
 
-            echo ""
             echo -e "${ColorAzul}    Determinando la versión disponible en los repos...${FinColor}"
             echo ""
             PaqueteEnRepos=$(apt-cache search nagios | grep ^nagios | grep core | cut -d'-' -f1)
-            UltVersiRepos=$(apt-cache show $PaqueteEnRepos | grep ersion | cut -d':' -f2) 
+            UltVersiRepos=$(apt-cache show $PaqueteEnRepos | grep ersion | cut -d':' -f2 | sed 's- --g')
             echo -e "${ColorAzul}      La última versión disponible en los repos de debian es la $UltVersiRepos...${FinColor}"
 
             echo ""
@@ -172,8 +171,8 @@ elif [ $OS_VERS == "11" ]; then
             systemctl restart $PaqueteEnRepos
 
             echo ""
-            echo -e "${ColorVerde}    $PaqueteEnRepos instalado desde los repos de Debian.${FinColor}"
-            echo -e "${ColorVerde}    Accede a la IP/$PaqueteEnRepos para conectarte.${FinColor}"
+            echo -e "${ColorVerde}  $PaqueteEnRepos instalado desde los repos de Debian.${FinColor}"
+            echo -e "${ColorVerde}  Accede $(hostname -I)/$PaqueteEnRepos para conectarte.${FinColor}"
             echo ""
           ;;
 
