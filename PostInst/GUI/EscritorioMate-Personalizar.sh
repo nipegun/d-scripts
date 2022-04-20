@@ -16,31 +16,31 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then
+    # Para systemd y freedesktop.org
+      . /etc/os-release
+      OS_NAME=$NAME
+      OS_VERS=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then
+    # linuxbase.org
+      OS_NAME=$(lsb_release -si)
+      OS_VERS=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then
+    # Para algunas versiones de Debian sin el comando lsb_release
+      . /etc/lsb-release
+      OS_NAME=$DISTRIB_ID
+      OS_VERS=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then
+    # Para versiones viejas de Debian.
+      OS_NAME=Debian
+      OS_VERS=$(cat /etc/debian_version)
+  else
+    # Para el viejo uname (También funciona para BSD)
+      OS_NAME=$(uname -s)
+      OS_VERS=$(uname -r)
+  fi
 
 if [ $OS_VERS == "7" ]; then
 
@@ -90,52 +90,52 @@ elif [ $OS_VERS == "10" ]; then
   echo -e "${ColorVerde}  Borrando y reemplazando los wallpapers...${FinColor}"
   echo ""
 
-  ## Cosmos
-     rm -R '/usr/share/backgrounds/cosmos' 
+  # Cosmos
+    rm -R '/usr/share/backgrounds/cosmos' 
 
-  ## Mate abstract
-     rm '/usr/share/backgrounds/mate/abstract/Flow.png'
-     rm '/usr/share/backgrounds/mate/abstract/Gulp.png'
-     rm '/usr/share/backgrounds/mate/abstract/Silk.png'
-     rm '/usr/share/backgrounds/mate/abstract/Spring.png'
-     rm '/usr/share/backgrounds/mate/abstract/Waves.png' 
+  # Mate abstract
+    rm '/usr/share/backgrounds/mate/abstract/Flow.png'
+    rm '/usr/share/backgrounds/mate/abstract/Gulp.png'
+    rm '/usr/share/backgrounds/mate/abstract/Silk.png'
+    rm '/usr/share/backgrounds/mate/abstract/Spring.png'
+    rm '/usr/share/backgrounds/mate/abstract/Waves.png' 
 
-  ## Mate desktop
-     rm '/usr/share/backgrounds/mate/desktop/Float-into-MATE.png' 
-     rm '/usr/share/backgrounds/mate/desktop/GreenTraditional.jpg' 
-     rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Dark.png' 
-     rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Light.png' 
-     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Cold-no-logo.png'
-     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Radioactive-no-logo.png'
-     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Warm-no-logo.png'
+  # Mate desktop
+    rm '/usr/share/backgrounds/mate/desktop/Float-into-MATE.png' 
+    rm '/usr/share/backgrounds/mate/desktop/GreenTraditional.jpg' 
+    rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Dark.png' 
+    rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Light.png' 
+    rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Cold-no-logo.png'
+    rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Radioactive-no-logo.png'
+    rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Warm-no-logo.png'
 
-  ## Mate nature
-     rm '/usr/share/backgrounds/mate/nature/Aqua.jpg'
-     rm '/usr/share/backgrounds/mate/nature/Blinds.jpg'
-     rm '/usr/share/backgrounds/mate/nature/Dune.jpg'
-     rm '/usr/share/backgrounds/mate/nature/FreshFlower.jpg'
-     rm '/usr/share/backgrounds/mate/nature/Garden.jpg'
-     rm '/usr/share/backgrounds/mate/nature/GreenMeadow.jpg'
-     rm '/usr/share/backgrounds/mate/nature/LadyBird.jpg'
-     rm '/usr/share/backgrounds/mate/nature/RainDrops.jpg'
-     rm '/usr/share/backgrounds/mate/nature/Storm.jpg'
-     rm '/usr/share/backgrounds/mate/nature/TwoWings.jpg'
-     rm '/usr/share/backgrounds/mate/nature/Wood.jpg'
-     rm '/usr/share/backgrounds/mate/nature/YellowFlower.jpg' 
-     rm -R /usr/share/backgrounds/mate/nature
+  # Mate nature
+    rm '/usr/share/backgrounds/mate/nature/Aqua.jpg'
+    rm '/usr/share/backgrounds/mate/nature/Blinds.jpg'
+    rm '/usr/share/backgrounds/mate/nature/Dune.jpg'
+    rm '/usr/share/backgrounds/mate/nature/FreshFlower.jpg'
+    rm '/usr/share/backgrounds/mate/nature/Garden.jpg'
+    rm '/usr/share/backgrounds/mate/nature/GreenMeadow.jpg'
+    rm '/usr/share/backgrounds/mate/nature/LadyBird.jpg'
+    rm '/usr/share/backgrounds/mate/nature/RainDrops.jpg'
+    rm '/usr/share/backgrounds/mate/nature/Storm.jpg'
+    rm '/usr/share/backgrounds/mate/nature/TwoWings.jpg'
+    rm '/usr/share/backgrounds/mate/nature/Wood.jpg'
+    rm '/usr/share/backgrounds/mate/nature/YellowFlower.jpg' 
+    rm -R /usr/share/backgrounds/mate/nature
 
-  ## Themes
-     apt-get -y purge arc-theme
-     apt-get -y purge adapta-gtk-theme
-     apt-get -y purge albatross-gtk-theme
-     apt-get -y purge blackbird-gtk-theme
-     apt-get -y purge bluebird-gtk-theme
-     apt-get -y purge breeze-gtk-theme
-     apt-get -y purge darkcold-gtk-theme
-     apt-get -y purge darkmint-gtk-theme
-     apt-get -y purge greybird-gtk-theme
-     apt-get -y purge materia-gtk-theme
-     apt-get -y purge numix-gtk-theme
+  # Themes
+    apt-get -y purge arc-theme
+    apt-get -y purge adapta-gtk-theme
+    apt-get -y purge albatross-gtk-theme
+    apt-get -y purge blackbird-gtk-theme
+    apt-get -y purge bluebird-gtk-theme
+    apt-get -y purge breeze-gtk-theme
+    apt-get -y purge darkcold-gtk-theme
+    apt-get -y purge darkmint-gtk-theme
+    apt-get -y purge greybird-gtk-theme
+    apt-get -y purge materia-gtk-theme
+    apt-get -y purge numix-gtk-theme
 
   rm -rf '/usr/share/themes/Blackbird'
   rm -rf '/usr/share/themes/BlackMATE'
@@ -181,59 +181,58 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${ColorVerde}  Borrando y reemplazando los wallpapers...${FinColor}"
   echo ""
 
-  ## Cosmos
-     rm -R '/usr/share/backgrounds/cosmos' 
+  # Cosmos
+    rm -R '/usr/share/backgrounds/cosmos' 
 
-  ## Mate abstract
-     rm '/usr/share/backgrounds/mate/abstract/Arc-Colors-Transparent-Wallpaper.png'
-     rm '/usr/share/backgrounds/mate/abstract/Elephants.jpg'
-     rm '/usr/share/backgrounds/mate/abstract/Elephants_3840x2160.jpg'
-     rm '/usr/share/backgrounds/mate/abstract/Elephants_5640x3172.jpg'
-     rm '/usr/share/backgrounds/mate/abstract/Flow.png'
-     rm '/usr/share/backgrounds/mate/abstract/Gulp.png'
-     rm '/usr/share/backgrounds/mate/abstract/Silk.png'
-     rm '/usr/share/backgrounds/mate/abstract/Spring.png'
-     rm '/usr/share/backgrounds/mate/abstract/Waves.png' 
+  # Mate abstract
+    rm '/usr/share/backgrounds/mate/abstract/Arc-Colors-Transparent-Wallpaper.png'
+    rm '/usr/share/backgrounds/mate/abstract/Elephants.jpg'
+    rm '/usr/share/backgrounds/mate/abstract/Elephants_3840x2160.jpg'
+    rm '/usr/share/backgrounds/mate/abstract/Elephants_5640x3172.jpg'
+    rm '/usr/share/backgrounds/mate/abstract/Flow.png'
+    rm '/usr/share/backgrounds/mate/abstract/Gulp.png'
+    rm '/usr/share/backgrounds/mate/abstract/Silk.png'
+    rm '/usr/share/backgrounds/mate/abstract/Spring.png'
+    rm '/usr/share/backgrounds/mate/abstract/Waves.png' 
 
-  ## Mate desktop
-     rm '/usr/share/backgrounds/mate/desktop/Float-into-MATE.png' 
-     rm '/usr/share/backgrounds/mate/desktop/GreenTraditional.jpg' 
-     rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Dark.png' 
-     rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Light.png'
-     rm '/usr/share/backgrounds/mate/desktop/Stripes.png'
-     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Cold-no-logo.png'
-     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Dark-no-logo.png'
-     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Radioactive-no-logo.png'
-     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Warm-no-logo.png'
-     
+  # Mate desktop
+    rm '/usr/share/backgrounds/mate/desktop/Float-into-MATE.png' 
+    rm '/usr/share/backgrounds/mate/desktop/GreenTraditional.jpg' 
+    rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Dark.png' 
+    rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Light.png'
+    rm '/usr/share/backgrounds/mate/desktop/Stripes.png'
+    rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Cold-no-logo.png'
+    rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Dark-no-logo.png'
+    rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Radioactive-no-logo.png'
+    rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Warm-no-logo.png'  
 
-  ## Mate nature
-     rm '/usr/share/backgrounds/mate/nature/Aqua.jpg'
-     rm '/usr/share/backgrounds/mate/nature/Blinds.jpg'
-     rm '/usr/share/backgrounds/mate/nature/Dune.jpg'
-     rm '/usr/share/backgrounds/mate/nature/FreshFlower.jpg'
-     rm '/usr/share/backgrounds/mate/nature/Garden.jpg'
-     rm '/usr/share/backgrounds/mate/nature/GreenMeadow.jpg'
-     rm '/usr/share/backgrounds/mate/nature/LadyBird.jpg'
-     rm '/usr/share/backgrounds/mate/nature/RainDrops.jpg'
-     rm '/usr/share/backgrounds/mate/nature/Storm.jpg'
-     rm '/usr/share/backgrounds/mate/nature/TwoWings.jpg'
-     rm '/usr/share/backgrounds/mate/nature/Wood.jpg'
-     rm '/usr/share/backgrounds/mate/nature/YellowFlower.jpg' 
-     rm -R /usr/share/backgrounds/mate/nature
+  # Mate nature
+    rm '/usr/share/backgrounds/mate/nature/Aqua.jpg'
+    rm '/usr/share/backgrounds/mate/nature/Blinds.jpg'
+    rm '/usr/share/backgrounds/mate/nature/Dune.jpg'
+    rm '/usr/share/backgrounds/mate/nature/FreshFlower.jpg'
+    rm '/usr/share/backgrounds/mate/nature/Garden.jpg'
+    rm '/usr/share/backgrounds/mate/nature/GreenMeadow.jpg'
+    rm '/usr/share/backgrounds/mate/nature/LadyBird.jpg'
+    rm '/usr/share/backgrounds/mate/nature/RainDrops.jpg'
+    rm '/usr/share/backgrounds/mate/nature/Storm.jpg'
+    rm '/usr/share/backgrounds/mate/nature/TwoWings.jpg'
+    rm '/usr/share/backgrounds/mate/nature/Wood.jpg'
+    rm '/usr/share/backgrounds/mate/nature/YellowFlower.jpg' 
+    rm -R /usr/share/backgrounds/mate/nature
 
-  ## Themes
-     apt-get -y purge arc-theme
-     apt-get -y purge adapta-gtk-theme
-     apt-get -y purge albatross-gtk-theme
-     apt-get -y purge blackbird-gtk-theme
-     apt-get -y purge bluebird-gtk-theme
-     apt-get -y purge breeze-gtk-theme
-     apt-get -y purge darkcold-gtk-theme
-     apt-get -y purge darkmint-gtk-theme
-     apt-get -y purge greybird-gtk-theme
-     apt-get -y purge materia-gtk-theme
-     apt-get -y purge numix-gtk-theme
+  # Themes
+    apt-get -y purge arc-theme
+    apt-get -y purge adapta-gtk-theme
+    apt-get -y purge albatross-gtk-theme
+    apt-get -y purge blackbird-gtk-theme
+    apt-get -y purge bluebird-gtk-theme
+    apt-get -y purge breeze-gtk-theme
+    apt-get -y purge darkcold-gtk-theme
+    apt-get -y purge darkmint-gtk-theme
+    apt-get -y purge greybird-gtk-theme
+    apt-get -y purge materia-gtk-theme
+    apt-get -y purge numix-gtk-theme
 
   rm -rf '/usr/share/themes/Blackbird'
   rm -rf '/usr/share/themes/BlackMATE'
@@ -289,6 +288,7 @@ elif [ $OS_VERS == "11" ]; then
     #sed -i -e 's|Exec=default|Exec=gnome-session|g' /usr/share/xsessions/lightdm-xsession.desktop
     #sed -i -e 's|Exec=default|Exec=enlightenment_start|g' /usr/share/xsessions/lightdm-xsession.desktop
     #sed -i -e 's|Exec=default|Exec=startlxde|g' /usr/share/xsessions/lightdm-xsession.desktop
+  echo ""
 
 fi
 
