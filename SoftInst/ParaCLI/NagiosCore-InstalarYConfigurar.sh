@@ -100,8 +100,19 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Determinando la última versión..."
   echo ""
+  UltVersNagiosCoreWeb=$(curl -s https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f2)
+  echo "  La última versión según la web oficial es la $UltVersNagiosCoreWeb."
+
+  echo ""
+  echo "  Descargando archivo de la última versión..."
+  echo ""
+  ArchUltVersNagiosCoreWeb=$(curl -s https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2)
+  ArchUltVersNagiosCoreGitHub=$(curl -s https://github.com/NagiosEnterprises/nagioscore/releases/ | grep href | grep "tar.gz" | head -n1 | cut -d'"' -f2)
+  mkdir -p /root/SoftInst/NagiosCore/
+  curl --silent $ArchUltVersNagiosCoreWeb                      --output /root/SoftInst/NagiosCore/nagios1.tar.gz
+  curl --silent https://github.com$ArchUltVersNagiosCoreGitHub --output /root/SoftInst/NagiosCore/nagios2.tar.gz
 
 fi
 
