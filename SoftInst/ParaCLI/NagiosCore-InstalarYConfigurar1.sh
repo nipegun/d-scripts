@@ -102,8 +102,17 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Determinando la última versión..."
   echo ""
+  # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo "  curl no está instalado. Iniciando su instalación..."
+      echo ""
+      apt-get -y update
+      apt-get -y install curl
+      echo ""
+    fi
   UltVersNagiosCoreWeb=$(curl -s https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f2)
-  echo "  La última versión según la web oficial es la $UltVersNagiosCoreWeb."
+  echo "    La última versión según la web oficial es la $UltVersNagiosCoreWeb."
 
   echo ""
   echo "  Descargando archivo de la última versión..."
@@ -112,7 +121,16 @@ elif [ $OS_VERS == "11" ]; then
   ArchUltVersNagiosCoreGitHub=$(curl -s https://github.com/NagiosEnterprises/nagioscore/releases/ | grep href | grep "tar.gz" | head -n1 | cut -d'"' -f2)
   mkdir -p /root/SoftInst/NagiosCore/
   curl --silent $ArchUltVersNagiosCoreWeb                      --output /root/SoftInst/NagiosCore/nagios1.tar.gz
-  curl --silent https://github.com$ArchUltVersNagiosCoreGitHub --output /root/SoftInst/NagiosCore/nagios2.tar.gz
+  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo "  wget no está instalado. Iniciando su instalación..."
+      echo ""
+      apt-get -y update
+      apt-get -y install wget
+      echo ""
+    fi
+  wget https://github.com$ArchUltVersNagiosCoreGitHub --output /root/SoftInst/NagiosCore/nagios2.tar.gz
 
 fi
 
