@@ -12,7 +12,7 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios-Agregar-Host-Windows.sh | bash -s URL Servicio
 #
 #  Ejemplo:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios-Agregar-Host-Windows.sh | bash -s https://nightly.odoo.com/odoo.key Odoo
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios-Agregar-Host-Windows.sh | bash -s miwindows "Mi máquina de Windows" "192.168.0.122"
 #----------------------------------------------------------------------------------------------------------------------
 
 NombreDelHost=$1
