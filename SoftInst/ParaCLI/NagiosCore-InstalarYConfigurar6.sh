@@ -93,181 +93,318 @@ elif [ $OS_VERS == "10" ]; then
 
 elif [ $OS_VERS == "11" ]; then
 
-  echo ""
-  echo "----------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Nagios Core para Debian 11 (Bullseye)..."
-  echo "----------------------------------------------------------------------------------"
-  echo ""
-
-  # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo "  curl no está instalado. Iniciando su instalación..."
+      echo "  dialog no está instalado. Iniciando su instalación..."
       echo ""
-      apt-get -y update
-      apt-get -y install curl
+      apt-get -y update > /dev/null
+      apt-get -y install dialog
       echo ""
     fi
+  menu=(dialog --timeout 5 --checklist "Instalación de Nagios" 22 76 16)
+    opciones=(
+      1 "Instalar Nagios Core desde la web Oficial" off
+      2 "Instalar Nagios Core desde GitHub" on
+      3 "Instalar plugins" off
+      4 "x" off
+    )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+    clear
 
-  echo ""
-  echo "  Determinando la última versión disponible en la web oficial..."
-  echo ""
-  UltVersNagiosCoreWeb=$(curl -s https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f2)
-  echo "    La última versión según la web oficial es la $UltVersNagiosCoreWeb."
+    for choice in $choices
+      do
+        case $choice in
 
-  echo ""
-  echo "  Determinando la última versión según la web de GitHub..."
-  echo ""
-  UltVersNagiosCoreGitHub=$(curl -s https://github.com/NagiosEnterprises/nagioscore/releases/ | grep href | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f2)
-  echo "    La última versión según la web de GitHub es la $UltVersNagiosCoreGitHub."
+          1)
+            echo ""
+            echo -e "${ColorVerde}  Iniciando la instalación de Nagios Core desde la web oficial...${FinColor}"
+            echo ""
 
-  echo ""
-  echo "  Descargando archivo de la última versión..."
-  echo ""
-  ArchUltVersNagiosCoreWeb=$(curl -s https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2)
-  ArchUltVersNagiosCoreGitHub=$(curl -s https://github.com/NagiosEnterprises/nagioscore/releases/ | grep href | grep "tar.gz" | head -n1 | cut -d'"' -f2)
-  mkdir -p /root/SoftInst/NagiosCore/
-  rm -rf /root/SoftInst/NagiosCore/*
-  curl --silent $ArchUltVersNagiosCoreWeb --output /root/SoftInst/NagiosCore/nagiosweb.tar.gz
-  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-      echo ""
-      echo "  wget no está instalado. Iniciando su instalación..."
-      echo ""
-      apt-get -y update
-      apt-get -y install wget
-      echo ""
-    fi
-  wget https://github.com$ArchUltVersNagiosCoreGitHub -O /root/SoftInst/NagiosCore/nagiosgithub.tar.gz
+            echo ""
+            echo "    Determinando la última versión disponible en la web oficial..."
+            echo ""
+            # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo "  curl no está instalado. Iniciando su instalación..."
+                echo ""
+                apt-get -y update
+                apt-get -y install curl
+                echo ""
+              fi
+            UltVersNagiosCoreWeb=$(curl -s https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f2)
+            echo "    La última versión según la web oficial es la $UltVersNagiosCoreWeb."
 
-  echo ""
-  echo "  Descomprimiendo archivo descargado..."
-  echo ""
-  # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
-      echo ""
-      echo "  tar no está instalado. Iniciando su instalación..."
-      echo ""
-      apt-get -y update
-      apt-get -y install tar
-      echo ""
-    fi
-  tar -xv -f /root/SoftInst/NagiosCore/nagiosweb.tar.gz    -C /root/SoftInst/NagiosCore/
-  tar -xv -f /root/SoftInst/NagiosCore/nagiosgithub.tar.gz -C /root/SoftInst/NagiosCore/
+            echo ""
+            echo "    Descargando archivo de la última versión..."
+            echo ""
+            ArchUltVersNagiosCoreWeb=$(curl -s https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2)
+            mkdir -p /root/SoftInst/NagiosCore/
+            rm -rf /root/SoftInst/NagiosCore/*
+            curl --silent $ArchUltVersNagiosCoreWeb --output /root/SoftInst/NagiosCore/nagiosweb.tar.gz
 
-  echo ""
-  echo "  Instalando paquetes necesarios..."
-  echo ""
-  apt-get -y update
-  apt-get -y install autoconf
-  apt-get -y install gcc
-  apt-get -y install libc6
-  apt-get -y install make
-  apt-get -y install apache2
-  apt-get -y install apache2-utils
-  apt-get -y install php
-  apt-get -y install libgd-dev
-  apt-get -y install openssl
-  apt-get -y install libssl-dev
+            echo ""
+            echo "    Descomprimiendo archivo descargado..."
+            echo ""
+            # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo "    tar no está instalado. Iniciando su instalación..."
+                echo ""
+                apt-get -y update
+                apt-get -y install tar
+                echo ""
+              fi
+            tar -xv -f /root/SoftInst/NagiosCore/nagiosweb.tar.gz -C /root/SoftInst/NagiosCore/
 
-  echo ""
-  echo "  Compilando..."
-  echo ""
-  cd /root/SoftInst/NagiosCore/nagios-$UltVersNagiosCoreGitHub/
-  ./configure --with-httpd-conf=/etc/apache2/sites-enabled
-  make all
-  make install-groups-users
-  usermod -a -G nagios www-data
-  make install
-  make install-daemoninit
-  make install-commandmode
-  make install-config
-  make install-webconf
-  a2enmod rewrite
-  a2enmod cgi
+            echo ""
+            echo "    Instalando paquetes necesarios..."
+            echo ""
+            apt-get -y update
+            apt-get -y install autoconf
+            apt-get -y install gcc
+            apt-get -y install libc6
+            apt-get -y install make
+            apt-get -y install apache2
+            apt-get -y install apache2-utils
+            apt-get -y install php
+            apt-get -y install libgd-dev
+            apt-get -y install openssl
+            apt-get -y install libssl-dev
 
-  echo ""
-  echo "  Creando la cuenta en apache para poder loguearse en nagios..."
-  echo ""
-  htpasswd -c             /usr/local/nagios/etc/htpasswd.users nagiosadmin
-  chown www-data:www-data /usr/local/nagios/etc/htpasswd.users
-  chmod 640               /usr/local/nagios/etc/htpasswd.users
+            echo ""
+            echo "    Compilando..."
+            echo ""
+            cd /root/SoftInst/NagiosCore/nagios-$UltVersNagiosCoreWeb/
+            ./configure --with-httpd-conf=/etc/apache2/sites-enabled
+            make all
+            make install-groups-users
+            usermod -a -G nagios www-data
+            make install
+            make install-daemoninit
+            make install-commandmode
+            make install-config
+            make install-webconf
+            a2enmod rewrite
+            a2enmod cgi
 
-  echo ""
-  echo "  Re-arrancando el servicio de Apache..."
-  echo ""
-  systemctl restart apache2.service
+            echo ""
+            echo "    Creando la cuenta en apache para poder loguearse en nagios..."
+            echo ""
+            htpasswd -c             /usr/local/nagios/etc/htpasswd.users nagiosadmin
+            chown www-data:www-data /usr/local/nagios/etc/htpasswd.users
+            chmod 640               /usr/local/nagios/etc/htpasswd.users
 
-  echo ""
-  echo "  Arrancando el servicio de Nagios..."
-  echo ""
-  systemctl start nagios.service
+            echo ""
+            echo "    Re-arrancando el servicio de Apache..."
+            echo ""
+            systemctl restart apache2.service
 
-  echo ""
-  echo "  Comenzando la instalación de plugins..."
-  echo ""
+            echo ""
+            echo "  Activando el servicio de Nagios..."
+            echo ""
+            systemctl enable nagios.service --now
 
-  echo ""
-  echo "    Instalando paquetes necesarios para que funcionen los plugins..."
-  echo ""
-  apt-get -y install libmcrypt-dev
-  apt-get -y install bc
-  apt-get -y install gawk
-  apt-get -y install dc
-  apt-get -y install build-essential
-  apt-get -y install snmp
-  apt-get -y install libnet-snmp-perl
-  apt-get -y install gettext
-  apt-get -y install libpqxx3-dev
-  apt-get -y install libdbi-dev
-  apt-get -y install libfreeradius-dev
-  apt-get -y install libldap2-dev
-  apt-get -y install libmariadb-dev-compat
-  apt-get -y install libmariadb-dev
-  apt-get -y install dnsutils
-  apt-get -y install smbclient
-  apt-get -y install qstat
-  apt-get -y install fping
-  apt-get -y install qmail-tools
+            echo ""
+            echo "  Arrancando el servicio de nagios..."
+            echo ""
+            systemctl start nagios.service
+            systemctl stop nagios.service
+            systemctl restart nagios.service
+            # systemctl status nagios.service
+          ;;
 
-  echo ""
-  echo "    Determinando la última versión de los plugins..."
-  echo ""
-  UltVersPlugIns=$(curl -s https://github.com/nagios-plugins/nagios-plugins/releases/ | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2)
+          2)
+            echo ""
+            echo -e "${ColorVerde}  Iniciando la instalación de Nagios Core desde la web de GitHub...${FinColor}"
+            echo ""
 
-  echo ""
-  echo "    Descargando la última versión de los plugins..."
-  echo ""
-  ArchUltVersPlugIns=$(curl -s https://github.com/nagios-plugins/nagios-plugins/releases/ | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2)
-  wget https://github.com$ArchUltVersPlugIns -O /root/SoftInst/NagiosCore/nagiosplugins.tar.gz
-  tar -xv -f /root/SoftInst/NagiosCore/nagiosplugins.tar.gz -C /root/SoftInst/NagiosCore/
+            echo ""
+            echo "  Determinando la última versión según la web de GitHub..."
+            echo ""
+            # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo "  curl no está instalado. Iniciando su instalación..."
+                echo ""
+                apt-get -y update
+                apt-get -y install curl
+                echo ""
+              fi
+            UltVersNagiosCoreGitHub=$(curl -s https://github.com/NagiosEnterprises/nagioscore/releases/ | grep href | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f3)
+            echo "    La última versión según la web de GitHub es la $UltVersNagiosCoreGitHub."
 
-  echo ""
-  echo "    Compilando e instalando plugins..."
-  echo ""
-  cd /root/SoftInst/NagiosCore/nagios-plugins$UltVersPlugIns/
-  ./configure --with-nagios-user=nagios --with-nagios-group=nagios
-  make
-  make install
-  echo "    Plugins instalaos en /usr/local/nagios/libexec/"
-  echo ""
+            echo ""
+            echo "  Descargando archivo de la última versión..."
+            echo ""
+            ArchUltVersNagiosCoreGitHub=$(curl -s https://github.com/NagiosEnterprises/nagioscore/releases/ | grep href | grep "tar.gz" | head -n1 | cut -d'"' -f2)
+            mkdir -p /root/SoftInst/NagiosCore/
+            rm -rf /root/SoftInst/NagiosCore/*
+            # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo "  wget no está instalado. Iniciando su instalación..."
+                echo ""
+                apt-get -y update
+                apt-get -y install wget
+                echo ""
+              fi
+            wget https://github.com$ArchUltVersNagiosCoreGitHub -O /root/SoftInst/NagiosCore/nagiosgithub.tar.gz
 
+            echo ""
+            echo "  Descomprimiendo archivo descargado..."
+            echo ""
+            # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo "  tar no está instalado. Iniciando su instalación..."
+                echo ""
+                apt-get -y update
+                apt-get -y install tar
+                echo ""
+              fi
+            tar -xv -f /root/SoftInst/NagiosCore/nagiosgithub.tar.gz -C /root/SoftInst/NagiosCore/
 
-state_retention_file=/usr/local/nagios/var/retention.dat /usr/local/nagios/etc/nagios.cfg
-status_file=/usr/local/nagios/var/status.dat             /usr/local/nagios/etc/nagios.cfg
-touch /usr/local/nagios/var/retention.da
-touch /usr/local/nagios/var/status.dat
+            echo ""
+            echo "  Instalando paquetes necesarios..."
+            echo ""
+            apt-get -y update
+            apt-get -y install autoconf
+            apt-get -y install gcc
+            apt-get -y install libc6
+            apt-get -y install make
+            apt-get -y install apache2
+            apt-get -y install apache2-utils
+            apt-get -y install php
+            apt-get -y install libgd-dev
+            apt-get -y install openssl
+            apt-get -y install libssl-dev
 
-  echo ""
-  echo "  Re-arrancando el servicio de nagios..."
-  echo ""
-  systemctl start nagios.service
-  systemctl stop nagios.service
-  systemctl restart nagios.service
-  systemctl status nagios.service
+            echo ""
+            echo "  Compilando..."
+            echo ""
+            cd /root/SoftInst/NagiosCore/nagios-$UltVersNagiosCoreGitHub/
+            ./configure --with-httpd-conf=/etc/apache2/sites-enabled
+            make all
+            make install-groups-users
+            usermod -a -G nagios www-data
+            make install
+            make install-daemoninit
+            make install-commandmode
+            make install-config
+            make install-webconf
+            a2enmod rewrite
+            a2enmod cgi
+
+            echo ""
+            echo "  Creando la cuenta en apache para poder loguearse en nagios..."
+            echo ""
+            htpasswd -c             /usr/local/nagios/etc/htpasswd.users nagiosadmin
+            chown www-data:www-data /usr/local/nagios/etc/htpasswd.users
+            chmod 640               /usr/local/nagios/etc/htpasswd.users
+
+            echo ""
+            echo "  Re-arrancando el servicio de Apache..."
+            echo ""
+            systemctl restart apache2.service
+
+            echo ""
+            echo "  Activando el servicio de Nagios..."
+            echo ""
+            systemctl enable nagios.service --now
+
+            echo ""
+            echo "  Arrancando el servicio de nagios..."
+            echo ""
+            systemctl start nagios.service
+            systemctl stop nagios.service
+            systemctl restart nagios.service
+            # systemctl status nagios.service
+          ;;
+
+          3)
+            echo ""
+            echo -e "${ColorVerde}  Instalando plugins de Nagios...${FinColor}"
+            echo ""
+
+            echo ""
+            echo "    Instalando paquetes necesarios para que funcionen los plugins..."
+            echo ""
+            apt-get -y install libmcrypt-dev
+            apt-get -y install bc
+            apt-get -y install gawk
+            apt-get -y install dc
+            apt-get -y install build-essential
+            apt-get -y install snmp
+            apt-get -y install libnet-snmp-perl
+            apt-get -y install gettext
+            apt-get -y install libpqxx3-dev
+            apt-get -y install libdbi-dev
+            apt-get -y install libfreeradius-dev
+            apt-get -y install libldap2-dev
+            apt-get -y install libmariadb-dev-compat
+            apt-get -y install libmariadb-dev
+            apt-get -y install dnsutils
+            apt-get -y install smbclient
+            apt-get -y install qstat
+            apt-get -y install fping
+            apt-get -y install qmail-tools
+
+            echo ""
+            echo "    Determinando la última versión de los plugins..."
+            echo ""
+            UltVersPlugIns=$(curl -s https://github.com/nagios-plugins/nagios-plugins/releases/ | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2)
+
+            echo ""
+            echo "    Descargando la última versión de los plugins..."
+            echo ""
+            ArchUltVersPlugIns=$(curl -s https://github.com/nagios-plugins/nagios-plugins/releases/ | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2)
+            # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo "  wget no está instalado. Iniciando su instalación..."
+                echo ""
+                apt-get -y update
+                apt-get -y install wget
+                echo ""
+              fi
+            wget https://github.com$ArchUltVersPlugIns -O /root/SoftInst/NagiosCore/nagiosplugins.tar.gz
+            tar -xv -f /root/SoftInst/NagiosCore/nagiosplugins.tar.gz -C /root/SoftInst/NagiosCore/
+
+            echo ""
+            echo "    Compilando e instalando plugins..."
+            echo ""
+            cd /root/SoftInst/NagiosCore/nagios-plugins$UltVersPlugIns/
+            ./configure --with-nagios-user=nagios --with-nagios-group=nagios
+            make
+            make install
+            echo "    Plugins instalaos en /usr/local/nagios/libexec/"
+            echo ""
+
+            # state_retention_file=/usr/local/nagios/var/retention.dat /usr/local/nagios/etc/nagios.cfg
+            # status_file=/usr/local/nagios/var/status.dat             /usr/local/nagios/etc/nagios.cfg
+            # touch /usr/local/nagios/var/retention.da
+            # touch /usr/local/nagios/var/status.dat
+
+            echo ""
+            echo "  Re-arrancando el servicio de nagios..."
+            echo ""
+            systemctl start nagios.service
+            systemctl stop nagios.service
+            systemctl restart nagios.service
+            # systemctl status nagios.service
+          ;;
+
+          4)
+            # HTML URL:  http://localhost/nagios/
+            # CGI URL:  http://localhost/nagios/cgi-bin/
+            # Traceroute (used by WAP):  /usr/sbin/traceroute
+          ;;
+        
+        esac
+      done
+  fi
 
 fi
 
-   HTML URL:  http://localhost/nagios/
-                  CGI URL:  http://localhost/nagios/cgi-bin/
- Traceroute (used by WAP):  /usr/sbin/traceroute
