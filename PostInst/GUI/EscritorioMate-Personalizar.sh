@@ -274,10 +274,6 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Personalizando LightDM..."
   echo ""
-  cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.old
-  
-  cp /etc/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf.old
-
   # Cambiar el tema
     sed -i -e 's|#theme-name=|theme-name=Arc-Darker|g' /etc/lightdm/lightdm-gtk-greeter.conf
   # Cambiar la imagen de fondo
