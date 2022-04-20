@@ -213,6 +213,17 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install snmp
   apt-get -y install libnet-snmp-perl
   apt-get -y install gettext
+  apt-get -y install libpqxx3-dev
+  apt-get -y install libdbi-dev
+  apt-get -y install libfreeradius-dev
+  apt-get -y install libldap2-dev
+  apt-get -y install libmariadb-dev-compat
+  apt-get -y install libmariadb-dev
+  apt-get -y install dnsutils
+  apt-get -y install smbclient
+  apt-get -y install qstat
+  apt-get -y install fping
+  apt-get -y install qmail-tools
 
 fi
 
