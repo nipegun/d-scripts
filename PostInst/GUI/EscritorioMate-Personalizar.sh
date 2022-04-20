@@ -276,9 +276,18 @@ elif [ $OS_VERS == "11" ]; then
   # Cambiar el tema
     sed -i -e 's|#theme-name=|theme-name=Arc-Darker|g' /etc/lightdm/lightdm-gtk-greeter.conf
   # Cambiar la imagen de fondo
-    sed -i -e 's|#background=|#background=#000000\nbackground=/usr/share/pixmaps/LightDMWallpaper.jpg|g' /etc/lightdm/lightdm-gtk-greeter.conf
-    wget -O /usr/share/pixmaps/LightDMWallpaper.jpg
+    # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "  curl no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update > /dev/null
+        apt-get -y install curl
+        echo ""
+      fi
+    curl --silent https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/LightDMWallpaper.jpg --output /usr/share/pixmaps/LightDMWallpaper.jpg
     chmod 777 /usr/share/pixmaps/LightDMWallpaper.jpg
+    sed -i -e 's|#background=|#background=#000000\nbackground=/usr/share/pixmaps/LightDMWallpaper.jpg|g' /etc/lightdm/lightdm-gtk-greeter.conf
   # Cambiar la fuente
     sed -i -e 's|#font-name=|font-name=ubuntu|g' /etc/lightdm/lightdm-gtk-greeter.conf
   # Cambiar el escritorio por defecto
