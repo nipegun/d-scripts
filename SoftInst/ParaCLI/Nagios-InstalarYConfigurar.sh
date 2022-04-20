@@ -409,6 +409,7 @@ elif [ $OS_VERS == "11" ]; then
             # HTML URL:  http://localhost/nagios/
             # CGI URL:  http://localhost/nagios/cgi-bin/
             # Traceroute (used by WAP):  /usr/sbin/traceroute
+            # /usr/local/nagios/bin/nagios -d /usr/local/nagios/etc/nagios.cfg
           ;;
         
         esac
