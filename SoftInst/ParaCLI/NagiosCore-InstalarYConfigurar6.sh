@@ -143,8 +143,6 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Descomprimiendo archivo descargado..."
   echo ""
-  mkdir -p /root/SoftInst/NagiosCore/Web/
-  mkdir -p /root/SoftInst/NagiosCore/GitHub/
   # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
       echo ""
@@ -157,5 +155,67 @@ elif [ $OS_VERS == "11" ]; then
   tar -xv -f /root/SoftInst/NagiosCore/nagiosweb.tar.gz    -C /root/SoftInst/NagiosCore/
   tar -xv -f /root/SoftInst/NagiosCore/nagiosgithub.tar.gz -C /root/SoftInst/NagiosCore/
 
+  echo ""
+  echo "  Instalando paquetes necesarios..."
+  echo ""
+  apt-get -y update
+  apt-get -y install autoconf
+  apt-get -y install gcc
+  apt-get -y install libc6
+  apt-get -y install make
+  apt-get -y install apache2
+  apt-get -y install apache2-utils
+  apt-get -y install php
+  apt-get -y install libgd-dev
+  apt-get -y install openssl
+  apt-get -y install libssl-dev
+
+  echo ""
+  echo "  Compilando..."
+  echo ""
+  cd /root/SoftInst/NagiosCore/nagios-$$UltVersNagiosCoreGitHub/
+  ./configure --with-httpd-conf=/etc/apache2/sites-enabled
+  make all
+  make install-groups-users
+  usermod -a -G nagios www-data
+  make install
+  make install-daemoninit
+  make install-commandmode
+  make install-config
+
+  make install-webconf
+  a2enmod rewrite
+  a2enmod cgi
+
+  echo ""
+  echo "  Creando la cuenta en apache para poder loguearse en nagios..."
+  echo ""
+  htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+
+  echo ""
+  echo "  Re-arrancando el servicio de Apache..."
+  echo ""
+  systemctl restart apache2.service
+
+  echo ""
+  echo "  Arrancando el servicio de Nagios..."
+  echo ""
+  systemctl start nagios.service
+
+  echo ""
+  echo "  Comenzando la instalación de plugins..."
+  echo ""
+  apt-get -y install libmcrypt-dev
+  apt-get -y install bc
+  apt-get -y install gawk
+  apt-get -y install dc
+  apt-get -y install build-essential
+  apt-get -y install snmp
+  apt-get -y install libnet-snmp-perl
+  apt-get -y install gettext
+
 fi
 
+   HTML URL:  http://localhost/nagios/
+                  CGI URL:  http://localhost/nagios/cgi-bin/
+ Traceroute (used by WAP):  /usr/sbin/traceroute
