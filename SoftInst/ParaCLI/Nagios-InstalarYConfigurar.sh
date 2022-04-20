@@ -161,6 +161,11 @@ elif [ $OS_VERS == "11" ]; then
             htdigest -c /etc/nagios4/htdigest.users "Restricted Nagios4 Access" $NagiosAdmin
 
             echo ""
+            echo -e "${ColorAzul}    Cambiando los permisos del binario de ping para que no de errores...${FinColor}"
+            echo ""
+            chmod u+s /bin/ping
+
+            echo ""
             echo -e "${ColorAzul}    Reiniciando apache...${FinColor}"
             echo ""
             systemctl restart apache2
