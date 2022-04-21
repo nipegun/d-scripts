@@ -5,7 +5,7 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para agregar un host de Windows a Nagios
 #
 #  Ejecución remota:
@@ -13,7 +13,7 @@
 #
 #  Ejemplo:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios-Agregar-Host-Debian.sh | bash -s milinux "Mi servidor Linux" "192.168.0.123"
-#----------------------------------------------------------------------------------------------------------------------
+# ----------
 
 NombreDelHost=$1
 AliasDelHost=$2
@@ -55,6 +55,9 @@ systemctl restart nagios4
 
 echo ""
 echo "  Host agregado."
-echo "  Si la monitorización no funciona comprueba que en el host esté instalado el paquete nagios-plugins."
+echo "  Si la monitorización no funciona comprueba que en el host esté instalado los paquetes:"
+echo ""
+echo "  nagios-plugins"
+echo "  nagios-nrpe-server"
 echo ""
 
