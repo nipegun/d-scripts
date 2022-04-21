@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para instalar y configurar Proxmox Backup Server en Debian
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Proxmox-BackupServer-Instalar.sh | bash
-#-------------------------------------------------------------------------------------------------------------------------------
+# ----------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -157,7 +157,8 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "  Conéctate a la administración Web en mediante la siguiente URL en LAN:"
             echo ""
-            echo "  https://$(hostname -I):8007"
+            echo "  https://$(hostname -I | sed 's- --g'):8007"
+            echo ""
 
           ;;
 
@@ -198,7 +199,8 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "  Conéctate a la administración Web en mediante la siguiente URL en LAN:"
             echo ""
-            echo "  https://$(hostname -I):8007"
+            echo "  https://$(hostname -I | sed 's- --g'):8007"
+            echo ""
 
           ;;
 
