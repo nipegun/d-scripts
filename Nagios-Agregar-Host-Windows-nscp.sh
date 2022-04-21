@@ -24,16 +24,20 @@ IPDelHost=$3
 mkdir -p /etc/nagios4/servers/ 2> /dev/null
 
 echo "define host {"                                                                         > /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  use        windows-server ; Valor heredado de la plantilla"                         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  host_name  $NombreDelHost ; Nombre del host"                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  alias      $AliasDelHost  ; Nombre largo para identificar el Windows"               >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  address    $IPDelHost     ; Dirección IP del Windows"                               >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  use             windows-server"                                                     >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  host_name       $NombreDelHost"                                                     >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  alias           $AliasDelHost"                                                      >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  address         $IPDelHost"                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  icon_image      windows.png"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  icon_image_alt  Windows"                                                            >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  vrml_image      windows40.png"                                                      >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  statusmap_image windows40.gd2"                                                      >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "}"                                                                                    >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo ""                                                                                     >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "# Todos los hosts que usen la plantilla windows-server formarán parte de este grupo." >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "define hostgroup {"                                                                   >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  hostgroup_name  windows-servers ; Nombre del grupo"                                 >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  alias           Windows Servers ; Nombre largo para el grupo"                       >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  hostgroup_name  windows-servers"                                                    >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  alias           Windows Servers"                                                    >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "}"                                                                                    >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo ""                                                                                     >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "define service {"                                                                     >> /etc/nagios4/servers/$NombreDelHost.cfg
