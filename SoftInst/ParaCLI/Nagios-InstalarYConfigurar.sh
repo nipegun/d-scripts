@@ -215,6 +215,11 @@ elif [ $OS_VERS == "11" ]; then
             echo "  Para ver los plugins que tienes instalados, ejecuta:"
             echo "  ls -1 /usr/lib/nagios/plugins/*"
             echo ""
+            echo "  Para ver si la configuración funciona, ejecuta:"
+            echo ""
+            echo "/usr/sbin/nagios4 -v /etc/nagios4/nagios.cfg"
+            echo ""
+
           ;;
 
           2)
