@@ -308,6 +308,12 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             systemctl enable nagios.service --now
 
+            # Crear el archivo para abrir midnight commander
+              mkdir -p /root/scripts 2> /dev/null
+              echo '#!/bin/bash'                                     > /root/scripts/MidnightCommander.sh
+              echo "mc /usr/local/nagios/ /usr/lib/nagios/plugins/" >> /root/scripts/MidnightCommander.sh
+              chmod +x                                                 /root/scripts/MidnightCommander.sh
+
             echo ""
             echo -e "${ColorAzul}  Arrancando el servicio de Nagios...${FinColor}"
             echo ""
@@ -315,6 +321,7 @@ elif [ $OS_VERS == "11" ]; then
             systemctl stop nagios.service
             systemctl restart nagios.service
             # systemctl status nagios.service
+
           ;;
 
           3)
@@ -417,6 +424,12 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             systemctl enable nagios.service --now
 
+            # Crear el archivo para abrir midnight commander
+              mkdir -p /root/scripts 2> /dev/null
+              echo '#!/bin/bash'                                     > /root/scripts/MidnightCommander.sh
+              echo "mc /usr/local/nagios/ /usr/lib/nagios/plugins/" >> /root/scripts/MidnightCommander.sh
+              chmod +x                                                 /root/scripts/MidnightCommander.sh
+
             echo ""
             echo -e "${ColorAzul}  Arrancando el servicio de nagios...${FinColor}"
             echo ""
@@ -504,6 +517,8 @@ elif [ $OS_VERS == "11" ]; then
             # CGI URL:  http://localhost/nagios/cgi-bin/
             # Traceroute (used by WAP):  /usr/sbin/traceroute
             # /usr/local/nagios/bin/nagios -d /usr/local/nagios/etc/nagios.cfg
+            # Para comprobar que la configuración funciona
+              #/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
           ;;
         
         esac
