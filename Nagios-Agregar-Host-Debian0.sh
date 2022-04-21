@@ -49,6 +49,8 @@ echo "}"                                                        >> /etc/nagios4/
 chown nagios:nagios /etc/nagios4/servers/$NombreDelHost.cfg
 chmod 664 /etc/nagios4/servers/$NombreDelHost.cfg
 
+sed -i -e "s-$NombreDelHost-$IPDelHost-g" /etc/nagios4/servers/$NombreDelHost.cfg
+
 systemctl restart nagios4
 
 echo ""
