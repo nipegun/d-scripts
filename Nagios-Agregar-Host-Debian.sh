@@ -22,10 +22,14 @@ IPDelHost=$3
 mkdir -p /etc/nagios4/servers/ 2> /dev/null
 
 echo "define host {"                                                                      > /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  use        linux-server"                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  host_name  $NombreDelHost"                                                       >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  alias      $AliasDelHost"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  address    $IPDelHost"                                                           >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  use              linux-server"                                                   >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  host_name        $NombreDelHost"                                                 >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  alias            $AliasDelHost"                                                  >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  address          $IPDelHost"                                                     >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  #icon_image      linux40.png"                                                    >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  #icon_image_alt  Linux"                                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  #vrml_image      linux40.png"                                                    >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  #statusmap_image linux40.gd2"                                                    >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "}"                                                                                 >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo ""                                                                                  >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "# Todos los hosts que usen la plantilla linux-server formarán parte de este grupo" >> /etc/nagios4/servers/$NombreDelHost.cfg
@@ -37,15 +41,15 @@ echo ""                                                                         
 echo "define service {"                                                                  >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  use                 generic-service"                                             >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  host_name           $NombreDelHost"                                              >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  service_description NSClient++ Version"                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  check_command       check_nt!CLIENTVERSION"                                      >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  service_description PING"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  check_command       check_ping!100.0,20%!500.0,60%"                              >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "}"                                                                                 >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo ""                                                                                  >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "define service {"                                                                  >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  use                 generic-service"                                             >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  host_name           $NombreDelHost"                                              >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  service_description Uptime"                                                      >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  check_command       check_nt!UPTIME"                                             >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  service_description SSH"                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  check_command       check_ssh"                                                   >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "}"                                                                                 >> /etc/nagios4/servers/$NombreDelHost.cfg
 
 chown nagios:nagios /etc/nagios4/servers/$NombreDelHost.cfg
