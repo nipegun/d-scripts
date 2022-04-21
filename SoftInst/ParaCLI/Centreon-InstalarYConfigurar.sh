@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #------------------------------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar Calibre en Debian
+#  Script de NiPeGun para instalar y configurar Centreon en Debian
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Centreon-InstalarYConfigurar.sh | bash
@@ -102,11 +102,6 @@ elif [ $OS_VERS == "11" ]; then
   hostnamectl set-hostname centreon
 
   echo ""
-  echo "  Agregando el repositorio de Centreon..."
-  echo ""
-  echo "deb https://apt.centreon.com/repository/centreon-bullseye/ bullseye main" > /etc/apt/sources.list.d/centreon.list
-
-  echo ""
   echo "  Actualizando la lsita de paquetes diponibles..."
   echo ""
   apt-get -y update
@@ -121,6 +116,11 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Descargando las llaves para firmar el repositorio..."
   echo ""
   wget -O- https://apt-key.centreon.com | gpg --dearmor | tee /etc/apt/trusted.gpg.d/centreon.gpg
+
+  echo ""
+  echo "  Agregando el repositorio de Centreon..."
+  echo ""
+  echo "deb https://apt.centreon.com/repository/centreon-bullseye/ bullseye main" > /etc/apt/sources.list.d/centreon.list
 
   echo ""
   echo "  Re-actualizando la lsita de paquetes diponibles..."
@@ -247,10 +247,13 @@ elif [ $OS_VERS == "11" ]; then
   echo "chmod 775 /var/lib/centreon/centplugins"
   echo "finally, I had to change the permissions of all Centreon plugins that are not executable during their installation"
 
-centreon-plugin-applications-protocol-http : Depends: liblwp-useragent-perl but it is not installable
-                                              Depends: libhttp-proxypac-perl but it is not installable
- centreon-plugin-applications-protocol-smtp : Depends: libemail-send-smtp-gmail-perl but it is not installable
- centreon-plugin-applications-protocol-ssh : Depends: libssh-session-perl but it is not installable
+apt-get -y install liblwp-useragent-perl
+apt-get -y install libhttp-proxypac-perl
+apt-get -y install libemail-send-smtp-gmail-perl
+apt-get -y install libssh-session-perl
+apt-get -y install centreon-plugin-applications-protocol-http
+apt-get -y install centreon-plugin-applications-protocol-smtp
+apt-get -y install centreon-plugin-applications-protocol-ssh
 
 fi
 
