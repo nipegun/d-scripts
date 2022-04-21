@@ -16,31 +16,31 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
+  if [ -f /etc/os-release ]; then
+    # Para systemd y freedesktop.org
+      . /etc/os-release
+      OS_NAME=$NAME
+      OS_VERS=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then
+    # linuxbase.org
+      OS_NAME=$(lsb_release -si)
+      OS_VERS=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then
+    # Para algunas versiones de Debian sin el comando lsb_release
        . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
-   fi
+      OS_NAME=$DISTRIB_ID
+      OS_VERS=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then
+    # Para versiones viejas de Debian.
+      OS_NAME=Debian
+      OS_VERS=$(cat /etc/debian_version)
+  else
+    # Para el viejo uname (También funciona para BSD)
+      OS_NAME=$(uname -s)
+      OS_VERS=$(uname -r)
+  fi
 
 if [ $OS_VERS == "7" ]; then
 
@@ -98,38 +98,102 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------------------"
   echo ""
 
-  # Bajar e instalar la llave
-    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo "  wget no está instalado. Iniciando su instalación..."
-        echo ""
-        apt-get -y update
-        apt-get -y install wget
-        echo ""
-      fi
-  wget https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${ColorRojo}  dialog no está instalado. Iniciando su instalación...${FinColor}"
+      echo ""
+      apt-get -y update > /dev/null
+      apt-get -y install dialog
+      echo ""
+    fi
+  menu=(dialog --timeout 10 --checklist "Instalación de Proxmox Backup Server" 22 76 16)
+    opciones=(
+      1 "Instalar en un Debian nativo o en una MV de Debian." off
+      2 "Instalar en un contenedor LXC de Debian." off
+      3 "" off
+    )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+    clear
 
-  # Agregar el repositorio enterprise y comentarlo
-    echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
+    for choice in $choices
+      do
+        case $choice in
 
-  # Agregar el repositorio para no suscriptores
-    echo "deb http://download.proxmox.com/debian/pbs bullseye pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
+          1)
 
-  # Agregar el repositorio test y comentarlo
-    echo "#deb http://download.proxmox.com/debian/pbs bullseye pbstest" > /etc/apt/sources.list.d/pbstest.list
+            # Bajar e instalar la llave
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${ColorRojo}    wget no está instalado. Iniciando su instalación...${FinColor}"
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install wget
+                  echo ""
+                fi
+              wget https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
 
-  # Agregar el repositorio client y comentarlo
-    echo "#deb http://download.proxmox.com/debian/pbs-client bullseye main" > /etc/apt/sources.list.d/pbs-client.list
+            # Agregar el repositorio enterprise y comentarlo
+              echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
 
-  # Actualizar el caché de paquetes
-    apt-get -y update
+            # Agregar el repositorio para no suscriptores
+              echo "deb http://download.proxmox.com/debian/pbs bullseye pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
 
-  # Instalar Proxmox Backup Server manteniendo el kernel instalado (Apto para contenedores)
-    apt-get -y install proxmox-backup-server
+            # Agregar el repositorio test y comentarlo
+              echo "#deb http://download.proxmox.com/debian/pbs bullseye pbstest" > /etc/apt/sources.list.d/pbstest.list
 
-  # Instalar cambiando el kernel (Agrega soporte ZFS) (Igual que la instalación del ISO)
-    #apt-get -y install proxmox-backup
+            # Agregar el repositorio client y comentarlo
+              echo "#deb http://download.proxmox.com/debian/pbs-client bullseye main" > /etc/apt/sources.list.d/pbs-client.list
 
+            # Actualizar el caché de paquetes
+              apt-get -y update
+
+            # Instalar cambiando el kernel (Agrega soporte ZFS) (Igual que la instalación del ISO)
+              apt-get -y install proxmox-backup
+
+          ;;
+
+          2)
+
+            # Bajar e instalar la llave
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${ColorRojo}    wget no está instalado. Iniciando su instalación...${FinColor}"
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install wget
+                  echo ""
+                fi
+              wget https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
+
+            # Agregar el repositorio enterprise y comentarlo
+              echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
+
+            # Agregar el repositorio para no suscriptores
+              echo "deb http://download.proxmox.com/debian/pbs bullseye pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
+
+            # Agregar el repositorio test y comentarlo
+              echo "#deb http://download.proxmox.com/debian/pbs bullseye pbstest" > /etc/apt/sources.list.d/pbstest.list
+
+            # Agregar el repositorio client y comentarlo
+              echo "#deb http://download.proxmox.com/debian/pbs-client bullseye main" > /etc/apt/sources.list.d/pbs-client.list
+
+            # Actualizar el caché de paquetes
+              apt-get -y update
+
+            # Instalar Proxmox Backup Server manteniendo el kernel instalado (Apto para contenedores)
+              apt-get -y install proxmox-backup-server
+
+          ;;
+
+          3)
+
+          ;;
+        
+        esac
+      done
+  
 fi
 
