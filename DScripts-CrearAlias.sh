@@ -23,7 +23,7 @@ ln -s /root/scripts/d-scripts/EditarInterfacesDeRed.sh                     /root
 ln -s /root/scripts/d-scripts/ZeroTier.sh                                  /root/scripts/d-scripts/Alias/zt
 ln -s /root/scripts/d-scripts/MumbleServer-Editar.sh                       /root/scripts/d-scripts/Alias/emumble
 ln -s /root/scripts/d-scripts/EditarUHUB.sh                                /root/scripts/d-scripts/Alias/euhub
-ln -s /root/scripts/d-scripts/AbrirMidnightCommander.sh                    /root/scripts/d-scripts/Alias/amc
+ln -s /root/scripts/d-scripts/MidnightCommander-Abrir.sh                   /root/scripts/d-scripts/Alias/amc
 ln -s /root/scripts/d-scripts/ADministrarUsuariosDElSERvidorCALibre.sh     /root/scripts/d-scripts/Alias/adudelsercal
 ln -s /root/scripts/d-scripts/AgregarAlMailElUsuario.sh                    /root/scripts/d-scripts/Alias/aameu
 ln -s /root/scripts/d-scripts/BloquearTráficoDeTORConIPTables.sh           /root/scripts/d-scripts/Alias/btdtorcipt
