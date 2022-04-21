@@ -152,6 +152,13 @@ elif [ $OS_VERS == "11" ]; then
             # Instalar cambiando el kernel (Agrega soporte ZFS) (Igual que la instalación del ISO)
               apt-get -y install proxmox-backup
 
+            echo ""
+            echo "  Instalación finalizada."
+            echo ""
+            echo "  Conéctate a la administración Web en mediante la siguiente URL en LAN:"
+            echo ""
+            echo "  https://$(hostname -I):8007"
+
           ;;
 
           2)
@@ -185,6 +192,13 @@ elif [ $OS_VERS == "11" ]; then
 
             # Instalar Proxmox Backup Server manteniendo el kernel instalado (Apto para contenedores)
               apt-get -y install proxmox-backup-server
+
+            echo ""
+            echo "  Instalación finalizada."
+            echo ""
+            echo "  Conéctate a la administración Web en mediante la siguiente URL en LAN:"
+            echo ""
+            echo "  https://$(hostname -I):8007"
 
           ;;
 
