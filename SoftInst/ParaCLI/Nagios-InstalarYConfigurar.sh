@@ -203,6 +203,12 @@ elif [ $OS_VERS == "11" ]; then
               chmod 775           /etc/nagios4/switches/
               chown nagios:nagios /etc/nagios4/switches/
 
+            # Crear el archivo para abrir midnight commander
+              mkdir -p /root/scripts 2> /dev/null
+              echo '#!/bin/bash'                                > /root/scripts/MidnightCommander.sh
+              echo "mc /etc/nagios4/ /usr/lib/nagios/plugins/" >> /root/scripts/MidnightCommander.sh
+              chmod +x                                            /root/scripts/MidnightCommander.sh
+
             echo ""
             echo "  Nagios instalado."
             echo ""
