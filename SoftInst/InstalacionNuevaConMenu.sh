@@ -5,12 +5,18 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar
+# ----------
+#  Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
 #
 #  Ejecución remota:
 #  curl -s x | bash
-#---------------------------------------------------------------------------------------
+#
+#  Ejecución remota sin caché:
+#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+#
+#  Ejecución remota con parámetros:
+#  curl -s x | bash -s Parámetro1 Parámetro2
+# ----------
 
 ColorAzul="\033[0;34m"
 ColorVerde='\033[1;32m'
