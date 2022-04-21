@@ -13,6 +13,9 @@
 #
 #  Ejecución remota sin caché:
 #  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+#
+#  Ejecución remota con parámetros:
+#  curl -s x | bash -s Parámetro1 Parámetro2
 # ----------
 
 ColorAzul="\033[0;34m"
