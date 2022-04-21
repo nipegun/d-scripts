@@ -12,8 +12,9 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Proxmox-BackupServer-Instalar.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
+ColorAzul="\033[0;34m"
 ColorVerde='\033[1;32m'
+ColorRojo='\033[1;31m'
 FinColor='\033[0m'
 
 # Determinar la versión de Debian
@@ -153,9 +154,9 @@ elif [ $OS_VERS == "11" ]; then
               apt-get -y install proxmox-backup
 
             echo ""
-            echo "  Instalación finalizada."
+            echo -e "${ColorVerde}  Instalación finalizada.${FinColor}"
             echo ""
-            echo "  Conéctate a la administración Web en mediante la siguiente URL en LAN:"
+            echo -e "${ColorVerde}  Conéctate a la administración Web en mediante la siguiente URL en LAN:${FinColor}"
             echo ""
             echo "  https://$(hostname -I | sed 's- --g'):8007"
             echo ""
@@ -195,9 +196,9 @@ elif [ $OS_VERS == "11" ]; then
               apt-get -y install proxmox-backup-server
 
             echo ""
-            echo "  Instalación finalizada."
+            echo -e "${ColorVerde}  Instalación finalizada.${FinColor}"
             echo ""
-            echo "  Conéctate a la administración Web en mediante la siguiente URL en LAN:"
+            echo -e "${ColorVerde}  Conéctate a la administración Web en mediante la siguiente URL en LAN:${FinColor}"
             echo ""
             echo "  https://$(hostname -I | sed 's- --g'):8007"
             echo ""
