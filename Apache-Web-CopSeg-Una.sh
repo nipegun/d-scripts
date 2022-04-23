@@ -9,7 +9,7 @@
 #  Script de NiPeGun para hacer copia de seguridad interna de un servidor web con Apache
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Apache-Web-CopSeg-Una.sh | bash
 # ----------
 
 vWeb="hacks4geeks.com"
