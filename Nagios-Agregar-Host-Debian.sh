@@ -45,6 +45,34 @@ echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/
 echo "  service_description SSH"                                >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  check_command       check_ssh"                          >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "define service{"                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  service_description Carga del procesador"               >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  check_command       check_nrpe!check_load"              >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "define service{"                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  service_description Uso de disco"                       >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  check_command       check_nrpe!check_disk"              >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "define service{"                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  service_description Procesos totales"                   >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  check_command       check_nrpe!check_total_procs"       >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "define service{"                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  service_description Usuarios actuales"                  >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  check_command       check_nrpe!check_users"             >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "}
 
 chown nagios:nagios /etc/nagios4/servers/$NombreDelHost.cfg
 chmod 664 /etc/nagios4/servers/$NombreDelHost.cfg
