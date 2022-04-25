@@ -210,8 +210,9 @@ elif [ $OS_VERS == "11" ]; then
               chmod +x                                            /root/scripts/MidnightCommander.sh
 
             echo ""
-            echo "  Agregando check_nrpe a commands.cfg..."
+            echo "  Agregando check_nrpe..."
             echo ""
+            apt-get -y install nagios-nrpe-plugin
             echo ""                                                             >> /etc/nagios4/objects/commands.cfg
             echo "define command {"                                             >> /etc/nagios4/objects/commands.cfg
             echo "  command_name check_nrpe"                                    >> /etc/nagios4/objects/commands.cfg
