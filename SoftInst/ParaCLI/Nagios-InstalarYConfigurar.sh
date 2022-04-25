@@ -210,6 +210,14 @@ elif [ $OS_VERS == "11" ]; then
               chmod +x                                            /root/scripts/MidnightCommander.sh
 
             echo ""
+            echo "  Agregando check_nrpe a commands.cfg..."
+            echo ""
+            echo "define command {"                                             >> /etc/nagios4/objects/commands.cfg
+            echo "  command_name check_nrpe"                                    >> /etc/nagios4/objects/commands.cfg
+            echo "  command_line $USER1$/check_nrpe -H $HOSTADDRESS$ -c $ARG1$" >> /etc/nagios4/objects/commands.cfg
+            echo "}"                                                            >> /etc/nagios4/objects/commands.cfg
+
+            echo ""
             echo "  Nagios instalado."
             echo ""
             echo "  Para ver los plugins que tienes instalados, ejecuta:"
