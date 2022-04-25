@@ -60,4 +60,7 @@ echo ""
 echo "  monitoring-plugins"
 echo "  nagios-nrpe-server"
 echo ""
+echo "  Y que has activado en ese host la IP del servidor nagios."
+echo "  sed -i -e 's/allowed_hosts=127.0.0.1,::1/allowed_hosts=127.0.0.1,::1,IpDelServidorNagios/g' /etc/nagios/nrpe.cfg"
+echo ""
 
