@@ -57,7 +57,7 @@ echo ""
 echo "  Host agregado."
 echo "  Si la monitorización no funciona comprueba que en el host esté instalado los paquetes:"
 echo ""
-echo "  nagios-plugins"
+echo "  monitoring-plugins"
 echo "  nagios-nrpe-server"
 echo ""
 
