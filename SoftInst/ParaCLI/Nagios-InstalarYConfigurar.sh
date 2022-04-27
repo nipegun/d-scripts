@@ -202,6 +202,11 @@ elif [ $OS_VERS == "11" ]; then
               mkdir -p            /etc/nagios4/switches/
               chmod 775           /etc/nagios4/switches/
               chown nagios:nagios /etc/nagios4/switches/
+            # Computers
+              sed -i -e 's|cfg_dir=/etc/nagios4/routers|cfg_dir=/etc/nagios4/routers\ncfg_dir=/etc/nagios4/computers|g' /etc/nagios4/nagios.cfg
+              mkdir -p            /etc/nagios4/computers/
+              chmod 775           /etc/nagios4/computers/
+              chown nagios:nagios /etc/nagios4/computers/
 
             # Crear el archivo para abrir midnight commander
               mkdir -p /root/scripts 2> /dev/null
