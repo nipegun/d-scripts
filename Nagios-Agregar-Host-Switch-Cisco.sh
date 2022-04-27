@@ -87,3 +87,4 @@ echo "  Si la monitorización no funciona comprueba que:"
 echo "    - Hayas activado SNMP en el switch."
 echo "    - Hayas permitido en el router la IP del servidor nagios:"
 echo ""
+
