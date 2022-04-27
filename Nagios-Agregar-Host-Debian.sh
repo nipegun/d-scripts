@@ -72,7 +72,7 @@ echo "  use                 generic-service"                    >> /etc/nagios4/
 echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  service_description Usuarios"                           >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  check_command       comprobar_nrpe!check_users"         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "}
+echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
 
 chown nagios:nagios /etc/nagios4/servers/$NombreDelHost.cfg
 chmod 664 /etc/nagios4/servers/$NombreDelHost.cfg
