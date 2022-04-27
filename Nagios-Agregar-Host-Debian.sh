@@ -26,10 +26,10 @@ echo "  use             linux-server"                           >> /etc/nagios4/
 echo "  host_name       $NombreDelHost"                         >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  alias           $AliasDelHost"                          >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  address         $IPDelHost"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  icon_image      linux40.png"                            >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  icon_image      debian.jpg"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  icon_image_alt  Linux"                                  >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  vrml_image      linux40.png"                            >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  statusmap_image linux40.gd2"                            >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  vrml_image      debian.png"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  statusmap_image debian.gd2"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "define service {"                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
