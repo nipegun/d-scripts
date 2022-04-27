@@ -22,7 +22,7 @@ IPDelHost=$3
 mkdir -p /etc/nagios4/switches/ 2> /dev/null
 
 echo "define host {"                                             > /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  use             linux-server"                           >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  use             generic-switch"                         >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "  host_name       $NombreDelHost"                         >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "  alias           $AliasDelHost"                          >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "  address         $IPDelHost"                             >> /etc/nagios4/switches/$NombreDelHost.cfg
