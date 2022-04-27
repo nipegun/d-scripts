@@ -92,3 +92,4 @@ echo ""
 #echo "  sed -i -e 's/allowed_hosts=127.0.0.1,::1/allowed_hosts=127.0.0.1,::1,IpDelServidorNagios/g' /etc/nagios/nrpe.cfg"
 #echo "  service nagios-nrpe-server restart"
 #echo ""
+
