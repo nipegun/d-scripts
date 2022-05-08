@@ -9,10 +9,10 @@
 #  Script de NiPeGun para agregar una impresora a Nagios
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios-Agregar-Host-Impresora.sh | bash -s URL Servicio
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Impresora.sh | bash -s URL Servicio
 #
 #  Ejemplo:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios-Agregar-Host-Impresora.sh | bash -s midebianserver "Mi servidor Debian" "192.168.0.123"
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Impresora.sh | bash -s midebianserver "Mi servidor Debian" "192.168.0.123"
 # ----------
 
 NombreDelHost=$1
