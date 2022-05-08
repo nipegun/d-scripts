@@ -21,45 +21,45 @@ IPDelHost=$3
 
 mkdir -p /etc/nagios4/switches/ 2> /dev/null
 
-echo "define host {"                                             > /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  use             generic-switch"                         >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  host_name       $NombreDelHost"                         >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  alias           $AliasDelHost"                          >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  address         $IPDelHost"                             >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  icon_image      switch40.jpg"                           >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  icon_image_alt  Switch"                                 >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  vrml_image      switch40.png"                           >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  statusmap_image switch40.gd2"                           >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "}"                                                        >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo ""                                                         >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "define service {"                                         >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  use                 generic-service"                    >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  service_description PING"                               >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  check_command       check_ping!100.0,20%!500.0,60%"     >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "}"                                                        >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo ""                                                         >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "define service {"                                         >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  use                 generic-service"                    >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  service_description SSH"                                >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  check_command       check_ssh"                          >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "}"                                                        >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo ""                                                         >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#define service{"                                          >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#  use                 generic-service"                    >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#  host_name           $NombreDelHost"                     >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#  service_description Procesador"                         >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#  check_command       comprobar_nrpe!check_load"          >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#}"                                                        >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#"                                                         >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#define service{"                                          >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#  use                 generic-service"                    >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#  host_name           $NombreDelHost"                     >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#  service_description Disco"                              >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#  check_command       comprobar_nrpe!check_disk"          >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#}"                                                        >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "#"                                                         >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "define host {"                                              > /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  use             generic-switch"                          >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  host_name       $NombreDelHost"                          >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  alias           $AliasDelHost"                           >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  address         $IPDelHost"                              >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  icon_image      switch40.jpg"                            >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  icon_image_alt  Switch"                                  >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  vrml_image      switch40.png"                            >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  statusmap_image switch40.gd2"                            >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "}"                                                         >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo ""                                                          >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "define service {"                                          >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  use                 generic-service"                     >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  host_name           $NombreDelHost"                      >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  service_description PING"                                >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  check_command       check_ping!100.0,20%!500.0,60%"      >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "}"                                                         >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo ""                                                          >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "define service {"                                          >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  use                 generic-service"                     >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  host_name           $NombreDelHost"                      >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  service_description SSH"                                 >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  check_command       check_ssh"                           >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "}"                                                                                >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo ""                                                                                 >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "define service{"                                                                  >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  use                 generic-service"                                            >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  host_name           $NombreDelHost"                                             >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  service_description Uptime (SNMP)"                                              >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  check_command       check_snmp!-C public -o sysUpTime.0"                        >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "}"                                                                                >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo ""                                                                                 >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "define service{"                                                                  >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  use                 generic-service"                                            >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  host_name           $NombreDelHost"                                             >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  service_description Puerto 1"                                                   >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  check_command       check_snmp!-C public -o ifOperStatus.1 -r 1 -m RFC1213-MIB" >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "}"                                                                                >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo ""                                                                                 >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "#define service{"                                          >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "#  use                 generic-service"                    >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "#  host_name           $NombreDelHost"                     >> /etc/nagios4/switches/$NombreDelHost.cfg
