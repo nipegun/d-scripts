@@ -9,10 +9,10 @@
 #  Script de NiPeGun para agregar un ordenador Debian a Nagios
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios-Agregar-Host-Debian.sh | bash -s URL Servicio
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Debian.sh | bash -s URL Servicio
 #
 #  Ejemplo:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios-Agregar-Host-Debian.sh | bash -s midebian "Mi ordenador Debian" "192.168.0.123"
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Debian.sh | bash -s midebian "Mi ordenador Debian" "192.168.0.123"
 # ----------
 
 NombreDelHost=$1
