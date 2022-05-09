@@ -129,7 +129,7 @@ elif [ $OS_VERS == "11" ]; then
 
           1)
             echo ""
-            echo -e "${ColorAzul}  Instalando Nagios desde los repos de Debian...${FinColor}"
+            echo -e "${ColorAzul}  Instalando Nagios4 desde los repos de Debian...${FinColor}"
             echo ""
 
             echo -e "${ColorAzul}    Determinando la versión disponible en los repos...${FinColor}"
@@ -246,7 +246,7 @@ elif [ $OS_VERS == "11" ]; then
             # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo -e "${ColorRojo}      curl no está instalado. Iniciando su instalación...${FinColor}"
+                echo -e "${ColorRojo}    curl no está instalado. Iniciando su instalación...${FinColor}"
                 echo ""
                 apt-get -y update
                 apt-get -y install curl
