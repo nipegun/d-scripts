@@ -113,11 +113,12 @@ elif [ $OS_VERS == "11" ]; then
     fi
   menu=(dialog --timeout 5 --checklist "Instalación de Nagios" 22 76 16)
     opciones=(
-      1 "Instalar Nagios desde los repos de Debian" on
-      2 "Instalar la última versión de Nagios Core desde la web Oficial (no terminado)" off
-      3 "Instalar la última versión de Nagios Core desde GitHub (no terminado)" off
-      4 "Instalar plugins (no terminado)" off
-      5 "x" off
+      1 "Instalar Nagios4 desde los repos de Debian" off
+      2 "Instalar NagiosXI desde el script oficial" on
+      3 "Instalar la última versión de Nagios Core desde la web Oficial (no terminado)" off
+      4 "Instalar la última versión de Nagios Core desde GitHub (no terminado)" off
+      5 "Instalar plugins (no terminado)" off
+      6 "x" off
     )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
     clear
@@ -239,6 +240,24 @@ elif [ $OS_VERS == "11" ]; then
 
           2)
             echo ""
+            echo -e "${ColorAzul}  Iniciando la instalación de Nagios XI desde el script oficial...${FinColor}"
+            echo ""
+
+            # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${ColorRojo}      curl no está instalado. Iniciando su instalación...${FinColor}"
+                echo ""
+                apt-get -y update
+                apt-get -y install curl
+                echo ""
+              fi
+
+            curl -s https://assets.nagios.com/downloads/nagiosxi/install.sh | sh
+          ;;
+
+          3)
+            echo ""
             echo -e "${ColorAzul}  Iniciando la instalación de Nagios Core desde la web oficial...${FinColor}"
             echo ""
 
@@ -344,7 +363,7 @@ elif [ $OS_VERS == "11" ]; then
 
           ;;
 
-          3)
+          4)
             echo ""
             echo -e "${ColorAzul}  Iniciando la instalación de Nagios Core desde la web de GitHub...${FinColor}"
             echo ""
@@ -459,7 +478,7 @@ elif [ $OS_VERS == "11" ]; then
             # systemctl status nagios.service
           ;;
 
-          4)
+          5)
             echo ""
             echo -e "${ColorAzul}  Instalando plugins de Nagios...${FinColor}"
             echo ""
@@ -532,7 +551,7 @@ elif [ $OS_VERS == "11" ]; then
             # systemctl status nagios.service
           ;;
 
-          5)
+          6)
             # HTML URL:  http://localhost/nagios/
             # CGI URL:  http://localhost/nagios/cgi-bin/
             # Traceroute (used by WAP):  /usr/sbin/traceroute
