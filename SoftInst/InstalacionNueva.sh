@@ -18,6 +18,12 @@
 #  curl -s x | bash -s Parámetro1 Parámetro2
 # ----------
 
+# Comprobar si el script está corriendo como root
+if [ $(id -u) -ne 0 ]; then
+    echo "Este script está preparado para ejecutarse como root y no lo has ejecutado como root." >&2
+    exit 1
+fi
+
 ColorAzul="\033[0;34m"
 ColorAzulClaro="\033[1;34m"
 ColorVerde='\033[1;32m'
