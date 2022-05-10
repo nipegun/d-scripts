@@ -45,13 +45,13 @@ echo "  use                 generic-service"                     >> /etc/nagios4
 echo "  host_name           $NombreDelHost"                      >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "  service_description SSH"                                 >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "  check_command       check_ssh"                           >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "}"                                                                                >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo ""                                                                                 >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "define service{"                                                                  >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  use                 generic-service"                                            >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  host_name           $NombreDelHost"                                             >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  service_description Uptime SNMP"                                                >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  check_command       check_snmp!-C public -o sysUpTime.0"                        >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "}"                                                                  >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo ""                                                                   >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "define service{"                                                    >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  use                 generic-service"                              >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  host_name           $NombreDelHost"                               >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  service_description Uptime SNMP"                                  >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  check_command       check_snmp!-C public -o 1.3.6.1.2.1.25.1.1.0" >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "}"                                                                                >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo ""                                                                                 >> /etc/nagios4/switches/$NombreDelHost.cfg
 
@@ -77,16 +77,55 @@ echo "#  check_command       comprobar_nrpe!check_users"         >> /etc/nagios4
 echo "#}"                                                        >> /etc/nagios4/switches/$NombreDelHost.cfg
 
 nropuerto=0
-for puerto in {01. .$CantPruertos}
+for puerto in {01..$CantPuertos}
   do
     nropuerto=$(($nropuerto + 1))
     echo "define service{"                                                                >> /etc/nagios4/switches/$NombreDelHost.cfg
     echo "  use                 generic-service"                                          >> /etc/nagios4/switches/$NombreDelHost.cfg
     echo "  host_name           $NombreDelHost"                                           >> /etc/nagios4/switches/$NombreDelHost.cfg
-    echo "  service_description Puerto $puerto - ifOperStatus.$puerto"                    >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "  service_description ifDescr.$puerto"                                          >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo '  check_command       check_snmp!-C public -o 1.3.6.1.2.1.2.2.1.2.'$nropuerto'' >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "}"                                                                              >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo ""                                                                               >> /etc/nagios4/switches/$NombreDelHost.cfg
+  done
+
+nropuerto=0
+for puerto in {01..$CantPuertos}
+  do
+    nropuerto=$(($nropuerto + 1))
+    echo "define service{"                                                                >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "  use                 generic-service"                                          >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "  host_name           $NombreDelHost"                                           >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "  service_description ifOperStatus.$puerto"                                     >> /etc/nagios4/switches/$NombreDelHost.cfg
     echo '  check_command       check_snmp!-C public -o 1.3.6.1.2.1.2.2.1.8.'$nropuerto'' >> /etc/nagios4/switches/$NombreDelHost.cfg
     echo "}"                                                                              >> /etc/nagios4/switches/$NombreDelHost.cfg
     echo ""                                                                               >> /etc/nagios4/switches/$NombreDelHost.cfg
+  done
+  
+nropuerto=0
+for puerto in {01..$CantPuertos}
+  do
+    nropuerto=$(($nropuerto + 1))
+    echo "define service{"                                                                 >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "  use                 generic-service"                                           >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "  host_name           $NombreDelHost"                                            >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "  service_description ifInErrors.$puerto"                                        >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo '  check_command       check_snmp!-C public -o 1.3.6.1.2.1.2.2.1.10.'$nropuerto'' >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "}"                                                                               >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo ""                                                                                >> /etc/nagios4/switches/$NombreDelHost.cfg
+  done
+
+nropuerto=0
+for puerto in {01..$CantPuertos}
+  do
+    nropuerto=$(($nropuerto + 1))
+    echo "define service{"                                                                 >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "  use                 generic-service"                                           >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "  host_name           $NombreDelHost"                                            >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "  service_description ifOutErrors.$puerto"                                       >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo '  check_command       check_snmp!-C public -o 1.3.6.1.2.1.2.2.1.20.'$nropuerto'' >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "}"                                                                               >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo ""                                                                                >> /etc/nagios4/switches/$NombreDelHost.cfg
   done
 
 
