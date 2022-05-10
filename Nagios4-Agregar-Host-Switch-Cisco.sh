@@ -18,6 +18,7 @@
 NombreDelHost=$1
 AliasDelHost=$2
 IPDelHost=$3
+CantPuertos=24
 
 mkdir -p /etc/nagios4/switches/ 2> /dev/null
 
@@ -49,17 +50,18 @@ echo ""                                                                         
 echo "define service{"                                                                  >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "  use                 generic-service"                                            >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "  host_name           $NombreDelHost"                                             >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  service_description Uptime (SNMP)"                                              >> /etc/nagios4/switches/$NombreDelHost.cfg
+echo "  service_description Uptime SNMP"                                                >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "  check_command       check_snmp!-C public -o sysUpTime.0"                        >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "}"                                                                                >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo ""                                                                                 >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "define service{"                                                                  >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  use                 generic-service"                                            >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  host_name           $NombreDelHost"                                             >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  service_description Puerto 1"                                                   >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "  check_command       check_snmp!-C public -o ifOperStatus.1 -r 1 -m RFC1213-MIB" >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo "}"                                                                                >> /etc/nagios4/switches/$NombreDelHost.cfg
-echo ""                                                                                 >> /etc/nagios4/switches/$NombreDelHost.cfg
+
+
+define service {
+  use                 generic-service
+  host_name           $NombreDelHost
+  service_description Puerto 1 - Ancho de banda
+  check_command       check_local_mrtgtraf!/var/lib/mrtg/$IPDelHost_1.log!AVG!1000000,1000000!5000000,5000000!10
+}
 echo "#define service{"                                          >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "#  use                 generic-service"                    >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "#  host_name           $NombreDelHost"                     >> /etc/nagios4/switches/$NombreDelHost.cfg
@@ -73,6 +75,18 @@ echo "#  host_name           $NombreDelHost"                     >> /etc/nagios4
 echo "#  service_description Usuarios"                           >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "#  check_command       comprobar_nrpe!check_users"         >> /etc/nagios4/switches/$NombreDelHost.cfg
 echo "#}"                                                        >> /etc/nagios4/switches/$NombreDelHost.cfg
+
+for puerto in {01. .$CantPruertos}
+  do
+    echo "define service{"                                                              >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "  use                 generic-service"                                        >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "  host_name           $NombreDelHost"                                         >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "  service_description Puerto $puerto - ifOperStatus.$puerto"                  >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo '  check_command       check_snmp!-C public -o 1.3.6.1.2.1.2.2.1.8.'$puerto''  >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo "}"                                                                            >> /etc/nagios4/switches/$NombreDelHost.cfg
+    echo ""                                                                             >> /etc/nagios4/switches/$NombreDelHost.cfg
+  done
+
 
 chown nagios:nagios /etc/nagios4/switches/$NombreDelHost.cfg
 chmod 664 /etc/nagios4/switches/$NombreDelHost.cfg
