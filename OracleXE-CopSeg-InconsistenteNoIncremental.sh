@@ -8,7 +8,7 @@
     exit 1
   fi
 
-vCarpetaCopSeg=/home/oracle/CopSeg
+vCarpetaCopSeg=/home/oracle/CopSeg/NoIncremental
 mkdir -p $vCarpetaCopSeg 2> /dev/null
 export DATE=$(date +A%yM%mD%d-%H%M%S)
 
