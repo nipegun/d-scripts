@@ -22,9 +22,3 @@ backup current controlfile format '$vCarpetaCopSeg/%d-${DATE}-controlfile_%u';
 exit;
 EOF
 
-
-if [ 0 = 1 ]; then
-
-#backup as compressed backupset incremental level 0 database tag 'weekly_hot_backup' plus archivelog tag 'weekly_hot_backup';
-
-fi
