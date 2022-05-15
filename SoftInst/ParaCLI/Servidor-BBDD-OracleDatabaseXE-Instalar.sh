@@ -324,11 +324,12 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "  Servidor instalado. Para conectarte desde Oracle SQL Developer:"
               echo ""
+              vNombreDelServicio=$(ls /opt/oracle/admin)
               echo "  Nueva conexión:"
               echo "    Usuario: sys"
               echo "    Contraseña: Oracle0"
               echo "    Rol: SYSDBA"
-              echo "    Nombre del servicio: XEPDB1"
+              echo "    Nombre del servicio: $vNombreDelServicio"
               echo ""
               echo "  Y ahí ya podrás crear los usuarios que te hagan falta."
               echo ""
