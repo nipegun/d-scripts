@@ -15,9 +15,13 @@ export DATE=$(date +A%yM%mD%d-%H%M%S)
 #rman target / log=/home/oracle/CopSeg/prueba.log << EOF
 rman target / << EOF
 run {
+shutdown immediate;
+startup mount;
 backup database format            '$vCarpetaCopSeg/%d-${DATE}-database_%u';
 backup archivelog all format      '$vCarpetaCopSeg/%d-${DATE}-archivelogs_%u' delete input;
 backup current controlfile format '$vCarpetaCopSeg/%d-${DATE}-controlfile_%u';
+shutdown;
+startup;
 }
 exit;
 EOF
