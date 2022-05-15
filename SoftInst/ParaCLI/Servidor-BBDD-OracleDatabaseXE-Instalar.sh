@@ -324,7 +324,7 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "  Servidor instalado. Para conectarte desde Oracle SQL Developer:"
               echo ""
-              vNombreDelServicio=$(ls /opt/oracle/admin)
+              vNombreDelServicio=$(cat /home/oracle/.bashrc | grep ORACLE_SID | cut -d'=' -f2)
               echo "  Nueva conexión:"
               echo "    Usuario: sys"
               echo "    Contraseña: Oracle0"
