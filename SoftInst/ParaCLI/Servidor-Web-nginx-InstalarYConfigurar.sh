@@ -194,5 +194,33 @@ elif [ $OS_VERS == "11" ]; then
   echo ""                                                                >> /etc/nginx/sites-available/default
   echo "}"                                                               >> /etc/nginx/sites-available/default
 
+  echo ""
+  echo "Agregando certificado SSL autofirmado..."
+  echo ""
+  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginxdefault.key -out /etc/ssl/certs/nginxdefault.pem
+  openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+
+  echo "ssl_certificate /etc/ssl/certs/nginxdefault.pem;"        > /etc/nginx/snippets/self-signed.conf
+  echo "ssl_certificate_key /etc/ssl/private/nginxdefault.key;" >> /etc/nginx/snippets/self-signed.conf
+
+  echo "ssl_protocols TLSv1 TLSv1.1 TLSv1.2;"                                         > /etc/nginx/snippets/ssl-params.conf
+  echo "ssl_prefer_server_ciphers on;"                                               >> /etc/nginx/snippets/ssl-params.conf
+  echo 'ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";'              >> /etc/nginx/snippets/ssl-params.conf
+  echo "ssl_ecdh_curve secp384r1;"                                                   >> /etc/nginx/snippets/ssl-params.conf
+  echo "ssl_session_cache shared:SSL:10m;"                                           >> /etc/nginx/snippets/ssl-params.conf
+  echo "ssl_session_tickets off;"                                                    >> /etc/nginx/snippets/ssl-params.conf
+  echo "ssl_stapling off;"                                                           >> /etc/nginx/snippets/ssl-params.conf
+  echo "ssl_stapling_verify on;"                                                     >> /etc/nginx/snippets/ssl-params.conf
+  echo "resolver 8.8.8.8 8.8.4.4 valid=300s;"                                        >> /etc/nginx/snippets/ssl-params.conf
+  echo "resolver_timeout 5s;"                                                        >> /etc/nginx/snippets/ssl-params.conf
+  echo 'add_header Strict-Transport-Security "max-age=63072000; includeSubdomains";' >> /etc/nginx/snippets/ssl-params.conf
+  echo "add_header X-Frame-Options DENY;"                                            >> /etc/nginx/snippets/ssl-params.conf
+  echo "add_header X-Content-Type-Options nosniff;"                                  >> /etc/nginx/snippets/ssl-params.conf
+  echo "ssl_dhparam /etc/ssl/certs/dhparam.pem;"                                     >> /etc/nginx/snippets/ssl-params.conf
+
+  sed -i -e 's|#listen 443 ssl default_server;|listen 443 ssl default_server;|g'                                               /etc/nginx/sites-available/default
+  sed -i -e 's|#listen [::]:443 ssl default_server;|listen [::]:443 ssl default_server;\ninclude snippets/self-signed.conf;|g' /etc/nginx/sites-available/default
+  sed -i -e 's|include snippets/self-signed.conf;|include snippets/self-signed.conf;\ninclude snippets/ssl-params.conf;|g'     /etc/nginx/sites-available/default
+
 fi
 
