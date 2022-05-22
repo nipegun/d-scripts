@@ -121,6 +121,7 @@ elif [ $OS_VERS == "10" ]; then
     apt-get -y install gufw
     apt-get -y install wireshark
     apt-get -y install etherape
+      setcap cap_net_raw,cap_net_admin+eip /usr/bin/etherape
     apt-get -y install sshpass
     apt-get -y install virt-viewer
     apt-get -y install firefox-esr-l10n-es-es
