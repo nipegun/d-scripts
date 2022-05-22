@@ -27,15 +27,15 @@ echo ""
 echo ""
 echo "  Determinando la última versión de litecoin core..."
 echo ""
-## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  curl no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install curl
-     echo ""
-   fi
+# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "  curl no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install curl
+    echo ""
+  fi
 UltVersLTC=$(curl -s https://litecoin.org | sed 's-//-\n-g' | sed 's-" -\n-g' | grep linux | grep 64 | grep -v ">" | head -n1 | cut -d "-" -f2 | cut -d "/" -f1)
 echo ""
 echo "  La última versión de litecoin es la $UltVersLTC"
@@ -64,32 +64,33 @@ echo ""
 echo "  Pidiendo el archivo en formato tar.gz..."
 echo ""
 wget https://download.litecoin.org/litecoin-$UltVersLTC/linux/litecoin-$UltVersLTC-x86_64-linux-gnu.tar.gz
+
 echo ""
 echo "  Descomprimiendo el archivo..."
 echo ""
-## Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  zip no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install zip
-     echo ""
-   fi
+# Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "  zip no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install zip
+    echo ""
+  fi
 unzip /root/SoftInst/Cryptos/LTC/litecoin-$UltVersLTC-x86_64-linux-gnu.zip
 mv /root/SoftInst/Cryptos/LTC/linux/litecoin-$UltVersLTC-x86_64-linux-gnu.tar.gz /root/SoftInst/Cryptos/LTC/
 rm -rf /root/SoftInst/Cryptos/LTC/litecoin-$UltVersLTC-x86_64-linux-gnu.zip
 rm -rf /root/SoftInst/Cryptos/LTC/linux/
 rm -rf /root/SoftInst/Cryptos/LTC/__MACOSX/
-## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  tar no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install tar
-     echo ""
-   fi
+# Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "  tar no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install tar
+    echo ""
+  fi
 tar -xf /root/SoftInst/Cryptos/LTC/litecoin-$UltVersLTC-x86_64-linux-gnu.tar.gz
 rm -rf /root/SoftInst/Cryptos/LTC/litecoin-$UltVersLTC-x86_64-linux-gnu.tar.gz
 
