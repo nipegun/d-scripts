@@ -220,7 +220,7 @@ elif [ $OS_VERS == "11" ]; then
 
   sed -i -e 's|#listen 443 ssl default_server;|listen 443 ssl default_server;|g'                                               /etc/nginx/sites-available/default
   sed -i -e 's|#listen [::]:443 ssl default_server;|listen [::]:443 ssl default_server;\ninclude snippets/self-signed.conf;|g' /etc/nginx/sites-available/default
-  sed -i -e 's|include snippets/self-signed.conf;|include snippets/self-signed.conf;\ninclude snippets/ssl-params.conf;|g'     /etc/nginx/sites-available/default
+  sed -i -e 's|#include snippets/self-signed.conf;|include snippets/self-signed.conf;\ninclude snippets/ssl-params.conf;|g'     /etc/nginx/sites-available/default
 
 fi
 
