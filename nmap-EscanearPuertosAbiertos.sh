@@ -9,7 +9,7 @@
 #  Script de NiPeGun para escanear todos los puertos abiertos de una IP
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/nmap-EscanearPuertosAbiertos.sh
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/nmap-EscanearPuertosAbiertos.sh | bash
 # ----------
 
 vIPWAN=111.111.111.111
