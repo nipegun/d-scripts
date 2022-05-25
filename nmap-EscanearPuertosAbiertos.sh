@@ -9,16 +9,13 @@
 #  Script de NiPeGun para escanear todos los puertos abiertos de una IP
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/APTKey-BajarEInstalar.sh | bash -s URL Servicio
-#
-#  Ejemplo:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/APTKey-BajarEInstalar.sh | bash -s https://nightly.odoo.com/odoo.key Odoo
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/nmap-EscanearPuertosAbiertos.sh
 # ----------
 
 vIPWAN=111.111.111.111
 
-vPuertoInicio=10100
-vPuertoFin=15000
+vPuertoInicio=1
+vPuertoFin=65535
 
 echo "  Escaneando puertos posibles ..."
 nmap $vIPWAN -p $vPuertoInicio-$vPuertoFin10999 | grep ^1 | cut -d'/' -f1 > /tmp/puertos.txt
