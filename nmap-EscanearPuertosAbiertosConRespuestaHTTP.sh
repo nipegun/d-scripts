@@ -17,13 +17,12 @@ vIPWAN=111.111.111.111
 vPuertoInicio=1
 vPuertoFin=65535
 
-
-sudo rm -f /tmp/puertos.txt 2> /dev/null
+rm -f /tmp/puertos.txt 2> /dev/null
 
 echo ""
 echo "  Buscando puertos abiertos en la IP $vIPWAN que den respuesta http..."
 echo ""
-  sudo nmap $vIPWAN -p $vPuertoInicio-$vPuertoFin | grep '^[0-9]' | cut -d'/' -f1 > /tmp/puertos.txt
+  nmap $vIPWAN -p $vPuertoInicio-$vPuertoFin | grep '^[0-9]' | cut -d'/' -f1 > /tmp/puertos.txt
   for line in $(cat /tmp/puertos.txt)
     do
       vRespuestaHTTP=$(curl -H 'Cache-Control: no-cache, no-store' --silent --max-time 10 -s -o /dev/null -w "%{http_code}" "http://$vIPWAN:$line")
@@ -43,7 +42,7 @@ echo ""
   touch /tmp/ServiciosDeLaIP-$vIPWAN.txt 2> /dev/null
   for line in $(cat /tmp/puertos.txt)
     do
-      sudo nmap -sV -O -sSU $vIPWAN -p $line >> /tmp/ServiciosDeLaIP-$vIPWAN.txt
+      nmap -sV -O -sSU $vIPWAN -p $line >> /tmp/ServiciosDeLaIP-$vIPWAN.txt
     done
 
 echo ""
