@@ -35,5 +35,5 @@ for line in $(cat /tmp/puertos.txt)
 
   done
 
-# sudo nmap -sV -O -sSU $vIPWAN -p 10300-10399
+# nmap -sV -O -sSU $vIPWAN -p 10300-10399
 
