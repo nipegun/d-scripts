@@ -9,10 +9,7 @@
 #  Script de NiPeGun para escanear todos los puertos abiertos de una IP que respondan a una solicitud HTTP
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/APTKey-BajarEInstalar.sh | bash -s URL Servicio
-#
-#  Ejemplo:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/APTKey-BajarEInstalar.sh | bash -s https://nightly.odoo.com/odoo.key Odoo
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/nmap-EscanearPuertosAbiertosConRespuestaHTTP.sh | bash
 # ----------
 
 vIPWAN=111.111.111.111
