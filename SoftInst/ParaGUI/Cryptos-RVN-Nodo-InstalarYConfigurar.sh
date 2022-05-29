@@ -130,53 +130,55 @@ find /home/$UsuarioNoRoot/Cryptos/RVN/bin -type f -exec chmod +x {} \;
 #DirCartRVN=$(cat /home/$UsuarioNoRoot/pooladdress-rvn.txt)
 #echo ""
 
-## Autoejecución de Ravencoin al iniciar el sistema
-   #echo ""
-   #echo "  Agregando ravend a los ComandosPostArranque..."
-   #echo ""
-   #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh
-   #echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+# Autoejecución de Ravencoin al iniciar el sistema
+  #echo ""
+  #echo "  Agregando ravend a los ComandosPostArranque..."
+  #echo ""
+  #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh
+  #echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
-## Icono de lanzamiento en el menú gráfico
-   echo ""
-   echo "  Agregando la aplicación gráfica al menú..."
-   echo ""
-   mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
-   echo "Name=rvn GUI"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
-   echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
-   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/rvn-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
-   echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
-   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
-   echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
-   #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
-   gio set /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop "metadata::trusted" yes
+# Icono de lanzamiento en el menú gráfico
+  echo ""
+  echo "  Agregando la aplicación gráfica al menú..."
+  echo ""
+  mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
+  echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+  echo "Name=rvn GUI"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+  echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/rvn-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+  echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+  echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+  echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+  #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop
+  gio set /home/$UsuarioNoRoot/.local/share/applications/rvn.desktop "metadata::trusted" yes
 
-## Autoejecución gráfica de Ravencoin
-   echo ""
-   echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."
-   echo ""
-   mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
-   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
-   echo "Name=rvn GUI"                                                    >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
-   echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
-   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/rvn-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
-   echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
-   echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
-   gio set /home/$UsuarioNoRoot/.config/autostart/rvn.desktop "metadata::trusted" yes
+# Autoejecución gráfica de Ravencoin
+  echo ""
+  echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."
+  echo ""
+  mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
+  echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
+  echo "Name=rvn GUI"                                                    >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
+  echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
+  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/rvn-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
+  echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
+  echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/rvn.desktop
+  gio set /home/$UsuarioNoRoot/.config/autostart/rvn.desktop "metadata::trusted" yes
 
-## Reparación de permisos
-   chmod +x /home/$UsuarioNoRoot/Cryptos/RVN/bin/*
-   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/RVN/ -R
+# Reparación de permisos
+  chmod +x /home/$UsuarioNoRoot/Cryptos/RVN/bin/*
+  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/RVN/ -R
+  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.raven/ -R
+  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.local/share/applications/ -R
 
-## Instalar los c-scripts
-   echo ""
-   echo "  Instalando los c-scripts..."
-   echo ""
-   su $UsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
-   find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+# Instalar los c-scripts
+  echo ""
+  echo "  Instalando los c-scripts..."
+  echo ""
+  su $UsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
+  find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 
-## Parar el daemon
-   #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/rvn-daemon-parar.sh
-   #su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/rvn-daemon-parar.sh"
+# Parar el daemon
+  chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/rvn-daemon-parar.sh
+  su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/rvn-daemon-parar.sh"
 
