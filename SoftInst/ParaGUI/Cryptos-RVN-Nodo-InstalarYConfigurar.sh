@@ -36,7 +36,7 @@ echo ""
      apt-get -y install curl
      echo ""
    fi
-UltVersRaven=$(curl --silent https://github.com/RavenProject/Ravencoin/releases/latest | cut -d '/' -f 8 | cut -d '"' -f 1 | cut -c2-)
+UltVersRaven=$(curl --silent -L https://github.com/RavenProject/Ravencoin/releases/latest | grep inux | grep href | grep -v isable | cut -d'"' -f2 | cut -d '/' -f 6 | cut -c2-)
 echo ""
 echo "  La última versión de raven es la $UltVersRaven"
 echo ""
