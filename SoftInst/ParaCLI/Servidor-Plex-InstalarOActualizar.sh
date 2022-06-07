@@ -95,15 +95,14 @@ elif [ $OS_VERS == "9" ]; then
             echo ""
             echo -e "${ColorVerde}Instalando Plex para arquitectura x86 de 32 bits...${FinColor}"
             echo ""
-            mkdir /root/paquetes
-            mkdir /root/paquetes/plex 
-            cd /root/paquetes/plex
-            rm -f /root/paquetes/plex/plex32x86.deb
+            mkdir -p /root/SoftInst/Plex/ 2> /dev/null
+            cd /root/SoftInst/Plex/
+            rm -f /root/SoftInst/Plex/plex32x86.deb
 
             echo ""
             echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
             echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/paquetes/plex/plex32x86.deb
+            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plex32x86.deb
 
             echo ""
             echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
@@ -113,7 +112,7 @@ elif [ $OS_VERS == "9" ]; then
             echo ""
             echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
             echo ""
-            dpkg -i /root/paquetes/plex/plex32x86.deb
+            dpkg -i /root/SoftInst/Plex/plex32x86.deb
           
             echo ""
             echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
@@ -125,15 +124,14 @@ elif [ $OS_VERS == "9" ]; then
             echo ""
             echo -e "${ColorVerde}Instalando Plex para arquitectura x86 de 64 bits...${FinColor}"
             echo ""
-            mkdir /root/paquetes
-            mkdir /root/paquetes/plex 
-            cd /root/paquetes/plex
-            rm -f /root/paquetes/plex/plex64x86.deb
+            mkdir -p /root/SoftInst/Plex/ 2> /dev/null
+            cd /root/SoftInst/Plex/
+            rm -f /root/SoftInst/Plex/plex64x86.deb
 
             echo ""
             echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
             echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/paquetes/plex/plex64x86.deb
+            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plex64x86.deb
 
             echo ""
             echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
@@ -143,7 +141,7 @@ elif [ $OS_VERS == "9" ]; then
             echo ""
             echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
             echo ""
-            dpkg -i /root/paquetes/plex/plex64x86.deb
+            dpkg -i /root/SoftInst/Plex/plex64x86.deb
           
             echo ""
             echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
@@ -155,15 +153,14 @@ elif [ $OS_VERS == "9" ]; then
             echo ""
             echo -e "${ColorVerde}Instalando Plex para arquitectura ARMv7 (armhf)...${FinColor}"
             echo ""
-            mkdir /root/paquetes
-            mkdir /root/paquetes/plex 
-            cd /root/paquetes/plex
-            rm -f /root/paquetes/plex/plexARMv7.deb
+            mkdir -p /root/SoftInst/Plex/ 2> /dev/null
+            cd /root/SoftInst/Plex/
+            rm -f /root/SoftInst/Plex/plexARMv7.deb
 
             echo ""
             echo "Descargando el paquete de instalación..."
             echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/paquetes/plex/plexARMv7.deb
+            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plexARMv7.deb
 
             echo ""
             echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
@@ -173,7 +170,7 @@ elif [ $OS_VERS == "9" ]; then
             echo ""
             echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
             echo ""
-            dpkg -i /root/paquetes/plex/plexARMv7.deb
+            dpkg -i /root/SoftInst/Plex/plexARMv7.deb
 
             echo ""
             echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
@@ -185,15 +182,14 @@ elif [ $OS_VERS == "9" ]; then
             echo ""
             echo -e "${ColorVerde}Instalando Plex para arquitectura ARMv7 (arm64)...${FinColor}"
             echo ""
-            mkdir /root/paquetes
-            mkdir /root/paquetes/plex 
-            cd /root/paquetes/plex
-            rm -f /root/paquetes/plex/plexARMv8.deb
+            mkdir -p /root/SoftInst/Plex/ 2> /dev/null
+            cd /root/SoftInst/Plex/
+            rm -f /root/SoftInst/Plex/plexARMv8.deb
 
             echo ""
             echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
             echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/paquetes/plex/plexARMv8.deb
+            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plexARMv8.deb
 
             echo ""
             echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
@@ -203,7 +199,7 @@ elif [ $OS_VERS == "9" ]; then
             echo ""
             echo -e "${ColorVerde}Instalando el paquete...${FinColor}"
             echo ""
-            dpkg -i /root/paquetes/plex/plexARMv8.deb
+            dpkg -i /root/SoftInst/Plex/plexARMv8.deb
           
             echo ""
             echo -e "${ColorVerde}Arrancando el servicio plexediaserver...${FinColor}"
@@ -265,14 +261,14 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo -e "${ColorVerde}Instalando Plex para arquitectura x86 de 32 bits...${FinColor}"
             echo ""
-            mkdir -p /root/SoftInst/Plex/
+            mkdir -p /root/SoftInst/Plex/ 2> /dev/null
             cd /root/SoftInst/Plex/
             rm -f /root/SoftInst/Plex/plex32x86.deb
 
             echo ""
             echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
             echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/plex/plex32x86.deb
+            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plex32x86.deb
 
             echo ""
             echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
@@ -297,14 +293,14 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo -e "${ColorVerde}Instalando Plex para arquitectura x86 de 64 bits...${FinColor}"
             echo ""
-            mkdir -p /root/SoftInst/Plex/
+            mkdir -p /root/SoftInst/Plex/ 2> /dev/null
             cd /root/SoftInst/Plex/
             rm -f /root/SoftInst/Plex/plex64x86.deb
 
             echo ""
             echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
             echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/plex/plex64x86.deb
+            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plex64x86.deb
 
             echo ""
             echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
@@ -329,14 +325,14 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo -e "${ColorVerde}Instalando Plex para arquitectura ARMv7 (armhf)...${FinColor}"
             echo ""
-            mkdir -p /root/SoftInst/Plex/
+            mkdir -p /root/SoftInst/Plex/ 2> /dev/null
             cd /root/SoftInst/Plex/
             rm -f /root/SoftInst/Plex/plexARMv7.deb
 
             echo ""
             echo "Descargando el paquete de instalación..."
             echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/plex/plexARMv7.deb
+            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plexARMv7.deb
 
             echo ""
             echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
@@ -361,14 +357,14 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo -e "${ColorVerde}Instalando Plex para arquitectura ARMv7 (arm64)...${FinColor}"
             echo ""
-            mkdir /root/SoftInst/Plex/
+            mkdir /root/SoftInst/Plex/ 2> /dev/null
             cd /root/SoftInst/Plex/
             rm -f /root/SoftInst/Plex/plexARMv8.deb
 
             echo ""
             echo -e "${ColorVerde}Descargando el paquete de instalación...${FinColor}"
             echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/plex/plexARMv8.deb
+            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plexARMv8.deb
 
             echo ""
             echo -e "${ColorVerde}Deteniendo el servicio plexmediaserver (si es que está activo)...${FinColor}"
