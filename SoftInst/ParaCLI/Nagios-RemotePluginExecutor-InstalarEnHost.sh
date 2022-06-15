@@ -124,6 +124,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "# SSH"                                                                                         >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_ssh]=/usr/lib/nagios/plugins/check_ssh -H localhost"                             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Mail"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_imap]=/usr/lib/nagios/plugins/check_imap -H localhost"                           >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_pop]=/usr/lib/nagios/plugins/check_pop -H localhost"                             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_smtp]=/usr/lib/nagios/plugins/check_smtp -H localhost"                           >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Sensores (Hace falta instalar el paquete lm-sensors)"                                        >> /etc/nagios/nrpe.d/comandos.cfg
@@ -200,11 +201,13 @@ elif [ $OS_VERS == "11" ]; then
   echo "command[check_mysql]=/usr/lib/nagios/plugins/check_mysql"                                      >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_mysql_query]=/usr/lib/nagios/plugins/check_mysql_query"                          >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# DHCP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_hdcp_local]=/usr/lib/nagios/plugins/check_dhcp -s 127.0.0.1"                     >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_dhcp_local]=/usr/lib/nagios/plugins/check_dhcp -s 127.0.0.1"                     >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# DNS"                                                                                         >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_dig]/usr/lib/nagios/plugins/check_dig"                                           >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_dns]/usr/lib/nagios/plugins/check_dns"                                           >> /etc/nagios/nrpe.d/comandos.cfg
-
+  echo "# HTTP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_http]/usr/lib/nagios/plugins/check_http -H localhost"                             >> /etc/nagios/nrpe.d/comandos.cfg
+  
   # Comandos con argumentos acarrean riesgos de seguridad
   # Sólo pueden ser usados si se configura dont_blame_nrpe=1 en el archivo de configuración
   #command[check_mem]=/usr/lib/nagios/plugins/custom_check_mem -n $ARG1$
