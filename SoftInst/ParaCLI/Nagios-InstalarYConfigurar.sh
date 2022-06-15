@@ -144,6 +144,11 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y install $PaqueteEnRepos
 
             echo ""
+            echo -e "${ColorAzul}    Instalando plugins...${FinColor}"
+            echo ""
+            apt-get -y install nagios-nrpe-plugin
+
+            echo ""
             echo -e "${ColorAzul}    Activando el servicio $PaqueteEnRepos...${FinColor}"
             echo ""
             systemctl enable $PaqueteEnRepos --now
