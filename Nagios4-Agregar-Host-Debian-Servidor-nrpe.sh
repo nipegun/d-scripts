@@ -9,10 +9,10 @@
 #  Script de NiPeGun para agregar un servidor Debian a Nagios
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Debian-Servidor.sh | bash -s URL Servicio
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Debian-Servidor-nrpe.sh | bash -s URL Servicio
 #
 #  Ejemplo:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Debian-Servidor.sh | bash -s midebianserver "Mi servidor Debian" "192.168.0.123"
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Debian-Servidor-nrpe.sh | bash -s midebianserver "Mi servidor Debian" "192.168.0.123"
 # ----------
 
 NombreDelHost=$1
@@ -48,9 +48,6 @@ echo "  service_description SSH"             >> /etc/nagios4/servers/$NombreDelH
 echo "  check_command       check_ssh"       >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "}"                                     >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo ""                                      >> /etc/nagios4/servers/$NombreDelHost.cfg
-
-
-
 
 
 echo "define service{"                                 >> /etc/nagios4/servers/$NombreDelHost.cfg
