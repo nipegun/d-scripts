@@ -228,4 +228,7 @@ echo "  Y que has activado en ese host la IP del servidor nagios:"
 echo "  sed -i -e 's/allowed_hosts=127.0.0.1,::1/allowed_hosts=127.0.0.1,::1,IpDelServidorNagios/g' /etc/nagios/nrpe.cfg"
 echo "  service nagios-nrpe-server restart"
 echo ""
+echo "  Si al haber agregado este host, Nagios4 no incia, comprueba que error de da la configuración, ejecutando:"
+echo "  /usr/sbin/nagios4 -v /etc/nagios4/nagios.cfg"
+echo ""
 
