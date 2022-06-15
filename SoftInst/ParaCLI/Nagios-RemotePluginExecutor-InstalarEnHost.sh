@@ -235,6 +235,8 @@ elif [ $OS_VERS == "11" ]; then
   #command[check_open_files]=/usr/lib/nagios/plugins/check_open_files.pl $ARG1$
   #command[check_netstat]=/usr/lib/nagios/plugins/check_netstat.pl -p $ARG1$ $ARG2$
 
+  apt-get -y update && apt-get -y install lm-sensors
+
   echo ""
   echo "  Reiniciando el servidor nrpe..."
   echo ""
