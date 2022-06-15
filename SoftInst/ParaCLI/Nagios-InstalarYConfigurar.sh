@@ -146,8 +146,8 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "  Agregando el archivo de comandos personalizados..."
             echo ""
-            touch /etc/nagios4/objects/comandos.cfg
-            sed -i -e 's|cfg_file=/etc/nagios4/objects/templates.cfg|cfg_file=/etc/nagios4/objects/templates.cfg\n\ncfg_file=/etc/nagios4/objects/comandos.cfg|g' /etc/nagios4/nagios.cfg
+            touch /etc/nagios4/objects/comandospers.cfg
+            sed -i -e 's|cfg_file=/etc/nagios4/objects/templates.cfg|cfg_file=/etc/nagios4/objects/templates.cfg\n\ncfg_file=/etc/nagios4/objects/comandospers.cfg|g' /etc/nagios4/nagios.cfg
           
             echo ""
             echo -e "${ColorAzul}    Instalando plugins...${FinColor}"
