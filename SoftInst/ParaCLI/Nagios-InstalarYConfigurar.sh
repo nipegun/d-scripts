@@ -148,21 +148,105 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             touch /etc/nagios4/objects/comandospers.cfg
             sed -i -e 's|cfg_file=/etc/nagios4/objects/templates.cfg|cfg_file=/etc/nagios4/objects/templates.cfg\n\ncfg_file=/etc/nagios4/objects/comandospers.cfg|g' /etc/nagios4/nagios.cfg
-          
+            echo 'define command {'                                                                      > /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_dhcp'                                                       >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_dhcp -H $HOSTADDRESS$ $ARG1$'                            >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_disk'                                                       >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_disk -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -p $ARG3$'     >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_ftp'                                                        >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_ftp -H $HOSTADDRESS$ $ARG1$'                             >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check-host-alive'                                                 >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_ping -H $HOSTADDRESS$ -w 3000.0,80% -c 5000.0,100% -p 5' >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_http'                                                       >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_http -I $HOSTADDRESS$ $ARG1$'                            >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_imap'                                                       >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_imap -H $HOSTADDRESS$ $ARG1$'                            >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_load'                                                       >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_load -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$'               >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_nrpe'                                                       >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_nrpe -H $HOSTADDRESS$ -t 30 -c $ARG1$ $ARG2$'            >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_nrpe_version'                                               >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_nrpe -H $HOSTADDRESS$'                                   >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_nt'                                                         >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_nt -H $HOSTADDRESS$ -p 12489 -v $ARG1$ $ARG2$'           >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_ping'                                                       >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_ping -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -p 5'          >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_pop'                                                        >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_pop -H $HOSTADDRESS$ $ARG1$'                             >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_procs'                                                      >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_procs -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -s $ARG3$'    >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_snmp'                                                       >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_snmp -H $HOSTADDRESS$ $ARG1$'                            >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_ssh'                                                        >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_ssh -H $HOSTADDRESS$ $ARG1$ $HOSTADDRESS$'               >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_swap'                                                       >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_swap -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$'               >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_tcp'                                                        >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_tcp -H $HOSTADDRESS$ -p $ARG1$ $ARG2$'                   >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_udp'                                                        >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_udp -H $HOSTADDRESS$ -p $ARG1$ $ARG2$'                   >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+            echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_name pers_check_users'                                                      >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_users -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$'              >> /etc/nagios4/objects/comandospers.cfg
+            echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
+
             echo ""
             echo -e "${ColorAzul}    Instalando plugins...${FinColor}"
             echo ""
             apt-get -y install nagios-nrpe-plugin
-              echo ""                                                                          >> /etc/nagios4/objects/comandospers.cfg
-              echo "define command {"                                                          >> /etc/nagios4/objects/comandospers.cfg
-              echo "  command_name nrpe_comprobar"                                             >> /etc/nagios4/objects/comandospers.cfg
-              echo '  command_line $USER1$/check_nrpe -H $HOSTADDRESS$ -t 30 -c $ARG1$ $ARG2$' >> /etc/nagios4/objects/comandospers.cfg
-              echo "}"                                                                         >> /etc/nagios4/objects/comandospers.cfg
-              echo ""                                                                          >> /etc/nagios4/objects/comandospers.cfg
-              echo "define command {"                                                          >> /etc/nagios4/objects/comandospers.cfg
-              echo "  command_name nrpe_version"                                               >> /etc/nagios4/objects/comandospers.cfg
-              echo '  command_line $USER1$/check_nrpe -H $HOSTADDRESS$'                        >> /etc/nagios4/objects/comandospers.cfg
-              echo "}"                                                                         >> /etc/nagios4/objects/comandospers.cfg
 
             echo ""
             echo -e "${ColorAzul}    Activando el servicio $PaqueteEnRepos...${FinColor}"
