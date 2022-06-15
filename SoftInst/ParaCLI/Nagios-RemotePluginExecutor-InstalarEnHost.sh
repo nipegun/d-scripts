@@ -121,7 +121,7 @@ elif [ $OS_VERS == "11" ]; then
   rm -f /etc/nagios/nrpe.d/comandos.cfg 2> /dev/null
   touch /etc/nagios/nrpe.d/comandos.cfg
 
-  echo "# Memopria"
+  echo "# Memoria"                                                                                     >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_memory]=/usr/lib/nagios/plugins/check_memory -w 90% -c 95%"                      >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Antivirus"                                                                                   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_clamav]=/usr/lib/nagios/plugins/check_clamav"                                    >> /etc/nagios/nrpe.d/comandos.cfg
