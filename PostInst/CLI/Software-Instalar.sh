@@ -1,2 +1,8 @@
+#!/bin/bash
 
-apt-get -y install shellcheck
+# Instalar nano
+  apt-get -y install nano
+  sed -i -e 's|# set linenumbers|set linenumbers|g' /etc/nanorc
+
+# Instalar shellcheck
+  apt-get -y install shellcheck
