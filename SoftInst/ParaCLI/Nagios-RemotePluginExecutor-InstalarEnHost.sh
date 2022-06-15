@@ -203,6 +203,10 @@ elif [ $OS_VERS == "11" ]; then
   echo "command[check_sdd2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd2"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdd3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd3"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdd4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde1"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde2"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde3"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde4"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Discos NVMe"                                                                                 >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme0n1p1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p1"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme0n1p2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p2"   >> /etc/nagios/nrpe.d/comandos.cfg
