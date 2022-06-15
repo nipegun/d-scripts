@@ -104,9 +104,11 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Instalando paquetes necesarios..."
   echo ""
   apt-get -y update
-  apt-get -y install monitoring-plugins
   apt-get -y install nagios-nrpe-server
-
+  apt-get -y install monitoring-plugins
+  apt-get -y install monitoring-plugins-contrib
+  apt-get -y install nagios-snmp-plugins
+            
   echo ""
   echo "  Agregando comandos..."
   echo ""
@@ -119,7 +121,18 @@ elif [ $OS_VERS == "11" ]; then
   rm -f /etc/nagios/nrpe.d/comandos.cfg 2> /dev/null
   touch /etc/nagios/nrpe.d/comandos.cfg
 
-  echo "# Ping"
+  echo "# Memopria"
+  echo "command[check_memory]=/usr/lib/nagios/plugins/check_memory -w 90% -c 95%"                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Antivirus"                                                                                   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_clamav]=/usr/lib/nagios/plugins/check_clamav"                                    >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_clamd]=/usr/lib/nagios/plugins/check_clamd"                                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Impresoras"                                                                                  >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_cups]=/usr/lib/nagios/plugins/check_cups"                                        >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# UpTime"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_uptime]=/usr/lib/nagios/plugins/check_uptime"                                    >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Kernel"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_running_kernel]=/usr/lib/nagios/plugins/check_running_kernel"                    >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Ping"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_localping]=/usr/lib/nagios/plugins/check_ping -H localhost -w 10:20% -c 10:100%" >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# SSH"                                                                                         >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_ssh]=/usr/lib/nagios/plugins/check_ssh -H localhost"                             >> /etc/nagios/nrpe.d/comandos.cfg
@@ -206,7 +219,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "command[check_dig]/usr/lib/nagios/plugins/check_dig"                                           >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_dns]/usr/lib/nagios/plugins/check_dns"                                           >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# HTTP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_http]/usr/lib/nagios/plugins/check_http -H localhost"                             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_http]/usr/lib/nagios/plugins/check_http -H localhost"                            >> /etc/nagios/nrpe.d/comandos.cfg
   
   # Comandos con argumentos acarrean riesgos de seguridad
   # Sólo pueden ser usados si se configura dont_blame_nrpe=1 en el archivo de configuración
