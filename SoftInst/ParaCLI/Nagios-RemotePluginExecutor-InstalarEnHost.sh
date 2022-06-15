@@ -152,7 +152,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "command[check_zombie_procs]=/usr/lib/nagios/plugins/check_procs -w 5 -c 10 -s Z"               >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200"                  >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Swap"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_swap]=/usr/lib/nagios/plugins/check_swap -w 90% -c 95%"                          >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_swap]=/usr/lib/nagios/plugins/check_swap -w 50% -c 20%"                          >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Oracle"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_oracle]=/usr/lib/nagios/plugins/check_oracle"                                    >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# MySQL"                                                                                       >> /etc/nagios/nrpe.d/comandos.cfg
