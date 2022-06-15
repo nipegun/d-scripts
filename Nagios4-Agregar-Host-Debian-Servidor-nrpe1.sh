@@ -658,7 +658,7 @@ echo ""                                                        >> /etc/nagios4/s
 echo "define service{"                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  use                 generic-service"                  >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  host_name           $NombreDelHost"                   >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  service_description Swap"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  service_description DHCP local"                       >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  check_command       pers_check_nrpe!check_dhcp_local" >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "}"                                                      >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo ""                                                       >> /etc/nagios4/servers/$NombreDelHost.cfg
