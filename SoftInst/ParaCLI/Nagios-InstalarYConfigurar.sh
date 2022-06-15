@@ -142,6 +142,13 @@ elif [ $OS_VERS == "11" ]; then
             echo -e "${ColorAzul}    Instalando el paquete $PaqueteEnRepos...${FinColor}"
             echo ""
             apt-get -y install $PaqueteEnRepos
+            apt-get -y install nagios-images
+
+            echo ""
+            echo "  Instalando nagvis..."
+            echo ""
+            apt-get -y install nagvis
+            apt-get -y install nagvis-demos
 
             echo ""
             echo "  Agregando el archivo de comandos personalizados..."
@@ -247,6 +254,14 @@ elif [ $OS_VERS == "11" ]; then
             echo -e "${ColorAzul}    Instalando plugins...${FinColor}"
             echo ""
             apt-get -y install nagios-nrpe-plugin
+            apt-get -y install monitoring-plugins
+            apt-get -y install monitoring-plugins-contrib
+            apt-get -y install nagios-check-xmppng
+            apt-get -y install nagios-snmp-plugins
+            apt-get -y install nagios-plugins-rabbitmq
+            apt-get -y install tang-nagios
+            apt-get -y install nordugrid-arc-nagios-plugins
+            apt-get -y install monitoring-plugins-btrfs
 
             echo ""
             echo -e "${ColorAzul}    Activando el servicio $PaqueteEnRepos...${FinColor}"
