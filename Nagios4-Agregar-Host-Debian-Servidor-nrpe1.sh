@@ -196,7 +196,7 @@ echo ""                                                 >> /etc/nagios4/servers/
 echo "define service{"                                     >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  use                 generic-service"               >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  host_name           $NombreDelHost"                >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  service_description /"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  service_description Direct /"                      >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  check_command       pers_check_nrpe!check_mp_root" >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "}"                                                   >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo ""                                                    >> /etc/nagios4/servers/$NombreDelHost.cfg
@@ -204,7 +204,7 @@ echo ""                                                    >> /etc/nagios4/serve
 echo "define service{"                                     >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  use                 generic-service"               >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  host_name           $NombreDelHost"                >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  service_description /home/"                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  service_description Direct /home/"                 >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  check_command       pers_check_nrpe!check_mp_home" >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "}"                                                   >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo ""                                                    >> /etc/nagios4/servers/$NombreDelHost.cfg
@@ -212,7 +212,7 @@ echo ""                                                    >> /etc/nagios4/serve
 echo "define service{"                                    >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  use                 generic-service"              >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  host_name           $NombreDelHost"               >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  service_description /var/"                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+echo "  service_description Direct /var/"                 >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "  check_command       pers_check_nrpe!check_mp_var" >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo "}"                                                  >> /etc/nagios4/servers/$NombreDelHost.cfg
 echo ""                                                   >> /etc/nagios4/servers/$NombreDelHost.cfg
