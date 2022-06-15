@@ -144,19 +144,25 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y install $PaqueteEnRepos
 
             echo ""
+            echo "  Agregando el archivo de comandos personalizados..."
+            echo ""
+            touch /etc/nagios4/objects/comandos.cfg
+            sed -i -e 's|cfg_file=/etc/nagios4/objects/templates.cfg|cfg_file=/etc/nagios4/objects/templates.cfg\n\ncfg_file=/etc/nagios4/objects/comandos.cfg|g' /etc/nagios4/nagios.cfg
+          
+            echo ""
             echo -e "${ColorAzul}    Instalando plugins...${FinColor}"
             echo ""
             apt-get -y install nagios-nrpe-plugin
-              echo ""                                                                          >> /etc/nagios4/objects/commands.cfg
-              echo "define command {"                                                          >> /etc/nagios4/objects/commands.cfg
-              echo "  command_name check_nrpe"                                                 >> /etc/nagios4/objects/commands.cfg
-              echo '  command_line $USER1$/check_nrpe -H $HOSTADDRESS$ -t 30 -c $ARG1$ $ARG2$' >> /etc/nagios4/objects/commands.cfg
-              echo "}"                                                                         >> /etc/nagios4/objects/commands.cfg
-              echo ""                                                                          >> /etc/nagios4/objects/commands.cfg
-              echo "define command {"                                                          >> /etc/nagios4/objects/commands.cfg
-              echo "  command_name check_nrpeversion"                                          >> /etc/nagios4/objects/commands.cfg
-              echo '  command_line $USER1$/check_nrpe -H $HOSTADDRESS$'                        >> /etc/nagios4/objects/commands.cfg
-              echo "}"                                                                         >> /etc/nagios4/objects/commands.cfg
+              echo ""                                                                          >> /etc/nagios4/objects/comandospers.cfg
+              echo "define command {"                                                          >> /etc/nagios4/objects/comandospers.cfg
+              echo "  command_name nrpe_comprobar"                                             >> /etc/nagios4/objects/comandospers.cfg
+              echo '  command_line $USER1$/check_nrpe -H $HOSTADDRESS$ -t 30 -c $ARG1$ $ARG2$' >> /etc/nagios4/objects/comandospers.cfg
+              echo "}"                                                                         >> /etc/nagios4/objects/comandospers.cfg
+              echo ""                                                                          >> /etc/nagios4/objects/comandospers.cfg
+              echo "define command {"                                                          >> /etc/nagios4/objects/comandospers.cfg
+              echo "  command_name nrpe_version"                                               >> /etc/nagios4/objects/comandospers.cfg
+              echo '  command_line $USER1$/check_nrpe -H $HOSTADDRESS$'                        >> /etc/nagios4/objects/comandospers.cfg
+              echo "}"                                                                         >> /etc/nagios4/objects/comandospers.cfg
 
             echo ""
             echo -e "${ColorAzul}    Activando el servicio $PaqueteEnRepos...${FinColor}"
@@ -195,9 +201,7 @@ elif [ $OS_VERS == "11" ]; then
             echo -e "${ColorVerde}  $PaqueteEnRepos instalado desde los repos de Debian.${FinColor}"
             echo -e "${ColorVerde}  Accede $(hostname -I | sed 's- --g')/$PaqueteEnRepos para conectarte.${FinColor}"
             echo ""
-
-            echo ""
-            
+  
             # Impresoras
               sed -i -e 's|#cfg_dir=/etc/nagios4/printers|cfg_dir=/etc/nagios4/printers|g' /etc/nagios4/nagios.cfg
               mkdir -p            /etc/nagios4/printers/
