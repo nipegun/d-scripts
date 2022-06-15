@@ -153,6 +153,18 @@ elif [ $OS_VERS == "11" ]; then
   echo "command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200"                  >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Swap"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_swap]=/usr/lib/nagios/plugins/check_swap -w 90% -c 95%"                          >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Oracle"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_oracle]=/usr/lib/nagios/plugins/check_oracle"                                    >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# MySQL"                                                                                       >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_mysql]=/usr/lib/nagios/plugins/check_mysql"                                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_mysql_query]=/usr/lib/nagios/plugins/check_mysql_query"                          >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# DHCP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_dhcp_local]=/usr/lib/nagios/plugins/check_dhcp -s 127.0.0.1"                     >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# DNS"                                                                                         >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_dig]/usr/lib/nagios/plugins/check_dig"                                           >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_dns]/usr/lib/nagios/plugins/check_dns"                                           >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# HTTP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_http]/usr/lib/nagios/plugins/check_http -H localhost"                            >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Discos"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_mp_root]=/usr/lib/nagios/plugins/check_disk -w 90% -c 95% -p /"                  >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_mp_home]=/usr/lib/nagios/plugins/check_disk -w 90% -c 95% -p /home/"             >> /etc/nagios/nrpe.d/comandos.cfg
@@ -208,18 +220,6 @@ elif [ $OS_VERS == "11" ]; then
   echo "command[check_nvme3n1p2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p2"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme3n1p3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p3"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme3n1p4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p4"   >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "# Oracle"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_oracle]=/usr/lib/nagios/plugins/check_oracle"                                    >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "# MySQL"                                                                                       >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_mysql]=/usr/lib/nagios/plugins/check_mysql"                                      >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_mysql_query]=/usr/lib/nagios/plugins/check_mysql_query"                          >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "# DHCP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_dhcp_local]=/usr/lib/nagios/plugins/check_dhcp -s 127.0.0.1"                     >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "# DNS"                                                                                         >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_dig]/usr/lib/nagios/plugins/check_dig"                                           >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_dns]/usr/lib/nagios/plugins/check_dns"                                           >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "# HTTP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_http]/usr/lib/nagios/plugins/check_http -H localhost"                            >> /etc/nagios/nrpe.d/comandos.cfg
   
   # Comandos con argumentos acarrean riesgos de seguridad
   # Sólo pueden ser usados si se configura dont_blame_nrpe=1 en el archivo de configuración
@@ -239,6 +239,6 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  La lista de comandos para ser llamados desde Nagios es:"
   echo ""
-  cat /etc/nagios/nrpe.d/comandos.cfg | cut -d ']' -f1 | cut -d '[' -f2
+  cat /etc/nagios/nrpe.d/comandos.cfg | cut -d ']' -f1 | cut -d '[' -f2 | grep -v "#"
 
 fi
