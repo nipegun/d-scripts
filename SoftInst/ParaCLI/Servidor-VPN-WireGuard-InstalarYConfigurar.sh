@@ -12,34 +12,35 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-VPN-WireGuard-InstalarYConfigurar.sh | bash
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
-InterfazEthernet="eth0"
-#InterfazEthernet="venet0"
+# Determinar la primera interfaz ethernet
+vInterfazEthernet=$(ip route | grep "default via" | sed 's-dev -\n-g' | tail -n 1 | cut -d ' ' -f1)
+#vInterfazEthernet="venet0"
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then
+    # Para systemd y freedesktop.org
+      . /etc/os-release
+      OS_NAME=$NAME
+      OS_VERS=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then
+    # linuxbase.org
+      OS_NAME=$(lsb_release -si)
+      OS_VERS=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then
+    # Para algunas versiones de Debian sin el comando lsb_release
+      . /etc/lsb-release
+      OS_NAME=$DISTRIB_ID
+      OS_VERS=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then
+    # Para versiones viejas de Debian.
+      OS_NAME=Debian
+      OS_VERS=$(cat /etc/debian_version)
+  else
+    # Para el viejo uname (También funciona para BSD)
+      OS_NAME=$(uname -s)
+      OS_VERS=$(uname -r)
+  fi
 
 if [ $OS_VERS == "7" ]; then
 
@@ -95,20 +96,20 @@ elif [ $OS_VERS == "8" ]; then
     echo ""
     echo "  Creando el archivo de configuración..."
     echo ""
-    echo "[Interface]"                                                                                                                                                                                                                    > /etc/wireguard/wg0.conf
-    echo "Address ="                                                                                                                                                                                                                     >> /etc/wireguard/wg0.conf
-    echo "PrivateKey ="                                                                                                                                                                                                                  >> /etc/wireguard/wg0.conf
-    echo "ListenPort = 51820"                                                                                                                                                                                                            >> /etc/wireguard/wg0.conf
-    echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
-    echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
-    echo "SaveConfig = true # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                        >> /etc/wireguard/wg0.conf
+    echo "[Interface]"                                                                                                                                                                                                                      > /etc/wireguard/wg0.conf
+    echo "Address ="                                                                                                                                                                                                                       >> /etc/wireguard/wg0.conf
+    echo "PrivateKey ="                                                                                                                                                                                                                    >> /etc/wireguard/wg0.conf
+    echo "ListenPort = 51820"                                                                                                                                                                                                              >> /etc/wireguard/wg0.conf
+    echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $vInterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $vInterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
+    echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $vInterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $vInterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
+    echo "SaveConfig = true # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                          >> /etc/wireguard/wg0.conf
     
   # Agregar la dirección IP del servidor al archivo de configuración
     echo ""
     echo "  Agregando la ip del ordenador/servidor al archivo de configuración..."
     echo ""
-    DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
-    sed -i -e 's|Address =|Address = "$DirIP"|g' /etc/wireguard/wg0.conf
+    DirIP=$(ip a | grep $vInterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
+    sed -i -e "s|Address =|Address = $vDirIP|g" /etc/wireguard/wg0.conf
 
   # Crear las claves pública y privada del servidor
     echo ""
@@ -122,8 +123,8 @@ elif [ $OS_VERS == "8" ]; then
     echo ""
     echo "  Agregando la clave privada del servidor al archivo de configuración..."
     echo ""
-    VarServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
-    sed -i -e 's|PrivateKey =|PrivateKey = "$VarServerPrivKey"|g' /etc/wireguard/wg0.conf
+    vServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
+    sed -i -e "s|PrivateKey =|PrivateKey = $vServerPrivKey|g" /etc/wireguard/wg0.conf
 
   # Agregar las reglas para tener salida a Internet desde el servidor
     echo ""
@@ -132,19 +133,19 @@ elif [ $OS_VERS == "8" ]; then
     iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT
-    iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
-    iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+    iptables -A INPUT -s $vDirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+    iptables -A INPUT -s $vDirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
 
   # Agregar las reglas a los ComandosPostArranque
     echo ""
     echo "  Agregando las reglas del cortaduegos a los ComandosPostArranque..."
     echo ""
     touch /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                        > /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                     >> /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT"           >> /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                         > /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                      >> /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT"            >> /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A INPUT -s $vDirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A INPUT -s $vDirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
     chmod +x /root/scripts/ReglasIPTablesWireGuard.sh
     touch /root/scripts/ComandosPostArranque.sh
     echo "/root/scripts/ReglasIPTablesWireGuard.sh" >> /root/scripts/ComandosPostArranque.sh
@@ -183,9 +184,9 @@ elif [ $OS_VERS == "8" ]; then
     echo "  Instalación finalizada."
     echo "  Para crear el primer cliente ejecuta:"
     echo ""
-    echo "  /root/scripts/d-scripts/VPN-WireGuard-NuevoCliente.sh"
+    echo "  /root/scripts/d-scripts/VPN-WireGuard-Clientes-Nuevo.sh"
     echo "  o"
-    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-NuevoCliente.sh | bash"
+    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-Clientes-Nuevo.sh | bash"
     echo ""
 
 elif [ $OS_VERS == "9" ]; then
@@ -219,13 +220,13 @@ elif [ $OS_VERS == "9" ]; then
     echo "Address ="                                                                                                                                                                                                                     >> /etc/wireguard/wg0.conf
     echo "PrivateKey ="                                                                                                                                                                                                                  >> /etc/wireguard/wg0.conf
     echo "ListenPort = 51820"                                                                                                                                                                                                            >> /etc/wireguard/wg0.conf
-    echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
-    echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
+    echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $vInterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $vInterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
+    echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $vInterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $vInterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
     echo "SaveConfig = true # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                        >> /etc/wireguard/wg0.conf
 
   # Agregar la dirección IP del servidor al archivo de configuración
-    DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
-    sed -i -e 's|Address =|Address = "$DirIP"|g' /etc/wireguard/wg0.conf
+    DirIP=$(ip a | grep $vInterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
+    sed -i -e "s|Address =|Address = $vDirIP|g" /etc/wireguard/wg0.conf
 
   # Crear las claves pública y privada del servidor
     mkdir /root/WireGuard/
@@ -233,23 +234,23 @@ elif [ $OS_VERS == "9" ]; then
     cat /root/WireGuard/WireGuardServerPrivate.key | wg pubkey > /root/WireGuard/WireGuardServerPublic.key
 
   # Agregar la clave privada al archivo de configuración
-    VarServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
-    sed -i -e 's|PrivateKey =|PrivateKey = "$VarServerPrivKey"|g' /etc/wireguard/wg0.conf
+    vServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
+    sed -i -e "s|PrivateKey =|PrivateKey = $vServerPrivKey|g" /etc/wireguard/wg0.conf
 
   # Agregar las reglas para tener salida a Internet desde el servidor
     iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT
-    iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
-    iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+    iptables -A INPUT -s $vDirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+    iptables -A INPUT -s $vDirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
 
   # Agregar las reglas a los ComandosPostArranque
     touch /root/scripts/ReglasIPTablesWireGuard.sh
     echo "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                        > /root/scripts/ReglasIPTablesWireGuard.sh
     echo "iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                     >> /root/scripts/ReglasIPTablesWireGuard.sh
     echo "iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT"           >> /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A INPUT -s $vDirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A INPUT -s $vDirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
     chmod +x /root/scripts/ReglasIPTablesWireGuard.sh
     touch /root/scripts/ComandosPostArranque.sh
     echo "/root/scripts/ReglasIPTablesWireGuard.sh" >> /root/scripts/ComandosPostArranque.sh
@@ -282,9 +283,9 @@ elif [ $OS_VERS == "9" ]; then
     echo "  Instalación finalizada."
     echo "  Para crear el primer cliente ejecuta:"
     echo ""
-    echo "  /root/scripts/d-scripts/VPN-WireGuard-NuevoCliente.sh"
+    echo "  /root/scripts/d-scripts/VPN-WireGuard-Clientes-Nuevo.sh"
     echo "  o"
-    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-NuevoCliente.sh | bash"
+    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-Clientes-Nuevo.sh | bash"
     echo ""
 
 elif [ $OS_VERS == "10" ]; then
@@ -319,13 +320,13 @@ elif [ $OS_VERS == "10" ]; then
     echo "Address ="                                                                                                                                                                                                                     >> /etc/wireguard/wg0.conf
     echo "PrivateKey ="                                                                                                                                                                                                                  >> /etc/wireguard/wg0.conf
     echo "ListenPort = 51820"                                                                                                                                                                                                            >> /etc/wireguard/wg0.conf
-    echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
-    echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
+    echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $vInterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $vInterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
+    echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $vInterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $vInterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
     echo "SaveConfig = true    # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                     >> /etc/wireguard/wg0.conf
 
   # Agregar la dirección IP del servidor al archivo de configuración
-    DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
-    sed -i -e 's|Address =|Address = "$DirIP"|g' /etc/wireguard/wg0.conf
+    DirIP=$(ip a | grep $vInterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
+    sed -i -e "s|Address =|Address = $vDirIP|g" /etc/wireguard/wg0.conf
 
   # Crear las claves pública y privada del servidor
     mkdir /root/WireGuard/
@@ -334,23 +335,23 @@ elif [ $OS_VERS == "10" ]; then
     chmod 600 /root/WireGuard/WireGuardServerPrivate.key
 
   # Agregar la clave privada al archivo de configuración
-    VarServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
-    sed -i -e 's|PrivateKey =|PrivateKey = "$VarServerPrivKey"|g' /etc/wireguard/wg0.conf
+    vServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
+    sed -i -e "s|PrivateKey =|PrivateKey = $vServerPrivKey|g" /etc/wireguard/wg0.conf
 
   # Agregar las reglas para tener salida a Internet desde el servidor
     iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT
-    iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
-    iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+    iptables -A INPUT -s $vDirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+    iptables -A INPUT -s $vDirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
 
   # Agregar las reglas a los ComandosPostArranque
     touch /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                        > /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                     >> /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT"           >> /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                         > /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                      >> /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT"            >> /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A INPUT -s $vDirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A INPUT -s $vDirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
     chmod +x /root/scripts/ReglasIPTablesWireGuard.sh
     touch /root/scripts/ComandosPostArranque.sh
     echo "/root/scripts/ReglasIPTablesWireGuard.sh" >> /root/scripts/ComandosPostArranque.sh
@@ -383,9 +384,9 @@ elif [ $OS_VERS == "10" ]; then
     echo "  Instalación finalizada."
     echo "  Para crear el primer cliente ejecuta:"
     echo ""
-    echo "  /root/scripts/d-scripts/VPN-WireGuard-NuevoCliente.sh"
+    echo "  /root/scripts/d-scripts/VPN-WireGuard-Clientes-Nuevo.sh"
     echo "  o"
-    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-NuevoCliente.sh | bash"
+    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-Clientes-Nuevo.sh | bash"
     echo ""
 
 elif [ $OS_VERS == "11" ]; then
@@ -417,13 +418,13 @@ elif [ $OS_VERS == "11" ]; then
     echo "Address ="                                                                                                                                                                                                                     >> /etc/wireguard/wg0.conf
     echo "PrivateKey ="                                                                                                                                                                                                                  >> /etc/wireguard/wg0.conf
     echo "ListenPort = 51820"                                                                                                                                                                                                            >> /etc/wireguard/wg0.conf
-    echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
-    echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $InterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
+    echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $vInterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $vInterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
+    echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $vInterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $vInterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
     echo "SaveConfig = true    # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                     >> /etc/wireguard/wg0.conf
 
   # Agregar la dirección IP del servidor al archivo de configuración
-    DirIP=$(ip a | grep $InterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
-    sed -i -e 's|Address =|Address = "$DirIP"|g' /etc/wireguard/wg0.conf
+    vDirIP=$(ip a | grep $vInterfazEthernet | grep inet | cut -d '/' -f 1 | cut -d 't' -f 2 | cut -d ' ' -f 2)
+    sed -i -e "s|Address =|Address = $vDirIP|g" /etc/wireguard/wg0.conf
 
   # Crear las claves pública y privada del servidor
     mkdir /root/WireGuard/
@@ -432,23 +433,23 @@ elif [ $OS_VERS == "11" ]; then
     chmod 600 /root/WireGuard/WireGuardServerPrivate.key
 
   # Agregar la clave privada al archivo de configuración
-    VarServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
-    sed -i -e 's|PrivateKey =|PrivateKey = "$VarServerPrivKey"|g' /etc/wireguard/wg0.conf
+    vServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
+    sed -i -e "s|PrivateKey =|PrivateKey = $vServerPrivKey|g" /etc/wireguard/wg0.conf
 
   # Agregar las reglas para tener salida a Internet desde el servidor
     iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT
-    iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
-    iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+    iptables -A INPUT -s $vDirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+    iptables -A INPUT -s $vDirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
 
   # Agregar las reglas a los ComandosPostArranque
     touch /root/scripts/ReglasIPTablesWireGuard.sh
     echo "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                        > /root/scripts/ReglasIPTablesWireGuard.sh
     echo "iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                     >> /root/scripts/ReglasIPTablesWireGuard.sh
     echo "iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT"           >> /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
-    echo "iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A INPUT -s $vDirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+    echo "iptables -A INPUT -s $vDirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
     chmod +x /root/scripts/ReglasIPTablesWireGuard.sh
     touch /root/scripts/ComandosPostArranque.sh
     echo "/root/scripts/ReglasIPTablesWireGuard.sh" >> /root/scripts/ComandosPostArranque.sh
@@ -481,9 +482,9 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Instalación finalizada."
     echo "  Para crear el primer cliente ejecuta:"
     echo ""
-    echo "  /root/scripts/d-scripts/VPN-WireGuard-NuevoCliente.sh"
+    echo "  /root/scripts/d-scripts/VPN-WireGuard-Clientes-Nuevo.sh"
     echo "  o"
-    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-NuevoCliente.sh | bash"
+    echo "  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-Clientes-Nuevo.sh | bash"
     echo ""
 
 fi
