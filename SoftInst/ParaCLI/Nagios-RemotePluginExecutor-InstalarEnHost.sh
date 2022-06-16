@@ -166,9 +166,9 @@ elif [ $OS_VERS == "11" ]; then
   echo "# HTTP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_http]=/usr/lib/nagios/plugins/check_http -H localhost"                           >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Discos"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_mp_root]=/usr/lib/nagios/plugins/check_disk -w 90% -c 95% -p /"                  >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_mp_home]=/usr/lib/nagios/plugins/check_disk -w 90% -c 95% -p /home/"             >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_mp_var]=/usr/lib/nagios/plugins/check_disk -w 90% -c 95% -p /var/"               >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_mp_root]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /"                  >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_mp_home]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /home/"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_mp_var]=/usr/lib/nagios/plugins/check_disk  -w 20% -c 10% -p /var/"              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Discos IDE"                                                                                  >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hda1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hda1"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hda2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hda2"             >> /etc/nagios/nrpe.d/comandos.cfg
