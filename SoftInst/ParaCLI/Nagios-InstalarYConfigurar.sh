@@ -232,7 +232,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
             echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
             echo '  command_name pers_check_ssh'                                                        >> /etc/nagios4/objects/comandospers.cfg
-            echo '  command_line $USER1$/check_ssh -H $HOSTADDRESS$ $ARG1$ $HOSTADDRESS$'               >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_ssh -H $HOSTADDRESS$ $ARG1$'                             >> /etc/nagios4/objects/comandospers.cfg
             echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
             echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
             echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
