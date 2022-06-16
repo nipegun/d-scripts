@@ -105,6 +105,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   apt-get -y update
   apt-get -y install nagios-nrpe-server
+  apt-get -y install nagios-nrpe-plugin
   apt-get -y install monitoring-plugins
   apt-get -y install monitoring-plugins-contrib
   apt-get -y install nagios-snmp-plugins
