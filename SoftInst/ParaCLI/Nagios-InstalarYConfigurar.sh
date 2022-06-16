@@ -157,7 +157,7 @@ elif [ $OS_VERS == "11" ]; then
             sed -i -e 's|cfg_file=/etc/nagios4/objects/templates.cfg|cfg_file=/etc/nagios4/objects/templates.cfg\n\ncfg_file=/etc/nagios4/objects/comandospers.cfg|g' /etc/nagios4/nagios.cfg
             echo 'define command {'                                                                      > /etc/nagios4/objects/comandospers.cfg
             echo '  command_name pers_check_dhcp'                                                       >> /etc/nagios4/objects/comandospers.cfg
-            echo '  command_line $USER1$/check_dhcp -H $HOSTADDRESS$ $ARG1$'                            >> /etc/nagios4/objects/comandospers.cfg
+            echo '  command_line $USER1$/check_dhcp -s $HOSTADDRESS$'                                   >> /etc/nagios4/objects/comandospers.cfg
             echo '}'                                                                                    >> /etc/nagios4/objects/comandospers.cfg
             echo ''                                                                                     >> /etc/nagios4/objects/comandospers.cfg
             echo 'define command {'                                                                     >> /etc/nagios4/objects/comandospers.cfg
