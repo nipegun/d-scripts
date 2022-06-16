@@ -161,10 +161,10 @@ elif [ $OS_VERS == "11" ]; then
   echo "# DHCP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_dhcp_local]=/usr/lib/nagios/plugins/check_dhcp -s 127.0.0.1"                     >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# DNS"                                                                                         >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_dig]/usr/lib/nagios/plugins/check_dig"                                           >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_dns]/usr/lib/nagios/plugins/check_dns"                                           >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_dig]=/usr/lib/nagios/plugins/check_dig"                                          >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_dns]=/usr/lib/nagios/plugins/check_dns"                                          >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# HTTP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
-  echo "command[check_http]/usr/lib/nagios/plugins/check_http -H localhost"                            >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_http]=/usr/lib/nagios/plugins/check_http -H localhost"                           >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Discos"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_mp_root]=/usr/lib/nagios/plugins/check_disk -w 90% -c 95% -p /"                  >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_mp_home]=/usr/lib/nagios/plugins/check_disk -w 90% -c 95% -p /home/"             >> /etc/nagios/nrpe.d/comandos.cfg
