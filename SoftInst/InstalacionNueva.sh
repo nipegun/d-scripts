@@ -58,62 +58,53 @@ FinColor='\033[0m'
 
 if [ $OS_VERS == "7" ]; then
 
+
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${FinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${ColorRojo}  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${FinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${ColorRojo}  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${FinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${ColorRojo}  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
   echo ""
 
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${FinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${ColorRojo}  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
   echo ""
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${FinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${ColorRojo}  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
   echo ""
 
 fi
