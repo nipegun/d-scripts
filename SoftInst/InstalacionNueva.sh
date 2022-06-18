@@ -30,6 +30,16 @@ ColorVerde='\033[1;32m'
 ColorRojo='\033[1;31m'
 FinColor='\033[0m'
 
+# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo -e "${ColorRojo}  curl no está instalado. Iniciando su instalación...${FinColor}"
+    echo ""
+    sudo apt-get -y update > /dev/null
+    sudo apt-get -y install curl
+    echo ""
+  fi
+
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then
     # Para systemd y freedesktop.org
