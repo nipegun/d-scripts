@@ -19,10 +19,10 @@
 # ----------
 
 # Comprobar si el script está corriendo como root
-if [ $(id -u) -ne 0 ]; then
+  if [ $(id -u) -ne 0 ]; then
     echo "Este script está preparado para ejecutarse como root y no lo has ejecutado como root." >&2
     exit 1
-fi
+  fi
 
 ColorAzul="\033[0;34m"
 ColorAzulClaro="\033[1;34m"
@@ -31,7 +31,6 @@ ColorRojo='\033[1;31m'
 FinColor='\033[0m'
 
 # Determinar la versión de Debian
-
   if [ -f /etc/os-release ]; then
     # Para systemd y freedesktop.org
       . /etc/os-release
@@ -57,7 +56,6 @@ FinColor='\033[0m'
   fi
 
 if [ $OS_VERS == "7" ]; then
-
 
   echo ""
   echo -e "${ColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${FinColor}"
