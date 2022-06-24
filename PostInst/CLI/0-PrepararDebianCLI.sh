@@ -9,7 +9,7 @@
 #  Script de NiPeGun para preparar Debian sin entorno gráfico a gusto de NiPeGun
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/0-PrepararDebianCLI.sh | bash
 # ----------
 
 ColorRojo='\033[1;31m'
