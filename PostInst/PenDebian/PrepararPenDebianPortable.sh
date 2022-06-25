@@ -328,8 +328,11 @@ elif [ $OS_VERS == "11" ]; then
     echo "mount -t auto /dev/nvme2n1p3 /Particiones/NVMe/nvme2n1p3/" >> /root/scripts/ComandosPostArranque.sh
     echo "mount -t auto /dev/nvme2n1p4 /Particiones/NVMe/nvme2n1p4/" >> /root/scripts/ComandosPostArranque.sh
 
-
-
+    echo "pvscan"                                                >> /root/scripts/ComandosPostArranque.sh
+    echo "vgscan"                                                >> /root/scripts/ComandosPostArranque.sh
+    echo "vgchange -a y"                                         >> /root/scripts/ComandosPostArranque.sh
+    echo "lvscan"                                                >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/VolGroup0/root /Particiones/LVM/1/" >> /root/scripts/ComandosPostArranque.sh
 
   # Escritorio mate
     curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioMate-Personalizar.sh| bash
