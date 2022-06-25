@@ -328,11 +328,7 @@ elif [ $OS_VERS == "11" ]; then
     echo "mount -t auto /dev/nvme2n1p3 /Particiones/NVMe/nvme2n1p3/" >> /root/scripts/ComandosPostArranque.sh
     echo "mount -t auto /dev/nvme2n1p4 /Particiones/NVMe/nvme2n1p4/" >> /root/scripts/ComandosPostArranque.sh
 
-# El servicio corosync debe estar funcionando antes que pve-cluster.
-# Una vez que el servicio pve-cluster esté funcionando este debería montar el filesystem fuse en /etc/pve
-# config.db is a sqlite database serving as backing storage for the pmxcfs (
-# if you want to replace it you need to stop the pve-cluster.service beforehand and make sure that the pmxcfs process is not running -
-# if this is a clustered environment you need to stop the service on all nodes before replacing the database.
+
     echo "pvscan"                                                >> /root/scripts/ComandosPostArranque.sh
     echo "vgscan"                                                >> /root/scripts/ComandosPostArranque.sh
     echo "vgchange --activate y pve"                             >> /root/scripts/ComandosPostArranque.sh
