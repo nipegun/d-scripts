@@ -16,31 +16,30 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-## Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
-   fi
+# Determinar la versión de Debian
+  if [ -f /etc/os-release ]; then
+    # Para systemd y freedesktop.org
+      . /etc/os-release
+      OS_NAME=$NAME
+      OS_VERS=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then
+    # linuxbase.org
+      OS_NAME=$(lsb_release -si)
+      OS_VERS=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then
+    # Para algunas versiones de Debian sin el comando lsb_release
+      . /etc/lsb-release
+      OS_NAME=$DISTRIB_ID
+      OS_VERS=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then
+    # Para versiones viejas de Debian.
+      OS_NAME=Debian
+      OS_VERS=$(cat /etc/debian_version)
+  else
+    # Para el viejo uname (También funciona para BSD)
+      OS_NAME=$(uname -s)
+      OS_VERS=$(uname -r)
+  fi
 
 if [ $OS_VERS == "7" ]; then
 
@@ -279,40 +278,40 @@ elif [ $OS_VERS == "11" ]; then
     curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Consola/TareasCron-Preparar.sh | bash
 
   # Agregar comandos post arranque
-    echo "mount -t auto /dev/sda1 /Particiones/IDE/hda1/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sda2 /Particiones/IDE/hda2/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sda3 /Particiones/IDE/hda3/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sda4 /Particiones/IDE/hda4/" >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sda1 /Particiones/IDE/hda1/"            >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sda2 /Particiones/IDE/hda2/"            >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sda3 /Particiones/IDE/hda3/"            >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sda4 /Particiones/IDE/hda4/"            >> /root/scripts/ComandosPostArranque.sh
      
-    echo "mount -t auto /dev/sdb1 /Particiones/IDE/hdb1/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdb2 /Particiones/IDE/hdb2/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdb3 /Particiones/IDE/hdb3/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdb4 /Particiones/IDE/hdb4/" >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdb1 /Particiones/IDE/hdb1/"            >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdb2 /Particiones/IDE/hdb2/"            >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdb3 /Particiones/IDE/hdb3/"            >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdb4 /Particiones/IDE/hdb4/"            >> /root/scripts/ComandosPostArranque.sh
 
-    echo "mount -t auto /dev/sda1 /Particiones/SATA/sda1/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sda2 /Particiones/SATA/sda2/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sda3 /Particiones/SATA/sda3/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sda4 /Particiones/SATA/sda4/" >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sda1 /Particiones/SATA/sda1/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sda2 /Particiones/SATA/sda2/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sda3 /Particiones/SATA/sda3/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sda4 /Particiones/SATA/sda4/"           >> /root/scripts/ComandosPostArranque.sh
      
-    echo "mount -t auto /dev/sdb1 /Particiones/SATA/sdb1/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdb2 /Particiones/SATA/sdb2/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdb3 /Particiones/SATA/sdb3/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdb4 /Particiones/SATA/sdb4/" >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdb1 /Particiones/SATA/sdb1/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdb2 /Particiones/SATA/sdb2/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdb3 /Particiones/SATA/sdb3/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdb4 /Particiones/SATA/sdb4/"           >> /root/scripts/ComandosPostArranque.sh
 
-    echo "mount -t auto /dev/sdc1 /Particiones/SATA/sdc1/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdc2 /Particiones/SATA/sdc2/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdc3 /Particiones/SATA/sdc3/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdc4 /Particiones/SATA/sdc4/" >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdc1 /Particiones/SATA/sdc1/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdc2 /Particiones/SATA/sdc2/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdc3 /Particiones/SATA/sdc3/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdc4 /Particiones/SATA/sdc4/"           >> /root/scripts/ComandosPostArranque.sh
 
-    echo "mount -t auto /dev/sdd1 /Particiones/SATA/sdd1/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdd2 /Particiones/SATA/sdd2/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdd3 /Particiones/SATA/sdd3/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdd4 /Particiones/SATA/sdd4/" >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdd1 /Particiones/SATA/sdd1/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdd2 /Particiones/SATA/sdd2/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdd3 /Particiones/SATA/sdd3/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sdd4 /Particiones/SATA/sdd4/"           >> /root/scripts/ComandosPostArranque.sh
 
-    echo "mount -t auto /dev/sde1 /Particiones/SATA/sde1/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sde2 /Particiones/SATA/sde2/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sde3 /Particiones/SATA/sde3/" >> /root/scripts/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sde4 /Particiones/SATA/sde4/" >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sde1 /Particiones/SATA/sde1/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sde2 /Particiones/SATA/sde2/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sde3 /Particiones/SATA/sde3/"           >> /root/scripts/ComandosPostArranque.sh
+    echo "mount -t auto /dev/sde4 /Particiones/SATA/sde4/"           >> /root/scripts/ComandosPostArranque.sh
 
     echo "mount -t auto /dev/nvme0n1p1 /Particiones/NVMe/nvme0n1p1/" >> /root/scripts/ComandosPostArranque.sh
     echo "mount -t auto /dev/nvme0n1p2 /Particiones/NVMe/nvme0n1p2/" >> /root/scripts/ComandosPostArranque.sh
