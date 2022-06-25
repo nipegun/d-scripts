@@ -330,7 +330,7 @@ elif [ $OS_VERS == "11" ]; then
 
     echo "pvscan"                                                >> /root/scripts/ComandosPostArranque.sh
     echo "vgscan"                                                >> /root/scripts/ComandosPostArranque.sh
-    echo "vgchange -a y"                                         >> /root/scripts/ComandosPostArranque.sh
+    echo "vgchange --activate y pve"                             >> /root/scripts/ComandosPostArranque.sh
     echo "lvscan"                                                >> /root/scripts/ComandosPostArranque.sh
     echo "mount -t auto /dev/VolGroup0/root /Particiones/LVM/1/" >> /root/scripts/ComandosPostArranque.sh
 
