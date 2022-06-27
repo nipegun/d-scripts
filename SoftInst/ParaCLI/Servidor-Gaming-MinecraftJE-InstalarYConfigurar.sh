@@ -164,8 +164,12 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install jq
   apt-get -y install tmux
   apt-get -y install netcat
-  apt-get -y install default-jre
   apt-get -y install distro-info
+  # Instalar la última versión de java
+    # apt-get -y install default-jre # No es suficiente porque instala java 11 en Bullseye
+    # Determinar la última versión
+      vUltVersJava=$(apt-cache search openjdk | grep jre | grep runtime | grep -v nvidia | grep -v headless | tail -n1 | cut -d' ' -f1)
+    apt-get -y install $vUltVersJava
 
   echo ""
   echo "  Dependencias instaladas."
