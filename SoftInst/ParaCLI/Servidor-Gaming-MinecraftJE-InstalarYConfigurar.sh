@@ -165,6 +165,7 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install tmux
   apt-get -y install netcat
   apt-get -y install default-jre
+  apt-get -y install distro-info
 
   echo ""
   echo "  Dependencias instaladas."
