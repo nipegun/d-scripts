@@ -147,27 +147,27 @@ else
       echo ""                                                                         >> /var/www/$2$1/.htaccess
 
     # Proteger los logs para que sólo se puedan ver con la sesión en WordPress iniciada
-      echo "#<Files *>"                                                    > /var/www/$2$1/logs/.htaccess
-      echo "#"                                                            >> /var/www/$2$1/logs/.htaccess
-      echo "#  Order Deny,Allow"                                          >> /var/www/$2$1/logs/.htaccess
-      echo "#  #Allow from 127.0.0.1"                                     >> /var/www/$2$1/logs/.htaccess
-      echo "#  Deny from all"                                             >> /var/www/$2$1/logs/.htaccess
-      echo "#"                                                            >> /var/www/$2$1/logs/.htaccess
-      echo "#</Files>"                                                    >> /var/www/$2$1/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/logs/.htaccess
-      echo "RewriteEngine On"                                             >> /var/www/$2$1/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/logs/.htaccess
-      echo "# Si alguien llega a la web desde otro lugar que no sea $2$1" >> /var/www/$2$1/logs/.htaccess
-      echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?$2\\$1/ [NC]"    >> /var/www/$2$1/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/logs/.htaccess
-      echo "#, pide directamente por un archivo con extension log"        >> /var/www/$2$1/logs/.htaccess
-      echo "RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]"              >> /var/www/$2$1/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/logs/.htaccess
-      echo "# y no tiene la sesion iniciada en WordPress"                 >> /var/www/$2$1/logs/.htaccess
-      echo "RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in.*$ [NC]"   >> /var/www/$2$1/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/logs/.htaccess
-      echo "# Redirigirlo a google.com"                                   >> /var/www/$2$1/logs/.htaccess
-      echo "RewriteRule .*\.(log)$ http://google.com/ [NC]"               >> /var/www/$2$1/logs/.htaccess
+      echo "#<Files *>"                                                    > /var/www/$2$1/_/logs/.htaccess
+      echo "#"                                                            >> /var/www/$2$1/_/logs/.htaccess
+      echo "#  Order Deny,Allow"                                          >> /var/www/$2$1/_/logs/.htaccess
+      echo "#  #Allow from 127.0.0.1"                                     >> /var/www/$2$1/_/logs/.htaccess
+      echo "#  Deny from all"                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo "#"                                                            >> /var/www/$2$1/_/logs/.htaccess
+      echo "#</Files>"                                                    >> /var/www/$2$1/_/logs/.htaccess
+      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo "RewriteEngine On"                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo "# Si alguien llega a la web desde otro lugar que no sea $2$1" >> /var/www/$2$1/_/logs/.htaccess
+      echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?$2\\$1/ [NC]"    >> /var/www/$2$1/_/logs/.htaccess
+      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo "#, pide directamente por un archivo con extension log"        >> /var/www/$2$1/_/logs/.htaccess
+      echo "RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]"              >> /var/www/$2$1/_/logs/.htaccess
+      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo "# y no tiene la sesion iniciada en WordPress"                 >> /var/www/$2$1/_/logs/.htaccess
+      echo "RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in.*$ [NC]"   >> /var/www/$2$1/_/logs/.htaccess
+      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo "# Redirigirlo a google.com"                                   >> /var/www/$2$1/_/logs/.htaccess
+      echo "RewriteRule .*\.(log)$ http://google.com/ [NC]"               >> /var/www/$2$1/_/logs/.htaccess
 
     # Reparar permisos y propietario de la carpeta
       chown www-data:www-data /var/www/$2$1/ -R
@@ -289,27 +289,27 @@ else
       echo ""                                                                         >> /var/www/$2$1/.htaccess
     
     # Proteger los logs para que sólo se puedan ver con la sesión en WordPress iniciada
-      echo "#<Files *>"                                                    > /var/www/$2$1/logs/.htaccess
-      echo "#"                                                            >> /var/www/$2$1/logs/.htaccess
-      echo "#  Order Deny,Allow"                                          >> /var/www/$2$1/logs/.htaccess
-      echo "#  #Allow from 127.0.0.1"                                     >> /var/www/$2$1/logs/.htaccess
-      echo "#  Deny from all"                                             >> /var/www/$2$1/logs/.htaccess
-      echo "#"                                                            >> /var/www/$2$1/logs/.htaccess
-      echo "#</Files>"                                                    >> /var/www/$2$1/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/logs/.htaccess
-      echo "RewriteEngine On"                                             >> /var/www/$2$1/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/logs/.htaccess
-      echo "# Si alguien llega a la web desde otro lugar que no sea $2$1" >> /var/www/$2$1/logs/.htaccess
-      echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?$2\\$1/ [NC]"    >> /var/www/$2$1/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/logs/.htaccess
-      echo "#, pide directamente por un archivo con extension log"        >> /var/www/$2$1/logs/.htaccess
-      echo "RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]"              >> /var/www/$2$1/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/logs/.htaccess
-      echo "# y no tiene la sesion iniciada en WordPress"                 >> /var/www/$2$1/logs/.htaccess
-      echo "RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in.*$ [NC]"   >> /var/www/$2$1/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/logs/.htaccess
-      echo "# Redirigirlo a google.com"                                   >> /var/www/$2$1/logs/.htaccess
-      echo "RewriteRule .*\.(log)$ http://google.com/ [NC]"               >> /var/www/$2$1/logs/.htaccess
+      echo "#<Files *>"                                                    > /var/www/$2$1/_/logs/.htaccess
+      echo "#"                                                            >> /var/www/$2$1/_/logs/.htaccess
+      echo "#  Order Deny,Allow"                                          >> /var/www/$2$1/_/logs/.htaccess
+      echo "#  #Allow from 127.0.0.1"                                     >> /var/www/$2$1/_/logs/.htaccess
+      echo "#  Deny from all"                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo "#"                                                            >> /var/www/$2$1/_/logs/.htaccess
+      echo "#</Files>"                                                    >> /var/www/$2$1/_/logs/.htaccess
+      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo "RewriteEngine On"                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo "# Si alguien llega a la web desde otro lugar que no sea $2$1" >> /var/www/$2$1/_/logs/.htaccess
+      echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?$2\\$1/ [NC]"    >> /var/www/$2$1/_/logs/.htaccess
+      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo "#, pide directamente por un archivo con extension log"        >> /var/www/$2$1/_/logs/.htaccess
+      echo "RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]"              >> /var/www/$2$1/_/logs/.htaccess
+      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo "# y no tiene la sesion iniciada en WordPress"                 >> /var/www/$2$1/_/logs/.htaccess
+      echo "RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in.*$ [NC]"   >> /var/www/$2$1/_/logs/.htaccess
+      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
+      echo "# Redirigirlo a google.com"                                   >> /var/www/$2$1/_/logs/.htaccess
+      echo "RewriteRule .*\.(log)$ http://google.com/ [NC]"               >> /var/www/$2$1/_/logs/.htaccess
 
     # Reparar permisos y propietario de la carpeta
       chown www-data:www-data /var/www/$2$1/ -R
