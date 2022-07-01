@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para cambiar el nombre de un usuario
 #
 #  Ejecución con curl:
-#  curl --silent https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-CambiarNombre.sh | bash -s -- UsuarioViejo UsuarioNuevo
-#------------------------------------------------------------------------------------------------------------------------------------------
+#  curl --silent https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-CambiarNombre.sh | bash -s UsuarioViejo UsuarioNuevo
+# ----------
 
 CantArgsCorrectos=2
 ArgsInsuficientes=65
