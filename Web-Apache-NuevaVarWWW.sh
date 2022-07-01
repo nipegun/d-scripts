@@ -199,8 +199,8 @@ else
     /root/scripts/d-scripts/MySQL-BaseDeDatos-Crear.sh $2 $2 $3
 
     # Crear las carpetas de la web
-    mkdir /var/www/$2$1/
-    mkdir /var/www/$2$1/logs/
+    mkdir -p /var/www/$2$1/
+    mkdir -p /var/www/$2$1/logs/
     echo "WEB OK" > /var/www/$2$1/index.html
 
     # Crear la web en Apache
