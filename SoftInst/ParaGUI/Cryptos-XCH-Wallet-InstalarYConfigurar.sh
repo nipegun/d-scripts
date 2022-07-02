@@ -143,7 +143,7 @@ echo ""
   echo "[Desktop Entry]"                                                            > /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
   echo "Name=xch wallet"                                                           >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
   echo "Type=Application"                                                          >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
-  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-wallet-iniciar.sh"         >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
+  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"            >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
   echo "Terminal=false"                                                            >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
   echo "Hidden=false"                                                              >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
   echo "Categories=Cryptos"                                                        >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
@@ -158,7 +158,7 @@ echo ""
   echo "[Desktop Entry]"                                                            > /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop
   echo "Name=xch wallet"                                                           >> /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop
   echo "Type=Application"                                                          >> /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop
-  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-wallet-iniciar.sh"         >> /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop
+  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"            >> /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop
   echo "Terminal=false"                                                            >> /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop
   echo "Hidden=false"                                                              >> /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop
   gio set /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop "metadata::trusted" yes
