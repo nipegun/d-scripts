@@ -140,28 +140,28 @@ echo ""
   echo "  Agregando la aplicación gráfica al menú..."
   echo ""
   mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-  echo "[Desktop Entry]"                                                            > /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
-  echo "Name=xch wallet"                                                           >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
-  echo "Type=Application"                                                          >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
-  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"            >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
-  echo "Terminal=false"                                                            >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
-  echo "Hidden=false"                                                              >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
-  echo "Categories=Cryptos"                                                        >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
-  echo "Icon=/home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain.png" >> /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop
-  gio set /home/$UsuarioNoRoot/.local/share/applications/xch-wallet.desktop "metadata::trusted" yes
+  echo "[Desktop Entry]"                                                            > /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
+  echo "Name=xch wallet"                                                           >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
+  echo "Type=Application"                                                          >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
+  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"            >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
+  echo "Terminal=false"                                                            >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
+  echo "Hidden=false"                                                              >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
+  echo "Categories=Cryptos"                                                        >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
+  echo "Icon=/home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain.png" >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
+  gio set /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop "metadata::trusted" yes
 
 # Crear el archivo de auto-ejecución
   echo ""
   echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
   echo ""
   mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
-  echo "[Desktop Entry]"                                                            > /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop
-  echo "Name=xch wallet"                                                           >> /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop
-  echo "Type=Application"                                                          >> /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop
-  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"            >> /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop
-  echo "Terminal=false"                                                            >> /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop
-  echo "Hidden=false"                                                              >> /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop
-  gio set /home/$UsuarioNoRoot/.config/autostart/xch-wallet.desktop "metadata::trusted" yes
+  echo "[Desktop Entry]"                                                            > /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
+  echo "Name=xch wallet"                                                           >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
+  echo "Type=Application"                                                          >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
+  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"            >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
+  echo "Terminal=false"                                                            >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
+  echo "Hidden=false"                                                              >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
+  gio set /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop "metadata::trusted" yes
 
 # Instalar los c-scripts
   echo ""
