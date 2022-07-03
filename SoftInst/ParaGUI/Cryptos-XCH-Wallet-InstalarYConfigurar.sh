@@ -141,7 +141,7 @@ echo ""
   echo ""
   mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
   echo "[Desktop Entry]"                                                            > /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
-  echo "Name=xch wallet"                                                           >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
+  echo "Name=xch GUI"                                                              >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
   echo "Type=Application"                                                          >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"            >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
   echo "Terminal=false"                                                            >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
@@ -156,7 +156,7 @@ echo ""
   echo ""
   mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
   echo "[Desktop Entry]"                                                            > /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
-  echo "Name=xch wallet"                                                           >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
+  echo "Name=xch GUI"                                                              >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
   echo "Type=Application"                                                          >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"            >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
   echo "Terminal=false"                                                            >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
