@@ -161,6 +161,8 @@ echo ""
   echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"            >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
   echo "Terminal=false"                                                            >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
   echo "Hidden=false"                                                              >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
+  echo "Categories=Cryptos"                                                        >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
+  echo "Icon=/home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain.png" >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
   gio set /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop "metadata::trusted" yes
 
 # Instalar los c-scripts
