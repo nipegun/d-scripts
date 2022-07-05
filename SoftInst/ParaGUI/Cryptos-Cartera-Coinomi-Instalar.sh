@@ -108,7 +108,21 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${ColorAzulClaro}  Iniciando el script de instalación de Coinomi para Debian 11 (Bullseye)...${FinColor}"
   echo ""
 
+  # Determinar URL de descarga del archivo comprimido
+    echo ""
+    echo "  Determinando la URL de descarga del archivo de instalación de Coinomi..."
+    echo ""
+    vURLArchivo=$(curl -s https://www.coinomi.com/en/downloads/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep binaries | grep>  echo ""
+    echo "    La URL de descarga del archivo es: $vURLArchivo"
+    echo ""
 
+  # Descargar archivo comprimido
+    echo ""
+    echo "  Descargando el archivo..."
+    echo ""
+    mkdir -p /root/SoftInst/Coinomi 2> /dev/null
+    cd /root/SoftInst/Coinomi
+    curl -s $vURLArchivo --output /root/SoftInst/Coinomi/Coinomi.tar.gz
 
 fi
 
