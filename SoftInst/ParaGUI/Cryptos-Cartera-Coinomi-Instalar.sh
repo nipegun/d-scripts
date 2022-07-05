@@ -168,5 +168,11 @@ elif [ $OS_VERS == "11" ]; then
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop -R
     gio set /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop "metadata::trusted" yes
 
+  # Reparar permisos
+    echo ""
+    echo "  Reparando permisos..."
+    echo ""
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
+
 fi
 
