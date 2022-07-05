@@ -9,10 +9,10 @@
 #  Script de NiPeGun para instalar y configurar el messenger de Utopia en Debian
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-CRP-Nodo-InstalarOActualizar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-CRP-InstalarOActualizar.sh | bash
 #
 #  Cambiando el nombre de usuario
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-CRP-Nodo-InstalarOActualizar.sh | sed 's/nipegun/usuarionuevo/g' | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-CRP-InstalarOActualizar.sh | sed 's/nipegun/usuarionuevo/g' | bash
 #----------------------------------------------------------------------------------------------------------------------------
 
 UsuarioNoRoot="nipegun"
