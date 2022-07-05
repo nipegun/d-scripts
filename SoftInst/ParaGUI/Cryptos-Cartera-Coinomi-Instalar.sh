@@ -157,13 +157,13 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
     cp /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop /home/$vUsuarioNoRoot/.local/share/applications/
-    sed -i -e 's-Exec=Coinomi-Exec=/home/"$vUsuarioNoRoot"/Coinomi/Coinomi-g' /home/v$UsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
-    gio set /home/v$UsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop "metadata::trusted" yes
+    sed -i -e 's-Exec=Coinomi-Exec=/home/"$vUsuarioNoRoot"/Coinomi/Coinomi-g' /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
+    gio set /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop "metadata::trusted" yes
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
-    mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
+    mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
     cp /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop /home/$vUsuarioNoRoot/.config/autostart/
     sed -i -e 's-Exec=Coinomi-Exec=/home/"$vUsuarioNoRoot"/Coinomi/Coinomi-g' /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
-    gio set /home/v$UsuarioNoRoot/.config/autostart/coinomi-wallet.desktop "metadata::trusted" yes
+    gio set /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop "metadata::trusted" yes
 
 fi
 
