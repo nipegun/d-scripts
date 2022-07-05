@@ -111,10 +111,10 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   # Borrar archivos previos
-    rm -rf /root/SoftInst/Atomic/
-    rm -rf /home/$vUsuarioNoRoot/Atomic/
-    rm -f  /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
-    rm -f  /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
+    #rm -rf /root/SoftInst/Atomic/
+    #rm -rf /home/$vUsuarioNoRoot/Atomic/
+    #rm -f  /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
+    #rm -f  /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
 
   # Determinar URL de descarga del archivo comprimido
     echo ""
