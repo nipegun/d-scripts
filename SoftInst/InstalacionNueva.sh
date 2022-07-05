@@ -35,8 +35,7 @@ FinColor='\033[0m'
     echo ""
     echo -e "${ColorRojo}  curl no está instalado. Iniciando su instalación...${FinColor}"
     echo ""
-    sudo apt-get -y update > /dev/null
-    sudo apt-get -y install curl
+    apt-get -y update && apt-get -y install curl
     echo ""
   fi
 
