@@ -113,8 +113,8 @@ elif [ $OS_VERS == "11" ]; then
   # Borrar archivos previos
     rm -rf /root/SoftInst/Atomic/
     rm -rf /home/$vUsuarioNoRoot/Atomic/
-    rm -f  /home/$vUsuarioNoRoot/.local/share/applications/Atomic.desktop
-    rm -f  /home/$vUsuarioNoRoot/.config/autostart/Atomic.desktop
+    rm -f  /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
+    rm -f  /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
 
   # Determinar URL de descarga del archivo comprimido
     echo ""
@@ -181,6 +181,7 @@ elif [ $OS_VERS == "11" ]; then
     cp -f /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                           /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
     sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/Atomic/atomic %U|g' /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
     sed -i -e "s|Icon=atomic|Icon=/home/$vUsuarioNoRoot/Atomic/atomic.png|g"                          /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
     gio set /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop "metadata::trusted" yes
 
   # Crear el archivo de auto-ehecución
@@ -191,6 +192,7 @@ elif [ $OS_VERS == "11" ]; then
     cp -f /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                           /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
     sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/Atomic/atomic %U|g' /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
     sed -i -e "s|Icon=atomic|Icon=/home/$vUsuarioNoRoot/Atomic/atomic.png|g"                          /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
     gio set /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop "metadata::trusted" yes
 
   # Reparar permisos
