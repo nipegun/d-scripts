@@ -113,5 +113,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo -e "${ColorRojo}  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
   echo ""
+  # https://jaxx.io/downloads
 
 fi
+
