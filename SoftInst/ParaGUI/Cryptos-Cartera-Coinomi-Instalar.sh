@@ -148,7 +148,7 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "  Moviendo la app a la cuenta del usuario no-root..."
     echo ""
-    mv /root/SoftInst/Coinomi/Coinomi/ /home/$vUsuarioNoRoot/
+    cp -r /root/SoftInst/Coinomi/Coinomi/ /home/$vUsuarioNoRoot/
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Coinomi -R
 
   # Crear lanzadores
