@@ -110,6 +110,12 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${ColorAzulClaro}Iniciando el script de instalación de Atomic para Debian 11 (Bullseye)...${FinColor}"
   echo ""
 
+  # Borrar archivos previos
+    rm -rf /root/SoftInst/Atomic/
+    rm -rf /home/$vUsuarioNoRoot/Atomic/
+    rm -f  /home/$UsuarioNoRoot/.local/share/applications/Atomic.desktop
+    rm -f  /home/$UsuarioNoRoot/.config/autostart/Atomic.desktop
+
   # Determinar URL de descarga del archivo comprimido
     echo ""
     echo "  Determinando la URL de descarga del archivo de instalación de Atomic Wallet..."
@@ -165,7 +171,7 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     mkdir -p /home/$vUsuarioNoRoot/Atomic/ 2> /dev/null
     cp -rf '/root/SoftInst/AtomicWallet/opt/Atomic Wallet/'* /home/$vUsuarioNoRoot/Atomic/
-    cp /root/SoftInst/AtomicWallet/usr/share/icons/hicollor/256x256/apps/atomic.png /home/$vUsuarioNoRoot/Atomic/atomic.png
+    cp /root/SoftInst/AtomicWallet/usr/share/icons/hicolor/256x256/apps/atomic.png /home/$vUsuarioNoRoot/Atomic/atomic.png
 
   # Agregar aplicación al menú
     echo ""
@@ -191,11 +197,11 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "  Reparando permisos..."
     echo ""
-    chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Atomic/ -R
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Atomic/ -R
     #find /home/$UsuarioNoRoot/Atomic/ -type d -exec chmod 750 {} \;
     #find /home/$UsuarioNoRoot/Atomic/ -type f -exec chmod +x {} \;
-    find /home/$UsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
-    chown root:root /home/$UsuarioNoRoot/Atomic/chrome-sandbox
-    chmod 4755      /home/$UsuarioNoRoot/Atomic/chrome-sandbox
+    find /home/$vUsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
+    chown root:root /home/$vUsuarioNoRoot/Atomic/chrome-sandbox
+    chmod 4755      /home/$vUsuarioNoRoot/Atomic/chrome-sandbox
 
 fi
