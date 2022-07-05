@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar la cadena de bloques de DigiByte (DGB)
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-DGB-Nodo-InstalarYConfigurar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-DGB-InstalarYConfigurar.sh | bash
 #--------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
