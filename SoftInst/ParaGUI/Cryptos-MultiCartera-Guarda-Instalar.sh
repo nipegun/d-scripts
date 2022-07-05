@@ -122,7 +122,7 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     vURLArchivo=$(curl -s https://github.com/guardaco/guarda-desktop-releases/releases/ | sed 's->-\n-g' | grep download | grep ".deb" | head -n1 | cut -d '"' -f2)
     echo ""
-    echo "    La URL de descarga del archivo es: https://github.com/$vURLArchivo"
+    echo "    La URL de descarga del archivo es: https://github.com$vURLArchivo"
     echo ""
 
   # Descargar archivo comprimido
@@ -131,7 +131,7 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     mkdir -p /root/SoftInst/Guarda 2> /dev/null
     cd /root/SoftInst/Guarda
-    curl -s https://github.com/$vURLArchivo --output /root/SoftInst/Guarda/Guarda.deb
+    curl -s https://github.com$vURLArchivo --output /root/SoftInst/Guarda/Guarda.deb
 
   # Extraer los archivos de dentro del .deb
     echo ""
