@@ -178,20 +178,20 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Agregando la aplicación gráfica al menú..."
     echo ""
     mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
-    cp -f /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                    /home/$vUsuarioNoRoot/.local/share/applications/Atomic.desktop
-    sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/atomic %U|g' /home/$vUsuarioNoRoot/.local/share/applications/Atomic.desktop
-    sed -i -e "s|Icon=atomic|Icon=/home/$vUsuarioNoRoot/Atomic/atomic.png|g"                   /home/$vUsuarioNoRoot/.local/share/applications/Atomic.desktop
-    gio set /home/$vUsuarioNoRoot/.local/share/applications/Atomic.desktop "metadata::trusted" yes
+    cp -f /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                           /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
+    sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/Atomic/atomic %U|g' /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
+    sed -i -e "s|Icon=atomic|Icon=/home/$vUsuarioNoRoot/Atomic/atomic.png|g"                          /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
+    gio set /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop "metadata::trusted" yes
 
   # Crear el archivo de auto-ehecución
     echo ""
     echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
     echo ""
     mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
-    cp -f /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                    /home/$vUsuarioNoRoot/.config/autostart/Atomic.desktop
-    sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/atomic %U|g' /home/$vUsuarioNoRoot/.config/autostart/Atomic.desktop
-    sed -i -e "s|Icon=atomic|Icon=/home/$vUsuarioNoRoot/Atomic/atomic.png|g"                   /home/$vUsuarioNoRoot/.config/autostart/Atomic.desktop
-    gio set /home/$vUsuarioNoRoot/.config/autostart/Atomic.desktop "metadata::trusted" yes
+    cp -f /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                           /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
+    sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/Atomic/atomic %U|g' /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
+    sed -i -e "s|Icon=atomic|Icon=/home/$vUsuarioNoRoot/Atomic/atomic.png|g"                          /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
+    gio set /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop "metadata::trusted" yes
 
   # Reparar permisos
     echo ""
