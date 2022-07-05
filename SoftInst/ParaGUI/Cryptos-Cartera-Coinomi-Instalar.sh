@@ -15,6 +15,8 @@
 #  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-Coinomi-Instalar.sh | bash
 # ----------
 
+vUsuarioNoRoot="nipegun"
+
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
     echo "Este script está preparado para ejecutarse como root y no lo has ejecutado como root." >&2
@@ -126,6 +128,9 @@ elif [ $OS_VERS == "11" ]; then
     curl -s $vURLArchivo --output /root/SoftInst/Coinomi/Coinomi.tar.gz
 
   # Descomprimir archivo
+    echo ""
+    echo "  Descomprimiento el archivo..."
+    echo ""
     # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
         echo ""
@@ -138,5 +143,27 @@ elif [ $OS_VERS == "11" ]; then
     cd /root/SoftInst/Coinomi
     tar -xf /root/SoftInst/Coinomi/Coinomi.tar.gz
     rm -rf /root/SoftInst/Coinomi/Coinomi.tar.gz
+
+  # Mover a la carpeta del usuario no-root
+    echo ""
+    echo "  Moviendo la app a la cuenta del usuario no-root..."
+    echo ""
+    mv /root/SoftInst/Coinomi/Coinomi/ /home/$vUsuarioNoRoot/
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Coinomi -R
+
+  # Crear lanzadores
+    echo ""
+    echo "  Creando lanzadores..."
+    echo ""
+    mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
+    cp /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop /home/$UsuarioNoRoot/.local/share/applications/
+    sed -i -e 's-Exec=Coinomi-Exec=/home/$vUsuarioNoRoot/Coinomi/Coinomi-g' /home/$UsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
+    gio set /home/$UsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop "metadata::trusted" yes
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$UsuarioNoRoot/.local/share/applications/ -R
+    mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
+    cp /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop /home/$UsuarioNoRoot/.config/autostart/
+    sed -i -e 's-Exec=Coinomi-Exec=/home/$vUsuarioNoRoot/Coinomi/Coinomi-g' /home/$UsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
+    gio set /home/$UsuarioNoRoot/.config/autostart/coinomi-wallet.desktop "metadata::trusted" yes
+
 fi
 
