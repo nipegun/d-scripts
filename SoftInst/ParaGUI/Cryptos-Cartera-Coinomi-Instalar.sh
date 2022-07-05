@@ -112,7 +112,8 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "  Determinando la URL de descarga del archivo de instalación de Coinomi..."
     echo ""
-    vURLArchivo=$(curl -s https://www.coinomi.com/en/downloads/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep binaries | grep>  echo ""
+    vURLArchivo=$(curl -s https://www.coinomi.com/en/downloads/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep binaries | grep linux64 | sed 's-&#x2F;-/-g')
+    echo ""
     echo "    La URL de descarga del archivo es: $vURLArchivo"
     echo ""
 
