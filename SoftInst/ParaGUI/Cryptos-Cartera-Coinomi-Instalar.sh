@@ -148,7 +148,7 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "  Moviendo la app a la cuenta del usuario no-root..."
     echo ""
-    cp -r /root/SoftInst/Coinomi/Coinomi/ /home/$vUsuarioNoRoot/
+    cp -rf /root/SoftInst/Coinomi/Coinomi/ /home/$vUsuarioNoRoot/
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Coinomi -R
 
   # Crear lanzadores
@@ -156,13 +156,13 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Creando lanzadores..."
     echo ""
     mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
-    cp /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop /home/$vUsuarioNoRoot/.local/share/applications/
-    sed -i -e 's-Exec=Coinomi-Exec=/home/$vUsuarioNoRoot/Coinomi/Coinomi-g' /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
+    cp -f /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop /home/$vUsuarioNoRoot/.local/share/applications/
+    sed -i -e 's-Exec=Coinomi-Exec=/home/'$vUsuarioNoRoot'/Coinomi/Coinomi-g' /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
     gio set /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop "metadata::trusted" yes
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
     mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
-    cp /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop /home/$vUsuarioNoRoot/.config/autostart/
-    sed -i -e 's-Exec=Coinomi-Exec=/home/$vUsuarioNoRoot/Coinomi/Coinomi-g' /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
+    cp -f /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop /home/$vUsuarioNoRoot/.config/autostart/
+    sed -i -e 's-Exec=Coinomi-Exec=/home/'$vUsuarioNoRoot'/Coinomi/Coinomi-g' /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
     gio set /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop "metadata::trusted" yes
 
 fi
