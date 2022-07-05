@@ -34,8 +34,7 @@ FinColor='\033[0m'
     echo ""
     echo -e "${ColorRojo}  curl no está instalado. Iniciando su instalación...${FinColor}"
     echo ""
-    sudo apt-get -y update > /dev/null
-    sudo apt-get -y install curl
+    apt-get -y update && apt-get -y install curl
     echo ""
   fi
 
@@ -131,7 +130,15 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     mkdir -p /root/SoftInst/Guarda 2> /dev/null
     cd /root/SoftInst/Guarda
-    curl -s https://github.com$vURLArchivo --output /root/SoftInst/Guarda/Guarda.deb
+    # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${ColorRojo}  wget no está instalado. Iniciando su instalación...${FinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install wget
+        echo ""
+      fi
+    wget https://github.com$vURLArchivo -O /root/SoftInst/Guarda/Guarda.deb
 
   # Extraer los archivos de dentro del .deb
     echo ""
@@ -142,8 +149,7 @@ elif [ $OS_VERS == "11" ]; then
         echo ""
         echo -e "${ColorRojo}  binutils no está instalado. Iniciando su instalación...${FinColor}"
         echo ""
-        apt-get -y update > /dev/null
-        apt-get -y install binutils
+        apt-get -y update && apt-get -y install binutils
         echo ""
       fi
     cd /root/SoftInst/Guarda/
@@ -158,8 +164,7 @@ elif [ $OS_VERS == "11" ]; then
         echo ""
         echo -e "${ColorRojo}    tar no está instalado. Iniciando su instalación...${FinColor}"
         echo ""
-        apt-get -y update > /dev/null
-        apt-get -y install tar
+        apt-get -y update && apt-get -y install tar
         echo ""
       fi
     tar -xvf /root/SoftInst/Guarda/data.tar.xz
