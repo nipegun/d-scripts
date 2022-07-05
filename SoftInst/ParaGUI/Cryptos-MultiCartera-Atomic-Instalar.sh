@@ -164,7 +164,7 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Creando la carpeta para el usuario no root..."
     echo ""
     mkdir -p /home/$vUsuarioNoRoot/Atomic/ 2> /dev/null
-    cp -r '/root/SoftInst/AtomicWallet/opt/Atomic Wallet/'* /home/$vUsuarioNoRoot/Atomic/
+    cp -rf '/root/SoftInst/AtomicWallet/opt/Atomic Wallet/'* /home/$vUsuarioNoRoot/Atomic/
     cp /root/SoftInst/AtomicWallet/usr/share/icons/hicollor/256x256/apps/atomic.png /home/$vUsuarioNoRoot/Atomic/atomic.png
 
   # Agregar aplicación al menú
@@ -172,7 +172,7 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Agregando la aplicación gráfica al menú..."
     echo ""
     mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-    cp /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                       /home/$UsuarioNoRoot/.local/share/applications/Atomic.desktop
+    cp -f /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                    /home/$UsuarioNoRoot/.local/share/applications/Atomic.desktop
     sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/atomic %U|g' /home/$UsuarioNoRoot/.local/share/applications/Atomic.desktop
     sed -i -e "s|Icon=atomic|Icon=/home/$vUsuarioNoRoot/Atomic/atomic.png|g"                   /home/$UsuarioNoRoot/.local/share/applications/Atomic.desktop
     gio set /home/$UsuarioNoRoot/.local/share/applications/Atomic.desktop "metadata::trusted" yes
@@ -182,9 +182,20 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
     echo ""
     mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
-    cp /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                       /home/$UsuarioNoRoot/.config/autostart/Atomic.desktop
+    cp -f /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                    /home/$UsuarioNoRoot/.config/autostart/Atomic.desktop
     sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/atomic %U|g' /home/$UsuarioNoRoot/.config/autostart/Atomic.desktop
     sed -i -e "s|Icon=atomic|Icon=/home/$vUsuarioNoRoot/Atomic/atomic.png|g"                   /home/$UsuarioNoRoot/.config/autostart/Atomic.desktop
     gio set /home/$UsuarioNoRoot/.config/autostart/Atomic.desktop "metadata::trusted" yes
+
+  # Reparar permisos
+    echo ""
+    echo "  Reparando permisos..."
+    echo ""
+    chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Atomic/ -R
+    #find /home/$UsuarioNoRoot/Atomic/ -type d -exec chmod 750 {} \;
+    #find /home/$UsuarioNoRoot/Atomic/ -type f -exec chmod +x {} \;
+    find /home/$UsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
+    chown root:root /home/$UsuarioNoRoot/Atomic/chrome-sandbox
+    chmod 4755      /home/$UsuarioNoRoot/Atomic/chrome-sandbox
 
 fi
