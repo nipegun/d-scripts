@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar la cadena de bloques de Argentum (ARG)
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-ARG-Nodo-InstalarYConfigurar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-ARG-InstalarYConfigurar.sh | bash
 #--------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
