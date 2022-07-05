@@ -125,5 +125,18 @@ elif [ $OS_VERS == "11" ]; then
     cd /root/SoftInst/Coinomi
     curl -s $vURLArchivo --output /root/SoftInst/Coinomi/Coinomi.tar.gz
 
+  # Descomprimir archivo
+    # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "  tar no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update
+        apt-get -y install tar
+        echo ""
+      fi
+    cd /root/SoftInst/Coinomi
+    tar -xf /root/SoftInst/Coinomi/Coinomi.tar.gz
+    rm -rf /root/SoftInst/Coinomi/Coinomi.tar.gz
 fi
 
