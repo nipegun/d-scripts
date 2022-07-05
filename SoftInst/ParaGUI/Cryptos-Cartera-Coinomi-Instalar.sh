@@ -174,5 +174,11 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
 
+  # Notificar fin del script
+    echo ""
+    echo "  Ejecución del script, finalizada..."
+    echo ""
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
+
 fi
 
