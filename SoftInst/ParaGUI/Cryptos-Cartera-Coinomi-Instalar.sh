@@ -163,6 +163,7 @@ elif [ $OS_VERS == "11" ]; then
       fi
     icns2png -x /home/$vUsuarioNoRoot/Coinomi/icons.icns -o /home/$vUsuarioNoRoot/Coinomi/
     find /home/$vUsuarioNoRoot/Coinomi/ -maxdepth 1 -mindepth 1 -type f -name "*.png" -exec mv {} /home/$vUsuarioNoRoot/Coinomi/Coinomi.png \;
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Coinomi/Coinomi.png
 
   # Crear lanzadores
     echo ""
