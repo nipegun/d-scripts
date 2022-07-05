@@ -113,8 +113,8 @@ elif [ $OS_VERS == "11" ]; then
   # Borrar archivos previos
     rm -rf /root/SoftInst/Atomic/
     rm -rf /home/$vUsuarioNoRoot/Atomic/
-    rm -f  /home/$UsuarioNoRoot/.local/share/applications/Atomic.desktop
-    rm -f  /home/$UsuarioNoRoot/.config/autostart/Atomic.desktop
+    rm -f  /home/$vUsuarioNoRoot/.local/share/applications/Atomic.desktop
+    rm -f  /home/$vUsuarioNoRoot/.config/autostart/Atomic.desktop
 
   # Determinar URL de descarga del archivo comprimido
     echo ""
