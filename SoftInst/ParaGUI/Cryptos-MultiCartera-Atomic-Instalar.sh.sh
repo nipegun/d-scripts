@@ -110,9 +110,54 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${ColorAzulClaro}  Iniciando el script de instalación de Atomic para Debian 11 (Bullseye)...${FinColor}"
   echo ""
 
-  echo ""
-  echo -e "${ColorRojo}  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
-  echo ""
-  # https://jaxx.io/downloads
+  # Determinar URL de descarga del archivo comprimido
+    echo ""
+    echo "  Determinando la URL de descarga del archivo de instalación de Atomic Wallet..."
+    echo ""
+    vURLArchivo=$(curl -s https://get.atomicwallet.io/download/ | grep ".deb" | grep href | grep -v sum | grep -v "atomicwallet.deb" | tail -n1 | cut -d'"' -f2 | cut -d'/' -f2)
+    echo ""
+    echo "    La URL de descarga del archivo es: https://get.atomicwallet.io/download/$vURLArchivo"
+    echo ""
+
+  # Descargar archivo comprimido
+    echo ""
+    echo "  Descargando el archivo..."
+    echo ""
+    mkdir -p /root/SoftInst/AtomicWallet 2> /dev/null
+    cd /root/SoftInst/AtomicWallet
+    curl -s https://get.atomicwallet.io/download/$vURLArchivo --output /root/SoftInst/AtomicWallet/AtomicWallet.deb
+
+  # Extraer los archivos de dentro del .deb
+    echo ""
+    echo "  Extrayendo los archivos de dentro del paquete .deb..."
+    echo ""
+    # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "  binutils no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update > /dev/null
+        apt-get -y install binutils
+        echo ""
+      fi
+    cd /root/SoftInst/AtomicWallet/
+    ar xv /root/SoftInst/AtomicWallet/AtomicWallet.deb
+
+  # Descomprimir el archivo data.tar.xz
+    echo ""
+    echo "  Descomprimiendo el archivo data.tar.xz..."
+    echo ""
+    # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "  tar no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update > /dev/null
+        apt-get -y install tar
+        echo ""
+      fi
+    tar -xvf /root/SoftInst/AtomicWallet/data.tar.xz
+    echo ""
+
 
 fi
