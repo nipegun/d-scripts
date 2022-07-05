@@ -159,5 +159,11 @@ elif [ $OS_VERS == "11" ]; then
     tar -xvf /root/SoftInst/AtomicWallet/data.tar.xz
     echo ""
 
+  # Crear la carpeta para el usuario no root
+    echo ""
+    echo "  Creando la carpeta para el usuario no root..."
+    echo ""
+    mkdir -p /home/$vUsuarioNoRoot/Atomic/ 2> /dev/null
+    cp -r '/root/SoftInst/AtomicWallet/opt/Atomic Wallet/*' /home/$vUsuarioNoRoot/Atomic/
 
 fi
