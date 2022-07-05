@@ -151,6 +151,19 @@ elif [ $OS_VERS == "11" ]; then
     cp -rf /root/SoftInst/Coinomi/Coinomi/ /home/$vUsuarioNoRoot/
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Coinomi -R
 
+  # Crear el icono
+    # Comprobar si el paquete icnsutils está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s icnsutils 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "  icnsutils no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update
+        apt-get -y install icnsutils
+        echo ""
+      fi
+    icns2png -x /home/$vUsuarioNoRoot/Coinomi/icons.icns -o /home/$vUsuarioNoRoot/Coinomi/
+    find /home/$vUsuarioNoRoot/Coinomi/ -maxdepth 1 -mindepth 1 -type f -name "*.png" -exec mv {} /home/$vUsuarioNoRoot/Coinomi/Coinomi.png \;
+
   # Crear lanzadores
     echo ""
     echo "  Creando lanzadores..."
