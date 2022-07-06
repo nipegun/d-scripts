@@ -192,7 +192,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Crear el archivo de auto-ehecución
     echo ""
-    echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
+    echo "  Creando el archivo de autoejecución para el escritorio..."
     echo ""
     mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
     cp -f /root/SoftInst/Guarda/usr/share/applications/guarda.desktop                        /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
