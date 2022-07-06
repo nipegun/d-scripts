@@ -212,3 +212,4 @@ elif [ $OS_VERS == "11" ]; then
     chmod 4755      /home/$vUsuarioNoRoot/Guarda/chrome-sandbox
 
 fi
+
