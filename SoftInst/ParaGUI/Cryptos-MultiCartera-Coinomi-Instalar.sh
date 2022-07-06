@@ -171,18 +171,18 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
 
     mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
-    cp -f /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop /home/$vUsuarioNoRoot/.local/share/applications/
+    cp -f /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop                                  /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
     sed -i -e 's|Exec=Coinomi|Exec=/home/'$vUsuarioNoRoot'/Coinomi/Coinomi|g'                   /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
     sed -i -e 's|Icon=/ui/static/images/logo.svg|/home/'$vUsuarioNoRoot'/Coinomi/Coinomi.png|g' /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
-
+    sed -i -e 's|Name=Coinomi Wallet|Name=MultiCartera Coinomi|g'                               /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
     gio set /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop "metadata::trusted" yes
 
     mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
-    cp -f /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop /home/$vUsuarioNoRoot/.config/autostart/
+    cp -f /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop                                  /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
     sed -i -e 's|Exec=Coinomi|Exec=/home/'$vUsuarioNoRoot'/Coinomi/Coinomi|g'                   /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
     sed -i -e 's|Icon=/ui/static/images/logo.svg|/home/'$vUsuarioNoRoot'/Coinomi/Coinomi.png|g' /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
-
+    sed -i -e 's|Name=Coinomi Wallet|Name=MultiCartera Coinomi|g'                               /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop -R
     gio set /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop "metadata::trusted" yes
 
