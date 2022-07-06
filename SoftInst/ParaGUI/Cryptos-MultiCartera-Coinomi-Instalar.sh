@@ -132,14 +132,15 @@ elif [ $OS_VERS == "11" ]; then
     mkdir -p /root/SoftInst/Coinomi 2> /dev/null
     cd /root/SoftInst/Coinomi/
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo -e "${ColorRojo}  wget no está instalado. Iniciando su instalación...${FinColor}"
-        echo ""
-        apt-get -y update && apt-get -y install wget
-        echo ""
-      fi
-    wget $vURLArchivo -O /root/SoftInst/Coinomi/Coinomi.tar.gz
+    #  if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+    #    echo ""
+    #    echo -e "${ColorRojo}  wget no está instalado. Iniciando su instalación...${FinColor}"
+    #    echo ""
+    #    apt-get -y update && apt-get -y install wget
+    #    echo ""
+    #  fi
+    #wget $vURLArchivo -O /root/SoftInst/Coinomi/Coinomi.tar.gz
+    curl -sL $vURLArchivo --output /root/SoftInst/Coinomi/Coinomi.tar.gz
 
   # Descomprimir archivo
     echo ""
