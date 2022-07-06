@@ -140,7 +140,7 @@ elif [ $OS_VERS == "11" ]; then
     # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${ColorRojo}  binutils no está instalado. Iniciando su instalación...${FinColor}"
+        echo -e "${ColorRojo}    binutils no está instalado. Iniciando su instalación...${FinColor}"
         echo ""
         apt-get -y update > /dev/null
         apt-get -y install binutils
