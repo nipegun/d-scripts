@@ -110,6 +110,12 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${ColorAzulClaro}  Iniciando el script de instalación de Coinomi para Debian 11 (Bullseye)...${FinColor}"
   echo ""
 
+  # Borrar archivos previos
+    rm -rf /root/SoftInst/Coinomi/
+    rm -rf /home/$vUsuarioNoRoot/Coinomi/
+    rm -f  /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
+    rm -f  /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
+
   # Determinar URL de descarga del archivo comprimido
     echo ""
     echo "  Determinando la URL de descarga del archivo de instalación de Coinomi..."
@@ -124,8 +130,16 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Descargando el archivo..."
     echo ""
     mkdir -p /root/SoftInst/Coinomi 2> /dev/null
-    cd /root/SoftInst/Coinomi
-    curl -s $vURLArchivo --output /root/SoftInst/Coinomi/Coinomi.tar.gz
+    cd /root/SoftInst/Coinomi/
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${ColorRojo}  wget no está instalado. Iniciando su instalación...${FinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install wget
+        echo ""
+      fi
+    wget $vURLArchivo -O /root/SoftInst/Coinomi/Coinomi.tar.gz
 
   # Descomprimir archivo
     echo ""
@@ -134,13 +148,13 @@ elif [ $OS_VERS == "11" ]; then
     # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  tar no está instalado. Iniciando su instalación..."
+        echo -e "${ColorRojo}    tar no está instalado. Iniciando su instalación...${FinColor}"
         echo ""
         apt-get -y update
         apt-get -y install tar
         echo ""
       fi
-    cd /root/SoftInst/Coinomi
+    cd /root/SoftInst/Coinomi/
     tar -xf /root/SoftInst/Coinomi/Coinomi.tar.gz
     rm -rf /root/SoftInst/Coinomi/Coinomi.tar.gz
 
@@ -155,8 +169,7 @@ elif [ $OS_VERS == "11" ]; then
     # Comprobar si el paquete icnsutils está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s icnsutils 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  icnsutils no está instalado. Iniciando su instalación..."
-        echo ""
+        echo -e "${ColorRojo}    icnsutils no está instalado. Iniciando su instalación...${FinColor}"        echo ""
         apt-get -y update
         apt-get -y install icnsutils
         echo ""
