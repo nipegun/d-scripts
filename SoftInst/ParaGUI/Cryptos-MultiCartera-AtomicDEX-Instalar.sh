@@ -129,7 +129,7 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "  Descargando el archivo..."
     echo ""
-    mkdir -p /root/SoftInst/AtomicDEX 2> /dev/null
+    mkdir -p /root/SoftInst/AtomicDex/ 2> /dev/null
     cd /root/SoftInst/AtomicDEX/
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
