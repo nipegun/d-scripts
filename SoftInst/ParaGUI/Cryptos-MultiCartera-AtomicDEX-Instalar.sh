@@ -111,10 +111,10 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   # Borrar archivos previos
-    rm -rf /root/SoftInst/AtomicDEX/
-    rm -rf /home/$vUsuarioNoRoot/AtomicDEX/
-    rm -f  /home/$vUsuarioNoRoot/.local/share/applications/atomicdex-wallet.desktop
-    rm -f  /home/$vUsuarioNoRoot/.config/autostart/atomicdex-wallet.desktop
+    #rm -rf /root/SoftInst/AtomicDEX/
+    #rm -rf /home/$vUsuarioNoRoot/AtomicDEX/
+    #rm -f  /home/$vUsuarioNoRoot/.local/share/applications/atomicdex-wallet.desktop
+    #rm -f  /home/$vUsuarioNoRoot/.config/autostart/atomicdex-wallet.desktop
 
   # Determinar URL de descarga del archivo comprimido
     echo ""
@@ -174,7 +174,7 @@ elif [ $OS_VERS == "11" ]; then
     sed -i -e 's|Exec=atomicdex-desktop|Exec=/home/'$vUsuarioNoRoot'/AtomicDEX/bin/atomicdex-desktop|g' /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
     sed -i -e "s|Icon=dex-logo-64|Icon=/home/$vUsuarioNoRoot/AtomicDEX/logo.png|g"                      /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
     sed -i -e "s|Name=atomicdex-desktop|Name=AtomicDEX|g"                                               /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
-    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
     gio set /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop "metadata::trusted" yes
 
   # Crear el archivo de auto-ejecución
@@ -186,7 +186,7 @@ elif [ $OS_VERS == "11" ]; then
     sed -i -e 's|Exec=atomicdex-desktop|Exec=/home/'$vUsuarioNoRoot'/AtomicDEX/bin/atomicdex-desktop|g' /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
     sed -i -e "s|Icon=dex-logo-64|Icon=/home/$vUsuarioNoRoot/AtomicDEX/logo.png|g"                      /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
     sed -i -e "s|Name=atomicdex-desktop|Name=AtomicDEX|g"                                               /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
-    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
     gio set /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop "metadata::trusted" yes
 
   # Creando el archivo para lanzarlo desde su propia carpeta
