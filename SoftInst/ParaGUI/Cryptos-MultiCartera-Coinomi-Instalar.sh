@@ -183,7 +183,7 @@ elif [ $OS_VERS == "11" ]; then
     sed -i -e 's|Exec=Coinomi|Exec=/home/'$vUsuarioNoRoot'/Coinomi/Coinomi|g'                   /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
     sed -i -e 's|Icon=/ui/static/images/logo.svg|/home/'$vUsuarioNoRoot'/Coinomi/Coinomi.png|g' /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
     sed -i -e 's|Name=Coinomi Wallet|Name=MultiCartera Coinomi|g'                               /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
-    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop -R
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
     gio set /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop "metadata::trusted" yes
 
   # Reparar permisos
