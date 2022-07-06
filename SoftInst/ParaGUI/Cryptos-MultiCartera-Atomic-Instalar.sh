@@ -182,7 +182,7 @@ elif [ $OS_VERS == "11" ]; then
     sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/Atomic/atomic %U|g' /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
     sed -i -e "s|Icon=atomic|Icon=/home/$vUsuarioNoRoot/Atomic/atomic.png|g"                          /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
     sed -i -e "s|Name=Atomic Wallet|Name=MultiCartera Atomic|g"                                       /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
-    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
     gio set /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop "metadata::trusted" yes
 
   # Crear el archivo de auto-ehecución
@@ -194,7 +194,7 @@ elif [ $OS_VERS == "11" ]; then
     sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/Atomic/atomic %U|g' /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
     sed -i -e "s|Icon=atomic|Icon=/home/$vUsuarioNoRoot/Atomic/atomic.png|g"                          /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
     sed -i -e "s|Name=Atomic Wallet|Name=MultiCartera Atomic|g"                                       /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
-    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
     gio set /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop "metadata::trusted" yes
 
   # Reparar permisos
