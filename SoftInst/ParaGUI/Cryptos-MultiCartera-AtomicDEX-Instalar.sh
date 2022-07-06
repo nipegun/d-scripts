@@ -173,6 +173,7 @@ elif [ $OS_VERS == "11" ]; then
     cp -f /root/SoftInst/AtomicDEX/AntaraAtomicDexAppDir/dex.desktop                                    /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
     sed -i -e 's|Exec=atomicdex-desktop|Exec=/home/'$vUsuarioNoRoot'/AtomicDEX/bin/atomicdex-desktop|g' /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
     sed -i -e "s|Icon=dex-logo-64|Icon=/home/$vUsuarioNoRoot/AtomicDEX/AtomicDEX.png|g"                 /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
+    sed -i -e "s|Name=atomicdex-desktop|Name=AtomicDEX|g"                                               /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
     gio set /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop "metadata::trusted" yes
 
@@ -184,6 +185,7 @@ elif [ $OS_VERS == "11" ]; then
     cp -f /root/SoftInst/AtomicDEX/AntaraAtomicDexAppDir/dex.desktop                                    /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
     sed -i -e 's|Exec=atomicdex-desktop|Exec=/home/'$vUsuarioNoRoot'/AtomicDEX/bin/atomicdex-desktop|g' /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
     sed -i -e "s|Icon=dex-logo-64|Icon=/home/$vUsuarioNoRoot/AtomicDEX/AtomicDEX.png|g"                 /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
+    sed -i -e "s|Name=atomicdex-desktop|Name=AtomicDEX|g"                                               /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
     gio set /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop "metadata::trusted" yes
 
