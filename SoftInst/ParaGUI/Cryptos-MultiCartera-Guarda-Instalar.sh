@@ -205,8 +205,8 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Reparando permisos..."
     echo ""
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Guarda/ -R
-    #find /home/$vUsuarioNoRoot/Atomic/ -type d -exec chmod 750 {} \;
-    #find /home/$vUsuarioNoRoot/Atomic/ -type f -exec chmod +x {} \;
+    #find /home/$vUsuarioNoRoot/Guarda/ -type d -exec chmod 750 {} \;
+    #find /home/$vUsuarioNoRoot/Guarda/ -type f -exec chmod +x {} \;
     find /home/$vUsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
     chown root:root /home/$vUsuarioNoRoot/Guarda/chrome-sandbox
     chmod 4755      /home/$vUsuarioNoRoot/Guarda/chrome-sandbox
