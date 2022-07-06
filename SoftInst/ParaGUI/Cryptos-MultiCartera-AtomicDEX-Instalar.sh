@@ -120,7 +120,8 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "  Determinando la URL de descarga del archivo de instalación de Guarda..."
     echo ""
-    vURLArchivo=$(curl -s https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/ | sed 's->-\n-g' | grep href | grep zip | grep -v staller | grep -v indows | grep ortable | head -n1 | cut -d '"' -f2)
+    #vURLArchivo=$(curl -s https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/ | sed 's->-\n-g' | grep href | grep zip | grep -v staller | grep -v indows | grep ortable | head -n1 | cut -d '"' -f2)
+    vURLArchivo=$(curl -s https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/ | sed 's->-\n-g' | grep href | grep linux | grep ".zip" | grep ortable | head -n1 | cut -d'"' -f2)
     echo ""
     echo "    La URL de descarga del archivo es: https://github.com$vURLArchivo"
     echo ""
@@ -139,7 +140,7 @@ elif [ $OS_VERS == "11" ]; then
         apt-get -y update && apt-get -y install wget
         echo ""
       fi
-    wget https://github.com$vURLArchivo -O /root/SoftInst/AtomicDex/AtomicDEX.zip
+    wget https://github.com$vURLArchivo -O /root/SoftInst/AtomicDEX/AtomicDEX.zip
 
 
 
