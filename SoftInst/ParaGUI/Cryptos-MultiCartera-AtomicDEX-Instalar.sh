@@ -176,7 +176,7 @@ elif [ $OS_VERS == "11" ]; then
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
     gio set /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop "metadata::trusted" yes
 
-  # Crear el archivo de auto-ehecución
+  # Crear el archivo de auto-ejecución
     echo ""
     echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
     echo ""
@@ -186,6 +186,9 @@ elif [ $OS_VERS == "11" ]; then
     sed -i -e "s|Icon=dex-logo-64|Icon=/home/$vUsuarioNoRoot/AtomicDEX/AtomicDEX.png|g"                 /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
     gio set /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop "metadata::trusted" yes
+
+  # Creando el archivo para lanzarlo desde su propia carpeta
+    cp /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop /home/$vUsuarioNoRoot/AtomicDEX/AtomicDEX.desktop
 
 fi
 
