@@ -176,7 +176,7 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     mkdir -p /home/$vUsuarioNoRoot/Guarda/ 2> /dev/null
     cp -rf '/root/SoftInst/Guarda/opt/Guarda/'* /home/$vUsuarioNoRoot/Guarda/
-    cp /root/SoftInst/AtomicWallet/usr/share/icons/hicolor/256x256/apps/guarda.png /home/$vUsuarioNoRoot/Guarda/atomic.png
+    cp /root/SoftInst/Guarda/usr/share/icons/hicolor/256x256/apps/guarda.png /home/$vUsuarioNoRoot/Guarda/guarda.png
 
   # Agregar aplicación al menú
     echo ""
