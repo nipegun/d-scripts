@@ -183,9 +183,10 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Agregando la aplicación gráfica al menú..."
     echo ""
     mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
-    cp -f /root/SoftInst/Guarda/usr/share/applications/guarda.desktop                                 /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
-    sed -i -e 's|Exec=/opt/Guarda/guarda %U|Exec=/home/'$vUsuarioNoRoot'/Guarda/guarda %U|g'          /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
-    sed -i -e "s|Icon=guarda|Icon=/home/$vUsuarioNoRoot/Guarda/guarda.png|g"                          /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
+    cp -f /root/SoftInst/Guarda/usr/share/applications/guarda.desktop                        /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
+    sed -i -e 's|Exec=/opt/Guarda/guarda %U|Exec=/home/'$vUsuarioNoRoot'/Guarda/guarda %U|g' /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
+    sed -i -e "s|Icon=guarda|Icon=/home/$vUsuarioNoRoot/Guarda/guarda.png|g"                 /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
+    sed -i -e "s|Name=Guarda|Name=MultiCartera Guarda|g"                                     /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
     gio set /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop "metadata::trusted" yes
 
@@ -194,9 +195,10 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
     echo ""
     mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
-    cp -f /root/SoftInst/Guarda/usr/share/applications/guarda.desktop                                 /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
-    sed -i -e 's|Exec=/opt/Guarda/guarda %U|Exec=/home/'$vUsuarioNoRoot'/Guarda/guarda %U|g'          /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
-    sed -i -e "s|Icon=guarda|Icon=/home/$vUsuarioNoRoot/Guarda/guarda.png|g"                          /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
+    cp -f /root/SoftInst/Guarda/usr/share/applications/guarda.desktop                        /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
+    sed -i -e 's|Exec=/opt/Guarda/guarda %U|Exec=/home/'$vUsuarioNoRoot'/Guarda/guarda %U|g' /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
+    sed -i -e "s|Icon=guarda|Icon=/home/$vUsuarioNoRoot/Guarda/guarda.png|g"                 /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
+    sed -i -e "s|Name=Guarda|Name=MultiCartera Guarda|g"                                     /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
     gio set /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop "metadata::trusted" yes
 
