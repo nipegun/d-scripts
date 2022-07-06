@@ -190,5 +190,13 @@ elif [ $OS_VERS == "11" ]; then
   # Creando el archivo para lanzarlo desde su propia carpeta
     cp /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop /home/$vUsuarioNoRoot/AtomicDEX/AtomicDEX.desktop
 
+  # Reparar permisos
+    echo ""
+    echo "  Reparando permisos..."
+    echo ""
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/AtomicDEX/ -R
+    #find /home/$vUsuarioNoRoot/AtomicDEX/ -type d -exec chmod 750 {} \;
+    #find /home/$vUsuarioNoRoot/AtomicDEX/ -type f -exec chmod +x {} \;
+    find /home/$vUsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
 fi
 
