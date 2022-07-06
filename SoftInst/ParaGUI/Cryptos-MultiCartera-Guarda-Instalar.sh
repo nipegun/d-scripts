@@ -110,10 +110,10 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   # Borrar archivos previos
-    rm -rf /root/SoftInst/Guarda/
-    rm -rf /home/$vUsuarioNoRoot/Guarda/
-    rm -f  /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
-    rm -f  /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
+    #rm -rf /root/SoftInst/Guarda/
+    #rm -rf /home/$vUsuarioNoRoot/Guarda/
+    #rm -f  /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
+    #rm -f  /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
 
   # Determinar URL de descarga del archivo comprimido
     echo ""
