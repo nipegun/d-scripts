@@ -187,7 +187,7 @@ elif [ $OS_VERS == "11" ]; then
     sed -i -e 's|Exec=/opt/Guarda/guarda %U|Exec=/home/'$vUsuarioNoRoot'/Guarda/guarda %U|g' /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
     sed -i -e "s|Icon=guarda|Icon=/home/$vUsuarioNoRoot/Guarda/guarda.png|g"                 /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
     sed -i -e "s|Name=Guarda|Name=MultiCartera Guarda|g"                                     /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
-    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
     gio set /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop "metadata::trusted" yes
 
   # Crear el archivo de auto-ehecución
@@ -199,7 +199,7 @@ elif [ $OS_VERS == "11" ]; then
     sed -i -e 's|Exec=/opt/Guarda/guarda %U|Exec=/home/'$vUsuarioNoRoot'/Guarda/guarda %U|g' /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
     sed -i -e "s|Icon=guarda|Icon=/home/$vUsuarioNoRoot/Guarda/guarda.png|g"                 /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
     sed -i -e "s|Name=Guarda|Name=MultiCartera Guarda|g"                                     /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
-    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
     gio set /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop "metadata::trusted" yes
 
   # Reparar permisos
