@@ -207,3 +207,4 @@ elif [ $OS_VERS == "11" ]; then
     chmod 4755      /home/$vUsuarioNoRoot/Atomic/chrome-sandbox
 
 fi
+
