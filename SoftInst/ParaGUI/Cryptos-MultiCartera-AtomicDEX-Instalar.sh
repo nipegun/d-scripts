@@ -118,10 +118,10 @@ elif [ $OS_VERS == "11" ]; then
 
   # Determinar URL de descarga del archivo comprimido
     echo ""
-    echo "  Determinando la URL de descarga del archivo de instalación de Guarda..."
+    echo "  Determinando la URL de descarga del archivo de instalación de AtomicDEX..."
     echo ""
-    #vURLArchivo=$(curl -s https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/ | sed 's->-\n-g' | grep href | grep zip | grep -v staller | grep -v indows | grep ortable | head -n1 | cut -d '"' -f2)
-    vURLArchivo=$(curl -s https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/ | sed 's->-\n-g' | grep href | grep linux | grep ".zip" | grep ortable | head -n1 | cut -d'"' -f2)
+    #vURLArchivo=$(curl -s https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/ | sed 's->-\n-g' | grep href | grep linux | grep ".zip" | grep ortable | head -n1 | cut -d'"' -f2)
+    vURLArchivo=$(curl -s https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/ | sed 's->-\n-g' | grep href | grep zip | grep -v staller | grep -v indows | grep ortable | head -n1 | cut -d '"' -f2)
     echo ""
     echo "    La URL de descarga del archivo es: https://github.com$vURLArchivo"
     echo ""
@@ -142,7 +142,20 @@ elif [ $OS_VERS == "11" ]; then
       fi
     wget https://github.com$vURLArchivo -O /root/SoftInst/AtomicDEX/AtomicDEX.zip
 
-
+  # Extraer los archivos de dentro del .zip
+    echo ""
+    echo "  Extrayendo los archivos de dentro del zip..."
+    echo ""
+    # Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${ColorRojo}    unzip no está instalado. Iniciando su instalación...${FinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install unzip
+        echo ""
+      fi
+    cd /root/SoftInst/AtomicDEX/
+    unzip /root/SoftInst/AtomicDEX/AtomicDEX.zip
 
 fi
 
