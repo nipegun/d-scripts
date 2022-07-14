@@ -45,6 +45,7 @@ echo ""
 echo "  Borrando archivos de instalaciónes anteriores..."
 echo ""
 rm -rf /root/SoftInst/Cryptos/RTM/*
+su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/rtm-daemon-parar.sh"
 rm -rf /home/$vUsuarioNoRoot/Cryptos/RTM/* -R
 rm -rf /home/$vUsuarioNoRoot/.raptoreumcore/ -R
 rm -f  /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
