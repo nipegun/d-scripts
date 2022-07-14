@@ -84,7 +84,7 @@ echo "rpcuser=rtmrpc"           > /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum
 echo "rpcpassword=rtmrpcpass"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
 echo "rpcallowip=127.0.0.1"    >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
 echo "#Default RPC port 8766"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "rpcport=20401"           >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "rpcport=60226"           >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
 echo "server=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
 echo "listen=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
 echo "prune=550"               >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
