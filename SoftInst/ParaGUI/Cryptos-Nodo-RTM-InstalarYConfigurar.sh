@@ -79,9 +79,8 @@ echo ""
 unzip /root/SoftInst/Cryptos/RTM/RaptoreumCode.zip
 
 echo ""
-echo "  Compilando..."
+echo "  Instalando dependencias para compilar..."
 echo ""
-cd /root/SoftInst/Cryptos/RTM/raptoreum-$vUltVersRTM
 apt-get -y install autoconf
 apt-get -y install libtool
 
@@ -93,4 +92,35 @@ apt-get -y install libgmp-dev
 apt-get -y install automake
 apt-get -y install zlib1g-dev
 apt-get -y install git
+
+apt-get -y install curl
+apt-get -y install build-essential
+apt-get -y install libtool
+apt-get -y install autotools-dev
+apt-get -y install automake
+apt-get -y install pkg-config
+apt-get -y install python3
+apt-get -y install bsdmainutils
+apt-get -y install cmake
+apt-get -y install python3-setuptools
+apt-get -y install libcap-dev
+apt-get -y install zlib1g-dev
+apt-get -y install libbz2-dev
+
+echo ""
+echo "  Compilando..."
+echo ""
+cd /root/SoftInst/Cryptos/RTM/raptoreum-$vUltVersRTM
+cd depends
+make -j4
+cd ..
 ./autogen.sh
+./configure --prefix='pwd'/depends/x86_64-pc-linux-gnu
+#./configure --prefix='pwd'/depends/i686-pc-linux-gnu     # Linux32
+#./configure --prefix='pwd'/depends/x86_64-pc-linux-gnu   # Linux64
+#./configure --prefix='pwd'/depends/i686-w64-mingw32      # Win32
+#./configure --prefix='pwd'/depends/x86_64-w64-mingw32    # Win64
+#./configure --prefix='pwd'/depends/x86_64-apple-darwin11 # MacOSX
+#./configure --prefix='pwd'/depends/arm-linux-gnueabihf   # Linux ARM 32 bit
+#./configure --prefix='pwd'/depends/aarch64-linux-gnu     # Linux ARM 64 bit
+make
