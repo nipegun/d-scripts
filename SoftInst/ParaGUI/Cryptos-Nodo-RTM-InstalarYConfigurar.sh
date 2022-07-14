@@ -38,7 +38,7 @@ echo ""
   fi
 vUltVersRTM=$(curl -sL https://github.com/Raptor3um/raptoreum/releases/latest | sed 's->->\n-g' | grep ".zip" | grep "href" | grep -v indows | cut -d '"' -f2 | cut -d '/' -f7 | sed 's-.zip--g')
 echo ""
-echo "  La última versión estable de raptoreum es la $vUltVersRTM"
+echo "    La última versión estable de raptoreum es la $vUltVersRTM"
 echo ""
 
 echo ""
@@ -50,15 +50,14 @@ cd /root/SoftInst/Cryptos/RTM/
 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  wget no está instalado. Iniciando su instalación..."
+     echo "    wget no está instalado. Iniciando su instalación..."
      echo ""
-     apt-get -y update
-     apt-get -y install wget
+     apt-get -y update 2> /dev/null && apt-get -y install wget
      echo ""
    fi
 vURLArchivo=$(curl -sL https://github.com/Raptor3um/raptoreum/releases/latest | sed 's->->\n-g' | grep .tar.gz | grep href | grep buntu2 | tail -n1 | cut -d'"' -f2)
 echo ""
-echo "  Pidiendo el archivo en formato tar.gz..."
+echo "    Pidiendo el archivo en formato tar.gz..."
 echo ""
 wget https://github.com$vURLArchivo -O /root/SoftInst/Cryptos/RTM/Raptoreum.tar.gz
 
