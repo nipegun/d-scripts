@@ -154,7 +154,11 @@ echo ""
 
 # Reparación de permisos
   chmod +x /home/$vUsuarioNoRoot/Cryptos/RTM/bin/*
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/
   chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/RTM/ -R
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.raptoreumcore/ -R
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
 
 # Instalar los c-scripts
   echo ""
