@@ -77,3 +77,20 @@ echo ""
     echo ""
   fi
 unzip /root/SoftInst/Cryptos/RTM/RaptoreumCode.zip
+
+echo ""
+echo "  Compilando..."
+echo ""
+cd /root/SoftInst/Cryptos/RTM/raptoreum-$vUltVersRTM
+apt-get -y install autoconf
+apt-get -y install libtool
+
+apt-get -y install build-essential
+apt-get -y install libssl-dev
+apt-get -y install libcurl4-openssl-dev
+apt-get -y install libjansson-dev
+apt-get -y install libgmp-dev
+apt-get -y install automake
+apt-get -y install zlib1g-dev
+apt-get -y install git
+./autogen.sh
