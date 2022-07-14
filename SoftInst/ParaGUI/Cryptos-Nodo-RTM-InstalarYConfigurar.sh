@@ -112,7 +112,7 @@ echo ""
 echo "  La dirección para recibir raptoreum es:"
 echo ""
 cat /home/$vUsuarioNoRoot/dircartera-rtm.txt
-vDirCartLTC=$(cat /home/$vUsuarioNoRoot/dircartera-rtm.txt)
+vDirCartRTM=$(cat /home/$vUsuarioNoRoot/dircartera-rtm.txt)
 echo ""
 
 # Autoejecución de Litecoin al iniciar el sistema
@@ -144,9 +144,9 @@ echo ""
   echo ""
   mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
   echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
-  echo "Name=ltc GUI"                                                     >> /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
+  echo "Name=rtm GUI"                                                     >> /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
   echo "Type=Application"                                                 >> /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
-  echo "Exec=/home/$vUsuarioNoRoot/scripts/c-scripts/ltc-gui-iniciar.sh"  >> /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
+  echo "Exec=/home/$vUsuarioNoRoot/scripts/c-scripts/rtm-gui-iniciar.sh"  >> /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
   echo "Terminal=false"                                                   >> /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
   echo "Hidden=false"                                                     >> /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
   chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
