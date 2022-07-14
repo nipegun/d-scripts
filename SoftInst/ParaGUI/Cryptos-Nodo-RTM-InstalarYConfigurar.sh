@@ -115,7 +115,7 @@ cat /home/$vUsuarioNoRoot/dircartera-rtm.txt
 vDirCartRTM=$(cat /home/$vUsuarioNoRoot/dircartera-rtm.txt)
 echo ""
 
-# Autoejecución de Litecoin al iniciar el sistema
+# Autoejecución de raptoreum al iniciar el sistema
   #echo ""
   #echo "  Agregando raptoreumd a los ComandosPostArranque..."
   #echo ""
@@ -138,7 +138,7 @@ echo ""
   chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
   gio set /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop "metadata::trusted" yes
 
-# Autoejecución gráfica de Litecoin
+# Autoejecución gráfica de raptoreum
   echo ""
   echo "  Creando el archivo de autoejecución de raptoreum-qt para escritorio..."
   echo ""
