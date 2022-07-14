@@ -45,7 +45,7 @@ echo ""
 echo "  Borrando archivos de instalaciónes anteriores..."
 echo ""
 rm -rf /root/SoftInst/Cryptos/RTM/*
-su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/rtm-daemon-parar.sh"
+killall -9 raptoreum*
 rm -rf /home/$vUsuarioNoRoot/Cryptos/RTM/* -R
 rm -rf /home/$vUsuarioNoRoot/.raptoreumcore/ -R
 rm -f  /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
@@ -89,17 +89,17 @@ echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."
 echo ""
 mkdir -p /home/$vUsuarioNoRoot/.raptoreumcore/
-touch /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "rpcuser=rtmrpc"           > /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "rpcpassword=rtmrpcpass"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "rpcallowip=127.0.0.1"    >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "#Default RPC port 8766"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "rpcport=60226"           >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "server=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "listen=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#touch /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "rpcuser=rtmrpc"           > /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "rpcpassword=rtmrpcpass"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "rpcallowip=127.0.0.1"    >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "#Default RPC port 8766"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "rpcport=60226"           >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "server=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "listen=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
 #echo "prune=550"               >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "daemon=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "gen=0"                   >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "daemon=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "gen=0"                   >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
 rm -rf /home/$vUsuarioNoRoot/Cryptos/RTM/
 mkdir -p /home/$vUsuarioNoRoot/Cryptos/RTM/bin/ 2> /dev/null
 mv /root/SoftInst/Cryptos/RTM/raptoreum-cli /home/$vUsuarioNoRoot/Cryptos/RTM/bin/
