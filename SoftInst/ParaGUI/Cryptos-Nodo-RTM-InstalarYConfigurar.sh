@@ -114,7 +114,7 @@ find /home/$vUsuarioNoRoot/Cryptos/RTM/bin/ -type f -exec chmod +x {} \;
 echo ""
 echo "  Arrancando raptoreumd..."
 echo ""
-su $vUsuarioNoRoot -c /home/$vUsuarioNoRoot/Cryptos/RTM/bin/raptoreumd -daemon
+su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/RTM/bin/raptoreumd -daemon"
 sleep 5
 su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/RTM/bin/raptoreum-cli getnewaddress" > /home/$vUsuarioNoRoot/dircartera-rtm.txt
 chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/dircartera-rtm.txt
