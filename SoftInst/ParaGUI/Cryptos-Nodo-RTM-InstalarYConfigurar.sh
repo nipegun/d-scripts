@@ -115,7 +115,7 @@ cd depends
 make -j4
 cd ..
 ./autogen.sh
-./configure --prefix='pwd'/depends/x86_64-pc-linux-gnu
+./configure
 #./configure --prefix='pwd'/depends/i686-pc-linux-gnu     # Linux32
 #./configure --prefix='pwd'/depends/x86_64-pc-linux-gnu   # Linux64
 #./configure --prefix='pwd'/depends/i686-w64-mingw32      # Win32
