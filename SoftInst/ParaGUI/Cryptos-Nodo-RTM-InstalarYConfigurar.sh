@@ -56,7 +56,7 @@ cd /root/SoftInst/Cryptos/RTM/
      apt-get -y install wget
      echo ""
    fi
-vURLArchivo=$(curl -sL https://github.com/Raptor3um/raptoreum/releases/latest | sed 's->->\n-g' | grep .tar.gz | grep href | grep buntu2 | cut -d'"' -f2)
+vURLArchivo=$(curl -sL https://github.com/Raptor3um/raptoreum/releases/latest | sed 's->->\n-g' | grep .tar.gz | grep href | grep buntu2 | tail -n1 | cut -d'"' -f2)
 echo ""
 echo "  Pidiendo el archivo en formato tar.gz..."
 echo ""
@@ -74,3 +74,96 @@ echo ""
     echo ""
   fi
 tar -xvf /root/SoftInst/Cryptos/RTM/Raptoreum.tar.gz
+
+echo ""
+echo "  Creando carpetas y archivos necesarios para ese usuario..."
+echo ""
+mkdir -p /home/$vUsuarioNoRoot/.raptoreumcore/
+touch /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "rpcuser=rtmrpc"           > /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "rpcpassword=rtmrpcpass"  >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "rpcallowip=127.0.0.1"    >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "#Default RPC port 8766"  >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "rpcport=20401"           >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "server=1"                >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "listen=1"                >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "prune=550"               >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "daemon=1"                >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "gen=0"                   >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
+rm -rf /home/$UsuarioNoRoot/Cryptos/RTM/
+mkdir -p /home/$vUsuarioNoRoot/Cryptos/RTM/bin/ 2> /dev/null
+mv /root/SoftInst/Cryptos/RTM/raptoreum-cli /home/$vUsuarioNoRoot/Cryptos/RTM/bin/
+mv /root/SoftInst/Cryptos/RTM/raptoreum-qt  /home/$vUsuarioNoRoot/Cryptos/RTM/bin/
+mv /root/SoftInst/Cryptos/RTM/raptoreum-tx  /home/$vUsuarioNoRoot/Cryptos/RTM/bin/
+mv /root/SoftInst/Cryptos/RTM/raptoreumd    /home/$vUsuarioNoRoot/Cryptos/RTM/bin/
+chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/RTM/ -R
+find /home/$vUsuarioNoRoot/Cryptos/RTM/ -type d -exec chmod 775 {} \;
+find /home/$vUsuarioNoRoot/Cryptos/RTM/ -type f -exec chmod 664 {} \;
+find /home/$vUsuarioNoRoot/Cryptos/RTM/bin/ -type f -exec chmod +x {} \;
+
+echo ""
+echo "  Arrancando raptoreumd..."
+echo ""
+su $vUsuarioNoRoot -c /home/$vUsuarioNoRoot/Cryptos/RTM/bin/raptoreumd
+sleep 5
+su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/RTM/bin/raptoreum-cli getnewaddress" > /home/$vUsuarioNoRoot/dircartera-rtm.txt
+chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/dircartera-rtm.txt
+echo ""
+echo "  La dirección para recibir raptoreum es:"
+echo ""
+cat /home/$vUsuarioNoRoot/dircartera-rtm.txt
+vDirCartLTC=$(cat /home/$vUsuarioNoRoot/dircartera-rtm.txt)
+echo ""
+
+# Autoejecución de Litecoin al iniciar el sistema
+  #echo ""
+  #echo "  Agregando raptoreumd a los ComandosPostArranque..."
+  #echo ""
+  #chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/rtm-daemon-iniciar.sh
+  #echo "su "$vUsuarioNoRoot" -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/rtm-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+
+# Icono de lanzamiento en el menú gráfico
+  echo ""
+  echo "  Agregando la aplicación gráfica al menú..."
+  echo ""
+  mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
+  echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
+  echo "Name=rtm GUI"                                                     >> /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
+  echo "Type=Application"                                                 >> /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
+  echo "Exec=/home/$vUsuarioNoRoot/scripts/c-scripts/rtm-gui-iniciar.sh"  >> /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
+  echo "Terminal=false"                                                   >> /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
+  echo "Hidden=false"                                                     >> /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
+  echo "Categories=Cryptos"                                               >> /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
+  #echo "Icon="                                                           >> /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
+  gio set /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop "metadata::trusted" yes
+
+# Autoejecución gráfica de Litecoin
+  echo ""
+  echo "  Creando el archivo de autoejecución de raptoreum-qt para escritorio..."
+  echo ""
+  mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
+  echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
+  echo "Name=ltc GUI"                                                     >> /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
+  echo "Type=Application"                                                 >> /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
+  echo "Exec=/home/$vUsuarioNoRoot/scripts/c-scripts/ltc-gui-iniciar.sh"  >> /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
+  echo "Terminal=false"                                                   >> /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
+  echo "Hidden=false"                                                     >> /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
+  gio set /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop "metadata::trusted" yes
+
+# Reparación de permisos
+  chmod +x /home/$vUsuarioNoRoot/Cryptos/RTM/bin/*
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/RTM/ -R
+
+# Instalar los c-scripts
+  echo ""
+  echo "  Instalando los c-scripts..."
+  echo ""
+  su $vUsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
+  find /home/$vUsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+
+# Parar el daemon
+  #chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/rtm-daemon-parar.sh
+  #su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/rtm-daemon-parar.sh"
+
