@@ -51,6 +51,7 @@ rm -rf /home/$vUsuarioNoRoot/.raptoreumcore/ -R
 rm -f  /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
 rm -f  /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
 rm -rf /home/$vUsuarioNoRoot/.config/Raptoreum/ -R
+rm -f  /home/$vUsuarioNoRoot/dircartera-rtm.txt
 
 echo ""
 echo "  Intentando descargar el archivo comprimido de la última versión..."
