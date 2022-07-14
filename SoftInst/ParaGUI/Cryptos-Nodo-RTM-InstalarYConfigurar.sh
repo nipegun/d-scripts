@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 #--------------------------------------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar la cadena de bloques de Litecoin (LTC)
+#  Script de NiPeGun para instalar y configurar la cadena de bloques de Raptoreum (RTM)
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-LTC-InstalarYConfigurar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-RTM-InstalarYConfigurar.sh | bash
 #--------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
