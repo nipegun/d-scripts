@@ -42,10 +42,19 @@ echo "    La última versión estable de raptoreum es la $vUltVersRTM"
 echo ""
 
 echo ""
+echo "  Borrando archivos de instalaciónes anteriores..."
+echo ""
+rm -rf /root/SoftInst/Cryptos/RTM/*
+rm -rf /home/$vUsuarioNoRoot/Cryptos/RTM/* -R
+rm -rf /home/$vUsuarioNoRoot/.raptoreumcore/ -R
+rm -f  /home/$vUsuarioNoRoot/.local/share/applications/rtm.desktop
+rm -f  /home/$vUsuarioNoRoot/.config/autostart/rtm.desktop
+rm -rf /home/$vUsuarioNoRoot/.config/Raptoreum/ -R
+
+echo ""
 echo "  Intentando descargar el archivo comprimido de la última versión..."
 echo ""
 mkdir -p /root/SoftInst/Cryptos/RTM/ 2> /dev/null
-rm -rf /root/SoftInst/Cryptos/RTM/*
 cd /root/SoftInst/Cryptos/RTM/
 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
@@ -78,17 +87,17 @@ echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."
 echo ""
 mkdir -p /home/$vUsuarioNoRoot/.raptoreumcore/
-touch /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "rpcuser=rtmrpc"           > /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "rpcpassword=rtmrpcpass"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "rpcallowip=127.0.0.1"    >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "#Default RPC port 8766"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "rpcport=60226"           >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "server=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "listen=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "prune=550"               >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "daemon=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "gen=0"                   >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#touch /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "rpcuser=rtmrpc"           > /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "rpcpassword=rtmrpcpass"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "rpcallowip=127.0.0.1"    >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "#Default RPC port 8766"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "rpcport=60226"           >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "server=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "listen=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "prune=550"               >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "daemon=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+#echo "gen=0"                   >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
 rm -rf /home/$vUsuarioNoRoot/Cryptos/RTM/
 mkdir -p /home/$vUsuarioNoRoot/Cryptos/RTM/bin/ 2> /dev/null
 mv /root/SoftInst/Cryptos/RTM/raptoreum-cli /home/$vUsuarioNoRoot/Cryptos/RTM/bin/
@@ -103,7 +112,7 @@ find /home/$vUsuarioNoRoot/Cryptos/RTM/bin/ -type f -exec chmod +x {} \;
 echo ""
 echo "  Arrancando raptoreumd..."
 echo ""
-su $vUsuarioNoRoot -c /home/$vUsuarioNoRoot/Cryptos/RTM/bin/raptoreumd
+su $vUsuarioNoRoot -c /home/$vUsuarioNoRoot/Cryptos/RTM/bin/raptoreumd -daemon
 sleep 5
 su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/RTM/bin/raptoreum-cli getnewaddress" > /home/$vUsuarioNoRoot/dircartera-rtm.txt
 chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/dircartera-rtm.txt
@@ -167,6 +176,6 @@ echo ""
   find /home/$vUsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Parar el daemon
-  #chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/rtm-daemon-parar.sh
-  #su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/rtm-daemon-parar.sh"
+  chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/rtm-daemon-parar.sh
+  su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/rtm-daemon-parar.sh"
 
