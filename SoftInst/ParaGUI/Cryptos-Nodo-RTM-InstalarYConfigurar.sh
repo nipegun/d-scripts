@@ -79,18 +79,18 @@ echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."
 echo ""
 mkdir -p /home/$vUsuarioNoRoot/.raptoreumcore/
-touch /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "rpcuser=rtmrpc"           > /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "rpcpassword=rtmrpcpass"  >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "rpcallowip=127.0.0.1"    >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "#Default RPC port 8766"  >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "rpcport=20401"           >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "server=1"                >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "listen=1"                >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "prune=550"               >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "daemon=1"                >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
-echo "gen=0"                   >> /home/$UsuarioNoRoot/.raptoreumcore/raptoreum.conf
-rm -rf /home/$UsuarioNoRoot/Cryptos/RTM/
+touch /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "rpcuser=rtmrpc"           > /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "rpcpassword=rtmrpcpass"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "rpcallowip=127.0.0.1"    >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "#Default RPC port 8766"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "rpcport=20401"           >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "server=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "listen=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "prune=550"               >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "daemon=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "gen=0"                   >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+rm -rf /home/$vUsuarioNoRoot/Cryptos/RTM/
 mkdir -p /home/$vUsuarioNoRoot/Cryptos/RTM/bin/ 2> /dev/null
 mv /root/SoftInst/Cryptos/RTM/raptoreum-cli /home/$vUsuarioNoRoot/Cryptos/RTM/bin/
 mv /root/SoftInst/Cryptos/RTM/raptoreum-qt  /home/$vUsuarioNoRoot/Cryptos/RTM/bin/
