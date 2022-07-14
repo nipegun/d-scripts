@@ -89,17 +89,17 @@ echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."
 echo ""
 mkdir -p /home/$vUsuarioNoRoot/.raptoreumcore/
-#touch /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-#echo "rpcuser=rtmrpc"           > /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-#echo "rpcpassword=rtmrpcpass"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-#echo "rpcallowip=127.0.0.1"    >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-#echo "#Default RPC port 8766"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-#echo "rpcport=60226"           >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-#echo "server=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-#echo "listen=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+touch /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "rpcuser=rtmrpc"           > /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "rpcpassword=rtmrpcpass"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "rpcallowip=127.0.0.1"    >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "#Default RPC port 8766"  >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "rpcport=60226"           >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "server=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "listen=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
 #echo "prune=550"               >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-#echo "daemon=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
-#echo "gen=0"                   >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "daemon=1"                >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
+echo "gen=0"                   >> /home/$vUsuarioNoRoot/.raptoreumcore/raptoreum.conf
 rm -rf /home/$vUsuarioNoRoot/Cryptos/RTM/
 mkdir -p /home/$vUsuarioNoRoot/Cryptos/RTM/bin/ 2> /dev/null
 mv /root/SoftInst/Cryptos/RTM/raptoreum-cli /home/$vUsuarioNoRoot/Cryptos/RTM/bin/
@@ -110,11 +110,11 @@ chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/RTM/ -R
 find /home/$vUsuarioNoRoot/Cryptos/RTM/ -type d -exec chmod 775 {} \;
 find /home/$vUsuarioNoRoot/Cryptos/RTM/ -type f -exec chmod 664 {} \;
 find /home/$vUsuarioNoRoot/Cryptos/RTM/bin/ -type f -exec chmod +x {} \;
+chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.raptoreumcore/ -R
 
 echo ""
 echo "  Arrancando raptoreumd..."
 echo ""
-chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.raptoreumcore/ -R
 su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/RTM/bin/raptoreumd -daemon"
 sleep 5
 su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/RTM/bin/raptoreum-cli getnewaddress" > /home/$vUsuarioNoRoot/dircartera-rtm.txt
