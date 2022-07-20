@@ -122,9 +122,10 @@ elif [ $OS_VERS == "11" ]; then
 
   touch /etc/ddclient.conf
   echo "protocol=dyndns2"                     >> /etc/ddclient.conf
-  echo "use=if, if=eth0"                      >> /etc/ddclient.conf
+  echo "#use=if, if=eth0"                     >> /etc/ddclient.conf
   echo "#use=if, if=vmbr0"                    >> /etc/ddclient.conf
-  echo "use=web, web=checkip.dyndns.org"      >> /etc/ddclient.conf
+  echo "#use=web, web=checkip.dyndns.org"     >> /etc/ddclient.conf
+  echo "use=web"                              >> /etc/ddclient.conf
   echo "ssl=yes"                              >> /etc/ddclient.conf
   echo "server=dyndns.strato.com/nic/update"  >> /etc/ddclient.conf
   echo "login=x"                              >> /etc/ddclient.conf
