@@ -122,6 +122,8 @@ elif [ $OS_VERS == "11" ]; then
 
   touch /etc/ddclient.conf
   echo "protocol=dyndns2"                     >> /etc/ddclient.conf
+  echo "use=if, if=eth0"                      >> /etc/ddclient.conf
+  echo "#use=if, if=vmbr0"                    >> /etc/ddclient.conf
   echo "use=web, web=checkip.dyndns.org"      >> /etc/ddclient.conf
   echo "ssl=yes"                              >> /etc/ddclient.conf
   echo "server=dyndns.strato.com/nic/update"  >> /etc/ddclient.conf
@@ -135,6 +137,11 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Instalación finalizada."
   echo "  Edita el archivo /etc/ddclient.conf para indicar tus credenciales."
+  echo ""
+  echo "  Para probar la configuración ejecuta:"
+  echo "  ddclient -query"
+  echo "  o"
+  echo "  ddclient "
   echo ""
   echo "  Si no lo has instalado para Strato, reconfigúralo con:"
   echo "  dpkg-reconfigure ddclient"
