@@ -98,6 +98,7 @@ elif [ $OS_VERS == "10" ]; then
   echo "server=dyndns.strato.com/nic/update"  >> /etc/ddclient.conf
   echo "login=x"                              >> /etc/ddclient.conf
   echo "password='x'"                         >> /etc/ddclient.conf
+  echo "verbose=yes"                          >> /etc/ddclient.conf
   echo "web.com"                              >> /etc/ddclient.conf
           
   apt-get -y install ddclient
