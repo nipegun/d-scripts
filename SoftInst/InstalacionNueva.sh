@@ -33,7 +33,7 @@ FinColor='\033[0m'
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${ColorRojo}  curl no está instalado. Iniciando su instalación...${FinColor}"
+    echo -e "${ColorRojo}curl no está instalado. Iniciando su instalación...${FinColor}"
     echo ""
     apt-get -y update && apt-get -y install curl
     echo ""
@@ -67,7 +67,7 @@ FinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${FinColor}"
+  echo -e "${ColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${FinColor}"
   echo ""
 
   echo ""
@@ -77,7 +77,7 @@ if [ $OS_VERS == "7" ]; then
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${FinColor}"
+  echo -e "${ColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${FinColor}"
   echo ""
 
   echo ""
@@ -87,7 +87,7 @@ elif [ $OS_VERS == "8" ]; then
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${FinColor}"
+  echo -e "${ColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${FinColor}"
   echo ""
 
   echo ""
@@ -97,7 +97,7 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${FinColor}"
+  echo -e "${ColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${FinColor}"
   echo ""
 
   echo ""
@@ -107,7 +107,7 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${FinColor}"
+  echo -e "${ColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${FinColor}"
   echo ""
 
   echo ""
