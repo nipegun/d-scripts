@@ -24,11 +24,11 @@
     exit 1
   fi
 
-ColorAzul="\033[0;34m"
-ColorAzulClaro="\033[1;34m"
-ColorVerde='\033[1;32m'
-ColorRojo='\033[1;31m'
-FinColor='\033[0m'
+vColorAzul="\033[0;34m"
+vColorAzulClaro="\033[1;34m"
+vColorVerde='\033[1;32m'
+vColorRojo='\033[1;31m'
+vFinColor='\033[0m'
 
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
@@ -40,26 +40,26 @@ FinColor='\033[0m'
   fi
 
 # Determinar la versión de Debian
-  if [ -f /etc/os-release ]; then
-    # Para systemd y freedesktop.org
+  # Para systemd y freedesktop.org
+    if [ -f /etc/os-release ]; then 
       . /etc/os-release
       OS_NAME=$NAME
       OS_VERS=$VERSION_ID
-  elif type lsb_release >/dev/null 2>&1; then
-    # linuxbase.org
+  # linuxbase.org
+    elif type lsb_release >/dev/null 2>&1; then
       OS_NAME=$(lsb_release -si)
       OS_VERS=$(lsb_release -sr)
-  elif [ -f /etc/lsb-release ]; then
-    # Para algunas versiones de Debian sin el comando lsb_release
+  # Para algunas versiones de Debian sin el comando lsb_release
+    elif [ -f /etc/lsb-release ]; then
       . /etc/lsb-release
       OS_NAME=$DISTRIB_ID
       OS_VERS=$DISTRIB_RELEASE
-  elif [ -f /etc/debian_version ]; then
-    # Para versiones viejas de Debian.
+  # Para versiones viejas de Debian.
+    elif [ -f /etc/debian_version ]; then 
       OS_NAME=Debian
       OS_VERS=$(cat /etc/debian_version)
-  else
-    # Para el viejo uname (También funciona para BSD)
+  # Para el viejo uname (También funciona para BSD)
+    else 
       OS_NAME=$(uname -s)
       OS_VERS=$(uname -r)
   fi
@@ -67,51 +67,51 @@ FinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${FinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${ColorRojo}  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
+  echo -e "${vColorRojo}  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${FinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${ColorRojo}  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
+  echo -e "${vColorRojo}  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${FinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${ColorRojo}  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
+  echo -e "${vColorRojo}  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${FinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${ColorRojo}  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
+  echo -e "${vColorRojo}  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${FinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${ColorRojo}  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
+  echo -e "${vColorRojo}  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 fi
