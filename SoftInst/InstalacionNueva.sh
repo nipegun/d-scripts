@@ -40,28 +40,23 @@ vFinColor='\033[0m'
   fi
 
 # Determinar la versión de Debian
-  # Para systemd y freedesktop.org
-    if [ -f /etc/os-release ]; then 
-      . /etc/os-release
-      OS_NAME=$NAME
-      OS_VERS=$VERSION_ID
-  # linuxbase.org
-    elif type lsb_release >/dev/null 2>&1; then
-      OS_NAME=$(lsb_release -si)
-      OS_VERS=$(lsb_release -sr)
-  # Para algunas versiones de Debian sin el comando lsb_release
-    elif [ -f /etc/lsb-release ]; then
-      . /etc/lsb-release
-      OS_NAME=$DISTRIB_ID
-      OS_VERS=$DISTRIB_RELEASE
-  # Para versiones viejas de Debian.
-    elif [ -f /etc/debian_version ]; then 
-      OS_NAME=Debian
-      OS_VERS=$(cat /etc/debian_version)
-  # Para el viejo uname (También funciona para BSD)
-    else 
-      OS_NAME=$(uname -s)
-      OS_VERS=$(uname -r)
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    OS_NAME=$NAME
+    OS_VERS=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    OS_NAME=$(lsb_release -si)
+    OS_VERS=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    OS_NAME=$DISTRIB_ID
+    OS_VERS=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    OS_NAME=Debian
+    OS_VERS=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    OS_NAME=$(uname -s)
+    OS_VERS=$(uname -r)
   fi
 
 if [ $OS_VERS == "7" ]; then
