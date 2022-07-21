@@ -18,22 +18,22 @@
 #  curl -s x | bash -s Parámetro1 Parámetro2
 # ----------
 
-# Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
-    echo "Este script está preparado para ejecutarse como root y no lo has ejecutado como root." >&2
-    exit 1
-  fi
-
 vColorAzul="\033[0;34m"
 vColorAzulClaro="\033[1;34m"
 vColorVerde='\033[1;32m'
 vColorRojo='\033[1;31m'
 vFinColor='\033[0m'
 
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo -e "${vColorRojo}Este script está preparado para ejecutarse como root y no lo has ejecutado como root....${vFinColor}" >&2
+    exit 1
+  fi
+
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${ColorRojo}curl no está instalado. Iniciando su instalación...${FinColor}"
+    echo -e "${vColorRojo}curl no está instalado. Iniciando su instalación...${vFinColor}"
     echo ""
     apt-get -y update && apt-get -y install curl
     echo ""
