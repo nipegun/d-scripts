@@ -99,7 +99,7 @@ elif [ $OS_VERS == "10" ]; then
   echo "use=web"                              >> /etc/ddclient.conf
   echo "ssl=yes"                              >> /etc/ddclient.conf
   echo "server=dyndns.strato.com/nic/update"  >> /etc/ddclient.conf
-  echo "login=x"                              >> /etc/ddclient.conf
+  echo "login=dominio.com"                    >> /etc/ddclient.conf
   echo "password='x'"                         >> /etc/ddclient.conf
   echo "web.com"                              >> /etc/ddclient.conf
           
@@ -142,7 +142,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "use=web"                              >> /etc/ddclient.conf
   echo "ssl=yes"                              >> /etc/ddclient.conf
   echo "server=dyndns.strato.com/nic/update"  >> /etc/ddclient.conf
-  echo "login=x"                              >> /etc/ddclient.conf
+  echo "login=dominio.com"                    >> /etc/ddclient.conf
   echo "password='x'"                         >> /etc/ddclient.conf
   echo "web.com"                              >> /etc/ddclient.conf
           
