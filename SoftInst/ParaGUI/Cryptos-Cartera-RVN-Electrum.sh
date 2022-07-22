@@ -121,7 +121,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   vURLArchivo=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases/tag/$vUltVersCodFuente | grep href | grep ".tar.gz" | cut -d'"' -f2)
   echo ""
-  echo '    La URL del archivo a descargar es https://github.com"$vURLArchivo"'
+  echo "    La URL del archivo a descargar es https://github.com$vURLArchivo"
   echo ""
 
   echo ""
@@ -129,7 +129,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   mkdir -p /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
   cd /root/SoftInst/ElectrumRavencoin/
-  curl -s https://github.com"$vURLArchivo" -o /root/SoftInst/ElectrumRavencoin/fuente.tar.gz
+  curl -s https://github.com$vURLArchivo -o /root/SoftInst/ElectrumRavencoin/fuente.tar.gz
 
   echo ""
   echo "  Instalando paquetes necesarios..."
