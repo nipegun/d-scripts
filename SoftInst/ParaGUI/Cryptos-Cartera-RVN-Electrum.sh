@@ -129,8 +129,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   mkdir -p /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
   cd /root/SoftInst/ElectrumRavencoin/
-  #curl -sL https://github.com"$vURLArchivo" -o /root/SoftInst/ElectrumRavencoin/CodFuente.tar.gz
-  curl -sL https://github.com/Electrum-RVN-SIG/electrum-ravencoin/archive/refs/tags/v0.4.6.tar.gz -o /root/SoftInst/ElectrumRavencoin/CodFuente.tar.gz
+  curl -sL https://github.com"$vURLArchivo" -o /root/SoftInst/ElectrumRavencoin/CodFuente.tar.gz
 
   echo ""
   echo "  Descomprimiendo el archivo descargado... "
