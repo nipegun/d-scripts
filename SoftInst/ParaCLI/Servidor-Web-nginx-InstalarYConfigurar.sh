@@ -12,12 +12,19 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Web-nginx-InstalarYConfigurar.sh | bash
 #----------------------------------------------------------------------------------------------------------------------------------------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorAzul="\033[0;34m"
+vColorAzulClaro="\033[1;34m"
+vColorVerde='\033[1;32m'
+vColorRojo='\033[1;31m'
+vFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo -e "${vColorRojo}Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    exit 1
+  fi
 
 ## Determinar la versión de Debian
-
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
        . /etc/os-release
@@ -144,83 +151,134 @@ elif [ $OS_VERS == "11" ]; then
   echo "----------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "Actualizando la lista de paquetes..."
-  echo ""
-  apt-get -y update
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${vColorRojo}  dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
 
-  echo ""
-  echo "Instalando nginx..."
-  echo ""
-  apt-get -y install nginx
+  cmd=(dialog --checklist "Script de NiPeGun para instalar nginx en Debian 11:" 22 76 16)
+  options=(
+    1 "Instalar el paquete nginx" on
+    2 "Instalar y configurar PHP" off
+    3 "Activar HTTPS y agregar certificado SSL autofirmado" off
+    4 "Instalar certificado SSL de letsencrypt" off
+    5 "Configurar y activar el módulo remoteip para estar detrás de un proxy inverso" off
+  )
+  choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+  clear
+  for choice in $choices
+  do
+    case $choice in
 
-  echo ""
-  echo "Instalando y configurando PHP..."
-  echo ""
-  apt-get -y install php-fpm
-  sed -i -e 's|;cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|g' /etc/php/7.3/fpm/php.ini
+      1)
 
-  echo ""
-  echo "Configurando el sitio principal para que también sirva PHP..."
-  echo ""
-  cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
-  echo "server {"                                                         > /etc/nginx/sites-available/default
-  echo "  listen 80 default_server;"                                     >> /etc/nginx/sites-available/default
-  echo "  listen [::]:80 default_server;"                                >> /etc/nginx/sites-available/default
-  echo ""                                                                >> /etc/nginx/sites-available/default
-  echo "  #listen 443 ssl default_server;"                               >> /etc/nginx/sites-available/default
-  echo "  #listen [::]:443 ssl default_server;"                          >> /etc/nginx/sites-available/default
-  echo ""                                                                >> /etc/nginx/sites-available/default
-  echo "  #include snippets/snakeoil.conf;"                              >> /etc/nginx/sites-available/default
-  echo ""                                                                >> /etc/nginx/sites-available/default
-  echo "  root /var/www/html;"                                           >> /etc/nginx/sites-available/default
-  echo ""                                                                >> /etc/nginx/sites-available/default
-  echo "  index index.php index.html index.htm index.nginx-debian.html;" >> /etc/nginx/sites-available/default
-  echo ""                                                                >> /etc/nginx/sites-available/default
-  echo "  server_name _;"                                                >> /etc/nginx/sites-available/default
-  echo ""                                                                >> /etc/nginx/sites-available/default
-  echo "  location / {"                                                  >> /etc/nginx/sites-available/default
-  echo "    try_files "'$uri'" "'$uri'"/ =404;"                          >> /etc/nginx/sites-available/default
-  echo "  }"                                                             >> /etc/nginx/sites-available/default
-  echo ""                                                                >> /etc/nginx/sites-available/default
-  echo "  location ~ \.php$ {"                                           >> /etc/nginx/sites-available/default
-  echo "    include snippets/fastcgi-php.conf;"                          >> /etc/nginx/sites-available/default
-  echo "    fastcgi_pass unix:/run/php/php7.4-fpm.sock;"                 >> /etc/nginx/sites-available/default
-  echo "  }"                                                             >> /etc/nginx/sites-available/default
-  echo ""                                                                >> /etc/nginx/sites-available/default
-  echo "  location ~ /\.ht {"                                            >> /etc/nginx/sites-available/default
-  echo "    deny all;"                                                   >> /etc/nginx/sites-available/default
-  echo "  }"                                                             >> /etc/nginx/sites-available/default
-  echo ""                                                                >> /etc/nginx/sites-available/default
-  echo "}"                                                               >> /etc/nginx/sites-available/default
+        echo ""
+        echo "  Instalando el paquete nginx..."
+        echo ""
+        apt-get -y update && apt-get -y install nginx
 
-  echo ""
-  echo "Agregando certificado SSL autofirmado..."
-  echo ""
-  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginxdefault.key -out /etc/ssl/certs/nginxdefault.pem
-  openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+      ;;
 
-  echo "ssl_certificate /etc/ssl/certs/nginxdefault.pem;"        > /etc/nginx/snippets/self-signed.conf
-  echo "ssl_certificate_key /etc/ssl/private/nginxdefault.key;" >> /etc/nginx/snippets/self-signed.conf
+      2)
 
-  echo "ssl_protocols TLSv1 TLSv1.1 TLSv1.2;"                                         > /etc/nginx/snippets/ssl-params.conf
-  echo "ssl_prefer_server_ciphers on;"                                               >> /etc/nginx/snippets/ssl-params.conf
-  echo 'ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";'              >> /etc/nginx/snippets/ssl-params.conf
-  echo "ssl_ecdh_curve secp384r1;"                                                   >> /etc/nginx/snippets/ssl-params.conf
-  echo "ssl_session_cache shared:SSL:10m;"                                           >> /etc/nginx/snippets/ssl-params.conf
-  echo "ssl_session_tickets off;"                                                    >> /etc/nginx/snippets/ssl-params.conf
-  echo "ssl_stapling off;"                                                           >> /etc/nginx/snippets/ssl-params.conf
-  echo "ssl_stapling_verify on;"                                                     >> /etc/nginx/snippets/ssl-params.conf
-  echo "resolver 8.8.8.8 8.8.4.4 valid=300s;"                                        >> /etc/nginx/snippets/ssl-params.conf
-  echo "resolver_timeout 5s;"                                                        >> /etc/nginx/snippets/ssl-params.conf
-  echo 'add_header Strict-Transport-Security "max-age=63072000; includeSubdomains";' >> /etc/nginx/snippets/ssl-params.conf
-  echo "add_header X-Frame-Options DENY;"                                            >> /etc/nginx/snippets/ssl-params.conf
-  echo "add_header X-Content-Type-Options nosniff;"                                  >> /etc/nginx/snippets/ssl-params.conf
-  echo "ssl_dhparam /etc/ssl/certs/dhparam.pem;"                                     >> /etc/nginx/snippets/ssl-params.conf
+        echo ""
+        echo "  Instalando y configurando PHP..."
+        echo ""
+        apt-get -y install php-fpm
+        sed -i -e 's|;cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|g' /etc/php/7.3/fpm/php.ini
+        sed -i -e 's|;cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|g' /etc/php/7.4/fpm/php.ini
 
-  sed -i -e 's|#listen 443 ssl default_server;|listen 443 ssl default_server;|g'                                               /etc/nginx/sites-available/default
-  sed -i -e 's|#listen [::]:443 ssl default_server;|listen [::]:443 ssl default_server;\ninclude snippets/self-signed.conf;|g' /etc/nginx/sites-available/default
-  sed -i -e 's|#include snippets/self-signed.conf;|include snippets/self-signed.conf;\ninclude snippets/ssl-params.conf;|g'     /etc/nginx/sites-available/default
+        echo ""
+        echo "    Configurando el sitio principal para que también sirva PHP..."
+        echo ""
+        cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
+        echo "server {"                                                         > /etc/nginx/sites-available/default
+        echo "  listen 80 default_server;"                                     >> /etc/nginx/sites-available/default
+        echo "  listen [::]:80 default_server;"                                >> /etc/nginx/sites-available/default
+        echo ""                                                                >> /etc/nginx/sites-available/default
+        echo "  #listen 443 ssl default_server;"                               >> /etc/nginx/sites-available/default
+        echo "  #listen [::]:443 ssl default_server;"                          >> /etc/nginx/sites-available/default
+        echo ""                                                                >> /etc/nginx/sites-available/default
+        echo "  #include snippets/snakeoil.conf;"                              >> /etc/nginx/sites-available/default
+        echo ""                                                                >> /etc/nginx/sites-available/default
+        echo "  root /var/www/html;"                                           >> /etc/nginx/sites-available/default
+        echo ""                                                                >> /etc/nginx/sites-available/default
+        echo "  index index.php index.html index.htm index.nginx-debian.html;" >> /etc/nginx/sites-available/default
+        echo ""                                                                >> /etc/nginx/sites-available/default
+        echo "  server_name _;"                                                >> /etc/nginx/sites-available/default
+        echo ""                                                                >> /etc/nginx/sites-available/default
+        echo "  location / {"                                                  >> /etc/nginx/sites-available/default
+        echo "    try_files "'$uri'" "'$uri'"/ =404;"                          >> /etc/nginx/sites-available/default
+        echo "  }"                                                             >> /etc/nginx/sites-available/default
+        echo ""                                                                >> /etc/nginx/sites-available/default
+        echo "  location ~ \.php$ {"                                           >> /etc/nginx/sites-available/default
+        echo "    include snippets/fastcgi-php.conf;"                          >> /etc/nginx/sites-available/default
+        echo "    fastcgi_pass unix:/run/php/php7.4-fpm.sock;"                 >> /etc/nginx/sites-available/default
+        echo "  }"                                                             >> /etc/nginx/sites-available/default
+        echo ""                                                                >> /etc/nginx/sites-available/default
+        echo "  location ~ /\.ht {"                                            >> /etc/nginx/sites-available/default
+        echo "    deny all;"                                                   >> /etc/nginx/sites-available/default
+        echo "  }"                                                             >> /etc/nginx/sites-available/default
+        echo ""                                                                >> /etc/nginx/sites-available/default
+        echo "}"                                                               >> /etc/nginx/sites-available/default
+
+      ;;
+
+      3)
+ 
+        echo ""
+        echo "  Activando https y agregando certificado SSL autofirmado..."
+        echo ""
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginxdefault.key -out /etc/ssl/certs/nginxdefault.pem
+        openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+
+        echo "ssl_certificate /etc/ssl/certs/nginxdefault.pem;"        > /etc/nginx/snippets/self-signed.conf
+        echo "ssl_certificate_key /etc/ssl/private/nginxdefault.key;" >> /etc/nginx/snippets/self-signed.conf
+
+        echo "ssl_protocols TLSv1 TLSv1.1 TLSv1.2;"                                         > /etc/nginx/snippets/ssl-params.conf
+        echo "ssl_prefer_server_ciphers on;"                                               >> /etc/nginx/snippets/ssl-params.conf
+        echo 'ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";'              >> /etc/nginx/snippets/ssl-params.conf
+        echo "ssl_ecdh_curve secp384r1;"                                                   >> /etc/nginx/snippets/ssl-params.conf
+        echo "ssl_session_cache shared:SSL:10m;"                                           >> /etc/nginx/snippets/ssl-params.conf
+        echo "ssl_session_tickets off;"                                                    >> /etc/nginx/snippets/ssl-params.conf
+        echo "ssl_stapling off;"                                                           >> /etc/nginx/snippets/ssl-params.conf
+        echo "ssl_stapling_verify on;"                                                     >> /etc/nginx/snippets/ssl-params.conf
+        echo "resolver 8.8.8.8 8.8.4.4 valid=300s;"                                        >> /etc/nginx/snippets/ssl-params.conf
+        echo "resolver_timeout 5s;"                                                        >> /etc/nginx/snippets/ssl-params.conf
+        echo 'add_header Strict-Transport-Security "max-age=63072000; includeSubdomains";' >> /etc/nginx/snippets/ssl-params.conf
+        echo "add_header X-Frame-Options DENY;"                                            >> /etc/nginx/snippets/ssl-params.conf
+        echo "add_header X-Content-Type-Options nosniff;"                                  >> /etc/nginx/snippets/ssl-params.conf
+        echo "ssl_dhparam /etc/ssl/certs/dhparam.pem;"                                     >> /etc/nginx/snippets/ssl-params.conf
+
+        sed -i -e 's|#listen 443 ssl default_server;|listen 443 ssl default_server;|g'                                               /etc/nginx/sites-available/default
+        sed -i -e 's|#listen [::]:443 ssl default_server;|listen [::]:443 ssl default_server;\ninclude snippets/self-signed.conf;|g' /etc/nginx/sites-available/default
+        sed -i -e 's|#include snippets/self-signed.conf;|include snippets/self-signed.conf;\ninclude snippets/ssl-params.conf;|g'    /etc/nginx/sites-available/default
+
+      ;;
+
+      4)
+ 
+        echo ""
+        echo "  Comandos todavía no preparados."
+        echo ""
+
+      ;;
+
+      5)
+ 
+        echo ""
+        echo "  Comandos todavía no preparados."
+        echo ""
+
+      ;;
+
+    esac
+
+  done
 
 fi
 
