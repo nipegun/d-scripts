@@ -9,13 +9,13 @@
 #  Script de NiPeGun para instalar y configurar la cartera de RVN Electrum en Debian
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-Electrum.sh | bash
 #
 #  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-Electrum.sh | bash
 #
 #  Ejecución remota con parámetros:
-#  curl -s x | bash -s Parámetro1 Parámetro2
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-Electrum.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 vColorAzul="\033[0;34m"
@@ -28,15 +28,6 @@ vFinColor='\033[0m'
   if [ $(id -u) -ne 0 ]; then
     echo -e "${vColorRojo}Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
     exit 1
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${vColorRojo}curl no está instalado. Iniciando su instalación...${vFinColor}"
-    echo ""
-    apt-get -y update && apt-get -y install curl
-    echo ""
   fi
 
 # Determinar la versión de Debian
@@ -105,28 +96,53 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}Iniciando el script de instalación de la cartera RVN Electrum para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
+  # Borrar archivos de ejecuciones anteriores
+    rm -rf /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
+
   echo ""
-  echo "  Bajando el código fuente..."
+  echo "  Determinando última versión del código fuente..."
   echo ""
+  # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${vColorRojo}    curl no está instalado. Iniciando su instalación...${vFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install curl
+      echo ""
+    fi
+  vAppImage=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases | sed 's->-\n-g' | grep ownload | grep href | grep mage | head -n1 | cut -d'"' -f2)
+  vUltVers=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases | sed 's->-\n-g' | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2 | cut -d'/' -f7 | sed 's-.tar.gz--g')
+  echo ""
+  echo "    La última versión es la $vUltVers"
+  echo ""
+
+  echo ""
+  echo "  Descargando el código fuente... "
+  echo ""
+  mkdir -p /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
+  cd /root/SoftInst/ElectrumRavencoin/
+  vURLArchivo=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases/tag/$vUltVers | grep href | grep ".tar.gz" | cut -d'"' -f2)
+  curl -s https://github.com"$vURLArchivo"
 
   echo ""
   echo "  Instalando paquetes necesarios..."
   echo ""
-  apt-get -y update
-  apt-get -y install python3
-  apt-get -y install python3-pip
-  apt-get -y install python3-cryptography
-  apt-get -y install python3-pyqt5
-  apt-get -y install libsecp256k1-0
-  apt-get -y install cmake
-  pip3 install virtualenv
+  #apt-get -y update
+  #apt-get -y install python3
+  #apt-get -y install python3-pip
+  #apt-get -y install python3-cryptography
+  #apt-get -y install python3-pyqt5
+  #apt-get -y install libsecp256k1-0
+  #apt-get -y install cmake
+  #pip3 install virtualenv
 
-  echo ""
-  echo "  ..."
-  echo ""
-  ./electrum-env
+  #echo ""
+  #echo "  ..."
+  #echo ""
+  #./electrum-env
 
-  apt-get -y install automake
-  apt-get -y install libtool
-  ./contrib/make_libsecp256k1.sh
+  #apt-get -y install automake
+  #apt-get -y install libtool
+  #./contrib/make_libsecp256k1.sh
+
 fi
