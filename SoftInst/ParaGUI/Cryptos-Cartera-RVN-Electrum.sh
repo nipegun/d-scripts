@@ -129,7 +129,21 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   mkdir -p /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
   cd /root/SoftInst/ElectrumRavencoin/
-  curl -s -o /root/SoftInst/ElectrumRavencoin/CodFuente.tar.gz https://github.com"$vURLArchivo" 
+  curl -sL https://github.com"$vURLArchivo" -o /root/SoftInst/ElectrumRavencoin/CodFuente.tar.gz
+
+  echo ""
+  echo "  Descomprimiendo el archivo descargado... "
+  echo ""
+  # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${vColorRojo}    tar no está instalado. Iniciando su instalación...${vFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install tar
+      echo ""
+    fi
+  cd /root/SoftInst/ElectrumRavencoin/
+  tar -xvzf /root/SoftInst/ElectrumRavencoin/CodFuente.tar.gz
 
   echo ""
   echo "  Instalando paquetes necesarios..."
