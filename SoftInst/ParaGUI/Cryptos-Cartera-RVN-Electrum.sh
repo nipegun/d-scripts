@@ -117,11 +117,18 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   echo ""
-  echo "  Descargando el código fuente... "
+  echo "  Determinando la URL del archivo a descargar..."
+  echo ""
+  vURLArchivo=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases/tag/$vUltVers | grep href | grep ".tar.gz" | cut -d'"' -f2)
+  echo ""
+  echo '    La URL del archivo a descargar es https://github.com"$vURLArchivo"'
+  echo ""
+
+  echo ""
+  echo "  Descargando el archivo del código fuente... "
   echo ""
   mkdir -p /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
   cd /root/SoftInst/ElectrumRavencoin/
-  vURLArchivo=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases/tag/$vUltVers | grep href | grep ".tar.gz" | cut -d'"' -f2)
   curl -s https://github.com"$vURLArchivo" -o /root/SoftInst/ElectrumRavencoin/fuente.tar.gz
 
   echo ""
