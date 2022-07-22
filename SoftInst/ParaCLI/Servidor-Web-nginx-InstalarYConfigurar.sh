@@ -229,7 +229,7 @@ elif [ $OS_VERS == "11" ]; then
       ;;
 
       3)
- 
+
         echo ""
         echo "  Activando https y agregando certificado SSL autofirmado..."
         echo ""
@@ -261,7 +261,7 @@ elif [ $OS_VERS == "11" ]; then
       ;;
 
       4)
- 
+
         echo ""
         echo "  Comandos todavía no preparados."
         echo ""
@@ -269,7 +269,7 @@ elif [ $OS_VERS == "11" ]; then
       ;;
 
       5)
- 
+
         echo ""
         echo "  Comandos todavía no preparados."
         echo ""
