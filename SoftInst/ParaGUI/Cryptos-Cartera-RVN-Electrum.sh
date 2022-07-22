@@ -153,9 +153,10 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install python3
   apt-get -y install python3-venv
   apt-get -y install cmake
-  
+  apt-get -y install python3-cryptography
+
   #apt-get -y install python3-pip
-  #apt-get -y install python3-cryptography
+  #
   #apt-get -y install python3-pyqt5
   #apt-get -y install libsecp256k1-0
   #
