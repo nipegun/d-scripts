@@ -129,7 +129,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   mkdir -p /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
   cd /root/SoftInst/ElectrumRavencoin/
-  curl -s https://github.com$vURLArchivo -o /root/SoftInst/ElectrumRavencoin/fuente.tar.gz
+  curl -s https://github.com"$vURLArchivo" -o /root/SoftInst/ElectrumRavencoin/fuente.tar.gz
 
   echo ""
   echo "  Instalando paquetes necesarios..."
