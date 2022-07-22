@@ -122,7 +122,7 @@ elif [ $OS_VERS == "11" ]; then
   mkdir -p /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
   cd /root/SoftInst/ElectrumRavencoin/
   vURLArchivo=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases/tag/$vUltVers | grep href | grep ".tar.gz" | cut -d'"' -f2)
-  curl -s https://github.com"$vURLArchivo"
+  curl -s https://github.com"$vURLArchivo" -o /root/SoftInst/ElectrumRavencoin/fuente.tar.gz
 
   echo ""
   echo "  Instalando paquetes necesarios..."
