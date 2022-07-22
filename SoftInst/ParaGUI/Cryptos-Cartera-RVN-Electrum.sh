@@ -111,15 +111,15 @@ elif [ $OS_VERS == "11" ]; then
       echo ""
     fi
   vAppImage=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases | sed 's->-\n-g' | grep ownload | grep href | grep mage | head -n1 | cut -d'"' -f2)
-  vUltVers=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases | sed 's->-\n-g' | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2 | cut -d'/' -f7 | sed 's-.tar.gz--g')
+  vUltVersCodFuente=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases | sed 's->-\n-g' | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2 | cut -d'/' -f7 | sed 's-.tar.gz--g')
   echo ""
-  echo "    La última versión es la $vUltVers"
+  echo "    La última versión es la $vUltVersCodFuente"
   echo ""
 
   echo ""
   echo "  Determinando la URL del archivo a descargar..."
   echo ""
-  vURLArchivo=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases/tag/$vUltVers | grep href | grep ".tar.gz" | cut -d'"' -f2)
+  vURLArchivo=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases/tag/$vUltVersCodFuente | grep href | grep ".tar.gz" | cut -d'"' -f2)
   echo ""
   echo '    La URL del archivo a descargar es https://github.com"$vURLArchivo"'
   echo ""
