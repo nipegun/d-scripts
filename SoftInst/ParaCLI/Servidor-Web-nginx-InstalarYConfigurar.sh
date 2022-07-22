@@ -181,6 +181,19 @@ elif [ $OS_VERS == "11" ]; then
         echo ""
         apt-get -y update && apt-get -y install nginx
 
+        echo "<!DOCTYPE html>"                                     > /var/www/html/index.html
+        echo '<html lang="es">'                                   >> /var/www/html/index.html
+        echo "  <head>"                                           >> /var/www/html/index.html
+        echo "    <meta charset='UTF-8'>"                         >> /var/www/html/index.html
+        echo "    <title>nginx</title>"                           >> /var/www/html/index.html
+        echo "  </head>"                                          >> /var/www/html/index.html
+        echo "  <body>"                                           >> /var/www/html/index.html
+        echo "    <p>Servidor nginx instalado correctamente.</p>" >> /var/www/html/index.html
+        echo "  </body>"                                          >> /var/www/html/index.html
+        echo "</html>"                                            >> /var/www/html/index.html
+        chown www-data:www-data /var/www/html/index.html
+        rm -f /var/www/html/index.nginx-debian.html
+
       ;;
 
       2)
