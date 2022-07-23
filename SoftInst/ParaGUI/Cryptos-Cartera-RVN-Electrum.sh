@@ -242,7 +242,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "Hidden=false"                                                             >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
               echo "Categories=Cryptos"                                                       >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
               echo "Icon=/home/$vUsuarioNoRoot/ElectrumRavencoin/electrum/gui/icons/Logo.png" >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
-              chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
+              chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
               gio set                               /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop "metadata::trusted" yes
 
             # Autoejecución gráfica de electrum-ravencoin
@@ -256,7 +256,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "Exec=/home/$vUsuarioNoRoot/ElectrumRavencoin/electrum-env" >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
               echo "Terminal=false"                                            >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
               echo "Hidden=false"                                              >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
-              chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
+              chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
               gio set                               /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop "metadata::trusted" yes
 
           ;;
