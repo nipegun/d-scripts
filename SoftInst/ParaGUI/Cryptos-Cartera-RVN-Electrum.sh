@@ -145,6 +145,8 @@ elif [ $OS_VERS == "11" ]; then
   cd /root/SoftInst/ElectrumRavencoin/
   tar -xvzf /root/SoftInst/ElectrumRavencoin/CodFuente.tar.gz
   find /root/SoftInst/ElectrumRavencoin/* -type d -exec mv {} /root/SoftInst/ElectrumRavencoin/CodFuente \; 2> /dev/null
+  rm -rf /root/SoftInst/ElectrumRavencoin/CodFuente/.github/
+  rm -rf /root/SoftInst/ElectrumRavencoin/CodFuente/.tx/
 
   echo ""
   echo "  Instalando paquetes necesarios..."
