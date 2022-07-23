@@ -160,9 +160,9 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install python3-venv
   apt-get -y install cmake
   apt-get -y install python3-pip
-  #apt-get -y install python3-cryptography
-  #apt-get -y install libsecp256k1-0
-  #apt-get -y install python3-pyqt5
+  apt-get -y install python3-cryptography
+  apt-get -y install libsecp256k1-0
+  apt-get -y install python3-pyqt5
   
   #pip3 install virtualenv
   #apt-get -y install automake
@@ -178,9 +178,10 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Script finalizado."
   echo ""
   echo "  Para lanzar la app como root, ejecuta:"
+  echo "  /root/ElectrumRavencoin/electrum-env"
   echo ""
-  echo "  cd /root/ElectrumRavencoin/"
-  echo "  ./electrum-env"
+  echo "  La primera vez tardará más tiempo en ejecutarse."
+  echo "  A partir de la segunda vez será casi instantánea."
   echo ""
 
 fi
