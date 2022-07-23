@@ -156,12 +156,14 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   apt-get -y update
   #apt-get -y install python3
+  
+  #apt-get -y install python3-venv
+  #apt-get -y install cmake
   #apt-get -y install python3-pip
-  apt-get -y install python3-venv
-  apt-get -y install cmake
-  apt-get -y install python3-cryptography
-  apt-get -y install libsecp256k1-0
-  apt-get -y install python3-pyqt5
+  #apt-get -y install python3-cryptography
+  #apt-get -y install libsecp256k1-0
+  #apt-get -y install python3-pyqt5
+  
   #pip3 install virtualenv
   #apt-get -y install automake
   #apt-get -y install libtool
