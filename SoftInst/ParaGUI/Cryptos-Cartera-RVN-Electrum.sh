@@ -108,14 +108,13 @@ elif [ $OS_VERS == "11" ]; then
     fi
 
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
-    opciones=
-      (
-        1 "Instalar para el usuario root" on
-        2 "Mover a la carpeta del usuario no-root" off
-        3 "..." off
-        4 "..." off
-        5 "..." off
-      )
+    opciones=(
+      1 "Instalar para el usuario root" on
+      2 "Mover a la carpeta del usuario no-root" off
+      3 "..." off
+      4 "..." off
+      5 "..." off
+    )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
     clear
 
