@@ -175,13 +175,14 @@ elif [ $OS_VERS == "11" ]; then
   mv /root/SoftInst/ElectrumRavencoin/CodFuente/ /root/ElectrumRavencoin/
 
   echo ""
-  echo "  Script finalizado."
+  echo -e "${vColorVerde}  Script finalizado.${vFinColor}"
   echo ""
-  echo "  Para lanzar la app como root, ejecuta:"
-  echo "  /root/ElectrumRavencoin/electrum-env"
+  echo -e "${vColorVerde}  Para lanzar la app como root, ejecuta:${vFinColor}"
   echo ""
-  echo "  La primera vez tardará más tiempo en ejecutarse."
-  echo "  A partir de la segunda vez será casi instantánea."
+  echo -e "${vColorVerde}  /root/ElectrumRavencoin/electrum-env${vFinColor}"
+  echo ""
+  echo -e "${vColorVerde}  La primera vez tardará más tiempo en ejecutarse.${vFinColor}"
+  echo -e "${vColorVerde}  A partir de la segunda vez será casi instantánea.${vFinColor}"
   echo ""
 
 fi
