@@ -15,14 +15,13 @@
   fi
 
 menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 22 96 16)
-  opciones=
-    (
-      1 "Opción 1" on
-      2 "Opción 2" off
-      3 "Opción 3" off
-      4 "Opción 4" off
-      5 "Opción 5" off
-    )
+  opciones=(
+    1 "Opción 1" on
+    2 "Opción 2" off
+    3 "Opción 3" off
+    4 "Opción 4" off
+    5 "Opción 5" off
+  )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
