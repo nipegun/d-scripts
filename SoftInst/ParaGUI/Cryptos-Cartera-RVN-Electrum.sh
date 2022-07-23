@@ -131,6 +131,7 @@ elif [ $OS_VERS == "11" ]; then
             # Borrar archivos de ejecuciones anteriores
             rm -rf /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
             rm -rf /root/ElectrumRavencoin/ 2> /dev/null
+            rm -rf /home/$vUsuarioNoRoot/ElectrumRavencoin/ 2> /dev/null
 
             echo ""
             echo "  Determinando última versión del código fuente..."
@@ -225,7 +226,7 @@ elif [ $OS_VERS == "11" ]; then
             echo "  Moviendo la app a la carpeta del usuario no-root..."
             echo ""
             mv /root/ElectrumRavencoin/ /home/$vUsuarioNoRoot/ElectrumRavencoin/
-            chmod $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
+            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
 
           ;;
 
