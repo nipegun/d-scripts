@@ -149,6 +149,7 @@ elif [ $OS_VERS == "11" ]; then
   rm -rf /root/SoftInst/ElectrumRavencoin/CodFuente/.tx/
   rm -f  /root/SoftInst/ElectrumRavencoin/CodFuente/.gitignore
   rm -f  /root/SoftInst/ElectrumRavencoin/CodFuente/.gitmodules
+  rm -f  /root/SoftInst/ElectrumRavencoin/CodFuente/.dockerignore
 
   echo ""
   echo "  Instalando paquetes necesarios..."
