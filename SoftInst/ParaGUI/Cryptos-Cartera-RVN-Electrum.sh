@@ -147,6 +147,8 @@ elif [ $OS_VERS == "11" ]; then
   find /root/SoftInst/ElectrumRavencoin/* -type d -exec mv {} /root/SoftInst/ElectrumRavencoin/CodFuente \; 2> /dev/null
   rm -rf /root/SoftInst/ElectrumRavencoin/CodFuente/.github/
   rm -rf /root/SoftInst/ElectrumRavencoin/CodFuente/.tx/
+  rm -f  /root/SoftInst/ElectrumRavencoin/CodFuente/.gitignore
+  rm -f  /root/SoftInst/ElectrumRavencoin/CodFuente/.gitmodules
 
   echo ""
   echo "  Instalando paquetes necesarios..."
