@@ -208,7 +208,7 @@ elif [ $OS_VERS == "11" ]; then
             mv /root/SoftInst/ElectrumRavencoin/CodFuente/ /root/ElectrumRavencoin/
 
             echo ""
-            echo -e "${vColorVerde}  Script finalizado.${vFinColor}"
+            echo -e "${vColorVerde}  Electrum instalado para el usuario root.${vFinColor}"
             echo ""
             echo -e "${vColorVerde}  Para lanzar la app como root, ejecuta:${vFinColor}"
             echo ""
@@ -258,6 +258,14 @@ elif [ $OS_VERS == "11" ]; then
               echo "Hidden=false"                                              >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
               chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
               gio set                               /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop "metadata::trusted" yes
+
+            echo ""
+            echo -e "${vColorVerde}  Script finalizado.${vFinColor}"
+            echo ""
+            echo -e "${vColorVerde}  La primera vez que ejecutes la app, tardará un poco en abrirse.${vFinColor}"
+            echo -e "${vColorVerde}  A partir de la segunda será casi instantánea.${vFinColor}"
+            echo ""
+
 
           ;;
 
