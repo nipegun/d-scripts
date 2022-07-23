@@ -98,163 +98,163 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}Iniciando el script de instalación de la cartera RVN Electrum para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
-# Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${vColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
-    echo ""
-    apt-get -y update && apt-get -y install dialog
-    echo ""
-  fi
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${vColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
 
-menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 22 96 16)
-  opciones=
-    (
-      1 "Instalar para el usuario root" on
-      2 "Mover a la carpeta del usuario no-root" off
-      3 "..." off
-      4 "..." off
-      5 "..." off
-    )
-  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  clear
+  menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+    opciones=
+      (
+        1 "Instalar para el usuario root" on
+        2 "Mover a la carpeta del usuario no-root" off
+        3 "..." off
+        4 "..." off
+        5 "..." off
+      )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+    clear
 
-  for choice in $choices
-    do
-      case $choice in
+    for choice in $choices
+      do
+        case $choice in
 
-        1)
+          1)
 
-          echo ""
-          echo "  Instalando para el usuario root..."
-          echo ""
+            echo ""
+            echo "  Instalando para el usuario root..."
+            echo ""
 
-          # Borrar archivos de ejecuciones anteriores
-          rm -rf /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
-          rm -rf /root/ElectrumRavencoin/ 2> /dev/null
+            # Borrar archivos de ejecuciones anteriores
+            rm -rf /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
+            rm -rf /root/ElectrumRavencoin/ 2> /dev/null
 
-          echo ""
-          echo "  Determinando última versión del código fuente..."
-          echo ""
-          # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-            if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-              echo ""
-              echo -e "${vColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
-              echo ""
-              apt-get -y update && apt-get -y install curl
-              echo ""
-            fi
-          #vAppImage=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases | sed 's->-\n-g' | grep ownload | grep href | grep mage | head -n1 | cut -d'"' -f2)
-          vUltVersCodFuente=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases | sed 's->-\n-g' | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2 | cut -d'/' -f7 | sed 's-.tar.gz--g')
-          echo ""
-          echo "    La última versión es la $vUltVersCodFuente"
-          echo ""
+            echo ""
+            echo "  Determinando última versión del código fuente..."
+            echo ""
+            # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${vColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
+                echo ""
+                apt-get -y update && apt-get -y install curl
+                echo ""
+              fi
+            #vAppImage=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases | sed 's->-\n-g' | grep ownload | grep href | grep mage | head -n1 | cut -d'"' -f2)
+            vUltVersCodFuente=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases | sed 's->-\n-g' | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2 | cut -d'/' -f7 | sed 's-.tar.gz--g')
+            echo ""
+            echo "    La última versión es la $vUltVersCodFuente"
+            echo ""
 
-          echo ""
-          echo "  Determinando la URL del archivo a descargar..."
-          echo ""
-          vURLArchivo=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases/tag/$vUltVersCodFuente | grep href | grep ".tar.gz" | cut -d'"' -f2)
-          echo ""
-          echo "    La URL del archivo a descargar es https://github.com$vURLArchivo"
-          echo ""
+            echo ""
+            echo "  Determinando la URL del archivo a descargar..."
+            echo ""
+            vURLArchivo=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases/tag/$vUltVersCodFuente | grep href | grep ".tar.gz" | cut -d'"' -f2)
+            echo ""
+            echo "    La URL del archivo a descargar es https://github.com$vURLArchivo"
+            echo ""
 
-          echo ""
-          echo "  Descargando el archivo del código fuente... "
-          echo ""
-          mkdir -p /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
-          cd /root/SoftInst/ElectrumRavencoin/
-          curl -sL https://github.com"$vURLArchivo" -o /root/SoftInst/ElectrumRavencoin/CodFuente.tar.gz
+            echo ""
+            echo "  Descargando el archivo del código fuente... "
+            echo ""
+            mkdir -p /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
+            cd /root/SoftInst/ElectrumRavencoin/
+            curl -sL https://github.com"$vURLArchivo" -o /root/SoftInst/ElectrumRavencoin/CodFuente.tar.gz
 
-          echo ""
-          echo "  Descomprimiendo el archivo descargado... "
-          echo ""
-          # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
-            if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
-               echo ""
-               echo -e "${vColorRojo}    tar no está instalado. Iniciando su instalación...${vFinColor}"
-               echo ""
-               apt-get -y update && apt-get -y install tar
-               echo ""
-            fi
-          cd /root/SoftInst/ElectrumRavencoin/
-          tar -xvzf /root/SoftInst/ElectrumRavencoin/CodFuente.tar.gz
-          find /root/SoftInst/ElectrumRavencoin/* -type d -exec mv {} /root/SoftInst/ElectrumRavencoin/CodFuente \; 2> /dev/null
-          rm -rf /root/SoftInst/ElectrumRavencoin/CodFuente/.github/
-          rm -rf /root/SoftInst/ElectrumRavencoin/CodFuente/.tx/
-          rm -f  /root/SoftInst/ElectrumRavencoin/CodFuente/.gitignore
-          rm -f  /root/SoftInst/ElectrumRavencoin/CodFuente/.gitmodules
-          rm -f  /root/SoftInst/ElectrumRavencoin/CodFuente/.dockerignore
+            echo ""
+            echo "  Descomprimiendo el archivo descargado... "
+            echo ""
+            # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+                 echo ""
+                 echo -e "${vColorRojo}    tar no está instalado. Iniciando su instalación...${vFinColor}"
+                 echo ""
+                 apt-get -y update && apt-get -y install tar
+                 echo ""
+              fi
+            cd /root/SoftInst/ElectrumRavencoin/
+            tar -xvzf /root/SoftInst/ElectrumRavencoin/CodFuente.tar.gz
+            find /root/SoftInst/ElectrumRavencoin/* -type d -exec mv {} /root/SoftInst/ElectrumRavencoin/CodFuente \; 2> /dev/null
+            rm -rf /root/SoftInst/ElectrumRavencoin/CodFuente/.github/
+            rm -rf /root/SoftInst/ElectrumRavencoin/CodFuente/.tx/
+            rm -f  /root/SoftInst/ElectrumRavencoin/CodFuente/.gitignore
+            rm -f  /root/SoftInst/ElectrumRavencoin/CodFuente/.gitmodules
+            rm -f  /root/SoftInst/ElectrumRavencoin/CodFuente/.dockerignore
 
-          echo ""
-          echo "  Instalando paquetes necesarios..."
-          echo ""
-          apt-get -y update
-          #apt-get -y install python3
-          apt-get -y install python3-venv
-          apt-get -y install cmake
-          apt-get -y install python3-pip
-          apt-get -y install python3-cryptography
-          apt-get -y install libsecp256k1-0
-          apt-get -y install python3-pyqt5
+            echo ""
+            echo "  Instalando paquetes necesarios..."
+            echo ""
+            apt-get -y update
+            #apt-get -y install python3
+            apt-get -y install python3-venv
+            apt-get -y install cmake
+            apt-get -y install python3-pip
+            apt-get -y install python3-cryptography
+            apt-get -y install libsecp256k1-0
+            apt-get -y install python3-pyqt5
   
-          #pip3 install virtualenv
-          #apt-get -y install automake
-          #apt-get -y install libtool
-          #./contrib/make_libsecp256k1.sh
+            #pip3 install virtualenv
+            #apt-get -y install automake
+            #apt-get -y install libtool
+            #./contrib/make_libsecp256k1.sh
 
-          echo ""
-          echo "  Moviendo el software a la carpeta de usuario..."
-          echo ""
-          mv /root/SoftInst/ElectrumRavencoin/CodFuente/ /root/ElectrumRavencoin/
+            echo ""
+            echo "  Moviendo el software a la carpeta de usuario..."
+            echo ""
+            mv /root/SoftInst/ElectrumRavencoin/CodFuente/ /root/ElectrumRavencoin/
 
-          echo ""
-          echo -e "${vColorVerde}  Script finalizado.${vFinColor}"
-          echo ""
-          echo -e "${vColorVerde}  Para lanzar la app como root, ejecuta:${vFinColor}"
-          echo ""
-          echo -e "${vColorVerde}  /root/ElectrumRavencoin/electrum-env${vFinColor}"
-          echo ""
-          echo -e "${vColorVerde}  La primera vez tardará más tiempo en ejecutarse.${vFinColor}"
-          echo -e "${vColorVerde}  A partir de la segunda vez será casi instantánea.${vFinColor}"
-          echo ""
+            echo ""
+            echo -e "${vColorVerde}  Script finalizado.${vFinColor}"
+            echo ""
+            echo -e "${vColorVerde}  Para lanzar la app como root, ejecuta:${vFinColor}"
+            echo ""
+            echo -e "${vColorVerde}  /root/ElectrumRavencoin/electrum-env${vFinColor}"
+            echo ""
+            echo -e "${vColorVerde}  La primera vez tardará más tiempo en ejecutarse.${vFinColor}"
+            echo -e "${vColorVerde}  A partir de la segunda vez será casi instantánea.${vFinColor}"
+            echo ""
 
-        ;;
+          ;;
 
-        2)
+          2)
 
-          echo ""
-          echo "  Moviendo la app a la carpeta del usuario no-root..."
-          echo ""
-          mv /root/ElectrumRavencoin/ /home/$vUsuarioNoRoot/ElectrumRavencoin/
-          chmod $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
+            echo ""
+            echo "  Moviendo la app a la carpeta del usuario no-root..."
+            echo ""
+            mv /root/ElectrumRavencoin/ /home/$vUsuarioNoRoot/ElectrumRavencoin/
+            chmod $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
 
-        ;;
+          ;;
 
-        3)
+          3)
 
-          echo ""
-          echo "  ..."
-          echo ""
+            echo ""
+            echo "  ..."
+            echo ""
 
-        ;;
+          ;;
 
-        4)
+          4)
 
-          echo ""
-          echo "  ..."
-          echo ""
+            echo ""
+            echo "  ..."
+            echo ""
 
-        ;;
+          ;;
 
-        5)
+          5)
 
-          echo ""
-          echo "  ..."
-          echo ""
+            echo ""
+            echo "  ..."
+            echo ""
 
-        ;;
+          ;;
 
-    esac
+      esac
 
   done
 
