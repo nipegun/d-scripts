@@ -155,24 +155,31 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Instalando paquetes necesarios..."
   echo ""
   apt-get -y update
-  apt-get -y install python3
+  #apt-get -y install python3
+  #apt-get -y install python3-pip
   apt-get -y install python3-venv
   apt-get -y install cmake
   apt-get -y install python3-cryptography
   apt-get -y install libsecp256k1-0
   apt-get -y install python3-pyqt5
-
-  #apt-get -y install python3-pip
   #pip3 install virtualenv
-
-  #echo ""
-  #echo "  ..."
-  #echo ""
-  #./electrum-env
-
   #apt-get -y install automake
   #apt-get -y install libtool
   #./contrib/make_libsecp256k1.sh
+
+  echo ""
+  echo "  Moviendo el software a la carpeta de usuario..."
+  echo ""
+  mv /root/SoftInst/ElectrumRavencoin/CodFuente/ /root/ElectrumRavencoin/
+
+  echo ""
+  echo "  Script finalizado."
+  echo ""
+  echo "  Para lanzar la app como root, ejecuta:"
+  echo ""
+  echo "  cd /root/ElectrumRavencoin/"
+  echo "  ./electrum-env"
+  echo ""
 
 fi
 
