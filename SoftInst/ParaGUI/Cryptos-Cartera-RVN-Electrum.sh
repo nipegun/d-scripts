@@ -227,6 +227,37 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             mv /root/ElectrumRavencoin/ /home/$vUsuarioNoRoot/ElectrumRavencoin/
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
+            cp /home/$vUsuarioNoRoot/ElectrumRavencoin/electrum/gui/icons/electrum-ravencoin.png /home/$vUsuarioNoRoot/ElectrumRavencoin/electrum/gui/icons/Logo.png
+
+            # Icono de lanzamiento en el menú gráfico
+              echo ""
+              echo "  Agregando la aplicación gráfica al menú..."
+              echo ""
+              mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
+              echo "[Desktop Entry]"                                                           > /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
+              echo "Name=electrum GUI"                                                        >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
+              echo "Type=Application"                                                         >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
+              echo "Exec=/home/$vUsuarioNoRoot/ElectrumRavencoin/electrum-env"                >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
+              echo "Terminal=false"                                                           >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
+              echo "Hidden=false"                                                             >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
+              echo "Categories=Cryptos"                                                       >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
+              echo "Icon=/home/$vUsuarioNoRoot/ElectrumRavencoin/electrum/gui/icons/Logo.png" >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
+              chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
+              gio set                               /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop "metadata::trusted" yes
+
+            # Autoejecución gráfica de electrum-ravencoin
+              echo ""
+              echo "  Creando el archivo de autoejecución de electrum-ravencoin para escritorio..."
+              echo ""
+              mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
+              echo "[Desktop Entry]"                                            > /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
+              echo "Name=electrum GUI"                                         >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
+              echo "Type=Application"                                          >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
+              echo "Exec=/home/$vUsuarioNoRoot/ElectrumRavencoin/electrum-env" >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
+              echo "Terminal=false"                                            >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
+              echo "Hidden=false"                                              >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
+              chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
+              gio set                               /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop "metadata::trusted" yes
 
           ;;
 
