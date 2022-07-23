@@ -18,6 +18,8 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-Electrum.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
+vUsuarioNoRoot=nipegun
+
 vColorAzul="\033[0;34m"
 vColorAzulClaro="\033[1;34m"
 vColorVerde='\033[1;32m'
