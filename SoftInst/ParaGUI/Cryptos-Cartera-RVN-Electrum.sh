@@ -225,7 +225,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
           echo "  Moviendo la app a la carpeta del usuario no-root..."
           echo ""
-          mv /root/ElectrumRavencoin/ /home/$vUsuarioNoRoot/
+          mv /root/ElectrumRavencoin/ /home/$vUsuarioNoRoot/ElectrumRavencoin/
           chmod $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
 
         ;;
