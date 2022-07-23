@@ -98,6 +98,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Borrar archivos de ejecuciones anteriores
     rm -rf /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
+    rm -rf /root/ElectrumRavencoin/ 2> /dev/null
 
   echo ""
   echo "  Determinando última versión del código fuente..."
@@ -158,7 +159,7 @@ elif [ $OS_VERS == "11" ]; then
   #apt-get -y install python3
   apt-get -y install python3-venv
   apt-get -y install cmake
-  #apt-get -y install python3-pip
+  apt-get -y install python3-pip
   #apt-get -y install python3-cryptography
   #apt-get -y install libsecp256k1-0
   #apt-get -y install python3-pyqt5
