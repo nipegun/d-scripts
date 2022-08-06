@@ -139,7 +139,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Instalando grub2 en $vDisposPen..."
   echo ""
-  grub-install --boot-directory=/Particiones/USB/PendriveGrub2/boot --efi-directory=/Particiones/USB/PendriveGrub2/usb --removable $vDisposPen
+  grub-install --boot-directory=/Particiones/USB/PendriveGrub2/boot --efi-directory=/Particiones/USB/PendriveGrub2 --removable $vDisposPen
 
 fi
 
