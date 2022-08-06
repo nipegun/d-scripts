@@ -107,12 +107,12 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}Iniciando el script de instalación de grub2 en pendrive desde Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
-  # Comprobar si el paquete grub está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s grub 2>/dev/null | grep installed) == "" ]]; then
+  # Comprobar si el paquete grub2 está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s grub2 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${vColorRojo}  grub no está instalado. Iniciando su instalación...${vFinColor}"
+      echo -e "${vColorRojo}  grub2 no está instalado. Iniciando su instalación...${vFinColor}"
       echo ""
-      apt-get -y update && apt-get -y install grub
+      apt-get -y update && apt-get -y install grub2
       echo ""
     fi
 
