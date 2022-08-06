@@ -136,6 +136,12 @@ elif [ $OS_VERS == "11" ]; then
   umount "$vDisposPen"1
   mount -t auto "$vDisposPen"1 /Particiones/USB/PendriveGrub2/
 
+
+  echo ""
+  echo "  Borrando archivos viejos de instalaciones anteriores..."
+  echo ""
+  rm -rf /Particiones/USB/PendriveGrub2/boot
+
   echo ""
   echo "  Instalando grub2 en $vDisposPen..."
   echo ""
