@@ -125,7 +125,17 @@ elif [ $OS_VERS == "11" ]; then
       echo ""
     fi
 
-  grub-install $vDisposPen --efi-directory=/mnt/usb --boot-directory=/mnt/usb/boot --removable
+  echo ""
+  echo "  Creando la carpeta para montar el pendrive..."
+  echo ""
+  mkdir -p /Particiones/USB/PendriveGrub2/ 2> /dev/null
+
+  echo ""
+  echo "  Montando la primera partición del pendrive en /Particiones/USB/PendriveGrub2/..."
+  echo ""
+  umount "$vDisposPen"1
+  mount -t auto "$vDisposPen"1 /Particiones/USB/PendriveGrub2/
+  grub-install $vDisposPen --boot-directory=/Particiones/USB/PendriveGrub2/boot --efi-directory=/Particiones/USB/PendriveGrub2/usb --removable
 
 fi
 
