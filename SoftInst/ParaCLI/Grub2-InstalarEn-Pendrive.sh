@@ -18,7 +18,7 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Grub2-InstalarEn-Pendrive.sh | bash -s Parámetro
 # ----------
 
-vDisposPen="/dev/sdf"
+vDisposPen="/dev/sdb"
 
 vColorAzul="\033[0;34m"
 vColorAzulClaro="\033[1;34m"
