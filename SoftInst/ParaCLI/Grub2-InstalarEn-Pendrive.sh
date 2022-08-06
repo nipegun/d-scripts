@@ -135,7 +135,11 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   umount "$vDisposPen"1
   mount -t auto "$vDisposPen"1 /Particiones/USB/PendriveGrub2/
-  grub-install $vDisposPen --boot-directory=/Particiones/USB/PendriveGrub2/boot --efi-directory=/Particiones/USB/PendriveGrub2/usb --removable
+
+  echo ""
+  echo "  Instalando grub2 en $vDisposPen..."
+  echo ""
+  grub-install --boot-directory=/Particiones/USB/PendriveGrub2/boot --efi-directory=/Particiones/USB/PendriveGrub2/usb --removable $vDisposPen
 
 fi
 
