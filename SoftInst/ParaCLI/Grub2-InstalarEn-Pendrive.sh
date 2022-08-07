@@ -181,6 +181,12 @@ elif [ $OS_VERS == "11" ]; then
   echo "  echo 'Apagando el sistema...'"                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  halt"                                                                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "}"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "if [ ${grub_platform} == 'efi' ]; then"                                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+	echo "  menuentry 'Configurar el firmware' {"                                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    fwsetup"                                                            >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+	echo "  }"                                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "fi"                                                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
 
 fi
 
