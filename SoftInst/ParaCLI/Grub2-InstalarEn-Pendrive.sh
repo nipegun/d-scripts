@@ -191,6 +191,15 @@ elif [ $OS_VERS == "11" ]; then
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  submenu 'BIOS/MBR Debian' {"                                              >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    menuentry 'Buscar e iniciar automáticamente' {"                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      echo 'Buscando automáticamente alguna instalación de Debian...'"      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      insmod ext2"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      set root='hd0,msdos3'"                                                >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      linux   /vmlinuz root=/dev/sda3 ro net.ifnames=0 biosdevname=0 quiet" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      initrd  /initrd.img"                                                  >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    menuentry 'Debian en /dev/sda3'{"                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      echo 'Iniciando el Debian instalado en /dev/sda3...'"                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
