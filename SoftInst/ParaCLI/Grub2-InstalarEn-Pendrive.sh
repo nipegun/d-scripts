@@ -116,15 +116,6 @@ elif [ $OS_VERS == "11" ]; then
       echo ""
     fi
 
-  # Comprobar si el paquete efibootmgr está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s efibootmgr 2>/dev/null | grep installed) == "" ]]; then
-      echo ""
-      echo -e "${vColorRojo}  efibootmgr no está instalado. Iniciando su instalación...${vFinColor}"
-      echo ""
-      apt-get -y update && apt-get -y install efibootmgr
-      echo ""
-    fi
-
   echo ""
   echo "  Creando la carpeta para montar el pendrive..."
   echo ""
@@ -135,7 +126,6 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   umount "$vDisposPen"1
   mount -t auto "$vDisposPen"1 /Particiones/USB/PendriveGrub2/
-
 
   echo ""
   echo "  Borrando archivos viejos de instalaciones anteriores..."
@@ -158,6 +148,14 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Instalando grub2 para EFI en $vDisposPen..."
   echo ""
   mkdir -p /Particiones/USB/PendriveGrub2/
+  # Comprobar si el paquete efibootmgr está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s efibootmgr 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${vColorRojo}  efibootmgr no está instalado. Iniciando su instalación...${vFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install efibootmgr
+      echo ""
+    fi
   grub-install $vDisposPen --debug --target=x86_64-efi --efi-directory=/Particiones/USB/PendriveGrub2 --bootloader-id=GRUB
 
   echo ""
@@ -165,12 +163,24 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   grub-mkconfig -o /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   
-  echo "menuentry 'Debian en /dev/sda3'"                                         > /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "menuentry 'Debian en /dev/sda3'{"                                        > /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  'Iniciando el Debian instalado en /dev/sda3...'"                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  insmod ext2"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  set root='hd0,msdos3'"                                                >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  linux   /vmlinuz root=/dev/sda3 ro net.ifnames=0 biosdevname=0 quiet" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  initrd  /initrd.img"                                                  >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "}"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "menuentry 'Reiniciar el sistema' {"                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  echo 'Reiniciando el sistema...'"                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  reboot"                                                               >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "}"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "menuentry 'Apagar el sistema' {"                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  echo 'Apagando el sistema...'"                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  halt"                                                                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "}"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
 
 fi
 
