@@ -149,9 +149,14 @@ elif [ $OS_VERS == "11" ]; then
   echo "(hd0) /dev/sda" > /Particiones/USB/PendriveGrub2/boot/grub/device.map
 
   echo ""
-  echo "  Instalando grub2 en $vDisposPen..."
+  echo "  Instalando grub2 para MBR en $vDisposPen..."
   echo ""
-  grub-install --debug --boot-directory=/Particiones/USB/PendriveGrub2/boot --efi-directory=/Particiones/USB/PendriveGrub2 --removable $vDisposPen
+  grub-install $vDisposPen --debug --target=i386-pc --boot-directory=/Particiones/USB/PendriveGrub2/boot
+
+  echo ""
+  echo "  Instalando grub2 para EFI en $vDisposPen..."
+  echo ""
+  grub-install $vDisposPen --debug --target=x86_64-efi  --efi-directory=/Particiones/USB/PendriveGrub2/EFI --bootloader-id=GRUB
 
   echo ""
   echo "  Creando el archivo grub.cfg..."
