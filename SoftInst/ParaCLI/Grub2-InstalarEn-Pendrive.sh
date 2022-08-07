@@ -153,7 +153,10 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   grub-install --debug --boot-directory=/Particiones/USB/PendriveGrub2/boot --efi-directory=/Particiones/USB/PendriveGrub2 --removable $vDisposPen
 
-
+  echo ""
+  echo "  Creando el archivo grub.cfg..."
+  echo ""
+  grub-mkconfig -o /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
 
 fi
 
