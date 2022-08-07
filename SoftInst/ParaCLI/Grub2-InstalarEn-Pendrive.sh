@@ -196,6 +196,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "      insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod ext2"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      set root='hd0,msdos3'"                                                >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      search --no-floppy --fs-uuid --set=root --hint-bios=hd0,msdos1 --hint-efi=hd0,msdos1" 
   echo "      linux   /vmlinuz root=/dev/sda3 ro net.ifnames=0 biosdevname=0 quiet" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      initrd  /initrd.img"                                                  >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
