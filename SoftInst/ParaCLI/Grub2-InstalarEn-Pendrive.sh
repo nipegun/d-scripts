@@ -160,7 +160,7 @@ elif [ $OS_VERS == "11" ]; then
       apt-get -y update && apt-get -y install efibootmgr
       echo ""
     fi
-  grub-install $vDisposPen --debug --target=x86_64-efi --efi-directory=/Particiones/USB/PendriveGrub2 --bootloader-id=GRUB
+  grub-install $vDisposPen --debug --target=x86_64-efi --efi-directory=/Particiones/USB/PendriveGrub2 --bootloader-id=GRUB --removable
 
   echo ""
   echo "  Creando el archivo grub.cfg..."
