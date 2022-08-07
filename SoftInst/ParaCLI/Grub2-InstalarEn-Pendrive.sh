@@ -191,12 +191,13 @@ elif [ $OS_VERS == "11" ]; then
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  submenu 'BIOS/MBR Debian' {"                                              >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    menuentry 'Autodetectar Debian' {"                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      echo 'Autodetectando Debian...'"                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    menuentry 'Autodetectar Debian e iniciarlo' {"                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      echo 'Autodetectando e iniciando Debian...'"                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      insmod ext2"                                                            >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      search --no-floppy --file /vmlinuz --set=root # --hint-bios=hd0,msdos1" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      linux root=/dev/sda3 /vmlinuz ro net.ifnames=0 biosdevname=0 quiet"   >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      insmod ext2"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      search --no-floppy --set=root --file /vmlinuz --hint-bios=hd0,msdos1" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      linux /vmlinuz ro net.ifnames=0 biosdevname=0 quiet"   >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      #linux root=/dev/sda3 /vmlinuz ro net.ifnames=0 biosdevname=0 quiet"   >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      initrd  /initrd.img"                                                  >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
