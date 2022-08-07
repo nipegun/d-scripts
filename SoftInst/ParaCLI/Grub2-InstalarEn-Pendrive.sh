@@ -169,7 +169,7 @@ elif [ $OS_VERS == "11" ]; then
   cp /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg.bak
   echo 'if [ ${grub_platform} == "pc" ]; then'                                       > /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  submenu 'BIOS/MBR Windows'"                                               >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  submenu 'BIOS/MBR Windows' {"                                             >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    menuentry 'Microsoft Windows XP' {"                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
@@ -189,7 +189,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  }"                                                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  submenu 'BIOS/MBR Debian'"                                                >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  submenu 'BIOS/MBR Debian' {"                                              >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    menuentry 'Debian en /dev/sda3'{"                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      echo 'Iniciando el Debian instalado en /dev/sda3...'"                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
@@ -202,7 +202,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  }"                                                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  submenu 'BIOS/MBR Ubuntu'"                                                >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  submenu 'BIOS/MBR Ubuntu' {"                                              >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    menuentry 'Ubuntu en /dev/sda4'{"                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      echo 'Iniciando el Debian instalado en /dev/sda4...'"                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
@@ -229,11 +229,24 @@ elif [ $OS_VERS == "11" ]; then
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo 'if [ ${grub_platform} == "efi" ]; then'                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  menuentry 'Configurar el firmware' {"                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  menuentry 'Configuración UEFI' {"                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    fwsetup"                                                                >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  }"                                                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  submenu 'Hackintosh'"                                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  submenu 'Windows' {"                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    menuentry 'Microsoft Windows Vista/7/8/8.1/10/11' {"                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      insmod part_gpt"                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      insmod fat"                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      insmod search_fs_uuid"                                                >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      insmod chain"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo '      search --fs-uuid --set=root $hints_string $fs_uuid'                   >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      chainloader /EFI/Microsoft/Boot/bootmgfw.efi"                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  }"                                                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  submenu 'Hackintosh' {"                                                   >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    menuentry 'BootLoader OpenCore' {"                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod fat"                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
@@ -242,15 +255,6 @@ elif [ $OS_VERS == "11" ]; then
   echo "      chainloader /EFI/OpenCore/opencore.efi"                               >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  }"                                                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  menuentry 'Microsoft Windows Vista/7/8/8.1/10/11 UEFI/GPT' {"             >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    insmod part_gpt"                                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    insmod fat"                                                             >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    insmod search_fs_uuid"                                                  >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    insmod chain"                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo '    search --fs-uuid --set=root $hints_string $fs_uuid'                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    chainloader /EFI/Microsoft/Boot/bootmgfw.efi"                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  }"                                                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "fi"                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
