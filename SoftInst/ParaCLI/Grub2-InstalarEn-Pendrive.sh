@@ -162,7 +162,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Creando el archivo grub.cfg..."
   echo ""
   grub-mkconfig -o /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-
+  cp /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg.bak
   echo 'if [ ${grub_platform} == "pc" ]; then'                                     > /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  menuentry 'Microsoft Windows XP' {"                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
