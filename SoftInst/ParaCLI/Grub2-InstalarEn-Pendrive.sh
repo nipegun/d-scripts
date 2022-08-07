@@ -166,7 +166,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Creando el archivo grub.cfg..."
   echo ""
   grub-mkconfig -o /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  cp /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg.bak
+  cp /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg.auto
   echo 'if [ ${grub_platform} == "pc" ]; then'                                       > /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  submenu 'BIOS/MBR Windows' {"                                             >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
