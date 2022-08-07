@@ -143,14 +143,17 @@ elif [ $OS_VERS == "11" ]; then
   rm -rf /Particiones/USB/PendriveGrub2/boot
 
   echo ""
+  echo "  Indicando que /dev/sda sea el primer disco..."
+  echo ""
+  mkdir -p /Particiones/USB/PendriveGrub2/boot/grub/
+  echo "(hd0) /dev/sda" > /Particiones/USB/PendriveGrub2/boot/grub/device.map
+
+  echo ""
   echo "  Instalando grub2 en $vDisposPen..."
   echo ""
   grub-install --debug --boot-directory=/Particiones/USB/PendriveGrub2/boot --efi-directory=/Particiones/USB/PendriveGrub2 --removable $vDisposPen
 
-  echo ""
-  echo "  Indicando que /dev/sda sea el primer disco..."
-  echo ""
-  #echo "(hd0) /dev/sda" > /Particiones/USB/PendriveGrub2/boot/grub/device.map
+
 
 fi
 
