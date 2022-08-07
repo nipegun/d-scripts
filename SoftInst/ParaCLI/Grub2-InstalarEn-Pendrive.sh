@@ -166,7 +166,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Creando el archivo grub.cfg..."
   echo ""
   grub-mkconfig -o /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  cp /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg.auto
+  cp /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg.bak
   echo 'if [ ${grub_platform} == "pc" ]; then'                                       > /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  submenu 'BIOS/MBR Windows' {"                                             >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
@@ -191,14 +191,12 @@ elif [ $OS_VERS == "11" ]; then
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  submenu 'BIOS/MBR Debian' {"                                              >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    menuentry 'Buscar e iniciar automáticamente' {"                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      echo 'Buscando automáticamente alguna instalación de Debian...'"      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    menuentry 'Autodetectar Debian' {"                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      echo 'Autodetectando Debian...'"                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod ext2"                                                            >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      search --no-floppy --file /vmlinuz --set=root # --hint-bios=hd0,msdos1" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      #set root='hd0,msdos1' # Donde buscar grub.cfg"                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      #linux   /vmlinuz root=/dev/sda3 ro net.ifnames=0 biosdevname=0 quiet" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      linux   /vmlinuz ro net.ifnames=0 biosdevname=0 quiet"                >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      linux root=/dev/sda3 /vmlinuz ro net.ifnames=0 biosdevname=0 quiet"   >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      initrd  /initrd.img"                                                  >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
