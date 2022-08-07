@@ -136,8 +136,12 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Indicando que /dev/sda sea el primer disco..."
   echo ""
   mkdir -p /Particiones/USB/PendriveGrub2/boot/grub/
-  echo "(hd0) /dev/sda" > /Particiones/USB/PendriveGrub2/boot/grub/device.map
-
+  echo "(hd0) /dev/sda"  > /Particiones/USB/PendriveGrub2/boot/grub/device.map
+  echo "(hd1) /dev/sdb" >> /Particiones/USB/PendriveGrub2/boot/grub/device.map
+  echo "(hd2) /dev/sdc" >> /Particiones/USB/PendriveGrub2/boot/grub/device.map
+  echo "(hd3) /dev/sdd" >> /Particiones/USB/PendriveGrub2/boot/grub/device.map
+  echo "(hd4) /dev/sde" >> /Particiones/USB/PendriveGrub2/boot/grub/device.map
+  
   echo ""
   echo "  Instalando grub2 para MBR en $vDisposPen..."
   echo ""
