@@ -173,7 +173,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "    ntldr /ntldr"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  menuentry ¡Microsoft Windows Vista/7/8/8.1/10/11 BIOS/MBR' {"           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  menuentry 'Microsoft Windows Vista/7/8/8.1/10/11 BIOS/MBR' {"           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    insmod ntfs"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    insmod ntldr"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
