@@ -221,11 +221,15 @@ elif [ $OS_VERS == "11" ]; then
   echo "    fwsetup"                                                              >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  menuentry 'OpenCore' {"                                                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    insmod fat"                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    insmod chain"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    search --no-floppy --set=root --file /EFI/OpenCore/opencore.efi"      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    chainloader /EFI/OpenCore/opencore.efi"                               >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  submenu 'Hackintosh'"                                                   >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    menuentry 'BootLoader OpenCore' {"                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      insmod fat"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      insmod chain"                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      search --no-floppy --set=root --file /EFI/OpenCore/opencore.efi"    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      chainloader /EFI/OpenCore/opencore.efi"                             >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    }"                                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  menuentry 'Microsoft Windows Vista/7/8/8.1/10/11 UEFI/GPT' {"           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
