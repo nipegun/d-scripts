@@ -162,51 +162,70 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Creando el archivo grub.cfg..."
   echo ""
   grub-mkconfig -o /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  
-  echo "menuentry 'Debian en /dev/sda3'{"                                        > /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  'Iniciando el Debian instalado en /dev/sda3...'"                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  insmod ext2"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  set root='hd0,msdos3'"                                                >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  linux   /vmlinuz root=/dev/sda3 ro net.ifnames=0 biosdevname=0 quiet" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  initrd  /initrd.img"                                                  >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "}"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo ""                                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "menuentry 'Reiniciar el sistema' {"                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  echo 'Reiniciando el sistema...'"                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  reboot"                                                               >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "}"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo ""                                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "menuentry 'Apagar el sistema' {"                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  echo 'Apagando el sistema...'"                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  halt"                                                                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "}"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo ""                                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "if [ ${grub_platform} == 'efi' ]; then"                                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo ""                                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  menuentry 'Configurar el firmware' {"                                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    fwsetup"                                                            >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  }"                                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo ""                                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  menuentry 'OpenCore' {"                                               >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    insmod fat"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    insmod chain"                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    search --no-floppy --set=root --file /EFI/OpenCore/opencore.efi"    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    chainloader /EFI/OpenCore/opencore.efi"                             >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  }"                                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo ""                                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "menuentry 'Microsoft Windows Vista/7/8/8.1/10/11 UEFI/GPT' {"           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  insmod part_gpt"                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  insmod fat"                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  insmod search_fs_uuid"                                                >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  insmod chain"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo '  search --fs-uuid --set=root $hints_string $fs_uuid'                   >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  chainloader /EFI/Microsoft/Boot/bootmgfw.efi"                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "}"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo ""                                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "fi"                                                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo ""                                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
 
+  echo 'if [ ${grub_platform} == "pc" ]; then'                                     > /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  menuentry 'Microsoft Windows XP' {"                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod ntfs"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod ntldr"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    search --no-floppy --fs-uuid --set=root --hint-bios=hd0,msdos1 --hint-efi=hd0,msdos1 --hint-baremetal=ahci0,msdos1 XXXXXXXXXXXXXXXX" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    ntldr /ntldr"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  menuentry ¡Microsoft Windows Vista/7/8/8.1/10/11 BIOS/MBR' {"           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod ntfs"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod ntldr"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    search --no-floppy --fs-uuid --set=root --hint-bios=hd0,msdos1 --hint-efi=hd0,msdos1 --hint-baremetal=ahci0,msdos1 XXXXXXXXXXXXXXXX" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    ntldr /bootmgr"                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  menuentry 'Debian en /dev/sda3'{"                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    'Iniciando el Debian instalado en /dev/sda3...'"                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod ext2"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    set root='hd0,msdos3'"                                                >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    linux   /vmlinuz root=/dev/sda3 ro net.ifnames=0 biosdevname=0 quiet" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    initrd  /initrd.img"                                                  >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  menuentry 'Reiniciar el sistema' {"                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    echo 'Reiniciando el sistema...'"                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    reboot"                                                               >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  menuentry 'Apagar el sistema' {"                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    echo 'Apagando el sistema...'"                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    halt"                                                                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "fi"                                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo 'if [ ${grub_platform} == "efi" ]; then'                                   >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  menuentry 'Configurar el firmware' {"                                   >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    fwsetup"                                                              >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  menuentry 'OpenCore' {"                                                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod fat"                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod chain"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    search --no-floppy --set=root --file /EFI/OpenCore/opencore.efi"      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    chainloader /EFI/OpenCore/opencore.efi"                               >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  menuentry 'Microsoft Windows Vista/7/8/8.1/10/11 UEFI/GPT' {"           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod part_gpt"                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod fat"                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod search_fs_uuid"                                                >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    insmod chain"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo '    search --fs-uuid --set=root $hints_string $fs_uuid'                   >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    chainloader /EFI/Microsoft/Boot/bootmgfw.efi"                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "fi"                                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
 
 fi
 
