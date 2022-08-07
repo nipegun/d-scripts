@@ -165,6 +165,8 @@ elif [ $OS_VERS == "11" ]; then
   cp /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg.bak
   echo 'if [ ${grub_platform} == "pc" ]; then'                                     > /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  echo 'Opciones de arranque para BIOS/MBR'"                              >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  menuentry 'Microsoft Windows XP' {"                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    insmod ntfs"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
@@ -182,7 +184,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "  }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  menuentry 'Debian en /dev/sda3'{"                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    'Iniciando el Debian instalado en /dev/sda3...'"                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    echo 'Iniciando el Debian instalado en /dev/sda3...'"                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    insmod ext2"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    set root='hd0,msdos3'"                                                >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
