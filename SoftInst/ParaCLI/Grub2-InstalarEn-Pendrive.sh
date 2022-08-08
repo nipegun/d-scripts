@@ -187,9 +187,10 @@ elif [ $OS_VERS == "11" ]; then
   echo "      ntldr /bootmgr"                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    menuentry 'Windows 11' --class windows --class os {"                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    # --class windows --class os"                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    menuentry 'Windows 11' {"                                               >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod ntfs"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      search --no-floppy --set=root --fs-uuid 09D82849069D194E"             >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      search --no-floppy --set=root --file /bootmgr"                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      ntldr /bootmgr"                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
