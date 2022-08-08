@@ -175,7 +175,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "      insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod ntfs"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod ntldr"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      search --no-floppy --fs-uuid --set=root --hint-bios=hd0,msdos1 --hint-efi=hd0,msdos1 --hint-baremetal=ahci0,msdos1 XXXXXXXXXXXXXXXX" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      search --no-floppy --set=root --file /ntldr"                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      ntldr /ntldr"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
@@ -183,12 +183,6 @@ elif [ $OS_VERS == "11" ]; then
   echo "      insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod ntfs"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod ntldr"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      search --no-floppy --set=root --file /bootmgr"                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      ntldr /bootmgr"                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    menuentry 'Windows 11' {"                                               >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      insmod ntfs"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      search --no-floppy --set=root --file /bootmgr"                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      ntldr /bootmgr"                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
