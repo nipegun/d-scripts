@@ -169,9 +169,9 @@ elif [ $OS_VERS == "11" ]; then
   cp /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg.bak
   echo 'if [ ${grub_platform} == "pc" ]; then'                                       > /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  submenu 'Iniciar versiones de Windows instaladas en BIOS/MBR' {"          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  submenu 'Bootear particiones con Windows' {"                              >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    menuentry 'Microsoft Windows XP' {"                                     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    menuentry 'Windows XP' {"                                               >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod ntfs"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod ntldr"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
@@ -179,11 +179,11 @@ elif [ $OS_VERS == "11" ]; then
   echo "      ntldr /ntldr"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "    menuentry 'Microsoft Windows Vista/7/8/8.1/10' {"                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "    menuentry 'Windows Vista/7/8/8.1/10/11' {"                              >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod part_msdos"                                                    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod ntfs"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod ntldr"                                                         >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "      search --no-floppy --fs-uuid --set=root --hint-bios=hd0,msdos1 --hint-efi=hd0,msdos1 --hint-baremetal=ahci0,msdos1 XXXXXXXXXXXXXXXX" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "      search --no-floppy --set=root --file /bootmgr"                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      ntldr /bootmgr"                                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
@@ -195,7 +195,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  }"                                                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  submenu 'Iniciar versiones de Debian instaladas en BIOS/MBR' {"           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  submenu 'Bootear particiones con Debian' {"                               >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    menuentry 'Autodetectar Debian e iniciarlo' {"                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      echo 'Autodetectando e iniciando Debian...'"                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
@@ -219,7 +219,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "  }"                                                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  submenu 'Iniciar versiones de Ubuntu instaladas en BIOS/MBR' {"           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  submenu 'Bootear particiones con Ubuntu' {"                               >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    menuentry 'Ubuntu en /dev/sda4'{"                                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      echo 'Iniciando el Debian instalado en /dev/sda4...'"                 >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
@@ -287,7 +287,9 @@ elif [ $OS_VERS == "11" ]; then
   echo "      chainloader /EFI/Ubuntu/grubx64.efi"                                  >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo "  }"                                                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfgecho "  submenu 'Lanzar bootloaders EFI para Hackintosh' {"                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  }"                                                                        >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo "  submenu 'Lanzar bootloaders EFI para Hackintosh' {"                       >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    menuentry 'BootLoader OpenCore' {"                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      insmod fat"                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
