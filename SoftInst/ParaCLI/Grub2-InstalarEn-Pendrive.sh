@@ -197,7 +197,8 @@ elif [ $OS_VERS == "11" ]; then
   echo "      insmod ext2"                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      search --no-floppy --set=root --file /vmlinuz --hint-bios=hd0,msdos1" >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo '      set dispo=set grub-probe --target=device /'                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
-  echo '      linux  /vmlinuz root=$dispo ro net.ifnames=0 biosdevname=0 quiet'     >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo '      echo $dispo'                                                          >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
+  echo '      linux  /vmlinuz root=${root} ro net.ifnames=0 biosdevname=0 quiet'    >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "      initrd /initrd.img"                                                   >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo "    }"                                                                      >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   echo ""                                                                           >> /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
