@@ -36,15 +36,15 @@ for i in {1..9}
         echo "  Generando la clave pública para el peer User$i"
         echo ""
         cat /root/WireGuard/WireGuardUser"$i"Private.key | wg pubkey > /root/WireGuard/WireGuardUser"$i"Public.key
-      # Agregar la configuración del nuevo peer a /etc/wireguard/wg0.conf
-        echo ""                                            >> /etc/wireguard/wg0.conf
-        echo "[Peer]"                                      >> /etc/wireguard/wg0.conf
-        echo "TempPublicKey ="                             >> /etc/wireguard/wg0.conf
-        echo "AllowedIPs = $vIPsClientes$i$vMascaraServer" >> /etc/wireguard/wg0.conf # Direcciones IPs que se le permiten pedir al cliente
-      # Agregar la clave pública del primer usuario al archivo de configuración
-        vClavePubNuevoUsuario=$(cat /root/WireGuard/WireGuardUser"$i"Public.key)
-        sed -i -e "s|TempPublicKey =|PublicKey = $vClavePubNuevoUsuario|g" /etc/wireguard/wg0.conf
       # Crear el archivo de configuración para el nuevo peer
+        # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+          if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+            echo ""
+            echo "  curl no está instalado. Iniciando su instalación..."
+            echo ""
+            apt-get -y update && apt-get -y install curl
+            echo ""
+          fi
         vPeerPrivateKey=$(cat /root/WireGuard/WireGuardUser"$i"Private.key)
         vSerPubKey=$(cat /root/WireGuard/WireGuardServerPublic.key)
         vServIPWAN=$(curl --silent ipinfo.io/ip)
@@ -58,6 +58,14 @@ for i in {1..9}
         echo "AllowedIPs = 0.0.0.0/0, ::/0"               >> /root/WireGuard/WireGuardUser"$i".conf
         echo "Endpoint = $vServIPWAN:51820"               >> /root/WireGuard/WireGuardUser"$i".conf
         echo "PersistentKeepalive = 30"                   >> /root/WireGuard/WireGuardUser"$i".conf
+      # Agregar la configuración del nuevo peer a /etc/wireguard/wg0.conf
+        echo ""                                            >> /etc/wireguard/wg0.conf
+        echo "[Peer]"                                      >> /etc/wireguard/wg0.conf
+        echo "TempPublicKey ="                             >> /etc/wireguard/wg0.conf
+        echo "AllowedIPs = $vIPsClientes$i$vMascaraServer" >> /etc/wireguard/wg0.conf # Direcciones IPs que se le permiten pedir al cliente
+      # Agregar la clave pública del primer usuario al archivo de configuración
+        vClavePubNuevoUsuario=$(cat /root/WireGuard/WireGuardUser"$i"Public.key)
+        sed -i -e "s|TempPublicKey =|PublicKey = $vClavePubNuevoUsuario|g" /etc/wireguard/wg0.conf
       # Crear el código QR para el nuevo peer
         # Comprobar si el paquete qrencode está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s qrencode 2>/dev/null | grep installed) == "" ]]; then
