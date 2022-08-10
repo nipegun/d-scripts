@@ -71,7 +71,7 @@ for i in {1..9}
         echo "  Generando el código QR para la conexión del peer User$i a partir del archivo /root/WireGuard/WireGuardUser$i.conf..."
         echo ""
         qrencode -t png -o /root/WireGuard/WireGuardUser"$i"QR.png -r /root/WireGuard/WireGuardUser"$i".conf
-        qrencode -t ansiutf8 < /root/WireGuard/WireGuardUser"$i".conf
+        cat /root/WireGuard/WireGuardUser"$i".conf | qrencode -t ansiutf8
       # Terminar el script
         exit
     fi
