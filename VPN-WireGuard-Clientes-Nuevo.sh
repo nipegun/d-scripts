@@ -31,7 +31,7 @@ for i in {1..9}
         echo ""
         echo "  Generando la clave privada para el peer User$i"
         echo ""
-        wg genkey >                                                    /root/WireGuard/WireGuardUser"$i"Private.key
+        wg genkey > /root/WireGuard/WireGuardUser"$i"Private.key
         echo ""
         echo "  Generando la clave pública para el peer User$i"
         echo ""
@@ -46,7 +46,7 @@ for i in {1..9}
             echo ""
           fi
         vPeerPrivateKey=$(cat /root/WireGuard/WireGuardUser"$i"Private.key)
-        vSerPubKey=$(cat /root/WireGuard/WireGuardServerPublic.key)
+        vServPubKey=$(cat /root/WireGuard/WireGuardServerPublic.key)
         vServIPWAN=$(curl --silent ipinfo.io/ip)
         echo "[Interface]"                                 > /root/WireGuard/WireGuardUser"$i".conf
         echo "PrivateKey = $vPeerPrivateKey"              >> /root/WireGuard/WireGuardUser"$i".conf
@@ -54,7 +54,7 @@ for i in {1..9}
         echo "DNS = 192.168.1.1"                          >> /root/WireGuard/WireGuardUser"$i".conf
         echo ""                                           >> /root/WireGuard/WireGuardUser"$i".conf
         echo "[Peer]"                                     >> /root/WireGuard/WireGuardUser"$i".conf
-        echo "PublicKey = $vSerPubKey"                    >> /root/WireGuard/WireGuardUser"$i".conf
+        echo "PublicKey = $vServPubKey"                   >> /root/WireGuard/WireGuardUser"$i".conf
         echo "AllowedIPs = 0.0.0.0/0, ::/0"               >> /root/WireGuard/WireGuardUser"$i".conf
         echo "Endpoint = $vServIPWAN:51820"               >> /root/WireGuard/WireGuardUser"$i".conf
         echo "PersistentKeepalive = 30"                   >> /root/WireGuard/WireGuardUser"$i".conf
