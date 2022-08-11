@@ -447,6 +447,14 @@ elif [ $OS_VERS == "11" ]; then
     sed -i -e "s|PrivateKey =|PrivateKey = $vServerPrivKey|g" /etc/wireguard/wg0.conf
 
   # Agregar las reglas para tener salida a Internet desde el servidor
+    # Comprobar si el paquete iptables está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s iptables 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${vColorRojo}  iptables no está instalado. Iniciando su instalación...${vFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install iptables
+        echo ""
+      fi
     iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT
