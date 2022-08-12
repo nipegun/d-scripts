@@ -38,7 +38,7 @@ for i in {1..9}
         cat /root/WireGuard/WireGuardUser"$i"Private.key | wg pubkey > /root/WireGuard/WireGuardUser"$i"Public.key
       # Agregar la sección de configuración del nuevo peer a /etc/wireguard/wg0.conf
         echo ""                                            >> /etc/wireguard/wg0.conf
-        echo '[Peer] # User"$i"'                           >> /etc/wireguard/wg0.conf
+        echo "[Peer]"                                      >> /etc/wireguard/wg0.conf
         echo "TempPublicKey ="                             >> /etc/wireguard/wg0.conf
         echo "AllowedIPs = $vIPsClientes$i$vMascaraServer" >> /etc/wireguard/wg0.conf # Direcciones IPs que se le permiten pedir al cliente
       # Agregar la clave pública del nuevo peer a su correspondiente sección de configuración
