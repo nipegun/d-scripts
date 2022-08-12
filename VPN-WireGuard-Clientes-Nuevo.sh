@@ -84,7 +84,7 @@ for i in {1..9}
         echo "PersistentKeepalive = 30"                   >> /root/WireGuard/WireGuardUser"$i".conf
       # Crear el código QR para el nuevo peer
         echo ""
-        echo "  Creando el código QR para el nuevo peer..."
+        echo "  Generando el código QR para la conexión del peer User$i a partir del archivo /root/WireGuard/WireGuardUser$i.conf..."
         echo ""
         # Comprobar si el paquete qrencode está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s qrencode 2>/dev/null | grep installed) == "" ]]; then
@@ -94,9 +94,6 @@ for i in {1..9}
             apt-get -y update && apt-get -y install qrencode
             echo ""
           fi
-        echo ""
-        echo "  Generando el código QR para la conexión del peer User$i a partir del archivo /root/WireGuard/WireGuardUser$i.conf..."
-        echo ""
         qrencode -t png -o /root/WireGuard/WireGuardUser"$i"QR.png -r /root/WireGuard/WireGuardUser"$i".conf
         cat /root/WireGuard/WireGuardUser"$i".conf | qrencode -t ansiutf8
       # Terminar el script
@@ -104,9 +101,7 @@ for i in {1..9}
     fi
   done
 
-
-
-
 # Otra forma de crear peers
 # ClavePúblicaDelNuevoCliente IPDelCliente 
 # wg set wg0 peer <Client Public Key> endpoint <Client IP address>:51820 allowed-ips 203.0.113.12/24,fd86:ea04:1115::5/64
+
