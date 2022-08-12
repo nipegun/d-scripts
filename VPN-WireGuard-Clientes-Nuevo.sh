@@ -29,16 +29,22 @@ for i in {1..9}
     else
       # Generar claves para el nuevo peer
         echo ""
-        echo "  Generando la clave privada para el peer User$i"
+        echo "  Generando la clave privada para el peer User$i..."
         echo ""
         wg genkey > /root/WireGuard/WireGuardUser"$i"Private.key
         echo ""
-        echo "  Generando la clave pública para el peer User$i"
+        echo "  Generando la clave pública para el peer User$i..."
         echo ""
         cat /root/WireGuard/WireGuardUser"$i"Private.key | wg pubkey > /root/WireGuard/WireGuardUser"$i"Public.key
       # Tirar la interfaz wg0
+        echo ""
+        echo "  Tirando la conexión wg0 antes de hacer los cambios en el archivo /etc/wireguard/wg0.conf..."
+        echo ""
         wg-quick down wg0
       # Agregar la sección de configuración del nuevo peer a /etc/wireguard/wg0.conf
+        echo ""
+        echo "  Agregando la sección de configuración del nuevo peer a /etc/wireguard/wg0.conf..."
+        echo ""
         echo ""                                            >> /etc/wireguard/wg0.conf
         echo "[Peer]"                                      >> /etc/wireguard/wg0.conf
         echo "TempPublicKey ="                             >> /etc/wireguard/wg0.conf
@@ -47,12 +53,18 @@ for i in {1..9}
         vClavePubNuevoPeer=$(cat /root/WireGuard/WireGuardUser"$i"Public.key)
         sed -i -e "s|TempPublicKey =|PublicKey = $vClavePubNuevoPeer|g" /etc/wireguard/wg0.conf
       # Levantar la interfaz wg0
+        echo ""
+        echo "  Levantando la conexión wg0, porque que los cambios en el archivo /etc/wireguard/wg0.conf ya se han realizado..."
+        echo ""
         wg-quick up wg0
-      # Crear el archivo de configuración del nuevo peer, para importalo en otros dispositivos
+      # Crear el archivo de configuración del nuevo peer para importalo en otros dispositivos
+        echo ""
+        echo "  Creando el archivo de configuración del nuevo peer para importalo en otros dispositivos..."
+        echo ""
         # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
             echo ""
-            echo "  curl no está instalado. Iniciando su instalación..."
+            echo "    curl no está instalado. Iniciando su instalación..."
             echo ""
             apt-get -y update && apt-get -y install curl
             echo ""
@@ -71,6 +83,9 @@ for i in {1..9}
         echo "Endpoint = $vServIPWAN:51820"               >> /root/WireGuard/WireGuardUser"$i".conf
         echo "PersistentKeepalive = 30"                   >> /root/WireGuard/WireGuardUser"$i".conf
       # Crear el código QR para el nuevo peer
+        echo ""
+        echo "  Creando el código QR para el nuevo peer..."
+        echo ""
         # Comprobar si el paquete qrencode está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s qrencode 2>/dev/null | grep installed) == "" ]]; then
             echo ""
