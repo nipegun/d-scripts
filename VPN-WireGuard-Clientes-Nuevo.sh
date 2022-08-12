@@ -36,6 +36,8 @@ for i in {1..9}
         echo "  Generando la clave pública para el peer User$i"
         echo ""
         cat /root/WireGuard/WireGuardUser"$i"Private.key | wg pubkey > /root/WireGuard/WireGuardUser"$i"Public.key
+      # Tirar la interfaz wg0
+        wg-quick down wg0
       # Agregar la sección de configuración del nuevo peer a /etc/wireguard/wg0.conf
         echo ""                                            >> /etc/wireguard/wg0.conf
         echo "[Peer]"                                      >> /etc/wireguard/wg0.conf
@@ -44,7 +46,8 @@ for i in {1..9}
       # Agregar la clave pública del nuevo peer a su correspondiente sección de configuración
         vClavePubNuevoPeer=$(cat /root/WireGuard/WireGuardUser"$i"Public.key)
         sed -i -e "s|TempPublicKey =|PublicKey = $vClavePubNuevoPeer|g" /etc/wireguard/wg0.conf
-
+      # Levantar la interfaz wg0
+        wg-quick up wg0
       # Crear el archivo de configuración del nuevo peer, para importalo en otros dispositivos
         # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
