@@ -132,61 +132,60 @@ elif [ $OS_VERS == "11" ]; then
               echo -e "${ColorVerde}  Instalando Utopia Messenger en ubicación por defecto...${FinColor}"
               echo ""
 
-              ## Crear carpeta de descarga
-                 echo ""
-                 echo "  Creando carpeta de descarga..."
-                 echo ""
-                 mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
-                 rm -rf /root/SoftInst/Cryptos/CRP/*
+              # Crear carpeta de descarga
+                echo ""
+                echo "  Creando carpeta de descarga..."
+                echo ""
+                mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
+                rm -rf /root/SoftInst/Cryptos/CRP/*
 
-              ## Descargar y descomprimir todos los archivos
-                 echo ""
-                 echo "  Descargando el paquete .deb de la instalación..."
-                 echo ""
-                 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-                    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-                      echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."
-                      echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
-                      echo ""
-                    fi
-                 cd /root/SoftInst/Cryptos/CRP/
-                 wget https://update.u.is/downloads/linux/utopia-latest.amd64.deb
+              # Descargar y descomprimir todos los archivos
+                echo ""
+                echo "  Descargando el paquete .deb de la instalación..."
+                echo ""
+                # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                     echo ""
+                     echo "  wget no está instalado. Iniciando su instalación..."
+                     echo ""
+                     apt-get -y update && apt-get -y install wget
+                     echo ""
+                   fi
+                cd /root/SoftInst/Cryptos/CRP/
+                wget https://update.u.is/downloads/linux/utopia-latest.amd64.deb
 
-              ## Instalar dependencias
-                 echo ""
-                 echo "  Instalando dependencias..."
-                 echo ""
+              # Instalar dependencias
+                echo ""
+                echo "  Instalando dependencias..."
+                echo ""
 
-                 ## Actualizar cache de paquetes
-                    apt-get -y update
+                # Actualizar cache de paquetes
+                  apt-get -y update
 
-                 ## libxcb
-                    apt-get -y install libxcb-icccm4
-                    apt-get -y install libxcb-image0
-                    apt-get -y install libxcb-keysyms1
-                    apt-get -y install libxcb-randr0
-                    apt-get -y install libxcb-render-util0
-                    apt-get -y install libxcb-xinerama0
-                    apt-get -y install libxcb-xkb1
-                    apt-get -y install libxcb-xinput0
-                    apt-get -y install libxkbcommon-x11-0
+                # libxcb
+                  apt-get -y install libxcb-icccm4
+                  apt-get -y install libxcb-image0
+                  apt-get -y install libxcb-keysyms1
+                  apt-get -y install libxcb-randr0
+                  apt-get -y install libxcb-render-util0
+                  apt-get -y install libxcb-xinerama0
+                  apt-get -y install libxcb-xkb1
+                  apt-get -y install libxcb-xinput0
+                  apt-get -y install libxkbcommon-x11-0
 
-              ## Instalar paquete .deb
-                 echo ""
-                 echo "  Instalando paquete .deb..."
-                 echo ""
-                 dpkg -i /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
+              # Instalar paquete .deb
+                echo ""
+                echo "  Instalando paquete .deb..."
+                echo ""
+                dpkg -i /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
 
-              ## Fin de la ejecución del script
-                 echo ""
-                 echo "  Ejecución del script, finalizada."
-                 echo ""
-                 echo "  Si en algún momento quieres desinstalarlo, ejecuta:"
-                 echo "  dpkg -r utopia"
-                 echo ""
+              # Fin de la ejecución del script
+                echo ""
+                echo "  Ejecución del script, finalizada."
+                echo ""
+                echo "  Si en algún momento quieres desinstalarlo, ejecuta:"
+                echo "  dpkg -r utopia"
+                echo ""
 
             ;;
 
@@ -362,8 +361,47 @@ elif [ $OS_VERS == "11" ]; then
             3)
 
               echo ""
-              echo -e "${ColorVerde}  .${FinColor}"
+              echo -e "${ColorVerde}  Actualizando Utopia Messenger en su ubicación por defecto...${FinColor}"
               echo ""
+
+              # Desinstalar paquete .deb viejo
+                echo ""
+                echo "  Desinstalando paquete .deb viejo..."
+                echo ""
+                apt-get -y remove utopia
+
+              # Crear carpeta de descarga
+                echo ""
+                echo "  Creando carpeta de descarga..."
+                echo ""
+                mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
+                rm -rf /root/SoftInst/Cryptos/CRP/*
+
+              # Descargar y descomprimir todos los archivos
+                echo ""
+                echo "  Descargando el paquete .deb de la instalación..."
+                echo ""
+                # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                     echo ""
+                     echo "  wget no está instalado. Iniciando su instalación..."
+                     echo ""
+                     apt-get -y update && apt-get -y install wget
+                     echo ""
+                   fi
+                cd /root/SoftInst/Cryptos/CRP/
+                wget https://update.u.is/downloads/linux/utopia-latest.amd64.deb
+
+              # Instalar paquete .deb
+                echo ""
+                echo "  Instalando paquete .deb..."
+                echo ""
+                dpkg -i /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
+
+              # Fin de la ejecución del script
+                echo ""
+                echo "  Ejecución del script, finalizada."
+                echo ""
 
             ;;
 
