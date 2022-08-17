@@ -113,10 +113,12 @@ elif [ $OS_VERS == "11" ]; then
        echo ""
      fi
   menu=(dialog --timeout 5 --checklist "¿Donde quieres instalar Utopia Messenger?:" 22 76 16)
-    opciones=(1 "Instalar en ubicación por defecto" off
-              2 "Instalar en ubicación personalizada" off
-              3 "Todavía no disponible" off
-              4 "Todavía no disponible" off)
+    opciones=(
+      1 "Instalar en ubicación por defecto (dpkg -i)." off
+      2 "Instalar en la carpeta del usuario no root." off
+      3 "Actualizar el messenger para el root (No disponible)." off
+      4 "Actualizar el messenger para el usuario no root." off
+    )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
@@ -371,6 +373,92 @@ elif [ $OS_VERS == "11" ]; then
               echo -e "${ColorVerde}  .${FinColor}"
               echo ""
 
+              # Crear carpeta de descarga
+                echo ""
+                echo "  Creando carpeta de descarga..."
+                echo ""
+                mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
+                rm -rf /root/SoftInst/Cryptos/CRP/*
+
+              # Descargar y descomprimir todos los archivos
+                echo ""
+                echo "  Descargando el paquete .deb de la instalación..."
+                echo ""
+                # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo "  wget no está instalado. Iniciando su instalación..."
+                    echo ""
+                    apt-get -y update && apt-get -y install wget
+                    echo ""
+                  fi
+                cd /root/SoftInst/Cryptos/CRP/
+                wget https://update.u.is/downloads/linux/utopia-latest.amd64.deb
+
+                echo ""
+                echo "  Extrayendo los archivos de dentro del paquete .deb..."
+                echo ""
+                # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo "  binutils no está instalado. Iniciando su instalación..."
+                    echo ""
+                    apt-get -y update && apt-get -y install binutils
+                    echo ""
+                  fi
+                ar xv /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
+
+                echo ""
+                echo "  Descomprimiendo el archivo data.tar.xz..."
+                echo ""
+                # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo "  tar no está instalado. Iniciando su instalación..."
+                    echo ""
+                    apt-get -y update && apt-get -y install tar
+                    echo ""
+                  fi
+                tar xfv /root/SoftInst/Cryptos/CRP/data.tar.xz
+                echo ""
+
+                # Crear la carpeta para el usuario no root
+                  echo ""
+                  echo "  Creando la carpeta para el usuario no root..."
+                  echo ""
+                  rm -rf /home/$UsuarioNoRoot/Cryptos/CRP/messenger/ 2> /dev/null
+                  mkdir -p /home/$UsuarioNoRoot/Cryptos/CRP/ 2> /dev/null
+                  mv /root/SoftInst/Cryptos/CRP/opt/utopia/* /home/$UsuarioNoRoot/Cryptos/CRP/messenger/
+                  mkdir -p /home/$UsuarioNoRoot/Cryptos/CRP/container/ 2> /dev/null
+                  #rm -rf   "/home/$UsuarioNoRoot/.local/share/Utopia/Utopia Client/"
+                  #mkdir -p "/home/$UsuarioNoRoot/.local/share/Utopia/Utopia Client/" 2> /dev/null
+                  #echo "[General]"          > "/home/$UsuarioNoRoot/.local/share/Utopia/Utopia Client/messenger.ini"
+                  #echo "languageCode=1034" >> "/home/$UsuarioNoRoot/.local/share/Utopia/Utopia Client/messenger.ini"
+                  rm -f /home/$UsuarioNoRoot/Cryptos/CRP/messenger/package.json
+                  rm -f /home/$UsuarioNoRoot/Cryptos/CRP/messenger/version
+
+                # Reparar permisos
+                  echo ""
+                  echo "  Reparando permisos..."
+                  echo ""
+                  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/
+                  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/CRP/ -R
+                  #find /home/$UsuarioNoRoot/Cryptos/CRP/ -type d -exec chmod 750 {} \;
+                  #find /home/$UsuarioNoRoot/Cryptos/CRP/ -type f -iname "*.sh" -exec chmod +x {} \;
+                  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.local/share/applications/ -R
+                  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.config/autostart/ -R
+
+                echo ""
+                echo "  Para debuggear la utilización de los plugins de qt, antes de abrir el messenger, ejecuta:"
+                echo ""
+                echo "export QT_DEBUG_PLUGINS=1"
+                echo ""
+
+                echo ""
+                echo "  Para corregir la ubicación de las liberías ejecuta:"
+                echo ""
+                echo "export LD_LIBRARY_PATH=/home/$UsuarioNoRoot/Cryptos/CRP/messenger/lib"
+                echo ""
             ;;
         
           esac
