@@ -336,6 +336,7 @@ elif [ $OS_VERS == "11" ]; then
                   echo ""
                   echo "  Reparando permisos..."
                   echo ""
+                  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/
                   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/CRP/ -R
                   #find /home/$UsuarioNoRoot/Cryptos/CRP/ -type d -exec chmod 750 {} \;
                   #find /home/$UsuarioNoRoot/Cryptos/CRP/ -type f -iname "*.sh" -exec chmod +x {} \;
