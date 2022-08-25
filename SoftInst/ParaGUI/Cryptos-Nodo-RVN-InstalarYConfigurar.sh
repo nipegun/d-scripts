@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para instalar y configurar la cadena de bloques de Chia (XCH)
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-RVN-InstalarYConfigurar.sh | bash
-#--------------------------------------------------------------------------------------------------------------------------------------
+# ----------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -27,16 +27,15 @@ echo ""
 echo ""
 echo "  Determinando la última versión de raven core..."
 echo ""
-## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  curl no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install curl
-     echo ""
-   fi
-UltVersRaven=$(curl --silent -L https://github.com/RavenProject/Ravencoin/releases/latest | grep inux | grep href | grep -v isable | cut -d'"' -f2 | cut -d '/' -f 6 | cut -c2-)
+# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "  curl no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update && apt-get -y install curl
+    echo ""
+  fi
+UltVersRaven=$(curl --silent -L https://github.com/RavenProject/Ravencoin/releases/latest | grep inux | grep href | grep -v isable | cut -d'"' -f2 | cut -d '/' -f 6 | cut -c2- | head -n1)
 echo ""
 echo "  La última versión de raven es la $UltVersRaven"
 echo ""
@@ -47,49 +46,49 @@ echo ""
 mkdir -p /root/SoftInst/Cryptos/RVN/ 2> /dev/null
 rm -rf /root/SoftInst/Cryptos/RVN/*
 cd /root/SoftInst/Cryptos/RVN/
-## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  wget no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install wget
-     echo ""
-   fi
-echo ""
-echo "  Pidiendo el archivo en formato zip..."
-echo ""
-wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.zip
+# Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "  wget no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update && apt-get -y install wget
+    echo ""
+  fi
+#echo ""
+#echo "  Pidiendo el archivo en formato zip..."
+#echo ""
+#wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.zip
+
 echo ""
 echo "  Pidiendo el archivo en formato tar.gz..."
 echo ""
 wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+
 echo ""
 echo "  Descomprimiendo el archivo..."
 echo ""
 ## Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  zip no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install zip
-     echo ""
-   fi
-unzip /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.zip
-mv /root/SoftInst/Cryptos/RVN/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Cryptos/RVN/
-rm -rf /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.zip
-rm -rf /root/SoftInst/Cryptos/RVN/linux/
-rm -rf /root/SoftInst/Cryptos/RVN/__MACOSX/
-## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  tar no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install tar
-     echo ""
-   fi
+#  if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
+#    echo ""
+#    echo "  zip no está instalado. Iniciando su instalación..."
+#    echo ""
+#    apt-get -y update && apt-get -y install zip
+#    echo ""
+#  fi
+#unzip /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.zip
+#mv /root/SoftInst/Cryptos/RVN/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Cryptos/RVN/
+#rm -rf /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.zip
+#rm -rf /root/SoftInst/Cryptos/RVN/linux/
+#rm -rf /root/SoftInst/Cryptos/RVN/__MACOSX/
+
+# Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "  tar no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update && apt-get -y install tar
+    echo ""
+  fi
 tar -xf /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
 rm -rf /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
 
@@ -181,4 +180,3 @@ find /home/$UsuarioNoRoot/Cryptos/RVN/bin -type f -exec chmod +x {} \;
 # Parar el daemon
   chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/rvn-daemon-parar.sh
   su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/rvn-daemon-parar.sh"
-
