@@ -77,7 +77,7 @@ echo ""
   fi
 tar -xf /root/SoftInst/Cryptos/RVN/$vNombreArchivo
 rm -rf /root/SoftInst/Cryptos/RVN/$vNombreArchivo
-find /root/SoftInst/Cryptos/RVN/ -type d -exec mv {} /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven/
+find /root/SoftInst/Cryptos/RVN/ -type d -exec mv {} /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven/ \;
 
 echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."
