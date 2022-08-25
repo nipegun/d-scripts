@@ -41,7 +41,15 @@ echo "  La última versión de raven es la $UltVersRaven"
 echo ""
 
 echo ""
-echo "  Intentando descargar el archivo comprimido de la última versión..."
+echo "  Determinando el nombre del archivo tar de la versión $UltVersRaven..."
+echo ""
+vNombreArchivo=$(curl -sL https://github.com/RavenProject/Ravencoin/releases/latest/ | grep href | grep inux | grep -v isable | grep x86 | cut -d'"' -f2 | cut -d '/' -f7)
+echo ""
+echo "    El nombre del archivo es $vNombreArchivo"
+echo ""
+
+echo ""
+echo "  Intentando descargar el archivo..."
 echo ""
 mkdir -p /root/SoftInst/Cryptos/RVN/ 2> /dev/null
 rm -rf /root/SoftInst/Cryptos/RVN/*
@@ -54,33 +62,11 @@ cd /root/SoftInst/Cryptos/RVN/
     apt-get -y update && apt-get -y install wget
     echo ""
   fi
-#echo ""
-#echo "  Pidiendo el archivo en formato zip..."
-#echo ""
-#wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.zip
-
-echo ""
-echo "  Pidiendo el archivo en formato tar.gz..."
-echo ""
-wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+wget https://github.com/RavenProject/Ravencoin/releases/download/v$UltVersRaven/$vNombreArchivo
 
 echo ""
 echo "  Descomprimiendo el archivo..."
 echo ""
-## Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
-#  if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
-#    echo ""
-#    echo "  zip no está instalado. Iniciando su instalación..."
-#    echo ""
-#    apt-get -y update && apt-get -y install zip
-#    echo ""
-#  fi
-#unzip /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.zip
-#mv /root/SoftInst/Cryptos/RVN/linux/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz /root/SoftInst/Cryptos/RVN/
-#rm -rf /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.zip
-#rm -rf /root/SoftInst/Cryptos/RVN/linux/
-#rm -rf /root/SoftInst/Cryptos/RVN/__MACOSX/
-
 # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
     echo ""
@@ -89,8 +75,8 @@ echo ""
     apt-get -y update && apt-get -y install tar
     echo ""
   fi
-tar -xf /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
-rm -rf /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven-x86_64-linux-gnu.tar.gz
+tar -xf /root/SoftInst/Cryptos/RVN/$vNombreArchivo
+rm -rf /root/SoftInst/Cryptos/RVN/$vNombreArchivo
 
 echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."
