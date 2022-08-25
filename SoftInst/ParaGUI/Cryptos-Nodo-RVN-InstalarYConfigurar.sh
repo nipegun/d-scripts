@@ -83,7 +83,7 @@ echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."
 echo ""
 mkdir -p /home/$UsuarioNoRoot/.raven/
-touch /home/$UsuarioNoRoot/.raven/raven.conf
+touch    /home/$UsuarioNoRoot/.raven/raven.conf
 echo "rpcuser=rvnrpc"           > /home/$UsuarioNoRoot/.raven/raven.conf
 echo "rpcpassword=rvnrpcpass"  >> /home/$UsuarioNoRoot/.raven/raven.conf
 echo "rpcallowip=127.0.0.1"    >> /home/$UsuarioNoRoot/.raven/raven.conf
@@ -94,9 +94,9 @@ echo "listen=1"                >> /home/$UsuarioNoRoot/.raven/raven.conf
 echo "prune=550"               >> /home/$UsuarioNoRoot/.raven/raven.conf
 echo "daemon=1"                >> /home/$UsuarioNoRoot/.raven/raven.conf
 echo "gen=0"                   >> /home/$UsuarioNoRoot/.raven/raven.conf
-rm -rf /home/$UsuarioNoRoot/Cryptos/RVN/
+rm -rf   /home/$UsuarioNoRoot/Cryptos/RVN/
 mkdir -p /home/$UsuarioNoRoot/Cryptos/RVN/ 2> /dev/null
-mv /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven/ /home/$UsuarioNoRoot/Cryptos/RVN/
+mv /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven/* /home/$UsuarioNoRoot/Cryptos/RVN/
 chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/RVN/ -R
 find /home/$UsuarioNoRoot/Cryptos/RVN/ -type d -exec chmod 775 {} \;
 find /home/$UsuarioNoRoot/Cryptos/RVN/ -type f -exec chmod 664 {} \;
