@@ -37,7 +37,7 @@ echo ""
   fi
 UltVersRaven=$(curl --silent -L https://github.com/RavenProject/Ravencoin/releases/latest | grep inux | grep href | grep -v isable | cut -d'"' -f2 | cut -d '/' -f 6 | cut -c2- | head -n1)
 echo ""
-echo "  La última versión de raven es la $UltVersRaven"
+echo "    La última versión de raven es la $UltVersRaven"
 echo ""
 
 echo ""
@@ -77,6 +77,7 @@ echo ""
   fi
 tar -xf /root/SoftInst/Cryptos/RVN/$vNombreArchivo
 rm -rf /root/SoftInst/Cryptos/RVN/$vNombreArchivo
+find /root/SoftInst/Cryptos/RVN/ -type d -exec mv {} /root/SoftInst/Cryptos/RVN/raven-$UltVersRaven/
 
 echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."
