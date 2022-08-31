@@ -218,5 +218,137 @@ elif [ $OS_VERS == "11" ]; then
       sed -i 's+include conf.d+include /etc/nginx/conf.d+g' "$NGINX_CONF"
     done
 
+  # Copiar archivos runtime
+    echo ""
+    echo "  Copiando archivos runtime..."
+    echo ""
+    mkdir -p /var/www/html
+    mkdir -p /etc/nginx/logs
+    cp -r docker/rootfs/var/www/html/*                   /var/www/html/
+    cp -r docker/rootfs/etc/nginx/*                      /etc/nginx/
+    cp docker/rootfs/etc/letsencrypt.ini                 /etc/letsencrypt.ini
+    cp docker/rootfs/etc/logrotate.d/nginx-proxy-manager /etc/logrotate.d/nginx-proxy-manager
+    ln -sf /etc/nginx/nginx.conf /etc/nginx/conf/nginx.conf
+    rm -f /etc/nginx/conf.d/dev.conf
+
+  # Crear las carpetas requeridas
+    echo ""
+    echo "  Creando las carpetas requeridas..."
+    echo ""
+    mkdir -p /tmp/nginx/body
+    mkdir -p /run/nginx
+    mkdir -p /data/nginx
+    mkdir -p /data/custom_ssl
+    mkdir -p /data/logs
+    mkdir -p /data/access
+    mkdir -p /data/nginx/default_host
+    mkdir -p /data/nginx/default_www
+    mkdir -p /data/nginx/proxy_host
+    mkdir -p /data/nginx/redirection_host
+    mkdir -p /data/nginx/stream
+    mkdir -p /data/nginx/dead_host
+    mkdir -p /data/nginx/temp
+    mkdir -p /var/lib/nginx/cache/public
+    mkdir -p /var/lib/nginx/cache/private
+    mkdir -p /var/cache/nginx/proxy_temp
+
+  chmod -R 777 /var/cache/nginx
+  chown root /tmp/nginx
+
+  # Dynamically generate resolvers file, if resolver is IPv6, enclose in `[]`
+    echo resolver "$(awk 'BEGIN{ORS=" "} $1=="nameserver" {print ($2 ~ ":")? "["$2"]": $2}' /etc/resolv.conf);" > /etc/nginx/conf.d/include/resolvers.conf
+
+  # Generate dummy self-signed certificate.
+    if [ ! -f /data/nginx/dummycert.pem ] || [ ! -f /data/nginx/dummykey.pem ]; then
+      echo ""
+      echo "  Generando el certificado SSL dummy..."
+      echo ""
+      openssl req -new -newkey rsa:2048 -days 3650 -nodes -x509 -subj "/O=Nginx Proxy Manager/OU=Dummy Certificate/CN=localhost" -keyout /data/nginx/dummykey.pem -out /data/nginx/dummycert.pem
+    fi
+
+  # Copy app files
+    echo ""
+    echo "  Copiando los archivos de aplicación..."
+    echo ""
+    mkdir -p /app/global
+    mkdir -p /app/frontend/images
+    cp -r backend/* /app
+    cp -r global/* /app/global
+
+  # Build the frontend
+    echo ""
+    echo "  Construyendo el frontend.."
+    echo ""
+    cd ./frontend
+    export NODE_ENV=development
+    yarn install --network-timeout=30000
+    yarn build
+    cp -r dist/* /app/frontend
+    cp -r app-images/* /app/frontend/images
+
+  # Inicializar backend
+    echo ""
+    echo "  Inicializando backend..."
+    echo ""
+    rm -rf /app/config/default.json
+    if [ ! -f /app/config/production.json ]; then
+      echo '{'                                           > /app/config/production.json
+      echo '  "database": {'                            >> /app/config/production.json
+      echo '    "engine": "knex-native",'                >> /app/config/production.json
+      echo '    "knex": {'                               >> /app/config/production.json
+      echo '      "client": "sqlite3",'                  >> /app/config/production.json
+      echo '      "connection": {'                       >> /app/config/production.json
+      echo '        "filename": "/data/database.sqlite"' >> /app/config/production.json
+      echo '      }'                                     >> /app/config/production.json
+      echo '    }'                                       >> /app/config/production.json
+      echo '  }'                                         >> /app/config/production.json
+      echo '}'                                           >> /app/config/production.json
+    fi
+    cd /app
+    export NODE_ENV=development
+    yarn install --network-timeout=30000
+
+  # Crear el servicio NPM
+    echo ""
+    echo "  Creando el servicio npm..."
+    echo ""
+    echo "[Unit]"                                                                                   > /lib/systemd/system/npm.service
+    echo "Description=Nginx Proxy Manager"                                                         >> /lib/systemd/system/npm.service
+    echo "After=network.target"                                                                    >> /lib/systemd/system/npm.service
+    echo "Wants=openresty.service"                                                                 >> /lib/systemd/system/npm.service
+    echo ""                                                                                        >> /lib/systemd/system/npm.service
+    echo "[Service]"                                                                               >> /lib/systemd/system/npm.service
+    echo "Type=simple"                                                                             >> /lib/systemd/system/npm.service
+    echo "Environment=NODE_ENV=production"                                                         >> /lib/systemd/system/npm.service
+    echo "ExecStartPre=-/bin/mkdir -p /tmp/nginx/body /data/letsencrypt-acme-challenge"            >> /lib/systemd/system/npm.service
+    echo "ExecStart=/usr/bin/node index.js --abort_on_uncaught_exception --max_old_space_size=250" >> /lib/systemd/system/npm.service
+    echo "WorkingDirectory=/app"                                                                   >> /lib/systemd/system/npm.service
+    echo "Restart=on-failure"                                                                      >> /lib/systemd/system/npm.service
+    echo ""                                                                                        >> /lib/systemd/system/npm.service
+    echo "[Install]"                                                                               >> /lib/systemd/system/npm.service
+    echo "WantedBy=multi-user.target"                                                              >> /lib/systemd/system/npm.service
+    systemctl daemon-reload
+    systemctl enable npm
+
+  # Arrancar servicios
+    echo ""
+    echo "  Arrancando servicios..."
+    echo ""
+    systemctl start openresty
+    systemctl start npm
+
+  # Mostrar mensaje final
+    vIPLocal=$(hostname -I | cut -f1 -d ' ')
+    echo ""
+    echo "  Instalación completa."
+    echo ""
+    echo "  Para conectarte a NPM accede a: http://${vIPLocal}:81"
+    echo ""
+    echo "  El mail por defecto es: admin@example.com"
+    echo "  La contraseña por defecto es: changeme"
+    echo ""
+    echo "  La primera vez que te conectes te pedirá que los cambies."
+    echo ""
+
 fi
 
