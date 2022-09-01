@@ -267,9 +267,7 @@ elif [ $OS_VERS == "11" ]; then
         echo "add_header X-Content-Type-Options nosniff;"                                  >> /etc/nginx/snippets/ssl-params.conf
         echo "ssl_dhparam /etc/ssl/certs/dhparam.pem;"                                     >> /etc/nginx/snippets/ssl-params.conf
 
-        sed -i -e 's|#listen 443 ssl default_server;|listen 443 ssl default_server;|g'                                               /etc/nginx/sites-available/default
-        sed -i -e 's|#listen [::]:443 ssl default_server;|listen [::]:443 ssl default_server;\ninclude snippets/self-signed.conf;|g' /etc/nginx/sites-available/default
-        sed -i -e 's|#include snippets/self-signed.conf;|include snippets/self-signed.conf;\ninclude snippets/ssl-params.conf;|g'    /etc/nginx/sites-available/default
+        sed -i -e 's|SSL configuration|SSL configuration\nlisten 443 ssl default_server;\nlisten [::]:443 ssl default_server;\ninclude snippets/self-signed.conf;\ninclude snippets/ssl-params.conf;|g' /etc/nginx/sites-available/default
 
       ;;
 
