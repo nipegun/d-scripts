@@ -29,12 +29,22 @@ if [ $# -ne $ArgumentosEsperados ]
     echo ""
     exit $ArgumentosInsuficientes
   else
+    # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${vColorRojo}dialog no está instalado. Iniciando su instalación...${vFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install dialog
+        echo ""
+      fi
     cmd=(dialog --checklist "Opciones del script:" 22 76 16)
-    options=(1 "Crear el usuario" on
-             2 "Crear la carpeta del usuario con permisos estándar usuario" on
-             3 "Denegar el acceso a la carpeta de usuario a otros usuarios" off
-             4 "Compartir la carpeta de usuario mediante Samba" off
-             5 "Otras opciones" off)
+    options=(
+      1 "Crear el usuario" on
+      2 "Crear la carpeta del usuario con permisos estándar usuario" on
+      3 "Denegar el acceso a la carpeta de usuario a otros usuarios" off
+      4 "Compartir la carpeta de usuario mediante Samba" off
+      5 "Otras opciones" off
+    )
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices
