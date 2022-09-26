@@ -86,8 +86,9 @@ elif [ $OS_VERS == "10" ]; then
   echo "------------------------------------------------------------------------------"
   echo ""
 
-  apt-get update
-  apt-get -y install gdebi wget
+  apt-get -y update
+  apt-get -y install gdebi
+  apt-get -y install wget
   mkdir -p /root/SoftInst/Discord
   wget -q --no-check-certificate -O /root/SoftInst/Discord/discord.deb https://discordapp.com/api/download?platform=linux&format=deb
   apt-get -y install libappindicator1
@@ -101,9 +102,13 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+  apt-get -y update
+  apt-get -y install gdebi
+  apt-get -y install wget
+  mkdir -p /root/SoftInst/Discord
+  wget -q --no-check-certificate -O /root/SoftInst/Discord/discord.deb https://discordapp.com/api/download?platform=linux&format=deb
+  apt-get -y install libappindicator1
+  gdebi /root/SoftInst/Discord/discord.deb
 
 fi
 
