@@ -12,31 +12,30 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/VisualStudioCode-Instalar.sh | bash
 #---------------------------------------------------------------------------------------------------------------------------
 
-## Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
-   fi
+# Determinar la versión de Debian
+  if [ -f /etc/os-release ]; then
+    # Para systemd y freedesktop.org
+    . /etc/os-release
+    OS_NAME=$NAME
+    OS_VERS=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then
+    # linuxbase.org
+    OS_NAME=$(lsb_release -si)
+    OS_VERS=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then
+    # Para algunas versiones de Debian sin el comando lsb_release
+    . /etc/lsb-release
+    OS_NAME=$DISTRIB_ID
+     OS_VERS=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then
+    # Para versiones viejas de Debian.
+    OS_NAME=Debian
+    OS_VERS=$(cat /etc/debian_version)
+  else
+    # Para el viejo uname (También funciona para BSD)
+    OS_NAME=$(uname -s)
+    OS_VERS=$(uname -r)
+  fi
 
 if [ $OS_VERS == "7" ]; then
 
@@ -467,54 +466,54 @@ elif [ $OS_VERS == "11" ]; then
               echo "  Instalando versión insider para armhf..."
               echo ""
 
-              ## Determinar URL del paquete
-                 URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep armhf | grep side)
-                 echo ""
-                 echo "  El archivo .deb que se va a descargar es:"
-                 echo ""
-                 echo "  $URLDelPaquete"
-                 echo ""
+              # Determinar URL del paquete
+                URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep armhf | grep side)
+                echo ""
+                echo "  El archivo .deb que se va a descargar es:"
+                echo ""
+                echo "  $URLDelPaquete"
+                echo ""
 
-              ## Descargar el paquete
-                 echo ""
-                 echo "  Descargando el paquete..."
-                 echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
-                 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-                    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-                      echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."
-                      echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
-                      echo ""
-                    fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+              # Descargar el paquete
+                echo ""
+                echo "  Descargando el paquete..."
+                echo ""
+                mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
+                cd /root/SoftInst/Microsoft/VisualStudioCode/
+                # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo "  wget no está instalado. Iniciando su instalación..."
+                    echo ""
+                    apt-get -y update > /dev/null
+                    apt-get -y install wget
+                    echo ""
+                  fi
+                wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
 
-              ## Instalar el paquete
-                 echo ""
-                 echo "  Instalando el paquete .deb..."
-                 echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+              # Instalar el paquete
+                echo ""
+                echo "  Instalando el paquete .deb..."
+                echo ""
+                dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
-              ## Crear el lanzador para el usuario root
-                 echo ""
-                 echo "  Creando el lanzador para el root"
-                 echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+              # Crear el lanzador para el usuario root
+                echo ""
+                echo "  Creando el lanzador para el root"
+                echo ""
+                mkdir -p /root/.local/share/applications/ 2> /dev/null
+                echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
+                echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
+                gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
 
             ;;
 
@@ -524,54 +523,54 @@ elif [ $OS_VERS == "11" ]; then
               echo "  Instalando versión insider para arm64..."
               echo ""
 
-              ## Determinar URL del paquete
-                 URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep arm64 | grep side)
-                 echo ""
-                 echo "  El archivo .deb que se va a descargar es:"
-                 echo ""
-                 echo "  $URLDelPaquete"
-                 echo ""
+              # Determinar URL del paquete
+                URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep arm64 | grep side)
+                echo ""
+                echo "  El archivo .deb que se va a descargar es:"
+                echo ""
+                echo "  $URLDelPaquete"
+                echo ""
 
-              ## Descargar el paquete
-                 echo ""
-                 echo "  Descargando el paquete..."
-                 echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
-                 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-                    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-                      echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."
-                      echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
-                      echo ""
-                    fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+              # Descargar el paquete
+                echo ""
+                echo "  Descargando el paquete..."
+                echo ""
+                mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
+                cd /root/SoftInst/Microsoft/VisualStudioCode/
+                # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo "  wget no está instalado. Iniciando su instalación..."
+                    echo ""
+                    apt-get -y update > /dev/null
+                    apt-get -y install wget
+                    echo ""
+                  fi
+                wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
 
-              ## Instalar el paquete
-                 echo ""
-                 echo "  Instalando el paquete .deb..."
-                 echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+              # Instalar el paquete
+                echo ""
+                echo "  Instalando el paquete .deb..."
+                echo ""
+                dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
-              ## Crear el lanzador para el usuario root
-                 echo ""
-                 echo "  Creando el lanzador para el root"
-                 echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+              # Crear el lanzador para el usuario root
+                echo ""
+                echo "  Creando el lanzador para el root"
+                echo ""
+                mkdir -p /root/.local/share/applications/ 2> /dev/null
+                echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
+                echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
+                echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
+                gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
 
             ;;
 
