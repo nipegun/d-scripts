@@ -9,10 +9,10 @@
 #  Script de NiPeGun para mostrar items de Heimdall desde Bash
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdall-Items-Mostrar.sh | bash
 #
 #  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdall-Items-Mostrar.sh | bash
 # ----------
 
 # Comprobar que sqlite3 esté instalado
