@@ -93,29 +93,43 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   # Parar apache
+    echo ""
+    echo " Parando el servicio de Apache..."
+    echo ""
     systemctl stop apache2
   # Borrar posible archivo de código fuente viejo
+    echo ""
+    echo "  Borrando posibles archivos de código fuente viejo..."
+    echo ""
     rm -f /root/SoftInst/Heimdall/source.zip 2> /dev/null
-  # Crear carpeta y posicionarse
-    mkdir -p /root/SoftInst/Heimdall/ 2> /dev/null
-    cd /root/SoftInst/Heimdall/
   # Determinar último archivo de código fuente
+    echo ""
+    echo "  Determinando la versión del último release..."
+    echo ""
     UltArchivoZip=$(curl -s https://github.com/linuxserver/Heimdall/releases/ | grep href | grep .zip | cut -d '"' -f2 | head -n1)
   # Descargar archivo de código fuente nuevo
+    echo ""
+    echo "  Descargando el archivo..."
+    echo ""
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  wget no está instalado. Iniciando su instalación..."
+        echo "    wget no está instalado. Iniciando su instalación..."
         echo ""
         apt-get -y update && apt-get -y install wget
         echo ""
       fi
-     wget https://github.com$UltArchivoZip -O /root/SoftInst/Heimdall/source.zip
+    mkdir -p /root/SoftInst/Heimdall/ 2> /dev/null
+    cd /root/SoftInst/Heimdall/
+    wget https://github.com$UltArchivoZip -O /root/SoftInst/Heimdall/source.zip
   # Descomprimir archivo con código fuente nuevo
+    echo ""
+    echo "  Descomprimiendo el archivo ..."
+    echo ""
     # Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  unzip no está instalado. Iniciando su instalación..."
+        echo "    unzip no está instalado. Iniciando su instalación..."
         echo ""
         apt-get -y update && apt-get -y install unzip
         echo ""
@@ -124,6 +138,9 @@ elif [ $OS_VERS == "11" ]; then
     CarpetaConCodFuente=$(find /root/SoftInst/Heimdall/ -maxdepth 1 -type d -print | sed 1d)
     mv $CarpetaConCodFuente /var/www/heimdall/
   # Copiar archivos a la carpeta pública de html de Apache
+    echo ""
+    echo "  Copianddo archivos a la carpeta pública configurada en Apache..."
+    echo ""
     chown www-data:www-data /var/www/heimdall/ -R
     sed -i -e "s|} elseif ('-' === |//} elseif ('-' === |g" /var/www/heimdall/vendor/symfony/console/Input/ArrayInput.php
     sed -i -e 's|$this->addShortOption(substr($key, 1), $value);|//$this->addShortOption(substr($key, 1), $value);|g' /var/www/heimdall/vendor/symfony/console/Input/ArrayInput.php
@@ -131,6 +148,9 @@ elif [ $OS_VERS == "11" ]; then
     #/usr/bin/php artisan key:generate
     #rm -rf /var/www/heimdall/storage/framework/sessions/* 2> /dev/null
   # Reiniciar el sistema
+    echo ""
+    echo "  Reiniciando el sistema..."
+    echo ""
     shutdown -r now
 fi
 
