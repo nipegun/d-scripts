@@ -29,7 +29,7 @@ vDatoNuevo="'http://192.168.1.202:9091/transmission/web/'"
 
 # Mostrar campo con dato viejo
   echo ""
-  echo "Mostrando campos con dato viejo..."
+  echo "Mostrando campos con dato viejo... ($vDatoViejo)"
   echo ""
 sqlite3 /var/www/heimdall/database/app.sqlite << EOF
 select url from items where url like '%$vDatoViejo%';
@@ -47,7 +47,7 @@ EOF
 
 # Mostrar campo con dato nuevo
   echo ""
-  echo "Mostrando campos con dato nuevo..."
+  echo "Mostrando campos con dato nuevo... ($vDatoNuevo)"
   echo ""
 sqlite3 /var/www/heimdall/database/app.sqlite << EOF
 select url from items where url like '%$vDatoNuevo%';
