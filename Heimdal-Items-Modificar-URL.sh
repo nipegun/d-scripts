@@ -15,6 +15,9 @@
 #  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdal-Items-Modificar-URL.sh | bash
 # ----------
 
+vDatoViejo="'http://192.168.1.205:9091/transmission/web/';"
+vDatoNuevo="'http://192.168.1.202:9091/transmission/web/'"
+
 # Comprobar que sqlite3 esté instalado
   if [[ $(dpkg-query -s sqlite3 2>/dev/null | grep installed) == "" ]]; then
     echo ""
@@ -28,8 +31,8 @@
 sqlite3 /var/www/heimdall/database/app.sqlite << EOF
 select url from items where url like "%9091%";
 update items
-  set url = 'http://192.168.1.202:9091/transmission/web/'
-  where url = 'http://192.168.1.205:9091/transmission/web/';
+  set url = $vDatoNuevo
+  where url = $vDatoViejo
 select url from items where url like "%9091%";
 EOF
 
