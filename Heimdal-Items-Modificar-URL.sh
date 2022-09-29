@@ -31,5 +31,5 @@ update items
   set url = 'http://192.168.1.202:9091/transmission/web/'
   where url = 'http://192.168.1.205:9091/transmission/web/';
 select url from items where url like "%9091%";
-  EOF
+EOF
 
