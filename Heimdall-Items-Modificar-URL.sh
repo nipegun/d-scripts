@@ -15,7 +15,7 @@
 #  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdall-Items-Modificar-URL.sh | bash
 # ----------
 
-vURLVieja="'http://192.168.1.205:9091/transmission/web/';"
+vURLVieja="'http://192.168.1.205:9091/transmission/web/'"
 vURLNueva="'http://192.168.1.202:9091/transmission/web/'"
 
 # Comprobar que sqlite3 esté instalado
@@ -36,10 +36,17 @@ select url from items where url like '%$vURLVieja%';
 EOF
 
 # Modificar URL
+  echo ""
+  echo "Modificando URL..."
+  echo ""
+  echo "  Cambiando $vURLVieja"
+  echo "  por"
+  echo "  Cambiando $vURLNueva"
+  echo ""
 sqlite3 /var/www/heimdall/database/app.sqlite << EOF
 update items
-set url = $vDatoNuevo
-where url = $vDatoViejo
+set url = $vURLNueva
+where url = $vURLVieja;
 EOF
 
 
