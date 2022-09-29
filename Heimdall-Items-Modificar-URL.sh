@@ -9,10 +9,10 @@
 #  Script de NiPeGun para modificar URLs de items de Heimdall desde Bash
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdal-Items-Modificar-URL.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdall-Items-Modificar-URL.sh | bash
 #
 #  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdal-Items-Modificar-URL.sh | bash
+#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdall-Items-Modificar-URL.sh | bash
 # ----------
 
 vDatoViejo="'http://192.168.1.205:9091/transmission/web/';"
