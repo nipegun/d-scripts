@@ -9,10 +9,10 @@
 #  Script de NiPeGun para modificar URLs de items de Heimdall desde Bash
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdal-Items-Modificar-URL.sh | bash
 #
 #  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdal-Items-Modificar-URL.sh | bash
 # ----------
 
 # Comprobar que sqlite3 esté instalado
