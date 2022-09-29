@@ -40,7 +40,9 @@ EOF
   echo "Modificando URL..."
   echo ""
   echo "  Cambiando $vURLVieja"
+  echo ""
   echo "  por"
+  echo ""
   echo "  Cambiando $vURLNueva"
   echo ""
 sqlite3 /var/www/heimdall/database/app.sqlite << EOF
