@@ -27,14 +27,29 @@ vDatoNuevo="'http://192.168.1.202:9091/transmission/web/'"
     echo ""
   fi
 
+# Mostrar campo con dato viejo
+  echo ""
+  echo "Mostrando campos con dato viejo..."
+  echo ""
+sqlite3 /var/www/heimdall/database/app.sqlite << EOF
+select url from items where url like "%$vDatoViejo%";
+EOF
+
 # Modificar URL
 sqlite3 /var/www/heimdall/database/app.sqlite << EOF
-select url from items where url like "%9091%";
-select url from items where url like "%$vDatoViejo%";
 update items
-  set url = $vDatoNuevo
-  where url = $vDatoViejo
-select url from items where url like "%9091%";
+set url = $vDatoNuevo
+where url = $vDatoViejo
+EOF
+
+
+#select url from items where url like "%9091%";
+
+# Mostrar campo con dato nuevo
+  echo ""
+  echo "Mostrando campos con dato nuevo..."
+  echo ""
+sqlite3 /var/www/heimdall/database/app.sqlite << EOF
 select url from items where url like "%$vDatoNuevo%";
 EOF
 
