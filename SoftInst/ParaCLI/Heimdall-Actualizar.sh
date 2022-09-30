@@ -101,7 +101,7 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "    Borrando posibles archivos de código fuente viejo..."
     echo ""
-    rm -f /root/SoftInst/Heimdall/source.zip 2> /dev/null
+    rm -rf /root/SoftInst/Heimdall/* 2> /dev/null
   # Determinar última versión disponible
     echo ""
     echo "    Determinando la versión de la última release..."
