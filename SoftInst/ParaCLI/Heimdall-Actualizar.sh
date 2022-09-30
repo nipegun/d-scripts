@@ -102,12 +102,23 @@ elif [ $OS_VERS == "11" ]; then
     echo "    Borrando posibles archivos de código fuente viejo..."
     echo ""
     rm -f /root/SoftInst/Heimdall/source.zip 2> /dev/null
-  # Determinar último archivo de código fuente
+  # Determinar última versión disponible
     echo ""
-    echo "    Determinando la versión del último release..."
+    echo "    Determinando la versión de la última release..."
     echo ""
-    UltArchivoZip=$(curl -s https://github.com/linuxserver/Heimdall/releases/ | grep href | grep .zip | cut -d '"' -f2 | head -n1)
-  # Descargar archivo de código fuente nuevo
+    # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "      curl no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update && apt-get -y install curl
+        echo ""
+      fi
+    vUltVers=$(curl -sL https://github.com/linuxserver/Heimdall/releases/latest/ | sed 's->-\n-g' | grep "/title" | grep elease | cut -d ' ' -f2)
+    echo ""
+    echo "      La última versión disponible es la $vUltVers"
+    echo ""
+  # Descargar archivo con la última versión
     echo ""
     echo "    Descargando el archivo..."
     echo ""
@@ -121,7 +132,7 @@ elif [ $OS_VERS == "11" ]; then
       fi
     mkdir -p /root/SoftInst/Heimdall/ 2> /dev/null
     cd /root/SoftInst/Heimdall/
-    wget https://github.com$UltArchivoZip -O /root/SoftInst/Heimdall/source.zip
+    wget https://github.com/linuxserver/Heimdall/archive/refs/tags/$vUltVers.zip -O /root/SoftInst/Heimdall/source.zip
   # Descomprimir archivo con código fuente nuevo
     echo ""
     echo "    Descomprimiendo el archivo ..."
@@ -135,8 +146,8 @@ elif [ $OS_VERS == "11" ]; then
         echo ""
       fi
     unzip -qq /root/SoftInst/Heimdall/source.zip
-    CarpetaConCodFuente=$(find /root/SoftInst/Heimdall/ -maxdepth 1 -type d -print | sed 1d)
-    mv $CarpetaConCodFuente /var/www/heimdall/
+    vCarpetaConCodFuente=$(find /root/SoftInst/Heimdall/ -maxdepth 1 -type d -print | sed 1d)
+    mv $vCarpetaConCodFuente /var/www/heimdall/
   # Copiar archivos a la carpeta pública de html de Apache
     echo ""
     echo "    Copianddo archivos a la carpeta pública configurada en Apache..."
