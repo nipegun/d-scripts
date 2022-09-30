@@ -147,6 +147,7 @@ elif [ $OS_VERS == "11" ]; then
       fi
     unzip -qq /root/SoftInst/Heimdall/source.zip
     vCarpetaConCodFuente=$(find /root/SoftInst/Heimdall/ -maxdepth 1 -type d -print | sed 1d)
+    vCarpetaConCodFuente=$(find /var/www/ -type f -name *tisan | sed 's-artisan--g')
     mv $vCarpetaConCodFuente /var/www/heimdall/
   # Copiar archivos a la carpeta pública de html de Apache
     echo ""
