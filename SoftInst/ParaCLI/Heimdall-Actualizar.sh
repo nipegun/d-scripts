@@ -150,7 +150,7 @@ elif [ $OS_VERS == "11" ]; then
     mv $vCarpetaConCodFuente /var/www/heimdall/
   # Copiar archivos a la carpeta pública de html de Apache
     echo ""
-    echo "    Copianddo archivos a la carpeta pública configurada en Apache..."
+    echo "    Copiando archivos a la carpeta pública configurada en Apache..."
     echo ""
     chown www-data:www-data /var/www/heimdall/ -R
     #sed -i -e "s|} elseif ('-' === |//} elseif ('-' === |g" /var/www/heimdall/vendor/symfony/console/Input/ArrayInput.php
