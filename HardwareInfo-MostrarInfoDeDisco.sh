@@ -5,9 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------
-#  Script de NiPeGun para mostrar información sobre un disco dado 
-#------------------------------------------------------------------
+# ----------
+#  Script de NiPeGun para mostrar información sobre un disco dado
+#
+#  Ejecución remota:
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/HardwareInfo-MostrarInfoDeDisco.sh | bash
+# ----------
 
 CantArgsEsperados=1
 ArgsInsuficientes=65
