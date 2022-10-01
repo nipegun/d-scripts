@@ -147,12 +147,14 @@ elif [ $OS_VERS == "11" ]; then
       fi
     unzip -qq /root/SoftInst/Heimdall/source.zip
     vCarpetaConCodFuente=$(find /root/SoftInst/Heimdall/ -type f -name *tisan | sed 's-artisan--g')
-    mv $vCarpetaConCodFuente* /var/www/heimdall/
-    mv $vCarpetaConCodFuente.* /var/www/heimdall/ 2> /dev/null
   # Copiar archivos a la carpeta pública de html de Apache
     echo ""
     echo "    Copiando archivos a la carpeta pública configurada en Apache..."
     echo ""
+    mv /var/www/heimdall/database/ /tmp/
+    mv $vCarpetaConCodFuente* /var/www/heimdall/
+    mv $vCarpetaConCodFuente.* /var/www/heimdall/ 2> /dev/null
+    /tmp/database/ /var/www/heimdall/
     chown www-data:www-data /var/www/heimdall/ -R
     #sed -i -e "s|} elseif ('-' === |//} elseif ('-' === |g" /var/www/heimdall/vendor/symfony/console/Input/ArrayInput.php
     #sed -i -e 's|$this->addShortOption(substr($key, 1), $value);|//$this->addShortOption(substr($key, 1), $value);|g' /var/www/heimdall/vendor/symfony/console/Input/ArrayInput.php
