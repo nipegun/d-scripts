@@ -153,7 +153,7 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     mv /var/www/heimdall/database/ /tmp/
     mkdir /tmp/backgrounds/
-    mv /var/www/heimdall/storage/app/public/backgrounds/* /tmp/backgrounds/
+    cp /var/www/heimdall/storage/app/public/backgrounds/* /tmp/backgrounds/
     rm -rf /var/www/heimdall/*
     mv $vCarpetaConCodFuente* /var/www/heimdall/
     mv $vCarpetaConCodFuente.* /var/www/heimdall/ 2> /dev/null
