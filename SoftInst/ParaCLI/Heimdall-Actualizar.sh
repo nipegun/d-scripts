@@ -152,10 +152,13 @@ elif [ $OS_VERS == "11" ]; then
     echo "    Copiando archivos a la carpeta pública configurada en Apache..."
     echo ""
     mv /var/www/heimdall/database/ /tmp/
+    mkdir /tmp/backgrounds/
+    mv /var/www/heimdall/storage/app/public/backgrounds/* /tmp/backgrounds/
     rm -rf /var/www/heimdall/*
     mv $vCarpetaConCodFuente* /var/www/heimdall/
     mv $vCarpetaConCodFuente.* /var/www/heimdall/ 2> /dev/null
-    mv -f /tmp/database/ /var/www/heimdall/database/
+    cp -rf /tmp/database/* /var/www/heimdall/database/
+    cp /tmp/backgrounds/* /var/www/heimdall/storage/app/public/backgrounds/
     chown www-data:www-data /var/www/heimdall/ -R
     #sed -i -e "s|} elseif ('-' === |//} elseif ('-' === |g" /var/www/heimdall/vendor/symfony/console/Input/ArrayInput.php
     #sed -i -e 's|$this->addShortOption(substr($key, 1), $value);|//$this->addShortOption(substr($key, 1), $value);|g' /var/www/heimdall/vendor/symfony/console/Input/ArrayInput.php
