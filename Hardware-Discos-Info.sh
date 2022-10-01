@@ -9,7 +9,7 @@
 #  Script de NiPeGun para mostrar información sobre discos duros
 #
 #  Ejecución remota:
-#  curl -s 
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Hardware-Discos-Info.sh | bash
 # ----------
 
 ColorVerde="\033[1;32m"
