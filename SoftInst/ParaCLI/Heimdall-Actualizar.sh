@@ -154,7 +154,7 @@ elif [ $OS_VERS == "11" ]; then
     mv /var/www/heimdall/database/ /tmp/
     mv $vCarpetaConCodFuente* /var/www/heimdall/
     mv $vCarpetaConCodFuente.* /var/www/heimdall/ 2> /dev/null
-    /tmp/database/ /var/www/heimdall/
+    mv -f /tmp/database/ /var/www/heimdall/
     chown www-data:www-data /var/www/heimdall/ -R
     #sed -i -e "s|} elseif ('-' === |//} elseif ('-' === |g" /var/www/heimdall/vendor/symfony/console/Input/ArrayInput.php
     #sed -i -e 's|$this->addShortOption(substr($key, 1), $value);|//$this->addShortOption(substr($key, 1), $value);|g' /var/www/heimdall/vendor/symfony/console/Input/ArrayInput.php
