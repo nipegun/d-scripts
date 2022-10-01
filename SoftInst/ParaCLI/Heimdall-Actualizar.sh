@@ -158,6 +158,7 @@ elif [ $OS_VERS == "11" ]; then
     mv $vCarpetaConCodFuente* /var/www/heimdall/
     mv $vCarpetaConCodFuente.* /var/www/heimdall/ 2> /dev/null
     cp -rf /tmp/database/* /var/www/heimdall/database/
+    mkdir /var/www/heimdall/storage/app/public/backgrounds/ 2> /dev/null
     cp /tmp/backgrounds/* /var/www/heimdall/storage/app/public/backgrounds/
     chown www-data:www-data /var/www/heimdall/ -R
     #sed -i -e "s|} elseif ('-' === |//} elseif ('-' === |g" /var/www/heimdall/vendor/symfony/console/Input/ArrayInput.php
