@@ -152,6 +152,7 @@ elif [ $OS_VERS == "11" ]; then
     echo "    Copiando archivos a la carpeta pública configurada en Apache..."
     echo ""
     mv /var/www/heimdall/database/ /tmp/
+    rm -rf /var/www/heimdall/*
     mv $vCarpetaConCodFuente* /var/www/heimdall/
     mv $vCarpetaConCodFuente.* /var/www/heimdall/ 2> /dev/null
     mv -f /tmp/database/ /var/www/heimdall/database/
