@@ -185,7 +185,7 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y remove blender
   apt-get -y remove imagemagick
   apt-get -y remove inkscape
-  apt-get -y remove rhytmbox
+  apt-get -y remove rhythmbox
   apt-get -y remove evolution
   apt-get -y remove gnome-2048
   apt-get -y remove five-or-more
