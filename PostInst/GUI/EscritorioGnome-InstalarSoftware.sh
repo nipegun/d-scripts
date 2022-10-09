@@ -200,6 +200,15 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y remove mlterm
   apt-get -y remove gnome-music
   apt-get -y remove gnome-nibbles
+  apt-get -y remove quadrapassel
+  apt-get -y remove iagno
+  apt-get -y remove gnome-robots
+  apt-get -y remove gnome-sudoku
+  apt-get -y remove swell-foop
+  apt-get -y remove gnome-tetravex
+  apt-get -y remove gnome-taquin
+  apt-get -y remove aisleriot
+  
   apt-get -y autoremove
 
 fi
