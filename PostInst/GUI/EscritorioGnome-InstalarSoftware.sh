@@ -195,6 +195,12 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y remove hitori
   apt-get -y remove gnome-klotski
   apt-get -y remove lightsoff
+  apt-get -y remove gnome-mahjongg
+  apt-get -y remove gnome-mines
+  apt-get -y remove mlterm
+  apt-get -y remove gnome-music
+  apt-get -y remove gnome-nibbles
   apt-get -y autoremove
 
 fi
+
