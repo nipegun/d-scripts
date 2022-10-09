@@ -111,10 +111,10 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install audacity
     apt-get -y install subtitleeditor
     apt-get -y install easytag
-    apt-get -y install openshot
+    #apt-get -y install openshot
 
   # Redes e internet
-    apt-get -y install gufw
+    #apt-get -y install gufw
     apt-get -y install wireshark
     apt-get -y install etherape
     apt-get -y install sshpass
@@ -157,7 +157,7 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install libreoffice-l10n-es
     apt-get -y install unrar
     apt-get -y install htop
-    apt-get -y install simple-scan
+    #apt-get -y install simple-scan
     apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
     apt-get -y install android-tools-fastboot
     apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
@@ -180,7 +180,13 @@ elif [ $OS_VERS == "11" ]; then
 
   /root/scripts/d-scripts/SoftInst/ParaGUI/TORBrowser-Instalar.sh
 
-  apt-get -y remove xterm reportbug blender imagemagick inkscape gnome-disk-utility
+  apt-get -y remove xterm
+  apt-get -y remove reportbug
+  apt-get -y remove blender
+  apt-get -y remove imagemagick
+  apt-get -y remove inkscape
+  apt-get -y remove rhytmbox
+  apt-get -y remove evolution
   apt-get -y autoremove
 
 fi
