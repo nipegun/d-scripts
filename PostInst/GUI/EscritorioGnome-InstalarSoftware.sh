@@ -191,6 +191,10 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y remove five-or-more
   apt-get -y remove four-in-a-row
   apt-get -y remove kasumi
+  apt-get -y remove ghcal
+  apt-get -y remove hitori
+  apt-get -y remove gnome-klotski
+  apt-get -y remove lightsoff
   apt-get -y autoremove
 
 fi
