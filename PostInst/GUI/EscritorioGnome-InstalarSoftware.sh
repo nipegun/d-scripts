@@ -98,14 +98,47 @@ elif [ $OS_VERS == "11" ]; then
   echo "-----------------------------------------------------------------------------------------------------"
   echo ""
 
-  apt-get -y update
+  # Desinstalar paquetes no necesarios
+    apt-get -y remove xterm
+    apt-get -y remove reportbug
+    apt-get -y remove blender
+    apt-get -y remove imagemagick
+    apt-get -y remove inkscape
+    apt-get -y remove rhythmbox
+    apt-get -y remove evolution
+    apt-get -y remove gnome-2048
+    apt-get -y remove five-or-more
+    apt-get -y remove four-in-a-row
+    apt-get -y remove kasumi
+    apt-get -y remove ghcal
+    apt-get -y remove hitori
+    apt-get -y remove gnome-klotski
+    apt-get -y remove lightsoff
+    apt-get -y remove gnome-mahjongg
+    apt-get -y remove gnome-mines
+    apt-get -y remove mlterm
+    apt-get -y remove gnome-music
+    apt-get -y remove gnome-nibbles
+    apt-get -y remove quadrapassel
+    apt-get -y remove iagno
+    apt-get -y remove gnome-robots
+    apt-get -y remove gnome-sudoku
+    apt-get -y remove swell-foop
+    apt-get -y remove gnome-tetravex
+    apt-get -y remove gnome-taquin
+    apt-get -y remove aisleriot
+    apt-get -y remove totem
+    apt-get -y autoremove
 
-  # Sistema
+  # Actualizar el sistema
+    apt-get -y update
+
+  # Apps de Sistema
     apt-get -y install gparted
     apt-get -y install hardinfo
     apt-get -y install bleachbit
 
-  # Multimedia
+  # Apps Multimedia
     apt-get -y install vlc
     apt-get -y install vlc-plugin-vlsub
     apt-get -y install audacity
@@ -113,8 +146,8 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install easytag
     #apt-get -y install openshot
 
-  # Redes e internet
-    #apt-get -y install gufw
+  # Apps de redes e internet
+    apt-get -y install gufw
     apt-get -y install wireshark
     apt-get -y install etherape
     apt-get -y install sshpass
@@ -146,10 +179,10 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install fonts-freefont-otf
     apt-get -y install ttf-mscorefonts-installer
 
-  # Programación
+  # apps de programación
     apt-get -y install ghex
 
-  # Seguridad
+  # apps de seguridad
     apt-get -y install clamav
     apt-get -y install clamtk
 
@@ -178,38 +211,8 @@ elif [ $OS_VERS == "11" ]; then
     echo "MimeType=text/html;text/xml;application/xhtml_xml;application/x-mimearchive;x-scheme-handler/http;x-scheme-handler/https;" >> /root/.local/share/applications/chromiumroot.desktop
     gio set /root/.local/share/applications/chromiumroot.desktop "metadata::trusted" yes
 
-  /root/scripts/d-scripts/SoftInst/ParaGUI/TORBrowser-Instalar.sh
-
-  apt-get -y remove xterm
-  apt-get -y remove reportbug
-  apt-get -y remove blender
-  apt-get -y remove imagemagick
-  apt-get -y remove inkscape
-  apt-get -y remove rhythmbox
-  apt-get -y remove evolution
-  apt-get -y remove gnome-2048
-  apt-get -y remove five-or-more
-  apt-get -y remove four-in-a-row
-  apt-get -y remove kasumi
-  apt-get -y remove ghcal
-  apt-get -y remove hitori
-  apt-get -y remove gnome-klotski
-  apt-get -y remove lightsoff
-  apt-get -y remove gnome-mahjongg
-  apt-get -y remove gnome-mines
-  apt-get -y remove mlterm
-  apt-get -y remove gnome-music
-  apt-get -y remove gnome-nibbles
-  apt-get -y remove quadrapassel
-  apt-get -y remove iagno
-  apt-get -y remove gnome-robots
-  apt-get -y remove gnome-sudoku
-  apt-get -y remove swell-foop
-  apt-get -y remove gnome-tetravex
-  apt-get -y remove gnome-taquin
-  apt-get -y remove aisleriot
-  
-  apt-get -y autoremove
+  # Tor browser
+    # /root/scripts/d-scripts/SoftInst/ParaGUI/TORBrowser-Instalar.sh
 
 fi
 
