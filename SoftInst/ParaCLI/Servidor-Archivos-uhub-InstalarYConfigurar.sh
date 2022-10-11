@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar uhub en Debian
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-CompartArchivos-uhub-InstalarYConfigurar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Archivos-uhub-InstalarYConfigurar.sh | bash
 #---------------------------------------------------------------------------------------------------------------------------------------------------
 
 ColorRojo='\033[1;31m'
