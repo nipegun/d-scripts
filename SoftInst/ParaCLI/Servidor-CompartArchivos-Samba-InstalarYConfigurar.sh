@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------------------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para instalar y configurar el servidor Samba en Debian
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-CompartArchivos-Samba-InstalarYConfigurar.sh | bash -s NombreDeGrupo NombreDeEquipo nipegun
-#------------------------------------------------------------------------------------------------------------------------------------------------
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Archivos-Samba-InstalarYConfigurar.sh | bash -s NombreDeGrupo NombreDeEquipo nipegun
+# ----------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -514,7 +514,7 @@ elif [ $OS_VERS == "11" ]; then
 
   echo ""
   echo "--------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de bind9 para Debian 11 (Bullseye)..."
+  echo "  Iniciando el script de instalación de Samba para Debian 11 (Bullseye)..."
   echo "--------------------------------------------------------------------------------"
   echo ""
 
@@ -546,13 +546,15 @@ elif [ $OS_VERS == "11" ]; then
     else
       apt-get update && apt-get -y install dialog
       menu=(dialog --timeout 5 --checklist "Instalación de la compartición Samba:" 22 76 16)
-      opciones=(1 "Instalar los paquetes necesarios" on
-                2 "Configurar las opciones globales" on
-                3 "Configurar la compartición Pública anónima" off
-                4 "Configurar la compartición de la carpeta del usuario" off
-                5 "Configurar la compartición Multimedia" off
-                6 "Configurar la compartición de Webs" off
-                7 "Reiniciar el demonio y mostrar el estado" on)
+      opciones=(
+        1 "Instalar los paquetes necesarios" on
+        2 "Configurar las opciones globales" on
+        3 "Configurar la compartición Pública anónima" off
+        4 "Configurar la compartición de la carpeta del usuario" off
+        5 "Configurar la compartición Multimedia" off
+        6 "Configurar la compartición de Webs" off
+        7 "Reiniciar el demonio y mostrar el estado" on
+      )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
