@@ -171,6 +171,7 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install scummvm
 
   # Fuentes
+    apt-get -y install fonts-ubuntu
     apt-get -y install fonts-freefont-ttf
     apt-get -y install fonts-freefont-otf
     apt-get -y install ttf-mscorefonts-installer
