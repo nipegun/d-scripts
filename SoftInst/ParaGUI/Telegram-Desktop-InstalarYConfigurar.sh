@@ -105,8 +105,21 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Descargando el archivo tar..."
   echo ""
-  mkdir -p /root/SoftInst/TelegramDesktop 2> /dev/null
-  curl -sL https://telegram.org/dl/desktop/linux -O /root/SoftInst/TelegramDesktop/telegram-desktop-setup.tar.xz
+  mkdir -p /root/SoftInst/TelegramDesktop/ 2> /dev/null
+  cd /root/SoftInst/TelegramDesktop/
+  curl -sL https://telegram.org/dl/desktop/linux -o /root/SoftInst/TelegramDesktop/telegram-desktop-setup.tar.xz
 
+  echo ""
+  echo "  Descomprimiento del archivo..."
+  echo ""
+  # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${vColorRojo}tar no está instalado. Iniciando su instalación...${vFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install tar
+      echo ""
+    fi
+   tar -x /root/SoftInst/TelegramDesktop/telegram-desktop-setup.tar.xz
 
 fi
