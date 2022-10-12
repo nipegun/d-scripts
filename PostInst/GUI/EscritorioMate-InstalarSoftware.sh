@@ -16,31 +16,25 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-## Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
-   fi
+# Determinar la versión de Debian
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
+    . /etc/os-release
+    OS_NAME=$NAME
+    OS_VERS=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # linuxbase.org
+    OS_NAME=$(lsb_release -si)
+    OS_VERS=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release
+    . /etc/lsb-release
+    OS_NAME=$DISTRIB_ID
+    OS_VERS=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    OS_NAME=Debian
+    OS_VERS=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD)
+    OS_NAME=$(uname -s)
+    OS_VERS=$(uname -r)
+  fi
 
 if [ $OS_VERS == "7" ]; then
 
@@ -182,12 +176,20 @@ elif [ $OS_VERS == "11" ]; then
   echo "-----------------------------------------------------------------------------------------------------"
   echo ""
 
-  apt-get -y update
+  # Desinstalar cosas específicas de mate-esktop
+    apt-get -y remove xterm
+    apt-get -y remove reportbug
+    apt-get -y remove blender
+    apt-get -y remove imagemagick
+    apt-get -y remove inkscape
+    apt-get -y remove gnome-disk-utility
+    apt-get -y autoremove
+
+  # Actualizar el cache de los paquetes
+    apt-get -y update
 
   # Sistema
     apt-get -y install gparted
-    apt-get -y install caja-open-terminal
-    apt-get -y install caja-admin
     apt-get -y install hardinfo
     apt-get -y install bleachbit
 
@@ -219,6 +221,7 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install mumble
     apt-get -y install obs-studio
     apt-get -y install telegram-desktop
+    apt-get -y install discord
 
   # Juegos
     apt-get -y install scid
@@ -266,9 +269,10 @@ elif [ $OS_VERS == "11" ]; then
     gio set /root/.local/share/applications/chromiumroot.desktop "metadata::trusted" yes
 
   /root/scripts/d-scripts/SoftInst/ParaGUI/TORBrowser-Instalar.sh
-
-  apt-get -y remove xterm reportbug blender imagemagick inkscape gnome-disk-utility
-  apt-get -y autoremove
+  
+  # Específicas para mate-desktop
+    apt-get -y install caja-open-terminal
+    apt-get -y install caja-admin
 
 fi
 
