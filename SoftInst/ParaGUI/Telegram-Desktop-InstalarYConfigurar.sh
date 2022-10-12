@@ -102,7 +102,11 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}Iniciando el script de instalación de Telegram-Desktop para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
+  echo ""
+  echo "  Descargando el archivo tar..."
+  echo ""
   mkdir -p /root/SoftInst/TelegramDesktop 2> /dev/null
   curl -sL https://telegram.org/dl/desktop/linux -O /root/SoftInst/TelegramDesktop/telegram-desktop-setup.tar.xz
+
 
 fi
