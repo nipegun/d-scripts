@@ -9,7 +9,7 @@
 #  Script de NiPeGun para mostrar el aislamiento/agrupamiento IOMMU en Debian
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/IOMMU-GruposMostrar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/IOMMU-Grupos-Mostrar.sh | bash
 # ----------
 
 echo ""
