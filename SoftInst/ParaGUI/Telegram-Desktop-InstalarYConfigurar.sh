@@ -128,7 +128,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "    Moviendo los archivos a la carpeta del usuario no-root..."
   echo ""
   mkdir -p /home/$vUsuarioNoRoot/AppsPortables/TelegramDesktop/ 2> /dev/null
-  cp -r /root/SoftInst/TelegramDesktop/* /home/$vUsuarioNoRoot/AppsPortables/TelegramDesktop/
+  cp -r /root/SoftInst/TelegramDesktop/Telegram/* /home/$vUsuarioNoRoot/AppsPortables/TelegramDesktop/
 
   echo ""
   echo "    Asignando propiedad y reparando permisos..."
