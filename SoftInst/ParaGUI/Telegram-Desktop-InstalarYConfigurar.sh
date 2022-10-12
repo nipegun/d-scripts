@@ -25,14 +25,14 @@ vFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${vColorRojo}Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
     exit 1
   fi
 
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${vColorRojo}curl no está instalado. Iniciando su instalación...${vFinColor}"
+    echo -e "${vColorRojo}  curl no está instalado. Iniciando su instalación...${vFinColor}"
     echo ""
     apt-get -y update && apt-get -y install curl
     echo ""
@@ -61,63 +61,63 @@ vFinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de Telegram-Desktop para Debian 7 (Wheezy)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Telegram-Desktop para Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de Telegram-Desktop para Debian 8 (Jessie)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Telegram-Desktop para Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de Telegram-Desktop para Debian 9 (Stretch)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Telegram-Desktop para Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de Telegram-Desktop para Debian 10 (Buster)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Telegram-Desktop para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de Telegram-Desktop para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Telegram-Desktop para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Descargando el archivo tar..."
+  echo "    Descargando el archivo tar..."
   echo ""
   mkdir -p /root/SoftInst/TelegramDesktop/ 2> /dev/null
   cd /root/SoftInst/TelegramDesktop/
   curl -sL https://telegram.org/dl/desktop/linux -o /root/SoftInst/TelegramDesktop/telegram-desktop-setup.tar.xz
 
   echo ""
-  echo "  Descomprimiendo del archivo..."
+  echo "    Descomprimiendo del archivo..."
   echo ""
   # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${vColorRojo}tar no está instalado. Iniciando su instalación...${vFinColor}"
+      echo -e "${vColorRojo}      tar no está instalado. Iniciando su instalación...${vFinColor}"
       echo ""
       apt-get -y update && apt-get -y install tar
       echo ""
@@ -125,15 +125,16 @@ elif [ $OS_VERS == "11" ]; then
    tar -xvf /root/SoftInst/TelegramDesktop/telegram-desktop-setup.tar.xz
 
   echo ""
-  echo "  Moviendo los archivos a la carpeta del usuario no-root..."
+  echo "    Moviendo los archivos a la carpeta del usuario no-root..."
   echo ""
   mkdir -p /home/$vUsuarioNoRoot/AppsPortables/TelegramDesktop/ 2> /dev/null
   cp -r /root/SoftInst/TelegramDesktop/* /home/$vUsuarioNoRoot/AppsPortables/TelegramDesktop/
 
   echo ""
-  echo "  Asignando propiedad y reparando permisos..."
+  echo "    Asignando propiedad y reparando permisos..."
   echo ""
   chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/AppsPortables/ -v
   chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/AppsPortables/TelegramDesktop/ -Rv
+  echo ""
 
 fi
