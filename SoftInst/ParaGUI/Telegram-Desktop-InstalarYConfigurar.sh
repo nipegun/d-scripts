@@ -120,6 +120,6 @@ elif [ $OS_VERS == "11" ]; then
       apt-get -y update && apt-get -y install tar
       echo ""
     fi
-   tar -x /root/SoftInst/TelegramDesktop/telegram-desktop-setup.tar.xz
+   tar -xvf /root/SoftInst/TelegramDesktop/telegram-desktop-setup.tar.xz
 
 fi
