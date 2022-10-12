@@ -15,6 +15,8 @@
 #  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Telegram-Desktop-InstalarYConfigurar.sh | bash
 # ----------
 
+vUsuarioNoRoot="nipegun"
+
 vColorAzul="\033[0;34m"
 vColorAzulClaro="\033[1;34m"
 vColorVerde='\033[1;32m'
@@ -121,5 +123,17 @@ elif [ $OS_VERS == "11" ]; then
       echo ""
     fi
    tar -xvf /root/SoftInst/TelegramDesktop/telegram-desktop-setup.tar.xz
+
+  echo ""
+  echo "  Moviendo los archivos a la carpeta del usuario no-root..."
+  echo ""
+  mkdir /home/$vUsuarioNoRoot/AppsPortables/TelegramDesktop/ 2> /dev/null
+  cp -r /root/SoftInst/TelegramDesktop/* /home/$vUsuarioNoRoot/AppsPortables/TelegramDesktop/
+
+  echo ""
+  echo "  Asignando propiedad y reparando permisos..."
+  echo ""
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot/home/$vUsuarioNoRoot/AppsPortables/ -v
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot/home/$vUsuarioNoRoot/AppsPortables/TelegramDesktop/ -Rv
 
 fi
