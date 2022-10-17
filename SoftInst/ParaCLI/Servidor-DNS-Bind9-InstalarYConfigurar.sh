@@ -194,9 +194,9 @@ elif [ $OS_VERS == "11" ]; then
           echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
           echo '  };'                                                                >> /etc/bind/named.conf.log
           echo ''                                                                    >> /etc/bind/named.conf.log
-          echo '  category "default"         { "default"; };'                        >> /etc/bind/named.conf.log
-          echo '  category "queries"         { "queries"; };'                        >> /etc/bind/named.conf.log
-          echo '  category "update"          { "update"; };'                         >> /etc/bind/named.conf.log
+          echo '  category "default" { "default"; };'                                >> /etc/bind/named.conf.log
+          echo '  category "queries" { "queries"; };'                                >> /etc/bind/named.conf.log
+          echo '  category "update"  { "update"; };'                                 >> /etc/bind/named.conf.log
           echo ''                                                                    >> /etc/bind/named.conf.log
           echo '};'                                                                  >> /etc/bind/named.conf.log
           mkdir /var/log/named 2> /dev/null
