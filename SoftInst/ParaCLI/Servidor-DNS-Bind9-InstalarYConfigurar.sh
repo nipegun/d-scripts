@@ -166,16 +166,12 @@ elif [ $OS_VERS == "11" ]; then
               echo "      La sintaxis del archivo /etc/bind/named.conf.options no es correcta:"
               echo "        $vRespuestaCheckConf"
             fi
-            
-
-#tail /var/log/syslog
-
 
             echo ""
-            echo "  Instalando resolvconf y configurando IP loopack"
+            echo "    Instalando resolvconf y configurando IP loopack"
             echo ""
-           # apt-get -y install resolvconf
-            #echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
+            apt-get -y install resolvconf
+            echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
 
            # echo ""
            # echo "  Instalando herramientas extra..."
@@ -186,6 +182,7 @@ elif [ $OS_VERS == "11" ]; then
             # rndc flush                                                  # Borrar el cache
             # rndc dumpdb -cache" > /root/scripts/VolcarCacheAArchivo.sh  # Salvar el cache
             # cat /var/cache/bind/named_dump.db                           # Mostrar el cache dumpeado
+#tail /var/log/syslog
 
           ;;
 
