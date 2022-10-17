@@ -166,23 +166,60 @@ elif [ $OS_VERS == "11" ]; then
             echo "      La sintaxis del archivo /etc/bind/named.conf.options no es correcta:"
             echo "        $vRespuestaCheckConf"
           fi
-           echo ""
+
+          echo ""
+          echo "    Configurando logs..."
+          echo ""
+          echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
+          echo 'logging {'                                                            > /etc/bind/named.conf.log
+          echo ''                                                                    >> /etc/bind/named.conf.log
+          echo '  channel "default" {'                                               >> /etc/bind/named.conf.log
+          echo '    file "/var/log/bind9/default.log" versions 10 size 10m;'         >> /etc/bind/named.conf.log
+          echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+          echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+          echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+          echo '  };'                                                                >> /etc/bind/named.conf.log
+          echo ''                                                                    >> /etc/bind/named.conf.log
+          echo '  channel "queries" {'                                               >> /etc/bind/named.conf.log
+          echo '    file "/var/log/bind9/queries.log" versions 10 size 10m;'         >> /etc/bind/named.conf.log
+          echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
+          echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+          echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+          echo '  };'                                                                >> /etc/bind/named.conf.log
+          echo ''                                                                    >> /etc/bind/named.conf.log
+          echo '  channel "update" {'                                                >> /etc/bind/named.conf.log
+          echo '    file "/var/log/bind9/update.log" versions 10 size 10m;'          >> /etc/bind/named.conf.log
+          echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
+          echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+          echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+          echo '  };'                                                                >> /etc/bind/named.conf.log
+          echo ''                                                                    >> /etc/bind/named.conf.log
+          echo '  category "default"         { "default"; };'                        >> /etc/bind/named.conf.log
+          echo '  category "queries"         { "queries"; };'                        >> /etc/bind/named.conf.log
+          echo '  category "update"          { "update"; };'                         >> /etc/bind/named.conf.log
+          echo ''                                                                    >> /etc/bind/named.conf.log
+          echo '};'                                                                  >> /etc/bind/named.conf.log
+          mkdir /var/log/named 2> /dev/null
+          chown -R bind:bind /var/log/named
+
+          echo ""
           echo "    Instalando resolvconf y configurando IP loopack"
           echo ""
           apt-get -y install resolvconf
           sed -i -e 's|nameserver 127.0.0.1||g' /etc/resolvconf/resolv.conf.d/head
           echo "nameserver 127.0.0.1" >>        /etc/resolvconf/resolv.conf.d/head
+          resolvconf -u # Regenerar /etc/resolv.conf
 
-          # echo ""
-          # echo "  Instalando herramientas extra..."
-          # echo ""
-          #apt-get -y install dnsutils
+          echo ""
+          echo "  Instalando herramientas extra..."
+          echo ""
+          apt-get -y install dnsutils
 
           # Cache
           # rndc flush                                                  # Borrar el cache
           # rndc dumpdb -cache" > /root/scripts/VolcarCacheAArchivo.sh  # Salvar el cache
           # cat /var/cache/bind/named_dump.db                           # Mostrar el cache dumpeado
-
+          # rndc querylog                                               # Activa loguear las querys
           #tail /var/log/syslog
 
         ;;
