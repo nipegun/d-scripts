@@ -147,7 +147,7 @@ elif [ $OS_VERS == "11" ]; then
             echo '  forwarders {'                 >> /etc/bind/named.conf.options
             echo '    1.1.1.1;'                   >> /etc/bind/named.conf.options
             echo '    8.8.8.8;'                   >> /etc/bind/named.conf.options
-            echo '  }'                            >> /etc/bind/named.conf.options
+            echo '  };'                           >> /etc/bind/named.conf.options
             echo '  listen-on { any; };'          >> /etc/bind/named.conf.options # Que IPs tienen acceso al servicio
             echo '  allow-query { any; };'        >> /etc/bind/named.conf.options # Quién tiene permiso a hacer cualquier tipo de query
             echo '  allow-query-cache { any; };'  >> /etc/bind/named.conf.options # Quién tiene permiso a las queries guardadas en el cache
