@@ -173,34 +173,33 @@ elif [ $OS_VERS == "11" ]; then
           echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
           echo 'logging {'                                                            > /etc/bind/named.conf.log
           echo ''                                                                    >> /etc/bind/named.conf.log
-          echo '  channel "default" {'                                               >> /etc/bind/named.conf.log
-          echo '    file "/var/log/bind9/default.log" versions 10 size 10m;'         >> /etc/bind/named.conf.log
+          echo '  channel "queries" {'                                               >> /etc/bind/named.conf.log
+          echo '    file "/var/log/bind9/queries.log" versions 10 size 10m;'         >> /etc/bind/named.conf.log
           echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
           echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
           echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+          echo '    severity info;'                                                  >> /etc/bind/named.conf.log
           echo '  };'                                                                >> /etc/bind/named.conf.log
           echo ''                                                                    >> /etc/bind/named.conf.log
-          echo '  channel "queries" {'                                               >> /etc/bind/named.conf.log
-          echo '    file "/var/log/bind9/queries.log" versions 10 size 10m;'         >> /etc/bind/named.conf.log
-          echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
-          echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
-          echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
-          echo '  };'                                                                >> /etc/bind/named.conf.log
-          echo ''                                                                    >> /etc/bind/named.conf.log
-          echo '  channel "update" {'                                                >> /etc/bind/named.conf.log
-          echo '    file "/var/log/bind9/update.log" versions 10 size 10m;'          >> /etc/bind/named.conf.log
-          echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
-          echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
-          echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
-          echo '  };'                                                                >> /etc/bind/named.conf.log
-          echo ''                                                                    >> /etc/bind/named.conf.log
-          echo '  category "default" { "default"; };'                                >> /etc/bind/named.conf.log
           echo '  category "queries" { "queries"; };'                                >> /etc/bind/named.conf.log
-          echo '  category "update"  { "update"; };'                                 >> /etc/bind/named.conf.log
           echo ''                                                                    >> /etc/bind/named.conf.log
           echo '};'                                                                  >> /etc/bind/named.conf.log
-          mkdir /var/log/named 2> /dev/null
-          chown -R bind:bind /var/log/named
+          mkdir -p /var/log/bind9/ 2> /dev/null
+          chown bind:bind /var/log/bind9 -R # El usuario bind necesita permisos de escritura en el la carpeta
+          # Dar permisos de escritura a bind9 en el directorio /var/log/bind9 (No hace falta si se meten los logs en /var/log/named/)
+            sed -i -e 's|/var/log/named/ rw,|/var/log/named/ rw,\n\n/var/log/bind9/** rw,\n/var/log/bind9/ rw,|g' /etc/apparmor.d/usr.sbin.named
+
+          echo ""
+          echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."
+          echo ""
+          vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
+          if [ "$vRespuestaCheckConf" = "" ]; then
+            echo "      La configuración de  /etc/bind/named.conf.log es correcta."
+          else
+            echo "      La sintaxis del archivo  /etc/bind/named.conf.log no es correcta:"
+            echo "        $vRespuestaCheckConf"
+          fi
+
 
           echo ""
           echo "    Instalando resolvconf y configurando IP loopack"
