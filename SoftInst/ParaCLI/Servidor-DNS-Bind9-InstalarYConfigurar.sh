@@ -171,7 +171,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           apt-get -y install resolvconf
           sed -i -e 's|nameserver 127.0.0.1||g' /etc/resolvconf/resolv.conf.d/head
-          echo "nameserver 127.0.0.1" >         /etc/resolvconf/resolv.conf.d/head
+          echo "nameserver 127.0.0.1" >>        /etc/resolvconf/resolv.conf.d/head
 
           # echo ""
           # echo "  Instalando herramientas extra..."
