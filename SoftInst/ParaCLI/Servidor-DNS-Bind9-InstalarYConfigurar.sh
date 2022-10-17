@@ -236,124 +236,225 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
-  ## Desinstalar cualquier posible paquete previamente instalado
-     mkdir -p /CopSegInt/ 2> /dev/null
-     mkdir -p /CopSegInt/DNS/etc/ 2> /dev/null
-     mv /etc/bind/ /CopSegInt/DNS/etc/
-     chattr -i /etc/resolv.conf
-     rm -rf /var/cache/bind/ 2> /dev/null
-     rm -rf /etc/bind/ 2> /dev/null
-     systemctl stop bind9.service
-     systemctl disable bind9.service
-     apt-get -y purge bind9 dnsutils
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${vColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
 
-  echo ""
-  echo "Instalando paquetes necesarios..."
-  echo ""
-  apt-get -y update
-  apt-get -y install bind9 dnsutils
+  menu=(dialog --timeout 5 --checklist "¿Cómo quieres instalar bind9?:" 22 96 16)
+    opciones=(
+      1 "Instalar como servidor DNS caché" off
+      2 "Instalar como servidor DNS maestro" off
+      3 "Instalar como servidor DNS esclavo" off
+    )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+    clear
 
-  echo ""
-  echo "Realizando cambios en la configuración..."
-  echo ""
-  sed -i "1s|^|nameserver 127.0.0.1\n|" /etc/resolv.conf
-  sed -i -e 's|// forwarders {|forwarders {|g' /etc/bind/named.conf.options
-  sed -i "/0.0.0.0;/c\1.1.1.1;"                /etc/bind/named.conf.options
-  sed -i -e 's|// };|};|g'                     /etc/bind/named.conf.options
+    for choice in $choices
+      do
+        case $choice in
 
-  echo ""
-  echo "Creando zona DNS de prueba..."
-  echo ""
-  echo 'zone "prueba.com" {'               >> /etc/bind/named.conf.local
-  echo "  type master;"                    >> /etc/bind/named.conf.local
-  echo '  file "/etc/bind/db.prueba.com";' >> /etc/bind/named.conf.local
-  echo "};"                                >> /etc/bind/named.conf.local
+          1)
 
-  echo ""
-  echo "Creando la base de datos de prueba..."
-  echo ""
-  cp /etc/bind/db.local /etc/bind/db.prueba.com
-  echo -e "router\tIN\tA\t192.168.1.1"     >> /etc/bind/db.prueba.com
-  echo -e "servidor\tIN\tA\t192.168.1.10"  >> /etc/bind/db.prueba.com
-  echo -e "impresora\tIN\tA\t192.168.1.11" >> /etc/bind/db.prueba.com
+            echo ""
+            echo "  Instalando el servidor DNS cache..."
+            echo ""
 
-  echo ""
-  echo "Corrigiendo los posibles errores de IPv6..."
-  echo ""
-  sed -i -e 's|RESOLVCONF=no|RESOLVCONF=yes|g'           /etc/default/named
-  sed -i -e 's|OPTIONS="-u bind"|OPTIONS="-4 -u bind"|g' /etc/default/named
+            echo ""
+            echo "  Borrando instalación existente (si es que existe)..."
+            echo ""
+            mkdir -p /CopSegInt/ 2> /dev/null
+            mkdir -p /CopSegInt/DNS/etc/ 2> /dev/null
+            mv /etc/bind/ /CopSegInt/DNS/etc/
+            chattr -i /etc/resolv.conf
+            rm -rf /var/cache/bind/ 2> /dev/null
+            rm -rf /etc/bind/ 2> /dev/null
+            systemctl stop bind9.service
+            systemctl disable bind9.service
+            apt-get -y purge bind9 dnsutils
 
-  echo ""
-  echo "Configurando logs..."
-  echo ""
+            echo ""
+            echo "  Instalando paquetes necesarios..."
+            echo ""
+            apt-get -y update
+            apt-get -y install bind9
+            apt-get -y install dnsutils
 
-  echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
+            echo ""
+            echo " Configurando el archivo /etc/bind/named.conf.options..."
+            echo ""
+            echo 'options {'                       > /etc/bind/named.conf.options
+            echo '  directory "/var/cache/bind";' >> /etc/bind/named.conf.options
+            echo '  forwarders {'                 >> /etc/bind/named.conf.options
+            echo '    1.1.1.1;'                   >> /etc/bind/named.conf.options
+            echo '    8.8.8.8;'                   >> /etc/bind/named.conf.options
+            echo '  }'                            >> /etc/bind/named.conf.options
+            echo '  dnssec-validation auto;'      >> /etc/bind/named.conf.options
+            echo '  listen-on-v6 { any; };'       >> /etc/bind/named.conf.options
+            echo '  allow-query { any; };'        >> /etc/bind/named.conf.options
+            echo '  listen-on { any; };'          >> /etc/bind/named.conf.options
+            
+            
+            echo "};"                             >> /etc/bind/named.conf.options
 
-  echo 'logging {'                                                            > /etc/bind/named.conf.log
-  echo '  channel "default" {'                                               >> /etc/bind/named.conf.log
-  echo '    file "/var/log/named/default.log" versions 10 size 10m;'         >> /etc/bind/named.conf.log
-  echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
-  echo '    print-severity YES;'                                             >> /etc/bind/named.conf.log
-  echo '    print-category YES;'                                             >> /etc/bind/named.conf.log
-  echo '  };'                                                                >> /etc/bind/named.conf.log
-  echo ''                                                                    >> /etc/bind/named.conf.log
-  echo '  channel "lame-servers" {'                                          >> /etc/bind/named.conf.log
-  echo '    file "/var/log/named/lame-servers.log" versions 1 size 5m;'      >> /etc/bind/named.conf.log
-  echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
-  echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
-  echo '    severity info;'                                                  >> /etc/bind/named.conf.log
-  echo '  };'                                                                >> /etc/bind/named.conf.log
-  echo ''                                                                    >> /etc/bind/named.conf.log
-  echo '  channel "queries" {'                                               >> /etc/bind/named.conf.log
-  echo '    file "/var/log/named/queries.log" versions 10 size 10m;'         >> /etc/bind/named.conf.log
-  echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
-  echo '    print-severity NO;'                                              >> /etc/bind/named.conf.log
-  echo '    print-category NO;'                                              >> /etc/bind/named.conf.log
-  echo '  };'                                                                >> /etc/bind/named.conf.log
-  echo ''                                                                    >> /etc/bind/named.conf.log
-  echo '  channel "security" {'                                              >> /etc/bind/named.conf.log
-  echo '    file "/var/log/named/security.log" versions 10 size 10m;'        >> /etc/bind/named.conf.log
-  echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
-  echo '    print-severity NO;'                                              >> /etc/bind/named.conf.log
-  echo '    print-category NO;'                                              >> /etc/bind/named.conf.log
-  echo '  };'                                                                >> /etc/bind/named.conf.log
-  echo ''                                                                    >> /etc/bind/named.conf.log
-  echo '  channel "update" {'                                                >> /etc/bind/named.conf.log
-  echo '    file "/var/log/named/update.log" versions 10 size 10m;'          >> /etc/bind/named.conf.log
-  echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
-  echo '    print-severity NO;'                                              >> /etc/bind/named.conf.log
-  echo '    print-category NO;'                                              >> /etc/bind/named.conf.log
-  echo '  };'                                                                >> /etc/bind/named.conf.log
-  echo ''                                                                    >> /etc/bind/named.conf.log
-  echo '  channel "update-security" {'                                       >> /etc/bind/named.conf.log
-  echo '    file "/var/log/named/update-security.log" versions 10 size 10m;' >> /etc/bind/named.conf.log
-  echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
-  echo '    print-severity NO;'                                              >> /etc/bind/named.conf.log
-  echo '    print-category NO;'                                              >> /etc/bind/named.conf.log
-  echo '  };'                                                                >> /etc/bind/named.conf.log
-  echo ''                                                                    >> /etc/bind/named.conf.log
-  echo '  category "default"         { "default"; };'                        >> /etc/bind/named.conf.log
-  echo '  category "lame-servers"    { "lame-servers"; };'                   >> /etc/bind/named.conf.log
-  echo '  category "queries"         { "queries"; };'                        >> /etc/bind/named.conf.log
-  echo '  category "security"        { "security"; };'                       >> /etc/bind/named.conf.log
-  echo '  category "update"          { "update"; };'                         >> /etc/bind/named.conf.log
-  echo '  category "update-security" { "update-security"; };'                >> /etc/bind/named.conf.log
-  echo ''                                                                    >> /etc/bind/named.conf.log
-  echo '};'                                                                  >> /etc/bind/named.conf.log
+echo ""
+named-checkconf
 
-  mkdir /var/log/named
-  chown -R bind:bind /var/log/named
+tail /var/log/syslog
 
-  chattr +i /etc/resolv.conf
 
-  echo ""
-  echo "Reiniciando el servidor DNS..."
-  echo ""
-  service bind9 restart
+            echo ""
+            echo "  Instalando resolvconf y configurando IP loopack"
+            echo ""
+            apt-get -y install resolvconf
+            echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
 
-  echo ""
-  echo "Mostrando el estado del servidor DNS..."
-  echo ""
-  service bind9 status
+
+volcar cache a un archivo con un comando
+          ;;
+
+          2)
+
+            echo ""
+            echo "  Instalando el servidor DNS maestro..."
+            echo ""
+
+            # Desinstalar cualquier posible paquete previamente instalado
+              mkdir -p /CopSegInt/ 2> /dev/null
+              mkdir -p /CopSegInt/DNS/etc/ 2> /dev/null
+              mv /etc/bind/ /CopSegInt/DNS/etc/
+              chattr -i /etc/resolv.conf
+              rm -rf /var/cache/bind/ 2> /dev/null
+              rm -rf /etc/bind/ 2> /dev/null
+              systemctl stop bind9.service
+              systemctl disable bind9.service
+              apt-get -y purge bind9 dnsutils
+
+            echo ""
+            echo "Instalando paquetes necesarios..."
+            echo ""
+            apt-get -y update
+            apt-get -y install bind9 dnsutils
+
+            echo ""
+            echo "Realizando cambios en la configuración..."
+            echo ""
+            sed -i "1s|^|nameserver 127.0.0.1\n|" /etc/resolv.conf
+            sed -i -e 's|// forwarders {|forwarders {|g' /etc/bind/named.conf.options
+            sed -i "/0.0.0.0;/c\1.1.1.1;"                /etc/bind/named.conf.options
+            sed -i -e 's|// };|};|g'                     /etc/bind/named.conf.options
+
+            echo ""
+            echo "Creando zona DNS de prueba..."
+            echo ""
+            echo 'zone "prueba.com" {'               >> /etc/bind/named.conf.local
+            echo "  type master;"                    >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.prueba.com";' >> /etc/bind/named.conf.local
+            echo "};"                                >> /etc/bind/named.conf.local
+
+            echo ""
+            echo "Creando la base de datos de prueba..."
+            echo ""
+            cp /etc/bind/db.local /etc/bind/db.prueba.com
+            echo -e "router\tIN\tA\t192.168.1.1"     >> /etc/bind/db.prueba.com
+            echo -e "servidor\tIN\tA\t192.168.1.10"  >> /etc/bind/db.prueba.com
+            echo -e "impresora\tIN\tA\t192.168.1.11" >> /etc/bind/db.prueba.com
+
+            echo ""
+            echo "Corrigiendo los posibles errores de IPv6..."
+            echo ""
+            sed -i -e 's|RESOLVCONF=no|RESOLVCONF=yes|g'           /etc/default/named
+            sed -i -e 's|OPTIONS="-u bind"|OPTIONS="-4 -u bind"|g' /etc/default/named
+
+            echo ""
+            echo "Configurando logs..."
+            echo ""
+
+            echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
+
+            echo 'logging {'                                                            > /etc/bind/named.conf.log
+            echo '  channel "default" {'                                               >> /etc/bind/named.conf.log
+            echo '    file "/var/log/named/default.log" versions 10 size 10m;'         >> /etc/bind/named.conf.log
+            echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity YES;'                                             >> /etc/bind/named.conf.log
+            echo '    print-category YES;'                                             >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "lame-servers" {'                                          >> /etc/bind/named.conf.log
+            echo '    file "/var/log/named/lame-servers.log" versions 1 size 5m;'      >> /etc/bind/named.conf.log
+            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "queries" {'                                               >> /etc/bind/named.conf.log
+            echo '    file "/var/log/named/queries.log" versions 10 size 10m;'         >> /etc/bind/named.conf.log
+            echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity NO;'                                              >> /etc/bind/named.conf.log
+            echo '    print-category NO;'                                              >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "security" {'                                              >> /etc/bind/named.conf.log
+            echo '    file "/var/log/named/security.log" versions 10 size 10m;'        >> /etc/bind/named.conf.log
+            echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity NO;'                                              >> /etc/bind/named.conf.log
+            echo '    print-category NO;'                                              >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "update" {'                                                >> /etc/bind/named.conf.log
+            echo '    file "/var/log/named/update.log" versions 10 size 10m;'          >> /etc/bind/named.conf.log
+            echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity NO;'                                              >> /etc/bind/named.conf.log
+            echo '    print-category NO;'                                              >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "update-security" {'                                       >> /etc/bind/named.conf.log
+            echo '    file "/var/log/named/update-security.log" versions 10 size 10m;' >> /etc/bind/named.conf.log
+            echo '    print-time YES;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity NO;'                                              >> /etc/bind/named.conf.log
+            echo '    print-category NO;'                                              >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  category "default"         { "default"; };'                        >> /etc/bind/named.conf.log
+            echo '  category "lame-servers"    { "lame-servers"; };'                   >> /etc/bind/named.conf.log
+            echo '  category "queries"         { "queries"; };'                        >> /etc/bind/named.conf.log
+            echo '  category "security"        { "security"; };'                       >> /etc/bind/named.conf.log
+            echo '  category "update"          { "update"; };'                         >> /etc/bind/named.conf.log
+            echo '  category "update-security" { "update-security"; };'                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '};'                                                                  >> /etc/bind/named.conf.log
+
+            mkdir /var/log/named
+            chown -R bind:bind /var/log/named
+
+            chattr +i /etc/resolv.conf
+
+            echo ""
+            echo "Reiniciando el servidor DNS..."
+            echo ""
+            service bind9 restart
+
+            echo ""
+            echo "Mostrando el estado del servidor DNS..."
+            echo ""
+            service bind9 status
+
+          ;;
+
+          3)
+
+            echo ""
+            echo "  Instalando el servidor DNS esclavo..."
+            echo ""
+
+          ;;
+
+      esac
+
+  done
 
 fi
