@@ -170,7 +170,8 @@ elif [ $OS_VERS == "11" ]; then
           echo "    Instalando resolvconf y configurando IP loopack"
           echo ""
           apt-get -y install resolvconf
-          echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
+          sed -i -e 's|nameserver 127.0.0.1||g' /etc/resolvconf/resolv.conf.d/head
+          echo "nameserver 127.0.0.1" >         /etc/resolvconf/resolv.conf.d/head
 
           # echo ""
           # echo "  Instalando herramientas extra..."
