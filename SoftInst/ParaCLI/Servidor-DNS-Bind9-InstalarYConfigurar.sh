@@ -160,7 +160,7 @@ elif [ $OS_VERS == "11" ]; then
             echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
             echo ""
             vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.options)
-            if [ $vRespuestaCheckConf = "" ]; then
+            if [ "$vRespuestaCheckConf" = "" ]; then
               echo "    La configuración de /etc/bind/named.conf.options es correcta"
             else
               echo "    La sintaxis del archivo /etc/bind/named.conf.options no es correcta:"
