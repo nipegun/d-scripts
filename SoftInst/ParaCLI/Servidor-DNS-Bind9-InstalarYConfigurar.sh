@@ -143,7 +143,7 @@ elif [ $OS_VERS == "11" ]; then
           echo "    Configurando el archivo /etc/bind/named.conf.options..."
           echo ""
           echo 'options {'                       > /etc/bind/named.conf.options
-          echo '  directory "/var/cache/bind";' >> /etc/bind/named.conf.options
+          echo '  directory "/var/cache/bind";' >> /etc/bind/named.conf.options # Carpeta donde se quiere guardar la cache con "rndc dumpdb -cache"
           echo '  forwarders {'                 >> /etc/bind/named.conf.options
           echo '    1.1.1.1;'                   >> /etc/bind/named.conf.options
           echo '    8.8.8.8;'                   >> /etc/bind/named.conf.options
@@ -200,7 +200,6 @@ elif [ $OS_VERS == "11" ]; then
             echo "        $vRespuestaCheckConf"
           fi
 
-
           echo ""
           echo "    Instalando resolvconf y configurando IP loopack"
           echo ""
@@ -229,22 +228,24 @@ elif [ $OS_VERS == "11" ]; then
           echo "  Instalando el servidor DNS maestro..."
           echo ""
 
-          # Desinstalar cualquier posible paquete previamente instalado
-            mkdir -p /CopSegInt/ 2> /dev/null
-            mkdir -p /CopSegInt/DNS/etc/ 2> /dev/null
-            mv /etc/bind/ /CopSegInt/DNS/etc/
-            chattr -i /etc/resolv.conf
-            rm -rf /var/cache/bind/ 2> /dev/null
-            rm -rf /etc/bind/ 2> /dev/null
-            systemctl stop bind9.service
-            systemctl disable bind9.service
-            apt-get -y purge bind9 dnsutils
+          echo ""
+          echo "    Borrando instalación existente (si es que existe)..."
+          echo ""
+          mkdir -p /CopSegInt/              2> /dev/null
+          mkdir -p /CopSegInt/DNS/etc/      2> /dev/null
+          mv /etc/bind/ /CopSegInt/DNS/etc/ 2> /dev/null
+          chattr -i /etc/resolv.conf        2> /dev/null
+          rm -rf /var/cache/bind/
+          rm -rf /etc/bind/
+          systemctl stop bind9.service
+          systemctl disable bind9.service
+          apt-get -y purge bind9
+          apt-get -y purge dnsutils
 
           echo ""
-          echo "Instalando paquetes necesarios..."
+          echo "    Instalando bind9..."
           echo ""
-          apt-get -y update
-          apt-get -y install bind9 dnsutils
+          apt-get -y update && apt-get -y install bind9
 
           echo ""
           echo "Realizando cambios en la configuración..."
