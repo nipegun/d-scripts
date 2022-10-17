@@ -151,7 +151,7 @@ elif [ $OS_VERS == "11" ]; then
             echo '  listen-on { any; };'          >> /etc/bind/named.conf.options # Que IPs tienen acceso al servicio
             echo '  allow-query { any; };'        >> /etc/bind/named.conf.options # Quién tiene permiso a hacer cualquier tipo de query
             echo '  allow-query-cache { any; };'  >> /etc/bind/named.conf.options # Quién tiene permiso a las queries guardadas en el cache
-            echo '  allow-recursion { any; };'    >> /etc/bind/named.conf.options # Quién tiene acceso a consultas recursivas
+            echo '  allow-recursion { any; }'    >> /etc/bind/named.conf.options # Quién tiene acceso a consultas recursivas
             #echo '  dnssec-validation auto;'     >> /etc/bind/named.conf.options
             #echo '  listen-on-v6 { any; };'      >> /etc/bind/named.conf.options
             echo "};"                             >> /etc/bind/named.conf.options
@@ -161,9 +161,9 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.options)
             if [ "$vRespuestaCheckConf" = "" ]; then
-              echo "    La configuración de /etc/bind/named.conf.options es correcta"
+              echo "      La configuración de /etc/bind/named.conf.options es correcta."
             else
-              echo "    La sintaxis del archivo /etc/bind/named.conf.options no es correcta:"
+              echo "      La sintaxis del archivo /etc/bind/named.conf.options no es correcta:"
               echo "    $vRespuestaCheckConf"
             fi
             
