@@ -428,7 +428,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             cp /etc/bind/db.127 /etc/bind/db.lan-inversa.local
             sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.lan-inversa.local
-            sed -i -e 's|localhost.|servdnsmae.lan.local.|g'                      /etc/bind/db.lan-inversa.local
+            sed -i -e 's|localhost.|servdnsmaes.lan.local.|g'                      /etc/bind/db.lan-inversa.local
             sed -i -e 's|1.0.0|1|g'                                               /etc/bind/db.lan-inversa.local
             echo -e "10\tIN\tPTR\tubuntuserver.lan.local."                     >> /etc/bind/db.lan-inversa.local
             echo -e "20\tIN\tPTR\tubuntudesktop.lan.local."                    >> /etc/bind/db.lan-inversa.local
