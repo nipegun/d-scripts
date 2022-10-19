@@ -404,13 +404,13 @@ elif [ $OS_VERS == "11" ]; then
 
           # Crear y popular zona LAN inversa...
             echo ""
-            echo "Creando y populando la base de datos de de la zona LAN indirecta..."
+            echo "Creando y populando la base de datos de de la zona LAN inversa..."
             echo ""
             cp /etc/bind/db.127 /etc/bind/db.lan-inversa.local
-            echo -e "ubuntuserver\tIN\tA\t192.168.1.10"   >> /etc/bind/db.lan-inversa.local
-            echo -e "ubuntudesktop\tIN\tA\t192.168.1.20"  >> /etc/bind/db.lan-inversa.local
-            echo -e "windowsserver\tIN\tA\t192.168.1.30"  >> /etc/bind/db.lan-inversa.local
-            echo -e "windowsdesktop\tIN\tA\t192.168.1.40" >> /etc/bind/db.lan-inversa.local
+            echo -e "192.168.1.10\tIN\tA\tubuntuserver\tIN\tA\t"  >> /etc/bind/db.lan-inversa.local
+            echo -e "192.168.1.20\tIN\tA\tubuntudesktop\tIN\tA\t" >> /etc/bind/db.lan-inversa.local
+            echo -e "192.168.1.30\tIN\tA\twindowsserver"          >> /etc/bind/db.lan-inversa.local
+            echo -e "192.168.1.40\tIN\tA\twindowsdesktop"         >> /etc/bind/db.lan-inversa.local
   
           # Linkear zona LAN inversa a /etc/bind/named.conf.local
             echo ""
