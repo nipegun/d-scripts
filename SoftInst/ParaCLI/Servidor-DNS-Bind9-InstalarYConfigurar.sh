@@ -376,7 +376,8 @@ elif [ $OS_VERS == "11" ]; then
             echo "  Instalando herramientas extra..."
             echo ""
             apt-get -y install dnsutils
-  
+
+
           # Crear y popular zona LAN directa...
             echo ""
             echo "Creando y populando la base de datos de de la zona LAN directa..."
@@ -402,16 +403,41 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             named-checkzone lan.local /etc/bind/db.lan-directa.local
 
+
           # Crear y popular zona LAN inversa...
             echo ""
             echo "Creando y populando la base de datos de de la zona LAN inversa..."
             echo ""
             cp /etc/bind/db.127 /etc/bind/db.lan-inversa.local
-            echo -e "192.168.1.10\tIN\tA\tubuntuserver\tIN\tA\t"  >> /etc/bind/db.lan-inversa.local
-            echo -e "192.168.1.20\tIN\tA\tubuntudesktop\tIN\tA\t" >> /etc/bind/db.lan-inversa.local
-            echo -e "192.168.1.30\tIN\tA\twindowsserver"          >> /etc/bind/db.lan-inversa.local
-            echo -e "192.168.1.40\tIN\tA\twindowsdesktop"         >> /etc/bind/db.lan-inversa.local
-  
+            echo -e "10.1\tIN\tPTR\tubuntuserver.lan.local."   >> /etc/bind/db.lan-inversa.local
+            echo -e "20.1\tIN\tPTR\tubuntudesktop.lan.local."  >> /etc/bind/db.lan-inversa.local
+            echo -e "30.1\tIN\tPTR\twindowsserver.lan.local."  >> /etc/bind/db.lan-inversa.local
+            echo -e "40.1\tIN\tPTR\twindowsdesktop.lan.local." >> /etc/bind/db.lan-inversa.local
+            sed -i -e 's|@\tIN\tSOA\tlocalhost.\troot.localhost.|@\tIN\tSOA\tlan.local.\troot.lan.local.|g' /etc/bind/db.lan-inversa.local
+            
+            sed -i -e 's-localhost.lan.local.-g' /etc/bind/db.lan-inversa.local
+                        
+            sed -i -e 's-localhost.lan.local.-g' /etc/bind/db.lan-inversa.local
+
+; BIND reverse data file for local loopback interface
+;
+$TTL 604800
+@ IN SOA midominio.es. root.midominio.es. (
+1002 ; Serial
+604800 ; Refresh
+86400 ; Retry
+2419200 ; Expire
+604800 ) ; Negative Cache TTL
+;
+@ IN NS ns.midominio.es.
+1 IN PTR ns.midominio.es.
+
+
+
+
+
+
+
           # Linkear zona LAN inversa a /etc/bind/named.conf.local
             echo ""
             echo "Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
@@ -426,6 +452,8 @@ elif [ $OS_VERS == "11" ]; then
             echo "  Comprobando la zona inversa..."
             echo ""
             named-checkzone 1.168.192.in-addr-arpa /etc/bind/db.lan-inversa.local
+
+zone "128.10.in-addr.arpa
 
           # Coregir errores IPv6
             echo ""
