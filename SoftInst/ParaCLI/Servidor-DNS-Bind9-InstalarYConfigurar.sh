@@ -394,27 +394,6 @@ elif [ $OS_VERS == "11" ]; then
   
 
 
-          
-            
-            
-            
-
-
-          echo ""
-          echo "Realizando cambios en la configuración..."
-          echo ""
-          sed -i "1s|^|nameserver 127.0.0.1\n|" /etc/resolv.conf
-          sed -i -e 's|// forwarders {|forwarders {|g' /etc/bind/named.conf.options
-          sed -i "/0.0.0.0;/c\1.1.1.1;"                /etc/bind/named.conf.options
-          sed -i -e 's|// };|};|g'                     /etc/bind/named.conf.options
-
-
-          echo ""
-          echo "Configurando logs..."
-          echo ""
-
-          echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
-
 
 
 
@@ -442,10 +421,6 @@ elif [ $OS_VERS == "11" ]; then
 
 
 
-          mkdir /var/log/named
-          chown -R bind:bind /var/log/named
-
-          chattr +i /etc/resolv.conf
 
           echo ""
           echo "Reiniciando el servidor DNS..."
@@ -456,8 +431,6 @@ elif [ $OS_VERS == "11" ]; then
           echo "Mostrando el estado del servidor DNS..."
           echo ""
           service bind9 status
-
-
 
         ;;
 
