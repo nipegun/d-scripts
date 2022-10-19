@@ -383,6 +383,8 @@ elif [ $OS_VERS == "11" ]; then
             echo "Creando y populando la base de datos de de la zona LAN directa..."
             echo ""
             cp /etc/bind/db.local /etc/bind/db.lan-directa.local
+            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.lan-directa.local
+            sed -i -e 's|localhost.|servdnsmaster.lan.local.|g'                   /etc/bind/db.lan-inversa.local
             echo -e "ubuntuserver\tIN\tA\t192.168.200.10"   >> /etc/bind/db.lan-directa.local
             echo -e "ubuntudesktop\tIN\tA\t192.168.200.20"  >> /etc/bind/db.lan-directa.local
             echo -e "windowsserver\tIN\tA\t192.168.200.30"  >> /etc/bind/db.lan-directa.local
