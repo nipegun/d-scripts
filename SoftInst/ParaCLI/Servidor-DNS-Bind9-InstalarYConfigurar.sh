@@ -136,10 +136,10 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y purge dnsutils
 
           # Cambiar el hostname
-            echo "servdnscache" > /etc/hostname
+            echo "servdnsca" > /etc/hostname
 
           # Cambiar el hosts
-            echo "127.0.0.1 servdnsmaster servdnscache.lan.local" >> /etc/hosts
+            echo "127.0.0.1 servdnsca servdnsca.lan.local" >> /etc/hosts
 
           # Instalar paquete
             echo ""
