@@ -409,36 +409,12 @@ elif [ $OS_VERS == "11" ]; then
             echo "Creando y populando la base de datos de de la zona LAN inversa..."
             echo ""
             cp /etc/bind/db.127 /etc/bind/db.lan-inversa.local
-            echo -e "10.1\tIN\tPTR\tubuntuserver.lan.local."   >> /etc/bind/db.lan-inversa.local
-            echo -e "20.1\tIN\tPTR\tubuntudesktop.lan.local."  >> /etc/bind/db.lan-inversa.local
-            echo -e "30.1\tIN\tPTR\twindowsserver.lan.local."  >> /etc/bind/db.lan-inversa.local
-            echo -e "40.1\tIN\tPTR\twindowsdesktop.lan.local." >> /etc/bind/db.lan-inversa.local
-            sed -i -e 's|@\tIN\tSOA\tlocalhost.\troot.localhost.|@\tIN\tSOA\tlan.local.\troot.lan.local.|g' /etc/bind/db.lan-inversa.local
-            sed -i -e 's|@$(printf '\t')IN$(printf '\t')SOA$(printf '\t')localhost.$(printf '\t')root.localhost.|@$(printf '\t')IN$(printf '\t')SOA$(printf '\t')lan.local.$(printf '\t')root.lan.local.|g' /etc/bind/db.lan-inversa.local
-            sed -i -e 's|localhost.$(printf '\t')root.localhost.|lan.local.$(printf '\t')root.lan.local.|g' /etc/bind/db.lan-inversa.local
-
-            sed -i -e 's-localhost.lan.local.-g' /etc/bind/db.lan-inversa.local
-                        
-            sed -i -e 's-localhost.lan.local.-g' /etc/bind/db.lan-inversa.local
-
-; BIND reverse data file for local loopback interface
-;
-$TTL 604800
-@ IN SOA midominio.es. root.midominio.es. (
-1002 ; Serial
-604800 ; Refresh
-86400 ; Retry
-2419200 ; Expire
-604800 ) ; Negative Cache TTL
-;
-@ IN NS ns.midominio.es.
-1 IN PTR ns.midominio.es.
-
-
-
-
-
-
+            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.lan-inversa.local
+            sed -i -e 's|localhost.|servdnsmaster.lan.local.|g'                    /etc/bind/db.lan-inversa.local
+            echo -e "10.1\tIN\tPTR\tubuntuserver.lan.local."                   >> /etc/bind/db.lan-inversa.local
+            echo -e "20.1\tIN\tPTR\tubuntudesktop.lan.local."                  >> /etc/bind/db.lan-inversa.local
+            echo -e "30.1\tIN\tPTR\twindowsserver.lan.local."                  >> /etc/bind/db.lan-inversa.local
+            echo -e "40.1\tIN\tPTR\twindowsdesktop.lan.local."                 >> /etc/bind/db.lan-inversa.local
 
           # Linkear zona LAN inversa a /etc/bind/named.conf.local
             echo ""
