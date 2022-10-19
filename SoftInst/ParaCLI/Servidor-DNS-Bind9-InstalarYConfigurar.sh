@@ -238,6 +238,10 @@ elif [ $OS_VERS == "11" ]; then
 
         2)
 
+          echo ""
+          echo "  Instalando como servidor DNS maestro..."
+          echo ""
+
           # Borrar instalación existente
             echo ""
             echo "    Borrando instalación existente (si es que existe)..."
@@ -254,10 +258,10 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y purge dnsutils
 
           # Cambiar el hostname
-            echo "servdnsmaster" > /etc/hostname
+            echo "servdnsmaes" > /etc/hostname
 
           # Cambiar el hosts
-            echo "127.0.0.1 servdnsmaster servdnsmaster.lan.local" >> /etc/hosts
+            echo "127.0.0.1 servdnsmaes servdnsmaes.lan.local" >> /etc/hosts
 
           # Instalar paquete
             echo ""
@@ -396,7 +400,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             cp /etc/bind/db.local /etc/bind/db.lan-directa.local
             sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.lan-directa.local
-            sed -i -e 's|localhost.|servdnsmaster.lan.local.|g'                   /etc/bind/db.lan-inversa.local
+            sed -i -e 's|localhost.|servdnsmaes.lan.local.|g'                     /etc/bind/db.lan-inversa.local
             echo -e "ubuntuserver\tIN\tA\t192.168.200.10"                      >> /etc/bind/db.lan-directa.local
             echo -e "ubuntudesktop\tIN\tA\t192.168.200.20"                     >> /etc/bind/db.lan-directa.local
             echo -e "windowsserver\tIN\tA\t192.168.200.30"                     >> /etc/bind/db.lan-directa.local
