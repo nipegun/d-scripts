@@ -415,7 +415,8 @@ elif [ $OS_VERS == "11" ]; then
             echo -e "40.1\tIN\tPTR\twindowsdesktop.lan.local." >> /etc/bind/db.lan-inversa.local
             sed -i -e 's|@\tIN\tSOA\tlocalhost.\troot.localhost.|@\tIN\tSOA\tlan.local.\troot.lan.local.|g' /etc/bind/db.lan-inversa.local
             sed -i -e 's|@$(printf '\t')IN$(printf '\t')SOA$(printf '\t')localhost.$(printf '\t')root.localhost.|@$(printf '\t')IN$(printf '\t')SOA$(printf '\t')lan.local.$(printf '\t')root.lan.local.|g' /etc/bind/db.lan-inversa.local
-            
+            sed -i -e 's|localhost.$(printf '\t')root.localhost.|lan.local.$(printf '\t')root.lan.local.|g' /etc/bind/db.lan-inversa.local
+
             sed -i -e 's-localhost.lan.local.-g' /etc/bind/db.lan-inversa.local
                         
             sed -i -e 's-localhost.lan.local.-g' /etc/bind/db.lan-inversa.local
