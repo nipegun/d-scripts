@@ -377,73 +377,55 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             apt-get -y install dnsutils
   
-          # Zona directa
-            mkdir /etc/bind/miszonas/
-            cp /etc/bind/db.local /etc/bind/miszonas/db.directa
-            echo ""
-            echo "  Comprobando la zona directa..."
-            echo ""
-            named-checkzone dnsbind.com /etc/bind/miszonas/db.directa
-
-          # Zona inversa
-            cp /etc/bind/db.127 /etc/bind/miszonas/db.inversa
-            echo ""
-            echo "  Comprobando la zona inversa..."
-            echo ""
-            named-checkzone 1.168.192.in-addr-arpa /etc/bind/miszonas/db.inversa  
-  
-  
-  
-  
           # Crear y popular zona LAN directa...
             echo ""
             echo "Creando y populando la base de datos de de la zona LAN directa..."
             echo ""
-            cp /etc/bind/db.local /etc/bind/db.zonalandirecta.local
-            echo -e "ubuntuserver\tIN\tA\t192.168.1.10"   >> /etc/bind/db.zonalandirecta.local
-            echo -e "ubuntudesktop\tIN\tA\t192.168.1.20"  >> /etc/bind/db.zonalandirecta.local
-            echo -e "windowsserver\tIN\tA\t192.168.1.30"  >> /etc/bind/db.zonalandirecta.local
-            echo -e "windowsdesktop\tIN\tA\t192.168.1.40" >> /etc/bind/db.zonalandirecta.local
+            cp /etc/bind/db.local /etc/bind/db.lan-directa.local
+            echo -e "ubuntuserver\tIN\tA\t192.168.1.10"   >> /etc/bind/db.lan-directa.local
+            echo -e "ubuntudesktop\tIN\tA\t192.168.1.20"  >> /etc/bind/db.lan-directa.local
+            echo -e "windowsserver\tIN\tA\t192.168.1.30"  >> /etc/bind/db.lan-directa.local
+            echo -e "windowsdesktop\tIN\tA\t192.168.1.40" >> /etc/bind/db.lan-directa.local
   
           # Linkear zona LAN directa a /etc/bind/named.conf.local
             echo ""
             echo "Linkeando zona LAN directa a /etc/bind/named.conf.local..."
             echo ""
-            echo 'zone "zonalandirecta.local" {'               >> /etc/bind/named.conf.local
-            echo "  type master;"                              >> /etc/bind/named.conf.local
-            echo '  file "/etc/bind/db.zonalandirecta.local";' >> /etc/bind/named.conf.local
-            echo "};"                                          >> /etc/bind/named.conf.local
+            echo 'zone "lan.local" {'                       >> /etc/bind/named.conf.local
+            echo "  type master;"                           >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.lan-directa.local";' >> /etc/bind/named.conf.local
+            echo "};"                                       >> /etc/bind/named.conf.local
 
           # Comprobar la LAN zona directa
             echo ""
             echo "  Comprobando la zona directa..."
             echo ""
-            named-checkzone dnsbind.com /etc/bind/db.zonalandirecta.local
+            named-checkzone lan.local /etc/bind/db.lan-directa.local
 
           # Crear y popular zona LAN inversa...
             echo ""
             echo "Creando y populando la base de datos de de la zona LAN indirecta..."
             echo ""
-            cp /etc/bind/db.local /etc/bind/db.zonalaninversa.local
-            echo -e "ubuntuserver\tIN\tA\t192.168.1.10"   >> /etc/bind/db.zonalaninversa.local
-            echo -e "ubuntudesktop\tIN\tA\t192.168.1.20"  >> /etc/bind/db.zonalaninversa.local
-            echo -e "windowsserver\tIN\tA\t192.168.1.30"  >> /etc/bind/db.zonalaninversa.local
-            echo -e "windowsdesktop\tIN\tA\t192.168.1.40" >> /etc/bind/db.zonalaninversa.local
+            cp /etc/bind/db.127 /etc/bind/db.lan-inversa.local
+            echo -e "ubuntuserver\tIN\tA\t192.168.1.10"   >> /etc/bind/db.lan-inversa.local
+            echo -e "ubuntudesktop\tIN\tA\t192.168.1.20"  >> /etc/bind/db.lan-inversa.local
+            echo -e "windowsserver\tIN\tA\t192.168.1.30"  >> /etc/bind/db.lan-inversa.local
+            echo -e "windowsdesktop\tIN\tA\t192.168.1.40" >> /etc/bind/db.lan-inversa.local
   
           # Linkear zona LAN inversa a /etc/bind/named.conf.local
             echo ""
-            echo "Linkeando zona LAN directa a /etc/bind/named.conf.local..."
+            echo "Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
             echo ""
-            echo 'zone "zonalaninversa.local" {'               >> /etc/bind/named.conf.local
-            echo "  type master;"                              >> /etc/bind/named.conf.local
-            echo '  file "/etc/bind/db.zonalaninversa.local";' >> /etc/bind/named.conf.local
-            echo "};"                                          >> /etc/bind/named.conf.local
+            echo 'zone "lan.local" {'                       >> /etc/bind/named.conf.local
+            echo "  type master;"                           >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.lan-inversa.local";' >> /etc/bind/named.conf.local
+            echo "};"                                       >> /etc/bind/named.conf.local
 
           # Comprobar la LAN zona inversa
             echo ""
             echo "  Comprobando la zona inversa..."
             echo ""
-            named-checkzone 1.168.192.in-addr-arpa /etc/bind/db.zonalaninversa.local
+            named-checkzone 1.168.192.in-addr-arpa /etc/bind/db.lan-inversa.local
 
           # Coregir errores IPv6
             echo ""
