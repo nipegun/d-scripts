@@ -392,24 +392,58 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             named-checkzone 1.168.192.in-addr-arpa /etc/bind/miszonas/db.inversa  
   
-          # Zona LAN
+  
+  
+  
+          # Crear y popular zona LAN directa...
             echo ""
-            echo "Creando zona LAN..."
+            echo "Creando y populando la base de datos de de la zona LAN directa..."
             echo ""
-            echo 'zone "zonalan.local" {'               >> /etc/bind/named.conf.local
-            echo "  type master;"                       >> /etc/bind/named.conf.local
-            echo '  file "/etc/bind/db.zonalan.local";' >> /etc/bind/named.conf.local
-            echo "};"                                   >> /etc/bind/named.conf.local
+            cp /etc/bind/db.local /etc/bind/db.zonalandirecta.local
+            echo -e "ubuntuserver\tIN\tA\t192.168.1.10"   >> /etc/bind/db.zonalandirecta.local
+            echo -e "ubuntudesktop\tIN\tA\t192.168.1.20"  >> /etc/bind/db.zonalandirecta.local
+            echo -e "windowsserver\tIN\tA\t192.168.1.30"  >> /etc/bind/db.zonalandirecta.local
+            echo -e "windowsdesktop\tIN\tA\t192.168.1.40" >> /etc/bind/db.zonalandirecta.local
+  
+          # Linkear zona LAN directa a /etc/bind/named.conf.local
+            echo ""
+            echo "Linkeando zona LAN directa a /etc/bind/named.conf.local..."
+            echo ""
+            echo 'zone "zonalandirecta.local" {'               >> /etc/bind/named.conf.local
+            echo "  type master;"                              >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.zonalandirecta.local";' >> /etc/bind/named.conf.local
+            echo "};"                                          >> /etc/bind/named.conf.local
 
-          # Base de datos de la zona LAN...
+          # Comprobar la LAN zona directa
             echo ""
-            echo "Creando la base de datos de de la zona lan..."
+            echo "  Comprobando la zona directa..."
             echo ""
-            cp /etc/bind/db.local /etc/bind/db.zonalan.local
-            echo -e "ubuntuserver\tIN\tA\t192.168.1.10"   >> /etc/bind/db.zonalan.local
-            echo -e "ubuntudesktop\tIN\tA\t192.168.1.20"  >> /etc/bind/db.zonalan.local
-            echo -e "windowsserver\tIN\tA\t192.168.1.30"  >> /etc/bind/db.zonalan.local
-            echo -e "windowsdesktop\tIN\tA\t192.168.1.40" >> /etc/bind/db.zonalan.local
+            named-checkzone dnsbind.com /etc/bind/db.zonalandirecta.local
+
+          # Crear y popular zona LAN inversa...
+            echo ""
+            echo "Creando y populando la base de datos de de la zona LAN indirecta..."
+            echo ""
+            cp /etc/bind/db.local /etc/bind/db.zonalaninversa.local
+            echo -e "ubuntuserver\tIN\tA\t192.168.1.10"   >> /etc/bind/db.zonalaninversa.local
+            echo -e "ubuntudesktop\tIN\tA\t192.168.1.20"  >> /etc/bind/db.zonalaninversa.local
+            echo -e "windowsserver\tIN\tA\t192.168.1.30"  >> /etc/bind/db.zonalaninversa.local
+            echo -e "windowsdesktop\tIN\tA\t192.168.1.40" >> /etc/bind/db.zonalaninversa.local
+  
+          # Linkear zona LAN inversa a /etc/bind/named.conf.local
+            echo ""
+            echo "Linkeando zona LAN directa a /etc/bind/named.conf.local..."
+            echo ""
+            echo 'zone "zonalaninversa.local" {'               >> /etc/bind/named.conf.local
+            echo "  type master;"                              >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.zonalaninversa.local";' >> /etc/bind/named.conf.local
+            echo "};"                                          >> /etc/bind/named.conf.local
+
+          # Comprobar la LAN zona inversa
+            echo ""
+            echo "  Comprobando la zona inversa..."
+            echo ""
+            named-checkzone 1.168.192.in-addr-arpa /etc/bind/db.zonalaninversa.local
 
           # Coregir errores IPv6
             echo ""
@@ -418,14 +452,13 @@ elif [ $OS_VERS == "11" ]; then
             sed -i -e 's|RESOLVCONF=no|RESOLVCONF=yes|g'           /etc/default/named
             sed -i -e 's|OPTIONS="-u bind"|OPTIONS="-4 -u bind"|g' /etc/default/named
 
-
           # Reiniciar servidor DNS
             echo ""
             echo "Reiniciando el servidor DNS..."
             echo ""
             service bind9 restart
 
-          # Mostrar estado del log
+          # Mostrar estado del servidor
             echo ""
             echo "Mostrando el estado del servidor DNS..."
             echo ""
