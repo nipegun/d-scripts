@@ -135,6 +135,12 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y purge bind9
             apt-get -y purge dnsutils
 
+          # Cambiar el hostname
+            echo "servdnscache" > /etc/hostname
+
+          # Cambiar el hosts
+            echo "127.0.0.1 servdnsmaster servdnscache.lan.local" >> /etc/hosts
+
           # Instalar paquete
             echo ""
             echo "    Instalando bind9..."
@@ -246,6 +252,12 @@ elif [ $OS_VERS == "11" ]; then
             systemctl disable bind9.service
             apt-get -y purge bind9
             apt-get -y purge dnsutils
+
+          # Cambiar el hostname
+            echo "servdnsmaster" > /etc/hostname
+
+          # Cambiar el hosts
+            echo "127.0.0.1 servdnsmaster servdnsmaster.lan.local" >> /etc/hosts
 
           # Instalar paquete
             echo ""
@@ -412,7 +424,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             cp /etc/bind/db.127 /etc/bind/db.lan-inversa.local
             sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.lan-inversa.local
-            sed -i -e 's|localhost.|servdnsmaster.lan.local.|g'                   /etc/bind/db.lan-inversa.local
+            sed -i -e 's|localhost.|servdnsmae.lan.local.|g'                      /etc/bind/db.lan-inversa.local
             sed -i -e 's|1.0.0|1|g'                                               /etc/bind/db.lan-inversa.local
             echo -e "10\tIN\tPTR\tubuntuserver.lan.local."                     >> /etc/bind/db.lan-inversa.local
             echo -e "20\tIN\tPTR\tubuntudesktop.lan.local."                    >> /etc/bind/db.lan-inversa.local
@@ -461,6 +473,13 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Instalando el servidor DNS esclavo..."
           echo ""
+
+          # Cambiar el hostname
+            echo "servdnsesc" > /etc/hostname
+
+          # Cambiar el hosts
+            echo "127.0.0.1 servdnsesc servdnsesc.lan.local" >> /etc/hosts
+
 
         ;;
 
