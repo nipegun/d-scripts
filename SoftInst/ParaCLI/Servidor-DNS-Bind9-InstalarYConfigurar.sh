@@ -392,45 +392,44 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             named-checkzone 1.168.192.in-addr-arpa /etc/bind/miszonas/db.inversa  
   
+          # Zona LAN
+            echo ""
+            echo "Creando zona LAN..."
+            echo ""
+            echo 'zone "zonalan.local" {'               >> /etc/bind/named.conf.local
+            echo "  type master;"                       >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.zonalan.local";' >> /etc/bind/named.conf.local
+            echo "};"                                   >> /etc/bind/named.conf.local
+
+          # Base de datos de la zona LAN...
+            echo ""
+            echo "Creando la base de datos de de la zona lan..."
+            echo ""
+            cp /etc/bind/db.local /etc/bind/db.zonalan.local
+            echo -e "ubuntuserver\tIN\tA\t192.168.1.10"   >> /etc/bind/db.zonalan.local
+            echo -e "ubuntudesktop\tIN\tA\t192.168.1.20"  >> /etc/bind/db.zonalan.local
+            echo -e "windowsserver\tIN\tA\t192.168.1.30"  >> /etc/bind/db.zonalan.local
+            echo -e "windowsdesktop\tIN\tA\t192.168.1.40" >> /etc/bind/db.zonalan.local
+
+          # Coregir errores IPv6
+            echo ""
+            echo "Corrigiendo los posibles errores de IPv6..."
+            echo ""
+            sed -i -e 's|RESOLVCONF=no|RESOLVCONF=yes|g'           /etc/default/named
+            sed -i -e 's|OPTIONS="-u bind"|OPTIONS="-4 -u bind"|g' /etc/default/named
 
 
+          # Reiniciar servidor DNS
+            echo ""
+            echo "Reiniciando el servidor DNS..."
+            echo ""
+            service bind9 restart
 
-
-
-          echo ""
-          echo "Creando zona DNS de prueba..."
-          echo ""
-          echo 'zone "prueba.com" {'               >> /etc/bind/named.conf.local
-          echo "  type master;"                    >> /etc/bind/named.conf.local
-          echo '  file "/etc/bind/db.prueba.com";' >> /etc/bind/named.conf.local
-          echo "};"                                >> /etc/bind/named.conf.local
-
-          echo ""
-          echo "Creando la base de datos de prueba..."
-          echo ""
-          cp /etc/bind/db.local /etc/bind/db.prueba.com
-          echo -e "router\tIN\tA\t192.168.1.1"     >> /etc/bind/db.prueba.com
-          echo -e "servidor\tIN\tA\t192.168.1.10"  >> /etc/bind/db.prueba.com
-          echo -e "impresora\tIN\tA\t192.168.1.11" >> /etc/bind/db.prueba.com
-
-          echo ""
-          echo "Corrigiendo los posibles errores de IPv6..."
-          echo ""
-          sed -i -e 's|RESOLVCONF=no|RESOLVCONF=yes|g'           /etc/default/named
-          sed -i -e 's|OPTIONS="-u bind"|OPTIONS="-4 -u bind"|g' /etc/default/named
-
-
-
-
-          echo ""
-          echo "Reiniciando el servidor DNS..."
-          echo ""
-          service bind9 restart
-
-          echo ""
-          echo "Mostrando el estado del servidor DNS..."
-          echo ""
-          service bind9 status
+          # Mostrar estado del log
+            echo ""
+            echo "Mostrando el estado del servidor DNS..."
+            echo ""
+            service bind9 status
 
         ;;
 
