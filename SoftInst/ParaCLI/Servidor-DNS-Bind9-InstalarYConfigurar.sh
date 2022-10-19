@@ -135,11 +135,14 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y purge bind9
             apt-get -y purge dnsutils
 
-          # Cambiar el hostname
+          # Cambiar el /etc/hostname
             echo "servdnsca" > /etc/hostname
 
-          # Cambiar el hosts
+          # Cambiar el archivo /etc/hosts
             echo "127.0.0.1 servdnsca servdnsca.lan.local" >> /etc/hosts
+            # Determinal IP LAN
+              vIPLAN=$(hostname -I)
+            echo "$vIPLAN servdnsca servdnsca.lan.local" >> /etc/hosts
 
           # Instalar paquete
             echo ""
@@ -257,11 +260,14 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y purge bind9
             apt-get -y purge dnsutils
 
-          # Cambiar el hostname
+          # Cambiar el /etc/hostname
             echo "servdnsmaes" > /etc/hostname
 
-          # Cambiar el hosts
+          # Cambiar el archivo /etc/hosts
             echo "127.0.0.1 servdnsmaes servdnsmaes.lan.local" >> /etc/hosts
+            # Determinal IP LAN
+              vIPLAN=$(hostname -I)
+            echo "$vIPLAN servdnsmaes servdnsmaes.lan.local" >> /etc/hosts
 
           # Instalar paquete
             echo ""
@@ -478,12 +484,35 @@ elif [ $OS_VERS == "11" ]; then
           echo "  Instalando el servidor DNS esclavo..."
           echo ""
 
-          # Cambiar el hostname
+          # Borrar instalación existente
+            echo ""
+            echo "    Borrando instalación existente (si es que existe)..."
+            echo ""
+            mkdir -p /CopSegInt/              2> /dev/null
+            mkdir -p /CopSegInt/DNS/etc/      2> /dev/null
+            mv /etc/bind/ /CopSegInt/DNS/etc/ 2> /dev/null
+            chattr -i /etc/resolv.conf        2> /dev/null
+            rm -rf /var/cache/bind/
+            rm -rf /etc/bind/
+            systemctl stop bind9.service
+            systemctl disable bind9.service
+            apt-get -y purge bind9
+            apt-get -y purge dnsutils
+
+          # Cambiar el /etc/hostname
             echo "servdnsesc" > /etc/hostname
 
-          # Cambiar el hosts
+          # Cambiar el archivo /etc/hosts
             echo "127.0.0.1 servdnsesc servdnsesc.lan.local" >> /etc/hosts
+            # Determinal IP LAN
+              vIPLAN=$(hostname -I)
+            echo "$vIPLAN servdnsesc servdnsesc.lan.local" >> /etc/hosts
 
+          # Instalar paquete
+            echo ""
+            echo "    Instalando bind9..."
+            echo ""
+            apt-get -y update && apt-get -y install bind9
 
         ;;
 
