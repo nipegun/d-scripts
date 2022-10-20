@@ -336,36 +336,36 @@ elif [ $OS_VERS == "11" ]; then
             echo '    severity info;'                                                  >> /etc/bind/named.conf.log
             echo '  };'                                                                >> /etc/bind/named.conf.log
             echo ''                                                                    >> /etc/bind/named.conf.log
-            echo '  channel "security" {'                                              >> /etc/bind/named.conf.log
-            echo '    file "/var/log/bind9/security.log" versions 10 size 10m;'        >> /etc/bind/named.conf.log
-            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
-            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
-            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
-            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
-            echo '  };'                                                                >> /etc/bind/named.conf.log
-            echo ''                                                                    >> /etc/bind/named.conf.log
-            echo '  channel "update" {'                                                >> /etc/bind/named.conf.log
-            echo '    file "/var/log/bind9/update.log" versions 10 size 10m;'          >> /etc/bind/named.conf.log
-            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
-            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
-            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
-            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
-            echo '  };'                                                                >> /etc/bind/named.conf.log
-            echo ''                                                                    >> /etc/bind/named.conf.log
-            echo '  channel "update-security" {'                                       >> /etc/bind/named.conf.log
-            echo '    file "/var/log/bind9/update-security.log" versions 10 size 10m;' >> /etc/bind/named.conf.log
-            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
-            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
-            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
-            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
-            echo '  };'                                                                >> /etc/bind/named.conf.log
+            #echo '  channel "security" {'                                              >> /etc/bind/named.conf.log
+            #echo '    file "/var/log/bind9/security.log" versions 10 size 10m;'        >> /etc/bind/named.conf.log
+            #echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            #echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            #echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+            #echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            #echo '  };'                                                                >> /etc/bind/named.conf.log
+            #echo ''                                                                    >> /etc/bind/named.conf.log
+            #echo '  channel "update" {'                                                >> /etc/bind/named.conf.log
+            #echo '    file "/var/log/bind9/update.log" versions 10 size 10m;'          >> /etc/bind/named.conf.log
+            #echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            #echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            #echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+            #echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            #echo '  };'                                                                >> /etc/bind/named.conf.log
+            #echo ''                                                                    >> /etc/bind/named.conf.log
+            #echo '  channel "update-security" {'                                       >> /etc/bind/named.conf.log
+            #echo '    file "/var/log/bind9/update-security.log" versions 10 size 10m;' >> /etc/bind/named.conf.log
+            #echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            #echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            #echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+            #echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            #echo '  };'                                                                >> /etc/bind/named.conf.log
             echo ''                                                                    >> /etc/bind/named.conf.log
             echo '  category "default"         { "default"; };'                        >> /etc/bind/named.conf.log
             echo '  category "lame-servers"    { "lame-servers"; };'                   >> /etc/bind/named.conf.log
             echo '  category "queries"         { "queries"; };'                        >> /etc/bind/named.conf.log
-            echo '  category "security"        { "security"; };'                       >> /etc/bind/named.conf.log
-            echo '  category "update"          { "update"; };'                         >> /etc/bind/named.conf.log
-            echo '  category "update-security" { "update-security"; };'                >> /etc/bind/named.conf.log
+            #echo '  category "security"        { "security"; };'                       >> /etc/bind/named.conf.log
+            #echo '  category "update"          { "update"; };'                         >> /etc/bind/named.conf.log
+            #echo '  category "update-security" { "update-security"; };'                >> /etc/bind/named.conf.log
             echo ''                                                                    >> /etc/bind/named.conf.log
             echo '};'                                                                  >> /etc/bind/named.conf.log
             mkdir -p /var/log/bind9/ 2> /dev/null
@@ -419,6 +419,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo 'zone "lan.local" {'                       >> /etc/bind/named.conf.local
             echo "  type master;"                           >> /etc/bind/named.conf.local
+            echo "  allow-transfer { none; };"              >> /etc/bind/named.conf.local
             echo '  file "/etc/bind/db.lan-directa.local";' >> /etc/bind/named.conf.local
             echo "};"                                       >> /etc/bind/named.conf.local
 
@@ -446,8 +447,10 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
             echo ""
+            echo ''                                         >> /etc/bind/named.conf.local
             echo 'zone "200.168.192.in-addr.arpa" {'        >> /etc/bind/named.conf.local
             echo "  type master;"                           >> /etc/bind/named.conf.local
+            echo "  allow-transfer { none; };"              >> /etc/bind/named.conf.local
             echo '  file "/etc/bind/db.lan-inversa.local";' >> /etc/bind/named.conf.local
             echo "};"                                       >> /etc/bind/named.conf.local
 
@@ -575,36 +578,45 @@ elif [ $OS_VERS == "11" ]; then
             echo '    severity info;'                                                  >> /etc/bind/named.conf.log
             echo '  };'                                                                >> /etc/bind/named.conf.log
             echo ''                                                                    >> /etc/bind/named.conf.log
-            echo '  channel "security" {'                                              >> /etc/bind/named.conf.log
-            echo '    file "/var/log/bind9/security.log" versions 10 size 10m;'        >> /etc/bind/named.conf.log
+#           echo '  channel "security" {'                                              >> /etc/bind/named.conf.log
+#           echo '    file "/var/log/bind9/security.log" versions 10 size 10m;'        >> /etc/bind/named.conf.log
+#           echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+#           echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+#           echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+#           echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+#           echo '  };'                                                                >> /etc/bind/named.conf.log
+#           echo ''                                                                    >> /etc/bind/named.conf.log
+#           echo '  channel "update" {'                                                >> /etc/bind/named.conf.log
+#           echo '    file "/var/log/bind9/update.log" versions 10 size 10m;'          >> /etc/bind/named.conf.log
+#           echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+#           echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+#           echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+#           echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+#           echo '  };'                                                                >> /etc/bind/named.conf.log
+#           echo ''                                                                    >> /etc/bind/named.conf.log
+#           echo '  channel "update-security" {'                                       >> /etc/bind/named.conf.log
+#           echo '    file "/var/log/bind9/update-security.log" versions 10 size 10m;' >> /etc/bind/named.conf.log
+#           echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+#           echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+#           echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+#           echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+#           echo '  };'                                                                >> /etc/bind/named.conf.log
+#           echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "xfer-out" {'                                              >> /etc/bind/named.conf.log
+            echo '    file "/var/log/bind9/transfers-out.log" versions 10 size 10m;'   >> /etc/bind/named.conf.log
             echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
             echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
             echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
             echo '    severity info;'                                                  >> /etc/bind/named.conf.log
             echo '  };'                                                                >> /etc/bind/named.conf.log
-            echo ''                                                                    >> /etc/bind/named.conf.log
-            echo '  channel "update" {'                                                >> /etc/bind/named.conf.log
-            echo '    file "/var/log/bind9/update.log" versions 10 size 10m;'          >> /etc/bind/named.conf.log
-            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
-            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
-            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
-            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
-            echo '  };'                                                                >> /etc/bind/named.conf.log
-            echo ''                                                                    >> /etc/bind/named.conf.log
-            echo '  channel "update-security" {'                                       >> /etc/bind/named.conf.log
-            echo '    file "/var/log/bind9/update-security.log" versions 10 size 10m;' >> /etc/bind/named.conf.log
-            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
-            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
-            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
-            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
-            echo '  };'                                                                >> /etc/bind/named.conf.log
-            echo ''                                                                    >> /etc/bind/named.conf.log
+#           echo ''                                                                    >> /etc/bind/named.conf.log
             echo '  category "default"         { "default"; };'                        >> /etc/bind/named.conf.log
             echo '  category "lame-servers"    { "lame-servers"; };'                   >> /etc/bind/named.conf.log
             echo '  category "queries"         { "queries"; };'                        >> /etc/bind/named.conf.log
-            echo '  category "security"        { "security"; };'                       >> /etc/bind/named.conf.log
-            echo '  category "update"          { "update"; };'                         >> /etc/bind/named.conf.log
-            echo '  category "update-security" { "update-security"; };'                >> /etc/bind/named.conf.log
+#           echo '  category "security"        { "security"; };'                       >> /etc/bind/named.conf.log
+#           echo '  category "update"          { "update"; };'                         >> /etc/bind/named.conf.log
+#           echo '  category "update-security" { "update-security"; };'                >> /etc/bind/named.conf.log
+            echo '  category "queries"         { "xfer-out"; };'                       >> /etc/bind/named.conf.log
             echo ''                                                                    >> /etc/bind/named.conf.log
             echo '};'                                                                  >> /etc/bind/named.conf.log
             mkdir -p /var/log/bind9/ 2> /dev/null
@@ -656,8 +668,13 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "Linkeando zona LAN directa a /etc/bind/named.conf.local..."
             echo ""
+            echo ""                                         >> /etc/bind/named.conf.local
             echo 'zone "lan.local" {'                       >> /etc/bind/named.conf.local
             echo "  type master;"                           >> /etc/bind/named.conf.local
+            echo "  allow-transfer { any; };"               >> /etc/bind/named.conf.local
+#           echo "  allow-transfer { 172.16.5.7; };"        >> /etc/bind/named.conf.local # Si sólo queremos transferir a una IP específica (Quitar la línea de any)
+            echo "  notify yes;"                            >> /etc/bind/named.conf.local
+            echo "  also-notify { $vIPDelServidorSlave; };" >> /etc/bind/named.conf.local # Poner si el servidor esclavo no tiene ns y sólo se le conoce por IP
             echo '  file "/etc/bind/db.lan-directa.local";' >> /etc/bind/named.conf.local
             echo "};"                                       >> /etc/bind/named.conf.local
 
@@ -685,8 +702,13 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
             echo ""
+            echo ""                                         >> /etc/bind/named.conf.local
             echo 'zone "200.168.192.in-addr.arpa" {'        >> /etc/bind/named.conf.local
             echo "  type master;"                           >> /etc/bind/named.conf.local
+            echo "  allow-transfer { any; };"               >> /etc/bind/named.conf.local
+#           echo "  allow-transfer { 172.16.5.7; };"        >> /etc/bind/named.conf.local # Si sólo queremos transferir a una IP específica (Quitar la línea de any)
+            echo "  notify yes;"                            >> /etc/bind/named.conf.local
+            echo "  also-notify { $vIPDelServidorSlave; };" >> /etc/bind/named.conf.local # Poner si el servidor esclavo no tiene ns y sólo se le conoce por IP
             echo '  file "/etc/bind/db.lan-inversa.local";' >> /etc/bind/named.conf.local
             echo "};"                                       >> /etc/bind/named.conf.local
 
@@ -754,6 +776,24 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             apt-get -y update && apt-get -y install bind9
 
+          # Crear zona directa esclava
+            echo ''                                         >> /etc/bind/named.conf.local
+            echo 'zone "lan.local" {'                           >> /etc/bind/named.conf.local
+            echo '  type slave;'                                >> /etc/bind/named.conf.local
+            echo "  masters { $vIPDelServidorMaster; };"        >> /etc/bind/named.conf.local
+            echo '  file "/var/lib/bind/db.lan-directa.local";' >> /etc/bind/named.conf.local
+            echo '};'                                           >> /etc/bind/named.conf.local
+            echo ''                                             >> /etc/bind/named.conf.local
+
+          # Crear zona inversa esclava
+            echo ''                                             >> /etc/bind/named.conf.local
+            echo 'zone "200.168.192.in-addr.arpa" {'            >> /etc/bind/named.conf.local
+            echo '  type slave;'                                >> /etc/bind/named.conf.local
+            echo "  masters { $vIPDelServidorMaster; };"        >> /etc/bind/named.conf.local
+            echo '  file "/var/lib/bind/db.lan-inversa.local";' >> /etc/bind/named.conf.local
+            echo '};'                                           >> /etc/bind/named.conf.local
+            echo ''                                             >> /etc/bind/named.conf.local
+
         ;;
 
       esac
@@ -761,3 +801,4 @@ elif [ $OS_VERS == "11" ]; then
   done
 
 fi
+
