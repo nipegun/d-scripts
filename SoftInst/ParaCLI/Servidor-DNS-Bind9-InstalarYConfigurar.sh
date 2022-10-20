@@ -165,8 +165,8 @@ elif [ $OS_VERS == "11" ]; then
             echo '  allow-query { any; };'        >> /etc/bind/named.conf.options # Quién tiene permiso a hacer cualquier tipo de query
             echo '  allow-query-cache { any; };'  >> /etc/bind/named.conf.options # Quién tiene permiso a las queries guardadas en el cache
             echo '  allow-recursion { any; };'    >> /etc/bind/named.conf.options # Quién tiene acceso a consultas recursivas
-            #echo '  dnssec-validation auto;'     >> /etc/bind/named.conf.options
-            #echo '  listen-on-v6 { any; };'      >> /etc/bind/named.conf.options
+#           echo '  dnssec-validation auto;'      >> /etc/bind/named.conf.options
+#           echo '  listen-on-v6 { any; };'       >> /etc/bind/named.conf.options
             echo "};"                             >> /etc/bind/named.conf.options
 
           # Sintaxis named.conf.options
@@ -290,8 +290,8 @@ elif [ $OS_VERS == "11" ]; then
             echo '  allow-query { any; };'        >> /etc/bind/named.conf.options # Quién tiene permiso a hacer cualquier tipo de query
             echo '  allow-query-cache { any; };'  >> /etc/bind/named.conf.options # Quién tiene permiso a las queries guardadas en el cache
             echo '  allow-recursion { any; };'    >> /etc/bind/named.conf.options # Quién tiene acceso a consultas recursivas
-            #echo '  dnssec-validation auto;'     >> /etc/bind/named.conf.options
-            #echo '  listen-on-v6 { any; };'      >> /etc/bind/named.conf.options
+#           echo '  dnssec-validation auto;'      >> /etc/bind/named.conf.options
+#           echo '  listen-on-v6 { any; };'       >> /etc/bind/named.conf.options
             echo "};"                             >> /etc/bind/named.conf.options
 
           # Sintaxis named.conf.options
@@ -336,36 +336,36 @@ elif [ $OS_VERS == "11" ]; then
             echo '    severity info;'                                                  >> /etc/bind/named.conf.log
             echo '  };'                                                                >> /etc/bind/named.conf.log
             echo ''                                                                    >> /etc/bind/named.conf.log
-            #echo '  channel "security" {'                                              >> /etc/bind/named.conf.log
-            #echo '    file "/var/log/bind9/security.log" versions 10 size 10m;'        >> /etc/bind/named.conf.log
-            #echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
-            #echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
-            #echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
-            #echo '    severity info;'                                                  >> /etc/bind/named.conf.log
-            #echo '  };'                                                                >> /etc/bind/named.conf.log
-            #echo ''                                                                    >> /etc/bind/named.conf.log
-            #echo '  channel "update" {'                                                >> /etc/bind/named.conf.log
-            #echo '    file "/var/log/bind9/update.log" versions 10 size 10m;'          >> /etc/bind/named.conf.log
-            #echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
-            #echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
-            #echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
-            #echo '    severity info;'                                                  >> /etc/bind/named.conf.log
-            #echo '  };'                                                                >> /etc/bind/named.conf.log
-            #echo ''                                                                    >> /etc/bind/named.conf.log
-            #echo '  channel "update-security" {'                                       >> /etc/bind/named.conf.log
-            #echo '    file "/var/log/bind9/update-security.log" versions 10 size 10m;' >> /etc/bind/named.conf.log
-            #echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
-            #echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
-            #echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
-            #echo '    severity info;'                                                  >> /etc/bind/named.conf.log
-            #echo '  };'                                                                >> /etc/bind/named.conf.log
+#           echo '  channel "security" {'                                              >> /etc/bind/named.conf.log
+#           echo '    file "/var/log/bind9/security.log" versions 10 size 10m;'        >> /etc/bind/named.conf.log
+#           echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+#           echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+#           echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+#           echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+#           echo '  };'                                                                >> /etc/bind/named.conf.log
+#           echo ''                                                                    >> /etc/bind/named.conf.log
+#           echo '  channel "update" {'                                                >> /etc/bind/named.conf.log
+#           echo '    file "/var/log/bind9/update.log" versions 10 size 10m;'          >> /etc/bind/named.conf.log
+#           echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+#           echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+#           echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+#           echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+#           echo '  };'                                                                >> /etc/bind/named.conf.log
+#           echo ''                                                                    >> /etc/bind/named.conf.log
+#           echo '  channel "update-security" {'                                       >> /etc/bind/named.conf.log
+#           echo '    file "/var/log/bind9/update-security.log" versions 10 size 10m;' >> /etc/bind/named.conf.log
+#           echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+#           echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+#           echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+#           echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+#           echo '  };'                                                                >> /etc/bind/named.conf.log
             echo ''                                                                    >> /etc/bind/named.conf.log
             echo '  category "default"         { "default"; };'                        >> /etc/bind/named.conf.log
             echo '  category "lame-servers"    { "lame-servers"; };'                   >> /etc/bind/named.conf.log
             echo '  category "queries"         { "queries"; };'                        >> /etc/bind/named.conf.log
-            #echo '  category "security"        { "security"; };'                       >> /etc/bind/named.conf.log
-            #echo '  category "update"          { "update"; };'                         >> /etc/bind/named.conf.log
-            #echo '  category "update-security" { "update-security"; };'                >> /etc/bind/named.conf.log
+#           echo '  category "security"        { "security"; };'                       >> /etc/bind/named.conf.log
+#           echo '  category "update"          { "update"; };'                         >> /etc/bind/named.conf.log
+#           echo '  category "update-security" { "update-security"; };'                >> /etc/bind/named.conf.log
             echo ''                                                                    >> /etc/bind/named.conf.log
             echo '};'                                                                  >> /etc/bind/named.conf.log
             mkdir -p /var/log/bind9/ 2> /dev/null
@@ -400,7 +400,6 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             apt-get -y install dnsutils
 
-
           # Crear y popular zona LAN directa...
             echo ""
             echo "Creando y populando la base de datos de de la zona LAN directa..."
@@ -428,7 +427,6 @@ elif [ $OS_VERS == "11" ]; then
             echo "  Comprobando la zona directa..."
             echo ""
             named-checkzone lan.local /etc/bind/db.lan-directa.local
-
 
           # Crear y popular zona LAN inversa...
             echo ""
@@ -532,8 +530,8 @@ elif [ $OS_VERS == "11" ]; then
             echo '  allow-query { any; };'        >> /etc/bind/named.conf.options # Quién tiene permiso a hacer cualquier tipo de query
             echo '  allow-query-cache { any; };'  >> /etc/bind/named.conf.options # Quién tiene permiso a las queries guardadas en el cache
             echo '  allow-recursion { any; };'    >> /etc/bind/named.conf.options # Quién tiene acceso a consultas recursivas
-            #echo '  dnssec-validation auto;'     >> /etc/bind/named.conf.options
-            #echo '  listen-on-v6 { any; };'      >> /etc/bind/named.conf.options
+#           echo '  dnssec-validation auto;'      >> /etc/bind/named.conf.options
+#           echo '  listen-on-v6 { any; };'       >> /etc/bind/named.conf.options
             echo "};"                             >> /etc/bind/named.conf.options
 
           # Sintaxis named.conf.options
@@ -776,6 +774,34 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             apt-get -y update && apt-get -y install bind9
 
+          # named.conf.options
+            echo ""
+            echo "    Configurando el archivo /etc/bind/named.conf.options..."
+            echo ""
+            echo 'options {'                       > /etc/bind/named.conf.options
+            echo '  directory "/var/cache/bind";' >> /etc/bind/named.conf.options # Carpeta donde se quiere guardar la cache con "rndc dumpdb -cache"
+            echo '  forwarders {'                 >> /etc/bind/named.conf.options
+            echo '    1.1.1.1;'                   >> /etc/bind/named.conf.options
+            echo '    8.8.8.8;'                   >> /etc/bind/named.conf.options
+            echo '  };'                           >> /etc/bind/named.conf.options
+            echo '  listen-on { any; };'          >> /etc/bind/named.conf.options # Que IPs tienen acceso al servicio
+            echo '  allow-query { any; };'        >> /etc/bind/named.conf.options # Quién tiene permiso a hacer cualquier tipo de query
+#           echo '  dnssec-validation auto;'      >> /etc/bind/named.conf.options
+#           echo '  listen-on-v6 { any; };'       >> /etc/bind/named.conf.options
+            echo "};"                             >> /etc/bind/named.conf.options
+
+          # Sintaxis named.conf.options
+            echo ""
+            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
+            echo ""
+            vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.options)
+            if [ "$vRespuestaCheckConf" = "" ]; then
+              echo "      La configuración de /etc/bind/named.conf.options es correcta."
+            else
+              echo "      La sintaxis del archivo /etc/bind/named.conf.options no es correcta:"
+              echo "        $vRespuestaCheckConf"
+            fi
+
           # logs
             echo ""
             echo "    Configurando logs..."
@@ -813,6 +839,7 @@ elif [ $OS_VERS == "11" ]; then
             echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
             echo '    severity info;'                                                  >> /etc/bind/named.conf.log
             echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
             echo '  category "default"         { "default"; };'                        >> /etc/bind/named.conf.log
             echo '  category "lame-servers"    { "lame-servers"; };'                   >> /etc/bind/named.conf.log
             echo '  category "queries"         { "queries"; };'                        >> /etc/bind/named.conf.log
