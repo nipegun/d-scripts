@@ -616,7 +616,7 @@ elif [ $OS_VERS == "11" ]; then
 #           echo '  category "security"        { "security"; };'                       >> /etc/bind/named.conf.log
 #           echo '  category "update"          { "update"; };'                         >> /etc/bind/named.conf.log
 #           echo '  category "update-security" { "update-security"; };'                >> /etc/bind/named.conf.log
-            echo '  category "queries"         { "xfer-out"; };'                       >> /etc/bind/named.conf.log
+            echo '  category "xfer-out"         { "xfer-out"; };'                      >> /etc/bind/named.conf.log
             echo ''                                                                    >> /etc/bind/named.conf.log
             echo '};'                                                                  >> /etc/bind/named.conf.log
             mkdir -p /var/log/bind9/ 2> /dev/null
@@ -775,6 +775,54 @@ elif [ $OS_VERS == "11" ]; then
             echo "    Instalando bind9..."
             echo ""
             apt-get -y update && apt-get -y install bind9
+
+          # logs
+            echo ""
+            echo "    Configurando logs..."
+            echo ""
+            echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
+            echo 'logging {'                                                            > /etc/bind/named.conf.log
+            echo '  channel "default" {'                                               >> /etc/bind/named.conf.log
+            echo '    file "/var/log/bind9/default.log" versions 10 size 10m;'         >> /etc/bind/named.conf.log
+            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "lame-servers" {'                                          >> /etc/bind/named.conf.log
+            echo '    file "/var/log/bind9/lame-servers.log" versions 1 size 5m;'      >> /etc/bind/named.conf.log
+            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "queries" {'                                               >> /etc/bind/named.conf.log
+            echo '    file "/var/log/bind9/queries.log" versions 10 size 10m;'         >> /etc/bind/named.conf.log
+            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "xfer-in" {'                                               >> /etc/bind/named.conf.log
+            echo '    file "/var/log/bind9/transfers-in.log" versions 10 size 10m;'    >> /etc/bind/named.conf.log
+            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo '  category "default"         { "default"; };'                        >> /etc/bind/named.conf.log
+            echo '  category "lame-servers"    { "lame-servers"; };'                   >> /etc/bind/named.conf.log
+            echo '  category "queries"         { "queries"; };'                        >> /etc/bind/named.conf.log
+            echo '  category "xfer-in"         { "xfer-in"; };'                        >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '};'                                                                  >> /etc/bind/named.conf.log
+            mkdir -p /var/log/bind9/ 2> /dev/null
+            chown bind:bind /var/log/bind9 -R # El usuario bind necesita permisos de escritura en el la carpeta
+            # Dar permisos de escritura a bind9 en el directorio /var/log/bind9 (No hace falta si se meten los logs en /var/log/named/)
+              sed -i -e 's|/var/log/named/ rw,|/var/log/named/ rw,\n\n/var/log/bind9/** rw,\n/var/log/bind9/ rw,|g' /etc/apparmor.d/usr.sbin.named
 
           # Crear zona directa esclava
             echo ''                                         >> /etc/bind/named.conf.local
