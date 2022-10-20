@@ -104,8 +104,9 @@ elif [ $OS_VERS == "11" ]; then
   menu=(dialog --timeout 5 --checklist "¿Cómo quieres instalar bind9?:" 22 96 16)
     opciones=(
       1 "Instalar como servidor DNS caché" off
-      2 "Instalar como servidor DNS maestro" off
-      3 "Instalar como servidor DNS esclavo" off
+      2 "Instalar como servidor DNS maestro (sin esperar slave)" off
+      3 "Instalar como servidor DNS maestro (esperando slave)" off
+      4 "Instalar como servidor DNS esclavo" off
     )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
@@ -242,7 +243,7 @@ elif [ $OS_VERS == "11" ]; then
         2)
 
           echo ""
-          echo "  Instalando como servidor DNS maestro..."
+          echo "  Instalando como servidor DNS maestro (sin esperar slave)..."
           echo ""
 
           # Borrar instalación existente
@@ -406,7 +407,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             cp /etc/bind/db.local /etc/bind/db.lan-directa.local
             sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.lan-directa.local
-            sed -i -e 's|localhost.|servdnsmaes.lan.local.|g'                     /etc/bind/db.lan-inversa.local
+            sed -i -e 's|localhost.|servdnsmaes.lan.local.|g'                     /etc/bind/db.lan-directa.local
             echo -e "ubuntuserver\tIN\tA\t192.168.200.10"                      >> /etc/bind/db.lan-directa.local
             echo -e "ubuntudesktop\tIN\tA\t192.168.200.20"                     >> /etc/bind/db.lan-directa.local
             echo -e "windowsserver\tIN\tA\t192.168.200.30"                     >> /etc/bind/db.lan-directa.local
@@ -479,6 +480,245 @@ elif [ $OS_VERS == "11" ]; then
         ;;
 
         3)
+
+          echo ""
+          echo "  Instalando como servidor DNS maestro (esperando slave)..."
+          echo ""
+
+          # Borrar instalación existente
+            echo ""
+            echo "    Borrando instalación existente (si es que existe)..."
+            echo ""
+            mkdir -p /CopSegInt/              2> /dev/null
+            mkdir -p /CopSegInt/DNS/etc/      2> /dev/null
+            mv /etc/bind/ /CopSegInt/DNS/etc/ 2> /dev/null
+            chattr -i /etc/resolv.conf        2> /dev/null
+            rm -rf /var/cache/bind/
+            rm -rf /etc/bind/
+            systemctl stop bind9.service
+            systemctl disable bind9.service
+            apt-get -y purge bind9
+            apt-get -y purge dnsutils
+
+          # Cambiar el /etc/hostname
+            echo "servdnsmaes" > /etc/hostname
+
+          # Cambiar el archivo /etc/hosts
+            echo "127.0.0.1 servdnsmaes servdnsmaes.lan.local" >> /etc/hosts
+            # Determinal IP LAN
+              vIPLAN=$(hostname -I)
+            echo "$vIPLAN servdnsmaes servdnsmaes.lan.local" >> /etc/hosts
+
+          # Instalar paquete
+            echo ""
+            echo "    Instalando bind9..."
+            echo ""
+            apt-get -y update && apt-get -y install bind9
+
+          # named.conf.options
+            echo ""
+            echo "    Configurando el archivo /etc/bind/named.conf.options..."
+            echo ""
+            echo 'options {'                       > /etc/bind/named.conf.options
+            echo '  directory "/var/cache/bind";' >> /etc/bind/named.conf.options # Carpeta donde se quiere guardar la cache con "rndc dumpdb -cache"
+            echo '  forwarders {'                 >> /etc/bind/named.conf.options
+            echo '    1.1.1.1;'                   >> /etc/bind/named.conf.options
+            echo '    8.8.8.8;'                   >> /etc/bind/named.conf.options
+            echo '  };'                           >> /etc/bind/named.conf.options
+            echo '  listen-on { any; };'          >> /etc/bind/named.conf.options # Que IPs tienen acceso al servicio
+            echo '  allow-query { any; };'        >> /etc/bind/named.conf.options # Quién tiene permiso a hacer cualquier tipo de query
+            echo '  allow-query-cache { any; };'  >> /etc/bind/named.conf.options # Quién tiene permiso a las queries guardadas en el cache
+            echo '  allow-recursion { any; };'    >> /etc/bind/named.conf.options # Quién tiene acceso a consultas recursivas
+            #echo '  dnssec-validation auto;'     >> /etc/bind/named.conf.options
+            #echo '  listen-on-v6 { any; };'      >> /etc/bind/named.conf.options
+            echo "};"                             >> /etc/bind/named.conf.options
+
+          # Sintaxis named.conf.options
+            echo ""
+            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
+            echo ""
+            vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.options)
+            if [ "$vRespuestaCheckConf" = "" ]; then
+              echo "      La configuración de /etc/bind/named.conf.options es correcta."
+            else
+              echo "      La sintaxis del archivo /etc/bind/named.conf.options no es correcta:"
+              echo "        $vRespuestaCheckConf"
+            fi
+
+          # logs
+            echo ""
+            echo "    Configurando logs..."
+            echo ""
+            echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
+            echo 'logging {'                                                            > /etc/bind/named.conf.log
+            echo '  channel "default" {'                                               >> /etc/bind/named.conf.log
+            echo '    file "/var/log/bind9/default.log" versions 10 size 10m;'         >> /etc/bind/named.conf.log
+            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "lame-servers" {'                                          >> /etc/bind/named.conf.log
+            echo '    file "/var/log/bind9/lame-servers.log" versions 1 size 5m;'      >> /etc/bind/named.conf.log
+            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "queries" {'                                               >> /etc/bind/named.conf.log
+            echo '    file "/var/log/bind9/queries.log" versions 10 size 10m;'         >> /etc/bind/named.conf.log
+            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "security" {'                                              >> /etc/bind/named.conf.log
+            echo '    file "/var/log/bind9/security.log" versions 10 size 10m;'        >> /etc/bind/named.conf.log
+            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "update" {'                                                >> /etc/bind/named.conf.log
+            echo '    file "/var/log/bind9/update.log" versions 10 size 10m;'          >> /etc/bind/named.conf.log
+            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  channel "update-security" {'                                       >> /etc/bind/named.conf.log
+            echo '    file "/var/log/bind9/update-security.log" versions 10 size 10m;' >> /etc/bind/named.conf.log
+            echo '    print-time yes;'                                                 >> /etc/bind/named.conf.log
+            echo '    print-severity yes;'                                             >> /etc/bind/named.conf.log
+            echo '    print-category yes;'                                             >> /etc/bind/named.conf.log
+            echo '    severity info;'                                                  >> /etc/bind/named.conf.log
+            echo '  };'                                                                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '  category "default"         { "default"; };'                        >> /etc/bind/named.conf.log
+            echo '  category "lame-servers"    { "lame-servers"; };'                   >> /etc/bind/named.conf.log
+            echo '  category "queries"         { "queries"; };'                        >> /etc/bind/named.conf.log
+            echo '  category "security"        { "security"; };'                       >> /etc/bind/named.conf.log
+            echo '  category "update"          { "update"; };'                         >> /etc/bind/named.conf.log
+            echo '  category "update-security" { "update-security"; };'                >> /etc/bind/named.conf.log
+            echo ''                                                                    >> /etc/bind/named.conf.log
+            echo '};'                                                                  >> /etc/bind/named.conf.log
+            mkdir -p /var/log/bind9/ 2> /dev/null
+            chown bind:bind /var/log/bind9 -R # El usuario bind necesita permisos de escritura en el la carpeta
+            # Dar permisos de escritura a bind9 en el directorio /var/log/bind9 (No hace falta si se meten los logs en /var/log/named/)
+              sed -i -e 's|/var/log/named/ rw,|/var/log/named/ rw,\n\n/var/log/bind9/** rw,\n/var/log/bind9/ rw,|g' /etc/apparmor.d/usr.sbin.named
+
+          # Sintaxis /etc/bind/named.conf.log
+            echo ""
+            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."
+            echo ""
+            vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
+            if [ "$vRespuestaCheckConf" = "" ]; then
+              echo "      La configuración de  /etc/bind/named.conf.log es correcta."
+            else
+              echo "      La sintaxis del archivo  /etc/bind/named.conf.log no es correcta:"
+              echo "        $vRespuestaCheckConf"
+            fi
+
+          # resolvconf
+            echo ""
+            echo "    Instalando resolvconf y configurando IP loopack"
+            echo ""
+            apt-get -y install resolvconf
+            sed -i -e 's|nameserver 127.0.0.1||g' /etc/resolvconf/resolv.conf.d/head
+            echo "nameserver 127.0.0.1" >>        /etc/resolvconf/resolv.conf.d/head
+            resolvconf -u # Regenerar /etc/resolv.conf
+
+          # Herramientas extra
+            echo ""
+            echo "  Instalando herramientas extra..."
+            echo ""
+            apt-get -y install dnsutils
+
+
+          # Crear y popular zona LAN directa...
+            echo ""
+            echo "Creando y populando la base de datos de de la zona LAN directa..."
+            echo ""
+            cp /etc/bind/db.local /etc/bind/db.lan-directa.local
+            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.lan-directa.local
+            sed -i -e 's|localhost.|servdnsmaes.lan.local.|g'                     /etc/bind/db.lan-directa.local
+            echo -e "ubuntuserver\tIN\tA\t192.168.200.10"                      >> /etc/bind/db.lan-directa.local
+            echo -e "ubuntudesktop\tIN\tA\t192.168.200.20"                     >> /etc/bind/db.lan-directa.local
+            echo -e "windowsserver\tIN\tA\t192.168.200.30"                     >> /etc/bind/db.lan-directa.local
+            echo -e "windowsdesktop\tIN\tA\t192.168.200.40"                    >> /etc/bind/db.lan-directa.local
+  
+          # Linkear zona LAN directa a /etc/bind/named.conf.local
+            echo ""
+            echo "Linkeando zona LAN directa a /etc/bind/named.conf.local..."
+            echo ""
+            echo 'zone "lan.local" {'                       >> /etc/bind/named.conf.local
+            echo "  type master;"                           >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.lan-directa.local";' >> /etc/bind/named.conf.local
+            echo "};"                                       >> /etc/bind/named.conf.local
+
+          # Comprobar la LAN zona directa
+            echo ""
+            echo "  Comprobando la zona directa..."
+            echo ""
+            named-checkzone lan.local /etc/bind/db.lan-directa.local
+
+
+          # Crear y popular zona LAN inversa...
+            echo ""
+            echo "Creando y populando la base de datos de de la zona LAN inversa..."
+            echo ""
+            cp /etc/bind/db.127 /etc/bind/db.lan-inversa.local
+            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.lan-inversa.local
+            sed -i -e 's|localhost.|servdnsmaes.lan.local.|g'                      /etc/bind/db.lan-inversa.local
+            sed -i -e 's|1.0.0|1|g'                                               /etc/bind/db.lan-inversa.local
+            echo -e "10\tIN\tPTR\tubuntuserver.lan.local."                     >> /etc/bind/db.lan-inversa.local
+            echo -e "20\tIN\tPTR\tubuntudesktop.lan.local."                    >> /etc/bind/db.lan-inversa.local
+            echo -e "30\tIN\tPTR\twindowsserver.lan.local."                    >> /etc/bind/db.lan-inversa.local
+            echo -e "40\tIN\tPTR\twindowsdesktop.lan.local."                   >> /etc/bind/db.lan-inversa.local
+
+          # Linkear zona LAN inversa a /etc/bind/named.conf.local
+            echo ""
+            echo "Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
+            echo ""
+            echo 'zone "200.168.192.in-addr.arpa" {'        >> /etc/bind/named.conf.local
+            echo "  type master;"                           >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.lan-inversa.local";' >> /etc/bind/named.conf.local
+            echo "};"                                       >> /etc/bind/named.conf.local
+
+          # Comprobar la LAN zona inversa
+            echo ""
+            echo "  Comprobando la zona inversa..."
+            echo ""
+            named-checkzone 200.168.192.in-addr-arpa /etc/bind/db.lan-inversa.local
+
+
+          # Coregir errores IPv6
+            echo ""
+            echo "Corrigiendo los posibles errores de IPv6..."
+            echo ""
+            sed -i -e 's|RESOLVCONF=no|RESOLVCONF=yes|g'           /etc/default/named
+            sed -i -e 's|OPTIONS="-u bind"|OPTIONS="-4 -u bind"|g' /etc/default/named
+
+          # Reiniciar servidor DNS
+            echo ""
+            echo "Reiniciando el servidor DNS..."
+            echo ""
+            service bind9 restart
+
+          # Mostrar estado del servidor
+            echo ""
+            echo "Mostrando el estado del servidor DNS..."
+            echo ""
+            service bind9 status
+
+        ;;
+
+        4)
 
           echo ""
           echo "  Instalando el servidor DNS esclavo..."
