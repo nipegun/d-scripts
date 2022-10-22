@@ -121,6 +121,7 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install gufw
     apt-get -y install wireshark
     apt-get -y install etherape
+      setcap CAP_NET_RAW=pe /usr/bin/etherape 
     apt-get -y install sshpass
     apt-get -y install virt-viewer
     apt-get -y install whois
