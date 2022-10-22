@@ -193,6 +193,13 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
     apt-get -y install comix
 
+  # SmartCards
+    apt-get -y install pcscd
+    apt-get -y install opensc-pkcs11 
+    apt-get -y install libpam-pkcs11
+
+
+
   # Lanzador de chromium para el root
     mkdir -p /root/.local/share/applications/ 2> /dev/null
     echo "[Desktop Entry]"                      > /root/.local/share/applications/chromiumroot.desktop
