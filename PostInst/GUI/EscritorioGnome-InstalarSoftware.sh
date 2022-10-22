@@ -198,7 +198,25 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install opensc-pkcs11 
     apt-get -y install libpam-pkcs11
 
+  # Huellas dactilares
+    apt-get -y install libpam-fprintd
+    fprintd-enroll -f right-index-finger
+    fprintd-enroll -f left-index-finger
+    #fprintd-enroll -f left-thumb
+    #fprintd-enroll -f left-middle-finger
+    #fprintd-enroll -f left-ring-finger
+    #fprintd-enroll -f left-little-finger
+    #fprintd-enroll -f right-thumb
+    #fprintd-enroll -f right-middle-finger
+    #fprintd-enroll -f right-ring-finger
+    #fprintd-enroll -f right-little-finger
 
+    # Activar autenticación PAM con huella dactilar
+      pam-auth-update # Marcar fingerprint authentication
+      # Comprobar que la autenticación por huella se activó correctamente
+      grep fprint /etc/pam.d/common-auth
+      # En caso de que no funcione la autenticación por huella habría entrar como root y purgar fprint 
+      # apt-get purge fprintd
 
   # Lanzador de chromium para el root
     mkdir -p /root/.local/share/applications/ 2> /dev/null
