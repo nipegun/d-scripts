@@ -741,7 +741,7 @@ elif [ $OS_VERS == "11" ]; then
         4)
 
           echo ""
-          echo "  Instalando el servidor DNS esclavo..."
+          echo "  Instalando el servidor DNS esclavo..." # Es un servidor caché con algunos extras
           echo ""
 
           # Borrar instalación existente
@@ -786,8 +786,6 @@ elif [ $OS_VERS == "11" ]; then
             echo '  };'                           >> /etc/bind/named.conf.options
             echo '  listen-on { any; };'          >> /etc/bind/named.conf.options # Que IPs tienen acceso al servicio
             echo '  allow-query { any; };'        >> /etc/bind/named.conf.options # Quién tiene permiso a hacer cualquier tipo de query
-#           echo '  dnssec-validation auto;'      >> /etc/bind/named.conf.options
-#           echo '  listen-on-v6 { any; };'       >> /etc/bind/named.conf.options
             echo "};"                             >> /etc/bind/named.conf.options
 
           # Sintaxis named.conf.options
@@ -851,6 +849,18 @@ elif [ $OS_VERS == "11" ]; then
             # Dar permisos de escritura a bind9 en el directorio /var/log/bind9 (No hace falta si se meten los logs en /var/log/named/)
               sed -i -e 's|/var/log/named/ rw,|/var/log/named/ rw,\n\n/var/log/bind9/** rw,\n/var/log/bind9/ rw,|g' /etc/apparmor.d/usr.sbin.named
 
+          # Sintaxis /etc/bind/named.conf.log
+            echo ""
+            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."
+            echo ""
+            vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
+            if [ "$vRespuestaCheckConf" = "" ]; then
+              echo "      La configuración de  /etc/bind/named.conf.log es correcta."
+            else
+              echo "      La sintaxis del archivo  /etc/bind/named.conf.log no es correcta:"
+              echo "        $vRespuestaCheckConf"
+            fi
+
           # Crear zona directa esclava
             echo ''                                         >> /etc/bind/named.conf.local
             echo 'zone "lan.local" {'                           >> /etc/bind/named.conf.local
@@ -868,6 +878,33 @@ elif [ $OS_VERS == "11" ]; then
             echo '  file "/var/lib/bind/db.lan-inversa.local";' >> /etc/bind/named.conf.local
             echo '};'                                           >> /etc/bind/named.conf.local
             echo ''                                             >> /etc/bind/named.conf.local
+
+          # Sintaxis /etc/bind/named.conf.local
+            echo ""
+            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."
+            echo ""
+            vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.local)
+            if [ "$vRespuestaCheckConf" = "" ]; then
+              echo "      La configuración de  /etc/bind/named.conf.local es correcta."
+            else
+              echo "      La sintaxis del archivo  /etc/bind/named.conf.local no es correcta:"
+              echo "        $vRespuestaCheckConf"
+            fi
+
+          # resolvconf
+            echo ""
+            echo "    Instalando resolvconf y configurando IP loopack"
+            echo ""
+            apt-get -y install resolvconf
+            sed -i -e 's|nameserver 127.0.0.1||g' /etc/resolvconf/resolv.conf.d/head
+            echo "nameserver 127.0.0.1" >>        /etc/resolvconf/resolv.conf.d/head
+            resolvconf -u # Regenerar /etc/resolv.conf
+
+          # Herramientas extra
+            echo ""
+            echo "  Instalando herramientas extra..."
+            echo ""
+            apt-get -y install dnsutils
 
         ;;
 
