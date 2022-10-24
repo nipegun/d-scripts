@@ -458,7 +458,6 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             named-checkzone 200.168.192.in-addr-arpa /etc/bind/db.lan-inversa.local
 
-
           # Coregir errores IPv6
             echo ""
             echo "Corrigiendo los posibles errores de IPv6..."
