@@ -16,6 +16,11 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
+
+vIPPropia=$(hostname -I)
+vNombreServidor="servidoroldap"
+vDominio="lan.local"
+
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org 
      . /etc/os-release
@@ -91,6 +96,16 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Iniciando el script de instalación del servidor OpenLDAP en Debian 11 (Bullseye)..."
   echo "---------------------------------------------------------------------------------------"
   echo ""
+
+  echo ""
+  echo "  Modificando el archivo /etc/hostname..."
+  echo ""
+  echo "$vNombreServidor" > /etc/hostname
+
+  echo ""
+  echo "  Modificando el archivo /etc/hosts..."
+  echo ""
+  echo "$vIPPropia $vNombreServidor.$vDominio" >> /etc/hosts
 
 
 fi
