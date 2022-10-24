@@ -107,6 +107,17 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "$vIPPropia $vNombreServidor.$vDominio" >> /etc/hosts
 
+  echo ""
+  echo "  Instalando paquetes..."
+  echo ""
+  apt-get -y update
+  apt-get -y install slapd
+  apt-get -y install ldap-utils
+  
+  echo ""
+  echo "  Reconfigurando slapd..."
+  echo ""
+  dpkg-reconfigure slapd
 
 fi
 
