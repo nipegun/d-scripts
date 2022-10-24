@@ -119,5 +119,17 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   dpkg-reconfigure slapd
 
+  echo ""
+  echo ""
+  echo ""
+  mkdir -p /root/OpenLDAP/
+  echo "dn: ou=usuarios,dc=hacks4geeks,dc=local"  > /root/OpenLDAP/dit.ldif
+  echo "objectClass: organizationalUnit"         >> /root/OpenLDAP/dit.ldif
+  echo "ou: usuarios"                            >> /root/OpenLDAP/dit.ldif
+  echo ""                                        >> /root/OpenLDAP/dit.ldif
+  echo "dn: ou=grupos,dc=hacks4geeks,dc=local"   >> /root/OpenLDAP/dit.ldif
+  echo "objectClass: organizationalUnit"         >> /root/OpenLDAP/dit.ldif
+  echo "ou: grupos"                              >> /root/OpenLDAP/dit.ldif
+
 fi
 
