@@ -16,31 +16,25 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-## Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
+# Determinar la versión de Debian
+  if [ -f /etc/os-release ]; then              # Para systemd y freedesktop.org
+     . /etc/os-release
+     OS_NAME=$NAME
+     OS_VERS=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then  # linuxbase.org
        OS_NAME=$(lsb_release -si)
        OS_VERS=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
+  elif [ -f /etc/lsb-release ]; then           # Para algunas versiones de Debian sin el comando lsb_release
        . /etc/lsb-release
        OS_NAME=$DISTRIB_ID
        OS_VERS=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
+  elif [ -f /etc/debian_version ]; then        # Para versiones viejas de Debian.
        OS_NAME=Debian
        OS_VERS=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
+  else                                         # Para el viejo uname (También funciona para BSD)
        OS_NAME=$(uname -s)
        OS_VERS=$(uname -r)
-   fi
+  fi
 
 if [ $OS_VERS == "7" ]; then
 
@@ -80,13 +74,15 @@ elif [ $OS_VERS == "8" ]; then
     else
       apt-get update && apt-get -y install dialog
       menu=(dialog --timeout 5 --checklist "Instalación de la compartición Samba:" 22 76 16)
-      opciones=(1 "Instalar los paquetes necesarios" on
-                2 "Configurar las opciones globales" on
-                3 "Configurar la compartición Pública anónima" off
-                4 "Configurar la compartición de la carpeta del usuario" off
-                5 "Configurar la compartición Multimedia" off
-                6 "Configurar la compartición de Webs" off
-                7 "Reiniciar el demonio y mostrar el estado" on)
+      opciones=(
+        1 "Instalar los paquetes necesarios" on
+        2 "Configurar las opciones globales" on
+        3 "Configurar la compartición Pública anónima" off
+        4 "Configurar la compartición de la carpeta del usuario" off
+        5 "Configurar la compartición Multimedia" off
+        6 "Configurar la compartición de Webs" off
+        7 "Reiniciar el demonio y mostrar el estado" on
+      )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
@@ -110,20 +106,20 @@ elif [ $OS_VERS == "8" ]; then
               echo "  CONFIGURANDO LAS OPCIONES GLOBALES"
               echo "--------------------------------------"
               echo ""
-              echo "[global]" > /etc/samba/smb.conf
-              echo "  workgroup = $1" >> /etc/samba/smb.conf
-              echo "  server string = Servidor Samba %v" >> /etc/samba/smb.conf
-              echo "  wins support = yes" >> /etc/samba/smb.conf
-              echo "  netbios name = $2" >> /etc/samba/smb.conf
-              echo "  security = user" >> /etc/samba/smb.conf
-              echo "  guest account = nobody" >> /etc/samba/smb.conf
-              echo "  map to guest = bad user" >> /etc/samba/smb.conf
-              echo "  dns proxy = no" >> /etc/samba/smb.conf
+              echo "[global]"                                                     > /etc/samba/smb.conf
+              echo "  workgroup = $1"                                            >> /etc/samba/smb.conf
+              echo "  server string = Servidor Samba %v"                         >> /etc/samba/smb.conf
+              echo "  wins support = yes"                                        >> /etc/samba/smb.conf
+              echo "  netbios name = $2"                                         >> /etc/samba/smb.conf
+              echo "  security = user"                                           >> /etc/samba/smb.conf
+              echo "  guest account = nobody"                                    >> /etc/samba/smb.conf
+              echo "  map to guest = bad user"                                   >> /etc/samba/smb.conf
+              echo "  dns proxy = no"                                            >> /etc/samba/smb.conf
               echo "  hosts allow = 192.168.0. 192.168.1. 192.168.2. 192.168.3." >> /etc/samba/smb.conf
-              echo "  hosts deny = 192.168.1.255" >> /etc/samba/smb.conf
-              echo "  #interfaces = lo eth1 wlan0 br0" >> /etc/samba/smb.conf
-              echo "  #bind interfaces only = yes" >> /etc/samba/smb.conf
-              echo "" >> /etc/samba/smb.conf
+              echo "  hosts deny = 192.168.1.255"                                >> /etc/samba/smb.conf
+              echo "  #interfaces = lo eth1 wlan0 br0"                           >> /etc/samba/smb.conf
+              echo "  #bind interfaces only = yes"                               >> /etc/samba/smb.conf
+              echo ""                                                            >> /etc/samba/smb.conf
             ;;
 
             3)
@@ -136,13 +132,13 @@ elif [ $OS_VERS == "8" ]; then
               mkdir /publica/
               chown nobody:nogroup /publica/
               chmod -Rv 777 /publica/
-              echo "  path = /publica/" >> /etc/samba/smb.conf
+              echo "  path = /publica/"                            >> /etc/samba/smb.conf
               echo "  comment = Compartida para usuarios anónimos" >> /etc/samba/smb.conf
-              echo "  browseable = yes" >> /etc/samba/smb.conf
-              echo "  public = yes" >> /etc/samba/smb.conf
-              echo "  writeable = no" >> /etc/samba/smb.conf
-              echo "  guest ok = yes" >> /etc/samba/smb.conf
-              echo "" >> /etc/samba/smb.conf
+              echo "  browseable = yes"                            >> /etc/samba/smb.conf
+              echo "  public = yes"                                >> /etc/samba/smb.conf
+              echo "  writeable = no"                              >> /etc/samba/smb.conf
+              echo "  guest ok = yes"                              >> /etc/samba/smb.conf
+              echo ""                                              >> /etc/samba/smb.conf
             ;;
 
             4)
@@ -151,12 +147,12 @@ elif [ $OS_VERS == "8" ]; then
               echo "  CREANDO LA COMPARTICIÓN PARA LA CARPETA DEL USUARIO"
               echo "-------------------------------------------------------"
               echo ""
-              echo "[Usuario $3]" >> /etc/samba/smb.conf
-              echo "  path = /home/$3/" >> /etc/samba/smb.conf
+              echo "[Usuario $3]"                       >> /etc/samba/smb.conf
+              echo "  path = /home/$3/"                 >> /etc/samba/smb.conf
               echo "  comment = Carpeta del usuario $3" >> /etc/samba/smb.conf
-              echo "  browsable = yes" >> /etc/samba/smb.conf
-              echo "  read only = no" >> /etc/samba/smb.conf
-              echo "  valid users = $3" >> /etc/samba/smb.conf
+              echo "  browsable = yes"                  >> /etc/samba/smb.conf
+              echo "  read only = no"                   >> /etc/samba/smb.conf
+              echo "  valid users = $3"                 >> /etc/samba/smb.conf
 
             ;;
 
@@ -166,14 +162,14 @@ elif [ $OS_VERS == "8" ]; then
               echo "  CREANDO LA COMPARTICIÓN DE UNA CARPETA CON MULTIMEDIA"
               echo "---------------------------------------------------------"
               echo ""
-              echo "[Multimedia]" >> /etc/samba/smb.conf
-              echo "  path = /Multimedia/" >> /etc/samba/smb.conf
+              echo "[Multimedia]"                                  >> /etc/samba/smb.conf
+              echo "  path = /Multimedia/"                         >> /etc/samba/smb.conf
               echo "  comment = Pelis, Serie, Música, libros, etc" >> /etc/samba/smb.conf
-              echo "  browseable = yes" >> /etc/samba/smb.conf
-              echo "  public = yes" >> /etc/samba/smb.conf
-              echo "  writeable = no" >> /etc/samba/smb.conf
-              echo "  guest ok = yes" >> /etc/samba/smb.conf
-              echo "" >> /etc/samba/smb.conf
+              echo "  browseable = yes"                            >> /etc/samba/smb.conf
+              echo "  public = yes"                                >> /etc/samba/smb.conf
+              echo "  writeable = no"                              >> /etc/samba/smb.conf
+              echo "  guest ok = yes"                              >> /etc/samba/smb.conf
+              echo ""                                              >> /etc/samba/smb.conf
             ;;
 
             6)
@@ -182,14 +178,14 @@ elif [ $OS_VERS == "8" ]; then
               echo "  CREANDO LA COMPARTICIÓN DE LA CARPETA DE LAS WEBS"
               echo "-----------------------------------------------------"
               echo ""
-              echo "[Webs]" >> /etc/samba/smb.conf
-              echo "  path = /var/www/" >> /etc/samba/smb.conf
-              echo "  comment = Webs" >> /etc/samba/smb.conf
-              echo "  browseable = yes" >> /etc/samba/smb.conf
-              echo "  public = no" >> /etc/samba/smb.conf
-              echo "  guest ok = no" >> /etc/samba/smb.conf
+              echo "[Webs]"                  >> /etc/samba/smb.conf
+              echo "  path = /var/www/"      >> /etc/samba/smb.conf
+              echo "  comment = Webs"        >> /etc/samba/smb.conf
+              echo "  browseable = yes"      >> /etc/samba/smb.conf
+              echo "  public = no"           >> /etc/samba/smb.conf
+              echo "  guest ok = no"         >> /etc/samba/smb.conf
               echo "  write list = www-data" >> /etc/samba/smb.conf
-              echo "" >> /etc/samba/smb.conf
+              echo ""                        >> /etc/samba/smb.conf
             ;;
 
             7)
@@ -238,13 +234,15 @@ elif [ $OS_VERS == "9" ]; then
     else
       apt-get update && apt-get -y install dialog
       menu=(dialog --timeout 5 --checklist "Instalación de la compartición Samba:" 22 76 16)
-      opciones=(1 "Instalar los paquetes necesarios" on
-                2 "Configurar las opciones globales" on
-                3 "Configurar la compartición Pública anónima" off
-                4 "Configurar la compartición de la carpeta del usuario" off
-                5 "Configurar la compartición Multimedia" off
-                6 "Configurar la compartición de Webs" off
-                7 "Reiniciar el demonio y mostrar el estado" on)
+      opciones=(
+        1 "Instalar los paquetes necesarios" on
+        2 "Configurar las opciones globales" on
+        3 "Configurar la compartición Pública anónima" off
+        4 "Configurar la compartición de la carpeta del usuario" off
+        5 "Configurar la compartición Multimedia" off
+        6 "Configurar la compartición de Webs" off
+        7 "Reiniciar el demonio y mostrar el estado" on
+      )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
@@ -392,13 +390,15 @@ elif [ $OS_VERS == "10" ]; then
     else
       apt-get update && apt-get -y install dialog
       menu=(dialog --timeout 5 --checklist "Instalación de la compartición Samba:" 22 76 16)
-      opciones=(1 "Instalar los paquetes necesarios" on
-                2 "Configurar las opciones globales" on
-                3 "Configurar la compartición Pública anónima" off
-                4 "Configurar la compartición de la carpeta del usuario" off
-                5 "Configurar la compartición Multimedia" off
-                6 "Configurar la compartición de Webs" off
-                7 "Reiniciar el demonio y mostrar el estado" on)
+      opciones=(
+        1 "Instalar los paquetes necesarios" on
+        2 "Configurar las opciones globales" on
+        3 "Configurar la compartición Pública anónima" off
+        4 "Configurar la compartición de la carpeta del usuario" off
+        5 "Configurar la compartición Multimedia" off
+        6 "Configurar la compartición de Webs" off
+        7 "Reiniciar el demonio y mostrar el estado" on
+      )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
