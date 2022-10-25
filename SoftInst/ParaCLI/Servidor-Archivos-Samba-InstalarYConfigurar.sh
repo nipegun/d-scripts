@@ -150,7 +150,7 @@ elif [ $OS_VERS == "8" ]; then
               echo "[Usuario $3]"                       >> /etc/samba/smb.conf
               echo "  path = /home/$3/"                 >> /etc/samba/smb.conf
               echo "  comment = Carpeta del usuario $3" >> /etc/samba/smb.conf
-              echo "  browsable = yes"                  >> /etc/samba/smb.conf
+              echo "  browseable = yes"                  >> /etc/samba/smb.conf
               echo "  read only = no"                   >> /etc/samba/smb.conf
               echo "  valid users = $3"                 >> /etc/samba/smb.conf
 
@@ -302,7 +302,7 @@ elif [ $OS_VERS == "9" ]; then
               echo "[Usuario $3]" >> /etc/samba/smb.conf
               echo "  path = /home/$3/" >> /etc/samba/smb.conf
               echo "  comment = Carpeta del usuario $3" >> /etc/samba/smb.conf
-              echo "  browsable = yes" >> /etc/samba/smb.conf
+              echo "  browseable = yes" >> /etc/samba/smb.conf
               echo "  read only = no" >> /etc/samba/smb.conf
               echo "  valid users = $3" >> /etc/samba/smb.conf
             ;;
@@ -458,7 +458,7 @@ elif [ $OS_VERS == "10" ]; then
               echo "[Usuario $3]"                       >> /etc/samba/smb.conf
               echo "  path = /home/$3/"                 >> /etc/samba/smb.conf
               echo "  comment = Carpeta del usuario $3" >> /etc/samba/smb.conf
-              echo "  browsable = yes"                  >> /etc/samba/smb.conf
+              echo "  browseable = yes"                  >> /etc/samba/smb.conf
               echo "  read only = no"                   >> /etc/samba/smb.conf
               echo "  valid users = $3"                 >> /etc/samba/smb.conf
             ;;
@@ -617,7 +617,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "[Usuario $3]"                       >> /etc/samba/smb.conf
               echo "  path = /home/$3/"                 >> /etc/samba/smb.conf
               echo "  comment = Carpeta del usuario $3" >> /etc/samba/smb.conf
-              echo "  browsable = yes"                  >> /etc/samba/smb.conf
+              echo "  browseable = yes"                  >> /etc/samba/smb.conf
               echo "  read only = no"                   >> /etc/samba/smb.conf
               echo "  valid users = $3"                 >> /etc/samba/smb.conf
             ;;
