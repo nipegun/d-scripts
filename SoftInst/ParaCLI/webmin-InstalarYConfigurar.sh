@@ -137,8 +137,6 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Instalando paquete deb..."
   echo ""
   dpkg -i /root/SoftInst/webmin/webmin.deb
-  
-
 
 fi
 
