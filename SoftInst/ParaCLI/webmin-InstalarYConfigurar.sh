@@ -124,4 +124,21 @@ elif [ $OS_VERS == "11" ]; then
   mkdir -p /root/SoftInst/webmin
   wget $vEnlaceArchivoDeb -O /root/SoftInst/webmin/webmin.deb
 
+  echo ""
+  echo "  Instalando dependencias..."
+  echo ""
+  apt-get -y update
+  apt-get -y install libauthen-pam-perl
+  apt-get -y install libio-pty-perl
+  apt-get -y install libnet-ssleay-perl
+  apt-get -y install perl-openssl-defaults
+
+  echo ""
+  echo "  Instalando paquete deb..."
+  echo ""
+  dpkg -i /root/SoftInst/webmin/webmin.deb
+  
+
+
 fi
+
