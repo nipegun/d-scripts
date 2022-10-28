@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar webmin en Debian
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/webmin-InstalarYConfigurar.sh | bash
 #
 #  Ejecución remota sin caché:
 #  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
