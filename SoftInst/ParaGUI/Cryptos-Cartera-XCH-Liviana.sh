@@ -39,7 +39,7 @@ echo ""
   echo ""
   vURLDelArchivoDeb=$(curl -s https://github.com/Chia-Network/chia-blockchain/releases | sed 's->-\n-g' | sed 's-href-\nhref-g' | grep $vUltVersEstable | grep href | grep .deb | grep amd64 | grep -v orrent | cut -d'"' -f2)
   echo ""
-  echo "  La URL de descarga es: $vURLDelArchivoDeb."
+  echo "  La URL de descarga es: https://github.com/$vURLDelArchivoDeb."
   echo ""
 
 # Crear carpeta de descarga
