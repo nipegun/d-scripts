@@ -24,13 +24,23 @@ echo -e "${ColorVerde}  Iniciando el script de instalación de la cartera livian
 echo -e "${ColorVerde}----------------------------------------------------------------------${FinColor}"
 echo ""
 
-# Obteniendo URL del archivo
+# Obtener el número de la última versión estable desde github
   echo ""
-  echo "  Obteniendo URL de descarga del archivo .deb..."
+  echo "  Obteniendo el número de la última versión estable desde github..."
   echo ""
-  URLDelArchivoDeb=$(curl -sL https://www.chia.net/download/ | sed 's->-\n-g' | grep .deb | grep -v ARM | cut -d'"' -f2)
+  vUltVersEstable=$(curl -sL https://github.com/Chia-Network/chia-blockchain/releases/latest | sed 's->-\n-g' | grep "releases/tag/" | sed 's-releases/tag/-\nversion"-g' | grep version | head -n1 | cut -d '"' -f2)
   echo ""
-  echo "  La URL de descarga es: $URLDelArchivoDeb."
+  echo "  La última versión estable es la: $vUltVersEstable."
+  echo ""
+
+# Obtener enlace de descarga de la última versión estable
+  echo ""
+  echo "  Obteniendo enlace de descarga de la versión $vUltVersEstable..."
+  echo ""
+  https://github.com/Chia-Network/chia-blockchain/releases/tag/$vUltVersEstable
+  vURLDelArchivoDeb=$(curl -s https://github.com/Chia-Network/chia-blockchain/releases | sed 's->-\n-g' | sed 's-href-\nhref-g' | grep $vUltVersEstable | grep href | grep .deb | grep amd64 | grep -v orrent | cut -d'"' -f2)
+  echo ""
+  echo "  La URL de descarga es: $vURLDelArchivoDeb."
   echo ""
 
 # Crear carpeta de descarga
@@ -49,13 +59,12 @@ echo ""
       echo ""
       echo "  wget no está instalado. Iniciando su instalación..."
       echo ""
-      apt-get -y update > /dev/null
-      apt-get -y install wget
+      apt-get -y update && apt-get -y install wget
       echo ""
     fi
   cd /root/SoftInst/Cryptos/XCH/
-  rm -f /root/SoftInst/Cryptos/XCH/chia-light-wallet.deb
-  wget $URLDelArchivoDeb -O /root/SoftInst/Cryptos/XCH/chia-light-wallet.deb
+  rm -f /root/SoftInst/Cryptos/XCH/chia.deb
+  wget https://github.com/$vURLDelArchivoDeb -O /root/SoftInst/Cryptos/XCH/chia.deb
 
   echo ""
   echo "  Extrayendo los archivos de dentro del paquete .deb..."
@@ -69,7 +78,7 @@ echo ""
       apt-get -y install binutils
       echo ""
     fi
-  ar xv /root/SoftInst/Cryptos/XCH/chia-light-wallet.deb
+  ar xv /root/SoftInst/Cryptos/XCH/chia.deb
 
   echo ""
   echo "  Descomprimiendo el archivo data.tar.xz..."
@@ -79,8 +88,7 @@ echo ""
       echo ""
       echo "  tar no está instalado. Iniciando su instalación..."
       echo ""
-      apt-get -y update > /dev/null
-      apt-get -y install tar
+      apt-get -y update && apt-get -y install tar
       echo ""
     fi
   tar -xvf /root/SoftInst/Cryptos/XCH/data.tar.xz
@@ -148,6 +156,7 @@ echo ""
   echo "Hidden=false"                                                              >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
   echo "Categories=Cryptos"                                                        >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
   echo "Icon=/home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain.png" >> /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
+  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop
   gio set /home/$UsuarioNoRoot/.local/share/applications/xch-gui.desktop "metadata::trusted" yes
 
 # Crear el archivo de auto-ejecución
@@ -163,6 +172,7 @@ echo ""
   echo "Hidden=false"                                                              >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
   echo "Categories=Cryptos"                                                        >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
   echo "Icon=/home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain.png" >> /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
+  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop
   gio set /home/$UsuarioNoRoot/.config/autostart/xch-gui.desktop "metadata::trusted" yes
 
 # Instalar los c-scripts
