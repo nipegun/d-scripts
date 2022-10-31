@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar la "cartera liviana" de Chia (XCH)
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-XCH-Oficial.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-XCH-Liviana.sh | bash
 # ----------
 
 ColorRojo='\033[1;31m'
