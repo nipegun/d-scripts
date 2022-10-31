@@ -40,8 +40,7 @@ echo ""
       echo ""
       echo "  wget no está instalado. Iniciando su instalación..."
       echo ""
-      apt-get -y update > /dev/null
-      apt-get -y install wget
+      apt-get -y update && apt-get -y install wget
       echo ""
     fi
   cd /root/SoftInst/Cryptos/XCH/
