@@ -28,7 +28,7 @@ echo ""
   echo ""
   echo "  Obteniendo URL de descarga del archivo .deb..."
   echo ""
-  URLDelArchivoDeb=$(curl -s https://www.chia.net/download/ | grep .deb | grep -v ARM | cut -d'"' -f2)
+  URLDelArchivoDeb=$(curl -sL https://www.chia.net/download/ | sed 's->-\n-g' | grep .deb | grep -v ARM | cut -d'"' -f2)
   echo ""
   echo "  La URL de descarga es: $URLDelArchivoDeb."
   echo ""
