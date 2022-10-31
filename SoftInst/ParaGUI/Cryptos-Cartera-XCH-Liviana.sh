@@ -195,4 +195,46 @@ echo ""
   echo ""
   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/
   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/XCH/ -R
+  find /home/$UsuarioNoRoot/Cryptos/XCH/ -type d -exec chmod 750 {} \;
+  find /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/ -type f -exec chmod +x {} \;
+  find /home/$UsuarioNoRoot/                             -type f -iname "*.sh" -exec chmod +x {} \;
+  chown root:root /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
+  chmod 4755      /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
+
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/chia_ca.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/daemon/private_daemon.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/farmer/private_farmer.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/farmer/public_farmer.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/full_node/private_full_node.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/full_node/public_full_node.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/chia_ca.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/private_ca.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/harvester/private_harvester.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/full_node/public_full_node.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/private_ca.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/timelord/private_timelord.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/timelord/public_timelord.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/daemon/private_daemon.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/wallet/private_wallet.crt
+  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/wallet/public_wallet.crt
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/chia_ca.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/daemon/private_daemon.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/farmer/private_farmer.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/farmer/public_farmer.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/full_node/private_full_node.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/full_node/public_full_node.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/chia_ca.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/private_ca.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/harvester/private_harvester.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/full_node/public_full_node.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/private_ca.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/timelord/private_timelord.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/timelord/public_timelord.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/daemon/private_daemon.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/wallet/private_wallet.key
+  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/wallet/public_wallet.key
+
+  chmod 0644 /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/resources/app.asar.unpacked/daemon/mozilla-ca/cacert.pem
+  chmod +x   /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain
+  chmod +x   /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/resources/app.asar.unpacked/daemon/chia
 
