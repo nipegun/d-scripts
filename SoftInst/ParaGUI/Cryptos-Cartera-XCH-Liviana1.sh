@@ -193,5 +193,6 @@ echo ""
   echo ""
   echo "  Reparando permisos..."
   echo ""
+  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/
   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/XCH/ -R
 
