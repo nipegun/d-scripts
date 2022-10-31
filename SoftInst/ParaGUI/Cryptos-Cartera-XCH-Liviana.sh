@@ -10,6 +10,9 @@
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-XCH-Liviana.sh | bash
+#
+#  Ejecución remota sin caché:
+#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-XCH-Liviana.sh | bash
 # ----------
 
 ColorRojo='\033[1;31m'
