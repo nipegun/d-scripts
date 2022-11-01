@@ -104,8 +104,9 @@ elif [ $OS_VERS == "11" ]; then
   chown nobody:nogroup /CarpetaNFS/
   chmod 777 /CarpetaNFS/
   cp /etc/exports /etc/exports.ori
-  echo "/CarpetaNFS *(sync)" > /etc/exports
-  #echo "/CarpetaNFS 192.168.1.80(rw,sync,no_subtree_check)" > /etc/exports
+  echo "/CarpetaNFS *(sync)" > /etc/exports # Montar sólo lectura
+  #echo "/CarpetaNFS *(rw,sync,no_subtree_check)" > /etc/exports # Montar lectura y escritura
+  #echo "/CarpetaNFS 192.168.1.80(rw,sync,no_subtree_check)" > /etc/exports # Montar lectura y escritura
   exportfs -av
   systemctl restart nfs-kernel-server
 
