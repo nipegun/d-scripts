@@ -100,13 +100,15 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   apt-get -y update
   apt-get -y install nfs-kernel-server
+  apt-get -y install nfs-common         # lockd, statd, showmount, nfsstat, etc.
+  apt-get -y install rpcbind            # convierte los identificadores de programa RPC (Remote Procedure Call) en direcciones universales ¿?
   mkdir -p /CarpetaNFS/
   chown nobody:nogroup /CarpetaNFS/
   chmod 777 /CarpetaNFS/
   cp /etc/exports /etc/exports.ori
-  echo "/CarpetaNFS *(sync)" > /etc/exports # Montar sólo lectura
+  echo "/CarpetaNFS *(sync)" > /etc/exports                      # Montar sólo lectura
   #echo "/CarpetaNFS *(rw,sync,no_subtree_check)" > /etc/exports # Montar lectura y escritura
-  #echo "/CarpetaNFS 192.168.1.80(rw,sync,no_subtree_check)" > /etc/exports # Montar lectura y escritura
+  #echo "/CarpetaNFS 192.168.1.80(rw,sync,no_subtree_check)" > /etc/exports # Montar lectura y escritura para un host específico
   exportfs -av
   systemctl restart nfs-kernel-server
 
