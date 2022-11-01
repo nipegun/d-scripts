@@ -92,4 +92,6 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
+  apt-get -y update
+  apt-get -y install nfs-kernel-server
 fi
