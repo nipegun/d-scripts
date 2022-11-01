@@ -92,6 +92,21 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
+  echo ""
+  echo "  ATENCIÓN: Este script no es válido para instalaciones en contenedores LXC."
+  echo "  Debe ser ejecutado en un baremetal o máquina virtual."
+  echo ""
+  echo "  Para instalaciones en LXC, buscar el script en los p-scripts."
+  echo ""
   apt-get -y update
   apt-get -y install nfs-kernel-server
+  mkdir -p /CarpetaNFS/
+  chown nobody:nogroup /CarpetaNFS/
+  chmod 777 /CarpetaNFS/
+  cp /etc/exports /etc/exports.ori
+  echo "/CarpetaNFS *(sync)" > /etc/exports
+  #echo "/CarpetaNFS 192.168.1.80(rw,sync,no_subtree_check)" > /etc/exports
+  exportfs -av
+  systemctl restart nfs-kernel-server
+
 fi
