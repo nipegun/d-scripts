@@ -164,7 +164,7 @@ elif [ $OS_VERS == "11" ]; then
     5 "Instalar certificado SSL de letsencrypt" off
     6 "Configurar y activar el módulo remoteip para estar detrás de un proxy inverso" off
     7 "Asegurar una parte de la web con usuario y contraseña" off
-    8 "Reiniciando nginx y mostrando su estado..." on
+    8 "Reiniciar nginx y mostrar su estado..." on
   )
   choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
   clear
@@ -334,6 +334,7 @@ elif [ $OS_VERS == "11" ]; then
         echo "  Reiniciando ngnix..."
         echo ""
         systemctl restart nginx
+        sleep 5
         systemctl status nginx
 
       ;;
