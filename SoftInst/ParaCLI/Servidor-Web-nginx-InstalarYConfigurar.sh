@@ -246,8 +246,8 @@ elif [ $OS_VERS == "11" ]; then
         echo ""
         echo "  Activando https y agregando certificado SSL autofirmado..."
         echo ""
-        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginxdefault.key -out /etc/ssl/certs/nginxdefault.crt
-        openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginxdefault.key -out /etc/ssl/certs/nginxdefault.crt # Crea el certificado y la clave del vcertificado
+        openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 # Crea un grupo Diffie-Hellman fuerte para negociar Perfect Forward Secrecy con los clientes.
 
         echo "ssl_certificate /etc/ssl/certs/nginxdefault.crt;"        > /etc/nginx/snippets/self-signed.conf
         echo "ssl_certificate_key /etc/ssl/private/nginxdefault.key;" >> /etc/nginx/snippets/self-signed.conf
