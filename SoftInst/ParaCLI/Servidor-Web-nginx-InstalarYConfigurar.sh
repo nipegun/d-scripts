@@ -159,11 +159,12 @@ elif [ $OS_VERS == "11" ]; then
   options=(
     1 "Instalar el paquete nginx" on
     2 "Instalar y configurar PHP" off
-    3 "Activar HTTPS y agregar certificado SSL autofirmado" off
+    3 "Activar HTTPS y agregar certificado SSL autofirmado" on
     4 "Activar HTTPS (con snippet) y agregar certificado SSL autofirmado" off
     5 "Instalar certificado SSL de letsencrypt" off
     6 "Configurar y activar el módulo remoteip para estar detrás de un proxy inverso" off
     7 "Asegurar una parte de la web con usuario y contraseña" off
+    8 "Reiniciando nginx y mostrando su estado..." on
   )
   choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
   clear
@@ -323,6 +324,15 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
           fi
         htpasswd -c /etc/nginx/.htpasswd usuario # Cada vez que se ejecuta borra lo anterior y deja el nuevo usuario
+
+      ;;
+
+      7)
+
+        echo ""
+        echo "  Reiniciando ngnix..."
+        echo ""
+        systemctl restart nginx
 
       ;;
 
