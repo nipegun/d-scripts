@@ -334,6 +334,7 @@ elif [ $OS_VERS == "11" ]; then
         echo "  Reiniciando ngnix..."
         echo ""
         systemctl restart nginx
+        systemctl status nginx
 
       ;;
 
