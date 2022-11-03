@@ -163,6 +163,7 @@ elif [ $OS_VERS == "11" ]; then
     4 "Activar HTTPS (con snippet) y agregar certificado SSL autofirmado" off
     5 "Instalar certificado SSL de letsencrypt" off
     6 "Configurar y activar el módulo remoteip para estar detrás de un proxy inverso" off
+    7 "Asegurar una parte de la web con usuario y contraseña" off
   )
   choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
   clear
@@ -291,6 +292,24 @@ elif [ $OS_VERS == "11" ]; then
         echo ""
         echo "  Comandos todavía no preparados."
         echo ""
+
+      ;;
+
+      7)
+
+        echo ""
+        echo "  Asegurando parte de la web con usuario y contraseña..."
+        echo ""
+        sed -i '$ s|}|  location /protegida {\n    auth_basic "Area protegida";\n    auth_basic_user_file /etc/nginx/.htpasswd;\n  }\n\n}|' /etc/nginx/sites-available/default
+        # Comprobar si el paquete apache2-utils está instalado. Si no lo está, instalarlo.
+          if [[ $(dpkg-query -s apache2-utils 2>/dev/null | grep installed) == "" ]]; then
+            echo ""
+            echo -e "${vColorRojo}apache2-utils no está instalado. Iniciando su instalación...${vFinColor}"
+            echo ""
+            apt-get -y update && apt-get -y install apache2-utils
+            echo ""
+          fi
+        htpasswd -c /etc/nginx/.htpasswd usuario
 
       ;;
 
