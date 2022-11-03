@@ -309,7 +309,7 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y update && apt-get -y install apache2-utils
             echo ""
           fi
-        htpasswd -c /etc/nginx/.htpasswd usuario
+        htpasswd -c /etc/nginx/.htpasswd usuario # Cada vez que se ejecuta borra lo anterior y deja el nuevo usuario
 
       ;;
 
