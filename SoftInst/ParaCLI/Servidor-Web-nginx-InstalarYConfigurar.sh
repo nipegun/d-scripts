@@ -243,7 +243,7 @@ elif [ $OS_VERS == "11" ]; then
         echo ""
         echo "  Activando https y agregando certificado SSL autofirmado..."
         echo ""
-        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginxdefault.key -out /etc/ssl/certs/nginxdefault.crt # Crea el certificado y la clave del vcertificado
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginxdefault.key -out /etc/ssl/certs/nginxdefault.crt -subj "/C=ES/ST=Madrid/L=Arganda/O=MiEmpresa/CN=dominio.com"# Crea el certificado y la clave del vcertificado
 
         sed -i -e 's|SSL configuration|SSL configuration\nlisten 443 ssl default_server;\nlisten [::]:443 ssl default_server;\nssl_certificate /etc/ssl/certs/nginxdefault.crt;\nssl_certificate_key /etc/ssl/private/nginxdefault.key;\nssl_protocols TLSv1 TLSv1.1 TLSv1.2;\nssl_ciphers HIGH:!aNULL:!MD5;|g' /etc/nginx/sites-available/default
 
