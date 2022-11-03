@@ -247,6 +247,13 @@ elif [ $OS_VERS == "11" ]; then
 
         sed -i -e 's|SSL configuration|SSL configuration\nlisten 443 ssl default_server;\nlisten [::]:443 ssl default_server;\nssl_certificate /etc/ssl/certs/nginxdefault.crt;\nssl_certificate_key /etc/ssl/private/nginxdefault.key;\nssl_protocols TLSv1 TLSv1.1 TLSv1.2;\nssl_ciphers HIGH:!aNULL:!MD5;|g' /etc/nginx/sites-available/default
 
+        #listen 443 ssl default_server;
+        #listen [::]:443 ssl default_server;
+        #ssl_certificate /etc/ssl/certs/nginxdefault.crt;
+        #ssl_certificate_key /etc/ssl/private/nginxdefault.key;
+        #ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+        #ssl_ciphers HIGH:!aNULL:!MD5;
+
       ;;
 
       4)
@@ -301,6 +308,12 @@ elif [ $OS_VERS == "11" ]; then
         echo "  Asegurando parte de la web con usuario y contraseña..."
         echo ""
         sed -i '$ s|}|  location /protegida {\n    auth_basic "Area protegida";\n    auth_basic_user_file /etc/nginx/.htpasswd;\n  }\n\n}|' /etc/nginx/sites-available/default
+
+        #location /protegida {
+        #  auth_basic "Area protegida";
+        #  auth_basic_user_file /etc/nginx/.htpasswd;
+        #}
+
         # Comprobar si el paquete apache2-utils está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s apache2-utils 2>/dev/null | grep installed) == "" ]]; then
             echo ""
