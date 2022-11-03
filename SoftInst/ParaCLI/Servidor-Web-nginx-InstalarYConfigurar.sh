@@ -246,10 +246,10 @@ elif [ $OS_VERS == "11" ]; then
         echo ""
         echo "  Activando https y agregando certificado SSL autofirmado..."
         echo ""
-        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginxdefault.key -out /etc/ssl/certs/nginxdefault.pem
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginxdefault.key -out /etc/ssl/certs/nginxdefault.crt
         openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 
-        echo "ssl_certificate /etc/ssl/certs/nginxdefault.pem;"        > /etc/nginx/snippets/self-signed.conf
+        echo "ssl_certificate /etc/ssl/certs/nginxdefault.crt;"        > /etc/nginx/snippets/self-signed.conf
         echo "ssl_certificate_key /etc/ssl/private/nginxdefault.key;" >> /etc/nginx/snippets/self-signed.conf
 
         echo "ssl_protocols TLSv1 TLSv1.1 TLSv1.2;"                                         > /etc/nginx/snippets/ssl-params.conf
