@@ -165,8 +165,9 @@ elif [ $OS_VERS == "11" ]; then
     1 "Instalar el paquete nginx" on
     2 "Instalar y configurar PHP" off
     3 "Activar HTTPS y agregar certificado SSL autofirmado" off
-    4 "Instalar certificado SSL de letsencrypt" off
-    5 "Configurar y activar el módulo remoteip para estar detrás de un proxy inverso" off
+    4 "Activar HTTPS (con snippet) y agregar certificado SSL autofirmado" off
+    5 "Instalar certificado SSL de letsencrypt" off
+    6 "Configurar y activar el módulo remoteip para estar detrás de un proxy inverso" off
   )
   choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
   clear
@@ -247,6 +248,17 @@ elif [ $OS_VERS == "11" ]; then
         echo "  Activando https y agregando certificado SSL autofirmado..."
         echo ""
         openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginxdefault.key -out /etc/ssl/certs/nginxdefault.crt # Crea el certificado y la clave del vcertificado
+
+        sed -i -e 's|SSL configuration|SSL configuration\nlisten 443 ssl default_server;\nlisten [::]:443 ssl default_server;\nssl_certificate /etc/ssl/certs/nginxdefault.crt;\nssl_certificate_key /etc/ssl/private/nginxdefault.key;\nssl_protocols TLSv1 TLSv1.1 TLSv1.2;\nssl_ciphers HIGH:!aNULL:!MD5;|g' /etc/nginx/sites-available/default
+
+      ;;
+
+      4)
+
+        echo ""
+        echo "  Activando https (con snippet) y agregando certificado SSL autofirmado..."
+        echo ""
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginxdefault.key -out /etc/ssl/certs/nginxdefault.crt # Crea el certificado y la clave del vcertificado
         openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 # Crea un grupo Diffie-Hellman fuerte para negociar Perfect Forward Secrecy con los clientes.
 
         echo "ssl_certificate /etc/ssl/certs/nginxdefault.crt;"        > /etc/nginx/snippets/self-signed.conf
@@ -271,14 +283,6 @@ elif [ $OS_VERS == "11" ]; then
 
       ;;
 
-      4)
-
-        echo ""
-        echo "  Comandos todavía no preparados."
-        echo ""
-
-      ;;
-
       5)
 
         echo ""
@@ -287,6 +291,13 @@ elif [ $OS_VERS == "11" ]; then
 
       ;;
 
+      6)
+
+        echo ""
+        echo "  Comandos todavía no preparados."
+        echo ""
+
+      ;;
     esac
 
   done
