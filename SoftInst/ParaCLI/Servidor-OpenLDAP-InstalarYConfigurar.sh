@@ -19,7 +19,8 @@ FinColor='\033[0m'
 
 vIPPropia=$(hostname -I)
 vNombreServidor="servidoroldap"
-vDominio="lan.local"
+vDominio="lan"
+vExtDominio="local"
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org 
@@ -105,7 +106,7 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Modificando el archivo /etc/hosts..."
   echo ""
-  echo "$vIPPropia $vNombreServidor.$vDominio" >> /etc/hosts
+  echo "$vIPPropia $vNombreServidor.$vDominio.$vExtDominio" >> /etc/hosts
 
   echo ""
   echo "  Instalando paquetes..."
@@ -120,16 +121,61 @@ elif [ $OS_VERS == "11" ]; then
   dpkg-reconfigure slapd
 
   echo ""
+  echo "  Mostrando información del servidor..."
   echo ""
+  slapcat
+
   echo ""
-  mkdir -p /root/OpenLDAP/
-  echo "dn: ou=usuarios,dc=hacks4geeks,dc=local"  > /root/OpenLDAP/dit.ldif
-  echo "objectClass: organizationalUnit"         >> /root/OpenLDAP/dit.ldif
-  echo "ou: usuarios"                            >> /root/OpenLDAP/dit.ldif
-  echo ""                                        >> /root/OpenLDAP/dit.ldif
-  echo "dn: ou=grupos,dc=hacks4geeks,dc=local"   >> /root/OpenLDAP/dit.ldif
-  echo "objectClass: organizationalUnit"         >> /root/OpenLDAP/dit.ldif
-  echo "ou: grupos"                              >> /root/OpenLDAP/dit.ldif
+  echo "  Agregando unidades organizativas..."
+  echo ""
+  mkdir -p /root/OpenLDAP/ 2> /dev/null
+  echo "dn: ou=tecnicos,dc=$vDominio,dc=$vExtDominio"  > /root/OpenLDAP/UnidadesOrganizativas.ldif
+  echo "objectClass: organizationalUnit"              >> /root/OpenLDAP/UnidadesOrganizativas.ldif
+  echo "ou: tecnicos"                                 >> /root/OpenLDAP/UnidadesOrganizativas.ldif
+  echo ""                                             >> /root/OpenLDAP/UnidadesOrganizativas.ldif
+  echo "dn: ou=usuarios,dc=$vDominio,dc=$vExtDominio" >> /root/OpenLDAP/UnidadesOrganizativas.ldif
+  echo "objectClass: organizationalUnit"              >> /root/OpenLDAP/UnidadesOrganizativas.ldif
+  echo "ou: usuarios"                                 >> /root/OpenLDAP/UnidadesOrganizativas.ldif
+  ldapadd -x -D cn=admin,dc=$vDominio,dc=$vExtDominio -W -f /root/OpenLDAP/UnidadesOrganizativas.ldif
+
+  echo ""
+  echo "  Agregando usuarios..."
+  echo ""
+  mkdir -p /root/OpenLDAP/ 2> /dev/null
+  echo "dn: uid=pedroaguirre,ou=tecnicos,dc=$vDominio,dc=$vExtDominio"  > /root/OpenLDAP/Usuarios.ldif
+  echo "objectClass: inetOrgPerson"                                    >> /root/OpenLDAP/Usuarios.ldif
+  echo "objectClass: posixAccount"                                     >> /root/OpenLDAP/Usuarios.ldif
+  echo "cn: Pedro"                                                     >> /root/OpenLDAP/Usuarios.ldif # Requerido si hay inetOrgPerson y posixAccount
+  echo "sn: Aguirre"                                                   >> /root/OpenLDAP/Usuarios.ldif # Requerido si hay inetOrgPerson
+  echo "uid: pedroaguirre"                                             >> /root/OpenLDAP/Usuarios.ldif # Requerido si hay posixAccount
+  echo "uidNumber: 2000"                                               >> /root/OpenLDAP/Usuarios.ldif # Requerido si hay posixAccount
+  echo "gidNumber: 10000"                                              >> /root/OpenLDAP/Usuarios.ldif # Requerido si hay posixAccount
+  echo "homeDirectory: /home/pedroaguirre"                             >> /root/OpenLDAP/Usuarios.ldif # Requerido si hay posixAccount
+  echo ""                                                              >> /root/OpenLDAP/Usuarios.ldif # Debe haber una línea vacía entre dn y dn
+  echo "dn: uid=juanoria,ou=usuarios,dc=$vDominio,dc=$vExtDominio"     >> /root/OpenLDAP/Usuarios.ldif
+  echo "objectClass: inetOrgPerson"                                    >> /root/OpenLDAP/Usuarios.ldif
+  echo "objectClass: posixAccount"                                     >> /root/OpenLDAP/Usuarios.ldif
+  echo "cn: Juan"                                                      >> /root/OpenLDAP/Usuarios.ldif # Requerido si hay inetOrgPerson y posixAccount
+  echo "sn: Oria"                                                      >> /root/OpenLDAP/Usuarios.ldif # Requerido si hay inetOrgPerson
+  echo "uid: juanoria"                                                 >> /root/OpenLDAP/Usuarios.ldif # Requerido si hay posixAccount
+  echo "uidNumber: 2001"                                               >> /root/OpenLDAP/Usuarios.ldif # Requerido si hay posixAccount
+  echo "gidNumber: 10001"                                              >> /root/OpenLDAP/Usuarios.ldif # Requerido si hay posixAccount
+  echo "homeDirectory: /home/juanoria"                                 >> /root/OpenLDAP/Usuarios.ldif # Requerido si hay posixAccount
+  echo "loginShell: /bin/bash"                                         >> /root/OpenLDAP/Usuarios.ldif # Atributo no obligatorio de posixAccount
+  echo "userPassword: 12345678"                                        >> /root/OpenLDAP/Usuarios.ldif # Atributo no obligatorio de posixAccount
+  echo "mail: juanoria@gmail.com"                                      >> /root/OpenLDAP/Usuarios.ldif # Atributo no obligatorio de inetOrgPerson
+  echo "displayName: Juan Oria"                                        >> /root/OpenLDAP/Usuarios.ldif # Atributo no obligatorio de inetOrgPerson
+  ldapadd -x -D cn=admin,dc=$vDominio,dc=$vExtDominio -W -f /root/OpenLDAP/Usuarios.ldif
+
+ # echo ""
+ # echo "  Mostrando los usuarios creados..."
+ # echo ""
+ # ldapsearch -xLLL -b "dc=$vDominio,dc=$vExtDominio" uid=nipegun sn givenName cn
+
+  echo ""
+  echo "  Instalando LAM (LDAP Account Manager)..."
+  echo ""
+  apt-get -y install ldap-account-manager
 
 fi
 
