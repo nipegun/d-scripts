@@ -139,6 +139,11 @@ elif [ $OS_VERS == "11" ]; then
   ldapadd -x -D cn=admin,dc=$vDominio,dc=$vExtDominio -W -f /root/OpenLDAP/UnidadesOrganizativas.ldif
 
   echo ""
+  echo "  Mostrando unidades organizativas del servidor OpenLDAP..."
+  echo ""
+  ldapsearch -xLLL -b "dc=$vDominio,dc=$vExtDominio" ou | grep ou:
+
+  echo ""
   echo "  Agregando usuarios..."
   echo ""
   mkdir -p /root/OpenLDAP/ 2> /dev/null
@@ -167,10 +172,10 @@ elif [ $OS_VERS == "11" ]; then
   echo "displayName: Juan Oria"                                        >> /root/OpenLDAP/Usuarios.ldif # Atributo no obligatorio de inetOrgPerson
   ldapadd -x -D cn=admin,dc=$vDominio,dc=$vExtDominio -W -f /root/OpenLDAP/Usuarios.ldif
 
- # echo ""
- # echo "  Mostrando los usuarios creados..."
- # echo ""
- # ldapsearch -xLLL -b "dc=$vDominio,dc=$vExtDominio" uid=nipegun sn givenName cn
+  echo ""
+  echo "  Mostrando usuarios del servidor OpenLDAP..."
+  echo ""
+  ldapsearch -xLLL -b "dc=$vDominio,dc=$vExtDominio" dn | cut -d ',' -f1 | grep uid
 
   echo ""
   echo "  Instalando LAM (LDAP Account Manager)..."
