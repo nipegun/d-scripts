@@ -873,7 +873,7 @@ elif [ $OS_VERS == "11" ]; then
             fi
 
           # Crear zona directa esclava
-            echo ''                                         >> /etc/bind/named.conf.local
+            echo ''                                             >> /etc/bind/named.conf.local
             echo 'zone "lan.local" {'                           >> /etc/bind/named.conf.local
             echo '  type slave;'                                >> /etc/bind/named.conf.local
             echo "  masters { $vIPDelServidorMaster; };"        >> /etc/bind/named.conf.local
