@@ -409,7 +409,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             cp /etc/bind/db.local /etc/bind/db.directa-lan.local
             sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.directa.lan.local
-            sed -i '/localhost./d'                                                /etc/bind/db.directa-lan.local
+            sed -i -e 's|localhost.|ns1.lan.local.|g'                             /etc/bind/db.directa.lan.local
             sed -i '/127.0.0.1/d'                                                 /etc/bind/db.directa-lan.local
             sed -i '/::1/d'                                                       /etc/bind/db.directa-lan.local
             echo -e "ubuntuserver\tIN\tA\t192.168.200.10"                      >> /etc/bind/db.directa-lan.local
@@ -660,7 +660,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             cp /etc/bind/db.local /etc/bind/db.directa-lan.local
             sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.directa.lan.local
-            sed -i '/localhost./d'                                                /etc/bind/db.directa-lan.local
+            sed -i -e 's|localhost.|ns1.lan.local.|g'                             /etc/bind/db.directa.lan.local
             sed -i '/127.0.0.1/d'                                                 /etc/bind/db.directa-lan.local
             sed -i '/::1/d'                                                       /etc/bind/db.directa-lan.local
             echo -e "ubuntuserver\tIN\tA\t192.168.200.10"                      >> /etc/bind/db.directa.lan.local
