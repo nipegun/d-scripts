@@ -439,8 +439,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             cp /etc/bind/db.127 /etc/bind/db.inversa-lan.local
             sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.inversa-lan.local
-            sed -i -e 's|localhost.|servdnsmaes.lan.local.|g'                     /etc/bind/db.inversa-lan.local
-            sed -i -e 's|1.0.0|1|g'                                               /etc/bind/db.inversa-lan.local
+            sed -i '/localhost./d'                                                /etc/bind/db.inversa-lan.local
             echo -e "10\tIN\tPTR\tubuntuserver.lan.local."                     >> /etc/bind/db.inversa-lan.local
             echo -e "20\tIN\tPTR\tubuntudesktop.lan.local."                    >> /etc/bind/db.inversa-lan.local
             echo -e "30\tIN\tPTR\twindowsserver.lan.local."                    >> /etc/bind/db.inversa-lan.local
@@ -661,7 +660,9 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             cp /etc/bind/db.local /etc/bind/db.directa-lan.local
             sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.directa.lan.local
-            sed -i -e 's|localhost.|servdnsmaes.lan.local.|g'                     /etc/bind/db.directa.lan.local
+            sed -i '/localhost./d'                                                /etc/bind/db.directa-lan.local
+            sed -i '/127.0.0.1/d'                                                 /etc/bind/db.directa-lan.local
+            sed -i '/::1/d'                                                       /etc/bind/db.directa-lan.local
             echo -e "ubuntuserver\tIN\tA\t192.168.200.10"                      >> /etc/bind/db.directa.lan.local
             echo -e "ubuntudesktop\tIN\tA\t192.168.200.20"                     >> /etc/bind/db.directa.lan.local
             echo -e "windowsserver\tIN\tA\t192.168.200.30"                     >> /etc/bind/db.directa.lan.local
@@ -694,8 +695,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             cp /etc/bind/db.127 /etc/bind/db.inversa-lan.local
             sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.inversa-lan.local
-            sed -i -e 's|localhost.|servdnsmaes.lan.local.|g'                     /etc/bind/db.inversa-lan.local
-            sed -i -e 's|1.0.0|1|g'                                               /etc/bind/db.inversa-lan.local
+            sed -i '/localhost./d'                                                /etc/bind/db.inversa-lan.local
             echo -e "10\tIN\tPTR\tubuntuserver.lan.local."                     >> /etc/bind/db.inversa-lan.local
             echo -e "20\tIN\tPTR\tubuntudesktop.lan.local."                    >> /etc/bind/db.inversa-lan.local
             echo -e "30\tIN\tPTR\twindowsserver.lan.local."                    >> /etc/bind/db.inversa-lan.local
