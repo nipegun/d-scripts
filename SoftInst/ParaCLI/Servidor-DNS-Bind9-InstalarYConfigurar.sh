@@ -407,13 +407,15 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "Creando y populando la base de datos de de la zona LAN directa..."
             echo ""
-            cp /etc/bind/db.local /etc/bind/db.lan-directa.local
-            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.lan-directa.local
-            sed -i -e 's|localhost.|servdnsmaes.lan.local.|g'                     /etc/bind/db.lan-directa.local
-            echo -e "ubuntuserver\tIN\tA\t192.168.200.10"                      >> /etc/bind/db.lan-directa.local
-            echo -e "ubuntudesktop\tIN\tA\t192.168.200.20"                     >> /etc/bind/db.lan-directa.local
-            echo -e "windowsserver\tIN\tA\t192.168.200.30"                     >> /etc/bind/db.lan-directa.local
-            echo -e "windowsdesktop\tIN\tA\t192.168.200.40"                    >> /etc/bind/db.lan-directa.local
+            cp /etc/bind/db.local /etc/bind/db.directa-lan.local
+            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.directa.lan.local
+            sed -i '/localhost./d'                                                /etc/bind/db.directa-lan.local
+            sed -i '/127.0.0.1/d'                                                 /etc/bind/db.directa-lan.local
+            sed -i '/::1/d'                                                       /etc/bind/db.directa-lan.local
+            echo -e "ubuntuserver\tIN\tA\t192.168.200.10"                      >> /etc/bind/db.directa-lan.local
+            echo -e "ubuntudesktop\tIN\tA\t192.168.200.20"                     >> /etc/bind/db.directa-lan.local
+            echo -e "windowsserver\tIN\tA\t192.168.200.30"                     >> /etc/bind/db.directa-lan.local
+            echo -e "windowsdesktop\tIN\tA\t192.168.200.40"                    >> /etc/bind/db.directa-lan.local
   
           # Linkear zona LAN directa a /etc/bind/named.conf.local
             echo ""
@@ -422,7 +424,7 @@ elif [ $OS_VERS == "11" ]; then
             echo 'zone "lan.local" {'                       >> /etc/bind/named.conf.local
             echo "  type master;"                           >> /etc/bind/named.conf.local
             echo "  allow-transfer { none; };"              >> /etc/bind/named.conf.local
-            echo '  file "/etc/bind/db.lan-directa.local";' >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.directa-lan.local";' >> /etc/bind/named.conf.local
             echo "};"                                       >> /etc/bind/named.conf.local
 
           # Comprobar la LAN zona directa
@@ -435,14 +437,14 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "Creando y populando la base de datos de de la zona LAN inversa..."
             echo ""
-            cp /etc/bind/db.127 /etc/bind/db.lan-inversa.local
-            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.lan-inversa.local
-            sed -i -e 's|localhost.|servdnsmaes.lan.local.|g'                      /etc/bind/db.lan-inversa.local
-            sed -i -e 's|1.0.0|1|g'                                               /etc/bind/db.lan-inversa.local
-            echo -e "10\tIN\tPTR\tubuntuserver.lan.local."                     >> /etc/bind/db.lan-inversa.local
-            echo -e "20\tIN\tPTR\tubuntudesktop.lan.local."                    >> /etc/bind/db.lan-inversa.local
-            echo -e "30\tIN\tPTR\twindowsserver.lan.local."                    >> /etc/bind/db.lan-inversa.local
-            echo -e "40\tIN\tPTR\twindowsdesktop.lan.local."                   >> /etc/bind/db.lan-inversa.local
+            cp /etc/bind/db.127 /etc/bind/db.inversa-lan.local
+            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.inversa-lan.local
+            sed -i -e 's|localhost.|servdnsmaes.lan.local.|g'                     /etc/bind/db.inversa-lan.local
+            sed -i -e 's|1.0.0|1|g'                                               /etc/bind/db.inversa-lan.local
+            echo -e "10\tIN\tPTR\tubuntuserver.lan.local."                     >> /etc/bind/db.inversa-lan.local
+            echo -e "20\tIN\tPTR\tubuntudesktop.lan.local."                    >> /etc/bind/db.inversa-lan.local
+            echo -e "30\tIN\tPTR\twindowsserver.lan.local."                    >> /etc/bind/db.inversa-lan.local
+            echo -e "40\tIN\tPTR\twindowsdesktop.lan.local."                   >> /etc/bind/db.inversa-lan.local
 
           # Linkear zona LAN inversa a /etc/bind/named.conf.local
             echo ""
@@ -452,14 +454,14 @@ elif [ $OS_VERS == "11" ]; then
             echo 'zone "200.168.192.in-addr.arpa" {'        >> /etc/bind/named.conf.local
             echo "  type master;"                           >> /etc/bind/named.conf.local
             echo "  allow-transfer { none; };"              >> /etc/bind/named.conf.local
-            echo '  file "/etc/bind/db.lan-inversa.local";' >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.inversa-lan.local";' >> /etc/bind/named.conf.local
             echo "};"                                       >> /etc/bind/named.conf.local
 
           # Comprobar la LAN zona inversa
             echo ""
             echo "  Comprobando la zona inversa..."
             echo ""
-            named-checkzone 200.168.192.in-addr-arpa /etc/bind/db.lan-inversa.local
+            named-checkzone 200.168.192.in-addr-arpa /etc/bind/db.inversa-lan.local
 
           # Coregir errores IPv6
             echo ""
