@@ -140,10 +140,10 @@ elif [ $OS_VERS == "11" ]; then
             echo "servdnsca" > /etc/hostname
 
           # Cambiar el archivo /etc/hosts
-            echo "127.0.0.1 servdnsca servdnsca.lan.local" >> /etc/hosts
+            echo "127.0.0.1 servdnscache servdnscache.lan.local" >> /etc/hosts
             # Determinal IP LAN
               vIPLAN=$(hostname -I)
-            echo "$vIPLAN servdnsca servdnsca.lan.local" >> /etc/hosts
+            echo "$vIPLAN servdnscache servdnscache.lan.local" >> /etc/hosts
 
           # Instalar paquete
             echo ""
@@ -158,16 +158,18 @@ elif [ $OS_VERS == "11" ]; then
             echo 'options {'                       > /etc/bind/named.conf.options
             echo '  directory "/var/cache/bind";' >> /etc/bind/named.conf.options # Carpeta donde se quiere guardar la cache con "rndc dumpdb -cache"
             echo '  forwarders {'                 >> /etc/bind/named.conf.options
-            echo '    1.1.1.1;'                   >> /etc/bind/named.conf.options
-            echo '    8.8.8.8;'                   >> /etc/bind/named.conf.options
+            echo '    9.9.9.9;'                   >> /etc/bind/named.conf.options
+            echo '    149.112.112.112;'           >> /etc/bind/named.conf.options
             echo '  };'                           >> /etc/bind/named.conf.options
             echo '  listen-on { any; };'          >> /etc/bind/named.conf.options # Que IPs tienen acceso al servicio
             echo '  allow-query { any; };'        >> /etc/bind/named.conf.options # Quién tiene permiso a hacer cualquier tipo de query
             echo '  allow-query-cache { any; };'  >> /etc/bind/named.conf.options # Quién tiene permiso a las queries guardadas en el cache
+            echo '  recursion yes;'               >> /etc/bind/named.conf.options # Permitir las consultas recursivas
             echo '  allow-recursion { any; };'    >> /etc/bind/named.conf.options # Quién tiene acceso a consultas recursivas
 #           echo '  dnssec-validation auto;'      >> /etc/bind/named.conf.options
 #           echo '  listen-on-v6 { any; };'       >> /etc/bind/named.conf.options
             echo "};"                             >> /etc/bind/named.conf.options
+
 
           # Sintaxis named.conf.options
             echo ""
@@ -283,12 +285,13 @@ elif [ $OS_VERS == "11" ]; then
             echo 'options {'                       > /etc/bind/named.conf.options
             echo '  directory "/var/cache/bind";' >> /etc/bind/named.conf.options # Carpeta donde se quiere guardar la cache con "rndc dumpdb -cache"
             echo '  forwarders {'                 >> /etc/bind/named.conf.options
-            echo '    1.1.1.1;'                   >> /etc/bind/named.conf.options
-            echo '    8.8.8.8;'                   >> /etc/bind/named.conf.options
+            echo '    9.9.9.9;'                   >> /etc/bind/named.conf.options
+            echo '    149.112.112.112;'           >> /etc/bind/named.conf.options
             echo '  };'                           >> /etc/bind/named.conf.options
             echo '  listen-on { any; };'          >> /etc/bind/named.conf.options # Que IPs tienen acceso al servicio
             echo '  allow-query { any; };'        >> /etc/bind/named.conf.options # Quién tiene permiso a hacer cualquier tipo de query
             echo '  allow-query-cache { any; };'  >> /etc/bind/named.conf.options # Quién tiene permiso a las queries guardadas en el cache
+            echo '  recursion yes;'               >> /etc/bind/named.conf.options # Permitir las consultas recursivas
             echo '  allow-recursion { any; };'    >> /etc/bind/named.conf.options # Quién tiene acceso a consultas recursivas
 #           echo '  dnssec-validation auto;'      >> /etc/bind/named.conf.options
 #           echo '  listen-on-v6 { any; };'       >> /etc/bind/named.conf.options
@@ -522,12 +525,13 @@ elif [ $OS_VERS == "11" ]; then
             echo 'options {'                       > /etc/bind/named.conf.options
             echo '  directory "/var/cache/bind";' >> /etc/bind/named.conf.options # Carpeta donde se quiere guardar la cache con "rndc dumpdb -cache"
             echo '  forwarders {'                 >> /etc/bind/named.conf.options
-            echo '    1.1.1.1;'                   >> /etc/bind/named.conf.options
-            echo '    8.8.8.8;'                   >> /etc/bind/named.conf.options
+            echo '    9.9.9.9;'                   >> /etc/bind/named.conf.options
+            echo '    149.112.112.112;'           >> /etc/bind/named.conf.options
             echo '  };'                           >> /etc/bind/named.conf.options
             echo '  listen-on { any; };'          >> /etc/bind/named.conf.options # Que IPs tienen acceso al servicio
             echo '  allow-query { any; };'        >> /etc/bind/named.conf.options # Quién tiene permiso a hacer cualquier tipo de query
             echo '  allow-query-cache { any; };'  >> /etc/bind/named.conf.options # Quién tiene permiso a las queries guardadas en el cache
+            echo '  recursion yes;'               >> /etc/bind/named.conf.options # Permitir las consultas recursivas
             echo '  allow-recursion { any; };'    >> /etc/bind/named.conf.options # Quién tiene acceso a consultas recursivas
 #           echo '  dnssec-validation auto;'      >> /etc/bind/named.conf.options
 #           echo '  listen-on-v6 { any; };'       >> /etc/bind/named.conf.options
@@ -780,12 +784,18 @@ elif [ $OS_VERS == "11" ]; then
             echo 'options {'                       > /etc/bind/named.conf.options
             echo '  directory "/var/cache/bind";' >> /etc/bind/named.conf.options # Carpeta donde se quiere guardar la cache con "rndc dumpdb -cache"
             echo '  forwarders {'                 >> /etc/bind/named.conf.options
-            echo '    1.1.1.1;'                   >> /etc/bind/named.conf.options
-            echo '    8.8.8.8;'                   >> /etc/bind/named.conf.options
+            echo '    9.9.9.9;'                   >> /etc/bind/named.conf.options
+            echo '    149.112.112.112;'           >> /etc/bind/named.conf.options
             echo '  };'                           >> /etc/bind/named.conf.options
             echo '  listen-on { any; };'          >> /etc/bind/named.conf.options # Que IPs tienen acceso al servicio
             echo '  allow-query { any; };'        >> /etc/bind/named.conf.options # Quién tiene permiso a hacer cualquier tipo de query
+            echo '  allow-query-cache { any; };'  >> /etc/bind/named.conf.options # Quién tiene permiso a las queries guardadas en el cache
+            echo '  recursion yes;'               >> /etc/bind/named.conf.options # Permitir las consultas recursivas
+            echo '  allow-recursion { any; };'    >> /etc/bind/named.conf.options # Quién tiene acceso a consultas recursivas
+#           echo '  dnssec-validation auto;'      >> /etc/bind/named.conf.options
+#           echo '  listen-on-v6 { any; };'       >> /etc/bind/named.conf.options
             echo "};"                             >> /etc/bind/named.conf.options
+
 
           # Sintaxis named.conf.options
             echo ""
