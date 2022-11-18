@@ -244,17 +244,20 @@ elif [ $OS_VERS == "11" ]; then
         echo ""
         echo "  Activando https y agregando certificado SSL autofirmado..."
         echo ""
-        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginxdefault.key -out /etc/ssl/certs/nginxdefault.crt -subj "/C=ES/ST=Madrid/L=Arganda/O=MiEmpresa/CN=dominio.com/emailAddress=mail@gmail.com"
-        
-        # Crea el certificado y la clave del vcertificado
-        sed -i -e 's|SSL configuration|SSL configuration\nlisten 443 ssl default_server;\nlisten [::]:443 ssl default_server;\nssl_certificate /etc/ssl/certs/nginxdefault.crt;\nssl_certificate_key /etc/ssl/private/nginxdefault.key;\nssl_protocols TLSv1 TLSv1.1 TLSv1.2;\nssl_ciphers HIGH:!aNULL:!MD5;|g' /etc/nginx/sites-available/default
 
-        #listen 443 ssl default_server;
-        #listen [::]:443 ssl default_server;
-        #ssl_certificate /etc/ssl/certs/nginxdefault.crt;
-        #ssl_certificate_key /etc/ssl/private/nginxdefault.key;
-        #ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-        #ssl_ciphers HIGH:!aNULL:!MD5;
+        # Crear el certificado y la clave del certificado
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-default.key -out /etc/ssl/certs/nginx-default.crt -subj "/C=ES/ST=Madrid/L=Arganda/O=MiEmpresa/CN=dominio.com/emailAddress=mail@gmail.com"
+
+        # Agregar SSL a la configuración
+        sed -i -e 's|SSL configuration|SSL configuration\nlisten 443 ssl default_server;\nlisten [::]:443 ssl default_server;\nssl_certificate /etc/ssl/certs/nginx-default.crt;\nssl_certificate_key /etc/ssl/private/nginx-default.key;\nssl_protocols TLSv1 TLSv1.1 TLSv1.2;\nssl_ciphers HIGH:!aNULL:!MD5;|g' /etc/nginx/sites-available/default
+
+        ## Así debería quedar el texto:
+        #  listen 443 ssl default_server;
+        #  listen [::]:443 ssl default_server;
+        #  ssl_certificate /etc/ssl/certs/nginxdefault.crt;
+        #  ssl_certificate_key /etc/ssl/private/nginxdefault.key;
+        #  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+        #  ssl_ciphers HIGH:!aNULL:!MD5;
 
       ;;
 
@@ -263,7 +266,7 @@ elif [ $OS_VERS == "11" ]; then
         echo ""
         echo "  Activando https (con snippet) y agregando certificado SSL autofirmado..."
         echo ""
-        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginxdefault.key -out /etc/ssl/certs/nginxdefault.crt # Crea el certificado y la clave del vcertificado
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-default.key -out /etc/ssl/certs/nginx-default.crt # Crea el certificado y la clave del vcertificado
         openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 # Crea un grupo Diffie-Hellman fuerte para negociar Perfect Forward Secrecy con los clientes.
 
         echo "ssl_certificate /etc/ssl/certs/nginxdefault.crt;"        > /etc/nginx/snippets/self-signed.conf
