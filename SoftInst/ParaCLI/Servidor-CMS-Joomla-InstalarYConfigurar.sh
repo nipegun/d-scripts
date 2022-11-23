@@ -6,16 +6,16 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
+#  Script de NiPeGun para instalar y configurar Joomla en Debian
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-CMS-Joomla-InstalarYConfigurar.sh | bash
 #
 #  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-CMS-Joomla-InstalarYConfigurar.sh | bash
 #
 #  Ejecución remota con parámetros:
-#  curl -s x | bash -s Parámetro1 Parámetro2
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-CMS-Joomla-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 vColorAzul="\033[0;34m"
@@ -106,7 +106,24 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo "  Actualizando la listas de paquetes disponibles en los repositorios..."
   echo ""
+  apt-get -y update
+
+  echo ""
+  echo "  Instalando el servidor de bases de datos..."
+  echo ""
+  apt-get -y install apache2
+
+  echo ""
+  echo "  Instalando el servidor de bases de datos"
+  echo ""
+  apt-get -y install mariadb-server
+
+  echo ""
+  echo "    Securizando el servidor de bases de datos..."
+  echo ""
+  mysql_secure_installation
+
 
 fi
