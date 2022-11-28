@@ -134,5 +134,9 @@ elif [ $OS_VERS == "11" ]; then
 
   # Modificar mensaje de bienvenida
     sed -i -e 's-#ftpd_banner=Welcome to blah FTP service-ftpd_banner=Bienvenido al servidor FTP-g'   /etc/vsftpd.conf
+    systemctl restart vsftpd
 
+  # Activar navegación anónima
+    sed -i -e 's-anonymous_enable=NO-anonymous_enable=YES-g' /etc/vsftpd.conf
+    systemctl restart vsftpd
 fi
