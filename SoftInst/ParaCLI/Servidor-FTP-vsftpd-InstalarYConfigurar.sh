@@ -106,7 +106,33 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo "  Actualizando la lista de los paquetes disponibles en los repositorios..."
   echo ""
+  apt-get -y update
+
+  echo ""
+  echo "  Instalando el paquete vsftpd..."
+  echo ""
+  apt-get -y update
+
+  echo ""
+  echo "  Efectuando cambios en la configuración..."
+  echo ""
+  # 
+  sed -i -e 's-#write_enable=YES-write_enable=YES-g'                                                 /etc/vsftpd.conf
+  sed -i -e 's-#chroot_local_user=YES-chroot_local_user=YES-g'                                       /etc/vsftpd.conf
+  sed -i -e 's-#chroot_list_enable=YES-chroot_list_enable=YES-g'                                     /etc/vsftpd.conf
+  echo "allow_writeable_chroot=YES" >>                                                               /etc/vsftpd.conf
+  sed -i -e 's-#chroot_list_file=/etc/vsftpd.chroot_list-chroot_list_file=/etc/vsftpd.chroot_list-g' /etc/vsftpd.conf
+  sed -i -e 's-#ls_recurse_enable=YES-ls_recurse_enable=YES-g'                                       /etc/vsftpd.conf
+
+  # Especificar cual es la carpeta pública. Si no se especifica, el directorio home del usuario sería la carpeta FTP home
+    echo "local_root=public_html" >>                                                               /etc/vsftpd.conf
+
+  # Agregar usuarios a los que vamos a permitir moverse por su carpeta home
+    echo "ubuntu" /etc/vsftpd.chroot_list 
+
+  # Modificar mensaje de bienvenida
+    sed -i -e 's-#ftpd_banner=Welcome to blah FTP service-ftpd_banner=Bienvenido al servidor FTP-g'   /etc/vsftpd.conf
 
 fi
