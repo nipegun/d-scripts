@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar vsftpserver en Debian
+#  Script de NiPeGun para instalar y configurar vsftpd en Debian
 #
 #  Ejecución remota:
 #  curl -s x | bash
@@ -62,7 +62,7 @@ vFinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de vsftpserver para Debian 7 (Wheezy)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de vsftpd para Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
@@ -72,7 +72,7 @@ if [ $OS_VERS == "7" ]; then
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de vsftpserver para Debian 8 (Jessie)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de vsftpd para Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
@@ -82,7 +82,7 @@ elif [ $OS_VERS == "8" ]; then
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de vsftpserver para Debian 9 (Stretch)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de vsftpd para Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
@@ -92,7 +92,7 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de vsftpserver para Debian 10 (Buster)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de vsftpd para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo ""
@@ -102,7 +102,7 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de vsftpserver para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de vsftpd para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   echo ""
