@@ -138,7 +138,7 @@ elif [ $OS_VERS == "11" ]; then
         2)
 
           echo ""
-          echo "    Modificando mensaje de bienvenida..."
+          echo "  Modificando mensaje de bienvenida..."
           echo ""
           sed -i -e 's-#ftpd_banner=Welcome to blah FTP service-ftpd_banner=Bienvenido al servidor FTP-g'   /etc/vsftpd.conf
           systemctl restart vsftpd
@@ -148,7 +148,7 @@ elif [ $OS_VERS == "11" ]; then
         3)
 
           echo ""
-          echo "    Activando navegación anónima..."
+          echo "  Activando navegación anónima..."
           echo ""
           sed -i -e 's|anonymous_enable=NO|anonymous_enable=YES|g' /etc/vsftpd.conf
           systemctl restart vsftpd
@@ -158,7 +158,7 @@ elif [ $OS_VERS == "11" ]; then
         4)
 
           echo ""
-          echo "    Activando el logueo para usuarios del sistema..."
+          echo "  Activando el logueo para usuarios del sistema..."
           echo ""
           sed -i -e 's|#local_enable=YES|local_enable=YES|g' /etc/vsftpd.conf
           echo "allow_writeable_chroot=YES" >>               /etc/vsftpd.conf
@@ -169,7 +169,7 @@ elif [ $OS_VERS == "11" ]; then
         5)
 
           echo ""
-          echo "    Activando enjaulado de usuarios..."
+          echo "  Activando enjaulado de usuarios..."
           echo ""
           # Activar enjaulado de usuarios
             sed -i -e 's|#chroot_local_user=YES|chroot_local_user=YES|g' /etc/vsftpd.conf
@@ -184,7 +184,7 @@ elif [ $OS_VERS == "11" ]; then
         6)
 
           echo ""
-          echo "    Desenjaulando el usuario 1000..."
+          echo "  Desenjaulando el usuario 1000..."
           echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
             vUsuarioLibre=$(id -nu 1000)
@@ -215,7 +215,7 @@ elif [ $OS_VERS == "11" ]; then
         7)
 
           echo ""
-          echo "    Desenjaulando usuario específico..."
+          echo "  Desenjaulando usuario específico..."
           echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
             #read -p "Ingresa el nombre del usuario que quieras desenjaular: " vUsuarioLibre
@@ -242,7 +242,7 @@ elif [ $OS_VERS == "11" ]; then
         8)
 
           echo ""
-          echo "    Activando conexión mediante SSL..."
+          echo "  Activando conexión mediante SSL..."
           echo ""
           openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.pem
           chmod 600 /etc/ssl/private/vsftpd.key
