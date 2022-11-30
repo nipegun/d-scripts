@@ -182,37 +182,14 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Activando enjaulado de usuarios..."
           echo ""
-
-          # Especificar cual es la carpeta pública. Si no se especifica, el directorio home del usuario sería la carpeta FTP home
-            echo "local_root=public_html" >> /etc/vsftpd.conf
-
-          # Activar escritura
-            sed -i -e 's|#write_enable=YES|write_enable=YES|g' /etc/vsftpd.conf
-
           # Activar enjaulado de usuarios
             sed -i -e 's|#chroot_local_user=YES|chroot_local_user=YES|g' /etc/vsftpd.conf
 
+          # Activar escritura
+            sed -i -e 's|#write_enable=YES|write_enable=YES|g' /etc/vsftpd.conf
         ;;
 
         6)
-
-          echo ""
-          echo "  Activando conexión mediante SSL..."
-          echo ""
-          openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.pem
-          chmod 600 /etc/ssl/private/vsftpd.key
-          sed -i -e 's|rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem|rsa_cert_file=/etc/ssl/certs/vsftpd.pem|g'                   /etc/vsftpd.conf
-          sed -i -e 's|rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key|rsa_private_key_file=/etc/ssl/private/vsftpd.key|g' /etc/vsftpd.conf
-          sed -i -e 's|ssl_enable=NO|ssl_enable=YES|g'                                                                                 /etc/vsftpd.conf
-          #echo "ssl_ciphers=HIGH"           >> /etc/vsftpd.conf
-          #echo "force_local_data_ssl=YES"   >> /etc/vsftpd.conf
-          #echo "force_local_logins_ssl=YES" >> /etc/vsftpd.conf
-          systemctl restart vsftpd
-
-        ;;
-
-
-        7)
 
           echo ""
           echo "  Desenjaulando un usuario específico..."
@@ -230,6 +207,26 @@ elif [ $OS_VERS == "11" ]; then
 
         ;;
 
+
+        7)
+
+          echo ""
+          echo "  Activando conexión mediante SSL..."
+          echo ""
+          openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.pem
+          chmod 600 /etc/ssl/private/vsftpd.key
+          sed -i -e 's|rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem|rsa_cert_file=/etc/ssl/certs/vsftpd.pem|g'                   /etc/vsftpd.conf
+          sed -i -e 's|rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key|rsa_private_key_file=/etc/ssl/private/vsftpd.key|g' /etc/vsftpd.conf
+          sed -i -e 's|ssl_enable=NO|ssl_enable=YES|g'                                                                                 /etc/vsftpd.conf
+          #echo "ssl_ciphers=HIGH"           >> /etc/vsftpd.conf
+          #echo "force_local_data_ssl=YES"   >> /etc/vsftpd.conf
+          #echo "force_local_logins_ssl=YES" >> /etc/vsftpd.conf
+          systemctl restart vsftpd
+
+        ;;
+
+          # Especificar cual es la carpeta pública. Si no se especifica, el directorio home del usuario sería la carpeta FTP home
+            #echo "local_root=public_html" >> /etc/vsftpd.conf
           #sed -i -e 's-#ls_recurse_enable=YES-ls_recurse_enable=YES-g'                                       /etc/vsftpd.conf
           
     esac
