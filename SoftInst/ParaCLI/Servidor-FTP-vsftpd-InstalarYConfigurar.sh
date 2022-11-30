@@ -118,24 +118,16 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Efectuando cambios en la configuración..."
   echo ""
-  # 
-  sed -i -e 's-#write_enable=YES-write_enable=YES-g'                                                 /etc/vsftpd.conf
-  sed -i -e 's-#chroot_local_user=YES-chroot_local_user=YES-g'                                       /etc/vsftpd.conf
-  sed -i -e 's-#chroot_list_enable=YES-chroot_list_enable=YES-g'                                     /etc/vsftpd.conf
-  echo "allow_writeable_chroot=YES" >>                                                               /etc/vsftpd.conf
-  sed -i -e 's-#chroot_list_file=/etc/vsftpd.chroot_list-chroot_list_file=/etc/vsftpd.chroot_list-g' /etc/vsftpd.conf
-  sed -i -e 's-#ls_recurse_enable=YES-ls_recurse_enable=YES-g'                                       /etc/vsftpd.conf
 
   # Especificar cual es la carpeta pública. Si no se especifica, el directorio home del usuario sería la carpeta FTP home
-    echo "local_root=public_html" >>                                                               /etc/vsftpd.conf
-
+    echo "local_root=public_html" >> /etc/vsftpd.conf
 
   # Activar escritura
-    write_enable=YES
-  
+    sed -i -e 's|#write_enable=YES|write_enable=YES|g' /etc/vsftpd.conf
+
   # Activar el logueo de los usuarios del sistema
-    local_enable=YES
-    allow_writeable_chroot=YES
+    sed -i -e 's|#local_enable=YES|local_enable=YES|g' /etc/vsftpd.conf
+    echo "allow_writeable_chroot=YES" >>               /etc/vsftpd.conf
 
   # Agregar usuarios a los que vamos a permitir moverse por su carpeta home
     touch /etc/vsftpd.chroot_list
@@ -151,16 +143,16 @@ elif [ $OS_VERS == "11" ]; then
 
   # Activar enjaulado de usuarios
     sed -i -e 's|#chroot_local_user=YES|chroot_local_user=YES|g' /etc/vsftpd.conf
-    
+
   # Activar conexión mediante SSL
     openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.pem
     chmod 600 vsftpd.pem 
     sed -i -e 's|rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem|rsa_cert_file=/etc/ssl/certs/vsftpd.pem|g'                   /etc/vsftpd.conf
     sed -i -e 's|rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key|rsa_private_key_file=/etc/ssl/private/vsftpd.key|g' /etc/vsftpd.conf
     sed -i -e 's|ssl_enable=NO|ssl_enable=YES|g'                                                                                 /etc/vsftpd.conf
-    echo "ssl_ciphers=HIGH"           >> /etc/vsftpd.conf
-    echo "force_local_data_ssl=YES"   >> /etc/vsftpd.conf
-    echo "force_local_logins_ssl=YES" >> /etc/vsftpd.conf
+    #echo "ssl_ciphers=HIGH"           >> /etc/vsftpd.conf
+    #echo "force_local_data_ssl=YES"   >> /etc/vsftpd.conf
+    #echo "force_local_logins_ssl=YES" >> /etc/vsftpd.conf
     systemctl restart vsftpd 
 
   # Activar modo Dios
@@ -170,5 +162,7 @@ elif [ $OS_VERS == "11" ]; then
     sed -i -e 's|#chroot_list_file=/etc/vsftpd.chroot_list|chroot_list_file=/etc/vsftpd.chroot_list|g' /etc/vsftpd.conf
     touch /etc/vsftpd.chroot_list
     
+  #sed -i -e 's-#ls_recurse_enable=YES-ls_recurse_enable=YES-g'                                       /etc/vsftpd.conf
+
 
 fi
