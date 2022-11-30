@@ -123,7 +123,7 @@ elif [ $OS_VERS == "11" ]; then
       5 "Opción 5" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  clear
+  #clear
 
   for choice in $choices
     do
