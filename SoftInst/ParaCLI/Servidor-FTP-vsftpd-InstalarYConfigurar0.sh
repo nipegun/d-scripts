@@ -205,7 +205,7 @@ elif [ $OS_VERS == "11" ]; then
             fi
           else
             echo ""
-            echo -e "${vColorRojo}    No se procederá con el desenjaulado de ningún usuario porque el desenjaulado no se ha activado previamente.${vFinColor}"
+            echo -e "${vColorRojo}    No se procederá con el desenjaulado de ningún usuario porque el enjaulado no se ha activado previamente.${vFinColor}"
             echo ""
           fi
 
@@ -230,7 +230,7 @@ elif [ $OS_VERS == "11" ]; then
             systemctl restart vsftpd
           else
             echo ""
-            echo -e "${vColorRojo}    No se procederá con el desenjaulado de ningún usuario porque el desenjaulado no se ha activado previamente.${vFinColor}"
+            echo -e "${vColorRojo}    No se procederá con el desenjaulado de ningún usuario porque el enjaulado no se ha activado previamente.${vFinColor}"
             echo ""
           fi
           systemctl restart vsftpd
