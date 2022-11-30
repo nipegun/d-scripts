@@ -100,16 +100,16 @@ elif [ $OS_VERS == "11" ]; then
     fi
 
 #  menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 80 16)
-  menu=(dialog --checklist "Marca las opciones que quieras instalar:" 18 60 14)
+  menu=(dialog --checklist "Marca las opciones que quieras instalar:" 18 64 14)
     opciones=(
-      1 "Instalar servidor FTP básico" on
-      2 "Modificar mensaje de bienvenida" off
-      3 "Activar navegación anónima" off
-      4 "Activar el logueo para los usuarios del sistema" off
-      5 "Activar el enjaulado de usuarios" off
-      6 "Desenjaular el usuario 1000" off
-      7 "Desenjaular usuario específico" off
-      8 "Activar la conexión mediante SSL" off
+      1 "Instalar servidor FTP básico." on
+      2 "Modificar mensaje de bienvenida." off
+      3 "Activar navegación anónima." off
+      4 "Activar el logueo para los usuarios del sistema." off
+      5 "Activar el enjaulado de usuarios." off
+      6 "Desenjaular el usuario 1000." off
+      7 "Desenjaular usuario específico." off
+      8 "Activar la conexión mediante SSL." off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
