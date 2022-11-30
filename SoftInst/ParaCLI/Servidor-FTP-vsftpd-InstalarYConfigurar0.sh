@@ -125,7 +125,6 @@ elif [ $OS_VERS == "11" ]; then
       7 "Activar la conexión mediante SSL" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  clear
 
   for choice in $choices
     do
@@ -198,7 +197,7 @@ elif [ $OS_VERS == "11" ]; then
         6)
 
           echo ""
-          echo "  Desenjaulando un usuario específico..."
+          echo "  Desenjaulando el usuario 1000..."
           echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
             vUsuarioLibre=$(id -nu 1000)
