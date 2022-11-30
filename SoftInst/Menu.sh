@@ -14,7 +14,8 @@
     echo ""
   fi
 
-menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+#menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
   opciones=(
     1 "Opción 1" on
     2 "Opción 2" off
