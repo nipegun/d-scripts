@@ -99,7 +99,8 @@ elif [ $OS_VERS == "11" ]; then
       echo ""
     fi
 
-  menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+#  menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+  menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 80 16)
     opciones=(
       1 "Instalar servidor FTP básico" on
       2 "Modificar mensaje de bienvenida" off
