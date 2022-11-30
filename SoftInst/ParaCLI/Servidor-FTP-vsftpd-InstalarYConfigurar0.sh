@@ -219,7 +219,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
             #read -p "Ingresa el nombre del usuario que quieras desenjaular: " vUsuarioLibre
-            echo "      Ingresa el nombre del usuario que quieras desenjaular:"
+            echo "    Ingresa el nombre del usuario que quieras desenjaular:"
             read vUsuarioLibre < /dev/tty
             echo "      Se desenjaulará al usuario $vUsuarioLibre."
             echo "      Si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
