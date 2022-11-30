@@ -73,3 +73,4 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
     esac
 
 done
+
