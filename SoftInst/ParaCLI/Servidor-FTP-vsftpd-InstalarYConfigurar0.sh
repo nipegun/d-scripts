@@ -10,12 +10,6 @@
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-FTP-vsftpd-InstalarYConfigurar.sh | bash
-#
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-FTP-vsftpd-InstalarYConfigurar.sh | bash
-#
-#  Ejecución remota con parámetros:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-FTP-vsftpd-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 vColorAzul="\033[0;34m"
@@ -28,15 +22,6 @@ vFinColor='\033[0m'
   if [ $(id -u) -ne 0 ]; then
     echo -e "${vColorRojo}Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
     exit 1
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${vColorRojo}curl no está instalado. Iniciando su instalación...${vFinColor}"
-    echo ""
-    apt-get -y update && apt-get -y install curl
-    echo ""
   fi
 
 # Determinar la versión de Debian
@@ -202,7 +187,8 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
             vUsuarioLibre=$(id -nu 1000)
-            if id "$vUsuarioLibre" &>/dev/null; then
+            #if id "$vUsuarioLibre" &>/dev/null; then
+            if id -u "$vUsuarioLibre" >/dev/null 2>&1; then
               echo "    Se desenjaulará al usuariuo $vUsuarioLibre."
               echo "    si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
               echo ""
@@ -228,17 +214,11 @@ elif [ $OS_VERS == "11" ]; then
         7)
 
           echo ""
-          echo "  Desenjaulando usuario específicoL..."
+          echo "  Desenjaulando usuario específico..."
           echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
-            # ingresa el bnombre del usuario que quieras desenjaular
-            vUsuarioLibre=$(id -nu 1000)
-            if (); then
-            else
-              echo ""
-              echo -e "${vColorRojo}    El usuario 1000 no existe. No se procederá con el desenjaulado.${vFinColor}"
-              echo ""
-            fi
+            echo "Ingresa el bnombre del usuario que quieras desenjaular"
+            read vUsuarioLibre
             echo "    Se desenjaulará al usuariuo $vUsuarioLibre."
             echo "    si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
             echo ""
