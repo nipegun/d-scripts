@@ -189,7 +189,7 @@ elif [ $OS_VERS == "11" ]; then
             vUsuarioLibre=$(id -nu 1000)
             #if id "$vUsuarioLibre" &>/dev/null; then
             if id -u "$vUsuarioLibre" >/dev/null 2>&1; then
-              echo "    Se desenjaulará al usuariuo $vUsuarioLibre."
+              echo "    Se desenjaulará al usuario $vUsuarioLibre."
               echo "    si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
               echo ""
               # Si la directiva chroot_local_user está configurada como YES, la lista se convierte en una lista de excepción
@@ -217,9 +217,8 @@ elif [ $OS_VERS == "11" ]; then
           echo "  Desenjaulando usuario específico..."
           echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
-            echo "Ingresa el bnombre del usuario que quieras desenjaular"
-            read vUsuarioLibre
-            echo "    Se desenjaulará al usuariuo $vUsuarioLibre."
+            read -p "Ingresa el bnombre del usuario que quieras desenjaular: " vUsuarioLibre
+            echo "    Se desenjaulará al usuario $vUsuarioLibre."
             echo "    si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
             echo ""
             # Si la directiva chroot_local_user está configurada como YES, la lista se convierte en una lista de excepción
