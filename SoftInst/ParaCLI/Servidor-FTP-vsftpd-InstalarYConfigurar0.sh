@@ -202,21 +202,21 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
             vUsuarioLibre=$(id -nu 1000)
-            if (); then
+            if id "$vUsuarioLibre" &>/dev/null; then
+              echo "    Se desenjaulará al usuariuo $vUsuarioLibre."
+              echo "    si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
+              echo ""
+              # Si la directiva chroot_local_user está configurada como YES, la lista se convierte en una lista de excepción
+              sed -i -e 's|#chroot_list_enable=YES|chroot_list_enable=YES|g'                                     /etc/vsftpd.conf
+              sed -i -e 's|#chroot_list_file=/etc/vsftpd.chroot_list|chroot_list_file=/etc/vsftpd.chroot_list|g' /etc/vsftpd.conf
+              touch /etc/vsftpd.chroot_list
+              echo "$vUsuarioLibre" >> /etc/vsftpd.chroot_list 
+              systemctl restart vsftpd
             else
               echo ""
               echo -e "${vColorRojo}    El usuario 1000 no existe. No se procederá con el desenjaulado.${vFinColor}"
               echo ""
             fi
-            echo "    Se desenjaulará al usuariuo $vUsuarioLibre."
-            echo "    si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
-            echo ""
-            # Si la directiva chroot_local_user está configurada como YES, la lista se convierte en una lista de excepción
-            sed -i -e 's|#chroot_list_enable=YES|chroot_list_enable=YES|g'                                     /etc/vsftpd.conf
-            sed -i -e 's|#chroot_list_file=/etc/vsftpd.chroot_list|chroot_list_file=/etc/vsftpd.chroot_list|g' /etc/vsftpd.conf
-            touch /etc/vsftpd.chroot_list
-            echo "$vUsuarioLibre" >> /etc/vsftpd.chroot_list 
-            systemctl restart vsftpd
           else
             echo ""
             echo -e "${vColorRojo}    No se procederá con el desenjaulado de ningún usuario porque el desenjaulado no se ha activado previamente.${vFinColor}"
