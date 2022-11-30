@@ -105,64 +105,136 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}Iniciando el script de instalación de vsftpd para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
-  echo ""
-  echo "  Actualizando la lista de los paquetes disponibles en los repositorios..."
-  echo ""
-  apt-get -y update
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${vColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
 
-  echo ""
-  echo "  Instalando el paquete vsftpd..."
-  echo ""
-  apt-get -y update
+  menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+    opciones=(
+      1 "Instalar servidor FTP básico" on
+      2 "Activar navegación anónima" off
+      3 "Activar el logueo para usuarios del sistema" off
+      4 "Opción 4" off
+      5 "Opción 5" off
+    )
+  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+  clear
 
-  echo ""
-  echo "  Efectuando cambios en la configuración..."
-  echo ""
+  for choice in $choices
+    do
+      case $choice in
 
-  # Especificar cual es la carpeta pública. Si no se especifica, el directorio home del usuario sería la carpeta FTP home
-    echo "local_root=public_html" >> /etc/vsftpd.conf
+        1)
 
-  # Activar escritura
-    sed -i -e 's|#write_enable=YES|write_enable=YES|g' /etc/vsftpd.conf
+          echo ""
+          echo "  Instalando servidor FTP básico..."
+          echo ""
 
-  # Activar el logueo de los usuarios del sistema
-    sed -i -e 's|#local_enable=YES|local_enable=YES|g' /etc/vsftpd.conf
-    echo "allow_writeable_chroot=YES" >>               /etc/vsftpd.conf
+          echo ""
+          echo "    Actualizando la lista de los paquetes disponibles en los repositorios..."
+          echo ""
+          apt-get -y update
 
-  # Agregar usuarios a los que vamos a permitir moverse por su carpeta home
-    touch /etc/vsftpd.chroot_list
-    echo "ubuntu" > /etc/vsftpd.chroot_list 
+          echo ""
+          echo "    Instalando el paquete vsftpd..."
+          echo ""
+          apt-get -y install vsftpd
 
-  # Modificar mensaje de bienvenida
-    sed -i -e 's-#ftpd_banner=Welcome to blah FTP service-ftpd_banner=Bienvenido al servidor FTP-g'   /etc/vsftpd.conf
-    systemctl restart vsftpd
+        ;;
 
-  # Activar navegación anónima
-    sed -i -e 's-anonymous_enable=NO-anonymous_enable=YES-g' /etc/vsftpd.conf
-    systemctl restart vsftpd
+        2)
 
-  # Activar enjaulado de usuarios
-    sed -i -e 's|#chroot_local_user=YES|chroot_local_user=YES|g' /etc/vsftpd.conf
+          echo ""
+          echo "  Modificando mensaje de bienvenida..."
+          echo ""
+          sed -i -e 's-#ftpd_banner=Welcome to blah FTP service-ftpd_banner=Bienvenido al servidor FTP-g'   /etc/vsftpd.conf
+          systemctl restart vsftpd
 
-  # Activar conexión mediante SSL
-    openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.pem
-    chmod 600 vsftpd.pem 
-    sed -i -e 's|rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem|rsa_cert_file=/etc/ssl/certs/vsftpd.pem|g'                   /etc/vsftpd.conf
-    sed -i -e 's|rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key|rsa_private_key_file=/etc/ssl/private/vsftpd.key|g' /etc/vsftpd.conf
-    sed -i -e 's|ssl_enable=NO|ssl_enable=YES|g'                                                                                 /etc/vsftpd.conf
-    #echo "ssl_ciphers=HIGH"           >> /etc/vsftpd.conf
-    #echo "force_local_data_ssl=YES"   >> /etc/vsftpd.conf
-    #echo "force_local_logins_ssl=YES" >> /etc/vsftpd.conf
-    systemctl restart vsftpd 
+        ;;
 
-  # Activar modo Dios
-    # Si la directiva chroot_local_user está configurada como YES, la lista se convierte en una lista de excepción
-    sed -i -e 's|#chroot_local_user=YES|chroot_local_user=YES|g'                                       /etc/vsftpd.conf
-    sed -i -e 's|#chroot_list_enable=YES|chroot_list_enable=YES|g'                                     /etc/vsftpd.conf
-    sed -i -e 's|#chroot_list_file=/etc/vsftpd.chroot_list|chroot_list_file=/etc/vsftpd.chroot_list|g' /etc/vsftpd.conf
-    touch /etc/vsftpd.chroot_list
-    
-  #sed -i -e 's-#ls_recurse_enable=YES-ls_recurse_enable=YES-g'                                       /etc/vsftpd.conf
+        3)
 
+          echo ""
+          echo "  Activando navegación anónima..."
+          echo ""
+          sed -i -e 's|anonymous_enable=NO|anonymous_enable=YES|g' /etc/vsftpd.conf
+          systemctl restart vsftpd
+
+        ;;
+
+        4)
+
+          echo ""
+          echo "  Activando el logueo para usuarios del sistema..."
+          echo ""
+          sed -i -e 's|#local_enable=YES|local_enable=YES|g' /etc/vsftpd.conf
+          echo "allow_writeable_chroot=YES" >>               /etc/vsftpd.conf
+
+        ;;
+
+        5)
+
+          echo ""
+          echo "  Activando enjaulado de usuarios..."
+          echo ""
+
+          # Especificar cual es la carpeta pública. Si no se especifica, el directorio home del usuario sería la carpeta FTP home
+            echo "local_root=public_html" >> /etc/vsftpd.conf
+
+          # Activar escritura
+            sed -i -e 's|#write_enable=YES|write_enable=YES|g' /etc/vsftpd.conf
+
+          # Activar enjaulado de usuarios
+            sed -i -e 's|#chroot_local_user=YES|chroot_local_user=YES|g' /etc/vsftpd.conf
+
+        ;;
+
+        6)
+
+          echo ""
+          echo "  Activando conexión mediante SSL..."
+          echo ""
+          openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.pem
+          chmod 600 /etc/ssl/private/vsftpd.key
+          sed -i -e 's|rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem|rsa_cert_file=/etc/ssl/certs/vsftpd.pem|g'                   /etc/vsftpd.conf
+          sed -i -e 's|rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key|rsa_private_key_file=/etc/ssl/private/vsftpd.key|g' /etc/vsftpd.conf
+          sed -i -e 's|ssl_enable=NO|ssl_enable=YES|g'                                                                                 /etc/vsftpd.conf
+          #echo "ssl_ciphers=HIGH"           >> /etc/vsftpd.conf
+          #echo "force_local_data_ssl=YES"   >> /etc/vsftpd.conf
+          #echo "force_local_logins_ssl=YES" >> /etc/vsftpd.conf
+          systemctl restart vsftpd
+
+        ;;
+
+
+        7)
+
+          echo ""
+          echo "  Desenjaulando un usuario específico..."
+          echo ""
+          vUsuarioLibre=$(id -nu 1000)
+          echo "    Se desenjaulará al usuariuo $vUsuarioLibre."
+          echo "    si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
+          echo ""
+          sed -i -e 's|#chroot_local_user=YES|chroot_local_user=YES|g'                                       /etc/vsftpd.conf # Si la directiva chroot_local_user está configurada como YES, la lista se convierte en una lista de excepción
+          sed -i -e 's|#chroot_list_enable=YES|chroot_list_enable=YES|g'                                     /etc/vsftpd.conf
+          sed -i -e 's|#chroot_list_file=/etc/vsftpd.chroot_list|chroot_list_file=/etc/vsftpd.chroot_list|g' /etc/vsftpd.conf
+          touch /etc/vsftpd.chroot_list
+          echo "$vUsuarioLibre" >> /etc/vsftpd.chroot_list 
+          systemctl restart vsftpd
+
+        ;;
+
+          #sed -i -e 's-#ls_recurse_enable=YES-ls_recurse_enable=YES-g'                                       /etc/vsftpd.conf
+          
+    esac
+
+  done
 
 fi
+
