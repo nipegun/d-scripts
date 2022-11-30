@@ -183,7 +183,7 @@ elif [ $OS_VERS == "11" ]; then
         6)
 
           echo ""
-          echo "  Desenjaulando el usuario 1000..."
+          echo "    Desenjaulando el usuario 1000..."
           echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
             vUsuarioLibre=$(id -nu 1000)
@@ -214,7 +214,7 @@ elif [ $OS_VERS == "11" ]; then
         7)
 
           echo ""
-          echo "  Desenjaulando usuario específico..."
+          echo "    Desenjaulando usuario específico..."
           echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
             read -p "Ingresa el bnombre del usuario que quieras desenjaular: " vUsuarioLibre
@@ -239,7 +239,7 @@ elif [ $OS_VERS == "11" ]; then
         8)
 
           echo ""
-          echo "  Activando conexión mediante SSL..."
+          echo "    Activando conexión mediante SSL..."
           echo ""
           openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.pem
           chmod 600 /etc/ssl/private/vsftpd.key
