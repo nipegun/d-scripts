@@ -139,4 +139,16 @@ elif [ $OS_VERS == "11" ]; then
   # Activar navegación anónima
     sed -i -e 's-anonymous_enable=NO-anonymous_enable=YES-g' /etc/vsftpd.conf
     systemctl restart vsftpd
+
+  # Activar conexión mediante SSL
+    openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.pem
+    chmod 600 vsftpd.pem 
+    sed -i -e 's|rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem|rsa_cert_file=/etc/ssl/certs/vsftpd.pem|g'                   /etc/vsftpd.conf
+    sed -i -e 's|rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key|rsa_private_key_file=/etc/ssl/private/vsftpd.key|g' /etc/vsftpd.conf
+    sed -i -e 's|ssl_enable=NO|ssl_enable=YES|g'                                                                                 /etc/vsftpd.conf
+    echo "ssl_ciphers=HIGH"           >> /etc/vsftpd.conf
+    echo "force_local_data_ssl=YES"   >> /etc/vsftpd.conf
+    echo "force_local_logins_ssl=YES" >> /etc/vsftpd.conf
+    systemctl restart vsftpd 
+
 fi
