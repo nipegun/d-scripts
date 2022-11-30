@@ -174,6 +174,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           sed -i -e 's|#local_enable=YES|local_enable=YES|g' /etc/vsftpd.conf
           echo "allow_writeable_chroot=YES" >>               /etc/vsftpd.conf
+          systemctl restart vsftpd
 
         ;;
 
