@@ -187,7 +187,7 @@ elif [ $OS_VERS == "11" ]; then
           echo "  Desenjaulando el usuario 1000..."
           echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
-            vUsuarioLibre=$(id -nu 1000)
+            vUsuarioLibre=$(id -nu 1000) 2> /dev/null
             #if id "$vUsuarioLibre" &>/dev/null; then
             if id -u "$vUsuarioLibre" >/dev/null 2>&1; then
               echo "    Se desenjaulará al usuario $vUsuarioLibre."
