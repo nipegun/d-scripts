@@ -187,9 +187,13 @@ elif [ $OS_VERS == "11" ]; then
           echo "  Desenjaulando el usuario 1000..."
           echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
-            vUsuarioLibre=$(id -nu 1000) 2> /dev/null
-            #if id "$vUsuarioLibre" &>/dev/null; then
-            if id -u "$vUsuarioLibre" >/dev/null 2>&1; then
+            vUsuario1000=$(cat /etc/passwd | grep "1000:1000" | cut -d ':' -f1)
+            if [ "$vUsuario1000" = "" ]; then
+              echo ""
+              echo -e "${vColorRojo}    El usuario 1000 no existe. No se procederá con el desenjaulado.${vFinColor}"
+              echo ""
+            else
+              vUsuarioLibre=$(id -nu 1000) 
               echo "    Se desenjaulará al usuario $vUsuarioLibre."
               echo "    Si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
               echo ""
@@ -199,10 +203,6 @@ elif [ $OS_VERS == "11" ]; then
               touch /etc/vsftpd.chroot_list
               echo "$vUsuarioLibre" >> /etc/vsftpd.chroot_list 
               systemctl restart vsftpd
-            else
-              echo ""
-              echo -e "${vColorRojo}    El usuario 1000 no existe. No se procederá con el desenjaulado.${vFinColor}"
-              echo ""
             fi
           else
             echo ""
