@@ -122,7 +122,8 @@ elif [ $OS_VERS == "11" ]; then
       4 "Activar el logueo para los usuarios del sistema" off
       5 "Activar el enjaulado de usuarios" off
       6 "Desenjaular el usuario 1000" off
-      7 "Activar la conexión mediante SSL" off
+      7 "Desenjaular usuario específico" off
+      8 "Activar la conexión mediante SSL" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -201,6 +202,12 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
             vUsuarioLibre=$(id -nu 1000)
+            if (); then
+            else
+              echo ""
+              echo -e "${vColorRojo}    El usuario 1000 no existe. No se procederá con el desenjaulado.${vFinColor}"
+              echo ""
+            fi
             echo "    Se desenjaulará al usuariuo $vUsuarioLibre."
             echo "    si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
             echo ""
@@ -219,6 +226,38 @@ elif [ $OS_VERS == "11" ]; then
         ;;
 
         7)
+
+          echo ""
+          echo "  Desenjaulando usuario específicoL..."
+          echo ""
+          if [ "$vEnjaulado" = "Activo" ]; then
+            # ingresa el bnombre del usuario que quieras desenjaular
+            vUsuarioLibre=$(id -nu 1000)
+            if (); then
+            else
+              echo ""
+              echo -e "${vColorRojo}    El usuario 1000 no existe. No se procederá con el desenjaulado.${vFinColor}"
+              echo ""
+            fi
+            echo "    Se desenjaulará al usuariuo $vUsuarioLibre."
+            echo "    si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
+            echo ""
+            # Si la directiva chroot_local_user está configurada como YES, la lista se convierte en una lista de excepción
+            sed -i -e 's|#chroot_list_enable=YES|chroot_list_enable=YES|g'                                     /etc/vsftpd.conf
+            sed -i -e 's|#chroot_list_file=/etc/vsftpd.chroot_list|chroot_list_file=/etc/vsftpd.chroot_list|g' /etc/vsftpd.conf
+            touch /etc/vsftpd.chroot_list
+            echo "$vUsuarioLibre" >> /etc/vsftpd.chroot_list 
+            systemctl restart vsftpd
+          else
+            echo ""
+            echo -e "${vColorRojo}    No se procederá con el desenjaulado de ningún usuario porque el desenjaulado no se ha activado previamente.${vFinColor}"
+            echo ""
+          fi
+          systemctl restart vsftpd
+
+        ;;
+
+        8)
 
           echo ""
           echo "  Activando conexión mediante SSL..."
