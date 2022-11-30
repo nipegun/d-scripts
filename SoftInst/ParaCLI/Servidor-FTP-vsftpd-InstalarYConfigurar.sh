@@ -117,8 +117,8 @@ elif [ $OS_VERS == "11" ]; then
   menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
       1 "Instalar servidor FTP básico" on
-      2 "Activar navegación anónima" off
-      3 "Activar el logueo para usuarios del sistema" off
+      2 "Modificar mensaje de bienvenida" off
+      3 "Activar navegación anónima" off
       4 "Opción 4" off
       5 "Opción 5" off
     )
@@ -188,6 +188,9 @@ elif [ $OS_VERS == "11" ]; then
 
           # Activar escritura
             sed -i -e 's|#write_enable=YES|write_enable=YES|g' /etc/vsftpd.conf
+
+          vEnjaulado="Activo"
+
         ;;
 
         6)
@@ -195,19 +198,24 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Desenjaulando un usuario específico..."
           echo ""
-          vUsuarioLibre=$(id -nu 1000)
-          echo "    Se desenjaulará al usuariuo $vUsuarioLibre."
-          echo "    si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
-          echo ""
-          sed -i -e 's|#chroot_local_user=YES|chroot_local_user=YES|g'                                       /etc/vsftpd.conf # Si la directiva chroot_local_user está configurada como YES, la lista se convierte en una lista de excepción
-          sed -i -e 's|#chroot_list_enable=YES|chroot_list_enable=YES|g'                                     /etc/vsftpd.conf
-          sed -i -e 's|#chroot_list_file=/etc/vsftpd.chroot_list|chroot_list_file=/etc/vsftpd.chroot_list|g' /etc/vsftpd.conf
-          touch /etc/vsftpd.chroot_list
-          echo "$vUsuarioLibre" >> /etc/vsftpd.chroot_list 
-          systemctl restart vsftpd
+          if [ "$vEnjaulado" = "Activo" ]; then
+            vUsuarioLibre=$(id -nu 1000)
+            echo "    Se desenjaulará al usuariuo $vUsuarioLibre."
+            echo "    si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
+            echo ""
+            # Si la directiva chroot_local_user está configurada como YES, la lista se convierte en una lista de excepción
+            sed -i -e 's|#chroot_list_enable=YES|chroot_list_enable=YES|g'                                     /etc/vsftpd.conf
+            sed -i -e 's|#chroot_list_file=/etc/vsftpd.chroot_list|chroot_list_file=/etc/vsftpd.chroot_list|g' /etc/vsftpd.conf
+            touch /etc/vsftpd.chroot_list
+            echo "$vUsuarioLibre" >> /etc/vsftpd.chroot_list 
+            systemctl restart vsftpd
+          else
+            echo ""
+            echo -e "${vColorRojo}    No se procederá con el desenjaulado de ningún usuario porque el desenjaulado no se ha activado previamente.${vFinColor}"
+            echo ""
+          fi
 
         ;;
-
 
         7)
 
