@@ -140,6 +140,9 @@ elif [ $OS_VERS == "11" ]; then
     sed -i -e 's-anonymous_enable=NO-anonymous_enable=YES-g' /etc/vsftpd.conf
     systemctl restart vsftpd
 
+  # Activar enjaulado de usuarios
+    sed -i -e 's|#chroot_local_user=YES|chroot_local_user=YES|g' /etc/vsftpd.conf
+
   # Activar conexión mediante SSL
     openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.pem
     chmod 600 vsftpd.pem 
