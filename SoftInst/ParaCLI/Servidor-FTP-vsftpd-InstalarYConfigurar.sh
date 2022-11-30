@@ -119,8 +119,10 @@ elif [ $OS_VERS == "11" ]; then
       1 "Instalar servidor FTP básico" on
       2 "Modificar mensaje de bienvenida" off
       3 "Activar navegación anónima" off
-      4 "Opción 4" off
-      5 "Opción 5" off
+      4 "Activar el logueo para los usuarios del sistema" off
+      5 "Activar el enjaulado de usuarios" off
+      6 "Desenjaular el usuario 1000" off
+      7 "Activar la conexión mediante SSL" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
@@ -150,7 +152,7 @@ elif [ $OS_VERS == "11" ]; then
         2)
 
           echo ""
-          echo "  Modificando mensaje de bienvenida..."
+          echo "    Modificando mensaje de bienvenida..."
           echo ""
           sed -i -e 's-#ftpd_banner=Welcome to blah FTP service-ftpd_banner=Bienvenido al servidor FTP-g'   /etc/vsftpd.conf
           systemctl restart vsftpd
@@ -160,7 +162,7 @@ elif [ $OS_VERS == "11" ]; then
         3)
 
           echo ""
-          echo "  Activando navegación anónima..."
+          echo "    Activando navegación anónima..."
           echo ""
           sed -i -e 's|anonymous_enable=NO|anonymous_enable=YES|g' /etc/vsftpd.conf
           systemctl restart vsftpd
@@ -170,7 +172,7 @@ elif [ $OS_VERS == "11" ]; then
         4)
 
           echo ""
-          echo "  Activando el logueo para usuarios del sistema..."
+          echo "    Activando el logueo para usuarios del sistema..."
           echo ""
           sed -i -e 's|#local_enable=YES|local_enable=YES|g' /etc/vsftpd.conf
           echo "allow_writeable_chroot=YES" >>               /etc/vsftpd.conf
@@ -181,7 +183,7 @@ elif [ $OS_VERS == "11" ]; then
         5)
 
           echo ""
-          echo "  Activando enjaulado de usuarios..."
+          echo "    Activando enjaulado de usuarios..."
           echo ""
           # Activar enjaulado de usuarios
             sed -i -e 's|#chroot_local_user=YES|chroot_local_user=YES|g' /etc/vsftpd.conf
