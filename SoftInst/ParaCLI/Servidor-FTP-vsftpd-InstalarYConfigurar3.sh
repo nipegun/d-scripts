@@ -110,6 +110,9 @@ elif [ $OS_VERS == "11" ]; then
       6 "Desenjaular el usuario 1000." off
       7 "Desenjaular usuario específico." off
       8 "Activar la conexión mediante SSL." off
+      9 "Activar permiso de escritura" off
+      10 "Cambiar la ubicación de la carpeta pública" off
+      11 "Permitir ls recursivo" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -173,10 +176,6 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           # Activar enjaulado de usuarios
             sed -i -e 's|#chroot_local_user=YES|chroot_local_user=YES|g' /etc/vsftpd.conf
-
-          # Activar escritura
-            sed -i -e 's|#write_enable=YES|write_enable=YES|g' /etc/vsftpd.conf
-
           vEnjaulado="Activo"
 
         ;;
@@ -256,9 +255,40 @@ elif [ $OS_VERS == "11" ]; then
 
         ;;
 
-          # Especificar cual es la carpeta pública. Si no se especifica, el directorio home del usuario sería la carpeta FTP home
-            #echo "local_root=public_html" >> /etc/vsftpd.conf
-          #sed -i -e 's-#ls_recurse_enable=YES-ls_recurse_enable=YES-g'                                       /etc/vsftpd.conf
+        9)
+
+          echo ""
+          echo "  Activando permiso de escritura..."
+          echo ""
+          sed -i -e 's|#write_enable=YES|write_enable=YES|g' /etc/vsftpd.conf
+          systemctl restart vsftpd
+
+        ;;
+
+       10)
+
+          echo ""
+          echo "  Cambiando la ubicación de la carpeta pública..."
+          echo ""
+          # Si no se especifica la carpeta pública, el directorio home del usuario sería la carpeta FTP home
+          vRutaACarpeta=/ftp/pub
+            echo "local_root=$vRutaACarpeta" >> /etc/vsftpd.conf
+          systemctl restart vsftpd
+
+        ;;
+
+
+       11)
+
+          echo ""
+          echo "  Permitiendo ls recursivo..."
+          echo ""
+          sed -i -e 's|#ls_recurse_enable=YES|ls_recurse_enable=YES|g' /etc/vsftpd.conf
+          systemctl restart vsftpd
+
+        ;;
+
+
           
     esac
 
