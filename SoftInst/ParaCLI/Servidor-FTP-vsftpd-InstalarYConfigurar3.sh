@@ -111,8 +111,8 @@ elif [ $OS_VERS == "11" ]; then
       7 "Desenjaular usuario específico." off
       8 "Activar la conexión mediante SSL." off
       9 "Activar permiso de escritura" off
-      10 "Cambiar la ubicación de la carpeta pública" off
-      11 "Permitir ls recursivo" off
+     10 "Cambiar la ubicación de la carpeta pública" off
+     11 "Permitir ls recursivo" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
