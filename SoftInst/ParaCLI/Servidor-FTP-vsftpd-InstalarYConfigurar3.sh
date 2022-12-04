@@ -136,6 +136,16 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           apt-get -y install vsftpd
 
+          # Archivo por defecto
+            #echo "listen=NO"                                > /etc/vsftpd.conf
+            #echo "listen_ipv6=YES"                         >> /etc/vsftpd.conf
+            #echo "pam_service_name=vsftpd"                 >> /etc/vsftpd.conf
+            #echo "dirmessage_enable=YES"                   >> /etc/vsftpd.conf
+            #echo "use_localtime=YES"                       >> /etc/vsftpd.conf
+            #echo "xferlog_enable=YES"                      >> /etc/vsftpd.conf
+            #echo "connect_from_port_20=YES"                >> /etc/vsftpd.conf
+            #echo "secure_chroot_dir=/var/run/vsftpd/empty" >> /etc/vsftpd.conf
+
         ;;
 
         2)
