@@ -109,5 +109,14 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
+  # Implementar Autenticación de dos factores
+    apt-get -y update
+    apt-get -y install libpam0g-dev
+    apt-get -y install make
+    apt-get -y install gcc
+    apt-get -y install wget
+    apt-get -y install ssh
+    apt-get -y install libpam-google-authenticator
+
 fi
 
