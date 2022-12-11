@@ -92,43 +92,61 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
-  # Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
+  # Comprobar si el paquete openssh-server está instalado.
+    if [[ $(dpkg-query -s openssh-server 2>/dev/null | grep installed) != "" ]]; then
       echo ""
-      echo -e "${vColorRojo}  tasksel no está instalado. Iniciando su instalación...${vFinColor}"
+      echo "  El paquete openssh-server ya está instalado."
+      echo "  Es posible que este equipo ya tenga un servidor SSH en funcionamiento."
       echo ""
-      apt-get -y update && apt-get -y install tasksel
+      echo "  Escribe ok y presiona Enter para destruir la instalación anterior y generar una nueva:"
       echo ""
+      read -p "" vProceder
+      echo ""
+    else
+      vProceder="ok"
     fi
-  tasksel install ssh-server
-  #apt-get -y install sshpass
 
-  # Implementar Autenticación de dos factores
-    apt-get -y update
-    apt-get -y install libpam0g-dev
-    apt-get -y install make
-    apt-get -y install gcc
-    apt-get -y install wget
-    apt-get -y install ssh
-    apt-get -y install libpam-google-authenticator
-    echo ""
-    echo "  A continuación se te mostrará un código QR que deberás escanear con la app Google Authenticator de tu dispositivo."
-    echo "  Inmediatamente después se te solicitará ingresar un código proporcionado por la app."
-    echo "    Es el código que te aparecerá en la sección $(cat /etc/hostname) "
-    echo "  Si ingresas el código correcto se te proporcionará la llave privada y los códigos de recuperación."
-    echo "    Deberás tomar nota de ambos y guardarlos en un lugar seguro."
-    echo ""
-    read -p "  Presiona ENTER para proceder..."
-    echo ""
-    su %1 -c "google-authenticator"
+  if [ $vProceder == "ok" ]; then
 
-  # Enjaular usuarios
-    echo "Match Group enjaulados"              >> /etc/ssh/sshd_config
-    echo "  ChrootDirectory /home"             >> /etc/ssh/sshd_config
-    echo "  AllowTCPForwarding no"             >> /etc/ssh/sshd_config
-    echo "  X11Forwarding no"                  >> /etc/ssh/sshd_config
-    echo "  ForceCommand internal-sftp -u 002" >> /etc/ssh/sshd_config
-    echo ""
+    # Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${vColorRojo}  tasksel no está instalado. Iniciando su instalación...${vFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install tasksel
+        echo ""
+      fi
+    tasksel install ssh-server
+    #apt-get -y install sshpass
 
+    # Implementar Autenticación de dos factores
+      apt-get -y update
+      apt-get -y install libpam0g-dev
+      apt-get -y install make
+      apt-get -y install gcc
+      apt-get -y install wget
+      apt-get -y install ssh
+      apt-get -y install libpam-google-authenticator
+      echo ""
+      echo "  A continuación se te mostrará un código QR que deberás escanear con la app Google Authenticator de tu dispositivo."
+      echo "  Inmediatamente después se te solicitará ingresar un código proporcionado por la app."
+      echo "    Es el código que te aparecerá en la sección $(cat /etc/hostname) "
+      echo "  Si ingresas el código correcto se te proporcionará la llave privada y los códigos de recuperación."
+      echo "    Deberás tomar nota de ambos y guardarlos en un lugar seguro."
+      echo ""
+      read -p "  Presiona ENTER para proceder..."
+      echo ""
+      su %1 -c "google-authenticator"
+
+    # Enjaular usuarios
+      echo "Match Group enjaulados"              >> /etc/ssh/sshd_config
+      echo "  ChrootDirectory /home"             >> /etc/ssh/sshd_config
+      echo "  AllowTCPForwarding no"             >> /etc/ssh/sshd_config
+      echo "  X11Forwarding no"                  >> /etc/ssh/sshd_config
+      echo "  ForceCommand internal-sftp -u 002" >> /etc/ssh/sshd_config
+      echo ""
+
+    fi
+ 
 fi
 
