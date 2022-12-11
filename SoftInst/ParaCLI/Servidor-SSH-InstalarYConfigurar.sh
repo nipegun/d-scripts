@@ -131,10 +131,11 @@ elif [ $OS_VERS == "11" ]; then
         echo "auth required pam_google_authenticator.so"        >> /etc/pam.d/sshd
         sed -i -e 's|@include common-auth|#@include common-auth|g' /etc/pam.d/sshd
       # Modificar /etc/ssh/sshd_config
-        sed -i -e 's|PasswordAuthentication yes|PasswordAuthentication no|'g                   /etc/ssh/sshd_config
-        sed -i -e 's|ChallengeResponseAuthentication no|ChallengeResponseAuthentication yes|'g /etc/ssh/sshd_config
-        echo "AuthenticationMethods publickey,keyboard-interactive" >>                         /etc/ssh/sshd_config
-
+        sed -i -e 's|PasswordAuthentication yes|PasswordAuthentication no|'g             /etc/ssh/sshd_config
+        sed -i -e 's|KbdInteractiveAuthentication no|KbdInteractiveAuthentication yes|'g /etc/ssh/sshd_config
+        #echo "ChallengeResponseAuthentication yes" >>                                    /etc/ssh/sshd_config # Obsoleto en Ubuntu 22.04
+        echo "AuthenticationMethods publickey,keyboard-interactive" >>                   /etc/ssh/sshd_config
+        #AuthenticationMethods any
     
       echo ""
       echo "  A continuación se te mostrará un código QR que deberás escanear con la app Google Authenticator de tu dispositivo."
