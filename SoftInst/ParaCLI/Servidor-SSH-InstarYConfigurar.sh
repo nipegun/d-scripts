@@ -118,5 +118,17 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install ssh
     apt-get -y install libpam-google-authenticator
 
+  # Iniciar configuración
+    echo ""
+    echo "  A continuación se te mostrará un código QR que deberás escanear con la app Google Authenticator de tu dispositivo."
+    echo "  Inmediatamente después se te solicitará ingresar un código proporcionado por la app."
+    echo "    Es el código que te aparecerá en la sección $(cat /etc/hostname) "
+    echo "  Si ingresas el código correcto se te proporcionará la llave privada y los códigos de recuperación."
+    echo "    Deberás tomar nota de ambos y guardarlos en un lugar seguro."
+    echo ""
+    read -p "  Presiona ENTER para proceder..."
+    echo ""
+    su %1 -c "google-authenticator"
+
 fi
 
