@@ -127,6 +127,15 @@ elif [ $OS_VERS == "11" ]; then
       apt-get -y install wget
       apt-get -y install ssh
       apt-get -y install libpam-google-authenticator
+      # Modificar /etc/pam.d/sshd
+        echo "auth required pam_google_authenticator.so"        >> /etc/pam.d/sshd
+        sed -i -e 's|@include common-auth|#@include common-auth|g' /etc/pam.d/sshd
+      # Modificar /etc/ssh/sshd_config
+        sed -i -e 's|PasswordAuthentication yes|PasswordAuthentication no|'g                   /etc/ssh/sshd_config
+        sed -i -e 's|ChallengeResponseAuthentication no|ChallengeResponseAuthentication yes|'g /etc/ssh/sshd_config
+        echo "AuthenticationMethods publickey,keyboard-interactive" >>                         /etc/ssh/sshd_config
+
+    
       echo ""
       echo "  A continuación se te mostrará un código QR que deberás escanear con la app Google Authenticator de tu dispositivo."
       echo "  Inmediatamente después se te solicitará ingresar un código proporcionado por la app."
@@ -145,6 +154,7 @@ elif [ $OS_VERS == "11" ]; then
       echo "  X11Forwarding no"                  >> /etc/ssh/sshd_config
       echo "  ForceCommand internal-sftp -u 002" >> /etc/ssh/sshd_config
       echo ""
+
 
     fi
  
