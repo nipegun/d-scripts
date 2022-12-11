@@ -5,42 +5,36 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para instalar y configurar el servidor OpenSSH en Debian
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-SSH-InstarYConfigurar.sh | bash
-#--------------------------------------------------------------------------------------------------------------------------------
+# ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorRojo='\033[1;31m'
+vColorVerde='\033[1;32m'
+vFinColor='\033[0m'
 
-## Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
-   fi
+# Determinar la versión de Debian
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    OS_NAME=$NAME
+    OS_VERS=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    OS_NAME=$(lsb_release -si)
+    OS_VERS=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    OS_NAME=$DISTRIB_ID
+    OS_VERS=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    OS_NAME=Debian
+    OS_VERS=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    OS_NAME=$(uname -s)
+    OS_VERS=$(uname -r)
+  fi
 
 if [ $OS_VERS == "7" ]; then
 
@@ -62,15 +56,8 @@ elif [ $OS_VERS == "8" ]; then
   echo "-----------------------------------------------------------------------------"
   echo ""
 
-  apt-get -y install tasksel
-  tasksel install ssh-server
-  apt-get -y install sshpass
   echo ""
-  echo "Match Group enjaulados"              >> /etc/ssh/sshd_config
-  echo "  ChrootDirectory /home"             >> /etc/ssh/sshd_config
-  echo "  AllowTCPForwarding no"             >> /etc/ssh/sshd_config
-  echo "  X11Forwarding no"                  >> /etc/ssh/sshd_config
-  echo "  ForceCommand internal-sftp -u 002" >> /etc/ssh/sshd_config
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
@@ -105,9 +92,16 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
-  echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+  # Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${vColorRojo}tasksel no está instalado. Iniciando su instalación...${vFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install tasksel
+      echo ""
+    fi
+  tasksel install ssh-server
+  #apt-get -y install sshpass
 
   # Implementar Autenticación de dos factores
     apt-get -y update
@@ -117,8 +111,6 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install wget
     apt-get -y install ssh
     apt-get -y install libpam-google-authenticator
-
-  # Iniciar configuración
     echo ""
     echo "  A continuación se te mostrará un código QR que deberás escanear con la app Google Authenticator de tu dispositivo."
     echo "  Inmediatamente después se te solicitará ingresar un código proporcionado por la app."
@@ -129,6 +121,14 @@ elif [ $OS_VERS == "11" ]; then
     read -p "  Presiona ENTER para proceder..."
     echo ""
     su %1 -c "google-authenticator"
+
+  # Enjaular usuarios
+    echo "Match Group enjaulados"              >> /etc/ssh/sshd_config
+    echo "  ChrootDirectory /home"             >> /etc/ssh/sshd_config
+    echo "  AllowTCPForwarding no"             >> /etc/ssh/sshd_config
+    echo "  X11Forwarding no"                  >> /etc/ssh/sshd_config
+    echo "  ForceCommand internal-sftp -u 002" >> /etc/ssh/sshd_config
+    echo ""
 
 fi
 
