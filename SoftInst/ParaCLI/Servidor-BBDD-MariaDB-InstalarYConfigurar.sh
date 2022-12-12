@@ -120,7 +120,7 @@ elif [ $OS_VERS == "11" ]; then
       1 "Instalar paquete mariadb-server." on
       2 "Securizar instalación con script oficial." on
       3 "Permitir conexiones desde todas las IPs (no sólo localhost)." off
-      4 "Permitiendo conexión desde una IP espacífica (además de localhost)." off
+      4 "Permitir conexión desde una IP espacífica (además de localhost)." off
       5 "Opción 5" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
