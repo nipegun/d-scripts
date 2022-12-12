@@ -137,7 +137,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Instalando y activando PHP..."
           echo ""
-          apt-get -y install php
+          #apt-get -y install php
           apt-get -y install php-cgi
           apt-get -y install php-fpm
           # Determinar la última versión de PHP disponible en Debian
