@@ -123,6 +123,9 @@ elif [ $OS_VERS == "11" ]; then
       4 "..." off
       5 "..." off
       6 "Securizar instalación con script oficial." off
+      7 "Crear base de datos para wordpress" off
+      8 "Crear base de datos para Joomla" off
+      
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -170,7 +173,15 @@ elif [ $OS_VERS == "11" ]; then
 
         4)
 
-          echo "  ..."
+          echo ""
+          echo "  Estableciendo política de contraseñas débiles (sólo para pruebas)..."
+          echo ""
+          if [ $(cat /etc/mysql/my.cnf | grep ^'\[mysqld]') == ""]; then
+            echo "[mysqld]"                     >> /etc/mysql/my.cnf
+            echo "validate_password.policy=LOW" >> /etc/mysql/my.cnf
+          else
+            sed -i -e 's|[mysqld]|[mysqld]\nvalidate_password.policy=LOW|g' /etc/mysql/my.cnf
+          fi
 
         ;;
 
@@ -180,12 +191,28 @@ elif [ $OS_VERS == "11" ]; then
 
         ;;
 
-        5)
+        6)
 
           echo ""
           echo "  Securizando instalación con script oficial..."
           echo ""
           mysql_secure_installation
+
+        ;;
+
+        7)
+
+          echo ""
+          echo "  Creando base de datos para WordPress..."
+          echo ""
+          
+        ;;
+
+        8)
+
+          echo ""
+          echo "  Creando base de datos para Joomla..."
+          echo ""
 
         ;;
 
