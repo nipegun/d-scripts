@@ -153,9 +153,11 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Permitiendo conexión desde todas las IPs (no sólo localhost)..."
           echo ""
+          echo ""                       >> /etc/mysql/my.cnf
           echo "[mysqld]"               >> /etc/mysql/my.cnf
           echo "bind-address = 0.0.0.0" >> /etc/mysql/my.cnf
           systemctl restart mariadb
+
         ;;
 
         4)
@@ -167,6 +169,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           read vIPExtra < /dev/tty
           echo ""
+          echo ""                         >> /etc/mysql/my.cnf
           echo "[mysqld]"                 >> /etc/mysql/my.cnf
           echo "bind-address = $vIPExtra" >> /etc/mysql/my.cnf
           systemctl restart mariadb
