@@ -144,16 +144,13 @@ elif [ $OS_VERS == "11" ]; then
             vUltVerPHP=$(apt-cache search php | grep etapack | grep ^php | cut -d ' ' -f1 | cut -d'p' -f3)
           sed -i -e 's|;cgi.fix_pathinfo=1|cgi.fix_pathinfo=1|g' /etc/php/$vUltVerPHP/fpm/php.ini
           sed -i -e 's|listen = /run/php/php'"$vUltVerPHP"'-fpm.sock|listen = 127.0.0.1:9000|g' /etc/php/$vUltVerPHP/fpm/pool.d/www.conf
-          systemctl restart php$vUltVerPHP-fpm
+          
           sed -i -e 's|"bin-path" => "/usr/bin/php-cgi",|"host" => "127.0.0.1",|g'       /etc/lighttpd/conf-available/15-fastcgi-php.conf
           #sed -i -e 's|"socket" => "/var/run/lighttpd/php.socket",|"port" => "9000",|g' /etc/lighttpd/conf-available/15-fastcgi-php.conf
           # Modificación individual (Por si la línea anterior no funciona)
             sed -i -e 's|"socket"|"port"|g'                   /etc/lighttpd/conf-available/15-fastcgi-php.conf
             sed -i -e 's|/var/run/lighttpd/php.socket|9000|g' /etc/lighttpd/conf-available/15-fastcgi-php.conf
             sed -i -e 's|/run/lighttpd/php.socket|9000|g'     /etc/lighttpd/conf-available/15-fastcgi-php.conf
-          lighty-enable-mod fastcgi
-          lighty-enable-mod fastcgi-php
-          systemctl restart lighttpd
           # Crear página web básica con PHP
             echo "<?php"                           > /var/www/html/index.php
             echo "  phpinfo();"                   >> /var/www/html/index.php
@@ -169,6 +166,21 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y purge apache2-bin
             apt-get -y autoremove
           # Reiniciar servidor web
+            echo ""
+            echo "    Reiniciando php$vUltVerPHP-fpm..."
+            echo ""
+            systemctl restart php$vUltVerPHP-fpm
+            echo ""
+            echo "    Activando módulo fastcgi..."
+            echo ""
+            lighty-enable-mod fastcgi
+            echo ""
+            echo "    Activando módulo fastcgi-php..."
+            echo ""
+            lighty-enable-mod fastcgi-php
+            echo ""
+            echo "    Reiniciando servidor Web..."
+            echo ""
             systemctl restart lighttpd
 
         ;;
