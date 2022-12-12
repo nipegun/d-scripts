@@ -165,7 +165,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Permitiendo conexión desde una IP espacífica (además de localhost)..."
           echo ""
-          echo "    Introduce la IP desde la que se deberían escuchar las conexiones:"
+          echo "    Introduce la IP desde la que se deberían escuchar las conexiones y presiona Enter:"
           echo ""
           read vIPExtra < /dev/tty
           echo ""
