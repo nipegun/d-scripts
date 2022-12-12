@@ -164,10 +164,19 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           read vIPExtra < /dev/tty
           echo ""
-          echo ""                         >> /etc/mysql/my.cnf
-          echo "[mysqld]"                 >> /etc/mysql/my.cnf
-          echo "bind-address = $vIPExtra" >> /etc/mysql/my.cnf
-          systemctl restart mariadb
+          vExisteSec=$(cat /etc/mysql/my.cnf | grep ^'\[mysqld]')
+          if [[ $vExisteSec == "" ]]; then
+            vFecha=$(date +A%YM%mD%d@%T)
+            cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
+            echo "[mysqld]"                 >> /etc/mysql/my.cnf
+            echo "bind-address = $vIPExtra" >> /etc/mysql/my.cnf
+            systemctl restart mariadb
+          else
+            vFecha=$(date +A%YM%mD%d@%T)
+            cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
+            sed -i -e 's|\[mysqld]|\[mysqld]\nbind-address = $vIPExtra|g' /etc/mysql/my.cnf
+            systemctl restart mariadb
+          fi
 
         ;;
 
@@ -182,10 +191,12 @@ elif [ $OS_VERS == "11" ]; then
             cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
             echo "[mysqld]"                     >> /etc/mysql/my.cnf
             echo "validate_password.policy=LOW" >> /etc/mysql/my.cnf
+            systemctl restart mariadb
           else
             vFecha=$(date +A%YM%mD%d@%T)
             cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
             sed -i -e 's|\[mysqld]|\[mysqld]\nvalidate_password.policy=LOW|g' /etc/mysql/my.cnf
+            systemctl restart mariadb
           fi
 
         ;;
