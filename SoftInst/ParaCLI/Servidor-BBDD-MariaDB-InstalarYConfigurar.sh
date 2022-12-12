@@ -118,10 +118,11 @@ elif [ $OS_VERS == "11" ]; then
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
       1 "Instalar paquete mariadb-server." on
-      2 "Securizar instalación con script oficial." on
-      3 "Permitir conexiones desde todas las IPs (no sólo localhost)." off
-      4 "Permitir conexión desde una IP específica (además de localhost)." off
-      5 "Permitir conexión SÓLO desde una IP específica (sin localhost)..."" off
+      2 "Permitir conexiones desde todas las IPs (no sólo localhost)." off
+      3 "Permitir conexión SÓLO desde una IP específica (sin localhost)." off
+      4 "..." off
+      5 "..." off
+      6 "Securizar instalación con script oficial." off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -142,16 +143,7 @@ elif [ $OS_VERS == "11" ]; then
         2)
 
           echo ""
-          echo "  Securizando instalación con script oficial..."
-          echo ""
-          mysql_secure_installation
-
-        ;;
-
-        3)
-
-          echo ""
-          echo "  Permitiendo conexión desde todas las IPs (no sólo localhost)..."
+          echo "  Permitiendo conexión desde todas las IPs (no sólo desde localhost)..."
           echo ""
           echo ""                       >> /etc/mysql/my.cnf
           echo "[mysqld]"               >> /etc/mysql/my.cnf
@@ -160,23 +152,7 @@ elif [ $OS_VERS == "11" ]; then
 
         ;;
 
-        4)
-
-          echo ""
-          echo "  Permitiendo conexiión desde una IP específica (además de localhost)..."
-          echo ""
-          echo "    Introduce la IP desde la que se deberían escuchar las conexiones y presiona Enter:"
-          echo ""
-          read vIPExtra < /dev/tty
-          echo ""
-          echo ""                                   >> /etc/mysql/my.cnf
-          echo "[mysqld]"                           >> /etc/mysql/my.cnf
-          echo "bind-address = 127.0.0.1,$vIPExtra" >> /etc/mysql/my.cnf
-          systemctl restart mariadb
-
-        ;;
-
-        5)
+        3)
 
           echo ""
           echo "  Permitiendo conexión SÓLO desde una IP específica (sin localhost)..."
@@ -192,6 +168,26 @@ elif [ $OS_VERS == "11" ]; then
 
         ;;
 
+        4)
+
+          echo "  ..."
+
+        ;;
+
+        5)
+
+          echo "  ..."
+
+        ;;
+
+        5)
+
+          echo ""
+          echo "  Securizando instalación con script oficial..."
+          echo ""
+          mysql_secure_installation
+
+        ;;
 
       esac
 
