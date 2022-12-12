@@ -6,6 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 vFecha=$(date +A%YM%mD%d@%T)
+
 # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
     echo ""
@@ -24,8 +25,8 @@ menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     4 "Opción 4" off
     5 "Opción 5" off
   )
-  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  clear
+choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+#clear
 
   for choice in $choices
     do
