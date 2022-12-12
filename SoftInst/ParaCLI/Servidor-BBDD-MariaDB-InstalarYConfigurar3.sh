@@ -178,9 +178,13 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           vExisteSec=$(cat /etc/mysql/my.cnf | grep ^'\[mysqld]')
           if [[ $vExisteSec == "" ]]; then
+            vFecha=$(date +A%YM%mD%d@%T)
+            cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
             echo "[mysqld]"                     >> /etc/mysql/my.cnf
             echo "validate_password.policy=LOW" >> /etc/mysql/my.cnf
           else
+            vFecha=$(date +A%YM%mD%d@%T)
+            cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
             sed -i -e 's|\[mysqld]|\[mysqld]\nvalidate_password.policy=LOW|g' /etc/mysql/my.cnf
           fi
 
