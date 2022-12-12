@@ -9,13 +9,13 @@
 #  Script de NiPeGun para instalar y configurar lighthttpd en Debian
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Web-lighttpd-InstalaryConfigurar.sh | bash
 #
 #  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Web-lighttpd-InstalaryConfigurar.sh | bash
 #
 #  Ejecución remota con parámetros:
-#  curl -s x | bash -s Parámetro1 Parámetro2
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Web-lighttpd-InstalaryConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 vColorAzul="\033[0;34m"
