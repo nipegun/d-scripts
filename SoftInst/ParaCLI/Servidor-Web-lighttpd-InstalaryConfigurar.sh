@@ -110,8 +110,8 @@ elif [ $OS_VERS == "11" ]; then
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
       1 "Instalar el paquete lighttpd..." on
-      2 "Opción 2" off
-      3 "Opción 3" off
+      2 "Instalar y activar PHP." off
+      3 "Instalar servidor de bases de datos MariaDB." off
       4 "Opción 4" off
       5 "Opción 5" off
     )
@@ -167,7 +167,7 @@ elif [ $OS_VERS == "11" ]; then
         3)
 
           echo ""
-          echo "  Instalar MariaDB..."
+          echo "  Instalando servidor de bases de datos MariaDB..."
           echo ""
           apt-get -y install php-mysql
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
