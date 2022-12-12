@@ -120,7 +120,7 @@ elif [ $OS_VERS == "11" ]; then
       1 "Instalar paquete mariadb-server." on
       2 "Permitir conexiones desde todas las IPs (no sólo localhost)." off
       3 "Permitir conexión SÓLO desde una IP específica (sin localhost)." off
-      4 "Establecer política de contraseñas débiles." off
+      4 "Establecer política de contraseñas débiles (sólo para pruebas)." off
       5 "..." off
       6 "Securizar instalación con script oficial." off
       7 "Crear base de datos para wordpress" off
