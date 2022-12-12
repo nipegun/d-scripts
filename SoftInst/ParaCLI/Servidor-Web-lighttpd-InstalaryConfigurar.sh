@@ -112,8 +112,8 @@ elif [ $OS_VERS == "11" ]; then
       1 "Instalar el paquete lighttpd." on
       2 "Instalar y activar PHP." off
       3 "Instalar servidor de bases de datos MariaDB." off
-      4 "Activar HTTPS" off
-      5 "Activar certificado de LetsEncrypt" off
+      4 "Activar HTTPS." off
+      5 "Activar certificado de LetsEncrypt." off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   #clear
@@ -145,8 +145,8 @@ elif [ $OS_VERS == "11" ]; then
           sed -i -e 's|;cgi.fix_pathinfo=1|cgi.fix_pathinfo=1|g' /etc/php/$vUltVerPHP/fpm/php.ini
           sed -i -e 's|listen = /run/php/php'"$vUltVerPHP"'-fpm.sock|listen = 127.0.0.1:9000|g' /etc/php/$vUltVerPHP/fpm/pool.d/www.conf
           systemctl restart php$vUltVerPHP-fpm
-          sed -i -e 's|"bin-path" => "/usr/bin/php-cgi",|"host" => "127.0.0.1",|g'        /etc/lighttpd/conf-available/15-fastcgi-php.conf
-          sed -i -e 's|"socket" => "\/var/run/lighttpd/php.socket",|"port" => "9000",|g' /etc/lighttpd/conf-available/15-fastcgi-php.conf
+          sed -i -e 's|"bin-path" => "/usr/bin/php-cgi",|"host" => "127.0.0.1",|g'      /etc/lighttpd/conf-available/15-fastcgi-php.conf
+          sed -i -e 's|"socket" => "/var/run/lighttpd/php.socket",|"port" => "9000",|g' /etc/lighttpd/conf-available/15-fastcgi-php.conf
           # Modificación individual (Por si la línea anterior no funciona)
             #sed -i -e 's|"socket"|"port"|g'                                          /etc/lighttpd/conf-available/15-fastcgi-php.conf
             #sed -i -e 's|"\/var/run\/lighttpd/php.socket"|"9000"|g'                   /etc/lighttpd/conf-available/15-fastcgi-php.conf
