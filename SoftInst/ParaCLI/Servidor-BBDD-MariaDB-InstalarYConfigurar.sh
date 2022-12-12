@@ -26,14 +26,14 @@ vFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${vColorRojo}Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
     exit 1
   fi
 
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${vColorRojo}curl no está instalado. Iniciando su instalación...${vFinColor}"
+    echo -e "${vColorRojo}  curl no está instalado. Iniciando su instalación...${vFinColor}"
     echo ""
     apt-get -y update && apt-get -y install curl
     echo ""
@@ -62,7 +62,7 @@ vFinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de MariaDB para Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
@@ -72,7 +72,7 @@ if [ $OS_VERS == "7" ]; then
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de MariaDB para Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
@@ -82,7 +82,7 @@ elif [ $OS_VERS == "8" ]; then
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de MariaDB para Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
@@ -92,7 +92,7 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de MariaDB para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo ""
@@ -102,13 +102,13 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de MariaDB para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${vColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo -e "${vColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
       echo ""
       apt-get -y update && apt-get -y install dialog
       echo ""
