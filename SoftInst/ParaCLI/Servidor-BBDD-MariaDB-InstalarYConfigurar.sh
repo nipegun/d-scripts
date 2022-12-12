@@ -183,6 +183,7 @@ elif [ $OS_VERS == "11" ]; then
           else
             vFecha=$(date +A%YM%mD%d@%T)
             cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
+            sed -i -e 's|bind-address = 0.0.0.0||g'                       /etc/mysql/my.cnf
             sed -i -e 's|\[mysqld]|\[mysqld]\nbind-address = $vIPExtra|g' /etc/mysql/my.cnf
             systemctl restart mariadb
           fi
