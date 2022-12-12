@@ -112,8 +112,8 @@ elif [ $OS_VERS == "11" ]; then
       1 "Instalar el paquete lighttpd..." on
       2 "Instalar y activar PHP." off
       3 "Instalar servidor de bases de datos MariaDB." off
-      4 "Opción 4" off
-      5 "Opción 5" off
+      4 "Activar HTTPS" off
+      5 "Activar certificado de LetsEncrypt" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   #clear
@@ -196,8 +196,20 @@ elif [ $OS_VERS == "11" ]; then
         5)
 
           echo ""
-          echo "  Opción 5..."
+          echo "  Activando certificado de LetsEncrypt..."
           echo ""
+          apt-get -y install certbot
+          echo ""
+          echo "  Introduce el nombre de dominio para el que quieras crear el certificado y presiona Enter:"
+          echo ""
+          read vNombreDeDominio < /dev/tty
+          certbot certonly --webroot -w /var/www/html -d $vNombreDeDominio
+          # Combinar certificado y llave privada en el mismo archivo
+            cat /etc/letsencrypt/live/$vNombreDeDominio/cert.pem /etc/letsencrypt/live/$vNombreDeDominio/privkey.pem > /etc/letsencrypt/live/$vNombreDeDominio/web.pem
+          # Agregar el certificado al archivo de configuración del sitio
+            
+          # Reiniciar lighttpd
+            systemctl restart lighttpd
 
         ;;
 
