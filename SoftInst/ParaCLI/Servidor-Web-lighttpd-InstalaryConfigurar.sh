@@ -93,7 +93,7 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de lighthttpd para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de lighthttpd para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   vFecha=$(date +A%YM%mD%d@%T)
@@ -101,7 +101,7 @@ elif [ $OS_VERS == "11" ]; then
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${vColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo -e "${vColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
       echo ""
       apt-get -y update && apt-get -y install dialog
       echo ""
