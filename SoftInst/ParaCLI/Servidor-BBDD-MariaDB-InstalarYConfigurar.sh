@@ -123,8 +123,7 @@ elif [ $OS_VERS == "11" ]; then
       4 "Permitiendo conexión desde una IP espacífica (además de localhost)." off
       5 "Opción 5" off
     )
-    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  clear
+  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
   for choice in $choices
     do
