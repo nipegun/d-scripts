@@ -109,7 +109,7 @@ elif [ $OS_VERS == "11" ]; then
 
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
-      1 "Instalar el paquete lighttpd..." on
+      1 "Instalar el paquete lighttpd." on
       2 "Instalar y activar PHP." off
       3 "Instalar servidor de bases de datos MariaDB." off
       4 "Activar HTTPS" off
@@ -146,10 +146,10 @@ elif [ $OS_VERS == "11" ]; then
           sed -i -e 's|listen = /run/php/php'"$vUltVerPHP"'-fpm.sock|listen = 127.0.0.1:9000|g' /etc/php/$vUltVerPHP/fpm/pool.d/www.conf
           systemctl restart php$vUltVerPHP-fpm
           sed -i -e 's|"bin-path" => "/usr/bin/php-cgi",|"host" => "127.0.0.1",|g'        /etc/lighttpd/conf-available/15-fastcgi-php.conf
-          sed -i -e 's|"socket" => "\/var/run\/lighttpd/php.socket",|"port" => "9000",|g' /etc/lighttpd/conf-available/15-fastcgi-php.conf
+          #sed -i -e 's|"socket" => "\/var/run\/lighttpd/php.socket",|"port" => "9000",|g' /etc/lighttpd/conf-available/15-fastcgi-php.conf
           # Modificación individual (Por si la línea anterior no funciona)
-            #sed -i -e 's|"socket"|"port"|g'                                          /etc/lighttpd/conf-available/15-fastcgi-php.conf
-            #sed -i -e 's|"\/var/run\/lighttpd/php.socket"|"9000"|g'                   /etc/lighttpd/conf-available/15-fastcgi-php.conf
+            sed -i -e 's|"socket"|"port"|g'                                          /etc/lighttpd/conf-available/15-fastcgi-php.conf
+            sed -i -e 's|"\/var/run\/lighttpd/php.socket"|"9000"|g'                   /etc/lighttpd/conf-available/15-fastcgi-php.conf
           lighty-enable-mod fastcgi
           lighty-enable-mod fastcgi-php
           systemctl restart lighttpd
@@ -163,6 +163,11 @@ elif [ $OS_VERS == "11" ]; then
           # Reparar permisos
             chown -R www-data:www-data /var/www/html/
             chmod -R 755 /var/www/html
+          # Desinstalar apache
+            apt-get -y purge apache2-data
+            apt-get -y purge apache2-bin
+            apt-get -y autoremove
+          # Reiniciar servidor web
             systemctl restart lighttpd
 
         ;;
