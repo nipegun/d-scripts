@@ -181,7 +181,7 @@ elif [ $OS_VERS == "11" ]; then
             echo "[mysqld]"                     >> /etc/mysql/my.cnf
             echo "validate_password.policy=LOW" >> /etc/mysql/my.cnf
           else
-            sed -i -e 's|[mysqld]|[mysqld]\nvalidate_password.policy=LOW|g' /etc/mysql/my.cnf
+            sed -i -e 's|\[mysqld]|\[mysqld]\nvalidate_password.policy=LOW|g' /etc/mysql/my.cnf
           fi
 
         ;;
