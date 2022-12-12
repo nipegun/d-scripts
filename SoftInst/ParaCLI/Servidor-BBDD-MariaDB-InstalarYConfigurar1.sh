@@ -176,7 +176,8 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Estableciendo política de contraseñas débiles (sólo para pruebas)..."
           echo ""
-          if [ $(cat /etc/mysql/my.cnf | grep ^'\[mysqld]') == "" ]; then
+          vExisteSec=$(cat /etc/mysql/my.cnf | grep ^'\[mysqld]')
+          if [ $vExisteSec == "" ]; then
             echo "[mysqld]"                     >> /etc/mysql/my.cnf
             echo "validate_password.policy=LOW" >> /etc/mysql/my.cnf
           else
