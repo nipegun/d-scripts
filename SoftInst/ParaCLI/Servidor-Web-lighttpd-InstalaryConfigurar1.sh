@@ -206,8 +206,24 @@ elif [ $OS_VERS == "11" ]; then
         4)
 
           echo ""
-          echo "  Opción 4..."
+          echo "  Activando HTTPS con certificado autofirmado..."
           echo ""
+          # Crear el certificado y la clave del certificado
+            openssl req -x509 -nodes -days 365 -newkey rsa:2048 -out /etc/ssl/certs/lighttpd-default.crt -keyout /etc/ssl/private/lighttpd-default.key
+          # Unir certificado y llave privada
+            mkdir  /etc/lighttpd/ssl/
+            cat /etc/ssl/private/lighttpd-default.key /etc/ssl/certs/lighttpd-default.crt > /etc/lighttpd/ssl/lighttpd-default.pem
+          # Añadir el certificado al archivo de configuración del sitio web por defecto de lighttpd
+            sed -i -e 's|server.modules += (|server.modules += (\n"mod_openssl",|g' /etc/lighttpd/lighttpd.conf
+            echo ''                                                              >> /etc/lighttpd/lighttpd.conf
+            echo '$SERVER["socket"] == ":443" {'                                 >> /etc/lighttpd/lighttpd.conf
+            echo '  ssl.engine = "enable"'                                       >> /etc/lighttpd/lighttpd.conf
+            echo '  ssl.pemfile = "/etc/lighttpd/ssl/lighttpd-default.pem"'      >> /etc/lighttpd/lighttpd.conf
+            echo '}'                                                             >> /etc/lighttpd/lighttpd.conf
+          # Verificar configuración
+            lighttpd -t -f /etc/lighttpd/lighttpd.conf
+          # Reiniciar el servicio
+            systemctl restart lighttpd
 
         ;;
 
