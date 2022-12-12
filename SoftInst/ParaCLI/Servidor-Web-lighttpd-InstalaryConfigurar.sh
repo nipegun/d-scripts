@@ -152,10 +152,10 @@ elif [ $OS_VERS == "11" ]; then
             sed -i -e 's|/var/run/lighttpd/php.socket|9000|g' /etc/lighttpd/conf-available/15-fastcgi-php.conf
             sed -i -e 's|/run/lighttpd/php.socket|9000|g'     /etc/lighttpd/conf-available/15-fastcgi-php.conf
           # Crear página web básica con PHP
-            echo "<?php"                           > /var/www/html/index.php
+            cat /var/www/html/index.lighttpd.html  > /var/www/html/index.php
+            echo "<?php"                          >> /var/www/html/index.php
             echo "  phpinfo();"                   >> /var/www/html/index.php
             echo "?>"                             >> /var/www/html/index.php
-            cat /var/www/html/index.lighttpd.html >> /var/www/html/index.php
           # Borrar html
             rm -f /var/www/html/index.lighttpd.html
           # Reparar permisos
