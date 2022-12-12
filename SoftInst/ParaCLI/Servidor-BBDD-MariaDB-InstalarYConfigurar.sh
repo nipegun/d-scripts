@@ -164,7 +164,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Permitiendo conexión desde una IP espacífica (además de localhost)..."
           echo ""
-          red -p "Introduce la IP desde la que se debería escuchar las conexiones" vIPExtra
+          read -p "Introduce la IP desde la que se debería escuchar las conexiones" vIPExtra
           echo "[mysqld]"                 >> /etc/mysql/my.cnf
           echo "bind-address = $vIPExtra" >> /etc/mysql/my.cnf
           systemctl restart mariadb
