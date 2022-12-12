@@ -120,7 +120,7 @@ elif [ $OS_VERS == "11" ]; then
       1 "Instalar paquete mariadb-server." on
       2 "Permitir conexiones desde todas las IPs (no sólo localhost)." off
       3 "Permitir conexión SÓLO desde una IP específica (sin localhost)." off
-      4 "Establecer política de contraseñas débiles (sólo para pruebas)." off
+      4 "..." off
       5 "..." off
       6 "Securizar instalación con script oficial." off
       7 "Crear base de datos para wordpress" off
@@ -148,10 +148,19 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Permitiendo conexión desde todas las IPs (no sólo desde localhost)..."
           echo ""
-          echo ""                       >> /etc/mysql/my.cnf
-          echo "[mysqld]"               >> /etc/mysql/my.cnf
-          echo "bind-address = 0.0.0.0" >> /etc/mysql/my.cnf
-          systemctl restart mariadb
+          vExisteSec=$(cat /etc/mysql/my.cnf | grep ^'\[mysqld]')
+          if [[ $vExisteSec == "" ]]; then
+            vFecha=$(date +A%YM%mD%d@%T)
+            cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
+            echo "[mysqld]"               >> /etc/mysql/my.cnf
+            echo "bind-address = 0.0.0.0" >> /etc/mysql/my.cnf
+            systemctl restart mariadb
+          else
+            vFecha=$(date +A%YM%mD%d@%T)
+            cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
+            sed -i -e 's|\[mysqld]|\[mysqld]\nbind-address = 0.0.0.0|g' /etc/mysql/my.cnf
+            systemctl restart mariadb
+          fi
 
         ;;
 
@@ -182,22 +191,7 @@ elif [ $OS_VERS == "11" ]; then
 
         4)
 
-          echo ""
-          echo "  Estableciendo política de contraseñas débiles (sólo para pruebas)..."
-          echo ""
-          vExisteSec=$(cat /etc/mysql/my.cnf | grep ^'\[mysqld]')
-          if [[ $vExisteSec == "" ]]; then
-            vFecha=$(date +A%YM%mD%d@%T)
-            cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
-            echo "[mysqld]"                     >> /etc/mysql/my.cnf
-            echo "validate_password.policy=LOW" >> /etc/mysql/my.cnf
-            systemctl restart mariadb
-          else
-            vFecha=$(date +A%YM%mD%d@%T)
-            cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
-            sed -i -e 's|\[mysqld]|\[mysqld]\nvalidate_password.policy=LOW|g' /etc/mysql/my.cnf
-            systemctl restart mariadb
-          fi
+          echo "  ..."
 
         ;;
 
