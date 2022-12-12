@@ -150,6 +150,17 @@ elif [ $OS_VERS == "11" ]; then
           lighty-enable-mod fastcgi
           lighty-enable-mod fastcgi-php
           systemctl restart lighttpd
+          # Crear página web básica con PHP
+            echo "<?php"                           > /var/www/html/index.php
+            echo "  phpinfo();"                   >> /var/www/html/index.php
+            echo "?>"                             >> /var/www/html/index.php
+            cat /var/www/html/index.lighttpd.html >> /var/www/html/index.php
+          # Borrar html
+            rm -f /var/www/html/index.lighttpd.html
+          # Reparar permisos
+            chown -R www-data:www-data /var/www/html/
+            chmod -R 755 /var/www/html
+            systemctl restart lighttpd
 
         ;;
 
@@ -190,8 +201,7 @@ elif [ $OS_VERS == "11" ]; then
 
     esac
 
-done
-
-
+  done
 
 fi
+
