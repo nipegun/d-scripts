@@ -120,8 +120,8 @@ elif [ $OS_VERS == "11" ]; then
       1 "Instalar paquete mariadb-server." on
       2 "Securizar instalación con script oficial." on
       3 "Permitir conexiones desde todas las IPs (no sólo localhost)." off
-      4 "Permitir conexión desde una IP espacífica (además de localhost)." off
-      5 "Opción 5" off
+      4 "Permitir conexión desde una IP específica (además de localhost)." off
+      5 "Permitir conexión SÓLO desde una IP específica (sin localhost)..."" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -163,7 +163,23 @@ elif [ $OS_VERS == "11" ]; then
         4)
 
           echo ""
-          echo "  Permitiendo conexión desde una IP espacífica (además de localhost)..."
+          echo "  Permitiendo conexiión desde una IP específica (además de localhost)..."
+          echo ""
+          echo "    Introduce la IP desde la que se deberían escuchar las conexiones y presiona Enter:"
+          echo ""
+          read vIPExtra < /dev/tty
+          echo ""
+          echo ""                                   >> /etc/mysql/my.cnf
+          echo "[mysqld]"                           >> /etc/mysql/my.cnf
+          echo "bind-address = 127.0.0.1,$vIPExtra" >> /etc/mysql/my.cnf
+          systemctl restart mariadb
+
+        ;;
+
+        5)
+
+          echo ""
+          echo "  Permitiendo conexión SÓLO desde una IP específica (sin localhost)..."
           echo ""
           echo "    Introduce la IP desde la que se deberían escuchar las conexiones y presiona Enter:"
           echo ""
@@ -173,14 +189,6 @@ elif [ $OS_VERS == "11" ]; then
           echo "[mysqld]"                 >> /etc/mysql/my.cnf
           echo "bind-address = $vIPExtra" >> /etc/mysql/my.cnf
           systemctl restart mariadb
-
-        ;;
-
-        5)
-
-          echo ""
-          echo "  Opción 5..."
-          echo ""
 
         ;;
 
