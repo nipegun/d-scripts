@@ -138,7 +138,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Instalando paquete mariadb-server..."
           echo ""
-          apt-get -y updat
+          apt-get -y update
           apt-get -y install mariadb-server
 
         ;;
