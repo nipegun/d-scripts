@@ -124,5 +124,8 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install docker-compose-plugin
     docker run hello-world
 
+  # Instalar bitwarden desde el script oficial
+    curl -sLs https://go.btwrdn.co/bw-sh | bash -s install
+
 fi
 
