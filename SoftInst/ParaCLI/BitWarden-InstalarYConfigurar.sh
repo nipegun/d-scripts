@@ -152,7 +152,8 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "  Instalando BitWarden usando el script oficial..."
     echo ""
-    curl -sLs https://go.btwrdn.co/bw-sh | bash -s install
+    curl -Lso bitwarden.sh https://go.btwrdn.co/bw-sh && chmod 700 bitwarden.sh
+    ./bitwarden.sh install
 
 fi
 
