@@ -114,5 +114,11 @@ elif [ $OS_VERS == "11" ]; then
       fi
     wget $vURLArchivo
 
+  # Descomprimir archivo
+    tar xjvf lplinux.tar.bz2
+
+  # Instalar
+   ./install_lastpass.sh
+
 fi
 
