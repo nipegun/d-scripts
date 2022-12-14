@@ -113,6 +113,16 @@ elif [ $OS_VERS == "11" ]; then
     mkdir -p /etc/apt/keyrings
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    apt-get -y update
+    chmod a+r /etc/apt/keyrings/docker.gpg
+    apt-get update
+
+  # Instalar Docker Engine
+    apt-get -y install docker-ce
+    apt-get -y install docker-ce-cli
+    apt-get -y install containerd.io
+    apt-get -y install docker-compose-plugin
+    docker run hello-world
 
 fi
 
