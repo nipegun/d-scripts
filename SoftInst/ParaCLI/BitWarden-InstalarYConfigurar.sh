@@ -96,5 +96,23 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}Iniciando el script de instalación de BitWarden para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
+  # Desinstalar probables versiones previas
+    apt-get -y remove docker
+    apt-get -y remove docker-engine
+    apt-get -y remove docker.io
+    apt-get -y remove containerd
+    apt-get -y remove runc
+
+  # Agregar el repositorio de Docker
+    apt-get -y update
+    apt-get -y install
+    apt-get -y install ca-certificates
+    apt-get -y install curl
+    apt-get -y install gnupg
+    apt-get -y install lsb-release
+    mkdir -p /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
 fi
 
