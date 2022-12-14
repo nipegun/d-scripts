@@ -124,7 +124,34 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install docker-compose-plugin
     docker run hello-world
 
+  # Crear usuario y grupo
+    echo ""
+    echo "  Creando el usuario bitwarden..."
+    echo ""
+    adduser bitwarden
+    echo ""
+    echo "  Asignando contraseña al usuario bitwarden..."
+    echo ""
+    passwd bitwarden
+    echo ""
+    echo "  Creando el grupo docker..."
+    echo ""
+    groupadd docker
+    echo ""
+    echo "  Agregando el usuario bitwarden al grupo docker..."
+    echo ""
+    usermod -aG docker bitwarden
+    echo ""
+    echo "  Creando la carpeta de instalación para bitwarden..."
+    echo ""
+    mkdir /opt/bitwarden
+    chmod -R 700 /opt/bitwarden
+    chown -R bitwarden:bitwarden /opt/bitwarden
+
   # Instalar bitwarden desde el script oficial
+    echo ""
+    echo "  Instalando BitWarden usando el script oficial..."
+    echo ""
     curl -sLs https://go.btwrdn.co/bw-sh | bash -s install
 
 fi
