@@ -269,66 +269,65 @@ elif [ $OS_VERS == "11" ]; then
   echo "-----------------------------------------------------------------------------------------"
   echo ""
 
-  ## Actualizar los paquetes de los repositorios
-     apt-get -y update
+  # Actualizar los paquetes de los repositorios
+    apt-get -y update
 
-  ## Instalar los paquetes necesarios para compilar 
-     apt-get -y install build-essential gcc make
+  # Instalar los paquetes necesarios para compilar 
+    apt-get -y install build-essential gcc make
 
-  ## Crear la carpeta para guardar el código
-     mkdir /root/SoftInst/ 2> /dev/null
+  # Crear la carpeta para guardar el código
+    mkdir /root/SoftInst/ 2> /dev/null
 
-  ## Posicionarse en esa carpeta y bajar allí el código fuente
-     cd /root/SoftInst/
-     ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-          echo ""
-          echo "  wget no está instalado. Iniciando su instalación..."
-          echo ""
-          apt-get -y update > /dev/null
-          apt-get -y install wget
-          echo ""
-        fi
-     wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
+  # Posicionarse en esa carpeta y bajar allí el código fuente
+    cd /root/SoftInst/
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "  wget no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update && apt-get -y install wget
+        echo ""
+      fi
+    wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
 
-  ## Descomprimir el archivo con el código
-     ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
-          echo ""
-          echo "  tar no está instalado. Iniciando su instalación..."
-          echo ""
-          apt-get -y update > /dev/null
-          apt-get -y install tar
-          echo ""
-        fi
-     tar xf noip-duc-linux.tar.gz
-     rm noip-duc-linux.tar.gz
+  # Descomprimir el archivo con el código
+    # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "  tar no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update > /dev/null
+        apt-get -y install tar
+        echo ""
+      fi
+    tar xf noip-duc-linux.tar.gz
+    rm noip-duc-linux.tar.gz
 
-  ## Compilar e instalar
-     Carpeta=$(ls /root/SoftInst/ | grep noip)
-     cd $Carpeta
-     make
-     echo ""
-     echo "------------------------------------------------------------------------"
-     echo "  A CONTINUACIÓN SE TE PEDIRÁ EL MAIL, LA CONTRASEÑA DE SESIÓN DE NOIP"
-     echo "  Y EL INTERVALO DE ACTUALIZACIÓN DE LA IP (POR DEFECTO 30 MINUTOS)"
-     echo "------------------------------------------------------------------------"
-     echo ""
-     make install
+  # Compilar e instalar
+    Carpeta=$(ls /root/SoftInst/ | grep noip)
+    cd $Carpeta
+    make
+    echo ""
+    echo "------------------------------------------------------------------------"
+    echo "  A CONTINUACIÓN SE TE PEDIRÁ EL MAIL, LA CONTRASEÑA DE SESIÓN DE NOIP"
+    echo "  Y EL INTERVALO DE ACTUALIZACIÓN DE LA IP (POR DEFECTO 30 MINUTOS)"
+    echo "------------------------------------------------------------------------"
+    echo ""
+    make install
 
-  ## Proteger los archivos de configuración
-     chmod 600 /usr/local/etc/no-ip2.conf
-     chown root:root /usr/local/etc/no-ip2.conf
-     chmod 700 /usr/local/bin/noip2
-     chown root:root /usr/local/bin/noip2
+  # Proteger los archivos de configuración
+    chmod 600 /usr/local/etc/no-ip2.conf
+    chown root:root /usr/local/etc/no-ip2.conf
+    chmod 700 /usr/local/bin/noip2
+    chown root:root /usr/local/bin/noip2
 
-  ## Lanzar la aplicación
-     /usr/local/bin/noip2
+  # Lanzar la aplicación
+    /usr/local/bin/noip2
 
-  ## Agregar la aplicación a los comandos post arranque
-     echo "" >> /root/scripts/ComandosPostArranque.sh
-     echo "# Actualizador NoIP"  >> /root/scripts/ComandosPostArranque.sh
-     echo "/usr/local/bin/noip2" >> /root/scripts/ComandosPostArranque.sh
+  # Agregar la aplicación a los comandos post arranque
+    echo "" >> /root/scripts/ComandosPostArranque.sh
+    echo "# Actualizador NoIP"  >> /root/scripts/ComandosPostArranque.sh
+    echo "/usr/local/bin/noip2" >> /root/scripts/ComandosPostArranque.sh
 
 fi
 
