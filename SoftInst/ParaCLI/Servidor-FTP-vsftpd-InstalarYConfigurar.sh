@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar y configurar vsftpd en Debian
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-FTP-vsftpd-InstalarYConfigurar5.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-FTP-vsftpd-InstalarYConfigurar.sh | bash
 # ----------
 
 vColorAzul="\033[0;34m"
