@@ -114,9 +114,9 @@ elif [ $OS_VERS == "11" ]; then
      fi
   menu=(dialog --timeout 5 --checklist "¿Donde quieres instalar Utopia Messenger?:" 22 76 16)
     opciones=(
-      1 "Instalar en ubicación por defecto (dpkg -i)." off
+      1 "Instalar en ubicación por defecto (dpkg -i) (/opt)." off
       2 "Instalar en la carpeta del usuario no root." off
-      3 "Actualizar el messenger para el root (No disponible)." off
+      3 "Actualizar el messenger en su ubicación por defecto (/opt)." off
       4 "Actualizar el messenger para el usuario no root." off
     )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -361,7 +361,7 @@ elif [ $OS_VERS == "11" ]; then
             3)
 
               echo ""
-              echo -e "${ColorVerde}  Actualizando Utopia Messenger en su ubicación por defecto...${FinColor}"
+              echo -e "${ColorVerde}  Actualizando el messenger en su ubicación por defecto...${FinColor}"
               echo ""
 
               # Desinstalar paquete .deb viejo
