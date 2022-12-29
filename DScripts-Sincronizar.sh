@@ -30,7 +30,7 @@ fi
 wget -q --tries=10 --timeout=20 --spider https://github.com
   if [[ $? -eq 0 ]]; then
     echo ""
-    echo -e "${ColorVerde}  Sincronizando los d-scripts con las últimas versiones y descargando nuevos d-scripts si es que existen...${FinColor}"
+    echo -e "${ColorVerde}  Sincronizando los d-scripts con las últimas versiones y descargando nuevos d-scripts (si es que existen)...${FinColor}"
     echo ""
     rm /root/scripts/d-scripts -R 2> /dev/null
     mkdir /root/scripts 2> /dev/null
