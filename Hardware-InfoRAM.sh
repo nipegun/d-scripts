@@ -22,7 +22,6 @@ echo ""
 echo ""
 echo -e "${vColorVerde}    Ejecutando: dmidecode --type 17...${vFinColor}"
 echo ""
-
 # Comprobar si el paquete lshw está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s lshw 2>/dev/null | grep installed) == "" ]]; then
     echo ""
@@ -31,14 +30,29 @@ echo ""
     apt-get -y update && apt-get -y install lshw
     echo ""
   fi
-
 dmidecode --type 17
 echo ""
+
 
 echo ""
 echo -e "${vColorVerde}    Ejecutando: lshw -class memory...${vFinColor}"
 echo ""
-
 lshw -class memory
+echo ""
+
+
+echo ""
+echo -e "${vColorVerde}    Ejecutando: decode-dimms...${vFinColor}"
+echo ""
+# Comprobar si el paquete i2c-tools está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s i2c-tools 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo -e "${vColorRojo}  i2c-tools no está instalado. Iniciando su instalación...${vFinColor}"
+    echo ""
+    apt-get -y update && apt-get -y install i2c-tools
+    echo ""
+  fi
+modprobe eeprom
+decode-dimms
 echo ""
 
