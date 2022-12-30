@@ -130,10 +130,10 @@ echo ""
   #mv /root/SoftInst/Cryptos/XCH/usr/lib/chia-blockchain/ /home/$UsuarioNoRoot/Cryptos/XCH/
   mv /root/SoftInst/Cryptos/XCH/opt/chia/ /home/$UsuarioNoRoot/Cryptos/XCH/
   #mv /root/SoftInst/Cryptos/XCH/usr/share/pixmaps/chia-blockchain.png /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/
-  mv /root/SoftInst/Cryptos/XCH/usr/share/icons/hicolor/1024x1024/apps/@chiagui.png /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/
-  mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
+  mv /root/SoftInst/Cryptos/XCH/usr/share/icons/hicolor/1024x1024/apps/@chiagui.png /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain.png
+  #mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
   #mv /root/SoftInst/Cryptos/XCH/usr/share/applications/chia-blockchain.desktop /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain
-  mv /root/SoftInst/Cryptos/XCH/usr/share/applications/@chiagui.desktop /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/
+  #mv /root/SoftInst/Cryptos/XCH/usr/share/applications/@chiagui.desktop /home/$UsuarioNoRoot/.local/share/applications/@chiagui.desktop
   rm -rf /root/SoftInst/Cryptos/XCH/usr/
   #mkdir -p "/home/$UsuarioNoRoot/.config/Chia Wallet Beta/" 2> /dev/null
   #echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > "/home/$UsuarioNoRoot/.config/Chia Wallet Beta/Preferences"
