@@ -19,6 +19,10 @@ echo ""
 echo -e "${vColorAzulClaro}  Mostrando información sobre la memoria RAM...${vFinColor}"
 echo ""
 
+echo ""
+echo -e "${vColorAzulClaro}    Ejecutando: dmidecode --type 17...${vFinColor}"
+echo ""
+
 # Comprobar si el paquete lshw está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s lshw 2>/dev/null | grep installed) == "" ]]; then
     echo ""
@@ -29,5 +33,12 @@ echo ""
   fi
 
 dmidecode --type 17
+echo ""
+
+echo ""
+echo -e "${vColorAzulClaro}    Ejecutando: lshw -class memory...${vFinColor}"
+echo ""
+
+lshw -class memory
 echo ""
 
