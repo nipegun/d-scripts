@@ -9,10 +9,10 @@
 #  Script de NiPeGun para instalar y configurar la "cartera liviana" de Chia (XCH)
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-XCH-Liviana.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-XCH-InstalarOActualizar.sh | bash
 #
 #  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-XCH.sh | bash
+#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-XCH-InstalarOActualizar.sh | bash
 # ----------
 
 ColorRojo='\033[1;31m'
@@ -49,8 +49,8 @@ echo ""
   echo ""
   echo "  Creando carpeta de descarga..."
   echo ""
+  rm -rf /root/SoftInst/Cryptos/XCH/ 2> /dev/null
   mkdir -p /root/SoftInst/Cryptos/XCH/ 2> /dev/null
-  rm -rf /root/SoftInst/Cryptos/XCH/*
 
 # Descargar y descomprimir todos los archivos
   echo ""
@@ -65,7 +65,7 @@ echo ""
       echo ""
     fi
   cd /root/SoftInst/Cryptos/XCH/
-  rm -f /root/SoftInst/Cryptos/XCH/chia.deb
+  rm -f /root/SoftInst/Cryptos/XCH/chia.deb 2> /dev/null
   wget https://github.com/$vURLDelArchivoDeb -O /root/SoftInst/Cryptos/XCH/chia.deb
 
   echo ""
@@ -127,23 +127,26 @@ echo ""
   mkdir -p /home/$UsuarioNoRoot/Cryptos/XCH/ 2> /dev/null
   rm -rf /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/ 2> /dev/null
 
-  mv /root/SoftInst/Cryptos/XCH/usr/lib/chia-blockchain/ /home/$UsuarioNoRoot/Cryptos/XCH/
-  mv /root/SoftInst/Cryptos/XCH/usr/share/pixmaps/chia-blockchain.png /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/
+  #mv /root/SoftInst/Cryptos/XCH/usr/lib/chia-blockchain/ /home/$UsuarioNoRoot/Cryptos/XCH/
+  mv /root/SoftInst/Cryptos/XCH/opt/chia/ /home/$UsuarioNoRoot/Cryptos/XCH/
+  #mv /root/SoftInst/Cryptos/XCH/usr/share/pixmaps/chia-blockchain.png /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/
+  mv /root/SoftInst/Cryptos/XCH/usr/share/icons/hicolor/1024x1024/apps/@chiagui.png /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/
   mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-  mv /root/SoftInst/Cryptos/XCH/usr/share/applications/chia-blockchain.desktop /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain
+  #mv /root/SoftInst/Cryptos/XCH/usr/share/applications/chia-blockchain.desktop /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain
+  mv /root/SoftInst/Cryptos/XCH/usr/share/applications/@chiagui.desktop /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/
   rm -rf /root/SoftInst/Cryptos/XCH/usr/
-  mkdir -p "/home/$UsuarioNoRoot/.config/Chia Wallet Beta/" 2> /dev/null
-  echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > "/home/$UsuarioNoRoot/.config/Chia Wallet Beta/Preferences"
-  mkdir -p "/home/$UsuarioNoRoot/.config/Chia Wallet/" 2> /dev/null
-  echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > "/home/$UsuarioNoRoot/.config/Chia Wallet/Preferences"
+  #mkdir -p "/home/$UsuarioNoRoot/.config/Chia Wallet Beta/" 2> /dev/null
+  #echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > "/home/$UsuarioNoRoot/.config/Chia Wallet Beta/Preferences"
+  #mkdir -p "/home/$UsuarioNoRoot/.config/Chia Wallet/" 2> /dev/null
+  #echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > "/home/$UsuarioNoRoot/.config/Chia Wallet/Preferences"
 
 # Borrar archivos sobrantes
   echo ""
   echo "  Borrando archivos sobrantes..."
   echo ""
-  rm -rf /root/SoftInst/Cryptos/XCH/debian-binary
-  rm -rf /root/SoftInst/Cryptos/XCH/control.tar.xz
-  rm -rf /root/SoftInst/Cryptos/XCH/data.tar.xz
+  #rm -rf /root/SoftInst/Cryptos/XCH/debian-binary
+  #rm -rf /root/SoftInst/Cryptos/XCH/control.tar.xz
+  #rm -rf /root/SoftInst/Cryptos/XCH/data.tar.xz
 
 # Agregar aplicación al menú
   echo ""
