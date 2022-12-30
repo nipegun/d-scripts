@@ -126,16 +126,9 @@ echo ""
   echo ""
   mkdir -p /home/$UsuarioNoRoot/Cryptos/XCH/ 2> /dev/null
   rm -rf /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/ 2> /dev/null
-
-  #mv /root/SoftInst/Cryptos/XCH/usr/lib/chia-blockchain/ /home/$UsuarioNoRoot/Cryptos/XCH/
   mv /root/SoftInst/Cryptos/XCH/opt/chia/ /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/
-  
-  #mv /root/SoftInst/Cryptos/XCH/usr/share/pixmaps/chia-blockchain.png /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/
   mv /root/SoftInst/Cryptos/XCH/usr/share/icons/hicolor/1024x1024/apps/@chiagui.png /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain.png
-  #mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-  #mv /root/SoftInst/Cryptos/XCH/usr/share/applications/chia-blockchain.desktop /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain
-  #mv /root/SoftInst/Cryptos/XCH/usr/share/applications/@chiagui.desktop /home/$UsuarioNoRoot/.local/share/applications/@chiagui.desktop
- ##rm -rf /root/SoftInst/Cryptos/XCH/usr/
+  rm -rf /root/SoftInst/Cryptos/XCH/usr/
   #mkdir -p "/home/$UsuarioNoRoot/.config/Chia Wallet Beta/" 2> /dev/null
   #echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > "/home/$UsuarioNoRoot/.config/Chia Wallet Beta/Preferences"
   #mkdir -p "/home/$UsuarioNoRoot/.config/Chia Wallet/" 2> /dev/null
@@ -145,9 +138,9 @@ echo ""
   echo ""
   echo "  Borrando archivos sobrantes..."
   echo ""
-  #rm -rf /root/SoftInst/Cryptos/XCH/debian-binary
-  #rm -rf /root/SoftInst/Cryptos/XCH/control.tar.xz
-  #rm -rf /root/SoftInst/Cryptos/XCH/data.tar.xz
+  rm -rf /root/SoftInst/Cryptos/XCH/debian-binary
+  rm -rf /root/SoftInst/Cryptos/XCH/control.tar.xz
+  rm -rf /root/SoftInst/Cryptos/XCH/data.tar.xz
 
 # Agregar aplicación al menú
   echo ""
@@ -241,4 +234,3 @@ echo ""
   chmod 0644 /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/resources/app.asar.unpacked/daemon/mozilla-ca/cacert.pem
   chmod +x   /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain
   chmod +x   /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/resources/app.asar.unpacked/daemon/chia
-
