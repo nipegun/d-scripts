@@ -25,7 +25,7 @@ echo ""
 # Comprobar si el paquete lshw está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s lshw 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${vColorRojo}  lshw no está instalado. Iniciando su instalación...${vFinColor}"
+    echo -e "${vColorRojo}      lshw no está instalado. Iniciando su instalación...${vFinColor}"
     echo ""
     apt-get -y update && apt-get -y install lshw
     echo ""
@@ -47,7 +47,7 @@ echo ""
 # Comprobar si el paquete i2c-tools está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s i2c-tools 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${vColorRojo}  i2c-tools no está instalado. Iniciando su instalación...${vFinColor}"
+    echo -e "${vColorRojo}      i2c-tools no está instalado. Iniciando su instalación...${vFinColor}"
     echo ""
     apt-get -y update && apt-get -y install i2c-tools
     echo ""
