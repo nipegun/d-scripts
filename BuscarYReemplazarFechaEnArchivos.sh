@@ -27,12 +27,9 @@ if [ $# -ne $EXPECTED_ARGS ]
     exit $E_BADARGS
   else
     echo ""
-    find  -exec touch {} \;
-    
     find $1 -type f -print0 | while read -d $'\0' file
       do
         stat -c $y "$file"
       done
-
     echo ""
 fi
