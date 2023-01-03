@@ -31,7 +31,7 @@ if [ $# -ne $EXPECTED_ARGS ]
       do
         vA=$(stat -c %y "$file" | cut -d '-' -f1)
         vM=$(stat -c %y "$file" | cut -d '-' -f2)
-        vD=$(stat -c %y "$file" | cut -d '-' -f3)
+        vD=$(stat -c %y "$file" | cut -d '-' -f3 | cut -d ' ' -f1)
         vH=$(stat -c %y "$file" | cut -d ' ' -f2 | cut -d ':' -f1)
         vM=$(stat -c %y "$file" | cut -d ' ' -f2 | cut -d ':' -f2)
         vS=$(stat -c %y "$file" | cut -d ' ' -f2 | cut -d ':' -f3 | cut -d '.' -f1)
