@@ -29,14 +29,22 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo ""
     find $1 -type f -print0 | while read -d $'\0' vArchivo
       do
-        vA=$(stat -c %y "$vArchivo" | cut -d '-' -f1)
-        vM=$(stat -c %y "$vArchivo" | cut -d '-' -f2)
-        vD=$(stat -c %y "$vArchivo" | cut -d '-' -f3 | cut -d ' ' -f1)
-        vh=$(stat -c %y "$vArchivo" | cut -d ' ' -f2 | cut -d ':' -f1)
-        vm=$(stat -c %y "$vArchivo" | cut -d ' ' -f2 | cut -d ':' -f2)
-        vs=$(stat -c %y "$vArchivo" | cut -d ' ' -f2 | cut -d ':' -f3 | cut -d '.' -f1)
-        touch -a -m -t "$2$vM$vD$vh$vm.$vs" "$vArchivo"
-        #echo "Año $vA Mes $vM Día $vD Hora $vh Minuto $vm Segundo $vs"
+        # Obtener el número de año de modificación del archivo
+          vA=$(stat -c %y "$vArchivo" | cut -d '-' -f1)
+        # Obtener el número de mes de modificación del archivo
+          vM=$(stat -c %y "$vArchivo" | cut -d '-' -f2)
+        # Obtener el número de día de modificación del archivo
+          vD=$(stat -c %y "$vArchivo" | cut -d '-' -f3 | cut -d ' ' -f1)
+        # Obtener el número de hora de modificación del archivo
+          vh=$(stat -c %y "$vArchivo" | cut -d ' ' -f2 | cut -d ':' -f1)
+        # Obtener el número de minutos de modificación del archivo
+          vm=$(stat -c %y "$vArchivo" | cut -d ' ' -f2 | cut -d ':' -f2)
+        # Obtener el número de segundos de modificación del archivo
+          vs=$(stat -c %y "$vArchivo" | cut -d ' ' -f2 | cut -d ':' -f3 | cut -d '.' -f1)
+        # Cambiar la fecha de modificación del archivo al año indicado en el parámetro 2
+          echo "Cambiando el año de modificación del archivo $vArchivo a $2..."
+          touch -a -m -t "$2$vM$vD$vh$vm.$vs" "$vArchivo"
       done
     echo ""
 fi
+
