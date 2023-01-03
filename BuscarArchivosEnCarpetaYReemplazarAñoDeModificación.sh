@@ -18,7 +18,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "##################################################"
     echo "Mal uso del script."
     echo ""
-    echo "El uso correcto sería: $0 ruta año"
+    echo "El uso correcto sería: $0 Carpeta AñoAPoner"
     echo ""
     echo "Ejemplo:"
     echo "&0 /home/nico/fotos/ 2015"
