@@ -35,7 +35,7 @@ if [ $# -ne $EXPECTED_ARGS ]
         vh=$(stat -c %y "$file" | cut -d ' ' -f2 | cut -d ':' -f1)
         vm=$(stat -c %y "$file" | cut -d ' ' -f2 | cut -d ':' -f2)
         vs=$(stat -c %y "$file" | cut -d ' ' -f2 | cut -d ':' -f3 | cut -d '.' -f1)
-        echo "Año $vA Mes $vM Día $vD Hora $vH Minuto $vM Segundo $vS"
+        echo "Año $vA Mes $vM Día $vD Hora $vh Minuto $vm Segundo $vs"
       done
     echo ""
 fi
