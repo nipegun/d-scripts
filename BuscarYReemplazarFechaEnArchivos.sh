@@ -29,7 +29,10 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo ""
     find $1 -type f -print0 | while read -d $'\0' file
       do
-        stat -c %y "$file"
+        vA=$(stat -c %y "$file" | cut -d '-' -f1)
+        vM=$(stat -c %y "$file" | cut -d '-' -f2)
+        vD=$(stat -c %y "$file" | cut -d '-' -f3)
+        echo $vA$vM$vD
       done
     echo ""
 fi
