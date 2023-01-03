@@ -34,7 +34,7 @@ if [ $# -ne $EXPECTED_ARGS ]
         vD=$(stat -c %y "$file" | cut -d '-' -f3)
         vH=$(stat -c %y "$file" | cut -d ' ' -f2 | cut -d ':' -f1)
         vM=$(stat -c %y "$file" | cut -d ' ' -f2 | cut -d ':' -f2)
-        vS=$(stat -c %y "$file" | cut -d ' ' -f2 | cut -d ':' -f3)
+        vS=$(stat -c %y "$file" | cut -d ' ' -f2 | cut -d ':' -f3 | cut -d '.' -f1)
         echo "Año $vA Mes $vM Día $vD Hora $vH Minuto $vM Segundo $vS"
       done
     echo ""
