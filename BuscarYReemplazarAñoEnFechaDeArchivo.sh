@@ -9,7 +9,7 @@
 #  Script de NiPeGun para buscar archivos en una ubicación dada y cambiarles el año de la fecha de creación y modificación
 # ----------
 
-EXPECTED_ARGS=1
+EXPECTED_ARGS=2
 E_BADARGS=65
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -35,8 +35,8 @@ if [ $# -ne $EXPECTED_ARGS ]
         vh=$(stat -c %y "$vArchivo" | cut -d ' ' -f2 | cut -d ':' -f1)
         vm=$(stat -c %y "$vArchivo" | cut -d ' ' -f2 | cut -d ':' -f2)
         vs=$(stat -c %y "$vArchivo" | cut -d ' ' -f2 | cut -d ':' -f3 | cut -d '.' -f1)
-        #touch -a -m -t $2$vM$vD$vh$vm.$vs "$vArchivo"
-        echo "Año $vA Mes $vM Día $vD Hora $vh Minuto $vm Segundo $vs"
+        touch -a -m -t "$2$vM$vD$vh$vm.$vs" "$vArchivo"
+        #echo "Año $vA Mes $vM Día $vD Hora $vh Minuto $vm Segundo $vs"
       done
     echo ""
 fi
