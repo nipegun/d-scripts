@@ -111,7 +111,6 @@ elif [ $OS_VERS == "11" ]; then
     echo "    Agregando repositorio de docker..."
     echo ""
     apt-get -y update
-    apt-get -y install
     apt-get -y install ca-certificates
     apt-get -y install curl
     apt-get -y install gnupg
@@ -121,7 +120,7 @@ elif [ $OS_VERS == "11" ]; then
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     apt-get -y update
     chmod a+r /etc/apt/keyrings/docker.gpg
-    apt-get update
+    apt-get -y update
 
   # Instalar Docker Engine
     echo ""
