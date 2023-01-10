@@ -105,7 +105,9 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y remove docker.io
     apt-get -y remove containerd
     apt-get -y remove runc
-
+    rm -rf /var/lib/docker
+    rm -rf /var/lib/containerd
+ 
   # Agregar el repositorio de Docker
     echo ""
     echo "    Agregando repositorio de docker..."
@@ -116,8 +118,8 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install gnupg
     apt-get -y install lsb-release
     mkdir -p /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
     apt-get -y update
     chmod a+r /etc/apt/keyrings/docker.gpg
     apt-get -y update
@@ -126,11 +128,9 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "    Instalando docker engine..."
     echo ""
-    apt-get -y install docker
     apt-get -y install docker-ce
     apt-get -y install docker-ce-cli
     apt-get -y install containerd.io
-    apt-get -y install docker-compose
     apt-get -y install docker-compose-plugin
     docker run hello-world
 
@@ -138,11 +138,11 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "    Creando el usuario bitwarden..."
     echo ""
-    adduser bitwarden
-    echo ""
-    echo "    Asignando contraseña al usuario bitwarden..."
-    echo ""
-    passwd bitwarden
+    #adduser bitwarden
+    #echo ""
+    #echo "    Asignando contraseña al usuario bitwarden..."
+    #echo ""
+    #passwd bitwarden
     echo ""
     echo "    Creando el grupo docker..."
     echo ""
@@ -162,7 +162,6 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "    Instalando BitWarden usando el script oficial..."
     echo ""
-    cd /root
     curl -Lso bitwarden.sh https://go.btwrdn.co/bw-sh && chmod 700 bitwarden.sh
     ./bitwarden.sh install
 
