@@ -130,6 +130,7 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install docker-ce
     apt-get -y install docker-ce-cli
     apt-get -y install containerd.io
+    apt-get -y install docker-compose
     apt-get -y install docker-compose-plugin
     docker run hello-world
 
