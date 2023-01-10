@@ -53,52 +53,52 @@ vFinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de BitWarden para Debian 7 (Wheezy)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de BitWarden para Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de BitWarden para Debian 8 (Jessie)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de BitWarden para Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de BitWarden para Debian 9 (Stretch)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de BitWarden para Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de BitWarden para Debian 10 (Buster)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de BitWarden para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de BitWarden para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de BitWarden para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   # Desinstalar posibles versiones previas
     echo ""
-    echo "  Desinstalando posibles versiones previas..."
+    echo "    Desinstalando posibles versiones previas..."
     echo ""
     apt-get -y remove docker
     apt-get -y remove docker-engine
@@ -108,7 +108,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Agregar el repositorio de Docker
     echo ""
-    echo "  Agregando repositorio de docker..."
+    echo "    Agregando repositorio de docker..."
     echo ""
     apt-get -y update
     apt-get -y install
@@ -125,7 +125,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Instalar Docker Engine
     echo ""
-    echo "  Instalando docker engine..."
+    echo "    Instalando docker engine..."
     echo ""
     apt-get -y install docker-ce
     apt-get -y install docker-ce-cli
@@ -135,23 +135,23 @@ elif [ $OS_VERS == "11" ]; then
 
   # Crear usuario y grupo
     echo ""
-    echo "  Creando el usuario bitwarden..."
+    echo "    Creando el usuario bitwarden..."
     echo ""
     adduser bitwarden
     echo ""
-    echo "  Asignando contraseña al usuario bitwarden..."
+    echo "    Asignando contraseña al usuario bitwarden..."
     echo ""
     passwd bitwarden
     echo ""
-    echo "  Creando el grupo docker..."
+    echo "    Creando el grupo docker..."
     echo ""
     groupadd docker
     echo ""
-    echo "  Agregando el usuario bitwarden al grupo docker..."
+    echo "    Agregando el usuario bitwarden al grupo docker..."
     echo ""
     usermod -aG docker bitwarden
     echo ""
-    echo "  Creando la carpeta de instalación para bitwarden..."
+    echo "    Creando la carpeta de instalación para bitwarden..."
     echo ""
     mkdir /opt/bitwarden
     chmod -R 700 /opt/bitwarden
@@ -159,7 +159,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Instalar bitwarden desde el script oficial
     echo ""
-    echo "  Instalando BitWarden usando el script oficial..."
+    echo "    Instalando BitWarden usando el script oficial..."
     echo ""
     curl -Lso bitwarden.sh https://go.btwrdn.co/bw-sh && chmod 700 bitwarden.sh
     ./bitwarden.sh install
