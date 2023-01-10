@@ -132,13 +132,14 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install docker-ce-cli
     apt-get -y install containerd.io
     apt-get -y install docker-compose-plugin
-    docker run hello-world
+    # Comprobar que docker-engine se instaló
+      # docker run hello-world
 
   # Crear usuario y grupo
     echo ""
     echo "    Creando el usuario bitwarden..."
     echo ""
-    #adduser bitwarden
+    adduser bitwarden
     #echo ""
     #echo "    Asignando contraseña al usuario bitwarden..."
     #echo ""
