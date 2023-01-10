@@ -127,6 +127,7 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "    Instalando docker engine..."
     echo ""
+    apt-get -y install docker
     apt-get -y install docker-ce
     apt-get -y install docker-ce-cli
     apt-get -y install containerd.io
