@@ -96,7 +96,10 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}Iniciando el script de instalación de BitWarden para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
-  # Desinstalar probables versiones previas
+  # Desinstalar posibles versiones previas
+    echo ""
+    echo "  Desinstalando posibles versiones previas..."
+    echo ""
     apt-get -y remove docker
     apt-get -y remove docker-engine
     apt-get -y remove docker.io
@@ -104,6 +107,9 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y remove runc
 
   # Agregar el repositorio de Docker
+    echo ""
+    echo "  Agregando repositorio de docker..."
+    echo ""
     apt-get -y update
     apt-get -y install
     apt-get -y install ca-certificates
@@ -118,6 +124,9 @@ elif [ $OS_VERS == "11" ]; then
     apt-get update
 
   # Instalar Docker Engine
+    echo ""
+    echo "  Instalando docker engine..."
+    echo ""
     apt-get -y install docker-ce
     apt-get -y install docker-ce-cli
     apt-get -y install containerd.io
