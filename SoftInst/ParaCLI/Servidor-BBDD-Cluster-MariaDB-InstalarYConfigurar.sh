@@ -184,7 +184,7 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "  Consultar el estado del cluster..."
               echo ""
-              
+              mysql -e "show status like 'wsrep_%';"
             # Volver a iniciar el servicio mariadb
               echo ""
               echo "    Volviendo a iniciar el servicio mariadb..."
