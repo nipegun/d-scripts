@@ -166,5 +166,8 @@ elif [ $OS_VERS == "11" ]; then
     curl -Lso bitwarden.sh https://go.btwrdn.co/bw-sh && chmod 700 bitwarden.sh
     ./bitwarden.sh install
 
+  # ?
+    `./bitwarden.sh start`
+
 fi
 
