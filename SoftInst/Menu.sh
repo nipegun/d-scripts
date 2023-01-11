@@ -5,75 +5,75 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-vFecha=$(date +A%YM%mD%d@%T)
 
-# Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${vColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
-    echo ""
-    apt-get -y update && apt-get -y install dialog
-    echo ""
-  fi
+  vFecha=$(date +A%YM%mD%d@%T)
 
-#menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
-menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
-  opciones=(
-    1 "Opción 1" on
-    2 "Opción 2" off
-    3 "Opción 3" off
-    4 "Opción 4" off
-    5 "Opción 5" off
-  )
-choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-#clear
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${vColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
 
-  for choice in $choices
-    do
-      case $choice in
+  #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+  menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+    opciones=(
+      1 "Opción 1" on
+      2 "Opción 2" off
+      3 "Opción 3" off
+      4 "Opción 4" off
+      5 "Opción 5" off
+    )
+  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+  #clear
 
-        1)
+    for choice in $choices
+      do
+        case $choice in
 
-          echo ""
-          echo "  Opción 1..."
-          echo ""
+          1)
 
-        ;;
+            echo ""
+            echo "  Opción 1..."
+            echo ""
 
-        2)
+          ;;
 
-          echo ""
-          echo "  Opción 2..."
-          echo ""
+          2)
 
-        ;;
+            echo ""
+            echo "  Opción 2..."
+            echo ""
 
-        3)
+          ;;
 
-          echo ""
-          echo "  Opción 3..."
-          echo ""
+          3)
 
-        ;;
+            echo ""
+            echo "  Opción 3..."
+            echo ""
 
-        4)
+          ;;
 
-          echo ""
-          echo "  Opción 4..."
-          echo ""
+          4)
 
-        ;;
+            echo ""
+            echo "  Opción 4..."
+            echo ""
 
-        5)
+          ;;
 
-          echo ""
-          echo "  Opción 5..."
-          echo ""
+          5)
 
-        ;;
+            echo ""
+            echo "  Opción 5..."
+            echo ""
 
+          ;;
 
-    esac
+      esac
 
-done
+  done
 
