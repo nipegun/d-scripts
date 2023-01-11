@@ -9,13 +9,13 @@
 #  Script de NiPeGun para instalar y configurar un cluster de bases de datos MariaDB en Debian
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-Cluster-MariaDB-InstalarYConfigurar.sh | bash
 #
 #  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-Cluster-MariaDB-InstalarYConfigurar.sh | bash
 #
 #  Ejecución remota con parámetros:
-#  curl -s x | bash -s Parámetro1 Parámetro2
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-Cluster-MariaDB-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 vColorAzul="\033[0;34m"
@@ -62,7 +62,7 @@ vFinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
@@ -72,7 +72,7 @@ if [ $OS_VERS == "7" ]; then
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
@@ -82,7 +82,7 @@ elif [ $OS_VERS == "8" ]; then
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
@@ -92,7 +92,7 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo ""
@@ -102,11 +102,81 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
-  echo ""
+  vFecha=$(date +A%YM%mD%d@%T)
+
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${vColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
+
+  #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+  menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+    opciones=(
+      1 "Instalar el servidor MariaDB." on
+      2 "Activar el cluster en el servidor 1." off
+      3 "Activar el cluster en el servidor 2." off
+      4 "Activar el cluster en el servidor 3" off
+      5 "Activar el cluster en el servidor 2" off
+    )
+  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+  #clear
+
+    for choice in $choices
+      do
+        case $choice in
+
+          1)
+
+            echo ""
+            echo "  Instalando el servidor MariaDB..."
+            echo ""
+            apt-get update && apt-get install mariadb-server
+
+          ;;
+
+          2)
+
+            echo ""
+            echo "  Activando en cluster en el servidor 1..."
+            echo ""
+
+          ;;
+
+          3)
+
+            echo ""
+            echo "  Activando en cluster en el servidor 2..."
+            echo ""
+
+          ;;
+
+          4)
+
+            echo ""
+            echo " Activando en cluster en el servidor 3..."
+            echo ""
+
+          ;;
+
+          5)
+
+            echo ""
+            echo "  Opción 5..."
+            echo ""
+
+          ;;
+
+
+      esac
+
+  done
 
 fi
+
