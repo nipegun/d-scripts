@@ -175,11 +175,22 @@ elif [ $OS_VERS == "11" ]; then
                 echo 'wsrep_node_address="$vIPLocal"'                           >> /etc/mysql/mariadb.conf.d/60-galera.cnf
                 echo 'wsrep_node_name=mariadb1'                                 >> /etc/mysql/mariadb.conf.d/60-galera.cnf
                 echo 'wsrep_sst_method=rsync'                                   >> /etc/mysql/mariadb.conf.d/60-galera.cnf
-           # Volver a iniciar el servicio mariadb
+            # Creando el cluster
+              echo ""
+              echo "    Inicializando el cluster..."
+              echo ""
+              galera_new_cluster
+            # Consultar el estado del cluster
+              echo ""
+              echo "  Consultar el estado del cluster..."
+              echo ""
+              
+            # Volver a iniciar el servicio mariadb
               echo ""
               echo "    Volviendo a iniciar el servicio mariadb..."
               echo ""
-              systemctl stop mariadb
+              systemctl start mariadb
+
           ;;
 
           3)
