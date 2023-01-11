@@ -24,6 +24,10 @@ vColorVerde='\033[1;32m'
 vColorRojo='\033[1;31m'
 vFinColor='\033[0m'
 
+vIP1=$1
+vIP2=$2
+vIP3=$3
+
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
     echo -e "${vColorRojo}Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
@@ -137,7 +141,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "  Instalando el servidor MariaDB..."
             echo ""
-            apt-get update && apt-get install mariadb-server
+            apt-get -y update && apt-get -y install mariadb-server
 
           ;;
 
@@ -146,6 +150,23 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "  Activando en cluster en el servidor 1..."
             echo ""
+            # Parar el servicio antes de hacer modificaciones
+              systemctl stop mariadb
+            # Responder consultas en todas las IPs
+              sed -i -e 's|bind-address|#bind-address|g' /etc/mysql/mariadb.conf.d/50-server.cnf
+            # Modificar la configuración del cluster
+              sed -i -e 's|#wsrep_on|wsrep_on|g'                                 /etc/mysql/mariadb.conf.d/60-galera.cnf
+              sed -i -e 's|#wsrep_cluster_name|wsrep_cluster_name|g'             /etc/mysql/mariadb.conf.d/60-galera.cnf
+              sed -i -e 's|#wsrep_cluster_address|wsrep_cluster_address|g'       /etc/mysql/mariadb.conf.d/60-galera.cnf
+              sed -i -e 's|#binlog_format|binlog_format|g'                       /etc/mysql/mariadb.conf.d/60-galera.cnf
+              sed -i -e 's|#default_storage_engine|default_storage_engine|g'     /etc/mysql/mariadb.conf.d/60-galera.cnf
+              sed -i -e 's|#innodb_autoinc_lock_mode|innodb_autoinc_lock_mode|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
+              sed -i -e 's|#bind-address|bind-address = 0.0.0.0|g'               /etc/mysql/mariadb.conf.d/60-galera.cnf
+
+              echo 'wsrep_provider = /usr/lib/galera/libgalera_smm.so' >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+              echo 'wsrep_node_address="192.168.0.9"'                  >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+              echo 'wsrep_node_name=mariadb1'                          >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+              echo 'wsrep_sst_method=rsync'                            >> /etc/mysql/mariadb.conf.d/60-galera.cnf
 
           ;;
 
@@ -154,6 +175,8 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "  Activando en cluster en el servidor 2..."
             echo ""
+            systemctl stop mariadb
+            sed -i -e 's|bind-address|#bind-address|g' /etc/mysql/mariadb.conf.d/50-server.cnf
 
           ;;
 
@@ -162,6 +185,8 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo " Activando en cluster en el servidor 3..."
             echo ""
+            systemctl stop mariadb
+            sed -i -e 's|bind-address|#bind-address|g' /etc/mysql/mariadb.conf.d/50-server.cnf
 
           ;;
 
