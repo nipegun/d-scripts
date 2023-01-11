@@ -161,12 +161,11 @@ elif [ $OS_VERS == "11" ]; then
               sed -i -e 's|#binlog_format|binlog_format|g'                       /etc/mysql/mariadb.conf.d/60-galera.cnf
               sed -i -e 's|#default_storage_engine|default_storage_engine|g'     /etc/mysql/mariadb.conf.d/60-galera.cnf
               sed -i -e 's|#innodb_autoinc_lock_mode|innodb_autoinc_lock_mode|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
-              sed -i -e 's|#bind-address|bind-address = 0.0.0.0|g'               /etc/mysql/mariadb.conf.d/60-galera.cnf
-
-              echo 'wsrep_provider = /usr/lib/galera/libgalera_smm.so' >> /etc/mysql/mariadb.conf.d/60-galera.cnf
-              echo 'wsrep_node_address="192.168.0.9"'                  >> /etc/mysql/mariadb.conf.d/60-galera.cnf
-              echo 'wsrep_node_name=mariadb1'                          >> /etc/mysql/mariadb.conf.d/60-galera.cnf
-              echo 'wsrep_sst_method=rsync'                            >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+              sed -i -e 's|#bind-address|bind-address|g'                         /etc/mysql/mariadb.conf.d/60-galera.cnf
+              echo 'wsrep_provider = /usr/lib/galera/libgalera_smm.so'        >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+              echo 'wsrep_node_address="192.168.0.9"'                         >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+              echo 'wsrep_node_name=mariadb1'                                 >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+              echo 'wsrep_sst_method=rsync'                                   >> /etc/mysql/mariadb.conf.d/60-galera.cnf
 
           ;;
 
