@@ -180,16 +180,18 @@ elif [ $OS_VERS == "11" ]; then
               echo "    Inicializando el cluster..."
               echo ""
               galera_new_cluster
-            # Consultar el estado del cluster
-              echo ""
-              echo "  Consultar el estado del cluster..."
-              echo ""
-              mysql -e "show status like 'wsrep_%';"
+            # Agregar las IPs de todos los servidores que van a conformar el cluster
+              sed -i -e 's|gcomm://|gcomm://$vIP1,$vIP2,$vIP3|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
             # Volver a iniciar el servicio mariadb
               echo ""
               echo "    Volviendo a iniciar el servicio mariadb..."
               echo ""
               systemctl start mariadb
+            # Consultar el estado del cluster
+              echo ""
+              echo "  Consultar el estado del cluster..."
+              echo ""
+              mysql -e "show status like 'wsrep_%';"
 
           ;;
 
@@ -198,8 +200,43 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "  Activando en cluster en el servidor 2..."
             echo ""
-            systemctl stop mariadb
-            sed -i -e 's|bind-address|#bind-address|g' /etc/mysql/mariadb.conf.d/50-server.cnf
+            # Obtener la IP local del servidor
+              vIPLocal=$(hostname -I)
+            # Parar el servicio antes de hacer modificaciones
+              echo ""
+              echo "    Parando el servicio mariadb..."
+              echo ""
+              systemctl stop mariadb
+            # Realizar modificaciones en archivos de configuración
+              echo ""
+              echo "    Realizando modificaciones en archivos de configuración..."
+              echo ""
+              # Responder consultas en todas las IPs
+                sed -i -e 's|bind-address|#bind-address|g' /etc/mysql/mariadb.conf.d/50-server.cnf
+              # Modificar la configuración del cluster
+                sed -i -e 's|#wsrep_on|wsrep_on|g'                                 /etc/mysql/mariadb.conf.d/60-galera.cnf
+                sed -i -e 's|#wsrep_cluster_name|wsrep_cluster_name|g'             /etc/mysql/mariadb.conf.d/60-galera.cnf
+                sed -i -e 's|#wsrep_cluster_address|wsrep_cluster_address|g'       /etc/mysql/mariadb.conf.d/60-galera.cnf
+                sed -i -e 's|#binlog_format|binlog_format|g'                       /etc/mysql/mariadb.conf.d/60-galera.cnf
+                sed -i -e 's|#default_storage_engine|default_storage_engine|g'     /etc/mysql/mariadb.conf.d/60-galera.cnf
+                sed -i -e 's|#innodb_autoinc_lock_mode|innodb_autoinc_lock_mode|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
+                sed -i -e 's|#bind-address|bind-address|g'                         /etc/mysql/mariadb.conf.d/60-galera.cnf
+                echo 'wsrep_provider = /usr/lib/galera/libgalera_smm.so'        >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+                echo 'wsrep_node_address="$vIPLocal"'                           >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+                echo 'wsrep_node_name=mariadb2'                                 >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+                echo 'wsrep_sst_method=rsync'                                   >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+            # Agregar las IPs de todos los servidores que van a conformar el cluster
+              sed -i -e 's|gcomm://|gcomm://$vIP1,$vIP2,$vIP3|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
+            # Volver a iniciar el servicio mariadb
+              echo ""
+              echo "    Volviendo a iniciar el servicio mariadb..."
+              echo ""
+              systemctl start mariadb
+            # Consultar el estado del cluster
+              echo ""
+              echo "  Consultar el estado del cluster..."
+              echo ""
+              mysql -e "show status like 'wsrep_%';"
 
           ;;
 
@@ -208,8 +245,44 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo " Activando en cluster en el servidor 3..."
             echo ""
-            systemctl stop mariadb
-            sed -i -e 's|bind-address|#bind-address|g' /etc/mysql/mariadb.conf.d/50-server.cnf
+            # Obtener la IP local del servidor
+              vIPLocal=$(hostname -I)
+            # Parar el servicio antes de hacer modificaciones
+              echo ""
+              echo "    Parando el servicio mariadb..."
+              echo ""
+              systemctl stop mariadb
+            # Realizar modificaciones en archivos de configuración
+              echo ""
+              echo "    Realizando modificaciones en archivos de configuración..."
+              echo ""
+              # Responder consultas en todas las IPs
+                sed -i -e 's|bind-address|#bind-address|g' /etc/mysql/mariadb.conf.d/50-server.cnf
+              # Modificar la configuración del cluster
+                sed -i -e 's|#wsrep_on|wsrep_on|g'                                 /etc/mysql/mariadb.conf.d/60-galera.cnf
+                sed -i -e 's|#wsrep_cluster_name|wsrep_cluster_name|g'             /etc/mysql/mariadb.conf.d/60-galera.cnf
+                sed -i -e 's|#wsrep_cluster_address|wsrep_cluster_address|g'       /etc/mysql/mariadb.conf.d/60-galera.cnf
+                sed -i -e 's|#binlog_format|binlog_format|g'                       /etc/mysql/mariadb.conf.d/60-galera.cnf
+                sed -i -e 's|#default_storage_engine|default_storage_engine|g'     /etc/mysql/mariadb.conf.d/60-galera.cnf
+                sed -i -e 's|#innodb_autoinc_lock_mode|innodb_autoinc_lock_mode|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
+                sed -i -e 's|#bind-address|bind-address|g'                         /etc/mysql/mariadb.conf.d/60-galera.cnf
+                echo 'wsrep_provider = /usr/lib/galera/libgalera_smm.so'        >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+                echo 'wsrep_node_address="$vIPLocal"'                           >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+                echo 'wsrep_node_name=mariadb3'                                 >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+                echo 'wsrep_sst_method=rsync'                                   >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+            # Agregar las IPs de todos los servidores que van a conformar el cluster
+              sed -i -e 's|gcomm://|gcomm://$vIP1,$vIP2,$vIP3|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
+            # Volver a iniciar el servicio mariadb
+              echo ""
+              echo "    Volviendo a iniciar el servicio mariadb..."
+              echo ""
+              systemctl start mariadb
+            # Consultar el estado del cluster
+              echo ""
+              echo "  Consultar el estado del cluster..."
+              echo ""
+              mysql -e "show status like 'wsrep_%';"
+
 
           ;;
 
