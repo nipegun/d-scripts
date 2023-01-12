@@ -283,7 +283,6 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               mysql -e "show status like 'wsrep_%';"
 
-
           ;;
 
           5)
