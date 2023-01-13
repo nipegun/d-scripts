@@ -18,6 +18,9 @@
 vEstadoServBD=$(systemctl status mariadb.service | grep "atus:" | cut -d'"' -f2)
 
 if [[ $vEstadoServBD == "MariaDB server is down" ]]; then
+  echo ""
+  echo "  El servidor MariaDB está caido. Intentando levantarlo..."
+  echo ""
   systemctl start mariadb
 fi
 
