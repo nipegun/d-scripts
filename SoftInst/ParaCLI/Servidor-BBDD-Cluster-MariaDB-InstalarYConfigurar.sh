@@ -317,3 +317,10 @@ elif [ $OS_VERS == "11" ]; then
 
 fi
 
+echo ""
+echo "  Script finalizado."
+echo ""
+echo "  Si todo resulto correcto, recuerda permitir en cada nodo el tráfico mediante los siguientes puertos:"
+echo "  3306, 4567,4568 y 4444"
+echo ""
+
