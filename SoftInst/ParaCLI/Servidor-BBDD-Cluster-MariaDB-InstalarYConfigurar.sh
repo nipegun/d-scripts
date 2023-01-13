@@ -123,11 +123,10 @@ elif [ $OS_VERS == "11" ]; then
   #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
-      1 "Instalar el servidor MariaDB." on
-      2 "Activar el cluster en el servidor 1." off
-      3 "Activar el cluster en el servidor 2." off
-      4 "Activar el cluster en el servidor 3" off
-      5 "Activar el cluster en el servidor 2" off
+      1 "Activar el cluster en el nodo 1 (Ejecutar sólo en el servidor 1)." off
+      2 "Activar el cluster en el nodo 2 (Ejecutar sólo en el servidor 2)." off
+      3 "Activar el cluster en el nodo 3 (Ejecutar sólo en el servidor 3)." off
+      4 "Instalar y configurar el nodo HAProxy (Ejecutar s)." off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   #clear
@@ -139,17 +138,18 @@ elif [ $OS_VERS == "11" ]; then
           1)
 
             echo ""
-            echo "  Instalando el servidor MariaDB..."
-            echo ""
-            apt-get -y update && apt-get -y install mariadb-server
-
-          ;;
-
-          2)
-
-            echo ""
             echo "  Activando en cluster en el servidor 1..."
             echo ""
+
+            # Comprobar si el paquete mariadb-server está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s mariadb-server 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${vColorRojo}El paquete mariadb-server no está instalado. Iniciando su instalación...${vFinColor}"
+                echo ""
+                apt-get -y update && apt-get -y install mariadb-server
+                echo ""
+              fi
+
             # Obtener la IP local del servidor
               vIPLocal=$(hostname -I)
             # Parar el servicio antes de hacer modificaciones
@@ -157,6 +157,11 @@ elif [ $OS_VERS == "11" ]; then
               echo "    Parando el servicio mariadb..."
               echo ""
               systemctl stop mariadb
+            # Securizando la instalación de MariaDB del nodo
+              echo ""
+              echo "    Securizando la instalación de MariaDB del nodo..."
+              echo ""
+              mysql_secure_installation
             # Realizar modificaciones en archivos de configuración
               echo ""
               echo "    Realizando modificaciones en archivos de configuración..."
@@ -201,11 +206,21 @@ elif [ $OS_VERS == "11" ]; then
 
           ;;
 
-          3)
+          2)
 
             echo ""
             echo "  Activando en cluster en el servidor 2..."
             echo ""
+
+            # Comprobar si el paquete mariadb-server está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s mariadb-server 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${vColorRojo}El paquete mariadb-server no está instalado. Iniciando su instalación...${vFinColor}"
+                echo ""
+                apt-get -y update && apt-get -y install mariadb-server
+                echo ""
+              fi
+
             # Obtener la IP local del servidor
               vIPLocal=$(hostname -I)
             # Parar el servicio antes de hacer modificaciones
@@ -213,6 +228,14 @@ elif [ $OS_VERS == "11" ]; then
               echo "    Parando el servicio mariadb..."
               echo ""
               systemctl stop mariadb
+            # Securizando la instalación de MariaDB del nodo
+              #echo ""
+              #echo "    Securizando la instalación de MariaDB del nodo..."
+              #echo ""
+              #mysql_secure_installation
+              # Nota: En los nodos posteriores no hace falta configurar ni usuario root ni la bases de datos.
+              #       La primera vez que el nuevo nodo se conecta al cluster, copia todo del primer nodo configurado,
+              #       incluido el usuario root (con su contraseña) y todas las bases de datos.
             # Realizar modificaciones en archivos de configuración
               echo ""
               echo "    Realizando modificaciones en archivos de configuración..."
@@ -252,11 +275,21 @@ elif [ $OS_VERS == "11" ]; then
 
           ;;
 
-          4)
+          3)
 
             echo ""
             echo " Activando en cluster en el servidor 3..."
             echo ""
+
+            # Comprobar si el paquete mariadb-server está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s mariadb-server 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${vColorRojo}El paquete mariadb-server no está instalado. Iniciando su instalación...${vFinColor}"
+                echo ""
+                apt-get -y update && apt-get -y install mariadb-server
+                echo ""
+              fi
+
             # Obtener la IP local del servidor
               vIPLocal=$(hostname -I)
             # Parar el servicio antes de hacer modificaciones
@@ -264,6 +297,14 @@ elif [ $OS_VERS == "11" ]; then
               echo "    Parando el servicio mariadb..."
               echo ""
               systemctl stop mariadb
+            # Securizando la instalación de MariaDB del nodo
+              #echo ""
+              #echo "    Securizando la instalación de MariaDB del nodo..."
+              #echo ""
+              #mysql_secure_installation
+              # Nota: En los nodos posteriores no hace falta configurar ni usuario root ni la bases de datos.
+              #       La primera vez que el nuevo nodo se conecta al cluster, copia todo del primer nodo configurado,
+              #       incluido el usuario root (con su contraseña) y todas las bases de datos.
             # Realizar modificaciones en archivos de configuración
               echo ""
               echo "    Realizando modificaciones en archivos de configuración..."
@@ -303,7 +344,7 @@ elif [ $OS_VERS == "11" ]; then
 
           ;;
 
-          5)
+          4)
 
             echo ""
             echo "  Opción 5..."
