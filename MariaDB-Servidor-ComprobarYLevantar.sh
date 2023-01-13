@@ -9,10 +9,10 @@
 #  Script de NiPeGun para comprobar si un servidor MariaDB está caido y, si eso, 
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/APTKey-BajarEInstalar.sh | bash -s URL Servicio
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/MariaDB-Servidor-ComprobarYLevantar.sh | bash -s URL Servicio
 #
 #  Ejemplo:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/APTKey-BajarEInstalar.sh | bash -s https://nightly.odoo.com/odoo.key Odoo
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/MariaDB-Servidor-ComprobarYLevantar.sh | bash -s https://nightly.odoo.com/odoo.key Odoo
 # ----------
 
 vEstadoServBD=$(systemctl status mariadb.service | grep "atus:" | cut -d'"' -f2)
