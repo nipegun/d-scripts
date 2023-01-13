@@ -189,9 +189,15 @@ elif [ $OS_VERS == "11" ]; then
               systemctl start mariadb
             # Consultar el estado del cluster
               echo ""
-              echo "  Consultar el estado del cluster..."
+              echo "    Consultando el estado del cluster..."
               echo ""
               mysql -e "show status like 'wsrep_%';"
+            # Agregar comandos a ejecutarse al inicio del servidor
+              echo ""
+              echo "    Agregando comandos a ejecutarse en cada inicio de Debian..."
+              echo ""
+              echo "# Re-inicializar el cluster" >> /root/scripts/ComandosPostArranque.sh
+              echo "  galera_new_cluster"        >> /root/scripts/ComandosPostArranque.sh
 
           ;;
 
@@ -234,9 +240,15 @@ elif [ $OS_VERS == "11" ]; then
               systemctl start mariadb
             # Consultar el estado del cluster
               echo ""
-              echo "  Consultar el estado del cluster..."
+              echo "    Consultar el estado del cluster..."
               echo ""
               mysql -e "show status like 'wsrep_%';"
+            # Agregar el script para reiniciar el cluster en nodos secundarios.
+              echo ""
+              echo "    Agregar el script para reiniciar el cluster en nodos secundarios..."
+              echo ""
+              echo "/root/scripts/d-scripts/MariaDB-Servidor-ComprobarYLevantar.sh" >> /root/scripts/ComandosPostArranque.sh
+              echo "/root/scripts/d-scripts/MariaDB-Servidor-ComprobarYLevantar.sh" >> /root/scripts/TareasCronCadaMinuto.sh
 
           ;;
 
@@ -282,6 +294,12 @@ elif [ $OS_VERS == "11" ]; then
               echo "  Consultar el estado del cluster..."
               echo ""
               mysql -e "show status like 'wsrep_%';"
+            # Agregar el script para reiniciar el cluster en nodos secundarios.
+              echo ""
+              echo "    Agregar el script para reiniciar el cluster en nodos secundarios..."
+              echo ""
+              echo "/root/scripts/d-scripts/MariaDB-Servidor-ComprobarYLevantar.sh" >> /root/scripts/ComandosPostArranque.sh
+              echo "/root/scripts/d-scripts/MariaDB-Servidor-ComprobarYLevantar.sh" >> /root/scripts/TareasCronCadaMinuto.sh
 
           ;;
 
@@ -292,7 +310,6 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
 
           ;;
-
 
       esac
 
