@@ -126,7 +126,7 @@ elif [ $OS_VERS == "11" ]; then
       1 "Activar el cluster en el nodo 1 (Ejecutar sólo en el servidor 1)." off
       2 "Activar el cluster en el nodo 2 (Ejecutar sólo en el servidor 2)." off
       3 "Activar el cluster en el nodo 3 (Ejecutar sólo en el servidor 3)." off
-      4 "Instalar y configurar el nodo HAProxy (Ejecutar s)." off
+      4 "Instalar y configurar el nodo HAProxy (Ejecutar sólo en el nodo HAproxy)." off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   #clear
