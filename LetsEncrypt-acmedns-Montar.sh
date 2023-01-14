@@ -9,13 +9,13 @@
 #  Script de NiPeGun para instalar y configurar en Debian el servidor acme-dns para obtener certificados sin posibilidad de los challenges HTTP-01 y DNS-01
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/LetsEncrypt-acmedns-Montar.sh | bash
 #
 #  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/LetsEncrypt-acmedns-Montar.sh | bash
 #
 #  Ejecución remota con parámetros:
-#  curl -s x | bash -s Parámetro1 Parámetro2
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/LetsEncrypt-acmedns-Montar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 vColorAzul="\033[0;34m"
@@ -106,7 +106,8 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo ""
   echo ""
 
 fi
+
