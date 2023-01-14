@@ -350,6 +350,15 @@ elif [ $OS_VERS == "11" ]; then
             echo "  Opción 5..."
             echo ""
 
+            # listen galera-cluster
+            # bind *:3306
+            # mode tcp
+            # option mysql-check user haproxy
+            # balance roundrobin
+            # server mariadb1 192.168.0.9:3306 check
+            # server mariadb2 192.168.0.11:3306 check
+            # server mariadb3 192.168.0.12:3306 check
+
           ;;
 
       esac
