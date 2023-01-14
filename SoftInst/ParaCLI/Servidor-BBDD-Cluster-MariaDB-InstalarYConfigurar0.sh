@@ -106,7 +106,7 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del cluster MariaDB con Galera para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   vFecha=$(date +A%YM%mD%d@%T)
@@ -114,7 +114,7 @@ elif [ $OS_VERS == "11" ]; then
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${vColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo -e "${vColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
       echo ""
       apt-get -y update && apt-get -y install dialog
       echo ""
@@ -144,7 +144,7 @@ elif [ $OS_VERS == "11" ]; then
             # Comprobar si el paquete mariadb-server está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s mariadb-server 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo -e "${vColorRojo}El paquete mariadb-server no está instalado. Iniciando su instalación...${vFinColor}"
+                echo -e "${vColorRojo}    El paquete mariadb-server no está instalado. Iniciando su instalación...${vFinColor}"
                 echo ""
                 apt-get -y update && apt-get -y install mariadb-server
                 echo ""
@@ -177,7 +177,7 @@ elif [ $OS_VERS == "11" ]; then
                 sed -i -e 's|#innodb_autoinc_lock_mode|innodb_autoinc_lock_mode|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
                 sed -i -e 's|#bind-address|bind-address|g'                         /etc/mysql/mariadb.conf.d/60-galera.cnf
                 echo 'wsrep_provider = /usr/lib/galera/libgalera_smm.so'        >> /etc/mysql/mariadb.conf.d/60-galera.cnf
-                echo 'wsrep_node_address="$vIPLocal"'                           >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+                echo "wsrep_node_address=$vIPLocal"                             >> /etc/mysql/mariadb.conf.d/60-galera.cnf
                 echo 'wsrep_node_name=mariadb1'                                 >> /etc/mysql/mariadb.conf.d/60-galera.cnf
                 echo 'wsrep_sst_method=rsync'                                   >> /etc/mysql/mariadb.conf.d/60-galera.cnf
             # Creando el cluster
@@ -186,7 +186,7 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               galera_new_cluster
             # Agregar las IPs de todos los servidores que van a conformar el cluster
-              sed -i -e 's|gcomm://|gcomm://$vIP1,$vIP2,$vIP3|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
+              sed -i -e "s|gcomm://|gcomm://$vIP1,$vIP2,$vIP3|g" /etc/mysql/mariadb.conf.d/60-galera.cnf
             # Volver a iniciar el servicio mariadb
               echo ""
               echo "    Volviendo a iniciar el servicio mariadb..."
@@ -215,7 +215,7 @@ elif [ $OS_VERS == "11" ]; then
             # Comprobar si el paquete mariadb-server está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s mariadb-server 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo -e "${vColorRojo}El paquete mariadb-server no está instalado. Iniciando su instalación...${vFinColor}"
+                echo -e "${vColorRojo}    El paquete mariadb-server no está instalado. Iniciando su instalación...${vFinColor}"
                 echo ""
                 apt-get -y update && apt-get -y install mariadb-server
                 echo ""
@@ -251,11 +251,11 @@ elif [ $OS_VERS == "11" ]; then
                 sed -i -e 's|#innodb_autoinc_lock_mode|innodb_autoinc_lock_mode|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
                 sed -i -e 's|#bind-address|bind-address|g'                         /etc/mysql/mariadb.conf.d/60-galera.cnf
                 echo 'wsrep_provider = /usr/lib/galera/libgalera_smm.so'        >> /etc/mysql/mariadb.conf.d/60-galera.cnf
-                echo 'wsrep_node_address="$vIPLocal"'                           >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+                echo "wsrep_node_address=$vIPLocal"                             >> /etc/mysql/mariadb.conf.d/60-galera.cnf
                 echo 'wsrep_node_name=mariadb2'                                 >> /etc/mysql/mariadb.conf.d/60-galera.cnf
                 echo 'wsrep_sst_method=rsync'                                   >> /etc/mysql/mariadb.conf.d/60-galera.cnf
             # Agregar las IPs de todos los servidores que van a conformar el cluster
-              sed -i -e 's|gcomm://|gcomm://$vIP1,$vIP2,$vIP3|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
+              sed -i -e "s|gcomm://|gcomm://$vIP1,$vIP2,$vIP3|g" /etc/mysql/mariadb.conf.d/60-galera.cnf
             # Volver a iniciar el servicio mariadb
               echo ""
               echo "    Volviendo a iniciar el servicio mariadb..."
@@ -284,7 +284,7 @@ elif [ $OS_VERS == "11" ]; then
             # Comprobar si el paquete mariadb-server está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s mariadb-server 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo -e "${vColorRojo}El paquete mariadb-server no está instalado. Iniciando su instalación...${vFinColor}"
+                echo -e "${vColorRojo}    El paquete mariadb-server no está instalado. Iniciando su instalación...${vFinColor}"
                 echo ""
                 apt-get -y update && apt-get -y install mariadb-server
                 echo ""
@@ -320,11 +320,11 @@ elif [ $OS_VERS == "11" ]; then
                 sed -i -e 's|#innodb_autoinc_lock_mode|innodb_autoinc_lock_mode|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
                 sed -i -e 's|#bind-address|bind-address|g'                         /etc/mysql/mariadb.conf.d/60-galera.cnf
                 echo 'wsrep_provider = /usr/lib/galera/libgalera_smm.so'        >> /etc/mysql/mariadb.conf.d/60-galera.cnf
-                echo 'wsrep_node_address="$vIPLocal"'                           >> /etc/mysql/mariadb.conf.d/60-galera.cnf
+                echo "wsrep_node_address=$vIPLocal"                             >> /etc/mysql/mariadb.conf.d/60-galera.cnf
                 echo 'wsrep_node_name=mariadb3'                                 >> /etc/mysql/mariadb.conf.d/60-galera.cnf
                 echo 'wsrep_sst_method=rsync'                                   >> /etc/mysql/mariadb.conf.d/60-galera.cnf
             # Agregar las IPs de todos los servidores que van a conformar el cluster
-              sed -i -e 's|gcomm://|gcomm://$vIP1,$vIP2,$vIP3|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
+              sed -i -e "s|gcomm://|gcomm://$vIP1,$vIP2,$vIP3|g" /etc/mysql/mariadb.conf.d/60-galera.cnf
             # Volver a iniciar el servicio mariadb
               echo ""
               echo "    Volviendo a iniciar el servicio mariadb..."
