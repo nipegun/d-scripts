@@ -208,7 +208,7 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "    Creando el usuario para monitorizar con HAProxy..."
               echo ""
-              mysql -e "create user 'haproxy'@'"$vIPHAProxy"';
+              mysql -e "create user 'haproxy'@'"$vIPHAProxy"'";
 
           ;;
 
@@ -365,6 +365,13 @@ elif [ $OS_VERS == "11" ]; then
             # server mariadb2 192.168.0.11:3306 check
             # server mariadb3 192.168.0.12:3306 check
 
+            # Para WordPress, en el nodo principal
+              # create user 'wordpress'@'IPDeHAProxy' identified by 'P@ssw0rd';
+              # grant all privileges on wordpress.* to 'wordpress'@'IPDeHaProxy';
+              # create user 'otrousuario'@'IPDeHAProxy' identified by 'P@ssw0rd';
+              # grant all privileges on otratabla.* to 'otrousuario'@'IPDeHaProxy';
+              #
+              # Todos los usuarios deben ser creados para la IP de HAProxy
           ;;
 
       esac
