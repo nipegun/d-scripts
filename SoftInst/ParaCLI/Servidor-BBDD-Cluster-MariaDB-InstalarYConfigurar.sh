@@ -204,7 +204,7 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "# Re-inicializar el cluster" >> /root/scripts/ComandosPostArranque.sh
               echo "  galera_new_cluster"        >> /root/scripts/ComandosPostArranque.sh
-            # Crear usuario para monitorizar con haproxy
+            # Crear usuario en la bases de datos para monitorizar con haproxy
               echo ""
               echo "    Creando el usuario para monitorizar con HAProxy..."
               echo ""
@@ -353,17 +353,20 @@ elif [ $OS_VERS == "11" ]; then
           4)
 
             echo ""
-            echo "  Opción 5..."
+            echo "  Instalando y configurando el nodo HAProxy..."
             echo ""
 
             # listen galera-cluster
-            # bind *:3306
-            # mode tcp
-            # option mysql-check user haproxy
-            # balance roundrobin
-            # server mariadb1 192.168.0.9:3306 check
-            # server mariadb2 192.168.0.11:3306 check
-            # server mariadb3 192.168.0.12:3306 check
+            #   bind *:3306
+            #   mode tcp
+            #   option mysql-check user haproxy
+            #   option tcpka
+            #   # balance first
+            #   # balance roundrobin
+            #   balance source
+            #   server node1 192.168.0.9:3306  check weight 1
+            #   server node2 192.168.0.11:3306 check weight 1
+            #   server node3 192.168.0.12:3306 check weight 1
 
             # Para WordPress, en el nodo principal
               # create user 'wordpress'@'IPDeHAProxy' identified by 'P@ssw0rd';
