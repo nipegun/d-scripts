@@ -27,6 +27,7 @@ vFinColor='\033[0m'
 vIP1=$1
 vIP2=$2
 vIP3=$3
+vIPHAProxy=$4
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
@@ -203,6 +204,11 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "# Re-inicializar el cluster" >> /root/scripts/ComandosPostArranque.sh
               echo "  galera_new_cluster"        >> /root/scripts/ComandosPostArranque.sh
+            # Crear usuario para monitorizar con haproxy
+              echo ""
+              echo "    Creando el usuario para monitorizar con HAProxy..."
+              echo ""
+              mysql -e "create user 'haproxy'@'"$vIPHAProxy"';
 
           ;;
 
