@@ -107,7 +107,7 @@ elif [ $OS_VERS == "11" ]; then
 
   apt-get -y install postfix
   apt-get -y install dovecot-imapd
-  apt-get -y install dovecot-pop3d
+  #apt-get -y install dovecot-pop3d
   #dpkg-reconfigure postfix
     # -> Sitio de intenet
     # -> festivalehz.ddns.net 
@@ -134,9 +134,83 @@ elif [ $OS_VERS == "11" ]; then
   #mysql -uroot -prootMySQL -e "update mysql.user set plugin='' where user = 'root';"
   mysql -e "create user 'roundcube'@'localhost' identified by 'roundcube';"
   mysql -e "grant all privileges on mysql.* to 'roundcube'@'localhost';"
+  mysql -e "create database roundcube;"
   mysql -e "grant all privileges on roundcube.* to 'roundcube'@'localhost'";
   apt-get -y install roundcube
     # dbconfig common, si, app
+    # TCP/IP
+    # Servidor de bases de datos para roundcube: localhost
+    # Número de puerto del servicio mysql: 3306
+    # Authentication: mysql_native_password
+    # Nombre de la base de datos: roundcube
+    # Usuario roundcube @ localhost
+    # contraseña de aplicación: roundcube (Es la contraseña de :identified by 'roundcube')
+  sed -i -e 's-#    Alias /roundcube /var/lib/roundcube/public_html-Alias /roundcube /var/lib/roundcube/public_html-g' /etc/roundcube/apache.conf
+  service apache2 restart
+  adduser nico
+  adduser pablo
+  adduser gorka
+
+  # Instalar paquetes
+    apt-get -y install roundcube
+    apt-get -y install roundcube-mysql
+    apt-get -y install roundcube-plugins
+  # Poner la configuracion de la base de datos 
+    sed -i -e 's---g' /etc/roundcube/config.inc.php
+  # 
+
+
+  # Configurar el servidor DNS, dado que las cuentas de correo no pueden funcionar con direcciones IP
+    # 
+  # Instalar el servidor de bases de datos
+    apt-get -y install mariadb-server
+  # Instalar roundcube (asume que la contraseña root de MySQL está vacía, si no, debería preguntar la contraseña root)
+    apt-get -y install roundcube
+      # dbconfig-common: si
+      # Poner contraseña de aplicación.
+  # Activar el alias para ingresar mediante /roundcube
+    sed -i -e 's-#    Alias /roundcube /var/lib/roundcube/public_html-Alias /roundcube /var/lib/roundcube/public_html-g' /etc/roundcube/apache.conf
+    service apache2 restart
+  # Instalar el demonio para IMAP
+    apt-get -y install dovecot-imapd
+  # Modificar la configuración
+    #sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'localhost';|g'               /etc/roundcube/config.inc.php
+    sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'correo.festivalehz.local';|g' /etc/roundcube/config.inc.php
+    sed -i -e 's|$config['smtp_port'] = 587;|$config['smtp_port'] = 25;|g'                              /etc/roundcube/config.inc.php
+    sed -i -e 's|$config['smtp_user'] = '%u';|$config['smtp_user'] = '';|g'                             /etc/roundcube/config.inc.php
+   
+
+
+
+
+
+
+
+
+
+    
+    
+  echo "virtual_alias_maps = mysql:/etc/postfix/mysql-virtual-alias-maps.cf"     >> /etc/postfix/main.cf
+  echo "virtual_mailbox_maps = mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf" >> /etc/postfix/main.cf
+  echo "user = roundcube"                                                   > /etc/postfix/mysql-virtual-alias-maps.cf
+  echo "password = raizraiz"                                               >> /etc/postfix/mysql-virtual-alias-maps.cf
+  echo "hosts = localhost"                                                 >> /etc/postfix/mysql-virtual-alias-maps.cf
+  echo "dbname = roundcube"                                                >> /etc/postfix/mysql-virtual-alias-maps.cf
+  echo "query = SELECT destination FROM virtual_aliases WHERE source='%s'" >> /etc/postfix/mysql-virtual-alias-maps.cf
+  echo "user = roundcube"                                                   > /etc/postfix/mysql-virtual-mailbox-maps.cf
+  echo "password = raizraiz"                                               >> /etc/postfix/mysql-virtual-mailbox-maps.cf
+  echo "hosts = localhost"                                                 >> /etc/postfix/mysql-virtual-mailbox-maps.cf
+  echo "dbname = roundcube"                                                >> /etc/postfix/mysql-virtual-mailbox-maps.cf
+  echo "query = SELECT maildir FROM virtual_users WHERE email='%s'"        >> /etc/postfix/mysql-virtual-mailbox-maps.cf
+  systemctl restart postfix
+  
+  # Indicar el servidor IMAP y SMTP en el archivo de confioguración de roundcube
+    sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'tuservidor';|g'        /etc/roundcube/config.inc.php
+    sed -i -e 's|$config['smtp_server'] = 'localhost';|$config['smtp_server'] = 'tuservidor';|g' /etc/roundcube/config.inc.php
+  #apt-get install roundcube-plugins
+  echo "home_mailbox = Maildir/" >> /etc/postfix/main.cf
+  maildirmake.dovecot /etc/skel/Maildir
+apt-get -y install postfix
 
 fi
 
