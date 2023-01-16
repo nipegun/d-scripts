@@ -105,6 +105,49 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
+
+  # Configurar el servidor DNS, dado que las cuentas de correo no pueden funcionar con direcciones IP
+    # 
+  # Instalar el servidor de bases de datos
+    apt-get -y install mariadb-server
+  # Instalar roundcube (asume que la contraseña root de MySQL está vacía, si no, debería preguntar la contraseña root)
+    apt-get -y install roundcube
+      # dbconfig-common: si
+      # Poner contraseña de aplicación.
+  # Activar el alias para ingresar mediante /roundcube
+    sed -i -e 's-#    Alias /roundcube /var/lib/roundcube/public_html-Alias /roundcube /var/lib/roundcube/public_html-g' /etc/roundcube/apache.conf
+    service apache2 restart
+  # Instalar el demonio para IMAP
+    apt-get -y install dovecot-imapd
+  # Modificar la configuración
+    #sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'localhost';|g'               /etc/roundcube/config.inc.php
+    sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'correo.festivalehz.local';|g' /etc/roundcube/config.inc.php
+    sed -i -e 's|$config['smtp_port'] = 587;|$config['smtp_port'] = 25;|g'                              /etc/roundcube/config.inc.php
+    sed -i -e 's|$config['smtp_user'] = '%u';|$config['smtp_user'] = '';|g'                             /etc/roundcube/config.inc.php
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   apt-get -y install postfix
   apt-get -y install dovecot-imapd
   #apt-get -y install dovecot-pop3d
@@ -160,24 +203,6 @@ elif [ $OS_VERS == "11" ]; then
   # 
 
 
-  # Configurar el servidor DNS, dado que las cuentas de correo no pueden funcionar con direcciones IP
-    # 
-  # Instalar el servidor de bases de datos
-    apt-get -y install mariadb-server
-  # Instalar roundcube (asume que la contraseña root de MySQL está vacía, si no, debería preguntar la contraseña root)
-    apt-get -y install roundcube
-      # dbconfig-common: si
-      # Poner contraseña de aplicación.
-  # Activar el alias para ingresar mediante /roundcube
-    sed -i -e 's-#    Alias /roundcube /var/lib/roundcube/public_html-Alias /roundcube /var/lib/roundcube/public_html-g' /etc/roundcube/apache.conf
-    service apache2 restart
-  # Instalar el demonio para IMAP
-    apt-get -y install dovecot-imapd
-  # Modificar la configuración
-    #sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'localhost';|g'               /etc/roundcube/config.inc.php
-    sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'correo.festivalehz.local';|g' /etc/roundcube/config.inc.php
-    sed -i -e 's|$config['smtp_port'] = 587;|$config['smtp_port'] = 25;|g'                              /etc/roundcube/config.inc.php
-    sed -i -e 's|$config['smtp_user'] = '%u';|$config['smtp_user'] = '';|g'                             /etc/roundcube/config.inc.php
    
 
 
