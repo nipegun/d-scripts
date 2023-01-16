@@ -120,12 +120,14 @@ elif [ $OS_VERS == "11" ]; then
   # Instalar el demonio para IMAP
     apt-get -y install dovecot-imapd
   # Modificar la configuración
-    #sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'localhost';|g'               /etc/roundcube/config.inc.php
-    sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'correo.festivalehz.local';|g' /etc/roundcube/config.inc.php
-    sed -i -e 's|$config['smtp_port'] = 587;|$config['smtp_port'] = 25;|g'                              /etc/roundcube/config.inc.php
-    sed -i -e 's|$config['smtp_user'] = '%u';|$config['smtp_user'] = '';|g'                             /etc/roundcube/config.inc.php
-
-
+    #sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'localhost';|g'                                            /etc/roundcube/config.inc.php
+    sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'correo.festivalehz.local';|g'                              /etc/roundcube/config.inc.php
+    sed -i -e 's|$config['smtp_port'] = 587;|$config['smtp_port'] = 25;|g'                                                           /etc/roundcube/config.inc.php
+    sed -i -e 's|$config['smtp_user'] = '%u';|$config['smtp_user'] = '';|g'                                                          /etc/roundcube/config.inc.php
+    sed -i -e 's|$config['plugins'] = array(|$config['plugins'] = array(\n'archive',\n'zipdownload',\n'managesieve',\n'password',|g' /etc/roundcube/config.inc.php
+    echo ""                                                                                                                       >> /etc/roundcube/config.inc.php
+    echo ""'$config'"['session_lifetime'] = 60;"                                                                                  >> /etc/roundcube/config.inc.php
+    echo ""'$config'"['skin_logo'] = './ispmail-logo.png';"                                                                       >> /etc/roundcube/config.inc.php
 
 
 
