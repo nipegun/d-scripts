@@ -108,7 +108,7 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install postfix
   apt-get -y install dovecot-imapd
   apt-get -y install dovecot-pop3d
-  dpkg-reconfigure postfix
+  #dpkg-reconfigure postfix
     # -> Sitio de intenet
     # -> festivalehz.ddns.net 
     # -> En blanco
@@ -123,6 +123,20 @@ elif [ $OS_VERS == "11" ]; then
   sed -i -e 's|#   mail_location = maildir:~/Maildir|mail_location = maildir:~/Maildir|g' /etc/dovecot/conf.d/10-mail.conf
   service dovecot restart
   service postfix restart
+
+  apt-get -y install mariadb-server
+  apt-get -y install mariadb-client
+  apt-get -y install phpmyadmin
+    # Marcar apache2
+    # Configurar la base para dbconfig-common: si
+    # Poner contraseña de aplicacion
+  mysql_secure_installation
+  #mysql -uroot -prootMySQL -e "update mysql.user set plugin='' where user = 'root';"
+  mysql -e "create user 'roundcube'@'localhost' identified by 'roundcube';"
+  mysql -e "grant all privileges on mysql.* to 'roundcube'@'localhost';"
+  mysql -e "grant all privileges on roundcube.* to 'roundcube'@'localhost'";
+  apt-get -y install roundcube
+    # dbconfig common, si, app
 
 fi
 
