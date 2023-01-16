@@ -116,6 +116,34 @@ elif [ $OS_VERS == "11" ]; then
       # Poner contraseña de aplicación.
   # Activar el alias para ingresar mediante /roundcube
     sed -i -e 's-#    Alias /roundcube /var/lib/roundcube/public_html-Alias /roundcube /var/lib/roundcube/public_html-g' /etc/roundcube/apache.conf
+  # Hacer que se sirva en la carpeta raíz de apache
+    # Modificar el sitio por defecto para HTTP
+      sed -i -e 's|</VirtualHost>|\n  Include /etc/roundcube/apache.conf\n  Alias / /var/lib/roundcube/public_html/\n\n</VirtualHost>|g' /etc/apache2/sites-available/000-default.conf
+      a2ensite 000-default
+    # Modificar el sitio por defecto para HTTPS
+      sed -i -e 's|</VirtualHost>|\n  Include /etc/roundcube/apache.conf\n  Alias / /var/lib/roundcube/public_html/\n\n</VirtualHost>|g' /etc/apache2/sites-available/default-ssl.conf
+      a2ensite default-ssl.conf
+      a2enmod ssl
+      # Crear un certificado autofirmado
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/roundcube.key -out /etc/ssl/certs/roundcube.crt -subj "/C=ES/ST=Madrid/L=Arganda/O=MiEmpresa/CN=dominio.com/emailAddress=mail@gmail.com"
+      # Reemplazar la ubicación del certificado en el archivo de configuración
+        sed -i -e 's|/etc/ssl/certs/ssl-cert-snakeoil.pem|/etc/ssl/certs/roundcube.crt|g'     /etc/apache2/sites-available/default-ssl.conf
+        sed -i -e 's|/etc/ssl/private/ssl-cert-snakeoil.key|/etc/ssl/private/roundcube.key|g' /etc/apache2/sites-available/default-ssl.conf
+    # Desactivar la configuración por defecto de roundcube
+      a2disconf roundcube
+    # Comprobar sintaxis de apache
+      echo ""
+      echo "  Comprobando sintaxis de los archivos de apache..."
+      echo ""
+      apache2ctl configtest
+    # Reiniciar el servidor apache
+      echo ""
+      echo "  Reiniciando el servidor apache..."
+      echo ""
+      systemctl restart apache2
+      systemctl restart apache2
+
+  # Reiniciar el servicio apache
     service apache2 restart
   # Instalar el demonio para IMAP
     apt-get -y install dovecot-imapd
@@ -128,11 +156,18 @@ elif [ $OS_VERS == "11" ]; then
     echo ""                                                                                                                       >> /etc/roundcube/config.inc.php
     echo ""'$config'"['session_lifetime'] = 60;"                                                                                  >> /etc/roundcube/config.inc.php
     echo ""'$config'"['skin_logo'] = './ispmail-logo.png';"                                                                       >> /etc/roundcube/config.inc.php
-
-
-
-
-
+    echo ""
+    echo "  Cambiando el logo por defecto..."
+    echo ""
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${vColorRojo}    wget no está instalado. Iniciando su instalación...${vFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install wget
+        echo ""
+      fi
+    wget --no-check-certificate http://hacks4geeks.com/_/cosas/LogoMailEHZ.png -O /var/lib/roundcube/public_html/logo.png
 
 
 
