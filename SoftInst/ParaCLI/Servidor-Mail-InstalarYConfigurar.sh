@@ -105,9 +105,25 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
+  vDominio="nipegun.com"
+  vIPDirecta="192.168.0.2" 
+  vIPInversa=""
+  
+  # Determinar si la IP directa es clase A, B o C
+    
 
   # Configurar el servidor DNS, dado que las cuentas de correo no pueden funcionar con direcciones IP
-    # 
+    # Como las cuentas de correo no pueden funcionar con direcciones IP y deben funcionar con nombres dns,
+    # hay que instalar el servidor de dns y apuntar el dominio a la IP del servidor de correo.
+    # El servidor dns del servidor de correo debe ser el servidor DNS donde están configurados los registros:
+    # Hay que crear una zona en el servidor DNS que sea el dominio y la extensión, por ejemplo: hacks4geeks.com
+    # En bind 9 (zona directa, db.hacks4geeks.com):
+    echo "correo     IN A     $vIPDirecta" >> /etc/bind/db.$vDominio
+    echo "$vDominio. IN MX 10 correo"      >> /etc/bind/db.$vDominio # Las cuentas de correo que entren en @hacsk4geeks.com serán redirigidas a la entrada correos
+    # Comprobamos que la zona esté bien escrita:
+      named-checkzone $vDominio /etc/bind/db.$vDominio
+    # En bind 9 (zona inversa, db.0.168.192): # es mejor declararla para que el correo no acabe en spam
+    echo "2 IN PTR correo.hacks4geeks.com." >> db.$vIPInversa
   # Instalar el servidor de bases de datos
     apt-get -y install mariadb-server
   # Instalar roundcube (asume que la contraseña root de MySQL está vacía, si no, debería preguntar la contraseña root)
