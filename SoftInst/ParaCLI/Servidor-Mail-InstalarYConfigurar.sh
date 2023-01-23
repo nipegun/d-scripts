@@ -19,7 +19,7 @@
 # ----------
 
 vDominio="hacks4geeks.com"
-vIPServMail="192.168.1.98"
+vIPServMail="172.16.56.98"
 vPrimerOcteto=$(echo $vIPServMail | cut -d '.' -f1)
 vSegundoOcteto=$(echo $vIPServMail | cut -d '.' -f2)
 vTercerOcteto=$(echo $vIPServMail | cut -d '.' -f3)
@@ -198,11 +198,11 @@ elif [ $OS_VERS == "11" ]; then
               sed -i -e "s|localhost.|correo.$vDominio.|g"                          /etc/bind/db.$vDominio.inversa
               sed -i '/localhost./d'                                                /etc/bind/db.$vDominio.inversa
               if [ $vClaseIP == "A" ]; then
-                echo -e "$vFinalDeIP\tIN\tPTR\tcorreo.$vDominio."                >> /etc/bind/db.inversa-lan.local
+                echo -e "$vFinalDeIP\tIN\tPTR\tcorreo.$vDominio."                >> /etc/bind/db.$vDominio.inversa
               elif  [ $vClaseIP == "B" ]; then
-                echo -e "$vFinalDeIP\tIN\tPTR\tcorreo.$vDominio."                >> /etc/bind/db.inversa-lan.local
+                echo -e "$vFinalDeIP\tIN\tPTR\tcorreo.$vDominio."                >> /etc/bind/db.$vDominio.inversa
               elif [ $vClaseIP == "C" ]; then
-                echo -e "$vFinalDeIP\tIN\tPTR\tcorreo.$vDominio."                >> /etc/bind/db.inversa-lan.local
+                echo -e "$vFinalDeIP\tIN\tPTR\tcorreo.$vDominio."                >> /etc/bind/db.$vDominio.inversa
               else
                 echo "No se ha podido determinar a que clase pertenece la IP."
               fi
