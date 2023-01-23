@@ -147,11 +147,11 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
 
             # Determinar si la IP directa es clase A, B o C para asignar la IP inversa
-              if [ $(cat $vIPServMail | cut -d '.' -f1) == "10" ]; then # Clase A
+              if [ $(echo $vIPServMail | cut -d '.' -f1) == "10" ]; then # Clase A
                 vIPInversa="$vPrimerOcteto"
-              elif [ $(cat $vIPServMail | cut -d '.' -f1) == "172" ]; then # Clase B
+              elif [ $(echo $vIPServMail | cut -d '.' -f1) == "172" ]; then # Clase B
                 vIPInversa="$vSegundoOcteto.$vPrimerOcteto"
-              elif [ $(cat $vIPServMail | cut -d '.' -f1) == "192" ]; then # Clase C
+              elif [ $(echo $vIPServMail | cut -d '.' -f1) == "192" ]; then # Clase C
                 vIPInversa="$vTercerOcteto.$vSegundoOcteto.$vPrimerOcteto"
               else
                 echo ""
