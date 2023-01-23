@@ -33,14 +33,14 @@ if [ $# -ne $CantArgsEsperados ]
     echo ""
     exit $ArgsInsuficientes
   else
-    # Comprobar si el paquete mutt está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s mutt 2>/dev/null | grep installed) == "" ]]; then
+    # Comprobar si el paquete mailutils está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s mailutils 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  mutt no está instalado. Iniciando su instalación..."
+        echo "  mailutils no está instalado. Iniciando su instalación..."
         echo ""
-        apt-get -y update > /dev/null
-        apt-get -y install mutt
+        apt-get -y update && apt-get -y install mailutils
         echo ""
       fi
     echo "$3" | mail -s "$2" -r hacks4geeks@gmail.com -A "$4" "$1"
 fi
+
