@@ -162,30 +162,43 @@ elif [ $OS_VERS == "11" ]; then
                 echo ""
               fi
 
+            # Crear la zona directa
+              echo ""
+              echo "  Creando la zona directa..."
+              echo ""
+              cp /etc/bind/db.local /etc/bind/db.$vDominio.directa
+              sed -i -e "s|localhost. root.localhost.|$vDominio. root.$vDomino.|g" /etc/bind/db.$vDominio.directa
+              sed -i -e "s|localhost.|correo.$vDominio.|g"                         /etc/bind/db.$vDominio.directa
+              sed -i -e '/127.0.0.1/d'                                             /etc/bind/db.$vDominio.directa
+              sed -i -e '/::1/d'                                                   /etc/bind/db.$vDominio.directa
             # Anexar la zona directa
+              echo ""
+              echo "  Anexando la zona directa..."
+              echo ""
               echo ''                                         >> /etc/bind/named.conf.local
               echo 'zone "lan.local" {'                       >> /etc/bind/named.conf.local
               echo '  type master;'                           >> /etc/bind/named.conf.local
               echo '  allow-transfer { none; };'              >> /etc/bind/named.conf.local
-              echo '  file "/etc/bind/db.$vDominio.directa";' >> /etc/bind/named.conf.local
+              echo '  file "/etc/bind/db.'$vDominio'.directa";' >> /etc/bind/named.conf.local
               echo '};'                                       >> /etc/bind/named.conf.local
               echo ''                                         >> /etc/bind/named.conf.local
-            # Crear la zona directa
-              cp /etc/bind/db.local /etc/bind/db.$vDominio.directa
-              sed -i -e 's|localhost. root.localhost.|$vDominio. root.$vDomino.|g' /etc/bind/db.$vDominio.directa
-              sed -i -e 's|localhost.|correo.$vDominio.|g'                         /etc/bind/db.$vDominio.directa
-              sed -i '/127.0.0.1/d'                                                /etc/bind/db.$vDominio.directa
-              sed -i '/::1/d'                                                      /etc/bind/db.$vDominio.directa
+            # Creando la zona inversa
+              echo ""
+              echo "  Creando la zona inversa..."
+              echo ""
+              cp /etc/bind/db.127   /etc/bind/db.$vDominio.inversa
             # Anexar la zona inversa
+              echo ""
+              echo "  Anexando la zona inversa..."
+              echo ""
               echo ''                                         >> /etc/bind/named.conf.local
               echo 'zone "$vIPInversa.in-addr.arpa" {'        >> /etc/bind/named.conf.local
               echo '  type master; '                          >> /etc/bind/named.conf.local
               echo '  allow-transfer { none; };'              >> /etc/bind/named.conf.local
-              echo '  file "/etc/bind/db.$vDominio.inversa";' >> /etc/bind/named.conf.local
+              echo '  file "/etc/bind/db.'$vDominio'.inversa";' >> /etc/bind/named.conf.local
               echo '};'                                       >> /etc/bind/named.conf.local
               echo ''                                         >> /etc/bind/named.conf.local
-            # Crear la zona inversa
-              cp /etc/bind/db.127   /etc/bind/db.$vDominio.inversa
+
  
             # Configurar el servidor DNS, dado que las cuentas de correo no pueden funcionar con direcciones IP
             # Como las cuentas de correo no pueden funcionar con direcciones IP y deben funcionar con nombres dns,
