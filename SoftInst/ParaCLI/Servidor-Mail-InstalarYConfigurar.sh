@@ -174,10 +174,10 @@ elif [ $OS_VERS == "11" ]; then
               echo "  Creando la zona directa..."
               echo ""
               cp /etc/bind/db.local /etc/bind/db.$vDominio.directa
-              sed -i -e "s|localhost. root.localhost.|correos.$vDominio. root.$vDominio.|g" /etc/bind/db.$vDominio.directa
-              sed -i -e "s|localhost.|correo.$vDominio.|g"                                  /etc/bind/db.$vDominio.directa
-              sed -i -e '/127.0.0.1/d'                                                      /etc/bind/db.$vDominio.directa
-              sed -i -e '/::1/d'                                                            /etc/bind/db.$vDominio.directa
+              sed -i -e "s|localhost. root.localhost.|correo.$vDominio. root.$vDominio.|g" /etc/bind/db.$vDominio.directa
+              sed -i -e "s|localhost.|correo.$vDominio.|g"                                 /etc/bind/db.$vDominio.directa
+              sed -i -e '/127.0.0.1/d'                                                     /etc/bind/db.$vDominio.directa
+              sed -i -e '/::1/d'                                                           /etc/bind/db.$vDominio.directa
             # Anexar la zona directa
               echo ""
               echo "  Anexando la zona directa..."
@@ -194,9 +194,9 @@ elif [ $OS_VERS == "11" ]; then
               echo "  Creando la zona inversa..."
               echo ""
               cp /etc/bind/db.127   /etc/bind/db.$vDominio.inversa
-              sed -i -e "s|localhost. root.localhost.|correos.$vDominio. root.$vDominio.|g" /etc/bind/db.$vDominio.inversa
-              sed -i -e "s|localhost.|correo.$vDominio.|g"                                  /etc/bind/db.$vDominio.inversa
-              sed -i '/localhost./d'                                                        /etc/bind/db.$vDominio.inversa
+              sed -i -e "s|localhost. root.localhost.|correo.$vDominio. root.$vDominio.|g" /etc/bind/db.$vDominio.inversa
+              sed -i -e "s|localhost.|correo.$vDominio.|g"                                 /etc/bind/db.$vDominio.inversa
+              sed -i '/localhost./d'                                                       /etc/bind/db.$vDominio.inversa
               if [ $vClaseIP == "A" ]; then
                 echo -e "$vFinalDeIP\tIN\tPTR\tcorreo.$vDominio."                >> /etc/bind/db.$vDominio.inversa
               elif  [ $vClaseIP == "B" ]; then
@@ -206,7 +206,6 @@ elif [ $OS_VERS == "11" ]; then
               else
                 echo "No se ha podido determinar a que clase pertenece la IP."
               fi
-              
             # Anexar la zona inversa
               echo ""
               echo "  Anexando la zona inversa..."
@@ -223,6 +222,11 @@ elif [ $OS_VERS == "11" ]; then
               echo "  Reiniciando servidor DNS..."
               echo ""
               systemctl restart bind9
+            # Consultar el registro MX
+              echo ""
+              echo "  Consultando el registro MX del dominio $vDominio..."
+              echo ""
+              dig $vDominio MX +short
 
           ;;
 
@@ -232,9 +236,45 @@ elif [ $OS_VERS == "11" ]; then
             echo "  Instalando el MTA (Mail Transport Agent) postfix..."
             echo ""
 
+            echo ""
+            echo "    Instalando el paquete postfix..."
+            echo ""
             apt-get -y install postfix
-            echo "home_mailbox = Maildir/" >> /etc/postfix/main.cf
-            service postfix restart
+
+            echo ""
+            echo "    Reconfigurando postfix..."
+            echo ""
+            dpkg-reconfigure postfix
+              # Sitio de Internet
+              # Recipiente de correo para el administrador: En blanco
+              # Otros destinos para los cuales recibir correo: $vDominio, correo.$vDominio, servmail.localdomain, localhost.localdomain, localhost, home.arpa
+              # Forzar actualizaciones síncronas de la cola de correo: No
+              # Redes locales: 127.0.0.0/8 192.168.1.0/24
+              # Usar procmail para local: Si
+              # Límite del tamaño del buzón de correo: 0
+              # Carácter de extensión de direcciones locales: +
+              # Protocolos de internet a usar: IPv4
+
+            echo ""
+            echo "    Realizando mnodificaciones finales en la configuración..."
+            echo ""
+            # Hacer que cada mail vaya a un archivo diferente
+              echo ""
+              echo "      Configurando postfix para que cada email se guarde en un archivo separado..."
+              echo ""
+              echo "home_mailbox = Maildir/" >> /etc/postfix/main.cf
+            # Hacer que el remitente venga siempre como del nombre del dominio, no del hostname
+              echo ""
+              echo "      Configurando postfix para que el remitente sea $vDominio y no $(cat /etc/hostname)..."
+              echo ""
+              echo "address {"                  > /etc/mailutils.conf
+              echo "  email-domain $vDominio;" >> /etc/mailutils.conf
+              echo "};"                        >> /etc/mailutils.conf
+
+            echo ""
+            echo "    Reiniciando el servicio postfix..."
+            echo ""
+            systemctl restart postfix
 
           ;;
 
@@ -374,8 +414,8 @@ elif [ $OS_VERS == "11" ]; then
             systemctl restart postfix
 
             echo "home_mailbox = Maildir/" >> /etc/postfix/main.cf
-            maildirmake.dovecot /etc/skel/Maildir
-            apt-get -y install postfix
+            
+
 
 
          ################3   Dovecot
@@ -392,7 +432,7 @@ elif [ $OS_VERS == "11" ]; then
             # -> Limite 0, ilimitado
             # -> Caracter de extension de direcciones locales +
             # -> Protocolos de internet a usar IPv4
-
+maildirmake.dovecot /etc/skel/Maildir
 
           ############### Roundcube
           
