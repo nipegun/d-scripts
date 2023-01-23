@@ -155,7 +155,8 @@ elif [ $OS_VERS == "11" ]; then
                 vIPInversa="$vTercerOcteto.$vSegundoOcteto.$vPrimerOcteto"
               else
                 echo ""
-                echo "La IP del servidor de mail no es de clase privada. Abortando..."
+                echo -e "${vColorRojo}    La IP del servidor de mail no es de clase privada. Abortando...${vFinColor}"
+                echo ""
                 echo ""
               fi
 
@@ -170,7 +171,7 @@ elif [ $OS_VERS == "11" ]; then
             # Crear la zona directa
               cp /etc/bind/db.local /etc/bind/db.$vDominio.directa
               sed -i -e 's|localhost. root.localhost.|$vDominio. root.$vDomino.|g' /etc/bind/db.$vDominio.directa
-              sed -i -e 's|localhost.|correo.$vDominio.|g'                            /etc/bind/db.$vDominio.directa
+              sed -i -e 's|localhost.|correo.$vDominio.|g'                         /etc/bind/db.$vDominio.directa
               sed -i '/127.0.0.1/d'                                                /etc/bind/db.$vDominio.directa
               sed -i '/::1/d'                                                      /etc/bind/db.$vDominio.directa
             # Anexar la zona inversa
