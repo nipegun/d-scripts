@@ -175,13 +175,13 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "  Anexando la zona directa..."
               echo ""
-              echo ''                                         >> /etc/bind/named.conf.local
-              echo 'zone "lan.local" {'                       >> /etc/bind/named.conf.local
-              echo '  type master;'                           >> /etc/bind/named.conf.local
-              echo '  allow-transfer { none; };'              >> /etc/bind/named.conf.local
+              echo ''                                           >> /etc/bind/named.conf.local
+              echo 'zone "lan.local" {'                         >> /etc/bind/named.conf.local
+              echo '  type master;'                             >> /etc/bind/named.conf.local
+              echo '  allow-transfer { none; };'                >> /etc/bind/named.conf.local
               echo '  file "/etc/bind/db.'$vDominio'.directa";' >> /etc/bind/named.conf.local
-              echo '};'                                       >> /etc/bind/named.conf.local
-              echo ''                                         >> /etc/bind/named.conf.local
+              echo '};'                                         >> /etc/bind/named.conf.local
+              echo ''                                           >> /etc/bind/named.conf.local
             # Creando la zona inversa
               echo ""
               echo "  Creando la zona inversa..."
@@ -210,12 +210,16 @@ elif [ $OS_VERS == "11" ]; then
        //     echo "$vDominio. IN MX 10 correo"      >> /etc/bind/db.$vDominio # Las cuentas de correo que entren en @hacsk4geeks.com serán redirigidas a la entrada correos
             # Comprobamos que la zona esté bien escrita:
              echo ""
-             echo "  Comprobando la sintaxis de las zonas..."
+             echo "  Comprobando la sintaxis de la zona directa..."
              echo ""
              named-checkzone $vDominio /etc/bind/db.$vDominio.directa
+             echo ""
+             echo "  Comprobando la sintaxis de la zona inversa..."
+             echo ""
              named-checkzone $vDominio /etc/bind/db.$vDominio.inversa
+             
             # En bind 9 (zona inversa, db.0.168.192): # es mejor declararla para que el correo no acabe en spam
-         //   echo "2 IN PTR correo.hacks4geeks.com." >> db.$vIPInversa
+         ##   echo "2 IN PTR correo.hacks4geeks.com." >> db.$vIPInversa
     
           ;;
 
