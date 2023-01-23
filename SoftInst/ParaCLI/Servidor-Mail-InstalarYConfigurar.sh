@@ -19,11 +19,11 @@
 # ----------
 
 vDominio="hacks4geeks.com"
-vIPServMail="172.16.56.98"
-vPrimerOcteto=$(echo $vIPServMail | cut -d '.' -f1)
+vIPServMail=$(hostname -I)
+vPrimerOcteto=$(echo $vIPServMail  | cut -d '.' -f1)
 vSegundoOcteto=$(echo $vIPServMail | cut -d '.' -f2)
-vTercerOcteto=$(echo $vIPServMail | cut -d '.' -f3)
-vCuartoOcteto=$(echo $vIPServMail | cut -d '.' -f4)
+vTercerOcteto=$(echo $vIPServMail  | cut -d '.' -f3)
+vCuartoOcteto=$(echo $vIPServMail  | cut -d '.' -f4)
 
 vIPDirecta="$vPrimerOcteto.$vSegundoOcteto.$vTercerOcteto"
 
