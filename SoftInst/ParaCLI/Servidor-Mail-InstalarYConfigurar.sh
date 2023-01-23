@@ -206,12 +206,16 @@ elif [ $OS_VERS == "11" ]; then
             # El servidor dns del servidor de correo debe ser el servidor DNS donde están configurados los registros:
             # Hay que crear una zona en el servidor DNS que sea el dominio y la extensión, por ejemplo: hacks4geeks.com
             # En bind 9 (zona directa, db.hacks4geeks.com):
-            echo "correo     IN A     $vIPDirecta" >> /etc/bind/db.$vDominio
-            echo "$vDominio. IN MX 10 correo"      >> /etc/bind/db.$vDominio # Las cuentas de correo que entren en @hacsk4geeks.com serán redirigidas a la entrada correos
+       //     echo "correo     IN A     $vIPDirecta" >> /etc/bind/db.$vDominio
+       //     echo "$vDominio. IN MX 10 correo"      >> /etc/bind/db.$vDominio # Las cuentas de correo que entren en @hacsk4geeks.com serán redirigidas a la entrada correos
             # Comprobamos que la zona esté bien escrita:
-             named-checkzone $vDominio /etc/bind/db.$vDominio
+             echo ""
+             echo "  Comprobando la sintaxis de las zonas..."
+             echo ""
+             named-checkzone $vDominio /etc/bind/db.$vDominio.directa
+             named-checkzone $vDominio /etc/bind/db.$vDominio.inversa
             # En bind 9 (zona inversa, db.0.168.192): # es mejor declararla para que el correo no acabe en spam
-            echo "2 IN PTR correo.hacks4geeks.com." >> db.$vIPInversa
+         //   echo "2 IN PTR correo.hacks4geeks.com." >> db.$vIPInversa
     
           ;;
 
