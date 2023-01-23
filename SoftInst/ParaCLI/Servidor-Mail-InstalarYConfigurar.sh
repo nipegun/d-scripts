@@ -191,13 +191,13 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "  Anexando la zona inversa..."
               echo ""
-              echo ''                                         >> /etc/bind/named.conf.local
-              echo 'zone "$vIPInversa.in-addr.arpa" {'        >> /etc/bind/named.conf.local
-              echo '  type master; '                          >> /etc/bind/named.conf.local
-              echo '  allow-transfer { none; };'              >> /etc/bind/named.conf.local
+              echo ''                                           >> /etc/bind/named.conf.local
+              echo 'zone "'$vIPInversa'.in-addr.arpa" {'        >> /etc/bind/named.conf.local
+              echo '  type master; '                            >> /etc/bind/named.conf.local
+              echo '  allow-transfer { none; };'                >> /etc/bind/named.conf.local
               echo '  file "/etc/bind/db.'$vDominio'.inversa";' >> /etc/bind/named.conf.local
-              echo '};'                                       >> /etc/bind/named.conf.local
-              echo ''                                         >> /etc/bind/named.conf.local
+              echo '};'                                         >> /etc/bind/named.conf.local
+              echo ''                                           >> /etc/bind/named.conf.local
 
  
             # Configurar el servidor DNS, dado que las cuentas de correo no pueden funcionar con direcciones IP
