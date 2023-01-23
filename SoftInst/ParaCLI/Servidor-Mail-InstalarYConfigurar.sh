@@ -23,7 +23,8 @@ vIPServMail="192.168.1.98"
 vPrimerOcteto=$(echo $vIPServMail | cut -d '.' -f1)
 vSegundoOcteto=$(echo $vIPServMail | cut -d '.' -f2)
 vTercerOcteto=$(echo $vIPServMail | cut -d '.' -f3)
-  
+vCuartoOcteto=$(echo $vIPServMail | cut -d '.' -f4)
+
 vIPDirecta="$vPrimerOcteto.$vSegundoOcteto.$vTercerOcteto"
 
 Fecha=$(date +A%YM%mD%d@%T)
@@ -151,10 +152,16 @@ elif [ $OS_VERS == "11" ]; then
             # Determinar si la IP directa es clase A, B o C para asignar la IP inversa
               if [ $(echo $vIPServMail | cut -d '.' -f1) == "10" ]; then # Clase A
                 vIPInversa="$vPrimerOcteto"
+                vFinalDeIP="$vSegundoOcteto$vTerceroOcteto$vCuartoOcteto"
+                vClaseIP="A"
               elif [ $(echo $vIPServMail | cut -d '.' -f1) == "172" ]; then # Clase B
                 vIPInversa="$vSegundoOcteto.$vPrimerOcteto"
+                vFinalDeIP="$vTerceroOcteto$vCuartoOcteto"
+                vClaseIP="B"
               elif [ $(echo $vIPServMail | cut -d '.' -f1) == "192" ]; then # Clase C
                 vIPInversa="$vTercerOcteto.$vSegundoOcteto.$vPrimerOcteto"
+                vFinalDeIP="$vCuartoOcteto"
+                vClaseIP="C"
               else
                 echo ""
                 echo -e "${vColorRojo}    La IP del servidor de mail no es de clase privada. Abortando...${vFinColor}"
@@ -187,6 +194,19 @@ elif [ $OS_VERS == "11" ]; then
               echo "  Creando la zona inversa..."
               echo ""
               cp /etc/bind/db.127   /etc/bind/db.$vDominio.inversa
+              sed -i -e "s|localhost. root.localhost.|$vDominio. root.$vDominio.|g" /etc/bind/db.$vDominio.inversa
+              sed -i -e "s|localhost.|correo.$vDominio.|g"                          /etc/bind/db.$vDominio.inversa
+              sed -i '/localhost./d'                                                /etc/bind/db.$vDominio.inversa
+              if [ $vClaseIP == "A" ]; then
+                echo -e "$vFinalDeIP\tIN\tPTR\tcorreo.$vDominio."                >> /etc/bind/db.inversa-lan.local
+              elif  [ $vClaseIP == "B" ]; then
+                echo -e "$vFinalDeIP\tIN\tPTR\tcorreo.$vDominio."                >> /etc/bind/db.inversa-lan.local
+              elif [ $vClaseIP == "C" ]; then
+                echo -e "$vFinalDeIP\tIN\tPTR\tcorreo.$vDominio."                >> /etc/bind/db.inversa-lan.local
+              else
+                echo "No se ha podido determinar a que clase pertenece la IP."
+              fi
+              
             # Anexar la zona inversa
               echo ""
               echo "  Anexando la zona inversa..."
