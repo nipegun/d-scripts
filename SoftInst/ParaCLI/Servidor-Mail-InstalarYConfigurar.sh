@@ -18,13 +18,13 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Mail-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
-vDominio="nipegun.com"
-vIPServMail="192.168.0.2"
+vDominio="hacks4geeks.com"
+vIPServMail="192.168.1.98"
 vPrimerOcteto=$(echo $vIPServMail | cut -d '.' -f1)
 vSegundoOcteto=$(echo $vIPServMail | cut -d '.' -f2)
 vTercerOcteto=$(echo $vIPServMail | cut -d '.' -f3)
   
-vIPDirecta="192.168.0.2"
+vIPDirecta="$vPrimerOcteto.$vSegundoOcteto.$vTercerOcteto"
 
 Fecha=$(date +A%YM%mD%d@%T)
 
@@ -198,28 +198,6 @@ elif [ $OS_VERS == "11" ]; then
               echo '  file "/etc/bind/db.'$vDominio'.inversa";' >> /etc/bind/named.conf.local
               echo '};'                                         >> /etc/bind/named.conf.local
               echo ''                                           >> /etc/bind/named.conf.local
-
- 
-            # Configurar el servidor DNS, dado que las cuentas de correo no pueden funcionar con direcciones IP
-            # Como las cuentas de correo no pueden funcionar con direcciones IP y deben funcionar con nombres dns,
-            # hay que instalar el servidor de dns y apuntar el dominio a la IP del servidor de correo.
-            # El servidor dns del servidor de correo debe ser el servidor DNS donde están configurados los registros:
-            # Hay que crear una zona en el servidor DNS que sea el dominio y la extensión, por ejemplo: hacks4geeks.com
-            # En bind 9 (zona directa, db.hacks4geeks.com):
-       ##     echo "correo     IN A     $vIPDirecta" >> /etc/bind/db.$vDominio
-       ##//     echo "$vDominio. IN MX 10 correo"      >> /etc/bind/db.$vDominio # Las cuentas de correo que entren en @hacsk4geeks.com serán redirigidas a la entrada correos
-            # Comprobamos que la zona esté bien escrita:
-             echo ""
-             echo "  Comprobando la sintaxis de la zona directa..."
-             echo ""
-             named-checkzone $vDominio /etc/bind/db.$vDominio.directa
-             echo ""
-             echo "  Comprobando la sintaxis de la zona inversa..."
-             echo ""
-             named-checkzone $vDominio /etc/bind/db.$vDominio.inversa
-             
-            # En bind 9 (zona inversa, db.0.168.192): # es mejor declararla para que el correo no acabe en spam
-         ##   echo "2 IN PTR correo.hacks4geeks.com." >> db.$vIPInversa
     
           ;;
 
@@ -230,40 +208,8 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
 
             apt-get -y install postfix
-
             echo "home_mailbox = Maildir/" >> /etc/postfix/main.cf
-
             service postfix restart
-
-            adduser nico
-            adduser pablo
-            adduser gorka
-
-            # Instalar paquetes
-              apt-get -y install roundcube
-              apt-get -y install roundcube-mysql
-              apt-get -y install roundcube-plugins
-            # Poner la configuracion de la base de datos 
-              sed -i -e 's---g' /etc/roundcube/config.inc.php
-            # 
-    
-            echo "virtual_alias_maps = mysql:/etc/postfix/mysql-virtual-alias-maps.cf"     >> /etc/postfix/main.cf
-            echo "virtual_mailbox_maps = mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf" >> /etc/postfix/main.cf
-            echo "user = roundcube"                                                   > /etc/postfix/mysql-virtual-alias-maps.cf
-            echo "password = raizraiz"                                               >> /etc/postfix/mysql-virtual-alias-maps.cf
-            echo "hosts = localhost"                                                 >> /etc/postfix/mysql-virtual-alias-maps.cf
-            echo "dbname = roundcube"                                                >> /etc/postfix/mysql-virtual-alias-maps.cf
-            echo "query = SELECT destination FROM virtual_aliases WHERE source='%s'" >> /etc/postfix/mysql-virtual-alias-maps.cf
-            echo "user = roundcube"                                                   > /etc/postfix/mysql-virtual-mailbox-maps.cf
-            echo "password = raizraiz"                                               >> /etc/postfix/mysql-virtual-mailbox-maps.cf
-            echo "hosts = localhost"                                                 >> /etc/postfix/mysql-virtual-mailbox-maps.cf
-            echo "dbname = roundcube"                                                >> /etc/postfix/mysql-virtual-mailbox-maps.cf
-            echo "query = SELECT maildir FROM virtual_users WHERE email='%s'"        >> /etc/postfix/mysql-virtual-mailbox-maps.cf
-            systemctl restart postfix
-
-            echo "home_mailbox = Maildir/" >> /etc/postfix/main.cf
-            maildirmake.dovecot /etc/skel/Maildir
-            apt-get -y install postfix
 
           ;;
 
@@ -347,9 +293,85 @@ elif [ $OS_VERS == "11" ]; then
                 systemctl restart apache2
                 systemctl restart apache2
 
+          ;;
+
+          5)
+
+            echo ""
+            echo "  Otra..."
+            echo ""
 
 
 
+            ######## DNS
+
+            # Configurar el servidor DNS, dado que las cuentas de correo no pueden funcionar con direcciones IP
+            # Como las cuentas de correo no pueden funcionar con direcciones IP y deben funcionar con nombres dns,
+            # hay que instalar el servidor de dns y apuntar el dominio a la IP del servidor de correo.
+            # El servidor dns del servidor de correo debe ser el servidor DNS donde están configurados los registros:
+            # Hay que crear una zona en el servidor DNS que sea el dominio y la extensión, por ejemplo: hacks4geeks.com
+            # En bind 9 (zona directa, db.hacks4geeks.com):
+       ##     echo "correo     IN A     $vIPDirecta" >> /etc/bind/db.$vDominio
+       ##//     echo "$vDominio. IN MX 10 correo"      >> /etc/bind/db.$vDominio # Las cuentas de correo que entren en @hacsk4geeks.com serán redirigidas a la entrada correos
+            # Comprobamos que la zona esté bien escrita:
+             echo ""
+             echo "  Comprobando la sintaxis de la zona directa..."
+             echo ""
+             named-checkzone $vDominio /etc/bind/db.$vDominio.directa
+             echo ""
+             echo "  Comprobando la sintaxis de la zona inversa..."
+             echo ""
+             named-checkzone $vDominio /etc/bind/db.$vDominio.inversa
+             
+            # En bind 9 (zona inversa, db.0.168.192): # es mejor declararla para que el correo no acabe en spam
+         ##   echo "2 IN PTR correo.hacks4geeks.com." >> db.$vIPInversa
+
+            #### Postfix
+
+            adduser nico
+            adduser pablo
+            adduser gorka
+
+
+    
+            echo "virtual_alias_maps = mysql:/etc/postfix/mysql-virtual-alias-maps.cf"     >> /etc/postfix/main.cf
+            echo "virtual_mailbox_maps = mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf" >> /etc/postfix/main.cf
+            echo "user = roundcube"                                                   > /etc/postfix/mysql-virtual-alias-maps.cf
+            echo "password = raizraiz"                                               >> /etc/postfix/mysql-virtual-alias-maps.cf
+            echo "hosts = localhost"                                                 >> /etc/postfix/mysql-virtual-alias-maps.cf
+            echo "dbname = roundcube"                                                >> /etc/postfix/mysql-virtual-alias-maps.cf
+            echo "query = SELECT destination FROM virtual_aliases WHERE source='%s'" >> /etc/postfix/mysql-virtual-alias-maps.cf
+            echo "user = roundcube"                                                   > /etc/postfix/mysql-virtual-mailbox-maps.cf
+            echo "password = raizraiz"                                               >> /etc/postfix/mysql-virtual-mailbox-maps.cf
+            echo "hosts = localhost"                                                 >> /etc/postfix/mysql-virtual-mailbox-maps.cf
+            echo "dbname = roundcube"                                                >> /etc/postfix/mysql-virtual-mailbox-maps.cf
+            echo "query = SELECT maildir FROM virtual_users WHERE email='%s'"        >> /etc/postfix/mysql-virtual-mailbox-maps.cf
+            systemctl restart postfix
+
+            echo "home_mailbox = Maildir/" >> /etc/postfix/main.cf
+            maildirmake.dovecot /etc/skel/Maildir
+            apt-get -y install postfix
+
+
+         ################3   Dovecot
+         
+            apt-get -y install dovecot-imapd
+            #apt-get -y install dovecot-pop3d
+            #dpkg-reconfigure postfix
+            # -> Sitio de intenet
+            # -> festivalehz.ddns.net 
+            # -> En blanco
+            # -> Enter
+            # -> Forzar actualizaciones síncronas, si
+            # -> 127.0.0.0/24 192.168.0.0/24 192.168.1.0/24 192.168.2.0/24 192.168.3.0/24 192.168.4.0/24 192.168.255.0/24
+            # -> Limite 0, ilimitado
+            # -> Caracter de extension de direcciones locales +
+            # -> Protocolos de internet a usar IPv4
+
+
+          ############### Roundcube
+          
+          
 
 
               apt-get -y install mariadb-server
@@ -383,26 +405,14 @@ elif [ $OS_VERS == "11" ]; then
               sed -i -e 's|$config['smtp_server'] = 'localhost';|$config['smtp_server'] = 'tuservidor';|g' /etc/roundcube/config.inc.php
             #apt-get install roundcube-plugins
 
-          ;;
+            # Instalar paquetes
+              apt-get -y install roundcube
+              apt-get -y install roundcube-mysql
+              apt-get -y install roundcube-plugins
+            # Poner la configuracion de la base de datos 
+              sed -i -e 's---g' /etc/roundcube/config.inc.php
+            # 
 
-          5)
-
-            echo ""
-            echo "  Opción 5..."
-            echo ""
-
-            apt-get -y install dovecot-imapd
-              #apt-get -y install dovecot-pop3d
-              #dpkg-reconfigure postfix
-              # -> Sitio de intenet
-              # -> festivalehz.ddns.net 
-              # -> En blanco
-              # -> Enter
-              # -> Forzar actualizaciones síncronas, si
-              # -> 127.0.0.0/24 192.168.0.0/24 192.168.1.0/24 192.168.2.0/24 192.168.3.0/24 192.168.4.0/24 192.168.255.0/24
-              # -> Limite 0, ilimitado
-              # -> Caracter de extension de direcciones locales +
-              # -> Protocolos de internet a usar IPv4
 
 
           ;;
