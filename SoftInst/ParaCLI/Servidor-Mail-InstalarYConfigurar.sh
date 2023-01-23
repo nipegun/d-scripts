@@ -20,9 +20,9 @@
 
 vDominio="nipegun.com"
 vIPServMail="192.168.0.2"
-vPrimerOcteto=$(cat $vIPServMail | cut -d '.' -f1)
-vSegundoOcteto=$(cat $vIPServMail | cut -d '.' -f2)
-vTercerOcteto=$(cat $vIPServMail | cut -d '.' -f3)
+vPrimerOcteto=$(echo $vIPServMail | cut -d '.' -f1)
+vSegundoOcteto=$(echo $vIPServMail | cut -d '.' -f2)
+vTercerOcteto=$(echo $vIPServMail | cut -d '.' -f3)
   
 vIPDirecta="192.168.0.2"
 
