@@ -167,10 +167,10 @@ elif [ $OS_VERS == "11" ]; then
               echo "  Creando la zona directa..."
               echo ""
               cp /etc/bind/db.local /etc/bind/db.$vDominio.directa
-              sed -i -e "s|localhost. root.localhost.|$vDominio. root.$vDomino.|g" /etc/bind/db.$vDominio.directa
-              sed -i -e "s|localhost.|correo.$vDominio.|g"                         /etc/bind/db.$vDominio.directa
-              sed -i -e '/127.0.0.1/d'                                             /etc/bind/db.$vDominio.directa
-              sed -i -e '/::1/d'                                                   /etc/bind/db.$vDominio.directa
+              sed -i -e "s|localhost. root.localhost.|$vDominio. root.$vDominio.|g" /etc/bind/db.$vDominio.directa
+              sed -i -e "s|localhost.|correo.$vDominio.|g"                          /etc/bind/db.$vDominio.directa
+              sed -i -e '/127.0.0.1/d'                                              /etc/bind/db.$vDominio.directa
+              sed -i -e '/::1/d'                                                    /etc/bind/db.$vDominio.directa
             # Anexar la zona directa
               echo ""
               echo "  Anexando la zona directa..."
