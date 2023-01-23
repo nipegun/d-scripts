@@ -174,10 +174,10 @@ elif [ $OS_VERS == "11" ]; then
               echo "  Creando la zona directa..."
               echo ""
               cp /etc/bind/db.local /etc/bind/db.$vDominio.directa
-              sed -i -e "s|localhost. root.localhost.|$vDominio. root.$vDominio.|g" /etc/bind/db.$vDominio.directa
-              sed -i -e "s|localhost.|correo.$vDominio.|g"                          /etc/bind/db.$vDominio.directa
-              sed -i -e '/127.0.0.1/d'                                              /etc/bind/db.$vDominio.directa
-              sed -i -e '/::1/d'                                                    /etc/bind/db.$vDominio.directa
+              sed -i -e "s|localhost. root.localhost.|correos.$vDominio. root.$vDominio.|g" /etc/bind/db.$vDominio.directa
+              sed -i -e "s|localhost.|correo.$vDominio.|g"                                  /etc/bind/db.$vDominio.directa
+              sed -i -e '/127.0.0.1/d'                                                      /etc/bind/db.$vDominio.directa
+              sed -i -e '/::1/d'                                                            /etc/bind/db.$vDominio.directa
             # Anexar la zona directa
               echo ""
               echo "  Anexando la zona directa..."
@@ -194,9 +194,9 @@ elif [ $OS_VERS == "11" ]; then
               echo "  Creando la zona inversa..."
               echo ""
               cp /etc/bind/db.127   /etc/bind/db.$vDominio.inversa
-              sed -i -e "s|localhost. root.localhost.|$vDominio. root.$vDominio.|g" /etc/bind/db.$vDominio.inversa
-              sed -i -e "s|localhost.|correo.$vDominio.|g"                          /etc/bind/db.$vDominio.inversa
-              sed -i '/localhost./d'                                                /etc/bind/db.$vDominio.inversa
+              sed -i -e "s|localhost. root.localhost.|correos.$vDominio. root.$vDominio.|g" /etc/bind/db.$vDominio.inversa
+              sed -i -e "s|localhost.|correo.$vDominio.|g"                                  /etc/bind/db.$vDominio.inversa
+              sed -i '/localhost./d'                                                        /etc/bind/db.$vDominio.inversa
               if [ $vClaseIP == "A" ]; then
                 echo -e "$vFinalDeIP\tIN\tPTR\tcorreo.$vDominio."                >> /etc/bind/db.$vDominio.inversa
               elif  [ $vClaseIP == "B" ]; then
