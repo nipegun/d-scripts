@@ -198,7 +198,12 @@ elif [ $OS_VERS == "11" ]; then
               echo '  file "/etc/bind/db.'$vDominio'.inversa";' >> /etc/bind/named.conf.local
               echo '};'                                         >> /etc/bind/named.conf.local
               echo ''                                           >> /etc/bind/named.conf.local
-    
+            # Reiniciar servidor DNS
+              echo ""
+              echo "  Reiniciando servidor DNS..."
+              echo ""
+              systemctl restart bind9
+
           ;;
 
           2)
