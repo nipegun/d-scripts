@@ -146,6 +146,8 @@ elif [ $OS_VERS == "11" ]; then
             echo "  Instalando servidor DNS..."
             echo ""
 
+            apt-get -y update && apt-get -y install bind9
+
             # Determinar si la IP directa es clase A, B o C para asignar la IP inversa
               if [ $(echo $vIPServMail | cut -d '.' -f1) == "10" ]; then # Clase A
                 vIPInversa="$vPrimerOcteto"
