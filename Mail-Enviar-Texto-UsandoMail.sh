@@ -38,8 +38,7 @@ if [ $# -ne $CantArgsEsperados ]
         echo ""
         echo "  mailutils no está instalado. Iniciando su instalación..."
         echo ""
-        apt-get -y update > /dev/null
-        apt-get -y install mailutils
+        apt-get -y update && apt-get -y install mailutils
         echo ""
       fi
     echo "$3" | mail -a "Content-Type: text/plain; charset=UTF-8" -s "$2" $1
