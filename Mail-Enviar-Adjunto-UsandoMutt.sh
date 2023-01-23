@@ -38,8 +38,7 @@ if [ $# -ne $CantArgsEsperados ]
         echo ""
         echo "  mutt no está instalado. Iniciando su instalación..."
         echo ""
-        apt-get -y update > /dev/null
-        apt-get -y install mutt
+        apt-get -y update && apt-get -y install mutt
         echo ""
       fi
     echo "$3" | mutt -s "$2" $1 -a "$4"
