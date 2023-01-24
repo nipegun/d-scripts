@@ -246,8 +246,8 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             dpkg-reconfigure postfix
               # Sitio de Internet
-              # Recipiente de correo para el administrador: En blanco
-              # Otros destinos para los cuales recibir correo: $vDominio, correo.$vDominio, servmail.localdomain, localhost.localdomain, localhost, home.arpa
+              # Recipiente de correo para el administrador: En blanco (o root@$vDominio)
+              # Otros destinos para los cuales recibir correo: $vDominio, correo.$vDominio, localhost.localdomain, localhost, servmail.localdomain, home.arpa
               # Forzar actualizaciones síncronas de la cola de correo: No
               # Redes locales: 127.0.0.0/8 192.168.1.0/24
               # Usar procmail para local: Si
