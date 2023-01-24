@@ -128,7 +128,7 @@ elif [ $OS_VERS == "11" ]; then
   #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
-      1 "Instalar servidor DNS en el propio servidor de correo." on
+      1 "Instalar servidor DNS en el propio servidor de correo." off
       2 "Instalar el MTA (Mail Transport Agent) postfix." off
       3 "Instalar el MDA (Mail Delivery Agent) dovecot." off
       4 "Instalar el MUA (Mail User Agent) roundcube." off
