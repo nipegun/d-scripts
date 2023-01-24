@@ -46,7 +46,6 @@ ln -s /root/scripts/d-scripts/ComprobarSSD.sh                              /root
 ln -s /root/scripts/d-scripts/DejarSóloElKernelMásReciente.sh              /root/scripts/d-scripts/Alias/dsekmr
 ln -s /root/scripts/d-scripts/DScripts-Sincronizar.sh                      /root/scripts/d-scripts/Alias/sinds
 ln -s /root/scripts/d-scripts/EjecutarComo.sh                              /root/scripts/d-scripts/Alias/ec
-ln -s /root/scripts/d-scripts/EnviarMailA.sh                               /root/scripts/d-scripts/Alias/ema
 ln -s /root/scripts/d-scripts/ExtraerSubtítuloDeMKV.sh                     /root/scripts/d-scripts/Alias/esdmkv
 ln -s /root/scripts/d-scripts/MostrarFrecuenciaCPU.sh                      /root/scripts/d-scripts/Alias/mfcpu
 ln -s /root/scripts/d-scripts/Grub-Editar.sh                               /root/scripts/d-scripts/Alias/egrub
@@ -65,6 +64,7 @@ ln -s /root/scripts/d-scripts/InfoShell.sh                                 /root
 ln -s /root/scripts/d-scripts/LanzarEscritorio.sh                          /root/scripts/d-scripts/Alias/le
 ln -s /root/scripts/d-scripts/ListarNodosTORQueEntran.sh                   /root/scripts/d-scripts/Alias/lntorqe
 ln -s /root/scripts/d-scripts/LogsDelSistema-Mostrar.sh                    /root/scripts/d-scripts/Alias/slog
+ln -s /root/scripts/d-scripts/Mail-Enviar-Texto-UsandoMail.sh              /root/scripts/d-scripts/Alias/metum
 ln -s /root/scripts/d-scripts/MonitorizarLog.sh                            /root/scripts/d-scripts/Alias/ml
 ln -s /root/scripts/d-scripts/MostrarAparatosConectadosAlRouterDebian.sh   /root/scripts/d-scripts/Alias/macard
 ln -s /root/scripts/d-scripts/MostrarAparatosConectadosEnLaInterfaz.sh     /root/scripts/d-scripts/Alias/maceli
