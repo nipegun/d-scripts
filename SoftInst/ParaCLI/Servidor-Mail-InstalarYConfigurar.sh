@@ -18,7 +18,7 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Mail-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
-vDominio="hacks4geeks.com"
+vDominio="nubimae.com"
 vIPServMail=$(hostname -I)
 vPrimerOcteto=$(echo $vIPServMail  | cut -d '.' -f1)
 vSegundoOcteto=$(echo $vIPServMail | cut -d '.' -f2)
