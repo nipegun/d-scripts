@@ -255,8 +255,9 @@ elif [ $OS_VERS == "11" ]; then
               # Límite del tamaño del buzón de correo: 0
               # Carácter de extensión de direcciones locales: +
               # Protocolos de internet a usar: IPv4
-myhostname = correo.$vDominio
-mydomain = $vDominio
+
+            # myhostname = correo.$vDominio
+            # mydomain = $vDominio
 
             echo ""
             echo "    Realizando mnodificaciones finales en la configuración..."
@@ -287,19 +288,30 @@ mydomain = $vDominio
             echo "  Instalando el MDA (Mail Delivery Agent) dovecot..."
             echo ""
 
-            # Reiniciar el servicio apache
-              service apache2 restart
             # Instalar el demonio para IMAP
+              echo ""
+              echo "    Instalando el servicio para IMAP..."
+              echo ""
               apt-get -y install dovecot-imapd
-            # Modificar la configuración
-              #sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'localhost';|g'                                            /etc/roundcube/config.inc.php
-              sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'correo.festivalehz.local';|g'                              /etc/roundcube/config.inc.php
-              sed -i -e 's|$config['smtp_port'] = 587;|$config['smtp_port'] = 25;|g'                                                           /etc/roundcube/config.inc.php
-              sed -i -e 's|$config['smtp_user'] = '%u';|$config['smtp_user'] = '';|g'                                                          /etc/roundcube/config.inc.php
-              sed -i -e 's|$config['plugins'] = array(|$config['plugins'] = array(\n'archive',\n'zipdownload',\n'managesieve',\n'password',|g' /etc/roundcube/config.inc.php
-              echo ""                                                                                                                       >> /etc/roundcube/config.inc.php
-              echo ""'$config'"['session_lifetime'] = 60;"                                                                                  >> /etc/roundcube/config.inc.php
-              echo ""'$config'"['skin_logo'] = './ispmail-logo.png';"                                                                       >> /etc/roundcube/config.inc.php
+            # Instalar el demonio para POP3
+              #echo ""
+              #echo "    Instalando el servicio para POP3..."
+              #echo ""
+              #apt-get -y install dovecot-pop3d
+
+            # Realizar cambios en la configuración
+              echo ""
+              echo "  Realizando cambios en la configuración..."
+              echo ""
+              # Parar el servicio
+                service dovecot stop
+              # Crear las carpetas de mail para para el servicio
+                maildirmake.dovecot /etc/skel/Maildir
+              # Indicar la ubicación de la carpeta de mail
+                sed -i -e 's|#   mail_location = maildir:~/Maildir|mail_location = maildir:~/Maildir|g' /etc/dovecot/conf.d/10-mail.conf
+              # Reiniciar el servicio
+                service dovecot restart
+              
               echo ""
               echo "  Cambiando el logo por defecto..."
               echo ""
@@ -312,11 +324,6 @@ mydomain = $vDominio
                 echo ""
               fi
             wget --no-check-certificate http://hacks4geeks.com/_/cosas/LogoMailEHZ.png -O /var/lib/roundcube/public_html/logo.png
-
-
-            maildirmake.dovecot /etc/skel/Maildir
-            sed -i -e 's|#   mail_location = maildir:~/Maildir|mail_location = maildir:~/Maildir|g' /etc/dovecot/conf.d/10-mail.conf
-            service dovecot restart
 
           ;;
 
@@ -416,31 +423,18 @@ mydomain = $vDominio
             echo "query = SELECT maildir FROM virtual_users WHERE email='%s'"        >> /etc/postfix/mysql-virtual-mailbox-maps.cf
             systemctl restart postfix
 
-            echo "home_mailbox = Maildir/" >> /etc/postfix/main.cf
-            
-
-
-
-         ################3   Dovecot
-         
-            apt-get -y install dovecot-imapd
-            #apt-get -y install dovecot-pop3d
-            #dpkg-reconfigure postfix
-            # -> Sitio de intenet
-            # -> festivalehz.ddns.net 
-            # -> En blanco
-            # -> Enter
-            # -> Forzar actualizaciones síncronas, si
-            # -> 127.0.0.0/24 192.168.0.0/24 192.168.1.0/24 192.168.2.0/24 192.168.3.0/24 192.168.4.0/24 192.168.255.0/24
-            # -> Limite 0, ilimitado
-            # -> Caracter de extension de direcciones locales +
-            # -> Protocolos de internet a usar IPv4
-maildirmake.dovecot /etc/skel/Maildir
-
           ############### Roundcube
           
           
-
+            # Modificar la configuración
+              #sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'localhost';|g'                                            /etc/roundcube/config.inc.php
+              sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'correo.festivalehz.local';|g'                              /etc/roundcube/config.inc.php
+              sed -i -e 's|$config['smtp_port'] = 587;|$config['smtp_port'] = 25;|g'                                                           /etc/roundcube/config.inc.php
+              sed -i -e 's|$config['smtp_user'] = '%u';|$config['smtp_user'] = '';|g'                                                          /etc/roundcube/config.inc.php
+              sed -i -e 's|$config['plugins'] = array(|$config['plugins'] = array(\n'archive',\n'zipdownload',\n'managesieve',\n'password',|g' /etc/roundcube/config.inc.php
+              echo ""                                                                                                                       >> /etc/roundcube/config.inc.php
+              echo ""'$config'"['session_lifetime'] = 60;"                                                                                  >> /etc/roundcube/config.inc.php
+              echo ""'$config'"['skin_logo'] = './ispmail-logo.png';"                                                                       >> /etc/roundcube/config.inc.php
 
               apt-get -y install mariadb-server
               apt-get -y install mariadb-client
