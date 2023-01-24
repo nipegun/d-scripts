@@ -227,6 +227,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "  Consultando el registro MX del dominio $vDominio..."
               echo ""
               dig $vDominio MX +short
+              nslookup -type=mx $vDominio
 
           ;;
 
@@ -254,6 +255,8 @@ elif [ $OS_VERS == "11" ]; then
               # Límite del tamaño del buzón de correo: 0
               # Carácter de extensión de direcciones locales: +
               # Protocolos de internet a usar: IPv4
+myhostname = correo.$vDominio
+mydomain = $vDominio
 
             echo ""
             echo "    Realizando mnodificaciones finales en la configuración..."
