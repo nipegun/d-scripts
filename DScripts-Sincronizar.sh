@@ -48,14 +48,11 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     mkdir -p /root/scripts/d-scripts/Alias/
     rm /root/scripts/d-scripts/.git -R 2> /dev/null
     find /root/scripts/d-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
-
     echo ""
     echo -e "${vColorVerde}  d-scripts sincronizados correctamente${vFinColor}"
     echo ""
-
     /root/scripts/d-scripts/DScripts-CrearAlias.sh
     find /root/scripts/d-scripts/Alias -type f -exec chmod +x {} \;
-    
 
   else
     echo ""
