@@ -130,11 +130,12 @@ elif [ $OS_VERS == "11" ]; then
     opciones=(
       1 "Instalar servidor DNS en el propio servidor de correo." off
       2 "Instalar el MTA (Mail Transport Agent) postfix." off
-      3 "Instalar el MDA (Mail Delivery Agent) dovecot." off
-      4 "Instalar el MUA (Mail Delivery Agent) maildrop." off
-      5 "Instalar el MUA (Mail Delivery Agent) procmail." off
-      6 "Instalar el MUA (Mail User Agent) roundcube." off
-      7 "Opción 5" off
+      3 "Instalar el MTA (Mail Transport Agent) courier." off
+      4 "Instalar el MDA (Mail Delivery Agent) dovecot." off
+      5 "Instalar el MDA (Mail Delivery Agent) maildrop." off
+      6 "Instalar el MDA (Mail Delivery Agent) procmail." off
+      7 "Instalar el MUA (Mail User Agent) roundcube." off
+      8 "Opción 5" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   #clear
@@ -287,6 +288,16 @@ elif [ $OS_VERS == "11" ]; then
           3)
 
             echo ""
+            echo "  Instalando el MTA (Mail Transport Agent) courier..."
+            echo ""
+ 
+            echo "  Comandos no preparados"
+ 
+          ;;
+
+          4)
+
+            echo ""
             echo "  Instalando el MDA (Mail Delivery Agent) dovecot..."
             echo ""
 
@@ -330,29 +341,29 @@ elif [ $OS_VERS == "11" ]; then
           ;;
 
 
-          4)
+          5)
 
             echo ""
             echo "  Instalando el MDA (Mail Delivery Agent) maildrop..."
             echo ""
 
-            echo ""
-
-          ;;
-
-
-          5)
-
-            echo ""
-            echo "  Instalando el MDA (Mail Delivery Agent) procmail..."
-            echo ""
-
-            echo ""
+            echo "  Comandos no preparados"
 
           ;;
 
 
           6)
+
+            echo ""
+            echo "  Instalando el MDA (Mail Delivery Agent) procmail..."
+            echo ""
+
+            echo "  Comandos no preparados"
+
+          ;;
+
+
+          7)
 
             echo ""
             echo "  Instalando el MUA (Mail User Agent) roundcube."
@@ -395,7 +406,7 @@ elif [ $OS_VERS == "11" ]; then
 
           ;;
 
-          7)
+          8)
 
             echo ""
             echo "  Otra..."
@@ -432,8 +443,6 @@ elif [ $OS_VERS == "11" ]; then
             adduser pablo
             adduser gorka
 
-
-    
             echo "virtual_alias_maps = mysql:/etc/postfix/mysql-virtual-alias-maps.cf"     >> /etc/postfix/main.cf
             echo "virtual_mailbox_maps = mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf" >> /etc/postfix/main.cf
             echo "user = roundcube"                                                   > /etc/postfix/mysql-virtual-alias-maps.cf
@@ -449,7 +458,6 @@ elif [ $OS_VERS == "11" ]; then
             systemctl restart postfix
 
           ############### Roundcube
-          
           
             # Modificar la configuración
               #sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'localhost';|g'                                            /etc/roundcube/config.inc.php
@@ -485,7 +493,6 @@ elif [ $OS_VERS == "11" ]; then
                 # contraseña de aplicación: roundcube (Es la contraseña de :identified by 'roundcube')
               sed -i -e 's-#    Alias /roundcube /var/lib/roundcube/public_html-Alias /roundcube /var/lib/roundcube/public_html-g' /etc/roundcube/apache.conf
               service apache2 restart
-
   
             # Indicar el servidor IMAP y SMTP en el archivo de confioguración de roundcube
               sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'tuservidor';|g'        /etc/roundcube/config.inc.php
@@ -499,8 +506,6 @@ elif [ $OS_VERS == "11" ]; then
             # Poner la configuracion de la base de datos 
               sed -i -e 's---g' /etc/roundcube/config.inc.php
             # 
-
-
 
           ;;
 
