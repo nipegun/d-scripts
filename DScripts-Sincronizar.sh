@@ -12,17 +12,18 @@
 # curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorAzul="\033[0;34m"
+vColorAzulClaro="\033[1;34m"
+vColorVerde='\033[1;32m'
+vColorRojo='\033[1;31m'
+vFinColor='\033[0m'
 
 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "  wget no está instalado. Iniciando su instalación..."
+    echo -e "${vColorRojo}  wget no está instalado. Iniciando su instalación...${vFinColor}"
     echo ""
-    apt-get -y update
-    apt-get -y install wget
+    apt-get -y update && apt-get -y install wget
     echo ""
 fi
 
@@ -30,7 +31,7 @@ fi
 wget -q --tries=10 --timeout=20 --spider https://github.com
   if [[ $? -eq 0 ]]; then
     echo ""
-    echo -e "${ColorVerde}  Sincronizando los d-scripts con las últimas versiones y descargando nuevos d-scripts (si es que existen)...${FinColor}"
+    echo -e "${vColorAzulClaro}  Sincronizando los d-scripts con las últimas versiones y descargando nuevos d-scripts (si es que existen)...${vFinColor}"
     echo ""
     rm /root/scripts/d-scripts -R 2> /dev/null
     mkdir /root/scripts 2> /dev/null
@@ -38,10 +39,9 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
        if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
          echo ""
-         echo "  git no está instalado. Iniciando su instalación..."
+         echo -e "${vColorRojo}    git no está instalado. Iniciando su instalación...${vFinColor}"
          echo ""
-         apt-get -y update > /dev/null
-         apt-get -y install git
+         apt-get -y update && apt-get -y install git
          echo ""
        fi
     git clone --depth=1 https://github.com/nipegun/d-scripts
@@ -52,11 +52,11 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     find /root/scripts/d-scripts/Alias -type f -exec chmod +x {} \;
     
     echo ""
-    echo -e "${ColorVerde}  d-scripts sincronizados correctamente${FinColor}"
+    echo -e "${vColorVerde}  d-scripts sincronizados correctamente${vFinColor}"
     echo ""
   else
     echo ""
-    echo -e "${ColorRojo}  No se pudo iniciar la sincronización de los d-scripts porque no se detectó conexión a Internet.${FinColor}"
+    echo -e "${vColorRojo}    No se pudo iniciar la sincronización de los d-scripts porque no se detectó conexión a Internet.${vFinColor}"
     echo ""
   fi
 
