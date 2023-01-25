@@ -113,7 +113,6 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y update
     apt-get -y install shellcheck
     apt-get -y install grub2
-    apt-get -y install lvm2
     apt-get -y install wget
     apt-get -y install curl
     apt-get -y install nmap
@@ -124,6 +123,10 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install unrar
     apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
     apt-get -y install android-tools-fastboot
+
+  # Herramientas para manejar volúmenes
+    apt-get -y install btrfs-tools
+    apt-get -y install lvm2
 
   # Herramientas gráficas
     apt-get -y install gparted
