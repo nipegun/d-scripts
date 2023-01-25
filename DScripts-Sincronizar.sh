@@ -49,14 +49,14 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     rm /root/scripts/d-scripts/.git -R 2> /dev/null
     find /root/scripts/d-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
     echo ""
-    echo -e "${vColorVerde}  d-scripts sincronizados correctamente${vFinColor}"
+    echo -e "${vColorVerde}    d-scripts sincronizados correctamente.${vFinColor}"
     echo ""
     /root/scripts/d-scripts/DScripts-CrearAlias.sh
     find /root/scripts/d-scripts/Alias -type f -exec chmod +x {} \;
 
   else
     echo ""
-    echo -e "${vColorRojo}    No se pudo iniciar la sincronización de los d-scripts porque no se detectó conexión a Internet.${vFinColor}"
+    echo -e "${vColorRojo}  No se pudo iniciar la sincronización de los d-scripts porque no se detectó conexión a Internet.${vFinColor}"
     echo ""
   fi
 
