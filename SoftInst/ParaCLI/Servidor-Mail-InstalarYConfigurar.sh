@@ -135,7 +135,8 @@ elif [ $OS_VERS == "11" ]; then
       5 "Instalar el MDA (Mail Delivery Agent) maildrop." off
       6 "Instalar el MDA (Mail Delivery Agent) procmail." off
       7 "Instalar el MUA (Mail User Agent) roundcube." off
-      8 "Opción 5" off
+      8 "Instalar el MUA (Mail User Agent) squirrelmail." off
+      9 "Opción 5" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   #clear
@@ -411,8 +412,6 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "  Otra..."
             echo ""
-
-
 
             ######## DNS
 
