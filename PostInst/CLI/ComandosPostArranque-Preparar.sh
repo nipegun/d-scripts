@@ -99,19 +99,19 @@ elif [ $OS_VERS == "9" ]; then
   echo -e "${ColorVerde}Creando el archivo para meter los comandos...${FinColor}"
   echo ""
   mkdir -p /root/scripts/ 2> /dev/null
-  echo '#!/bin/bash'                                                                                         > /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo "vColorRojo='\033[1;31m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
-  echo "vColorVerde='\033[1;32m'"                                                                           >> /root/scripts/ComandosPostArranque.sh
-  echo "vFinColor='\033[0m'"                                                                                >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                 >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                    >> /root/scripts/ComandosPostArranque.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                  >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
+  echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
+  echo "vColorRojo='\033[1;31m'"                                                                             >> /root/scripts/ComandosPostArranque.sh
+  echo "vColorVerde='\033[1;32m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
+  echo "vFinColor='\033[0m'"                                                                                 >> /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
+  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                  >> /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
+  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ComandosPostArranque.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
   chmod 700                                                                                                    /root/scripts/ComandosPostArranque.sh
 
   echo ""
@@ -159,19 +159,19 @@ elif [ $OS_VERS == "10" ]; then
   echo -e "${ColorVerde}Creando el archivo para meter los comandos...${FinColor}"
   echo ""
   mkdir -p /root/scripts/ 2> /dev/null
-  echo '#!/bin/bash'                                                                                         > /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo "vColorRojo='\033[1;31m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
-  echo "vColorVerde='\033[1;32m'"                                                                           >> /root/scripts/ComandosPostArranque.sh
-  echo "vFinColor='\033[0m'"                                                                                >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                 >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                    >> /root/scripts/ComandosPostArranque.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                  >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
+  echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
+  echo "vColorRojo='\033[1;31m'"                                                                             >> /root/scripts/ComandosPostArranque.sh
+  echo "vColorVerde='\033[1;32m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
+  echo "vFinColor='\033[0m'"                                                                                 >> /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
+  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                  >> /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
+  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ComandosPostArranque.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
   chmod 700                                                                                                    /root/scripts/ComandosPostArranque.sh
 
   echo ""
@@ -219,19 +219,19 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${ColorVerde}Creando el archivo para meter los comandos...${FinColor}"
   echo ""
   mkdir -p /root/scripts/ 2> /dev/null
-  echo '#!/bin/bash'                                                                                         > /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo "vColorRojo='\033[1;31m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
-  echo "vColorVerde='\033[1;32m'"                                                                           >> /root/scripts/ComandosPostArranque.sh
-  echo "vFinColor='\033[0m'"                                                                                >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                 >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                    >> /root/scripts/ComandosPostArranque.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                  >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
+  echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
+  echo "vColorRojo='\033[1;31m'"                                                                             >> /root/scripts/ComandosPostArranque.sh
+  echo "vColorVerde='\033[1;32m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
+  echo "vFinColor='\033[0m'"                                                                                 >> /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
+  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                  >> /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
+  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ComandosPostArranque.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
   chmod 700                                                                                                    /root/scripts/ComandosPostArranque.sh
 
   echo ""
