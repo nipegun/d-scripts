@@ -19,16 +19,16 @@ vColorRojo='\033[1;31m'
 vFinColor='\033[0m'
 
 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+  if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
     echo ""
     echo -e "${vColorRojo}  wget no está instalado. Iniciando su instalación...${vFinColor}"
     echo ""
     apt-get -y update && apt-get -y install wget
     echo ""
-fi
+  fi
 
 # Comprobar si hay conexión a Internet antes de sincronizar los d-scripts
-wget -q --tries=10 --timeout=20 --spider https://github.com
+  wget -q --tries=10 --timeout=20 --spider https://github.com
   if [[ $? -eq 0 ]]; then
     echo ""
     echo -e "${vColorAzulClaro}  Sincronizando los d-scripts con las últimas versiones y descargando nuevos d-scripts (si es que existen)...${vFinColor}"
@@ -53,7 +53,6 @@ wget -q --tries=10 --timeout=20 --spider https://github.com
     echo ""
     /root/scripts/d-scripts/DScripts-CrearAlias.sh
     find /root/scripts/d-scripts/Alias -type f -exec chmod +x {} \;
-
   else
     echo ""
     echo -e "${vColorRojo}  No se pudo iniciar la sincronización de los d-scripts porque no se detectó conexión a Internet.${vFinColor}"
