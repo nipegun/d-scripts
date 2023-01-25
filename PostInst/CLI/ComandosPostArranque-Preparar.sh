@@ -12,9 +12,9 @@
 # curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorRojo='\033[1;31m'
+vColorVerde='\033[1;32m'
+vFinColor='\033[0m'
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
@@ -101,11 +101,11 @@ elif [ $OS_VERS == "9" ]; then
   mkdir -p /root/scripts/ 2> /dev/null
   echo '#!/bin/bash'                                                                                         > /root/scripts/ComandosPostArranque.sh
   echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo "ColorRojo='\033[1;31m'"                                                                             >> /root/scripts/ComandosPostArranque.sh
-  echo "ColorVerde='\033[1;32m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
-  echo "FinColor='\033[0m'"                                                                                 >> /root/scripts/ComandosPostArranque.sh
+  echo "vColorRojo='\033[1;31m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
+  echo "vColorVerde='\033[1;32m'"                                                                           >> /root/scripts/ComandosPostArranque.sh
+  echo "vFinColor='\033[0m'"                                                                                >> /root/scripts/ComandosPostArranque.sh
   echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                  >> /root/scripts/ComandosPostArranque.sh
+  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                 >> /root/scripts/ComandosPostArranque.sh
   echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
   echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
   echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
@@ -161,11 +161,11 @@ elif [ $OS_VERS == "10" ]; then
   mkdir -p /root/scripts/ 2> /dev/null
   echo '#!/bin/bash'                                                                                         > /root/scripts/ComandosPostArranque.sh
   echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo "ColorRojo='\033[1;31m'"                                                                             >> /root/scripts/ComandosPostArranque.sh
-  echo "ColorVerde='\033[1;32m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
-  echo "FinColor='\033[0m'"                                                                                 >> /root/scripts/ComandosPostArranque.sh
+  echo "vColorRojo='\033[1;31m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
+  echo "vColorVerde='\033[1;32m'"                                                                           >> /root/scripts/ComandosPostArranque.sh
+  echo "vFinColor='\033[0m'"                                                                                >> /root/scripts/ComandosPostArranque.sh
   echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                  >> /root/scripts/ComandosPostArranque.sh
+  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                 >> /root/scripts/ComandosPostArranque.sh
   echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
   echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
   echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
@@ -221,11 +221,11 @@ elif [ $OS_VERS == "11" ]; then
   mkdir -p /root/scripts/ 2> /dev/null
   echo '#!/bin/bash'                                                                                         > /root/scripts/ComandosPostArranque.sh
   echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo "ColorRojo='\033[1;31m'"                                                                             >> /root/scripts/ComandosPostArranque.sh
-  echo "ColorVerde='\033[1;32m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
-  echo "FinColor='\033[0m'"                                                                                 >> /root/scripts/ComandosPostArranque.sh
+  echo "vColorRojo='\033[1;31m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
+  echo "vColorVerde='\033[1;32m'"                                                                           >> /root/scripts/ComandosPostArranque.sh
+  echo "vFinColor='\033[0m'"                                                                                >> /root/scripts/ComandosPostArranque.sh
   echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
-  echo 'FechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                  >> /root/scripts/ComandosPostArranque.sh
+  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                 >> /root/scripts/ComandosPostArranque.sh
   echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
   echo 'echo "Iniciada la ejecución del script post-arranque el $FechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
   echo ""                                                                                                   >> /root/scripts/ComandosPostArranque.sh
