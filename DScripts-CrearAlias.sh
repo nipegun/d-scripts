@@ -16,7 +16,7 @@ vColorRojo='\033[1;31m'
 vFinColor='\033[0m'
 
 echo ""
-echo -e "${vAzulClaro}  Creando alias para los d-scripts...${vFinColor}"
+echo -e "${vColorAzulClaro}  Creando alias para los d-scripts...${vFinColor}"
 echo ""
 
 ln -s /root/scripts/d-scripts/Externos/VelocidadDeInternet.sh              /root/scripts/d-scripts/Alias/vdi
