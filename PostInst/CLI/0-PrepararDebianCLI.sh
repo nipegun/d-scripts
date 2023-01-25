@@ -19,7 +19,7 @@ FinColor='\033[0m'
 # Preparar ComandosPostArranque (rc.local)
   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
 
-# Preparar tareas Cropn
+# Preparar tareas Cron
   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/TareasCron-Preparar.sh | bash
 
 # Preparar cortafuegos
