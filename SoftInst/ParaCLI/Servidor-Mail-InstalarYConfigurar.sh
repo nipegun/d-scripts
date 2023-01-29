@@ -19,6 +19,7 @@
 # ----------
 
 vDominio="nubimae.com"
+vHostEsSubDominio="si" # Si el servidor de mail está en un host diferente al servidor web, por ejemplo
 vIPServMail=$(hostname -I)
 vPrimerOcteto=$(echo $vIPServMail  | cut -d '.' -f1)
 vSegundoOcteto=$(echo $vIPServMail | cut -d '.' -f2)
@@ -138,6 +139,7 @@ elif [ $OS_VERS == "11" ]; then
       8 "Instalar el MUA (Mail User Agent) roundcube." off
       9 "Instalar el MUA (Mail User Agent) squirrelmail." off
       10 "Opción 5" off
+      11 "Instalar y configurar mailutils" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   #clear
@@ -268,8 +270,6 @@ elif [ $OS_VERS == "11" ]; then
               echo 'append_dot_mydomain = no'                                    >> /etc/postfix/main.cf
               echo 'alias_maps = hash:/etc/aliases'                              >> /etc/postfix/main.cf
               echo 'alias_database = hash:/etc/aliases'                          >> /etc/postfix/main.cf
-              echo '# Dominios para los cuales este ordenador responderá localmente, en vez de forwardearlos a otro ordenador' >> /etc/postfix/main.cf
-              echo "mydestination = localhost, $(hostname).$vDominio, $vDominio" >> /etc/postfix/main.cf
               echo 'relayhost ='                                                 >> /etc/postfix/main.cf
               echo 'mynetworks = 127.0.0.0/8'                                    >> /etc/postfix/main.cf
               echo 'inet_interfaces = all'                                       >> /etc/postfix/main.cf
@@ -279,49 +279,42 @@ elif [ $OS_VERS == "11" ]; then
               echo 'mailbox_size_limit = 0'                                      >> /etc/postfix/main.cf
               echo 'inet_protocols = all'                                        >> /etc/postfix/main.cf
               echo '#inet_protocols = ipv4'                                      >> /etc/postfix/main.cf
-              echo "masquerade_domains = $vDominio"                              >> /etc/postfix/main.cf
-            # Modificar /etc/mailname
-              echo "$(hostname).$vDominio" > /etc/mailname
-            echo ""
-            echo "      Realizando mnodificaciones finales en la configuración..."
-            echo ""
-            # Hacer que cada mail vaya a un archivo diferente
-              echo ""
-              echo "      Configurando postfix para que cada email se guarde en un archivo separado..."
-              echo ""
-              echo "home_mailbox = Maildir/" >> /etc/postfix/main.cf
-              # Modificar mailutils para que sepa que los mail van a archivos separados
-                echo 'mailbox {'                                             > /etc/mailutils.conf
-               #echo '  mailbox-pattern "maildir:///home/${user}/Maildir";' >> /etc/mailutils.conf
-                echo '  mailbox-pattern "maildir:~/Maildir";'               >> /etc/mailutils.conf
-                echo '  mailbox-type maildir;'                              >> /etc/mailutils.conf
-                echo '}'                                                    >> /etc/mailutils.conf
-            # Comprobar si el paquete mailutils está instalado. Si no lo está, instalarlo.
-              if [[ $(dpkg-query -s mailutils 2>/dev/null | grep installed) == "" ]]; then
-                echo ""
-                echo -e "${vColorRojo}    El paquete mailutils no está instalado. Iniciando su instalación...${vFinColor}"
-                echo ""
-                apt-get -y update && apt-get -y install mailutils
-                echo ""
+              if [ $vHostEsSubDominio == "si" ]; then
+                echo '# Dominios para los cuales este ordenador responderá localmente, en vez de forwardearlos a otro servidor' >> /etc/postfix/main.cf
+                echo "mydestination = localhost, $(hostname).$vDominio, $vDominio"                                              >> /etc/postfix/main.cf
+                echo "masquerade_domains = $vDominio"                                                                           >> /etc/postfix/main.cf
+              elif [ $vHostEsSubDominio == "no" ]; then
+                echo '# Dominios para los cuales este ordenador responderá localmente, en vez de forwardearlos a otro servidor' >> /etc/postfix/main.cf
+                echo "mydestination = localhost, $vDominio"                                                                     >> /etc/postfix/main.cf
+              else
+                echo '# Dominios para los cuales este ordenador responderá localmente, en vez de forwardearlos a otro servidor' >> /etc/postfix/main.cf
+                echo "mydestination = localhost, $(hostname)"                                                                   >> /etc/postfix/main.cf
               fi
-            # Hacer que el remitente venga siempre como del nombre del dominio, no del hostname
-              echo ""
-              echo "      Configurando mailutils para que el remitente sea $vDominio y no $(cat /etc/hostname)..."
-              echo ""
-              #echo "address {"                 >> /etc/mailutils.conf
-              #echo "  email-domain $vDominio;" >> /etc/mailutils.conf
-              #echo "};"                        >> /etc/mailutils.conf
-            # Alias
+              # Hacer que cada mail vaya a un archivo diferente
+                echo "home_mailbox = Maildir/" >> /etc/postfix/main.cf
+
+            # Modificar /etc/mailname
+              if [ $vHostEsSubDominio == "si" ]; then
+                echo "$(hostname).$vDominio" > /etc/mailname
+              elif [ $vHostEsSubDominio == "no" ]; then
+                echo "$vDominio" > /etc/mailname
+              else
+                echo "localhost.localdomain" > /etc/mailname
+              fi
+              
+           
+            # Aliases
               # Por defecto los correos electrónicos generados por el sistema se reenvian al root.
               # Para hacer que luego se vuelvan a enviar a una cuenta específica, se agrega lo siguiente:
                 echo "root: nipegun@$vDominio" >> /etc/aliases
               # Crear los nuevos alias
                 newaliases
-              
-            echo ""
-            echo "    Reiniciando el servicio postfix..."
-            echo ""
-            systemctl restart postfix
+
+            # Reiniciar el servicio postfix
+              echo ""
+              echo "    Reiniciando el servicio postfix..."
+              echo ""
+              systemctl restart postfix
 
           ;;
 
@@ -552,6 +545,37 @@ elif [ $OS_VERS == "11" ]; then
             # Poner la configuracion de la base de datos 
               sed -i -e 's---g' /etc/roundcube/config.inc.php
             # 
+
+          ;;
+
+          11)
+
+          echo ""
+          echo "  Instalando y configurando mailutils..."
+          echo ""
+
+          # Configurar mailutils
+            # Modificar mailutils para que sepa que los mails van a archivos separados
+              echo 'mailbox {'                                              > /etc/mailutils.conf
+              #echo '  mailbox-pattern "maildir:///home/${user}/Maildir";' >> /etc/mailutils.conf
+              echo '  mailbox-pattern "maildir:~/Maildir";'                >> /etc/mailutils.conf
+              echo '  mailbox-type maildir;'                               >> /etc/mailutils.conf
+              echo '}'                                                     >> /etc/mailutils.conf
+            # Hacer que el remitente venga siempre como del nombre del dominio, no del hostname
+              echo ""
+              echo "      Configurando mailutils para que el remitente sea $vDominio y no $(cat /etc/hostname)..."
+              echo ""
+              echo "address {"                 >> /etc/mailutils.conf
+              echo "  email-domain $vDominio;" >> /etc/mailutils.conf
+              echo "};"                        >> /etc/mailutils.conf
+          # Comprobar si el paquete mailutils está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s mailutils 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo -e "${vColorRojo}    El paquete mailutils no está instalado. Iniciando su instalación...${vFinColor}"
+              echo ""
+              apt-get -y update && apt-get -y install mailutils
+              echo ""
+            fi
 
           ;;
 
