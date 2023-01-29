@@ -244,7 +244,7 @@ elif [ $OS_VERS == "11" ]; then
             # Agregar el certificado al archivo de configuración del sitio
           # Agregar certificado en archivos separados
             sed -i -e 's|ssl.pemfile = "/etc/lighttpd/ssl/lighttpd-default.pem"|ssl.pemfile =|g' /etc/lighttpd/lighttpd.conf
-            sed -i -e "s|ssl.pemfile =|\n ssl.pemfile = /etc/letsencrypt/live/$vNombreDeDominio/fullchain.pem\n  ssl.privkey = /etc/letsencrypt/live/$vNombreDeDominio/privkey.pem|g" /etc/lighttpd/lighttpd.conf
+            sed -i -e "s|ssl.pemfile =|\n  ssl.pemfile = /etc/letsencrypt/live/$vNombreDeDominio/fullchain.pem\n  ssl.privkey = /etc/letsencrypt/live/$vNombreDeDominio/privkey.pem|g" /etc/lighttpd/lighttpd.conf
           # Reiniciar lighttpd
             systemctl restart lighttpd
 
