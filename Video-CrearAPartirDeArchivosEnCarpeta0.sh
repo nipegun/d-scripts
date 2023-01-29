@@ -18,6 +18,9 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
+#vCarpetaConArchivos="/home/videovig/"
+#vExt="jpg"
+
 vCarpetaConArchivos="/home/videovig/"
 vExt="jpg"
 
