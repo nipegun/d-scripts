@@ -15,7 +15,7 @@
 #  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash
 #
 #  Ejecución remota con parámetros:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash -s Parámetro1 Parámetro2
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash -s "/home/videovig/" "jpg"
 #
 #  Para agregar este script a cron:
 #    crontab -e
