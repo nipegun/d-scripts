@@ -258,23 +258,27 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y install postfix
 
             echo ""
-            echo "    Reconfigurando postfix..."
+            echo "    Configurando postfix..."
             echo ""
-            dpkg-reconfigure postfix
-              # Sitio de Internet
-              # Mail site: $(hostname).$vDominio
-              # Recipiente de correo para el administrador: root
-              # Otros destinos para los cuales recibir correo: $vDominio, $(hostname).$vDominio, localhost, localhost.localdomain, $(hostname).localdomain, $(hostname).home.arpa
-              # Forzar actualizaciones síncronas de la cola de correo: No
-              # Redes locales: 127.0.0.0/8 192.168.1.0/24
-              # Usar procmail para local: No
-              # Límite del tamaño del buzón de correo: 0
-              # Carácter de extensión de direcciones locales: +
-              # Protocolos de internet a usar: IPv4
-
-            # myhostname = correo.$vDominio
-            # mydomain = $vDominio
-
+            # Parar el servicio de postfix
+              systemctl stop postfix
+            # Modificar /etc/postfix/main.cf
+              echo 'smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)'     > /etc/postfix/main.cf
+              echo 'biff = no'                                                   >> /etc/postfix/main.cf
+              echo 'append_dot_mydomain = no'                                    >> /etc/postfix/main.cf
+              echo 'alias_maps = hash:/etc/aliases'                              >> /etc/postfix/main.cf
+              echo 'alias_database = hash:/etc/aliases'                          >> /etc/postfix/main.cf
+              echo "mydestination = localhost, $(hostname).$vDominio, $vDominio" >> /etc/postfix/main.cf
+              echo 'relayhost ='                                                 >> /etc/postfix/main.cf
+              echo 'mynetworks = 127.0.0.0/8'                                    >> /etc/postfix/main.cf
+              echo 'inet_interfaces = all'                                       >> /etc/postfix/main.cf
+              echo 'recipient_delimiter = +'                                     >> /etc/postfix/main.cf
+              echo 'compatibility_level = 2'                                     >> /etc/postfix/main.cf
+              echo 'myorigin = /etc/mailname'                                    >> /etc/postfix/main.cf
+              echo 'mailbox_size_limit = 0'                                      >> /etc/postfix/main.cf
+              echo 'inet_protocols = all'                                        >> /etc/postfix/main.cf
+            # Modificar /etc/mailname
+              echo "$(hostname).$vDominio" > /etc/mailname
             echo ""
             echo "    Realizando mnodificaciones finales en la configuración..."
             echo ""
