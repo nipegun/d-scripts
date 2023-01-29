@@ -362,6 +362,16 @@ elif [ $OS_VERS == "11" ]; then
               # Reiniciar el servicio
                 service dovecot restart
 
+              echo ""
+              echo "  Dovecot instalado."
+              echo ""
+              echo "    Recuerda abrir los puertos:"
+              echo "      143 (Para IMAP)"
+              echo "      993 (Para IMAPS)"
+              echo "      110 (Para POP3)"
+              echo "      995 (Para POP3S)"
+              echo ""
+
           ;;
 
 
