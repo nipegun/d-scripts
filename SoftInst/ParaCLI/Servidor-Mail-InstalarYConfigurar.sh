@@ -129,14 +129,15 @@ elif [ $OS_VERS == "11" ]; then
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
       1 "Instalar servidor DNS en el propio servidor de correo." off
-      2 "Instalar el MTA (Mail Transport Agent) postfix." off
-      3 "Instalar el MTA (Mail Transport Agent) courier." off
-      4 "Instalar el MDA (Mail Delivery Agent) dovecot." off
-      5 "Instalar el MDA (Mail Delivery Agent) maildrop." off
-      6 "Instalar el MDA (Mail Delivery Agent) procmail." off
-      7 "Instalar el MUA (Mail User Agent) roundcube." off
-      8 "Instalar el MUA (Mail User Agent) squirrelmail." off
-      9 "Opción 5" off
+      3 "Instalar el MTA (Mail Transport Agent) sendmail." off
+      3 "Instalar el MTA (Mail Transport Agent) postfix." off
+      4 "Instalar el MTA (Mail Transport Agent) courier." off
+      5 "Instalar el MDA (Mail Delivery Agent) dovecot." off
+      6 "Instalar el MDA (Mail Delivery Agent) maildrop." off
+      7 "Instalar el MDA (Mail Delivery Agent) procmail." off
+      8 "Instalar el MUA (Mail User Agent) roundcube." off
+      9 "Instalar el MUA (Mail User Agent) squirrelmail." off
+      10 "Opción 5" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   #clear
@@ -238,6 +239,16 @@ elif [ $OS_VERS == "11" ]; then
           2)
 
             echo ""
+            echo "  Instalando el MTA (Mail Transport Agent) sendmail..."
+            echo ""
+ 
+            echo "  Comandos no preparados"
+ 
+          ;;
+
+          3)
+
+            echo ""
             echo "  Instalando el MTA (Mail Transport Agent) postfix..."
             echo ""
 
@@ -293,7 +304,7 @@ elif [ $OS_VERS == "11" ]; then
 
           ;;
 
-          3)
+          4)
 
             echo ""
             echo "  Instalando el MTA (Mail Transport Agent) courier..."
@@ -303,7 +314,7 @@ elif [ $OS_VERS == "11" ]; then
  
           ;;
 
-          4)
+          5)
 
             echo ""
             echo "  Instalando el MDA (Mail Delivery Agent) dovecot..."
@@ -349,7 +360,7 @@ elif [ $OS_VERS == "11" ]; then
           ;;
 
 
-          5)
+          6)
 
             echo ""
             echo "  Instalando el MDA (Mail Delivery Agent) maildrop..."
@@ -359,8 +370,7 @@ elif [ $OS_VERS == "11" ]; then
 
           ;;
 
-
-          6)
+          7)
 
             echo ""
             echo "  Instalando el MDA (Mail Delivery Agent) procmail..."
@@ -370,8 +380,7 @@ elif [ $OS_VERS == "11" ]; then
 
           ;;
 
-
-          7)
+          8)
 
             echo ""
             echo "  Instalando el MUA (Mail User Agent) roundcube."
@@ -414,7 +423,17 @@ elif [ $OS_VERS == "11" ]; then
 
           ;;
 
-          8)
+          9)
+
+            echo ""
+            echo "  Instalando el MUA (Mail User Agent) squirelmail."
+            echo ""
+
+            echo "  Comandos no preparados"
+
+          ;;
+
+          10)
 
             echo ""
             echo "  Otra..."
