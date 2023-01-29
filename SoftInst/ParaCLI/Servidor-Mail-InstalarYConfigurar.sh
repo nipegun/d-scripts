@@ -296,6 +296,14 @@ elif [ $OS_VERS == "11" ]; then
                 echo '  mailbox-pattern "maildir:~/Maildir";'               >> /etc/mailutils.conf
                 echo '  mailbox-type maildir;'                              >> /etc/mailutils.conf
                 echo '}'                                                    >> /etc/mailutils.conf
+            # Comprobar si el paquete mailutils está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s mailutils 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${vColorRojo}    El paquete mailutils no está instalado. Iniciando su instalación...${vFinColor}"
+                echo ""
+                apt-get -y update && apt-get -y install mailutils
+                echo ""
+              fi
             # Hacer que el remitente venga siempre como del nombre del dominio, no del hostname
               echo ""
               echo "      Configurando mailutils para que el remitente sea $vDominio y no $(cat /etc/hostname)..."
