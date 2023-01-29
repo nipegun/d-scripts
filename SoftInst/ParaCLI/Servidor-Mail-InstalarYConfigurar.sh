@@ -251,11 +251,12 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             dpkg-reconfigure postfix
               # Sitio de Internet
-              # Recipiente de correo para el administrador: En blanco (o root@$vDominio)
-              # Otros destinos para los cuales recibir correo: $vDominio, correo.$vDominio, localhost.localdomain, localhost, servmail.localdomain, home.arpa
+              # Mail site: $(hostname).$vDominio
+              # Recipiente de correo para el administrador: root
+              # Otros destinos para los cuales recibir correo: $vDominio, $(hostname).$vDominio, localhost, localhost.localdomain, $(hostname).localdomain, $(hostname).home.arpa
               # Forzar actualizaciones síncronas de la cola de correo: No
               # Redes locales: 127.0.0.0/8 192.168.1.0/24
-              # Usar procmail para local: Si
+              # Usar procmail para local: No
               # Límite del tamaño del buzón de correo: 0
               # Carácter de extensión de direcciones locales: +
               # Protocolos de internet a usar: IPv4
@@ -271,11 +272,17 @@ elif [ $OS_VERS == "11" ]; then
               echo "      Configurando postfix para que cada email se guarde en un archivo separado..."
               echo ""
               echo "home_mailbox = Maildir/" >> /etc/postfix/main.cf
+              # Modificar mailutils para que sepa que los mail van a archivos separados
+                echo 'mailbox {'                                             > /etc/mailutils.conf
+               #echo '  mailbox-pattern "maildir:///home/${user}/Maildir";' >> /etc/mailutils.conf
+                echo '  mailbox-pattern "maildir:~/Maildir";'               >> /etc/mailutils.conf
+                echo '  mailbox-type maildir;'                              >> /etc/mailutils.conf
+                echo '}'                                                    >> /etc/mailutils.conf
             # Hacer que el remitente venga siempre como del nombre del dominio, no del hostname
               echo ""
-              echo "      Configurando postfix para que el remitente sea $vDominio y no $(cat /etc/hostname)..."
+              echo "      Configurando mailutils para que el remitente sea $vDominio y no $(cat /etc/hostname)..."
               echo ""
-              echo "address {"                  > /etc/mailutils.conf
+              echo "address {"                 >> /etc/mailutils.conf
               echo "  email-domain $vDominio;" >> /etc/mailutils.conf
               echo "};"                        >> /etc/mailutils.conf
 
