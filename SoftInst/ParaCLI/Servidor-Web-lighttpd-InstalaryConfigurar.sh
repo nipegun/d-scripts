@@ -238,10 +238,13 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           read vNombreDeDominio < /dev/tty
           certbot certonly --webroot -w /var/www/html -d $vNombreDeDominio
-          # Combinar certificado y llave privada en el mismo archivo
-            cat /etc/letsencrypt/live/$vNombreDeDominio/cert.pem /etc/letsencrypt/live/$vNombreDeDominio/privkey.pem > /etc/letsencrypt/live/$vNombreDeDominio/web.pem
-          # Agregar el certificado al archivo de configuración del sitio
-            
+          # Agregar cetificado en un único archivo combinado
+            # Combinar certificado y llave privada en el mismo archivo
+              #cat /etc/letsencrypt/live/$vNombreDeDominio/cert.pem /etc/letsencrypt/live/$vNombreDeDominio/privkey.pem > /etc/letsencrypt/live/$vNombreDeDominio/web.pem
+            # Agregar el certificado al archivo de configuración del sitio
+          # Agregar certificado en archivos separados
+            sed -i -e 's|ssl.pemfile = "/etc/lighttpd/ssl/lighttpd-default.pem"|ssl.pemfile =|g' /etc/lighttpd/lighttpd.conf
+            sed -i -e "s|ssl.pemfile =|\n ssl.pemfile = /etc/letsencrypt/live/$vNombreDeDominio/fullchain.pem\n  ssl.privkey = /etc/letsencrypt/live/$vNombreDeDominio/privkey.pem|g" /etc/lighttpd/lighttpd.conf
           # Reiniciar lighttpd
             systemctl restart lighttpd
 
