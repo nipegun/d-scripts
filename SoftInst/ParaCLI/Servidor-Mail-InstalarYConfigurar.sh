@@ -300,9 +300,9 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "      Configurando mailutils para que el remitente sea $vDominio y no $(cat /etc/hostname)..."
               echo ""
-              echo "address {"                 >> /etc/mailutils.conf
-              echo "  email-domain $vDominio;" >> /etc/mailutils.conf
-              echo "};"                        >> /etc/mailutils.conf
+              #echo "address {"                 >> /etc/mailutils.conf
+              #echo "  email-domain $vDominio;" >> /etc/mailutils.conf
+              #echo "};"                        >> /etc/mailutils.conf
             # Alias
               # Por defecto los correos electrónicos generados por el sistema se reenvian al root.
               # Para hacer que luego se vuelvan a enviar a una cuenta específica, se agrega lo siguiente:
