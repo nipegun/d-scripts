@@ -351,8 +351,12 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               # Parar el servicio
                 service dovecot stop
-              # Crear las carpetas de mail para para el servicio
+              # Pre-crear las carpetas de mail por defecto del servicio para futuros usuarios
                 maildirmake.dovecot /etc/skel/Maildir
+                maildirmake.dovecot /etc/skel/Maildir/.Drafts
+                maildirmake.dovecot /etc/skel/Maildir/.Sent
+                maildirmake.dovecot /etc/skel/Maildir/.Trash
+                maildirmake.dovecot /etc/skel/Maildir/.Templates
               # Indicar la ubicación de la carpeta de mail
                 sed -i -e 's|mail_location = maildir:~/Maildir|\nmail_location = maildir:~/Maildir|g' /etc/dovecot/conf.d/10-mail.conf
               # Reiniciar el servicio
@@ -390,11 +394,12 @@ elif [ $OS_VERS == "11" ]; then
             # Instalar el servidor de bases de datos
               apt-get -y install mariadb-server
             # Instalar roundcube (asume que la contraseña root de MySQL está vacía, si no, debería preguntar la contraseña root)
+              echo " "
               apt-get -y install roundcube
               # dbconfig-common: si
               # Poner contraseña de aplicación.
             # Activar el alias para ingresar mediante /roundcube
-              sed -i -e 's-#    Alias /roundcube /var/lib/roundcube/public_html-Alias /roundcube /var/lib/roundcube/public_html-g' /etc/roundcube/apache.conf
+              sed -i -e 's|Alias /roundcube /var/lib/roundcube/public_html|\nAlias /roundcube /var/lib/roundcube/public_html|g' /etc/roundcube/apache.conf
             # Hacer que se sirva en la carpeta raíz de apache
               # Modificar el sitio por defecto para HTTP
                 sed -i -e 's|</VirtualHost>|\n  Include /etc/roundcube/apache.conf\n  Alias / /var/lib/roundcube/public_html/\n\n</VirtualHost>|g' /etc/apache2/sites-available/000-default.conf
@@ -420,11 +425,27 @@ elif [ $OS_VERS == "11" ]; then
                 echo "  Reiniciando el servidor apache..."
                 echo ""
                 systemctl restart apache2
-                systemctl restart apache2
+            # Realizar configuraciones finales
+              # Autenticación básica
+                sed -i -e 's|$config['smtp_port'] = 587;|$config['smtp_port'] = 25;|g'  /etc/roundcube/config.inc.php
+                sed -i -e 's|$config['smtp_user'] = '%u';|$config['smtp_user'] = '';|g' /etc/roundcube/config.inc.php
+                # Para que no de "relay access denied"
+                  sed -i -e 's|localhost|127.0.0.1;|g'                                  /etc/roundcube/config.inc.php
+              # Dominio
+                if [ $vHostEsSubDominio == "si" ]; then
+                  sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = '$(hostname).$vDominio';|g' /etc/roundcube/config.inc.php
+                elif [ $vHostEsSubDominio == "no" ]; then
+                  sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = '$vDominio';|g'             /etc/roundcube/config.inc.php
+                else
+                  echo ""
+                fi
+              # plugins
+                sed -i -e 's|$config['plugins'] = array(|$config['plugins'] = array(\n'archive',\n'zipdownload',\n'managesieve',\n'password',|g' /etc/roundcube/config.inc.php
             # Cambiar el logo que viene por defecto  
               echo ""
               echo "  Cambiando el logo por defecto..."
               echo ""
+              echo ""'$config'"['skin_logo'] = 'logo.png';" >> /etc/roundcube/config.inc.php
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -499,14 +520,6 @@ elif [ $OS_VERS == "11" ]; then
           ############### Roundcube
           
             # Modificar la configuración
-              #sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'localhost';|g'                                            /etc/roundcube/config.inc.php
-              sed -i -e 's|$config['default_host'] = '';|$config['default_host'] = 'correo.festivalehz.local';|g'                              /etc/roundcube/config.inc.php
-              sed -i -e 's|$config['smtp_port'] = 587;|$config['smtp_port'] = 25;|g'                                                           /etc/roundcube/config.inc.php
-              sed -i -e 's|$config['smtp_user'] = '%u';|$config['smtp_user'] = '';|g'                                                          /etc/roundcube/config.inc.php
-              sed -i -e 's|$config['plugins'] = array(|$config['plugins'] = array(\n'archive',\n'zipdownload',\n'managesieve',\n'password',|g' /etc/roundcube/config.inc.php
-              echo ""                                                                                                                       >> /etc/roundcube/config.inc.php
-              echo ""'$config'"['session_lifetime'] = 60;"                                                                                  >> /etc/roundcube/config.inc.php
-              echo ""'$config'"['skin_logo'] = './ispmail-logo.png';"                                                                       >> /etc/roundcube/config.inc.php
 
               apt-get -y install mariadb-server
               apt-get -y install mariadb-client
