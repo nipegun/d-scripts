@@ -46,7 +46,7 @@ if [ $# -ne $vCantArgsCorrectos ]
   else
     echo ""
     echo "  Creando video a partir de los archivos de imagen ubicados en:"
-    echo ""
+    echo "  $vCarpetaConArchivos"
     echo ""
     vFecha=$(date +A%YM%mD%d)
     vYear=$(date +%Y)
