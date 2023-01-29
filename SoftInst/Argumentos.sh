@@ -18,14 +18,14 @@ vArgsInsuficientes=65
 if [ $# -ne $vCantArgsCorrectos ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
-    echo "Mal uso del script."
     echo ""
-    echo "El uso correcto sería: $0 [Argumento1] [Argumento2]"
+    echo -e "${vColorRojo}  Mal uso del script.${vFinColor}"
     echo ""
-    echo "Ejemplo:"
-    echo ' $0 "/etc/pepe/" "pepe.conf"'
-    echo "------------------------------------------------------------------------------"
+    echo -e "${vColorRojo}  El uso correcto sería: ${vFinColor}"
+    echo "    $0 [Argumento1] [Argumento2]"
+    echo ""
+    echo "  Ejemplo:"
+    echo '    $0 "/etc/pepe/" "pepe.conf"'
     echo ""
     exit $vArgsInsuficientes
   else
