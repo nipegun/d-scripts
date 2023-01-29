@@ -49,8 +49,7 @@ if [ $# -ne $vCantArgsCorrectos ]
     exit $vArgsInsuficientes
   else
     echo ""
-    echo "  Creando video a partir de los archivos de imagen ubicados en:"
-    echo "  $vCarpetaConArchivos"
+    echo -e "${vColorAzulClaro}  Creando video a partir de los archivos de imagen ubicados en $vCarpetaConArchivos... ${vFinColor}"
     echo ""
     vFecha=$(date +A%YM%mD%d)
     vYear=$(date +%Y)
