@@ -16,13 +16,17 @@
 #
 #  Ejecución remota con parámetros:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash -s Parámetro1 Parámetro2
+#
+#  Para agregar este script a cron:
+#    crontab -e
+#    59 23 * * * /root/scripts/-d-scripts/Video-CrearAPartirDeArchivosEnCarpeta.sh "/home/videovig/" "jpg"
 # ----------
 
 #vCarpetaConArchivos="/home/videovig/"
 #vExt="jpg"
 
-vCarpetaConArchivos="/home/videovig/"
-vExt="jpg"
+vCarpetaConArchivos=$1
+vExt=$2
 
 vColorAzul="\033[0;34m"
 vColorAzulClaro="\033[1;34m"
