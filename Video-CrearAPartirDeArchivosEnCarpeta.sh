@@ -9,13 +9,13 @@
 #  Script de NiPeGun para crear un video a partir de todos los archivos de imagen de una carpeta dada
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash
 #
 #  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash
 #
 #  Ejecución remota con parámetros:
-#  curl -s x | bash -s Parámetro1 Parámetro2
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 vCarpetaConArchivos="/home/videovig/"
@@ -52,11 +52,11 @@ if [ $# -ne $vCantArgsCorrectos ]
     vMonth=$(date +%m)
     vDay=$(date +%d)
     # Comprobar si el paquete ffmpeg está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      if [[ $(dpkg-query -s ffmpeg 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${vColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+        echo -e "${vColorRojo}  El paquete ffmpeg no está instalado. Iniciando su instalación...${vFinColor}"
         echo ""
-        apt-get -y update && apt-get -y install dialog
+        apt-get -y update && apt-get -y install ffmpeg
         echo ""
       fi
     ffmpeg -framerate 25 -pattern_type glob -i "$vCarpetaConArchivos$vYear$vMonth$vDay/*.$vExt" -c:v libx264 -pix_fmt yuv420p /VideoVig/$vFecha.mp4
