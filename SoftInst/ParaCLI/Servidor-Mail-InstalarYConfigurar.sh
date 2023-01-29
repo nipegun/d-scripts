@@ -347,7 +347,7 @@ elif [ $OS_VERS == "11" ]; then
 
             # Realizar cambios en la configuración
               echo ""
-              echo "  Realizando cambios en la configuración..."
+              echo "    Realizando cambios en la configuración..."
               echo ""
               # Parar el servicio
                 service dovecot stop
