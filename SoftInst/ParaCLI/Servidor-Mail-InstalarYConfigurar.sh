@@ -359,6 +359,8 @@ elif [ $OS_VERS == "11" ]; then
                 maildirmake.dovecot /etc/skel/Maildir/.Templates
               # Indicar la ubicación de la carpeta de mail
                 sed -i -e 's|mail_location = maildir:~/Maildir|\nmail_location = maildir:~/Maildir|g' /etc/dovecot/conf.d/10-mail.conf
+              # Escuchar en todas las interfaces
+                sed -i -e 's|#listen|listen|g' /etc/dovecot/dovecot.conf
               # Reiniciar el servicio
                 service dovecot restart
 
