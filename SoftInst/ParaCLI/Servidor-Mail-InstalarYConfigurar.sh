@@ -354,22 +354,9 @@ elif [ $OS_VERS == "11" ]; then
               # Crear las carpetas de mail para para el servicio
                 maildirmake.dovecot /etc/skel/Maildir
               # Indicar la ubicación de la carpeta de mail
-                sed -i -e 's|#   mail_location = maildir:~/Maildir|mail_location = maildir:~/Maildir|g' /etc/dovecot/conf.d/10-mail.conf
+                sed -i -e 's|mail_location = maildir:~/Maildir|\nmail_location = maildir:~/Maildir|g' /etc/dovecot/conf.d/10-mail.conf
               # Reiniciar el servicio
                 service dovecot restart
-              
-              echo ""
-              echo "  Cambiando el logo por defecto..."
-              echo ""
-            # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-              if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-                echo ""
-                echo -e "${vColorRojo}    wget no está instalado. Iniciando su instalación...${vFinColor}"
-                echo ""
-                apt-get -y update && apt-get -y install wget
-                echo ""
-              fi
-            wget --no-check-certificate http://hacks4geeks.com/_/cosas/LogoMailEHZ.png -O /var/lib/roundcube/public_html/logo.png
 
           ;;
 
@@ -434,6 +421,19 @@ elif [ $OS_VERS == "11" ]; then
                 echo ""
                 systemctl restart apache2
                 systemctl restart apache2
+            # Cambiar el logo que viene por defecto  
+              echo ""
+              echo "  Cambiando el logo por defecto..."
+              echo ""
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${vColorRojo}    wget no está instalado. Iniciando su instalación...${vFinColor}"
+                  echo ""
+                  apt-get -y update && apt-get -y install wget
+                  echo ""
+                fi
+              wget --no-check-certificate http://hacks4geeks.com/_/cosas/LogoMailEHZ.png -O /var/lib/roundcube/public_html/logo.png
 
           ;;
 
