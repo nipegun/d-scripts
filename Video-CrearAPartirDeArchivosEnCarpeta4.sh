@@ -49,7 +49,7 @@ if [ $# -ne $vCantArgsCorrectos ]
     exit $vArgsInsuficientes
   else
     echo ""
-    echo -e "${vColorAzulClaro}  Creando video a partir de los archivos de imagen ubicados en $vCarpetaConArchivos... ${vFinColor}"
+    echo -e "${vColorAzulClaro}  Creando video a partir de los archivos de imagen ubicados en $vCarpetaConArchivos ... ${vFinColor}"
     echo ""
     vFecha=$(date +A%YM%mD%d)
     vYear=$(date +%Y)
@@ -63,6 +63,8 @@ if [ $# -ne $vCantArgsCorrectos ]
         apt-get -y update && apt-get -y install ffmpeg
         echo ""
       fi
+    mkdir /VideoVig > /dev/null
     ffmpeg -framerate 25 -hide_banner -loglevel error -pattern_type glob -i "$vCarpetaConArchivos$vYear$vMonth$vDay/*.$vExt" -c:v libx264 -pix_fmt yuv420p /VideoVig/$vFecha.mp4
+    echo ""
 fi
 
