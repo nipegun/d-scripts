@@ -303,8 +303,13 @@ elif [ $OS_VERS == "11" ]; then
               echo "address {"                 >> /etc/mailutils.conf
               echo "  email-domain $vDominio;" >> /etc/mailutils.conf
               echo "};"                        >> /etc/mailutils.conf
-            # Creando nuevos alias
-              newaliases
+            # Alias
+              # Por defecto los correos electrónicos generados por el sistema se reenvian al root.
+              # Para hacer que luego se vuelvan a enviar a una cuenta específica, se agrega lo siguiente:
+                echo "root: nipegun@$vDominio" >> /etc/aliases
+              # Crear los nuevos alias
+                newaliases
+              
             echo ""
             echo "    Reiniciando el servicio postfix..."
             echo ""
