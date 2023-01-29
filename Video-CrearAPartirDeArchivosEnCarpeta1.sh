@@ -64,6 +64,6 @@ if [ $# -ne $vCantArgsCorrectos ]
         apt-get -y update && apt-get -y install ffmpeg
         echo ""
       fi
-    ffmpeg -framerate 25 -hide_banner -pattern_type glob -i "$vCarpetaConArchivos$vYear$vMonth$vDay/*.$vExt" -c:v libx264 -pix_fmt yuv420p /VideoVig/$vFecha.mp4
+    ffmpeg -framerate 25 -hide_banner -loglevel error -pattern_type glob -i "$vCarpetaConArchivos$vYear$vMonth$vDay/*.$vExt" -c:v libx264 -pix_fmt yuv420p /VideoVig/$vFecha.mp4
 fi
 
