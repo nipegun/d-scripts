@@ -338,10 +338,8 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Cambiando la ubicación de la carpeta pública..."
           echo ""
-          # Si no se especifica la carpeta pública, el directorio home del usuario sería la carpeta FTP home
-          vRutaACarpeta=/ftp/pub
-            echo "local_root=$vRutaACarpeta" >> /etc/vsftpd.conf
-          systemctl restart vsftpd
+
+          echo "    Comandos todavía no preparados..."
 
         ;;
 
@@ -350,8 +348,8 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Permitiendo ls recursivo..."
           echo ""
-          sed -i -e 's|#ls_recurse_enable=YES|ls_recurse_enable=YES|g' /etc/vsftpd.conf
-          systemctl restart vsftpd
+
+          echo "    Comandos todavía no preparados..."
 
         ;;
           
