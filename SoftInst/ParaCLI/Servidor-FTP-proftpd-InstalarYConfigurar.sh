@@ -185,7 +185,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ''                                                                                                   >> /etc/proftpd/conf.d/extra.conf
           echo '  <Directory incoming>'                                                                             >> /etc/proftpd/conf.d/extra.conf
           echo '    # Hacer que las nuevas carpetas y archivos sean accesibles por el grupo y el resto de usuarios' >> /etc/proftpd/conf.d/extra.conf
-          echo '      Umask022  022'                                                                                >> /etc/proftpd/conf.d/extra.conf
+          echo '      Umask 022 022'                                                                                >> /etc/proftpd/conf.d/extra.conf
           echo '    <Limit READ WRITE>'                                                                             >> /etc/proftpd/conf.d/extra.conf
           echo '      DenyAll'                                                                                      >> /etc/proftpd/conf.d/extra.conf
           echo '    </Limit>'                                                                                       >> /etc/proftpd/conf.d/extra.conf
