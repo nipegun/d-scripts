@@ -156,45 +156,42 @@ elif [ $OS_VERS == "11" ]; then
           echo "  Activando navegación anónima..."
           echo ""
 
-          echo ''                                                                                                   >> /etc/proftpd/conf.d/extra.conf
-          echo '<Anonymous ~ftp>'                                                                                   >> /etc/proftpd/conf.d/extra.conf
-          echo '   User ftp'                                                                                        >> /etc/proftpd/conf.d/extra.conf
-          echo '   Group nogroup'                                                                                   >> /etc/proftpd/conf.d/extra.conf
-          echo '   # Permitir a los clientes loguearse con la cuenta "anonymous" además de la de "ftp"'             >> /etc/proftpd/conf.d/extra.conf
-          echo '     UserAlias anonymous ftp'                                                                       >> /etc/proftpd/conf.d/extra.conf
-          echo '   # Que todos los archivos pertenezcan al usuario ftp'                                             >> /etc/proftpd/conf.d/extra.conf
-          echo '     DirFakeUser on ftp'                                                                            >> /etc/proftpd/conf.d/extra.conf
-          echo '     DirFakeGroup on ftp'                                                                           >> /etc/proftpd/conf.d/extra.conf
-          echo '   #'                                                                                               >> /etc/proftpd/conf.d/extra.conf
-          echo '    RequireValidShell off'                                                                          >> /etc/proftpd/conf.d/extra.conf
-          echo ''                                                                                                   >> /etc/proftpd/conf.d/extra.conf
-          echo '   # Limit the maximum number of anonymous logins'                                                  >> /etc/proftpd/conf.d/extra.conf
-          echo '   MaxClients 10'                                                                                   >> /etc/proftpd/conf.d/extra.conf
-          echo ''                                                                                                   >> /etc/proftpd/conf.d/extra.conf
-          echo '   # Mostrar un mensaje al login'                                                                   >> /etc/proftpd/conf.d/extra.conf
-          echo '     DisplayLogin welcome.msg'                                                                      >> /etc/proftpd/conf.d/extra.conf
-          echo '   # Mostrar un mensaje con cada cambio de directorio'                                              >> /etc/proftpd/conf.d/extra.conf
-          echo '     DisplayChdir .message'                                                                         >> /etc/proftpd/conf.d/extra.conf
-          echo ''                                                                                                   >> /etc/proftpd/conf.d/extra.conf
-          echo '   # Limit WRITE everywhere in the anonymous chroot'                                                >> /etc/proftpd/conf.d/extra.conf
-          echo '   <Directory *>'                                                                                   >> /etc/proftpd/conf.d/extra.conf
-          echo '     <Limit WRITE>'                                                                                 >> /etc/proftpd/conf.d/extra.conf
-          echo '       DenyAll'                                                                                     >> /etc/proftpd/conf.d/extra.conf
-          echo '     </Limit>'                                                                                      >> /etc/proftpd/conf.d/extra.conf
-          echo '   </Directory>'                                                                                    >> /etc/proftpd/conf.d/extra.conf
-          echo ''                                                                                                   >> /etc/proftpd/conf.d/extra.conf
-          echo '  <Directory incoming>'                                                                             >> /etc/proftpd/conf.d/extra.conf
-          echo '    # Hacer que las nuevas carpetas y archivos sean accesibles por el grupo y el resto de usuarios' >> /etc/proftpd/conf.d/extra.conf
-          echo '      Umask 022 022'                                                                                >> /etc/proftpd/conf.d/extra.conf
-          echo '    <Limit READ WRITE>'                                                                             >> /etc/proftpd/conf.d/extra.conf
-          echo '      DenyAll'                                                                                      >> /etc/proftpd/conf.d/extra.conf
-          echo '    </Limit>'                                                                                       >> /etc/proftpd/conf.d/extra.conf
-          echo '    <Limit STOR>'                                                                                   >> /etc/proftpd/conf.d/extra.conf
-          echo '      AllowAll'                                                                                     >> /etc/proftpd/conf.d/extra.conf
-          echo '    </Limit>'                                                                                       >> /etc/proftpd/conf.d/extra.conf
-          echo '  </Directory>'                                                                                     >> /etc/proftpd/conf.d/extra.conf
-          echo '</Anonymous>'                                                                                       >> /etc/proftpd/conf.d/extra.conf
-          echo ''                                                                                                   >> /etc/proftpd/conf.d/extra.conf
+          echo ''                                                                                                      >> /etc/proftpd/conf.d/extra.conf
+          echo '<Anonymous ~ftp>'                                                                                      >> /etc/proftpd/conf.d/extra.conf
+          echo '   User ftp'                                                                                           >> /etc/proftpd/conf.d/extra.conf
+          echo '   Group nogroup'                                                                                      >> /etc/proftpd/conf.d/extra.conf
+          echo '   # Permitir a los clientes loguearse con la cuenta "anonymous" además de la de "ftp"'                >> /etc/proftpd/conf.d/extra.conf
+          echo '     UserAlias anonymous ftp'                                                                          >> /etc/proftpd/conf.d/extra.conf
+          echo '   # Que todos los archivos pertenezcan al usuario ftp'                                                >> /etc/proftpd/conf.d/extra.conf
+          echo '     DirFakeUser on ftp'                                                                               >> /etc/proftpd/conf.d/extra.conf
+          echo '     DirFakeGroup on ftp'                                                                              >> /etc/proftpd/conf.d/extra.conf
+          echo '   #'                                                                                                  >> /etc/proftpd/conf.d/extra.conf
+          echo '    RequireValidShell off'                                                                             >> /etc/proftpd/conf.d/extra.conf
+          echo '   # Limit the maximum number of anonymous logins'                                                     >> /etc/proftpd/conf.d/extra.conf
+          echo '     MaxClients 10'                                                                                    >> /etc/proftpd/conf.d/extra.conf
+          echo '   # Mostrar un mensaje al login'                                                                      >> /etc/proftpd/conf.d/extra.conf
+          echo '     DisplayLogin welcome.msg'                                                                         >> /etc/proftpd/conf.d/extra.conf
+          echo '   # Mostrar un mensaje con cada cambio de directorio'                                                 >> /etc/proftpd/conf.d/extra.conf
+          echo '     DisplayChdir .message'                                                                            >> /etc/proftpd/conf.d/extra.conf
+          echo '   # No permitir el permiso de escritura en la carpta por defecto: (/srv/ftp/)'                        >> /etc/proftpd/conf.d/extra.conf
+          echo '     <Directory *>'                                                                                    >> /etc/proftpd/conf.d/extra.conf
+          echo '       <Limit WRITE>'                                                                                  >> /etc/proftpd/conf.d/extra.conf
+          echo '         DenyAll'                                                                                      >> /etc/proftpd/conf.d/extra.conf
+          echo '       </Limit>'                                                                                       >> /etc/proftpd/conf.d/extra.conf
+          echo '     </Directory>'                                                                                     >> /etc/proftpd/conf.d/extra.conf
+          echo '   #'                                                                                                  >> /etc/proftpd/conf.d/extra.conf
+          echo '     <Directory incoming>'                                                                             >> /etc/proftpd/conf.d/extra.conf
+          echo '       # Hacer que las nuevas carpetas y archivos sean accesibles por el grupo y el resto de usuarios' >> /etc/proftpd/conf.d/extra.conf
+          echo '         Umask 022 022'                                                                                >> /etc/proftpd/conf.d/extra.conf
+          echo '       <Limit READ WRITE>'                                                                             >> /etc/proftpd/conf.d/extra.conf
+          echo '         DenyAll'                                                                                      >> /etc/proftpd/conf.d/extra.conf
+          echo '       </Limit>'                                                                                       >> /etc/proftpd/conf.d/extra.conf
+          echo '       <Limit STOR>'                                                                                   >> /etc/proftpd/conf.d/extra.conf
+          echo '         AllowAll'                                                                                     >> /etc/proftpd/conf.d/extra.conf
+          echo '       </Limit>'                                                                                       >> /etc/proftpd/conf.d/extra.conf
+          echo '     </Directory>'                                                                                     >> /etc/proftpd/conf.d/extra.conf
+          echo '</Anonymous>'                                                                                          >> /etc/proftpd/conf.d/extra.conf
+          echo ''                                                                                                      >> /etc/proftpd/conf.d/extra.conf
           systemctl restart proftpd
 
         ;;
@@ -204,9 +201,10 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Activando el logueo para usuarios del sistema..."
           echo ""
-          sed -i -e 's|#local_enable=YES|local_enable=YES|g' /etc/vsftpd.conf
-          echo "allow_writeable_chroot=YES" >>               /etc/vsftpd.conf
-          systemctl restart vsftpd
+
+          echo ""
+          echo "    En proftpd, la configuración por defecto ya permite loguearse por ftp a los usuarios del sistema!"
+          echo ""
 
         ;;
 
@@ -215,10 +213,12 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Activando enjaulado de usuarios..."
           echo ""
-          # Activar enjaulado de usuarios
-            sed -i -e 's|#chroot_local_user=YES|chroot_local_user=YES|g' /etc/vsftpd.conf
-          vEnjaulado="Activo"
 
+          echo "DefaultRoot ~ !ftpsinjaula" >> /etc/proftpd/conf.d/extra.conf
+          groupadd ftpsinjaula 2> /dev/null
+          systemctl restart proftpd
+          vEnjaulado="Activo"
+ 
         ;;
 
         6)
@@ -235,14 +235,10 @@ elif [ $OS_VERS == "11" ]; then
             else
               vUsuarioLibre=$(id -nu 1000) 
               echo "    Se desenjaulará al usuario $vUsuarioLibre."
-              echo "    Si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
+              echo '    Si se desea desenjaular a un usuario diferente habrá que agregarlo al grupo "ftpsinjaula"'
               echo ""
-              # Si la directiva chroot_local_user está configurada como YES, la lista se convierte en una lista de excepción
-              sed -i -e 's|#chroot_list_enable=YES|chroot_list_enable=YES|g'                                     /etc/vsftpd.conf
-              sed -i -e 's|#chroot_list_file=/etc/vsftpd.chroot_list|chroot_list_file=/etc/vsftpd.chroot_list|g' /etc/vsftpd.conf
-              touch /etc/vsftpd.chroot_list
-              echo "$vUsuarioLibre" >> /etc/vsftpd.chroot_list 
-              systemctl restart vsftpd
+              usermod -a -G ftpsinjaula $vUsuarioLibre
+              systemctl restart proftpd
             fi
           else
             echo ""
@@ -260,22 +256,24 @@ elif [ $OS_VERS == "11" ]; then
           if [ "$vEnjaulado" = "Activo" ]; then
             #read -p "Ingresa el nombre del usuario que quieras desenjaular: " vUsuarioLibre
             echo "    Ingresa el nombre del usuario que quieras desenjaular:"
-            read vUsuarioLibre < /dev/tty
-            echo "      Se desenjaulará al usuario $vUsuarioLibre."
-            echo "      Si se desea desenjaular a un usuario diferente habrá que agregarlo a /etc/vsftpd.chroot_list"
-            echo ""
-            # Si la directiva chroot_local_user está configurada como YES, la lista se convierte en una lista de excepción
-            sed -i -e 's|#chroot_list_enable=YES|chroot_list_enable=YES|g'                                     /etc/vsftpd.conf
-            sed -i -e 's|#chroot_list_file=/etc/vsftpd.chroot_list|chroot_list_file=/etc/vsftpd.chroot_list|g' /etc/vsftpd.conf
-            touch /etc/vsftpd.chroot_list
-            echo "$vUsuarioLibre" >> /etc/vsftpd.chroot_list 
-            systemctl restart vsftpd
+            read vUsuarioALiberar < /dev/tty
+            vUsuarioExiste=$(cat /etc/passwd | grep $vUsuarioALiberar | cut -d ':' -f1)
+            if [ "$vUsuarioExiste" = "" ]; then
+              echo ""
+              echo -e "${vColorRojo}    El usuario $vUsuarioALiberar no existe. No se procederá con el desenjaulado.${vFinColor}"
+              echo ""
+            else
+              echo "    Se desenjaulará al usuario $vUsuarioALiberar."
+              echo '    Si se desea desenjaular a un usuario diferente habrá que agregarlo al grupo "ftpsinjaula"'
+              echo ""
+              usermod -a -G ftpsinjaula $vUsuarioALiberar
+              systemctl restart proftpd
+            fi
           else
             echo ""
             echo -e "${vColorRojo}    No se procederá con el desenjaulado de ningún usuario porque el enjaulado no se ha activado previamente.${vFinColor}"
             echo ""
           fi
-          systemctl restart vsftpd
 
         ;;
 
@@ -301,8 +299,16 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Activando permiso de escritura..."
           echo ""
-          sed -i -e 's|#write_enable=YES|write_enable=YES|g' /etc/vsftpd.conf
-          systemctl restart vsftpd
+
+          echo ""
+          echo "    En proftpd, la configuración por defecto ya permite el permiso de escritura a los distintos usuarios del sistema!"
+          echo "    Si lo que quieres es permitir permisos de escritura para usuarios anónimos, agrega la línea:"
+          echo "      asdasdasd"
+          echo "    al archivo:"
+          echo "      /etc/proftpd/conf.d/extra.conf"
+          echo "    y reinicia el servicio, ejecutando como root:"
+          echo "      systemctl restart proftpd"
+          echo ""
 
         ;;
 
