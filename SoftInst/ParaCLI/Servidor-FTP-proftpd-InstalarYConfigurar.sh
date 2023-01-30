@@ -165,9 +165,9 @@ elif [ $OS_VERS == "11" ]; then
           echo '   # Que todos los archivos pertenezcan al usuario ftp'                                                >> /etc/proftpd/conf.d/extra.conf
           echo '     DirFakeUser on ftp'                                                                               >> /etc/proftpd/conf.d/extra.conf
           echo '     DirFakeGroup on ftp'                                                                              >> /etc/proftpd/conf.d/extra.conf
-          echo '   #'                                                                                                  >> /etc/proftpd/conf.d/extra.conf
+          echo '   # No requerir que los usuario tengan un shell válido en /etc/shells para poder loguearse'           >> /etc/proftpd/conf.d/extra.conf
           echo '    RequireValidShell off'                                                                             >> /etc/proftpd/conf.d/extra.conf
-          echo '   # Limit the maximum number of anonymous logins'                                                     >> /etc/proftpd/conf.d/extra.conf
+          echo '   # Limit la cantidad de usuarios anónimos conectados al mismo tiempo'                                >> /etc/proftpd/conf.d/extra.conf
           echo '     MaxClients 10'                                                                                    >> /etc/proftpd/conf.d/extra.conf
           echo '   # Mostrar un mensaje al login'                                                                      >> /etc/proftpd/conf.d/extra.conf
           echo '     DisplayLogin welcome.msg'                                                                         >> /etc/proftpd/conf.d/extra.conf
@@ -177,17 +177,6 @@ elif [ $OS_VERS == "11" ]; then
           echo '     <Directory *>'                                                                                    >> /etc/proftpd/conf.d/extra.conf
           echo '       <Limit WRITE>'                                                                                  >> /etc/proftpd/conf.d/extra.conf
           echo '         DenyAll'                                                                                      >> /etc/proftpd/conf.d/extra.conf
-          echo '       </Limit>'                                                                                       >> /etc/proftpd/conf.d/extra.conf
-          echo '     </Directory>'                                                                                     >> /etc/proftpd/conf.d/extra.conf
-          echo '   #'                                                                                                  >> /etc/proftpd/conf.d/extra.conf
-          echo '     <Directory incoming>'                                                                             >> /etc/proftpd/conf.d/extra.conf
-          echo '       # Hacer que las nuevas carpetas y archivos sean accesibles por el grupo y el resto de usuarios' >> /etc/proftpd/conf.d/extra.conf
-          echo '         Umask 022 022'                                                                                >> /etc/proftpd/conf.d/extra.conf
-          echo '       <Limit READ WRITE>'                                                                             >> /etc/proftpd/conf.d/extra.conf
-          echo '         DenyAll'                                                                                      >> /etc/proftpd/conf.d/extra.conf
-          echo '       </Limit>'                                                                                       >> /etc/proftpd/conf.d/extra.conf
-          echo '       <Limit STOR>'                                                                                   >> /etc/proftpd/conf.d/extra.conf
-          echo '         AllowAll'                                                                                     >> /etc/proftpd/conf.d/extra.conf
           echo '       </Limit>'                                                                                       >> /etc/proftpd/conf.d/extra.conf
           echo '     </Directory>'                                                                                     >> /etc/proftpd/conf.d/extra.conf
           echo '</Anonymous>'                                                                                          >> /etc/proftpd/conf.d/extra.conf
@@ -282,15 +271,26 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Activando conexión mediante SSL..."
           echo ""
-          openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.pem
-          chmod 600 /etc/ssl/private/vsftpd.key
-          sed -i -e 's|rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem|rsa_cert_file=/etc/ssl/certs/vsftpd.pem|g'                   /etc/vsftpd.conf
-          sed -i -e 's|rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key|rsa_private_key_file=/etc/ssl/private/vsftpd.key|g' /etc/vsftpd.conf
-          sed -i -e 's|ssl_enable=NO|ssl_enable=YES|g'                                                                                 /etc/vsftpd.conf
-          #echo "ssl_ciphers=HIGH"           >> /etc/vsftpd.conf
-          #echo "force_local_data_ssl=YES"   >> /etc/vsftpd.conf
-          #echo "force_local_logins_ssl=YES" >> /etc/vsftpd.conf
-          systemctl restart vsftpd
+          # Generar el nuevo certificado
+            rm -f /etc/ssl/certs/proftpd.crt 2> /dev/null
+            rm -f /etc/ssl/private/proftpd.key 2> /dev/null
+            #openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/proftpd.key -out /etc/ssl/certs/proftpd.crt
+            proftpd-gencert
+            chmod 600 /etc/ssl/private/proftpd.key
+          # Modificar la configuración de TLS
+            sed -i -e 's|#TLSEngine|\nTLSEngine|g'                                    /etc/proftpd/tls.conf
+            sed -i -e 's|#TLSLog|\nTLSLog|g'                                          /etc/proftpd/tls.conf
+            sed -i -e 's|#TLSProtocol|\nTLSProtocol|g'                                /etc/proftpd/tls.conf
+            sed -i -e 's|#TLSRSACertificateFile|\nTLSRSACertificateFile|g'            /etc/proftpd/tls.conf
+            sed -i -e 's|#TLSRSACertificateKeyFile|\nTLSRSACertificateKeyFile|g'      /etc/proftpd/tls.conf
+          # Aceptar sólo conexiones seguras
+            sed -i -e 's|#TLSRequired|\nTLSRequired|g'                              /etc/proftpd/tls.conf
+          # Aceptar conexiones seguras e inseguras
+            #sed -i -e 's|#TLSRequired.*|\nTLSRequired off|g'                       /etc/proftpd/tls.conf
+          # Linkear TLS a la configuración general
+            echo "Include /etc/proftpd/tls.conf" >> /etc/proftpd/conf.d/extra.conf
+          # Reiniciar el servicio
+            systemctl restart proftpd
 
         ;;
 
@@ -302,11 +302,28 @@ elif [ $OS_VERS == "11" ]; then
 
           echo ""
           echo "    En proftpd, la configuración por defecto ya permite el permiso de escritura a los distintos usuarios del sistema!"
-          echo "    Si lo que quieres es permitir permisos de escritura para usuarios anónimos, agrega la línea:"
-          echo "      asdasdasd"
-          echo "    al archivo:"
+          echo "    Si lo que quieres es permitir permisos de escritura para usuarios anónimos, reemplaza:"
+          echo ''
+          echo '      <Directory *>'
+          echo '        <Limit WRITE>'
+          echo -e "${vColorRojo}          DenyAll${vFinColor}"
+          echo '        </Limit>'
+          echo '      </Directory>'
+          echo ''
+          echo '    por:'
+          echo ''
+          echo '      <Directory *>'
+          echo '        <Limit WRITE>'
+          echo -e "${vColorVerde}          AllowAll${vFinColor}"
+          echo '        </Limit>'
+          echo '      </Directory>'
+          echo ''
+          echo "    ...en el archivo:"
+          echo ''
           echo "      /etc/proftpd/conf.d/extra.conf"
-          echo "    y reinicia el servicio, ejecutando como root:"
+          echo ''
+          echo "    ...y reinicia el servicio, ejecutando como root:"
+          echo ''
           echo "      systemctl restart proftpd"
           echo ""
 
