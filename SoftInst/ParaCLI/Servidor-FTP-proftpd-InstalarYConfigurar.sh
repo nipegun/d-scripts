@@ -278,8 +278,8 @@ elif [ $OS_VERS == "11" ]; then
           # Generar el nuevo certificado
             rm -f /etc/ssl/certs/proftpd.crt 2> /dev/null
             rm -f /etc/ssl/private/proftpd.key 2> /dev/null
-            #openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/proftpd.key -out /etc/ssl/certs/proftpd.crt
-            proftpd-gencert
+            #proftpd-gencert
+            openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/proftpd.key -out /etc/ssl/certs/proftpd.crt -subj "/C=ES/ST=Madrid/L=Arganda/O=MiEmpresa/CN=dominio.com/emailAddress=mail@gmail.com"
             chmod 600 /etc/ssl/private/proftpd.key
           # Modificar la configuración de TLS
             sed -i -e 's|#TLSEngine|\nTLSEngine|g'                                    /etc/proftpd/tls.conf
