@@ -109,7 +109,7 @@ elif [ $OS_VERS == "11" ]; then
       5 "Activar el enjaulado de usuarios." off
       6 "Desenjaular el usuario 1000." off
       7 "Desenjaular usuario específico." off
-      8 "Activar la conexión mediante SSL." off
+      8 "Activar la conexión mediante TLS." off
       9 "Activar permiso de escritura" off
      10 "Cambiar la ubicación de la carpeta pública" off
      11 "Permitir ls recursivo" off
@@ -269,10 +269,12 @@ elif [ $OS_VERS == "11" ]; then
         8)
 
           echo ""
-          echo "  Activando conexión mediante SSL..."
+          echo "  Activando conexión mediante TLS..."
           echo ""
           # Instalar el módulo para TLS
             apt-get -y install proftpd-mod-crypto
+          # Activar el módulo
+            sed -i -e 's|#LoadModule mod_tls.c|LoadModule mod_tls.c|g' /etc/proftpd/modules.conf
           # Generar el nuevo certificado
             rm -f /etc/ssl/certs/proftpd.crt 2> /dev/null
             rm -f /etc/ssl/private/proftpd.key 2> /dev/null
