@@ -271,6 +271,8 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Activando conexión mediante SSL..."
           echo ""
+          # Instalar el módulo para TLS
+            apt-get -y install proftpd-mod-crypto
           # Generar el nuevo certificado
             rm -f /etc/ssl/certs/proftpd.crt 2> /dev/null
             rm -f /etc/ssl/private/proftpd.key 2> /dev/null
