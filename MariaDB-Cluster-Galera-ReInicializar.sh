@@ -18,8 +18,8 @@ echo ""
 # Obtener las direcciones IP que forman parte del cluster
   vIPsDelCluster=$(cat /etc/mysql/mariadb.conf.d/60-galera.cnf | grep gcomm | cut -d ':' -f2)
   echo ""
-  echo "    Actualmente el cluster está configurado con estos nodos:"
-  echo "  $vIPsDelCluster"
+  echo "    Actualmente el clúster está configurado con estos nodos:"
+  echo "    $vIPsDelCluster"
 # Parar el servicio MariaDB
   echo ""
   echo "    Parando el servicio mariadb..."
@@ -38,5 +38,5 @@ echo ""
   echo ""
   systemctl start mariadb
 # Volver a agregar las IPs del cluster
-  sed -i -e 's|^wsrep_cluster_address.*|wsrep_cluster_address = gcomm:$vIPsDelCluster|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
+  sed -i -e "s|^wsrep_cluster_address.*|wsrep_cluster_address = gcomm:$vIPsDelCluster|g" /etc/mysql/mariadb.conf.d/60-galera.cnf
 
