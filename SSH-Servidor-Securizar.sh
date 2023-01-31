@@ -86,10 +86,10 @@ elif [ $OS_VERS == "11" ]; then
 
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
-      1 "Ejecutar securización básica (mandatorio)" on
-      2 "Activar la autenticación mediante clave público/privada" on
-      3 "Limitar la autenticación a sólo mediante clave público/privada" off
-      4 "Opción 4" off
+      1 "Ejecutar securización básica (mandatorio)." on
+      2 "Activar la autenticación mediante clave público/privada." on
+      3 "Limitar la autenticación a sólo mediante clave público/privada." off
+      4 "Implementar autenticación de doble factor." off
       5 "Opción 5" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -131,6 +131,17 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "  Activando la autenticación mediante clave público/privada..."
             echo ""
+            # Activar la autenticación mediante llave pública
+              sed -i -e 's|#PubkeyAuthentication yes|PubkeyAuthentication yes|g' /etc/ssh/sshd_config
+            # Crear el usuario tecnico
+              useradd -d /home/tecnico/ -s /bin/bash -p $(openssl passwd -1 Contra123) tecnico
+              mkdir /home/tecnico/ 2> /dev/null
+              chown tecnico:tecnico /home/$1/ -R
+              find /home/tecnico -type d -exec chmod 750 {} \;
+              find /home/tecnico -type f -exec chmod 664 {} \;
+            # Reiniciar el servidor SSH
+              systemctl restart ssh.service
+            echo ""
             echo "    Recuerda crear las llaves SSH en el cliente ejecutando:"
             echo "      ssh-keygen -t rsa -b 4096"
             echo ""
@@ -146,10 +157,6 @@ elif [ $OS_VERS == "11" ]; then
             echo "    NOTA: Aunque éste método te evite tener que poner la contraseña SSH del servidor,"
             echo "    la conexión seguirá pidiendo la contraseña de la clave privada del cliente."
             echo ""
-            # Activar la autenticación mediante llave pública
-              sed -i -e 's|#PubkeyAuthentication yes|PubkeyAuthentication yes|g' /etc/ssh/sshd_config
-            # Reiniciar el servidor SSH
-              systemctl restart ssh.service
 
           ;;
 
@@ -166,8 +173,12 @@ elif [ $OS_VERS == "11" ]; then
           4)
 
             echo ""
-            echo "  Opción 4..."
+            echo "  Implementando autenticación de doble factor..."
             echo ""
+            # Establecer la zona horaria
+              timedatectl set-time-zone Europe/Madrid
+            # Instalar chrony
+              apt-get -y update && apt-get -y install chrony
 
           ;;
 
