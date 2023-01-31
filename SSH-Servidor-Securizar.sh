@@ -84,17 +84,15 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}Iniciando el script de securización de SSH para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
- #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
-      1 "Ejecutar securización básica (casi mandatorio)" on
-      2 "Opción 2" off
-      3 "Opción 3" off
+      1 "Ejecutar securización básica (mandatorio)" on
+      2 "Activar la autenticación mediante clave público/privada" on
+      3 "Limitar la autenticación a sólo mediante clave público/privada" off
       4 "Opción 4" off
       5 "Opción 5" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  #clear
 
     for choice in $choices
       do
@@ -123,22 +121,45 @@ elif [ $OS_VERS == "11" ]; then
               sed -i -e 's|#MaxAuthTries 6|MaxAuthTries 3|g' /etc/ssh/sshd_config
             # Denegar ssh a los usuarios mortadelo y filemon
               echo "DenyUsers mortadelo filemon" >> /etc/ssh/sshd_config
+            # Reiniciar el servidor SSH
+              systemctl restart ssh.service
 
           ;;
 
           2)
 
             echo ""
-            echo "  Opción 2..."
+            echo "  Activando la autenticación mediante clave público/privada..."
             echo ""
+            echo "    Recuerda crear las llaves SSH en el cliente ejecutando:"
+            echo "      ssh-keygen -t rsa -b 4096"
+            echo ""
+            echo "      El comando creará dos archivos en el cliente:"
+            echo "      - /home/usuario/.ssh/id_rsa      (clave privada)"
+            echo "      - /home/usuario/.ssh/id_rsa.pub. (clave pública)"
+            echo ""
+            echo "        Deberás meter el contenido del archivo id_rsa.pub del cliente"
+            echo "        dentro del archivo ~/.ssh/authorized_keys de la cuenta de usuario del servidor."
+            echo '        Por ejemplo, para copiar dentro del usuario "tecnico" del servidor, ejecuta en el cliente:'
+            echo "          cat ~/.ssh/id_rsa.pub | ssh -p 22222 tecnico@xxx.xxx.xxx.xxx 'cat >> ~/.ssh/authorized_keys'"
+            echo ""
+            echo "    NOTA: Aunque éste método te evite tener que poner la contraseña SSH del servidor,"
+            echo "    la conexión seguirá pidiendo la contraseña de la clave privada del cliente."
+            echo ""
+            # Activar la autenticación mediante llave pública
+              sed -i -e 's|#PubkeyAuthentication yes|PubkeyAuthentication yes|g' /etc/ssh/sshd_config
+            # Reiniciar el servidor SSH
+              systemctl restart ssh.service
 
           ;;
 
           3)
 
             echo ""
-            echo "  Opción 3..."
+            echo "  Limitando la autenticación a sólo mediante clave público/privada..."
             echo ""
+            sed -i -e 's|#PasswordAuthentication yes|PasswordAuthentication no|g' /etc/ssh/sshd_config
+            sed -i -e 's|#PubkeyAuthentication yes|PubkeyAuthentication yes|g'    /etc/ssh/sshd_config
 
           ;;
 
