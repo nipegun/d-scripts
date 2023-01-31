@@ -105,9 +105,31 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Issabel para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
-  # Activar el repositorio
+  # Agregar el repositorio a la lista de repositorios disponibles
+    echo ""
+    echo "  Agregando el repositorio a la lista de repositorios disponibles..."
+    echo ""
     echo "deb http://repo.issabel.org/debian bullseye main" > /etc/apt/sources.list.d/issabel.list
-  # Bajar la firma
+  # Bajar llave para firmar el repositorio
+    echo ""
+    echo "  Bajando la llave para firmar el repositorio..."
+    echo ""
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${vColorRojo}  wget no está instalado. Iniciando su instalación...${vFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install wget
+        echo ""
+      fi
+    # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${vColorRojo}  gnupg2 no está instalado. Iniciando su instalación...${vFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install gnupg2
+        echo ""
+      fi
     wget -O - http://repo.issabel.org/issabel.key | apt-key add -
   # Instalar los paquetes
     apt-get -y update
