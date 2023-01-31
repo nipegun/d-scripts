@@ -38,7 +38,7 @@ echo ""
   sed -i -e 's|^wsrep_cluster_address.*|wsrep_cluster_address = gcomm://|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
 # Inicializar el cluster
   echo ""
-  echo "    Intentando reinicializarlo..."
+  echo "    Intentando reinicializar el clúster..."
   echo ""
   vEsSeguroInicializarlo=$(cat /var/lib/mysql/grastate.dat | grep trap | cut -d':' -f2 | sed 's- --g')
   if [[ $vEsSeguroInicializarlo == "0" ]]; then
