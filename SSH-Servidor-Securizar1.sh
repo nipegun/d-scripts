@@ -47,48 +47,57 @@ vFinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de securización de SSH para Debian 7 (Wheezy)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de securización de SSH para Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de securización de SSH para Debian 8 (Jessie)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de securización de SSH para Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de securización de SSH para Debian 9 (Stretch)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de securización de SSH para Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de securización de SSH para Debian 10 (Buster)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de securización de SSH para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de securización de SSH para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de securización de SSH para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
+
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${vColorRojo}  dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
 
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
