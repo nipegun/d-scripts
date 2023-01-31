@@ -135,7 +135,7 @@ elif [ $OS_VERS == "11" ]; then
             # Limitar ingresar la contraseña mal a sólo 3 veces
               sed -i -e 's|#MaxAuthTries 6|MaxAuthTries 3|g' /etc/ssh/sshd_config
             # Denegar ssh a los usuarios mortadelo y filemon
-              echo "DenyUsers mortadelo filemon" >> /etc/ssh/sshd_config
+              echo -e "DenyUsers\tmortadelo\tfilemon" >> /etc/ssh/sshd_config
             # Reiniciar el servidor SSH
               systemctl restart ssh.service
 
@@ -166,8 +166,14 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "        Deberás meter el contenido del archivo id_rsa.pub del cliente"
             echo "        dentro del archivo ~/.ssh/authorized_keys de la cuenta de usuario del servidor."
-            echo '        Por ejemplo, para copiar dentro del usuario "tecnico" del servidor, ejecuta en el cliente:'
-            echo "          cat ~/.ssh/id_rsa.pub | ssh -p 22222 tecnico@xxx.xxx.xxx.xxx 'cat >> ~/.ssh/authorized_keys'"
+            echo '        Por ejemplo, para copiar la primer id dentro del usuario "tecnico" del servidor, ejecuta en el cliente:'
+            echo "          ssh-copy-id ssh://tecnico@IPdelServidorSSH:22222"
+            echo "          o"
+            echo "          scp -P 22222 ~/.ssh/id_rsa.pub tecnico@IPdelServidorSSH:~/.ssh/authorized_keys"
+            echo "          ↑↑↑↑↑↑↑↑↑    - No crea la carpeta ~/.ssh/ (si no existe, fallará)    ↑↑↑↑↑↑↑↑↑"
+            echo ""
+            echo '          Para copiar la segunda ID y siguientes, ejecuta:'
+            echo "            cat ~/.ssh/id_rsa.pub | ssh -p 22222 tecnico@IPdelServidorSSH 'cat >> ~/.ssh/authorized_keys'"
             echo ""
             echo "    NOTA: Aunque éste método te evite tener que poner la contraseña SSH del servidor,"
             echo "    la conexión seguirá pidiendo la contraseña de la clave privada del cliente."
