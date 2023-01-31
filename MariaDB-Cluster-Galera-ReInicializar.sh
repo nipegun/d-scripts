@@ -13,17 +13,29 @@
 # ----------
 
 echo ""
-echo "  Re-creando el cluster Galera..."
+echo "  Iniciando el script para re-inicializar el clúster Galera..."
 echo ""
 # Obtener las direcciones IP que forman parte del cluster
   vIPsDelCluster=$(cat /etc/mysql/mariadb.conf.d/60-galera.cnf | grep gcomm | cut -d ':' -f2)
+  echo ""
+  echo "    Actualmente el cluster está configurado con estos nodos:"
+  echo "  $vIPsDelCluster"
 # Parar el servicio MariaDB
+  echo ""
+  echo "    Parando el servicio mariadb..."
+  echo ""
   systemctl stop mariadb
 # Quitar las IPs del cluster
   sed -i -e 's|^wsrep_cluster_address.*|wsrep_cluster_address = gcomm://|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
 # Inicializar el cluster
+  echo ""
+  echo "    Intentando reinicializar el cluster..."
+  echo ""
   galera_new_cluster
 # Volver a iniciar el servicio MariaDB
+  echo ""
+  echo "    Volviendo a iniciar el servicio mariadb..."
+  echo ""
   systemctl start mariadb
 # Volver a agregar las IPs del cluster
   sed -i -e 's|^wsrep_cluster_address.*|wsrep_cluster_address = gcomm:$vIPsDelCluster|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
