@@ -13,7 +13,8 @@
       echo ""
       echo -e "${vColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
       echo ""
-      apt-get -y update && apt-get -y install dialog
+      apt-get -y update
+      apt-get -y install dialog
       echo ""
     fi
 
