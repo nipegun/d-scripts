@@ -12,6 +12,12 @@
 #   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/MariaDB-Cluster-Galera-ReInicializar.sh | bash
 # ----------
 
+vColorAzul="\033[0;34m"
+vColorAzulClaro="\033[1;34m"
+vColorVerde='\033[1;32m'
+vColorRojo='\033[1;31m'
+vFinColor='\033[0m'
+
 echo ""
 echo "  Iniciando el script para re-inicializar el clúster Galera..."
 echo ""
@@ -30,11 +36,6 @@ echo ""
   echo "    Quitando los nodos..."
   echo ""
   sed -i -e 's|^wsrep_cluster_address.*|wsrep_cluster_address = gcomm://|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
-  vNodos=$(cat /etc/mysql/mariadb.conf.d/60-galera.cnf | grep gcomm)
-  echo ""
-  echo "      La configuración de nodos ha quedado así:"
-  echo "      $vNodos"
-  echo ""
 # Inicializar el cluster
   echo ""
   echo "    Intentando reinicializarlo..."
@@ -42,8 +43,8 @@ echo ""
   vEsSeguroInicializarlo=$(cat /var/lib/mysql/grastate.dat | grep trap | cut -d':' -f2 | sed 's- --g')
   if [[ $vEsSeguroInicializarlo == "0" ]]; then
     echo ""
-    echo "      ATENCIÓN: Este nodo del clúster no fue el último en apagarse."
-    echo "      Si se inicializa el clúster desde este nodo puede que se pierdan las últimas actualizaciones de la BD."
+    echo -e "${vColorRojo}      ATENCIÓN: Este nodo del clúster no fue el último en apagarse.${vFinColor}"
+    echo -e "${vColorRojo}      Si se inicializa el clúster desde este nodo puede que se pierdan las últimas actualizaciones de la BD.${vFinColor}"
     echo ""
     sed -i -e 's|safe_to_bootstrap: 0|safe_to_bootstrap: 1|g' /var/lib/mysql/grastate.dat
     galera_new_cluster
