@@ -9,7 +9,7 @@
 #   Script de NiPeGun para volver a inicializar el cluster de Galera cuando no se levanta al no encontrar los otros nodos
 #
 #   Ejecución remota:
-#   curl -s x | bash
+#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/MariaDB-Cluster-Galera-ReInicializar.sh | bash
 # ----------
 
 echo ""
