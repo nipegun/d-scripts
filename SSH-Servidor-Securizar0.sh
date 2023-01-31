@@ -12,6 +12,12 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SSH-Servidor-Securizar.sh | bash
 # ----------
 
+vColorAzul="\033[0;34m"
+vColorAzulClaro="\033[1;34m"
+vColorVerde='\033[1;32m'
+vColorRojo='\033[1;31m'
+vFinColor='\033[0m'
+
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
     echo -e "${vColorRojo}Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
