@@ -39,7 +39,18 @@ echo ""
   echo ""
   echo "    Intentando reinicializarlo..."
   echo ""
-  galera_new_cluster
+  vEsSeguroInicializarlo=$(cat /var/lib/mysql/grastate.dat | grep trap | cut -d':' -f2 | sed 's- --g')
+  if [[ $vEsSeguroInicializarlo == "0" ]]; then
+    echo ""
+    echo "      ATENCIÓN: Este nodo del clúster no fue el último en apagarse."
+    echo "      Si se inicializa el clúster desde este nodo puede que se pierdan las últimas actualizaciones de la BD."
+    echo ""
+    sed -i -e 's|safe_to_bootstrap: 0|safe_to_bootstrap: 1|g' /var/lib/mysql/grastate.dat
+    galera_new_cluster
+  else
+    galera_new_cluster
+  fi
+  
 # Volver a iniciar el servicio MariaDB
   echo ""
   echo "    Volviendo a iniciar el servicio mariadb..."
