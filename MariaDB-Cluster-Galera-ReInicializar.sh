@@ -26,10 +26,18 @@ echo ""
   echo ""
   systemctl stop mariadb
 # Quitar las IPs del cluster
+  echo ""
+  echo "    Quitando los nodos..."
+  echo ""
   sed -i -e 's|^wsrep_cluster_address.*|wsrep_cluster_address = gcomm://|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
+  vNodos=$(cat /etc/mysql/mariadb.conf.d/60-galera.cnf | grep gcomm)
+  echo ""
+  echo "      La configuración de nodos ha quedado así:"
+  echo "      $vNodos"
+  echo ""
 # Inicializar el cluster
   echo ""
-  echo "    Intentando reinicializar el cluster..."
+  echo "    Intentando reinicializarlo..."
   echo ""
   galera_new_cluster
 # Volver a iniciar el servicio MariaDB
