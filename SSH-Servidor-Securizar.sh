@@ -20,7 +20,7 @@ vFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${vColorRojo}Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
     exit 1
   fi
 
@@ -93,7 +93,7 @@ elif [ $OS_VERS == "11" ]; then
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${vColorRojo}  dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo -e "${vColorRojo}    dialog no está instalado. Iniciando su instalación...${vFinColor}"
       echo ""
       apt-get -y update && apt-get -y install dialog
       echo ""
@@ -105,7 +105,6 @@ elif [ $OS_VERS == "11" ]; then
       2 "Activar la autenticación mediante clave público/privada." on
       3 "Limitar la autenticación a sólo mediante clave público/privada." off
       4 "Implementar autenticación de doble factor." off
-      5 "Opción 5" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -197,17 +196,52 @@ elif [ $OS_VERS == "11" ]; then
             echo "  Implementando autenticación de doble factor..."
             echo ""
             # Establecer la zona horaria
-              timedatectl set-time-zone Europe/Madrid
+              echo ""
+              echo "    Estableciendo Europe/Madrid como zona horaria..."
+              echo ""
+              timedatectl set-timezone Europe/Madrid
             # Instalar chrony
+              echo ""
+              echo "    Instalando chrony..."
+              echo ""
               apt-get -y update && apt-get -y install chrony
-
-          ;;
-
-          5)
-
-            echo ""
-            echo "  Opción 5..."
-            echo ""
+              # A ejecutar en el cliente:
+                # timedatectl -H tecnico@IPDelServidorSSH:22222
+                # apt-get -y install  iputils-clockdiff
+                # clockdiff -o IPDelServidorSSH
+            # Instalar dependencias
+              apt-get -y update
+              apt-get -y install libpam0g-dev
+              apt-get -y install make
+              apt-get -y install gcc
+              apt-get -y install wget
+              apt-get -y install ssh
+              apt-get -y install libpam-google-authenticator
+            # Ejecutar Google Authenticator con la cuenta de técnico
+              echo ""
+              echo "    Preparando autenticación OTP..."
+              echo ""
+              echo "      - Toma nota de la clave privada (Your new secret key is:) y guárdala en un lugar seguro."
+              echo "      - Escanea el código QR con la app Google Authenticator y, una vez escaneado,"
+              echo "        baja hasta la cuenta que acabas de agregar, toma nota del código e introdúcelo abajo, donde pone:"
+              echo '        "Enter code from app:"'
+              echo ""
+              echo "      - Si el código es correcto, se te presentarán todos los códigos de emergencia."
+              echo "        Toma nota de todos ellos y guárdalos también en un lugar seguro."
+              echo "      - Luego responde que si a todas las preguntas que te salgan."
+              echo ""
+              su tecnico -c "google-authenticator"
+            # Crear una contraseña para el usuario root
+              vRootPass=$(cat /etc/shadow | grep root | cut -d ':' -f2)
+              if [ $vRootPass == "" ] || [ $vRootPass == "!" ]; then
+                passwd root
+              fi
+            # Realizar modificaciones (Falta comprobar si funcionan en Debian, en Ubuntu si funciona)
+              # echo "auth required pam_google_authenticator.so"                  >> /etc/pam.d/sshd
+              # sed -i -e 's/@include common-auth/#@include common-auth/g'           /etc/pam.d/sshd
+              # sed -i -e 's|PasswordAuthentication yes|PasswordAuthentication no|g'             /etc/ssh/sshd_config
+              # sed -i -e 's|KbdInteractiveAuthentication no|KbdInteractiveAuthentication yes|g' /etc/ssh/sshd_config
+              # echo "AuthenticationMethods publickey,keyboard-interactive"                   >> /etc/ssh/sshd_config
 
           ;;
 
