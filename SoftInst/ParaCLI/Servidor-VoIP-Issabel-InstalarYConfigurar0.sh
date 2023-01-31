@@ -35,7 +35,8 @@ vFinColor='\033[0m'
     echo ""
     echo -e "${vColorRojo}  curl no está instalado. Iniciando su instalación...${vFinColor}"
     echo ""
-    apt-get -y update && apt-get -y install curl
+    apt-get -y update
+    apt-get -y install curl
     echo ""
   fi
 
@@ -107,19 +108,20 @@ elif [ $OS_VERS == "11" ]; then
 
   # Agregar el repositorio a la lista de repositorios disponibles
     echo ""
-    echo "  Agregando el repositorio a la lista de repositorios disponibles..."
+    echo "    Agregando el repositorio a la lista de repositorios disponibles..."
     echo ""
     echo "deb http://repo.issabel.org/debian bullseye main" > /etc/apt/sources.list.d/issabel.list
   # Bajar llave para firmar el repositorio
     echo ""
-    echo "  Bajando la llave para firmar el repositorio..."
+    echo "    Bajando la llave para firmar el repositorio..."
     echo ""
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
         echo ""
         echo -e "${vColorRojo}  wget no está instalado. Iniciando su instalación...${vFinColor}"
         echo ""
-        apt-get -y update && apt-get -y install wget
+        apt-get -y update
+        apt-get -y install wget
         echo ""
       fi
     # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
@@ -127,7 +129,8 @@ elif [ $OS_VERS == "11" ]; then
         echo ""
         echo -e "${vColorRojo}  gnupg2 no está instalado. Iniciando su instalación...${vFinColor}"
         echo ""
-        apt-get -y update && apt-get -y install gnupg2
+        apt-get -y update 
+        apt-get -y install gnupg2
         echo ""
       fi
     wget -O - http://repo.issabel.org/issabel.key | apt-key add -
