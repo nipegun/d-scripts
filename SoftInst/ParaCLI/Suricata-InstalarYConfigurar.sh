@@ -160,7 +160,7 @@ elif [ $OS_VERS == "11" ]; then
                   systemctl stop suricata
                 # Configurar
                   echo ""
-                  echo "    Configurando suricata..."
+                  echo "    Modificando archivos de confguración..."
                   echo ""
                   # Indicar la interfaz sobre la que va a correr
                     echo ""
