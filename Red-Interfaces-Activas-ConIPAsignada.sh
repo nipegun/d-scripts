@@ -135,6 +135,7 @@ elif [ $OS_VERS == "11" ]; then
         fi
       done
     echo ""
+  # Seguir trabajando con el array aInterfazActivaConIP[@]
 
 fi
 
