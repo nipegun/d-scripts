@@ -127,10 +127,8 @@ elif [ $OS_VERS == "11" ]; then
     aInterfazActivaConIP=()
     for (( j=0; j<$vCantIntActivas; j++ ));
       do
-        #vInterfazSinArroba=$(echo "${aIntRedActivas[$j]}" | cut -d '@' -f1)
-        #vIPInt=$(ip a show $vInterfazSinArroba 2> /dev/null | grep "scope" | grep -Po '(?<=inet )[\d.]+')
-        echo "${aIntRedActivas[$j]}"
-        vIPInt=$(ip a show ${aIntRedActivas[$j]} 2> /dev/null | grep "scope" | grep -Po '(?<=inet )[\d.]+')
+        vInterfaz=$(echo "${aIntRedActivas[$j]}")
+        vIPInt=$(ip a show $vInterfaz | grep "scope" | grep -Po '(?<=inet )[\d.]+')
         if [ "$vIPInt" != ""  ]; then
           echo "    → :${aIntRedActivas[$j]}:$vIPInt"
           aInterfazActivaConIP[$j]=${aIntRedActivas[$j]}
