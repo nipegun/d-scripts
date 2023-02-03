@@ -9,13 +9,7 @@
 #  Script de NiPeGun para determinar que interfaces de red activas tiene asignada una IP en Debian
 #
 #  Ejecución remota:
-#  curl -s x | bash
-#
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
-#
-#  Ejecución remota con parámetros:
-#  curl -s x | bash -s Parámetro1 Parámetro2
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Red-Interfaces-Activas-ConIPAsignada.sh | bash
 # ----------
 
 vColorAzul="\033[0;34m"
