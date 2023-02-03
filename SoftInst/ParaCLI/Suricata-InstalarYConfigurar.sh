@@ -153,39 +153,43 @@ elif [ $OS_VERS == "11" ]; then
               aInterfacesActivasConIP=($(/root/scripts/d-scripts/Red-Interfaces-Activas-ConIPAsignada.sh | grep "→" | cut -d ':' -f2))
             # Comprobar si efectivamente hay una única interfaz de red
               if [ $(echo ${#aInterfacesActivasConIP[@]}) == "1" ]; then
-                echo ""
-                echo "  Se ha encontrado una única interfaz activa con IP asignada: ${aInterfacesActivasConIP[0]}"
-                echo "  Se configurará como interfaz por defecto."
-                echo ""
                 # Detener el servicio
                   echo ""
-                  echo "  Deteniendo el servicio suricata..."
+                  echo "    Deteniendo el servicio suricata..."
                   echo ""
                   systemctl stop suricata
                 # Configurar
                   echo ""
-                  echo "  Configurando suricata..."
+                  echo "    Configurando suricata..."
                   echo ""
                   # Indicar la interfaz sobre la que va a correr
+                    echo ""
+                    echo "      Se ha encontrado una única interfaz activa con IP asignada: ${aInterfacesActivasConIP[0]}"
+                    echo "      Se configurará como interfaz por defecto."
+                    echo ""
                     # Buscar una línea que empiece por "af-packet:" y ejecutar el reemplazo en la siguiente línea
                       # Reemplazar sólo texto coincidente de la siguiente línea
                         #sed -i "/^af-packet:/{ n; s|- interface: eth0|- interface: ${aInterfacesActivasConIP[0]}|g }" /etc/suricata/suricata.yaml
                       # Reemplazar toda la siguiente línea
                         sed -i "/^af-packet:/{ n; s|- interface:.*|- interface: ${aInterfacesActivasConIP[0]}|g }" /etc/suricata/suricata.yaml
                   # Indicar las redes que van a ser consideradas como home
-                    # Detectar si la WAN es una IP privada o una Pública
-                      vIPWAN="priv"
-                      if [ $vIPWAN == "pub"  ]; then
+                    # Detectar si la IP es de clase A, B o C es una IP privada o una Pública
+                      vClaseIP="c"
+                      if [ $vClaseIP == "a"  ]; then
+                        sed -i -e 's|HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|#HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|g' /etc/suricata/suricata.yaml
+                        sed -i -e 's|#HOME_NET: "\[10.0.0.0/8]"|HOME_NET: "\[10.0.0.0/8]"|g'                                                           /etc/suricata/suricata.yaml
+                      elif [ $vClaseIP == "b"  ]; then
+                        sed -i -e 's|HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|#HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|g' /etc/suricata/suricata.yaml
+                        sed -i -e 's|#HOME_NET: "\[172.16.0.0/12]"|HOME_NET: "\[172.16.0.0/12]"|g'                                                     /etc/suricata/suricata.yaml
+                      elif [ $vClaseIP == "c"  ]; then
                         sed -i -e 's|HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|#HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|g' /etc/suricata/suricata.yaml
                         sed -i -e 's|#HOME_NET: "\[192.168.0.0/16]"|HOME_NET: "\[192.168.0.0/16]"|g'                                                   /etc/suricata/suricata.yaml
-                      elif [ $vIPWAN == "priv"  ]; then
-                        vSubRedHomeNet="192.168.0.0/16"
-                        sed -i -e 's|HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|#HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|g' /etc/suricata/suricata.yaml
-                        sed -i -e 's|#HOME_NET: "\[192.168.0.0/16]"|HOME_NET: "\[$vSubRedHomeNet]"|g'                                                  /etc/suricata/suricata.yaml
+                      else
+                        echo "      No se ha podido determinar de que clase es la IP de la interfaz"
                       fi
                 # Iniciar el servicio
                   echo ""
-                  echo "  Iniciando el servicio suricata..."
+                  echo "    Iniciando el servicio suricata..."
                   echo ""
                   systemctl start suricata
               elif [ $(echo ${#aInterfacesActivasConIP[@]}) == "" ]; then
@@ -212,6 +216,18 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "  Configurando para un Debian en modo router (con, al menos, dos interfaces de red)."
             echo ""
+
+                  # Indicar las redes que van a ser consideradas como home
+                    # Detectar si la IP es de clase A, B o C es una IP privada o una Pública
+                      vIPWAN="priv"
+                      if [ $vIPWAN == "pub"  ]; then
+                        sed -i -e 's|HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|#HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|g' /etc/suricata/suricata.yaml
+                        sed -i -e 's|#HOME_NET: "\[192.168.0.0/16]"|HOME_NET: "\[192.168.0.0/16]"|g'                                                   /etc/suricata/suricata.yaml
+                      elif [ $vIPWAN == "priv"  ]; then
+                        vSubRedHomeNet="192.168.0.0/16"
+                        sed -i -e 's|HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|#HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|g' /etc/suricata/suricata.yaml
+                        sed -i -e 's|#HOME_NET: "\[192.168.0.0/16]"|HOME_NET: "\[$vSubRedHomeNet]"|g'                                                  /etc/suricata/suricata.yaml
+                      fi
 
           ;;
 
