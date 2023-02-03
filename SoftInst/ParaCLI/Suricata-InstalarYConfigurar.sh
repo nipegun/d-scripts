@@ -128,9 +128,10 @@ elif [ $OS_VERS == "11" ]; then
           echo "  Se configurará como interfaz por defecto."
           echo ""
           # Buscar una línea que empiece por "af-packet:" y ejecutar el reemplazo en la siguiente línea
-            sed -i "/^af-packet:/{ n; s|- interface: eth0|- interface: ${aInterfacesActivasConIP[0]}|g }" /etc/suricata/suricata.yaml
-          
-          #sed -i -e "s|- interface: eth0|- interface: ${aInterfacesActivasConIP[0]}|g" /etc/suricata/suricata.yaml
+            # Reemplazar sólo texto coincidente de la siguiente línea
+              #sed -i "/^af-packet:/{ n; s|- interface: eth0|- interface: ${aInterfacesActivasConIP[0]}|g }" /etc/suricata/suricata.yaml
+            # Reemplazar toda la siguiente línea
+              sed -i "/^af-packet:/{ n; s|- interface:.*|- interface: ${aInterfacesActivasConIP[0]}|g }" /etc/suricata/suricata.yaml
         else
           echo ""
           echo "  Debería haberse encontrado al menos una (o únicamente una) interfaz de red activa con IP asignada"
