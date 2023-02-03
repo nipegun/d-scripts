@@ -118,7 +118,7 @@ elif [ $OS_VERS == "11" ]; then
 
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
-      1 "Instalar paquete Suricata, dependencia y otros paquetes útiles." oon
+      1 "Instalar paquete Suricata, dependencias y otros paquetes útiles." oon
       2 "Configurar para un Debian con una única interfaz de red." off
       3 "Configurar para un Debian en modo router (con, al menos, dos interfaces de red)." off
     )
@@ -131,7 +131,7 @@ elif [ $OS_VERS == "11" ]; then
           1)
 
             echo ""
-            echo "  Instalando paquete Suricata, dependencia y otros paquetes útiles..."
+            echo "  Instalando paquete Suricata, dependencias y otros paquetes útiles..."
             echo ""
 
             # Actualizar el sistema
