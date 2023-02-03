@@ -129,7 +129,7 @@ elif [ $OS_VERS == "11" ]; then
       do
         vIPInt=$(ip a show ${aIntRedActivas[$j]} 2> /dev/null | grep "scope" | grep -Po '(?<=inet )[\d.]+')
         if [ "$vIPInt" != ""  ]; then
-          echo "    ${aIntRedActivas[$j]}→$vIPInt"
+          echo "    → ${aIntRedActivas[$j]}:$vIPInt"
           aInterfazActivaConIP[$j]=${aIntRedActivas[$j]}
         fi
       done
