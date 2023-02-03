@@ -115,7 +115,7 @@ elif [ $OS_VERS == "11" ]; then
   # Configuración
     # Detener el servicio
       echo ""
-      echo "  Deteniendo el servicio suricada..."
+      echo "  Deteniendo el servicio suricata..."
       echo ""
       systemctl stop suricata
     # Indicar la interfaz sobre la que va a correr
@@ -133,8 +133,8 @@ elif [ $OS_VERS == "11" ]; then
           #sed -i -e "s|- interface: eth0|- interface: ${aInterfacesActivasConIP[0]}|g" /etc/suricata/suricata.yaml
         else
           echo ""
-          echo "  Se ha encontrado más de una interfaz activa con IP asignada."
-          echo "  No se configurará la interfaz por defecto."
+          echo "  Debería haberse encontrado al menos una (o únicamente una) interfaz de red activa con IP asignada"
+          echo "  No se configurará automáticmante la interfaz por defecto."
           echo "  Deberás configurarla manualmente editando el archivo /etc/suricata/suricata.yaml y cambiando"
           echo "    - interface: eth0"
           echo "  ...por la interfaz sobre la que quieres hacer correr suricata."
