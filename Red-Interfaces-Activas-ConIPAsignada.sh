@@ -129,7 +129,7 @@ elif [ $OS_VERS == "11" ]; then
       do
         #vInterfazSinArroba=$(echo "${aIntRedActivas[$j]}" | cut -d '@' -f1)
         #vIPInt=$(ip a show $vInterfazSinArroba 2> /dev/null | grep "scope" | grep -Po '(?<=inet )[\d.]+')
-        vIPInt=$(ip a show ${aIntRedActivas[$j]} 2> /dev/null | grep "scope" | grep -Po '(?<=inet )[\d.]+')
+        vIPInt=$(ip a show "${aIntRedActivas[$j]}" 2> /dev/null | grep "scope" | grep -Po '(?<=inet )[\d.]+')
         if [ "$vIPInt" != ""  ]; then
           echo "    → :${aIntRedActivas[$j]}:$vIPInt"
           aInterfazActivaConIP[$j]=${aIntRedActivas[$j]}
