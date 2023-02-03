@@ -114,6 +114,9 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install jq
   # Configuración
     # Detener el servicio
+      echo ""
+      echo "  Deteniendo el servicio suricada..."
+      echo ""
       systemctl stop suricata
     # Indicar la interfaz sobre la que va a correr
       # Determinar las interfaces activas que tienen asignada una IP
@@ -124,7 +127,10 @@ elif [ $OS_VERS == "11" ]; then
           echo "  Se ha encontrado una única interfaz activa con IP asignada: ${aInterfacesActivasConIP[0]}"
           echo "  Se configurará como interfaz por defecto."
           echo ""
-          sed -i -e "s|- interface: eth0|- interface: ${aInterfacesActivasConIP[0]}|g" /etc/suricata/suricata.yaml
+          # Buscar una línea que empiece por "af-packet:" y ejecutar el reemplazo en la siguiente línea
+            sed -i "/^af-packet:/{ n; s|- interface: eth0|- interface: ${aInterfacesActivasConIP[0]}|g }" /etc/suricata/suricata.yaml
+          
+          #sed -i -e "s|- interface: eth0|- interface: ${aInterfacesActivasConIP[0]}|g" /etc/suricata/suricata.yaml
         else
           echo ""
           echo "  Se ha encontrado más de una interfaz activa con IP asignada."
