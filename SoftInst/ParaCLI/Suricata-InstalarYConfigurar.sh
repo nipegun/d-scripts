@@ -6,16 +6,16 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
+#  Script de NiPeGun para instalar y configurar suricata en Debian
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Suricata-InstalarYConfigurar.sh | bash
 #
 #  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Suricata-InstalarYConfigurar.sh | bash
 #
 #  Ejecución remota con parámetros:
-#  curl -s x | bash -s Parámetro1 Parámetro2
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Suricata-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 vColorAzul="\033[0;34m"
@@ -112,6 +112,49 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install suricata
   # Instalar paquetes extra
     apt-get -y install jq
+  # Configurar
+    # Obtener las interfaces activas
+      # Quitar todas las de proxmox
+        #aIntRedActivas=($(ip link | grep "ate UP" | grep -v ^[^0-9] | grep -v lo | grep -v vir | grep -v wl | grep -v veth | grep -v fwbr | cut -d ':' -f2 | sed 's- --g'))
+      # No incluir la loopback
+        #aIntRedActivas=($(ip link | grep -v ^[^0-9] | cut -d ':' -f2 | sed 's- --g'))
+      aIntRedActivas=($(ip link | grep "ate UP" | grep -v ^[^0-9] | cut -d ':' -f2 | sed 's- --g'))
+    # Mostrar las interfaces activas (todos los valores del array)
+      # Contar cuantas interfaces hay en el array
+        vCantIntActivas=$(echo ${#aIntRedActivas[@]})
+      # Mostrar las interfaces activas en una única línea
+        #echo "  El sistema tiene $vCantIntActivas interfaz/faces activa/s: ${aIntRedActivas[@]}"
+      # Mostrar en una única línea
+        echo ""
+        echo "  El sistema tiene $vCantIntActivas interfaz/faces activa/s:"
+        echo ""
+        for i in "${aIntRedActivas[@]}"
+          do
+            echo "    $i"
+          done
+        echo ""
+    # De las interfaces activas, determinar cual tiene asignada una IP y guardar la info en otro array
+      echo ""
+      echo "  De esas $vCantIntActivas interfaz/faces activa/s, la siguientes interfaces tienen asignada una IP:"
+      echo ""
+      aInterfazActivaConIP=()
+      for (( j=0; j<$vCantIntActivas; j++ ));
+        do
+          vIPInt=$(ip a show ${aIntRedActivas[$j]} 2> /dev/null | grep "scope" | grep -Po '(?<=inet )[\d.]+')
+          if [ "$vIPInt" != ""  ]; then
+            echo "    ${aIntRedActivas[$j]}: $vIPInt"
+            aInterfazActivaConIP[$j]=${aIntRedActivas[$j]}
+          fi
+        done
+      echo ""
+    # De esas interfaces con IPs
+
+
+    # Obtener el nombre de la interfaz WAN
+      vInterfazWAN=$(ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}')
+    sed -i -e 's|HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|#HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|g' /etc/suricata/suricata.yaml
+    sed -i -e 's|#HOME_NET: "[192.168.0.0/16]"|HOME_NET: "[192.168.0.0/16]"|g'                                                   /etc/suricata/suricata.yaml
+    sed -i -e "s|- interface: eth0|- interface: eth0|g"                                                                          /etc/suricata/suricata.yaml
 
 fi
 
