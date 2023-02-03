@@ -115,7 +115,7 @@ elif [ $OS_VERS == "11" ]; then
   # Configuración
     # Indicar la interfaz sobre la que va a correr
       # Determinar las interfaces activas que tienen asignada una IP
-        aInterfacesActivasConIP=($(/root/scripts/d-scripts/Red-Interfaces-Activas-ConIPAsignada2.sh | grep "→" | cut -d ':' -f2))
+        aInterfacesActivasConIP=($(/root/scripts/d-scripts/Red-Interfaces-Activas-ConIPAsignada.sh | grep "→" | cut -d ':' -f2))
       # De esas interfaces con IP asignada determinar si la interfaz es única
         if [ $(echo ${#aInterfacesActivasConIP[@]}) == "1" ]; then
           echo ""
