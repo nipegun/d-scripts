@@ -106,45 +106,101 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}  Iniciando el script de instalación y configuración de suricata para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
-  # Actualizar el sistema
-    apt-get -y update
-  # Instalar suricata
-    apt-get -y install suricata
-  # Instalar paquetes extra
-    apt-get -y install jq
-  # Configuración
-    # Detener el servicio
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo "  Deteniendo el servicio suricata..."
+      echo -e "${vColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
       echo ""
-      systemctl stop suricata
-    # Indicar la interfaz sobre la que va a correr
-      # Determinar las interfaces activas que tienen asignada una IP
-        aInterfacesActivasConIP=($(/root/scripts/d-scripts/Red-Interfaces-Activas-ConIPAsignada.sh | grep "→" | cut -d ':' -f2))
-      # De esas interfaces con IP asignada determinar si la interfaz es única
-        if [ $(echo ${#aInterfacesActivasConIP[@]}) == "1" ]; then
-          echo ""
-          echo "  Se ha encontrado una única interfaz activa con IP asignada: ${aInterfacesActivasConIP[0]}"
-          echo "  Se configurará como interfaz por defecto."
-          echo ""
-          # Buscar una línea que empiece por "af-packet:" y ejecutar el reemplazo en la siguiente línea
-            # Reemplazar sólo texto coincidente de la siguiente línea
-              #sed -i "/^af-packet:/{ n; s|- interface: eth0|- interface: ${aInterfacesActivasConIP[0]}|g }" /etc/suricata/suricata.yaml
-            # Reemplazar toda la siguiente línea
-              sed -i "/^af-packet:/{ n; s|- interface:.*|- interface: ${aInterfacesActivasConIP[0]}|g }" /etc/suricata/suricata.yaml
-        else
-          echo ""
-          echo "  Debería haberse encontrado al menos una (o únicamente una) interfaz de red activa con IP asignada"
-          echo "  No se configurará automáticmante la interfaz por defecto."
-          echo "  Deberás configurarla manualmente editando el archivo /etc/suricata/suricata.yaml y cambiando"
-          echo "    - interface: eth0"
-          echo "  ...por la interfaz sobre la que quieres hacer correr suricata."
-          echo ""
-        fi
-    # Indicar las redes que van a ser consideradas como home 
-      sed -i -e 's|HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|#HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|g' /etc/suricata/suricata.yaml
-      sed -i -e 's|#HOME_NET: "[192.168.0.0/16]"|HOME_NET: "[192.168.0.0/16]"|g'                                                   /etc/suricata/suricata.yaml
+      apt-get -y update
+      apt-get -y install dialog
+      echo ""
+    fi
+
+  menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+    opciones=(
+      1 "Instalar Suricata en un Debian con una única interfaz de red." on
+      2 "Instalar Suricata en un Debian en modo router (con, al menos, dos interfaces de red)." off
+    )
+  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+
+    for choice in $choices
+      do
+        case $choice in
+
+          1)
+
+            echo ""
+            echo "  Instalando Suricata en un Debian con una única interfaz de red..."
+            echo ""
+
+            # Actualizar el sistema
+              apt-get -y update
+            # Instalar suricata
+              apt-get -y install suricata
+            # Instalar paquetes extra
+              apt-get -y install jq
+            # Configuración
+              # Detener el servicio
+                echo ""
+                echo "  Deteniendo el servicio suricata..."
+                echo ""
+                systemctl stop suricata
+              # Indicar la interfaz sobre la que va a correr
+                # Determinar las interfaces activas que tienen asignada una IP
+                  aInterfacesActivasConIP=($(/root/scripts/d-scripts/Red-Interfaces-Activas-ConIPAsignada.sh | grep "→" | cut -d ':' -f2))
+                # De esas interfaces con IP asignada determinar si la interfaz es única
+                  if [ $(echo ${#aInterfacesActivasConIP[@]}) == "1" ]; then
+                    echo ""
+                    echo "  Se ha encontrado una única interfaz activa con IP asignada: ${aInterfacesActivasConIP[0]}"
+                    echo "  Se configurará como interfaz por defecto."
+                    echo ""
+                    # Buscar una línea que empiece por "af-packet:" y ejecutar el reemplazo en la siguiente línea
+                      # Reemplazar sólo texto coincidente de la siguiente línea
+                        #sed -i "/^af-packet:/{ n; s|- interface: eth0|- interface: ${aInterfacesActivasConIP[0]}|g }" /etc/suricata/suricata.yaml
+                      # Reemplazar toda la siguiente línea
+                        sed -i "/^af-packet:/{ n; s|- interface:.*|- interface: ${aInterfacesActivasConIP[0]}|g }" /etc/suricata/suricata.yaml
+                  else
+                    echo ""
+                    echo "  Debería haberse encontrado al menos una (o únicamente una) interfaz de red activa con IP asignada"
+                    echo "  No se configurará automáticmante la interfaz por defecto."
+                    echo "  Deberás configurarla manualmente editando el archivo /etc/suricata/suricata.yaml y cambiando"
+                    echo "    - interface: eth0"
+                    echo "  ...por la interfaz sobre la que quieres hacer correr suricata."
+                    echo ""
+                  fi
+              # Indicar las redes que van a ser consideradas como home
+                # Detectar si la WAN es una IP privada o una Pública
+                  vIPWAN="priv"
+                  if [ $vIPWAN == "pub"  ]; then
+                    sed -i -e 's|HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|#HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|g' /etc/suricata/suricata.yaml
+                    sed -i -e 's|#HOME_NET: "\[192.168.0.0/16]"|HOME_NET: "\[192.168.0.0/16]"|g'                                                   /etc/suricata/suricata.yaml
+                  elif [ $vIPWAN == "priv"  ]; then
+                    vSubRedHomeNet="192.168.0.0/16"
+                    sed -i -e 's|HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|#HOME_NET: "\[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"|g' /etc/suricata/suricata.yaml
+                    sed -i -e 's|#HOME_NET: "\[192.168.0.0/16]"|HOME_NET: "\[$vSubRedHomeNet]"|g'                                                  /etc/suricata/suricata.yaml
+                  fi
+
+              # Iniciar el servicio
+                echo ""
+                echo "  Iniciando el servicio suricata..."
+                echo ""
+                systemctl start suricata
 
 
+          ;;
+
+          2)
+
+            echo ""
+            echo "  Instalar Suricata en un Debian en modo router (con, al menos, dos interfaces de red)..."
+            echo ""
+
+          ;;
+
+
+      esac
+
+  done
+ 
 fi
 
