@@ -274,6 +274,44 @@ elif [ $OS_VERS == "11" ]; then
 
           ;;
 
+          4)
+
+            echo ""
+            echo "  Actualizando la fuente de reglas..."
+            echo ""
+            suricata-update update-sources
+            echo ""
+            echo "  Hay disponibles para descargar reglas de estas fuentes:"
+            echo ""
+            suricata-update list-sources | grep Vendor
+              # Para instalar reglas de un vendor:
+              #suricata-update enable-source oisf/trafficid
+              #suricata-update
+            
+            echo ""
+            echo "  Metiendo todas las reglas disponibles dentro del archivo /var/lib/suricata/rules/suricata.rules..."
+            echo ""
+            suricata-update
+
+To enable rules that are disabled by default, use /etc/suricata/enable.conf
+
+2019401                   # enable signature with this sid
+group:emerging-icmp.rules # enable this rulefile
+re:trojan                 # enable all rules with this string
+
+Similarly, to disable rules use /etc/suricata/disable.conf:
+
+2019401                   # disable signature with this sid
+group:emerging-info.rules # disable this rulefile
+re:heartbleed             # disable all rules with this string
+
+After updating these files, rerun suricata-update again:
+
+sudo suricata-update
+
+
+systemctl restart suricata
+          ;;
 
       esac
 
