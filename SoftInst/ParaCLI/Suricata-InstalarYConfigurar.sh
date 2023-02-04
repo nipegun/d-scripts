@@ -187,6 +187,43 @@ elif [ $OS_VERS == "11" ]; then
                       else
                         echo "      No se ha podido determinar de que clase es la IP de la interfaz"
                       fi
+                # Crear reglas básica
+                  echo ""
+                  echo "    Creando reglas básicas..."
+                  echo ""
+                  touch /etc/suricata/rules/suricata.rules
+                  # Registrar quién nos hace ping
+                    echo 'alert icmp any any -> any any (msg: "Detectado paquete ICMP"; sid:2000001; rev:1;)'                                  >> /etc/suricata/rules/suricata.rules
+                  # Detectar conexiones que en la carga útil (payload) detecten la palabra "facebook" (Sólo vale para http)
+                    # curl -i facebook.com debería hacer saltar la alerta (incluso facebook.es debería hacerla saltar)
+                    echo 'drop tcp any any -> any any (msg: "Detectado intento de acceso a Facebook"; content:"facebook"; sid:2000002; rev:1;)' >> /etc/suricata/rules/suricata.rules
+                  # Hacer saltar la alerta de todas las salidas http en el puerto 80
+                    echo 'alert http $HOME_NET any -> $EXTERNAL_NET 80 (msg: "Detectada petición GET HTML"; flow:established,to_server; content:"GET"; http_method; sid:2000003; rev:1;)' >> /etc/suricata/rules/suricata.rules
+                  # Alerta de conexiones SSH en el puerto 22
+                    echo 'alert ssh any any -> any any (msg: "Detectado intento de conexión SSH entrante”; sid:2000004; rev:1;)' >> /etc/suricata/rules/suricata.rules
+                  # Alerta de escaneo de puertos
+                    echo 'alert tcp any any -> any !22 (msg: "Detectado intento NMAP Scan FIN"; flags:F; sid:2000005; rev:1;)'         >> /etc/suricata/rules/suricata.rules
+                    echo 'alert tcp any any -> any !22 (msg: "Detectado intento NMAP Scan NULL"; flags:0; sid:2000006; rev:1;)'        >> /etc/suricata/rules/suricata.rules
+                    echo 'alert udp any any -> any 22 (msg: "Detectado intento NMAP Scan UDP"; sid:2000007; rev:1;)'                   >> /etc/suricata/rules/suricata.rules
+                    echo 'alert tcp any any -> any !22 (msg: "Detectado intento NMAP Scan XMAS Tree"; flags:FPU; sid:2000008; rev:1;)' >> /etc/suricata/rules/suricata.rules
+                    echo 'alert tcp any any -> any !22 (msg: "Detectado intento NMAP Scan TCP"; sid:2000009; rev:1;)'                  >> /etc/suricata/rules/suricata.rules
+                    echo 'alert icmp any any -> any 22 (msg: "Detectado intento NMAP Scan Ping Sweep"; dsize:0; sid:2000010; rev:1;)'  >> /etc/suricata/rules/suricata.rules
+                  # Puertos entrantes
+                    echo 'alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg: "Detectado paquete saliente ICMP"; sid:3000001; rev:1;)'                >> /etc/suricata/rules/debian-in.rules
+                    echo 'alert tcp $EXTERNAL_NET any -> $HOME_NET 22 (msg: "Detectado paquete entrante hacia puerto 22 tcp"; sid:3000022; rev:1;)'   >> /etc/suricata/rules/debian-in.rules
+                    echo 'alert udp $EXTERNAL_NET any -> $HOME_NET 53 (msg: "Detectado paquete entrante hacia puerto 53 udp"; sid:3000053; rev:1;)'   >> /etc/suricata/rules/debian-in.rules
+                    echo 'alert tcp $EXTERNAL_NET any -> $HOME_NET 80 (msg: "Detectado paquete entrante hacia puerto 80 tcp"; sid:3000080; rev:1;)'   >> /etc/suricata/rules/debian-in.rules
+                    echo 'alert tcp $EXTERNAL_NET any -> $HOME_NET 443 (msg: "Detectado paquete entrante hacia puerto 443 tcp"; sid:3000443; rev:1;)' >> /etc/suricata/rules/debian-in.rules
+                  # Puertos salientes
+                    echo 'alert icmp $HOME_NET any -> $EXTERNAL_NET any (msg: "Detectado paquete saliente ICMP"; sid:4000001; rev:1;)'                >> /etc/suricata/rules/debian-out.rules
+                    echo 'alert tcp $HOME_NET any -> $EXTERNAL_NET 22 (msg: "Detectado paquete saliente hacia puerto 22 tcp"; sid:4000022; rev:1;)'   >> /etc/suricata/rules/debian-out.rules
+                    echo 'alert udp $HOME_NET any -> $EXTERNAL_NET 53 (msg: "Detectado paquete saliente hacia puerto 53 udp"; sid:4000053; rev:1;)'   >> /etc/suricata/rules/debian-out.rules
+                    echo 'alert tcp $HOME_NET any -> $EXTERNAL_NET 80 (msg: "Detectado paquete saliente hacia puerto 80 tcp"; sid:4000080; rev:1;)'   >> /etc/suricata/rules/debian-out.rules
+                    echo 'alert tcp $HOME_NET any -> $EXTERNAL_NET 443 (msg: "Detectado paquete saliente hacia puerto 443 tcp"; sid:4000443; rev:1;)' >> /etc/suricata/rules/debian-out.rules
+                  echo ""
+                  echo "      Para ver las alertas en tiempo real, ejecuta:"
+                  echo "        tail -f /var/log/suricata/fast.log"
+                  echo ""
                 # Iniciar el servicio
                   echo ""
                   echo "    Iniciando el servicio suricata..."
