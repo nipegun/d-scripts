@@ -5,10 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA ENCONTRAR UNA CADENA ESPECÍFICA
-#  DENTRO DE LOS NOMBRES DE ARCHIVOS EN UNA UBICACIÓN DADA
-#-----------------------------------------------------------
+# ----------
+#  Script de NiPeGun para encontrar una cadena específica dentro de los nombres de archivos de una carpeta dada
+# ----------
 
 EXPECTED_ARGS=2
 E_BADARGS=65
