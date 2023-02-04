@@ -5,10 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------
-#  SCRIPT DE NIPEGUN PARA ENCONTRAR UNA CADENA ESPECÍFICA
-#  DENTRO DE ARCHIVOS DE TEXTO DE TODO EL SISTEMA
-#----------------------------------------------------------
+# ----------
+#  ScriptDeNiPeGun para encontrar una cadena específica dentro de los archivos de todo el sistema
+# ----------
 
 EXPECTED_ARGS=1
 E_BADARGS=65
