@@ -5,9 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para buscar una cadena específica dentro de archivos de una ubicación dada
-#------------------------------------------------------------------------------------------------
+# ----------
 
 EXPECTED_ARGS=2
 E_BADARGS=65
