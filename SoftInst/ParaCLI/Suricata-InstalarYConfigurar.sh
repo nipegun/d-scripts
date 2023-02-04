@@ -5,6 +5,15 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
+######################################################
+# 
+#   SCRIPT NO TERMINADO
+#
+################################################
+
+
+
+
 # ----------
 #  Script de NiPeGun para instalar y configurar suricata en Debian
 #
