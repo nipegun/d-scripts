@@ -222,9 +222,9 @@ elif [ $OS_VERS == "11" ]; then
                     echo 'alert tcp $HOME_NET any -> $EXTERNAL_NET 80 (msg: "Detectado paquete saliente hacia puerto 80 tcp"; sid:4000080; rev:1;)'   >> /etc/suricata/rules/debian-out.rules
                     echo 'alert tcp $HOME_NET any -> $EXTERNAL_NET 443 (msg: "Detectado paquete saliente hacia puerto 443 tcp"; sid:4000443; rev:1;)' >> /etc/suricata/rules/debian-out.rules
                   # Bloquear todas las conexiones entrantes no establecidas
-                    echo 'alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg: "Detectada conexión ICMP entrante no establecida"; flow:not_established; sid:5000001; rev:1;)' >> /etc/suricata/rules/debian-cortafuegos.rule
-                    echo 'alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg: "Detectada conexión TCP entrante no establecida"; flow:not_established; sid:5000002; rev:1;)' >> /etc/suricata/rules/debian-cortafuegos.rule
-                    echo 'alert udp $EXTERNAL_NET any -> $HOME_NET any (msg: "Detectada conexión UDP entrante no establecida"; flow:not_established; sid:5000003; rev:1;)' >> /etc/suricata/rules/debian-cortafuegos.rule
+                    echo 'alert icmp $EXTERNAL_NET any -> $HOME_NET any (msg: "Detectada conexión ICMP entrante no solicitada"; flow:not_established; sid:5000001; rev:1;)' >> /etc/suricata/rules/debian-cortafuegos.rule
+                    echo 'alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg: "Detectada conexión TCP entrante no solicitada"; flow:not_established; sid:5000002; rev:1;)' >> /etc/suricata/rules/debian-cortafuegos.rule
+                    echo 'alert udp $EXTERNAL_NET any -> $HOME_NET any (msg: "Detectada conexión UDP entrante no solicitada"; flow:not_established; sid:5000003; rev:1;)' >> /etc/suricata/rules/debian-cortafuegos.rule
 
                   echo ""
                   echo "      Para ver las alertas en tiempo real, ejecuta:"
