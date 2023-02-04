@@ -47,3 +47,15 @@ if [ $# -ne $EXPECTED_ARGS ]
     grep -rnw --color -e $1 /var
     echo ""
 fi
+
+
+# De esta forma sólo buscará en archivos con extensión .c o .h:
+  #grep --include=\*.{c,h} -rnw '/path/to/somewhere/' -e "pattern"
+
+# De esta otra forma se excluirá la búsqueda dentro delos archivos con extensión .o:
+  #grep --exclude=\*.o -rnw '/path/to/somewhere/' -e "pattern"
+
+#Es posible excluir una o varias carpetas usando e parámetro "--exclude-dir".
+#Por ejemplo, lo siguiente excluirá las carpetas dir1/, dir2/ y todas las que hagan match con *.dst/:
+  #grep --exclude-dir={dir1,dir2,*.dst} -rnw '/path/to/search/' -e "pattern"
+
