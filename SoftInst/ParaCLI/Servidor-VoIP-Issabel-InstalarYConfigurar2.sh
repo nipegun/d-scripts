@@ -106,6 +106,8 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Issabel para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
+http://repo.issabel.org/install-debian-install_amp
+
   # Agregar el repositorio a la lista de repositorios disponibles
     echo ""
     echo "    Agregando el repositorio a la lista de repositorios disponibles..."
