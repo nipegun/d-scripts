@@ -128,10 +128,12 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install mssql-server
   # Configurar
     /opt/mssql/bin/mssql-conf setup
+  # Estado del servicio
+    systemctl status mssql-server --no-pager
 
 # Más info:
   # https://learn.microsoft.com/es-es/sql/linux/quickstart-install-connect-ubuntu?view=sql-server-linux-ver16&preserve-view=true#prerequisites
   # https://hub.docker.com/_/microsoft-mssql-server
-  
 
 fi
+
