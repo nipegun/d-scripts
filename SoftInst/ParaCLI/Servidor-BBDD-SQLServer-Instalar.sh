@@ -16,31 +16,25 @@ ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
 
-## Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
-   fi
+# Determinar la versión de Debian
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
+    . /etc/os-release
+    OS_NAME=$NAME
+    OS_VERS=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # linuxbase.org
+    OS_NAME=$(lsb_release -si)
+    OS_VERS=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release
+    . /etc/lsb-release
+    OS_NAME=$DISTRIB_ID
+    OS_VERS=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    OS_NAME=Debian
+    OS_VERS=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD)
+    OS_NAME=$(uname -s)
+    OS_VERS=$(uname -r)
+  fi
 
 if [ $OS_VERS == "7" ]; then
 
@@ -98,5 +92,46 @@ elif [ $OS_VERS == "11" ]; then
   echo "----------------------------------------------------------------------------------------"
   echo ""
 
+  # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${vColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
+      echo ""
+      apt-get -y update
+      apt-get -y install curl
+      echo ""
+    fi
+  # Agregar el repositorio
+    curl -sL https://packages.microsoft.com/config/ubuntu/20.04/mssql-server-2022.list > /etc/apt/sources.list.d/mssql-server-2022.list
+  # Agregar la llave
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${vColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
+        echo ""
+        apt-get -y update
+        apt-get -y install wget
+        echo ""
+      fi
+    # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${vColorRojo}  El paquete gnupg2 no está instalado. Iniciando su instalación...${vFinColor}"
+        echo ""
+        apt-get -y update
+        apt-get -y install gnupg2
+        echo ""
+      fi
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+  # Instalar el paquete
+    apt-get -y update
+    apt-get -y install mssql-server
+  # Configurar
+    /opt/mssql/bin/mssql-conf setup
+
+# Más info:
+  # https://learn.microsoft.com/es-es/sql/linux/quickstart-install-connect-ubuntu?view=sql-server-linux-ver16&preserve-view=true#prerequisites
+  # https://hub.docker.com/_/microsoft-mssql-server
+  
 
 fi
