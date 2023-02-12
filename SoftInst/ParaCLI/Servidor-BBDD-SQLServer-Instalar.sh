@@ -160,6 +160,11 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "  NOTA: sa (System Administrator) es el root."
     echo ""
-    
+
+    #sp_configure @configname = 'remote admin connections', @configvalue = 1;
+    #go
+    #reconfigure;
+    #go
+
 fi
 
