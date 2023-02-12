@@ -129,10 +129,6 @@ elif [ $OS_VERS == "11" ]; then
   # Instalar el paquete
     apt-get -y update
     apt-get -y install mssql-server
-  # Configurar
-    /opt/mssql/bin/mssql-conf setup
-  # Estado del servicio
-    systemctl status mssql-server --no-pager
   # Instalar herramientas
     # Agregar repositorio
       curl -sL https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/msprod.list
@@ -148,6 +144,10 @@ elif [ $OS_VERS == "11" ]; then
       source /root/.bashrc
   # Quitar permiso de ejecución al archivo del servicio
     chmod -x /usr/lib/systemd/system/mssql-server.service
+  # Configurar
+    /opt/mssql/bin/mssql-conf setup
+  # Estado del servicio
+    systemctl status mssql-server --no-pager
   # Notificar de fin de la instalación
     echo ""
     echo "  Instalación finalizada..."
