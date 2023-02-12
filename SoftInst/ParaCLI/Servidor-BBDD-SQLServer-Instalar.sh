@@ -143,9 +143,9 @@ elif [ $OS_VERS == "11" ]; then
     # Instalar paquetes
       apt-get -y install mssql-tools unixodbc-dev
     # Agregar la variable de entorno
-      echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
-      echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
-      source ~/.bashrc
+      sh -c "echo 'export PATH=$PATH:/opt/mssql-tools/bin/' >> /root/.bash_profile"
+      sh -c "echo 'export PATH=$PATH:/opt/mssql-tools/bin/' >> /root/.bashrc"
+      source /root/.bashrc
   # Notificar de fin de la instalación
     echo ""
     echo "  Instalación finalizada..."
