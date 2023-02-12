@@ -146,6 +146,8 @@ elif [ $OS_VERS == "11" ]; then
       sh -c "echo 'export PATH=$PATH:/opt/mssql-tools/bin/' >> /root/.bash_profile"
       sh -c "echo 'export PATH=$PATH:/opt/mssql-tools/bin/' >> /root/.bashrc"
       source /root/.bashrc
+  # Quitar permiso de ejecución al archivo del servicio
+    chmod -x /usr/lib/systemd/system/mssql-server.service
   # Notificar de fin de la instalación
     echo ""
     echo "  Instalación finalizada..."
@@ -160,7 +162,8 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "  NOTA: sa (System Administrator) es el root."
     echo ""
-
+    echo "  Para ver el estado del servicio, ejecuta: "
+    echo "    systemctl status  mssql-server.service --no-pager"
     #sp_configure @configname = 'remote admin connections', @configvalue = 1;
     #go
     #reconfigure;
