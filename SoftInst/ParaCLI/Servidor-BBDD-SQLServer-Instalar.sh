@@ -5,12 +5,15 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar el servidor de bases SQLServer en Debian
+# Fuente: https://learn.microsoft.com/es-es/sql/linux/quickstart-install-connect-ubuntu
+# Instalación en docker: https://hub.docker.com/_/microsoft-mssql-server
+
+# ----------
+#  Script de NiPeGun para instalar el servidor de bases de datos SQLServer en Debian
 #
-# Ejecución remota
-# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-SQLServer-Instalar.sh | bash
-#--------------------------------------------------------------------------------------------------------------------------------
+#  Ejecución remota
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-SQLServer-Instalar.sh | bash
+# ----------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -130,10 +133,33 @@ elif [ $OS_VERS == "11" ]; then
     /opt/mssql/bin/mssql-conf setup
   # Estado del servicio
     systemctl status mssql-server --no-pager
-
-# Más info:
-  # https://learn.microsoft.com/es-es/sql/linux/quickstart-install-connect-ubuntu?view=sql-server-linux-ver16&preserve-view=true#prerequisites
-  # https://hub.docker.com/_/microsoft-mssql-server
-
+  # Instalar herramientas
+    # Agregar repositorio
+      curl -sL https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/msprod.list
+    # Agregar llave
+      curl -sL https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+    # Actualizar
+      apt-get -y update
+    # Instalar paquetes
+      apt-get -y install mssql-tools unixodbc-dev
+    # Agregar la variable de entorno
+      echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
+      echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+      source ~/.bashrc
+  # Notificar de fin de la instalación
+    echo ""
+    echo "  Instalación finalizada..."
+    echo ""
+    echo "  Para conectarte a la CLI de SQLServer ejecuta:"
+    echo ""
+    echo "    sqlcmd -S localhost -U sa -P 'Contraseña'"
+    echo "    o"
+    echo "    sqlcmd -S localhost -U sa"
+    echo ""
+    echo "  ...para hacer que pida la contraseña."
+    echo ""
+    echo "  NOTA: sa (System Administrator) es el root."
+    echo ""
+    
 fi
 
