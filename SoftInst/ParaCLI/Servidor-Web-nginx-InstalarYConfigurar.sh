@@ -312,7 +312,7 @@ elif [ $OS_VERS == "11" ]; then
         echo ""
         echo "  Asegurando parte de la web con usuario y contraseña..."
         echo ""
-        sed -i '$ s|}|  location /protegida {\n    auth_basic "Area protegida";\n    auth_basic_user_file /etc/nginx/.htpasswd;\n  }\n\n}|' /etc/nginx/sites-available/default
+        sed -i '$ s|^}|  location /protegida {\n    auth_basic "Area protegida";\n    auth_basic_user_file /etc/nginx/.htpasswd;\n  }\n\n}|' /etc/nginx/sites-available/default
 
         #location /protegida {
         #  auth_basic "Area protegida";
