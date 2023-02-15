@@ -159,6 +159,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "  range 10.0.0.2 10.255.255.254;"               >> /etc/dhcp/dhcpd.conf
               echo "  option routers 10.0.0.1;"                     >> /etc/dhcp/dhcpd.conf
               echo "  option domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhcpd.conf
+              echo '  option domain-name "home.arpa";'              >> /etc/dhcp/dhcpd.conf
               echo "  default-lease-time 600;"                      >> /etc/dhcp/dhcpd.conf
               echo "  max-lease-time 7200;"                         >> /etc/dhcp/dhcpd.conf
               echo ""                                               >> /etc/dhcp/dhcpd.conf
@@ -216,6 +217,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "  range 172.16.0.2 172.16.255.254;"             >> /etc/dhcp/dhcpd.conf
               echo "  option routers 172.16.0.1;"                   >> /etc/dhcp/dhcpd.conf
               echo "  option domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhcpd.conf
+              echo '  option domain-name "home.arpa";'              >> /etc/dhcp/dhcpd.conf
               echo "  default-lease-time 600;"                      >> /etc/dhcp/dhcpd.conf
               echo "  max-lease-time 7200;"                         >> /etc/dhcp/dhcpd.conf
               echo ""                                               >> /etc/dhcp/dhcpd.conf
@@ -273,6 +275,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "  range 192.168.0.2 192.168.0.254;"             >> /etc/dhcp/dhcpd.conf
               echo "  option routers 192.168.0.1;"                  >> /etc/dhcp/dhcpd.conf
               echo "  option domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhcpd.conf
+              echo '  option domain-name "home.arpa";'              >> /etc/dhcp/dhcpd.conf
               echo "  default-lease-time 600;"                      >> /etc/dhcp/dhcpd.conf
               echo "  max-lease-time 7200;"                         >> /etc/dhcp/dhcpd.conf
               echo ""                                               >> /etc/dhcp/dhcpd.conf
@@ -331,6 +334,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "  range 10.0.0.2 10.255.255.254;"               >> /etc/dhcp/dhcpd.conf
               echo "  option routers 10.0.0.1;"                     >> /etc/dhcp/dhcpd.conf
               echo "  option domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhcpd.conf
+              echo '  option domain-name "home.arpa";'              >> /etc/dhcp/dhcpd.conf
               echo "  default-lease-time 600;"                      >> /etc/dhcp/dhcpd.conf
               echo "  max-lease-time 7200;"                         >> /etc/dhcp/dhcpd.conf
               echo ""                                               >> /etc/dhcp/dhcpd.conf
@@ -388,6 +392,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "  range 172.16.0.2 172.16.255.254;"             >> /etc/dhcp/dhcpd.conf
               echo "  option routers 172.16.0.1;"                   >> /etc/dhcp/dhcpd.conf
               echo "  option domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhcpd.conf
+              echo '  option domain-name "home.arpa";'              >> /etc/dhcp/dhcpd.conf
               echo "  default-lease-time 600;"                      >> /etc/dhcp/dhcpd.conf
               echo "  max-lease-time 7200;"                         >> /etc/dhcp/dhcpd.conf
               echo ""                                               >> /etc/dhcp/dhcpd.conf
@@ -445,6 +450,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "  range 192.168.0.2 192.168.0.254;"             >> /etc/dhcp/dhcpd.conf
               echo "  option routers 192.168.0.1;"                  >> /etc/dhcp/dhcpd.conf
               echo "  option domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhcpd.conf
+              echo '  option domain-name "home.arpa";'              >> /etc/dhcp/dhcpd.conf
               echo "  default-lease-time 600;"                      >> /etc/dhcp/dhcpd.conf
               echo "  max-lease-time 7200;"                         >> /etc/dhcp/dhcpd.conf
               echo ""                                               >> /etc/dhcp/dhcpd.conf
