@@ -408,8 +408,8 @@ elif [ $OS_VERS == "11" ]; then
             echo "Creando y populando la base de datos de de la zona LAN directa..."
             echo ""
             cp /etc/bind/db.local /etc/bind/db.directa-lan.local
-            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.directa.lan.local
-            sed -i -e 's|localhost.|ns1.lan.local.|g'                             /etc/bind/db.directa.lan.local
+            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.directa-lan.local
+            sed -i -e 's|localhost.|ns1.lan.local.|g'                             /etc/bind/db.directa-lan.local
             sed -i '/127.0.0.1/d'                                                 /etc/bind/db.directa-lan.local
             sed -i '/::1/d'                                                       /etc/bind/db.directa-lan.local
             echo -e "ubuntuserver.lan.local.\tIN\tA\t192.168.200.10"           >> /etc/bind/db.directa-lan.local
@@ -659,14 +659,14 @@ elif [ $OS_VERS == "11" ]; then
             echo "Creando y populando la base de datos de la zona LAN directa..."
             echo ""
             cp /etc/bind/db.local /etc/bind/db.directa-lan.local
-            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.directa.lan.local
-            sed -i -e 's|localhost.|ns1.lan.local.|g'                             /etc/bind/db.directa.lan.local
+            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.directa-lan.local
+            sed -i -e 's|localhost.|ns1.lan.local.|g'                             /etc/bind/db.directa-lan.local
             sed -i '/127.0.0.1/d'                                                 /etc/bind/db.directa-lan.local
             sed -i '/::1/d'                                                       /etc/bind/db.directa-lan.local
-            echo -e "ubuntuserver.lan.local.\tIN\tA\t192.168.200.10"           >> /etc/bind/db.directa.lan.local
-            echo -e "ubuntudesktop.lan.local.\tIN\tA\t192.168.200.20"          >> /etc/bind/db.directa.lan.local
-            echo -e "windowsserver.lan.local.\tIN\tA\t192.168.200.30"          >> /etc/bind/db.directa.lan.local
-            echo -e "windowsdesktop.lan.local.\tIN\tA\t192.168.200.40"         >> /etc/bind/db.directa.lan.local
+            echo -e "ubuntuserver.lan.local.\tIN\tA\t192.168.200.10"           >> /etc/bind/db.directa-lan.local
+            echo -e "ubuntudesktop.lan.local.\tIN\tA\t192.168.200.20"          >> /etc/bind/db.directa-lan.local
+            echo -e "windowsserver.lan.local.\tIN\tA\t192.168.200.30"          >> /etc/bind/db.directa-lan.local
+            echo -e "windowsdesktop.lan.local.\tIN\tA\t192.168.200.40"         >> /etc/bind/db.directa-lan.local
   
           # Linkear zona LAN directa a /etc/bind/named.conf.local
             echo ""
