@@ -12,6 +12,8 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-DNS-Bind9-InstalarYConfigurar.sh | bash
 # ----------
 
+vDominioLAN="home.arpa"
+
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
 FinColor='\033[0m'
@@ -140,10 +142,10 @@ elif [ $OS_VERS == "11" ]; then
             echo "servdnsca" > /etc/hostname
 
           # Cambiar el archivo /etc/hosts
-            echo "127.0.0.1 servdnscache servdnscache.lan.local" >> /etc/hosts
+            echo "127.0.0.1 servdnscache servdnscache.$vDominioLAN" >> /etc/hosts
             # Determinal IP LAN
               vIPLAN=$(hostname -I)
-            echo "$vIPLAN servdnscache servdnscache.lan.local" >> /etc/hosts
+            echo "$vIPLAN servdnscache servdnscache.$vDominioLAN" >> /etc/hosts
 
           # Instalar paquete
             echo ""
@@ -267,10 +269,10 @@ elif [ $OS_VERS == "11" ]; then
             echo "servdnsmaes" > /etc/hostname
 
           # Cambiar el archivo /etc/hosts
-            echo "127.0.0.1 servdnsmaes servdnsmaes.lan.local" >> /etc/hosts
+            echo "127.0.0.1 servdnsmaes servdnsmaes.$vDominioLAN" >> /etc/hosts
             # Determinal IP LAN
               vIPLAN=$(hostname -I)
-            echo "$vIPLAN servdnsmaes servdnsmaes.lan.local" >> /etc/hosts
+            echo "$vIPLAN servdnsmaes servdnsmaes.$vDominioLAN" >> /etc/hosts
 
           # Instalar paquete
             echo ""
@@ -407,43 +409,43 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "Creando y populando la base de datos de de la zona LAN directa..."
             echo ""
-            cp /etc/bind/db.local /etc/bind/db.directa-lan.local
-            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.directa-lan.local
-            sed -i -e 's|localhost.|ns1.lan.local.|g'                             /etc/bind/db.directa-lan.local
-            sed -i '/127.0.0.1/d'                                                 /etc/bind/db.directa-lan.local
-            sed -i '/::1/d'                                                       /etc/bind/db.directa-lan.local
-            echo -e "ubuntuserver.lan.local.\tIN\tA\t192.168.200.10"           >> /etc/bind/db.directa-lan.local
-            echo -e "ubuntudesktop.lan.local.\tIN\tA\t192.168.200.20"          >> /etc/bind/db.directa-lan.local
-            echo -e "windowsserver.lan.local.\tIN\tA\t192.168.200.30"          >> /etc/bind/db.directa-lan.local
-            echo -e "windowsdesktop.lan.local.\tIN\tA\t192.168.200.40"         >> /etc/bind/db.directa-lan.local
+            cp /etc/bind/db.local /etc/bind/db.directa-$vDominioLAN
+            sed -i -e "s|localhost. root.localhost.|$vDominioLAN. root.$vDominioLAN.|g" /etc/bind/db.directa-$vDominioLAN
+            sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                             /etc/bind/db.directa-$vDominioLAN
+            sed -i '/127.0.0.1/d'                                                 /etc/bind/db.directa-$vDominioLAN
+            sed -i '/::1/d'                                                       /etc/bind/db.directa-$vDominioLAN
+            echo -e "ubuntuserver.$vDominioLAN.\tIN\tA\t192.168.200.10"           >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "ubuntudesktop.$vDominioLAN.\tIN\tA\t192.168.200.20"          >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "windowsserver.$vDominioLAN.\tIN\tA\t192.168.200.30"          >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "windowsdesktop.$vDominioLAN.\tIN\tA\t192.168.200.40"         >> /etc/bind/db.directa-$vDominioLAN
   
           # Linkear zona LAN directa a /etc/bind/named.conf.local
             echo ""
             echo "Linkeando zona LAN directa a /etc/bind/named.conf.local..."
             echo ""
-            echo 'zone "lan.local" {'                       >> /etc/bind/named.conf.local
+            echo 'zone '"$vDominioLAN"' {'                       >> /etc/bind/named.conf.local
             echo "  type master;"                           >> /etc/bind/named.conf.local
             echo "  allow-transfer { none; };"              >> /etc/bind/named.conf.local
-            echo '  file "/etc/bind/db.directa-lan.local";' >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.directa-$vDominioLAN";' >> /etc/bind/named.conf.local
             echo "};"                                       >> /etc/bind/named.conf.local
 
           # Comprobar la LAN zona directa
             echo ""
             echo "  Comprobando la zona directa..."
             echo ""
-            named-checkzone lan.local /etc/bind/db.directa-lan.local
+            named-checkzone $vDominioLAN /etc/bind/db.directa-$vDominioLAN
 
           # Crear y popular zona LAN inversa...
             echo ""
             echo "Creando y populando la base de datos de de la zona LAN inversa..."
             echo ""
-            cp /etc/bind/db.127 /etc/bind/db.inversa-lan.local
-            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.inversa-lan.local
-            sed -i '/localhost./d'                                                /etc/bind/db.inversa-lan.local
-            echo -e "10\tIN\tPTR\tubuntuserver.lan.local."                     >> /etc/bind/db.inversa-lan.local
-            echo -e "20\tIN\tPTR\tubuntudesktop.lan.local."                    >> /etc/bind/db.inversa-lan.local
-            echo -e "30\tIN\tPTR\twindowsserver.lan.local."                    >> /etc/bind/db.inversa-lan.local
-            echo -e "40\tIN\tPTR\twindowsdesktop.lan.local."                   >> /etc/bind/db.inversa-lan.local
+            cp /etc/bind/db.127 /etc/bind/db.inversa-$vDominioLAN
+            sed -i -e 's|localhost. root.localhost.|$vDominioLAN. root.$vDominioLAN.|g' /etc/bind/db.inversa-$vDominioLAN
+            sed -i '/localhost./d'                                                /etc/bind/db.inversa-$vDominioLAN
+            echo -e "10\tIN\tPTR\tubuntuserver.$vDominioLAN."                     >> /etc/bind/db.inversa-$vDominioLAN
+            echo -e "20\tIN\tPTR\tubuntudesktop.$vDominioLAN."                    >> /etc/bind/db.inversa-$vDominioLAN
+            echo -e "30\tIN\tPTR\twindowsserver.$vDominioLAN."                    >> /etc/bind/db.inversa-$vDominioLAN
+            echo -e "40\tIN\tPTR\twindowsdesktop.$vDominioLAN."                   >> /etc/bind/db.inversa-$vDominioLAN
 
           # Linkear zona LAN inversa a /etc/bind/named.conf.local
             echo ""
@@ -453,14 +455,14 @@ elif [ $OS_VERS == "11" ]; then
             echo 'zone "200.168.192.in-addr.arpa" {'        >> /etc/bind/named.conf.local
             echo "  type master;"                           >> /etc/bind/named.conf.local
             echo "  allow-transfer { none; };"              >> /etc/bind/named.conf.local
-            echo '  file "/etc/bind/db.inversa-lan.local";' >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.inversa-$vDominioLAN";' >> /etc/bind/named.conf.local
             echo "};"                                       >> /etc/bind/named.conf.local
 
           # Comprobar la LAN zona inversa
             echo ""
             echo "  Comprobando la zona inversa..."
             echo ""
-            named-checkzone 200.168.192.in-addr-arpa /etc/bind/db.inversa-lan.local
+            named-checkzone 200.168.192.in-addr-arpa /etc/bind/db.inversa-$vDominioLAN
 
           # Coregir errores IPv6
             echo ""
@@ -508,10 +510,10 @@ elif [ $OS_VERS == "11" ]; then
             echo "servdnsmaes" > /etc/hostname
 
           # Cambiar el archivo /etc/hosts
-            echo "127.0.0.1 servdnsmaes servdnsmaes.lan.local" >> /etc/hosts
+            echo "127.0.0.1 servdnsmaes servdnsmaes.$vDominioLAN" >> /etc/hosts
             # Determinal IP LAN
               vIPLAN=$(hostname -I)
-            echo "$vIPLAN servdnsmaes servdnsmaes.lan.local" >> /etc/hosts
+            echo "$vIPLAN servdnsmaes servdnsmaes.$vDominioLAN" >> /etc/hosts
 
           # Instalar paquete
             echo ""
@@ -658,48 +660,48 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "Creando y populando la base de datos de la zona LAN directa..."
             echo ""
-            cp /etc/bind/db.local /etc/bind/db.directa-lan.local
-            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.directa-lan.local
-            sed -i -e 's|localhost.|ns1.lan.local.|g'                             /etc/bind/db.directa-lan.local
-            sed -i '/127.0.0.1/d'                                                 /etc/bind/db.directa-lan.local
-            sed -i '/::1/d'                                                       /etc/bind/db.directa-lan.local
-            echo -e "ubuntuserver.lan.local.\tIN\tA\t192.168.200.10"           >> /etc/bind/db.directa-lan.local
-            echo -e "ubuntudesktop.lan.local.\tIN\tA\t192.168.200.20"          >> /etc/bind/db.directa-lan.local
-            echo -e "windowsserver.lan.local.\tIN\tA\t192.168.200.30"          >> /etc/bind/db.directa-lan.local
-            echo -e "windowsdesktop.lan.local.\tIN\tA\t192.168.200.40"         >> /etc/bind/db.directa-lan.local
+            cp /etc/bind/db.local /etc/bind/db.directa-$vDominioLAN
+            sed -i -e 's|localhost. root.localhost.|$vDominioLAN. root.$vDominioLAN.|g' /etc/bind/db.directa-$vDominioLAN
+            sed -i -e 's|localhost.|ns1.$vDominioLAN.|g'                             /etc/bind/db.directa-$vDominioLAN
+            sed -i '/127.0.0.1/d'                                                 /etc/bind/db.directa-$vDominioLAN
+            sed -i '/::1/d'                                                       /etc/bind/db.directa-$vDominioLAN
+            echo -e "ubuntuserver.$vDominioLAN.\tIN\tA\t192.168.200.10"           >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "ubuntudesktop.$vDominioLAN.\tIN\tA\t192.168.200.20"          >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "windowsserver.$vDominioLAN.\tIN\tA\t192.168.200.30"          >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "windowsdesktop.$vDominioLAN.\tIN\tA\t192.168.200.40"         >> /etc/bind/db.directa-$vDominioLAN
   
           # Linkear zona LAN directa a /etc/bind/named.conf.local
             echo ""
             echo "Linkeando zona LAN directa a /etc/bind/named.conf.local..."
             echo ""
             echo ""                                         >> /etc/bind/named.conf.local
-            echo 'zone "lan.local" {'                       >> /etc/bind/named.conf.local
+            echo 'zone "$vDominioLAN" {'                       >> /etc/bind/named.conf.local
             echo "  type master;"                           >> /etc/bind/named.conf.local
             echo "  allow-transfer { any; };"               >> /etc/bind/named.conf.local
 #           echo "  allow-transfer { 172.16.5.7; };"        >> /etc/bind/named.conf.local # Si sólo queremos transferir a una IP específica (Quitar la línea de any)
             echo "  notify yes;"                            >> /etc/bind/named.conf.local
             echo "  also-notify { $vIPDelServidorSlave; };" >> /etc/bind/named.conf.local # Poner si el servidor esclavo no tiene ns y sólo se le conoce por IP
-            echo '  file "/etc/bind/db.directa-lan.local";' >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.directa-$vDominioLAN";' >> /etc/bind/named.conf.local
             echo "};"                                       >> /etc/bind/named.conf.local
 
           # Comprobar la LAN zona directa
             echo ""
             echo "  Comprobando la zona directa..."
             echo ""
-            named-checkzone lan.local /etc/bind/db.directa-lan.local
+            named-checkzone $vDominioLAN /etc/bind/db.directa-$vDominioLAN
 
 
           # Crear y popular zona LAN inversa...
             echo ""
             echo "Creando y populando la base de datos de de la zona LAN inversa..."
             echo ""
-            cp /etc/bind/db.127 /etc/bind/db.inversa-lan.local
-            sed -i -e 's|localhost. root.localhost.|lan.local. root.lan.local.|g' /etc/bind/db.inversa-lan.local
-            sed -i '/localhost./d'                                                /etc/bind/db.inversa-lan.local
-            echo -e "10\tIN\tPTR\tubuntuserver.lan.local."                     >> /etc/bind/db.inversa-lan.local
-            echo -e "20\tIN\tPTR\tubuntudesktop.lan.local."                    >> /etc/bind/db.inversa-lan.local
-            echo -e "30\tIN\tPTR\twindowsserver.lan.local."                    >> /etc/bind/db.inversa-lan.local
-            echo -e "40\tIN\tPTR\twindowsdesktop.lan.local."                   >> /etc/bind/db.inversa-lan.local
+            cp /etc/bind/db.127 /etc/bind/db.inversa-$vDominioLAN
+            sed -i -e 's|localhost. root.localhost.|$vDominioLAN. root.$vDominioLAN.|g' /etc/bind/db.inversa-$vDominioLAN
+            sed -i '/localhost./d'                                                /etc/bind/db.inversa-$vDominioLAN
+            echo -e "10\tIN\tPTR\tubuntuserver.$vDominioLAN."                     >> /etc/bind/db.inversa-$vDominioLAN
+            echo -e "20\tIN\tPTR\tubuntudesktop.$vDominioLAN."                    >> /etc/bind/db.inversa-$vDominioLAN
+            echo -e "30\tIN\tPTR\twindowsserver.$vDominioLAN."                    >> /etc/bind/db.inversa-$vDominioLAN
+            echo -e "40\tIN\tPTR\twindowsdesktop.$vDominioLAN."                   >> /etc/bind/db.inversa-$vDominioLAN
 
           # Linkear zona LAN inversa a /etc/bind/named.conf.local
             echo ""
@@ -712,14 +714,14 @@ elif [ $OS_VERS == "11" ]; then
 #           echo "  allow-transfer { 172.16.5.7; };"        >> /etc/bind/named.conf.local # Si sólo queremos transferir a una IP específica (Quitar la línea de any)
             echo "  notify yes;"                            >> /etc/bind/named.conf.local
             echo "  also-notify { $vIPDelServidorSlave; };" >> /etc/bind/named.conf.local # Poner si el servidor esclavo no tiene ns y sólo se le conoce por IP
-            echo '  file "/etc/bind/db.inversa-lan.local";' >> /etc/bind/named.conf.local
+            echo '  file "/etc/bind/db.inversa-$vDominioLAN";' >> /etc/bind/named.conf.local
             echo "};"                                       >> /etc/bind/named.conf.local
 
           # Comprobar la LAN zona inversa
             echo ""
             echo "  Comprobando la zona inversa..."
             echo ""
-            named-checkzone 200.168.192.in-addr-arpa /etc/bind/db.inversa-lan.local
+            named-checkzone 200.168.192.in-addr-arpa /etc/bind/db.inversa-$vDominioLAN
 
 
           # Coregir errores IPv6
@@ -768,10 +770,10 @@ elif [ $OS_VERS == "11" ]; then
             echo "servdnsesc" > /etc/hostname
 
           # Cambiar el archivo /etc/hosts
-            echo "127.0.0.1 servdnsesc servdnsesc.lan.local" >> /etc/hosts
+            echo "127.0.0.1 servdnsesc servdnsesc.$vDominioLAN" >> /etc/hosts
             # Determinal IP LAN
               vIPLAN=$(hostname -I)
-            echo "$vIPLAN servdnsesc servdnsesc.lan.local" >> /etc/hosts
+            echo "$vIPLAN servdnsesc servdnsesc.$vDominioLAN" >> /etc/hosts
 
           # Instalar paquete
             echo ""
@@ -874,10 +876,10 @@ elif [ $OS_VERS == "11" ]; then
 
           # Crear zona directa esclava
             echo ''                                             >> /etc/bind/named.conf.local
-            echo 'zone "lan.local" {'                           >> /etc/bind/named.conf.local
+            echo 'zone "$vDominioLAN" {'                           >> /etc/bind/named.conf.local
             echo '  type slave;'                                >> /etc/bind/named.conf.local
             echo "  masters { $vIPDelServidorMaster; };"        >> /etc/bind/named.conf.local
-            echo '  file "/var/lib/bind/db.directa-lan.local";' >> /etc/bind/named.conf.local
+            echo '  file "/var/lib/bind/db.directa-$vDominioLAN";' >> /etc/bind/named.conf.local
             echo '};'                                           >> /etc/bind/named.conf.local
             echo ''                                             >> /etc/bind/named.conf.local
 
@@ -886,7 +888,7 @@ elif [ $OS_VERS == "11" ]; then
             echo 'zone "200.168.192.in-addr.arpa" {'            >> /etc/bind/named.conf.local
             echo '  type slave;'                                >> /etc/bind/named.conf.local
             echo "  masters { $vIPDelServidorMaster; };"        >> /etc/bind/named.conf.local
-            echo '  file "/var/lib/bind/db.inversa-lan.local";' >> /etc/bind/named.conf.local
+            echo '  file "/var/lib/bind/db.inversa-$vDominioLAN";' >> /etc/bind/named.conf.local
             echo '};'                                           >> /etc/bind/named.conf.local
             echo ''                                             >> /etc/bind/named.conf.local
 
