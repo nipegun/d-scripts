@@ -28,7 +28,10 @@ if [[ $vEstaCargado == "loaded" ]]; then
   if [[ $vEstaActivo == "inactive" ]]; then
     echo ""
     echo -e "${vColorRojo}    El servicio $vNombreDelServicio está inactivo.${vFinColor} Intentando levantarlo..."
+    echo ""
     systemctl restart $vNombreDelServicio.service
+    systemctl status $vNombreDelServicio.service --no-pager
+    echo ""
   elif [[ $vEstaActivo == "active" ]]; then
     echo ""
     echo -e "${vColorVerde}    El servicio $vNombreDelServicio está activo.${vFinColor} No se realizará ninguna acción."
