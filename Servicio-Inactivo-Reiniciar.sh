@@ -33,12 +33,14 @@ if [[ $vEstaCargado == "loaded" ]]; then
     systemctl restart $vNombreDelServicio.service
   elif [[ $vEstaActivo == "active" ]]; then
     echo ""
-    echo -e "${vColorRojo}    El servicio $vNombreDelServicio está activo.${vFinColor}"
-    echo "    No se realizará ninguna acción..."
+    echo -e "${vColorVerde}    El servicio $vNombreDelServicio está activo.${vFinColor}"
+    echo "      No se realizará ninguna acción..."
+    echo ""
   fi
 else
   echo ""
   echo "  No parece que systemd haya cargado el servicio $vNombreDelServicio al inicio del sistema."
   echo "    No se puede determinar el estado."
+  echo ""
 fi
 
