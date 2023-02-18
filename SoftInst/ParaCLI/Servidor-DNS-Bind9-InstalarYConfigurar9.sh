@@ -16,7 +16,7 @@
   #vDominioLAN="localdomain"
   vDominioLAN="home.arpa"
   vTresOctetosClaseC="192.168.1"
-  v4toOctetoIPServEsclavo="3"
+  v4toOctetoIPServEsclavo="61"
 
 # Variables automáticas
   vIPLANHost=$(hostname -I)
@@ -24,7 +24,7 @@
   vOcteto2=$(echo $vTresOctetosClaseC | cut -d'.' -f2)
   vOcteto3=$(echo $vTresOctetosClaseC | cut -d'.' -f3)
   vIPServDNSEsclavo=$(echo "$vTresOctetosClaseC.$v4toOctetoIPServEsclavo") # Sólo se usa en la instalación del servidor DNS maestro (esperando esclavo).
-  vIPDelServidorMaestro="2"                                                # Sólo se usa en la instalación del servidor DNS esclavo.
+  vIPDelServidorMaestro="60"                                                # Sólo se usa en la instalación del servidor DNS esclavo.
 
 vColorAzul="\033[0;34m"
 vColorAzulClaro="\033[1;34m"
