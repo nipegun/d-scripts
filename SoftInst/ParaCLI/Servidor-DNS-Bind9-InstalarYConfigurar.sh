@@ -476,12 +476,12 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "      Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
             echo ""
-            echo ''                                                    >> /etc/bind/named.conf.local
-            echo 'zone "$vOcteto3.$vOcteto2.$vOcteto1.in-addr.arpa" {' >> /etc/bind/named.conf.local
-            echo "  type master;"                                      >> /etc/bind/named.conf.local
-            echo "  allow-transfer { none; };"                         >> /etc/bind/named.conf.local
-            echo '  file "'"/etc/bind/db.$vDominioLAN.inversa"'";'     >> /etc/bind/named.conf.local
-            echo "};"                                                  >> /etc/bind/named.conf.local
+            echo ''                                                        >> /etc/bind/named.conf.local
+            echo 'zone "'"$vOcteto3.$vOcteto2.$vOcteto1.in-addr.arpa"'" {' >> /etc/bind/named.conf.local
+            echo "  type master;"                                          >> /etc/bind/named.conf.local
+            echo "  allow-transfer { none; };"                             >> /etc/bind/named.conf.local
+            echo '  file "'"/etc/bind/db.$vDominioLAN.inversa"'";'         >> /etc/bind/named.conf.local
+            echo "};"                                                      >> /etc/bind/named.conf.local
 
           # Sintaxis /etc/bind/named.conf.local
             echo ""
