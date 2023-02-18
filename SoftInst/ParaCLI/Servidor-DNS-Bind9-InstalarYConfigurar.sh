@@ -16,6 +16,7 @@
   #vDominioLAN="localdomain"
   vDominioLAN="home.arpa"
   vTresOctetosClaseC="192.168.1"
+  v4toOctetoIPServMaestro="60"
   v4toOctetoIPServEsclavo="61"
 
 # Variables automáticas
@@ -23,8 +24,8 @@
   vOcteto1=$(echo $vTresOctetosClaseC | cut -d'.' -f1)
   vOcteto2=$(echo $vTresOctetosClaseC | cut -d'.' -f2)
   vOcteto3=$(echo $vTresOctetosClaseC | cut -d'.' -f3)
-  vIPServDNSEsclavo=$(echo "$vTresOctetosClaseC.$v4toOctetoIPServEsclavo") # Sólo se usa en la instalación del servidor DNS maestro (esperando esclavo).
-  vIPDelServidorMaestro="60"                                                # Sólo se usa en la instalación del servidor DNS esclavo.
+  vIPServDNSEsclavo=$(echo "$vTresOctetosClaseC.$v4toOctetoIPServEsclavo")     # Sólo se usa en la instalación del servidor DNS maestro (esperando esclavo).
+  vIPDelServidorMaestro=$(echo "$vTresOctetosClaseC.$v4toOctetoIPServMaestro") # Sólo se usa en la instalación del servidor DNS esclavo.
 
 vColorAzul="\033[0;34m"
 vColorAzulClaro="\033[1;34m"
@@ -845,7 +846,7 @@ elif [ $OS_VERS == "11" ]; then
 
           # Sintaxis named.conf.options
             echo ""
-            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
             echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.options)
             if [ "$vRespuestaCheckConf" = "" ]; then
@@ -907,7 +908,7 @@ elif [ $OS_VERS == "11" ]; then
 
           # Sintaxis /etc/bind/named.conf.log
             echo ""
-            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."
             echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
             if [ "$vRespuestaCheckConf" = "" ]; then
@@ -920,7 +921,7 @@ elif [ $OS_VERS == "11" ]; then
 
           # Crear zona directa esclava
             echo ''                                                >> /etc/bind/named.conf.local
-            echo 'zone "$vDominioLAN" {'                           >> /etc/bind/named.conf.local
+            echo 'zone "'"$vDominioLAN"'" {'                       >> /etc/bind/named.conf.local
             echo '  type slave;'                                   >> /etc/bind/named.conf.local
             echo "  masters { $vIPDelServidorMaestro; };"          >> /etc/bind/named.conf.local
             echo '  file "/var/lib/bind/db.directa-$vDominioLAN";' >> /etc/bind/named.conf.local
@@ -938,7 +939,7 @@ elif [ $OS_VERS == "11" ]; then
 
           # Sintaxis /etc/bind/named.conf.local
             echo ""
-            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."
             echo ""
             vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.local)
             if [ "$vRespuestaCheckConf" = "" ]; then
