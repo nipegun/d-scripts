@@ -178,7 +178,7 @@ elif [ $OS_VERS == "11" ]; then
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.options es correcta:${vFinColor}"
             else
-              echo "        "
+              echo ""
               echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.options no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
@@ -214,7 +214,7 @@ elif [ $OS_VERS == "11" ]; then
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log es correcta:${vFinColor}"
             else
-              echo "        "
+              echo ""
               echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.log no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
@@ -315,7 +315,7 @@ elif [ $OS_VERS == "11" ]; then
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.options es correcta:${vFinColor}"
             else
-              echo "        "
+              echo ""
               echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.options no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
@@ -395,7 +395,7 @@ elif [ $OS_VERS == "11" ]; then
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log es correcta:${vFinColor}"
             else
-              echo "        "
+              echo ""
               echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.log no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
@@ -421,15 +421,15 @@ elif [ $OS_VERS == "11" ]; then
             echo "  Creando y populando la base de datos de la zona LAN directa..."
             echo ""
             cp /etc/bind/db.local /etc/bind/db.directa-$vDominioLAN
-            sed -i -e "s|localhost. root.localhost.|ns1.$vDominioLAN. root.$vDominioLAN.|g" /etc/bind/db.directa-$vDominioLAN
-            sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                    /etc/bind/db.directa-$vDominioLAN
-            sed -i '/127.0.0.1/d'                                                           /etc/bind/db.directa-$vDominioLAN
-            sed -i '/::1/d'                                                                 /etc/bind/db.directa-$vDominioLAN
-            sid     IN      A       192.168.0.1
-            echo -e "ubuntuserver.$vDominioLAN.\tIN\tA\t192.168.200.10"                  >> /etc/bind/db.directa-$vDominioLAN
-            echo -e "ubuntudesktop.$vDominioLAN.\tIN\tA\t192.168.200.20"                 >> /etc/bind/db.directa-$vDominioLAN
-            echo -e "windowsserver.$vDominioLAN.\tIN\tA\t192.168.200.30"                 >> /etc/bind/db.directa-$vDominioLAN
-            echo -e "windowsdesktop.$vDominioLAN.\tIN\tA\t192.168.200.40"                >> /etc/bind/db.directa-$vDominioLAN
+            sed -i -e "s|localhost. root.localhost.|ns1.$vDominioLAN. root.$vDominioLAN.|g"    /etc/bind/db.directa-$vDominioLAN
+            sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                       /etc/bind/db.directa-$vDominioLAN
+            sed -i '/127.0.0.1/d'                                                              /etc/bind/db.directa-$vDominioLAN
+            sed -i '/::1/d'                                                                    /etc/bind/db.directa-$vDominioLAN
+            echo -e "ns1.$vDominioLAN.\tIN\tA\t$IPLANHost"                                  >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "ubuntuserver.$vDominioLAN.\tIN\tA\t$vOcteto1.$vOcteto2.$vOcteto3.10"   >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "ubuntudesktop.$vDominioLAN.\tIN\tA\t$vOcteto1.$vOcteto2.$vOcteto3.20"  >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "windowsserver.$vDominioLAN.\tIN\tA\t$vOcteto1.$vOcteto2.$vOcteto3.30"  >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "windowsdesktop.$vDominioLAN.\tIN\tA\t$vOcteto1.$vOcteto2.$vOcteto3.40" >> /etc/bind/db.directa-$vDominioLAN
   
           # Comprobar la LAN zona directa
             echo ""
@@ -453,7 +453,8 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             cp /etc/bind/db.127 /etc/bind/db.inversa-$vDominioLAN
             sed -i -e "s|localhost. root.localhost.|ns1.$vDominioLAN. root.$vDominioLAN.|g" /etc/bind/db.inversa-$vDominioLAN
-            sed -i '/localhost./d'                                                          /etc/bind/db.inversa-$vDominioLAN
+            sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                    /etc/bind/db.directa-$vDominioLAN
+            sed -i '/1.0.0/d'                                                               /etc/bind/db.directa-$vDominioLAN
             echo -e "10\tIN\tPTR\tubuntuserver.$vDominioLAN."                            >> /etc/bind/db.inversa-$vDominioLAN
             echo -e "20\tIN\tPTR\tubuntudesktop.$vDominioLAN."                           >> /etc/bind/db.inversa-$vDominioLAN
             echo -e "30\tIN\tPTR\twindowsserver.$vDominioLAN."                           >> /etc/bind/db.inversa-$vDominioLAN
@@ -484,7 +485,7 @@ elif [ $OS_VERS == "11" ]; then
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.local es correcta:${vFinColor}"
             else
-              echo "        "
+              echo ""
               echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.local no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
@@ -571,7 +572,7 @@ elif [ $OS_VERS == "11" ]; then
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.options es correcta:${vFinColor}"
             else
-              echo "        "
+              echo ""
               echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.options no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
@@ -660,7 +661,7 @@ elif [ $OS_VERS == "11" ]; then
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log es correcta:${vFinColor}"
             else
-              echo "        "
+              echo ""
               echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.log no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
@@ -685,14 +686,15 @@ elif [ $OS_VERS == "11" ]; then
             echo "Creando y populando la base de datos de la zona LAN directa..."
             echo ""
             cp /etc/bind/db.local /etc/bind/db.directa-$vDominioLAN
-            sed -i -e "s|localhost. root.localhost.|ns1.$vDominioLAN. root.$vDominioLAN.|g" /etc/bind/db.directa-$vDominioLAN
-            sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                    /etc/bind/db.directa-$vDominioLAN
-            sed -i '/127.0.0.1/d'                                                           /etc/bind/db.directa-$vDominioLAN
-            sed -i '/::1/d'                                                                 /etc/bind/db.directa-$vDominioLAN
-            echo -e "ubuntuserver.$vDominioLAN.\tIN\tA\t192.168.200.10"                  >> /etc/bind/db.directa-$vDominioLAN
-            echo -e "ubuntudesktop.$vDominioLAN.\tIN\tA\t192.168.200.20"                 >> /etc/bind/db.directa-$vDominioLAN
-            echo -e "windowsserver.$vDominioLAN.\tIN\tA\t192.168.200.30"                 >> /etc/bind/db.directa-$vDominioLAN
-            echo -e "windowsdesktop.$vDominioLAN.\tIN\tA\t192.168.200.40"                >> /etc/bind/db.directa-$vDominioLAN
+            sed -i -e "s|localhost. root.localhost.|ns1.$vDominioLAN. root.$vDominioLAN.|g"    /etc/bind/db.directa-$vDominioLAN
+            sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                       /etc/bind/db.directa-$vDominioLAN
+            sed -i '/127.0.0.1/d'                                                              /etc/bind/db.directa-$vDominioLAN
+            sed -i '/::1/d'                                                                    /etc/bind/db.directa-$vDominioLAN
+            echo -e "ns1.$vDominioLAN.\tIN\tA\t$IPLANHost"                                  >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "ubuntuserver.$vDominioLAN.\tIN\tA\t$vOcteto1.$vOcteto2.$vOcteto3.10"   >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "ubuntudesktop.$vDominioLAN.\tIN\tA\t$vOcteto1.$vOcteto2.$vOcteto3.20"  >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "windowsserver.$vDominioLAN.\tIN\tA\t$vOcteto1.$vOcteto2.$vOcteto3.30"  >> /etc/bind/db.directa-$vDominioLAN
+            echo -e "windowsdesktop.$vDominioLAN.\tIN\tA\t$vOcteto1.$vOcteto2.$vOcteto3.40" >> /etc/bind/db.directa-$vDominioLAN
   
           # Linkear zona LAN directa a /etc/bind/named.conf.local
             echo ""
@@ -720,7 +722,8 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             cp /etc/bind/db.127 /etc/bind/db.inversa-$vDominioLAN
             sed -i -e "s|localhost. root.localhost.|ns1.$vDominioLAN. root.$vDominioLAN.|g" /etc/bind/db.inversa-$vDominioLAN
-            sed -i '/localhost./d'                                                          /etc/bind/db.inversa-$vDominioLAN
+            sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                    /etc/bind/db.directa-$vDominioLAN
+            sed -i '/1.0.0/d'                                                               /etc/bind/db.directa-$vDominioLAN
             echo -e "10\tIN\tPTR\tubuntuserver.$vDominioLAN."                            >> /etc/bind/db.inversa-$vDominioLAN
             echo -e "20\tIN\tPTR\tubuntudesktop.$vDominioLAN."                           >> /etc/bind/db.inversa-$vDominioLAN
             echo -e "30\tIN\tPTR\twindowsserver.$vDominioLAN."                           >> /etc/bind/db.inversa-$vDominioLAN
@@ -754,7 +757,7 @@ elif [ $OS_VERS == "11" ]; then
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.local es correcta:${vFinColor}"
             else
-              echo "        "
+              echo ""
               echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.local no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
@@ -841,7 +844,7 @@ elif [ $OS_VERS == "11" ]; then
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.options es correcta:${vFinColor}"
             else
-              echo "        "
+              echo ""
               echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.options no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
@@ -903,7 +906,7 @@ elif [ $OS_VERS == "11" ]; then
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log es correcta:${vFinColor}"
             else
-              echo "        "
+              echo ""
               echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.log no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
@@ -934,7 +937,7 @@ elif [ $OS_VERS == "11" ]; then
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.local es correcta:${vFinColor}"
             else
-              echo "        "
+              echo ""
               echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.local no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
