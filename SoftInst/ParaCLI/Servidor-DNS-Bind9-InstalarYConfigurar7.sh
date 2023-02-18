@@ -16,12 +16,15 @@
   #vDominioLAN="localdomain"
   vDominioLAN="home.arpa"
   vTresOctetosClaseC="192.168.1"
+  v4toOctetoIPServEsclavo="3"
 
 # Variables automáticas
   vIPLANHost=$(hostname -I)
   vOcteto1=$(echo $vTresOctetosClaseC | cut -d'.' -f1)
   vOcteto2=$(echo $vTresOctetosClaseC | cut -d'.' -f2)
   vOcteto3=$(echo $vTresOctetosClaseC | cut -d'.' -f3)
+  vIPServDNSEsclavo=$(echo "$vTresOctetosClaseC.$v4toOctetoIPServEsclavo") # Sólo se usa en la instalación del servidor DNS maestro (esperando esclavo).
+  vIPDelServidorMaestro="2"                                                # Sólo se usa en la instalación del servidor DNS esclavo.
 
 vColorAzul="\033[0;34m"
 vColorAzulClaro="\033[1;34m"
@@ -107,8 +110,8 @@ elif [ $OS_VERS == "11" ]; then
   menu=(dialog --checklist "¿Cómo quieres instalar bind9?" 22 96 16)
     opciones=(
       1 "Instalar como servidor DNS caché." off
-      2 "Instalar como servidor DNS maestro (sin esperar slave)." off
-      3 "Instalar como servidor DNS maestro (esperando slave)." off
+      2 "Instalar como servidor DNS maestro (sin esperar esclavo)." off
+      3 "Instalar como servidor DNS maestro (esperando esclavo)." off
       4 "Instalar como servidor DNS esclavo." off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -569,7 +572,7 @@ elif [ $OS_VERS == "11" ]; then
 
           # Sintaxis named.conf.options
             echo ""
-            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
             echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.options)
             if [ "$vRespuestaCheckConf" = "" ]; then
@@ -658,7 +661,7 @@ elif [ $OS_VERS == "11" ]; then
 
           # Sintaxis /etc/bind/named.conf.log
             echo ""
-            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."
             echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
             if [ "$vRespuestaCheckConf" = "" ]; then
@@ -701,7 +704,7 @@ elif [ $OS_VERS == "11" ]; then
   
           # Comprobar la LAN zona directa
             echo ""
-            echo "  Comprobando la zona directa..."
+            echo "      Comprobando la zona directa..."
             echo ""
             named-checkzone $vDominioLAN /etc/bind/db.directa-$vDominioLAN
   
@@ -713,9 +716,9 @@ elif [ $OS_VERS == "11" ]; then
             echo 'zone "'"$vDominioLAN"'" {'                       >> /etc/bind/named.conf.local
             echo "  type master;"                                  >> /etc/bind/named.conf.local
             echo "  allow-transfer { any; };"                      >> /etc/bind/named.conf.local
-#           echo "  allow-transfer { 172.16.5.7; };"               >> /etc/bind/named.conf.local # Si sólo queremos transferir a una IP específica (Quitar la línea de any)
+#           echo "  allow-transfer { $vIPServDNSEsclavo; };"       >> /etc/bind/named.conf.local # Si sólo queremos transferir a una IP específica (Quitar la línea de any)
             echo "  notify yes;"                                   >> /etc/bind/named.conf.local
-            echo '  also-notify { $vIPDelServidorSlave; };'        >> /etc/bind/named.conf.local # Poner si el servidor esclavo no tiene ns y sólo se le conoce por IP
+            echo "  also-notify { $vIPServDNSEsclavo; };"          >> /etc/bind/named.conf.local # Poner si el servidor esclavo no tiene ns y sólo se le conoce por IP
             echo '  file "'"/etc/bind/db.directa-$vDominioLAN"'";' >> /etc/bind/named.conf.local
             echo "};"                                              >> /etc/bind/named.conf.local
 
@@ -746,15 +749,15 @@ elif [ $OS_VERS == "11" ]; then
             echo 'zone "'"$vOcteto3.$vOcteto2.$vOcteto1.in-addr.arpa"'" {' >> /etc/bind/named.conf.local
             echo "  type master;"                                          >> /etc/bind/named.conf.local
             echo "  allow-transfer { any; };"                              >> /etc/bind/named.conf.local
-#           echo "  allow-transfer { 172.16.5.7; };"                       >> /etc/bind/named.conf.local # Si sólo queremos transferir a una IP específica (Quitar la línea de any)
+#           echo "  allow-transfer { $vIPServDNSEsclavo; };"               >> /etc/bind/named.conf.local # Si sólo queremos transferir a una IP específica (Quitar la línea de any)
             echo "  notify yes;"                                           >> /etc/bind/named.conf.local
-            echo "  also-notify { $vIPDelServidorSlave; };"                >> /etc/bind/named.conf.local # Poner si el servidor esclavo no tiene ns y sólo se le conoce por IP
+            echo "  also-notify { $vIPServDNSEsclavo; };"                  >> /etc/bind/named.conf.local # Poner si el servidor esclavo no tiene ns y sólo se le conoce por IP
             echo '  file "'"/etc/bind/db.inversa-$vDominioLAN"'";'         >> /etc/bind/named.conf.local
             echo "};"                                                      >> /etc/bind/named.conf.local
 
           # Sintaxis /etc/bind/named.conf.local
             echo ""
-            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."
             echo ""
             vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.local)
             if [ "$vRespuestaCheckConf" = "" ]; then
@@ -919,7 +922,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ''                                                >> /etc/bind/named.conf.local
             echo 'zone "$vDominioLAN" {'                           >> /etc/bind/named.conf.local
             echo '  type slave;'                                   >> /etc/bind/named.conf.local
-            echo "  masters { $vIPDelServidorMaster; };"           >> /etc/bind/named.conf.local
+            echo "  masters { $vIPDelServidorMaestro; };"          >> /etc/bind/named.conf.local
             echo '  file "/var/lib/bind/db.directa-$vDominioLAN";' >> /etc/bind/named.conf.local
             echo '};'                                              >> /etc/bind/named.conf.local
             echo ''                                                >> /etc/bind/named.conf.local
@@ -928,7 +931,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ''                                                        >> /etc/bind/named.conf.local
             echo 'zone "'"$vOcteto3.$vOcteto2.$vOcteto1.in-addr.arpa"'" {' >> /etc/bind/named.conf.local
             echo '  type slave;'                                           >> /etc/bind/named.conf.local
-            echo '  masters { $vIPDelServidorMaster; };'                   >> /etc/bind/named.conf.local
+            echo "  masters { $vIPDelServidorMaestro; };"                  >> /etc/bind/named.conf.local
             echo '  file "'"/var/lib/bind/db.inversa-$vDominioLAN"'";'     >> /etc/bind/named.conf.local
             echo '};'                                                      >> /etc/bind/named.conf.local
             echo ''                                                        >> /etc/bind/named.conf.local
