@@ -146,8 +146,8 @@ elif [ $OS_VERS == "11" ]; then
             echo "servdnsca" > /etc/hostname
 
           # Cambiar el archivo /etc/hosts
-            echo "127.0.0.1 servdnscache servdnscache.$vDominioLAN"   >> /etc/hosts
-            echo "$vIPLANHost servdnscache servdnscache.$vDominioLAN" >> /etc/hosts
+            echo "127.0.0.1 ns1 ns1.$vDominioLAN"   >> /etc/hosts
+            echo "$vIPLANHost ns1 ns1.$vDominioLAN" >> /etc/hosts
 
           # Instalar paquete
             echo ""
