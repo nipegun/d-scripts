@@ -453,8 +453,8 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             cp /etc/bind/db.127 /etc/bind/db.inversa-$vDominioLAN
             sed -i -e "s|localhost. root.localhost.|ns1.$vDominioLAN. root.$vDominioLAN.|g" /etc/bind/db.inversa-$vDominioLAN
-            sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                    /etc/bind/db.directa-$vDominioLAN
-            sed -i '/1.0.0/d'                                                               /etc/bind/db.directa-$vDominioLAN
+            sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                    /etc/bind/db.inversa-$vDominioLAN
+            sed -i '/1.0.0/d'                                                               /etc/bind/db.inversa-$vDominioLAN
             echo -e "10\tIN\tPTR\tubuntuserver.$vDominioLAN."                            >> /etc/bind/db.inversa-$vDominioLAN
             echo -e "20\tIN\tPTR\tubuntudesktop.$vDominioLAN."                           >> /etc/bind/db.inversa-$vDominioLAN
             echo -e "30\tIN\tPTR\twindowsserver.$vDominioLAN."                           >> /etc/bind/db.inversa-$vDominioLAN
@@ -722,8 +722,8 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             cp /etc/bind/db.127 /etc/bind/db.inversa-$vDominioLAN
             sed -i -e "s|localhost. root.localhost.|ns1.$vDominioLAN. root.$vDominioLAN.|g" /etc/bind/db.inversa-$vDominioLAN
-            sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                    /etc/bind/db.directa-$vDominioLAN
-            sed -i '/1.0.0/d'                                                               /etc/bind/db.directa-$vDominioLAN
+            sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                    /etc/bind/db.inversa-$vDominioLAN
+            sed -i '/1.0.0/d'                                                               /etc/bind/db.inversa-$vDominioLAN
             echo -e "10\tIN\tPTR\tubuntuserver.$vDominioLAN."                            >> /etc/bind/db.inversa-$vDominioLAN
             echo -e "20\tIN\tPTR\tubuntudesktop.$vDominioLAN."                           >> /etc/bind/db.inversa-$vDominioLAN
             echo -e "30\tIN\tPTR\twindowsserver.$vDominioLAN."                           >> /etc/bind/db.inversa-$vDominioLAN
