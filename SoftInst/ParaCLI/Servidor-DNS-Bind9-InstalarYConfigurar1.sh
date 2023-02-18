@@ -240,6 +240,17 @@ elif [ $OS_VERS == "11" ]; then
           # rndc querylog                                               # Activa loguear las querys
           #tail /var/log/syslog
 
+          # Reiniciar servidor DNS
+            echo ""
+            echo "    Reiniciando el servidor DNS..."
+            echo ""
+            service bind9 restart
+
+          # Mostrar estado del servidor
+            echo ""
+            echo "    Mostrando el estado del servidor DNS..."
+            echo ""
+            systemctl status bind9 --no-pager
         ;;
 
         2)
@@ -487,15 +498,15 @@ elif [ $OS_VERS == "11" ]; then
 
           # Reiniciar servidor DNS
             echo ""
-            echo "  Reiniciando el servidor DNS..."
+            echo "    Reiniciando el servidor DNS..."
             echo ""
             service bind9 restart
 
           # Mostrar estado del servidor
             echo ""
-            echo "  Mostrando el estado del servidor DNS..."
+            echo "    Mostrando el estado del servidor DNS..."
             echo ""
-            service bind9 status
+            systemctl status bind9 --no-pager
 
         ;;
 
@@ -752,22 +763,22 @@ elif [ $OS_VERS == "11" ]; then
 
           # Coregir errores IPv6
             echo ""
-            echo "Corrigiendo los posibles errores de IPv6..."
+            echo "    Corrigiendo los posibles errores de IPv6..."
             echo ""
             sed -i -e 's|RESOLVCONF=no|RESOLVCONF=yes|g'           /etc/default/named
             sed -i -e 's|OPTIONS="-u bind"|OPTIONS="-4 -u bind"|g' /etc/default/named
 
           # Reiniciar servidor DNS
             echo ""
-            echo "Reiniciando el servidor DNS..."
+            echo "    Reiniciando el servidor DNS..."
             echo ""
             service bind9 restart
 
           # Mostrar estado del servidor
             echo ""
-            echo "Mostrando el estado del servidor DNS..."
+            echo "    Mostrando el estado del servidor DNS..."
             echo ""
-            service bind9 status
+            systemctl status bind9 --no-pager
 
         ;;
 
@@ -946,6 +957,18 @@ elif [ $OS_VERS == "11" ]; then
             echo "    Instalando herramientas extra..."
             echo ""
             apt-get -y install dnsutils
+
+          # Reiniciar servidor DNS
+            echo ""
+            echo "    Reiniciando el servidor DNS..."
+            echo ""
+            service bind9 restart
+
+          # Mostrar estado del servidor
+            echo ""
+            echo "    Mostrando el estado del servidor DNS..."
+            echo ""
+            systemctl status bind9 --no-pager
 
         ;;
 
