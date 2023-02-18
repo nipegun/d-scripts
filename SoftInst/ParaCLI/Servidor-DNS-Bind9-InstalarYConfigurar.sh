@@ -920,13 +920,13 @@ elif [ $OS_VERS == "11" ]; then
             fi
 
           # Crear zona directa esclava
-            echo ''                                                >> /etc/bind/named.conf.local
-            echo 'zone "'"$vDominioLAN"'" {'                       >> /etc/bind/named.conf.local
-            echo '  type slave;'                                   >> /etc/bind/named.conf.local
-            echo "  masters { $vIPDelServidorMaestro; };"          >> /etc/bind/named.conf.local
-            echo '  file "/var/lib/bind/db.directa-$vDominioLAN";' >> /etc/bind/named.conf.local
-            echo '};'                                              >> /etc/bind/named.conf.local
-            echo ''                                                >> /etc/bind/named.conf.local
+            echo ''                                                    >> /etc/bind/named.conf.local
+            echo 'zone "'"$vDominioLAN"'" {'                           >> /etc/bind/named.conf.local
+            echo '  type slave;'                                       >> /etc/bind/named.conf.local
+            echo "  masters { $vIPDelServidorMaestro; };"              >> /etc/bind/named.conf.local
+            echo '  file "'"/var/lib/bind/db.directa-$vDominioLAN"'";' >> /etc/bind/named.conf.local
+            echo '};'                                                  >> /etc/bind/named.conf.local
+            echo ''                                                    >> /etc/bind/named.conf.local
 
           # Crear zona inversa esclava
             echo ''                                                        >> /etc/bind/named.conf.local
