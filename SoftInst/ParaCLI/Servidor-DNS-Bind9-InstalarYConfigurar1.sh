@@ -464,6 +464,19 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             named-checkzone $vOcteto3.$vOcteto2.$vOcteto1.in-addr-arpa /etc/bind/db.inversa-$vDominioLAN
 
+          # Sintaxis /etc/bind/named.conf.local
+            echo ""
+            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."
+            echo ""
+            vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.local)
+            if [ "$vRespuestaCheckConf" = "" ]; then
+              echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.local es correcta:${vFinColor}"
+            else
+              echo "        "
+              echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.local no es correcta:${vFinColor}"
+              echo "        $vRespuestaCheckConf"
+            fi
+
           # Coregir errores IPv6
             echo ""
             echo "  Corrigiendo los posibles errores de IPv6..."
@@ -552,7 +565,6 @@ elif [ $OS_VERS == "11" ]; then
               echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.options no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
-
 
           # logs
             echo ""
@@ -723,6 +735,19 @@ elif [ $OS_VERS == "11" ]; then
             echo "  Comprobando la zona inversa..."
             echo ""
             named-checkzone $vOcteto3.$vOcteto2.$vOcteto1.in-addr-arpa /etc/bind/db.inversa-$vDominioLAN
+
+          # Sintaxis /etc/bind/named.conf.local
+            echo ""
+            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."
+            echo ""
+            vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.local)
+            if [ "$vRespuestaCheckConf" = "" ]; then
+              echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.local es correcta:${vFinColor}"
+            else
+              echo "        "
+              echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.local no es correcta:${vFinColor}"
+              echo "        $vRespuestaCheckConf"
+            fi
 
           # Coregir errores IPv6
             echo ""
