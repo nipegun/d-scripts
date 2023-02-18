@@ -439,7 +439,7 @@ elif [ $OS_VERS == "11" ]; then
   
           # Linkear zona LAN directa a /etc/bind/named.conf.local
             echo ""
-            echo "    Linkeando zona LAN directa a /etc/bind/named.conf.local..."
+            echo "      Linkeando zona LAN directa a /etc/bind/named.conf.local..."
             echo ""
             echo 'zone "'"$vDominioLAN"'" {'                       >> /etc/bind/named.conf.local
             echo "  type master;"                                  >> /etc/bind/named.conf.local
@@ -468,7 +468,7 @@ elif [ $OS_VERS == "11" ]; then
 
           # Linkear zona LAN inversa a /etc/bind/named.conf.local
             echo ""
-            echo "    Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
+            echo "      Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
             echo ""
             echo ''                                                    >> /etc/bind/named.conf.local
             echo 'zone "$vOcteto3.$vOcteto2.$vOcteto1.in-addr.arpa" {' >> /etc/bind/named.conf.local
@@ -696,9 +696,15 @@ elif [ $OS_VERS == "11" ]; then
             echo -e "windowsserver.$vDominioLAN.\tIN\tA\t$vOcteto1.$vOcteto2.$vOcteto3.30"  >> /etc/bind/db.directa-$vDominioLAN
             echo -e "windowsdesktop.$vDominioLAN.\tIN\tA\t$vOcteto1.$vOcteto2.$vOcteto3.40" >> /etc/bind/db.directa-$vDominioLAN
   
+          # Comprobar la LAN zona directa
+            echo ""
+            echo "  Comprobando la zona directa..."
+            echo ""
+            named-checkzone $vDominioLAN /etc/bind/db.directa-$vDominioLAN
+  
           # Linkear zona LAN directa a /etc/bind/named.conf.local
             echo ""
-            echo "Linkeando zona LAN directa a /etc/bind/named.conf.local..."
+            echo "      Linkeando zona LAN directa a /etc/bind/named.conf.local..."
             echo ""
             echo ""                                                >> /etc/bind/named.conf.local
             echo 'zone "'"$vDominioLAN"'" {'                       >> /etc/bind/named.conf.local
@@ -710,15 +716,9 @@ elif [ $OS_VERS == "11" ]; then
             echo '  file "'"/etc/bind/db.directa-$vDominioLAN"'";' >> /etc/bind/named.conf.local
             echo "};"                                              >> /etc/bind/named.conf.local
 
-          # Comprobar la LAN zona directa
-            echo ""
-            echo "  Comprobando la zona directa..."
-            echo ""
-            named-checkzone $vDominioLAN /etc/bind/db.directa-$vDominioLAN
-
           # Crear y popular zona LAN inversa...
             echo ""
-            echo "Creando y populando la base de datos de de la zona LAN inversa..."
+            echo "    Creando y populando la base de datos de de la zona LAN inversa..."
             echo ""
             cp /etc/bind/db.127 /etc/bind/db.inversa-$vDominioLAN
             sed -i -e "s|localhost. root.localhost.|ns1.$vDominioLAN. root.$vDominioLAN.|g" /etc/bind/db.inversa-$vDominioLAN
@@ -729,9 +729,15 @@ elif [ $OS_VERS == "11" ]; then
             echo -e "30\tIN\tPTR\twindowsserver.$vDominioLAN."                           >> /etc/bind/db.inversa-$vDominioLAN
             echo -e "40\tIN\tPTR\twindowsdesktop.$vDominioLAN."                          >> /etc/bind/db.inversa-$vDominioLAN
 
+          # Comprobar la LAN zona inversa
+            echo ""
+            echo "      Comprobando la zona inversa..."
+            echo ""
+            named-checkzone $vOcteto3.$vOcteto2.$vOcteto1.in-addr-arpa /etc/bind/db.inversa-$vDominioLAN
+
           # Linkear zona LAN inversa a /etc/bind/named.conf.local
             echo ""
-            echo "Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
+            echo "      Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
             echo ""
             echo ""                                                        >> /etc/bind/named.conf.local
             echo 'zone "'"$vOcteto3.$vOcteto2.$vOcteto1.in-addr.arpa"'" {' >> /etc/bind/named.conf.local
@@ -742,12 +748,6 @@ elif [ $OS_VERS == "11" ]; then
             echo "  also-notify { $vIPDelServidorSlave; };"                >> /etc/bind/named.conf.local # Poner si el servidor esclavo no tiene ns y sólo se le conoce por IP
             echo '  file "'"/etc/bind/db.inversa-$vDominioLAN"'";'         >> /etc/bind/named.conf.local
             echo "};"                                                      >> /etc/bind/named.conf.local
-
-          # Comprobar la LAN zona inversa
-            echo ""
-            echo "  Comprobando la zona inversa..."
-            echo ""
-            named-checkzone $vOcteto3.$vOcteto2.$vOcteto1.in-addr-arpa /etc/bind/db.inversa-$vDominioLAN
 
           # Sintaxis /etc/bind/named.conf.local
             echo ""
