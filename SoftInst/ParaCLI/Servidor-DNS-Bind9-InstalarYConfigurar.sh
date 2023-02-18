@@ -15,9 +15,9 @@
 vDominioLAN="home.arpa"
 vTresOctetosClaseC="192.168.1"
 
-vOcteto1=$(cat $vTresOctetosClaseC | cut -d'.' -f1)
-vOcteto2=$(cat $vTresOctetosClaseC | cut -d'.' -f2)
-vOcteto3=$(cat $vTresOctetosClaseC | cut -d'.' -f3)
+vOcteto1=$(echo $vTresOctetosClaseC | cut -d'.' -f1)
+vOcteto2=$(echo $vTresOctetosClaseC | cut -d'.' -f2)
+vOcteto3=$(echo $vTresOctetosClaseC | cut -d'.' -f3)
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
