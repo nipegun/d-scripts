@@ -168,16 +168,16 @@ elif [ $OS_VERS == "11" ]; then
 #           echo '  listen-on-v6 { any; };'       >> /etc/bind/named.conf.options
             echo "};"                             >> /etc/bind/named.conf.options
 
-
           # Sintaxis named.conf.options
             echo ""
             echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
             echo ""
-            vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.options)
+            vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.options)
             if [ "$vRespuestaCheckConf" = "" ]; then
-              echo "      La configuración de /etc/bind/named.conf.options es correcta."
+              echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.options es correcta:${vFinColor}"
             else
-              echo "      La sintaxis del archivo /etc/bind/named.conf.options no es correcta:"
+              echo "        "
+              echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.options no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
 
@@ -200,7 +200,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ''                                                                    >> /etc/bind/named.conf.log
             echo '};'                                                                  >> /etc/bind/named.conf.log
             mkdir -p /var/log/bind9/ 2> /dev/null
-           chown bind:bind /var/log/bind9 -R # El usuario bind necesita permisos de escritura en el la carpeta
+           chown bind:bind /var/log/bind9 -R # El usuario bind necesita permisos de escritura en la carpeta
             # Dar permisos de escritura a bind9 en el directorio /var/log/bind9 (No hace falta si se meten los logs en /var/log/named/)
               sed -i -e 's|/var/log/named/ rw,|/var/log/named/ rw,\n\n/var/log/bind9/** rw,\n/var/log/bind9/ rw,|g' /etc/apparmor.d/usr.sbin.named
 
@@ -210,9 +210,10 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
             if [ "$vRespuestaCheckConf" = "" ]; then
-              echo "      La configuración de  /etc/bind/named.conf.log es correcta."
+              echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log es correcta:${vFinColor}"
             else
-              echo "      La sintaxis del archivo  /etc/bind/named.conf.log no es correcta:"
+              echo "        "
+              echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.log no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
 
@@ -227,7 +228,7 @@ elif [ $OS_VERS == "11" ]; then
 
           # Herramientas extra
             echo ""
-            echo "  Instalando herramientas extra..."
+            echo "    Instalando herramientas extra..."
             echo ""
             apt-get -y install dnsutils
 
@@ -299,11 +300,12 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
             echo ""
-            vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.options)
+            vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.options)
             if [ "$vRespuestaCheckConf" = "" ]; then
-              echo "      La configuración de /etc/bind/named.conf.options es correcta."
+              echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.options es correcta:${vFinColor}"
             else
-              echo "      La sintaxis del archivo /etc/bind/named.conf.options no es correcta:"
+              echo "        "
+              echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.options no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
 
@@ -380,7 +382,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
             if [ "$vRespuestaCheckConf" = "" ]; then
-              echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log no es correcta:${vFinColor}"
+              echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log es correcta:${vFinColor}"
             else
               echo "        "
               echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.log no es correcta:${vFinColor}"
@@ -405,7 +407,7 @@ elif [ $OS_VERS == "11" ]; then
 
           # Crear y popular zona LAN directa...
             echo ""
-            echo "Creando y populando la base de datos de de la zona LAN directa..."
+            echo "  Creando y populando la base de datos de de la zona LAN directa..."
             echo ""
             cp /etc/bind/db.local /etc/bind/db.directa-$vDominioLAN
             sed -i -e "s|localhost. root.localhost.|$vDominioLAN. root.$vDominioLAN.|g" /etc/bind/db.directa-$vDominioLAN
@@ -419,7 +421,7 @@ elif [ $OS_VERS == "11" ]; then
   
           # Linkear zona LAN directa a /etc/bind/named.conf.local
             echo ""
-            echo "Linkeando zona LAN directa a /etc/bind/named.conf.local..."
+            echo "  Linkeando zona LAN directa a /etc/bind/named.conf.local..."
             echo ""
             echo 'zone "'"$vDominioLAN"'" {'                       >> /etc/bind/named.conf.local
             echo "  type master;"                                  >> /etc/bind/named.conf.local
@@ -435,7 +437,7 @@ elif [ $OS_VERS == "11" ]; then
 
           # Crear y popular zona LAN inversa...
             echo ""
-            echo "Creando y populando la base de datos de la zona LAN inversa..."
+            echo "  Creando y populando la base de datos de la zona LAN inversa..."
             echo ""
             cp /etc/bind/db.127 /etc/bind/db.inversa-$vDominioLAN
             sed -i -e "s|localhost. root.localhost.|$vDominioLAN. root.$vDominioLAN.|g" /etc/bind/db.inversa-$vDominioLAN
@@ -447,7 +449,7 @@ elif [ $OS_VERS == "11" ]; then
 
           # Linkear zona LAN inversa a /etc/bind/named.conf.local
             echo ""
-            echo "Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
+            echo "  Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
             echo ""
             echo ''                                                    >> /etc/bind/named.conf.local
             echo 'zone "$vOcteto3.$vOcteto2.$vOcteto1.in-addr.arpa" {' >> /etc/bind/named.conf.local
@@ -464,20 +466,20 @@ elif [ $OS_VERS == "11" ]; then
 
           # Coregir errores IPv6
             echo ""
-            echo "Corrigiendo los posibles errores de IPv6..."
+            echo "  Corrigiendo los posibles errores de IPv6..."
             echo ""
             sed -i -e 's|RESOLVCONF=no|RESOLVCONF=yes|g'           /etc/default/named
             sed -i -e 's|OPTIONS="-u bind"|OPTIONS="-4 -u bind"|g' /etc/default/named
 
           # Reiniciar servidor DNS
             echo ""
-            echo "Reiniciando el servidor DNS..."
+            echo "  Reiniciando el servidor DNS..."
             echo ""
             service bind9 restart
 
           # Mostrar estado del servidor
             echo ""
-            echo "Mostrando el estado del servidor DNS..."
+            echo "  Mostrando el estado del servidor DNS..."
             echo ""
             service bind9 status
 
@@ -542,13 +544,15 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
             echo ""
-            vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.options)
+            vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.options)
             if [ "$vRespuestaCheckConf" = "" ]; then
-              echo "      La configuración de /etc/bind/named.conf.options es correcta."
+              echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.options es correcta:${vFinColor}"
             else
-              echo "      La sintaxis del archivo /etc/bind/named.conf.options no es correcta:"
+              echo "        "
+              echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.options no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
+
 
           # logs
             echo ""
@@ -632,15 +636,16 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
             if [ "$vRespuestaCheckConf" = "" ]; then
-              echo "      La configuración de  /etc/bind/named.conf.log es correcta."
+              echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log es correcta:${vFinColor}"
             else
-              echo "      La sintaxis del archivo  /etc/bind/named.conf.log no es correcta:"
+              echo "        "
+              echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.log no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
 
           # resolvconf
             echo ""
-            echo "    Instalando resolvconf y configurando IP loopack"
+            echo "    Instalando resolvconf y configurando IP loopack..."
             echo ""
             apt-get -y install resolvconf
             sed -i -e 's|nameserver 127.0.0.1||g' /etc/resolvconf/resolv.conf.d/head
@@ -649,10 +654,9 @@ elif [ $OS_VERS == "11" ]; then
 
           # Herramientas extra
             echo ""
-            echo "  Instalando herramientas extra..."
+            echo "    Instalando herramientas extra..."
             echo ""
             apt-get -y install dnsutils
-
 
           # Crear y popular zona LAN directa...
             echo ""
@@ -688,7 +692,6 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             named-checkzone $vDominioLAN /etc/bind/db.directa-$vDominioLAN
 
-
           # Crear y popular zona LAN inversa...
             echo ""
             echo "Creando y populando la base de datos de de la zona LAN inversa..."
@@ -720,7 +723,6 @@ elif [ $OS_VERS == "11" ]; then
             echo "  Comprobando la zona inversa..."
             echo ""
             named-checkzone $vOcteto3.$vOcteto2.$vOcteto1.in-addr-arpa /etc/bind/db.inversa-$vDominioLAN
-
 
           # Coregir errores IPv6
             echo ""
@@ -798,16 +800,16 @@ elif [ $OS_VERS == "11" ]; then
 #           echo '  listen-on-v6 { any; };'       >> /etc/bind/named.conf.options
             echo "};"                             >> /etc/bind/named.conf.options
 
-
           # Sintaxis named.conf.options
             echo ""
             echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
             echo ""
-            vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.options)
+            vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.options)
             if [ "$vRespuestaCheckConf" = "" ]; then
-              echo "      La configuración de /etc/bind/named.conf.options es correcta."
+              echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.options es correcta:${vFinColor}"
             else
-              echo "      La sintaxis del archivo /etc/bind/named.conf.options no es correcta:"
+              echo "        "
+              echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.options no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
 
@@ -866,9 +868,10 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
             if [ "$vRespuestaCheckConf" = "" ]; then
-              echo "      La configuración de  /etc/bind/named.conf.log es correcta."
+              echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log es correcta:${vFinColor}"
             else
-              echo "      La sintaxis del archivo  /etc/bind/named.conf.log no es correcta:"
+              echo "        "
+              echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.log no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
 
@@ -882,7 +885,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ''                                                >> /etc/bind/named.conf.local
 
           # Crear zona inversa esclava
-            echo ''                                                    >> /etc/bind/named.conf.local
+            echo ''                                                        >> /etc/bind/named.conf.local
             echo 'zone "'"$vOcteto3.$vOcteto2.$vOcteto1.in-addr.arpa"'" {' >> /etc/bind/named.conf.local
             echo '  type slave;'                                           >> /etc/bind/named.conf.local
             echo '  masters { $vIPDelServidorMaster; };'                   >> /etc/bind/named.conf.local
@@ -894,17 +897,18 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."
             echo ""
-            vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.local)
+            vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.local)
             if [ "$vRespuestaCheckConf" = "" ]; then
-              echo "      La configuración de  /etc/bind/named.conf.local es correcta."
+              echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.local es correcta:${vFinColor}"
             else
-              echo "      La sintaxis del archivo  /etc/bind/named.conf.local no es correcta:"
+              echo "        "
+              echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.local no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
 
           # resolvconf
             echo ""
-            echo "    Instalando resolvconf y configurando IP loopack"
+            echo "    Instalando resolvconf y configurando IP loopack..."
             echo ""
             apt-get -y install resolvconf
             sed -i -e 's|nameserver 127.0.0.1||g' /etc/resolvconf/resolv.conf.d/head
@@ -913,7 +917,7 @@ elif [ $OS_VERS == "11" ]; then
 
           # Herramientas extra
             echo ""
-            echo "  Instalando herramientas extra..."
+            echo "    Instalando herramientas extra..."
             echo ""
             apt-get -y install dnsutils
 
