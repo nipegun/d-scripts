@@ -23,24 +23,20 @@ vNombreDelServicio="$1"
 vEstaCargado=$(systemctl status $vNombreDelServicio.service | grep "oaded:" | cut -d':' -f2 | sed 's- --g' | cut -d'(' -f1)
 if [[ $vEstaCargado == "loaded" ]]; then
   echo ""
-  echo "  El servicio $vNombreDelServicio está cargado."
-  echo "    Comprobando si está activo..."
+  echo -e "${vColorRojo}  El servicio $vNombreDelServicio está cargado.${vFinColor} Comprobando si está activo..."
   vEstaActivo=$(systemctl status $vNombreDelServicio.service | grep "ctive:" | cut -d':' -f2 | sed 's- --g' | cut -d'(' -f1)
   if [[ $vEstaActivo == "inactive" ]]; then
     echo ""
-    echo -e "${vColorRojo}    El servicio $vNombreDelServicio está inactivo.${vFinColor}"
-    echo "      Intentando levantarlo..."
+    echo -e "${vColorRojo}    El servicio $vNombreDelServicio está inactivo.${vFinColor} Intentando levantarlo..."
     systemctl restart $vNombreDelServicio.service
   elif [[ $vEstaActivo == "active" ]]; then
     echo ""
-    echo -e "${vColorVerde}    El servicio $vNombreDelServicio está activo.${vFinColor}"
-    echo "      No se realizará ninguna acción..."
+    echo -e "${vColorVerde}    El servicio $vNombreDelServicio está activo.${vFinColor} No se realizará ninguna acción."
     echo ""
   fi
 else
   echo ""
-  echo "  No parece que systemd haya cargado el servicio $vNombreDelServicio al inicio del sistema."
-  echo "    No se puede determinar el estado."
+  echo "  No parece que systemd haya cargado el servicio $vNombreDelServicio al inicio del sistema. No se puede determinar el estado."
   echo ""
 fi
 
