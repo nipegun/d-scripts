@@ -100,12 +100,12 @@ elif [ $OS_VERS == "11" ]; then
       echo ""
     fi
 
-  menu=(dialog --checklist "¿Cómo quieres instalar bind9?:" 22 96 16)
+  menu=(dialog --checklist "¿Cómo quieres instalar bind9?" 22 96 16)
     opciones=(
-      1 "Instalar como servidor DNS caché" off
-      2 "Instalar como servidor DNS maestro (sin esperar slave)" off
-      3 "Instalar como servidor DNS maestro (esperando slave)" off
-      4 "Instalar como servidor DNS esclavo" off
+      1 "Instalar como servidor DNS caché." off
+      2 "Instalar como servidor DNS maestro (sin esperar slave)." off
+      3 "Instalar como servidor DNS maestro (esperando slave)." off
+      4 "Instalar como servidor DNS esclavo." off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -376,23 +376,24 @@ elif [ $OS_VERS == "11" ]; then
 
           # Sintaxis /etc/bind/named.conf.log
             echo ""
-            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."
             echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
             if [ "$vRespuestaCheckConf" = "" ]; then
-              echo "      La configuración de  /etc/bind/named.conf.log es correcta."
+              echo -e "${vColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log no es correcta:${vFinColor}"
             else
-              echo "      La sintaxis del archivo  /etc/bind/named.conf.log no es correcta:"
+              echo "        "
+              echo -e "${vColorRojo}        La sintaxis del archivo /etc/bind/named.conf.log no es correcta:${vFinColor}"
               echo "        $vRespuestaCheckConf"
             fi
 
           # resolvconf
             echo ""
-            echo "    Instalando resolvconf y configurando IP loopack"
+            echo "    Instalando resolvconf y configurando IP loopack..."
             echo ""
             apt-get -y install resolvconf
             sed -i -e 's|nameserver 127.0.0.1||g' /etc/resolvconf/resolv.conf.d/head
-            echo "nameserver 127.0.0.1" >>        /etc/resolvconf/resolv.conf.d/head
+            echo "nameserver 127.0.0.1"        >> /etc/resolvconf/resolv.conf.d/head
             # Regenerar /etc/resolv.conf
               resolvconf -u
 
