@@ -12,6 +12,7 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-DNS-Bind9-InstalarYConfigurar.sh | bash
 # ----------
 
+#vDominioLAN="localdomain"
 vDominioLAN="home.arpa"
 vTresOctetosClaseC="192.168.1"
 
