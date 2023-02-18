@@ -23,7 +23,7 @@ vNombreDelServicio="$1"
 vEstaCargado=$(systemctl status $vNombreDelServicio.service | grep "oaded:" | cut -d':' -f2 | sed 's- --g' | cut -d'(' -f1)
 if [[ $vEstaCargado == "loaded" ]]; then
   echo ""
-  echo -e "${vColorRojo}  El servicio $vNombreDelServicio está cargado.${vFinColor} Comprobando si está activo..."
+  echo -e "${vColorVerde}  El servicio $vNombreDelServicio está cargado.${vFinColor} Comprobando si está activo..."
   vEstaActivo=$(systemctl status $vNombreDelServicio.service | grep "ctive:" | cut -d':' -f2 | sed 's- --g' | cut -d'(' -f1)
   if [[ $vEstaActivo == "inactive" ]]; then
     echo ""
