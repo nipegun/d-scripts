@@ -281,11 +281,11 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y autoremove
  
           # Cambiar el /etc/hostname
-            echo "servdnsmaes" > /etc/hostname
+            echo "ns1" > /etc/hostname
 
           # Cambiar el archivo /etc/hosts
-            echo "127.0.0.1 servdnsmaes servdnsmaes.$vDominioLAN"   >> /etc/hosts
-            echo "$vIPLANHost servdnsmaes servdnsmaes.$vDominioLAN" >> /etc/hosts
+            echo "127.0.0.1 ns1 ns1.$vDominioLAN"   >> /etc/hosts
+            echo "$vIPLANHost ns1 ns1.$vDominioLAN" >> /etc/hosts
 
           # Instalar paquete
             echo ""
@@ -539,11 +539,11 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y autoremove
  
           # Cambiar el /etc/hostname
-            echo "servdnsmaes" > /etc/hostname
+            echo "ns1" > /etc/hostname
 
           # Cambiar el archivo /etc/hosts
-            echo "127.0.0.1 servdnsmaes servdnsmaes.$vDominioLAN"   >> /etc/hosts
-            echo "$vIPLANHost servdnsmaes servdnsmaes.$vDominioLAN" >> /etc/hosts
+            echo "127.0.0.1 ns1 ns1.$vDominioLAN"   >> /etc/hosts
+            echo "$vIPLANHost ns1 ns1.$vDominioLAN" >> /etc/hosts
 
           # Instalar paquete
             echo ""
@@ -812,11 +812,11 @@ elif [ $OS_VERS == "11" ]; then
             apt-get -y autoremove
  
           # Cambiar el /etc/hostname
-            echo "servdnsesc" > /etc/hostname
+            echo "ns2" > /etc/hostname
 
           # Cambiar el archivo /etc/hosts
-            echo "127.0.0.1 servdnsesc servdnsesc.$vDominioLAN"   >> /etc/hosts
-            echo "$vIPLANHost servdnsesc servdnsesc.$vDominioLAN" >> /etc/hosts
+            echo "127.0.0.1 ns2 ns2.$vDominioLAN"   >> /etc/hosts
+            echo "$vIPLANHost ns2 ns2.$vDominioLAN" >> /etc/hosts
 
           # Instalar paquete
             echo ""
