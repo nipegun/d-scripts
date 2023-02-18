@@ -19,9 +19,11 @@ vOcteto1=$(echo $vTresOctetosClaseC | cut -d'.' -f1)
 vOcteto2=$(echo $vTresOctetosClaseC | cut -d'.' -f2)
 vOcteto3=$(echo $vTresOctetosClaseC | cut -d'.' -f3)
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorAzul="\033[0;34m"
+vColorAzulClaro="\033[1;34m"
+vColorVerde='\033[1;32m'
+vColorRojo='\033[1;31m'
+vFinColor='\033[0m'
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
@@ -46,57 +48,47 @@ FinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de bind9 para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de bind9 para Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de bind9 para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de bind9 para Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de bind9 para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de bind9 para Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de bind9 para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de bind9 para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de bind9 para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de bind9 para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -108,15 +100,14 @@ elif [ $OS_VERS == "11" ]; then
       echo ""
     fi
 
-  menu=(dialog --timeout 5 --checklist "¿Cómo quieres instalar bind9?:" 22 96 16)
+  menu=(dialog --checklist "¿Cómo quieres instalar bind9?:" 22 96 16)
     opciones=(
       1 "Instalar como servidor DNS caché" off
       2 "Instalar como servidor DNS maestro (sin esperar slave)" off
       3 "Instalar como servidor DNS maestro (esperando slave)" off
       4 "Instalar como servidor DNS esclavo" off
     )
-    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  clear
+  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
   for choice in $choices
     do
