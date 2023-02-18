@@ -137,6 +137,7 @@ elif [ $OS_VERS == "11" ]; then
             systemctl disable bind9.service
             apt-get -y purge bind9
             apt-get -y purge dnsutils
+            apt-get -y autoremove
 
           # Cambiar el /etc/hostname
             echo "servdnsca" > /etc/hostname
@@ -274,7 +275,8 @@ elif [ $OS_VERS == "11" ]; then
             systemctl disable bind9.service
             apt-get -y purge bind9
             apt-get -y purge dnsutils
-
+            apt-get -y autoremove
+ 
           # Cambiar el /etc/hostname
             echo "servdnsmaes" > /etc/hostname
 
@@ -531,7 +533,8 @@ elif [ $OS_VERS == "11" ]; then
             systemctl disable bind9.service
             apt-get -y purge bind9
             apt-get -y purge dnsutils
-
+            apt-get -y autoremove
+ 
           # Cambiar el /etc/hostname
             echo "servdnsmaes" > /etc/hostname
 
@@ -803,7 +806,8 @@ elif [ $OS_VERS == "11" ]; then
             systemctl disable bind9.service
             apt-get -y purge bind9
             apt-get -y purge dnsutils
-
+            apt-get -y autoremove
+ 
           # Cambiar el /etc/hostname
             echo "servdnsesc" > /etc/hostname
 
