@@ -28,12 +28,12 @@ if [[ $vEstaCargado == "loaded" ]]; then
   vEstaActivo=$(systemctl status $vNombreDelServicio.service | grep "ctive:" | cut -d':' -f2 | sed 's- --g' | cut -d'(' -f1)
   if [[ $vEstaActivo == "inactive" ]]; then
     echo ""
-    echo "    El servicio $vNombreDelServicio está inactivo."
+    echo -e "${vColorRojo}    El servicio $vNombreDelServicio está inactivo.${vFinColor}"
     echo "      Intentando levantarlo..."
     systemctl restart $vNombreDelServicio.service
   elif [[ $vEstaActivo == "active" ]]; then
     echo ""
-    echo "  El servicio $vNombreDelServicio está activo."
+    echo -e "${vColorRojo}    El servicio $vNombreDelServicio está activo.${vFinColor}"
     echo "    No se realizará ninguna acción..."
   fi
 else
