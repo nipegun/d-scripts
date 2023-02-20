@@ -23,7 +23,8 @@ vFinColor='\033[0m'
     echo ""
     echo -e "${vColorRojo}  wget no está instalado. Iniciando su instalación...${vFinColor}"
     echo ""
-    apt-get -y update && apt-get -y install wget
+    apt-get -y update
+    apt-get -y install wget
     echo ""
   fi
 
@@ -39,9 +40,10 @@ vFinColor='\033[0m'
     # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${vColorRojo}    git no está instalado. Iniciando su instalación...${vFinColor}"
+        echo -e "${vColorRojo}    El paquete git no está instalado. Iniciando su instalación...${vFinColor}"
         echo ""
-        apt-get -y update && apt-get -y install git
+        apt-get -y update
+        apt-get -y install git
         echo ""
       fi
     git clone --depth=1 https://github.com/nipegun/d-scripts
