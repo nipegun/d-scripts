@@ -1,4 +1,7 @@
+#!/bin/bash
+
 # Archivo /etc/login.defs
+    cp /etc/login.defs /etc/login.defs.bak
   # Configurar el número máximo de días que se puede usar una contraseña.
     sed -i -e 's|^#PASS_MAX_DAYS|PASS_MAX_DAYS|g'         /etc/login.defs
   # Configurar el número mínimo de días permitido entre cambios de contraseña.
