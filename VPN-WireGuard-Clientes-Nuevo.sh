@@ -18,7 +18,7 @@ FinColor='\033[0m'
 
 vIPsClientes="192.168.255."
 vMascaraServer="/32"
-vMascaraClientes="/24"
+vMascaraPermitidaPeers="/32"
 
 for i in {1..9}
   do
@@ -45,10 +45,10 @@ for i in {1..9}
         echo ""
         echo "  Agregando la sección de configuración del nuevo peer a /etc/wireguard/wg0.conf..."
         echo ""
-        echo ""                                            >> /etc/wireguard/wg0.conf
-        echo "[Peer]"                                      >> /etc/wireguard/wg0.conf
-        echo "TempPublicKey ="                             >> /etc/wireguard/wg0.conf
-        echo "AllowedIPs = $vIPsClientes$i$vMascaraServer" >> /etc/wireguard/wg0.conf # Direcciones IPs que se le permiten pedir al cliente
+        echo ""                                                    >> /etc/wireguard/wg0.conf
+        echo "[Peer]"                                              >> /etc/wireguard/wg0.conf
+        echo "TempPublicKey ="                                     >> /etc/wireguard/wg0.conf
+        echo "AllowedIPs = $vIPsClientes$i$vMascaraPermitidaPeers" >> /etc/wireguard/wg0.conf # Direcciones IPs que se le permiten pedir al cliente
       # Agregar la clave pública del nuevo peer a su correspondiente sección de configuración
         vClavePubNuevoPeer=$(cat /root/WireGuard/WireGuardUser"$i"Public.key)
         sed -i -e "s|TempPublicKey =|PublicKey = $vClavePubNuevoPeer|g" /etc/wireguard/wg0.conf
