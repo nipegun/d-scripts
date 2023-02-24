@@ -12,9 +12,9 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-Clientes-Nuevo.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorRojo='\033[1;31m'
+vColorVerde='\033[1;32m'
+vFinColor='\033[0m'
 
 vOctetos123="192.168.255."
 vMascaraRestrictora="/32"
@@ -25,10 +25,9 @@ for vNumPeer in {1..254}
   do
     if [ -f /root/WireGuard/WireGuardUser"$vNumPeer"Private.key ] && [ -f /root/WireGuard/WireGuardUser"$vNumPeer"Public.key ]; then
       echo ""
-      echo "El peer User$vNumPeer ya existe. Intentando crear el peer User$(($vNumPeer+1))..."
+      echo "  El peer User$vNumPeer ya existe. Intentando crear el peer User$(($vNumPeer+1))..."
       echo ""
     else
-
       # Generar claves para el nuevo peer
         echo ""
         echo "  Generando la clave privada para el peer User$vNumPeer..."
