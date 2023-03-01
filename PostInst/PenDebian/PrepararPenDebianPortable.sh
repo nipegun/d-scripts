@@ -127,6 +127,8 @@ elif [ $OS_VERS == "11" ]; then
   # Herramientas para manejar volúmenes
     apt-get -y install lvm2
     apt-get -y install btrfs-progs
+    apt-get -y install mdadm
+    apt-get -y install dmraid
 
   # Herramientas gráficas
     apt-get -y install gparted
