@@ -113,7 +113,7 @@ elif [ $OS_VERS == "11" ]; then
         apt-get -y install curl
         echo ""
       fi
-    vUltVerLTS)
+    vUltVerLTS=""
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
