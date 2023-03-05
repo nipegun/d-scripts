@@ -33,7 +33,7 @@ vFinColor='\033[0m'
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${vColorRojo}  curl no está instalado. Iniciando su instalación...${vFinColor}"
+    echo -e "${vColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
     echo ""
     apt-get -y update
     apt-get -y install curl
@@ -163,8 +163,9 @@ elif [ $OS_VERS == "11" ]; then
                   apt-get -y install wget
                   echo ""
                 fi
-              wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-4%2Bdebian11_all.deb
-              dpkg -i zabbix-release_6.0-4+debian11_all.deb
+              mkdir -p /root/SoftInst/Zabbix/
+              wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-4%2Bdebian11_all.deb -O /root/SoftInst/Zabbix/ZabbixRepo.deb
+              apt -y install /root/SoftInst/Zabbix/ZabbixRepo.deb
               apt-get -y update
 
             # Instalar el frontend y el agente
@@ -176,6 +177,7 @@ elif [ $OS_VERS == "11" ]; then
               apt-get -y install zabbix-apache-conf
               apt-get -y install zabbix-sql-scripts
               apt-get -y install zabbix-agent
+              apt-get -y install mariadb-server
 
             # Crear la base de datos
               echo ""
@@ -187,21 +189,49 @@ elif [ $OS_VERS == "11" ]; then
               mysql -e "set global log_bin_trust_function_creators = 1"
 
             # Importando el esquema y los datos iniciales
-              zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p Pass123
+              # Comprobar si el paquete gzip está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s gzip 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${vColorRojo}    El paquete gzip no está instalado. Iniciando su instalación...${vFinColor}"
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install gzip
+                  echo ""
+                fi
+              zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -pPass123 zabbix
               # Deshabilitar log_bin_trust_function_creators
                 mysql -e "set global log_bin_trust_function_creators = 0"
  
             # Indicar el password de la base de datos en el archivo de configuración
-              sed -i -e 's-DBPassword=-DBPassword=Pass123-g' /etc/zabbix/zabbix_server.conf
+              sed -i -e 's|DBPassword=.*|\nDBPassword=Pass123|g' /etc/zabbix/zabbix_server.conf
+
+            # Asegurarse que la configuración locale del Debian sea la correcta
+              echo "es_ES.UTF-8 UTF-8"  > /etc/locale.gen
+              echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+              apt-get -y update && apt-get -y install locales
+              locale-gen --purge es_ES.UTF-8 en_US.UTF-8
+              # Cambiar de false a true la línea que tenga como idioma es_ES
+                sed -i -e '/es_ES/s/false/true/g' /usr/share/zabbix/include/locales.inc.php
 
             # Iniciar el servidor y el agente
-              systemctl restart zabbix-server zabbix-agent apache2
+              systemctl restart zabbix-server
+              systemctl restart zabbix-agent
+              systemctl restart apache2
               systemctl enable zabbix-server --now
-              systemctl zabbix-agent apache2 --now
+              systemctl enable zabbix-agent  --now
+              systemctl enable apache2       --now
 
-f. Open Zabbix UI web page
+            # Mostrar mensaje de fin
+              vIPHostZabbix=$(hostname -I)
+              echo ""
+              echo "  Instalación de Zabbix LTS con servidor Web apache2 y base de datos MySQL, finalizada."
+              echo ""
+              echo "    Para conectarte a la web del servidor accede a la siguiente URL:"
+              echo "      http://$vIPHostZabbix/zabbix"
+              echo ""
+              echo "      El usuario por defecto es Admin y la contraseña zabbix."
+              echo ""
 
-The default URL for Zabbix UI when using Apache web server is http://host/zabbix 
           ;;
 
           2)
@@ -215,8 +245,101 @@ The default URL for Zabbix UI when using Apache web server is http://host/zabbix
           3)
 
             echo ""
-            echo "  Opción 3..."
+            echo "  Instalando Zabbix LTS con servidor Web nginx y base de datos MySQL..."
             echo ""
+
+            # Agregar el repositorio
+              echo ""
+              echo "    Agregando el repositorio..."
+              echo ""
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${vColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install wget
+                  echo ""
+                fi
+              mkdir -p /root/SoftInst/Zabbix/
+              wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-4%2Bdebian11_all.deb -O /root/SoftInst/Zabbix/ZabbixRepo.deb
+              apt -y install /root/SoftInst/Zabbix/ZabbixRepo.deb
+              apt-get -y update
+
+            # Instalar el frontend y el agente
+              echo ""
+              echo "    Instalando el frontend y el repositorio..."
+              echo ""
+              apt-get -y install zabbix-server-mysql
+              apt-get -y install zabbix-frontend-php
+              apt-get -y install zabbix-nginx-conf
+              apt-get -y install zabbix-sql-scripts
+              apt-get -y install zabbix-agent
+              apt-get -y install mariadb-server
+
+            # Crear la base de datos
+              echo ""
+              echo "    Creando la base de datos..."
+              echo ""
+              mysql -e "create database zabbix character set utf8mb4 collate utf8mb4_bin"
+              mysql -e "create user zabbix@localhost identified by 'Pass123'"
+              mysql -e "grant all privileges on zabbix.* to zabbix@localhost"
+              mysql -e "set global log_bin_trust_function_creators = 1"
+
+            # Importando el esquema y los datos iniciales
+              # Comprobar si el paquete gzip está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s gzip 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${vColorRojo}    El paquete gzip no está instalado. Iniciando su instalación...${vFinColor}"
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install gzip
+                  echo ""
+                fi
+              zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -pPass123 zabbix
+              # Deshabilitar log_bin_trust_function_creators
+                mysql -e "set global log_bin_trust_function_creators = 0"
+ 
+            # Indicar el password de la base de datos en el archivo de configuración
+              sed -i -e 's|DBPassword=.*|\nDBPassword=Pass123|g' /etc/zabbix/zabbix_server.conf
+
+            # Modificar conf de nginx
+              sed -i -e 's|8080;|\n  listen 8080;|g'                     /etc/zabbix/nginx.conf
+              sed -i -e 's|example.com;|\n  server_name example.com; |g' /etc/zabbix/nginx.conf
+              sed -i -e 's|^#.*||g'                                      /etc/zabbix/nginx.conf
+
+            # Asegurarse que la configuración locale del Debian sea la correcta
+              echo "es_ES.UTF-8 UTF-8"  > /etc/locale.gen
+              echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+              apt-get -y update && apt-get -y install locales
+              locale-gen --purge es_ES.UTF-8 en_US.UTF-8
+              # Cambiar de false a true la línea que tenga como idioma es_ES
+                sed -i -e '/es_ES/s/false/true/g' /usr/share/zabbix/include/locales.inc.php
+
+            # Desinstalar apache2, por si está instalado
+              apt-get -y autoremove apache2
+              apt-get -y purge apache2
+
+            # Iniciar el servidor y el agente
+              systemctl restart zabbix-server
+              systemctl restart zabbix-agent
+              systemctl restart nginx
+              systemctl restart php7.4-fpm
+              systemctl enable zabbix-server --now
+              systemctl enable zabbix-agent  --now
+              systemctl enable nginx         --now
+              systemctl enable php7.4-fpm    --now
+
+            # Mostrar mensaje de fin
+              vIPHostZabbix=$(hostname -I)
+              echo ""
+              echo "  Instalación de Zabbix LTS con servidor Web apache2 y base de datos MySQL, finalizada."
+              echo ""
+              echo "    Para conectarte a la web del servidor accede a la siguiente URL:"
+              echo "      http://$vIPHostZabbix:8080"
+              echo ""
+              echo "      El usuario por defecto es Admin y la contraseña zabbix."
+              echo ""
 
           ;;
 
@@ -240,6 +363,5 @@ The default URL for Zabbix UI when using Apache web server is http://host/zabbix
 
   done
 
-
-
 fi
+
