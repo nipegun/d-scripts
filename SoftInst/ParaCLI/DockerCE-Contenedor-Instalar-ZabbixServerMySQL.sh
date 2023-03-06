@@ -113,25 +113,25 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Creando el comando para iniciar el contenedor docker..."
           echo ""
-          echo '#!/bin/bash'                                         > /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo ""                                                   >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "docker run -d --restart=always                  \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  --name ZabbixServerMySQL                      \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  -p 8001:8001                                  \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  -p 9444:9444                                  \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock  \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  -v /Contenedores/ZabbixServerMySQL/data:/data \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  docker.io/zabbix/zabbix-server-mysql"             >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          chmod +x                                                     /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '#!/bin/bash'                                         > /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo ""                                                   >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "docker run -d --restart=always                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "  --name ZabbixServerMySQL                      \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "  -p 8001:8001                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "  -p 9444:9444                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock  \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "  -v /Contenedores/ZabbixServerMySQL/data:/data \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "  docker.io/zabbix/zabbix-server-mysql"             >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          chmod +x                                                     /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
               
           echo ""
           echo "  Creando el comando post arranque..."
           echo ""
-          echo "/root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh" >> /root/scripts/ComandosPostArranque.sh
+          echo "/root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL" >> /root/scripts/ComandosPostArranque.sh
           echo ""
           echo "  Iniciando el container por primera vez..."
           echo ""
-          /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
 
         ;;
 
@@ -145,26 +145,26 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Creando el comando para iniciar el contenedor docker..."
           echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo ""                                                  >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  --name ZabbixServerMySQL                     \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  -p 8001:8001                                 \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  -p 9444:9444                                 \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  -v /Host/ZabbixServerMySQL/data:/data        \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  docker.io/zabbix/zabbix-server-mysql"            >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          chmod +x                                                    /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo ""                                                  >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "  --name ZabbixServerMySQL                     \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "  -p 8001:8001                                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "  -p 9444:9444                                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "  -v /Host/ZabbixServerMySQL/data:/data        \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo "  docker.io/zabbix/zabbix-server-mysql"            >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          chmod +x                                                    /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
 
           echo ""
           echo "  Creando el comando post arranque..."
           echo ""
-          echo "/root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh" >> /root/scripts/ComandosPostArranque.sh
+          echo "/root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh" >> /root/scripts/ComandosPostArranque.sh
 
           echo ""
           echo "  Iniciando el container por primera vez..."
           echo ""
-          /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
 
         ;;
 
