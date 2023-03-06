@@ -15,36 +15,36 @@
 NombreContenedor="portainer"
 NuevaIP="172.17.0.10" # No puede ser 172.17.0.1, porque esa es la IP de la interfaz de Docker. Tiene que ser a partir de la 172.17.0.2
 
-## Comprobar si el contenedor está corriendo. Si no lo está, abortar.
-   if [[ $(docker ps 2>/dev/null | grep $NombreContenedor) == "" ]]; then
-     echo ""
-     echo "  El contenedor $NombreContenedor no se está ejecutando."
-     echo "  No se puede cambiar la IP de un contenedor que no se está ejecutando."
-     echo ""
-   else
-     ## Comprobar si el paquete jq está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s jq 2>/dev/null | grep installed) == "" ]]; then
-          echo ""
-          echo "  jq no está instalado. Iniciando su instalación..."
-          echo ""
-          apt-get -y update > /dev/null
-          apt-get -y install jq
-          echo ""
-        fi
-     Red=$(docker inspect $NombreContenedor -f "{{json .NetworkSettings.Networks }}" | jq .bridge.NetworkID | cut -d'"' -f2)
-     ## Comprobar que la red no sea null, si es null, abortar.
-        if [[ $Red == "null" ]]; then
-          echo ""
-          echo "  La red es $Red, abortando..."
-          echo ""
-        else
-          echo ""
-          echo " El contenedor $NombreContenedor está conectado a la red $Red"
-          echo ""
-          #docker network ls
-          docker network disconnect $Red $NombreContenedor
-          docker network connect --ip $NuevaIP $Red $NombreContenedor
-          echo ""
-        fi
+# Comprobar si el contenedor está corriendo. Si no lo está, abortar.
+  if [[ $(docker ps 2>/dev/null | grep $NombreContenedor) == "" ]]; then
+    echo ""
+    echo "  El contenedor $NombreContenedor no se está ejecutando."
+    echo "  No se puede cambiar la IP de un contenedor que no se está ejecutando."
+    echo ""
+  else
+    # Comprobar si el paquete jq está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s jq 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "  jq no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update > /dev/null
+        apt-get -y install jq
+        echo ""
+      fi
+    Red=$(docker inspect $NombreContenedor -f "{{json .NetworkSettings.Networks }}" | jq .bridge.NetworkID | cut -d'"' -f2)
+    # Comprobar que la red no sea null, si es null, abortar.
+      if [[ $Red == "null" ]]; then
+        echo ""
+        echo "  La red es $Red, abortando..."
+        echo ""
+      else
+        echo ""
+        echo " El contenedor $NombreContenedor está conectado a la red $Red"
+        echo ""
+        #docker network ls
+        docker network disconnect $Red $NombreContenedor
+        docker network connect --ip $NuevaIP $Red $NombreContenedor
+        echo ""
+      fi
    fi
 
