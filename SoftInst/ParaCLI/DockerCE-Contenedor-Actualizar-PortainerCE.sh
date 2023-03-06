@@ -9,7 +9,7 @@
 # Script de NiPeGun para actualizar PortainerCE en el DockerCE de Debian
 #
 # Ejecución remota
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-PortainerCE.sh | bash
+#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Actualizar-PortainerCE.sh | bash
 # ----------
 
 vColorRojo='\033[1;31m'
