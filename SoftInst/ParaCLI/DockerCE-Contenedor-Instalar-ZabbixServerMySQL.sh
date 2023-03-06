@@ -117,8 +117,8 @@ elif [ $OS_VERS == "11" ]; then
           echo ""                                                   >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo "docker run -d --restart=always                  \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo "  --name ZabbixServerMySQL                      \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  -p 8000:8000                                  \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  -p 9443:9443                                  \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  -p 8001:8001                                  \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  -p 9444:9444                                  \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock  \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo "  -v /Contenedores/ZabbixServerMySQL/data:/data \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo "  docker.io/zabbix/zabbix-server-mysql"             >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
