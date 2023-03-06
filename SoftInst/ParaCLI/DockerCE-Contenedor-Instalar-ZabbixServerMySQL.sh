@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar Zabbix Server MySQL en el DockerCE de Debian
 #
 # Ejecución remota
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-PortainerCE.sh | bash
+#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-ZabbixServerMySQL.sh | bash
 # ----------
 
 vColorRojo='\033[1;31m'
@@ -84,21 +84,20 @@ elif [ $OS_VERS == "11" ]; then
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  dialog no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update && apt-get -y install dialog
-     echo ""
-   fi
-  menu=(dialog --timeout 5 --checklist "¿Donde quieres instalar Zabbix Server MySQL?:" 22 76 16)
+      echo ""
+      echo "  dialog no está instalado. Iniciando su instalación..."
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
+  menu=(dialog --checklist "¿Donde quieres instalar Zabbix Server MySQL?:" 22 76 16)
     opciones=(
-      1 "En un ordenador o máquina virtual" on
+      1 "En un ordenador o máquina virtual" off
       2 "En un contenedor LXC de Proxmox" off
       3 "..." off
       4 "..." off
     )
-    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-    clear
+  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
   for choice in $choices
     do
@@ -107,7 +106,7 @@ elif [ $OS_VERS == "11" ]; then
         1)
 
           echo ""
-          echo -e "${ColorVerde}  Instalando Zabbix Server MySQL en un ordenador o máquina virtual...${FinColor}"
+          echo -e "${vColorVerde}  Instalando Zabbix Server MySQL en un ordenador o máquina virtual...${vFinColor}"
           echo ""
           mkdir -p /Contenedores/ZabbixServerMySQL/data 2> /dev/null
 
@@ -139,7 +138,7 @@ elif [ $OS_VERS == "11" ]; then
         2)
 
           echo ""
-          echo -e "${ColorVerde}  Instalando Zabbix Server MySQL en un contenedor LXC...${FinColor}"
+          echo -e "${vColorVerde}  Instalando Zabbix Server MySQL en un contenedor LXC...${vFinColor}"
           echo ""
           mkdir -p /Host/ZabbixServerMySQL/data 2> /dev/null
 
@@ -150,8 +149,8 @@ elif [ $OS_VERS == "11" ]; then
           echo ""                                                  >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo "  --name ZabbixServerMySQL                     \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  -p 8000:8000                                 \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo "  -p 9443:9443                                 \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  -p 8001:8001                                 \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  -p 9444:9444                                 \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo "  -v /Host/ZabbixServerMySQL/data:/data        \\" >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo "  docker.io/zabbix/zabbix-server-mysql"            >> /root/scripts/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
@@ -172,7 +171,7 @@ elif [ $OS_VERS == "11" ]; then
         3)
 
           echo ""
-          echo -e "${ColorVerde}  ...${FinColor}"
+          echo -e "${vColorVerde}  ...${vFinColor}"
           echo ""
 
         ;;
@@ -180,7 +179,7 @@ elif [ $OS_VERS == "11" ]; then
         4)
 
           echo ""
-          echo -e "${ColorVerde}  ...${FinColor}"
+          echo -e "${vColorVerde}  ...${vFinColor}"
           echo ""
 
         ;;
