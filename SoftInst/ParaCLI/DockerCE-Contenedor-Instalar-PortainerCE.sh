@@ -12,42 +12,34 @@
 #   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-PortainerCE.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorRojo='\033[1;31m'
+vColorVerde='\033[1;32m'
+vFinColor='\033[0m'
 
-## Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
-   fi
+# Determinar la versión de Debian
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
+    . /etc/os-release
+    OS_NAME=$NAME
+    OS_VERS=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # linuxbase.org
+    OS_NAME=$(lsb_release -si)
+    OS_VERS=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release
+    . /etc/lsb-release
+    OS_NAME=$DISTRIB_ID
+    OS_VERS=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    OS_NAME=Debian
+    OS_VERS=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD)
+    OS_NAME=$(uname -s)
+    OS_VERS=$(uname -r)
+  fi
 
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de PortainerCE en el DockerCE de Debian 7 (Wheezy)..."
-  echo "--------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -57,9 +49,7 @@ if [ $OS_VERS == "7" ]; then
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de PortainerCE en el DockerCE de Debian 8 (Jessie)..."
-  echo "--------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -69,9 +59,7 @@ elif [ $OS_VERS == "8" ]; then
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de PortainerCE en el DockerCE de Debian 9 (Stretch)..."
-  echo "---------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -81,9 +69,7 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de PortainerCE en el DockerCE de Debian 10 (Buster)..."
-  echo "---------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -93,28 +79,25 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de PortainerCE en el DockerCE de Debian 11 (Bullseye)..."
-  echo "-----------------------------------------------------------------------------------------------"
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  dialog no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update && apt-get -y install dialog
-     echo ""
-   fi
-  menu=(dialog --timeout 5 --checklist "¿Donde quieres instalar PortainerCE?:" 22 76 16)
+      echo ""
+      echo "  dialog no está instalado. Iniciando su instalación..."
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
+  menu=(dialog --checklist "¿Donde quieres instalar PortainerCE?:" 22 76 16)
     opciones=(
-      1 "En un ordenador o máquina virtual" on
+      1 "En un ordenador o máquina virtual" off
       2 "En un contenedor LXC de Proxmox" off
       3 "..." off
       4 "..." off
     )
-    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-    clear
+  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
   for choice in $choices
     do
@@ -123,7 +106,7 @@ elif [ $OS_VERS == "11" ]; then
         1)
 
           echo ""
-          echo -e "${ColorVerde}  Instalando PortainerCE en un ordenador o máquina virtual...${FinColor}"
+          echo -e "${vColorVerde}  Instalando PortainerCE en un ordenador o máquina virtual...${vFinColor}"
           echo ""
           mkdir -p /Contenedores/PortainerCE/data 2> /dev/null
 
@@ -155,7 +138,7 @@ elif [ $OS_VERS == "11" ]; then
         2)
 
           echo ""
-          echo -e "${ColorVerde}  Instalando PortainerCE en un contenedor LXC...${FinColor}"
+          echo -e "${vColorVerde}  Instalando PortainerCE en un contenedor LXC...${vFinColor}"
           echo ""
           mkdir -p /Host/PortainerCE/data 2> /dev/null
 
@@ -188,7 +171,7 @@ elif [ $OS_VERS == "11" ]; then
         3)
 
           echo ""
-          echo -e "${ColorVerde}  ...${FinColor}"
+          echo -e "${vColorVerde}  ...${vFinColor}"
           echo ""
 
         ;;
@@ -196,7 +179,7 @@ elif [ $OS_VERS == "11" ]; then
         4)
 
           echo ""
-          echo -e "${ColorVerde}  ...${FinColor}"
+          echo -e "${vColorVerde}  ...${vFinColor}"
           echo ""
 
         ;;
