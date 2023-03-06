@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar OracleLinux en el DockerCE de Debian
 #
 # Ejecución remota
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-InstalarContenedor-OracleLinux.sh | bash
+#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-OracleLinux.sh | bash
 # ----------
 
 VerOLDeseada=8
