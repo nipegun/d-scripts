@@ -126,11 +126,10 @@ elif [ $OS_VERS == "11" ]; then
 
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
-      1 "Instalar Zabbix LTS con servidor Web apache2 y base de datos MySQL." on
-      2 "Instalar Zabbix LTS con servidor Web apache2 y base de datos PostGreSQL." off
-      3 "Instalar Zabbix LTS con servidor Web nginx y base de datos MySQL." off
-      4 "Instalar Zabbix LTS con servidor Web nginx y base de datos PostgreSQL." off
-      5 "Opción 5" off
+      1 "Zabbix LTS con base de datos MariaDB y servidor web apache2." off
+      2 "Zabbix LTS con base de datos MariaDB y servidor web nginx." off
+      3 "Zabbix (última versión) con base de datos MariaDB y servidor web apache2." off
+      4 "Zabbix (última versión) con base de datos MariaDB y servidor web nginx." off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -141,7 +140,7 @@ elif [ $OS_VERS == "11" ]; then
           1)
 
             echo ""
-            echo "  Instalando Zabbix LTS con servidor Web apache2 y base de datos MySQL..."
+            echo "  Instalando Zabbix LTS con base de datos MariaDB y servidor web apache2..."
             echo ""
 
             # Agregar el repositorio
@@ -231,15 +230,7 @@ elif [ $OS_VERS == "11" ]; then
           2)
 
             echo ""
-            echo "  Opción 2..."
-            echo ""
-
-          ;;
-
-          3)
-
-            echo ""
-            echo "  Instalando Zabbix LTS con servidor Web nginx y base de datos MySQL..."
+            echo "  Instalando Zabbix LTS con base de datos MariaDB y servidor web nginx..."
             echo ""
 
             # Agregar el repositorio
@@ -314,6 +305,9 @@ elif [ $OS_VERS == "11" ]; then
               apt-get -y autoremove apache2
               apt-get -y purge apache2
 
+            # Quitar el sitio por defecto de nginx
+              unlink /etc/nginx/sites-enabled/default
+
             # Iniciar el servidor y el agente
               systemctl restart zabbix-server
               systemctl restart zabbix-agent
@@ -325,7 +319,7 @@ elif [ $OS_VERS == "11" ]; then
               systemctl enable php7.4-fpm    --now
 
             # Mostrar mensaje de fin
-              vIPHostZabbix=$(hostname -I)
+              vIPHostZabbix=$(hostname -I | sed 's- --g')
               echo ""
               echo "  Instalación de Zabbix LTS con servidor Web apache2 y base de datos MySQL, finalizada."
               echo ""
@@ -337,18 +331,26 @@ elif [ $OS_VERS == "11" ]; then
 
           ;;
 
-          4)
+          3)
 
             echo ""
-            echo "  Opción 4..."
+            echo "  Instalando Zabbix (última versión) con base de datos MariaDB y servidor web apache2..."
+            echo ""
+
+            echo ""
+            echo -e "${vColorRojo}    Comandos todavía no preparados...${vFinColor}"
             echo ""
 
           ;;
 
-          5)
+          4)
 
             echo ""
-            echo "  Opción 5..."
+            echo "  Instalando Zabbix (última versión) con base de datos MariaDB y servidor web nginx..."
+            echo ""
+
+            echo ""
+            echo -e "${vColorRojo}    Comandos todavía no preparados...${vFinColor}"
             echo ""
 
           ;;
