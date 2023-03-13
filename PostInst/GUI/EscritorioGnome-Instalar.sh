@@ -86,11 +86,18 @@ elif [ $OS_VERS == "10" ]; then
   echo "----------------------------------------------------------------------------------------"
   echo ""
 
-  apt-get -y update
-  apt-get -y install tasksel
-  tasksel install gnome-desktop
-  apt-get -y install firefox-esr-l10n-es-es
-  apt-get -y install libreoffice-l10n-es
+  # Actualizar la lista de paquetes
+    apt-get -y update
+
+  # Instalar tasksel
+    apt-get -y install tasksel
+
+  # Instalar gnome con tasksel
+    tasksel install gnome-desktop
+
+  # Instalar paquetes en castellano que no se instalaron por defecto
+    apt-get -y install firefox-esr-l10n-es-es
+    apt-get -y install libreoffice-l10n-es
 
 elif [ $OS_VERS == "11" ]; then
 
@@ -100,10 +107,17 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------------"
   echo ""
 
-  apt-get -y update
-  apt-get -y install tasksel
-  tasksel install gnome-desktop
-  apt-get -y install firefox-esr-l10n-es-es
-  apt-get -y install libreoffice-l10n-es
+  # Actualizar la lista de paquetes
+    apt-get -y update
+
+  # Instalar tasksel
+    apt-get -y install tasksel
+
+  # Instalar gnome con tasksel
+    tasksel install gnome-desktop
+
+  # Instalar paquetes en castellano que no se instalaron por defecto
+    apt-get -y install firefox-esr-l10n-es-es
+    apt-get -y install libreoffice-l10n-es
 
 fi
