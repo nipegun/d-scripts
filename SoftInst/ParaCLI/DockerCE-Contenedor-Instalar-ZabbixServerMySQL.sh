@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar Zabbix Server MySQL en el DockerCE de Debian
 #
 # Ejecución remota
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-ZabbixServerMySQL.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-ZabbixServerMySQL.sh | bash
 # ----------
 
 vColorRojo='\033[1;31m'
