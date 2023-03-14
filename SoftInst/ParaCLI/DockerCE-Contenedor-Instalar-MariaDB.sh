@@ -117,9 +117,9 @@ elif [ $OS_VERS == "11" ]; then
           echo ""                                                  >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
           echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
           echo "  --name MariaDB                               \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --env MARIADB_USER=example-user              \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --env MARIADB_PASSWORD=my_cool_secret        \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --env MARIADB_ROOT_PASSWORD=my-secret-pw     \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
+          echo "  --env MARIADB_USER=usuariox                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
+          echo "  --env MARIADB_PASSWORD=UsuarioX              \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
+          echo "  --env MARIADB_ROOT_PASSWORD=raizraiz         \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
           echo "  -v /Contenedores/MariaDB/data:/data          \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
           echo "  mariadb:latest"                                  >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
@@ -150,9 +150,9 @@ elif [ $OS_VERS == "11" ]; then
           echo ""                                                  >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
           echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
           echo "  --name MariaDB                               \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --env MARIADB_USER=example-user              \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --env MARIADB_PASSWORD=my_cool_secret        \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --env MARIADB_ROOT_PASSWORD=my-secret-pw     \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
+          echo "  --env MARIADB_USER=usuariox                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
+          echo "  --env MARIADB_PASSWORD=UsuarioX              \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
+          echo "  --env MARIADB_ROOT_PASSWORD=raizraiz         \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
           echo "  -v /Host/MariaDB/data:/data                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
           echo "  mariadb:latest"                                  >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
