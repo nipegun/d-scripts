@@ -127,7 +127,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ""
           echo "  Creando el comando post arranque..."
           echo ""
-          echo "/root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL" >> /root/scripts/ComandosPostArranque.sh
+          echo "/root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh" >> /root/scripts/ComandosPostArranque.sh
           echo ""
           echo "  Iniciando el container por primera vez..."
           echo ""
