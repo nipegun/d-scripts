@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar Coder en el DockerCE de Debian
 #
 # Ejecución remota
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-ZabbixServerMySQL.sh | bash
+#   https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-Coder.sh | bash
 # ----------
 
 vColorRojo='\033[1;31m'
