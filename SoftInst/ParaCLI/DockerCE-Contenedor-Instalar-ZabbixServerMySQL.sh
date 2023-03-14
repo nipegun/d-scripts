@@ -149,8 +149,11 @@ elif [ $OS_VERS == "11" ]; then
           echo ""                                                  >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
           echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
           echo "  --name ZabbixServerMySQL                     \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "  -p 8001:8001                                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "  -p 9444:9444                                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo '-e DB_SERVER_HOST="some-mysql-server"          \\' >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo '-e MYSQL_USER="some-user"                      \\' >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          echo '-e MYSQL_PASSWORD="some-password"              \\' >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          #echo "  -p 8001:8001                                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+          #echo "  -p 9444:9444                                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
           echo "  -v /Host/ZabbixServerMySQL/data:/data        \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
           echo "  docker.io/zabbix/zabbix-server-mysql"            >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
