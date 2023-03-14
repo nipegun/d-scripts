@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar Coder en el DockerCE de Debian
 #
 # Ejecución remota
-#   https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-Coder.sh | bash
+# curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-Coder.sh | bash
 # ----------
 
 vColorRojo='\033[1;31m'
