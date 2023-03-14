@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar Heimdall en el DockerCE de Debian
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-Coder.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-LS-Heimdall.sh | bash
 # ----------
 
 vColorRojo='\033[1;31m'
