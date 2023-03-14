@@ -82,6 +82,110 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Iniciando el script de instalación de Coder en el DockerCE de Debian 11 (Bullseye)..."
   echo ""
 
-  
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo "  dialog no está instalado. Iniciando su instalación..."
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
+  menu=(dialog --checklist "¿Donde quieres instalar Coder?:" 22 76 16)
+    opciones=(
+      1 "En un ordenador o máquina virtual" off
+      2 "En un contenedor LXC de Proxmox" off
+      3 "..." off
+      4 "..." off
+    )
+  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+
+  for choice in $choices
+    do
+      case $choice in
+
+        1)
+
+          echo ""
+          echo -e "${vColorVerde}  Instalando Coder en un ordenador o máquina virtual...${vFinColor}"
+          echo ""
+          mkdir -p /Contenedores/Coder/data 2> /dev/null
+
+          echo ""
+          echo "  Creando el comando para iniciar el contenedor docker..."
+          echo ""
+          echo '#!/bin/bash'                                         > /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          echo ""                                                   >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          echo "docker run -d --restart=always                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          echo "  --name Coder                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          #echo "  -p 3000:3000                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          #echo "  -p 3001:3001                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          echo "  -v /Contenedores/Coder/data:/data             \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          echo "  ghcr.io/coder/coder:latest"                       >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          chmod +x                                                     /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+              
+          echo ""
+          echo "  Creando el comando post arranque..."
+          echo ""
+          echo "/root/scripts/DockerCE-Cont-Iniciar-Coder.sh" >> /root/scripts/ComandosPostArranque.sh
+          echo ""
+          echo "  Iniciando el container por primera vez..."
+          echo ""
+          /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+
+        ;;
+
+        2)
+
+          echo ""
+          echo -e "${vColorVerde}  Instalando Coder en un contenedor LXC...${vFinColor}"
+          echo ""
+          mkdir -p /Host/Coder/data 2> /dev/null
+
+          echo ""
+          echo "  Creando el comando para iniciar el contenedor docker..."
+          echo ""
+          echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          echo ""                                                  >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          echo "  --name Coder                                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          #echo "  -p 3000:3000                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          #echo "  -p 3001:3001                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          echo "  -v /Host/Coder/data:/data                    \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          echo "  ghcr.io/coder/coder:latest"                      >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+          chmod +x                                                    /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+
+          echo ""
+          echo "  Creando el comando post arranque..."
+          echo ""
+          echo "/root/scripts/DockerCE-Cont-Iniciar-Coder.sh" >> /root/scripts/ComandosPostArranque.sh
+
+          echo ""
+          echo "  Iniciando el container por primera vez..."
+          echo ""
+          /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+
+        ;;
+
+        3)
+
+          echo ""
+          echo -e "${vColorVerde}  ...${vFinColor}"
+          echo ""
+
+        ;;
+
+        4)
+
+          echo ""
+          echo -e "${vColorVerde}  ...${vFinColor}"
+          echo ""
+
+        ;;
+        
+      esac
+
+    done
 
 fi
