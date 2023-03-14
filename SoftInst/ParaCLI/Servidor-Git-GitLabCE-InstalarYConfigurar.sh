@@ -128,6 +128,7 @@ elif [ $OS_VERS == "11" ]; then
   # Notificar password
     echo ""
     echo "    El password es:"
+    echo ""
     cat /etc/gitlab/initial_root_password
 
   # Más info aquí:
