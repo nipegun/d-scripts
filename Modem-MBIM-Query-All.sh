@@ -41,149 +41,201 @@ vFinColor='\033[0m'
   fi
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-device-caps..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-device-caps
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-subscriber-ready-status..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-subscriber-ready-status
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-radio-state..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-radio-state
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-device-services..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-device-services
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-pin-state..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-pin-state
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-pin-list..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-pin-list
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-home-provider..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-home-provider
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-preferred-providers..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-preferred-providers
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-visible-providers..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-visible-providers
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-registration-state..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-registration-state
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-signal-state..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-signal-state
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-packet-service-state..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-packet-service-state
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-packet-statistics..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-packet-statistics
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-provisioned-contexts..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-provisioned-contexts
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-network-idle-hint..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-network-idle-hint
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando query-emergency-mode..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-emergency-mode
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando phonebook-query-configuration..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --phonebook-query-configuration
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando ms-query-firmware-id..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-firmware-id
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando ms-query-sar-config..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-sar-config
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando ms-query-transmission-status..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-transmission-status
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando atds-query-signal..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --atds-query-signal
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando atds-query-location..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --atds-query-location
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando ms-query-lte-attach-configuration..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-lte-attach-configuration
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando ms-query-lte-attach-info..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-lte-attach-info
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando ms-query-sys-caps..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-sys-caps
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando ms-query-device-caps..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-device-caps
 
 echo ""
-echo "  Ejecutando ..."
+echo "  Ejecutando ms-query-device-slot-mappings..."
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-device-slot-mappings
+
+echo ""
+echo "  Ejecutando ms-query-location-info-status..."
+echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-location-info-status
+
+echo ""
+echo "  Ejecutando ms-query-provisioned-contexts..."
+echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-provisioned-contexts
+
+echo ""
+echo "  Ejecutando ms-query-base-stations-info..."
+echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-base-stations-info
+
+echo ""
+echo "  Ejecutando ms-query-registration-parameters..."
+echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-registration-parameters
+
+echo ""
+echo "  Ejecutando ms-query-modem-configuration..."
+echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-modem-configuration
+
+echo ""
+echo "  Ejecutando ms-query-wake-reason..."
+echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-wake-reason
+
+echo ""
+echo "  Ejecutando quectel-query-radio-state..."
+echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --quectel-query-radio-state
+
+echo ""
+echo "  Ejecutando intel-query-rfim..."
+echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --intel-query-rfim
+
+echo ""
+echo "  Ejecutando ms-query-nitz..."
+echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-nitz
+
+echo ""
+echo "  Ejecutando ms-query-uicc-application-list..."
+echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-uicc-application-list
+
+echo ""
+echo "  Ejecutando ms-query-uicc-atr..."
+echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-uicc-atr
+
+echo ""
+echo "  Ejecutando ms-query-uicc-reset..."
+echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-uicc-reset
+
+echo ""
+echo "  Ejecutando ms-query-uicc-terminal-capability..."
+echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --ms-query-uicc-terminal-capability
