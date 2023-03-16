@@ -85,7 +85,7 @@ echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-registration-state
 
 echo ""
-echo "  Ejecutando query-signal-state...${vFinColor}"
+echo -e "${vColorAzulClaro}  Ejecutando query-signal-state...${vFinColor}"
 echo ""
 mbimcli --device=/dev/cdc-wdm0 --device-open-proxy --query-signal-state
 
