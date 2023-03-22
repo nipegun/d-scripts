@@ -31,7 +31,7 @@ echo ""
   echo ""
   echo "  Obteniendo el número de la última versión estable desde github..."
   echo ""
-  vUltVersEstable=$(curl -sL https://github.com/Chia-Network/chia-blockchain/releases/latest | sed 's->-\n-g' | grep "releases/tag/" | sed 's-releases/tag/-\nversion"-g' | grep version | head -n1 | cut -d '"' -f2)
+  vUltVersEstable=$(curl -sL https://github.com/Chia-Network/chia-blockchain/releases/latest | sed 's->-\n-g' | grep "releases/tag/" | sed 's-releases/tag/-\nversion"-g' | grep version | grep -v name | head -n1 | cut -d '"' -f2)
   echo ""
   echo "  La última versión estable es la: $vUltVersEstable."
   echo ""
