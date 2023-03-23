@@ -40,7 +40,7 @@ echo ""
   echo ""
   echo "  Obteniendo enlace de descarga de la versión $vUltVersEstable..."
   echo ""
-  vURLDelArchivoDeb=$(curl -s https://github.com/Chia-Network/chia-blockchain/releases | sed 's->-\n-g' | sed 's-href-\nhref-g' | grep $vUltVersEstable | grep href | grep .deb | grep amd64 | grep -v orrent | cut -d'"' -f2)
+  vURLDelArchivoDeb=$(curl -s https://github.com/Chia-Network/chia-blockchain/releases | sed 's->-\n-g' | sed 's-href-\nhref-g' | grep $vUltVersEstable | grep href | grep .deb | grep amd64 | grep -v orrent | grep -v cli | cut -d'"' -f2)
   echo ""
   echo "  La URL de descarga es: https://github.com/$vURLDelArchivoDeb."
   echo ""
