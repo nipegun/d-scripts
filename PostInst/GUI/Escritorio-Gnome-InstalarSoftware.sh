@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar software en el escritorio Gnome de Debian
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/EscritorioGnome-InstalarSoftware.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-InstalarSoftware.sh | bash
 # ----------
 
 ColorRojo='\033[1;31m'
