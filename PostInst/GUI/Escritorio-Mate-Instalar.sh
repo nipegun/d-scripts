@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar el escritorio Mate al acabar de instalar Debian standard
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/EscritorioMate-Instalar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Mate-Instalar.sh | bash
 # ----------
 
 ColorRojo='\033[1;31m'
