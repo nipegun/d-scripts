@@ -16,6 +16,6 @@ echo ""
 echo -e "${vColorVerde}  Mostrando información sobre la/las tarjeta gráfica/s...${vFinColor}"
 echo ""
 
-lspci -kknn -d ::300
+lspci -vvkknn -d ::300
 echo ""
 
