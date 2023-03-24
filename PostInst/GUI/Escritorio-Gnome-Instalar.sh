@@ -9,7 +9,7 @@
 #  Script de NiPeGun para instalar el escritorio Gnome al acabar de instalar Debian standard
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/EscritorioGnome-Instalar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-Instalar.sh | bash
 # ----------
 
 ColorRojo='\033[1;31m'
