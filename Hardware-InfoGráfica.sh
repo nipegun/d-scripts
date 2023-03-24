@@ -16,6 +16,6 @@ echo ""
 echo -e "${ColorVerde}Mostrando información sobre la/las tarjeta gráfica/s...${FinColor}"
 echo ""
 
-lspci -knn | grep -EA2 'VGA|3D'
+lspci -kknn | grep -EA4 'VGA|3D'
 echo ""
 
