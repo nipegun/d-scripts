@@ -9,7 +9,7 @@
 #  Script de NiPeGun para personalizar el escritorio Mate al acabar de instalarlo
 #
 #  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/EscritorioMate-Personalizar.sh | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Mate-Personalizar.sh | bash
 # ----------
 
 ColorRojo='\033[1;31m'
