@@ -73,19 +73,19 @@ if [ $# -ne $ArgumentosEsperados ]
           echo -e "${ColorVerde}Denegando el acceso a la carpeta /home/$1 a los otros usuarios...${FinColor}"
           echo ""
           find /home/$1 -type d -exec chmod 750 {} \;
-          find /home/$1 -type f -exec chmod 664 {} \;
+          find /home/$1 -type f -exec chmod 660 {} \;
         ;;
     
         4)
           echo ""
           echo -e "${ColorVerde}Creando la compartición Samba para la carpeta de usuario...${FinColor}"
           echo ""
-          echo "[$1]" >> /etc/samba/smb.conf
-          echo "  path = /home/$1/" >> /etc/samba/smb.conf
+          echo "[$1]"                               >> /etc/samba/smb.conf
+          echo "  path = /home/$1/"                 >> /etc/samba/smb.conf
           echo "  comment = Carpeta del usuario $1" >> /etc/samba/smb.conf
-          echo "  browsable = yes" >> /etc/samba/smb.conf
-          echo "  read only = no" >> /etc/samba/smb.conf
-          echo "  valid users = $1" >> /etc/samba/smb.conf
+          echo "  browsable = yes"                  >> /etc/samba/smb.conf
+          echo "  read only = no"                   >> /etc/samba/smb.conf
+          echo "  valid users = $1"                 >> /etc/samba/smb.conf
           echo ""
           echo -e "${ColorRojo}Ahora deberás ingresar 2 veces la nueva contraseña samba para el usuario $1.${FinColor}"
           echo -e "${ColorRojo}Puede ser distinta a la de la propia cuenta de usuario. Pero si pones una${FinColor}"
