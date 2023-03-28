@@ -18,10 +18,10 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "##################################################"
     echo "Mal uso del script."
     echo ""
-    echo "El uso correcto sería: byrteads texto"
+    echo "El uso correcto sería: $0 texto1 text02"
     echo ""
     echo "Ejemplo:"
-    echo "byrteads perro gato"
+    echo "$0 perro gato"
     echo "##################################################"
     echo ""
     exit $E_BADARGS
