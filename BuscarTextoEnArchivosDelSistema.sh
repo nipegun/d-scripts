@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/BuscarTextoEnArchivosDelSistema.sh | bash -s texto
 # ----------
 
-EXPECTED_ARGS=2
+EXPECTED_ARGS=1
 E_BADARGS=65
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -24,7 +24,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "El uso correcto sería: $0 texto"
     echo ""
     echo "Ejemplo:"
-    echo "$0 perro gato"
+    echo "$0 perro"
     echo "##################################################"
     echo ""
     exit $E_BADARGS
