@@ -5,10 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------------------------
-#  Script de NiPeGun para encontrar una cadena específica dentro de archivos
-#  de todo el sistema y reemplazarla por otra cadena dada
-#-----------------------------------------------------------------------------
+# ----------
+#  Script de NiPeGun para encontrar una cadena específica dentro de archivos de todo el sistema y reemplazarla por otra cadena dada
+# ----------
 
 EXPECTED_ARGS=2
 E_BADARGS=65
@@ -48,3 +47,4 @@ if [ $# -ne $EXPECTED_ARGS ]
     find /var        -type f -exec sed -i -e "s|$1|$2|g" {} \;
     echo ""
 fi
+
