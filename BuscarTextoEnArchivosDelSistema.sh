@@ -50,3 +50,4 @@ if [ $# -ne $EXPECTED_ARGS ]
     find /var        -type f -exec grep --color=auto "$1" {} \;
     echo ""
 fi
+
