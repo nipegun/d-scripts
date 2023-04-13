@@ -27,7 +27,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     exit $E_BADARGS
   else
     echo ""
-    find $1 -type f -name *$2* -print
+    find $1 -type f -name "*$2*" -print
     echo ""
 fi
 
