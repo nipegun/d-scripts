@@ -12,6 +12,16 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Servicio-xrdpMonitorCon-Instalar.sh | bash
 # ----------
 
+vColorAzul="\033[0;34m"
+vColorAzulClaro="\033[1;34m"
+vColorVerde='\033[1;32m'
+vColorRojo='\033[1;31m'
+vFinColor='\033[0m'
+
+echo ""
+echo -e "${vColorAzulClaro}  Iniciando el script de instalación de la monitorización de conexiones al servidor xrdp...${vFinColor}"
+echo ""
+
 # Crear el servicio
   echo "[Unit]"                                                                      > /etc/systemd/system/xrdpMonitorCon.service
   echo "Description=Monitor de conexiones xrdp"                                     >> /etc/systemd/system/xrdpMonitorCon.service
