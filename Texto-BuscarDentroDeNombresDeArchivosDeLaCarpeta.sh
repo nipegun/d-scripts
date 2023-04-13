@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para encontrar una cadena específica dentro de los nombres de archivos de una carpeta dada
+# Script de NiPeGun para buscar una cadena específica dentro de los nombres de archivos de una carpeta específica
 # ----------
 
 EXPECTED_ARGS=2
