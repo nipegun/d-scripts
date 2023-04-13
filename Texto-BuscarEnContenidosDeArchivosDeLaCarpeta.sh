@@ -9,10 +9,10 @@
 # Script de NiPeGun para buscar una cadena específica dentro del contenido de los archivos de una carpeta dada
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Texto-BuscarEnContenidosDeArchivosDeLaCarpeta.sh | bash -s Cadena
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Texto-BuscarEnContenidosDeArchivosDeLaCarpeta.sh | bash -s Carpeta Cadena
 # ----------
 
-EXPECTED_ARGS=1
+EXPECTED_ARGS=2
 E_BADARGS=65
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -30,7 +30,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     exit $E_BADARGS
   else
     echo ""
-    grep -rnw --color "$1" -e "$2" 
+    grep -rnw --color "$1" -e "$2"
     echo ""
 fi
 
