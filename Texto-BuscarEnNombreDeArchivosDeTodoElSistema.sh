@@ -30,24 +30,44 @@ if [ $# -ne $EXPECTED_ARGS ]
     exit $E_BADARGS
   else
     echo ""
-    find /bin        -type f -exec grep --color=auto "$1" {} \;
-    find /boot       -type f -exec grep --color=auto "$1" {} \;
-    find /dev        -type f -exec grep --color=auto "$1" {} \;
-    find /etc        -type f -exec grep --color=auto "$1" {} \;
-    find /home       -type f -exec grep --color=auto "$1" {} \;
-    find /lib        -type f -exec grep --color=auto "$1" {} \;
-    find /lib64      -type f -exec grep --color=auto "$1" {} \;
-    find /lost+found -type f -exec grep --color=auto "$1" {} \;
-    find /media      -type f -exec grep --color=auto "$1" {} \;
-    find /mnt        -type f -exec grep --color=auto "$1" {} \;
-    find /opt        -type f -exec grep --color=auto "$1" {} \;
-    find /root       -type f -exec grep --color=auto "$1" {} \;
-    find /run        -type f -exec grep --color=auto "$1" {} \;
-    find /sbin       -type f -exec grep --color=auto "$1" {} \;
-    find /srv        -type f -exec grep --color=auto "$1" {} \;
-    find /tmp        -type f -exec grep --color=auto "$1" {} \;
-    find /usr        -type f -exec grep --color=auto "$1" {} \;
-    find /var        -type f -exec grep --color=auto "$1" {} \;
+    find /bin        -type f -name *$2* -print
+    find /boot       -type f -exec *$2* -print
+    find /dev        -type f -exec *$2* -print
+    find /etc        -type f -exec *$2* -print
+    find /home       -type f -exec *$2* -print
+    find /lib        -type f -exec *$2* -print
+    find /lib64      -type f -exec *$2* -print
+    find /lost+found -type f -exec *$2* -print
+    find /media      -type f -exec *$2* -print
+    find /mnt        -type f -exec *$2* -print
+    find /opt        -type f -exec *$2* -print
+    find /root       -type f -exec *$2* -print
+    find /run        -type f -exec *$2* -print
+    find /sbin       -type f -exec *$2* -print
+    find /srv        -type f -exec *$2* -print
+    find /tmp        -type f -exec *$2* -print
+    find /usr        -type f -exec *$2* -print
+    find /var        -type f -exec *$2* -print
+    echo ""
+    echo ""
+    #find /bin        -type f -exec grep --color=auto "$1" {} \;
+    #find /boot       -type f -exec grep --color=auto "$1" {} \;
+    #find /dev        -type f -exec grep --color=auto "$1" {} \;
+    #find /etc        -type f -exec grep --color=auto "$1" {} \;
+    #find /home       -type f -exec grep --color=auto "$1" {} \;
+    #find /lib        -type f -exec grep --color=auto "$1" {} \;
+    #find /lib64      -type f -exec grep --color=auto "$1" {} \;
+    #find /lost+found -type f -exec grep --color=auto "$1" {} \;
+    #find /media      -type f -exec grep --color=auto "$1" {} \;
+    #find /mnt        -type f -exec grep --color=auto "$1" {} \;
+    #find /opt        -type f -exec grep --color=auto "$1" {} \;
+    #find /root       -type f -exec grep --color=auto "$1" {} \;
+    #find /run        -type f -exec grep --color=auto "$1" {} \;
+    #find /sbin       -type f -exec grep --color=auto "$1" {} \;
+    #find /srv        -type f -exec grep --color=auto "$1" {} \;
+    #find /tmp        -type f -exec grep --color=auto "$1" {} \;
+    #find /usr        -type f -exec grep --color=auto "$1" {} \;
+    #find /var        -type f -exec grep --color=auto "$1" {} \;
     echo ""
 fi
 
