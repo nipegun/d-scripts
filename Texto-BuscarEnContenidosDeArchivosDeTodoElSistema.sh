@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  ScriptDeNiPeGun para encontrar una cadena específica dentro de los archivos de todo el sistema
+#  Script de NiPeGun para buscar una cadena específica dentro del contenido de los archivos de todo el sistema
 # ----------
 
 EXPECTED_ARGS=1
