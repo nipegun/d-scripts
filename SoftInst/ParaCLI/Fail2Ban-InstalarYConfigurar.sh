@@ -42,7 +42,7 @@ FinColor='\033[0m'
        OS_VERS=$(uname -r)
    fi
 
-
+ 
 if [ $OS_VERS == "7" ]; then
 
   echo ""
