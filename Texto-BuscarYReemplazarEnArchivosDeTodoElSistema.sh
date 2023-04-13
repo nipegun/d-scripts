@@ -9,7 +9,7 @@
 # Script de NiPeGun para encontrar una cadena específica dentro de archivos de todo el sistema y reemplazarla por otra cadena dada
 #
 # Ejecución remota:
-#   curl -sL x | bash -s gato perro
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Texto-BuscarYReemplazarEnArchivosDeTodoElSistema.sh | bash -s CadenaVieja CadenaNueva
 # ----------
 
 EXPECTED_ARGS=2
@@ -21,7 +21,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "##################################################"
     echo "Mal uso del script."
     echo ""
-    echo "El uso correcto sería: $0 texto1 text02"
+    echo "El uso correcto sería: $0 CadenaVieja CadenaNueva"
     echo ""
     echo "Ejemplo:"
     echo "$0 perro gato"
