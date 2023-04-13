@@ -5,73 +5,63 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar XRDP en Debian
+# ----------
+# Script de NiPeGun para instalar y configurar XRDP en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Escritorio-xrdp-Instalar.sh | bash
-#-----------------------------------------------------------------------------------------------------------------------------------
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Escritorio-xrdp-Instalar.sh | bash
+# ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorAzul="\033[0;34m"
+vColorAzulClaro="\033[1;34m"
+vColorVerde='\033[1;32m'
+vColorRojo='\033[1;31m'
+vFinColor='\033[0m'
 
-## Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
-   fi
+# Determinar la versión de Debian
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
+    . /etc/os-release
+    OS_NAME=$NAME
+    OS_VERS=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # linuxbase.org
+    OS_NAME=$(lsb_release -si)
+    OS_VERS=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release
+    . /etc/lsb-release
+    OS_NAME=$DISTRIB_ID
+    OS_VERS=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    OS_NAME=Debian
+    OS_VERS=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD)
+    OS_NAME=$(uname -s)
+    OS_VERS=$(uname -r)
+  fi
 
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian...${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian...${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   apt-get -y update
@@ -83,40 +73,37 @@ elif [ $OS_VERS == "9" ]; then
   sed -i -e 's|allowed_users=console|allowed_users=anybody|g' /etc/X11/Xwrapper.config    
 
   echo ""
-  echo "  Activando XRDP como servicio..."
+  echo "    Activando XRDP como servicio..."
   echo ""
   systemctl enable xrdp
 
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   apt-get -y update 2> /dev/null
   apt-get -y install xrdp
 
   echo ""
-  echo "  Activando XRDP como servicio..."
+  echo "    Activando XRDP como servicio..."
   echo ""
   systemctl enable xrdp --now
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   apt-get -y update 2> /dev/null
   apt-get -y install xrdp
 
   echo ""
-  echo "  Activando XRDP como servicio..."
+  echo "    Activando XRDP como servicio..."
   echo ""
   systemctl enable xrdp --now
 
 fi
+
