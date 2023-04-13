@@ -9,7 +9,7 @@
 # Script de NiPeGun para encontrar una cadena específica dentro de archivos de todo el sistema
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Texto-BuscarEnNombresDeArchivosDeTodoElSistema.sh | bash -s texto
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Texto-BuscarEnNombresDeArchivosDeTodoElSistema.sh | bash -s Cadena
 # ----------
 
 EXPECTED_ARGS=1
@@ -21,7 +21,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "##################################################"
     echo "Mal uso del script."
     echo ""
-    echo "El uso correcto sería: $0 texto"
+    echo "El uso correcto sería: $0 Cadena"
     echo ""
     echo "Ejemplo:"
     echo "$0 perro"
