@@ -7,6 +7,9 @@
 
 # ----------
 # Script de NiPeGun para buscar una cadena específica dentro de los nombres de archivos de una carpeta dada
+#
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Texto-BuscarEnNombresDeArchivosDeLaCarpeta.sh | bash -s /etc/ Perro
 # ----------
 
 EXPECTED_ARGS=2
