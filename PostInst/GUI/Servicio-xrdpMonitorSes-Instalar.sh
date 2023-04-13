@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Servicio de NiPeGun para monitorizar las sesiones xrdp
+# Servicio de NiPeGun para monitorizar las sesiones xrdp
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Servicio-xrdpMonitorSes-Instalar.sh | bash
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Servicio-xrdpMonitorSes-Instalar.sh | bash
 # ----------
 
 # Crear el servicio
