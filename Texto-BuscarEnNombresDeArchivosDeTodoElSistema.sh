@@ -49,25 +49,5 @@ if [ $# -ne $EXPECTED_ARGS ]
     find /usr        -type f -name "*$2*" -print
     find /var        -type f -name "*$2*" -print
     echo ""
-    echo ""
-    #find /bin        -type f -exec grep --color=auto "$1" {} \;
-    #find /boot       -type f -exec grep --color=auto "$1" {} \;
-    #find /dev        -type f -exec grep --color=auto "$1" {} \;
-    #find /etc        -type f -exec grep --color=auto "$1" {} \;
-    #find /home       -type f -exec grep --color=auto "$1" {} \;
-    #find /lib        -type f -exec grep --color=auto "$1" {} \;
-    #find /lib64      -type f -exec grep --color=auto "$1" {} \;
-    #find /lost+found -type f -exec grep --color=auto "$1" {} \;
-    #find /media      -type f -exec grep --color=auto "$1" {} \;
-    #find /mnt        -type f -exec grep --color=auto "$1" {} \;
-    #find /opt        -type f -exec grep --color=auto "$1" {} \;
-    #find /root       -type f -exec grep --color=auto "$1" {} \;
-    #find /run        -type f -exec grep --color=auto "$1" {} \;
-    #find /sbin       -type f -exec grep --color=auto "$1" {} \;
-    #find /srv        -type f -exec grep --color=auto "$1" {} \;
-    #find /tmp        -type f -exec grep --color=auto "$1" {} \;
-    #find /usr        -type f -exec grep --color=auto "$1" {} \;
-    #find /var        -type f -exec grep --color=auto "$1" {} \;
-    echo ""
 fi
 
