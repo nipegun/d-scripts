@@ -9,7 +9,7 @@
 # Script de NiPeGun para encontrar una cadena específica dentro de archivos de todo el sistema
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/BuscarTextoEnArchivosDelSistema.sh | bash -s texto
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Texto-BuscarEnNombresDeArchivosDeTodoElSistema.sh | bash -s texto
 # ----------
 
 EXPECTED_ARGS=1
