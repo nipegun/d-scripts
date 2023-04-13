@@ -31,23 +31,23 @@ if [ $# -ne $EXPECTED_ARGS ]
   else
     echo ""
     find /bin        -type f -name *$2* -print
-    find /boot       -type f -exec *$2* -print
-    find /dev        -type f -exec *$2* -print
-    find /etc        -type f -exec *$2* -print
-    find /home       -type f -exec *$2* -print
-    find /lib        -type f -exec *$2* -print
-    find /lib64      -type f -exec *$2* -print
-    find /lost+found -type f -exec *$2* -print
-    find /media      -type f -exec *$2* -print
-    find /mnt        -type f -exec *$2* -print
-    find /opt        -type f -exec *$2* -print
-    find /root       -type f -exec *$2* -print
-    find /run        -type f -exec *$2* -print
-    find /sbin       -type f -exec *$2* -print
-    find /srv        -type f -exec *$2* -print
-    find /tmp        -type f -exec *$2* -print
-    find /usr        -type f -exec *$2* -print
-    find /var        -type f -exec *$2* -print
+    find /boot       -type f -name *$2* -print
+    find /dev        -type f -name *$2* -print
+    find /etc        -type f -name *$2* -print
+    find /home       -type f -name *$2* -print
+    find /lib        -type f -name *$2* -print
+    find /lib64      -type f -name *$2* -print
+    find /lost+found -type f -name *$2* -print
+    find /media      -type f -name *$2* -print
+    find /mnt        -type f -name *$2* -print
+    find /opt        -type f -name *$2* -print
+    find /root       -type f -name *$2* -print
+    find /run        -type f -name *$2* -print
+    find /sbin       -type f -name *$2* -print
+    find /srv        -type f -name *$2* -print
+    find /tmp        -type f -name *$2* -print
+    find /usr        -type f -name *$2* -print
+    find /var        -type f -name *$2* -print
     echo ""
     echo ""
     #find /bin        -type f -exec grep --color=auto "$1" {} \;
