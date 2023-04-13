@@ -21,7 +21,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "El uso correcto sería: btenda ruta texto"
     echo ""
     echo "Ejemplo:"
-    echo "btenda /etc/ Perro"
+    echo "$0 /etc/ Perro"
     echo "##################################################"
     echo ""
     exit $E_BADARGS
