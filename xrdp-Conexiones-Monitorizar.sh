@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para monitorizar las conexiones xrdp
+# ----------
+# Script de NiPeGun para monitorizar las conexiones xrdp
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/xrdp-Conexiones-Monitorizar.sh | bash
-#------------------------------------------------------------------------------------------------------------
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/xrdp-Conexiones-Monitorizar.sh | bash
+# ----------
 
 # Crear el archivo de log, en caso de que no exista
   if [ ! -f /var/log/XRDPWatcher.log ]; then
