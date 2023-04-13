@@ -21,7 +21,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "El uso correcto sería: $0 texto"
     echo ""
     echo "Ejemplo:"
-    echo "&0 Perro"
+    echo "$0 Perro"
     echo "##################################################"
     echo ""
     exit $E_BADARGS
