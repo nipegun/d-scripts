@@ -6,7 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para buscar una cadena específica dentro del contenido de los archivos de todo el sistema
+# Script de NiPeGun para buscar una cadena específica dentro del contenido de los archivos de todo el sistema
+#
+# Ejecución remota:
+#   curl -sL | bash -s
 # ----------
 
 EXPECTED_ARGS=1
