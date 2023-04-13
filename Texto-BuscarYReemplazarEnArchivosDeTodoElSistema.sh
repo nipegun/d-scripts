@@ -6,7 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para encontrar una cadena específica dentro de archivos de todo el sistema y reemplazarla por otra cadena dada
+# Script de NiPeGun para encontrar una cadena específica dentro de archivos de todo el sistema y reemplazarla por otra cadena dada
+#
+# Ejecución remota:
+#   curl -sL x | bash -s gato perro
 # ----------
 
 EXPECTED_ARGS=2
