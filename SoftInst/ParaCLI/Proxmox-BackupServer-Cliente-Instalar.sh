@@ -6,16 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
+# Script de NiPeGun para instalar y configurar el cliente de PBS (Proxmox BackUpServer) en Debian
 #
-#  Ejecución remota:
-#  curl -s x | bash
-#
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
-#
-#  Ejecución remota con parámetros:
-#  curl -s x | bash -s Parámetro1 Parámetro2
+# Ejecución remota:
+#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Proxmox-BackupServer-Cliente-Instalar.sh | bash
 # ----------
 
 vColorAzul="\033[0;34m"
@@ -63,7 +57,7 @@ vFinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del cliente de Proxmox Backup Server para Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
@@ -73,7 +67,7 @@ if [ $OS_VERS == "7" ]; then
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del cliente de Proxmox Backup Server para Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
@@ -83,7 +77,7 @@ elif [ $OS_VERS == "8" ]; then
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del cliente de Proxmox Backup Server para Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
@@ -93,7 +87,7 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del cliente de Proxmox Backup Server para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo ""
@@ -103,11 +97,10 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del cliente de Proxmox Backup Server para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${vColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
-  echo ""
+  vArch=amd64
+  echo "deb [arch=$vArch] http://download.proxmox.com/debian/pbs-client bullseye main" > /etc/apt/sources.list.d/pbs-client.list
 
 fi
