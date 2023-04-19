@@ -10,7 +10,7 @@
 #
 # Ejecución remota:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Proxmox-BackupServer-Cliente-Instalar.sh | bash
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Proxmox-BackupServer-Cliente-Instalar.sh | sed 's-192.168.1.9-192.168.1.10-g' | sed 's-pbsdt-pbsdatastorage-g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Proxmox-BackupServer-Cliente-Instalar.sh | sed 's|192.168.1.9|192.168.1.10|g' | sed 's|pbsdt|pbsdatastorage|g' | bash
 # ----------
 
 vArch=amd64
