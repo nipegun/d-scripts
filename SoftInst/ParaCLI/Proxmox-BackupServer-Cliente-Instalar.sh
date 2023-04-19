@@ -121,5 +121,7 @@ elif [ $OS_VERS == "11" ]; then
   mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                   > /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
   echo "proxmox-backup-client backup root.pxar:/ --repository $vIPpbs:$vDataStorage " >> /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
+  chmod +x                                                                               /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
 
 fi
+
