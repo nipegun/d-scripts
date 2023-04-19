@@ -119,9 +119,15 @@ elif [ $OS_VERS == "11" ]; then
   echo "    Creando el script para copias de seguridad completas..."
   echo ""
   mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
-  echo '#!/bin/bash'                                                                   > /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
-  echo "proxmox-backup-client backup root.pxar:/ --repository $vIPpbs:$vDataStorage " >> /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
-  chmod +x                                                                               /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
+  echo "$vIPpbs:$vDataStorage" > /root/scripts/EsteDebian/RutaPBS.txt
+  echo '#!/bin/bash'                                                                    > /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
+  echo "if [ -f /root/scripts/EsteDebian/RutaPBS.txt ]; then"                          >> /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
+  echo '  vRuta=$(cat /root/scripts/EsteDebian/RutaPBS.txt)'                           >> /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
+  echo '  proxmox-backup-client backup root.pxar:/ --repository $vRuta'                >> /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
+  echo "else"                                                                          >> /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
+  echo "  proxmox-backup-client backup root.pxar:/ --repository $vIPpbs:$vDataStorage" >> /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
+  echo "fi"                                                                            >> /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
+  chmod +x                                                                                /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh
 
 fi
 
