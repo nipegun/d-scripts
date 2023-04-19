@@ -14,7 +14,7 @@
 # ----------
 
 vArch=amd64
-vIPpbs="xxx.xxx.xxx.xxx"
+vIPpbs="192.168.1.9"
 vDataStorage="pbsdt"
 
 vColorAzul="\033[0;34m"
