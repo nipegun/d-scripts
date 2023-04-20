@@ -77,7 +77,7 @@ for vNumPeer in {1..254}
             apt-get -y install curl
             echo ""
           fi
-        vPeerPrivateKey=$(cat /root/WireGuard/WireGuardUser"$i"Private.key)
+        vPeerPrivateKey=$(cat /root/WireGuard/WireGuardUser"$vNumPeer"Private.key)
         vServPubKey=$(cat /root/WireGuard/WireGuardServerPublic.key)
         vIPwanServidor=$(curl --silent ipinfo.io/ip)
         echo "[Interface]"                                         > /root/WireGuard/WireGuardUser"$vNumPeer".conf
