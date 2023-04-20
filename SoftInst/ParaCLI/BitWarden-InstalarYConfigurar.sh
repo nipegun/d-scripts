@@ -168,7 +168,10 @@ elif [ $OS_VERS == "11" ]; then
     ./bitwarden.sh install
 
   # Agregando bitwarden a los ComandosPostArranque
-    echo "/opt/bitwarden/bitwarden.sh start" >> /root/scripts/ComandosPostArranque.sh
+    echo ""                                    >> /root/scripts/ComandosPostArranque.sh
+    echo "# Iniciar BitWarden"                 >> /root/scripts/ComandosPostArranque.sh
+    echo "  /opt/bitwarden/bitwarden.sh start" >> /root/scripts/ComandosPostArranque.sh
+    echo ""                                    >> /root/scripts/ComandosPostArranque.sh
 
 fi
 
