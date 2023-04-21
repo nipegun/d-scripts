@@ -196,6 +196,13 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}  Iniciando el script de instalación de WireGuard para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
+
+echo "------------------------------------------"
+echo ""
+echo "Revisar que las relgas nftables están bien. Si no, se pueden utilizar los comandos para debian 10, con iptables, que funcionan seguro."
+echo ""
+echo "------------------------------------------"
+
   # Borrar WireGuard si ya está instalado
     echo ""
     echo "    Borrando posible instalación anterior..."
@@ -220,13 +227,13 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "    Creando el archivo de configuración de la interfaz..."
     echo ""
-    echo "[Interface]"                                                                                                                                                                                                                      > /etc/wireguard/wg0.conf
-    echo "Address = $vDirIPintWG/24"                                                                                                                                                                                                       >> /etc/wireguard/wg0.conf
-    echo "PrivateKey ="                                                                                                                                                                                                                    >> /etc/wireguard/wg0.conf
-    echo "ListenPort = 51820"                                                                                                                                                                                                              >> /etc/wireguard/wg0.conf
-    echo "PostUp =   iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o $vInterfazEthernet -j MASQUERADE; ip6tables -A FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -A POSTROUTING -o $vInterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
-    echo "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o $vInterfazEthernet -j MASQUERADE; ip6tables -D FORWARD -i wg0 -j ACCEPT; ip6tables -t nat -D POSTROUTING -o $vInterfazEthernet -j MASQUERADE" >> /etc/wireguard/wg0.conf
-    echo "SaveConfig = true    # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                       >> /etc/wireguard/wg0.conf
+    echo "[Interface]"                                                                                                                                                                                                                                                                                                        > /etc/wireguard/wg0.conf
+    echo "Address = $vDirIPintWG/24"                                                                                                                                                                                                                                                                                         >> /etc/wireguard/wg0.conf
+    echo "PrivateKey ="                                                                                                                                                                                                                                                                                                      >> /etc/wireguard/wg0.conf
+    echo "ListenPort = 51820"                                                                                                                                                                                                                                                                                                >> /etc/wireguard/wg0.conf
+    echo 'PostUp =     nft add rule ip filter FORWARD iifname "wg0" counter accept; nft add rule ip nat POSTROUTING oifname "'"$vInterfazEthernet"'" counter masquerade; nft add rule ip6 filter FORWARD iifname "wg0" counter accept; nft add rule ip6 nat POSTROUTING oifname "'"$vInterfazEthernet"'" counter masquerade' >> /etc/wireguard/wg0.conf
+    echo 'PostDown =   nft del rule ip filter FORWARD iifname "wg0" counter accept; nft del rule ip nat POSTROUTING oifname "'"$vInterfazEthernet"'" counter masquerade; nft del rule ip6 filter FORWARD iifname "wg0" counter accept; nft del rule ip6 nat POSTROUTING oifname "'"$vInterfazEthernet"'" counter masquerade' >> /etc/wireguard/wg0.conf
+    echo "SaveConfig = true    # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos"                                                                                                                                                                                                         >> /etc/wireguard/wg0.conf
 
   # Crear las claves pública y privada del servidor
     mkdir /root/WireGuard/
