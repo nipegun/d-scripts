@@ -5,6 +5,15 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
+
+
+https://gist.github.com/heinoldenhuis/f8164f73e5bff048e76fb4fff2e824e1
+
+
+
+
+
+
 # ----------
 #  Script de NiPeGun para instalar y configurar VaultWarden en Debian
 #
