@@ -207,7 +207,8 @@ elif [ $OS_VERS == "11" ]; then
             echo ''                                                                    >> /etc/bind/named.conf.log
             echo '};'                                                                  >> /etc/bind/named.conf.log
             mkdir -p /var/log/bind9/ 2> /dev/null
-           chown bind:bind /var/log/bind9 -R # El usuario bind necesita permisos de escritura en la carpeta
+            touch /var/log/bind9/queries.log
+            chown bind:bind /var/log/bind9 -R # El usuario bind necesita permisos de escritura en el la carpeta
             # Dar permisos de escritura a bind9 en el directorio /var/log/bind9 (No hace falta si se meten los logs en /var/log/named/)
               sed -i -e 's|/var/log/named/ rw,|/var/log/named/ rw,\n\n/var/log/bind9/** rw,\n/var/log/bind9/ rw,|g' /etc/apparmor.d/usr.sbin.named
 
@@ -389,6 +390,12 @@ elif [ $OS_VERS == "11" ]; then
             echo ''                                                                    >> /etc/bind/named.conf.log
             echo '};'                                                                  >> /etc/bind/named.conf.log
             mkdir -p /var/log/bind9/ 2> /dev/null
+            touch /var/log/bind9/default.log
+            touch /var/log/bind9/lame-servers.log
+            touch /var/log/bind9/queries.log
+            touch /var/log/bind9/security.log
+            touch /var/log/bind9/update.log
+            touch /var/log/bind9/update-security.log
             chown bind:bind /var/log/bind9 -R # El usuario bind necesita permisos de escritura en el la carpeta
             # Dar permisos de escritura a bind9 en el directorio /var/log/bind9 (No hace falta si se meten los logs en /var/log/named/)
               sed -i -e 's|/var/log/named/ rw,|/var/log/named/ rw,\n\n/var/log/bind9/** rw,\n/var/log/bind9/ rw,|g' /etc/apparmor.d/usr.sbin.named
@@ -656,6 +663,13 @@ elif [ $OS_VERS == "11" ]; then
             echo ''                                                                    >> /etc/bind/named.conf.log
             echo '};'                                                                  >> /etc/bind/named.conf.log
             mkdir -p /var/log/bind9/ 2> /dev/null
+            touch /var/log/bind9/default.log
+            touch /var/log/bind9/lame-servers.log
+            touch /var/log/bind9/queries.log
+            touch /var/log/bind9/security.log
+            touch /var/log/bind9/update.log
+            touch /var/log/bind9/update-security.log
+            touch /var/log/bind9/transfers-out.log
             chown bind:bind /var/log/bind9 -R # El usuario bind necesita permisos de escritura en el la carpeta
             # Dar permisos de escritura a bind9 en el directorio /var/log/bind9 (No hace falta si se meten los logs en /var/log/named/)
               sed -i -e 's|/var/log/named/ rw,|/var/log/named/ rw,\n\n/var/log/bind9/** rw,\n/var/log/bind9/ rw,|g' /etc/apparmor.d/usr.sbin.named
@@ -902,6 +916,10 @@ elif [ $OS_VERS == "11" ]; then
             echo ''                                                                    >> /etc/bind/named.conf.log
             echo '};'                                                                  >> /etc/bind/named.conf.log
             mkdir -p /var/log/bind9/ 2> /dev/null
+            touch /var/log/bind9/default.log
+            touch /var/log/bind9/lame-servers.log
+            touch /var/log/bind9/queries.log
+            touch /var/log/bind9/transfers-in.log
             chown bind:bind /var/log/bind9 -R # El usuario bind necesita permisos de escritura en el la carpeta
             # Dar permisos de escritura a bind9 en el directorio /var/log/bind9 (No hace falta si se meten los logs en /var/log/named/)
               sed -i -e 's|/var/log/named/ rw,|/var/log/named/ rw,\n\n/var/log/bind9/** rw,\n/var/log/bind9/ rw,|g' /etc/apparmor.d/usr.sbin.named
