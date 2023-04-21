@@ -21,7 +21,7 @@ vMascaraRestrictora="/32"
 vMascaraSolicitada="/24"
 vPuertoWireGuard="51820"
 
-for vNumPeer in {1..254}
+for vNumPeer in {2..254}
   do
     if [ -f /root/WireGuard/WireGuardUser"$vNumPeer"Private.key ] && [ -f /root/WireGuard/WireGuardUser"$vNumPeer"Public.key ]; then
       echo ""
