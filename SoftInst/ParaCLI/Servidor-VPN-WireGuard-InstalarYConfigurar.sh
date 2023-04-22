@@ -277,20 +277,20 @@ elif [ $OS_VERS == "11" ]; then
       echo "  ip route add default via $vDirIPDefaultGateway"                                          >> /root/scripts/ReglasNFTablesWireGuard-PostUp.sh
       chmod +x /root/scripts/ReglasNFTablesWireGuard-PostUp.sh
     # Reglas PostDown
-      echo '#/bin/bash'                                                                                   > /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
-      echo ""                                                                                            >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
-      echo "# IPv4 e IPv6"                                                                               >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
-      echo '  #nft del rule inet filter forward     iifname "wg0" counter accept'                        >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
-      echo '  #nft del rule inet nat    postrouting oifname "'"$vInterfazEthernet"'" counter masquerade' >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
-      echo "# IPv4"                                                                                      >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
-      echo '  nft del rule ip   filter forward     iifname "wg0" counter accept'                         >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
-      echo '  nft del rule ip   nat    postrouting oifname "'"$vInterfazEthernet"'" counter masquerade'  >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
-      echo "# IPv6"                                                                                      >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
-      echo '  nft del rule ip6  filter forward     iifname "wg0" counter accept'                         >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
-      echo '  nft del rule ip6  nat    postrouting oifname "'"$vInterfazEthernet"'" counter masquerade'  >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
-      echo "# Rutas"                                                                                     >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
-      echo "  ip route del default"                                                                      >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
-      echo "  ip route add default via $vDirIPDefaultGateway"                                            >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo '#/bin/bash'                                                                                      > /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo ""                                                                                               >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo "# IPv4 e IPv6"                                                                                  >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo '  #nft delete rule inet filter forward     iifname "wg0" counter accept'                        >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo '  #nft delete rule inet nat    postrouting oifname "'"$vInterfazEthernet"'" counter masquerade' >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo "# IPv4"                                                                                         >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo '  nft delete rule ip   filter forward     iifname "wg0" counter accept'                         >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo '  nft delete rule ip   nat    postrouting oifname "'"$vInterfazEthernet"'" counter masquerade'  >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo "# IPv6"                                                                                         >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo '  nft delete rule ip6  filter forward     iifname "wg0" counter accept'                         >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo '  nft delete rule ip6  nat    postrouting oifname "'"$vInterfazEthernet"'" counter masquerade'  >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo "# Rutas"                                                                                        >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo "  ip route del default"                                                                         >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
+      echo "  ip route add default via $vDirIPDefaultGateway"                                               >> /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
       chmod +x /root/scripts/ReglasNFTablesWireGuard-PostDown.sh
 
   # Crear las claves pública y privada del servidor
