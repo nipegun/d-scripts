@@ -251,7 +251,8 @@ elif [ $OS_VERS == "11" ]; then
       echo '  nft add rule  ip filter forward iifname "wg0" counter accept'                                                      >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo '  nft add table ip nat'                                                                                              >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo '  nft add chain ip nat postrouting { type nat hook postrouting priority srcnat \; }'                                 >> /root/WireGuard/ReglasWireGuard-PostUp.sh
-      echo '  nft add rule  ip nat postrouting oifname "'"$vInterfazWAN"'" ip saddr "'"$vDirIPintWG"'"/24 counter masquerade'    >> /root/WireGuard/ReglasWireGuard-PostUp.sh
+      echo '  #nft add rule  ip nat postrouting oifname "'"$vInterfazWAN"'" ip saddr "'"$vDirIPintWG"'"/24 counter masquerade'   >> /root/WireGuard/ReglasWireGuard-PostUp.sh
+      echo '  nft add rule  ip nat postrouting oifname "'"$vInterfazWAN"'" iifname "wg0" counter masquerade'                     >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo "# IPv6"                                                                                                              >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo '  #nft add table ip6 filter'                                                                                         >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo '  #nft add chain ip6 filter forward { type filter hook forward priority filter \; }'                                 >> /root/WireGuard/ReglasWireGuard-PostUp.sh
@@ -259,6 +260,7 @@ elif [ $OS_VERS == "11" ]; then
       echo '  #nft add table ip6 nat'                                                                                            >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo '  #nft add chain ip6 nat postrouting { type nat hook postrouting priority srcnat \; }'                               >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo '  #nft add rule  ip6 nat postrouting oifname "'"$vInterfazWAN"'" ip saddr "'"$vDirIPintWG"'"/24 counter masquerade'  >> /root/WireGuard/ReglasWireGuard-PostUp.sh
+      echo '  #nft add rule  ip6 nat postrouting oifname "'"$vInterfazWAN"'" iifname "wg0" counter masquerade'                   >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo "# Otras"                                                                                                             >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo "  #nft add rule ip filter INPUT ct state related,established counter accept"                                         >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo "  #nft add rule ip filter FORWARD ct state related,established counter accept"                                       >> /root/WireGuard/ReglasWireGuard-PostUp.sh
