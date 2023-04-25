@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para agregar el repositorio testing a Debian
+# Script de NiPeGun para agregar el repositorio testing a Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorio-Testing-Agregar.sh | bash
+# Ejecución remota:
+#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorio-Testing-Agregar.sh | bash
 #
-#  Para instalar un paquete desde backports:
-#  apt-get -y install -t testing NombreDelPaquete
+# Para instalar un paquete desde backports:
+#   apt-get -y install -t testing NombreDelPaquete
 # ----------
 
 vColorRojo='\033[1;31m'
