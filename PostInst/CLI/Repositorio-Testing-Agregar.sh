@@ -15,9 +15,6 @@
 #  apt-get -y install -t testing NombreDelPaquete
 # ----------
 
-#vRepoActual=$(lsb_release -a | grep odename | cut -d':' -f2 | sed -e 's/^[ \t]*//')
-vRepoActual=$(cat /etc/os-release | grep CODENAME | cut -d'=' -f2)
-
 vColorRojo='\033[1;31m'
 vColorVerde='\033[1;32m'
 vFinColor='\033[0m'
