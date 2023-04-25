@@ -6,17 +6,14 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para agregar el repositorio unstable a Debian
+# Script de NiPeGun para agregar el repositorio unstable a Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorio-Unstable-Agregar.sh | bash
+# Ejecución remota:
+#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorio-Unstable-Agregar.sh | bash
 #
-#  Para instalar un paquete desde backports:
-#  apt-get -y install -t bullseye-unstable NombreDelPaquete
+# Para instalar un paquete desde backports:
+#   apt-get -y install -t unstable NombreDelPaquete
 # ----------
-
-#vRepoActual=$(lsb_release -a | grep odename | cut -d':' -f2 | sed -e 's/^[ \t]*//')
-vRepoActual=$(cat /etc/os-release | grep CODENAME | cut -d'=' -f2)
 
 vColorRojo='\033[1;31m'
 vColorVerde='\033[1;32m'
@@ -50,7 +47,7 @@ if [ $OS_VERS == "7" ]; then
   echo "------------------------------------------------------------------------------------"
   echo ""
 
-  echo "deb http://deb.debian.org/debian $vRepoActual-unstable main contrib non-free" > /etc/apt/sources.list.d/unstable.list
+  echo "deb http://deb.debian.org/debian unstable main contrib non-free" > /etc/apt/sources.list.d/unstable.list
   apt-get update
 
 elif [ $OS_VERS == "8" ]; then
@@ -61,7 +58,7 @@ elif [ $OS_VERS == "8" ]; then
   echo "------------------------------------------------------------------------------------"
   echo ""
 
-  echo "deb http://deb.debian.org/debian $vRepoActual-unstable main contrib non-free" > /etc/apt/sources.list.d/unstable.list
+  echo "deb http://deb.debian.org/debian unstable main contrib non-free" > /etc/apt/sources.list.d/unstable.list
   apt-get update
 
 elif [ $OS_VERS == "9" ]; then
@@ -72,7 +69,7 @@ elif [ $OS_VERS == "9" ]; then
   echo "-------------------------------------------------------------------------------------"
   echo ""
 
-  echo "deb http://deb.debian.org/debian $vRepoActual-unstable main contrib non-free" > /etc/apt/sources.list.d/unstable.list
+  echo "deb http://deb.debian.org/debian unstable main contrib non-free" > /etc/apt/sources.list.d/unstable.list
   apt-get update
 
 elif [ $OS_VERS == "10" ]; then
@@ -83,7 +80,7 @@ elif [ $OS_VERS == "10" ]; then
   echo "-------------------------------------------------------------------------------------"
   echo ""
 
-  echo "deb http://deb.debian.org/debian $vRepoActual-unstable main contrib non-free" > /etc/apt/sources.list.d/unstable.list
+  echo "deb http://deb.debian.org/debian unstable main contrib non-free" > /etc/apt/sources.list.d/unstable.list
   apt-get update
 
 elif [ $OS_VERS == "11" ]; then
@@ -94,7 +91,8 @@ elif [ $OS_VERS == "11" ]; then
   echo "---------------------------------------------------------------------------------------"
   echo ""
 
-  echo "deb http://deb.debian.org/debian $vRepoActual-unstable main contrib non-free" > /etc/apt/sources.list.d/unstable.list
+  echo "deb http://deb.debian.org/debian unstable main contrib non-free" > /etc/apt/sources.list.d/unstable.list
   apt-get update
 
 fi
+
