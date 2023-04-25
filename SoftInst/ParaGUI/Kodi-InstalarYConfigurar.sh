@@ -9,13 +9,13 @@
 #  Script de NiPeGun para instalar y configurar Kodi en Debian
 #
 #  Ejecución remota:
-#  curl -s x | bash
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Kodi-InstalarYConfigurar.sh | bash
 #
 #  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Kodi-InstalarYConfigurar.sh | bash
 #
 #  Ejecución remota con parámetros:
-#  curl -s x | bash -s Parámetro1 Parámetro2
+#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Kodi-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 vColorAzul="\033[0;34m"
@@ -118,8 +118,8 @@ elif [ $OS_VERS == "11" ]; then
 
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
-      1 "Instalar versión en repositorios oficiales de Debian" on
-      2 "Instalar última versión disponible en la web" off
+      1 "Instalar versión de repositorio oficial de la distro" on
+      2 "Instalar versión de repositorio testing de la distro" off
       3 "Opción 3" off
       4 "Opción 4" off
       5 "Opción 5" off
@@ -133,7 +133,7 @@ elif [ $OS_VERS == "11" ]; then
           1)
 
             echo ""
-            echo "    Instalando la versión de Kodi disponible en los repositorios oficiales de Debian..."
+            echo "    Instalando la versión de Kodi disponible en el repositorio oficial de la distro..."
             echo ""
 
             # Actualizar la lista de paquetes de los repositorios
@@ -166,14 +166,49 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               usermod -a -G cdrom,audio,render,video,plugdev,users,dialout,dip,input kodi
 
-
           ;;
 
           2)
 
             echo ""
-            echo "    Instalando última versión disponible en la web..."
+            echo "    Instalando la versión de Kodi disponible en el repositorio testing de la distro..."
             echo ""
+
+            # Agregar el repositorio testing
+              echo ""
+              echo "      Agregando el repositorio testing..."
+              echo ""
+              curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorio-Testing-Agregar.sh | bash
+
+            # Actualizar la lista de paquetes de los repositorios
+              echo ""
+              echo "    Actualizando la lista de paquetes de los repositorios..."
+              echo ""
+              apt-get -y update
+
+            # Instalar el paquete kodi
+              echo ""
+              echo "    Instalando el paquete kodi..."
+              echo ""
+              apt-get -y install -t testing kodi
+
+            # Crear el usuario para kodi
+              echo ""
+              echo "    Creando el usuario para Kodi..."
+              echo ""
+              adduser --disabled-password --gecos "" kodi
+
+            # Agregar traseña al usuario kodi
+              echo ""
+              echo "    Agregando contraseña al usuario kodi..."
+              echo ""
+              passwd kodi
+
+            # Agregar el usuario kodi a los grupos necesarios
+              echo ""
+              echo "    Agregando el usuario kodi a los grupos necesarios..."
+              echo ""
+              usermod -a -G cdrom,audio,render,video,plugdev,users,dialout,dip,input kodi
 
           ;;
 
