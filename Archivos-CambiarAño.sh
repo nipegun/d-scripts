@@ -14,32 +14,56 @@
 
 vCarpeta="$1"
 vYear="$2"
-vFechaDeseada=201701011010.10
 
-#find "$vCarpeta" -type f -print -exec vFechaArch=$(date -r {} "+%Y%m%d%H%M.%S")  \; -exec echo $vFechaArch \;
+vCantArgsCorrectos=1
+vArgsInsuficientes=65
 
-#for vArchivo in "$vCarpeta"
-#  do
-  for vArchivo in $(find $vCarpeta -type f); do echo "Procesando $vArchivo..."; done
+if [ $# -ne $vCantArgsCorrectos ]
+  then
+    echo ""
+    echo "------------------------------------------------------------------------------"
+    echo "Mal uso del script."
+    echo ""
+    echo "El uso correcto sería: $0 [Carpeta] [Año]"
+    echo ""
+    echo "Ejemplo:"
+    echo ' $0 "/home/nico/fotos/2022" 2023'
+    echo "------------------------------------------------------------------------------"
+    echo ""
+    exit $vArgsInsuficientes
+  else
+    # Guardar lista de archivos en un fichero txt
+      for vArchivos in "$(find "$vCarpeta" -type f)"
+        do
+          #date -r "$vArchivo" "+%Y%m%d%H%M.%S"
+          echo "$vArchivos" > /tmp/Archivos.txt
+        done
 
-    # Obtener mes del archivo
-      #vMes=$($vArchivo)
-      #echo "  El mes es: $vMes"
-    # Obtener hora del archivo
-      #vHora=$($vArchivo)
-      #echo "  La hora es: $vHora"
-    # Obtener minuto del archivo
-      #vMin=$($vArchivo)
-      #echo "  El minuto es: $vMin"
-    # Obtener segundo del archivo
-      #vSeg=$($vArchivo)
-      #echo "  El segundo es: $vSeg"
-    # Aplicar cambio de año
-      #touch -t $vAño$vMes$vHora$vMin$vSeg $vArchivo
-      echo "Procesando $vArchivo..."
- # done
+    # Mostrar la fecha de cada no de los archivos en el fichero
+      while read vArchivo
+        do
+          # Obtener mes del archivo
+            vMes=$(date -r "$vArchivo" "+%m")
+            #echo "  El mes es: $vMes"
+          # Obtener día del archivo
+            vDia=$(date -r "$vArchivo" "+%d")
+            #echo "  El día es: $vDia"
+          # Obtener hora del archivo
+            vHora=$(date -r "$vArchivo" "+%H")
+            #echo "  La hora es: $vHora"
+          # Obtener minuto del archivo
+            vMin=$(date -r "$vArchivo" "+%M")
+            #echo "  El minuto es: $vMin"
+          # Obtener segundo del archivo
+            vSeg=$(date -r "$vArchivo" "+%S")
+            #echo "  El segundo es: $vSeg"
+          # Aplicar cambio de año
+            echo $vYear$vMes$vDia$vHora$vMin.$vSeg "$vArchivo"
+           #touch -t $vMes$vDia$vHora$vMin.$vSeg "$vArchivo"
+        done </tmp/Archivos.txt
+fi
+
 #touch --date=2015-09-01
 #find $vCarpeta -type f -print -exec touch -t $vFechaDeseada {} \;
 #find $vCarpeta -type d -print -exec touch -t $vFechaDeseada {} \;
-
 
