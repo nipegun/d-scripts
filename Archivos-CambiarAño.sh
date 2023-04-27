@@ -9,12 +9,12 @@
 # Script de NiPeGun para cambiar el año de todos los archivos dentro de una carpeta dada
 #
 # Ejecución remota:
-#   curl -sL | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Archivos-CambiarA%C3%B1o.sh | bash
 # ----------
 
-vAño=$1
+vCarpeta="$1"
+vAño="$2"
 vFechaDeseada=201701011010.10
-vCarpeta="/var/tmp/"
 
 for vArchivo in "$vCarpeta"
   do
