@@ -35,7 +35,7 @@ if [ $# -ne $vCantArgsCorrectos ]
     exit $vArgsInsuficientes
   elif ! [[ $vYear =~ ^[0-9]{4}$ ]]; then # Comprobar si el año introducido es un número y si 4 digitos
     echo ""
-    echo "    Error: Debes introducir un número de 4 dígitos como año.\n" >&2; exit
+    echo -e "    Error: Debes introducir un número de 4 dígitos como año.\n" >&2; exit
   else
     # Guardar lista de archivos en un fichero txt
       for vArchivos in "$(find "$vCarpeta" -type f)"
