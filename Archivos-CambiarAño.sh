@@ -7,25 +7,35 @@
 
 # ----------
 # Script de NiPeGun para cambiar el año de todos los archivos dentro de una carpeta dada
+#
+# Ejecución remota:
+#   curl -sL | bash
 # ----------
 
+vAño=$1
 vFechaDeseada=201701011010.10
 vCarpeta="/var/tmp/"
 
-for f in "$vCarpeta"
+for vArchivo in "$vCarpeta"
   do
     # Obtener mes del archivo
-      vMes$()
+      #vMes=$($vArchivo)
+      #echo "  El mes es: $vMes"
     # Obtener hora del archivo
-      vHora$()
+      #vHora=$($vArchivo)
+      #echo "  La hora es: $vHora"
     # Obtener minuto del archivo
-      vMin=$()
+      #vMin=$($vArchivo)
+      #echo "  El minuto es: $vMin"
     # Obtener segundo del archivo
-      vSeg=$()
+      #vSeg=$($vArchivo)
+      #echo "  El segundo es: $vSeg"
     # Aplicar cambio de año
-      touch -t $vFechaDeseada
-  done
+      #touch -t $vAño$vMes$vHora$vMin$vSeg $vArchivo
+      date -r $vArchivo "+%m-%d-%Y %H:%M:%S"
 
+  done
+#touch --date=2015-09-01
 #find $vCarpeta -type d -print -exec touch -t $vFechaDeseada {} \;
 #find $vCarpeta -type f -print -exec touch -t $vFechaDeseada {} \;
 
