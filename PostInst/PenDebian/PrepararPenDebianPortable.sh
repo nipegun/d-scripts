@@ -129,6 +129,7 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install btrfs-progs
     apt-get -y install mdadm
     apt-get -y install dmraid
+    apt-get -y install zfsutils-linux
 
   # Herramientas gráficas
     apt-get -y install gparted
