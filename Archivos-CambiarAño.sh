@@ -16,7 +16,7 @@ vCarpeta="$1"
 vYear="$2"
 vFechaDeseada=201701011010.10
 
-find $vCarpeta -type f -print -exec date -r {} "+%Y%m%d%H%M.%S"  \;
+find "$vCarpeta" -type f -print -exec date -r {} "+%Y%m%d%H%M.%S"  \;
 
 #for vArchivo in "$vCarpeta"
   #do
