@@ -34,7 +34,9 @@ if [ $# -ne $vCantArgsCorrectos ]
     echo ""
     exit $vArgsInsuficientes
   elif ! [[ $vYear =~ $vEsNumero ]]; then # Comprobar si la variable es un número y si tiene 4 caracteres
-    echo "Error: No has introducido un número de 4 dígitos como año" >&2; exit
+    echo ··
+    echo "Error: Debes introducir un número de 4 dígitos como año." >&2; exit
+    echo ""
   else
     # Guardar lista de archivos en un fichero txt
       for vArchivos in "$(find "$vCarpeta" -type f)"
@@ -42,7 +44,6 @@ if [ $# -ne $vCantArgsCorrectos ]
           #date -r "$vArchivo" "+%Y%m%d%H%M.%S"
           echo "$vArchivos" > /tmp/Archivos.txt
         done
-
     # Mostrar la fecha de cada no de los archivos en el fichero
       while read vArchivo
         do
