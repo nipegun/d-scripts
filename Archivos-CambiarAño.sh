@@ -16,8 +16,10 @@ vCarpeta="$1"
 vYear="$2"
 vFechaDeseada=201701011010.10
 
-for vArchivo in "$vCarpeta"
-  do
+find $vCarpeta -type f -print -exec date -r {} "+%Y%m%d%H%M.%S"  \;
+
+#for vArchivo in "$vCarpeta"
+  #do
     # Obtener mes del archivo
       #vMes=$($vArchivo)
       #echo "  El mes es: $vMes"
@@ -32,9 +34,10 @@ for vArchivo in "$vCarpeta"
       #echo "  El segundo es: $vSeg"
     # Aplicar cambio de año
       #touch -t $vAño$vMes$vHora$vMin$vSeg $vArchivo
-      date -r "$vArchivo" "+%Y%m%d%H%M.%S"
-  done
+      
+  #done
 #touch --date=2015-09-01
-#find $vCarpeta -type d -print -exec touch -t $vFechaDeseada {} \;
 #find $vCarpeta -type f -print -exec touch -t $vFechaDeseada {} \;
+#find $vCarpeta -type d -print -exec touch -t $vFechaDeseada {} \;
+
 
