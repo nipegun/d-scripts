@@ -15,7 +15,9 @@
 vCarpeta="$1"
 vYear="$2"
 
-vCantArgsCorrectos=1
+vEsNumero='^[0-9]+$'
+
+vCantArgsCorrectos=2
 vArgsInsuficientes=65
 
 if [ $# -ne $vCantArgsCorrectos ]
@@ -31,6 +33,8 @@ if [ $# -ne $vCantArgsCorrectos ]
     echo "------------------------------------------------------------------------------"
     echo ""
     exit $vArgsInsuficientes
+  elif ! [[ $vYear =~ $vEsNumero ]] && [[ ]]; then # Comprobar si la variable es un número y si tiene 4 caracteres
+    echo "Error: No has introducido un número de 4 dígitos como año" >&2; exit
   else
     # Guardar lista de archivos en un fichero txt
       for vArchivos in "$(find "$vCarpeta" -type f)"
