@@ -63,7 +63,8 @@ if [ $# -ne $vCantArgsCorrectos ]
             #echo "  El segundo es: $vSeg"
           # Aplicar cambio de año
             #echo $vYear$vMes$vDia$vHora$vMin.$vSeg "$vArchivo"
-            touch -t $vMes$vDia$vHora$vMin.$vSeg "$vArchivo"
+            echo "  Modificando la fecha del archivo $vArchivo..."
+            touch -t $vYear$vMes$vDia$vHora$vMin.$vSeg "$vArchivo"
         done </tmp/Archivos.txt
 fi
 
