@@ -33,7 +33,7 @@ if [ $# -ne $vCantArgsCorrectos ]
     echo "------------------------------------------------------------------------------"
     echo ""
     exit $vArgsInsuficientes
-  elif ! [[ $vYear =~ $vEsNumero ]] && [[ ]]; then # Comprobar si la variable es un número y si tiene 4 caracteres
+  elif ! [[ $vYear =~ $vEsNumero ]]; then # Comprobar si la variable es un número y si tiene 4 caracteres
     echo "Error: No has introducido un número de 4 dígitos como año" >&2; exit
   else
     # Guardar lista de archivos en un fichero txt
