@@ -13,7 +13,7 @@
 # ----------
 
 vCarpeta="$1"
-vAño="$2"
+vYear="$2"
 vFechaDeseada=201701011010.10
 
 for vArchivo in "$vCarpeta"
