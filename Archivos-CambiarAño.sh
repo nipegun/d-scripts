@@ -32,8 +32,7 @@ for vArchivo in "$vCarpeta"
       #echo "  El segundo es: $vSeg"
     # Aplicar cambio de año
       #touch -t $vAño$vMes$vHora$vMin$vSeg $vArchivo
-      date -r $vArchivo "+%m-%d-%Y %H:%M:%S"
-
+      date -r "$vArchivo" "+%Y%m%d%H%M.%S"
   done
 #touch --date=2015-09-01
 #find $vCarpeta -type d -print -exec touch -t $vFechaDeseada {} \;
