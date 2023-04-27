@@ -34,7 +34,7 @@ if [ $# -ne $vCantArgsCorrectos ]
     echo ""
     exit $vArgsInsuficientes
   elif ! [[ $vYear =~ ^[0-9]{4}$ ]]; then # Comprobar si el año introducido es un número y si 4 digitos
-    echo ··
+    echo ""
     echo "    Error: Debes introducir un número de 4 dígitos como año." >&2; exit
     echo ""
   else
