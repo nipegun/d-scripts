@@ -125,11 +125,16 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install android-tools-fastboot
 
   # Herramientas para manejar volúmenes
-    apt-get -y install lvm2
-    apt-get -y install btrfs-progs
-    apt-get -y install mdadm
-    apt-get -y install dmraid
-    apt-get -y install zfsutils-linux
+    # LVM
+      apt-get -y install lvm2
+    # BTRFS
+      apt-get -y install btrfs-progs
+      apt-get -y install btrfs-tools
+    # RAID
+      apt-get -y install mdadm
+      apt-get -y install dmraid
+    # ZFS
+      apt-get -y install zfsutils-linux
 
   # Herramientas gráficas
     apt-get -y install gparted
