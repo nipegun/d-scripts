@@ -120,6 +120,7 @@ ln -s /root/scripts/d-scripts/VerEstadoDeServicio.sh                            
 ln -s /root/scripts/d-scripts/VersiónDeDebian.sh                                   /root/scripts/d-scripts/Alias/vdd
 ln -s /root/scripts/d-scripts/VerLogEnTiempoReal.sh                                /root/scripts/d-scripts/Alias/vletr
 ln -s /root/scripts/d-scripts/WinDir.sh                                            /root/scripts/d-scripts/Alias/wd
+ln -s /root/scripts/d-scripts/WireGuard-Editar.sh                                  /root/scripts/d-scripts/Alias/ewireguard
 
 ln -s /root/scripts/d-scripts/router/EditarDHCP.sh                                 /root/scripts/d-scripts/Alias/edhcp
 ln -s /root/scripts/d-scripts/router/EditarHOSTAPD.sh                              /root/scripts/d-scripts/Alias/ehostapd
