@@ -31,7 +31,7 @@ if [ $# -ne $vCantArgsEsperados ]
     echo ' $0 pepe.org pepe'
     echo "------------------------------------------------------------------------------"
     echo ""
-    exit $ArgsInsuficientes
+    exit $vArgsInsuficientes
   else
     echo ""
     echo -e "${vColorArgumentos}Ejecutando la copia de seguridad...${vFinColor}"
