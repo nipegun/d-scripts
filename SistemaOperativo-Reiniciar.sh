@@ -16,7 +16,7 @@ vColorRojo='\033[1;31m'
 vFinColor='\033[0m'
 
 echo ""
-echo -e "${vColorRojo}  Reiniciando el sistema operativo...${vFinColor}"
+echo -e "${vColorAzulClaro}  Reiniciando el sistema operativo...${vFinColor}"
 echo ""
 shutdown -r now
 
