@@ -9,29 +9,29 @@
 #  Script de NiPeGun para importar una copia de seguridad de una web específica
 # ----------
 
-CantArgsEsperados=4
-ArgsInsuficientes=65
+vCantArgsEsperados=4
+vArgsInsuficientes=65
 
-ColorAdvertencia='\033[1;31m'
-ColorArgumentos='\033[1;32m'
-FinColor='\033[0m'
+vColorAdvertencia='\033[1;31m'
+vColorArgumentos='\033[1;32m'
+vFinColor='\033[0m'
 
-if [ $# -ne $CantArgsEsperados ]
+if [ $# -ne $vCantArgsEsperados ]
   then
     echo ""
     echo "------------------------------------------------------------------------------"
-    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo -e "${vColorAdvertencia}Mal uso del script.${vFinColor} El uso correcto sería:"
     echo ""
-    echo -e "$0 ${ColorArgumentos}[NombreDeLaWebEnApache] [UsuarioBD] [PasswordBD] [NombreBD]${FinColor}"
+    echo -e "$0 ${vColorArgumentos}[NombreDeLaWebEnApache] [UsuarioBD] [PasswordBD] [NombreBD]${vFinColor}"
     echo ""
     echo "Ejemplo:"
     echo ' $0 pepe.org pepe'
     echo "------------------------------------------------------------------------------"
     echo ""
-    exit $ArgsInsuficientes
+    exit $vArgsInsuficientes
   else
     echo ""
-    echo -e "${ColorArgumentos}  Importando...${FinColor}"
+    echo -e "${vColorArgumentos}  Importando...${vFinColor}"
     echo ""
     /root/scripts/d-scripts/MySQL-BaseDeDatos-Importar.sh
 fi
