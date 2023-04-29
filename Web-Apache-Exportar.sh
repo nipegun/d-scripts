@@ -7,6 +7,9 @@
 
 # ----------
 # Script de NiPeGun para hacer una copia de seguridad de una web específica
+#
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Web-Apache-Exportar.sh | bash -s pepe.com pepe 1234 pepedb
 # ----------
 
 vCantArgsEsperados=4
