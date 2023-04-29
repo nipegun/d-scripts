@@ -9,47 +9,42 @@
 #  Script de NiPeGun para actualizar Debian
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorAzul="\033[0;34m"
+vColorAzulClaro="\033[1;34m"
+vColorVerde='\033[1;32m'
+vColorRojo='\033[1;31m'
+vFinColor='\033[0m'
 
 echo ""
-#echo "$(tput setab 2)$(tput setaf 7)Iniciando el script de actualización del sistema operativo...$(tput sgr 0)"
-echo -e "${ColorVerde}-----------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}  Iniciando el script de actualización del sistema operativo...${FinColor}"
-echo -e "${ColorVerde}-----------------------------------------------------------------${FinColor}"
+echo -e "${vColorAzulClaro}  Iniciando el script de actualización del sistema operativo...${vFinColor}"
 echo ""
 
 echo ""
-echo -e "${ColorVerde}  Reparando permisos de la carpeta /tmp/ ...${FinColor}"
+echo "    Reparando permisos de la carpeta /tmp/ ..."
 echo ""
 chmod 1777 /tmp
 
 echo ""
-echo -e "${ColorVerde}  Ejecutando apt-get update...${FinColor}"
+echo "    Ejecutando apt-get update..."
 echo ""
 apt-get -y update
 
 echo ""
-echo -e "${ColorVerde}  Ejecutando apt-get -y upgrade...${FinColor}"
+echo "    Ejecutando apt-get -y upgrade..."
 echo ""
 apt-get -y --allow-downgrades upgrade
 
 echo ""
-echo -e "${ColorVerde}  Ejecutando apt-get -y dist-upgrade...${FinColor}"
+echo "    Ejecutando apt-get -y dist-upgrade..."
 echo ""
 apt-get -y --allow-downgrades dist-upgrade
 
 echo ""
-echo -e "${ColorVerde}  Ejecutando apt-get -y autoremove...${FinColor}"
+echo "    Ejecutando apt-get -y autoremove..."
 echo ""
 apt-get -y autoremove
 
 echo ""
-echo ""
-echo -e "${ColorVerde}------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}  Script para actualizar el sistema operativo, finalizado.${FinColor}"
-echo -e "${ColorVerde}------------------------------------------------------------${FinColor}"
-echo ""
+echo -e "${vColorVerde}    Script para actualizar el sistema operativo, finalizado.${vFinColor}"
 echo ""
 
