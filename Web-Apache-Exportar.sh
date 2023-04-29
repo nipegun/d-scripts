@@ -5,24 +5,24 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------------------------
-#  Script de NiPeGun para hacer una copia de seguridad de una web específica
-#-----------------------------------------------------------------------------
+# ----------
+# Script de NiPeGun para hacer una copia de seguridad de una web específica
+# ----------
 
-CantArgsEsperados=4
-ArgsInsuficientes=65
+vCantArgsEsperados=4
+vArgsInsuficientes=65
 
-ColorAdvertencia='\033[1;31m'
-ColorArgumentos='\033[1;32m'
-FinColor='\033[0m'
+vColorAdvertencia='\033[1;31m'
+vColorArgumentos='\033[1;32m'
+vFinColor='\033[0m'
 
-if [ $# -ne $CantArgsEsperados ]
+if [ $# -ne $vCantArgsEsperados ]
   then
     echo ""
     echo "------------------------------------------------------------------------------"
-    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo -e "${vColorAdvertencia}Mal uso del script.${vFinColor} El uso correcto sería:"
     echo ""
-    echo -e "$0 ${ColorArgumentos}[NombreDeLaWebEnApache] [UsuarioBD] [PasswordBD] [NombreBD]${FinColor}"
+    echo -e "$0 ${vColorArgumentos}[NombreDeLaWebEnApache] [UsuarioBD] [PasswordBD] [NombreBD]${vFinColor}"
     echo ""
     echo "Ejemplo:"
     echo ' $0 pepe.org pepe'
@@ -31,7 +31,7 @@ if [ $# -ne $CantArgsEsperados ]
     exit $ArgsInsuficientes
   else
     echo ""
-    echo -e "${ColorArgumentos}Ejecutando la copia de seguridad...${FinColor}"
+    echo -e "${vColorArgumentos}Ejecutando la copia de seguridad...${vFinColor}"
     echo ""
     mkdir -p /CopSeg/$1/etc/apache2/sites-available/
     cp /etc/apache2/sites-available/$1.conf /CopSeg/$1/etc/apache2/sites-available/
@@ -41,7 +41,7 @@ if [ $# -ne $CantArgsEsperados ]
     /root/scripts/d-scripts/MySQL-BaseDeDatos-Exportar.sh $2 $3 $4 /CopSeg/$1/BaseDeDatos.sql
     tar -czvf /CopSeg/$1.tar.gz /CopSeg/$1/
     rm -rf /CopSeg/$1/
-    FechaDeEjec=$(date +A%Y-M%m-D%d@%T)
-    mv /CopSeg/$1.tar.gz /CopSeg/$1-$FechaDeEjec.tar.gz
+    vFechaDeEjec=$(date +A%Y-M%m-D%d@%T)
+    mv /CopSeg/$1.tar.gz /CopSeg/$1-$vFechaDeEjec.tar.gz
 fi
 
