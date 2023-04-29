@@ -9,12 +9,14 @@
 #  Script de NiPeGun para reiniciar Debian
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorAzul="\033[0;34m"
+vColorAzulClaro="\033[1;34m"
+vColorVerde='\033[1;32m'
+vColorRojo='\033[1;31m'
+vFinColor='\033[0m'
 
 echo ""
-echo -e "${ColorVerde}Reiniciando sistema operativo...${FinColor}"
+echo -e "${vColorRojo}  Reiniciando el sistema operativo...${vFinColor}"
 echo ""
 shutdown -r now
 
