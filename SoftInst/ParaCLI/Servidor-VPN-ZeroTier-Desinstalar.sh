@@ -12,6 +12,8 @@
 #   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-VPN-ZeroTier-Desinstalar.sh | bash
 # ----------
 
+vFechaDeEjec=$(date +a%Ym%md%d@%T)
+
 vColorAzul="\033[0;34m"
 vColorAzulClaro="\033[1;34m"
 vColorVerde='\033[1;32m'
@@ -101,8 +103,6 @@ elif [ $OS_VERS == "10" ]; then
     apt-get -y autoremove
     apt-get -y purge
 
-
-
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
@@ -123,11 +123,17 @@ elif [ $OS_VERS == "11" ]; then
     echo "    Desinstalando el paquete zerotier-one..."
     echo ""
     apt-get -y remove zerotier-one
+  # Hacer copia de seguridad de la configuración
+    echo ""
+    echo "    Haciendo copia de seguridad de la configuración..."
+    echo ""
+    mkdir -p /CopSegInt/$vFechaDeEjec/ZeroTierOne/var/lib/zerotier-one/
+    cp -r /var/lib/zerotier-one/* /CopSegInt/$vFechaDeEjec/ZeroTierOne/var/lib/zerotier-one/
   # Borrar toda la configuración
     echo ""
     echo "    Borrando toda la configuración..."
     echo ""
-    dpkg -P zerotier-one
+    rm -rf /var/lib/zerotier-one/
   # Limpiar el sistema
     echo ""
     echo "    Limpiando el sistema..."
