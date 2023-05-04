@@ -74,38 +74,64 @@ elif [ $OS_VERS == "10" ]; then
   echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
+
   # Quitar de todas las redes a las que está unido el host
+    echo ""
+    echo "    Quitando este host de todas las redes a las que se ha unido..."
+    echo ""
     zerotier-cli listnetworks | grep -v type >> /tmp/RedesZeroTier.txt
     while read linea
       do
         zerotier-cli leave "$linea"
       done < /tmp/RedesZeroTier.txt
-  # Borrar el paquete
+  # Desinstalar el paquete
+    echo ""
+    echo "    Desinstalando el paquete zerotier-one..."
+    echo ""
     apt-get -y remove zerotier-ono
   # Borrar toda la configuración
+    echo ""
+    echo "    Borrando toda la configuración..."
+    echo ""
     dpkg -P zerotier-one
   # Limpiar el sistema
+    echo ""
+    echo "    Limpiando el sistema..."
+    echo ""
     apt-get -y autoremove
     apt-get -y purge
+
 
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 11 (Bullseye)..."
+  echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   # Quitar de todas las redes a las que está unido el host
+    echo ""
+    echo "    Quitando este host de todas las redes a las que se ha unido..."
+    echo ""
     zerotier-cli listnetworks | grep -v type >> /tmp/RedesZeroTier.txt
     while read linea
       do
         zerotier-cli leave "$linea"
       done < /tmp/RedesZeroTier.txt
-  # Borrar el paquete
+  # Desinstalar el paquete
+    echo ""
+    echo "    Desinstalando el paquete zerotier-one..."
+    echo ""
     apt-get -y remove zerotier-ono
   # Borrar toda la configuración
+    echo ""
+    echo "    Borrando toda la configuración..."
+    echo ""
     dpkg -P zerotier-one
   # Limpiar el sistema
+    echo ""
+    echo "    Limpiando el sistema..."
+    echo ""
     apt-get -y autoremove
     apt-get -y purge
 
