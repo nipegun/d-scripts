@@ -76,7 +76,6 @@ elif [ $OS_VERS == "10" ]; then
   echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
-
   # Quitar de todas las redes a las que está unido el host
     echo ""
     echo "    Quitando este host de todas las redes a las que se ha unido..."
@@ -84,6 +83,9 @@ elif [ $OS_VERS == "10" ]; then
     zerotier-cli listnetworks | grep -v type >> /tmp/RedesZeroTier.txt
     while read linea
       do
+        echo ""
+        echo "      Saliendo de la red $linea..."
+        echo ""
         zerotier-cli leave "$linea"
       done < /tmp/RedesZeroTier.txt
   # Desinstalar el paquete
@@ -91,11 +93,17 @@ elif [ $OS_VERS == "10" ]; then
     echo "    Desinstalando el paquete zerotier-one..."
     echo ""
     apt-get -y remove zerotier-one
+  # Hacer copia de seguridad de la configuración
+    echo ""
+    echo "    Haciendo copia de seguridad de la configuración..."
+    echo ""
+    mkdir -p /CopSegInt/$vFechaDeEjec/ZeroTierOne/var/lib/zerotier-one/
+    cp -r /var/lib/zerotier-one/* /CopSegInt/$vFechaDeEjec/ZeroTierOne/var/lib/zerotier-one/
   # Borrar toda la configuración
     echo ""
     echo "    Borrando toda la configuración..."
     echo ""
-    dpkg -P zerotier-one
+    rm -rf /var/lib/zerotier-one/
   # Limpiar el sistema
     echo ""
     echo "    Limpiando el sistema..."
@@ -116,6 +124,9 @@ elif [ $OS_VERS == "11" ]; then
     zerotier-cli listnetworks | grep -v type >> /tmp/RedesZeroTier.txt
     while read linea
       do
+        echo ""
+        echo "      Saliendo de la red $linea..."
+        echo ""
         zerotier-cli leave "$linea"
       done < /tmp/RedesZeroTier.txt
   # Desinstalar el paquete
