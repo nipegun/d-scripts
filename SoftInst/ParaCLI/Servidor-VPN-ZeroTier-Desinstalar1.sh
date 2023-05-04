@@ -88,7 +88,7 @@ elif [ $OS_VERS == "10" ]; then
     echo ""
     echo "    Desinstalando el paquete zerotier-one..."
     echo ""
-    apt-get -y remove zerotier-ono
+    apt-get -y remove zerotier-one
   # Borrar toda la configuración
     echo ""
     echo "    Borrando toda la configuración..."
@@ -122,7 +122,7 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo "    Desinstalando el paquete zerotier-one..."
     echo ""
-    apt-get -y remove zerotier-ono
+    apt-get -y remove zerotier-one
   # Borrar toda la configuración
     echo ""
     echo "    Borrando toda la configuración..."
