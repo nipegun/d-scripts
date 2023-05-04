@@ -12,8 +12,10 @@
 #   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-VPN-ZeroTier-Desinstalar.sh | bash
 # ----------
 
-vColorRojo='\033[1;31m'
+vColorAzul="\033[0;34m"
+vColorAzulClaro="\033[1;34m"
 vColorVerde='\033[1;32m'
+vColorRojo='\033[1;31m'
 vFinColor='\033[0m'
 
 # Determinar la versión de Debian
@@ -39,45 +41,37 @@ vFinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de ZeroTier para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de ZeroTier para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de ZeroTier para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de ZeroTier para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   # Quitar de todas las redes a las que está unido el host
@@ -98,9 +92,7 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de ZeroTier para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 11 (Bullseye)..."
   echo ""
 
   # Quitar de todas las redes a las que está unido el host
