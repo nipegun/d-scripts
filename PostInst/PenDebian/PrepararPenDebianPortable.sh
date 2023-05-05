@@ -125,6 +125,9 @@ elif [ $OS_VERS == "11" ]; then
     apt-get -y install android-tools-fastboot
 
   # Herramientas para manejar volúmenes
+    # EXT2/3/4
+      apt-get -y install e2fsprogs
+      apt-get -y install e2fsprogs-l10n
     # LVM
       apt-get -y install lvm2
     # BTRFS
