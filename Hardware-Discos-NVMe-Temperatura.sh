@@ -37,7 +37,7 @@ vFinColor='\033[0m'
 
 for vNumNVMe in [0..9]
   do
-    if -f [ /dev/nvme$vNumNVMe ]; then
+    if [ -f /dev/nvme$vNumNVMe ]; then
       nvme smart-log /dev/nvme$vNumNVMe | grep temperature
     fi
   done
