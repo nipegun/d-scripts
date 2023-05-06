@@ -35,10 +35,19 @@ vFinColor='\033[0m'
     echo ""
   fi
 
-for vNumNVMe in [0..9]
+# Obtener la cantidad de discos NVMe que hay instalados en el sistema
+  for vNroDiscoNVMe in {0..100}
+    do
+      if [[ $(nvme list | grep nvme$vNroDiscoNVMe) != "" ]]; then
+        aDiscosTotales[$vNroDiscoNVMe]=$(nvme list | grep nvme$vNroDiscoNVMe)
+      fi
+    done
+
+for i in "${aDiscosTotales[@]}"
   do
-    if [ -f /dev/nvme$vNumNVMe ]; then
-      nvme smart-log /dev/nvme$vNumNVMe | grep temperature
-    fi
+    echo $i
+    vDispActual=$(echo $i | cut -d' ' -f1)
+    nvme smart-log "$vDispActual" | grep temperature
+    echo ""
   done
 
