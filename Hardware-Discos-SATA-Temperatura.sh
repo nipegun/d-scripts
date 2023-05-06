@@ -9,7 +9,7 @@
 # Script de NiPeGun para mostrar la temperatura de los discos duros SATA
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Hardware-Discos-SSD-SATA-Temperatura.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Hardware-Discos-SATA-Temperatura.sh | bash
 # ----------
 
 ColorVerde="\033[1;32m"
