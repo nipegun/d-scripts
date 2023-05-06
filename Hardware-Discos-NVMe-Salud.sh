@@ -30,16 +30,16 @@
       fi
     done
 
-echo ""
-echo "  Hay ${#aDiscosTotales[@]} discos NVMe instalados en el sistema:"
-echo ""
-
-for i in "${aDiscosTotales[@]}"
-  do
-    echo $i
-    vDispActual=$(echo $i | cut -d' ' -f1)
-    nvme smart-log "$vDispActual" | grep ercentage
-    nvme smart-log "$vDispActual" | grep ritten
-    echo ""
-  done
+# Mostrar la salud de todos los discos detectados
+  echo ""
+  echo "  Hay ${#aDiscosTotales[@]} discos NVMe instalados en el sistema:"
+  echo ""
+  for i in "${aDiscosTotales[@]}"
+    do
+      echo $i
+      vDispActual=$(echo $i | cut -d' ' -f1)
+      nvme smart-log "$vDispActual" | grep ercentage
+      nvme smart-log "$vDispActual" | grep ritten
+      echo ""
+    done
 
