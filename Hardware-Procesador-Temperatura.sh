@@ -7,6 +7,9 @@
 
 # ----------
 # Script de NiPeGun para mostrar información sobre el/los procesador/es
+#
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Hardware-Procesador-Temperatura.sh | bash
 # ----------
 
 vColorAzul="\033[0;34m"
