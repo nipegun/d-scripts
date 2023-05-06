@@ -43,11 +43,12 @@ vFinColor='\033[0m'
       fi
     done
 
-for i in "${aDiscosTotales[@]}"
-  do
-    echo $i
-    vDispActual=$(echo $i | cut -d' ' -f1)
-    nvme smart-log "$vDispActual" | grep temperature
-    echo ""
-  done
+# Mostrar la temperatura de todos los discos detectados
+  for i in "${aDiscosTotales[@]}"
+    do
+      echo $i
+      vDispActual=$(echo $i | cut -d' ' -f1)
+      nvme smart-log "$vDispActual" | grep temperature
+      echo ""
+    done
 
