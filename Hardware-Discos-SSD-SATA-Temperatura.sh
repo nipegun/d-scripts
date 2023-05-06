@@ -5,9 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------
-#  Script de NiPeGun para mostrar la temperatura de los discos duros SATA
-#--------------------------------------------------------------------------
+# ----------
+# Script de NiPeGun para mostrar la temperatura de los discos duros SATA
+#
+# Ejecución remota:
+#  curl -sL x | bash
+# ----------
 
 ColorVerde="\033[1;32m"
 FinColor="\033[0m"
