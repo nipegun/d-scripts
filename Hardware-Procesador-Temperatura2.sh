@@ -24,10 +24,6 @@ vFinColor='\033[0m'
     exit 1
   fi
 
-echo ""
-echo -e "${vColorAzulClaro}  Mostrando temperatura del procesador...${vFinColor}"
-echo ""
-
 # Comprobar si el paquete lm-sensors está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s lm-sensors 2>/dev/null | grep installed) == "" ]]; then
     echo ""
@@ -41,11 +37,25 @@ echo ""
 
 # Comprobar si el procesador es AMD o Intel
   vProc=$(lscpu | grep "Vendor ID" | cut -d':' -f2 | sed 's- --g')
+# Comprobar el modelo del procesador
+  vModeloProc=$(lscpu | grep "Model name" | cut -d':' -f2 | sed 's- --g' | sed -e 's/^[ \t]*//')
+
+# Mostrar una información si el procesador es AMD, otra si es Intel y otra si es cualquier otra arquitectura
   if [[ "$vProc" == "AuthenticAMD" ]]; then
+    echo ""
+    echo -e "${vColorAzulClaro}  Mostrando temperatura del procesador $vModeloProc...${vFinColor}"
+    echo ""
     # watch -n 1 'sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6'
     sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6
   elif [[ "$vProc" == "GenuineIntel" ]]; then
+    echo ""
+    echo -e "${vColorAzulClaro}  Mostrando temperatura del procesador $vModeloProc...${vFinColor}"
+    echo ""
     # watch -n 1 'sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6'
     sensors | grep CPU
+  else
+    echo ""
+    echo -e "${vColorAzulClaro}  Mostrando temperatura del procesador $vModeloProc...${vFinColor}"
+    echo ""
   fi
 
