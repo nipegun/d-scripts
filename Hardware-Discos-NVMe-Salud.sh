@@ -32,7 +32,7 @@
 
 # Mostrar la salud de todos los discos detectados
   echo ""
-  echo "  Hay ${#aDiscosTotales[@]} discos NVMe instalados en el sistema:"
+  echo "  Hay ${#aDiscosTotales[@]} discos NVMe instalados en el sistema. Mostrando información de salud:"
   echo ""
   for i in "${aDiscosTotales[@]}"
     do
