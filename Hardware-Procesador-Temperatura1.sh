@@ -39,5 +39,13 @@ echo ""
     echo ""
   fi
 
-
+# Comprobar si el procesador es AMD o Intel
+  vProc=$(lscpu | grep "Vendor ID" | cut -d':' -f2 | sed 's- --g')
+  if [[ "$vProc" == "AuthenticAMD" ]]; then
+    # watch -n 1 'sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6'
+    sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6
+  elif [[ "$vProc" == "GenuineIntel" ]]; then
+    # watch -n 1 'sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6'
+    sensors | grep CPU
+  fi
 
