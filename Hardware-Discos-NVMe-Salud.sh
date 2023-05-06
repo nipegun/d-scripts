@@ -23,23 +23,23 @@
  fi
 
 # Obtener la cantidad de discos NVMe que hay instalados en el sistema
-  for NroDiscoNVMe in {0..100}
+  for vNroDiscoNVMe in {0..100}
     do
-      if [[ $(nvme list | grep nvme$NroDiscoNVMe) != "" ]]; then
-        ArrayDiscosTotales[$NroDiscoNVMe]=$(nvme list | grep nvme$NroDiscoNVMe)
+      if [[ $(nvme list | grep nvme$vNroDiscoNVMe) != "" ]]; then
+        aDiscosTotales[$vNroDiscoNVMe]=$(nvme list | grep nvme$vNroDiscoNVMe)
       fi
     done
 
 echo ""
-echo "  Hay ${#ArrayDiscosTotales[@]} discos NVMe instalados en el sistema:"
+echo "  Hay ${#aDiscosTotales[@]} discos NVMe instalados en el sistema:"
 echo ""
 
-for i in "${ArrayDiscosTotales[@]}"
+for i in "${aDiscosTotales[@]}"
   do
     echo $i
-    DispActual=$(echo $i | cut -d' ' -f1)
-    nvme smart-log "$DispActual" | grep ercentage
-    nvme smart-log "$DispActual" | grep ritten
+    vDispActual=$(echo $i | cut -d' ' -f1)
+    nvme smart-log "$vDispActual" | grep ercentage
+    nvme smart-log "$vDispActual" | grep ritten
     echo ""
   done
 
