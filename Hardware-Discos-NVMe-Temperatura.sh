@@ -44,6 +44,9 @@ vFinColor='\033[0m'
     done
 
 # Mostrar la temperatura de todos los discos detectados
+  echo ""
+  echo "  Hay ${#aDiscosTotales[@]} discos NVMe instalados en el sistema:"
+  echo ""
   for i in "${aDiscosTotales[@]}"
     do
       echo $i
