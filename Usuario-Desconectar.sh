@@ -9,7 +9,7 @@
 # Script de NiPeGun para desconectar usuarios conectados a Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-Desconectar.sh | bash -s  pepe
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-Desconectar.sh | bash -s pepe
 # ----------
 
 vArgumentosEsperados=1
