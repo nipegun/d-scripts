@@ -191,7 +191,8 @@ elif [ $OS_VERS == "11" ]; then
   # Específicas para mate-desktop
     apt-get -y install caja-open-terminal
     apt-get -y install caja-admin
-    apt-get -y install caja-share
+    #apt-get -y install caja-share     # Para compartir carpetas desde el propio caja
+    #apt-get -y install gvfs-backends  # Para poder ver las comparticiones de red usando samba
 
 fi
 
