@@ -9,15 +9,18 @@
 # Script de NiPeGun para desconectar usuarios conectados a Debian
 #
 # Ejecución remota:
-#  curl -sL x | bash -s  pepe
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-Desconectar.sh | bash -s  pepe
 # ----------
 
 vArgumentosEsperados=1
 vArgumentosInsuficientes=65
 
-vColorRojo='\033[1;31m'
-vColorVerde='\033[1;32m'
-vFinColor='\033[0m'
+# Definir variables de color
+  vColorAzul="\033[0;34m"
+  vColorAzulClaro="\033[1;34m"
+  vColorVerde='\033[1;32m'
+  vColorRojo='\033[1;31m'
+  vFinColor='\033[0m'
 
 if [ $# -ne $vArgumentosEsperados ]
   then
@@ -32,6 +35,9 @@ if [ $# -ne $vArgumentosEsperados ]
     echo ""
     exit $vArgumentosInsuficientes
   else
-    pkill -KILL -u "$1"
+    echo ""
+    echo -e "${vColorAzulClaro}  Desconectando al usuario $1...${vFinColor}"
+    echo ""
+    pkill -KILL -u $1
 fi
 
