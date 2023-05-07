@@ -39,5 +39,6 @@ if [ $# -ne $vArgumentosEsperados ]
     echo -e "${vColorAzulClaro}  Desconectando al usuario $1...${vFinColor}"
     echo ""
     pkill -KILL -u $1
+    echo ""
 fi
 
