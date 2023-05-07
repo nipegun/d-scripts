@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar sacar al usuario que ejecute el comando, de la sesión de mate-desktop en la que está logueado
 #
 # Ejecución remota:
-#   curl -s x | bash
+#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-MateDesktop-Desloguear.sh | bash
 # ----------
 
 # Definir variables de color
