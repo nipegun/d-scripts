@@ -120,7 +120,7 @@ echo "  Ejecutando minero con identificador $vIdMinero..."
 echo ""
 
 # Con TLS
-  ~/Cryptos/XMR/minero/xmrig -o -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --tls 
+  ~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --tls 
 
 # Sin TLS
   # ~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet
