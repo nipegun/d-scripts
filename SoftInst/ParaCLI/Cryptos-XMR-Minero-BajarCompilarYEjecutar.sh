@@ -78,7 +78,7 @@ echo ""                                                                         
 echo 'vHilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)'              >> ~/Cryptos/XMR/minero/Minar.sh
 echo "#vHilos=3"                                                                                                >> ~/Cryptos/XMR/minero/Minar.sh
 echo 'vIdMinero=$(cat ~/Cryptos/XMR/minero/IdMinero.txt)'                                                       >> ~/Cryptos/XMR/minero/Minar.sh
-echo "vDirWallet="'"$vDirWallet"'""                                                                             >> ~/Cryptos/XMR/minero/Minar.sh
+echo 'vDirWallet="'"$vDirWallet"'"'                                                                             >> ~/Cryptos/XMR/minero/Minar.sh
 echo '#~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet'      >> ~/Cryptos/XMR/minero/Minar.sh
 echo '~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --tls' >> ~/Cryptos/XMR/minero/Minar.sh
 chmod +x  ~/Cryptos/XMR/minero/Minar.sh
