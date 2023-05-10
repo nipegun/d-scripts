@@ -5,35 +5,33 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar diferentes carteras de criptomonedas en Debian
+# ----------
+# Script de NiPeGun para instalar y configurar diferentes carteras de criptomonedas en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-XMR-Minero-BajarCompilarYEjecutar.sh | bash
-#-------------------------------------------------------------------------------------------------------------------------------------------
+# Ejecución remota:
+#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-XMR-Minero-BajarCompilarYEjecutar.sh | bash
+# ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vColorRojo='\033[1;31m'
+vColorVerde='\033[1;32m'
+vFinColor='\033[0m'
 
-DirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"
-Hilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)
+vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"
+vHilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)
 
 echo ""
-echo -e "${ColorVerde}--------------------------------------------------${FinColor}"
 echo -e "${ColorVerde}  Iniciando el script de instalación de XMRig...${FinColor}"
-echo -e "${ColorVerde}--------------------------------------------------${FinColor}"
 echo ""
 
-## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  git no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install git
-     echo ""
-   fi
+# Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "  git no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install git
+    echo ""
+  fi
 
 echo ""
 echo "  Descargando el repositorio de XMRig..."
@@ -69,56 +67,57 @@ echo ""
 echo ""
 echo "  Creando el script para ejecutar manualmente el minero..."
 echo ""
-echo '#!/bin/bash'                                                                                                  > ~/Cryptos/XMR/minero/Minar.sh
-echo ""                                                                                                            >> ~/Cryptos/XMR/minero/Minar.sh
-echo 'Hilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)'                  >> ~/Cryptos/XMR/minero/Minar.sh
-echo "#Hilos=3"                                                                                                    >> ~/Cryptos/XMR/minero/Minar.sh
-echo 'IdMinero=$(cat ~/Cryptos/XMR/minero/IdMinero.txt)'                                                           >> ~/Cryptos/XMR/minero/Minar.sh
-echo 'DirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"' >> ~/Cryptos/XMR/minero/Minar.sh
-echo '~/Cryptos/XMR/minero/xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet --tls'  >> ~/Cryptos/XMR/minero/Minar.sh
+echo '#!/bin/bash'                                                                                               > ~/Cryptos/XMR/minero/Minar.sh
+echo ""                                                                                                         >> ~/Cryptos/XMR/minero/Minar.sh
+echo 'vHilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)'              >> ~/Cryptos/XMR/minero/Minar.sh
+echo "#vHilos=3"                                                                                                >> ~/Cryptos/XMR/minero/Minar.sh
+echo 'vIdMinero=$(cat ~/Cryptos/XMR/minero/IdMinero.txt)'                                                       >> ~/Cryptos/XMR/minero/Minar.sh
+echo 'vDirWallet='"$vDirWallet"''                                                                               >> ~/Cryptos/XMR/minero/Minar.sh
+echo '#~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet'      >> ~/Cryptos/XMR/minero/Minar.sh
+echo '~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --tls' >> ~/Cryptos/XMR/minero/Minar.sh
 chmod +x  ~/Cryptos/XMR/minero/Minar.sh
 
 echo ""
 echo "  Creando el script para ejecutar manualmente el minero en background..."
 echo ""
-echo '#!/bin/bash'                                                                                                              > ~/Cryptos/XMR/minero/MinarEnBackground.sh
-echo ""                                                                                                                        >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
-echo 'Hilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)'                              >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
-echo "#Hilos=3"                                                                                                                >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
-echo 'IdMinero=$(cat ~/Cryptos/XMR/minero/IdMinero.txt)'                                                                       >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
-echo 'DirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"'             >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
-echo '~/Cryptos/XMR/minero/xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet --tls --background' >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo '#!/bin/bash'                                                                                                            > ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo ""                                                                                                                      >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo 'vHilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)'                           >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo "#vHilos=3"                                                                                                             >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo 'vIdMinero=$(cat ~/Cryptos/XMR/minero/IdMinero.txt)'                                                                    >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo 'vDirWallet='"$vDirWallet"''                                                                                            >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo '#~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --background'      >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo '~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --tls --background' >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
 chmod +x  ~/Cryptos/XMR/minero/MinarEnBackground.sh
-
 
 echo ""
 echo "  Creando ID para el minero..."
 echo ""
 
-## A partir de la MAC WiFi
-   ## Obtener MAC de la WiFi
-      #DirMACwlan0=$(ip addr show wlan0 | grep link/ether | cut -d" " -f6 | sed 's/://g')
-   ## Generar un identificador del minero a partir de la MAC de la WiFi...
-      #IdMinero=$(echo -n $DirMACwlan0 | md5sum | cut -d" " -f1)
+# A partir de la MAC WiFi
+   # Obtener MAC de la WiFi
+     #vDirMACwlan0=$(ip addr show wlan0 | grep link/ether | cut -d" " -f6 | sed 's/://g')
+   # Generar un identificador del minero a partir de la MAC de la WiFi...
+     #vIdMinero=$(echo -n $vDirMACwlan0 | md5sum | cut -d" " -f1)
 
-## A partir del ID del procesador
-   ## Obtener ID del procesador
-      IdProc=$(dmidecode -t 4 | grep ID | cut -d":" -f2 | sed 's/ //g')
-   ## Generar un identificador del minero a partir del ID del procesador...
-      IdMinero=$(echo -n $IdProc | md5sum | cut -d" " -f1)
+# A partir del ID del procesador
+  # Obtener ID del procesador
+    vIdProc=$(dmidecode -t 4 | grep ID | cut -d":" -f2 | sed 's/ //g')
+  # Generar un identificador del minero a partir del ID del procesador...
+    vIdMinero=$(echo -n $vIdProc | md5sum | cut -d" " -f1)
 
-## Guardar el ID del minero en un archivo de texto
-   echo "$IdMinero" > ~/Cryptos/XMR/minero/IdMinero.txt
+# Guardar el ID del minero en un archivo de texto
+   echo "$vIdMinero" > ~/Cryptos/XMR/minero/IdMinero.txt
 
 echo ""
-echo "  Ejecutando minero con identificador $IdMinero..."
+echo "  Ejecutando minero con identificador $vIdMinero..."
 echo ""
 
-## Con TLS
-   ~/Cryptos/XMR/minero/xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet --tls 
+# Con TLS
+  ~/Cryptos/XMR/minero/xmrig -o -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --tls 
 
-## Sin TLS
-   # -o pool.minexmr.com:4444 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet
+# Sin TLS
+  # ~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet
 
 #/data/data/com.termux/files/home/xmrig/build/xmrig
 
