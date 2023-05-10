@@ -88,27 +88,29 @@ echo ""
 echo ""
 echo "  Creando el script para ejecutar manualmente el minero..."
 echo ""
-echo '#!/bin/bash'                                                                                               > ~/Cryptos/XMR/minero/Minar.sh
-echo ""                                                                                                         >> ~/Cryptos/XMR/minero/Minar.sh
-echo 'vHilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)'              >> ~/Cryptos/XMR/minero/Minar.sh
-echo "#vHilos=3"                                                                                                >> ~/Cryptos/XMR/minero/Minar.sh
-echo 'vIdMinero=$(cat ~/Cryptos/XMR/minero/IdMinero.txt)'                                                       >> ~/Cryptos/XMR/minero/Minar.sh
-echo 'vDirWallet="'"$vDirWallet"'"'                                                                             >> ~/Cryptos/XMR/minero/Minar.sh
-echo '#~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet'      >> ~/Cryptos/XMR/minero/Minar.sh
-echo '~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --tls' >> ~/Cryptos/XMR/minero/Minar.sh
+echo '#!/bin/bash'                                                                                                > ~/Cryptos/XMR/minero/Minar.sh
+echo ""                                                                                                          >> ~/Cryptos/XMR/minero/Minar.sh
+echo 'vHilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)'               >> ~/Cryptos/XMR/minero/Minar.sh
+echo "#vHilos=3"                                                                                                 >> ~/Cryptos/XMR/minero/Minar.sh
+echo 'vIdMinero=$(cat ~/Cryptos/XMR/minero/IdMinero.txt)'                                                        >> ~/Cryptos/XMR/minero/Minar.sh
+echo 'vDirWallet="'"$vDirWallet"'"'                                                                              >> ~/Cryptos/XMR/minero/Minar.sh
+echo '#~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet'       >> ~/Cryptos/XMR/minero/Minar.sh
+echo '#~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --tls' >> ~/Cryptos/XMR/minero/Minar.sh
+echo '~/Cryptos/XMR/minero/xmrig -o ssl://xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet'  >> ~/Cryptos/XMR/minero/Minar.sh
 chmod +x  ~/Cryptos/XMR/minero/Minar.sh
 
 echo ""
 echo "  Creando el script para ejecutar manualmente el minero en background..."
 echo ""
-echo '#!/bin/bash'                                                                                                            > ~/Cryptos/XMR/minero/MinarEnBackground.sh
-echo ""                                                                                                                      >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
-echo 'vHilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)'                           >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
-echo "#vHilos=3"                                                                                                             >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
-echo 'vIdMinero=$(cat ~/Cryptos/XMR/minero/IdMinero.txt)'                                                                    >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
-echo 'vDirWallet="'"$vDirWallet"'"'                                                                                          >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
-echo '#~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --background'      >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
-echo '~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --tls --background' >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo '#!/bin/bash'                                                                                                             > ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo ""                                                                                                                       >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo 'vHilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)'                            >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo "#vHilos=3"                                                                                                              >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo 'vIdMinero=$(cat ~/Cryptos/XMR/minero/IdMinero.txt)'                                                                     >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo 'vDirWallet="'"$vDirWallet"'"'                                                                                           >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo '#~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --background'       >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo '#~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --tls --background' >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
+echo '~/Cryptos/XMR/minero/xmrig -o ssl://xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --background'  >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
 chmod +x  ~/Cryptos/XMR/minero/MinarEnBackground.sh
 
 echo ""
