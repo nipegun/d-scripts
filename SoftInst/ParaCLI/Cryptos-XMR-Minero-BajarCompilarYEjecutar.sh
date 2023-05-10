@@ -116,15 +116,3 @@ echo "  Minando con ID $vIdMinero..."
 echo ""
 ~/Cryptos/XMR/minero/Minar.sh
 
-# Definir la cantidad de hilos a usar
- # vHilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)
-  #vHilos=
-
-# Con TLS
-  #~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --tls 
-
-# Sin TLS
-  # ~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet
-
-#/data/data/com.termux/files/home/xmrig/build/xmrig
-
