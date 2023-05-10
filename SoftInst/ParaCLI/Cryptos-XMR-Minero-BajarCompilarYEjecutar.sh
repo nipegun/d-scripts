@@ -12,16 +12,22 @@
 #   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-XMR-Minero-BajarCompilarYEjecutar.sh | bash
 # ----------
 
-vColorRojo='\033[1;31m'
-vColorVerde='\033[1;32m'
-vFinColor='\033[0m'
-
 vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"
-vHilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)
 
-echo ""
-echo -e "${ColorVerde}  Iniciando el script de instalación de XMRig...${FinColor}"
-echo ""
+# Definir variables de color
+  vColorAzul="\033[0;34m"
+  vColorAzulClaro="\033[1;34m"
+  vColorVerde='\033[1;32m'
+  vColorRojo='\033[1;31m'
+  vFinColor='\033[0m'
+
+# Definir la cantidad de hilos a usar
+  vHilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)
+
+# Notificar el inicio de ejecución del script
+  echo ""
+  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de XMRig...${FinColor}"
+  echo ""
 
 # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
