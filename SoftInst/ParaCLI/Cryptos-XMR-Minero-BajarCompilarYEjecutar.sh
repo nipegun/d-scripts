@@ -25,7 +25,7 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
 
 # Notificar el inicio de ejecución del script
   echo ""
-  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de XMRig...${FinColor}"
+  echo -e "${ColorAzulClaro}  Iniciando el script de compilación y ejecución de XMRig...${FinColor}"
   echo ""
 
 # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
