@@ -6,16 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para montar la partición donde se van a ejecutar las copias de seguridad
+# Script de NiPeGun para montar la partición donde se van a ejecutar las copias de seguridad
 #
-#  Ejecución remota:
-#  curl -s x | bash
-#
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
-#
-#  Ejecución remota con parámetros:
-#  curl -s x | bash -s Parámetro1 Parámetro2
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Part-CopSeg-Montar.sh | bash
 # ----------
 
 # Definir variables de color
