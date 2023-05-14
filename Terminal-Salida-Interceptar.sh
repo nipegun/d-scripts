@@ -6,16 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para interceptar la salida de terminal de un comando dado
+# Script de NiPeGun para interceptar la salida de terminal de un comando dado
 #
-#  Ejecución remota:
-#  curl -s x | bash
-#
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
-#
-#  Ejecución remota con parámetros:
-#  curl -s x | bash -s Parámetro1 Parámetro2
+# Ejecución remota con parámetros:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Terminal-Salida-Interceptar.sh | bash -s NombreDelSoftware
 # ----------
 
 # Definir variables de color
@@ -38,10 +32,10 @@ if [ $# -ne $vCantArgsCorrectos ]
   then
     echo ""
     echo -e "${vColorRojo}  Mal uso del script. El uso correcto sería: ${vFinColor}"
-    echo                 "    script [Argumento1] [Argumento2]"
+    echo "    $0 [NombreDelSoftware]"
     echo ""
-    echo                 "  Ejemplo:"
-    echo                 '    script "/etc/pepe/" "jpg"'
+    echo "  Ejemplo:"
+    echo "    $0 xmrig'
     echo ""
     exit $vArgsInsuficientes
   else
