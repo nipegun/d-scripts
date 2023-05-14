@@ -38,10 +38,12 @@
     echo -e "${vColorVerde}    El estado de la base de datos es consistente. Mostrando usuarios...${vFinColor}"
     echo ""
     sqlite3 -column -header /etc/uhub/users.db "select * from users;"
+    echo ""
   else
     echo ""
     echo -e "${vColorRojo}    El estado de la base de datos no es consistente. Intentando mostrar lo que se pueda...${vFinColor}"
     echo ""
     cat /etc/uhub/users.db
+    echo ""
   fi
 
