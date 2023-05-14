@@ -53,7 +53,7 @@ if [ $# -ne $vCantArgsCorrectos ]
         echo ""
         echo "    Mostrando resultado..."
         echo ""
-        sqlite3 -column -header /etc/uhub/users.db "select * from users where user = "$1";
+        sqlite3 -column -header /etc/uhub/users.db "select * from users where user = "$1"";
       else
         echo ""
         echo -e "${vColorRojo}    El estado de la base de datos no es consistente. Abortando el cambio de contraseña...${vFinColor}"
