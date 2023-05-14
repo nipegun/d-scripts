@@ -51,7 +51,7 @@ if [ $# -ne $vCantArgsCorrectos ]
         echo ""
         sqlite3 /etc/uhub/users.db "update users set password = '"$2"' where nickname = '"$1"';"
         echo ""
-        echo "    Mostrando resultado..."
+        echo "      Resultado..."
         echo ""
         sqlite3 -column -header /etc/uhub/users.db "select * from users where nickname = '"$1"'";
         echo ""
