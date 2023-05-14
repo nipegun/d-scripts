@@ -35,7 +35,7 @@ if [ $# -ne $vCantArgsCorrectos ]
     echo "    $0 [NombreDelSoftware]"
     echo ""
     echo "  Ejemplo:"
-    echo "    $0 xmrig'
+    echo "    $0 xmrig"
     echo ""
     exit $vArgsInsuficientes
   else
