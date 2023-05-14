@@ -49,11 +49,12 @@ if [ $# -ne $vCantArgsCorrectos ]
         echo ""
         echo -e "${vColorVerde}    El estado de la base de datos es consistente. Intentando cambiar la contraseña...${vFinColor}"
         echo ""
-        sqlite3 /etc/uhub/users.db "update users set password = "$2" where nickname = "$1";"
+        sqlite3 /etc/uhub/users.db "update users set password = '"$2"' where nickname = '"$1"';"
         echo ""
         echo "    Mostrando resultado..."
         echo ""
-        sqlite3 -column -header /etc/uhub/users.db "select * from users where nickname = "$1"";
+        sqlite3 -column -header /etc/uhub/users.db "select * from users where nickname = '"$1"'";
+        echo ""
       else
         echo ""
         echo -e "${vColorRojo}    El estado de la base de datos no es consistente. Abortando el cambio de contraseña...${vFinColor}"
