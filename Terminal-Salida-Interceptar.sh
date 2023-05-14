@@ -52,7 +52,7 @@ if [ $# -ne $vCantArgsCorrectos ]
       while read -r vLinea;
         do
           printf "%b\n" "$vLinea";
-        done < <(strace -e recvfrom,write -s 4096 -fp $(pgrep -n $1) 2>/dev/stdout)
+        done < <(bash -c "strace -e recvfrom,write -s 4096 -fp $(pgrep -n $1)" 2>/dev/stdout) # Es necesario usar un subshell con bash -c porque hay que pasar la variable $1
     # Ejemplo para interceptar xmrig y parsear la salida
       #while read -r vLinea;
       #  do
