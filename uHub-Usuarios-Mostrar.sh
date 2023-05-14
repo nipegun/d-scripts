@@ -27,17 +27,21 @@
   fi
 
 # Comprobar estado de la base de datos
+  echo ""
+  echo "  Comprobando estado de la base de datos..."
+  echo ""
   vEstadoDeLaBaseDeDatosDeUHUB=$(sqlite3 /etc/uhub/users.db "PRAGMA integrity_check;")
 
-if [ $vEstadoDeLaBaseDeDatosDeUHUB == "ok" ]; then
-  echo ""
-  echo "    El estado de la base de datos es consistente. Mostrando usuarios..."
-  echo ""
-  sqlite3 -column -header /etc/uhub/users.db "select * from users;"
-else
-  echo ""
-  echo -e "${vColorRojo}    El estado de la base de datos no es consistente. Intentando mostrar lo que se pueda...${vFinColor}"
-  echo ""
-  cat /etc/uhub/users.db
-fi
+# Mostrar usuarios
+  if [ $vEstadoDeLaBaseDeDatosDeUHUB == "ok" ]; then
+    echo ""
+    echo -e "${vColorVerde}    El estado de la base de datos es consistente. Mostrando usuarios..."
+    echo ""
+    sqlite3 -column -header /etc/uhub/users.db "select * from users;"
+  else
+    echo ""
+    echo -e "${vColorRojo}    El estado de la base de datos no es consistente. Intentando mostrar lo que se pueda...${vFinColor}"
+    echo ""
+    cat /etc/uhub/users.db
+  fi
 
