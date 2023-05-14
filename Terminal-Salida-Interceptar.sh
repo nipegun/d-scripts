@@ -48,11 +48,13 @@ if [ $# -ne $vCantArgsCorrectos ]
         apt-get -y install strace
         echo ""
       fi
+    # Guardar el argumentao pasado en $1 como una variable nueva
+      vSoftware="$1"
     # Interceptar salida de terminal
       while read -r vLinea;
         do
           printf "%b\n" "$vLinea";
-        done < <(bash -c "strace -e recvfrom,write -s 4096 -fp $(pgrep -n $1)" 2>/dev/stdout) # Es necesario usar un subshell con bash -c porque hay que pasar la variable $1
+        done < <(strace -e recvfrom,write -s 4096 -fp $(pgrep -n $vSoftware) 2>/dev/stdout)
     # Ejemplo para interceptar xmrig y parsear la salida
       #while read -r vLinea;
       #  do
