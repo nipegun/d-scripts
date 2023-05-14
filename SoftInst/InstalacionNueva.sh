@@ -6,16 +6,16 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
+# Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
 #
-#  Ejecución remota:
-#  curl -s x | bash
+# Ejecución remota:
+#   curl -s x | bash
 #
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+# Ejecución remota sin caché:
+#   curl -s -H 'Cache-Control: no-cache, no-store' x | bash
 #
-#  Ejecución remota con parámetros:
-#  curl -s x | bash -s Parámetro1 Parámetro2
+# Ejecución remota con parámetros:
+#   curl -s x | bash -s Parámetro1 Parámetro2
 # ----------
 
 # Definir variables de color
