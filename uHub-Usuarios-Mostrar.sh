@@ -35,7 +35,7 @@
 # Mostrar usuarios
   if [ $vEstadoDeLaBaseDeDatosDeUHUB == "ok" ]; then
     echo ""
-    echo -e "${vColorVerde}    El estado de la base de datos es consistente. Mostrando usuarios..."
+    echo -e "${vColorVerde}    El estado de la base de datos es consistente. Mostrando usuarios...${vFinColor}"
     echo ""
     sqlite3 -column -header /etc/uhub/users.db "select * from users;"
   else
