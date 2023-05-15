@@ -760,11 +760,11 @@ elif [ $OS_VERS == "11" ]; then
 
   apt-get -y update > /dev/null
   apt-get -y install dialog > /dev/null
-  cmd=(dialog --checklist "Script de hacks4geeks.com para instalación de servidor Web:" 22 76 16)
+  cmd=(dialog --checklist "Script de NiPeGun para instalar un servidor Web con Apache:" 22 76 16)
   options=(
-    1 "Instalar con certificado SSL autofirmado" on
-    2 "Agregar certificado LetsEncrypt encima (Requiere DDNS)" off
-    3 "Configurar y activar el módulo remoteip para estar detrás de un proxy inverso" off
+    1 "Instalar con certificado SSL autofirmado." on
+    2 "Agregar certificado LetsEncrypt encima (Requiere DDNS)." off
+    3 "Configurar y activar el módulo remoteip para estar detrás de un proxy inverso." off
   )
   choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
   clear
@@ -773,6 +773,7 @@ elif [ $OS_VERS == "11" ]; then
     case $choice in
 
       1)
+
         echo ""
         echo "    Instalando servidor web con certificado SSL autofirmado..."
         echo ""
@@ -957,68 +958,95 @@ elif [ $OS_VERS == "11" ]; then
           echo "# nft add rule inet filter input tcp dport 443 accept" >> /root/scripts/ComandosNFTables.sh
         # Notificar el fin de la ejecución de la parte 1 del script
           echo ""
-          echo -e "${vColorVerde}  Fin de ejecución de la parte 1 del script.${vFinColor}"
+          echo -e "${vColorVerde}    Fin de ejecución de la parte 1 del script.${vFinColor}"
           echo ""
 
       ;;
 
       2)
-        echo ""
-        echo -e "${ColorVerde}Instalando el certificado SSL de letsencrypt y configurando Apache para que lo use...${FinColor}"
-        echo ""
-        apt-get update
-        apt-get -y install certbot python3-certbot-apache
-        iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-        service apache2 stop
-        certbot --apache
-        dominio_servidor=$(dialog --title "Actualizar la configuración de default-ssl.conf" --inputbox "Ingresa el nombre de dominio exactamente como se lo pusiste a LetsEncrypt:" 8 60 3>&1 1>&2 2>&3 3>&- )
-        echo ""
-        echo "SE ACTUALIZARÁ EL ARCHIVO default-ssl.conf con el dominio $dominio_servidor"
-        echo ""
-        sed -i -e 's|apache2/ssl/autocertssl.pem|letsencrypt/live/'"$dominio_servidor"'/fullchain.pem|g' /etc/apache2/sites-available/default-ssl.conf
-        sed -i -e 's|apache2/ssl/autocertssl.key|letsencrypt/live/'"$dominio_servidor"'/privkey.pem|g'   /etc/apache2/sites-available/default-ssl.conf
-        chmod 600 /etc/letsencrypt/live/$dominio_servidor/*
-        sed -i -e 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html\n        Redirect permanent / https://'"$dominio_servidor"'/|g' /etc/apache2/sites-available/000-default.conf
-        service apache2 start
-        mkdir -p /root/scripts/ 2> /dev/null
-        echo '#!/bin/bash'                   >  /root/scripts/RenovarCertificadosSSL.sh
-        echo ""                              >> /root/scripts/RenovarCertificadosSSL.sh
-        echo "# Parar el servidor Apache"    >> /root/scripts/RenovarCertificadosSSL.sh
-        echo "service apache2 stop"          >> /root/scripts/RenovarCertificadosSSL.sh
-        echo ""                              >> /root/scripts/RenovarCertificadosSSL.sh
-        echo "# Renovar certificados"        >> /root/scripts/RenovarCertificadosSSL.sh
-        echo "certbot renew"                 >> /root/scripts/RenovarCertificadosSSL.sh
-        echo ""                              >> /root/scripts/RenovarCertificadosSSL.sh
-        echo "# Arrancar el servidor Apache" >> /root/scripts/RenovarCertificadosSSL.sh
-        echo "service apache2 start"         >> /root/scripts/RenovarCertificadosSSL.sh
-        chmod +x /root/scripts/RenovarCertificadosSSL.sh
-        echo "/root/scripts/RenovarCertificadosSSL.sh" >> /root/scripts/TareasCronPorSemana.sh
+
+        # Instalar el cortafuegos NFTables
+          echo ""
+          echo "    Agregando el certificado SSL de letsencrypt y configurando Apache para que lo use..."
+          echo ""
+          apt-get update
+          apt-get -y install certbot
+          apt-get -y install python3-certbot-apache
+          #iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+          #service apache2 stop
+          certbot --apache
+          dominio_servidor=$(dialog --title "Actualizar la configuración de default-ssl.conf" --inputbox "Ingresa el nombre de dominio exactamente como se lo pusiste a LetsEncrypt:" 8 60 3>&1 1>&2 2>&3 3>&- )
+          echo ""
+          echo "SE ACTUALIZARÁ EL ARCHIVO default-ssl.conf con el dominio $dominio_servidor"
+          echo ""
+          sed -i -e 's|apache2/ssl/autocertssl.pem|letsencrypt/live/'"$dominio_servidor"'/fullchain.pem|g' /etc/apache2/sites-available/default-ssl.conf
+          sed -i -e 's|apache2/ssl/autocertssl.key|letsencrypt/live/'"$dominio_servidor"'/privkey.pem|g'   /etc/apache2/sites-available/default-ssl.conf
+          chmod 600 /etc/letsencrypt/live/$dominio_servidor/*
+          sed -i -e 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html\n        Redirect permanent / https://'"$dominio_servidor"'/|g' /etc/apache2/sites-available/000-default.conf
+          service apache2 start
+        # Creando el script para renovar el certificado
+          echo ""
+          echo "  Creando el script para renovar el certificado de LetsEncrypt de forma automática.,.."
+          echo ""
+          mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
+          echo '#!/bin/bash'                    > /root/scripts/EsteDebian/RenovarCertificadosSSL.sh
+          echo ""                              >> /root/scripts/EsteDebian/RenovarCertificadosSSL.sh
+          echo "# Parar el servidor Apache"    >> /root/scripts/EsteDebian/RenovarCertificadosSSL.sh
+          echo "service apache2 stop"          >> /root/scripts/EsteDebian/RenovarCertificadosSSL.sh
+          echo ""                              >> /root/scripts/EsteDebian/RenovarCertificadosSSL.sh
+          echo "# Renovar certificados"        >> /root/scripts/EsteDebian/RenovarCertificadosSSL.sh
+          echo "certbot renew"                 >> /root/scripts/EsteDebian/RenovarCertificadosSSL.sh
+          echo ""                              >> /root/scripts/EsteDebian/RenovarCertificadosSSL.sh
+          echo "# Arrancar el servidor Apache" >> /root/scripts/EsteDebian/RenovarCertificadosSSL.sh
+          echo "service apache2 start"         >> /root/scripts/EsteDebian/RenovarCertificadosSSL.sh
+          chmod +x                                /root/scripts/EsteDebian/RenovarCertificadosSSL.sh
+          echo "/root/scripts/EsteDebian/RenovarCertificadosSSL.sh" >> /root/scripts/TareasCronPorSemana.sh
+
       ;;
 
       3)
-        a2enmod remoteip
-        a2enmod headers
-        echo "RemoteIPHeader X-Forwarded-For"                                                     > /etc/apache2/conf-available/remoteip.conf
-        echo "#RemoteIPInternalProxy 0.0.0.0"                                                    >> /etc/apache2/conf-available/remoteip.conf
-        echo "#RemoteIPTrustedProxy 0.0.0.0"                                                     >> /etc/apache2/conf-available/remoteip.conf
-        echo 'LogFormat "%a %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined' >> /etc/apache2/conf-available/remoteip.conf
-        a2enconf remoteip
-        service apache2 restart
-        echo ""
-        echo -e "${ColorVerde}El módulo remoteip está activado. Para configurarlo edita el archivo:${FinColor}"
-        echo ""
-        echo -e "${ColorVerde}/etc/apache2/conf-available/remoteip.conf${FinColor}"
-        echo ""
-        echo -e "${ColorVerde}descomenta la línea que te interese de las dos que están comentadas,${FinColor}"
-        echo -e "${ColorVerde}reemplaza la ip que aparece como 0.0.0.0 con la ip del host del proxy inverso${FinColor}"
-        echo -e "${ColorVerde}y reinicia apache 2 ejecutando:${FinColor}"
-        echo ""
-        echo -e "${ColorVerde}service apache2 restart${FinColor}"
-        echo ""
-        echo -e "${ColorVerde}Para más información sobre este punto, revisa:${FinColor}"
-        echo ""
-        echo -e "${ColorVerde}http://hacks4geeks.com/pasar-ips-reales-de-clientes-http-de-haproxy-a-backends-con-apache${FinColor}"
-        echo ""
+
+        # Activar módulos para remoteip
+          echo ""
+          echo "    Activando módulos para RemoteIP..."
+          echo ""
+          a2enmod remoteip
+          a2enmod headers
+        # Modificar la configuración de apache
+          echo ""
+          echo "    Modificando el archivo remoteip.conf en Apache..."
+          echo ""
+          echo "RemoteIPHeader X-Forwarded-For"                                                     > /etc/apache2/conf-available/remoteip.conf
+          echo "#RemoteIPInternalProxy 0.0.0.0"                                                    >> /etc/apache2/conf-available/remoteip.conf
+          echo "#RemoteIPTrustedProxy 0.0.0.0"                                                     >> /etc/apache2/conf-available/remoteip.conf
+          echo 'LogFormat "%a %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined' >> /etc/apache2/conf-available/remoteip.conf
+        # Activar la configuración de remoteip
+          echo ""
+          echo "    Activando la configuración de apache de remoteip..."
+          echo ""
+          a2enconf remoteip
+        # Reiniciar el servidor apache
+          echo ""
+          echo "    Reiniciando el servidor apache..."
+          echo ""
+          service apache2 restart
+        # Notificar fin del script
+          echo ""
+          echo -e "${ColorVerde}      El módulo remoteip está activado. Para configurarlo edita el archivo:${FinColor}"
+          echo ""
+          echo -e "${ColorVerde}        /etc/apache2/conf-available/remoteip.conf${FinColor}"
+          echo ""
+          echo -e "${ColorVerde}      descomenta la línea que te interese de las dos que están comentadas,${FinColor}"
+          echo -e "${ColorVerde}      reemplaza la ip que aparece como 0.0.0.0 con la ip del host del proxy inverso${FinColor}"
+          echo -e "${ColorVerde}      y reinicia apache 2 ejecutando:${FinColor}"
+          echo ""
+          echo -e "${ColorVerde}      service apache2 restart${FinColor}"
+          echo ""
+          echo -e "${ColorVerde}      Para más información sobre este punto, revisa:${FinColor}"
+          echo ""
+          echo -e "${ColorVerde}        http://hacks4geeks.com/pasar-ips-reales-de-clientes-http-de-haproxy-a-backends-con-apache${FinColor}"
+          echo ""
+
       ;;
 
     esac
