@@ -945,12 +945,8 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "      Instalando el servidor de bases de datos..."
               echo ""
-              apt-get -y install mariadb-server
-              # Asegurar el servidor de bases de datos
-              echo ""
-              echo "        Asegurando el servidor de bases de datos...${FinColor}"
-              echo ""
-              mysql_secure_installation
+              #curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-MariaDB-InstalarYConfigurar.sh | bash
+              /root/scripts/d-scripts/SoftInst/ParaCLI/Servidor-BBDD-MariaDB-InstalarYConfigurar.sh
             # Instalar memcached
               echo ""
               echo "      Instalando MemCacheD...${FinColor}"
