@@ -110,22 +110,17 @@ elif [ $OS_VERS == "11" ]; then
       echo ""
       echo -e "${vColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
       echo ""
-      apt-get -y update && apt-get -y install dialog
+      apt-get -y update
+      apt-get -y install dialog
       echo ""
     fi
 
-  #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
       1 "Instalar paquete mariadb-server." on
       2 "Permitir conexiones desde todas las IPs (no sólo localhost)." off
       3 "Permitir conexión SÓLO desde una IP específica (sin localhost)." off
-      4 "..." off
-      5 "..." off
-      6 "Securizar instalación con script oficial." off
-      7 "Crear base de datos para wordpress" off
-      8 "Crear base de datos para Joomla" off
-      
+      4 "Securizar instalación con script oficial." off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -135,95 +130,71 @@ elif [ $OS_VERS == "11" ]; then
 
         1)
 
-          echo ""
-          echo "  Instalando paquete mariadb-server..."
-          echo ""
-          apt-get -y update
-          apt-get -y install mariadb-server
+          # Instalar el paquete mmariadb-server
+            echo ""
+            echo "  Instalando el paquete mariadb-server..."
+            echo ""
+            apt-get -y update
+            apt-get -y install mariadb-server
 
         ;;
 
         2)
 
-          echo ""
-          echo "  Permitiendo conexión desde todas las IPs (no sólo desde localhost)..."
-          echo ""
-          vExisteSec=$(cat /etc/mysql/my.cnf | grep ^'\[mysqld]')
-          if [[ $vExisteSec == "" ]]; then
-            vFecha=$(date +A%YM%mD%d@%T)
-            cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
-            echo "[mysqld]"               >> /etc/mysql/my.cnf
-            echo "bind-address = 0.0.0.0" >> /etc/mysql/my.cnf
-            systemctl restart mariadb
-          else
-            vFecha=$(date +A%YM%mD%d@%T)
-            cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
-            sed -i -e 's|\[mysqld]|\[mysqld]\nbind-address = 0.0.0.0|g' /etc/mysql/my.cnf
-            systemctl restart mariadb
-          fi
+          # Permitir la conexión desde todas las IPs
+            echo ""
+            echo "  Permitiendo conexión desde todas las IPs (no sólo desde localhost)..."
+            echo ""
+            vExisteSec=$(cat /etc/mysql/my.cnf | grep ^'\[mysqld]')
+            if [[ $vExisteSec == "" ]]; then
+              vFecha=$(date +a%Ym%md%d@%T)
+              cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
+              echo "[mysqld]"               >> /etc/mysql/my.cnf
+              echo "bind-address = 0.0.0.0" >> /etc/mysql/my.cnf
+              systemctl restart mariadb
+            else
+              vFecha=$(date +a%Ym%md%d@%T)
+              cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
+              sed -i -e 's|\[mysqld]|\[mysqld]\nbind-address = 0.0.0.0|g' /etc/mysql/my.cnf
+              systemctl restart mariadb
+            fi
 
         ;;
 
         3)
 
-          echo ""
-          echo "  Permitiendo conexión SÓLO desde una IP específica (sin localhost)..."
-          echo ""
-          echo "    Introduce la IP desde la que se deberían escuchar las conexiones y presiona Enter:"
-          echo ""
-          read vIPExtra < /dev/tty
-          echo ""
-          vExisteSec=$(cat /etc/mysql/my.cnf | grep ^'\[mysqld]')
-          if [[ $vExisteSec == "" ]]; then
-            vFecha=$(date +A%YM%mD%d@%T)
-            cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
-            echo "[mysqld]"                 >> /etc/mysql/my.cnf
-            echo "bind-address = $vIPExtra" >> /etc/mysql/my.cnf
-            systemctl restart mariadb
-          else
-            vFecha=$(date +A%YM%mD%d@%T)
-            cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
-            sed -i -e 's|bind-address = 0.0.0.0||g'                       /etc/mysql/my.cnf
-            sed -i -e 's|\[mysqld]|\[mysqld]\nbind-address = $vIPExtra|g' /etc/mysql/my.cnf
-            systemctl restart mariadb
-          fi
+          # Permitir conexiones sólo desde una IP específica
+            echo ""
+            echo "  Permitiendo conexión SÓLO desde una IP específica (sin localhost)..."
+            echo ""
+            echo "    Introduce la IP desde la que se deberían escuchar las conexiones y presiona Enter:"
+            echo ""
+            read vIPExtra < /dev/tty
+            echo ""
+            vExisteSec=$(cat /etc/mysql/my.cnf | grep ^'\[mysqld]')
+            if [[ $vExisteSec == "" ]]; then
+              vFecha=$(date +a%Ym%md%d@%T)
+              cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
+              echo "[mysqld]"                 >> /etc/mysql/my.cnf
+              echo "bind-address = $vIPExtra" >> /etc/mysql/my.cnf
+              systemctl restart mariadb
+            else
+              vFecha=$(date +a%Ym%md%d@%T)
+              cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
+              sed -i -e 's|bind-address = 0.0.0.0||g'                       /etc/mysql/my.cnf
+              sed -i -e 's|\[mysqld]|\[mysqld]\nbind-address = $vIPExtra|g' /etc/mysql/my.cnf
+              systemctl restart mariadb
+            fi
 
         ;;
 
         4)
 
-          echo "  ..."
-
-        ;;
-
-        5)
-
-          echo "  ..."
-
-        ;;
-
-        6)
-
-          echo ""
-          echo "  Securizando instalación con script oficial..."
-          echo ""
-          mysql_secure_installation
-
-        ;;
-
-        7)
-
-          echo ""
-          echo "  Creando base de datos para WordPress..."
-          echo ""
-          
-        ;;
-
-        8)
-
-          echo ""
-          echo "  Creando base de datos para Joomla..."
-          echo ""
+          # Securizar la instalación
+            echo ""
+            echo "  Securizando instalación con script oficial..."
+            echo ""
+            mysql_secure_installation
 
         ;;
 
