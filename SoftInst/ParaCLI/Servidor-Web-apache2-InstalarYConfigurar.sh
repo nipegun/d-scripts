@@ -799,7 +799,7 @@ elif [ $OS_VERS == "11" ]; then
         
             # Instalar paquetes
               echo ""
-              echo "    Instalando el servidor web con Apache y PHP $vUltVersPHP..."
+              echo "      Instalando el servidor web con Apache y PHP $vUltVersPHP..."
               echo ""
               apt-get -y install tasksel
               tasksel install ssh-server
@@ -823,7 +823,7 @@ elif [ $OS_VERS == "11" ]; then
               apt-get -y install libapache2-mod-php"$vUltVersPHP"
             # Activar módulos de PHP
               echo ""
-              echo "    Activando módulos de PHP..."
+              echo "      Activando módulos de PHP..."
               echo ""
               phpenmod gd
               phpenmod curl
@@ -834,7 +834,7 @@ elif [ $OS_VERS == "11" ]; then
               phpenmod imagick
             # Activar módulos de Apache
               echo ""
-              echo "    Activando módulos de Apache..."
+              echo "      Activando módulos de Apache..."
               echo ""
               a2enmod rewrite
               a2enmod ssl
@@ -844,18 +844,18 @@ elif [ $OS_VERS == "11" ]; then
               a2enmod mime
             # Activar sitio SSL por defecto
               echo ""
-              echo "    Activando sitio SSL por defecto en Apache..."
+              echo "      Activando sitio SSL por defecto en Apache..."
               echo ""
               a2ensite default-ssl
             # Volver a activar mbstring
               echo ""
-              echo "    Volviendo a activar el módulo mbstring de PHP..."
+              echo "      Volviendo a activar el módulo mbstring de PHP..."
               echo ""
               #phpenmod mcrypt
               phpenmod mbstring
             # Modificar php.ini
               echo ""
-              echo "    Modificando php.ini..."
+              echo "      Modificando php.ini..."
               echo ""
               cp /etc/php/"$vUltVersPHP"/apache2/php.ini /etc/php/"$vUltVersPHP"/apache2/php.ini.ori
               sed -i -e 's|max_execution_time = 30|max_execution_time = 300|g'   /etc/php/"$vUltVersPHP"/apache2/php.ini
@@ -864,7 +864,7 @@ elif [ $OS_VERS == "11" ]; then
               sed -i -e 's|upload_max_filesize = 2M|upload_max_filesize = 64M|g' /etc/php/"$vUltVersPHP"/apache2/php.ini
             # Configurar carpeta de logs del sitio por defecto
               echo ""
-              echo "    Configurando carpeta de logs del sitio por defecto..."
+              echo "      Configurando carpeta de logs del sitio por defecto..."
               echo ""
               cp /etc/apache2/sites-available/000-default.conf     /etc/apache2/sites-available/000-default.conf.ori
               sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/_/logs|g' /etc/apache2/sites-available/000-default.conf
@@ -874,7 +874,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "  RewriteRule .*\.(log)$ http://google.com [NC]"   >> /var/www/html/_/logs/.htaccess
             # Modificr el servidor SSH
               echo ""
-              echo "    Modificando el servidor SSH..."
+              echo "      Modificando el servidor SSH..."
               echo ""
               cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
               echo ""                             >> /etc/ssh/sshd_config
@@ -885,11 +885,11 @@ elif [ $OS_VERS == "11" ]; then
               echo "  ForceCommand internal-sftp" >> /etc/ssh/sshd_config
             # Preparar el usuario www-data para conectarse mediante sftp
               echo ""
-              echo "    Preparando el usuario www-data para conectarse mediante sftp..."
+              echo "      Preparando el usuario www-data para conectarse mediante sftp..."
               echo ""
               echo ""
-              echo "      Ahora tendrás que ingresar veces en nuevo password para el usuario www-data."
-              echo "      Acuérdate de apuntarlo en un lugar seguro porque tendrás que loguearte con él mediante sftp."
+              echo "        Ahora tendrás que ingresar veces en nuevo password para el usuario www-data."
+              echo "        Acuérdate de apuntarlo en un lugar seguro porque tendrás que loguearte con él mediante sftp."
               echo ""
               passwd www-data
               usermod -s /bin/bash www-data
@@ -899,7 +899,7 @@ elif [ $OS_VERS == "11" ]; then
               service ssh restart
             # Crear el archivo intermedio nuevawebvar.conf
               echo ""
-              echo "    Creando el archivo intermedio nuevawebvar.conf..."
+              echo "      Creando el archivo intermedio nuevawebvar.conf..."
               echo ""
               echo ""                                                                 > /etc/apache2/sites-available/nuevawebvar.conf
               echo "<VirtualHost *:80>"                                              >> /etc/apache2/sites-available/nuevawebvar.conf
@@ -924,7 +924,7 @@ elif [ $OS_VERS == "11" ]; then
               echo ""                                                                >> /etc/apache2/sites-available/nuevawebvar.conf
             # Instalar el certificado SSL autofirmado para https...
               echo ""
-              echo "    Instalando el certificado SSL autofirmado para https..."
+              echo "      Instalando el certificado SSL autofirmado para https..."
               echo ""
               mkdir -p /etc/apache2/ssl/
               openssl req -x509 -nodes -days 365 -newkey rsa:8192 -out /etc/apache2/ssl/autocertssl.pem -keyout /etc/apache2/ssl/autocertssl.key
@@ -936,17 +936,17 @@ elif [ $OS_VERS == "11" ]; then
               service apache2 restart
             # Instalar el servidor de bases de datos
               echo ""
-              echo "    Instalando el servidor de bases de datos..."
+              echo "      Instalando el servidor de bases de datos..."
               echo ""
               apt-get -y install mariadb-server
               # Asegurar el servidor de bases de datos
               echo ""
-              echo "      Asegurando el servidor de bases de datos...${FinColor}"
+              echo "        Asegurando el servidor de bases de datos...${FinColor}"
               echo ""
               mysql_secure_installation
             # Instalar memcached
               echo ""
-              echo "    Instalando MemCacheD...${FinColor}"
+              echo "      Instalando MemCacheD...${FinColor}"
               echo ""
               apt-get -y install memcached
               apt-get -y install php-memcached
@@ -954,7 +954,7 @@ elif [ $OS_VERS == "11" ]; then
               service apache2 restart
             # Instalar el cortafuegos NFTables
               echo ""
-              echo "    Instalando el cortafuegos NFTables..."
+              echo "      Instalando el cortafuegos NFTables..."
               echo ""
               apt-get -y install nftables
               systemctl enable nftables.service
@@ -965,7 +965,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "# nft add rule inet filter input tcp dport 443 accept" >> /root/scripts/ComandosNFTables.sh
             # Notificar el fin de la ejecución de la parte 1 del script
               echo ""
-              echo -e "${vColorVerde}    Fin de ejecución de la parte 1 del script.${vFinColor}"
+              echo -e "${vColorVerde}      Fin de ejecución de la parte 1 del script.${vFinColor}"
               echo ""
 
           ;;
