@@ -768,7 +768,7 @@ elif [ $OS_VERS == "11" ]; then
       echo ""
     fi
   # Crear el menú
-    cmd=(dialog --checklist "Script de NiPeGun para instalar un servidor Web con Apache:" 10 90 20)
+    cmd=(dialog --checklist "Script de NiPeGun para instalar un servidor Web con Apache:" 12 96 20)
     options=(
       1 "Instalar con certificado SSL autofirmado." on
       2 "Agregar certificado LetsEncrypt encima (Requiere DDNS)." off
