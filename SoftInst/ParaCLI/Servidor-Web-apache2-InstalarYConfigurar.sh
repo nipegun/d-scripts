@@ -826,12 +826,21 @@ elif [ $OS_VERS == "11" ]; then
               echo "      Activando módulos de PHP..."
               echo ""
               phpenmod gd
+                php -m | grep gd
               phpenmod curl
+                php -m | grep curl
               phpenmod json
+                php -m | grep json
               phpenmod mbstring
+                php -m | grep mbstring
               phpenmod intl
+                php -m | grep intl
               phpenmod redis
+                php -m | grep redis
               phpenmod imagick
+                php -m | grep imagick
+              #phpenmod mcrypt
+                #php -m | grep mcrypt
             # Activar módulos de Apache
               echo ""
               echo "      Activando módulos de Apache..."
@@ -848,11 +857,11 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               a2ensite default-ssl
             # Volver a activar mbstring
-              echo ""
-              echo "      Volviendo a activar el módulo mbstring de PHP..."
-              echo ""
+              #echo ""
+              #echo "      Volviendo a activar el módulo mbstring de PHP..."
+              #echo ""
               #phpenmod mcrypt
-              phpenmod mbstring
+              #phpenmod mbstring
             # Modificar php.ini
               echo ""
               echo "      Modificando php.ini..."
