@@ -121,7 +121,8 @@ elif [ $OS_VERS == "11" ]; then
       1 "Instalar paquete mariadb-server." on
       2 "Permitir conexiones desde todas las IPs (no sólo localhost)." off
       3 "Permitir conexión SÓLO desde una IP específica (sin localhost)." off
-      4 "Securizar instalación con script oficial." off
+      4 "Instalar phpmyadmin." off
+      5 "Securizar instalación con script oficial." off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -186,6 +187,16 @@ elif [ $OS_VERS == "11" ]; then
               sed -i -e 's|\[mysqld]|\[mysqld]\nbind-address = $vIPExtra|g' /etc/mysql/my.cnf
               systemctl restart mariadb
             fi
+
+        ;;
+
+        4)
+
+          # Instalar phpmydmin
+            echo ""
+            echo "  Instalando phpmyadmin..."
+            echo ""
+            apt-get -y install phpmyadmin
 
         ;;
 
