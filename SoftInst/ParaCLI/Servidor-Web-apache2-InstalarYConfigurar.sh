@@ -892,7 +892,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "  ForceCommand internal-sftp" >> /etc/ssh/sshd_config
             # Preparar el usuario www-data para conectarse mediante sftp
               echo ""
-              echo "      Preparando el usuario www-data para conectarse mediante sftp..."
+              echo "      Preparando el usuario www-data para conectarse sólo mediante sftp..."
               echo ""
               echo ""
               echo "        Ahora tendrás que ingresar veces en nuevo password para el usuario www-data."
