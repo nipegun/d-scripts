@@ -797,9 +797,9 @@ elif [ $OS_VERS == "11" ]; then
             # Determinar la última versión de PHP
               vUltVersPHP=$(apt-cache search php | grep etapackage | grep php | cut -d' ' -f1 | sed 's|[^0-9.]*||g' )
         
-            # Instalar paquetes
+            # Instalar paquetes de apache y relacionados
               echo ""
-              echo "      Instalando el servidor web con Apache y PHP $vUltVersPHP..."
+              echo "      Instalando paquetes de apache y relacionados..."
               echo ""
               apt-get -y install tasksel
               tasksel install ssh-server
@@ -807,6 +807,35 @@ elif [ $OS_VERS == "11" ]; then
               apt-get -y install apache2-utils
               apt-get -y install redis-server
               apt-get -y install imagemagick
+            # Activar módulos de Apache
+              echo ""
+              echo "      Activando módulos de Apache..."
+              echo ""
+              a2enmod rewrite
+              a2enmod ssl
+              a2enmod headers
+              a2enmod env
+              a2enmod dir
+              a2enmod mime
+            # Activar sitio SSL por defecto
+              echo ""
+              echo "      Activando sitio SSL por defecto en Apache..."
+              echo ""
+              a2ensite default-ssl
+            # Configurar carpeta de logs del sitio por defecto
+              echo ""
+              echo "      Configurando carpeta de logs del sitio por defecto..."
+              echo ""
+              cp /etc/apache2/sites-available/000-default.conf     /etc/apache2/sites-available/000-default.conf.ori
+              sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/_/logs|g' /etc/apache2/sites-available/000-default.conf
+              mkdir -p /var/www/html/_/logs/
+              echo "RewriteEngine On"                                   > /var/www/html/_/logs/.htaccess
+              echo '  RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]' >> /var/www/html/_/logs/.htaccess
+              echo "  RewriteRule .*\.(log)$ http://google.com [NC]"   >> /var/www/html/_/logs/.htaccess
+            # Instalar paquetes de PHP
+              echo ""
+              echo "      Instalando paquetes de PHP $vUltVersPHP..."
+              echo ""
               apt-get -y install php"$vUltVersPHP"-common
               apt-get -y install php"$vUltVersPHP"-gd
               apt-get -y install php"$vUltVersPHP"-curl
@@ -841,27 +870,6 @@ elif [ $OS_VERS == "11" ]; then
                 php -m | grep imagick
               #phpenmod mcrypt
                 #php -m | grep mcrypt
-            # Activar módulos de Apache
-              echo ""
-              echo "      Activando módulos de Apache..."
-              echo ""
-              a2enmod rewrite
-              a2enmod ssl
-              a2enmod headers
-              a2enmod env
-              a2enmod dir
-              a2enmod mime
-            # Activar sitio SSL por defecto
-              echo ""
-              echo "      Activando sitio SSL por defecto en Apache..."
-              echo ""
-              a2ensite default-ssl
-            # Volver a activar mbstring
-              #echo ""
-              #echo "      Volviendo a activar el módulo mbstring de PHP..."
-              #echo ""
-              #phpenmod mcrypt
-              #phpenmod mbstring
             # Modificar php.ini
               echo ""
               echo "      Modificando php.ini..."
@@ -871,17 +879,7 @@ elif [ $OS_VERS == "11" ]; then
               sed -i -e 's|memory_limit = 128M|memory_limit = 300M|g'            /etc/php/"$vUltVersPHP"/apache2/php.ini
               sed -i -e 's|post_max_size = 8M|post_max_size = 64M|g'             /etc/php/"$vUltVersPHP"/apache2/php.ini
               sed -i -e 's|upload_max_filesize = 2M|upload_max_filesize = 64M|g' /etc/php/"$vUltVersPHP"/apache2/php.ini
-            # Configurar carpeta de logs del sitio por defecto
-              echo ""
-              echo "      Configurando carpeta de logs del sitio por defecto..."
-              echo ""
-              cp /etc/apache2/sites-available/000-default.conf     /etc/apache2/sites-available/000-default.conf.ori
-              sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/_/logs|g' /etc/apache2/sites-available/000-default.conf
-              mkdir -p /var/www/html/_/logs/
-              echo "RewriteEngine On"                                   > /var/www/html/_/logs/.htaccess
-              echo '  RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]' >> /var/www/html/_/logs/.htaccess
-              echo "  RewriteRule .*\.(log)$ http://google.com [NC]"   >> /var/www/html/_/logs/.htaccess
-            # Modificr el servidor SSH
+            # Modificar el servidor SSH
               echo ""
               echo "      Modificando el servidor SSH..."
               echo ""
