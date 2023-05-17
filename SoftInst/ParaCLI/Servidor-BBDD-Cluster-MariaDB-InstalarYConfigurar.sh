@@ -359,18 +359,20 @@ elif [ $OS_VERS == "11" ]; then
 
             apt-get -y install haproxy
             cp  /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
-            echo ""                                              >> /etc/haproxy/haproxy.cfg
-            echo "listen galera-cluster"                         >> /etc/haproxy/haproxy.cfg
-            echo "bind *:3306"                                   >> /etc/haproxy/haproxy.cfg
-            echo "mode tcp"                                      >> /etc/haproxy/haproxy.cfg
-            echo "option mysql-check user haproxy"               >> /etc/haproxy/haproxy.cfg
-            echo "option tcpka"                                  >> /etc/haproxy/haproxy.cfg
-            echo "# balance first"                               >> /etc/haproxy/haproxy.cfg
-            echo "# balance roundrobin"                          >> /etc/haproxy/haproxy.cfg
-            echo "balance source"                                >> /etc/haproxy/haproxy.cfg
-            echo "server node1 192.168.0.10:3306 check weight 1" >> /etc/haproxy/haproxy.cfg
-            echo "server node2 192.168.0.11:3306 check weight 1" >> /etc/haproxy/haproxy.cfg
-            echo "server node3 192.168.0.12:3306 check weight 1" >> /etc/haproxy/haproxy.cfg
+            echo ""                                       >> /etc/haproxy/haproxy.cfg
+            echo "listen galera-cluster"                  >> /etc/haproxy/haproxy.cfg
+            echo "bind *:3306"                            >> /etc/haproxy/haproxy.cfg
+            echo "mode tcp"                               >> /etc/haproxy/haproxy.cfg
+            echo "option mysql-check user haproxy"        >> /etc/haproxy/haproxy.cfg
+            echo "option tcpka"                           >> /etc/haproxy/haproxy.cfg
+            echo "# balance first"                        >> /etc/haproxy/haproxy.cfg
+            echo "# balance roundrobin"                   >> /etc/haproxy/haproxy.cfg
+            echo "balance source"                         >> /etc/haproxy/haproxy.cfg
+            echo "server node1 $vIP1:3306 check weight 1" >> /etc/haproxy/haproxy.cfg
+            echo "server node2 $vIP2:3306 check weight 1" >> /etc/haproxy/haproxy.cfg
+            echo "server node3 $vIP3:3306 check weight 1" >> /etc/haproxy/haproxy.cfg
+            systemctl reload haproxy.service
+            #service haproxy reload
 
             # Para WordPress, en el nodo principal
               # create user 'wordpress'@'IPDeHAProxy' identified by 'P@ssw0rd';
