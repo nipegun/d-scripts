@@ -147,7 +147,8 @@ elif [ $OS_VERS == "11" ]; then
                 echo ""
                 echo -e "${vColorRojo}    El paquete mariadb-server no está instalado. Iniciando su instalación...${vFinColor}"
                 echo ""
-                apt-get -y update && apt-get -y install mariadb-server
+                apt-get -y update
+                apt-get -y install mariadb-server
                 echo ""
               fi
 
@@ -356,17 +357,20 @@ elif [ $OS_VERS == "11" ]; then
             echo "  Instalando y configurando el nodo HAProxy..."
             echo ""
 
-            # listen galera-cluster
-            #   bind *:3306
-            #   mode tcp
-            #   option mysql-check user haproxy
-            #   option tcpka
-            #   # balance first
-            #   # balance roundrobin
-            #   balance source
-            #   server node1 192.168.0.9:3306  check weight 1
-            #   server node2 192.168.0.11:3306 check weight 1
-            #   server node3 192.168.0.12:3306 check weight 1
+            apt-get -y install haproxy
+            cp  /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
+            echo ""                                              >> /etc/haproxy/haproxy.cfg
+            echo "listen galera-cluster"                         >> /etc/haproxy/haproxy.cfg
+            echo "bind *:3306"                                   >> /etc/haproxy/haproxy.cfg
+            echo "mode tcp"                                      >> /etc/haproxy/haproxy.cfg
+            echo "option mysql-check user haproxy"               >> /etc/haproxy/haproxy.cfg
+            echo "option tcpka"                                  >> /etc/haproxy/haproxy.cfg
+            echo "# balance first"                               >> /etc/haproxy/haproxy.cfg
+            echo "# balance roundrobin"                          >> /etc/haproxy/haproxy.cfg
+            echo "balance source"                                >> /etc/haproxy/haproxy.cfg
+            echo "server node1 192.168.0.10:3306 check weight 1" >> /etc/haproxy/haproxy.cfg
+            echo "server node2 192.168.0.11:3306 check weight 1" >> /etc/haproxy/haproxy.cfg
+            echo "server node3 192.168.0.12:3306 check weight 1" >> /etc/haproxy/haproxy.cfg
 
             # Para WordPress, en el nodo principal
               # create user 'wordpress'@'IPDeHAProxy' identified by 'P@ssw0rd';
@@ -375,6 +379,7 @@ elif [ $OS_VERS == "11" ]; then
               # grant all privileges on otratabla.* to 'otrousuario'@'IPDeHaProxy';
               #
               # Todos los usuarios deben ser creados para la IP de HAProxy
+
           ;;
 
       esac
