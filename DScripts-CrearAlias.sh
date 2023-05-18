@@ -87,6 +87,7 @@ ln -s /root/scripts/d-scripts/MySQL-BaseDeDatos-Importar.sh                     
 ln -s /root/scripts/d-scripts/NotificarFalloDeDisco.sh                             /root/scripts/d-scripts/Alias/nfdd
 ln -s /root/scripts/d-scripts/NuevaWebVarWWW.sh                                    /root/scripts/d-scripts/Alias/nwvwww
 ln -s /root/scripts/d-scripts/PCIPassThrough-Editar.sh                             /root/scripts/d-scripts/Alias/epcip
+ln -s /root/scripts/d-scripts/Proceso-Matar.sh                                     /root/scripts/d-scripts/Alias/mp
 ln -s /root/scripts/d-scripts/Plex-Editar.sh                                       /root/scripts/d-scripts/Alias/eplex
 ln -s /root/scripts/d-scripts/ProcesosCorriendo.sh                                 /root/scripts/d-scripts/Alias/pc
 ln -s /root/scripts/d-scripts/ProcesosCorriendoEnÁrbol.sh                          /root/scripts/d-scripts/Alias/pcea
