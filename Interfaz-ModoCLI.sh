@@ -12,19 +12,26 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Interfaz-ModoCLI.sh | bash
 # ----------
 
+# Definir variables de color
+  vColorAzul="\033[0;34m"
+  vColorAzulClaro="\033[1;34m"
+  vColorVerde='\033[1;32m'
+  vColorRojo='\033[1;31m'
+  vFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    exit 1
+  fi
+
 echo ""
-echo "-------------------------"
-echo "  REALIZANDO CAMBIOS..."
-echo "-------------------------"
+echo -e "${vColorAzulClaro}  Iniciando script de configuración de inicio en modo CLI para Debian...${vFinColor}"
 echo ""
 systemctl set-default -f multi-user.target
 
 echo ""
-echo "---------------------------------------------------------------------"
-echo "  CAMBIOS REALIZADOS: "
-echo "  EN EL PRÓXIMO INICIO DEBIAN ARRANCARÁ EN MODO TEXTO MULTI-USUARIO"
-echo "---------------------------------------------------------------------"
+echo -e "${vColorVerde}    Cambios realizados. En el próximo inicio Debian iniciará en modo CLI multi-usuario.${vFinColor}"
 echo ""
-
 shutdown -r now
 
