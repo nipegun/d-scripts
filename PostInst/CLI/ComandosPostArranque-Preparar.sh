@@ -9,7 +9,7 @@
 #  Script de NiPeGun para preparar los comandos post-arranque (antiguo rc.local)
 #
 # Ejecución remota:
-# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
 # ----------
 
 vColorRojo='\033[1;31m'
