@@ -104,13 +104,15 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script para matar procesos en Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   if [[ "$1" =~ ^[0-9]+$ ]]; then
     pkill $1
+    echo ""
   else
     killall -9 $1
+    echo ""
   fi
 
 fi
