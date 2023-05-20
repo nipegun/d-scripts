@@ -9,13 +9,7 @@
 # Script de NiPeGun para instalar y configurar Jellyfin en Debian
 #
 # Ejecución remota:
-#   curl -s x | bash
-#
-# Ejecución remota sin caché:
-#   curl -s -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -s x | bash -s Parámetro1 Parámetro2
+#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Jellyfin-InstalarYConfigurar.sh | bash
 # ----------
 
 # Definir variables de color
