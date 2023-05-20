@@ -801,9 +801,7 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "      Instalando paquetes de apache y relacionados..."
               echo ""
-              apt-get -y install tasksel
-              tasksel install ssh-server
-              tasksel install web-server
+              apt-get -y install apache2
               apt-get -y install apache2-utils
               apt-get -y install redis-server
               apt-get -y install imagemagick
@@ -883,6 +881,8 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "      Modificando el servidor SSH..."
               echo ""
+              #apt-get -y install tasksel
+              #tasksel install ssh-server
               cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
               echo ""                             >> /etc/ssh/sshd_config
               echo "Match Group webmasters"       >> /etc/ssh/sshd_config
