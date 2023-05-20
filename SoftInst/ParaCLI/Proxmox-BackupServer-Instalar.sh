@@ -135,23 +135,34 @@ elif [ $OS_VERS == "11" ]; then
                 fi
               wget https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
 
-            # Agregar el repositorio enterprise y comentarlo
-              echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
-
-            # Agregar el repositorio para no suscriptores
-              echo "deb http://download.proxmox.com/debian/pbs bullseye pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
-
-            # Agregar el repositorio test y comentarlo
-              echo "#deb http://download.proxmox.com/debian/pbs bullseye pbstest" > /etc/apt/sources.list.d/pbstest.list
-
-            # Agregar el repositorio client y comentarlo
-              echo "#deb http://download.proxmox.com/debian/pbs-client bullseye main" > /etc/apt/sources.list.d/pbs-client.list
+            # Establecer repositorios
+              # Agregar el repositorio enterprise y comentarlo
+                echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
+              # Agregar el repositorio para no suscriptores
+                echo "deb http://download.proxmox.com/debian/pbs bullseye pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
+              # Agregar el repositorio test y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs bullseye pbstest" > /etc/apt/sources.list.d/pbstest.list
+              # Agregar el repositorio client y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs-client bullseye main" > /etc/apt/sources.list.d/pbs-client.list
 
             # Actualizar el caché de paquetes
               apt-get -y update
 
             # Instalar cambiando el kernel (Agrega soporte ZFS) (Igual que la instalación del ISO)
               apt-get -y install proxmox-backup
+
+            # Volver a establecer repositorios
+              # Agregar el repositorio enterprise y comentarlo
+                echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
+              # Agregar el repositorio para no suscriptores
+                echo "deb http://download.proxmox.com/debian/pbs bullseye pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
+              # Agregar el repositorio test y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs bullseye pbstest" > /etc/apt/sources.list.d/pbstest.list
+              # Agregar el repositorio client y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs-client bullseye main" > /etc/apt/sources.list.d/pbs-client.list
+
+            # Actualizar todo el sistema
+              apt-get -y update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y autoremove
 
             echo ""
             echo -e "${ColorVerde}  Instalación finalizada.${FinColor}"
@@ -177,23 +188,34 @@ elif [ $OS_VERS == "11" ]; then
                 fi
               wget https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
 
-            # Agregar el repositorio enterprise y comentarlo
-              echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
-
-            # Agregar el repositorio para no suscriptores
-              echo "deb http://download.proxmox.com/debian/pbs bullseye pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
-
-            # Agregar el repositorio test y comentarlo
-              echo "#deb http://download.proxmox.com/debian/pbs bullseye pbstest" > /etc/apt/sources.list.d/pbstest.list
-
-            # Agregar el repositorio client y comentarlo
-              echo "#deb http://download.proxmox.com/debian/pbs-client bullseye main" > /etc/apt/sources.list.d/pbs-client.list
+            # Establecer repositorios
+              # Agregar el repositorio enterprise y comentarlo
+                echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
+              # Agregar el repositorio para no suscriptores
+                echo "deb http://download.proxmox.com/debian/pbs bullseye pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
+              # Agregar el repositorio test y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs bullseye pbstest" > /etc/apt/sources.list.d/pbstest.list
+              # Agregar el repositorio client y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs-client bullseye main" > /etc/apt/sources.list.d/pbs-client.list
 
             # Actualizar el caché de paquetes
               apt-get -y update
 
             # Instalar Proxmox Backup Server manteniendo el kernel instalado (Apto para contenedores)
               apt-get -y install proxmox-backup-server
+
+            # Volver a establecer repositorios
+              # Agregar el repositorio enterprise y comentarlo
+                echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
+              # Agregar el repositorio para no suscriptores
+                echo "deb http://download.proxmox.com/debian/pbs bullseye pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
+              # Agregar el repositorio test y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs bullseye pbstest" > /etc/apt/sources.list.d/pbstest.list
+              # Agregar el repositorio client y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs-client bullseye main" > /etc/apt/sources.list.d/pbs-client.list
+
+            # Actualizar todo el sistema
+              apt-get -y update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y autoremove
 
             echo ""
             echo -e "${ColorVerde}  Instalación finalizada.${FinColor}"
@@ -210,6 +232,7 @@ elif [ $OS_VERS == "11" ]; then
           ;;
         
         esac
+
       done
   
 fi
