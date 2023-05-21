@@ -332,6 +332,11 @@ elif [ $OS_VERS == "11" ]; then
               export ORACLE_SID=XE
               export PATH=$ORACLE_HOME/bin:$PATH
               echo -e "begin\n DBMS_XDB.SetListenerLocalAccess(false);\n end;\n /" | sqlplus -s "sys/Oracle0 as sysdba"
+              echo ""
+              echo "    Cambios realizados."
+              echo "    Puedes conectarte a Enterprise Manager XE desde otro ordenador accediendo a esta URL:"
+              echo "      https://$(hostname -I):5500/em"
+              echo ""
 
             ;;
 
