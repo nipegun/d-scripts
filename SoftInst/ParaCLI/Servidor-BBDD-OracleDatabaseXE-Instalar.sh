@@ -106,22 +106,24 @@ elif [ $OS_VERS == "11" ]; then
        apt-get -y install dialog
        echo ""
      fi
-  menu=(dialog --timeout 5 --checklist "Instalación del servidor Oracle Database XE:" 22 76 16)
-    opciones=(1 "Descargar paquete" on
-              2 "Convertir .rpm a .deb" on
-              3 "Intentar descargar el .deb desde hacks4geeks" off
-              4 "Crear el grupo dba" on
-              5 "Crear el usuario oracle y agregarlo al grupo dba" on
-              6 "Instalar dependencias y paquetes necesarios" on
-              7 "Instalar paquete" on
-              8 "  Crear variables de entorno" on
-              9 "  Crear el servicio en systemd" on
-             10 "  Añadir contraseña al usuario oracle" on
-             11 "  Configurar instancia" on
-             12 "  Activar e iniciar el servicio" on
-             13 "  Realizar cambios en el sistema -- no terminados --" on)
-      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-      clear
+  menu=(dialog --checklist "Instalación del servidor Oracle Database XE:" 22 76 16)
+    opciones=(
+      1 "Descargar paquete" on
+      2 "Convertir .rpm a .deb" on
+      3 "Intentar descargar el .deb desde hacks4geeks" off
+      4 "Crear el grupo dba" on
+      5 "Crear el usuario oracle y agregarlo al grupo dba" on
+      6 "Instalar dependencias y paquetes necesarios" on
+      7 "Instalar paquete" on
+      8 "  Crear variables de entorno" on
+      9 "  Crear el servicio en systemd" on
+      10 "  Añadir contraseña al usuario oracle" on
+      11 "  Configurar instancia" on
+      12 "  Activar e iniciar el servicio" on
+      13 "  Permitir Enterprise Manager desde fuera del localhost" on
+      14 "  Mostrar info de fin de instalación" on
+    )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
       for choice in $choices
         do
@@ -322,6 +324,19 @@ elif [ $OS_VERS == "11" ]; then
             13)
 
               echo ""
+              echo "  Permitiendo el acceso a Enterprise Manager XE desde fuera del localhost..."
+              echo ""
+              vVerOracleXE=S(cat /home/oracle/.bashrc | grep dbhomeXE | cut -d'/' -f5)
+              export ORACLE_HOME=/opt/oracle/product/$vVerOracleXE/dbhomeXE
+              export ORACLE_SID=XE
+              export PATH=$ORACLE_HOME/bin:$PATH
+              echo "begin DBMS_XDB.SetListenerLocalAccess( false ); end;" | sqlplus "sys/Oracle0 as sysdba"
+
+            ;;
+
+            14)
+
+              echo ""
               echo "  Servidor instalado. Para conectarte desde Oracle SQL Developer:"
               echo ""
               vNombreDelSIDPorDefecto=$(cat /home/oracle/.bashrc | grep ORACLE_SID | cut -d'=' -f2)
@@ -339,6 +354,9 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "  Y ahí ya podrás crear los usuarios que te hagan falta."
               echo ""
+              echo "  Para conectarte a Enterprose Manager XE desde este ordenador accede a la siguiente URL:"
+              echo ""
+              echo "  https://localhost:5500/em"
 
               ## Hacer cambios necesarios en el sistema
 
