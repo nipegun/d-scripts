@@ -326,11 +326,12 @@ elif [ $OS_VERS == "11" ]; then
               echo ""
               echo "  Permitiendo el acceso a Enterprise Manager XE desde fuera del localhost..."
               echo ""
-              vVerOracleXE=S(cat /home/oracle/.bashrc | grep dbhomeXE | cut -d'/' -f5)
+              #vVerOracleXE=S(cat /home/oracle/.bashrc | grep dbhomeXE | cut -d'/' -f5)
+              vVerOracleXE=S(find /opt/oracle/product -mindepth 1 -maxdepth 1 -type d | cut -d'/' -f5)
               export ORACLE_HOME=/opt/oracle/product/$vVerOracleXE/dbhomeXE
               export ORACLE_SID=XE
               export PATH=$ORACLE_HOME/bin:$PATH
-              echo "begin DBMS_XDB.SetListenerLocalAccess( false ); end;" | sqlplus "sys/Oracle0 as sysdba"
+              echo -e "begin\n DBMS_XDB.SetListenerLocalAccess(false);\n end;\n /" | sqlplus -s "sys/Oracle0 as sysdba"
 
             ;;
 
