@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar Grafana en Debian
+# ----------
+# Script de NiPeGun para instalar Grafana en Debian
 #
-#  Ejecución remota
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Grafana-Instalar.sh | bash
-#------------------------------------------------------------------------------------------------------------------
+# Ejecución remota
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Grafana-Instalar.sh | bash
+# ----------
 
 ColorRojo='\033[1;31m'
 ColorVerde='\033[1;32m'
@@ -148,6 +148,16 @@ elif [ $OS_VERS == "11" ]; then
   echo "  Activando el servicio..."
   echo ""
   systemctl enable grafana-server --now
+
+  echo ""
+  echo "  Instalando el plugin grafana-image-renderer..."
+  echo ""
+  grafana-cli plugins install grafana-image-renderer
+
+  echo ""
+  echo "  Reiniciando el servicio..."
+  echo ""
+  systemctl restart grafana-server
 
 fi
 
