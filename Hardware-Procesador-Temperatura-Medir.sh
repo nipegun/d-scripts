@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para medir la temperatura del procesador
+# Script de NiPeGun para medir la temperatura del procesador en Debian
 #
 # Ejecución remota:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Hardware-Procesador-Temperatura-Medir.sh | bash
