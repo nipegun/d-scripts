@@ -20,7 +20,7 @@ vBaseDeDatos="hardware"
 vHost=$(cat /etc/hostname)
 vSensor="procesador"
 vTemperatura=$(/root/scripts/d-scripts/Hardware-Procesador-Temperatura-Medir.sh)
-vFecha=$(awk 'BEGIN { srand(); print strftime("%s")""int(rand()*1000000000) }')
+vFecha=$(date +%s%N)
 
 curl -XPOST http://$vHostInflux:$vPuertoInflux/write?db=$vBaseDeDatos --data-binary "$vHost,sensor=$vSensor temperatura=$vTemperatura $vFecha"
 
