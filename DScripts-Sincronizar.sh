@@ -32,30 +32,32 @@
 # Comprobar si hay conexión a Internet antes de sincronizar los d-scripts
   wget -q --tries=10 --timeout=20 --spider https://github.com
   if [[ $? -eq 0 ]]; then
-    echo ""
-    echo -e "${vColorAzulClaro}  Sincronizando los d-scripts con las últimas versiones y descargando nuevos d-scripts (si es que existen)...${vFinColor}"
-    echo ""
-    rm /root/scripts/d-scripts -R 2> /dev/null
-    mkdir /root/scripts 2> /dev/null
-    cd /root/scripts
-    # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo -e "${vColorRojo}    El paquete git no está instalado. Iniciando su instalación...${vFinColor}"
-        echo ""
-        apt-get -y update
-        apt-get -y install git
-        echo ""
-      fi
-    git clone --depth=1 https://github.com/nipegun/d-scripts
-    mkdir -p /root/scripts/d-scripts/Alias/
-    rm /root/scripts/d-scripts/.git -R 2> /dev/null
-    find /root/scripts/d-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
-    echo ""
-    echo -e "${vColorVerde}    d-scripts sincronizados correctamente.${vFinColor}"
-    echo ""
-    /root/scripts/d-scripts/DScripts-CrearAlias.sh
-    find /root/scripts/d-scripts/Alias -type f -exec chmod +x {} \;
+    # Sincronizar los d-scripts
+      echo ""
+      echo -e "${vColorAzulClaro}  Sincronizando los d-scripts con las últimas versiones y descargando nuevos d-scripts (si es que existen)...${vFinColor}"
+      echo ""
+      rm /root/scripts/d-scripts -R 2> /dev/null
+      mkdir /root/scripts 2> /dev/null
+      cd /root/scripts
+      # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${vColorRojo}    El paquete git no está instalado. Iniciando su instalación...${vFinColor}"
+          echo ""
+          apt-get -y update
+          apt-get -y install git
+          echo ""
+        fi
+      git clone --depth=1 https://github.com/nipegun/d-scripts
+      rm /root/scripts/d-scripts/.git -R 2> /dev/null
+      find /root/scripts/d-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+      echo ""
+      echo -e "${vColorVerde}    d-scripts sincronizados correctamente.${vFinColor}"
+      echo ""
+    # Crear los alias
+      mkdir -p /root/scripts/d-scripts/Alias/
+      /root/scripts/d-scripts/DScripts-CrearAlias.sh
+      find /root/scripts/d-scripts/Alias -type f -exec chmod +x {} \;
   else
     echo ""
     echo -e "${vColorRojo}  No se pudo iniciar la sincronización de los d-scripts porque no se detectó conexión a Internet.${vFinColor}"
