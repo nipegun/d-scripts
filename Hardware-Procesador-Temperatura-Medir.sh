@@ -35,5 +35,10 @@
     echo ""
   fi
 
-sensors -u k10temp-pci-00c3 | grep emp1 | cut -d':' -f2 | sed 's- --g'
+# Para varios procesadores
+  #sensors -u k10temp-* | grep emp1 | cut -d':' -f2 | sed 's- --g'
+
+# Para un sólo procesador
+  vChip=$(sensors | grep k10temp)
+  sensors -u $vChip | grep emp1 | cut -d':' -f2 | sed 's- --g'
 
