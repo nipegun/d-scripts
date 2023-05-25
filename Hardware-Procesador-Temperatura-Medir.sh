@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Pongo a disposición pública este script bajo el término de "software de dominio público".
 # Puedes hacer lo que quieras con él porque es libre de verdad; no libre con condiciones como las licencias GNU y otras patrañas similares.
@@ -26,7 +26,7 @@
   fi
 
 # Comprobar si el paquete lm-sensors está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s "lm-sensors" 2>/dev/null | grep installed) == "" ]]; then
+  if [[ $(dpkg-query -s lm-sensors 2>/dev/null | grep installed) == "" ]]; then
     echo ""
     echo -e "${vColorRojo}  El paquete lm-sensors no está instalado. Iniciando su instalación...${vFinColor}"
     echo ""
