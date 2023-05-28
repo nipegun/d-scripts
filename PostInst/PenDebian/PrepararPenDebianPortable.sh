@@ -138,6 +138,8 @@ elif [ $OS_VERS == "11" ]; then
       apt-get -y install dmraid
     # ZFS
       apt-get -y install zfsutils-linux
+    # F2FS
+      apt-get -y install f2fs-tools
 
   # Herramientas gráficas
     apt-get -y install gparted
