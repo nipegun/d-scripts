@@ -140,6 +140,8 @@ elif [ $OS_VERS == "11" ]; then
       apt-get -y install zfsutils-linux
     # F2FS
       apt-get -y install f2fs-tools
+    # MTD JFFS JFFS2
+      apt-get -y install mtd-utils
 
   # Herramientas gráficas
     apt-get -y install gparted
