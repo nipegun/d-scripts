@@ -159,6 +159,14 @@ elif [ $OS_VERS == "11" ]; then
     echo ""
     echo '    ExecStart=/opt/calibre/calibre-server "/Calibre" --enable-auth --access-log "/Calibre/Access.log"'
     echo ""
+    echo "  Una vez iniciado con autenticación activada, para gestionar los usuarios deberás:"
+    echo "    1 - Parar el servidor, con:"
+    echo "      systemctl stop calibre-server"
+    echo "    2 - Lanzar el comando de administración de usuarios, con:"
+    echo "      calibre-server --manage-users"
+    echo "    3 - Volver a lanzar el servidor, con:"
+    echo "      systemctl start calibre-server"
+    echo ""
 
 fi
 
