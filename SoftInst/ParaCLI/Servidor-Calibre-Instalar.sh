@@ -157,7 +157,7 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Si quieres activar la autenticación, modifica el archivo /etc/systemd/system/calibre-server.service"
     echo "  y lanza el servidor de la siguiente manera:"
     echo ""
-    echo '    ExecStart=/opt/calibre/calibre-server "/Calibre" --enable-auth --access-log /Calibre/Access.log'
+    echo '    ExecStart=/opt/calibre/calibre-server "/Calibre" --enable-auth --access-log "/Calibre/Access.log"'
     echo ""
 
 fi
