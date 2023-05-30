@@ -148,7 +148,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             echo ""
             echo "  Arrancando ravencoind..."
             echo ""
-            su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'
+            su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh"
             sleep 5
 
             #su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/RVN/bin/raven-cli getnewaddress" > /home/$vUsuarioNoRoot/pooladdress-rvn.txt
@@ -276,7 +276,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             echo ""
             echo "  Arrancando ravencoind..."
             echo ""
-            su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'
+            su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh"
             sleep 5
 
             #su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/RVN/bin/raven-cli getnewaddress" > /home/$vUsuarioNoRoot/pooladdress-rvn.txt
@@ -319,7 +319,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             #echo "Icon="                                                           >> /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop
             gio set /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop "metadata::trusted" yes
 
-            # Autoejecución gráfica de Ravencoin
+          # Autoejecución gráfica de Ravencoin
             echo ""
             echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."
             echo ""
