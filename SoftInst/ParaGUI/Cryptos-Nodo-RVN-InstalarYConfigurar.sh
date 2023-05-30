@@ -66,7 +66,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install curl
               echo ""
             fi
-          $vEtiquetaUltVer=$(curl -sL https://ravencoin.org/wallet/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep tar.gz | sed 's|.*raven-||' | cut -d'-' -f1)
+          vEtiquetaUltVer=$(curl -sL https://ravencoin.org/wallet/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep tar.gz | sed 's|.*raven-||' | cut -d'-' -f1)
           echo ""
           echo "      La última versión de raven disponible en la web oficial es la $vEtiquetaUltVer"
           echo ""
