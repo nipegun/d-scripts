@@ -144,29 +144,30 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/RVN/ -R
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.raven/ -R
 
-          #echo ""
-          #echo "  Arrancando ravencoind..."
-          #echo ""
-          #su $vUsuarioNoRoot -c /home/$vUsuarioNoRoot/Cryptos/RVN/bin/ravend
-          #sleep 5
-          #su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/RVN/bin/raven-cli getnewaddress" > /home/$vUsuarioNoRoot/pooladdress-rvn.txt
-          #chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/pooladdress-rvn.txt
-          #echo ""
-          #echo "  La dirección para recibir ravencoins es:"
-          #echo ""
-          #cat /home/$vUsuarioNoRoot/pooladdress-rvn.txt
-          #DirCartRVN=$(cat /home/$vUsuarioNoRoot/pooladdress-rvn.txt)
-          #echo ""
+          # Iniciar el demonio
+            echo ""
+            echo "  Arrancando ravencoind..."
+            echo ""
+            su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'
+            sleep 5
 
-          # Autoejecución de Ravencoin al iniciar el sistema
+            #su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/RVN/bin/raven-cli getnewaddress" > /home/$vUsuarioNoRoot/pooladdress-rvn.txt
+            #chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/pooladdress-rvn.txt
             #echo ""
-            #echo "  Agregando ravend a los ComandosPostArranque..."
+            #echo "  La dirección para recibir ravencoins es:"
             #echo ""
-            #chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh
-            #echo "su "$vUsuarioNoRoot" -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+            #cat /home/$vUsuarioNoRoot/pooladdress-rvn.txt
+            #vDirCartRVN=$(cat /home/$vUsuarioNoRoot/pooladdress-rvn.txt)
+            #echo ""
+
+          # Autoejecución del nodo al iniciar el sistema
+            echo ""
+            echo "    Agregando ravend a los ComandosPostArranque..."
+            echo ""
+            chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh
+            echo "su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
         ;;
-
 
         2)
 
@@ -187,19 +188,19 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install curl
               echo ""
             fi
-          vEtiquetaUltVer=$(curl -sL https://github.com/RavenProject/Ravencoin/releases/latest  | sed 's-"-\n-g' | grep tree | grep ^/ | head -n1 | sed 's|.*/v||')
+          $vUltVersRaven=$(curl -sL https://github.com/RavenProject/Ravencoin/releases/latest  | sed 's-"-\n-g' | grep tree | grep ^/ | head -n1 | sed 's|.*/v||')
           echo ""
-          echo "      La última versión de raven disponible en GitHub es la $vEtiquetaUltVer"
+          echo "      La última versión de raven disponible en GitHub es la $vUltVersRaven"
           echo ""
 
           echo ""
           echo "    Determinando la URL del archivo a descargar..."
           echo ""
-          vNombreArchivo=$(curl -sL https://github.com/RavenProject/Ravencoin/releases/tag/v$vEtiquetaUltVer | grep href | grep inux | grep -v isable | grep x86 | cut -d'"' -f2 | cut -d '/' -f7)
+          vNombreArchivo=$(curl -sL https://github.com/RavenProject/Ravencoin/releases/tag/v$vUltVersRaven | grep href | grep inux | grep -v isable | grep x86 | cut -d'"' -f2 | cut -d '/' -f7)
           echo ""
           echo "      El nombre del archivo es $vNombreArchivo"
           echo ""
-          vURLArchivo="https://github.com/RavenProject/Ravencoin/releases/download/v$vEtiquetaUltVer/$vNombreArchivo"
+          vURLArchivo="https://github.com/RavenProject/Ravencoin/releases/download/v$vUltVersRaven/$vNombreArchivo"
           vURLArchivo=$(curl -sL https://ravencoin.org/wallet/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep tar.gz)
           echo ""
           echo "      La URL del archivo es: $vURLArchivo"
@@ -220,7 +221,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install wget
               echo ""
             fi
-          wget $vURLArchivo
+          wget $vURLArchivo -O /root/SoftInst/Cryptos/RVN/raven$vUltVersRaven.tar.gz
 
           echo ""
           echo "    Descomprimiendo el archivo..."
@@ -234,8 +235,8 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install tar
               echo ""
             fi
-          tar -xf /root/SoftInst/Cryptos/RVN/$vNombreArchivo
-          rm -rf /root/SoftInst/Cryptos/RVN/$vNombreArchivo
+          tar -xf /root/SoftInst/Cryptos/RVN/raven$vUltVersRaven.tar.gz
+          rm -f /root/SoftInst/Cryptos/RVN/raven$vUltVersRaven.tar.gz
           find /root/SoftInst/Cryptos/RVN/ -type d -name "raven*" -exec mv {} /root/SoftInst/Cryptos/RVN/"raven-$vUltVersRaven"/ \; 2> /dev/null
 
           echo ""
@@ -262,17 +263,37 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           find /home/$vUsuarioNoRoot/Cryptos/RVN/bin -type f -exec chmod +x {} \;
 
           # Instalar los c-scripts
-            echo ""
-            echo "    Instalando los c-scripts..."
-            echo ""
-            su $vUsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
+            su $vUsuarioNoRoot -c "curl -sL https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
             find /home/$vUsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 
           # Reparación de permisos
             chmod +x /home/$vUsuarioNoRoot/Cryptos/RVN/bin/*
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/RVN/ -R
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.raven/ -R
-            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
+
+          # Iniciar el demonio
+            echo ""
+            echo "  Arrancando ravencoind..."
+            echo ""
+            su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'
+            sleep 5
+
+            #su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/RVN/bin/raven-cli getnewaddress" > /home/$vUsuarioNoRoot/pooladdress-rvn.txt
+            #chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/pooladdress-rvn.txt
+            #echo ""
+            #echo "  La dirección para recibir ravencoins es:"
+            #echo ""
+            #cat /home/$vUsuarioNoRoot/pooladdress-rvn.txt
+            #vDirCartRVN=$(cat /home/$vUsuarioNoRoot/pooladdress-rvn.txt)
+            #echo ""
+
+          # Autoejecución del nodo al iniciar el sistema
+            echo ""
+            echo "    Agregando ravend a los ComandosPostArranque..."
+            echo ""
+            chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh
+            echo "su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+
         ;;
 
         3)
