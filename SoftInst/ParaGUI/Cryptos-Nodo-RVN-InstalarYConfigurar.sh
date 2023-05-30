@@ -37,11 +37,9 @@ echo ""
 
 menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
   opciones=(
-    1 "Instalar el nodo RVN en modo CLI" on
-    2 "Agregar la configuración para modo GUI" off
-    3 "Opción 3" off
-    4 "Opción 4" off
-    5 "Opción 5" off
+    1 "Instalar el nodo RVN en modo CLI desde la web oficial." on
+    2 "Instalar el nodo RVN en modo CLI desde la web de GitHub." off
+    3 "Agregar la configuración para modo GUI." off
   )
 choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -52,11 +50,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
         1)
 
           echo ""
-          echo "  Instalando el nodo RVN para modo CLI..."
+          echo "  Instalando el nodo RVN para modo CLI desde la web oficial..."
           echo ""
 
           echo ""
-          echo "    Determinando la última versión de raven core..."
+          echo "    Determinando la última versión de raven disponible en la web oficial..."
           echo ""
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
@@ -68,17 +66,17 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install curl
               echo ""
             fi
-          vUltVersRaven=$(curl -sL https://github.com/RavenProject/Ravencoin/releases/latest | grep inux | grep href | grep -v isable | cut -d'"' -f2 | cut -d '/' -f 6 | cut -c2- | head -n1)
+          $vEtiquetaUltVerWebOficial=$(curl -sL https://ravencoin.org/wallet/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep tar.gz | sed 's|.*raven-||' | cut -d'-' -f1)
           echo ""
-          echo "      La última versión de raven es la $vUltVersRaven"
+          echo "      La última versión de raven disponible en la web oficial es la $vEtiquetaUltVerWebOficial"
           echo ""
 
           echo ""
-          echo "    Determinando el nombre del archivo tar de la versión $vUltVersRaven..."
+          echo "    Determinando la URL del archivo a descargar..."
           echo ""
-          vNombreArchivo=$(curl -sL https://github.com/RavenProject/Ravencoin/releases/latest/ | grep href | grep inux | grep -v isable | grep x86 | cut -d'"' -f2 | cut -d '/' -f7)
+          vURLArchivo=$(curl -sL https://ravencoin.org/wallet/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep tar.gz)
           echo ""
-          echo "      El nombre del archivo es $vNombreArchivo"
+          echo "      La URL del archivo es: $vURLArchivo"
           echo ""
 
           echo ""
@@ -96,7 +94,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install wget
               echo ""
             fi
-          wget https://github.com/RavenProject/Ravencoin/releases/download/v$vUltVersRaven/$vNombreArchivo
+          wget $vURLArchivo
 
           echo ""
           echo "    Descomprimiendo el archivo..."
@@ -173,7 +171,115 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
         ;;
 
+
         2)
+
+          echo ""
+          echo "  Instalando el nodo RVN para modo CLI desde la web de GitHub..."
+          echo ""
+
+          echo ""
+          echo "    Determinando la última versión de raven disponible en GitHub..."
+          echo ""
+          # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo -e "${vColorAzulClaro}      El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
+              echo "  "
+              echo ""
+              apt-get -y update
+              apt-get -y install curl
+              echo ""
+            fi
+          vEtiquetaUltVer=$(curl -sL https://github.com/RavenProject/Ravencoin/releases/latest  | sed 's-"-\n-g' | grep tree | grep ^/ | head -n1 | sed 's|.*/v||')
+          echo ""
+          echo "      La última versión de raven disponible en GitHub es la $vEtiquetaUltVer"
+          echo ""
+
+          echo ""
+          echo "    Determinando la URL del archivo a descargar..."
+          echo ""
+          vNombreArchivo=$(curl -sL https://github.com/RavenProject/Ravencoin/releases/tag/v$vEtiquetaUltVer | grep href | grep inux | grep -v isable | grep x86 | cut -d'"' -f2 | cut -d '/' -f7)
+          echo ""
+          echo "      El nombre del archivo es $vNombreArchivo"
+          echo ""
+          vURLArchivo="https://github.com/RavenProject/Ravencoin/releases/download/v$vEtiquetaUltVer/$vNombreArchivo"
+          vURLArchivo=$(curl -sL https://ravencoin.org/wallet/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep tar.gz)
+          echo ""
+          echo "      La URL del archivo es: $vURLArchivo"
+          echo ""
+
+          echo ""
+          echo "    Intentando descargar el archivo..."
+          echo ""
+          mkdir -p /root/SoftInst/Cryptos/RVN/ 2> /dev/null
+          rm -rf /root/SoftInst/Cryptos/RVN/*
+          cd /root/SoftInst/Cryptos/RVN/
+          # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo -e "${vColorAzulClaro}      El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
+              echo ""
+              apt-get -y update
+              apt-get -y install wget
+              echo ""
+            fi
+          wget $vURLArchivo
+
+          echo ""
+          echo "    Descomprimiendo el archivo..."
+          echo ""
+          # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo -e "${vColorAzulClaro}      El paquete tar no está instalado. Iniciando su instalación...${vFinColor}"
+              echo ""
+              apt-get -y update
+              apt-get -y install tar
+              echo ""
+            fi
+          tar -xf /root/SoftInst/Cryptos/RVN/$vNombreArchivo
+          rm -rf /root/SoftInst/Cryptos/RVN/$vNombreArchivo
+          find /root/SoftInst/Cryptos/RVN/ -type d -name "raven*" -exec mv {} /root/SoftInst/Cryptos/RVN/"raven-$vUltVersRaven"/ \; 2> /dev/null
+
+          echo ""
+          echo "    Creando carpetas y archivos necesarios para ese usuario..."
+          echo ""
+          mkdir -p /home/$vUsuarioNoRoot/.raven/
+          touch    /home/$vUsuarioNoRoot/.raven/raven.conf
+          echo "rpcuser=rvnrpc"           > /home/$vUsuarioNoRoot/.raven/raven.conf
+          echo "rpcpassword=rvnrpcpass"  >> /home/$vUsuarioNoRoot/.raven/raven.conf
+          echo "rpcallowip=127.0.0.1"    >> /home/$vUsuarioNoRoot/.raven/raven.conf
+          echo "#Default RPC port 8766"  >> /home/$vUsuarioNoRoot/.raven/raven.conf
+          echo "rpcport=20401"           >> /home/$vUsuarioNoRoot/.raven/raven.conf
+          echo "server=1"                >> /home/$vUsuarioNoRoot/.raven/raven.conf
+          echo "listen=1"                >> /home/$vUsuarioNoRoot/.raven/raven.conf
+          echo "prune=550"               >> /home/$vUsuarioNoRoot/.raven/raven.conf
+          echo "daemon=1"                >> /home/$vUsuarioNoRoot/.raven/raven.conf
+          echo "gen=0"                   >> /home/$vUsuarioNoRoot/.raven/raven.conf
+          rm -rf   /home/$vUsuarioNoRoot/Cryptos/RVN/
+          mkdir -p /home/$vUsuarioNoRoot/Cryptos/RVN/ 2> /dev/null
+          mv /root/SoftInst/Cryptos/RVN/raven-$vUltVersRaven/* /home/$vUsuarioNoRoot/Cryptos/RVN/
+          chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/RVN/ -R
+          find /home/$vUsuarioNoRoot/Cryptos/RVN/ -type d -exec chmod 775 {} \;
+          find /home/$vUsuarioNoRoot/Cryptos/RVN/ -type f -exec chmod 664 {} \;
+          find /home/$vUsuarioNoRoot/Cryptos/RVN/bin -type f -exec chmod +x {} \;
+
+          # Instalar los c-scripts
+            echo ""
+            echo "    Instalando los c-scripts..."
+            echo ""
+            su $vUsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
+            find /home/$vUsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+
+          # Reparación de permisos
+            chmod +x /home/$vUsuarioNoRoot/Cryptos/RVN/bin/*
+            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/RVN/ -R
+            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.raven/ -R
+            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
+        ;;
+
+        3)
 
           echo ""
           echo "  Agregando configuración para el modo GUI..."
