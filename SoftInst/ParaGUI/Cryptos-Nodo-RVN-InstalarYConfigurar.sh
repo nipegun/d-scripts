@@ -94,7 +94,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install wget
               echo ""
             fi
-          wget $vURLArchivo
+          wget $vURLArchivo -O /root/SoftInst/Cryptos/RVN/raven$$vEtiquetaUltVerWebOficial.tar.gz
 
           echo ""
           echo "    Descomprimiendo el archivo..."
@@ -108,9 +108,9 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install tar
               echo ""
             fi
-          tar -xf /root/SoftInst/Cryptos/RVN/$vNombreArchivo
-          rm -rf /root/SoftInst/Cryptos/RVN/$vNombreArchivo
-          find /root/SoftInst/Cryptos/RVN/ -type d -name "raven*" -exec mv {} /root/SoftInst/Cryptos/RVN/"raven-$vUltVersRaven"/ \; 2> /dev/null
+          tar -xf /root/SoftInst/Cryptos/RVN/raven$vEtiquetaUltVerWebOficial.tar.gz
+          rm -f /root/SoftInst/Cryptos/RVN/raven$vEtiquetaUltVerWebOficial.tar.gz
+          find /root/SoftInst/Cryptos/RVN/ -type d -name "raven*" -exec mv {} /root/SoftInst/Cryptos/RVN/"raven-$vEtiquetaUltVerWebOficial"/ \; 2> /dev/null
 
           echo ""
           echo "    Creando carpetas y archivos necesarios para ese usuario..."
