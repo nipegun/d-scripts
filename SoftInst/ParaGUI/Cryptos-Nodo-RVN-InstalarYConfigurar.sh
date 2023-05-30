@@ -66,9 +66,9 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install curl
               echo ""
             fi
-          vEtiquetaUltVer=$(curl -sL https://ravencoin.org/wallet/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep tar.gz | sed 's|.*raven-||' | cut -d'-' -f1)
+          $vUltVersRaven=$(curl -sL https://ravencoin.org/wallet/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep tar.gz | sed 's|.*raven-||' | cut -d'-' -f1)
           echo ""
-          echo "      La última versión de raven disponible en la web oficial es la $vEtiquetaUltVer"
+          echo "      La última versión de raven disponible en la web oficial es la $vUltVersRaven"
           echo ""
 
           echo ""
@@ -94,7 +94,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install wget
               echo ""
             fi
-          wget $vURLArchivo -O /root/SoftInst/Cryptos/RVN/raven$vEtiquetaUltVer.tar.gz
+          wget $vURLArchivo -O /root/SoftInst/Cryptos/RVN/raven$vUltVersRaven.tar.gz
 
           echo ""
           echo "    Descomprimiendo el archivo..."
@@ -108,9 +108,9 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install tar
               echo ""
             fi
-          tar -xf /root/SoftInst/Cryptos/RVN/raven$vEtiquetaUltVer.tar.gz
-          rm -f /root/SoftInst/Cryptos/RVN/raven$vEtiquetaUltVer.tar.gz
-          find /root/SoftInst/Cryptos/RVN/ -type d -name "raven*" -exec mv {} /root/SoftInst/Cryptos/RVN/"raven-$vEtiquetaUltVer"/ \; 2> /dev/null
+          tar -xf /root/SoftInst/Cryptos/RVN/raven$vUltVersRaven.tar.gz
+          rm -f /root/SoftInst/Cryptos/RVN/raven$vUltVersRaven.tar.gz
+          find /root/SoftInst/Cryptos/RVN/ -type d -name "raven*" -exec mv {} /root/SoftInst/Cryptos/RVN/"raven-$vUltVersRaven"/ \; 2> /dev/null
 
           echo ""
           echo "    Creando carpetas y archivos necesarios para ese usuario..."
