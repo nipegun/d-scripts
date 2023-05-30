@@ -317,7 +317,9 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             echo "Hidden=false"                                                     >> /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop
             echo "Categories=Cryptos"                                               >> /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop
             #echo "Icon="                                                           >> /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop
+            chown $vUsuarioNoRoot:$vUsuarioNoRoot                                      /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop
             gio set /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop "metadata::trusted" yes
+            
 
           # Autoejecución gráfica de Ravencoin
             echo ""
@@ -330,6 +332,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             echo "Exec=/home/$vUsuarioNoRoot/scripts/c-scripts/rvn-gui-iniciar.sh"  >> /home/$vUsuarioNoRoot/.config/autostart/rvn.desktop
             echo "Terminal=false"                                                   >> /home/$vUsuarioNoRoot/.config/autostart/rvn.desktop
             echo "Hidden=false"                                                     >> /home/$vUsuarioNoRoot/.config/autostart/rvn.desktop
+            chown $vUsuarioNoRoot:$vUsuarioNoRoot                                      /home/$vUsuarioNoRoot/.config/autostart/rvn.desktop
             gio set /home/$vUsuarioNoRoot/.config/autostart/rvn.desktop "metadata::trusted" yes
 
         ;;
