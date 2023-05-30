@@ -304,10 +304,6 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           echo "  Agregando configuración para el modo GUI..."
           echo ""
 
-          # Parar el daemon
-            chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/rvn-daemon-parar.sh
-            su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/rvn-daemon-parar.sh"
-
           # Icono de lanzamiento en el menú gráfico
             echo ""
             echo "    Agregando la aplicación gráfica al menú..."
