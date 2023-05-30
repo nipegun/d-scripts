@@ -94,7 +94,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install wget
               echo ""
             fi
-          wget $vURLArchivo -O /root/SoftInst/Cryptos/RVN/raven$$vEtiquetaUltVerWebOficial.tar.gz
+          wget $vURLArchivo -O /root/SoftInst/Cryptos/RVN/raven$vEtiquetaUltVerWebOficial.tar.gz
 
           echo ""
           echo "    Descomprimiendo el archivo..."
