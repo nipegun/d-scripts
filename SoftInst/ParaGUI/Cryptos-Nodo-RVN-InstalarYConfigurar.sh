@@ -309,6 +309,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             echo "    Agregando la aplicación gráfica al menú..."
             echo ""
             mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
+            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/
             echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop
             echo "Name=rvn GUI"                                                     >> /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop
             echo "Type=Application"                                                 >> /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop
@@ -326,6 +327,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."
             echo ""
             mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
+            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/
             echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.config/autostart/rvn.desktop
             echo "Name=rvn GUI"                                                     >> /home/$vUsuarioNoRoot/.config/autostart/rvn.desktop
             echo "Type=Application"                                                 >> /home/$vUsuarioNoRoot/.config/autostart/rvn.desktop
