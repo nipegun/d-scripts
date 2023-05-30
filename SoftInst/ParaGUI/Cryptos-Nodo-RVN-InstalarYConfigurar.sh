@@ -66,9 +66,9 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install curl
               echo ""
             fi
-          $vEtiquetaUltVerWebOficial=$(curl -sL https://ravencoin.org/wallet/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep tar.gz | sed 's|.*raven-||' | cut -d'-' -f1)
+          $vEtiquetaUltVer=$(curl -sL https://ravencoin.org/wallet/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep tar.gz | sed 's|.*raven-||' | cut -d'-' -f1)
           echo ""
-          echo "      La última versión de raven disponible en la web oficial es la $vEtiquetaUltVerWebOficial"
+          echo "      La última versión de raven disponible en la web oficial es la $vEtiquetaUltVer"
           echo ""
 
           echo ""
@@ -94,7 +94,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install wget
               echo ""
             fi
-          wget $vURLArchivo -O /root/SoftInst/Cryptos/RVN/raven$vEtiquetaUltVerWebOficial.tar.gz
+          wget $vURLArchivo -O /root/SoftInst/Cryptos/RVN/raven$vEtiquetaUltVer.tar.gz
 
           echo ""
           echo "    Descomprimiendo el archivo..."
@@ -108,9 +108,9 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
               apt-get -y install tar
               echo ""
             fi
-          tar -xf /root/SoftInst/Cryptos/RVN/raven$vEtiquetaUltVerWebOficial.tar.gz
-          rm -f /root/SoftInst/Cryptos/RVN/raven$vEtiquetaUltVerWebOficial.tar.gz
-          find /root/SoftInst/Cryptos/RVN/ -type d -name "raven*" -exec mv {} /root/SoftInst/Cryptos/RVN/"raven-$vEtiquetaUltVerWebOficial"/ \; 2> /dev/null
+          tar -xf /root/SoftInst/Cryptos/RVN/raven$vEtiquetaUltVer.tar.gz
+          rm -f /root/SoftInst/Cryptos/RVN/raven$vEtiquetaUltVer.tar.gz
+          find /root/SoftInst/Cryptos/RVN/ -type d -name "raven*" -exec mv {} /root/SoftInst/Cryptos/RVN/"raven-$vEtiquetaUltVer"/ \; 2> /dev/null
 
           echo ""
           echo "    Creando carpetas y archivos necesarios para ese usuario..."
@@ -139,14 +139,13 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             echo ""
             echo "    Instalando los c-scripts..."
             echo ""
-            su $vUsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
+            su $vUsuarioNoRoot -c "curl -sL https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
             find /home/$vUsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 
           # Reparación de permisos
             chmod +x /home/$vUsuarioNoRoot/Cryptos/RVN/bin/*
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/RVN/ -R
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.raven/ -R
-            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
 
           #echo ""
           #echo "  Arrancando ravencoind..."
