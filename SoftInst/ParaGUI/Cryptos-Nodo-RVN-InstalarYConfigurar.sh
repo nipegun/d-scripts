@@ -130,6 +130,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           rm -rf   /home/$vUsuarioNoRoot/Cryptos/RVN/
           mkdir -p /home/$vUsuarioNoRoot/Cryptos/RVN/ 2> /dev/null
           mv /root/SoftInst/Cryptos/RVN/raven-$vUltVersRaven/* /home/$vUsuarioNoRoot/Cryptos/RVN/
+          chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/
           chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/RVN/ -R
           find /home/$vUsuarioNoRoot/Cryptos/RVN/ -type d -exec chmod 775 {} \;
           find /home/$vUsuarioNoRoot/Cryptos/RVN/ -type f -exec chmod 664 {} \;
@@ -258,6 +259,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           rm -rf   /home/$vUsuarioNoRoot/Cryptos/RVN/
           mkdir -p /home/$vUsuarioNoRoot/Cryptos/RVN/ 2> /dev/null
           mv /root/SoftInst/Cryptos/RVN/raven-$vUltVersRaven/* /home/$vUsuarioNoRoot/Cryptos/RVN/
+          chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/
           chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/RVN/ -R
           find /home/$vUsuarioNoRoot/Cryptos/RVN/ -type d -exec chmod 775 {} \;
           find /home/$vUsuarioNoRoot/Cryptos/RVN/ -type f -exec chmod 664 {} \;
