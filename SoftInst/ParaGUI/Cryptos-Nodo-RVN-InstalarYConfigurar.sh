@@ -136,9 +136,6 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           find /home/$vUsuarioNoRoot/Cryptos/RVN/bin -type f -exec chmod +x {} \;
 
           # Instalar los c-scripts
-            echo ""
-            echo "    Instalando los c-scripts..."
-            echo ""
             su $vUsuarioNoRoot -c "curl -sL https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
             find /home/$vUsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 
