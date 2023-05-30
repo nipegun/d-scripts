@@ -166,6 +166,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             echo ""
             chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh
             echo "su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+            echo ""
 
         ;;
 
@@ -293,6 +294,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             echo ""
             chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh
             echo "su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+            echo ""
 
         ;;
 
