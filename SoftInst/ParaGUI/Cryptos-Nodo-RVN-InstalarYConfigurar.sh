@@ -132,7 +132,7 @@ find /home/$vUsuarioNoRoot/Cryptos/RVN/bin -type f -exec chmod +x {} \;
   echo ""
   echo "    Agregando la aplicación gráfica al menú..."
   echo ""
-  mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
+  mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
   echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop
   echo "Name=rvn GUI"                                                     >> /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop
   echo "Type=Application"                                                 >> /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop
