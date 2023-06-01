@@ -9,13 +9,13 @@
 # Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
 #
 # Ejecución remota:
-#   curl -s x | bash
+#   curl -sL x | bash
 #
 # Ejecución remota sin caché:
-#   curl -s -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
 #
 # Ejecución remota con parámetros:
-#   curl -s x | bash -s Parámetro1 Parámetro2
+#   curl -sL x | bash -s Parámetro1 Parámetro2
 # ----------
 
 # Definir variables de color
