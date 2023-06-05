@@ -6,33 +6,35 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar Nginx Proxy Manager en Debian
+# Script de NiPeGun para instalar y configurar Nginx Proxy Manager en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/npm-InstalarYConfigurar.sh | bash
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/npm-InstalarYConfigurar.sh | bash
 #
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/npm-InstalarYConfigurar.sh | bash
+# Ejecución remota sin caché:
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/npm-InstalarYConfigurar.sh | bash
 # ----------
 
-vColorAzul="\033[0;34m"
-vColorAzulClaro="\033[1;34m"
-vColorVerde='\033[1;32m'
-vColorRojo='\033[1;31m'
-vFinColor='\033[0m'
+# Definir variables de color
+  vColorAzul="\033[0;34m"
+  vColorAzulClaro="\033[1;34m"
+  vColorVerde='\033[1;32m'
+  vColorRojo='\033[1;31m'
+  vFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${vColorRojo}Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
     exit 1
   fi
 
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${vColorRojo}curl no está instalado. Iniciando su instalación...${vFinColor}"
+    echo -e "${vColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
     echo ""
-    apt-get -y update && apt-get -y install curl
+    apt-get -y update
+    apt-get -y install curl
     echo ""
   fi
 
@@ -59,54 +61,54 @@ vFinColor='\033[0m'
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de Nginx Proxy Manager para Debian 7 (Wheezy)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Nginx Proxy Manager para Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de Nginx Proxy Manager para Debian 8 (Jessie)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Nginx Proxy Manager para Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de Nginx Proxy Manager para Debian 9 (Stretch)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Nginx Proxy Manager para Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de Nginx Proxy Manager para Debian 10 (Buster)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Nginx Proxy Manager para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${vColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de Nginx Proxy Manager para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Nginx Proxy Manager para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   vCarpetaTemporal=$(mktemp -d)
 
   # Limpiar
     echo ""
-    echo "  Limpiando el sistema..."
+    echo "    Limpiando el sistema..."
     echo ""
     apt-get -y remove --purge git
     apt-get -y remove --purge build-essential
@@ -121,7 +123,7 @@ elif [ $OS_VERS == "11" ]; then
   # Comprobar si hay una instalación previa y detener todos los servicios
     if [ -f /lib/systemd/system/npm.service ]; then
       echo ""
-      echo "  Se ha encontrado una instalación previa. Deteniendo servicios..."
+      echo "    Se ha encontrado una instalación previa. Deteniendo servicios..."
       echo ""
       systemctl stop openresty
       systemctl stop npm
@@ -129,7 +131,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Limpiar todo para la nueva instalación
     echo ""
-    echo "  Se ha encontrado una instalación previa. Limpiando archivos..."
+    echo "    Se ha encontrado una instalación previa. Limpiando archivos..."
     echo ""
     rm -rf /app
     rm -rf /var/www/html
@@ -140,7 +142,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Instalar dependencias
     echo ""
-    echo "  Instalando dependencias..."
+    echo "    Instalando dependencias..."
     echo ""
     apt-get -y install --no-install-recommends git
     apt-get -y install --no-install-recommends build-essential
@@ -155,7 +157,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Instalar Python
     echo ""
-    echo "  Instalando y configurando Python..."
+    echo "    Instalando y configurando Python..."
     echo ""
     apt-get -y -q install --no-install-recommends python3
     apt-get -y -q install --no-install-recommends python3-distutils
@@ -193,7 +195,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Crear los enlaces simbólicos
     echo ""
-    echo "  Creando los enlaces simbólicos..."
+    echo "    Creando los enlaces simbólicos..."
     echo ""
     ln -sf /usr/bin/python3                      /usr/bin/python
     ln -sf /opt/certbot/bin/pip                  /usr/bin/pip
@@ -203,14 +205,14 @@ elif [ $OS_VERS == "11" ]; then
 
   # Actualizar la versión de NPM en los archivos package.json
     echo ""
-    echo "Actualizando la versión de NPM en los archivos package.json..."
+    echo "    Actualizando la versión de NPM en los archivos package.json..."
     echo ""
     sed -i "s+0.0.0+$vUltVersNPM+g" backend/package.json
     sed -i "s+0.0.0+$vUltVersNPM+g" frontend/package.json
 
   # Adaptar los archivos de configuración de nginx a la configuración por defecto de openresty
     echo ""
-    echo "  Adaptando los archivos de configuración de nginx a la configuración por defecto de openresty..."
+    echo "    Adaptando los archivos de configuración de nginx a la configuración por defecto de openresty..."
     echo ""
     sed -i 's+^daemon+#daemon+g' docker/rootfs/etc/nginx/nginx.conf
     vConfNginx=$(find "$(pwd)" -type f -name "*.conf")
@@ -220,7 +222,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Copiar archivos runtime
     echo ""
-    echo "  Copiando archivos runtime..."
+    echo "    Copiando archivos runtime..."
     echo ""
     mkdir -p /var/www/html
     mkdir -p /etc/nginx/logs
@@ -233,7 +235,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Crear las carpetas requeridas
     echo ""
-    echo "  Creando las carpetas requeridas..."
+    echo "    Creando las carpetas requeridas..."
     echo ""
     mkdir -p /tmp/nginx/body
     mkdir -p /run/nginx
@@ -261,14 +263,14 @@ elif [ $OS_VERS == "11" ]; then
   # Generate dummy self-signed certificate.
     if [ ! -f /data/nginx/dummycert.pem ] || [ ! -f /data/nginx/dummykey.pem ]; then
       echo ""
-      echo "  Generando el certificado SSL dummy..."
+      echo "    Generando el certificado SSL dummy..."
       echo ""
       openssl req -new -newkey rsa:2048 -days 3650 -nodes -x509 -subj "/O=Nginx Proxy Manager/OU=Dummy Certificate/CN=localhost" -keyout /data/nginx/dummykey.pem -out /data/nginx/dummycert.pem
     fi
 
   # Copy app files
     echo ""
-    echo "  Copiando los archivos de aplicación..."
+    echo "    Copiando los archivos de aplicación..."
     echo ""
     mkdir -p /app/global
     mkdir -p /app/frontend/images
@@ -277,7 +279,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Build the frontend
     echo ""
-    echo "  Construyendo el frontend.."
+    echo "    Construyendo el frontend.."
     echo ""
     cd ./frontend
     export NODE_ENV=development
@@ -288,7 +290,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Inicializar backend
     echo ""
-    echo "  Inicializando backend..."
+    echo "    Inicializando backend..."
     echo ""
     rm -rf /app/config/default.json
     if [ ! -f /app/config/production.json ]; then
@@ -310,7 +312,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Crear el servicio NPM
     echo ""
-    echo "  Creando el servicio npm..."
+    echo "    Creando el servicio npm..."
     echo ""
     echo "[Unit]"                                                                                   > /lib/systemd/system/npm.service
     echo "Description=Nginx Proxy Manager"                                                         >> /lib/systemd/system/npm.service
@@ -332,7 +334,7 @@ elif [ $OS_VERS == "11" ]; then
 
   # Arrancar servicios
     echo ""
-    echo "  Arrancando servicios..."
+    echo "    Arrancando servicios..."
     echo ""
     systemctl start openresty
     systemctl start npm
@@ -340,14 +342,14 @@ elif [ $OS_VERS == "11" ]; then
   # Mostrar mensaje final
     vIPLocal=$(hostname -I | cut -f1 -d ' ')
     echo ""
-    echo "  Instalación completa."
+    echo "    Instalación completa."
     echo ""
-    echo "  Para conectarte a NPM accede a: http://${vIPLocal}:81"
+    echo "    Para conectarte a NPM accede a: http://${vIPLocal}:81"
     echo ""
-    echo "  El mail por defecto es: admin@example.com"
-    echo "  La contraseña por defecto es: changeme"
+    echo "    El mail por defecto es: admin@example.com"
+    echo "    La contraseña por defecto es: changeme"
     echo ""
-    echo "  La primera vez que te conectes te pedirá que los cambies."
+    echo "    La primera vez que te conectes te pedirá que los cambies."
     echo ""
 
 fi
