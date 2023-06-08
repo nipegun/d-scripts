@@ -21,6 +21,14 @@ vHost=$(cat /etc/hostname)
 vSensor="procesador"
 vTemperatura=$(/root/scripts/d-scripts/Hardware-Procesador-Temperatura-Medir.sh)
 vFecha=$(date +%s%N)
-
+# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo -e "${vColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
+    echo ""
+    apt-get -y update
+    apt-get -y install curl
+    echo ""
+  fi
 curl -XPOST http://$vHostInflux:$vPuertoInflux/write?db=$vBaseDeDatos --data-binary "$vHost,sensor=$vSensor temperatura=$vTemperatura $vFecha"
 
