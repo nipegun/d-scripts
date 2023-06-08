@@ -47,9 +47,8 @@
 # Obtener identificadores de dispositivos y temperaturas
   for i in "${aDiscosTotales[@]}"
     do
-      echo $i | cut -d' ' -f1
-
-      nvme smart-log "$vDispActual" | grep temperature | cut -d':' -f2 | cut -d' ' -f2
-      echo ""
+      vDispActual=$(echo $i | cut -d' ' -f1)
+      vTempDispActual=$(nvme smart-log "$vDispActual" | grep temperature | cut -d':' -f2 | cut -d' ' -f2)
+      echo $vDispActual $vTempDispActual
     done
 
