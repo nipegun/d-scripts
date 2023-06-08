@@ -71,7 +71,7 @@ vTemperatura=$(/root/scripts/d-scripts/Hardware-Procesador-Temperatura-Medir.sh)
       # Obtener el identificador del dispositivo
         vIdDispNVMe=$(echo $i | cut -d' ' -f1)
       # Asignar nombre al sensor
-        vSensor="$vIdDispNVMe"
+        vSensor=$(echo $vIdDispNVMe | cut -d'/' -f3)
       # Obtener la temperatura
         vTemperatura=$(nvme smart-log "$vIdDispNVMe" | grep temperature | cut -d':' -f2 | cut -d' ' -f2)
       # Registrar
