@@ -75,7 +75,6 @@ vTemperatura=$(/root/scripts/d-scripts/Hardware-Procesador-Temperatura-Medir.sh)
       # Obtener la temperatura
         vTemperatura=$(nvme smart-log "$vIdDispNVMe" | grep temperature | cut -d':' -f2 | cut -d' ' -f2)
       # Registrar
-        #curl -XPOST http://$vHostInflux:$vPuertoInflux/write?db=$vBaseDeDatos --data-binary "$vHost,sensor=$vSensor temperatura=$vTemperatura $vFecha"
-        echo $vSensor $vTemperatura
+        curl -XPOST http://$vHostInflux:$vPuertoInflux/write?db=$vBaseDeDatos --data-binary "$vHost,sensor=$vSensor temperatura=$vTemperatura $vFecha"
     done
 
