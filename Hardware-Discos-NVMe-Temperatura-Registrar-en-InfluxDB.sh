@@ -49,7 +49,7 @@
     do
       echo $i
       vDispActual=$(echo $i | cut -d' ' -f1)
-      nvme smart-log "$vDispActual" | grep temperature cut -d':' -f2 | cut -d' ' -f2
+      nvme smart-log "$vDispActual" | grep temperature | cut -d':' -f2 | cut -d' ' -f2
       echo ""
     done
 
