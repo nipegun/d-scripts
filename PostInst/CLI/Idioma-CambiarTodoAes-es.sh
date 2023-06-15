@@ -6,15 +6,24 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para cambiar el idioma del sistema y del teclado a sólo español
+# Script de NiPeGun para cambiar el idioma del sistema y del teclado a sólo español
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Idioma-CambiarTodoAes-es.sh | bash
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Idioma-CambiarTodoAes-es.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+# Definir variables de color
+  vColorAzul="\033[0;34m"
+  vColorAzulClaro="\033[1;34m"
+  vColorVerde='\033[1;32m'
+  vColorRojo='\033[1;31m'
+  vFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    exit 1
+  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
@@ -191,6 +200,42 @@ elif [ $OS_VERS == "11" ]; then
     echo "  Debes reiniciar el sistema para que los cambios tengan efecto."
     echo "------------------------------------------------------------------"
     echo ""
+
+elif [ $OS_VERS == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de cambio de idioma a español en Debian 12 (Bookworm)..."
+  echo ""
+
+  # Poner que sólo se genere el español de España cuando se creen locales
+    echo "es_ES.UTF-8 UTF-8" > /etc/locale.gen
+
+  # Compilar los locales borrando primero los existentes y dejando nada más que el español de España
+    apt-get -y update
+    apt-get -y install locales
+    locale-gen --purge es_ES.UTF-8
+
+  # Modificar el archivo /etc/default/locale reflejando los cambios
+    echo 'LANG="es_ES.UTF-8"'   > /etc/default/locale
+    echo 'LANGUAGE="es_ES:es"' >> /etc/default/locale
+
+  # Poner el teclado en español de España
+    echo 'XKBMODEL="pc105"'   > /etc/default/keyboard
+    echo 'XKBLAYOUT="es"'    >> /etc/default/keyboard
+    echo 'XKBVARIANT=""'     >> /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     >> /etc/default/keyboard
+    echo ''                  >> /etc/default/keyboard
+    echo 'BACKSPACE="guess"' >> /etc/default/keyboard
+    echo ''                  >> /etc/default/keyboard
+
+  # Notificar cambios
+    echo ""
+    echo "------------------------------------------------------------------"
+    echo "  Cambios realizados."
+    echo "  Debes reiniciar el sistema para que los cambios tengan efecto."
+    echo "------------------------------------------------------------------"
+    echo ""
+
 
 fi
 
