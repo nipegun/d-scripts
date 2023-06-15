@@ -77,14 +77,14 @@ elif [ $OS_VERS == "9" ]; then
   echo "-----------------------------------------------------------------------------"
   echo ""
 
-  mkdir -p /root/scripts/ 2> /dev/null
-  echo '#!/bin/bash'                                                                         > /root/scripts/ComandosIPTables.sh
-  echo ""                                                                                   >> /root/scripts/ComandosIPTables.sh
-  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE IPTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/ComandosIPTables.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ComandosIPTables.sh
-  echo ""                                                                                   >> /root/scripts/ComandosIPTables.sh
-  chmod 700                                                                                    /root/scripts/ComandosIPTables.sh
-  echo "/root/scripts/ComandosIPTables.sh" >> /root/scripts/ComandosPostArranque.sh
+  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                         > /root/scripts/EsteDebian/ComandosIPTables.sh
+  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosIPTables.sh
+  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE IPTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/EsteDebian/ComandosIPTables.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/EsteDebian/ComandosIPTables.sh
+  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosIPTables.sh
+  chmod 700                                                                                    /root/scripts/EsteDebian/ComandosIPTables.sh
+  echo "/root/scripts/EsteDebian/ComandosIPTables.sh" >> /root/scripts/EsteDebian/ComandosPostArranque.sh
 
 elif [ $OS_VERS == "10" ]; then
 
@@ -94,14 +94,14 @@ elif [ $OS_VERS == "10" ]; then
   echo "-----------------------------------------------------------------------------"
   echo ""
 
-  mkdir -p /root/scripts/ 2> /dev/null
-  echo '#!/bin/bash'                                                                         > /root/scripts/ComandosNFTables.sh
-  echo ""                                                                                   >> /root/scripts/ComandosNFTables.sh
-  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/ComandosNFTables.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ComandosNFTables.sh
-  echo ""                                                                                   >> /root/scripts/ComandosNFTables.sh
-  chmod 700                                                                                    /root/scripts/ComandosNFTables.sh
-  echo "/root/scripts/ComandosNFTables.sh" >> /root/scripts/ComandosPostArranque.sh
+  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                         > /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosNFTables.sh
+  chmod 700                                                                                    /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo "/root/scripts/EsteDebian/ComandosNFTables.sh" >> /root/scripts/EsteDebian/ComandosPostArranque.sh
 
 elif [ $OS_VERS == "11" ]; then
 
@@ -111,14 +111,14 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
-  mkdir -p /root/scripts/ 2> /dev/null
-  echo '#!/bin/bash'                                                                         > /root/scripts/ComandosNFTables.sh
-  echo ""                                                                                   >> /root/scripts/ComandosNFTables.sh
-  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/ComandosNFTables.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ComandosNFTables.sh
-  echo ""                                                                                   >> /root/scripts/ComandosNFTables.sh
-  chmod 700                                                                                    /root/scripts/ComandosNFTables.sh
-  echo "/root/scripts/ComandosNFTables.sh" >> /root/scripts/ComandosPostArranque.sh
+  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                         > /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosNFTables.sh
+  chmod 700                                                                                    /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo "/root/scripts/EsteDebian/ComandosNFTables.sh" >> /root/scripts/EsteDebian/ComandosPostArranque.sh
 
 elif [ $OS_VERS == "12" ]; then
 
