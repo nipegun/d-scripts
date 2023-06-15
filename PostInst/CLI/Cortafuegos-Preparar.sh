@@ -6,15 +6,24 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para preparar el cortafuegos
+# Script de NiPeGun para preparar el cortafuegos
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Cortafuegos-Preparar.sh | bash
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Cortafuegos-Preparar.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+# Definir variables de color
+  vColorAzul="\033[0;34m"
+  vColorAzulClaro="\033[1;34m"
+  vColorVerde='\033[1;32m'
+  vColorRojo='\033[1;31m'
+  vFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    exit 1
+  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
@@ -110,6 +119,21 @@ elif [ $OS_VERS == "11" ]; then
   echo ""                                                                                   >> /root/scripts/ComandosNFTables.sh
   chmod 700                                                                                    /root/scripts/ComandosNFTables.sh
   echo "/root/scripts/ComandosNFTables.sh" >> /root/scripts/ComandosPostArranque.sh
+
+elif [ $OS_VERS == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script para preparar el cortafuegos de Debian 12 (Bookworm)..."
+  echo ""
+
+  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                         > /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosNFTables.sh
+  chmod 700                                                                                    /root/scripts/EsteDebian/ComandosNFTables.sh
+  echo "/root/scripts/EsteDebian/ComandosNFTables.sh" >> /root/scripts/EsteDebian/ComandosPostArranque.sh
 
 fi
 
