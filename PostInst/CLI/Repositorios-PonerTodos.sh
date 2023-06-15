@@ -12,9 +12,18 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-PonerTodos.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+# Definir variables de color
+  vColorAzul="\033[0;34m"
+  vColorAzulClaro="\033[1;34m"
+  vColorVerde='\033[1;32m'
+  vColorRojo='\033[1;31m'
+  vFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    exit 1
+  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
@@ -56,7 +65,7 @@ elif [ $OS_VERS == "8" ]; then
   echo "----------------------------------------------------------------------------"
   echo ""
 
-  cp /etc/apt/sources.list /etc/apt/sources.list.bak
+  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
   echo "deb http://ftp.debian.org/debian/ jessie main contrib non-free"              > /etc/apt/sources.list
   echo "deb-src http://ftp.debian.org/debian/ jessie main contrib non-free"         >> /etc/apt/sources.list
@@ -77,7 +86,7 @@ elif [ $OS_VERS == "9" ]; then
   echo "-----------------------------------------------------------------------------"
   echo ""
 
-  cp /etc/apt/sources.list /etc/apt/sources.list.bak
+  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
   echo "deb http://ftp.debian.org/debian/ stretch main contrib non-free"              > /etc/apt/sources.list
   echo "deb-src http://ftp.debian.org/debian/ stretch main contrib non-free"         >> /etc/apt/sources.list
@@ -98,7 +107,7 @@ elif [ $OS_VERS == "10" ]; then
   echo "------------------------------------------------------------------------------"
   echo ""
 
-  cp /etc/apt/sources.list /etc/apt/sources.list.bak
+  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
   echo "deb http://deb.debian.org/debian/ buster main contrib non-free"              > /etc/apt/sources.list
   echo "deb-src http://deb.debian.org/debian/ buster main contrib non-free"         >> /etc/apt/sources.list
@@ -119,7 +128,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "--------------------------------------------------------------------------------"
   echo ""
 
-  cp /etc/apt/sources.list /etc/apt/sources.list.bak
+  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
   echo "deb http://deb.debian.org/debian bullseye main contrib non-free"                         > /etc/apt/sources.list
   echo "deb-src http://deb.debian.org/debian bullseye main contrib non-free"                    >> /etc/apt/sources.list
@@ -131,6 +140,26 @@ elif [ $OS_VERS == "11" ]; then
   echo "deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free"            >> /etc/apt/sources.list
   echo ""                                                                                       >> /etc/apt/sources.list
   echo ""
-  
+
+elif [ $OS_VERS == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script para agregar todos los repos de Debian 12 (Bookworm)..."
+  echo ""
+
+  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
+
+  echo "deb http://deb.debian.org/debian bookworm main contrib non-free"                         > /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian bookworm main contrib non-free"                    >> /etc/apt/sources.list
+  echo ""                                                                                       >> /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian-security/ bookworm-security main contrib non-free"     >> /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian-security/ bookworm-security main contrib non-free" >> /etc/apt/sources.list
+  echo ""                                                                                       >> /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free"                >> /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free"            >> /etc/apt/sources.list
+  echo ""                                                                                       >> /etc/apt/sources.list
+  echo ""
+
+
 fi
 
