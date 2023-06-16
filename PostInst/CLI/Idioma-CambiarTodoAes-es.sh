@@ -48,21 +48,17 @@
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de cambio de idioma a español en Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de cambio de idioma a español en Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales
@@ -87,18 +83,14 @@ elif [ $OS_VERS == "8" ]; then
 
   # Notificar cambios
     echo ""
-    echo "------------------------------------------------------------------"
-    echo "  Cambios realizados."
-    echo "  Debes reiniciar el sistema para que los cambios tengan efecto."
-    echo "------------------------------------------------------------------"
+    echo -e "${vColorAzulClaro}    Cambios realizados.${vFinColor}"
+    echo -e "${vColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${vFinColor}"
     echo ""
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de cambio de idioma a español en Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales
@@ -123,18 +115,14 @@ elif [ $OS_VERS == "9" ]; then
 
   # Notificar cambios
     echo ""
-    echo "------------------------------------------------------------------"
-    echo "  Cambios realizados."
-    echo "  Debes reiniciar el sistema para que los cambios tengan efecto."
-    echo "------------------------------------------------------------------"
+    echo -e "${vColorAzulClaro}    Cambios realizados.${vFinColor}"
+    echo -e "${vColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${vFinColor}"
     echo ""
 
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script de cambio de idioma a español en Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales
@@ -159,18 +147,14 @@ elif [ $OS_VERS == "10" ]; then
 
   # Notificar cambios
     echo ""
-    echo "------------------------------------------------------------------"
-    echo "  Cambios realizados."
-    echo "  Debes reiniciar el sistema para que los cambios tengan efecto."
-    echo "------------------------------------------------------------------"
+    echo -e "${vColorVerde}    Cambios realizados.${vFinColor}"
+    echo -e "${vColorVerde}    Debes reiniciar el sistema para que los cambios tengan efecto.${vFinColor}"
     echo ""
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
-  echo "  Iniciando el script de cambio de idioma a español en Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales
@@ -195,16 +179,14 @@ elif [ $OS_VERS == "11" ]; then
 
   # Notificar cambios
     echo ""
-    echo "------------------------------------------------------------------"
-    echo "  Cambios realizados."
-    echo "  Debes reiniciar el sistema para que los cambios tengan efecto."
-    echo "------------------------------------------------------------------"
+    echo -e "${vColorVerde}    Cambios realizados.${vFinColor}"
+    echo -e "${vColorVerde}    Debes reiniciar el sistema para que los cambios tengan efecto.${vFinColor}"
     echo ""
 
 elif [ $OS_VERS == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script de cambio de idioma a español en Debian 12 (Bookworm)..."
+  echo -e "${vColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 12 (Bookworm)...${vFinColor}"
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales
@@ -230,10 +212,8 @@ elif [ $OS_VERS == "12" ]; then
 
   # Notificar cambios
     echo ""
-    echo "------------------------------------------------------------------"
-    echo "  Cambios realizados."
-    echo "  Debes reiniciar el sistema para que los cambios tengan efecto."
-    echo "------------------------------------------------------------------"
+    echo -e "${vColorVerde}    Cambios realizados.${vFinColor}"
+    echo -e "${vColorVerde}    Debes reiniciar el sistema para que los cambios tengan efecto.${vFinColor}"
     echo ""
 
 
