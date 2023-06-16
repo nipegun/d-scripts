@@ -48,96 +48,86 @@
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación y configuración de sensores de hardware en Debian 7 (Wheezy)..."
-  echo "------------------------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación y configuración de sensores de hardware en Debian 8 (Jessie)..."
-  echo "------------------------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación y configuración de sensores de hardware en Debian 9 (Stretch)..."
-  echo "-------------------------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación y configuración de sensores de hardware en Debian 10 (Buster)..."
-  echo "-------------------------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${ColorVerde}  Instalando el paquete lm-sensors...${FinColor}"
+  echo "    Instalando el paquete lm-sensors..."
   echo ""
   apt-get -y update
   apt-get -y install lm-sensors
 
   echo ""
-  echo -e "${ColorVerde}  Instalando el paquete hddtemp...${FinColor}"
+  echo "    Instalando el paquete hddtemp..."
   echo ""
   apt-get -y update
   apt-get -y install hddtemp
 
   echo ""
-  echo -e "${ColorVerde}  Detectando los sensores...${FinColor}"
+  echo "    Detectando los sensores..."
   echo ""
   /usr/bin/yes YES | /usr/sbin/sensors-detect
 
   echo ""
-  echo -e "${ColorVerde}  Activando el módulo del kernel...${FinColor}"
+  echo "    Activando el módulo del kernel..."
   echo ""
   /etc/init.d/kmod start
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación y configuración de sensores de hardware en Debian 11 (Bullseye)..."
-  echo "---------------------------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${ColorVerde}  Instalando el paquete lm-sensors...${FinColor}"
+  echo "    Instalando el paquete lm-sensors..."
   echo ""
   apt-get -y update
   apt-get -y install lm-sensors
 
   echo ""
-  echo -e "${ColorVerde}  Instalando el paquete hddtemp...${FinColor}"
+  echo "    Instalando el paquete hddtemp..."
   echo ""
   apt-get -y update
   apt-get -y install hddtemp
 
   echo ""
-  echo -e "${ColorVerde}  Detectando los sensores...${FinColor}"
+  echo "    Detectando los sensores..."
   echo ""
   /usr/bin/yes YES | /usr/sbin/sensors-detect
 
   echo ""
-  echo -e "${ColorVerde}  Activando el módulo del kernel...${FinColor}"
+  echo "    Activando el módulo del kernel..."
   echo ""
   /etc/init.d/kmod start
 
