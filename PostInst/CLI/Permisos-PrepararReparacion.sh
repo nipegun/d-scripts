@@ -25,9 +25,11 @@
     exit 1
   fi
 
-echo ""
-echo -e "${vColorAzulClaro}  Iniciando script para crear el script de reparación de permisos...${vFinColor}"
-echo ""
+# Notificar inicio de ejecución del script
+  echo ""
+  echo -e "${vColorAzulClaro}  Iniciando script para crear el script de reparación de permisos...${vFinColor}"
+  echo ""
+
 mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
 echo '#!/bin/bash'                                                                                   > /root/scripts/RepararPermisos.sh
 echo ""                                                                                             >> /root/scripts/RepararPermisos.sh
