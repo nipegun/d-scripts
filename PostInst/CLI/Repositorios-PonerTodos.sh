@@ -48,21 +48,17 @@
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------"
-  echo "  Iniciando el script para agregar todos los repos de Debian 7 (Wheezy)..."
-  echo "----------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------"
-  echo "  Iniciando el script para agregar todos los repos de Debian 8 (Jessie)..."
-  echo "----------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
@@ -81,9 +77,7 @@ elif [ $OS_VERS == "8" ]; then
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script para agregar todos los repos de Debian 9 (Stretch)..."
-  echo "-----------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
@@ -102,9 +96,7 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
-  echo "  Iniciando el script para agregar todos los repos de Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
@@ -123,9 +115,7 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
-  echo "  Iniciando el script para agregar todos los repos de Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
@@ -144,7 +134,7 @@ elif [ $OS_VERS == "11" ]; then
 elif [ $OS_VERS == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script para agregar todos los repos de Debian 12 (Bookworm)..."
+  echo -e "${vColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 12 (Bookworm)...${vFinColor}"
   echo ""
 
   cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
