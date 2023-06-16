@@ -25,6 +25,11 @@
     exit 1
   fi
 
+# Notificar inicio de ejecución del script
+  echo ""
+  echo -e "${vColorAzulClaro}  Iniciando script para preparar Debian sin entorno gráfico a gusto de NiPeGun...${vFinColor}"
+  echo ""
+
 # Preparar ComandosPostArranque (rc.local)
   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
 
