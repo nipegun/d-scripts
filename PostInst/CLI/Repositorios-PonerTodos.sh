@@ -150,6 +150,5 @@ elif [ $OS_VERS == "12" ]; then
   echo ""                                                                                       >> /etc/apt/sources.list
   echo ""
 
-
 fi
 
