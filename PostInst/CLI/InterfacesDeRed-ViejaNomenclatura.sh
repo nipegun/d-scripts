@@ -26,17 +26,13 @@
   fi
 
 echo ""
-echo -e "${ColorVerde}Cambiando el nombre de las interfaces de red...${FinColor}"
+echo "    Realizando cambios en /etc/default/grub..."
 echo ""
 sed -i -e 's|GRUB_CMDLINE_LINUX=""|GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"|g' /etc/default/grub
-
-echo ""
-echo -e "${ColorVerde}Acortando el tiempo de espera de grub...${FinColor}"
-echo ""
 sed -i -e "s|GRUB_TIMEOUT=5|GRUB_TIMEOUT=1|g" /etc/default/grub
 
 echo ""
-echo -e "${ColorVerde}Actualizando grub...${FinColor}"
+echo "    Actualizando grub..."
 echo ""
 update-grub
 
