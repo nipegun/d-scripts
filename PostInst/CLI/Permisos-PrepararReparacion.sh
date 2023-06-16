@@ -26,11 +26,9 @@
   fi
 
 echo ""
-echo "----------------------------------------------"
-echo "  CREANDO EL ARCHIVO PARA METER LOS COMANDOS"
-echo "----------------------------------------------"
+echo -e "${vColorAzulClaro}  Iniciando script para crear el script de reparación de permisos...${vFinColor}"
 echo ""
-mkdir -p /root/scripts/ 2> /dev/null
+mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
 echo '#!/bin/bash'                                                                                   > /root/scripts/RepararPermisos.sh
 echo ""                                                                                             >> /root/scripts/RepararPermisos.sh
 echo 'FechaDeEjecucion=$(date +A%YM%mD%d@%T)'                                                       >> /root/scripts/RepararPermisos.sh
