@@ -26,7 +26,7 @@
   fi
 
 echo ""
-echo -e "${ColorVerde}Configurando las interfaces de red...${FinColor}"
+echo -e "${vColorAzulClaro}  Iniciando el script para configurar loopback y eth0 por por DHCP...${vFinColor}"
 echo ""
 echo "auto lo"                   > /etc/network/interfaces
 echo "  iface lo inet loopback" >> /etc/network/interfaces
