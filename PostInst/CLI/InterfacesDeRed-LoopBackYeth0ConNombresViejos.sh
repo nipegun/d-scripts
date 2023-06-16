@@ -25,14 +25,20 @@
     exit 1
   fi
 
-echo ""
-echo -e "${vColorAzulClaro}  Iniciando el script para configurar loopback y eth0 por por DHCP...${vFinColor}"
-echo ""
-echo "auto lo"                   > /etc/network/interfaces
-echo "  iface lo inet loopback" >> /etc/network/interfaces
-echo ""                         >> /etc/network/interfaces
-echo "auto eth0"                >> /etc/network/interfaces
-echo "  allow-hotplug eth0"     >> /etc/network/interfaces
-echo "  iface eth0 inet dhcp"   >> /etc/network/interfaces
-echo ""                         >> /etc/network/interfaces
+# Notificar inicio de ejecución del script
+  echo ""
+  echo -e "${vColorAzulClaro}  Iniciando el script para configurar loopback y eth0 por por DHCP...${vFinColor}"
+  echo ""
+
+# Modificar /etc/network/interfaces
+  echo ""
+  echo "    Modificando /etc/network/interfaces..."
+  echo ""
+  echo "auto lo"                   > /etc/network/interfaces
+  echo "  iface lo inet loopback" >> /etc/network/interfaces
+  echo ""                         >> /etc/network/interfaces
+  echo "auto eth0"                >> /etc/network/interfaces
+  echo "  allow-hotplug eth0"     >> /etc/network/interfaces
+  echo "  iface eth0 inet dhcp"   >> /etc/network/interfaces
+  echo ""                         >> /etc/network/interfaces
 
