@@ -93,5 +93,15 @@ elif [ $OS_VERS == "11" ]; then
   echo "deb http://deb.debian.org/debian unstable main contrib non-free" > /etc/apt/sources.list.d/unstable.list
   apt-get -y update
 
+elif [ $OS_VERS == "12" ]; then
+
+  echo ""
+  echo -e "${vColorAzulClaro}  Iniciando el script ... Debian 12 (Bookworm)...${vFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${vColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo ""
+
 fi
 
