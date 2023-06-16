@@ -96,7 +96,7 @@ elif [ $OS_VERS == "11" ]; then
 elif [ $OS_VERS == "12" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script ... Debian 12 (Bookworm)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script para agregar el repositorio unstable a Debian 12 (Bookworm)...${vFinColor}"
   echo ""
 
   echo ""
