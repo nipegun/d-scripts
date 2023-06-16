@@ -24,15 +24,22 @@
     echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
     exit 1
   fi
+  
+# Notificar inicio de ejecución del script
+  echo ""
+  echo -e "${vColorAzulClaro}  Iniciando el script para poner los nombres de las interfaces de red a la nomenclatura usada en Debian 8...${vFinColor}"
+  echo ""
 
-echo ""
-echo "    Realizando cambios en /etc/default/grub..."
-echo ""
-sed -i -e 's|GRUB_CMDLINE_LINUX=""|GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"|g' /etc/default/grub
-sed -i -e "s|GRUB_TIMEOUT=5|GRUB_TIMEOUT=1|g" /etc/default/grub
+# Realizar cambios en /etc/default/grub
+  echo ""
+  echo "    Realizando cambios en /etc/default/grub..."
+  echo ""
+  sed -i -e 's|GRUB_CMDLINE_LINUX=""|GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"|g' /etc/default/grub
+  sed -i -e "s|GRUB_TIMEOUT=5|GRUB_TIMEOUT=1|g" /etc/default/grub
 
-echo ""
-echo "    Actualizando grub..."
-echo ""
-update-grub
+# Actualizar grub
+  echo ""
+  echo "    Actualizando grub..."
+  echo ""
+  update-grub
 
