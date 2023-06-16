@@ -25,6 +25,11 @@
     exit 1
   fi
 
+# Notificar inicio de ejecución del script
+  echo ""
+  echo -e "${vColorAzulClaro}  Iniciando el script para instalar software para modo CLI en Debian...${vFinColor}"
+  echo ""
+
 # Actualizar lista de paquetes disponibles
   apt-get -y update
 
