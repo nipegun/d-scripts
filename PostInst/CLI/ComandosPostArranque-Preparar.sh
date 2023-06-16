@@ -92,30 +92,26 @@ elif [ $OS_VERS == "9" ]; then
   echo ""
   echo "    Creando el archivo /etc/rc.local..."
   echo ""
-  echo '#!/bin/bash'                            > /etc/rc.local
-  echo ""                                      >> /etc/rc.local
-  echo "/root/scripts/ComandosPostArranque.sh" >> /etc/rc.local
-  echo "exit 0"                                >> /etc/rc.local
-  chmod +x                                        /etc/rc.local
+  echo '#!/bin/bash'                                       > /etc/rc.local
+  echo ""                                                 >> /etc/rc.local
+  echo "/root/scripts/EsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
+  echo "exit 0"                                           >> /etc/rc.local
+  chmod +x                                                   /etc/rc.local
 
   echo ""
   echo "    Creando el archivo para meter los comandos..."
   echo ""
-  mkdir -p /root/scripts/ 2> /dev/null
-  echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  echo "vColorRojo='\033[1;31m'"                                                                             >> /root/scripts/ComandosPostArranque.sh
-  echo "vColorVerde='\033[1;32m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
-  echo "vFinColor='\033[0m'"                                                                                 >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                  >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ComandosPostArranque.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  chmod 700                                                                                                    /root/scripts/ComandosPostArranque.sh
+  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                          > /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                  >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  chmod 700                                                                                                     /root/scripts/EsteDebian/ComandosPostArranque.sh
 
   echo ""
   echo "    Activando y arrancando el servicio..."
@@ -150,30 +146,26 @@ elif [ $OS_VERS == "10" ]; then
   echo ""
   echo "    Creando el archivo /etc/rc.local ..."
   echo ""
-  echo '#!/bin/bash'                            > /etc/rc.local
-  echo ""                                      >> /etc/rc.local
-  echo "/root/scripts/ComandosPostArranque.sh" >> /etc/rc.local
-  echo "exit 0"                                >> /etc/rc.local
-  chmod +x                                        /etc/rc.local
+  echo '#!/bin/bash'                                       > /etc/rc.local
+  echo ""                                                 >> /etc/rc.local
+  echo "/root/scripts/EsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
+  echo "exit 0"                                           >> /etc/rc.local
+  chmod +x                                                   /etc/rc.local
 
   echo ""
   echo "    Creando el archivo para meter los comandos..."
   echo ""
-  mkdir -p /root/scripts/ 2> /dev/null
-  echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  echo "vColorRojo='\033[1;31m'"                                                                             >> /root/scripts/ComandosPostArranque.sh
-  echo "vColorVerde='\033[1;32m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
-  echo "vFinColor='\033[0m'"                                                                                 >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                  >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ComandosPostArranque.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  chmod 700                                                                                                    /root/scripts/ComandosPostArranque.sh
+  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                          > /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                  >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  chmod 700                                                                                                     /root/scripts/EsteDebian/ComandosPostArranque.sh
 
   echo ""
   echo "    Activando y arrancando el servicio..."
@@ -208,30 +200,26 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "    Creando el archivo /etc/rc.local..."
   echo ""
-  echo '#!/bin/bash'                            > /etc/rc.local
-  echo ""                                      >> /etc/rc.local
-  echo "/root/scripts/ComandosPostArranque.sh" >> /etc/rc.local
-  echo "exit 0"                                >> /etc/rc.local
-  chmod +x                                        /etc/rc.local
+  echo '#!/bin/bash'                                       > /etc/rc.local
+  echo ""                                                 >> /etc/rc.local
+  echo "/root/scripts/EsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
+  echo "exit 0"                                           >> /etc/rc.local
+  chmod +x                                                   /etc/rc.local
 
   echo ""
   echo "    Creando el archivo para meter los comandos..."
   echo ""
-  mkdir -p /root/scripts/ 2> /dev/null
-  echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  echo "vColorRojo='\033[1;31m'"                                                                             >> /root/scripts/ComandosPostArranque.sh
-  echo "vColorVerde='\033[1;32m'"                                                                            >> /root/scripts/ComandosPostArranque.sh
-  echo "vFinColor='\033[0m'"                                                                                 >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                  >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ComandosPostArranque.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ComandosPostArranque.sh
-  chmod 700                                                                                                    /root/scripts/ComandosPostArranque.sh
+  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                          > /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo 'vFechaDeEjec=$(date +A%YM%mD%d@%T)'                                                                  >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  chmod 700                                                                                                     /root/scripts/EsteDebian/ComandosPostArranque.sh
 
   echo ""
   echo "    Activando y arrancando el servicio..."
@@ -266,11 +254,11 @@ elif [ $OS_VERS == "12" ]; then
   echo ""
   echo "    Creando el archivo /etc/rc.local ..."
   echo ""
-  echo '#!/bin/bash'                            > /etc/rc.local
-  echo ""                                      >> /etc/rc.local
-  echo "/root/scripts/ComandosPostArranque.sh" >> /etc/rc.local
-  echo "exit 0"                                >> /etc/rc.local
-  chmod +x                                        /etc/rc.local
+  echo '#!/bin/bash'                                       > /etc/rc.local
+  echo ""                                                 >> /etc/rc.local
+  echo "/root/scripts/EsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
+  echo "exit 0"                                           >> /etc/rc.local
+  chmod +x                                                   /etc/rc.local
 
   echo ""
   echo "    Creando el archivo para meter los comandos..."
