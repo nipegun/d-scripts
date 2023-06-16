@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # Pongo a disposición pública este script bajo el término de "software de dominio público".
@@ -34,24 +35,24 @@
   echo ""
   echo "    Creando el archivo para las tareas de cada minuto..."
   echo ""
-  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
-  echo '#!/bin/bash'                                                                                                 > /root/scripts/EsteDebian/TareasCronCadaMinuto.sh
-  echo ""                                                                                                           >> /root/scripts/EsteDebian/TareasCronCadaMinuto.sh
-  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                         >> /root/scripts/EsteDebian/TareasCronCadaMinuto.sh
-  echo 'echo "Iniciada la ejecución del cron de cada minuto el $vFechaDeEjec" >> /var/log/TareasCronCadaMinuto.log' >> /root/scripts/EsteDebian/TareasCronCadaMinuto.sh
-  echo ""                                                                                                           >> /root/scripts/EsteDebian/TareasCronCadaMinuto.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA MINUTO"                                         >> /root/scripts/EsteDebian/TareasCronCadaMinuto.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                       >> /root/scripts/EsteDebian/TareasCronCadaMinuto.sh
-  echo ""                                                                                                           >> /root/scripts/EsteDebian/TareasCronCadaMinuto.sh
+  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                                 > /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
+  echo ""                                                                                                           >> /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
+  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                         >> /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
+  echo 'echo "Iniciada la ejecución del cron de cada minuto el $vFechaDeEjec" >> /var/log/TareasCronCadaMinuto.log' >> /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
+  echo ""                                                                                                           >> /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA MINUTO"                                         >> /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                       >> /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
+  echo ""                                                                                                           >> /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..."
   echo ""
-  chmod +x /root/scripts/EsteDebian/TareasCronCadaMinuto.sh
+  chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
   echo ""
   echo "      Instalando la tarea en crontab..."
   echo ""
   crontab -l > /tmp/CronTemporal
-  echo "* * * * * /root/scripts/EsteDebian/TareasCronCadaMinuto.sh" >> /tmp/CronTemporal
+  echo "* * * * * /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh" >> /tmp/CronTemporal
   crontab /tmp/CronTemporal
   rm /tmp/CronTemporal
 
@@ -59,46 +60,46 @@
   echo ""
   echo "    Creando el archivo para las tareas de cada hora..."
   echo ""
-  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
-  echo '#!/bin/bash'                                                                                             > /root/scripts/EsteDebian/TareasCronCadaHora.sh
-  echo ""                                                                                                       >> /root/scripts/EsteDebian/TareasCronCadaHora.sh
-  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                     >> /root/scripts/EsteDebian/TareasCronCadaHora.sh
-  echo 'echo "Iniciada la ejecución del cron de cada hora el $vFechaDeEjec" >> /var/log/TareasCronCadaHora.log' >> /root/scripts/EsteDebian/TareasCronCadaHora.sh
-  echo ""                                                                                                       >> /root/scripts/EsteDebian/TareasCronCadaHora.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA"                                       >> /root/scripts/EsteDebian/TareasCronCadaHora.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                     >> /root/scripts/EsteDebian/TareasCronCadaHora.sh
-  echo ""                                                                                                       >> /root/scripts/EsteDebian/TareasCronCadaHora.sh
+  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                             > /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
+  echo ""                                                                                                       >> /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
+  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                     >> /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
+  echo 'echo "Iniciada la ejecución del cron de cada hora el $vFechaDeEjec" >> /var/log/TareasCronCadaHora.log' >> /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
+  echo ""                                                                                                       >> /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA"                                       >> /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                     >> /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
+  echo ""                                                                                                       >> /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..."
   echo ""
-  chmod +x /root/scripts/EsteDebian/TareasCronCadaHora.sh
+  chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
   echo ""
   echo "      Creando enlace hacia el archivo en /etc/cron.hourly/ ..."
   echo ""
-  ln -s /root/scripts/EsteDebian/TareasCronCadaHora.sh /etc/cron.hourly/TareasCronCadaHora
+  ln -s /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh /etc/cron.hourly/TareasCronCadaHora
 
 # Preparar el script de tareas cada hora impar
   echo ""
   echo "    Creando el archivo para las tareas de cada hora impar..."
   echo ""
-  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
-  echo '#!/bin/bash'                                                                                                        > /root/scripts/EsteDebian/TareasCronCadaHoraImpar.sh
-  echo ""                                                                                                                  >> /root/scripts/EsteDebian/TareasCronCadaHoraImpar.sh
-  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                                >> /root/scripts/EsteDebian/TareasCronCadaHoraImpar.sh
-  echo 'echo "Iniciada la ejecución del cron de cada hora impar el $vFechaDeEjec" >> /var/log/TareasCronCadaHoraImpar.log' >> /root/scripts/EsteDebian/TareasCronCadaHoraImpar.sh
-  echo ""                                                                                                                  >> /root/scripts/EsteDebian/TareasCronCadaHoraImpar.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA IMPAR"                                            >> /root/scripts/EsteDebian/TareasCronCadaHoraImpar.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                          >> /root/scripts/EsteDebian/TareasCronCadaHoraImpar.sh
-  echo ""                                                                                                                  >> /root/scripts/EsteDebian/TareasCronCadaHoraImpar.sh
+  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                                        > /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
+  echo ""                                                                                                                  >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
+  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                                >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
+  echo 'echo "Iniciada la ejecución del cron de cada hora impar el $vFechaDeEjec" >> /var/log/TareasCronCadaHoraImpar.log' >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
+  echo ""                                                                                                                  >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA IMPAR"                                            >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                          >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
+  echo ""                                                                                                                  >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..."
   echo ""
-  chmod +x /root/scripts/EsteDebian/TareasCronCadaHoraImpar.sh
+  chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
   echo ""
   echo "      Instalando la tarea en crontab..."
   echo ""
   crontab -l > /tmp/CronTemporal
-  echo "0 1-23/2 * * * /root/scripts/EsteDebian/TareasCronCadaHoraImpar.sh" >> /tmp/CronTemporal
+  echo "0 1-23/2 * * * /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh" >> /tmp/CronTemporal
   crontab /tmp/CronTemporal
   rm /tmp/CronTemporal
 
@@ -106,24 +107,24 @@
   echo ""
   echo "    Creando el archivo para las tareas de cada hora par..."
   echo ""
-  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
-  echo '#!/bin/bash'                                                                                                    > /root/scripts/EsteDebian/TareasCronCadaHoraPar.sh
-  echo ""                                                                                                              >> /root/scripts/EsteDebian/TareasCronCadaHoraPar.sh
-  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                            >> /root/scripts/EsteDebian/TareasCronCadaHoraPar.sh
-  echo 'echo "Iniciada la ejecución del cron de cada hora par el $vFechaDeEjec" >> /var/log/TareasCronCadaHoraPar.log' >> /root/scripts/EsteDebian/TareasCronCadaHoraPar.sh
-  echo ""                                                                                                              >> /root/scripts/EsteDebian/TareasCronCadaHoraPar.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA PAR"                                          >> /root/scripts/EsteDebian/TareasCronCadaHoraPar.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                        >> /root/scripts/EsteDebian/TareasCronCadaHoraPar.sh
-  echo ""                                                                                                              >> /root/scripts/EsteDebian/TareasCronCadaHoraPar.sh
+  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                                    > /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
+  echo ""                                                                                                              >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
+  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                            >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
+  echo 'echo "Iniciada la ejecución del cron de cada hora par el $vFechaDeEjec" >> /var/log/TareasCronCadaHoraPar.log' >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
+  echo ""                                                                                                              >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA PAR"                                          >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                        >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
+  echo ""                                                                                                              >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..."
   echo ""
-  chmod +x /root/scripts/EsteDebian/TareasCronCadaHoraPar.sh
+  chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
   echo ""
   echo "      Instalando la tarea en crontab..."
   echo ""
   crontab -l > /tmp/CronTemporal
-  echo "0 */2 * * * /root/scripts/EsteDebian/TareasCronCadaHoraPar.sh" >> /tmp/CronTemporal
+  echo "0 */2 * * * /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh" >> /tmp/CronTemporal
   crontab /tmp/CronTemporal
   rm /tmp/CronTemporal
 
@@ -131,14 +132,14 @@
   echo ""
   echo "    Creando el archivo para las tareas de cada día..."
   echo ""
-  echo '#!/bin/bash'                                                                                           > /root/scripts/EsteDebian/TareasCronCadaDía.sh
-  echo ""                                                                                                     >> /root/scripts/EsteDebian/TareasCronCadaDía.sh
-  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                   >> /root/scripts/EsteDebian/TareasCronCadaDía.sh
-  echo 'echo "Iniciada la ejecución del cron de cada día el $vFechaDeEjec" >> /var/log/TareasCronCadaDía.log' >> /root/scripts/EsteDebian/TareasCronCadaDía.sh
-  echo ""                                                                                                     >> /root/scripts/EsteDebian/TareasCronCadaDía.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA DÍA"                                      >> /root/scripts/EsteDebian/TareasCronCadaDía.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                    >> /root/scripts/EsteDebian/TareasCronCadaDía.sh
-  echo ""                                                                                                     >> /root/scripts/EsteDebian/TareasCronCadaDía.sh
+  echo '#!/bin/bash'                                                                                           > /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
+  echo ""                                                                                                     >> /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
+  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                   >> /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
+  echo 'echo "Iniciada la ejecución del cron de cada día el $vFechaDeEjec" >> /var/log/TareasCronCadaDía.log' >> /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
+  echo ""                                                                                                     >> /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA DÍA"                                      >> /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                    >> /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
+  echo ""                                                                                                     >> /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..."
   echo ""
@@ -146,60 +147,59 @@
   echo ""
   echo "      Creando enlace hacia el archivo en /etc/cron.daily/ ..."
   echo ""
-  ln -s /root/scripts/EsteDebian/TareasCronCadaDía.sh /etc/cron.daily/TareasCronCadaDía
+  ln -s /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh /etc/cron.daily/TareasCronCadaDía
 
 # Preparar el script de tareas cada semana
   echo ""
   echo "    Creando el archivo para las tareas de cada semana..."
   echo ""
-  echo '#!/bin/bash'                                                                                                 > /root/scripts/EsteDebian/TareasCronCadaSemana.sh
-  echo ""                                                                                                           >> /root/scripts/EsteDebian/TareasCronCadaSemana.sh
-  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                         >> /root/scripts/EsteDebian/TareasCronCadaSemana.sh
-  echo 'echo "Iniciada la ejecución del cron de cada semana el $vFechaDeEjec" >> /var/log/TareasCronCadaSemana.log' >> /root/scripts/EsteDebian/TareasCronCadaSemana.sh
-  echo ""                                                                                                           >> /root/scripts/EsteDebian/TareasCronCadaSemana.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA SEMANA"                                         >> /root/scripts/EsteDebian/TareasCronCadaSemana.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                       >> /root/scripts/EsteDebian/TareasCronCadaSemana.sh
-  echo ""                                                                                                           >> /root/scripts/EsteDebian/TareasCronCadaSemana.sh
+  echo '#!/bin/bash'                                                                                                 > /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
+  echo ""                                                                                                           >> /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
+  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                         >> /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
+  echo 'echo "Iniciada la ejecución del cron de cada semana el $vFechaDeEjec" >> /var/log/TareasCronCadaSemana.log' >> /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
+  echo ""                                                                                                           >> /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA SEMANA"                                         >> /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                       >> /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
+  echo ""                                                                                                           >> /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..."
   echo ""
-  chmod +x /root/scripts/EsteDebian/TareasCronCadaSemana.sh
+  chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
   echo ""
   echo "      Creando enlace hacia el archivo en /etc/cron.weekly/ ..."
   echo ""
-  ln -s /root/scripts/EsteDebian/TareasCronCadaSemana.sh /etc/cron.weekly/TareasCronCadaSemana
+  ln -s /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh /etc/cron.weekly/TareasCronCadaSemana
 
 # Preparar el script de tareas cada mes
   echo ""
   echo "    Creando el archivo para las tareas de cada mes..."
   echo ""
-  echo '#!/bin/bash'                                                                                           > /root/scripts/EsteDebian/TareasCronCadaMes.sh
-  echo ""                                                                                                     >> /root/scripts/EsteDebian/TareasCronCadaMes.sh
-  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                   >> /root/scripts/EsteDebian/TareasCronCadaMes.sh
-  echo 'echo "Iniciada la ejecución del cron de cada mes el $vFechaDeEjec" >> /var/log/TareasCronCadaMes.log' >> /root/scripts/EsteDebian/TareasCronCadaMes.sh
-  echo ""                                                                                                     >> /root/scripts/EsteDebian/TareasCronCadaMes.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA MES"                                      >> /root/scripts/EsteDebian/TareasCronCadaMes.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                    >> /root/scripts/EsteDebian/TareasCronCadaMes.sh
-  echo ""                                                                                                     >> /root/scripts/EsteDebian/TareasCronCadaMes.sh
+  echo '#!/bin/bash'                                                                                           > /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
+  echo ""                                                                                                     >> /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
+  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                   >> /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
+  echo 'echo "Iniciada la ejecución del cron de cada mes el $vFechaDeEjec" >> /var/log/TareasCronCadaMes.log' >> /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
+  echo ""                                                                                                     >> /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA MES"                                      >> /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                    >> /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
+  echo ""                                                                                                     >> /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..."
   echo ""
-  chmod +x /root/scripts/EsteDebian/TareasCronCadaMes.sh
+  chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
   echo ""
   echo "      Creando enlace hacia el archivo en /etc/cron.monthly/ ..."
   echo ""
-  ln -s /root/scripts/EsteDebian/TareasCronCadaMes.sh /etc/cron.monthly/TareasCronCadaMes
+  ln -s /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh /etc/cron.monthly/TareasCronCadaMes
 
 # Dar permisos de lectura y ejecución sólo al propietario de los scripts
   echo ""
   echo "  Dando permisos de lectura y ejecución solo al propietario de los scripts..."
   echo ""
   # Si esto no se hace las tareas no se ejecutarán.
-  chmod 700 /root/scripts/EsteDebian/TareasCronCadaMinuto.sh
-  chmod 700 /root/scripts/EsteDebian/TareasCronCadaHora.sh
-  chmod 700 /root/scripts/EsteDebian/TareasCronCadaHoraImpar.sh
-  chmod 700 /root/scripts/EsteDebian/TareasCronCadaHoraPar.sh
-  chmod 700 /root/scripts/EsteDebian/TareasCronCadaDía.sh
-  chmod 700 /root/scripts/EsteDebian/TareasCronCadaSemana.sh
-  chmod 700 /root/scripts/EsteDebian/TareasCronCadaMes.sh
-
+  chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
+  chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
+  chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
+  chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
+  chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
+  chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
+  chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
