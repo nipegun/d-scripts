@@ -134,7 +134,7 @@ elif [ $OS_VERS == "11" ]; then
 elif [ $OS_VERS == "12" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script ... Debian 12 (Bookworm)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 12 (Bookworm)...${vFinColor}"
   echo ""
 
   echo ""
