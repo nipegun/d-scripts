@@ -54,57 +54,47 @@ vRepoActual=$(cat /etc/os-release | grep CODENAME | cut -d'=' -f2)
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para agregar el repositorio backports a Debian 7 (Wheezy)..."
-  echo "------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para agregar el repositorio backports a Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo "deb http://deb.debian.org/debian $vRepoActual-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
-  apt-get update
+  apt-get -y update
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para agregar el repositorio backports a Debian 8 (Jessie)..."
-  echo "------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para agregar el repositorio backports a Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo "deb http://deb.debian.org/debian $vRepoActual-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
-  apt-get update
+  apt-get -y update
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para agregar el repositorio backports a Debian 9 (Stretch)..."
-  echo "-------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para agregar el repositorio backports a Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo "deb http://deb.debian.org/debian $vRepoActual-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
-  apt-get update
+  apt-get -y update
 
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para agregar el repositorio backports a Debian 10 (Buster)..."
-  echo "-------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para agregar el repositorio backports a Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo "deb http://deb.debian.org/debian $vRepoActual-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
-  apt-get update
+  apt-get -y update
 
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para agregar el repositorio backports a Debian 11 (Bullseye)..."
-  echo "---------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para agregar el repositorio backports a Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   echo "deb http://deb.debian.org/debian $vRepoActual-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
-  apt-get update
+  apt-get -y update
 
 fi
 
