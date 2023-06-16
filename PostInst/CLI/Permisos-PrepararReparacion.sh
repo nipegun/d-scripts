@@ -31,24 +31,24 @@
   echo ""
 
 # Crear el script de reparación de permisos
-  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
-  echo '#!/bin/bash'                                                                                    > /root/scripts/EsteDebian/RepararPermisos.sh
-  echo ""                                                                                              >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo 'vFechaDeEjecucion=$(date +a%Ym%md%d@%T)'                                                       >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo ""                                                                                              >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo 'echo "La reparación de permisos se ejecutó el $vFechaDeEjecucion" >> /var/log/RepPermisos.log' >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo ""                                                                                              >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS DE REPARACIÓN DE PERMISOS A EJECUTAR"              >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"            >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo ""                                                                                              >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo 'echo ""'                                                                                       >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo 'echo "  Reparando permisos..."'                                                                >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo 'echo ""'                                                                                       >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo 'echo "    Reparando permisos web..."'                                                          >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo 'echo ""'                                                                                       >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo "chown -R www-data:www-data /var/www"                                                           >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo "find /var/www -type d -exec chmod 755 {} \;"                                                   >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo "find /var/www -type f -exec chmod 644 {} \;"                                                   >> /root/scripts/EsteDebian/RepararPermisos.sh
-  echo "chown root:root /var/www # Necesario para enjaular las cuentas"                                >> /root/scripts/EsteDebian/RepararPermisos.sh
-  chmod 700                                                                                               /root/scripts/EsteDebian/RepararPermisos.sh
+  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                    > /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo ""                                                                                              >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo 'vFechaDeEjecucion=$(date +a%Ym%md%d@%T)'                                                       >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo ""                                                                                              >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo 'echo "La reparación de permisos se ejecutó el $vFechaDeEjecucion" >> /var/log/RepPermisos.log' >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo ""                                                                                              >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS DE REPARACIÓN DE PERMISOS A EJECUTAR"              >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"            >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo ""                                                                                              >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo 'echo ""'                                                                                       >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo 'echo "  Reparando permisos..."'                                                                >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo 'echo ""'                                                                                       >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo 'echo "    Reparando permisos web..."'                                                          >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo 'echo ""'                                                                                       >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo "chown -R www-data:www-data /var/www"                                                           >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo "find /var/www -type d -exec chmod 755 {} \;"                                                   >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo "find /var/www -type f -exec chmod 644 {} \;"                                                   >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  echo "chown root:root /var/www # Necesario para enjaular las cuentas"                                >> /root/scripts/ParaEsteDebian/RepararPermisos.sh
+  chmod 700                                                                                               /root/scripts/ParaEsteDebian/RepararPermisos.sh
 
