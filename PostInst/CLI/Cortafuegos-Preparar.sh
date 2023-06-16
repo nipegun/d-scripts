@@ -71,14 +71,14 @@ elif [ $OS_VERS == "9" ]; then
   echo -e "${vColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
-  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
-  echo '#!/bin/bash'                                                                         > /root/scripts/EsteDebian/ComandosIPTables.sh
-  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosIPTables.sh
-  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE IPTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/EsteDebian/ComandosIPTables.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/EsteDebian/ComandosIPTables.sh
-  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosIPTables.sh
-  chmod 700                                                                                    /root/scripts/EsteDebian/ComandosIPTables.sh
-  echo "/root/scripts/EsteDebian/ComandosIPTables.sh" >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                         > /root/scripts/ParaEsteDebian/ComandosIPTables.sh
+  echo ""                                                                                   >> /root/scripts/ParaEsteDebian/ComandosIPTables.sh
+  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE IPTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/ParaEsteDebian/ComandosIPTables.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ParaEsteDebian/ComandosIPTables.sh
+  echo ""                                                                                   >> /root/scripts/ParaEsteDebian/ComandosIPTables.sh
+  chmod 700                                                                                    /root/scripts/ParaEsteDebian/ComandosIPTables.sh
+  echo "/root/scripts/ParaEsteDebian/ComandosIPTables.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
 elif [ $OS_VERS == "10" ]; then
 
@@ -86,14 +86,14 @@ elif [ $OS_VERS == "10" ]; then
   echo -e "${vColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 10 (Buster)...${vFinColor}"
   echo ""
 
-  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
-  echo '#!/bin/bash'                                                                         > /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosNFTables.sh
-  chmod 700                                                                                    /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo "/root/scripts/EsteDebian/ComandosNFTables.sh" >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                         > /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  chmod 700                                                                                    /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo "/root/scripts/ParaEsteDebian/ComandosNFTables.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
 elif [ $OS_VERS == "11" ]; then
 
@@ -101,14 +101,14 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
-  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
-  echo '#!/bin/bash'                                                                         > /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosNFTables.sh
-  chmod 700                                                                                    /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo "/root/scripts/EsteDebian/ComandosNFTables.sh" >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                         > /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  chmod 700                                                                                    /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo "/root/scripts/ParaEsteDebian/ComandosNFTables.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
 elif [ $OS_VERS == "12" ]; then
 
@@ -116,14 +116,14 @@ elif [ $OS_VERS == "12" ]; then
   echo -e "${vColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 12 (Bookworm)...${vFinColor}"
   echo ""
 
-  mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
-  echo '#!/bin/bash'                                                                         > /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo ""                                                                                   >> /root/scripts/EsteDebian/ComandosNFTables.sh
-  chmod 700                                                                                    /root/scripts/EsteDebian/ComandosNFTables.sh
-  echo "/root/scripts/EsteDebian/ComandosNFTables.sh" >> /root/scripts/EsteDebian/ComandosPostArranque.sh
+  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                         > /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE NFTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo ""                                                                                   >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  chmod 700                                                                                    /root/scripts/ParaEsteDebian/ComandosNFTables.sh
+  echo "/root/scripts/ParaEsteDebian/ComandosNFTables.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
 fi
 
