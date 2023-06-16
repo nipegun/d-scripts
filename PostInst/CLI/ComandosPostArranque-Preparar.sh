@@ -48,37 +48,31 @@
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para preparar los comandos post-arranque en Debian 7 (Wheezy)..."
-  echo "----------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para preparar los comandos post-arranque en Debian 8 (Jessie)..."
-  echo "----------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${vColorRojo}  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
   echo ""
 
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para preparar los comandos post-arranque en Debian 9 (Stretch)..."
-  echo "-----------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${ColorVerde}Configurando el servicio...${FinColor}"
+  echo "    Configurando el servicio..."
   echo ""
   echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
   echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
@@ -96,7 +90,7 @@ elif [ $OS_VERS == "9" ]; then
   echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
 
   echo ""
-  echo -e "${ColorVerde}Creando el archivo /etc/rc.local ...${FinColor}"
+  echo "    Creando el archivo /etc/rc.local..."
   echo ""
   echo '#!/bin/bash'                            > /etc/rc.local
   echo ""                                      >> /etc/rc.local
@@ -105,7 +99,7 @@ elif [ $OS_VERS == "9" ]; then
   chmod +x                                        /etc/rc.local
 
   echo ""
-  echo -e "${ColorVerde}Creando el archivo para meter los comandos...${FinColor}"
+  echo "    Creando el archivo para meter los comandos..."
   echo ""
   mkdir -p /root/scripts/ 2> /dev/null
   echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh
@@ -124,7 +118,7 @@ elif [ $OS_VERS == "9" ]; then
   chmod 700                                                                                                    /root/scripts/ComandosPostArranque.sh
 
   echo ""
-  echo -e "${ColorVerde}Activando y arrancando el servicio...${FinColor}"
+  echo "    Activando y arrancando el servicio..."
   echo ""
   systemctl enable rc-local
   systemctl start rc-local.service
@@ -132,13 +126,11 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para preparar los comandos post-arranque en Debian 10 (Buster)..."
-  echo "-----------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${ColorVerde}Configurando el servicio...${FinColor}"
+  echo "    Configurando el servicio..."
   echo ""
   echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
   echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
@@ -156,7 +148,7 @@ elif [ $OS_VERS == "10" ]; then
   echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
 
   echo ""
-  echo -e "${ColorVerde}Creando el archivo /etc/rc.local ...${FinColor}"
+  echo "    Creando el archivo /etc/rc.local ..."
   echo ""
   echo '#!/bin/bash'                            > /etc/rc.local
   echo ""                                      >> /etc/rc.local
@@ -165,7 +157,7 @@ elif [ $OS_VERS == "10" ]; then
   chmod +x                                        /etc/rc.local
 
   echo ""
-  echo -e "${ColorVerde}Creando el archivo para meter los comandos...${FinColor}"
+  echo "    Creando el archivo para meter los comandos..."
   echo ""
   mkdir -p /root/scripts/ 2> /dev/null
   echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh
@@ -184,7 +176,7 @@ elif [ $OS_VERS == "10" ]; then
   chmod 700                                                                                                    /root/scripts/ComandosPostArranque.sh
 
   echo ""
-  echo -e "${ColorVerde}Activando y arrancando el servicio...${FinColor}"
+  echo "    Activando y arrancando el servicio..."
   echo ""
   systemctl enable rc-local
   systemctl start rc-local.service
@@ -192,13 +184,11 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para preparar los comandos post-arranque en Debian 11 (Bullseye)..."
-  echo "-------------------------------------------------------------------------------------------"
+  echo -e "${vColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   echo ""
-  echo -e "${ColorVerde}Configurando el servicio...${FinColor}"
+  echo "    Configurando el servicio..."
   echo ""
   echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
   echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
@@ -216,7 +206,7 @@ elif [ $OS_VERS == "11" ]; then
   echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
 
   echo ""
-  echo -e "${ColorVerde}Creando el archivo /etc/rc.local ...${FinColor}"
+  echo "    Creando el archivo /etc/rc.local..."
   echo ""
   echo '#!/bin/bash'                            > /etc/rc.local
   echo ""                                      >> /etc/rc.local
@@ -225,7 +215,7 @@ elif [ $OS_VERS == "11" ]; then
   chmod +x                                        /etc/rc.local
 
   echo ""
-  echo -e "${ColorVerde}Creando el archivo para meter los comandos...${FinColor}"
+  echo "    Creando el archivo para meter los comandos..."
   echo ""
   mkdir -p /root/scripts/ 2> /dev/null
   echo '#!/bin/bash'                                                                                          > /root/scripts/ComandosPostArranque.sh
@@ -244,7 +234,7 @@ elif [ $OS_VERS == "11" ]; then
   chmod 700                                                                                                    /root/scripts/ComandosPostArranque.sh
 
   echo ""
-  echo -e "${ColorVerde}Activando y arrancando el servicio...${FinColor}"
+  echo "    Activando y arrancando el servicio..."
   echo ""
   systemctl enable rc-local
   systemctl start rc-local.service
