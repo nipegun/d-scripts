@@ -5,52 +5,61 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar diferentes carteras de criptomonedas en Debian10
+# ----------
+# Script de NiPeGun para instalar y configurar diferentes carteras de criptomonedas en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-Carteras-InstalarYConfigurar.sh | bash
-#--------------------------------------------------------------------------------------------------------------------------------------
-
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-Carteras-InstalarYConfigurar.sh | bash
+# ----------
 
 UsuarioNoRoot="nipegun"
 
+# Definir variables de color
+  vColorAzul="\033[0;34m"
+  vColorAzulClaro="\033[1;34m"
+  vColorVerde='\033[1;32m'
+  vColorRojo='\033[1;31m'
+  vFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    exit 1
+  fi
+
 echo ""
-echo -e "${ColorVerde}-------------------------------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}  Iniciando el script de instalación de las diferentes carteras de criptomonedas...${FinColor}"
-echo -e "${ColorVerde}-------------------------------------------------------------------------------------${FinColor}"
+echo -e "${vColorAzulClaro}  Iniciando el script de instalación de las diferentes carteras de criptomonedas...${vFinColor}"
 echo ""
 
-## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  dialog no está instalado. Iniciando su instalación..."
-     echo ""
-     apt-get -y update
-     apt-get -y install dialog
-     echo ""
-   fi
+# Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo "    El paquete dialog no está instalado. Iniciando su instalación..."
+    echo ""
+    apt-get -y update
+    apt-get -y install dialog
+    echo ""
+  fi
 
 menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
-  opciones=(1 "Crear usuario sin privilegios para ejecutar la pool (Obligatorio)" on
-            2 "Instalar los c-scripts (Obligatorio)" on
-            3 "Borrar todas las carteras y configuraciones ya existentes" off
-            4 "Instalar core de Litecoin" off
-            5 "Instalar core de Ravencoin" off
-            6 "Instalar core de Argentum" off
-            7 "Instalar core de Monero" off
-            8 "Instalar core de Chia" off
-            9 "Instalar core de Bitcoin BCH (Todavía no disponible)" off
-           10 "Instalar core de Bitcoin BTC (Todavía no disponible)" off
-           11 "Instalar messenger de Utopia" off
-           12 "(Todavía no disponible)" off
-           13 "Mover todo hacia la carpeta del usuario no root" off
-           14 "Instalar escritorio y algunas utilidades de terminal" off
-           15 "Reparar permisos (Obligatorio)" on
-           16 "Reniciar el sistema" off)
+  opciones=(
+    1 "Crear usuario sin privilegios para ejecutar la pool (Obligatorio)" on
+    2 "Instalar los c-scripts (Obligatorio)" on
+    3 "Borrar todas las carteras y configuraciones ya existentes" off
+    4 "Instalar core de Litecoin" off
+    5 "Instalar core de Ravencoin" off
+    6 "Instalar core de Argentum" off
+    7 "Instalar core de Monero" off
+    8 "Instalar core de Chia" off
+    9 "Instalar core de Bitcoin BCH (Todavía no disponible)" off
+    10 "Instalar core de Bitcoin BTC (Todavía no disponible)" off
+    11 "Instalar messenger de Utopia" off
+    12 "(Todavía no disponible)" off
+    13 "Mover todo hacia la carpeta del usuario no root" off
+    14 "Instalar escritorio y algunas utilidades de terminal" off
+    15 "Reparar permisos (Obligatorio)" on
+    16 "Reniciar el sistema" off
+  )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   clear
 
@@ -61,9 +70,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         1)
 
           echo ""
-          echo -e "${ColorVerde}-------------------------------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Creando el usuario para ejecutar y administrar la pool...${FinColor}"
-          echo -e "${ColorVerde}-------------------------------------------------------------${FinColor}"
           echo ""
 
           ## Agregar el usuario
@@ -82,9 +89,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         2)
 
           echo ""
-          echo -e "${ColorVerde}-------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando los c-scripts...${FinColor}"
-          echo -e "${ColorVerde}-------------------------------${FinColor}"
           echo ""
 
           ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
@@ -105,9 +110,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         3)
 
           echo ""
-          echo -e "${ColorVerde}-----------------------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Borrando carteras y configuraciones anteriores...${FinColor}"
-          echo -e "${ColorVerde}-----------------------------------------------------${FinColor}"
           echo ""
 
           ## Litecoin
@@ -129,9 +132,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         4)
 
           echo ""
-          echo -e "${ColorVerde}-------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando la cartera litecoin...${FinColor}"
-          echo -e "${ColorVerde}-------------------------------------${FinColor}"
           echo ""
 
           echo "  Determinando la última versión de litecoin core..."
@@ -264,9 +265,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         5)
 
           echo ""
-          echo -e "${ColorVerde}-------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando la cartera de raven...${FinColor}"
-          echo -e "${ColorVerde}-------------------------------------${FinColor}"
           echo ""
 
         ;;
@@ -281,9 +280,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         7)
 
           echo ""
-          echo -e "${ColorVerde}--------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando la cartera de monero...${FinColor}"
-          echo -e "${ColorVerde}--------------------------------------${FinColor}"
           echo ""
           
         ;;
@@ -291,9 +288,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         8)
 
           echo ""
-          echo -e "${ColorVerde}---------------------------------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando la cadena de bloques de chia y sus utilidades...${FinColor}"
-          echo -e "${ColorVerde}---------------------------------------------------------------${FinColor}"
           echo ""
        
         ;;
@@ -301,9 +296,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         9)
 
           echo ""
-          echo -e "${ColorVerde}------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando core de BCH (Todavía no disponible)...${FinColor}"
-          echo -e "${ColorVerde}------------------------------${FinColor}"
           echo ""
 
         ;;
@@ -311,9 +304,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         10)
 
           echo ""
-          echo -e "${ColorVerde}------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando core de BTC (Todavía no disponible)...${FinColor}"
-          echo -e "${ColorVerde}------------------------------${FinColor}"
           echo ""
 
         ;;
@@ -321,9 +312,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         11)
 
           echo ""
-          echo -e "${ColorVerde}----------------------------------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando o actualizando messenger de Utopia...${FinColor}"
-          echo -e "${ColorVerde}----------------------------------------------------${FinColor}"
           echo ""
 
         ;;
@@ -331,9 +320,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         12)
 
           echo ""
-          echo -e "${ColorVerde}------------------------------${FinColor}"
           echo -e "${ColorVerde}  (Todavía no disponible)...${FinColor}"
-          echo -e "${ColorVerde}------------------------------${FinColor}"
           echo ""
 
         ;;
@@ -341,9 +328,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         13)
 
           echo ""
-          echo -e "${ColorVerde}------------------------------${FinColor}"
           echo -e "${ColorVerde}  (Todavía no disponible)...${FinColor}"
-          echo -e "${ColorVerde}------------------------------${FinColor}"
           echo ""
 
         ;;
@@ -351,9 +336,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         14)
 
           echo ""
-          echo -e "${ColorVerde}----------------------------${FinColor}"
           echo -e "${ColorVerde}  Instalando escritorio...${FinColor}"
-          echo -e "${ColorVerde}----------------------------${FinColor}"
           echo ""
 
           ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
@@ -374,9 +357,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         15)
 
           echo ""
-          echo -e "${ColorVerde}-------------------------${FinColor}"
           echo -e "${ColorVerde}  Reparando permisos...${FinColor}"
-          echo -e "${ColorVerde}-------------------------${FinColor}"
           echo ""
 
           chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/
@@ -401,9 +382,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
         16)
 
           echo ""
-          echo -e "${ColorVerde}-----------------------------${FinColor}"
           echo -e "${ColorVerde}  Reiniciando el sistema...${FinColor}"
-          echo -e "${ColorVerde}-----------------------------${FinColor}"
           echo ""
 
           shutdown -r now
@@ -415,9 +394,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 done
 
 echo ""
-echo -e "${ColorVerde}----------------------------------------------------------------------------------${FinColor}"
 echo -e "${ColorVerde}  Script de instalación de las diferentes carteras de criptomonedas, finalizado.${FinColor}"
-echo -e "${ColorVerde}----------------------------------------------------------------------------------${FinColor}"
 echo ""
 
 echo "ARGENTUM:"
