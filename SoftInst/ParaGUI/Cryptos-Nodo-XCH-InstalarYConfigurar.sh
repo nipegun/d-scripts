@@ -6,53 +6,61 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar la cadena de bloques de Chia (XCH)
+# Script de NiPeGun para instalar y configurar la cadena de bloques de Chia (XCH)
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-XCH-InstalarYConfigurar.sh | bash
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-XCH-InstalarYConfigurar.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vUsuarioNoRoot="nipegun"
 
-UsuarioNoRoot="nipegun"
+# Definir variables de color
+  vColorAzul="\033[0;34m"
+  vColorAzulClaro="\033[1;34m"
+  vColorVerde='\033[1;32m'
+  vColorRojo='\033[1;31m'
+  vFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    exit 1
+  fi
 
 echo ""
-echo -e "${ColorVerde}------------------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}  Iniciando el script de instalación de la cadena de bloques de XCH...${FinColor}"
-echo -e "${ColorVerde}------------------------------------------------------------------------${FinColor}"
+echo -e "${vColorAzulClaro}  Iniciando el script de instalación de la cadena de bloques de XCH...${vFinColor}"
 echo ""
 
 # Crear carpeta de descarga
   echo ""
-  echo "  Creando carpeta de descarga..."
+  echo "    Creando carpeta de descarga..."
   echo ""
   mkdir -p /root/SoftInst/Cryptos/XCH/ 2> /dev/null
   rm -rf /root/SoftInst/Cryptos/XCH/*
 
 # Descargar y descomprimir todos los archivos
   echo ""
-  echo "  Descargando el paquete .deb de la instalación..."
+  echo "    Descargando el paquete .deb de la instalación..."
   echo ""
   # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo "  wget no está instalado. Iniciando su instalación..."
+      echo "      El paquete wget no está instalado. Iniciando su instalación..."
       echo ""
-      apt-get -y update && apt-get -y install wget
+      apt-get -y update
+      apt-get -y install wget
       echo ""
     fi
   cd /root/SoftInst/Cryptos/XCH/
   wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
 
   echo ""
-  echo "  Extrayendo los archivos de dentro del paquete .deb..."
+  echo "    Extrayendo los archivos de dentro del paquete .deb..."
   echo ""
   # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo "  binutils no está instalado. Iniciando su instalación..."
+      echo "      El paquete binutils no está instalado. Iniciando su instalación..."
       echo ""
       apt-get -y update > /dev/null
       apt-get -y install binutils
@@ -61,12 +69,12 @@ echo ""
   ar xv /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
 
   echo ""
-  echo "  Descomprimiendo el archivo data.tar.xz..."
+  echo "    Descomprimiendo el archivo data.tar.xz..."
   echo ""
   # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo "  tar no está instalado. Iniciando su instalación..."
+      echo "      El paquete tar no está instalado. Iniciando su instalación..."
       echo ""
       apt-get -y update > /dev/null
       apt-get -y install tar
@@ -77,7 +85,7 @@ echo ""
 
 # Instalar dependencias necesarias
   echo ""
-  echo "  Instalando dependencias necesarias..."
+  echo "    Instalando dependencias necesarias..."
   echo ""
   apt-get -y install libgtk-3-0
   apt-get -y install libnotify4
@@ -101,18 +109,18 @@ echo ""
 
 # Crear la carpeta para el usuario no root
   echo ""
-  echo "  Creando la carpeta para el usuario no root..."
+  echo "    Creando la carpeta para el usuario no root..."
   echo ""
-  mkdir -p /home/$UsuarioNoRoot/Cryptos/XCH/ 2> /dev/null
-  rm -rf /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/ 2> /dev/null
-  mv /root/SoftInst/Cryptos/XCH/usr/lib/chia-blockchain/ /home/$UsuarioNoRoot/Cryptos/XCH/
+  mkdir -p /home/$vUsuarioNoRoot/Cryptos/XCH/ 2> /dev/null
+  rm -rf /home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/ 2> /dev/null
+  mv /root/SoftInst/Cryptos/XCH/usr/lib/chia-blockchain/ /home/$vUsuarioNoRoot/Cryptos/XCH/
   rm -rf /root/SoftInst/Cryptos/XCH/usr/
-  #mkdir -p /home/$UsuarioNoRoot/.config/Chia Blockchain/ 2> /dev/null
-  #echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > /home/$UsuarioNoRoot/.config/Chia Blockchain/Preferences
+  #mkdir -p /home/$vUsuarioNoRoot/.config/Chia Blockchain/ 2> /dev/null
+  #echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > /home/$vUsuarioNoRoot/.config/Chia Blockchain/Preferences
 
 # Borrar archivos sobrantes
   echo ""
-  echo "  Borrando archivos sobrantes..."
+  echo "    Borrando archivos sobrantes..."
   echo ""
   #rm -rf /root/SoftInst/Cryptos/XCH/debian-binary
   #rm -rf /root/SoftInst/Cryptos/XCH/control.tar.xz
@@ -120,95 +128,95 @@ echo ""
 
 # Agregar aplicación al menú
   echo ""
-  echo "  Agregando la aplicación gráfica al menú..."
+  echo "    Agregando la aplicación gráfica al menú..."
   echo ""
-  mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-  echo "[Desktop Entry]"                                                            > /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
-  echo "Name=xch GUI"                                                              >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
-  echo "Type=Application"                                                          >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
-  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"            >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
-  echo "Terminal=false"                                                            >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
-  echo "Hidden=false"                                                              >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
-  echo "Categories=Cryptos"                                                        >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
-  echo "Icon=/home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain.png" >> /home/$UsuarioNoRoot/.local/share/applications/xch.desktop
-  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.local/share/applications/xch.desktop -R
-  gio set /home/$UsuarioNoRoot/.local/share/applications/xch.desktop "metadata::trusted" yes
+  mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
+  echo "[Desktop Entry]"                                                             > /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+  echo "Name=xch GUI"                                                               >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+  echo "Type=Application"                                                           >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+  echo "Exec=/home/$vUsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"            >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+  echo "Terminal=false"                                                             >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+  echo "Hidden=false"                                                               >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+  echo "Categories=Cryptos"                                                         >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+  echo "Icon=/home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain.png" >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop -R
+  gio set /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop "metadata::trusted" yes
 
 # Crear el archivo de auto-ehecución
   echo ""
-  echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
+  echo "    Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
   echo ""
-  mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
-  echo "[Desktop Entry]"                                                            > /home/$UsuarioNoRoot/.config/autostart/xch.desktop
-  echo "Name=xch GUI"                                                              >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
-  echo "Type=Application"                                                          >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
-  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"            >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
-  echo "Terminal=false"                                                            >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
-  echo "Hidden=false"                                                              >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
-  echo "Categories=Cryptos"                                                        >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
-  echo "Icon=/home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain.png" >> /home/$UsuarioNoRoot/.config/autostart/xch.desktop
-  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.config/autostart/xch.desktop -R
-  gio set /home/$UsuarioNoRoot/.config/autostart/xch.desktop "metadata::trusted" yes
+  mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
+  echo "[Desktop Entry]"                                                             > /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+  echo "Name=xch GUI"                                                               >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+  echo "Type=Application"                                                           >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+  echo "Exec=/home/$vUsuarioNoRoot/scripts/c-scripts/xch-gui-iniciar.sh"            >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+  echo "Terminal=false"                                                             >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+  echo "Hidden=false"                                                               >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+  echo "Categories=Cryptos"                                                         >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+  echo "Icon=/home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain.png" >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/xch.desktop -R
+  gio set /home/$vUsuarioNoRoot/.config/autostart/xch.desktop "metadata::trusted" yes
 
 # Instalar los c-scripts
   echo ""
-  echo "  Instalando los c-scripts..."
+  echo "    Instalando los c-scripts..."
   echo ""
-  su $UsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
-  find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+  su $vUsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
+  find /home/$vUsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Parar el daemon
   echo ""
-  echo "  Parando el daemon (si es que está activo)..."
+  echo "    Parando el daemon (si es que está activo)..."
   echo ""
-  chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh
-  su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh"
+  chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh
+  su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh"
 
 # Reparar permisos
   echo ""
-  echo "  Reparando permisos..."
+  echo "    Reparando permisos..."
   echo ""
-  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/XCH/ -R
-  find /home/$UsuarioNoRoot/Cryptos/XCH/ -type d -exec chmod 750 {} \;
-  find /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/ -type f -exec chmod +x {} \;
-  find /home/$UsuarioNoRoot/                             -type f -iname "*.sh" -exec chmod +x {} \;
-  chown root:root /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
-  chmod 4755      /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/XCH/ -R
+  find /home/$vUsuarioNoRoot/Cryptos/XCH/ -type d -exec chmod 750 {} \;
+  find /home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/ -type f -exec chmod +x {} \;
+  find /home/$vUsuarioNoRoot/                             -type f -iname "*.sh" -exec chmod +x {} \;
+  chown root:root /home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
+  chmod 4755      /home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
 
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/chia_ca.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/daemon/private_daemon.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/farmer/private_farmer.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/farmer/public_farmer.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/full_node/private_full_node.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/full_node/public_full_node.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/chia_ca.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/private_ca.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/harvester/private_harvester.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/full_node/public_full_node.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/private_ca.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/timelord/private_timelord.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/timelord/public_timelord.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/daemon/private_daemon.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/wallet/private_wallet.crt
-  chmod 0644 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/wallet/public_wallet.crt
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/chia_ca.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/daemon/private_daemon.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/farmer/private_farmer.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/farmer/public_farmer.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/full_node/private_full_node.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/full_node/public_full_node.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/chia_ca.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/private_ca.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/harvester/private_harvester.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/full_node/public_full_node.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/ca/private_ca.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/timelord/private_timelord.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/timelord/public_timelord.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/daemon/private_daemon.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/wallet/private_wallet.key
-  chmod 0600 /home/$UsuarioNoRoot/.chia/mainnet/config/ssl/wallet/public_wallet.key
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/ca/chia_ca.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/daemon/private_daemon.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/farmer/private_farmer.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/farmer/public_farmer.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/full_node/private_full_node.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/full_node/public_full_node.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/ca/chia_ca.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/ca/private_ca.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/harvester/private_harvester.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/full_node/public_full_node.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/ca/private_ca.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/timelord/private_timelord.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/timelord/public_timelord.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/daemon/private_daemon.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/wallet/private_wallet.crt
+  chmod 0644 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/wallet/public_wallet.crt
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/ca/chia_ca.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/daemon/private_daemon.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/farmer/private_farmer.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/farmer/public_farmer.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/full_node/private_full_node.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/full_node/public_full_node.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/ca/chia_ca.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/ca/private_ca.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/harvester/private_harvester.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/full_node/public_full_node.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/ca/private_ca.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/timelord/private_timelord.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/timelord/public_timelord.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/daemon/private_daemon.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/wallet/private_wallet.key
+  chmod 0600 /home/$vUsuarioNoRoot/.chia/mainnet/config/ssl/wallet/public_wallet.key
 
-  chmod 0644 /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/resources/app.asar.unpacked/daemon/mozilla-ca/cacert.pem
-  chmod +x   /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain
-  chmod +x   /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/resources/app.asar.unpacked/daemon/chia
+  chmod 0644 /home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/resources/app.asar.unpacked/daemon/mozilla-ca/cacert.pem
+  chmod +x   /home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain
+  chmod +x   /home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/resources/app.asar.unpacked/daemon/chia
      
