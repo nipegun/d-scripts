@@ -86,6 +86,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             fi
           cd /root/SoftInst/Cryptos/XCH/
           #wget https://download.chia.net/install/chia-blockchain_"$vUltVersDeb"_amd64.deb -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+          rm -f chia-blockchain.deb 2> /dev/null
           wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
 
           # Instalar el paquete
