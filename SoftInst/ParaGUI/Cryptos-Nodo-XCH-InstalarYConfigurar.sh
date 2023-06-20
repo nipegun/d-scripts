@@ -104,6 +104,38 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             #gdebi -n /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
             dpkg -i /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
 
+          # Agregar aplicación al menú
+            echo ""
+            echo "    Agregando la aplicación gráfica al menú..."
+            echo ""
+            mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
+            echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+            echo "Name=xch GUI"                                                     >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+            echo "Type=Application"                                                 >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+            echo "Exec=/opt/chia/chia-blockchain"                                   >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+            echo "Terminal=false"                                                   >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+            echo "Hidden=false"                                                     >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+            echo "Categories=Cryptos"                                               >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+            echo "Icon=/usr/share/icons/hicolor/1024x1024/apps/chia-blockchain.png" >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
+            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop -R
+            gio set /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop "metadata::trusted" yes
+
+          # Crear el archivo de auto-ehecución
+            echo ""
+            echo "    Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
+            echo ""
+            mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
+            echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+            echo "Name=xch GUI"                                                     >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+            echo "Type=Application"                                                 >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+            echo "Exec=/opt/chia/chia-blockchain"                                   >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+            echo "Terminal=false"                                                   >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+            echo "Hidden=false"                                                     >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+            echo "Categories=Cryptos"                                               >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+            echo "Icon=/usr/share/icons/hicolor/1024x1024/apps/chia-blockchain.png" >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
+            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/xch.desktop -R
+            gio set /home/$vUsuarioNoRoot/.config/autostart/xch.desktop "metadata::trusted" yes
+
         ;;
 
         2)
