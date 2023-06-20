@@ -177,7 +177,7 @@ elif [ $OS_VERS == "11" ]; then
 elif [ $OS_VERS == "12" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 12 (Bookworm)...${vFinColor}"
   echo ""
 
   echo ""
