@@ -174,7 +174,7 @@ elif [ $OS_VERS == "11" ]; then
     service fail2ban restart
     # tail -f /var/log/fail2ban.log
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $OS_VERS == "12" ]; then
 
   echo ""
   echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 11 (Bullseye)...${vFinColor}"
