@@ -139,15 +139,15 @@ elif [ $OS_VERS == "12" ]; then
 
   cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
-  echo "deb http://deb.debian.org/debian bookworm main contrib non-free"                         > /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian bookworm main contrib non-free"                    >> /etc/apt/sources.list
-  echo ""                                                                                       >> /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian-security/ bookworm-security main contrib non-free"     >> /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian-security/ bookworm-security main contrib non-free" >> /etc/apt/sources.list
-  echo ""                                                                                       >> /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free"                >> /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free"            >> /etc/apt/sources.list
-  echo ""                                                                                       >> /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware"                         > /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware"                    >> /etc/apt/sources.list
+  echo ""                                                                                                         >> /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware"     >> /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list
+  echo ""                                                                                                         >> /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"                >> /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"            >> /etc/apt/sources.list
+  echo ""                                                                                                         >> /etc/apt/sources.list
   echo ""
 
 fi
