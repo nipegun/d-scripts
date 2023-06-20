@@ -108,7 +108,7 @@ elif [ $OS_VERS == "11" ]; then
 elif [ $OS_VERS == "12" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 12 (Bookwork)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 12 (Bookworm)...${vFinColor}"
   echo ""
 
   apt-get -y update 2> /dev/null
