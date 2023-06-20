@@ -105,5 +105,19 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   systemctl enable xrdp --now
 
+elif [ $OS_VERS == "12" ]; then
+
+  echo ""
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 12 (Bookwork)...${vFinColor}"
+  echo ""
+
+  apt-get -y update 2> /dev/null
+  apt-get -y install xrdp
+
+  echo ""
+  echo "    Activando XRDP como servicio..."
+  echo ""
+  systemctl enable xrdp --now
+
 fi
 
