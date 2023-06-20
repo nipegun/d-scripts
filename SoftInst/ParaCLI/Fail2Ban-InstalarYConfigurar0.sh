@@ -235,6 +235,7 @@ elif [ $OS_VERS == "12" ]; then
     echo "findtime = 1w"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
     echo "bantime = 1w"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
     echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
     echo "[JaulaInCrescendo6]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
     echo "# Si ocurren 2 baneos de 1 semana en 1 mes, crear un nuevo baneo de 1 mes"         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
     echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
@@ -257,9 +258,14 @@ elif [ $OS_VERS == "12" ]; then
     #echo "#mta = sendmail"             >> /etc/fail2ban/jail.d/defaults-debian.conf
     #echo "#action = %(action_mwl)s"    >> /etc/fail2ban/jail.d/defaults-debian.conf
 
+  # Crear los archivos de logs
+    touch /var/log/auth.log      # Necesario para que inicie el servicio
+    touch /var/log/fail2ban.log
+
   # Reiniciar el servicio
     systemctl reload fail2ban
     systemctl restart fail2ban
+    systemctl --no-pager status fail2ban
     # tail -f /var/log/fail2ban.log
 
 fi
