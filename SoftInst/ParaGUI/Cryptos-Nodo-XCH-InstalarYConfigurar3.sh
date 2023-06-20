@@ -117,7 +117,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             echo "Hidden=false"                                                     >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
             echo "Categories=Cryptos"                                               >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
             echo "Icon=/usr/share/icons/hicolor/1024x1024/apps/chia-blockchain.png" >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
-            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop -R
+            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/ -R
             gio set /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop "metadata::trusted" yes
 
           # Crear el archivo de auto-ehecución
@@ -133,7 +133,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             echo "Hidden=false"                                                     >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
             echo "Categories=Cryptos"                                               >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
             echo "Icon=/usr/share/icons/hicolor/1024x1024/apps/chia-blockchain.png" >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
-            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/xch.desktop -R
+            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/ -R
             gio set /home/$vUsuarioNoRoot/.config/autostart/xch.desktop "metadata::trusted" yes
 
         ;;
