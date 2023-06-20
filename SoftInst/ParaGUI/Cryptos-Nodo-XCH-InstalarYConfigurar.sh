@@ -102,7 +102,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             #    echo ""
             #  fi
             #gdebi -n /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
-            dpkg -i /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+            # dpkg -i /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
 
         ;;
 
