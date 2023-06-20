@@ -263,7 +263,6 @@ elif [ $OS_VERS == "12" ]; then
     touch /var/log/fail2ban.log
 
   # Reiniciar el servicio
-    systemctl reload fail2ban
     systemctl restart fail2ban
     systemctl --no-pager status fail2ban
     # tail -f /var/log/fail2ban.log
