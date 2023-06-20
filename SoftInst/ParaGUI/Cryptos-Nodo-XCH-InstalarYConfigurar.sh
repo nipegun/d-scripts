@@ -101,6 +101,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
                 apt-get -y install gdebi
                 echo ""
               fi
+            gdebi -n /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
 
         ;;
 
