@@ -93,15 +93,16 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             echo "    Instalando el paquete .deb..."
             echo ""
             # Comprobar si el paquete gdebi está instalado. Si no lo está, instalarlo.
-              if [[ $(dpkg-query -s gdebi 2>/dev/null | grep installed) == "" ]]; then
-                echo ""
-                echo "      El paquete gdebi no está instalado. Iniciando su instalación..."
-                echo ""
-                apt-get -y update
-                apt-get -y install gdebi
-                echo ""
-              fi
-            gdebi -n /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+            #  if [[ $(dpkg-query -s gdebi 2>/dev/null | grep installed) == "" ]]; then
+            #    echo ""
+            #    echo "      El paquete gdebi no está instalado. Iniciando su instalación..."
+            #    echo ""
+            #    apt-get -y update
+            #    apt-get -y install gdebi
+            #    echo ""
+            #  fi
+            #gdebi -n /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+            dpkg -i /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
 
         ;;
 
