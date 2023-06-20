@@ -31,76 +31,221 @@ echo ""
 echo -e "${vColorAzulClaro}  Iniciando el script de instalación de la cadena de bloques de XCH...${vFinColor}"
 echo ""
 
-# Crear carpeta de descarga
-  echo ""
-  echo "    Creando carpeta de descarga..."
-  echo ""
-  mkdir -p /root/SoftInst/Cryptos/XCH/ 2> /dev/null
-  rm -rf /root/SoftInst/Cryptos/XCH/*
+vFechaDeEjec=$(date +a%Ym%md%d@%T)
 
-# Descargar y descomprimir todos los archivos
-  echo ""
-  echo "    Descargando el paquete .deb de la instalación..."
-  echo ""
-  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-      echo ""
-      echo "      El paquete wget no está instalado. Iniciando su instalación..."
-      echo ""
-      apt-get -y update
-      apt-get -y install wget
-      echo ""
-    fi
-  cd /root/SoftInst/Cryptos/XCH/
-  wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+# Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo -e "${vColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+    echo ""
+    apt-get -y update
+    apt-get -y install dialog
+    echo ""
+  fi
 
-  echo ""
-  echo "    Extrayendo los archivos de dentro del paquete .deb..."
-  echo ""
-  # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
-      echo ""
-      echo "      El paquete binutils no está instalado. Iniciando su instalación..."
-      echo ""
-      apt-get -y update > /dev/null
-      apt-get -y install binutils
-      echo ""
-    fi
-  ar xv /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+menu=(dialog --checklist "Indica el tipo de instalación o actualización que quieres realizar:" 22 96 16)
+  opciones=(
+    1 "Instalar o actualizar en la carpeta por defecto /opt." off
+    2 "Instalar o actualizar en la carpeta de root." off
+    3 "Instalar o actualizar en la carpeta del usuario no root." off 
+  )
+choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
-  echo ""
-  echo "    Descomprimiendo el archivo data.tar.xz..."
-  echo ""
-  # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
-      echo ""
-      echo "      El paquete tar no está instalado. Iniciando su instalación..."
-      echo ""
-      apt-get -y update > /dev/null
-      apt-get -y install tar
-      echo ""
-    fi
-  tar -xvf /root/SoftInst/Cryptos/XCH/data.tar.xz
-  echo ""
+  for choice in $choices
+    do
+      case $choice in
+
+        1)
+
+          echo ""
+          echo "  Instalando o actualizando en la carpeta por defecto (/opt)..."
+          echo ""
+
+          # Crear carpeta de descarga
+            echo ""
+            echo "    Creando carpeta de descarga..."
+            echo ""
+            mkdir -p /root/SoftInst/Cryptos/XCH/ 2> /dev/null
+            rm -rf /root/SoftInst/Cryptos/XCH/*
+
+          # Determinar la última versión para Debian
+            vUltVersDeb=$(curl -sL https://www.chia.net/downloads/ | sed 's|>|>\n|g' | grep href | grep releases | cut -d'"' -f2 | cut -d'/' -f8 | head -n1)
+
+          # Descargar y descomprimir todos los archivos
+            echo ""
+            echo "    Descargando el paquete .deb de la instalación..."
+            echo ""
+          # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo "      El paquete wget no está instalado. Iniciando su instalación..."
+              echo ""
+              apt-get -y update
+              apt-get -y install wget
+              echo ""
+            fi
+          cd /root/SoftInst/Cryptos/XCH/
+          #wget https://download.chia.net/install/chia-blockchain_"$vUltVersDeb"_amd64.deb -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+          wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+
+        ;;
+
+        2)
+
+          echo ""
+          echo "  Instalando o actualizando en la carpeta de root...."
+          echo ""
+
+          # Crear carpeta de descarga
+            echo ""
+            echo "    Creando carpeta de descarga..."
+            echo ""
+            mkdir -p /root/SoftInst/Cryptos/XCH/ 2> /dev/null
+            rm -rf /root/SoftInst/Cryptos/XCH/*
+
+          # Determinar la última versión para Debian
+            vUltVersDeb=$(curl -sL https://www.chia.net/downloads/ | sed 's|>|>\n|g' | grep href | grep releases | cut -d'"' -f2 | cut -d'/' -f8 | head -n1)
+
+          # Descargar y descomprimir todos los archivos
+            echo ""
+            echo "    Descargando el paquete .deb de la instalación..."
+            echo ""
+          # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo "      El paquete wget no está instalado. Iniciando su instalación..."
+              echo ""
+              apt-get -y update
+              apt-get -y install wget
+              echo ""
+            fi
+          cd /root/SoftInst/Cryptos/XCH/
+          #wget https://download.chia.net/install/chia-blockchain_"$vUltVersDeb"_amd64.deb -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+          wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+
+          echo ""
+          echo "    Extrayendo los archivos de dentro del paquete .deb..."
+          echo ""
+          # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo "      El paquete binutils no está instalado. Iniciando su instalación..."
+              echo ""
+              apt-get -y update > /dev/null
+              apt-get -y install binutils
+              echo ""
+            fi
+          ar xv /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+
+          echo ""
+          echo "    Descomprimiendo el archivo data.tar.xz..."
+          echo ""
+          # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo "      El paquete tar no está instalado. Iniciando su instalación..."
+              echo ""
+              apt-get -y update > /dev/null
+              apt-get -y install tar
+              echo ""
+            fi
+          tar -xvf /root/SoftInst/Cryptos/XCH/data.tar.xz
+          echo ""
+
+        ;;
+
+        3)
+
+          echo ""
+          echo "  Instalando o actualizando en la carpeta del usuario no root...."
+          echo ""
+
+          # Crear carpeta de descarga
+            echo ""
+            echo "    Creando carpeta de descarga..."
+            echo ""
+            mkdir -p /root/SoftInst/Cryptos/XCH/ 2> /dev/null
+            rm -rf /root/SoftInst/Cryptos/XCH/*
+
+          # Determinar la última versión para Debian
+            vUltVersDeb=$(curl -sL https://www.chia.net/downloads/ | sed 's|>|>\n|g' | grep href | grep releases | cut -d'"' -f2 | cut -d'/' -f8 | head -n1)
+
+          # Descargar y descomprimir todos los archivos
+            echo ""
+            echo "    Descargando el paquete .deb de la instalación..."
+            echo ""
+          # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo "      El paquete wget no está instalado. Iniciando su instalación..."
+              echo ""
+              apt-get -y update
+              apt-get -y install wget
+              echo ""
+            fi
+          cd /root/SoftInst/Cryptos/XCH/
+          #wget https://download.chia.net/install/chia-blockchain_"$vUltVersDeb"_amd64.deb -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+          wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+
+
+          echo ""
+          echo "    Extrayendo los archivos de dentro del paquete .deb..."
+          echo ""
+          # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo "      El paquete binutils no está instalado. Iniciando su instalación..."
+              echo ""
+              apt-get -y update > /dev/null
+              apt-get -y install binutils
+              echo ""
+            fi
+          ar xv /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
+
+          echo ""
+          echo "    Descomprimiendo el archivo data.tar.xz..."
+          echo ""
+          # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo "      El paquete tar no está instalado. Iniciando su instalación..."
+              echo ""
+              apt-get -y update > /dev/null
+              apt-get -y install tar
+              echo ""
+            fi
+          tar -xvf /root/SoftInst/Cryptos/XCH/data.tar.xz
+          echo ""
+
+        ;;
+
+    esac
+
+done
+
+
+
+
+
 
 # Instalar dependencias necesarias
-  echo ""
-  echo "    Instalando dependencias necesarias..."
-  echo ""
-  apt-get -y install libgtk-3-0
-  apt-get -y install libnotify4
-  apt-get -y install libnss3
-  apt-get -y install libxtst6
-  apt-get -y install xdg-utils
-  apt-get -y install libatspi2.0-0
-  apt-get -y install libdrm2
-  apt-get -y install libgbm1
-  apt-get -y install libxcb-dri3-0
-  apt-get -y install kde-cli-tools
-  apt-get -y install kde-runtime
-  apt-get -y install trash-cli
-  apt-get -y install libglib2.0-bin
-  apt-get -y install gvfs-bin
+  #echo ""
+  #echo "    Instalando dependencias necesarias..."
+  #echo ""
+  #apt-get -y install libgtk-3-0
+  #apt-get -y install libnotify4
+  #apt-get -y install libnss3
+  #apt-get -y install libxtst6
+  #apt-get -y install xdg-utils
+  #apt-get -y install libatspi2.0-0
+  #apt-get -y install libdrm2
+  #apt-get -y install libgbm1
+  #apt-get -y install libxcb-dri3-0
+  #apt-get -y install kde-cli-tools
+  #apt-get -y install kde-runtime
+  #apt-get -y install trash-cli
+  #apt-get -y install libglib2.0-bin
+  #apt-get -y install gvfs-bin
   #dpkg -i /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
   #echo ""
   #echo "Para ver que archivos instaló el paquete, ejecuta:"
@@ -108,13 +253,13 @@ echo ""
   #echo "dpkg-deb -c /root/SoftInst/Cryptos/XCH/chia-blockchain.deb"
 
 # Crear la carpeta para el usuario no root
-  echo ""
-  echo "    Creando la carpeta para el usuario no root..."
-  echo ""
-  mkdir -p /home/$vUsuarioNoRoot/Cryptos/XCH/ 2> /dev/null
-  rm -rf /home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/ 2> /dev/null
-  mv /root/SoftInst/Cryptos/XCH/usr/lib/chia-blockchain/ /home/$vUsuarioNoRoot/Cryptos/XCH/
-  rm -rf /root/SoftInst/Cryptos/XCH/usr/
+  #echo ""
+  #echo "    Creando la carpeta para el usuario no root..."
+  #echo ""
+  #mkdir -p /home/$vUsuarioNoRoot/Cryptos/XCH/ 2> /dev/null
+  #rm -rf /home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/ 2> /dev/null
+  #mv /root/SoftInst/Cryptos/XCH/usr/lib/chia-blockchain/ /home/$vUsuarioNoRoot/Cryptos/XCH/
+  #rm -rf /root/SoftInst/Cryptos/XCH/usr/
   #mkdir -p /home/$vUsuarioNoRoot/.config/Chia Blockchain/ 2> /dev/null
   #echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > /home/$vUsuarioNoRoot/.config/Chia Blockchain/Preferences
 
@@ -162,9 +307,9 @@ echo ""
   echo ""
   echo "    Instalando los c-scripts..."
   echo ""
-  su $vUsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
+  su $vUsuarioNoRoot -c "curl -sL https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
   find /home/$vUsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
-
+  
 # Parar el daemon
   echo ""
   echo "    Parando el daemon (si es que está activo)..."
@@ -224,6 +369,4 @@ echo ""
   # Carpea .config
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/ -R
 
-# Instalar los c-scripts
-  su $vUsuarioNoRoot -c "curl -sL https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
-  find /home/$vUsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+
