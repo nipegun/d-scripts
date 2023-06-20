@@ -88,6 +88,20 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           #wget https://download.chia.net/install/chia-blockchain_"$vUltVersDeb"_amd64.deb -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
           wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
 
+          # Instalar el paquete
+            echo ""
+            echo "    Instalando el paquete .deb..."
+            echo ""
+            # Comprobar si el paquete gdebi está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s gdebi 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo "      El paquete gdebi no está instalado. Iniciando su instalación..."
+                echo ""
+                apt-get -y update
+                apt-get -y install gdebi
+                echo ""
+              fi
+
         ;;
 
         2)
