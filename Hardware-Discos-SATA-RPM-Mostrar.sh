@@ -36,37 +36,37 @@
   fi
 
 echo ""
-echo "  DISCO sda"
+echo "  /dev/sda:"
 echo ""
 smartctl -i /dev/sda | grep otation
 
 echo ""
-echo "  DISCO sdb"
+echo "  /dev/sdb:"
 echo ""
 smartctl -i /dev/sdb | grep otation
 
 echo ""
-echo "  DISCO sdc"
+echo "  /dev/sdc:"
 echo ""
 smartctl -i /dev/sdc | grep otation
 
 echo ""
-echo "  DISCO sdd"
+echo "  /dev/sdd:"
 echo ""
 smartctl -i /dev/sdd | grep otation
 
 echo ""
-echo "  DISCO sde"
+echo "  /dev/sde:"
 echo ""
 smartctl -i /dev/sde | grep otation
 
 echo ""
-echo "  DISCO sdf"
+echo "  /dev/sdf:"
 echo ""
 smartctl -i /dev/sdf | grep otation
 
 echo ""
-echo "  DISCO sdg"
+echo "  /dev/sdg:"
 echo ""
 smartctl -i /dev/sdg | grep otation
 
