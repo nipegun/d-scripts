@@ -38,35 +38,35 @@
 echo ""
 echo "  DISCO sda"
 echo ""
-smartctl -i /dev/sda
+smartctl -i /dev/sda | grep otation
 
 echo ""
 echo "  DISCO sdb"
 echo ""
-smartctl -i /dev/sdb
+smartctl -i /dev/sdb | grep otation
 
 echo ""
 echo "  DISCO sdc"
 echo ""
-smartctl -i /dev/sdc
+smartctl -i /dev/sdc | grep otation
 
 echo ""
 echo "  DISCO sdd"
 echo ""
-smartctl -i /dev/sdd
+smartctl -i /dev/sdd | grep otation
 
 echo ""
 echo "  DISCO sde"
 echo ""
-smartctl -i /dev/sde
+smartctl -i /dev/sde | grep otation
 
 echo ""
 echo "  DISCO sdf"
 echo ""
-smartctl -i /dev/sdf
+smartctl -i /dev/sdf | grep otation
 
 echo ""
 echo "  DISCO sdg"
 echo ""
-smartctl -i /dev/sdg
+smartctl -i /dev/sdg | grep otation
 
