@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para instalar y configurar el servidor iperf en Debian
+# Script de NiPeGun para instalar y configurar el servidor iPerf en Debian
 #
 # Ejecución remota:
 #   curl -sL x | bash
@@ -58,7 +58,7 @@
 if [ $OS_VERS == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor iperf para Debian 7 (Wheezy)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor iPerf para Debian 7 (Wheezy)...${vFinColor}"
   echo ""
 
   echo ""
@@ -68,7 +68,7 @@ if [ $OS_VERS == "7" ]; then
 elif [ $OS_VERS == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor iperf para Debian 8 (Jessie)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor iPerf para Debian 8 (Jessie)...${vFinColor}"
   echo ""
 
   echo ""
@@ -78,7 +78,7 @@ elif [ $OS_VERS == "8" ]; then
 elif [ $OS_VERS == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor iperf para Debian 9 (Stretch)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor iPerf para Debian 9 (Stretch)...${vFinColor}"
   echo ""
 
   echo ""
@@ -88,7 +88,7 @@ elif [ $OS_VERS == "9" ]; then
 elif [ $OS_VERS == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor iperf para Debian 10 (Buster)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor iPerf para Debian 10 (Buster)...${vFinColor}"
   echo ""
 
   echo ""
@@ -98,7 +98,7 @@ elif [ $OS_VERS == "10" ]; then
 elif [ $OS_VERS == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor iperf para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor iPerf para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
   echo ""
@@ -108,7 +108,7 @@ elif [ $OS_VERS == "11" ]; then
 elif [ $OS_VERS == "12" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor iperf para Debian 12 (Bookworm)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor iPerf para Debian 12 (Bookworm)...${vFinColor}"
   echo ""
 
   echo ""
