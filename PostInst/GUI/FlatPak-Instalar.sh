@@ -130,5 +130,6 @@ elif [ $OS_VERS == "12" ]; then
   echo "    Agregando el repositorio flathuub..."
   echo ""
   flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 fi
 
