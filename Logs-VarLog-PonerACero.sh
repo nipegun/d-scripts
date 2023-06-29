@@ -30,15 +30,15 @@
   echo -e "${vColorAzulClaro}  Iniciando el script para poner a cero todos los logs de /var/log/ ...${vFinColor}"
   echo ""
 
-# Borrar archivos sobrantes
+# Borrar archivos comprimidos de logs viejos y otros archivos ya innecesarios
   echo ""
-  echo "    Borrando archivos sobrantes..."
+  echo "    Borrando archivos comprimidos de logs viejos y otros archivos ya innecesarios..."
   echo ""
   find /var/log/ -type f -name "*.gz" -print -exec rm {} \;
-  for ContExt in {0..100}
+  for vExt in {0..100}
     do
-      find /var/log/ -type f -name "*.$ContExt" -print -exec rm {} \;
-      find /var/log/ -type f -name "*.$ContExt.log" -print -exec rm {} \;
+      find /var/log/ -type f -name "*.$vExt" -print -exec rm {} \;
+      find /var/log/ -type f -name "*.$vExt.log" -print -exec rm {} \;
       find /var/log/ -type f -name "*.old" -print -exec rm {} \;
     done
 
