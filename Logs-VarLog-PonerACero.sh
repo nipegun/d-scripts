@@ -9,7 +9,7 @@
 # Script de NiPeGun para poner a cero todos los logs de /var/log
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Logs-VarLog-PonerACero.sh | bash
 # ----------
 
 # Definir variables de color
