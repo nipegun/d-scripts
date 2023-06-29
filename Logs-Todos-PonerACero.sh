@@ -36,12 +36,12 @@
   echo ""
   find /bin/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
   find /boot/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /dev/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /dev/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \; 2> /dev/null
   find /etc/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
   find /home/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
   find /lib/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
   find /lib64/      -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /lost+found/ -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /lost+found/ -type f -name "*.log.gz" -print -exec truncate -s 0 {} \; 2> /dev/null
   find /media/      -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
   find /mnt/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
   find /opt/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
@@ -59,12 +59,12 @@
   echo ""
   find /bin/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
   find /boot/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /dev/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /dev/        -type f -name "*.log" -print -exec truncate -s 0 {} \; 2> /dev/null
   find /etc/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
   find /home/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
   find /lib/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
   find /lib64/      -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /lost+found/ -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /lost+found/ -type f -name "*.log" -print -exec truncate -s 0 {} \; 2> /dev/null
   find /media/      -type f -name "*.log" -print -exec truncate -s 0 {} \;
   find /mnt/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
   find /opt/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
