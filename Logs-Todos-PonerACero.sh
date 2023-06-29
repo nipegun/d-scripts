@@ -27,7 +27,7 @@
 
 # Notificar inicio de ejecución del script
   echo ""
-  echo -e "${vColorAzulClaro}  Poniendo a cero todos los achivos de logs de todo el sistema... ...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Poniendo a cero todos los archivos de logs de todo el sistema... ...${vFinColor}"
   echo ""
 
 # Borrar archivos comprimidos de logs viejos
