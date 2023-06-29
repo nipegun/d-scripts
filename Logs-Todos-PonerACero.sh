@@ -6,55 +6,78 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para poner a cero todos los logs de /var/log
+# Script de NiPeGun para poner a cero todos los logs de /var/log
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Logs-Todos-PonerACero.sh | bash
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Logs-Todos-PonerACero.sh | bash
 # ----------
 
-echo ""
-echo -e "${ColorVerde}  Poniendo a cero todos los achivos de logs que se encuentren en las carpetas de todo el sistema...${FinColor}"
-echo ""
+# Definir variables de color
+  vColorAzul="\033[0;34m"
+  vColorAzulClaro="\033[1;34m"
+  vColorVerde='\033[1;32m'
+  vColorRojo='\033[1;31m'
+  vFinColor='\033[0m'
 
-    find /bin/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /boot/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /dev/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /etc/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /home/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /lib/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /lib64/      -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /lost+found/ -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /media/      -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /mnt/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /opt/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /root/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /run/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /sbin/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /srv/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /tmp/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /usr/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-    find /var/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    exit 1
+  fi
 
-echo ""
-echo -e "${ColorVerde}  Borrando todos los achivos comprimidos de logs que se encuentren en las carpetas de todo el sistema...${FinColor}"
-echo ""
+# Notificar inicio de ejecución del script
+  echo ""
+  echo -e "${vColorAzulClaro}  Poniendo a cero todos los achivos de logs de todo el sistema... ...${vFinColor}"
+  echo ""
 
-    find /bin/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /boot/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /dev/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /etc/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /home/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /lib/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /lib64/      -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /lost+found/ -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /media/      -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /mnt/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /opt/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /root/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /run/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /sbin/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /srv/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /tmp/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /usr/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-    find /var/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+# Borrar archivos comprimidos de logs viejos
+  echo ""
+  echo "    Borrando archivos comprimidos de logs viejos..."
+  echo ""
+  find /bin/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /boot/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /dev/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /etc/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /home/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /lib/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /lib64/      -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /lost+found/ -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /media/      -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /mnt/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /opt/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /root/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /run/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /sbin/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /srv/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /tmp/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /usr/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  find /var/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+
+# Truncar logs activos
+  echo ""
+  echo "    Truncando archivos de logs activos..."
+  echo ""
+  find /bin/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /boot/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /dev/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /etc/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /home/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /lib/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /lib64/      -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /lost+found/ -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /media/      -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /mnt/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /opt/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /root/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /run/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /sbin/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /srv/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /tmp/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /usr/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  find /var/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+
+# Notificar inicio de ejecución del script
+  echo ""
+  echo -e "${vColorVerde}    Ejecución del script, finalizada.${vFinColor}"
+  echo ""
 
