@@ -186,7 +186,7 @@ elif [ $OS_VERS == "11" ]; then
     echo "MimeType=text/html;text/xml;application/xhtml_xml;application/x-mimearchive;x-scheme-handler/http;x-scheme-handler/https;" >> /root/.local/share/applications/chromiumroot.desktop
     gio set /root/.local/share/applications/chromiumroot.desktop "metadata::trusted" yes
 
-  /root/scripts/d-scripts/SoftInst/ParaGUI/TORBrowser-Instalar.sh
+  apt-get -y install torbrowser-launcher
   
   # Específicas para mate-desktop
     apt-get -y install caja-open-terminal
