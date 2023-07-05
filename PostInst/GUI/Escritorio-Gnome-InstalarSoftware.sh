@@ -398,7 +398,7 @@ elif [ $OS_VERS == "12" ]; then
     gio set /root/.local/share/applications/chromiumroot.desktop "metadata::trusted" yes
 
   # Tor browser
-    /root/scripts/d-scripts/SoftInst/ParaGUI/TORBrowser-Instalar.sh
+    apt-get -y install torbrowser-launcher
 
   # Espacíficas para Gnome
     apt-get -y install gnome-tweaks
