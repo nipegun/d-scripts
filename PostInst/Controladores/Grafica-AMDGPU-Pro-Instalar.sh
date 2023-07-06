@@ -187,7 +187,7 @@ elif [ $OS_VERS == "11" ]; then
   apt-get -y install wget
   mkdir -p /root/paquetes/amdgpu-pro
   rm -rf /root/paquetes/amdgpu-pro/*
-  wget --referer https://www.amd.com/es/support $URL$Archivo -O /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz
+  wget --referer https://www.amd.com/es/support $vURL$vArchivo -O /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz
   tar -xvf /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz -C  /root/paquetes/amdgpu-pro/
   rm -rf /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz
 
@@ -205,5 +205,10 @@ elif [ $OS_VERS == "11" ]; then
   dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-dkms-firmware_5.6.5.24-1109583_all.deb
   dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-core_20.30-1109583_all.deb
   dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-dkms_5.6.5.24-1109583_all.deb
+
+  apt -y install /root/paquetes/amdgpu-pro/amdgpu-pro-20.50-1234664-ubuntu-20.04/amdgpu-dkms-firmware_5.9.10.69-1234664_all.deb
+  apt -y install /root/paquetes/amdgpu-pro/amdgpu-pro-20.50-1234664-ubuntu-20.04/amdgpu-core_20.50-1234664_all.deb
+  apt -y install /root/paquetes/amdgpu-pro/amdgpu-pro-20.50-1234664-ubuntu-20.04/amdgpu-dkms_5.9.10.69-1234664_all.deb
+
 fi
 
