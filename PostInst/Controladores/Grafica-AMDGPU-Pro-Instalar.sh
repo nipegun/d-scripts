@@ -86,12 +86,12 @@ elif [ $OS_VERS == "10" ]; then
   echo "--------------------------------------------------------------------------------------------"
   echo ""
 
-  URL="http://drivers.amd.com/drivers/linux/"
+  vURL="http://drivers.amd.com/drivers/linux/"
 
   # 20.30
   #
   #Archivo="amdgpu-pro-20.30-1109583-ubuntu-18.04.tar.xz"
-  Archivo="amdgpu-pro-20.30-1109583-ubuntu-20.04.tar.xz"
+  vArchivo="amdgpu-pro-20.30-1109583-ubuntu-20.04.tar.xz"
   # AMD Radeon™ RX 5700/5600/5500 Series Graphics
   # AMD Radeon™ Pro WX-series
   # AMD Radeon™ VII Series Graphics
@@ -174,9 +174,36 @@ elif [ $OS_VERS == "11" ]; then
   echo "----------------------------------------------------------------------------------------------"
   echo ""
 
+  vURL="http://drivers.amd.com/drivers/linux/"
+  vArchivo="amdgpu-pro-20.50-1234664-ubuntu-20.04.tar.xz"
+  amdgpu-uninstall -y
+
   echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Quitando arquitectura i386"
+  echo ""
+  dpkg --remove-architecture i386
+  apt-get -y update
+
+  apt-get -y install wget
+  mkdir -p /root/paquetes/amdgpu-pro
+  rm -rf /root/paquetes/amdgpu-pro/*
+  wget --referer https://www.amd.com/es/support $URL$Archivo -O /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz
+  tar -xvf /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz -C  /root/paquetes/amdgpu-pro/
+  rm -rf /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz
+
+
+  echo ""
+  echo "  Agregando arquitectura i386"
+  echo ""
+  dpkg --add-architecture i386
+  apt-get -y update
+
+  echo ""
+  echo "  Listo para instalar..."
   echo ""
 
+  dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-dkms-firmware_5.6.5.24-1109583_all.deb
+  dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-core_20.30-1109583_all.deb
+  dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-dkms_5.6.5.24-1109583_all.deb
 fi
 
