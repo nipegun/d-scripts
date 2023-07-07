@@ -235,7 +235,7 @@ elif [ $OS_VERS == "11" ]; then
     echo ''                                                           >> /etc/guacamole/user-mapping.xml
     echo '</user-mapping>'                                            >> /etc/guacamole/user-mapping.xml
   # Generar el hash de la contraseña
-    vHashContra=$(echo -n P@ssw0rd | openssl md5 | cut -d'=' -f2 | sed 's- --g')
+    vHashContra=$(echo -n UsuarioX | openssl md5 | cut -d'=' -f2 | sed 's- --g')
   # Remplazar texto con hash de la contraseña
     sed -i -e "s|ContraHasheada|$vHashContra|g" /etc/guacamole/user-mapping.xml
   # Web cliente
