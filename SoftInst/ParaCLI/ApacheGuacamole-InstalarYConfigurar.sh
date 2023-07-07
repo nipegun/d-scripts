@@ -91,36 +91,69 @@ elif [ $OS_VERS == "11" ]; then
   echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 11 (Bullseye)...${vFinColor}"
   echo ""
 
-  # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-      echo ""
-      echo -e "${vColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
-      echo ""
-      apt-get -y update
-      apt-get -y install curl
-      echo ""
-    fi
-
-  vUltVersApGuac=$(curl -sL https://dlcdn.apache.org/guacamole/ | sed 's|</a>|</a>\n|g' | sed 's|<a|\n<a|g' | grep href | grep -v ame | grep -v ize | grep -v escription | grep -v irectory | grep -v EYS | grep -v odifie | tail -n 1 | cut -d'/' -f1 | cut -d'"' -f2)
-
-  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-      echo ""
-      echo -e "${vColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
-      echo ""
-      apt-get -y update
-      apt-get -y install wget
-      echo ""
-    fi
-
-  # Descargar
-    mkdir -p /root/SoftInst/Guacamole/
-    cd /root/SoftInst/Guacamole/
-    if [[ $vUltVersApGuac == "" ]]; then
-      echo "No se ha encontrado la versión"
-    else
-      wget https://dlcdn.apache.org/guacamole/$vUltVersApGuac/source/guacamole-server-$vUltVersApGuac.tar.gz
-    fi
+  # Instalar dependencias
+    apt-get -y install build-essential
+    apt-get -y install freerdp2-dev
+    apt-get -y install libavcodec-dev
+    apt-get -y install libavformat-dev
+    apt-get -y install libavutil-dev
+    apt-get -y install libcairo2-dev
+    apt-get -y install libjpeg62-turbo-dev
+    apt-get -y install libjpeg-dev
+    apt-get -y install libossp-uuid-dev
+    apt-get -y install libpango1.0-0
+    apt-get -y install libpango1.0-dev
+    apt-get -y install libpng-dev
+    apt-get -y install libpulse-dev
+    apt-get -y install libssh2-1
+    apt-get -y install libssh2-1-dev
+    apt-get -y install libssl-dev
+    apt-get -y install libswscale-dev
+    apt-get -y install libtelnet-dev
+    apt-get -y install libtool-bin
+    apt-get -y install libvncserver-dev
+    apt-get -y install libvorbis-dev
+    apt-get -y install libwebp-dev
+    apt-get -y install libwebsocketpp-dev
+    apt-get -y install libwebsockets16
+    apt-get -y install libwebsockets-dev
+    apt-get -y install openssl
+  # Apache Tomcat
+    apt-get -y install tomcat9
+    apt-get -y install tomcat9-admin
+    apt-get -y install tomcat9-common
+    apt-get -y install tomcat9-user
+    systemctl enable --now tomcat9
+    systemctl status tomcat9 --no-pager
+  # Guacamole server
+    # Determinar cuál es la última versión
+      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${vColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
+          echo ""
+          apt-get -y update
+          apt-get -y install curl
+          echo ""
+        fi
+      vUltVersApGuac=$(curl -sL https://dlcdn.apache.org/guacamole/ | sed 's|</a>|</a>\n|g' | sed 's|<a|\n<a|g' | grep href | grep -v ame | grep -v ize | grep -v escription | grep -v irectory | grep -v EYS | grep -v odifie | tail -n 1 | cut -d'/' -f1 | cut -d'"' -f2)
+    # Descargar el código fuente
+      # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${vColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
+          echo ""
+          apt-get -y update
+          apt-get -y install wget
+          echo ""
+        fi
+      mkdir -p /root/SoftInst/Guacamole/
+      cd /root/SoftInst/Guacamole/
+      if [[ $vUltVersApGuac == "" ]]; then
+        echo "No se ha encontrado la versión"
+      else
+        wget https://dlcdn.apache.org/guacamole/$vUltVersApGuac/source/guacamole-server-$vUltVersApGuac.tar.gz
+      fi
   # Descomprimir
     # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
@@ -135,98 +168,128 @@ elif [ $OS_VERS == "11" ]; then
   # Borrar archivo comprimido
     rm -rf /root/SoftInst/Guacamole/guacamole-server-$vUltVersApGuac.tar.gz
   # Compilar
-    # Instalar paquetes necesarios
-      apt-get -y install build-essential
-      apt-get -y install libcairo2-dev
-      #apt-get -y install libjpeg-turbo8-dev
-      apt-get -y install libpng-dev
-      apt-get -y install libtool-bin
-      apt-get -y install libossp-uuid-dev
-      apt-get -y install libvncserver-dev
-      apt-get -y install freerdp2-dev
-      apt-get -y install libssh2-1-dev
-      apt-get -y install libtelnet-dev
-      apt-get -y install libwebsockets-dev
-      apt-get -y install libpulse-dev
-      apt-get -y install libvorbis-dev
-      apt-get -y install libwebp-dev
-      apt-get -y install libssl-dev
-      apt-get -y install libpango1.0-dev
-      apt-get -y install libswscale-dev
-      apt-get -y install libavcodec-dev
-      apt-get -y install libavutil-dev
-      apt-get -y install libavformat-dev
-    #
-      cd guacamole-server-$vUltVersApGuac
-      ./configure --with-init-dir=/etc/init.d --enable-allow-freerdp-snapshots
-      make
-      make install
-      ldconfig
-      systemctl daemon-reload
-      systemctl start guacd
-      systemctl enable guacd
-      mkdir -p /etc/guacamole/{extensions,lib}
-    # Apache Tomcat
-      apt install tomcat9 tomcat9-admin tomcat9-common tomcat9-user
-      wget https://downloads.apache.org/guacamole/1.3.0/binary/guacamole-1.3.0.war
-      mv guacamole-1.3.0.war /var/lib/tomcat9/webapps/guacamole.war
-      systemctl restart tomcat9 guacd
-    # Auntnticación de bases de datos
-      apt install mariadb-server
-      mysql_secure_installation
-      wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
-      tar -xf mysql-connector-java-8.0.26.tar.gz
-      cp mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar /etc/guacamole/lib/
-      wget https://downloads.apache.org/guacamole/1.3.0/binary/guacamole-auth-jdbc-1.3.0.tar.gz
-      tar -xf guacamole-auth-jdbc-1.3.0.tar.gz
-      mv guacamole-auth-jdbc-1.3.0/mysql/guacamole-auth-jdbc-mysql-1.3.0.jar /etc/guacamole/extensions/
-      mysql -u root -p
-        ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
-        CREATE DATABASE guacamole_db;
-        CREATE USER 'guacamole_user'@'localhost' IDENTIFIED BY 'password';
-        GRANT SELECT,INSERT,UPDATE,DELETE ON guacamole_db.* TO 'guacamole_user'@'localhost';
-        FLUSH PRIVILEGES;
-        cd guacamole-auth-jdbc-1.3.0/mysql/schema
-        cat *.sql | mysql -u root -p guacamole_db
-        nano /etc/guacamole/guacamole.properties
-        #Paste in the following configuration settings, replacing [password] with the password of the new guacamole_user that you created for the database.
-        # MySQL properties
-        #mysql-hostname: 127.0.0.1
-        #mysql-port: 3306
-        #mysql-database: guacamole_db
-        #mysql-username: guacamole_user
-        #mysql-password: [password]
-        systemctl restart tomcat9 guacd mysql
-        #Navigate to the URL: [ip]:8080/guacamole
-        Enter guacadmin as the username and guacadmin as the password. Then click Login.
-        Create a New Admin User
-        Before continuing with configuring Guacamole, it’s recommended that you create a new admin account and delete the original.
-        Click the guacadmin user dropdown menu on the top right and select Settings.
-        Navigate to the Users tab and click the New User button.
-        Under the Edit User section, enter your preferred username and a secure password.
-        Under the Permissions section, check all the permissions.
-        Click Save to create the new user.
-        Log out of the current user and log in as the newly created user.
-        Click your username on the top left and select Settings from the dropdown menu.
-        Navigate to the Users tab and click the guacadmin user.
-        At the bottom of the Edit User screen, click Delete to remove the default user.
-        Create an SSH Connection
-        To test Guacamole, let’s create an new connection in Guacamole that opens up an SSH connection to the server.
-        After logging in to Guacamole, click your username on the top left and select Settings from the dropdown menu.
-        Navigate to the Connections tab and click New Connection.
-        Under Edit Connection, enter a name for your new connection (such as “Guacamole SSH”) and select SSH as the Protocol.
-
-        Under Parameters, enter your IP address as the Hostname, 22 as the Port, your username as the Username and your user’s password as the Password. Other parameters as available if you wish to edit the connection further.
-        Click Save to create the new connection.
-        Navigate back to your user’s home screen by clicking your username on the top left and select Home from the dropdown menu.
-        Click on the new connection under the All Connections list.
-
-        Más info: https://www.linode.com/docs/guides/installing-apache-guacamole-on-ubuntu-and-debian/
+    cd guacamole-server-$vUltVersApGuac
+    ./configure --with-systemd-dir=/etc/systemd/system/
+    make
+  # Instalar
+    make install
+    ldconfig
+    mkdir -p /etc/guacamole/{extensions,lib}
+    echo 'GUACAMOLE_HOME=/etc/guacamole' >> /etc/default/tomcat9
+  # Crear el archivo de propiedades
+    echo "guacd-hostname: localhost"                      > /etc/guacamole/guacamole.properties
+    echo "guacd-port: 4822"                              >> /etc/guacamole/guacamole.properties
+    echo "user-mapping: /etc/guacamole/user-mapping.xml" >> /etc/guacamole/guacamole.properties
+  # Crear el archivo de configuración de registro y depuración
+    echo '<configuration>'                                                                    > /etc/guacamole/logback.xml
+    echo ''                                                                                  >> /etc/guacamole/logback.xml
+    echo '  <!-- Appender for debugging -->'                                                 >> /etc/guacamole/logback.xml
+    echo '  <appender name="GUAC-DEBUG" class="ch.qos.logback.core.ConsoleAppender">'        >> /etc/guacamole/logback.xml
+    echo '    <encoder>'                                                                     >> /etc/guacamole/logback.xml
+    echo '      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>' >> /etc/guacamole/logback.xml
+    echo '    </encoder>'                                                                    >> /etc/guacamole/logback.xml
+    echo '  </appender>'                                                                     >> /etc/guacamole/logback.xml
+    echo ''                                                                                  >> /etc/guacamole/logback.xml
+    echo '  <!-- Log at DEBUG level -->'                                                     >> /etc/guacamole/logback.xml
+    echo '  <root level="debug">'                                                            >> /etc/guacamole/logback.xml
+    echo '    <appender-ref ref="GUAC-DEBUG"/>'                                              >> /etc/guacamole/logback.xml
+    echo '  </root>'                                                                         >> /etc/guacamole/logback.xml
+    echo ''                                                                                  >> /etc/guacamole/logback.xml
+    echo '</configuration>'                                                                  >> /etc/guacamole/logback.xml
+  # Creando archivo de autenticación de usuarios
+    echo '<user-mapping>'                                              > /etc/guacamole/user-mapping.xml
+    echo ''                                                           >> /etc/guacamole/user-mapping.xml
+    echo '  <!-- Another user, but using md5 to hash the password'    >> /etc/guacamole/user-mapping.xml
+    echo '       (example below uses the md5 hash of "PASSWORD") -->' >> /etc/guacamole/user-mapping.xml
+    echo '  <authorize'                                               >> /etc/guacamole/user-mapping.xml
+    echo '    username="usuariox"'                                    >> /etc/guacamole/user-mapping.xml
+    echo '    password="ContraHasheada"'                              >> /etc/guacamole/user-mapping.xml
+    echo '    encoding="md5">'                                        >> /etc/guacamole/user-mapping.xml
+    echo ''                                                           >> /etc/guacamole/user-mapping.xml
+    echo '    <!-- First authorized connection -->'                   >> /etc/guacamole/user-mapping.xml
+    echo '    <connection name="SSH localhost">'                      >> /etc/guacamole/user-mapping.xml
+    echo '      <protocol>ssh</protocol>'                             >> /etc/guacamole/user-mapping.xml
+    echo '      <param name="hostname">localhost</param>'             >> /etc/guacamole/user-mapping.xml
+    echo '      <param name="port">22</param>'                        >> /etc/guacamole/user-mapping.xml
+    echo '      <param name="username">johndoe</param>'               >> /etc/guacamole/user-mapping.xml
+    echo '      <param name="password">SSHPASSWORD</param>'           >> /etc/guacamole/user-mapping.xml
+    echo '    </connection>'                                          >> /etc/guacamole/user-mapping.xml
+    echo ''                                                           >> /etc/guacamole/user-mapping.xml
+    echo '    <!-- Second authorized connection -->'                  >> /etc/guacamole/user-mapping.xml
+    echo '    <connection name="localhost">'                          >> /etc/guacamole/user-mapping.xml
+    echo '      <protocol>vnc</protocol>'                             >> /etc/guacamole/user-mapping.xml
+    echo '      <param name="hostname">localhost</param>'             >> /etc/guacamole/user-mapping.xml
+    echo '      <param name="port">5901</param>'                      >> /etc/guacamole/user-mapping.xml
+    echo '      <param name="password">VNCPASS</param>'               >> /etc/guacamole/user-mapping.xml
+    echo '    </connection>'                                          >> /etc/guacamole/user-mapping.xml
+    echo ''                                                           >> /etc/guacamole/user-mapping.xml
+    echo '    <!-- Third authorized connection -->'                   >> /etc/guacamole/user-mapping.xml
+    echo '    <connection name="otherhost">'                          >> /etc/guacamole/user-mapping.xml
+    echo '      <protocol>vnc</protocol>'                             >> /etc/guacamole/user-mapping.xml
+    echo '      <param name="hostname">otherhost</param>'             >> /etc/guacamole/user-mapping.xml
+    echo '      <param name="port">5900</param>'                      >> /etc/guacamole/user-mapping.xml
+    echo '      <param name="password">VNCPASS</param>'               >> /etc/guacamole/user-mapping.xml
+    echo '    </connection>'                                          >> /etc/guacamole/user-mapping.xml
+    echo ''                                                           >> /etc/guacamole/user-mapping.xml
+    echo '  </authorize>'                                             >> /etc/guacamole/user-mapping.xml
+    echo ''                                                           >> /etc/guacamole/user-mapping.xml
+    echo '</user-mapping>'                                            >> /etc/guacamole/user-mapping.xml
+  # Generar el hash de la contraseña
+    vHashContra=$(echo -n P@ssw0rd | openssl md5 | cut -d'=' -f2 | sed 's- --g')
+  # Remplazar texto con hash de la contraseña
+    sed -i -e "s|ContraHasheada|$vHashContra|g" /etc/guacamole/user-mapping.xml
+  # Web cliente
+    wget https://downloads.apache.org/guacamole/$vUltVersApGuac/binary/guacamole-$vUltVersApGuac.war
+    mv guacamole-$vUltVersApGuac.war /var/lib/tomcat9/webapps/guacamole.war
+    systemctl restart tomcat9
+    systemctl status tomcat9 --no-pager
+  # Servicio
+    systemctl enable --now guacd
+    systemctl status guacd --no-pager
+  # Mensaje
+    echo ""
+    echo "    Ya deberías poder ver la web de Apache Guacamole en http://IPDeEsteServidor:8080/guacamole"
+    echo ""
         
 elif [ $OS_VERS == "12" ]; then
 
   echo ""
   echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 12 (Bookworm)...${vFinColor}"
   echo ""
+
+  # Instalar dependencias
+    apt-get -y install build-essential
+    apt-get -y install freerdp2-dev
+    apt-get -y install libavcodec-dev
+    apt-get -y install libavformat-dev
+    apt-get -y install libavutil-dev
+    apt-get -y install libcairo2-dev
+    apt-get -y install libjpeg62-turbo-dev
+    apt-get -y install libjpeg-dev
+    apt-get -y install libossp-uuid-dev
+    apt-get -y install libpango1.0-0
+    apt-get -y install libpango1.0-dev
+    apt-get -y install libpng-dev
+    apt-get -y install libpulse-dev
+    apt-get -y install libssh2-1
+    apt-get -y install libssh2-1-dev
+    apt-get -y install libssl-dev
+    apt-get -y install libswscale-dev
+    apt-get -y install libtelnet-dev
+    apt-get -y install libtool-bin
+    apt-get -y install libvncserver-dev
+    apt-get -y install libvorbis-dev
+    apt-get -y install libwebp-dev
+    apt-get -y install libwebsocketpp-dev
+    apt-get -y install libwebsockets17
+    apt-get -y install libwebsockets-dev
+    apt-get -y install openssl
+  # Apache Tomcat
+    apt-get -y install tomcat10
+    apt-get -y install tomcat10-admin
+    apt-get -y install tomcat10-common
+    apt-get -y install tomcat10-user
+    systemctl enable --now tomcat10
+    systemctl status tomcat10 --no-pager
 
 fi
