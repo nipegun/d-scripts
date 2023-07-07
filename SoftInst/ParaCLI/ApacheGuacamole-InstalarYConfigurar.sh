@@ -199,32 +199,28 @@ elif [ $OS_VERS == "11" ]; then
   # Creando archivo de autenticación de usuarios
     echo '<user-mapping>'                                              > /etc/guacamole/user-mapping.xml
     echo ''                                                           >> /etc/guacamole/user-mapping.xml
-    echo '  <!-- Another user, but using md5 to hash the password'    >> /etc/guacamole/user-mapping.xml
-    echo '       (example below uses the md5 hash of "PASSWORD") -->' >> /etc/guacamole/user-mapping.xml
     echo '  <authorize'                                               >> /etc/guacamole/user-mapping.xml
+    echo ''                                                           >> /etc/guacamole/user-mapping.xml
     echo '    username="usuariox"'                                    >> /etc/guacamole/user-mapping.xml
     echo '    password="ContraHasheada"'                              >> /etc/guacamole/user-mapping.xml
     echo '    encoding="md5">'                                        >> /etc/guacamole/user-mapping.xml
     echo ''                                                           >> /etc/guacamole/user-mapping.xml
-    echo '    <!-- First authorized connection -->'                   >> /etc/guacamole/user-mapping.xml
     echo '    <connection name="SSH localhost">'                      >> /etc/guacamole/user-mapping.xml
     echo '      <protocol>ssh</protocol>'                             >> /etc/guacamole/user-mapping.xml
     echo '      <param name="hostname">localhost</param>'             >> /etc/guacamole/user-mapping.xml
     echo '      <param name="port">22</param>'                        >> /etc/guacamole/user-mapping.xml
-    echo '      <param name="username">johndoe</param>'               >> /etc/guacamole/user-mapping.xml
-    echo '      <param name="password">SSHPASSWORD</param>'           >> /etc/guacamole/user-mapping.xml
+    echo '      <param name="username">usuariox</param>'              >> /etc/guacamole/user-mapping.xml
+    echo '      <param name="password">UsuarioX</param>'              >> /etc/guacamole/user-mapping.xml
     echo '    </connection>'                                          >> /etc/guacamole/user-mapping.xml
     echo ''                                                           >> /etc/guacamole/user-mapping.xml
-    echo '    <!-- Second authorized connection -->'                  >> /etc/guacamole/user-mapping.xml
-    echo '    <connection name="localhost">'                          >> /etc/guacamole/user-mapping.xml
+    echo '    <connection name="VNC localhost">'                      >> /etc/guacamole/user-mapping.xml
     echo '      <protocol>vnc</protocol>'                             >> /etc/guacamole/user-mapping.xml
     echo '      <param name="hostname">localhost</param>'             >> /etc/guacamole/user-mapping.xml
     echo '      <param name="port">5901</param>'                      >> /etc/guacamole/user-mapping.xml
     echo '      <param name="password">VNCPASS</param>'               >> /etc/guacamole/user-mapping.xml
     echo '    </connection>'                                          >> /etc/guacamole/user-mapping.xml
     echo ''                                                           >> /etc/guacamole/user-mapping.xml
-    echo '    <!-- Third authorized connection -->'                   >> /etc/guacamole/user-mapping.xml
-    echo '    <connection name="otherhost">'                          >> /etc/guacamole/user-mapping.xml
+    echo '    <connection name="VNC otherhost">'                      >> /etc/guacamole/user-mapping.xml
     echo '      <protocol>vnc</protocol>'                             >> /etc/guacamole/user-mapping.xml
     echo '      <param name="hostname">otherhost</param>'             >> /etc/guacamole/user-mapping.xml
     echo '      <param name="port">5900</param>'                      >> /etc/guacamole/user-mapping.xml
