@@ -107,8 +107,7 @@ elif [ $OS_VERS == "11" ]; then
       echo ""
     fi
 
-  vUltVersApGuac=$(curl -sL https://dlcdn.apache.org/guacamole/ | sed 's|</a>|</a>\n|g' | sed 's|<a|\n<a|g' | grep href | grep -v ame | grep -v ize | grep -v escription | grep -v irectory | grep -v EYS | grep -v odifie | tail -n 1 | cut -d'
-/' -f1 | cut -d'"' -f2)
+  vUltVersApGuac=$(curl -sL https://dlcdn.apache.org/guacamole/ | sed 's|</a>|</a>\n|g' | sed 's|<a|\n<a|g' | grep href | grep -v ame | grep -v ize | grep -v escription | grep -v irectory | grep -v EYS | grep -v odifie | tail -n 1 | cut -d'/' -f1 | cut -d'"' -f2)
 
   # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
