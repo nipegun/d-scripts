@@ -9,13 +9,7 @@
 # Script de NiPeGun para instalar y configurar Apache Guacamole en Debian
 #
 # Ejecución remota:
-#   curl -sL x | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/ApacheGuacamole-InstalarYConfigurar.sh | bash
 # ----------
 
 # Definir variables de color
