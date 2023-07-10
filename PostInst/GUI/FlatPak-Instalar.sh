@@ -124,7 +124,7 @@ elif [ $OS_VERS == "12" ]; then
   echo ""
   echo "    Instalando plugin para gnome software..."
   echo ""
-  gnome-software-plugin-flatpak
+  apt-get -y install gnome-software-plugin-flatpak
 
   echo ""
   echo "    Agregando el repositorio flathuub..."
