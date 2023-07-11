@@ -131,4 +131,9 @@ elif [ $OS_VERS == "12" ]; then
   echo ""
   apt-get -y install libretro-snes9x
 
+  echo ""
+  echo "    Instalando núcleo para Sega Genesis/Sega MegaDrive..."
+  echo ""
+  apt-get -y install libretro-genesisplusgx
+
 fi
