@@ -86,8 +86,8 @@ elif [ $OS_VERS == "10" ]; then
   echo "------------------------------------------------------------------------------"
   echo ""
 
-  apt-get update -y
-  apt-get install retroarch
+  apt-get -y update
+  apt-get -y install retroarch
   #sed -i -e 's|user_language = "0"|user_language = "3"|g' /home/nipegun/.config/retroarch/retroarch.cfg
 
 elif [ $OS_VERS == "11" ]; then
@@ -101,5 +101,34 @@ elif [ $OS_VERS == "11" ]; then
   echo ""
   echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
+
+
+elif [ $OS_VERS == "12" ]; then
+
+  echo ""
+  echo "--------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de RetroArch para Debian 12 (Bookworm)..."
+  echo "--------------------------------------------------------------------------------"
+  echo ""
+
+  echo ""
+  echo "    Actualizando lista de paquetes disponibles en los repositorios..."
+  echo ""
+  apt-get -y update
+
+  echo ""
+  echo "    Instalando paquete retroarch..."
+  echo ""
+  apt-get -y install retroarch
+
+  echo ""
+  echo "    Instalando núcleo para NES/Famicom/Family Game..."
+  echo ""
+  apt-get -y install libretro-nestopia
+
+  echo ""
+  echo "    Instalando núcleo para SNES (Family Game)..."
+  echo ""
+  apt-get -y install libretro-snes9x
 
 fi
