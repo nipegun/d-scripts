@@ -136,4 +136,34 @@ elif [ $OS_VERS == "12" ]; then
   echo ""
   apt-get -y install libretro-genesisplusgx
 
+  echo ""
+  echo "    Instalando núcleo para Nintendo DS..."
+  echo ""
+  apt-get -y install libretro-desmume
+
+  echo ""
+  echo "    Instalando núcleo para Nintendo Game Boy..."
+  echo ""
+  apt-get -y install libretro-gambatte
+
+  echo ""
+  echo "    Instalando núcleo para Nintendo Game Boy Advance..."
+  echo ""
+  apt-get -y install libretro-mgba
+
+  echo ""
+  echo "    Instalando núcleo para NEC/PC Engine..."
+  echo ""
+  apt-get -y install libretro-beetle-pce-fast
+
+  echo ""
+  echo "    Instalando núcleo para Sony PlayStation..."
+  echo ""
+  apt-get -y install libretro-beetle-psx
+
+  echo ""
+  echo "    Instalando núcleo para Nintendo Virtual Boy..."
+  echo ""
+  apt-get -y install libretro-beetle-vb
+
 fi
