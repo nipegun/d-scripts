@@ -178,9 +178,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo -e "${vColorVerde}  Instalación finalizada.${vFinColor}"
             echo ""
-            echo -e "${vColorVerde}  Conéctate a la administración Web en mediante la siguiente URL en LAN:${vFinColor}"
-            echo ""
-            echo "  https://$(hostname -I | sed 's- --g'):8007"
+            echo -e "${vColorVerde}  Conéctate a la administración Web en mediante la siguiente URL en LAN:${vFinColor} https://$(hostname -I | sed 's- --g'):8007"
             echo ""
 
           ;;
@@ -252,9 +250,7 @@ elif [ $OS_VERS == "11" ]; then
             echo ""
             echo -e "${vColorVerde}  Instalación finalizada.${vFinColor}"
             echo ""
-            echo -e "${vColorVerde}  Conéctate a la administración Web en mediante la siguiente URL en LAN:${vFinColor}"
-            echo ""
-            echo "  https://$(hostname -I | sed 's- --g'):8007"
+            echo -e "${vColorVerde}  Conéctate a la administración Web en mediante la siguiente URL en LAN:${vFinColor} https://$(hostname -I | sed 's- --g'):8007"
             echo ""
 
           ;;
@@ -360,9 +356,7 @@ elif [ $OS_VERS == "12" ]; then
             echo ""
             echo -e "${vColorVerde}  Instalación finalizada.${vFinColor}"
             echo ""
-            echo -e "${vColorVerde}  Conéctate a la administración Web en mediante la siguiente URL en LAN:${vFinColor}"
-            echo ""
-            echo "  https://$(hostname -I | sed 's- --g'):8007"
+            echo -e "${vColorVerde}  Conéctate a la administración Web en mediante la siguiente URL en LAN:${vFinColor} https://$(hostname -I | sed 's- --g'):8007"
             echo ""
 
           ;;
@@ -433,9 +427,7 @@ elif [ $OS_VERS == "12" ]; then
             echo ""
             echo -e "${vColorVerde}  Instalación finalizada.${vFinColor}"
             echo ""
-            echo -e "${vColorVerde}  Conéctate a la administración Web en mediante la siguiente URL en LAN:${vFinColor}"
-            echo ""
-            echo "  https://$(hostname -I | sed 's- --g'):8007"
+            echo -e "${vColorVerde}  Conéctate a la administración Web en mediante la siguiente URL en LAN:${vFinColor} https://$(hostname -I | sed 's- --g'):8007"
             echo ""
 
           ;;
