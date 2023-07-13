@@ -234,6 +234,150 @@ elif [ $OS_VERS == "11" ]; then
         esac
 
       done
-  
+
+elif [ $OS_VERS == "12" ]; then
+
+  echo ""
+  echo "--------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Proxmox Backup Server para Debian 12 (Bookworm)..."
+  echo "--------------------------------------------------------------------------------------------"
+  echo ""
+
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${ColorRojo}  dialog no está instalado. Iniciando su instalación...${FinColor}"
+      echo ""
+      apt-get -y update > /dev/null
+      apt-get -y install dialog
+      echo ""
+    fi
+  menu=(dialog --timeout 10 --checklist "Instalación de Proxmox Backup Server" 22 76 16)
+    opciones=(
+      1 "Instalar en un Debian nativo o en una MV de Debian." off
+      2 "Instalar en un contenedor LXC de Debian." off
+      3 "" off
+    )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+    clear
+
+    for choice in $choices
+      do
+        case $choice in
+
+          1)
+
+            # Bajar e instalar la llave
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${ColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${FinColor}"
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install wget
+                  echo ""
+                fi
+              wget https://enterprise.proxmox.com/debian/proxmox-release-bookworm.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bookworm.gpg
+
+            # Establecer repositorios
+              # Agregar el repositorio enterprise y comentarlo
+                echo "#deb https://enterprise.proxmox.com/debian/pbs bookworm pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
+              # Agregar el repositorio para no suscriptores
+                echo "deb http://download.proxmox.com/debian/pbs bookworm pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
+              # Agregar el repositorio test y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs bookworm pbstest" > /etc/apt/sources.list.d/pbstest.list
+              # Agregar el repositorio client y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs-client bookworm main" > /etc/apt/sources.list.d/pbs-client.list
+
+            # Actualizar el caché de paquetes
+              apt-get -y update
+
+            # Instalar cambiando el kernel (Agrega soporte ZFS) (Igual que la instalación del ISO)
+              apt-get -y install proxmox-backup
+
+            # Volver a establecer repositorios
+              # Agregar el repositorio enterprise y comentarlo
+                echo "#deb https://enterprise.proxmox.com/debian/pbs bookworm pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
+              # Agregar el repositorio para no suscriptores
+                echo "deb http://download.proxmox.com/debian/pbs bookworm pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
+              # Agregar el repositorio test y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs bookworm pbstest" > /etc/apt/sources.list.d/pbstest.list
+              # Agregar el repositorio client y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs-client bookworm main" > /etc/apt/sources.list.d/pbs-client.list
+
+            # Actualizar todo el sistema
+              apt-get -y update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y autoremove
+
+            echo ""
+            echo -e "${ColorVerde}  Instalación finalizada.${FinColor}"
+            echo ""
+            echo -e "${ColorVerde}  Conéctate a la administración Web en mediante la siguiente URL en LAN:${FinColor}"
+            echo ""
+            echo "  https://$(hostname -I | sed 's- --g'):8007"
+            echo ""
+
+          ;;
+
+          2)
+
+            # Bajar e instalar la llave
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${ColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${FinColor}"
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install wget
+                  echo ""
+                fi
+              wget https://enterprise.proxmox.com/debian/proxmox-release-bookworm.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bookworm.gpg
+
+            # Establecer repositorios
+              # Agregar el repositorio enterprise y comentarlo
+                echo "#deb https://enterprise.proxmox.com/debian/pbs bookworm pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
+              # Agregar el repositorio para no suscriptores
+                echo "deb http://download.proxmox.com/debian/pbs bookworm pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
+              # Agregar el repositorio test y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs bookworm pbstest" > /etc/apt/sources.list.d/pbstest.list
+              # Agregar el repositorio client y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs-client bookworm main" > /etc/apt/sources.list.d/pbs-client.list
+
+            # Actualizar el caché de paquetes
+              apt-get -y update
+
+            # Instalar Proxmox Backup Server manteniendo el kernel instalado (Apto para contenedores)
+              apt-get -y install proxmox-backup-server
+
+            # Volver a establecer repositorios
+              # Agregar el repositorio enterprise y comentarlo
+                echo "#deb https://enterprise.proxmox.com/debian/pbs bookworm pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
+              # Agregar el repositorio para no suscriptores
+                echo "deb http://download.proxmox.com/debian/pbs bookworm pbs-no-subscription" > /etc/apt/sources.list.d/pbs-no-subscription.list
+              # Agregar el repositorio test y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs bookworm pbstest" > /etc/apt/sources.list.d/pbstest.list
+              # Agregar el repositorio client y comentarlo
+                echo "#deb http://download.proxmox.com/debian/pbs-client bookworm main" > /etc/apt/sources.list.d/pbs-client.list
+
+            # Actualizar todo el sistema
+              apt-get -y update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y autoremove
+
+            echo ""
+            echo -e "${ColorVerde}  Instalación finalizada.${FinColor}"
+            echo ""
+            echo -e "${ColorVerde}  Conéctate a la administración Web en mediante la siguiente URL en LAN:${FinColor}"
+            echo ""
+            echo "  https://$(hostname -I | sed 's- --g'):8007"
+            echo ""
+
+          ;;
+
+          3)
+
+          ;;
+        
+        esac
+
+      done
+
 fi
 
