@@ -6,35 +6,45 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para importar una base de datos de MySQL
+# Script de NiPeGun para importar una base de datos de MySQL
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/MySQL-BaseDeDatos-Importar.sh | bash -s UsuarioBD PasswordBD NombreBD RutaArchivoSQL
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/MySQL-BaseDeDatos-Importar.sh | bash -s UsuarioBD PasswordBD NombreBD RutaArchivoSQL
 # ----------
 
-CantArgsEsperados=4
-ArgsInsuficientes=65
+# Definir variables de color
+  vColorAzul="\033[0;34m"
+  vColorAzulClaro="\033[1;34m"
+  vColorVerde='\033[1;32m'
+  vColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  vFinColor='\033[0m'
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    exit 1
+  fi
 
-if [ $# -ne $CantArgsEsperados ]
-  then
-    echo ""
-    echo -e "${ColorRojo}Mal uso del script.${FinColor}"
-    echo ""
-    echo "El uso correcto sería:"
-    echo -e "$0 ${ColorVerde}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
-    echo ""
-    echo "Ejemplo 1:"
-    echo "$0 pepe 12345678 Cuentas Cuentas.sql"
-    echo ""
-    echo "Ejemplo 2:"
-    echo "$0 pepe 12345678 Cuentas '\Copias de seguridad\Base de datos.sql'"   
-    echo ""
-    exit $ArgsInsuficientes
-  else
-    mysql -u$1 -p$2 $3 < $4
-fi
+# Comprobar que se hayan ingresado la cantidad de argumentos esperados
+  vCantArgsEsperados=4
+  if [ $# -ne $vCantArgsEsperados ]
+    then
+      echo ""
+      echo -e "${vColorRojo}  Mal uso del script.${vFinColor}"
+      echo ""
+      echo "  El uso correcto sería:"
+      echo -e "    $0 ${vColorVerde}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${vFinColor}"
+      echo ""
+      echo "  Ejemplo 1:"
+      echo "    $0 pepe 12345678 Cuentas Cuentas.sql"
+      echo ""
+      echo "  Ejemplo 2:"
+      echo "    $0 pepe 12345678 Cuentas '\Copias de seguridad\Base de datos.sql'"   
+      echo ""
+      exit
+    else
+      mysql -u$1 -p$2 $3 < $4
+  fi
 
