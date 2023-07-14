@@ -6,18 +6,29 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para crear bases de datos MySQL
+# Script de NiPeGun para crear bases de datos MySQL
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/MySQL-BaseDeDatos-Crear.sh | bash -s NombreBD UsuarioBD PasswordBD
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/MySQL-BaseDeDatos-Crear.sh | bash -s NombreBD UsuarioBD PasswordBD
 # ----------
 
 CantArgsEsperados=3
 ArgsInsuficientes=65
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+# Definir variables de color
+  vColorAzul="\033[0;34m"
+  vColorAzulClaro="\033[1;34m"
+  vColorVerde='\033[1;32m'
+  vColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  vFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    exit 1
+  fi
 
 if [ $# -ne $CantArgsEsperados ]
   then
