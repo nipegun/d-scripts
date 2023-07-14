@@ -119,8 +119,28 @@ elif [ $OS_VERS == "12" ]; then
 
   # Instalar paquete
     echo ""
-    echo "    Instalando paquete crowdsec"
+    echo "    Instalando paquete crowdsec..."
     echo ""
     apt -y install crowdsec
+
+  # Instalar firewall bouncer
+    echo ""
+    echo "    Instalando firewall bouncer..."
+    echo ""
+    apt -y install crowdsec-firewall-bouncer 
+    apt -y install crowdsec-firewall-bouncer-nftables
+
+  # Instalar el dashboard (sin docker)
+    # todavía por hacer...
+
+  # Instalar el dashboard (usa docker)
+    #echo ""
+    #echo "    Instalando el dashboard..."
+    #echo ""
+    # Instalar docker
+      #
+    #cscli dashboard setup --listen 0.0.0.0
+    
+   #       https://www.youtube.com/watch?v=QK-Fkg-88rU
 
 fi
