@@ -41,9 +41,9 @@ if [ $# -ne $EXPECTED_ARGS ]
     rsync -a --delete $1 $2@$3:$4
 
     echo ""
-    echo "-----------------------------------"
+    
     echo "  EJECUCIÓN DEL SCRIPT FINALIZADA"
-    echo "-----------------------------------"
+    
     echo ""
     
 fi

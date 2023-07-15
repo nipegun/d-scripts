@@ -10,9 +10,9 @@
 # ----------
 
 echo ""
-echo "------------------------------"
+
 echo "  Arrancando en modo UEFI..."
-echo "------------------------------"
+
 echo ""
 
 systemctl reboot --firmware-setup
