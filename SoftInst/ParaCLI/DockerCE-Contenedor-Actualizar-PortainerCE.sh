@@ -17,7 +17,6 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 # Determinar la versión de Debian
-
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
     . /etc/os-release
     cNomSO=$NAME
@@ -40,8 +39,8 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "  Iniciando el script de actualización de PortainerCE en el DockerCE de Debian 7 (Wheezy)..." 
-echo ""
+  echo "  Iniciando el script de actualización de PortainerCE en el DockerCE de Debian 7 (Wheezy)..."
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
@@ -50,8 +49,8 @@ echo ""
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "  Iniciando el script de actualización de PortainerCE en el DockerCE de Debian 8 (Jessie)..." 
-echo ""
+  echo "  Iniciando el script de actualización de PortainerCE en el DockerCE de Debian 8 (Jessie)..."
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
@@ -60,8 +59,8 @@ echo ""
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "  Iniciando el script de actualización de PortainerCE en el DockerCE de Debian 9 (Stretch)..." 
-echo ""
+  echo "  Iniciando el script de actualización de PortainerCE en el DockerCE de Debian 9 (Stretch)..."
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
@@ -70,43 +69,43 @@ echo ""
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "  Iniciando el script de actualización de PortainerCE en el DockerCE de Debian 10 (Buster)..." 
-echo ""
+  echo "  Iniciando el script de actualización de PortainerCE en el DockerCE de Debian 10 (Buster)..."
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
   echo ""
- 
+
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "  Iniciando el script de actualización de PortainerCE en el DockerCE de Debian 11 (Bullseye)..." 
-echo ""
+  echo "  Iniciando el script de actualización de PortainerCE en el DockerCE de Debian 11 (Bullseye)..."
+  echo ""
 
   echo ""
-  echo "    Obteniendo el nombre del contenedor de Portainer..." 
-echo ""
+  echo "    Obteniendo el nombre del contenedor de Portainer..."
+  echo ""
   vNombreContenedorContainer=$(docker container ls | grep ortainer | rev | cut -d' ' -f1 | rev)
   echo "      El nombre es: $vNombreContenedorContainer."
 
   echo ""
-  echo "    Deteniendo el contenedor con nombre $vNombreContenedorContainer..." 
-echo ""
+  echo "    Deteniendo el contenedor con nombre $vNombreContenedorContainer..."
+  echo ""
   docker stop $vNombreContenedorContainer
 
   echo ""
-  echo "    Borrando el contenedor con nombre $vNombreContenedorContainer..." 
-echo ""
+  echo "    Borrando el contenedor con nombre $vNombreContenedorContainer..."
+  echo ""
   docker rm $vNombreContenedorContainer
 
   echo ""
-  echo "    Descargando la última versión del contenedor de portainer..." 
-echo ""
+  echo "    Descargando la última versión del contenedor de portainer..."
+  echo ""
   docker pull cr.portainer.io/portainer/portainer-ce
 
   echo ""
-  echo "    Volviendo a iniciar portainer..." 
-echo ""
+  echo "    Volviendo a iniciar portainer..."
+  echo ""
   /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
 
 fi

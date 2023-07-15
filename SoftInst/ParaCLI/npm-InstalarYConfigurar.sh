@@ -24,8 +24,8 @@
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}" >&2
-    exit 1
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
+    exit
   fi
 
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
@@ -174,11 +174,11 @@ elif [ $cVerSO == "11" ]; then
     wget -qO - https://openresty.org/package/pubkey.gpg | apt-key add -
     vDistro=$(wget -t 1 -T 15 -q "http://openresty.org/package/$(cat /etc/*-release | grep -w ID | cut -d= -f2 | tr -d '"')/dists/" -O - | grep -o "$(cat /etc/*-release | grep -w VERSION_CODENAME | cut -d= -f2 | tr -d '"')" | head -n1 || true)
     echo "deb [trusted=yes] http://openresty.org/package/$(cat /etc/*-release | grep -w ID | cut -d= -f2 | tr -d '"') ${vDistro:-bullseye} openresty" | tee /etc/apt/sources.list.d/openresty.list
-    apt-get -y update && apt-get install -y -q --no-install-recommends openresty
+    apt-get -y update && apt-get -y install -q --no-install-recommends openresty
 
   # Instalar nodejs
     wget -qO - https://deb.nodesource.com/setup_16.x | bash -
-    apt-get install -y -q --no-install-recommends nodejs
+    apt-get -y install -q --no-install-recommends nodejs
     npm install --global yarn
 
   # Obtener la última versión de Nginx Proxy Manager

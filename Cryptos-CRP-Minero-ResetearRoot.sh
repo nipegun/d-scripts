@@ -44,8 +44,8 @@ DirCartera="248C22E649C37C46A03F6A255212CADE2D1569DBB39FC8CEC03A3D6D1F919D22" #f
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 7 (Wheezy)..."  echo "-------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 7 (Wheezy)..."  
   echo ""
 
   echo ""
@@ -55,8 +55,8 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 8 (Jessie)..."  echo "-------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 8 (Jessie)..."  
   echo ""
 
   echo ""
@@ -66,8 +66,8 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 9 (Stretch)..."  echo "--------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -77,8 +77,8 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 10 (Buster)..."  echo "--------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 10 (Buster)..."  
   echo ""
 
   echo ""

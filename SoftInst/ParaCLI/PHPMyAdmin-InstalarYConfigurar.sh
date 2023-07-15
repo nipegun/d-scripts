@@ -59,8 +59,8 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de phpmyadmin para Debian 9 (Stretch)..."  echo "-------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script de instalación de phpmyadmin para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""

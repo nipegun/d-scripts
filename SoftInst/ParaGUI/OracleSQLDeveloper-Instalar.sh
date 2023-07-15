@@ -75,8 +75,8 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Oracle SQL Developer para Debian 11 (Bullseye)..."  echo "-------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script de instalación de Oracle SQL Developer para Debian 11 (Bullseye)..."  
   echo ""
 
   # Determinar URL del archivo a descargar

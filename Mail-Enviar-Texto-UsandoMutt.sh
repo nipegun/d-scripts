@@ -22,14 +22,14 @@ cFinColor='\033[0m'
 if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
-    echo "-----------------------------------------------------------------------------------------------------"
+    
     echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
     echo ""
     echo -e "EnviarMailA ${cColorVerde}[DirecciónDeCorreo] [Asunto] [Texto]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo ' Mail-Enviar-UsandoMutt.sh pepe@pepe.com "Recordatorio de cita" "Acuérdate que quedamos para comer"'
-    echo "-----------------------------------------------------------------------------------------------------"
+    
     echo ""
     exit
   else

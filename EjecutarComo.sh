@@ -15,7 +15,7 @@ cCantArgumEsperados=2
 if [ $# -ne $EXPECTED_ARGS ]
   then
     echo ""
-    echo "--------------------------------------------------------------------------------------------"
+    
     echo "  Mal uso del script."
     echo ""
     echo "  El uso correcto sería:"
@@ -23,7 +23,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo ""
     echo "  Ejemplo:"
     echo "  $0 nico ls -n ~"
-    echo "--------------------------------------------------------------------------------------------"
+    
     echo ""
     exit
   else

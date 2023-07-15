@@ -39,8 +39,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 7 (Wheezy)..."  echo "-------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 7 (Wheezy)..."
   echo ""
 
   echo ""
@@ -50,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 8 (Jessie)..."  echo "-------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 8 (Jessie)..."
   echo ""
 
   echo ""
@@ -61,8 +59,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 9 (Stretch)..."  echo "--------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 9 (Stretch)..."
   echo ""
 
   echo ""
@@ -72,8 +69,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 10 (Buster)..."  echo "--------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 10 (Buster)..."
   echo ""
 
   vURL="http://drivers.amd.com/drivers/linux/"
@@ -149,7 +145,7 @@ elif [ $cVerSO == "10" ]; then
   apt-get -y update
 
   echo ""
-  echo "  Listo para instalar..." 
+  echo "  Listo para instalar..."
 echo ""
 
   dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-dkms-firmware_5.6.5.24-1109583_all.deb
@@ -159,8 +155,7 @@ echo ""
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 11 (Bullseye)..."  echo "----------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 11 (Bullseye)..."
   echo ""
 
   vURL="http://drivers.amd.com/drivers/linux/"
@@ -188,7 +183,7 @@ elif [ $cVerSO == "11" ]; then
   apt-get -y update
 
   echo ""
-  echo "  Listo para instalar..." 
+  echo "  Listo para instalar..."
 echo ""
 
   dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-dkms-firmware_5.6.5.24-1109583_all.deb

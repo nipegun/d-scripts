@@ -21,8 +21,8 @@
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}" >&2
-    exit 1
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
+    exit
   fi
 
 # Determinar la versión de Debian
@@ -48,8 +48,8 @@
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 7 (Wheezy)..."  echo "---------------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 7 (Wheezy)..."  
   echo ""
 
   echo ""
@@ -59,8 +59,8 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 8 (Jessie)..."  echo "---------------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 8 (Jessie)..."  
   echo ""
 
   echo ""
@@ -92,8 +92,8 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 11 (Bullseye)..."  echo "-----------------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 11 (Bullseye)..."  
   echo ""
 
   # Desinstalar cosas específicas de gnome

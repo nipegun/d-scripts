@@ -81,8 +81,8 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para routear todo el tráfico de Debian 11 (Bullseye) mediante TOR..."  echo "--------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script para routear todo el tráfico de Debian 11 (Bullseye) mediante TOR..."  
   echo ""
 
   # Determinar IP Pública del equipo

@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-----------------
+# ----------
 # Script de NiPeGun para instalar el firmware para el procesador Ryzen 7 Pro 4750G en Debian
 #
 # Ejecución remota:
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Firmware-Procesador-Ryzen7Pro4750g-Instalar.sh | bash
-----------------
+# ----------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
@@ -39,8 +39,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del firmware para el procesador Ryzen 7 Pro 4750G en Debian 7 (Wheezy)..."  echo "----------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del firmware para el procesador Ryzen 7 Pro 4750G en Debian 7 (Wheezy)..."
   echo ""
 
   echo ""
@@ -50,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del firmware para el procesador Ryzen 7 Pro 4750G en Debian 8 (Jessie)..."  echo "----------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del firmware para el procesador Ryzen 7 Pro 4750G en Debian 8 (Jessie)..."
   echo ""
 
   echo ""
@@ -61,8 +59,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del firmware para el procesador Ryzen 7 Pro 4750G en Debian 9 (Stretch)..."  echo "-----------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del firmware para el procesador Ryzen 7 Pro 4750G en Debian 9 (Stretch)..."
   echo ""
 
   echo ""
@@ -72,8 +69,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del firmware para el procesador Ryzen 7 Pro 4750G en Debian 10 (Buster)..."  echo "-----------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del firmware para el procesador Ryzen 7 Pro 4750G en Debian 10 (Buster)..."
   echo ""
 
   # Gráficos integrados Vega7
@@ -178,7 +174,7 @@ elif [ $cVerSO == "10" ]; then
   wget https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/amdgpu/navi10_mes.bin
   wget https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/amdgpu/arcturus_vcn.bin
   wget https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/amdgpu/arcturus_smc.bin
-  
+
   # Possible missing firmware /lib/firmware/amdgpu/navi12_gpu_info.bin for module amdgpu
   # Possible missing firmware /lib/firmware/amdgpu/arcturus_gpu_info.bin for module amdgpu
   # Possible missing firmware /lib/firmware/amdgpu/raven_ta.bin for module amdgpu
@@ -221,8 +217,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del firmware para el procesador Ryzen 7 Pro 4750G en Debian 11 (Bullseye)..."  echo "-------------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del firmware para el procesador Ryzen 7 Pro 4750G en Debian 11 (Bullseye)..."
   echo ""
 
   echo ""

@@ -76,8 +76,8 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para activar el acceso root mediante ssh en Debian 11 (Bullseye)..."  echo "-------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script para activar el acceso root mediante ssh en Debian 11 (Bullseye)..."  
   echo ""
 
   sed -i -e 's|^#PermitRootLogin.*|PermitRootLogin yes|g' /etc/ssh/sshd_config

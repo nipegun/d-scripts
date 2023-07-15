@@ -39,8 +39,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del controlador ethernet Realtek 10ec-8125 para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador ethernet Realtek 10ec-8125 para Debian 7 (Wheezy)..."
   echo ""
 
   echo ""
@@ -50,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del controlador ethernet Realtek 10ec-8125 para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador ethernet Realtek 10ec-8125 para Debian 8 (Jessie)..."
   echo ""
 
   echo ""
@@ -61,8 +59,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del controlador ethernet Realtek 10ec-8125 para Debian 9 (Stretch)..."  echo "------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador ethernet Realtek 10ec-8125 para Debian 9 (Stretch)..."
   echo ""
 
   echo ""
@@ -72,8 +69,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del controlador ethernet Realtek 10ec-8125 para Debian 10 (Buster)..."  echo "------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador ethernet Realtek 10ec-8125 para Debian 10 (Buster)..."
   echo ""
 
   # Dragon ethernet
@@ -105,7 +101,7 @@ elif [ $cVerSO == "10" ]; then
   wget https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/rtl_nic/rtl8168d-1.fw
 
   mkdir -p /root/SoftInst/Controladores/EthernetRealtekRTL8125/
-  wget 
+  wget
   apt-get install linux-headers-amd64 build-essentials
   cd /root/SoftInst/Controladores/EthernetRealtekRTL8125/
   ./autorun.sh
@@ -113,8 +109,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del controlador ethernet Realtek 10ec-8125 para Debian 11 (Bullseye)..."  echo "--------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del controlador ethernet Realtek 10ec-8125 para Debian 11 (Bullseye)..."
   echo ""
 
   echo ""

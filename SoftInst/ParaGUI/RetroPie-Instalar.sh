@@ -75,9 +75,9 @@ elif [ $cVerSO == "10" ]; then
   echo ""
   echo "Instalando paquetes necesarios..." 
 echo ""
-  apt-get update -y
+  apt-get -y update
   apt-get upgrade -y
-  apt-get install -y git dialog unzip xmlstarlet
+  apt-get -y install git dialog unzip xmlstarlet
 
   echo ""
   echo "Borrando instalación anterior, si es que existe..." 

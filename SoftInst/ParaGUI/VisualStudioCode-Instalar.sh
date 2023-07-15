@@ -80,8 +80,8 @@ echo ""
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Visual Studio Code para Debian 11 (Bullseye)..."  echo "-------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script de instalación de Visual Studio Code para Debian 11 (Bullseye)..."  
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.

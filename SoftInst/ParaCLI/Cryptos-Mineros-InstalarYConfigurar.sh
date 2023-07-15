@@ -19,9 +19,7 @@ cFinColor='\033[0m'
 UsuarioNoRoot=NiPeGun
 
 echo ""
-echo -e "${cColorVerde}------------------------------------------------------------------------------------${cFinColor}"
 echo -e "${cColorVerde}  Iniciando el script de instalación de los diferentes mineros de criptomonedas...${cFinColor}"
-echo -e "${cColorVerde}------------------------------------------------------------------------------------${cFinColor}"
 echo ""
 
 # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -129,7 +127,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
 
         ;;
 
-    
+
         9)
 
           echo ""

@@ -58,7 +58,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de Pools Cripto para Debian 7 (Wheezy)..."  
+  echo "  Iniciando el script de instalación de Pools Cripto para Debian 7 (Wheezy)..."
   echo ""
 
   echo ""
@@ -68,7 +68,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de Pools Cripto para Debian 8 (Jessie)..."  
+  echo "  Iniciando el script de instalación de Pools Cripto para Debian 8 (Jessie)..."
   echo ""
 
   echo ""
@@ -78,7 +78,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de Pools Cripto para Debian 9 (Stretch)..."  
+  echo "  Iniciando el script de instalación de Pools Cripto para Debian 9 (Stretch)..."
   echo ""
 
   echo ""
@@ -88,7 +88,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de Pools Cripto para Debian 10 (Buster)..."  
+  echo "  Iniciando el script de instalación de Pools Cripto para Debian 10 (Buster)..."
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -120,9 +120,7 @@ elif [ $cVerSO == "10" ]; then
 
           1)
             echo ""
-            echo -e "${cColorVerde}-----------------------------------------${cFinColor}"
             echo -e "${cColorVerde}  Instalando la pool rvn-kawpow-pool...${cFinColor}"
-            echo -e "${cColorVerde}-----------------------------------------${cFinColor}"
             echo ""
 
             # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
@@ -160,9 +158,7 @@ elif [ $cVerSO == "10" ]; then
 
           2)
             echo ""
-            echo -e "${cColorVerde}------------------------------${cFinColor}"
             echo -e "${cColorVerde}  Instalando la pool MPOS...${cFinColor}"
-            echo -e "${cColorVerde}------------------------------${cFinColor}"
             echo ""
 
             # Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
@@ -183,7 +179,7 @@ elif [ $cVerSO == "10" ]; then
                apt-get -y install memcached zip
                apt-get -y install php-dom php-mbstring php-memcached php-zip
                apt-get -y install libapache2-mod-php$VersPHP
-               apt-get -y install php$VersPHP-curl php$VersPHP-mysqlnd php$VersPHP-json php$VersPHP-xml 
+               apt-get -y install php$VersPHP-curl php$VersPHP-mysqlnd php$VersPHP-json php$VersPHP-xml
 
             apache2ctl -k stop
             cd /var/www/
@@ -306,9 +302,7 @@ elif [ $cVerSO == "10" ]; then
           3)
 
             echo ""
-            echo -e "${cColorVerde}------------------------${cFinColor}"
             echo -e "${cColorVerde}  Instalando NodeJS...${cFinColor}"
-            echo -e "${cColorVerde}------------------------${cFinColor}"
             echo ""
 
             apt-get -y update
@@ -319,9 +313,7 @@ elif [ $cVerSO == "10" ]; then
           4)
 
             echo ""
-            echo -e "${cColorVerde}------------------------------------${cFinColor}"
             echo -e "${cColorVerde}  Instalando node-multi-hashing...${cFinColor}"
-            echo -e "${cColorVerde}------------------------------------${cFinColor}"
             echo ""
 
             npm install multi-hashing
@@ -331,9 +323,7 @@ elif [ $cVerSO == "10" ]; then
           5)
 
             echo ""
-            echo -e "${cColorVerde}-------------------------------------${cFinColor}"
             echo -e "${cColorVerde}  Instalando kawpow-stratum-pool...${cFinColor}"
-            echo -e "${cColorVerde}-------------------------------------${cFinColor}"
             echo ""
 
             cd /root/
@@ -344,9 +334,7 @@ elif [ $cVerSO == "10" ]; then
           5)
 
             echo ""
-            echo -e "${cColorVerde}-------------------------${cFinColor}"
             echo -e "${cColorVerde}  Reparando permisos...${cFinColor}"
-            echo -e "${cColorVerde}-------------------------${cFinColor}"
             echo ""
 
             chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/
@@ -364,9 +352,7 @@ elif [ $cVerSO == "10" ]; then
           6)
 
             echo ""
-            echo -e "${cColorVerde}------------------------------${cFinColor}"
             echo -e "${cColorVerde}  Instalando servidor Web...${cFinColor}"
-            echo -e "${cColorVerde}------------------------------${cFinColor}"
             echo ""
 
             # Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
@@ -385,9 +371,7 @@ elif [ $cVerSO == "10" ]; then
           7)
 
             echo ""
-            echo -e "${cColorVerde}----------------------------${cFinColor}"
             echo -e "${cColorVerde}  Instalando MiningCore...${cFinColor}"
-            echo -e "${cColorVerde}----------------------------${cFinColor}"
             echo ""
 
             # Instalar .NET Core 2.2 SDK para Linux (Necesario para correr el motor Stratum)
@@ -780,9 +764,7 @@ elif [ $cVerSO == "10" ]; then
           8)
 
             echo ""
-            echo -e "${cColorVerde}----------------------------------${cFinColor}"
             echo -e "${cColorVerde}  Instalando MiningCore WebUI...${cFinColor}"
-            echo -e "${cColorVerde}----------------------------------${cFinColor}"
             echo ""
 
             # Descargar MiningCore.WebUI
@@ -815,7 +797,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de Pools Cripto para Debian 11 (Bullseye)..."  
+  echo "  Iniciando el script de instalación de Pools Cripto para Debian 11 (Bullseye)..."
   echo ""
 
   echo ""

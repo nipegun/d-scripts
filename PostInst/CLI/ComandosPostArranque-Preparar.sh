@@ -21,28 +21,28 @@
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}" >&2
-    exit 1
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
+    exit
   fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
   elif type lsb_release >/dev/null 2>&1; then # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
   elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
   elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
   else                                        # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
   fi
 
 if [ $cVerSO == "7" ]; then
@@ -72,7 +72,7 @@ elif [ $cVerSO == "9" ]; then
   echo ""
 
   echo ""
-  echo "    Configurando el servicio..." 
+  echo "    Configurando el servicio..."
 echo ""
   echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
   echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
@@ -90,7 +90,7 @@ echo ""
   echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
 
   echo ""
-  echo "    Creando el archivo /etc/rc.local..." 
+  echo "    Creando el archivo /etc/rc.local..."
 echo ""
   echo '#!/bin/bash'                                           > /etc/rc.local
   echo ""                                                     >> /etc/rc.local
@@ -99,7 +99,7 @@ echo ""
   chmod +x                                                       /etc/rc.local
 
   echo ""
-  echo "    Creando el archivo para meter los comandos..." 
+  echo "    Creando el archivo para meter los comandos..."
 echo ""
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                          > /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
@@ -114,7 +114,7 @@ echo ""
   chmod 700                                                                                                     /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
   echo ""
-  echo "    Activando y arrancando el servicio..." 
+  echo "    Activando y arrancando el servicio..."
 echo ""
   systemctl enable rc-local
   systemctl start rc-local.service
@@ -126,7 +126,7 @@ elif [ $cVerSO == "10" ]; then
   echo ""
 
   echo ""
-  echo "    Configurando el servicio..." 
+  echo "    Configurando el servicio..."
 echo ""
   echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
   echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
@@ -144,7 +144,7 @@ echo ""
   echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
 
   echo ""
-  echo "    Creando el archivo /etc/rc.local ..." 
+  echo "    Creando el archivo /etc/rc.local ..."
 echo ""
   echo '#!/bin/bash'                                           > /etc/rc.local
   echo ""                                                     >> /etc/rc.local
@@ -153,7 +153,7 @@ echo ""
   chmod +x                                                       /etc/rc.local
 
   echo ""
-  echo "    Creando el archivo para meter los comandos..." 
+  echo "    Creando el archivo para meter los comandos..."
 echo ""
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                          > /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
@@ -168,7 +168,7 @@ echo ""
   chmod 700                                                                                                     /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
   echo ""
-  echo "    Activando y arrancando el servicio..." 
+  echo "    Activando y arrancando el servicio..."
 echo ""
   systemctl enable rc-local
   systemctl start rc-local.service
@@ -180,7 +180,7 @@ elif [ $cVerSO == "11" ]; then
   echo ""
 
   echo ""
-  echo "    Configurando el servicio..." 
+  echo "    Configurando el servicio..."
 echo ""
   echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
   echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
@@ -198,7 +198,7 @@ echo ""
   echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
 
   echo ""
-  echo "    Creando el archivo /etc/rc.local..." 
+  echo "    Creando el archivo /etc/rc.local..."
 echo ""
   echo '#!/bin/bash'                                            > /etc/rc.local
   echo ""                                                     >> /etc/rc.local
@@ -207,7 +207,7 @@ echo ""
   chmod +x                                                       /etc/rc.local
 
   echo ""
-  echo "    Creando el archivo para meter los comandos..." 
+  echo "    Creando el archivo para meter los comandos..."
 echo ""
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                          > /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
@@ -222,7 +222,7 @@ echo ""
   chmod 700                                                                                                     /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
   echo ""
-  echo "    Activando y arrancando el servicio..." 
+  echo "    Activando y arrancando el servicio..."
 echo ""
   systemctl enable rc-local
   systemctl start rc-local.service
@@ -234,7 +234,7 @@ elif [ $cVerSO == "12" ]; then
   echo ""
 
   echo ""
-  echo "    Configurando el servicio..." 
+  echo "    Configurando el servicio..."
 echo ""
   echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
   echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
@@ -252,7 +252,7 @@ echo ""
   echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
 
   echo ""
-  echo "    Creando el archivo /etc/rc.local ..." 
+  echo "    Creando el archivo /etc/rc.local ..."
 echo ""
   echo '#!/bin/bash'                                           > /etc/rc.local
   echo ""                                                     >> /etc/rc.local
@@ -261,7 +261,7 @@ echo ""
   chmod +x                                                       /etc/rc.local
 
   echo ""
-  echo "    Creando el archivo para meter los comandos..." 
+  echo "    Creando el archivo para meter los comandos..."
 echo ""
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                          > /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
@@ -276,7 +276,7 @@ echo ""
   chmod 700                                                                                                     /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
   echo ""
-  echo "    Activando y arrancando el servicio..." 
+  echo "    Activando y arrancando el servicio..."
 echo ""
   systemctl enable rc-local
   systemctl start rc-local.service

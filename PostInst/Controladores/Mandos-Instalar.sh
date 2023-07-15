@@ -37,7 +37,7 @@ menu=(dialog --timeout 5 --checklist "Elección del mando a instalar:" 22 76 16)
           echo ""
           mkdir /root/Controladores/
           cd /root/Controladores/
-          apt-get install -y git cabextract
+          apt-get -y install git cabextract
           git clone https://github.com/medusalix/xow
           mv /root/Controladores/xow/ /root/Controladores/XBoxOneWirelessAdapter/
           /root/Controladores/XBoxOneWirelessAdapter/

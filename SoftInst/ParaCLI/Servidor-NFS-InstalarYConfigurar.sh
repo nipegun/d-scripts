@@ -70,9 +70,9 @@ elif [ $cVerSO == "8" ]; then
 
   # Agregar un archivo a ese directorio para ver si la comparticón es correcta
     echo ""
-    echo "----------------------------------------------------------------------------"
+    
     echo "  AGREGANDO UN ARCHIVO A LA CARPETA COMPARTIDA PARA PROBAR LA COMPARTICIÓN"
-    echo "----------------------------------------------------------------------------"
+    
     echo ""
     echo "Prueba" > /nfs/Prueba.txt
 

@@ -39,8 +39,8 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 7 (Wheezy)..."  echo "---------------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 7 (Wheezy)..."  
   echo ""
 
   echo ""
@@ -50,8 +50,8 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 8 (Jessie)..."  echo "---------------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 8 (Jessie)..."  
   echo ""
 
   echo ""

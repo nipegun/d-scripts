@@ -35,8 +35,8 @@ menu=(dialog --timeout 5 --checklist "Elección del adaptador:" 22 76 16)
           echo ""
           echo -e "${cColorVerde}Instalando controladores Bluetooth para la tarjeta Intel Centrino 7260...${cFinColor}"
           echo ""
-          apt-get update -y
-          apt-get install -y firmware-iwlwifi blueman
+          apt-get -y update
+          apt-get -y install firmware-iwlwifi blueman
 
         ;;
 

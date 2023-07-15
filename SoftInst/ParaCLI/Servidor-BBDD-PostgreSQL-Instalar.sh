@@ -85,8 +85,8 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor PostgreSQL para Debian 11 (Bullseye)..."  echo "-------------------------------------------------------------------------------------------"
+  
+  echo "  Iniciando el script de instalación del servidor PostgreSQL para Debian 11 (Bullseye)..."  
   echo ""
 
   apt-get -y update 
