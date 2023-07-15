@@ -40,8 +40,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -52,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -64,8 +62,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -76,8 +73,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."  
   echo ""
 
   echo ""
@@ -88,8 +84,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."  
   echo ""
 
   # Comprobar si el paquete openssh-server está instalado.
@@ -144,8 +139,7 @@ elif [ $cVerSO == "11" ]; then
       echo "  Si ingresas el código correcto se te proporcionará la llave privada y los códigos de recuperación."
       echo "    Deberás tomar nota de ambos y guardarlos en un lugar seguro."
       echo ""
-      read -p "  Presiona ENTER para proceder..."
-      echo ""
+      read -p "  Presiona ENTER para proceder..."      echo ""
       su %1 -c "google-authenticator"
 
     # Enjaular usuarios

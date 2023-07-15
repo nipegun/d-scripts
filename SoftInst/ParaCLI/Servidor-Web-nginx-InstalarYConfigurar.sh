@@ -48,8 +48,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de nginx para Debian 7 (Wheezy)..."
-  
+  echo "  Iniciando el script de instalación de nginx para Debian 7 (Wheezy)..."  
   echo ""
 
   echo ""
@@ -60,8 +59,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de nginx para Debian 8 (Jessie)..."
-  
+  echo "  Iniciando el script de instalación de nginx para Debian 8 (Jessie)..."  
   echo ""
 
   echo ""
@@ -72,8 +70,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de nginx para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de nginx para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -84,29 +81,28 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de nginx para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de nginx para Debian 10 (Buster)..."  
   echo ""
 
   echo ""
-  echo "Actualizando la lista de paquetes..."
-  echo ""
+  echo "Actualizando la lista de paquetes..." 
+echo ""
   apt-get -y update
 
   echo ""
-  echo "Instalando nginx..."
-  echo ""
+  echo "Instalando nginx..." 
+echo ""
   apt-get -y install nginx
 
   echo ""
-  echo "Instalando y configurando PHP..."
-  echo ""
+  echo "Instalando y configurando PHP..." 
+echo ""
   apt-get -y install php-fpm
   sed -i -e 's|;cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|g' /etc/php/7.3/fpm/php.ini
 
   echo ""
-  echo "Configurando el sitio principal para que también sirva PHP..."
-  echo ""
+  echo "Configurando el sitio principal para que también sirva PHP..." 
+echo ""
   cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
   echo "server {"                                                         > /etc/nginx/sites-available/default
   echo "  listen 80 default_server;"                                     >> /etc/nginx/sites-available/default
@@ -142,8 +138,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de nginx para Debian 11 (Bullseye)..."
-  echo "----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de nginx para Debian 11 (Bullseye)..."  echo "----------------------------------------------------------------------------"
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -175,8 +170,7 @@ elif [ $cVerSO == "11" ]; then
       1)
 
         echo ""
-        echo "  Instalando el paquete nginx..."
-        echo ""
+        echo "  Instalando el paquete nginx..."        echo ""
         apt-get -y update && apt-get -y install nginx
 
         echo '<!DOCTYPE html>'                                     > /var/www/html/index.html
@@ -197,15 +191,13 @@ elif [ $cVerSO == "11" ]; then
       2)
 
         echo ""
-        echo "  Instalando y configurando PHP..."
-        echo ""
+        echo "  Instalando y configurando PHP..."        echo ""
         apt-get -y install php-fpm
         sed -i -e 's|;cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|g' /etc/php/7.3/fpm/php.ini
         sed -i -e 's|;cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|g' /etc/php/7.4/fpm/php.ini
 
         echo ""
-        echo "    Configurando el sitio principal para que también sirva PHP..."
-        echo ""
+        echo "    Configurando el sitio principal para que también sirva PHP..."        echo ""
         cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
         echo "server {"                                                         > /etc/nginx/sites-available/default
         echo "  listen 80 default_server;"                                     >> /etc/nginx/sites-available/default
@@ -242,8 +234,7 @@ elif [ $cVerSO == "11" ]; then
       3)
 
         echo ""
-        echo "  Activando https y agregando certificado SSL autofirmado..."
-        echo ""
+        echo "  Activando https y agregando certificado SSL autofirmado..."        echo ""
 
         # Crear el certificado y la clave del certificado
         openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-default.key -out /etc/ssl/certs/nginx-default.crt -subj "/C=ES/ST=Madrid/L=Arganda/O=MiEmpresa/CN=dominio.com/emailAddress=mail@gmail.com"
@@ -264,8 +255,7 @@ elif [ $cVerSO == "11" ]; then
       4)
 
         echo ""
-        echo "  Activando https (con snippet) y agregando certificado SSL autofirmado..."
-        echo ""
+        echo "  Activando https (con snippet) y agregando certificado SSL autofirmado..."        echo ""
         openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-default.key -out /etc/ssl/certs/nginx-default.crt # Crea el certificado y la clave del vcertificado
         openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 # Crea un grupo Diffie-Hellman fuerte para negociar Perfect Forward Secrecy con los clientes.
 
@@ -310,8 +300,7 @@ elif [ $cVerSO == "11" ]; then
       7)
 
         echo ""
-        echo "  Asegurando parte de la web con usuario y contraseña..."
-        echo ""
+        echo "  Asegurando parte de la web con usuario y contraseña..."        echo ""
         sed -i '$ s|^}|  location /protegida {\n    auth_basic "Area protegida";\n    auth_basic_user_file /etc/nginx/.htpasswd;\n  }\n\n}|' /etc/nginx/sites-available/default
 
         #location /protegida {
@@ -334,8 +323,7 @@ elif [ $cVerSO == "11" ]; then
       8)
 
         echo ""
-        echo "  Reiniciando ngnix..."
-        echo ""
+        echo "  Reiniciando ngnix..."        echo ""
         systemctl restart nginx
         sleep 5
         systemctl status nginx

@@ -17,37 +17,30 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de uhub para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de uhub para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -58,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de uhub para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de uhub para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -70,8 +62,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de uhub para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de uhub para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -82,22 +73,21 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de uhub para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de uhub para Debian 10 (Buster)..."  
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
-       echo "  dialog no está instalado. Iniciando su instalación..."
-       echo ""
+       echo "  dialog no está instalado. Iniciando su instalación..."       echo ""
        apt-get -y update > /dev/null
        apt-get -y install dialog
        echo ""
      fi
 
   menu=(dialog --timeout 5 --checklist "Elige como instalar:" 22 76 16)
-    opciones=(1 "Instalar desde los repos de Debian -- normalmente la 0.4 --" off
+    opciones=(
+  1 "Instalar desde los repos de Debian -- normalmente la 0.4 --" off
               2 "Instalar desde los binarios de Tehnick -- Mejor para Ubuntu --" off
               3 "Bajar, compilar e instalar la última versión de GitHub" on)
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -292,21 +282,20 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de uhub para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de uhub para Debian 11 (Bullseye)..."  
   echo ""
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
-       echo "  dialog no está instalado. Iniciando su instalación..."
-       echo ""
+       echo "  dialog no está instalado. Iniciando su instalación..."       echo ""
        apt-get -y update > /dev/null
        apt-get -y install dialog
        echo ""
      fi
 
   menu=(dialog --timeout 5 --checklist "Elige como instalar:" 22 76 16)
-    opciones=(1 "Instalar desde los repos de Debian -- normalmente la 0.4 --" off
+    opciones=(
+  1 "Instalar desde los repos de Debian -- normalmente la 0.4 --" off
               2 "Instalar desde los binarios de Tehnick -- Mejor para Ubuntu --" off
               3 "Bajar, compilar e instalar la última versión de GitHub" on)
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -407,8 +396,7 @@ elif [ $cVerSO == "11" ]; then
             echo ""
 
             echo ""
-            echo "  Instalando dependencias y paquetes necesarios..."
-            echo ""
+            echo "  Instalando dependencias y paquetes necesarios..."            echo ""
             apt-get -y install cmake
             apt-get -y install make
             apt-get -y install gcc
@@ -417,16 +405,14 @@ elif [ $cVerSO == "11" ]; then
             apt-get -y install libssl-dev
 
             echo ""
-            echo "  Bajando el código fuente..."
-            echo ""
+            echo "  Bajando el código fuente..."            echo ""
             mkdir -p /root/SoftInst/ 2> /dev/null
             cd /root/SoftInst/
             rm /root/SoftInst/uhub/ -R 2> /dev/null
             # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
                if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
                  echo ""
-                 echo "  git no está instalado. Iniciando su instalación..."
-                 echo ""
+                 echo "  git no está instalado. Iniciando su instalación..."                 echo ""
                  apt-get -y update > /dev/null
                  apt-get -y install git
                  echo ""
@@ -434,20 +420,17 @@ elif [ $cVerSO == "11" ]; then
             git clone https://github.com/janvidar/uhub.git
 
             echo ""
-            echo "  Compilando ..."
-            echo ""
+            echo "  Compilando ..."            echo ""
             cd /root/SoftInst/uhub/
             cmake .
             make
 
             echo ""
-            echo "  Instalando..."
-            echo ""
+            echo "  Instalando..."            echo ""
             make install
 
             echo ""
-            echo "  Creando el archivo de configuración de usuarios..."
-            echo ""
+            echo "  Creando el archivo de configuración de usuarios..."            echo ""
             echo "# uHub access control lists."                                                                                   > /etc/uhub/users.conf
             echo "#"                                                                                                             >> /etc/uhub/users.conf
             echo "# Syntax: <command> [data]"                                                                                    >> /etc/uhub/users.conf
@@ -503,8 +486,7 @@ elif [ $cVerSO == "11" ]; then
             echo "Bienvenido a este Hub" > /etc/uhub/motd.txt
 
             echo ""
-            echo "  Creando el certificado SSL..."
-            echo ""
+            echo "  Creando el certificado SSL..."            echo ""
             openssl genrsa -out /etc/uhub/sslpriv.key 8192
             openssl req -new -x509 -nodes -sha512 -days 365 -key /etc/uhub/sslpriv.key > /etc/uhub/sslown.crt
             echo 'tls_private_key="/etc/uhub/sslpriv.key"' >> /etc/uhub/uhub.conf
@@ -513,8 +495,7 @@ elif [ $cVerSO == "11" ]; then
             echo '#tls_require=yes'                        >> /etc/uhub/uhub.conf
 
             echo ""
-            echo "  Creando el servicio..."
-            echo ""
+            echo "  Creando el servicio..."            echo ""
             echo "[Unit]"                         > /etc/systemd/system/uhub.service
             echo "Description=uHub DC Hub"       >> /etc/systemd/system/uhub.service
             echo "After=network.target"          >> /etc/systemd/system/uhub.service
@@ -528,13 +509,11 @@ elif [ $cVerSO == "11" ]; then
             echo "WantedBy=multi-user.target"    >> /etc/systemd/system/uhub.service
 
             echo ""
-            echo "  Creando la base de datos de usuarios..."
-            echo ""
+            echo "  Creando la base de datos de usuarios..."            echo ""
             uhub-passwd /etc/uhub/users.db create
 
             echo ""
-            echo "  Activando e iniciando el servicio..."
-            echo ""
+            echo "  Activando e iniciando el servicio..."            echo ""
             systemctl enable uhub.service
             systemctl start uhub.service
 

@@ -40,9 +40,7 @@
 if [ $cVerSO == "7" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación de Visual Studio Code para Debian 7 (Wheezy)..."
-
   echo ""
 
   echo ""
@@ -52,9 +50,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación de Visual Studio Code para Debian 8 (Jessie)..."
-
   echo ""
 
   echo ""
@@ -64,10 +60,8 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Visual Studio Code para Debian 9 (Stretch)..."
-  echo "---------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script de instalación de Visual Studio Code para Debian 9 (Stretch)..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -76,10 +70,8 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Visual Studio Code para Debian 10 (Buster)..."
-  echo "---------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script de instalación de Visual Studio Code para Debian 10 (Buster)..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -89,28 +81,28 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Visual Studio Code para Debian 11 (Bullseye)..."
-  echo "-------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Visual Studio Code para Debian 11 (Bullseye)..."  echo "-------------------------------------------------------------------------------------------"
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
-       echo "  dialog no está instalado. Iniciando su instalación..."
-       echo ""
+       echo "  dialog no está instalado. Iniciando su instalación..."       echo ""
        apt-get -y update > /dev/null
        apt-get -y install dialog
        echo ""
      fi
   menu=(dialog --timeout 5 --checklist "Instalación de Visual Studio Code:" 22 76 16)
-    opciones=(1 "Instalar versión estable para i386" off
+    opciones=(
+  1 "Instalar versión estable para i386" off
               2 "Instalar versión estable para amd64" off
               3 "Instalar versión estable para armhf" off
               4 "Instalar versión estable para arm64" off
               5 "Instalar version -insider- para i386 " off
               6 "Instalar versión -insider- para amd64" off
               7 "Instalar versión -insider- para armhf" off
-              8 "Instalar versión -insider- para arm64" off)
+              8 "Instalar versión -insider- para arm64" off
+)
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
@@ -121,8 +113,7 @@ elif [ $cVerSO == "11" ]; then
             1)
 
               echo ""
-              echo "  Instalando versión estable para i386..."
-              echo ""
+              echo "  Instalando versión estable para i386..."              echo ""
 
               # Determinar URL del paquete
                  URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep i386 | grep -v side)
@@ -134,15 +125,13 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."
-                 echo ""
+                 echo "  Descargando el paquete..."                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."
-                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -151,8 +140,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."
-                 echo ""
+                 echo "  Instalando el paquete .deb..."                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -178,8 +166,7 @@ elif [ $cVerSO == "11" ]; then
             2)
 
               echo ""
-              echo "  Instalando versión estable para amd64..."
-              echo ""
+              echo "  Instalando versión estable para amd64..."              echo ""
 
               # Determinar URL del paquete
                  URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep amd64 | grep -v side)
@@ -191,15 +178,13 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."
-                 echo ""
+                 echo "  Descargando el paquete..."                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."
-                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -208,8 +193,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."
-                 echo ""
+                 echo "  Instalando el paquete .deb..."                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -235,8 +219,7 @@ elif [ $cVerSO == "11" ]; then
             3)
 
               echo ""
-              echo "  Instalando versión estable para armhf..."
-              echo ""
+              echo "  Instalando versión estable para armhf..."              echo ""
 
               # Determinar URL del paquete
                  URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep armhf | grep -v side)
@@ -248,15 +231,13 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."
-                 echo ""
+                 echo "  Descargando el paquete..."                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."
-                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -265,8 +246,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."
-                 echo ""
+                 echo "  Instalando el paquete .deb..."                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -292,8 +272,7 @@ elif [ $cVerSO == "11" ]; then
             4)
 
               echo ""
-              echo "  Instalando para versión estable para arm64..."
-              echo ""
+              echo "  Instalando para versión estable para arm64..."              echo ""
 
               # Determinar URL del paquete
                  URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep arm64 | grep -v side)
@@ -305,15 +284,13 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."
-                 echo ""
+                 echo "  Descargando el paquete..."                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."
-                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -322,8 +299,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."
-                 echo ""
+                 echo "  Instalando el paquete .deb..."                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -349,8 +325,7 @@ elif [ $cVerSO == "11" ]; then
             5)
 
               echo ""
-              echo "  Instalando versión insider para i386..."
-              echo ""
+              echo "  Instalando versión insider para i386..."              echo ""
 
               # Determinar URL del paquete
                  URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep i386 | grep side)
@@ -362,15 +337,13 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."
-                 echo ""
+                 echo "  Descargando el paquete..."                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."
-                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -379,8 +352,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."
-                 echo ""
+                 echo "  Instalando el paquete .deb..."                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -406,8 +378,7 @@ elif [ $cVerSO == "11" ]; then
             6)
 
               echo ""
-              echo "  Instalando versión insider para amd64..."
-              echo ""
+              echo "  Instalando versión insider para amd64..."              echo ""
 
               # Determinar URL del paquete
                  URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep amd64 | grep side)
@@ -419,15 +390,13 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."
-                 echo ""
+                 echo "  Descargando el paquete..."                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."
-                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -436,8 +405,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."
-                 echo ""
+                 echo "  Instalando el paquete .deb..."                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -463,8 +431,7 @@ elif [ $cVerSO == "11" ]; then
             7)
 
               echo ""
-              echo "  Instalando versión insider para armhf..."
-              echo ""
+              echo "  Instalando versión insider para armhf..."              echo ""
 
               # Determinar URL del paquete
                 URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep armhf | grep side)
@@ -476,15 +443,13 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                 echo ""
-                echo "  Descargando el paquete..."
-                echo ""
+                echo "  Descargando el paquete..."                echo ""
                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
-                    echo "  wget no está instalado. Iniciando su instalación..."
-                    echo ""
+                    echo "  wget no está instalado. Iniciando su instalación..."                    echo ""
                     apt-get -y update > /dev/null
                     apt-get -y install wget
                     echo ""
@@ -493,8 +458,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                 echo ""
-                echo "  Instalando el paquete .deb..."
-                echo ""
+                echo "  Instalando el paquete .deb..."                echo ""
                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -520,8 +484,7 @@ elif [ $cVerSO == "11" ]; then
             8)
 
               echo ""
-              echo "  Instalando versión insider para arm64..."
-              echo ""
+              echo "  Instalando versión insider para arm64..."              echo ""
 
               # Determinar URL del paquete
                 URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep arm64 | grep side)
@@ -533,15 +496,13 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                 echo ""
-                echo "  Descargando el paquete..."
-                echo ""
+                echo "  Descargando el paquete..."                echo ""
                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
-                    echo "  wget no está instalado. Iniciando su instalación..."
-                    echo ""
+                    echo "  wget no está instalado. Iniciando su instalación..."                    echo ""
                     apt-get -y update > /dev/null
                     apt-get -y install wget
                     echo ""
@@ -550,8 +511,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                 echo ""
-                echo "  Instalando el paquete .deb..."
-                echo ""
+                echo "  Instalando el paquete .deb..."                echo ""
                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root

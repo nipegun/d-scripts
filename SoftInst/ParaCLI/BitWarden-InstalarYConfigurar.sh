@@ -98,8 +98,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Desinstalar posibles versiones previas
     echo ""
-    echo "    Desinstalando posibles versiones previas..."
-    echo ""
+    echo "    Desinstalando posibles versiones previas..."    echo ""
     apt-get -y remove docker
     apt-get -y remove docker-engine
     apt-get -y remove docker.io
@@ -110,8 +109,7 @@ elif [ $cVerSO == "11" ]; then
  
   # Agregar el repositorio de Docker
     echo ""
-    echo "    Agregando repositorio de docker..."
-    echo ""
+    echo "    Agregando repositorio de docker..."    echo ""
     apt-get -y update
     apt-get -y install ca-certificates
     apt-get -y install curl
@@ -126,8 +124,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Instalar Docker Engine
     echo ""
-    echo "    Instalando docker engine..."
-    echo ""
+    echo "    Instalando docker engine..."    echo ""
     apt-get -y install docker-ce
     apt-get -y install docker-ce-cli
     apt-get -y install containerd.io
@@ -137,32 +134,26 @@ elif [ $cVerSO == "11" ]; then
 
   # Crear usuario y grupo
     echo ""
-    echo "    Creando el usuario bitwarden..."
-    echo ""
+    echo "    Creando el usuario bitwarden..."    echo ""
     adduser bitwarden
     #echo ""
-    #echo "    Asignando contraseña al usuario bitwarden..."
-    #echo ""
+    #echo "    Asignando contraseña al usuario bitwarden..."    #echo ""
     #passwd bitwarden
     echo ""
-    echo "    Creando el grupo docker..."
-    echo ""
+    echo "    Creando el grupo docker..."    echo ""
     groupadd docker
     echo ""
-    echo "    Agregando el usuario bitwarden al grupo docker..."
-    echo ""
+    echo "    Agregando el usuario bitwarden al grupo docker..."    echo ""
     usermod -aG docker bitwarden
     echo ""
-    echo "    Creando la carpeta de instalación para bitwarden..."
-    echo ""
+    echo "    Creando la carpeta de instalación para bitwarden..."    echo ""
     mkdir /opt/bitwarden
     chmod -R 700 /opt/bitwarden
     chown -R bitwarden:bitwarden /opt/bitwarden
 
   # Instalar bitwarden desde el script oficial
     echo ""
-    echo "    Instalando BitWarden usando el script oficial..."
-    echo ""
+    echo "    Instalando BitWarden usando el script oficial..."    echo ""
     mkdir /opt/bitwarden
     curl -Lso bitwarden.sh https://go.btwrdn.co/bw-sh && chmod 700 bitwarden.sh
     ./bitwarden.sh install

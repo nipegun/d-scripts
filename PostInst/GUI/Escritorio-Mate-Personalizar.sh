@@ -39,9 +39,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-
   echo "  Iniciando el script de personalización del escritorio Mate en Debian 7 (Wheezy)..."
-
   echo ""
 
   echo ""
@@ -51,9 +49,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-
   echo "  Iniciando el script de personalización del escritorio Mate en Debian 8 (Jessie)..."
-
   echo ""
 
   echo ""
@@ -63,9 +59,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
   echo "  Iniciando el script de personalización del escritorio Mate en Debian 9 (Stretch)..."
-  echo "---------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -75,9 +69,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
   echo "  Iniciando el script de personalización del escritorio Mate en Debian 10 (Buster)..."
-  echo "---------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -85,20 +77,20 @@ elif [ $cVerSO == "10" ]; then
   echo ""
 
   # Cosmos
-    rm -R '/usr/share/backgrounds/cosmos' 
+    rm -R '/usr/share/backgrounds/cosmos'
 
   # Mate abstract
     rm '/usr/share/backgrounds/mate/abstract/Flow.png'
     rm '/usr/share/backgrounds/mate/abstract/Gulp.png'
     rm '/usr/share/backgrounds/mate/abstract/Silk.png'
     rm '/usr/share/backgrounds/mate/abstract/Spring.png'
-    rm '/usr/share/backgrounds/mate/abstract/Waves.png' 
+    rm '/usr/share/backgrounds/mate/abstract/Waves.png'
 
   # Mate desktop
-    rm '/usr/share/backgrounds/mate/desktop/Float-into-MATE.png' 
-    rm '/usr/share/backgrounds/mate/desktop/GreenTraditional.jpg' 
-    rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Dark.png' 
-    rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Light.png' 
+    rm '/usr/share/backgrounds/mate/desktop/Float-into-MATE.png'
+    rm '/usr/share/backgrounds/mate/desktop/GreenTraditional.jpg'
+    rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Dark.png'
+    rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Light.png'
     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Cold-no-logo.png'
     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Radioactive-no-logo.png'
     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Warm-no-logo.png'
@@ -115,7 +107,7 @@ elif [ $cVerSO == "10" ]; then
     rm '/usr/share/backgrounds/mate/nature/Storm.jpg'
     rm '/usr/share/backgrounds/mate/nature/TwoWings.jpg'
     rm '/usr/share/backgrounds/mate/nature/Wood.jpg'
-    rm '/usr/share/backgrounds/mate/nature/YellowFlower.jpg' 
+    rm '/usr/share/backgrounds/mate/nature/YellowFlower.jpg'
     rm -R /usr/share/backgrounds/mate/nature
 
   # Themes
@@ -146,7 +138,7 @@ elif [ $cVerSO == "10" ]; then
   rm -rf '/usr/share/themes/HighContrast'
   rm -rf '/usr/share/themes/HighContrastInverse'
   rm -rf '/usr/share/themes/Menta'
-  rm -rf '/usr/share/themes/TraditionalOk' 
+  rm -rf '/usr/share/themes/TraditionalOk'
 
   apt-get -y install gnome-icon-theme
   apt-get -y install arc-theme
@@ -166,9 +158,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------"
   echo "  Iniciando el script de personalización del escritorio Mate en Debian 11 (Bullseye)..."
-  echo "-----------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -176,7 +166,7 @@ elif [ $cVerSO == "11" ]; then
   echo ""
 
   # Cosmos
-    rm -R '/usr/share/backgrounds/cosmos' 
+    rm -R '/usr/share/backgrounds/cosmos'
 
   # Mate abstract
     rm '/usr/share/backgrounds/mate/abstract/Arc-Colors-Transparent-Wallpaper.png'
@@ -187,18 +177,18 @@ elif [ $cVerSO == "11" ]; then
     rm '/usr/share/backgrounds/mate/abstract/Gulp.png'
     rm '/usr/share/backgrounds/mate/abstract/Silk.png'
     rm '/usr/share/backgrounds/mate/abstract/Spring.png'
-    rm '/usr/share/backgrounds/mate/abstract/Waves.png' 
+    rm '/usr/share/backgrounds/mate/abstract/Waves.png'
 
   # Mate desktop
-    rm '/usr/share/backgrounds/mate/desktop/Float-into-MATE.png' 
-    rm '/usr/share/backgrounds/mate/desktop/GreenTraditional.jpg' 
-    rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Dark.png' 
+    rm '/usr/share/backgrounds/mate/desktop/Float-into-MATE.png'
+    rm '/usr/share/backgrounds/mate/desktop/GreenTraditional.jpg'
+    rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Dark.png'
     rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Light.png'
     rm '/usr/share/backgrounds/mate/desktop/Stripes.png'
     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Cold-no-logo.png'
     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Dark-no-logo.png'
     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Radioactive-no-logo.png'
-    rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Warm-no-logo.png'  
+    rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Warm-no-logo.png'
 
   # Mate nature
     rm '/usr/share/backgrounds/mate/nature/Aqua.jpg'
@@ -212,7 +202,7 @@ elif [ $cVerSO == "11" ]; then
     rm '/usr/share/backgrounds/mate/nature/Storm.jpg'
     rm '/usr/share/backgrounds/mate/nature/TwoWings.jpg'
     rm '/usr/share/backgrounds/mate/nature/Wood.jpg'
-    rm '/usr/share/backgrounds/mate/nature/YellowFlower.jpg' 
+    rm '/usr/share/backgrounds/mate/nature/YellowFlower.jpg'
     rm -R /usr/share/backgrounds/mate/nature
 
   # Themes
@@ -243,7 +233,7 @@ elif [ $cVerSO == "11" ]; then
   rm -rf '/usr/share/themes/HighContrast'
   rm -rf '/usr/share/themes/HighContrastInverse'
   rm -rf '/usr/share/themes/Menta'
-  rm -rf '/usr/share/themes/TraditionalOk' 
+  rm -rf '/usr/share/themes/TraditionalOk'
 
   apt-get -y install gnome-icon-theme
   apt-get -y install arc-theme
@@ -260,21 +250,20 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "  Instalando las fuentes de Ubuntu..."
-  echo ""
+echo ""
   apt-get install fonts-ubuntu
   echo ""
 
   echo ""
   echo "  Personalizando LightDM..."
-  echo ""
+echo ""
   # Cambiar el tema
     sed -i -e 's|#theme-name=|theme-name=Arc-Darker|g' /etc/lightdm/lightdm-gtk-greeter.conf
   # Cambiar la imagen de fondo
     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  curl no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "  curl no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update > /dev/null
         apt-get -y install curl
         echo ""
@@ -296,9 +285,7 @@ elif [ $cVerSO == "11" ]; then
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------"
   echo "  Iniciando el script de personalización del escritorio Mate en Debian 12 (Bookworm)..."
-  echo "-----------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -306,7 +293,7 @@ elif [ $cVerSO == "12" ]; then
   echo ""
 
   # Cosmos
-    rm -R '/usr/share/backgrounds/cosmos' 
+    rm -R '/usr/share/backgrounds/cosmos'
 
   # Mate abstract
     rm '/usr/share/backgrounds/mate/abstract/Arc-Colors-Transparent-Wallpaper.png'
@@ -317,18 +304,18 @@ elif [ $cVerSO == "12" ]; then
     rm '/usr/share/backgrounds/mate/abstract/Gulp.png'
     rm '/usr/share/backgrounds/mate/abstract/Silk.png'
     rm '/usr/share/backgrounds/mate/abstract/Spring.png'
-    rm '/usr/share/backgrounds/mate/abstract/Waves.png' 
+    rm '/usr/share/backgrounds/mate/abstract/Waves.png'
 
   # Mate desktop
-    rm '/usr/share/backgrounds/mate/desktop/Float-into-MATE.png' 
-    rm '/usr/share/backgrounds/mate/desktop/GreenTraditional.jpg' 
-    rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Dark.png' 
+    rm '/usr/share/backgrounds/mate/desktop/Float-into-MATE.png'
+    rm '/usr/share/backgrounds/mate/desktop/GreenTraditional.jpg'
+    rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Dark.png'
     rm '/usr/share/backgrounds/mate/desktop/MATE-Stripes-Light.png'
     rm '/usr/share/backgrounds/mate/desktop/Stripes.png'
     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Cold-no-logo.png'
     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Dark-no-logo.png'
     rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Radioactive-no-logo.png'
-    rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Warm-no-logo.png'  
+    rm '/usr/share/backgrounds/mate/desktop/Ubuntu-Mate-Warm-no-logo.png'
 
   # Mate nature
     rm '/usr/share/backgrounds/mate/nature/Aqua.jpg'
@@ -342,7 +329,7 @@ elif [ $cVerSO == "12" ]; then
     rm '/usr/share/backgrounds/mate/nature/Storm.jpg'
     rm '/usr/share/backgrounds/mate/nature/TwoWings.jpg'
     rm '/usr/share/backgrounds/mate/nature/Wood.jpg'
-    rm '/usr/share/backgrounds/mate/nature/YellowFlower.jpg' 
+    rm '/usr/share/backgrounds/mate/nature/YellowFlower.jpg'
     rm -R /usr/share/backgrounds/mate/nature
 
   # Themes
@@ -373,7 +360,7 @@ elif [ $cVerSO == "12" ]; then
   rm -rf '/usr/share/themes/HighContrast'
   rm -rf '/usr/share/themes/HighContrastInverse'
   rm -rf '/usr/share/themes/Menta'
-  rm -rf '/usr/share/themes/TraditionalOk' 
+  rm -rf '/usr/share/themes/TraditionalOk'
 
   apt-get -y install gnome-icon-theme
   apt-get -y install arc-theme
@@ -390,21 +377,20 @@ elif [ $cVerSO == "12" ]; then
 
   echo ""
   echo "  Instalando las fuentes de Ubuntu..."
-  echo ""
+echo ""
   apt-get -y install fonts-ubuntu
   echo ""
 
   echo ""
   echo "  Personalizando LightDM..."
-  echo ""
+echo ""
   # Cambiar el tema
     sed -i -e 's|#theme-name=|theme-name=Arc-Darker|g' /etc/lightdm/lightdm-gtk-greeter.conf
   # Cambiar la imagen de fondo
     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  curl no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "  curl no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update > /dev/null
         apt-get -y install curl
         echo ""

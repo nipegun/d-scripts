@@ -10,13 +10,11 @@
 # ----------
 
 echo ""
-echo "Editando el archivo de configuración..."
-echo ""
+echo "Editando el archivo de configuración..."echo ""
 nano /etc/haproxy/haproxy.cfg
 
 echo ""
-echo "Indicando al servicio que vuelva a cargar el archivo de configuración..."
-echo ""
+echo "Indicando al servicio que vuelva a cargar el archivo de configuración..."echo ""
 service haproxy reload
 
 echo ""

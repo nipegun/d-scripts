@@ -17,37 +17,30 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de RetroArch para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de RetroArch para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -58,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de RetroArch para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de RetroArch para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -70,8 +62,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de RetroArch para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de RetroArch para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -82,8 +73,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de RetroArch para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de RetroArch para Debian 10 (Buster)..."  
   echo ""
 
   apt-get -y update
@@ -94,8 +84,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de RetroArch para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de RetroArch para Debian 11 (Bullseye)..."  
   echo ""
 
   echo ""
@@ -107,63 +96,62 @@ elif [ $cVerSO == "12" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de RetroArch para Debian 12 (Bookworm)..."
-  
+  echo "  Iniciando el script de instalación de RetroArch para Debian 12 (Bookworm)..."  
   echo ""
 
   echo ""
-  echo "    Actualizando lista de paquetes disponibles en los repositorios..."
-  echo ""
+  echo "    Actualizando lista de paquetes disponibles en los repositorios..." 
+echo ""
   apt-get -y update
 
   echo ""
-  echo "    Instalando paquete retroarch..."
-  echo ""
+  echo "    Instalando paquete retroarch..." 
+echo ""
   apt-get -y install retroarch
 
   echo ""
-  echo "    Instalando núcleo para NES/Famicom/Family Game..."
-  echo ""
+  echo "    Instalando núcleo para NES/Famicom/Family Game..." 
+echo ""
   apt-get -y install libretro-nestopia
 
   echo ""
-  echo "    Instalando núcleo para SNES (Family Game)..."
-  echo ""
+  echo "    Instalando núcleo para SNES (Family Game)..." 
+echo ""
   apt-get -y install libretro-snes9x
 
   echo ""
-  echo "    Instalando núcleo para Sega Genesis/Sega MegaDrive..."
-  echo ""
+  echo "    Instalando núcleo para Sega Genesis/Sega MegaDrive..." 
+echo ""
   apt-get -y install libretro-genesisplusgx
 
   echo ""
-  echo "    Instalando núcleo para Nintendo DS..."
-  echo ""
+  echo "    Instalando núcleo para Nintendo DS..." 
+echo ""
   apt-get -y install libretro-desmume
 
   echo ""
-  echo "    Instalando núcleo para Nintendo Game Boy..."
-  echo ""
+  echo "    Instalando núcleo para Nintendo Game Boy..." 
+echo ""
   apt-get -y install libretro-gambatte
 
   echo ""
-  echo "    Instalando núcleo para Nintendo Game Boy Advance..."
-  echo ""
+  echo "    Instalando núcleo para Nintendo Game Boy Advance..." 
+echo ""
   apt-get -y install libretro-mgba
 
   echo ""
-  echo "    Instalando núcleo para NEC/PC Engine..."
-  echo ""
+  echo "    Instalando núcleo para NEC/PC Engine..." 
+echo ""
   apt-get -y install libretro-beetle-pce-fast
 
   echo ""
-  echo "    Instalando núcleo para Sony PlayStation..."
-  echo ""
+  echo "    Instalando núcleo para Sony PlayStation..." 
+echo ""
   apt-get -y install libretro-beetle-psx
 
   echo ""
-  echo "    Instalando núcleo para Nintendo Virtual Boy..."
-  echo ""
+  echo "    Instalando núcleo para Nintendo Virtual Boy..." 
+echo ""
   apt-get -y install libretro-beetle-vb
 
 fi

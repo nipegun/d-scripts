@@ -29,8 +29,7 @@ if [ $# -ne $cCantArgsEsperados ]
     exit
   else
     echo ""
-    echo "  Mostrando los usuarios del grupo $1..."
-    echo ""
+    echo "  Mostrando los usuarios del grupo $1..."    echo ""
     members $1
     echo ""
 fi

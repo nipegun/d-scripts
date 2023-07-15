@@ -13,8 +13,7 @@
 cd /
 
 echo ""
-echo "  BORRANDO LOS ARCHIVOS ._.DS_Store DE TODO EL SISTEMA Y VOLÚMENES MONTADOS..."
-echo ""
+echo "  BORRANDO LOS ARCHIVOS ._.DS_Store DE TODO EL SISTEMA Y VOLÚMENES MONTADOS..."echo ""
 find . -type f -name "._.DS_Store" -print -exec rm -f {} \;
 
 echo ""
@@ -22,8 +21,7 @@ echo "  ARCHIVOS ._.DS_Store BORRADOS"
 echo ""
 
 echo ""
-echo "  BORRANDO LOS ARCHIVOS .DS_Store DE TODO EL SISTEMA Y VOLÚMENES MONTADOS..."
-echo ""
+echo "  BORRANDO LOS ARCHIVOS .DS_Store DE TODO EL SISTEMA Y VOLÚMENES MONTADOS..."echo ""
 find . -type f -name ".DS_Store" -print -exec rm -f {} \;
 
 echo ""

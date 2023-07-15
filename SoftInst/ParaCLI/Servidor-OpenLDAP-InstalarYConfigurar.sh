@@ -45,9 +45,7 @@ vExtDominio="local"
 if [ $cVerSO == "7" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación del servidor OpenLDAP en Debian 7 (Wheezy)..."
-
   echo ""
 
   echo ""
@@ -57,9 +55,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación del servidor OpenLDAP en Debian 8 (Jessie)..."
-
   echo ""
 
   echo ""
@@ -69,10 +65,8 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor OpenLDAP en Debian 9 (Stretch)..."
-  echo "---------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script de instalación del servidor OpenLDAP en Debian 9 (Stretch)..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -81,10 +75,8 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor OpenLDAP en Debian 10 (Buster)..."
-  echo "---------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script de instalación del servidor OpenLDAP en Debian 10 (Buster)..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -93,41 +85,39 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor OpenLDAP en Debian 11 (Bullseye)..."
-  echo "---------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script de instalación del servidor OpenLDAP en Debian 11 (Bullseye)..." 
+echo ""
 
   echo ""
-  echo "  Modificando el archivo /etc/hostname..."
-  echo ""
+  echo "  Modificando el archivo /etc/hostname..." 
+echo ""
   echo "$vNombreServidor" > /etc/hostname
 
   echo ""
-  echo "  Modificando el archivo /etc/hosts..."
-  echo ""
+  echo "  Modificando el archivo /etc/hosts..." 
+echo ""
   echo "$vIPPropia $vNombreServidor.$vDominio.$vExtDominio" >> /etc/hosts
 
   echo ""
-  echo "  Instalando paquetes..."
-  echo ""
+  echo "  Instalando paquetes..." 
+echo ""
   apt-get -y update
   apt-get -y install slapd
   apt-get -y install ldap-utils
   
   echo ""
-  echo "  Reconfigurando slapd..."
-  echo ""
+  echo "  Reconfigurando slapd..." 
+echo ""
   dpkg-reconfigure slapd
 
   echo ""
-  echo "  Mostrando información del servidor..."
-  echo ""
+  echo "  Mostrando información del servidor..." 
+echo ""
   slapcat
 
   echo ""
-  echo "  Agregando unidades organizativas..."
-  echo ""
+  echo "  Agregando unidades organizativas..." 
+echo ""
   mkdir -p /root/OpenLDAP/ 2> /dev/null
   echo "dn: ou=tecnicos,dc=$vDominio,dc=$vExtDominio"  > /root/OpenLDAP/UnidadesOrganizativas.ldif
   echo "objectClass: organizationalUnit"              >> /root/OpenLDAP/UnidadesOrganizativas.ldif
@@ -139,13 +129,13 @@ elif [ $cVerSO == "11" ]; then
   ldapadd -x -D cn=admin,dc=$vDominio,dc=$vExtDominio -W -f /root/OpenLDAP/UnidadesOrganizativas.ldif
 
   echo ""
-  echo "  Mostrando unidades organizativas del servidor OpenLDAP..."
-  echo ""
+  echo "  Mostrando unidades organizativas del servidor OpenLDAP..." 
+echo ""
   ldapsearch -xLLL -b "dc=$vDominio,dc=$vExtDominio" ou | grep ou:
 
   echo ""
-  echo "  Agregando usuarios..."
-  echo ""
+  echo "  Agregando usuarios..." 
+echo ""
   mkdir -p /root/OpenLDAP/ 2> /dev/null
   echo "dn: uid=pedroaguirre,ou=tecnicos,dc=$vDominio,dc=$vExtDominio"  > /root/OpenLDAP/Usuarios.ldif
   echo "objectClass: inetOrgPerson"                                    >> /root/OpenLDAP/Usuarios.ldif
@@ -173,13 +163,13 @@ elif [ $cVerSO == "11" ]; then
   ldapadd -x -D cn=admin,dc=$vDominio,dc=$vExtDominio -W -f /root/OpenLDAP/Usuarios.ldif
 
   echo ""
-  echo "  Mostrando usuarios del servidor OpenLDAP..."
-  echo ""
+  echo "  Mostrando usuarios del servidor OpenLDAP..." 
+echo ""
   ldapsearch -xLLL -b "dc=$vDominio,dc=$vExtDominio" dn | cut -d ',' -f1 | grep uid
 
   echo ""
-  echo "  Instalando LAM (LDAP Account Manager)..."
-  echo ""
+  echo "  Instalando LAM (LDAP Account Manager)..." 
+echo ""
   apt-get -y install ldap-account-manager
 
 fi

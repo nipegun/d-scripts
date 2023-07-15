@@ -49,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Odoo para Debian 7 (Wheezy)..."
-  echo "------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Odoo para Debian 7 (Wheezy)..."  echo "------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -61,8 +60,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Odoo para Debian 8 (Jessie)..."
-  echo "------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Odoo para Debian 8 (Jessie)..."  echo "------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -73,8 +71,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Odoo para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de Odoo para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -85,8 +82,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Odoo para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de Odoo para Debian 10 (Buster)..."  
   echo ""
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -96,18 +92,16 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de nginx para Debian 11 (Bullseye)..."
-  echo "----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de nginx para Debian 11 (Bullseye)..."  echo "----------------------------------------------------------------------------"
   echo ""
 
   echo ""
-  echo "  Instalando la base de datos PostgreSQL..."
-  echo ""
+  echo "  Instalando la base de datos PostgreSQL..." 
+echo ""
   # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo "  wget no está instalado. Iniciando su instalación..."
-      echo ""
+      echo "  wget no está instalado. Iniciando su instalación..."      echo ""
       apt-get -y update > /dev/null
       apt-get -y install wget
       echo ""
@@ -118,8 +112,7 @@ elif [ $cVerSO == "11" ]; then
     # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  gnupg2 no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "  gnupg2 no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update > /dev/null
         apt-get -y install gnupg2
         echo ""
@@ -138,8 +131,8 @@ elif [ $cVerSO == "11" ]; then
     #su - postgres -c "createdb $BaseDeDatosPSQL"
 
   echo ""
-  echo "  Instalando wkhtmltopdf..."
-  echo ""
+  echo "  Instalando wkhtmltopdf..." 
+echo ""
   # Instalar paquetes necesarios
     apt-get -y install fontconfig
     apt-get -y install libjpeg62-turbo
@@ -149,8 +142,7 @@ elif [ $cVerSO == "11" ]; then
     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  curl no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "  curl no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update > /dev/null
         apt-get -y install curl
         echo ""
@@ -163,8 +155,8 @@ elif [ $cVerSO == "11" ]; then
     dpkg -i /root/SoftInst/wkhtmltopdf/wkhtmltopdf.deb
 
   echo ""
-  echo "  Iniciando la instalación de Odoo..."
-  echo ""
+  echo "  Iniciando la instalación de Odoo..." 
+echo ""
   # Agregar llave para firmar repositorio
     mkdir -p /root/aptkeys/ 2> /dev/null
     wget -q -O- https://nightly.odoo.com/odoo.key -O /root/aptkeys/odoo.key
@@ -174,8 +166,7 @@ elif [ $cVerSO == "11" ]; then
     # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  gnupg2 no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "  gnupg2 no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update > /dev/null
         apt-get -y install gnupg2
         echo ""

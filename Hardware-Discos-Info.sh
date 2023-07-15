@@ -22,32 +22,28 @@ echo ""
 # Comprobar si el paquete lshw está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s lshw 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  lshw no está instalado. Iniciando su instalación..."
-     echo ""
+     echo "  lshw no está instalado. Iniciando su instalación..."     echo ""
      apt-get -y update
      apt-get -y install lshw
      echo ""
    fi
 
 echo ""
-echo "  Mostrando info de discos IDE y SATA..."
-echo ""
+echo "  Mostrando info de discos IDE y SATA..."echo ""
 lshw -class disk
 echo ""
 
 # Comprobar si el paquete nvme-cli está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s nvme-cli 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  nvme-cli no está instalado. Iniciando su instalación..."
-     echo ""
+     echo "  nvme-cli no está instalado. Iniciando su instalación..."     echo ""
      apt-get -y update
      apt-get -y install nvme-cli
      echo ""
    fi
 
 echo ""
-echo "  Mostrando info de discos NVMe..."
-echo ""
+echo "  Mostrando info de discos NVMe..."echo ""
 nvme list
 echo ""
 

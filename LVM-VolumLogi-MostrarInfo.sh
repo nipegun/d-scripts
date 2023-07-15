@@ -13,14 +13,12 @@
 # ----------
 
 echo ""
-echo "  Mostrando info de volúmenes lógicos del sistema..."
-echo ""
+echo "  Mostrando info de volúmenes lógicos del sistema..."echo ""
 lvs
 echo ""
 
 echo ""
-echo "  Mostrando info de volúmenes lógicos del sistema (más completo)..."
-echo ""
+echo "  Mostrando info de volúmenes lógicos del sistema (más completo)..."echo ""
 lvdisplay
 echo ""
 

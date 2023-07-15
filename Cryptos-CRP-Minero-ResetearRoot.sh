@@ -22,37 +22,30 @@ cFinColor='\033[0m'
 DirCartera="248C22E649C37C46A03F6A255212CADE2D1569DBB39FC8CEC03A3D6D1F919D22" #feriz
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 7 (Wheezy)..."
-  echo "-------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 7 (Wheezy)..."  echo "-------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -63,8 +56,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 8 (Jessie)..."
-  echo "-------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 8 (Jessie)..."  echo "-------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -75,8 +67,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "--------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 9 (Stretch)..."
-  echo "--------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 9 (Stretch)..."  echo "--------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -87,8 +78,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "--------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 10 (Buster)..."
-  echo "--------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script para resetear el minero de Utopia instalado en Debian 10 (Buster)..."  echo "--------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -99,19 +89,16 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para resetear el minero de Crypton instalado en Debian 11 (Bullseye)..."
-  echo "-----------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script para resetear el minero de Crypton instalado en Debian 11 (Bullseye)..."  echo "-----------------------------------------------------------------------------------------------"
   echo ""
 
   # Terminar cualquier proceso del minero que pueda estar ejecutándose
      echo ""
-     echo "  Terminando posibles procesos activos del antiguo minero..."
-     echo ""
+     echo "  Terminando posibles procesos activos del antiguo minero..."     echo ""
      # Comprobar si el paquete psmisc está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s psmisc 2>/dev/null | grep installed) == "" ]]; then
           echo ""
-          echo "  psmisc no está instalado. Iniciando su instalación..."
-          echo ""
+          echo "  psmisc no está instalado. Iniciando su instalación..."          echo ""
           apt-get -y update
           apt-get -y install psmisc
           echo ""
@@ -123,14 +110,12 @@ elif [ $cVerSO == "11" ]; then
 
   # Borrar todos los datos del anterior minero
      echo ""
-     echo "  Borrando todos los datos del anterior minero..."
-     echo ""
+     echo "  Borrando todos los datos del anterior minero..."     echo ""
      rm -rf /root/.uam/*
 
 # Preparar el archivo .ini del nuevo minero
      echo ""
-     echo "  Preparando el archivo .ini del nuevo minero..."
-     echo ""
+     echo "  Preparando el archivo .ini del nuevo minero..."     echo ""
      IPYPuerto=$(cat /root/uam.ini | grep listens)
      echo "[net]"       > /root/uam.ini
      echo "$IPYPuerto" >> /root/uam.ini
@@ -141,8 +126,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Reiniciar el sistema
      echo ""
-     echo "  Reiniciando el sistema..."
-     echo ""
+     echo "  Reiniciando el sistema..."     echo ""
      shutdown -r now
 
   fi

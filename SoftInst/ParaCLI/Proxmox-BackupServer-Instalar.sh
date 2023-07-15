@@ -115,8 +115,7 @@ elif [ $cVerSO == "11" ]; then
 
             # Bajar e instalar la llave
               echo ""
-              echo "    Bajando e instalando la llave para firmar el repositorio de Proxmox..."
-              echo ""
+              echo "    Bajando e instalando la llave para firmar el repositorio de Proxmox..."              echo ""
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -130,8 +129,7 @@ elif [ $cVerSO == "11" ]; then
 
             # Agregar los repositorios
               echo ""
-              echo "    Agregando los repositorios..."
-              echo ""
+              echo "    Agregando los repositorios..."              echo ""
               # Agregar el repositorio enterprise y comentarlo
                 echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
               # Agregar el repositorio para no suscriptores
@@ -143,20 +141,17 @@ elif [ $cVerSO == "11" ]; then
 
             # Actualizar la lista de paquetes disponibles en los repositorios
               echo ""
-              echo "    Actualizando la lista de paquetes disponibles en los repositorios..."
-              echo ""
+              echo "    Actualizando la lista de paquetes disponibles en los repositorios..."              echo ""
               apt-get -y update
 
             # Instalar el paquete proxmox-backup (cambia el kernel y agrega sporte para ZFS) (Igual que la instalación del ISO)
               echo ""
-              echo "    Instalando el paquete proxmox-backup (cambia el kernel y agrega sporte para ZFS)..."
-              echo ""
+              echo "    Instalando el paquete proxmox-backup (cambia el kernel y agrega sporte para ZFS)..."              echo ""
               apt-get -y install proxmox-backup
 
             # Volver agregar los repositorios
               echo ""
-              echo "    Volviendo a agregar los repositorios..."
-              echo ""
+              echo "    Volviendo a agregar los repositorios..."              echo ""
               # Agregar el repositorio enterprise y comentarlo
                 echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
               # Agregar el repositorio para no suscriptores
@@ -168,8 +163,7 @@ elif [ $cVerSO == "11" ]; then
 
             # Actualizar todo el sistema
               echo ""
-              echo "    Actualizando todo el sistema..."
-              echo ""
+              echo "    Actualizando todo el sistema..."              echo ""
               apt-get -y update
               apt-get -y upgrade
               apt-get -y dist-upgrade
@@ -187,8 +181,7 @@ elif [ $cVerSO == "11" ]; then
 
             # Bajar e instalar la llave
               echo ""
-              echo "    Bajando e instalando la llave para firmar el repositorio de Proxmox..."
-              echo ""
+              echo "    Bajando e instalando la llave para firmar el repositorio de Proxmox..."              echo ""
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -202,8 +195,7 @@ elif [ $cVerSO == "11" ]; then
 
             # Agregar los repositorios
               echo ""
-              echo "    Agregando los repositorios..."
-              echo ""
+              echo "    Agregando los repositorios..."              echo ""
               # Agregar el repositorio enterprise y comentarlo
                 echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
               # Agregar el repositorio para no suscriptores
@@ -215,20 +207,17 @@ elif [ $cVerSO == "11" ]; then
 
             # Actualizar la lista de paquetes disponibles en los repositorios
               echo ""
-              echo "    Actualizando la lista de paquetes disponibles en los repositorios..."
-              echo ""
+              echo "    Actualizando la lista de paquetes disponibles en los repositorios..."              echo ""
               apt-get -y update
 
             # Instalar el paquete proxmox-backup-server (no cambia el kernel y no tiene soporte para ZFS) (Apto para contenedores)
               echo ""
-              echo "    Instalando el paquete proxmox-backup-server (no cambia el kernel y no tiene soporte para ZFS)..."
-              echo ""
+              echo "    Instalando el paquete proxmox-backup-server (no cambia el kernel y no tiene soporte para ZFS)..."              echo ""
               apt-get -y install proxmox-backup-server
 
             # Volver a establecer repositorios
               echo ""
-              echo "    Volviendo a estableceer los repositorios..."
-              echo ""
+              echo "    Volviendo a estableceer los repositorios..."              echo ""
               # Agregar el repositorio enterprise y comentarlo
                 echo "#deb https://enterprise.proxmox.com/debian/pbs bullseye pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
               # Agregar el repositorio para no suscriptores
@@ -240,8 +229,7 @@ elif [ $cVerSO == "11" ]; then
 
             # Actualizar todo el sistema
               echo ""
-              echo "    Actualizando todo el sistema..."
-              echo ""
+              echo "    Actualizando todo el sistema..."              echo ""
               apt-get -y update
               apt-get -y upgrade
               apt-get -y dist-upgrade
@@ -293,8 +281,7 @@ elif [ $cVerSO == "12" ]; then
 
             # Bajar e instalar la llave
               echo ""
-              echo "    Bajando e instalando la llave para firmar el repositorio de Proxmox..."
-              echo ""
+              echo "    Bajando e instalando la llave para firmar el repositorio de Proxmox..."              echo ""
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -308,8 +295,7 @@ elif [ $cVerSO == "12" ]; then
 
             # Agregar los repositorios
               echo ""
-              echo "    Agregando los repositorios..."
-              echo ""
+              echo "    Agregando los repositorios..."              echo ""
               # Agregar el repositorio enterprise y comentarlo
                 echo "#deb https://enterprise.proxmox.com/debian/pbs bookworm pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
               # Agregar el repositorio para no suscriptores
@@ -321,20 +307,17 @@ elif [ $cVerSO == "12" ]; then
 
             # Actualizar la lista de paquetes disponibles en los repositorios
               echo ""
-              echo "    Actualizando la lista de paquetes disponibles en los repositorios..."
-              echo ""
+              echo "    Actualizando la lista de paquetes disponibles en los repositorios..."              echo ""
               apt-get -y update
 
             # Instalar el paquete proxmox-backup (cambia el kernel y agrega sporte para ZFS) (Igual que la instalación del ISO)
               echo ""
-              echo "    Instalando el paquete proxmox-backup (cambia el kernel y agrega sporte para ZFS)..."
-              echo ""
+              echo "    Instalando el paquete proxmox-backup (cambia el kernel y agrega sporte para ZFS)..."              echo ""
               apt-get -y install proxmox-backup
 
             # Volver a agregar los repositorios
               echo ""
-              echo "    Volviendo a agregar los repositorios..."
-              echo ""
+              echo "    Volviendo a agregar los repositorios..."              echo ""
               # Agregar el repositorio enterprise y comentarlo
                 echo "#deb https://enterprise.proxmox.com/debian/pbs bookworm pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
               # Agregar el repositorio para no suscriptores
@@ -346,8 +329,7 @@ elif [ $cVerSO == "12" ]; then
 
             # Actualizar todo el sistema
               echo ""
-              echo "    Actualizando todo el sistema..."
-              echo ""
+              echo "    Actualizando todo el sistema..."              echo ""
               apt-get -y update
               apt-get -y upgrade
               apt-get -y dist-upgrade
@@ -364,8 +346,7 @@ elif [ $cVerSO == "12" ]; then
           2)
             # Bajar e instalar la llave
               echo ""
-              echo "    Bajando e instalando la llave para firmar el repositorio de Proxmox..."
-              echo ""
+              echo "    Bajando e instalando la llave para firmar el repositorio de Proxmox..."              echo ""
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -379,8 +360,7 @@ elif [ $cVerSO == "12" ]; then
 
             # Agregar los repositorios
               echo ""
-              echo "    Agregando los repositorios..."
-              echo ""
+              echo "    Agregando los repositorios..."              echo ""
               # Agregar el repositorio enterprise y comentarlo
                 echo "#deb https://enterprise.proxmox.com/debian/pbs bookworm pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
               # Agregar el repositorio para no suscriptores
@@ -392,20 +372,17 @@ elif [ $cVerSO == "12" ]; then
 
             # Actualizar la lista de paquetes disponibles en los repositorios
               echo ""
-              echo "    Actualizando la lista de paquetes disponibles en los repositorios..."
-              echo ""
+              echo "    Actualizando la lista de paquetes disponibles en los repositorios..."              echo ""
               apt-get -y update
 
             # Instalar el paquete proxmox-backup-server (no cambia el kernel y no tiene soporte para ZFS) (Apto para contenedores)
               echo ""
-              echo "    Instalando el paquete proxmox-backup-server (no cambia el kernel y no tiene soporte para ZFS)..."
-              echo ""
+              echo "    Instalando el paquete proxmox-backup-server (no cambia el kernel y no tiene soporte para ZFS)..."              echo ""
               apt-get -y install proxmox-backup-server
 
             # Agregar a agregar los repositorios
               echo ""
-              echo "    Volviendo a agregar los repositorios..."
-              echo ""
+              echo "    Volviendo a agregar los repositorios..."              echo ""
               # Agregar el repositorio enterprise y comentarlo
                 echo "#deb https://enterprise.proxmox.com/debian/pbs bookworm pbs-enterprise" > /etc/apt/sources.list.d/pbs-enterprise.list
               # Agregar el repositorio para no suscriptores
@@ -417,8 +394,7 @@ elif [ $cVerSO == "12" ]; then
 
             # Actualizar todo el sistema
               echo ""
-              echo "    Actualizando el sistema..."
-              echo ""
+              echo "    Actualizando el sistema..."              echo ""
               apt-get -y update
               apt-get -y upgrade
               apt-get -y dist-upgrade

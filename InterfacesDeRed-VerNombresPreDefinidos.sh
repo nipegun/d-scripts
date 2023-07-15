@@ -11,7 +11,6 @@
 
 echo ""
 echo "-----------------------------------------"
-echo "  Mostrando los nombres predefinidos..."
-echo "-----------------------------------------"
+echo "  Mostrando los nombres predefinidos..."echo "-----------------------------------------"
 cat /etc/udev/rules.d/70-persistent-net.rules
 

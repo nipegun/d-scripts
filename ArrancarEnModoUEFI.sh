@@ -12,7 +12,6 @@
 echo ""
 
 echo "  Arrancando en modo UEFI..."
-
 echo ""
 
 systemctl reboot --firmware-setup

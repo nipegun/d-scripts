@@ -40,8 +40,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Heimdall para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Heimdall para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -52,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Heimdall para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Heimdall para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -64,8 +62,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Heimdall para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de Heimdall para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -76,8 +73,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Heimdall para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de Heimdall para Debian 10 (Buster)..."  
   echo ""
 
   echo ""
@@ -88,39 +84,33 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Heimdall para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de Heimdall para Debian 11 (Bullseye)..."  
   echo ""
 
   # Instalar PHP
     echo ""
-    echo "    Instalando PHP..."
-    echo ""
+    echo "    Instalando PHP..."    echo ""
     vVersPHP=$(apt-cache search php | grep server-side | grep meta | cut -d ' ' -f1)
     apt-get -y install $vVersPHP
   # Instalar dependencias php para heimdall
     echo ""
-    echo "    Instalando dependencias..."
-    echo ""
+    echo "    Instalando dependencias..."    echo ""
     apt-get -y install php-sqlite3
     apt-get -y install php-zip
   # Borrar posible archivo de código fuente viejo
     echo ""
-    echo "    Borrando posibles archivos de código fuente viejo..."
-    echo ""
+    echo "    Borrando posibles archivos de código fuente viejo..."    echo ""
     rm -rf /root/SoftInst/Heimdall/* 2> /dev/null
   # Crear carpeta y posicionarse
     mkdir -p /root/SoftInst/Heimdall/ 2> /dev/null
     cd /root/SoftInst/Heimdall/
   # Determinar última versión disponible
     echo ""
-    echo "    Determinando la versión de la última release..."
-    echo ""
+    echo "    Determinando la versión de la última release..."    echo ""
     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "      curl no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "      curl no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update && apt-get -y install curl
         echo ""
       fi
@@ -130,13 +120,11 @@ elif [ $cVerSO == "11" ]; then
     echo ""
   # Descargar archivo con la última versión
     echo ""
-    echo "    Descargando el archivo..."
-    echo ""
+    echo "    Descargando el archivo..."    echo ""
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "      wget no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "      wget no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update && apt-get -y install wget
         echo ""
       fi
@@ -145,13 +133,11 @@ elif [ $cVerSO == "11" ]; then
     wget https://github.com/linuxserver/Heimdall/archive/refs/tags/$vUltVers.zip -O /root/SoftInst/Heimdall/source.zip
   # Descomprimir archivo con código fuente nuevo
     echo ""
-    echo "    Descomprimiendo el archivo ..."
-    echo ""
+    echo "    Descomprimiendo el archivo ..."    echo ""
     # Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "      unzip no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "      unzip no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update && apt-get -y install unzip
         echo ""
       fi
@@ -159,8 +145,7 @@ elif [ $cVerSO == "11" ]; then
     vCarpetaConCodFuente=$(find /root/SoftInst/Heimdall/ -type f -name *tisan | sed 's-artisan--g')
   # Copiar archivos a la carpeta pública de html de Apache
     echo ""
-    echo "    Copiando archivos a la carpeta pública configurada en Apache..."
-    echo ""
+    echo "    Copiando archivos a la carpeta pública configurada en Apache..."    echo ""
     mv /var/www/heimdall/database/ /tmp/ 2> /dev/null
     rm -rf /var/www/heimdall/ 2> /dev/null
     mkdir /var/www/heimdall/
@@ -175,8 +160,7 @@ elif [ $cVerSO == "11" ]; then
     rm -rf /var/www/heimdall/storage/framework/sessions/* 2> /dev/null
   # Crear el servicio de systemd
     echo ""
-    echo "    Creando el servicio en SystemD..."
-    echo ""
+    echo "    Creando el servicio en SystemD..."    echo ""
     echo "[Unit]"                                                             > /etc/systemd/system/heimdall.service
     echo "Description=Heimdall"                                              >> /etc/systemd/system/heimdall.service
     echo "After=network.target"                                              >> /etc/systemd/system/heimdall.service
@@ -199,8 +183,7 @@ elif [ $cVerSO == "11" ]; then
     rm -rf /var/www/heimdall/storage/framework/sessions/* 2> /dev/null
   # Reiniciar el sistema
     echo ""
-    echo "    Reiniciando el sistema..."
-    echo ""
+    echo "    Reiniciando el sistema..."    echo ""
     shutdown -r now
 fi
 

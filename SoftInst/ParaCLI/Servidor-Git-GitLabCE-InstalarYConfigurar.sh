@@ -129,8 +129,7 @@ elif [ $cVerSO == "11" ]; then
     echo ""
     echo "    Para loguearte usa el usuario root y el password que está en el archivo /etc/gitlab/initial_root_password."
     echo ""
-    echo "    Mostrando el contenido del archivo /etc/gitlab/initial_root_password..."
-    echo ""
+    echo "    Mostrando el contenido del archivo /etc/gitlab/initial_root_password..."    echo ""
     cat /etc/gitlab/initial_root_password
 
   # Más info aquí:

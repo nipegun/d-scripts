@@ -10,13 +10,11 @@
 # ----------
 
 echo ""
-echo "Editando el archivo de configuración..."
-echo ""
+echo "Editando el archivo de configuración..."echo ""
 nano /etc/uhub/uhub.conf
 
 echo ""
-echo "Indicando al servicio que vuelva a cargar el archivo de configuración..."
-echo ""
+echo "Indicando al servicio que vuelva a cargar el archivo de configuración..."echo ""
 service uhub reload
 
 echo ""

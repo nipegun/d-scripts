@@ -50,7 +50,6 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
    12 "Agregar los mineros del usuario $UsuarioNoRoot a los ComandosPostArranque" off
   )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  clear
 
   for choice in $choices
     do

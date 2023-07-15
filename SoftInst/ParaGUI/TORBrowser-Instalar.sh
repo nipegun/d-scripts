@@ -49,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de TORBrowser para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de TORBrowser para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -61,8 +60,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de TORBrowser para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de TORBrowser para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -73,8 +71,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de TORBrowser para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de TORBrowser para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -85,8 +82,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de TORBrowser para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de TORBrowser para Debian 10 (Buster)..."  
   echo ""
 
   printf "deb http://deb.debian.org/debian buster-backports main contrib" > /etc/apt/sources.list.d/buster-backports.list
@@ -97,8 +93,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de TORBrowser para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de TORBrowser para Debian 11 (Bullseye)..."  
   echo ""
 
   apt-get -y update
@@ -107,8 +102,8 @@ elif [ $cVerSO == "11" ]; then
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de TORBrowser para Debian 12 (Bookworm)..."
-  echo ""
+  echo "  Iniciando el script de instalación de TORBrowser para Debian 12 (Bookworm)..." 
+echo ""
 
   apt-get -y update
   apt-get -y install torbrowser-launcher

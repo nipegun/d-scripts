@@ -125,22 +125,19 @@ elif [ $cVerSO == "11" ]; then
 
   # Loguearse para crear el primer usuario
     echo ""
-    echo "    Intentando loguearse en http://127.0.0.1:3000..."
-    echo "    Sigue los pasos para la creación del primer usuario."
+    echo "    Intentando loguearse en http://127.0.0.1:3000..."    echo "    Sigue los pasos para la creación del primer usuario."
     echo ""
     coder login http://127.0.0.1:3000
 
   # Crear el primer espacio de trabajo
     echo ""
-    echo "    Creando el primer espacio de trabajo..."
-    echo '      Aconsejado: Elegir "code-server en docker"'
+    echo "    Creando el primer espacio de trabajo..."    echo '      Aconsejado: Elegir "code-server en docker"'
     echo ""
     coder template init
 
   # Crear la plantilla
     echo ""
-    echo "    Creando la plantilla para docker code-server..."
-    echo "    Responde yes cuando sea necesario."
+    echo "    Creando la plantilla para docker code-server..."    echo "    Responde yes cuando sea necesario."
     echo ""
     cd ./docker-code-server && coder templates create       
 

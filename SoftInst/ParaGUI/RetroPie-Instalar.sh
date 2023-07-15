@@ -17,37 +17,30 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de RetroPie para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de RetroPie para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -58,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de RetroPie para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de RetroPie para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -70,8 +62,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de RetroPie para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de RetroPie para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -82,20 +73,19 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de RetroPie para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de RetroPie para Debian 10 (Buster)..."  
   echo ""
 
   echo ""
-  echo "Instalando paquetes necesarios..."
-  echo ""
+  echo "Instalando paquetes necesarios..." 
+echo ""
   apt-get update -y
   apt-get upgrade -y
   apt-get install -y git dialog unzip xmlstarlet
 
   echo ""
-  echo "Borrando instalación anterior, si es que existe..."
-  echo ""
+  echo "Borrando instalación anterior, si es que existe..." 
+echo ""
   unlink /root/.emulationstation
   unlink /root/.config/retroarch
   rm -rf /root/RetroPie
@@ -123,8 +113,8 @@ elif [ $cVerSO == "10" ]; then
   /root/SoftInst/RetroPie/retropie_setup.sh
 
   echo ""
-  echo "Modificando archivos para adaptador a la nueva ubicación..."
-  echo ""
+  echo "Modificando archivos para adaptador a la nueva ubicación..." 
+echo ""
   find /RetroPie/ -type f -exec sed -i -e "s|/opt/retropie|/RetroPie/opt|g" {} \;
   sed -i -e 's|/root/RetroPie/|/RetroPie/|g' /etc/emulationstation/es_systems.cfg
   chown nobody:nogroup /RetroPie/ -R
@@ -139,8 +129,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de RetroPie para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de RetroPie para Debian 11 (Bullseye)..."  
   echo ""
 
   echo ""

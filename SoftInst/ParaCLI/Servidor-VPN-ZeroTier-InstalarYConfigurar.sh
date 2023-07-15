@@ -40,8 +40,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de ZeroTier para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de ZeroTier para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -52,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de ZeroTier para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de ZeroTier para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -64,8 +62,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de ZeroTier para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de ZeroTier para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -76,8 +73,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de ZeroTier para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de ZeroTier para Debian 10 (Buster)..."  
   echo ""
 
   curl -sL https://install.zerotier.com | bash
@@ -87,8 +83,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de ZeroTier para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de ZeroTier para Debian 11 (Bullseye)..."  
   echo ""
 
   curl -sL https://install.zerotier.com | bash

@@ -4,8 +4,7 @@
   vUsuario=$(id | cut -d"(" -f2 | cut -d ")" -f1)
   echo $vUsuario
   if [ $vUsuario != "oracle" ]; then
-    echo "El script debe ser ejecutado como el usuario oracle. Abortando script..."
-    exit 1
+    echo "El script debe ser ejecutado como el usuario oracle. Abortando script..."    exit 1
   fi
 
 vCarpetaCopSeg=/home/oracle/CopSeg/Consistente/NoIncremental

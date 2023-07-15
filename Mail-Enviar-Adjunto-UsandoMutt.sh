@@ -36,8 +36,7 @@ if [ $# -ne $cCantArgsEsperados ]
     # Comprobar si el paquete mutt está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s mutt 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  mutt no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "  mutt no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update && apt-get -y install mutt
         echo ""
       fi

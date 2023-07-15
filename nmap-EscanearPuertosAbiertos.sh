@@ -17,8 +17,7 @@ vIPWAN=111.111.111.111
 vPuertoInicio=1
 vPuertoFin=65535
 
-echo "  Escaneando puertos posibles ..."
-nmap $vIPWAN -p $vPuertoInicio-$vPuertoFin10999 | grep ^1 | cut -d'/' -f1 > /tmp/puertos.txt
+echo "  Escaneando puertos posibles ..."nmap $vIPWAN -p $vPuertoInicio-$vPuertoFin10999 | grep ^1 | cut -d'/' -f1 > /tmp/puertos.txt
 
 for line in $(cat /tmp/puertos.txt)
   do

@@ -34,8 +34,7 @@ if [ $# -ne $EXPECTED_ARGS ]
 
     echo ""
     echo "--------------------"
-    echo "  SINCRONIZANDO..."
-    echo "--------------------"
+    echo "  SINCRONIZANDO..."    echo "--------------------"
     echo ""
     #echo -e "password" | rsync -a --delete /root/scripts/ yo@192.168.1.125:~/scripts
     rsync -a --delete $1 $2@$3:$4

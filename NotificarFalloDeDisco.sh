@@ -11,15 +11,13 @@
 
 echo ""
 echo "--------------------"
-echo "  ENVIANDO MAIL..."
-echo "--------------------"
+echo "  ENVIANDO MAIL..."echo "--------------------"
 echo ""
 echo "$SMARTD_MESSAGE" | mail -s "$SMARTD_FAILTYPE" "$SMARTD_ADDRESS"
 
 echo ""
 echo "-----------------------------"
-echo "  NOTIFICANDO AL USUARIO..."
-echo "-----------------------------"
+echo "  NOTIFICANDO AL USUARIO..."echo "-----------------------------"
 echo ""
 wall "$SMARTD_MESSAGE"
 

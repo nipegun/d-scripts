@@ -105,15 +105,15 @@ elif [ $cVerSO == "11" ]; then
   echo ""
 
   echo ""
-  echo "    Descargando el archivo tar..."
-  echo ""
+  echo "    Descargando el archivo tar..." 
+echo ""
   mkdir -p /root/SoftInst/TelegramDesktop/ 2> /dev/null
   cd /root/SoftInst/TelegramDesktop/
   curl -sL https://telegram.org/dl/desktop/linux -o /root/SoftInst/TelegramDesktop/telegram-desktop-setup.tar.xz
 
   echo ""
-  echo "    Descomprimiendo del archivo..."
-  echo ""
+  echo "    Descomprimiendo del archivo..." 
+echo ""
   # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
       echo ""
@@ -125,14 +125,14 @@ elif [ $cVerSO == "11" ]; then
    tar -xvf /root/SoftInst/TelegramDesktop/telegram-desktop-setup.tar.xz
 
   echo ""
-  echo "    Moviendo los archivos a la carpeta del usuario no-root..."
-  echo ""
+  echo "    Moviendo los archivos a la carpeta del usuario no-root..." 
+echo ""
   mkdir -p /home/$vUsuarioNoRoot/AppsPortables/TelegramDesktop/ 2> /dev/null
   cp -r /root/SoftInst/TelegramDesktop/Telegram/* /home/$vUsuarioNoRoot/AppsPortables/TelegramDesktop/
 
   echo ""
-  echo "    Asignando propiedad y reparando permisos..."
-  echo ""
+  echo "    Asignando propiedad y reparando permisos..." 
+echo ""
   chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/AppsPortables/ -v
   chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/AppsPortables/TelegramDesktop/ -Rv
   echo ""

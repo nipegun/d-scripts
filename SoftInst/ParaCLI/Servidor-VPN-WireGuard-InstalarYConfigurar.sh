@@ -89,8 +89,7 @@ elif [ $cVerSO == "10" ]; then
 
   # Borrar WireGuard si ya está instalado
     echo ""
-    echo "    Borrando posible instalación anterior..."
-    echo ""
+    echo "    Borrando posible instalación anterior..."    echo ""
     # Ejecutar primero copia de seguridad de posible instalación anterior
     mkdir -p /root/WireGuard/CopSegInstAnt/ 2> /dev/null
     mv /root/WireGuard/* /root/WireGuard/CopSegInstAnt/
@@ -100,8 +99,7 @@ elif [ $cVerSO == "10" ]; then
 
 # Instalar el paquete WireGuard
     echo ""
-    echo "    Instalando paquetes..."
-    echo ""
+    echo "    Instalando paquetes..."    echo ""
     apt-get -y update > /dev/null
     apt-get -y autoremove > /dev/null
     apt-get -y install wireguard
@@ -109,8 +107,7 @@ elif [ $cVerSO == "10" ]; then
 
   # Crear el archivo de configuración#
     echo ""
-    echo "    Creando el archivo de configuración de la interfaz..."
-    echo ""
+    echo "    Creando el archivo de configuración de la interfaz..."    echo ""
     echo "[Interface]"                                             > /etc/wireguard/wg0.conf
     echo "Address = $vDirIPintWG/24"                              >> /etc/wireguard/wg0.conf
     echo "PrivateKey ="                                           >> /etc/wireguard/wg0.conf
@@ -171,15 +168,13 @@ elif [ $cVerSO == "10" ]; then
 
   # Levantar la conexión
     echo ""
-    echo "    Levantando la interfaz..."
-    echo ""
+    echo "    Levantando la interfaz..."    echo ""
     wg-quick up wg0
     echo ""
 
   # Activar el servicio
     echo ""
-    echo "    Activando el servicio..."
-    echo ""
+    echo "    Activando el servicio..."    echo ""
     systemctl enable wg-quick@wg0.service
     echo ""
 
@@ -204,8 +199,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Borrar WireGuard si ya está instalado
     echo ""
-    echo "    Borrando posible instalación anterior..."
-    echo ""
+    echo "    Borrando posible instalación anterior..."    echo ""
     # Ejecutar primero copia de seguridad de posible instalación anterior
     mkdir -p /root/WireGuard/CopSegInstAnt/ 2> /dev/null
     mv /root/WireGuard/* /root/WireGuard/CopSegInstAnt/
@@ -215,8 +209,7 @@ elif [ $cVerSO == "11" ]; then
 
 # Instalar el paquete WireGuard
     echo ""
-    echo "    Instalando paquetes..."
-    echo ""
+    echo "    Instalando paquetes..."    echo ""
     apt-get -y update > /dev/null
     apt-get -y autoremove > /dev/null
     apt-get -y install wireguard
@@ -224,8 +217,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Crear el archivo de configuración#
     echo ""
-    echo "    Creando el archivo de configuración de la interfaz..."
-    echo ""
+    echo "    Creando el archivo de configuración de la interfaz..."    echo ""
     echo "[Interface]"                                             > /etc/wireguard/wg0.conf
     echo "Address = $vDirIPintWG/24"                              >> /etc/wireguard/wg0.conf
     echo "PrivateKey ="                                           >> /etc/wireguard/wg0.conf
@@ -314,15 +306,13 @@ elif [ $cVerSO == "11" ]; then
 
   # Levantar la conexión
     echo ""
-    echo "    Levantando la interfaz..."
-    echo ""
+    echo "    Levantando la interfaz..."    echo ""
     wg-quick up wg0
     echo ""
 
   # Activar el servicio
     echo ""
-    echo "    Activando el servicio..."
-    echo ""
+    echo "    Activando el servicio..."    echo ""
     systemctl enable wg-quick@wg0.service
     echo ""
 

@@ -18,8 +18,7 @@ cd /
 
 echo ""
 echo "  BORRANDO DE TODO EL SISTEMA Y VOLÚMENES MONTADOS"
-echo "  TODOS LOS ARCHIVOS QUE CONTENGAN Zone.Identifier EN EL NOMBRE..."
-echo ""
+echo "  TODOS LOS ARCHIVOS QUE CONTENGAN Zone.Identifier EN EL NOMBRE..."echo ""
 find . -type f -name "*Zone.Identifier*" -print -exec rm -f {} \;
 
 echo ""

@@ -27,13 +27,11 @@ if [ $# -ne $EXPECTED_ARGS ]
     exit
   else
     echo ""
-    echo "Borrando el usuario $1 de la lista de usuarios del sistema..."
-    echo ""
+    echo "Borrando el usuario $1 de la lista de usuarios del sistema..."    echo ""
     userdel $1
 
     echo ""
-    echo "Borrando la carpeta home del usuario $1..."
-    echo ""
+    echo "Borrando la carpeta home del usuario $1..."    echo ""
     rm -r /home/$1
     echo ""
 fi

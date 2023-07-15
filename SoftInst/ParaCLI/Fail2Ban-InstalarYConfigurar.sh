@@ -93,8 +93,8 @@ elif [ $cVerSO == "11" ]; then
   echo ""
 
   echo ""
-  echo "  Instalando paquetes..."
-  echo ""
+  echo "  Instalando paquetes..." 
+echo ""
   apt-get -y update
   apt-get -y install fail2ban
   #apt-get -y install sendmail
@@ -181,8 +181,8 @@ elif [ $cVerSO == "12" ]; then
   echo ""
 
   echo ""
-  echo "  Instalando paquetes..."
-  echo ""
+  echo "  Instalando paquetes..." 
+echo ""
   apt-get -y update
   apt-get -y install fail2ban
   #apt-get -y install sendmail

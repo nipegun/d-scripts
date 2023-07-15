@@ -30,16 +30,14 @@ echo ""
 # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  git no está instalado. Iniciando su instalación..."
-     echo ""
+     echo "  git no está instalado. Iniciando su instalación..."     echo ""
      apt-get -y update
      apt-get -y install git
      echo ""
    fi
 
 echo ""
-echo "  Descargando el repositorio de XMRig..."
-echo ""
+echo "  Descargando el repositorio de XMRig..."echo ""
 cd /
 rm -rf ~/kawpowminer/
 rm -rf ~/.hunter/
@@ -48,8 +46,7 @@ git clone https://github.com/RavenCommunity/kawpowminer.git
 cd kawpowminer
 
 echo ""
-echo "  Compilando..."
-echo ""
+echo "  Compilando..."echo ""
 git submodule update --init --recursive
 # Crear la carpeta
    mkdir build
@@ -66,8 +63,7 @@ git submodule update --init --recursive
    make -sj $(nproc)
 
 echo ""
-echo "  Creando ID para el minero..."
-echo ""
+echo "  Creando ID para el minero..."echo ""
 
 # A partir de la MAC WiFi
    # Obtener MAC de la WiFi
@@ -83,8 +79,7 @@ echo ""
 
 echo 
 ""
-echo "  Ejecutando minero con identificador $IdMinero..."
-echo ""
+echo "  Ejecutando minero con identificador $IdMinero..."echo ""
 
 # Con TLS
 ./xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet --tls 

@@ -45,9 +45,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación del escritorio Gnome en Debian 7 (Wheezy)..."
-
   echo ""
 
   echo ""
@@ -57,9 +55,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación del escritorio Gnome en Debian 8 (Jessie)..."
-
   echo ""
 
   echo ""
@@ -69,9 +65,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación del escritorio Gnome en Debian 9 (Stretch)..."
-
   echo ""
 
   echo ""
@@ -81,10 +75,8 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de personalización del escritorio Gnome en Debian 10 (Buster)..."
-  echo "----------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script de personalización del escritorio Gnome en Debian 10 (Buster)..." 
+echo ""
 
   # Actualizar la lista de paquetes
     apt-get -y update
@@ -102,9 +94,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación del escritorio Gnome en Debian 11 (Bullseye)..."
-
   echo ""
 
   # Actualizar la lista de paquetes

@@ -115,8 +115,7 @@ elif [ $cVerSO == "11" ]; then
           1)
 
             echo ""
-            echo "  Ejecutando securización básica..."
-            echo ""
+            echo "  Ejecutando securización básica..."            echo ""
             echo "    Los cambios serán los siguientes:"
             echo ""
             echo "    - Se cambiará el puerto del 2 al 22222"
@@ -143,8 +142,7 @@ elif [ $cVerSO == "11" ]; then
           2)
 
             echo ""
-            echo "  Activando la autenticación mediante clave público/privada..."
-            echo ""
+            echo "  Activando la autenticación mediante clave público/privada..."            echo ""
             # Activar la autenticación mediante llave pública
               sed -i -e 's|#PubkeyAuthentication yes|PubkeyAuthentication yes|g' /etc/ssh/sshd_config
             # Crear el usuario tecnico
@@ -183,8 +181,7 @@ elif [ $cVerSO == "11" ]; then
           3)
 
             echo ""
-            echo "  Limitando la autenticación a sólo mediante clave público/privada..."
-            echo ""
+            echo "  Limitando la autenticación a sólo mediante clave público/privada..."            echo ""
             sed -i -e 's|#PasswordAuthentication yes|PasswordAuthentication no|g' /etc/ssh/sshd_config
             sed -i -e 's|#PubkeyAuthentication yes|PubkeyAuthentication yes|g'    /etc/ssh/sshd_config
 
@@ -193,17 +190,14 @@ elif [ $cVerSO == "11" ]; then
           4)
 
             echo ""
-            echo "  Implementando autenticación de doble factor..."
-            echo ""
+            echo "  Implementando autenticación de doble factor..."            echo ""
             # Establecer la zona horaria
               echo ""
-              echo "    Estableciendo Europe/Madrid como zona horaria..."
-              echo ""
+              echo "    Estableciendo Europe/Madrid como zona horaria..."              echo ""
               timedatectl set-timezone Europe/Madrid
             # Instalar chrony
               echo ""
-              echo "    Instalando chrony..."
-              echo ""
+              echo "    Instalando chrony..."              echo ""
               apt-get -y update && apt-get -y install chrony
               # A ejecutar en el cliente:
                 # timedatectl -H tecnico@IPDelServidorSSH:22222
@@ -219,8 +213,7 @@ elif [ $cVerSO == "11" ]; then
               apt-get -y install libpam-google-authenticator
             # Ejecutar Google Authenticator con la cuenta de técnico
               echo ""
-              echo "    Preparando autenticación OTP..."
-              echo ""
+              echo "    Preparando autenticación OTP..."              echo ""
               echo "      - Toma nota de la clave privada (Your new secret key is:) y guárdala en un lugar seguro."
               echo "      - Escanea el código QR con la app Google Authenticator y, una vez escaneado,"
               echo "        baja hasta la cuenta que acabas de agregar, toma nota del código e introdúcelo abajo, donde pone:"

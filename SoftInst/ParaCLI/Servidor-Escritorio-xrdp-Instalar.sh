@@ -73,8 +73,8 @@ elif [ $cVerSO == "9" ]; then
   sed -i -e 's|allowed_users=console|allowed_users=anybody|g' /etc/X11/Xwrapper.config    
 
   echo ""
-  echo "    Activando XRDP como servicio..."
-  echo ""
+  echo "    Activando XRDP como servicio..." 
+echo ""
   systemctl enable xrdp
 
 elif [ $cVerSO == "10" ]; then
@@ -87,8 +87,8 @@ elif [ $cVerSO == "10" ]; then
   apt-get -y install xrdp
 
   echo ""
-  echo "    Activando XRDP como servicio..."
-  echo ""
+  echo "    Activando XRDP como servicio..." 
+echo ""
   systemctl enable xrdp --now
 
 elif [ $cVerSO == "11" ]; then
@@ -101,8 +101,8 @@ elif [ $cVerSO == "11" ]; then
   apt-get -y install xrdp
 
   echo ""
-  echo "    Activando XRDP como servicio..."
-  echo ""
+  echo "    Activando XRDP como servicio..." 
+echo ""
   systemctl enable xrdp --now
 
 elif [ $cVerSO == "12" ]; then
@@ -115,8 +115,8 @@ elif [ $cVerSO == "12" ]; then
   apt-get -y install xrdp
 
   echo ""
-  echo "    Activando XRDP como servicio..."
-  echo ""
+  echo "    Activando XRDP como servicio..." 
+echo ""
   systemctl enable xrdp --now
 
 fi

@@ -37,8 +37,8 @@ EOF
 
 # Modificar URL
   echo ""
-  echo "Modificando URL..."
-  echo ""
+  echo "Modificando URL..." 
+echo ""
   echo "  Cambiando $vURLVieja"
   echo ""
   echo "  por"

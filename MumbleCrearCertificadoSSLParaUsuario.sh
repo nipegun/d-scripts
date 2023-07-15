@@ -31,38 +31,31 @@ if [ $# -ne $cCantArgsEsperados ]
     exit
   else
     echo ""
-    echo "  Instalando los paquetes necesarios..."
-    echo ""
+    echo "  Instalando los paquetes necesarios..."    echo ""
     apt-get -y install openssl ssl-cert
 
     echo ""
-    echo "  Creando la carpeta para los certificados (si es que no existe)..."
-    echo ""
+    echo "  Creando la carpeta para los certificados (si es que no existe)..."    echo ""
     mkdir -p /root/Mumble/CertificadosSSL/
 
     echo ""
-    echo "  Borrando el certificado viejo (si es que existe)..."
-    echo ""
+    echo "  Borrando el certificado viejo (si es que existe)..."    echo ""
     rm -f /root/Mumble/CertificadosSSL/$1*
 
-    echo "  Creando el certificado..."
-    echo ""
+    echo "  Creando el certificado..."    echo ""
     openssl req -x509 -nodes -days 3650 -newkey rsa:4096 -out /root/Mumble/CertificadosSSL/$1.pem -keyout /root/Mumble/CertificadosSSL/$1.key
 
     echo ""
-    echo "  Convirtiendo el certificado al formato PKCS12..."
-    echo ""
+    echo "  Convirtiendo el certificado al formato PKCS12..."    echo ""
     openssl pkcs12 -export -in /root/Mumble/CertificadosSSL/$1.pem -inkey /root/Mumble/CertificadosSSL/$1.key -certfile /root/Mumble/CertificadosSSL/$1.pem -out /root/Mumble/CertificadosSSL/$1.p12
 
     echo ""
-    echo "  Borrando los archivos .key y .pem..."
-    echo ""
+    echo "  Borrando los archivos .key y .pem..."    echo ""
     rm -f /root/Mumble/CertificadosSSL/$1.pem
     rm -f /root/Mumble/CertificadosSSL/$1.key
 
     echo ""
-    echo "  Enviando el certificado en formato PKCS12 al usuario..."
-    echo ""
+    echo "  Enviando el certificado en formato PKCS12 al usuario..."    echo ""
     
 fi
 

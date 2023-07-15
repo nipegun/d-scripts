@@ -17,37 +17,30 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -58,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   apt-get -y update
@@ -147,12 +139,11 @@ elif [ $cVerSO == "8" ]; then
   echo ""
   echo "  Al terminar deberías ver algo así:"
   echo ""
-  echo "  Active: active (exited) since..."
-  echo ""
+  echo "  Active: active (exited) since..." 
+echo ""
   echo "  en vez de:"
   echo ""
-  echo "  Active: Inactive (dead) since..."
-  echo "------------------------------------"
+  echo "  Active: Inactive (dead) since..."  echo "------------------------------------"
   echo ""
   sleep 2
   service openvpn start
@@ -162,8 +153,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."  
   echo ""
 
 cCantArgumEsperados=1
@@ -186,9 +176,11 @@ if [ $# -ne $cCantArgsEsperados ]
     exit
   else
     menu=(dialog --timeout 5 --checklist "Que VPN quieres instalar:" 22 76 16)
-    opciones=(1 "OpenVPN con Autoridad Certificadora en la misma máquina" off
+    opciones=(
+  1 "OpenVPN con Autoridad Certificadora en la misma máquina" off
               2 "OpenVPN con Autoridad Certificadora en otra máquina" off
-              3 "otra" off)
+              3 "otra" off
+)
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
     clear
 
@@ -198,8 +190,7 @@ if [ $# -ne $cCantArgsEsperados ]
 
           1)
             echo ""
-            echo "Borrando archivos y configuraciones antiguas..."
-            echo ""
+            echo "Borrando archivos y configuraciones antiguas..."            echo ""
             apt-get -y purge openvpn easy-rsa
             apt-get -y autoremove
             rm -rf /etc/openvpn
@@ -207,27 +198,23 @@ if [ $# -ne $cCantArgsEsperados ]
             rm -rf /root/VPN
 
             echo ""
-            echo "Instalando OpenVPN..."
-            echo ""
+            echo "Instalando OpenVPN..."            echo ""
             aso
             apt-get -y install openvpn
             
             echo ""
-            echo "Descargando EasyRSA..."
-            echo ""
+            echo "Descargando EasyRSA..."            echo ""
             wget --no-check-certificate -P /root/ https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.6/EasyRSA-unix-v3.0.6.tgz
             tar xvf /root/EasyRSA-unix-v3.0.6.tgz -C /root/
             mv /root/EasyRSA-v3.0.6 /root/EasyRSA
             
             echo ""
-            echo "Preparando EasyRSA..."
-            echo ""
+            echo "Preparando EasyRSA..."            echo ""
             cd /root/EasyRSA/
             /root/EasyRSA/easyrsa init-pki
             
             echo ""
-            echo "Construyendo la Autoridad Certificadora..."
-            echo ""
+            echo "Construyendo la Autoridad Certificadora..."            echo ""
             /root/EasyRSA/easyrsa build-ca nopass
             /root/EasyRSA/easyrsa import-req /root/EasyRSA/pki/reqs/server.req server-ca
             /root/EasyRSA/easyrsa sign-req server server-ca
@@ -250,8 +237,7 @@ if [ $# -ne $cCantArgsEsperados ]
             chmod -R 700 /root/VPN/client-configs
             
             echo ""
-            echo "Creando el cliente1..."
-            echo ""
+            echo "Creando el cliente1..."            echo ""
             /root/EasyRSA/easyrsa gen-req client1 nopass
             cp /root/EasyRSA/pki/private/client1.key /root/VPN/client-configs/keys/
             /root/EasyRSA/easyrsa sign-req client client1
@@ -260,8 +246,7 @@ if [ $# -ne $cCantArgsEsperados ]
             cp /etc/openvpn/ca.crt /root/VPN/client-configs/keys/
 
             echo ""
-            echo "Configurando el servicio..."
-            echo ""
+            echo "Configurando el servicio..."            echo ""
             cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/
             gzip -d /etc/openvpn/server.conf.gz
             sed -i -e's|tls-auth ta.key 0 # This file is secret|tls-auth ta.key 0 # This file is secret\nkey-direction 0|g' /etc/openvpn/server.conf
@@ -331,8 +316,7 @@ if [ $# -ne $cCantArgsEsperados ]
             chmod 700 /root/VPN/client-configs/make_config.sh
             
             #echo ""
-            #echo "Agregando usuarios con..."
-            #echo ""
+            #echo "Agregando usuarios con..."            #echo ""
             #/root/VPN/client-configs/make_config.sh client1
           ;;
 
@@ -400,8 +384,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."  
   echo ""
 
   echo ""
@@ -412,8 +395,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."  
   echo ""
 
   echo ""

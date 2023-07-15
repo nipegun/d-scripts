@@ -123,17 +123,14 @@ elif [ $cVerSO == "11" ]; then
         1)
 
           echo ""
-          echo "  Instalando servidor FTP básico..."
-          echo ""
+          echo "  Instalando servidor FTP básico..."          echo ""
 
           echo ""
-          echo "    Actualizando la lista de los paquetes disponibles en los repositorios..."
-          echo ""
+          echo "    Actualizando la lista de los paquetes disponibles en los repositorios..."          echo ""
           apt-get -y update
 
           echo ""
-          echo "    Instalando el paquete proftpd..."
-          echo ""
+          echo "    Instalando el paquete proftpd..."          echo ""
           apt-get -y install proftpd
           touch /etc/proftpd/conf.d/extra.conf
 
@@ -142,8 +139,7 @@ elif [ $cVerSO == "11" ]; then
         2)
 
           echo ""
-          echo "  Modificando mensaje de bienvenida..."
-          echo ""
+          echo "  Modificando mensaje de bienvenida..."          echo ""
           
           echo 'ServerIdent on "Bienvenido al servidor FTP."' >> /etc/proftpd/conf.d/extra.conf
           systemctl restart proftpd
@@ -153,8 +149,7 @@ elif [ $cVerSO == "11" ]; then
         3)
 
           echo ""
-          echo "  Activando navegación anónima..."
-          echo ""
+          echo "  Activando navegación anónima..."          echo ""
 
           echo ''                                                                                                      >> /etc/proftpd/conf.d/extra.conf
           echo '<Anonymous ~ftp>'                                                                                      >> /etc/proftpd/conf.d/extra.conf
@@ -188,8 +183,7 @@ elif [ $cVerSO == "11" ]; then
         4)
 
           echo ""
-          echo "  Activando el logueo para usuarios del sistema..."
-          echo ""
+          echo "  Activando el logueo para usuarios del sistema..."          echo ""
 
           echo ""
           echo "    En proftpd, la configuración por defecto ya permite loguearse por ftp a los usuarios del sistema!"
@@ -200,8 +194,7 @@ elif [ $cVerSO == "11" ]; then
         5)
 
           echo ""
-          echo "  Activando enjaulado de usuarios..."
-          echo ""
+          echo "  Activando enjaulado de usuarios..."          echo ""
 
           echo "DefaultRoot ~ !ftpsinjaula" >> /etc/proftpd/conf.d/extra.conf
           groupadd ftpsinjaula 2> /dev/null
@@ -213,8 +206,7 @@ elif [ $cVerSO == "11" ]; then
         6)
 
           echo ""
-          echo "  Desenjaulando el usuario 1000..."
-          echo ""
+          echo "  Desenjaulando el usuario 1000..."          echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
             vUsuario1000=$(cat /etc/passwd | grep "1000:1000" | cut -d ':' -f1)
             if [ "$vUsuario1000" = "" ]; then
@@ -240,8 +232,7 @@ elif [ $cVerSO == "11" ]; then
         7)
 
           echo ""
-          echo "  Desenjaulando usuario específico..."
-          echo ""
+          echo "  Desenjaulando usuario específico..."          echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
             #read -p "Ingresa el nombre del usuario que quieras desenjaular: " vUsuarioLibre
             echo "    Ingresa el nombre del usuario que quieras desenjaular:"
@@ -269,8 +260,7 @@ elif [ $cVerSO == "11" ]; then
         8)
 
           echo ""
-          echo "  Activando conexión mediante TLS..."
-          echo ""
+          echo "  Activando conexión mediante TLS..."          echo ""
           # Instalar el módulo para TLS
             apt-get -y install proftpd-mod-crypto
           # Activar el módulo
@@ -301,8 +291,7 @@ elif [ $cVerSO == "11" ]; then
         9)
 
           echo ""
-          echo "  Activando permiso de escritura..."
-          echo ""
+          echo "  Activando permiso de escritura..."          echo ""
 
           echo ""
           echo "    En proftpd, la configuración por defecto ya permite el permiso de escritura a los distintos usuarios del sistema!"
@@ -336,21 +325,17 @@ elif [ $cVerSO == "11" ]; then
        10)
 
           echo ""
-          echo "  Cambiando la ubicación de la carpeta pública..."
-          echo ""
+          echo "  Cambiando la ubicación de la carpeta pública..."          echo ""
 
           echo "    Comandos todavía no preparados..."
-
         ;;
 
        11)
 
           echo ""
-          echo "  Permitiendo ls recursivo..."
-          echo ""
+          echo "  Permitiendo ls recursivo..."          echo ""
 
           echo "    Comandos todavía no preparados..."
-
         ;;
           
     esac

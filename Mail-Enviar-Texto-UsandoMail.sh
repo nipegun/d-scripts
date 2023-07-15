@@ -36,8 +36,7 @@ if [ $# -ne $cCantArgsEsperados ]
     # Comprobar si el paquete mailutils está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s mailutils 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  mailutils no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "  mailutils no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update && apt-get -y install mailutils
         echo ""
       fi

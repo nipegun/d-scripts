@@ -116,13 +116,11 @@ elif [ $cVerSO == "11" ]; then
           1)
 
             echo ""
-            echo "    Instalando servidor web con certificado SSL autofirmado..."
-            echo ""
+            echo "    Instalando servidor web con certificado SSL autofirmado..."            echo ""
 
             # Actualizar sistema
               echo ""
-              echo "      Actualizando el sistema..."
-              echo ""
+              echo "      Actualizando el sistema..."              echo ""
               apt-get -y update
               apt-get -y upgrade
               apt-get -y dist-upgrade
@@ -133,16 +131,14 @@ elif [ $cVerSO == "11" ]; then
         
             # Instalar paquetes de apache y relacionados
               echo ""
-              echo "      Instalando paquetes de apache y relacionados..."
-              echo ""
+              echo "      Instalando paquetes de apache y relacionados..."              echo ""
               apt-get -y install apache2
               apt-get -y install apache2-utils
               apt-get -y install redis-server
               apt-get -y install imagemagick
             # Activar módulos de Apache
               echo ""
-              echo "      Activando módulos de Apache..."
-              echo ""
+              echo "      Activando módulos de Apache..."              echo ""
               a2enmod rewrite
               a2enmod ssl
               a2enmod headers
@@ -151,13 +147,11 @@ elif [ $cVerSO == "11" ]; then
               a2enmod mime
             # Activar sitio SSL por defecto
               echo ""
-              echo "      Activando sitio SSL por defecto en Apache..."
-              echo ""
+              echo "      Activando sitio SSL por defecto en Apache..."              echo ""
               a2ensite default-ssl
             # Configurar carpeta de logs del sitio por defecto
               echo ""
-              echo "      Configurando carpeta de logs del sitio por defecto..."
-              echo ""
+              echo "      Configurando carpeta de logs del sitio por defecto..."              echo ""
               cp /etc/apache2/sites-available/000-default.conf     /etc/apache2/sites-available/000-default.conf.ori
               sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/_/logs|g' /etc/apache2/sites-available/000-default.conf
               mkdir -p /var/www/html/_/logs/
@@ -166,8 +160,7 @@ elif [ $cVerSO == "11" ]; then
               echo "  RewriteRule .*\.(log)$ http://google.com [NC]"   >> /var/www/html/_/logs/.htaccess
             # Instalar paquetes de PHP
               echo ""
-              echo "      Instalando paquetes de PHP $vUltVersPHP..."
-              echo ""
+              echo "      Instalando paquetes de PHP $vUltVersPHP..."              echo ""
               apt-get -y install php"$vUltVersPHP"-common
               apt-get -y install php"$vUltVersPHP"-gd
               apt-get -y install php"$vUltVersPHP"-curl
@@ -184,8 +177,7 @@ elif [ $cVerSO == "11" ]; then
               apt-get -y install libapache2-mod-php"$vUltVersPHP"
             # Activar módulos de PHP
               echo ""
-              echo "      Activando módulos de PHP..."
-              echo ""
+              echo "      Activando módulos de PHP..."              echo ""
               phpenmod gd
                 php -m | grep gd
               phpenmod curl
@@ -204,8 +196,7 @@ elif [ $cVerSO == "11" ]; then
                 #php -m | grep mcrypt
             # Modificar php.ini
               echo ""
-              echo "      Modificando php.ini..."
-              echo ""
+              echo "      Modificando php.ini..."              echo ""
               cp /etc/php/"$vUltVersPHP"/apache2/php.ini /etc/php/"$vUltVersPHP"/apache2/php.ini.ori
               sed -i -e 's|max_execution_time = 30|max_execution_time = 300|g'   /etc/php/"$vUltVersPHP"/apache2/php.ini
               sed -i -e 's|memory_limit = 128M|memory_limit = 300M|g'            /etc/php/"$vUltVersPHP"/apache2/php.ini
@@ -213,8 +204,7 @@ elif [ $cVerSO == "11" ]; then
               sed -i -e 's|upload_max_filesize = 2M|upload_max_filesize = 64M|g' /etc/php/"$vUltVersPHP"/apache2/php.ini
             # Modificar el servidor SSH
               echo ""
-              echo "      Modificando el servidor SSH..."
-              echo ""
+              echo "      Modificando el servidor SSH..."              echo ""
               #apt-get -y install tasksel
               #tasksel install ssh-server
               cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
@@ -226,8 +216,7 @@ elif [ $cVerSO == "11" ]; then
               echo "  ForceCommand internal-sftp" >> /etc/ssh/sshd_config
             # Preparar el usuario www-data para conectarse mediante sftp
               echo ""
-              echo "      Preparando el usuario www-data para conectarse sólo mediante sftp..."
-              echo ""
+              echo "      Preparando el usuario www-data para conectarse sólo mediante sftp..."              echo ""
               echo ""
               echo "        Ahora tendrás que ingresar veces en nuevo password para el usuario www-data."
               echo "        Acuérdate de apuntarlo en un lugar seguro porque tendrás que loguearte con él mediante sftp."
@@ -240,8 +229,7 @@ elif [ $cVerSO == "11" ]; then
               service ssh restart
             # Crear el archivo intermedio nuevawebvar.conf
               echo ""
-              echo "      Creando el archivo intermedio nuevawebvar.conf..."
-              echo ""
+              echo "      Creando el archivo intermedio nuevawebvar.conf..."              echo ""
               echo ""                                                                 > /etc/apache2/sites-available/nuevawebvar.conf
               echo "<VirtualHost *:80>"                                              >> /etc/apache2/sites-available/nuevawebvar.conf
               echo ""                                                                >> /etc/apache2/sites-available/nuevawebvar.conf
@@ -265,8 +253,7 @@ elif [ $cVerSO == "11" ]; then
               echo ""                                                                >> /etc/apache2/sites-available/nuevawebvar.conf
             # Instalar el certificado SSL autofirmado para https...
               echo ""
-              echo "      Instalando el certificado SSL autofirmado para https..."
-              echo ""
+              echo "      Instalando el certificado SSL autofirmado para https..."              echo ""
               mkdir -p /etc/apache2/ssl/
               openssl req -x509 -nodes -days 365 -newkey rsa:8192 -out /etc/apache2/ssl/autocertssl.pem -keyout /etc/apache2/ssl/autocertssl.key
               chmod 600 /etc/apache2/ssl/*
@@ -277,22 +264,19 @@ elif [ $cVerSO == "11" ]; then
               service apache2 restart
             # Instalar el servidor de bases de datos
               echo ""
-              echo "      Instalando el servidor de bases de datos..."
-              echo ""
+              echo "      Instalando el servidor de bases de datos..."              echo ""
               #curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-MariaDB-InstalarYConfigurar.sh | bash
               /root/scripts/d-scripts/SoftInst/ParaCLI/Servidor-BBDD-MariaDB-InstalarYConfigurar.sh
             # Instalar memcached
               echo ""
-              echo "      Instalando MemCacheD..."
-              echo ""
+              echo "      Instalando MemCacheD..."              echo ""
               apt-get -y install memcached
               apt-get -y install php-memcached
               phpenmod memcached
               service apache2 restart
             # Instalar el cortafuegos NFTables
               echo ""
-              echo "      Instalando el cortafuegos NFTables..."
-              echo ""
+              echo "      Instalando el cortafuegos NFTables..."              echo ""
               apt-get -y install nftables
               systemctl enable nftables.service
               echo "# Reglas NFTables para servidor Web"                   >> /root/scripts/ComandosNFTables.sh
@@ -311,8 +295,7 @@ elif [ $cVerSO == "11" ]; then
 
             # Instalar el cortafuegos NFTables
               echo ""
-              echo "    Agregando el certificado SSL de letsencrypt y configurando Apache para que lo use..."
-              echo ""
+              echo "    Agregando el certificado SSL de letsencrypt y configurando Apache para que lo use..."              echo ""
               apt-get update
               apt-get -y install certbot
               apt-get -y install python3-certbot-apache
@@ -352,27 +335,23 @@ elif [ $cVerSO == "11" ]; then
 
             # Activar módulos para remoteip
               echo ""
-              echo "    Activando módulos para RemoteIP..."
-              echo ""
+              echo "    Activando módulos para RemoteIP..."              echo ""
               a2enmod remoteip
               a2enmod headers
             # Modificar la configuración de apache
               echo ""
-              echo "    Modificando el archivo remoteip.conf en Apache..."
-              echo ""
+              echo "    Modificando el archivo remoteip.conf en Apache..."              echo ""
               echo "RemoteIPHeader X-Forwarded-For"                                                     > /etc/apache2/conf-available/remoteip.conf
               echo "#RemoteIPInternalProxy 0.0.0.0"                                                    >> /etc/apache2/conf-available/remoteip.conf
               echo "#RemoteIPTrustedProxy 0.0.0.0"                                                     >> /etc/apache2/conf-available/remoteip.conf
               echo 'LogFormat "%a %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined' >> /etc/apache2/conf-available/remoteip.conf
             # Activar la configuración de remoteip
               echo ""
-              echo "    Activando la configuración de apache de remoteip..."
-              echo ""
+              echo "    Activando la configuración de apache de remoteip..."              echo ""
               a2enconf remoteip
             # Reiniciar el servidor apache
               echo ""
-              echo "    Reiniciando el servidor apache..."
-              echo ""
+              echo "    Reiniciando el servidor apache..."              echo ""
               service apache2 restart
             # Notificar fin del script
               echo ""
@@ -427,13 +406,11 @@ elif [ $cVerSO == "12" ]; then
           1)
 
             echo ""
-            echo "    Instalando servidor web con certificado SSL autofirmado..."
-            echo ""
+            echo "    Instalando servidor web con certificado SSL autofirmado..."            echo ""
 
             # Actualizar sistema
               echo ""
-              echo "      Actualizando el sistema..."
-              echo ""
+              echo "      Actualizando el sistema..."              echo ""
               apt-get -y update
               apt-get -y upgrade
               apt-get -y dist-upgrade
@@ -444,16 +421,14 @@ elif [ $cVerSO == "12" ]; then
         
             # Instalar paquetes de apache y relacionados
               echo ""
-              echo "      Instalando paquetes de apache y relacionados..."
-              echo ""
+              echo "      Instalando paquetes de apache y relacionados..."              echo ""
               apt-get -y install apache2
               apt-get -y install apache2-utils
               apt-get -y install redis-server
               apt-get -y install imagemagick
             # Activar módulos de Apache
               echo ""
-              echo "      Activando módulos de Apache..."
-              echo ""
+              echo "      Activando módulos de Apache..."              echo ""
               a2enmod rewrite
               a2enmod ssl
               a2enmod headers
@@ -462,13 +437,11 @@ elif [ $cVerSO == "12" ]; then
               a2enmod mime
             # Activar sitio SSL por defecto
               echo ""
-              echo "      Activando sitio SSL por defecto en Apache..."
-              echo ""
+              echo "      Activando sitio SSL por defecto en Apache..."              echo ""
               a2ensite default-ssl
             # Configurar carpeta de logs del sitio por defecto
               echo ""
-              echo "      Configurando carpeta de logs del sitio por defecto..."
-              echo ""
+              echo "      Configurando carpeta de logs del sitio por defecto..."              echo ""
               cp /etc/apache2/sites-available/000-default.conf     /etc/apache2/sites-available/000-default.conf..bak.ori
               sed -i -e 's|${APACHE_LOG_DIR}|/var/www/html/_/logs|g' /etc/apache2/sites-available/000-default.conf
               mkdir -p /var/www/html/_/logs/
@@ -477,8 +450,7 @@ elif [ $cVerSO == "12" ]; then
               echo "  RewriteRule .*\.(log)$ http://google.com [NC]"   >> /var/www/html/_/logs/.htaccess
             # Instalar paquetes de PHP
               echo ""
-              echo "      Instalando paquetes de PHP $vUltVersPHP..."
-              echo ""
+              echo "      Instalando paquetes de PHP $vUltVersPHP..."              echo ""
               apt-get -y install php"$vUltVersPHP"-common
               apt-get -y install php"$vUltVersPHP"-gd
               apt-get -y install php"$vUltVersPHP"-curl
@@ -495,8 +467,7 @@ elif [ $cVerSO == "12" ]; then
               apt-get -y install libapache2-mod-php"$vUltVersPHP"
             # Activar módulos de PHP
               echo ""
-              echo "      Activando módulos de PHP..."
-              echo ""
+              echo "      Activando módulos de PHP..."              echo ""
               phpenmod gd
                 php -m | grep gd
               phpenmod curl
@@ -515,8 +486,7 @@ elif [ $cVerSO == "12" ]; then
                 php -m | grep mcrypt
             # Modificar php.ini
               echo ""
-              echo "      Modificando php.ini..."
-              echo ""
+              echo "      Modificando php.ini..."              echo ""
               cp /etc/php/"$vUltVersPHP"/apache2/php.ini /etc/php/"$vUltVersPHP"/apache2/php.ini.bak.ori
               sed -i -e 's|max_execution_time = 30|max_execution_time = 300|g'   /etc/php/"$vUltVersPHP"/apache2/php.ini
               sed -i -e 's|memory_limit = 128M|memory_limit = 300M|g'            /etc/php/"$vUltVersPHP"/apache2/php.ini
@@ -524,8 +494,7 @@ elif [ $cVerSO == "12" ]; then
               sed -i -e 's|upload_max_filesize = 2M|upload_max_filesize = 64M|g' /etc/php/"$vUltVersPHP"/apache2/php.ini
             # Modificar el servidor SSH
               echo ""
-              echo "      Modificando el servidor SSH..."
-              echo ""
+              echo "      Modificando el servidor SSH..."              echo ""
               #apt-get -y install tasksel
               #tasksel install ssh-server
               cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak.ori
@@ -537,8 +506,7 @@ elif [ $cVerSO == "12" ]; then
               echo "  ForceCommand internal-sftp" >> /etc/ssh/sshd_config
             # Preparar el usuario www-data para conectarse mediante sftp
               echo ""
-              echo "      Preparando el usuario www-data para conectarse sólo mediante sftp..."
-              echo ""
+              echo "      Preparando el usuario www-data para conectarse sólo mediante sftp..."              echo ""
               echo ""
               echo "        Ahora tendrás que ingresar veces en nuevo password para el usuario www-data."
               echo "        Acuérdate de apuntarlo en un lugar seguro porque tendrás que loguearte con él mediante sftp."
@@ -551,8 +519,7 @@ elif [ $cVerSO == "12" ]; then
               service ssh restart
             # Crear el archivo intermedio nuevawebvar.conf
               echo ""
-              echo "      Creando el archivo intermedio nuevawebvar.conf..."
-              echo ""
+              echo "      Creando el archivo intermedio nuevawebvar.conf..."              echo ""
               echo ""                                                                 > /etc/apache2/sites-available/nuevawebvar.conf
               echo "<VirtualHost *:80>"                                              >> /etc/apache2/sites-available/nuevawebvar.conf
               echo ""                                                                >> /etc/apache2/sites-available/nuevawebvar.conf
@@ -576,8 +543,7 @@ elif [ $cVerSO == "12" ]; then
               echo ""                                                                >> /etc/apache2/sites-available/nuevawebvar.conf
             # Instalar el certificado SSL autofirmado para https...
               echo ""
-              echo "      Instalando el certificado SSL autofirmado para https..."
-              echo ""
+              echo "      Instalando el certificado SSL autofirmado para https..."              echo ""
               mkdir -p /etc/apache2/ssl/
               openssl req -x509 -nodes -days 365 -newkey rsa:8192 -out /etc/apache2/ssl/autocertssl.pem -keyout /etc/apache2/ssl/autocertssl.key
               chmod 600 /etc/apache2/ssl/*
@@ -588,22 +554,19 @@ elif [ $cVerSO == "12" ]; then
               service apache2 restart
             # Instalar el servidor de bases de datos
               echo ""
-              echo "      Instalando el servidor de bases de datos..."
-              echo ""
+              echo "      Instalando el servidor de bases de datos..."              echo ""
               curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-MariaDB-InstalarYConfigurar.sh | bash
 
             # Instalar memcached
               echo ""
-              echo "      Instalando MemCacheD..."
-              echo ""
+              echo "      Instalando MemCacheD..."              echo ""
               apt-get -y install memcached
               apt-get -y install php-memcached
               phpenmod memcached
               service apache2 restart
             # Instalar el cortafuegos NFTables
               echo ""
-              echo "      Instalando el cortafuegos NFTables..."
-              echo ""
+              echo "      Instalando el cortafuegos NFTables..."              echo ""
               apt-get -y install nftables
               systemctl enable nftables.service
               echo "# Reglas NFTables para servidor Web"                   >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
@@ -622,8 +585,7 @@ elif [ $cVerSO == "12" ]; then
 
             # Instalar el cortafuegos NFTables
               echo ""
-              echo "    Agregando el certificado SSL de letsencrypt y configurando Apache para que lo use..."
-              echo ""
+              echo "    Agregando el certificado SSL de letsencrypt y configurando Apache para que lo use..."              echo ""
               apt-get update
               apt-get -y install certbot
               apt-get -y install python3-certbot-apache
@@ -663,27 +625,23 @@ elif [ $cVerSO == "12" ]; then
 
             # Activar módulos para remoteip
               echo ""
-              echo "    Activando módulos para RemoteIP..."
-              echo ""
+              echo "    Activando módulos para RemoteIP..."              echo ""
               a2enmod remoteip
               a2enmod headers
             # Modificar la configuración de apache
               echo ""
-              echo "    Modificando el archivo remoteip.conf en Apache..."
-              echo ""
+              echo "    Modificando el archivo remoteip.conf en Apache..."              echo ""
               echo "RemoteIPHeader X-Forwarded-For"                                                     > /etc/apache2/conf-available/remoteip.conf
               echo "#RemoteIPInternalProxy 0.0.0.0"                                                    >> /etc/apache2/conf-available/remoteip.conf
               echo "#RemoteIPTrustedProxy 0.0.0.0"                                                     >> /etc/apache2/conf-available/remoteip.conf
               echo 'LogFormat "%a %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined' >> /etc/apache2/conf-available/remoteip.conf
             # Activar la configuración de remoteip
               echo ""
-              echo "    Activando la configuración de apache de remoteip..."
-              echo ""
+              echo "    Activando la configuración de apache de remoteip..."              echo ""
               a2enconf remoteip
             # Reiniciar el servidor apache
               echo ""
-              echo "    Reiniciando el servidor apache..."
-              echo ""
+              echo "    Reiniciando el servidor apache..."              echo ""
               service apache2 restart
             # Notificar fin del script
               echo ""

@@ -10,17 +10,14 @@
 # ----------
 
 echo ""
-echo "  Deteniendo el servidor Plex..."
-echo ""
+echo "  Deteniendo el servidor Plex..."echo ""
 service plexmediaserver stop
 
 echo ""
-echo "  Borrando el contenido del servidor..."
-echo ""
+echo "  Borrando el contenido del servidor..."echo ""
 rm -rf "/var/lib/plexmediaserver/Library/Application Support/Plex Media Server"
 
 echo ""
-echo "  Re-arrancando el servidor Plex..."
-echo ""
+echo "  Re-arrancando el servidor Plex..."echo ""
 service plexmediaserver start
 

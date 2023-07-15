@@ -30,8 +30,7 @@ if [ $# -ne $cCantArgumEsperados ]
     exit
   else
     echo ""
-    echo "  Calculando la latencia del ping a google.com..."
-    echo ""
+    echo "  Calculando la latencia del ping a google.com..."    echo ""
     pinggoogle=$(ping -c 1 google.com | sed -ne '/.*time=/{;s///;s/\..*//;p;}')
     pingenseg=$(awk 'BEGIN { print ("'$pinggoogle'"/1000) }')
     echo "  El ping a google.com tiene una latencia de $pinggoogle ms, o lo que es lo mismo: $pingenseg seg"

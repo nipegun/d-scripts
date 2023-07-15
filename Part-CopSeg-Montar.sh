@@ -32,7 +32,6 @@ mkdir -p /Particiones/CopSeg 2> /dev/null
 mount -t auto -v /dev/disk/by-partlabel/PartCopSeg /Particiones/CopSeg
 
 echo ""
-echo "    Indicando que el disco que tiene la partición de copia de seguridad se apague después de 5 min. sin usar..."
-echo ""
+echo "    Indicando que el disco que tiene la partición de copia de seguridad se apague después de 5 min. sin usar..."echo ""
 hdparm -S 60 /dev/disk/by-partlabel/PartCopSeg
 

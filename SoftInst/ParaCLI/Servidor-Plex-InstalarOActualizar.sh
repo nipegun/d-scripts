@@ -19,37 +19,30 @@ cFinColor='\033[0m'
 CarpetaAlternativa="/Discos/HDD-Datos/Plex"
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor Plex para Debian 7 (Wheezy)..."
-  echo "----------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor Plex para Debian 7 (Wheezy)..."  echo "----------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -60,8 +53,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor Plex para Debian 8 (Jessie)..."
-  echo "----------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor Plex para Debian 8 (Jessie)..."  echo "----------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -71,19 +63,19 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación del servidor Plex para Debian 9 (Stretch)..."
-
   echo ""
 
   cColorVerde="\033[1;32m"
   cFinColor="\033[0m"
 
   menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
-    opciones=(1 "Instalar o actualizar versión x86 de 32 bits" off
+    opciones=(
+  1 "Instalar o actualizar versión x86 de 32 bits" off
               2 "Instalar o actualizar versión x86 de 64 bits" off
               3 "Instalar o actualizar versión ARMv7" off
-              4 "Instalar o actualizar versión ARMv8" off)
+              4 "Instalar o actualizar versión ARMv8" off
+)
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
     clear
 
@@ -158,8 +150,7 @@ elif [ $cVerSO == "9" ]; then
             rm -f /root/SoftInst/Plex/plexARMv7.deb
 
             echo ""
-            echo "Descargando el paquete de instalación..."
-            echo ""
+            echo "Descargando el paquete de instalación..."            echo ""
             wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plexARMv7.deb
 
             echo ""
@@ -214,9 +205,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación del servidor Plex para Debian 10 (Buster)..."
-
   echo ""
 
   echo ""
@@ -226,27 +215,26 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación del servidor Plex para Debian 11 (Bullseye)..."
-  echo "-------------------------------------------------------------------------------------"
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
-       echo "  dialog no está instalado. Iniciando su instalación..."
-       echo ""
+       echo "  dialog no está instalado. Iniciando su instalación..."       echo ""
        apt-get -y update
        apt-get -y install dialog
        echo ""
      fi
 
   menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
-    opciones=(1 "Instalar o actualizar versión x86 de 32 bits" off
+    opciones=(
+  1 "Instalar o actualizar versión x86 de 32 bits" off
               2 "Instalar o actualizar versión x86 de 64 bits" off
               3 "Instalar o actualizar versión ARMv7" off
               4 "Instalar o actualizar versión ARMv8" off
-              5 "Cambiar la carpeta por defecto de Plex" off)
+              5 "Cambiar la carpeta por defecto de Plex" off
+)
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
@@ -330,8 +318,7 @@ elif [ $cVerSO == "11" ]; then
             rm -f /root/SoftInst/Plex/plexARMv7.deb
 
             echo ""
-            echo "Descargando el paquete de instalación..."
-            echo ""
+            echo "Descargando el paquete de instalación..."            echo ""
             wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plexARMv7.deb
 
             echo ""

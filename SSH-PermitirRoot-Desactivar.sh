@@ -14,37 +14,30 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para desactivar el acceso root mediante ssh en Debian 7 (Wheezy)..."
-  echo "-------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script para desactivar el acceso root mediante ssh en Debian 7 (Wheezy)..."  echo "-------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -55,8 +48,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para desactivar el acceso root mediante ssh en Debian 8 (Jessie)..."
-  echo "-------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script para desactivar el acceso root mediante ssh en Debian 8 (Jessie)..."  echo "-------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -66,10 +58,8 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script desactivar el acceso root mediante ssh en Debian 9 (Stretch)..."
-  echo "---------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script desactivar el acceso root mediante ssh en Debian 9 (Stretch)..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -79,8 +69,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "--------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para desactivar el acceso root mediante ssh en Debian 10 (Buster)..."
-  echo "--------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script para desactivar el acceso root mediante ssh en Debian 10 (Buster)..."  echo "--------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -91,8 +80,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para desactivar el acceso root mediante ssh en Debian 11 (Bullseye)..."
-  echo "----------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script para desactivar el acceso root mediante ssh en Debian 11 (Bullseye)..."  echo "----------------------------------------------------------------------------------------------"
   echo ""
 
   sed -i -e 's|^PermitRootLogin.*|#PermitRootLogin without-password|g' /etc/ssh/sshd_config

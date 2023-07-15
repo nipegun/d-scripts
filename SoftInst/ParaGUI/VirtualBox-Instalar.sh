@@ -49,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de VirtualBox para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -61,8 +60,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de VirtualBox para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -73,8 +71,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de VirtualBox para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -101,8 +98,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de VirtualBox para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 10 (Buster)..."  
   echo ""
 
   echo ""
@@ -113,28 +109,24 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de VirtualBox para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 11 (Bullseye)..."  
   echo ""
 
   # Instalar paquetes necesarios
      echo ""
-     echo "  Instalando paquetes necesarios..."
-     echo ""
+     echo "  Instalando paquetes necesarios..."     echo ""
      apt-get -y update
      apt-get -y install linux-headers-$(uname -r)
      apt-get -y install dkms
 
   # Agregar repositorio
      echo ""
-     echo "  Agregando repositorio de VirtualBox..."
-     echo ""
+     echo "  Agregando repositorio de VirtualBox..."     echo ""
      apt-get -y install gnupg2
      # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
           echo ""
-          echo "  wget no está instalado. Iniciando su instalación..."
-          echo ""
+          echo "  wget no está instalado. Iniciando su instalación..."          echo ""
           apt-get -y update > /dev/null
           apt-get -y install wget
           echo ""
@@ -146,15 +138,13 @@ elif [ $cVerSO == "11" ]; then
 
   # Instalar virtualbox
      echo ""
-     echo "  Instalando el paquete virtualbox..."
-     echo ""
+     echo "  Instalando el paquete virtualbox..."     echo ""
      PaqueteAInstalar=$(apt-cache search virtualbox | grep "virtualbox-" | tail -n1 | cut -d' ' -f1)
      apt-get -y install $PaqueteAInstalar
 
   # Instalar el pack de extensiones
      echo ""
-     echo "  Instalando el pack de extensiones..."
-     echo ""
+     echo "  Instalando el pack de extensiones..."     echo ""
      mkdir -p /root/SoftInst/VirtualBox/
      cd /root/SoftInst/VirtualBox/
      VersDeVBoxInstalada=$(virtualbox -h | grep elector | cut -d'v' -f2)
@@ -163,35 +153,31 @@ elif [ $cVerSO == "11" ]; then
 
    # Agregar el usuario 1000 al grupo virtualbox
       echo ""
-      echo "  Agregando el usuario 1000 en el grupo virtualbox..."
-      echo ""
+      echo "  Agregando el usuario 1000 en el grupo virtualbox..."      echo ""
       Usuario1000=$(id 1000 | cut -d'(' -f2 | cut -d')' -f1)
       usermod -a -G vboxusers $Usuario1000
 
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de VirtualBox para Debian 12 (Bookworm)..."
-  echo ""
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 12 (Bookworm)..." 
+echo ""
 
   # Instalar paquetes necesarios
     echo ""
-    echo "  Instalando paquetes necesarios..."
-    echo ""
+    echo "  Instalando paquetes necesarios..."    echo ""
     apt-get -y update
     apt-get -y install linux-headers-$(uname -r)
     apt-get -y install dkms
 
   # Agregar repositorio
     echo ""
-    echo "  Agregando repositorio de VirtualBox..."
-    echo ""
+    echo "  Agregando repositorio de VirtualBox..."    echo ""
     apt-get -y install gnupg2
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  wget no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "  wget no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update > /dev/null
         apt-get -y install wget
         echo ""
@@ -203,15 +189,13 @@ elif [ $cVerSO == "12" ]; then
 
   # Instalar virtualbox
     echo ""
-    echo "  Instalando el paquete virtualbox..."
-    echo ""
+    echo "  Instalando el paquete virtualbox..."    echo ""
     PaqueteAInstalar=$(apt-cache search virtualbox | grep "virtualbox-" | tail -n1 | cut -d' ' -f1)
     apt-get -y install $PaqueteAInstalar
 
   # Instalar el pack de extensiones
     echo ""
-    echo "  Instalando el pack de extensiones..."
-    echo ""
+    echo "  Instalando el pack de extensiones..."    echo ""
     mkdir -p /root/SoftInst/VirtualBox/
     cd /root/SoftInst/VirtualBox/
     VersDeVBoxInstalada=$(virtualbox -h | grep elector | cut -d'v' -f2)
@@ -220,8 +204,7 @@ elif [ $cVerSO == "12" ]; then
 
    # Agregar el usuario 1000 al grupo virtualbox
      echo ""
-     echo "  Agregando el usuario 1000 en el grupo virtualbox..."
-     echo ""
+     echo "  Agregando el usuario 1000 en el grupo virtualbox..."     echo ""
      Usuario1000=$(id 1000 | cut -d'(' -f2 | cut -d')' -f1)
      usermod -a -G vboxusers $Usuario1000
 

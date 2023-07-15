@@ -30,8 +30,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     # Comprobar si el paquete eyed3 está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s eyed3 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  eyed3 no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "  eyed3 no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update > /dev/null
         apt-get -y install eyed3
         echo ""

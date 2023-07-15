@@ -10,8 +10,7 @@
 # ----------
 
 echo ""
-echo "  Borrando todos los Kernels anteriores al 4.9.0-8..."
-echo ""
+echo "  Borrando todos los Kernels anteriores al 4.9.0-8..."echo ""
 apt-get -y purge linux-image-4.9.0-1-amd64 linux-headers-4.9.0-1-amd64
 apt-get -y purge linux-image-4.9.0-2-amd64 linux-headers-4.9.0-2-amd64
 apt-get -y purge linux-image-4.9.0-3-amd64 linux-headers-4.9.0-3-amd64
@@ -21,7 +20,6 @@ apt-get -y purge linux-image-4.9.0-6-amd64 linux-headers-4.9.0-6-amd64
 apt-get -y purge linux-image-4.9.0-7-amd64 linux-headers-4.9.0-7-amd64
 
 echo ""
-echo "  Instalando el último kernel..."
-echo ""
+echo "  Instalando el último kernel..."echo ""
 apt-get -y install linux-image-amd64
 

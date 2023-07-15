@@ -34,8 +34,7 @@ echo ""
 # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "    El paquete dialog no está instalado. Iniciando su instalación..."
-    echo ""
+    echo "    El paquete dialog no está instalado. Iniciando su instalación..."    echo ""
     apt-get -y update
     apt-get -y install dialog
     echo ""
@@ -61,7 +60,6 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
     16 "Reniciar el sistema" off
   )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  clear
 
   for choice in $choices
     do
@@ -95,8 +93,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "  curl no está instalado. Iniciando su instalación..."
-               echo ""
+               echo "  curl no está instalado. Iniciando su instalación..."               echo ""
                apt-get -y update
                apt-get -y install curl
                echo ""
@@ -135,13 +132,11 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${cColorVerde}  Instalando la cartera litecoin...${cFinColor}"
           echo ""
 
-          echo "  Determinando la última versión de litecoin core..."
-          echo ""
+          echo "  Determinando la última versión de litecoin core..."          echo ""
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "  curl no está instalado. Iniciando su instalación..."
-              echo ""
+              echo "  curl no está instalado. Iniciando su instalación..."              echo ""
               apt-get -y update
               apt-get -y install curl
               echo ""
@@ -151,32 +146,27 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo "  La última versión de raven es la $UltVersLite"
 
           echo ""
-          echo "  Intentando descargar el archivo comprimido de la última versión..."
-          echo ""
+          echo "  Intentando descargar el archivo comprimido de la última versión..."          echo ""
           mkdir -p /root/SoftInst/Litecoin/ 2> /dev/null
           rm -rf /root/SoftInst/Litecoin/*
           cd /root/SoftInst/Litecoin/
           # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "  wget no está instalado. Iniciando su instalación..."
-              echo ""
+              echo "  wget no está instalado. Iniciando su instalación..."              echo ""
               apt-get -y update
               apt-get -y install wget
               echo ""
             fi
-          echo "  Pidiendo el archivo en formato tar.gz..."
-          echo ""
+          echo "  Pidiendo el archivo en formato tar.gz..."          echo ""
           wget https://download.litecoin.org/litecoin-$UltVersLite/linux/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
 
           echo ""
-          echo "  Descomprimiendo el archivo..."
-          echo ""
+          echo "  Descomprimiendo el archivo..."          echo ""
           # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "  tar no está instalado. Iniciando su instalación..."
-              echo ""
+              echo "  tar no está instalado. Iniciando su instalación..."              echo ""
               apt-get -y update
               apt-get -y install tar
               echo ""
@@ -185,8 +175,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           rm -rf /root/SoftInst/Litecoin/litecoin-$UltVersLite-x86_64-linux-gnu.tar.gz
 
           echo ""
-          echo "  Creando carpetas y archivos necesarios para ese usuario..."
-          echo ""
+          echo "  Creando carpetas y archivos necesarios para ese usuario..."          echo ""
           mkdir -p /home/$UsuarioNoRoot/Cryptos/LTC/ 2> /dev/null
           mkdir -p /home/$UsuarioNoRoot/.litecoin/
           touch /home/$UsuarioNoRoot/.litecoin/litecoin.conf
@@ -202,8 +191,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           find /home/$UsuarioNoRoot/Cryptos/LTC/bin -type f -exec chmod +x {} \;
 
           echo ""
-          echo "  Arrancando litecoind..."
-          echo ""
+          echo "  Arrancando litecoind..."          echo ""
           su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/LTC/bin/litecoind -daemon"
           sleep 5
           su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/LTC/bin/litecoin-cli getnewaddress" > /home/$UsuarioNoRoot/pooladdress-ltc.txt
@@ -218,16 +206,14 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           # Autoejecución de Litecoin al iniciar el sistema
 
              echo ""
-             echo "  Agregando litecoind a los ComandosPostArranque..."
-             echo ""
+             echo "  Agregando litecoind a los ComandosPostArranque..."             echo ""
              echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/ltc-daemon-iniciar.sh"
              echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/ltc-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
           # Icono de lanzamiento en el menú gráfico
 
              echo ""
-             echo "  Agregando la aplicación gráfica al menú..."
-             echo ""
+             echo "  Agregando la aplicación gráfica al menú..."             echo ""
              mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
              echo "[Desktop Entry]"                                                     > /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
              echo "Name=Litecoin GUI"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
@@ -241,8 +227,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           # Autoejecución gráfica de Litecoin
 
              echo ""
-             echo "  Creando el archivo de autoejecución de litecoin-qt para escritorio..."
-             echo ""
+             echo "  Creando el archivo de autoejecución de litecoin-qt para escritorio..."             echo ""
              mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
              echo "[Desktop Entry]"                                                     > /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
              echo "Name=Litecoin GUI"                                                  >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
@@ -342,8 +327,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           # Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
                echo ""
-               echo "  tasksel no está instalado. Iniciando su instalación..."
-               echo ""
+               echo "  tasksel no está instalado. Iniciando su instalación..."               echo ""
                apt-get -y update
                apt-get -y install tasksel
                echo ""

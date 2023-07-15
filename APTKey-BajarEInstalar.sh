@@ -47,8 +47,8 @@ vNombreServicio="$2"
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de nueva llave apt para Debian 7 (Wheezy)..."
-  echo ""
+  echo "  Iniciando el script de instalación de nueva llave apt para Debian 7 (Wheezy)..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -57,8 +57,8 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de nueva llave apt para Debian 8 (Jessie)..."
-  echo ""
+  echo "  Iniciando el script de instalación de nueva llave apt para Debian 8 (Jessie)..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -67,8 +67,8 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de nueva llave apt para Debian 9 (Stretch)..."
-  echo ""
+  echo "  Iniciando el script de instalación de nueva llave apt para Debian 9 (Stretch)..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -77,8 +77,8 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de nueva llave apt para Debian 10 (Buster)..."
-  echo ""
+  echo "  Iniciando el script de instalación de nueva llave apt para Debian 10 (Buster)..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -87,8 +87,8 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de nueva llave apt para Debian 11 (Bullseye)..."
-  echo ""
+  echo "  Iniciando el script de instalación de nueva llave apt para Debian 11 (Bullseye)..." 
+echo ""
 
   mkdir -p /root/aptkeys/ 2> /dev/null
   wget -q -O- $vURLKey -O /root/aptkeys/$vNombreServicio.key

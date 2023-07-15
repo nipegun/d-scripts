@@ -28,36 +28,31 @@ if [ $# -ne $EXPECTED_ARGS ]
   else
     echo ""
     echo "----------------------------------------"
-    echo "  ACTIVANDO SMART EN EL DISPOSITIVO..."
-    echo "----------------------------------------"
+    echo "  ACTIVANDO SMART EN EL DISPOSITIVO..."    echo "----------------------------------------"
     echo ""
     smartctl -s on $1
 
     echo ""
     echo "-------------------------------------"
-    echo "  OBTENIENDO INFORMACIÓN GENERAL..."
-    echo "-------------------------------------"
+    echo "  OBTENIENDO INFORMACIÓN GENERAL..."    echo "-------------------------------------"
     echo ""
     smartctl -x $1
 
     echo ""
     echo "---------------------------"
-    echo "  CORRIENDO TEST CORTO..."
-    echo "---------------------------"
+    echo "  CORRIENDO TEST CORTO..."    echo "---------------------------"
     echo ""
     #smartctl -t short $1
     
     echo ""
     echo "---------------------------"
-    echo "  CORRIENDO TEST LARGO..."
-    echo "---------------------------"
+    echo "  CORRIENDO TEST LARGO..."    echo "---------------------------"
     echo ""
     #smartctl -t long $1
     
     echo ""
     echo "-----------------------------------------"
-    echo "  COMPROBANDO RESULTADO DE LOS TESTS..."
-    echo "-----------------------------------------"
+    echo "  COMPROBANDO RESULTADO DE LOS TESTS..."    echo "-----------------------------------------"
     echo ""
     smartctl -l selftest $1
 

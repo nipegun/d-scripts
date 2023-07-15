@@ -13,38 +13,31 @@
 # ----------
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Dropbox para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Dropbox para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -55,8 +48,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Dropbox para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Dropbox para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -67,23 +59,22 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Dropbox para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de Dropbox para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
-  echo "  Creando la carpeta para descargar el paquete..."
-  echo ""
+  echo "  Creando la carpeta para descargar el paquete..." 
+echo ""
   mkdir -p ~/paquetes/dropbox/
 
   echo ""
-  echo "  Descargando el paquete desde la web de Dropbox..."
-  echo ""
+  echo "  Descargando el paquete desde la web de Dropbox..." 
+echo ""
   wget -O ~/paquetes/dropbox/dropbox.tar https://www.dropbox.com/download?plat=lnx.x86_64
 
   echo ""
-  echo "  Descomprimiendo el paquete..."
-  echo ""
+  echo "  Descomprimiendo el paquete..." 
+echo ""
   tar xzf ~/paquetes/dropbox/dropbox.tar -C ~/
 
   echo ""
@@ -93,13 +84,13 @@ elif [ $cVerSO == "9" ]; then
   chmod +x ~/scripts/DemonioDropbox.py
 
   echo ""
-  echo "  Configurando dropbox para que se inicie con el sistema..."
-  echo ""
+  echo "  Configurando dropbox para que se inicie con el sistema..." 
+echo ""
   echo "~/scripts/DemonioDropbox.py start" >> /root/scripts/ComandosPostArranque.sh
 
   echo ""
-  echo "  Arrancando el daemon por primera vez..."
-  echo ""
+  echo "  Arrancando el daemon por primera vez..." 
+echo ""
   echo "  Toma nota de la url que te pondrá abajo porque deberás ingresar a ella"
   echo "  desde un nbavegador en el que tengas iniciada la sesión de Dropbox"
   echo "  para activar el dropbox que acabas de instalar."
@@ -111,8 +102,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Dropbox para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de Dropbox para Debian 10 (Buster)..."  
   echo ""
 
   echo ""
@@ -123,8 +113,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Dropbox para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de Dropbox para Debian 11 (Bullseye)..."  
   echo ""
 
   echo ""

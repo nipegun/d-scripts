@@ -19,12 +19,13 @@ apt-get -y update 2> /dev/null
 apt-get -y install dialog 2> /dev/null
 
 menu=(dialog --timeout 5 --checklist "Elección del mando a instalar:" 22 76 16)
-  opciones=(1 "XBox One USB Wireless Adapter" off
+  opciones=(
+  1 "XBox One USB Wireless Adapter" off
             2 "2" off
             3 "3" off
-            4 "4" off)
+            4 "4" off
+)
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  clear
 
   for choice in $choices
     do

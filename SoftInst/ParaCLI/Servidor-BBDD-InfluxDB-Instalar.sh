@@ -82,8 +82,8 @@ elif [ $cVerSO == "10" ]; then
   echo ""
 
   echo ""
-  echo "    Instalando paquetes..."
-  echo ""
+  echo "    Instalando paquetes..." 
+echo ""
   apt-get -y update
   apt-get -y install influxdb
   apt-get -y install influxdb-client
@@ -101,15 +101,15 @@ elif [ $cVerSO == "11" ]; then
   echo ""
 
   echo ""
-  echo "    Instalando paquetes de InfluxDB..."
-  echo ""
+  echo "    Instalando paquetes de InfluxDB..." 
+echo ""
   apt-get -y update
   apt-get -y install influxdb
   apt-get -y install influxdb-client
 
   echo ""
-  echo "    Instalando paquetes de Python..."
-  echo ""
+  echo "    Instalando paquetes de Python..." 
+echo ""
   apt-get -y install python3-dev
   apt-get -y install python3-pip
   apt-get -y install python3-influxdb

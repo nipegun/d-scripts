@@ -36,8 +36,7 @@ echo ""
 # Comprobar si el paquete hddtemp está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s hddtemp 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  hddtemp no está instalado. Iniciando su instalación..."
-     echo ""
+     echo "  hddtemp no está instalado. Iniciando su instalación..."     echo ""
      apt-get -y update
      apt-get -y install hddtemp
      echo ""

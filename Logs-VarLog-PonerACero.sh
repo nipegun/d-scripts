@@ -32,8 +32,8 @@
 
 # Borrar archivos comprimidos de logs viejos y otros archivos ya innecesarios
   echo ""
-  echo "    Borrando archivos comprimidos de logs viejos y otros archivos ya innecesarios..."
-  echo ""
+  echo "    Borrando archivos comprimidos de logs viejos y otros archivos ya innecesarios..." 
+echo ""
   find /var/log/ -type f -name "*.gz" -print -exec rm {} \;
   for vExt in {0..100}
     do
@@ -44,8 +44,8 @@
 
 # Truncar todos los logs activos
   echo ""
-  echo "    Truncando a cero todos los logs activos..."
-  echo ""
+  echo "    Truncando a cero todos los logs activos..." 
+echo ""
   find /var/log/ -type f -print -exec truncate -s 0 {} \;
 
 # Notificar inicio de ejecución del script

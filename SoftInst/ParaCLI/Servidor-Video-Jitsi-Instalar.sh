@@ -17,37 +17,30 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -58,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -70,8 +62,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -82,8 +73,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."  
   echo ""
 
   vCantParamCorr=1
@@ -92,12 +82,14 @@ elif [ $cVerSO == "10" ]; then
   apt-get -y install jq dialog software-properties-common > /dev/null
   
   menu=(dialog --timeout 5 --checklist "Instalación y configuración de jitsi-meet:" 22 76 16)
-    opciones=(1 "Instalar jitsi-meet" on
+    opciones=(
+  1 "Instalar jitsi-meet" on
               2 "Instalar certificado de LetsEncrypt" off
               3 "Activar autentificación para crear salas" off
               4 "Modificar título y descripción" off
               5 "Poner logo transparente" off
-              6 "Cambiar lenguaje por defecto a Español" off)
+              6 "Cambiar lenguaje por defecto a Español" off
+)
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
     clear
 
@@ -161,8 +153,7 @@ elif [ $cVerSO == "10" ]; then
 
           3)
             echo ""
-            echo "  Agregando autentificación para crear canales..."
-            echo ""
+            echo "  Agregando autentificación para crear canales..."            echo ""
             sed -i -e 's|authentication = "anonymous"|authentication = "internal_plain"|g' /etc/prosody/conf.avail/$1.cfg.lua
             echo "" >> /etc/prosody/conf.avail/$1.cfg.lua
             echo 'VirtualHost "guest.'"$1"'"'           >> /etc/prosody/conf.avail/$1.cfg.lua
@@ -176,8 +167,7 @@ elif [ $cVerSO == "10" ]; then
 
           4)
             echo ""
-            echo "  Modificando título y descripción..."
-            echo ""
+            echo "  Modificando título y descripción..."            echo ""
             for ArchivoReal in /usr/share/jitsi-meet/lang/main*.json
               do
                 ArchivoTemporalTitle=$(mktemp)
@@ -192,16 +182,14 @@ elif [ $cVerSO == "10" ]; then
 
           5)
             echo ""
-            echo "  Poniendo logo transparente..."
-            echo ""
+            echo "  Poniendo logo transparente..."            echo ""
             cp /usr/share/jitsi-meet/images/watermark.png /usr/share/jitsi-meet/images/watermark.png.bak
             truncate -s 0 /usr/share/jitsi-meet/images/watermark.png
           ;;
         
           6)
             echo ""
-            echo "  Poniendo lenguaje en español de España..."
-            echo ""
+            echo "  Poniendo lenguaje en español de España..."            echo ""
             sed -i -e "s|// defaultLanguage: 'en',|defaultLanguage: 'es',|g" /etc/jitsi/meet/$1-config.js
           ;;
         
@@ -213,8 +201,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."  
   echo ""
 
   echo ""

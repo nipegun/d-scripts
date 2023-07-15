@@ -25,8 +25,7 @@ NuevaIP="172.17.0.10" # No puede ser 172.17.0.1, porque esa es la IP de la inter
     # Comprobar si el paquete jq está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s jq 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  jq no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "  jq no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update > /dev/null
         apt-get -y install jq
         echo ""
@@ -35,8 +34,7 @@ NuevaIP="172.17.0.10" # No puede ser 172.17.0.1, porque esa es la IP de la inter
     # Comprobar que la red no sea null, si es null, abortar.
       if [[ $Red == "null" ]]; then
         echo ""
-        echo "  La red es $Red, abortando..."
-        echo ""
+        echo "  La red es $Red, abortando..."        echo ""
       else
         echo ""
         echo " El contenedor $NombreContenedor está conectado a la red $Red"

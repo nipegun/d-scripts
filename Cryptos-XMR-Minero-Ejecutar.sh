@@ -23,8 +23,7 @@ echo -e "${cColorVerde}----------------------------------------------${cFinColor
 echo ""
 
 echo ""
-echo "  Creando ID para el minero..."
-echo ""
+echo "  Creando ID para el minero..."echo ""
 
 # A partir de la MAC WiFi
    # Obtener MAC de la WiFi
@@ -39,8 +38,7 @@ echo ""
       IdMinero=$(echo -n $IdProc | md5sum | cut -d" " -f1)
 
 echo ""
-echo "  Ejecutando minero con identificador $IdMinero..."
-echo ""
+echo "  Ejecutando minero con identificador $IdMinero..."echo ""
 
 # Con TLS
    ~/Cryptos/XMR/minero/xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet --tls 

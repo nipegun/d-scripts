@@ -10,19 +10,16 @@
 # ----------
 
 echo ""
-echo "  Editando la configuración del módulo VFIO..."
-echo ""
+echo "  Editando la configuración del módulo VFIO..."echo ""
 nano /etc/modprobe.d/vfio.conf
 
 echo ""
-echo "  Editando la configuración por default del GRUB..."
-echo ""
+echo "  Editando la configuración por default del GRUB..."echo ""
 nano /etc/default/grub
 update-grub
 
 echo ""
-echo "  Editando la BlackList de los módulos..."
-echo ""
+echo "  Editando la BlackList de los módulos..."echo ""
 nano /etc/modprobe.d/pcipassthrough.conf
 update-initramfs -u
 

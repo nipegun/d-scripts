@@ -110,13 +110,11 @@ http://repo.issabel.org/install-debian-install_amp
 
   # Agregar el repositorio a la lista de repositorios disponibles
     echo ""
-    echo "    Agregando el repositorio a la lista de repositorios disponibles..."
-    echo ""
+    echo "    Agregando el repositorio a la lista de repositorios disponibles..."    echo ""
     echo "deb http://repo.issabel.org/debian bullseye main" > /etc/apt/sources.list.d/issabel.list
   # Bajar llave para firmar el repositorio
     echo ""
-    echo "    Bajando la llave para firmar el repositorio..."
-    echo ""
+    echo "    Bajando la llave para firmar el repositorio..."    echo ""
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
         echo ""

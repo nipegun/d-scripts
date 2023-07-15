@@ -106,13 +106,13 @@ elif [ $cVerSO == "11" ]; then
   echo ""
 
   echo ""
-  echo "  Actualizando la listas de paquetes disponibles en los repositorios..."
-  echo ""
+  echo "  Actualizando la listas de paquetes disponibles en los repositorios..." 
+echo ""
   apt-get -y update
 
   echo ""
-  echo "  Instalando el servidor de bases de datos..."
-  echo ""
+  echo "  Instalando el servidor de bases de datos..." 
+echo ""
   apt-get -y install apache2
 
   echo ""
@@ -121,8 +121,8 @@ elif [ $cVerSO == "11" ]; then
   apt-get -y install mariadb-server
 
   echo ""
-  echo "    Securizando el servidor de bases de datos..."
-  echo ""
+  echo "    Securizando el servidor de bases de datos..." 
+echo ""
   mysql_secure_installation
 
 

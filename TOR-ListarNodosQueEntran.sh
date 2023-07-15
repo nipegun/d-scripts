@@ -17,8 +17,7 @@ IPWANDelServidor=$(curl --silent ipinfo.io/ip)
 truncate -s 0 /root/NodosTORQueEntran.list
 
 echo ""
-echo "  CREANDO EL ARCHIVO CON LA LISTA DE IPS DE LOS NODOS..."
-echo ""
+echo "  CREANDO EL ARCHIVO CON LA LISTA DE IPS DE LOS NODOS..."echo ""
 # Obtener la lista de nodos de salida que llegan al servidor, quitar las lineas comentadas de esa lista
 # y recorrerla en busca de IPs para agregarlas también línea a línea en el archivo de texto.
 wget -q https://check.torproject.org/cgi-bin/TorBulkExitList.py?ip=$IPWANDelServidor -O -| sed '/^#/d' | while read IP

@@ -11,15 +11,13 @@
 
 echo ""
 echo "---------------------------------------------------"
-echo "  EDITANDO EL ARCHIVO DE CONFIGURACIÓN DE GRUB..."
-echo "---------------------------------------------------"
+echo "  EDITANDO EL ARCHIVO DE CONFIGURACIÓN DE GRUB..."echo "---------------------------------------------------"
 echo ""
 nano /etc/default/grub
 
 echo ""
 echo "----------------------------"
-echo "  APLICANDO LOS CAMBIOS..."
-echo "----------------------------"
+echo "  APLICANDO LOS CAMBIOS..."echo "----------------------------"
 echo ""
 update-grub
 

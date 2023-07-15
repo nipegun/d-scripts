@@ -82,13 +82,13 @@ elif [ $cVerSO == "10" ]; then
   echo ""
 
   echo ""
-  echo "  Actualizando el contenido de los repositorios..."
-  echo ""
+  echo "  Actualizando el contenido de los repositorios..." 
+echo ""
   apt-get -y update
 
   echo ""
-  echo "  Instalando los paquetes necesarios..."
-  echo ""
+  echo "  Instalando los paquetes necesarios..." 
+echo ""
   apt-get -y install xdg-utils wget xz-utils python xvfb imagemagick
 
   mkdir /root/SoftInst/Calibre

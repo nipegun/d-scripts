@@ -10,8 +10,7 @@
 # ----------
 
 echo ""
-echo "  Reseteando SSH..."
-echo ""
+echo "  Reseteando SSH..."echo ""
 rm -rf /etc/ssh/ssh_host_*
 dpkg-reconfigure openssh-server
 

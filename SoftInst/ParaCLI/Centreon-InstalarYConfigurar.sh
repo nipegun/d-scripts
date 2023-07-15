@@ -17,38 +17,31 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Centreon para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Centreon para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -59,8 +52,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Centreon para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Centreon para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -71,8 +63,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Centreon para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de Centreon para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -83,8 +74,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Centreon para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de Centreon para Debian 10 (Buster)..."  
   echo ""
 
   echo ""
@@ -95,41 +85,40 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Centreon para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de Centreon para Debian 11 (Bullseye)..."  
   echo ""
 
   hostnamectl set-hostname centreon
 
   echo ""
-  echo "  Actualizando la lsita de paquetes diponibles..."
-  echo ""
+  echo "  Actualizando la lsita de paquetes diponibles..." 
+echo ""
   apt-get -y update
 
   echo ""
-  echo " Instalando paquetes necesarios..."
-  echo ""
+  echo " Instalando paquetes necesarios..." 
+echo ""
   apt-get -y install wget
   apt-get -y install gnupg2
 
   echo ""
-  echo "  Descargando las llaves para firmar el repositorio..."
-  echo ""
+  echo "  Descargando las llaves para firmar el repositorio..." 
+echo ""
   wget -O- https://apt-key.centreon.com | gpg --dearmor | tee /etc/apt/trusted.gpg.d/centreon.gpg
 
   echo ""
-  echo "  Agregando el repositorio de Centreon..."
-  echo ""
+  echo "  Agregando el repositorio de Centreon..." 
+echo ""
   echo "deb https://apt.centreon.com/repository/centreon-bullseye/ bullseye main" > /etc/apt/sources.list.d/centreon.list
 
   echo ""
-  echo "  Re-actualizando la lsita de paquetes diponibles..."
-  echo ""
+  echo "  Re-actualizando la lsita de paquetes diponibles..." 
+echo ""
   apt-get -y update
 
   echo ""
-  echo " Instalando centreon..."
-  echo ""
+  echo " Instalando centreon..." 
+echo ""
   apt-get -y install centreon-broker
   apt-get -y install centreon-broker-cbmod
   apt-get -y install centreon-broker-core
@@ -146,14 +135,14 @@ elif [ $cVerSO == "11" ]; then
   apt-get -y install zmq-libzmq4-perl
 
   echo ""
-  echo "  Activando los servicios en systemd..."
-  echo ""
+  echo "  Activando los servicios en systemd..." 
+echo ""
   systemctl enable centreon
   systemctl enable centengine
 
   echo ""
-  echo "  Agregando el usuario centreon a sudoers..."
-  echo ""
+  echo "  Agregando el usuario centreon a sudoers..." 
+echo ""
   echo "# BEGIN: CENTREON SUDO"                                            >> /etc/sudoers
   echo ""                                                                   >> /etc/sudoers
   echo "User_Alias      CENTREON=%centreon"                                 >> /etc/sudoers
@@ -208,8 +197,8 @@ elif [ $cVerSO == "11" ]; then
   echo "# END: CENTREON SUDO"                                              >> /etc/sudoers
 
   echo ""
-  echo "  Corrigiendo permisos..."
-  echo ""
+  echo "  Corrigiendo permisos..." 
+echo ""
   chown -R centreon-engine:centreon-gorgone /etc/centreon-engine/
   chmod -R g+w /etc/centreon-engine/
   chown -R centreon-broker:centreon-gorgone /etc/centreon-broker/
@@ -218,8 +207,8 @@ elif [ $cVerSO == "11" ]; then
   chmod -R g+w /var/cache/centreon
 
   echo ""
-  echo "  Reiniciando los servicios..."
-  echo ""
+  echo "  Reiniciando los servicios..." 
+echo ""
   systemctl restart centengine
   systemctl restart gorgoned
 

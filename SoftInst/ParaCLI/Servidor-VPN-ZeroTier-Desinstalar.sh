@@ -78,36 +78,30 @@ elif [ $cVerSO == "10" ]; then
 
   # Quitar de todas las redes a las que está unido el host
     echo ""
-    echo "    Quitando este host de todas las redes a las que se ha unido..."
-    echo ""
+    echo "    Quitando este host de todas las redes a las que se ha unido..."    echo ""
     zerotier-cli listnetworks | grep -v type >> /tmp/RedesZeroTier.txt
     while read linea
       do
         echo ""
-        echo "      Saliendo de la red $linea..."
-        echo ""
+        echo "      Saliendo de la red $linea..."        echo ""
         zerotier-cli leave "$linea"
       done < /tmp/RedesZeroTier.txt
   # Desinstalar el paquete
     echo ""
-    echo "    Desinstalando el paquete zerotier-one..."
-    echo ""
+    echo "    Desinstalando el paquete zerotier-one..."    echo ""
     apt-get -y remove zerotier-one
   # Hacer copia de seguridad de la configuración
     echo ""
-    echo "    Haciendo copia de seguridad de la configuración..."
-    echo ""
+    echo "    Haciendo copia de seguridad de la configuración..."    echo ""
     mkdir -p /CopSegInt/$vFechaDeEjec/ZeroTierOne/var/lib/zerotier-one/
     cp -r /var/lib/zerotier-one/* /CopSegInt/$vFechaDeEjec/ZeroTierOne/var/lib/zerotier-one/
   # Borrar toda la configuración
     echo ""
-    echo "    Borrando toda la configuración..."
-    echo ""
+    echo "    Borrando toda la configuración..."    echo ""
     rm -rf /var/lib/zerotier-one/
   # Limpiar el sistema
     echo ""
-    echo "    Limpiando el sistema..."
-    echo ""
+    echo "    Limpiando el sistema..."    echo ""
     apt-get -y autoremove
     apt-get -y purge
 
@@ -119,36 +113,30 @@ elif [ $cVerSO == "11" ]; then
 
   # Quitar de todas las redes a las que está unido el host
     echo ""
-    echo "    Quitando este host de todas las redes a las que se ha unido..."
-    echo ""
+    echo "    Quitando este host de todas las redes a las que se ha unido..."    echo ""
     zerotier-cli listnetworks | grep -v type >> /tmp/RedesZeroTier.txt
     while read linea
       do
         echo ""
-        echo "      Saliendo de la red $linea..."
-        echo ""
+        echo "      Saliendo de la red $linea..."        echo ""
         zerotier-cli leave "$linea"
       done < /tmp/RedesZeroTier.txt
   # Desinstalar el paquete
     echo ""
-    echo "    Desinstalando el paquete zerotier-one..."
-    echo ""
+    echo "    Desinstalando el paquete zerotier-one..."    echo ""
     apt-get -y remove zerotier-one
   # Hacer copia de seguridad de la configuración
     echo ""
-    echo "    Haciendo copia de seguridad de la configuración..."
-    echo ""
+    echo "    Haciendo copia de seguridad de la configuración..."    echo ""
     mkdir -p /CopSegInt/$vFechaDeEjec/ZeroTierOne/var/lib/zerotier-one/
     cp -r /var/lib/zerotier-one/* /CopSegInt/$vFechaDeEjec/ZeroTierOne/var/lib/zerotier-one/
   # Borrar toda la configuración
     echo ""
-    echo "    Borrando toda la configuración..."
-    echo ""
+    echo "    Borrando toda la configuración..."    echo ""
     rm -rf /var/lib/zerotier-one/
   # Limpiar el sistema
     echo ""
-    echo "    Limpiando el sistema..."
-    echo ""
+    echo "    Limpiando el sistema..."    echo ""
     apt-get -y autoremove
     apt-get -y purge
 

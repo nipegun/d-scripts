@@ -22,37 +22,29 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación de Utopia Messenger para Debian 7 (Wheezy)..."
-
   echo ""
 
   echo ""
@@ -62,9 +54,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación de Utopia Messenger para Debian 8 (Jessie)..."
-
   echo ""
 
   echo ""
@@ -74,9 +64,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de Utopia Messenger para Debian 9 (Stretch)..."
-  echo "-------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -86,9 +74,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de Utopia Messenger para Debian 10 (Buster)..."
-  echo "-------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -98,16 +84,13 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Utopia Messenger para Debian 11 (Bullseye)..."
-  echo "---------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script de instalación de Utopia Messenger para Debian 11 (Bullseye)..." 
+echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
-       echo "  dialog no está instalado. Iniciando su instalación..."
-       echo ""
+       echo "  dialog no está instalado. Iniciando su instalación..."       echo ""
        apt-get -y update > /dev/null
        apt-get -y install dialog
        echo ""
@@ -134,26 +117,22 @@ elif [ $cVerSO == "11" ]; then
 
               # Desinstalar paquete anterior
                 echo ""
-                echo "  Desinstalando paquete .deb anterior..."
-                echo ""
+                echo "  Desinstalando paquete .deb anterior..."                echo ""
                 dpkg -r utopia
 
               # Crear carpeta de descarga
                 echo ""
-                echo "  Creando carpeta de descarga..."
-                echo ""
+                echo "  Creando carpeta de descarga..."                echo ""
                 mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
                 rm -rf /root/SoftInst/Cryptos/CRP/*
 
               # Descargar y descomprimir todos los archivos
                 echo ""
-                echo "  Descargando el paquete .deb de la instalación..."
-                echo ""
+                echo "  Descargando el paquete .deb de la instalación..."                echo ""
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                      echo ""
-                     echo "  wget no está instalado. Iniciando su instalación..."
-                     echo ""
+                     echo "  wget no está instalado. Iniciando su instalación..."                     echo ""
                      apt-get -y update
                      apt-get -y install wget
                      echo ""
@@ -163,8 +142,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar dependencias
                 echo ""
-                echo "  Instalando dependencias..."
-                echo ""
+                echo "  Instalando dependencias..."                echo ""
 
                 # Actualizar cache de paquetes
                   apt-get -y update
@@ -182,8 +160,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar paquete .deb
                 echo ""
-                echo "  Instalando paquete .deb..."
-                echo ""
+                echo "  Instalando paquete .deb..."                echo ""
                 dpkg -i /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
 
               # Fin de la ejecución del script
@@ -204,20 +181,17 @@ elif [ $cVerSO == "11" ]; then
 
               # Crear carpeta de descarga
                 echo ""
-                echo "  Creando carpeta de descarga..."
-                echo ""
+                echo "  Creando carpeta de descarga..."                echo ""
                 mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
                 rm -rf /root/SoftInst/Cryptos/CRP/*
 
               # Descargar y descomprimir todos los archivos
                 echo ""
-                echo "  Descargando el paquete .deb de la instalación..."
-                echo ""
+                echo "  Descargando el paquete .deb de la instalación..."                echo ""
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
-                    echo "  wget no está instalado. Iniciando su instalación..."
-                    echo ""
+                    echo "  wget no está instalado. Iniciando su instalación..."                    echo ""
                     apt-get -y update && apt-get -y install wget
                     echo ""
                   fi
@@ -225,26 +199,22 @@ elif [ $cVerSO == "11" ]; then
                 wget https://update.u.is/downloads/linux/utopia-latest.amd64.deb
 
                 echo ""
-                echo "  Extrayendo los archivos de dentro del paquete .deb..."
-                echo ""
+                echo "  Extrayendo los archivos de dentro del paquete .deb..."                echo ""
                 # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
-                    echo "  binutils no está instalado. Iniciando su instalación..."
-                    echo ""
+                    echo "  binutils no está instalado. Iniciando su instalación..."                    echo ""
                     apt-get -y update && apt-get -y install binutils
                     echo ""
                   fi
                 ar xv /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
 
                 echo ""
-                echo "  Descomprimiendo el archivo data.tar.xz..."
-                echo ""
+                echo "  Descomprimiendo el archivo data.tar.xz..."                echo ""
                 # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
-                    echo "  tar no está instalado. Iniciando su instalación..."
-                    echo ""
+                    echo "  tar no está instalado. Iniciando su instalación..."                    echo ""
                     apt-get -y update && apt-get -y install tar
                     echo ""
                   fi
@@ -253,8 +223,7 @@ elif [ $cVerSO == "11" ]; then
 
                 # Instalar dependencias
                   echo ""
-                  echo "  Instalando dependencias necesarias..."
-                  echo ""
+                  echo "  Instalando dependencias necesarias..."                  echo ""
 
                   # Por orden de requerimiento
                     apt-get -y install libxcb-screensaver0
@@ -298,8 +267,7 @@ elif [ $cVerSO == "11" ]; then
 
                 # Crear la carpeta para el usuario no root
                   echo ""
-                  echo "  Creando la carpeta para el usuario no root..."
-                  echo ""
+                  echo "  Creando la carpeta para el usuario no root..."                  echo ""
                   rm -rf /home/$UsuarioNoRoot/Cryptos/CRP/messenger/ 2> /dev/null
                   mkdir -p /home/$UsuarioNoRoot/Cryptos/CRP/ 2> /dev/null
                   mv /root/SoftInst/Cryptos/CRP/opt/utopia/* /home/$UsuarioNoRoot/Cryptos/CRP/messenger/
@@ -331,8 +299,7 @@ elif [ $cVerSO == "11" ]; then
 
                 # Borrar archivos sobrantes
                   #echo ""
-                  #echo "  Borrando archivos sobrantes..."
-                  #echo ""
+                  #echo "  Borrando archivos sobrantes..."                  #echo ""
                   #rm -rf /root/SoftInst/Cryptos/CRP/opt/
                   #rm -rf /root/SoftInst/Cryptos/CRP/usr/
                   #rm -rf /root/SoftInst/Cryptos/CRP/control.tar.gz
@@ -342,8 +309,7 @@ elif [ $cVerSO == "11" ]; then
 
                 # Reparar permisos
                   echo ""
-                  echo "  Reparando permisos..."
-                  echo ""
+                  echo "  Reparando permisos..."                  echo ""
                   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/
                   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/CRP/ -R
                   #find /home/$UsuarioNoRoot/Cryptos/CRP/ -type d -exec chmod 750 {} \;
@@ -373,26 +339,22 @@ elif [ $cVerSO == "11" ]; then
 
               # Desinstalar paquete .deb viejo
                 echo ""
-                echo "  Desinstalando paquete .deb viejo..."
-                echo ""
+                echo "  Desinstalando paquete .deb viejo..."                echo ""
                 apt-get -y remove utopia
 
               # Crear carpeta de descarga
                 echo ""
-                echo "  Creando carpeta de descarga..."
-                echo ""
+                echo "  Creando carpeta de descarga..."                echo ""
                 mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
                 rm -rf /root/SoftInst/Cryptos/CRP/*
 
               # Descargar y descomprimir todos los archivos
                 echo ""
-                echo "  Descargando el paquete .deb de la instalación..."
-                echo ""
+                echo "  Descargando el paquete .deb de la instalación..."                echo ""
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                      echo ""
-                     echo "  wget no está instalado. Iniciando su instalación..."
-                     echo ""
+                     echo "  wget no está instalado. Iniciando su instalación..."                     echo ""
                      apt-get -y update && apt-get -y install wget
                      echo ""
                    fi
@@ -401,8 +363,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar paquete .deb
                 echo ""
-                echo "  Instalando paquete .deb..."
-                echo ""
+                echo "  Instalando paquete .deb..."                echo ""
                 dpkg -i /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
 
               # Fin de la ejecución del script
@@ -420,20 +381,17 @@ elif [ $cVerSO == "11" ]; then
 
               # Crear carpeta de descarga
                 echo ""
-                echo "  Creando carpeta de descarga..."
-                echo ""
+                echo "  Creando carpeta de descarga..."                echo ""
                 mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
                 rm -rf /root/SoftInst/Cryptos/CRP/*
 
               # Descargar y descomprimir todos los archivos
                 echo ""
-                echo "  Descargando el paquete .deb de la instalación..."
-                echo ""
+                echo "  Descargando el paquete .deb de la instalación..."                echo ""
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
-                    echo "  wget no está instalado. Iniciando su instalación..."
-                    echo ""
+                    echo "  wget no está instalado. Iniciando su instalación..."                    echo ""
                     apt-get -y update && apt-get -y install wget
                     echo ""
                   fi
@@ -441,26 +399,22 @@ elif [ $cVerSO == "11" ]; then
                 wget https://update.u.is/downloads/linux/utopia-latest.amd64.deb
 
                 echo ""
-                echo "  Extrayendo los archivos de dentro del paquete .deb..."
-                echo ""
+                echo "  Extrayendo los archivos de dentro del paquete .deb..."                echo ""
                 # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
-                    echo "  binutils no está instalado. Iniciando su instalación..."
-                    echo ""
+                    echo "  binutils no está instalado. Iniciando su instalación..."                    echo ""
                     apt-get -y update && apt-get -y install binutils
                     echo ""
                   fi
                 ar xv /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
 
                 echo ""
-                echo "  Descomprimiendo el archivo data.tar.xz..."
-                echo ""
+                echo "  Descomprimiendo el archivo data.tar.xz..."                echo ""
                 # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
-                    echo "  tar no está instalado. Iniciando su instalación..."
-                    echo ""
+                    echo "  tar no está instalado. Iniciando su instalación..."                    echo ""
                     apt-get -y update && apt-get -y install tar
                     echo ""
                   fi
@@ -469,8 +423,7 @@ elif [ $cVerSO == "11" ]; then
 
                 # Crear la carpeta para el usuario no root
                   echo ""
-                  echo "  Creando la carpeta para el usuario no root..."
-                  echo ""
+                  echo "  Creando la carpeta para el usuario no root..."                  echo ""
                   rm -rf /home/$UsuarioNoRoot/Cryptos/CRP/messenger/ 2> /dev/null
                   mkdir -p /home/$UsuarioNoRoot/Cryptos/CRP/ 2> /dev/null
                   mv /root/SoftInst/Cryptos/CRP/opt/utopia/* /home/$UsuarioNoRoot/Cryptos/CRP/messenger/
@@ -484,8 +437,7 @@ elif [ $cVerSO == "11" ]; then
 
                 # Reparar permisos
                   echo ""
-                  echo "  Reparando permisos..."
-                  echo ""
+                  echo "  Reparando permisos..."                  echo ""
                   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/
                   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/CRP/ -R
                   #find /home/$UsuarioNoRoot/Cryptos/CRP/ -type d -exec chmod 750 {} \;

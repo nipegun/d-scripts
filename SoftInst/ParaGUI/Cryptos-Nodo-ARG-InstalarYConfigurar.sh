@@ -51,12 +51,10 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
         1)
 
           echo ""
-          echo "  Instalando el nodo ARG para modo CLI desde la web oficial..."
-          echo ""
+          echo "  Instalando el nodo ARG para modo CLI desde la web oficial..."          echo ""
 
           echo ""
-          echo "    Determinando la última versión de argentum disponible en la web oficial..."
-          echo ""
+          echo "    Determinando la última versión de argentum disponible en la web oficial..."          echo ""
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
               echo ""
@@ -73,16 +71,14 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           echo ""
 
           echo ""
-          echo "    Determinando la URL del archivo a descargar..."
-          echo ""
+          echo "    Determinando la URL del archivo a descargar..."          echo ""
           vURLArchivo=$(curl -sL https://raven.org/wallet/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep tar.gz)
           echo ""
           echo "      La URL del archivo es: $vURLArchivo"
           echo ""
 
           echo ""
-          echo "    Intentando descargar el archivo..."
-          echo ""
+          echo "    Intentando descargar el archivo..."          echo ""
           mkdir -p /root/SoftInst/Cryptos/ARG/ 2> /dev/null
           rm -rf /root/SoftInst/Cryptos/ARG/*
           cd /root/SoftInst/Cryptos/ARG/
@@ -98,8 +94,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           wget $vURLArchivo -O /root/SoftInst/Cryptos/ARG/raven$vUltVersArgentum.tar.gz
 
           echo ""
-          echo "    Descomprimiendo el archivo..."
-          echo ""
+          echo "    Descomprimiendo el archivo..."          echo ""
           # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
@@ -114,8 +109,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           find /root/SoftInst/Cryptos/ARG/ -type d -name "raven*" -exec mv {} /root/SoftInst/Cryptos/ARG/"raven-$vUltVersArgentum"/ \; 2> /dev/null
 
           echo ""
-          echo "    Creando carpetas y archivos necesarios para ese usuario..."
-          echo ""
+          echo "    Creando carpetas y archivos necesarios para ese usuario..."          echo ""
           mkdir -p /home/$vUsuarioNoRoot/.argentum/
           touch    /home/$vUsuarioNoRoot/.argentum/argentum.conf
           echo "rpcuser=ARGrpc"           > /home/$vUsuarioNoRoot/.argentum/argentum.conf
@@ -148,8 +142,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Iniciar el demonio
             echo ""
-            echo "  Arrancando argentumd..."
-            echo ""
+            echo "  Arrancando argentumd..."            echo ""
             su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/ARG-daemon-iniciar.sh"
             sleep 5
 
@@ -164,8 +157,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Autoejecución del nodo al iniciar el sistema
             echo ""
-            echo "    Agregando argentumd a los ComandosPostArranque..."
-            echo ""
+            echo "    Agregando argentumd a los ComandosPostArranque..."            echo ""
             chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/ARG-daemon-iniciar.sh
             echo "su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/ARG-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
             echo ""
@@ -175,12 +167,10 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
         2)
 
           echo ""
-          echo "  Instalando el nodo ARG para modo CLI desde la web de GitHub..."
-          echo ""
+          echo "  Instalando el nodo ARG para modo CLI desde la web de GitHub..."          echo ""
 
           echo ""
-          echo "    Determinando la última versión de argentum disponible en GitHub..."
-          echo ""
+          echo "    Determinando la última versión de argentum disponible en GitHub..."          echo ""
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
               echo ""
@@ -197,8 +187,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           echo ""
 
           echo ""
-          echo "    Determinando la URL del archivo a descargar..."
-          echo ""
+          echo "    Determinando la URL del archivo a descargar..."          echo ""
           vNombreArchivo=$(curl -sL https://github.com/RavenProject/Raven/releases/tag/v$vUltVersArgentum | grep href | grep inux | grep -v isable | grep x86 | cut -d'"' -f2 | cut -d '/' -f7)
           echo ""
           echo "      El nombre del archivo es $vNombreArchivo"
@@ -210,8 +199,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           echo ""
 
           echo ""
-          echo "    Intentando descargar el archivo..."
-          echo ""
+          echo "    Intentando descargar el archivo..."          echo ""
           mkdir -p /root/SoftInst/Cryptos/ARG/ 2> /dev/null
           rm -rf /root/SoftInst/Cryptos/ARG/*
           cd /root/SoftInst/Cryptos/ARG/
@@ -227,8 +215,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           wget $vURLArchivo -O /root/SoftInst/Cryptos/ARG/raven$vUltVersArgentum.tar.gz
 
           echo ""
-          echo "    Descomprimiendo el archivo..."
-          echo ""
+          echo "    Descomprimiendo el archivo..."          echo ""
           # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
@@ -243,8 +230,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           find /root/SoftInst/Cryptos/ARG/ -type d -name "raven*" -exec mv {} /root/SoftInst/Cryptos/ARG/"raven-$vUltVersArgentum"/ \; 2> /dev/null
 
           echo ""
-          echo "    Creando carpetas y archivos necesarios para ese usuario..."
-          echo ""
+          echo "    Creando carpetas y archivos necesarios para ese usuario..."          echo ""
           mkdir -p /home/$vUsuarioNoRoot/.argentum/
           touch    /home/$vUsuarioNoRoot/.argentum/argentum.conf
           echo "rpcuser=ARGrpc"           > /home/$vUsuarioNoRoot/.argentum/argentum.conf
@@ -277,8 +263,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Iniciar el demonio
             echo ""
-            echo "  Arrancando argentumd..."
-            echo ""
+            echo "  Arrancando argentumd..."            echo ""
             su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/ARG-daemon-iniciar.sh"
             sleep 5
 
@@ -293,8 +278,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Autoejecución del nodo al iniciar el sistema
             echo ""
-            echo "    Agregando argentumd a los ComandosPostArranque..."
-            echo ""
+            echo "    Agregando argentumd a los ComandosPostArranque..."            echo ""
             chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/ARG-daemon-iniciar.sh
             echo "su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/ARG-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
             echo ""
@@ -304,13 +288,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
         3)
 
           echo ""
-          echo "  Agregando configuración para el modo GUI..."
-          echo ""
+          echo "  Agregando configuración para el modo GUI..."          echo ""
 
           # Icono de lanzamiento en el menú gráfico
             echo ""
-            echo "    Agregando la aplicación gráfica al menú..."
-            echo ""
+            echo "    Agregando la aplicación gráfica al menú..."            echo ""
             mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/
             echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.local/share/applications/ARG.desktop
@@ -327,8 +309,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Autoejecución gráfica de argentum
             echo ""
-            echo "  Creando el archivo de autoejecución de argentum-qt para escritorio..."
-            echo ""
+            echo "  Creando el archivo de autoejecución de argentum-qt para escritorio..."            echo ""
             mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/
             echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.config/autostart/ARG.desktop
@@ -374,8 +355,7 @@ done
 
 
 echo ""
-echo "  Intentando descargar el archivo comprimido de la última versión..."
-echo ""
+echo "  Intentando descargar el archivo comprimido de la última versión..."echo ""
 mkdir -p /root/SoftInst/Argentumcoin/ 2> /dev/null
 rm -rf /root/SoftInst/Argentumcoin/*
 cd /root/SoftInst/Argentumcoin/
@@ -384,13 +364,11 @@ ArchUltVersAgentum=$(curl -sL https://github.com/argentumproject/argentum/releas
 wget --no-check-certificate https://github.com$ArchUltVersAgentum -O /root/SoftInst/Argentumcoin/Argentum.tar.gz
 
 echo ""
-echo "  Descomprimiendo el archivo..."
-echo ""
+echo "  Descomprimiendo el archivo..."echo ""
 # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "  tar no está instalado. Iniciando su instalación..."
-    echo ""
+    echo "  tar no está instalado. Iniciando su instalación..."    echo ""
     apt-get -y update
     apt-get -y install tar
     echo ""
@@ -399,8 +377,7 @@ tar -xf /root/SoftInst/Argentumcoin/Argentum.tar.gz
 rm -rf /root/SoftInst/Argentumcoin/Argentum.tar.gz
 
 echo ""
-echo "  Creando carpetas y archivos necesarios para ese usuario..."
-echo ""
+echo "  Creando carpetas y archivos necesarios para ese usuario..."echo ""
 mkdir -p /home/$UsuarioNoRoot/Cryptos/ARG/ 2> /dev/null
 # Archivo argentum.conf
   mkdir -p /home/$UsuarioNoRoot/.argentum/
@@ -423,8 +400,7 @@ mkdir -p /home/$UsuarioNoRoot/Cryptos/ARG/ 2> /dev/null
     #find /home/$UsuarioNoRoot -type f -exec chmod 664 {} \;
 
 #echo ""
-#echo "  Arrancando argentumd..."
-#echo ""
+#echo "  Arrancando argentumd..."#echo ""
 #su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/ARG/bin/argentumd"
 #sleep 5
 #su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/ARG/bin/argentum-cli getnewaddress" > /home/$UsuarioNoRoot/pooladdress-arg.txt
@@ -438,15 +414,14 @@ mkdir -p /home/$UsuarioNoRoot/Cryptos/ARG/ 2> /dev/null
 
 # Autoejecución de Argentum al iniciar el sistema
 #  echo ""
-#  echo "  Agregando argentumd a los ComandosPostArranque..."
-#  echo ""
+#  echo "  Agregando argentumd a los ComandosPostArranque..."#  echo ""
 #  echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/arg-daemon-iniciar.sh"
 #  echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/arg-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
 # Icono de lanzamiento en el menú gráfico
   echo ""
-  echo "  Agregando la aplicación gráfica al menú..."
-  echo ""
+  echo "  Agregando la aplicación gráfica al menú..." 
+echo ""
   mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
   echo "[Desktop Entry]"                                                     > /home/$UsuarioNoRoot/.local/share/applications/arg.desktop
   echo "Name=arg GUI"                                                       >> /home/$UsuarioNoRoot/.local/share/applications/arg.desktop
@@ -461,8 +436,8 @@ mkdir -p /home/$UsuarioNoRoot/Cryptos/ARG/ 2> /dev/null
 
 # Autoejecución gráfica de Argentum
   echo ""
-  echo "  Creando el archivo de autoejecución de argentum-qt para escritorio..."
-  echo ""
+  echo "  Creando el archivo de autoejecución de argentum-qt para escritorio..." 
+echo ""
   mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
   echo "[Desktop Entry]"                                                     > /home/$UsuarioNoRoot/.config/autostart/arg.desktop
   echo "Name=arg GUI"                                                       >> /home/$UsuarioNoRoot/.config/autostart/arg.desktop
@@ -479,8 +454,8 @@ mkdir -p /home/$UsuarioNoRoot/Cryptos/ARG/ 2> /dev/null
   
 # Instalar los c-scripts
   echo ""
-  echo "  Instalando los c-scripts..."
-  echo ""
+  echo "  Instalando los c-scripts..." 
+echo ""
   su $UsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
   find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 

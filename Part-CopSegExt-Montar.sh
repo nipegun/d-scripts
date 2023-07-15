@@ -32,6 +32,5 @@ mkdir -p /Particiones/CopSegExt 2> /dev/null
 mount -t auto -v /dev/disk/by-partlabel/PartCopSegExt /Particiones/CopSegExt
 
 echo ""
-echo "    Indicando que el disco que tiene la partición de copias de seguridad externas se apague después de 5 min. sin usar..."
-echo ""
+echo "    Indicando que el disco que tiene la partición de copias de seguridad externas se apague después de 5 min. sin usar..."echo ""
 hdparm -S 60 /dev/disk/by-partlabel/PartCopSegExt

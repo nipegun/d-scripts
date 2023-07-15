@@ -48,8 +48,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor nrpe para Debian 7 (Wheezy)..."
-  echo "----------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor nrpe para Debian 7 (Wheezy)..."  echo "----------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -60,8 +59,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor nrpe para Debian 8 (Jessie)..."
-  echo "----------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor nrpe para Debian 8 (Jessie)..."  echo "----------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -71,9 +69,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación del servidor nrpe para Debian 9 (Stretch)..."
-
   echo ""
 
   echo ""
@@ -83,9 +79,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación del servidor nrpe para Debian 10 (Buster)..."
-
   echo ""
 
   echo ""
@@ -95,14 +89,12 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación del servidor nrpe para Debian 11 (Bullseye)..."
-
   echo ""
 
   echo ""
-  echo "  Instalando paquetes necesarios..."
-  echo ""
+  echo "  Instalando paquetes necesarios..." 
+echo ""
   apt-get -y update
   apt-get -y install nagios-nrpe-server
   apt-get -y install nagios-nrpe-plugin
@@ -111,8 +103,8 @@ elif [ $cVerSO == "11" ]; then
   apt-get -y install nagios-snmp-plugins
             
   echo ""
-  echo "  Agregando comandos..."
-  echo ""
+  echo "  Agregando comandos..." 
+echo ""
   sed -i -e 's|command\[check_users]=|#command\[check_users]=|g'               /etc/nagios/nrpe.cfg
   sed -i -e 's|command\[check_load]=|#command\[check_load]=|g'                 /etc/nagios/nrpe.cfg
   sed -i -e 's|command\[check_hda1]=|#command\[check_hda1]=|g'                 /etc/nagios/nrpe.cfg
@@ -239,8 +231,8 @@ elif [ $cVerSO == "11" ]; then
   apt-get -y update && apt-get -y install lm-sensors
 
   echo ""
-  echo "  Reiniciando el servidor nrpe..."
-  echo ""
+  echo "  Reiniciando el servidor nrpe..." 
+echo ""
   systemctl restart nagios-nrpe-server
 
   echo ""

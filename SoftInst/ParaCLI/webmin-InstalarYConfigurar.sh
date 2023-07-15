@@ -106,13 +106,13 @@ elif [ $cVerSO == "11" ]; then
   echo ""
 
   echo ""
-  echo "  Determinando enlace de descarga..."
-  echo ""
+  echo "  Determinando enlace de descarga..." 
+echo ""
   vEnlaceArchivoDeb=$(curl -sL https://www.webmin.com/download.html | sed 's->-\n-g' | grep href | grep current | grep deb | cut -d '=' -f2)
   
   echo ""
-  echo "  Descargando archivo deb..."
-  echo ""
+  echo "  Descargando archivo deb..." 
+echo ""
   # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
     echo ""
@@ -125,8 +125,8 @@ elif [ $cVerSO == "11" ]; then
   wget $vEnlaceArchivoDeb -O /root/SoftInst/webmin/webmin.deb
 
   echo ""
-  echo "  Instalando dependencias..."
-  echo ""
+  echo "  Instalando dependencias..." 
+echo ""
   apt-get -y update
   apt-get -y install libauthen-pam-perl
   apt-get -y install libio-pty-perl
@@ -134,8 +134,8 @@ elif [ $cVerSO == "11" ]; then
   apt-get -y install perl-openssl-defaults
 
   echo ""
-  echo "  Instalando paquete deb..."
-  echo ""
+  echo "  Instalando paquete deb..." 
+echo ""
   dpkg -i /root/SoftInst/webmin/webmin.deb
 
 fi

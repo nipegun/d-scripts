@@ -13,15 +13,13 @@
 # ----------
 
 echo ""
-echo "Comprobando si falta algún paquete e instálándolo..."
-echo ""
+echo "Comprobando si falta algún paquete e instálándolo..."echo ""
 # apt-get -t stretch-backports
 apt-get -y update
 apt-get install certbot python-certbot-apache
 
 echo ""
-echo "Ejecutando el bot de certificados para apache..."
-echo ""
+echo "Ejecutando el bot de certificados para apache..."echo ""
 # certbot --apache # Te autoconfigura el .conf de apache 
 certbot --apache certonly # Te premite configurar el .conf de apache manualemnte
 

@@ -13,14 +13,12 @@
 # ----------
 
 echo ""
-echo "  Mostrando info de grupos de volúmenes..."
-echo ""
+echo "  Mostrando info de grupos de volúmenes..."echo ""
 vgs
 echo ""
 
 echo ""
-echo "  Mostrando info de grupos de volúmenes (más completo)..."
-echo ""
+echo "  Mostrando info de grupos de volúmenes (más completo)..."echo ""
 vgdisplay
 echo ""
 

@@ -13,8 +13,7 @@
 # ----------
 
 echo ""
-echo "  Mostrando los IPSets creados..."
-echo ""
+echo "  Mostrando los IPSets creados..."echo ""
 ipset list -n
 echo ""
 

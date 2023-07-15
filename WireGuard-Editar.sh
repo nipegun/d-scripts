@@ -11,19 +11,19 @@
 
 # Tirar la interfaz wg0
   echo ""
-  echo "  Tirando la conexión wg0 antes de hacer los cambios en el archivo /etc/wireguard/wg0.conf..."
-  echo ""
+  echo "  Tirando la conexión wg0 antes de hacer los cambios en el archivo /etc/wireguard/wg0.conf..." 
+echo ""
   wg-quick down wg0
 
 # Editar el archivo /etc/wireguard/wg0.conf
   echo ""
-  echo "  Editando el archivo /etc/wireguard/wg0.conf..."
-  echo ""
+  echo "  Editando el archivo /etc/wireguard/wg0.conf..." 
+echo ""
   nano /etc/wireguard/wg0.conf
 
 # Levantar la interfaz wg0
   echo ""
-  echo "  Volviendo a levantar la conexión wg0..."
-  echo ""
+  echo "  Volviendo a levantar la conexión wg0..." 
+echo ""
   wg-quick up wg0
 

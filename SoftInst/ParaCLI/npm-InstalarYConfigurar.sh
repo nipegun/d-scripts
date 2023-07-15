@@ -108,8 +108,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Limpiar
     echo ""
-    echo "    Limpiando el sistema..."
-    echo ""
+    echo "    Limpiando el sistema..."    echo ""
     apt-get -y remove --purge git
     apt-get -y remove --purge build-essential
     apt-get -y remove --purge libffi-dev
@@ -123,16 +122,14 @@ elif [ $cVerSO == "11" ]; then
   # Comprobar si hay una instalación previa y detener todos los servicios
     if [ -f /lib/systemd/system/npm.service ]; then
       echo ""
-      echo "    Se ha encontrado una instalación previa. Deteniendo servicios..."
-      echo ""
+      echo "    Se ha encontrado una instalación previa. Deteniendo servicios..."      echo ""
       systemctl stop openresty
       systemctl stop npm
     fi
 
   # Limpiar todo para la nueva instalación
     echo ""
-    echo "    Se ha encontrado una instalación previa. Limpiando archivos..."
-    echo ""
+    echo "    Se ha encontrado una instalación previa. Limpiando archivos..."    echo ""
     rm -rf /app
     rm -rf /var/www/html
     rm -rf /etc/nginx
@@ -142,8 +139,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Instalar dependencias
     echo ""
-    echo "    Instalando dependencias..."
-    echo ""
+    echo "    Instalando dependencias..."    echo ""
     apt-get -y install --no-install-recommends git
     apt-get -y install --no-install-recommends build-essential
     apt-get -y install --no-install-recommends libffi-dev
@@ -157,8 +153,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Instalar Python
     echo ""
-    echo "    Instalando y configurando Python..."
-    echo ""
+    echo "    Instalando y configurando Python..."    echo ""
     apt-get -y -q install --no-install-recommends python3
     apt-get -y -q install --no-install-recommends python3-distutils
     apt-get -y -q install --no-install-recommends python3-venv
@@ -195,8 +190,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Crear los enlaces simbólicos
     echo ""
-    echo "    Creando los enlaces simbólicos..."
-    echo ""
+    echo "    Creando los enlaces simbólicos..."    echo ""
     ln -sf /usr/bin/python3                      /usr/bin/python
     ln -sf /opt/certbot/bin/pip                  /usr/bin/pip
     ln -sf /opt/certbot/bin/certbot              /usr/bin/certbot
@@ -205,15 +199,13 @@ elif [ $cVerSO == "11" ]; then
 
   # Actualizar la versión de NPM en los archivos package.json
     echo ""
-    echo "    Actualizando la versión de NPM en los archivos package.json..."
-    echo ""
+    echo "    Actualizando la versión de NPM en los archivos package.json..."    echo ""
     sed -i "s+0.0.0+$vUltVersNPM+g" backend/package.json
     sed -i "s+0.0.0+$vUltVersNPM+g" frontend/package.json
 
   # Adaptar los archivos de configuración de nginx a la configuración por defecto de openresty
     echo ""
-    echo "    Adaptando los archivos de configuración de nginx a la configuración por defecto de openresty..."
-    echo ""
+    echo "    Adaptando los archivos de configuración de nginx a la configuración por defecto de openresty..."    echo ""
     sed -i 's+^daemon+#daemon+g' docker/rootfs/etc/nginx/nginx.conf
     vConfNginx=$(find "$(pwd)" -type f -name "*.conf")
     for NGINX_CONF in $vConfNginx; do
@@ -222,8 +214,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Copiar archivos runtime
     echo ""
-    echo "    Copiando archivos runtime..."
-    echo ""
+    echo "    Copiando archivos runtime..."    echo ""
     mkdir -p /var/www/html
     mkdir -p /etc/nginx/logs
     cp -r docker/rootfs/var/www/html/*                   /var/www/html/
@@ -235,8 +226,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Crear las carpetas requeridas
     echo ""
-    echo "    Creando las carpetas requeridas..."
-    echo ""
+    echo "    Creando las carpetas requeridas..."    echo ""
     mkdir -p /tmp/nginx/body
     mkdir -p /run/nginx
     mkdir -p /data/nginx
@@ -263,15 +253,13 @@ elif [ $cVerSO == "11" ]; then
   # Generate dummy self-signed certificate.
     if [ ! -f /data/nginx/dummycert.pem ] || [ ! -f /data/nginx/dummykey.pem ]; then
       echo ""
-      echo "    Generando el certificado SSL dummy..."
-      echo ""
+      echo "    Generando el certificado SSL dummy..."      echo ""
       openssl req -new -newkey rsa:2048 -days 3650 -nodes -x509 -subj "/O=Nginx Proxy Manager/OU=Dummy Certificate/CN=localhost" -keyout /data/nginx/dummykey.pem -out /data/nginx/dummycert.pem
     fi
 
   # Copy app files
     echo ""
-    echo "    Copiando los archivos de aplicación..."
-    echo ""
+    echo "    Copiando los archivos de aplicación..."    echo ""
     mkdir -p /app/global
     mkdir -p /app/frontend/images
     cp -r backend/* /app
@@ -290,8 +278,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Inicializar backend
     echo ""
-    echo "    Inicializando backend..."
-    echo ""
+    echo "    Inicializando backend..."    echo ""
     rm -rf /app/config/default.json
     if [ ! -f /app/config/production.json ]; then
       echo '{'                                           > /app/config/production.json
@@ -312,8 +299,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Crear el servicio NPM
     echo ""
-    echo "    Creando el servicio npm..."
-    echo ""
+    echo "    Creando el servicio npm..."    echo ""
     echo "[Unit]"                                                                                   > /lib/systemd/system/npm.service
     echo "Description=Nginx Proxy Manager"                                                         >> /lib/systemd/system/npm.service
     echo "After=network.target"                                                                    >> /lib/systemd/system/npm.service
@@ -334,8 +320,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Arrancar servicios
     echo ""
-    echo "    Arrancando servicios..."
-    echo ""
+    echo "    Arrancando servicios..."    echo ""
     systemctl start openresty
     systemctl start npm
 

@@ -15,15 +15,14 @@
 # Crear el archivo de log, en caso de que no exista
   if [ ! -f /var/log/XRDPWatcher.log ]; then
     echo ""
-    echo "  El archivo de log no existe, creando uno nuevo..."
-    echo ""
+    echo "  El archivo de log no existe, creando uno nuevo..."    echo ""
     touch /var/log/XRDPWatcher.log
   fi
 
 # Monitorizar las conexiones
   echo ""
-  echo "  Monitorizando las conexiones xrdp..."
-  echo ""
+  echo "  Monitorizando las conexiones xrdp..." 
+echo ""
   tail -f /var/log/xrdp.log | grep --line-buffered -E "onnected client"\|"onnection established" | while read line
     do
       # Eliminar los brackets

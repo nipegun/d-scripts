@@ -19,8 +19,7 @@ LOG=/var/log/TRIM.log
 echo "*** $(date -R) ***" >> $LOG
 
 echo ""
-echo "Ejecutando trim sobre el directorio raíz..."
-echo ""
+echo "Ejecutando trim sobre el directorio raíz..."echo ""
 fstrim -v / >> $LOG
 tail -n 2 /var/log/TRIM.log
 echo ""

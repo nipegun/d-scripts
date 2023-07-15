@@ -30,8 +30,7 @@ echo ""
 # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "  dialog no está instalado. Iniciando su instalación..."
-    echo ""
+    echo "  dialog no está instalado. Iniciando su instalación..."    echo ""
     apt-get -y update && apt-get -y install dialog
     echo ""
   fi
@@ -46,7 +45,6 @@ echo ""
       5 "Activar auto-logueo de root en modo texto" on
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  clear
 
 # Programar elecciones
   for choice in $choices
@@ -63,8 +61,7 @@ echo ""
             # Comprobar si el paquete psmisc está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s psmisc 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo "  psmisc no está instalado. Iniciando su instalación..."
-                echo ""
+                echo "  psmisc no está instalado. Iniciando su instalación..."                echo ""
                 apt-get -y update
                 apt-get -y install psmisc
                 echo ""
@@ -80,15 +77,13 @@ echo ""
             # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo "  wget no está instalado. Iniciando su instalación..."
-                echo ""
+                echo "  wget no está instalado. Iniciando su instalación..."                echo ""
                 apt-get -y update
                 apt-get -y install wget
                 echo ""
               fi
             echo ""
-            echo "  Descargando el archivo .deb..."
-            echo ""
+            echo "  Descargando el archivo .deb..."            echo ""
             rm -rf /root/Cryptos/CRP/opt/ 2> /dev/null
             rm -f /root/Cryptos/CRP/control.tar.gz 2> /dev/null
             rm -f /root/Cryptos/CRP/data.tar.xz 2> /dev/null
@@ -101,35 +96,30 @@ echo ""
             # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo "  binutils no está instalado. Iniciando su instalación..."
-                echo ""
+                echo "  binutils no está instalado. Iniciando su instalación..."                echo ""
                 apt-get -y update
                 apt-get -y install binutils
                 echo ""
               fi
             echo ""
-            echo "  Descomprimiendo el archivo .deb..."
-            echo ""
+            echo "  Descomprimiendo el archivo .deb..."            echo ""
             ar x /root/Cryptos/CRP/uam-latest_amd64.deb
             # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo "  tar no está instalado. Iniciando su instalación..."
-                echo ""
+                echo "  tar no está instalado. Iniciando su instalación..."                echo ""
                 apt-get -y update
                 apt-get -y install tar
                 echo ""
               fi
             echo ""
-            echo "  Descomprimiendo el archivo data.tar.xz..."
-            echo ""
+            echo "  Descomprimiendo el archivo data.tar.xz..."            echo ""
             tar xfv /root/Cryptos/CRP/data.tar.xz
             echo ""
             mv /root/Cryptos/CRP/opt/uam/ /root/Cryptos/CRP/minero/
             # Borrar archivos sobrantes
               echo ""
-              echo "  Borrando archivos sobrantes..."
-              echo ""
+              echo "  Borrando archivos sobrantes..."              echo ""
               rm -rf /root/Cryptos/CRP/opt/
               rm -rf /root/Cryptos/CRP/control.tar.gz
               rm -rf /root/Cryptos/CRP/data.tar.xz
@@ -184,8 +174,7 @@ echo ""
               rm -rf /root/Cryptos/CRP/
           else
             echo ""
-            echo "  El usuario $UsuarioCRPNoRoot no existe. Abortando script..."
-            echo ""
+            echo "  El usuario $UsuarioCRPNoRoot no existe. Abortando script..."            echo ""
             echo "  El minero ha quedado instalado sólo para el usuario root."
             echo ""
             exit

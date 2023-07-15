@@ -40,8 +40,7 @@ if [ $# -ne $cCantArgumEsperados ]
       fi
     # Comprobar estado de la base de datos
       echo ""
-      echo "  Comprobando estado de la base de datos..."
-      echo ""
+      echo "  Comprobando estado de la base de datos..."      echo ""
       vEstadoDeLaBaseDeDatosDeUHUB=$(sqlite3 /etc/uhub/users.db "PRAGMA integrity_check;")
     # Cambiar contraseña a usuario
       if [ $vEstadoDeLaBaseDeDatosDeUHUB == "ok" ]; then
@@ -50,8 +49,7 @@ if [ $# -ne $cCantArgumEsperados ]
         echo ""
         sqlite3 /etc/uhub/users.db "update users set password = '"$2"' where nickname = '"$1"';"
         echo ""
-        echo "      Resultado..."
-        echo ""
+        echo "      Resultado..."        echo ""
         sqlite3 -column -header /etc/uhub/users.db "select * from users where nickname = '"$1"'";
         echo ""
       else

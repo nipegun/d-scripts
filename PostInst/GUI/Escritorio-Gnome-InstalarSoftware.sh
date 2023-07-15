@@ -49,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "---------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 7 (Wheezy)..."
-  echo "---------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 7 (Wheezy)..."  echo "---------------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -61,8 +60,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "---------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 8 (Jessie)..."
-  echo "---------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 8 (Jessie)..."  echo "---------------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -73,8 +71,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 9 (Stretch)..."
-  echo "----------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 9 (Stretch)..."  echo "----------------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -85,8 +82,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 10 (Buster)..."
-  echo "----------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 10 (Buster)..."  echo "----------------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -97,8 +93,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 11 (Bullseye)..."
-  echo "-----------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 11 (Bullseye)..."  echo "-----------------------------------------------------------------------------------------------------"
   echo ""
 
   # Desinstalar cosas específicas de gnome
@@ -252,8 +247,8 @@ elif [ $cVerSO == "11" ]; then
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 12 (Bookworm)..."
-  echo ""
+  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 12 (Bookworm)..." 
+echo ""
 
   # Desinstalar cosas específicas de gnome
     apt-get -y remove xterm

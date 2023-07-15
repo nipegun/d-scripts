@@ -151,8 +151,7 @@ elif [ $cVerSO == "11" ]; then
           1)
 
             echo ""
-            echo "  Instalando servidor DNS..."
-            echo ""
+            echo "  Instalando servidor DNS..."            echo ""
 
             apt-get -y update && apt-get -y install bind9
 
@@ -178,8 +177,7 @@ elif [ $cVerSO == "11" ]; then
 
             # Crear la zona directa
               echo ""
-              echo "  Creando la zona directa..."
-              echo ""
+              echo "  Creando la zona directa..."              echo ""
               cp /etc/bind/db.local /etc/bind/db.$vDominio.directa
               sed -i -e "s|localhost. root.localhost.|correo.$vDominio. root.$vDominio.|g" /etc/bind/db.$vDominio.directa
               sed -i -e "s|localhost.|correo.$vDominio.|g"                                 /etc/bind/db.$vDominio.directa
@@ -187,8 +185,7 @@ elif [ $cVerSO == "11" ]; then
               sed -i -e '/::1/d'                                                           /etc/bind/db.$vDominio.directa
             # Anexar la zona directa
               echo ""
-              echo "  Anexando la zona directa..."
-              echo ""
+              echo "  Anexando la zona directa..."              echo ""
               echo ''                                           >> /etc/bind/named.conf.local
               echo 'zone "lan.local" {'                         >> /etc/bind/named.conf.local
               echo '  type master;'                             >> /etc/bind/named.conf.local
@@ -198,8 +195,7 @@ elif [ $cVerSO == "11" ]; then
               echo ''                                           >> /etc/bind/named.conf.local
             # Creando la zona inversa
               echo ""
-              echo "  Creando la zona inversa..."
-              echo ""
+              echo "  Creando la zona inversa..."              echo ""
               cp /etc/bind/db.127   /etc/bind/db.$vDominio.inversa
               sed -i -e "s|localhost. root.localhost.|correo.$vDominio. root.$vDominio.|g" /etc/bind/db.$vDominio.inversa
               sed -i -e "s|localhost.|correo.$vDominio.|g"                                 /etc/bind/db.$vDominio.inversa
@@ -215,8 +211,7 @@ elif [ $cVerSO == "11" ]; then
               fi
             # Anexar la zona inversa
               echo ""
-              echo "  Anexando la zona inversa..."
-              echo ""
+              echo "  Anexando la zona inversa..."              echo ""
               echo ''                                           >> /etc/bind/named.conf.local
               echo 'zone "'$vIPInversa'.in-addr.arpa" {'        >> /etc/bind/named.conf.local
               echo '  type master; '                            >> /etc/bind/named.conf.local
@@ -226,13 +221,11 @@ elif [ $cVerSO == "11" ]; then
               echo ''                                           >> /etc/bind/named.conf.local
             # Reiniciar servidor DNS
               echo ""
-              echo "  Reiniciando servidor DNS..."
-              echo ""
+              echo "  Reiniciando servidor DNS..."              echo ""
               systemctl restart bind9
             # Consultar el registro MX
               echo ""
-              echo "  Consultando el registro MX del dominio $vDominio..."
-              echo ""
+              echo "  Consultando el registro MX del dominio $vDominio..."              echo ""
               dig $vDominio MX +short
               nslookup -type=mx $vDominio
 
@@ -241,8 +234,7 @@ elif [ $cVerSO == "11" ]; then
           2)
 
             echo ""
-            echo "  Instalando el MTA (Mail Transport Agent) sendmail..."
-            echo ""
+            echo "  Instalando el MTA (Mail Transport Agent) sendmail..."            echo ""
  
             echo "  Comandos no preparados"
  
@@ -251,17 +243,14 @@ elif [ $cVerSO == "11" ]; then
           3)
 
             echo ""
-            echo "  Instalando el MTA (Mail Transport Agent) postfix..."
-            echo ""
+            echo "  Instalando el MTA (Mail Transport Agent) postfix..."            echo ""
 
             echo ""
-            echo "    Instalando el paquete postfix..."
-            echo ""
+            echo "    Instalando el paquete postfix..."            echo ""
             apt-get -y install postfix
 
             echo ""
-            echo "    Configurando postfix..."
-            echo ""
+            echo "    Configurando postfix..."            echo ""
             # Parar el servicio de postfix
               systemctl stop postfix
             # Modificar /etc/postfix/main.cf
@@ -312,8 +301,7 @@ elif [ $cVerSO == "11" ]; then
 
             # Reiniciar el servicio postfix
               echo ""
-              echo "    Reiniciando el servicio postfix..."
-              echo ""
+              echo "    Reiniciando el servicio postfix..."              echo ""
               systemctl restart postfix
 
           ;;
@@ -321,8 +309,7 @@ elif [ $cVerSO == "11" ]; then
           4)
 
             echo ""
-            echo "  Instalando el MTA (Mail Transport Agent) courier..."
-            echo ""
+            echo "  Instalando el MTA (Mail Transport Agent) courier..."            echo ""
  
             echo "  Comandos no preparados"
  
@@ -331,24 +318,20 @@ elif [ $cVerSO == "11" ]; then
           5)
 
             echo ""
-            echo "  Instalando el MDA (Mail Delivery Agent) dovecot..."
-            echo ""
+            echo "  Instalando el MDA (Mail Delivery Agent) dovecot..."            echo ""
 
             # Instalar el demonio para IMAP
               echo ""
-              echo "    Instalando el servicio para IMAP..."
-              echo ""
+              echo "    Instalando el servicio para IMAP..."              echo ""
               apt-get -y install dovecot-imapd
             # Instalar el demonio para POP3
               #echo ""
-              #echo "    Instalando el servicio para POP3..."
-              #echo ""
+              #echo "    Instalando el servicio para POP3..."              #echo ""
               #apt-get -y install dovecot-pop3d
 
             # Realizar cambios en la configuración
               echo ""
-              echo "    Realizando cambios en la configuración..."
-              echo ""
+              echo "    Realizando cambios en la configuración..."              echo ""
               # Parar el servicio
                 service dovecot stop
               # Pre-crear las carpetas de mail por defecto del servicio para futuros usuarios
@@ -380,8 +363,7 @@ elif [ $cVerSO == "11" ]; then
           6)
 
             echo ""
-            echo "  Instalando el MDA (Mail Delivery Agent) maildrop..."
-            echo ""
+            echo "  Instalando el MDA (Mail Delivery Agent) maildrop..."            echo ""
 
             echo "  Comandos no preparados"
 
@@ -390,8 +372,7 @@ elif [ $cVerSO == "11" ]; then
           7)
 
             echo ""
-            echo "  Instalando el MDA (Mail Delivery Agent) procmail..."
-            echo ""
+            echo "  Instalando el MDA (Mail Delivery Agent) procmail..."            echo ""
 
             echo "  Comandos no preparados"
 
@@ -429,13 +410,11 @@ elif [ $cVerSO == "11" ]; then
                 a2disconf roundcube
               # Comprobar sintaxis de apache
                 echo ""
-                echo "  Comprobando sintaxis de los archivos de apache..."
-                echo ""
+                echo "  Comprobando sintaxis de los archivos de apache..."                echo ""
                 apache2ctl configtest
               # Reiniciar el servidor apache
                 echo ""
-                echo "  Reiniciando el servidor apache..."
-                echo ""
+                echo "  Reiniciando el servidor apache..."                echo ""
                 systemctl restart apache2
             # Realizar configuraciones finales
               # Autenticación básica
@@ -455,8 +434,7 @@ elif [ $cVerSO == "11" ]; then
                 sed -i -e 's|$config['plugins'] = array(|$config['plugins'] = array(\n'archive',\n'zipdownload',\n'managesieve',\n'password',|g' /etc/roundcube/config.inc.php
             # Cambiar el logo que viene por defecto  
               echo ""
-              echo "  Cambiando el logo por defecto..."
-              echo ""
+              echo "  Cambiando el logo por defecto..."              echo ""
               echo ""'$config'"['skin_logo'] = 'logo.png';" >> /etc/roundcube/config.inc.php
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
@@ -483,8 +461,7 @@ elif [ $cVerSO == "11" ]; then
           10)
 
             echo ""
-            echo "  Otra..."
-            echo ""
+            echo "  Otra..."            echo ""
 
             ####### DNS
 
@@ -498,12 +475,10 @@ elif [ $cVerSO == "11" ]; then
        ##//     echo "$vDominio. IN MX 10 correo"      >> /etc/bind/db.$vDominio # Las cuentas de correo que entren en @hacsk4geeks.com serán redirigidas a la entrada correos
             # Comprobamos que la zona esté bien escrita:
              echo ""
-             echo "  Comprobando la sintaxis de la zona directa..."
-             echo ""
+             echo "  Comprobando la sintaxis de la zona directa..."             echo ""
              named-checkzone $vDominio /etc/bind/db.$vDominio.directa
              echo ""
-             echo "  Comprobando la sintaxis de la zona inversa..."
-             echo ""
+             echo "  Comprobando la sintaxis de la zona inversa..."             echo ""
              named-checkzone $vDominio /etc/bind/db.$vDominio.inversa
              
             # En bind 9 (zona inversa, db.0.168.192): # es mejor declararla para que el correo no acabe en spam
@@ -576,8 +551,7 @@ elif [ $cVerSO == "11" ]; then
           11)
 
           echo ""
-          echo "  Instalando y configurando mailutils..."
-          echo ""
+          echo "  Instalando y configurando mailutils..."          echo ""
 
           # Configurar mailutils
             # Modificar mailutils para que sepa que los mails van a archivos separados
@@ -588,8 +562,7 @@ elif [ $cVerSO == "11" ]; then
               echo '}'                                                     >> /etc/mailutils.conf
             # Hacer que el remitente venga siempre como del nombre del dominio, no del hostname
               echo ""
-              echo "      Configurando mailutils para que el remitente sea $vDominio y no $(cat /etc/hostname)..."
-              echo ""
+              echo "      Configurando mailutils para que el remitente sea $vDominio y no $(cat /etc/hostname)..."              echo ""
               echo "address {"                 >> /etc/mailutils.conf
               echo "  email-domain $vDominio;" >> /etc/mailutils.conf
               echo "};"                        >> /etc/mailutils.conf

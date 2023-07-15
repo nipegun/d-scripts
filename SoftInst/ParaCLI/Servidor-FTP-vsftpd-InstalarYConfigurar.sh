@@ -123,17 +123,14 @@ elif [ $cVerSO == "11" ]; then
         1)
 
           echo ""
-          echo "  Instalando servidor FTP básico..."
-          echo ""
+          echo "  Instalando servidor FTP básico..."          echo ""
 
           echo ""
-          echo "    Actualizando la lista de los paquetes disponibles en los repositorios..."
-          echo ""
+          echo "    Actualizando la lista de los paquetes disponibles en los repositorios..."          echo ""
           apt-get -y update
 
           echo ""
-          echo "    Instalando el paquete vsftpd..."
-          echo ""
+          echo "    Instalando el paquete vsftpd..."          echo ""
           apt-get -y install vsftpd
 
           # Archivo por defecto
@@ -151,8 +148,7 @@ elif [ $cVerSO == "11" ]; then
         2)
 
           echo ""
-          echo "  Modificando mensaje de bienvenida..."
-          echo ""
+          echo "  Modificando mensaje de bienvenida..."          echo ""
           sed -i -e 's-#ftpd_banner=Welcome to blah FTP service-ftpd_banner=Bienvenido al servidor FTP-g'   /etc/vsftpd.conf
           systemctl restart vsftpd
 
@@ -161,8 +157,7 @@ elif [ $cVerSO == "11" ]; then
         3)
 
           echo ""
-          echo "  Activando navegación anónima..."
-          echo ""
+          echo "  Activando navegación anónima..."          echo ""
           sed -i -e 's|anonymous_enable=NO|anonymous_enable=YES|g' /etc/vsftpd.conf
           systemctl restart vsftpd
 
@@ -171,8 +166,7 @@ elif [ $cVerSO == "11" ]; then
         4)
 
           echo ""
-          echo "  Activando el logueo para usuarios del sistema..."
-          echo ""
+          echo "  Activando el logueo para usuarios del sistema..."          echo ""
           sed -i -e 's|#local_enable=YES|local_enable=YES|g' /etc/vsftpd.conf
           echo "allow_writeable_chroot=YES" >>               /etc/vsftpd.conf
           systemctl restart vsftpd
@@ -182,8 +176,7 @@ elif [ $cVerSO == "11" ]; then
         5)
 
           echo ""
-          echo "  Activando enjaulado de usuarios..."
-          echo ""
+          echo "  Activando enjaulado de usuarios..."          echo ""
           # Activar enjaulado de usuarios
             sed -i -e 's|#chroot_local_user=YES|chroot_local_user=YES|g' /etc/vsftpd.conf
           vEnjaulado="Activo"
@@ -193,8 +186,7 @@ elif [ $cVerSO == "11" ]; then
         6)
 
           echo ""
-          echo "  Desenjaulando el usuario 1000..."
-          echo ""
+          echo "  Desenjaulando el usuario 1000..."          echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
             vUsuario1000=$(cat /etc/passwd | grep "1000:1000" | cut -d ':' -f1)
             if [ "$vUsuario1000" = "" ]; then
@@ -224,8 +216,7 @@ elif [ $cVerSO == "11" ]; then
         7)
 
           echo ""
-          echo "  Desenjaulando usuario específico..."
-          echo ""
+          echo "  Desenjaulando usuario específico..."          echo ""
           if [ "$vEnjaulado" = "Activo" ]; then
             #read -p "Ingresa el nombre del usuario que quieras desenjaular: " vUsuarioLibre
             echo "    Ingresa el nombre del usuario que quieras desenjaular:"
@@ -251,8 +242,7 @@ elif [ $cVerSO == "11" ]; then
         8)
 
           echo ""
-          echo "  Activando conexión mediante SSL..."
-          echo ""
+          echo "  Activando conexión mediante SSL..."          echo ""
           openssl req -x509 -nodes -newkey rsa:2048 -days 365 -keyout /etc/ssl/private/vsftpd.key -out /etc/ssl/certs/vsftpd.pem
           chmod 600 /etc/ssl/private/vsftpd.key
           sed -i -e 's|rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem|rsa_cert_file=/etc/ssl/certs/vsftpd.pem|g'                   /etc/vsftpd.conf
@@ -268,8 +258,7 @@ elif [ $cVerSO == "11" ]; then
         9)
 
           echo ""
-          echo "  Activando permiso de escritura..."
-          echo ""
+          echo "  Activando permiso de escritura..."          echo ""
           sed -i -e 's|#write_enable=YES|write_enable=YES|g' /etc/vsftpd.conf
           systemctl restart vsftpd
 
@@ -278,8 +267,7 @@ elif [ $cVerSO == "11" ]; then
        10)
 
           echo ""
-          echo "  Cambiando la ubicación de la carpeta pública..."
-          echo ""
+          echo "  Cambiando la ubicación de la carpeta pública..."          echo ""
           # Si no se especifica la carpeta pública, el directorio home del usuario sería la carpeta FTP home
           vRutaACarpeta=/ftp/pub
             echo "local_root=$vRutaACarpeta" >> /etc/vsftpd.conf
@@ -291,8 +279,7 @@ elif [ $cVerSO == "11" ]; then
        11)
 
           echo ""
-          echo "  Permitiendo ls recursivo..."
-          echo ""
+          echo "  Permitiendo ls recursivo..."          echo ""
           sed -i -e 's|#ls_recurse_enable=YES|ls_recurse_enable=YES|g' /etc/vsftpd.conf
           systemctl restart vsftpd
 

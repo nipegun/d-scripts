@@ -13,8 +13,7 @@
 ----
 
 echo ""
-echo "  Consultando la última versión disponible de NBMiner..."
-echo ""
+echo "  Consultando la última versión disponible de NBMiner..."echo ""
 UltVers=$(curl --silent https://github.com/NebuTech/NBMiner/releases/latest | cut -d '"' -f2 | cut -d "/" -f 8 | sed 's/v//g')
 
 echo ""
@@ -30,8 +29,7 @@ cd ~/Cryptos/Mineros/GPU/
 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  wget no está instalado. Iniciando su instalación..."
-     echo ""
+     echo "  wget no está instalado. Iniciando su instalación..."     echo ""
      apt-get -y update
      apt-get -y install wget
      echo ""
@@ -44,8 +42,7 @@ echo ""
 # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  tar no está instalado. Iniciando su instalación..."
-     echo ""
+     echo "  tar no está instalado. Iniciando su instalación..."     echo ""
      apt-get -y update
      apt-get -y install tar
      echo ""
@@ -56,8 +53,7 @@ rm -rf ~/Cryptos/Mineros/GPU/NBMiner_"$UltVers"_Linux.tgz
 echo ""
 
 echo ""
-echo "  Instalando OpenCL..."
-echo ""
+echo "  Instalando OpenCL..."echo ""
 apt-get -y install build-essential dkms
 dpkg -i amdgpu-pro-core
 dpkg -i libopencl1-amdgpu-pro *
@@ -71,7 +67,6 @@ dpkg -i libdrm-amdgpu-pro-amdgpu1
 
 
 echo ""
-echo "  Ejecutando minero para minar RVN..."
-echo ""
+echo "  Ejecutando minero para minar RVN..."echo ""
 ~/Cryptos/Mineros/GPU/NBMiner/nbminer -a kawpow -o stratum+tcp://eu.ravenminer.com:3838 -u RKxPhh36Cz6JoqMuq1nwMuPYnkj8DmUswy.worker:passwd
 

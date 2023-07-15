@@ -11,8 +11,7 @@
 
 echo ""
 echo "-----------------------------"
-echo "  Reiniciando Jitsi Meet..."
-echo "-----------------------------"
+echo "  Reiniciando Jitsi Meet..."echo "-----------------------------"
 echo ""
 service jitsi-videobridge restart
 

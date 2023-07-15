@@ -42,8 +42,7 @@ if [ $# -ne $EXPECTED_ARGS ]
         # Obtener el número de segundos de modificación del archivo
           vs=$(stat -c %y "$vArchivo" | cut -d ' ' -f2 | cut -d ':' -f3 | cut -d '.' -f1)
         # Cambiar la fecha de modificación del archivo al año indicado en el parámetro 2
-          echo "Cambiando el año de modificación del archivo $vArchivo a $2..."
-          touch -a -m -t "$2$vM$vD$vh$vm.$vs" "$vArchivo"
+          echo "Cambiando el año de modificación del archivo $vArchivo a $2..."          touch -a -m -t "$2$vM$vD$vh$vm.$vs" "$vArchivo"
       done
     echo ""
 fi

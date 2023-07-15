@@ -39,10 +39,8 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de preparación del Pendrive con Debian 7 (Wheezy) Portable..."
-  echo "-------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script de preparación del Pendrive con Debian 7 (Wheezy) Portable..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -51,10 +49,8 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de preparación del Pendrive con Debian 8 (Jessie) Portable..."
-  echo "-------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script de preparación del Pendrive con Debian 8 (Jessie) Portable..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -63,10 +59,8 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-
-  echo "  Iniciando el script de preparación del Pendrive con Debian 9 (Stretch) Portable..."
-
-  echo ""
+  echo "  Iniciando el script de preparación del Pendrive con Debian 9 (Stretch) Portable..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -75,10 +69,8 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-
-  echo "  Iniciando el script de preparación del Pendrive con Debian 10 (Buster) Portable..."
-
-  echo ""
+  echo "  Iniciando el script de preparación del Pendrive con Debian 10 (Buster) Portable..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -87,10 +79,8 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de preparación del Pendrive con Debian 11 (Bullseye) Portable..."
-  echo "----------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script de preparación del Pendrive con Debian 11 (Bullseye) Portable..." 
+echo ""
 
   # Modificar el grub
     sed -i -e 's|GRUB_TIMEOUT=5|GRUB_TIMEOUT=1|g' /etc/default/grub
@@ -234,7 +224,7 @@ elif [ $cVerSO == "11" ]; then
     mkdir -p /Particiones/SATA/sda2/    2> /dev/null
     mkdir -p /Particiones/SATA/sda3/    2> /dev/null
     mkdir -p /Particiones/SATA/sda4/    2> /dev/null
-     
+
     mkdir -p /Particiones/SATA/sdb1/    2> /dev/null
     mkdir -p /Particiones/SATA/sdb2/    2> /dev/null
     mkdir -p /Particiones/SATA/sdb3/    2> /dev/null
@@ -278,7 +268,7 @@ elif [ $cVerSO == "11" ]; then
     apt-get -y remove xterm reportbug blender imagemagick inkscape gnome-disk-utility
     apt-get -y autoremove
 
-  # x 
+  # x
     echo -n mem > /sys/power/state
 
   # ComandosPostArranque
@@ -295,7 +285,7 @@ elif [ $cVerSO == "11" ]; then
     echo "mount -t auto /dev/sda2 /Particiones/IDE/hda2/"            >> /root/scripts/ComandosPostArranque.sh
     echo "mount -t auto /dev/sda3 /Particiones/IDE/hda3/"            >> /root/scripts/ComandosPostArranque.sh
     echo "mount -t auto /dev/sda4 /Particiones/IDE/hda4/"            >> /root/scripts/ComandosPostArranque.sh
-     
+
     echo "mount -t auto /dev/sdb1 /Particiones/IDE/hdb1/"            >> /root/scripts/ComandosPostArranque.sh
     echo "mount -t auto /dev/sdb2 /Particiones/IDE/hdb2/"            >> /root/scripts/ComandosPostArranque.sh
     echo "mount -t auto /dev/sdb3 /Particiones/IDE/hdb3/"            >> /root/scripts/ComandosPostArranque.sh
@@ -305,7 +295,7 @@ elif [ $cVerSO == "11" ]; then
     echo "mount -t auto /dev/sda2 /Particiones/SATA/sda2/"           >> /root/scripts/ComandosPostArranque.sh
     echo "mount -t auto /dev/sda3 /Particiones/SATA/sda3/"           >> /root/scripts/ComandosPostArranque.sh
     echo "mount -t auto /dev/sda4 /Particiones/SATA/sda4/"           >> /root/scripts/ComandosPostArranque.sh
-     
+
     echo "mount -t auto /dev/sdb1 /Particiones/SATA/sdb1/"           >> /root/scripts/ComandosPostArranque.sh
     echo "mount -t auto /dev/sdb2 /Particiones/SATA/sdb2/"           >> /root/scripts/ComandosPostArranque.sh
     echo "mount -t auto /dev/sdb3 /Particiones/SATA/sdb3/"           >> /root/scripts/ComandosPostArranque.sh
@@ -355,7 +345,7 @@ elif [ $cVerSO == "11" ]; then
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar.sh | bash
 
   # Documentos
-  
+
     mkdir -p /root/Documentos/ 2> /dev/null
 
       # Chameleon desde Grub

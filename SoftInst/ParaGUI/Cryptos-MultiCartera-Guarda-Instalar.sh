@@ -117,8 +117,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Determinar URL de descarga del archivo comprimido
     echo ""
-    echo "  Determinando la URL de descarga del archivo de instalación de Guarda..."
-    echo ""
+    echo "  Determinando la URL de descarga del archivo de instalación de Guarda..."    echo ""
     vURLArchivo=$(curl -sL https://github.com/guardaco/guarda-desktop-releases/releases/ | sed 's->-\n-g' | grep download | grep ".deb" | head -n1 | cut -d '"' -f2)
     echo ""
     echo "    La URL de descarga del archivo es: https://github.com$vURLArchivo"
@@ -126,8 +125,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Descargar archivo comprimido
     echo ""
-    echo "  Descargando el archivo..."
-    echo ""
+    echo "  Descargando el archivo..."    echo ""
     mkdir -p /root/SoftInst/Guarda 2> /dev/null
     cd /root/SoftInst/Guarda
     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
@@ -142,8 +140,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Extraer los archivos de dentro del .deb
     echo ""
-    echo "  Extrayendo los archivos de dentro del paquete .deb..."
-    echo ""
+    echo "  Extrayendo los archivos de dentro del paquete .deb..."    echo ""
     # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
         echo ""
@@ -157,8 +154,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Descomprimir el archivo data.tar.xz
     echo ""
-    echo "  Descomprimiendo el archivo data.tar.xz..."
-    echo ""
+    echo "  Descomprimiendo el archivo data.tar.xz..."    echo ""
     # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
         echo ""
@@ -172,16 +168,14 @@ elif [ $cVerSO == "11" ]; then
 
   # Crear la carpeta para el usuario no root
     echo ""
-    echo "  Creando la carpeta para el usuario no root..."
-    echo ""
+    echo "  Creando la carpeta para el usuario no root..."    echo ""
     mkdir -p /home/$vUsuarioNoRoot/Guarda/ 2> /dev/null
     cp -rf '/root/SoftInst/Guarda/opt/Guarda/'* /home/$vUsuarioNoRoot/Guarda/
     cp /root/SoftInst/Guarda/usr/share/icons/hicolor/256x256/apps/guarda.png /home/$vUsuarioNoRoot/Guarda/guarda.png
 
   # Agregar aplicación al menú
     echo ""
-    echo "  Agregando la aplicación gráfica al menú..."
-    echo ""
+    echo "  Agregando la aplicación gráfica al menú..."    echo ""
     mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
     cp -f /root/SoftInst/Guarda/usr/share/applications/guarda.desktop                        /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
     sed -i -e 's|Exec=/opt/Guarda/guarda %U|Exec=/home/'$vUsuarioNoRoot'/Guarda/guarda %U|g' /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
@@ -192,8 +186,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Crear el archivo de auto-ehecución
     echo ""
-    echo "  Creando el archivo de autoejecución para el escritorio..."
-    echo ""
+    echo "  Creando el archivo de autoejecución para el escritorio..."    echo ""
     mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
     cp -f /root/SoftInst/Guarda/usr/share/applications/guarda.desktop                        /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
     sed -i -e 's|Exec=/opt/Guarda/guarda %U|Exec=/home/'$vUsuarioNoRoot'/Guarda/guarda %U|g' /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
@@ -204,8 +197,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Reparar permisos
     echo ""
-    echo "  Reparando permisos..."
-    echo ""
+    echo "  Reparando permisos..."    echo ""
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Guarda/ -R
     #find /home/$vUsuarioNoRoot/Guarda/ -type d -exec chmod 750 {} \;
     #find /home/$vUsuarioNoRoot/Guarda/ -type f -exec chmod +x {} \;

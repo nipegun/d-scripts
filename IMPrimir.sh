@@ -30,8 +30,7 @@ if [ $# -ne $cCantArgumEsperados ]
     exit
   else
     echo ""
-    echo "Mandando la tarea a la cola de impresión..."
-    echo ""
+    echo "Mandando la tarea a la cola de impresión..."    echo ""
     echo $1 | lp -d $2
     echo ""
 fi

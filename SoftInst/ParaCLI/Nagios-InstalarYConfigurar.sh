@@ -50,8 +50,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Nagios Core para Debian 7 (Wheezy)..."
-  echo "-------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Nagios Core para Debian 7 (Wheezy)..."  echo "-------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -62,8 +61,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Nagios Core para Debian 8 (Jessie)..."
-  echo "-------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Nagios Core para Debian 8 (Jessie)..."  echo "-------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -74,8 +72,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Nagios Core para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de Nagios Core para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -86,8 +83,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Nagios Core para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de Nagios Core para Debian 10 (Buster)..."  
   echo ""
 
   echo ""
@@ -98,8 +94,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Nagios Core para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de Nagios Core para Debian 11 (Bullseye)..."  
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -145,14 +140,12 @@ elif [ $cVerSO == "11" ]; then
             apt-get -y install nagios-images
 
             echo ""
-            echo "  Instalando nagvis..."
-            echo ""
+            echo "  Instalando nagvis..."            echo ""
             apt-get -y install nagvis
             apt-get -y install nagvis-demos
 
             echo ""
-            echo "  Agregando el archivo de comandos personalizados..."
-            echo ""
+            echo "  Agregando el archivo de comandos personalizados..."            echo ""
             touch /etc/nagios4/objects/comandospers.cfg
             sed -i -e 's|cfg_file=/etc/nagios4/objects/templates.cfg|cfg_file=/etc/nagios4/objects/templates.cfg\n\ncfg_file=/etc/nagios4/objects/comandospers.cfg|g' /etc/nagios4/nagios.cfg
             echo 'define command {'                                                                      > /etc/nagios4/objects/comandospers.cfg

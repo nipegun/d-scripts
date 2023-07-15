@@ -35,11 +35,9 @@ if [ $# -ne $cCantArgumEsperados ]
     exit
   else
     echo ""
-    echo "  Creando pendrive de CloneZilla Live..."
+    echo "  Creando pendrive de CloneZilla Live..."    echo ""
     echo ""
-    echo ""
-    echo "  Instalando los paquetes necesarios..."
-    apt-get -y install libc6-i386
+    echo "  Instalando los paquetes necesarios..."    apt-get -y install libc6-i386
     URLUltVersCloneZilla=$(wget -qO- --no-check-certificate https://www.kernel.org | grep zip | head -n1 | cut -d\" -f2)
     wget --no-check-certificate $URLUltVersCloneZilla
     mkfs.vfat -F 32 $1

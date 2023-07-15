@@ -11,22 +11,19 @@
 
 echo ""
 echo "--------------------------------------------"
-echo "  Deteniendo el servicio calibre-server..."
-echo "--------------------------------------------"
+echo "  Deteniendo el servicio calibre-server..."echo "--------------------------------------------"
 systemctl stop calibre-server
 
 echo ""
 echo "--------------------------------------------------"
-echo "  Administrando usuarios del servidor Calibre..."
-echo "--------------------------------------------------"
+echo "  Administrando usuarios del servidor Calibre..."echo "--------------------------------------------------"
 echo ""
 echo "Acciones:"
 calibre-server --manage-users
 
 echo ""
 echo "-----------------------------------------------"
-echo "  Re-arrancando el servicio calibre-srever..."
-echo "-----------------------------------------------"
+echo "  Re-arrancando el servicio calibre-srever..."echo "-----------------------------------------------"
 echo ""
 systemctl start calibre-server
 

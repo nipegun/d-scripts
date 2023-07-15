@@ -10,14 +10,12 @@
 # ----------
 
 echo ""
-echo "  BORRANDO LOS ARCHIVOS access.log DE TODO /var/www y sub-directorios..."
-echo ""
+echo "  BORRANDO LOS ARCHIVOS access.log DE TODO /var/www y sub-directorios..."echo ""
 find /var/www/ -type f -name "access.log" -print -exec truncate -s 0 {} \;
 echo ""
 
 echo ""
-echo "  BORRANDO LOS ARCHIVOS error.log DE TODO /var/www y sub-directorios..."
-echo ""
+echo "  BORRANDO LOS ARCHIVOS error.log DE TODO /var/www y sub-directorios..."echo ""
 find /var/www/ -type f -name "error.log" -print -exec truncate -s 0 {} \;
 echo ""
 

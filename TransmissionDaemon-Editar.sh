@@ -10,17 +10,14 @@
 # ----------
 
 echo ""
-echo "  DETENIENDO EL SERVICIO TRANSMISSION-DAEMON..."
-echo ""
+echo "  DETENIENDO EL SERVICIO TRANSMISSION-DAEMON..."echo ""
 service transmission-daemon stop
 
 echo ""
-echo "  EDITANDO EL ARCHIVO DE CONFIGURACIÓN..."
-echo ""
+echo "  EDITANDO EL ARCHIVO DE CONFIGURACIÓN..."echo ""
 nano /etc/transmission-daemon/settings.json
 
 echo ""
-echo "  ARRANCANDO EL SERVICIO TRANSMISSION-DAEMON..."
-echo ""
+echo "  ARRANCANDO EL SERVICIO TRANSMISSION-DAEMON..."echo ""
 service transmission-daemon start
 

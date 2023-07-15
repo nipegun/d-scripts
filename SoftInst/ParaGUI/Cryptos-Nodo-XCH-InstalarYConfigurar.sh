@@ -58,13 +58,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
         1)
 
           echo ""
-          echo "  Instalando o actualizando en la carpeta por defecto (/opt)..."
-          echo ""
+          echo "  Instalando o actualizando en la carpeta por defecto (/opt)..."          echo ""
 
           # Crear carpeta de descarga
             echo ""
-            echo "    Creando carpeta de descarga..."
-            echo ""
+            echo "    Creando carpeta de descarga..."            echo ""
             mkdir -p /root/SoftInst/Cryptos/XCH/ 2> /dev/null
             rm -rf /root/SoftInst/Cryptos/XCH/*
 
@@ -73,13 +71,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Descargar y descomprimir todos los archivos
             echo ""
-            echo "    Descargando el paquete .deb de la instalación..."
-            echo ""
+            echo "    Descargando el paquete .deb de la instalación..."            echo ""
           # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "      El paquete wget no está instalado. Iniciando su instalación..."
-              echo ""
+              echo "      El paquete wget no está instalado. Iniciando su instalación..."              echo ""
               apt-get -y update
               apt-get -y install wget
               echo ""
@@ -91,13 +87,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Instalar el paquete
             echo ""
-            echo "    Instalando el paquete .deb..."
-            echo ""
+            echo "    Instalando el paquete .deb..."            echo ""
             # Comprobar si el paquete gdebi está instalado. Si no lo está, instalarlo.
             #  if [[ $(dpkg-query -s gdebi 2>/dev/null | grep installed) == "" ]]; then
             #    echo ""
-            #    echo "      El paquete gdebi no está instalado. Iniciando su instalación..."
-            #    echo ""
+            #    echo "      El paquete gdebi no está instalado. Iniciando su instalación..."            #    echo ""
             #    apt-get -y update
             #    apt-get -y install gdebi
             #    echo ""
@@ -107,8 +101,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Agregar aplicación al menú
             echo ""
-            echo "    Agregando la aplicación gráfica al menú..."
-            echo ""
+            echo "    Agregando la aplicación gráfica al menú..."            echo ""
             mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
             echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
             echo "Name=xch GUI"                                                     >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
@@ -123,8 +116,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Crear el archivo de auto-ehecución
             echo ""
-            echo "    Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
-            echo ""
+            echo "    Creando el archivo de autoejecución de chia-blockchain para el escritorio..."            echo ""
             mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
             echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
             echo "Name=xch GUI"                                                     >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
@@ -142,13 +134,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
         2)
 
           echo ""
-          echo "  Instalando o actualizando en la carpeta de root...."
-          echo ""
+          echo "  Instalando o actualizando en la carpeta de root...."          echo ""
 
           # Crear carpeta de descarga
             echo ""
-            echo "    Creando carpeta de descarga..."
-            echo ""
+            echo "    Creando carpeta de descarga..."            echo ""
             mkdir -p /root/SoftInst/Cryptos/XCH/ 2> /dev/null
             rm -rf /root/SoftInst/Cryptos/XCH/*
 
@@ -157,13 +147,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Descargar y descomprimir todos los archivos
             echo ""
-            echo "    Descargando el paquete .deb de la instalación..."
-            echo ""
+            echo "    Descargando el paquete .deb de la instalación..."            echo ""
           # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "      El paquete wget no está instalado. Iniciando su instalación..."
-              echo ""
+              echo "      El paquete wget no está instalado. Iniciando su instalación..."              echo ""
               apt-get -y update
               apt-get -y install wget
               echo ""
@@ -173,13 +161,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
 
           echo ""
-          echo "    Extrayendo los archivos de dentro del paquete .deb..."
-          echo ""
+          echo "    Extrayendo los archivos de dentro del paquete .deb..."          echo ""
           # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "      El paquete binutils no está instalado. Iniciando su instalación..."
-              echo ""
+              echo "      El paquete binutils no está instalado. Iniciando su instalación..."              echo ""
               apt-get -y update > /dev/null
               apt-get -y install binutils
               echo ""
@@ -187,13 +173,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           ar xv /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
 
           echo ""
-          echo "    Descomprimiendo el archivo data.tar.xz..."
-          echo ""
+          echo "    Descomprimiendo el archivo data.tar.xz..."          echo ""
           # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "      El paquete tar no está instalado. Iniciando su instalación..."
-              echo ""
+              echo "      El paquete tar no está instalado. Iniciando su instalación..."              echo ""
               apt-get -y update > /dev/null
               apt-get -y install tar
               echo ""
@@ -206,13 +190,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
         3)
 
           echo ""
-          echo "  Instalando o actualizando en la carpeta del usuario no root...."
-          echo ""
+          echo "  Instalando o actualizando en la carpeta del usuario no root...."          echo ""
 
           # Crear carpeta de descarga
             echo ""
-            echo "    Creando carpeta de descarga..."
-            echo ""
+            echo "    Creando carpeta de descarga..."            echo ""
             mkdir -p /root/SoftInst/Cryptos/XCH/ 2> /dev/null
             rm -rf /root/SoftInst/Cryptos/XCH/*
 
@@ -221,13 +203,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Descargar y descomprimir todos los archivos
             echo ""
-            echo "    Descargando el paquete .deb de la instalación..."
-            echo ""
+            echo "    Descargando el paquete .deb de la instalación..."            echo ""
           # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "      El paquete wget no está instalado. Iniciando su instalación..."
-              echo ""
+              echo "      El paquete wget no está instalado. Iniciando su instalación..."              echo ""
               apt-get -y update
               apt-get -y install wget
               echo ""
@@ -237,13 +217,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           wget https://download.chia.net/latest/x86_64-Ubuntu-gui -O /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
 
           echo ""
-          echo "    Extrayendo los archivos de dentro del paquete .deb..."
-          echo ""
+          echo "    Extrayendo los archivos de dentro del paquete .deb..."          echo ""
           # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "      El paquete binutils no está instalado. Iniciando su instalación..."
-              echo ""
+              echo "      El paquete binutils no está instalado. Iniciando su instalación..."              echo ""
               apt-get -y update > /dev/null
               apt-get -y install binutils
               echo ""
@@ -251,13 +229,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           ar xv /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
 
           echo ""
-          echo "    Descomprimiendo el archivo data.tar.xz..."
-          echo ""
+          echo "    Descomprimiendo el archivo data.tar.xz..."          echo ""
           # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "      El paquete tar no está instalado. Iniciando su instalación..."
-              echo ""
+              echo "      El paquete tar no está instalado. Iniciando su instalación..."              echo ""
               apt-get -y update > /dev/null
               apt-get -y install tar
               echo ""
@@ -267,8 +243,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Instalar dependencias necesarias
             #echo ""
-            #echo "    Instalando dependencias necesarias..."
-            #echo ""
+            #echo "    Instalando dependencias necesarias..."            #echo ""
             #apt-get -y install libgtk-3-0
             #apt-get -y install libnotify4
             #apt-get -y install libnss3
@@ -292,8 +267,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Crear la carpeta para el usuario no root
             #echo ""
-            #echo "    Creando la carpeta para el usuario no root..."
-            #echo ""
+            #echo "    Creando la carpeta para el usuario no root..."            #echo ""
             #mkdir -p /home/$vUsuarioNoRoot/Cryptos/XCH/ 2> /dev/null
             #rm -rf /home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/ 2> /dev/null
             #mv /root/SoftInst/Cryptos/XCH/usr/lib/chia-blockchain/ /home/$vUsuarioNoRoot/Cryptos/XCH/
@@ -303,16 +277,14 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Borrar archivos sobrantes
             echo ""
-            echo "    Borrando archivos sobrantes..."
-            echo ""
+            echo "    Borrando archivos sobrantes..."            echo ""
             #rm -rf /root/SoftInst/Cryptos/XCH/debian-binary
             #rm -rf /root/SoftInst/Cryptos/XCH/control.tar.xz
             #rm -rf /root/SoftInst/Cryptos/XCH/data.tar.xz
 
           # Agregar aplicación al menú
             echo ""
-            echo "    Agregando la aplicación gráfica al menú..."
-            echo ""
+            echo "    Agregando la aplicación gráfica al menú..."            echo ""
             mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
             echo "[Desktop Entry]"                                                             > /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
             echo "Name=xch GUI"                                                               >> /home/$vUsuarioNoRoot/.local/share/applications/xch.desktop
@@ -327,8 +299,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Crear el archivo de auto-ehecución
             echo ""
-            echo "    Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
-            echo ""
+            echo "    Creando el archivo de autoejecución de chia-blockchain para el escritorio..."            echo ""
             mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
             echo "[Desktop Entry]"                                                             > /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
             echo "Name=xch GUI"                                                               >> /home/$vUsuarioNoRoot/.config/autostart/xch.desktop
@@ -343,22 +314,19 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Instalar los c-scripts
             echo ""
-            echo "    Instalando los c-scripts..."
-            echo ""
+            echo "    Instalando los c-scripts..."            echo ""
             su $vUsuarioNoRoot -c "curl -sL https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
             find /home/$vUsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
   
           # Parar el daemon
             echo ""
-            echo "    Parando el daemon (si es que está activo)..."
-            echo ""
+            echo "    Parando el daemon (si es que está activo)..."            echo ""
             chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh
             su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/xch-daemon-parar.sh"
 
           # Reparar permisos
             echo ""
-            echo "    Reparando permisos..."
-            echo ""
+            echo "    Reparando permisos..."            echo ""
             # Carpeta Cryptos
               chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/XCH/ -R
               find /home/$vUsuarioNoRoot/Cryptos/XCH/ -type d -exec chmod 750 {} \;

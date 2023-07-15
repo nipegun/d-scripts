@@ -72,8 +72,8 @@ elif [ $cVerSO == "9" ]; then
   echo ""
 
   echo ""
-  echo "    Configurando el servicio..."
-  echo ""
+  echo "    Configurando el servicio..." 
+echo ""
   echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
   echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
   echo "ConditionPathExists=/etc/rc.local"       >> /etc/systemd/system/rc-local.service
@@ -90,8 +90,8 @@ elif [ $cVerSO == "9" ]; then
   echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
 
   echo ""
-  echo "    Creando el archivo /etc/rc.local..."
-  echo ""
+  echo "    Creando el archivo /etc/rc.local..." 
+echo ""
   echo '#!/bin/bash'                                           > /etc/rc.local
   echo ""                                                     >> /etc/rc.local
   echo "/root/scripts/ParaEsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
@@ -99,8 +99,8 @@ elif [ $cVerSO == "9" ]; then
   chmod +x                                                       /etc/rc.local
 
   echo ""
-  echo "    Creando el archivo para meter los comandos..."
-  echo ""
+  echo "    Creando el archivo para meter los comandos..." 
+echo ""
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                          > /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
   echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
@@ -114,8 +114,8 @@ elif [ $cVerSO == "9" ]; then
   chmod 700                                                                                                     /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
   echo ""
-  echo "    Activando y arrancando el servicio..."
-  echo ""
+  echo "    Activando y arrancando el servicio..." 
+echo ""
   systemctl enable rc-local
   systemctl start rc-local.service
 
@@ -126,8 +126,8 @@ elif [ $cVerSO == "10" ]; then
   echo ""
 
   echo ""
-  echo "    Configurando el servicio..."
-  echo ""
+  echo "    Configurando el servicio..." 
+echo ""
   echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
   echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
   echo "ConditionPathExists=/etc/rc.local"       >> /etc/systemd/system/rc-local.service
@@ -144,8 +144,8 @@ elif [ $cVerSO == "10" ]; then
   echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
 
   echo ""
-  echo "    Creando el archivo /etc/rc.local ..."
-  echo ""
+  echo "    Creando el archivo /etc/rc.local ..." 
+echo ""
   echo '#!/bin/bash'                                           > /etc/rc.local
   echo ""                                                     >> /etc/rc.local
   echo "/root/scripts/ParaEsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
@@ -153,8 +153,8 @@ elif [ $cVerSO == "10" ]; then
   chmod +x                                                       /etc/rc.local
 
   echo ""
-  echo "    Creando el archivo para meter los comandos..."
-  echo ""
+  echo "    Creando el archivo para meter los comandos..." 
+echo ""
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                          > /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
   echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
@@ -168,8 +168,8 @@ elif [ $cVerSO == "10" ]; then
   chmod 700                                                                                                     /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
   echo ""
-  echo "    Activando y arrancando el servicio..."
-  echo ""
+  echo "    Activando y arrancando el servicio..." 
+echo ""
   systemctl enable rc-local
   systemctl start rc-local.service
 
@@ -180,8 +180,8 @@ elif [ $cVerSO == "11" ]; then
   echo ""
 
   echo ""
-  echo "    Configurando el servicio..."
-  echo ""
+  echo "    Configurando el servicio..." 
+echo ""
   echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
   echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
   echo "ConditionPathExists=/etc/rc.local"       >> /etc/systemd/system/rc-local.service
@@ -198,8 +198,8 @@ elif [ $cVerSO == "11" ]; then
   echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
 
   echo ""
-  echo "    Creando el archivo /etc/rc.local..."
-  echo ""
+  echo "    Creando el archivo /etc/rc.local..." 
+echo ""
   echo '#!/bin/bash'                                            > /etc/rc.local
   echo ""                                                     >> /etc/rc.local
   echo "/root/scripts/ParaEsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
@@ -207,8 +207,8 @@ elif [ $cVerSO == "11" ]; then
   chmod +x                                                       /etc/rc.local
 
   echo ""
-  echo "    Creando el archivo para meter los comandos..."
-  echo ""
+  echo "    Creando el archivo para meter los comandos..." 
+echo ""
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                          > /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
   echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
@@ -222,8 +222,8 @@ elif [ $cVerSO == "11" ]; then
   chmod 700                                                                                                     /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
   echo ""
-  echo "    Activando y arrancando el servicio..."
-  echo ""
+  echo "    Activando y arrancando el servicio..." 
+echo ""
   systemctl enable rc-local
   systemctl start rc-local.service
 
@@ -234,8 +234,8 @@ elif [ $cVerSO == "12" ]; then
   echo ""
 
   echo ""
-  echo "    Configurando el servicio..."
-  echo ""
+  echo "    Configurando el servicio..." 
+echo ""
   echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
   echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
   echo "ConditionPathExists=/etc/rc.local"       >> /etc/systemd/system/rc-local.service
@@ -252,8 +252,8 @@ elif [ $cVerSO == "12" ]; then
   echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
 
   echo ""
-  echo "    Creando el archivo /etc/rc.local ..."
-  echo ""
+  echo "    Creando el archivo /etc/rc.local ..." 
+echo ""
   echo '#!/bin/bash'                                           > /etc/rc.local
   echo ""                                                     >> /etc/rc.local
   echo "/root/scripts/ParaEsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
@@ -261,8 +261,8 @@ elif [ $cVerSO == "12" ]; then
   chmod +x                                                       /etc/rc.local
 
   echo ""
-  echo "    Creando el archivo para meter los comandos..."
-  echo ""
+  echo "    Creando el archivo para meter los comandos..." 
+echo ""
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                          > /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
   echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
@@ -276,8 +276,8 @@ elif [ $cVerSO == "12" ]; then
   chmod 700                                                                                                     /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
   echo ""
-  echo "    Activando y arrancando el servicio..."
-  echo ""
+  echo "    Activando y arrancando el servicio..." 
+echo ""
   systemctl enable rc-local
   systemctl start rc-local.service
 

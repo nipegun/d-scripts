@@ -42,9 +42,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación del servidor SQLServer para Debian 7 (Wheezy)..."
-
   echo ""
 
   echo ""
@@ -54,9 +52,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-
   echo "  Iniciando el script de instalación del servidor SQLServer para Debian 8 (Jessie)..."
-
   echo ""
 
   echo ""
@@ -66,10 +62,8 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor SQLServer para Debian 9 (Stretch)..."
-  echo "---------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script de instalación del servidor SQLServer para Debian 9 (Stretch)..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
@@ -78,10 +72,8 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor SQLServer para Debian 10 (Buster)..."
-  echo "---------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script de instalación del servidor SQLServer para Debian 10 (Buster)..." 
+echo ""
 
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
@@ -90,10 +82,8 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor SQLServer para Debian 11 (Bullseye)..."
-  echo "----------------------------------------------------------------------------------------"
-  echo ""
+  echo "  Iniciando el script de instalación del servidor SQLServer para Debian 11 (Bullseye)..." 
+echo ""
 
   # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
@@ -150,8 +140,7 @@ elif [ $cVerSO == "11" ]; then
     systemctl status mssql-server --no-pager
   # Notificar de fin de la instalación
     echo ""
-    echo "  Instalación finalizada..."
-    echo ""
+    echo "  Instalación finalizada..."    echo ""
     echo "  Para conectarte a la CLI de SQLServer ejecuta:"
     echo ""
     echo "    sqlcmd -S localhost -U sa -P 'Contraseña'"

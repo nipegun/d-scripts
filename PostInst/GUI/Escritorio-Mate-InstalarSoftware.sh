@@ -40,8 +40,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "--------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Mate en Debian 7 (Wheezy)..."
-  echo "--------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de software para el escritorio Mate en Debian 7 (Wheezy)..."  echo "--------------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -52,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "--------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Mate en Debian 8 (Jessie)..."
-  echo "--------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de software para el escritorio Mate en Debian 8 (Jessie)..."  echo "--------------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -64,8 +62,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "---------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Mate en Debian 9 (Stretch)..."
-  echo "---------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de software para el escritorio Mate en Debian 9 (Stretch)..."  echo "---------------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -76,8 +73,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "---------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Mate en Debian 10 (Buster)..."
-  echo "---------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de software para el escritorio Mate en Debian 10 (Buster)..."  echo "---------------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -88,8 +84,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Mate en Debian 11 (Bullseye)..."
-  echo "-----------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de software para el escritorio Mate en Debian 11 (Bullseye)..."  echo "-----------------------------------------------------------------------------------------------------"
   echo ""
 
   # Desinstalar cosas específicas de mate-esktop

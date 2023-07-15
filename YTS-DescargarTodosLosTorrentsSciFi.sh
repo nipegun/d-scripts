@@ -26,16 +26,14 @@ echo ""
 
 # Construir el archivo con todas las URLs de las páginas de cada peli
 echo ""
-echo "Construyendo el archivo con todas las URLs de cada peli..."
-echo ""
+echo "Construyendo el archivo con todas las URLs de cada peli..."echo ""
 mkdir -p $CarpetaDeDescarga 2>/dev/null
 touch         $CarpetaDeDescarga/URLsPagPelis.txt
 truncate -s 0 $CarpetaDeDescarga/URLsPagPelis.txt
 for NroPag in $(seq $NroPagIni $NroPagFin);
   do
     echo ""
-    echo "Revisando la página de resultados nro $NroPag..."
-    echo ""
+    echo "Revisando la página de resultados nro $NroPag..."    echo ""
     curl --insecure --silent https://$DominioYTS/browse-movies/0/all/$Genero/0/latest/0/all?page=$NroPag | grep href | grep title | grep movies | cut -d '"' -f 2 >> $CarpetaDeDescarga/URLsPagPelis.txt
 
     # Comprobar si la página de resultados ya no muestra pelis y, si eso, parar el buble for
@@ -56,8 +54,7 @@ for NroPag in $(seq $NroPagIni $NroPagFin);
 
 # Revisar una a una cada URL de cada peli para extraer los enlaces de descarga de los torrents
 echo ""
-echo "Revisando una a una las URLs de las pelis para buscar enlaces a torrents..."
-echo ""
+echo "Revisando una a una las URLs de las pelis para buscar enlaces a torrents..."echo ""
 touch         $CarpetaDeDescarga/EnlacesEnURLsPagPelis.txt
 truncate -s 0 $CarpetaDeDescarga/EnlacesEnURLsPagPelis.txt
 for URLPeli in $(cat $CarpetaDeDescarga/URLsPagPelis.txt)
@@ -74,8 +71,7 @@ cat $CarpetaDeDescarga/EnlacesEnURLsPagPelis.txt | cut -d '"' -f 2 > $CarpetaDeD
 
 # Guardar los archivos torrent en una carpeta
 echo ""
-echo "Guardando archivos torrent..."
-echo ""
+echo "Guardando archivos torrent..."echo ""
 mkdir -p $CarpetaDeDescarga/Torrents/$Genero/ 2> /dev/null
 cd $CarpetaDeDescarga/Torrents/$Genero/
 for EnlaceAlTorrent in $(cat $CarpetaDeDescarga/EnlacesATorrents.txt)
@@ -93,8 +89,7 @@ for EnlaceAlTorrent in $(cat $CarpetaDeDescarga/EnlacesATorrents.txt)
 # Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "El paquete zip no está instalado. Iniciando su instalación..."
-    echo ""
+    echo "El paquete zip no está instalado. Iniciando su instalación..."    echo ""
     apt-get -y update
     apt-get -y install zip
     echo ""
@@ -102,8 +97,7 @@ fi
 
 # Comprimir todos los archivos en un solo archivo
 echo ""
-echo "Comprimiendo torrents en un archivo zip..."
-echo ""
+echo "Comprimiendo torrents en un archivo zip..."echo ""
 zip -9 -r $CarpetaDeDescarga/Torrents/$Genero.zip $CarpetaDeDescarga/Torrents/$Genero/
 
 echo ""

@@ -32,8 +32,8 @@
 
 # Borrar archivos comprimidos de logs viejos
   echo ""
-  echo "    Borrando archivos comprimidos de logs viejos..."
-  echo ""
+  echo "    Borrando archivos comprimidos de logs viejos..." 
+echo ""
   find /bin/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
   find /boot/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
   find /dev/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \; 2> /dev/null
@@ -55,8 +55,8 @@
 
 # Truncar logs activos
   echo ""
-  echo "    Truncando archivos de logs activos..."
-  echo ""
+  echo "    Truncando archivos de logs activos..." 
+echo ""
   find /bin/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
   find /boot/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
   find /dev/        -type f -name "*.log" -print -exec truncate -s 0 {} \; 2> /dev/null

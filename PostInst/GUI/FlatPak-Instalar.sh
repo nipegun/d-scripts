@@ -112,8 +112,8 @@ elif [ $cVerSO == "12" ]; then
   echo ""
 
   echo ""
-  echo "    Actualizando lista de paquetes..."
-  echo ""
+  echo "    Actualizando lista de paquetes..." 
+echo ""
   apt-get -y update
 
   echo ""
@@ -122,13 +122,13 @@ elif [ $cVerSO == "12" ]; then
   apt-get -y install flatpak
 
   echo ""
-  echo "    Instalando plugin para gnome software..."
-  echo ""
+  echo "    Instalando plugin para gnome software..." 
+echo ""
   apt-get -y install gnome-software-plugin-flatpak
 
   echo ""
-  echo "    Agregando el repositorio flathuub..."
-  echo ""
+  echo "    Agregando el repositorio flathuub..." 
+echo ""
   flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 fi

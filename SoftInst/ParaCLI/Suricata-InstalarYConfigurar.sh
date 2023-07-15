@@ -140,8 +140,7 @@ elif [ $cVerSO == "11" ]; then
           1)
 
             echo ""
-            echo "  Instalando paquete Suricata, dependencias y otros paquetes útiles..."
-            echo ""
+            echo "  Instalando paquete Suricata, dependencias y otros paquetes útiles..."            echo ""
 
             # Actualizar el sistema
               apt-get -y update
@@ -155,8 +154,7 @@ elif [ $cVerSO == "11" ]; then
           2)
 
             echo ""
-            echo "  Configurando para un Debian con una única interfaz de red..."
-            echo ""
+            echo "  Configurando para un Debian con una única interfaz de red..."            echo ""
 
             # Determinar las interfaces activas que tienen asignada una IP
               aInterfacesActivasConIP=($(/root/scripts/d-scripts/Red-Interfaces-Activas-ConIPAsignada.sh | grep "→" | cut -d ':' -f2))
@@ -164,13 +162,11 @@ elif [ $cVerSO == "11" ]; then
               if [ $(echo ${#aInterfacesActivasConIP[@]}) == "1" ]; then
                 # Detener el servicio
                   echo ""
-                  echo "    Deteniendo el servicio suricata..."
-                  echo ""
+                  echo "    Deteniendo el servicio suricata..."                  echo ""
                   systemctl stop suricata
                 # Configurar
                   echo ""
-                  echo "    Modificando archivos de confguración..."
-                  echo ""
+                  echo "    Modificando archivos de confguración..."                  echo ""
                   # Indicar la interfaz sobre la que va a correr
                     echo ""
                     echo "      Se ha encontrado una única interfaz activa con IP asignada: ${aInterfacesActivasConIP[0]}"
@@ -198,8 +194,7 @@ elif [ $cVerSO == "11" ]; then
                       fi
                 # Crear reglas básica
                   echo ""
-                  echo "    Creando reglas básicas..."
-                  echo ""
+                  echo "    Creando reglas básicas..."                  echo ""
                   touch /etc/suricata/rules/suricata.rules
                   # Registrar quién nos hace ping
                     echo 'alert icmp any any -> any any (msg: "Detectado paquete ICMP"; sid:2000001; rev:1;)'                                  >> /etc/suricata/rules/suricata.rules
@@ -241,8 +236,7 @@ elif [ $cVerSO == "11" ]; then
                   echo ""
                 # Iniciar el servicio
                   echo ""
-                  echo "    Iniciando el servicio suricata..."
-                  echo ""
+                  echo "    Iniciando el servicio suricata..."                  echo ""
                   systemctl start suricata
               elif [ $(echo ${#aInterfacesActivasConIP[@]}) == "" ]; then
                 echo ""
@@ -286,8 +280,7 @@ elif [ $cVerSO == "11" ]; then
           4)
 
             echo ""
-            echo "  Actualizando la fuente de reglas..."
-            echo ""
+            echo "  Actualizando la fuente de reglas..."            echo ""
             suricata-update update-sources
             echo ""
             echo "  Hay disponibles para descargar reglas de estas fuentes:"
@@ -298,8 +291,7 @@ elif [ $cVerSO == "11" ]; then
               #suricata-update
             
             echo ""
-            echo "  Metiendo todas las reglas disponibles dentro del archivo /var/lib/suricata/rules/suricata.rules..."
-            echo ""
+            echo "  Metiendo todas las reglas disponibles dentro del archivo /var/lib/suricata/rules/suricata.rules..."            echo ""
             suricata-update
 
 To enable rules that are disabled by default, use /etc/suricata/enable.conf

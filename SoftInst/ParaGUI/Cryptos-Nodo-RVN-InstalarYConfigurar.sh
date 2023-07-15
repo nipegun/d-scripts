@@ -50,12 +50,10 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
         1)
 
           echo ""
-          echo "  Instalando el nodo RVN para modo CLI desde la web oficial..."
-          echo ""
+          echo "  Instalando el nodo RVN para modo CLI desde la web oficial..."          echo ""
 
           echo ""
-          echo "    Determinando la última versión de raven disponible en la web oficial..."
-          echo ""
+          echo "    Determinando la última versión de raven disponible en la web oficial..."          echo ""
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
               echo ""
@@ -72,16 +70,14 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           echo ""
 
           echo ""
-          echo "    Determinando la URL del archivo a descargar..."
-          echo ""
+          echo "    Determinando la URL del archivo a descargar..."          echo ""
           vURLArchivo=$(curl -sL https://ravencoin.org/wallet/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep tar.gz)
           echo ""
           echo "      La URL del archivo es: $vURLArchivo"
           echo ""
 
           echo ""
-          echo "    Intentando descargar el archivo..."
-          echo ""
+          echo "    Intentando descargar el archivo..."          echo ""
           mkdir -p /root/SoftInst/Cryptos/RVN/ 2> /dev/null
           rm -rf /root/SoftInst/Cryptos/RVN/*
           cd /root/SoftInst/Cryptos/RVN/
@@ -97,8 +93,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           wget $vURLArchivo -O /root/SoftInst/Cryptos/RVN/raven$vUltVersRaven.tar.gz
 
           echo ""
-          echo "    Descomprimiendo el archivo..."
-          echo ""
+          echo "    Descomprimiendo el archivo..."          echo ""
           # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
@@ -113,8 +108,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           find /root/SoftInst/Cryptos/RVN/ -type d -name "raven*" -exec mv {} /root/SoftInst/Cryptos/RVN/"raven-$vUltVersRaven"/ \; 2> /dev/null
 
           echo ""
-          echo "    Creando carpetas y archivos necesarios para ese usuario..."
-          echo ""
+          echo "    Creando carpetas y archivos necesarios para ese usuario..."          echo ""
           mkdir -p /home/$vUsuarioNoRoot/.raven/
           touch    /home/$vUsuarioNoRoot/.raven/raven.conf
           echo "rpcuser=rvnrpc"           > /home/$vUsuarioNoRoot/.raven/raven.conf
@@ -147,8 +141,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Iniciar el demonio
             echo ""
-            echo "  Arrancando ravencoind..."
-            echo ""
+            echo "  Arrancando ravencoind..."            echo ""
             su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh"
             sleep 5
 
@@ -163,8 +156,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Autoejecución del nodo al iniciar el sistema
             echo ""
-            echo "    Agregando ravend a los ComandosPostArranque..."
-            echo ""
+            echo "    Agregando ravend a los ComandosPostArranque..."            echo ""
             chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh
             echo "su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
             echo ""
@@ -174,12 +166,10 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
         2)
 
           echo ""
-          echo "  Instalando el nodo RVN para modo CLI desde la web de GitHub..."
-          echo ""
+          echo "  Instalando el nodo RVN para modo CLI desde la web de GitHub..."          echo ""
 
           echo ""
-          echo "    Determinando la última versión de raven disponible en GitHub..."
-          echo ""
+          echo "    Determinando la última versión de raven disponible en GitHub..."          echo ""
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
               echo ""
@@ -196,8 +186,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           echo ""
 
           echo ""
-          echo "    Determinando la URL del archivo a descargar..."
-          echo ""
+          echo "    Determinando la URL del archivo a descargar..."          echo ""
           vNombreArchivo=$(curl -sL https://github.com/RavenProject/Ravencoin/releases/tag/v$vUltVersRaven | grep href | grep inux | grep -v isable | grep x86 | cut -d'"' -f2 | cut -d '/' -f7)
           echo ""
           echo "      El nombre del archivo es $vNombreArchivo"
@@ -209,8 +198,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           echo ""
 
           echo ""
-          echo "    Intentando descargar el archivo..."
-          echo ""
+          echo "    Intentando descargar el archivo..."          echo ""
           mkdir -p /root/SoftInst/Cryptos/RVN/ 2> /dev/null
           rm -rf /root/SoftInst/Cryptos/RVN/*
           cd /root/SoftInst/Cryptos/RVN/
@@ -226,8 +214,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           wget $vURLArchivo -O /root/SoftInst/Cryptos/RVN/raven$vUltVersRaven.tar.gz
 
           echo ""
-          echo "    Descomprimiendo el archivo..."
-          echo ""
+          echo "    Descomprimiendo el archivo..."          echo ""
           # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
@@ -242,8 +229,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           find /root/SoftInst/Cryptos/RVN/ -type d -name "raven*" -exec mv {} /root/SoftInst/Cryptos/RVN/"raven-$vUltVersRaven"/ \; 2> /dev/null
 
           echo ""
-          echo "    Creando carpetas y archivos necesarios para ese usuario..."
-          echo ""
+          echo "    Creando carpetas y archivos necesarios para ese usuario..."          echo ""
           mkdir -p /home/$vUsuarioNoRoot/.raven/
           touch    /home/$vUsuarioNoRoot/.raven/raven.conf
           echo "rpcuser=rvnrpc"           > /home/$vUsuarioNoRoot/.raven/raven.conf
@@ -276,8 +262,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Iniciar el demonio
             echo ""
-            echo "  Arrancando ravencoind..."
-            echo ""
+            echo "  Arrancando ravencoind..."            echo ""
             su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh"
             sleep 5
 
@@ -292,8 +277,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Autoejecución del nodo al iniciar el sistema
             echo ""
-            echo "    Agregando ravend a los ComandosPostArranque..."
-            echo ""
+            echo "    Agregando ravend a los ComandosPostArranque..."            echo ""
             chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/rvn-daemon-iniciar.sh
             echo "su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/rvn-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
             echo ""
@@ -303,13 +287,11 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
         3)
 
           echo ""
-          echo "  Agregando configuración para el modo GUI..."
-          echo ""
+          echo "  Agregando configuración para el modo GUI..."          echo ""
 
           # Icono de lanzamiento en el menú gráfico
             echo ""
-            echo "    Agregando la aplicación gráfica al menú..."
-            echo ""
+            echo "    Agregando la aplicación gráfica al menú..."            echo ""
             mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/
             echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.local/share/applications/rvn.desktop
@@ -326,8 +308,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Autoejecución gráfica de Ravencoin
             echo ""
-            echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."
-            echo ""
+            echo "  Creando el archivo de autoejecución de raven-qt para escritorio..."            echo ""
             mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/
             echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.config/autostart/rvn.desktop

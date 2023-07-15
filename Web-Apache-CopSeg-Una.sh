@@ -26,8 +26,8 @@ FechaDeEjecCopSegInt=$(date +A%Y-M%m-D%d@%T)
 
 # Borrar copias anteriores
   echo ""
-  echo "  Borrando todas las copias de seguridad anteriores..."
-  echo ""
+  echo "  Borrando todas las copias de seguridad anteriores..." 
+echo ""
   rm /CopSegInt/* -R
 
 # Ejecutar copia
@@ -64,8 +64,7 @@ FechaDeEjecCopSegInt=$(date +A%Y-M%m-D%d@%T)
 
   # LetsEncrypt
     echo ""
-    echo "Creando copia de seguridad de los certificados de LetsEncrypt..."
-    echo ""
+    echo "Creando copia de seguridad de los certificados de LetsEncrypt..."    echo ""
     mkdir -p /CopSegInt/$FechaDeEjecCopSegInt/DiscoDuro/etc/letsencrypt/
     cp -r /etc/letsencrypt/* /CopSegInt/$FechaDeEjecCopSegInt/DiscoDuro/etc/letsencrypt/
 

@@ -17,37 +17,29 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------"
   echo "  Iniciando el script para routear todo el tráfico de Debian 7 (Wheezy) mediante TOR..."
-  echo "-----------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -57,9 +49,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------------"
   echo "  Iniciando el script para routear todo el tráfico de Debian 8 (Jessie) mediante TOR..."
-  echo "-----------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -70,8 +60,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para routear todo el tráfico de Debian 9 (Stretch) mediante TOR..."
-  echo "------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script para routear todo el tráfico de Debian 9 (Stretch) mediante TOR..."  echo "------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -82,8 +71,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para routear todo el tráfico de Debian 10 (Buster) mediante TOR..."
-  echo "------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script para routear todo el tráfico de Debian 10 (Buster) mediante TOR..."  echo "------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -94,16 +82,14 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "--------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script para routear todo el tráfico de Debian 11 (Bullseye) mediante TOR..."
-  echo "--------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script para routear todo el tráfico de Debian 11 (Bullseye) mediante TOR..."  echo "--------------------------------------------------------------------------------------------"
   echo ""
 
   # Determinar IP Pública del equipo
      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
           echo ""
-          echo "  curl no está instalado. Iniciando su instalación..."
-          echo ""
+          echo "  curl no está instalado. Iniciando su instalación..."          echo ""
           apt-get -y update > /dev/null
           apt-get -y install curl
           echo ""
@@ -132,8 +118,7 @@ elif [ $cVerSO == "11" ]; then
   # Comprobar si el paquete tor está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s tor 2>/dev/null | grep installed) == "" ]]; then
        echo ""
-       echo "  tor no está instalado. Iniciando su instalación..."
-       echo ""
+       echo "  tor no está instalado. Iniciando su instalación..."       echo ""
        apt-get -y update > /dev/null
        apt-get -y install tor
        echo ""
@@ -158,8 +143,7 @@ elif [ $cVerSO == "11" ]; then
      # Comprobar si el paquete iptables está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s iptables 2>/dev/null | grep installed) == "" ]]; then
           echo ""
-          echo "  iptables no está instalado. Iniciando su instalación..."
-          echo ""
+          echo "  iptables no está instalado. Iniciando su instalación..."          echo ""
           apt-get -y update > /dev/null
           apt-get -y install iptables
           echo ""

@@ -19,8 +19,7 @@ cColorRojo='\033[1;31m'
 cFinColor='\033[0m'
 
 echo ""
-echo "  Iniciando el script para re-inicializar el clúster Galera..."
-echo ""
+echo "  Iniciando el script para re-inicializar el clúster Galera..."echo ""
 # Obtener las direcciones IP que forman parte del cluster
   vIPsDelCluster=$(cat /etc/mysql/mariadb.conf.d/60-galera.cnf | grep gcomm | cut -d ':' -f2)
   echo ""
@@ -28,18 +27,18 @@ echo ""
   echo "    $vIPsDelCluster"
 # Parar el servicio MariaDB
   echo ""
-  echo "    Parando el servicio mariadb..."
-  echo ""
+  echo "    Parando el servicio mariadb..." 
+echo ""
   systemctl stop mariadb
 # Quitar las IPs del cluster
   echo ""
-  echo "    Quitando los nodos..."
-  echo ""
+  echo "    Quitando los nodos..." 
+echo ""
   sed -i -e 's|^wsrep_cluster_address.*|wsrep_cluster_address = gcomm://|g' /etc/mysql/mariadb.conf.d/60-galera.cnf
 # Inicializar el cluster
   echo ""
-  echo "    Intentando reinicializar el clúster..."
-  echo ""
+  echo "    Intentando reinicializar el clúster..." 
+echo ""
   vEsSeguroInicializarlo=$(cat /var/lib/mysql/grastate.dat | grep trap | cut -d':' -f2 | sed 's- --g')
   if [[ $vEsSeguroInicializarlo == "0" ]]; then
     echo ""
@@ -54,8 +53,8 @@ echo ""
   
 # Volver a iniciar el servicio MariaDB
   echo ""
-  echo "    Volviendo a iniciar el servicio mariadb..."
-  echo ""
+  echo "    Volviendo a iniciar el servicio mariadb..." 
+echo ""
   systemctl start mariadb
 # Volver a agregar las IPs del cluster
   sed -i -e "s|^wsrep_cluster_address.*|wsrep_cluster_address = gcomm:$vIPsDelCluster|g" /etc/mysql/mariadb.conf.d/60-galera.cnf

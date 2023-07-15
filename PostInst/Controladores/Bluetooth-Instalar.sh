@@ -19,12 +19,13 @@ apt-get -y update 2> /dev/null
 apt-get -y install dialog 2> /dev/null
 
 menu=(dialog --timeout 5 --checklist "Elección del adaptador:" 22 76 16)
-  opciones=(1 "Bluetoth Intel - Tarjeta Centrino 7260 (8087:07dc)" off
-            2 "2" off
-            3 "3" off
-            4 "4" off)
+  opciones=(
+    1 "Bluetoth Intel - Tarjeta Centrino 7260 (8087:07dc)" off
+    2 "2" off
+    3 "3" off
+    4 "4" off
+  )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  clear
 
   for choice in $choices
     do
@@ -52,4 +53,4 @@ menu=(dialog --timeout 5 --checklist "Elección del adaptador:" 22 76 16)
 
 done
 
-    
+

@@ -40,8 +40,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de DockerCE para Debian 7 (Wheezy)..."
-  echo "----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de DockerCE para Debian 7 (Wheezy)..."  echo "----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -52,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de DockerCE para Debian 8 (Jessie)..."
-  echo "----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de DockerCE para Debian 8 (Jessie)..."  echo "----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -64,8 +62,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de DockerCE para Debian 9 (Stretch)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de DockerCE para Debian 9 (Stretch)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -76,8 +73,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de DockerCE para Debian 10 (Buster)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de DockerCE para Debian 10 (Buster)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common
@@ -93,13 +89,12 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "-------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de DockerCE para Debian 11 (Bullseye)..."
-  echo "-------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de DockerCE para Debian 11 (Bullseye)..."  echo "-------------------------------------------------------------------------------"
   echo ""
 
   echo ""
-  echo "  Instalando paquetes necesarios..."
-  echo ""
+  echo "  Instalando paquetes necesarios..." 
+echo ""
   apt-get -y install wget
   apt-get -y install apt-transport-https
   apt-get -y install ca-certificates
@@ -108,24 +103,24 @@ elif [ $cVerSO == "11" ]; then
   apt-get -y install software-properties-common
 
   echo ""
-  echo "  Descargando la clave PGP del KeyRing..."
-  echo ""
+  echo "  Descargando la clave PGP del KeyRing..." 
+echo ""
   wget -O- https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
   
   echo ""
-  echo "  Agregando el repositorio..."
-  echo ""
+  echo "  Agregando el repositorio..." 
+echo ""
   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
   apt-get update
 
   echo ""
-  echo "  Instalando docker-ce..."
-  echo ""
+  echo "  Instalando docker-ce..." 
+echo ""
   apt-get -y install docker-ce
 
   echo ""
-  echo "  Activando y arrancando el servicio de docker..."
-  echo ""
+  echo "  Activando y arrancando el servicio de docker..." 
+echo ""
   systemctl enable docker
   systemctl start docker
 

@@ -27,7 +27,7 @@
 
 # Listar hubs
   echo ""
-  echo "  Listando hubs de CrowdSed activados en el sistema..."
-  echo ""
+  echo "  Listando hubs de CrowdSed activados en el sistema..." 
+echo ""
   cscli hub list
 

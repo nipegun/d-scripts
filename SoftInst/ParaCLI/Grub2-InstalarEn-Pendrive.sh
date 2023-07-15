@@ -117,24 +117,24 @@ elif [ $cVerSO == "11" ]; then
     fi
 
   echo ""
-  echo "  Creando la carpeta para montar el pendrive..."
-  echo ""
+  echo "  Creando la carpeta para montar el pendrive..." 
+echo ""
   mkdir -p /Particiones/USB/PendriveGrub2/ 2> /dev/null
 
   echo ""
-  echo "  Montando la primera partición del pendrive en /Particiones/USB/PendriveGrub2/..."
-  echo ""
+  echo "  Montando la primera partición del pendrive en /Particiones/USB/PendriveGrub2/..." 
+echo ""
   umount "$vDisposPen"1
   mount -t auto "$vDisposPen"1 /Particiones/USB/PendriveGrub2/
 
   echo ""
-  echo "  Borrando archivos viejos de instalaciones anteriores..."
-  echo ""
+  echo "  Borrando archivos viejos de instalaciones anteriores..." 
+echo ""
   rm -rf /Particiones/USB/PendriveGrub2/boot
 
   echo ""
-  echo "  Indicando que /dev/sda sea el primer disco..."
-  echo ""
+  echo "  Indicando que /dev/sda sea el primer disco..." 
+echo ""
   mkdir -p /Particiones/USB/PendriveGrub2/boot/grub/
   echo "(hd0) /dev/sda"  > /Particiones/USB/PendriveGrub2/boot/grub/device.map
   echo "(hd1) /dev/sdb" >> /Particiones/USB/PendriveGrub2/boot/grub/device.map
@@ -143,14 +143,14 @@ elif [ $cVerSO == "11" ]; then
   echo "(hd4) /dev/sde" >> /Particiones/USB/PendriveGrub2/boot/grub/device.map
   
   echo ""
-  echo "  Instalando grub2 para MBR en $vDisposPen..."
-  echo ""
+  echo "  Instalando grub2 para MBR en $vDisposPen..." 
+echo ""
   mkdir -p /Particiones/USB/PendriveGrub2/boot/
   grub-install $vDisposPen --debug --target=i386-pc --boot-directory=/Particiones/USB/PendriveGrub2/boot
 
   echo ""
-  echo "  Instalando grub2 para EFI en $vDisposPen..."
-  echo ""
+  echo "  Instalando grub2 para EFI en $vDisposPen..." 
+echo ""
   mkdir -p /Particiones/USB/PendriveGrub2/
   # Comprobar si el paquete efibootmgr está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s efibootmgr 2>/dev/null | grep installed) == "" ]]; then
@@ -163,8 +163,8 @@ elif [ $cVerSO == "11" ]; then
   grub-install $vDisposPen --debug --target=x86_64-efi --efi-directory=/Particiones/USB/PendriveGrub2 --bootloader-id=GRUB --removable
 
   echo ""
-  echo "  Creando el archivo grub.cfg..."
-  echo ""
+  echo "  Creando el archivo grub.cfg..." 
+echo ""
   grub-mkconfig -o /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg
   cp /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg.bak
   echo 'if [ ${grub_platform} == "pc" ]; then'                                       > /Particiones/USB/PendriveGrub2/boot/grub/grub.cfg

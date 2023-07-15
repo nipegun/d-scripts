@@ -31,16 +31,14 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
 # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "  git no está instalado. Iniciando su instalación..."
-    echo ""
+    echo "  git no está instalado. Iniciando su instalación..."    echo ""
     apt-get -y update
     apt-get -y install git
     echo ""
   fi
 
 echo ""
-echo "  Descargando el repositorio de XMRig..."
-echo ""
+echo "  Descargando el repositorio de XMRig..."echo ""
 rm -rf ~/Cryptos/XMR/minero/
 mkdir -p ~/Cryptos/XMR/
 cd ~/Cryptos/XMR/
@@ -48,8 +46,7 @@ git clone https://github.com/xmrig/xmrig.git
 cd xmrig
 
 echo ""
-echo "  Compilando..."
-echo ""
+echo "  Compilando..."echo ""
 # Crear la carpeta
   mkdir build
   cd build
@@ -70,8 +67,7 @@ echo ""
   rm -rf ~/Cryptos/XMR/xmrig/
 
 echo ""
-echo "  Creando ID para el minero..."
-echo ""
+echo "  Creando ID para el minero..."echo ""
 # A partir de la MAC WiFi
    # Obtener MAC de la WiFi
      #vDirMACwlan0=$(ip addr show wlan0 | grep link/ether | cut -d" " -f6 | sed 's/://g')
@@ -86,8 +82,7 @@ echo ""
    echo "$vIdMinero" > ~/Cryptos/XMR/minero/IdMinero.txt
 
 echo ""
-echo "  Creando el script para ejecutar manualmente el minero..."
-echo ""
+echo "  Creando el script para ejecutar manualmente el minero..."echo ""
 echo '#!/bin/bash'                                                                                                > ~/Cryptos/XMR/minero/Minar.sh
 echo ""                                                                                                          >> ~/Cryptos/XMR/minero/Minar.sh
 echo 'vHilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)'               >> ~/Cryptos/XMR/minero/Minar.sh
@@ -100,8 +95,7 @@ echo '~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$
 chmod +x  ~/Cryptos/XMR/minero/Minar.sh
 
 echo ""
-echo "  Creando el script para ejecutar manualmente el minero en background..."
-echo ""
+echo "  Creando el script para ejecutar manualmente el minero en background..."echo ""
 echo '#!/bin/bash'                                                                                                             > ~/Cryptos/XMR/minero/MinarEnBackground.sh
 echo ""                                                                                                                       >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
 echo 'vHilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)'                            >> ~/Cryptos/XMR/minero/MinarEnBackground.sh
@@ -114,7 +108,6 @@ echo '~/Cryptos/XMR/minero/xmrig -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$
 chmod +x  ~/Cryptos/XMR/minero/MinarEnBackground.sh
 
 echo ""
-echo "  Minando con ID $vIdMinero..."
-echo ""
+echo "  Minando con ID $vIdMinero..."echo ""
 ~/Cryptos/XMR/minero/Minar.sh
 

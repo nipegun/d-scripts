@@ -102,8 +102,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Obtener el númer de la última versión LTS de Zabbix
     echo ""
-    echo "    Obteniendo el número de la última versión LTS de Zabbix..."
-    echo ""
+    echo "    Obteniendo el número de la última versión LTS de Zabbix..."    echo ""
     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
         echo ""
@@ -140,13 +139,11 @@ elif [ $cVerSO == "11" ]; then
           1)
 
             echo ""
-            echo "  Instalando Zabbix LTS con base de datos MariaDB y servidor web apache2..."
-            echo ""
+            echo "  Instalando Zabbix LTS con base de datos MariaDB y servidor web apache2..."            echo ""
 
             # Agregar el repositorio
               echo ""
-              echo "    Agregando el repositorio..."
-              echo ""
+              echo "    Agregando el repositorio..."              echo ""
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -163,8 +160,7 @@ elif [ $cVerSO == "11" ]; then
 
             # Instalar el frontend y el agente
               echo ""
-              echo "    Instalando el frontend y el repositorio..."
-              echo ""
+              echo "    Instalando el frontend y el repositorio..."              echo ""
               apt-get -y install zabbix-server-mysql
               apt-get -y install zabbix-frontend-php
               apt-get -y install zabbix-apache-conf
@@ -174,8 +170,7 @@ elif [ $cVerSO == "11" ]; then
 
             # Crear la base de datos
               echo ""
-              echo "    Creando la base de datos..."
-              echo ""
+              echo "    Creando la base de datos..."              echo ""
               mysql -e "create database zabbix character set utf8mb4 collate utf8mb4_bin"
               mysql -e "create user zabbix@localhost identified by 'Pass123'"
               mysql -e "grant all privileges on zabbix.* to zabbix@localhost"
@@ -230,13 +225,11 @@ elif [ $cVerSO == "11" ]; then
           2)
 
             echo ""
-            echo "  Instalando Zabbix LTS con base de datos MariaDB y servidor web nginx..."
-            echo ""
+            echo "  Instalando Zabbix LTS con base de datos MariaDB y servidor web nginx..."            echo ""
 
             # Agregar el repositorio
               echo ""
-              echo "    Agregando el repositorio..."
-              echo ""
+              echo "    Agregando el repositorio..."              echo ""
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -253,8 +246,7 @@ elif [ $cVerSO == "11" ]; then
 
             # Instalar el frontend y el agente
               echo ""
-              echo "    Instalando el frontend y el repositorio..."
-              echo ""
+              echo "    Instalando el frontend y el repositorio..."              echo ""
               apt-get -y install zabbix-server-mysql
               apt-get -y install zabbix-frontend-php
               apt-get -y install zabbix-nginx-conf
@@ -264,8 +256,7 @@ elif [ $cVerSO == "11" ]; then
 
             # Crear la base de datos
               echo ""
-              echo "    Creando la base de datos..."
-              echo ""
+              echo "    Creando la base de datos..."              echo ""
               mysql -e "create database zabbix character set utf8mb4 collate utf8mb4_bin"
               mysql -e "create user zabbix@localhost identified by 'Pass123'"
               mysql -e "grant all privileges on zabbix.* to zabbix@localhost"
@@ -334,8 +325,7 @@ elif [ $cVerSO == "11" ]; then
           3)
 
             echo ""
-            echo "  Instalando Zabbix (última versión) con base de datos MariaDB y servidor web apache2..."
-            echo ""
+            echo "  Instalando Zabbix (última versión) con base de datos MariaDB y servidor web apache2..."            echo ""
 
             echo ""
             echo -e "${cColorRojo}    Comandos todavía no preparados...${cFinColor}"
@@ -346,8 +336,7 @@ elif [ $cVerSO == "11" ]; then
           4)
 
             echo ""
-            echo "  Instalando Zabbix (última versión) con base de datos MariaDB y servidor web nginx..."
-            echo ""
+            echo "  Instalando Zabbix (última versión) con base de datos MariaDB y servidor web nginx..."            echo ""
 
             echo ""
             echo -e "${cColorRojo}    Comandos todavía no preparados...${cFinColor}"

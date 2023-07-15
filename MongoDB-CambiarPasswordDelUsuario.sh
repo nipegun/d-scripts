@@ -20,7 +20,6 @@ echo "use $varBaseDeDatos"                                     > /tmp/CambiarPas
 echo 'db.changeUserPassword("$varUsuario", passwordPrompt())' >> /tmp/CambiarPasswordMongo.js
 
 echo ""
-echo "  Cambiando la contraseña del usuario $varUsuario de la base de datos $varBaseDeDatos..."
-echo ""
+echo "  Cambiando la contraseña del usuario $varUsuario de la base de datos $varBaseDeDatos..."echo ""
 mongosh --quiet < /tmp/CambiarPasswordMongo.js
 

@@ -32,8 +32,7 @@
 lisnodtor
 
 echo ""
-echo "  CREANDO EL ARCHIVO DE CONFIGURACIÓN PARA APACHE..."
-echo ""
+echo "  CREANDO EL ARCHIVO DE CONFIGURACIÓN PARA APACHE..."echo ""
 cat /root/NodosTORQueEntran.list | sed "s/^/  Require not ip /g; 1i\<RequireAll\>\n  Require all granted" | sed '$a\<\/RequireAll\>' > /etc/apache2/NodosTORQueEntran.conf
 
 echo ""

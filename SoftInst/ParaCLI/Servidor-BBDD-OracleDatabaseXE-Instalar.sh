@@ -100,8 +100,7 @@ elif [ $cVerSO == "11" ]; then
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
-       echo "  dialog no está instalado. Iniciando su instalación..."
-       echo ""
+       echo "  dialog no está instalado. Iniciando su instalación..."       echo ""
        apt-get -y update > /dev/null
        apt-get -y install dialog
        echo ""
@@ -148,15 +147,13 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."
-                 echo ""
+                 echo "  Descargando el paquete..."                 echo ""
                  mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
                  cd /root/SoftInst/Oracle/DatabaseXE/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."
-                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -169,14 +166,12 @@ elif [ $cVerSO == "11" ]; then
 
               # Convertir el .rpm a un .deb
                  echo ""
-                 echo "  Convirtiendo el paquete .rpm a .deb..."
-                 echo "  El proceso puede tardar hasta una hora. Déjalo terminar."ç
+                 echo "  Convirtiendo el paquete .rpm a .deb..."                 echo "  El proceso puede tardar hasta una hora. Déjalo terminar."ç
                  echo ""
                  # Comprobar si el paquete alien está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s alien 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  alien no está instalado. Iniciando su instalación..."
-                      echo ""
+                      echo "  alien no está instalado. Iniciando su instalación..."                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install alien
                       echo ""
@@ -190,8 +185,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Intentar descargar el paquete desde hacks4geeks
                 echo ""
-                echo "  Intentando descargar el paquete. deb desde hacks4geeks..."
-                echo ""
+                echo "  Intentando descargar el paquete. deb desde hacks4geeks..."                echo ""
                 mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
                 wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Oracle/DatabaseXE/OracleDatabaseXE.deb -O /root/SoftInst/Oracle/DatabaseXE/OracleDatabaseXE.deb
 
@@ -201,8 +195,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Crear el grupo dba
                 echo ""
-                echo "  Creando el grupo dba..."
-                echo ""
+                echo "  Creando el grupo dba..."                echo ""
                 groupadd dba
 
             ;;
@@ -221,8 +214,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar dependencias y paquetes necesarios
                 echo ""
-                echo "  Instalando dependencias y paquetes necesarios...."
-                echo ""
+                echo "  Instalando dependencias y paquetes necesarios...."                echo ""
                 apt-get -y update
                 apt-get -y install libaio1
                 apt-get -y install bc
@@ -234,8 +226,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar paquete
                 echo ""
-                echo "  Instalando paquete .deb..."
-                echo ""
+                echo "  Instalando paquete .deb..."                echo ""
                 mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
                 find /root/ -type f -name oracle*.deb -exec mv {} /root/SoftInst/Oracle/DatabaseXE/ \; 2> /dev/null
                 find /root/SoftInst/Oracle/DatabaseXE/ -type f -name *.deb -exec dpkg -i {} \;
@@ -249,8 +240,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Crear variables de entorno
                 echo ""
-                echo "  Creando variables de entorno..."
-                echo ""
+                echo "  Creando variables de entorno..."                echo ""
                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt)
                 cat $ArchivoInitD | grep "export ORACLE_HOME" >> /home/oracle/.bashrc
                 cat $ArchivoInitD | grep "export ORACLE_SID"  >> /home/oracle/.bashrc
@@ -262,8 +252,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Crear el servicio en systemd
                 echo ""
-                echo "  Creando el servicio en systemd..."
-                echo ""
+                echo "  Creando el servicio en systemd..."                echo ""
                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt)
                 echo "[Unit]"                            > /etc/systemd/system/OracleDatabaseXE.service
                 echo "  Description=Oracle Database XE" >> /etc/systemd/system/OracleDatabaseXE.service
@@ -278,8 +267,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Poner contraseña al usuario oracle
                 echo ""
-                echo "  Estableciendo la contraseña del usuario oracle..."
-                echo ""
+                echo "  Estableciendo la contraseña del usuario oracle..."                echo ""
                 echo -e "Oracle0\nOracle0" | passwd oracle
                 echo ""
                 echo "  Se le ha puesto la contraseña Oracle0 al usuario oracle."
@@ -315,8 +303,7 @@ elif [ $cVerSO == "11" ]; then
 
               # Activar e iniciar el servicio
                 echo ""
-                echo "  Activando e iniciando el servicio..."
-                echo ""
+                echo "  Activando e iniciando el servicio..."                echo ""
                 systemctl enable OracleDatabaseXE.service --now
 
             ;;
@@ -324,8 +311,7 @@ elif [ $cVerSO == "11" ]; then
             13)
 
               echo ""
-              echo "  Permitiendo el acceso a Enterprise Manager XE desde fuera del localhost..."
-              echo ""
+              echo "  Permitiendo el acceso a Enterprise Manager XE desde fuera del localhost..."              echo ""
               #vVerOracleXE=S(cat /home/oracle/.bashrc | grep dbhomeXE | cut -d'/' -f5)
               vVerOracleXE=S(find /opt/oracle/product -mindepth 1 -maxdepth 1 -type d | cut -d'/' -f5)
               export ORACLE_HOME=/opt/oracle/product/$vVerOracleXE/dbhomeXE

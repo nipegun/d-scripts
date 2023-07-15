@@ -40,8 +40,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de actualización de Heimdall para Debian 7 (Wheezy)..."
-  
+  echo "  Iniciando el script de actualización de Heimdall para Debian 7 (Wheezy)..."  
   echo ""
 
   echo ""
@@ -52,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de actualización de Heimdall para Debian 8 (Jessie)..."
-  
+  echo "  Iniciando el script de actualización de Heimdall para Debian 8 (Jessie)..."  
   echo ""
 
   echo ""
@@ -64,8 +62,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "-------------------------------------------------------------------------------"
-  echo "  Iniciando el script de actualización de Heimdall para Debian 9 (Stretch)..."
-  echo "-------------------------------------------------------------------------------"
+  echo "  Iniciando el script de actualización de Heimdall para Debian 9 (Stretch)..."  echo "-------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -76,8 +73,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "-------------------------------------------------------------------------------"
-  echo "  Iniciando el script de actualización de Heimdall para Debian 10 (Buster)..."
-  echo "-------------------------------------------------------------------------------"
+  echo "  Iniciando el script de actualización de Heimdall para Debian 10 (Buster)..."  echo "-------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -88,29 +84,24 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "---------------------------------------------------------------------------------"
-  echo "  Iniciando el script de actualización de Heimdall para Debian 11 (Bullseye)..."
-  echo "---------------------------------------------------------------------------------"
+  echo "  Iniciando el script de actualización de Heimdall para Debian 11 (Bullseye)..."  echo "---------------------------------------------------------------------------------"
   echo ""
 
   # Parar apache
     echo ""
-    echo "   Parando el servicio de Apache..."
-    echo ""
+    echo "   Parando el servicio de Apache..."    echo ""
     systemctl stop apache2
   # Borrar posible archivo de código fuente viejo
     echo ""
-    echo "    Borrando posibles archivos de código fuente viejo..."
-    echo ""
+    echo "    Borrando posibles archivos de código fuente viejo..."    echo ""
     rm -rf /root/SoftInst/Heimdall/* 2> /dev/null
   # Determinar última versión disponible
     echo ""
-    echo "    Determinando la versión de la última release..."
-    echo ""
+    echo "    Determinando la versión de la última release..."    echo ""
     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "      curl no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "      curl no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update && apt-get -y install curl
         echo ""
       fi
@@ -120,13 +111,11 @@ elif [ $cVerSO == "11" ]; then
     echo ""
   # Descargar archivo con la última versión
     echo ""
-    echo "    Descargando el archivo..."
-    echo ""
+    echo "    Descargando el archivo..."    echo ""
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "      wget no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "      wget no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update && apt-get -y install wget
         echo ""
       fi
@@ -135,13 +124,11 @@ elif [ $cVerSO == "11" ]; then
     wget https://github.com/linuxserver/Heimdall/archive/refs/tags/$vUltVers.zip -O /root/SoftInst/Heimdall/source.zip
   # Descomprimir archivo con código fuente nuevo
     echo ""
-    echo "    Descomprimiendo el archivo ..."
-    echo ""
+    echo "    Descomprimiendo el archivo ..."    echo ""
     # Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "      unzip no está instalado. Iniciando su instalación..."
-        echo ""
+        echo "      unzip no está instalado. Iniciando su instalación..."        echo ""
         apt-get -y update && apt-get -y install unzip
         echo ""
       fi
@@ -149,8 +136,7 @@ elif [ $cVerSO == "11" ]; then
     vCarpetaConCodFuente=$(find /root/SoftInst/Heimdall/ -type f -name *tisan | sed 's-artisan--g')
   # Copiar archivos a la carpeta pública de html de Apache
     echo ""
-    echo "    Copiando archivos a la carpeta pública configurada en Apache..."
-    echo ""
+    echo "    Copiando archivos a la carpeta pública configurada en Apache..."    echo ""
     mv /var/www/heimdall/database/ /tmp/
     mkdir /tmp/backgrounds/
     cp /var/www/heimdall/storage/app/public/backgrounds/* /tmp/backgrounds/
@@ -168,8 +154,7 @@ elif [ $cVerSO == "11" ]; then
     rm -rf /var/www/heimdall/storage/framework/sessions/* 2> /dev/null
   # Reiniciar el sistema
     echo ""
-    echo "    Reiniciando el sistema..."
-    echo ""
+    echo "    Reiniciando el sistema..."    echo ""
     #shutdown -r now
 fi
 

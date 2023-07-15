@@ -20,8 +20,7 @@ vPuertoFin=65535
 rm -f /tmp/puertos.txt 2> /dev/null
 
 echo ""
-echo "  Buscando puertos abiertos en la IP $vIPWAN que den respuesta http..."
-echo ""
+echo "  Buscando puertos abiertos en la IP $vIPWAN que den respuesta http..."echo ""
   nmap $vIPWAN -p $vPuertoInicio-$vPuertoFin | grep '^[0-9]' | cut -d'/' -f1 > /tmp/puertos.txt
   for line in $(cat /tmp/puertos.txt)
     do
@@ -36,8 +35,7 @@ echo ""
     done
 
 echo ""
-echo "  Intentando encontrar el software que brinda servicio en esos puertos..."
-echo ""
+echo "  Intentando encontrar el software que brinda servicio en esos puertos..."echo ""
   rm -f /tmp/ServiciosDeLaIP-$vIPWAN.txt 2> /dev/null
   touch /tmp/ServiciosDeLaIP-$vIPWAN.txt 2> /dev/null
   for line in $(cat /tmp/puertos.txt)

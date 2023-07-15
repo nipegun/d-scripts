@@ -10,8 +10,7 @@
 # ----------
 
 echo ""
-echo "  Mostrando usuarios del sistema..."
-echo ""
+echo "  Mostrando usuarios del sistema..."echo ""
 compgen -u
 echo ""
 

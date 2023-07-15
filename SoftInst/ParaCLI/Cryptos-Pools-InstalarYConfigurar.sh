@@ -36,37 +36,30 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Pools Cripto para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Pools Cripto para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -77,8 +70,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Pools Cripto para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Pools Cripto para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -89,8 +81,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Pools Cripto para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de Pools Cripto para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -101,29 +92,29 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Pools Cripto para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de Pools Cripto para Debian 10 (Buster)..."  
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
-       echo "  dialog no está instalado. Iniciando su instalación..."
-       echo ""
+       echo "  dialog no está instalado. Iniciando su instalación..."       echo ""
        apt-get -y update
        apt-get -y install dialog
        echo ""
      fi
 
   menu=(dialog --timeout 10 --checklist "Marca lo que quieras instalar:" 22 76 16)
-    opciones=(1 "Instalar la pool rvn-kawpow-pool (Para Ravencoin)" off
+    opciones=(
+  1 "Instalar la pool rvn-kawpow-pool (Para Ravencoin)" off
               2 "Instalar la pool php-mpos" off
               3 "Instalar NodeJS" off
               4 "Instalar node-multi-hashing" off
               5 "Reparar permisos" off
               6 "Instalar servidor Web" off
               7 "Instalar MiningCore" off
-              8 "Instalar MiningCore WebUI" off)
+              8 "Instalar MiningCore WebUI" off
+)
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
     clear
 
@@ -141,8 +132,7 @@ elif [ $cVerSO == "10" ]; then
             # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
                if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
                  echo ""
-                 echo "  git no está instalado. Iniciando su instalación..."
-                 echo ""
+                 echo "  git no está instalado. Iniciando su instalación..."                 echo ""
                  apt-get -y update
                  apt-get -y install git
                  echo ""
@@ -182,8 +172,7 @@ elif [ $cVerSO == "10" ]; then
             # Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
                if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
                  echo ""
-                 echo "  tasksel no está instalado. Iniciando su instalación..."
-                 echo ""
+                 echo "  tasksel no está instalado. Iniciando su instalación..."                 echo ""
                  apt-get -y update
                  apt-get -y install tasksel
                  echo ""
@@ -206,8 +195,7 @@ elif [ $cVerSO == "10" ]; then
             # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
                if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
                  echo ""
-                 echo "  git no está instalado. Iniciando su instalación..."
-                 echo ""
+                 echo "  git no está instalado. Iniciando su instalación..."                 echo ""
                  apt-get -y update
                  apt-get -y install git
                  echo ""
@@ -292,16 +280,13 @@ elif [ $cVerSO == "10" ]; then
                   mysql -e "select user,host from mysql.user"
 
                   echo ""
-                  echo "  Creando la base de datos mpos..."
-                  echo ""
+                  echo "  Creando la base de datos mpos..."                  echo ""
                   mysql -e "create database mpos"
                   echo ""
-                  echo "  Creando el usuario mpos@localhost..."
-                  echo ""
+                  echo "  Creando el usuario mpos@localhost..."                  echo ""
                   mysql -e "create user mpos@localhost"
                   echo ""
-                  echo "  Dando permisos al usuario mpos para que administre la base de datos mpos..."
-                  echo ""
+                  echo "  Dando permisos al usuario mpos para que administre la base de datos mpos..."                  echo ""
                   mysql -e "grant all privileges on mpos.* to mpos@localhost identified by '$ContraBD'"
 
                   echo ""
@@ -314,8 +299,7 @@ elif [ $cVerSO == "10" ]; then
                   mysql -e "select user,host from mysql.user"
 
                   echo ""
-                  echo "  Importando la estructura de la base de datos..."
-                  echo ""
+                  echo "  Importando la estructura de la base de datos..."                  echo ""
                   mysql -p mpos < /var/www/MPOS/sql/000_base_structure.sql
 
             # Reparación de permisos
@@ -392,8 +376,7 @@ elif [ $cVerSO == "10" ]; then
             # Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
                if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
                  echo ""
-                 echo "  tasksel no está instalado. Iniciando su instalación..."
-                 echo ""
+                 echo "  tasksel no está instalado. Iniciando su instalación..."                 echo ""
                  apt-get -y update
                  apt-get -y install tasksel
                  echo ""
@@ -749,14 +732,12 @@ elif [ $cVerSO == "10" ]; then
 
                # Crear rol para la base de datos
                   echo ""
-                  echo "  Creando el rol $UsuarioNoRoot..."
-                  echo ""
+                  echo "  Creando el rol $UsuarioNoRoot..."                  echo ""
                   su - postgres -c "createuser --interactive --pwprompt $UsuarioNoRoot"
 
                # Crear la base de datos con el rol recién creado
                   echo ""
-                  echo "  Creando la base de datos miningcore para el rol $UsuarioNoRoot..."
-                  echo ""
+                  echo "  Creando la base de datos miningcore para el rol $UsuarioNoRoot..."                  echo ""
                   su - postgres -c "createdb -O $UsuarioNoRoot miningcore"
 
                # Si se quiere que el propietario de la base de datos sea postgres y no el rol de arriba
@@ -774,8 +755,7 @@ elif [ $cVerSO == "10" ]; then
 
                # Importar el formato básico de la base de datos
                   echo ""
-                  echo "  Importando la estructura de la base de datos..."
-                  echo ""
+                  echo "  Importando la estructura de la base de datos..."                  echo ""
                   rm /tmp/miningcore-basic.sql
                   su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb.sql -O /tmp/miningcore-basic.sql"
                   chmod 777 /tmp/miningcore-basic.sql
@@ -840,8 +820,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Pools Cripto para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de Pools Cripto para Debian 11 (Bullseye)..."  
   echo ""
 
   echo ""

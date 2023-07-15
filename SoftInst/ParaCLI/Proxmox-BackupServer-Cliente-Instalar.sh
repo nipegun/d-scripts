@@ -96,8 +96,8 @@ elif [ $cVerSO == "11" ]; then
   echo ""
 
   echo ""
-  echo "    Agregando el repositorio PBS Client..."
-  echo ""
+  echo "    Agregando el repositorio PBS Client..." 
+echo ""
   vArch=amd64
   echo "deb [arch=$vArch] http://download.proxmox.com/debian/pbs-client bullseye main" > /etc/apt/sources.list.d/pbs-client.list
   # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
@@ -112,12 +112,12 @@ elif [ $cVerSO == "11" ]; then
   wget http://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-bullseye.gpg
   apt-get -y update
   echo ""
-  echo "    Instalando el paquete proxmox-backup-client..."
-  echo ""
+  echo "    Instalando el paquete proxmox-backup-client..." 
+echo ""
   apt-get -y install proxmox-backup-client
   echo ""
-  echo "    Creando el script para copias de seguridad completas..."
-  echo ""
+  echo "    Creando el script para copias de seguridad completas..." 
+echo ""
   mkdir -p /root/scripts/EsteDebian/ 2> /dev/null
   echo "$vIPpbs:$vDataStorage" > /root/scripts/EsteDebian/RutaPBS.txt
   echo '#!/bin/bash'                                                                    > /root/scripts/EsteDebian/CopSeg-SistemaDeArchivosCompletoHaciaPBS.sh

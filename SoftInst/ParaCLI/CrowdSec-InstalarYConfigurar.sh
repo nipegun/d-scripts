@@ -113,20 +113,17 @@ elif [ $cVerSO == "12" ]; then
 
   # Agregar repositorio
     echo ""
-    echo "    Agregando el repositorio..."
-    echo ""
+    echo "    Agregando el repositorio..."    echo ""
     curl -sL https://packagecloud.io/install/repositories/crowdsec/crowdsec/script.deb.sh | bash
 
   # Instalar paquete
     echo ""
-    echo "    Instalando paquete crowdsec..."
-    echo ""
+    echo "    Instalando paquete crowdsec..."    echo ""
     apt -y install crowdsec
 
   # Instalar firewall bouncer
     echo ""
-    echo "    Instalando firewall bouncer..."
-    echo ""
+    echo "    Instalando firewall bouncer..."    echo ""
     apt -y install crowdsec-firewall-bouncer 
     apt -y install crowdsec-firewall-bouncer-nftables
 
@@ -135,8 +132,7 @@ elif [ $cVerSO == "12" ]; then
 
   # Instalar el dashboard (usa docker)
     #echo ""
-    #echo "    Instalando el dashboard..."
-    #echo ""
+    #echo "    Instalando el dashboard..."    #echo ""
     # Instalar docker
       #
     #cscli dashboard setup --listen 0.0.0.0

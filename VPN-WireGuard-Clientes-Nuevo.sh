@@ -25,30 +25,25 @@ for vNumPeer in {2..254}
   do
     if [ -f /root/WireGuard/WireGuardUser"$vNumPeer"Private.key ] && [ -f /root/WireGuard/WireGuardUser"$vNumPeer"Public.key ]; then
       echo ""
-      echo "  El peer User$vNumPeer ya existe. Intentando crear el peer User$(($vNumPeer+1))..."
-      echo ""
+      echo "  El peer User$vNumPeer ya existe. Intentando crear el peer User$(($vNumPeer+1))..."      echo ""
     else
       # Generar claves para el nuevo peer
         echo ""
-        echo "  Generando la clave privada para el peer User$vNumPeer..."
-        echo ""
+        echo "  Generando la clave privada para el peer User$vNumPeer..."        echo ""
         wg genkey > /root/WireGuard/WireGuardUser"$vNumPeer"Private.key
         echo ""
-        echo "  Generando la clave pública para el peer User$vNumPeer..."
-        echo ""
+        echo "  Generando la clave pública para el peer User$vNumPeer..."        echo ""
         cat /root/WireGuard/WireGuardUser"$vNumPeer"Private.key | wg pubkey > /root/WireGuard/WireGuardUser"$vNumPeer"Public.key
 
       # Tirar la interfaz wg0
         echo ""
-        echo "  Tirando la conexión wg0 antes de hacer los cambios en el archivo /etc/wireguard/wg0.conf..."
-        echo ""
+        echo "  Tirando la conexión wg0 antes de hacer los cambios en el archivo /etc/wireguard/wg0.conf..."        echo ""
         wg-quick down wg0
 
       # Agregar la sección de configuración del nuevo peer a /etc/wireguard/wg0.conf
         vIPsPermitidasAlPeer="$vOctetos123$vNumPeer$vMascaraRestrictora"
         echo ""
-        echo "  Agregando la sección de configuración del nuevo peer a /etc/wireguard/wg0.conf..."
-        echo ""
+        echo "  Agregando la sección de configuración del nuevo peer a /etc/wireguard/wg0.conf..."        echo ""
         echo ""                                   >> /etc/wireguard/wg0.conf
         echo "[Peer]"                             >> /etc/wireguard/wg0.conf
         echo "TempPublicKey ="                    >> /etc/wireguard/wg0.conf
@@ -60,19 +55,16 @@ for vNumPeer in {2..254}
 
       # Levantar la interfaz wg0
         echo ""
-        echo "  Levantando la conexión wg0, porque que los cambios en el archivo /etc/wireguard/wg0.conf ya se han realizado..."
-        echo ""
+        echo "  Levantando la conexión wg0, porque que los cambios en el archivo /etc/wireguard/wg0.conf ya se han realizado..."        echo ""
         wg-quick up wg0
 
       # Crear el archivo de configuración del nuevo peer para importalo en otros dispositivos
         echo ""
-        echo "  Creando el archivo de configuración del nuevo peer para importalo en otros dispositivos..."
-        echo ""
+        echo "  Creando el archivo de configuración del nuevo peer para importalo en otros dispositivos..."        echo ""
         # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
             echo ""
-            echo "    El paquete curl no está instalado. Iniciando su instalación..."
-            echo ""
+            echo "    El paquete curl no está instalado. Iniciando su instalación..."            echo ""
             apt-get -y update
             apt-get -y install curl
             echo ""
@@ -93,13 +85,11 @@ for vNumPeer in {2..254}
 
       # Crear el código QR para el nuevo peer
         echo ""
-        echo "  Generando el código QR para la conexión del peer User$vNumPeer a partir del archivo /root/WireGuard/WireGuardUser$vNumPeer.conf..."
-        echo ""
+        echo "  Generando el código QR para la conexión del peer User$vNumPeer a partir del archivo /root/WireGuard/WireGuardUser$vNumPeer.conf..."        echo ""
         # Comprobar si el paquete qrencode está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s qrencode 2>/dev/null | grep installed) == "" ]]; then
             echo ""
-            echo "    El paquete qrencode no está instalado. Iniciando su instalación..."
-            echo ""
+            echo "    El paquete qrencode no está instalado. Iniciando su instalación..."            echo ""
             apt-get -y update
             apt-get -y install qrencode
             echo ""

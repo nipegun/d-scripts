@@ -20,8 +20,7 @@ vCarpetaAProteger="/var/www/html/_/logs"
 vNombreDeUsuario="nipegun"
 
 echo ""
-echo "  Creando el archivo para almacenar las contraseñas..."
-echo ""
+echo "  Creando el archivo para almacenar las contraseñas..."echo ""
 htpasswd -c /etc/apache2/.htpasswd $vNombreDeUsuario
 
 # Para crear nuevos usuarios le quitamos la -c

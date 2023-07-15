@@ -10,20 +10,17 @@
 # ----------
 
 echo ""
-echo "Obteniendo la IP WAN del servidor..."
-echo ""
+echo "Obteniendo la IP WAN del servidor..."echo ""
 IPWANDelServidor=$(curl --silent ipinfo.io/ip)
 
 echo ""
-echo "Creando un nuevo set para la lista de IPs a banear..."
-echo ""
+echo "Creando un nuevo set para la lista de IPs a banear..."echo ""
 ipset --flush NodosTORQueEntran
 ipset --create NodosTORQueEntran iphash
 
 echo ""
 echo "Obteniendo una lista de las IPs de los nodos Tor de salida que pueden acceder"
-echo "a la IP del servidor y agregando esa lista al set creado antes..."
-echo ""
+echo "a la IP del servidor y agregando esa lista al set creado antes..."echo ""
 # Abajo, se borran del wget resultante las líneas comentadas y se lee línea por línea las IPs
 wget -q https://check.torproject.org/cgi-bin/TorBulkExitList.py?ip=$IPWANDelServidor -O -|sed '/^#/d' |while read IP
   do
@@ -31,8 +28,7 @@ wget -q https://check.torproject.org/cgi-bin/TorBulkExitList.py?ip=$IPWANDelServ
   done
 
 echo ""
-echo "Agregando una regla input a IPTables con el set de IPs de nodos a banear..."
-echo ""
+echo "Agregando una regla input a IPTables con el set de IPs de nodos a banear..."echo ""
 iptables -A INPUT -m set --match-set NodosTORQueEntran src -j DROP
 
 echo ""

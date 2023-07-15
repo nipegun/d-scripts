@@ -25,13 +25,11 @@ echo -e "${cColorVerde}---------------------------------------------------------
 echo ""
 
 echo ""
-echo "  Determinando la última versión de digibyte core..."
-echo ""
+echo "  Determinando la última versión de digibyte core..."echo ""
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  curl no está instalado. Iniciando su instalación..."
-     echo ""
+     echo "  curl no está instalado. Iniciando su instalación..."     echo ""
      apt-get -y update
      apt-get -y install curl
      echo ""
@@ -42,8 +40,7 @@ echo "  La última versión de DigiByte core es la $UltVersDGB"
 echo ""
 
 echo ""
-echo "  Intentando descargar el archivo comprimido de la última versión..."
-echo ""
+echo "  Intentando descargar el archivo comprimido de la última versión..."echo ""
 mkdir -p /root/SoftInst/Cryptos/DGB/ 2> /dev/null
 rm -rf /root/SoftInst/Cryptos/DGB/*
 cd /root/SoftInst/Cryptos/DGB/
@@ -51,28 +48,23 @@ vLinkArchivoDentroGithub=$(curl -sL https://github.com/DigiByte-Core/digibyte/re
 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  wget no está instalado. Iniciando su instalación..."
-     echo ""
+     echo "  wget no está instalado. Iniciando su instalación..."     echo ""
      apt-get -y update
      apt-get -y install wget
      echo ""
    fi
 echo ""
-echo "  Pidiendo el archivo en formato zip..."
-echo ""
+echo "  Pidiendo el archivo en formato zip..."echo ""
 wget https://github.com/$vLinkArchivoDentroGithub.zip
 echo ""
-echo "  Pidiendo el archivo en formato tar.gz..."
-echo ""
+echo "  Pidiendo el archivo en formato tar.gz..."echo ""
 wget https://github.com/$vLinkArchivoDentroGithub.tar.gz
 echo ""
-echo "  Descomprimiendo el archivo..."
-echo ""
+echo "  Descomprimiendo el archivo..."echo ""
 # Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  zip no está instalado. Iniciando su instalación..."
-     echo ""
+     echo "  zip no está instalado. Iniciando su instalación..."     echo ""
      apt-get -y update
      apt-get -y install zip
      echo ""
@@ -85,8 +77,7 @@ rm -rf /root/SoftInst/Cryptos/DGB/__MACOSX/
 # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  tar no está instalado. Iniciando su instalación..."
-     echo ""
+     echo "  tar no está instalado. Iniciando su instalación..."     echo ""
      apt-get -y update
      apt-get -y install tar
      echo ""
@@ -95,8 +86,7 @@ tar -xf /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB-x86_64-linux-gnu.tar.gz
 rm -rf /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB-x86_64-linux-gnu.tar.gz
 
 echo ""
-echo "  Creando carpetas y archivos necesarios para ese usuario..."
-echo ""
+echo "  Creando carpetas y archivos necesarios para ese usuario..."echo ""
 # Crear la carpeta en la home del usuario no root
   mkdir -p /home/$UsuarioNoRoot/Cryptos/DGB/ 2> /dev/null
   rm -rf /home/$UsuarioNoRoot/Cryptos/DGB/
@@ -125,8 +115,7 @@ echo ""
   find /home/$UsuarioNoRoot/Cryptos/DGB/bin -type f -exec chmod +x {} \;
 
 echo ""
-echo "  Arrancando digibyted..."
-echo ""
+echo "  Arrancando digibyted..."echo ""
 chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.digibyte/ -R
 su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyted -daemon"
 sleep 5
@@ -141,15 +130,14 @@ echo ""
 
 # Autoejecución de DigiByte al iniciar el sistema
   #echo ""
-  #echo "  Agregando digibyted a los ComandosPostArranque..."
-  #echo ""
+  #echo "  Agregando digibyted a los ComandosPostArranque..."  #echo ""
   #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-iniciar.sh
   #echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/dgb-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
 # Icono de lanzamiento en el menú gráfico
   echo ""
-  echo "  Agregando la aplicación gráfica al menú..."
-  echo ""
+  echo "  Agregando la aplicación gráfica al menú..." 
+echo ""
   mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
   echo "Name=dgb GUI"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
@@ -164,8 +152,8 @@ echo ""
 
 # Autoejecución gráfica de DigiByte
   echo ""
-  echo "  Creando el archivo de autoejecución de digibyte-qt para escritorio..."
-  echo ""
+  echo "  Creando el archivo de autoejecución de digibyte-qt para escritorio..." 
+echo ""
   mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
   echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
   echo "Name=dgb GUI"                                                    >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
@@ -182,8 +170,8 @@ echo ""
 
 # Instalar los c-scripts
   echo ""
-  echo "  Instalando los c-scripts..."
-  echo ""
+  echo "  Instalando los c-scripts..." 
+echo ""
   su $UsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
   find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 

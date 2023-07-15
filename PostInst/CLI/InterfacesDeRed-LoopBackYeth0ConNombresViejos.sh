@@ -32,8 +32,8 @@
 
 # Modificar /etc/network/interfaces
   echo ""
-  echo "    Modificando /etc/network/interfaces..."
-  echo ""
+  echo "    Modificando /etc/network/interfaces..." 
+echo ""
   echo "auto lo"                   > /etc/network/interfaces
   echo "  iface lo inet loopback" >> /etc/network/interfaces
   echo ""                         >> /etc/network/interfaces

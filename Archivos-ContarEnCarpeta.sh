@@ -41,8 +41,7 @@ if [ $# -ne $cCantArgsEsperados ]
     # Comprobar si el paquete tree está instalado. Si no lo está, instalarlo.
        if [[ $(dpkg-query -s tree 2>/dev/null | grep installed) == "" ]]; then
          echo ""
-         echo "  tree no está instalado. Iniciando su instalación..."
-         echo ""
+         echo "  tree no está instalado. Iniciando su instalación..."         echo ""
          apt-get -y update > /dev/null
          apt-get -y install tree
          echo ""

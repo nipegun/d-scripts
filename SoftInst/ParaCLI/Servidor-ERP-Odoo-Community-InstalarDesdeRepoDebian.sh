@@ -46,8 +46,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Odoo para Debian 7 (Wheezy)..."
-  echo "------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Odoo para Debian 7 (Wheezy)..."  echo "------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -58,8 +57,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Odoo para Debian 8 (Jessie)..."
-  echo "------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Odoo para Debian 8 (Jessie)..."  echo "------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -70,8 +68,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Odoo para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de Odoo para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -82,8 +79,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Odoo para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de Odoo para Debian 10 (Buster)..."  
   echo ""
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -93,8 +89,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "---------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Odoo para Debian 11 (Bullseye)..."
-  echo "---------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Odoo para Debian 11 (Bullseye)..."  echo "---------------------------------------------------------------------------"
   echo ""
   apt-get -y update 2> /dev/null
   vVersPostgre=$(apt-cache depends postgresql | grep pen | cut -d '-' -f2)
@@ -108,18 +103,18 @@ elif [ $cVerSO == "11" ]; then
   sleep 5
 
   echo ""
-  echo "  Instalando la base de datos PostgreSQL..."
-  echo ""
+  echo "  Instalando la base de datos PostgreSQL..." 
+echo ""
   apt-get -y install postgresql
 
   echo ""
-  echo "  Instalando wkhtmltopdf..."
-  echo ""
+  echo "  Instalando wkhtmltopdf..." 
+echo ""
   apt-get -y install wkhtmltopdf
 
   echo ""
-  echo "  Instalando odoo..."
-  echo ""
+  echo "  Instalando odoo..." 
+echo ""
   apt-get -y install odoo
 
   echo ""

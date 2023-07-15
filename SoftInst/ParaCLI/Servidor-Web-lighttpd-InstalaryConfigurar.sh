@@ -125,8 +125,7 @@ elif [ $cVerSO == "11" ]; then
         1)
 
           echo ""
-          echo "  Instalando el paquete lighttpd..."
-          echo ""
+          echo "  Instalando el paquete lighttpd..."          echo ""
           apt-get -y update && apt-get -y install lighttpd 
           systemctl enable lighttpd --now
 
@@ -135,8 +134,7 @@ elif [ $cVerSO == "11" ]; then
         2)
 
           echo ""
-          echo "  Instalando y activando PHP..."
-          echo ""
+          echo "  Instalando y activando PHP..."          echo ""
           #apt-get -y install php
           apt-get -y install php-cgi
           apt-get -y install php-fpm
@@ -167,20 +165,16 @@ elif [ $cVerSO == "11" ]; then
             apt-get -y autoremove
           # Reiniciar servidor web
             echo ""
-            echo "    Reiniciando php$vUltVerPHP-fpm..."
-            echo ""
+            echo "    Reiniciando php$vUltVerPHP-fpm..."            echo ""
             systemctl restart php$vUltVerPHP-fpm
             echo ""
-            echo "    Activando módulo fastcgi..."
-            echo ""
+            echo "    Activando módulo fastcgi..."            echo ""
             lighty-enable-mod fastcgi
             echo ""
-            echo "    Activando módulo fastcgi-php..."
-            echo ""
+            echo "    Activando módulo fastcgi-php..."            echo ""
             lighty-enable-mod fastcgi-php
             echo ""
-            echo "    Reiniciando servidor Web..."
-            echo ""
+            echo "    Reiniciando servidor Web..."            echo ""
             systemctl restart lighttpd
 
         ;;
@@ -188,8 +182,7 @@ elif [ $cVerSO == "11" ]; then
         3)
 
           echo ""
-          echo "  Instalando servidor de bases de datos MariaDB..."
-          echo ""
+          echo "  Instalando servidor de bases de datos MariaDB..."          echo ""
           apt-get -y install php-mysql
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
@@ -206,8 +199,7 @@ elif [ $cVerSO == "11" ]; then
         4)
 
           echo ""
-          echo "  Activando HTTPS con certificado autofirmado..."
-          echo ""
+          echo "  Activando HTTPS con certificado autofirmado..."          echo ""
           # Crear el certificado y la clave del certificado
             openssl req -x509 -nodes -days 365 -newkey rsa:2048 -out /etc/ssl/certs/lighttpd-default.crt -keyout /etc/ssl/private/lighttpd-default.key
           # Unir certificado y llave privada
@@ -230,8 +222,7 @@ elif [ $cVerSO == "11" ]; then
         5)
 
           echo ""
-          echo "  Activando certificado de LetsEncrypt..."
-          echo ""
+          echo "  Activando certificado de LetsEncrypt..."          echo ""
           apt-get -y install certbot
           echo ""
           echo "  Introduce el nombre de dominio para el que quieras crear el certificado y presiona Enter:"

@@ -118,8 +118,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Determinar URL de descarga del archivo comprimido
     echo ""
-    echo "  Determinando la URL de descarga del archivo de instalación de Atomic Wallet..."
-    echo ""
+    echo "  Determinando la URL de descarga del archivo de instalación de Atomic Wallet..."    echo ""
     vURLArchivo=$(curl -sL https://get.atomicwallet.io/download/ | grep ".deb" | grep href | grep -v sum | grep -v "atomicwallet.deb" | tail -n1 | cut -d'"' -f2 | cut -d'/' -f2)
     echo ""
     echo "    La URL de descarga del archivo es: https://get.atomicwallet.io/download/$vURLArchivo"
@@ -127,16 +126,14 @@ elif [ $cVerSO == "11" ]; then
 
   # Descargar archivo comprimido
     echo ""
-    echo "  Descargando el archivo..."
-    echo ""
+    echo "  Descargando el archivo..."    echo ""
     mkdir -p /root/SoftInst/AtomicWallet 2> /dev/null
     cd /root/SoftInst/AtomicWallet
     curl -sL https://get.atomicwallet.io/download/$vURLArchivo --output /root/SoftInst/AtomicWallet/AtomicWallet.deb
 
   # Extraer los archivos de dentro del .deb
     echo ""
-    echo "  Extrayendo los archivos de dentro del paquete .deb..."
-    echo ""
+    echo "  Extrayendo los archivos de dentro del paquete .deb..."    echo ""
     # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
         echo ""
@@ -151,8 +148,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Descomprimir el archivo data.tar.xz
     echo ""
-    echo "  Descomprimiendo el archivo data.tar.xz..."
-    echo ""
+    echo "  Descomprimiendo el archivo data.tar.xz..."    echo ""
     # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
         echo ""
@@ -167,16 +163,14 @@ elif [ $cVerSO == "11" ]; then
 
   # Crear la carpeta para el usuario no root
     echo ""
-    echo "  Creando la carpeta para el usuario no root..."
-    echo ""
+    echo "  Creando la carpeta para el usuario no root..."    echo ""
     mkdir -p /home/$vUsuarioNoRoot/Atomic/ 2> /dev/null
     cp -rf '/root/SoftInst/AtomicWallet/opt/Atomic Wallet/'* /home/$vUsuarioNoRoot/Atomic/
     cp /root/SoftInst/AtomicWallet/usr/share/icons/hicolor/256x256/apps/atomic.png /home/$vUsuarioNoRoot/Atomic/atomic.png
 
   # Agregar aplicación al menú
     echo ""
-    echo "  Agregando la aplicación gráfica al menú..."
-    echo ""
+    echo "  Agregando la aplicación gráfica al menú..."    echo ""
     mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
     cp -f /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                           /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
     sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/Atomic/atomic %U|g' /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
@@ -187,8 +181,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Crear el archivo de auto-ehecución
     echo ""
-    echo "  Creando el archivo de autoejecución para el escritorio..."
-    echo ""
+    echo "  Creando el archivo de autoejecución para el escritorio..."    echo ""
     mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
     cp -f /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                           /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
     sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/Atomic/atomic %U|g' /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
@@ -199,8 +192,7 @@ elif [ $cVerSO == "11" ]; then
 
   # Reparar permisos
     echo ""
-    echo "  Reparando permisos..."
-    echo ""
+    echo "  Reparando permisos..."    echo ""
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Atomic/ -R
     #find /home/$vUsuarioNoRoot/Atomic/ -type d -exec chmod 750 {} \;
     #find /home/$vUsuarioNoRoot/Atomic/ -type f -exec chmod +x {} \;

@@ -27,7 +27,7 @@
 
 # Reconfigurar servicios
   echo ""
-  echo "  Re-configurando los servicios a monitorizar con CrowdSed..."
-  echo ""
+  echo "  Re-configurando los servicios a monitorizar con CrowdSed..." 
+echo ""
   /usr/share/crowdsec/wizard.sh -c
 

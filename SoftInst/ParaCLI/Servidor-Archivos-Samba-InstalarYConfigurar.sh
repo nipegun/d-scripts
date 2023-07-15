@@ -40,8 +40,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Samba para Debian 7 (Wheezy)..."
-  
+  echo "  Iniciando el script de instalación de Samba para Debian 7 (Wheezy)..."  
   echo ""
 
   echo ""
@@ -52,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Samba para Debian 8 (Jessie)..."
-  
+  echo "  Iniciando el script de instalación de Samba para Debian 8 (Jessie)..."  
   echo ""
 
   cCantArgumEsperados=3
@@ -212,8 +210,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de bind9 para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de bind9 para Debian 9 (Stretch)..."  
   echo ""
 
   cCantArgumEsperados=3
@@ -358,8 +355,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de bind9 para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de bind9 para Debian 10 (Buster)..."  
   echo ""
 
   # ----------
@@ -514,8 +510,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Samba para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de Samba para Debian 11 (Bullseye)..."  
   echo ""
 
   # ----------

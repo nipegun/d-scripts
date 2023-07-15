@@ -17,37 +17,30 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "---------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Grafana para Debian 7 (Wheezy)..."
-  echo "---------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Grafana para Debian 7 (Wheezy)..."  echo "---------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -58,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "---------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Grafana para Debian 8 (Jessie)..."
-  echo "---------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Grafana para Debian 8 (Jessie)..."  echo "---------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -70,8 +62,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Grafana para Debian 9 (Stretch)..."
-  echo "----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Grafana para Debian 9 (Stretch)..."  echo "----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -82,8 +73,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Grafana para Debian 10 (Buster)..."
-  echo "----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Grafana para Debian 10 (Buster)..."  echo "----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -94,13 +84,12 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de Grafana para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de Grafana para Debian 11 (Bullseye)..."  
   echo ""
 
   echo ""
-  echo "  Instalando dependencias o paquetes necesarios para el script..."
-  echo ""
+  echo "  Instalando dependencias o paquetes necesarios para el script..." 
+echo ""
   apt-get update
   apt-get -y insall wget
   apt-get -y install gnupg
@@ -118,13 +107,13 @@ elif [ $cVerSO == "11" ]; then
    wget -q -O - https://packages.grafana.com/gpg.key | apt-key add -
 
   echo ""
-  echo "  Agregando repositorio..."
-  echo ""
+  echo "  Agregando repositorio..." 
+echo ""
   echo "deb https://packages.grafana.com/enterprise/deb stable main" > /etc/apt/sources.list.d/grafana.list
 
   echo ""
-  echo "  Instalando paquetes..."
-  echo ""
+  echo "  Instalando paquetes..." 
+echo ""
   apt-get update
   apt-get -y install grafana-enterprise
 
@@ -145,18 +134,18 @@ elif [ $cVerSO == "11" ]; then
      sed -i -e 's|;cookie_samesite = lax|cookie_samesite = disabled|g' /etc/grafana/grafana.ini
 
   echo ""
-  echo "  Activando el servicio..."
-  echo ""
+  echo "  Activando el servicio..." 
+echo ""
   systemctl enable grafana-server --now
 
   echo ""
-  echo "  Instalando el plugin grafana-image-renderer..."
-  echo ""
+  echo "  Instalando el plugin grafana-image-renderer..." 
+echo ""
   grafana-cli plugins install grafana-image-renderer
 
   echo ""
-  echo "  Reiniciando el servicio..."
-  echo ""
+  echo "  Reiniciando el servicio..." 
+echo ""
   systemctl restart grafana-server
 
 fi

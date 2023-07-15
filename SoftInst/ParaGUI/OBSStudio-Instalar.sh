@@ -17,37 +17,30 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de OBSStudio para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de OBSStudio para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -58,8 +51,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de OBSStudio para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de OBSStudio para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -70,8 +62,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de OBSStudio para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de OBSStudio para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
@@ -82,19 +73,20 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de OBSStudio para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de OBSStudio para Debian 10 (Buster)..."  
   echo ""
 
   apt-get -y update 2> /dev/null
   apt-get -y install dialog 2> /dev/null
 
   menu=(dialog --timeout 5 --checklist "Opciones de instalación:" 22 76 16)
-    opciones=(1 "Instalar desde repositorio" off
+    opciones=(
+  1 "Instalar desde repositorio" off
               2 "Bajar, compilar e instalar" off
               3 "Bajar, compilar e instalar como portable" off
               4 "Instalar plugin de navegador" off
-              5 "Desinstalar OBS compilado" off)
+              5 "Desinstalar OBS compilado" off
+)
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
     clear
 
@@ -170,8 +162,7 @@ elif [ $cVerSO == "10" ]; then
             #checkinstall --default --pkgname=obs-studio --fstrans=no --backup=no --pkgversion="$(date +%Y%m%d)-git" --deldoc=yes
             make install
             echo ""
-            echo "Parcheando el link de ejecución para indicarle que arranque siempre con LibGL..."
-            echo ""
+            echo "Parcheando el link de ejecución para indicarle que arranque siempre con LibGL..."            echo ""
             sed -i -e 's|Exec=obs|Exec=LIBGL_ALWAYS_SOFTWARE=1 obs|g' /usr/share/applications/com.obsproject.Studio.desktop
 
           ;;
@@ -323,8 +314,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de OBSStudio para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de OBSStudio para Debian 11 (Bullseye)..."  
   echo ""
 
   echo ""

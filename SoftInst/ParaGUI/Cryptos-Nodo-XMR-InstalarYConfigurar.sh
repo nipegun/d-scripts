@@ -25,13 +25,11 @@ echo -e "${cColorVerde}---------------------------------------------------------
 echo ""
 
 echo ""
-echo "  Descargando el archivo comprimido de la última release..."
-echo ""
+echo "  Descargando el archivo comprimido de la última release..."echo ""
 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "  wget no está instalado. Iniciando su instalación..."
-    echo ""
+    echo "  wget no está instalado. Iniciando su instalación..."    echo ""
     apt-get -y update
     apt-get -y install wget
     echo ""
@@ -42,13 +40,11 @@ wget https://downloads.getmonero.org/gui/linux64 -O /root/SoftInst/Cryptos/XMR/m
 #wget https://downloads.getmonero.org/cli/linux64 -O /root/SoftInst/Cryptos/XMR/monero.tar.bz2
 
 echo ""
-echo "  Descomprimiendo el archivo..."
-echo ""
+echo "  Descomprimiendo el archivo..."echo ""
 # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo "  tar no está instalado. Iniciando su instalación..."
-    echo ""
+    echo "  tar no está instalado. Iniciando su instalación..."    echo ""
     apt-get -y update
     apt-get -y install tar
     echo ""
@@ -57,8 +53,7 @@ tar xjfv /root/SoftInst/Cryptos/XMR/monero.tar.bz2 -C /root/SoftInst/Cryptos/XMR
 rm -rf /root/SoftInst/Cryptos/XMR/monero.tar.bz2
 
 echo ""
-echo "  Preparando la carpeta final..."
-echo ""
+echo "  Preparando la carpeta final..."echo ""
 mkdir -p /home/$UsuarioNoRoot/Cryptos/XMR/bin/ 2> /dev/null
 find /root/SoftInst/Cryptos/XMR/ -type d -name monero* -exec cp -r {}/. /home/$UsuarioNoRoot/Cryptos/XMR/bin/ \;
 rm -rf /root/SoftInst/Cryptos/XMR/*
@@ -84,8 +79,7 @@ echo "useRemoteNode=false"                            >> /home/$UsuarioNoRoot/.c
 echo "walletMode=2"                                   >> /home/$UsuarioNoRoot/.config/monero-project/monero-core.conf
 
 echo ""
-echo "  Instalando paquetes necesarios para ejecutar la cartera..."
-echo ""
+echo "  Instalando paquetes necesarios para ejecutar la cartera..."echo ""
 apt-get -y install libxcb-icccm4
 apt-get -y install libxcb-image0
 apt-get -y install libxcb-keysyms1
@@ -96,14 +90,14 @@ apt-get -y install libxkbcommon-x11-0
 
 # Autoejecución de Monero al iniciar el sistema
   echo ""
-  echo "  Agregando monerod a los ComandosPostArranque..."
-  echo ""
+  echo "  Agregando monerod a los ComandosPostArranque..." 
+echo ""
   echo "su $UsuarioNoRoot -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/xmr-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
 # Icono de lanzamiento en el menú gráfico
   echo ""
-  echo "  Agregando la aplicación gráfica al menú..."
-  echo ""
+  echo "  Agregando la aplicación gráfica al menú..." 
+echo ""
   mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
   echo "[Desktop Entry]"                                                    > /home/$UsuarioNoRoot/.local/share/applications/xmr.desktop
   echo "Name=xmr GUI"                                                      >> /home/$UsuarioNoRoot/.local/share/applications/xmr.desktop
@@ -117,8 +111,8 @@ apt-get -y install libxkbcommon-x11-0
 
 # Autoejecución gráfica de monero
   echo ""
-  echo "  Creando el archivo de autoejecución de monero-wallet-gui para el escritorio..."
-  echo ""
+  echo "  Creando el archivo de autoejecución de monero-wallet-gui para el escritorio..." 
+echo ""
   mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
   echo "[Desktop Entry]"                                                 > /home/$UsuarioNoRoot/.config/autostart/xmr.desktop
   echo "Name=xmr GUI"                                                   >> /home/$UsuarioNoRoot/.config/autostart/xmr.desktop

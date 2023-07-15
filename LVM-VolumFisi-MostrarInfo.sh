@@ -13,14 +13,12 @@
 # ----------
 
 echo ""
-echo "  Mostrando info de volúmenes físicos en el sistema..."
-echo ""
+echo "  Mostrando info de volúmenes físicos en el sistema..."echo ""
 pvs
 echo ""
 
 echo ""
-echo "  Mostrando info de volúmenes físicos en el sistema (más completo)..."
-echo ""
+echo "  Mostrando info de volúmenes físicos en el sistema (más completo)..."echo ""
 pvdisplay
 echo ""
 

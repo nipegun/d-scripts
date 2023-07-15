@@ -13,38 +13,31 @@
 # ----------
 
 # Determinar la versión de Debian
-
-   if [ -f /etc/os-release ]; then
-       # Para systemd y freedesktop.org
-       . /etc/os-release
-       cNomSO=$NAME
-       cVerSO=$VERSION_ID
-   elif type lsb_release >/dev/null 2>&1; then
-       # linuxbase.org
-       cNomSO=$(lsb_release -si)
-       cVerSO=$(lsb_release -sr)
-   elif [ -f /etc/lsb-release ]; then
-       # Para algunas versiones de Debian sin el comando lsb_release
-       . /etc/lsb-release
-       cNomSO=$DISTRIB_ID
-       cVerSO=$DISTRIB_RELEASE
-   elif [ -f /etc/debian_version ]; then
-       # Para versiones viejas de Debian.
-       cNomSO=Debian
-       cVerSO=$(cat /etc/debian_version)
-   else
-       # Para el viejo uname (También funciona para BSD)
-       cNomSO=$(uname -s)
-       cVerSO=$(uname -r)
-   fi
+  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+    . /etc/os-release
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+    . /etc/lsb-release
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
+  else                                        # Para el viejo uname (También funciona para BSD).
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
+  fi
 
 
 if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de amule para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de amule para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -55,8 +48,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de amule para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de amule para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -67,8 +59,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de amule para Debian 9 (Stretch)..."
-  
+  echo "  Iniciando el script de instalación de amule para Debian 9 (Stretch)..."  
   echo ""
 
   ArgumentosRequeridos=4
@@ -90,34 +81,28 @@ elif [ $cVerSO == "9" ]; then
       exit
     else
       echo ""
-      echo "Creando las carpetas para las descargas..."
-      echo ""
+      echo "Creando las carpetas para las descargas..."      echo ""
       mkdir -p $1
       mkdir -p $2
     
       echo ""
-      echo "Instalando el paquete amule-daemon..."
-      echo ""
+      echo "Instalando el paquete amule-daemon..."      echo ""
       apt-get -y install amule-daemon
 
       echo ""
-      echo "Agregando el usuario $3..."
-      echo ""
+      echo "Agregando el usuario $3..."      echo ""
       adduser $3
 
       echo ""
-      echo "Corriendo el comando amuled por primera vez para el usuario $3..."
-      echo ""
+      echo "Corriendo el comando amuled por primera vez para el usuario $3..."      echo ""
       runuser -l $3 -c 'amuled'
 
       echo ""
-      echo "Deteniendo el servicio amule-daemon..."
-      echo ""
+      echo "Deteniendo el servicio amule-daemon..."      echo ""
       service amule-daemon stop
 
       echo ""
-      echo "Realizando cambios en la configuración..."
-      echo ""
+      echo "Realizando cambios en la configuración..."      echo ""
       sed -i -e 's|TempDir=/home/debian-amule/.aMule/Temp|TempDir="'$1'"|g' /home/$3/.aMule/amule.conf
       sed -i -e 's|IncomingDir=/home/debian-amule/.aMule/Incoming|IncomingDir="'$2'"|g' /home/$3/.aMule/amule.conf
 
@@ -131,13 +116,11 @@ elif [ $cVerSO == "9" ]; then
       sed -i -e 's|AMULED_USER=""|AMULED_USER="$3"|g' /etc/default/amule-daemon
 
       echo ""
-      echo "Iniciando el servicio amule-daemon..."
-      echo ""
+      echo "Iniciando el servicio amule-daemon..."      echo ""
       service amule-daemon start
 
       #echo ""
-      #echo "Agregando el usuario al grupo amule-daemon..."
-      #echo ""
+      #echo "Agregando el usuario al grupo amule-daemon..."      #echo ""
       #usermod -a -G debian-amule $3
 
       echo ""
@@ -159,8 +142,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de amule para Debian 10 (Buster)..."
-  
+  echo "  Iniciando el script de instalación de amule para Debian 10 (Buster)..."  
   echo ""
 
   echo ""
@@ -171,8 +153,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   
-  echo "  Iniciando el script de instalación de amule para Debian 11 (Bullseye)..."
-  
+  echo "  Iniciando el script de instalación de amule para Debian 11 (Bullseye)..."  
   echo ""
 
   echo ""
