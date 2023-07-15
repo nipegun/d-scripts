@@ -117,18 +117,21 @@ echo ""
 
               # Desinstalar paquete anterior
                 echo ""
-                echo "  Desinstalando paquete .deb anterior..."                echo ""
+                echo "  Desinstalando paquete .deb anterior..."
+                echo ""
                 dpkg -r utopia
 
               # Crear carpeta de descarga
                 echo ""
-                echo "  Creando carpeta de descarga..."                echo ""
+                echo "  Creando carpeta de descarga..."
+                echo ""
                 mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
                 rm -rf /root/SoftInst/Cryptos/CRP/*
 
               # Descargar y descomprimir todos los archivos
                 echo ""
-                echo "  Descargando el paquete .deb de la instalación..."                echo ""
+                echo "  Descargando el paquete .deb de la instalación..."
+                echo ""
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                      echo ""
@@ -142,7 +145,8 @@ echo ""
 
               # Instalar dependencias
                 echo ""
-                echo "  Instalando dependencias..."                echo ""
+                echo "  Instalando dependencias..."
+                echo ""
 
                 # Actualizar cache de paquetes
                   apt-get -y update
@@ -160,7 +164,8 @@ echo ""
 
               # Instalar paquete .deb
                 echo ""
-                echo "  Instalando paquete .deb..."                echo ""
+                echo "  Instalando paquete .deb..."
+                echo ""
                 dpkg -i /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
 
               # Fin de la ejecución del script
@@ -181,13 +186,15 @@ echo ""
 
               # Crear carpeta de descarga
                 echo ""
-                echo "  Creando carpeta de descarga..."                echo ""
+                echo "  Creando carpeta de descarga..."
+                echo ""
                 mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
                 rm -rf /root/SoftInst/Cryptos/CRP/*
 
               # Descargar y descomprimir todos los archivos
                 echo ""
-                echo "  Descargando el paquete .deb de la instalación..."                echo ""
+                echo "  Descargando el paquete .deb de la instalación..."
+                echo ""
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
@@ -199,7 +206,8 @@ echo ""
                 wget https://update.u.is/downloads/linux/utopia-latest.amd64.deb
 
                 echo ""
-                echo "  Extrayendo los archivos de dentro del paquete .deb..."                echo ""
+                echo "  Extrayendo los archivos de dentro del paquete .deb..."
+                echo ""
                 # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
@@ -210,7 +218,8 @@ echo ""
                 ar xv /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
 
                 echo ""
-                echo "  Descomprimiendo el archivo data.tar.xz..."                echo ""
+                echo "  Descomprimiendo el archivo data.tar.xz..."
+                echo ""
                 # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
@@ -339,18 +348,21 @@ echo ""
 
               # Desinstalar paquete .deb viejo
                 echo ""
-                echo "  Desinstalando paquete .deb viejo..."                echo ""
+                echo "  Desinstalando paquete .deb viejo..."
+                echo ""
                 apt-get -y remove utopia
 
               # Crear carpeta de descarga
                 echo ""
-                echo "  Creando carpeta de descarga..."                echo ""
+                echo "  Creando carpeta de descarga..."
+                echo ""
                 mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
                 rm -rf /root/SoftInst/Cryptos/CRP/*
 
               # Descargar y descomprimir todos los archivos
                 echo ""
-                echo "  Descargando el paquete .deb de la instalación..."                echo ""
+                echo "  Descargando el paquete .deb de la instalación..."
+                echo ""
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                      echo ""
@@ -363,7 +375,8 @@ echo ""
 
               # Instalar paquete .deb
                 echo ""
-                echo "  Instalando paquete .deb..."                echo ""
+                echo "  Instalando paquete .deb..."
+                echo ""
                 dpkg -i /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
 
               # Fin de la ejecución del script
@@ -381,13 +394,15 @@ echo ""
 
               # Crear carpeta de descarga
                 echo ""
-                echo "  Creando carpeta de descarga..."                echo ""
+                echo "  Creando carpeta de descarga..."
+                echo ""
                 mkdir -p /root/SoftInst/Cryptos/CRP/ 2> /dev/null
                 rm -rf /root/SoftInst/Cryptos/CRP/*
 
               # Descargar y descomprimir todos los archivos
                 echo ""
-                echo "  Descargando el paquete .deb de la instalación..."                echo ""
+                echo "  Descargando el paquete .deb de la instalación..."
+                echo ""
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
@@ -399,7 +414,8 @@ echo ""
                 wget https://update.u.is/downloads/linux/utopia-latest.amd64.deb
 
                 echo ""
-                echo "  Extrayendo los archivos de dentro del paquete .deb..."                echo ""
+                echo "  Extrayendo los archivos de dentro del paquete .deb..."
+                echo ""
                 # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
@@ -410,7 +426,8 @@ echo ""
                 ar xv /root/SoftInst/Cryptos/CRP/utopia-latest.amd64.deb
 
                 echo ""
-                echo "  Descomprimiendo el archivo data.tar.xz..."                echo ""
+                echo "  Descomprimiendo el archivo data.tar.xz..."
+                echo ""
                 # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                     echo ""

@@ -40,7 +40,8 @@ if [ $# -ne $cCantArgumEsperados ]
       fi
     # Comprobar estado de la base de datos
       echo ""
-      echo "  Comprobando estado de la base de datos..."      echo ""
+      echo "  Comprobando estado de la base de datos..."
+      echo ""
       vEstadoDeLaBaseDeDatosDeUHUB=$(sqlite3 /etc/uhub/users.db "PRAGMA integrity_check;")
     # Cambiar contraseña a usuario
       if [ $vEstadoDeLaBaseDeDatosDeUHUB == "ok" ]; then

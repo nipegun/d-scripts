@@ -139,7 +139,8 @@ elif [ $cVerSO == "11" ]; then
           1)
 
             echo ""
-            echo "  Activando en cluster en el servidor 1..."            echo ""
+            echo "  Activando en cluster en el servidor 1..."
+            echo ""
 
             # Comprobar si el paquete mariadb-server está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s mariadb-server 2>/dev/null | grep installed) == "" ]]; then
@@ -155,15 +156,18 @@ elif [ $cVerSO == "11" ]; then
               vIPLocal=$(hostname -I)
             # Parar el servicio antes de hacer modificaciones
               echo ""
-              echo "    Parando el servicio mariadb..."              echo ""
+              echo "    Parando el servicio mariadb..."
+              echo ""
               systemctl stop mariadb
             # Securizando la instalación de MariaDB del nodo
               echo ""
-              echo "    Securizando la instalación de MariaDB del nodo..."              echo ""
+              echo "    Securizando la instalación de MariaDB del nodo..."
+              echo ""
               mysql_secure_installation
             # Realizar modificaciones en archivos de configuración
               echo ""
-              echo "    Realizando modificaciones en archivos de configuración..."              echo ""
+              echo "    Realizando modificaciones en archivos de configuración..."
+              echo ""
               # Responder consultas en todas las IPs
                 sed -i -e 's|bind-address|#bind-address|g' /etc/mysql/mariadb.conf.d/50-server.cnf
               # Modificar la configuración del cluster
@@ -180,26 +184,31 @@ elif [ $cVerSO == "11" ]; then
                 echo 'wsrep_sst_method=rsync'                                   >> /etc/mysql/mariadb.conf.d/60-galera.cnf
             # Creando el cluster
               echo ""
-              echo "    Inicializando el cluster..."              echo ""
+              echo "    Inicializando el cluster..."
+              echo ""
               galera_new_cluster
             # Agregar las IPs de todos los servidores que van a conformar el cluster
               sed -i -e "s|gcomm://|gcomm://$vIP1,$vIP2,$vIP3|g" /etc/mysql/mariadb.conf.d/60-galera.cnf
             # Volver a iniciar el servicio mariadb
               echo ""
-              echo "    Volviendo a iniciar el servicio mariadb..."              echo ""
+              echo "    Volviendo a iniciar el servicio mariadb..."
+              echo ""
               systemctl start mariadb
             # Consultar el estado del cluster
               echo ""
-              echo "    Consultando el estado del cluster..."              echo ""
+              echo "    Consultando el estado del cluster..."
+              echo ""
               mysql -e "show status like 'wsrep_%';"
             # Agregar comandos a ejecutarse al inicio del servidor
               echo ""
-              echo "    Agregando comandos a ejecutarse en cada inicio de Debian..."              echo ""
+              echo "    Agregando comandos a ejecutarse en cada inicio de Debian..."
+              echo ""
               echo "# Re-inicializar el cluster" >> /root/scripts/ComandosPostArranque.sh
               echo "  galera_new_cluster"        >> /root/scripts/ComandosPostArranque.sh
             # Crear usuario en la bases de datos para monitorizar con haproxy
               echo ""
-              echo "    Creando el usuario para monitorizar con HAProxy..."              echo ""
+              echo "    Creando el usuario para monitorizar con HAProxy..."
+              echo ""
               mysql -e "create user 'haproxy'@'"$vIPHAProxy"'";
 
           ;;
@@ -207,7 +216,8 @@ elif [ $cVerSO == "11" ]; then
           2)
 
             echo ""
-            echo "  Activando en cluster en el servidor 2..."            echo ""
+            echo "  Activando en cluster en el servidor 2..."
+            echo ""
 
             # Comprobar si el paquete mariadb-server está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s mariadb-server 2>/dev/null | grep installed) == "" ]]; then
@@ -222,7 +232,8 @@ elif [ $cVerSO == "11" ]; then
               vIPLocal=$(hostname -I)
             # Parar el servicio antes de hacer modificaciones
               echo ""
-              echo "    Parando el servicio mariadb..."              echo ""
+              echo "    Parando el servicio mariadb..."
+              echo ""
               systemctl stop mariadb
             # Securizando la instalación de MariaDB del nodo
               #echo ""
@@ -233,7 +244,8 @@ elif [ $cVerSO == "11" ]; then
               #       incluido el usuario root (con su contraseña) y todas las bases de datos.
             # Realizar modificaciones en archivos de configuración
               echo ""
-              echo "    Realizando modificaciones en archivos de configuración..."              echo ""
+              echo "    Realizando modificaciones en archivos de configuración..."
+              echo ""
               # Responder consultas en todas las IPs
                 sed -i -e 's|bind-address|#bind-address|g' /etc/mysql/mariadb.conf.d/50-server.cnf
               # Modificar la configuración del cluster
@@ -252,15 +264,18 @@ elif [ $cVerSO == "11" ]; then
               sed -i -e "s|gcomm://|gcomm://$vIP1,$vIP2,$vIP3|g" /etc/mysql/mariadb.conf.d/60-galera.cnf
             # Volver a iniciar el servicio mariadb
               echo ""
-              echo "    Volviendo a iniciar el servicio mariadb..."              echo ""
+              echo "    Volviendo a iniciar el servicio mariadb..."
+              echo ""
               systemctl start mariadb
             # Consultar el estado del cluster
               echo ""
-              echo "    Consultar el estado del cluster..."              echo ""
+              echo "    Consultar el estado del cluster..."
+              echo ""
               mysql -e "show status like 'wsrep_%';"
             # Agregar el script para reiniciar el cluster en nodos secundarios.
               echo ""
-              echo "    Agregar el script para reiniciar el cluster en nodos secundarios..."              echo ""
+              echo "    Agregar el script para reiniciar el cluster en nodos secundarios..."
+              echo ""
               echo "/root/scripts/d-scripts/MariaDB-Servidor-ComprobarYLevantar.sh" >> /root/scripts/ComandosPostArranque.sh
               echo "/root/scripts/d-scripts/MariaDB-Servidor-ComprobarYLevantar.sh" >> /root/scripts/TareasCronCadaMinuto.sh
 
@@ -269,7 +284,8 @@ elif [ $cVerSO == "11" ]; then
           3)
 
             echo ""
-            echo " Activando en cluster en el servidor 3..."            echo ""
+            echo " Activando en cluster en el servidor 3..."
+            echo ""
 
             # Comprobar si el paquete mariadb-server está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s mariadb-server 2>/dev/null | grep installed) == "" ]]; then
@@ -284,7 +300,8 @@ elif [ $cVerSO == "11" ]; then
               vIPLocal=$(hostname -I)
             # Parar el servicio antes de hacer modificaciones
               echo ""
-              echo "    Parando el servicio mariadb..."              echo ""
+              echo "    Parando el servicio mariadb..."
+              echo ""
               systemctl stop mariadb
             # Securizando la instalación de MariaDB del nodo
               #echo ""
@@ -295,7 +312,8 @@ elif [ $cVerSO == "11" ]; then
               #       incluido el usuario root (con su contraseña) y todas las bases de datos.
             # Realizar modificaciones en archivos de configuración
               echo ""
-              echo "    Realizando modificaciones en archivos de configuración..."              echo ""
+              echo "    Realizando modificaciones en archivos de configuración..."
+              echo ""
               # Responder consultas en todas las IPs
                 sed -i -e 's|bind-address|#bind-address|g' /etc/mysql/mariadb.conf.d/50-server.cnf
               # Modificar la configuración del cluster
@@ -314,15 +332,18 @@ elif [ $cVerSO == "11" ]; then
               sed -i -e "s|gcomm://|gcomm://$vIP1,$vIP2,$vIP3|g" /etc/mysql/mariadb.conf.d/60-galera.cnf
             # Volver a iniciar el servicio mariadb
               echo ""
-              echo "    Volviendo a iniciar el servicio mariadb..."              echo ""
+              echo "    Volviendo a iniciar el servicio mariadb..."
+              echo ""
               systemctl start mariadb
             # Consultar el estado del cluster
               echo ""
-              echo "  Consultar el estado del cluster..."              echo ""
+              echo "  Consultar el estado del cluster..."
+              echo ""
               mysql -e "show status like 'wsrep_%';"
             # Agregar el script para reiniciar el cluster en nodos secundarios.
               echo ""
-              echo "    Agregar el script para reiniciar el cluster en nodos secundarios..."              echo ""
+              echo "    Agregar el script para reiniciar el cluster en nodos secundarios..."
+              echo ""
               echo "/root/scripts/d-scripts/MariaDB-Servidor-ComprobarYLevantar.sh" >> /root/scripts/ComandosPostArranque.sh
               echo "/root/scripts/d-scripts/MariaDB-Servidor-ComprobarYLevantar.sh" >> /root/scripts/TareasCronCadaMinuto.sh
 
@@ -331,7 +352,8 @@ elif [ $cVerSO == "11" ]; then
           4)
 
             echo ""
-            echo "  Instalando y configurando el nodo HAProxy..."            echo ""
+            echo "  Instalando y configurando el nodo HAProxy..."
+            echo ""
 
             apt-get -y install haproxy
             cp  /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak

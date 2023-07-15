@@ -142,7 +142,8 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Iniciar el demonio
             echo ""
-            echo "  Arrancando argentumd..."            echo ""
+            echo "  Arrancando argentumd..."
+            echo ""
             su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/ARG-daemon-iniciar.sh"
             sleep 5
 
@@ -157,7 +158,8 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Autoejecución del nodo al iniciar el sistema
             echo ""
-            echo "    Agregando argentumd a los ComandosPostArranque..."            echo ""
+            echo "    Agregando argentumd a los ComandosPostArranque..."
+            echo ""
             chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/ARG-daemon-iniciar.sh
             echo "su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/ARG-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
             echo ""
@@ -263,7 +265,8 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Iniciar el demonio
             echo ""
-            echo "  Arrancando argentumd..."            echo ""
+            echo "  Arrancando argentumd..."
+            echo ""
             su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/ARG-daemon-iniciar.sh"
             sleep 5
 
@@ -278,7 +281,8 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Autoejecución del nodo al iniciar el sistema
             echo ""
-            echo "    Agregando argentumd a los ComandosPostArranque..."            echo ""
+            echo "    Agregando argentumd a los ComandosPostArranque..."
+            echo ""
             chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/ARG-daemon-iniciar.sh
             echo "su $vUsuarioNoRoot -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/ARG-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
             echo ""
@@ -292,7 +296,8 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Icono de lanzamiento en el menú gráfico
             echo ""
-            echo "    Agregando la aplicación gráfica al menú..."            echo ""
+            echo "    Agregando la aplicación gráfica al menú..."
+            echo ""
             mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/
             echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.local/share/applications/ARG.desktop
@@ -309,7 +314,8 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
           # Autoejecución gráfica de argentum
             echo ""
-            echo "  Creando el archivo de autoejecución de argentum-qt para escritorio..."            echo ""
+            echo "  Creando el archivo de autoejecución de argentum-qt para escritorio..."
+            echo ""
             mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/
             echo "[Desktop Entry]"                                                   > /home/$vUsuarioNoRoot/.config/autostart/ARG.desktop

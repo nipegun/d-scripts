@@ -39,8 +39,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de MLDonkey para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de MLDonkey para Debian 7 (Wheezy)..."  
   echo ""
 
   echo ""
@@ -50,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de MLDonkey para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de MLDonkey para Debian 8 (Jessie)..."  
   echo ""
 
   echo ""
@@ -61,7 +59,6 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de MLDonkey para Debian 9 (Stretch)..."  
   echo ""
 
@@ -83,20 +80,24 @@ elif [ $cVerSO == "9" ]; then
       exit
     else
       echo ""
-      echo "  Instalando el paquete mldonkey-server..."      echo ""
+      echo "  Instalando el paquete mldonkey-server..."
+      echo ""
       apt-get update
       apt-get -y install mldonkey-server
       echo ""
-      echo "  Deteninendo el servicio..."      echo ""
+      echo "  Deteninendo el servicio..."
+      echo ""
       service mldonkey-server stop
       echo ""
-      echo "  Realizando cambios en la configuración..."      echo ""
+      echo "  Realizando cambios en la configuración..."
+      echo ""
       cp /var/lib/mldonkey/downloads.ini /var/lib/mldonkey/downloads.ini.bak
       sed -i -e 's| allowed_ips = \[| allowed_ips = ["127.0.0.1"; "'"$1"'";]|g' /var/lib/mldonkey/downloads.ini
       sed -i -e 's|  "127.0.0.1";]| |g' /var/lib/mldonkey/downloads.ini
       sed -i -e 's| nolimit_ips = \[| nolimit_ips = ["127.0.0.1";]|g' /var/lib/mldonkey/downloads.ini
       echo ""
-      echo "  Re-arrancando el servicio..."      echo ""
+      echo "  Re-arrancando el servicio..."
+      echo ""
       service mldonkey-server start
       echo ""
       echo "  Ejecución del script, finalizada."
@@ -107,7 +108,6 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de MLDonkey para Debian 10 (Buster)..."  
   echo ""
 
@@ -118,7 +118,6 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de MLDonkey para Debian 11 (Bullseye)..."  
   echo ""
 

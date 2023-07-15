@@ -140,7 +140,8 @@ elif [ $cVerSO == "11" ]; then
           1)
 
             echo ""
-            echo "  Instalando paquete Suricata, dependencias y otros paquetes útiles..."            echo ""
+            echo "  Instalando paquete Suricata, dependencias y otros paquetes útiles..."
+            echo ""
 
             # Actualizar el sistema
               apt-get -y update
@@ -154,7 +155,8 @@ elif [ $cVerSO == "11" ]; then
           2)
 
             echo ""
-            echo "  Configurando para un Debian con una única interfaz de red..."            echo ""
+            echo "  Configurando para un Debian con una única interfaz de red..."
+            echo ""
 
             # Determinar las interfaces activas que tienen asignada una IP
               aInterfacesActivasConIP=($(/root/scripts/d-scripts/Red-Interfaces-Activas-ConIPAsignada.sh | grep "→" | cut -d ':' -f2))
@@ -280,7 +282,8 @@ elif [ $cVerSO == "11" ]; then
           4)
 
             echo ""
-            echo "  Actualizando la fuente de reglas..."            echo ""
+            echo "  Actualizando la fuente de reglas..."
+            echo ""
             suricata-update update-sources
             echo ""
             echo "  Hay disponibles para descargar reglas de estas fuentes:"
@@ -291,7 +294,8 @@ elif [ $cVerSO == "11" ]; then
               #suricata-update
             
             echo ""
-            echo "  Metiendo todas las reglas disponibles dentro del archivo /var/lib/suricata/rules/suricata.rules..."            echo ""
+            echo "  Metiendo todas las reglas disponibles dentro del archivo /var/lib/suricata/rules/suricata.rules..."
+            echo ""
             suricata-update
 
 To enable rules that are disabled by default, use /etc/suricata/enable.conf

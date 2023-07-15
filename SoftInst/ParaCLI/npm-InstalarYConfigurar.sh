@@ -122,7 +122,8 @@ elif [ $cVerSO == "11" ]; then
   # Comprobar si hay una instalación previa y detener todos los servicios
     if [ -f /lib/systemd/system/npm.service ]; then
       echo ""
-      echo "    Se ha encontrado una instalación previa. Deteniendo servicios..."      echo ""
+      echo "    Se ha encontrado una instalación previa. Deteniendo servicios..."
+      echo ""
       systemctl stop openresty
       systemctl stop npm
     fi
@@ -253,7 +254,8 @@ elif [ $cVerSO == "11" ]; then
   # Generate dummy self-signed certificate.
     if [ ! -f /data/nginx/dummycert.pem ] || [ ! -f /data/nginx/dummykey.pem ]; then
       echo ""
-      echo "    Generando el certificado SSL dummy..."      echo ""
+      echo "    Generando el certificado SSL dummy..."
+      echo ""
       openssl req -new -newkey rsa:2048 -days 3650 -nodes -x509 -subj "/O=Nginx Proxy Manager/OU=Dummy Certificate/CN=localhost" -keyout /data/nginx/dummykey.pem -out /data/nginx/dummycert.pem
     fi
 

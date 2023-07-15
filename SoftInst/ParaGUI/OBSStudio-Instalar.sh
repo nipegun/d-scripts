@@ -39,8 +39,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de OBSStudio para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de OBSStudio para Debian 7 (Wheezy)..."  
   echo ""
 
   echo ""
@@ -50,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de OBSStudio para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de OBSStudio para Debian 8 (Jessie)..."  
   echo ""
 
   echo ""
@@ -61,7 +59,6 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de OBSStudio para Debian 9 (Stretch)..."  
   echo ""
 
@@ -72,7 +69,6 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de OBSStudio para Debian 10 (Buster)..."  
   echo ""
 
@@ -162,7 +158,8 @@ elif [ $cVerSO == "10" ]; then
             #checkinstall --default --pkgname=obs-studio --fstrans=no --backup=no --pkgversion="$(date +%Y%m%d)-git" --deldoc=yes
             make install
             echo ""
-            echo "Parcheando el link de ejecución para indicarle que arranque siempre con LibGL..."            echo ""
+            echo "Parcheando el link de ejecución para indicarle que arranque siempre con LibGL..."
+            echo ""
             sed -i -e 's|Exec=obs|Exec=LIBGL_ALWAYS_SOFTWARE=1 obs|g' /usr/share/applications/com.obsproject.Studio.desktop
 
           ;;
@@ -313,7 +310,6 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de OBSStudio para Debian 11 (Bullseye)..."  
   echo ""
 

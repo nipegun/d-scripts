@@ -83,7 +83,6 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de Grafana para Debian 11 (Bullseye)..."  
   echo ""
 

@@ -74,13 +74,13 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "  Determinando el número de la última versión de MongoDB..." 
-echo ""
+  echo ""
   UltVersMongoDB=$(curl -sL https://repo.mongodb.org/apt/debian/dists/buster/mongodb-org/ | grep href | grep -v velopmen | grep -v esti | grep -v arent | tail -n1 | cut -d "'" -f2)
   echo "  La última versión de MongoDB es la $UltVersMongoDB"
 
   echo ""
   echo "  Instalando dependencias..." 
-echo ""
+  echo ""
   apt-get -y update
   apt-get -y install ca-certificates
   apt-get -y install curl
@@ -88,7 +88,7 @@ echo ""
 
   echo ""
   echo "  Agregando la clave GPG..." 
-echo ""
+  echo ""
   # Comprobar si el paquete gnupg está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s gnupg 2>/dev/null | grep installed) == "" ]]; then
        echo ""
@@ -101,7 +101,7 @@ echo ""
   
   echo ""
   echo "  Agregando el repositorio..." 
-echo ""
+  echo ""
   # Comprobar si el paquete lsb-release está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s lsb-release 2>/dev/null | grep installed) == "" ]]; then
        echo ""
@@ -116,18 +116,18 @@ echo ""
 
   echo ""
   echo "  Instalando paquetes..." 
-echo ""
+  echo ""
   apt-get -y update
   apt-get -y install mongodb-org
 
   echo ""
   echo "  Activando el servicio..." 
-echo ""
+  echo ""
   systemctl enable mongod --now
 
   echo ""
   echo "  Verificando el estado de la conexión con la base de datos..." 
-echo ""
+  echo ""
   echo "  0 = Incorrecta."
   echo "  1 = Correcta"
   echo ""
@@ -135,12 +135,12 @@ echo ""
 
   echo ""
   echo "  Activando la autenticación de usuarios..." 
-echo ""
+  echo ""
   sed -i -e 's|#security:|security:\n  authorization: enabled|g' /etc/mongod.conf
 
   echo ""
   echo "  Activando el acceso desde todas las IPs..." 
-echo ""
+  echo ""
   echo "  Si no quieres esto, edita el archivo /etc/mongod.conf"
   echo '  y cambia la línea IP en la parte que dice "bindIp: 0.0.0.0".'
   echo ""
@@ -148,12 +148,12 @@ echo ""
 
   echo ""
   echo "  Reiniciando el servicio..." 
-echo ""
+  echo ""
   systemctl restart mongod
 
   echo ""
   echo "  Creando el usuario con privilegios de administración..." 
-echo ""
+  echo ""
   echo 'use admin'                            > /tmp/CrearUsuariosMongoDB.js
   echo ''                                    >> /tmp/CrearUsuariosMongoDB.js
   echo 'db.createUser({'                     >> /tmp/CrearUsuariosMongoDB.js
@@ -181,17 +181,17 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación del servidor MongoDB para Debian 11 (Bullseye)..." 
-echo ""
+  echo ""
 
   echo ""
   echo "  Determinando el número de la última versión de MongoDB..." 
-echo ""
+  echo ""
   UltVersMongoDB=$(curl -sL https://repo.mongodb.org/apt/debian/dists/buster/mongodb-org/ | grep href | grep -v velopmen | grep -v esti | grep -v arent | tail -n1 | cut -d "'" -f2)
   echo "  La última versión de MongoDB es la $UltVersMongoDB"
 
   echo ""
   echo "  Instalando dependencias..." 
-echo ""
+  echo ""
   apt-get -y update
   apt-get -y install ca-certificates
   apt-get -y install curl
@@ -199,7 +199,7 @@ echo ""
 
   echo ""
   echo "  Agregando la clave GPG..." 
-echo ""
+  echo ""
   # Comprobar si el paquete gnupg está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s gnupg 2>/dev/null | grep installed) == "" ]]; then
        echo ""
@@ -212,7 +212,7 @@ echo ""
   
   echo ""
   echo "  Agregando el repositorio..." 
-echo ""
+  echo ""
   # Comprobar si el paquete lsb-release está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s lsb-release 2>/dev/null | grep installed) == "" ]]; then
        echo ""
@@ -227,18 +227,18 @@ echo ""
 
   echo ""
   echo "  Instalando paquetes..." 
-echo ""
+  echo ""
   apt-get -y update
   apt-get -y install mongodb-org
 
   echo ""
   echo "  Activando el servicio..." 
-echo ""
+  echo ""
   systemctl enable mongod --now
 
   echo ""
   echo "  Verificando el estado de la conexión con la base de datos..." 
-echo ""
+  echo ""
   echo "  0 = Incorrecta."
   echo "  1 = Correcta"
   echo ""
@@ -246,12 +246,12 @@ echo ""
 
   echo ""
   echo "  Activando la autenticación de usuarios..." 
-echo ""
+  echo ""
   sed -i -e 's|#security:|security:\n  authorization: enabled|g' /etc/mongod.conf
 
   echo ""
   echo "  Activando el acceso desde todas las IPs..." 
-echo ""
+  echo ""
   echo "  Si no quieres esto, edita el archivo /etc/mongod.conf"
   echo '  y cambia la línea IP en la parte que dice "bindIp: 0.0.0.0".'
   echo ""
@@ -259,12 +259,12 @@ echo ""
 
   echo ""
   echo "  Reiniciando el servicio..." 
-echo ""
+  echo ""
   systemctl restart mongod
 
   echo ""
   echo "  Creando el usuario con privilegios de administración..." 
-echo ""
+  echo ""
   echo 'use admin'                            > /tmp/CrearUsuariosMongoDB.js
   echo ''                                    >> /tmp/CrearUsuariosMongoDB.js
   echo 'db.createUser({'                     >> /tmp/CrearUsuariosMongoDB.js

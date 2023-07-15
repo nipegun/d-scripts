@@ -130,17 +130,20 @@ elif [ $cVerSO == "11" ]; then
           1)
 
             echo ""
-            echo "  Instalando y configurando el servidor DHCP para redes de clase A por eth0..."            echo ""
+            echo "  Instalando y configurando el servidor DHCP para redes de clase A por eth0..."
+            echo ""
 
             # Instalar el paquete isc-dhcp-server
               echo ""
-              echo "    Instalando el paquete isc-dhcp-server..."              echo ""
+              echo "    Instalando el paquete isc-dhcp-server..."
+              echo ""
               apt-get -y update && apt-get -y install isc-dhcp-server
 
             # Indicar la ubicación del archivo de configuración del demonio
               echo ""
               echo "    Indicando la ubicación del archivo de configuración del demonio dhcpd"
-              echo "    y la interfaz sobre la que correrá..."              echo ""
+              echo "    y la interfaz sobre la que correrá..."
+              echo ""
               cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.bak
               echo 'DHCPDv4_CONF=/etc/dhcp/dhcpd.conf'  > /etc/default/isc-dhcp-server
               echo 'INTERFACESv4="eth0"'               >> /etc/default/isc-dhcp-server
@@ -148,7 +151,8 @@ elif [ $cVerSO == "11" ]; then
 
             # Configurar servidor DHCP
               echo ""
-              echo "    Configurando el servidor DHCP..."              echo ""
+              echo "    Configurando el servidor DHCP..."
+              echo ""
               cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.ori
               echo "authoritative;"                                  > /etc/dhcp/dhcpd.conf
               echo "subnet 10.0.0.0 netmask 255.0.0.0 {"            >> /etc/dhcp/dhcpd.conf
@@ -167,7 +171,8 @@ elif [ $cVerSO == "11" ]; then
 
             # Descargar archivo de nombres de fabricantes
               echo ""
-              echo "    Descargando archivo de nombres de fabricantes..."              echo ""
+              echo "    Descargando archivo de nombres de fabricantes..."
+              echo ""
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                    echo ""
@@ -183,17 +188,20 @@ elif [ $cVerSO == "11" ]; then
           2)
 
             echo ""
-            echo "  Instalando y configurando el servidor DHCP para redes de clase B por eth0..."            echo ""
+            echo "  Instalando y configurando el servidor DHCP para redes de clase B por eth0..."
+            echo ""
 
             # Instalar el paquete isc-dhcp-server
               echo ""
-              echo "    Instalando el paquete isc-dhcp-server..."              echo ""
+              echo "    Instalando el paquete isc-dhcp-server..."
+              echo ""
               apt-get -y update && apt-get -y install isc-dhcp-server
 
             # Indicar la ubicación del archivo de configuración del demonio
               echo ""
               echo "    Indicando la ubicación del archivo de configuración del demonio dhcpd"
-              echo "    y la interfaz sobre la que correrá..."              echo ""
+              echo "    y la interfaz sobre la que correrá..."
+              echo ""
               cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.bak
               echo 'DHCPDv4_CONF=/etc/dhcp/dhcpd.conf'  > /etc/default/isc-dhcp-server
               echo 'INTERFACESv4="eth0"'               >> /etc/default/isc-dhcp-server
@@ -201,7 +209,8 @@ elif [ $cVerSO == "11" ]; then
 
             # Configurar servidor DHCP
               echo ""
-              echo "    Configurando el servidor DHCP..."              echo ""
+              echo "    Configurando el servidor DHCP..."
+              echo ""
               cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.ori
               echo "authoritative;"                                  > /etc/dhcp/dhcpd.conf
               echo "subnet 172.16.0.0 netmask 255.255.0.0 {"        >> /etc/dhcp/dhcpd.conf
@@ -220,7 +229,8 @@ elif [ $cVerSO == "11" ]; then
 
             # Descargar archivo de nombres de fabricantes
               echo ""
-              echo "    Descargando archivo de nombres de fabricantes..."              echo ""
+              echo "    Descargando archivo de nombres de fabricantes..."
+              echo ""
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                    echo ""
@@ -236,17 +246,20 @@ elif [ $cVerSO == "11" ]; then
           3)
 
             echo ""
-            echo "  Instalando y configurando el servidor DHCP para redes de clase C por eth0..."            echo ""
+            echo "  Instalando y configurando el servidor DHCP para redes de clase C por eth0..."
+            echo ""
 
             # Instalar el paquete isc-dhcp-server
               echo ""
-              echo "    Instalando el paquete isc-dhcp-server..."              echo ""
+              echo "    Instalando el paquete isc-dhcp-server..."
+              echo ""
               apt-get -y update && apt-get -y install isc-dhcp-server
 
             # Indicar la ubicación del archivo de configuración del demonio
               echo ""
               echo "    Indicando la ubicación del archivo de configuración del demonio dhcpd"
-              echo "    y la interfaz sobre la que correrá..."              echo ""
+              echo "    y la interfaz sobre la que correrá..."
+              echo ""
               cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.bak
               echo 'DHCPDv4_CONF=/etc/dhcp/dhcpd.conf'  > /etc/default/isc-dhcp-server
               echo 'INTERFACESv4="eth0"'               >> /etc/default/isc-dhcp-server
@@ -254,7 +267,8 @@ elif [ $cVerSO == "11" ]; then
 
             # Configurar servidor DHCP
               echo ""
-              echo "    Configurando el servidor DHCP..."              echo ""
+              echo "    Configurando el servidor DHCP..."
+              echo ""
               cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.ori
               echo "authoritative;"                                  > /etc/dhcp/dhcpd.conf
               echo "subnet 192.168.0.0 netmask 255.255.255.0 {"     >> /etc/dhcp/dhcpd.conf
@@ -273,7 +287,8 @@ elif [ $cVerSO == "11" ]; then
 
             # Descargar archivo de nombres de fabricantes
               echo ""
-              echo "    Descargando archivo de nombres de fabricantes..."              echo ""
+              echo "    Descargando archivo de nombres de fabricantes..."
+              echo ""
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                    echo ""
@@ -290,17 +305,20 @@ elif [ $cVerSO == "11" ]; then
           4)
 
             echo ""
-            echo "  Instalando y configurando el servidor DHCP para redes de clase A por eth1..."            echo ""
+            echo "  Instalando y configurando el servidor DHCP para redes de clase A por eth1..."
+            echo ""
 
             # Instalar el paquete isc-dhcp-server
               echo ""
-              echo "    Instalando el paquete isc-dhcp-server..."              echo ""
+              echo "    Instalando el paquete isc-dhcp-server..."
+              echo ""
               apt-get -y update && apt-get -y install isc-dhcp-server
 
             # Indicar la ubicación del archivo de configuración del demonio
               echo ""
               echo "    Indicando la ubicación del archivo de configuración del demonio dhcpd"
-              echo "    y la interfaz sobre la que correrá..."              echo ""
+              echo "    y la interfaz sobre la que correrá..."
+              echo ""
               cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.bak
               echo 'DHCPDv4_CONF=/etc/dhcp/dhcpd.conf'  > /etc/default/isc-dhcp-server
               echo 'INTERFACESv4="eth1"'               >> /etc/default/isc-dhcp-server
@@ -308,7 +326,8 @@ elif [ $cVerSO == "11" ]; then
 
             # Configurar servidor DHCP
               echo ""
-              echo "    Configurando el servidor DHCP..."              echo ""
+              echo "    Configurando el servidor DHCP..."
+              echo ""
               cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.ori
               echo "authoritative;"                                  > /etc/dhcp/dhcpd.conf
               echo "subnet 10.0.0.0 netmask 255.0.0.0 {"            >> /etc/dhcp/dhcpd.conf
@@ -327,7 +346,8 @@ elif [ $cVerSO == "11" ]; then
 
             # Descargar archivo de nombres de fabricantes
               echo ""
-              echo "    Descargando archivo de nombres de fabricantes..."              echo ""
+              echo "    Descargando archivo de nombres de fabricantes..."
+              echo ""
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                    echo ""
@@ -343,17 +363,20 @@ elif [ $cVerSO == "11" ]; then
           5)
 
             echo ""
-            echo "  Instalando y configurando el servidor DHCP para redes de clase B por eth1..."            echo ""
+            echo "  Instalando y configurando el servidor DHCP para redes de clase B por eth1..."
+            echo ""
 
             # Instalar el paquete isc-dhcp-server
               echo ""
-              echo "    Instalando el paquete isc-dhcp-server..."              echo ""
+              echo "    Instalando el paquete isc-dhcp-server..."
+              echo ""
               apt-get -y update && apt-get -y install isc-dhcp-server
 
             # Indicar la ubicación del archivo de configuración del demonio
               echo ""
               echo "    Indicando la ubicación del archivo de configuración del demonio dhcpd"
-              echo "    y la interfaz sobre la que correrá..."              echo ""
+              echo "    y la interfaz sobre la que correrá..."
+              echo ""
               cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.bak
               echo 'DHCPDv4_CONF=/etc/dhcp/dhcpd.conf'  > /etc/default/isc-dhcp-server
               echo 'INTERFACESv4="eth1"'               >> /etc/default/isc-dhcp-server
@@ -361,7 +384,8 @@ elif [ $cVerSO == "11" ]; then
 
             # Configurar servidor DHCP
               echo ""
-              echo "    Configurando el servidor DHCP..."              echo ""
+              echo "    Configurando el servidor DHCP..."
+              echo ""
               cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.ori
               echo "authoritative;"                                  > /etc/dhcp/dhcpd.conf
               echo "subnet 172.16.0.0 netmask 255.255.0.0 {"        >> /etc/dhcp/dhcpd.conf
@@ -380,7 +404,8 @@ elif [ $cVerSO == "11" ]; then
 
             # Descargar archivo de nombres de fabricantes
               echo ""
-              echo "    Descargando archivo de nombres de fabricantes..."              echo ""
+              echo "    Descargando archivo de nombres de fabricantes..."
+              echo ""
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                    echo ""
@@ -396,17 +421,20 @@ elif [ $cVerSO == "11" ]; then
           6)
 
             echo ""
-            echo "  Instalando y configurando el servidor DHCP para redes de clase C por eth1..."            echo ""
+            echo "  Instalando y configurando el servidor DHCP para redes de clase C por eth1..."
+            echo ""
 
             # Instalar el paquete isc-dhcp-server
               echo ""
-              echo "    Instalando el paquete isc-dhcp-server..."              echo ""
+              echo "    Instalando el paquete isc-dhcp-server..."
+              echo ""
               apt-get -y update && apt-get -y install isc-dhcp-server
 
             # Indicar la ubicación del archivo de configuración del demonio
               echo ""
               echo "    Indicando la ubicación del archivo de configuración del demonio dhcpd"
-              echo "    y la interfaz sobre la que correrá..."              echo ""
+              echo "    y la interfaz sobre la que correrá..."
+              echo ""
               cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.bak
               echo 'DHCPDv4_CONF=/etc/dhcp/dhcpd.conf'  > /etc/default/isc-dhcp-server
               echo 'INTERFACESv4="eth1"'               >> /etc/default/isc-dhcp-server
@@ -414,7 +442,8 @@ elif [ $cVerSO == "11" ]; then
 
             # Configurar servidor DHCP
               echo ""
-              echo "    Configurando el servidor DHCP..."              echo ""
+              echo "    Configurando el servidor DHCP..."
+              echo ""
               cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.ori
               echo "authoritative;"                                  > /etc/dhcp/dhcpd.conf
               echo "subnet 192.168.0.0 netmask 255.255.255.0 {"     >> /etc/dhcp/dhcpd.conf
@@ -433,7 +462,8 @@ elif [ $cVerSO == "11" ]; then
 
             # Descargar archivo de nombres de fabricantes
               echo ""
-              echo "    Descargando archivo de nombres de fabricantes..."              echo ""
+              echo "    Descargando archivo de nombres de fabricantes..."
+              echo ""
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                    echo ""

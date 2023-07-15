@@ -44,7 +44,8 @@ for vSubRed in {0..5}
           if [[ $(nmap $vIP -p ssh | grep open | cut -d' ' -f2) == "open" ]]; then
             # Ejecutar sincronización
               echo ""
-              echo "  $vIP está disponible,  -- EJECUTANDO COPIA --- ..."              echo ""
+              echo "  $vIP está disponible,  -- EJECUTANDO COPIA --- ..."
+              echo ""
               rsync --remove-source-files -a root@$vIP:/CopSegInt/ /CopSeg/$vIP
           else
              echo ""

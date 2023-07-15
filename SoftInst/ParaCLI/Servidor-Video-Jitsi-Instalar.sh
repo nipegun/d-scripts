@@ -39,8 +39,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."  
   echo ""
 
   echo ""
@@ -50,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."  
   echo ""
 
   echo ""
@@ -61,7 +59,6 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."  
   echo ""
 
@@ -72,7 +69,6 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."  
   echo ""
 
@@ -153,7 +149,8 @@ elif [ $cVerSO == "10" ]; then
 
           3)
             echo ""
-            echo "  Agregando autentificación para crear canales..."            echo ""
+            echo "  Agregando autentificación para crear canales..."
+            echo ""
             sed -i -e 's|authentication = "anonymous"|authentication = "internal_plain"|g' /etc/prosody/conf.avail/$1.cfg.lua
             echo "" >> /etc/prosody/conf.avail/$1.cfg.lua
             echo 'VirtualHost "guest.'"$1"'"'           >> /etc/prosody/conf.avail/$1.cfg.lua
@@ -167,7 +164,8 @@ elif [ $cVerSO == "10" ]; then
 
           4)
             echo ""
-            echo "  Modificando título y descripción..."            echo ""
+            echo "  Modificando título y descripción..."
+            echo ""
             for ArchivoReal in /usr/share/jitsi-meet/lang/main*.json
               do
                 ArchivoTemporalTitle=$(mktemp)
@@ -182,14 +180,16 @@ elif [ $cVerSO == "10" ]; then
 
           5)
             echo ""
-            echo "  Poniendo logo transparente..."            echo ""
+            echo "  Poniendo logo transparente..."
+            echo ""
             cp /usr/share/jitsi-meet/images/watermark.png /usr/share/jitsi-meet/images/watermark.png.bak
             truncate -s 0 /usr/share/jitsi-meet/images/watermark.png
           ;;
         
           6)
             echo ""
-            echo "  Poniendo lenguaje en español de España..."            echo ""
+            echo "  Poniendo lenguaje en español de España..."
+            echo ""
             sed -i -e "s|// defaultLanguage: 'en',|defaultLanguage: 'es',|g" /etc/jitsi/meet/$1-config.js
           ;;
         
@@ -200,7 +200,6 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."  
   echo ""
 

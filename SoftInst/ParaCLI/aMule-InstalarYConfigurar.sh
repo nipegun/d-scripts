@@ -36,8 +36,7 @@
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de amule para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de amule para Debian 7 (Wheezy)..."
   echo ""
 
   echo ""
@@ -47,8 +46,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de amule para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de amule para Debian 8 (Jessie)..."
   echo ""
 
   echo ""
@@ -58,17 +56,15 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  
-  echo "  Iniciando el script de instalación de amule para Debian 9 (Stretch)..."  
+  echo "  Iniciando el script de instalación de amule para Debian 9 (Stretch)..."
   echo ""
 
   ArgumentosRequeridos=4
-  
+
 
   if [ $# -ne $ArgumentosRequeridos ]
     then
       echo ""
-      echo "--------------------------------------------------------------------------------------------"
       echo "  Mal uso del script."
       echo ""
       echo "  El uso correcto sería:"
@@ -76,33 +72,38 @@ elif [ $cVerSO == "9" ]; then
       echo ""
       echo "  Ejemplo:"
       echo "  $0 /var/tmp/amule/completos /var/tmp/amule/incompletos 12345678 debian-amule"
-      echo "--------------------------------------------------------------------------------------------"
       echo ""
       exit
     else
       echo ""
-      echo "Creando las carpetas para las descargas..."      echo ""
+      echo "Creando las carpetas para las descargas..."
+      echo ""
       mkdir -p $1
       mkdir -p $2
-    
+
       echo ""
-      echo "Instalando el paquete amule-daemon..."      echo ""
+      echo "Instalando el paquete amule-daemon..."
+      echo ""
       apt-get -y install amule-daemon
 
       echo ""
-      echo "Agregando el usuario $3..."      echo ""
+      echo "Agregando el usuario $3..."
+      echo ""
       adduser $3
 
       echo ""
-      echo "Corriendo el comando amuled por primera vez para el usuario $3..."      echo ""
+      echo "Corriendo el comando amuled por primera vez para el usuario $3..."
+      echo ""
       runuser -l $3 -c 'amuled'
 
       echo ""
-      echo "Deteniendo el servicio amule-daemon..."      echo ""
+      echo "Deteniendo el servicio amule-daemon..."
+      echo ""
       service amule-daemon stop
 
       echo ""
-      echo "Realizando cambios en la configuración..."      echo ""
+      echo "Realizando cambios en la configuración..."
+      echo ""
       sed -i -e 's|TempDir=/home/debian-amule/.aMule/Temp|TempDir="'$1'"|g' /home/$3/.aMule/amule.conf
       sed -i -e 's|IncomingDir=/home/debian-amule/.aMule/Incoming|IncomingDir="'$2'"|g' /home/$3/.aMule/amule.conf
 
@@ -116,7 +117,8 @@ elif [ $cVerSO == "9" ]; then
       sed -i -e 's|AMULED_USER=""|AMULED_USER="$3"|g' /etc/default/amule-daemon
 
       echo ""
-      echo "Iniciando el servicio amule-daemon..."      echo ""
+      echo "Iniciando el servicio amule-daemon..."
+      echo ""
       service amule-daemon start
 
       #echo ""
@@ -124,7 +126,6 @@ elif [ $cVerSO == "9" ]; then
       #usermod -a -G debian-amule $3
 
       echo ""
-      echo "--------------------------------------------------------------"
       echo "  El demonio amule ha sido instalado, configurado e inciado."
       echo ""
       echo "  Deberías poder administrarlo mediante web en la IP de"
@@ -134,15 +135,13 @@ elif [ $cVerSO == "9" ]; then
       echo ""
       echo "  Nombre de usuario: debian-amule"
       echo "  Contraseña: password"
-      
       echo ""
   fi
 
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  
-  echo "  Iniciando el script de instalación de amule para Debian 10 (Buster)..."  
+  echo "  Iniciando el script de instalación de amule para Debian 10 (Buster)..."
   echo ""
 
   echo ""
@@ -152,8 +151,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  
-  echo "  Iniciando el script de instalación de amule para Debian 11 (Bullseye)..."  
+  echo "  Iniciando el script de instalación de amule para Debian 11 (Bullseye)..."
   echo ""
 
   echo ""

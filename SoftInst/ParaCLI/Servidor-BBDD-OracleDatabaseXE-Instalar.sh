@@ -185,7 +185,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Intentar descargar el paquete desde hacks4geeks
                 echo ""
-                echo "  Intentando descargar el paquete. deb desde hacks4geeks..."                echo ""
+                echo "  Intentando descargar el paquete. deb desde hacks4geeks..."
+                echo ""
                 mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
                 wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Oracle/DatabaseXE/OracleDatabaseXE.deb -O /root/SoftInst/Oracle/DatabaseXE/OracleDatabaseXE.deb
 
@@ -195,7 +196,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Crear el grupo dba
                 echo ""
-                echo "  Creando el grupo dba..."                echo ""
+                echo "  Creando el grupo dba..."
+                echo ""
                 groupadd dba
 
             ;;
@@ -214,7 +216,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar dependencias y paquetes necesarios
                 echo ""
-                echo "  Instalando dependencias y paquetes necesarios...."                echo ""
+                echo "  Instalando dependencias y paquetes necesarios...."
+                echo ""
                 apt-get -y update
                 apt-get -y install libaio1
                 apt-get -y install bc
@@ -226,7 +229,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar paquete
                 echo ""
-                echo "  Instalando paquete .deb..."                echo ""
+                echo "  Instalando paquete .deb..."
+                echo ""
                 mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
                 find /root/ -type f -name oracle*.deb -exec mv {} /root/SoftInst/Oracle/DatabaseXE/ \; 2> /dev/null
                 find /root/SoftInst/Oracle/DatabaseXE/ -type f -name *.deb -exec dpkg -i {} \;
@@ -240,7 +244,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Crear variables de entorno
                 echo ""
-                echo "  Creando variables de entorno..."                echo ""
+                echo "  Creando variables de entorno..."
+                echo ""
                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt)
                 cat $ArchivoInitD | grep "export ORACLE_HOME" >> /home/oracle/.bashrc
                 cat $ArchivoInitD | grep "export ORACLE_SID"  >> /home/oracle/.bashrc
@@ -252,7 +257,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Crear el servicio en systemd
                 echo ""
-                echo "  Creando el servicio en systemd..."                echo ""
+                echo "  Creando el servicio en systemd..."
+                echo ""
                 ArchivoInitD=$(cat /root/SoftInst/Oracle/DatabaseXE/UbScriptDeArranque.txt)
                 echo "[Unit]"                            > /etc/systemd/system/OracleDatabaseXE.service
                 echo "  Description=Oracle Database XE" >> /etc/systemd/system/OracleDatabaseXE.service
@@ -267,7 +273,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Poner contraseña al usuario oracle
                 echo ""
-                echo "  Estableciendo la contraseña del usuario oracle..."                echo ""
+                echo "  Estableciendo la contraseña del usuario oracle..."
+                echo ""
                 echo -e "Oracle0\nOracle0" | passwd oracle
                 echo ""
                 echo "  Se le ha puesto la contraseña Oracle0 al usuario oracle."
@@ -303,7 +310,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Activar e iniciar el servicio
                 echo ""
-                echo "  Activando e iniciando el servicio..."                echo ""
+                echo "  Activando e iniciando el servicio..."
+                echo ""
                 systemctl enable OracleDatabaseXE.service --now
 
             ;;
@@ -311,7 +319,8 @@ elif [ $cVerSO == "11" ]; then
             13)
 
               echo ""
-              echo "  Permitiendo el acceso a Enterprise Manager XE desde fuera del localhost..."              echo ""
+              echo "  Permitiendo el acceso a Enterprise Manager XE desde fuera del localhost..."
+              echo ""
               #vVerOracleXE=S(cat /home/oracle/.bashrc | grep dbhomeXE | cut -d'/' -f5)
               vVerOracleXE=S(find /opt/oracle/product -mindepth 1 -maxdepth 1 -type d | cut -d'/' -f5)
               export ORACLE_HOME=/opt/oracle/product/$vVerOracleXE/dbhomeXE

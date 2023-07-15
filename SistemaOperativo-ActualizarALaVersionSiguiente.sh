@@ -36,7 +36,6 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  
   echo "  Iniciando el script para actualizar Debian 7 (Wheezy) a Debian 8 (Jessie)..."  
   echo ""
 
@@ -47,8 +46,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------"
-  echo "  Iniciando el script para actualizar Debian 8 (Jessie) a Debian 9 (Stretch)..."  echo "---------------------------------------------------------------------------------"
+  echo "  Iniciando el script para actualizar Debian 8 (Jessie) a Debian 9 (Stretch)..."
   echo ""
 
   apt-get -y update
@@ -67,8 +65,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------"
-  echo "  Iniciando el script para actualizar Debian 9 (Stretch) a Debian 10 (Buster)..."  echo "----------------------------------------------------------------------------------"
+  echo "  Iniciando el script para actualizar Debian 9 (Stretch) a Debian 10 (Buster)..."
   echo ""
 
   apt-get -y update
@@ -97,7 +94,6 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  
   echo "  Iniciando el script para actualizar Debian 11 (Bullseye) a Debian 12..."  
   echo ""
 

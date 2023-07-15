@@ -39,8 +39,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de LiquidControl para Debian 7 (Wheezy)..."  echo "---------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de LiquidControl para Debian 7 (Wheezy)..."
   echo ""
 
   echo ""
@@ -50,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de LiquidControl para Debian 8 (Jessie)..."  echo "---------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de LiquidControl para Debian 8 (Jessie)..."
   echo ""
 
   echo ""
@@ -61,8 +59,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de LiquidControl para Debian 9 (Stretch)..."  echo "----------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de LiquidControl para Debian 9 (Stretch)..."
   echo ""
 
   echo ""
@@ -72,8 +69,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de LiquidControl para Debian 10 (Buster)..."  echo "----------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de LiquidControl para Debian 10 (Buster)..."
   echo ""
 
   apt-get -y update
@@ -94,16 +90,16 @@ elif [ $cVerSO == "10" ]; then
   cd liquidctl
   python3 setup.py install
   echo ""
-  echo "  Instalación terminada. Para ver la ayuda ejecuta..." 
+  echo "  Instalación terminada. Para ver la ayuda ejecuta..."
 echo ""
   echo "  liquidctl --help"
   echo ""
-  echo "  Mostrando dispositivos compatibles..." 
+  echo "  Mostrando dispositivos compatibles..."
 echo ""
   liquidctl list --verbose
   echo "  Iniciando comunicación con los dispositivos..."  liquidctl initialize
   echo ""
-  echo "  Mostrando estado del dispositivo..." 
+  echo "  Mostrando estado del dispositivo..."
 echo ""
   liquidctl status
 
@@ -131,16 +127,16 @@ elif [ $cVerSO == "11" ]; then
   cd liquidctl
   python3 setup.py install
   echo ""
-  echo "  Instalación terminada. Para ver la ayuda ejecuta..." 
+  echo "  Instalación terminada. Para ver la ayuda ejecuta..."
 echo ""
   echo "  liquidctl --help"
   echo ""
-  echo "  Mostrando dispositivos compatibles..." 
+  echo "  Mostrando dispositivos compatibles..."
 echo ""
   liquidctl list --verbose
   echo "  Iniciando comunicación con los dispositivos..."  liquidctl initialize
   echo ""
-  echo "  Mostrando estado del dispositivo..." 
+  echo "  Mostrando estado del dispositivo..."
 echo ""
   liquidctl status
 

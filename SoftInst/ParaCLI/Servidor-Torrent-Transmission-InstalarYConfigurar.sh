@@ -39,8 +39,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Transmission para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Transmission para Debian 7 (Wheezy)..."  
   echo ""
 
   echo ""
@@ -50,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Transmission para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de Transmission para Debian 8 (Jessie)..."  
   echo ""
 
   echo ""
@@ -61,7 +59,6 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de Transmission para Debian 9 (Stretch)..."  
   echo ""
 
@@ -72,7 +69,6 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de Transmission para Debian 10 (Buster)..."  
   echo ""
 
@@ -82,14 +78,14 @@ elif [ $cVerSO == "10" ]; then
   if [ $# -ne $CantArgsRequeridos ]
     then
       echo ""
-      echo "--------------------------------------------------------------------------------------------"
+
       echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
       echo ""
       echo -e "$0 ${cColorVerde}[CarpetaDeDescargas] [CarpetaDeIncompletos] [Password] [Usuario]${cFinColor}"
       echo ""
       echo "  Ejemplo:"
       echo "  $0 /var/tmp/transmission/completos /var/tmp/transmission/incompletos 12345678 nico"
-      echo "--------------------------------------------------------------------------------------------"
+
       echo ""
       exit
     else
@@ -162,7 +158,6 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de Transmission para Debian 11 (Bullseye)..."  
   echo ""
 
@@ -172,14 +167,14 @@ CantArgsRequeridos=4
   if [ $# -ne $CantArgsRequeridos ]
     then
       echo ""
-      echo "--------------------------------------------------------------------------------------------"
+
       echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
       echo ""
       echo -e "$0 ${cColorVerde}[CarpetaDeDescargas] [CarpetaDeIncompletos] [Password] [Usuario]${cFinColor}"
       echo ""
       echo "  Ejemplo:"
       echo "  $0 /var/tmp/transmission/completos /var/tmp/transmission/incompletos 12345678 nico"
-      echo "--------------------------------------------------------------------------------------------"
+
       echo ""
       exit
     else

@@ -25,7 +25,8 @@ for vNumPeer in {2..254}
   do
     if [ -f /root/WireGuard/WireGuardUser"$vNumPeer"Private.key ] && [ -f /root/WireGuard/WireGuardUser"$vNumPeer"Public.key ]; then
       echo ""
-      echo "  El peer User$vNumPeer ya existe. Intentando crear el peer User$(($vNumPeer+1))..."      echo ""
+      echo "  El peer User$vNumPeer ya existe. Intentando crear el peer User$(($vNumPeer+1))..."
+      echo ""
     else
       # Generar claves para el nuevo peer
         echo ""
@@ -64,7 +65,8 @@ for vNumPeer in {2..254}
         # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
             echo ""
-            echo "    El paquete curl no está instalado. Iniciando su instalación..."            echo ""
+            echo "    El paquete curl no está instalado. Iniciando su instalación..."
+            echo ""
             apt-get -y update
             apt-get -y install curl
             echo ""
@@ -89,7 +91,8 @@ for vNumPeer in {2..254}
         # Comprobar si el paquete qrencode está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s qrencode 2>/dev/null | grep installed) == "" ]]; then
             echo ""
-            echo "    El paquete qrencode no está instalado. Iniciando su instalación..."            echo ""
+            echo "    El paquete qrencode no está instalado. Iniciando su instalación..."
+            echo ""
             apt-get -y update
             apt-get -y install qrencode
             echo ""

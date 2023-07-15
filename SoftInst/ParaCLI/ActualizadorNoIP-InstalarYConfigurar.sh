@@ -90,10 +90,8 @@ elif [ $cVerSO == "8" ]; then
      cd $Carpeta
      make
      echo ""
-     echo "------------------------------------------------------------------------"
      echo "  A CONTINUACIÓN SE TE PEDIRÁ EL MAIL, LA CONTRASEÑA DE SESIÓN DE NOIP"
      echo "  Y EL INTERVALO DE ACTUALIZACIÓN DE LA IP (POR DEFECTO 30 MINUTOS)"
-     echo "------------------------------------------------------------------------"
      echo ""
      make install
 
@@ -114,7 +112,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación del actualizador NoIP para Debian 9 (Stretch)..." 
+  echo "  Iniciando el script de instalación del actualizador NoIP para Debian 9 (Stretch)..."
 echo ""
 
   # Actualizar los paquetes de los repositorios
@@ -155,10 +153,8 @@ echo ""
      cd $Carpeta
      make
      echo ""
-     echo "------------------------------------------------------------------------"
      echo "  A CONTINUACIÓN SE TE PEDIRÁ EL MAIL, LA CONTRASEÑA DE SESIÓN DE NOIP"
      echo "  Y EL INTERVALO DE ACTUALIZACIÓN DE LA IP (POR DEFECTO 30 MINUTOS)"
-     echo "------------------------------------------------------------------------"
      echo ""
      make install
 
@@ -179,8 +175,8 @@ echo ""
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación del actualizador NoIP para Debian 10 (Buster)..." 
-echo ""
+  echo "  Iniciando el script de instalación del actualizador NoIP para Debian 10 (Buster)..."
+  echo ""
 
   # Actualizar los paquetes de los repositorios
      apt-get -y update
@@ -220,10 +216,8 @@ echo ""
      cd $Carpeta
      make
      echo ""
-     echo "------------------------------------------------------------------------"
      echo "  A CONTINUACIÓN SE TE PEDIRÁ EL MAIL, LA CONTRASEÑA DE SESIÓN DE NOIP"
      echo "  Y EL INTERVALO DE ACTUALIZACIÓN DE LA IP (POR DEFECTO 30 MINUTOS)"
-     echo "------------------------------------------------------------------------"
      echo ""
      make install
 
@@ -284,10 +278,8 @@ elif [ $cVerSO == "11" ]; then
     cd $Carpeta
     make
     echo ""
-    echo "------------------------------------------------------------------------"
     echo "  A CONTINUACIÓN SE TE PEDIRÁ EL MAIL, LA CONTRASEÑA DE SESIÓN DE NOIP"
     echo "  Y EL INTERVALO DE ACTUALIZACIÓN DE LA IP (POR DEFECTO 30 MINUTOS)"
-    echo "------------------------------------------------------------------------"
     echo ""
     make install
 

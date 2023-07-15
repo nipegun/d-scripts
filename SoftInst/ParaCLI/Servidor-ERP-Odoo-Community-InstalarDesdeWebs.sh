@@ -70,7 +70,6 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de Odoo para Debian 9 (Stretch)..."  
   echo ""
 
@@ -81,7 +80,6 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de Odoo para Debian 10 (Buster)..."  
   echo ""
   echo ""
@@ -101,7 +99,8 @@ echo ""
   # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo "  wget no está instalado. Iniciando su instalación..."      echo ""
+      echo "  wget no está instalado. Iniciando su instalación..."
+      echo ""
       apt-get -y update > /dev/null
       apt-get -y install wget
       echo ""

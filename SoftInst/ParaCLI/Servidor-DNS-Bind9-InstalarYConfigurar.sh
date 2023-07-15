@@ -128,7 +128,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Borrar instalación existente
             echo ""
-            echo "    Borrando instalación existente (si es que existe)..."            echo ""
+            echo "    Borrando instalación existente (si es que existe)..."
+            echo ""
             mkdir -p /CopSegInt/              2> /dev/null
             mkdir -p /CopSegInt/DNS/etc/      2> /dev/null
             mv /etc/bind/ /CopSegInt/DNS/etc/ 2> /dev/null
@@ -150,12 +151,14 @@ elif [ $cVerSO == "11" ]; then
 
           # Instalar paquete
             echo ""
-            echo "    Instalando bind9..."            echo ""
+            echo "    Instalando bind9..."
+            echo ""
             apt-get -y update && apt-get -y install bind9
 
           # named.conf.options
             echo ""
-            echo "    Configurando el archivo /etc/bind/named.conf.options..."            echo ""
+            echo "    Configurando el archivo /etc/bind/named.conf.options..."
+            echo ""
             echo 'options {'                       > /etc/bind/named.conf.options
             echo '  directory "/var/cache/bind";' >> /etc/bind/named.conf.options # Carpeta donde se quiere guardar la cache con "rndc dumpdb -cache"
             echo '  forwarders {'                 >> /etc/bind/named.conf.options
@@ -173,7 +176,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Sintaxis named.conf.options
             echo ""
-            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."            echo ""
+            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
+            echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.options)
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${cColorVerde}        La sintaxis del archivo /etc/bind/named.conf.options es correcta:${cFinColor}"
@@ -185,7 +189,8 @@ elif [ $cVerSO == "11" ]; then
 
           # logs
             echo ""
-            echo "    Configurando logs..."            echo ""
+            echo "    Configurando logs..."
+            echo ""
             echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
             echo 'logging {'                                                            > /etc/bind/named.conf.log
             echo ''                                                                    >> /etc/bind/named.conf.log
@@ -208,7 +213,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Sintaxis /etc/bind/named.conf.log
             echo ""
-            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."            echo ""
+            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."
+            echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${cColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log es correcta:${cFinColor}"
@@ -229,7 +235,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Herramientas extra
             echo ""
-            echo "    Instalando herramientas extra..."            echo ""
+            echo "    Instalando herramientas extra..."
+            echo ""
             apt-get -y install dnsutils
 
           # Cache
@@ -241,12 +248,14 @@ elif [ $cVerSO == "11" ]; then
 
           # Reiniciar servidor DNS
             echo ""
-            echo "    Reiniciando el servidor DNS..."            echo ""
+            echo "    Reiniciando el servidor DNS..."
+            echo ""
             service bind9 restart
 
           # Mostrar estado del servidor
             echo ""
-            echo "    Mostrando el estado del servidor DNS..."            echo ""
+            echo "    Mostrando el estado del servidor DNS..."
+            echo ""
             systemctl status bind9 --no-pager
         ;;
 
@@ -257,7 +266,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Borrar instalación existente
             echo ""
-            echo "    Borrando instalación existente (si es que existe)..."            echo ""
+            echo "    Borrando instalación existente (si es que existe)..."
+            echo ""
             mkdir -p /CopSegInt/              2> /dev/null
             mkdir -p /CopSegInt/DNS/etc/      2> /dev/null
             mv /etc/bind/ /CopSegInt/DNS/etc/ 2> /dev/null
@@ -279,12 +289,14 @@ elif [ $cVerSO == "11" ]; then
 
           # Instalar paquete
             echo ""
-            echo "    Instalando bind9..."            echo ""
+            echo "    Instalando bind9..."
+            echo ""
             apt-get -y update && apt-get -y install bind9
 
           # named.conf.options
             echo ""
-            echo "    Configurando el archivo /etc/bind/named.conf.options..."            echo ""
+            echo "    Configurando el archivo /etc/bind/named.conf.options..."
+            echo ""
             echo 'options {'                       > /etc/bind/named.conf.options
             echo '  directory "/var/cache/bind";' >> /etc/bind/named.conf.options # Carpeta donde se quiere guardar la cache con "rndc dumpdb -cache"
             echo '  forwarders {'                 >> /etc/bind/named.conf.options
@@ -302,7 +314,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Sintaxis named.conf.options
             echo ""
-            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."            echo ""
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
+            echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.options)
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${cColorVerde}        La sintaxis del archivo /etc/bind/named.conf.options es correcta:${cFinColor}"
@@ -314,7 +327,8 @@ elif [ $cVerSO == "11" ]; then
 
           # logs
             echo ""
-            echo "    Configurando logs..."            echo ""
+            echo "    Configurando logs..."
+            echo ""
             echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
             echo 'logging {'                                                            > /etc/bind/named.conf.log
             echo '  channel "default" {'                                               >> /etc/bind/named.conf.log
@@ -386,7 +400,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Sintaxis /etc/bind/named.conf.log
             echo ""
-            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."            echo ""
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."
+            echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${cColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log es correcta:${cFinColor}"
@@ -398,7 +413,8 @@ elif [ $cVerSO == "11" ]; then
 
           # resolvconf
             echo ""
-            echo "    Instalando resolvconf y configurando IP loopack..."            echo ""
+            echo "    Instalando resolvconf y configurando IP loopack..."
+            echo ""
             apt-get -y install resolvconf
             sed -i -e 's|nameserver 127.0.0.1||g' /etc/resolvconf/resolv.conf.d/head
             echo "nameserver 127.0.0.1"        >> /etc/resolvconf/resolv.conf.d/head
@@ -407,12 +423,14 @@ elif [ $cVerSO == "11" ]; then
 
           # Herramientas extra
             echo ""
-            echo "    Instalando herramientas extra..."            echo ""
+            echo "    Instalando herramientas extra..."
+            echo ""
             apt-get -y install dnsutils
 
           # Crear y popular zona LAN directa...
             echo ""
-            echo "    Creando y populando la base de datos de la zona LAN directa..."            echo ""
+            echo "    Creando y populando la base de datos de la zona LAN directa..."
+            echo ""
             cp /etc/bind/db.local /etc/bind/db.$vDominioLAN.directa
             sed -i -e "s|localhost. root.localhost.|ns1.$vDominioLAN. root.$vDominioLAN.|g"    /etc/bind/db.$vDominioLAN.directa
             sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                       /etc/bind/db.$vDominioLAN.directa
@@ -426,12 +444,14 @@ elif [ $cVerSO == "11" ]; then
   
           # Comprobar la LAN zona directa
             echo ""
-            echo "      Comprobando la sintaxis de la zona LAN directa..."            echo ""
+            echo "      Comprobando la sintaxis de la zona LAN directa..."
+            echo ""
             named-checkzone $vDominioLAN /etc/bind/db.$vDominioLAN.directa
   
           # Linkear zona LAN directa a /etc/bind/named.conf.local
             echo ""
-            echo "      Linkeando zona LAN directa a /etc/bind/named.conf.local..."            echo ""
+            echo "      Linkeando zona LAN directa a /etc/bind/named.conf.local..."
+            echo ""
             echo 'zone "'"$vDominioLAN"'" {'                       >> /etc/bind/named.conf.local
             echo "  type master;"                                  >> /etc/bind/named.conf.local
             echo "  allow-transfer { none; };"                     >> /etc/bind/named.conf.local
@@ -440,7 +460,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Crear y popular zona LAN inversa...
             echo ""
-            echo "    Creando y populando la base de datos de la zona LAN inversa..."            echo ""
+            echo "    Creando y populando la base de datos de la zona LAN inversa..."
+            echo ""
             cp /etc/bind/db.127 /etc/bind/db.$vDominioLAN.inversa
             sed -i -e "s|localhost. root.localhost.|ns1.$vDominioLAN. root.$vDominioLAN.|g" /etc/bind/db.$vDominioLAN.inversa
             sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                    /etc/bind/db.$vDominioLAN.inversa
@@ -452,12 +473,14 @@ elif [ $cVerSO == "11" ]; then
 
           # Comprobar la LAN zona inversa
             echo ""
-            echo "      Comprobando la sintaxis de la zona LAN inversa..."            echo ""
+            echo "      Comprobando la sintaxis de la zona LAN inversa..."
+            echo ""
             named-checkzone $vOcteto3.$vOcteto2.$vOcteto1.in-addr-arpa /etc/bind/db.$vDominioLAN.inversa
 
           # Linkear zona LAN inversa a /etc/bind/named.conf.local
             echo ""
-            echo "      Linkeando zona LAN inversa a /etc/bind/named.conf.local..."            echo ""
+            echo "      Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
+            echo ""
             echo ''                                                        >> /etc/bind/named.conf.local
             echo 'zone "'"$vOcteto3.$vOcteto2.$vOcteto1.in-addr.arpa"'" {' >> /etc/bind/named.conf.local
             echo "  type master;"                                          >> /etc/bind/named.conf.local
@@ -467,7 +490,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Sintaxis /etc/bind/named.conf.local
             echo ""
-            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."            echo ""
+            echo "    Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."
+            echo ""
             vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.local)
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${cColorVerde}        La sintaxis del archivo /etc/bind/named.conf.local es correcta:${cFinColor}"
@@ -479,18 +503,21 @@ elif [ $cVerSO == "11" ]; then
 
           # Coregir errores IPv6
             echo ""
-            echo "    Corrigiendo los posibles errores de IPv6..."            echo ""
+            echo "    Corrigiendo los posibles errores de IPv6..."
+            echo ""
             sed -i -e 's|RESOLVCONF=no|RESOLVCONF=yes|g'           /etc/default/named
             sed -i -e 's|OPTIONS="-u bind"|OPTIONS="-4 -u bind"|g' /etc/default/named
 
           # Reiniciar servidor DNS
             echo ""
-            echo "    Reiniciando el servidor DNS..."            echo ""
+            echo "    Reiniciando el servidor DNS..."
+            echo ""
             service bind9 restart
 
           # Mostrar estado del servidor
             echo ""
-            echo "    Mostrando el estado del servidor DNS..."            echo ""
+            echo "    Mostrando el estado del servidor DNS..."
+            echo ""
             systemctl status bind9 --no-pager
 
         ;;
@@ -502,7 +529,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Borrar instalación existente
             echo ""
-            echo "    Borrando instalación existente (si es que existe)..."            echo ""
+            echo "    Borrando instalación existente (si es que existe)..."
+            echo ""
             mkdir -p /CopSegInt/              2> /dev/null
             mkdir -p /CopSegInt/DNS/etc/      2> /dev/null
             mv /etc/bind/ /CopSegInt/DNS/etc/ 2> /dev/null
@@ -524,12 +552,14 @@ elif [ $cVerSO == "11" ]; then
 
           # Instalar paquete
             echo ""
-            echo "    Instalando bind9..."            echo ""
+            echo "    Instalando bind9..."
+            echo ""
             apt-get -y update && apt-get -y install bind9
 
           # named.conf.options
             echo ""
-            echo "    Configurando el archivo /etc/bind/named.conf.options..."            echo ""
+            echo "    Configurando el archivo /etc/bind/named.conf.options..."
+            echo ""
             echo 'options {'                       > /etc/bind/named.conf.options
             echo '  directory "/var/cache/bind";' >> /etc/bind/named.conf.options # Carpeta donde se quiere guardar la cache con "rndc dumpdb -cache"
             echo '  forwarders {'                 >> /etc/bind/named.conf.options
@@ -547,7 +577,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Sintaxis named.conf.options
             echo ""
-            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."            echo ""
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
+            echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.options)
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${cColorVerde}        La sintaxis del archivo /etc/bind/named.conf.options es correcta:${cFinColor}"
@@ -559,7 +590,8 @@ elif [ $cVerSO == "11" ]; then
 
           # logs
             echo ""
-            echo "    Configurando logs..."            echo ""
+            echo "    Configurando logs..."
+            echo ""
             echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
             echo 'logging {'                                                            > /etc/bind/named.conf.log
             echo '  channel "default" {'                                               >> /etc/bind/named.conf.log
@@ -641,7 +673,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Sintaxis /etc/bind/named.conf.log
             echo ""
-            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."            echo ""
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."
+            echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${cColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log es correcta:${cFinColor}"
@@ -653,7 +686,8 @@ elif [ $cVerSO == "11" ]; then
 
           # resolvconf
             echo ""
-            echo "    Instalando resolvconf y configurando IP loopack..."            echo ""
+            echo "    Instalando resolvconf y configurando IP loopack..."
+            echo ""
             apt-get -y install resolvconf
             sed -i -e 's|nameserver 127.0.0.1||g' /etc/resolvconf/resolv.conf.d/head
             echo "nameserver 127.0.0.1"        >> /etc/resolvconf/resolv.conf.d/head
@@ -661,12 +695,14 @@ elif [ $cVerSO == "11" ]; then
 
           # Herramientas extra
             echo ""
-            echo "    Instalando herramientas extra..."            echo ""
+            echo "    Instalando herramientas extra..."
+            echo ""
             apt-get -y install dnsutils
 
           # Crear y popular zona LAN directa...
             echo ""
-            echo "    Creando y populando la base de datos de la zona LAN directa..."            echo ""
+            echo "    Creando y populando la base de datos de la zona LAN directa..."
+            echo ""
             cp /etc/bind/db.local /etc/bind/db.$vDominioLAN.directa
             sed -i -e "s|localhost. root.localhost.|ns1.$vDominioLAN. root.$vDominioLAN.|g"    /etc/bind/db.$vDominioLAN.directa
             sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                       /etc/bind/db.$vDominioLAN.directa
@@ -680,12 +716,14 @@ elif [ $cVerSO == "11" ]; then
   
           # Comprobar la LAN zona directa
             echo ""
-            echo "      Comprobando la zona directa..."            echo ""
+            echo "      Comprobando la zona directa..."
+            echo ""
             named-checkzone $vDominioLAN /etc/bind/db.$vDominioLAN.directa
   
           # Linkear zona LAN directa a /etc/bind/named.conf.local
             echo ""
-            echo "      Linkeando zona LAN directa a /etc/bind/named.conf.local..."            echo ""
+            echo "      Linkeando zona LAN directa a /etc/bind/named.conf.local..."
+            echo ""
             echo ""                                                >> /etc/bind/named.conf.local
             echo 'zone "'"$vDominioLAN"'" {'                       >> /etc/bind/named.conf.local
             echo "  type master;"                                  >> /etc/bind/named.conf.local
@@ -698,7 +736,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Crear y popular zona LAN inversa...
             echo ""
-            echo "    Creando y populando la base de datos de de la zona LAN inversa..."            echo ""
+            echo "    Creando y populando la base de datos de de la zona LAN inversa..."
+            echo ""
             cp /etc/bind/db.127 /etc/bind/db.$vDominioLAN.inversa
             sed -i -e "s|localhost. root.localhost.|ns1.$vDominioLAN. root.$vDominioLAN.|g" /etc/bind/db.$vDominioLAN.inversa
             sed -i -e "s|localhost.|ns1.$vDominioLAN.|g"                                    /etc/bind/db.$vDominioLAN.inversa
@@ -710,12 +749,14 @@ elif [ $cVerSO == "11" ]; then
 
           # Comprobar la LAN zona inversa
             echo ""
-            echo "      Comprobando la zona inversa..."            echo ""
+            echo "      Comprobando la zona inversa..."
+            echo ""
             named-checkzone $vOcteto3.$vOcteto2.$vOcteto1.in-addr-arpa /etc/bind/db.$vDominioLAN.inversa
 
           # Linkear zona LAN inversa a /etc/bind/named.conf.local
             echo ""
-            echo "      Linkeando zona LAN inversa a /etc/bind/named.conf.local..."            echo ""
+            echo "      Linkeando zona LAN inversa a /etc/bind/named.conf.local..."
+            echo ""
             echo ""                                                        >> /etc/bind/named.conf.local
             echo 'zone "'"$vOcteto3.$vOcteto2.$vOcteto1.in-addr.arpa"'" {' >> /etc/bind/named.conf.local
             echo "  type master;"                                          >> /etc/bind/named.conf.local
@@ -728,7 +769,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Sintaxis /etc/bind/named.conf.local
             echo ""
-            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."            echo ""
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."
+            echo ""
             vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.local)
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${cColorVerde}        La sintaxis del archivo /etc/bind/named.conf.local es correcta:${cFinColor}"
@@ -740,18 +782,21 @@ elif [ $cVerSO == "11" ]; then
 
           # Coregir errores IPv6
             echo ""
-            echo "    Corrigiendo los posibles errores de IPv6..."            echo ""
+            echo "    Corrigiendo los posibles errores de IPv6..."
+            echo ""
             sed -i -e 's|RESOLVCONF=no|RESOLVCONF=yes|g'           /etc/default/named
             sed -i -e 's|OPTIONS="-u bind"|OPTIONS="-4 -u bind"|g' /etc/default/named
 
           # Reiniciar servidor DNS
             echo ""
-            echo "    Reiniciando el servidor DNS..."            echo ""
+            echo "    Reiniciando el servidor DNS..."
+            echo ""
             service bind9 restart
 
           # Mostrar estado del servidor
             echo ""
-            echo "    Mostrando el estado del servidor DNS..."            echo ""
+            echo "    Mostrando el estado del servidor DNS..."
+            echo ""
             systemctl status bind9 --no-pager
 
         ;;
@@ -764,7 +809,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Borrar instalación existente
             echo ""
-            echo "    Borrando instalación existente (si es que existe)..."            echo ""
+            echo "    Borrando instalación existente (si es que existe)..."
+            echo ""
             mkdir -p /CopSegInt/              2> /dev/null
             mkdir -p /CopSegInt/DNS/etc/      2> /dev/null
             mv /etc/bind/ /CopSegInt/DNS/etc/ 2> /dev/null
@@ -786,12 +832,14 @@ elif [ $cVerSO == "11" ]; then
 
           # Instalar paquete
             echo ""
-            echo "    Instalando bind9..."            echo ""
+            echo "    Instalando bind9..."
+            echo ""
             apt-get -y update && apt-get -y install bind9
 
           # named.conf.options
             echo ""
-            echo "    Configurando el archivo /etc/bind/named.conf.options..."            echo ""
+            echo "    Configurando el archivo /etc/bind/named.conf.options..."
+            echo ""
             echo 'options {'                       > /etc/bind/named.conf.options
             echo '  directory "/var/cache/bind";' >> /etc/bind/named.conf.options # Carpeta donde se quiere guardar la cache con "rndc dumpdb -cache"
             echo '  forwarders {'                 >> /etc/bind/named.conf.options
@@ -809,7 +857,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Sintaxis named.conf.options
             echo ""
-            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."            echo ""
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.options sea correcta..."
+            echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.options)
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${cColorVerde}        La sintaxis del archivo /etc/bind/named.conf.options es correcta:${cFinColor}"
@@ -821,7 +870,8 @@ elif [ $cVerSO == "11" ]; then
 
           # logs
             echo ""
-            echo "    Configurando logs..."            echo ""
+            echo "    Configurando logs..."
+            echo ""
             echo 'include "/etc/bind/named.conf.log";' >> /etc/bind/named.conf
             echo 'logging {'                                                            > /etc/bind/named.conf.log
             echo '  channel "default" {'                                               >> /etc/bind/named.conf.log
@@ -873,7 +923,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Sintaxis /etc/bind/named.conf.log
             echo ""
-            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."            echo ""
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.log sea correcta..."
+            echo ""
             vRespuestaCheckConf=$(named-checkconf  /etc/bind/named.conf.log)
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${cColorVerde}        La sintaxis del archivo /etc/bind/named.conf.log es correcta:${cFinColor}"
@@ -903,7 +954,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Sintaxis /etc/bind/named.conf.local
             echo ""
-            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."            echo ""
+            echo "      Comprobando que la sintaxis del archivo /etc/bind/named.conf.local sea correcta..."
+            echo ""
             vRespuestaCheckConf=$(named-checkconf /etc/bind/named.conf.local)
             if [ "$vRespuestaCheckConf" = "" ]; then
               echo -e "${cColorVerde}        La sintaxis del archivo /etc/bind/named.conf.local es correcta:${cFinColor}"
@@ -915,7 +967,8 @@ elif [ $cVerSO == "11" ]; then
 
           # resolvconf
             echo ""
-            echo "    Instalando resolvconf y configurando IP loopack..."            echo ""
+            echo "    Instalando resolvconf y configurando IP loopack..."
+            echo ""
             apt-get -y install resolvconf
             sed -i -e 's|nameserver 127.0.0.1||g' /etc/resolvconf/resolv.conf.d/head
             echo "nameserver 127.0.0.1"        >> /etc/resolvconf/resolv.conf.d/head
@@ -923,17 +976,20 @@ elif [ $cVerSO == "11" ]; then
 
           # Herramientas extra
             echo ""
-            echo "    Instalando herramientas extra..."            echo ""
+            echo "    Instalando herramientas extra..."
+            echo ""
             apt-get -y install dnsutils
 
           # Reiniciar servidor DNS
             echo ""
-            echo "    Reiniciando el servidor DNS..."            echo ""
+            echo "    Reiniciando el servidor DNS..."
+            echo ""
             service bind9 restart
 
           # Mostrar estado del servidor
             echo ""
-            echo "    Mostrando el estado del servidor DNS..."            echo ""
+            echo "    Mostrando el estado del servidor DNS..."
+            echo ""
             systemctl status bind9 --no-pager
 
         ;;

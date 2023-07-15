@@ -38,15 +38,13 @@ InterfazEthernet="eth0"
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de WireGuard para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de WireGuard para Debian 7 (Wheezy)..."  
   echo ""
 
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de WireGuard para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de WireGuard para Debian 8 (Jessie)..."  
   echo ""
 
   # Agregar el repositorio inestable
@@ -130,14 +128,14 @@ elif [ $cVerSO == "8" ]; then
 
   # Activar el servicio
       echo ""
-      echo "Activando el servicio..."      echo ""
+      echo "Activando el servicio..."
+      echo ""
       systemctl enable wg-quick@wg0.service
       echo ""
 
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de WireGuard para Debian 9 (Stretch)..."  
   echo ""
 
@@ -219,14 +217,14 @@ elif [ $cVerSO == "9" ]; then
 
   # Activar el servicio
       echo ""
-      echo "Activando el servicio..."      echo ""
+      echo "Activando el servicio..."
+      echo ""
       systemctl enable wg-quick@wg0.service
       echo ""
 
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de WireGuard para Debian 10 (Buster)..."  
   echo ""
 
@@ -310,14 +308,14 @@ elif [ $cVerSO == "10" ]; then
 
   # Activar el servicio
       echo ""
-      echo "Activando el servicio..."      echo ""
+      echo "Activando el servicio..."
+      echo ""
       systemctl enable wg-quick@wg0.service
       echo ""
 
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de WireGuard para Debian 11 (Bullseye)..."  
   echo ""
 

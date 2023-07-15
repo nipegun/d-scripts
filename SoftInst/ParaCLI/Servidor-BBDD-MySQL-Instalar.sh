@@ -39,7 +39,6 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de MySQL Server para Debian 7 (Wheezy)..."  
   echo ""
 
@@ -50,7 +49,6 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de MySQL Server para Debian 8 (Jessie)..."  
   echo ""
 
@@ -61,8 +59,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de MySQL Server para Debian 9 (Stretch)..."  echo "---------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de MySQL Server para Debian 9 (Stretch)..."
   echo ""
 
   echo ""
@@ -72,8 +69,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de MySQL Server para Debian 10 (Buster)..."  echo "---------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de MySQL Server para Debian 10 (Buster)..."
   echo ""
 
   echo ""

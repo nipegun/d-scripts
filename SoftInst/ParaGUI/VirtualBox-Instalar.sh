@@ -48,8 +48,7 @@
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de VirtualBox para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 7 (Wheezy)..."  
   echo ""
 
   echo ""
@@ -59,8 +58,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de VirtualBox para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 8 (Jessie)..."  
   echo ""
 
   echo ""
@@ -70,7 +68,6 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de VirtualBox para Debian 9 (Stretch)..."  
   echo ""
 
@@ -97,7 +94,6 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de VirtualBox para Debian 10 (Buster)..."  
   echo ""
 
@@ -108,7 +104,6 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de VirtualBox para Debian 11 (Bullseye)..."  
   echo ""
 
@@ -153,7 +148,8 @@ elif [ $cVerSO == "11" ]; then
 
    # Agregar el usuario 1000 al grupo virtualbox
       echo ""
-      echo "  Agregando el usuario 1000 en el grupo virtualbox..."      echo ""
+      echo "  Agregando el usuario 1000 en el grupo virtualbox..."
+      echo ""
       Usuario1000=$(id 1000 | cut -d'(' -f2 | cut -d')' -f1)
       usermod -a -G vboxusers $Usuario1000
 

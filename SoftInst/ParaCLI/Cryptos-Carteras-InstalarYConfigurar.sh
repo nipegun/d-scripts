@@ -136,7 +136,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "  curl no está instalado. Iniciando su instalación..."              echo ""
+              echo "  curl no está instalado. Iniciando su instalación..."
+              echo ""
               apt-get -y update
               apt-get -y install curl
               echo ""
@@ -153,7 +154,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "  wget no está instalado. Iniciando su instalación..."              echo ""
+              echo "  wget no está instalado. Iniciando su instalación..."
+              echo ""
               apt-get -y update
               apt-get -y install wget
               echo ""
@@ -166,7 +168,8 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo "  tar no está instalado. Iniciando su instalación..."              echo ""
+              echo "  tar no está instalado. Iniciando su instalación..."
+              echo ""
               apt-get -y update
               apt-get -y install tar
               echo ""

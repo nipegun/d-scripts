@@ -165,16 +165,20 @@ elif [ $cVerSO == "11" ]; then
             apt-get -y autoremove
           # Reiniciar servidor web
             echo ""
-            echo "    Reiniciando php$vUltVerPHP-fpm..."            echo ""
+            echo "    Reiniciando php$vUltVerPHP-fpm..."
+            echo ""
             systemctl restart php$vUltVerPHP-fpm
             echo ""
-            echo "    Activando módulo fastcgi..."            echo ""
+            echo "    Activando módulo fastcgi..."
+            echo ""
             lighty-enable-mod fastcgi
             echo ""
-            echo "    Activando módulo fastcgi-php..."            echo ""
+            echo "    Activando módulo fastcgi-php..."
+            echo ""
             lighty-enable-mod fastcgi-php
             echo ""
-            echo "    Reiniciando servidor Web..."            echo ""
+            echo "    Reiniciando servidor Web..."
+            echo ""
             systemctl restart lighttpd
 
         ;;

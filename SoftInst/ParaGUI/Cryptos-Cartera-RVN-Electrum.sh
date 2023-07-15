@@ -125,7 +125,8 @@ elif [ $cVerSO == "11" ]; then
           1)
 
             echo ""
-            echo "  Instalando para el usuario root..."            echo ""
+            echo "  Instalando para el usuario root..."
+            echo ""
 
             # Borrar archivos de ejecuciones anteriores
             rm -rf /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
@@ -133,7 +134,8 @@ elif [ $cVerSO == "11" ]; then
             rm -rf /home/$vUsuarioNoRoot/ElectrumRavencoin/ 2> /dev/null
 
             echo ""
-            echo "  Determinando última versión del código fuente..."            echo ""
+            echo "  Determinando última versión del código fuente..."
+            echo ""
             # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
@@ -149,7 +151,8 @@ elif [ $cVerSO == "11" ]; then
             echo ""
 
             echo ""
-            echo "  Determinando la URL del archivo a descargar..."            echo ""
+            echo "  Determinando la URL del archivo a descargar..."
+            echo ""
             vURLArchivo=$(curl -sL https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases/tag/$vUltVersCodFuente | grep href | grep ".tar.gz" | cut -d'"' -f2)
             echo ""
             echo "    La URL del archivo a descargar es https://github.com$vURLArchivo"
@@ -183,7 +186,8 @@ elif [ $cVerSO == "11" ]; then
             rm -f  /root/SoftInst/ElectrumRavencoin/CodFuente/.dockerignore
 
             echo ""
-            echo "  Instalando paquetes necesarios..."            echo ""
+            echo "  Instalando paquetes necesarios..."
+            echo ""
             apt-get -y update
             #apt-get -y install python3
             apt-get -y install python3-venv
@@ -199,7 +203,8 @@ elif [ $cVerSO == "11" ]; then
             #./contrib/make_libsecp256k1.sh
 
             echo ""
-            echo "  Moviendo el software a la carpeta de usuario..."            echo ""
+            echo "  Moviendo el software a la carpeta de usuario..."
+            echo ""
             mv /root/SoftInst/ElectrumRavencoin/CodFuente/ /root/ElectrumRavencoin/
 
             echo ""
@@ -218,14 +223,16 @@ elif [ $cVerSO == "11" ]; then
           2)
 
             echo ""
-            echo "  Moviendo la app a la carpeta del usuario no-root..."            echo ""
+            echo "  Moviendo la app a la carpeta del usuario no-root..."
+            echo ""
             mv /root/ElectrumRavencoin/ /home/$vUsuarioNoRoot/ElectrumRavencoin/
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
             cp /home/$vUsuarioNoRoot/ElectrumRavencoin/electrum/gui/icons/electrum-ravencoin.png /home/$vUsuarioNoRoot/ElectrumRavencoin/electrum/gui/icons/Logo.png
 
             # Icono de lanzamiento en el menú gráfico
               echo ""
-              echo "  Agregando la aplicación gráfica al menú..."              echo ""
+              echo "  Agregando la aplicación gráfica al menú..."
+              echo ""
               mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
               echo "[Desktop Entry]"                                                           > /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
               echo "Name=electrum GUI"                                                        >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
@@ -240,7 +247,8 @@ elif [ $cVerSO == "11" ]; then
 
             # Autoejecución gráfica de electrum-ravencoin
               echo ""
-              echo "  Creando el archivo de autoejecución de electrum-ravencoin para escritorio..."              echo ""
+              echo "  Creando el archivo de autoejecución de electrum-ravencoin para escritorio..."
+              echo ""
               mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
               echo "[Desktop Entry]"                                            > /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
               echo "Name=electrum GUI"                                         >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
@@ -264,21 +272,24 @@ elif [ $cVerSO == "11" ]; then
           3)
 
             echo ""
-            echo "  ..."            echo ""
+            echo "  ..."
+            echo ""
 
           ;;
 
           4)
 
             echo ""
-            echo "  ..."            echo ""
+            echo "  ..."
+            echo ""
 
           ;;
 
           5)
 
             echo ""
-            echo "  ..."            echo ""
+            echo "  ..."
+            echo ""
 
           ;;
 

@@ -59,7 +59,8 @@ echo ""
   # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo "  wget no está instalado. Iniciando su instalación..."      echo ""
+      echo "  wget no está instalado. Iniciando su instalación..."
+      echo ""
       apt-get -y update && apt-get -y install wget
       echo ""
     fi
@@ -73,7 +74,8 @@ echo ""
   # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo "  binutils no está instalado. Iniciando su instalación..."      echo ""
+      echo "  binutils no está instalado. Iniciando su instalación..."
+      echo ""
       apt-get -y update > /dev/null
       apt-get -y install binutils
       echo ""
@@ -86,7 +88,8 @@ echo ""
   # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo "  tar no está instalado. Iniciando su instalación..."      echo ""
+      echo "  tar no está instalado. Iniciando su instalación..."
+      echo ""
       apt-get -y update && apt-get -y install tar
       echo ""
     fi

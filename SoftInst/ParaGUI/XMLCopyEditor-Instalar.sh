@@ -35,8 +35,7 @@
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de XMLCopyEditor para Debian 7 (Wheezy)..."  echo "---------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de XMLCopyEditor para Debian 7 (Wheezy)..."
   echo ""
 
   echo ""
@@ -46,8 +45,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de jDownloader para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de jDownloader para Debian 8 (Jessie)..."  
   echo ""
 
   echo ""
@@ -57,8 +55,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de XMLCopyEditor para Debian 9 (Stretch)..."  echo "----------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de XMLCopyEditor para Debian 9 (Stretch)..."
   echo ""
 
   echo ""
@@ -68,8 +65,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de XMLCopyEditor para Debian 10 (Buster)..."  echo "----------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de XMLCopyEditor para Debian 10 (Buster)..."
   echo ""
 
   echo ""

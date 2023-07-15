@@ -39,7 +39,6 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de actualización de Heimdall para Debian 7 (Wheezy)..."  
   echo ""
 
@@ -50,7 +49,6 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de actualización de Heimdall para Debian 8 (Jessie)..."  
   echo ""
 
@@ -83,8 +81,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------"
-  echo "  Iniciando el script de actualización de Heimdall para Debian 11 (Bullseye)..."  echo "---------------------------------------------------------------------------------"
+  echo "  Iniciando el script de actualización de Heimdall para Debian 11 (Bullseye)..."
   echo ""
 
   # Parar apache

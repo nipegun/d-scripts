@@ -128,7 +128,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Instalar el paquete mmariadb-server
             echo ""
-            echo "  Instalando el paquete mariadb-server..."            echo ""
+            echo "  Instalando el paquete mariadb-server..."
+            echo ""
             apt-get -y update
             apt-get -y install mariadb-server
 
@@ -138,7 +139,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Permitir la conexión desde todas las IPs
             echo ""
-            echo "  Permitiendo conexión desde todas las IPs (no sólo desde localhost)..."            echo ""
+            echo "  Permitiendo conexión desde todas las IPs (no sólo desde localhost)..."
+            echo ""
             vExisteSec=$(cat /etc/mysql/my.cnf | grep ^'\[mysqld]')
             if [[ $vExisteSec == "" ]]; then
               vFecha=$(date +a%Ym%md%d@%T)
@@ -159,7 +161,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Permitir conexiones sólo desde una IP específica
             echo ""
-            echo "  Permitiendo conexión SÓLO desde una IP específica (sin localhost)..."            echo ""
+            echo "  Permitiendo conexión SÓLO desde una IP específica (sin localhost)..."
+            echo ""
             echo "    Introduce la IP desde la que se deberían escuchar las conexiones y presiona Enter:"
             echo ""
             read vIPExtra < /dev/tty
@@ -185,7 +188,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Instalar phpmydmin
             echo ""
-            echo "  Instalando phpmyadmin..."            echo ""
+            echo "  Instalando phpmyadmin..."
+            echo ""
             apt-get -y install phpmyadmin
 
         ;;
@@ -194,7 +198,8 @@ elif [ $cVerSO == "11" ]; then
 
           # Securizar la instalación
             echo ""
-            echo "  Securizando instalación con script oficial..."            echo ""
+            echo "  Securizando instalación con script oficial..."
+            echo ""
             mysql_secure_installation
 
         ;;
@@ -238,7 +243,8 @@ elif [ $cVerSO == "12" ]; then
 
           # Instalar el paquete mmariadb-server
             echo ""
-            echo "  Instalando el paquete mariadb-server..."            echo ""
+            echo "  Instalando el paquete mariadb-server..."
+            echo ""
             apt-get -y update
             apt-get -y install mariadb-server
 
@@ -248,7 +254,8 @@ elif [ $cVerSO == "12" ]; then
 
           # Permitir la conexión desde todas las IPs
             echo ""
-            echo "  Permitiendo conexión desde todas las IPs (no sólo desde localhost)..."            echo ""
+            echo "  Permitiendo conexión desde todas las IPs (no sólo desde localhost)..."
+            echo ""
             vExisteSec=$(cat /etc/mysql/my.cnf | grep ^'\[mysqld]')
             if [[ $vExisteSec == "" ]]; then
               cp /etc/mysql/my.cnf /etc/mysql/my.cnf.bak-$vFecha
@@ -267,7 +274,8 @@ elif [ $cVerSO == "12" ]; then
 
           # Permitir conexiones sólo desde una IP específica
             echo ""
-            echo "  Permitiendo conexión SÓLO desde una IP específica (sin localhost)..."            echo ""
+            echo "  Permitiendo conexión SÓLO desde una IP específica (sin localhost)..."
+            echo ""
             echo "    Introduce la IP desde la que se deberían escuchar las conexiones y presiona Enter:"
             echo ""
             read vIPExtra < /dev/tty
@@ -291,7 +299,8 @@ elif [ $cVerSO == "12" ]; then
 
           # Instalar phpmydmin
             echo ""
-            echo "  Instalando phpmyadmin..."            echo ""
+            echo "  Instalando phpmyadmin..."
+            echo ""
             apt-get -y install phpmyadmin
 
         ;;
@@ -300,7 +309,8 @@ elif [ $cVerSO == "12" ]; then
 
           # Securizar la instalación
             echo ""
-            echo "  Securizando instalación con script oficial..."            echo ""
+            echo "  Securizando instalación con script oficial..."
+            echo ""
             mysql_secure_installation
 
         ;;

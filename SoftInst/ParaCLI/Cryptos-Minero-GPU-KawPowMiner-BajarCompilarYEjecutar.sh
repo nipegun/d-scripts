@@ -22,9 +22,7 @@ DirWallet="r"
 Hilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)
 
 echo ""
-echo -e "${cColorVerde}--------------------------------------------------------${cFinColor}"
 echo -e "${cColorVerde}  Iniciando el script de instalación de KawPowMiner...${cFinColor}"
-echo -e "${cColorVerde}--------------------------------------------------------${cFinColor}"
 echo ""
 
 # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
@@ -77,12 +75,12 @@ echo "  Creando ID para el minero..."echo ""
    # Generar un identificador del minero a partir del ID del procesador...
       IdMinero=$(echo -n $IdProc | md5sum | cut -d" " -f1)
 
-echo 
+echo
 ""
 echo "  Ejecutando minero con identificador $IdMinero..."echo ""
 
 # Con TLS
-./xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet --tls 
+./xmrig -o pool.minexmr.com:443 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet --tls
 
 # Sin TLS
    #./xmrig -o pool.minexmr.com:4444 --threads=$Hilos --rig-id=$IdMinero -u $DirWallet

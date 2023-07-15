@@ -39,8 +39,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."  
   echo ""
 
   echo ""
@@ -50,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."  
   echo ""
 
   echo ""
@@ -61,7 +59,6 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."  
   echo ""
 
@@ -251,7 +248,8 @@ if [ $# -ne $cCantArgsEsperados ]
             echo "  rightsendcert=never" >> /etc/ipsec.conf
             echo "  eap_identity=%identity" >> /etc/ipsec.conf
             echo ""
-            echo "Configurando los usuarios..."            echo ""
+            echo "Configurando los usuarios..."
+            echo ""
             echo ': RSA "server-key.pem"' >> /etc/ipsec.secrets
             echo 'usuarioprueba : EAP "passwordprueba"' >> /etc/ipsec.secrets
             echo ""
@@ -261,17 +259,20 @@ if [ $# -ne $cCantArgsEsperados ]
             echo "Si quieres agregar o modificar usuarios, modifica el archivo /etc/ipsec.secrets"
             echo ""
             echo ""
-            echo "Activando el forwarding..."            echo ""
+            echo "Activando el forwarding..."
+            echo ""
             sed -i -e 's|# net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
             echo ""
-            echo "Creando los comandos para IPTables..."            echo ""
+            echo "Creando los comandos para IPTables..."
+            echo ""
             echo "iptables -A INPUT -p udp --dport 500 -j ACCEPT" >> /root/ComandosIPTables
             echo "iptables -A INPUT -p udp --dport 4500 -j ACCEPT" >> /root/ComandosIPTables
             echo "iptables -A INPUT -p 50 -j ACCEPT" >> /root/ComandosIPTables
             echo "iptables -A INPUT -p 51 -j ACCEPT" >> /root/ComandosIPTables
             echo "iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> /root/ComandosIPTables
             echo ""
-            echo "Reiniciando StrongSwan..."            echo ""
+            echo "Reiniciando StrongSwan..."
+            echo ""
             systemctl restart strongswan
           ;;
 
@@ -323,10 +324,12 @@ if [ $# -ne $cCantArgsEsperados ]
             echo "iptables -A INPUT -p 51 -j ACCEPT" >> /root/ComandosIPTables
             echo "iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> /root/ComandosIPTables
             echo ""
-            echo "Activando el servicio strongswan..."            echo ""
+            echo "Activando el servicio strongswan..."
+            echo ""
             systemctl enable strongswan
             echo ""
-            echo "Reiniciando el sistema..."            echo ""
+            echo "Reiniciando el sistema..."
+            echo ""
             shutdown -r now
           ;;
 
@@ -339,7 +342,6 @@ fi
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."  
   echo ""
 
@@ -350,7 +352,6 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."  
   echo ""
 

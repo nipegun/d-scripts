@@ -67,7 +67,6 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de Odoo para Debian 9 (Stretch)..."  
   echo ""
 
@@ -78,7 +77,6 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de Odoo para Debian 10 (Buster)..."  
   echo ""
   echo ""

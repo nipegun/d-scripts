@@ -39,8 +39,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."  
   echo ""
 
   echo ""
@@ -50,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."  echo "-----------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."  
   echo ""
 
   apt-get -y update
@@ -152,7 +150,6 @@ echo ""
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."  
   echo ""
 
@@ -190,7 +187,8 @@ if [ $# -ne $cCantArgsEsperados ]
 
           1)
             echo ""
-            echo "Borrando archivos y configuraciones antiguas..."            echo ""
+            echo "Borrando archivos y configuraciones antiguas..."
+            echo ""
             apt-get -y purge openvpn easy-rsa
             apt-get -y autoremove
             rm -rf /etc/openvpn
@@ -198,23 +196,27 @@ if [ $# -ne $cCantArgsEsperados ]
             rm -rf /root/VPN
 
             echo ""
-            echo "Instalando OpenVPN..."            echo ""
+            echo "Instalando OpenVPN..."
+            echo ""
             aso
             apt-get -y install openvpn
             
             echo ""
-            echo "Descargando EasyRSA..."            echo ""
+            echo "Descargando EasyRSA..."
+            echo ""
             wget --no-check-certificate -P /root/ https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.6/EasyRSA-unix-v3.0.6.tgz
             tar xvf /root/EasyRSA-unix-v3.0.6.tgz -C /root/
             mv /root/EasyRSA-v3.0.6 /root/EasyRSA
             
             echo ""
-            echo "Preparando EasyRSA..."            echo ""
+            echo "Preparando EasyRSA..."
+            echo ""
             cd /root/EasyRSA/
             /root/EasyRSA/easyrsa init-pki
             
             echo ""
-            echo "Construyendo la Autoridad Certificadora..."            echo ""
+            echo "Construyendo la Autoridad Certificadora..."
+            echo ""
             /root/EasyRSA/easyrsa build-ca nopass
             /root/EasyRSA/easyrsa import-req /root/EasyRSA/pki/reqs/server.req server-ca
             /root/EasyRSA/easyrsa sign-req server server-ca
@@ -237,7 +239,8 @@ if [ $# -ne $cCantArgsEsperados ]
             chmod -R 700 /root/VPN/client-configs
             
             echo ""
-            echo "Creando el cliente1..."            echo ""
+            echo "Creando el cliente1..."
+            echo ""
             /root/EasyRSA/easyrsa gen-req client1 nopass
             cp /root/EasyRSA/pki/private/client1.key /root/VPN/client-configs/keys/
             /root/EasyRSA/easyrsa sign-req client client1
@@ -246,7 +249,8 @@ if [ $# -ne $cCantArgsEsperados ]
             cp /etc/openvpn/ca.crt /root/VPN/client-configs/keys/
 
             echo ""
-            echo "Configurando el servicio..."            echo ""
+            echo "Configurando el servicio..."
+            echo ""
             cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/
             gzip -d /etc/openvpn/server.conf.gz
             sed -i -e's|tls-auth ta.key 0 # This file is secret|tls-auth ta.key 0 # This file is secret\nkey-direction 0|g' /etc/openvpn/server.conf
@@ -383,7 +387,6 @@ fi
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."  
   echo ""
 
@@ -394,7 +397,6 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."  
   echo ""
 

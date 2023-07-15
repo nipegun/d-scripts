@@ -37,35 +37,40 @@
           1)
 
             echo ""
-            echo "  Opción 1..."            echo ""
+            echo "  Opción 1..."
+            echo ""
 
           ;;
 
           2)
 
             echo ""
-            echo "  Opción 2..."            echo ""
+            echo "  Opción 2..."
+            echo ""
 
           ;;
 
           3)
 
             echo ""
-            echo "  Opción 3..."            echo ""
+            echo "  Opción 3..."
+            echo ""
 
           ;;
 
           4)
 
             echo ""
-            echo "  Opción 4..."            echo ""
+            echo "  Opción 4..."
+            echo ""
 
           ;;
 
           5)
 
             echo ""
-            echo "  Opción 5..."            echo ""
+            echo "  Opción 5..."
+            echo ""
 
           ;;
 

@@ -41,8 +41,7 @@ CarpetaAlternativa="/Discos/HDD-Datos/Plex"
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor Plex para Debian 7 (Wheezy)..."  echo "----------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor Plex para Debian 7 (Wheezy)..."
   echo ""
 
   echo ""
@@ -52,8 +51,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor Plex para Debian 8 (Jessie)..."  echo "----------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor Plex para Debian 8 (Jessie)..."
   echo ""
 
   echo ""
@@ -150,7 +148,8 @@ elif [ $cVerSO == "9" ]; then
             rm -f /root/SoftInst/Plex/plexARMv7.deb
 
             echo ""
-            echo "Descargando el paquete de instalación..."            echo ""
+            echo "Descargando el paquete de instalación..."
+            echo ""
             wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plexARMv7.deb
 
             echo ""
@@ -318,7 +317,8 @@ elif [ $cVerSO == "11" ]; then
             rm -f /root/SoftInst/Plex/plexARMv7.deb
 
             echo ""
-            echo "Descargando el paquete de instalación..."            echo ""
+            echo "Descargando el paquete de instalación..."
+            echo ""
             wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plexARMv7.deb
 
             echo ""
