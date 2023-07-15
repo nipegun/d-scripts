@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para agregar usuarios nuevos sin shell a Debian
+# Script de NiPeGun para agregar usuarios nuevos sin shell a Debian
 # ----------
 
 cCantArgEsperados=1

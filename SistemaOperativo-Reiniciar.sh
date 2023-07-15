@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para reiniciar Debian
+# Script de NiPeGun para reiniciar Debian
 # ----------
 
 cColorAzul="\033[0;34m"
@@ -16,7 +16,7 @@ cColorRojo='\033[1;31m'
 cFinColor='\033[0m'
 
 echo ""
-echo -e "${vColorAzulClaro}  Reiniciando el sistema operativo...${cFinColor}"
+echo -e "${cColorAzulClaro}  Reiniciando el sistema operativo...${cFinColor}"
 echo ""
 shutdown -r now
 

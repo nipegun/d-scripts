@@ -6,17 +6,17 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar GoAccess en Debian
+# Script de NiPeGun para instalar y configurar GoAccess en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-GoAccess-InstalarYConfigurar.sh
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-GoAccess-InstalarYConfigurar.sh
 # ----------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -62,10 +62,10 @@ elif [ $cVerSO == "8" ]; then
   echo "-----------------------------------------------------------------------------"
   echo ""
 
-  cCantArgsCorrectos=2
+  cCantArgumEsperados=2
   
 
-  if [ $# -ne $cCantArgsCorrectos ]
+  if [ $# -ne $cCantArgumEsperados ]
     then
       echo ""
       
@@ -108,10 +108,10 @@ elif [ $cVerSO == "9" ]; then
   
   echo ""
 
-  cCantArgsCorrectos=2
+  cCantArgumEsperados=2
   
 
-  if [ $# -ne $cCantArgsCorrectos ]
+  if [ $# -ne $cCantArgumEsperados ]
     then
       echo ""
       
@@ -176,7 +176,7 @@ elif [ $cVerSO == "10" ]; then
       wget -O - http://deb.goaccess.io/gnugpg.key | apt-key add -
       apt-get -y update
       mkdir -p /root/paquetes/libssl/
-      ArchivoDeb=$(curl -s http://ftp.debian.org/debian/pool/main/o/openssl1.0/ | grep amd64 | grep -v crypto | grep -v dev | grep -v udeb | cut -d\" -f8)
+      ArchivoDeb=$(curl -sL http://ftp.debian.org/debian/pool/main/o/openssl1.0/ | grep amd64 | grep -v crypto | grep -v dev | grep -v udeb | cut -d\" -f8)
       wget -O /root/paquetes/libssl/$ArchivoDeb http://ftp.debian.org/debian/pool/main/o/openssl1.0/$ArchivoDeb
       dpkg -i /root/paquetes/libssl/$ArchivoDeb
       apt-get -y install goaccess

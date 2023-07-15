@@ -9,16 +9,16 @@
 # Script de NiPeGun para cambiar la contraseña de un usuario registrado en la base de datos de uHub
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
   cColorRojo='\033[1;31m'
   cFinColor='\033[0m'
 
-cCantArgsCorrectos=2
+cCantArgumEsperados=2
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
@@ -27,7 +27,7 @@ if [ $# -ne $cCantArgsCorrectos ]
     echo "  Ejemplo:"
     echo "    $0 'pedro' '12345678'"
     echo ""
-    exit $vArgsInsuficientes
+    exit
   else
     # Comprobar si el paquete sqlite3 está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s sqlite3 2>/dev/null | grep installed) == "" ]]; then

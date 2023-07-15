@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para resetear el minero de Crypton del usuario root en Debian
+# Script de NiPeGun para resetear el minero de Crypton del usuario root en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Cryptos-CRP-Minero-ResetearRoot.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Cryptos-CRP-Minero-ResetearRoot.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
@@ -21,7 +21,7 @@ cFinColor='\033[0m'
 #DirCartera="F62FF04B8849C4ADD45CC5980499168A1B8ADF2C329C602443CD34AA97B55727" #edpik
 DirCartera="248C22E649C37C46A03F6A255212CADE2D1569DBB39FC8CEC03A3D6D1F919D22" #feriz
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -103,11 +103,11 @@ elif [ $cVerSO == "11" ]; then
   echo "-----------------------------------------------------------------------------------------------"
   echo ""
 
-  ## Terminar cualquier proceso del minero que pueda estar ejecutándose
+  # Terminar cualquier proceso del minero que pueda estar ejecutándose
      echo ""
      echo "  Terminando posibles procesos activos del antiguo minero..."
      echo ""
-     ## Comprobar si el paquete psmisc está instalado. Si no lo está, instalarlo.
+     # Comprobar si el paquete psmisc está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s psmisc 2>/dev/null | grep installed) == "" ]]; then
           echo ""
           echo "  psmisc no está instalado. Iniciando su instalación..."
@@ -118,16 +118,16 @@ elif [ $cVerSO == "11" ]; then
         fi
      killall -9 uam
 
-  ## Hacer copia de seguridad del archio uam.ini
+  # Hacer copia de seguridad del archio uam.ini
      mv /root/.uam/uam.ini /root/
 
-  ## Borrar todos los datos del anterior minero
+  # Borrar todos los datos del anterior minero
      echo ""
      echo "  Borrando todos los datos del anterior minero..."
      echo ""
      rm -rf /root/.uam/*
 
-## Preparar el archivo .ini del nuevo minero
+# Preparar el archivo .ini del nuevo minero
      echo ""
      echo "  Preparando el archivo .ini del nuevo minero..."
      echo ""
@@ -136,10 +136,10 @@ elif [ $cVerSO == "11" ]; then
      echo "$IPYPuerto" >> /root/uam.ini
      mv /root/uam.ini /root/.uam/
 
-  ## Re-escribir la dirección de cartera
+  # Re-escribir la dirección de cartera
      sed -i -e "s|C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415|$DirCartera|g" ~/Cryptos/CRP/minero/Minar.sh
 
-  ## Reiniciar el sistema
+  # Reiniciar el sistema
      echo ""
      echo "  Reiniciando el sistema..."
      echo ""

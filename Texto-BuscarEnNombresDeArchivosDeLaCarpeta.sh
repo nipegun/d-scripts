@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Texto-BuscarEnNombresDeArchivosDeLaCarpeta.sh | bash -s /etc/ Cadena
 # ----------
 
-EXPECTED_ARGS=2
+cCantArgumEsperados=2
 
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -27,7 +27,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "$0 /etc/ Perro"
     echo "##################################################"
     echo ""
-    exit $E_BADARGS
+    exit
   else
     echo ""
     find $1 -type f -name "*$2*" -print

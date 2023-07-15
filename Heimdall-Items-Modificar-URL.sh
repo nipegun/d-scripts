@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para modificar URLs de items de Heimdall desde Bash
+# Script de NiPeGun para modificar URLs de items de Heimdall desde Bash
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdall-Items-Modificar-URL.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdall-Items-Modificar-URL.sh | bash
 #
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdall-Items-Modificar-URL.sh | bash
+# Ejecución remota sin caché:
+#  curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Heimdall-Items-Modificar-URL.sh | bash
 # ----------
 
 vURLVieja="'http://192.168.1.205:9091/transmission/web/'"

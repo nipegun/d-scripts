@@ -5,9 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -----------
-#  SCRIPT DE NIPEGUN PARA LANZAR EL ESCRITORIO ESTANDO EN MODO TEXTO (multi-user)
-# -----------
+# ----------
+# Script de NiPeGun para LANZAR EL ESCRITORIO ESTANDO EN MODO TEXTO (multi-user)
+# ----------
 
 startx
 

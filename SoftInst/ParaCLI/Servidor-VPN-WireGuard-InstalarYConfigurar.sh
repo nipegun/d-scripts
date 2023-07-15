@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar y configurar WireGuard en Debian
 #
 # Ejecución remota:
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-VPN-WireGuard-InstalarYConfigurar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-VPN-WireGuard-InstalarYConfigurar.sh | bash
 # ----------
 
 # Determinar la primera interfaz ethernet
@@ -53,7 +53,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de WireGuard para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de WireGuard para Debian 7 (Wheezy)...${cFinColor}"
   echo "  "
   echo ""
 
@@ -64,7 +64,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de WireGuard para Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de WireGuard para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
@@ -74,7 +74,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de WireGuard para Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de WireGuard para Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   echo ""
@@ -84,7 +84,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de WireGuard para Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de WireGuard para Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   # Borrar WireGuard si ya está instalado
@@ -192,14 +192,14 @@ elif [ $cVerSO == "10" ]; then
     echo "  "
     echo -e "${cColorVerde}    o${cFinColor}"
     echo ""
-    echo -e "${cColorVerde}      curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-Clientes-Nuevo.sh | bash${cFinColor}"
+    echo -e "${cColorVerde}      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-Clientes-Nuevo.sh | bash${cFinColor}"
     echo "  "
     echo ""
 
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de WireGuard para Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de WireGuard para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   # Borrar WireGuard si ya está instalado
@@ -335,7 +335,7 @@ elif [ $cVerSO == "11" ]; then
     echo "  "
     echo -e "${cColorVerde}    o${cFinColor}"
     echo ""
-    echo -e "${cColorVerde}      curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-Clientes-Nuevo.sh | bash${cFinColor}"
+    echo -e "${cColorVerde}      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-Clientes-Nuevo.sh | bash${cFinColor}"
     echo "  "
     echo ""
 

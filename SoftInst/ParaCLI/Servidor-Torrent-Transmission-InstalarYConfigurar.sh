@@ -6,17 +6,17 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 ------------------------------------------------------------------------------------------------------
-#  Script de NiPeGun para instalar y configurar Transmission en Debian
+# Script de NiPeGun para instalar y configurar Transmission en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Torrent-Transmission-InstalarYConfigurar.sh | bash -s -- /var/tmp/transmission/completos /var/tmp/transmission/incompletos 12345678 nico
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Torrent-Transmission-InstalarYConfigurar.sh | bash -s -- /var/tmp/transmission/completos /var/tmp/transmission/incompletos 12345678 nico
 ------------------------------------------------------------------------------------------------------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org

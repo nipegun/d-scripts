@@ -5,11 +5,11 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# --------------
-#  Script de NiPeGun para buscar una carpeta en todo el sistema
-# --------------
+# ----------
+# Script de NiPeGun para buscar una carpeta en todo el sistema
+# ----------
 
-EXPECTED_ARGS=1
+cCantArgumEsperados=1
 
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -24,7 +24,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "bcees Perro"
     echo "##################################################"
     echo ""
-    exit $E_BADARGS
+    exit
   else
     echo ""
     find /bin -type d -name $1

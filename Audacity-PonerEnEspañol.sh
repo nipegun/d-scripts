@@ -5,9 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# ------------
-#  Script de NiPeGun para poner Audacity en español
-# ------------
+# ----------
+# Script de NiPeGun para poner Audacity en español
+# ----------
 
 # Asegúrate de que Audacity esté cerrado antes de ejecutar este script
 

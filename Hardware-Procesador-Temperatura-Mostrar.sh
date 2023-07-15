@@ -43,21 +43,21 @@ cFinColor='\033[0m'
 # Mostrar una información si el procesador es AMD, otra si es Intel y otra si es cualquier otra arquitectura
   if [[ "$vProc" == "AuthenticAMD" ]]; then
     echo ""
-    echo -e "${vColorAzulClaro}  Mostrando temperatura del procesador $vModeloProc...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Mostrando temperatura del procesador $vModeloProc...${cFinColor}"
     echo ""
     # watch -n 1 'sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6'
     sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6
     echo ""
   elif [[ "$vProc" == "GenuineIntel" ]]; then
     echo ""
-    echo -e "${vColorAzulClaro}  Mostrando temperatura del procesador $vModeloProc...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Mostrando temperatura del procesador $vModeloProc...${cFinColor}"
     echo ""
     # watch -n 1 'sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6'
     sensors | grep CPU
     echo ""
   else
     echo ""
-    echo -e "${vColorAzulClaro}  Mostrando temperatura del procesador $vModeloProc...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Mostrando temperatura del procesador $vModeloProc...${cFinColor}"
     echo ""
     sensors | grep CPU
     echo ""

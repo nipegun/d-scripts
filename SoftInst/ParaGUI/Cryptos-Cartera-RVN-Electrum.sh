@@ -6,16 +6,16 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar la cartera de RVN Electrum en Debian
+# Script de NiPeGun para instalar y configurar la cartera de RVN Electrum en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-Electrum.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-Electrum.sh | bash
 #
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-Electrum.sh | bash
+# Ejecución remota sin caché:
+#  curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-Electrum.sh | bash
 #
-#  Ejecución remota con parámetros:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-Electrum.sh | bash -s Parámetro1 Parámetro2
+# Ejecución remota con parámetros:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-Electrum.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 vUsuarioNoRoot=nipegun
@@ -55,7 +55,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de la cartera RVN Electrum para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}Iniciando el script de instalación de la cartera RVN Electrum para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
@@ -65,7 +65,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de la cartera RVN Electrum para Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}Iniciando el script de instalación de la cartera RVN Electrum para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
@@ -75,7 +75,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de la cartera RVN Electrum para Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}Iniciando el script de instalación de la cartera RVN Electrum para Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   echo ""
@@ -85,7 +85,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de la cartera RVN Electrum para Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}Iniciando el script de instalación de la cartera RVN Electrum para Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   echo ""
@@ -95,7 +95,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de la cartera RVN Electrum para Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}Iniciando el script de instalación de la cartera RVN Electrum para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -144,8 +144,8 @@ elif [ $cVerSO == "11" ]; then
                 apt-get -y update && apt-get -y install curl
                 echo ""
               fi
-            #vAppImage=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases | sed 's->-\n-g' | grep ownload | grep href | grep mage | head -n1 | cut -d'"' -f2)
-            vUltVersCodFuente=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases | sed 's->-\n-g' | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2 | cut -d'/' -f7 | sed 's-.tar.gz--g')
+            #vAppImage=$(curl -sL https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases | sed 's->-\n-g' | grep ownload | grep href | grep mage | head -n1 | cut -d'"' -f2)
+            vUltVersCodFuente=$(curl -sL https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases | sed 's->-\n-g' | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2 | cut -d'/' -f7 | sed 's-.tar.gz--g')
             echo ""
             echo "    La última versión es la $vUltVersCodFuente"
             echo ""
@@ -153,7 +153,7 @@ elif [ $cVerSO == "11" ]; then
             echo ""
             echo "  Determinando la URL del archivo a descargar..."
             echo ""
-            vURLArchivo=$(curl -s https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases/tag/$vUltVersCodFuente | grep href | grep ".tar.gz" | cut -d'"' -f2)
+            vURLArchivo=$(curl -sL https://github.com/Electrum-RVN-SIG/electrum-ravencoin/releases/tag/$vUltVersCodFuente | grep href | grep ".tar.gz" | cut -d'"' -f2)
             echo ""
             echo "    La URL del archivo a descargar es https://github.com$vURLArchivo"
             echo ""

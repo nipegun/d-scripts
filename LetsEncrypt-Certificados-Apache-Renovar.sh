@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -----------
-#  Script de NiPeGun para renovar certificados LetsEncrypt
+# ----------
+# Script de NiPeGun para renovar certificados LetsEncrypt
 #
 #  Más info aquí:
 #  https://certbot.eff.org/lets-encrypt/debianstretch-apache
-# -----------
+# ----------
 
 echo ""
 echo "Comprobando si falta algún paquete e instálándolo..."

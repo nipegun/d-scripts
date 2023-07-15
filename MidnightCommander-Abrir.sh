@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para cargar el script de inicio de Midnight Commander ubicado en /root/scripts/MidnightCommander.sh
+# Script de NiPeGun para cargar el script de inicio de Midnight Commander ubicado en /root/scripts/MidnightCommander.sh
 # ----------
 
 /root/scripts/MidnightCommander.sh

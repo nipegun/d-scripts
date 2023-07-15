@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  SCRIPT DE NIPEGUN PARA BORRAR LOS ARCHIVOS QUE CONTENGAN EL TEXTO
+# Script de NiPeGun para BORRAR LOS ARCHIVOS QUE CONTENGAN EL TEXTO
 #  Zone.Identifier
 #  DEL DISCO DE SISTEMA DEBIAN Y DE TODOS LOS VOLÚMENES MONTADOS
 #

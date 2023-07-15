@@ -9,14 +9,14 @@
 # Script de NiPeGun para instalar y configurar RetroPie en Debian
 #
 # Ejecución remota:
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/RetroPie-Instalar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/RetroPie-Instalar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -114,7 +114,7 @@ elif [ $cVerSO == "10" ]; then
   echo "lr-ppsspp"
   echo ""
 
-  ## Packages
+  # Packages
   sed -i -e 's|rootdir="/opt/retropie"|rootdir="/RetroPie/opt"|g'                           /root/SoftInst/RetroPie/retropie_packages.sh
   sed -i -e 's|datadir="$home/RetroPie"|datadir="/RetroPie"|g'                              /root/SoftInst/RetroPie/retropie_packages.sh
   sed -i -e 's|scriptdir="$(dirname "$0")"||g'                                              /root/SoftInst/RetroPie/retropie_packages.sh

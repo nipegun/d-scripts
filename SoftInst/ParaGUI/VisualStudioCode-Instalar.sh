@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# ------------
-#  Script de NiPeGun para instalar Visual Studio Code en Debian
+# ----------
+# Script de NiPeGun para instalar Visual Studio Code en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/VisualStudioCode-Instalar.sh | bash
-# ------------
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/VisualStudioCode-Instalar.sh | bash
+# ----------
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then
@@ -93,7 +93,7 @@ elif [ $cVerSO == "11" ]; then
   echo "-------------------------------------------------------------------------------------------"
   echo ""
 
-  ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
        echo "  dialog no está instalado. Iniciando su instalación..."
@@ -124,21 +124,21 @@ elif [ $cVerSO == "11" ]; then
               echo "  Instalando versión estable para i386..."
               echo ""
 
-              ## Determinar URL del paquete
-                 URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep i386 | grep -v side)
+              # Determinar URL del paquete
+                 URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep i386 | grep -v side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
                  echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
-              ## Descargar el paquete
+              # Descargar el paquete
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
-                 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
@@ -149,13 +149,13 @@ elif [ $cVerSO == "11" ]; then
                     fi
                  wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
 
-              ## Instalar el paquete
+              # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
-              ## Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario root
                  echo ""
                  echo "  Creando el lanzador para el root"
                  echo ""
@@ -181,21 +181,21 @@ elif [ $cVerSO == "11" ]; then
               echo "  Instalando versión estable para amd64..."
               echo ""
 
-              ## Determinar URL del paquete
-                 URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep amd64 | grep -v side)
+              # Determinar URL del paquete
+                 URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep amd64 | grep -v side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
                  echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
-              ## Descargar el paquete
+              # Descargar el paquete
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
-                 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
@@ -206,13 +206,13 @@ elif [ $cVerSO == "11" ]; then
                     fi
                  wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
 
-              ## Instalar el paquete
+              # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
-              ## Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario root
                  echo ""
                  echo "  Creando el lanzador para el root"
                  echo ""
@@ -238,21 +238,21 @@ elif [ $cVerSO == "11" ]; then
               echo "  Instalando versión estable para armhf..."
               echo ""
 
-              ## Determinar URL del paquete
-                 URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep armhf | grep -v side)
+              # Determinar URL del paquete
+                 URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep armhf | grep -v side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
                  echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
-              ## Descargar el paquete
+              # Descargar el paquete
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
-                 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
@@ -263,13 +263,13 @@ elif [ $cVerSO == "11" ]; then
                     fi
                  wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
 
-              ## Instalar el paquete
+              # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
-              ## Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario root
                  echo ""
                  echo "  Creando el lanzador para el root"
                  echo ""
@@ -295,21 +295,21 @@ elif [ $cVerSO == "11" ]; then
               echo "  Instalando para versión estable para arm64..."
               echo ""
 
-              ## Determinar URL del paquete
-                 URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep arm64 | grep -v side)
+              # Determinar URL del paquete
+                 URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep arm64 | grep -v side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
                  echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
-              ## Descargar el paquete
+              # Descargar el paquete
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
-                 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
@@ -320,13 +320,13 @@ elif [ $cVerSO == "11" ]; then
                     fi
                  wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
 
-              ## Instalar el paquete
+              # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
-              ## Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario root
                  echo ""
                  echo "  Creando el lanzador para el root"
                  echo ""
@@ -352,21 +352,21 @@ elif [ $cVerSO == "11" ]; then
               echo "  Instalando versión insider para i386..."
               echo ""
 
-              ## Determinar URL del paquete
-                 URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep i386 | grep side)
+              # Determinar URL del paquete
+                 URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep i386 | grep side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
                  echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
-              ## Descargar el paquete
+              # Descargar el paquete
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
-                 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
@@ -377,13 +377,13 @@ elif [ $cVerSO == "11" ]; then
                     fi
                  wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
 
-              ## Instalar el paquete
+              # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
-              ## Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario root
                  echo ""
                  echo "  Creando el lanzador para el root"
                  echo ""
@@ -409,21 +409,21 @@ elif [ $cVerSO == "11" ]; then
               echo "  Instalando versión insider para amd64..."
               echo ""
 
-              ## Determinar URL del paquete
-                 URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep amd64 | grep side)
+              # Determinar URL del paquete
+                 URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep amd64 | grep side)
                  echo ""
                  echo "  El archivo .deb que se va a descargar es:"
                  echo ""
                  echo "  $URLDelPaquete"
                  echo ""
 
-              ## Descargar el paquete
+              # Descargar el paquete
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
-                 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
@@ -434,13 +434,13 @@ elif [ $cVerSO == "11" ]; then
                     fi
                  wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
 
-              ## Instalar el paquete
+              # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
-              ## Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario root
                  echo ""
                  echo "  Creando el lanzador para el root"
                  echo ""
@@ -467,7 +467,7 @@ elif [ $cVerSO == "11" ]; then
               echo ""
 
               # Determinar URL del paquete
-                URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep armhf | grep side)
+                URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep armhf | grep side)
                 echo ""
                 echo "  El archivo .deb que se va a descargar es:"
                 echo ""
@@ -524,7 +524,7 @@ elif [ $cVerSO == "11" ]; then
               echo ""
 
               # Determinar URL del paquete
-                URLDelPaquete=$(curl -s https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep arm64 | grep side)
+                URLDelPaquete=$(curl -sL https://code.visualstudio.com/sha/ | sed 's/.deb/.deb\n/g' | sed 's-//-\n-g' | grep ".deb" | grep arm64 | grep side)
                 echo ""
                 echo "  El archivo .deb que se va a descargar es:"
                 echo ""

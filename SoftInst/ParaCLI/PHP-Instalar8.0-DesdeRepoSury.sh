@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar PHP 8.0 desde el repo de Sury.org
+# Script de NiPeGun para instalar PHP 8.0 desde el repo de Sury.org
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/PHP-Instalar8.0-DesdeRepoSury.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/PHP-Instalar8.0-DesdeRepoSury.sh | bash
 #
 #  Antes de ejecutar este script recuerda ejecutar:
 #   /root/scripts/d-scripts/SoftInst/Consola/PHP-DesinstalarPorCompleto.sh

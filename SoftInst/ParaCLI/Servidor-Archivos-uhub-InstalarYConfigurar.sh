@@ -6,17 +6,17 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 ----------------
-#  Script de NiPeGun para instalar y configurar uhub en Debian
+# Script de NiPeGun para instalar y configurar uhub en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Archivos-uhub-InstalarYConfigurar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Archivos-uhub-InstalarYConfigurar.sh | bash
 ----------------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -86,7 +86,7 @@ elif [ $cVerSO == "10" ]; then
   
   echo ""
 
-  ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
        echo "  dialog no está instalado. Iniciando su instalación..."
@@ -295,7 +295,7 @@ elif [ $cVerSO == "11" ]; then
   echo "  Iniciando el script de instalación de uhub para Debian 11 (Bullseye)..."
   
   echo ""
-  ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
        echo "  dialog no está instalado. Iniciando su instalación..."
@@ -422,7 +422,7 @@ elif [ $cVerSO == "11" ]; then
             mkdir -p /root/SoftInst/ 2> /dev/null
             cd /root/SoftInst/
             rm /root/SoftInst/uhub/ -R 2> /dev/null
-            ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+            # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
                if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
                  echo ""
                  echo "  git no está instalado. Iniciando su instalación..."

@@ -6,11 +6,11 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para obtener los link E2DK desde el código fuente
+# Script de NiPeGun para obtener los link E2DK desde el código fuente
 #  de una Web cuya dirección conocemos
 # ----------
 
-cCantArgsEsperados=1
+cCantArgumEsperados=1
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'

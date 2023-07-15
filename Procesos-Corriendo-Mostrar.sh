@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para mostrar los procesos que están corriendo en el sistema
+# Script de NiPeGun para mostrar los procesos que están corriendo en el sistema
 # ----------
 
 echo ""

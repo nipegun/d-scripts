@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Logs-VarLog-PonerACero.sh | bash
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -27,7 +27,7 @@
 
 # Notificar inicio de ejecución del script
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para poner a cero todos los logs de /var/log/ ...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para poner a cero todos los logs de /var/log/ ...${cFinColor}"
   echo ""
 
 # Borrar archivos comprimidos de logs viejos y otros archivos ya innecesarios

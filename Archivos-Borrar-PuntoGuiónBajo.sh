@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  SCRIPT DE NIPEGUN PARA BORRAR LOS ARCHIVOS que empiecen por ._
+# Script de NiPeGun para BORRAR LOS ARCHIVOS que empiecen por ._
 #  DEL DISCO DE SISTEMA DEBIAN Y DE TODOS LOS VOLÚMENES MONTADOS
 # ----------
 

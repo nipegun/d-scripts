@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para crear certificado SSL para un usuario de mumble-server
+# Script de NiPeGun para crear certificado SSL para un usuario de mumble-server
 # ----------
 
-cCantArgsEsperados=2
+cCantArgumEsperados=2
 
 
 cColorRojo='\033[1;31m'

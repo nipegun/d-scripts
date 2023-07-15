@@ -6,17 +6,17 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar el servidor de bases de datos de Oracle Database XE en Debian
+# Script de NiPeGun para instalar el servidor de bases de datos de Oracle Database XE en Debian
 #
-#  Ejecución remota
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-OracleDatabaseXE-Instalar.sh | bash
+# Ejecución remota
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-OracleDatabaseXE-Instalar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
        . /etc/os-release
@@ -97,7 +97,7 @@ elif [ $cVerSO == "11" ]; then
   echo -e "${cColorVerde}-----------------------------------------------------------------------------------------${cFinColor}"
   echo ""
 
-  ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
        echo "  dialog no está instalado. Iniciando su instalación..."
@@ -131,10 +131,10 @@ elif [ $cVerSO == "11" ]; then
 
             1)
 
-              ## Determinar URL del paquete
-                 URLDelPaquete=$(curl -s https://www.oracle.com/database/technologies/xe-downloads.html | sed 's/>/>\n/g' | sed 's-//-\n-g' | grep .rpm | grep -v preinst | head -n1 | cut -d"'" -f1)
+              # Determinar URL del paquete
+                 URLDelPaquete=$(curl -sL https://www.oracle.com/database/technologies/xe-downloads.html | sed 's/>/>\n/g' | sed 's-//-\n-g' | grep .rpm | grep -v preinst | head -n1 | cut -d"'" -f1)
  
-              ## Guardar archivo con número de versión
+              # Guardar archivo con número de versión
                  touch /tmp/VersOracleDatabaseXE.txt
                  echo $URLDelPaquete >  /tmp/VersOracleDatabaseXE.txt
                  sed -i -e 's|xe-|\n|g' /tmp/VersOracleDatabaseXE.txt
@@ -146,13 +146,13 @@ elif [ $cVerSO == "11" ]; then
                  echo "  La versión que se va a descargar es la $(cat /root/SoftInst/Oracle/DatabaseXE/VersOracleDatabaseXE.txt)"
                  echo ""
 
-              ## Descargar el paquete
+              # Descargar el paquete
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
                  mkdir -p /root/SoftInst/Oracle/DatabaseXE/ 2> /dev/null
                  cd /root/SoftInst/Oracle/DatabaseXE/
-                 ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
@@ -167,12 +167,12 @@ elif [ $cVerSO == "11" ]; then
 
             2)
 
-              ## Convertir el .rpm a un .deb
+              # Convertir el .rpm a un .deb
                  echo ""
                  echo "  Convirtiendo el paquete .rpm a .deb..."
                  echo "  El proceso puede tardar hasta una hora. Déjalo terminar."ç
                  echo ""
-                 ## Comprobar si el paquete alien está instalado. Si no lo está, instalarlo.
+                 # Comprobar si el paquete alien está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s alien 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  alien no está instalado. Iniciando su instalación..."
@@ -364,12 +364,12 @@ elif [ $cVerSO == "11" ]; then
               echo ""
               echo "  https://localhost:5500/em"
 
-              ## Hacer cambios necesarios en el sistema
+              # Hacer cambios necesarios en el sistema
 
-                ## maximum stack size limitation
+                # maximum stack size limitation
                    #ulimit -s 10240
 
-                ## values for database user deployment
+                # values for database user deployment
                    # echo "deployment soft nofile  1024"       > /etc/security/limits.conf
                    # echo "deployment hard nofile  65536"     >> /etc/security/limits.conf
                    # echo "deployment soft nproc   16384"     >> /etc/security/limits.conf
@@ -379,10 +379,10 @@ elif [ $cVerSO == "11" ]; then
                    # echo "deployment hard memlock 134217728" >> /etc/security/limits.conf
                    # echo "deployment soft memlock 134217728" >> /etc/security/limits.conf
 
-                ## .
+                # .
                    #echo "session include system-auth" >> /etc/pam.d/login
 
-                ## .
+                # .
                    #echo "session required pam_limits.so" >> /etc/pam.d/system-auth    
 
             ;;

@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para mostrar información sobre un disco dado
+# Script de NiPeGun para mostrar información sobre un disco dado
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/HardwareInfo-MostrarInfoDeDisco.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/HardwareInfo-MostrarInfoDeDisco.sh | bash
 # ----------
 
-cCantArgsEsperados=1
+cCantArgumEsperados=1
 
 
 cColorRojo='\033[1;31m'

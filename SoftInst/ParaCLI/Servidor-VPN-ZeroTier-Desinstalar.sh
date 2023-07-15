@@ -9,7 +9,7 @@
 # Script de NiPeGun para desinstalar ZeroTier de Debian
 #
 # Ejecución remota:
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-VPN-ZeroTier-Desinstalar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-VPN-ZeroTier-Desinstalar.sh | bash
 # ----------
 
 vFechaDeEjec=$(date +a%Ym%md%d@%T)
@@ -43,7 +43,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
@@ -53,7 +53,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
@@ -63,7 +63,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   echo ""
@@ -73,7 +73,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   # Quitar de todas las redes a las que está unido el host
@@ -114,7 +114,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de desinstalación de ZeroTier para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   # Quitar de todas las redes a las que está unido el host

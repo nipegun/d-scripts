@@ -5,18 +5,18 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# ------------
-#  Script de NiPeGun para Imprimir un archivo desde la terminal en Debian 9
-# ------------
+# ----------
+# Script de NiPeGun para Imprimir un archivo desde la terminal en Debian 9
+# ----------
 
-ColorAdvertencia="\033[1;31m"
-ColorArgumentos="\033[1;32m"
+cColorRojo="\033[1;31m"
+cColorVerde="\033[1;32m"
 cFinColor="\033[0m"
 
-cCantArgsCorrectos=2
+cCantArgumEsperados=2
 
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     echo -e "${cColorRojo}Mal uso del script!${cFinColor}"

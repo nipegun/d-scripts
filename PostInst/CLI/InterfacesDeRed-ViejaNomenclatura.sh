@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/InterfacesDeRed-ViejaNomenclatura.sh | bash
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -27,7 +27,7 @@
   
 # Notificar inicio de ejecución del script
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para poner los nombres de las interfaces de red a la nomenclatura usada en Debian 8...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para poner los nombres de las interfaces de red a la nomenclatura usada en Debian 8...${cFinColor}"
   echo ""
 
 # Realizar cambios en /etc/default/grub

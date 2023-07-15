@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 ----
-#  Script de NiPeGun para bajar, configurar, instalar y ejecutar NBMiner en Debian
+# Script de NiPeGun para bajar, configurar, instalar y ejecutar NBMiner en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-Minero-NBMiner-BajarYEjecutar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-Minero-NBMiner-BajarYEjecutar.sh | bash
 ----
 
 echo ""
@@ -27,7 +27,7 @@ echo ""
 rm -rf ~/Cryptos/Mineros/GPU/NBMiner/
 mkdir -p ~/Cryptos/Mineros/GPU/
 cd ~/Cryptos/Mineros/GPU/
-## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+# Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
      echo ""
      echo "  wget no está instalado. Iniciando su instalación..."
@@ -41,7 +41,7 @@ wget https://github.com/NebuTech/NBMiner/releases/download/v"$UltVers"/NBMiner_"
 echo ""
 echo "  Descomprimiendo el archivo... "
 echo ""
-## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+# Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
      echo ""
      echo "  tar no está instalado. Iniciando su instalación..."

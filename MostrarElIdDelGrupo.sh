@@ -5,11 +5,11 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# --------------
-#  Script de NiPeGun para mostrar el id de un usuario
-# --------------
+# ----------
+# Script de NiPeGun para mostrar el id de un usuario
+# ----------
 
-cCantArgsEsperados=1
+cCantArgumEsperados=1
 
 
 cColorRojo='\033[1;31m'

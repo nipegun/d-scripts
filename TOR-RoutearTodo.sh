@@ -6,17 +6,17 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para routear todo el tráfico de debian mediante TOR
+# Script de NiPeGun para routear todo el tráfico de debian mediante TOR
 #
 # Ejecución remota:
-# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/TOR-RoutearTodo.sh | bash
+# curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/TOR-RoutearTodo.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -98,8 +98,8 @@ elif [ $cVerSO == "11" ]; then
   echo "--------------------------------------------------------------------------------------------"
   echo ""
 
-  ## Determinar IP Pública del equipo
-     ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+  # Determinar IP Pública del equipo
+     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
           echo ""
           echo "  curl no está instalado. Iniciando su instalación..."
@@ -113,14 +113,14 @@ elif [ $cVerSO == "11" ]; then
      echo -e "${cColorVerde}  La IP pública de este equipo es: $IPWAN ${cFinColor}"
      echo ""
 
-  ## Mostrar el estado de los puertos actuales del sistema
+  # Mostrar el estado de los puertos actuales del sistema
      echo ""
      echo -e "${cColorVerde}  Ahora mismo el sistema tiene en funcionamiento los siguientes puertos:${cFinColor}"
      echo ""
      nmap 127.0.0.1 -p 1-65535
      echo ""
 
-  ## Purgar TOR
+  # Purgar TOR
      echo ""
      echo -e "${cColorVerde}  Eliminando toda la instalación de TOR...${cFinColor}"
      echo ""
@@ -129,7 +129,7 @@ elif [ $cVerSO == "11" ]; then
      apt-get -y purge tor tor-geoipdb torsocks > /dev/null
      apt-get -y autoremove > /dev/null
 
-  ## Comprobar si el paquete tor está instalado. Si no lo está, instalarlo.
+  # Comprobar si el paquete tor está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s tor 2>/dev/null | grep installed) == "" ]]; then
        echo ""
        echo "  tor no está instalado. Iniciando su instalación..."
@@ -139,23 +139,23 @@ elif [ $cVerSO == "11" ]; then
        echo ""
      fi
 
-  ## Mostrar el estado de los puertos actuales del sistema
+  # Mostrar el estado de los puertos actuales del sistema
      echo ""
      echo -e "${cColorVerde}  Después de instalar TOR el sistema tiene en funcionamiento los siguientes puertos:${cFinColor}"
      echo ""
      nmap 127.0.0.1 -p 1-65535
      echo ""
 
-  ## Parar el servicio tor
+  # Parar el servicio tor
      systemctl stop tor.service
 
-  ## Modificar archivo de configuraciónm
+  # Modificar archivo de configuraciónm
      echo "AutomapHostsOnResolve 1"  > /etc/tor/torrc
      echo "TransPort 9040"          >> /etc/tor/torrc
      echo "DNSPort 4053"            >> /etc/tor/torrc
 
-  ## Crear reglas de IP Tables para todo el tráfico
-     ## Comprobar si el paquete iptables está instalado. Si no lo está, instalarlo.
+  # Crear reglas de IP Tables para todo el tráfico
+     # Comprobar si el paquete iptables está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s iptables 2>/dev/null | grep installed) == "" ]]; then
           echo ""
           echo "  iptables no está instalado. Iniciando su instalación..."
@@ -179,15 +179,15 @@ elif [ $cVerSO == "11" ]; then
      echo 'echo ""'                                                                        >> /root/scripts/ReglasIPTablesRoutearPorTOR.sh
      chmod +x                                                                                 /root/scripts/ReglasIPTablesRoutearPorTOR.sh
 
-  ## Crear reglas de IP tables para un usuario sólo
+  # Crear reglas de IP tables para un usuario sólo
      #iptables -t nat -A OUTPUT -p tcp -m owner --uid-owner usuariox -m tcp -j REDIRECT --to-ports 9040
      #iptables -t nat -A OUTPUT -p udp -m owner --uid-owner usuariox -m udp --dport 53 -j REDIRECT --to-ports 4053
 
-  ## Re-leer los archivos de configuración de los daemons
+  # Re-leer los archivos de configuración de los daemons
      systemctl daemon-reload
      systemctl restart tor.service
 
-  ## Volver a determinar la IP pública del equipo
+  # Volver a determinar la IP pública del equipo
      IPWAN=$(curl --silent ipinfo.io/ip)
      echo ""
      echo -e "${cColorVerde}  La IP pública de este equipo ahora es: $IPWAN ${cFinColor}"

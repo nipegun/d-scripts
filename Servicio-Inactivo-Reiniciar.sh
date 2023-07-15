@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para comprobar si Apache2 está inactivo y reiniciarlo si lo está
+# Script de NiPeGun para comprobar si Apache2 está inactivo y reiniciarlo si lo está
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Apache2-ReiniciarSiNoActivo.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Apache2-ReiniciarSiNoActivo.sh | bash
 # ----------
 
 cColorAzul="\033[0;34m"

@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# --------------
-#  Script de NiPeGun para instalar controladores de mandos de juegos en Debian
+# ----------
+# Script de NiPeGun para instalar controladores de mandos de juegos en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Mandos-Instalar.sh | bash
-# --------------
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Mandos-Instalar.sh | bash
+# ----------
 
 cColorVerde="\033[1;32m"
 cFinColor="\033[0m"

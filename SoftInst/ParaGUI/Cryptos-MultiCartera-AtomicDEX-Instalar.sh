@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar AtomicDEX en Debian
+# Script de NiPeGun para instalar y configurar AtomicDEX en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-MultiCartera-AtomicDEX-Instalar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-MultiCartera-AtomicDEX-Instalar.sh | bash
 #
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-MultiCartera-AtomicDEX-Instalar.sh | bash
+# Ejecución remota sin caché:
+#  curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-MultiCartera-AtomicDEX-Instalar.sh | bash
 # ----------
 
 vUsuarioNoRoot="nipegun"
@@ -120,8 +120,8 @@ elif [ $cVerSO == "11" ]; then
     echo ""
     echo "  Determinando la URL de descarga del archivo de instalación de AtomicDEX..."
     echo ""
-    #vURLArchivo=$(curl -s https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/ | sed 's->-\n-g' | grep href | grep linux | grep ".zip" | grep ortable | head -n1 | cut -d'"' -f2)
-    vURLArchivo=$(curl -s https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/ | sed 's->-\n-g' | grep href | grep zip | grep -v staller | grep -v indows | grep ortable | head -n1 | cut -d '"' -f2)
+    #vURLArchivo=$(curl -sL https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/ | sed 's->-\n-g' | grep href | grep linux | grep ".zip" | grep ortable | head -n1 | cut -d'"' -f2)
+    vURLArchivo=$(curl -sL https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/ | sed 's->-\n-g' | grep href | grep zip | grep -v staller | grep -v indows | grep ortable | head -n1 | cut -d '"' -f2)
     echo ""
     echo "    La URL de descarga del archivo es: https://github.com$vURLArchivo"
     echo ""

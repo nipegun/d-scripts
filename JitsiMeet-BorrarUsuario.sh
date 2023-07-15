@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para borrar usuarios en jitsi-meet
+# Script de NiPeGun para borrar usuarios en jitsi-meet
 # ----------
 
 vCantParamCorr=2

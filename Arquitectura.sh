@@ -5,9 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# ------------
-#  Script de NiPeGun para mostrar la arquitectura del sistema
-# ------------
+# ----------
+# Script de NiPeGun para mostrar la arquitectura del sistema
+# ----------
 
 echo ""
 echo "El sistema esa utilizando la siguiente arquitectura:"

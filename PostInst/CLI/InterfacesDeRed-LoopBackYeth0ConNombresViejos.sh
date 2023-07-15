@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/InterfacesDeRed-LoopBackYeth0ConNombresViejos.sh
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -27,7 +27,7 @@
 
 # Notificar inicio de ejecución del script
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para configurar loopback y eth0 por por DHCP...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para configurar loopback y eth0 por por DHCP...${cFinColor}"
   echo ""
 
 # Modificar /etc/network/interfaces

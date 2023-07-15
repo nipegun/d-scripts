@@ -5,11 +5,11 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -------------
-#  SCRIPT DE NIPEGUN PARA BUSCAR POR NOMBRE MÓDULOS DISPONIOBLES PARA CARGAR
-# -------------
+# ----------
+# Script de NiPeGun para BUSCAR POR NOMBRE MÓDULOS DISPONIOBLES PARA CARGAR
+# ----------
 
-EXPECTED_ARGS=1
+cCantArgumEsperados=1
 
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -24,7 +24,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "$0 marvell"
     echo "------------------------------------------------------------------"
     echo ""
-    exit $E_BADARGS
+    exit
   else
     find /lib/modules/$(uname -r) -type f -name \*$1*.ko
 fi

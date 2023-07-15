@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Terminal-Salida-Interceptar.sh | bash -s NombreDelSoftware
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -25,10 +25,10 @@
     exit 1
   fi
 
-cCantArgsCorrectos=1
+cCantArgumEsperados=1
 v
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
@@ -37,7 +37,7 @@ if [ $# -ne $cCantArgsCorrectos ]
     echo "  Ejemplo:"
     echo "    $0 xmrig"
     echo ""
-    exit $vArgsInsuficientes
+    exit
   else
     # Comprobar si el paquete strace está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s strace 2>/dev/null | grep installed) == "" ]]; then

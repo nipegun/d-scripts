@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar el servidor web con apache2 en Debian
 #
 # Ejecución remota
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Web-apache2-InstalarYConfigurar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Web-apache2-InstalarYConfigurar.sh | bash
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -48,7 +48,7 @@
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
@@ -58,7 +58,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
@@ -68,7 +68,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   echo ""
@@ -79,7 +79,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   echo ""
@@ -89,7 +89,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   # Comprobar si el paquete dialog esté instalado. SI no lo está, instalarlo.
@@ -400,7 +400,7 @@ elif [ $cVerSO == "11" ]; then
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 12 (Bookworm)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
   # Comprobar si el paquete dialog esté instalado. SI no lo está, instalarlo.

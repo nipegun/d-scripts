@@ -6,9 +6,9 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para desactivar el logueo automático del root en modo texto (terminal no gráfico)
+# Script de NiPeGun para desactivar el logueo automático del root en modo texto (terminal no gráfico)
 #
-#  Ejecución remota:
+# Ejecución remota:
 #  https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-Root-AutologuearEnModoTexto-Desactivar.sh
 # ----------
 
@@ -24,8 +24,8 @@
 
 # Esta solución es temporal y puede que se revierta en alguna actualización del sistema
 
-## Borrar la línea que empieza por ExecStart
+# Borrar la línea que empieza por ExecStart
    sed -i '/^ExecStart/d' /lib/systemd/system/getty@.service
-## Reemplazar la línea Type=idle por la línea de ejecucion, un saldo de línea y nuevamente type idle
+# Reemplazar la línea Type=idle por la línea de ejecucion, un saldo de línea y nuevamente type idle
    sed -i -e 's|Type=idle|ExecStart=-/sbin/agetty -o '"'-p -- \\\\\\\u'"' --noclear %I $TERM\nType=idle|g' /lib/systemd/system/getty@.service
 

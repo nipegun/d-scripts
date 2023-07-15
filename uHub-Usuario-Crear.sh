@@ -9,7 +9,7 @@
 # Script de NiPeGun para agregar usuarios a uHub
 # ----------
 
-cCantArgsEsperados=2
+cCantArgumEsperados=2
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'

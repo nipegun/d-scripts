@@ -5,10 +5,10 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -------------
-#  SCRIPT DE NIPEGUN PARA OBTENER LA LISTA DE IPS DE NODOS TOR
+# ----------
+# Script de NiPeGun para OBTENER LA LISTA DE IPS DE NODOS TOR
 #  QUE LLEGAN A LA IP WAN Y GENERAR UNA ARCHIVO CON LA LISTA
-# -------------
+# ----------
 
 # Obtener la IP WAN del servidor y agregarla a una variable
 IPWANDelServidor=$(curl --silent ipinfo.io/ip)

@@ -9,10 +9,10 @@
 # Instalación en docker: https://hub.docker.com/_/microsoft-mssql-server
 
 # ----------
-#  Script de NiPeGun para instalar el servidor de bases de datos SQLServer en Debian
+# Script de NiPeGun para instalar el servidor de bases de datos SQLServer en Debian
 #
-#  Ejecución remota
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-SQLServer-Instalar.sh | bash
+# Ejecución remota
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-SQLServer-Instalar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'

@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar el messenger de Utopia en Debian
+# Script de NiPeGun para instalar y configurar el messenger de Utopia en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-CRP-InstalarOActualizar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-CRP-InstalarOActualizar.sh | bash
 #
 #  Cambiando el nombre de usuario
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-CRP-InstalarOActualizar.sh | sed 's/nipegun/usuarionuevo/g' | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-CRP-InstalarOActualizar.sh | sed 's/nipegun/usuarionuevo/g' | bash
 # ----------
 
 UsuarioNoRoot="nipegun"
@@ -21,7 +21,7 @@ cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -103,7 +103,7 @@ elif [ $cVerSO == "11" ]; then
   echo "---------------------------------------------------------------------------------------"
   echo ""
 
-  ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
        echo "  dialog no está instalado. Iniciando su instalación..."

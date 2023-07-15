@@ -12,10 +12,10 @@
   cColorRojo='\033[1;31m'
   cFinColor='\033[0m'
 
-cCantArgsCorrectos=2
+cCantArgumEsperados=2
 v
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
@@ -24,7 +24,7 @@ if [ $# -ne $cCantArgsCorrectos ]
     echo "  Ejemplo:"
     echo "    $0 'Hola' 'Mundo'"
     echo ""
-    exit $vArgsInsuficientes
+    exit
   else
     echo ""
     echo ""

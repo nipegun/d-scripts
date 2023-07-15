@@ -6,17 +6,17 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar el servidor de bases MongoDB en Debian
+# Script de NiPeGun para instalar el servidor de bases MongoDB en Debian
 #
 # Ejecución remota
-# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-MongoDB-Instalar.sh | bash
+# curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-MongoDB-Instalar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -89,7 +89,7 @@ elif [ $cVerSO == "10" ]; then
   echo ""
   echo "  Determinando el número de la última versión de MongoDB..."
   echo ""
-  UltVersMongoDB=$(curl -s https://repo.mongodb.org/apt/debian/dists/buster/mongodb-org/ | grep href | grep -v velopmen | grep -v esti | grep -v arent | tail -n1 | cut -d "'" -f2)
+  UltVersMongoDB=$(curl -sL https://repo.mongodb.org/apt/debian/dists/buster/mongodb-org/ | grep href | grep -v velopmen | grep -v esti | grep -v arent | tail -n1 | cut -d "'" -f2)
   echo "  La última versión de MongoDB es la $UltVersMongoDB"
 
   echo ""
@@ -103,7 +103,7 @@ elif [ $cVerSO == "10" ]; then
   echo ""
   echo "  Agregando la clave GPG..."
   echo ""
-  ## Comprobar si el paquete gnupg está instalado. Si no lo está, instalarlo.
+  # Comprobar si el paquete gnupg está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s gnupg 2>/dev/null | grep installed) == "" ]]; then
        echo ""
        echo "  gnupg no está instalado. Iniciando su instalación..."
@@ -117,7 +117,7 @@ elif [ $cVerSO == "10" ]; then
   echo ""
   echo "  Agregando el repositorio..."
   echo ""
-  ## Comprobar si el paquete lsb-release está instalado. Si no lo está, instalarlo.
+  # Comprobar si el paquete lsb-release está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s lsb-release 2>/dev/null | grep installed) == "" ]]; then
        echo ""
        echo "  lsb-release no está instalado. Iniciando su instalación..."
@@ -204,7 +204,7 @@ elif [ $cVerSO == "11" ]; then
   echo ""
   echo "  Determinando el número de la última versión de MongoDB..."
   echo ""
-  UltVersMongoDB=$(curl -s https://repo.mongodb.org/apt/debian/dists/buster/mongodb-org/ | grep href | grep -v velopmen | grep -v esti | grep -v arent | tail -n1 | cut -d "'" -f2)
+  UltVersMongoDB=$(curl -sL https://repo.mongodb.org/apt/debian/dists/buster/mongodb-org/ | grep href | grep -v velopmen | grep -v esti | grep -v arent | tail -n1 | cut -d "'" -f2)
   echo "  La última versión de MongoDB es la $UltVersMongoDB"
 
   echo ""
@@ -218,7 +218,7 @@ elif [ $cVerSO == "11" ]; then
   echo ""
   echo "  Agregando la clave GPG..."
   echo ""
-  ## Comprobar si el paquete gnupg está instalado. Si no lo está, instalarlo.
+  # Comprobar si el paquete gnupg está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s gnupg 2>/dev/null | grep installed) == "" ]]; then
        echo ""
        echo "  gnupg no está instalado. Iniciando su instalación..."
@@ -232,7 +232,7 @@ elif [ $cVerSO == "11" ]; then
   echo ""
   echo "  Agregando el repositorio..."
   echo ""
-  ## Comprobar si el paquete lsb-release está instalado. Si no lo está, instalarlo.
+  # Comprobar si el paquete lsb-release está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s lsb-release 2>/dev/null | grep installed) == "" ]]; then
        echo ""
        echo "  lsb-release no está instalado. Iniciando su instalación..."

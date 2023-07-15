@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 ---
-#  Script de NiPeGun para instalar y configurar la cadena de bloques de Litecoin (LTC)
+# Script de NiPeGun para instalar y configurar la cadena de bloques de Litecoin (LTC)
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-LTC-InstalarYConfigurar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-LTC-InstalarYConfigurar.sh | bash
 ---
 
 cColorRojo='\033[1;31m'
@@ -36,7 +36,7 @@ echo ""
     apt-get -y install curl
     echo ""
   fi
-UltVersLTC=$(curl -s https://litecoin.org | sed 's-//-\n-g' | sed 's-" -\n-g' | grep linux | grep 64 | grep -v ">" | head -n1 | cut -d "-" -f2 | cut -d "/" -f1)
+UltVersLTC=$(curl -sL https://litecoin.org | sed 's-//-\n-g' | sed 's-" -\n-g' | grep linux | grep 64 | grep -v ">" | head -n1 | cut -d "-" -f2 | cut -d "/" -f1)
 echo ""
 echo "  La última versión de litecoin es la $UltVersLTC"
 echo ""
@@ -47,7 +47,7 @@ echo ""
 mkdir -p /root/SoftInst/Cryptos/LTC/ 2> /dev/null
 rm -rf /root/SoftInst/Cryptos/LTC/*
 cd /root/SoftInst/Cryptos/LTC/
-## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+# Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
      echo ""
      echo "  wget no está instalado. Iniciando su instalación..."
@@ -131,14 +131,14 @@ find /home/$UsuarioNoRoot/Cryptos/LTC/bin -type f -exec chmod +x {} \;
 #DirCartLTC=$(cat /home/$UsuarioNoRoot/pooladdress-ltc.txt)
 #echo ""
 
-## Autoejecución de Litecoin al iniciar el sistema
+# Autoejecución de Litecoin al iniciar el sistema
    #echo ""
    #echo "  Agregando litecoind a los ComandosPostArranque..."
    #echo ""
    #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/ltc-daemon-iniciar.sh
    #echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/ltc-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
-## Icono de lanzamiento en el menú gráfico
+# Icono de lanzamiento en el menú gráfico
    echo ""
    echo "  Agregando la aplicación gráfica al menú..."
    echo ""
@@ -154,7 +154,7 @@ find /home/$UsuarioNoRoot/Cryptos/LTC/bin -type f -exec chmod +x {} \;
    chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop
    gio set /home/$UsuarioNoRoot/.local/share/applications/ltc.desktop "metadata::trusted" yes
 
-## Autoejecución gráfica de Litecoin
+# Autoejecución gráfica de Litecoin
    echo ""
    echo "  Creando el archivo de autoejecución de litecoin-qt para escritorio..."
    echo ""
@@ -168,18 +168,18 @@ find /home/$UsuarioNoRoot/Cryptos/LTC/bin -type f -exec chmod +x {} \;
    chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.config/autostart/ltc.desktop
    gio set /home/$UsuarioNoRoot/.config/autostart/ltc.desktop "metadata::trusted" yes
 
-## Reparación de permisos
+# Reparación de permisos
    chmod +x /home/$UsuarioNoRoot/Cryptos/LTC/bin/*
    chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/LTC/ -R
 
-## Instalar los c-scripts
+# Instalar los c-scripts
    echo ""
    echo "  Instalando los c-scripts..."
    echo ""
    su $UsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
    find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 
-## Parar el daemon
+# Parar el daemon
    #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/ltc-daemon-parar.sh
    #su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/ltc-daemon-parar.sh"
 

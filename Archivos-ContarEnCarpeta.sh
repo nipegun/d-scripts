@@ -5,14 +5,14 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -----------
-#  Script de NiPeGun para contar la cantidad de archivos que hay en una carpeta
+# ----------
+# Script de NiPeGun para contar la cantidad de archivos que hay en una carpeta
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Archivos-ContarEnCarpeta.sh | bash
-# -----------
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Archivos-ContarEnCarpeta.sh | bash
+# ----------
 
-cCantArgsEsperados=1
+cCantArgumEsperados=1
 
 
 cColorRojo='\033[1;31m'
@@ -38,7 +38,7 @@ if [ $# -ne $cCantArgsEsperados ]
     
     echo ""
 
-    ## Comprobar si el paquete tree está instalado. Si no lo está, instalarlo.
+    # Comprobar si el paquete tree está instalado. Si no lo está, instalarlo.
        if [[ $(dpkg-query -s tree 2>/dev/null | grep installed) == "" ]]; then
          echo ""
          echo "  tree no está instalado. Iniciando su instalación..."

@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Part-CopSeg-Montar.sh | bash
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -26,7 +26,7 @@
   fi
 
 echo ""
-echo -e "${vColorAzulClaro}  Montando la partición de copias de seguridad...${cFinColor}"
+echo -e "${cColorAzulClaro}  Montando la partición de copias de seguridad...${cFinColor}"
 echo ""
 mkdir -p /Particiones/CopSeg 2> /dev/null
 mount -t auto -v /dev/disk/by-partlabel/PartCopSeg /Particiones/CopSeg

@@ -16,7 +16,7 @@ vSlackHost=PUT_YOUR_HOST_HERE
 
 # ---
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -64,5 +64,5 @@ vJson="{\"channel\": \"#$vCanal\", \"text\": \"$vTextoEscapado\"}"
       apt-get -y install curl
       echo ""
     fi
-  curl -s -d "payload=$vJson" "https://$vSlackHost.slack.com/services/hooks/incoming-webhook?token=$vToken"
+  curl -sL -d "payload=$vJson" "https://$vSlackHost.slack.com/services/hooks/incoming-webhook?token=$vToken"
 

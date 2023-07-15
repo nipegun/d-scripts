@@ -5,11 +5,11 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# ------------
-#  SCRIPT DE NIPEGUN PARA MONITORIZAR LOGS
-# ------------
+# ----------
+# Script de NiPeGun para MONITORIZAR LOGS
+# ----------
 
-EXPECTED_ARGS=2
+cCantArgumEsperados=2
 
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -24,7 +24,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo " $0 15 /var/log/kern.log"
     echo "------------------------------------------------------------------"
     echo ""
-    exit $E_BADARGS
+    exit
   else
     watch tail -n $1 $2
 fi

@@ -14,7 +14,7 @@
 
 UsuarioNoRoot="nipegun"
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -28,7 +28,7 @@ UsuarioNoRoot="nipegun"
   fi
 
 echo ""
-echo -e "${vColorAzulClaro}  Iniciando el script de instalación de las diferentes carteras de criptomonedas...${cFinColor}"
+echo -e "${cColorAzulClaro}  Iniciando el script de instalación de las diferentes carteras de criptomonedas...${cFinColor}"
 echo ""
 
 # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -73,16 +73,16 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${cColorVerde}  Creando el usuario para ejecutar y administrar la pool...${cFinColor}"
           echo ""
 
-          ## Agregar el usuario
+          # Agregar el usuario
              useradd -d /home/$UsuarioNoRoot/ -s /bin/bash $UsuarioNoRoot
 
-          ## Crear la contraseña
+          # Crear la contraseña
              passwd $UsuarioNoRoot
 
-          ## Crear la carpeta
+          # Crear la carpeta
              mkdir -p /home/$UsuarioNoRoot/ 2> /dev/null
 
-          ## Reparación de permisos
+          # Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
         ;;
 
@@ -92,7 +92,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${cColorVerde}  Instalando los c-scripts...${cFinColor}"
           echo ""
 
-          ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+          # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                echo ""
                echo "  curl no está instalado. Iniciando su instalación..."
@@ -113,19 +113,19 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${cColorVerde}  Borrando carteras y configuraciones anteriores...${cFinColor}"
           echo ""
 
-          ## Litecoin
+          # Litecoin
              rm -rf /home/$UsuarioNoRoot/.litecoin/
-          ## Raven
+          # Raven
              rm -rf /home/$UsuarioNoRoot/.raven/
-          ## Argentum
+          # Argentum
              rm -rf /home/$UsuarioNoRoot/.argentum/
-          ## Chia
+          # Chia
              rm -rf /home/$UsuarioNoRoot/.chia/
              rm -rf /home/$UsuarioNoRoot/.config/Chia Blockchain/
-          ## Pool MPOS
+          # Pool MPOS
              rm -rf /var/www/MPOS/
 
-          ## Reparación de permisos
+          # Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
         ;;
 
@@ -137,7 +137,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           echo "  Determinando la última versión de litecoin core..."
           echo ""
-          ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+          # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
               echo ""
               echo "  curl no está instalado. Iniciando su instalación..."
@@ -156,7 +156,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           mkdir -p /root/SoftInst/Litecoin/ 2> /dev/null
           rm -rf /root/SoftInst/Litecoin/*
           cd /root/SoftInst/Litecoin/
-          ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+          # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
               echo ""
               echo "  wget no está instalado. Iniciando su instalación..."
@@ -172,7 +172,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo ""
           echo "  Descomprimiendo el archivo..."
           echo ""
-          ## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+          # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
               echo "  tar no está instalado. Iniciando su instalación..."
@@ -215,7 +215,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           DirCartLTC=$(cat /home/$UsuarioNoRoot/pooladdress-ltc.txt)
           echo ""
 
-          ## Autoejecución de Litecoin al iniciar el sistema
+          # Autoejecución de Litecoin al iniciar el sistema
 
              echo ""
              echo "  Agregando litecoind a los ComandosPostArranque..."
@@ -223,7 +223,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/ltc-daemon-iniciar.sh"
              echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/ltc-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
-          ## Icono de lanzamiento en el menú gráfico
+          # Icono de lanzamiento en el menú gráfico
 
              echo ""
              echo "  Agregando la aplicación gráfica al menú..."
@@ -238,7 +238,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "Categories=Cryptos"                                                 >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
              #echo "Icon="                                                             >> /home/$UsuarioNoRoot/.local/share/applications/litecoin.desktop
 
-          ## Autoejecución gráfica de Litecoin
+          # Autoejecución gráfica de Litecoin
 
              echo ""
              echo "  Creando el archivo de autoejecución de litecoin-qt para escritorio..."
@@ -251,12 +251,12 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
              echo "Terminal=false"                                                     >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
              echo "Hidden=false"                                                       >> /home/$UsuarioNoRoot/.config/autostart/litecoin.desktop
 
-          ## Reparación de permisos
+          # Reparación de permisos
 
              chmod +x /home/$UsuarioNoRoot/Cryptos/LTC/bin/*
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
-          ## Parar el daemon
+          # Parar el daemon
              chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/ltc-daemon-parar.sh
              su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/ltc-daemon-parar.sh"
 
@@ -339,7 +339,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           echo -e "${cColorVerde}  Instalando escritorio...${cFinColor}"
           echo ""
 
-          ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
+          # Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
              if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
                echo ""
                echo "  tasksel no está instalado. Iniciando su instalación..."
@@ -362,7 +362,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
 
           chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/
 
-          ## Denegar a los otros usuarios del sistema el acceso a la carpeta del usuario 
+          # Denegar a los otros usuarios del sistema el acceso a la carpeta del usuario 
              find /home/$UsuarioNoRoot -type d -exec chmod 750 {} \;
              find /home/$UsuarioNoRoot -type f -exec chmod 664 {} \;
 
@@ -373,7 +373,7 @@ menu=(dialog --timeout 5 --checklist "Marca lo que quieras instalar:" 22 76 16)
           find /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/ -type f -exec chmod +x {} \;
           find /home/$UsuarioNoRoot/                             -type f -iname "*.sh" -exec chmod +x {} \;
 
-          ## Reparar permisos para permitir la ejecución de la cartera de Chia
+          # Reparar permisos para permitir la ejecución de la cartera de Chia
              chown root:root /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
              chmod 4755 /home/$UsuarioNoRoot/Cryptos/XCH/chia-blockchain/chrome-sandbox
 

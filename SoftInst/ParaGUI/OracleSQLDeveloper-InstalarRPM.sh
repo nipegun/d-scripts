@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar Oracle SQL Developer en Debian
+# Script de NiPeGun para instalar y configurar Oracle SQL Developer en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/OracleSQLDeveloper-InstalarRPM.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/OracleSQLDeveloper-InstalarRPM.sh | bash
 # ----------
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -94,11 +94,11 @@ elif [ $cVerSO == "11" ]; then
   echo "-------------------------------------------------------------------------------------------"
   echo ""
 
-  ## Determinar URL del archivo a descargar
+  # Determinar URL del archivo a descargar
      echo ""
      echo "  Determinando URL del archivo a descargar..."
      echo ""
-     ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
           echo ""
           echo "  curl no está instalado. Iniciando su instalación..."
@@ -107,17 +107,17 @@ elif [ $cVerSO == "11" ]; then
           apt-get -y install curl
           echo ""
         fi
-     URLDelPaquete=$(curl -s https://www.oracle.com/tools/downloads/sqldev-downloads.html | sed 's-//-\n-g' | sed 's-.zip-.zip\n-g' | sed 's-.rpm-.rpm\n-g' | grep "download.oracle" | grep rpm)
+     URLDelPaquete=$(curl -sL https://www.oracle.com/tools/downloads/sqldev-downloads.html | sed 's-//-\n-g' | sed 's-.zip-.zip\n-g' | sed 's-.rpm-.rpm\n-g' | grep "download.oracle" | grep rpm)
      echo ""
      echo "  La URL del archivo a descargar es: $URLDelPaquete"
      echo ""
 
-  ## Descargar el archivo .rpm
+  # Descargar el archivo .rpm
      echo ""
      echo "  Descargando el archivo .rpm..."
      echo ""
      mkdir -p /root/SoftInst/Oracle/SQLDeveloper/ 2> /dev/null
-     ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
           echo ""
           echo "  wget no está instalado. Iniciando su instalación..."
@@ -128,7 +128,7 @@ elif [ $cVerSO == "11" ]; then
         fi
      wget $URLDelPaquete -O /root/SoftInst/Oracle/SQLDeveloper/sqldeveloper.rpm
 
-  ## Comprobar si el archivo descargado es el correcto
+  # Comprobar si el archivo descargado es el correcto
      echo ""
      echo "  Comprobando si el archivo descargado es correcto..."
      echo ""
@@ -148,11 +148,11 @@ elif [ $cVerSO == "11" ]; then
        echo ""
      fi
 
-  ## Convertir el archivo .rpm a .deb
+  # Convertir el archivo .rpm a .deb
      echo ""
      echo "  Convirtiendo el .rpm a .deb..."
      echo ""
-     ## Comprobar si el paquete alien está instalado. Si no lo está, instalarlo.
+     # Comprobar si el paquete alien está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s alien 2>/dev/null | grep installed) == "" ]]; then
           echo ""
           echo "  alien no está instalado. Iniciando su instalación..."
@@ -164,20 +164,20 @@ elif [ $cVerSO == "11" ]; then
      mkdir -p /root/sqldeveloper-21.4.2/debian/sqldeveloper/usr/local/bin/sqldeveloper/
      alien --scripts --verbose -d /root/SoftInst/Oracle/SQLDeveloper/sqldeveloper.rpm
 
-  ## Instlalar OpenJDK 11
+  # Instlalar OpenJDK 11
      echo ""
      echo "  Instalando OpenJDK 11..."
      echo ""
      apt-get -y update
      apt-get -y install openjdk-11-jdk
 
-  ## Instalar el archivo .deb
+  # Instalar el archivo .deb
      echo ""
      echo "  Instalando el archivo .deb..."
      echo ""
      find /root/SoftInst/Oracle/SQLDeveloper/ -type f -name *.deb -exec dpkg -i {} \;
 
-  ## Crear icono en el menú
+  # Crear icono en el menú
      echo ""
      echo "  Creando icono en el menú"
      echo ""

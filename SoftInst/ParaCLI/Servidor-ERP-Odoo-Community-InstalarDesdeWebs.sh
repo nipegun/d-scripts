@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 ------------
-#  Script de NiPeGun para instalar y configurar el servidor ERP de Odoo
+# Script de NiPeGun para instalar y configurar el servidor ERP de Odoo
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-ERP-Odoo-Community-InstalarDesdeWebs.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-ERP-Odoo-Community-InstalarDesdeWebs.sh | bash
 ------------
 
 cColorRojo='\033[1;31m'
@@ -155,7 +155,7 @@ elif [ $cVerSO == "11" ]; then
         apt-get -y install curl
         echo ""
       fi
-    vSubURL=$(curl -s https://github.com/wkhtmltopdf/packaging/releases | grep href | grep .deb | grep amd64 | grep buster | head -n1 | cut -d '"' -f2)
+    vSubURL=$(curl -sL https://github.com/wkhtmltopdf/packaging/releases | grep href | grep .deb | grep amd64 | grep buster | head -n1 | cut -d '"' -f2)
     rm -rf /root/SoftInst/wkhtmltopdf/
     mkdir -p /root/SoftInst/wkhtmltopdf/ 2> /dev/null
     cd /root/SoftInst/wkhtmltopdf/
@@ -180,7 +180,7 @@ elif [ $cVerSO == "11" ]; then
         apt-get -y install gnupg2
         echo ""
       fi
-    vUltVersOdoo=$(curl -s http://nightly.odoo.com/ | grep blob | grep -v master | head -n1 | cut -d '"' -f2 | sed 's-blob/-\n-g' | grep -v http | cut -d '/' -f1)
+    vUltVersOdoo=$(curl -sL http://nightly.odoo.com/ | grep blob | grep -v master | head -n1 | cut -d '"' -f2 | sed 's-blob/-\n-g' | grep -v http | cut -d '/' -f1)
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/odoo.gpg] http://nightly.odoo.com/$vUltVersOdoo/nightly/deb/ ./" > /etc/apt/sources.list.d/odoo.list
   # Actualizar el cache de paquetes
     apt-get -y update

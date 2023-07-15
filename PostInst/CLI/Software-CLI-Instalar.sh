@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Sensores-InstalarYDetectar.sh | bash
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -27,7 +27,7 @@
 
 # Notificar inicio de ejecución del script
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para instalar software para modo CLI en Debian...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para instalar software para modo CLI en Debian...${cFinColor}"
   echo ""
 
 # Actualizar lista de paquetes disponibles

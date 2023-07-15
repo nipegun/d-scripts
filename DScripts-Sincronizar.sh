@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar.sh | bash
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -34,7 +34,7 @@
   if [[ $? -eq 0 ]]; then
     # Sincronizar los d-scripts
       echo ""
-      echo -e "${vColorAzulClaro}  Sincronizando los d-scripts con las últimas versiones y descargando nuevos d-scripts (si es que existen)...${cFinColor}"
+      echo -e "${cColorAzulClaro}  Sincronizando los d-scripts con las últimas versiones y descargando nuevos d-scripts (si es que existen)...${cFinColor}"
       echo ""
       rm /root/scripts/d-scripts -R 2> /dev/null
       mkdir /root/scripts 2> /dev/null

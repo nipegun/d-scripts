@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar y configurar ZeroTier en Debian
 #
 # Ejecución remota:
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-VPN-ZeroTier-InstalarYConfigurar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-VPN-ZeroTier-InstalarYConfigurar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
@@ -80,7 +80,7 @@ elif [ $cVerSO == "10" ]; then
   
   echo ""
 
-  curl -s https://install.zerotier.com | bash
+  curl -sL https://install.zerotier.com | bash
   systemctl enable zerotier-one.service --now
 
 elif [ $cVerSO == "11" ]; then
@@ -91,7 +91,7 @@ elif [ $cVerSO == "11" ]; then
   
   echo ""
 
-  curl -s https://install.zerotier.com | bash
+  curl -sL https://install.zerotier.com | bash
   systemctl enable zerotier-one.service --now
 
 fi

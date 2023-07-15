@@ -13,7 +13,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/TareasCron-Preparar.sh | bash
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -28,7 +28,7 @@
 
 # Notificar inicio de ejecución del script
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando script para preparar las tareas cron...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando script para preparar las tareas cron...${cFinColor}"
   echo ""
 
 # Preparar el script de tareas cada minuto

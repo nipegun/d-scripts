@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 --
-#  Script de NiPeGun para instalar y configurar los mineros para las diferentes criptomonedas
+# Script de NiPeGun para instalar y configurar los mineros para las diferentes criptomonedas
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-Mineros-InstalarYConfigurar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-Mineros-InstalarYConfigurar.sh | bash
 --
 
 cColorRojo='\033[1;31m'
@@ -62,7 +62,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${cColorVerde}  Instalando el minero de XMR (Monero) para el usuario root...${cFinColor}"
           echo ""
 
-          ## Crear la carpeta
+          # Crear la carpeta
              mkdir -p /root/Cryptos/XMR/minero/ 2> /dev/null
 
         ;;
@@ -73,10 +73,10 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${cColorVerde}  Moviendo el minero de XMR a la carpeta del usuario $UsuarioNoRoot...${cFinColor}"
           echo ""
 
-          ## Mover carpeta de mineros
+          # Mover carpeta de mineros
              mkdir -p /home/$UsuarioNoRoot/Cryptos/XMR/ 2> /dev/null
              mv /root/Cryptos/XMR/minero/ /home/$UsuarioNoRoot/Cryptos/XMR/minero/
-          ## Reparación de permisos
+          # Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
         ;;
@@ -87,7 +87,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${cColorVerde}  Instalando el minero de RVN (Raven) con AMD para el usuario root...${cFinColor}"
           echo ""
 
-          ## Crear la carpeta
+          # Crear la carpeta
              mkdir -p /root/Cryptos/RVN/minero/amd/ 2> /dev/null
 
         ;;
@@ -98,10 +98,10 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${cColorVerde}  Moviendo el minero de RVN con AMD a la carpeta del usuario $UsuarioNoRoot...${cFinColor}"
           echo ""
 
-          ## Mover carpeta de mineros
+          # Mover carpeta de mineros
              mkdir -p /home/$UsuarioNoRoot/Cryptos/RVN/minero/ 2> /dev/null
              mv /root/Cryptos/RVN/minero/amd/ /home/$UsuarioNoRoot/Cryptos/RVN/minero/amd/
-          ## Reparación de permisos
+          # Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
         ;;
@@ -112,7 +112,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${cColorVerde}  Instalando el minero de RVN (Raven) con nVidia para el usuario root...${cFinColor}"
           echo ""
 
-          ## Crear la carpeta
+          # Crear la carpeta
              mkdir -p /root/Cryptos/RVN/minero/nvidia/ 2> /dev/null
 
         ;;
@@ -123,9 +123,9 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${cColorVerde}  Moviendo el minero de RVN con nVidia a la carpeta del usuario $UsuarioNoRoot...${cFinColor}"
           echo ""
 
-          ## Mover carpeta de mineros
+          # Mover carpeta de mineros
              mv /root/Cryptos/RVN/minero/nvidia/ /home/$UsuarioNoRoot/Cryptos/RVN/minero/
-          ## Reparación de permisos
+          # Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
         ;;
@@ -137,7 +137,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${cColorVerde}  Instalando el minero de LTC (Litecoin) para el usuario root...${cFinColor}"
           echo ""
 
-          ## Crear la carpeta
+          # Crear la carpeta
              mkdir -p /root/MinerosCrypto/LTC/ 2> /dev/null
 
         ;;
@@ -148,9 +148,9 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo -e "${cColorVerde}  Moviendo el minero de LTC a la carpeta del usuario $UsuarioNoRoot...${cFinColor}"
           echo ""
 
-          ## Mover carpeta de mineros
+          # Mover carpeta de mineros
              mv /root/MinerosCrypto/ /home/$UsuarioNoRoot//MinerosCrypto/
-          ## Reparación de permisos
+          # Reparación de permisos
              chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
         ;;
@@ -160,7 +160,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
           echo -e "${cColorVerde}  Agregando los mineros del root a los ComandosPostArranque...${cFinColor}"
           echo ""
-          ## CRP
+          # CRP
              echo "#/root/MinerosCrypto/CRP/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh
              echo "#disown -a"                          >> /root/scripts/ComandosPostArranque.sh
         ;;
@@ -170,7 +170,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
           echo ""
           echo -e "${cColorVerde}  Agregando los mineros del usuario $UsuarioNoRoot a los ComandosPostArranque...${cFinColor}"
           echo ""
-          ## CRP
+          # CRP
              echo "#su $UsuarioNoRoot -c /home/$UsuarioNoRoot/MinerosCrypto/CRP/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh
              echo "#disown -a"                                                             >> /root/scripts/ComandosPostArranque.sh
         ;;

@@ -5,11 +5,11 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -----------
-#  Script de NiPeGun para pasar logs webs de http a https
-# -----------
+# ----------
+# Script de NiPeGun para pasar logs webs de http a https
+# ----------
 
-cCantArgsEsperados=3
+cCantArgumEsperados=3
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'

@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Idioma-CambiarTodoAes-es.sh | bash
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -48,7 +48,7 @@
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
@@ -58,7 +58,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales
@@ -83,14 +83,14 @@ elif [ $cVerSO == "8" ]; then
 
   # Notificar cambios
     echo ""
-    echo -e "${vColorAzulClaro}    Cambios realizados.${cFinColor}"
-    echo -e "${vColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
+    echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
+    echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
 
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales
@@ -115,14 +115,14 @@ elif [ $cVerSO == "9" ]; then
 
   # Notificar cambios
     echo ""
-    echo -e "${vColorAzulClaro}    Cambios realizados.${cFinColor}"
-    echo -e "${vColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
+    echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
+    echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
 
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales
@@ -154,7 +154,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales
@@ -186,7 +186,7 @@ elif [ $cVerSO == "11" ]; then
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 12 (Bookworm)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales

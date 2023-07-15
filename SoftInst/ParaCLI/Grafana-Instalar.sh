@@ -16,7 +16,7 @@ cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -110,7 +110,7 @@ elif [ $cVerSO == "11" ]; then
   echo ""
   echo "  Importando clave del repositorio.."
   echo ""
-  ## Para cuando apt-key quede obsoleto:
+  # Para cuando apt-key quede obsoleto:
      # mkdir -p /root/aptkeys/
      # wget -q -O- https://packages.grafana.com/gpg.key > /root/aptkeys/grafana.key
      # gpg --dearmor /root/aptkeys/grafana.key
@@ -128,7 +128,7 @@ elif [ $cVerSO == "11" ]; then
   apt-get update
   apt-get -y install grafana-enterprise
 
-  ## Preparar para https
+  # Preparar para https
      #cd /etc/grafana
      #openssl genrsa -out grafana.key 2048
      #openssl req -new -key grafana.key -out grafana.csr
@@ -140,7 +140,7 @@ elif [ $cVerSO == "11" ]; then
      #sed -i -e 's|;cert_file =|cert_key = /etc/grafana/grafana.key|g'  /etc/grafana/grafana.ini
      #sed -i -e 's|;key_file =|cert_file = /etc/grafana/grafana.crt|g'  /etc/grafana/grafana.ini
      
-  ## Permitir embedded
+  # Permitir embedded
      sed -i -e 's|;allow_embedding = false|allow_embedding = true|g'   /etc/grafana/grafana.ini
      sed -i -e 's|;cookie_samesite = lax|cookie_samesite = disabled|g' /etc/grafana/grafana.ini
 

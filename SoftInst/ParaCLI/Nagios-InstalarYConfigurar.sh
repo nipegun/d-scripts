@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar Nagios Core en Debian
+# Script de NiPeGun para instalar y configurar Nagios Core en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Nagios-InstalarYConfigurar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Nagios-InstalarYConfigurar.sh | bash
 # ----------
 
 NagiosAdmin="nagiosadmin"
@@ -366,7 +366,7 @@ elif [ $cVerSO == "11" ]; then
                 echo ""
               fi
 
-            curl -s https://assets.nagios.com/downloads/nagiosxi/install.sh | sh
+            curl -sL https://assets.nagios.com/downloads/nagiosxi/install.sh | sh
           ;;
 
           3)
@@ -386,13 +386,13 @@ elif [ $cVerSO == "11" ]; then
                 apt-get -y install curl
                 echo ""
               fi
-            UltVersNagiosCoreWeb=$(curl -s https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f2)
+            UltVersNagiosCoreWeb=$(curl -sL https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f2)
             echo -e "${ColorAzul}      La última versión según la web oficial es la $UltVersNagiosCoreWeb.${cFinColor}"
 
             echo ""
             echo -e "${ColorAzul}    Descargando archivo de la última versión...${cFinColor}"
             echo ""
-            ArchUltVersNagiosCoreWeb=$(curl -s https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2)
+            ArchUltVersNagiosCoreWeb=$(curl -sL https://www.nagios.org/downloads/nagios-core/thanks/?product_download=nagioscore | sed 's->->\n-g' | grep releases | grep "tar.gz" | head -n1 | cut -d'"' -f2)
             mkdir -p /root/SoftInst/NagiosCore/
             rm -rf /root/SoftInst/NagiosCore/*
             curl --silent $ArchUltVersNagiosCoreWeb --output /root/SoftInst/NagiosCore/nagiosweb.tar.gz
@@ -493,13 +493,13 @@ elif [ $cVerSO == "11" ]; then
                 apt-get -y install curl
                 echo ""
               fi
-            UltVersNagiosCoreGitHub=$(curl -s https://github.com/NagiosEnterprises/nagioscore/releases/ | grep href | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f3)
+            UltVersNagiosCoreGitHub=$(curl -sL https://github.com/NagiosEnterprises/nagioscore/releases/ | grep href | grep "tar.gz" | head -n1 | cut -d'"' -f2 | sed 's-.tar.gz--g' | cut -d'-' -f3)
             echo -e "${ColorAzul}    La última versión según la web de GitHub es la $UltVersNagiosCoreGitHub.${cFinColor}"
 
             echo ""
             echo -e "${ColorAzul}  Descargando archivo de la última versión...${cFinColor}"
             echo ""
-            ArchUltVersNagiosCoreGitHub=$(curl -s https://github.com/NagiosEnterprises/nagioscore/releases/ | grep href | grep "tar.gz" | head -n1 | cut -d'"' -f2)
+            ArchUltVersNagiosCoreGitHub=$(curl -sL https://github.com/NagiosEnterprises/nagioscore/releases/ | grep href | grep "tar.gz" | head -n1 | cut -d'"' -f2)
             mkdir -p /root/SoftInst/NagiosCore/
             rm -rf /root/SoftInst/NagiosCore/*
             # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
@@ -622,12 +622,12 @@ elif [ $cVerSO == "11" ]; then
             echo ""
             echo -e "${ColorAzul}    Determinando la última versión de los plugins...${cFinColor}"
             echo ""
-            UltVersPlugIns=$(curl -s https://github.com/nagios-plugins/nagios-plugins/releases/ | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2)
+            UltVersPlugIns=$(curl -sL https://github.com/nagios-plugins/nagios-plugins/releases/ | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2)
 
             echo ""
             echo -e "${ColorAzul}    Descargando la última versión de los plugins...${cFinColor}"
             echo ""
-            ArchUltVersPlugIns=$(curl -s https://github.com/nagios-plugins/nagios-plugins/releases/ | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2)
+            ArchUltVersPlugIns=$(curl -sL https://github.com/nagios-plugins/nagios-plugins/releases/ | grep href | grep ".tar.gz" | head -n1 | cut -d'"' -f2)
             # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                 echo ""

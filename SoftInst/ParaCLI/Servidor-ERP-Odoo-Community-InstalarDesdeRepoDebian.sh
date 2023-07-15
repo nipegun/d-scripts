@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 ------------------
-#  Script de NiPeGun para instalar y configurar el servidor ERP de Odoo
+# Script de NiPeGun para instalar y configurar el servidor ERP de Odoo
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-ERP-Odoo-Community-InstalarDesdeRepoDebian.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-ERP-Odoo-Community-InstalarDesdeRepoDebian.sh | bash
 ------------------
 
 cColorRojo='\033[1;31m'

@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para mostrar información sobre la tarjeta gráfica
+# Script de NiPeGun para mostrar información sobre la tarjeta gráfica
 # ----------
 
-ccColorVerde="\033[1;32m"
+cColorVerde="\033[1;32m"
 ccFinColor="\033[0m"
 
 echo ""

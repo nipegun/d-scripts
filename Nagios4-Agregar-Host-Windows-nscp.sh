@@ -5,15 +5,15 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -------------
-#  Script de NiPeGun para agregar un host de Windows a Nagios para monitorear con NSClient++
+# ----------
+# Script de NiPeGun para agregar un host de Windows a Nagios para monitorear con NSClient++
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Windows-nscp.sh | bash -s URL Servicio
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Windows-nscp.sh | bash -s URL Servicio
 #
 #  Ejemplo:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Windows-nscp.sh | bash -s miwindows "Mi máquina de Windows" "192.168.0.122"
-# -------------
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Windows-nscp.sh | bash -s miwindows "Mi máquina de Windows" "192.168.0.122"
+# ----------
 
 NombreDelHost=$1
 AliasDelHost=$2

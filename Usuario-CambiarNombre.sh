@@ -12,9 +12,9 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-CambiarNombre.sh | bash -s UsuarioViejo UsuarioNuevo
 # ----------
 
-cCantArgsCorrectos=2
+cCantArgumEsperados=2
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     

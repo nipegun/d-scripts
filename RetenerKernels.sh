@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para retener sólo los úlltimos kernels indicados
+# Script de NiPeGun para retener sólo los úlltimos kernels indicados
 # ----------
 
-cCantArgsCorrectos=1
+cCantArgumEsperados=1
 
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     

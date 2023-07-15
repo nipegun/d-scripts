@@ -6,17 +6,17 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar phpmyadmin en Debian
+# Script de NiPeGun para instalar y configurar phpmyadmin en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/PHPMyAdmin-InstalarYConfigurar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/PHPMyAdmin-InstalarYConfigurar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -98,14 +98,14 @@ elif [ $cVerSO == "11" ]; then
   echo "---------------------------------------------------------------------------------"
   echo ""
 
-  ## Determinar la versión de PHP disponible para instalar
+  # Determinar la versión de PHP disponible para instalar
      apt-get -y update
      VersPHP=$(apt-cache search php | grep server | grep metapackage | cut -d' ' -f1 | tail -n1)
-  ## Instalar PHP
+  # Instalar PHP
      apt-get -y install $VersPHP
-  ## Instalar el mod de php para apache2
+  # Instalar el mod de php para apache2
      apt-get -y install libapache2-mod-php  
-  ## Instalar PHPMyAdmin
+  # Instalar PHPMyAdmin
      apt-get -y install phpmyadmin
 
 fi

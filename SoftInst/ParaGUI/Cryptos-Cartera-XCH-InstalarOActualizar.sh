@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar la "cartera liviana" de Chia (XCH)
+# Script de NiPeGun para instalar y configurar la "cartera liviana" de Chia (XCH)
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-XCH-InstalarOActualizar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-XCH-InstalarOActualizar.sh | bash
 #
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-XCH-InstalarOActualizar.sh | bash
+# Ejecución remota sin caché:
+#  curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-XCH-InstalarOActualizar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
@@ -40,7 +40,7 @@ echo ""
   echo ""
   echo "  Obteniendo enlace de descarga de la versión $vUltVersEstable..."
   echo ""
-  vURLDelArchivoDeb=$(curl -s https://github.com/Chia-Network/chia-blockchain/releases | sed 's->-\n-g' | sed 's-href-\nhref-g' | grep $vUltVersEstable | grep href | grep .deb | grep amd64 | grep -v orrent | grep -v cli | cut -d'"' -f2)
+  vURLDelArchivoDeb=$(curl -sL https://github.com/Chia-Network/chia-blockchain/releases | sed 's->-\n-g' | sed 's-href-\nhref-g' | grep $vUltVersEstable | grep href | grep .deb | grep amd64 | grep -v orrent | grep -v cli | cut -d'"' -f2)
   echo ""
   echo "  La URL de descarga es: https://github.com/$vURLDelArchivoDeb."
   echo ""

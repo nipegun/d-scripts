@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para borrar todos los archivos basura del sistema
+# Script de NiPeGun para borrar todos los archivos basura del sistema
 # ----------
 
 /root/scripts/d-scripts/Archivos-Borrar-DSStore.sh

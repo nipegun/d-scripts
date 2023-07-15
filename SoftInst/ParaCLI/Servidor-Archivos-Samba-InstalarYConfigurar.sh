@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar el servidor Samba en Debian
+# Script de NiPeGun para instalar y configurar el servidor Samba en Debian
 #
-#  Ejecución remota:
-#    curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Archivos-Samba-InstalarYConfigurar.sh | bash -s NombreDeGrupo NombreDeEquipo nipegun
+# Ejecución remota:
+#    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Archivos-Samba-InstalarYConfigurar.sh | bash -s NombreDeGrupo NombreDeEquipo nipegun
 # ----------
 
 cColorRojo='\033[1;31m'
@@ -56,7 +56,7 @@ elif [ $cVerSO == "8" ]; then
   
   echo ""
 
-  EXPECTED_ARGS=3
+  cCantArgumEsperados=3
   
 
   if [ $# -ne $EXPECTED_ARGS ]
@@ -70,7 +70,7 @@ elif [ $cVerSO == "8" ]; then
       echo "InstalarYConfigurarServidorSamba oficina ordenador pepe"
       echo "---------------------------------------------------------------"
       echo ""
-      exit $E_BADARGS
+      exit
     else
       apt-get update && apt-get -y install dialog
       menu=(dialog --timeout 5 --checklist "Instalación de la compartición Samba:" 22 76 16)
@@ -216,7 +216,7 @@ elif [ $cVerSO == "9" ]; then
   
   echo ""
 
-  EXPECTED_ARGS=3
+  cCantArgumEsperados=3
   
 
   if [ $# -ne $EXPECTED_ARGS ]
@@ -230,7 +230,7 @@ elif [ $cVerSO == "9" ]; then
       echo "$0 oficina ordenador pepe"
       echo "---------------------------------------------------------------"
       echo ""
-      exit $E_BADARGS
+      exit
     else
       apt-get update && apt-get -y install dialog
       menu=(dialog --timeout 5 --checklist "Instalación de la compartición Samba:" 22 76 16)
@@ -363,14 +363,14 @@ elif [ $cVerSO == "10" ]; then
   echo ""
 
   # ----------
-  #  Script de NiPeGun para instalar y configurar el servidor Samba
+  # Script de NiPeGun para instalar y configurar el servidor Samba
   #
   #  Para que los usuarios puedan utilizar samba es necesario crearles
   #  una contraseña para samba al usuario con:
   #  smbpasswd -a NombreDeUsuario
   #  La contraseña samba puede ser distinta a la de la propia cuenta
   #  de usuario
-  # -----------
+  # ----------
 
   ArgumentosRequeridos=3
   
@@ -519,14 +519,14 @@ elif [ $cVerSO == "11" ]; then
   echo ""
 
   # ----------
-  #  Script de NiPeGun para instalar y configurar el servidor Samba
+  # Script de NiPeGun para instalar y configurar el servidor Samba
   #
   #  Para que los usuarios puedan utilizar samba es necesario crearles
   #  una contraseña para samba al usuario con:
   #  smbpasswd -a NombreDeUsuario
   #  La contraseña samba puede ser distinta a la de la propia cuenta
   #  de usuario
-  # -----------
+  # ----------
 
   ArgumentosRequeridos=3
   

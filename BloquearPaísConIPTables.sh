@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para bloquear países con IPTables
+# Script de NiPeGun para bloquear países con IPTables
 #
 #  https://www.ip2location.com/free/visitor-blocker
 # ----------

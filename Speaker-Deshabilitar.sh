@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  SCRIPT DE NIPEGUN PARA DESHABILITAR EL SPEAKER EN DEBIAN
+# Script de NiPeGun para DESHABILITAR EL SPEAKER EN DEBIAN
 # ----------
 
 sed -i "s|^# set bell-style none|set bell-style none|g" /etc/inputrc

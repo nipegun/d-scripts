@@ -9,7 +9,7 @@
 # Script de NiPeGun para preparar el Pendrive de Debian Portable
 #
 # Ejecución remota:
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/PenDebian/PrepararPenDebianPortable.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/PenDebian/PrepararPenDebianPortable.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
@@ -282,13 +282,13 @@ elif [ $cVerSO == "11" ]; then
     echo -n mem > /sys/power/state
 
   # ComandosPostArranque
-    curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Consola/ComandosPostArranque-Preparar.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Consola/ComandosPostArranque-Preparar.sh | bash
 
   # Cortafuegos
-    curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Consola/Cortafuegos-Preparar.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Consola/Cortafuegos-Preparar.sh | bash
 
   # Tareas cron
-    curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Consola/TareasCron-Preparar.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Consola/TareasCron-Preparar.sh | bash
 
   # Agregar comandos post arranque
     echo "mount -t auto /dev/sda1 /Particiones/IDE/hda1/"            >> /root/scripts/ComandosPostArranque.sh
@@ -349,10 +349,10 @@ elif [ $cVerSO == "11" ]; then
     echo "mount -t auto /dev/VolGroup0/root /Particiones/LVM/1/" >> /root/scripts/ComandosPostArranque.sh
 
   # Escritorio mate
-    curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioMate-Personalizar.sh| bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioMate-Personalizar.sh| bash
 
   # d-scripts
-    curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar.sh | bash
 
   # Documentos
   

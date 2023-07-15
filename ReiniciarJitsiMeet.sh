@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para reiniciar Jitsi Meet
+# Script de NiPeGun para reiniciar Jitsi Meet
 # ----------
 
 echo ""

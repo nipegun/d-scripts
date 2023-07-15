@@ -5,18 +5,18 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -----------
-#  Script de NiPeGun para instalar y configurar NextCloud en Debian
+# ----------
+# Script de NiPeGun para instalar y configurar NextCloud en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-NextCloud-InstalarYConfigurar.sh
-# -----------
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-NextCloud-InstalarYConfigurar.sh
+# ----------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -109,10 +109,10 @@ elif [ $cVerSO == "9" ]; then
   
   echo ""
 
-  cCantArgsCorrectos=1
+  cCantArgumEsperados=1
   
 
-  if [ $# -ne $cCantArgsCorrectos ]
+  if [ $# -ne $cCantArgumEsperados ]
     then
       echo ""
       

@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 ---
-#  Script de NiPeGun para instalar y configurar la cadena de bloques de DigiByte (DGB)
+# Script de NiPeGun para instalar y configurar la cadena de bloques de DigiByte (DGB)
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-DGB-InstalarYConfigurar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-DGB-InstalarYConfigurar.sh | bash
 ---
 
 cColorRojo='\033[1;31m'
@@ -27,7 +27,7 @@ echo ""
 echo ""
 echo "  Determinando la última versión de digibyte core..."
 echo ""
-## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
      echo ""
      echo "  curl no está instalado. Iniciando su instalación..."
@@ -36,7 +36,7 @@ echo ""
      apt-get -y install curl
      echo ""
    fi
-UltVersDGB=$(curl -s https://github.com/DigiByte-Core/digibyte/releases/ | grep href | grep linux | grep -v aarch64 | head -n1 | cut -d '"' -f2 | sed 's-/v-\n-g' | grep -v down | cut -d'/' -f1)
+UltVersDGB=$(curl -sL https://github.com/DigiByte-Core/digibyte/releases/ | grep href | grep linux | grep -v aarch64 | head -n1 | cut -d '"' -f2 | sed 's-/v-\n-g' | grep -v down | cut -d'/' -f1)
 echo ""
 echo "  La última versión de DigiByte core es la $UltVersDGB"
 echo ""
@@ -47,8 +47,8 @@ echo ""
 mkdir -p /root/SoftInst/Cryptos/DGB/ 2> /dev/null
 rm -rf /root/SoftInst/Cryptos/DGB/*
 cd /root/SoftInst/Cryptos/DGB/
-vLinkArchivoDentroGithub=$(curl -s https://github.com/DigiByte-Core/digibyte/releases/ | grep href | grep linux | grep -v aarch64 | head -n1 | cut -d '"' -f2 | sed 's-.tar.gz--g' | sed 's-.zip--g')
-## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+vLinkArchivoDentroGithub=$(curl -sL https://github.com/DigiByte-Core/digibyte/releases/ | grep href | grep linux | grep -v aarch64 | head -n1 | cut -d '"' -f2 | sed 's-.tar.gz--g' | sed 's-.zip--g')
+# Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
      echo ""
      echo "  wget no está instalado. Iniciando su instalación..."
@@ -68,7 +68,7 @@ wget https://github.com/$vLinkArchivoDentroGithub.tar.gz
 echo ""
 echo "  Descomprimiendo el archivo..."
 echo ""
-## Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
+# Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
      echo ""
      echo "  zip no está instalado. Iniciando su instalación..."
@@ -82,7 +82,7 @@ mv /root/SoftInst/Cryptos/DGB/linux/digibyte-$UltVersDGB-x86_64-linux-gnu.tar.gz
 rm -rf /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB-x86_64-linux-gnu.zip
 rm -rf /root/SoftInst/Cryptos/DGB/linux/
 rm -rf /root/SoftInst/Cryptos/DGB/__MACOSX/
-## Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+# Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
      echo ""
      echo "  tar no está instalado. Iniciando su instalación..."

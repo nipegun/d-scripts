@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  SCRIPT DE NIPEGUN PARA MOSTRAR LOS MÓDULOS CARGADOS
+# Script de NiPeGun para MOSTRAR LOS MÓDULOS CARGADOS
 # ----------
 
 echo ""

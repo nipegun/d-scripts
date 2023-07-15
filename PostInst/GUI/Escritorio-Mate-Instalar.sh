@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar el escritorio Mate al acabar de instalar Debian standard
+# Script de NiPeGun para instalar el escritorio Mate al acabar de instalar Debian standard
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Mate-Instalar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Mate-Instalar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'

@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para administrar ZeroTier
+# Script de NiPeGun para administrar ZeroTier
 # ----------
 
 cColorVerde="\033[1;32m"

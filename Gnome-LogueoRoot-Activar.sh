@@ -6,17 +6,17 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para activar el logueo como root en Gnome
+# Script de NiPeGun para activar el logueo como root en Gnome
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Gnome-LogueoRoot-Activar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Gnome-LogueoRoot-Activar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -85,9 +85,9 @@ elif [ $cVerSO == "10" ]; then
   echo "  Activando el logueo root en Gnome para Debian 10 (Buster)..."
   echo "----------------------------------------------------------------"
   echo ""
-  ## Hacer copia de seguridad antes de reemplazar
+  # Hacer copia de seguridad antes de reemplazar
      cp /etc/pam.d/gdm-password /etc/pam.d/gdm-password.bak
-  ## Reemplazar toda la línea que tenga la palabra root
+  # Reemplazar toda la línea que tenga la palabra root
      sed -i -e '/root/c#auth required pam_succeed_if.so user != root quiet_success' /etc/pam.d/gdm-password
 
 elif [ $cVerSO == "11" ]; then
@@ -97,9 +97,9 @@ elif [ $cVerSO == "11" ]; then
   echo "  Activando el logueo root en Gnome para Debian 11 (Bullseye)..."
   echo "------------------------------------------------------------------"
   echo ""
-  ## Hacer copia de seguridad antes de reemplazar
+  # Hacer copia de seguridad antes de reemplazar
      cp /etc/pam.d/gdm-password /etc/pam.d/gdm-password.bak
-  ## Reemplazar toda la línea que tenga la palabra root
+  # Reemplazar toda la línea que tenga la palabra root
      sed -i -e '/root/c#auth required pam_succeed_if.so user != root quiet_success' /etc/pam.d/gdm-password
 
 fi

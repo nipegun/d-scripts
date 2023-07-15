@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para ver logs en tiempo real
+# Script de NiPeGun para ver logs en tiempo real
 # ----------
 
-cCantArgsEsperados=1
+cCantArgumEsperados=1
 
 
 cColorRojo='\033[1;31m'

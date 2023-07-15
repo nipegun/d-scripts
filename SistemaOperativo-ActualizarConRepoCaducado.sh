@@ -16,7 +16,7 @@ cColorRojo='\033[1;31m'
 cFinColor='\033[0m'
 
 echo ""
-echo -e "${vColorAzulClaro}  Iniciando el script de actualización del sistema opeartivo con firmas caducadas...${cFinColor}"
+echo -e "${cColorAzulClaro}  Iniciando el script de actualización del sistema opeartivo con firmas caducadas...${cFinColor}"
 echo ""
 
 echo ""

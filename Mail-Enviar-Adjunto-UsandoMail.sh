@@ -5,14 +5,14 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -----------
-#  Script de NiPeGun para enviar mail en una sola línea usando mail
+# ----------
+# Script de NiPeGun para enviar mail en una sola línea usando mail
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Mail-Enviar-Adjunto-UsandoMail.sh | bash
-# -----------
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Mail-Enviar-Adjunto-UsandoMail.sh | bash
+# ----------
 
-cCantArgsEsperados=4
+cCantArgumEsperados=4
 
 
 cColorRojo='\033[1;31m'

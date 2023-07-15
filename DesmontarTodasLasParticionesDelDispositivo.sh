@@ -5,11 +5,11 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# ------------
-#  Script de NiPeGun para desmontar de una sola vez todas las particiones de un disco
-# ------------
+# ----------
+# Script de NiPeGun para desmontar de una sola vez todas las particiones de un disco
+# ----------
 
-cCantArgsEsperados=3
+cCantArgumEsperados=3
 
 
 cColorRojo='\033[1;31m'

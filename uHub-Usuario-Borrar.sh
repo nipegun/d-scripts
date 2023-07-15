@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para borrar usuarios del Hub uHub
+# Script de NiPeGun para borrar usuarios del Hub uHub
 # ----------
 
-cCantArgsEsperados=1
+cCantArgumEsperados=1
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'

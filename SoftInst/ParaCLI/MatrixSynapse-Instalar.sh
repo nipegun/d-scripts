@@ -6,17 +6,17 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar Matrix Synapse en Debian
+# Script de NiPeGun para instalar Matrix Synapse en Debian
 #
-#  Ejecución remota
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/MatrixSynapse-Instalar.sh | bash
+# Ejecución remota
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/MatrixSynapse-Instalar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -121,10 +121,10 @@ elif [ $cVerSO == "11" ]; then
   echo "  Instalación finalizada."
   echo "  Revisa el script porque hay comandos que tendrás que ejecutar manualmente."
   echo ""
-  ## Base de datos PostGreSQL
-     ## Crear usuario
+  # Base de datos PostGreSQL
+     # Crear usuario
         su - postgres -c "createuser synapse"
-     ## Crear base de datos
+     # Crear base de datos
         su - postgres -c "createdb synapse"
      echo ""
      echo "  Se han creado el usuario y la base de datos para synapse."

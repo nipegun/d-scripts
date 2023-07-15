@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  SCRIPT DE NIPEGUN PARA EJECUTAR TRIM SOBRE LA PARTICIÓN DONDE ESTÁ MONTADA /
+# Script de NiPeGun para EJECUTAR TRIM SOBRE LA PARTICIÓN DONDE ESTÁ MONTADA /
 #
 #  PARA SABER SI TRIM ESTÁ SOPORTADO PUEDES EJECUTAR hdparm SOBRE EL DISCO
 #  EJEMPLO:

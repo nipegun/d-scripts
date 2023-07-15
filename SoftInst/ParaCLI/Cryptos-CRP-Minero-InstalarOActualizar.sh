@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar los mineros para las diferentes criptomonedas
+# Script de NiPeGun para instalar y configurar los mineros para las diferentes criptomonedas
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-CRP-Minero-InstalarOActualizar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-CRP-Minero-InstalarOActualizar.sh | bash
 #
-#  Ejecución remota con cambio de llave pública:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-CRP-Minero-InstalarOActualizar.sh | sed 's/^PublicKey.*/PublicKey=TuClave/g' | bash
+# Ejecución remota con cambio de llave pública:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-CRP-Minero-InstalarOActualizar.sh | sed 's/^PublicKey.*/PublicKey=TuClave/g' | bash
 # ----------
 
 PublicKey=C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415
@@ -215,7 +215,7 @@ echo ""
 
         5)
 
-          curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-Root-AutologuearEnModoTexto-Activar.sh | bash
+          curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-Root-AutologuearEnModoTexto-Activar.sh | bash
 
         ;;
 

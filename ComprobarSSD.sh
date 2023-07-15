@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  SCRIPT DE NIPEGUN PARA COMPROBAR SALUD DEL SSD
+# Script de NiPeGun para COMPROBAR SALUD DEL SSD
 # ----------
 
-EXPECTED_ARGS=1
+cCantArgumEsperados=1
 
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -24,7 +24,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo " $0 /dev/sda"
     
     echo ""
-    exit $E_BADARGS
+    exit
   else
     echo ""
     echo "----------------------------------------"

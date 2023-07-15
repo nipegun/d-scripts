@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# ------------
-#  Script de NiPeGun para instalar y configurar el servidor Plex en Debian
+# ----------
+# Script de NiPeGun para instalar y configurar el servidor Plex en Debian
 #
 # Ejecución remota:
-# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Plex-InstalarOActualizar.sh | bash
-# ------------
+# curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Plex-InstalarOActualizar.sh | bash
+# ----------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
@@ -18,7 +18,7 @@ cFinColor='\033[0m'
 
 CarpetaAlternativa="/Discos/HDD-Datos/Plex"
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -231,7 +231,7 @@ elif [ $cVerSO == "11" ]; then
   echo "-------------------------------------------------------------------------------------"
   echo ""
 
-  ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
        echo "  dialog no está instalado. Iniciando su instalación..."

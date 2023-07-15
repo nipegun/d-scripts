@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para personalizar el escritorio Mate al acabar de instalarlo
+# Script de NiPeGun para personalizar el escritorio Mate al acabar de instalarlo
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Mate-Personalizar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Mate-Personalizar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'

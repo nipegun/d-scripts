@@ -9,7 +9,7 @@
 # Script de NiPeGun para mostrar los usuarios de la base de datos del servidor uHub
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'

@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para compilar e instalar el último kernel estable
+# Script de NiPeGun para compilar e instalar el último kernel estable
 # ----------
 
 ColorMensajes='\033[1;34m'

@@ -14,7 +14,7 @@
 
 cCantArgEsperados=1
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -35,7 +35,7 @@ if [ $# -ne $cCantArgEsperados ]
     exit $vArgumentosInsuficientes
   else
     echo ""
-    echo -e "${vColorAzulClaro}  Desconectando el usuario $1...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Desconectando el usuario $1...${cFinColor}"
     echo ""
     pkill -KILL -u $1
     echo ""

@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para importar una copia de seguridad de una web específica
+# Script de NiPeGun para importar una copia de seguridad de una web específica
 # ----------
 
-cCantArgsEsperados=4
+cCantArgumEsperados=4
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
@@ -27,7 +27,7 @@ if [ $# -ne $cCantArgsEsperados ]
     echo ' $0 pepe.org pepe'
 
     echo ""
-    exit $vArgsInsuficientes
+    exit
   else
     echo ""
     echo -e "${cColorVerde}  Importando...${cFinColor}"

@@ -9,13 +9,13 @@
 # Script de NiPeGun para agregar el repositorio testing a Debian
 #
 # Ejecución remota:
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorio-Testing-Agregar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorio-Testing-Agregar.sh | bash
 #
 # Para instalar un paquete desde backports:
 #   apt-get -y install -t testing NombreDelPaquete
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -51,7 +51,7 @@
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para agregar el repositorio testing a Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar el repositorio testing a Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo "deb http://deb.debian.org/debian testing main contrib non-free" > /etc/apt/sources.list.d/testing.list
@@ -60,7 +60,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para agregar el repositorio testing a Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar el repositorio testing a Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo "deb http://deb.debian.org/debian testing main contrib non-free" > /etc/apt/sources.list.d/testing.list
@@ -69,7 +69,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para agregar el repositorio testing a Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar el repositorio testing a Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   echo "deb http://deb.debian.org/debian testing main contrib non-free" > /etc/apt/sources.list.d/testing.list
@@ -78,7 +78,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para agregar el repositorio testing a Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar el repositorio testing a Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   echo "deb http://deb.debian.org/debian testing main contrib non-free" > /etc/apt/sources.list.d/testing.list
@@ -87,7 +87,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para agregar el repositorio testing a Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar el repositorio testing a Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   echo "deb http://deb.debian.org/debian testing main contrib non-free" > /etc/apt/sources.list.d/testing.list
@@ -96,7 +96,7 @@ elif [ $cVerSO == "11" ]; then
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para agregar el repositorio testing a Debian 12 (Bookworm)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar el repositorio testing a Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
   echo ""

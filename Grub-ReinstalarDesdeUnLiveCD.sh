@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para reinstalar Grub desde un LiveCD
+# Script de NiPeGun para reinstalar Grub desde un LiveCD
 # ----------
 
-cCantArgsCorrectos=2
+cCantArgumEsperados=2
 
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     

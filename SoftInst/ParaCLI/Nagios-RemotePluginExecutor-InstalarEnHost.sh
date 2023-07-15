@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar el servidor nrpe de Nagios Debian
+# Script de NiPeGun para instalar y configurar el servidor nrpe de Nagios Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Nagios-RemotePluginExecutor-InstalarEnHost.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Nagios-RemotePluginExecutor-InstalarEnHost.sh | bash
 # ----------
 
 ColorAzul="\033[0;34m"

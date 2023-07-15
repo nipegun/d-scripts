@@ -6,14 +6,14 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  SCRIPT DE NIPEGUN PARA REACTIVAR UN CERTIFICADO LETSENCRYPT YA VENCIDO
+# Script de NiPeGun para REACTIVAR UN CERTIFICADO LETSENCRYPT YA VENCIDO
 #  PARA UN DOMINIO ALOJADO EN UN SERVIDOR DE APACHE
 # ----------
 
-cCantArgsCorrectos=1
+cCantArgumEsperados=1
 
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     

@@ -5,14 +5,14 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# ------------
-#  Script de NiPeGun para crear los scripts de simulación de lectura del sensor DHT22 para Debian
+# ----------
+# Script de NiPeGun para crear los scripts de simulación de lectura del sensor DHT22 para Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/SensorDHT22Simulado-CrearScripts.sh | bash
-# ------------
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/SensorDHT22Simulado-CrearScripts.sh | bash
+# ----------
 
-## Creación del script de simulación de lectura del sensor
+# Creación del script de simulación de lectura del sensor
    echo '#!/usr/bin/python3'                                                                          > /root/scripts/SensorDHT22Simulado-Leer.py
    echo ''                                                                                           >> /root/scripts/SensorDHT22Simulado-Leer.py
    echo 'from time import time, sleep'                                                               >> /root/scripts/SensorDHT22Simulado-Leer.py
@@ -24,7 +24,7 @@
    echo "  print(json.dumps({'Temperatura': uniform(10, 45), 'Humedad': uniform(11,99)}, indent=2))" >> /root/scripts/SensorDHT22Simulado-Leer.py
    chmod +x /root/scripts/SensorDHT22Simulado-Leer.py
 
-## Creación del script para el servicio
+# Creación del script para el servicio
    echo '#!/usr/bin/python3'                                                                                                 > /root/scripts/SensorDHT22Simulado-LeerYGuardarEnInfluxDB.py
    echo ''                                                                                                                  >> /root/scripts/SensorDHT22Simulado-LeerYGuardarEnInfluxDB.py
    echo 'import json'                                                                                                       >> /root/scripts/SensorDHT22Simulado-LeerYGuardarEnInfluxDB.py

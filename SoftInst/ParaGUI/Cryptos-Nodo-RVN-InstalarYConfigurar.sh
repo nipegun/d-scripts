@@ -14,7 +14,7 @@
 
 vUsuarioNoRoot="nipegun"
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -22,7 +22,7 @@ vUsuarioNoRoot="nipegun"
   cFinColor='\033[0m'
 
 echo ""
-echo -e "${vColorAzulClaro}  Iniciando el script de instalación de la cadena de bloques de RVN...${cFinColor}"
+echo -e "${cColorAzulClaro}  Iniciando el script de instalación de la cadena de bloques de RVN...${cFinColor}"
 echo ""
 
 # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -59,7 +59,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${vColorAzulClaro}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+              echo -e "${cColorAzulClaro}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
               echo "  "
               echo ""
               apt-get -y update
@@ -88,7 +88,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${vColorAzulClaro}      El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+              echo -e "${cColorAzulClaro}      El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
               echo ""
               apt-get -y update
               apt-get -y install wget
@@ -102,7 +102,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${vColorAzulClaro}      El paquete tar no está instalado. Iniciando su instalación...${cFinColor}"
+              echo -e "${cColorAzulClaro}      El paquete tar no está instalado. Iniciando su instalación...${cFinColor}"
               echo ""
               apt-get -y update
               apt-get -y install tar
@@ -183,7 +183,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${vColorAzulClaro}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+              echo -e "${cColorAzulClaro}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
               echo "  "
               echo ""
               apt-get -y update
@@ -217,7 +217,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${vColorAzulClaro}      El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+              echo -e "${cColorAzulClaro}      El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
               echo ""
               apt-get -y update
               apt-get -y install wget
@@ -231,7 +231,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${vColorAzulClaro}      El paquete tar no está instalado. Iniciando su instalación...${cFinColor}"
+              echo -e "${cColorAzulClaro}      El paquete tar no está instalado. Iniciando su instalación...${cFinColor}"
               echo ""
               apt-get -y update
               apt-get -y install tar

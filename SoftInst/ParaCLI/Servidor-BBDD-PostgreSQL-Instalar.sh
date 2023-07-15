@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 
-#  Script de NiPeGun para instalar el servidor de bases de datos PostgreSQL en Debian
+# Script de NiPeGun para instalar el servidor de bases de datos PostgreSQL en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-PostgreSQL-Instalar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-PostgreSQL-Instalar.sh | bash
 #
-#  Ejecución remota con cambio de nombre:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-PostgreSQL-Instalar.sh | sed 's/UsuarioPrueba/nipegun/g' | sed 's/BDPrueba/nipegun/g' | bash
+# Ejecución remota con cambio de nombre:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-PostgreSQL-Instalar.sh | sed 's/UsuarioPrueba/nipegun/g' | sed 's/BDPrueba/nipegun/g' | bash
 
 
 cColorRojo='\033[1;31m'
@@ -22,7 +22,7 @@ cFinColor='\033[0m'
 UsuarioPSQL="UsuarioPrueba"
 BaseDeDatosPSQL="BDPrueba"
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -107,9 +107,9 @@ elif [ $cVerSO == "11" ]; then
   apt-get -y update 
   apt-get -y install postgresql
   
-  ## Crear usuario
+  # Crear usuario
      su - postgres -c "createuser $UsuarioPSQL"
-  ## Crear base de datos
+  # Crear base de datos
      su - postgres -c "createdb $BaseDeDatosPSQL"
   echo ""
   echo "  Se han creado el usuario y la base de datos de prueba."

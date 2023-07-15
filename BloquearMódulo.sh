@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para bloquear un módulo específico
+# Script de NiPeGun para bloquear un módulo específico
 # ----------
 
-cCantArgsEsperados=3
+cCantArgumEsperados=3
 
 
 cColorRojo='\033[1;31m'

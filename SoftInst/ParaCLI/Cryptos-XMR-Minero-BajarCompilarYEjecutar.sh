@@ -9,14 +9,14 @@
 # Script de NiPeGun para instalar y configurar diferentes carteras de criptomonedas en Debian
 #
 # Ejecución remota normal (Se ejecuta con los cores reales que tiene el núcleo):
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-XMR-Minero-BajarCompilarYEjecutar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-XMR-Minero-BajarCompilarYEjecutar.sh | bash
 # Ejecución remota personalizada (Se ejecuta con los cores que le pases como parámetro):
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-XMR-Minero-BajarCompilarYEjecutar.sh | sed 's-#vHilos=-vHilos=32-g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-XMR-Minero-BajarCompilarYEjecutar.sh | sed 's-#vHilos=-vHilos=32-g' | bash
 # ----------
 
 vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'

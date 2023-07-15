@@ -5,10 +5,10 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -----------
-#  SCRIPT DE NIPEGUN PARA MOSTRAR SI EL SISTEMA
+# ----------
+# Script de NiPeGun para MOSTRAR SI EL SISTEMA
 #  CUENTA CON SOPORTE PARA INTERRUPT REMAPPING
-# -----------
+# ----------
 
 # Ver si existe alguna línea con ecap en dmesg
 # Si no existe no hay soporte para IR

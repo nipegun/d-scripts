@@ -5,18 +5,18 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -----------
-#  Script de NiPeGun para instalar y configurar OBSStudio en Debian
+# ----------
+# Script de NiPeGun para instalar y configurar OBSStudio en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/OBSStudio-Instalar.sh | bash
-# -----------
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/OBSStudio-Instalar.sh | bash
+# ----------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -245,8 +245,8 @@ elif [ $cVerSO == "10" ]; then
           4)
 
             apt-get -y install curl wget
-            UltVers=$(curl -s https://github.curl https://github.com/bazukas/obs-linuxbrowser/releases/latest | cut -d'"' -f2 | cut -d'/' -f8)
-            Archivo=$(curl -s https://github.com/bazukas/obs-linuxbrowser/releases/tag/$UltVers | grep tgz | cut -d'"' -f2 | grep tgz)
+            UltVers=$(curl -sL https://github.curl https://github.com/bazukas/obs-linuxbrowser/releases/latest | cut -d'"' -f2 | cut -d'/' -f8)
+            Archivo=$(curl -sL https://github.com/bazukas/obs-linuxbrowser/releases/tag/$UltVers | grep tgz | cut -d'"' -f2 | grep tgz)
             mkdir -p /root/paquetes/obs-linuxbrowser
             cd /root/paquetes/obs-linuxbrowser
             rm -rf /root/paquetes/obs-linuxbrowser/*

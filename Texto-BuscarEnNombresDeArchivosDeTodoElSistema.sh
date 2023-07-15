@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Texto-BuscarEnNombresDeArchivosDeTodoElSistema.sh | bash -s Cadena
 # ----------
 
-EXPECTED_ARGS=1
+cCantArgumEsperados=1
 
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -27,7 +27,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "$0 perro"
     echo "##################################################"
     echo ""
-    exit $E_BADARGS
+    exit
   else
     echo ""
     find /bin        -type f -name "*$2*" -print

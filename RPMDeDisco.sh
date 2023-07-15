@@ -5,11 +5,11 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -----------
-#  Script de NiPeGun para saber las RPMs de un disco duro
-# -----------
+# ----------
+# Script de NiPeGun para saber las RPMs de un disco duro
+# ----------
 
-EXPECTED_ARGS=1
+cCantArgumEsperados=1
 
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -24,7 +24,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo " $0 /dev/sdb"
     
     echo ""
-    exit $E_BADARGS
+    exit
   else
     smartctl --all $1 | grep Rotation
 fi

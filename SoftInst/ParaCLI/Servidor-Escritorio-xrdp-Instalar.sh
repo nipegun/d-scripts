@@ -41,7 +41,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
@@ -51,7 +51,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
@@ -61,7 +61,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   apt-get -y update
@@ -80,7 +80,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   apt-get -y update 2> /dev/null
@@ -94,7 +94,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   apt-get -y update 2> /dev/null
@@ -108,7 +108,7 @@ elif [ $cVerSO == "11" ]; then
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 12 (Bookworm)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
   apt-get -y update 2> /dev/null

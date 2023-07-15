@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  SCRIPT DE NIPEGUN PARA BORRAR TODA LA CONFIGURACIÓN DEL CLIENTE MUMBLE EN DEBIAN
+# Script de NiPeGun para BORRAR TODA LA CONFIGURACIÓN DEL CLIENTE MUMBLE EN DEBIAN
 # ----------
 
 # Borrar la base de datos (Lista de servidores, certificados de servidores, favoritos, amigos, tokens de acceso, comentarios, etc)

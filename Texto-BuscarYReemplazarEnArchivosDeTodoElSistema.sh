@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Texto-BuscarYReemplazarEnArchivosDeTodoElSistema.sh | bash -s CadenaVieja CadenaNueva
 # ----------
 
-EXPECTED_ARGS=2
+cCantArgumEsperados=2
 
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -27,7 +27,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "$0 perro gato"
     echo "##################################################"
     echo ""
-    exit $E_BADARGS
+    exit
   else
     echo ""
     find /bin        -type f -exec sed -i -e "s|$1|$2|g" {} \;

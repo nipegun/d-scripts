@@ -6,16 +6,16 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar un servidor de correo con en Debian
+# Script de NiPeGun para instalar y configurar un servidor de correo con en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Mail-InstalarYConfigurar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Mail-InstalarYConfigurar.sh | bash
 #
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Mail-InstalarYConfigurar.sh | bash
+# Ejecución remota sin caché:
+#  curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Mail-InstalarYConfigurar.sh | bash
 #
-#  Ejecución remota con parámetros:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Mail-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
+# Ejecución remota con parámetros:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Mail-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 vDominio="nubimae.com"
@@ -74,7 +74,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
@@ -84,7 +84,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
@@ -94,7 +94,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   echo ""
@@ -104,7 +104,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   echo ""
@@ -114,7 +114,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor de correo para Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de correo para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -486,7 +486,7 @@ elif [ $cVerSO == "11" ]; then
             echo "  Otra..."
             echo ""
 
-            ######## DNS
+            ####### DNS
 
             # Configurar el servidor DNS, dado que las cuentas de correo no pueden funcionar con direcciones IP
             # Como las cuentas de correo no pueden funcionar con direcciones IP y deben funcionar con nombres dns,
@@ -494,7 +494,7 @@ elif [ $cVerSO == "11" ]; then
             # El servidor dns del servidor de correo debe ser el servidor DNS donde están configurados los registros:
             # Hay que crear una zona en el servidor DNS que sea el dominio y la extensión, por ejemplo: hacks4geeks.com
             # En bind 9 (zona directa, db.hacks4geeks.com):
-       ##     echo "correo     IN A     $vIPDirecta" >> /etc/bind/db.$vDominio
+       #     echo "correo     IN A     $vIPDirecta" >> /etc/bind/db.$vDominio
        ##//     echo "$vDominio. IN MX 10 correo"      >> /etc/bind/db.$vDominio # Las cuentas de correo que entren en @hacsk4geeks.com serán redirigidas a la entrada correos
             # Comprobamos que la zona esté bien escrita:
              echo ""
@@ -507,9 +507,9 @@ elif [ $cVerSO == "11" ]; then
              named-checkzone $vDominio /etc/bind/db.$vDominio.inversa
              
             # En bind 9 (zona inversa, db.0.168.192): # es mejor declararla para que el correo no acabe en spam
-         ##   echo "2 IN PTR correo.hacks4geeks.com." >> db.$vIPInversa
+         #   echo "2 IN PTR correo.hacks4geeks.com." >> db.$vIPInversa
 
-            #### Postfix
+            ### Postfix
 
             adduser nico
             adduser pablo
@@ -529,7 +529,7 @@ elif [ $cVerSO == "11" ]; then
             echo "query = SELECT maildir FROM virtual_users WHERE email='%s'"        >> /etc/postfix/mysql-virtual-mailbox-maps.cf
             systemctl restart postfix
 
-          ############### Roundcube
+          ############## Roundcube
           
             # Modificar la configuración
 

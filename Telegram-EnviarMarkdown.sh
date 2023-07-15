@@ -5,17 +5,17 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# --------------
-#  Script de NiPeGun para enviar MarkDown a Telegram desde Bash usando un bot
-# --------------
+# ----------
+# Script de NiPeGun para enviar MarkDown a Telegram desde Bash usando un bot
+# ----------
 
-ColorAdvertencia="\033[1;31m"
-ColorArgumentos="\033[1;32m"
+cColorRojo="\033[1;31m"
+cColorVerde="\033[1;32m"
 cFinColor="\033[0m"
 
-cCantArgsCorrectos=3
+cCantArgumEsperados=3
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     echo -e "${cColorRojo}Mal uso del script!${cFinColor}"
@@ -34,7 +34,7 @@ if [ $# -ne $cCantArgsCorrectos ]
       URL="https://api.telegram.org/bot$TokenDelBot/sendMessage"
       IdDestino="$2"
       Mensaje="$3"
-      curl -s -X POST $URL -d chat_id=$IdDestino -d parse_mode=MarkdownV2 -d text="$Mensaje" > /dev/null
+      curl -sL -X POST $URL -d chat_id=$IdDestino -d parse_mode=MarkdownV2 -d text="$Mensaje" > /dev/null
       echo ""
     else
       echo ""

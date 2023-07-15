@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para escanear todos los puertos abiertos de una IP que respondan a una solicitud HTTP
+# Script de NiPeGun para escanear todos los puertos abiertos de una IP que respondan a una solicitud HTTP
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/nmap-EscanearPuertosAbiertosConRespuestaHTTP.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/nmap-EscanearPuertosAbiertosConRespuestaHTTP.sh | bash
 # ----------
 
 vIPWAN=111.111.111.111

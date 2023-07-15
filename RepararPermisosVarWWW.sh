@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para reparar los permisos de la carpeta /var/www
+# Script de NiPeGun para reparar los permisos de la carpeta /var/www
 # ----------
 
 cColorRojo='\033[1;31m'

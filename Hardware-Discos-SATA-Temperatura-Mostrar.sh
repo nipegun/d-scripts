@@ -19,11 +19,11 @@ echo ""
 echo -e "${cColorVerde}  Mostrando temperatura de los discos duros SATA...${cFinColor}"
 echo ""
 
-## Obtener la cantidad de discos SATA que hay instalados en el sistema
+# Obtener la cantidad de discos SATA que hay instalados en el sistema
    for LetraDiscoSATA in {a..x}
      do
        if [[ -d "/sys/block/sd$LetraDiscoSATA" ]]; then
-         ## Agregar la unidad al último índice libre en el array
+         # Agregar la unidad al último índice libre en el array
             DiscoActual=$(echo "sd$LetraDiscoSATA")
             ArrayDiscosSATA+=("${DiscoActual}")
        fi
@@ -33,7 +33,7 @@ echo ""
 echo "  Total de discos SATA instalados en el sistema: ${#ArrayDiscosSATA[@]}"
 echo ""
 
-## Comprobar si el paquete hddtemp está instalado. Si no lo está, instalarlo.
+# Comprobar si el paquete hddtemp está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s hddtemp 2>/dev/null | grep installed) == "" ]]; then
      echo ""
      echo "  hddtemp no está instalado. Iniciando su instalación..."
@@ -43,7 +43,7 @@ echo ""
      echo ""
    fi
 
-## Mostrar la temperatura de cada disco detectado
+# Mostrar la temperatura de cada disco detectado
    for DiscoSATA in "${ArrayDiscosSATA[@]}"
      do
        #echo ""

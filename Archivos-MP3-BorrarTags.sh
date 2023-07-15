@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# ------------
-#  SCRIPT DE NIPEGUN PARA BORRAR TAGs DE ARCHIVOS MP3 DE UNA CARPETA
+# ----------
+# Script de NiPeGun para BORRAR TAGs DE ARCHIVOS MP3 DE UNA CARPETA
 #  X Y TAMBIÉN DE SUS SUB-CARPETAS DE FORMA RECURSIVA
 # ----------
 
-EXPECTED_ARGS=1
+cCantArgumEsperados=1
 
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -25,9 +25,9 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "&0 /etc/"
     echo "##################################################"
     echo ""
-    exit $E_BADARGS
+    exit
   else
-    ## Comprobar si el paquete eyed3 está instalado. Si no lo está, instalarlo.
+    # Comprobar si el paquete eyed3 está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s eyed3 2>/dev/null | grep installed) == "" ]]; then
         echo ""
         echo "  eyed3 no está instalado. Iniciando su instalación..."

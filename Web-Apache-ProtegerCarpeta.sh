@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para proteger una carpeta alojada en el servidor web apache2 de Debian
+# Script de NiPeGun para proteger una carpeta alojada en el servidor web apache2 de Debian
 #
-#  Ejecución remota
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Web-Apache-ProtegerCarpeta.sh | bash
+# Ejecución remota
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Web-Apache-ProtegerCarpeta.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'

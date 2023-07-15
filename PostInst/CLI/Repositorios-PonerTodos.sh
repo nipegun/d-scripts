@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-PonerTodos.sh | bash
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -48,7 +48,7 @@
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
@@ -58,7 +58,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
@@ -77,7 +77,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
@@ -96,7 +96,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
@@ -115,7 +115,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
@@ -134,7 +134,7 @@ elif [ $cVerSO == "11" ]; then
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 12 (Bookworm)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
   cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori

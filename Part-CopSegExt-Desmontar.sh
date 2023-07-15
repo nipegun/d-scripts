@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Part-CopSegExt-Desmontar.sh | bash
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -26,6 +26,6 @@
   fi
 
 echo ""
-echo -e "${vColorAzulClaro}  Desmontando la partición de copias de seguridad externa...${cFinColor}"
+echo -e "${cColorAzulClaro}  Desmontando la partición de copias de seguridad externa...${cFinColor}"
 echo ""
 umount /dev/disk/by-partlabel/PartCopSegExt

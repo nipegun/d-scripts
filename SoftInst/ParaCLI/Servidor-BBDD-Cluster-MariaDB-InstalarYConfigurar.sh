@@ -6,16 +6,16 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar un cluster de bases de datos MariaDB en Debian
+# Script de NiPeGun para instalar y configurar un cluster de bases de datos MariaDB en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-Cluster-MariaDB-InstalarYConfigurar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-Cluster-MariaDB-InstalarYConfigurar.sh | bash
 #
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-Cluster-MariaDB-InstalarYConfigurar.sh | bash
+# Ejecución remota sin caché:
+#  curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-Cluster-MariaDB-InstalarYConfigurar.sh | bash
 #
-#  Ejecución remota con parámetros:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-Cluster-MariaDB-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
+# Ejecución remota con parámetros:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-Cluster-MariaDB-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 cColorAzul="\033[0;34m"
@@ -67,7 +67,7 @@ vIPHAProxy=$4
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
@@ -77,7 +77,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
@@ -87,7 +87,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   echo ""
@@ -97,7 +97,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}Iniciando el script de instalación del cluster MariaDB con Galera para Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   echo ""
@@ -107,7 +107,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del cluster MariaDB con Galera para Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del cluster MariaDB con Galera para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   vFecha=$(date +A%YM%mD%d@%T)

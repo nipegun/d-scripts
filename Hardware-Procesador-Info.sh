@@ -9,7 +9,7 @@
 # Script de NiPeGun para mostrar información sobre el/los procesador/es
 # ----------
 
-ccColorVerde="\033[1;32m"
+cColorVerde="\033[1;32m"
 ccFinColor="\033[0m"
 
 echo ""

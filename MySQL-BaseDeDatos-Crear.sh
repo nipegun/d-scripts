@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para crear bases de datos MySQL
+# Script de NiPeGun para crear bases de datos MySQL
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/MySQL-BaseDeDatos-Crear.sh | bash -s NombreBD UsuarioBD PasswordBD
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/MySQL-BaseDeDatos-Crear.sh | bash -s NombreBD UsuarioBD PasswordBD
 # ----------
 
-cCantArgsEsperados=3
+cCantArgumEsperados=3
 
 
 cColorRojo='\033[1;31m'

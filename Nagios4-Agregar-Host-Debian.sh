@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para agregar un ordenador Debian a Nagios
+# Script de NiPeGun para agregar un ordenador Debian a Nagios
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Debian.sh | bash -s URL Servicio
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Debian.sh | bash -s URL Servicio
 #
 #  Ejemplo:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Debian.sh | bash -s midebian "Mi ordenador Debian" "192.168.0.123"
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Debian.sh | bash -s midebian "Mi ordenador Debian" "192.168.0.123"
 # ----------
 
 NombreDelHost=$1

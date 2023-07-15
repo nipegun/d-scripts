@@ -5,9 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -----------
-#  Script de NiPeGun para dejar sólo el último kernel estable en los repositorios de Debian 9
-# -----------
+# ----------
+# Script de NiPeGun para dejar sólo el último kernel estable en los repositorios de Debian 9
+# ----------
 
 ColorMensajes='\033[1;34m'
 cFinColor='\033[0m'

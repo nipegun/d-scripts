@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para comprobar el estado de salud de los discos duros SSD SATA
+# Script de NiPeGun para comprobar el estado de salud de los discos duros SSD SATA
 # ----------
 
 cColorVerde="\033[1;32m"
@@ -20,7 +20,7 @@ echo ""
 echo "  Identificando que discos SATA son SSD..."
 echo ""
 
-## Obtener la cantidad de discos SSD SATA que hay instalados en el sistema
+# Obtener la cantidad de discos SSD SATA que hay instalados en el sistema
    for LetraDiscoSATA in {a..x}
      do
        if [[ $(cat /sys/block/sd$LetraDiscoSATA/queue/rotational 2> /dev/null) == "0" ]]; then
@@ -32,7 +32,7 @@ echo ""
 echo ""
 echo "  Mostrando estado de salud de todos los discos SSD SATA instalados en el sistema (Total: ${#ArrayDiscosSSDSATA[@]})..."
 
-## Comprobar si el paquete hdparm está instalado. Si no lo está, instalarlo.
+# Comprobar si el paquete hdparm está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s hdparm 2>/dev/null | grep installed) == "" ]]; then
      echo ""
      echo "hdparm no está instalado. Iniciando su instalación..."
@@ -50,7 +50,7 @@ for DiscoSSD in "${ArrayDiscosSSDSATA[@]}"
     echo ""
     hdparm -I /dev/$DiscoSSD | grep odel
     smartctl /dev/$DiscoSSD --all | grep "ector" | grep -v "eall"
-    ## Mostrar el último campo de 241
+    # Mostrar el último campo de 241
     echo "GiB escritos: " && smartctl /dev/$DiscoSSD --all | grep 241 | awk '{print $(NF)}'
     echo ""
   done

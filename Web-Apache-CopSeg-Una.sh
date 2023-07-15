@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para hacer copia de seguridad interna de un servidor web con Apache
+# Script de NiPeGun para hacer copia de seguridad interna de un servidor web con Apache
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Web-Apache-CopSeg-Una.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Web-Apache-CopSeg-Una.sh | bash
 # ----------
 
 vWeb="hacks4geeks.com"

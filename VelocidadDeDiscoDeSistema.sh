@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  SCRIPT DE NIPEGUN PARA MEDIR LA VELOCIDAD DE ESCRITURA DEL DISCO DE SISTEMA
+# Script de NiPeGun para MEDIR LA VELOCIDAD DE ESCRITURA DEL DISCO DE SISTEMA
 #  LA ESCRITURA SE EFECTÚA SOBRE LA CARPETA /tmp/ POR LO QUE ES NECESARIO QUE
 #  /tmp/ NO ESTÉ MONTADA DESDE OTRO DISCO QUE NO SEA EL QUE TIENE EL SISTEMA
 # ----------

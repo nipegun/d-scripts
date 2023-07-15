@@ -5,9 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# ------------
-#  Script de NiPeGun para poner a cero todos los logs de todas las web en /var/www
-# ------------
+# ----------
+# Script de NiPeGun para poner a cero todos los logs de todas las web en /var/www
+# ----------
 
 echo ""
 echo "  BORRANDO LOS ARCHIVOS access.log DE TODO /var/www y sub-directorios..."

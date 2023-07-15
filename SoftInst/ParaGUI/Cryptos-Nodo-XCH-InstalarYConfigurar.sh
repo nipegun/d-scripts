@@ -14,7 +14,7 @@
 
 vUsuarioNoRoot="nipegun"
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -28,7 +28,7 @@ vUsuarioNoRoot="nipegun"
   fi
 
 echo ""
-echo -e "${vColorAzulClaro}  Iniciando el script de instalación de la cadena de bloques de XCH...${cFinColor}"
+echo -e "${cColorAzulClaro}  Iniciando el script de instalación de la cadena de bloques de XCH...${cFinColor}"
 echo ""
 
 vFechaDeEjec=$(date +a%Ym%md%d@%T)

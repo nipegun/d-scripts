@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 
-#  Script de NiPeGun para instalar y configurar Pools Cripto en Debian
+# Script de NiPeGun para instalar y configurar Pools Cripto en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-Pools-InstalarYConfigurar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-Pools-InstalarYConfigurar.sh | bash
 
 
 UsuarioNoRoot="pooladmin"
@@ -35,7 +35,7 @@ cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -105,7 +105,7 @@ elif [ $cVerSO == "10" ]; then
   
   echo ""
 
-  ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
        echo "  dialog no está instalado. Iniciando su instalación..."
@@ -138,7 +138,7 @@ elif [ $cVerSO == "10" ]; then
             echo -e "${cColorVerde}-----------------------------------------${cFinColor}"
             echo ""
 
-            ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+            # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
                if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
                  echo ""
                  echo "  git no está instalado. Iniciando su instalación..."
@@ -179,7 +179,7 @@ elif [ $cVerSO == "10" ]; then
             echo -e "${cColorVerde}------------------------------${cFinColor}"
             echo ""
 
-            ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
+            # Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
                if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
                  echo ""
                  echo "  tasksel no está instalado. Iniciando su instalación..."
@@ -189,10 +189,10 @@ elif [ $cVerSO == "10" ]; then
                  echo ""
                fi
 
-            ## Instalar servidor Web
+            # Instalar servidor Web
                tasksel install web-server
 
-            ## Instalar paquetes necesarios
+            # Instalar paquetes necesarios
                apt-get -y update
                apt-get -y install build-essential libcurl4-openssl-dev libdb5.3-dev libdb5.3++-dev mariadb-server
                apt-get -y install memcached zip
@@ -203,7 +203,7 @@ elif [ $cVerSO == "10" ]; then
             apache2ctl -k stop
             cd /var/www/
 
-            ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+            # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
                if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
                  echo ""
                  echo "  git no está instalado. Iniciando su instalación..."
@@ -216,7 +216,7 @@ elif [ $cVerSO == "10" ]; then
             cd MPOS
             git checkout master
             php composer.phar install
-            ## Crear el sitio web en Apache
+            # Crear el sitio web en Apache
                echo "<VirtualHost *:80>"                                  > /etc/apache2/sites-available/pool.conf
                echo ""                                                   >> /etc/apache2/sites-available/pool.conf
                echo "  #Redirect permanent / https://$DominioPool/"      >> /etc/apache2/sites-available/pool.conf
@@ -245,12 +245,12 @@ elif [ $cVerSO == "10" ]; then
                sleep 3
                service apache2 restart
 
-            ## Permisos
+            # Permisos
                chown -Rv www-data /var/www/MPOS/templates/compile
                chown -Rv www-data /var/www/MPOS/templates/cache
                chown -Rv www-data /var/www/MPOS/logs
 
-            ## Archivo de configuración
+            # Archivo de configuración
                cp /var/www/MPOS/include/config/global.inc.dist.php /var/www/MPOS/include/config/global.inc.php
                sed -i -e 's|$config['db']['host'] = 'localhost';|$config['db']['host'] = 'localhost';|g'                                     /var/www/MPOS/include/config/global.inc.php
                sed -i -e 's|$config['db']['user'] = 'root';|$config['db']['user'] = 'root';|g'                                               /var/www/MPOS/include/config/global.inc.php
@@ -268,18 +268,18 @@ elif [ $cVerSO == "10" ]; then
                #SALT and SALTY must be a minimum of 24 characters or you will get an error message:
                #'SALT or SALTY is too short, they should be more than 24 characters and changing them will require registering a
 
-               ## Servidor Stratum
+               # Servidor Stratum
 
-               ## Web socket
+               # Web socket
                   sed -i -e 's|from autobahn.websocket import WebSocketServerProtocol, WebSocketServerFactory|from autobahn.twisted.websocket import WebSocketServerProtocol, WebSocketServerFactory|g' /usr/local/lib/python2.7/dist-packages/stratum-0.2.13-py2.7.egg/stratum/websocket_transport.py
                   apache2ctl -k start
 
-               ## Base de datos
+               # Base de datos
 
-                  ## Borrar la base de datos anterior de mpos, si es que existe
+                  # Borrar la base de datos anterior de mpos, si es que existe
                      mysql -e "drop database if exists mpos"
 
-                  ## Borrar el usuario mpos, si es que existe
+                  # Borrar el usuario mpos, si es que existe
                      mysql -e "drop user if exists mpos@localhost"
 
                   echo ""
@@ -318,7 +318,7 @@ elif [ $cVerSO == "10" ]; then
                   echo ""
                   mysql -p mpos < /var/www/MPOS/sql/000_base_structure.sql
 
-            ## Reparación de permisos
+            # Reparación de permisos
                chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/ -R
 
           ;;
@@ -389,7 +389,7 @@ elif [ $cVerSO == "10" ]; then
             echo -e "${cColorVerde}------------------------------${cFinColor}"
             echo ""
 
-            ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
+            # Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
                if [[ $(dpkg-query -s tasksel 2>/dev/null | grep installed) == "" ]]; then
                  echo ""
                  echo "  tasksel no está instalado. Iniciando su instalación..."
@@ -411,7 +411,7 @@ elif [ $cVerSO == "10" ]; then
             echo -e "${cColorVerde}----------------------------${cFinColor}"
             echo ""
 
-            ## Instalar .NET Core 2.2 SDK para Linux (Necesario para correr el motor Stratum)
+            # Instalar .NET Core 2.2 SDK para Linux (Necesario para correr el motor Stratum)
                mkdir -p /root/SoftInst/MS.NETCore/ 2> /dev/null
                cd /root/
                wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb -O /root/SoftInst/MS.NETCore/packages-microsoft-prod.deb
@@ -421,14 +421,14 @@ elif [ $cVerSO == "10" ]; then
                apt-get update
                apt-get -y install dotnet-sdk-2.2
 
-            ## Instalar MiningCore
+            # Instalar MiningCore
                apt-get -y install cmake build-essential libssl-dev pkg-config libboost-all-dev libsodium-dev libzmq5 libzmq3-dev
                cd /root/
                git clone https://github.com/coinfoundry/miningcore.git
                cd /root/miningcore/src/Miningcore/
                dotnet publish -c Release --framework netcoreapp2.2  -o ../../build
 
-            ## Crear el archivo de configuración json de MiningCore
+            # Crear el archivo de configuración json de MiningCore
                echo '{'                                                                                                                                        > /root/miningcore/build/config.json
                echo '    "logging": {'                                                                                                                        >> /root/miningcore/build/config.json
                echo '        "level": "info",'                                                                                                                >> /root/miningcore/build/config.json
@@ -738,41 +738,41 @@ elif [ $cVerSO == "10" ]; then
                echo '  ]'                                                       >> /root/miningcore/build/config-rvn.json
                echo '}'                                                         >> /root/miningcore/build/config-rvn.json
 
-            ## Asignar dirección de cartera al archivo de configuración
+            # Asignar dirección de cartera al archivo de configuración
                DirCartRVNtxt=$(cat /home/pooladmin/pooladdress-rvn.txt)
                sed -i -e 's|DirCarteraPoolRVN|'$DirCartRVNtxt'|g' /root/miningcore/build/config-rvn.json
 
-            ## Instalar base de datos PostgreSQL
+            # Instalar base de datos PostgreSQL
                apt-get -y install postgresql
 
-            ## Crear la base de datos PostgreSQL
+            # Crear la base de datos PostgreSQL
 
-               ## Crear rol para la base de datos
+               # Crear rol para la base de datos
                   echo ""
                   echo "  Creando el rol $UsuarioNoRoot..."
                   echo ""
                   su - postgres -c "createuser --interactive --pwprompt $UsuarioNoRoot"
 
-               ## Crear la base de datos con el rol recién creado
+               # Crear la base de datos con el rol recién creado
                   echo ""
                   echo "  Creando la base de datos miningcore para el rol $UsuarioNoRoot..."
                   echo ""
                   su - postgres -c "createdb -O $UsuarioNoRoot miningcore"
 
-               ## Si se quiere que el propietario de la base de datos sea postgres y no el rol de arriba
+               # Si se quiere que el propietario de la base de datos sea postgres y no el rol de arriba
                   #su - postgres -c "createuser miningcore -d -P"
                   #su - postgres -c "createdb miningcore"
                   #su - postgres -c "psql"
                     #alter user miningcore with encrypted password '12345678';
                     #grant all privileges on database miningcore to miningcore;
 
-               ## Cambiar la autentificación a MD5
+               # Cambiar la autentificación a MD5
                   sed -i -e 's|local   all             all                                     peer|local   all             all                                     md5|g' /etc/postgresql/$VersPostgre/main/pg_hba.conf
 
-               ## Reiniciar PostgreSQL
+               # Reiniciar PostgreSQL
                   service postgresql restart
 
-               ## Importar el formato básico de la base de datos
+               # Importar el formato básico de la base de datos
                   echo ""
                   echo "  Importando la estructura de la base de datos..."
                   echo ""
@@ -785,7 +785,7 @@ elif [ $cVerSO == "10" ]; then
                   echo ""
                   su - postgres -c "psql -d miningcore -U $UsuarioNoRoot -f /tmp/miningcore-basic.sql -W"
 
-               ## Mejorar a formato multi-pool
+               # Mejorar a formato multi-pool
                   #su - postgres -c "wget https://raw.githubusercontent.com/coinfoundry/miningcore/master/src/Miningcore/Persistence/Postgres/Scripts/createdb_postgresql_11_appendix.sql -O /tmp/miningcore-advanced.sql"
                   #su - postgres -c "psql -d miningcore -U miningcore -f /tmp/miningcore-advanced.sql -W"
             echo ""
@@ -795,7 +795,7 @@ elif [ $cVerSO == "10" ]; then
             echo ""
             echo 'su - postgres -c "psql -h localhost --username=miningcore --list"'
 
-            ## Ejecutar MiningCore
+            # Ejecutar MiningCore
                cd /root/miningcore/build/
                dotnet Miningcore.dll -c /root/miningcore/build/config-rvn.json
 
@@ -809,24 +809,24 @@ elif [ $cVerSO == "10" ]; then
             echo -e "${cColorVerde}----------------------------------${cFinColor}"
             echo ""
 
-            ## Descargar MiningCore.WebUI
+            # Descargar MiningCore.WebUI
                cd /root
                rm -rf /root/Miningcore.WebUI/
                git clone https://github.com/minernl/Miningcore.WebUI
                rm -rf /root/Miningcore.WebUI/.git/
                rm -rf /root/Miningcore.WebUI/README.md
 
-            ## Modificar las carpetas por defecto
+            # Modificar las carpetas por defecto
                sed -i -e 's|window.location.protocol + "//" + window.location.hostname + "/";|"'$MiningCoreDomain'";|g'                /root/Miningcore.WebUI/js/miningcore.js
                sed -i -e 's|WebURL + "api/";|"'$MiningCoreAPI'";|g'                                                                    /root/Miningcore.WebUI/js/miningcore.js
                sed -i -e 's|var stratumAddress = window.location.hostname;|var stratumAddress            = "'$MiningCoreStratum':";|g' /root/Miningcore.WebUI/js/miningcore.js
 
-            ## Mover archivos de MiningCore a su ubicación final
+            # Mover archivos de MiningCore a su ubicación final
                rm -rf /var/www/html/
                mv /root/Miningcore.WebUI/ /var/www/
                mv /var/www/Miningcore.WebUI/ /var/www/html/
 
-            ## Reparar permisos
+            # Reparar permisos
                chown www-data:www-data /var/www/html/ -Rv
                echo ""
 

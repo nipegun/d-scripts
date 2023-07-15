@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para hacer que Debian arranque en modo gráfico
+# Script de NiPeGun para hacer que Debian arranque en modo gráfico
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Interfaz-ModoGUI.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Interfaz-ModoGUI.sh | bash
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -26,7 +26,7 @@
   fi
 
 echo ""
-echo -e "${vColorAzulClaro}  Iniciando script de configuración de inicio en modo GUI para Debian...${cFinColor}"
+echo -e "${cColorAzulClaro}  Iniciando script de configuración de inicio en modo GUI para Debian...${cFinColor}"
 echo ""
 systemctl set-default -f graphical.target
 

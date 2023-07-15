@@ -12,7 +12,7 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/VirtualBox-Instalar.sh | bash
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -117,7 +117,7 @@ elif [ $cVerSO == "11" ]; then
   
   echo ""
 
-  ## Instalar paquetes necesarios
+  # Instalar paquetes necesarios
      echo ""
      echo "  Instalando paquetes necesarios..."
      echo ""
@@ -125,12 +125,12 @@ elif [ $cVerSO == "11" ]; then
      apt-get -y install linux-headers-$(uname -r)
      apt-get -y install dkms
 
-  ## Agregar repositorio
+  # Agregar repositorio
      echo ""
      echo "  Agregando repositorio de VirtualBox..."
      echo ""
      apt-get -y install gnupg2
-     ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
           echo ""
           echo "  wget no está instalado. Iniciando su instalación..."
@@ -144,14 +144,14 @@ elif [ $cVerSO == "11" ]; then
      echo "deb [arch=$(dpkg --print-architecture)] http://download.virtualbox.org/virtualbox/debian bullseye contrib" > /etc/apt/sources.list.d/virtualbox.list
      apt-get -y update
 
-  ## Instalar virtualbox
+  # Instalar virtualbox
      echo ""
      echo "  Instalando el paquete virtualbox..."
      echo ""
      PaqueteAInstalar=$(apt-cache search virtualbox | grep "virtualbox-" | tail -n1 | cut -d' ' -f1)
      apt-get -y install $PaqueteAInstalar
 
-  ## Instalar el pack de extensiones
+  # Instalar el pack de extensiones
      echo ""
      echo "  Instalando el pack de extensiones..."
      echo ""
@@ -161,7 +161,7 @@ elif [ $cVerSO == "11" ]; then
      wget https://download.virtualbox.org/virtualbox/$VersDeVBoxInstalada/Oracle_VM_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
      vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VM_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
 
-   ## Agregar el usuario 1000 al grupo virtualbox
+   # Agregar el usuario 1000 al grupo virtualbox
       echo ""
       echo "  Agregando el usuario 1000 en el grupo virtualbox..."
       echo ""

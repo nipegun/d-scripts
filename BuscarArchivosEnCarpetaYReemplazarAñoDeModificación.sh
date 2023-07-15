@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para buscar archivos en una ubicación dada y cambiarles el año de la fecha de creación y modificación
+# Script de NiPeGun para buscar archivos en una ubicación dada y cambiarles el año de la fecha de creación y modificación
 # ----------
 
-EXPECTED_ARGS=2
+cCantArgumEsperados=2
 
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -24,7 +24,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "&0 /home/nico/fotos/ 2015"
     echo "##################################################"
     echo ""
-    exit $E_BADARGS
+    exit
   else
     echo ""
     find $1 -type f -print0 | while read -d $'\0' vArchivo

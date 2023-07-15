@@ -16,7 +16,7 @@ cColorRojo='\033[1;31m'
 cFinColor='\033[0m'
 
 echo ""
-echo -e "${vColorAzulClaro}  Apagando el sistema operativo...${cFinColor}"
+echo -e "${cColorAzulClaro}  Apagando el sistema operativo...${cFinColor}"
 echo ""
 shutdown -h now
 echo ""

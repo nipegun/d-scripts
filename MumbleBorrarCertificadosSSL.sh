@@ -5,9 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -----------
-#  Script de NiPeGun para borrar todos los certificados SSL de la base de datos de mumble-server
-# -----------
+# ----------
+# Script de NiPeGun para borrar todos los certificados SSL de la base de datos de mumble-server
+# ----------
 
 /usr/sbin/murmurd -ini /etc/mumble-server.ini -wipessl
 

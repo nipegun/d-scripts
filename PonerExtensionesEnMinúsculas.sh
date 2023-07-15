@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para poner recursivamente todas las extensiones en minúsculas de todos los archivos de una ubicación dada
+# Script de NiPeGun para poner recursivamente todas las extensiones en minúsculas de todos los archivos de una ubicación dada
 # ----------
 
 cCantArgEsperados=1

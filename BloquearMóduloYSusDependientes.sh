@@ -5,14 +5,14 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -------------
-#  SCRIPT DE NIPEGUN PARA BLOQUEAR UN MÓDULO ESPECÍFICO Y TODOS LOS QUE DEPENDAN DE ÉL
-# -------------
+# ----------
+# Script de NiPeGun para BLOQUEAR UN MÓDULO ESPECÍFICO Y TODOS LOS QUE DEPENDAN DE ÉL
+# ----------
 
-cCantArgsCorrectos=1
+cCantArgumEsperados=1
 
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     

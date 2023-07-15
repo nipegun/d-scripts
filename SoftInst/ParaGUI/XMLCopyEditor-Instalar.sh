@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar XMLCopyEditor en Debian
+# Script de NiPeGun para instalar y configurar XMLCopyEditor en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/XMLCopyEditor-Instalar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/XMLCopyEditor-Instalar.sh | bash
 # ----------
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -107,9 +107,9 @@ elif [ $cVerSO == "11" ]; then
     apt-get -y install libxslt1.1
 
   # Descargar paquete
-    URLArchivo=$(curl -s https://xml-copy-editor.sourceforge.io/ | grep .deb | grep href | cut -d'"' -f2 | head -n1)
+    URLArchivo=$(curl -sL https://xml-copy-editor.sourceforge.io/ | grep .deb | grep href | cut -d'"' -f2 | head -n1)
     mkdir-p /root/SoftInst/XMLCopyEditor/ 2> /dev/null
-    curl -s -L $URLArchivo --output /root/SoftInst/XMLCopyEditor/XMLCopyEditor.deb
+    curl -sL -L $URLArchivo --output /root/SoftInst/XMLCopyEditor/XMLCopyEditor.deb
     dpkg -i /root/SoftInst/XMLCopyEditor/XMLCopyEditor.deb
 
 fi

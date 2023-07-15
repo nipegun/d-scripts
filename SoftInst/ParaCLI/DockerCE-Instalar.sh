@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar Docker y Portainer en Debian
+# Script de NiPeGun para instalar Docker y Portainer en Debian
 #
 # Ejecución remota
-# curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Instalar.sh | bash
+# curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Instalar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'

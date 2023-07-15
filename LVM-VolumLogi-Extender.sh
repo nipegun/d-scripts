@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para extender volúmenes lógicos LVM
+# Script de NiPeGun para extender volúmenes lógicos LVM
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/LVM-VolumLogi-Extender.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/LVM-VolumLogi-Extender.sh | bash
 # ----------
 
 lvextend $1

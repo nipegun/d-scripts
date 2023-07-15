@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -------------
-#  Script de NiPeGun para cambiar la IP de un container de Docker
+# ----------
+# Script de NiPeGun para cambiar la IP de un container de Docker
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/DockerCE-Contenedor-CambiarIP.sh | bash
-# -------------
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/DockerCE-Contenedor-CambiarIP.sh | bash
+# ----------
 
 NombreContenedor="portainer"
 NuevaIP="172.17.0.10" # No puede ser 172.17.0.1, porque esa es la IP de la interfaz de Docker. Tiene que ser a partir de la 172.17.0.2

@@ -5,14 +5,14 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# -----------
-#  Script de NiPeGun para instalar y configurar Oracle SQL Developer en Debian
+# ----------
+# Script de NiPeGun para instalar y configurar Oracle SQL Developer en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/OracleSQLDeveloper-Instalar.sh | bash
-# -----------
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/OracleSQLDeveloper-Instalar.sh | bash
+# ----------
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -94,11 +94,11 @@ elif [ $cVerSO == "11" ]; then
   echo "-------------------------------------------------------------------------------------------"
   echo ""
 
-  ## Determinar URL del archivo a descargar
+  # Determinar URL del archivo a descargar
      echo ""
      echo "  Determinando URL del archivo a descargar..."
      echo ""
-     ## Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
           echo ""
           echo "  curl no está instalado. Iniciando su instalación..."
@@ -107,17 +107,17 @@ elif [ $cVerSO == "11" ]; then
           apt-get -y install curl
           echo ""
         fi
-     URLDelPaquete=$(curl -s https://www.oracle.com/tools/downloads/sqldev-downloads.html | sed 's-//-\n-g' | sed 's-.zip-.zip\n-g' | sed 's-.rpm-.rpm\n-g' | grep "download.oracle" | grep jre | tail -n 1)
+     URLDelPaquete=$(curl -sL https://www.oracle.com/tools/downloads/sqldev-downloads.html | sed 's-//-\n-g' | sed 's-.zip-.zip\n-g' | sed 's-.rpm-.rpm\n-g' | grep "download.oracle" | grep jre | tail -n 1)
      echo ""
      echo "  La URL del archivo a descargar es: $URLDelPaquete"
      echo ""
 
-  ## Descargar el archivo .zip
+  # Descargar el archivo .zip
      echo ""
      echo "  Descargando el archivo .zip..."
      echo ""
      mkdir -p /root/SoftInst/Oracle/SQLDeveloper/ 2> /dev/null
-     ## Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
           echo ""
           echo "  wget no está instalado. Iniciando su instalación..."
@@ -128,7 +128,7 @@ elif [ $cVerSO == "11" ]; then
         fi
      wget $URLDelPaquete -O /root/SoftInst/Oracle/SQLDeveloper/sqldeveloper.zip
 
-  ## Comprobar si el archivo descargado es el correcto
+  # Comprobar si el archivo descargado es el correcto
      echo ""
      echo "  Comprobando si el archivo descargado es correcto..."
      echo ""
@@ -148,11 +148,11 @@ elif [ $cVerSO == "11" ]; then
        echo ""
      fi
 
-  ## Descomprimir el archivo .zip
+  # Descomprimir el archivo .zip
      echo ""
      echo "  Descomprimiendo en archivo .zip..."
      echo ""
-     ## Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
+     # Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
           echo ""
           echo "  unzip no está instalado. Iniciando su instalación..."
@@ -164,14 +164,14 @@ elif [ $cVerSO == "11" ]; then
      mkdir -p /opt/ 2> /dev/null
      unzip /root/SoftInst/Oracle/SQLDeveloper/sqldeveloper.zip -d /opt/
 
-  ## Instlalar OpenJDK 11
+  # Instlalar OpenJDK 11
      echo ""
      echo "  Instalando OpenJDK 11..."
      echo ""
      apt-get -y update
      apt-get -y install openjdk-11-jdk
 
-  ## Crear icono en el menú
+  # Crear icono en el menú
      echo ""
      echo "  Creando icono en el menú"
      echo ""

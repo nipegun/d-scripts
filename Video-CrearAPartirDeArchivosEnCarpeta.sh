@@ -34,9 +34,9 @@ cColorVerde='\033[1;32m'
 cColorRojo='\033[1;31m'
 cFinColor='\033[0m'
 
-cCantArgsCorrectos=2
+cCantArgumEsperados=2
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
@@ -45,10 +45,10 @@ if [ $# -ne $cCantArgsCorrectos ]
     echo                 "  Ejemplo:"
     echo                 '    script "/home/pepe/fotos/" "jpg"'
     echo ""
-    exit $vArgsInsuficientes
+    exit
   else
     echo ""
-    echo -e "${vColorAzulClaro}  Creando video a partir de los archivos de imagen ubicados en $vCarpetaConArchivos ... ${cFinColor}"
+    echo -e "${cColorAzulClaro}  Creando video a partir de los archivos de imagen ubicados en $vCarpetaConArchivos ... ${cFinColor}"
     echo ""
     vFecha=$(date +A%YM%mD%d)
     vYear=$(date +%Y)

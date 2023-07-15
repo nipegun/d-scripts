@@ -6,17 +6,17 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para enviar archivos a Telegram desde Bash usando un bot
+# Script de NiPeGun para enviar archivos a Telegram desde Bash usando un bot
 # ----------
 
-ColorAdvertencia="\033[1;31m"
-ColorArgumentos="\033[1;32m"
+cColorRojo="\033[1;31m"
+cColorVerde="\033[1;32m"
 cFinColor="\033[0m"
 
-cCantArgsCorrectos=4
+cCantArgumEsperados=4
 
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     echo -e "${cColorRojo}Mal uso del script!${cFinColor}"

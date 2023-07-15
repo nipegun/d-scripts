@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Web-Apache-Exportar.sh | bash -s pepe.com pepe 1234 pepedb
 # ----------
 
-cCantArgsEsperados=4
+cCantArgumEsperados=4
 v
 
 cColorRojo='\033[1;31m'
@@ -31,7 +31,7 @@ if [ $# -ne $cCantArgsEsperados ]
     echo ' $0 pepe.org pepe'
     
     echo ""
-    exit $vArgsInsuficientes
+    exit
   else
     echo ""
     echo -e "${cColorVerde}Ejecutando la copia de seguridad...${cFinColor}"

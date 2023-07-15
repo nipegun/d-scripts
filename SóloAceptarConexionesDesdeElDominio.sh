@@ -6,17 +6,17 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para bloquear todas las IPs que acceden al sistema menos la que se indique
+# Script de NiPeGun para bloquear todas las IPs que acceden al sistema menos la que se indique
 # ----------
 
 cColorRojo="\033[1;31m"
 cColorVerde="\033[1;32m"
 cFinColor="\033[0m"
 
-cCantArgsCorrectos=1
+cCantArgumEsperados=1
 
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     echo -e "${cColorRojo}Mal uso del script!${cFinColor}"

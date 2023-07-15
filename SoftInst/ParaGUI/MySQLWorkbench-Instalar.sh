@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar MySQL WorkBench en Debian
+# Script de NiPeGun para instalar y configurar MySQL WorkBench en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/MySQLWorkbench-Instalar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/MySQLWorkbench-Instalar.sh | bash
 # ----------
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -83,12 +83,12 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
 
-  ## Actualizar el sistema
+  # Actualizar el sistema
      apt-get -y update
      apt-get -y upgrade
      apt-get -y dist-upgrade
 
-  ## Instalar dependencias necesarias
+  # Instalar dependencias necesarias
      apt-get -y install libatkmm-1.6-1v5
      apt-get -y install libglibmm-2.4-1v5
      apt-get -y install libgtkmm-3.0-1v5
@@ -100,12 +100,12 @@ elif [ $cVerSO == "10" ]; then
      apt-get -y install libproj-dev
      apt-get -y install proj-bin
 
-  ## Descargar el archivo .deb
+  # Descargar el archivo .deb
      mkdir -p /root/InstSoft/MySQLWorkbench
      cd /root/InstSoft/MySQLWorkbench
      wget https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community-dbgsym_8.0.27-1ubuntu20.04_amd64.deb
 
-  ## Instalar el archivo .deb
+  # Instalar el archivo .deb
      dpkg -i /root/InstSoft/MySQLWorkbench/mysql-workbench-community_8.0.23-1ubuntu18.04_amd64.deb
 
 elif [ $cVerSO == "11" ]; then

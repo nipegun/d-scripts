@@ -17,10 +17,10 @@ vYear="$2"
 
 vEsNumero='^[0-9]+$'
 
-cCantArgsCorrectos=2
+cCantArgumEsperados=2
 v
 
-if [ $# -ne $cCantArgsCorrectos ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     
@@ -32,7 +32,7 @@ if [ $# -ne $cCantArgsCorrectos ]
     echo ' $0 "/home/nico/fotos/2022" 2023'
     
     echo ""
-    exit $vArgsInsuficientes
+    exit
   elif ! [[ $vYear =~ ^[0-9]{4}$ ]]; then # Comprobar si el año introducido es un número y si 4 digitos
     echo ""
     echo -e "    Error: Debes introducir un número de 4 dígitos como año.\n" >&2; exit

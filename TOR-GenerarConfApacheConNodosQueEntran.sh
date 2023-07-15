@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  SCRIPT DE NIPEGUN PARA OBTENER LA LISTA DE IPS DE NODOS TOR
+# Script de NiPeGun para OBTENER LA LISTA DE IPS DE NODOS TOR
 #  QUE LLEGAN A LA IP WAN Y GENERAR UNA CONFIGURACIÓN DE APACHE
 #  PARA USAR ESA LISTA DE ALGUN MODO.
 #

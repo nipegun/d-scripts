@@ -5,18 +5,18 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# ------------
-#  Script de NiPeGun para instalar y configurar Centreon en Debian
+# ----------
+# Script de NiPeGun para instalar y configurar Centreon en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Centreon-InstalarYConfigurar.sh | bash
-# ------------
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Centreon-InstalarYConfigurar.sh | bash
+# ----------
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-## Determinar la versión de Debian
+# Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
@@ -154,7 +154,7 @@ elif [ $cVerSO == "11" ]; then
   echo ""
   echo "  Agregando el usuario centreon a sudoers..."
   echo ""
-  echo "## BEGIN: CENTREON SUDO"                                            >> /etc/sudoers
+  echo "# BEGIN: CENTREON SUDO"                                            >> /etc/sudoers
   echo ""                                                                   >> /etc/sudoers
   echo "User_Alias      CENTREON=%centreon"                                 >> /etc/sudoers
   echo "Defaults:CENTREON !requiretty"                                      >> /etc/sudoers
@@ -205,7 +205,7 @@ elif [ $cVerSO == "11" ]; then
   echo "CENTREON   ALL = NOPASSWD: /usr/bin/systemctl restart cbd"          >> /etc/sudoers
   echo "CENTREON   ALL = NOPASSWD: /usr/bin/systemctl reload cbd"           >> /etc/sudoers
   echo ""                                                                   >> /etc/sudoers
-  echo "## END: CENTREON SUDO"                                              >> /etc/sudoers
+  echo "# END: CENTREON SUDO"                                              >> /etc/sudoers
 
   echo ""
   echo "  Corrigiendo permisos..."

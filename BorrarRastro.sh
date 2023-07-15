@@ -6,14 +6,14 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para borrar el rastro de acceso a un sistema
+# Script de NiPeGun para borrar el rastro de acceso a un sistema
 # ----------
 
-# -------------
-#  Ejecución remota:
+# ----------
+# Ejecución remota:
 #
 #  curl --silent https://raw.githubusercontent.com/nipegun/d-scripts/master/BorrarRastro.sh | bash
-# -------------
+# ----------
 
 cColorVerde="\033[1;32m"
 ColorAzul="\033[0;34m" 
@@ -29,7 +29,7 @@ echo ""
 echo -e "${cColorVerde}  Borrando todos los logs de /var/log...${cFinColor}"
 echo ""
 
-   ## Borrar archivos sobrantes
+   # Borrar archivos sobrantes
       find /var/log/ -type f -name "*.gz" -print -exec rm {} \;
       for ContExt in {0..100}
         do
@@ -38,23 +38,23 @@ echo ""
           find /var/log/ -type f -name "*.old"          -print -exec rm {} \;
         done
 
-   ## Poner a cero todos los logs de /var/log
+   # Poner a cero todos los logs de /var/log
       find /var/log/ -type f -print -exec truncate -s 0 {} \;
 
 echo ""
 echo -e "${cColorVerde}  Borrando todos los historiales de comandos...${cFinColor}"
 echo ""
 
-  ## Comandos ejecutados en bash por el root
+  # Comandos ejecutados en bash por el root
      find /root/ -type f -name ".bash_history" -print -exec truncate -s 0 {} \;
 
-  ## Comandos ejecutados en bash por otros usuarios
+  # Comandos ejecutados en bash por otros usuarios
      find /home/ -type f -name ".bash_history" -print -exec truncate -s 0 {} \;
 
-  ## Comandos ejecutados en Midnight Commander por el root
+  # Comandos ejecutados en Midnight Commander por el root
      find /root/.local/share/mc/ -type f -name "history" -print -exec truncate -s 0 {} \;
 
-  ## Este propio script
+  # Este propio script
      history -c
 
 echo ""

@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar sacar al usuario que ejecute el comando, de la sesión de mate-desktop en la que está logueado
 #
 # Ejecución remota:
-#   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-MateDesktop-Desloguear.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-MateDesktop-Desloguear.sh | bash
 # ----------
 
-# Definir variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
@@ -24,7 +24,7 @@
 
 # Sacar al usuario de la sesión abierta de mate-desktop
   echo ""
-  echo -e "${vColorAzulClaro}  Cerrando la sesión de mate-desktop del usuario $vUsuario...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Cerrando la sesión de mate-desktop del usuario $vUsuario...${cFinColor}"
   echo ""
   mate-session-save --logout
 

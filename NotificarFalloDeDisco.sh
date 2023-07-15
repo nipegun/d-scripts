@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  SCRIPT DE NIPEGUN PARA NOTIFICAR POR MAIL EL FALLO DE UN DISCO DURO
+# Script de NiPeGun para NOTIFICAR POR MAIL EL FALLO DE UN DISCO DURO
 # ----------
 
 echo ""

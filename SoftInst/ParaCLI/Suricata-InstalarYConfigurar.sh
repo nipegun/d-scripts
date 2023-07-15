@@ -15,16 +15,16 @@
 
 
 # ----------
-#  Script de NiPeGun para instalar y configurar suricata en Debian
+# Script de NiPeGun para instalar y configurar suricata en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Suricata-InstalarYConfigurar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Suricata-InstalarYConfigurar.sh | bash
 #
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Suricata-InstalarYConfigurar.sh | bash
+# Ejecución remota sin caché:
+#  curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Suricata-InstalarYConfigurar.sh | bash
 #
-#  Ejecución remota con parámetros:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Suricata-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
+# Ejecución remota con parámetros:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Suricata-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 cColorAzul="\033[0;34m"
@@ -72,7 +72,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación y configuración de suricata para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de suricata para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
@@ -82,7 +82,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación y configuración de suricata para Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de suricata para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
@@ -92,7 +92,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación y configuración de suricata para Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de suricata para Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   echo ""
@@ -102,7 +102,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación y configuración de suricata para Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de suricata para Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   echo ""
@@ -112,7 +112,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación y configuración de suricata para Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de suricata para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.

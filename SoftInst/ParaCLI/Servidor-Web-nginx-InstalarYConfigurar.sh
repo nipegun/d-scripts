@@ -6,10 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar nginx en Debian
+# Script de NiPeGun para instalar y configurar nginx en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Web-nginx-InstalarYConfigurar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Web-nginx-InstalarYConfigurar.sh | bash
 # ----------
 
 cColorAzul="\033[0;34m"
@@ -251,7 +251,7 @@ elif [ $cVerSO == "11" ]; then
         # Agregar SSL a la configuración
         sed -i -e 's|SSL configuration|SSL configuration\nlisten 443 ssl default_server;\nlisten [::]:443 ssl default_server;\nssl_certificate /etc/ssl/certs/nginx-default.crt;\nssl_certificate_key /etc/ssl/private/nginx-default.key;\nssl_protocols TLSv1 TLSv1.1 TLSv1.2;\nssl_ciphers HIGH:!aNULL:!MD5;|g' /etc/nginx/sites-available/default
 
-        ## Así debería quedar el texto:
+        # Así debería quedar el texto:
         #  listen 443 ssl default_server;
         #  listen [::]:443 ssl default_server;
         #  ssl_certificate /etc/ssl/certs/nginxdefault.crt;

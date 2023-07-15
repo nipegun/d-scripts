@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para instalar y configurar Atomic en Debian
+# Script de NiPeGun para instalar y configurar Atomic en Debian
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-MultiCartera-Atomic-Instalar.sh | bash
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-MultiCartera-Atomic-Instalar.sh | bash
 #
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-MultiCartera-Atomic-Instalar.sh | bash
+# Ejecución remota sin caché:
+#  curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-MultiCartera-Atomic-Instalar.sh | bash
 # ----------
 
 vUsuarioNoRoot="nipegun"
@@ -120,7 +120,7 @@ elif [ $cVerSO == "11" ]; then
     echo ""
     echo "  Determinando la URL de descarga del archivo de instalación de Atomic Wallet..."
     echo ""
-    vURLArchivo=$(curl -s https://get.atomicwallet.io/download/ | grep ".deb" | grep href | grep -v sum | grep -v "atomicwallet.deb" | tail -n1 | cut -d'"' -f2 | cut -d'/' -f2)
+    vURLArchivo=$(curl -sL https://get.atomicwallet.io/download/ | grep ".deb" | grep href | grep -v sum | grep -v "atomicwallet.deb" | tail -n1 | cut -d'"' -f2 | cut -d'/' -f2)
     echo ""
     echo "    La URL de descarga del archivo es: https://get.atomicwallet.io/download/$vURLArchivo"
     echo ""
@@ -131,7 +131,7 @@ elif [ $cVerSO == "11" ]; then
     echo ""
     mkdir -p /root/SoftInst/AtomicWallet 2> /dev/null
     cd /root/SoftInst/AtomicWallet
-    curl -s https://get.atomicwallet.io/download/$vURLArchivo --output /root/SoftInst/AtomicWallet/AtomicWallet.deb
+    curl -sL https://get.atomicwallet.io/download/$vURLArchivo --output /root/SoftInst/AtomicWallet/AtomicWallet.deb
 
   # Extraer los archivos de dentro del .deb
     echo ""
