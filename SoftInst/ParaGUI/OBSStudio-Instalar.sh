@@ -96,7 +96,7 @@ elif [ $cVerSO == "10" ]; then
 
           2)
             echo ""
-            echo -e "${cColorVerde}Instalando paquetes necesarios para construir OBS...${cFinColor}"
+            echo -e "${cColorVerde}  Instalando paquetes necesarios para construir OBS...${cFinColor}"
             echo ""
             apt-get -y update
             apt-get -y install git
@@ -167,7 +167,7 @@ elif [ $cVerSO == "10" ]; then
           3)
 
             echo ""
-            echo -e "${cColorVerde}Instalando paquetes necesarios para construir OBS...${cFinColor}"
+            echo -e "${cColorVerde}  Instalando paquetes necesarios para construir OBS...${cFinColor}"
             echo ""
             apt-get -y update
             apt-get -y install git
@@ -267,9 +267,9 @@ elif [ $cVerSO == "10" ]; then
             
             echo ""
             echo -e "${cColorVerde}-----------------------------------------------------------------------------${cFinColor}"
-            echo -e "${cColorVerde}Ejecución del script, finalizada.${cFinColor}"
+            echo -e "${cColorVerde}  Ejecución del script, finalizada.${cFinColor}"
             echo -e ""
-            echo -e "${cColorVerde}Si queres tener el plugin disponible para otro usuario que no sea el root${cFinColor}"
+            echo -e "${cColorVerde}  Si queres tener el plugin disponible para otro usuario que no sea el root${cFinColor}"
             echo -e "${cColorVerde}copia la carpeta /root/.config/obs-studio/plugins dentro de la carpeta${cFinColor}"
             echo -e "${cColorVerde}del usuario correspondiente, siguiendo la estructura de carpetas correcta.${cFinColor}"
             echo -e "${cColorVerde}-----------------------------------------------------------------------------${cFinColor}"

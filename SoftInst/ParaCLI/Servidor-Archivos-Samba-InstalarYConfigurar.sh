@@ -246,7 +246,7 @@ elif [ $cVerSO == "9" ]; then
 
             1)
               echo ""
-              echo -e "${cColorVerde}Instalando los paquetes necesarios...${cFinColor}"
+              echo -e "${cColorVerde}  Instalando los paquetes necesarios...${cFinColor}"
               echo ""
               apt-get -y install libcups2 samba samba-common cups
               cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
@@ -254,7 +254,7 @@ elif [ $cVerSO == "9" ]; then
 
             2)
               echo ""
-              echo -e "${cColorVerde}Configurando las opciones globales...${cFinColor}"
+              echo -e "${cColorVerde}  Configurando las opciones globales...${cFinColor}"
               echo ""
               echo "[global]" > /etc/samba/smb.conf
               echo "  workgroup = $1" >> /etc/samba/smb.conf
@@ -274,7 +274,7 @@ elif [ $cVerSO == "9" ]; then
 
             3)
               echo ""
-              echo -e "${cColorVerde}Creando la compartición para la carpeta pública...${cFinColor}"
+              echo -e "${cColorVerde}  Creando la compartición para la carpeta pública...${cFinColor}"
               echo ""
               echo "[publica]" >> /etc/samba/smb.conf
               mkdir /publica/
@@ -291,7 +291,7 @@ elif [ $cVerSO == "9" ]; then
 
             4)
               echo ""
-              echo -e "${cColorVerde}Creando la compartición para la carpeta del usuario...${cFinColor}"
+              echo -e "${cColorVerde}  Creando la compartición para la carpeta del usuario...${cFinColor}"
               echo ""
               echo "[Usuario $3]" >> /etc/samba/smb.conf
               echo "  path = /home/$3/" >> /etc/samba/smb.conf
@@ -303,7 +303,7 @@ elif [ $cVerSO == "9" ]; then
 
             5)
               echo ""
-              echo -e "${cColorVerde}Creando la compartición de una carpeta Multimedia...${cFinColor}"
+              echo -e "${cColorVerde}  Creando la compartición de una carpeta Multimedia...${cFinColor}"
               echo ""
               echo "[Multimedia]" >> /etc/samba/smb.conf
               echo "  path = /Multimedia/" >> /etc/samba/smb.conf
@@ -317,7 +317,7 @@ elif [ $cVerSO == "9" ]; then
 
             6)
               echo ""
-              echo -e "${cColorVerde}Creando la compartición de la carpeta de las Webs...${cFinColor}"
+              echo -e "${cColorVerde}  Creando la compartición de la carpeta de las Webs...${cFinColor}"
               echo ""
               echo "[Webs]" >> /etc/samba/smb.conf
               echo "  path = /var/www/" >> /etc/samba/smb.conf
@@ -400,7 +400,7 @@ elif [ $cVerSO == "10" ]; then
 
             1)
               echo ""
-              echo -e "${cColorVerde}Instalando los paquetes necesarios...${cFinColor}"
+              echo -e "${cColorVerde}  Instalando los paquetes necesarios...${cFinColor}"
               echo ""
               apt-get -y install libcups2 samba samba-common cups
               cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
@@ -408,7 +408,7 @@ elif [ $cVerSO == "10" ]; then
 
             2)
               echo ""
-              echo -e "${cColorVerde}Configurando las opciones globales...${cFinColor}"
+              echo -e "${cColorVerde}  Configurando las opciones globales...${cFinColor}"
               echo ""
               echo "[global]"                                                     > /etc/samba/smb.conf
               echo "  workgroup = $1"                                            >> /etc/samba/smb.conf
@@ -428,7 +428,7 @@ elif [ $cVerSO == "10" ]; then
 
             3)
               echo ""
-              echo -e "${cColorVerde}Creando la compartición para la carpeta pública...${cFinColor}"
+              echo -e "${cColorVerde}  Creando la compartición para la carpeta pública...${cFinColor}"
               echo ""
               mkdir /publica/
               chown nobody:nogroup /publica/
@@ -445,7 +445,7 @@ elif [ $cVerSO == "10" ]; then
 
             4)
               echo ""
-              echo -e "${cColorVerde}Creando la compartición para la carpeta del usuario...${cFinColor}"
+              echo -e "${cColorVerde}  Creando la compartición para la carpeta del usuario...${cFinColor}"
               echo ""
               echo "[Usuario $3]"                       >> /etc/samba/smb.conf
               echo "  path = /home/$3/"                 >> /etc/samba/smb.conf
@@ -457,7 +457,7 @@ elif [ $cVerSO == "10" ]; then
 
             5)
               echo ""
-              echo -e "${cColorVerde}Creando la compartición de una carpeta Multimedia...${cFinColor}"
+              echo -e "${cColorVerde}  Creando la compartición de una carpeta Multimedia...${cFinColor}"
               echo ""
               echo "[Multimedia]"                                   >> /etc/samba/smb.conf
               echo "  path = /Discos/HDD-Multimedia/"               >> /etc/samba/smb.conf
@@ -471,7 +471,7 @@ elif [ $cVerSO == "10" ]; then
 
             6)
               echo ""
-              echo -e "${cColorVerde}Creando la compartición de la carpeta de las Webs...${cFinColor}"
+              echo -e "${cColorVerde}  Creando la compartición de la carpeta de las Webs...${cFinColor}"
               echo ""
               echo "[Webs]"                  >> /etc/samba/smb.conf
               echo "  path = /var/www/"      >> /etc/samba/smb.conf

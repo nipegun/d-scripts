@@ -21,7 +21,7 @@ NroPagIni=2
 NroPagFin=500
 
 echo ""
-echo -e "${cColorVerde}Iniciando script de descarga de torrents de YTS...${cFinColor}"
+echo -e "${cColorVerde}  Iniciando script de descarga de torrents de YTS...${cFinColor}"
 echo ""
 
 # Construir el archivo con todas las URLs de las páginas de cada peli
@@ -84,7 +84,7 @@ for EnlaceAlTorrent in $(cat $CarpetaDeDescarga/EnlacesATorrents.txt)
     curl --insecure --silent ${EnlaceAlTorrent} -o $CarpetaDeDescarga/Torrents/$Genero/"$NombreDelTorrent"
     sleep 1
   done
-  
+
 
 # Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
 if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
@@ -101,7 +101,7 @@ echo "Comprimiendo torrents en un archivo zip..."echo ""
 zip -9 -r $CarpetaDeDescarga/Torrents/$Genero.zip $CarpetaDeDescarga/Torrents/$Genero/
 
 echo ""
-echo -e "${cColorVerde}Script de descarga de torrents de YTS, finalizado...${cFinColor}"
+echo -e "${cColorVerde}  Script de descarga de torrents de YTS, finalizado...${cFinColor}"
 echo ""
 echo "Deberías encontrar el archivo .zip con los torrents en: $CarpetaDeDescarga/Torrents/$Genero/"
 echo ""

@@ -13,7 +13,7 @@ cColorVerde="\033[1;32m"
 cFinColor="\033[0m"
 
 echo ""
-echo -e "${cColorVerde}Bloqueando los servidores de Ivoox...${cFinColor}"
+echo -e "${cColorVerde}  Bloqueando los servidores de Ivoox...${cFinColor}"
 echo ""
 
 # Obtener la IP de Ivoox.com

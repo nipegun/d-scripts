@@ -20,7 +20,7 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 echo ""
-echo -e "${cColorVerde}Instalando PHP 7.4 desde el repo de sury.org...${cFinColor}"
+echo -e "${cColorVerde}  Instalando PHP 7.4 desde el repo de sury.org...${cFinColor}"
 echo ""
 
 # Agregar el repositorio de sury.org

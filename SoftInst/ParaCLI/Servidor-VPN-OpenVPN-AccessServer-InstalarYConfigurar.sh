@@ -65,12 +65,12 @@ elif [ $cVerSO == "9" ]; then
   IPDelServidor=$(hostname -I)
 
   echo ""
-  echo -e "${cColorVerde}Instalando paquetes requeridos...${cFinColor}"
+  echo -e "${cColorVerde}  Instalando paquetes requeridos...${cFinColor}"
   echo ""
   apt-get -y install net-tools
 
   echo ""
-  echo -e "${cColorVerde}Instalando OpenVPN Access Server...${cFinColor}"
+  echo -e "${cColorVerde}  Instalando OpenVPN Access Server...${cFinColor}"
   echo ""
   mkdir -p /root/Paquetes
   wget --no-check-certificate -P /root/Paquetes/ https://openvpn.net/downloads/openvpn-as-latest-debian9.amd_64.deb
@@ -78,7 +78,7 @@ elif [ $cVerSO == "9" ]; then
   echo -e "openvpn\nopenvpn" | passwd openvpn
 
   echo ""
-  echo -e "${cColorVerde}OpenVPN Access Server se ha terminado de instalar...${cFinColor}"
+  echo -e "${cColorVerde}  OpenVPN Access Server se ha terminado de instalar...${cFinColor}"
   echo ""
   echo "  Podrás conectarte al Web UI de OpenVPN Access Server mediante las siguientes direcciones:"
   echo "  $IPDelServidor:943       (para los usuarios normales)"

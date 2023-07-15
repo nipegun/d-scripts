@@ -34,7 +34,7 @@ if [ $# -ne $cCantArgsEsperados ]
     exit
   else
     echo ""
-    echo -e "${cColorVerde}Ejecutando la copia de seguridad...${cFinColor}"
+    echo -e "${cColorVerde}  Ejecutando la copia de seguridad...${cFinColor}"
     echo ""
     mkdir -p /CopSeg/$1/etc/apache2/sites-available/
     cp /etc/apache2/sites-available/$1.conf /CopSeg/$1/etc/apache2/sites-available/

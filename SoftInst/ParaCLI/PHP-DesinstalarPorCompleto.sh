@@ -17,7 +17,7 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 echo ""
-echo -e "${cColorVerde}Desinstalando PHP por completo...${cFinColor}"
+echo -e "${cColorVerde}  Desinstalando PHP por completo...${cFinColor}"
 echo ""
 
 NroPHP=$(php -v | head -1 | cut -d " " -f 2 | cut -c 1-3)

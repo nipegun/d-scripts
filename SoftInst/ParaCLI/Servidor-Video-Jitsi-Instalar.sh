@@ -112,7 +112,7 @@ elif [ $cVerSO == "10" ]; then
             else
 
               echo ""
-              echo -e "${cColorVerde}Instalando jitsi-meet...${cFinColor}"
+              echo -e "${cColorVerde}  Instalando jitsi-meet...${cFinColor}"
               echo ""
   
               #HostName=$(cat /etc/hostname)

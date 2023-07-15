@@ -90,23 +90,23 @@ elif [ $cVerSO == "10" ]; then
       exit
     else
       echo ""
-      echo -e "${cColorVerde}Creando las carpetas para las descargas...${cFinColor}"
+      echo -e "${cColorVerde}  Creando las carpetas para las descargas...${cFinColor}"
       echo ""
       mkdir -p $1
       mkdir -p $2
     
       echo ""
-      echo -e "${cColorVerde}Instalando el paquete transission-daemon...${cFinColor}"
+      echo -e "${cColorVerde}  Instalando el paquete transission-daemon...${cFinColor}"
       echo ""
       apt-get -y install transmission-daemon
 
       echo ""
-      echo -e "${cColorVerde}Deteniendo el servicio transmission-daemon${cFinColor}"
+      echo -e "${cColorVerde}  Deteniendo el servicio transmission-daemon${cFinColor}"
       echo ""
       service transmission-daemon stop
 
       echo ""
-      echo -e "${cColorVerde}Realizando cambios en la configuración...${cFinColor}"
+      echo -e "${cColorVerde}  Realizando cambios en la configuración...${cFinColor}"
       echo ""
       cp /etc/transmission-daemon/settings.json /etc/transmission-daemon/settings.json.bak
       sed -i -e 's|"download-dir": "/var/lib/transmission-daemon/downloads",|"download-dir": "'$1'",|g'     /etc/transmission-daemon/settings.json
@@ -119,24 +119,24 @@ elif [ $cVerSO == "10" ]; then
       sed -i -e 's|"umask": 18,|"umask": 2,|g'                                                              /etc/transmission-daemon/settings.json
 
       echo ""
-      echo -e "${cColorVerde}Agregando el usuario al grupo transmission-daemon...${cFinColor}"
+      echo -e "${cColorVerde}  Agregando el usuario al grupo transmission-daemon...${cFinColor}"
       echo ""
       usermod -a -G debian-transmission $4
 
       echo ""
-      echo -e "${cColorVerde}Cambiando el grupo propietario de lsa carpetas $1 y $2...${cFinColor}"
+      echo -e "${cColorVerde}  Cambiando el grupo propietario de lsa carpetas $1 y $2...${cFinColor}"
       echo ""
       chgrp debian-transmission $1
       chgrp debian-transmission $2
     
       echo ""
-      echo -e "${cColorVerde}Dando permisos de escritura al grupo...${cFinColor}"
+      echo -e "${cColorVerde}  Dando permisos de escritura al grupo...${cFinColor}"
       echo ""
       chmod 770 $1
       chmod 770 $2
 
       echo ""
-      echo -e "${cColorVerde}Iniciando el servicio transmission-daemon...${cFinColor}"
+      echo -e "${cColorVerde}  Iniciando el servicio transmission-daemon...${cFinColor}"
       echo ""
       service transmission-daemon start
 
@@ -179,23 +179,23 @@ CantArgsRequeridos=4
       exit
     else
       echo ""
-      echo -e "${cColorVerde}Creando las carpetas para las descargas...${cFinColor}"
+      echo -e "${cColorVerde}  Creando las carpetas para las descargas...${cFinColor}"
       echo ""
       mkdir -p $1
       mkdir -p $2
     
       echo ""
-      echo -e "${cColorVerde}Instalando el paquete transission-daemon...${cFinColor}"
+      echo -e "${cColorVerde}  Instalando el paquete transission-daemon...${cFinColor}"
       echo ""
       apt-get -y install transmission-daemon
 
       echo ""
-      echo -e "${cColorVerde}Deteniendo el servicio transmission-daemon${cFinColor}"
+      echo -e "${cColorVerde}  Deteniendo el servicio transmission-daemon${cFinColor}"
       echo ""
       service transmission-daemon stop
 
       echo ""
-      echo -e "${cColorVerde}Realizando cambios en la configuración...${cFinColor}"
+      echo -e "${cColorVerde}  Realizando cambios en la configuración...${cFinColor}"
       echo ""
       cp /etc/transmission-daemon/settings.json /etc/transmission-daemon/settings.json.bak
       sed -i -e 's|"download-dir": "/var/lib/transmission-daemon/downloads",|"download-dir": "'$1'",|g'     /etc/transmission-daemon/settings.json
@@ -208,24 +208,24 @@ CantArgsRequeridos=4
       sed -i -e 's|"umask": 18,|"umask": 2,|g'                                                              /etc/transmission-daemon/settings.json
 
       echo ""
-      echo -e "${cColorVerde}Agregando el usuario al grupo transmission-daemon...${cFinColor}"
+      echo -e "${cColorVerde}  Agregando el usuario al grupo transmission-daemon...${cFinColor}"
       echo ""
       usermod -a -G debian-transmission $4
 
       echo ""
-      echo -e "${cColorVerde}Cambiando el grupo propietario de lsa carpetas $1 y $2...${cFinColor}"
+      echo -e "${cColorVerde}  Cambiando el grupo propietario de lsa carpetas $1 y $2...${cFinColor}"
       echo ""
       chgrp debian-transmission $1
       chgrp debian-transmission $2
     
       echo ""
-      echo -e "${cColorVerde}Dando permisos de escritura al grupo...${cFinColor}"
+      echo -e "${cColorVerde}  Dando permisos de escritura al grupo...${cFinColor}"
       echo ""
       chmod 770 $1
       chmod 770 $2
 
       echo ""
-      echo -e "${cColorVerde}Iniciando el servicio transmission-daemon...${cFinColor}"
+      echo -e "${cColorVerde}  Iniciando el servicio transmission-daemon...${cFinColor}"
       echo ""
       service transmission-daemon start
 

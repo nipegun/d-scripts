@@ -267,23 +267,23 @@ if [ $# -ne $cCantArgsEsperados ]
             # sed -i -e's|key server.key  # This file should be kept secret|key ServidorOpenVPN.key|g' /etc/openvpn/server.conf
             
             echo ""
-            echo -e "${cColorVerde}Activando el forwarding...${cFinColor}"
+            echo -e "${cColorVerde}  Activando el forwarding...${cFinColor}"
             echo ""
             sed -i -e 's|#net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
             
             echo ""
-            echo -e "${cColorVerde}Creando las reglas IPTables...${cFinColor}"
+            echo -e "${cColorVerde}  Creando las reglas IPTables...${cFinColor}"
             echo ""
             echo "# OpenVPN" >> /root/ComandosIPTables
             echo "iptables -t nat-A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE" >> /root/ComandosIPTables
             
             echo ""
-            echo -e "${cColorVerde}Activando el servicio...${cFinColor}"
+            echo -e "${cColorVerde}  Activando el servicio...${cFinColor}"
             echo ""
             systemctl enable openvpn
             
             echo ""
-            echo -e "${cColorVerde}Creando la infraestructura de configuración de los clientes...${cFinColor}"
+            echo -e "${cColorVerde}  Creando la infraestructura de configuración de los clientes...${cFinColor}"
             echo ""
             mkdir -p /root/VPN/client-configs/files
             cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /root/VPN/client-configs/base.conf
@@ -301,7 +301,7 @@ if [ $# -ne $cCantArgsEsperados ]
             echo "# down /etc/openvpn/update-resolv-conf" >> /root/VPN/client-configs/base.conf
             
             echo ""
-            echo -e "${cColorVerde}Creando el script para agregar usuarios...${cFinColor}"
+            echo -e "${cColorVerde}  Creando el script para agregar usuarios...${cFinColor}"
             echo ""
             echo '#!/bin/bash' > /root/VPN/client-configs/make_config.sh
             echo "" >> /root/VPN/client-configs/make_config.sh

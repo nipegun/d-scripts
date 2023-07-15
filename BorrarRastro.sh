@@ -105,7 +105,7 @@ echo ""
 
 echo ""
 echo -e "${cColorVerde}----------------------------------------------------${cFinColor}"
-echo -e "${cColorVerde}Script finalizado. Vuelve a ejecutar:${cFinColor}"
+echo -e "${cColorVerde}  Script finalizado. Vuelve a ejecutar:${cFinColor}"
 echo ""
 echo -e "${cColorVerde}history -c${cFinColor}"
 echo ""

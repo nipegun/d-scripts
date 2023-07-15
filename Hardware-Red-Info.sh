@@ -13,7 +13,7 @@ cColorVerde="\033[1;32m"
 cFinColor="\033[0m"
 
 echo ""
-echo -e "${cColorVerde}Mostrando información sobre el hardware de red...${cFinColor}"
+echo -e "${cColorVerde}  Mostrando información sobre el hardware de red...${cFinColor}"
 echo ""
 
 # Comprobar si el paquete lshw está instalado. Si no lo está, instalarlo.

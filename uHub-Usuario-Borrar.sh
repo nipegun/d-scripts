@@ -29,7 +29,7 @@ if [ $# -ne $cCantArgsEsperados ]
     exit
   else
     echo ""
-    echo -e "${cColorVerde}Borrando el usuario $1 del Hub...${cFinColor}"
+    echo -e "${cColorVerde}  Borrando el usuario $1 del Hub...${cFinColor}"
     echo ""
     uhub-passwd /etc/uhub/users.db del $1
     systemctl restart uhub.service

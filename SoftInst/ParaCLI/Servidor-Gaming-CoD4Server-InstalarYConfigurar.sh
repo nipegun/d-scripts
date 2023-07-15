@@ -77,7 +77,7 @@ elif [ $cVerSO == "10" ]; then
   echo ""
 
   echo ""
-  echo -e "${cColorVerde}Instalando el servidor cod4server...${cFinColor}"
+  echo -e "${cColorVerde}  Instalando el servidor cod4server...${cFinColor}"
   echo ""
 
   echo ""

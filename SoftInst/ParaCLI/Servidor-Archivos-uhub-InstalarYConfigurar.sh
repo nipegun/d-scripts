@@ -95,7 +95,7 @@ elif [ $cVerSO == "10" ]; then
 
           1)
             echo ""
-            echo -e "${cColorVerde}Instalando la versión disponible en los repos de Debian...${cFinColor}"
+            echo -e "${cColorVerde}  Instalando la versión disponible en los repos de Debian...${cFinColor}"
             echo ""
             apt-get -y update 2> /dev/null
             apt-get -y install uhub
@@ -166,7 +166,7 @@ elif [ $cVerSO == "10" ]; then
           2)
 
             echo ""
-            echo -e "${cColorVerde}Instalando los paquetes binarios de Tehnick...${cFinColor}"
+            echo -e "${cColorVerde}  Instalando los paquetes binarios de Tehnick...${cFinColor}"
             echo ""
             apt-get -y update 2> /dev/mull
             apt-get -y install software-properties-common 2> /dev/mull
@@ -180,7 +180,7 @@ elif [ $cVerSO == "10" ]; then
 
           3)
             echo ""
-            echo -e "${cColorVerde}Bajando, compilando e instalando la versión de GitHub...${cFinColor}"
+            echo -e "${cColorVerde}  Bajando, compilando e instalando la versión de GitHub...${cFinColor}"
             echo ""
             apt-get -y install cmake
             apt-get -y install make
@@ -302,7 +302,7 @@ elif [ $cVerSO == "11" ]; then
 
           1)
             echo ""
-            echo -e "${cColorVerde}Instalando la versión disponible en los repos de Debian...${cFinColor}"
+            echo -e "${cColorVerde}  Instalando la versión disponible en los repos de Debian...${cFinColor}"
             echo ""
             apt-get -y update 2> /dev/null
             apt-get -y install uhub
@@ -373,7 +373,7 @@ elif [ $cVerSO == "11" ]; then
           2)
 
             echo ""
-            echo -e "${cColorVerde}Instalando los paquetes binarios de Tehnick...${cFinColor}"
+            echo -e "${cColorVerde}  Instalando los paquetes binarios de Tehnick...${cFinColor}"
             echo ""
             apt-get -y update 2> /dev/mull
             apt-get -y install software-properties-common 2> /dev/mull
@@ -387,7 +387,7 @@ elif [ $cVerSO == "11" ]; then
 
           3)
             echo ""
-            echo -e "${cColorVerde}Iniciando el script para bajar, compilar e instalar la versión de GitHub de uhub...${cFinColor}"
+            echo -e "${cColorVerde}  Iniciando el script para bajar, compilar e instalar la versión de GitHub de uhub...${cFinColor}"
             echo ""
 
             echo ""

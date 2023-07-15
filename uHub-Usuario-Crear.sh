@@ -29,7 +29,7 @@ if [ $# -ne $cCantArgsEsperados ]
     exit
   else
     echo ""
-    echo -e "${cColorVerde}Agregando el nuevo usuario a uHub...${cFinColor}"
+    echo -e "${cColorVerde}  Agregando el nuevo usuario a uHub...${cFinColor}"
     echo ""
     uhub-passwd /etc/uhub/users.db add $1 $2
     systemctl restart uhub.service

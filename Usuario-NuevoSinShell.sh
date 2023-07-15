@@ -52,14 +52,14 @@ if [ $# -ne $cCantArgEsperados ]
       case $choice in
         1)
           echo ""
-          echo -e "${cColorVerde}Creando el usuario $1...${cFinColor}"
+          echo -e "${cColorVerde}  Creando el usuario $1...${cFinColor}"
           echo ""
           useradd -d /home/$1/ -s /bin/false $1
         ;;
 
         2)
           echo ""
-          echo -e "${cColorVerde}Creando la carpeta del usuario con permisos estándar...${cFinColor}"
+          echo -e "${cColorVerde}  Creando la carpeta del usuario con permisos estándar...${cFinColor}"
           echo ""
           mkdir /home/$1/
           chown $1:$1 /home/$1/ -R
@@ -70,7 +70,7 @@ if [ $# -ne $cCantArgEsperados ]
 
         3)
           echo ""
-          echo -e "${cColorVerde}Denegando el acceso a la carpeta /home/$1 a los otros usuarios...${cFinColor}"
+          echo -e "${cColorVerde}  Denegando el acceso a la carpeta /home/$1 a los otros usuarios...${cFinColor}"
           echo ""
           find /home/$1 -type d -print0 | xargs -0 chmod 0750
           echo "hacks4geeks rules da net" > /home/$1/$1
@@ -79,7 +79,7 @@ if [ $# -ne $cCantArgEsperados ]
 
         4)
           echo ""
-          echo -e "${cColorVerde}Creando la compartición Samba para la carpeta de usuario...${cFinColor}"
+          echo -e "${cColorVerde}  Creando la compartición Samba para la carpeta de usuario...${cFinColor}"
           echo ""
           echo "[$1]"                               >> /etc/samba/smb.conf
           echo "  path = /home/$1/"                 >> /etc/samba/smb.conf

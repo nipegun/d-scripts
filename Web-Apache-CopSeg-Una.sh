@@ -32,7 +32,7 @@ echo ""
 
 # Ejecutar copia
   echo ""
-  echo -e "${cColorVerde}Ejecutando copia de seguridad interna...${cFinColor}"
+  echo -e "${cColorVerde}  Ejecutando copia de seguridad interna...${cFinColor}"
   echo ""
 
   # Archivos de la Web
@@ -72,5 +72,5 @@ echo ""
   chown $vUsuarioHome:$vUsuarioHome /CopSegInt/ -R
 
 echo ""
-echo -e "${cColorVerde}Fin del proceso de copia de seguridad...${cFinColor}"
+echo -e "${cColorVerde}  Fin del proceso de copia de seguridad...${cFinColor}"
 echo ""

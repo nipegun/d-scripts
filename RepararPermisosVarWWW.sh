@@ -33,6 +33,6 @@ chown root:root /var/www
 echo "..."
 echo ""
 echo "La reparación de permisos se terminó de ejecutar el $FechaDeEjec" >> /var/log/RepPermisos.log
-echo -e "${cColorVerde}Proceso de reparación de permisos de /var/www, finalizado.${cFinColor}"
+echo -e "${cColorVerde}  Proceso de reparación de permisos de /var/www, finalizado.${cFinColor}"
 echo ""
 

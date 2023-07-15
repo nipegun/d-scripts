@@ -77,7 +77,7 @@ elif [ $cVerSO == "10" ]; then
   echo ""
 
   echo ""
-  echo -e "${cColorVerde}Instalando el dibujador del mapa...${cFinColor}"
+  echo -e "${cColorVerde}  Instalando el dibujador del mapa...${cFinColor}"
   echo ""
 
   apt-get -y update > /dev/null
@@ -107,7 +107,7 @@ elif [ $cVerSO == "11" ]; then
   echo ""
 
   echo ""
-  echo -e "${cColorVerde}Instalando el dibujador del mapa...${cFinColor}"
+  echo -e "${cColorVerde}  Instalando el dibujador del mapa...${cFinColor}"
   echo ""
 
   apt-get -y update > /dev/null

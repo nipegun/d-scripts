@@ -53,7 +53,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}Iniciando el script de instalación de lighthttpd para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de lighthttpd para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
@@ -63,7 +63,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}Iniciando el script de instalación de lighthttpd para Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de lighthttpd para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
@@ -73,7 +73,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}Iniciando el script de instalación de lighthttpd para Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de lighthttpd para Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   echo ""
@@ -83,7 +83,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}Iniciando el script de instalación de lighthttpd para Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de lighthttpd para Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   echo ""

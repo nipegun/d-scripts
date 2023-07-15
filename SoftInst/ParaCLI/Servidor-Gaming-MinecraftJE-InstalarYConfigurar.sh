@@ -77,7 +77,7 @@ elif [ $cVerSO == "10" ]; then
   echo ""
 
   echo ""
-  echo -e "${cColorVerde}Instalando el servidor mcserver...${cFinColor}"
+  echo -e "${cColorVerde}  Instalando el servidor mcserver...${cFinColor}"
   echo ""
 
   echo ""
@@ -127,7 +127,7 @@ elif [ $cVerSO == "11" ]; then
   echo ""
 
   echo ""
-  echo -e "${cColorVerde}Instalando el servidor mcserver...${cFinColor}"
+  echo -e "${cColorVerde}  Instalando el servidor mcserver...${cFinColor}"
   echo ""
 
   echo ""

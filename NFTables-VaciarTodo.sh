@@ -14,7 +14,7 @@ cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
 echo ""
-echo -e "${cColorVerde}Vaciando las reglas de NFTables...${cFinColor}"
+echo -e "${cColorVerde}  Vaciando las reglas de NFTables...${cFinColor}"
 nft flush ruleset
 echo ""
 

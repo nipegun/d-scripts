@@ -31,7 +31,7 @@ if [ $# -ne $cCantArgsEsperados ]
     exit
   else
     echo ""
-    echo -e "${cColorVerde}Mostrando el archivo $1 en tiempo real, según se va modificando ...${cFinColor}"
+    echo -e "${cColorVerde}  Mostrando el archivo $1 en tiempo real, según se va modificando ...${cFinColor}"
     echo ""
     tailf $1
 fi

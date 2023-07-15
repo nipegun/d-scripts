@@ -33,7 +33,7 @@ menu=(dialog --timeout 5 --checklist "Elección del mando a instalar:" 22 76 16)
 
         1)
           echo ""
-          echo -e "${cColorVerde}Instalando controladores para el adaptador USB de los mandos de la XBox One...${cFinColor}"
+          echo -e "${cColorVerde}  Instalando controladores para el adaptador USB de los mandos de la XBox One...${cFinColor}"
           echo ""
           mkdir /root/Controladores/
           cd /root/Controladores/
