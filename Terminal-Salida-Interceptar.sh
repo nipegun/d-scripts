@@ -13,25 +13,25 @@
 # ----------
 
 # Definir variables de color
-  vColorAzul="\033[0;34m"
-  vColorAzulClaro="\033[1;34m"
-  vColorVerde='\033[1;32m'
-  vColorRojo='\033[1;31m'
-  vFinColor='\033[0m'
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}" >&2
     exit 1
   fi
 
-vCantArgsCorrectos=1
-vArgsInsuficientes=65
+cCantArgsCorrectos=1
+v
 
-if [ $# -ne $vCantArgsCorrectos ]
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo -e "${vColorRojo}  Mal uso del script. El uso correcto sería: ${vFinColor}"
+    echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
     echo "    $0 [NombreDelSoftware]"
     echo ""
     echo "  Ejemplo:"
@@ -42,7 +42,7 @@ if [ $# -ne $vCantArgsCorrectos ]
     # Comprobar si el paquete strace está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s strace 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${vColorRojo}  strace no está instalado. Iniciando su instalación...${vFinColor}"
+        echo -e "${cColorRojo}  strace no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
         apt-get -y update
         apt-get -y install strace

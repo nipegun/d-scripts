@@ -6,20 +6,20 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-#  Script de NiPeGun para crear un video a partir de todos los archivos de imagen de una carpeta dada
+# Script de NiPeGun para crear un video a partir de todos los archivos de imagen de una carpeta dada
 #
-#  Ejecución remota:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash
 #
-#  Ejecución remota sin caché:
-#  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash
+# Ejecución remota sin caché:
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash
 #
-#  Ejecución remota con parámetros:
-#  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash -s "/home/videovig/" "jpg"
+# Ejecución remota con parámetros:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Video-CrearAPartirDeArchivosEnCarpeta.sh | bash -s "/home/videovig/" "jpg"
 #
-#  Para agregar este script a cron:
-#    crontab -e
-#    59 23 * * * /root/scripts/-d-scripts/Video-CrearAPartirDeArchivosEnCarpeta.sh "/home/videovig/" "jpg"
+# Para agregar este script a cron:
+#   crontab -e
+#   59 23 * * * /root/scripts/-d-scripts/Video-CrearAPartirDeArchivosEnCarpeta.sh "/home/videovig/" "jpg"
 # ----------
 
 #vCarpetaConArchivos="/home/videovig/"
@@ -28,19 +28,18 @@
 vCarpetaConArchivos=$1
 vExt=$2
 
-vColorAzul="\033[0;34m"
-vColorAzulClaro="\033[1;34m"
-vColorVerde='\033[1;32m'
-vColorRojo='\033[1;31m'
-vFinColor='\033[0m'
+cColorAzul="\033[0;34m"
+cColorAzulClaro="\033[1;34m"
+cColorVerde='\033[1;32m'
+cColorRojo='\033[1;31m'
+cFinColor='\033[0m'
 
-vCantArgsCorrectos=2
-vArgsInsuficientes=65
+cCantArgsCorrectos=2
 
-if [ $# -ne $vCantArgsCorrectos ]
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo -e "${vColorRojo}  Mal uso del script. El uso correcto sería: ${vFinColor}"
+    echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
     echo                 "    script [CarpetaConArchivos] [Extensión]"
     echo ""
     echo                 "  Ejemplo:"
@@ -49,7 +48,7 @@ if [ $# -ne $vCantArgsCorrectos ]
     exit $vArgsInsuficientes
   else
     echo ""
-    echo -e "${vColorAzulClaro}  Creando video a partir de los archivos de imagen ubicados en $vCarpetaConArchivos ... ${vFinColor}"
+    echo -e "${vColorAzulClaro}  Creando video a partir de los archivos de imagen ubicados en $vCarpetaConArchivos ... ${cFinColor}"
     echo ""
     vFecha=$(date +A%YM%mD%d)
     vYear=$(date +%Y)
@@ -58,7 +57,7 @@ if [ $# -ne $vCantArgsCorrectos ]
     # Comprobar si el paquete ffmpeg está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s ffmpeg 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${vColorRojo}  El paquete ffmpeg no está instalado. Iniciando su instalación...${vFinColor}"
+        echo -e "${cColorRojo}  El paquete ffmpeg no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
         apt-get -y update && apt-get -y install ffmpeg
         echo ""

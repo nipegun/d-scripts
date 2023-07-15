@@ -9,11 +9,11 @@
 #  Script de NiPeGun para mostrar información sobre la tarjeta gráfica
 # ----------
 
-vColorVerde="\033[1;32m"
-vFinColor="\033[0m"
+ccColorVerde="\033[1;32m"
+ccFinColor="\033[0m"
 
 echo ""
-echo -e "${vColorVerde}  Mostrando información sobre la/las tarjeta gráfica/s...${vFinColor}"
+echo -e "${cColorVerde}  Mostrando información sobre la/las tarjeta gráfica/s...${cFinColor}"
 echo ""
 
 lspci -vvkknn -d ::300

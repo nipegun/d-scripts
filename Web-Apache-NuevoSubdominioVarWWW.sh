@@ -5,28 +5,29 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para crear un subdominio para una web de /var/www
-#-----------------------------------------------------------------------
+# ----------
 
-total_param_corr=3
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vCantParamCorr=3
 
-if [ $# -ne $total_param_corr ]; then
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
+
+if [ $# -ne $vCantParamCorr ]; then
 
   echo ""
-  echo -e "${ColorRojo}Mal uso del script. Se le deben pasar tres parámetros obligatorios:${FinColor}"
+  echo -e "${cColorRojo}Mal uso del script. Se le deben pasar tres parámetros obligatorios:${cFinColor}"
   echo ""
-  echo -e "${ColorVerde}[SubDominioConPunto] [Dominio] [ExtensionDelDominio]${FinColor}"
+  echo -e "${cColorVerde}[SubDominioConPunto] [Dominio] [ExtensionDelDominio]${cFinColor}"
   echo ""
   echo "Ejemplo:"
   echo ""
-  echo -e "$0 ${ColorVerde}nube. unawebcualquiera .org${FinColor}"
+  echo -e "$0 ${cColorVerde}nube. unawebcualquiera .org${cFinColor}"
   echo ""
   exit
-  
+
 else
 
   # Crear las carpetas para el subdominio
@@ -89,7 +90,7 @@ else
   echo ""                                                                >> /var/www/$1$2$3/.htaccess
   echo "# END Medidas de seguridad"                                      >> /var/www/$1$2$3/.htaccess
   echo ""                                                                >> /var/www/$1$2$3/.htaccess
-   
+
   # Proteger los logs
   echo ""
   echo "$(tput setaf 2)Protegiendo los logs con un .htaccess específico... $(tput sgr 0)"
@@ -121,6 +122,6 @@ else
   find /var/www/$1$2$3/ -type d -exec chmod 755 {} \;
   find /var/www/$1$2$3/ -type f -exec chmod 644 {} \;
   chown -v root:root /var/www
-   
+
 fi
 

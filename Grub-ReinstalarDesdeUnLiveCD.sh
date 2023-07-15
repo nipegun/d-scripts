@@ -9,22 +9,22 @@
 #  Script de NiPeGun para reinstalar Grub desde un LiveCD
 # ----------
 
-CantArgsCorrectos=2
-ArgsInsuficientes=65
+cCantArgsCorrectos=2
 
-if [ $# -ne $CantArgsCorrectos ]
+
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
+    
     echo "Mal uso del script."
     echo ""
     echo "El uso correcto sería: $0 [Disco] [Partición]"
     echo ""
     echo "Ejemplo:"
     echo ' $0 /dev/sda 1'
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     echo ""
     echo "  Reinstalando Grub en la partición $1"

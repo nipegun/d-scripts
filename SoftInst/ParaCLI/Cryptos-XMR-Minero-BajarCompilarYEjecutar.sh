@@ -17,15 +17,15 @@
 vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"
 
 # Definir variables de color
-  vColorAzul="\033[0;34m"
-  vColorAzulClaro="\033[1;34m"
-  vColorVerde='\033[1;32m'
-  vColorRojo='\033[1;31m'
-  vFinColor='\033[0m'
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  cFinColor='\033[0m'
 
 # Notificar el inicio de ejecución del script
   echo ""
-  echo -e "${ColorAzulClaro}  Iniciando el script de compilación y ejecución de XMRig...${FinColor}"
+  echo -e "${ColorAzulClaro}  Iniciando el script de compilación y ejecución de XMRig...${cFinColor}"
   echo ""
 
 # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.

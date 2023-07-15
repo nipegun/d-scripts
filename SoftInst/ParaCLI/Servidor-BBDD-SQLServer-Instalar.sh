@@ -15,55 +15,55 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-SQLServer-Instalar.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
     . /etc/os-release
-    OS_NAME=$NAME
-    OS_VERS=$VERSION_ID
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
   elif type lsb_release >/dev/null 2>&1; then # linuxbase.org
-    OS_NAME=$(lsb_release -si)
-    OS_VERS=$(lsb_release -sr)
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
   elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release
     . /etc/lsb-release
-    OS_NAME=$DISTRIB_ID
-    OS_VERS=$DISTRIB_RELEASE
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
   elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
-    OS_NAME=Debian
-    OS_VERS=$(cat /etc/debian_version)
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
   else                                        # Para el viejo uname (También funciona para BSD)
-    OS_NAME=$(uname -s)
-    OS_VERS=$(uname -r)
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
   fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------"
+
   echo "  Iniciando el script de instalación del servidor SQLServer para Debian 7 (Wheezy)..."
-  echo "--------------------------------------------------------------------------------------"
+
   echo ""
 
   echo ""
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "8" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------"
+
   echo "  Iniciando el script de instalación del servidor SQLServer para Debian 8 (Jessie)..."
-  echo "--------------------------------------------------------------------------------------"
+
   echo ""
 
   echo ""
   echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "---------------------------------------------------------------------------------------"
@@ -75,7 +75,7 @@ elif [ $OS_VERS == "9" ]; then
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "10" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "---------------------------------------------------------------------------------------"
@@ -87,7 +87,7 @@ elif [ $OS_VERS == "10" ]; then
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "----------------------------------------------------------------------------------------"
@@ -98,7 +98,7 @@ elif [ $OS_VERS == "11" ]; then
   # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${vColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
+      echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
       apt-get -y update
       apt-get -y install curl
@@ -110,7 +110,7 @@ elif [ $OS_VERS == "11" ]; then
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${vColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
+        echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
         apt-get -y update
         apt-get -y install wget
@@ -119,7 +119,7 @@ elif [ $OS_VERS == "11" ]; then
     # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${vColorRojo}  El paquete gnupg2 no está instalado. Iniciando su instalación...${vFinColor}"
+        echo -e "${cColorRojo}  El paquete gnupg2 no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
         apt-get -y update
         apt-get -y install gnupg2

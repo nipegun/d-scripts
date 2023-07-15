@@ -12,29 +12,29 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Apache2-ReiniciarSiNoActivo.sh | bash
 # ----------
 
-vColorAzul="\033[0;34m"
-vColorAzulClaro="\033[1;34m"
-vColorVerde='\033[1;32m'
-vColorRojo='\033[1;31m'
-vFinColor='\033[0m'
+cColorAzul="\033[0;34m"
+cColorAzulClaro="\033[1;34m"
+cColorVerde='\033[1;32m'
+cColorRojo='\033[1;31m'
+cFinColor='\033[0m'
 
 vNombreDelServicio="$1"
 
 vEstaCargado=$(systemctl status $vNombreDelServicio.service | grep "oaded:" | cut -d':' -f2 | sed 's- --g' | cut -d'(' -f1)
 if [[ $vEstaCargado == "loaded" ]]; then
   echo ""
-  echo -e "${vColorVerde}  El servicio $vNombreDelServicio está cargado.${vFinColor} Comprobando si está activo..."
+  echo -e "${cColorVerde}  El servicio $vNombreDelServicio está cargado.${cFinColor} Comprobando si está activo..."
   vEstaActivo=$(systemctl status $vNombreDelServicio.service | grep "ctive:" | cut -d':' -f2 | sed 's- --g' | cut -d'(' -f1)
   if [[ $vEstaActivo == "inactive" ]]; then
     echo ""
-    echo -e "${vColorRojo}    El servicio $vNombreDelServicio está inactivo.${vFinColor} Intentando levantarlo..."
+    echo -e "${cColorRojo}    El servicio $vNombreDelServicio está inactivo.${cFinColor} Intentando levantarlo..."
     echo ""
     systemctl restart $vNombreDelServicio.service
     systemctl status $vNombreDelServicio.service --no-pager
     echo ""
   elif [[ $vEstaActivo == "active" ]]; then
     echo ""
-    echo -e "${vColorVerde}    El servicio $vNombreDelServicio está activo.${vFinColor} No se realizará ninguna acción."
+    echo -e "${cColorVerde}    El servicio $vNombreDelServicio está activo.${cFinColor} No se realizará ninguna acción."
     echo ""
   fi
 else

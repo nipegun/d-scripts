@@ -15,11 +15,11 @@
 #  curl -s -H 'Cache-Control: no-cache, no-store' x | bash
 # ----------
 
-vColorAzul="\033[0;34m"
-vColorAzulClaro="\033[1;34m"
-vColorVerde='\033[1;32m'
-vColorRojo='\033[1;31m'
-vFinColor='\033[0m'
+cColorAzul="\033[0;34m"
+cColorAzulClaro="\033[1;34m"
+cColorVerde='\033[1;32m'
+cColorRojo='\033[1;31m'
+cFinColor='\033[0m'
 
 # Definir los octetos finales a recorrer.
 for vSubRed in {0..5}
@@ -34,7 +34,7 @@ for vSubRed in {0..5}
           # Comprobar si el paquete nmap está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s nmap 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${vColorRojo}  nmap no está instalado. Iniciando su instalación...${vFinColor}"
+              echo -e "${cColorRojo}  nmap no está instalado. Iniciando su instalación...${cFinColor}"
               echo ""
               apt-get -y update
               apt-get -y install nmap

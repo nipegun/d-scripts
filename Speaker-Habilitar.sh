@@ -5,9 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------------
+# ----------
 #  SCRIPT DE NIPEGUN PARA HABILITAR EL SPEAKER EN DEBIAN
-#---------------------------------------------------------
+# ----------
 
 sed -i "s|^set bell-style none|# set bell-style none|g" /etc/inputrc
 

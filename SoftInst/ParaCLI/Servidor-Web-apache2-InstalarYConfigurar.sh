@@ -13,89 +13,89 @@
 # ----------
 
 # Definir variables de color
-  vColorAzul="\033[0;34m"
-  vColorAzulClaro="\033[1;34m"
-  vColorVerde='\033[1;32m'
-  vColorRojo='\033[1;31m'
-  vFinColor='\033[0m'
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}" >&2
     exit 1
   fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
-    OS_NAME=$NAME
-    OS_VERS=$VERSION_ID
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
   elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
-    OS_NAME=$(lsb_release -si)
-    OS_VERS=$(lsb_release -sr)
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
   elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
     . /etc/lsb-release
-    OS_NAME=$DISTRIB_ID
-    OS_VERS=$DISTRIB_RELEASE
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
   elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
-    OS_NAME=Debian
-    OS_VERS=$(cat /etc/debian_version)
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
   else                                        # Para el viejo uname (También funciona para BSD).
-    OS_NAME=$(uname -s)
-    OS_VERS=$(uname -r)
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
   fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 7 (Wheezy)...${vFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${vColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${vFinColor}"
-  echo ""
-
-elif [ $OS_VERS == "8" ]; then
-
-  echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 8 (Jessie)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${vFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${cFinColor}"
   echo ""
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 9 (Stretch)...${vFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${vColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${vFinColor}"
-  echo ""
-
-
-elif [ $OS_VERS == "10" ]; then
-
-  echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 10 (Buster)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${vFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${cFinColor}"
   echo ""
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 9 (Stretch)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${cFinColor}"
+  echo ""
+
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 10 (Buster)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   # Comprobar si el paquete dialog esté instalado. SI no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${vColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
       apt-get -y update
       apt-get -y install dialog
@@ -302,7 +302,7 @@ elif [ $OS_VERS == "11" ]; then
               echo "# nft add rule inet filter input tcp dport 443 accept" >> /root/scripts/ComandosNFTables.sh
             # Notificar el fin de la ejecución de la parte 1 del script
               echo ""
-              echo -e "${vColorVerde}      Fin de ejecución de la parte 1 del script.${vFinColor}"
+              echo -e "${cColorVerde}      Fin de ejecución de la parte 1 del script.${cFinColor}"
               echo ""
 
           ;;
@@ -376,19 +376,19 @@ elif [ $OS_VERS == "11" ]; then
               service apache2 restart
             # Notificar fin del script
               echo ""
-              echo -e "${vColorVerde}      El módulo remoteip está activado. Para configurarlo edita el archivo:${vFinColor}"
+              echo -e "${cColorVerde}      El módulo remoteip está activado. Para configurarlo edita el archivo:${cFinColor}"
               echo ""
-              echo -e "${vColorVerde}        /etc/apache2/conf-available/remoteip.conf${vFinColor}"
+              echo -e "${cColorVerde}        /etc/apache2/conf-available/remoteip.conf${cFinColor}"
               echo ""
-              echo -e "${vColorVerde}      descomenta la línea que te interese de las dos que están comentadas,${vFinColor}"
-              echo -e "${vColorVerde}      reemplaza la ip que aparece como 0.0.0.0 con la ip del host del proxy inverso${vFinColor}"
-              echo -e "${vColorVerde}      y reinicia apache 2 ejecutando:${vFinColor}"
+              echo -e "${cColorVerde}      descomenta la línea que te interese de las dos que están comentadas,${cFinColor}"
+              echo -e "${cColorVerde}      reemplaza la ip que aparece como 0.0.0.0 con la ip del host del proxy inverso${cFinColor}"
+              echo -e "${cColorVerde}      y reinicia apache 2 ejecutando:${cFinColor}"
               echo ""
-              echo -e "${vColorVerde}      service apache2 restart${vFinColor}"
+              echo -e "${cColorVerde}      service apache2 restart${cFinColor}"
               echo ""
-              echo -e "${vColorVerde}      Para más información sobre este punto, revisa:${vFinColor}"
+              echo -e "${cColorVerde}      Para más información sobre este punto, revisa:${cFinColor}"
               echo ""
-              echo -e "${vColorVerde}        http://hacks4geeks.com/pasar-ips-reales-de-clientes-http-de-haproxy-a-backends-con-apache${vFinColor}"
+              echo -e "${cColorVerde}        http://hacks4geeks.com/pasar-ips-reales-de-clientes-http-de-haproxy-a-backends-con-apache${cFinColor}"
               echo ""
 
           ;;
@@ -397,16 +397,16 @@ elif [ $OS_VERS == "11" ]; then
 
       done
 
-elif [ $OS_VERS == "12" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 12 (Bookworm)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación del servidor web con Apache2 para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
   # Comprobar si el paquete dialog esté instalado. SI no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${vColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
       apt-get -y update
       apt-get -y install dialog
@@ -613,7 +613,7 @@ elif [ $OS_VERS == "12" ]; then
               echo "# nft add rule inet filter input tcp dport 443 accept" >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
             # Notificar el fin de la ejecución de la parte 1 del script
               echo ""
-              echo -e "${vColorVerde}      Fin de ejecución de la parte 1 del script.${vFinColor}"
+              echo -e "${cColorVerde}      Fin de ejecución de la parte 1 del script.${cFinColor}"
               echo ""
 
           ;;
@@ -687,19 +687,19 @@ elif [ $OS_VERS == "12" ]; then
               service apache2 restart
             # Notificar fin del script
               echo ""
-              echo -e "${vColorVerde}      El módulo remoteip está activado. Para configurarlo edita el archivo:${vFinColor}"
+              echo -e "${cColorVerde}      El módulo remoteip está activado. Para configurarlo edita el archivo:${cFinColor}"
               echo ""
-              echo -e "${vColorVerde}        /etc/apache2/conf-available/remoteip.conf${vFinColor}"
+              echo -e "${cColorVerde}        /etc/apache2/conf-available/remoteip.conf${cFinColor}"
               echo ""
-              echo -e "${vColorVerde}      descomenta la línea que te interese de las dos que están comentadas,${vFinColor}"
-              echo -e "${vColorVerde}      reemplaza la ip que aparece como 0.0.0.0 con la ip del host del proxy inverso${vFinColor}"
-              echo -e "${vColorVerde}      y reinicia apache 2 ejecutando:${vFinColor}"
+              echo -e "${cColorVerde}      descomenta la línea que te interese de las dos que están comentadas,${cFinColor}"
+              echo -e "${cColorVerde}      reemplaza la ip que aparece como 0.0.0.0 con la ip del host del proxy inverso${cFinColor}"
+              echo -e "${cColorVerde}      y reinicia apache 2 ejecutando:${cFinColor}"
               echo ""
-              echo -e "${vColorVerde}      service apache2 restart${vFinColor}"
+              echo -e "${cColorVerde}      service apache2 restart${cFinColor}"
               echo ""
-              echo -e "${vColorVerde}      Para más información sobre este punto, revisa:${vFinColor}"
+              echo -e "${cColorVerde}      Para más información sobre este punto, revisa:${cFinColor}"
               echo ""
-              echo -e "${vColorVerde}        http://hacks4geeks.com/pasar-ips-reales-de-clientes-http-de-haproxy-a-backends-con-apache${vFinColor}"
+              echo -e "${cColorVerde}        http://hacks4geeks.com/pasar-ips-reales-de-clientes-http-de-haproxy-a-backends-con-apache${cFinColor}"
               echo ""
 
           ;;

@@ -7,24 +7,24 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------
 #  Script de NiPeGun para bajar, compilar y ejecutar KawPowMiner para minar RVN en Debian
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-Minero-GPU-KawPowMiner-BajarCompilarYEjecutar.sh | bash
-#-------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 DirWallet="r"
 Hilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)
 
 echo ""
-echo -e "${ColorVerde}--------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}  Iniciando el script de instalación de KawPowMiner...${FinColor}"
-echo -e "${ColorVerde}--------------------------------------------------------${FinColor}"
+echo -e "${cColorVerde}--------------------------------------------------------${cFinColor}"
+echo -e "${cColorVerde}  Iniciando el script de instalación de KawPowMiner...${cFinColor}"
+echo -e "${cColorVerde}--------------------------------------------------------${cFinColor}"
 echo ""
 
 ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.

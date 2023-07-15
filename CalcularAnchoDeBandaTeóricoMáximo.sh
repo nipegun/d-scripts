@@ -5,29 +5,29 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------------------------
+# -------------
 #  Script de NiPeGun para calcular el ancho de banda teórico máximo a Google
 #  via eduardocollado.com
 #  TamañoDeVentanaTCPenBits/LatenciaEnSegundos=BitsPorSegundoDeTransferencia
-#-----------------------------------------------------------------------------
+# -------------
 
 
-CantArgsCorrectos=1
-ArgsInsuficientes=65
+cCantArgsCorrectos=1
 
-if [ $# -ne $CantArgsCorrectos ]
+
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
+    
     echo "Mal uso del script."
     echo ""
     echo "El uso correcto sería: $0 [Tamaño en KB]"
     echo ""
     echo "Ejemplo:"
     echo ' $0 64'
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     echo ""
     echo "  Calculando la latencia del ping a google.com..."

@@ -13,25 +13,25 @@
 # ----------
 
 # Definir variables de color
-  vColorAzul="\033[0;34m"
-  vColorAzulClaro="\033[1;34m"
-  vColorVerde='\033[1;32m'
-  vColorRojo='\033[1;31m'
-  vFinColor='\033[0m'
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}" >&2
     exit 1
   fi
 
 echo ""
-echo -e "${vColorAzulClaro}  Iniciando script de configuración de inicio en modo CLI para Debian...${vFinColor}"
+echo -e "${vColorAzulClaro}  Iniciando script de configuración de inicio en modo CLI para Debian...${cFinColor}"
 echo ""
 systemctl set-default -f multi-user.target
 
 echo ""
-echo -e "${vColorVerde}    Cambios realizados. En el próximo inicio Debian iniciará en modo CLI multi-usuario.${vFinColor}"
+echo -e "${cColorVerde}    Cambios realizados. En el próximo inicio Debian iniciará en modo CLI multi-usuario.${cFinColor}"
 echo ""
 shutdown -r now
 

@@ -12,26 +12,26 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/HardwareInfo-MostrarInfoDeDisco.sh | bash
 # ----------
 
-CantArgsEsperados=1
-ArgsInsuficientes=65
+cCantArgsEsperados=1
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
 
-if [ $# -ne $CantArgsEsperados ]
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
+
+if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
-    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
+    
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
     echo ""
-    echo -e "$0 ${ColorVerde}[Dispositivo]${FinColor}"
+    echo -e "$0 ${cColorVerde}[Dispositivo]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo " $0 /dev/sdc"
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     echo ""
     hdparm -I $1

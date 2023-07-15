@@ -12,88 +12,88 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-FTP-proftpd-InstalarYConfigurar.sh | bash
 # ----------
 
-vColorAzul="\033[0;34m"
-vColorAzulClaro="\033[1;34m"
-vColorVerde='\033[1;32m'
-vColorRojo='\033[1;31m'
-vFinColor='\033[0m'
+cColorAzul="\033[0;34m"
+cColorAzulClaro="\033[1;34m"
+cColorVerde='\033[1;32m'
+cColorRojo='\033[1;31m'
+cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${vColorRojo}Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    echo -e "${cColorRojo}Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}" >&2
     exit 1
   fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
-    OS_NAME=$NAME
-    OS_VERS=$VERSION_ID
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
   elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
-    OS_NAME=$(lsb_release -si)
-    OS_VERS=$(lsb_release -sr)
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
   elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
     . /etc/lsb-release
-    OS_NAME=$DISTRIB_ID
-    OS_VERS=$DISTRIB_RELEASE
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
   elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
-    OS_NAME=Debian
-    OS_VERS=$(cat /etc/debian_version)
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
   else                                        # Para el viejo uname (También funciona para BSD).
-    OS_NAME=$(uname -s)
-    OS_VERS=$(uname -r)
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
   fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de proftpd para Debian 7 (Wheezy)...${vFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
-  echo ""
-
-elif [ $OS_VERS == "8" ]; then
-
-  echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de proftpd para Debian 8 (Jessie)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de proftpd para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${cColorRojo}  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de proftpd para Debian 9 (Stretch)...${vFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
-  echo ""
-
-elif [ $OS_VERS == "10" ]; then
-
-  echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de proftpd para Debian 10 (Buster)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de proftpd para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${cColorRojo}  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}Iniciando el script de instalación de proftpd para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de proftpd para Debian 9 (Stretch)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de proftpd para Debian 10 (Buster)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo -e "${vColorAzulClaro}Iniciando el script de instalación de proftpd para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${vColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+      echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
       apt-get -y update && apt-get -y install dialog
       echo ""
@@ -219,7 +219,7 @@ elif [ $OS_VERS == "11" ]; then
             vUsuario1000=$(cat /etc/passwd | grep "1000:1000" | cut -d ':' -f1)
             if [ "$vUsuario1000" = "" ]; then
               echo ""
-              echo -e "${vColorRojo}    El usuario 1000 no existe. No se procederá con el desenjaulado.${vFinColor}"
+              echo -e "${cColorRojo}    El usuario 1000 no existe. No se procederá con el desenjaulado.${cFinColor}"
               echo ""
             else
               vUsuarioLibre=$(id -nu 1000) 
@@ -231,7 +231,7 @@ elif [ $OS_VERS == "11" ]; then
             fi
           else
             echo ""
-            echo -e "${vColorRojo}    No se procederá con el desenjaulado de ningún usuario porque el enjaulado no se ha activado previamente.${vFinColor}"
+            echo -e "${cColorRojo}    No se procederá con el desenjaulado de ningún usuario porque el enjaulado no se ha activado previamente.${cFinColor}"
             echo ""
           fi
 
@@ -249,7 +249,7 @@ elif [ $OS_VERS == "11" ]; then
             vUsuarioExiste=$(cat /etc/passwd | grep $vUsuarioALiberar | cut -d ':' -f1)
             if [ "$vUsuarioExiste" = "" ]; then
               echo ""
-              echo -e "${vColorRojo}    El usuario $vUsuarioALiberar no existe. No se procederá con el desenjaulado.${vFinColor}"
+              echo -e "${cColorRojo}    El usuario $vUsuarioALiberar no existe. No se procederá con el desenjaulado.${cFinColor}"
               echo ""
             else
               echo "    Se desenjaulará al usuario $vUsuarioALiberar."
@@ -260,7 +260,7 @@ elif [ $OS_VERS == "11" ]; then
             fi
           else
             echo ""
-            echo -e "${vColorRojo}    No se procederá con el desenjaulado de ningún usuario porque el enjaulado no se ha activado previamente.${vFinColor}"
+            echo -e "${cColorRojo}    No se procederá con el desenjaulado de ningún usuario porque el enjaulado no se ha activado previamente.${cFinColor}"
             echo ""
           fi
 
@@ -310,7 +310,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ''
           echo '      <Directory *>'
           echo '        <Limit WRITE>'
-          echo -e "${vColorRojo}          DenyAll${vFinColor}"
+          echo -e "${cColorRojo}          DenyAll${cFinColor}"
           echo '        </Limit>'
           echo '      </Directory>'
           echo ''
@@ -318,7 +318,7 @@ elif [ $OS_VERS == "11" ]; then
           echo ''
           echo '      <Directory *>'
           echo '        <Limit WRITE>'
-          echo -e "${vColorVerde}          AllowAll${vFinColor}"
+          echo -e "${cColorVerde}          AllowAll${cFinColor}"
           echo '        </Limit>'
           echo '      </Directory>'
           echo ''

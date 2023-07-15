@@ -5,33 +5,33 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------------------------------------------
+# --------------
 #  Script de NiPeGun para enviar mail en una sola línea usando mail
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Mail-Enviar-Texto-UsandoMail.sh | bash
-#-------------------------------------------------------------------------------------------------------------
+# --------------
 
-CantArgsEsperados=3
-ArgsInsuficientes=65
+cCantArgsEsperados=3
 
-ColorAdvertencia='\033[1;31m'
-ColorArgumentos='\033[1;32m'
-FinColor='\033[0m'
 
-if [ $# -ne $CantArgsEsperados ]
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
+
+if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
-    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
+    
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
     echo ""
-    echo -e "EnviarMailA ${ColorArgumentos}[DirecciónDeCorreo] [Asunto] [Texto]${FinColor}"
+    echo -e "EnviarMailA ${cColorVerde}[DirecciónDeCorreo] [Asunto] [Texto]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo ' EnviarMailA pepe@pepe.com "Recordatorio de cita" "Acuérdate que quedamos para comer"'
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     # Comprobar si el paquete mailutils está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s mailutils 2>/dev/null | grep installed) == "" ]]; then

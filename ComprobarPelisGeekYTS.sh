@@ -5,30 +5,30 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------
+# -----------
 #  Script de NiPeGun para comprobar las nuevas pelis geek
 #  disponibles para descargar en YTS
-#----------------------------------------------------------
-#--------------------------------------------------------
+# -----------
+# ----------
 #  SCRIPT DE NIPEGUN PARA BLOQUEAR UN MÓDULO ESPECÍFICO
-#--------------------------------------------------------
+# ----------
 
-CantArgsCorrectos=1
-ArgsInsuficientes=65
+cCantArgsCorrectos=1
 
-if [ $# -ne $CantArgsCorrectos ]
+
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
+    
     echo "Mal uso del script."
     echo ""
     echo "El uso correcto sería: $0 [NombreDelMódulo]"
     echo ""
     echo "Ejemplo:"
     echo ' $0 igb'
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     
     curl https://yts.am/browse-movies/0/all/sci-fi/0/latest | grep movie/ | grep link

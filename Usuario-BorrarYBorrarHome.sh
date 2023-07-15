@@ -5,13 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------
+# ------------
 #  Script de NiPeGun para borrar un usuario del sistema
 #  borrando también su correspondiente carpeta en /home
-#-----------------------------------------------------------
+# ------------
 
 EXPECTED_ARGS=1
-E_BADARGS=65
 
 if [ $# -ne $EXPECTED_ARGS ]
   then
@@ -31,7 +30,7 @@ if [ $# -ne $EXPECTED_ARGS ]
     echo "Borrando el usuario $1 de la lista de usuarios del sistema..."
     echo ""
     userdel $1
-    
+
     echo ""
     echo "Borrando la carpeta home del usuario $1..."
     echo ""

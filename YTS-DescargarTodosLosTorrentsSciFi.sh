@@ -5,13 +5,13 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------------
+# ------------
 #  Script de NiPeGun descargar todos los torrents sci-fi disponibles en YTS
-#----------------------------------------------------------------------------
+# ------------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 DominioYTS=yts.mx
 CalidadDeseada=720p
@@ -21,7 +21,7 @@ NroPagIni=2
 NroPagFin=500
 
 echo ""
-echo -e "${ColorVerde}Iniciando script de descarga de torrents de YTS...${FinColor}"
+echo -e "${cColorVerde}Iniciando script de descarga de torrents de YTS...${cFinColor}"
 echo ""
 
 ## Construir el archivo con todas las URLs de las páginas de cada peli
@@ -43,7 +43,7 @@ for NroPag in $(seq $NroPagIni $NroPagFin);
     if [ "$ResultadoDelCurl" = "" ]
       then
         echo ""
-        echo -e "${ColorRojo}La página $NroPag ya no tiene resultados. Parando la búsqueda...${FinColor}"
+        echo -e "${cColorRojo}La página $NroPag ya no tiene resultados. Parando la búsqueda...${cFinColor}"
         echo ""
 
         ## Terminar el bucle for
@@ -107,7 +107,7 @@ echo ""
 zip -9 -r $CarpetaDeDescarga/Torrents/$Genero.zip $CarpetaDeDescarga/Torrents/$Genero/
 
 echo ""
-echo -e "${ColorVerde}Script de descarga de torrents de YTS, finalizado...${FinColor}"
+echo -e "${cColorVerde}Script de descarga de torrents de YTS, finalizado...${cFinColor}"
 echo ""
 echo "Deberías encontrar el archivo .zip con los torrents en: $CarpetaDeDescarga/Torrents/$Genero/"
 echo ""

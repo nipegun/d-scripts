@@ -12,23 +12,22 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-Desconectar.sh | bash -s pepe
 # ----------
 
-vArgumentosEsperados=1
-vArgumentosInsuficientes=65
+cCantArgEsperados=1
 
 # Definir variables de color
-  vColorAzul="\033[0;34m"
-  vColorAzulClaro="\033[1;34m"
-  vColorVerde='\033[1;32m'
-  vColorRojo='\033[1;31m'
-  vFinColor='\033[0m'
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  cFinColor='\033[0m'
 
-if [ $# -ne $vArgumentosEsperados ]
+if [ $# -ne $cCantArgEsperados ]
   then
     echo ""
-    echo -e "${vColorRojo}  Mal uso del script!${vFinColor}"
+    echo -e "${cColorRojo}  Mal uso del script!${cFinColor}"
     echo ""
     echo "  El uso correcto sería:"
-    echo -e "    $0 ${vColorVerde}[NombreDeUsuario]${vFinColor}"
+    echo -e "    $0 ${cColorVerde}[NombreDeUsuario]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo " $0 pepe"
@@ -36,7 +35,7 @@ if [ $# -ne $vArgumentosEsperados ]
     exit $vArgumentosInsuficientes
   else
     echo ""
-    echo -e "${vColorAzulClaro}  Desconectando el usuario $1...${vFinColor}"
+    echo -e "${vColorAzulClaro}  Desconectando el usuario $1...${cFinColor}"
     echo ""
     pkill -KILL -u $1
     echo ""

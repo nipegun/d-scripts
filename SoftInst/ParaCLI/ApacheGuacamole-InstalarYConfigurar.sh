@@ -13,82 +13,82 @@
 # ----------
 
 # Definir variables de color
-  vColorAzul="\033[0;34m"
-  vColorAzulClaro="\033[1;34m"
-  vColorVerde='\033[1;32m'
-  vColorRojo='\033[1;31m'
-  vFinColor='\033[0m'
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}" >&2
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}" >&2
     exit 1
   fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
-    OS_NAME=$NAME
-    OS_VERS=$VERSION_ID
+    cNomSO=$NAME
+    cVerSO=$VERSION_ID
   elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
-    OS_NAME=$(lsb_release -si)
-    OS_VERS=$(lsb_release -sr)
+    cNomSO=$(lsb_release -si)
+    cVerSO=$(lsb_release -sr)
   elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
     . /etc/lsb-release
-    OS_NAME=$DISTRIB_ID
-    OS_VERS=$DISTRIB_RELEASE
+    cNomSO=$DISTRIB_ID
+    cVerSO=$DISTRIB_RELEASE
   elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
-    OS_NAME=Debian
-    OS_VERS=$(cat /etc/debian_version)
+    cNomSO=Debian
+    cVerSO=$(cat /etc/debian_version)
   else                                        # Para el viejo uname (También funciona para BSD).
-    OS_NAME=$(uname -s)
-    OS_VERS=$(uname -r)
+    cNomSO=$(uname -s)
+    cVerSO=$(uname -r)
   fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 7 (Wheezy)...${vFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${vColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
-  echo ""
-
-elif [ $OS_VERS == "8" ]; then
-
-  echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 8 (Jessie)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 9 (Stretch)...${vFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${vColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
-  echo ""
-
-elif [ $OS_VERS == "10" ]; then
-
-  echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 10 (Buster)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 11 (Bullseye)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 9 (Stretch)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 10 (Buster)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   # Instalar dependencias
@@ -130,7 +130,7 @@ elif [ $OS_VERS == "11" ]; then
       # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
           echo ""
-          echo -e "${vColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
+          echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
           apt-get -y update
           apt-get -y install curl
@@ -141,7 +141,7 @@ elif [ $OS_VERS == "11" ]; then
       # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
           echo ""
-          echo -e "${vColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
+          echo -e "${cColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
           apt-get -y update
           apt-get -y install wget
@@ -158,7 +158,7 @@ elif [ $OS_VERS == "11" ]; then
     # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${vColorRojo}    El paquete tar no está instalado. Iniciando su instalación...${vFinColor}"
+        echo -e "${cColorRojo}    El paquete tar no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
         apt-get -y update
         apt-get -y install tar
@@ -247,10 +247,10 @@ elif [ $OS_VERS == "11" ]; then
     echo "    Ya deberías poder ver la web de Apache Guacamole en http://IPDeEsteServidor:8080/guacamole"
     echo ""
         
-elif [ $OS_VERS == "12" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 12 (Bookworm)...${vFinColor}"
+  echo -e "${vColorAzulClaro}  Iniciando el script de instalación de Apache Guacamole para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
   # Instalar dependencias

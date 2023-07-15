@@ -12,25 +12,25 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/MySQL-BaseDeDatos-Crear.sh | bash -s NombreBD UsuarioBD PasswordBD
 # ----------
 
-CantArgsEsperados=3
-ArgsInsuficientes=65
+cCantArgsEsperados=3
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
 
-if [ $# -ne $CantArgsEsperados ]
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
+
+if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
-    echo -e "${ColorRojo}Mal uso del script.${FinColor}"
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor}"
     echo ""
     echo "El uso correcto sería:"
-    echo -e "$0 ${ColorVerde}[NombreBD] [UsuarioBD] [PasswordBD]${FinColor}"
+    echo -e "$0 ${cColorVerde}[NombreBD] [UsuarioBD] [PasswordBD]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo "$0 wordpress usuariowp 12345678"
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     echo ""
     echo "" Ingresa el password del root de MySQL

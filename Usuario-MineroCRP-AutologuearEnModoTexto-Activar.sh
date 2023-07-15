@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------------------------------------------------------------------------------------
+# -----------
 #  Script de NiPeGun para activar el logueo automático del usuariox en modo texto (terminal no gráfico)
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-MineroCRP-AutologuearEnModoTexto-Activar.sh | bash
-#---------------------------------------------------------------------------------------------------------------------------------
+# -----------
 
 # Se debe reemplazar la línea
 # ExecStart=-/sbin/agetty -o '-p -- \\u' --noclear %I $TERM

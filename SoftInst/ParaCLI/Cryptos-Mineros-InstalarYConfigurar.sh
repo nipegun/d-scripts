@@ -5,29 +5,29 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------------------------------------------------------------------
+--
 #  Script de NiPeGun para instalar y configurar los mineros para las diferentes criptomonedas
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-Mineros-InstalarYConfigurar.sh | bash
-#-------------------------------------------------------------------------------------------------------------------------------------
+--
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 UsuarioNoRoot=NiPeGun
 
 echo ""
-echo -e "${ColorVerde}------------------------------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}  Iniciando el script de instalación de los diferentes mineros de criptomonedas...${FinColor}"
-echo -e "${ColorVerde}------------------------------------------------------------------------------------${FinColor}"
+echo -e "${cColorVerde}------------------------------------------------------------------------------------${cFinColor}"
+echo -e "${cColorVerde}  Iniciando el script de instalación de los diferentes mineros de criptomonedas...${cFinColor}"
+echo -e "${cColorVerde}------------------------------------------------------------------------------------${cFinColor}"
 echo ""
 
 # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${ColorRojo}  dialog no está instalado. Iniciando su instalación...${FinColor}"
+    echo -e "${cColorRojo}  dialog no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
     apt-get -y update
     apt-get -y install dialog
@@ -59,7 +59,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
         1)
 
           echo ""
-          echo -e "${ColorVerde}  Instalando el minero de XMR (Monero) para el usuario root...${FinColor}"
+          echo -e "${cColorVerde}  Instalando el minero de XMR (Monero) para el usuario root...${cFinColor}"
           echo ""
 
           ## Crear la carpeta
@@ -70,7 +70,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
         2)
 
           echo ""
-          echo -e "${ColorVerde}  Moviendo el minero de XMR a la carpeta del usuario $UsuarioNoRoot...${FinColor}"
+          echo -e "${cColorVerde}  Moviendo el minero de XMR a la carpeta del usuario $UsuarioNoRoot...${cFinColor}"
           echo ""
 
           ## Mover carpeta de mineros
@@ -84,7 +84,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
         3)
 
           echo ""
-          echo -e "${ColorVerde}  Instalando el minero de RVN (Raven) con AMD para el usuario root...${FinColor}"
+          echo -e "${cColorVerde}  Instalando el minero de RVN (Raven) con AMD para el usuario root...${cFinColor}"
           echo ""
 
           ## Crear la carpeta
@@ -95,7 +95,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
         4)
 
           echo ""
-          echo -e "${ColorVerde}  Moviendo el minero de RVN con AMD a la carpeta del usuario $UsuarioNoRoot...${FinColor}"
+          echo -e "${cColorVerde}  Moviendo el minero de RVN con AMD a la carpeta del usuario $UsuarioNoRoot...${cFinColor}"
           echo ""
 
           ## Mover carpeta de mineros
@@ -109,7 +109,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
         5)
 
           echo ""
-          echo -e "${ColorVerde}  Instalando el minero de RVN (Raven) con nVidia para el usuario root...${FinColor}"
+          echo -e "${cColorVerde}  Instalando el minero de RVN (Raven) con nVidia para el usuario root...${cFinColor}"
           echo ""
 
           ## Crear la carpeta
@@ -120,7 +120,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
         6)
 
           echo ""
-          echo -e "${ColorVerde}  Moviendo el minero de RVN con nVidia a la carpeta del usuario $UsuarioNoRoot...${FinColor}"
+          echo -e "${cColorVerde}  Moviendo el minero de RVN con nVidia a la carpeta del usuario $UsuarioNoRoot...${cFinColor}"
           echo ""
 
           ## Mover carpeta de mineros
@@ -134,7 +134,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
         9)
 
           echo ""
-          echo -e "${ColorVerde}  Instalando el minero de LTC (Litecoin) para el usuario root...${FinColor}"
+          echo -e "${cColorVerde}  Instalando el minero de LTC (Litecoin) para el usuario root...${cFinColor}"
           echo ""
 
           ## Crear la carpeta
@@ -145,7 +145,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
         10)
 
           echo ""
-          echo -e "${ColorVerde}  Moviendo el minero de LTC a la carpeta del usuario $UsuarioNoRoot...${FinColor}"
+          echo -e "${cColorVerde}  Moviendo el minero de LTC a la carpeta del usuario $UsuarioNoRoot...${cFinColor}"
           echo ""
 
           ## Mover carpeta de mineros
@@ -158,7 +158,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
         11)
 
           echo ""
-          echo -e "${ColorVerde}  Agregando los mineros del root a los ComandosPostArranque...${FinColor}"
+          echo -e "${cColorVerde}  Agregando los mineros del root a los ComandosPostArranque...${cFinColor}"
           echo ""
           ## CRP
              echo "#/root/MinerosCrypto/CRP/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh
@@ -168,7 +168,7 @@ menu=(dialog --timeout 5 --checklist "Marca los mineros que quieras instalar:" 2
         12)
 
           echo ""
-          echo -e "${ColorVerde}  Agregando los mineros del usuario $UsuarioNoRoot a los ComandosPostArranque...${FinColor}"
+          echo -e "${cColorVerde}  Agregando los mineros del usuario $UsuarioNoRoot a los ComandosPostArranque...${cFinColor}"
           echo ""
           ## CRP
              echo "#su $UsuarioNoRoot -c /home/$UsuarioNoRoot/MinerosCrypto/CRP/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh

@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------
+# --------------
 #  Script de NiPeGun para ejecutar un comando como otro usuario
-#----------------------------------------------------------------
+# --------------
 
 EXPECTED_ARGS=2
-E_BADARGS=65
+
 
 if [ $# -ne $EXPECTED_ARGS ]
   then

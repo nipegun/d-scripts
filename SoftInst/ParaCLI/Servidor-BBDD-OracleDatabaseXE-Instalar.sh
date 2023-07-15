@@ -12,89 +12,89 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-OracleDatabaseXE-Instalar.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 ## Determinar la versión de Debian
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
        . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
+       cNomSO=$NAME
+       cVerSO=$VERSION_ID
    elif type lsb_release >/dev/null 2>&1; then
        # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
+       cNomSO=$(lsb_release -si)
+       cVerSO=$(lsb_release -sr)
    elif [ -f /etc/lsb-release ]; then
        # Para algunas versiones de Debian sin el comando lsb_release
        . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
+       cNomSO=$DISTRIB_ID
+       cVerSO=$DISTRIB_RELEASE
    elif [ -f /etc/debian_version ]; then
        # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
+       cNomSO=Debian
+       cVerSO=$(cat /etc/debian_version)
    else
        # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
+       cNomSO=$(uname -s)
+       cVerSO=$(uname -r)
    fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${ColorVerde}--------------------------------------------------------------------------------------${FinColor}"
-  echo -e "${ColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 7 (Wheezy)...${FinColor}"
-  echo -e "${ColorVerde}--------------------------------------------------------------------------------------${FinColor}"
+  echo -e "${cColorVerde}--------------------------------------------------------------------------------------${cFinColor}"
+  echo -e "${cColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorVerde}--------------------------------------------------------------------------------------${cFinColor}"
   echo ""
 
   echo ""
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "8" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${ColorVerde}--------------------------------------------------------------------------------------${FinColor}"
-  echo -e "${ColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 8 (Jessie)...${FinColor}"
-  echo -e "${ColorVerde}--------------------------------------------------------------------------------------${FinColor}"
+  echo -e "${cColorVerde}--------------------------------------------------------------------------------------${cFinColor}"
+  echo -e "${cColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorVerde}--------------------------------------------------------------------------------------${cFinColor}"
   echo ""
 
   echo ""
   echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${ColorVerde}---------------------------------------------------------------------------------------${FinColor}"
-  echo -e "${ColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 9 (Stretch)...${FinColor}"
-  echo -e "${ColorVerde}---------------------------------------------------------------------------------------${FinColor}"
+  echo -e "${cColorVerde}---------------------------------------------------------------------------------------${cFinColor}"
+  echo -e "${cColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorVerde}---------------------------------------------------------------------------------------${cFinColor}"
   echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "10" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${ColorVerde}---------------------------------------------------------------------------------------${FinColor}"
-  echo -e "${ColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 10 (Buster)...${FinColor}"
-  echo -e "${ColorVerde}---------------------------------------------------------------------------------------${FinColor}"
+  echo -e "${cColorVerde}---------------------------------------------------------------------------------------${cFinColor}"
+  echo -e "${cColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorVerde}---------------------------------------------------------------------------------------${cFinColor}"
   echo ""
 
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo -e "${ColorVerde}-----------------------------------------------------------------------------------------${FinColor}"
-  echo -e "${ColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 11 (Bullseye)...${FinColor}"
-  echo -e "${ColorVerde}-----------------------------------------------------------------------------------------${FinColor}"
+  echo -e "${cColorVerde}-----------------------------------------------------------------------------------------${cFinColor}"
+  echo -e "${cColorVerde}  Iniciando el script de instalación de Oracle Database XE para Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorVerde}-----------------------------------------------------------------------------------------${cFinColor}"
   echo ""
 
   ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.

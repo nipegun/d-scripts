@@ -5,15 +5,15 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------------------------------------------------------
+# -----------
 #  Script de NiPeGun para instalar controladores bluetooth en Debian
 #
 #  Instalación remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Bluetooth-Instalar.sh | bash
-#--------------------------------------------------------------------------------------------------------------------------
+# -----------
 
-ColorVerde="\033[1;32m"
-FinColor="\033[0m"
+cColorVerde="\033[1;32m"
+cFinColor="\033[0m"
 
 apt-get -y update 2> /dev/null
 apt-get -y install dialog 2> /dev/null
@@ -32,7 +32,7 @@ menu=(dialog --timeout 5 --checklist "Elección del adaptador:" 22 76 16)
 
         1)
           echo ""
-          echo -e "${ColorVerde}Instalando controladores Bluetooth para la tarjeta Intel Centrino 7260...${FinColor}"
+          echo -e "${cColorVerde}Instalando controladores Bluetooth para la tarjeta Intel Centrino 7260...${cFinColor}"
           echo ""
           apt-get update -y
           apt-get install -y firmware-iwlwifi blueman

@@ -5,13 +5,13 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para reparar los permisos de la carpeta /var/www
-#----------------------------------------------------------------------
+# ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 FechaDeEjec=$(date +A%YM%mD%d@%T)
 
@@ -37,6 +37,6 @@ echo "..."
 
 echo ""
 echo "La reparación de permisos se terminó de ejecutar el $FechaDeEjec" >> /var/log/RepPermisos.log
-echo -e "${ColorVerde}Proceso de reparación de permisos de /var/www, finalizado.${FinColor}"
+echo -e "${cColorVerde}Proceso de reparación de permisos de /var/www, finalizado.${cFinColor}"
 echo ""
 

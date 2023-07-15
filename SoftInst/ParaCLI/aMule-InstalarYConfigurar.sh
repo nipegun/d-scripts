@@ -5,41 +5,41 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------------------------------------------------------------------------------
+# ------------
 #  Script de NiPeGun para instalar y configurar aMule en Debian
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/aMule-InstalarYConfigurar.sh | bash
-#---------------------------------------------------------------------------------------------------------------------------
+# ------------
 
 ## Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
        . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
+       cNomSO=$NAME
+       cVerSO=$VERSION_ID
    elif type lsb_release >/dev/null 2>&1; then
        # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
+       cNomSO=$(lsb_release -si)
+       cVerSO=$(lsb_release -sr)
    elif [ -f /etc/lsb-release ]; then
        # Para algunas versiones de Debian sin el comando lsb_release
        . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
+       cNomSO=$DISTRIB_ID
+       cVerSO=$DISTRIB_RELEASE
    elif [ -f /etc/debian_version ]; then
        # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
+       cNomSO=Debian
+       cVerSO=$(cat /etc/debian_version)
    else
        # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
+       cNomSO=$(uname -s)
+       cVerSO=$(uname -r)
    fi
 
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -51,7 +51,7 @@ if [ $OS_VERS == "7" ]; then
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "8" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -63,16 +63,16 @@ elif [ $OS_VERS == "8" ]; then
   echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de amule para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
   ArgumentosRequeridos=4
-  ArgumentosInsuficientes=65
+  
 
   if [ $# -ne $ArgumentosRequeridos ]
     then
@@ -87,7 +87,7 @@ elif [ $OS_VERS == "9" ]; then
       echo "  $0 /var/tmp/amule/completos /var/tmp/amule/incompletos 12345678 debian-amule"
       echo "--------------------------------------------------------------------------------------------"
       echo ""
-      exit $ArgumentosInsuficientes
+      exit
     else
       echo ""
       echo "Creando las carpetas para las descargas..."
@@ -151,28 +151,28 @@ elif [ $OS_VERS == "9" ]; then
       echo ""
       echo "  Nombre de usuario: debian-amule"
       echo "  Contraseña: password"
-      echo "---------------------------------------------------------"
+      
       echo ""
   fi
 
-elif [ $OS_VERS == "10" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de amule para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de amule para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  
   echo ""
 
   echo ""

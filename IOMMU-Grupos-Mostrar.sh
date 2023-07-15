@@ -13,9 +13,9 @@
 # ----------
 
 echo ""
-echo "-------------------------------------------"
+
 echo " Grupos IOMMU disponibles en el sistema:"
-echo "-------------------------------------------"
+
 echo ""
 
 for iommu_group in $(find /sys/kernel/iommu_groups/ -maxdepth 1 -mindepth 1 -type d);

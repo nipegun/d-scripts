@@ -5,34 +5,34 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------------------
+# -----------
 #  Script de NiPeGun para crear un pendrive con la última versión de clonezilla Live
-#-------------------------------------------------------------------------------------
+# -----------
 
 
 
 #
-# ----------------------------------------
+# ----------
 #  SCRIPT POR TERMINAR !!!!!!!!!!!!!!!!!!
-# ----------------------------------------
+# ----------
 #
 
-CantArgsCorrectos=1
-ArgsInsuficientes=65
+cCantArgsCorrectos=1
 
-if [ $# -ne $CantArgsCorrectos ]
+
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
+    
     echo "Mal uso del script."
     echo ""
     echo "El uso correcto sería: $0 [DevYParticiónDelPendrive]"
     echo ""
     echo "Ejemplo:"
     echo ' CrearPendriveCloneZilla /dev/sdf1'
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     echo ""
     echo "  Creando pendrive de CloneZilla Live..."

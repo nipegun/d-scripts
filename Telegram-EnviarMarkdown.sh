@@ -5,29 +5,28 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------------------
+# --------------
 #  Script de NiPeGun para enviar MarkDown a Telegram desde Bash usando un bot
-#------------------------------------------------------------------------------
+# --------------
 
 ColorAdvertencia="\033[1;31m"
 ColorArgumentos="\033[1;32m"
-FinColor="\033[0m"
+cFinColor="\033[0m"
 
-CantArgsCorrectos=3
-ArgsInsuficientes=65
+cCantArgsCorrectos=3
 
-if [ $# -ne $CantArgsCorrectos ]
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo -e "${ColorAdvertencia}Mal uso del script!${FinColor}"
+    echo -e "${cColorRojo}Mal uso del script!${cFinColor}"
     echo ""
-    echo -e 'El uso correcto sería: '$0' '${ColorArgumentos}'[TokenDelBot] [IdDelChatDeDestino] ["Mensaje"]'${FinColor}''
+    echo -e 'El uso correcto sería: '$0' '${cColorVerde}'[TokenDelBot] [IdDelChatDeDestino] ["Mensaje"]'${cFinColor}''
     echo ""
     echo "Ejemplo:"
     echo ""
     echo ''$0' 123456789:AAAAAAAAAA_AAAAAAAAAAAAAAA_AAAAAA_A 000000000 "Mensaje de prueba"'
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     wget -q --tries=10 --timeout=20 --spider https://api.telegram.org
     if [[ $? -eq 0 ]]; then
@@ -39,7 +38,7 @@ if [ $# -ne $CantArgsCorrectos ]
       echo ""
     else
       echo ""
-      echo -e "${ColorAdvertencia}No se pudo enviar el mensaje porque no se pudo contactar con https://api.telegram.org${FinColor}"
+      echo -e "${cColorRojo}No se pudo enviar el mensaje porque no se pudo contactar con https://api.telegram.org${cFinColor}"
       echo ""
     fi
 fi

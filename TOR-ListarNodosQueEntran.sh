@@ -5,10 +5,10 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------------------
+# -------------
 #  SCRIPT DE NIPEGUN PARA OBTENER LA LISTA DE IPS DE NODOS TOR
 #  QUE LLEGAN A LA IP WAN Y GENERAR UNA ARCHIVO CON LA LISTA
-#---------------------------------------------------------------
+# -------------
 
 # Obtener la IP WAN del servidor y agregarla a una variable
 IPWANDelServidor=$(curl --silent ipinfo.io/ip)
@@ -17,9 +17,7 @@ IPWANDelServidor=$(curl --silent ipinfo.io/ip)
 truncate -s 0 /root/NodosTORQueEntran.list
 
 echo ""
-echo "----------------------------------------------------------"
 echo "  CREANDO EL ARCHIVO CON LA LISTA DE IPS DE LOS NODOS..."
-echo "----------------------------------------------------------"
 echo ""
 # Obtener la lista de nodos de salida que llegan al servidor, quitar las lineas comentadas de esa lista
 # y recorrerla en busca de IPs para agregarlas también línea a línea en el archivo de texto.
@@ -29,10 +27,8 @@ wget -q https://check.torproject.org/cgi-bin/TorBulkExitList.py?ip=$IPWANDelServ
   done
 
 echo ""
-echo "------------------------------------------------"
 echo "  ARCHIVO: /root/NodosTORQueEntran.list CREADO"
 echo ""
 echo "  DENTRO ENCONTRARÁS LAS IPS DE LOS NODOS"
-echo "------------------------------------------------"
 echo ""
 

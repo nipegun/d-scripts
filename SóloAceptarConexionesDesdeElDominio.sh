@@ -5,29 +5,29 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para bloquear todas las IPs que acceden al sistema menos la que se indique
-#------------------------------------------------------------------------------------------------
+# ----------
 
-ColorRojo="\033[1;31m"
-ColorVerde="\033[1;32m"
-FinColor="\033[0m"
+cColorRojo="\033[1;31m"
+cColorVerde="\033[1;32m"
+cFinColor="\033[0m"
 
-CantArgsCorrectos=1
-ArgsInsuficientes=65
+cCantArgsCorrectos=1
 
-if [ $# -ne $CantArgsCorrectos ]
+
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo -e "${ColorRojo}Mal uso del script!${FinColor}"
+    echo -e "${cColorRojo}Mal uso del script!${cFinColor}"
     echo ""
-    echo -e "El uso correcto sería: $0 ${ColorVerde}[IPAPermitir]${FinColor}""
+    echo -e "El uso correcto sería: $0 ${cColorVerde}[IPAPermitir]${cFinColor}""
     echo ""
     echo "Ejemplo:"
     echo ""
     echo "$0 111.222.333.444"
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     getent hosts $1 | awk '{ print $1 }'
 fi

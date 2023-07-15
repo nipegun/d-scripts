@@ -12,11 +12,11 @@
 #   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/MariaDB-Cluster-Galera-ReInicializar.sh | bash
 # ----------
 
-vColorAzul="\033[0;34m"
-vColorAzulClaro="\033[1;34m"
-vColorVerde='\033[1;32m'
-vColorRojo='\033[1;31m'
-vFinColor='\033[0m'
+cColorAzul="\033[0;34m"
+cColorAzulClaro="\033[1;34m"
+cColorVerde='\033[1;32m'
+cColorRojo='\033[1;31m'
+cFinColor='\033[0m'
 
 echo ""
 echo "  Iniciando el script para re-inicializar el clúster Galera..."
@@ -43,8 +43,8 @@ echo ""
   vEsSeguroInicializarlo=$(cat /var/lib/mysql/grastate.dat | grep trap | cut -d':' -f2 | sed 's- --g')
   if [[ $vEsSeguroInicializarlo == "0" ]]; then
     echo ""
-    echo -e "${vColorRojo}      ATENCIÓN: Este nodo del clúster no fue el último en apagarse.${vFinColor}"
-    echo -e "${vColorRojo}      Si se inicializa el clúster desde este nodo puede que se pierdan las últimas actualizaciones de la BD.${vFinColor}"
+    echo -e "${cColorRojo}      ATENCIÓN: Este nodo del clúster no fue el último en apagarse.${cFinColor}"
+    echo -e "${cColorRojo}      Si se inicializa el clúster desde este nodo puede que se pierdan las últimas actualizaciones de la BD.${cFinColor}"
     echo ""
     sed -i -e 's|safe_to_bootstrap: 0|safe_to_bootstrap: 1|g' /var/lib/mysql/grastate.dat
     galera_new_cluster

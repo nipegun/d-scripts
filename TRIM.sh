@@ -5,7 +5,7 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------------
+# ----------
 #  SCRIPT DE NIPEGUN PARA EJECUTAR TRIM SOBRE LA PARTICIÓN DONDE ESTÁ MONTADA /
 #
 #  PARA SABER SI TRIM ESTÁ SOPORTADO PUEDES EJECUTAR hdparm SOBRE EL DISCO
@@ -13,7 +13,7 @@
 #  hdparm -I /dev/disk/by-label/Debian | grep "TRIM supported"
 #  O
 #  hdparm -I /dev/sda | grep "TRIM supported"
-#--------------------------------------------------------------------------------
+# ----------
 
 LOG=/var/log/TRIM.log
 echo "*** $(date -R) ***" >> $LOG

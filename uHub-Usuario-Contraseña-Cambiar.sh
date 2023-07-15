@@ -10,19 +10,18 @@
 # ----------
 
 # Definir variables de color
-  vColorAzul="\033[0;34m"
-  vColorAzulClaro="\033[1;34m"
-  vColorVerde='\033[1;32m'
-  vColorRojo='\033[1;31m'
-  vFinColor='\033[0m'
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  cFinColor='\033[0m'
 
-vCantArgsCorrectos=2
-vArgsInsuficientes=65
+cCantArgsCorrectos=2
 
-if [ $# -ne $vCantArgsCorrectos ]
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo -e "${vColorRojo}  Mal uso del script. El uso correcto sería: ${vFinColor}"
+    echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
     echo "    $0 [NombreDeUsuario] [Contraseña]"
     echo ""
     echo "  Ejemplo:"
@@ -33,7 +32,7 @@ if [ $# -ne $vCantArgsCorrectos ]
     # Comprobar si el paquete sqlite3 está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s sqlite3 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${vColorRojo}  El paquete sqlite3 no está instalado. Iniciando su instalación...${vFinColor}"
+        echo -e "${cColorRojo}  El paquete sqlite3 no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
         apt-get -y update
         apt-get -y install sqlite3
@@ -47,7 +46,7 @@ if [ $# -ne $vCantArgsCorrectos ]
     # Cambiar contraseña a usuario
       if [ $vEstadoDeLaBaseDeDatosDeUHUB == "ok" ]; then
         echo ""
-        echo -e "${vColorVerde}    El estado de la base de datos es consistente. Intentando cambiar la contraseña...${vFinColor}"
+        echo -e "${cColorVerde}    El estado de la base de datos es consistente. Intentando cambiar la contraseña...${cFinColor}"
         echo ""
         sqlite3 /etc/uhub/users.db "update users set password = '"$2"' where nickname = '"$1"';"
         echo ""
@@ -57,7 +56,7 @@ if [ $# -ne $vCantArgsCorrectos ]
         echo ""
       else
         echo ""
-        echo -e "${vColorRojo}    El estado de la base de datos no es consistente. Abortando el cambio de contraseña...${vFinColor}"
+        echo -e "${cColorRojo}    El estado de la base de datos no es consistente. Abortando el cambio de contraseña...${cFinColor}"
         echo ""
       fi
 fi

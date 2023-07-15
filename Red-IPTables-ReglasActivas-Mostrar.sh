@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para mostrar las reglas activas de IPTables
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Red-IPTables-ReglasActivas-Mostrar.sh | bash
-#-------------------------------------------------------------------------------------------------------------------
+# ----------
 
 echo ""
 echo "  Tablas NAT"

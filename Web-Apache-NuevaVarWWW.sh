@@ -12,21 +12,21 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Web-Apache-NuevaVarWWW.sh | bash -s Extension Dominio Password
 # ----------
 
-total_param_corr=3
+vCantParamCorr=3
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
-if [ $# -ne $total_param_corr ]; then
+if [ $# -ne $vCantParamCorr ]; then
   echo ""
-  echo -e "${ColorRojo}Mal uso del script. Se le deben pasar tres parámetros obligatorios:${FinColor}"
+  echo -e "${cColorRojo}Mal uso del script. Se le deben pasar tres parámetros obligatorios:${cFinColor}"
   echo ""
-  echo -e "${ColorVerde}[ExtensionDelDominio] [NombreDeLaWeb] y [Password]${FinColor}"
+  echo -e "${cColorVerde}[ExtensionDelDominio] [NombreDeLaWeb] y [Password]${cFinColor}"
   echo ""
   echo "Ejemplo:"
   echo ""
-  echo -e "$0 ${ColorVerde}.org unawebcualquiera 12345678${FinColor}"
+  echo -e "$0 ${cColorVerde}.org unawebcualquiera 12345678${cFinColor}"
   echo ""
   echo "NOTA: El nombre de la Web también se utilizará como nombre de usuario MySQL."
   echo ""
@@ -79,7 +79,7 @@ else
       apt-get -y install certbot
       apt-get -y install python3-certbot-apache
       certbot --apache -d $2$1 -d www.$2$1
-    
+
     # Volver a arrancar Apache
       echo ""
       echo "$(tput setaf 1)Re-arrancando Apache... $(tput sgr 0)"
@@ -190,7 +190,7 @@ else
     exit
 
   else
- 
+
     # Crear la base de datos
       echo ""
       echo "$(tput setaf 1)Creando la base de datos con su usuario... $(tput sgr 0)"
@@ -287,7 +287,7 @@ else
       echo ""                                                                         >> /var/www/$2$1/.htaccess
       echo "# END Redirigir www. a sin www."                                          >> /var/www/$2$1/.htaccess
       echo ""                                                                         >> /var/www/$2$1/.htaccess
-    
+
     # Proteger los logs para que sólo se puedan ver con la sesión en WordPress iniciada
       echo "#<Files *>"                                                    > /var/www/$2$1/_/logs/.htaccess
       echo "#"                                                            >> /var/www/$2$1/_/logs/.htaccess

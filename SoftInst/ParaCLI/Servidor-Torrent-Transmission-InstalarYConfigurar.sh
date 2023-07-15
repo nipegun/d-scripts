@@ -5,44 +5,44 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 #  Script de NiPeGun para instalar y configurar Transmission en Debian
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Torrent-Transmission-InstalarYConfigurar.sh | bash -s -- /var/tmp/transmission/completos /var/tmp/transmission/incompletos 12345678 nico
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 ## Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
        . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
+       cNomSO=$NAME
+       cVerSO=$VERSION_ID
    elif type lsb_release >/dev/null 2>&1; then
        # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
+       cNomSO=$(lsb_release -si)
+       cVerSO=$(lsb_release -sr)
    elif [ -f /etc/lsb-release ]; then
        # Para algunas versiones de Debian sin el comando lsb_release
        . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
+       cNomSO=$DISTRIB_ID
+       cVerSO=$DISTRIB_RELEASE
    elif [ -f /etc/debian_version ]; then
        # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
+       cNomSO=Debian
+       cVerSO=$(cat /etc/debian_version)
    else
        # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
+       cNomSO=$(uname -s)
+       cVerSO=$(uname -r)
    fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -54,7 +54,7 @@ if [ $OS_VERS == "7" ]; then
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "8" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -66,61 +66,61 @@ elif [ $OS_VERS == "8" ]; then
   echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de Transmission para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "10" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de Transmission para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
   CantArgsRequeridos=4
-  ArgumentosInsuficientes=65
+  
 
   if [ $# -ne $CantArgsRequeridos ]
     then
       echo ""
       echo "--------------------------------------------------------------------------------------------"
-      echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
+      echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
       echo ""
-      echo -e "$0 ${ColorVerde}[CarpetaDeDescargas] [CarpetaDeIncompletos] [Password] [Usuario]${FinColor}"
+      echo -e "$0 ${cColorVerde}[CarpetaDeDescargas] [CarpetaDeIncompletos] [Password] [Usuario]${cFinColor}"
       echo ""
       echo "  Ejemplo:"
       echo "  $0 /var/tmp/transmission/completos /var/tmp/transmission/incompletos 12345678 nico"
       echo "--------------------------------------------------------------------------------------------"
       echo ""
-      exit $ArgumentosInsuficientes
+      exit
     else
       echo ""
-      echo -e "${ColorVerde}Creando las carpetas para las descargas...${FinColor}"
+      echo -e "${cColorVerde}Creando las carpetas para las descargas...${cFinColor}"
       echo ""
       mkdir -p $1
       mkdir -p $2
     
       echo ""
-      echo -e "${ColorVerde}Instalando el paquete transission-daemon...${FinColor}"
+      echo -e "${cColorVerde}Instalando el paquete transission-daemon...${cFinColor}"
       echo ""
       apt-get -y install transmission-daemon
 
       echo ""
-      echo -e "${ColorVerde}Deteniendo el servicio transmission-daemon${FinColor}"
+      echo -e "${cColorVerde}Deteniendo el servicio transmission-daemon${cFinColor}"
       echo ""
       service transmission-daemon stop
 
       echo ""
-      echo -e "${ColorVerde}Realizando cambios en la configuración...${FinColor}"
+      echo -e "${cColorVerde}Realizando cambios en la configuración...${cFinColor}"
       echo ""
       cp /etc/transmission-daemon/settings.json /etc/transmission-daemon/settings.json.bak
       sed -i -e 's|"download-dir": "/var/lib/transmission-daemon/downloads",|"download-dir": "'$1'",|g'     /etc/transmission-daemon/settings.json
@@ -133,29 +133,29 @@ elif [ $OS_VERS == "10" ]; then
       sed -i -e 's|"umask": 18,|"umask": 2,|g'                                                              /etc/transmission-daemon/settings.json
 
       echo ""
-      echo -e "${ColorVerde}Agregando el usuario al grupo transmission-daemon...${FinColor}"
+      echo -e "${cColorVerde}Agregando el usuario al grupo transmission-daemon...${cFinColor}"
       echo ""
       usermod -a -G debian-transmission $4
 
       echo ""
-      echo -e "${ColorVerde}Cambiando el grupo propietario de lsa carpetas $1 y $2...${FinColor}"
+      echo -e "${cColorVerde}Cambiando el grupo propietario de lsa carpetas $1 y $2...${cFinColor}"
       echo ""
       chgrp debian-transmission $1
       chgrp debian-transmission $2
     
       echo ""
-      echo -e "${ColorVerde}Dando permisos de escritura al grupo...${FinColor}"
+      echo -e "${cColorVerde}Dando permisos de escritura al grupo...${cFinColor}"
       echo ""
       chmod 770 $1
       chmod 770 $2
 
       echo ""
-      echo -e "${ColorVerde}Iniciando el servicio transmission-daemon...${FinColor}"
+      echo -e "${cColorVerde}Iniciando el servicio transmission-daemon...${cFinColor}"
       echo ""
       service transmission-daemon start
 
       echo ""
-      echo "---------------------------------------------------------"
+      
       echo "  EL DEMONIO TRANSMISSION HA SIDO INSTALADO E INICIADO."
       echo ""
       echo "  Deberías poder administrarlo mediante web en la IP de"
@@ -165,53 +165,53 @@ elif [ $OS_VERS == "10" ]; then
       echo ""
       echo "  Nombre de usuario: transmission"
       echo "  Contraseña: $3"
-      echo "---------------------------------------------------------"
+      
       echo ""
   fi
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de Transmission para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  
   echo ""
 
 CantArgsRequeridos=4
-  ArgumentosInsuficientes=65
+  
 
   if [ $# -ne $CantArgsRequeridos ]
     then
       echo ""
       echo "--------------------------------------------------------------------------------------------"
-      echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
+      echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
       echo ""
-      echo -e "$0 ${ColorVerde}[CarpetaDeDescargas] [CarpetaDeIncompletos] [Password] [Usuario]${FinColor}"
+      echo -e "$0 ${cColorVerde}[CarpetaDeDescargas] [CarpetaDeIncompletos] [Password] [Usuario]${cFinColor}"
       echo ""
       echo "  Ejemplo:"
       echo "  $0 /var/tmp/transmission/completos /var/tmp/transmission/incompletos 12345678 nico"
       echo "--------------------------------------------------------------------------------------------"
       echo ""
-      exit $ArgumentosInsuficientes
+      exit
     else
       echo ""
-      echo -e "${ColorVerde}Creando las carpetas para las descargas...${FinColor}"
+      echo -e "${cColorVerde}Creando las carpetas para las descargas...${cFinColor}"
       echo ""
       mkdir -p $1
       mkdir -p $2
     
       echo ""
-      echo -e "${ColorVerde}Instalando el paquete transission-daemon...${FinColor}"
+      echo -e "${cColorVerde}Instalando el paquete transission-daemon...${cFinColor}"
       echo ""
       apt-get -y install transmission-daemon
 
       echo ""
-      echo -e "${ColorVerde}Deteniendo el servicio transmission-daemon${FinColor}"
+      echo -e "${cColorVerde}Deteniendo el servicio transmission-daemon${cFinColor}"
       echo ""
       service transmission-daemon stop
 
       echo ""
-      echo -e "${ColorVerde}Realizando cambios en la configuración...${FinColor}"
+      echo -e "${cColorVerde}Realizando cambios en la configuración...${cFinColor}"
       echo ""
       cp /etc/transmission-daemon/settings.json /etc/transmission-daemon/settings.json.bak
       sed -i -e 's|"download-dir": "/var/lib/transmission-daemon/downloads",|"download-dir": "'$1'",|g'     /etc/transmission-daemon/settings.json
@@ -224,29 +224,29 @@ CantArgsRequeridos=4
       sed -i -e 's|"umask": 18,|"umask": 2,|g'                                                              /etc/transmission-daemon/settings.json
 
       echo ""
-      echo -e "${ColorVerde}Agregando el usuario al grupo transmission-daemon...${FinColor}"
+      echo -e "${cColorVerde}Agregando el usuario al grupo transmission-daemon...${cFinColor}"
       echo ""
       usermod -a -G debian-transmission $4
 
       echo ""
-      echo -e "${ColorVerde}Cambiando el grupo propietario de lsa carpetas $1 y $2...${FinColor}"
+      echo -e "${cColorVerde}Cambiando el grupo propietario de lsa carpetas $1 y $2...${cFinColor}"
       echo ""
       chgrp debian-transmission $1
       chgrp debian-transmission $2
     
       echo ""
-      echo -e "${ColorVerde}Dando permisos de escritura al grupo...${FinColor}"
+      echo -e "${cColorVerde}Dando permisos de escritura al grupo...${cFinColor}"
       echo ""
       chmod 770 $1
       chmod 770 $2
 
       echo ""
-      echo -e "${ColorVerde}Iniciando el servicio transmission-daemon...${FinColor}"
+      echo -e "${cColorVerde}Iniciando el servicio transmission-daemon...${cFinColor}"
       echo ""
       service transmission-daemon start
 
       echo ""
-      echo "---------------------------------------------------------"
+      
       echo "  EL DEMONIO TRANSMISSION HA SIDO INSTALADO E INICIADO."
       echo ""
       echo "  Deberías poder administrarlo mediante web en la IP de"
@@ -256,7 +256,7 @@ CantArgsRequeridos=4
       echo ""
       echo "  Nombre de usuario: transmission"
       echo "  Contraseña: $3"
-      echo "---------------------------------------------------------"
+      
       echo ""
 
   fi

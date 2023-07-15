@@ -12,52 +12,52 @@
 #    curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Archivos-Samba-InstalarYConfigurar.sh | bash -s NombreDeGrupo NombreDeEquipo nipegun
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then              # Para systemd y freedesktop.org
      . /etc/os-release
-     OS_NAME=$NAME
-     OS_VERS=$VERSION_ID
+     cNomSO=$NAME
+     cVerSO=$VERSION_ID
   elif type lsb_release >/dev/null 2>&1; then  # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
+       cNomSO=$(lsb_release -si)
+       cVerSO=$(lsb_release -sr)
   elif [ -f /etc/lsb-release ]; then           # Para algunas versiones de Debian sin el comando lsb_release
        . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
+       cNomSO=$DISTRIB_ID
+       cVerSO=$DISTRIB_RELEASE
   elif [ -f /etc/debian_version ]; then        # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
+       cNomSO=Debian
+       cVerSO=$(cat /etc/debian_version)
   else                                         # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
+       cNomSO=$(uname -s)
+       cVerSO=$(uname -r)
   fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de Samba para Debian 7 (Wheezy)..."
-  echo "--------------------------------------------------------------------------"
+  
   echo ""
 
   echo ""
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "8" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de Samba para Debian 8 (Jessie)..."
-  echo "--------------------------------------------------------------------------"
+  
   echo ""
 
   EXPECTED_ARGS=3
-  E_BADARGS=65
+  
 
   if [ $# -ne $EXPECTED_ARGS ]
     then
@@ -143,9 +143,9 @@ elif [ $OS_VERS == "8" ]; then
 
             4)
               echo ""
-              echo "-------------------------------------------------------"
+              
               echo "  CREANDO LA COMPARTICIÓN PARA LA CARPETA DEL USUARIO"
-              echo "-------------------------------------------------------"
+              
               echo ""
               echo "[Usuario $3]"                       >> /etc/samba/smb.conf
               echo "  path = /home/$3/"                 >> /etc/samba/smb.conf
@@ -158,9 +158,9 @@ elif [ $OS_VERS == "8" ]; then
 
             5)
               echo ""
-              echo "---------------------------------------------------------"
+              
               echo "  CREANDO LA COMPARTICIÓN DE UNA CARPETA CON MULTIMEDIA"
-              echo "---------------------------------------------------------"
+              
               echo ""
               echo "[Multimedia]"                                  >> /etc/samba/smb.conf
               echo "  path = /Multimedia/"                         >> /etc/samba/smb.conf
@@ -208,23 +208,23 @@ elif [ $OS_VERS == "8" ]; then
 
     fi
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de bind9 para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
   EXPECTED_ARGS=3
-  E_BADARGS=65
+  
 
   if [ $# -ne $EXPECTED_ARGS ]
     then
       echo ""
       echo "---------------------------------------------------------------"
-      echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
-      echo -e "$0 ${ColorVerde}[GrupoDeTrabajo] [NombreNetBios] [Usuario]${FinColor}"
+      echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
+      echo -e "$0 ${cColorVerde}[GrupoDeTrabajo] [NombreNetBios] [Usuario]${cFinColor}"
       echo ""
       echo "Ejemplo:"
       echo "$0 oficina ordenador pepe"
@@ -252,7 +252,7 @@ elif [ $OS_VERS == "9" ]; then
 
             1)
               echo ""
-              echo -e "${ColorVerde}Instalando los paquetes necesarios...${FinColor}"
+              echo -e "${cColorVerde}Instalando los paquetes necesarios...${cFinColor}"
               echo ""
               apt-get -y install libcups2 samba samba-common cups
               cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
@@ -260,7 +260,7 @@ elif [ $OS_VERS == "9" ]; then
 
             2)
               echo ""
-              echo -e "${ColorVerde}Configurando las opciones globales...${FinColor}"
+              echo -e "${cColorVerde}Configurando las opciones globales...${cFinColor}"
               echo ""
               echo "[global]" > /etc/samba/smb.conf
               echo "  workgroup = $1" >> /etc/samba/smb.conf
@@ -280,7 +280,7 @@ elif [ $OS_VERS == "9" ]; then
 
             3)
               echo ""
-              echo -e "${ColorVerde}Creando la compartición para la carpeta pública...${FinColor}"
+              echo -e "${cColorVerde}Creando la compartición para la carpeta pública...${cFinColor}"
               echo ""
               echo "[publica]" >> /etc/samba/smb.conf
               mkdir /publica/
@@ -297,7 +297,7 @@ elif [ $OS_VERS == "9" ]; then
 
             4)
               echo ""
-              echo -e "${ColorVerde}Creando la compartición para la carpeta del usuario...${FinColor}"
+              echo -e "${cColorVerde}Creando la compartición para la carpeta del usuario...${cFinColor}"
               echo ""
               echo "[Usuario $3]" >> /etc/samba/smb.conf
               echo "  path = /home/$3/" >> /etc/samba/smb.conf
@@ -309,7 +309,7 @@ elif [ $OS_VERS == "9" ]; then
 
             5)
               echo ""
-              echo -e "${ColorVerde}Creando la compartición de una carpeta Multimedia...${FinColor}"
+              echo -e "${cColorVerde}Creando la compartición de una carpeta Multimedia...${cFinColor}"
               echo ""
               echo "[Multimedia]" >> /etc/samba/smb.conf
               echo "  path = /Multimedia/" >> /etc/samba/smb.conf
@@ -323,7 +323,7 @@ elif [ $OS_VERS == "9" ]; then
 
             6)
               echo ""
-              echo -e "${ColorVerde}Creando la compartición de la carpeta de las Webs...${FinColor}"
+              echo -e "${cColorVerde}Creando la compartición de la carpeta de las Webs...${cFinColor}"
               echo ""
               echo "[Webs]" >> /etc/samba/smb.conf
               echo "  path = /var/www/" >> /etc/samba/smb.conf
@@ -354,15 +354,15 @@ elif [ $OS_VERS == "9" ]; then
         done
   fi
 
-elif [ $OS_VERS == "10" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de bind9 para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
-  #------------------------------------------------------------------
+  # ----------
   #  Script de NiPeGun para instalar y configurar el servidor Samba
   #
   #  Para que los usuarios puedan utilizar samba es necesario crearles
@@ -370,23 +370,23 @@ elif [ $OS_VERS == "10" ]; then
   #  smbpasswd -a NombreDeUsuario
   #  La contraseña samba puede ser distinta a la de la propia cuenta
   #  de usuario
-  #-------------------------------------------------------------------
+  # -----------
 
   ArgumentosRequeridos=3
-  ArgumentosInsuficientes=65
+  
 
   if [ $# -ne $ArgumentosRequeridos ]
     then
       echo ""
       echo "---------------------------------------------------------------"
-      echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
-      echo -e "$0 ${ColorVerde}[GrupoDeTrabajo] [NombreNetBios] [Usuario]${FinColor}"
+      echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
+      echo -e "$0 ${cColorVerde}[GrupoDeTrabajo] [NombreNetBios] [Usuario]${cFinColor}"
       echo ""
       echo "Ejemplo:"
       echo "$0 oficina ordenador pepe"
       echo "---------------------------------------------------------------"
       echo ""
-      exit $ArgumentosInsuficientes
+      exit
     else
       apt-get update && apt-get -y install dialog
       menu=(dialog --timeout 5 --checklist "Instalación de la compartición Samba:" 22 76 16)
@@ -408,7 +408,7 @@ elif [ $OS_VERS == "10" ]; then
 
             1)
               echo ""
-              echo -e "${ColorVerde}Instalando los paquetes necesarios...${FinColor}"
+              echo -e "${cColorVerde}Instalando los paquetes necesarios...${cFinColor}"
               echo ""
               apt-get -y install libcups2 samba samba-common cups
               cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
@@ -416,7 +416,7 @@ elif [ $OS_VERS == "10" ]; then
 
             2)
               echo ""
-              echo -e "${ColorVerde}Configurando las opciones globales...${FinColor}"
+              echo -e "${cColorVerde}Configurando las opciones globales...${cFinColor}"
               echo ""
               echo "[global]"                                                     > /etc/samba/smb.conf
               echo "  workgroup = $1"                                            >> /etc/samba/smb.conf
@@ -436,7 +436,7 @@ elif [ $OS_VERS == "10" ]; then
 
             3)
               echo ""
-              echo -e "${ColorVerde}Creando la compartición para la carpeta pública...${FinColor}"
+              echo -e "${cColorVerde}Creando la compartición para la carpeta pública...${cFinColor}"
               echo ""
               mkdir /publica/
               chown nobody:nogroup /publica/
@@ -453,7 +453,7 @@ elif [ $OS_VERS == "10" ]; then
 
             4)
               echo ""
-              echo -e "${ColorVerde}Creando la compartición para la carpeta del usuario...${FinColor}"
+              echo -e "${cColorVerde}Creando la compartición para la carpeta del usuario...${cFinColor}"
               echo ""
               echo "[Usuario $3]"                       >> /etc/samba/smb.conf
               echo "  path = /home/$3/"                 >> /etc/samba/smb.conf
@@ -465,7 +465,7 @@ elif [ $OS_VERS == "10" ]; then
 
             5)
               echo ""
-              echo -e "${ColorVerde}Creando la compartición de una carpeta Multimedia...${FinColor}"
+              echo -e "${cColorVerde}Creando la compartición de una carpeta Multimedia...${cFinColor}"
               echo ""
               echo "[Multimedia]"                                   >> /etc/samba/smb.conf
               echo "  path = /Discos/HDD-Multimedia/"               >> /etc/samba/smb.conf
@@ -479,7 +479,7 @@ elif [ $OS_VERS == "10" ]; then
 
             6)
               echo ""
-              echo -e "${ColorVerde}Creando la compartición de la carpeta de las Webs...${FinColor}"
+              echo -e "${cColorVerde}Creando la compartición de la carpeta de las Webs...${cFinColor}"
               echo ""
               echo "[Webs]"                  >> /etc/samba/smb.conf
               echo "  path = /var/www/"      >> /etc/samba/smb.conf
@@ -510,15 +510,15 @@ elif [ $OS_VERS == "10" ]; then
         done
   fi
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de Samba para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  
   echo ""
 
-  #------------------------------------------------------------------
+  # ----------
   #  Script de NiPeGun para instalar y configurar el servidor Samba
   #
   #  Para que los usuarios puedan utilizar samba es necesario crearles
@@ -526,23 +526,23 @@ elif [ $OS_VERS == "11" ]; then
   #  smbpasswd -a NombreDeUsuario
   #  La contraseña samba puede ser distinta a la de la propia cuenta
   #  de usuario
-  #-------------------------------------------------------------------
+  # -----------
 
   ArgumentosRequeridos=3
-  ArgumentosInsuficientes=65
+  
 
   if [ $# -ne $ArgumentosRequeridos ]
     then
       echo ""
       echo "---------------------------------------------------------------"
-      echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
-      echo -e "$0 ${ColorVerde}[GrupoDeTrabajo] [NombreNetBios] [Usuario]${FinColor}"
+      echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
+      echo -e "$0 ${cColorVerde}[GrupoDeTrabajo] [NombreNetBios] [Usuario]${cFinColor}"
       echo ""
       echo "Ejemplo:"
       echo "$0 oficina ordenador pepe"
       echo "---------------------------------------------------------------"
       echo ""
-      exit $ArgumentosInsuficientes
+      exit
     else
       apt-get update && apt-get -y install dialog
       menu=(dialog --timeout 5 --checklist "Instalación de la compartición Samba:" 22 76 16)
@@ -564,7 +564,7 @@ elif [ $OS_VERS == "11" ]; then
 
             1)
               echo ""
-              echo -e "${ColorVerde}  Instalando los paquetes necesarios...${FinColor}"
+              echo -e "${cColorVerde}  Instalando los paquetes necesarios...${cFinColor}"
               echo ""
               apt-get -y install libcups2
               apt-get -y install samba
@@ -575,7 +575,7 @@ elif [ $OS_VERS == "11" ]; then
 
             2)
               echo ""
-              echo -e "${ColorVerde}  Configurando las opciones globales...${FinColor}"
+              echo -e "${cColorVerde}  Configurando las opciones globales...${cFinColor}"
               echo ""
               echo "[global]"                                                     > /etc/samba/smb.conf
               echo "  workgroup = $1"                                            >> /etc/samba/smb.conf
@@ -595,7 +595,7 @@ elif [ $OS_VERS == "11" ]; then
 
             3)
               echo ""
-              echo -e "${ColorVerde}  Creando la compartición para la carpeta pública...${FinColor}"
+              echo -e "${cColorVerde}  Creando la compartición para la carpeta pública...${cFinColor}"
               echo ""
               mkdir /publica/
               chown nobody:nogroup /publica/
@@ -612,7 +612,7 @@ elif [ $OS_VERS == "11" ]; then
 
             4)
               echo ""
-              echo -e "${ColorVerde}  Creando la compartición para la carpeta del usuario...${FinColor}"
+              echo -e "${cColorVerde}  Creando la compartición para la carpeta del usuario...${cFinColor}"
               echo ""
               echo "[Usuario $3]"                       >> /etc/samba/smb.conf
               echo "  path = /home/$3/"                 >> /etc/samba/smb.conf
@@ -624,7 +624,7 @@ elif [ $OS_VERS == "11" ]; then
 
             5)
               echo ""
-              echo -e "${ColorVerde}  Creando la compartición de una carpeta Multimedia...${FinColor}"
+              echo -e "${cColorVerde}  Creando la compartición de una carpeta Multimedia...${cFinColor}"
               echo ""
               echo "[Multimedia]"                                   >> /etc/samba/smb.conf
               echo "  path = /Discos/HDD-Multimedia/"               >> /etc/samba/smb.conf
@@ -638,7 +638,7 @@ elif [ $OS_VERS == "11" ]; then
 
             6)
               echo ""
-              echo -e "${ColorVerde}  Creando la compartición de la carpeta de las Webs...${FinColor}"
+              echo -e "${cColorVerde}  Creando la compartición de la carpeta de las Webs...${cFinColor}"
               echo ""
               echo "[Webs]"                  >> /etc/samba/smb.conf
               echo "  path = /var/www/"      >> /etc/samba/smb.conf

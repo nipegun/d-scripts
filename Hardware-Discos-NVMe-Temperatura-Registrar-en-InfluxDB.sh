@@ -21,22 +21,22 @@ vHost=$(cat /etc/hostname)
 vFecha=$(date +%s%N)
 
 # Definir variables de color
-  vColorAzul="\033[0;34m"
-  vColorAzulClaro="\033[1;34m"
-  vColorVerde='\033[1;32m'
-  vColorRojo='\033[1;31m'
-  vFinColor='\033[0m'
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${vColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${vFinColor}"
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
     exit 1
   fi
 
 # Comprobar si el paquete nvme-cli está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s nvme-cli 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${vColorRojo}    nvme-cli no está instalado. Iniciando su instalación...${vFinColor}"
+    echo -e "${cColorRojo}    nvme-cli no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
     apt-get -y update
     apt-get -y install nvme-cli
@@ -55,7 +55,7 @@ vFecha=$(date +%s%N)
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${vColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
+    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
     apt-get -y update
     apt-get -y install curl

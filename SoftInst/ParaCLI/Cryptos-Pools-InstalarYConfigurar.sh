@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------------------------------------------------------------------------------
+
 #  Script de NiPeGun para instalar y configurar Pools Cripto en Debian
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-Pools-InstalarYConfigurar.sh | bash
-#-----------------------------------------------------------------------------------------------------------------------------------
+
 
 UsuarioNoRoot="pooladmin"
 DominioPool="localhost"
@@ -31,37 +31,37 @@ PuertoRPCrvn="20401"
 UsuarioRPCrvn="rvnrpc"
 PassRPCrvn="rvnrpcpass"
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 ## Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
        . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
+       cNomSO=$NAME
+       cVerSO=$VERSION_ID
    elif type lsb_release >/dev/null 2>&1; then
        # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
+       cNomSO=$(lsb_release -si)
+       cVerSO=$(lsb_release -sr)
    elif [ -f /etc/lsb-release ]; then
        # Para algunas versiones de Debian sin el comando lsb_release
        . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
+       cNomSO=$DISTRIB_ID
+       cVerSO=$DISTRIB_RELEASE
    elif [ -f /etc/debian_version ]; then
        # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
+       cNomSO=Debian
+       cVerSO=$(cat /etc/debian_version)
    else
        # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
+       cNomSO=$(uname -s)
+       cVerSO=$(uname -r)
    fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -73,7 +73,7 @@ if [ $OS_VERS == "7" ]; then
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "8" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -85,24 +85,24 @@ elif [ $OS_VERS == "8" ]; then
   echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de Pools Cripto para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "10" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de Pools Cripto para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
   ## Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -133,9 +133,9 @@ elif [ $OS_VERS == "10" ]; then
 
           1)
             echo ""
-            echo -e "${ColorVerde}-----------------------------------------${FinColor}"
-            echo -e "${ColorVerde}  Instalando la pool rvn-kawpow-pool...${FinColor}"
-            echo -e "${ColorVerde}-----------------------------------------${FinColor}"
+            echo -e "${cColorVerde}-----------------------------------------${cFinColor}"
+            echo -e "${cColorVerde}  Instalando la pool rvn-kawpow-pool...${cFinColor}"
+            echo -e "${cColorVerde}-----------------------------------------${cFinColor}"
             echo ""
 
             ## Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
@@ -174,9 +174,9 @@ elif [ $OS_VERS == "10" ]; then
 
           2)
             echo ""
-            echo -e "${ColorVerde}------------------------------${FinColor}"
-            echo -e "${ColorVerde}  Instalando la pool MPOS...${FinColor}"
-            echo -e "${ColorVerde}------------------------------${FinColor}"
+            echo -e "${cColorVerde}------------------------------${cFinColor}"
+            echo -e "${cColorVerde}  Instalando la pool MPOS...${cFinColor}"
+            echo -e "${cColorVerde}------------------------------${cFinColor}"
             echo ""
 
             ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
@@ -326,9 +326,9 @@ elif [ $OS_VERS == "10" ]; then
           3)
 
             echo ""
-            echo -e "${ColorVerde}------------------------${FinColor}"
-            echo -e "${ColorVerde}  Instalando NodeJS...${FinColor}"
-            echo -e "${ColorVerde}------------------------${FinColor}"
+            echo -e "${cColorVerde}------------------------${cFinColor}"
+            echo -e "${cColorVerde}  Instalando NodeJS...${cFinColor}"
+            echo -e "${cColorVerde}------------------------${cFinColor}"
             echo ""
 
             apt-get -y update
@@ -339,9 +339,9 @@ elif [ $OS_VERS == "10" ]; then
           4)
 
             echo ""
-            echo -e "${ColorVerde}------------------------------------${FinColor}"
-            echo -e "${ColorVerde}  Instalando node-multi-hashing...${FinColor}"
-            echo -e "${ColorVerde}------------------------------------${FinColor}"
+            echo -e "${cColorVerde}------------------------------------${cFinColor}"
+            echo -e "${cColorVerde}  Instalando node-multi-hashing...${cFinColor}"
+            echo -e "${cColorVerde}------------------------------------${cFinColor}"
             echo ""
 
             npm install multi-hashing
@@ -351,9 +351,9 @@ elif [ $OS_VERS == "10" ]; then
           5)
 
             echo ""
-            echo -e "${ColorVerde}-------------------------------------${FinColor}"
-            echo -e "${ColorVerde}  Instalando kawpow-stratum-pool...${FinColor}"
-            echo -e "${ColorVerde}-------------------------------------${FinColor}"
+            echo -e "${cColorVerde}-------------------------------------${cFinColor}"
+            echo -e "${cColorVerde}  Instalando kawpow-stratum-pool...${cFinColor}"
+            echo -e "${cColorVerde}-------------------------------------${cFinColor}"
             echo ""
 
             cd /root/
@@ -364,9 +364,9 @@ elif [ $OS_VERS == "10" ]; then
           5)
 
             echo ""
-            echo -e "${ColorVerde}-------------------------${FinColor}"
-            echo -e "${ColorVerde}  Reparando permisos...${FinColor}"
-            echo -e "${ColorVerde}-------------------------${FinColor}"
+            echo -e "${cColorVerde}-------------------------${cFinColor}"
+            echo -e "${cColorVerde}  Reparando permisos...${cFinColor}"
+            echo -e "${cColorVerde}-------------------------${cFinColor}"
             echo ""
 
             chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/
@@ -384,9 +384,9 @@ elif [ $OS_VERS == "10" ]; then
           6)
 
             echo ""
-            echo -e "${ColorVerde}------------------------------${FinColor}"
-            echo -e "${ColorVerde}  Instalando servidor Web...${FinColor}"
-            echo -e "${ColorVerde}------------------------------${FinColor}"
+            echo -e "${cColorVerde}------------------------------${cFinColor}"
+            echo -e "${cColorVerde}  Instalando servidor Web...${cFinColor}"
+            echo -e "${cColorVerde}------------------------------${cFinColor}"
             echo ""
 
             ## Comprobar si el paquete tasksel está instalado. Si no lo está, instalarlo.
@@ -406,9 +406,9 @@ elif [ $OS_VERS == "10" ]; then
           7)
 
             echo ""
-            echo -e "${ColorVerde}----------------------------${FinColor}"
-            echo -e "${ColorVerde}  Instalando MiningCore...${FinColor}"
-            echo -e "${ColorVerde}----------------------------${FinColor}"
+            echo -e "${cColorVerde}----------------------------${cFinColor}"
+            echo -e "${cColorVerde}  Instalando MiningCore...${cFinColor}"
+            echo -e "${cColorVerde}----------------------------${cFinColor}"
             echo ""
 
             ## Instalar .NET Core 2.2 SDK para Linux (Necesario para correr el motor Stratum)
@@ -804,9 +804,9 @@ elif [ $OS_VERS == "10" ]; then
           8)
 
             echo ""
-            echo -e "${ColorVerde}----------------------------------${FinColor}"
-            echo -e "${ColorVerde}  Instalando MiningCore WebUI...${FinColor}"
-            echo -e "${ColorVerde}----------------------------------${FinColor}"
+            echo -e "${cColorVerde}----------------------------------${cFinColor}"
+            echo -e "${cColorVerde}  Instalando MiningCore WebUI...${cFinColor}"
+            echo -e "${cColorVerde}----------------------------------${cFinColor}"
             echo ""
 
             ## Descargar MiningCore.WebUI
@@ -836,12 +836,12 @@ elif [ $OS_VERS == "10" ]; then
 
   done
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de Pools Cripto para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  
   echo ""
 
   echo ""

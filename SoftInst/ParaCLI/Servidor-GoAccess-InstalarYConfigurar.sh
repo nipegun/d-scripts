@@ -5,44 +5,44 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para instalar y configurar GoAccess en Debian
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-GoAccess-InstalarYConfigurar.sh
-#--------------------------------------------------------------------------------------------------------------------------------
+# ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 ## Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
        . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
+       cNomSO=$NAME
+       cVerSO=$VERSION_ID
    elif type lsb_release >/dev/null 2>&1; then
        # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
+       cNomSO=$(lsb_release -si)
+       cVerSO=$(lsb_release -sr)
    elif [ -f /etc/lsb-release ]; then
        # Para algunas versiones de Debian sin el comando lsb_release
        . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
+       cNomSO=$DISTRIB_ID
+       cVerSO=$DISTRIB_RELEASE
    elif [ -f /etc/debian_version ]; then
        # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
+       cNomSO=Debian
+       cVerSO=$(cat /etc/debian_version)
    else
        # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
+       cNomSO=$(uname -s)
+       cVerSO=$(uname -r)
    fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -54,7 +54,7 @@ if [ $OS_VERS == "7" ]; then
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "8" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -62,22 +62,22 @@ elif [ $OS_VERS == "8" ]; then
   echo "-----------------------------------------------------------------------------"
   echo ""
 
-  CantArgsCorrectos=2
-  ArgsInsuficientes=65
+  cCantArgsCorrectos=2
+  
 
-  if [ $# -ne $CantArgsCorrectos ]
+  if [ $# -ne $cCantArgsCorrectos ]
     then
       echo ""
-      echo "------------------------------------------------------------------------------"
+      
       echo "Mal uso del script."
       echo ""
       echo "El uso correcto sería: $0 [CarpetaDeLogs] [CarpetaDeStats]"
       echo ""
       echo "Ejemplo:"
       echo ' $0 /var/www/pepe.com/logs /var/www/pepe.com/_/stats'
-      echo "------------------------------------------------------------------------------"
+      
       echo ""
-      exit $ArgsInsuficientes
+      exit
     else
       echo ""
       echo "--------------------------------------"
@@ -100,30 +100,30 @@ elif [ $OS_VERS == "8" ]; then
       goaccess -f $1/access.log -o $2/index.html --real-time-html --daemon --pid-file=/etc/goaccess/pid.number
   fi
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de GoAccess para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
-  CantArgsCorrectos=2
-  ArgsInsuficientes=65
+  cCantArgsCorrectos=2
+  
 
-  if [ $# -ne $CantArgsCorrectos ]
+  if [ $# -ne $cCantArgsCorrectos ]
     then
       echo ""
-      echo "------------------------------------------------------------------------------"
+      
       echo "Mal uso del script."
       echo ""
       echo "El uso correcto sería: $0 [CarpetaDeLogs] [CarpetaDeStats]"
       echo ""
       echo "Ejemplo:"
       echo ' $0 /var/www/pepe.com/logs /var/www/pepe.com/_/stats'
-      echo "------------------------------------------------------------------------------"
+      
       echo ""
-      exit $ArgsInsuficientes
+      exit
     else
       echo ""
       echo "--------------------------------------"
@@ -147,30 +147,30 @@ elif [ $OS_VERS == "9" ]; then
       goaccess -f $1/access.log -o $2/index.html --real-time-html --daemon --pid-file=/etc/goaccess/pid.number
   fi
 
-elif [ $OS_VERS == "10" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de GoAccess para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
   CantArgsRequeridos=2
-  ArgsInsuficientes=65
+  
 
   if [ $# -ne $CantArgsRequeridos ]
     then
       echo ""
-      echo "------------------------------------------------------------------------------"
+      
       echo "Mal uso del script."
       echo ""
       echo "El uso correcto sería: $0 [CarpetaDeLogs] [CarpetaDeStats]"
       echo ""
       echo "Ejemplo:"
       echo ' $0 /var/www/pepe.com/logs /var/www/pepe.com/stats'
-      echo "------------------------------------------------------------------------------"
+      
       echo ""
-      exit $ArgsInsuficientes
+      exit
     else
       echo "deb http://deb.goaccess.io/ buster main" | tee -a /etc/apt/sources.list.d/goaccess.list
       wget -O - http://deb.goaccess.io/gnugpg.key | apt-key add -
@@ -222,30 +222,30 @@ elif [ $OS_VERS == "10" ]; then
 
   fi
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de GoAccess para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  
   echo ""
 
   CantArgsRequeridos=2
-  ArgsInsuficientes=65
+  
 
   if [ $# -ne $CantArgsRequeridos ]
     then
       echo ""
-      echo "------------------------------------------------------------------------------"
+      
       echo "Mal uso del script."
       echo ""
       echo "El uso correcto sería: $0 [CarpetaDeLogs] [CarpetaDeStats]"
       echo ""
       echo "Ejemplo:"
       echo ' $0 /var/www/pepe.com/logs /var/www/pepe.com/stats'
-      echo "------------------------------------------------------------------------------"
+      
       echo ""
-      exit $ArgsInsuficientes
+      exit
     else
     
       wget -O - https://deb.goaccess.io/gnugpg.key | gpg --dearmor | sudo tee /usr/share/keyrings/goaccess.gpg >/dev/null

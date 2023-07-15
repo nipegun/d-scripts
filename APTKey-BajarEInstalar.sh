@@ -23,80 +23,71 @@ vNombreServicio="$2"
   if [ -f /etc/os-release ]; then
       # Para systemd y freedesktop.org
       . /etc/os-release
-      OS_NAME=$NAME
-      OS_VERS=$VERSION_ID
+      cNomSO=$NAME
+      cVerSO=$VERSION_ID
   elif type lsb_release >/dev/null 2>&1; then
       # linuxbase.org
-      OS_NAME=$(lsb_release -si)
-      OS_VERS=$(lsb_release -sr)
+      cNomSO=$(lsb_release -si)
+      cVerSO=$(lsb_release -sr)
   elif [ -f /etc/lsb-release ]; then
       # Para algunas versiones de Debian sin el comando lsb_release
       . /etc/lsb-release
-      OS_NAME=$DISTRIB_ID
-      OS_VERS=$DISTRIB_RELEASE
+      cNomSO=$DISTRIB_ID
+      cVerSO=$DISTRIB_RELEASE
   elif [ -f /etc/debian_version ]; then
       # Para versiones viejas de Debian.
-      OS_NAME=Debian
-      OS_VERS=$(cat /etc/debian_version)
+      cNomSO=Debian
+      cVerSO=$(cat /etc/debian_version)
   else
       # Para el viejo uname (También funciona para BSD)
-      OS_NAME=$(uname -s)
-      OS_VERS=$(uname -r)
+      cNomSO=$(uname -s)
+      cVerSO=$(uname -r)
   fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de nueva llave apt para Debian 7 (Wheezy)..."
-  echo "-----------------------------------------------------------------------------------"
   echo ""
 
   echo ""
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "8" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "-----------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de nueva llave apt para Debian 8 (Jessie)..."
-  echo "-----------------------------------------------------------------------------------"
   echo ""
 
   echo ""
   echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de nueva llave apt para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "10" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de nueva llave apt para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------------"
   echo ""
+
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------------"
   echo "  Iniciando el script de instalación de nueva llave apt para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------------"
   echo ""
 
   mkdir -p /root/aptkeys/ 2> /dev/null

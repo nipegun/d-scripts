@@ -5,25 +5,25 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------
+# ----------
 #  Script de NiPeGun para borrar usuarios en jitsi-meet
-#--------------------------------------------------------
+# ----------
 
-total_param_corr=2
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+vCantParamCorr=2
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
-if [ $# -ne $total_param_corr ]; then
+if [ $# -ne $vCantParamCorr ]; then
 
   echo ""
-  echo -e "${ColorRojo}Mal uso del script. Se le deben pasar dos parámetros obligatorios:${FinColor}"
+  echo -e "${cColorRojo}Mal uso del script. Se le deben pasar dos parámetros obligatorios:${cFinColor}"
   echo ""
-  echo -e "${ColorVerde}[NombreDeUsuario] [Dominio]${FinColor}"
+  echo -e "${cColorVerde}[NombreDeUsuario] [Dominio]${cFinColor}"
   echo ""
   echo "Ejemplo:"
   echo ""
-  echo -e "$0 ${ColorVerde}Nico video.dominio.com${FinColor}"
+  echo -e "$0 ${cColorVerde}Nico video.dominio.com${cFinColor}"
   echo ""
   exit
 

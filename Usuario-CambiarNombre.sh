@@ -12,22 +12,21 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-CambiarNombre.sh | bash -s UsuarioViejo UsuarioNuevo
 # ----------
 
-CantArgsCorrectos=2
-ArgsInsuficientes=65
+cCantArgsCorrectos=2
 
-if [ $# -ne $CantArgsCorrectos ]
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
+    
     echo "Mal uso del script."
     echo ""
     echo "El uso correcto sería: cndu [NombreDeUsuarioViejo] [NombreDeUsuarioNuevo]"
     echo ""
     echo "Ejemplo:"
     echo ' cndu pepe jose'
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     echo ""
     usermod -l $2 $1

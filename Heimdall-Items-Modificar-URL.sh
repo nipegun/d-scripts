@@ -21,7 +21,7 @@ vURLNueva="'http://192.168.1.202:9091/transmission/web/'"
 # Comprobar que sqlite3 esté instalado
   if [[ $(dpkg-query -s sqlite3 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${vColorRojo}sqlite3 no está instalado. Iniciando su instalación...${vFinColor}"
+    echo -e "${cColorRojo}sqlite3 no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
     apt-get -y update && apt-get -y install sqlite3
     echo ""

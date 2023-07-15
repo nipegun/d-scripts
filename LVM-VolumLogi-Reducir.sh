@@ -5,7 +5,7 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------------------------------------
+# --------------
 #  Script de NiPeGun para extender volúmenes lógicos LVM
 #
 #  Ejecución remota:
@@ -19,7 +19,7 @@
 #    /dev/mapper/vg01-lv01 492M   33M  435M   8% /testfs
 #
 #    lvreduce /dev/vg01/lv01 -L-235M -r
-#----------------------------------------------------------------------------------------------------
+# --------------
 
 lvreduce $1
 

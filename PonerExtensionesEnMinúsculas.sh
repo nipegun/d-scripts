@@ -5,14 +5,14 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para poner recursivamente todas las extensiones en minúsculas de todos los archivos de una ubicación dada
-#-------------------------------------------------------------------------------------------------------------------------------
+# ----------
 
-ArgumentosEsperados=1
-ArgumentosInsuficientes=65
+cCantArgEsperados=1
 
-if [ $# -ne $ArgumentosEsperados ]
+
+if [ $# -ne $cCantArgEsperados ]
   then
     echo ""
     echo "##################################################"
@@ -24,7 +24,7 @@ if [ $# -ne $ArgumentosEsperados ]
     echo "$0 /home/pepe"
     echo "##################################################"
     echo ""
-    exit $ArgumentosInsuficientes
+    exit
   else
     echo ""
     find $1 -type f -exec sh -c 'a=$(echo "$0" | sed -r "s/([^.]*)\$/\L\1/"); [ "$a" != "$0" ] && mv "$0" "$a" ' {} \;

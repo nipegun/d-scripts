@@ -17,20 +17,20 @@ vYear="$2"
 
 vEsNumero='^[0-9]+$'
 
-vCantArgsCorrectos=2
-vArgsInsuficientes=65
+cCantArgsCorrectos=2
+v
 
-if [ $# -ne $vCantArgsCorrectos ]
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
+    
     echo "Mal uso del script."
     echo ""
     echo "El uso correcto sería: $0 [Carpeta] [Año]"
     echo ""
     echo "Ejemplo:"
     echo ' $0 "/home/nico/fotos/2022" 2023'
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
     exit $vArgsInsuficientes
   elif ! [[ $vYear =~ ^[0-9]{4}$ ]]; then # Comprobar si el año introducido es un número y si 4 digitos

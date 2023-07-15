@@ -5,15 +5,15 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------
+# ------------
 #  Script de NiPeGun para bloquear los servidores de Ivoox
-#-----------------------------------------------------------
+# ------------
 
-ColorVerde="\033[1;32m"
-FinColor="\033[0m"
+cColorVerde="\033[1;32m"
+cFinColor="\033[0m"
 
 echo ""
-echo -e "${ColorVerde}Bloqueando los servidores de Ivoox...${FinColor}"
+echo -e "${cColorVerde}Bloqueando los servidores de Ivoox...${cFinColor}"
 echo ""
 
 # Obtener la IP de Ivoox.com

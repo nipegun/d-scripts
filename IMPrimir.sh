@@ -5,29 +5,29 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para Imprimir un texto desde la terminal en Debian 9
-#--------------------------------------------------------------------------
+# ----------
 
 ColorAdvertencia="\033[1;31m"
 ColorArgumentos="\033[1;32m"
-FinColor="\033[0m"
+cFinColor="\033[0m"
 
-CantArgsCorrectos=2
-ArgsInsuficientes=65
+cCantArgsCorrectos=2
 
-if [ $# -ne $CantArgsCorrectos ]
+
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo -e "${ColorAdvertencia}Mal uso del script!${FinColor}"
+    echo -e "${cColorRojo}Mal uso del script!${cFinColor}"
     echo ""
-    echo -e 'El uso correcto sería: '$0' '${ColorArgumentos}'["Texto"] [ImpresoraDestino]'${FinColor}''
+    echo -e 'El uso correcto sería: '$0' '${cColorVerde}'["Texto"] [ImpresoraDestino]'${cFinColor}''
     echo ""
     echo "Ejemplo:"
     echo ""
     echo ''$0' "Me la pela el lorem ipsum" Officejet7610'
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     echo ""
     echo "Mandando la tarea a la cola de impresión..."

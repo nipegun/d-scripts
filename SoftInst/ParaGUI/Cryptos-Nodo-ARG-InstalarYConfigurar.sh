@@ -16,20 +16,20 @@
 vUsuarioNoRoot="nipegun"
 
 # Definir variables de color
-  vColorAzul="\033[0;34m"
-  vColorAzulClaro="\033[1;34m"
-  vColorVerde='\033[1;32m'
-  vColorRojo='\033[1;31m'
-  vFinColor='\033[0m'
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  cFinColor='\033[0m'
 
 echo ""
-echo -e "${vColorAzulClaro}  Iniciando el script de instalación de la cadena de bloques de ARG...${vFinColor}"
+echo -e "${vColorAzulClaro}  Iniciando el script de instalación de la cadena de bloques de ARG...${cFinColor}"
 echo ""
 
 # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${vColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${vFinColor}"
+    echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
     apt-get -y update
     apt-get -y install dialog
@@ -60,7 +60,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${vColorAzulClaro}      El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
+              echo -e "${vColorAzulClaro}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
               echo "  "
               echo ""
               apt-get -y update
@@ -89,7 +89,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${vColorAzulClaro}      El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
+              echo -e "${vColorAzulClaro}      El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
               echo ""
               apt-get -y update
               apt-get -y install wget
@@ -103,7 +103,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${vColorAzulClaro}      El paquete tar no está instalado. Iniciando su instalación...${vFinColor}"
+              echo -e "${vColorAzulClaro}      El paquete tar no está instalado. Iniciando su instalación...${cFinColor}"
               echo ""
               apt-get -y update
               apt-get -y install tar
@@ -184,7 +184,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${vColorAzulClaro}      El paquete curl no está instalado. Iniciando su instalación...${vFinColor}"
+              echo -e "${vColorAzulClaro}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
               echo "  "
               echo ""
               apt-get -y update
@@ -218,7 +218,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${vColorAzulClaro}      El paquete wget no está instalado. Iniciando su instalación...${vFinColor}"
+              echo -e "${vColorAzulClaro}      El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
               echo ""
               apt-get -y update
               apt-get -y install wget
@@ -232,7 +232,7 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
           # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${vColorAzulClaro}      El paquete tar no está instalado. Iniciando su instalación...${vFinColor}"
+              echo -e "${vColorAzulClaro}      El paquete tar no está instalado. Iniciando su instalación...${cFinColor}"
               echo ""
               apt-get -y update
               apt-get -y install tar

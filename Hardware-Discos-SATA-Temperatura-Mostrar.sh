@@ -12,11 +12,11 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Hardware-Discos-SATA-Temperatura.sh | bash
 # ----------
 
-ColorVerde="\033[1;32m"
-FinColor="\033[0m"
+cColorVerde="\033[1;32m"
+cFinColor="\033[0m"
 
 echo ""
-echo -e "${ColorVerde}  Mostrando temperatura de los discos duros SATA...${FinColor}"
+echo -e "${cColorVerde}  Mostrando temperatura de los discos duros SATA...${cFinColor}"
 echo ""
 
 ## Obtener la cantidad de discos SATA que hay instalados en el sistema

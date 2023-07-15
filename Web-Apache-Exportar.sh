@@ -12,29 +12,29 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Web-Apache-Exportar.sh | bash -s pepe.com pepe 1234 pepedb
 # ----------
 
-vCantArgsEsperados=4
-vArgsInsuficientes=65
+cCantArgsEsperados=4
+v
 
-vColorAdvertencia='\033[1;31m'
-vColorArgumentos='\033[1;32m'
-vFinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
-if [ $# -ne $vCantArgsEsperados ]
+if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
-    echo -e "${vColorAdvertencia}Mal uso del script.${vFinColor} El uso correcto sería:"
+    
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
     echo ""
-    echo -e "$0 ${vColorArgumentos}[NombreDeLaWebEnApache] [UsuarioBD] [PasswordBD] [NombreBD]${vFinColor}"
+    echo -e "$0 ${cColorVerde}[NombreDeLaWebEnApache] [UsuarioBD] [PasswordBD] [NombreBD]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo ' $0 pepe.org pepe'
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
     exit $vArgsInsuficientes
   else
     echo ""
-    echo -e "${vColorArgumentos}Ejecutando la copia de seguridad...${vFinColor}"
+    echo -e "${cColorVerde}Ejecutando la copia de seguridad...${cFinColor}"
     echo ""
     mkdir -p /CopSeg/$1/etc/apache2/sites-available/
     cp /etc/apache2/sites-available/$1.conf /CopSeg/$1/etc/apache2/sites-available/

@@ -9,14 +9,14 @@
 # Script de NiPeGun para actualizar Debian cuando hay un repositorio con firmas caducadas
 # ----------
 
-vColorAzul="\033[0;34m"
-vColorAzulClaro="\033[1;34m"
-vColorVerde='\033[1;32m'
-vColorRojo='\033[1;31m'
-vFinColor='\033[0m'
+cColorAzul="\033[0;34m"
+cColorAzulClaro="\033[1;34m"
+cColorVerde='\033[1;32m'
+cColorRojo='\033[1;31m'
+cFinColor='\033[0m'
 
 echo ""
-echo -e "${vColorAzulClaro}  Iniciando el script de actualización del sistema opeartivo con firmas caducadas...${vFinColor}"
+echo -e "${vColorAzulClaro}  Iniciando el script de actualización del sistema opeartivo con firmas caducadas...${cFinColor}"
 echo ""
 
 echo ""

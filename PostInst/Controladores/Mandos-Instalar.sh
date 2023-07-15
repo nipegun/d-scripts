@@ -5,15 +5,15 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-----------------------------------------------------------------------------------------------------------------------
+# --------------
 #  Script de NiPeGun para instalar controladores de mandos de juegos en Debian
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Mandos-Instalar.sh | bash
-#-----------------------------------------------------------------------------------------------------------------------
+# --------------
 
-ColorVerde="\033[1;32m"
-FinColor="\033[0m"
+cColorVerde="\033[1;32m"
+cFinColor="\033[0m"
 
 apt-get -y update 2> /dev/null
 apt-get -y install dialog 2> /dev/null
@@ -32,7 +32,7 @@ menu=(dialog --timeout 5 --checklist "Elección del mando a instalar:" 22 76 16)
 
         1)
           echo ""
-          echo -e "${ColorVerde}Instalando controladores para el adaptador USB de los mandos de la XBox One...${FinColor}"
+          echo -e "${cColorVerde}Instalando controladores para el adaptador USB de los mandos de la XBox One...${cFinColor}"
           echo ""
           mkdir /root/Controladores/
           cd /root/Controladores/

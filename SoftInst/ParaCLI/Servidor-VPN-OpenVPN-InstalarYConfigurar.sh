@@ -5,44 +5,44 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------------------------------------------------------------------------------
+-------
 #  Script de NiPeGun para instalar y configurar OpenVPN
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-VPN-OpenVPN-InstalarYConfigurar.sh | bash
-#------------------------------------------------------------------------------------------------------------------------------------------
+-------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 ## Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
        . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
+       cNomSO=$NAME
+       cVerSO=$VERSION_ID
    elif type lsb_release >/dev/null 2>&1; then
        # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
+       cNomSO=$(lsb_release -si)
+       cVerSO=$(lsb_release -sr)
    elif [ -f /etc/lsb-release ]; then
        # Para algunas versiones de Debian sin el comando lsb_release
        . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
+       cNomSO=$DISTRIB_ID
+       cVerSO=$DISTRIB_RELEASE
    elif [ -f /etc/debian_version ]; then
        # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
+       cNomSO=Debian
+       cVerSO=$(cat /etc/debian_version)
    else
        # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
+       cNomSO=$(uname -s)
+       cVerSO=$(uname -r)
    fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -54,7 +54,7 @@ if [ $OS_VERS == "7" ]; then
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "8" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -134,9 +134,9 @@ elif [ $OS_VERS == "8" ]; then
   ./build-key-server OpenVPN
 
   echo ""
-  echo "---------------------------------------------------------------------"
+  
   echo "  COPIANDO EL CERTIFICADO Y LA LLAVE DEL SERVIDOR AL LUGAR CORRECTO"
-  echo "---------------------------------------------------------------------"
+  
   echo ""
   sleep 2
   cp /etc/openvpn/easy-rsa/keys/{OpenVPN.crt,OpenVPN.key,ca.crt} /etc/openvpn
@@ -158,32 +158,32 @@ elif [ $OS_VERS == "8" ]; then
   service openvpn start
   service openvpn status
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
-CantArgsEsperados=1
-ArgsInsuficientes=65
+cCantArgsEsperados=1
 
-if [ $# -ne $CantArgsEsperados ]
+
+if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
-    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
+    
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
     echo ""
-    echo -e "  $0${ColorVerde}[IPDelServidorOpenVPN] [IPDelOrdenadorConLaAutoridadCertificadora]${FinColor}"
+    echo -e "  $0${cColorVerde}[IPDelServidorOpenVPN] [IPDelOrdenadorConLaAutoridadCertificadora]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo "  $0 192.168.0.10"
     echo "o"
     echo "  $0 pepe.com"
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     menu=(dialog --timeout 5 --checklist "Que VPN quieres instalar:" 22 76 16)
     opciones=(1 "OpenVPN con Autoridad Certificadora en la misma máquina" off
@@ -278,23 +278,23 @@ if [ $# -ne $CantArgsEsperados ]
             # sed -i -e's|key server.key  # This file should be kept secret|key ServidorOpenVPN.key|g' /etc/openvpn/server.conf
             
             echo ""
-            echo -e "${ColorVerde}Activando el forwarding...${FinColor}"
+            echo -e "${cColorVerde}Activando el forwarding...${cFinColor}"
             echo ""
             sed -i -e 's|#net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
             
             echo ""
-            echo -e "${ColorVerde}Creando las reglas IPTables...${FinColor}"
+            echo -e "${cColorVerde}Creando las reglas IPTables...${cFinColor}"
             echo ""
             echo "# OpenVPN" >> /root/ComandosIPTables
             echo "iptables -t nat-A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE" >> /root/ComandosIPTables
             
             echo ""
-            echo -e "${ColorVerde}Activando el servicio...${FinColor}"
+            echo -e "${cColorVerde}Activando el servicio...${cFinColor}"
             echo ""
             systemctl enable openvpn
             
             echo ""
-            echo -e "${ColorVerde}Creando la infraestructura de configuración de los clientes...${FinColor}"
+            echo -e "${cColorVerde}Creando la infraestructura de configuración de los clientes...${cFinColor}"
             echo ""
             mkdir -p /root/VPN/client-configs/files
             cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /root/VPN/client-configs/base.conf
@@ -312,7 +312,7 @@ if [ $# -ne $CantArgsEsperados ]
             echo "# down /etc/openvpn/update-resolv-conf" >> /root/VPN/client-configs/base.conf
             
             echo ""
-            echo -e "${ColorVerde}Creando el script para agregar usuarios...${FinColor}"
+            echo -e "${cColorVerde}Creando el script para agregar usuarios...${cFinColor}"
             echo ""
             echo '#!/bin/bash' > /root/VPN/client-configs/make_config.sh
             echo "" >> /root/VPN/client-configs/make_config.sh
@@ -347,7 +347,7 @@ if [ $# -ne $CantArgsEsperados ]
             apt-get -y install openvpn
             
             echo ""
-            echo -e "${ColorRojo}Creando la entidad certificadora...${FinColor}"
+            echo -e "${cColorRojo}Creando la entidad certificadora...${cFinColor}"
             echo ""
             wget --no-check-certificate -P /root/ https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.6/EasyRSA-unix-v3.0.6.tgz
             tar xvf /root/EasyRSA-unix-v3.0.6.tgz -C /root/
@@ -377,7 +377,7 @@ if [ $# -ne $CantArgsEsperados ]
           cp /root/EasyRSA/pki/reqs/server.req
             
           echo ""
-          echo -e "${ColorRojo}Creando el certificado del servidor, la llave y los archivos de encriptación...${FinColor}"
+          echo -e "${cColorRojo}Creando el certificado del servidor, la llave y los archivos de encriptación...${cFinColor}"
           echo ""
           cd /etc/openvpn/EasyRSA-v3.0.6/
           ./easyrsa init-pki
@@ -396,24 +396,24 @@ if [ $# -ne $CantArgsEsperados ]
 fi
 
 
-elif [ $OS_VERS == "10" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  
   echo ""
 
   echo ""

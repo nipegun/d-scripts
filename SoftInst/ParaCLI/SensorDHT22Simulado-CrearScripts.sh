@@ -5,12 +5,12 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------------------------------------------------------------------
+# ------------
 #  Script de NiPeGun para crear los scripts de simulación de lectura del sensor DHT22 para Debian
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/SensorDHT22Simulado-CrearScripts.sh | bash
-#----------------------------------------------------------------------------------------------------------------------------------
+# ------------
 
 ## Creación del script de simulación de lectura del sensor
    echo '#!/usr/bin/python3'                                                                          > /root/scripts/SensorDHT22Simulado-Leer.py

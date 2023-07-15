@@ -5,44 +5,44 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------------------------------------------------
+# -----------
 #  Script de NiPeGun para instalar y configurar OBSStudio en Debian
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/OBSStudio-Instalar.sh | bash
-#--------------------------------------------------------------------------------------------------------------------
+# -----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 ## Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
        . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
+       cNomSO=$NAME
+       cVerSO=$VERSION_ID
    elif type lsb_release >/dev/null 2>&1; then
        # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
+       cNomSO=$(lsb_release -si)
+       cVerSO=$(lsb_release -sr)
    elif [ -f /etc/lsb-release ]; then
        # Para algunas versiones de Debian sin el comando lsb_release
        . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
+       cNomSO=$DISTRIB_ID
+       cVerSO=$DISTRIB_RELEASE
    elif [ -f /etc/debian_version ]; then
        # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
+       cNomSO=Debian
+       cVerSO=$(cat /etc/debian_version)
    else
        # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
+       cNomSO=$(uname -s)
+       cVerSO=$(uname -r)
    fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -54,7 +54,7 @@ if [ $OS_VERS == "7" ]; then
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "8" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -66,24 +66,24 @@ elif [ $OS_VERS == "8" ]; then
   echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de OBSStudio para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "10" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de OBSStudio para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
   apt-get -y update 2> /dev/null
@@ -108,7 +108,7 @@ elif [ $OS_VERS == "10" ]; then
 
           2)
             echo ""
-            echo -e "${ColorVerde}Instalando paquetes necesarios para construir OBS...${FinColor}"
+            echo -e "${cColorVerde}Instalando paquetes necesarios para construir OBS...${cFinColor}"
             echo ""
             apt-get -y update
             apt-get -y install git
@@ -179,7 +179,7 @@ elif [ $OS_VERS == "10" ]; then
           3)
 
             echo ""
-            echo -e "${ColorVerde}Instalando paquetes necesarios para construir OBS...${FinColor}"
+            echo -e "${cColorVerde}Instalando paquetes necesarios para construir OBS...${cFinColor}"
             echo ""
             apt-get -y update
             apt-get -y install git
@@ -278,13 +278,13 @@ elif [ $OS_VERS == "10" ]; then
             cp -r /root/paquetes/obs-linuxbrowser/obs-linuxbrowser/ /root/.config/obs-studio/plugins/
             
             echo ""
-            echo -e "${ColorVerde}-----------------------------------------------------------------------------${FinColor}"
-            echo -e "${ColorVerde}Ejecución del script, finalizada.${FinColor}"
+            echo -e "${cColorVerde}-----------------------------------------------------------------------------${cFinColor}"
+            echo -e "${cColorVerde}Ejecución del script, finalizada.${cFinColor}"
             echo -e ""
-            echo -e "${ColorVerde}Si queres tener el plugin disponible para otro usuario que no sea el root${FinColor}"
-            echo -e "${ColorVerde}copia la carpeta /root/.config/obs-studio/plugins dentro de la carpeta${FinColor}"
-            echo -e "${ColorVerde}del usuario correspondiente, siguiendo la estructura de carpetas correcta.${FinColor}"
-            echo -e "${ColorVerde}-----------------------------------------------------------------------------${FinColor}"
+            echo -e "${cColorVerde}Si queres tener el plugin disponible para otro usuario que no sea el root${cFinColor}"
+            echo -e "${cColorVerde}copia la carpeta /root/.config/obs-studio/plugins dentro de la carpeta${cFinColor}"
+            echo -e "${cColorVerde}del usuario correspondiente, siguiendo la estructura de carpetas correcta.${cFinColor}"
+            echo -e "${cColorVerde}-----------------------------------------------------------------------------${cFinColor}"
             echo ""
 
           ;;
@@ -319,12 +319,12 @@ elif [ $OS_VERS == "10" ]; then
 
   done
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de OBSStudio para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  
   echo ""
 
   echo ""

@@ -12,9 +12,9 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/VPN-WireGuard-Clientes-Nuevo.sh | bash
 # ----------
 
-vColorRojo='\033[1;31m'
-vColorVerde='\033[1;32m'
-vFinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 vOctetos123="192.168.255."
 vMascaraRestrictora="/32"
@@ -113,6 +113,6 @@ for vNumPeer in {2..254}
   done
 
 # Otra forma de crear peers
-# ClavePúblicaDelNuevoCliente IPDelCliente 
+# ClavePúblicaDelNuevoCliente IPDelCliente
 # wg set wg0 peer <Client Public Key> endpoint <Client IP address>:51820 allowed-ips 203.0.113.12/24,fd86:ea04:1115::5/64
 

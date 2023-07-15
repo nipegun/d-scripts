@@ -5,13 +5,13 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------
+# ------------
 #  SCRIPT DE NIPEGUN PARA BORRAR TAGs DE ARCHIVOS MP3 DE UNA CARPETA
 #  X Y TAMBIÉN DE SUS SUB-CARPETAS DE FORMA RECURSIVA
-#----------------------------------------------------------------------
+# ----------
 
 EXPECTED_ARGS=1
-E_BADARGS=65
+
 
 if [ $# -ne $EXPECTED_ARGS ]
   then

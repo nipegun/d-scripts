@@ -5,30 +5,30 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para cambiar la contraseña del SuperUser en mumble-server
-#-------------------------------------------------------------------------------
+# ----------
 
-CantArgsEsperados=1
-ArgsInsuficientes=65
+cCantArgsEsperados=1
 
-ColorAdvertencia='\033[1;31m'
-ColorArgumentos='\033[1;32m'
-FinColor='\033[0m'
 
-if [ $# -ne $CantArgsEsperados ]
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
+
+if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
-    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor} El uso correcto sería:"
+    
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
     echo ""
-    echo -e "CambiarPasswordASuperUserEnMumble ${ColorArgumentos}[PasswordNuevo]${FinColor}"
+    echo -e "CambiarPasswordASuperUserEnMumble ${cColorVerde}[PasswordNuevo]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo ' CambiarPasswordASuperUserEnMumble 12345678'
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     /usr/sbin/murmurd -ini /etc/mumble-server.ini -supw $1
 fi

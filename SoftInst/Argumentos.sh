@@ -6,19 +6,19 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # Definir las variables de color
-  vColorAzul="\033[0;34m"
-  vColorAzulClaro="\033[1;34m"
-  vColorVerde='\033[1;32m'
-  vColorRojo='\033[1;31m'
-  vFinColor='\033[0m'
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  cFinColor='\033[0m'
 
-vCantArgsCorrectos=2
-vArgsInsuficientes=65
+cCantArgsCorrectos=2
+v
 
-if [ $# -ne $vCantArgsCorrectos ]
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo -e "${vColorRojo}  Mal uso del script. El uso correcto sería: ${vFinColor}"
+    echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
     echo "    $0 [Argumento1] [Argumento2]"
     echo ""
     echo "  Ejemplo:"

@@ -9,11 +9,11 @@
 #  Script de NiPeGun para comprobar el estado de salud de los discos duros SSD SATA
 # ----------
 
-ColorVerde="\033[1;32m"
-FinColor="\033[0m"
+cColorVerde="\033[1;32m"
+cFinColor="\033[0m"
 
 echo ""
-echo -e "${ColorVerde}  Mostrando información de salud de discos SSD SATA...${FinColor}"
+echo -e "${cColorVerde}  Mostrando información de salud de discos SSD SATA...${cFinColor}"
 echo ""
 
 echo ""

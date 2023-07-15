@@ -5,9 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para borrar kernels viejos de Debian 9
-#------------------------------------------------------------
+# ----------
 
 echo ""
 echo "  Borrando todos los Kernels anteriores al 4.9.0-8..."

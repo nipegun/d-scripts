@@ -5,44 +5,44 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------------------------------------------------------------------------------------
+-----
 #  Script de NiPeGun para instalar y configurar el servidor VPN IKEv2 en Debian
 #
 #  Ejecución remota:
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-VPN-IKEv2-InstalarYConfigurar.sh | bash
-#----------------------------------------------------------------------------------------------------------------------------------------
+-----
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 ## Determinar la versión de Debian
 
    if [ -f /etc/os-release ]; then
        # Para systemd y freedesktop.org
        . /etc/os-release
-       OS_NAME=$NAME
-       OS_VERS=$VERSION_ID
+       cNomSO=$NAME
+       cVerSO=$VERSION_ID
    elif type lsb_release >/dev/null 2>&1; then
        # linuxbase.org
-       OS_NAME=$(lsb_release -si)
-       OS_VERS=$(lsb_release -sr)
+       cNomSO=$(lsb_release -si)
+       cVerSO=$(lsb_release -sr)
    elif [ -f /etc/lsb-release ]; then
        # Para algunas versiones de Debian sin el comando lsb_release
        . /etc/lsb-release
-       OS_NAME=$DISTRIB_ID
-       OS_VERS=$DISTRIB_RELEASE
+       cNomSO=$DISTRIB_ID
+       cVerSO=$DISTRIB_RELEASE
    elif [ -f /etc/debian_version ]; then
        # Para versiones viejas de Debian.
-       OS_NAME=Debian
-       OS_VERS=$(cat /etc/debian_version)
+       cNomSO=Debian
+       cVerSO=$(cat /etc/debian_version)
    else
        # Para el viejo uname (También funciona para BSD)
-       OS_NAME=$(uname -s)
-       OS_VERS=$(uname -r)
+       cNomSO=$(uname -s)
+       cVerSO=$(uname -r)
    fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -54,7 +54,7 @@ if [ $OS_VERS == "7" ]; then
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "8" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "-----------------------------------------------------------------------------"
@@ -66,30 +66,30 @@ elif [ $OS_VERS == "8" ]; then
   echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
-CantArgsEsperados=1
-ArgsInsuficientes=65
+cCantArgsEsperados=1
 
-if [ $# -ne $CantArgsEsperados ]
+
+if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
-    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
+    
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
     echo ""
-    echo -e "  $0${ColorVerde}[DominioOIPDelOrdenador]${FinColor}"
+    echo -e "  $0${cColorVerde}[DominioOIPDelOrdenador]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo "  $0 pepe"
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     menu=(dialog --timeout 5 --checklist "Que VPN quieres instalar:" 22 76 16)
     opciones=(1 "IKEv2 basada en IP" off
@@ -114,7 +114,7 @@ if [ $# -ne $CantArgsEsperados ]
             cp -r /root/pki/* /etc/ipsec.d/
             
             echo ""
-            echo -e "${ColorRojo}Haciendo cambios en el archivo de configuración...${FinColor}"
+            echo -e "${cColorRojo}Haciendo cambios en el archivo de configuración...${cFinColor}"
             echo ""
             mv /etc/ipsec.conf{,.original}
             echo "config setup" > /etc/ipsec.conf
@@ -148,7 +148,7 @@ if [ $# -ne $CantArgsEsperados ]
             echo "  eap_identity=%identity" >> /etc/ipsec.conf
 
             echo ""
-            echo -e "${ColorRojo}Configurando los usuarios...${FinColor}"
+            echo -e "${cColorRojo}Configurando los usuarios...${cFinColor}"
             echo ""
             echo ': RSA "server-key.pem"' >> /etc/ipsec.secrets
             echo 'usuario : EAP "password"' >> /etc/ipsec.secrets
@@ -159,12 +159,12 @@ if [ $# -ne $CantArgsEsperados ]
             echo "Si quieres agregar o modificar usuarios, modifica el archivo /etc/ipsec.secrets"
             
             echo ""
-            echo -e "${ColorRojo}Re-leyendo los cambios hechos en los usuarios...${FinColor}"
+            echo -e "${cColorRojo}Re-leyendo los cambios hechos en los usuarios...${cFinColor}"
             echo ""
             ipsec rereadsecrets
 
             echo ""
-            echo -e "${ColorRojo}Modificando strongswan.conf para activar los logs...${FinColor}"
+            echo -e "${cColorRojo}Modificando strongswan.conf para activar los logs...${cFinColor}"
             echo ""
             cp /etc/strongswan.conf /etc/strongswan.conf.bak
             touch /var/log/StrongSwan.log
@@ -190,12 +190,12 @@ if [ $# -ne $CantArgsEsperados ]
             echo "include strongswan.d/*.conf" >> /etc/strongswan.conf
 
             echo ""
-            echo -e "${ColorRojo}Reiniciando StrongSwan...${FinColor}"
+            echo -e "${cColorRojo}Reiniciando StrongSwan...${cFinColor}"
             echo ""
             systemctl restart strongswan
             
             echo ""
-            echo -e "${ColorRojo}Preparando el certificado para importar en los dispositivos...${FinColor}"
+            echo -e "${cColorRojo}Preparando el certificado para importar en los dispositivos...${cFinColor}"
             echo ""
             mkdir /root/VPN
             cp /etc/ipsec.d/cacerts/ca-cert.pem /root/VPN/CertificadoVPN.pem
@@ -206,12 +206,12 @@ if [ $# -ne $CantArgsEsperados ]
             echo ""
             
             echo ""
-            echo -e "${ColorRojo}Activando el forwarding...${FinColor}"
+            echo -e "${cColorRojo}Activando el forwarding...${cFinColor}"
             echo ""
             sed -i -e 's|#net.ipv4.ip_forward=1|net.ipv4.ip_forward=1|g' /etc/sysctl.conf
 
             echo ""
-            echo -e "${ColorRojo}Creando los comandos para IPTables...${FinColor}"
+            echo -e "${cColorRojo}Creando los comandos para IPTables...${cFinColor}"
             echo ""
             echo "iptables -A INPUT -p udp --dport 500 -j ACCEPT" >> /root/ComandosIPTables
             echo "iptables -A INPUT -p udp --dport 4500 -j ACCEPT" >> /root/ComandosIPTables
@@ -349,24 +349,24 @@ if [ $# -ne $CantArgsEsperados ]
 
 fi
 
-elif [ $OS_VERS == "10" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."
-  echo "------------------------------------------------------------------------------"
+  
   echo ""
 
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "--------------------------------------------------------------------------------"
+  
   echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."
-  echo "--------------------------------------------------------------------------------"
+  
   echo ""
 
   echo ""

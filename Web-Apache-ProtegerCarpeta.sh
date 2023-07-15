@@ -12,9 +12,9 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Web-Apache-ProtegerCarpeta.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 vCarpetaAProteger="/var/www/html/_/logs"
 vNombreDeUsuario="nipegun"

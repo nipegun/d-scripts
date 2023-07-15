@@ -10,16 +10,16 @@
 # ----------
 
 # Definir variables de color
-  vColorAzul="\033[0;34m"
-  vColorAzulClaro="\033[1;34m"
-  vColorVerde='\033[1;32m'
-  vColorRojo='\033[1;31m'
-  vFinColor='\033[0m'
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  cFinColor='\033[0m'
 
 # Comprobar si el paquete sqlite3 está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s sqlite3 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${vColorRojo}  El paquete sqlite3 no está instalado. Iniciando su instalación...${vFinColor}"
+    echo -e "${cColorRojo}  El paquete sqlite3 no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
     apt-get -y update
     apt-get -y install sqlite3
@@ -35,13 +35,13 @@
 # Mostrar usuarios
   if [ $vEstadoDeLaBaseDeDatosDeUHUB == "ok" ]; then
     echo ""
-    echo -e "${vColorVerde}    El estado de la base de datos es consistente. Mostrando usuarios...${vFinColor}"
+    echo -e "${cColorVerde}    El estado de la base de datos es consistente. Mostrando usuarios...${cFinColor}"
     echo ""
     sqlite3 -column -header /etc/uhub/users.db "select * from users;"
     echo ""
   else
     echo ""
-    echo -e "${vColorRojo}    El estado de la base de datos no es consistente. Intentando mostrar lo que se pueda...${vFinColor}"
+    echo -e "${cColorRojo}    El estado de la base de datos no es consistente. Intentando mostrar lo que se pueda...${cFinColor}"
     echo ""
     cat /etc/uhub/users.db
     echo ""

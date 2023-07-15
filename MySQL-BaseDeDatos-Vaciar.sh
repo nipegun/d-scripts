@@ -5,29 +5,29 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------------------------------------------------------
+# ------------
 #  Script de NiPeGun para borrar una base de datos antes de importar una copia de seguridad de la misma
-#--------------------------------------------------------------------------------------------------------
+# ------------
 
-CantArgsEsperados=4
-ArgsInsuficientes=65
+cCantArgsEsperados=4
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
 
-if [ $# -ne $CantArgsEsperados ]
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
+
+if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
-    echo -e "${ColorRojo}Mal uso del script.${FinColor}"
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor}"
     echo ""
     echo "El uso correcto sería:"
-    echo -e "$0 ${ColorVerde}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
+    echo -e "$0 ${cColorVerde}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo "$0 pepe 12345678 Cuentas"
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     mysqldump -u$1 -p$2 --add-drop-table --no-data $3 | grep ^DROP | sed -e 's/DROP TABLE IF EXISTS/TRUNCATE TABLE/g' | mysql -u$1 -p$2 $3
 fi

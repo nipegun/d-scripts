@@ -17,14 +17,14 @@
 
 PublicKey=C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 echo ""
-echo -e "${ColorVerde}------------------------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}  Iniciando el script de instalación o actualización del minero de Utopia...${FinColor}"
-echo -e "${ColorVerde}------------------------------------------------------------------------------${FinColor}"
+echo -e "${cColorVerde}------------------------------------------------------------------------------${cFinColor}"
+echo -e "${cColorVerde}  Iniciando el script de instalación o actualización del minero de Utopia...${cFinColor}"
+echo -e "${cColorVerde}------------------------------------------------------------------------------${cFinColor}"
 echo ""
 
 # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -56,7 +56,7 @@ echo ""
         1)
 
           echo ""
-          echo -e "${ColorVerde}  Instalando el minero de CRP (Crypton) para el usuario root...${FinColor}"
+          echo -e "${cColorVerde}  Instalando el minero de CRP (Crypton) para el usuario root...${cFinColor}"
           echo ""
 
           # Detener todos los posibles procesos activos del minero
@@ -164,7 +164,7 @@ echo ""
         2)
 
           echo ""
-          echo -e "${ColorVerde}  Moviendo el minero de CRP a la carpeta del usuario no-root...${FinColor}"
+          echo -e "${cColorVerde}  Moviendo el minero de CRP a la carpeta del usuario no-root...${cFinColor}"
           echo ""
           # Pedir el nombre del usuario no-root
              UsuarioCRPNoRoot=$(dialog --keep-tite --title "Ingresa el nombre para el usuario no-root" --inputbox "Nombre de usuario:" 8 60 3>&1 1>&2 2>&3 3>&- )
@@ -196,7 +196,7 @@ echo ""
         3)
 
           echo ""
-          echo -e "${ColorVerde}  Agregando los mineros del root a los ComandosPostArranque...${FinColor}"
+          echo -e "${cColorVerde}  Agregando los mineros del root a los ComandosPostArranque...${cFinColor}"
           echo ""
           # CRP
             echo "#/root/Cryptos/CRP/minero/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh
@@ -206,7 +206,7 @@ echo ""
         4)
 
           echo ""
-          echo -e "${ColorVerde}  Agregando el minero del usuario $UsuarioCRPNoRoot a los ComandosPostArranque...${FinColor}"
+          echo -e "${cColorVerde}  Agregando el minero del usuario $UsuarioCRPNoRoot a los ComandosPostArranque...${cFinColor}"
           echo ""
           # CRP
             echo "#su $UsuarioCRPNoRoot -c /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh

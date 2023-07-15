@@ -5,34 +5,34 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#---------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para agregar usuarios nuevos sin shell a Debian
-#---------------------------------------------------------------------
+# ----------
 
-ArgumentosEsperados=1
-ArgumentosInsuficientes=65
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cCantArgEsperados=1
 
-if [ $# -ne $ArgumentosEsperados ]
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
+
+if [ $# -ne $cCantArgEsperados ]
   then
     echo ""
     echo "------------------------------------------------------------------"
-    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
     echo ""
-    echo -e "$0 ${ColorVerde}[NombreDeUsuario]${FinColor}"
+    echo -e "$0 ${cColorVerde}[NombreDeUsuario]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo " $0 pepe"
     echo "------------------------------------------------------------------"
     echo ""
-    exit $ArgumentosInsuficientes
+    exit
   else
     # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${vColorRojo}dialog no está instalado. Iniciando su instalación...${vFinColor}"
+        echo -e "${cColorRojo}dialog no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
         apt-get -y update && apt-get -y install dialog
         echo ""
@@ -52,14 +52,14 @@ if [ $# -ne $ArgumentosEsperados ]
       case $choice in
         1)
           echo ""
-          echo -e "${ColorVerde}Creando el usuario $1...${FinColor}"
+          echo -e "${cColorVerde}Creando el usuario $1...${cFinColor}"
           echo ""
           useradd -d /home/$1/ -s /bin/false $1
         ;;
 
         2)
           echo ""
-          echo -e "${ColorVerde}Creando la carpeta del usuario con permisos estándar...${FinColor}"
+          echo -e "${cColorVerde}Creando la carpeta del usuario con permisos estándar...${cFinColor}"
           echo ""
           mkdir /home/$1/
           chown $1:$1 /home/$1/ -R
@@ -70,16 +70,16 @@ if [ $# -ne $ArgumentosEsperados ]
 
         3)
           echo ""
-          echo -e "${ColorVerde}Denegando el acceso a la carpeta /home/$1 a los otros usuarios...${FinColor}"
+          echo -e "${cColorVerde}Denegando el acceso a la carpeta /home/$1 a los otros usuarios...${cFinColor}"
           echo ""
           find /home/$1 -type d -print0 | xargs -0 chmod 0750
           echo "hacks4geeks rules da net" > /home/$1/$1
           find /home/$1 -type f -print0 | xargs -0 chmod 0664
         ;;
-    
+
         4)
           echo ""
-          echo -e "${ColorVerde}Creando la compartición Samba para la carpeta de usuario...${FinColor}"
+          echo -e "${cColorVerde}Creando la compartición Samba para la carpeta de usuario...${cFinColor}"
           echo ""
           echo "[$1]"                               >> /etc/samba/smb.conf
           echo "  path = /home/$1/"                 >> /etc/samba/smb.conf
@@ -88,16 +88,16 @@ if [ $# -ne $ArgumentosEsperados ]
           echo "  read only = no"                   >> /etc/samba/smb.conf
           echo "  valid users = $1"                 >> /etc/samba/smb.conf
           echo ""
-          echo -e "${ColorRojo}Ahora deberás ingresar 2 veces la nueva contraseña samba para el usuario $1.${FinColor}"
-          echo -e "${ColorRojo}Puede ser distinta a la de la propia cuenta de usuario. Pero si pones una${FinColor}"
-          echo -e "${ColorRojo}distinta, cuando te conectes a la carpeta compartida, acuérdate de utilizar${FinColor}"
-          echo -e "${ColorRojo}la contraseña que pongas ahora y no la de la cuenta de usuario.${FinColor}"
+          echo -e "${cColorRojo}Ahora deberás ingresar 2 veces la nueva contraseña samba para el usuario $1.${cFinColor}"
+          echo -e "${cColorRojo}Puede ser distinta a la de la propia cuenta de usuario. Pero si pones una${cFinColor}"
+          echo -e "${cColorRojo}distinta, cuando te conectes a la carpeta compartida, acuérdate de utilizar${cFinColor}"
+          echo -e "${cColorRojo}la contraseña que pongas ahora y no la de la cuenta de usuario.${cFinColor}"
           echo ""
           smbpasswd -a $1
         ;;
 
         5)
-       
+
         ;;
 
       esac

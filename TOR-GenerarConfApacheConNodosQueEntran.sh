@@ -5,7 +5,7 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------
+# ----------
 #  SCRIPT DE NIPEGUN PARA OBTENER LA LISTA DE IPS DE NODOS TOR
 #  QUE LLEGAN A LA IP WAN Y GENERAR UNA CONFIGURACIÓN DE APACHE
 #  PARA USAR ESA LISTA DE ALGUN MODO.
@@ -27,20 +27,16 @@
 #  <Files my-files.html>"
 #    Include /etc/apache2/NodosTORQueEntran.conf"
 #  </Files>"
-#------------------------------------------------------------------
+# ----------
 
 lisnodtor
 
 echo ""
-echo "------------------------------------------------------"
 echo "  CREANDO EL ARCHIVO DE CONFIGURACIÓN PARA APACHE..."
-echo "------------------------------------------------------"
 echo ""
 cat /root/NodosTORQueEntran.list | sed "s/^/  Require not ip /g; 1i\<RequireAll\>\n  Require all granted" | sed '$a\<\/RequireAll\>' > /etc/apache2/NodosTORQueEntran.conf
 
 echo ""
-echo "---------------------------------------------------------------------"
 echo "  Archivo: /etc/apache2/NodosTORQueEntran.conf creado correctamente"
-echo "---------------------------------------------------------------------"
 echo ""
 

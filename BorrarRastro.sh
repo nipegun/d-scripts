@@ -5,28 +5,28 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para borrar el rastro de acceso a un sistema
-#------------------------------------------------------------------
+# ----------
 
-#---------------------------------------------------------------------------------------------------
+# -------------
 #  Ejecución remota:
 #
 #  curl --silent https://raw.githubusercontent.com/nipegun/d-scripts/master/BorrarRastro.sh | bash
-#---------------------------------------------------------------------------------------------------
+# -------------
 
-ColorVerde="\033[1;32m"
+cColorVerde="\033[1;32m"
 ColorAzul="\033[0;34m" 
-FinColor="\033[0m"
+cFinColor="\033[0m"
 
 echo ""
-echo -e "${ColorVerde}-----------------------------------------------${FinColor}"
-echo -e "${ColorVerde}  Iniciando el script de borrado de rastro...${FinColor}"
-echo -e "${ColorVerde}-----------------------------------------------${FinColor}"
+echo -e "${cColorVerde}-----------------------------------------------${cFinColor}"
+echo -e "${cColorVerde}  Iniciando el script de borrado de rastro...${cFinColor}"
+echo -e "${cColorVerde}-----------------------------------------------${cFinColor}"
 echo ""
 
 echo ""
-echo -e "${ColorVerde}  Borrando todos los logs de /var/log...${FinColor}"
+echo -e "${cColorVerde}  Borrando todos los logs de /var/log...${cFinColor}"
 echo ""
 
    ## Borrar archivos sobrantes
@@ -42,7 +42,7 @@ echo ""
       find /var/log/ -type f -print -exec truncate -s 0 {} \;
 
 echo ""
-echo -e "${ColorVerde}  Borrando todos los historiales de comandos...${FinColor}"
+echo -e "${cColorVerde}  Borrando todos los historiales de comandos...${cFinColor}"
 echo ""
 
   ## Comandos ejecutados en bash por el root
@@ -58,7 +58,7 @@ echo ""
      history -c
 
 echo ""
-echo -e "${ColorVerde}  Poniendo a cero todos los achivos de logs que se encuentren en las carpetas de todo el sistema...${FinColor}"
+echo -e "${cColorVerde}  Poniendo a cero todos los achivos de logs que se encuentren en las carpetas de todo el sistema...${cFinColor}"
 echo ""
 
     find /bin/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
@@ -81,7 +81,7 @@ echo ""
     find /var/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
 
 echo ""
-echo -e "${ColorVerde}  Borrando todos los achivos comprimidos de logs que se encuentren en las carpetas de todo el sistema...${FinColor}"
+echo -e "${cColorVerde}  Borrando todos los achivos comprimidos de logs que se encuentren en las carpetas de todo el sistema...${cFinColor}"
 echo ""
 
     find /bin/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
@@ -104,12 +104,12 @@ echo ""
     find /var/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
 
 echo ""
-echo -e "${ColorVerde}----------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}Script finalizado. Vuelve a ejecutar:${FinColor}"
+echo -e "${cColorVerde}----------------------------------------------------${cFinColor}"
+echo -e "${cColorVerde}Script finalizado. Vuelve a ejecutar:${cFinColor}"
 echo ""
-echo -e "${ColorVerde}history -c${FinColor}"
+echo -e "${cColorVerde}history -c${cFinColor}"
 echo ""
-echo -e "${ColorVerde}manualmente para borrar la ejecución de este script.${FinColor}"
-echo -e "${ColorVerde}----------------------------------------------------${FinColor}"
+echo -e "${cColorVerde}manualmente para borrar la ejecución de este script.${cFinColor}"
+echo -e "${cColorVerde}----------------------------------------------------${cFinColor}"
 echo ""
 

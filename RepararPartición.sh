@@ -5,30 +5,30 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------
+# ------------
 #  Script de NiPeGun para reparar un disco de Deban
-#----------------------------------------------------
+# ------------
 
-CantArgsEsperados=1
-ArgsInsuficientes=65
+cCantArgsEsperados=1
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
 
-if [ $# -ne $CantArgsEsperados ]
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
+
+if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
-    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
+    
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
     echo ""
-    echo -e "$0 ${ColorVerde}[Partición]${FinColor}"
+    echo -e "$0 ${cColorVerde}[Partición]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo " $0 /dev/sdd1"
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     fsck -p -f -v $1
     echo ""

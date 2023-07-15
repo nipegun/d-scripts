@@ -5,26 +5,26 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#--------------------------------------------------------
+# ----------
 #  Script de NiPeGun para exportar bases de datos MySQL
-#--------------------------------------------------------
+# ----------
 
 FechaDeExp=$(date +A%YM%mD%d@%T)
 
-CantArgsEsperados=4
-ArgsInsuficientes=65
+cCantArgsEsperados=4
 
-ColorAdvertencia='\033[1;31m'
-ColorArgumentos='\033[1;32m'
-FinColor='\033[0m'
 
-if [ $# -ne $CantArgsEsperados ]
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
+
+if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
-    echo -e "${ColorAdvertencia}Mal uso del script.${FinColor}"
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor}"
     echo ""
     echo "El uso correcto sería:"
-    echo -e "$0 ${ColorArgumentos}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
+    echo -e "$0 ${cColorVerde}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${cFinColor}"
     echo ""
     echo "Ejemplo 1:"
     echo "$0 pepe 12345678 Cuentas Cuentas.sql"
@@ -32,7 +32,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo "Ejemplo 2:"
     echo "$0 pepe 12345678 Cuentas '\Copias de seguridad\Base de datos.sql'"   
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     mysqldump --opt --user=$1 --password=$2 $3 > $4
     echo "$FechaDeExp - Copia de seguridad de la base de datos $3." >> /var/log/CopiasDeSeguridad.log

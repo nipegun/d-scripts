@@ -25,7 +25,7 @@
   cColorRojo='\033[1;31m'
   # Para el color rojo también:
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
-  cFinColor='\033[0m'
+  ccFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
@@ -90,7 +90,7 @@ elif [ $cVerSO == "9" ]; then
   echo ""
 
   echo ""
-  echo -e "${vColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${vFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
 elif [ $cVerSO == "10" ]; then

@@ -5,7 +5,7 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#-------------------------------------------------------------------------------------------------------------------------------
+# ----------
 #  Script de NiPeGun para instalar PHP 7.3 desde el repo de Sury.org
 #
 #  Ejecución remota:
@@ -13,14 +13,14 @@
 #
 #  Antes de ejecutar este script recuerda ejecutar:
 #   /root/scripts/d-scripts/SoftInst/Consola/PHP-DesinstalarPorCompleto.sh
-#-------------------------------------------------------------------------------------------------------------------------------
+# ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 echo ""
-echo -e "${ColorVerde}Instalando PHP 7.3 desde el repo de sury.org...${FinColor}"
+echo -e "${cColorVerde}Instalando PHP 7.3 desde el repo de sury.org...${cFinColor}"
 echo ""
 
 # Agregar el repositorio de sury.org

@@ -5,26 +5,26 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#------------------------------------------------------------------------------------------
+# ----------
 #  SCRIPT DE NIPEGUN PARA MEDIR LA VELOCIDAD DE CARGA DE UNA WEB (via eduardocollado.com)
-#------------------------------------------------------------------------------------------
+# ----------
 
-CantArgsCorrectos=1
-ArgsInsuficientes=65
+cCantArgsCorrectos=1
 
-if [ $# -ne $CantArgsCorrectos ]
+
+if [ $# -ne $cCantArgsCorrectos ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
+
     echo "Se le debe pasar un (único) parámetro al script."
     echo ""
     echo "El uso correcto sería: MostrarVelocidadDeCargaDeWeb [URLDeLaWeb]"
     echo ""
     echo "Ejemplo:"
     echo ' MostrarVelocidadDeCargaDeWeb http://nipegun.com'
-    echo "------------------------------------------------------------------------------"
+
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     curl -s -w '\nMostrando velocidad de carga de la web %{url_effective}\n\nTiempo consulta DNS:\t\t\t%{time_namelookup}s\nTiempo hasta conectar:\t\t\t%{time_connect}s\nAppCon Time:\t\t\t\t%{time_appconnect}s\nTiempo de redirección:\t\t\t%{time_redirect}s\nPre-transfer Time:\t\t\t%{time_pretransfer}s\nStart-transfer Time:\t\t\t%{time_starttransfer}\nVelocidad de descarga (bytes/sec):\t%{speed_download}\nTamaño descargado (bytes):\t\t%{size_download}\n\nTiempo total:\t\t\t\t%{time_total}\n' -o /dev/null $1
 fi

@@ -15,16 +15,16 @@
 #  curl -s -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-XCH-InstalarOActualizar.sh | bash
 # ----------
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 UsuarioNoRoot="nipegun"
 
 echo ""
-echo -e "${ColorVerde}----------------------------------------------------------------------${FinColor}"
-echo -e "${ColorVerde}  Iniciando el script de instalación de la cartera liviana de XCH...${FinColor}"
-echo -e "${ColorVerde}----------------------------------------------------------------------${FinColor}"
+echo -e "${cColorVerde}----------------------------------------------------------------------${cFinColor}"
+echo -e "${cColorVerde}  Iniciando el script de instalación de la cartera liviana de XCH...${cFinColor}"
+echo -e "${cColorVerde}----------------------------------------------------------------------${cFinColor}"
 echo ""
 
 # Obtener el número de la última versión estable desde github

@@ -5,24 +5,24 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------
+# -----------
 #  Script de NiPeGun para saber las RPMs de un disco duro
-#----------------------------------------------------------
+# -----------
 
 EXPECTED_ARGS=1
-E_BADARGS=65
+
 
 if [ $# -ne $EXPECTED_ARGS ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
+    
     echo "Mal uso del script."
     echo ""
     echo "El uso correcto sería: $0 Dispositivo"
     echo ""
     echo "Ejemplo:"
     echo " $0 /dev/sdb"
-    echo "------------------------------------------------------------------------------"
+    
     echo ""
     exit $E_BADARGS
   else

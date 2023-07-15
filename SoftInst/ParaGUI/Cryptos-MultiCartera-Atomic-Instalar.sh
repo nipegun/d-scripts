@@ -25,14 +25,14 @@ vUsuarioNoRoot="nipegun"
 
 ColorAzul="\033[0;34m"
 ColorAzulClaro="\033[1;34m"
-ColorVerde='\033[1;32m'
-ColorRojo='\033[1;31m'
-FinColor='\033[0m'
+cColorVerde='\033[1;32m'
+cColorRojo='\033[1;31m'
+cFinColor='\033[0m'
 
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${ColorRojo}  curl no está instalado. Iniciando su instalación...${FinColor}"
+    echo -e "${cColorRojo}  curl no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
     sudo apt-get -y update > /dev/null
     sudo apt-get -y install curl
@@ -43,71 +43,71 @@ FinColor='\033[0m'
   if [ -f /etc/os-release ]; then
     # Para systemd y freedesktop.org
       . /etc/os-release
-      OS_NAME=$NAME
-      OS_VERS=$VERSION_ID
+      cNomSO=$NAME
+      cVerSO=$VERSION_ID
   elif type lsb_release >/dev/null 2>&1; then
     # linuxbase.org
-      OS_NAME=$(lsb_release -si)
-      OS_VERS=$(lsb_release -sr)
+      cNomSO=$(lsb_release -si)
+      cVerSO=$(lsb_release -sr)
   elif [ -f /etc/lsb-release ]; then
     # Para algunas versiones de Debian sin el comando lsb_release
       . /etc/lsb-release
-      OS_NAME=$DISTRIB_ID
-      OS_VERS=$DISTRIB_RELEASE
+      cNomSO=$DISTRIB_ID
+      cVerSO=$DISTRIB_RELEASE
   elif [ -f /etc/debian_version ]; then
     # Para versiones viejas de Debian.
-      OS_NAME=Debian
-      OS_VERS=$(cat /etc/debian_version)
+      cNomSO=Debian
+      cVerSO=$(cat /etc/debian_version)
   else
     # Para el viejo uname (También funciona para BSD)
-      OS_NAME=$(uname -s)
-      OS_VERS=$(uname -r)
+      cNomSO=$(uname -s)
+      cVerSO=$(uname -r)
   fi
 
-if [ $OS_VERS == "7" ]; then
+if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}Iniciando el script de instalación de Atomic para Debian 7 (Wheezy)...${FinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${ColorRojo}  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
-  echo ""
-
-elif [ $OS_VERS == "8" ]; then
-
-  echo ""
-  echo -e "${ColorAzulClaro}Iniciando el script de instalación de Atomic para Debian 8 (Jessie)...${FinColor}"
+  echo -e "${ColorAzulClaro}Iniciando el script de instalación de Atomic para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${ColorRojo}  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
+  echo -e "${cColorRojo}  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
-elif [ $OS_VERS == "9" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}Iniciando el script de instalación de Atomic para Debian 9 (Stretch)...${FinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${ColorRojo}  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
-  echo ""
-
-elif [ $OS_VERS == "10" ]; then
-
-  echo ""
-  echo -e "${ColorAzulClaro}Iniciando el script de instalación de Atomic para Debian 10 (Buster)...${FinColor}"
+  echo -e "${ColorAzulClaro}Iniciando el script de instalación de Atomic para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${ColorRojo}  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${FinColor}"
+  echo -e "${cColorRojo}  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
-elif [ $OS_VERS == "11" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}Iniciando el script de instalación de Atomic para Debian 11 (Bullseye)...${FinColor}"
+  echo -e "${ColorAzulClaro}Iniciando el script de instalación de Atomic para Debian 9 (Stretch)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo -e "${ColorAzulClaro}Iniciando el script de instalación de Atomic para Debian 10 (Buster)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo -e "${ColorAzulClaro}Iniciando el script de instalación de Atomic para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   # Borrar archivos previos
@@ -140,7 +140,7 @@ elif [ $OS_VERS == "11" ]; then
     # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${ColorRojo}    binutils no está instalado. Iniciando su instalación...${FinColor}"
+        echo -e "${cColorRojo}    binutils no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
         apt-get -y update > /dev/null
         apt-get -y install binutils
@@ -156,7 +156,7 @@ elif [ $OS_VERS == "11" ]; then
     # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${ColorRojo}    tar no está instalado. Iniciando su instalación...${FinColor}"
+        echo -e "${cColorRojo}    tar no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
         apt-get -y update > /dev/null
         apt-get -y install tar

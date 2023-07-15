@@ -12,11 +12,11 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/Hardware-Discos-Info.sh | bash
 # ----------
 
-ColorVerde="\033[1;32m"
-FinColor="\033[0m"
+cColorVerde="\033[1;32m"
+cFinColor="\033[0m"
 
 echo ""
-echo -e "${ColorVerde}  Mostrando información sobre discos...${FinColor}"
+echo -e "${cColorVerde}  Mostrando información sobre discos...${cFinColor}"
 echo ""
 
 ## Comprobar si el paquete lshw está instalado. Si no lo está, instalarlo.

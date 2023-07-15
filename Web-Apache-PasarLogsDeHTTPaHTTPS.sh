@@ -5,30 +5,29 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#----------------------------------------------------------
+# -----------
 #  Script de NiPeGun para pasar logs webs de http a https
-#----------------------------------------------------------
+# -----------
 
-CantArgsEsperados=3
-ArgsInsuficientes=65
+cCantArgsEsperados=3
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
-if [ $# -ne $CantArgsEsperados ]
+if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
-    echo "------------------------------------------------------------------------------"
-    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
+
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
     echo ""
-    echo -e "$0 ${ColorVerde}[DominioyExtensiónAReemplazar]${FinColor}"
+    echo -e "$0 ${cColorVerde}[DominioyExtensiónAReemplazar]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo " $0 nipegun.com"
-    echo "------------------------------------------------------------------------------"
+
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     find /var/www/$1/logs/ -type f -exec sed -i -e "s|http://$1|https://$2|g" {} \;
 fi

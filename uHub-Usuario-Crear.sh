@@ -9,28 +9,27 @@
 # Script de NiPeGun para agregar usuarios a uHub
 # ----------
 
-CantArgsEsperados=2
-ArgsInsuficientes=65
+cCantArgsEsperados=2
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
-if [ $# -ne $CantArgsEsperados ]
+if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
     echo "---------------------------------------------------------------------------"
-    echo -e "${ColorRojo}Mal uso del script.${FinColor} El uso correcto sería:"
-    echo -e "$0 ${ColorVerde}[NombreDeUsuario] [Contraseña]${FinColor}"
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
+    echo -e "$0 ${cColorVerde}[NombreDeUsuario] [Contraseña]${cFinColor}"
     echo ""
     echo "Ejemplo:"
     echo "$0 pepe 12345678"
     echo "---------------------------------------------------------------------------"
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     echo ""
-    echo -e "${ColorVerde}Agregando el nuevo usuario a uHub...${FinColor}"
+    echo -e "${cColorVerde}Agregando el nuevo usuario a uHub...${cFinColor}"
     echo ""
     uhub-passwd /etc/uhub/users.db add $1 $2
     systemctl restart uhub.service

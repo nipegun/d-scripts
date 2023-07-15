@@ -18,9 +18,9 @@ vBDUsuario=""
 vBDPass=""
 vUsuarioHome=""
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
 
 FechaDeEjecCopSegInt=$(date +A%Y-M%m-D%d@%T)
 
@@ -32,7 +32,7 @@ FechaDeEjecCopSegInt=$(date +A%Y-M%m-D%d@%T)
 
 # Ejecutar copia
   echo ""
-  echo -e "${ColorVerde}Ejecutando copia de seguridad interna...${FinColor}"
+  echo -e "${cColorVerde}Ejecutando copia de seguridad interna...${cFinColor}"
   echo ""
 
   # Archivos de la Web
@@ -73,5 +73,5 @@ FechaDeEjecCopSegInt=$(date +A%Y-M%m-D%d@%T)
   chown $vUsuarioHome:$vUsuarioHome /CopSegInt/ -R
 
 echo ""
-echo -e "${ColorVerde}Fin del proceso de copia de seguridad...${FinColor}"
+echo -e "${cColorVerde}Fin del proceso de copia de seguridad...${cFinColor}"
 echo ""

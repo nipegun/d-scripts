@@ -12,20 +12,20 @@
 #  curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/MySQL-BaseDeDatos-Importar.sh | bash -s UsuarioBD PasswordBD NombreBD RutaArchivoSQL
 # ----------
 
-CantArgsEsperados=4
-ArgsInsuficientes=65
+cCantArgsEsperados=4
 
-ColorRojo='\033[1;31m'
-ColorVerde='\033[1;32m'
-FinColor='\033[0m'
 
-if [ $# -ne $CantArgsEsperados ]
+cColorRojo='\033[1;31m'
+cColorVerde='\033[1;32m'
+cFinColor='\033[0m'
+
+if [ $# -ne $cCantArgsEsperados ]
   then
     echo ""
-    echo -e "${ColorRojo}Mal uso del script.${FinColor}"
+    echo -e "${cColorRojo}Mal uso del script.${cFinColor}"
     echo ""
     echo "El uso correcto sería:"
-    echo -e "$0 ${ColorVerde}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${FinColor}"
+    echo -e "$0 ${cColorVerde}[UsuarioBD] [PasswordBD] [NombreBD] [RutaArchivoSQL]${cFinColor}"
     echo ""
     echo "Ejemplo 1:"
     echo "$0 pepe 12345678 Cuentas Cuentas.sql"
@@ -33,7 +33,7 @@ if [ $# -ne $CantArgsEsperados ]
     echo "Ejemplo 2:"
     echo "$0 pepe 12345678 Cuentas '\Copias de seguridad\Base de datos.sql'"   
     echo ""
-    exit $ArgsInsuficientes
+    exit
   else
     mysql -u$1 -p$2 $3 < $4
 fi

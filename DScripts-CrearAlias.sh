@@ -9,14 +9,14 @@
 # Script de NiPeGun para crear los alias de los d-scripts 
 # ----------
 
-vColorAzul="\033[0;34m"
-vColorAzulClaro="\033[1;34m"
-vColorVerde='\033[1;32m'
-vColorRojo='\033[1;31m'
-vFinColor='\033[0m'
+cColorAzul="\033[0;34m"
+cColorAzulClaro="\033[1;34m"
+cColorVerde='\033[1;32m'
+cColorRojo='\033[1;31m'
+cFinColor='\033[0m'
 
 echo ""
-echo -e "${vColorAzulClaro}  Creando alias para los d-scripts...${vFinColor}"
+echo -e "${vColorAzulClaro}  Creando alias para los d-scripts...${cFinColor}"
 echo ""
 
 ln -s /root/scripts/d-scripts/Externos/VelocidadDeInternet.sh                      /root/scripts/d-scripts/Alias/vdi
@@ -129,6 +129,6 @@ ln -s /root/scripts/d-scripts/router/MostrarAparatosConectados.sh               
 ln -s /root/scripts/d-scripts/router/EditarOpenVPN.sh                              /root/scripts/d-scripts/Alias/eovpn
 
 echo ""
-echo -e "${vColorVerde}    Alias creados. Deberías poder ejecutar los d-scripts escribiendo el nombre de su alias.${vFinColor}"
+echo -e "${cColorVerde}    Alias creados. Deberías poder ejecutar los d-scripts escribiendo el nombre de su alias.${cFinColor}"
 echo ""
 
