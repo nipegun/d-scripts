@@ -25,7 +25,7 @@
   cColorRojo='\033[1;31m'
   # Para el color rojo también:
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
-  ccFinColor='\033[0m'
+  cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then

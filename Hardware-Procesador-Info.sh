@@ -10,7 +10,7 @@
 # ----------
 
 cColorVerde="\033[1;32m"
-ccFinColor="\033[0m"
+cFinColor="\033[0m"
 
 echo ""
 echo -e "${cColorVerde}  Mostrando información sobre el procesador...${cFinColor}"
