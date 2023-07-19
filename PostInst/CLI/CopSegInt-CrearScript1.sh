@@ -43,12 +43,22 @@
   echo ""                                                            >> /root/scripts/ParaEsteDebian/CopSegInt.sh
   echo "# Guardar la fecha de ejecución del script en una constante" >> /root/scripts/ParaEsteDebian/CopSegInt.sh
   echo '  cFechaEjecScript=$(date +a%Ym%md%d@%T)'                    >> /root/scripts/ParaEsteDebian/CopSegInt.sh
-  echo "" >> /root/scripts/ParaEsteDebian/CopSegInt.sh
-  echo "" >> /root/scripts/ParaEsteDebian/CopSegInt.sh
-  echo "" >> /root/scripts/ParaEsteDebian/CopSegInt.sh
-  echo "" >> /root/scripts/ParaEsteDebian/CopSegInt.sh
-  echo "" >> /root/scripts/ParaEsteDebian/CopSegInt.sh
-  echo "" >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo ""                                                            >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo "# Crear la carpeta de copias de seguridad"                   >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo '  mkdir -p /CopSegInt/$cFechaEjecScript/'                    >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo ""                                                            >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo "# Ejecutar copia de /etc/"                                   >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo '  mkdir -p /CopSegInt/$cFechaEjecScript/etc/ 2> /dev/null'   >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo '  cp -r /etc/* /CopSegInt/$cFechaEjecScript/etc/'            >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo ""                                                            >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo "# Ejecutar copia de /root/"                                  >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo '  mkdir -p /CopSegInt/$cFechaEjecScript/root/ 2> /dev/null'  >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo '  cp -r /root/* /CopSegInt/$cFechaEjecScript/root/'          >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo ""                                                            >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo "# Ejecutar copia de /home/"                                  >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo '  mkdir -p /CopSegInt/$cFechaEjecScript/home/ 2> /dev/null'  >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo '  cp -r /home/* /CopSegInt/$cFechaEjecScript/home/'          >> /root/scripts/ParaEsteDebian/CopSegInt.sh
+  echo ""                                                            >> /root/scripts/ParaEsteDebian/CopSegInt.sh
   echo "# Loguear la ejecución del script el /var/log/CopSegInt.log" >> /root/scripts/ParaEsteDebian/CopSegInt.sh
   echo '  echo $cFechaEjecScript >> /var/log/CopSegInt.log'          >> /root/scripts/ParaEsteDebian/CopSegInt.sh
                 
