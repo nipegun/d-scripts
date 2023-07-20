@@ -272,13 +272,13 @@ echo ""
     echo -n mem > /sys/power/state
 
   # ComandosPostArranque
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Consola/ComandosPostArranque-Preparar.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
 
   # Cortafuegos
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Consola/Cortafuegos-Preparar.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Cortafuegos-Preparar.sh | bash
 
   # Tareas cron
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Consola/TareasCron-Preparar.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/TareasCron-Preparar.sh | bash
 
   # Agregar comandos post arranque
     echo "mount -t auto /dev/sda1 /Particiones/IDE/hda1/"            >> /root/scripts/ComandosPostArranque.sh
