@@ -12,6 +12,12 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Proxmox-VirtualizationEnvironment-Instalar.sh | bash
 ---------
 
+# IP Local
+  #cIPLocal="$(hostname -I)"
+  cIPLocal="192.168.1.200"
+  cCIDR="24"
+  cIPGateway="192.168.1.1"
+
 # Definir fecha de ejecución del script
   cFechaDeEjec=$(date +a%Ym%md%d@%T)
 
@@ -53,94 +59,158 @@
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de ProxmoxVE para Debian 7 (Wheezy)..."  
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ProxmoxVE para Debian 7 (Wheezy)...${cFinColor}"  
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de ProxmoxVE para Debian 8 (Jessie)..."  
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ProxmoxVE para Debian 8 (Jessie)...${cFinColor}"  
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de ProxmoxVE para Debian 9 (Stretch)..."  
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ProxmoxVE para Debian 9 (Stretch)...${cFinColor}"  
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de ProxmoxVE para Debian 10 (Buster)..."  
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ProxmoxVE para Debian 10 (Buster)...${cFinColor}"  
   echo ""
 
-  apt-get -y update
-  apt-get -y install wget
-  echo "deb http://download.proxmox.com/debian/pve buster pve-no-subscription" > /etc/apt/sources.list.d/ProxmoxVE.list
-  wget http://download.proxmox.com/debian/proxmox-ve-release-6.x.gpg -O /etc/apt/trusted.gpg.d/proxmomx-ve-release-buster.gpg
-  apt-get -y update
-  echo "127.0.0.1 $HOSTNAME" > /etc/hosts
-  apt-get -y install proxmox-ve
-  rm -rf /etc/apt/sources.list.d/pve-enterprise.list
-  apt-get -y update
-  apt-get -y install pve-headers
-  cp /etc/network/interfaces /etc/network/interfaces.bak.$cFechaDeEjec
-
-  # Desinstalar
-  # touch /please-remove-proxmox-ve
-  # apt-get -y purge proxmox-ve
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
 
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de ProxmoxVE para Debian 11 (Bullseye)..."  
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ProxmoxVE para Debian 11 (Bullseye)...${cFinColor}"  
   echo ""
 
-  apt-get -y update
-  apt-get -y install wget
-  echo "deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription" > /etc/apt/sources.list.d/ProxmoxVE.list
-  wget http://download.proxmox.com/debian/proxmox-release-buulseye.gpg -O /etc/apt/trusted.gpg.d/proxmomx-release-bullseye.gpg
-  apt-get -y update
-  echo "127.0.0.1 $HOSTNAME" > /etc/hosts
-  apt-get -y install proxmox-ve
-  rm -rf /etc/apt/sources.list.d/pve-enterprise.list
-  apt-get -y update
-  apt-get -y install pve-headers
-  cp /etc/network/interfaces /etc/network/interfaces.bak.$cFechaDeEjec
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
 
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de ProxmoxVE para Debian 12 (Bookworm)..."  
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ProxmoxVE para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
-  apt-get -y update
-  apt-get -y install wget
-  echo "deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription" > /etc/apt/sources.list.d/ProxmoxVE.list
-  wget http://download.proxmox.com/debian/proxmox-release-bookworm.gpg -O /etc/apt/trusted.gpg.d/proxmomx-release-bookworm.gpg
-  apt-get -y update
-  echo "127.0.0.1 $HOSTNAME" > /etc/hosts
-  apt-get -y install proxmox-ve
-  rm -rf /etc/apt/sources.list.d/pve-enterprise.list
-  apt-get -y update
-  apt-get -y install pve-headers
-  cp /etc/network/interfaces /etc/network/interfaces.bak.$cFechaDeEjec
+  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${cColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+      echo ""
+      apt-get -y update
+      apt-get -y install wget
+      echo ""
+    fi
 
-  # Desinstalar
-  # touch /please-remove-proxmox-ve
-  # apt-get -y purge proxmox-ve
+  # Agregar el repositorio de proxmox
+    echo ""
+    echo "    Agregando el repositorio re Proxmox..."
+    echo ""
+    echo "deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription" > /etc/apt/sources.list.d/ProxmoxVE.list
+
+  # Agregar a llave para firmar las descargas desde el repositorio de Proxmox
+    echo ""
+    echo "    Agregando a llave para firmar las descargas desde el repositorio de Proxmox..."
+    echo ""
+    wget http://download.proxmox.com/debian/proxmox-release-bookworm.gpg -O /etc/apt/trusted.gpg.d/proxmomx-release-bookworm.gpg
+
+  # Actualizar la lista de paquetes disponibles en los repositorios activados
+    echo ""
+    echo "    Actualizar la lista de paquetes disponibles en los repositorios activados..."
+    echo ""
+    apt-get -y update
+
+  # Configurar la red
+    echo ""
+    echo "    Configurando la red..."
+    echo ""
+    # /etc/hosts
+      echo ""
+      echo "      Editando el archivo /etc/hosts..."
+      echo ""
+      cp /etc/hosts /etc/hosts.bak.$cFechaDeEjec
+      echo "127.0.0.1 $HOSTNAME"                      > /etc/hosts
+      echo "$vIPLocal $HOSTNAME $HOSTNAME.home.arpa" >> /etc/hosts
+      echo ""
+      echo "        El archivo /etc/hosts ha quedado así:"
+      echo ""
+      cat /etc/hosts
+      echo ""
+    # /etc/network/interfaces
+      echo ""
+      echo "      Editando el archivo /etc/network/interfaces..."
+      echo ""
+      cp /etc/network/interfaces /etc/network/interfaces.bak.$cFechaDeEjec
+      echo "auto lo"                      > /etc/network/interfaces
+      echo "iface lo inet loopback"      >> /etc/network/interfaces
+      echo ""                            >> /etc/network/interfaces
+      echo "iface eth0 inet static"      >> /etc/network/interfaces
+      echo "  address $cIPLocal/$cCIDR"  >> /etc/network/interfaces
+      echo "  gateway $cIPGateway"       >> /etc/network/interfaces
+      echo "" >> /etc/network/interfaces
+      echo ""
+      echo "        El archivo /etc/network/interfaces ha quedado así:"
+      echo ""
+      cat /etc/network/interfaces
+      echo ""
+    # Reiniciar el servicio de networking
+      echo ""
+      echo "    Re-iniciando el servicio de networking"
+      echo ""
+      service networking restart
+
+  # Instalar el paqete proxmox-ve
+    echo ""
+    echo "    Instalando el paquete proxmox-ve..."
+    echo ""
+    apt-get -y install proxmox-ve
+
+  # Borrar el repositorio enterprise
+    echo ""
+    echo "    Desactivando el repositorio enterprise..."
+    echo ""
+    rm -rf /etc/apt/sources.list.d/pve-enterprise.list
+
+  # Volver a actualizar la lista de paquetes disponibles en los repositorios activados
+    echo ""
+    echo "    Volviendo a actualizar la lista de paquetes disponibles en los repositorios activados..."
+    echo ""
+    apt-get -y update
+
+  # Instalar las cabeceras del kernel
+    echo ""
+    echo "    Instalando las cabeceras del kernel..."
+    echo ""
+    apt-get -y install pve-headers
+    
+  # Notificar fin de la instalación
+    echo ""
+    echo -e "${cColorVerde}    Ejecución del script, finalizada.${cFinColor}"
+    echo ""
+    echo -e "${cColorVerde}      Para desinstalar Proxmox ejecuta:${cFinColor}"
+    echo -e "${cColorVerde}        touch /please-remove-proxmox-ve${cFinColor}"
+    echo -e "${cColorVerde}        apt-get -y purge proxmox-ve${cFinColor}"
+    echo ""
 
 fi
 
