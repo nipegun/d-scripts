@@ -150,7 +150,7 @@ elif [ $cVerSO == "12" ]; then
       echo ""
       cp /etc/hosts /etc/hosts.bak.$cFechaDeEjec
       echo "127.0.0.1 $HOSTNAME"                      > /etc/hosts
-      echo "$vIPLocal $HOSTNAME $HOSTNAME.home.arpa" >> /etc/hosts
+      echo "$cIPLocal $HOSTNAME $HOSTNAME.home.arpa" >> /etc/hosts
       echo ""
       echo "        El archivo /etc/hosts ha quedado así:"
       echo ""
