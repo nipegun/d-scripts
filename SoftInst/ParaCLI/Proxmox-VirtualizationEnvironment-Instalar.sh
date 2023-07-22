@@ -164,10 +164,11 @@ elif [ $cVerSO == "12" ]; then
       echo "auto lo"                      > /etc/network/interfaces
       echo "iface lo inet loopback"      >> /etc/network/interfaces
       echo ""                            >> /etc/network/interfaces
+      echo "auto eth0"                   >> /etc/network/interfaces
       echo "iface eth0 inet static"      >> /etc/network/interfaces
       echo "  address $cIPLocal/$cCIDR"  >> /etc/network/interfaces
       echo "  gateway $cIPGateway"       >> /etc/network/interfaces
-      echo "" >> /etc/network/interfaces
+      echo ""                            >> /etc/network/interfaces
       echo ""
       echo "        El archivo /etc/network/interfaces ha quedado así:"
       echo ""
