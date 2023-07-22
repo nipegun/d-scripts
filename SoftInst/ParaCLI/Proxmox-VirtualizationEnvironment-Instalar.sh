@@ -111,7 +111,7 @@ elif [ $cVerSO == "11" ]; then
   apt-get -y update
   apt-get -y install wget
   echo "deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription" > /etc/apt/sources.list.d/ProxmoxVE.list
-  wget http://download.proxmox.com/debian/proxmox-ve-release-buulseye.gpg -O /etc/apt/trusted.gpg.d/proxmomx-ve-release-bullseye.gpg
+  wget http://download.proxmox.com/debian/proxmox-release-buulseye.gpg -O /etc/apt/trusted.gpg.d/proxmomx-release-bullseye.gpg
   apt-get -y update
   echo "127.0.0.1 $HOSTNAME" > /etc/hosts
   apt-get -y install proxmox-ve
@@ -129,7 +129,7 @@ elif [ $cVerSO == "12" ]; then
   apt-get -y update
   apt-get -y install wget
   echo "deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription" > /etc/apt/sources.list.d/ProxmoxVE.list
-  wget http://download.proxmox.com/debian/proxmox-ve-release-bookworm.gpg -O /etc/apt/trusted.gpg.d/proxmomx-ve-release-bookworm.gpg
+  wget http://download.proxmox.com/debian/proxmox-release-bookworm.gpg -O /etc/apt/trusted.gpg.d/proxmomx-release-bookworm.gpg
   apt-get -y update
   echo "127.0.0.1 $HOSTNAME" > /etc/hosts
   apt-get -y install proxmox-ve
