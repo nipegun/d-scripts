@@ -190,7 +190,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Desactivando el repositorio enterprise..."
     echo ""
-    rm -rf /etc/apt/sources.list.d/pve-enterprise.list
+    rm -f /etc/apt/sources.list.d/pve-enterprise.list*
 
   # Volver a actualizar la lista de paquetes disponibles en los repositorios activados
     echo ""
