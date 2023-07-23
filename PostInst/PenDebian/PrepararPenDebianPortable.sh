@@ -260,6 +260,11 @@ echo ""
     mkdir -p /Particiones/NVMe/nvme2n1p3/    2> /dev/null
     mkdir -p /Particiones/NVMe/nvme2n1p4/    2> /dev/null
 
+    mkdir -p /Particiones/LVM/G1/            2> /dev/null
+    mkdir -p /Particiones/LVM/G2/            2> /dev/null
+    mkdir -p /Particiones/LVM/G3/            2> /dev/null
+    mkdir -p /Particiones/LVM/G4/            2> /dev/null
+
   # Actualizar el sistema
     apt-get -y upgrade
     apt-get -y dist-upgrade
@@ -331,12 +336,11 @@ echo ""
     echo "mount -t auto /dev/nvme2n1p3 /Particiones/NVMe/nvme2n1p3/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
     echo "mount -t auto /dev/nvme2n1p4 /Particiones/NVMe/nvme2n1p4/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
-
-    echo "pvscan"                                                >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "vgscan"                                                >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "vgchange --activate y pve"                             >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "lvscan"                                                >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/VolGroup0/root /Particiones/LVM/1/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo "# Montar LVM de Proxmox"                                             >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo '  vgchange --activate y pve'                             >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo '  '             >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo '  mount -t auto /dev/$vLVMg1/root /Particiones/LVM/G1/root/' >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo '  mount -t auto /dev/$vLVMg1/root /Particiones/LVM/G1/root/' >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
   # Escritorio mate
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioMate-Personalizar.sh| bash
