@@ -40,7 +40,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "  Iniciando el script de preparación del Pendrive con Debian 7 (Wheezy) Portable..." 
-echo ""
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -50,7 +50,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "  Iniciando el script de preparación del Pendrive con Debian 8 (Jessie) Portable..." 
-echo ""
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -60,7 +60,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "  Iniciando el script de preparación del Pendrive con Debian 9 (Stretch) Portable..." 
-echo ""
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -70,7 +70,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "  Iniciando el script de preparación del Pendrive con Debian 10 (Buster) Portable..." 
-echo ""
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -80,7 +80,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "  Iniciando el script de preparación del Pendrive con Debian 11 (Bullseye) Portable..." 
-echo ""
+  echo ""
 
   # Modificar el grub
     sed -i -e 's|GRUB_TIMEOUT=5|GRUB_TIMEOUT=1|g' /etc/default/grub
