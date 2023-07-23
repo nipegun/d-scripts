@@ -126,7 +126,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Agregando el repositorio re Proxmox..."
     echo ""
-    echo "deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription" > /etc/apt/sources.list.d/ProxmoxVE.list
+    echo "deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription" > /etc/apt/sources.list.d/pve-no-subscription.list
 
   # Agregar a llave para firmar las descargas desde el repositorio de Proxmox
     echo ""
