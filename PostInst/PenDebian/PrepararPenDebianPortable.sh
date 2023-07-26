@@ -288,60 +288,16 @@ elif [ $cVerSO == "11" ]; then
   # Tareas cron
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/TareasCron-Preparar.sh | bash
 
-  # Agregar comandos post arranque
-    echo "mount -t auto /dev/sda1      /Particiones/IDE/hda1/"            >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sda2      /Particiones/IDE/hda2/"            >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sda3      /Particiones/IDE/hda3/"            >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sda4      /Particiones/IDE/hda4/"            >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
-    echo "mount -t auto /dev/sdb1      /Particiones/IDE/hdb1/"            >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdb2      /Particiones/IDE/hdb2/"            >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdb3      /Particiones/IDE/hdb3/"            >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdb4      /Particiones/IDE/hdb4/"            >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  # Agregar automontaje de particiones
+    echo '# Automontaje de todas las particiones'               >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo "  /root/scripts/d-scripts/Particiones-IDE-Montar.sh"  >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo "  /root/scripts/d-scripts/Particiones-SATA-Montar.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo "  /root/scripts/d-scripts/Particiones-NVMe-Montar.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
-    echo "mount -t auto /dev/sda1      /Particiones/SATA/sda1/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sda2      /Particiones/SATA/sda2/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sda3      /Particiones/SATA/sda3/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sda4      /Particiones/SATA/sda4/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-
-    echo "mount -t auto /dev/sdb1      /Particiones/SATA/sdb1/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdb2      /Particiones/SATA/sdb2/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdb3      /Particiones/SATA/sdb3/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdb4      /Particiones/SATA/sdb4/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-
-    echo "mount -t auto /dev/sdc1      /Particiones/SATA/sdc1/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdc2      /Particiones/SATA/sdc2/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdc3      /Particiones/SATA/sdc3/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdc4      /Particiones/SATA/sdc4/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-
-    echo "mount -t auto /dev/sdd1      /Particiones/SATA/sdd1/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdd2      /Particiones/SATA/sdd2/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdd3      /Particiones/SATA/sdd3/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sdd4      /Particiones/SATA/sdd4/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-
-    echo "mount -t auto /dev/sde1      /Particiones/SATA/sde1/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sde2      /Particiones/SATA/sde2/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sde3      /Particiones/SATA/sde3/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/sde4      /Particiones/SATA/sde4/"           >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-
-    echo "mount -t auto /dev/nvme0n1p1 /Particiones/NVMe/nvme0n1p1/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/nvme0n1p2 /Particiones/NVMe/nvme0n1p2/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/nvme0n1p3 /Particiones/NVMe/nvme0n1p3/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/nvme0n1p4 /Particiones/NVMe/nvme0n1p4/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-
-    echo "mount -t auto /dev/nvme1n1p1 /Particiones/NVMe/nvme1n1p1/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/nvme1n1p2 /Particiones/NVMe/nvme1n1p2/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/nvme1n1p3 /Particiones/NVMe/nvme1n1p3/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/nvme1n1p4 /Particiones/NVMe/nvme1n1p4/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-
-    echo "mount -t auto /dev/nvme2n1p1 /Particiones/NVMe/nvme2n1p1/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/nvme2n1p2 /Particiones/NVMe/nvme2n1p2/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/nvme2n1p3 /Particiones/NVMe/nvme2n1p3/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo "mount -t auto /dev/nvme2n1p4 /Particiones/NVMe/nvme2n1p4/" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-
-    echo "# Montar LVM de Proxmox"                                             >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo '  vgchange --activate y pve'                             >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-    echo '  '             >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo "# Montar LVM de Proxmox"                                     >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo '  vgchange --activate y pve'                                 >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo ''                                                            >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
     echo '  mount -t auto /dev/$vLVMg1/root /Particiones/LVM/G1/root/' >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
     echo '  mount -t auto /dev/$vLVMg1/root /Particiones/LVM/G1/root/' >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
