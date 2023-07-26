@@ -9,7 +9,7 @@
 # Script de NiPeGun montar todas las particiones de los discos SATA
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Particiones-SATA-Montar.sh | bash
 # ----------
 
 # Definir constantes de color
