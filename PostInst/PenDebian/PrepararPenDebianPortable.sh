@@ -115,6 +115,9 @@ elif [ $cVerSO == "11" ]; then
     apt-get -y install android-tools-fastboot
 
   # Herramientas para manejar volúmenes
+    # FAT
+      apt-get -y install dosfstools
+      apt-get -y install mtools
     # EXT2/3/4
       apt-get -y install e2fsprogs
       apt-get -y install e2fsprogs-l10n
