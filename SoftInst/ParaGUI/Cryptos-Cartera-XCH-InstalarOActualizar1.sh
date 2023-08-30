@@ -21,9 +21,10 @@ cFinColor='\033[0m'
 
 vUsuarioNoRoot="nipegun"
 
-echo ""
-echo -e "${cColorVerde}  Iniciando el script de instalación de la cartera liviana de XCH...${cFinColor}"
-echo ""
+# Notificar el inicio de ejecución del script
+  echo ""
+  echo -e "${cColorVerde}  Iniciando el script de instalación de la cartera liviana de XCH...${cFinColor}"
+  echo ""
 
 # Obtener el número de la última versión estable desde github
   echo ""
@@ -37,7 +38,7 @@ echo ""
 # Obtener enlace de descarga de la última versión estable
   echo ""
   echo "    Obteniendo enlace de descarga de la versión $vUltVersEstable..." 
-echo ""
+  echo ""
   vURLDelArchivoDeb=$(curl -sL https://github.com/Chia-Network/chia-blockchain/releases | sed 's->-\n-g' | sed 's-href-\nhref-g' | grep $vUltVersEstable | grep href | grep .deb | grep amd64 | grep -v orrent | grep -v cli | cut -d'"' -f2)
   if [[ "$vURLDelArchivoDeb" == "" ]]; then
     vURLDelArchivoDeb="Chia-Network/chia-blockchain/releases/download/$vUltVersEstable/chia-blockchain_"$vUltVersEstable"_amd64.deb"
