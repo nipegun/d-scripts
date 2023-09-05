@@ -59,7 +59,6 @@ choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
             if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
               echo ""
               echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-              echo "  "
               echo ""
               apt-get -y update
               apt-get -y install curl
