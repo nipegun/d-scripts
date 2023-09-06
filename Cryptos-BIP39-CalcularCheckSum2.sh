@@ -53,10 +53,11 @@ if [ $# -ne $cCantArgumEsperados ]
     echo ""
     exit
   else
-    vArchivo=$1
+    vArchivo="$1"
     if [ -f "$vArchivo"  ];then
+      vCantPalabrasEnArchivo=$(cat "$vArchivo" | wc -w)
       echo ""
-      echo "  El archivo existe"
+      echo "  Cantidad de palabras que contiene el archivo es vCantPalabrasEnArchivo"
       echo ""
     else
       echo ""
