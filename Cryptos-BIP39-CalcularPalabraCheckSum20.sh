@@ -80,10 +80,11 @@ if [ $# -ne $cCantArgumEsperados ]
             do
               echo ${!aBIP39english[[$vLinea]]}:${aBIP39english[[$vLinea]]}
             done
-for country in "${!vPalabra[@]}"
-do
-   echo "$vLinea -> ${vPalabra[$vLinea]}"
-done
+          for vLinea in "${!aBIP39english[@]}"
+            do
+              echo "$vLinea -> ${aBIP39english[$vLinea]}"
+            done
+            
     else
       echo ""
       echo -e "${cColorRojo}  El archivo $vArchivo no existe. Abortando script ${cFinColor}"
