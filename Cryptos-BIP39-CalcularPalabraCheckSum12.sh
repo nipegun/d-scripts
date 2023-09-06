@@ -75,12 +75,13 @@ if [ $# -ne $cCantArgumEsperados ]
         echo "  Los campos son los siguientes:"
         echo ""
         # Iterar sobre el array
-          for vLinea in "${!aBIP39english[@]}"
+          for vLinea in "${aBIP39english[@]}"
             do
-              echo "$vLinea : ${aBIP39english[$vLinea]}"
+              #echo "$vLinea : ${aBIP39english[$vLinea]}"
+              echo $vLinea
             done
            #echo "${aBIP39english[$vLinea]}"
-echo "${aBIP39english[[1]]}"
+#echo "${aBIP39english[[1]]}"
            
     else
       echo ""
