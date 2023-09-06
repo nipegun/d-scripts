@@ -67,13 +67,21 @@ if [ $# -ne $cCantArgumEsperados ]
         while read vLinea; do
           for vPalabra in $vLinea; do
             aBIP39english[$vLinea]="$vPalabra"
-            echo "${aBIP39english[$vLinea]}"
+            
           done
           
         done < "/tmp/BIP39english.txt"
       # Consultar array
         echo "La cantidad de campos es: ${#aBIP39english[@]}"
-
+        echo ""
+        echo "  Los campos son los siguientes:"
+        echo ""
+        # Iterar sobre el array
+          for vLinea in "${!aBIP39english[@]}"
+            do
+              echo "$vLinea -> ${aBIP39english[$vLinea]}"
+            done
+           #echo "${aBIP39english[$vLinea]}"
     else
       echo ""
       echo -e "${cColorRojo}  El archivo $vArchivo no existe. Abortando script ${cFinColor}"
