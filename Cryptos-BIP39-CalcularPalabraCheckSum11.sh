@@ -80,7 +80,7 @@ if [ $# -ne $cCantArgumEsperados ]
               echo "$vLinea : ${aBIP39english[$vLinea]}"
             done
            #echo "${aBIP39english[$vLinea]}"
-echo "${aBIP39english[[1]}"
+echo "${aBIP39english[[1]]}"
            
     else
       echo ""
