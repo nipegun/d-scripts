@@ -61,20 +61,19 @@ if [ $# -ne $cCantArgumEsperados ]
           fi
         # Descargar el archivo a /tmp/
           wget -q https://raw.githubusercontent.com/bitcoin/bips/master/bip-0039/english.txt -O /tmp/BIP39english.txt
-      # Recorrer el archivo
-      while read vLinea; do
-        for vPalabra in $vLinea; do
-          echo "Palabra = '$vPalabra'"
-        done
-      done < "$cArchivoConSemillas"
-      
+      # Recorrer el archivo de semillas y asignar cada palabra a un array asociativo
+        declare -A aBIP39english
+        aBIP39english[0]="xxx"
+        while read vLinea; do
+          aBIP39english[$vLinea]="$vPalabra"
+          echo "${aBIP39english[$vLinea]}"
+        done < "/tmp/BIP39english.txt"
+
 
     else
       echo ""
       echo -e "${cColorRojo}  El archivo $vArchivo no existe. Abortando script ${cFinColor}"
       echo ""
-      
-
       exit
     fi
 fi
