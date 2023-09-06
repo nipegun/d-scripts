@@ -71,13 +71,14 @@ if [ $# -ne $cCantArgumEsperados ]
           done
         done < "/tmp/BIP39english.txt"
       # Consultar array
-        echo "  La cantidad de campos es: ${#aBIP39english[@]}"
+        echo "  La cantidad de campos es: ${#aBIP39english[@]}."
         echo ""
         echo "    Los campos son los siguientes:"
         echo ""
         # Iterar sobre el array
           for vLinea in {1..2048}
             do
+              echo $vLinea
               echo ${!aBIP39english[$vLinea]}:${aBIP39english[$vLinea]}
             done
     else
