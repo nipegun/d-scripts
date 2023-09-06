@@ -64,7 +64,7 @@ if [ $# -ne $cCantArgumEsperados ]
       # Recorrer el archivo
         while IFS= read -r vPalabra; do
           echo "Buscando la palabra '$vPalabra' en el archivo destino:"
-          grep -n "$vPalabra" /tmp/BIP39english.txt
+          grep -n "^$vPalabra" "/tmp/BIP39english.txt"
         done < "$cArchivoConSemillas"
       #
     else
