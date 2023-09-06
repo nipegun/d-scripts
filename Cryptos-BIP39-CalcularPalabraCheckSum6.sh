@@ -65,7 +65,9 @@ if [ $# -ne $cCantArgumEsperados ]
         declare -A aBIP39english
         aBIP39english[0]="xxx"
         while read vLinea; do
-          aBIP39english[$vLinea]="$vPalabra"
+          for vPalabra in $vLinea; do
+            aBIP39english[$vLinea]="$vPalabra"
+          done
           echo "${aBIP39english[$vLinea]}"
         done < "/tmp/BIP39english.txt"
 
