@@ -60,6 +60,7 @@ if [ $# -ne $cCantArgumEsperados ]
             echo ""
           fi
         # Descargar el archivo a /tmp/
+          rm -f /tmp/BIP39english.txt
           wget -q https://raw.githubusercontent.com/bitcoin/bips/master/bip-0039/english.txt -O /tmp/BIP39english.txt
       # Recorrer el archivo de semillas y asignar cada palabra a un array asociativo
         declare -A aBIP39english
@@ -75,14 +76,10 @@ if [ $# -ne $cCantArgumEsperados ]
         echo "    Los campos son los siguientes:"
         echo ""
         # Iterar sobre el array
-          for vLinea in "${!aBIP39english[@]}"
+          for vLinea in {1..2048}
             do
-              #echo "$vLinea : ${aBIP39english[$vLinea]}"
               echo ${!aBIP39english[$vLinea]}:${aBIP39english[$vLinea]}
             done
-           #echo "${aBIP39english[$vLinea]}"
-#echo "${aBIP39english[[1]]}"
-           
     else
       echo ""
       echo -e "${cColorRojo}  El archivo $vArchivo no existe. Abortando script ${cFinColor}"
