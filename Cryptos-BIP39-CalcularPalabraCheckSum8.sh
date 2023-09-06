@@ -74,7 +74,6 @@ if [ $# -ne $cCantArgumEsperados ]
       # Consultar array
         echo "La cantidad de campos es: ${#aBIP39english[@]}"
 
-
     else
       echo ""
       echo -e "${cColorRojo}  El archivo $vArchivo no existe. Abortando script ${cFinColor}"
