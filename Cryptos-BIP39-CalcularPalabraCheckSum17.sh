@@ -78,8 +78,7 @@ if [ $# -ne $cCantArgumEsperados ]
         # Iterar sobre el array
           for vLinea in {1..2048}
             do
-              echo $vLinea
-              echo ${!aBIP39english[$vLinea]}:${aBIP39english[$vLinea]}
+              echo ${!aBIP39english[[$vLinea]]}:${aBIP39english[[$vLinea]]}
             done
     else
       echo ""
