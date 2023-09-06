@@ -67,10 +67,13 @@ if [ $# -ne $cCantArgumEsperados ]
         while read vLinea; do
           for vPalabra in $vLinea; do
             aBIP39english[$vLinea]="$vPalabra"
+            echo "${aBIP39english[$vLinea]}"
           done
-          echo "${aBIP39english[$vLinea]}"
+          
         done < "/tmp/BIP39english.txt"
-echo "La cantidad de palabras es: ${#aBIP39english[@]}"
+      # Consultar array
+        echo "La cantidad de campos es: ${#aBIP39english[@]}"
+
 
     else
       echo ""
