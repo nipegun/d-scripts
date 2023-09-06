@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar nueva llave para firmar repositorios en Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/APTKey-BajarEInstalar.sh | bash -s URL Servicio
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Cryptos-BIP39-CalcularCheckSum.sh | bash -s URL Servicio
 #
 #  Ejemplo:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/APTKey-BajarEInstalar.sh | bash -s https://nightly.odoo.com/odoo.key Odoo
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Cryptos-BIP39-CalcularCheckSum.sh | bash -s "/tmp/semillas.txt"
 # ----------
 
 # Definir constantes de color
