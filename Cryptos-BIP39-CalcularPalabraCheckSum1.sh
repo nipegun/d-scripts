@@ -47,7 +47,7 @@ if [ $# -ne $cCantArgumEsperados ]
     if [ -f "$cArchivoConSemillas"  ];then
       vCantPalabrasEnArchivo=$(cat "$cArchivoConSemillas" | wc -w)
       echo ""
-      echo "  Cantidad de palabras que contiene el archivo es $vCantPalabrasEnArchivo"
+      echo "  La cantidad de palabras que contiene el archivo es $vCantPalabrasEnArchivo."
       echo ""
       # Descargar el archivo con la lista de palabras en inglés
         # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
@@ -60,7 +60,7 @@ if [ $# -ne $cCantArgumEsperados ]
             echo ""
           fi
         # Descargar el archivo a /tmp/
-          wget https://raw.githubusercontent.com/bitcoin/bips/master/bip-0039/english.txt -O /tmp/BIP39english.txt
+          wget -q https://raw.githubusercontent.com/bitcoin/bips/master/bip-0039/english.txt -O /tmp/BIP39english.txt
       # Recorrer el archivo
         while IFS= read -r vPalabra; do
           echo "Buscando la palabra '$vPalabra' en el archivo destino:"
