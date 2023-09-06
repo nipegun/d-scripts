@@ -50,12 +50,12 @@ vUsuarioNoRoot="nipegun"
   echo ""
   echo "    Obteniendo enlace de descarga de la versión $vUltVersEstable..." 
   echo ""
-  vURLDelArchivoDeb=$(curl -sL https://github.com/mymonero/mymonero-app-js/releases | sed 's->-\n-g' | sed 's-href-\nhref-g' | grep $vUltVersEstable | grep href | grep .deb | grep amd64 | grep -v orrent | grep -v cli | cut -d'"' -f2)
+  vURLDelArchivoDeb=$(curl -sL https://github.com/mymonero/mymonero-app-js/releases | sed 's->-\n-g' | sed 's-href-\nhref-g' | grep $vUltVersEstable | grep href | grep AppImage | cut -d'"' -f2)
   if [[ "$vURLDelArchivoDeb" == "" ]]; then
     vURLDelArchivoDeb="https://github.com/mymonero/mymonero-app-js/releases/download/v$vUltVersEstable/MyMonero-$vUltVersEstable.AppImage"
   fi
   echo ""
-  echo "      La URL de descarga es: https://github.com/$vURLDelArchivoDeb."
+  echo "      La URL de descarga es: https://github.com$vURLDelArchivoDeb."
   echo ""
 
 # Crear carpeta de descarga
@@ -67,7 +67,7 @@ vUsuarioNoRoot="nipegun"
 
 # Descargar y descomprimir todos los archivos
   echo ""
-  echo "    Descargando el paquete .deb..." 
+  echo "    Descargando el paquete AppImage..." 
   echo ""
   # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
@@ -82,8 +82,6 @@ vUsuarioNoRoot="nipegun"
   rm -f /root/SoftInst/Cryptos/XMR/*.AppImage 2> /dev/null
   wget https://github.com/$vURLDelArchivoDeb -O /root/SoftInst/Cryptos/XMR/MyMonero.AppImage
 
- 
-
 # Instalar dependencias necesarias
   echo ""
   echo "    Instalando dependencias necesarias..." 
@@ -94,22 +92,10 @@ vUsuarioNoRoot="nipegun"
   echo "    Creando la carpeta para el usuario no root..." 
   echo ""
   mkdir -p /home/$vUsuarioNoRoot/Cryptos/XMR/ 2> /dev/null
-  rm -rf /home/$vUsuarioNoRoot/Cryptos/XMR/chia-blockchain/ 2> /dev/null
-  mv /root/SoftInst/Cryptos/XCH/opt/chia/ /home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/
-  mv /root/SoftInst/Cryptos/XCH/usr/share/icons/hicolor/1024x1024/apps/@chiagui.png /home/$vUsuarioNoRoot/Cryptos/XCH/chia-blockchain/chia-blockchain.png
-  rm -rf /root/SoftInst/Cryptos/XCH/usr/
-  #mkdir -p "/home/$vUsuarioNoRoot/.config/Chia Wallet Beta/" 2> /dev/null
-  #echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > "/home/$vUsuarioNoRoot/.config/Chia Wallet Beta/Preferences"
-  #mkdir -p "/home/$vUsuarioNoRoot/.config/Chia Wallet/" 2> /dev/null
-  #echo '{"spellcheck":{"dictionaries":["es-ES"],"dictionary":""}}' > "/home/$vUsuarioNoRoot/.config/Chia Wallet/Preferences"
-
-# Borrar archivos sobrantes
-  echo ""
-  echo "    Borrando archivos sobrantes..." 
-  echo ""
-  rm -rf /root/SoftInst/Cryptos/XCH/debian-binary
-  rm -rf /root/SoftInst/Cryptos/XCH/control.tar.xz
-  rm -rf /root/SoftInst/Cryptos/XCH/data.tar.xz
+  rm -rf /home/$vUsuarioNoRoot/Cryptos/XMR/MyMonero/ 2> /dev/null
+  mv /root/SoftInst/Cryptos/XMR/MyMonero.AppImage /home/$vUsuarioNoRoot/Cryptos/XMR/
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/XMR/MyMonero.AppImage
+  chmod +x /home/$vUsuarioNoRoot/Cryptos/XMR/MyMonero.AppImage
 
 # Agregar aplicación al menú
   echo ""
