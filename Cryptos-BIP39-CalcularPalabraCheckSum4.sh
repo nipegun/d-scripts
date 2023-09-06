@@ -62,12 +62,13 @@ if [ $# -ne $cCantArgumEsperados ]
         # Descargar el archivo a /tmp/
           wget -q https://raw.githubusercontent.com/bitcoin/bips/master/bip-0039/english.txt -O /tmp/BIP39english.txt
       # Recorrer el archivo
-        while IFS= read -r vPalabra; do
-          echo "Buscando la palabra '$vPalabra' en el archivo destino:"
-          grep -n "^$vPalabra" "/tmp/BIP39english.txt" >> "/tmp/resultado.txt"
-        done < "$cArchivoConSemillas"
-      # Mostrar output
-        cat /tmp/resultado.txt
+      while read vLinea; do
+        for vPalabra in $vLinea; do
+          echo "Palabra = '$vPalabra'"
+        done
+      done < "$cArchivoConSemillas"
+      
+
     else
       echo ""
       echo -e "${cColorRojo}  El archivo $vArchivo no existe. Abortando script ${cFinColor}"
