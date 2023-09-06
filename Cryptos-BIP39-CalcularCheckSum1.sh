@@ -54,7 +54,10 @@ if [ $# -ne $cCantArgumEsperados ]
     exit
   else
     vArchivo=$1
-    if -f $vArchivo ;then
+    if [ -f "$vArchivo"  ];then
+      echo ""
+      echo "  El archivo existe"
+      echo ""
     else
       echo ""
       echo -e "${cColorRojo}  El archivo $vArchivo no existe. Abortando script ${cFinColor}"
