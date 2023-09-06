@@ -70,7 +70,7 @@ if [ $# -ne $cCantArgumEsperados ]
           done
           echo "${aBIP39english[$vLinea]}"
         done < "/tmp/BIP39english.txt"
-
+echo "La cantidad de palabras es: ${#aBIP39english[@]}"
 
     else
       echo ""
