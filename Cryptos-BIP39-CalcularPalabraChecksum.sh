@@ -141,3 +141,18 @@ if [ $# -ne $cCantArgumEsperados ]
       exit
     fi
 fi
+
+
+#        while read vLinea; do
+#          for vPalabra in $vLinea; do
+#            aBIP39english[$vLinea]="$vPalabra"
+#          done
+#        done < "$cArchivoConSemillas"
+       
+      # Obtener el número de lína de cada palabra en el archivo
+#        while IFS= read -r vPalabra; do
+#          echo "Buscando la palabra '$vPalabra' en el archivo destino:"
+#          grep -n "^$vPalabra" "/tmp/BIP39english.txt" >> "/tmp/resultado.txt"
+#        done < "$cArchivoConSemillas"
+      # Mostrar output
+ #       cat /tmp/resultado.txt
