@@ -38,7 +38,7 @@ if [ $# -ne $cCantArgumEsperados ]
       echo ""
     else
       echo ""
-      echo -e "${cColorRojo}No se pudo enviar el mensaje porque no se pudo contactar con https://api.telegram.org${cFinColor}"
+      echo -e "${cColorRojo}  No se pudo enviar el mensaje porque no se pudo contactar con https://api.telegram.org${cFinColor}"
       echo ""
     fi
 fi
