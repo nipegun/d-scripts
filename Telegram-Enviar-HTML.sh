@@ -30,38 +30,51 @@
 #
 # ----------
 
-cColorRojo="\033[1;31m"
-cColorVerde="\033[1;32m"
-cFinColor="\033[0m"
-
 cCantArgumEsperados=3
 
+# Definir constantes de color
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
+
+# Notificar el inicio de ejecución del script
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script para enviar HTML con la API de Telegram...${cFinColor}"
+  echo ""
 
 if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
-    echo -e "${cColorRojo}Mal uso del script!${cFinColor}"
+    echo -e "${cColorRojo}    Mal uso del script!${cFinColor}"
     echo ""
-    echo -e 'El uso correcto sería: '$0' '${cColorVerde}'[TokenDelBot] [IdDelChatDeDestino] ["Mensaje"]'${cFinColor}''
+    echo "      El uso correcto sería:"
     echo ""
-    echo "Ejemplo:"
+    echo "        $0 'TokenDelBot' 'IdDelChatDeDestino' 'Mensaje'"
     echo ""
-    echo ''$0' 123456789:AAAAAAAAAA_AAAAAAAAAAAAAAA_AAAAAA_A 000000000 "Mensaje de prueba"'
+    echo "      Por ejemplo:"
+    echo ""
+    echo "        $0 '123456789:AAAAAAAAAA_AAAAAAAAAAAAAAA_AAAAAA_A' '000000000' '<b>Empresa: </b><a>Google</a> %0A <b>Enlace a su web: </b><a href="'"http://google.es"'">aquí</a>'"
     echo ""
     exit
   else
-    wget -q --tries=10 --timeout=20 --spider https://api.telegram.org
-    if [[ $? -eq 0 ]]; then
-      TokenDelBot="$1"
-      URL="https://api.telegram.org/bot$TokenDelBot/sendMessage"
-      IdDestino="$2"
-      Mensaje="$3"
-      curl -sL -X POST $URL -d chat_id=$IdDestino -d parse_mode=HTML -d text="$Mensaje" > /dev/null
-      echo ""
-    else
-      echo ""
-      echo -e "${cColorRojo}  No se pudo enviar el mensaje porque no se pudo contactar con https://api.telegram.org${cFinColor}"
-      echo ""
-    fi
+    # Comprobar que haya acceso a la API de Telegram antes de Intentar enviar
+      wget -q --tries=10 --timeout=20 --spider https://api.telegram.org
+      if [[ $? -eq 0 ]]
+        then
+          vTokenDelBot="$1"
+          vURL="https://api.telegram.org/bot$vTokenDelBot/sendMessage"
+          vIdDestino="$2"
+          vMensaje="$3"
+          curl -sL -X POST $vURL -d chat_id=$vIdDestino -d parse_mode=HTML -d text="$vMensaje" > /dev/null
+          echo ""
+        else
+          echo ""
+          echo -e "${cColorRojo}  No se pudo enviar el mensaje porque no se pudo contactar con https://api.telegram.org${cFinColor}"
+          echo ""
+      fi
 fi
 
