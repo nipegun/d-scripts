@@ -16,6 +16,7 @@
 #
 # Etiquetas HTML soportadas:
 #
+#    %0A Salto de línea
 #   <b>bold</b>
 #   <strong>bold</strong>
 #   <i>italic</i>
