@@ -29,7 +29,9 @@
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
+    echo ""
     echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
+    echo ""
     exit
   fi
 
