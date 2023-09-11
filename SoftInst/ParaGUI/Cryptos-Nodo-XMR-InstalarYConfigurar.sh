@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 ---
-# Script de NiPeGun para instalar y configurar la cadena de bloques de Monero (XMR)
+# Script de NiPeGun para instalar y configurar el nodo de Monero (XMR)
 #
 # Ejecución remota:
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Nodo-XMR-InstalarYConfigurar.sh | bash
@@ -25,7 +25,7 @@ vUsuarioNoRoot="nipegun"
 
 # Notificar inicio de ejecución del script
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de la cadena de bloques de XMR...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del nodo de Monero (XMR)...${cFinColor}"
   echo ""
   
 # Comprobar si el script está corriendo como root
