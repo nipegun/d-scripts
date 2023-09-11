@@ -6,27 +6,33 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para enviar HTML a Telegram desde Bash usando un bot
+# Script de NiPeGun para enviar HTML desde Bash hacia Telegram usando la API de bots de este último
 #
-#  Etiquetas soportadas:
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Telegram-Enviar-HTML.sh | bash -s 'TokenDelBot' 'IdDelChatDeDestino' 'Mensaje'
+# ----------
+
+# ----------
 #
-#  <b>bold</b>
-#  <strong>bold</strong>
-#  <i>italic</i>
-#  <em>italic</em>
-#  <u>underline</u>
-#  <ins>underline</ins>
-#  <s>strikethrough</s>
-#  <strike>strikethrough</strike>
-#  <del>strikethrough</del>
-#  <span class="tg-spoiler">spoiler</span>
-#  <tg-spoiler>spoiler</tg-spoiler>
-#  <b>bold <i>italic bold <s>italic bold strikethrough <span class="tg-spoiler">italic bold strikethrough spoiler</span></s> <u>underline italic bold</u></i> bold</b>
-#  <a href="http://www.example.com/">inline URL</a>
-#  <a href="tg://user?id=123456789">inline mention of a user</a>
-#  <code>inline fixed-width code</code>
-#  <pre></pre>
-#  <pre><code class="language-python"></code></pre>
+# Etiquetas HTML soportadas:
+#
+#   <b>bold</b>
+#   <strong>bold</strong>
+#   <i>italic</i>
+#   <em>italic</em>
+#   <u>underline</u>
+#   <ins>underline</ins>
+#   <s>strikethrough</s>
+#   <strike>strikethrough</strike>
+#   <del>strikethrough</del>
+#   <span class="tg-spoiler">spoiler</span>
+#   <tg-spoiler>spoiler</tg-spoiler>
+#   <b>bold <i>italic bold <s>italic bold strikethrough <span class="tg-spoiler">italic bold strikethrough spoiler</span></s> <u>underline italic bold</u></i> bold</b>
+#   <a href="http://www.example.com/">inline URL</a>
+#   <a href="tg://user?id=123456789">inline mention of a user</a>
+#   <code>inline fixed-width code</code>
+#   <pre></pre>
+#   <pre><code class="language-python"></code></pre>
 #
 # ----------
 
