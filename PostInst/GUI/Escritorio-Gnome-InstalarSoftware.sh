@@ -279,6 +279,7 @@ echo ""
     apt-get -y remove gnome-tetravex
     apt-get -y remove gnome-taquin
     apt-get -y remove aisleriot
+    apt-get -y remove tali
     apt-get -y remove totem
     apt-get -y autoremove
 
