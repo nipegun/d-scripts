@@ -56,6 +56,7 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
     mkdir build
     cd build
   # Instalar el softare para poder compilar
+    apt-get -y update
     apt-get -y install cmake
     apt-get -y install libhwloc-dev
     apt-get -y install libuv1-dev
