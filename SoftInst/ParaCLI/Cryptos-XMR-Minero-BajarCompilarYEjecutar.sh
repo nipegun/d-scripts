@@ -233,3 +233,4 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
   echo "    Minando con ID $vIdMinero..."
   echo ""
   ~/Cryptos/XMR/minero/Minar-ConCoresReales-TLS.sh
+
