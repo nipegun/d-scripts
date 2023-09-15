@@ -149,7 +149,7 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
 
 # Crear el script de ejecución manual
   echo ""
-  echo "    Creando el script para ejecutar manualmente el minero (con cores reales)..."
+  echo "    Creando el script para ejecutar manualmente el minero (con cores reales) (Background)..."
   echo ""
   echo '#!/bin/bash'                                                                                                      > ~/Cryptos/XMR/minero/Minar-ConCoresReales-Background.sh
   echo ""                                                                                                                >> ~/Cryptos/XMR/minero/Minar-ConCoresReales-Background.sh
