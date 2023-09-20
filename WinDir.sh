@@ -13,7 +13,7 @@ if [ $# -eq 1 ]
   then
     vParam=" -lha1FX --group-directories-first --color=auto --time-style=long-iso"
     echo ""
-    ls $vParam $1
+    ls $vParam "$1"
     echo ""
   else
     vParam=" -lha1FX --group-directories-first --color=auto --time-style=long-iso"
