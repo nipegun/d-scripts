@@ -13,7 +13,6 @@
   cFinColor='\033[0m'
 
 cCantArgumEsperados=2
-v
 
 if [ $# -ne $cCantArgumEsperados ]
   then
