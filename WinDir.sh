@@ -6,11 +6,11 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para MOSTRAR DIRECTORIOS COMO EL DIR DE WINDOWS
+# Script de NiPeGun para mostrar directorios y archivos de forma similar a como lo hace el dir de Windows
 # ----------
 
-varParam=" -lha1FX --group-directories-first --color=auto --time-style=long-iso"
+vParam=" -lha1FX --group-directories-first --color=auto --time-style=long-iso"
 echo ""
-ls $varParam
+ls $vParam
 echo ""
 
