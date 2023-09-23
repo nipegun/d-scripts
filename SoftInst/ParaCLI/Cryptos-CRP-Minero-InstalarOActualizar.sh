@@ -15,7 +15,7 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Cryptos-CRP-Minero-InstalarOActualizar.sh | sed 's/^PublicKey.*/PublicKey=TuClave/g' | bash
 # ----------
 
-PublicKey=C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415
+vPublicKey=C24C4B77698578B46CDB1C109996B0299984FEE46AAC5CD6025786F5C5C61415
 
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
@@ -39,7 +39,7 @@ echo ""
       1 "Instalar o actualizar el minero de CRP para el usuario root" on
       2 "  Mover el minero de CRP a la carpeta del usuario no root" off
       3 "Agregar los mineros del root a los ComandosPostArranque" off
-      4 "Agregar los mineros del usuario $UsuarioCRPNoRoot a los ComandosPostArranque" off
+      4 "Agregar los mineros del usuario $vUsuarioCRPNoRoot a los ComandosPostArranque" off
       5 "Activar auto-logueo de root en modo texto" on
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -59,7 +59,7 @@ echo ""
             # Comprobar si el paquete psmisc está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s psmisc 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo "  psmisc no está instalado. Iniciando su instalación..."
+                echo "  El paquete psmisc no está instalado. Iniciando su instalación..."
                 echo ""
                 apt-get -y update
                 apt-get -y install psmisc
@@ -133,23 +133,37 @@ echo ""
               rm -rf /root/Cryptos/CRP/uam-latest_amd64.deb
 
           # Crear el archivo para minar
-            echo '#!/bin/bash'                                                                         > /root/Cryptos/CRP/minero/Minar.sh
-            echo ""                                                                                   >> /root/Cryptos/CRP/minero/Minar.sh
-            echo "PublicKey=$PublicKey"                                                               >> /root/Cryptos/CRP/minero/Minar.sh
-            echo 'IPLocalDelMinero=$(hostname -I)'                                                    >> /root/Cryptos/CRP/minero/Minar.sh
-            echo ""                                                                                   >> /root/Cryptos/CRP/minero/Minar.sh
-            echo 'echo ""'                                                                            >> /root/Cryptos/CRP/minero/Minar.sh
-            echo 'echo "  Ejecutando el minero de Utopia..."'                                         >> /root/Cryptos/CRP/minero/Minar.sh
-            echo 'echo ""'                                                                            >> /root/Cryptos/CRP/minero/Minar.sh
-            echo '~/Cryptos/CRP/minero/uam --pk $PublicKey --http ["$IPLocalDelMinero"]:8090 --no-ui' >> /root/Cryptos/CRP/minero/Minar.sh
-            chmod +x                                                                                     /root/Cryptos/CRP/minero/Minar.sh
+            echo '#!/bin/bash'                                                                                   > /root/Cryptos/CRP/minero/Minar.sh
+            echo ""                                                                                             >> /root/Cryptos/CRP/minero/Minar.sh
+            echo "PublicKey=$vPublicKey"                                                                        >> /root/Cryptos/CRP/minero/Minar.sh
+            echo 'vIPLocalDelMinero=$(hostname -I)'                                                             >> /root/Cryptos/CRP/minero/Minar.sh
+            echo ""                                                                                             >> /root/Cryptos/CRP/minero/Minar.sh
+            echo 'echo ""'                                                                                      >> /root/Cryptos/CRP/minero/Minar.sh
+            echo 'echo "  Ejecutando el minero de Utopia..."'                                                   >> /root/Cryptos/CRP/minero/Minar.sh
+            echo 'echo ""'                                                                                      >> /root/Cryptos/CRP/minero/Minar.sh
+            echo ''                                                                                             >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '# Crear el bucle'                                                                             >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '  while true'                                                                                 >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '    do'                                                                                       >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '      # Ejecutar el comando'                                                                  >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '        ~/Cryptos/CRP/minero/uam --pk $vPublicKey --http ["$vIPLocalDelMinero"]:8090 --no-ui' >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '      # Verificr el código de salida del comando'                                             >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '        if [ $? -eq 0 ]; then'                                                                >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '          echo "El minero se ha ejecutado correctamente."'                                    >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '        else'                                                                                 >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '          echo "El minero ha finalizado debido a un error. Reiniciandolo..."'                 >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '        fi'                                                                                   >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '      # Esperar 5 segundos antes de re-ejecutar el comando'                                   >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '        sleep 5'                                                                              >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '    done'                                                                                     >> /root/Cryptos/CRP/minero/Minar.sh
+            chmod +x                                                                                               /root/Cryptos/CRP/minero/Minar.sh
 
           # Crear la configuración de conexión por defecto
-            IPLocal=$(hostname -I)
-            PuertoCentena=$(echo $IPLocal | cut -d'.' -f4)
+            vIPLocal=$(hostname -I)
+            vPuertoCentena=$(echo $vIPLocal | cut -d'.' -f4)
             mkdir -p /root/.uam/ > /dev/null
-            echo "[net]"                                > /root/.uam/uam.ini
-            echo "listens=[$IPLocal]:609$PuertoCentena" >> /root/.uam/uam.ini
+            echo "[net]"                                   > /root/.uam/uam.ini
+            echo "listens=[$vIPLocal]:609$vPuertoCentena" >> /root/.uam/uam.ini
             sed -i -e 's| ]|]|g' /root/.uam/uam.ini
 
           # Auto-arrancar el minero cada vez que se inicia sesión como root
@@ -163,24 +177,24 @@ echo ""
           echo -e "${cColorVerde}  Moviendo el minero de CRP a la carpeta del usuario no-root...${cFinColor}"
           echo ""
           # Pedir el nombre del usuario no-root
-             UsuarioCRPNoRoot=$(dialog --keep-tite --title "Ingresa el nombre para el usuario no-root" --inputbox "Nombre de usuario:" 8 60 3>&1 1>&2 2>&3 3>&- )
-          if id "$UsuarioCRPNoRoot" &>/dev/null; then
+             vUsuarioCRPNoRoot=$(dialog --keep-tite --title "Ingresa el nombre para el usuario no-root" --inputbox "Nombre de usuario:" 8 60 3>&1 1>&2 2>&3 3>&- )
+          if id "$vUsuarioCRPNoRoot" &>/dev/null; then
             # Crear la carpeta
-              mkdir -p  /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/ 2> /dev/null
+              mkdir -p  /home/$vUsuarioCRPNoRoot/Cryptos/CRP/minero/ 2> /dev/null
             # Borrar el minero ya instalado
-              rm -rf /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/
+              rm -rf /home/$vUsuarioCRPNoRoot/Cryptos/CRP/minero/
             # Mover carpeta de mineros
-              mv /root/Cryptos/CRP/minero/ /home/$UsuarioCRPNoRoot/Cryptos/CRP/
+              mv /root/Cryptos/CRP/minero/ /home/$vUsuarioCRPNoRoot/Cryptos/CRP/
             # Pasar el archivo de conexión por defecto
-              mkdir -p /home/$UsuarioCRPNoRoot/.uam/ > /dev/null
-              cp /root/.uam/uam.ini /home/$UsuarioCRPNoRoot/.uam/uam.ini
+              mkdir -p /home/$vUsuarioCRPNoRoot/.uam/ > /dev/null
+              cp /root/.uam/uam.ini /home/$vUsuarioCRPNoRoot/.uam/uam.ini
             # Reparación de permisos
-              chown $UsuarioCRPNoRoot:$UsuarioCRPNoRoot /home/$UsuarioCRPNoRoot/ -R 2> /dev/null
+              chown $vUsuarioCRPNoRoot:$vUsuarioCRPNoRoot /home/$vUsuarioCRPNoRoot/ -R 2> /dev/null
             # Borrar el minero de la carpeta del root
               rm -rf /root/Cryptos/CRP/
           else
             echo ""
-            echo "  El usuario $UsuarioCRPNoRoot no existe. Abortando script..."
+            echo "  El usuario $vUsuarioCRPNoRoot no existe. Abortando script..."
             echo ""
             echo "  El minero ha quedado instalado sólo para el usuario root."
             echo ""
@@ -202,11 +216,11 @@ echo ""
         4)
 
           echo ""
-          echo -e "${cColorVerde}  Agregando el minero del usuario $UsuarioCRPNoRoot a los ComandosPostArranque...${cFinColor}"
+          echo -e "${cColorVerde}  Agregando el minero del usuario $vUsuarioCRPNoRoot a los ComandosPostArranque...${cFinColor}"
           echo ""
           # CRP
-            echo "#su $UsuarioCRPNoRoot -c /home/$UsuarioCRPNoRoot/Cryptos/CRP/minero/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh
-            echo "#disown -a"                                                                     >> /root/scripts/ComandosPostArranque.sh
+            echo "#su $vUsuarioCRPNoRoot -c /home/$vUsuarioCRPNoRoot/Cryptos/CRP/minero/Minar.sh &" >> /root/scripts/ComandosPostArranque.sh
+            echo "#disown -a"                                                                       >> /root/scripts/ComandosPostArranque.sh
         ;;
 
         5)
