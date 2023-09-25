@@ -61,7 +61,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación de Visual Studio Code para Debian 9 (Stretch)..." 
-echo ""
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -71,7 +71,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación de Visual Studio Code para Debian 10 (Buster)..." 
-echo ""
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -80,7 +80,6 @@ echo ""
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de Visual Studio Code para Debian 11 (Bullseye)..."  
   echo ""
 
@@ -94,15 +93,15 @@ elif [ $cVerSO == "11" ]; then
      fi
   menu=(dialog --timeout 5 --checklist "Instalación de Visual Studio Code:" 22 76 16)
     opciones=(
-  1 "Instalar versión estable para i386" off
-              2 "Instalar versión estable para amd64" off
-              3 "Instalar versión estable para armhf" off
-              4 "Instalar versión estable para arm64" off
-              5 "Instalar version -insider- para i386 " off
-              6 "Instalar versión -insider- para amd64" off
-              7 "Instalar versión -insider- para armhf" off
-              8 "Instalar versión -insider- para arm64" off
-)
+      1 "Instalar versión estable para i386" off
+      2 "Instalar versión estable para amd64" off
+      3 "Instalar versión estable para armhf" off
+      4 "Instalar versión estable para arm64" off
+      5 "Instalar version -insider- para i386 " off
+      6 "Instalar versión -insider- para amd64" off
+      7 "Instalar versión -insider- para armhf" off
+      8 "Instalar versión -insider- para arm64" off
+    )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       clear
 
