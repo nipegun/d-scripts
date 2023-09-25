@@ -86,7 +86,8 @@ elif [ $cVerSO == "11" ]; then
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
-       echo "  dialog no está instalado. Iniciando su instalación..."       echo ""
+       echo "  dialog no está instalado. Iniciando su instalación..."
+       echo ""
        apt-get -y update > /dev/null
        apt-get -y install dialog
        echo ""
@@ -125,13 +126,15 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."                 echo ""
+                 echo "  Descargando el paquete..."
+                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."
+                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -140,7 +143,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."                 echo ""
+                 echo "  Instalando el paquete .deb..."
+                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -179,13 +183,15 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."                 echo ""
+                 echo "  Descargando el paquete..."
+                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."
+                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -194,7 +200,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."                 echo ""
+                 echo "  Instalando el paquete .deb..."
+                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -233,13 +240,15 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."                 echo ""
+                 echo "  Descargando el paquete..."
+                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."
+                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -248,7 +257,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."                 echo ""
+                 echo "  Instalando el paquete .deb..."
+                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -287,13 +297,15 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."                 echo ""
+                 echo "  Descargando el paquete..."
+                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."
+                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -302,7 +314,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."                 echo ""
+                 echo "  Instalando el paquete .deb..."
+                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -341,13 +354,15 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."                 echo ""
+                 echo "  Descargando el paquete..."
+                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."
+                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -356,7 +371,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."                 echo ""
+                 echo "  Instalando el paquete .deb..."
+                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -395,13 +411,15 @@ elif [ $cVerSO == "11" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."                 echo ""
+                 echo "  Descargando el paquete..."
+                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."
+                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -410,7 +428,8 @@ elif [ $cVerSO == "11" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."                 echo ""
+                 echo "  Instalando el paquete .deb..."
+                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -456,7 +475,8 @@ elif [ $cVerSO == "11" ]; then
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
-                    echo "  wget no está instalado. Iniciando su instalación..."                    echo ""
+                    echo "  wget no está instalado. Iniciando su instalación..."
+                    echo ""
                     apt-get -y update > /dev/null
                     apt-get -y install wget
                     echo ""
@@ -512,7 +532,8 @@ elif [ $cVerSO == "11" ]; then
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
-                    echo "  wget no está instalado. Iniciando su instalación..."                    echo ""
+                    echo "  wget no está instalado. Iniciando su instalación..."
+                    echo ""
                     apt-get -y update > /dev/null
                     apt-get -y install wget
                     echo ""
@@ -558,7 +579,8 @@ elif [ $cVerSO == "12" ]; then
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
        echo ""
-       echo "  dialog no está instalado. Iniciando su instalación..."       echo ""
+       echo "  dialog no está instalado. Iniciando su instalación..."
+       echo ""
        apt-get -y update > /dev/null
        apt-get -y install dialog
        echo ""
@@ -597,13 +619,15 @@ elif [ $cVerSO == "12" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."                 echo ""
+                 echo "  Descargando el paquete..."
+                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."
+                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -612,7 +636,8 @@ elif [ $cVerSO == "12" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."                 echo ""
+                 echo "  Instalando el paquete .deb..."
+                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -651,13 +676,15 @@ elif [ $cVerSO == "12" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."                 echo ""
+                 echo "  Descargando el paquete..."
+                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."
+                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -666,7 +693,8 @@ elif [ $cVerSO == "12" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."                 echo ""
+                 echo "  Instalando el paquete .deb..."
+                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -705,13 +733,15 @@ elif [ $cVerSO == "12" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."                 echo ""
+                 echo "  Descargando el paquete..."
+                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."
+                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -720,7 +750,8 @@ elif [ $cVerSO == "12" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."                 echo ""
+                 echo "  Instalando el paquete .deb..."
+                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -759,13 +790,15 @@ elif [ $cVerSO == "12" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."                 echo ""
+                 echo "  Descargando el paquete..."
+                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."
+                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -774,7 +807,8 @@ elif [ $cVerSO == "12" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."                 echo ""
+                 echo "  Instalando el paquete .deb..."
+                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -813,13 +847,15 @@ elif [ $cVerSO == "12" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."                 echo ""
+                 echo "  Descargando el paquete..."
+                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."
+                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -828,7 +864,8 @@ elif [ $cVerSO == "12" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."                 echo ""
+                 echo "  Instalando el paquete .deb..."
+                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -867,13 +904,15 @@ elif [ $cVerSO == "12" ]; then
 
               # Descargar el paquete
                  echo ""
-                 echo "  Descargando el paquete..."                 echo ""
+                 echo "  Descargando el paquete..."
+                 echo ""
                  mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
                  cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
-                      echo "  wget no está instalado. Iniciando su instalación..."                      echo ""
+                      echo "  wget no está instalado. Iniciando su instalación..."
+                      echo ""
                       apt-get -y update > /dev/null
                       apt-get -y install wget
                       echo ""
@@ -882,7 +921,8 @@ elif [ $cVerSO == "12" ]; then
 
               # Instalar el paquete
                  echo ""
-                 echo "  Instalando el paquete .deb..."                 echo ""
+                 echo "  Instalando el paquete .deb..."
+                 echo ""
                  dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
@@ -928,7 +968,8 @@ elif [ $cVerSO == "12" ]; then
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
-                    echo "  wget no está instalado. Iniciando su instalación..."                    echo ""
+                    echo "  wget no está instalado. Iniciando su instalación..."
+                    echo ""
                     apt-get -y update > /dev/null
                     apt-get -y install wget
                     echo ""
@@ -984,7 +1025,8 @@ elif [ $cVerSO == "12" ]; then
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
-                    echo "  wget no está instalado. Iniciando su instalación..."                    echo ""
+                    echo "  wget no está instalado. Iniciando su instalación..."
+                    echo ""
                     apt-get -y update > /dev/null
                     apt-get -y install wget
                     echo ""
