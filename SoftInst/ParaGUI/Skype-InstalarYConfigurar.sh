@@ -104,5 +104,34 @@ elif [ $cVerSO == "11" ]; then
   echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de Skype para Debian 12 (Bookworm)..."  
+  echo ""
+
+  # Descargar el apquete
+    echo ""
+    echo "  Descargando el paquete..."
+    echo ""
+    mkdir -p /root/SoftInst/Skype
+    cd /root/SoftInst/Skype
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo "    El paquete wget no está instalado. Iniciando su instalación..."
+        echo ""
+        apt-get -y update > /dev/null
+        apt-get -y install wget
+        echo ""
+      fi
+    wget https://go.skype.com/skypeforlinux-64.deb
+
+  # Instalar el paquete
+    echo ''
+    echo '  Instalando el paquete ...'
+    echo ''
+    dpkg -i skypeforlinux-64.deb
+
 fi
 
