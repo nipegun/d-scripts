@@ -135,7 +135,7 @@ echo ""
           # Crear el archivo para minar
             echo '#!/bin/bash'                                                                                   > /root/Cryptos/CRP/minero/Minar.sh
             echo ""                                                                                             >> /root/Cryptos/CRP/minero/Minar.sh
-            echo "cPublicKey=$vPublicKey"                                                                        >> /root/Cryptos/CRP/minero/Minar.sh
+            echo "cPublicKey=$vPublicKey"                                                                       >> /root/Cryptos/CRP/minero/Minar.sh
             echo 'vIPLocalDelMinero=$(hostname -I)'                                                             >> /root/Cryptos/CRP/minero/Minar.sh
             echo ""                                                                                             >> /root/Cryptos/CRP/minero/Minar.sh
             echo 'echo ""'                                                                                      >> /root/Cryptos/CRP/minero/Minar.sh
