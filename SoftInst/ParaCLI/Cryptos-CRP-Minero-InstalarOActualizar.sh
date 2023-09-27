@@ -135,7 +135,7 @@ echo ""
           # Crear el archivo para minar
             echo '#!/bin/bash'                                                                                   > /root/Cryptos/CRP/minero/Minar.sh
             echo ""                                                                                             >> /root/Cryptos/CRP/minero/Minar.sh
-            echo "PublicKey=$vPublicKey"                                                                        >> /root/Cryptos/CRP/minero/Minar.sh
+            echo "cPublicKey=$vPublicKey"                                                                        >> /root/Cryptos/CRP/minero/Minar.sh
             echo 'vIPLocalDelMinero=$(hostname -I)'                                                             >> /root/Cryptos/CRP/minero/Minar.sh
             echo ""                                                                                             >> /root/Cryptos/CRP/minero/Minar.sh
             echo 'echo ""'                                                                                      >> /root/Cryptos/CRP/minero/Minar.sh
@@ -146,7 +146,7 @@ echo ""
             echo '  while true'                                                                                 >> /root/Cryptos/CRP/minero/Minar.sh
             echo '    do'                                                                                       >> /root/Cryptos/CRP/minero/Minar.sh
             echo '      # Ejecutar el comando'                                                                  >> /root/Cryptos/CRP/minero/Minar.sh
-            echo '        ~/Cryptos/CRP/minero/uam --pk $vPublicKey --http ["$vIPLocalDelMinero"]:8090 --no-ui' >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '        ~/Cryptos/CRP/minero/uam --pk $cPublicKey --http ["$vIPLocalDelMinero"]:8090 --no-ui' >> /root/Cryptos/CRP/minero/Minar.sh
             echo '      # Verificr el código de salida del comando'                                             >> /root/Cryptos/CRP/minero/Minar.sh
             echo '        if [ $? -eq 0 ]; then'                                                                >> /root/Cryptos/CRP/minero/Minar.sh
             echo '          echo "El minero se ha ejecutado correctamente."'                                    >> /root/Cryptos/CRP/minero/Minar.sh
