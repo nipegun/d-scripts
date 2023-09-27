@@ -150,16 +150,16 @@ echo ""
             echo '      # Verificr el código de salida del comando'                                             >> /root/Cryptos/CRP/minero/Minar.sh
             echo '        if [ $? -eq 0 ]; then'                                                                >> /root/Cryptos/CRP/minero/Minar.sh
             echo '          echo ""'                                                                            >> /root/Cryptos/CRP/minero/Minar.sh
-            echo '          echo "  El proceso de ejecución del minero ha sido correcto."'                      >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '          echo "    El proceso de ejecución del minero ha sido correcto."'                    >> /root/Cryptos/CRP/minero/Minar.sh
             echo '          echo ""'                                                                            >> /root/Cryptos/CRP/minero/Minar.sh
             echo '        else'                                                                                 >> /root/Cryptos/CRP/minero/Minar.sh
             echo '          echo ""'                                                                            >> /root/Cryptos/CRP/minero/Minar.sh
-            echo '          echo "  El minero ha finalizado debido a un error."'                                >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '          echo "    El minero ha finalizado debido a un error."'                              >> /root/Cryptos/CRP/minero/Minar.sh
             echo '          echo ""'                                                                            >> /root/Cryptos/CRP/minero/Minar.sh
             echo '        fi'                                                                                   >> /root/Cryptos/CRP/minero/Minar.sh
             echo '      # Esperar 5 segundos antes de re-ejecutar el comando'                                   >> /root/Cryptos/CRP/minero/Minar.sh
             echo '        echo ""'                                                                              >> /root/Cryptos/CRP/minero/Minar.sh
-            echo '        echo "    Re-iniciando la ejecución del minero..."'                                   >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '        echo "      Re-iniciando la ejecución del minero..."'                                 >> /root/Cryptos/CRP/minero/Minar.sh
             echo '        echo ""'                                                                              >> /root/Cryptos/CRP/minero/Minar.sh
             echo '        sleep 5'                                                                              >> /root/Cryptos/CRP/minero/Minar.sh
             echo '    done'                                                                                     >> /root/Cryptos/CRP/minero/Minar.sh
