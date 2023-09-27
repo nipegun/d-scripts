@@ -159,7 +159,7 @@ echo ""
             echo '        fi'                                                                                   >> /root/Cryptos/CRP/minero/Minar.sh
             echo '      # Esperar 5 segundos antes de re-ejecutar el comando'                                   >> /root/Cryptos/CRP/minero/Minar.sh
             echo '        echo ""'                                                                              >> /root/Cryptos/CRP/minero/Minar.sh
-            echo '        echo "      Re-iniciando la ejecución del minero..."'                                 >> /root/Cryptos/CRP/minero/Minar.sh
+            echo '        echo "  Volviendo a ejecutar el minero..."'                                           >> /root/Cryptos/CRP/minero/Minar.sh
             echo '        echo ""'                                                                              >> /root/Cryptos/CRP/minero/Minar.sh
             echo '        sleep 5'                                                                              >> /root/Cryptos/CRP/minero/Minar.sh
             echo '    done'                                                                                     >> /root/Cryptos/CRP/minero/Minar.sh
