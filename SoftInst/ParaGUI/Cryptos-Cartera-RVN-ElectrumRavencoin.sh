@@ -9,13 +9,13 @@
 # Script de NiPeGun para instalar y configurar la cartera de RVN Electrum en Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-Electrum.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-ElectrumRavencoin.sh | bash
 #
 # Ejecución remota sin caché:
-#  curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-Electrum.sh | bash
+#  curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-ElectrumRavencoin.sh | bash
 #
 # Ejecución remota con parámetros:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-Electrum.sh | bash -s Parámetro1 Parámetro2
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Cryptos-Cartera-RVN-ElectrumRavencoin.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 vUsuarioNoRoot=nipegun
@@ -28,7 +28,7 @@ cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
-    echo -e "${cColorRojo}Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
+    echo -e "${cColorRojo} Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
     exit
   fi
 
