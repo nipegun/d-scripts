@@ -151,5 +151,50 @@ elif [ $cVerSO == "11" ]; then
   echo "  dpkg-reconfigure ddclient"
   echo "" 
 
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de DDClient para Debian 12 (Bookworm)..."  
+  echo ""
+
+  echo 'run_dhclient="true"'   > /etc/default/ddclient
+  echo 'run_ipup="true"'      >> /etc/default/ddclient
+  echo 'run_daemon="true"'    >> /etc/default/ddclient
+  echo 'daemon_interval="60"' >> /etc/default/ddclient
+
+  touch /etc/ddclient.conf
+  echo "pid=/var/run/ddclient.pid"             > /etc/ddclient.conf
+  echo "protocol=dyndns2"                     >> /etc/ddclient.conf
+  echo "#use=if, if=eth0"                     >> /etc/ddclient.conf
+  echo "#use=if, if=vmbr0"                    >> /etc/ddclient.conf
+  echo "#use=web, web=checkip.dyndns.org"     >> /etc/ddclient.conf
+  echo "use=web"                              >> /etc/ddclient.conf
+  echo "ssl=yes"                              >> /etc/ddclient.conf
+  echo "server=dyndns.strato.com/nic/update"  >> /etc/ddclient.conf
+  echo "login=dominio.com"                    >> /etc/ddclient.conf
+  echo "password='x'"                         >> /etc/ddclient.conf
+  echo "web.com"                              >> /etc/ddclient.conf
+          
+  apt-get -y install net-tools
+  apt-get -y install ddclient
+          
+  echo ""
+  echo "  Instalación finalizada."
+  echo "  Edita el archivo /etc/ddclient.conf para indicar tus credenciales."
+  echo ""
+  echo "  Para probar la configuración ejecuta:"
+  echo "  ddclient -query"
+  echo "  o"
+  echo "  ddclient"
+  echo "  o"
+  echo "  ddclient -daemon=0 -debug -verbose -noquiet"
+  echo ""
+  echo "  Para ver las actualizaciones en tiempo real, ejecuta:"
+  echo "  tail -f /var/log/syslog | grep ddclient"
+  echo ""
+  echo "  Si no lo has instalado para Strato, reconfigúralo con:"
+  echo "  dpkg-reconfigure ddclient"
+  echo "" 
+
 fi
 
