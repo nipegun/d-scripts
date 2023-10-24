@@ -20,11 +20,13 @@ echo -e "${cColorAzulClaro}  Iniciando el script de actualización del sistema o
 echo ""
 
 echo ""
-echo "    Reparando permisos de la carpeta /tmp/ ..."echo ""
+echo "    Reparando permisos de la carpeta /tmp/ ..."
+echo ""
 chmod 1777 /tmp
 
 echo ""
-echo "    Intentando actualización..."echo ""
+echo "    Intentando actualización..."
+echo ""
 apt-get -o Acquire::Check-Valid-Until=false update
 apt-get -y --allow-downgrades upgrade
 apt-get -y --allow-downgrades dist-upgrade
