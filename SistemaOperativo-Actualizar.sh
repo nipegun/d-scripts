@@ -20,23 +20,28 @@ echo -e "${cColorAzulClaro}  Iniciando el script de actualización del sistema o
 echo ""
 
 echo ""
-echo "    Reparando permisos de la carpeta /tmp/ ..."echo ""
+echo "    Reparando permisos de la carpeta /tmp/ ..."
+echo ""
 chmod 1777 /tmp
 
 echo ""
-echo "    Ejecutando apt-get update..."echo ""
+echo "    Ejecutando apt-get update..."
+echo ""
 apt-get -y update
 
 echo ""
-echo "    Ejecutando apt-get -y upgrade..."echo ""
+echo "    Ejecutando apt-get -y upgrade..."
+echo ""
 apt-get -y --allow-downgrades upgrade
 
 echo ""
-echo "    Ejecutando apt-get -y dist-upgrade..."echo ""
+echo "    Ejecutando apt-get -y dist-upgrade..."
+echo ""
 apt-get -y --allow-downgrades dist-upgrade
 
 echo ""
-echo "    Ejecutando apt-get -y autoremove..."echo ""
+echo "    Ejecutando apt-get -y autoremove..."
+echo ""
 apt-get -y autoremove
 
 echo ""
