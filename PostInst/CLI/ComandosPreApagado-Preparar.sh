@@ -115,6 +115,8 @@ elif [ $cVerSO == "12" ]; then
   echo "StandardOutput=tty"                                                     >> /etc/systemd/system/ComandosPreApagado.service
   echo "RemainAfterExit=yes"                                                    >> /etc/systemd/system/ComandosPreApagado.service
   echo ""                                                                       >> /etc/systemd/system/ComandosPreApagado.service
+  echo "[Install]"                                                              >> /etc/systemd/system/ComandosPreApagado.service
+  echo "WantedBy=multi-user.target"                                             >> /etc/systemd/system/ComandosPreApagado.service
 
   echo ""
   echo "    Creando el archivo para meter los comandos..."
