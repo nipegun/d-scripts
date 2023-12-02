@@ -58,9 +58,9 @@ vFechaDeEjec=$(date +a%Ym%md%d@%T)
     fi
 
   #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
-  menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+  menu=(dialog --checklist "¿Qué tipo de tunel quieres crear:" 22 96 16)
     opciones=(
-      1 "Opción 1" on
+      1 "Tunel hacia un servicio alojado en un ordenador de casa o de la oficina" on
       2 "Opción 2" off
       3 "Opción 3" off
       4 "Opción 4" off
@@ -76,8 +76,32 @@ vFechaDeEjec=$(date +a%Ym%md%d@%T)
           1)
 
             echo ""
-            echo "  Opción 1..."
+            echo "  Creando un tunel hacia un servicio alojado en casa o en la oficina..."
             echo ""
+            "Ingresa la IP o nombre DNS del servidor SSH remoto"
+              vDirServidorSSHRemoto=""
+            "Ingresa el usuario con el que te vas a conectar al servidor remoto:"
+              vUsuarioSSHRemoto=""
+            "Ingresa la IP LAN del ordenador remoto al que te quieres conectar:"
+              vIPLANOrdenadorRemoto=""
+            "Ingresa el puerto donde está el servicio del ordenador remoto:"
+              vPuertoServicioOrdenadorRemoto=""
+            "Ingresa el puerto de este ordenador en el que quieres mapear la conexión:"
+              vPuertoLocal=""
+
+            echo ""
+            echo "    Intentando crear tunel con los siguientes datos:"
+            echo ""
+            echo "      IP remota del servidor SSH: $vDirServidorSSHRemoto"
+            echo "      Usuario del servidor SSH: $vUsuarioSSHRemoto"
+            echo "      IP LAN del ordenador de casa u oficina: $vIPLANOrdenadorRemoto"
+            echo "      Puerto en el que está el servicio del ordenador: $vPuertoServicioOrdenadorRemoto"
+            echo "      Puerto de este ordenador al que conectarse para acceder: $vPuertoLocal"
+            echo ""
+            echo "      Comando ejecutado:"
+            echo "        ssh -L $vPuertoLocal:$vIPLANOrdenadorRemoto:$vPuertoServicioOrdenadorRemoto $vUsuarioSSHRemoto@$vDirServidorSSHRemoto"
+            echo ""
+            ssh -L $vPuertoLocal:$vIPLANOrdenadorRemoto:$vPuertoServicioOrdenadorRemoto $vUsuarioSSHRemoto@$vDirServidorSSHRemoto
 
           ;;
 
