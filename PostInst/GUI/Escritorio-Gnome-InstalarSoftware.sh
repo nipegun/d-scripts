@@ -48,7 +48,6 @@
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 7 (Wheezy)..."  
   echo ""
 
@@ -59,7 +58,6 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 8 (Jessie)..."  
   echo ""
 
@@ -70,8 +68,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 9 (Stretch)..."  echo "----------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 9 (Stretch)..."
   echo ""
 
   echo ""
@@ -81,8 +78,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 10 (Buster)..."  echo "----------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 10 (Buster)..."
   echo ""
 
   echo ""
@@ -205,20 +201,40 @@ elif [ $cVerSO == "11" ]; then
 
   # Huellas dactilares
     apt-get -y install libpam-fprintd
-    fprintd-enroll -f right-index-finger
-    fprintd-enroll -f left-index-finger
-    #fprintd-enroll -f left-thumb
-    #fprintd-enroll -f left-middle-finger
-    #fprintd-enroll -f left-ring-finger
-    #fprintd-enroll -f left-little-finger
-    #fprintd-enroll -f right-thumb
-    #fprintd-enroll -f right-middle-finger
-    #fprintd-enroll -f right-ring-finger
-    #fprintd-enroll -f right-little-finger
-
+    # Borrar todas las huellas registradas en el usuario root (por las dudas)
+      echo ""
+      echo "    Borrando todas las huellas digitales registradas para el usuario root..."
+      echo ""
+      fprintd-delete root --finger right-index-finger
+      fprintd-delete root --finger left-index-finger
+      fprintd-delete root --finger left-thumb
+      fprintd-delete root --finger left-middle-finger
+      fprintd-delete root --finger left-ring-finger
+      fprintd-delete root --finger left-little-finger
+      fprintd-delete root --finger right-thumb
+      fprintd-delete root --finger right-middle-finger
+      fprintd-delete root --finger right-ring-finger
+      fprintd-delete root --finger right-little-finger
+    # Registrar las huellas nuevas
+      echo ""
+      echo "    Registrando nuevas huellas digitales..."
+      echo ""
+      fprintd-enroll -f right-index-finger
+      fprintd-enroll -f left-index-finger
+      #fprintd-enroll -f left-thumb
+      #fprintd-enroll -f left-middle-finger
+      #fprintd-enroll -f left-ring-finger
+      #fprintd-enroll -f left-little-finger
+      #fprintd-enroll -f right-thumb
+      #fprintd-enroll -f right-middle-finger
+      #fprintd-enroll -f right-ring-finger
+      #fprintd-enroll -f right-little-finger
     # Activar autenticación PAM con huella dactilar
+      echo ""
+      echo "    Activando la autenticación PAM mediante huellas digitales..."
+      echo ""
       pam-auth-update # Marcar fingerprint authentication
-      # Comprobar que la autenticación por huella se activó correctamente
+    # Comprobar que la autenticación por huella se activó correctamente
       grep fprint /etc/pam.d/common-auth
       # En caso de que no funcione la autenticación por huella habría entrar como root y purgar fprint 
       # apt-get purge fprintd
