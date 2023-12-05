@@ -229,6 +229,15 @@ elif [ $cVerSO == "11" ]; then
       #fprintd-enroll -f left-middle-finger
       #fprintd-enroll -f left-ring-finger
       #fprintd-enroll -f left-little-finger
+    # Activar autenticación PAM con huella dactilar
+      echo ""
+      echo "    Activando la autenticación PAM mediante huellas digitales..."
+      echo ""
+      pam-auth-update # Marcar fingerprint authentication
+    # Comprobar que la autenticación por huella se activó correctamente
+      grep fprint /etc/pam.d/common-auth
+      # En caso de que no funcione la autenticación por huella habría entrar como root y purgar fprint 
+      # apt-get purge fprintd
 
   # Lanzador de chromium para el root
     mkdir -p /root/.local/share/applications/ 2> /dev/null
@@ -395,7 +404,6 @@ echo ""
       #fprintd-enroll -f left-middle-finger
       #fprintd-enroll -f left-ring-finger
       #fprintd-enroll -f left-little-finger
-
     # Activar autenticación PAM con huella dactilar
       echo ""
       echo "    Activando la autenticación PAM mediante huellas digitales..."
