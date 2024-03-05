@@ -203,7 +203,7 @@ elif [ $cVerSO == "11" ]; then
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo -e "${ColorAzulClaro}Iniciando el script de instalación de Atomic para Debian 12 (Bookworm)...${cFinColor}"
+  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de Atomic para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
   # Borrar archivos previos
@@ -214,16 +214,16 @@ elif [ $cVerSO == "12" ]; then
 
   # Determinar URL de descarga del archivo comprimido
     echo ""
-    echo "  Determinando la URL de descarga del archivo de instalación de Atomic Wallet..."
+    echo "    Determinando la URL de descarga del archivo de instalación de Atomic Wallet..."
     echo ""
     vURLArchivo=$(curl -sL https://get.atomicwallet.io/download/latest-debian.txt)
     echo ""
-    echo "    La URL de descarga del archivo es: $vURLArchivo"
+    echo "      La URL de descarga del archivo es: $vURLArchivo"
     echo ""
 
   # Descargar archivo .deb
     echo ""
-    echo "  Descargando el archivo..."
+    echo "    Descargando el archivo..."
     echo ""
     mkdir -p /root/SoftInst/AtomicWallet 2> /dev/null
     cd /root/SoftInst/AtomicWallet
@@ -231,90 +231,15 @@ elif [ $cVerSO == "12" ]; then
 
   # Cambiar el propietario del archivo .deb al usuario _apt
     echo ""
-    echo "  Cambiando el propietario del archivo .deb al usuario _apt..."
+    echo "    Cambiando el propietario del archivo .deb al usuario _apt..."
     echo ""
-    chown _apt:_apt /root/SoftInst/AtomicWallet/AtomicWallet.deb
+    chown _apt /root/SoftInst/AtomicWallet/AtomicWallet.deb
 
   # Instalar el archivo .deb
     echo ""
-    echo "  Instalando el archivo .deb..."
+    echo "    Instalando el archivo .deb..."
     echo ""
     apt -y install /root/SoftInst/AtomicWallet/AtomicWallet.deb
-
-  # Extraer los archivos de dentro del .deb
-    #echo ""
-    #echo "  Extrayendo los archivos de dentro del paquete .deb..."
-    #echo ""
-    # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
-      #if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
-        #echo ""
-        #echo -e "${cColorRojo}    binutils no está instalado. Iniciando su instalación...${cFinColor}"
-        #echo ""
-        #apt-get -y update > /dev/null
-        #apt-get -y install binutils
-        #echo ""
-      #fi
-    #cd /root/SoftInst/AtomicWallet/
-    #ar xv /root/SoftInst/AtomicWallet/AtomicWallet.deb
-
-  # Descomprimir el archivo data.tar.xz
-    #echo ""
-    #echo "  Descomprimiendo el archivo data.tar.xz..."
-    #echo ""
-    # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
-      #if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
-        #echo ""
-        #echo -e "${cColorRojo}    tar no está instalado. Iniciando su instalación...${cFinColor}"
-        #echo ""
-        #apt-get -y update > /dev/null
-        #apt-get -y install tar
-        #echo ""
-      #fi
-    #tar -xvf /root/SoftInst/AtomicWallet/data.tar.xz
-    #echo ""
-
-  # Crear la carpeta para el usuario no root
-    #echo ""
-    #echo "  Creando la carpeta para el usuario no root..."
-    #echo ""
-    #mkdir -p /home/$vUsuarioNoRoot/AtomicWallet/ 2> /dev/null
-    #cp -rf '/root/SoftInst/AtomicWallet/opt/Atomic Wallet/'* /home/$vUsuarioNoRoot/AtomicWallet/
-    #cp /root/SoftInst/AtomicWallet/usr/share/icons/hicolor/256x256/apps/atomic.png /home/$vUsuarioNoRoot/Atomic/atomic.png
-
-  # Agregar aplicación al menú
-    #echo ""
-    #echo "  Agregando la aplicación gráfica al menú..."
-    #echo ""
-    #mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
-    #cp -f /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                           /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
-    #sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/Atomic/atomic %U|g' /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
-    #sed -i -e "s|Icon=atomic|Icon=/home/$vUsuarioNoRoot/Atomic/atomic.png|g"                          /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
-    #sed -i -e "s|Name=Atomic Wallet|Name=MultiCartera Atomic|g"                                       /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
-    #chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
-    #gio set /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop "metadata::trusted" yes
-
-  # Crear el archivo de auto-ehecución
-    #echo ""
-    #echo "  Creando el archivo de autoejecución para el escritorio..."
-    #echo ""
-    #mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
-    #cp -f /root/SoftInst/AtomicWallet/usr/share/applications/atomic.desktop                           /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
-    #sed -i -e 's|Exec="/opt/Atomic Wallet/atomic" %U|Exec=/home/'$vUsuarioNoRoot'/Atomic/atomic %U|g' /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
-    #sed -i -e "s|Icon=atomic|Icon=/home/$vUsuarioNoRoot/Atomic/atomic.png|g"                          /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
-    #sed -i -e "s|Name=Atomic Wallet|Name=MultiCartera Atomic|g"                                       /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
-    #chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
-    #gio set /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop "metadata::trusted" yes
-
-  # Reparar permisos
-    #echo ""
-    #echo "  Reparando permisos..."
-    #echo ""
-    #chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Atomic/ -R
-    #find /home/$vUsuarioNoRoot/Atomic/ -type d -exec chmod 750 {} \;
-    #find /home/$vUsuarioNoRoot/Atomic/ -type f -exec chmod +x {} \;
-    #find /home/$vUsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
-    #chown root:root /home/$vUsuarioNoRoot/Atomic/chrome-sandbox
-    #chmod 4755      /home/$vUsuarioNoRoot/Atomic/chrome-sandbox
 
 fi
 
