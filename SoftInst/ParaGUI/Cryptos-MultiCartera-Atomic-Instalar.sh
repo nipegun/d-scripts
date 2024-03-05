@@ -243,7 +243,7 @@ elif [ $cVerSO == "12" ]; then
     echo "    Instalando el archivo .deb..."
     echo ""
     #apt -y install /root/SoftInst/AtomicWallet/AtomicWallet.deb
-    su - $vUsuarioNoRoot -c "sudo -S apt -y install /root/SoftInst/AtomicWallet/AtmicWallet.deb"
+    su - $vUsuarioNoRoot -c "sudo -S apt -y install /root/SoftInst/AtomicWallet/AtomicWallet.deb"
 
 fi
 
