@@ -207,8 +207,8 @@ elif [ $cVerSO == "12" ]; then
   echo ""
 
   # Borrar archivos previos
-    #rm -rf /root/SoftInst/Atomic/
-    #rm -rf /home/$vUsuarioNoRoot/Atomic/
+    rm -rf /root/SoftInst/Atomicallet/
+    rm -rf /home/$vUsuarioNoRoot/Atomic/
     #rm -f  /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
     #rm -f  /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
 
@@ -265,8 +265,8 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "  Creando la carpeta para el usuario no root..."
     echo ""
-    mkdir -p /home/$vUsuarioNoRoot/Atomic/ 2> /dev/null
-    cp -rf '/root/SoftInst/AtomicWallet/opt/Atomic Wallet/'* /home/$vUsuarioNoRoot/Atomic/
+    mkdir -p /home/$vUsuarioNoRoot/AtomicWallet/ 2> /dev/null
+    cp -rf '/root/SoftInst/AtomicWallet/opt/Atomic Wallet/'* /home/$vUsuarioNoRoot/AtomicWallet/
     cp /root/SoftInst/AtomicWallet/usr/share/icons/hicolor/256x256/apps/atomic.png /home/$vUsuarioNoRoot/Atomic/atomic.png
 
   # Agregar aplicación al menú
