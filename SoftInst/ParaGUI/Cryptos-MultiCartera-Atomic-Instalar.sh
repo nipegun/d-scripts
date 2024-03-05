@@ -229,6 +229,12 @@ elif [ $cVerSO == "12" ]; then
     cd /root/SoftInst/AtomicWallet
     curl -sL $vURLArchivo --output /root/SoftInst/AtomicWallet/AtomicWallet.deb
 
+  # Cambiar el propietario del archivo .deb al usuario _apt
+    echo ""
+    echo "  Cambiando el propietario del archivo .deb al usuario _apt..."
+    echo ""
+    chown _apt:_apt /root/SoftInst/AtomicWallet/AtomicWallet.deb
+
   # Instalar el archivo .deb
     echo ""
     echo "  Instalando el archivo .deb..."
