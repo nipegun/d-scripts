@@ -207,7 +207,7 @@ elif [ $cVerSO == "12" ]; then
   echo ""
 
   # Borrar archivos previos
-    rm -rf /SoftInst/Atomicallet/
+    rm -rf /root/SoftInst/AtomicWallet/
     rm -rf /home/$vUsuarioNoRoot/Atomic/
     #rm -f  /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
     #rm -f  /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
@@ -221,19 +221,12 @@ elif [ $cVerSO == "12" ]; then
     echo "      La URL de descarga del archivo es: $vURLArchivo"
     echo ""
 
-  # Crear la carpeta de descarga de Software
-    echo ""
-    echo "    Creando la carpeta de descarga de software..."
-    echo ""
-    mkdir -p /SoftInst/AtomicWallet 2> /dev/null
-    chmod 777 /SoftInst/ -R
-
   # Descargar archivo .deb
     echo ""
     echo "    Descargando el archivo..."
     echo ""
-    curl -sL $vURLArchivo --output /SoftInst/AtomicWallet/AtomicWallet.deb
-    chmod 777 /SoftInst/AtomicWallet/AtomicWallet.deb
+    mkdir -p /root/SoftInst/AtomicWallet 2> /dev/null
+    curl -sL $vURLArchivo --output /root/SoftInst/AtomicWallet/AtomicWallet.deb
 
   # Instalar el archivo .deb
     echo ""
@@ -241,6 +234,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     apt -y install /SoftInst/AtomicWallet/AtomicWallet.deb
     #su - $vUsuarioNoRoot -c "sudo -S apt -y install /root/SoftInst/AtomicWallet/AtomicWallet.deb"
+    #sed -i -e 's|Categories=Utility;|Categories=Cryptos;|g' /usr/share/applications/atomic.desktop
 
 fi
 
