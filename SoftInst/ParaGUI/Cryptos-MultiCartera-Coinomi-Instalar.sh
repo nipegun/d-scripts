@@ -291,6 +291,7 @@ elif [ $cVerSO == "12" ]; then
     sed -i -e 's|Exec=Coinomi|Exec=/home/'$vUsuarioNoRoot'/Coinomi/Coinomi|g'                        /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
     sed -i -e 's|Icon=/ui/static/images/logo.svg|Icon=/home/'$vUsuarioNoRoot'/Coinomi/Coinomi.png|g' /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
     sed -i -e 's|Name=Coinomi Wallet|Name=MultiCartera Coinomi|g'                                    /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
+    sed -i -e 's|Categories=Financial;|Categories=Cryptos;|g'                                        /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
     gio set /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop "metadata::trusted" yes
 
@@ -299,7 +300,9 @@ elif [ $cVerSO == "12" ]; then
     sed -i -e 's|Exec=Coinomi|Exec=/home/'$vUsuarioNoRoot'/Coinomi/Coinomi|g'                        /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
     sed -i -e 's|Icon=/ui/static/images/logo.svg|Icon=/home/'$vUsuarioNoRoot'/Coinomi/Coinomi.png|g' /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
     sed -i -e 's|Name=Coinomi Wallet|Name=MultiCartera Coinomi|g'                                    /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
-    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
+    sed -i -e 's|Categories=Financial;|Categories=Cryptos;|g'                                        /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R                
+    # /usr/share/applications/coinomi-wallet.desktop
     gio set /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop "metadata::trusted" yes
 
   # Reparar permisos
