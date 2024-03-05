@@ -223,7 +223,7 @@ elif [ $cVerSO == "12" ]; then
 
   # Descargar archivo .deb
     echo ""
-    echo "    Descargando el archivo..."
+    echo "    Descargando el archivo .deb..."
     echo ""
     mkdir -p /root/SoftInst/AtomicWallet 2> /dev/null
     curl -sL $vURLArchivo --output /root/SoftInst/AtomicWallet/AtomicWallet.deb
@@ -233,8 +233,7 @@ elif [ $cVerSO == "12" ]; then
     echo "    Instalando el archivo .deb..."
     echo ""
     apt -y install /SoftInst/AtomicWallet/AtomicWallet.deb
-    #su - $vUsuarioNoRoot -c "sudo -S apt -y install /root/SoftInst/AtomicWallet/AtomicWallet.deb"
-    #sed -i -e 's|Categories=Utility;|Categories=Cryptos;|g' /usr/share/applications/atomic.desktop
+    sed -i -e 's|Categories=Utility;|Categories=Cryptos;|g' /usr/share/applications/atomic.desktop
 
 fi
 
