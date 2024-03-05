@@ -216,9 +216,9 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "  Determinando la URL de descarga del archivo de instalación de Atomic Wallet..."
     echo ""
-    vURLArchivo=$(curl -sL https://get.atomicwallet.io/download/ | grep ".deb" | grep href | grep -v sum | grep -v "atomicwallet.deb" | tail -n1 | cut -d'"' -f2 | cut -d'/' -f2)
+    vURLArchivo=$(curl -sL https://get.atomicwallet.io/download/latest-debian.txt)
     echo ""
-    echo "    La URL de descarga del archivo es: https://get.atomicwallet.io/download/$vURLArchivo"
+    echo "    La URL de descarga del archivo es: $vURLArchivo"
     echo ""
 
   # Descargar archivo comprimido
