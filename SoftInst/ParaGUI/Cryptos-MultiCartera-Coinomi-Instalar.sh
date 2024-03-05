@@ -219,7 +219,8 @@ elif [ $cVerSO == "12" ]; then
 
   # Determinar URL de descarga del archivo comprimido
     echo ""
-    echo "  Determinando la URL de descarga del archivo de instalación de Coinomi..."    echo ""
+    echo "  Determinando la URL de descarga del archivo de instalación de Coinomi..."
+    echo ""
     vURLArchivo=$(curl -sL https://www.coinomi.com/en/downloads/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep binaries | grep linux64 | sed 's-&#x2F;-/-g')
     echo ""
     echo "    La URL de descarga del archivo es: $vURLArchivo"
@@ -227,7 +228,8 @@ elif [ $cVerSO == "12" ]; then
 
   # Descargar archivo comprimido
     echo ""
-    echo "  Descargando el archivo..."    echo ""
+    echo "  Descargando el archivo..."
+    echo ""
     mkdir -p /root/SoftInst/Coinomi 2> /dev/null
     cd /root/SoftInst/Coinomi/
     # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
@@ -243,7 +245,8 @@ elif [ $cVerSO == "12" ]; then
 
   # Descomprimir archivo
     echo ""
-    echo "  Descomprimiento el archivo..."    echo ""
+    echo "  Descomprimiento el archivo..."
+    echo ""
     # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
         echo ""
@@ -259,7 +262,8 @@ elif [ $cVerSO == "12" ]; then
 
   # Mover a la carpeta del usuario no-root
     echo ""
-    echo "  Moviendo la app a la cuenta del usuario no-root..."    echo ""
+    echo "  Moviendo la app a la cuenta del usuario no-root..."
+    echo ""
     cp -rf /root/SoftInst/Coinomi/Coinomi/ /home/$vUsuarioNoRoot/
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Coinomi -R
 
@@ -267,7 +271,8 @@ elif [ $cVerSO == "12" ]; then
     # Comprobar si el paquete icnsutils está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s icnsutils 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${cColorRojo}    icnsutils no está instalado. Iniciando su instalación...${cFinColor}"        echo ""
+        echo -e "${cColorRojo}    icnsutils no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
         apt-get -y update
         apt-get -y install icnsutils
         echo ""
@@ -278,7 +283,8 @@ elif [ $cVerSO == "12" ]; then
 
   # Crear lanzadores
     echo ""
-    echo "  Creando lanzadores..."    echo ""
+    echo "  Creando lanzadores..."
+    echo ""
 
     mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
     cp -f /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop                                       /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
@@ -298,12 +304,14 @@ elif [ $cVerSO == "12" ]; then
 
   # Reparar permisos
     echo ""
-    echo "  Reparando permisos..."    echo ""
+    echo "  Reparando permisos..."
+    echo ""
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
 
   # Notificar fin del script
     echo ""
-    echo "  Ejecución del script, finalizada..."    echo ""
+    echo "  Ejecución del script, finalizada..."
+    echo ""
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
 
 fi
