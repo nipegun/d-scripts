@@ -232,7 +232,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Instalando el archivo .deb..."
     echo ""
-    apt -y install /SoftInst/AtomicWallet/AtomicWallet.deb
+    apt -y install /root/SoftInst/AtomicWallet/AtomicWallet.deb
     sed -i -e 's|Categories=Utility;|Categories=Cryptos;|g' /usr/share/applications/atomic.desktop
 
 fi
