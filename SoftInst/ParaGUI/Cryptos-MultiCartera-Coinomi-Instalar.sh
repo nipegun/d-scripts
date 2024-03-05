@@ -205,5 +205,106 @@ elif [ $cVerSO == "11" ]; then
     echo "  Ejecución del script, finalizada..."    echo ""
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
 
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de Coinomi para Debian 12 (Bookworm)...${cFinColor}"
+  echo ""
+
+  # Borrar archivos previos
+    rm -rf /root/SoftInst/Coinomi/
+    rm -rf /home/$vUsuarioNoRoot/Coinomi/
+    rm -f  /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
+    rm -f  /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
+
+  # Determinar URL de descarga del archivo comprimido
+    echo ""
+    echo "  Determinando la URL de descarga del archivo de instalación de Coinomi..."    echo ""
+    vURLArchivo=$(curl -sL https://www.coinomi.com/en/downloads/ | sed 's->->\n-g' | sed 's-"-\n-g' | grep binaries | grep linux64 | sed 's-&#x2F;-/-g')
+    echo ""
+    echo "    La URL de descarga del archivo es: $vURLArchivo"
+    echo ""
+
+  # Descargar archivo comprimido
+    echo ""
+    echo "  Descargando el archivo..."    echo ""
+    mkdir -p /root/SoftInst/Coinomi 2> /dev/null
+    cd /root/SoftInst/Coinomi/
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+    #  if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+    #    echo ""
+    #    echo -e "${cColorRojo}  wget no está instalado. Iniciando su instalación...${cFinColor}"
+    #    echo ""
+    #    apt-get -y update && apt-get -y install wget
+    #    echo ""
+    #  fi
+    #wget $vURLArchivo -O /root/SoftInst/Coinomi/Coinomi.tar.gz
+    curl -sL $vURLArchivo --output /root/SoftInst/Coinomi/Coinomi.tar.gz
+
+  # Descomprimir archivo
+    echo ""
+    echo "  Descomprimiento el archivo..."    echo ""
+    # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}    tar no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        apt-get -y update
+        apt-get -y install tar
+        echo ""
+      fi
+    cd /root/SoftInst/Coinomi/
+    tar -xf /root/SoftInst/Coinomi/Coinomi.tar.gz
+    rm -rf /root/SoftInst/Coinomi/Coinomi.tar.gz
+
+  # Mover a la carpeta del usuario no-root
+    echo ""
+    echo "  Moviendo la app a la cuenta del usuario no-root..."    echo ""
+    cp -rf /root/SoftInst/Coinomi/Coinomi/ /home/$vUsuarioNoRoot/
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Coinomi -R
+
+  # Crear el icono
+    # Comprobar si el paquete icnsutils está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s icnsutils 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}    icnsutils no está instalado. Iniciando su instalación...${cFinColor}"        echo ""
+        apt-get -y update
+        apt-get -y install icnsutils
+        echo ""
+      fi
+    icns2png -x /home/$vUsuarioNoRoot/Coinomi/icons.icns -o /home/$vUsuarioNoRoot/Coinomi/
+    find /home/$vUsuarioNoRoot/Coinomi/ -maxdepth 1 -mindepth 1 -type f -name "*.png" -exec mv {} /home/$vUsuarioNoRoot/Coinomi/Coinomi.png \;
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Coinomi/Coinomi.png
+
+  # Crear lanzadores
+    echo ""
+    echo "  Creando lanzadores..."    echo ""
+
+    mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
+    cp -f /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop                                       /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
+    sed -i -e 's|Exec=Coinomi|Exec=/home/'$vUsuarioNoRoot'/Coinomi/Coinomi|g'                        /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
+    sed -i -e 's|Icon=/ui/static/images/logo.svg|Icon=/home/'$vUsuarioNoRoot'/Coinomi/Coinomi.png|g' /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
+    sed -i -e 's|Name=Coinomi Wallet|Name=MultiCartera Coinomi|g'                                    /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
+    gio set /home/$vUsuarioNoRoot/.local/share/applications/coinomi-wallet.desktop "metadata::trusted" yes
+
+    mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
+    cp -f /home/$vUsuarioNoRoot/Coinomi/coinomi-wallet.desktop                                       /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
+    sed -i -e 's|Exec=Coinomi|Exec=/home/'$vUsuarioNoRoot'/Coinomi/Coinomi|g'                        /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
+    sed -i -e 's|Icon=/ui/static/images/logo.svg|Icon=/home/'$vUsuarioNoRoot'/Coinomi/Coinomi.png|g' /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
+    sed -i -e 's|Name=Coinomi Wallet|Name=MultiCartera Coinomi|g'                                    /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
+    gio set /home/$vUsuarioNoRoot/.config/autostart/coinomi-wallet.desktop "metadata::trusted" yes
+
+  # Reparar permisos
+    echo ""
+    echo "  Reparando permisos..."    echo ""
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
+
+  # Notificar fin del script
+    echo ""
+    echo "  Ejecución del script, finalizada..."    echo ""
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/ -R
+
 fi
 
