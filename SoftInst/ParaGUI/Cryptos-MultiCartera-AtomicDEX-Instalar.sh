@@ -193,5 +193,103 @@ elif [ $cVerSO == "11" ]; then
     #find /home/$vUsuarioNoRoot/AtomicDEX/ -type d -exec chmod 750 {} \;
     #find /home/$vUsuarioNoRoot/AtomicDEX/ -type f -exec chmod +x {} \;
     find /home/$vUsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de AtomicDEX para Debian 12 (Bookworm)...${cFinColor}"
+  echo ""
+
+  # Borrar archivos previos
+    rm -rf /root/SoftInst/AtomicDEX/
+    #rm -rf /home/$vUsuarioNoRoot/AtomicDEX/
+    #rm -f  /home/$vUsuarioNoRoot/.local/share/applications/atomicdex-wallet.desktop
+    #rm -f  /home/$vUsuarioNoRoot/.config/autostart/atomicdex-wallet.desktop
+
+  # Determinar URL de descarga del archivo comprimido
+    echo ""
+    echo "  Determinando la URL de descarga del archivo de instalación de AtomicDEX..."
+    echo ""
+    #vURLArchivo=$(curl -sL https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/ | sed 's->-\n-g' | grep href | grep linux | grep ".zip" | grep ortable | head -n1 | cut -d'"' -f2)
+    vURLArchivo=$(curl -sL https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/ | sed 's->-\n-g' | grep href | grep zip | grep -v staller | grep -v indows | grep ortable | head -n1 | cut -d '"' -f2)
+    echo ""
+    echo "    La URL de descarga del archivo es: https://github.com$vURLArchivo"
+    echo ""
+
+  # Descargar archivo comprimido
+    echo ""
+    echo "  Descargando el archivo..."
+    echo ""
+    mkdir -p /root/SoftInst/AtomicDEX/ 2> /dev/null
+    cd /root/SoftInst/AtomicDEX/
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}  wget no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install wget
+        echo ""
+      fi
+    wget https://github.com$vURLArchivo -O /root/SoftInst/AtomicDEX/AtomicDEX.zip
+
+  # Extraer los archivos de dentro del .zip
+    echo ""
+    echo "  Extrayendo los archivos de dentro del zip..."
+    echo ""
+    # Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}    unzip no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install unzip
+        echo ""
+      fi
+    cd /root/SoftInst/AtomicDEX/
+    unzip /root/SoftInst/AtomicDEX/AtomicDEX.zip
+
+  # Crear la carpeta para el usuario no root
+    echo ""
+    echo "  Creando la carpeta para el usuario no root..."
+    echo ""
+    mkdir -p /home/$vUsuarioNoRoot/AtomicDEX/ 2> /dev/null
+    cp -rf /root/SoftInst/AtomicDEX/AntaraAtomicDexAppDir/usr/* /home/$vUsuarioNoRoot/AtomicDEX/
+    cp /root/SoftInst/AtomicDEX/AntaraAtomicDexAppDir/dex-logo-64.png /home/$vUsuarioNoRoot/AtomicDEX/logo.png
+
+  # Agregar aplicación al menú
+    echo ""
+    echo "  Agregando la aplicación gráfica al menú..."
+    echo ""
+    mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
+    cp -f /root/SoftInst/AtomicDEX/AntaraAtomicDexAppDir/dex.desktop                                    /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
+    sed -i -e 's|Exec=atomicdex-desktop|Exec=/home/'$vUsuarioNoRoot'/AtomicDEX/bin/atomicdex-desktop|g' /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
+    sed -i -e "s|Icon=dex-logo-64|Icon=/home/$vUsuarioNoRoot/AtomicDEX/logo.png|g"                      /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
+    sed -i -e "s|Name=atomicdex-desktop|Name=AtomicDEX|g"                                               /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
+    gio set /home/$vUsuarioNoRoot/.local/share/applications/atomicdex.desktop "metadata::trusted" yes
+
+  # Crear el archivo de auto-ejecución
+    echo ""
+    echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
+    echo ""
+    mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
+    cp -f /root/SoftInst/AtomicDEX/AntaraAtomicDexAppDir/dex.desktop                                    /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
+    sed -i -e 's|Exec=atomicdex-desktop|Exec=/home/'$vUsuarioNoRoot'/AtomicDEX/bin/atomicdex-desktop|g' /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
+    sed -i -e "s|Icon=dex-logo-64|Icon=/home/$vUsuarioNoRoot/AtomicDEX/logo.png|g"                      /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
+    sed -i -e "s|Name=atomicdex-desktop|Name=AtomicDEX|g"                                               /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
+    gio set /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop "metadata::trusted" yes
+
+  # Creando el archivo para lanzarlo desde su propia carpeta
+    cp /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop /home/$vUsuarioNoRoot/AtomicDEX/AtomicDEX.desktop
+
+  # Reparar permisos
+    echo ""
+    echo "  Reparando permisos..."
+    echo ""
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/AtomicDEX/ -R
+    #find /home/$vUsuarioNoRoot/AtomicDEX/ -type d -exec chmod 750 {} \;
+    #find /home/$vUsuarioNoRoot/AtomicDEX/ -type f -exec chmod +x {} \;
+    find /home/$vUsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
+
 fi
 
