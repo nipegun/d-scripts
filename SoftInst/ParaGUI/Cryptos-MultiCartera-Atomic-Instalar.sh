@@ -227,7 +227,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     mkdir -p /root/SoftInst/AtomicWallet 2> /dev/null
     cd /root/SoftInst/AtomicWallet
-    curl -sL https://get.atomicwallet.io/download/$vURLArchivo --output /root/SoftInst/AtomicWallet/AtomicWallet.deb
+    curl -sL $vURLArchivo --output /root/SoftInst/AtomicWallet/AtomicWallet.deb
 
   # Extraer los archivos de dentro del .deb
     echo ""
