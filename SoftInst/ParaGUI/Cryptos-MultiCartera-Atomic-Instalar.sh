@@ -233,10 +233,10 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Cambiando el propietario del archivo .deb al usuario _apt..."
     echo ""
-    #chown _apt /root/SoftInst/AtomicWallet/AtomicWallet.deb
+    chown _apt /root/SoftInst/AtomicWallet/ -Rv
     #chmod 777 /root/SoftInst/AtomicWallet/AtomicWallet.deb
-    chown -Rv _apt:root /var/cache/apt/archives/partial/
-    chmod -Rv 700 /var/cache/apt/archives/partial/
+    #chown -Rv _apt:root /var/cache/apt/archives/partial/
+    #chmod -Rv 700 /var/cache/apt/archives/partial/
 
   # Instalar el archivo .deb
     echo ""
