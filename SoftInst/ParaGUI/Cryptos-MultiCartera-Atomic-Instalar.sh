@@ -209,8 +209,6 @@ elif [ $cVerSO == "12" ]; then
   # Borrar archivos previos
     rm -rf /root/SoftInst/AtomicWallet/
     rm -rf /home/$vUsuarioNoRoot/Atomic/
-    #rm -f  /home/$vUsuarioNoRoot/.local/share/applications/atomic-wallet.desktop
-    #rm -f  /home/$vUsuarioNoRoot/.config/autostart/atomic-wallet.desktop
 
   # Determinar URL de descarga del archivo comprimido
     echo ""
