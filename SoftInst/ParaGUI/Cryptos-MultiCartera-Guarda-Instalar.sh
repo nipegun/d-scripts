@@ -221,9 +221,9 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "  Determinando la URL de descarga del archivo de instalación de Guarda..."
     echo ""
-    vURLArchivo=$(curl -sL https://github.com/guardaco/guarda-desktop-releases/releases/ | sed 's->-\n-g' | grep download | grep ".deb" | head -n1 | cut -d '"' -f2)
+    vURLArchivo=$(curl -sL https://guarda.com/desktop/ | sed 's->-\n-g' | grep href | cut -d'"' -f2 | grep deb)
     echo ""
-    echo "    La URL de descarga del archivo es: https://github.com$vURLArchivo"
+    echo "    La URL de descarga del archivo es: $vURLArchivo"
     echo ""
 
   # Descargar archivo comprimido
@@ -240,7 +240,7 @@ elif [ $cVerSO == "12" ]; then
         apt-get -y update && apt-get -y install wget
         echo ""
       fi
-    wget https://github.com$vURLArchivo -O /root/SoftInst/Guarda/Guarda.deb
+    wget $vURLArchivo -O /root/SoftInst/Guarda/Guarda.deb
 
   # Extraer los archivos de dentro del .deb
     echo ""
