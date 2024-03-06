@@ -184,6 +184,7 @@ elif [ $cVerSO == "12" ]; then
     sed -i -e "s|Icon=dex-logo-64|Icon=/home/$vUsuarioNoRoot/Komodo/logo.png|g"                      /home/$vUsuarioNoRoot/.local/share/applications/komodo-wallet.desktop
     sed -i -e "s|Name=atomicdex-desktop|Name=Komodo Wallet|g"                                        /home/$vUsuarioNoRoot/.local/share/applications/komodo-wallet.desktop
     sed -i -e "s|Categories=Office;|Categories=Cryptos;|g"                                           /home/$vUsuarioNoRoot/.local/share/applications/komodo-wallet.desktop
+    sed -i -e "s|Exec=komodo-wallet|Exec=/home/'$vUsuarioNoRoot'/Komodo/bin/komodo-wallet %U|g"      /home/$vUsuarioNoRoot/.local/share/applications/komodo-wallet.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
     gio set /home/$vUsuarioNoRoot/.local/share/applications/komodo-wallet.desktop "metadata::trusted" yes
 
@@ -197,6 +198,7 @@ elif [ $cVerSO == "12" ]; then
     sed -i -e "s|Icon=dex-logo-64|Icon=/home/$vUsuarioNoRoot/Komodo/logo.png|g"                      /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop
     sed -i -e "s|Name=atomicdex-desktop|Name=Komodo Wallet|g"                                        /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop
     sed -i -e "s|Categories=Office;|Categories=Cryptos;|g"                                           /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop
+    sed -i -e "s|Exec=komodo-wallet|Exec=/home/'$vUsuarioNoRoot'/Komodo/bin/komodo-wallet %U|g"      /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
     gio set /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop "metadata::trusted" yes
 
@@ -211,6 +213,8 @@ elif [ $cVerSO == "12" ]; then
     #find /home/$vUsuarioNoRoot/Komodo/ -type d -exec chmod 750 {} \;
     #find /home/$vUsuarioNoRoot/Komodo/ -type f -exec chmod +x {} \;
     find /home/$vUsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
+
+
 
 fi
 
