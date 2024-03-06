@@ -122,9 +122,9 @@ elif [ $cVerSO == "12" ]; then
 
   # Borrar archivos previos
     rm -rf /root/SoftInst/Komodo/
-    #rm -rf /home/$vUsuarioNoRoot/Komodo/
-    #rm -f  /home/$vUsuarioNoRoot/.local/share/applications/komodo-wallet.desktop
-    #rm -f  /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop
+    rm -rf /home/$vUsuarioNoRoot/Komodo/
+    rm -f  /home/$vUsuarioNoRoot/.local/share/applications/komodo-wallet.desktop
+    rm -f  /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop
 
   # Determinar URL de descarga del archivo comprimido
     echo ""
@@ -183,23 +183,25 @@ elif [ $cVerSO == "12" ]; then
     sed -i -e 's|Exec=atomicdex-desktop|Exec=/home/'$vUsuarioNoRoot'/Komodo/bin/atomicdex-desktop|g' /home/$vUsuarioNoRoot/.local/share/applications/komodo-wallet.desktop
     sed -i -e "s|Icon=dex-logo-64|Icon=/home/$vUsuarioNoRoot/Komodo/logo.png|g"                      /home/$vUsuarioNoRoot/.local/share/applications/komodo-wallet.desktop
     sed -i -e "s|Name=atomicdex-desktop|Name=Komodo Wallet|g"                                        /home/$vUsuarioNoRoot/.local/share/applications/komodo-wallet.desktop
+    sed -i -e "s|Categories=Office;|Categories=Cryptos;|g"                                           /home/$vUsuarioNoRoot/.local/share/applications/komodo-wallet.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
     gio set /home/$vUsuarioNoRoot/.local/share/applications/komodo-wallet.desktop "metadata::trusted" yes
 
   # Crear el archivo de auto-ejecución
     echo ""
-    echo "  Creando el archivo de autoejecución de chia-blockchain para el escritorio..."
+    echo "  Creando el archivo de autoejecución de komodo-wallet para el escritorio..."
     echo ""
     mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
-    cp -f /root/SoftInst/AtomicDEX/AntaraAtomicDexAppDir/dex.desktop                                 /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop
+    cp -f /root/SoftInst/Komodo/AntaraAtomicDexAppDir/dex.desktop                                    /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop
     sed -i -e 's|Exec=atomicdex-desktop|Exec=/home/'$vUsuarioNoRoot'/Komodo/bin/atomicdex-desktop|g' /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop
     sed -i -e "s|Icon=dex-logo-64|Icon=/home/$vUsuarioNoRoot/Komodo/logo.png|g"                      /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop
     sed -i -e "s|Name=atomicdex-desktop|Name=Komodo Wallet|g"                                        /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop
+    sed -i -e "s|Categories=Office;|Categories=Cryptos;|g"                                           /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
     gio set /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop "metadata::trusted" yes
 
   # Creando el archivo para lanzarlo desde su propia carpeta
-    cp /home/$vUsuarioNoRoot/.config/autostart/atomicdex.desktop /home/$vUsuarioNoRoot/AtomicDEX/AtomicDEX.desktop
+    cp /home/$vUsuarioNoRoot/.config/autostart/komodo-wallet.desktop /home/$vUsuarioNoRoot/Komodo/komodo-wallet.desktop
 
   # Reparar permisos
     echo ""
