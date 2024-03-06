@@ -288,7 +288,8 @@ elif [ $cVerSO == "12" ]; then
     cp -f /root/SoftInst/Guarda/usr/share/applications/guarda.desktop                        /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
     sed -i -e 's|Exec=/opt/Guarda/guarda %U|Exec=/home/'$vUsuarioNoRoot'/Guarda/guarda %U|g' /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
     sed -i -e "s|Icon=guarda|Icon=/home/$vUsuarioNoRoot/Guarda/guarda.png|g"                 /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
-    sed -i -e "s|Name=Guarda|Name=MultiCartera Guarda|g"                                     /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
+    sed -i -e "s|Name=Guarda|Name=Guarda Wallet|g"                                           /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
+    sed -i -e "s|Categories=Office;Finance;|Categories=Cryptos;|g"                           /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
     gio set /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop "metadata::trusted" yes
 
@@ -300,7 +301,8 @@ elif [ $cVerSO == "12" ]; then
     cp -f /root/SoftInst/Guarda/usr/share/applications/guarda.desktop                        /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
     sed -i -e 's|Exec=/opt/Guarda/guarda %U|Exec=/home/'$vUsuarioNoRoot'/Guarda/guarda %U|g' /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
     sed -i -e "s|Icon=guarda|Icon=/home/$vUsuarioNoRoot/Guarda/guarda.png|g"                 /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
-    sed -i -e "s|Name=Guarda|Name=MultiCartera Guarda|g"                                     /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
+    sed -i -e "s|Name=Guarda|Name=Guarda Wallet|g"                                           /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
+    sed -i -e "s|Categories=Office;Finance;|Categories=Cryptos;|g"                           /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
     chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
     gio set /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop "metadata::trusted" yes
 
