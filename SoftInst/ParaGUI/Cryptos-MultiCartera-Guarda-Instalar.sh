@@ -205,5 +205,115 @@ elif [ $cVerSO == "11" ]; then
     chown root:root /home/$vUsuarioNoRoot/Guarda/chrome-sandbox
     chmod 4755      /home/$vUsuarioNoRoot/Guarda/chrome-sandbox
 
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo -e "${ColorAzulClaro}  Iniciando el script de instalación de Guarda para Debian 12 (Bookworm)...${cFinColor}"
+  echo ""
+
+  # Borrar archivos previos
+    #rm -rf /root/SoftInst/Guarda/
+    #rm -rf /home/$vUsuarioNoRoot/Guarda/
+    #rm -f  /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
+    #rm -f  /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
+
+  # Determinar URL de descarga del archivo comprimido
+    echo ""
+    echo "  Determinando la URL de descarga del archivo de instalación de Guarda..."
+    echo ""
+    vURLArchivo=$(curl -sL https://github.com/guardaco/guarda-desktop-releases/releases/ | sed 's->-\n-g' | grep download | grep ".deb" | head -n1 | cut -d '"' -f2)
+    echo ""
+    echo "    La URL de descarga del archivo es: https://github.com$vURLArchivo"
+    echo ""
+
+  # Descargar archivo comprimido
+    echo ""
+    echo "  Descargando el archivo..."
+    echo ""
+    mkdir -p /root/SoftInst/Guarda 2> /dev/null
+    cd /root/SoftInst/Guarda
+    # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}  wget no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install wget
+        echo ""
+      fi
+    wget https://github.com$vURLArchivo -O /root/SoftInst/Guarda/Guarda.deb
+
+  # Extraer los archivos de dentro del .deb
+    echo ""
+    echo "  Extrayendo los archivos de dentro del paquete .deb..."
+    echo ""
+    # Comprobar si el paquete binutils está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s binutils 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}  binutils no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install binutils
+        echo ""
+      fi
+    cd /root/SoftInst/Guarda/
+    ar xv /root/SoftInst/Guarda/Guarda.deb
+
+  # Descomprimir el archivo data.tar.xz
+    echo ""
+    echo "  Descomprimiendo el archivo data.tar.xz..."
+    echo ""
+    # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}    tar no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install tar
+        echo ""
+      fi
+    tar -xvf /root/SoftInst/Guarda/data.tar.xz
+    echo ""
+
+  # Crear la carpeta para el usuario no root
+    echo ""
+    echo "  Creando la carpeta para el usuario no root..."
+    echo ""
+    mkdir -p /home/$vUsuarioNoRoot/Guarda/ 2> /dev/null
+    cp -rf '/root/SoftInst/Guarda/opt/Guarda/'* /home/$vUsuarioNoRoot/Guarda/
+    cp /root/SoftInst/Guarda/usr/share/icons/hicolor/256x256/apps/guarda.png /home/$vUsuarioNoRoot/Guarda/guarda.png
+
+  # Agregar aplicación al menú
+    echo ""
+    echo "  Agregando la aplicación gráfica al menú..."
+    echo ""
+    mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
+    cp -f /root/SoftInst/Guarda/usr/share/applications/guarda.desktop                        /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
+    sed -i -e 's|Exec=/opt/Guarda/guarda %U|Exec=/home/'$vUsuarioNoRoot'/Guarda/guarda %U|g' /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
+    sed -i -e "s|Icon=guarda|Icon=/home/$vUsuarioNoRoot/Guarda/guarda.png|g"                 /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
+    sed -i -e "s|Name=Guarda|Name=MultiCartera Guarda|g"                                     /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.local/share/applications/ -R
+    gio set /home/$vUsuarioNoRoot/.local/share/applications/guarda-wallet.desktop "metadata::trusted" yes
+
+  # Crear el archivo de auto-ehecución
+    echo ""
+    echo "  Creando el archivo de autoejecución para el escritorio..."
+    echo ""
+    mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
+    cp -f /root/SoftInst/Guarda/usr/share/applications/guarda.desktop                        /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
+    sed -i -e 's|Exec=/opt/Guarda/guarda %U|Exec=/home/'$vUsuarioNoRoot'/Guarda/guarda %U|g' /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
+    sed -i -e "s|Icon=guarda|Icon=/home/$vUsuarioNoRoot/Guarda/guarda.png|g"                 /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
+    sed -i -e "s|Name=Guarda|Name=MultiCartera Guarda|g"                                     /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.config/autostart/ -R
+    gio set /home/$vUsuarioNoRoot/.config/autostart/guarda-wallet.desktop "metadata::trusted" yes
+
+  # Reparar permisos
+    echo ""
+    echo "  Reparando permisos..."
+    echo ""
+    chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Guarda/ -R
+    #find /home/$vUsuarioNoRoot/Guarda/ -type d -exec chmod 750 {} \;
+    #find /home/$vUsuarioNoRoot/Guarda/ -type f -exec chmod +x {} \;
+    find /home/$vUsuarioNoRoot/ -type f -iname "*.sh" -exec chmod +x {} \;
+    chown root:root /home/$vUsuarioNoRoot/Guarda/chrome-sandbox
+    chmod 4755      /home/$vUsuarioNoRoot/Guarda/chrome-sandbox
+
 fi
 
