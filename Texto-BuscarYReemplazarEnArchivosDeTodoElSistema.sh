@@ -15,7 +15,7 @@
 cCantArgumEsperados=2
 
 
-if [ $# -ne $EXPECTED_ARGS ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     echo "##################################################"
