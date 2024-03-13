@@ -357,7 +357,7 @@ elif [ $cVerSO == "12" ]; then
               echo ""
               mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
               echo "[Desktop Entry]"                                                           > /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
-              echo "Name=electrum GUI"                                                        >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
+              echo "Name=electrum-ravencoin GUI"                                              >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
               echo "Type=Application"                                                         >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
               echo "Exec=/home/$vUsuarioNoRoot/ElectrumRavencoin/ElectrumRavencoin.AppImage"  >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
               echo "Terminal=false"                                                           >> /home/$vUsuarioNoRoot/.local/share/applications/electrum-ravencoin.desktop
@@ -373,7 +373,7 @@ elif [ $cVerSO == "12" ]; then
               echo ""
               mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
               echo "[Desktop Entry]"                                                          > /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
-              echo "Name=electrum GUI"                                                       >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
+              echo "Name=electrum-ravencoin GUI"                                             >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
               echo "Type=Application"                                                        >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
               echo "Exec=/home/$vUsuarioNoRoot/ElectrumRavencoin/ElectrumRavencoin.AppImage" >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
               echo "Terminal=false"                                                          >> /home/$vUsuarioNoRoot/.config/autostart/electrum-ravencoin.desktop
