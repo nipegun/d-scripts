@@ -267,7 +267,7 @@ elif [ $cVerSO == "12" ]; then
             echo ""
 
             echo ""
-            echo "  Descargando la imagene... "
+            echo "  Descargando la imagen AppImage... "
             echo ""
             mkdir -p /root/SoftInst/ElectrumRavencoin/ 2> /dev/null
             cd /root/SoftInst/ElectrumRavencoin/
