@@ -345,18 +345,17 @@ elif [ $cVerSO == "12" ]; then
     echo "    Borrando posible instalación anterior..."
     echo ""
     # Ejecutar primero copia de seguridad de posible instalación anterior
-    mkdir -p /root/WireGuard/CopSegInstAnt/ 2> /dev/null
-    mv /root/WireGuard/* /root/WireGuard/CopSegInstAnt/
+    mkdir -p /CopSegWireGuard/ 2> /dev/null
+    mv /root/WireGuard/* /CopSegWireGuard/
+    apt-get -y autoremove wireguard
     apt-get -y purge wireguard
-    apt-get -y purge
-    apt-get -y autoremove
-
+    
 # Instalar el paquete WireGuard
     echo ""
     echo "    Instalando paquetes..."
     echo ""
-    apt-get -y update > /dev/null
-    apt-get -y autoremove > /dev/null
+    apt-get -y update
+    apt-get -y autoremove
     apt-get -y install wireguard
     apt-get -y install qrencode
 
