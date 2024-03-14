@@ -480,4 +480,388 @@ elif [ $cVerSO == "11" ]; then
 
   done
 
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor DHCP para Debian 12 (Bookworm)...${cFinColor}"
+  echo ""
+
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${cColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
+
+  menu=(dialog --checklist "Instalando el servidor DHCP:" 22 96 16)
+    opciones=(
+      1 "Instalar y configurar para redes de clase A en eth0" off
+      2 "Instalar y configurar para redes de clase B en eth0" off
+      3 "Instalar y configurar para redes de clase C en eth0" off
+      4 "Instalar y configurar para redes de clase A en eth1" off
+      5 "Instalar y configurar para redes de clase B en eth1" off
+      6 "Instalar y configurar para redes de clase C en eth1" off
+    )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+    clear
+
+    for choice in $choices
+      do
+        case $choice in
+
+          1)
+
+            echo ""
+            echo "  Instalando y configurando el servidor DHCP para redes de clase A por eth0..."
+            echo ""
+
+            # Instalar el paquete isc-dhcp-server
+              echo ""
+              echo "    Instalando el paquete isc-dhcp-server..."
+              echo ""
+              apt-get -y update && apt-get -y install isc-dhcp-server
+
+            # Indicar la ubicación del archivo de configuración del demonio
+              echo ""
+              echo "    Indicando la ubicación del archivo de configuración del demonio dhcpd"
+              echo "    y la interfaz sobre la que correrá..."
+              echo ""
+              cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.bak
+              echo 'DHCPDv4_CONF=/etc/dhcp/dhcpd.conf'  > /etc/default/isc-dhcp-server
+              echo 'INTERFACESv4="eth0"'               >> /etc/default/isc-dhcp-server
+              echo 'INTERFACESv6=""'                   >> /etc/default/isc-dhcp-server
+
+            # Configurar servidor DHCP
+              echo ""
+              echo "    Configurando el servidor DHCP..."
+              echo ""
+              cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.ori
+              echo "authoritative;"                                  > /etc/dhcp/dhcpd.conf
+              echo "subnet 10.0.0.0 netmask 255.0.0.0 {"            >> /etc/dhcp/dhcpd.conf
+              echo "  range 10.0.0.2 10.255.255.254;"               >> /etc/dhcp/dhcpd.conf
+              echo "  option routers 10.0.0.1;"                     >> /etc/dhcp/dhcpd.conf
+              echo "  option domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhcpd.conf
+              echo '  option domain-name "home.arpa";'              >> /etc/dhcp/dhcpd.conf
+              echo "  default-lease-time 600;"                      >> /etc/dhcp/dhcpd.conf
+              echo "  max-lease-time 7200;"                         >> /etc/dhcp/dhcpd.conf
+              echo ""                                               >> /etc/dhcp/dhcpd.conf
+              echo "  host PrimeraReserva {"                        >> /etc/dhcp/dhcpd.conf
+              echo "    hardware ethernet 00:00:00:00:00:01;"       >> /etc/dhcp/dhcpd.conf
+              echo "    fixed-address 10.0.0.10;"                   >> /etc/dhcp/dhcpd.conf
+              echo "  }"                                            >> /etc/dhcp/dhcpd.conf
+              echo "}"                                              >> /etc/dhcp/dhcpd.conf
+
+            # Descargar archivo de nombres de fabricantes
+              echo ""
+              echo "    Descargando archivo de nombres de fabricantes..."
+              echo ""
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                   echo ""
+                   echo -e "${cColorRojo}      wget no está instalado. Iniciando su instalación...${cFinColor}"
+                   echo ""
+                   apt-get -y update && apt-get -y install wget
+                   echo ""
+                 fi
+              wget -O /usr/local/etc/oui.txt http://standards-oui.ieee.org/oui/oui.txt
+
+          ;;
+
+          2)
+
+            echo ""
+            echo "  Instalando y configurando el servidor DHCP para redes de clase B por eth0..."
+            echo ""
+
+            # Instalar el paquete isc-dhcp-server
+              echo ""
+              echo "    Instalando el paquete isc-dhcp-server..."
+              echo ""
+              apt-get -y update && apt-get -y install isc-dhcp-server
+
+            # Indicar la ubicación del archivo de configuración del demonio
+              echo ""
+              echo "    Indicando la ubicación del archivo de configuración del demonio dhcpd"
+              echo "    y la interfaz sobre la que correrá..."
+              echo ""
+              cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.bak
+              echo 'DHCPDv4_CONF=/etc/dhcp/dhcpd.conf'  > /etc/default/isc-dhcp-server
+              echo 'INTERFACESv4="eth0"'               >> /etc/default/isc-dhcp-server
+              echo 'INTERFACESv6=""'                   >> /etc/default/isc-dhcp-server
+
+            # Configurar servidor DHCP
+              echo ""
+              echo "    Configurando el servidor DHCP..."
+              echo ""
+              cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.ori
+              echo "authoritative;"                                  > /etc/dhcp/dhcpd.conf
+              echo "subnet 172.16.0.0 netmask 255.255.0.0 {"        >> /etc/dhcp/dhcpd.conf
+              echo "  range 172.16.0.2 172.16.255.254;"             >> /etc/dhcp/dhcpd.conf
+              echo "  option routers 172.16.0.1;"                   >> /etc/dhcp/dhcpd.conf
+              echo "  option domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhcpd.conf
+              echo '  option domain-name "home.arpa";'              >> /etc/dhcp/dhcpd.conf
+              echo "  default-lease-time 600;"                      >> /etc/dhcp/dhcpd.conf
+              echo "  max-lease-time 7200;"                         >> /etc/dhcp/dhcpd.conf
+              echo ""                                               >> /etc/dhcp/dhcpd.conf
+              echo "  host PrimeraReserva {"                        >> /etc/dhcp/dhcpd.conf
+              echo "    hardware ethernet 00:00:00:00:00:01;"       >> /etc/dhcp/dhcpd.conf
+              echo "    fixed-address 172.16.0.10;"                 >> /etc/dhcp/dhcpd.conf
+              echo "  }"                                            >> /etc/dhcp/dhcpd.conf
+              echo "}"                                              >> /etc/dhcp/dhcpd.conf
+
+            # Descargar archivo de nombres de fabricantes
+              echo ""
+              echo "    Descargando archivo de nombres de fabricantes..."
+              echo ""
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                   echo ""
+                   echo -e "${cColorRojo}      wget no está instalado. Iniciando su instalación...${cFinColor}"
+                   echo ""
+                   apt-get -y update && apt-get -y install wget
+                   echo ""
+                 fi
+              wget -O /usr/local/etc/oui.txt http://standards-oui.ieee.org/oui/oui.txt
+
+          ;;
+
+          3)
+
+            echo ""
+            echo "  Instalando y configurando el servidor DHCP para redes de clase C por eth0..."
+            echo ""
+
+            # Instalar el paquete isc-dhcp-server
+              echo ""
+              echo "    Instalando el paquete isc-dhcp-server..."
+              echo ""
+              apt-get -y update && apt-get -y install isc-dhcp-server
+
+            # Indicar la ubicación del archivo de configuración del demonio
+              echo ""
+              echo "    Indicando la ubicación del archivo de configuración del demonio dhcpd"
+              echo "    y la interfaz sobre la que correrá..."
+              echo ""
+              cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.bak
+              echo 'DHCPDv4_CONF=/etc/dhcp/dhcpd.conf'  > /etc/default/isc-dhcp-server
+              echo 'INTERFACESv4="eth0"'               >> /etc/default/isc-dhcp-server
+              echo 'INTERFACESv6=""'                   >> /etc/default/isc-dhcp-server
+
+            # Configurar servidor DHCP
+              echo ""
+              echo "    Configurando el servidor DHCP..."
+              echo ""
+              cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.ori
+              echo "authoritative;"                                  > /etc/dhcp/dhcpd.conf
+              echo "subnet 192.168.0.0 netmask 255.255.255.0 {"     >> /etc/dhcp/dhcpd.conf
+              echo "  range 192.168.0.2 192.168.0.254;"             >> /etc/dhcp/dhcpd.conf
+              echo "  option routers 192.168.0.1;"                  >> /etc/dhcp/dhcpd.conf
+              echo "  option domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhcpd.conf
+              echo '  option domain-name "home.arpa";'              >> /etc/dhcp/dhcpd.conf
+              echo "  default-lease-time 600;"                      >> /etc/dhcp/dhcpd.conf
+              echo "  max-lease-time 7200;"                         >> /etc/dhcp/dhcpd.conf
+              echo ""                                               >> /etc/dhcp/dhcpd.conf
+              echo "  host PrimeraReserva {"                        >> /etc/dhcp/dhcpd.conf
+              echo "    hardware ethernet 00:00:00:00:00:01;"       >> /etc/dhcp/dhcpd.conf
+              echo "    fixed-address 192.168.0.10;"                >> /etc/dhcp/dhcpd.conf
+              echo "  }"                                            >> /etc/dhcp/dhcpd.conf
+              echo "}"                                              >> /etc/dhcp/dhcpd.conf
+
+            # Descargar archivo de nombres de fabricantes
+              echo ""
+              echo "    Descargando archivo de nombres de fabricantes..."
+              echo ""
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                   echo ""
+                   echo -e "${cColorRojo}      wget no está instalado. Iniciando su instalación...${cFinColor}"
+                   echo ""
+                   apt-get -y update && apt-get -y install wget
+                   echo ""
+                 fi
+              wget -O /usr/local/etc/oui.txt http://standards-oui.ieee.org/oui/oui.txt
+
+          ;;
+
+
+          4)
+
+            echo ""
+            echo "  Instalando y configurando el servidor DHCP para redes de clase A por eth1..."
+            echo ""
+
+            # Instalar el paquete isc-dhcp-server
+              echo ""
+              echo "    Instalando el paquete isc-dhcp-server..."
+              echo ""
+              apt-get -y update && apt-get -y install isc-dhcp-server
+
+            # Indicar la ubicación del archivo de configuración del demonio
+              echo ""
+              echo "    Indicando la ubicación del archivo de configuración del demonio dhcpd"
+              echo "    y la interfaz sobre la que correrá..."
+              echo ""
+              cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.bak
+              echo 'DHCPDv4_CONF=/etc/dhcp/dhcpd.conf'  > /etc/default/isc-dhcp-server
+              echo 'INTERFACESv4="eth1"'               >> /etc/default/isc-dhcp-server
+              echo 'INTERFACESv6=""'                   >> /etc/default/isc-dhcp-server
+
+            # Configurar servidor DHCP
+              echo ""
+              echo "    Configurando el servidor DHCP..."
+              echo ""
+              cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.ori
+              echo "authoritative;"                                  > /etc/dhcp/dhcpd.conf
+              echo "subnet 10.0.0.0 netmask 255.0.0.0 {"            >> /etc/dhcp/dhcpd.conf
+              echo "  range 10.0.0.2 10.255.255.254;"               >> /etc/dhcp/dhcpd.conf
+              echo "  option routers 10.0.0.1;"                     >> /etc/dhcp/dhcpd.conf
+              echo "  option domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhcpd.conf
+              echo '  option domain-name "home.arpa";'              >> /etc/dhcp/dhcpd.conf
+              echo "  default-lease-time 600;"                      >> /etc/dhcp/dhcpd.conf
+              echo "  max-lease-time 7200;"                         >> /etc/dhcp/dhcpd.conf
+              echo ""                                               >> /etc/dhcp/dhcpd.conf
+              echo "  host PrimeraReserva {"                        >> /etc/dhcp/dhcpd.conf
+              echo "    hardware ethernet 00:00:00:00:00:01;"       >> /etc/dhcp/dhcpd.conf
+              echo "    fixed-address 10.0.0.10;"                   >> /etc/dhcp/dhcpd.conf
+              echo "  }"                                            >> /etc/dhcp/dhcpd.conf
+              echo "}"                                              >> /etc/dhcp/dhcpd.conf
+
+            # Descargar archivo de nombres de fabricantes
+              echo ""
+              echo "    Descargando archivo de nombres de fabricantes..."
+              echo ""
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                   echo ""
+                   echo -e "${cColorRojo}      wget no está instalado. Iniciando su instalación...${cFinColor}"
+                   echo ""
+                   apt-get -y update && apt-get -y install wget
+                   echo ""
+                 fi
+              wget -O /usr/local/etc/oui.txt http://standards-oui.ieee.org/oui/oui.txt
+
+          ;;
+
+          5)
+
+            echo ""
+            echo "  Instalando y configurando el servidor DHCP para redes de clase B por eth1..."
+            echo ""
+
+            # Instalar el paquete isc-dhcp-server
+              echo ""
+              echo "    Instalando el paquete isc-dhcp-server..."
+              echo ""
+              apt-get -y update && apt-get -y install isc-dhcp-server
+
+            # Indicar la ubicación del archivo de configuración del demonio
+              echo ""
+              echo "    Indicando la ubicación del archivo de configuración del demonio dhcpd"
+              echo "    y la interfaz sobre la que correrá..."
+              echo ""
+              cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.bak
+              echo 'DHCPDv4_CONF=/etc/dhcp/dhcpd.conf'  > /etc/default/isc-dhcp-server
+              echo 'INTERFACESv4="eth1"'               >> /etc/default/isc-dhcp-server
+              echo 'INTERFACESv6=""'                   >> /etc/default/isc-dhcp-server
+
+            # Configurar servidor DHCP
+              echo ""
+              echo "    Configurando el servidor DHCP..."
+              echo ""
+              cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.ori
+              echo "authoritative;"                                  > /etc/dhcp/dhcpd.conf
+              echo "subnet 172.16.0.0 netmask 255.255.0.0 {"        >> /etc/dhcp/dhcpd.conf
+              echo "  range 172.16.0.2 172.16.255.254;"             >> /etc/dhcp/dhcpd.conf
+              echo "  option routers 172.16.0.1;"                   >> /etc/dhcp/dhcpd.conf
+              echo "  option domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhcpd.conf
+              echo '  option domain-name "home.arpa";'              >> /etc/dhcp/dhcpd.conf
+              echo "  default-lease-time 600;"                      >> /etc/dhcp/dhcpd.conf
+              echo "  max-lease-time 7200;"                         >> /etc/dhcp/dhcpd.conf
+              echo ""                                               >> /etc/dhcp/dhcpd.conf
+              echo "  host PrimeraReserva {"                        >> /etc/dhcp/dhcpd.conf
+              echo "    hardware ethernet 00:00:00:00:00:01;"       >> /etc/dhcp/dhcpd.conf
+              echo "    fixed-address 172.16.0.10;"                 >> /etc/dhcp/dhcpd.conf
+              echo "  }"                                            >> /etc/dhcp/dhcpd.conf
+              echo "}"                                              >> /etc/dhcp/dhcpd.conf
+
+            # Descargar archivo de nombres de fabricantes
+              echo ""
+              echo "    Descargando archivo de nombres de fabricantes..."
+              echo ""
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                   echo ""
+                   echo -e "${cColorRojo}      wget no está instalado. Iniciando su instalación...${cFinColor}"
+                   echo ""
+                   apt-get -y update && apt-get -y install wget
+                   echo ""
+                 fi
+              wget -O /usr/local/etc/oui.txt http://standards-oui.ieee.org/oui/oui.txt
+
+          ;;
+
+          6)
+
+            echo ""
+            echo "  Instalando y configurando el servidor DHCP para redes de clase C por eth1..."
+            echo ""
+
+            # Instalar el paquete isc-dhcp-server
+              echo ""
+              echo "    Instalando el paquete isc-dhcp-server..."
+              echo ""
+              apt-get -y update && apt-get -y install isc-dhcp-server
+
+            # Indicar la ubicación del archivo de configuración del demonio
+              echo ""
+              echo "    Indicando la ubicación del archivo de configuración del demonio dhcpd"
+              echo "    y la interfaz sobre la que correrá..."
+              echo ""
+              cp /etc/default/isc-dhcp-server /etc/default/isc-dhcp-server.bak
+              echo 'DHCPDv4_CONF=/etc/dhcp/dhcpd.conf'  > /etc/default/isc-dhcp-server
+              echo 'INTERFACESv4="eth1"'               >> /etc/default/isc-dhcp-server
+              echo 'INTERFACESv6=""'                   >> /etc/default/isc-dhcp-server
+
+            # Configurar servidor DHCP
+              echo ""
+              echo "    Configurando el servidor DHCP..."
+              echo ""
+              cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.ori
+              echo "authoritative;"                                  > /etc/dhcp/dhcpd.conf
+              echo "subnet 192.168.0.0 netmask 255.255.255.0 {"     >> /etc/dhcp/dhcpd.conf
+              echo "  range 192.168.0.2 192.168.0.254;"             >> /etc/dhcp/dhcpd.conf
+              echo "  option routers 192.168.0.1;"                  >> /etc/dhcp/dhcpd.conf
+              echo "  option domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhcpd.conf
+              echo '  option domain-name "home.arpa";'              >> /etc/dhcp/dhcpd.conf
+              echo "  default-lease-time 600;"                      >> /etc/dhcp/dhcpd.conf
+              echo "  max-lease-time 7200;"                         >> /etc/dhcp/dhcpd.conf
+              echo ""                                               >> /etc/dhcp/dhcpd.conf
+              echo "  host PrimeraReserva {"                        >> /etc/dhcp/dhcpd.conf
+              echo "    hardware ethernet 00:00:00:00:00:01;"       >> /etc/dhcp/dhcpd.conf
+              echo "    fixed-address 192.168.0.10;"                >> /etc/dhcp/dhcpd.conf
+              echo "  }"                                            >> /etc/dhcp/dhcpd.conf
+              echo "}"                                              >> /etc/dhcp/dhcpd.conf
+
+            # Descargar archivo de nombres de fabricantes
+              echo ""
+              echo "    Descargando archivo de nombres de fabricantes..."
+              echo ""
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                   echo ""
+                   echo -e "${cColorRojo}      wget no está instalado. Iniciando su instalación...${cFinColor}"
+                   echo ""
+                   apt-get -y update && apt-get -y install wget
+                   echo ""
+                 fi
+              wget -O /usr/local/etc/oui.txt http://standards-oui.ieee.org/oui/oui.txt
+
+          ;;
+
+      esac
+
+  done
+
 fi
