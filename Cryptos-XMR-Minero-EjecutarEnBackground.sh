@@ -17,9 +17,7 @@ DirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wq
 Hilos=$(dmidecode -t processor | grep ore | grep ount | cut -d ":" -f 2 | cut -d " " -f 2)
 
 echo ""
-echo -e "${cColorVerde}----------------------------------------------${cFinColor}"
 echo -e "${cColorVerde}  Iniciando scripts de ejecución de XMRig...${cFinColor}"
-echo -e "${cColorVerde}----------------------------------------------${cFinColor}"
 echo ""
 
 echo ""
