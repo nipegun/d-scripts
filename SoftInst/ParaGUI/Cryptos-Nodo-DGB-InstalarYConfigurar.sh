@@ -34,7 +34,7 @@ echo "  Determinando la última versión estable de digibyte core..."echo ""
      apt-get -y install curl
      echo ""
    fi
-UltVersDGB=$(curl -sL https://github.com/DigiByte-Core/digibyte/releases/latest | sed 's->-\n>-'g | grep tag | sed 's-tag/-\n-g' | grep ^v | cut -d'"' -f1 | head -n1)
+UltVersDGB=$(curl -sL https://github.com/DigiByte-Core/digibyte/releases/latest | sed 's->-\n>-'g | grep tag | sed 's-tag/-\n-g' | grep ^v | cut -d'"' -f1 | head -n1 | sed 's-v--g')
 echo ""
 echo "  La última versión estable de DigiByte core es la $UltVersDGB"
 echo ""
