@@ -23,12 +23,12 @@ echo -e "${cColorVerde}  Iniciando el script de instalación de la cadena de blo
 echo ""
 
 echo ""
-echo "  Determinando la última versión estable de digibyte core..."
+echo "    Determinando la última versión estable de digibyte core..."
 echo ""
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "    El paquete curl no está instalado. Iniciando su instalación..."
+     echo "      El paquete curl no está instalado. Iniciando su instalación..."
      echo ""
      apt-get -y update
      apt-get -y install curl
@@ -36,54 +36,48 @@ echo ""
    fi
 cUltVersDGB=$(curl -sL https://github.com/DigiByte-Core/digibyte/releases/latest | sed 's->-\n>-'g | grep tag | sed 's-tag/-\n-g' | grep ^v | cut -d'"' -f1 | head -n1 | sed 's-v--g')
 echo ""
-echo "  La última versión estable de DigiByte core es la $cUltVersDGB"
+echo "      La última versión estable de DigiByte core es la $cUltVersDGB"
 echo ""
 
 echo ""
-echo "  Intentando descargar el archivo comprimido de la última versión..."echo ""
+echo "    Determinando el enlace de descarga de la última versión estable..."
+echo ""
+cEnlDescUltVersEst=$(curl -sL https://github.com/DigiByte-Core/digibyte/releases/tag/v$cUltVersDGB | sed 's->-\n>-'g | grep tag | sed 's-tag/-\n-g' | grep ^v | cut -d'"' -f1 | head -n1 | sed 's-v--g')
+echo ""
+echo "      El enlace de descarga de la última versión estable es: "
+echo "        $cEnlDescUltVersEst"
+echo ""
+
+echo ""
+echo "  Intentando descargar el archivo comprimido de la última versión..."
+echo ""
 mkdir -p /root/SoftInst/Cryptos/DGB/ 2> /dev/null
 rm -rf /root/SoftInst/Cryptos/DGB/*
 cd /root/SoftInst/Cryptos/DGB/
-vLinkArchivoDentroGithub=$(curl -sL https://github.com/DigiByte-Core/digibyte/releases/ | grep href | grep linux | grep -v aarch64 | head -n1 | cut -d '"' -f2 | sed 's-.tar.gz--g' | sed 's-.zip--g')
 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  wget no está instalado. Iniciando su instalación..."     echo ""
+     echo "    El paquete wget no está instalado. Iniciando su instalación..."
+     echo ""
      apt-get -y update
      apt-get -y install wget
      echo ""
    fi
+wget https://github.com/DigiByte-Core/digibyte/releases/download/v"$cUltVersDGB"/digibyte-"$cUltVersDGB"-x86_64-linux-gnu.tar.gz -o /root/SoftInst/Cryptos/DGB/DigibyteCore.tar.gz
+
 echo ""
-echo "  Pidiendo el archivo en formato zip..."echo ""
-wget https://github.com/$vLinkArchivoDentroGithub.zip
+echo "  Descomprimiendo el archivo..."
 echo ""
-echo "  Pidiendo el archivo en formato tar.gz..."echo ""
-wget https://github.com/$vLinkArchivoDentroGithub.tar.gz
-echo ""
-echo "  Descomprimiendo el archivo..."echo ""
-# Comprobar si el paquete zip está instalado. Si no lo está, instalarlo.
-   if [[ $(dpkg-query -s zip 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  zip no está instalado. Iniciando su instalación..."     echo ""
-     apt-get -y update
-     apt-get -y install zip
-     echo ""
-   fi
-unzip /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB-x86_64-linux-gnu.zip
-mv /root/SoftInst/Cryptos/DGB/linux/digibyte-$UltVersDGB-x86_64-linux-gnu.tar.gz /root/SoftInst/Cryptos/DGB/
-rm -rf /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB-x86_64-linux-gnu.zip
-rm -rf /root/SoftInst/Cryptos/DGB/linux/
-rm -rf /root/SoftInst/Cryptos/DGB/__MACOSX/
 # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  tar no está instalado. Iniciando su instalación..."     echo ""
+     echo "    El paquete tar no está instalado. Iniciando su instalación..."     echo ""
      apt-get -y update
      apt-get -y install tar
      echo ""
    fi
-tar -xf /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB-x86_64-linux-gnu.tar.gz
-rm -rf /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB-x86_64-linux-gnu.tar.gz
+tar -xf /root/SoftInst/Cryptos/DGB/DigibyteCore.tar-gz
+rm -rf /root/SoftInst/Cryptos/DGB/DigibyteCore.tar-gz
 
 echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."echo ""
