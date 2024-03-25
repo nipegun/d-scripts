@@ -19,24 +19,24 @@ cFinColor='\033[0m'
 UsuarioNoRoot="nipegun"
 
 echo ""
-echo -e "${cColorVerde}------------------------------------------------------------------------${cFinColor}"
 echo -e "${cColorVerde}  Iniciando el script de instalación de la cadena de bloques de DGB...${cFinColor}"
-echo -e "${cColorVerde}------------------------------------------------------------------------${cFinColor}"
 echo ""
 
 echo ""
-echo "  Determinando la última versión estable de digibyte core..."echo ""
+echo "  Determinando la última versión estable de digibyte core..."
+echo ""
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  curl no está instalado. Iniciando su instalación..."     echo ""
+     echo "    El paquete curl no está instalado. Iniciando su instalación..."
+     echo ""
      apt-get -y update
      apt-get -y install curl
      echo ""
    fi
-UltVersDGB=$(curl -sL https://github.com/DigiByte-Core/digibyte/releases/latest | sed 's->-\n>-'g | grep tag | sed 's-tag/-\n-g' | grep ^v | cut -d'"' -f1 | head -n1 | sed 's-v--g')
+cUltVersDGB=$(curl -sL https://github.com/DigiByte-Core/digibyte/releases/latest | sed 's->-\n>-'g | grep tag | sed 's-tag/-\n-g' | grep ^v | cut -d'"' -f1 | head -n1 | sed 's-v--g')
 echo ""
-echo "  La última versión estable de DigiByte core es la $UltVersDGB"
+echo "  La última versión estable de DigiByte core es la $cUltVersDGB"
 echo ""
 
 echo ""
