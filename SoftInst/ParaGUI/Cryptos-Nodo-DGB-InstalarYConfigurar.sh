@@ -73,11 +73,11 @@ rm -rf /root/SoftInst/Cryptos/DGB/DigibyteCore.tar.gz
 echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."echo ""
 # Crear la carpeta en la home del usuario no root
-  mkdir -p /home/$UsuarioNoRoot/Cryptos/DGB/ 2> /dev/null
-  rm -rf /home/$UsuarioNoRoot/Cryptos/DGB/
-  mv /root/SoftInst/Cryptos/DGB/digibyte-$UltVersDGB/ /home/$UsuarioNoRoot/Cryptos/DGB/
+  mkdir -p /home/$vUsuarioNoRoot/Cryptos/DGB/ 2> /dev/null
+  rm -rf /home/$vUsuarioNoRoot/Cryptos/DGB/
+  mv /root/SoftInst/Cryptos/DGB/digibyte-$cUltVersDGB/ /home/$vUsuarioNoRoot/Cryptos/DGB/
 # Crear archivo de configuración cli
-  mkdir -p /home/$UsuarioNoRoot/.digibyte/ 2> /dev/null
+  mkdir -p /home/$vUsuarioNoRoot/.digibyte/ 2> /dev/null
   #touch /home/$UsuarioNoRoot/.digibyte/digibyte.conf
   #echo "rpcuser=dgbrpc"           > /home/$UsuarioNoRoot/.digibyte/digibyte.conf
   #echo "rpcpassword=dgbrpcpass"  >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
@@ -90,27 +90,27 @@ echo "  Creando carpetas y archivos necesarios para ese usuario..."echo ""
   #echo "daemon=1"                >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
   #echo "gen=0"                   >> /home/$UsuarioNoRoot/.digibyte/digibyte.conf
 # Crear archivo de configuración gráfica
-  mkdir -p /home/$UsuarioNoRoot/.config/DigiByte/ 2> /dev/null
-  touch /home/$UsuarioNoRoot/.config/DigiByte/DigiByte-Qt.conf
-  echo "strDataDir=/home/nipegun/.digibyte" > /home/$UsuarioNoRoot/.config/DigiByte/DigiByte-Qt.conf
+  mkdir -p /home/$vUsuarioNoRoot/.config/DigiByte/ 2> /dev/null
+  touch /home/$vUsuarioNoRoot/.config/DigiByte/DigiByte-Qt.conf
+  echo "strDataDir=/home/nipegun/.digibyte" > /home/$vUsuarioNoRoot/.config/DigiByte/DigiByte-Qt.conf
 # Reparar permisos
-  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/DGB/ -R
-  find /home/$UsuarioNoRoot/Cryptos/DGB/ -type d -exec chmod 775 {} \;
-  find /home/$UsuarioNoRoot/Cryptos/DGB/ -type f -exec chmod 664 {} \;
-  find /home/$UsuarioNoRoot/Cryptos/DGB/bin -type f -exec chmod +x {} \;
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/DGB/ -R
+  find /home/$vUsuarioNoRoot/Cryptos/DGB/ -type d -exec chmod 775 {} \;
+  find /home/$vUsuarioNoRoot/Cryptos/DGB/ -type f -exec chmod 664 {} \;
+  find /home/$vUsuarioNoRoot/Cryptos/DGB/bin -type f -exec chmod +x {} \;
 
 echo ""
 echo "  Arrancando digibyted..."echo ""
-chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.digibyte/ -R
-su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyted -daemon"
+chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.digibyte/ -R
+su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/DGB/bin/digibyted -daemon"
 sleep 5
-su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/Cryptos/DGB/bin/digibyte-cli getnewaddress" > /home/$UsuarioNoRoot/dgb-address.txt
-chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/dgb-address.txt
+su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/DGB/bin/digibyte-cli getnewaddress" > /home/$vUsuarioNoRoot/dgb-address.txt
+chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/dgb-address.txt
 echo ""
 echo "  La dirección para recibir DigiBytes es:"
 echo ""
-cat /home/$UsuarioNoRoot/dgb-address.txt
-DirCartDGB=$(cat /home/$UsuarioNoRoot/dgb-address.txt)
+cat /home/$vUsuarioNoRoot/dgb-address.txt
+DirCartDGB=$(cat /home/$vUsuarioNoRoot/dgb-address.txt)
 echo ""
 
 # Autoejecución de DigiByte al iniciar el sistema
