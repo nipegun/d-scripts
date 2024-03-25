@@ -40,15 +40,6 @@ echo "      La última versión estable de DigiByte core es la $cUltVersDGB"
 echo ""
 
 echo ""
-echo "    Determinando el enlace de descarga de la última versión estable..."
-echo ""
-cEnlDescUltVersEst=$(curl -sL https://github.com/DigiByte-Core/digibyte/releases/tag/v$cUltVersDGB | sed 's->-\n>-'g | grep tag | sed 's-tag/-\n-g' | grep ^v | cut -d'"' -f1 | head -n1 | sed 's-v--g')
-echo ""
-echo "      El enlace de descarga de la última versión estable es: "
-echo "        $cEnlDescUltVersEst"
-echo ""
-
-echo ""
 echo "  Intentando descargar el archivo comprimido de la última versión..."
 echo ""
 mkdir -p /root/SoftInst/Cryptos/DGB/ 2> /dev/null
