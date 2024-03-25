@@ -25,7 +25,7 @@ echo -e "${cColorVerde}---------------------------------------------------------
 echo ""
 
 echo ""
-echo "  Determinando la última versión de digibyte core..."echo ""
+echo "  Determinando la última versión estable de digibyte core..."echo ""
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
      echo ""
@@ -34,9 +34,9 @@ echo "  Determinando la última versión de digibyte core..."echo ""
      apt-get -y install curl
      echo ""
    fi
-UltVersDGB=$(curl -sL https://github.com/DigiByte-Core/digibyte/releases/ | grep href | grep linux | grep -v aarch64 | head -n1 | cut -d '"' -f2 | sed 's-/v-\n-g' | grep -v down | cut -d'/' -f1)
+UltVersDGB=$(curl -sL https://github.com/DigiByte-Core/digibyte/releases/latest | sed 's->-\n>-'g | grep tag | sed 's-tag/-\n-g' | grep ^v | cut -d'"' -f1 | head -n1)
 echo ""
-echo "  La última versión de DigiByte core es la $UltVersDGB"
+echo "  La última versión estable de DigiByte core es la $UltVersDGB"
 echo ""
 
 echo ""
