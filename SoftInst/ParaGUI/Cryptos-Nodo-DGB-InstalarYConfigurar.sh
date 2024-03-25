@@ -54,7 +54,7 @@ cd /root/SoftInst/Cryptos/DGB/
      apt-get -y install wget
      echo ""
    fi
-wget https://github.com/DigiByte-Core/digibyte/releases/download/v"$cUltVersDGB"/digibyte-"$cUltVersDGB"-x86_64-linux-gnu.tar.gz -o /root/SoftInst/Cryptos/DGB/DigibyteCore.tar.gz
+wget https://github.com/DigiByte-Core/digibyte/releases/download/v"$cUltVersDGB"/digibyte-"$cUltVersDGB"-x86_64-linux-gnu.tar.gz -O /root/SoftInst/Cryptos/DGB/DigibyteCore.tar.gz
 
 echo ""
 echo "  Descomprimiendo el archivo..."
