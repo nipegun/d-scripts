@@ -67,8 +67,8 @@ echo ""
      apt-get -y install tar
      echo ""
    fi
-tar -xf /root/SoftInst/Cryptos/DGB/DigibyteCore.tar-gz
-rm -rf /root/SoftInst/Cryptos/DGB/DigibyteCore.tar-gz
+tar -xf /root/SoftInst/Cryptos/DGB/DigibyteCore.tar.gz
+rm -rf /root/SoftInst/Cryptos/DGB/DigibyteCore.tar.gz
 
 echo ""
 echo "  Creando carpetas y archivos necesarios para ese usuario..."echo ""
