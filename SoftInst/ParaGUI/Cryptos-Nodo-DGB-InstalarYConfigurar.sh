@@ -16,10 +16,10 @@ cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-UsuarioNoRoot="nipegun"
+vUsuarioNoRoot="nipegun"
 
 echo ""
-echo -e "${cColorVerde}  Iniciando el script de instalación de la cadena de bloques de DGB...${cFinColor}"
+echo -e "${cColorAzulClaro}  Iniciando el script de instalación del nodo Digibyte (DGB)...${cFinColor}"
 echo ""
 
 echo ""
@@ -28,7 +28,7 @@ echo ""
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "      El paquete curl no está instalado. Iniciando su instalación..."
+     echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
      echo ""
      apt-get -y update
      apt-get -y install curl
@@ -71,7 +71,8 @@ tar -xf /root/SoftInst/Cryptos/DGB/DigibyteCore.tar.gz
 rm -rf /root/SoftInst/Cryptos/DGB/DigibyteCore.tar.gz
 
 echo ""
-echo "  Creando carpetas y archivos necesarios para ese usuario..."echo ""
+echo "  Creando carpetas y archivos necesarios para ese usuario..."
+echo ""
 # Crear la carpeta en la home del usuario no root
   mkdir -p /home/$vUsuarioNoRoot/Cryptos/DGB/ 2> /dev/null
   rm -rf /home/$vUsuarioNoRoot/Cryptos/DGB/
@@ -92,80 +93,82 @@ echo "  Creando carpetas y archivos necesarios para ese usuario..."echo ""
 # Crear archivo de configuración gráfica
   mkdir -p /home/$vUsuarioNoRoot/.config/DigiByte/ 2> /dev/null
   touch /home/$vUsuarioNoRoot/.config/DigiByte/DigiByte-Qt.conf
-  echo "strDataDir=/home/nipegun/.digibyte" > /home/$vUsuarioNoRoot/.config/DigiByte/DigiByte-Qt.conf
+  echo "strDataDir=/home/$vUsuarioNoRoot/.digibyte" > /home/$vUsuarioNoRoot/.config/DigiByte/DigiByte-Qt.conf
 # Reparar permisos
   chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/DGB/ -R
   find /home/$vUsuarioNoRoot/Cryptos/DGB/ -type d -exec chmod 775 {} \;
   find /home/$vUsuarioNoRoot/Cryptos/DGB/ -type f -exec chmod 664 {} \;
   find /home/$vUsuarioNoRoot/Cryptos/DGB/bin -type f -exec chmod +x {} \;
 
-echo ""
-echo "  Arrancando digibyted..."echo ""
-chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.digibyte/ -R
-su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/DGB/bin/digibyted -daemon"
-sleep 5
-su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/DGB/bin/digibyte-cli getnewaddress" > /home/$vUsuarioNoRoot/dgb-address.txt
-chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/dgb-address.txt
-echo ""
-echo "  La dirección para recibir DigiBytes es:"
-echo ""
-cat /home/$vUsuarioNoRoot/dgb-address.txt
-DirCartDGB=$(cat /home/$vUsuarioNoRoot/dgb-address.txt)
-echo ""
+## Arrancar el nodo
+#  echo ""
+#  echo "  Arrancando digibyted..."
+#  echo ""
+#  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.digibyte/ -R
+#  su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/DGB/bin/digibyted -daemon"
+#  sleep 5
+#  su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/DGB/bin/digibyte-cli getnewaddress" > /home/$vUsuarioNoRoot/dgb-address.txt
+#  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/dgb-address.txt
+#  echo ""
+#  echo "  La dirección para recibir DigiBytes es:"
+#  echo ""
+#  cat /home/$vUsuarioNoRoot/dgb-address.txt
+#  vDirCartDGB=$(cat /home/$vUsuarioNoRoot/dgb-address.txt)
+#  echo ""
 
 # Autoejecución de DigiByte al iniciar el sistema
   #echo ""
-  #echo "  Agregando digibyted a los ComandosPostArranque..."  #echo ""
-  #chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-iniciar.sh
-  #echo "su "$UsuarioNoRoot" -c '/home/"$UsuarioNoRoot"/scripts/c-scripts/dgb-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
+  #echo "  Agregando digibyted a los ComandosPostArranque..."
+  #echo ""
+  #chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/dgb-daemon-iniciar.sh
+  #echo "su "$vUsuarioNoRoot" -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/dgb-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
 # Icono de lanzamiento en el menú gráfico
   echo ""
   echo "  Agregando la aplicación gráfica al menú..." 
-echo ""
-  mkdir -p /home/$UsuarioNoRoot/.local/share/applications/ 2> /dev/null
-  echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-  echo "Name=dgb GUI"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-  echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/dgb-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-  echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-  echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-  echo "Categories=Cryptos"                                              >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-  #echo "Icon="                                                          >> /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop
-  gio set /home/$UsuarioNoRoot/.local/share/applications/dgb.desktop "metadata::trusted" yes
+  echo ""
+  mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
+  echo "[Desktop Entry]"                                                  > /home/$vUsuarioNoRoot/.local/share/applications/nodo-dgb.desktop
+  echo "Name=Nodo GUI"                                                   >> /home/$vUsuarioNoRoot/.local/share/applications/nodo-dgb.desktop
+  echo "Type=Application"                                                >> /home/$vUsuarioNoRoot/.local/share/applications/nodo-dgb.desktop
+  echo "Exec=/home/$vUsuarioNoRoot/scripts/c-scripts/dgb-gui-iniciar.sh" >> /home/$vUsuarioNoRoot/.local/share/applications/nodo-dgb.desktop
+  echo "Terminal=false"                                                  >> /home/$vUsuarioNoRoot/.local/share/applications/nodo-dgb.desktop
+  echo "Hidden=false"                                                    >> /home/$vUsuarioNoRoot/.local/share/applications/nodo-dgb.desktop
+  echo "Categories=Cryptos"                                              >> /home/$vUsuarioNoRoot/.local/share/applications/nodo-dgb.desktop
+  #echo "Icon="                                                          >> /home/$vUsuarioNoRoot/.local/share/applications/nodo-dgb.desktop
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot                                     /home/$vUsuarioNoRoot/.local/share/applications/nodo-dgb.desktop
+  gio set /home/$vUsuarioNoRoot/.local/share/applications/nodo-dgb.desktop "metadata::trusted" yes
 
 # Autoejecución gráfica de DigiByte
   echo ""
   echo "  Creando el archivo de autoejecución de digibyte-qt para escritorio..." 
-echo ""
-  mkdir -p /home/$UsuarioNoRoot/.config/autostart/ 2> /dev/null
-  echo "[Desktop Entry]"                                                  > /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
-  echo "Name=dgb GUI"                                                    >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
-  echo "Type=Application"                                                >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
-  echo "Exec=/home/$UsuarioNoRoot/scripts/c-scripts/dgb-gui-iniciar.sh"  >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
-  echo "Terminal=false"                                                  >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
-  echo "Hidden=false"                                                    >> /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
-  chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/.config/autostart/dgb.desktop
-  gio set /home/$UsuarioNoRoot/.config/autostart/dgb.desktop "metadata::trusted" yes
+  echo ""
+  mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
+  echo "[Desktop Entry]"                                                  > /home/$vUsuarioNoRoot/.config/autostart/nodo-dgb.desktop
+  echo "Name=Noddo DGB"                                                  >> /home/$vUsuarioNoRoot/.config/autostart/nodo-dgb.desktop
+  echo "Type=Application"                                                >> /home/$vUsuarioNoRoot/.config/autostart/nodo-dgb.desktop
+  echo "Exec=/home/$vUsuarioNoRoot/scripts/c-scripts/dgb-gui-iniciar.sh" >> /home/$vUsuarioNoRoot/.config/autostart/nodo-dgb.desktop
+  echo "Terminal=false"                                                  >> /home/$vUsuarioNoRoot/.config/autostart/nodo-dgb.desktop
+  echo "Hidden=false"                                                    >> /home/$vUsuarioNoRoot/.config/autostart/nodo-dgb.desktop
+  chown $vUsuarioNoRoot:$vUsuarioNoRoot                                     /home/$vUsuarioNoRoot/.config/autostart/nodo-dgb.desktop
+  gio set /home/$vUsuarioNoRoot/.config/autostart/nodo-dgb.desktop "metadata::trusted" yes
 
 # Reparación de permisos
-   chmod +x /home/$UsuarioNoRoot/Cryptos/DGB/bin/*
-   chown $UsuarioNoRoot:$UsuarioNoRoot /home/$UsuarioNoRoot/Cryptos/DGB/ -R
+   chmod +x /home/$vUsuarioNoRoot/Cryptos/DGB/bin/*
+   chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/Cryptos/DGB/ -R
 
 # Instalar los c-scripts
   echo ""
   echo "  Instalando los c-scripts..." 
-echo ""
-  su $UsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
-  find /home/$UsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+  echo ""
+  su $vUsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
+  find /home/$vUsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Parar el daemon
-  chmod +x /home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh
-  su $UsuarioNoRoot -c "/home/$UsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh"
+  chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh
+  su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh"
 
 echo ""
 echo "Nodo instalado."
 echo "El puerto a abrir es el 12024"
 echo ""
-
