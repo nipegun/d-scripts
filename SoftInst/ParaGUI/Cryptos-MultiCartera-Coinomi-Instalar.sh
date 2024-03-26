@@ -23,16 +23,16 @@ vUsuarioNoRoot="nipegun"
     exit 1
   fi
 
-ColorAzul="\033[0;34m"
-ColorAzulClaro="\033[1;34m"
-cColorVerde='\033[1;32m'
+cColorAzul="\033[0;34m"
+cColorAzulClaro="\033[1;34m"
+ccColorVerde='\033[1;32m'
 cColorRojo='\033[1;31m'
 cFinColor='\033[0m'
 
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${cColorRojo}  curl no está instalado. Iniciando su instalación...${cFinColor}"
+    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
     sudo apt-get -y update > /dev/null
     sudo apt-get -y install curl
@@ -71,7 +71,7 @@ if [ $cVerSO == "7" ]; then
   echo ""
 
   echo ""
-  echo -e "${cColorRojo}  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
 elif [ $cVerSO == "8" ]; then
@@ -81,7 +81,7 @@ elif [ $cVerSO == "8" ]; then
   echo ""
 
   echo ""
-  echo -e "${cColorRojo}  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
 elif [ $cVerSO == "9" ]; then
@@ -91,7 +91,7 @@ elif [ $cVerSO == "9" ]; then
   echo ""
 
   echo ""
-  echo -e "${cColorRojo}  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
 elif [ $cVerSO == "10" ]; then
@@ -101,7 +101,7 @@ elif [ $cVerSO == "10" ]; then
   echo ""
 
   echo ""
-  echo -e "${cColorRojo}  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
 elif [ $cVerSO == "11" ]; then
@@ -250,9 +250,9 @@ elif [ $cVerSO == "12" ]; then
     # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${cColorRojo}    tar no está instalado. Iniciando su instalación...${cFinColor}"
+        echo -e "${cColorRojo}    El paquete tar no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
-        apt-get -y update
+        apt-get -y update 2> /dev/null
         apt-get -y install tar
         echo ""
       fi
@@ -271,9 +271,9 @@ elif [ $cVerSO == "12" ]; then
     # Comprobar si el paquete icnsutils está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s icnsutils 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${cColorRojo}    icnsutils no está instalado. Iniciando su instalación...${cFinColor}"
+        echo -e "${cColorRojo}    El paquete icnsutils no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
-        apt-get -y update
+        apt-get -y update 2> /dev/null
         apt-get -y install icnsutils
         echo ""
       fi
