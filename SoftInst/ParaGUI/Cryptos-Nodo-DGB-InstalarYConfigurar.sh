@@ -40,7 +40,7 @@ echo "      La última versión estable de DigiByte core es la $cUltVersDGB"
 echo ""
 
 echo ""
-echo "  Intentando descargar el archivo comprimido de la última versión..."
+echo "    Intentando descargar el archivo comprimido de la última versión..."
 echo ""
 mkdir -p /root/SoftInst/Cryptos/DGB/ 2> /dev/null
 rm -rf /root/SoftInst/Cryptos/DGB/*
@@ -48,7 +48,7 @@ cd /root/SoftInst/Cryptos/DGB/
 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "    El paquete wget no está instalado. Iniciando su instalación..."
+     echo "      El paquete wget no está instalado. Iniciando su instalación..."
      echo ""
      apt-get -y update
      apt-get -y install wget
@@ -57,12 +57,12 @@ cd /root/SoftInst/Cryptos/DGB/
 wget https://github.com/DigiByte-Core/digibyte/releases/download/v"$cUltVersDGB"/digibyte-"$cUltVersDGB"-x86_64-linux-gnu.tar.gz -O /root/SoftInst/Cryptos/DGB/DigibyteCore.tar.gz
 
 echo ""
-echo "  Descomprimiendo el archivo..."
+echo "    Descomprimiendo el archivo..."
 echo ""
 # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "    El paquete tar no está instalado. Iniciando su instalación..."     echo ""
+     echo "      El paquete tar no está instalado. Iniciando su instalación..."     echo ""
      apt-get -y update
      apt-get -y install tar
      echo ""
@@ -71,7 +71,7 @@ tar -xf /root/SoftInst/Cryptos/DGB/DigibyteCore.tar.gz
 rm -rf /root/SoftInst/Cryptos/DGB/DigibyteCore.tar.gz
 
 echo ""
-echo "  Creando carpetas y archivos necesarios para ese usuario..."
+echo "    Creando carpetas y archivos necesarios para ese usuario..."
 echo ""
 # Crear la carpeta en la home del usuario no root
   mkdir -p /home/$vUsuarioNoRoot/Cryptos/DGB/ 2> /dev/null
@@ -102,7 +102,7 @@ echo ""
 
 ## Arrancar el nodo
 #  echo ""
-#  echo "  Arrancando digibyted..."
+#  echo "    Arrancando digibyted..."
 #  echo ""
 #  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/.digibyte/ -R
 #  su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/DGB/bin/digibyted -daemon"
@@ -110,7 +110,7 @@ echo ""
 #  su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/Cryptos/DGB/bin/digibyte-cli getnewaddress" > /home/$vUsuarioNoRoot/dgb-address.txt
 #  chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/dgb-address.txt
 #  echo ""
-#  echo "  La dirección para recibir DigiBytes es:"
+#  echo "      La dirección para recibir DigiBytes es:"
 #  echo ""
 #  cat /home/$vUsuarioNoRoot/dgb-address.txt
 #  vDirCartDGB=$(cat /home/$vUsuarioNoRoot/dgb-address.txt)
@@ -118,14 +118,14 @@ echo ""
 
 # Autoejecución de DigiByte al iniciar el sistema
   #echo ""
-  #echo "  Agregando digibyted a los ComandosPostArranque..."
+  #echo "    Agregando digibyted a los ComandosPostArranque..."
   #echo ""
   #chmod +x /home/$vUsuarioNoRoot/scripts/c-scripts/dgb-daemon-iniciar.sh
   #echo "su "$vUsuarioNoRoot" -c '/home/"$vUsuarioNoRoot"/scripts/c-scripts/dgb-daemon-iniciar.sh'" >> /root/scripts/ComandosPostArranque.sh
 
 # Icono de lanzamiento en el menú gráfico
   echo ""
-  echo "  Agregando la aplicación gráfica al menú..." 
+  echo "    Agregando la aplicación gráfica al menú..." 
   echo ""
   mkdir -p /home/$vUsuarioNoRoot/.local/share/applications/ 2> /dev/null
   echo "[Desktop Entry]"                                                  > /home/$vUsuarioNoRoot/.local/share/applications/nodo-dgb.desktop
@@ -141,7 +141,7 @@ echo ""
 
 # Autoejecución gráfica de DigiByte
   echo ""
-  echo "  Creando el archivo de autoejecución de digibyte-qt para escritorio..." 
+  echo "    Creando el archivo de autoejecución de digibyte-qt para escritorio..." 
   echo ""
   mkdir -p /home/$vUsuarioNoRoot/.config/autostart/ 2> /dev/null
   echo "[Desktop Entry]"                                                  > /home/$vUsuarioNoRoot/.config/autostart/nodo-dgb.desktop
@@ -159,7 +159,7 @@ echo ""
 
 # Instalar los c-scripts
   echo ""
-  echo "  Instalando los c-scripts..." 
+  echo "    Instalando los c-scripts..." 
   echo ""
   su $vUsuarioNoRoot -c "curl --silent https://raw.githubusercontent.com/nipegun/c-scripts/main/CScripts-Instalar.sh | bash"
   find /home/$vUsuarioNoRoot/scripts/c-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
@@ -169,6 +169,6 @@ echo ""
   su $vUsuarioNoRoot -c "/home/$vUsuarioNoRoot/scripts/c-scripts/dgb-daemon-parar.sh"
 
 echo ""
-echo "Nodo instalado."
-echo "El puerto a abrir es el 12024"
+echo "    Nodo instalado."
+echo "    El puerto a abrir es el 12024"
 echo ""
