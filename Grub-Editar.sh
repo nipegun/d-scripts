@@ -6,18 +6,47 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para EDITAR LA CONFIGURACIÓN DE GRUB
+# Script de NiPeGun para editar la configuración de grub
+#
+# Ejecución remota:
+#   curl -sL x | bash
+#
+# Ejecución remota sin caché:
+#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#
+# Ejecución remota con parámetros:
+#   curl -sL x | bash -s Parámetro1 Parámetro2
 # ----------
 
+# Definir constantes de color
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo ""
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
+    echo ""
+    exit
+  fi
+
 echo ""
-echo "---------------------------------------------------"
-echo "  EDITANDO EL ARCHIVO DE CONFIGURACIÓN DE GRUB..."echo "---------------------------------------------------"
+echo "  Editando el archivo de configuración por defecto de Grub..."
 echo ""
 nano /etc/default/grub
 
 echo ""
-echo "----------------------------"
-echo "  APLICANDO LOS CAMBIOS..."echo "----------------------------"
+echo "  Editando el archivo de configuración de instalaciones customizadas..."
+echo ""
+nano /etc/grub.d/40_custom
+
+echo ""
+echo "  Aplicando los cambios..."
 echo ""
 update-grub
 
