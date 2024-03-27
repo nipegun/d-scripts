@@ -9,13 +9,10 @@
 # Script de NiPeGun para editar la configuración de grub
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Grub-Editar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Grub-Editar.sh | bash
 # ----------
 
 # Definir constantes de color
