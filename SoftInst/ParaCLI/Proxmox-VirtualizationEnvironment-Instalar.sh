@@ -363,12 +363,6 @@ elif [ $cVerSO == "12" ]; then
         echo "nameserver 9.9.9.9"         >> /etc/resolv.conf
         echo "nameserver 149.112.112.112" >> /etc/resolv.conf
 
-    # Reiniciar el servicio de red
-      echo ""
-      echo "    Reiniciando el servicio de red.."
-      echo ""
-      service networking restart
-
     # Notificar fin de la instalación
       echo ""
       echo -e "${cColorVerde}    Ejecución del script, finalizada.${cFinColor}"
@@ -377,6 +371,12 @@ elif [ $cVerSO == "12" ]; then
       echo -e "${cColorVerde}        touch /please-remove-proxmox-ve${cFinColor}"
       echo -e "${cColorVerde}        apt-get -y purge proxmox-ve${cFinColor}"
       echo ""
+
+    # Reiniciar el servicio de red
+      echo ""
+      echo "    Reiniciando el servicio de red.."
+      echo ""
+      service networking restart
 
   fi
 
