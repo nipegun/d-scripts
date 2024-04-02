@@ -112,19 +112,9 @@ elif [ $cVerSO == "12" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ProxmoxVE para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
-  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-      echo ""
-      echo -e "${cColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
-      echo ""
-      apt-get -y update
-      apt-get -y install wget
-      echo ""
-    fi
-
   # Agregar el repositorio de proxmox
     echo ""
-    echo "    Agregando el repositorio re Proxmox..."
+    echo "    Agregando el repositorio de Proxmox..."
     echo ""
     echo "deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription" > /etc/apt/sources.list.d/pve-no-subscription.list
 
@@ -132,6 +122,15 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Agregando a llave para firmar las descargas desde el repositorio de Proxmox..."
     echo ""
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}      El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        apt-get -y update
+        apt-get -y install wget
+        echo ""
+      fi
     wget http://download.proxmox.com/debian/proxmox-release-bookworm.gpg -O /etc/apt/trusted.gpg.d/proxmomx-release-bookworm.gpg
 
   # Actualizar la lista de paquetes disponibles en los repositorios activados
@@ -190,7 +189,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Desactivando el repositorio enterprise..."
     echo ""
-    rm -f /etc/apt/sources.list.d/pve-enterprise.list*
+    mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak
 
   # Volver a actualizar la lista de paquetes disponibles en los repositorios activados
     echo ""
