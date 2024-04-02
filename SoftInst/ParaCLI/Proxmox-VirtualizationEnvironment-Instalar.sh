@@ -172,7 +172,13 @@ elif [ $cVerSO == "12" ]; then
       echo "        El archivo /etc/network/interfaces ha quedado así:"
       echo ""
       cat /etc/network/interfaces
+    # /etc/network/interfaces
       echo ""
+      echo "      Editando el archivo /etc/resolv.conf..."
+      echo ""
+      echo "nameserver $cIPGateway"      > /etc/resolv.conf
+      echo "nameserver 9.9.9.9"         >> /etc/resolv.conf
+      echo "nameserver 149.112.112.112" >> /etc/resolv.conf
     # Reiniciar el servicio de networking
       echo ""
       echo "    Re-iniciando el servicio de networking"
