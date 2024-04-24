@@ -184,7 +184,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "  Listo para instalar..."
-echo ""
+  echo ""
 
   dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-dkms-firmware_5.6.5.24-1109583_all.deb
   dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-core_20.30-1109583_all.deb
@@ -194,5 +194,52 @@ echo ""
   apt -y install /root/paquetes/amdgpu-pro/amdgpu-pro-20.50-1234664-ubuntu-20.04/amdgpu-core_20.50-1234664_all.deb
   apt -y install /root/paquetes/amdgpu-pro/amdgpu-pro-20.50-1234664-ubuntu-20.04/amdgpu-dkms_5.9.10.69-1234664_all.deb
 
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación del controlador AMDGPU-Pro para Debian 12 (Bookworm)..."
+  echo ""
+  apt update
+  mkdir -p /root/Controladores/AMDGPUPro
+  vURLArchivo="https://repo.radeon.com/amdgpu-install/23.40.3/ubuntu/focal/amdgpu-install_6.0.60003-1_all.deb"
+  vURLArchivo="https://repo.radeon.com/amdgpu-install/23.40.3/ubuntu/jammy/amdgpu-install_6.0.60003-1_all.deb"
+  wget $vURLArchivo -O /root/Controladores/AMDGPUPro/AMDGPUPro.deb
+  apt install /root/Controladores/AMDGPUPro/AMDGPUPro.deb
+  amdgpu-install -y --usecase=graphics,rocm
+  usermod -a -G render,video nipegun
+  
+  amdgpu-uninstall -y
+
+  echo ""
+  echo "  Quitando arquitectura i386"
+  echo ""
+  dpkg --remove-architecture i386
+  apt-get -y update
+
+  #apt-get -y install wget
+  #mkdir -p /root/paquetes/amdgpu-pro
+  #rm -rf /root/paquetes/amdgpu-pro/*
+  #wget --referer https://www.amd.com/es/support $vURL$vArchivo -O /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz
+  #tar -xvf /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz -C  /root/paquetes/amdgpu-pro/
+  #rm -rf /root/paquetes/amdgpu-pro/amdgpu-pro.tar.xz
+
+
+  echo ""
+  echo "  Agregando arquitectura i386"
+  echo ""
+  dpkg --add-architecture i386
+  apt-get -y update
+
+  echo ""
+  echo "  Listo para instalar..."
+  echo ""
+
+  dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-dkms-firmware_5.6.5.24-1109583_all.deb
+  dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-core_20.30-1109583_all.deb
+  dpkg -i /root/paquetes/amdgpu-pro/amdgpu-pro-20.30-1109583-ubuntu-20.04/amdgpu-dkms_5.6.5.24-1109583_all.deb
+
+  apt -y install /root/paquetes/amdgpu-pro/amdgpu-pro-20.50-1234664-ubuntu-20.04/amdgpu-dkms-firmware_5.9.10.69-1234664_all.deb
+  apt -y install /root/paquetes/amdgpu-pro/amdgpu-pro-20.50-1234664-ubuntu-20.04/amdgpu-core_20.50-1234664_all.deb
+  apt -y install /root/paquetes/amdgpu-pro/amdgpu-pro-20.50-1234664-ubuntu-20.04/amdgpu-dkms_5.9.10.69-1234664_all.deb
 fi
 
