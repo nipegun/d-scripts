@@ -127,6 +127,17 @@ elif [ $cVerSO == "12" ]; then
             apt-get -y install librocsparse0
             apt-get -y install libspfft1
 
+            # Desinstalar
+              apt-get -y remove librocm-smi-dev
+              apt-get -y remove librocm-smi64-1
+              apt-get -y remove rocm-cmake
+              apt-get -y remove rocm-device-libs
+              apt-get -y remove rocm-smi
+              apt-get -y remove rocminfo
+              apt-get -y remove libamd-comgr2
+              apt-get -y remove librocsparse0
+              apt-get -y remove libspfft1
+
           ;;
 
           2)
@@ -160,6 +171,16 @@ elif [ $cVerSO == "12" ]; then
               echo "    Instalando el paquete rocm-opencl-runtime..."
               echo ""
               apt-get -y install rocm-opencl-runtime
+
+
+            # Desinstalar
+              # apt-get -y remove rocm-opencl-runtime
+              # apt-get -y remove clinfo
+              # apt-get -y remove gawk
+              # rm -f /etc/apt/sources.list.d/rocm.list
+              # rm -f /etc/apt/trusted.gpg.d/rocm-keyring.gpg
+              # apt-get -y update
+
           ;;
 
       esac
