@@ -139,6 +139,7 @@ elif [ $cVerSO == "12" ]; then
               echo ""
               echo "    Agregando el repositorio"
               echo ""
+              apt-get -y update
               apt-get -y install curl
               apt-get -y install gnupg2
               curl -fsSL https://repo.radeon.com/rocm/rocm.gpg.key | gpg --dearmor -o /etc/apt/trusted.gpg.d/rocm-keyring.gpg
@@ -148,6 +149,7 @@ elif [ $cVerSO == "12" ]; then
               echo ""
               echo "    Instalando paquetes necesarios..."
               echo ""
+              apt-get -y update
               apt-get -y install wget
               apt-get -y install gawk
               apt-get -y install linux-headers-amd64
