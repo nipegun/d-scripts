@@ -128,15 +128,15 @@ elif [ $cVerSO == "12" ]; then
             apt-get -y install libspfft1
 
             # Desinstalar
-              apt-get -y remove librocm-smi-dev
-              apt-get -y remove librocm-smi64-1
-              apt-get -y remove rocm-cmake
-              apt-get -y remove rocm-device-libs
-              apt-get -y remove rocm-smi
-              apt-get -y remove rocminfo
-              apt-get -y remove libamd-comgr2
-              apt-get -y remove librocsparse0
-              apt-get -y remove libspfft1
+              #apt-get -y remove librocm-smi-dev
+              #apt-get -y remove librocm-smi64-1
+              #apt-get -y remove rocm-cmake
+              #apt-get -y remove rocm-device-libs
+              #apt-get -y remove rocm-smi
+              #apt-get -y remove rocminfo
+              #apt-get -y remove libamd-comgr2
+              #apt-get -y remove librocsparse0
+              #apt-get -y remove libspfft1
 
           ;;
 
