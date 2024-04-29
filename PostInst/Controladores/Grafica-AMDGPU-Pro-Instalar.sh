@@ -201,12 +201,31 @@ elif [ $cVerSO == "12" ]; then
   echo ""
   apt update
   mkdir -p /root/Controladores/AMDGPUPro
-  vURLArchivo="https://repo.radeon.com/amdgpu-install/23.40.3/ubuntu/focal/amdgpu-install_6.0.60003-1_all.deb"
-  vURLArchivo="https://repo.radeon.com/amdgpu-install/23.40.3/ubuntu/jammy/amdgpu-install_6.0.60003-1_all.deb"
+  vURLArchivo="https://repo.radeon.com/amdgpu-install/23.40.2/ubuntu/focal/amdgpu-install_6.0.60003-1_all.deb"
+  vURLArchivo="https://repo.radeon.com/amdgpu-install/23.40.2/ubuntu/jammy/amdgpu-install_6.0.60003-1_all.deb"
   wget $vURLArchivo -O /root/Controladores/AMDGPUPro/AMDGPUPro.deb
   apt install /root/Controladores/AMDGPUPro/AMDGPUPro.deb
   amdgpu-install -y --usecase=graphics,rocm
   usermod -a -G render,video nipegun
+
+
+
+
+
+ttps://repo.radeon.com/amdgpu-install/23.40.2/ubuntu/jammy/amdgpu-install_6.0.60002-1_all.deb
+# Instalar ROCm
+apt-get -y install librocm-smi-dev
+apt-get -y install librocm-smi64-1
+apt-get -y install rocm-cmake
+apt-get -y install rocm-device-libs
+apt-get -y install rocm-smi
+apt-get -y install rocminfo
+apt-get -y install libamd-comgr2
+apt-get -y install librocsparse0
+apt-get -y install libspfft1 
+
+
+
   
   amdgpu-uninstall -y
 
