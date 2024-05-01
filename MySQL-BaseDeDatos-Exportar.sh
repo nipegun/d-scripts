@@ -13,12 +13,11 @@ FechaDeExp=$(date +A%YM%mD%d@%T)
 
 cCantArgumEsperados=4
 
-
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-if [ $# -ne $cCantArgsEsperados ]
+if [ $# -ne $cCantArgumEsperados ]
   then
     echo ""
     echo -e "${cColorRojo}Mal uso del script.${cFinColor}"
