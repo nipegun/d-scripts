@@ -168,5 +168,64 @@ elif [ $cVerSO == "11" ]; then
     echo "      systemctl start calibre-server"
     echo ""
 
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Calibre para Debian 12 (Bookworm)...${cFinColor}"
+  echo ""
+
+  # Instalar paquetes necesarios
+    apt-get -y install xdg-utils
+    apt-get -y install wget
+    apt-get -y install xz-utils
+    apt-get -y install python
+    apt-get -y install xvfb
+    apt-get -y install imagemagick
+    apt-get -y install libopengl0
+
+  # Descargar el instalador
+    mkdir /root/SoftInst/Calibre
+    cd /root/SoftInst/Calibre
+    wget --no-check-certificate https://download.calibre-ebook.com/linux-installer.sh
+    sh /root/SoftInst/Calibre/linux-installer.sh
+
+  # Crear el servicio
+    echo "[Unit]"                                             > /etc/systemd/system/calibre-server.service
+    echo " Description=Servidor Calibre"                     >> /etc/systemd/system/calibre-server.service
+    echo " After=network.target"                             >> /etc/systemd/system/calibre-server.service
+    echo ""                                                  >> /etc/systemd/system/calibre-server.service
+    echo "[Service]"                                         >> /etc/systemd/system/calibre-server.service
+    echo " Type=simple"                                      >> /etc/systemd/system/calibre-server.service
+    echo " User=root"                                        >> /etc/systemd/system/calibre-server.service
+    echo " Group=root"                                       >> /etc/systemd/system/calibre-server.service
+    echo ' ExecStart=/opt/calibre/calibre-server "/Calibre"' >> /etc/systemd/system/calibre-server.service
+    echo ""                                                  >> /etc/systemd/system/calibre-server.service
+    echo "[Install]"                                         >> /etc/systemd/system/calibre-server.service
+    echo " WantedBy=default.target"                          >> /etc/systemd/system/calibre-server.service
+
+  # Activar el servicio
+    systemctl enable calibre-server --now
+
+  # Notificar fin del script
+    echo ""
+    echo "  El servidor Calibre se ha instalado correctamente."
+    echo ""
+    echo "  Si quieres activar la autenticación, modifica el archivo /etc/systemd/system/calibre-server.service"
+    echo "  y lanza el servidor de la siguiente manera:"
+    echo ""
+    echo '    ExecStart=/opt/calibre/calibre-server "/Calibre" --enable-auth --access-log "/Calibre/Access.log"'
+    echo ""
+    echo "  Una vez iniciado con autenticación activada, para gestionar los usuarios deberás:"
+    echo "    1 - Parar el servidor, con:"
+    echo "      systemctl stop calibre-server"
+    echo "    2 - Lanzar el comando de administración de usuarios, con:"
+    echo "      calibre-server --manage-users"
+    echo "    3 - Volver a lanzar el servidor, con:"
+    echo "      systemctl start calibre-server"
+    echo ""
+    echo "  Para acceder a la web de calibre desde localhost ingresa a:"
+    echo "    http://127.0.0.1:8080/calibre o http://localhost:8080/calibre"
+    echo ""
+
 fi
 
