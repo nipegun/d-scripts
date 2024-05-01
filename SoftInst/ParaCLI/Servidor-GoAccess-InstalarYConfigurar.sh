@@ -277,6 +277,8 @@ elif [ $cVerSO == "11" ]; then
       echo "GoAcces instalado. Recuerda editar el archivo $2/.htaccess para poner la web correcta"
       echo ""
 
+  fi
+
 elif [ $cVerSO == "12" ]; then
 
   echo ""
@@ -285,7 +287,6 @@ elif [ $cVerSO == "12" ]; then
 
   CantArgsRequeridos=2
   
-
   if [ $# -ne $CantArgsRequeridos ]
     then
       echo ""
@@ -345,5 +346,7 @@ elif [ $cVerSO == "12" ]; then
       echo ""
       echo "GoAcces instalado. Recuerda editar el archivo $2/.htaccess para poner la web correcta"
       echo ""
+
+  fi
 
 fi
