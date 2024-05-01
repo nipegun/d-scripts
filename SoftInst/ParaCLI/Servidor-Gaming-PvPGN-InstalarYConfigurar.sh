@@ -40,7 +40,8 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming PvPGN para Debian 7 (Wheezy)..."  echo "------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming PvPGN para Debian 7 (Wheezy)..."
+  echo "------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -51,7 +52,8 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming PvPGN para Debian 8 (Jessie)..."  echo "------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming PvPGN para Debian 8 (Jessie)..."
+  echo "------------------------------------------------------------------------------------------"
   echo ""
 
   echo ""
@@ -90,13 +92,32 @@ echo ""
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming PvPGN para Debian 11 (Bullseye)..."  echo "---------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming PvPGN para Debian 11 (Bullseye)..."
   echo ""
 
   echo ""
   echo "  Instalando y configurando PvPGN..." 
-echo ""
+  echo ""
+  apt-get -y update
+  apt-get -y install pvpgn
+  apt-get -y install wget
+  service pvpgn stop
+  wget http://downloads.sourceforge.net/project/pvpgn.berlios/pvpgn-support-1.3.tar.gz -P /tmp/
+  pvpgn-support-installer -l /tmp/pvpgn-support-1.3.tar.gz
+  service pvpgn start
+
+  # Comandos a ejecutar manualmente
+  # adduser pvpgn
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación del servidor gaming PvPGN para Debian 12 (Bookworm)..."
+  echo ""
+
+  echo ""
+  echo "  Instalando y configurando PvPGN..." 
+  echo ""
   apt-get -y update
   apt-get -y install pvpgn
   apt-get -y install wget
