@@ -317,29 +317,29 @@ elif [ $cVerSO == "12" ]; then
       sed -i -e 's|ignore-crawlers false|ignore-crawlers true|g'                                                        /etc/goaccess/goaccess.conf
       sed -i -e 's|ignore-panel REFERRERS|#ignore-panel REFERRERS|g'                                                    /etc/goaccess/goaccess.conf
       sed -i -e 's|ignore-panel KEYPHRASES|#ignore-panel KEYPHRASES|g'                                                  /etc/goaccess/goaccess.conf
-      echo "#!/bin/bash"                                                                                                                              > /root/scripts/ArrancarStats.sh
-      echo ""                                                                                                                                        >> /root/scripts/ArrancarStats.sh
-      echo "goaccess -p /etc/goaccess/goaccess.conf -f $1/access.log -o $2/index.html --real-time-html --daemon --pid-file=/etc/goaccess/pid.number" >> /root/scripts/ArrancarStats.sh
-      chmod +x /root/scripts/ArrancarStats.sh
-      /root/scripts/ArrancarStats.sh
-      echo ""                                  >> /root/scripts/ComandosPostArranque.sh
-      echo "# Arrancar estadísticas de la web" >> /root/scripts/ComandosPostArranque.sh
-      echo "/root/scripts/ArrancarStats.sh"    >> /root/scripts/ComandosPostArranque.sh
-      echo ""                                  >> /root/scripts/ComandosPostArranque.sh
+      echo "#!/bin/bash"                                                                                                                              > /root/scripts/ParaEsteDebian/ArrancarStats.sh
+      echo ""                                                                                                                                        >> /root/scripts/ParaEsteDebian/ArrancarStats.sh
+      echo "goaccess -p /etc/goaccess/goaccess.conf -f $1/access.log -o $2/index.html --real-time-html --daemon --pid-file=/etc/goaccess/pid.number" >> /root/scripts/ParaEsteDebian/ArrancarStats.sh
+      chmod +x                                                                                                                                          /root/scripts/ParaEsteDebian/ArrancarStats.sh
+      /root/scripts/ParaEsteDebian/ArrancarStats.sh
+      echo ""                                  >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+      echo "# Arrancar estadísticas de la web" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+      echo "/root/scripts/ArrancarStats.sh"    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+      echo ""                                  >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
     
-      echo "RewriteEngine On" > $2/.htaccess
-      echo "" >> $2/.htaccess
+      echo "RewriteEngine On"                                                         > $2/.htaccess
+      echo ""                                                                        >> $2/.htaccess
       echo "# Si alguien llega a la web desde otro lugar que no sea lapropiaweb.com" >> $2/.htaccess
-      echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?lapropiaweb\.com/ [NC]" >> $2/.htaccess
-      echo "" >> $2/.htaccess
-      echo "#, pide directamente por un archivo con extensión .html" >> $2/.htaccess
-      echo "RewriteCond %{REQUEST_URI} !hotlink\.(html) [NC]" >> $2/.htaccess
-      echo "" >> $2/.htaccess
-      echo "# y no tiene la sesión iniciada en WordPress" >> $2/.htaccess
-      echo "RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in.*$ [NC]" >> $2/.htaccess
-      echo "" >> $2/.htaccess
-      echo "# Redirigirlo a google.com" >> $2/.htaccess
-      echo "RewriteRule .*\.(log)$ http://google.com/ [NC]" >> $2/.htaccess
+      echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?lapropiaweb\.com/ [NC]"     >> $2/.htaccess
+      echo ""                                                                        >> $2/.htaccess
+      echo "#, pide directamente por un archivo con extensión .html"                 >> $2/.htaccess
+      echo "RewriteCond %{REQUEST_URI} !hotlink\.(html) [NC]"                        >> $2/.htaccess
+      echo ""                                                                        >> $2/.htaccess
+      echo "# y no tiene la sesión iniciada en WordPress"                            >> $2/.htaccess
+      echo "RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in.*$ [NC]"              >> $2/.htaccess
+      echo ""                                                                        >> $2/.htaccess
+      echo "# Redirigirlo a google.com"                                              >> $2/.htaccess
+      echo "RewriteRule .*\.(log)$ http://google.com/ [NC]"                          >> $2/.htaccess
       echo ""
     
       echo ""
