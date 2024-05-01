@@ -224,7 +224,7 @@ elif [ $cVerSO == "12" ]; then
     echo "      systemctl start calibre-server"
     echo ""
     echo "  Para acceder a la web de calibre desde localhost ingresa a:"
-    echo "    http://127.0.0.1:8080 o http://localhost:8080"
+    echo "    http://127.0.0.1:8080 o http://localhost:8080/calibre"
     echo ""
 
 fi
