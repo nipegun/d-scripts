@@ -96,9 +96,20 @@ elif [ $cVerSO == "11" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de BitWarden para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de BitWarden para Debian 12 (Bookworm)...${cFinColor}"
+  echo ""
+
   # Desinstalar posibles versiones previas
     echo ""
-    echo "    Desinstalando posibles versiones previas..."    echo ""
+    echo "    Desinstalando posibles versiones previas..."
+    echo ""
     apt-get -y remove docker
     apt-get -y remove docker-engine
     apt-get -y remove docker.io
@@ -109,7 +120,8 @@ elif [ $cVerSO == "11" ]; then
  
   # Agregar el repositorio de Docker
     echo ""
-    echo "    Agregando repositorio de docker..."    echo ""
+    echo "    Agregando repositorio de docker..."
+    echo ""
     apt-get -y update
     apt-get -y install ca-certificates
     apt-get -y install curl
@@ -124,7 +136,8 @@ elif [ $cVerSO == "11" ]; then
 
   # Instalar Docker Engine
     echo ""
-    echo "    Instalando docker engine..."    echo ""
+    echo "    Instalando docker engine..."
+    echo ""
     apt-get -y install docker-ce
     apt-get -y install docker-ce-cli
     apt-get -y install containerd.io
@@ -134,35 +147,65 @@ elif [ $cVerSO == "11" ]; then
 
   # Crear usuario y grupo
     echo ""
-    echo "    Creando el usuario bitwarden..."    echo ""
+    echo "    Creando el usuario bitwarden..."
+    echo ""
     adduser bitwarden
+
     #echo ""
-    #echo "    Asignando contraseña al usuario bitwarden..."    #echo ""
+    #echo "    Asignando contraseña al usuario bitwarden..."
+    #echo ""
     #passwd bitwarden
+
     echo ""
-    echo "    Creando el grupo docker..."    echo ""
+    echo "    Creando el grupo docker..."
+    echo ""
     groupadd docker
+
     echo ""
-    echo "    Agregando el usuario bitwarden al grupo docker..."    echo ""
+    echo "    Agregando el usuario bitwarden al grupo docker..."
+    echo ""
     usermod -aG docker bitwarden
+
     echo ""
-    echo "    Creando la carpeta de instalación para bitwarden..."    echo ""
+    echo "    Creando la carpeta de instalación para bitwarden..."
+    echo ""
     mkdir /opt/bitwarden
     chmod -R 700 /opt/bitwarden
     chown -R bitwarden:bitwarden /opt/bitwarden
 
   # Instalar bitwarden desde el script oficial
     echo ""
-    echo "    Instalando BitWarden usando el script oficial..."    echo ""
-    mkdir /opt/bitwarden
+    echo "    Instalando BitWarden usando el script oficial..."
+    echo ""
+    cd /opt/bitwarden
     curl -Lso bitwarden.sh https://go.btwrdn.co/bw-sh && chmod 700 bitwarden.sh
-    ./bitwarden.sh install
+    chown bitwarden:bitwarden /opt/bitwarden/ -R
+    #./bitwarden.sh install
+    su - bitwarden -c "/opt/bitwarden/bitwarden.sh install"
 
   # Agregando bitwarden a los ComandosPostArranque
-    echo ""                                    >> /root/scripts/ComandosPostArranque.sh
-    echo "# Iniciar BitWarden"                 >> /root/scripts/ComandosPostArranque.sh
-    echo "  /opt/bitwarden/bitwarden.sh start" >> /root/scripts/ComandosPostArranque.sh
-    echo ""                                    >> /root/scripts/ComandosPostArranque.sh
+    echo ""                                                        >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo "# Iniciar BitWarden"                                     >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo "  #/opt/bitwarden/bitwarden.sh start"                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo '  su - bitwarden -c "/opt/bitwarden/bitwarden.sh start"' >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+    echo ""                                                        >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+  # Notificar fin del ejecución del script
+    echo ""
+    echo "  Ejecución del script de instalación de Bitwarden, finalizada."
+    echo ""
+    echo "    La ID de instalación y la llave se han guardado en:"
+    echo "      /opt/bitwarden/bwdata/env/global.override.env"
+    echo ""
+    echo "    Si necesitas hacer cambios adicionales en la configuración edita:"
+    echo "      /opt/bitwarden/bwdata/config.yml"
+    echo "    y luego ejecuta:"
+    echo "      /opt/bitwarden/bitwarden.sh rebuild o /opt/bitwarden/bitwarden.sh update"
+    echo ""
+    echo "    Para actualizar Bitwarden, ejecuta:"
+    echo "      /opt/bitwarden/bitwarden.sh updateself"
+    echo "    y luego:"
+    echo "      /opt/bitwarden/bitwarden.sh update"
+    echo ""
 
 fi
-
