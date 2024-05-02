@@ -190,6 +190,15 @@ elif [ $cVerSO == "12" ]; then
     echo '  su - bitwarden -c "/opt/bitwarden/bitwarden.sh start"' >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
     echo ""                                                        >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
+  # Reparar que no se pueda crear la primera cuenta
+    su - bitwarden -c "/opt/bitwarden/bitwarden.sh stop"
+    vIDAdmin=$(docker images --filter=reference=bitwarden/admin --format "{{.ID}}")
+    vIDMSSQL=$(docker images --filter=reference=bitwarden/mssql --format "{{.ID}}")
+    docker image rm $vIDAdmin $vIDMSSQL
+    su - bitwarden -c "/opt/bitwarden/bitwarden.sh updateself"
+    su - bitwarden -c "/opt/bitwarden/bitwarden.sh update"
+    su - bitwarden -c "/opt/bitwarden/bitwarden.sh start"
+
   # Notificar fin del ejecución del script
     echo ""
     echo "  Ejecución del script de instalación de Bitwarden, finalizada."
@@ -206,6 +215,9 @@ elif [ $cVerSO == "12" ]; then
     echo "      /opt/bitwarden/bitwarden.sh updateself"
     echo "    y luego:"
     echo "      /opt/bitwarden/bitwarden.sh update"
+    echo ""
+    echo "    Para registrar la primera cuenta accede a:"
+    echo "      $(cat /opt/bitwarden/bwdata/env/global.override.env | grep vault | cut -d'=' -f2)/#/register"
     echo ""
 
 fi
