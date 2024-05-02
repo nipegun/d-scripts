@@ -106,6 +106,38 @@ elif [ $cVerSO == "11" ]; then
   echo ""
   echo "    Volviendo a iniciar portainer..."
   echo ""
-  /root/scripts/DockerCE-Cont-PortainerCE-Iniciar.sh
+  /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de actualización de PortainerCE en el DockerCE de Debian 12 (Bookworm)..."
+  echo ""
+
+  echo ""
+  echo "    Obteniendo el nombre del contenedor de Portainer..."
+  echo ""
+  vNombreContenedorContainer=$(docker container ls | grep ortainer | rev | cut -d' ' -f1 | rev)
+  echo "      El nombre es: $vNombreContenedorContainer."
+
+  echo ""
+  echo "    Deteniendo el contenedor con nombre $vNombreContenedorContainer..."
+  echo ""
+  docker stop $vNombreContenedorContainer
+
+  echo ""
+  echo "    Borrando el contenedor con nombre $vNombreContenedorContainer..."
+  echo ""
+  docker rm $vNombreContenedorContainer
+
+  echo ""
+  echo "    Descargando la última versión del contenedor de portainer..."
+  echo ""
+  docker pull cr.portainer.io/portainer/portainer-ce
+
+  echo ""
+  echo "    Volviendo a iniciar portainer..."
+  echo ""
+  /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
 
 fi
