@@ -30,24 +30,24 @@ if [ $# -ne $cCantArgumEsperados ]
     exit
   else
     echo ""
-    grep -rnw --color -e "$1" /bin
-    grep -rnw --color -e "$1" /boot
-    grep -rnw --color -e "$1" /dev
-    grep -rnw --color -e "$1" /etc
-    grep -rnw --color -e "$1" /home
-    grep -rnw --color -e "$1" /lib
-    grep -rnw --color -e "$1" /lib64
-    grep -rnw --color -e "$1" /lost+found
-    grep -rnw --color -e "$1" /media
-    grep -rnw --color -e "$1" /mnt
-    grep -rnw --color -e "$1" /opt
-    grep -rnw --color -e "$1" /root
-    grep -rnw --color -e "$1" /run
-    grep -rnw --color -e "$1" /sbin
-    grep -rnw --color -e "$1" /srv
-    grep -rnw --color -e "$1" /tmp
-    grep -rnw --color -e "$1" /usr
-    grep -rnw --color -e "$1" /var
+    grep -rnw --color -e "$1" /bin        2> /dev/null
+    grep -rnw --color -e "$1" /boot       2> /dev/null
+    grep -rnw --color -e "$1" /dev        2> /dev/null
+    grep -rnw --color -e "$1" /etc        2> /dev/null
+    grep -rnw --color -e "$1" /home       2> /dev/null
+    grep -rnw --color -e "$1" /lib        2> /dev/null
+    grep -rnw --color -e "$1" /lib64      2> /dev/null
+    grep -rnw --color -e "$1" /lost+found 2> /dev/null
+    grep -rnw --color -e "$1" /media      2> /dev/null
+    grep -rnw --color -e "$1" /mnt        2> /dev/null
+    grep -rnw --color -e "$1" /opt        2> /dev/null
+    grep -rnw --color -e "$1" /root       2> /dev/null
+    grep -rnw --color -e "$1" /run        2> /dev/null
+    grep -rnw --color -e "$1" /sbin       2> /dev/null
+    grep -rnw --color -e "$1" /srv        2> /dev/null
+    grep -rnw --color -e "$1" /tmp        2> /dev/null
+    grep -rnw --color -e "$1" /usr        2> /dev/null
+    grep -rnw --color -e "$1" /var        2> /dev/null
     echo ""
 fi
 
