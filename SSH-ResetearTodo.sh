@@ -8,8 +8,8 @@
 # ----------
 # Script de NiPeGun para resetear SSH
 #
-#  Ejecución remota:
-#    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SSH-ResetearTodo.sh | bash
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SSH-ResetearTodo.sh | bash
 # ----------
 
 echo ""
