@@ -62,9 +62,6 @@ vFecha=$(date +%s%N)
     echo ""
   fi
 
-vSensor="procesador"
-vTemperatura=$(/root/scripts/d-scripts/Hardware-Procesador-Temperatura-Medir.sh)
-
 # Obtener información
   for i in "${aDiscosTotales[@]}"
     do
@@ -73,7 +70,7 @@ vTemperatura=$(/root/scripts/d-scripts/Hardware-Procesador-Temperatura-Medir.sh)
       # Asignar nombre al sensor
         vSensor=$(echo $vIdDispNVMe | cut -d'/' -f3)
       # Obtener la temperatura
-        vTemperatura=$(nvme smart-log "$vIdDispNVMe" | grep temperature | cut -d':' -f2 | cut -d' ' -f2)
+        vTemperatura=$(nvme smart-log "$vIdDispNVMe" | grep temperature | cut -d':' -f2 | cut -d' ' -f2 | sed 's-°-:-g' | cut -d":" -f1)
       # Registrar
         curl -XPOST http://$vHostInflux:$vPuertoInflux/write?db=$vBaseDeDatos --data-binary "$vHost,sensor=$vSensor temperatura=$vTemperatura $vFecha"
     done
