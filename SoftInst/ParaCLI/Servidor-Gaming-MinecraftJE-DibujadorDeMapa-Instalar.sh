@@ -72,8 +72,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 10 (Buster)..."  echo "----------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 10 (Buster)..."
   echo ""
 
   echo ""
@@ -102,8 +101,36 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 11 (Bullseye)..."  echo "------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 11 (Bullseye)..."
+  echo ""
+
+  echo ""
+  echo -e "${cColorVerde}  Instalando el dibujador del mapa...${cFinColor}"
+  echo ""
+
+  apt-get -y update > /dev/null
+  apt-get -y install python3-pil
+  apt-get -y install python3-dev
+  apt-get -y install python3-numpy
+  apt-get -y install git
+  apt-get -y install unzip
+  mkdir -p /root/SoftInst/ 2> /dev/null
+  cd /root/SoftInst/
+  rm -rf /root/SoftInst/Minecraft-Overviewer/
+  git clone git://github.com/overviewer/Minecraft-Overviewer.git
+  cd Minecraft-Overviewer
+  python3 setup.py build
+  ln -s /root/SoftInst/Minecraft-Overviewer/overviewer.py /usr/local/bin/mcoverviewer
+  
+  unzip -p /home/mcserver/serverfiles/minecraft_server.jar version.json > /tmp/version.json
+  ServerVersion=$(cat /tmp/version.json | grep arget | cut -d'"' -f4)
+  mkdir -p /root/.minecraft/versions/${ServerVersion}/
+  wget https://overviewer.org/textures/${ServerVersion} -O /root/.minecraft/versions/${ServerVersion}/${ServerVersion}.jar
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 12 (Bookworm)..."
   echo ""
 
   echo ""
