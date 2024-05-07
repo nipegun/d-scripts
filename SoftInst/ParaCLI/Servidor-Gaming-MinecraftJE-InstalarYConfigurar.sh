@@ -173,7 +173,7 @@ echo ""
   # bash linuxgsm.sh mcserver
   # ./mcserver install
 
-elif [ $cVerSO == "11" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 12 (Bookworm)..."
