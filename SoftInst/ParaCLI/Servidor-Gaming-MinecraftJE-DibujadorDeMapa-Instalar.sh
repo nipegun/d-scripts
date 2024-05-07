@@ -152,9 +152,10 @@ elif [ $cVerSO == "12" ]; then
   ln -s /root/SoftInst/Minecraft-Overviewer/overviewer.py /usr/local/bin/mcoverviewer
   
   unzip -p /home/mcserver/serverfiles/minecraft_server.jar version.json > /tmp/version.json
-  ServerVersion=$(cat /tmp/version.json | grep arget | cut -d'"' -f4)
-  mkdir -p /root/.minecraft/versions/${ServerVersion}/
-  wget https://overviewer.org/textures/${ServerVersion} -O /root/.minecraft/versions/${ServerVersion}/${ServerVersion}.jar
+  vServerVersion=$(cat /tmp/version.json | grep arget | cut -d'"' -f4)
+  vServerVersion=$(cat /tmp/version.json | grep id | head -n1 | cut -d'"' -f4)
+  mkdir -p /root/.minecraft/versions/${vServerVersion}/
+  wget https://overviewer.org/textures/${vServerVersion} -O /root/.minecraft/versions/${vServerVersion}/${vServerVersion}.jar
 
 fi
 
