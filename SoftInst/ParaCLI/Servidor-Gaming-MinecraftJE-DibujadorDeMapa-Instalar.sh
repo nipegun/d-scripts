@@ -61,8 +61,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 9 (Stretch)..."  echo "----------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 9 (Stretch)..."
   echo ""
 
   echo ""
@@ -146,7 +145,7 @@ elif [ $cVerSO == "12" ]; then
   mkdir -p /root/SoftInst/ 2> /dev/null
   cd /root/SoftInst/
   rm -rf /root/SoftInst/Minecraft-Overviewer/
-  git clone git://github.com/overviewer/Minecraft-Overviewer.git
+  git clone --progress --verbose git://github.com/overviewer/Minecraft-Overviewer.git
   cd Minecraft-Overviewer
   python3 setup.py build
   ln -s /root/SoftInst/Minecraft-Overviewer/overviewer.py /usr/local/bin/mcoverviewer
