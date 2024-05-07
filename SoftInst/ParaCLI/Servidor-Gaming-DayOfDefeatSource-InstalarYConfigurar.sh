@@ -61,8 +61,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de Day of Defeat Source para Debian 9 (Stretch)..."  echo "-------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de Day of Defeat Source para Debian 9 (Stretch)..."
   echo ""
 
   echo ""
@@ -72,8 +71,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "-------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de Day of Defeat Source para Debian 10 (Buster)..."  echo "-------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de Day of Defeat Source para Debian 10 (Buster)..."
   echo ""
 
   echo ""
@@ -82,7 +80,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "  Instalando dependencias..." 
-echo ""
+  echo ""
   dpkg --add-architecture i386
   apt-get -y update
   apt-get -y install mailutils
@@ -126,8 +124,7 @@ echo ""
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de Day of Defeat Source para Debian 11 (Bullseye)..."  echo "---------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de Day of Defeat Source para Debian 11 (Bullseye)..."
   echo ""
 
   echo ""
@@ -136,7 +133,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "  Instalando dependencias..." 
-echo ""
+  echo ""
   dpkg --add-architecture i386
   apt-get -y update
   apt-get -y install mailutils
@@ -176,6 +173,61 @@ echo ""
   # chmod +x linuxgsm.sh
   # bash linuxgsm.sh dodsserver
   #./dodsserver install
+  
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación del servidor gaming de Day of Defeat Source para Debian 12 (Bookworm)..."
+  echo ""
+
+  echo ""
+  echo -e "${cColorVerde}  Instalando el servidor dodsserver...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo "  Instalando dependencias..." 
+  echo ""
+  dpkg --add-architecture i386
+  apt-get -y update
+  apt-get -y install bc
+  apt-get -y install binutils
+  apt-get -y install bsdmainutils
+  apt-get -y install bzip2
+  apt-get -y install ca-certificates
+  apt-get -y install cpio
+  apt-get -y install curl
+  apt-get -y install distro-info
+  apt-get -y install file
+  apt-get -y install gzip
+  apt-get -y install hostname
+  apt-get -y install jq
+  apt-get -y install lib32gcc-s1
+  apt-get -y install lib32stdc++6
+  apt-get -y install libsdl2-2.0-0:i386
+  apt-get -y install netcat-openbsd
+  apt-get -y install pigz
+  apt-get -y install python3
+  apt-get -y install steamcmd
+  apt-get -y install tar
+  apt-get -y install tmux
+  apt-get -y install unzip
+  apt-get -y install util-linux
+  apt-get -y install uuid-runtime
+  apt-get -y install wget
+  apt-get -y install xz-utils
+
+  # Crear usuario dodsserver
+    adduser dodsserver
+
+  # Bajar script de instalación
+    su - dodsserver -c "wget -O  /home/dodsserver/linuxgsm.sh https://linuxgsm.sh"
+    su - dodsserver -c "chmod +x /home/dodsserver/linuxgsm.sh"
+
+  # Ejecutar selector de script
+    su - dodsserver -c "bash     /home/dodsserver/linuxgsm.sh dodsserver"
+
+  # Instalar servidor
+    su - dodsserver -c "bash     /home/dodsserver/dodsserver install"
 
 fi
 
