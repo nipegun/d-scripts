@@ -122,8 +122,7 @@ echo ""
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 11 (Bullseye)..."  echo "------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 11 (Bullseye)..."
   echo ""
 
   echo ""
@@ -133,6 +132,60 @@ elif [ $cVerSO == "11" ]; then
   echo ""
   echo "  Instalando dependencias..." 
 echo ""
+  dpkg --add-architecture i386
+  apt-get -y update
+  apt-get -y install mailutils
+  apt-get -y install postfix
+  apt-get -y install curl
+  apt-get -y install wget
+  apt-get -y install file
+  apt-get -y install tar
+  apt-get -y install bzip2
+  apt-get -y install gzip
+  apt-get -y install unzip
+  apt-get -y install bsdmainutils
+  apt-get -y install python
+  apt-get -y install util-linux
+  apt-get -y install ca-certificates
+  apt-get -y install binutils
+  apt-get -y install bc
+  apt-get -y install jq
+  apt-get -y install tmux
+  apt-get -y install netcat
+  apt-get -y install distro-info
+  # Instalar la última versión de java
+    # apt-get -y install default-jre # No es suficiente porque instala java 11 en Bullseye
+    # Determinar la última versión
+      vUltVersJava=$(apt-cache search openjdk | grep jre | grep runtime | grep -v nvidia | grep -v headless | tail -n1 | cut -d' ' -f1)
+    apt-get -y install $vUltVersJava
+
+  echo ""
+  echo "  Dependencias instaladas."
+  echo "  Revisa el script porque hay comandos que tendrás que ejecutar manualmente"
+  echo "  para terminar de instalar el servidor de MinecraftJE."
+  echo ""
+
+  # Comandos a ejecutar manualmente
+  # adduser mcserver
+  # su - mcserver
+  # wget -O linuxgsm.sh https://linuxgsm.sh
+  # chmod +x linuxgsm.sh
+  # bash linuxgsm.sh mcserver
+  # ./mcserver install
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 12 (Bookworm)..."
+  echo ""
+
+  echo ""
+  echo -e "${cColorVerde}  Instalando el servidor mcserver...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo "  Instalando dependencias..." 
+  echo ""
   dpkg --add-architecture i386
   apt-get -y update
   apt-get -y install mailutils
