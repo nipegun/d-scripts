@@ -39,8 +39,7 @@ cFinColor='\033[0m'
 if [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de Call of Duty 4 Modern Warfare para Debian 7 (Wheezy)..."  echo "---------------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de Call of Duty 4 Modern Warfare para Debian 7 (Wheezy)..."
   echo ""
 
   echo ""
@@ -50,8 +49,7 @@ if [ $cVerSO == "7" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de Call of Duty 4 Modern Warfare para Debian 8 (Jessie)..."  echo "---------------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de Call of Duty 4 Modern Warfare para Debian 8 (Jessie)..."
   echo ""
 
   echo ""
@@ -61,8 +59,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de Call of Duty 4 Modern Warfare para Debian 9 (Stretch)..."  echo "----------------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de Call of Duty 4 Modern Warfare para Debian 9 (Stretch)..."
   echo ""
 
   echo ""
@@ -72,8 +69,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "----------------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de Call of Duty 4 Modern Warfare para Debian 10 (Buster)..."  echo "----------------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de Call of Duty 4 Modern Warfare para Debian 10 (Buster)..."
   echo ""
 
   echo ""
@@ -82,7 +78,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "  Instalando dependencias..." 
-echo ""
+  echo ""
   dpkg --add-architecture i386
   apt-get -y update
   apt-get -y install mailutils
@@ -140,13 +136,12 @@ echo ""
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "------------------------------------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación del servidor gaming de Call of Duty 4 Modern Warfare para Debian 11 (Bullseye)..."  echo "------------------------------------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación del servidor gaming de Call of Duty 4 Modern Warfare para Debian 11 (Bullseye)..."
   echo ""
 
   echo ""
   echo "  Instalando dependencias..." 
-echo ""
+  echo ""
   dpkg --add-architecture i386
   apt-get -y update
   apt-get -y install mailutils
@@ -184,6 +179,70 @@ echo ""
   # chmod +x linuxgsm.sh
   # bash linuxgsm.sh cod4server
   # ./cod4server install
+
+  # Cómo administrarlo
+  #
+  #./cod4server start
+  #./cod4server stop
+  #./cod4server restart
+  #./cod4server details
+  #./cod4server debug
+  #./cod4server backup
+  #./cod4server monitor
+  #./cod4server console 
+  #  To exit the console press CTRL+b d. Pressing CTRL+c will terminate the server.
+  #  
+  #Logs
+  #Server logs are available to monitor and diagnose your server. Script, console and game server (if available) logs are created for the server.
+  #/home/cod4server/logs
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación del servidor gaming de Call of Duty 4 Modern Warfare para Debian 12 (Bookworm)..."
+  echo ""
+
+  echo ""
+  echo "  Instalando dependencias..." 
+  echo ""
+  apt-get -y update
+  apt-get -y install bc
+  apt-get -y install binutils
+  apt-get -y install bsdmainutils
+  apt-get -y install bzip2
+  apt-get -y install ca-certificates
+  apt-get -y install cpio
+  apt-get -y install curl
+  apt-get -y install distro-info
+  apt-get -y install file
+  apt-get -y install gzip
+  apt-get -y install hostname
+  apt-get -y install jq
+  apt-get -y install lib32gcc-s1
+  apt-get -y install lib32stdc++6
+  apt-get -y install netcat-openbsd
+  apt-get -y install pigz
+  apt-get -y install python3
+  apt-get -y install tar
+  apt-get -y install tmux
+  apt-get -y install unzip
+  apt-get -y install util-linux
+  apt-get -y install uuid-runtime
+  apt-get -y install wget
+  apt-get -y install xz-utils
+
+  # Crear usuario cod4server
+    adduser cod4server
+
+  # Bajar script de instalación
+    su - cod4server -c "wget -O  /home/cod4server/linuxgsm.sh https://linuxgsm.sh"
+    su - cod4server -c "chmod +x /home/cod4server/linuxgsm.sh"
+
+  # Ejecutar selector de script
+    su - cod4server -c "bash     /home/cod4server/linuxgsm.sh cod4server"
+
+  # Instalar servidor
+    su - cod4server -c "bash     /home/cod4server/cod4server install"
 
   # Cómo administrarlo
   #
