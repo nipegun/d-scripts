@@ -142,6 +142,7 @@ elif [ $cVerSO == "12" ]; then
   apt-get -y install python3-numpy
   apt-get -y install git
   apt-get -y install unzip
+  apt-get -y install gcc
   mkdir -p /root/SoftInst/ 2> /dev/null
   cd /root/SoftInst/
   rm -rf /root/SoftInst/Minecraft-Overviewer/
