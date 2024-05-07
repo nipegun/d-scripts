@@ -198,14 +198,14 @@ elif [ $cVerSO == "12" ]; then
   apt-get -y install gzip
   apt-get -y install unzip
   apt-get -y install bsdmainutils
-  apt-get -y install python
+  apt-get -y install python3
   apt-get -y install util-linux
   apt-get -y install ca-certificates
   apt-get -y install binutils
   apt-get -y install bc
   apt-get -y install jq
   apt-get -y install tmux
-  apt-get -y install netcat
+  apt-get -y install netcat-traditional
   apt-get -y install distro-info
   # Instalar la última versión de java
     # apt-get -y install default-jre # No es suficiente porque instala java 11 en Bullseye
