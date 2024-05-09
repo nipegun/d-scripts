@@ -12,10 +12,10 @@
 #     - etc
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/WiFi-Broadcom-BCM4360.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/WiFi-Broadcom-BCM4360.sh | bash
 #
 # Ejecución remota con parámetros:
 #   curl -sL x | bash -s Parámetro1 Parámetro2
