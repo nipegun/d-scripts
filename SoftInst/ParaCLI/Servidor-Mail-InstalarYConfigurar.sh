@@ -18,6 +18,19 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Mail-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
+# Notificar inicio de ejecución del script
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de correo electrónico para Debian...${cFinColor}"
+  echo ""
+
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo ""
+    echo -e "${cColorRojo}    Este script está preparado para ejecutarse como root y no se ha ejecutado como root...${cFinColor}"
+    echo ""
+    exit
+  fi
+
 # Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
@@ -26,14 +39,6 @@
   # Para el color rojo también:
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
-
-# Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
-    echo ""
-    exit
-  fi
 
 vDominio="nubimae.com"
 vHostEsSubDominio="si" # Si el servidor de mail está en un host diferente al servidor web, por ejemplo
@@ -46,27 +51,6 @@ vCuartoOcteto=$(echo $vIPServMail  | cut -d '.' -f4)
 vIPDirecta="$vPrimerOcteto.$vSegundoOcteto.$vTercerOcteto"
 
 Fecha=$(date +A%YM%mD%d@%T)
-
-cColorAzul="\033[0;34m"
-cColorAzulClaro="\033[1;34m"
-cColorVerde='\033[1;32m'
-cColorRojo='\033[1;31m'
-cFinColor='\033[0m'
-
-# Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
-    exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update && apt-get -y install curl
-    echo ""
-  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
