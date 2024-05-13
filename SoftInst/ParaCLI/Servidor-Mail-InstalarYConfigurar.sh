@@ -134,6 +134,16 @@ elif [ $cVerSO == "11" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de correo para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de correo para Debian 12 (Bookworm)...${cFinColor}"
+  echo ""
+
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
