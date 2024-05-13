@@ -62,7 +62,7 @@ cFinColor='\033[0m'
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${cColorRojo}  curl no está instalado. Iniciando su instalación...${cFinColor}"
+    echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
     apt-get -y update && apt-get -y install curl
     echo ""
@@ -147,16 +147,17 @@ elif [ $cVerSO == "11" ]; then
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
       1 "Instalar servidor DNS en el propio servidor de correo." off
-      3 "Instalar el MTA (Mail Transport Agent) sendmail." off
+      2 "Instalar el MTA (Mail Transport Agent) sendmail." off
       3 "Instalar el MTA (Mail Transport Agent) postfix." off
       4 "Instalar el MTA (Mail Transport Agent) courier." off
-      5 "Instalar el MDA (Mail Delivery Agent) dovecot." off
-      6 "Instalar el MDA (Mail Delivery Agent) maildrop." off
-      7 "Instalar el MDA (Mail Delivery Agent) procmail." off
-      8 "Instalar el MUA (Mail User Agent) roundcube." off
-      9 "Instalar el MUA (Mail User Agent) squirrelmail." off
-      10 "Opción 5" off
+      5 "Instalar el MTA (Mail Transport Agent) exim." off
+      6 "Instalar el MDA (Mail Delivery Agent) dovecot." off
+      7 "Instalar el MDA (Mail Delivery Agent) maildrop." off
+      8 "Instalar el MDA (Mail Delivery Agent) procmail." off
+      9 "Instalar el MUA (Mail User Agent) roundcube." off
+      10 "Instalar el MUA (Mail User Agent) squirrelmail." off
       11 "Instalar y configurar mailutils" off
+      12 "Otro... no terminado" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   #clear
@@ -171,7 +172,8 @@ elif [ $cVerSO == "11" ]; then
             echo "  Instalando servidor DNS..."
             echo ""
 
-            apt-get -y update && apt-get -y install bind9
+            apt-get -y update
+            apt-get -y install bind9
 
             # Determinar si la IP directa es clase A, B o C para asignar la IP inversa
               if [ $(echo $vIPServMail | cut -d '.' -f1) == "10" ]; then # Clase A
@@ -348,6 +350,86 @@ elif [ $cVerSO == "11" ]; then
           5)
 
             echo ""
+            echo "  Instalando el MTA (Mail Transport Agent) exim..."
+            echo ""
+ 
+            apt-get -y update
+            apt-get -y install exim4
+            apt-get -y install courier-imap
+
+            # Crear la carpeta mail en cada carpeta de usuario
+              maildirmake /etc/skel/Maildir
+              maildirmake ~root/Maildir
+              chown root:root ~root/Maildir -R
+
+            # Reconfigurar Exim4
+              dpkg-reconfigure exim4-config
+
+            # Generar el certificado SSL
+              /usr/share/doc/exim4-base/examples/exim-gencert
+          
+            # Activar TLS
+              echo "MAIN_TLS_ENABLE = true"      > /etc/exim4/exim4.conf.localmacros
+              echo "tls_on_connect_ports = 465" >> /etc/exim4/exim4.conf.localmacros
+              sed -i -e "s|SMTPLISTENEROPTIONS=''|SMTPLISTENEROPTIONS='-oX 465:25:587 -oP /var/run/exim4/exim.pid'|g" /etc/default/exim4
+              echo "MAIN_TLS_ENABLE = yes"      >> /etc/exim4/exim4.conf.template
+              echo "tls_on_connect_ports=465"   >> /etc/exim4/exim4.conf.template
+              echo "rfc1413_query_timeout = 0s" >> /etc/exim4/exim4.conf.template
+          
+            # Instalar el daemon SaslAuth
+              apt-get -y install sasl2-bin
+              sed -i -e 's|START=no|START=yes|g' /etc/default/saslauthd
+              adduser Debian-exim sasl
+          
+            # Borrar 7 líneas después de "# plain_saslauthd_server:"
+              sed -i -e '/# plain_saslauthd_server:/{n;N;N;N;N;N;N;N;d}' /etc/exim4/exim4.conf.template
+          
+            # Descomentar la línea "# plain_saslauthd_server:" y agregar el resto de líneas antes borradas pero ahora descomentadas
+              sed -i -e 's|# plain_saslauthd_server:|\
+              plain_saslauthd_server: \
+              driver = plaintext \
+              public_name = PLAIN \
+              server_condition = ${if saslauthd{{$auth2}{$auth3}}{1}{0}} \
+              server_set_id = $auth2 \
+              server_prompts = : \
+              .ifndef AUTH_SERVER_ALLOW_NOTLS_PASSWORDS \
+              server_advertise_condition = ${if eq{$tls_in_cipher}{}{}{*}} \
+              .endif|g' /etc/exim4/exim4.conf.template
+          
+            # Configurar IMAP
+              rm -rf /etc/courier/*.pem
+              make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/courier/imapd.pem
+              service courier-imap restart
+              service courier-imap-ssl restart
+              service courier-authdaemon restart
+
+            # Comprobar si el paquete net-tools está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s net-tools 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${cColorRojo}  El paquete net-tools no está instalado. Iniciando su instalación...${cFinColor}"
+                echo ""
+                apt-get -y update
+                apt-get -y install net-tools
+                echo ""
+              fi
+              netstat -atupln | grep 465
+          
+            # Instalar y configurar SpamAssassin
+              apt-get -y install spamassassin
+              systemctl enable spamassassin.service
+          
+            echo ""
+            echo "Sistema instalado."
+            echo ""
+            echo "Para crear un usuario sin acceso al shell ejecuta:"
+            echo "/root/scripts/d-scripts/UsuarioNuevoSinShell.sh"
+            echo ""
+ 
+          ;;
+
+          6)
+
+            echo ""
             echo "  Instalando el MDA (Mail Delivery Agent) dovecot..."
             echo ""
 
@@ -358,7 +440,8 @@ elif [ $cVerSO == "11" ]; then
               apt-get -y install dovecot-imapd
             # Instalar el demonio para POP3
               #echo ""
-              #echo "    Instalando el servicio para POP3..."              #echo ""
+              #echo "    Instalando el servicio para POP3..."
+              #echo ""
               #apt-get -y install dovecot-pop3d
 
             # Realizar cambios en la configuración
@@ -393,7 +476,7 @@ elif [ $cVerSO == "11" ]; then
           ;;
 
 
-          6)
+          7)
 
             echo ""
             echo "  Instalando el MDA (Mail Delivery Agent) maildrop..."
@@ -403,7 +486,7 @@ elif [ $cVerSO == "11" ]; then
 
           ;;
 
-          7)
+          8)
 
             echo ""
             echo "  Instalando el MDA (Mail Delivery Agent) procmail..."
@@ -413,7 +496,7 @@ elif [ $cVerSO == "11" ]; then
 
           ;;
 
-          8)
+          9)
 
             echo ""
             echo "  Instalando el MUA (Mail User Agent) roundcube."
@@ -486,7 +569,7 @@ elif [ $cVerSO == "11" ]; then
 
           ;;
 
-          9)
+          10)
 
             echo ""
             echo "  Instalando el MUA (Mail User Agent) squirelmail."
@@ -496,10 +579,41 @@ elif [ $cVerSO == "11" ]; then
 
           ;;
 
-          10)
+          11)
+
+          echo ""
+          echo "  Instalando y configurando mailutils..."
+          echo ""
+
+          # Configurar mailutils
+            # Modificar mailutils para que sepa que los mails van a archivos separados
+              echo 'mailbox {'                                              > /etc/mailutils.conf
+              #echo '  mailbox-pattern "maildir:///home/${user}/Maildir";' >> /etc/mailutils.conf
+              echo '  mailbox-pattern "maildir:~/Maildir";'                >> /etc/mailutils.conf
+              echo '  mailbox-type maildir;'                               >> /etc/mailutils.conf
+              echo '}'                                                     >> /etc/mailutils.conf
+            # Hacer que el remitente venga siempre como del nombre del dominio, no del hostname
+              echo ""
+              echo "      Configurando mailutils para que el remitente sea $vDominio y no $(cat /etc/hostname)..."
+              echo ""
+              echo "address {"                 >> /etc/mailutils.conf
+              echo "  email-domain $vDominio;" >> /etc/mailutils.conf
+              echo "};"                        >> /etc/mailutils.conf
+          # Comprobar si el paquete mailutils está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s mailutils 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo -e "${cColorRojo}    El paquete mailutils no está instalado. Iniciando su instalación...${cFinColor}"
+              echo ""
+              apt-get -y update && apt-get -y install mailutils
+              echo ""
+            fi
+
+          ;;
+
+          12)
 
             echo ""
-            echo "  Otra..."
+            echo "  Otro..."
             echo ""
 
             ####### DNS
@@ -514,10 +628,12 @@ elif [ $cVerSO == "11" ]; then
        ##//     echo "$vDominio. IN MX 10 correo"      >> /etc/bind/db.$vDominio # Las cuentas de correo que entren en @hacsk4geeks.com serán redirigidas a la entrada correos
             # Comprobamos que la zona esté bien escrita:
              echo ""
-             echo "  Comprobando la sintaxis de la zona directa..."             echo ""
+             echo "  Comprobando la sintaxis de la zona directa..."
+             echo ""
              named-checkzone $vDominio /etc/bind/db.$vDominio.directa
              echo ""
-             echo "  Comprobando la sintaxis de la zona inversa..."             echo ""
+             echo "  Comprobando la sintaxis de la zona inversa..."
+             echo ""
              named-checkzone $vDominio /etc/bind/db.$vDominio.inversa
              
             # En bind 9 (zona inversa, db.0.168.192): # es mejor declararla para que el correo no acabe en spam
@@ -584,36 +700,6 @@ elif [ $cVerSO == "11" ]; then
             # Poner la configuracion de la base de datos 
               sed -i -e 's---g' /etc/roundcube/config.inc.php
             # 
-
-          ;;
-
-          11)
-
-          echo ""
-          echo "  Instalando y configurando mailutils..."          echo ""
-
-          # Configurar mailutils
-            # Modificar mailutils para que sepa que los mails van a archivos separados
-              echo 'mailbox {'                                              > /etc/mailutils.conf
-              #echo '  mailbox-pattern "maildir:///home/${user}/Maildir";' >> /etc/mailutils.conf
-              echo '  mailbox-pattern "maildir:~/Maildir";'                >> /etc/mailutils.conf
-              echo '  mailbox-type maildir;'                               >> /etc/mailutils.conf
-              echo '}'                                                     >> /etc/mailutils.conf
-            # Hacer que el remitente venga siempre como del nombre del dominio, no del hostname
-              echo ""
-              echo "      Configurando mailutils para que el remitente sea $vDominio y no $(cat /etc/hostname)..."
-              echo ""
-              echo "address {"                 >> /etc/mailutils.conf
-              echo "  email-domain $vDominio;" >> /etc/mailutils.conf
-              echo "};"                        >> /etc/mailutils.conf
-          # Comprobar si el paquete mailutils está instalado. Si no lo está, instalarlo.
-            if [[ $(dpkg-query -s mailutils 2>/dev/null | grep installed) == "" ]]; then
-              echo ""
-              echo -e "${cColorRojo}    El paquete mailutils no está instalado. Iniciando su instalación...${cFinColor}"
-              echo ""
-              apt-get -y update && apt-get -y install mailutils
-              echo ""
-            fi
 
           ;;
 
