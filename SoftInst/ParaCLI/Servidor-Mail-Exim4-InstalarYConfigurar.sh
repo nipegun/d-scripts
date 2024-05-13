@@ -12,9 +12,22 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Mail-Exim4-InstalarYConfigurar.sh | bash
 ------
 
-cColorRojo='\033[1;31m'
-cColorVerde='\033[1;32m'
-cFinColor='\033[0m'
+# Definir constantes de color
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo ""
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
+    echo ""
+    exit
+  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -76,34 +89,34 @@ elif [ $cVerSO == "10" ]; then
   apt-get -y install courier-imap
 
   # Crear la carpeta mail en cada carpeta de usuario
-  maildirmake /etc/skel/Maildir
-  maildirmake ~root/Maildir
-  chown root:root ~root/Maildir -R
+    maildirmake /etc/skel/Maildir
+    maildirmake ~root/Maildir
+    chown root:root ~root/Maildir -R
 
   # Reconfigurar Exim4
-  dpkg-reconfigure exim4-config
+    dpkg-reconfigure exim4-config
 
   # Generar el certificado SSL
-  /usr/share/doc/exim4-base/examples/exim-gencert
+    /usr/share/doc/exim4-base/examples/exim-gencert
           
   # Activar TLS
-  echo "MAIN_TLS_ENABLE = true" > /etc/exim4/exim4.conf.localmacros
-  echo "tls_on_connect_ports = 465" >> /etc/exim4/exim4.conf.localmacros
-  sed -i -e "s|SMTPLISTENEROPTIONS=''|SMTPLISTENEROPTIONS='-oX 465:25:587 -oP /var/run/exim4/exim.pid'|g" /etc/default/exim4
-  echo "MAIN_TLS_ENABLE = yes" >> /etc/exim4/exim4.conf.template
-  echo "tls_on_connect_ports=465" >> /etc/exim4/exim4.conf.template
-  echo "rfc1413_query_timeout = 0s" >> /etc/exim4/exim4.conf.template
+    echo "MAIN_TLS_ENABLE = true" > /etc/exim4/exim4.conf.localmacros
+    echo "tls_on_connect_ports = 465" >> /etc/exim4/exim4.conf.localmacros
+    sed -i -e "s|SMTPLISTENEROPTIONS=''|SMTPLISTENEROPTIONS='-oX 465:25:587 -oP /var/run/exim4/exim.pid'|g" /etc/default/exim4
+    echo "MAIN_TLS_ENABLE = yes" >> /etc/exim4/exim4.conf.template
+    echo "tls_on_connect_ports=465" >> /etc/exim4/exim4.conf.template
+    echo "rfc1413_query_timeout = 0s" >> /etc/exim4/exim4.conf.template
           
   # Instalar el daemon SaslAuth
-  apt-get -y install sasl2-bin
-  sed -i -e 's|START=no|START=yes|g' /etc/default/saslauthd
-  adduser Debian-exim sasl
+    apt-get -y install sasl2-bin
+    sed -i -e 's|START=no|START=yes|g' /etc/default/saslauthd
+    adduser Debian-exim sasl
           
   # Borrar 7 líneas después de "# plain_saslauthd_server:"
-  sed -i -e '/# plain_saslauthd_server:/{n;N;N;N;N;N;N;N;d}' /etc/exim4/exim4.conf.template
+    sed -i -e '/# plain_saslauthd_server:/{n;N;N;N;N;N;N;N;d}' /etc/exim4/exim4.conf.template
           
   # Descomentar la línea "# plain_saslauthd_server:" y agregar el resto de líneas antes borradas pero ahora descomentadas
-  sed -i -e 's|# plain_saslauthd_server:|\
+    sed -i -e 's|# plain_saslauthd_server:|\
     plain_saslauthd_server: \
     driver = plaintext \
     public_name = PLAIN \
@@ -115,17 +128,17 @@ elif [ $cVerSO == "10" ]; then
     .endif|g' /etc/exim4/exim4.conf.template
           
   # Configurar IMAP
-  rm -rf /etc/courier/*.pem
-  make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/courier/imapd.pem
-  service courier-imap restart
-  service courier-imap-ssl restart
-  service courier-authdaemon restart
+    rm -rf /etc/courier/*.pem
+    make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/courier/imapd.pem
+    service courier-imap restart
+    service courier-imap-ssl restart
+    service courier-authdaemon restart
 
   netstat -atupln | grep 465
           
   # Instalar y configurar SpamAssassin
-  apt-get -y install spamassassin
-  systemctl enable spamassassin.service
+    apt-get -y install spamassassin
+    systemctl enable spamassassin.service
           
   echo ""
   echo "Sistema instalado."
