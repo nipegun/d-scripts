@@ -348,6 +348,7 @@ echo ""
 
   # Fuentes
     apt-get -y install fonts-ubuntu
+    apt-get -y install fonts-ubuntu-console
     apt-get -y install fonts-freefont-ttf
     apt-get -y install fonts-freefont-otf
     apt-get -y install ttf-mscorefonts-installer
