@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para instalar y configurar la última versión de binwalk en Debian
+# Script de NiPeGun para instalar la última versión de binwalk en Debian
 #
 # Ejecución remota:
 #   curl -sL x | bash
