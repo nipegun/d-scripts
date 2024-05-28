@@ -108,9 +108,129 @@ elif [ $cVerSO == "11" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Binwalk para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+  # Instalar dependencias
+    echo ""
+    echo "    Instalando dependencias..."
+    echo ""
+    apt-get -y update
+    apt-get -y autoremove binwalk
+    apt-get -y install zlib1g-dev
+    apt-get -y install liblzma-dev
+    apt-get -y install liblzo2-dev
+    apt-get -y install wget
+    apt-get -y install tar
+    apt-get -y install python
+    apt-get -y install python3-pip
+    apt-get -y install python3-opengl
+    apt-get -y install python3-numpy
+    apt-get -y install python3-scipy
+    apt-get -y install mtd-utils
+    apt-get -y install gzip
+    apt-get -y install bzip2
+    apt-get -y install tar
+    apt-get -y install arj
+    apt-get -y install lhasa
+    apt-get -y install p7zip
+    apt-get -y install p7zip-full
+    apt-get -y install cabextract
+    apt-get -y install cramfsprogs
+    apt-get -y install cramfsswap
+    apt-get -y install squashfs-tools
+    apt-get -y install sleuthkit
+    apt-get -y install default-jdk
+    apt-get -y install lzop
+    apt-get -y install srecord
+
+    apt-get -y install libqt4-opengl          # No se instala
+    apt-get -y install python3-pyqt4          # No se instala
+    apt-get -y install python3-pyqt4.qtopengl # No se instala
+
+  # Instalar dependencias python
+    echo ""
+    echo "    Instalando dependencias de Python..."
+    echo ""
+    pip3 install nose
+    pip3 install coverage
+    pip3 install pycryptodome
+    pip3 install pyqtgraph
+    pip3 install capstone
+
+  # Instalar sasquatch
+    echo ""
+    echo "    Instalando sasquatch..."
+    echo ""
+    mkdir -p /root/SoftInst
+    rm -rf /root/SoftInst/sasquatch/
+    cd /root/SoftInst
+    git clone --quiet --depth 1 --branch "master" https://github.com/devttys0/sasquatch
+    cd /root/SoftInst/sasquatch
+    wget https://raw.githubusercontent.com/devttys0/sasquatch/82da12efe97a37ddcd33dba53933bc96db4d7c69/patches/patch0.txt
+    mv patch0.txt /root/SoftInst/sasquatch/patches/
+    ./build.sh
+
+  # Instalar jefferson
+    echo ""
+    echo "    Instalando jefferson..."
+    echo ""
+    mkdir -p /root/SoftInst
+    rm -rf /root/SoftInst/jefferson/
+    cd /root/SoftInst
+    git clone --quiet --depth 1 --branch "master" https://github.com/sviehb/jefferson
+    cd /root/SoftInst/jefferson
+    python3 -mpip install -r requirements.txt
+    python3 setup.py install
+
+  # Instalar ubi_reader
+    echo ""
+    echo "    Instalando ubi_reader..."
+    echo ""
+    mkdir -p /root/SoftInst
+    rm -rf /root/SoftInst/ubi_reader/
+    cd /root/SoftInst
+    git clone --quiet --depth 1 https://github.com/onekey-sec/ubi_reader
+    cd /root/SoftInst/ubi_reader/
+    pip install --user ubi_reader
+    cp -f /root/.local/bin/ubireader_display_blocks /bin/
+    cp -f /root/.local/bin/ubireader_display_info   /bin/
+    cp -f /root/.local/bin/ubireader_extract_files  /bin/
+    cp -f /root/.local/bin/ubireader_extract_images /bin/
+    cp -f /root/.local/bin/ubireader_list_files     /bin/
+    cp -f /root/.local/bin/ubireader_utils_info     /bin/
+
+  # Instalar yaffshiv
+    echo ""
+    echo "    Instalando yaffshiv..."
+    echo ""
+    mkdir -p /root/SoftInst
+    rm -rf /root/SoftInst/yaffshiv/
+    cd /root/SoftInst
+    git clone --quiet --depth 1 --branch "master" https://github.com/devttys0/yaffshiv
+    cd /root/SoftInst/yaffshiv
+    python2 setup.py install
+
+  # Instalar cramfs-tools
+    echo ""
+    echo "    Instalando cramfs-tools..."
+    echo ""
+    mkdir -p /root/SoftInst
+    rm -rf /root/SoftInst/cramfs-tools/
+    cd /root/SoftInst
+    git clone --quiet --depth 1 --branch "master" https://github.com/npitre/cramfs-tools
+    cd /root/SoftInst/cramfs-tools/
+    make
+    install mkcramfs "/usr/local/bin"
+    install cramfsck "/usr/local/bin"
+
+  # Instalar binwalk
+    echo ""
+    echo "    Instalando binwalk desde Github..."
+    echo ""
+    mkdir -p /root/SoftInst
+    rm -rf /root/SoftInst/binwalk/
+    cd /root/SoftInst
+    git clone --quiet --depth 1 --branch "master" https://github.com/ReFirmLabs/binwalk
+    cd /root/SoftInst/binwalk/
+    python3 setup.py install
 
 elif [ $cVerSO == "12" ]; then
 
