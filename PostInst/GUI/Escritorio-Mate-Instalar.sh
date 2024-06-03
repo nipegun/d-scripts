@@ -66,7 +66,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación del escritorio Mate en Debian 9 (Stretch)..." 
-echo ""
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
@@ -76,7 +76,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "  Iniciando el script de personalización del escritorio Mate en Debian 10 (Buster)..." 
-echo ""
+  echo ""
 
   apt-get -y update
   apt-get -y install tasksel
