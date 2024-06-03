@@ -88,183 +88,14 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 11 (Bullseye)..."  
   echo ""
-
-  # Desinstalar cosas específicas de gnome
-    apt-get -y remove xterm
-    apt-get -y remove reportbug
-    apt-get -y remove blender
-    apt-get -y remove imagemagick
-    apt-get -y remove inkscape
-    apt-get -y remove rhythmbox
-    apt-get -y remove evolution
-    apt-get -y remove gnome-2048
-    apt-get -y remove five-or-more
-    apt-get -y remove four-in-a-row
-    apt-get -y remove kasumi
-    apt-get -y remove ghcal
-    apt-get -y remove hitori
-    apt-get -y remove gnome-klotski
-    apt-get -y remove lightsoff
-    apt-get -y remove gnome-mahjongg
-    apt-get -y remove gnome-mines
-    apt-get -y remove mlterm
-    apt-get -y remove gnome-music
-    apt-get -y remove gnome-nibbles
-    apt-get -y remove quadrapassel
-    apt-get -y remove iagno
-    apt-get -y remove gnome-robots
-    apt-get -y remove gnome-sudoku
-    apt-get -y remove swell-foop
-    apt-get -y remove gnome-tetravex
-    apt-get -y remove gnome-taquin
-    apt-get -y remove aisleriot
-    apt-get -y remove totem
-    apt-get -y autoremove
-
-  # Actualizar el sistema
-    apt-get -y update
-
-  # Apps de Sistema
-    apt-get -y install gparted
-    apt-get -y install hardinfo
-    apt-get -y install bleachbit
-
-  # Apps Multimedia
-    apt-get -y install vlc
-    apt-get -y install vlc-plugin-vlsub
-    apt-get -y install audacity
-    apt-get -y install subtitleeditor
-    apt-get -y install easytag
-    #apt-get -y install openshot
-
-  # Apps de redes e internet
-    apt-get -y install gufw
-    apt-get -y install wireshark
-    apt-get -y install etherape
-      setcap CAP_NET_RAW=pe /usr/bin/etherape 
-    apt-get -y install sshpass
-    apt-get -y install virt-viewer
-    apt-get -y install whois
-    apt-get -y install remmina
-    apt-get -y install firefox-esr-l10n-es-es
-    apt-get -y install thunderbird
-    apt-get -y install thunderbird-l10n-es-es
-    apt-get -y install lightning-l10n-es-es
-    apt-get -y install eiskaltdcpp
-    apt-get -y install amule
-    apt-get -y install chromium
-    apt-get -y install chromium-l10n
-    apt-get -y install filezilla
-    apt-get -y install mumble
-    apt-get -y install obs-studio
-    #apt-get -y install telegram-desktop
-    apt-get -y install discord
-
-  # Juegos
-    apt-get -y install scid
-    apt-get -y install scid-rating-data
-    apt-get -y install scid-spell-data
-    apt-get -y install stockfish
-    apt-get -y install dosbox
-    apt-get -y install scummvm
-
-  # Fuentes
-    apt-get -y install fonts-ubuntu
-    apt-get -y install fonts-freefont-ttf
-    apt-get -y install fonts-freefont-otf
-    apt-get -y install ttf-mscorefonts-installer
-
-  # apps de programación
-    apt-get -y install ghex
-
-  # apps de seguridad
-    apt-get -y install clamav
-    apt-get -y install clamtk
-
-  # Otros
-    apt-get -y install libreoffice-l10n-es
-    apt-get -y install unrar
-    apt-get -y install htop
-    #apt-get -y install simple-scan
-    apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
-    apt-get -y install android-tools-fastboot
-    apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
-    apt-get -y install comix
-
-  # SmartCards
-    apt-get -y install pcscd
-    apt-get -y install opensc-pkcs11 
-    apt-get -y install libpam-pkcs11
-
-  # Huellas dactilares
-    apt-get -y install libpam-fprintd
-    # Borrar todas las huellas registradas en el usuario root (por las dudas)
-      echo ""
-      echo "    Borrando todas las huellas digitales registradas para el usuario root..."
-      echo ""
-      fprintd-delete root --finger right-index-finger
-      fprintd-delete root --finger right-thumb
-      fprintd-delete root --finger right-middle-finger
-      fprintd-delete root --finger right-ring-finger
-      fprintd-delete root --finger right-little-finger
-      fprintd-delete root --finger left-index-finger
-      fprintd-delete root --finger left-thumb
-      fprintd-delete root --finger left-middle-finger
-      fprintd-delete root --finger left-ring-finger
-      fprintd-delete root --finger left-little-finger
-    # Registrar las huellas nuevas
-      echo ""
-      echo "    Registrando nuevas huellas digitales..."
-      echo ""
-      fprintd-enroll -f right-index-finger
-      #fprintd-enroll -f right-thumb
-      #fprintd-enroll -f right-middle-finger
-      #fprintd-enroll -f right-ring-finger
-      #fprintd-enroll -f right-little-finger
-      fprintd-enroll -f left-index-finger
-      #fprintd-enroll -f left-thumb
-      #fprintd-enroll -f left-middle-finger
-      #fprintd-enroll -f left-ring-finger
-      #fprintd-enroll -f left-little-finger
-    # Activar autenticación PAM con huella dactilar
-      echo ""
-      echo "    Activando la autenticación PAM mediante huellas digitales..."
-      echo ""
-      pam-auth-update # Marcar fingerprint authentication
-    # Comprobar que la autenticación por huella se activó correctamente
-      grep fprint /etc/pam.d/common-auth
-      # En caso de que no funcione la autenticación por huella habría entrar como root y purgar fprint 
-      # apt-get purge fprintd
-
-  # Lanzador de chromium para el root
-    mkdir -p /root/.local/share/applications/ 2> /dev/null
-    echo "[Desktop Entry]"                      > /root/.local/share/applications/chromiumroot.desktop
-    echo "Name=Chromium (para root)"           >> /root/.local/share/applications/chromiumroot.desktop
-    echo "Comment=Accede a Internet"           >> /root/.local/share/applications/chromiumroot.desktop
-    echo "GenericName=Navegador web"           >> /root/.local/share/applications/chromiumroot.desktop
-    echo "Exec=/usr/bin/chromium --no-sandbox" >> /root/.local/share/applications/chromiumroot.desktop
-    echo "Icon=chromium"                       >> /root/.local/share/applications/chromiumroot.desktop
-    echo "Type=Application"                    >> /root/.local/share/applications/chromiumroot.desktop
-    echo "StartupNotify=false"                 >> /root/.local/share/applications/chromiumroot.desktop
-    echo "StartupWMClass=Code"                 >> /root/.local/share/applications/chromiumroot.desktop
-    echo "Categories=Network;WebBrowser;"      >> /root/.local/share/applications/chromiumroot.desktop
-    echo "MimeType=text/html;text/xml;application/xhtml_xml;application/x-mimearchive;x-scheme-handler/http;x-scheme-handler/https;" >> /root/.local/share/applications/chromiumroot.desktop
-    gio set /root/.local/share/applications/chromiumroot.desktop "metadata::trusted" yes
-
-  # Tor browser
-    /root/scripts/d-scripts/SoftInst/ParaGUI/TORBrowser-Instalar.sh
-
-  # Espacíficas para Gnome
-    apt-get -y install gnome-tweaks
 
 elif [ $cVerSO == "12" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 12 (Bookworm)..." 
-echo ""
+  echo ""
 
   # Desinstalar cosas específicas de gnome
     apt-get -y remove xterm
@@ -302,6 +133,23 @@ echo ""
   # Actualizar el sistema
     apt-get -y update
 
+  # Herramientas de terminal
+    apt-get -y install sshpass
+    apt-get -y install virt-viewer
+    apt-get -y install whois
+    apt-get -y install shellcheck
+    apt-get -y install grub2
+    apt-get -y install wget
+    apt-get -y install curl
+    apt-get -y install nmap
+    apt-get -y install mc
+    apt-get -y install smartmontools
+    apt-get -y install coreutils
+    apt-get -y install sshpass
+    apt-get -y install unrar
+    apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
+    apt-get -y install android-tools-fastboot
+
   # Apps de Sistema
     apt-get -y install gparted
     apt-get -y install hardinfo
@@ -316,13 +164,10 @@ echo ""
     #apt-get -y install openshot
 
   # Apps de redes e internet
-    apt-get -y install gufw
     apt-get -y install wireshark
     apt-get -y install etherape
       setcap CAP_NET_RAW=pe /usr/bin/etherape 
-    apt-get -y install sshpass
     apt-get -y install virt-viewer
-    apt-get -y install whois
     apt-get -y install remmina
     apt-get -y install firefox-esr-l10n-es-es
     apt-get -y install thunderbird
@@ -356,9 +201,17 @@ echo ""
   # apps de programación
     apt-get -y install ghex
 
-  # apps de seguridad
-    apt-get -y install clamav
+  # Antivirus
     apt-get -y install clamtk
+    apt-get -y install clamav
+    apt-get -y install clamav-freshclam
+    apt-get -y install clamav-daemon
+    mkdir /var/log/clamav/ 2> /dev/null
+    #touch /var/log/clamav/freshclam.log
+    #chown clamav:clamav /var/log/clamav/freshclam.log
+    #chmod 640 /var/log/clamav/freshclam.log
+    rm -rf /var/log/clamav/freshclam.log
+    freshclam
 
   # Otros
     apt-get -y install libreoffice-l10n-es
@@ -376,42 +229,42 @@ echo ""
     apt-get -y install libpam-pkcs11
 
   # Huellas dactilares
-    apt-get -y install libpam-fprintd
+    #apt-get -y install libpam-fprintd
     # Borrar todas las huellas registradas en el usuario root (por las dudas)
-      echo ""
-      echo "    Borrando todas las huellas digitales registradas para el usuario root..."
-      echo ""
-      fprintd-delete root --finger right-index-finger
-      fprintd-delete root --finger right-thumb
-      fprintd-delete root --finger right-middle-finger
-      fprintd-delete root --finger right-ring-finger
-      fprintd-delete root --finger right-little-finger
-      fprintd-delete root --finger left-index-finger
-      fprintd-delete root --finger left-thumb
-      fprintd-delete root --finger left-middle-finger
-      fprintd-delete root --finger left-ring-finger
-      fprintd-delete root --finger left-little-finger
+      #echo ""
+      #echo "    Borrando todas las huellas digitales registradas para el usuario root..."
+      #echo ""
+      #fprintd-delete root --finger right-index-finger
+      #fprintd-delete root --finger right-thumb
+      #fprintd-delete root --finger right-middle-finger
+      #fprintd-delete root --finger right-ring-finger
+      #fprintd-delete root --finger right-little-finger
+      #fprintd-delete root --finger left-index-finger
+      #fprintd-delete root --finger left-thumb
+      #fprintd-delete root --finger left-middle-finger
+      #fprintd-delete root --finger left-ring-finger
+      #fprintd-delete root --finger left-little-finger
     # Registrar las huellas nuevas
-      echo ""
-      echo "    Registrando nuevas huellas digitales..."
-      echo ""
-      fprintd-enroll -f right-index-finger
+      #echo ""
+      #echo "    Registrando nuevas huellas digitales..."
+      #echo ""
+      #fprintd-enroll -f right-index-finger
       #fprintd-enroll -f right-thumb
       #fprintd-enroll -f right-middle-finger
       #fprintd-enroll -f right-ring-finger
       #fprintd-enroll -f right-little-finger
-      fprintd-enroll -f left-index-finger
+      #fprintd-enroll -f left-index-finger
       #fprintd-enroll -f left-thumb
       #fprintd-enroll -f left-middle-finger
       #fprintd-enroll -f left-ring-finger
       #fprintd-enroll -f left-little-finger
     # Activar autenticación PAM con huella dactilar
-      echo ""
-      echo "    Activando la autenticación PAM mediante huellas digitales..."
-      echo ""
-      pam-auth-update # Marcar fingerprint authentication
+      #echo ""
+      #echo "    Activando la autenticación PAM mediante huellas digitales..."
+      #echo ""
+      #pam-auth-update # Marcar fingerprint authentication
     # Comprobar que la autenticación por huella se activó correctamente
-      grep fprint /etc/pam.d/common-auth
+      #grep fprint /etc/pam.d/common-auth
       # En caso de que no funcione la autenticación por huella habría entrar como root y purgar fprint 
       # apt-get purge fprintd
 
@@ -435,7 +288,6 @@ echo ""
 
   # Espacíficas para Gnome
     apt-get -y install gnome-tweaks
-
 
 fi
 
