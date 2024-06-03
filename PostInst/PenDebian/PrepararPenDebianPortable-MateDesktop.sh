@@ -9,7 +9,7 @@
 # Script de NiPeGun para preparar el Pendrive de Debian Portable
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/PenDebian/PrepararPenDebianPortable.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/PenDebian/PrepararPenDebianPortable-MateDesktop.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
