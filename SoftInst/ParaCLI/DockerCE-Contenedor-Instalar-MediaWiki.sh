@@ -40,7 +40,7 @@ if [ $cVerSO == "7" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación de MediaWiki en el DockerCE de Debian 7 (Wheezy)..." 
-echo ""
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
@@ -50,7 +50,7 @@ elif [ $cVerSO == "8" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación de MediaWiki en el DockerCE de Debian 8 (Jessie)..." 
-echo ""
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
@@ -60,7 +60,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación de MediaWiki en el DockerCE de Debian 9 (Stretch)..." 
-echo ""
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
@@ -70,7 +70,7 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación de MediaWiki en el DockerCE de Debian 10 (Buster)..." 
-echo ""
+  echo ""
 
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
@@ -80,7 +80,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación de MediaWiki en el DockerCE de Debian 11 (Bullseye)..." 
-echo ""
+  echo ""
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
@@ -111,7 +111,8 @@ echo ""
           mkdir -p /Contenedores/MediaWiki/data 2> /dev/null
 
           echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."          echo ""
+          echo "  Creando el comando para iniciar el contenedor docker..."
+          echo ""
           echo '#!/bin/bash'                                         > /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
           echo ""                                                   >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
           echo "docker run -d --restart=always                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
@@ -123,10 +124,12 @@ echo ""
           chmod +x                                                     /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
               
           echo ""
-          echo "  Creando el comando post arranque..."          echo ""
+          echo "  Creando el comando post arranque..."
+          echo ""
           echo "/root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh" >> /root/scripts/ComandosPostArranque.sh
           echo ""
-          echo "  Iniciando el container por primera vez..."          echo ""
+          echo "  Iniciando el container por primera vez..."
+          echo ""
           /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
 
         ;;
@@ -139,7 +142,8 @@ echo ""
           mkdir -p /Host/MediaWiki/data 2> /dev/null
 
           echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."          echo ""
+          echo "  Creando el comando para iniciar el contenedor docker..."
+          echo ""
           echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
           echo ""                                                  >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
           echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
@@ -151,11 +155,13 @@ echo ""
           chmod +x                                                    /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
 
           echo ""
-          echo "  Creando el comando post arranque..."          echo ""
+          echo "  Creando el comando post arranque..."
+          echo ""
           echo "/root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh" >> /root/scripts/ComandosPostArranque.sh
 
           echo ""
-          echo "  Iniciando el container por primera vez..."          echo ""
+          echo "  Iniciando el container por primera vez..."
+          echo ""
           /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
 
         ;;
