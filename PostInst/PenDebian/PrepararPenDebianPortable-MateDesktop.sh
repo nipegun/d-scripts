@@ -223,14 +223,6 @@ elif [ $cVerSO == "12" ]; then
     mkdir -p /Particiones/LVM/G3/            2> /dev/null
     mkdir -p /Particiones/LVM/G4/            2> /dev/null
 
-  # Actualizar el sistema
-    apt-get -y upgrade
-    apt-get -y dist-upgrade
-
-  # Borrar paquetes
-    apt-get -y remove xterm reportbug blender imagemagick inkscape gnome-disk-utility
-    apt-get -y autoremove
-
   # ComandosPostArranque
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
 
@@ -274,7 +266,7 @@ elif [ $cVerSO == "12" ]; then
     mkdir -p /root/Documentos/ 2> /dev/null
 
       # Chameleon desde Grub
-        echo "gedit /boot/grub/grub.cfg"         > /root/Documentos/BootearChameleonDesdeGrub.txt
+        echo "gedit /boot/grub/grub.cfg"         > /root/DocumentostalarSoftware.sh/BootearChameleonDesdeGrub.txt
         echo ""                                 >> /root/Documentos/BootearChameleonDesdeGrub.txt
         echo 'menuentry "macOS" {'              >> /root/Documentos/BootearChameleonDesdeGrub.txt
         echo "  insmod hfsplus"                 >> /root/Documentos/BootearChameleonDesdeGrub.txt
@@ -302,8 +294,11 @@ elif [ $cVerSO == "12" ]; then
         echo "hdparm --user-master u --security-set-pass hacks4geeks /dev/sdb"         >> /root/Documentos/BorrarSSD.txt
         echo "hdparm --user-master u --security-erase hacks4geeks /dev/sdb"            >> /root/Documentos/BorrarSSD.txt
 
+  # Actualizar el sistema
+    apt-get -y upgrade
+    apt-get -y dist-upgrade
+
   # Personalizar escritorio mate
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioMate-Personalizar.sh| bash
-
 
 fi
