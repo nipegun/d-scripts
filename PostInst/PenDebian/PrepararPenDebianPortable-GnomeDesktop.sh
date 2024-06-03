@@ -251,4 +251,6 @@ elif [ $cVerSO == "12" ]; then
   # Personalizar escritorio gnome
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioGnome-Personalizar.sh| bash
 
+  # Agregar el usuario a sudo
+    echo "usuariox ALL=(ALL:ALL) ALL" >> /etc/sudoers
 fi
