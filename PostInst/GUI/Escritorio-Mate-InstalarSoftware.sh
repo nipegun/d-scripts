@@ -127,7 +127,7 @@ elif [ $cVerSO == "12" ]; then
 
   # Multimedia
     apt-get -y install vlc
-    apt-get -y install vlc-plugin-vlsub
+    #apt-get -y install vlc-plugin-vlsub
     apt-get -y install audacity
     apt-get -y install subtitleeditor
     apt-get -y install easytag
@@ -190,8 +190,53 @@ elif [ $cVerSO == "12" ]; then
     apt-get -y install simple-scan
     apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
     apt-get -y install android-tools-fastboot
-    apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
-    apt-get -y install comix
+    #apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
+    #apt-get -y install comix
+
+  # SmartCards
+    apt-get -y install pcscd
+    apt-get -y install opensc-pkcs11 
+    apt-get -y install libpam-pkcs11
+
+  # Huellas dactilares
+    #apt-get -y install libpam-fprintd
+    # Borrar todas las huellas registradas en el usuario root (por las dudas)
+      #echo ""
+      #echo "    Borrando todas las huellas digitales registradas para el usuario root..."
+      #echo ""
+      #fprintd-delete root --finger right-index-finger
+      #fprintd-delete root --finger right-thumb
+      #fprintd-delete root --finger right-middle-finger
+      #fprintd-delete root --finger right-ring-finger
+      #fprintd-delete root --finger right-little-finger
+      #fprintd-delete root --finger left-index-finger
+      #fprintd-delete root --finger left-thumb
+      #fprintd-delete root --finger left-middle-finger
+      #fprintd-delete root --finger left-ring-finger
+      #fprintd-delete root --finger left-little-finger
+    # Registrar las huellas nuevas
+      #echo ""
+      #echo "    Registrando nuevas huellas digitales..."
+      #echo ""
+      #fprintd-enroll -f right-index-finger
+      #fprintd-enroll -f right-thumb
+      #fprintd-enroll -f right-middle-finger
+      #fprintd-enroll -f right-ring-finger
+      #fprintd-enroll -f right-little-finger
+      #fprintd-enroll -f left-index-finger
+      #fprintd-enroll -f left-thumb
+      #fprintd-enroll -f left-middle-finger
+      #fprintd-enroll -f left-ring-finger
+      #fprintd-enroll -f left-little-finger
+    # Activar autenticación PAM con huella dactilar
+      #echo ""
+      #echo "    Activando la autenticación PAM mediante huellas digitales..."
+      #echo ""
+      #pam-auth-update # Marcar fingerprint authentication
+    # Comprobar que la autenticación por huella se activó correctamente
+      #grep fprint /etc/pam.d/common-auth
+      # En caso de que no funcione la autenticación por huella habría entrar como root y purgar fprint 
+      # apt-get purge fprintd
 
   # Lanzador de chromium para el root
     mkdir -p /root/.local/share/applications/ 2> /dev/null
