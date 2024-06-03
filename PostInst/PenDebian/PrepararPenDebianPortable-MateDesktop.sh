@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para preparar el Pendrive de Debian Portable
+# Script de NiPeGun para preparar el Pendrive de Debian Portable con el escritorio Mate
 #
 # Ejecución remota:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/PenDebian/PrepararPenDebianPortable-MateDesktop.sh | bash
@@ -98,20 +98,23 @@ elif [ $cVerSO == "12" ]; then
   # Agregar repositorios
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-PonerTodos.sh | bash
 
-  # Herramientas de terminal
-    apt-get -y update
-    apt-get -y install shellcheck
-    apt-get -y install grub2
-    apt-get -y install wget
-    apt-get -y install curl
-    apt-get -y install nmap
-    apt-get -y install mc
-    apt-get -y install smartmontools
-    apt-get -y install coreutils
-    apt-get -y install sshpass
-    apt-get -y install unrar
-    apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
-    apt-get -y install android-tools-fastboot
+  # Instalar software
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Mate-InstalarSoftware.sh | bash
+  
+  # Desinstalar software extra instalado
+    apt-get -y autoremove subtitleeditor
+    apt-get -y autoremove easytag
+    apt-get -y autoremove openshot
+    apt-get -y autoremove mumble
+    apt-get -y autoremove obs-studio
+    apt-get -y autoremove telegram-desktop
+    apt-get -y autoremove discord
+    apt-get -y autoremove scid
+    apt-get -y autoremove scid-rating-data
+    apt-get -y autoremove scid-spell-data
+    apt-get -y autoremove stockfish
+    apt-get -y autoremove dosbox
+    apt-get -y autoremove scummvm
 
   # Herramientas para manejar volúmenes
     # FAT
@@ -135,50 +138,7 @@ elif [ $cVerSO == "12" ]; then
     # MTD JFFS JFFS2
       apt-get -y install mtd-utils
 
-  # Herramientas gráficas
-    apt-get -y install gparted
-    apt-get -y install caja-open-terminal
-    apt-get -y install caja-admin
-    apt-get -y install vlc
-    apt-get -y install vlc-plugin-vlsub
-    apt-get -y install audacity
-    apt-get -y install subtitleeditor
-    apt-get -y install easytag
-    apt-get -y install wireshark
-    apt-get -y install etherape
-      setcap CAP_NET_RAW=pe /usr/bin/etherape
-    apt-get -y install thunderbird
-    apt-get -y install thunderbird-l10n-es-es
-    apt-get -y install lightning-l10n-es-es
-    apt-get -y install eiskaltdcpp
-    apt-get -y install amule
-    apt-get -y install chromium
-    apt-get -y install chromium-l10n
-    apt-get -y install filezilla
-    apt-get -y install htop
-    apt-get -y install simple-scan
-    apt-get -y install ghex
-    apt-get -y install hardinfo
-    apt-get -y install bleachbit
-    apt-get -y install fonts-freefont-ttf
-    apt-get -y install fonts-freefont-otf
-    apt-get -y install ttf-mscorefonts-installer
-    apt-get -y install firefox-esr-l10n-es-es
-    apt-get -y install libreoffice-l10n-es
-
-  # Antivirus
-    apt-get -y install clamtk
-    apt-get -y install clamav
-    apt-get -y install clamav-freshclam
-    apt-get -y install clamav-daemon
-    mkdir /var/log/clamav/ 2> /dev/null
-    #touch /var/log/clamav/freshclam.log
-    #chown clamav:clamav /var/log/clamav/freshclam.log
-    #chmod 640 /var/log/clamav/freshclam.log
-    rm -rf /var/log/clamav/freshclam.log
-    freshclam
-
-  # Instalación de firmwares
+  # Firmwares
     apt-get -y install firmware-linux-free
     apt-get -y install firmware-ath9k-htc
     #apt-get -y install firmware-ath9k-htc-dbgsym
@@ -271,9 +231,6 @@ elif [ $cVerSO == "12" ]; then
     apt-get -y remove xterm reportbug blender imagemagick inkscape gnome-disk-utility
     apt-get -y autoremove
 
-  # x
-    echo -n mem > /sys/power/state
-
   # ComandosPostArranque
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
 
@@ -294,9 +251,6 @@ elif [ $cVerSO == "12" ]; then
     echo ''                                                            >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
     echo '  mount -t auto /dev/$vLVMg1/root /Particiones/LVM/G1/root/' >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
     echo '  mount -t auto /dev/$vLVMg1/root /Particiones/LVM/G1/root/' >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-
-  # Escritorio mate
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioMate-Personalizar.sh| bash
 
   # d-scripts
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar.sh | bash
@@ -347,5 +301,9 @@ elif [ $cVerSO == "12" ]; then
         echo "# BORRAR /dev/sdb"                                                       >> /root/Documentos/BorrarSSD.txt
         echo "hdparm --user-master u --security-set-pass hacks4geeks /dev/sdb"         >> /root/Documentos/BorrarSSD.txt
         echo "hdparm --user-master u --security-erase hacks4geeks /dev/sdb"            >> /root/Documentos/BorrarSSD.txt
+
+  # Personalizar escritorio mate
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioMate-Personalizar.sh| bash
+
 
 fi
