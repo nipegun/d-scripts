@@ -75,29 +75,28 @@ elif [ $cVerSO == "10" ]; then
   echo ""
   echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
-
+  
 elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "  Iniciando el script de preparación del Pendrive con Debian 11 (Bullseye) Portable..." 
   echo ""
 
-  # Modificar el grub
-    sed -i -e 's|GRUB_TIMEOUT=5|GRUB_TIMEOUT=1|g' /etc/default/grub
-    sed -i -e 's|GRUB_CMDLINE_LINUX=""|GRUB_CMDLINE_LINUX="net.ifnames=0" biosdevname=0|g' /etc/default/grub
-    update-grub
+  echo ""
+  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de preparación del Pendrive con Debian 12 (Bookworm) Portable..." 
+  echo ""
+
+  # Poner nomenclatura antigua de nombre de interfaces de red
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/InterfacesDeRed-ViejaNomenclatura.sh | bash
 
   # Agregar repositorios
-    cp /etc/apt/sources.list /etc/apt/sources.list.bak
-    echo "deb http://deb.debian.org/debian bullseye main contrib non-free"                         > /etc/apt/sources.list
-    echo "deb-src http://deb.debian.org/debian bullseye main contrib non-free"                    >> /etc/apt/sources.list
-    echo ""                                                                                       >> /etc/apt/sources.list
-    echo "deb http://deb.debian.org/debian-security/ bullseye-security main contrib non-free"     >> /etc/apt/sources.list
-    echo "deb-src http://deb.debian.org/debian-security/ bullseye-security main contrib non-free" >> /etc/apt/sources.list
-    echo ""                                                                                       >> /etc/apt/sources.list
-    echo "deb http://deb.debian.org/debian bullseye-updates main contrib non-free"                >> /etc/apt/sources.list
-    echo "deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free"            >> /etc/apt/sources.list
-    echo ""                                                                                       >> /etc/apt/sources.list
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-PonerTodos.sh | bash
 
   # Herramientas de terminal
     apt-get -y update
@@ -147,6 +146,7 @@ elif [ $cVerSO == "11" ]; then
     apt-get -y install easytag
     apt-get -y install wireshark
     apt-get -y install etherape
+      setcap CAP_NET_RAW=pe /usr/bin/etherape
     apt-get -y install thunderbird
     apt-get -y install thunderbird-l10n-es-es
     apt-get -y install lightning-l10n-es-es
@@ -163,7 +163,8 @@ elif [ $cVerSO == "11" ]; then
     apt-get -y install fonts-freefont-ttf
     apt-get -y install fonts-freefont-otf
     apt-get -y install ttf-mscorefonts-installer
-    apt-get -y install gufw
+    apt-get -y install firefox-esr-l10n-es-es
+    apt-get -y install libreoffice-l10n-es
 
   # Antivirus
     apt-get -y install clamtk
@@ -191,7 +192,7 @@ elif [ $cVerSO == "11" ]; then
     apt-get -y install firmware-bnx2x
     apt-get -y install firmware-brcm80211
     apt-get -y install firmware-cavium
-    apt-get -y install firmware-intelwimax
+    # apt-get -y install firmware-intelwimax
     #ACCEPT_EULA=Y apt-get -y install firmware-ipw2x00
     apt-get -y install firmware-iwlwifi
     apt-get -y install firmware-linux
@@ -207,12 +208,6 @@ elif [ $cVerSO == "11" ]; then
     apt-get -y install firmware-zd1211
 
   # Otros cambios
-    mkdir -p /Discos/LVM/  2> /dev/null
-    mkdir -p /Discos/SATA/ 2> /dev/null
-    mkdir -p /Discos/NVMe/ 2> /dev/null
-    mkdir -p /Particiones/Windows/ 2> /dev/null
-    mkdir -p /Particiones/macOS/   2> /dev/null
-
     mkdir -p /Particiones/IDE/hda1/    2> /dev/null
     mkdir -p /Particiones/IDE/hda2/    2> /dev/null
     mkdir -p /Particiones/IDE/hda3/    2> /dev/null
@@ -288,7 +283,6 @@ elif [ $cVerSO == "11" ]; then
   # Tareas cron
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/TareasCron-Preparar.sh | bash
 
-
   # Agregar automontaje de particiones
     echo '# Automontaje de todas las particiones'               >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
     echo "  /root/scripts/d-scripts/Particiones-IDE-Montar.sh"  >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
@@ -306,6 +300,20 @@ elif [ $cVerSO == "11" ]; then
 
   # d-scripts
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar.sh | bash
+
+  # Permitir caja como root
+    mkdir -p /root/.config/autostart/ 2> /dev/null
+    echo "[Desktop Entry]"                > /root/.config/autostart/caja.desktop
+    echo "Type=Application"              >> /root/.config/autostart/caja.desktop
+    echo "Exec=caja --force-desktop"     >> /root/.config/autostart/caja.desktop
+    echo "Hidden=false"                  >> /root/.config/autostart/caja.desktop
+    echo "X-MATE-Autostart-enabled=true" >> /root/.config/autostart/caja.desktop
+    echo "Name[es_ES]=Caja"              >> /root/.config/autostart/caja.desktop
+    echo "Name=Caja"                     >> /root/.config/autostart/caja.desktop
+    echo "Comment[es_ES]="               >> /root/.config/autostart/caja.desktop
+    echo "Comment="                      >> /root/.config/autostart/caja.desktop
+    echo "X-MATE-Autostart-Delay=0"      >> /root/.config/autostart/caja.desktop
+    gio set /root/.config/autostart/caja.desktop "metadata::trusted" yes
 
   # Documentos
 
