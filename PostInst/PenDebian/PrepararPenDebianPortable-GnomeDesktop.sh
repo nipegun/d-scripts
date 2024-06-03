@@ -298,7 +298,7 @@ elif [ $cVerSO == "12" ]; then
     apt-get -y upgrade
     apt-get -y dist-upgrade
 
-  # Personalizar escritorio mate
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioMate-Personalizar.sh| bash
+  # Personalizar escritorio gnome
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioGnome-Personalizar.sh| bash
 
 fi
