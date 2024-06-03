@@ -105,6 +105,7 @@ elif [ $cVerSO == "12" ]; then
     apt-get -y update
 
   # Herramientas de terminal
+    apt-get -y install openssh-server
     apt-get -y install sshpass
     apt-get -y install whois
     apt-get -y install shellcheck
