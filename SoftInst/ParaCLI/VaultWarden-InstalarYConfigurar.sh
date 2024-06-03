@@ -5,15 +5,6 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-
-
-https://gist.github.com/heinoldenhuis/f8164f73e5bff048e76fb4fff2e824e1
-
-
-
-
-
-
 # ----------
 # Script de NiPeGun para instalar y configurar VaultWarden en Debian
 #
@@ -105,79 +96,147 @@ elif [ $cVerSO == "11" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de VaultWarden para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
-  # Desinstalar posibles versiones previas
-    echo ""
-    echo "    Desinstalando posibles versiones previas..."
-    echo ""
-    apt-get -y remove docker
-    apt-get -y remove docker-engine
-    apt-get -y remove docker.io
-    apt-get -y remove containerd
-    apt-get -y remove runc
-    rm -rf /var/lib/docker
-    rm -rf /var/lib/containerd
- 
-  # Agregar el repositorio de Docker
-    echo ""
-    echo "    Agregando repositorio de docker..."
-    echo ""
-    apt-get -y update
-    apt-get -y install ca-certificates
-    apt-get -y install curl
-    apt-get -y install gnupg
-    apt-get -y install lsb-release
-    mkdir -p /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-    apt-get -y update
-    chmod a+r /etc/apt/keyrings/docker.gpg
-    apt-get -y update
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
 
-  # Instalar Docker Engine
-    echo ""
-    echo "    Instalando docker engine..."
-    echo ""
-    apt-get -y install docker-ce
-    apt-get -y install docker-ce-cli
-    apt-get -y install containerd.io
-    apt-get -y install docker-compose-plugin
-    # Comprobar que docker-engine se instaló
-      # docker run hello-world
+elif [ $cVerSO == "12" ]; then
 
-  # Crear usuario y grupo
-    echo ""
-    echo "    Creando el usuario vaultwarden..."
-    echo ""
-    adduser vaultwarden
-    #echo ""
-    #echo "    Asignando contraseña al usuario bitwarden..."    #echo ""
-    #passwd vaultwarden
-    echo ""
-    echo "    Creando el grupo docker..."
-    echo ""
-    groupadd docker
-    echo ""
-    echo "    Agregando el usuario vaultwarden al grupo docker..."
-    echo ""
-    usermod -aG docker vaultwarden
-    echo ""
-    echo "    Creando la carpeta de instalación para vaultwarden..."
-    echo ""
-    mkdir /opt/vaultwarden
-    chmod -R 700 /opt/vaultwarden
-    chown -R vaultwarden:vaultwarden /opt/vaultwarden
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de VaultWarden para Debian 12 (Bookworm)...${cFinColor}"
+  echo ""
 
-  # Instalar bitwarden desde el script oficial
-    echo ""
-    echo "    Instalando el docker de BitWarden..."
-    echo ""
-    docker pull vaultwarden/server:latest
-    docker run -d --name vaultwarden -v /vw-data/:/data/ -p 80:80 vaultwarden/server:latest
+  # Instalar Rust
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash
+    source $HOME/.cargo/env
 
-  # Agregando bitwarden a los ComandosPostArranque
-    echo ""                                    >> /root/scripts/ComandosPostArranque.sh
-    echo "# Iniciar BitWarden"                 >> /root/scripts/ComandosPostArranque.sh
-    echo "  /opt/bitwarden/bitwarden.sh start" >> /root/scripts/ComandosPostArranque.sh
-    echo ""                                    >> /root/scripts/ComandosPostArranque.sh
+  # Salir de la sesion
+    exit
+
+  # Instalar dependencias
+    apt update
+    apt install -y build-essential
+    apt install -y git
+    apt install -y libssl-dev
+    apt install -y pkg-config
+    apt install -y libsqlite3-dev
+    apt install -y nginx
+    apt install -y certbot
+
+  # Compilar vaultWarden desde el código fuente con backend SQLite
+    mkdir -p /root/SoftInst/VaultWarden/
+    cd /root/SoftInst/VaultWarden/
+    git clone https://github.com/dani-garcia/vaultwarden.git
+    mv vaultwarden Fuente
+    cd Fuente
+    cargo build --features sqlite --release
+
+  # Crear carpetas para guardar los datos
+    mkdir -p /var/lib/vaultwarden
+    cd /var/lib/vaultwarden
+    mkdir -p data
+    wget https://raw.githubusercontent.com/dani-garcia/vaultwarden/main/.env.template
+    mv .env.template .env
+
+  # Instalar el entorno web
+    cd /var/lib/vaultwarden
+    # Determinar última versión
+      vUltVers=$(curl -sL https://github.com/dani-garcia/bw_web_builds/releases/latest | sed 's->->\n-g' | grep tag | grep tree | sed 's-href=-\n-g' | grep '/' | cut -d'"' -f2 | cut -d'/' -f5)
+    wget https://github.com/dani-garcia/bw_web_builds/releases/download/$vUltVers/bw_web_$vUltVers.tar.gz
+    tar -xvf bw_web_$vUltVers.tar.gz
+    rm bw_web_$vUltVers.tar.gz
+
+  # Configurar VaultWarden
+    echo "DATA_FOLDER=data /var/lib/vaultwarden/.env"  > /var/lib/vaultwarden/.env
+    echo "DATABASE_URL=data/db.sqlite3"               >> /var/lib/vaultwarden/.env
+    echo "PUSH_ENABLED=true"                          >> /var/lib/vaultwarden/.env
+    echo "PUSH_INSTALLATION_ID=CHANGEME"              >> /var/lib/vaultwarden/.env      # source this id from https://bitwarden.com/host
+    echo "PUSH_INSTALLATION_KEY-CHANGEME"             >> /var/lib/vaultwarden/.env     # source this key from https://bitwarden.com/host
+    echo "LOG_FILE=data/vaultwarden.log"              >> /var/lib/vaultwarden/.env
+    echo "LOG_LEVEL=error"                            >> /var/lib/vaultwarden/.env
+    echo "DOMAIN=https://static.<your-ip-in-reverse>.clients.your-server.de" >> /var/lib/vaultwarden/.env
+    echo "ROCKET_ADDRESS=127.0.0.1"                   >> /var/lib/vaultwarden/.env
+    echo "ROCKET_PORT=8000"                           >> /var/lib/vaultwarden/.env
+    echo "SMTP_HOST=smtp.domain.tld"                  >> /var/lib/vaultwarden/.env  # CHANGE THIS
+    echo "SMTP_FROM=vaultwarden@domain.tld"           >> /var/lib/vaultwarden/.env
+    echo "SMTP_PORT=587"                              >> /var/lib/vaultwarden/.env
+    echo "SMTP_SECURITY=starttls"                     >> /var/lib/vaultwarden/.env
+    echo "SMTP_USERNAME=username"                     >> /var/lib/vaultwarden/.env
+    echo "SMTP_PASSWORD=password"                     >> /var/lib/vaultwarden/.env
+    echo "SMTP_TIMEOUT=15"                            >> /var/lib/vaultwarden/.env
+
+  # Copiar el archivo compilado
+    cp /root/SoftInst/VaultWarden/Fuente/target/release/vaultwarden /usr/local/bin/vaultwarden
+
+  # Asignar permiso de ejecución
+    chmod +x /usr/local/bin/vaultwarden
+
+  # Agregar el usuario y cambiar propiedad al nuevo usuario
+    useradd -m -d /var/lib/vaultwarden vaultwarden
+    chown -R vaultwarden:vaultwarden /var/lib/vaultwarden
+
+  # Crear el servicio
+    echo "[Unit]"                                                    > /etc/systemd/system/vaultwarden.service
+    echo "Description=Bitwarden Server (Rust Edition)"              >> /etc/systemd/system/vaultwarden.service
+    echo "Documentation=https://github.com/dani-garcia/vaultwarden" >> /etc/systemd/system/vaultwarden.service
+    echo ""                                                         >> /etc/systemd/system/vaultwarden.service
+    echo "After=network.target"                                     >> /etc/systemd/system/vaultwarden.service
+    echo ""                                                         >> /etc/systemd/system/vaultwarden.service
+    echo "[Service]"                                                >> /etc/systemd/system/vaultwarden.service
+    echo "User=vaultwarden"                                         >> /etc/systemd/system/vaultwarden.service
+    echo "Group=vaultwarden"                                        >> /etc/systemd/system/vaultwarden.service
+    echo "ExecStart=/usr/local/bin/vaultwarden"                     >> /etc/systemd/system/vaultwarden.service
+    echo "LimitNOFILE=1048576"                                      >> /etc/systemd/system/vaultwarden.service
+    echo "LimitNPROC=64"                                            >> /etc/systemd/system/vaultwarden.service
+    echo "PrivateTmp=true"                                          >> /etc/systemd/system/vaultwarden.service
+    echo "PrivateDevices=true"                                      >> /etc/systemd/system/vaultwarden.service
+    echo "ProtectHome=true"                                         >> /etc/systemd/system/vaultwarden.service
+    echo "ProtectSystem=strict"                                     >> /etc/systemd/system/vaultwarden.service
+    echo "WorkingDirectory=/var/lib/vaultwarden"                    >> /etc/systemd/system/vaultwarden.service
+    echo "ReadWriteDirectories=/var/lib/vaultwarden"                >> /etc/systemd/system/vaultwarden.service
+    echo "AmbientCapabilities=CAP_NET_BIND_SERVICE"                 >> /etc/systemd/system/vaultwarden.service
+    echo ""                                                         >> /etc/systemd/system/vaultwarden.service
+    echo "[Install]"                                                >> /etc/systemd/system/vaultwarden.service
+    echo "WantedBy=multi-user.target"                               >> /etc/systemd/system/vaultwarden.service
+
+  # Activar e iniciar el servicio
+    systemctl daemon-reload
+    systemctl enable vaultwarden
+    systemctl start vaultwarden
+
+  # Configurar nginx como proxy inverso
+    echo 'upstream vaultwarden-default {'                                       > /etc/nginx/sites-available/vaultwarden.conf
+    echo '  zone vaultwarden-default 64k;'                                     >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '  server 127.0.0.1:8000;'                                            >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '  keepalive 2;'                                                      >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '}'                                                                   >> /etc/nginx/sites-available/vaultwarden.conf
+    echo ''                                                                    >> /etc/nginx/sites-available/vaultwarden.conf
+    echo 'map $http_upgrade $connection_upgrade {'                             >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '    default upgrade;'                                                >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '    ''      "";'                                                     >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '}'                                                                   >> /etc/nginx/sites-available/vaultwarden.conf
+    echo ''                                                                    >> /etc/nginx/sites-available/vaultwarden.conf
+    echo 'server {'                                                            >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '    listen 80;'                                                      >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '    server_name static.<your-ip-in-reverse>.clients.your-server.de;' >> /etc/nginx/sites-available/vaultwarden.conf
+    echo ''                                                                    >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '    client_max_body_size 525M;'                                      >> /etc/nginx/sites-available/vaultwarden.conf
+    echo ''                                                                    >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '    location / {'                                                    >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '      proxy_http_version 1.1;'                                       >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '      proxy_set_header Upgrade $http_upgrade;'                       >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '      proxy_set_header Connection $connection_upgrade;'              >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '      proxy_set_header Host $host;'                                  >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '      proxy_set_header X-Real-IP $remote_addr;'                      >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;'  >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '      proxy_set_header X-Forwarded-Proto $scheme;'                   >> /etc/nginx/sites-available/vaultwarden.conf
+    echo ''                                                                    >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '      proxy_pass http://vaultwarden-default;'                        >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '    }'                                                               >> /etc/nginx/sites-available/vaultwarden.conf
+    echo ''                                                                    >> /etc/nginx/sites-available/vaultwarden.conf
+    echo '}'                                                                   >> /etc/nginx/sites-available/vaultwarden.conf
+    ln -s /etc/nginx/sites-available/vaultwarden.conf /etc/nginx/sites-enabled/vaultwarden.conf
+    nginx -t                       # check if the configuration is valid
+    certbot --nginx                # make sure to choose redirect to https option
 
 fi
