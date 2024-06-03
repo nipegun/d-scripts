@@ -107,7 +107,8 @@ elif [ $cVerSO == "11" ]; then
 
   # Desinstalar posibles versiones previas
     echo ""
-    echo "    Desinstalando posibles versiones previas..."    echo ""
+    echo "    Desinstalando posibles versiones previas..."
+    echo ""
     apt-get -y remove docker
     apt-get -y remove docker-engine
     apt-get -y remove docker.io
@@ -118,7 +119,8 @@ elif [ $cVerSO == "11" ]; then
  
   # Agregar el repositorio de Docker
     echo ""
-    echo "    Agregando repositorio de docker..."    echo ""
+    echo "    Agregando repositorio de docker..."
+    echo ""
     apt-get -y update
     apt-get -y install ca-certificates
     apt-get -y install curl
@@ -133,7 +135,8 @@ elif [ $cVerSO == "11" ]; then
 
   # Instalar Docker Engine
     echo ""
-    echo "    Instalando docker engine..."    echo ""
+    echo "    Instalando docker engine..."
+    echo ""
     apt-get -y install docker-ce
     apt-get -y install docker-ce-cli
     apt-get -y install containerd.io
@@ -143,26 +146,31 @@ elif [ $cVerSO == "11" ]; then
 
   # Crear usuario y grupo
     echo ""
-    echo "    Creando el usuario vaultwarden..."    echo ""
+    echo "    Creando el usuario vaultwarden..."
+    echo ""
     adduser vaultwarden
     #echo ""
     #echo "    Asignando contraseña al usuario bitwarden..."    #echo ""
     #passwd vaultwarden
     echo ""
-    echo "    Creando el grupo docker..."    echo ""
+    echo "    Creando el grupo docker..."
+    echo ""
     groupadd docker
     echo ""
-    echo "    Agregando el usuario vaultwarden al grupo docker..."    echo ""
+    echo "    Agregando el usuario vaultwarden al grupo docker..."
+    echo ""
     usermod -aG docker vaultwarden
     echo ""
-    echo "    Creando la carpeta de instalación para vaultwarden..."    echo ""
+    echo "    Creando la carpeta de instalación para vaultwarden..."
+    echo ""
     mkdir /opt/vaultwarden
     chmod -R 700 /opt/vaultwarden
     chown -R vaultwarden:vaultwarden /opt/vaultwarden
 
   # Instalar bitwarden desde el script oficial
     echo ""
-    echo "    Instalando el docker de BitWarden..."    echo ""
+    echo "    Instalando el docker de BitWarden..."
+    echo ""
     docker pull vaultwarden/server:latest
     docker run -d --name vaultwarden -v /vw-data/:/data/ -p 80:80 vaultwarden/server:latest
 
