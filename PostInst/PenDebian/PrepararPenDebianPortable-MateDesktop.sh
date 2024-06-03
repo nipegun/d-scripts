@@ -168,56 +168,6 @@ elif [ $cVerSO == "12" ]; then
     apt-get -y install firmware-zd1211
 
   # Otros cambios
-    mkdir -p /Particiones/IDE/hda1/    2> /dev/null
-    mkdir -p /Particiones/IDE/hda2/    2> /dev/null
-    mkdir -p /Particiones/IDE/hda3/    2> /dev/null
-    mkdir -p /Particiones/IDE/hda4/    2> /dev/null
-
-    mkdir -p /Particiones/IDE/hdb1/    2> /dev/null
-    mkdir -p /Particiones/IDE/hdb2/    2> /dev/null
-    mkdir -p /Particiones/IDE/hdb3/    2> /dev/null
-    mkdir -p /Particiones/IDE/hdb4/    2> /dev/null
-
-    mkdir -p /Particiones/SATA/sda1/    2> /dev/null
-    mkdir -p /Particiones/SATA/sda2/    2> /dev/null
-    mkdir -p /Particiones/SATA/sda3/    2> /dev/null
-    mkdir -p /Particiones/SATA/sda4/    2> /dev/null
-
-    mkdir -p /Particiones/SATA/sdb1/    2> /dev/null
-    mkdir -p /Particiones/SATA/sdb2/    2> /dev/null
-    mkdir -p /Particiones/SATA/sdb3/    2> /dev/null
-    mkdir -p /Particiones/SATA/sdb4/    2> /dev/null
-
-    mkdir -p /Particiones/SATA/sdc1/    2> /dev/null
-    mkdir -p /Particiones/SATA/sdc2/    2> /dev/null
-    mkdir -p /Particiones/SATA/sdc3/    2> /dev/null
-    mkdir -p /Particiones/SATA/sdc4/    2> /dev/null
-
-    mkdir -p /Particiones/SATA/sdd1/    2> /dev/null
-    mkdir -p /Particiones/SATA/sdd2/    2> /dev/null
-    mkdir -p /Particiones/SATA/sdd3/    2> /dev/null
-    mkdir -p /Particiones/SATA/sdd4/    2> /dev/null
-
-    mkdir -p /Particiones/SATA/sde1/    2> /dev/null
-    mkdir -p /Particiones/SATA/sde2/    2> /dev/null
-    mkdir -p /Particiones/SATA/sde3/    2> /dev/null
-    mkdir -p /Particiones/SATA/sde4/    2> /dev/null
-
-    mkdir -p /Particiones/NVMe/nvme0n1p1/    2> /dev/null
-    mkdir -p /Particiones/NVMe/nvme0n1p2/    2> /dev/null
-    mkdir -p /Particiones/NVMe/nvme0n1p3/    2> /dev/null
-    mkdir -p /Particiones/NVMe/nvme0n1p4/    2> /dev/null
-
-    mkdir -p /Particiones/NVMe/nvme1n1p1/    2> /dev/null
-    mkdir -p /Particiones/NVMe/nvme1n1p2/    2> /dev/null
-    mkdir -p /Particiones/NVMe/nvme1n1p3/    2> /dev/null
-    mkdir -p /Particiones/NVMe/nvme1n1p4/    2> /dev/null
-
-    mkdir -p /Particiones/NVMe/nvme2n1p1/    2> /dev/null
-    mkdir -p /Particiones/NVMe/nvme2n1p2/    2> /dev/null
-    mkdir -p /Particiones/NVMe/nvme2n1p3/    2> /dev/null
-    mkdir -p /Particiones/NVMe/nvme2n1p4/    2> /dev/null
-
     mkdir -p /Particiones/LVM/G1/            2> /dev/null
     mkdir -p /Particiones/LVM/G2/            2> /dev/null
     mkdir -p /Particiones/LVM/G3/            2> /dev/null
