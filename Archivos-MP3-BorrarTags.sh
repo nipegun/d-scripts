@@ -6,11 +6,29 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para BORRAR TAGs DE ARCHIVOS MP3 DE UNA CARPETA
-#  X Y TAMBIÉN DE SUS SUB-CARPETAS DE FORMA RECURSIVA
+# Script de NiPeGun para borrar tags de archivos mp3 en una carpeta dada (Y subcarpetas)
+#
+# Ejecución remota:
+#   curl -sL x | bash
+#
+# Ejecución remota sin caché:
+#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#
+# Ejecución remota con parámetros:
+#   curl -sL x | bash -s Parámetro1 Parámetro2
 # ----------
 
-cCantArgumEsperados=1
+# Definir constantes de color
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
+
+# Definir cantidad de argumentos esperados
+  cCantArgumEsperados=1
 
 
 if [ $# -ne $EXPECTED_ARGS ]
@@ -30,7 +48,8 @@ if [ $# -ne $EXPECTED_ARGS ]
     # Comprobar si el paquete eyed3 está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s eyed3 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo "  eyed3 no está instalado. Iniciando su instalación..."        echo ""
+        echo "  eyed3 no está instalado. Iniciando su instalación..."
+        echo ""
         apt-get -y update > /dev/null
         apt-get -y install eyed3
         echo ""
