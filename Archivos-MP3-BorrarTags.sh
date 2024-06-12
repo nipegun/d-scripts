@@ -55,7 +55,7 @@ if [ $# -ne $cCantArgumEsperados ]
         echo ""
       fi
     echo ""
-    eyeD3 --remove-all $1
+    eyeD3 -v -r --remove-all $1
     echo ""
 fi
 
