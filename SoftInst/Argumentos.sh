@@ -5,14 +5,17 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-# Definir las variables de color
+# Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
   cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
-cCantArgumEsperados=2
+# Definir la cantidad de argumentos esperados
+  cCantArgumEsperados=2
 
 if [ $# -ne $cCantArgumEsperados ]
   then
