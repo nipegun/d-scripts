@@ -92,7 +92,7 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "  Instalando paquetes necesarios..." 
-echo ""
+  echo ""
   apt-get -y update
   apt-get -y install nagios-nrpe-server
   apt-get -y install nagios-nrpe-plugin
@@ -102,7 +102,7 @@ echo ""
             
   echo ""
   echo "  Agregando comandos..." 
-echo ""
+  echo ""
   sed -i -e 's|command\[check_users]=|#command\[check_users]=|g'               /etc/nagios/nrpe.cfg
   sed -i -e 's|command\[check_load]=|#command\[check_load]=|g'                 /etc/nagios/nrpe.cfg
   sed -i -e 's|command\[check_hda1]=|#command\[check_hda1]=|g'                 /etc/nagios/nrpe.cfg
@@ -114,108 +114,185 @@ echo ""
 
   echo "# Memoria"                                                                                     >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_memory]=/usr/lib/nagios/plugins/check_memory -w 20% -c 10%"                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Antivirus"                                                                                   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_clamav]=/usr/lib/nagios/plugins/check_clamav"                                    >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_clamd]=/usr/lib/nagios/plugins/check_clamd"                                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Impresoras"                                                                                  >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_cups]=/usr/lib/nagios/plugins/check_cups"                                        >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# UpTime"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_uptime]=/usr/lib/nagios/plugins/check_uptime"                                    >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Kernel"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_running_kernel]=/usr/lib/nagios/plugins/check_running_kernel"                    >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Ping"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_localping]=/usr/lib/nagios/plugins/check_ping -H localhost -w 10:20% -c 10:100%" >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# SSH"                                                                                         >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_ssh]=/usr/lib/nagios/plugins/check_ssh -H localhost"                             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Mail"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_imap]=/usr/lib/nagios/plugins/check_imap -H localhost"                           >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_pop]=/usr/lib/nagios/plugins/check_pop -H localhost"                             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_smtp]=/usr/lib/nagios/plugins/check_smtp -H localhost"                           >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Sensores (Hace falta instalar el paquete lm-sensors)"                                        >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sensors]=/usr/lib/nagios/plugins/check_sensors -H localhost"                     >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Usuarios"                                                                                    >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_users]=/usr/lib/nagios/plugins/check_users -w 5 -c 10"                           >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Actualizaciones"                                                                             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_apt]=/usr/lib/nagios/plugins/check_apt"                                          >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Carga de trabajo"                                                                            >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_load]=/usr/lib/nagios/plugins/check_load -r -w .15,.10,.05 -c .30,.25,.20"       >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Procesos"                                                                                    >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_zombie_procs]=/usr/lib/nagios/plugins/check_procs -w 5 -c 10 -s Z"               >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200"                  >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Swap"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_swap]=/usr/lib/nagios/plugins/check_swap -w 50% -c 20%"                          >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Oracle"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_oracle]=/usr/lib/nagios/plugins/check_oracle"                                    >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# MySQL"                                                                                       >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_mysql]=/usr/lib/nagios/plugins/check_mysql"                                      >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_mysql_query]=/usr/lib/nagios/plugins/check_mysql_query"                          >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# DHCP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_dhcp_local]=/usr/lib/nagios/plugins/check_dhcp -s 127.0.0.1"                     >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# DNS"                                                                                         >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_dig]=/usr/lib/nagios/plugins/check_dig"                                          >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_dns]=/usr/lib/nagios/plugins/check_dns"                                          >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# HTTP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_http]=/usr/lib/nagios/plugins/check_http -H localhost"                           >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Discos"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_mp_root]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /"                  >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_mp_home]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /home/"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_mp_var]=/usr/lib/nagios/plugins/check_disk  -w 20% -c 10% -p /var/"              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Discos IDE"                                                                                  >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hda1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hda1"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hda2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hda2"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hda3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hda3"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hda4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hda4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hdb1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdb1"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hdb2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdb2"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hdb3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdb3"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hdb4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdb4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hdc1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdc1"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hdc2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdc2"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hdc3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdc3"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hdc4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdc4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hdd1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdd1"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hdd2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdd2"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hdd3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdd3"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_hdd4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdd4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Discos SATA"                                                                                 >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sda1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda1"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sda2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda2"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sda3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda3"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sda4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda5"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda6"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda7"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda8"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda9"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdb1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb1"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdb2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb2"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdb3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb3"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdb4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb5"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb6"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb7"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb8"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb9"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdc1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc1"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdc2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc2"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdc3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc3"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdc4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc5"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc6"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc7"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc8"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc9"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdd1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd1"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdd2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd2"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdd3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd3"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sdd4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd5"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd6"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd7"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd8"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd9"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sde1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde1"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sde2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde2"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sde3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde3"             >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_sde4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde5"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde6"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde7"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde8"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde9"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "# Discos NVMe"                                                                                 >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme0n1p1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p1"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme0n1p2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p2"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme0n1p3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p3"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme0n1p4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p4"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p5"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p6"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p7"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p8"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p9"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme1n1p1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p1"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme1n1p2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p2"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme1n1p3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p3"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme1n1p4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p4"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p5"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p6"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p7"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p8"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p9"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme2n1p1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p1"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme2n1p2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p2"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme2n1p3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p3"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme2n1p4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p4"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p5"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p6"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p7"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p8"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p9"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme3n1p1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p1"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme3n1p2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p2"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme3n1p3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p3"   >> /etc/nagios/nrpe.d/comandos.cfg
   echo "command[check_nvme3n1p4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p4"   >> /etc/nagios/nrpe.d/comandos.cfg
-  
+  echo "command[check_nvme3n1p5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p5"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme3n1p6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p6"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme3n1p7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p7"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme3n1p8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p8"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme3n1p9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p9"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+
   # Comandos con argumentos acarrean riesgos de seguridad
   # Sólo pueden ser usados si se configura dont_blame_nrpe=1 en el archivo de configuración
   #command[check_mem]=/usr/lib/nagios/plugins/custom_check_mem -n $ARG1$
@@ -230,7 +307,238 @@ echo ""
 
   echo ""
   echo "  Reiniciando el servidor nrpe..." 
-echo ""
+  echo ""
+  systemctl restart nagios-nrpe-server
+
+  echo ""
+  echo "  La lista de comandos para ser llamados desde Nagios es:"
+  echo ""
+  cat /etc/nagios/nrpe.d/comandos.cfg | cut -d ']' -f1 | cut -d '[' -f2 | grep -v "#"
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación del servidor nrpe para Debian 12 (Bookworm)..."
+  echo ""
+
+  echo ""
+  echo "  Instalando paquetes necesarios..." 
+  echo ""
+  apt-get -y update
+  apt-get -y install nagios-nrpe-server
+  apt-get -y install nagios-nrpe-plugin
+  apt-get -y install monitoring-plugins
+  apt-get -y install monitoring-plugins-contrib
+  apt-get -y install nagios-snmp-plugins
+            
+  echo ""
+  echo "  Agregando comandos..." 
+  echo ""
+  sed -i -e 's|command\[check_users]=|#command\[check_users]=|g'               /etc/nagios/nrpe.cfg
+  sed -i -e 's|command\[check_load]=|#command\[check_load]=|g'                 /etc/nagios/nrpe.cfg
+  sed -i -e 's|command\[check_hda1]=|#command\[check_hda1]=|g'                 /etc/nagios/nrpe.cfg
+  sed -i -e 's|command\[check_zombie_procs]=|#command\[check_zombie_procs]=|g' /etc/nagios/nrpe.cfg
+  sed -i -e 's|command\[check_total_procs]=|#command\[check_total_procs]=|g'   /etc/nagios/nrpe.cfg
+
+  rm -f /etc/nagios/nrpe.d/comandos.cfg 2> /dev/null
+  touch /etc/nagios/nrpe.d/comandos.cfg
+
+  echo "# Memoria"                                                                                     >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_memory]=/usr/lib/nagios/plugins/check_memory -w 20% -c 10%"                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Antivirus"                                                                                   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_clamav]=/usr/lib/nagios/plugins/check_clamav"                                    >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_clamd]=/usr/lib/nagios/plugins/check_clamd"                                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Impresoras"                                                                                  >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_cups]=/usr/lib/nagios/plugins/check_cups"                                        >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# UpTime"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_uptime]=/usr/lib/nagios/plugins/check_uptime"                                    >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Kernel"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_running_kernel]=/usr/lib/nagios/plugins/check_running_kernel"                    >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Ping"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_localping]=/usr/lib/nagios/plugins/check_ping -H localhost -w 10:20% -c 10:100%" >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# SSH"                                                                                         >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_ssh]=/usr/lib/nagios/plugins/check_ssh -H localhost"                             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Mail"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_imap]=/usr/lib/nagios/plugins/check_imap -H localhost"                           >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_pop]=/usr/lib/nagios/plugins/check_pop -H localhost"                             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_smtp]=/usr/lib/nagios/plugins/check_smtp -H localhost"                           >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Sensores (Hace falta instalar el paquete lm-sensors)"                                        >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sensors]=/usr/lib/nagios/plugins/check_sensors -H localhost"                     >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Usuarios"                                                                                    >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_users]=/usr/lib/nagios/plugins/check_users -w 5 -c 10"                           >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Actualizaciones"                                                                             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_apt]=/usr/lib/nagios/plugins/check_apt"                                          >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Carga de trabajo"                                                                            >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_load]=/usr/lib/nagios/plugins/check_load -r -w .15,.10,.05 -c .30,.25,.20"       >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Procesos"                                                                                    >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_zombie_procs]=/usr/lib/nagios/plugins/check_procs -w 5 -c 10 -s Z"               >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200"                  >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Swap"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_swap]=/usr/lib/nagios/plugins/check_swap -w 50% -c 20%"                          >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Oracle"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_oracle]=/usr/lib/nagios/plugins/check_oracle"                                    >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# MySQL"                                                                                       >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_mysql]=/usr/lib/nagios/plugins/check_mysql"                                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_mysql_query]=/usr/lib/nagios/plugins/check_mysql_query"                          >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# DHCP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_dhcp_local]=/usr/lib/nagios/plugins/check_dhcp -s 127.0.0.1"                     >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# DNS"                                                                                         >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_dig]=/usr/lib/nagios/plugins/check_dig"                                          >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_dns]=/usr/lib/nagios/plugins/check_dns"                                          >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# HTTP"                                                                                        >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_http]=/usr/lib/nagios/plugins/check_http -H localhost"                           >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Discos"                                                                                      >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_mp_root]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /"                  >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_mp_home]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /home/"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_mp_var]=/usr/lib/nagios/plugins/check_disk  -w 20% -c 10% -p /var/"              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Discos IDE"                                                                                  >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hda1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hda1"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hda2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hda2"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hda3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hda3"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hda4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hda4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hdb1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdb1"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hdb2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdb2"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hdb3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdb3"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hdb4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdb4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hdc1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdc1"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hdc2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdc2"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hdc3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdc3"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hdc4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdc4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hdd1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdd1"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hdd2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdd2"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hdd3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdd3"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_hdd4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hdd4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Discos SATA"                                                                                 >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda1"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda2"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda3"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda5"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda6"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda7"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda8"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sda9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda9"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb1"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb2"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb3"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb5"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb6"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb7"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb8"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdb9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb9"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc1"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc2"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc3"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc5"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc6"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc7"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc8"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdc9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdc9"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd1"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd2"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd3"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd5"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd6"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd7"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd8"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sdd9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdd9"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde1"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde2"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde3"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde4"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde5"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde6"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde7"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde8"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_sde9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sde9"             >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "# Discos NVMe"                                                                                 >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p1"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p2"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p3"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p4"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p5"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p6"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p7"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p8"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme0n1p9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme0n1p9"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p1"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p2"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p3"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p4"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p5"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p6"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p7"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p8"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme1n1p9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme1n1p9"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p1"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p2"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p3"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p4"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p5"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p6"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p7"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p8"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme2n1p9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme2n1p9"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme3n1p1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p1"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme3n1p2]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p2"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme3n1p3]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p3"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme3n1p4]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p4"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme3n1p5]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p5"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme3n1p6]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p6"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme3n1p7]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p7"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme3n1p8]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p8"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo "command[check_nvme3n1p9]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/nvme3n1p9"   >> /etc/nagios/nrpe.d/comandos.cfg
+  echo ""                                                                                              >> /etc/nagios/nrpe.d/comandos.cfg
+
+  # Comandos con argumentos acarrean riesgos de seguridad
+  # Sólo pueden ser usados si se configura dont_blame_nrpe=1 en el archivo de configuración
+  #command[check_mem]=/usr/lib/nagios/plugins/custom_check_mem -n $ARG1$
+  #command[check_init_service]=sudo /usr/lib/nagios/plugins/check_init_service $ARG1$
+  #command[check_services]=/usr/lib/nagios/plugins/check_services -p $ARG1$
+  #command[check_all_procs]=/usr/lib/nagios/plugins/custom_check_procs
+  #command[check_procs]=/usr/lib/nagios/plugins/check_procs $ARG1$
+  #command[check_open_files]=/usr/lib/nagios/plugins/check_open_files.pl $ARG1$
+  #command[check_netstat]=/usr/lib/nagios/plugins/check_netstat.pl -p $ARG1$ $ARG2$
+
+  apt-get -y update && apt-get -y install lm-sensors
+
+  echo ""
+  echo "  Reiniciando el servidor nrpe..." 
+  echo ""
   systemctl restart nagios-nrpe-server
 
   echo ""
