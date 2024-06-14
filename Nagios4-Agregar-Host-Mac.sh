@@ -15,47 +15,75 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Mac.sh | bash -s mimac "Mi Mac" "192.168.0.123"
 # ----------
 
-NombreDelHost=$1
-AliasDelHost=$2
-IPDelHost=$3
+# Definir constantes de color
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
 
-mkdir -p /etc/nagios4/computers/ 2> /dev/null
+# Definir la cantidad de argumentos esperados
+  cCantArgumEsperados=2
 
-echo "define host {"                                             > /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  use             linux-server"                           >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  host_name       $NombreDelHost"                         >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  alias           $AliasDelHost"                          >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  address         $IPDelHost"                             >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  icon_image      mac40.jpg"                              >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  icon_image_alt  Mac"                                    >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  vrml_image      mac40.png"                              >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  statusmap_image mac40.gd2"                              >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "}"                                                        >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo ""                                                         >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "define service {"                                         >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  use                 generic-service"                    >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  service_description PING"                               >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  check_command       check_ping!100.0,20%!500.0,60%"     >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "}"                                                        >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo ""                                                         >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "define service {"                                         >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  use                 generic-service"                    >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  service_description SSH"                                >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "  check_command       check_ssh"                          >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo "}"                                                        >> /etc/nagios4/computers/$NombreDelHost.cfg
-echo ""                                                         >> /etc/nagios4/computers/$NombreDelHost.cfg
+# Controlar que la cantidad de argumentos ingresados sea la correcta
+  if [ $# -ne $cCantArgumEsperados ]
+    then
+      echo ""
+      echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
+      echo "    $0 [NombreDelHost] [AliasDelHost] [IPDelHost]"
+      echo ""
+      echo "  Ejemplo:"
+      echo "    $0 'servdebian' 'servdebian' '192.168.1.10'"
+      echo ""
+      exit
+    else
 
-chown nagios:nagios /etc/nagios4/computers/$NombreDelHost.cfg
-chmod 664 /etc/nagios4/computers/$NombreDelHost.cfg
+      NombreDelHost=$1
+      AliasDelHost=$2
+      IPDelHost=$3
 
-sed -i -e "s-$NombreDelHost-$IPDelHost-g" /etc/nagios4/computers/$NombreDelHost.cfg
+      mkdir -p /etc/nagios4/computers/ 2> /dev/null
 
-systemctl restart nagios4
+      echo "define host {"                                             > /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  use             linux-server"                           >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  host_name       $NombreDelHost"                         >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  alias           $AliasDelHost"                          >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  address         $IPDelHost"                             >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  icon_image      mac40.jpg"                              >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  icon_image_alt  Mac"                                    >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  vrml_image      mac40.png"                              >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  statusmap_image mac40.gd2"                              >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "}"                                                        >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo ""                                                         >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "define service {"                                         >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  use                 generic-service"                    >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  service_description PING"                               >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  check_command       check_ping!100.0,20%!500.0,60%"     >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "}"                                                        >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo ""                                                         >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "define service {"                                         >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  use                 generic-service"                    >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  service_description SSH"                                >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "  check_command       check_ssh"                          >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo "}"                                                        >> /etc/nagios4/computers/$NombreDelHost.cfg
+      echo ""                                                         >> /etc/nagios4/computers/$NombreDelHost.cfg
 
-echo ""
-echo "  Mac agregado."
-echo "  Si la monitorización no funciona comprueba que xxx:"
-echo ""
-echo ""
+      chown nagios:nagios /etc/nagios4/computers/$NombreDelHost.cfg
+      chmod 664 /etc/nagios4/computers/$NombreDelHost.cfg
+
+      sed -i -e "s-$NombreDelHost-$IPDelHost-g" /etc/nagios4/computers/$NombreDelHost.cfg
+
+      systemctl restart nagios4
+
+      echo ""
+      echo "  Mac agregado."
+      echo "  Si la monitorización no funciona comprueba que xxx:"
+      echo ""
+      echo ""
+
+  fi
+
