@@ -13,81 +13,107 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Nagios4-Agregar-Host-Debian-Servidor.sh | bash -s midebianserver "Mi servidor Debian" "192.168.0.123"
 # ----------
 
-NombreDelHost=$1
-AliasDelHost=$2
-IPDelHost=$3
+# Definir constantes de color
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
 
-mkdir -p /etc/nagios4/servers/ 2> /dev/null
+# Definir la cantidad de argumentos esperados
+  cCantArgumEsperados=2
 
-echo "define host {"                                             > /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  use             linux-server"                           >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  host_name       $NombreDelHost"                         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  alias           $AliasDelHost"                          >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  address         $IPDelHost"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  icon_image      debian.jpg"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  icon_image_alt  Linux"                                  >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  vrml_image      debian.png"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  statusmap_image debian.gd2"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "define service {"                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  service_description PING"                               >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  check_command       check_ping!100.0,20%!500.0,60%"     >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "define service {"                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  service_description SSH"                                >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  check_command       check_ssh"                          >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "define service{"                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  service_description Procesador"                         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  check_command       comprobar_nrpe!check_load"          >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "define service{"                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  service_description Disco"                              >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  check_command       comprobar_nrpe!check_disk"          >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "define service{"                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  service_description Procesos"                           >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  check_command       comprobar_nrpe!check_total_procs"   >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "define service{"                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  service_description Usuarios"                           >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "  check_command       comprobar_nrpe!check_users"         >> /etc/nagios4/servers/$NombreDelHost.cfg
-echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+# Controlar que la cantidad de argumentos ingresados sea la correcta
+  if [ $# -ne $cCantArgumEsperados ]
+    then
+      echo ""
+      echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
+      echo "    $0 [NombreDelHost] [AliasDelHost] [IPDelHost]"
+      echo ""
+      echo "  Ejemplo:"
+      echo "    $0 'servdebian' 'servdebian' '192.168.1.10'"
+      echo ""
+      exit
+    else
+      NombreDelHost=$1
+      AliasDelHost=$2
+      IPDelHost=$3
 
-chown nagios:nagios /etc/nagios4/servers/$NombreDelHost.cfg
-chmod 664 /etc/nagios4/servers/$NombreDelHost.cfg
+      mkdir -p /etc/nagios4/servers/ 2> /dev/null
 
-sed -i -e "s-$NombreDelHost-$IPDelHost-g" /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "define host {"                                             > /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  use             linux-server"                           >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  host_name       $NombreDelHost"                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  alias           $AliasDelHost"                          >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  address         $IPDelHost"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  icon_image      debian.jpg"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  icon_image_alt  Linux"                                  >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  vrml_image      debian.png"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  statusmap_image debian.gd2"                             >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "define service {"                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  service_description PING"                               >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  check_command       check_ping!100.0,20%!500.0,60%"     >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "define service {"                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  service_description SSH"                                >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  check_command       check_ssh"                          >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "define service{"                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  service_description Procesador"                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  check_command       comprobar_nrpe!check_load"          >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "define service{"                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  service_description Disco"                              >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  check_command       comprobar_nrpe!check_disk"          >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "define service{"                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  service_description Procesos"                           >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  check_command       comprobar_nrpe!check_total_procs"   >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo ""                                                         >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "define service{"                                          >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  use                 generic-service"                    >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  host_name           $NombreDelHost"                     >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  service_description Usuarios"                           >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "  check_command       comprobar_nrpe!check_users"         >> /etc/nagios4/servers/$NombreDelHost.cfg
+      echo "}"                                                        >> /etc/nagios4/servers/$NombreDelHost.cfg
 
-systemctl restart nagios4
+      chown nagios:nagios /etc/nagios4/servers/$NombreDelHost.cfg
+      chmod 664 /etc/nagios4/servers/$NombreDelHost.cfg
 
-echo ""
-echo "  Host agregado."
-echo "  Si la monitorización no funciona comprueba que en el host esté instalado los paquetes:"
-echo ""
-echo "  monitoring-plugins"
-echo "  nagios-nrpe-server"
-echo ""
-echo "  Y que has activado en ese host la IP del servidor nagios:"
-echo "  sed -i -e 's/allowed_hosts=127.0.0.1,::1/allowed_hosts=127.0.0.1,::1,IpDelServidorNagios/g' /etc/nagios/nrpe.cfg"
-echo "  service nagios-nrpe-server restart"
-echo ""
+      sed -i -e "s-$NombreDelHost-$IPDelHost-g" /etc/nagios4/servers/$NombreDelHost.cfg
+
+      systemctl restart nagios4
+
+      echo ""
+      echo "  Host agregado."
+      echo "  Si la monitorización no funciona comprueba que en el host esté instalado los paquetes:"
+      echo ""
+      echo "  monitoring-plugins"
+      echo "  nagios-nrpe-server"
+      echo ""
+      echo "  Y que has activado en ese host la IP del servidor nagios:"
+      echo "  sed -i -e 's/allowed_hosts=127.0.0.1,::1/allowed_hosts=127.0.0.1,::1,IpDelServidorNagios/g' /etc/nagios/nrpe.cfg"
+      echo "  service nagios-nrpe-server restart"
+      echo ""
+
+  fi
 
