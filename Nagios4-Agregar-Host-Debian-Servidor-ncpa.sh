@@ -37,6 +37,7 @@
       echo ""
       exit
     else
+
       NombreDelHost=$1
       AliasDelHost=$2
       IPDelHost=$3
