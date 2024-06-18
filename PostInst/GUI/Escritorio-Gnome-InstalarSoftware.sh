@@ -290,6 +290,9 @@ elif [ $cVerSO == "12" ]; then
   # Específicas para Gnome
     apt-get -y install gnome-tweaks
     apt-get -y install gnome-shell-extension-desktop-icons-ng
+    apt-get -y install gnome-shell-extension-impatience
+    apt-get -y install gnome-shell-extension-hide-activities
+    apt-get -y install gnome-shell-extension-easycreencast
 
 fi
 
