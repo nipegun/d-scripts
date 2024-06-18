@@ -287,8 +287,9 @@ elif [ $cVerSO == "12" ]; then
   # Tor browser
     apt-get -y install torbrowser-launcher
 
-  # Espacíficas para Gnome
+  # Específicas para Gnome
     apt-get -y install gnome-tweaks
+    apt-get -y install gnome-shell-extension-desktop-icons-ng
 
 fi
 
