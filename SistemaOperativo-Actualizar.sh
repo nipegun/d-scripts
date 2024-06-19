@@ -7,44 +7,60 @@
 
 # ----------
 # Script de NiPeGun para actualizar Debian
+#
+# Ejecución remota:
+#   curl -sL x | bash
+#
+# Ejecución remota sin caché:
+#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
 # ----------
 
-cColorAzul="\033[0;34m"
-cColorAzulClaro="\033[1;34m"
-cColorVerde='\033[1;32m'
-cColorRojo='\033[1;31m'
-cFinColor='\033[0m'
+# Definir constantes de color
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
 
-echo ""
-echo -e "${cColorAzulClaro}  Iniciando el script de actualización del sistema operativo...${cFinColor}"
-echo ""
+# Indicar inicio de ejecución del script
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de actualización del sistema operativo...${cFinColor}"
+  echo ""
 
-echo ""
-echo "    Reparando permisos de la carpeta /tmp/ ..."
-echo ""
-chmod 1777 /tmp
+# Reparar permisos de /tmp
+  echo ""
+  echo "    Reparando permisos de la carpeta /tmp/ ..."
+  echo ""
+  chmod 1777 /tmp
 
-echo ""
-echo "    Ejecutando apt-get update..."
-echo ""
-apt-get -y update
+# Actualizar lista de paquetes disponibles en los repositorios
+  echo ""
+  echo "    Actualizando lista de paquetes disponibles en los repositorios..."
+  echo ""
+  apt-get -y update
 
-echo ""
-echo "    Ejecutando apt-get -y upgrade..."
-echo ""
-apt-get -y --allow-downgrades upgrade
+# Ejecutar upgrade
+  echo ""
+  echo "    Ejecutando apt-get -y upgrade..."
+  echo ""
+  apt-get -y --allow-downgrades upgrade
 
-echo ""
-echo "    Ejecutando apt-get -y dist-upgrade..."
-echo ""
-apt-get -y --allow-downgrades dist-upgrade
+# Ejecutar dist-upgrade
+  echo ""
+  echo "    Ejecutando apt-get -y dist-upgrade..."
+  echo ""
+  apt-get -y --allow-downgrades dist-upgrade
 
-echo ""
-echo "    Ejecutando apt-get -y autoremove..."
-echo ""
-apt-get -y autoremove
+# Borrar paquetes sobrantes innecesarios
+  echo ""
+  echo "    Ejecutando apt-get -y autoremove..."
+  echo ""
+  apt-get -y autoremove
 
-echo ""
-echo -e "${cColorVerde}    Script para actualizar el sistema operativo, finalizado.${cFinColor}"
-echo ""
+# Notificar fin de ejecución del script
+  echo ""
+  echo -e "${cColorVerde}    Script para actualizar el sistema operativo, finalizado.${cFinColor}"
+  echo ""
 
