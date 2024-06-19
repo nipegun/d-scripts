@@ -6,8 +6,33 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para actualizar e inmediamente apagar el sistema operativo
+# Script de NiPeGun para ctualizar e inmediamente apagar el sistema operativo
+#
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SistemaOperativo-ActualizarYApagar.sh | bash
+#
+# Ejecución remota sin caché:
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SistemaOperativo-ActualizarYApagar.sh | bash
 # ----------
+
+# Definir constantes de color
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
+    echo ""
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
+    echo ""
+    exit
+  fi
+
+# Comprobar que los d-scripts estén instalados
 
 /root/scripts/d-scripts/SistemaOperativo-Actualizar.sh
 /root/scripts/d-scripts/SistemaOperativo-Apagar.sh
