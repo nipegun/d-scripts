@@ -9,10 +9,10 @@
 # Script de NiPeGun para actualizar e inmediamente reiniciar Debian
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SistemaOperativo-ActualizarYApagar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SistemaOperativo-ActualizarYReiniciar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SistemaOperativo-ActualizarYApagar.sh | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SistemaOperativo-ActualizarYReiniciar.sh | bash
 # ----------
 
 # Definir constantes de color
