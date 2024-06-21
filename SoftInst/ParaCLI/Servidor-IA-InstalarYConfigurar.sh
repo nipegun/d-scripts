@@ -9,13 +9,13 @@
 # Script de NiPeGun para instalar y configurar un servidor de inteligencia artificial en Debian
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-IA-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-IA-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-IA-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 # Definir constantes de color
@@ -68,7 +68,7 @@
 if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 13 (x)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de inteligencia artificial para Debian 13 (x)...${cFinColor}"
   echo ""
 
   echo ""
@@ -78,7 +78,7 @@ if [ $cVerSO == "13" ]; then
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 12 (Bookworm)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de inteligencia artificial para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
   echo ""
@@ -88,7 +88,7 @@ elif [ $cVerSO == "12" ]; then
 elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de inteligencia artificial para Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   echo ""
@@ -98,7 +98,7 @@ elif [ $cVerSO == "11" ]; then
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de inteligencia artificial para Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   echo ""
@@ -108,7 +108,7 @@ elif [ $cVerSO == "10" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de inteligencia artificial para Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   echo ""
@@ -118,7 +118,7 @@ elif [ $cVerSO == "9" ]; then
 elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de inteligencia artificial para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
@@ -128,7 +128,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de inteligencia artificial para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
