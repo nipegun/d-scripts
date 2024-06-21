@@ -35,16 +35,6 @@
     exit
   fi
 
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update
-    apt-get -y install curl
-    echo ""
-  fi
-
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
@@ -81,9 +71,103 @@ elif [ $cVerSO == "12" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de inteligencia artificial para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+  vFechaDeEjec=$(date +a%Ym%md%d@%T)
+
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+      echo ""
+      apt-get -y update
+      apt-get -y install dialog
+      echo ""
+    fi
+
+  menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+    opciones=(
+      1 "Instalar Ollama" on
+      2 "Opción 2" off
+      3 "Opción 3" off
+      4 "Opción 4" off
+      5 "Opción 5" off
+    )
+  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+
+    for choice in $choices
+      do
+        case $choice in
+
+          1)
+
+            echo ""
+            echo "  Instalando Ollama..."
+            echo ""
+
+            echo ""
+            echo "    Bajando y ejecutando el script de instalación desde la web oficial..."
+            echo ""
+            # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                echo ""
+                apt-get -y update
+                apt-get -y install curl
+                echo ""
+              fi
+            # Comprobar si el paquete pciutils está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s pciutils 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${cColorRojo}      El paquete pciutils no está instalado. Iniciando su instalación...${cFinColor}"
+                echo ""
+                apt-get -y update
+                apt-get -y install pciutils
+                echo ""
+              fi
+            # Correr el script de instalación
+              curl -fsSL https://ollama.com/install.sh | sh
+
+            # Activar e iniciar el servicio
+            systemctl enable ollama --now
+
+          ;;
+
+          2)
+
+            echo ""
+            echo "  Instalando el controlador de nVidia..."
+            echo ""
+            curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-Instalar.sh | bash
+
+          ;;
+
+          3)
+
+            echo ""
+            echo "  Opción 3..."
+            echo ""
+
+          ;;
+
+          4)
+
+            echo ""
+            echo "  Opción 4..."
+            echo ""
+
+          ;;
+
+          5)
+
+            echo ""
+            echo "  Opción 5..."
+            echo ""
+
+          ;;
+
+      esac
+
+  done
 
 elif [ $cVerSO == "11" ]; then
 
