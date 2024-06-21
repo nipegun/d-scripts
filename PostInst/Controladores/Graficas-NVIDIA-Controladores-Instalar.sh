@@ -7,6 +7,7 @@
 
 # ----------
 # Script de NiPeGun para instalar y configurar los controladores de NVIDIA en Debian
+# de forma que se pueda dar uso a los núcleos CUDA de la tarjeta gráfica
 #
 # Ejecución remota:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-Instalar.sh | bash
