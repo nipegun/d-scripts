@@ -6,16 +6,16 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para instalar y configurar los controladores nVidia en Debian
+# Script de NiPeGun para instalar y configurar los controladores de NVIDIA en Debian
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-Instalar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-Instalar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-Instalar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
 # Definir constantes de color
@@ -33,16 +33,6 @@
     echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
     echo ""
     exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update
-    apt-get -y install curl
-    echo ""
   fi
 
 # Determinar la versión de Debian
@@ -81,9 +71,29 @@ elif [ $cVerSO == "12" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de los controladores NVIDIA para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+  # Determinar el controlador a instalar
+    echo ""
+    echo "    Determinando el controlador a instalar..."
+    echo ""
+    # Comprobar si el paquete nvidia-detect está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s nvidia-detect 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}      El paquete nvidia-detect no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        apt-get -y update
+        apt-get -y install nvidia-detect
+        echo ""
+      fi
+    cPaqueteControlador=$(nvidia-detect | grep "^ " | sed 's- --g')
+    echo ""
+    echo "      El paquete con el controlador a instalar es: $cPaqueteControlador"
+    echo ""
+
+  # Instalar el paquete del controlador
+    echo ""
+    echo "    Instalando el paquete del controlador..."
+    echo ""
+    apt-get -y install $cPaqueteControlador
 
 elif [ $cVerSO == "11" ]; then
 
