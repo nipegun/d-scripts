@@ -86,8 +86,8 @@ elif [ $cVerSO == "12" ]; then
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
       1 "Instalar Ollama" on
-      2 "Opción 2" off
-      3 "Opción 3" off
+      2 "Instalar llama3" off
+      3 "Instalar Open WebUI" off
       4 "Opción 4" off
       5 "Opción 5" off
     )
@@ -135,18 +135,22 @@ elif [ $cVerSO == "12" ]; then
           2)
 
             echo ""
-            echo "  Instalando el modelo llama3 de 8000 millones de parámetros..."
+            echo "  Instalando el modelo llama3..."
             echo ""
-            ollama pull llama3:8b
+            # Modelo de 8.000.000.000 de parámetros
+              ollama pull llama3:8b
+            # Modelo de 70.000.000.000 de parámetros
+              ollama pull llama3:70b
 
           ;;
 
           3)
 
             echo ""
-            echo "  Instalando el modelo llama3 de 70.000 millones de parámetros..."
+            echo "  Instalando Open WebUI..."
             echo ""
-            ollama pull llama3:70b
+            python3 -m venv --system-site-packages /opt/open-webui
+            /opt/open-webui/bin/pip3 install open-webui 
 
           ;;
 
