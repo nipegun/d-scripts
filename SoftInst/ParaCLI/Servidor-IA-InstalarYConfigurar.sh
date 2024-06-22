@@ -135,17 +135,18 @@ elif [ $cVerSO == "12" ]; then
           2)
 
             echo ""
-            echo "  Instalando el controlador de nVidia..."
+            echo "  Instalando el modelo llama3 de 8000 millones de parámetros..."
             echo ""
-            curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-Instalar.sh | bash
+            ollama pull llama3:8b
 
           ;;
 
           3)
 
             echo ""
-            echo "  Opción 3..."
+            echo "  Instalando el modelo llama3 de 70.000 millones de parámetros..."
             echo ""
+            ollama pull llama3:70b
 
           ;;
 
