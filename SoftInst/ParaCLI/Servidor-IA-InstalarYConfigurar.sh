@@ -178,6 +178,15 @@ elif [ $cVerSO == "12" ]; then
               systemctl daemon-reload
               systemctl enable --now open-webui.service 
 
+            # Notificar fin de la instalación de Open WebUI
+              echo ""
+              echo "  Instalación de Open WebUI, finalizada."
+              echo ""
+              echo "    La web está disponible en: http://localhost:8080"
+              echo ""
+              echo "    El primer usuario en registrarse se convertirá automáticamente en el AAdministrador."
+              echo ""
+
           ;;
 
           4)
