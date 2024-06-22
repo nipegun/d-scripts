@@ -140,7 +140,7 @@ elif [ $cVerSO == "12" ]; then
             # Modelo de 8.000.000.000 de parámetros
               ollama pull llama3:8b
             # Modelo de 70.000.000.000 de parámetros
-              ollama pull llama3:70b
+              #ollama pull llama3:70b
 
           ;;
 
@@ -149,8 +149,34 @@ elif [ $cVerSO == "12" ]; then
             echo ""
             echo "  Instalando Open WebUI..."
             echo ""
+            apt-get -y install python3-venv
             python3 -m venv --system-site-packages /opt/open-webui
             /opt/open-webui/bin/pip3 install open-webui 
+
+            # Crear el servicio
+              echo ""
+              echo "  Creando el servicio..."
+              echo ""
+              echo "[Unit]"                                          > /usr/lib/systemd/system/open-webui.service
+              echo "Description=Open WebUI Service"                 >> /usr/lib/systemd/system/open-webui.service
+              echo "After=network.target"                           >> /usr/lib/systemd/system/open-webui.service
+              echo ""                                               >> /usr/lib/systemd/system/open-webui.service
+              echo "[Service]"                                      >> /usr/lib/systemd/system/open-webui.service
+              echo "Type=simple"                                    >> /usr/lib/systemd/system/open-webui.service
+              echo "ExecStart=/opt/open-webui/bin/open-webui serve" >> /usr/lib/systemd/system/open-webui.service
+              echo "ExecStop=/bin/kill -HUP $MAINPID"               >> /usr/lib/systemd/system/open-webui.service
+              echo "User=root"                                      >> /usr/lib/systemd/system/open-webui.service
+              echo "Group=root"                                     >> /usr/lib/systemd/system/open-webui.service
+              echo ""                                               >> /usr/lib/systemd/system/open-webui.service
+              echo "[Install]"                                      >> /usr/lib/systemd/system/open-webui.service
+              echo "WantedBy=multi-user.target"                     >> /usr/lib/systemd/system/open-webui.service
+
+            # Activar e iniciar el servicio
+              echo ""
+              echo "  Activando e iniciando el servicio..."
+              echo ""
+              systemctl daemon-reload
+              systemctl enable --now open-webui.service 
 
           ;;
 
