@@ -352,7 +352,7 @@
             echo ""
 
             # Definir el espacio libre necesario
-              vGBsLibresNecesarios=30
+              vGBsLibresNecesarios=10
               vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
 
             # Obtener el espacio libre en la partición raíz en kilobytes
@@ -379,7 +379,7 @@
             echo ""
 
             # Definir el espacio libre necesario
-              vGBsLibresNecesarios=30
+              vGBsLibresNecesarios=135
               vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
 
             # Obtener el espacio libre en la partición raíz en kilobytes
@@ -399,11 +399,6 @@
 
           ;;
 
-
-
-
-
-
          13)
 
             echo ""
@@ -411,7 +406,7 @@
             echo ""
 
             # Definir el espacio libre necesario
-              vGBsLibresNecesarios=30
+              vGBsLibresNecesarios=33
               vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
 
             # Obtener el espacio libre en la partición raíz en kilobytes
@@ -438,7 +433,7 @@
             echo ""
 
             # Definir el espacio libre necesario
-              vGBsLibresNecesarios=30
+              vGBsLibresNecesarios=480
               vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
 
             # Obtener el espacio libre en la partición raíz en kilobytes
@@ -457,10 +452,6 @@
               fi
 
           ;;
-
-
-
-
 
       esac
 
