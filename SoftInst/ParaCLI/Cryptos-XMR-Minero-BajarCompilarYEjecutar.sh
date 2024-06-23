@@ -173,13 +173,13 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
   echo ""
   echo "    Creando el script para ejecutar manualmente el minero (con cores reales) (Background)..."
   echo ""
-  echo '#!/bin/bash'                                                                                                                                                              > /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
-  echo ""                                                                                                                                                                        >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
-  echo "vHilos=$vHilosCalculados"                                                                                                                                                >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
-  echo 'vIdMinero=$(cat /$HOME/Cryptos/XMR/Minero/IdMinero.txt)'                                                                                                                 >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
-  echo 'vDirWallet="'"$vDirWallet"'"'                                                                                                                                            >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
-  echo '/$HOME/Cryptos/XMR/Minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --background --log-file=/$HOME/Cryptos/XMR/Minero/Log/xmrig.log' >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
-  chmod +x                                                                                                                                                                          /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
+  echo '#!/bin/bash'                                                                                                                                         > /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
+  echo ""                                                                                                                                                   >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
+  echo "vHilos=$vHilosCalculados"                                                                                                                           >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
+  echo 'vIdMinero=$(cat /$HOME/Cryptos/XMR/Minero/IdMinero.txt)'                                                                                            >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
+  echo 'vDirWallet="'"$vDirWallet"'"'                                                                                                                       >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
+  echo '/$HOME/Cryptos/XMR/Minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --background --log-file=/var/log/xmrig.log' >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
+  chmod +x                                                                                                                                                     /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-Background.sh
 
 # Crear el script de ejecución manual
   echo ""
@@ -197,13 +197,13 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
   echo ""
   echo "    Creando el script para ejecutar manualmente el minero (con cores reales) (TLS) (Background)..."
   echo ""
-  echo '#!/bin/bash'                                                                                                                                                                    > /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
-  echo ""                                                                                                                                                                              >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
-  echo "vHilos=$vHilosCalculados"                                                                                                                                                      >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
-  echo 'vIdMinero=$(cat /$HOME/Cryptos/XMR/Minero/IdMinero.txt)'                                                                                                                       >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
-  echo 'vDirWallet="'"$vDirWallet"'"'                                                                                                                                                  >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
-  echo '/$HOME/Cryptos/XMR/Minero/xmrig -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --tls --background --log-file=/$HOME/Cryptos/XMR/Minero/Log/xmrig.log' >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
-  chmod +x                                                                                                                                                                                /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
+  echo '#!/bin/bash'                                                                                                                                               > /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
+  echo ""                                                                                                                                                         >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
+  echo "vHilos=$vHilosCalculados"                                                                                                                                 >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
+  echo 'vIdMinero=$(cat /$HOME/Cryptos/XMR/Minero/IdMinero.txt)'                                                                                                  >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
+  echo 'vDirWallet="'"$vDirWallet"'"'                                                                                                                             >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
+  echo '/$HOME/Cryptos/XMR/Minero/xmrig -o xmrpool.eu:9999 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet --tls --background --log-file=/var/log/xmrig.log' >> /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
+  chmod +x                                                                                                                                                           /$HOME/Cryptos/XMR/Minero/Minar-ConCoresReales-TLS-Background.sh
 
 
 # Crear el script de ejecución manual
@@ -221,12 +221,12 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
   echo ""
   echo "    Creando el script para ejecutar manualmente el minero (con rendimiento máximo) (Background)..."
   echo ""
-  echo '#!/bin/bash'                                                                                                                                            > /$HOME/Cryptos/XMR/Minero/Minar-ATope-Background.sh
-  echo ""                                                                                                                                                      >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-Background.sh
-  echo 'vIdMinero=$(cat /$HOME/Cryptos/XMR/Minero/IdMinero.txt)'                                                                                               >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-Background.sh
-  echo 'vDirWallet="'"$vDirWallet"'"'                                                                                                                          >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-Background.sh
-  echo '/$HOME/Cryptos/XMR/Minero/xmrig -o xmrpool.eu:3333 --rig-id=$vIdMinero -u $vDirWallet --background --log-file=/$HOME/Cryptos/XMR/Minero/Log/xmrig.log' >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-Background.sh
-  chmod +x                                                                                                                                                        /$HOME/Cryptos/XMR/Minero/Minar-ATope-Background.sh
+  echo '#!/bin/bash'                                                                                                                       > /$HOME/Cryptos/XMR/Minero/Minar-ATope-Background.sh
+  echo ""                                                                                                                                 >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-Background.sh
+  echo 'vIdMinero=$(cat /$HOME/Cryptos/XMR/Minero/IdMinero.txt)'                                                                          >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-Background.sh
+  echo 'vDirWallet="'"$vDirWallet"'"'                                                                                                     >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-Background.sh
+  echo '/$HOME/Cryptos/XMR/Minero/xmrig -o xmrpool.eu:3333 --rig-id=$vIdMinero -u $vDirWallet --background --log-file=/var/log/xmrig.log' >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-Background.sh
+  chmod +x                                                                                                                                   /$HOME/Cryptos/XMR/Minero/Minar-ATope-Background.sh
 
 # Crear el script de ejecución manual
   echo ""
@@ -243,27 +243,27 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
   echo ""
   echo "    Creando el script para ejecutar manualmente el minero (con rendimiento máximo) (TLS) (Background)..."
   echo ""
-  echo '#!/bin/bash'                                                                                                                                                  > /$HOME/Cryptos/XMR/Minero/Minar-ATope-TLS-Background.sh
-  echo ""                                                                                                                                                            >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-TLS-Background.sh
-  echo 'vIdMinero=$(cat /$HOME/Cryptos/XMR/Minero/IdMinero.txt)'                                                                                                     >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-TLS-Background.sh
-  echo 'vDirWallet="'"$vDirWallet"'"'                                                                                                                                >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-TLS-Background.sh
-  echo '/$HOME/Cryptos/XMR/Minero/xmrig -o xmrpool.eu:9999 --rig-id=$vIdMinero -u $vDirWallet --tls --background --log-file=/$HOME/Cryptos/XMR/Minero/Log/xmrig.log' >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-TLS-Background.sh
-  chmod +x                                                                                                                                                              /$HOME/Cryptos/XMR/Minero/Minar-ATope-TLS-Background.sh
+  echo '#!/bin/bash'                                                                                                                             > /$HOME/Cryptos/XMR/Minero/Minar-ATope-TLS-Background.sh
+  echo ""                                                                                                                                       >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-TLS-Background.sh
+  echo 'vIdMinero=$(cat /$HOME/Cryptos/XMR/Minero/IdMinero.txt)'                                                                                >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-TLS-Background.sh
+  echo 'vDirWallet="'"$vDirWallet"'"'                                                                                                           >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-TLS-Background.sh
+  echo '/$HOME/Cryptos/XMR/Minero/xmrig -o xmrpool.eu:9999 --rig-id=$vIdMinero -u $vDirWallet --tls --background --log-file=/var/log/xmrig.log' >> /$HOME/Cryptos/XMR/Minero/Minar-ATope-TLS-Background.sh
+  chmod +x                                                                                                                                         /$HOME/Cryptos/XMR/Minero/Minar-ATope-TLS-Background.sh
 
 # Crear el archivo para mostrar el log
-  echo '#!/bin/bash'                                      > /$HOME/Cryptos/XMR/Minero/Log-Mostrar.sh
-  echo ""                                                >> /$HOME/Cryptos/XMR/Minero/Log-Mostrar.sh
-  echo 'echo ""'                                         >> /$HOME/Cryptos/XMR/Minero/Log-Mostrar.sh
-  echo 'tail -f /$HOME/Cryptos/XMR/Minero/Log/xmrig.log' >> /$HOME/Cryptos/XMR/Minero/Log-Mostrar.sh
-  echo 'echo ""'                                         >> /$HOME/Cryptos/XMR/Minero/Log-Mostrar.sh
-  chmod +x                                                  /$HOME/Cryptos/XMR/Minero/Log-Mostrar.sh
+  echo '#!/bin/bash'                 > /$HOME/Cryptos/XMR/Minero/Log-Mostrar.sh
+  echo ""                           >> /$HOME/Cryptos/XMR/Minero/Log-Mostrar.sh
+  echo 'echo ""'                    >> /$HOME/Cryptos/XMR/Minero/Log-Mostrar.sh
+  echo 'tail -f /var/log/xmrig.log' >> /$HOME/Cryptos/XMR/Minero/Log-Mostrar.sh
+  echo 'echo ""'                    >> /$HOME/Cryptos/XMR/Minero/Log-Mostrar.sh
+  chmod +x                             /$HOME/Cryptos/XMR/Minero/Log-Mostrar.sh
 
 # Crear el archivo de logs
   echo ""
   echo "  Creando el archivo de logs..."
   echo ""
-  mkdir -p /$HOME/Cryptos/XMR/Minero/Log/ 2> /dev/null
-  touch    /$HOME/Cryptos/XMR/Minero/Log/xmrig.log
+  touch /var/log/xmrig.log
+  chmod 777 /var/log/xmrig.log
 
 # Lanzar el minero
   echo ""
