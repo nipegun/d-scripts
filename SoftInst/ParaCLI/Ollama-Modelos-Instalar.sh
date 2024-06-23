@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para instalar y configurar diferentes modelos de Ollama en Debian
+# Script de NiPeGun para instalar y configurar diferentes modelos LLM de Ollama en Debian
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Ollama-Modelos-Instalar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Ollama-Modelos-Instalar.sh | bash
 #
 # Ejecución remota con parámetros:
 #   curl -sL x | bash -s Parámetro1 Parámetro2
@@ -122,6 +122,38 @@
           ;;
 
           5)
+
+            echo ""
+            echo "  Opción 5..."
+            echo ""
+
+          ;;
+
+          6)
+
+            echo ""
+            echo "  Opción 5..."
+            echo ""
+
+          ;;
+
+          7)
+
+            echo ""
+            echo "  Opción 5..."
+            echo ""
+
+          ;;
+
+          8)
+
+            echo ""
+            echo "  Opción 5..."
+            echo ""
+
+          ;;
+
+          9)
 
             echo ""
             echo "  Opción 5..."
