@@ -88,7 +88,7 @@ elif [ $cVerSO == "12" ]; then
       1 "Instalar Ollama" on
       2 "Instalar Open WebUI" on
       3 "Instalar modelos LLM para Ollama" on
-      4 "Opción 4" off
+      4 "Instalar TextGeneration WebUI" off
       5 "Opción 5" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
