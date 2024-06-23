@@ -61,8 +61,12 @@
       6 "mistral 7b-instruct-fp16 (FineTuneado para chatear)" off
       7 "phi3 3.8b" off
       8 "phi3 14b" off
-      9 "phi3 3.8b-mini-128k-instruct-f16" off
-     10 "phi3 14b-medium-128k-instruct-f16" off
+      9 "phi3 3.8b-mini-128k-instruct-f16 (FineTuneado para chatear)" off
+     10 "phi3 14b-medium-128k-instruct-f16 (FineTuneado para chatear)" off
+     11 "deepseek-coder-v2 16b" off
+     12 "deepseek-coder-v2 236b" off
+     13 "deepseek-coder-v2 16b-lite-instruct-fp16 (FineTuneado para chatear)" off
+     14 "deepseek-coder-v2 236b-instruct-fp16 (FineTuneado para chatear)" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   #clear
@@ -340,6 +344,123 @@
               fi
 
           ;;
+
+         11)
+
+            echo ""
+            echo "  Instalando deepseek-coder-v2:16b..."
+            echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=30
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull deepseek-coder-v2:16b
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo deepseek-coder-v2:16b.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
+
+          ;;
+
+         12)
+
+            echo ""
+            echo "  Instalando deepseek-coder-v2:236b..."
+            echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=30
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull deepseek-coder-v2:236b
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo deepseek-coder-v2:236b.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
+
+          ;;
+
+
+
+
+
+
+         13)
+
+            echo ""
+            echo "  Instalando deepseek-coder-v2:16b-lite-instruct-fp16..."
+            echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=30
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull deepseek-coder-v2:16b-lite-instruct-fp16
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo deepseek-coder-v2:16b-lite-instruct-fp16.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
+
+          ;;
+
+         14)
+
+            echo ""
+            echo "  Instalando deepseek-coder-v2:236b-instruct-fp16..."
+            echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=30
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull deepseek-coder-v2:236b-instruct-fp16
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo deepseek-coder-v2:236b-instruct-fp16.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
+
+          ;;
+
+
+
+
 
       esac
 
