@@ -172,7 +172,7 @@ elif [ $cVerSO == "12" ]; then
               echo ""
               echo "    La web está disponible en: http://localhost:8080"
               echo ""
-              echo "    El primer usuario en registrarse se convertirá automáticamente en el AAdministrador."
+              echo "    El primer usuario en registrarse se convertirá automáticamente en el Administrador."
               echo ""
 
           ;;
