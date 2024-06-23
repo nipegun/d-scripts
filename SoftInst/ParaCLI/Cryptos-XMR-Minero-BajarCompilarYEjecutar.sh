@@ -251,12 +251,12 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
   chmod +x                                                                                                                                                    ~/Cryptos/XMR/Minero/Minar-ATope-TLS-Background.sh
 
 # Crear el archivo para mostrar el log
-  echo '#!/bin/bash'                                     > ~/Cryptos/XMR/Minero/Log-Mostrar.sh
-  echo ""                                               >> ~/Cryptos/XMR/Minero/Log-Mostrar.sh
-  echo 'echo ""'                                        >> ~/Cryptos/XMR/Minero/Log-Mostrar.sh
-  echo 'tail -f /root/Cryptos/XMR/Minero/Log/xmrig.log' >> ~/Cryptos/XMR/Minero/Log-Mostrar.sh
-  echo 'echo ""'                                        >> ~/Cryptos/XMR/Minero/Log-Mostrar.sh
-  chmod +x                                                 ~/Cryptos/XMR/Minero/Log-Mostrar.sh
+  echo '#!/bin/bash'                                 > ~/Cryptos/XMR/Minero/Log-Mostrar.sh
+  echo ""                                           >> ~/Cryptos/XMR/Minero/Log-Mostrar.sh
+  echo 'echo ""'                                    >> ~/Cryptos/XMR/Minero/Log-Mostrar.sh
+  echo 'tail -f ~/Cryptos/XMR/Minero/Log/xmrig.log' >> ~/Cryptos/XMR/Minero/Log-Mostrar.sh
+  echo 'echo ""'                                    >> ~/Cryptos/XMR/Minero/Log-Mostrar.sh
+  chmod +x                                             ~/Cryptos/XMR/Minero/Log-Mostrar.sh
 
 # Crear el archivo de logs
   echo ""
