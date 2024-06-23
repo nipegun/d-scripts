@@ -140,7 +140,7 @@ vCartera="nipegun"
       echo ""
     fi
   vCantSockets=$(lscpu | grep ocket | grep -v "ocket»" | cut -d':' -f2 | sed 's- --g')
-  echo "    La cantidad de sockets es: $vCantSockets."
+  echo "      La cantidad de sockets es: $vCantSockets."
   echo ""
 
 # Obtener el número de cores
@@ -148,7 +148,7 @@ vCartera="nipegun"
   echo "    Obteniendo el número de cores..."
   echo ""
   vCantCores=$(lscpu | grep "ocket»" | cut -d':' -f2 | sed 's- --g')
-  echo "    La cantidad de cores es: $vCantCores."
+  echo "      La cantidad de cores es: $vCantCores."
   echo ""
 
 # Obtener el número de hilos
@@ -158,7 +158,7 @@ vCartera="nipegun"
   vCantHilosPorCore=$(lscpu | grep ilo | cut -d':' -f2| sed 's- --g')
   #vCantTotalDeHilos=$(echo "$vCantHilosPorCore * $vCantCores" | bc)
   vCantTotalDeHilos=$(($vCantHilosPorCore * $vCantCores))
-  echo "    La cantidad de hilos es: $vCantTotalDeHilos."
+  echo "      La cantidad de hilos es: $vCantTotalDeHilos."
   echo ""
 
 # Asignar los hilos calculados al conteo de cores reales
@@ -176,9 +176,9 @@ vCartera="nipegun"
   echo '#!/bin/bash'                                                                                              > $vHome/Cryptos/XMR/Minero/Minar-ConCoresReales.sh
   echo ""                                                                                                        >> $vHome/Cryptos/XMR/Minero/Minar-ConCoresReales.sh
   echo "vHilos=$vHilosCalculados"                                                                                >> $vHome/Cryptos/XMR/Minero/Minar-ConCoresReales.sh
-  echo 'vIdMinero=$(cat $vHome/Cryptos/XMR/Minero/IdMinero.txt)'                                                 >> $vHome/Cryptos/XMR/Minero/Minar-ConCoresReales.sh
+  echo 'vIdMinero=$(cat '"$vHome"'/Cryptos/XMR/Minero/IdMinero.txt)'                                                 >> $vHome/Cryptos/XMR/Minero/Minar-ConCoresReales.sh
   echo 'vDirWallet="'"$vDirWallet"'"'                                                                            >> $vHome/Cryptos/XMR/Minero/Minar-ConCoresReales.sh
-  echo '$vHome/Cryptos/XMR/Minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet' >> $vHome/Cryptos/XMR/Minero/Minar-ConCoresReales.sh
+  echo ''"$vHome"'/Cryptos/XMR/Minero/xmrig -o xmrpool.eu:3333 --threads=$vHilos --rig-id=$vIdMinero -u $vDirWallet' >> $vHome/Cryptos/XMR/Minero/Minar-ConCoresReales.sh
   chmod +x                                                                                                          $vHome/Cryptos/XMR/Minero/Minar-ConCoresReales.sh
 
 # Crear el script de ejecución manual
