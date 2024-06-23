@@ -59,9 +59,10 @@
       4 "llama3 70b-instruct-fp16 (FineTuneado para chatear)" off
       5 "mistral 7b" off
       6 "mistral 7b-instruct-fp16 (FineTuneado para chatear)" off
-      7 "" off
-      8 "" off
+      7 "phi3 3.8b" off
+      8 "phi3 14b" off
       9 "" off
+     10 "" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   #clear
@@ -235,16 +236,54 @@
           7)
 
             echo ""
-            echo "  Opción 5..."
+            echo "  Instalando phi3:3.8b..."
             echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=3
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull phi3:3.8b
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo phi3:3.8b.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
 
           ;;
 
           8)
 
             echo ""
-            echo "  Opción 5..."
+            echo "  Instalando phi3:14b..."
             echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=9
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull phi3:14b
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo phi3:14b.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
 
           ;;
 
