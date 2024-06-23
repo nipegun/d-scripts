@@ -12,16 +12,21 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/FlatPak-Instalar.sh | bash
 # ----------
 
+
 # Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
   cColorVerde='\033[1;32m'
   cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
   if [ $(id -u) -ne 0 ]; then
+    echo ""
     echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
+    echo ""
     exit
   fi
 
@@ -55,81 +60,92 @@
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+# Ejecutar comandos dependiendo de la versión de Debian detectada
+  if [ $cVerSO == "13" ]; then
 
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de flatpak para Debian 7 (Wheezy)...${cFinColor}"
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 13 (x)...${cFinColor}"
+    echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "8" ]; then
+  elif [ $cVerSO == "12" ]; then
 
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de flatpak para Debian 8 (Jessie)...${cFinColor}"
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 12 (Bookworm)...${cFinColor}"
+    echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+    echo ""
+    echo "    Actualizando lista de paquetes..." 
+    echo ""
+    apt-get -y update
 
-elif [ $cVerSO == "9" ]; then
+    echo ""
+    echo "    Instalando paquete flatpak"
+    echo ""
+    apt-get -y install flatpak
 
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de flatpak para Debian 9 (Stretch)...${cFinColor}"
-  echo ""
+    echo ""
+    echo "    Instalando plugin para gnome software..." 
+    echo ""
+    apt-get -y install gnome-software-plugin-flatpak
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+    echo ""
+    echo "    Agregando el repositorio flathuub..." 
+    echo ""
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-elif [ $cVerSO == "10" ]; then
+  elif [ $cVerSO == "11" ]; then
 
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de flatpak para Debian 10 (Buster)...${cFinColor}"
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${cFinColor}"
+    echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "11" ]; then
+  elif [ $cVerSO == "10" ]; then
 
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de flatpak para Debian 11 (Bullseye)...${cFinColor}"
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${cFinColor}"
+    echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "12" ]; then
+  elif [ $cVerSO == "9" ]; then
 
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de flatpak para Debian 12 (Bookworm)...${cFinColor}"
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "    Actualizando lista de paquetes..." 
-echo ""
-  apt-get -y update
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "    Instalando paquete flatpak"
-  echo ""
-  apt-get -y install flatpak
+  elif [ $cVerSO == "8" ]; then
 
-  echo ""
-  echo "    Instalando plugin para gnome software..." 
-echo ""
-  apt-get -y install gnome-software-plugin-flatpak
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "    Agregando el repositorio flathuub..." 
-echo ""
-  flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-fi
+  elif [ $cVerSO == "7" ]; then
+
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${cFinColor}"
+    echo ""
+
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
+
+  fi
 
