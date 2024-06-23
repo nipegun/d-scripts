@@ -12,7 +12,6 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/FlatPak-Instalar.sh | bash
 # ----------
 
-
 # Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
