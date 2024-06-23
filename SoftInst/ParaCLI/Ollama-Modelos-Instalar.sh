@@ -55,11 +55,11 @@
     opciones=(
       1 "llama3 8b" off
       2 "llama3 70b" off
-      3 "llama3 8b-instruct-fp16" off
-      4 "llama3 70b-instruct-fp16" off
-      5 "gemma 7b-instruct-fp16" off
-      6 "phi3 3.8b" off
-      7 "phi3 14b" off
+      3 "llama3 8b-instruct-fp16 (FineTuneado para chatear)" off
+      4 "llama3 70b-instruct-fp16 (FineTuneado para chatear)" off
+      5 "mistral 7b" off
+      6 "mistral 7b-instruct-fp16 (FineTuneado para chatear)" off
+      7 "" off
       8 "" off
       9 "" off
     )
@@ -181,16 +181,54 @@
           5)
 
             echo ""
-            echo "  Opción 5..."
+            echo "  Instalando mistral:7b..."
             echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=6
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull mistral:7b
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo mistral:7b.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
 
           ;;
 
           6)
 
             echo ""
-            echo "  Opción 5..."
+            echo "  Instalando mistral:7b-instruct-fp16..."
             echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=16
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull mistral:7b-instruct-fp16
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo mistral:7b-instruct-fp16.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
 
           ;;
 
