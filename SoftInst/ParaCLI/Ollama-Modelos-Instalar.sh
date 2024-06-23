@@ -89,9 +89,9 @@
                 ollama pull llama3:8b-instruct-fp16
               else
                 echo ""
-                echo -e "${cColorRojo}  No hay suficiente espacio libre para instalar el modelo llama3:8b-instruct-fp16...${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3:8b-instruct-fp16.${cFinColor}"
                 echo ""
-                echo -e "${cColorRojo}    Hacen falta $vGBsLibresNecesarios y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
               fi
 
