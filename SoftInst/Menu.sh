@@ -5,7 +5,6 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-
   # Definir fecha de ejecución del script
     cFechaDeEjec=$(date +a%Ym%md%d@%T)
 
@@ -19,17 +18,18 @@
       echo ""
     fi
 
-  #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
-  menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
-    opciones=(
-      1 "Opción 1" on
-      2 "Opción 2" off
-      3 "Opción 3" off
-      4 "Opción 4" off
-      5 "Opción 5" off
-    )
-  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  #clear
+  # Crear el menú
+    #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+    menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+      opciones=(
+        1 "Opción 1" on
+        2 "Opción 2" off
+        3 "Opción 3" off
+        4 "Opción 4" off
+        5 "Opción 5" off
+      )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+    #clear
 
     for choice in $choices
       do
