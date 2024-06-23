@@ -28,15 +28,16 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
   echo -e "${cColorAzulClaro}  Iniciando el script de compilación y ejecución de XMRig...${cFinColor}"
   echo ""
 
-# Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+# Comprobar si el script está corriendo como root
+  if [ $(id -u) -ne 0 ]; then
     echo ""
-    echo "    El paquete git no está instalado. Iniciando su instalación..."
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
     echo ""
-    apt-get -y update
-    apt-get -y install git
-    echo ""
+    exit
   fi
+
+# Matar todos los procesos de xmrig
+  killall -9 xmrig
 
 # Descargar el repositorio
   echo ""
@@ -45,6 +46,15 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
   rm -rf ~/Cryptos/XMR/Minero/
   mkdir -p ~/Cryptos/XMR/
   cd ~/Cryptos/XMR/
+  # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo "    El paquete git no está instalado. Iniciando su instalación..."
+      echo ""
+      apt-get -y update
+      apt-get -y install git
+      echo ""
+    fi
   git clone https://github.com/xmrig/xmrig.git
   cd xmrig
 
