@@ -236,6 +236,7 @@
       apt-get -y install torbrowser-launcher
 
     # Específicas para mate-desktop
+      apt-get -y install mate-tweaks
       apt-get -y install caja-open-terminal
       apt-get -y install caja-admin
       #apt-get -y install caja-share     # Para compartir carpetas desde el propio caja
