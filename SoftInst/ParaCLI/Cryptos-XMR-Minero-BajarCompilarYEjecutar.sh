@@ -18,7 +18,7 @@ vUsuario="root"
 vCartera="nipegun"
 
 # Definir la carpeta home
-  if [ $vUsuario == "root" ]: then
+  if [ $vUsuario == "root" ]; then
     vHome="/root"
   else
     vHome="/home/$vUsuario"
