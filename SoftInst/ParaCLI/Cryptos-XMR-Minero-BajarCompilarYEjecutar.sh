@@ -25,11 +25,17 @@ vCartera=""
   fi
 
 # Definir la dirección final de la cartera
-  if [ -z "$vCartera" ]; then
-    vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"
-  else
-    vDirWallet="$vCartera"
-  fi
+  # Comprobar si se ha pasado al menos un argumento
+    if [ $# -eq 0 ]; then
+      vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"
+    else
+      vDirWallet="$1"
+    fi
+  #if [ -z "$vCartera" ]; then
+    #vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"
+  #else
+    #vDirWallet="$vCartera"
+  #fi
 
 # Definir constantes de color
   cColorAzul="\033[0;34m"
