@@ -259,7 +259,6 @@ elif [ $cVerSO == "12" ]; then
               echo "  Activando e iniciando el servicio..."
               echo ""
               systemctl daemon-reload
-              systemctl enable --now text-generation-webui.service 
 
             # Notificar fin de la instalación
               echo ""
@@ -269,10 +268,16 @@ elif [ $cVerSO == "12" ]; then
               echo "      Para salir, presiona Ctrl+c"
               echo ""
               echo "    Para volver a iniciar, ejecuta:"
+              echo "      /opt/text-generation-webui/start_linux.sh"
+              echo ""
+              echo "    Si quieres que se escuche en todas las IPs (no sólo en localhost), ejecuta:"
               echo "      /opt/text-generation-webui/start_linux.sh --listen"
               echo ""
               echo "    Para actualizar TextGeneration WebUI, ejecuta:"
               echo "      /root/SoftInst/text-generation-webui/update_wizard_linux.sh"
+              echo ""
+              echo "    Se ha creado el servicio. Para activarlo, ejecuta:"
+              echo "      systemctl enable --now text-generation-webui.service"
               echo ""
 
           ;;
