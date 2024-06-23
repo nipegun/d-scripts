@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar y configurar diferentes modelos LLM de Ollama en Debian
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Ollama-Modelos-Instalar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Ollama-ModelosLLM-Instalar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Ollama-Modelos-Instalar.sh | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Ollama-ModelosLLM-Instalar.sh | bash
 #
 # Ejecución remota con parámetros:
 #   curl -sL x | bash -s Parámetro1 Parámetro2
@@ -61,8 +61,8 @@
       6 "mistral 7b-instruct-fp16 (FineTuneado para chatear)" off
       7 "phi3 3.8b" off
       8 "phi3 14b" off
-      9 "" off
-     10 "" off
+      9 "phi3 3.8b-mini-128k-instruct-f16" off
+     10 "phi3 14b-medium-128k-instruct-f16" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   #clear
@@ -290,8 +290,54 @@
           9)
 
             echo ""
-            echo "  Opción 5..."
+            echo "  Instalando phi3:3.8b-mini-128k-instruct-f16..."
             echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=3
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull phi3:3.8b-mini-128k-instruct-f16
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo phi3:3.8b-mini-128k-instruct-f16.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
+
+          ;;
+
+         10)
+
+            echo ""
+            echo "  Instalando phi3:14b-medium-128k-instruct-f16..."
+            echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=3
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull phi3:14b-medium-128k-instruct-f16
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo phi3:14b-medium-128k-instruct-f16.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
 
           ;;
 
