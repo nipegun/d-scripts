@@ -15,7 +15,7 @@
 # ----------
 
 vUsuario="root"
-vCartera="carteranipegun"
+vCartera=""
 
 # Definir la carpeta home
   if [ $vUsuario == "root" ]; then
@@ -25,10 +25,10 @@ vCartera="carteranipegun"
   fi
 
 # Definir la dirección final de la cartera
-  if [ $vCartera != "carteranipegun" ]; then
-    vDirWallet="$vCartera"
-  else
+  if [ -z "$vCartera" ]; then
     vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3wqKTjnp9NKZpfyUzncXCJ24H4Xtr"
+  else
+    vDirWallet="$vCartera"
   fi
 
 # Definir constantes de color
