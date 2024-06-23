@@ -6,7 +6,8 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 
-  vFechaDeEjec=$(date +a%Ym%md%d@%T)
+  # Definir fecha de ejecución del script
+    cFechaDeEjec=$(date +a%Ym%md%d@%T)
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
