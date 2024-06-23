@@ -37,6 +37,18 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
   fi
 
 # Matar todos los procesos de xmrig
+  echo ""
+  echo "  Matando el proceso xmrig (si es que se está ejecutando)..."
+  echo ""
+  # Comprobar si el paquete psmisc instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s psmisc 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${cColorRojo}  El paquete psmisc no está instalado. Iniciando su instalación...${cFinColor}"
+      echo ""
+      apt-get -y update
+      apt-get -y install psmisc
+      echo ""
+    fi
   killall -9 xmrig
 
 # Descargar el repositorio
