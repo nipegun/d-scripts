@@ -228,12 +228,27 @@ elif [ $cVerSO == "12" ]; then
                 git clone --depth=1 https://github.com/oobabooga/text-generation-webui
                 rm /root/SoftInst/text-generation-webui/.git -R 2> /dev/null
                 find /root/SoftInst/text-generation-webui/ -type f -iname "*.sh" -exec chmod +x {} \;
+                mv /root/SoftInst/text-generation-webui/ /opt
 
             # Instalar ROCm SDK 5.6 (Para tarjetas AMD a partir de Radeon RX 6800 XT)
 
             # Instalar el paquete
-              chmod +x /root/SoftInst/text-generation-webui/start_linux.sh
-              /root/SoftInst/text-generation-webui/start_linux.sh
+              chmod +x /opt/text-generation-webui/start_linux.sh
+              /opt/text-generation-webui/start_linux.sh
+
+            # Notificar fin de la instalación
+              echo ""
+              echo "  Instalación de TextGeneration WebUI, finalizada."
+              echo ""
+              echo "    Auto-ejecutando..."
+              echo "      Para salir, presiona Ctrl+c"
+              echo ""
+              echo "    Para volver a iniciar, ejecuta:"
+              echo "      /opt/text-generation-webui/start_linux.sh --listen"
+              echo ""
+              echo "    Para actualizar TextGeneration WebUI, ejecuta:"
+              echo "      /root/SoftInst/text-generation-webui/update_wizard_linux.sh"
+              echo ""
 
           ;;
 
