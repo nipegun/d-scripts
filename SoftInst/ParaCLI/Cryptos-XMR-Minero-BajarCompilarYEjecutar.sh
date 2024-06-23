@@ -258,6 +258,13 @@ vDirWallet="451K8ZpJTWdLBKb5uCR1EWM5YfCUxdgxWFjYrvKSTaWpH1zdz22JDQBQeZCw7wZjRm3w
   echo 'echo ""'                                        >> ~/Cryptos/XMR/Minero/Log-Mostrar.sh
   chmod +x                                                 ~/Cryptos/XMR/Minero/Log-Mostrar.sh
 
+# Crear el archivo de logs
+  echo ""
+  echo "  Creando el archivo de logs..."
+  echo ""
+  mkdir -p ~/Cryptos/XMR/Minero/Log/ 2> /dev/null
+  touch ~/Cryptos/XMR/Minero/Log/xmrig.log
+
 # Lanzar el minero
   echo ""
   echo "    Minando con ID $vIdMinero..."
