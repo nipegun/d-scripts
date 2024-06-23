@@ -279,7 +279,7 @@ vUsuario="root"
 
 # Crear el archivo de logs
   echo ""
-  echo "  Creando el archivo de logs..."
+  echo "    Creando el archivo de logs..."
   echo ""
   touch /var/log/xmrig.log
   chmod 777 /var/log/xmrig.log
