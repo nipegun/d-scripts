@@ -86,8 +86,8 @@ elif [ $cVerSO == "12" ]; then
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
       1 "Instalar Ollama" on
-      2 "Instalar llama3" off
-      3 "Instalar Open WebUI" off
+      2 "Instalar Open WebUI" on
+      3 "Instalar modelos LLM para Ollama" on
       4 "Opción 4" off
       5 "Opción 5" off
     )
@@ -135,18 +135,6 @@ elif [ $cVerSO == "12" ]; then
           2)
 
             echo ""
-            echo "  Instalando el modelo llama3..."
-            echo ""
-            # Modelo de 8.000.000.000 de parámetros
-              ollama pull llama3:8b
-            # Modelo de 70.000.000.000 de parámetros
-              #ollama pull llama3:70b
-
-          ;;
-
-          3)
-
-            echo ""
             echo "  Instalando Open WebUI..."
             echo ""
             apt-get -y install python3-venv
@@ -186,6 +174,24 @@ elif [ $cVerSO == "12" ]; then
               echo ""
               echo "    El primer usuario en registrarse se convertirá automáticamente en el AAdministrador."
               echo ""
+
+          ;;
+
+          3)
+
+            echo ""
+            echo "  Instalando modelos LLM para Ollama..."
+            echo ""
+            # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                echo ""
+                apt-get -y update
+                apt-get -y install curl
+                echo ""
+              fi
+            curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Ollama-ModelosLLM-Instalar.sh | bash
 
           ;;
 
