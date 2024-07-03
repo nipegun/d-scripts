@@ -9,10 +9,10 @@
 # Script de NiPeGun para obtener información de los puertos PCIe de una placa base
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Hardware-PuertosPCIe-Mostrar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/Hardware-PuertosPCIe-Mostrar.sh | bash
 # ----------
 
 # Definir el array asociativo
