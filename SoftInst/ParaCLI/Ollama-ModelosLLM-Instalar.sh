@@ -53,23 +53,26 @@
 # Crear el menú
   menu=(dialog --checklist "Marca los modelos que quieras instalar:" 22 96 16)
     opciones=(
-      1 "llama3 8b" off
-      2 "llama3 70b" off
-      3 "llama3 8b-instruct-fp16 (FineTuneado para chatear)" off
-      4 "llama3 70b-instruct-fp16 (FineTuneado para chatear)" off
-      5 "mistral 7b" off
-      6 "mistral 7b-instruct-fp16 (FineTuneado para chatear)" off
-      7 "phi3 3.8b" off
-      8 "phi3 14b" off
-      9 "phi3 3.8b-mini-128k-instruct-f16 (FineTuneado para chatear)" off
-     10 "phi3 14b-medium-128k-instruct-f16 (FineTuneado para chatear)" off
-     11 "deepseek-coder-v2 16b" off
-     12 "deepseek-coder-v2 236b" off
-     13 "deepseek-coder-v2 16b-lite-instruct-fp16 (FineTuneado para chatear)" off
-     14 "deepseek-coder-v2 236b-instruct-fp16 (FineTuneado para chatear)" off
+      1 "llama3 8b (Cuantificación Q4)" off
+      2 "llama3 70b (Cuantificación Q4)" off
+      3 "llama3 8b-instruct-fp16 (Cuantificación FP16)" off
+      4 "llama3 70b-instruct-fp16 (Cuantificación FP16)" off
+      5 "mistral 7b (Cuantificación Q4)" off
+      6 "mistral 7b-instruct-fp16 (Cuantificación FP16)" off
+      7 "phi3 3.8b (Cuantificación Q4)" off
+      8 "phi3 14b (Cuantificación Q4)" off
+      9 "phi3 3.8b-mini-128k-instruct-f16 (Cuantificación FP16)" off
+     10 "phi3 14b-medium-128k-instruct-f16 (Cuantificación FP16)" off
+     11 "deepseek-coder-v2 16b (Cuantificación Q4)" off
+     12 "deepseek-coder-v2 236b (Cuantificación Q4)" off
+     13 "deepseek-coder-v2 16b-lite-instruct-fp16 (Cuantificación FP16)" off
+     14 "deepseek-coder-v2 236b-instruct-fp16 (Cuantificación FP16)" off
+     15 "gemma2 9b (Cuantificación Q4)" off
+     16 "gemma2 27b (Cuantificación Q4)" off
+     17 "gemma2 9b-instruct-fp16 (Cuantificación FP16)" off
+     18 "gemma2 27b-instruct-fp16 (Cuantificación FP16)" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  #clear
 
     for choice in $choices
       do
@@ -446,6 +449,115 @@
               else
                 echo ""
                 echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo deepseek-coder-v2:236b-instruct-fp16.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
+
+          ;;
+
+
+         15)
+
+            echo ""
+            echo "  Instalando gemma2:9b..."
+            echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=6
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull gemma2:9b
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo gemma2:9b.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
+
+          ;;
+
+         16)
+
+            echo ""
+            echo "  Instalando gemma2:27b..."
+            echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=18
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull gemma2:27b
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo gemma2:27b.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
+
+          ;;
+
+         17)
+
+            echo ""
+            echo "  Instalando gemma2:9b-instruct-fp16..."
+            echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=20
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull gemma2:9b-instruct-fp16
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo gemma2:9b-instruct-fp16.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
+
+          ;;
+
+         18)
+
+            echo ""
+            echo "  Instalando gemma2:27b-instruct-fp16..."
+            echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=56
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull gemma2:27b-instruct-fp16
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo gemma2:27b-instruct-fp16.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
