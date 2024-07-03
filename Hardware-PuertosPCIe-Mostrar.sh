@@ -37,7 +37,7 @@
 # Leer la salida del comando desde la variable
   while IFS= read -r line; do
     if (( vContador % 3 == 0 )); then # Comprueba si el contador es múltiplo de 3 para crear una nueva clave en el array asociativo.
-      key="PuertoConID$vPuerto"
+      key="PuertoPCIe$vPuerto"
       vPuertosPCIe["$key"]=""
       vPuerto=$(( vPuerto + 1 ))
     fi
