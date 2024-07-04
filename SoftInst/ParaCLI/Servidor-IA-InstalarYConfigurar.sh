@@ -228,10 +228,10 @@ elif [ $cVerSO == "12" ]; then
                     apt-get -y update && apt-get -y install git
                     echo ""
                   fi
-                git clone --depth=1 https://github.com/oobabooga/text-generation-webui
-                rm /root/SoftInst/text-generation-webui/.git -R 2> /dev/null
+                #git clone --depth=1 https://github.com/oobabooga/text-generation-webui
+                #rm /root/SoftInst/text-generation-webui/.git -R 2> /dev/null
                 #find /root/SoftInst/text-generation-webui/ -type f -iname "*.sh" -exec chmod +x {} \;
-                mv /root/SoftInst/text-generation-webui/ /opt
+                #mv /root/SoftInst/text-generation-webui/ /opt
 
           ;;
 
