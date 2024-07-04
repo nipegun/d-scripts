@@ -73,32 +73,32 @@ elif [ $cVerSO == "10" ]; then
   echo ""
 
   echo ""
-  echo "Instalando paquetes necesarios..." 
-echo ""
+  echo "    Instalando paquetes necesarios..." 
+  echo ""
   apt-get -y update
   apt-get -y install tor
 
   echo ""
-  echo "Configurando TOR..." 
-echo ""
-  cp /etc/tor/torrc /etc/tor/torrc.bak
+  echo "    Configurando TOR..." 
+  echo ""
+  cp /etc/tor/torrc /etc/tor/torrc.bak.ori
   echo "SocksPort 9050"                            > /etc/tor/torrc
   echo "Log notice file /var/log/tor/notices.log" >> /etc/tor/torrc
   echo "Log debug file /var/log/tor/debug.log"    >> /etc/tor/torrc
   echo "RunAsDaemon 1"                            >> /etc/tor/torrc
 
   echo ""
-  echo "Reiniciando el servicio..." 
-echo ""
+  echo "    Reiniciando el servicio..." 
+  echo ""
   systemctl reload tor.service
-  systemctl restart tor.service
-  systemctl status tor.service
+  systemctl enable tor.service --now
+  systemctl status tor.service --no-pager
   echo ""
 
   echo ""
-  echo "Comprobando el funcionamiento de TOR..." 
-echo ""
-  curl --silent --socks5-hostname localhost:9050 https://check.torproject.org | grep ongrat
+  echo "  Comprobando el funcionamiento de TOR..." 
+  echo ""
+  curl -sL --socks5-hostname localhost:9050 https://check.torproject.org | grep ongrat
   echo ""
 
 elif [ $cVerSO == "11" ]; then
@@ -108,7 +108,74 @@ elif [ $cVerSO == "11" ]; then
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Iniciando el script de instalación de TOR para Debian 10 (Buster)..."  
+  echo ""
+
+  echo ""
+  echo "    Instalando paquetes necesarios..." 
+  echo ""
+  apt-get -y update
+  apt-get -y install tor
+
+  echo ""
+  echo "    Configurando TOR..." 
+  echo ""
+  cp /etc/tor/torrc /etc/tor/torrc.bak.ori
+  echo "SocksPort 9050"                            > /etc/tor/torrc
+  echo "Log notice file /var/log/tor/notices.log" >> /etc/tor/torrc
+  echo "Log debug file /var/log/tor/debug.log"    >> /etc/tor/torrc
+  echo "RunAsDaemon 1"                            >> /etc/tor/torrc
+
+  echo ""
+  echo "    Reiniciando el servicio..." 
+  echo ""
+  systemctl reload tor.service
+  systemctl enable tor.service --now
+  systemctl status tor.service --no-pager
+  echo ""
+
+  echo ""
+  echo "  Comprobando el funcionamiento de TOR..." 
+  echo ""
+  curl -sL --socks5-hostname localhost:9050 https://check.torproject.org | grep ongrat
+  echo ""
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de TOR para Debian 12 (Bookworm)..."  
+  echo ""
+  echo ""
+  echo "  Iniciando el script de instalación de TOR para Debian 10 (Buster)..."  
+  echo ""
+
+  echo ""
+  echo "    Instalando paquetes necesarios..." 
+  echo ""
+  apt-get -y update
+  apt-get -y install tor
+
+  echo ""
+  echo "    Configurando TOR..." 
+  echo ""
+  cp /etc/tor/torrc /etc/tor/torrc.bak.ori
+  echo "SocksPort 9050"                            > /etc/tor/torrc
+  echo "Log notice file /var/log/tor/notices.log" >> /etc/tor/torrc
+  echo "Log debug file /var/log/tor/debug.log"    >> /etc/tor/torrc
+  echo "RunAsDaemon 1"                            >> /etc/tor/torrc
+
+  echo ""
+  echo "    Reiniciando el servicio..." 
+  echo ""
+  systemctl reload tor.service
+  systemctl enable tor.service --now
+  systemctl status tor.service --no-pager
+  echo ""
+
+  echo ""
+  echo "  Comprobando el funcionamiento de TOR..." 
+  echo ""
+  curl -sL --socks5-hostname localhost:9050 https://check.torproject.org | grep ongrat
   echo ""
 
 fi
