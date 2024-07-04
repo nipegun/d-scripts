@@ -303,7 +303,14 @@ elif [ $cVerSO == "12" ]; then
             # Obtener el enlace de descarga
               #vEnlace=$(curl -sL )
               vEnlace="https://releases.lmstudio.ai/linux/x86/0.2.27/beta/LM_Studio-0.2.27.AppImage"
-              curl -L -o /tmp/LMStudio.AppImage $vEnlace
+            echo ""
+            echo "    Descargando paquete AppImage..."
+            echo ""
+            curl -L -o /tmp/LMStudio.AppImage $vEnlace
+            chmod +x /tmp/LMStudio.AppImage
+            mkdir -p /home/$vUsuarioNoRoot/IA/LMStudio
+            mv /tmp/LMStudio.AppImage /home/$vUsuarioNoRoot/IA/LMStudio
+            chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA/ -R
 
           ;;
 
