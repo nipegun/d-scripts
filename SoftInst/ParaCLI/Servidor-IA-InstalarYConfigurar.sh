@@ -221,17 +221,17 @@ elif [ $cVerSO == "12" ]; then
                   mkdir /root/SoftInst/ 2> /dev/null
                   cd /root/SoftInst/
                 # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
-                  if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+                  #if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
                     echo -e "${cColorRojo}    El paquete git no está instalado. Iniciando su instalación...${cFinColor}"
                     echo ""
                     apt-get -y update && apt-get -y install git
                     echo ""
-                  fi
-                #git clone --depth=1 https://github.com/oobabooga/text-generation-webui
-                #rm /root/SoftInst/text-generation-webui/.git -R 2> /dev/null
-                #find /root/SoftInst/text-generation-webui/ -type f -iname "*.sh" -exec chmod +x {} \;
-                #mv /root/SoftInst/text-generation-webui/ /opt
+                  #fi
+                git clone --depth=1 https://github.com/oobabooga/text-generation-webui
+                rm /root/SoftInst/text-generation-webui/.git -R 2> /dev/null
+                find /root/SoftInst/text-generation-webui/ -type f -iname "*.sh" -exec chmod +x {} \;
+                mv /root/SoftInst/text-generation-webui/ /opt
 
           ;;
 
