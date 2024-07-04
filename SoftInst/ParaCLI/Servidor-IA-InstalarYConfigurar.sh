@@ -299,8 +299,8 @@ elif [ $cVerSO == "12" ]; then
             echo ""
             echo "  Instalando LM Studio.."
             echo ""
-            # 
             # Obtener el enlace de descarga
+              #vEnlace=$(curl -sL )
               vEnlace="https://releases.lmstudio.ai/linux/x86/0.2.27/beta/LM_Studio-0.2.27.AppImage"
               curl -L -o /tmp/LMStudio.AppImage $vEnlace
 
