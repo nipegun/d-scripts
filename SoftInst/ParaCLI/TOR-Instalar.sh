@@ -178,4 +178,15 @@ elif [ $cVerSO == "12" ]; then
   curl -sL --socks5-hostname localhost:9050 https://check.torproject.org | grep ongrat
   echo ""
 
+  echo ""
+  echo "  TOR instalado."
+  echo ""
+  echo "    Para cambiar la IP ejecuta como root:"
+  echo "      systemctl reload tor"
+  echo ""
+  echo "    Para limitar los nodos de salida a USA y Reino Unido, ejecuta como root:"
+  echo '      echo "ExitNodes {us},{uk} StrictNodes" | sudo tee -a /etc/tor/torrc'
+  echo '      systemctl reload tor'
+  echo ""
+
 fi
