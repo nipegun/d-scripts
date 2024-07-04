@@ -90,6 +90,9 @@ elif [ $cVerSO == "12" ]; then
       3 "Instalar modelos LLM para Ollama" on
       4 "Instalar TextGeneration WebUI" off
       5 "Instalar modelos LLM para TextGeneration WebUI" off
+      6 "Instalar LMStudio" off
+      7 "Instalar modelos LLM para LMStudio" off
+      8 "Instalar AnythingLLM" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -288,6 +291,30 @@ elif [ $cVerSO == "12" ]; then
             echo "  Instalando modelos LLM para TextGeneration WebUI.."
             echo ""
             #Use the download-model.py script to automatically download a model from Hugging Face.
+
+          ;;
+
+          6)
+
+            echo ""
+            echo "  Instalando LMStudio.."
+            echo ""
+
+          ;;
+
+          7)
+
+            echo ""
+            echo "  Instalando modelos LLM para LMStudio.."
+            echo ""
+
+          ;;
+
+          8)
+
+            echo ""
+            echo "  Instalando AnythingLLM.."
+            echo ""
 
           ;;
 
