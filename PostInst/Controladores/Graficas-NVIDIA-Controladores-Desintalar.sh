@@ -23,6 +23,8 @@
     cat /tmp/PaquetesADesinstalar.txt.sh | sed 's|^|apt-get -y autoremove |' > /tmp/DesinstalarControladoresNvidia.sh
   # Insertar el shebang al principio del script
     sed -i '1s|^|#!/bin/bash\n|' /tmp/DesinstalarControladoresNvidia.sh
+  # Insertar la línea para purgar paquetes:
+    echo "apt-get -y purge" >> /tmp/DesinstalarControladoresNvidia.sh
   # Asignar permisos de ejecución al script
     chmod +x /tmp/DesinstalarControladoresNvidia.sh
 
