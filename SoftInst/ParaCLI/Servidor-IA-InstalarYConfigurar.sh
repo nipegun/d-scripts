@@ -288,7 +288,7 @@ elif [ $cVerSO == "12" ]; then
           5)
 
             echo ""
-            echo "  Instalando modelos LLM para TextGeneration WebUI.."
+            echo "  Instalando modelos LLM para TextGeneration WebUI..."
             echo ""
             #Use the download-model.py script to automatically download a model from Hugging Face.
 
