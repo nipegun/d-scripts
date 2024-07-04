@@ -319,6 +319,7 @@ elif [ $cVerSO == "12" ]; then
             echo ""
             echo "  Instalando modelos LLM para LMStudio.."
             echo ""
+            curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/LMStudio-ModelosLLM-Instalar.sh | bash
 
           ;;
 
