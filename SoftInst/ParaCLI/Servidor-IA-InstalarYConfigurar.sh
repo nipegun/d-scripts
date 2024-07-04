@@ -204,6 +204,14 @@ elif [ $cVerSO == "12" ]; then
             echo "  Instalando TextGeneration WebUI..."
             echo ""
 
+            # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${cColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+                echo ""
+                apt-get -y update && apt-get -y install wget
+                echo ""
+              fi
 
           ;;
 
