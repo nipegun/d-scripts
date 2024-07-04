@@ -234,6 +234,56 @@ elif [ $cVerSO == "12" ]; then
                 mv /root/SoftInst/text-generation-webui/ /opt
               fi
 
+            # Instalar ROCm SDK 5.6 (Para tarjetas AMD a partir de Radeon RX 6800 XT)
+
+            # Instalar el paquete
+              chmod +x /opt/text-generation-webui/start_linux.sh
+              /opt/text-generation-webui/start_linux.sh
+
+            # Crear el servicio
+              echo ""
+              echo "  Creando el servicio..."
+              echo ""
+              echo "[Unit]"                                                        > /usr/lib/systemd/system/text-generation-webui.service
+              echo "Description=TextGeneration WebUI Service"                     >> /usr/lib/systemd/system/text-generation-webui.service
+              echo "After=network.target"                                         >> /usr/lib/systemd/system/text-generation-webui.service
+              echo ""                                                             >> /usr/lib/systemd/system/text-generation-webui.service
+              echo "[Service]"                                                    >> /usr/lib/systemd/system/text-generation-webui.service
+              echo "Type=simple"                                                  >> /usr/lib/systemd/system/text-generation-webui.service
+              echo "ExecStart=/opt/text-generation-webui/start_linux.sh --listen" >> /usr/lib/systemd/system/text-generation-webui.service
+              echo "ExecStop=/bin/kill -HUP $MAINPID"                             >> /usr/lib/systemd/system/text-generation-webui.service
+              echo "User=root"                                                    >> /usr/lib/systemd/system/text-generation-webui.service
+              echo "Group=root"                                                   >> /usr/lib/systemd/system/text-generation-webui.service
+              echo ""                                                             >> /usr/lib/systemd/system/text-generation-webui.service
+              echo "[Install]"                                                    >> /usr/lib/systemd/system/text-generation-webui.service
+              echo "WantedBy=multi-user.target"                                   >> /usr/lib/systemd/system/text-generation-webui.service
+
+            # Activar e iniciar el servicio
+              echo ""
+              echo "  Activando e iniciando el servicio..."
+              echo ""
+              systemctl daemon-reload
+
+            # Notificar fin de la instalación
+              echo ""
+              echo "  Instalación de TextGeneration WebUI, finalizada."
+              echo ""
+              echo "    Auto-ejecutando..."
+              echo "      Para salir, presiona Ctrl+c"
+              echo ""
+              echo "    Para volver a iniciar, ejecuta:"
+              echo "      /opt/text-generation-webui/start_linux.sh"
+              echo ""
+              echo "    Si quieres que se escuche en todas las IPs (no sólo en localhost), ejecuta:"
+              echo "      /opt/text-generation-webui/start_linux.sh --listen"
+              echo ""
+              echo "    Para actualizar TextGeneration WebUI, ejecuta:"
+              echo "      /root/SoftInst/text-generation-webui/update_wizard_linux.sh"
+              echo ""
+              echo "    Se ha creado el servicio. Para activarlo, ejecuta:"
+              echo "      systemctl enable --now text-generation-webui.service"
+              echo ""
+
           ;;
 
           5)
