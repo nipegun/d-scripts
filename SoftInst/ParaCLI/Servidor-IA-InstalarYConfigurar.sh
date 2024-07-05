@@ -311,7 +311,7 @@ elif [ $cVerSO == "12" ]; then
             echo ""
             curl -L -o /tmp/LMStudio.AppImage $vEnlace
             chmod +x /tmp/LMStudio.AppImage
-            mkdir -p /home/$vUsuarioNoRoot/IA/LMStudio
+            mkdir -p /home/$vUsuarioNoRoot/IA/LMStudio 2> /dev/null
             mv /tmp/LMStudio.AppImage /home/$vUsuarioNoRoot/IA/LMStudio
             chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA/ -R
 
@@ -322,7 +322,7 @@ elif [ $cVerSO == "12" ]; then
             echo ""
             echo "  Instalando modelos LLM para LMStudio.."
             echo ""
-            curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/LMStudio-ModelosLLM-Instalar.sh | bash
+            curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/LMStudio-ModelosLLM-Instalar.sh | bash
 
           ;;
 
