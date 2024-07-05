@@ -18,6 +18,9 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-IA-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
+# Indicar cuál es el usuario no root
+  vUsuarioNoRoot="usuariox"
+
 # Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
