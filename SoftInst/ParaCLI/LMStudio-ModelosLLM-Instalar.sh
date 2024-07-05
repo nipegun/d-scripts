@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar y configurar diferentes modelos LLM de Ollama en Debian
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Ollama-ModelosLLM-Instalar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/LMStudio-ModelosLLM-Instalar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Ollama-ModelosLLM-Instalar.sh | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/LMStudio-ModelosLLM-Instalar.sh | bash
 #
 # Ejecución remota con parámetros:
 #   curl -sL x | bash -s Parámetro1 Parámetro2
