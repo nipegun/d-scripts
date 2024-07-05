@@ -19,7 +19,9 @@
   vUsuarioNoRoot="usuariox"
 
 # Indicar la carpeta donde se guardarán los modelos
-  vCarpetaDeModelosLLM="/home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM"
+  vCarpetaDeModelosLLM="/home/$vUsuarioNoRoot/.cache/lm-studio/models/"
+  #vCarpetaDeModelosLLM="/home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM"
+  
 
 # Definir constantes de color
   cColorAzul="\033[0;34m"
