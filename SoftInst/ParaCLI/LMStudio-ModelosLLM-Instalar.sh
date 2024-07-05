@@ -101,7 +101,7 @@
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p $vCarpetaDeModelosLLM 2> /dev/null
                 curl -L --create-dirs -O --output-dir "$vCarpetaDeModelosLLM/LM Studio Community/Meta-Llama-3-8B-Instruct-gguf" https://huggingface.co/lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF/resolve/main/Meta-Llama-3-8B-Instruct-Q8_0.gguf
-                chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
+                chown $vUsuarioNoRoot:$vUsuarioNoRoot "$vCarpetaDeModelosLLM" -R
               else
                 echo ""
                 echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3:8b.${cFinColor}"
@@ -130,7 +130,7 @@
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p $vCarpetaDeModelosLLM 2> /dev/null
                 curl -L --create-dirs -O --output-dir "$vCarpetaDeModelosLLM/LM Studio Community/gemma-2-9b-it-Q8_0-gguf" https://huggingface.co/lmstudio-community/gemma-2-9b-it-GGUF/resolve/main/gemma-2-9b-it-Q8_0.gguf
-                chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
+                chown $vUsuarioNoRoot:$vUsuarioNoRoot "$vCarpetaDeModelosLLM" -R
               else
                 echo ""
                 echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3:70b.${cFinColor}"
@@ -159,7 +159,7 @@
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p $vCarpetaDeModelosLLM 2> /dev/null
                 curl -L --create-dirs -O --output-dir "$vCarpetaDeModelosLLM/LM Studio Community/gemma-2-27b-it-Q8_0-gguf" https://huggingface.co/lmstudio-community/gemma-2-27b-it-GGUF/resolve/main/gemma-2-27b-it-Q8_0.gguf
-                chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
+                chown $vUsuarioNoRoot:$vUsuarioNoRoot "$vCarpetaDeModelosLLM" -R
               else
                 echo ""
                 echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3:8b-instruct-fp16.${cFinColor}"
@@ -188,7 +188,7 @@
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p $vCarpetaDeModelosLLM 2> /dev/null
                 curl -L --create-dirs -O --output-dir "$vCarpetaDeModelosLLM/LM Studio Community/Mistral-7B-Instruct-v0.3-Q8_0-gguf" https://huggingface.co/lmstudio-community/Mistral-7B-Instruct-v0.3-GGUF/resolve/main/Mistral-7B-Instruct-v0.3-Q8_0.gguf
-                chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
+                chown $vUsuarioNoRoot:$vUsuarioNoRoot "$vCarpetaDeModelosLLM" -R
               else
                 echo ""
                 echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3:70b-instruct-fp16.${cFinColor}"
@@ -217,7 +217,7 @@
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p $vCarpetaDeModelosLLM 2> /dev/null
                 curl -L --create-dirs -O --output-dir "$vCarpetaDeModelosLLM/LM Studio Community/Mistral-7B-Instruct-v0.3-f32-gguf" https://huggingface.co/lmstudio-community/Mistral-7B-Instruct-v0.3-GGUF/resolve/main/Mistral-7B-Instruct-v0.3-f32.gguf
-                chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
+                chown $vUsuarioNoRoot:$vUsuarioNoRoot "$vCarpetaDeModelosLLM" -R
               else
                 echo ""
                 echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo mistral:7b.${cFinColor}"
@@ -246,7 +246,7 @@
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p $vCarpetaDeModelosLLM 2> /dev/null
                 curl -L --create-dirs -O --output-dir "$vCarpetaDeModelosLLM/LM Studio Community/Phi-3-mini-4k-instruct-Q8_0-gguf" https://huggingface.co/lmstudio-community/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-Q8_0.gguf
-                chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
+                chown $vUsuarioNoRoot:$vUsuarioNoRoot "$vCarpetaDeModelosLLM" -R
               else
                 echo ""
                 echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo mistral:7b-instruct-fp16.${cFinColor}"
@@ -275,7 +275,7 @@
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p $vCarpetaDeModelosLLM 2> /dev/null
                 curl -L --create-dirs -O --output-dir "$vCarpetaDeModelosLLM/LM Studio Community/Phi-3-mini-4k-instruct-fp16-gguf" https://huggingface.co/lmstudio-community/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-fp16.gguf
-                chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
+                chown $vUsuarioNoRoot:$vUsuarioNoRoot "$vCarpetaDeModelosLLM" -R
               else
                 echo ""
                 echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo phi3:3.8b.${cFinColor}"
@@ -304,7 +304,7 @@
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p $vCarpetaDeModelosLLM 2> /dev/null
                 curl -L --create-dirs -O --output-dir "$vCarpetaDeModelosLLM/LM Studio Community/Phi-3-mini-4k-instruct-fp32-gguf" https://huggingface.co/lmstudio-community/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-fp32.gguf
-                chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
+                chown $vUsuarioNoRoot:$vUsuarioNoRoot "$vCarpetaDeModelosLLM" -R
               else
                 echo ""
                 echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo phi3:14b.${cFinColor}"
@@ -333,7 +333,7 @@
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p $vCarpetaDeModelosLLM 2> /dev/null
                 curl -L --create-dirs -O --output-dir "$vCarpetaDeModelosLLM/LM Studio Community/DeepSeek-Coder-V2-Lite-Instruct-Q8_0-gguf" https://huggingface.co/lmstudio-community/DeepSeek-Coder-V2-Lite-Instruct-GGUF/resolve/main/DeepSeek-Coder-V2-Lite-Instruct-Q8_0.gguf
-                chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
+                chown $vUsuarioNoRoot:$vUsuarioNoRoot "$vCarpetaDeModelosLLM" -R
               else
                 echo ""
                 echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo phi3:3.8b-mini-128k-instruct-f16.${cFinColor}"
