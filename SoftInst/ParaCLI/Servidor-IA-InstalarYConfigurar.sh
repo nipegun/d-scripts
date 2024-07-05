@@ -197,7 +197,7 @@ elif [ $cVerSO == "12" ]; then
                 apt-get -y install curl
                 echo ""
               fi
-            curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Ollama-ModelosLLM-Instalar.sh | bash
+            curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/IA-ModelosLLM-Instalar-Ollama.sh | bash
 
           ;;
 
@@ -294,7 +294,16 @@ elif [ $cVerSO == "12" ]; then
             echo ""
             echo "  Instalando modelos LLM para TextGeneration WebUI..."
             echo ""
-            #Use the download-model.py script to automatically download a model from Hugging Face.
+            # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                echo ""
+                apt-get -y update
+                apt-get -y install curl
+                echo ""
+              fi
+            curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/IA-ModelosLLM-Instalar-TextGenerationWebUI.sh | bash
 
           ;;
 
@@ -322,7 +331,16 @@ elif [ $cVerSO == "12" ]; then
             echo ""
             echo "  Instalando modelos LLM para LMStudio.."
             echo ""
-            curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/LMStudio-ModelosLLM-Instalar.sh | bash
+            # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                echo ""
+                apt-get -y update
+                apt-get -y install curl
+                echo ""
+              fi
+            curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/IA-ModelosLLM-Instalar-LMStudio.sh | bash
 
           ;;
 
