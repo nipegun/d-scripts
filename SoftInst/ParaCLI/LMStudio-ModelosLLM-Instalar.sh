@@ -13,9 +13,6 @@
 #
 # Ejecución remota sin caché:
 #   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/LMStudio-ModelosLLM-Instalar.sh | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
 # ----------
 
 # Indicar la cuenta de usuario no root
@@ -88,7 +85,7 @@
             echo ""
 
             # Definir el espacio libre necesario
-              vGBsLibresNecesarios=6
+              vGBsLibresNecesarios=9
               vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
 
             # Obtener el espacio libre en la partición raíz en kilobytes
@@ -98,7 +95,7 @@
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ 2> /dev/null
-                curl -sL https://huggingface.co/lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF/resolve/main/Meta-Llama-3-8B-Instruct-Q8_0.gguf -o /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/
+                curl -L --create-dirs -O --output-dir /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ https://huggingface.co/lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF/resolve/main/Meta-Llama-3-8B-Instruct-Q8_0.gguf
                 chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
               else
                 echo ""
@@ -117,7 +114,7 @@
             echo ""
 
             # Definir el espacio libre necesario
-              vGBsLibresNecesarios=42
+              vGBsLibresNecesarios=10
               vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
 
             # Obtener el espacio libre en la partición raíz en kilobytes
@@ -127,7 +124,7 @@
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ 2> /dev/null
-                curl -sL https://huggingface.co/lmstudio-community/gemma-2-9b-it-GGUF/resolve/main/gemma-2-9b-it-Q8_0.gguf -o /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/
+                curl -L --create-dirs -O --output-dir /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ https://huggingface.co/lmstudio-community/gemma-2-9b-it-GGUF/resolve/main/gemma-2-9b-it-Q8_0.gguf
                 chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
               else
                 echo ""
@@ -146,7 +143,7 @@
             echo ""
 
             # Definir el espacio libre necesario
-              vGBsLibresNecesarios=18
+              vGBsLibresNecesarios=28
               vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
 
             # Obtener el espacio libre en la partición raíz en kilobytes
@@ -156,7 +153,7 @@
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ 2> /dev/null
-                curl -sL https://huggingface.co/lmstudio-community/gemma-2-27b-it-GGUF/resolve/main/gemma-2-27b-it-Q8_0.gguf -o /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/
+                curl -L --create-dirs -O --output-dir /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ https://huggingface.co/lmstudio-community/gemma-2-27b-it-GGUF/resolve/main/gemma-2-27b-it-Q8_0.gguf
                 chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
               else
                 echo ""
@@ -175,7 +172,7 @@
             echo ""
 
             # Definir el espacio libre necesario
-              vGBsLibresNecesarios=145
+              vGBsLibresNecesarios=8
               vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
 
             # Obtener el espacio libre en la partición raíz en kilobytes
@@ -185,7 +182,7 @@
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ 2> /dev/null
-                curl -sL https://huggingface.co/lmstudio-community/Mistral-7B-Instruct-v0.3-GGUF/resolve/main/Mistral-7B-Instruct-v0.3-Q8_0.gguf -o /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/
+                curl -L --create-dirs -O --output-dir /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ https://huggingface.co/lmstudio-community/Mistral-7B-Instruct-v0.3-GGUF/resolve/main/Mistral-7B-Instruct-v0.3-Q8_0.gguf
                 chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
               else
                 echo ""
@@ -204,7 +201,7 @@
             echo ""
 
             # Definir el espacio libre necesario
-              vGBsLibresNecesarios=6
+              vGBsLibresNecesarios=28
               vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
 
             # Obtener el espacio libre en la partición raíz en kilobytes
@@ -214,7 +211,7 @@
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ 2> /dev/null
-                curl -sL https://huggingface.co/lmstudio-community/Mistral-7B-Instruct-v0.3-GGUF/resolve/main/Mistral-7B-Instruct-v0.3-f32.gguf -o /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/
+                curl -L --create-dirs -O --output-dir /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ https://huggingface.co/lmstudio-community/Mistral-7B-Instruct-v0.3-GGUF/resolve/main/Mistral-7B-Instruct-v0.3-f32.gguf
                 chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
               else
                 echo ""
@@ -233,7 +230,7 @@
             echo ""
 
             # Definir el espacio libre necesario
-              vGBsLibresNecesarios=16
+              vGBsLibresNecesarios=4
               vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
 
             # Obtener el espacio libre en la partición raíz en kilobytes
@@ -243,7 +240,7 @@
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ 2> /dev/null
-                curl -sL https://huggingface.co/lmstudio-community/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-Q8_0.gguf -o /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/
+                curl -L --create-dirs -O --output-dir /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ https://huggingface.co/lmstudio-community/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-Q8_0.gguf
                 chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
               else
                 echo ""
@@ -262,7 +259,7 @@
             echo ""
 
             # Definir el espacio libre necesario
-              vGBsLibresNecesarios=3
+              vGBsLibresNecesarios=8
               vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
 
             # Obtener el espacio libre en la partición raíz en kilobytes
@@ -272,7 +269,7 @@
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ 2> /dev/null
-                curl -sL https://huggingface.co/lmstudio-community/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-fp16.gguf -o /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/
+                curl -L --create-dirs -O --output-dir /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ https://huggingface.co/lmstudio-community/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-fp16.gguf
                 chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
               else
                 echo ""
@@ -291,7 +288,7 @@
             echo ""
 
             # Definir el espacio libre necesario
-              vGBsLibresNecesarios=9
+              vGBsLibresNecesarios=15
               vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
 
             # Obtener el espacio libre en la partición raíz en kilobytes
@@ -301,7 +298,7 @@
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ 2> /dev/null
-                curl -sL https://huggingface.co/lmstudio-community/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-fp32.gguf -o /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/
+                curl -L --create-dirs -O --output-dir /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ https://huggingface.co/lmstudio-community/Phi-3-mini-4k-instruct-GGUF/resolve/main/Phi-3-mini-4k-instruct-fp32.gguf
                 chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
               else
                 echo ""
@@ -320,7 +317,7 @@
             echo ""
 
             # Definir el espacio libre necesario
-              vGBsLibresNecesarios=9
+              vGBsLibresNecesarios=16
               vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
 
             # Obtener el espacio libre en la partición raíz en kilobytes
@@ -330,7 +327,7 @@
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
                 mkdir -p /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ 2> /dev/null
-                curl -sL https://huggingface.co/lmstudio-community/DeepSeek-Coder-V2-Lite-Instruct-GGUF/resolve/main/DeepSeek-Coder-V2-Lite-Instruct-Q8_0.gguf -o /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/
+                curl -L --create-dirs -O --output-dir /home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM/ https://huggingface.co/lmstudio-community/DeepSeek-Coder-V2-Lite-Instruct-GGUF/resolve/main/DeepSeek-Coder-V2-Lite-Instruct-Q8_0.gguf
                 chown $vUsuarioNoRoot:$vUsuarioNoRoot /home/$vUsuarioNoRoot/IA -R
               else
                 echo ""
