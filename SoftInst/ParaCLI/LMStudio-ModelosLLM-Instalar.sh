@@ -58,15 +58,15 @@
 # Crear el menú
   menu=(dialog --checklist "Marca los modelos que quieras instalar:" 22 96 16)
     opciones=(
-      1 "llama3 8b instruct, cuantificación Q8" off
-      2 "gemma2 9b instruct, cuantificación Q8" off
-      3 "gemma2 27b instruct, cuantificación Q8" off
-      4 "mistral v0.3 7b instruct, cuantificación Q8" off
-      5 "mistral v0.3 7b instruct, cuantificación FP32" off
-      6 "phi3 mini instruct 4k, cuantificación Q8" off
-      7 "phi3 mini instruct 4k, cuantificación FP16" off
-      8 "phi3 mini instruct 4k, cuantificación FP32" off
-      9 "DeepSeek Coder v2 lite instruct, cuantificación Q8" off
+      1 "LM Studio Community Llama3 8b instruct, cuantificación Q8" off
+      2 "LM Studio Community Gemma2 9b instruct, cuantificación Q8" off
+      3 "LM Studio Community Gemma2 27b instruct, cuantificación Q8" off
+      4 "LM Studio Community Mistral v0.3 7b instruct, cuantificación Q8" off
+      5 "LM Studio Community Mistral v0.3 7b instruct, cuantificación FP32" off
+      6 "LM Studio Community Phi3 mini instruct 4k, cuantificación Q8" off
+      7 "LM Studio Community Phi3 mini instruct 4k, cuantificación FP16" off
+      8 "LM Studio Community Phi3 mini instruct 4k, cuantificación FP32" off
+      9 "LM Studio Community DeepSeek Coder v2 lite instruct, cuantificación Q8" off
      10 "x" off
      11 "x" off
      12 "x" off
@@ -86,7 +86,7 @@
           1)
 
             echo ""
-            echo "  Instalando llama3 8b instruct, cuantificación Q8 (Meta-Llama-3-8B-Instruct-Q8_0.gguf)..."
+            echo "  Instalando LM Studio Community Llama3 8b instruct, cuantificación Q8 (Meta-Llama-3-8B-Instruct-Q8_0.gguf)..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -115,7 +115,7 @@
           2)
 
             echo ""
-            echo "  Instalando gemma2 9b instruct, cuantificación Q8 (gemma-2-9b-it-Q8_0.gguf)..."
+            echo "  Instalando LM Studio Community Gemma2 9b instruct, cuantificación Q8 (gemma-2-9b-it-Q8_0.gguf)..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -144,7 +144,7 @@
           3)
 
             echo ""
-            echo "  Instalando gemma2 27b instruct, cuantificación Q8 (gemma-2-27b-it-Q8_0.gguf)..."
+            echo "  Instalando LM Studio Community Gemma2 27b instruct, cuantificación Q8 (gemma-2-27b-it-Q8_0.gguf)..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -173,7 +173,7 @@
           4)
 
             echo ""
-            echo "  Instalando mistral v0.3 7b instruct, cuantificación Q8 (Mistral-7B-Instruct-v0.3-Q8_0.gguf)..."
+            echo "  Instalando LM Studio Community Mistral v0.3 7b instruct, cuantificación Q8 (Mistral-7B-Instruct-v0.3-Q8_0.gguf)..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -202,7 +202,7 @@
           5)
 
             echo ""
-            echo "  Instalando mistral v0.3 7b instruct, cuantificación FP32 (Mistral-7B-Instruct-v0.3-f32.gguf)..."
+            echo "  Instalando LM Studio Community Mistral v0.3 7b instruct, cuantificación FP32 (Mistral-7B-Instruct-v0.3-f32.gguf)..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -231,7 +231,7 @@
           6)
 
             echo ""
-            echo "  Instalando phi3 mini instruct 4k, cuantificación Q8 (Phi-3-mini-4k-instruct-Q8_0.gguf)..."
+            echo "  Instalando LM Studio Community Phi3 mini instruct 4k, cuantificación Q8 (Phi-3-mini-4k-instruct-Q8_0.gguf)..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -260,7 +260,7 @@
           7)
 
             echo ""
-            echo "  Instalando phi3 mini instruct 4k, cuantificación FP16 (Phi-3-mini-4k-instruct-fp16.gguf)..."
+            echo "  Instalando LM Studio Community Phi3 mini instruct 4k, cuantificación FP16 (Phi-3-mini-4k-instruct-fp16.gguf)..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -289,7 +289,7 @@
           8)
 
             echo ""
-            echo "  Instalando phi3 mini instruct 4k, cuantificación FP32 (Phi-3-mini-4k-instruct-fp32.gguf)..."
+            echo "  Instalando LM Studio Community Phi3 mini instruct 4k, cuantificación FP32 (Phi-3-mini-4k-instruct-fp32.gguf)..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -318,7 +318,7 @@
           9)
 
             echo ""
-            echo "  Instalando DeepSeek Coder v2 lite instruct, cuantificación Q8 (DeepSeek-Coder-V2-Lite-Instruct-Q8_0.gguf)..."
+            echo "  Instalando LM Studio Community DeepSeek Coder v2 lite instruct, cuantificación Q8 (DeepSeek-Coder-V2-Lite-Instruct-Q8_0.gguf)..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -347,12 +347,15 @@
          10)
 
 
+Phi-3-mini-4k-instruct-q4.gguf
+https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-gguf/resolve/main/Phi-3-mini-4k-instruct-q4.gguf
 
           ;;
 
          11)
 
-
+Phi-3-mini-4k-instruct-fp16.gguf
+https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-gguf/resolve/main/Phi-3-mini-4k-instruct-fp16.gguf
 
           ;;
 
