@@ -19,7 +19,7 @@
   vUsuarioNoRoot="usuariox"
 
 # Indicar la carpeta donde se guardarán los modelos
-  vCarpetaDeModelosLLM="/home/$vUsuarioNoRoot/.cache/lm-studio/models/"
+  vCarpetaDeModelosLLM="/home/$vUsuarioNoRoot/.cache/lm-studio/models"
   #vCarpetaDeModelosLLM="/home/$vUsuarioNoRoot/IA/LMStudio/ModelosLLM"
   
 
