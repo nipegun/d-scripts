@@ -275,7 +275,7 @@
       apt-get -y install gnome-shell-extension-desktop-icons-ng
       apt-get -y install gnome-shell-extension-impatience
       apt-get -y install gnome-shell-extension-hide-activities
-      apt-get -y install gnome-shell-extension-easycreencast
+      apt-get -y install gnome-shell-extension-easyscreencast
 
   elif [ $cVerSO == "11" ]; then
 
