@@ -40,8 +40,7 @@
     echo ""
     echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
-    apt-get -y update
-    apt-get -y install curl
+    apt-get -y update && apt-get -y install curl
     echo ""
   fi
 
@@ -50,10 +49,9 @@ vFechaDeEjec=$(date +a%Ym%md%d@%T)
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${cColorRojo}El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+      echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
-      apt-get -y update
-      apt-get -y install dialog
+      apt-get -y update && apt-get -y install dialog
       echo ""
     fi
 
