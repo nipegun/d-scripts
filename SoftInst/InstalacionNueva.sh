@@ -16,6 +16,9 @@
 #
 # Ejecución remota con parámetros:
 #   curl -sL x | bash -s Parámetro1 Parámetro2
+#
+# Bajar y editar directamente el archivo en nano
+#   curl -sL x | nano -
 # ----------
 
 # Definir constantes de color
