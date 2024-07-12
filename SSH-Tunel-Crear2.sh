@@ -110,6 +110,22 @@ vPuerto=22
             echo "  Creando un tunel para solicitar asistencia remota hacia mi Debian (RDP)..."
             echo ""
 
+            # Definir los puertos
+              vPuertoServicioLocal=3389
+              vPuertoEnOrdenadorRemoto=63389
+
+            # Definir el usuario y la IP del servidor SSH remoto
+              # Comprobar si el paquete zenity está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s zenity 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}    El paquete zenity no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  apt-get -y update && apt-get -y install zenity
+                  echo ""
+                fi
+              vUsuarioRemoto=$(zenity --entry --title="Usuario SSH remoto" --text="Introduce el nombre de la cuenta de usuario SSH remoto:")
+              vIPoDNSRemoto=$(zenity --entry --title="IP o DNS remoto" --text="Introduce la IP o el nombre DNS del servidor SSH remoto:")
+
             # Comprobar si el paquete ssh está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s ssh 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
@@ -119,33 +135,35 @@ vPuerto=22
                 echo ""
               fi
 
-            # Definir el usuario y la IP del servidor SSH remoto
-              vPuertoServicioLocal=3389
-              vPuertoEnOrdenadorRemoto=63389
-              vUsuarioRemoto="nipegun"
-              vIPoDNSRemoto="0.0.0.0"
+            # Comprobar que la conexión no exista, antes de crearla
+              vConex=$(ss | grep ESTAB | grep ssh | grep "$vIPoDNSRemoto" | cut -d':' -f2 | rev | cut -d' ' -f1 | rev)
+              if [ "$vConex" ==  "$vIPoDNSRemoto" ];then
+                echo ""
+                echo -e "${cColorRojo}    La conexión ya existe. Abortando...${cFinColor}"
+                echo ""
+                exit 1
+              else
+              # Comprobar que el puerto del servidor SSH sea el 22 y crear la conexión
+                if [ "$vPuerto" -eq 22 ]; then
+                  ssh -N -f -R localhost:$vPuertoEnOrdenadorRemoto:localhost:$vPuertoServicioLocal "$vUsuarioRemoto"@"$vIPoDNSRemoto"
+                else
+                  ssh -N -f -R localhost:$vPuertoEnOrdenadorRemoto:localhost:$vPuertoServicioLocal "$vUsuarioRemoto"@"$vIPoDNSRemoto" -p "$vPuerto"
+                fi
+              fi
 
-            # Comprobar que el puerto del servidor SSH sea el 22
-              if [ "$vPuerto" -eq 22 ]; then
-                ssh -N -f -R localhost:$vPuertoEnOrdenadorRemoto:localhost:$vPuertoServicioLocal "$vUsuarioRemoto"@"$vIPoDNSRemoto"
+            # Comprobar que el túnel se haya creado y notificar la creación
+              vConex=$(ss | grep ESTAB | grep ssh | grep "$vIPoDNSRemoto" | cut -d':' -f2 | rev | cut -d' ' -f1 | rev)
+              if [ "$vConex" ==  "$vIPoDNSRemoto" ];then
                 echo ""
                 echo "  Se ha creado la conexión."
                 echo "    El usuario remoto puede acceder al escritorio remoto indicando:"
                 echo "      localhost:$vPuertoEnOrdenadorRemoto"
                 echo ""
               else
-                ssh -N -f -R localhost:$vPuertoEnOrdenadorRemoto:localhost:$vPuertoServicioLocal "$vUsuarioRemoto"@"$vIPoDNSRemoto" -p "$vPuerto"
                 echo ""
-                echo "  Se ha creado la conexión."
-                echo "    El usuario remoto puede acceder al escritorio remoto indicando:"
-                echo "      localhost:$vPuertoEnOrdenadorRemoto"
+                echo -e "${cColorRojo}    La conexión no parece haberse creado!${cFinColor}"
                 echo ""
               fi
-
-            # Notificar la creación del tunel
-              echo ""
-              echo "  Se ha creado el tunel remoto, fuera"
-              echo ""
 
           ;;
 
