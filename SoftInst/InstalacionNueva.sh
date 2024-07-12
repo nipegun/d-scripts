@@ -69,6 +69,7 @@
   fi
 
 # Ejecutar comandos dependiendo de la versión de Debian detectada
+
   if [ $cVerSO == "13" ]; then
 
     echo ""
