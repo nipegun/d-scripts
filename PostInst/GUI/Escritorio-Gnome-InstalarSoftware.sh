@@ -10,7 +10,13 @@
 #
 # Ejecución remota:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-InstalarSoftware.sh | bash
+#
+# Bajar y editar directamente el archivo en nano
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-InstalarSoftware.sh | nano -
 # ----------
+
+# Definir el usuario NoRoot
+  vUsuarioNoRoot="nipegun"
 
 # Definir constantes de color
   cColorAzul="\033[0;34m"
