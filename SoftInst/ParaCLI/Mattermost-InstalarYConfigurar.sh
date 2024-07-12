@@ -9,16 +9,16 @@
 # Script de NiPeGun para instalar y configurar Mattermost en Debian
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Mattermost-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Mattermost-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Mattermost-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Mattermost-InstalarYConfigurar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -37,15 +37,6 @@
     echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
     echo ""
     exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update && apt-get -y install curl
-    echo ""
   fi
 
 # Determinar la versión de Debian
@@ -86,9 +77,129 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Mattermost para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Instalar PostgreSQL
+      echo ""
+      echo "    Instalando PostgreSQL..."
+      echo ""
+      apt-get update
+      apt-get -y install postgresql
+      apt-get -y install postgresql-contrib
+      systemctl enable postgresql --now
+      # Crear la base de datos y el usuario para Mattermost
+        vUsuarioMMPostgreSQL="mmuser"
+        vPasswordMMPostgreSQL="P@ssw0rd!"
+        vNombreBDPostgresSQL="mattermost"
+        psql -U postgres -h localhost -c "CREATE USER $vUsuarioMMPostgreSQL WITH PASSWORD '$vPasswordMMPostgreSQL';"
+        psql -U postgres -h localhost -c "CREATE DATABASE $vNombreBDPostgresSQL OWNER $vUsuarioMMPostgreSQL;"
+        psql -U postgres -h localhost -c "GRANT ALL PRIVILEGES ON DATABASE $vNombreBDPostgresSQL TO $vUsuarioMMPostgreSQL;"
+
+    # Consultar el número de la última versión de Mattermost disponible
+      echo ""
+      echo "    Consultando el número de la última versión disponible de Mattermost..."
+      echo ""
+      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update && apt-get -y install curl
+          echo ""
+        fi
+      vNumUltVers=$(curl -sL https://github.com/mattermost/mattermost/releases/latest/ | sed 's->->\n-g' | grep tag | grep tree | sed 's-/tree/-/tree/\n-g' | grep ^v | cut -d'"' -f1 | head -n1 | cut -d'v' -f2)
+      echo ""
+      echo "      La última versión disponible parece ser la $vNumUltVers"
+      echo ""
+
+    # Descargar el archivo comprimido de la última versión
+      echo ""
+      echo "    Descargando el archivo comprimido de la última versión..."
+      echo ""
+      rm -rf   /root/SoftInst/Mattermost/* 2> /dev/null
+      mkdir -p /root/SoftInst/Mattermost/  2> /dev/null
+      cd       /root/SoftInst/Mattermost/
+      curl -L https://releases.mattermost.com/$vNumUltVers/mattermost-$vNumUltVers-linux-amd64.tar.gz -o Mattermost.tar.gz
+      echo ""
+
+    # Descomprimir el archivo
+      echo ""
+      echo "    Descomprimiendo el archivo..."
+      echo ""
+      tar -xvzf Mattermost.tar.gz
+      echo ""
+
+    # Agregar el usuario mattermost
+      echo ""
+      echo "    Agregando el usuario mattermost..."
+      echo ""
+      useradd --system --user-group mattermost
+
+    # Preparar la carpeta final
+      echo ""
+      echo "    Preparando la carpeta final..."
+      echo ""
+      mv mattermost /opt
+      mkdir /opt/mattermost/data
+      chown -R mattermost:mattermost /opt/mattermost
+      chmod -R g+w /opt/mattermost
+
+    # Preparar el servicio de systemd
+      echo ""
+      echo "    Preparando el servicio de systemd..."
+      echo ""
+      echo "[Unit]"                                    > /lib/systemd/system/Mattermost.service
+      echo "Description=Mattermost"                   >> /lib/systemd/system/Mattermost.service
+      echo "After=network.target"                     >> /lib/systemd/system/Mattermost.service
+      echo "After=postgresql.service"                 >> /lib/systemd/system/Mattermost.service # Aconsejable al instalar mattermost en la misma máquina que PosgreSQL
+      echo "BindsTo=postgresql.service"               >> /lib/systemd/system/Mattermost.service# Aconsejable al instalar mattermost en la misma máquina que PosgreSQL
+      echo ""                                         >> /lib/systemd/system/Mattermost.service
+      echo "[Service]"                                >> /lib/systemd/system/Mattermost.service
+      echo "Type=notify"                              >> /lib/systemd/system/Mattermost.service
+      echo "ExecStart=/opt/mattermost/bin/mattermost" >> /lib/systemd/system/Mattermost.service
+      echo "TimeoutStartSec=3600"                     >> /lib/systemd/system/Mattermost.service
+      echo "KillMode=mixed"                           >> /lib/systemd/system/Mattermost.service
+      echo "Restart=always"                           >> /lib/systemd/system/Mattermost.service
+      echo "RestartSec=10"                            >> /lib/systemd/system/Mattermost.service
+      echo "WorkingDirectory=/opt/mattermost"         >> /lib/systemd/system/Mattermost.service
+      echo "User=mattermost"                          >> /lib/systemd/system/Mattermost.service
+      echo "Group=mattermost"                         >> /lib/systemd/system/Mattermost.service
+      echo "LimitNOFILE=49152"                        >> /lib/systemd/system/Mattermost.service
+      echo ""                                         >> /lib/systemd/system/Mattermost.service
+      echo "[Install]"                                >> /lib/systemd/system/Mattermost.service
+      echo "WantedBy=multi-user.target"               >> /lib/systemd/system/Mattermost.service
+
+    # Configurar Mattermost
+      echo ""
+      echo "    Configurando la aplicación..."
+      echo ""
+      # Hacer copia de seguridad del archivo de configuración
+        cp /opt/mattermost/config/config.json /opt/mattermost/config/config.json.bak.ori
+      # Modificar el DataSource
+        # Comprobar si el paquete jq está instalado. Si no lo está, instalarlo.
+          if [[ $(dpkg-query -s jq 2>/dev/null | grep installed) == "" ]]; then
+            echo ""
+            echo -e "${cColorRojo}      El paquete jq no está instalado. Iniciando su instalación...${cFinColor}"
+            echo ""
+            apt-get -y update && apt-get -y install jq
+            echo ""
+          fi
+        jq '.SqlSettings.DataSource = "postgres://'"$vUsuarioMMPostgreSQL:$vPasswordMMPostgreSQL@localhost:5432/$vNombreBDPostgresSQL?sslmode=disable&connect_timeout=10"'"' /opt/mattermost/config/config.json > /tmp/mmconfig.json && mv /tmp/mmconfig.json /opt/mattermost/config/config.json
+        #jq '.ServiceSettings.SiteURL = "http://mattermost.dominio.com"' /opt/mattermost/config/config.json
+
+    # Activar e iniciar el servicio
+      echo ""
+      echo "    Activando e iniciando el servicio..."
+      echo ""
+      systemctl daemon-reload
+      systemctl enable Mattermost.service --now
+
+    # Notificar fin de ejecución del script
+      echo ""
+      echo "    Instalación finalizada. Puedes acceder al servicio en:"
+      echo "      http://localhost:8065"
+      echo ""
+
+#Depending on your configuration, there are several important folders in /opt/mattermost to backup.
+#These are config, logs, plugins, client/plugins, and data. We strongly recommend you back up these locations before running the rm command.
 
   elif [ $cVerSO == "11" ]; then
 
