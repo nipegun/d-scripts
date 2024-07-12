@@ -35,7 +35,9 @@ vPuerto=22
 
   # Comprobar si el script se está ejecutando con privilegios de administración (root o sudo)
     if [ "$EUID" -ne 0 ]; then
+      echo ""
       echo -e "${cColorRojo}  El script debe ejecutarse con privilegios de administración (como root o con sudo).${cFinColor}"
+      echo ""
       exit 1
     fi
 
@@ -111,7 +113,7 @@ vPuerto=22
             # Comprobar si el paquete ssh está instalado. Si no lo está, instalarlo.
               if [[ $(dpkg-query -s ssh 2>/dev/null | grep installed) == "" ]]; then
                 echo ""
-                echo -e "${cColorRojo}  El paquete ssh no está instalado. Iniciando su instalación...${cFinColor}"
+                echo -e "${cColorRojo}    El paquete ssh no está instalado. Iniciando su instalación...${cFinColor}"
                 echo ""
                 apt-get -y update && apt-get -y install ssh
                 echo ""
