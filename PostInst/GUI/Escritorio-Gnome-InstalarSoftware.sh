@@ -127,6 +127,11 @@
       apt-get -y install coreutils
       apt-get -y install sshpass
       apt-get -y install unrar
+
+    # Instalar herramientas para poder conectar dispositivos Android
+      echo ""
+      echo "  Instalando herramientas para poder conectar dispositivos Android..."
+      echo ""
       apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
       apt-get -y install android-tools-fastboot
 
