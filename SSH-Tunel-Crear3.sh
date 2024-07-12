@@ -139,7 +139,10 @@ vPuerto=22
               vConex=$(ss | grep ESTAB | grep ssh | grep "$vIPoDNSRemoto" | cut -d':' -f2 | rev | cut -d' ' -f1 | rev)
               if [ "$vConex" ==  "$vIPoDNSRemoto" ];then
                 echo ""
-                echo -e "${cColorRojo}    La conexión ya existe. Abortando...${cFinColor}"
+                echo -e "${cColorRojo}    La conexión ya existe. Abortando la creación de una nueva...${cFinColor}"
+                echo ""
+                echo "      Puedes terminal la conexión actual ejecutando:"
+                echo "        pkill -f localhost:$vPuertoServicioLocal $vUsuarioRemoto@$vIPoDNSRemoto"
                 echo ""
                 exit 1
               else
