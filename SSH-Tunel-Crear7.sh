@@ -141,7 +141,7 @@ vPuerto=22
                 echo -e "${cColorRojo}    La conexión ya existe. Abortando la creación de una nueva...${cFinColor}"
                 echo ""
                 echo "      Puedes terminal la conexión actual ejecutando:"
-                echo '        pkill -f '"localhost:$vPuertoServicioLocal $vUsuarioRemoto@$vIPoDNSRemoto"''
+                echo '        pkill -f "'"localhost:$vPuertoServicioLocal $vUsuarioRemoto@$vIPoDNSRemoto"'"'
                 echo ""
                 exit 1
               else
