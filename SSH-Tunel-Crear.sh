@@ -35,15 +35,6 @@
     exit
   fi
 
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update && apt-get -y install curl
-    echo ""
-  fi
-
 vFechaDeEjec=$(date +a%Ym%md%d@%T)
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
@@ -59,8 +50,8 @@ vFechaDeEjec=$(date +a%Ym%md%d@%T)
   menu=(dialog --checklist "¿Qué tipo de tunel quieres crear:" 22 96 16)
     opciones=(
       1 "Tunel hacia un servicio alojado en un ordenador de casa o de la oficina" on
-      2 "Opción 2" off
-      3 "Opción 3" off
+      2 "Solicitar asistencia remota hacia mi Debian (RDP)" off
+      3 "Solicitar asistencia remota hacia mi debian (SSH)" off
       4 "Opción 4" off
       5 "Opción 5" off
     )
@@ -106,15 +97,29 @@ vFechaDeEjec=$(date +a%Ym%md%d@%T)
           2)
 
             echo ""
-            echo "  Opción 2..."
+            echo "  Creando un tunel para solicitar asistencia remota hacia mi Debian (RDP)..."
             echo ""
 
+            # Comprobar si el paquete ssh está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s ssh 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${cColorRojo}  El paquete ssh no está instalado. Iniciando su instalación...${cFinColor}"
+                echo ""
+                apt-get -y update && apt-get -y install ssh
+                echo ""
+              fi
+
+            # Definir el usuario y la IP del servidor SSH remoto
+              vUsuarioRemoto="nipegun"
+              vIPRemota=""
+            ssh -R localhost:3389:localhost:63389 root@dominio.com -p 11122
+            ssh -R localhost:3389:localhost:63389 root@dominio.com
           ;;
 
           3)
 
             echo ""
-            echo "  Opción 3..."
+            echo "  Creando un tunel para solicitar asistencia remota hacia mi Debian (SSH)..."
             echo ""
 
           ;;
