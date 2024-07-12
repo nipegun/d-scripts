@@ -86,12 +86,25 @@
       apt-get -y install postgresql-contrib
       systemctl enable postgresql --now
       # Crear la base de datos y el usuario para Mattermost
+        echo ""
+        echo "      Creando el usuario y la base de datos para mattermost..."
+        echo ""
+        # Cambiar momentáneamente la autenticación del usuario postres
+          # Obtener la versión de PostgreSQL instalada
+            vVersPostgreInst=$(ls /etc/postgresql/ | tail -n1)
+          cp /etc/postgresql/$vVersPostgreInst/main/pg_hba.conf /etc/postgresql/$vVersPostgreInst/main/pg_hba.conf.bak
+          sed -i -e 's|local   all             postgres                                peer|local all postgres trust|g' /etc/postgresql/$vVersPostgreInst/main/pg_hba.conf
+          systemctl restart postgresql
         vUsuarioMMPostgreSQL="mmuser"
         vPasswordMMPostgreSQL="P@ssw0rd!"
-        vNombreBDPostgresSQL="mattermost"
+        vNombreBDPostgreSQL="mattermost"
         psql -U postgres -h localhost -c "CREATE USER $vUsuarioMMPostgreSQL WITH PASSWORD '$vPasswordMMPostgreSQL';"
-        psql -U postgres -h localhost -c "CREATE DATABASE $vNombreBDPostgresSQL OWNER $vUsuarioMMPostgreSQL;"
-        psql -U postgres -h localhost -c "GRANT ALL PRIVILEGES ON DATABASE $vNombreBDPostgresSQL TO $vUsuarioMMPostgreSQL;"
+        psql -U postgres -h localhost -c "CREATE DATABASE $vNombreBDPostgreSQL OWNER $vUsuarioMMPostgreSQL;"
+        psql -U postgres -h localhost -c "GRANT ALL PRIVILEGES ON DATABASE $vNombreBDPostgreSQL TO $vUsuarioMMPostgreSQL;"
+        # Restaurar la autenticación del usuario postres
+          cp /etc/postgresql/$vVersPostgreInst/main/pg_hba.conf /etc/postgresql/$vVersPostgreInst/main/pg_hba.conf.bak
+          sed -i -e 's|local all postgres trust|local all postgres peer|g' /etc/postgresql/$vVersPostgreInst/main/pg_hba.conf
+          systemctl restart postgresql
 
     # Consultar el número de la última versión de Mattermost disponible
       echo ""
@@ -182,7 +195,7 @@
             apt-get -y update && apt-get -y install jq
             echo ""
           fi
-        jq '.SqlSettings.DataSource = "postgres://'"$vUsuarioMMPostgreSQL:$vPasswordMMPostgreSQL@localhost:5432/$vNombreBDPostgresSQL?sslmode=disable&connect_timeout=10"'"' /opt/mattermost/config/config.json > /tmp/mmconfig.json && mv /tmp/mmconfig.json /opt/mattermost/config/config.json
+        jq '.SqlSettings.DataSource = "postgres://'"$vUsuarioMMPostgreSQL:$vPasswordMMPostgreSQL@localhost:5432/$vNombreBDPostgreSQL?sslmode=disable&connect_timeout=10"'"' /opt/mattermost/config/config.json > /tmp/mmconfig.json && mv /tmp/mmconfig.json /opt/mattermost/config/config.json
         #jq '.ServiceSettings.SiteURL = "http://mattermost.dominio.com"' /opt/mattermost/config/config.json
 
     # Activar e iniciar el servicio
@@ -194,8 +207,9 @@
 
     # Notificar fin de ejecución del script
       echo ""
-      echo "    Instalación finalizada. Puedes acceder al servicio en:"
-      echo "      http://localhost:8065"
+      echo "    Ejecución del script, finalizada."
+      echo "      Puedes acceder al servicio en:"
+      echo "        http://localhost:8065"
       echo ""
 
 #Depending on your configuration, there are several important folders in /opt/mattermost to backup.
