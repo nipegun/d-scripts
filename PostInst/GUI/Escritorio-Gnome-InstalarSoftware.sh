@@ -29,16 +29,6 @@
     exit
   fi
 
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update
-    apt-get -y install curl
-    echo ""
-  fi
-
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
@@ -60,6 +50,7 @@
   fi
 
 # Ejecutar comandos dependiendo de la versión de Debian detectada
+
   if [ $cVerSO == "13" ]; then
 
     echo ""
@@ -76,11 +67,10 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de software para el escritorio Gnome en Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo "  Iniciando el script de instalación de software para el escritorio Gnome en Debian 12 (Bookworm)..." 
-    echo ""
-
     # Desinstalar cosas específicas de gnome
+      echo ""
+      echo "  Desinstalando escoria de Gnome..."
+      echo ""
       apt-get -y remove xterm
       #apt-get -y remove reportbug
       #apt-get -y remove blender
@@ -113,10 +103,16 @@
       apt-get -y remove totem
       apt-get -y autoremove
 
-    # Actualizar el sistema
+    # Actualizar la lista de paquetes disponibles en los repositorios...
+      echo ""
+      echo "  Actualizando la lista de paquetes disponibles en los repositorios..."
+      echo ""
       apt-get -y update
 
-    # Herramientas de terminal
+    # Herramientas para la CLI
+      echo ""
+      echo "  Instalando herramientas para la CLI..."
+      echo ""
       apt-get -y install openssh-server
       apt-get -y install sshpass
       apt-get -y install virt-viewer
@@ -135,11 +131,17 @@
       apt-get -y install android-tools-fastboot
 
     # Apps de Sistema
+      echo ""
+      echo "  Instalando aplicaciones de sistema..."
+      echo ""
       apt-get -y install gparted
       apt-get -y install hardinfo
       apt-get -y install bleachbit
 
     # Apps Multimedia
+      echo ""
+      echo "  Instalando aplicaciones multimedia..."
+      echo ""
       apt-get -y install vlc
       #apt-get -y install vlc-plugin-vlsub
       apt-get -y install audacity
@@ -148,6 +150,9 @@
       #apt-get -y install openshot
 
     # Apps de redes e internet
+      echo ""
+      echo "  Instalando aplicaciones de redes e internet..."
+      echo ""
       apt-get -y install wireshark
       apt-get -y install etherape
         setcap CAP_NET_RAW=pe /usr/bin/etherape 
@@ -168,6 +173,9 @@
       #apt-get -y install discord
 
     # Juegos
+      echo ""
+      echo "  Instalando juegos..."
+      echo ""
       apt-get -y install scid
       apt-get -y install scid-rating-data
       apt-get -y install scid-spell-data
@@ -176,6 +184,9 @@
       apt-get -y install scummvm
 
     # Fuentes
+      echo ""
+      echo "  Instalando fuentes..."
+      echo ""
       apt-get -y install fonts-ubuntu
       apt-get -y install fonts-ubuntu-console
       apt-get -y install fonts-freefont-ttf
@@ -183,9 +194,15 @@
       apt-get -y install ttf-mscorefonts-installer
 
     # apps de programación
+      echo ""
+      echo "  Instalando apps de programación..."
+      echo ""
       apt-get -y install ghex
 
     # Antivirus
+      echo ""
+      echo "  Instalando anti-virus ClamAV..."
+      echo ""
       apt-get -y install clamtk
       apt-get -y install clamav
       apt-get -y install clamav-freshclam
@@ -253,29 +270,52 @@
         # apt-get purge fprintd
 
     # Lanzador de chromium para el root
+      echo ""
+      echo "  Preparando el lanzador de chromium para el root..."
+      echo ""
       mkdir -p /root/.local/share/applications/ 2> /dev/null
-      echo "[Desktop Entry]"                      > /root/.local/share/applications/chromiumroot.desktop
-      echo "Name=Chromium (para root)"           >> /root/.local/share/applications/chromiumroot.desktop
-      echo "Comment=Accede a Internet"           >> /root/.local/share/applications/chromiumroot.desktop
-      echo "GenericName=Navegador web"           >> /root/.local/share/applications/chromiumroot.desktop
-      echo "Exec=/usr/bin/chromium --no-sandbox" >> /root/.local/share/applications/chromiumroot.desktop
-      echo "Icon=chromium"                       >> /root/.local/share/applications/chromiumroot.desktop
-      echo "Type=Application"                    >> /root/.local/share/applications/chromiumroot.desktop
-      echo "StartupNotify=false"                 >> /root/.local/share/applications/chromiumroot.desktop
-      echo "StartupWMClass=Code"                 >> /root/.local/share/applications/chromiumroot.desktop
-      echo "Categories=Network;WebBrowser;"      >> /root/.local/share/applications/chromiumroot.desktop
+      echo "[Desktop Entry]"                                                                                                            > /root/.local/share/applications/chromiumroot.desktop
+      echo "Name=Chromium (para root)"                                                                                                 >> /root/.local/share/applications/chromiumroot.desktop
+      echo "Comment=Accede a Internet"                                                                                                 >> /root/.local/share/applications/chromiumroot.desktop
+      echo "GenericName=Navegador web"                                                                                                 >> /root/.local/share/applications/chromiumroot.desktop
+      echo "Exec=/usr/bin/chromium --no-sandbox"                                                                                       >> /root/.local/share/applications/chromiumroot.desktop
+      echo "Icon=chromium"                                                                                                             >> /root/.local/share/applications/chromiumroot.desktop
+      echo "Type=Application"                                                                                                          >> /root/.local/share/applications/chromiumroot.desktop
+      echo "StartupNotify=false"                                                                                                       >> /root/.local/share/applications/chromiumroot.desktop
+      echo "StartupWMClass=Code"                                                                                                       >> /root/.local/share/applications/chromiumroot.desktop
+      echo "Categories=Network;WebBrowser;"                                                                                            >> /root/.local/share/applications/chromiumroot.desktop
       echo "MimeType=text/html;text/xml;application/xhtml_xml;application/x-mimearchive;x-scheme-handler/http;x-scheme-handler/https;" >> /root/.local/share/applications/chromiumroot.desktop
       gio set /root/.local/share/applications/chromiumroot.desktop "metadata::trusted" yes
 
     # Tor browser
+      echo ""
+      echo "  Instalando TOR browser..."
+      echo ""
       apt-get -y install torbrowser-launcher
 
     # Específicas para Gnome
+      echo ""
+      echo "  Instalando herramientas específicas para Gnome..."
+      echo ""
       apt-get -y install gnome-tweaks
       apt-get -y install gnome-shell-extension-desktop-icons-ng
       apt-get -y install gnome-shell-extension-impatience
       apt-get -y install gnome-shell-extension-hide-activities
       apt-get -y install gnome-shell-extension-easyscreencast
+      # Atajos de teclado
+        echo ""
+        echo "    Instalando atajos de teclado personalizados..."
+        echo ""
+        # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+          if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+            echo ""
+            echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+            echo ""
+            apt-get -y update && apt-get -y install curl
+            echo ""
+          fi
+        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-AtajosDeTeclado.txt -o /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
+        dconf load /org/gnome/settings-daemon/plugins/media-keys/ < /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
 
   elif [ $cVerSO == "11" ]; then
 
