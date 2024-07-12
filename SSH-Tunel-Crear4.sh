@@ -50,10 +50,9 @@ vPuerto=22
       echo ""
     fi
 
-  #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
   menu=(dialog --checklist "¿Qué tipo de tunel quieres crear:" 22 96 16)
     opciones=(
-      1 "Tunel hacia un servicio alojado en un ordenador de casa o de la oficina" on
+      1 "Tunel hacia un servicio alojado en un ordenador de casa o de la oficina" off
       2 "Inverso - Solicitar asistencia remota hacia mi Debian (RDP)" off
       3 "Inverso - Solicitar asistencia remota hacia mi Debian (SSH)" off
       4 "Inverso - Permitir el acceso a un servicio en un puerto de este ordenador" off
@@ -66,7 +65,7 @@ vPuerto=22
      11 "Opción 5" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  #clear
+  echo ""
 
     for choice in $choices
       do
