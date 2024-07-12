@@ -18,6 +18,12 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SSH-Tunel-Crear.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
+vPuerto=22
+
+# -------------------------
+# NO TOCAR A PARTIR DE AQUÍ
+#--------------------------
+
 # Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
@@ -27,15 +33,11 @@
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
-# Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
-    echo ""
-    exit
-  fi
-
-vFechaDeEjec=$(date +a%Ym%md%d@%T)
+  # Comprobar si el script se está ejecutando con privilegios de administración (root o sudo)
+    if [ "$EUID" -ne 0 ]; then
+      echo -e "${cColorRojo}  El script debe ejecutarse con privilegios de administración (como root o con sudo).${cFinColor}"
+      exit 1
+    fi
 
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
@@ -50,10 +52,16 @@ vFechaDeEjec=$(date +a%Ym%md%d@%T)
   menu=(dialog --checklist "¿Qué tipo de tunel quieres crear:" 22 96 16)
     opciones=(
       1 "Tunel hacia un servicio alojado en un ordenador de casa o de la oficina" on
-      2 "Solicitar asistencia remota hacia mi Debian (RDP)" off
-      3 "Solicitar asistencia remota hacia mi debian (SSH)" off
-      4 "Opción 4" off
-      5 "Opción 5" off
+      2 "Inverso - Solicitar asistencia remota hacia mi Debian (RDP)" off
+      3 "Inverso - Solicitar asistencia remota hacia mi Debian (SSH)" off
+      4 "Inverso - Permitir el acceso a un servicio en un puerto de este ordenador" off
+      5 "Inverso - Permitir el acceso a un servicio en un puerto de otro ordenador de mi subred" off
+      6 "Inverso - Publicar un servicio propio en una IP diferente a la nuestra" off
+      7 "Opción 5" off
+      8 "Opción 5" off
+      9 "Opción 5" off
+     10 "Opción 5" off
+     11 "Opción 5" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   #clear
@@ -110,10 +118,18 @@ vFechaDeEjec=$(date +a%Ym%md%d@%T)
               fi
 
             # Definir el usuario y la IP del servidor SSH remoto
+              vPuertoServicioLocal=3389
+              vPuertoEnOrdenadorRemoto=63389
               vUsuarioRemoto="nipegun"
-              vIPRemota=""
-            ssh -R localhost:3389:localhost:63389 root@dominio.com -p 11122
-            ssh -R localhost:3389:localhost:63389 root@dominio.com
+              vIPoDNSRemoto="0.0.0.0"
+
+            # Comprobar que el puerto del servidor SSH sea el 22
+              if [ "$vPuerto" -eq 22 ]; then
+                ssh -R localhost:$vPuertoEnOrdenadorRemoto:localhost:$vPuertoServicioLocal "$vUsuarioRemoto"@"$vIPoDNSRemoto"
+              else
+                ssh -R localhost:$vPuertoEnOrdenadorRemoto:localhost:$vPuertoServicioLocal "$vUsuarioRemoto"@"$vIPoDNSRemoto" -p "$vPuerto"
+              fi
+  
           ;;
 
           3)
@@ -136,6 +152,38 @@ vFechaDeEjec=$(date +a%Ym%md%d@%T)
 
             echo ""
             echo "  Opción 5..."
+            echo ""
+
+          ;;
+
+          6)
+
+            echo ""
+            echo "  Opción 6..."
+            echo ""
+
+          ;;
+
+          7)
+
+            echo ""
+            echo "  Opción 7..."
+            echo ""
+
+          ;;
+
+          8)
+
+            echo ""
+            echo "  Opción 8..."
+            echo ""
+
+          ;;
+
+          9)
+
+            echo ""
+            echo "  Opción 9..."
             echo ""
 
           ;;
