@@ -125,11 +125,26 @@ vPuerto=22
 
             # Comprobar que el puerto del servidor SSH sea el 22
               if [ "$vPuerto" -eq 22 ]; then
-                ssh -R localhost:$vPuertoEnOrdenadorRemoto:localhost:$vPuertoServicioLocal "$vUsuarioRemoto"@"$vIPoDNSRemoto"
+                ssh -N -f -R localhost:$vPuertoEnOrdenadorRemoto:localhost:$vPuertoServicioLocal "$vUsuarioRemoto"@"$vIPoDNSRemoto"
+                echo ""
+                echo "  Se ha creado la conexión."
+                echo "    El usuario remoto puede acceder al escritorio remoto indicando:"
+                echo "      localhost:$vPuertoEnOrdenadorRemoto"
+                echo ""
               else
-                ssh -R localhost:$vPuertoEnOrdenadorRemoto:localhost:$vPuertoServicioLocal "$vUsuarioRemoto"@"$vIPoDNSRemoto" -p "$vPuerto"
+                ssh -N -f -R localhost:$vPuertoEnOrdenadorRemoto:localhost:$vPuertoServicioLocal "$vUsuarioRemoto"@"$vIPoDNSRemoto" -p "$vPuerto"
+                echo ""
+                echo "  Se ha creado la conexión."
+                echo "    El usuario remoto puede acceder al escritorio remoto indicando:"
+                echo "      localhost:$vPuertoEnOrdenadorRemoto"
+                echo ""
               fi
-  
+
+            # Notificar la creación del tunel
+              echo ""
+              echo "  Se ha creado el tunel remoto, fuera"
+              echo ""
+
           ;;
 
           3)
