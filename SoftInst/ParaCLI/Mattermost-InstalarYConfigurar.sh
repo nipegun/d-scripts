@@ -155,30 +155,55 @@
       chown -R mattermost:mattermost /opt/mattermost
       chmod -R g+w /opt/mattermost
 
+#    # Preparar el servicio de systemd
+#      echo ""
+#      echo "    Preparando el servicio de systemd..."
+#      echo ""
+#      echo "[Unit]"                                    > /lib/systemd/system/Mattermost.service
+#      echo "Description=Mattermost"                   >> /lib/systemd/system/Mattermost.service
+#      echo "After=network.target"                     >> /lib/systemd/system/Mattermost.service
+#      echo "After=postgresql.service"                 >> /lib/systemd/system/Mattermost.service # Aconsejable al instalar mattermost en la misma máquina que PosgreSQL
+#      echo "BindsTo=postgresql.service"               >> /lib/systemd/system/Mattermost.service # Aconsejable al instalar mattermost en la misma máquina que PosgreSQL
+#      echo ""                                         >> /lib/systemd/system/Mattermost.service
+#      echo "[Service]"                                >> /lib/systemd/system/Mattermost.service
+#      echo "Type=notify"                              >> /lib/systemd/system/Mattermost.service
+#      echo "ExecStart=/opt/mattermost/bin/mattermost" >> /lib/systemd/system/Mattermost.service
+#      echo "TimeoutStartSec=3600"                     >> /lib/systemd/system/Mattermost.service
+#      echo "KillMode=mixed"                           >> /lib/systemd/system/Mattermost.service
+#      echo "Restart=always"                           >> /lib/systemd/system/Mattermost.service
+#      echo "RestartSec=10"                            >> /lib/systemd/system/Mattermost.service
+#      echo "WorkingDirectory=/opt/mattermost"         >> /lib/systemd/system/Mattermost.service
+#      echo "User=mattermost"                          >> /lib/systemd/system/Mattermost.service
+#      echo "Group=mattermost"                         >> /lib/systemd/system/Mattermost.service
+#      echo "LimitNOFILE=49152"                        >> /lib/systemd/system/Mattermost.service
+#      echo ""                                         >> /lib/systemd/system/Mattermost.service
+#      echo "[Install]"                                >> /lib/systemd/system/Mattermost.service
+#      echo "WantedBy=multi-user.target"               >> /lib/systemd/system/Mattermost.service
+
     # Preparar el servicio de systemd
       echo ""
       echo "    Preparando el servicio de systemd..."
       echo ""
-      echo "[Unit]"                                    > /lib/systemd/system/Mattermost.service
-      echo "Description=Mattermost"                   >> /lib/systemd/system/Mattermost.service
-      echo "After=network.target"                     >> /lib/systemd/system/Mattermost.service
-      echo "After=postgresql.service"                 >> /lib/systemd/system/Mattermost.service # Aconsejable al instalar mattermost en la misma máquina que PosgreSQL
-      echo "BindsTo=postgresql.service"               >> /lib/systemd/system/Mattermost.service# Aconsejable al instalar mattermost en la misma máquina que PosgreSQL
-      echo ""                                         >> /lib/systemd/system/Mattermost.service
-      echo "[Service]"                                >> /lib/systemd/system/Mattermost.service
-      echo "Type=notify"                              >> /lib/systemd/system/Mattermost.service
-      echo "ExecStart=/opt/mattermost/bin/mattermost" >> /lib/systemd/system/Mattermost.service
-      echo "TimeoutStartSec=3600"                     >> /lib/systemd/system/Mattermost.service
-      echo "KillMode=mixed"                           >> /lib/systemd/system/Mattermost.service
-      echo "Restart=always"                           >> /lib/systemd/system/Mattermost.service
-      echo "RestartSec=10"                            >> /lib/systemd/system/Mattermost.service
-      echo "WorkingDirectory=/opt/mattermost"         >> /lib/systemd/system/Mattermost.service
-      echo "User=mattermost"                          >> /lib/systemd/system/Mattermost.service
-      echo "Group=mattermost"                         >> /lib/systemd/system/Mattermost.service
-      echo "LimitNOFILE=49152"                        >> /lib/systemd/system/Mattermost.service
-      echo ""                                         >> /lib/systemd/system/Mattermost.service
-      echo "[Install]"                                >> /lib/systemd/system/Mattermost.service
-      echo "WantedBy=multi-user.target"               >> /lib/systemd/system/Mattermost.service
+      echo "[Unit]"                                    > /etc/systemd/system/Mattermost.service
+      echo "Description=Mattermost"                   >> /etc/systemd/system/Mattermost.service
+      echo "After=network.target"                     >> /etc/systemd/system/Mattermost.service
+      echo "After=postgresql.service"                 >> /etc/systemd/system/Mattermost.service # Aconsejable al instalar mattermost en la misma máquina que PosgreSQL
+      echo "BindsTo=postgresql.service"               >> /etc/systemd/system/Mattermost.service # Aconsejable al instalar mattermost en la misma máquina que PosgreSQL
+      echo ""                                         >> /etc/systemd/system/Mattermost.service
+      echo "[Service]"                                >> /etc/systemd/system/Mattermost.service
+      echo "Type=notify"                              >> /etc/systemd/system/Mattermost.service
+      echo "ExecStart=/opt/mattermost/bin/mattermost" >> /etc/systemd/system/Mattermost.service
+      echo "TimeoutStartSec=3600"                     >> /etc/systemd/system/Mattermost.service
+      echo "KillMode=mixed"                           >> /etc/systemd/system/Mattermost.service
+      echo "Restart=always"                           >> /etc/systemd/system/Mattermost.service
+      echo "RestartSec=10"                            >> /etc/systemd/system/Mattermost.service
+      echo "WorkingDirectory=/opt/mattermost"         >> /etc/systemd/system/Mattermost.service
+      echo "User=mattermost"                          >> /etc/systemd/system/Mattermost.service
+      echo "Group=mattermost"                         >> /etc/systemd/system/Mattermost.service
+      echo "LimitNOFILE=49152"                        >> /etc/systemd/system/Mattermost.service
+      echo ""                                         >> /etc/systemd/system/Mattermost.service
+      echo "[Install]"                                >> /etc/systemd/system/Mattermost.service
+      echo "WantedBy=multi-user.target"               >> /etc/systemd/system/Mattermost.service
 
     # Configurar Mattermost
       echo ""
