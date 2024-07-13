@@ -223,8 +223,8 @@
         jq '.SqlSettings.DataSource = "postgres://'"$vUsuarioMMPostgreSQL:$vPasswordMMPostgreSQL@localhost:5432/$vNombreBDPostgreSQL?sslmode=disable&connect_timeout=10"'"' /opt/mattermost/config/config.json > /tmp/mmconfig.json && mv /tmp/mmconfig.json /opt/mattermost/config/config.json
       # Modificar el SiteURL
         #jq '.ServiceSettings.SiteURL = "http://mattermost.dominio.com"' /opt/mattermost/config/config.json
-      # Corregir propietario del archivo config.json
-        chown mattermost:mattermost /opt/mattermost/config/config.json
+      # Corregir propietario de los archivos
+        chown mattermost:mattermost /opt/mattermost -R
  
 
     # Activar e iniciar el servicio
