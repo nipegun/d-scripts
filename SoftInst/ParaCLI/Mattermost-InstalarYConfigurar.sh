@@ -21,6 +21,11 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Mattermost-InstalarYConfigurar.sh | nano -
 # ----------
 
+vDominioMM="mattermost.dominio.com"
+
+# -------------------------
+# NO TOCAR A PARTIR DE AQUÍ
+# -------------------------
 # Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
@@ -222,10 +227,9 @@
           fi
         jq '.SqlSettings.DataSource = "postgres://'"$vUsuarioMMPostgreSQL:$vPasswordMMPostgreSQL@localhost:5432/$vNombreBDPostgreSQL?sslmode=disable&connect_timeout=10"'"' /opt/mattermost/config/config.json > /tmp/mmconfig.json && mv /tmp/mmconfig.json /opt/mattermost/config/config.json
       # Modificar el SiteURL
-        #jq '.ServiceSettings.SiteURL = "http://mattermost.dominio.com"' /opt/mattermost/config/config.json
+        jq '.ServiceSettings.SiteURL = "http://'"$vDominioMM"'"' /opt/mattermost/config/config.json > /tmp/mmconfig.json && mv /tmp/mmconfig.json /opt/mattermost/config/config.json
       # Corregir propietario de los archivos
         chown mattermost:mattermost /opt/mattermost -R
- 
 
     # Activar e iniciar el servicio
       echo ""
