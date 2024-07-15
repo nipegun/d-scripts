@@ -86,9 +86,67 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Node.js para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+  # Crear el menú
+    menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+      opciones=(
+        1 "Instalar la versión disponible en los repositorios oficiales de Debian" on
+        2 "Instalar la última versión LTS" off
+        3 "Instalar la versión Current" off
+        4 "x" off
+        5 "x" off
+      )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+
+    for choice in $choices
+      do
+        case $choice in
+
+          1)
+
+            echo ""
+            echo "  Instalando la versión de Node.js disponible en los repositorios oficiales de Debian..."
+            echo ""
+            apt-get -y update
+            apt-get -y install nodejs
+            apt-get -y install npm
+
+          ;;
+
+          2)
+
+            echo ""
+            echo "  Instalando la versión LTS de Node.js..."
+            echo ""
+
+          ;;
+
+          3)
+
+            echo ""
+            echo "  Instalando la versión Current de Node.js..."
+            echo ""
+
+          ;;
+
+          4)
+
+            echo ""
+            echo "  Opción 4..."
+            echo ""
+
+          ;;
+
+          5)
+
+            echo ""
+            echo "  Opción 5..."
+            echo ""
+
+          ;;
+
+      esac
+
+  done
 
   elif [ $cVerSO == "11" ]; then
 
