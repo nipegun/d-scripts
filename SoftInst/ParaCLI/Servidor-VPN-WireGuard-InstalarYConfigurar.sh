@@ -13,20 +13,28 @@
 # ----------
 
 # Determinar la primera interfaz ethernet
-vInterfazWAN=$(ip route | grep "default via" | sed 's-dev -\n-g' | tail -n 1 | cut -d ' ' -f1)
-#vInterfazWAN="venet0"
-vDirIPintWG="192.168.255.1"
-vDirIPDefaultGateway=$(ip r | grep efault | cut -d' ' -f3)
+  vInterfazWAN=$(ip route | grep "default via" | sed 's-dev -\n-g' | tail -n 1 | cut -d ' ' -f1)
+  #vInterfazWAN="venet0"
+# Asignar IP a la interfaz Wireguard
+  vDirIPintWG="192.168.255.1"
+# Determinar el gateway de la interfaz WAN
+  vDirIPDefaultGateway=$(ip r | grep efault | cut -d' ' -f3)
 
-cColorAzul="\033[0;34m"
-cColorAzulClaro="\033[1;34m"
-cColorVerde='\033[1;32m'
-cColorRojo='\033[1;31m'
-cFinColor='\033[0m'
+# Definir constantes de color
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root....${cFinColor}"
+  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
+  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
+    echo ""
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
+    echo ""
     exit
   fi
 
@@ -98,8 +106,9 @@ elif [ $cVerSO == "12" ]; then
     echo "SaveConfig = true"                                      >> /etc/wireguard/wg0.conf # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos
 
   # Crear los scripts con las reglas de NFTables
+    mkdir -p /root/WireGuard/ 2> /dev/null
     # Reglas PostUp
-      echo '#/bin/bash'                                                                                                           > /root/WireGuard/ReglasWireGuard-PostUp.sh
+      echo '#!/bin/bash'                                                                                                          > /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo ""                                                                                                                    >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo "# IPv4 e IPv6"                                                                                                       >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo '  #nft add table inet filter'                                                                                        >> /root/WireGuard/ReglasWireGuard-PostUp.sh
@@ -135,7 +144,7 @@ elif [ $cVerSO == "12" ]; then
       echo "  ip route add default via $vDirIPDefaultGateway"                                                                    >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       chmod +x /root/WireGuard/ReglasWireGuard-PostUp.sh
     # Reglas PostDown
-      echo '#/bin/bash'                                                                         > /root/WireGuard/ReglasWireGuard-PostDown.sh
+      echo '#!/bin/bash'                                                                        > /root/WireGuard/ReglasWireGuard-PostDown.sh
       echo ""                                                                                  >> /root/WireGuard/ReglasWireGuard-PostDown.sh
       echo "# IPv4 e IPv6"                                                                     >> /root/WireGuard/ReglasWireGuard-PostDown.sh
       echo '  #vReglaForwardIP4y6=$(nft -a list table inet filter | grep wg0 | cut -d"#" -f2)' >> /root/WireGuard/ReglasWireGuard-PostDown.sh
@@ -241,8 +250,9 @@ elif [ $cVerSO == "11" ]; then
     echo "SaveConfig = true"                                      >> /etc/wireguard/wg0.conf # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos
 
   # Crear los scripts con las reglas de NFTables
+    mkdir -p /root/WireGuard/ 2> /dev/null
     # Reglas PostUp
-      echo '#/bin/bash'                                                                                                           > /root/WireGuard/ReglasWireGuard-PostUp.sh
+      echo '#!/bin/bash'                                                                                                          > /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo ""                                                                                                                    >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo "# IPv4 e IPv6"                                                                                                       >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo '  #nft add table inet filter'                                                                                        >> /root/WireGuard/ReglasWireGuard-PostUp.sh
@@ -278,7 +288,7 @@ elif [ $cVerSO == "11" ]; then
       echo "  ip route add default via $vDirIPDefaultGateway"                                                                    >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       chmod +x /root/WireGuard/ReglasWireGuard-PostUp.sh
     # Reglas PostDown
-      echo '#/bin/bash'                                                                         > /root/WireGuard/ReglasWireGuard-PostDown.sh
+      echo '#!/bin/bash'                                                                        > /root/WireGuard/ReglasWireGuard-PostDown.sh
       echo ""                                                                                  >> /root/WireGuard/ReglasWireGuard-PostDown.sh
       echo "# IPv4 e IPv6"                                                                     >> /root/WireGuard/ReglasWireGuard-PostDown.sh
       echo '  #vReglaForwardIP4y6=$(nft -a list table inet filter | grep wg0 | cut -d"#" -f2)' >> /root/WireGuard/ReglasWireGuard-PostDown.sh
@@ -353,7 +363,8 @@ elif [ $cVerSO == "10" ]; then
 
   # Borrar WireGuard si ya está instalado
     echo ""
-    echo "    Borrando posible instalación anterior..."    echo ""
+    echo "    Borrando posible instalación anterior..."
+    echo ""
     # Ejecutar primero copia de seguridad de posible instalación anterior
     mkdir -p /root/WireGuard/CopSegInstAnt/ 2> /dev/null
     mv /root/WireGuard/* /root/WireGuard/CopSegInstAnt/
@@ -363,7 +374,8 @@ elif [ $cVerSO == "10" ]; then
 
 # Instalar el paquete WireGuard
     echo ""
-    echo "    Instalando paquetes..."    echo ""
+    echo "    Instalando paquetes..."
+    echo ""
     apt-get -y update > /dev/null
     apt-get -y autoremove > /dev/null
     apt-get -y install wireguard
@@ -371,7 +383,8 @@ elif [ $cVerSO == "10" ]; then
 
   # Crear el archivo de configuración#
     echo ""
-    echo "    Creando el archivo de configuración de la interfaz..."    echo ""
+    echo "    Creando el archivo de configuración de la interfaz..."
+    echo ""
     echo "[Interface]"                                             > /etc/wireguard/wg0.conf
     echo "Address = $vDirIPintWG/24"                              >> /etc/wireguard/wg0.conf
     echo "PrivateKey ="                                           >> /etc/wireguard/wg0.conf
@@ -381,17 +394,20 @@ elif [ $cVerSO == "10" ]; then
     echo "SaveConfig = true"                                      >> /etc/wireguard/wg0.conf  # Para que se guarden los nuevos clientes en este archivo desde la línea de comandos
 
   # Crear los scripts con las reglas de IPTables
+    mkdir -p /root/WireGuard/ 2> /dev/null
     # Comprobar si el paquete iptables está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s iptables 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${cColorRojo}    iptables no está instalado. Iniciando su instalación...${cFinColor}"
+        echo -e "${cColorRojo}    El paquete iptables no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
-        apt-get -y update
-        apt-get -y install iptables
+        apt-get -y update && apt-get -y install iptables
         echo ""
       fi
     # Reglas PostUp
-      echo "iptables -A FORWARD -i wg0 -j ACCEPT"                                                                 > /root/WireGuard/ReglasWireGuard-PostUp.sh
+      mkdir -p /root/WireGuard/ 2> /dev/null
+      echo '#!/bin/bash'                                                                                          > /root/WireGuard/ReglasWireGuard-PostUp.sh
+      echo ''                                                                                                    >> /root/WireGuard/ReglasWireGuard-PostUp.sh
+      echo "iptables -A FORWARD -i wg0 -j ACCEPT"                                                                >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo "iptables -t nat -A POSTROUTING -o $vInterfazWAN -j MASQUERADE"                                       >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo "#ip6tables -A FORWARD -i wg0 -j ACCEPT"                                                              >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       echo "#ip6tables -t nat -A POSTROUTING -o $vInterfazWAN -j MASQUERADE"                                     >> /root/WireGuard/ReglasWireGuard-PostUp.sh
@@ -404,7 +420,9 @@ elif [ $cVerSO == "10" ]; then
       echo "ip route add default via $vDirIPDefaultGateway"                                                      >> /root/WireGuard/ReglasWireGuard-PostUp.sh
       chmod +x /root/WireGuard/ReglasWireGuard-PostUp.sh
     # Reglas PostDown
-      echo "iptables -D FORWARD -i wg0 -j ACCEPT"                             > /root/WireGuard/ReglasWireGuard-PostDown.sh
+      echo '#!/bin/bash'                                                      > /root/WireGuard/ReglasWireGuard-PostDown.sh
+      echo ''                                                                >> /root/WireGuard/ReglasWireGuard-PostDown.sh
+      echo "iptables -D FORWARD -i wg0 -j ACCEPT"                            >> /root/WireGuard/ReglasWireGuard-PostDown.sh
       echo "iptables -t nat -D POSTROUTING -o $vInterfazWAN -j MASQUERADE"   >> /root/WireGuard/ReglasWireGuard-PostDown.sh
       echo "#ip6tables -D FORWARD -i wg0 -j ACCEPT"                          >> /root/WireGuard/ReglasWireGuard-PostDown.sh
       echo "#ip6tables -t nat -D POSTROUTING -o $vInterfazWAN -j MASQUERADE" >> /root/WireGuard/ReglasWireGuard-PostDown.sh
@@ -432,13 +450,15 @@ elif [ $cVerSO == "10" ]; then
 
   # Levantar la conexión
     echo ""
-    echo "    Levantando la interfaz..."    echo ""
+    echo "    Levantando la interfaz..."
+    echo ""
     wg-quick up wg0
     echo ""
 
   # Activar el servicio
     echo ""
-    echo "    Activando el servicio..."    echo ""
+    echo "    Activando el servicio..."
+    echo ""
     systemctl enable wg-quick@wg0.service
     echo ""
 
