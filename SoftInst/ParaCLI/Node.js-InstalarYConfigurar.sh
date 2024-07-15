@@ -108,7 +108,34 @@
             echo ""
             apt-get -y update
             apt-get -y install nodejs
-            apt-get -y install npm
+            #apt-get -y install npm
+
+            # Notificar fin de instalación
+              vNodeJS=$(node -v | cut  -d'v' -f2)
+              echo ""
+              echo "    Se ha instalado la versión $vNodeJS de Node.js."
+              echo ""
+
+           # Probar la instalación
+             # Crear el archivo de configuración del servidor
+               echo ""                                                      > /tmp/ServidorPrueba.js 
+               echo "var http = require('http');"                          >> /tmp/ServidorPrueba.js
+               echo "var server = http.createServer(function(req, res) {"  >> /tmp/ServidorPrueba.js
+               echo 'res.write("Servidor http Node.js de prueba!\n");'     >> /tmp/ServidorPrueba.js
+               echo "res.end();"                                           >> /tmp/ServidorPrueba.js
+               echo "}).liste(8080);"                                      >> /tmp/ServidorPrueba.js
+             # Lanzar el servidor
+               node /tmp/ServidorPrueba.js &
+             # Notificar el servidor de pruebas corriendo
+               echo ""
+               echo "      Se ha creado y ejecutado el servidor http de prueba en:"
+               echo "        /tmp/ServidorPrueba.js"
+               echo "        Para acceder: http://localhost:8080"
+               vNumProcSP=$(jobs | grep "/tmp/ServidorPrueba.js" | cut -d'[' -f2 | cut -d']' -f1)
+               echo "        Para detenerlo: fg %$vNumProcSP && kill %$vNumProcSP"
+               echo ""
+               echo "      Si la web del servidor se ve, es que Node.js se ha instalado correctamente."
+               echo ""
 
           ;;
 
