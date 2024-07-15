@@ -123,7 +123,7 @@
                echo "var server = http.createServer(function(req, res) {"  >> /tmp/ServidorPrueba.js
                echo 'res.write("Servidor http Node.js de prueba!\n");'     >> /tmp/ServidorPrueba.js
                echo "res.end();"                                           >> /tmp/ServidorPrueba.js
-               echo "}).listen(8080);"                                      >> /tmp/ServidorPrueba.js
+               echo "}).listen(8080);"                                     >> /tmp/ServidorPrueba.js
              # Lanzar el servidor
                node /tmp/ServidorPrueba.js &
              # Notificar el servidor de pruebas corriendo
@@ -132,7 +132,7 @@
                echo "        /tmp/ServidorPrueba.js"
                echo "        Para acceder: http://localhost:8080"
                vNumProcSP=$(jobs | grep "/tmp/ServidorPrueba.js" | cut -d'[' -f2 | cut -d']' -f1)
-               echo "        Para detenerlo: fg %$vNumProcSP && kill %$vNumProcSP"
+               echo "        Para detenerlo: kill %$vNumProcSP"
                echo ""
                echo "      Si la web del servidor se ve, es que Node.js se ha instalado correctamente."
                echo ""
