@@ -108,7 +108,7 @@
             echo ""
             apt-get -y update
             apt-get -y install nodejs
-            #apt-get -y install npm
+            apt-get -y install npm
 
             # Notificar fin de instalación
               vNodeJS=$(node -v | cut  -d'v' -f2)
