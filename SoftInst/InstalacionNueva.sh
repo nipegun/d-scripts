@@ -31,8 +31,8 @@
   cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
-  #if [ $(id -u) -ne 0 ]; then
-  if [[ $EUID -ne 0 ]]; then
+  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
+  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
     echo ""
     echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
     echo ""
