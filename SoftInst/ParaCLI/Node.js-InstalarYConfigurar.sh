@@ -123,7 +123,7 @@
                echo "var server = http.createServer(function(req, res) {"  >> /tmp/ServidorPrueba.js
                echo 'res.write("Servidor http Node.js de prueba!\n");'     >> /tmp/ServidorPrueba.js
                echo "res.end();"                                           >> /tmp/ServidorPrueba.js
-               echo "}).liste(8080);"                                      >> /tmp/ServidorPrueba.js
+               echo "}).listen(8080);"                                      >> /tmp/ServidorPrueba.js
              # Lanzar el servidor
                node /tmp/ServidorPrueba.js &
              # Notificar el servidor de pruebas corriendo
