@@ -34,7 +34,7 @@
   #if [ $(id -u) -ne 0 ]; then
   if [[ $EUID -ne 0 ]]; then
     echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
     echo ""
     exit
   fi
