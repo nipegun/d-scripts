@@ -497,6 +497,8 @@ elif [ $cVerSO == "12" ]; then
               echo "      La instalación de LibreChat ha finalizado. Puedes acceder la web, aquí:"
               echo "        http://localhost:3080"
               echo ""
+              echo "      Para poner tu OPENAI_API_KEY edita: /opt/librechat/.env"
+              echo ""
 
           ;;
 
