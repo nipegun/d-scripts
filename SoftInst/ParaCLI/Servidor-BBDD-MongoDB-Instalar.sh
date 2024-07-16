@@ -120,40 +120,9 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Descargando e instalando Mongo Community Shell"
     echo ""
-    curl -L https://repo.mongodb.org/apt/debian/dists/bookworm/mongodb-org/$vUltVersMainMongoDBCommunity/main/binary-amd64/mongodb-org-shell_"$vUltSubVersMongoDBCommunity"_amd64.deb -o /root/SoftInst/MongoDBCommunityServer/MongoDBCommunityShell.deb 
+    curl -L https://repo.mongodb.org/apt/debian/dists/bookworm/mongodb-org/$vUltVersMainMongoDBCommunity/main/binary-amd64/mongodb-org-shell_"$vUltSubVersMongoDBCommunity"_amd64.deb -o /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb 
     echo ""
     apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb
-
-  # Instalar Mongo Community Tools
-    echo ""
-    echo "    Descargando e instalando Mongo Community Tools..."
-    echo ""
-    curl -L https://repo.mongodb.org/apt/debian/dists/bookworm/mongodb-org/$vUltVersMainMongoDBCommunity/main/binary-amd64/mongodb-org-tools_"$vUltSubVersMongoDBCommunity"_amd64.deb -o /root/SoftInst/MongoDBCommunityServer/MongoDBCommunityTools.deb
-    echo ""
-    apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityTools.deb
-
-  echo "  Instalando dependencias..." 
-  echo ""
-  apt-get -y update
-  apt-get -y install ca-certificates
-
-
-  echo ""
-  echo "  Activando el servicio..." 
-  echo ""
-  systemctl enable mongod.service --now
-
-
-
-
-
-  echo ""
-  echo "  Verificando el estado de la conexión con la base de datos..." 
-  echo ""
-  echo "  0 = Incorrecta."
-  echo "  1 = Correcta"
-  echo ""
-  mongod --quiet --eval 'db.runCommand({ connectionStatus: 1 })' | jq .ok
 
   echo ""
   echo "  Activando la autenticación de usuarios..." 
@@ -167,6 +136,21 @@ elif [ $cVerSO == "12" ]; then
   echo '  y cambia la línea IP en la parte que dice "bindIp: 0.0.0.0".'
   echo ""
   sed -i -e 's|bindIp: 127.0.0.1|bindIp: 0.0.0.0|g' /etc/mongod.conf
+
+  echo ""
+  echo "  Activando el servicio..." 
+  echo ""
+  systemctl enable mongod.service --now
+
+  echo ""
+  echo "  Verificando el estado de la conexión con la base de datos..." 
+  echo ""
+  echo "  0 = Incorrecta."
+  echo "  1 = Correcta"
+  echo ""
+  mongo --quiet --eval 'db.runCommand({ connectionStatus: 1 })' | jq .ok
+
+
 
   echo ""
   echo "  Reiniciando el servicio..." 
