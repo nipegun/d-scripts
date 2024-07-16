@@ -430,6 +430,9 @@ elif [ $cVerSO == "12" ]; then
               echo "            o, para tener usuario y contraseña:"
               echo "          su - flowise -c '/opt/flowise/bin/flowise start --FLOWISE_USERNAME=$vUsuarioWebFlowise --FLOWISE_PASSWORD=$vContraWebFlowise'"
               echo ""
+              echo "        Es posible asegurar un ChatFlow con una API key. Mas info en:"
+              echo "          https://docs.flowiseai.com/configuration/authorization/chatflow-level"
+              echo ""
 
           ;;
 
