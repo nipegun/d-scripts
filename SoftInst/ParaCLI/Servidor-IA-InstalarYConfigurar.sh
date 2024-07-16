@@ -499,7 +499,7 @@ elif [ $cVerSO == "12" ]; then
               echo "          cd /opt/librechat/ && npm run backend"
               echo ""
               echo "        Para actualizar LibreChat, ejecuta:"
-              echo "          cd /opt/librechat/ && npm ci && npm run backend"
+              echo "          cd /opt/librechat/ && npm ci && npm run frontend"
               echo ""
               echo "        Una vez iniciado el servidor podrás acceder a él en:"
               echo "          http://localhost:3080"
