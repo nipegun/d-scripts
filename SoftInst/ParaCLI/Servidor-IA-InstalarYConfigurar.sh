@@ -355,6 +355,9 @@ elif [ $cVerSO == "12" ]; then
             echo ""
 
             # Instalar Node.js
+              echo ""
+              echo "    Instalando Node.js..."
+              echo ""
               # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -366,6 +369,9 @@ elif [ $cVerSO == "12" ]; then
               curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Node.js-InstalarYConfigurar.sh | bash
 
             # Instalar FlowiseAI con NPM
+              echo ""
+              echo "    Continuando con la instalación de FlowiseAI..."
+              echo ""
               # Hacer la instalación global (-g) em ña carpeta /opt/flowise/
                 npm install -g flowise --prefix /opt/flowise/
 
