@@ -160,31 +160,6 @@ vDominioMM="mattermost.dominio.com"
       chown -R mattermost:mattermost /opt/mattermost
       chmod -R g+w /opt/mattermost
 
-#    # Preparar el servicio de systemd
-#      echo ""
-#      echo "    Preparando el servicio de systemd..."
-#      echo ""
-#      echo "[Unit]"                                    > /lib/systemd/system/mattermost.service
-#      echo "Description=Mattermost"                   >> /lib/systemd/system/mattermost.service
-#      echo "After=network.target"                     >> /lib/systemd/system/mattermost.service
-#      echo "After=postgresql.service"                 >> /lib/systemd/system/mattermost.service # Aconsejable al instalar mattermost en la misma máquina que PosgreSQL
-#      echo "BindsTo=postgresql.service"               >> /lib/systemd/system/mattermost.service # Aconsejable al instalar mattermost en la misma máquina que PosgreSQL
-#      echo ""                                         >> /lib/systemd/system/mattermost.service
-#      echo "[Service]"                                >> /lib/systemd/system/mattermost.service
-#      echo "Type=notify"                              >> /lib/systemd/system/mattermost.service
-#      echo "ExecStart=/opt/mattermost/bin/mattermost" >> /lib/systemd/system/mattermost.service
-#      echo "TimeoutStartSec=3600"                     >> /lib/systemd/system/mattermost.service
-#      echo "KillMode=mixed"                           >> /lib/systemd/system/mattermost.service
-#      echo "Restart=always"                           >> /lib/systemd/system/mattermost.service
-#      echo "RestartSec=10"                            >> /lib/systemd/system/mattermost.service
-#      echo "WorkingDirectory=/opt/mattermost"         >> /lib/systemd/system/mattermost.service
-#      echo "User=mattermost"                          >> /lib/systemd/system/mattermost.service
-#      echo "Group=mattermost"                         >> /lib/systemd/system/mattermost.service
-#      echo "LimitNOFILE=49152"                        >> /lib/systemd/system/mattermost.service
-#      echo ""                                         >> /lib/systemd/system/mattermost.service
-#      echo "[Install]"                                >> /lib/systemd/system/mattermost.service
-#      echo "WantedBy=multi-user.target"               >> /lib/systemd/system/mattermost.service
-
     # Preparar el servicio de systemd
       echo ""
       echo "    Preparando el servicio de systemd..."
