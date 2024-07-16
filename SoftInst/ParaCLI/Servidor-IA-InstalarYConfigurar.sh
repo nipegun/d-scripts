@@ -146,7 +146,17 @@ elif [ $cVerSO == "12" ]; then
               # Meter Environment="OLLAMA_HOST=0.0.0.0:11434" antes de [Install] en /etc/systemd/system/ollama.service
 
             # Activar e iniciar el servicio
-            systemctl enable ollama --now
+              systemctl enable ollama --now
+
+            # Notificar fin de la instalación
+              echo ""
+              echo "  Instalación finalizada."
+              echo ""
+              echo "    Para enviar peticiones a la API:"
+              echo "      curl http://localhost:11434/api/generate -d '{ "'"model"'": "'"llama3:8b"'", "'"prompt"'": "'"El texto que quieras"'", "'"stream"'": false }'"
+              echo '        o'
+              echo "      curl http://127.0.0.1:11434/api/generate -d '{ "'"model"'": "'"mistral:7b"'", "'"prompt"'": "'"El texto que quieras"'", "'"stream"'": false, "'"temperature"'": 0.3, "'"max_length"'": 80}'"
+              echo ''
 
           ;;
 
