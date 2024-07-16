@@ -366,14 +366,15 @@ elif [ $cVerSO == "12" ]; then
               curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Node.js-InstalarYConfigurar.sh | bash
 
             # Instalar FlowiseAI con NPM
-              npm install -g flowise
+              # Hacer la instalación global (-g) em ña carpeta /opt/flowise/
+                npm install -g flowise --prefix /opt/flowise/
 
             # Agregar el usuario mattermost
               echo ""
-              echo "    Agregando el usuario flowise..."
+              echo "    Agregando el usuario y grupo flowise..."
               echo ""
-              useradd --system --user-group flowise
-              mkdir -p /opt/flowise 2> /dev/null
+              mkdir -p /opt/flowise/ 2> /dev/null
+              useradd -d /opt/flowise/ -s /bin/false flowise
               chown flowise:flowise /opt/flowise -R 2> /dev/null
 
             # Crear el servicio de systemd para flowiseai
@@ -383,12 +384,14 @@ elif [ $cVerSO == "12" ]; then
               echo ""                                         >> /etc/systemd/system/flowise.service
               echo "[Service]"                                >> /etc/systemd/system/flowise.service
               echo "Type=notify"                              >> /etc/systemd/system/flowise.service
-              echo 'ExecStart=/usr/bin/npx flowise start'     >> /etc/systemd/system/flowise.service
+              #echo 'ExecStart=/opt/flowise/bin/flowise start --FLOWISE_USERNAME=user --FLOWISE_PASSWORD=1234' >> /etc/systemd/system/flowise.service
+              echo 'ExecStart=/opt/flowise/bin/flowise start' >> /etc/systemd/system/flowise.service
               echo "WorkingDirectory=/opt/flowise"            >> /etc/systemd/system/flowise.service
               echo "Restart=always"                           >> /etc/systemd/system/flowise.service
               echo "User=flowise"                             >> /etc/systemd/system/flowise.service
               echo "Group=flowise"                            >> /etc/systemd/system/flowise.service
-              echo "Environment=PATH=/usr/bin:/usr/local/bin" >> /etc/systemd/system/flowise.service
+              #echo "Environment=PATH=/usr/bin:/usr/local/bin" >> /etc/systemd/system/flowise.service
+              #PATH=/mi/nueva/ruta/npm-global/bin:
               echo ""                                         >> /etc/systemd/system/flowise.service
               echo "[Install]"                                >> /etc/systemd/system/flowise.service
               echo "WantedBy=multi-user.target"               >> /etc/systemd/system/flowise.service
