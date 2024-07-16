@@ -142,6 +142,9 @@ elif [ $cVerSO == "12" ]; then
             # Correr el script de instalación
               curl -fsSL https://ollama.com/install.sh | sh
 
+            # Permitir las conexiones desde fuera
+              # Meter Environment="OLLAMA_HOST=0.0.0.0:11434" antes de [Install] en /etc/systemd/system/ollama.service
+
             # Activar e iniciar el servicio
             systemctl enable ollama --now
 
