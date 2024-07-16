@@ -423,6 +423,11 @@ elif [ $cVerSO == "12" ]; then
               echo "        ...y ejecuta:"
               echo "          systemctl stop flowise.service && systemctl daemon-reload && systemctl start flowise.service"
               echo ""
+              echo "        Si no funciona el servicio, es posible lanzar Flowise desde la línea de comandos, ejecutando como root:"
+              echo "          su - flowise -c '/opt/flowise/bin/flowise start'"
+              echo "            o, para tener usuario y contraseña:"
+              echo "          su - flowise -c '/opt/flowise/bin/flowise start --FLOWISE_USERNAME=$vUsuarioWebFlowise --FLOWISE_PASSWORD=$vContraWebFlowise'"
+              echo ""
 
           ;;
 
