@@ -448,7 +448,43 @@ elif [ $cVerSO == "12" ]; then
                 fi
               curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Node.js-InstalarYConfigurar.sh | bash
 
-            # (Continuar)
+            # Instalar MongoDB
+              
+
+            # Clonar repositorio
+              mkdir -p /root/SoftInst/ 2> /dev/null
+              rm -rf /root/SoftInst/LibreChat/
+              cd /root/SoftInst/
+              # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}    El paquete git no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  apt-get -y update && apt-get -y install git
+                  echo ""
+                fi
+              git clone https://github.com/danny-avila/LibreChat.git
+
+            # Compilar
+              cd LibreChat
+              cp .env.example .env
+              # Modificar la URL de la base de datos
+                #sed -i -e 's|MONGO_URI=mongodb://127.0.0.1:27017/LibreChat|MONGO_URI=mongodb://127.0.0.1:27017/LibreChat|g' /root/SoftInst/LibreChat/.env
+              # Instalar dependencias
+                npm ci
+              # Construir el frontend
+                npm run frontend
+              # Especificar el directorio de datos donde MongoDB guardará los archivos
+                cd /usr/bin
+                ./mongod --dbpath=/path/to/data/directory
+              # Construir el backend
+                npm run backend
+
+            # Notificar fin de la instalación
+              echo ""
+              echo "      La instalación de LibreChat ha finalizado. Puedes acceder la web, aquí:"
+              echo "        http://localhost:3080"
+              echo ""
 
           ;;
 
