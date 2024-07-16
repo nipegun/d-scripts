@@ -128,8 +128,7 @@
                node /tmp/ServidorPrueba.js &
              # Notificar el servidor de pruebas corriendo
                echo ""
-               echo "      Se ha creado y ejecutado el servidor http de prueba en:"
-               echo "        /tmp/ServidorPrueba.js"
+               echo "      Se ha creado y ejecutado el servidor http de prueba en /tmp/ServidorPrueba.js."
                echo "        Para acceder: http://localhost:8080"
                vNumProcSP=$(jobs | grep "/tmp/ServidorPrueba.js" | cut -d'[' -f2 | cut -d']' -f1)
                echo "        Para detenerlo: kill %$vNumProcSP"
