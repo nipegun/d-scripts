@@ -81,106 +81,227 @@ elif [ $cVerSO == "12" ]; then
   vUltSubVersMongoDBCommunity=$(cat /tmp/PaquetesDebianMondoDBCommunity.json | grep server | grep -vE 'velopment|esting' | cut -d'"' -f2 | cut -d'_' -f2)
   echo ""
   echo "      La última versión estable de MongoDB Community es la $vUltSubVersMongoDBCommunity"
-
-  # Obtener el enlace de descarga del paquete .deb
-    echo "" 
-    echo "    Obteniendo el enlace de descarga del paquete.deb..."
-    echo ""
-    vEnlaceDescargaPaqueteDeb=$(cat /tmp/PaquetesDebianMondoDBCommunity.json | grep server | grep -vE 'velopment|esting' | cut -d'"' -f2)
-    echo ""
-    echo "      En enlace de descarga del paquete .deb es: $vEnlaceDescargaPaqueteDeb"
-    echo ""
-
-  # Guardar versión main
-    vUltVersMainMongoDBCommunity=$(echo $vEnlaceDescargaPaqueteDeb | cut -d'/' -f9)
-
-  # Descargar el paquete:
-    echo ""
-    echo "    Descargando el paquete..."
-    echo ""
-    mkdir -p /root/SoftInst/MongoDBCommunity/ 2> /dev/null
-    cd /root/SoftInst/MongoDBCommunity/
-    # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-        echo ""
-        apt-get -y update && apt-get -y install curl
-        echo ""
-      fi
-    curl -L $vEnlaceDescargaPaqueteDeb -o /root/SoftInst/MongoDBCommunity/MondoDBCommunityServer.deb
-
-  # Instalar el paquete
-    echo ""
-    echo "    Instalando el paquete .deb..."
-    echo ""
-    apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityServer.deb
-
-#  # Instalar Mongo Community Shell
-#    echo ""
-#    echo "    Descargando e instalando Mongo Community Shell"
-#    echo ""
-#    curl -L https://repo.mongodb.org/apt/debian/dists/bookworm/mongodb-org/$vUltVersMainMongoDBCommunity/main/binary-amd64/mongodb-org-shell_"$vUltSubVersMongoDBCommunity"_amd64.deb -o /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb 
-#    echo ""
-#    apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb
-
   echo ""
-  echo "  Activando el acceso desde todas las IPs..." 
-  echo ""
-  echo "  Si no quieres esto, edita el archivo /etc/mongod.conf"
-  echo '  y cambia la línea IP en la parte que dice "bindIp: 0.0.0.0".'
-  echo ""
-  sed -i -e 's|bindIp: 127.0.0.1|bindIp: 0.0.0.0|g' /etc/mongod.conf
+  # Calcular la versión sin subversión
+    vUltVersMainMongoDBCommunity=$(echo $vUltSubVersMongoDBCommunity | cut -d '.' -f1-2)
 
-  echo ""
-  echo "  Activando el servicio..." 
-  echo ""
-  systemctl enable mongod.service --now
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
 
-#  echo ""
-#  echo "  Verificando el estado de la conexión con la base de datos..." 
-#  echo ""
-#  echo "  0 = Incorrecta."
-#  echo "  1 = Correcta"
-#  echo ""
-#  mongo --quiet --eval 'db.runCommand({ connectionStatus: 1 })' | jq .ok
+  # Crear el menú
+    menu=(dialog --timeout 5 --checklist "Instalación de MongoDB - Indica la versión:" 22 96 16)
+      opciones=(
+        1 "Instalar la versión $vUltSubVersMongoDBCommunity desde el repositorio de MongoDB" on
+        2 "Instalar la versión $vUltSubVersMongoDBCommunity desde el archivo .deb" off
+        3 "Instalar la última versión disponible en los repositorios de Debian" off
+        4 "  Activar el acceso desde todas las IPs" off
+        5 "  Securizar la instalación" off
+      )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
-#  echo ""
-#  echo "  Activando la autenticación de usuarios..." 
-#  echo ""
-#  sed -i -e 's|#security:|security:\n  authorization: enabled|g' /etc/mongod.conf
+    for choice in $choices
+      do
+        case $choice in
 
-#  echo ""
-#  echo "  Creando el usuario con privilegios de administración..." 
-#  echo ""
-#  echo 'use admin'                            > /tmp/CrearUsuariosMongoDB.js
-#  echo ''                                    >> /tmp/CrearUsuariosMongoDB.js
-#  echo 'db.createUser({'                     >> /tmp/CrearUsuariosMongoDB.js
-#  echo '  user: "root",'                     >> /tmp/CrearUsuariosMongoDB.js
-#  echo '  pwd: "rootMongoDB",'               >> /tmp/CrearUsuariosMongoDB.js
-#  echo '  roles: ['                          >> /tmp/CrearUsuariosMongoDB.js
-#  echo '    {'                               >> /tmp/CrearUsuariosMongoDB.js
-#  echo '      role: "userAdminAnyDatabase",' >> /tmp/CrearUsuariosMongoDB.js
-#  echo '      db: "admin"'                   >> /tmp/CrearUsuariosMongoDB.js
-#  echo '    }'                               >> /tmp/CrearUsuariosMongoDB.js
-#  echo '    ,"readWriteAnyDatabase"'         >> /tmp/CrearUsuariosMongoDB.js
-#  echo '  ]'                                 >> /tmp/CrearUsuariosMongoDB.js
-#  echo '})'                                  >> /tmp/CrearUsuariosMongoDB.js
-#  mongosh --quiet < /tmp/CrearUsuariosMongoDB.js
-#  echo ""
-#  echo "  Se ha creado el usuario root con contraseña rootMySQL."
-#  echo ""
-#  echo "  Para cambiarle la contraseña lanza mongosh como root ejecuta:"
-#  echo ""
-#  echo "  use admin"
-#  echo '  db.changeUserPassword("root", passwordPrompt())'
-#  echo ""
+          1)
 
-#  echo ""
-#  echo "  Reiniciando el servicio..." 
-#  echo ""
-#  systemctl daemon-reload
-#  systemctl restart mongod
+            echo ""
+            echo "  Instalando la versión $vUltSubVersMongoDBCommunity desde el repositorio de MongoDB..."
+            echo ""
+
+            # Instalar el repositorio
+              # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  apt-get -y update && apt-get -y install curl
+                  echo ""
+                fi
+              # Comprobar si el paquete gnupg está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s gnupg 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}    El paquete gnupg no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  apt-get -y update && apt-get -y install gnupg
+                  echo ""
+                fi
+              curl -fsSL https://www.mongodb.org/static/pgp/server-"$vUltVersMainMongoDBCommunity".asc | gpg -o /usr/share/keyrings/mongodb-server-"$vUltVersMainMongoDBCommunity".gpg --dearmor
+
+            # Instalar la llave para firmar el repositorio
+              echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-$vUltVersMainMongoDBCommunity.gpg ] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/$vUltVersMainMongoDBCommunity main" | tee /etc/apt/sources.list.d/mongodb-org-$vUltVersMainMongoDBCommunity.list
+
+            # Actualizar la lista de paquetes disponibles en todos los repositorios instalados en el sistema
+              apt-get -y update
+
+            # Instalar el servidor MondoDB
+              apt-get -y install mongodb-org
+
+            # Activar y ejecutar el servicio
+              echo ""
+              echo "  Activando el servicio..." 
+              echo ""
+              systemctl enable mongod.service --now
+
+            # Comprobar el estado de la conexión con la base de datos...
+              echo ""
+              echo "  Verificando el estado de la conexión con la base de datos..." 
+              echo ""
+              echo "  0 = Incorrecta."
+              echo "  1 = Correcta"
+              echo ""
+              mongo --quiet --eval 'db.runCommand({ connectionStatus: 1 })' | jq .ok
+
+            # Notificar el fin de la instalación
+              echo ""
+              echo "    Instalación finalizada."
+              echo "      Los archivos se guardan en: /var/lib/mongodb"
+              echo "      Los logs se guardan en: /var/log/mongodb"
+              echo ""
+
+          ;;
+
+          2)
+
+            echo ""
+            echo "  Instalar la versión $vUltSubVersMongoDBCommunity desde el archivo .deb..."
+            echo ""
+
+            # Obtener el enlace de descarga del paquete .deb
+              echo "" 
+              echo "    Obteniendo el enlace de descarga del paquete.deb..."
+              echo ""
+              vEnlaceDescargaPaqueteDeb=$(cat /tmp/PaquetesDebianMondoDBCommunity.json | grep server | grep -vE 'velopment|esting' | cut -d'"' -f2)
+              echo ""
+              echo "      En enlace de descarga del paquete .deb es: $vEnlaceDescargaPaqueteDeb"
+              echo ""
+
+            # Guardar versión main
+              vUltVersMainMongoDBCommunity=$(echo $vEnlaceDescargaPaqueteDeb | cut -d'/' -f9)
+
+            # Descargar el paquete:
+              echo ""
+              echo "    Descargando el paquete..."
+              echo ""
+              mkdir -p /root/SoftInst/MongoDBCommunity/ 2> /dev/null
+              cd /root/SoftInst/MongoDBCommunity/
+              # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  apt-get -y update && apt-get -y install curl
+                  echo ""
+                fi
+              curl -L $vEnlaceDescargaPaqueteDeb -o /root/SoftInst/MongoDBCommunity/MondoDBCommunityServer.deb
+
+            # Instalar el paquete
+              echo ""
+              echo "    Instalando el paquete .deb..."
+              echo ""
+              apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityServer.deb
+
+          #  # Instalar Mongo Community Shell
+          #    echo ""
+          #    echo "    Descargando e instalando Mongo Community Shell"
+          #    echo ""
+          #    curl -L https://repo.mongodb.org/apt/debian/dists/bookworm/mongodb-org/$vUltVersMainMongoDBCommunity/main/binary-amd64/mongodb-org-shell_"$vUltSubVersMongoDBCommunity"_amd64.deb -o /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb 
+          #    echo ""
+          #    apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb
+
+          # Activar y ejecutar el servicio
+            echo ""
+            echo "  Activando el servicio..." 
+            echo ""
+            systemctl enable mongod.service --now
+
+
+          ;;
+
+          3)
+
+            echo ""
+            echo "  Instalando la última versión disponible en los repositorios de Debian..."
+            echo ""
+
+          ;;
+
+          4)
+
+            echo ""
+            echo "  Activando el acceso desde todas las IPs..."
+            echo ""
+            echo "    Si luego no quieres esto, edita el archivo /etc/mongod.conf"
+            echo '    y cambia la línea IP en la parte que dice "bindIp: 0.0.0.0".'
+            echo ""
+            sed -i -e 's|bindIp: 127.0.0.1|bindIp: 0.0.0.0|g' /etc/mongod.conf
+
+            # Reiniciar el servicio
+              echo ""
+              echo "  Reiniciando el servicio..." 
+              echo ""
+              systemctl daemon-reload
+              systemctl restart mongod
+
+          ;;
+
+          5)
+
+            echo ""
+            echo "  Securizando instalación..."
+            echo ""
+
+            # Activar la autenticación de usuarios
+              echo ""
+              echo "    Activando la autenticación de usuarios..." 
+              echo ""
+              sed -i -e 's|#security:|security:\n  authorization: enabled|g' /etc/mongod.conf
+
+            # Crear el usuario con privilegios de administración
+              echo ""
+              echo "  Creando el usuario con privilegios de administración..." 
+              echo ""
+              echo 'use admin'                            > /tmp/CrearUsuariosMongoDB.js
+              echo ''                                    >> /tmp/CrearUsuariosMongoDB.js
+              echo 'db.createUser({'                     >> /tmp/CrearUsuariosMongoDB.js
+              echo '  user: "root",'                     >> /tmp/CrearUsuariosMongoDB.js
+              echo '  pwd: "rootMongoDB",'               >> /tmp/CrearUsuariosMongoDB.js
+              echo '  roles: ['                          >> /tmp/CrearUsuariosMongoDB.js
+              echo '    {'                               >> /tmp/CrearUsuariosMongoDB.js
+              echo '      role: "userAdminAnyDatabase",' >> /tmp/CrearUsuariosMongoDB.js
+              echo '      db: "admin"'                   >> /tmp/CrearUsuariosMongoDB.js
+              echo '    }'                               >> /tmp/CrearUsuariosMongoDB.js
+              echo '    ,"readWriteAnyDatabase"'         >> /tmp/CrearUsuariosMongoDB.js
+              echo '  ]'                                 >> /tmp/CrearUsuariosMongoDB.js
+              echo '})'                                  >> /tmp/CrearUsuariosMongoDB.js
+              mongosh --quiet < /tmp/CrearUsuariosMongoDB.js
+              echo ""
+              echo "  Se ha creado el usuario root con contraseña rootMySQL."
+              echo ""
+              echo "  Para cambiarle la contraseña lanza mongosh como root ejecuta:"
+              echo ""
+              echo "  use admin"
+              echo '  db.changeUserPassword("root", passwordPrompt())'
+              echo ""
+
+            # Reiniciar el servicio
+              echo ""
+              echo "  Reiniciando el servicio..." 
+              echo ""
+              systemctl daemon-reload
+              systemctl restart mongod
+
+          ;;
+
+      esac
+
+  done
 
 elif [ $cVerSO == "11" ]; then
 
