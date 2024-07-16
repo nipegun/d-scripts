@@ -490,6 +490,35 @@ elif [ $cVerSO == "12" ]; then
                 cd /usr/bin
                 ./mongod --dbpath=/opt/librechat/mongodb
 
+            # Agregar ollama como endpoint
+              cd /opt/librechat/
+              cp librechat.example.yaml librechat.yaml
+              sed -i '/endpoints:/,$d' librechat.yaml
+              echo 'endpoints:'                                                      >> librechat.yaml
+              echo '  custom:'                                                       >> librechat.yaml
+              echo '    - name: "Ollama"'                                            >> librechat.yaml
+              echo '      apiKey: "ollama"'                                          >> librechat.yaml
+              echo '      baseURL: "http://ollama:11434/v1/chat/completions"'        >> librechat.yaml
+              echo '      models:'                                                   >> librechat.yaml
+              echo '        default: ['                                              >> librechat.yaml
+              echo '          "llama3",'                                             >> librechat.yaml
+              echo '          "llama2"'                                              >> librechat.yaml
+              echo '          ]'                                                     >> librechat.yaml
+              echo '        fetch: false # fetching list of models is not supported' >> librechat.yaml
+              echo '      titleConvo: true'                                          >> librechat.yaml
+              echo '      titleModel: "llama3"'                                      >> librechat.yaml
+              echo '      summarize: false'                                          >> librechat.yaml
+              echo '      summaryModel: "llama3"'                                    >> librechat.yaml
+              echo '      forcePrompt: false'                                        >> librechat.yaml
+              echo '      modelDisplayLabel: "Ollama"'                               >> librechat.yaml
+              echo '      addParams:'                                                >> librechat.yaml
+              echo '            "stop": ['                                           >> librechat.yaml
+              echo '              "<|start_header_id|>",'                            >> librechat.yaml
+              echo '              "<|end_header_id|>",'                              >> librechat.yaml
+              echo '              "<|eot_id|>",'                                     >> librechat.yaml
+              echo '              "<|reserved_special_token"'                        >> librechat.yaml
+              echo '            ]'                                                   >> librechat.yaml
+
             # Notificar fin de la instalación
               echo ""
               echo "      La instalación de LibreChat ha finalizado."
