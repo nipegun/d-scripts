@@ -510,9 +510,9 @@ elif [ $cVerSO == "12" ]; then
               echo '          ]'                                                     >> librechat.yaml
               echo '        fetch: false # fetching list of models is not supported' >> librechat.yaml
               echo '      titleConvo: true'                                          >> librechat.yaml
-              echo '      titleModel: "llama3"'                                      >> librechat.yaml
+              echo '      titleModel: "current_model"'                               >> librechat.yaml
               echo '      summarize: false'                                          >> librechat.yaml
-              echo '      summaryModel: "llama3"'                                    >> librechat.yaml
+              echo '      summaryModel: "current_model"'                             >> librechat.yaml
               echo '      forcePrompt: false'                                        >> librechat.yaml
               echo '      modelDisplayLabel: "Ollama"'                               >> librechat.yaml
               echo '      addParams:'                                                >> librechat.yaml
