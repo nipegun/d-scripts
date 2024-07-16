@@ -113,7 +113,7 @@ elif [ $cVerSO == "12" ]; then
           1)
 
             echo ""
-            echo "  Instalando la versión $vUltSubVersMongoDBCommunity desde el repositorio de MongoDB..."
+            echo "    Instalando la versión $vUltSubVersMongoDBCommunity desde el repositorio de MongoDB..."
             echo ""
 
             # Instalar el repositorio
