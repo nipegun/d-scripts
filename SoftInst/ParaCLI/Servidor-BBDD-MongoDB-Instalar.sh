@@ -67,12 +67,12 @@ elif [ $cVerSO == "12" ]; then
   echo ""
 
   echo ""
-  echo "  Determinando el número de la última versión estable de MongoDB Community..." 
+  echo "    Determinando el número de la última versión estable de MongoDB Community..." 
   echo ""
   # Comprobar si el paquete jq está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s jq 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo -e "${cColorRojo}    El paquete jq no está instalado. Iniciando su instalación...${cFinColor}"
+     echo -e "${cColorRojo}      El paquete jq no está instalado. Iniciando su instalación...${cFinColor}"
      echo ""
      apt-get -y update && apt-get -y install jq
      echo ""
@@ -95,7 +95,7 @@ elif [ $cVerSO == "12" ]; then
     fi
 
   # Crear el menú
-    menu=(dialog --timeout 5 --checklist "Instalación de MongoDB - Indica la versión:" 22 96 16)
+    menu=(dialog --checklist "Instalación de MongoDB - Indica la versión:" 22 96 16)
       opciones=(
         1 "Instalar la versión $vUltSubVersMongoDBCommunity desde el repositorio de MongoDB" on
         2 "Instalar la versión $vUltSubVersMongoDBCommunity desde el archivo .deb" off
