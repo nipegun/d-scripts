@@ -499,6 +499,12 @@ elif [ $cVerSO == "12" ]; then
               echo ""
               echo "      Para poner tu OPENAI_API_KEY edita: /opt/librechat/.env"
               echo ""
+              echo "      Para volver a iniciar el servidor, ejecuta:"
+              echo "        cd /opt/librechat/ && npm run backend"
+              echo ""
+              echo "      Para actualizar LibreChat, ejecuta:"
+              echo "        cd /opt/librechat/ && npm ci && npm run backend"
+              echo ""
 
           ;;
 
