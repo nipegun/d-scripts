@@ -104,7 +104,8 @@ elif [ $cVerSO == "12" ]; then
       7 "  Instalar modelos LLM para LMStudio" off
       8 "Instalar AnythingLLM" off
       9 "Instalar FlowiseAI" off
-     10 "Instalar LibreChat" off 
+     10 "Instalar LibreChat" off
+     11 "Instalar LiteLLM" off 
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
   echo ""
@@ -534,6 +535,14 @@ elif [ $cVerSO == "12" ]; then
               echo "        Una vez iniciado el servidor podrás acceder a él en:"
               echo "          http://localhost:3080"
               echo ""
+
+          ;;
+
+         11)
+
+            echo ""
+            echo "  Instalando LiteLLM (Proxy)..."
+            echo ""
 
           ;;
 
