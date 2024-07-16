@@ -21,6 +21,14 @@
 # Indicar cuál es el usuario no root
   vUsuarioNoRoot="usuariox"
 
+# Indicar usuario y contraseña para conectarse a la web de Flowise
+  vUsuarioWebFlowise="usuariox"
+  vContraWebFlowise="UsuarioX"
+
+# -------------------------
+# NO TOCAR A PARTIR DE AQUÍ
+# -------------------------
+
 # Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
@@ -384,27 +392,37 @@ elif [ $cVerSO == "12" ]; then
               chown flowise:flowise /opt/flowise -R 2> /dev/null
 
             # Crear el servicio de systemd para flowiseai
-              echo "[Unit]"                                    > /etc/systemd/system/flowise.service
-              echo "Description=FlowiseAI"                    >> /etc/systemd/system/flowise.service
-              echo "After=network.target"                     >> /etc/systemd/system/flowise.service
-              echo ""                                         >> /etc/systemd/system/flowise.service
-              echo "[Service]"                                >> /etc/systemd/system/flowise.service
-              echo "Type=notify"                              >> /etc/systemd/system/flowise.service
-              #echo 'ExecStart=/opt/flowise/bin/flowise start --FLOWISE_USERNAME=user --FLOWISE_PASSWORD=1234' >> /etc/systemd/system/flowise.service
-              echo 'ExecStart=/opt/flowise/bin/flowise start' >> /etc/systemd/system/flowise.service
-              echo "WorkingDirectory=/opt/flowise"            >> /etc/systemd/system/flowise.service
-              echo "Restart=always"                           >> /etc/systemd/system/flowise.service
-              echo "User=flowise"                             >> /etc/systemd/system/flowise.service
-              echo "Group=flowise"                            >> /etc/systemd/system/flowise.service
-              #echo "Environment=PATH=/usr/bin:/usr/local/bin" >> /etc/systemd/system/flowise.service
-              #PATH=/mi/nueva/ruta/npm-global/bin:
-              echo ""                                         >> /etc/systemd/system/flowise.service
-              echo "[Install]"                                >> /etc/systemd/system/flowise.service
-              echo "WantedBy=multi-user.target"               >> /etc/systemd/system/flowise.service
+              echo "[Unit]"                                                                                                                 > /etc/systemd/system/flowise.service
+              echo "Description=FlowiseAI"                                                                                                 >> /etc/systemd/system/flowise.service
+              echo "After=network.target"                                                                                                  >> /etc/systemd/system/flowise.service
+              echo ""                                                                                                                      >> /etc/systemd/system/flowise.service
+              echo "[Service]"                                                                                                             >> /etc/systemd/system/flowise.service
+              echo "Type=notify"                                                                                                           >> /etc/systemd/system/flowise.service
+              echo "ExecStart=/opt/flowise/bin/flowise start --FLOWISE_USERNAME=$vUsuarioWebFlowise --FLOWISE_PASSWORD=$vContraWebFlowise" >> /etc/systemd/system/flowise.service
+              echo "WorkingDirectory=/opt/flowise"                                                                                         >> /etc/systemd/system/flowise.service
+              echo "Restart=always"                                                                                                        >> /etc/systemd/system/flowise.service
+              echo "User=flowise"                                                                                                          >> /etc/systemd/system/flowise.service
+              echo "Group=flowise"                                                                                                         >> /etc/systemd/system/flowise.service
+              echo ""                                                                                                                      >> /etc/systemd/system/flowise.service
+              echo "[Install]"                                                                                                             >> /etc/systemd/system/flowise.service
+              echo "WantedBy=multi-user.target"                                                                                            >> /etc/systemd/system/flowise.service
 
             # Activar e iniciar el servicio
               systemctl daemon-reload
               systemctl enable flowise.service --now
+
+            # Notificar fin de instalación
+              echo ""
+              echo "      Flowise se ha instalado. Deberías poder acceder a la web aquí:"
+              echo "        http://localhost:3000"
+              echo "          Usuario: $vUsuarioWebFlowise"
+              echo "          Contraseña: $vContraWebFlowise"
+              echo ""
+              echo "        Si quieres usar otro usuario y contraseña, módifícalos aquí:"
+              echo "          /etc/systemd/system/flowise.service"
+              echo "        ...y ejecuta:"
+              echo "          systemctl stop flowise.service && systemctl daemon-reload && systemctl start flowise.service"
+              echo ""
 
           ;;
 
