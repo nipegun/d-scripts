@@ -100,8 +100,9 @@ elif [ $cVerSO == "12" ]; then
         1 "Instalar la versión $vUltSubVersMongoDBCommunity desde el repositorio de MongoDB" on
         2 "Instalar la versión $vUltSubVersMongoDBCommunity desde el archivo .deb" off
         3 "Instalar la última versión disponible en los repositorios de Debian" off
-        4 "  Activar el acceso desde todas las IPs" off
-        5 "  Securizar la instalación" off
+        4 "  Verificar el estado de la conexión con la base de datos" off
+        5 "  Activar el acceso desde todas las IPs" off
+        6 "  Securizar la instalación" off
       )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -148,15 +149,6 @@ elif [ $cVerSO == "12" ]; then
               echo "  Activando el servicio..." 
               echo ""
               systemctl enable mongod.service --now
-
-            # Comprobar el estado de la conexión con la base de datos...
-              echo ""
-              echo "  Verificando el estado de la conexión con la base de datos..." 
-              echo ""
-              echo "  0 = Incorrecta."
-              echo "  1 = Correcta"
-              echo ""
-              mongo --quiet --eval 'db.runCommand({ connectionStatus: 1 })' | jq .ok
 
             # Notificar el fin de la instalación
               echo ""
@@ -235,6 +227,18 @@ elif [ $cVerSO == "12" ]; then
           4)
 
             echo ""
+            echo "  Verificando el estado de la conexión con la base de datos..." 
+            echo ""
+            echo "  0 = Incorrecta."
+            echo "  1 = Correcta"
+            echo ""
+            mongo --quiet --eval 'db.runCommand({ connectionStatus: 1 })' | jq .ok
+
+          ;;
+
+          5)
+
+            echo ""
             echo "  Activando el acceso desde todas las IPs..."
             echo ""
             echo "    Si luego no quieres esto, edita el archivo /etc/mongod.conf"
@@ -251,7 +255,7 @@ elif [ $cVerSO == "12" ]; then
 
           ;;
 
-          5)
+          6)
 
             echo ""
             echo "  Securizando instalación..."
