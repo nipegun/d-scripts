@@ -97,11 +97,11 @@ elif [ $cVerSO == "12" ]; then
     opciones=(
       1 "Instalar Ollama" on
       2 "Instalar Open WebUI" on
-      3 "Instalar modelos LLM para Ollama" on
+      3 "  Instalar modelos LLM para Ollama" on
       4 "Instalar TextGeneration WebUI" off
-      5 "Instalar modelos LLM para TextGeneration WebUI" off
+      5 "  Instalar modelos LLM para TextGeneration WebUI" off
       6 "Instalar LMStudio" off
-      7 "Instalar modelos LLM para LMStudio" off
+      7 "  Instalar modelos LLM para LMStudio" off
       8 "Instalar AnythingLLM" off
       9 "Instalar FlowiseAI" off
      10 "Instalar LibreChat" off 
