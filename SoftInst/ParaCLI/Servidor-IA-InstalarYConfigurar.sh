@@ -498,11 +498,11 @@ elif [ $cVerSO == "12" ]; then
               echo '  custom:'                                                       >> librechat.yaml
               echo '    - name: "Ollama"'                                            >> librechat.yaml
               echo '      apiKey: "ollama"'                                          >> librechat.yaml
-              echo '      baseURL: "http://ollama:11434/v1/chat/completions"'        >> librechat.yaml
+              echo '      baseURL: "http://127.0.0.1:11434/v1/chat/completions"'     >> librechat.yaml
               echo '      models:'                                                   >> librechat.yaml
               echo '        default: ['                                              >> librechat.yaml
-              echo '          "llama3",'                                             >> librechat.yaml
-              echo '          "llama2"'                                              >> librechat.yaml
+              echo '          "llama3:8b",'                                          >> librechat.yaml
+              echo '          "llama3:70b"'                                          >> librechat.yaml
               echo '          ]'                                                     >> librechat.yaml
               echo '        fetch: false # fetching list of models is not supported' >> librechat.yaml
               echo '      titleConvo: true'                                          >> librechat.yaml
