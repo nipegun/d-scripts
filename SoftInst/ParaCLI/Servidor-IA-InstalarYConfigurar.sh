@@ -488,22 +488,21 @@ elif [ $cVerSO == "12" ]; then
                 chown mongodb:mongodb /opt/librechat/mongodb/
                 cd /usr/bin
                 ./mongod --dbpath=/opt/librechat/mongodb
-              # Construir el backend
-                cd /opt/librechat/
-                npm run backend
 
             # Notificar fin de la instalación
               echo ""
-              echo "      La instalación de LibreChat ha finalizado. Puedes acceder la web, aquí:"
-              echo "        http://localhost:3080"
+              echo "      La instalación de LibreChat ha finalizado."
               echo ""
-              echo "      Para poner tu OPENAI_API_KEY edita: /opt/librechat/.env"
+              echo "        Para poner tu OPENAI_API_KEY edita: /opt/librechat/.env"
               echo ""
-              echo "      Para volver a iniciar el servidor, ejecuta:"
-              echo "        cd /opt/librechat/ && npm run backend"
+              echo "        Para iniciar el servidor, ejecuta:"
+              echo "          cd /opt/librechat/ && npm run backend"
               echo ""
-              echo "      Para actualizar LibreChat, ejecuta:"
-              echo "        cd /opt/librechat/ && npm ci && npm run backend"
+              echo "        Para actualizar LibreChat, ejecuta:"
+              echo "          cd /opt/librechat/ && npm ci && npm run backend"
+              echo ""
+              echo "        Una vez iniciado el servidor podrás acceder a él en:"
+              echo "          http://localhost:3080"
               echo ""
 
           ;;
