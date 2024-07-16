@@ -87,11 +87,11 @@
     echo ""
 
   # Crear el menú
-    menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+    menu=(dialog --checklist "Instalando Node.js - Marca la versión deseada:" 22 96 16)
       opciones=(
-        1 "Instalar la versión disponible en los repositorios oficiales de Debian" on
-        2 "Instalar la última versión LTS" off
-        3 "Instalar la versión Current" off
+        1 "Versión disponible en los repositorios oficiales de Debian" on
+        2 "Última versión LTS" off
+        3 "Versión Current" off
         4 "x" off
         5 "x" off
       )
