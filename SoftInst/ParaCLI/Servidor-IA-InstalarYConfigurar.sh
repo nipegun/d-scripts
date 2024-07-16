@@ -438,6 +438,9 @@ elif [ $cVerSO == "12" ]; then
             echo ""
 
             # Instalar Node.js
+              echo ""
+              echo "    Instalando Node.js..."
+              echo ""
               # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -449,7 +452,10 @@ elif [ $cVerSO == "12" ]; then
               curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Node.js-InstalarYConfigurar.sh | bash
 
             # Instalar MongoDB
-              
+              echo ""
+              echo "    Instalando MongoDB..."
+              echo ""
+              curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-MongoDB-Instalar.sh | bash
 
             # Clonar repositorio
               mkdir -p /root/SoftInst/ 2> /dev/null
@@ -475,9 +481,12 @@ elif [ $cVerSO == "12" ]; then
               # Construir el frontend
                 npm run frontend
               # Especificar el directorio de datos donde MongoDB guardará los archivos
+                mkdir /opt/librechat
+                chown mongodb:mongodb /opt/librechat
                 cd /usr/bin
-                ./mongod --dbpath=/path/to/data/directory
+                ./mongod --dbpath=/opt/librechat
               # Construir el backend
+                cd /root/SoftInst/LibreChat/
                 npm run backend
 
             # Notificar fin de la instalación
