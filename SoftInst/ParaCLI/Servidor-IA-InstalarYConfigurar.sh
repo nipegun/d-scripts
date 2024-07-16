@@ -81,8 +81,7 @@ elif [ $cVerSO == "12" ]; then
       echo ""
       echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
-      apt-get -y update
-      apt-get -y install dialog
+      apt-get -y update && apt-get -y install dialog
       echo ""
     fi
 
@@ -96,6 +95,8 @@ elif [ $cVerSO == "12" ]; then
       6 "Instalar LMStudio" off
       7 "Instalar modelos LLM para LMStudio" off
       8 "Instalar AnythingLLM" off
+      9 "Instalar FlowiseAI" off
+     10 "Instalar LibreChat" off 
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -117,8 +118,7 @@ elif [ $cVerSO == "12" ]; then
                 echo ""
                 echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
                 echo ""
-                apt-get -y update
-                apt-get -y install curl
+                apt-get -y update && apt-get -y install curl
                 echo ""
               fi
             # Comprobar si el paquete pciutils está instalado. Si no lo está, instalarlo.
@@ -126,8 +126,7 @@ elif [ $cVerSO == "12" ]; then
                 echo ""
                 echo -e "${cColorRojo}      El paquete pciutils no está instalado. Iniciando su instalación...${cFinColor}"
                 echo ""
-                apt-get -y update
-                apt-get -y install pciutils
+                apt-get -y update && apt-get -y install pciutils
                 echo ""
               fi
             # Correr el script de instalación
@@ -193,8 +192,7 @@ elif [ $cVerSO == "12" ]; then
                 echo ""
                 echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
                 echo ""
-                apt-get -y update
-                apt-get -y install curl
+                apt-get -y update && apt-get -y install curl
                 echo ""
               fi
             curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/IA-ModelosLLM-Instalar-Ollama.sh | bash
@@ -299,8 +297,7 @@ elif [ $cVerSO == "12" ]; then
                 echo ""
                 echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
                 echo ""
-                apt-get -y update
-                apt-get -y install curl
+                apt-get -y update && apt-get -y install curl
                 echo ""
               fi
             curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/IA-ModelosLLM-Instalar-TextGenerationWebUI.sh | bash
@@ -336,8 +333,7 @@ elif [ $cVerSO == "12" ]; then
                 echo ""
                 echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
                 echo ""
-                apt-get -y update
-                apt-get -y install curl
+                apt-get -y update && apt-get -y install curl
                 echo ""
               fi
             curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/IA-ModelosLLM-Instalar-LMStudio.sh | bash
@@ -349,6 +345,78 @@ elif [ $cVerSO == "12" ]; then
             echo ""
             echo "  Instalando AnythingLLM.."
             echo ""
+
+          ;;
+
+          9)
+
+            echo ""
+            echo "  Instalando FlowiseAI..."
+            echo ""
+
+            # Instalar Node.js
+              # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  apt-get -y update && apt-get -y install curl
+                  echo ""
+                fi
+              curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Node.js-InstalarYConfigurar.sh | bash
+
+            # Instalar FlowiseAI con NPM
+              npm install -g flowise
+
+            # Agregar el usuario mattermost
+              echo ""
+              echo "    Agregando el usuario flowise..."
+              echo ""
+              useradd --system --user-group flowise
+              mkdir -p /opt/flowise 2> /dev/null
+              chown flowise:flowise /opt/flowise -R 2> /dev/null
+
+            # Crear el servicio de systemd para flowiseai
+              echo "[Unit]"                                    > /etc/systemd/system/flowise.service
+              echo "Description=FlowiseAI"                    >> /etc/systemd/system/flowise.service
+              echo "After=network.target"                     >> /etc/systemd/system/flowise.service
+              echo ""                                         >> /etc/systemd/system/flowise.service
+              echo "[Service]"                                >> /etc/systemd/system/flowise.service
+              echo "Type=notify"                              >> /etc/systemd/system/flowise.service
+              echo 'ExecStart=/usr/bin/npx flowise start'     >> /etc/systemd/system/flowise.service
+              echo "WorkingDirectory=/opt/flowise"            >> /etc/systemd/system/flowise.service
+              echo "Restart=always"                           >> /etc/systemd/system/flowise.service
+              echo "User=flowise"                             >> /etc/systemd/system/flowise.service
+              echo "Group=flowise"                            >> /etc/systemd/system/flowise.service
+              echo "Environment=PATH=/usr/bin:/usr/local/bin" >> /etc/systemd/system/flowise.service
+              echo ""                                         >> /etc/systemd/system/flowise.service
+              echo "[Install]"                                >> /etc/systemd/system/flowise.service
+              echo "WantedBy=multi-user.target"               >> /etc/systemd/system/flowise.service
+
+            # Activar e iniciar el servicio
+              systemctl daemon-reload
+              systemctl enable flowise.service --now
+
+          ;;
+
+         10)
+
+            echo ""
+            echo "  Instalando LibreChat..."
+            echo ""
+
+            # Instalar Node.js
+              # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  apt-get -y update && apt-get -y install curl
+                  echo ""
+                fi
+              curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Node.js-InstalarYConfigurar.sh | bash
+
+            # (Continuar)
 
           ;;
 
