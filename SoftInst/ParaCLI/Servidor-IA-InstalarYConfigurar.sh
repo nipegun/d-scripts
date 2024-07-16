@@ -107,6 +107,7 @@ elif [ $cVerSO == "12" ]; then
      10 "Instalar LibreChat" off 
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+  echo ""
 
     for choice in $choices
       do
