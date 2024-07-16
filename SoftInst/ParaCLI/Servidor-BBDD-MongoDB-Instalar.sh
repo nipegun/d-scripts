@@ -50,7 +50,7 @@
     cVerSO=$(uname -r)
   fi
 
-elif [ $cVerSO == "13" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación del servidor MongoDB para Debian 13 (x)..." 
