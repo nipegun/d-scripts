@@ -471,8 +471,11 @@ elif [ $cVerSO == "12" ]; then
                 fi
               git clone https://github.com/danny-avila/LibreChat.git
 
+            # Preparar carpeta final
+              mv /root/SoftInst/LibreChat/ /opt/librechat/
+
             # Compilar
-              cd LibreChat
+              cd /opt/librechat/
               cp .env.example .env
               # Modificar la URL de la base de datos
                 #sed -i -e 's|MONGO_URI=mongodb://127.0.0.1:27017/LibreChat|MONGO_URI=mongodb://127.0.0.1:27017/LibreChat|g' /root/SoftInst/LibreChat/.env
@@ -481,12 +484,12 @@ elif [ $cVerSO == "12" ]; then
               # Construir el frontend
                 npm run frontend
               # Especificar el directorio de datos donde MongoDB guardará los archivos
-                mkdir /opt/librechat
-                chown mongodb:mongodb /opt/librechat
+                mkdir -p /opt/librechat/mongodb/
+                chown mongodb:mongodb /opt/librechat/mongodb/
                 cd /usr/bin
-                ./mongod --dbpath=/opt/librechat
+                ./mongod --dbpath=/opt/librechat/mongodb
               # Construir el backend
-                cd /root/SoftInst/LibreChat/
+                cd /opt/librechat/
                 npm run backend
 
             # Notificar fin de la instalación
