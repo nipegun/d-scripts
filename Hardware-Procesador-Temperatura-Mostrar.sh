@@ -30,11 +30,10 @@ cFinColor='\033[0m'
     echo -e "${cColorRojo}    El paquete lm-sensors no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
     apt-get -y update && apt-get -y install lm-sensors
-    echo ""
+    # Detectar sensores
+      sensors-detect
+    echo "" 
   fi
-
-# Detectar sensores
-  sensors-detect
 
 # Comprobar si el procesador es AMD o Intel
   vProc=$(lscpu | grep "Vendor ID" | cut -d':' -f2 | sed 's- --g')
