@@ -36,9 +36,10 @@ cFinColor='\033[0m'
   fi
 
 # Comprobar si el procesador es AMD o Intel
-  vProc=$(lscpu | grep "Vendor ID" | cut -d':' -f2 | sed 's- --g')
+  vProc=$(lscpu | grep -E "Vendor ID:|ID de fabricante:" | cut -d':' -f2 | sed 's- --g')
+  
 # Comprobar el modelo del procesador
-  vModeloProc=$(lscpu | grep "Model name" | cut -d':' -f2 | sed -e 's/^[ \t]*//')
+  vModeloProc=$(lscpu | grep -E "Model name:|Nombre del modelo:" | cut -d':' -f2 | sed -e 's/^[ \t]*//')
 
 # Mostrar una información si el procesador es AMD, otra si es Intel y otra si es cualquier otra arquitectura
   if [[ "$vProc" == "AuthenticAMD" ]]; then
