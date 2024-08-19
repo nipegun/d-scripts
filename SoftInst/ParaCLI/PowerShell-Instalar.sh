@@ -77,43 +77,134 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de PowerShell para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+    # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
         echo ""
-        echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+        echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
-        apt-get -y update && apt-get -y install wget
+        apt-get -y update && apt-get -y install dialog
         echo ""
       fi
 
-    # Instalar el repositorio
-      echo ""
-      echo "  Instalando el repositorio de PowerShell..."
-      echo ""
-      cd /tmp/
-      wget -q https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb
-      dpkg -i packages-microsoft-prod.deb
-      rm packages-microsoft-prod.deb
+    # Crear el menú
+      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+        opciones=(
+          1 "Instalar agregando el repositorio" on
+          2 "Instalar desde Github" off
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
-    # Actualizar la lista de paquetes disponibles en los repositorios
-      echo ""
-      echo "  Actualizando la lista de paquetes disponibles en los repositorios..."
-      echo ""
-      apt-get update
+      for choice in $choices
+        do
+          case $choice in
 
-    # Instalar el paquete
-      echo ""
-      echo "  Instalar el paquete powershell..."
-      echo ""
-      apt-get -y install powershell
+            1)
 
-    # Notificar fin de ejecución del script
-      echo ""
-      echo "  Script de instalación de PowerShell, finalizado."
-      echo ""
-      echo "    Para ejecutar PowerShell, ejecuta:"
-      echo "      pwsh"
-      echo ""
+              echo ""
+              echo "  Intentando instalar PowerShell agregando el repositorio..."
+              echo ""
+
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  apt-get -y update && apt-get -y install wget
+                  echo ""
+                fi
+
+              # Instalar el repositorio
+                echo ""
+                echo "  Instalando el repositorio de PowerShell..."
+                echo ""
+                cd /tmp/
+                wget -q https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb
+                dpkg -i packages-microsoft-prod.deb
+                rm packages-microsoft-prod.deb
+
+              # Actualizar la lista de paquetes disponibles en los repositorios
+                echo ""
+                echo "  Actualizando la lista de paquetes disponibles en los repositorios..."
+                echo ""
+                apt-get update
+
+              # Instalar el paquete
+                echo ""
+                echo "  Instalar el paquete powershell..."
+                echo ""
+                apt-get -y install powershell
+
+              # Notificar fin de ejecución del script
+                echo ""
+                echo "  Script de instalación de PowerShell, finalizado."
+                echo ""
+                echo "    Para ejecutar PowerShell, ejecuta:"
+                echo "      pwsh"
+                echo ""
+                echo "    Para borrarlo:"
+                echo "      apt-get -y autoremove powershell"
+                echo "      apt remove packages-microsoft-prod"
+                echo "      apt-get update"
+                echo ""
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Intentando instalar PowerShell desde Github..."
+              echo ""
+
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  apt-get -y update && apt-get -y install wget
+                  echo ""
+                fi
+
+              # Determinar la última versión disponible en Github
+                echo ""
+                echo "  Determinando la última versión disponible en Github..."
+                echo ""
+                vUltVers=$(curl -sL https://github.com/PowerShell/PowerShell/releases/latest | sed 's->->\n-g' | grep deb_amd64 | grep lts | cut -d'_' -f2 | cut -d'-' -f1)
+
+              # Obtener el nombre del archivo de instalación de la última versión
+                echo ""
+                echo "  Obteniendo el nombre del archivo de instalación de la última versión..."
+                echo ""
+                vNomArch=$(curl -sL https://github.com/PowerShell/PowerShell/releases/latest | sed 's->->\n-g' | grep deb_amd64 | grep lts)
+
+              # Descargar el paquete de instalación
+                echo ""
+                echo "  Descargando el paquete de instalación..."
+                echo ""
+                cd /tmp/
+                wget https://github.com/PowerShell/PowerShell/releases/download/v$vUltVers/$vNomArch -O /tmp/powershell.deb
+
+              # Instalar el paquete
+                echo ""
+                echo "  Instalando el paquete..."
+                echo ""
+                apt install /tmp/powershell.deb
+
+              # Notificar fin de ejecución del script
+                echo ""
+                echo "  Script de instalación de PowerShell, finalizado."
+                echo ""
+                echo "    Para ejecutar PowerShell, ejecuta:"
+                echo "      pwsh"
+                echo ""
+                echo "    Para borrarlo:"
+                echo "      apt-get -y autoremove powershell-lts"
+                echo ""
+
+            ;;
+
+        esac
+
+    done
 
   elif [ $cVerSO == "11" ]; then
 
