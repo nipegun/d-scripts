@@ -9,16 +9,16 @@
 # Script de NiPeGun para instalar y configurar PowerShell en Debian
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/PowerShell-Instalar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/PowerShell-Instalar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/PowerShell-Instalar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/PowerShell-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -37,15 +37,6 @@
     echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
     echo ""
     exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update && apt-get -y install curl
-    echo ""
   fi
 
 # Determinar la versión de Debian
@@ -86,9 +77,43 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de PowerShell para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install wget
+        echo ""
+      fi
+
+    # Instalar el repositorio
+      echo ""
+      echo "  Instalando el repositorio de PowerShell..."
+      echo ""
+      cd /tmp/
+      wget -q https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb
+      dpkg -i packages-microsoft-prod.deb
+      rm packages-microsoft-prod.deb
+
+    # Actualizar la lista de paquetes disponibles en los repositorios
+      echo ""
+      echo "  Actualizando la lista de paquetes disponibles en los repositorios..."
+      echo ""
+      apt-get update
+
+    # Instalar el paquete
+      echo ""
+      echo "  Instalar el paquete powershell..."
+      echo ""
+      apt-get -y install powershell
+
+    # Notificar fin de ejecución del script
+      echo ""
+      echo "  Script de instalación de PowerShell, finalizado."
+      echo ""
+      echo "    Para ejecutar PowerShell, ejecuta:"
+      echo "      pwsh"
+      echo ""
 
   elif [ $cVerSO == "11" ]; then
 
