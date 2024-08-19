@@ -28,17 +28,27 @@
 # Comprobar si el paquete lm-sensors está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s lm-sensors 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${cColorRojo}  El paquete lm-sensors no está instalado. Iniciando su instalación...${cFinColor}"
+    echo -e "${cColorRojo}    El paquete lm-sensors no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
-    apt-get -y update
-    apt-get -y install lm-sensors
-    echo ""
+    apt-get -y update && apt-get -y install lm-sensors
+    # Detectar sensores
+      sensors-detect
+    echo "" 
   fi
 
-# Para varios procesadores
-  #sensors -u k10temp-* | grep emp1 | cut -d':' -f2 | sed 's- --g'
+# Comprobar si el procesador es AMD o Intel
+  vProc=$(lscpu | grep -E "Vendor ID:|ID de fabricante:" | cut -d':' -f2 | sed 's- --g')
 
-# Para un sólo procesador
-  vChip=$(sensors | grep k10temp)
-  sensors -u $vChip | grep emp1 | cut -d':' -f2 | sed 's- --g'
-
+# Mostrar una información si el procesador es AMD, otra si es Intel y otra si es cualquier otra arquitectura
+  if [[ "$vProc" == "AuthenticAMD" ]]; then
+    # watch -n 1 'sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6'
+    sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6
+    echo ""
+  elif [[ "$vProc" == "GenuineIntel" ]]; then
+    # watch -n 1 'sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6'
+    sensors coretemp-isa-0000 | grep "Package id" | cut -d'+' -f2 | cut -d'.' -f1
+    echo ""
+  else
+    sensors | grep CPU
+    echo ""
+  fi
