@@ -27,13 +27,14 @@ cFinColor='\033[0m'
 # Comprobar si el paquete lm-sensors está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s lm-sensors 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${cColorRojo}    lm-sensors no está instalado. Iniciando su instalación...${cFinColor}"
+    echo -e "${cColorRojo}    El paquete lm-sensors no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
-    apt-get -y update
-    apt-get -y install lm-sensors
-    sensors-detect
+    apt-get -y update && apt-get -y install lm-sensors
     echo ""
   fi
+
+# Detectar sensores
+  sensors-detect
 
 # Comprobar si el procesador es AMD o Intel
   vProc=$(lscpu | grep "Vendor ID" | cut -d':' -f2 | sed 's- --g')
