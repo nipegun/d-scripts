@@ -78,8 +78,7 @@ vUsuarioNoRoot="nipegun"
       echo ""
       echo "      El paquete binutils no está instalado. Iniciando su instalación..."
       echo ""
-      apt-get -y update > /dev/null
-      apt-get -y install binutils
+      apt-get -y update && apt-get -y install binutils
       echo ""
     fi
   ar xv /root/SoftInst/Cryptos/XCH/chia.deb
@@ -102,20 +101,20 @@ vUsuarioNoRoot="nipegun"
   echo ""
   echo "    Instalando dependencias necesarias..." 
   echo ""
-  apt-get -y install libgtk-3-0
-  apt-get -y install libnotify4
-  apt-get -y install libnss3
-  apt-get -y install libxtst6
-  apt-get -y install xdg-utils
-  apt-get -y install libatspi2.0-0
-  apt-get -y install libdrm2
-  apt-get -y install libgbm1
-  apt-get -y install libxcb-dri3-0
-  apt-get -y install kde-cli-tools
-  apt-get -y install kde-runtime
-  apt-get -y install trash-cli
-  apt-get -y install libglib2.0-bin
-  apt-get -y install gvfs-bin
+  #apt-get -y install libgtk-3-0
+  #apt-get -y install libnotify4
+  #apt-get -y install libnss3
+  #apt-get -y install libxtst6
+  #apt-get -y install xdg-utils
+  #apt-get -y install libatspi2.0-0
+  #apt-get -y install libdrm2
+  #apt-get -y install libgbm1
+  #apt-get -y install libxcb-dri3-0
+  #apt-get -y install kde-cli-tools
+  #apt-get -y install kde-runtime
+  #apt-get -y install trash-cli
+  #apt-get -y install libglib2.0-bin
+  #apt-get -y install gvfs-bin
   #dpkg -i /root/SoftInst/Cryptos/XCH/chia-blockchain.deb
   #echo ""
   #echo "Para ver que archivos instaló el paquete, ejecuta:"
