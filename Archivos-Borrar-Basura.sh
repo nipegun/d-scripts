@@ -14,6 +14,7 @@
 /root/scripts/d-scripts/Archivos-Borrar-ZoneIdentifier.sh
 
 echo ""
-echo "  Borrando todas las papeleras de reciclaje..."echo ""
+echo "  Borrando todas las papeleras de reciclaje..."
+echo ""
 find / -type d -name ".Trash-*" -print -exec rm -rf {} \;
 
