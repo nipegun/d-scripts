@@ -10,18 +10,11 @@
 #  DEL DISCO DE SISTEMA DEBIAN Y DE TODOS LOS VOLÚMENES MONTADOS
 # ----------
 
-cd /
-
 echo ""
-echo "-----------------------------------------------------"
-echo "  Borrando de todo el sistema y volúmenes montados"
-echo "  todos los archivos cuyos nombres comienzan por ._"
-echo "-----------------------------------------------------"
+echo "  Borrando de todo el sistema y volúmenes montados todos los archivos cuyos nombres comienzan por ._"
 echo ""
-find . -type f -name "._*" -print -exec rm -f {} \;
+find / -type f -name "._*" -print -exec rm -f {} \;
 echo ""
-
 echo "  Archivos borrados del sistema y volúmenes montados"
-
 echo ""
 
