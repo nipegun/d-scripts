@@ -17,5 +17,5 @@
 echo ""
 echo "  Borrando de todo el sistema y volúmenes montados todos los archivos que contengan Zone.Identifier en el nombre ..."
 echo ""
-find . -type f -name "*Zone.Identifier*" -print -exec rm -f {} \;
+find / -type f -name "*Zone.Identifier*" -print -exec rm -f {} \;
 
