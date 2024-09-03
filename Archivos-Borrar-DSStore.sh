@@ -10,21 +10,13 @@
 #  DEL DISCO DE SISTEMA DEBIAN Y DE TODOS LOS VOLÚMENES MONTADOS
 # ----------
 
-cd /
+echo ""
+echo "  Borrando de todo el sistema y volúmenes montados todos los archivos ._.DS_Store..."
+echo ""
+find / -type f -name "._.DS_Store" -print -exec rm -f {} \;
 
 echo ""
-echo "  BORRANDO LOS ARCHIVOS ._.DS_Store DE TODO EL SISTEMA Y VOLÚMENES MONTADOS..."echo ""
-find . -type f -name "._.DS_Store" -print -exec rm -f {} \;
-
+echo "  Borrando de todo el sistema y volúmenes montados todos los archivos .DS_Store..."
 echo ""
-echo "  ARCHIVOS ._.DS_Store BORRADOS"
-echo ""
-
-echo ""
-echo "  BORRANDO LOS ARCHIVOS .DS_Store DE TODO EL SISTEMA Y VOLÚMENES MONTADOS..."echo ""
-find . -type f -name ".DS_Store" -print -exec rm -f {} \;
-
-echo ""
-echo "  ARCHIVOS .DS_Store BORRADOS"
-echo ""
+find / -type f -name ".DS_Store" -print -exec rm -f {} \;
 
