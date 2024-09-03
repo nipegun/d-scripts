@@ -14,14 +14,8 @@
 #  DESCARGADOS DESDE INTERNET
 # ----------
 
-cd /
-
 echo ""
-echo "  BORRANDO DE TODO EL SISTEMA Y VOLÚMENES MONTADOS"
-echo "  TODOS LOS ARCHIVOS QUE CONTENGAN Zone.Identifier EN EL NOMBRE..."echo ""
+echo "  Borrando de todo el sistema y volúmenes montados todos los archivos que contengan Zone.Identifier en el nombre ..."
+echo ""
 find . -type f -name "*Zone.Identifier*" -print -exec rm -f {} \;
-
-echo ""
-echo "  ARCHIVOS QUE CONTENÍAN Zone.Identifier EN EL NOMBRE, BORRADOS"
-echo ""
 
