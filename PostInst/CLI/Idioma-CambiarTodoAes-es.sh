@@ -81,6 +81,12 @@ elif [ $cVerSO == "8" ]; then
     echo 'BACKSPACE="guess"' >> /etc/default/keyboard
     echo ''                  >> /etc/default/keyboard
 
+  # Indicar idioma español de España para todos los usuarios
+    echo ""                                                      >> /etc/profile
+    echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
+    echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
+
   # Notificar cambios
     echo ""
     echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
@@ -112,6 +118,12 @@ elif [ $cVerSO == "9" ]; then
     echo ''                  >> /etc/default/keyboard
     echo 'BACKSPACE="guess"' >> /etc/default/keyboard
     echo ''                  >> /etc/default/keyboard
+
+  # Indicar idioma español de España para todos los usuarios
+    echo ""                                                      >> /etc/profile
+    echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
+    echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
 
   # Notificar cambios
     echo ""
@@ -145,6 +157,12 @@ elif [ $cVerSO == "10" ]; then
     echo 'BACKSPACE="guess"' >> /etc/default/keyboard
     echo ''                  >> /etc/default/keyboard
 
+  # Indicar idioma español de España para todos los usuarios
+    echo ""                                                      >> /etc/profile
+    echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
+    echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
+
   # Notificar cambios
     echo ""
     echo -e "${cColorVerde}    Cambios realizados.${cFinColor}"
@@ -176,6 +194,12 @@ elif [ $cVerSO == "11" ]; then
     echo ''                  >> /etc/default/keyboard
     echo 'BACKSPACE="guess"' >> /etc/default/keyboard
     echo ''                  >> /etc/default/keyboard
+
+  # Indicar idioma español de España para todos los usuarios
+    echo ""                                                      >> /etc/profile
+    echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
+    echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
 
   # Notificar cambios
     echo ""
@@ -210,7 +234,7 @@ elif [ $cVerSO == "12" ]; then
     echo 'BACKSPACE="guess"' >> /etc/default/keyboard
     echo ''                  >> /etc/default/keyboard
 
-    # Indicar idioma español de España para todos los usuarios
+  # Indicar idioma español de España para todos los usuarios
     echo ""                                                      >> /etc/profile
     echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
     echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
