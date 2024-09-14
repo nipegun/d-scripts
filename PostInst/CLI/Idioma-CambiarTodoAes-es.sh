@@ -210,6 +210,10 @@ elif [ $cVerSO == "12" ]; then
     echo 'BACKSPACE="guess"' >> /etc/default/keyboard
     echo ''                  >> /etc/default/keyboard
 
+    #
+    echo 'export LANG=es_ES.UTF-8'  >> /etc/profile
+    echo 'export LANGUAGE=es_ES:es' >> /etc/profile
+
   # Notificar cambios
     echo ""
     echo -e "${cColorVerde}    Cambios realizados.${cFinColor}"
