@@ -211,17 +211,16 @@ elif [ $cVerSO == "12" ]; then
     echo ''                  >> /etc/default/keyboard
 
     # Indicar idioma español de España para todos los usuarios
-    echo ""                                                         >> /etc/profile
-    echo '# Poner el idioma español de España a todos los usuarios' >> /etc/profile
-    echo '  export LANG=es_ES.UTF-8'                                >> /etc/profile
-    echo '  export LANGUAGE=es_ES:es'                               >> /etc/profile
+    echo ""                                                      >> /etc/profile
+    echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
+    echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
 
   # Notificar cambios
     echo ""
     echo -e "${cColorVerde}    Cambios realizados.${cFinColor}"
     echo -e "${cColorVerde}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
-
 
 fi
 
