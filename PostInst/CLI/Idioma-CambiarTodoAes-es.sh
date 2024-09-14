@@ -210,7 +210,7 @@ elif [ $cVerSO == "12" ]; then
     echo 'BACKSPACE="guess"' >> /etc/default/keyboard
     echo ''                  >> /etc/default/keyboard
 
-    #
+    # Cambiar para todos los usuarios
     echo 'export LANG=es_ES.UTF-8'  >> /etc/profile
     echo 'export LANGUAGE=es_ES:es' >> /etc/profile
 
