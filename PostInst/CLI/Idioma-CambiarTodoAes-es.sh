@@ -86,6 +86,8 @@ elif [ $cVerSO == "8" ]; then
     echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
     echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
     echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             >> /etc/skel/.bashrc
+    echo '  export LANGUAGE=es_ES:es'                            >> /etc/skel/.bashrc
 
   # Notificar cambios
     echo ""
@@ -124,6 +126,8 @@ elif [ $cVerSO == "9" ]; then
     echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
     echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
     echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             >> /etc/skel/.bashrc
+    echo '  export LANGUAGE=es_ES:es'                            >> /etc/skel/.bashrc
 
   # Notificar cambios
     echo ""
@@ -162,6 +166,8 @@ elif [ $cVerSO == "10" ]; then
     echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
     echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
     echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             >> /etc/skel/.bashrc
+    echo '  export LANGUAGE=es_ES:es'                            >> /etc/skel/.bashrc
 
   # Notificar cambios
     echo ""
@@ -200,6 +206,8 @@ elif [ $cVerSO == "11" ]; then
     echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
     echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
     echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             >> /etc/skel/.bashrc
+    echo '  export LANGUAGE=es_ES:es'                            >> /etc/skel/.bashrc
 
   # Notificar cambios
     echo ""
@@ -239,6 +247,8 @@ elif [ $cVerSO == "12" ]; then
     echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
     echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
     echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             >> /etc/skel/.bashrc
+    echo '  export LANGUAGE=es_ES:es'                            >> /etc/skel/.bashrc
 
   # Notificar cambios
     echo ""
