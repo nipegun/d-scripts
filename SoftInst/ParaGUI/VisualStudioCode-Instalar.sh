@@ -145,7 +145,7 @@ elif [ $cVerSO == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                  echo ""
@@ -202,7 +202,7 @@ elif [ $cVerSO == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                  echo ""
@@ -259,7 +259,7 @@ elif [ $cVerSO == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                  echo ""
@@ -316,7 +316,7 @@ elif [ $cVerSO == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                  echo ""
@@ -373,7 +373,7 @@ elif [ $cVerSO == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                  echo ""
@@ -430,7 +430,7 @@ elif [ $cVerSO == "11" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                  echo ""
@@ -487,7 +487,7 @@ elif [ $cVerSO == "11" ]; then
                 echo ""
                 echo "  Instalando el paquete .deb..."
                 echo ""
-                dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                 echo ""
@@ -544,7 +544,7 @@ elif [ $cVerSO == "11" ]; then
                 echo ""
                 echo "  Instalando el paquete .deb..."
                 echo ""
-                dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                 echo ""
@@ -638,7 +638,7 @@ elif [ $cVerSO == "12" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                  echo ""
@@ -695,7 +695,7 @@ elif [ $cVerSO == "12" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                  echo ""
@@ -752,7 +752,7 @@ elif [ $cVerSO == "12" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                  echo ""
@@ -809,7 +809,7 @@ elif [ $cVerSO == "12" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                  echo ""
@@ -866,7 +866,7 @@ elif [ $cVerSO == "12" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                  echo ""
@@ -923,7 +923,7 @@ elif [ $cVerSO == "12" ]; then
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                  echo ""
@@ -980,7 +980,7 @@ elif [ $cVerSO == "12" ]; then
                 echo ""
                 echo "  Instalando el paquete .deb..."
                 echo ""
-                dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                 echo ""
@@ -1037,7 +1037,7 @@ elif [ $cVerSO == "12" ]; then
                 echo ""
                 echo "  Instalando el paquete .deb..."
                 echo ""
-                dpkg -i /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario root
                 echo ""
