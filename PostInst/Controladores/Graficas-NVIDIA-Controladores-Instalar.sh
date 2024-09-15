@@ -96,6 +96,12 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     apt-get -y install $cPaqueteControlador
 
+  # Instalar el firmware
+    echo ""
+    echo "    Instalando el firmware..."
+    echo ""
+    apt-get -y install firmware-misc-nonfree
+
 elif [ $cVerSO == "11" ]; then
 
   echo ""
