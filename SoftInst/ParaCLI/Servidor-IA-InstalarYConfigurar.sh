@@ -153,10 +153,12 @@ elif [ $cVerSO == "12" ]; then
               echo "  Instalación finalizada."
               echo ""
               echo "    Para enviar peticiones a la API:"
-              echo "      curl http://localhost:11434/api/generate -d '{ "'"model"'": "'"llama3:8b"'", "'"prompt"'": "'"El texto que quieras"'", "'"stream"'": false }'"
+              echo "      curl http://localhost:11434/api/generate -d '{ "'"model"'": "'"llama3.1:8b-instruct-fp16"'", "'"prompt"'": "'"Hola. Qué tal?"'", "'"stream"'": false }'"
               echo '        o'
-              echo "      curl http://127.0.0.1:11434/api/generate -d '{ "'"model"'": "'"mistral:7b"'", "'"prompt"'": "'"El texto que quieras"'", "'"stream"'": false, "'"temperature"'": 0.3, "'"max_length"'": 80}'"
+              echo "      curl http://127.0.0.1:11434/api/generate -d '{ "'"model"'": "'"mistral:7b"'", "'"prompt"'": "'"Hola. Qué tal?"'", "'"stream"'": false, "'"temperature"'": 0.3, "'"max_length"'": 80}'"
               echo ''
+              echo "      Ollama tiene una interfaz de texto. Si quieres interfaz web, instala Open WebUI o alguna similar."
+              echo ""
 
           ;;
 
@@ -180,7 +182,7 @@ elif [ $cVerSO == "12" ]; then
               echo "[Service]"                                      >> /usr/lib/systemd/system/open-webui.service
               echo "Type=simple"                                    >> /usr/lib/systemd/system/open-webui.service
               echo "ExecStart=/opt/open-webui/bin/open-webui serve" >> /usr/lib/systemd/system/open-webui.service
-              echo "ExecStop=/bin/kill -HUP $MAINPID"               >> /usr/lib/systemd/system/open-webui.service
+              echo 'ExecStop=/bin/kill -HUP $MAINPID'               >> /usr/lib/systemd/system/open-webui.service
               echo "User=root"                                      >> /usr/lib/systemd/system/open-webui.service
               echo "Group=root"                                     >> /usr/lib/systemd/system/open-webui.service
               echo ""                                               >> /usr/lib/systemd/system/open-webui.service
