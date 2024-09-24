@@ -66,7 +66,7 @@ elif [ $cVerSO == "12" ]; then
     echo ''                             >> /etc/wireguard/wg0.conf
     echo '[Peer]'                       >> /etc/wireguard/wg0.conf # Datos del servidor
     echo "PublicKey ="                  >> /etc/wireguard/wg0.conf # Clave pública del servidor
-    echo 'AllowedIPs = 192.168.10.0/24' >> /etc/wireguard/wg0.conf # Lista de control de acceso
+    echo 'AllowedIPs = 192.168.10.0/24' >> /etc/wireguard/wg0.conf # La subred a la que tendrá acceso el cliente, 0.0.0.0/0 para pasar todo el tráfico por Wireguard  
     echo "Endpoint ="                   >> /etc/wireguard/wg0.conf # Dirección IP pública y puerto del servidor
     echo 'PersistentKeepalive = 20'     >> /etc/wireguard/wg0.conf # Key connection alive
 
