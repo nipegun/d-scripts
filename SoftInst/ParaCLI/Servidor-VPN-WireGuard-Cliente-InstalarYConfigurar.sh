@@ -59,15 +59,16 @@ elif [ $cVerSO == "12" ]; then
     chmod 600 /root/WireGuard/WireGuardClientPrivate.key
 
   # Crear el archivo de configuración
-    echo '[Interface]'                       > /etc/wireguard/wg0.conf # Datos del cliente
-    echo "PrivateKey ="                     >> /etc/wireguard/wg0.conf # Clave privada del cliente
-    echo 'Address = 10.0.0.2/24'            >> /etc/wireguard/wg0.conf # IP deseada por el cliente
-    echo ''                                 >> /etc/wireguard/wg0.conf
-    echo '[Peer]'                           >> /etc/wireguard/wg0.conf # Datos del servidor
-    echo "PublicKey ="                      >> /etc/wireguard/wg0.conf # Clave pública del servidor
-    echo 'AllowedIPs = 192.168.10.0/24'     >> /etc/wireguard/wg0.conf # Lista de control de acceso
-    echo "Endpoint ="                       >> /etc/wireguard/wg0.conf # Dirección IP pública y puerto del servidor
-    echo 'PersistentKeepalive = 20'         >> /etc/wireguard/wg0.conf # Key connection alive
+    echo '[Interface]'                   > /etc/wireguard/wg0.conf # Datos del cliente
+    echo "PrivateKey ="                 >> /etc/wireguard/wg0.conf # Clave privada del cliente
+    echo 'Address = 10.0.0.2/24'        >> /etc/wireguard/wg0.conf # IP deseada por el cliente
+    echo 'DNS = 9.9.9.9'                >> /etc/wireguard/wg0.conf # IP deseada por el cliente
+    echo ''                             >> /etc/wireguard/wg0.conf
+    echo '[Peer]'                       >> /etc/wireguard/wg0.conf # Datos del servidor
+    echo "PublicKey ="                  >> /etc/wireguard/wg0.conf # Clave pública del servidor
+    echo 'AllowedIPs = 192.168.10.0/24' >> /etc/wireguard/wg0.conf # Lista de control de acceso
+    echo "Endpoint ="                   >> /etc/wireguard/wg0.conf # Dirección IP pública y puerto del servidor
+    echo 'PersistentKeepalive = 20'     >> /etc/wireguard/wg0.conf # Key connection alive
 
   # Agregar las claves privada y pública al archivo de configuración
     vClientPrivKey=$(cat /root/WireGuard/WireGuardClientPrivate.key)
