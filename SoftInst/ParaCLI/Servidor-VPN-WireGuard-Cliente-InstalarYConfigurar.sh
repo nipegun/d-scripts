@@ -64,30 +64,38 @@ elif [ $cVerSO == "12" ]; then
     echo 'Address = 10.0.0.2/24'        >> /etc/wireguard/wg0.conf # IP deseada por el cliente
     echo 'DNS = 9.9.9.9'                >> /etc/wireguard/wg0.conf # IP deseada por el cliente
     echo ''                             >> /etc/wireguard/wg0.conf
-    echo '[Peer]'                       >> /etc/wireguard/wg0.conf # Datos del servidor
-    echo "PublicKey ="                  >> /etc/wireguard/wg0.conf # Clave pública del servidor
+    echo '[Peer]'                       >> /etc/wireguard/wg0.conf # Datos del servidor remoto
+    echo "PublicKey ="                  >> /etc/wireguard/wg0.conf # Clave pública del servidor remoto
     echo 'AllowedIPs = 192.168.10.0/24' >> /etc/wireguard/wg0.conf # La subred a la que tendrá acceso el cliente, 0.0.0.0/0 para pasar todo el tráfico por Wireguard  
     echo "Endpoint ="                   >> /etc/wireguard/wg0.conf # Dirección IP pública y puerto del servidor
     echo 'PersistentKeepalive = 20'     >> /etc/wireguard/wg0.conf # Key connection alive
 
-  # Agregar las claves privada y pública al archivo de configuración
-    vClientPrivKey=$(cat /root/WireGuard/WireGuardClientPrivate.key)
-    sed -i -e 's|PrivateKey =|PrivateKey = '"$vClientPrivKey"'|g' /etc/wireguard/wg0.conf
-    vClientPublicKey=$(cat /root/WireGuard/WireGuardClientPublic.key)
-    sed -i -e 's|PublicKey =|PublicKey = '"$vClientPublicKey"'|g' /etc/wireguard/wg0.conf
-
   # Agregar el endpoint
     echo ""
     echo "  Ingresa la IP o el dominio del servidor al que quieras conectarte y presiona Enter."
-    echo ""
-    echo "  La información se guardará en el archivo /etc/wireguard/wg0.conf"
-    echo "  Si te equivocas, puedes modificar ese archivo a posteriori."
     echo ""
     read -p "IP o nombre de dominio: " vIPoDominio
     echo ""
     echo "    La IP o dominio que ingresaste es: $vIPoDominio"
     echo ""
     sed -i -e 's|Endpoint =|Endpoint = '"$vIPoDominio"'|g' /etc/wireguard/wg0.conf
+
+  # Agregar las claves privada y pública al archivo de configuración
+    # Clave privada del propio wireguard
+      vClientPrivKey=$(cat /root/WireGuard/WireGuardClientPrivate.key)
+      sed -i -e 's|PrivateKey =|PrivateKey = '"$vClientPrivKey"'|g' /etc/wireguard/wg0.conf
+    # Clave pública del endpoint
+      echo ""
+      read -p "  Pega la clave pública del servidor remoto y presiona Enter: " vEndPointPublicKey
+      echo ""
+      sed -i -e 's|PublicKey =|PublicKey = '"$vEndPointPublicKey"'|g' /etc/wireguard/wg0.conf
+
+  # Notificar la creación del archivo de la interfaz
+    echo ""
+    echo "  Se ha creado el archivo de configuración /etc/wireguard/wg0.conf"
+    echo "  Para activar la interfaz creada, ejecuta:"
+    echo "    wg-quick up wg0"
+    echo ""
 
   # Agregar las reglas del cortafuego a los ComandosPostArranque
     #touch /root/scripts/ReglasIPTablesWireGuard.sh
@@ -100,9 +108,6 @@ elif [ $cVerSO == "12" ]; then
     #touch /root/scripts/ComandosPostArranque.sh
     #echo "/root/scripts/ReglasIPTablesWireGuard.sh" >> /root/scripts/ComandosPostArranque.sh
     #chmod +x /root/scripts/ComandosPostArranque.sh
-
-  # Arrancar wireguard
-    wg-quick up wg0
 
 elif [ $cVerSO == "11" ]; then
 
