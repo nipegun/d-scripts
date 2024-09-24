@@ -60,10 +60,13 @@ elif [ $cVerSO == "12" ]; then
     echo "    Para conectarse en modo cliente no hace falta crear claves privada y pública de servidor."
     echo "    Simplemente debes crear en el servidor Wireguard remoto un archivo de configuración para este par"
     echo "    y guardar el archivo de configuración en la carpeta /etc/wireguard/ de este Debian"
-    echo "    Luego, para activar la conexión, ejecuta: wg-quick up NombreDeLaConexion"
+    echo "    Luego, para activar la conexión, ejecuta cada vez: wg-quick up NombreDeLaConexion"
     echo ""
     echo "    Por ejemplo:"
     echo "      wq-quick up wg0 (Si el archivo de configuración se llama wg.conf)"
+    echo ""
+    echo "    Si quieres que la conexión se levante cada vez que inicies Debian, ejecuta:"
+    echo "      systemctl enable wg-quick@wg0"
     echo ""
 
   # Agregar las reglas del cortafuego a los ComandosPostArranque
