@@ -51,6 +51,7 @@ elif [ $cVerSO == "12" ]; then
   # Instalar el paquete WireGuard
     apt-get -y update
     apt-get -y install wireguard
+    apt-get -y install resolvconf
 
   # Crear las claves pública y privada del cliente
     mkdir /root/WireGuard/
