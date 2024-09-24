@@ -59,7 +59,7 @@ elif [ $cVerSO == "12" ]; then
     chmod 600 /root/WireGuard/WireGuardClientPrivate.key
 
   # Crear el archivo de configuración
-    echo '[Interface]'                      >> /etc/wireguard/wg0.conf # Datos del cliente
+    echo '[Interface]'                       > /etc/wireguard/wg0.conf # Datos del cliente
     echo "PrivateKey ="                     >> /etc/wireguard/wg0.conf # Clave privada del cliente
     echo 'Address = 10.0.0.2/24'            >> /etc/wireguard/wg0.conf # IP deseada por el cliente
     echo ''                                 >> /etc/wireguard/wg0.conf
