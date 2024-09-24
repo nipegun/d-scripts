@@ -12,8 +12,8 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-VPN-WireGuard-Cliente-InstalarYConfigurar.sh | bash
 -----------------
 
-InterfazEthernet="eth0"
-#InterfazEthernet="venet0"
+vInterfazEthernet="eth0"
+#vInterfazEthernet="venet0"
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -58,40 +58,35 @@ elif [ $cVerSO == "12" ]; then
     cat /root/WireGuard/WireGuardClientPrivate.key | wg pubkey > /root/WireGuard/WireGuardClientPublic.key
     chmod 600 /root/WireGuard/WireGuardClientPrivate.key
 
-  # Agregar la clave privada al archivo de configuración
-    VarClientPrivKey=$(cat /root/WireGuard/WireGuardClientPrivate.key)
-    sed -i -e 's|PrivateKey =|PrivateKey = '$VarClientPrivKey'|g' /etc/wireguard/wg0.conf
+  # Crear el archivo de configuración
+    echo '[Interface]'                      >> /etc/wireguard/wg0.conf # Datos del cliente
+    echo "PrivateKey ="                     >> /etc/wireguard/wg0.conf # Clave privada del cliente
+    echo 'Address = 10.0.0.2/24'            >> /etc/wireguard/wg0.conf # IP deseada por el cliente
+    echo ''                                 >> /etc/wireguard/wg0.conf
+    echo '[Peer]'                           >> /etc/wireguard/wg0.conf # Datos del servidor
+    echo "PublicKey ="                      >> /etc/wireguard/wg0.conf # Clave pública del servidor
+    echo 'AllowedIPs = 192.168.10.0/24'     >> /etc/wireguard/wg0.conf # Lista de control de acceso
+    echo "Endpoint ="                       >> /etc/wireguard/wg0.conf # Dirección IP pública y puerto del servidor
+    echo 'PersistentKeepalive = 20'         >> /etc/wireguard/wg0.conf # Key connection alive
 
+  # Agregar las claves privada y pública al archivo de configuración
+    vClientPrivKey=$(cat /root/WireGuard/WireGuardClientPrivate.key)
+    sed -i -e 's|PrivateKey =|PrivateKey = '"$vClientPrivKey"'|g' /etc/wireguard/wg0.conf
+    vClientPublicKey=$(cat /root/WireGuard/WireGuardClientPublic.key)
+    sed -i -e 's|PublicKey =|PublicKey = '"$vClientPublicKey"'|g' /etc/wireguard/wg0.conf
+
+  # Agregar el endpoint
     echo ""
     echo "  Ingresa la IP o el dominio del servidor al que quieras conectarte y presiona Enter."
     echo ""
     echo "  La información se guardará en el archivo /etc/wireguard/wg0.conf"
     echo "  Si te equivocas, puedes modificar ese archivo a posteriori."
     echo ""
-    read -p "IP o nombre de dominio: "
-
+    read -p "IP o nombre de dominio: " vIPoDominio
     echo ""
-    echo "La IP o dominio que ingresaste es: $IPoDominio"
+    echo "    La IP o dominio que ingresaste es: $vIPoDominio"
     echo ""
-
-    # Crear el archivo de configuración
-      echo "# Datos del cliente"                           > /etc/wireguard/wg0.conf
-      echo "[Interface]"                                  >> /etc/wireguard/wg0.conf
-      echo "# Clave privada del cliente"                  >> /etc/wireguard/wg0.conf
-      echo "PrivateKey = $VarClientPrivKey"               >> /etc/wireguard/wg0.conf
-      echo "# IP deseada por el cliente"                  >> /etc/wireguard/wg0.conf
-      echo "Address = 10.0.0.2/24"                        >> /etc/wireguard/wg0.conf
-      echo ""                                             >> /etc/wireguard/wg0.conf
-      echo "# Datos del servidor"                         >> /etc/wireguard/wg0.conf
-      echo "[Peer]"                                       >> /etc/wireguard/wg0.conf
-      echo "# Clave pública del servidor"                 >> /etc/wireguard/wg0.conf
-      echo "PublicKey = $ClavePubServidor"                >> /etc/wireguard/wg0.conf
-      echo "# Lista de control de acceso"                 >> /etc/wireguard/wg0.conf
-      echo "AllowedIPs = 192.168.10.0/24"                 >> /etc/wireguard/wg0.conf
-      echo "# Dirección IP pública y puerto del servidor" >> /etc/wireguard/wg0.conf
-      echo "Endpoint = $IPPubServ"                        >> /etc/wireguard/wg0.conf #172.105.112.120:51194
-      echo "# Key connection alive"                       >> /etc/wireguard/wg0.conf
-      echo "PersistentKeepalive = 20"                     >> /etc/wireguard/wg0.conf
+    sed -i -e 's|Endpoint =|Endpoint = '"$vIPoDominio"'|g' /etc/wireguard/wg0.conf
 
   # Agregar las reglas del cortafuego a los ComandosPostArranque
     #touch /root/scripts/ReglasIPTablesWireGuard.sh
