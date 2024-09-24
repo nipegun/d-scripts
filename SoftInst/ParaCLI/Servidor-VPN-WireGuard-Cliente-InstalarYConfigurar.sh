@@ -53,49 +53,17 @@ elif [ $cVerSO == "12" ]; then
     apt-get -y install wireguard
     apt-get -y install resolvconf
 
-  # Crear las claves pública y privada del cliente
-    mkdir /root/WireGuard/
-    wg genkey >                                                  /root/WireGuard/WireGuardClientPrivate.key
-    cat /root/WireGuard/WireGuardClientPrivate.key | wg pubkey > /root/WireGuard/WireGuardClientPublic.key
-    chmod 600 /root/WireGuard/WireGuardClientPrivate.key
-
-  # Crear el archivo de configuración
-    echo '[Interface]'                   > /etc/wireguard/wg0.conf # Datos del cliente
-    echo "PrivateKey ="                 >> /etc/wireguard/wg0.conf # Clave privada del cliente
-    echo 'Address = 10.0.0.2/24'        >> /etc/wireguard/wg0.conf # IP deseada por el cliente
-    echo 'DNS = 9.9.9.9'                >> /etc/wireguard/wg0.conf # IP deseada por el cliente
-    echo ''                             >> /etc/wireguard/wg0.conf
-    echo '[Peer]'                       >> /etc/wireguard/wg0.conf # Datos del servidor remoto
-    echo "PublicKey ="                  >> /etc/wireguard/wg0.conf # Clave pública del servidor remoto
-    echo 'AllowedIPs = 192.168.10.0/24' >> /etc/wireguard/wg0.conf # La subred a la que tendrá acceso el cliente, 0.0.0.0/0 para pasar todo el tráfico por Wireguard  
-    echo "Endpoint ="                   >> /etc/wireguard/wg0.conf # Dirección IP pública y puerto del servidor
-    echo 'PersistentKeepalive = 20'     >> /etc/wireguard/wg0.conf # Key connection alive
-
-  # Agregar el endpoint
+  # Indicar que se proporcione el archivo de configuración del par
     echo ""
-    echo "  Ingresa la IP o el dominio del servidor al que quieras conectarte y presiona Enter."
+    echo "  Paquete Wireguard instalado."
     echo ""
-    read -p "IP o nombre de dominio: " vIPoDominio
+    echo "    Para conectarse en modo cliente no hace falta crear claves privada y pública de servidor."
+    echo "    Simplemente debes crear en el servidor Wireguard remoto un archivo de configuración para este par"
+    echo "    y guardar el archivo de configuración en la carpeta /etc/wireguard/ de este Debian"
+    echo "    Luego, para activar la conexión, ejecuta: wg-quick up NombreDeLaConexion"
     echo ""
-    echo "    La IP o dominio que ingresaste es: $vIPoDominio"
-    echo ""
-    sed -i -e 's|Endpoint =|Endpoint = '"$vIPoDominio"'|g' /etc/wireguard/wg0.conf
-
-  # Agregar las claves privada y pública al archivo de configuración
-    # Clave privada del propio wireguard
-      vClientPrivKey=$(cat /root/WireGuard/WireGuardClientPrivate.key)
-      sed -i -e 's|PrivateKey =|PrivateKey = '"$vClientPrivKey"'|g' /etc/wireguard/wg0.conf
-    # Clave pública del endpoint
-      echo ""
-      read -p "  Pega la clave pública del servidor remoto y presiona Enter: " vEndPointPublicKey
-      echo ""
-      sed -i -e 's|PublicKey =|PublicKey = '"$vEndPointPublicKey"'|g' /etc/wireguard/wg0.conf
-
-  # Notificar la creación del archivo de la interfaz
-    echo ""
-    echo "  Se ha creado el archivo de configuración /etc/wireguard/wg0.conf"
-    echo "  Para activar la interfaz creada, ejecuta:"
-    echo "    wg-quick up wg0"
+    echo "    Por ejemplo:"
+    echo "      wq-quick up wg0 (Si el archivo de configuración se llama wg.conf)"
     echo ""
 
   # Agregar las reglas del cortafuego a los ComandosPostArranque
@@ -116,50 +84,27 @@ elif [ $cVerSO == "11" ]; then
   echo "  Iniciando el script de instalación de WireGuard para Debian 11 (Bullseye)..."  
   echo ""
 
+  echo ""
+  echo "  Iniciando el script de instalación de WireGuard para Debian 12 (Bookworm)..."  
+  echo ""
+
   # Instalar el paquete WireGuard
     apt-get -y update
     apt-get -y install wireguard
+    apt-get -y install resolvconf
 
-  # Crear las claves pública y privada del cliente
-    mkdir /root/WireGuard/
-    wg genkey >                                                  /root/WireGuard/WireGuardClientPrivate.key
-    cat /root/WireGuard/WireGuardClientPrivate.key | wg pubkey > /root/WireGuard/WireGuardClientPublic.key
-    chmod 600 /root/WireGuard/WireGuardClientPrivate.key
-
-  # Agregar la clave privada al archivo de configuración
-    VarClientPrivKey=$(cat /root/WireGuard/WireGuardClientPrivate.key)
-    sed -i -e 's|PrivateKey =|PrivateKey = '$VarClientPrivKey'|g' /etc/wireguard/wg0.conf
-
+  # Indicar que se proporcione el archivo de configuración del par
     echo ""
-    echo "  Ingresa la IP o el dominio del servidor al que quieras conectarte y presiona Enter."
+    echo "  Paquete Wireguard instalado."
     echo ""
-    echo "  La información se guardará en el archivo /etc/wireguard/wg0.conf"
-    echo "  Si te equivocas, puedes modificar ese archivo a posteriori."
+    echo "    Para conectarse en modo cliente no hace falta crear claves privada y pública de servidor."
+    echo "    Simplemente debes crear en el servidor Wireguard remoto un archivo de configuración para este par"
+    echo "    y guardar el archivo de configuración en la carpeta /etc/wireguard/ de este Debian"
+    echo "    Luego, para activar la conexión, ejecuta: wg-quick up NombreDeLaConexion"
     echo ""
-    read -p "IP o nombre de dominio: "
-
+    echo "    Por ejemplo:"
+    echo "      wq-quick up wg0 (Si el archivo de configuración se llama wg.conf)"
     echo ""
-    echo "La IP o dominio que ingresaste es: $IPoDominio"
-    echo ""
-
-    # Crear el archivo de configuración
-      echo "# Datos del cliente"                           > /etc/wireguard/wg0.conf
-      echo "[Interface]"                                  >> /etc/wireguard/wg0.conf
-      echo "# Clave privada del cliente"                  >> /etc/wireguard/wg0.conf
-      echo "PrivateKey = $VarClientPrivKey"               >> /etc/wireguard/wg0.conf
-      echo "# IP deseada por el cliente"                  >> /etc/wireguard/wg0.conf
-      echo "Address = 10.0.0.2/24"                        >> /etc/wireguard/wg0.conf
-      echo ""                                             >> /etc/wireguard/wg0.conf
-      echo "# Datos del servidor"                         >> /etc/wireguard/wg0.conf
-      echo "[Peer]"                                       >> /etc/wireguard/wg0.conf
-      echo "# Clave pública del servidor"                 >> /etc/wireguard/wg0.conf
-      echo "PublicKey = $ClavePubServidor"                >> /etc/wireguard/wg0.conf
-      echo "# Lista de control de acceso"                 >> /etc/wireguard/wg0.conf
-      echo "AllowedIPs = 192.168.10.0/24"                 >> /etc/wireguard/wg0.conf
-      echo "# Dirección IP pública y puerto del servidor" >> /etc/wireguard/wg0.conf
-      echo "Endpoint = $IPPubServ"                        >> /etc/wireguard/wg0.conf #172.105.112.120:51194
-      echo "# Key connection alive"                       >> /etc/wireguard/wg0.conf
-      echo "PersistentKeepalive = 20"                     >> /etc/wireguard/wg0.conf
 
   # Agregar las reglas del cortafuego a los ComandosPostArranque
     #touch /root/scripts/ReglasIPTablesWireGuard.sh
@@ -172,9 +117,6 @@ elif [ $cVerSO == "11" ]; then
     #touch /root/scripts/ComandosPostArranque.sh
     #echo "/root/scripts/ReglasIPTablesWireGuard.sh" >> /root/scripts/ComandosPostArranque.sh
     #chmod +x /root/scripts/ComandosPostArranque.sh
-
-  # Arrancar wireguard
-    wg-quick up wg0
 
 elif [ $cVerSO == "10" ]; then
 
