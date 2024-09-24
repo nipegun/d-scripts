@@ -35,29 +35,160 @@ InterfazEthernet="eth0"
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de WireGuard para Debian 7 (Wheezy)..."  
+  echo "  Iniciando el script de instalación de WireGuard para Debian 13 (x)..."  
   echo ""
 
-elif [ $cVerSO == "8" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de WireGuard para Debian 8 (Jessie)..."  
+  echo "  Iniciando el script de instalación de WireGuard para Debian 12 (Bookworm)..."  
   echo ""
-
-  # Agregar el repositorio inestable
-     echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable.list
 
   # Instalar el paquete WireGuard
-     apt-get -y update
-     apt-get -y install wireguard
+    apt-get -y update
+    apt-get -y install wireguard
 
-  # Cargar elmódulo
-     modprobe wireguard
+  # Crear las claves pública y privada del cliente
+    mkdir /root/WireGuard/
+    wg genkey >                                                  /root/WireGuard/WireGuardClientPrivate.key
+    cat /root/WireGuard/WireGuardClientPrivate.key | wg pubkey > /root/WireGuard/WireGuardClientPublic.key
+    chmod 600 /root/WireGuard/WireGuardClientPrivate.key
 
-  # Crear el archivo de configuración#
+  # Agregar la clave privada al archivo de configuración
+    VarClientPrivKey=$(cat /root/WireGuard/WireGuardClientPrivate.key)
+    sed -i -e 's|PrivateKey =|PrivateKey = '$VarClientPrivKey'|g' /etc/wireguard/wg0.conf
+
+    echo ""
+    echo "  Ingresa la IP o el dominio del servidor al que quieras conectarte y presiona Enter."
+    echo ""
+    echo "  La información se guardará en el archivo /etc/wireguard/wg0.conf"
+    echo "  Si te equivocas, puedes modificar ese archivo a posteriori."
+    echo ""
+    read -p "IP o nombre de dominio: "
+
+    echo ""
+    echo "La IP o dominio que ingresaste es: $IPoDominio"
+    echo ""
+
+    # Crear el archivo de configuración
+      echo "# Datos del cliente"                           > /etc/wireguard/wg0.conf
+      echo "[Interface]"                                  >> /etc/wireguard/wg0.conf
+      echo "# Clave privada del cliente"                  >> /etc/wireguard/wg0.conf
+      echo "PrivateKey = $VarClientPrivKey"               >> /etc/wireguard/wg0.conf
+      echo "# IP deseada por el cliente"                  >> /etc/wireguard/wg0.conf
+      echo "Address = 10.0.0.2/24"                        >> /etc/wireguard/wg0.conf
+      echo ""                                             >> /etc/wireguard/wg0.conf
+      echo "# Datos del servidor"                         >> /etc/wireguard/wg0.conf
+      echo "[Peer]"                                       >> /etc/wireguard/wg0.conf
+      echo "# Clave pública del servidor"                 >> /etc/wireguard/wg0.conf
+      echo "PublicKey = $ClavePubServidor"                >> /etc/wireguard/wg0.conf
+      echo "# Lista de control de acceso"                 >> /etc/wireguard/wg0.conf
+      echo "AllowedIPs = 192.168.10.0/24"                 >> /etc/wireguard/wg0.conf
+      echo "# Dirección IP pública y puerto del servidor" >> /etc/wireguard/wg0.conf
+      echo "Endpoint = $IPPubServ"                        >> /etc/wireguard/wg0.conf #172.105.112.120:51194
+      echo "# Key connection alive"                       >> /etc/wireguard/wg0.conf
+      echo "PersistentKeepalive = 20"                     >> /etc/wireguard/wg0.conf
+
+  # Agregar las reglas del cortafuego a los ComandosPostArranque
+    #touch /root/scripts/ReglasIPTablesWireGuard.sh
+    #echo "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                        > /root/scripts/ReglasIPTablesWireGuard.sh
+    #echo "iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                     >> /root/scripts/ReglasIPTablesWireGuard.sh
+    #echo "iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT"           >> /root/scripts/ReglasIPTablesWireGuard.sh
+    #echo "iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+    #echo "iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+    #chmod +x /root/scripts/ReglasIPTablesWireGuard.sh
+    #touch /root/scripts/ComandosPostArranque.sh
+    #echo "/root/scripts/ReglasIPTablesWireGuard.sh" >> /root/scripts/ComandosPostArranque.sh
+    #chmod +x /root/scripts/ComandosPostArranque.sh
+
+  # Arrancar wireguard
+    wg-quick up wg0
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de WireGuard para Debian 11 (Bullseye)..."  
+  echo ""
+
+  # Instalar el paquete WireGuard
+    apt-get -y update
+    apt-get -y install wireguard
+
+  # Crear las claves pública y privada del cliente
+    mkdir /root/WireGuard/
+    wg genkey >                                                  /root/WireGuard/WireGuardClientPrivate.key
+    cat /root/WireGuard/WireGuardClientPrivate.key | wg pubkey > /root/WireGuard/WireGuardClientPublic.key
+    chmod 600 /root/WireGuard/WireGuardClientPrivate.key
+
+  # Agregar la clave privada al archivo de configuración
+    VarClientPrivKey=$(cat /root/WireGuard/WireGuardClientPrivate.key)
+    sed -i -e 's|PrivateKey =|PrivateKey = '$VarClientPrivKey'|g' /etc/wireguard/wg0.conf
+
+    echo ""
+    echo "  Ingresa la IP o el dominio del servidor al que quieras conectarte y presiona Enter."
+    echo ""
+    echo "  La información se guardará en el archivo /etc/wireguard/wg0.conf"
+    echo "  Si te equivocas, puedes modificar ese archivo a posteriori."
+    echo ""
+    read -p "IP o nombre de dominio: "
+
+    echo ""
+    echo "La IP o dominio que ingresaste es: $IPoDominio"
+    echo ""
+
+    # Crear el archivo de configuración
+      echo "# Datos del cliente"                           > /etc/wireguard/wg0.conf
+      echo "[Interface]"                                  >> /etc/wireguard/wg0.conf
+      echo "# Clave privada del cliente"                  >> /etc/wireguard/wg0.conf
+      echo "PrivateKey = $VarClientPrivKey"               >> /etc/wireguard/wg0.conf
+      echo "# IP deseada por el cliente"                  >> /etc/wireguard/wg0.conf
+      echo "Address = 10.0.0.2/24"                        >> /etc/wireguard/wg0.conf
+      echo ""                                             >> /etc/wireguard/wg0.conf
+      echo "# Datos del servidor"                         >> /etc/wireguard/wg0.conf
+      echo "[Peer]"                                       >> /etc/wireguard/wg0.conf
+      echo "# Clave pública del servidor"                 >> /etc/wireguard/wg0.conf
+      echo "PublicKey = $ClavePubServidor"                >> /etc/wireguard/wg0.conf
+      echo "# Lista de control de acceso"                 >> /etc/wireguard/wg0.conf
+      echo "AllowedIPs = 192.168.10.0/24"                 >> /etc/wireguard/wg0.conf
+      echo "# Dirección IP pública y puerto del servidor" >> /etc/wireguard/wg0.conf
+      echo "Endpoint = $IPPubServ"                        >> /etc/wireguard/wg0.conf #172.105.112.120:51194
+      echo "# Key connection alive"                       >> /etc/wireguard/wg0.conf
+      echo "PersistentKeepalive = 20"                     >> /etc/wireguard/wg0.conf
+
+  # Agregar las reglas del cortafuego a los ComandosPostArranque
+    #touch /root/scripts/ReglasIPTablesWireGuard.sh
+    #echo "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                        > /root/scripts/ReglasIPTablesWireGuard.sh
+    #echo "iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                     >> /root/scripts/ReglasIPTablesWireGuard.sh
+    #echo "iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT"           >> /root/scripts/ReglasIPTablesWireGuard.sh
+    #echo "iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+    #echo "iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
+    #chmod +x /root/scripts/ReglasIPTablesWireGuard.sh
+    #touch /root/scripts/ComandosPostArranque.sh
+    #echo "/root/scripts/ReglasIPTablesWireGuard.sh" >> /root/scripts/ComandosPostArranque.sh
+    #chmod +x /root/scripts/ComandosPostArranque.sh
+
+  # Arrancar wireguard
+    wg-quick up wg0
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de WireGuard para Debian 10 (Buster)..."  
+  echo ""
+
+  # Agregar el repositorio back-ports
+     echo "deb http://deb.debian.org/debian buster-backports main" > /etc/apt/sources.list.d/backports.lis
+
+  # Instalar el paquete WireGuard desde el repositorio back-ports
+     apt-get -y update > /dev/null
+     apt-get -y autoremove > /dev/null
+     apt-get -y -t buster-backports install wireguard
+
+  # Crear el archivo de configuración
      echo "[Interface]" > /etc/wireguard/wg0.conf
      echo "Address =" >> /etc/wireguard/wg0.conf
      echo "PrivateKey =" >> /etc/wireguard/wg0.conf
@@ -74,6 +205,7 @@ elif [ $cVerSO == "8" ]; then
      mkdir /root/WireGuard/
      wg genkey >                                                  /root/WireGuard/WireGuardServerPrivate.key
      cat /root/WireGuard/WireGuardServerPrivate.key | wg pubkey > /root/WireGuard/WireGuardServerPublic.key
+     chmod 600 /root/WireGuard/WireGuardServerPrivate.key
 
   # Agregar la clave privada al archivo de configuración
      VarServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
@@ -93,14 +225,14 @@ elif [ $cVerSO == "8" ]; then
      VarUser0PubKey=$(cat /root/WireGuard/WireGuardUser0Public.key)
      sed -i -e 's|User0PublicKey =|PublicKey = '$VarUser0PubKey'|g' /etc/wireguard/wg0.conf
 
-  # Agregar las reglas para tener salida a Internet desde el servidor
+# Agregar las reglas para tener salida a Internet desde el servidor
      iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
      iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
      iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT
      iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
      iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
 
-  # Agregar las reglas a los ComandosPostArranque
+  # Agregar las reglas del cortafuego a los ComandosPostArranque
      touch /root/scripts/ReglasIPTablesWireGuard.sh
      echo "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                        > /root/scripts/ReglasIPTablesWireGuard.sh
      echo "iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                     >> /root/scripts/ReglasIPTablesWireGuard.sh
@@ -211,7 +343,8 @@ elif [ $cVerSO == "9" ]; then
 
   # Levantar la conexión
      echo ""
-     echo "Levantando la interfaz..."     echo ""
+     echo "Levantando la interfaz..."
+     echo ""
      wg-quick up wg0
      echo ""
 
@@ -222,21 +355,23 @@ elif [ $cVerSO == "9" ]; then
       systemctl enable wg-quick@wg0.service
       echo ""
 
-elif [ $cVerSO == "10" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de WireGuard para Debian 10 (Buster)..."  
+  echo "  Iniciando el script de instalación de WireGuard para Debian 8 (Jessie)..."  
   echo ""
 
-  # Agregar el repositorio back-ports
-     echo "deb http://deb.debian.org/debian buster-backports main" > /etc/apt/sources.list.d/backports.lis
+  # Agregar el repositorio inestable
+     echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable.list
 
-  # Instalar el paquete WireGuard desde el repositorio back-ports
-     apt-get -y update > /dev/null
-     apt-get -y autoremove > /dev/null
-     apt-get -y -t buster-backports install wireguard
+  # Instalar el paquete WireGuard
+     apt-get -y update
+     apt-get -y install wireguard
 
-  # Crear el archivo de configuración
+  # Cargar elmódulo
+     modprobe wireguard
+
+  # Crear el archivo de configuración#
      echo "[Interface]" > /etc/wireguard/wg0.conf
      echo "Address =" >> /etc/wireguard/wg0.conf
      echo "PrivateKey =" >> /etc/wireguard/wg0.conf
@@ -253,7 +388,6 @@ elif [ $cVerSO == "10" ]; then
      mkdir /root/WireGuard/
      wg genkey >                                                  /root/WireGuard/WireGuardServerPrivate.key
      cat /root/WireGuard/WireGuardServerPrivate.key | wg pubkey > /root/WireGuard/WireGuardServerPublic.key
-     chmod 600 /root/WireGuard/WireGuardServerPrivate.key
 
   # Agregar la clave privada al archivo de configuración
      VarServerPrivKey=$(cat /root/WireGuard/WireGuardServerPrivate.key)
@@ -273,14 +407,14 @@ elif [ $cVerSO == "10" ]; then
      VarUser0PubKey=$(cat /root/WireGuard/WireGuardUser0Public.key)
      sed -i -e 's|User0PublicKey =|PublicKey = '$VarUser0PubKey'|g' /etc/wireguard/wg0.conf
 
-# Agregar las reglas para tener salida a Internet desde el servidor
+  # Agregar las reglas para tener salida a Internet desde el servidor
      iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
      iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
      iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT
      iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
      iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
 
-  # Agregar las reglas del cortafuego a los ComandosPostArranque
+  # Agregar las reglas a los ComandosPostArranque
      touch /root/scripts/ReglasIPTablesWireGuard.sh
      echo "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                        > /root/scripts/ReglasIPTablesWireGuard.sh
      echo "iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                     >> /root/scripts/ReglasIPTablesWireGuard.sh
@@ -313,71 +447,11 @@ elif [ $cVerSO == "10" ]; then
       systemctl enable wg-quick@wg0.service
       echo ""
 
-elif [ $cVerSO == "11" ]; then
+elif [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de WireGuard para Debian 11 (Bullseye)..."  
+  echo "  Iniciando el script de instalación de WireGuard para Debian 7 (Wheezy)..."  
   echo ""
-
-  # Instalar el paquete WireGuard
-    apt-get -y update
-    apt-get -y install wireguard
-
-  # Crear las claves pública y privada del cliente
-    mkdir /root/WireGuard/
-    wg genkey >                                                  /root/WireGuard/WireGuardClientPrivate.key
-    cat /root/WireGuard/WireGuardClientPrivate.key | wg pubkey > /root/WireGuard/WireGuardClientPublic.key
-    chmod 600 /root/WireGuard/WireGuardClientPrivate.key
-
-  # Agregar la clave privada al archivo de configuración
-    VarClientPrivKey=$(cat /root/WireGuard/WireGuardClientPrivate.key)
-    sed -i -e 's|PrivateKey =|PrivateKey = '$VarClientPrivKey'|g' /etc/wireguard/wg0.conf
-
-    echo ""
-    echo "  Ingresa la IP o el dominio del servidor al que quieras conectarte y presiona Enter."
-    echo ""
-    echo "  La información se guardará en el archivo /etc/wireguard/wg0.conf"
-    echo "  Si te equivocas, puedes modificar ese archivo a posteriori."
-    echo ""
-    read -p "IP o nombre de dominio: "
-
-    echo ""
-    echo "La IP o dominio que ingresaste es: $IPoDominio"
-    echo ""
-
-    # Crear el archivo de configuración
-      echo "# Datos del cliente"                           > /etc/wireguard/wg0.conf
-      echo "[Interface]"                                  >> /etc/wireguard/wg0.conf
-      echo "# Clave privada del cliente"                  >> /etc/wireguard/wg0.conf
-      echo "PrivateKey = $VarClientPrivKey"               >> /etc/wireguard/wg0.conf
-      echo "# IP deseada por el cliente"                  >> /etc/wireguard/wg0.conf
-      echo "Address = 10.0.0.2/24"                        >> /etc/wireguard/wg0.conf
-      echo ""                                             >> /etc/wireguard/wg0.conf
-      echo "# Datos del servidor"                         >> /etc/wireguard/wg0.conf
-      echo "[Peer]"                                       >> /etc/wireguard/wg0.conf
-      echo "# Clave pública del servidor"                 >> /etc/wireguard/wg0.conf
-      echo "PublicKey = $ClavePubServidor"                >> /etc/wireguard/wg0.conf
-      echo "# Lista de control de acceso"                 >> /etc/wireguard/wg0.conf
-      echo "AllowedIPs = 192.168.10.0/24"                 >> /etc/wireguard/wg0.conf
-      echo "# Dirección IP pública y puerto del servidor" >> /etc/wireguard/wg0.conf
-      echo "Endpoint = $IPPubServ"                        >> /etc/wireguard/wg0.conf #172.105.112.120:51194
-      echo "# Key connection alive"                       >> /etc/wireguard/wg0.conf
-      echo "PersistentKeepalive = 20"                     >> /etc/wireguard/wg0.conf
-
-  # Agregar las reglas del cortafuego a los ComandosPostArranque
-    #touch /root/scripts/ReglasIPTablesWireGuard.sh
-    #echo "iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                        > /root/scripts/ReglasIPTablesWireGuard.sh
-    #echo "iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT"                     >> /root/scripts/ReglasIPTablesWireGuard.sh
-    #echo "iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT"           >> /root/scripts/ReglasIPTablesWireGuard.sh
-    #echo "iptables -A INPUT -s $DirIP/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
-    #echo "iptables -A INPUT -s $DirIP/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT" >> /root/scripts/ReglasIPTablesWireGuard.sh
-    #chmod +x /root/scripts/ReglasIPTablesWireGuard.sh
-    #touch /root/scripts/ComandosPostArranque.sh
-    #echo "/root/scripts/ReglasIPTablesWireGuard.sh" >> /root/scripts/ComandosPostArranque.sh
-    #chmod +x /root/scripts/ComandosPostArranque.sh
-
-  # Arrancar wireguard
-    wg-quick up wg0
 
 fi
 
