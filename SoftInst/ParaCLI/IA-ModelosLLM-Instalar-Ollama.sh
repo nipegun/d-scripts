@@ -54,21 +54,21 @@
   menu=(dialog --checklist "Marca los modelos que quieras instalar:" 22 96 16)
     opciones=(
 
-      1 "dolphin-mistral 7b-v2.8-q4_0 ( 4,3 GB en disco) ( 7,4GB VRAM)" off
-      2 "dolphin-mistral 7b-v2.8-q8_0 ( 7,9 GB en disco) (10,7GB VRAM)" off
-      3 "dolphin-mistral 7b-v2.8-fp16 (14,2 GB en disco) (15,4GB VRAM)" off
+      1 "dolphin-mistral 7b-v2.8-q4_0 ( 4,3 GB en disco) ( 7,4 GB en VRAM)" off
+      2 "dolphin-mistral 7b-v2.8-q8_0 ( 7,9 GB en disco) (10,7 GB en VRAM)" off
+      3 "dolphin-mistral 7b-v2.8-fp16 (14,2 GB en disco) (15,4 GB en VRAM)" off
 
-      4 "llama3.2   1b-instruct-q4_0 (0,9GB en disco) (3,4GB VRAM)" off
-      5 "llama3.2   1b-instruct-q8_0 (1,5GB en disco) (3,8GB VRAM)" off
-      6 "llama3.2   1b-instruct-fp16 (2,7GB en disco) (7,2GB VRAM)" off
+      4 "llama3.2   1b-instruct-q4_0 (0,9 GB en disco) (3,4 GB en VRAM)" off
+      5 "llama3.2   1b-instruct-q8_0 (1,5 GB en disco) (3,8 GB en VRAM)" off
+      6 "llama3.2   1b-instruct-fp16 (2,7 GB en disco) (7,2 GB en VRAM)" off
 
-      7 "llama3.2   3b-instruct-q4_0 (2,0GB en disco) ( 4,9GB VRAM)" off
-      8 "llama3.2   3b-instruct-q8_0 (3,6GB en disco) ( 9,8GB VRAM)" off
-      9 "llama3.2   3b-instruct-fp16 (6,6GB en disco) (14,0GB VRAM)" off
+      7 "llama3.2   3b-instruct-q4_0 (2,0 GB en disco) ( 4,9 GB en VRAM)" off
+      8 "llama3.2   3b-instruct-q8_0 (3,6 GB en disco) ( 9,8 GB en VRAM)" off
+      9 "llama3.2   3b-instruct-fp16 (6,6 GB en disco) (14,0 GB en VRAM)" off
       
-     10 "llama3.1   8b-instruct-q4_0 (0,0GB en disco) (0,0GB VRAM)" off
-     11 "llama3.1   8b-instruct-q8_0 (0,0GB en disco) (0,0GB VRAM)" off
-     12 "llama3.1   8b-instruct-fp16 (0,0GB en disco) (0,0GB VRAM)" off
+     10 "llama3.1   8b-instruct-q4_0 ( 4,8 GB en disco) ( 7,5 GB en VRAM)" off
+     11 "llama3.1   8b-instruct-q8_0 ( 8,6 GB en disco) (11,0 GB en VRAM)" off
+     12 "llama3.1   8b-instruct-fp16 (16,2 GB en disco) (15,8 GB en VRAM)" off
 
      13 "llama3.1  70b-instruct-q4_0 (0,0GB en disco) (0,0GB VRAM)" off
      14 "llama3.1  70b-instruct-q8_0 (0,0GB en disco) (0,0GB VRAM)" off
