@@ -56,7 +56,7 @@
 
       1 "dolphin-mistral 7b-v2.8-q4_0 ( 4,3 GB en disco) ( 7,4 GB en VRAM)" off
       2 "dolphin-mistral 7b-v2.8-q8_0 ( 7,9 GB en disco) (10,7 GB en VRAM)" off
-      3 "dolphin-mistral 7b-v2.8-fp16 (14,2 GB en disco) (15,4 GB en VRAM)" off
+      3 "dolphin-mistral 7b-v2.8-fp16 (14,2 GB en disco) (15,4 GB en VRAM)?" off
 
       4 "llama3.2   1b-instruct-q4_0 (0,9 GB en disco) (3,4 GB en VRAM)" off
       5 "llama3.2   1b-instruct-q8_0 (1,5 GB en disco) (3,8 GB en VRAM)" off
@@ -68,7 +68,7 @@
       
      10 "llama3.1   8b-instruct-q4_0 ( 4,8 GB en disco) ( 7,5 GB en VRAM)" off
      11 "llama3.1   8b-instruct-q8_0 ( 8,6 GB en disco) (11,0 GB en VRAM)" off
-     12 "llama3.1   8b-instruct-fp16 (16,2 GB en disco) (15,8 GB en VRAM)" off
+     12 "llama3.1   8b-instruct-fp16 (16,2 GB en disco) (15,8 GB en VRAM)?" off
 
 
 
@@ -89,9 +89,9 @@
 
 
 
-     11 "mistral 7b-instruct-q4_0 ( 4,2 GB en disco) (x,x GB en VRAM)" off
-     11 "mistral 7b-instruct-q8_0 ( 7,8 GB en disco) (x,x GB en VRAM)" off
-     12 "mistral 7b-instruct-fp16 (14,2 GB en disco) (x,x GB en VRAM)" off
+     11 "mistral 7b-instruct-q4_0 ( 4,2 GB en disco) ( 7,2 GB en VRAM)" off
+     11 "mistral 7b-instruct-q8_0 ( 7,8 GB en disco) (15,0 GB en VRAM)" off
+     12 "mistral 7b-instruct-fp16 (14,2 GB en disco) ( x,x GB en VRAM)?" off
 
      13 "phi3 3.8b-mini-128k-instruct-q4_0 (x,x GB en disco) (x,x GB en VRAM)" off
      13 "phi3 3.8b-mini-128k-instruct-q8_0 (x,x GB en disco) (x,x GB en VRAM)" off
