@@ -53,24 +53,28 @@
 # Crear el menú
   menu=(dialog --checklist "Marca los modelos que quieras instalar:" 22 96 16)
     opciones=(
-      1 "llama3.1 8b (Cuantificación Q4)" off
-      2 "llama3.1 70b (Cuantificación Q4)" off
-      3 "llama3.1 8b-instruct-fp16 (Cuantificación FP16)" off
-      4 "llama3.1 70b-instruct-fp16 (Cuantificación FP16)" off
-      5 "mistral 7b (Cuantificación Q4)" off
-      6 "mistral 7b-instruct-fp16 (Cuantificación FP16)" off
-      7 "phi3 3.8b (Cuantificación Q4)" off
-      8 "phi3 14b (Cuantificación Q4)" off
-      9 "phi3 3.8b-mini-128k-instruct-f16 (Cuantificación FP16)" off
-     10 "phi3 14b-medium-128k-instruct-f16 (Cuantificación FP16)" off
-     11 "deepseek-coder-v2 16b (Cuantificación Q4)" off
-     12 "deepseek-coder-v2 236b (Cuantificación Q4)" off
-     13 "deepseek-coder-v2 16b-lite-instruct-fp16 (Cuantificación FP16)" off
-     14 "deepseek-coder-v2 236b-instruct-fp16 (Cuantificación FP16)" off
-     15 "gemma2 9b (Cuantificación Q4)" off
-     16 "gemma2 27b (Cuantificación Q4)" off
-     17 "gemma2 9b-instruct-fp16 (Cuantificación FP16)" off
-     18 "gemma2 27b-instruct-fp16 (Cuantificación FP16)" off
+      1 "llama3.2 1b (Cuantificación Q4)" off
+      2 "llama3.2 3b (Cuantificación Q4)" off
+      3 "llama3.2 1b (Cuantificación FP16)" off
+      4 "llama3.2 3b (Cuantificación FP16)" off
+      5 "llama3.1 8b (Cuantificación Q4)" off
+      6 "llama3.1 70b (Cuantificación Q4)" off
+      7 "llama3.1 8b-instruct-fp16 (Cuantificación FP16)" off
+      8 "llama3.1 70b-instruct-fp16 (Cuantificación FP16)" off
+      9 "mistral 7b (Cuantificación Q4)" off
+     10 "mistral 7b-instruct-fp16 (Cuantificación FP16)" off
+     11 "phi3 3.8b (Cuantificación Q4)" off
+     12 "phi3 14b (Cuantificación Q4)" off
+     13 "phi3 3.8b-mini-128k-instruct-f16 (Cuantificación FP16)" off
+     14 "phi3 14b-medium-128k-instruct-f16 (Cuantificación FP16)" off
+     15 "deepseek-coder-v2 16b (Cuantificación Q4)" off
+     16 "deepseek-coder-v2 236b (Cuantificación Q4)" off
+     17 "deepseek-coder-v2 16b-lite-instruct-fp16 (Cuantificación FP16)" off
+     18 "deepseek-coder-v2 236b-instruct-fp16 (Cuantificación FP16)" off
+     19 "gemma2 9b (Cuantificación Q4)" off
+     20 "gemma2 27b (Cuantificación Q4)" off
+     21 "gemma2 9b-instruct-fp16 (Cuantificación FP16)" off
+     22 "gemma2 27b-instruct-fp16 (Cuantificación FP16)" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -79,6 +83,114 @@
         case $choice in
 
           1)
+
+            echo ""
+            echo "  Instalando llama3.2:1b..."
+            echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=2
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull llama3.2:1b
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
+
+          ;;
+
+          2)
+
+            echo ""
+            echo "  Instalando llama3.2:3b..."
+            echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=3
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull llama3.2:3b
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:3b.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
+
+          ;;
+
+          3)
+
+            echo ""
+            echo "  Instalando llama3.2:1b-instruct-fp16..."
+            echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=3
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull llama3.2:1b-instruct-fp16
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b-instruct-fp16.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
+
+          ;;
+
+          4)
+
+            echo ""
+            echo "  Instalando llama3.2:3b-instruct-fp16..."
+            echo ""
+
+            # Definir el espacio libre necesario
+              vGBsLibresNecesarios=7
+              vEspacioNecesario=$(($vGBsLibresNecesarios * 1024 * 1024)) # Convertir a kilobytes (1GB = 1048576KB)
+
+            # Obtener el espacio libre en la partición raíz en kilobytes
+              vEspacioLibre=$(df / | grep '/' | tail -1 | sed -E 's/\s+/ /g' | cut -d ' ' -f 4)
+              vGBsLibres=$(echo "scale=2; $vEspacioLibre/1024/1024" | bc)
+
+            # Comprobar si hay espacio libre disponible
+              if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
+                ollama pull llama3.2:3b-instruct-fp16
+              else
+                echo ""
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:3b-instruct-fp16.${cFinColor}"
+                echo ""
+                echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
+                echo ""
+              fi
+
+          ;;
+
+          5)
 
             echo ""
             echo "  Instalando llama3.1:8b..."
@@ -105,7 +217,7 @@
 
           ;;
 
-          2)
+          6)
 
             echo ""
             echo "  Instalando llama3.1:70b..."
@@ -132,7 +244,7 @@
 
           ;;
 
-          3)
+          7)
 
             echo ""
             echo "  Instalando llama3.1:8b-instruct-fp16..."
@@ -159,7 +271,7 @@
 
           ;;
 
-          4)
+          8)
 
             echo ""
             echo "  Instalando llama3.1 70b-instruct-fp16..."
@@ -186,7 +298,7 @@
 
           ;;
 
-          5)
+          9)
 
             echo ""
             echo "  Instalando mistral:7b..."
@@ -213,7 +325,7 @@
 
           ;;
 
-          6)
+         10)
 
             echo ""
             echo "  Instalando mistral:7b-instruct-fp16..."
@@ -240,7 +352,7 @@
 
           ;;
 
-          7)
+         11)
 
             echo ""
             echo "  Instalando phi3:3.8b..."
@@ -267,7 +379,7 @@
 
           ;;
 
-          8)
+         12)
 
             echo ""
             echo "  Instalando phi3:14b..."
@@ -294,7 +406,7 @@
 
           ;;
 
-          9)
+         13)
 
             echo ""
             echo "  Instalando phi3:3.8b-mini-128k-instruct-f16..."
@@ -321,7 +433,7 @@
 
           ;;
 
-         10)
+         14)
 
             echo ""
             echo "  Instalando phi3:14b-medium-128k-instruct-f16..."
@@ -348,7 +460,7 @@
 
           ;;
 
-         11)
+         15)
 
             echo ""
             echo "  Instalando deepseek-coder-v2:16b..."
@@ -375,7 +487,7 @@
 
           ;;
 
-         12)
+         16)
 
             echo ""
             echo "  Instalando deepseek-coder-v2:236b..."
@@ -402,7 +514,7 @@
 
           ;;
 
-         13)
+         17)
 
             echo ""
             echo "  Instalando deepseek-coder-v2:16b-lite-instruct-fp16..."
@@ -429,7 +541,7 @@
 
           ;;
 
-         14)
+         18)
 
             echo ""
             echo "  Instalando deepseek-coder-v2:236b-instruct-fp16..."
@@ -457,7 +569,7 @@
           ;;
 
 
-         15)
+         19)
 
             echo ""
             echo "  Instalando gemma2:9b..."
@@ -484,7 +596,7 @@
 
           ;;
 
-         16)
+         20)
 
             echo ""
             echo "  Instalando gemma2:27b..."
@@ -511,7 +623,7 @@
 
           ;;
 
-         17)
+         21)
 
             echo ""
             echo "  Instalando gemma2:9b-instruct-fp16..."
@@ -538,7 +650,7 @@
 
           ;;
 
-         18)
+         22)
 
             echo ""
             echo "  Instalando gemma2:27b-instruct-fp16..."
