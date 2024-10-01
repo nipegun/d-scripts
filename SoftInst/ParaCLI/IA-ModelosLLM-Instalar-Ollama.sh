@@ -53,28 +53,64 @@
 # Crear el menú
   menu=(dialog --checklist "Marca los modelos que quieras instalar:" 22 96 16)
     opciones=(
-      1 "llama3.2 1b (Cuantificación Q4)" off
-      2 "llama3.2 3b (Cuantificación Q4)" off
-      3 "llama3.2 1b (Cuantificación FP16)" off
-      4 "llama3.2 3b (Cuantificación FP16)" off
-      5 "llama3.1 8b (Cuantificación Q4)" off
-      6 "llama3.1 70b (Cuantificación Q4)" off
-      7 "llama3.1 8b-instruct-fp16 (Cuantificación FP16)" off
-      8 "llama3.1 70b-instruct-fp16 (Cuantificación FP16)" off
-      9 "mistral 7b (Cuantificación Q4)" off
-     10 "mistral 7b-instruct-fp16 (Cuantificación FP16)" off
-     11 "phi3 3.8b (Cuantificación Q4)" off
-     12 "phi3 14b (Cuantificación Q4)" off
-     13 "phi3 3.8b-mini-128k-instruct-f16 (Cuantificación FP16)" off
-     14 "phi3 14b-medium-128k-instruct-f16 (Cuantificación FP16)" off
-     15 "deepseek-coder-v2 16b (Cuantificación Q4)" off
-     16 "deepseek-coder-v2 236b (Cuantificación Q4)" off
-     17 "deepseek-coder-v2 16b-lite-instruct-fp16 (Cuantificación FP16)" off
-     18 "deepseek-coder-v2 236b-instruct-fp16 (Cuantificación FP16)" off
-     19 "gemma2 9b (Cuantificación Q4)" off
-     20 "gemma2 27b (Cuantificación Q4)" off
-     21 "gemma2 9b-instruct-fp16 (Cuantificación FP16)" off
-     22 "gemma2 27b-instruct-fp16 (Cuantificación FP16)" off
+
+      1 "dolphin-mistral 7b-v2.8-q4_0 ( 4,3 GB en disco) ( 0.0GB VRAM)" off
+      2 "dolphin-mistral 7b-v2.8-q8_0 ( 7,9 GB en disco) (10.7GB VRAM)" off
+      3 "dolphin-mistral 7b-v2.8-fp16 (14.2 GB en disco) (15.4GB VRAM)" off
+
+      4 "llama3.2   1b-instruct-q4_0 (0.9GB en disco) (0.0GB VRAM)" off
+      5 "llama3.2   1b-instruct-q8_0 (1.5GB en disco) (0.0GB VRAM)" off
+      6 "llama3.2   1b-instruct-fp16 (2.7GB en disco) (0.0GB VRAM)" off
+
+      7 "llama3.2   3b-instruct-q4_0 (0.0GB en disco) (0.0GB VRAM)" off
+      8 "llama3.2   3b-instruct-q8_0 (0.0GB en disco) (0.0GB VRAM)" off
+      9 "llama3.2   3b-instruct-fp16 (0.0GB en disco) (0.0GB VRAM)" off
+      
+     10 "llama3.1   8b-instruct-q4_0 (0.0GB en disco) (0.0GB VRAM)" off
+     11 "llama3.1   8b-instruct-q8_0 (0.0GB en disco) (0.0GB VRAM)" off
+     12 "llama3.1   8b-instruct-fp16 (0.0GB en disco) (0.0GB VRAM)" off
+
+     13 "llama3.1  70b-instruct-q4_0 (0.0GB en disco) (0.0GB VRAM)" off
+     14 "llama3.1  70b-instruct-q8_0 (0.0GB en disco) (0.0GB VRAM)" off
+     15 "llama3.1  70b-instruct-fp16 (0.0GB en disco) (0.0GB VRAM)" off
+
+     16 "llama3.1 405b-instruct-q4_0 (0.0GB en disco) (0.0GB VRAM)" off
+     17 "llama3.1 405b-instruct-q8_0 (0.0GB en disco) (0.0GB VRAM)" off
+     18 "llama3.1 405b-instruct-fp16 (0.0GB en disco) (0.0GB VRAM)" off
+
+     19 "qwen2.5 -instruct-q4_0 (0.0GB en disco) (0.0GB VRAM)" off
+     20 "qwen2.5 -instruct-q8_0 (0.0GB en disco) (0.0GB VRAM)" off
+     21 "qwen2.5 -instruct-fp16 (0.0GB en disco) (0.0GB VRAM)" off
+
+     11 "mistral 7b-instruct-q4_0 (0.0GB en disco) (0.0GB VRAM)" off
+     11 "mistral 7b-instruct-q8_0 (0.0GB en disco) (0.0GB VRAM)" off
+     12 "mistral 7b-instruct-fp16 (0.0GB en disco) (0.0GB VRAM)" off
+
+     13 "phi3 3.8b-mini-128k-instruct-q4_0 (0.0GB en disco) (0.0GB VRAM)" off
+     13 "phi3 3.8b-mini-128k-instruct-q8_0 (0.0GB en disco) (0.0GB VRAM)" off
+     15 "phi3 3.8b-mini-128k-instruct-fp16 (0.0GB en disco) (0.0GB VRAM)" off
+
+     14 "phi3 14b-medium-128k-instruct-q4_0 (0.0GB en disco) (0.0GB VRAM)" off
+     14 "phi3 14b-medium-128k-instruct-q8_0 (0.0GB en disco) (0.0GB VRAM)" off
+     16 "phi3 14b-medium-128k-instruct-fp16 (0.0GB en disco) (0.0GB VRAM)" off
+     
+     17 "deepseek-coder-v2 16b-lite-instruct-q4_0 (0.0GB en disco) (0.0GB VRAM)" off
+     17 "deepseek-coder-v2 16b-lite-instruct-q8_0 (0.0GB en disco) (0.0GB VRAM)" off
+     19 "deepseek-coder-v2 16b-lite-instruct-fp16 (0.0GB en disco) (0.0GB VRAM)" off
+     
+     18 "deepseek-coder-v2 236b-instruct-q4_0 (0.0GB en disco) (0.0GB VRAM)" off
+     18 "deepseek-coder-v2 236b-instruct-q8_0 (0.0GB en disco) (0.0GB VRAM)" off
+     20 "deepseek-coder-v2 236b-instruct-fp16 (0.0GB en disco) (0.0GB VRAM)" off
+     
+     21 "gemma2 9b-instruct-q4_0 (0.0GB en disco) (0.0GB VRAM)" off
+     21 "gemma2 9b-instruct-q8_0 (0.0GB en disco) (0.0GB VRAM)" off
+     23 "gemma2 9b-instruct-fp16 (0.0GB en disco) (0.0GB VRAM)" off
+     
+     22 "gemma2 27b-instruct-q4_0 (0.0GB en disco) (0.0GB VRAM)" off
+     22 "gemma2 27b-instruct-q8_0 (0.0GB en disco) (0.0GB VRAM)" off
+     24 "gemma2 27b-instruct-fp16 (0.0GB en disco) (0.0GB VRAM)" off
+
+
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
