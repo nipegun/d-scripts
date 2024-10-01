@@ -70,45 +70,52 @@
      11 "llama3.1   8b-instruct-q8_0 ( 8,6 GB en disco) (11,0 GB en VRAM)" off
      12 "llama3.1   8b-instruct-fp16 (16,2 GB en disco) (15,8 GB en VRAM)" off
 
-     13 "llama3.1  70b-instruct-q4_0 (0,0GB en disco) (0,0GB VRAM)" off
-     14 "llama3.1  70b-instruct-q8_0 (0,0GB en disco) (0,0GB VRAM)" off
-     15 "llama3.1  70b-instruct-fp16 (0,0GB en disco) (0,0GB VRAM)" off
 
-     16 "llama3.1 405b-instruct-q4_0 (0,0GB en disco) (0,0GB VRAM)" off
-     17 "llama3.1 405b-instruct-q8_0 (0,0GB en disco) (0,0GB VRAM)" off
-     18 "llama3.1 405b-instruct-fp16 (0,0GB en disco) (0,0GB VRAM)" off
 
-     19 "qwen2.5 -instruct-q4_0 (0,0GB en disco) (0,0GB VRAM)" off
-     20 "qwen2.5 -instruct-q8_0 (0,0GB en disco) (0,0GB VRAM)" off
-     21 "qwen2.5 -instruct-fp16 (0,0GB en disco) (0,0GB VRAM)" off
+     13 "llama3.1  70b-instruct-q4_0 ( 40,0 GB en disco) (x,x GB en VRAM)" off
+     14 "llama3.1  70b-instruct-q8_0 ( 75,0 GB en disco) (x,x GB en VRAM)" off
+     15 "llama3.1  70b-instruct-fp16 (142,0 GB en disco) (x,x GB en VRAM)" off
 
-     11 "mistral 7b-instruct-q4_0 (0,0GB en disco) (0,0GB VRAM)" off
-     11 "mistral 7b-instruct-q8_0 (0,0GB en disco) (0,0GB VRAM)" off
-     12 "mistral 7b-instruct-fp16 (0,0GB en disco) (0,0GB VRAM)" off
+     16 "llama3.1 405b-instruct-q4_0 (230,0 GB en disco) (x,x GB en VRAM)" off
+     17 "llama3.1 405b-instruct-q8_0 (433,0 GB en disco) (x,x GB en VRAM)" off
+     18 "llama3.1 405b-instruct-fp16 (815,0 GB en disco) (x,x GB en VRAM)" off
 
-     13 "phi3 3.8b-mini-128k-instruct-q4_0 (0,0GB en disco) (0,0GB VRAM)" off
-     13 "phi3 3.8b-mini-128k-instruct-q8_0 (0,0GB en disco) (0,0GB VRAM)" off
-     15 "phi3 3.8b-mini-128k-instruct-fp16 (0,0GB en disco) (0,0GB VRAM)" off
 
-     14 "phi3 14b-medium-128k-instruct-q4_0 (0,0GB en disco) (0,0GB VRAM)" off
-     14 "phi3 14b-medium-128k-instruct-q8_0 (0,0GB en disco) (0,0GB VRAM)" off
-     16 "phi3 14b-medium-128k-instruct-fp16 (0,0GB en disco) (0,0GB VRAM)" off
+
+     19 "qwen2.5 -instruct-q4_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     20 "qwen2.5 -instruct-q8_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     21 "qwen2.5 -instruct-fp16 (x,x GB en disco) (x,x GB en VRAM)" off
+
+
+
+
+     11 "mistral 7b-instruct-q4_0 ( 4,2 GB en disco) (x,x GB en VRAM)" off
+     11 "mistral 7b-instruct-q8_0 ( 7,8 GB en disco) (x,x GB en VRAM)" off
+     12 "mistral 7b-instruct-fp16 (14,2 GB en disco) (x,x GB en VRAM)" off
+
+     13 "phi3 3.8b-mini-128k-instruct-q4_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     13 "phi3 3.8b-mini-128k-instruct-q8_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     15 "phi3 3.8b-mini-128k-instruct-fp16 (x,x GB en disco) (x,x GB en VRAM)" off
+
+     14 "phi3 14b-medium-128k-instruct-q4_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     14 "phi3 14b-medium-128k-instruct-q8_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     16 "phi3 14b-medium-128k-instruct-fp16 (x,x GB en disco) (x,x GB en VRAM)" off
      
-     17 "deepseek-coder-v2 16b-lite-instruct-q4_0 (0,0GB en disco) (0,0GB VRAM)" off
-     17 "deepseek-coder-v2 16b-lite-instruct-q8_0 (0,0GB en disco) (0,0GB VRAM)" off
-     19 "deepseek-coder-v2 16b-lite-instruct-fp16 (0,0GB en disco) (0,0GB VRAM)" off
+     17 "deepseek-coder-v2 16b-lite-instruct-q4_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     17 "deepseek-coder-v2 16b-lite-instruct-q8_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     19 "deepseek-coder-v2 16b-lite-instruct-fp16 (x,x GB en disco) (x,x GB en VRAM)" off
      
-     18 "deepseek-coder-v2 236b-instruct-q4_0 (0,0GB en disco) (0,0GB VRAM)" off
-     18 "deepseek-coder-v2 236b-instruct-q8_0 (0,0GB en disco) (0,0GB VRAM)" off
-     20 "deepseek-coder-v2 236b-instruct-fp16 (0,0GB en disco) (0,0GB VRAM)" off
+     18 "deepseek-coder-v2 236b-instruct-q4_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     18 "deepseek-coder-v2 236b-instruct-q8_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     20 "deepseek-coder-v2 236b-instruct-fp16 (x,x GB en disco) (x,x GB en VRAM)" off
      
-     21 "gemma2 9b-instruct-q4_0 (0,0GB en disco) (0,0GB VRAM)" off
-     21 "gemma2 9b-instruct-q8_0 (0,0GB en disco) (0,0GB VRAM)" off
-     23 "gemma2 9b-instruct-fp16 (0,0GB en disco) (0,0GB VRAM)" off
+     21 "gemma2 9b-instruct-q4_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     21 "gemma2 9b-instruct-q8_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     23 "gemma2 9b-instruct-fp16 (x,x GB en disco) (x,x GB en VRAM)" off
      
-     22 "gemma2 27b-instruct-q4_0 (0,0GB en disco) (0,0GB VRAM)" off
-     22 "gemma2 27b-instruct-q8_0 (0,0GB en disco) (0,0GB VRAM)" off
-     24 "gemma2 27b-instruct-fp16 (0,0GB en disco) (0,0GB VRAM)" off
+     22 "gemma2 27b-instruct-q4_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     22 "gemma2 27b-instruct-q8_0 (x,x GB en disco) (x,x GB en VRAM)" off
+     24 "gemma2 27b-instruct-fp16 (x,x GB en disco) (x,x GB en VRAM)" off
 
 
     )
