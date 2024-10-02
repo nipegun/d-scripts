@@ -42,8 +42,7 @@
     echo ""
     echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
-    apt-get -y update
-    apt-get -y install dialog
+    apt-get -y update && apt-get -y install dialog
     echo ""
   fi
 
@@ -81,7 +80,7 @@
           1)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.2:1b-instruct-q4_0..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -94,10 +93,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.2:1b-instruct-q4_0
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b-instruct-q4_0.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -108,7 +107,7 @@
           2)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.2:1b-instruct-q8_0..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -121,10 +120,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.2:1b-instruct-q8_0
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b-instruct-q8_0.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -135,7 +134,7 @@
           3)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.2:1b-instruct-fp16..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -148,10 +147,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.2:1b-instruct-fp16
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b-instruct-fp16.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -162,7 +161,7 @@
           4)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.2:3b-instruct-q4_0..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -175,10 +174,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.2:3b-instruct-q4_0
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:3b-instruct-q4_0.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -189,7 +188,7 @@
           5)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.2:3b-instruct-q8_0..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -202,10 +201,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.2:3b-instruct-q8_0
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:3b-instruct-q8_0.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -216,7 +215,7 @@
           6)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.2:3b-instruct-fp16..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -229,10 +228,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.2:3b-instruct-fp16
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:3b-instruct-fp16.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -243,7 +242,7 @@
           7)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.1:8b-instruct-q4_0 ..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -256,10 +255,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.1:8b-instruct-q4_0 
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.1:8b-instruct-q4_0.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -270,7 +269,7 @@
           8)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.1:8b-instruct-q8_0..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -283,10 +282,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.1:8b-instruct-q8_0
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.1:8b-instruct-q8_0.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -297,7 +296,7 @@
           9)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.1:8b-instruct-fp16..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -310,10 +309,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.1:8b-instruct-fp16
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.1:8b-instruct-fp16.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -324,7 +323,7 @@
          10)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.1:70b-instruct-q4_0..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -337,10 +336,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.1:70b-instruct-q4_0
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.1:70b-instruct-q4_0.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -351,7 +350,7 @@
          11)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.1:70b-instruct-q8_0..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -364,10 +363,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.1:70b-instruct-q8_0
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.1:70b-instruct-q8_0.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -378,7 +377,7 @@
          12)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.1:70b-instruct-fp16..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -391,10 +390,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.1:70b-instruct-fp16
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.1:70b-instruct-fp16.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -405,7 +404,7 @@
          13)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.1:405b-instruct-q4_0..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -418,10 +417,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.1:405b-instruct-q4_0
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.1:405b-instruct-q4_0.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -432,7 +431,7 @@
          14)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  Instalando llama3.1:405b-instruct-q8_0..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -445,10 +444,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.1:405b-instruct-q8_0
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.1:405b-instruct-q8_0.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
@@ -459,7 +458,7 @@
          15)
 
             echo ""
-            echo "  Instalando llama3.2:1b..."
+            echo "  llama3.1:405b-instruct-fp16..."
             echo ""
 
             # Definir el espacio libre necesario
@@ -472,10 +471,10 @@
 
             # Comprobar si hay espacio libre disponible
               if [ "$vEspacioLibre" -ge "$vEspacioNecesario" ]; then
-                ollama pull llama3.2:1b
+                ollama pull llama3.1:405b-instruct-fp16
               else
                 echo ""
-                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.2:1b.${cFinColor}"
+                echo -e "${cColorRojo}    No hay suficiente espacio libre para instalar el modelo llama3.1:405b-instruct-fp16.${cFinColor}"
                 echo ""
                 echo -e "${cColorRojo}      Hacen falta $vGBsLibresNecesarios GB y hay sólo $vGBsLibres GB.${cFinColor}"
                 echo ""
