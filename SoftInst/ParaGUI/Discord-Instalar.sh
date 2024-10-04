@@ -12,9 +12,23 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Discord-Instalar.sh | bash
 # ----------
 
-cColorRojo='\033[1;31m'
-cColorVerde='\033[1;32m'
-cFinColor='\033[0m'
+# Definir constantes de color
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
+  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
+    echo ""
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
+    echo ""
+    exit
+  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -36,35 +50,48 @@ cFinColor='\033[0m'
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de Discord para Debian 7 (Wheezy)..."  
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  echo "  Iniciando el script de instalación de Discord para Debian 8 (Jessie)..."  
+  echo "  Iniciando el script de instalación de Discord para Debian 13 (x)..."  
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $cVerSO == "9" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de Discord para Debian 9 (Stretch)..."  
+  echo "  Iniciando el script de instalación de Discord para Debian 12 (Bookworm)..."  
   echo ""
 
+  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install wget
+      echo ""
+    fi
+  mkdir -p /root/SoftInst/Discord
+  wget -q --no-check-certificate -O /root/SoftInst/Discord/discord.deb https://discordapp.com/api/download?platform=linux&format=deb
+  apt-get -y install libappindicator1
+  apt -y install /root/SoftInst/Discord/discord.deb
+
+elif [ $cVerSO == "11" ]; then
+
   echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Iniciando el script de instalación de Discord para Debian 11 (Bullseye)..."  
   echo ""
+
+  apt-get -y update
+  apt-get -y install gdebi
+  apt-get -y install wget
+  mkdir -p /root/SoftInst/Discord
+  wget -q --no-check-certificate -O /root/SoftInst/Discord/discord.deb https://discordapp.com/api/download?platform=linux&format=deb
+  apt-get -y install libappindicator1
+  gdebi /root/SoftInst/Discord/discord.deb
 
 elif [ $cVerSO == "10" ]; then
 
@@ -80,19 +107,35 @@ elif [ $cVerSO == "10" ]; then
   apt-get -y install libappindicator1
   gdebi /root/SoftInst/Discord/discord.deb
 
-elif [ $cVerSO == "11" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de Discord para Debian 11 (Bullseye)..."  
+  echo "  Iniciando el script de instalación de Discord para Debian 9 (Stretch)..."  
   echo ""
 
-  apt-get -y update
-  apt-get -y install gdebi
-  apt-get -y install wget
-  mkdir -p /root/SoftInst/Discord
-  wget -q --no-check-certificate -O /root/SoftInst/Discord/discord.deb https://discordapp.com/api/download?platform=linux&format=deb
-  apt-get -y install libappindicator1
-  gdebi /root/SoftInst/Discord/discord.deb
+  echo ""
+  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "8" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de Discord para Debian 8 (Jessie)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de Discord para Debian 7 (Wheezy)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
 
 fi
 
