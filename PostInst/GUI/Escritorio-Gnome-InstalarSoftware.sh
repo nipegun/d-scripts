@@ -313,6 +313,7 @@
       apt-get -y install gnome-shell-extension-impatience
       apt-get -y install gnome-shell-extension-hide-activities
       apt-get -y install gnome-shell-extension-easyscreencast
+      apt-get -y install gnome-shell-extension-dashtodock
       # Atajos de teclado
         echo ""
         echo "    Instalando atajos de teclado personalizados..."
