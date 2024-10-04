@@ -304,31 +304,6 @@
       echo ""
       apt-get -y install torbrowser-launcher
 
-    # Específicas para Gnome
-      echo ""
-      echo "  Instalando herramientas específicas para Gnome..."
-      echo ""
-      apt-get -y install gnome-tweaks
-      apt-get -y install gnome-shell-extension-desktop-icons-ng
-      apt-get -y install gnome-shell-extension-impatience
-      apt-get -y install gnome-shell-extension-hide-activities
-      apt-get -y install gnome-shell-extension-easyscreencast
-      apt-get -y install gnome-shell-extension-dashtodock
-      # Atajos de teclado
-        echo ""
-        echo "    Instalando atajos de teclado personalizados..."
-        echo ""
-        # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-          if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-            echo ""
-            echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-            echo ""
-            apt-get -y update && apt-get -y install curl
-            echo ""
-          fi
-        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-AtajosDeTeclado.txt -o /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
-        dconf load /org/gnome/settings-daemon/plugins/media-keys/ < /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
-
   elif [ $cVerSO == "11" ]; then
 
     echo ""
