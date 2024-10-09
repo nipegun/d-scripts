@@ -77,9 +77,97 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de securización de Sistema Operativo para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+  # Definir fecha de ejecución del script
+    cFechaDeEjec=$(date +a%Ym%md%d@%T)
+
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
+
+  # Crear el menú
+    #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+    menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+      opciones=(
+        1 "Impedir a usuarios acceder a carpetas home de otros usuarios" on
+        2 "Enjaular usuarios que que conecten mediante SSH" off
+        3 "Comrobar permisos de archivos críticos del sistema" off
+        4 "Opción 4" off
+        5 "Opción 5" off
+      )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+    #clear
+
+    for choice in $choices
+      do
+        case $choice in
+
+          1)
+
+            echo ""
+            echo "  Opción 1..."
+            echo ""
+
+          ;;
+
+          2)
+
+            echo ""
+            echo "  Enjaulando usuarios que se conecten mediante SSH..."
+            echo ""
+
+            # Crear la carpeta que servirá para la jaula
+              mkdir -p /home/jaula
+              chown root:root /home/jaula
+            # Crear el grupo para hacer match
+              addgroup enjaulados
+            # Agregar el usuaio al grupo enjaulados
+            
+              usermod -aG enjaulados nombredeusuario
+            # Modificar sshhd_config
+              # Primero hacer copia de seguridad
+                cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak.$cFechaDeEjec
+              # Agregar match de grupo
+                echo "Match Group enjaulados"   > /etc/ssh/sshd_config.d/enjaulados.conf
+                echo "  ChrootDirectory /home" >> /etc/ssh/sshd_config.d/enjaulados.conf
+                echo "  AllowTCPForwarding no" >> /etc/ssh/sshd_config.d/enjaulados.conf
+                echo "  X11Forwarding no"      >> /etc/ssh/sshd_config.d/enjaulados.conf
+              # Reiniciar el servicio SSH
+                service ssh restart
+
+          ;;
+
+          3)
+
+            echo ""
+            echo "  Opción 3..."
+            echo ""
+
+          ;;
+
+          4)
+
+            echo ""
+            echo "  Opción 4..."
+            echo ""
+
+          ;;
+
+          5)
+
+            echo ""
+            echo "  Opción 5..."
+            echo ""
+
+          ;;
+
+      esac
+
+  done
 
   elif [ $cVerSO == "11" ]; then
 
