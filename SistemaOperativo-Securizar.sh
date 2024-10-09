@@ -141,15 +141,19 @@
             # Crear carpetas
               mkdir -p /jaula/{bin,lib,lib64}
             # Copiar Bash y librerías
-              cp /bin/bash /jaula/bin/bash
-              # Librerías sin enlaces simbólicos
+              cp /bin/bash /jaula/bin/
+              # Librerías 32 bits
                 vLibrerias32bits=$(ldd /bin/bash | grep -v '/lib64/' | cut -d' ' -f1)
-                while read -r line
-                  do
-                  echo $line
-                    #cp /lib/x86_64-linux-gnu/"$line" /jaula/lib/
-                  done < <($vLibrerias32bits)
-
+                while read -r archivo; do
+                  echo "$archivo"
+                  cp /lib/x86_64-linux-gnu/"$archivo" /jaula/lib/
+                done <<< "$vLibrerias32bits"
+              # Librerías 64 bits
+                vLibrerias64bits=$(ldd /bin/bash | grep '/lib64/' | cut -d' ' -f1)
+                while read -r archivo; do
+                  echo "$archivo"
+                  cp "$archivo" /jaula/lib64/
+                done <<< "$vLibrerias64bits"
             # Modificar sshhd_config
               # Primero hacer copia de seguridad
                 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak.$cFechaDeEjec
