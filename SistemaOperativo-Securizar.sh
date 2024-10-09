@@ -93,7 +93,7 @@
     #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
       opciones=(
-        1 "Impedir a usuarios acceder a carpetas home de otros usuarios" on
+        1 "Impedir a usuarios acceder a la carpeta home de otros usuarios" on
         2 "Enjaular usuarios que que conecten mediante SSH" off
         3 "Comrobar permisos de archivos críticos del sistema" off
         4 "Opción 4" off
@@ -109,9 +109,11 @@
           1)
 
             echo ""
-            echo "  Opción 1..."
+            echo "  Impidiendo a los usuarios el acceso a la carpeta home de otros usuarios..."
             echo ""
-
+            find /home/ -type d -exec chmod 750 {} \;
+            find /home/ -type f -exec chmod 660 {} \;
+          
           ;;
 
           2)
@@ -120,22 +122,42 @@
             echo "  Enjaulando usuarios que se conecten mediante SSH..."
             echo ""
 
+
             # Crear la carpeta que servirá para la jaula
-              mkdir -p /home/jaula
-              chown root:root /home/jaula
-            # Crear el grupo para hacer match
+              mkdir -p /jaula/home
+              chown root:root /jaula/home
+            # Agregar el usuario bot
+              useradd bot -d /jaula/home/bot
+            # Agregar una contraseña al usuario
+              passwd bot
+            # Crear la carpeta para el usuario
+              mkdir -p /jaula/home/bot
+            # Corregir permisos
+              chown bot:bot /jaula/home/bot
+            # Crear el grupo pàra enjaulados
               addgroup enjaulados
-            # Agregar el usuaio al grupo enjaulados
-            
-              usermod -aG enjaulados nombredeusuario
+            # Agregar usuario al grupo
+              usermod -aG enjaulados bot
+            # Crear carpetas
+              mkdir -p /jaula/{bin,lib,lib64}
+            # Copiar Bash y librerías
+              cp /bin/bash /jaula/bin/bash
+              # Librerías sin enlaces simbólicos
+                vLibrerias32bits=$(ldd /bin/bash | grep -v '/lib64/' | cut -d' ' -f1)
+                while read -r line
+                  do
+                  echo $line
+                    #cp /lib/x86_64-linux-gnu/"$line" /jaula/lib/
+                  done < <($vLibrerias32bits)
+
             # Modificar sshhd_config
               # Primero hacer copia de seguridad
                 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak.$cFechaDeEjec
               # Agregar match de grupo
-                echo "Match Group enjaulados"   > /etc/ssh/sshd_config.d/enjaulados.conf
-                echo "  ChrootDirectory /home" >> /etc/ssh/sshd_config.d/enjaulados.conf
-                echo "  AllowTCPForwarding no" >> /etc/ssh/sshd_config.d/enjaulados.conf
-                echo "  X11Forwarding no"      >> /etc/ssh/sshd_config.d/enjaulados.conf
+                echo "Match Group enjaulados"         > /etc/ssh/sshd_config.d/enjaulados.conf
+                echo "  ChrootDirectory /jaula/home" >> /etc/ssh/sshd_config.d/enjaulados.conf
+                echo "  AllowTCPForwarding no"       >> /etc/ssh/sshd_config.d/enjaulados.conf
+                echo "  X11Forwarding no"            >> /etc/ssh/sshd_config.d/enjaulados.conf
               # Reiniciar el servicio SSH
                 service ssh restart
 
@@ -144,8 +166,16 @@
           3)
 
             echo ""
-            echo "  Opción 3..."
+            echo "  Enjaular un único usuario que se conecta por SSH..."
             echo ""
+
+            echo "Match User NombreDeUsuario"               > /etc/ssh/sshd_config.d/jaulaANombreDeUsuario.conf
+            echo "  ChrootDirectory /home/NombreDeUsuario" >> /etc/ssh/sshd_config.d/jaulaANombreDeUsuario.conf
+            echo "  AllowTCPForwarding no"                 >> /etc/ssh/sshd_config.d/jaulaANombreDeUsuario.conf
+            echo "  X11Forwarding no"                      >> /etc/ssh/sshd_config.d/jaulaANombreDeUsuario.conf
+            chown root:root /home/NombreDeUsuario
+            chmod 755 /home/NombreDeUsuario
+            service ssh restart
 
           ;;
 
