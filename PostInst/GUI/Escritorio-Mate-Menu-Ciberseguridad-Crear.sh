@@ -114,81 +114,86 @@
             echo "  Crear el menú con lanzadores, subcarpetas y carpetas..."
             echo ""
 
-            # Agregar la sección categorías
-              echo '<Menu>'                                                                    > ~/.config/menus/mate-settings.menu 
-              echo '  <Name>Desktop</Name>'                                                   >> ~/.config/menus/mate-settings.menu 
-              echo '  <MergeFile type="parent">/etc/xdg/menus/mate-settings.menu</MergeFile>' >> ~/.config/menus/mate-settings.menu 
-              echo '</Menu>'                                                                  >> ~/.config/menus/mate-settings.menu 
+            # Agregar la sección a categorías
+              rm -f ~/.config/menus/mate-settings.menu
+              echo '<Menu>'                                                                    > ~/.config/menus/mate-settings.menu
+              echo '  <Name>Desktop</Name>'                                                   >> ~/.config/menus/mate-settings.menu
+              echo '  <MergeFile type="parent">/etc/xdg/menus/mate-settings.menu</MergeFile>' >> ~/.config/menus/mate-settings.menu
+              echo '</Menu>'                                                                  >> ~/.config/menus/mate-settings.menu
 
-              echo '<Menu>'                                                                        > /.config/menus/mate-applications.menu
-              echo '  <Name>Applications</Name>'                                                  >> /.config/menus/mate-applications.menu
-              echo '  <MergeFile type="parent">/etc/xdg/menus/mate-applications.menu</MergeFile>' >> /.config/menus/mate-applications.menu
-              echo '  <DefaultLayout inline="false"/>'                                            >> /.config/menus/mate-applications.menu
-              echo ''                                                                             >> /.config/menus/mate-applications.menu
-              echo '  <Menu>'                                                                     >> /.config/menus/mate-applications.menu
-              echo '    <Name>Cybersecurity</Name>'                                               >> /.config/menus/mate-applications.menu
-              echo '    <Directory>cybersecurity.directory</Directory>'                           >> /.config/menus/mate-applications.menu
-              echo ''                                                                             >> /.config/menus/mate-applications.menu
-              echo '    <Menu>'                                                                   >> /.config/menus/mate-applications.menu
-              echo '      <Name>cybersecurity-forensics</Name>'                                   >> /.config/menus/mate-applications.menu
-              echo '      <Directory>cybersecurity-forensics.directory</Directory>'               >> /.config/menus/mate-applications.menu
-              echo ''                                                                             >> /.config/menus/mate-applications.menu
-              echo '      <Include>'                                                              >> /.config/menus/mate-applications.menu
-              echo '        <Filename>dd.desktop</Filename>'                                      >> /.config/menus/mate-applications.menu
-              echo '      </Include>'                                                             >> /.config/menus/mate-applications.menu
-              echo '      <Layout>'                                                               >> /.config/menus/mate-applications.menu
-              echo '        <Merge type="menus"/>'                                                >> /.config/menus/mate-applications.menu
-              echo '        <Filename>dd.desktop</Filename>'                                      >> /.config/menus/mate-applications.menu
-              echo '        <Merge type="files"/>'                                                >> /.config/menus/mate-applications.menu
-              echo '      </Layout>'                                                              >> /.config/menus/mate-applications.menu
-              echo ''                                                                             >> /.config/menus/mate-applications.menu
-              echo '    </Menu>'                                                                  >> /.config/menus/mate-applications.menu
-              echo '    <DefaultLayout inline="false"/>'                                          >> /.config/menus/mate-applications.menu
-              echo ''                                                                             >> /.config/menus/mate-applications.menu
-              echo '    <Menu>'                                                                   >> /.config/menus/mate-applications.menu
-              echo '      <Name>cybersecurity-datarecovery</Name>'                                >> /.config/menus/mate-applications.menu
-              echo '      <Directory>cybersecurity-datarecovery.directory</Directory>'            >> /.config/menus/mate-applications.menu
-              echo ''                                                                             >> /.config/menus/mate-applications.menu
-              echo '      <Include>'                                                              >> /.config/menus/mate-applications.menu
-              echo '        <Filename>testdisk.desktop</Filename>'                                >> /.config/menus/mate-applications.menu
-              echo '      </Include>'                                                             >> /.config/menus/mate-applications.menu
-              echo '      <Layout>'                                                               >> /.config/menus/mate-applications.menu
-              echo '        <Merge type="menus"/>'                                                >> /.config/menus/mate-applications.menu
-              echo '        <Filename>testdisk.desktop</Filename>'                                >> /.config/menus/mate-applications.menu
-              echo '        <Merge type="files"/>'                                                >> /.config/menus/mate-applications.menu
-              echo '      </Layout>'                                                              >> /.config/menus/mate-applications.menu
-              echo ''                                                                             >> /.config/menus/mate-applications.menu
-              echo '    </Menu>'                                                                  >> /.config/menus/mate-applications.menu
-              echo '    <Include>'                                                                >> /.config/menus/mate-applications.menu
-              echo '      <Filename>gparted.desktop</Filename>'                                   >> /.config/menus/mate-applications.menu
-              echo '    </Include>'                                                               >> /.config/menus/mate-applications.menu
-              echo '    <Layout>'                                                                 >> /.config/menus/mate-applications.menu
-              echo '      <Merge type="menus"/>'                                                  >> /.config/menus/mate-applications.menu
-              echo '      <Menuname>cybersecurity-forensics</Menuname>'                           >> /.config/menus/mate-applications.menu
-              echo '      <Menuname>cybersecurity-datarecovery</Menuname>'                        >> /.config/menus/mate-applications.menu
-              echo '      <Filename>gparted.desktop</Filename>'                                   >> /.config/menus/mate-applications.menu
-              echo '      <Merge type="files"/>'                                                  >> /.config/menus/mate-applications.menu
-              echo '    </Layout>'                                                                >> /.config/menus/mate-applications.menu
-              echo ''                                                                             >> /.config/menus/mate-applications.menu
-              echo '  </Menu>'                                                                    >> /.config/menus/mate-applications.menu
-              echo '  <Layout>'                                                                   >> /.config/menus/mate-applications.menu
-              echo '    <Merge type="menus"/>'                                                    >> /.config/menus/mate-applications.menu
-              echo '    <Menuname>Universal Access</Menuname>'                                    >> /.config/menus/mate-applications.menu
-              echo '    <Menuname>Accessories</Menuname>'                                         >> /.config/menus/mate-applications.menu
-              echo '    <Menuname>Collection</Menuname>'                                          >> /.config/menus/mate-applications.menu
-              echo '    <Menuname>Education</Menuname>'                                           >> /.config/menus/mate-applications.menu
-              echo '    <Menuname>Graphics</Menuname>'                                            >> /.config/menus/mate-applications.menu
-              echo '    <Menuname>System</Menuname>'                                              >> /.config/menus/mate-applications.menu
-              echo '    <Menuname>Internet</Menuname>'                                            >> /.config/menus/mate-applications.menu
-              echo '    <Menuname>Games</Menuname>'                                               >> /.config/menus/mate-applications.menu
-              echo '    <Menuname>Office</Menuname>'                                              >> /.config/menus/mate-applications.menu
-              echo '    <Menuname>Other</Menuname>'                                               >> /.config/menus/mate-applications.menu
-              echo '    <Menuname>Development</Menuname>'                                         >> /.config/menus/mate-applications.menu
-              echo '    <Menuname>Multimedia</Menuname>'                                          >> /.config/menus/mate-applications.menu
-              echo '    <Menuname>Cybersecurity</Menuname>'                                       >> /.config/menus/mate-applications.menu
-              echo '    <Merge type="files"/>'                                                    >> /.config/menus/mate-applications.menu
-              echo '  </Layout>'                                                                  >> /.config/menus/mate-applications.menu
-              echo '</Menu>'                                                                      >> /.config/menus/mate-applications.menu
+              rm -f /.config/menus/mate-applications.menu
+              echo '<Menu>'                                                                        > ~/.config/menus/mate-applications.menu
+              echo '  <Name>Applications</Name>'                                                  >> ~/.config/menus/mate-applications.menu
+              echo '  <MergeFile type="parent">/etc/xdg/menus/mate-applications.menu</MergeFile>' >> ~/.config/menus/mate-applications.menu
+              echo '  <DefaultLayout inline="false"/>'                                            >> ~/.config/menus/mate-applications.menu
+              echo ''                                                                             >> ~/.config/menus/mate-applications.menu
+              echo '  <Menu>'                                                                     >> ~/.config/menus/mate-applications.menu
+              echo '    <Name>Cybersecurity</Name>'                                               >> ~/.config/menus/mate-applications.menu
+              echo '    <Directory>cybersecurity.directory</Directory>'                           >> ~/.config/menus/mate-applications.menu
+              echo ''                                                                             >> ~/.config/menus/mate-applications.menu
+              echo '    <Menu>'                                                                   >> ~/.config/menus/mate-applications.menu
+              echo '      <Name>cybersecurity-forensics</Name>'                                   >> ~/.config/menus/mate-applications.menu
+              echo '      <Directory>cybersecurity-forensics.directory</Directory>'               >> ~/.config/menus/mate-applications.menu
+              echo ''                                                                             >> ~/.config/menus/mate-applications.menu
+              echo '      <Include>'                                                              >> ~/.config/menus/mate-applications.menu
+              echo '        <Filename>dd.desktop</Filename>'                                      >> ~/.config/menus/mate-applications.menu
+              echo '      </Include>'                                                             >> ~/.config/menus/mate-applications.menu
+              echo '      <Layout>'                                                               >> ~/.config/menus/mate-applications.menu
+              echo '        <Merge type="menus"/>'                                                >> ~/.config/menus/mate-applications.menu
+              echo '        <Filename>dd.desktop</Filename>'                                      >> ~/.config/menus/mate-applications.menu
+              echo '        <Merge type="files"/>'                                                >> ~/.config/menus/mate-applications.menu
+              echo '      </Layout>'                                                              >> ~/.config/menus/mate-applications.menu
+              echo ''                                                                             >> ~/.config/menus/mate-applications.menu
+              echo '    </Menu>'                                                                  >> ~/.config/menus/mate-applications.menu
+              echo '    <DefaultLayout inline="false"/>'                                          >> ~/.config/menus/mate-applications.menu
+              echo ''                                                                             >> ~/.config/menus/mate-applications.menu
+              echo '    <Menu>'                                                                   >> ~/.config/menus/mate-applications.menu
+              echo '      <Name>cybersecurity-datarecovery</Name>'                                >> ~/.config/menus/mate-applications.menu
+              echo '      <Directory>cybersecurity-datarecovery.directory</Directory>'            >> ~/.config/menus/mate-applications.menu
+              echo ''                                                                             >> ~/.config/menus/mate-applications.menu
+              echo '      <Include>'                                                              >> ~/.config/menus/mate-applications.menu
+              echo '        <Filename>testdisk.desktop</Filename>'                                >> ~/.config/menus/mate-applications.menu
+              echo '      </Include>'                                                             >> ~/.config/menus/mate-applications.menu
+              echo '      <Layout>'                                                               >> ~/.config/menus/mate-applications.menu
+              echo '        <Merge type="menus"/>'                                                >> ~/.config/menus/mate-applications.menu
+              echo '        <Filename>testdisk.desktop</Filename>'                                >> ~/.config/menus/mate-applications.menu
+              echo '        <Merge type="files"/>'                                                >> ~/.config/menus/mate-applications.menu
+              echo '      </Layout>'                                                              >> ~/.config/menus/mate-applications.menu
+              echo ''                                                                             >> ~/.config/menus/mate-applications.menu
+              echo '    </Menu>'                                                                  >> ~/.config/menus/mate-applications.menu
+              echo '    <Include>'                                                                >> ~/.config/menus/mate-applications.menu
+              echo '      <Filename>gparted.desktop</Filename>'                                   >> ~/.config/menus/mate-applications.menu
+              echo '    </Include>'                                                               >> ~/.config/menus/mate-applications.menu
+              echo '    <Layout>'                                                                 >> ~/.config/menus/mate-applications.menu
+              echo '      <Merge type="menus"/>'                                                  >> ~/.config/menus/mate-applications.menu
+              echo '      <Menuname>cybersecurity-forensics</Menuname>'                           >> ~/.config/menus/mate-applications.menu
+              echo '      <Menuname>cybersecurity-datarecovery</Menuname>'                        >> ~/.config/menus/mate-applications.menu
+              echo '      <Filename>gparted.desktop</Filename>'                                   >> ~/.config/menus/mate-applications.menu
+              echo '      <Merge type="files"/>'                                                  >> ~/.config/menus/mate-applications.menu
+              echo '    </Layout>'                                                                >> ~/.config/menus/mate-applications.menu
+              echo ''                                                                             >> ~/.config/menus/mate-applications.menu
+              echo '  </Menu>'                                                                    >> ~/.config/menus/mate-applications.menu
+              echo '  <Layout>'                                                                   >> ~/.config/menus/mate-applications.menu
+              echo '    <Merge type="menus"/>'                                                    >> ~/.config/menus/mate-applications.menu
+              echo '    <Menuname>Universal Access</Menuname>'                                    >> ~/.config/menus/mate-applications.menu
+              echo '    <Menuname>Accessories</Menuname>'                                         >> ~/.config/menus/mate-applications.menu
+              echo '    <Menuname>Collection</Menuname>'                                          >> ~/.config/menus/mate-applications.menu
+              echo '    <Menuname>Education</Menuname>'                                           >> ~/.config/menus/mate-applications.menu
+              echo '    <Menuname>Graphics</Menuname>'                                            >> ~/.config/menus/mate-applications.menu
+              echo '    <Menuname>System</Menuname>'                                              >> ~/.config/menus/mate-applications.menu
+              echo '    <Menuname>Internet</Menuname>'                                            >> ~/.config/menus/mate-applications.menu
+              echo '    <Menuname>Games</Menuname>'                                               >> ~/.config/menus/mate-applications.menu
+              echo '    <Menuname>Office</Menuname>'                                              >> ~/.config/menus/mate-applications.menu
+              echo '    <Menuname>Other</Menuname>'                                               >> ~/.config/menus/mate-applications.menu
+              echo '    <Menuname>Development</Menuname>'                                         >> ~/.config/menus/mate-applications.menu
+              echo '    <Menuname>Multimedia</Menuname>'                                          >> ~/.config/menus/mate-applications.menu
+              echo '    <Menuname>Cybersecurity</Menuname>'                                       >> ~/.config/menus/mate-applications.menu
+              echo '    <Merge type="files"/>'                                                    >> ~/.config/menus/mate-applications.menu
+              echo '  </Layout>'                                                                  >> ~/.config/menus/mate-applications.menu
+              echo '</Menu>'                                                                      >> ~/.config/menus/mate-applications.menu
+
+              # Copiar la primera app para que se muestre el menú
+              cp '/usr/share/applications/gparted.desktop' ~/.local/share/applications/
 
           ;;
 
@@ -214,31 +219,3 @@
 
 
 
-
-
-
-
-
-
-
-
-# Modificar el archivo del menú para integrar las nuevas categorías
-
-if -f  [ ]: then
- ~/.config/menus/mate-applications.menu
-else
-  echo '<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"'           > ~/.config/menus/mate-applications.menu
-  echo ' "http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">'   >> ~/.config/menus/mate-applications.menu
-  echo '<Menu>'                                                            >> ~/.config/menus/mate-applications.menu
-  echo '  <Name>Applications</Name>'                                       >> ~/.config/menus/mate-applications.menu
-  echo '  <DirectoryDir>~/.local/share/desktop-directories</DirectoryDir>' >> ~/.config/menus/mate-applications.menu
-  echo '  <Include>'                                                       >> ~/.config/menus/mate-applications.menu
-  echo '    <!-- Aquí se incluirán las nuevas categorías -->'              >> ~/.config/menus/mate-applications.menu
-  echo '  </Include>'                                                      >> ~/.config/menus/mate-applications.menu
-  echo ' </Menu>'                                                          >> ~/.config/menus/mate-applications.menu
-fi
-
-
-
-
-mate-panel --replace &
