@@ -49,19 +49,22 @@ if [ $# -ne $cCantArgumEsperados ]
     fi
 
   # Crear el menú
-    menu=(dialog --checklist "Marca los hashes que deseas calcular:" 22 60 16)
+    menu=(dialog --checklist "Marca los hashes que deseas calcular:" 22 50 16)
       opciones=(
-        1 "SHA-512"    off
-        2 "SHA-3"      off
-        3 "BLAKE2"     off
-        4 "SHA-256"    off
-        5 "Whirlpool"  off
-        6 "RIPEMD-160" off
-        7 "SHA-1"      off
-        8 "Tiger"      off
-        9 "MD5"        off
-       10 "CRC32"      off
-       11 "Adler-32"   off
+        1 "SHA-3 512"  off
+        2 "SHA-512"    off
+        3 "SHA-3 384"  off
+        4 "SHA-3 256"  off
+        5 "SHA-256"    off
+        6 "BLAKE2"     off
+        7 "SHA-3 224"  off
+        8 "Whirlpool"  off
+        9 "RIPEMD-160" off
+       10 "SHA-1"      off
+       11 "Tiger"      off
+       12 "MD5"        off
+       13 "CRC32"      off
+       14 "Adler-32"   off
       )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -72,31 +75,64 @@ if [ $# -ne $cCantArgumEsperados ]
           1)
 
             echo ""
-            echo "  Calculando el hash SHA-512 del archivo $1..."
+            echo "  Calculando el hash SHA-3 512 del archivo $1..."
             echo ""
-            sha512sum "$1"
+            # Comprobar si el paquete openssl está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s openssl 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${cColorRojo}  El paquete openssl no está instalado. Iniciando su instalación...${cFinColor}"
+                echo ""
+                apt-get -y update && apt-get -y install openssl
+                echo ""
+              fi
+            openssl dgst -sha3-512 "$1"
 
           ;;
 
           2)
 
             echo ""
-            echo "  Calculando el hash SHA-3 del archivo $1..."
+            echo "  Calculando el hash SHA-512 del archivo $1..."
             echo ""
-            sha3sum "$1"
+            sha512sum "$1"
 
           ;;
 
           3)
 
             echo ""
-            echo "  Calculando el hash BLAKE2 del archivo $1..."
+            echo "  Calculando el hash SHA-3 384 del archivo $1..."
             echo ""
-            b2sum "$1"
+            # Comprobar si el paquete openssl está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s openssl 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${cColorRojo}  El paquete openssl no está instalado. Iniciando su instalación...${cFinColor}"
+                echo ""
+                apt-get -y update && apt-get -y install openssl
+                echo ""
+              fi
+            openssl dgst -sha3-384 "$1"
 
           ;;
 
           4)
+
+            echo ""
+            echo "  Calculando el hash SHA-3 256 del archivo $1..."
+            echo ""
+            # Comprobar si el paquete openssl está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s openssl 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${cColorRojo}  El paquete openssl no está instalado. Iniciando su instalación...${cFinColor}"
+                echo ""
+                apt-get -y update && apt-get -y install openssl
+                echo ""
+              fi
+            openssl dgst -sha3-256 "$1"
+
+          ;;
+
+          5)
 
             echo ""
             echo "  Calculando el hash SHA-256 del archivo $1..."
@@ -105,7 +141,33 @@ if [ $# -ne $cCantArgumEsperados ]
 
           ;;
 
-          5)
+          6)
+
+            echo ""
+            echo "  Calculando el hash BLAKE2 del archivo $1..."
+            echo ""
+            b2sum "$1"
+
+          ;;
+
+          7)
+
+            echo ""
+            echo "  Calculando el hash SHA-3 224 del archivo $1..."
+            echo ""
+            # Comprobar si el paquete openssl está instalado. Si no lo está, instalarlo.
+              if [[ $(dpkg-query -s openssl 2>/dev/null | grep installed) == "" ]]; then
+                echo ""
+                echo -e "${cColorRojo}  El paquete openssl no está instalado. Iniciando su instalación...${cFinColor}"
+                echo ""
+                apt-get -y update && apt-get -y install openssl
+                echo ""
+              fi
+            openssl dgst -sha3-224 "$1"
+
+          ;;
+
+          8)
 
             echo ""
             echo "  Calculando el hash Wirpool del archivo $1..."
@@ -122,8 +184,7 @@ if [ $# -ne $cCantArgumEsperados ]
 
           ;;
 
-
-          6)
+          9)
 
             echo ""
             echo "  Calculando el hash RIPEMD-160 del archivo $1..."
@@ -140,7 +201,7 @@ if [ $# -ne $cCantArgumEsperados ]
 
           ;;
 
-          7)
+          10)
 
             echo ""
             echo "  Calculando el hash SHA-1 del archivo $1..."
@@ -149,7 +210,7 @@ if [ $# -ne $cCantArgumEsperados ]
 
           ;;
 
-          8)
+          11)
 
             echo ""
             echo "  Calculando el hash Tiger del archivo $1..."
@@ -166,7 +227,7 @@ if [ $# -ne $cCantArgumEsperados ]
 
           ;;
 
-          9)
+          12)
 
             echo ""
             echo "  Calculando el hash MD5 del archivo $1..."
@@ -175,7 +236,7 @@ if [ $# -ne $cCantArgumEsperados ]
 
           ;;
 
-          10)
+          13)
 
             echo ""
             echo "  Calculando el hash CRC32 del archivo $1..."
@@ -184,7 +245,7 @@ if [ $# -ne $cCantArgumEsperados ]
 
           ;;
 
-          11)
+          14)
 
             echo ""
             echo "  Calculando el hash Adler-32 del archivo $1..."
