@@ -85,7 +85,8 @@ if [ $# -ne $cCantArgumEsperados ]
                 apt-get -y update && apt-get -y install openssl
                 echo ""
               fi
-            openssl dgst -sha3-512 "$1"
+            vHashSHA3-512=$(openssl dgst -sha3-512 "$1" | cut -d'=' -f2 | sed 's- --g')
+            echo "    El hash SHA-3 512 es: $vHashSHA3-512"
 
           ;;
 
@@ -111,7 +112,8 @@ if [ $# -ne $cCantArgumEsperados ]
                 apt-get -y update && apt-get -y install openssl
                 echo ""
               fi
-            openssl dgst -sha3-384 "$1"
+            vHashSHA3-384=$(openssl dgst -sha3-384 "$1" | cut -d'=' -f2 | sed 's- --g')
+            echo "    El hash SHA-3 384 es: $vHashSHA3-384"
 
           ;;
 
@@ -128,7 +130,8 @@ if [ $# -ne $cCantArgumEsperados ]
                 apt-get -y update && apt-get -y install openssl
                 echo ""
               fi
-            openssl dgst -sha3-256 "$1"
+            vHashSHA3-256=$(openssl dgst -sha3-256 "$1" | cut -d'=' -f2 | sed 's- --g')
+            echo "    El hash SHA-3 256 es: $vHashSHA3-256"
 
           ;;
 
@@ -163,7 +166,8 @@ if [ $# -ne $cCantArgumEsperados ]
                 apt-get -y update && apt-get -y install openssl
                 echo ""
               fi
-            openssl dgst -sha3-224 "$1"
+            vHashSHA3-224=$(openssl dgst -sha3-224 "$1" | cut -d'=' -f2 | sed 's- --g')
+            echo "    El hash SHA-3 224 es: $vHashSHA3-224"
 
           ;;
 
