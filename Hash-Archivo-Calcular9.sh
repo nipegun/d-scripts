@@ -154,7 +154,7 @@ if [ $# -ne $cCantArgumEsperados ]
             echo "  Calculando el hash SHA-256 del archivo $1..."
             echo ""
             vHashSHA_256=$(sha256sum "$1" | cut -d' ' -f1)
-            echo -e "    El hash SHA256 es: ${cColorAzulClaro}$vHashSHA_256${cFinColor}"
+            echo -e "    El hash SHA-256 es: ${cColorAzulClaro}$vHashSHA_256${cFinColor}"
 
           ;;
 
@@ -192,7 +192,7 @@ if [ $# -ne $cCantArgumEsperados ]
             echo "  Calculando el hash SHA-224 del archivo $1..."
             echo ""
             vHashSHA_224=$(sha224sum "$1" | cut -d' ' -f1)
-            echo -e "    El hash SHA224 es: ${cColorAzulClaro}$vHashSHA_224${cFinColor}"
+            echo -e "    El hash SHA-224 es: ${cColorAzulClaro}$vHashSHA_224${cFinColor}"
 
           ;;
 
@@ -226,6 +226,8 @@ if [ $# -ne $cCantArgumEsperados ]
                 apt-get -y update && apt-get -y install openssl
                 echo ""
               fi
+            vHashRIPEMD_160=$(openssl dgst -rmd160 "$1" | cut -d'=' -f2 | sed 's- --g')
+            echo -e "    El hash RIPEMD-160 es: ${cColorAzulClaro}$vHashRIPEMD_160${cFinColor}"
             openssl dgst -rmd160 "$1"
 
           ;;
@@ -236,7 +238,7 @@ if [ $# -ne $cCantArgumEsperados ]
             echo "  Calculando el hash SHA-1 del archivo $1..."
             echo ""
             vHashSHA1=$(sha1sum "$1" | cut -d' ' -f1)
-            echo -e "    El hash SHA-3 512 es: ${cColorAzulClaro}$vHashSHA1${cFinColor}"
+            echo -e "    El hash SHA-1 es: ${cColorAzulClaro}$vHashSHA1${cFinColor}"
 
           ;;
 
@@ -263,7 +265,7 @@ if [ $# -ne $cCantArgumEsperados ]
             echo "  Calculando el hash MD5 del archivo $1..."
             echo ""
             vHashMD5=$(md5sum "$1" | cut -d' ' -f1)
-            echo -e "    El hash SHA-3 512 es: ${cColorAzulClaro}$vHashMD5${cFinColor}"
+            echo -e "    El hash MD5 es: ${cColorAzulClaro}$vHashMD5${cFinColor}"
 
           ;;
 
@@ -272,7 +274,7 @@ if [ $# -ne $cCantArgumEsperados ]
             echo ""
             echo "  Calculando el hash CRC32 del archivo $1..."
             echo ""
-            vHashCRC32=$(cksum "$1" | cut -d' ' -f1)
+            vHashCRC32=$(cksum "$1")
             echo "    El hash CRC32 es: $vHashCRC32"
             cksum "$1"
 
