@@ -143,7 +143,6 @@ if [ $# -ne $cCantArgumEsperados ]
             echo ""
             vHashSHA_256=$(sha256sum "$1" | cut -d' ' -f1)
             echo "    El hash SHA-256 es: $vHashSHA_256"
-            sha256sum "$1"
 
           ;;
 
@@ -152,6 +151,8 @@ if [ $# -ne $cCantArgumEsperados ]
             echo ""
             echo "  Calculando el hash BLAKE2 del archivo $1..."
             echo ""
+            vHashBLAKE2=$(b2sum "$1" | cut -d' ' -f1)
+            echo "    El hash BLAKE2 es: $vHashBLAKE2"
             b2sum "$1"
 
           ;;
@@ -213,6 +214,8 @@ if [ $# -ne $cCantArgumEsperados ]
             echo ""
             echo "  Calculando el hash SHA-1 del archivo $1..."
             echo ""
+            vHashSHA1=$(sha1sum "$1" | cut -d' ' -f1)
+            echo "    El hash SHA-1 es: $vHashSHA1"
             sha1sum "$1"
 
           ;;
@@ -239,6 +242,8 @@ if [ $# -ne $cCantArgumEsperados ]
             echo ""
             echo "  Calculando el hash MD5 del archivo $1..."
             echo ""
+            vHashMD5=$(md5sum "$1" | cut -d' ' -f1)
+            echo "    El hash MD5 es: $vHashMD5"
             md5sum "$1"
 
           ;;
@@ -248,6 +253,8 @@ if [ $# -ne $cCantArgumEsperados ]
             echo ""
             echo "  Calculando el hash CRC32 del archivo $1..."
             echo ""
+            vHashCRC32=$(cksum "$1" | cut -d' ' -f1)
+            echo "    El hash CRC32 es: $vHashCRC32"
             cksum "$1"
 
           ;;
