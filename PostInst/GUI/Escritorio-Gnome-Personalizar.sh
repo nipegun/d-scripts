@@ -79,8 +79,9 @@
     apt-get -y install gnome-tweaks
 
     echo ""
-    echo "    Instalando extensiones..."
+    echo "    Instalando la app de extensiones y algunas extensiones..."
     echo ""
+    apt-get -y install gnome-shell-extensions
     apt-get -y install gnome-shell-extension-desktop-icons-ng
     apt-get -y install gnome-shell-extension-impatience
     apt-get -y install gnome-shell-extension-hide-activities
