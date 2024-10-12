@@ -51,19 +51,19 @@ if [ $# -ne $cCantArgumEsperados ]
   # Crear el menú
     menu=(dialog --checklist "Marca los hashes que deseas calcular:" 22 50 16)
       opciones=(
-        1 "SHA-3 512"  off
-        2 "SHA-512"    off
-        3 "SHA-3 384"  off
-        4 "SHA-3 256"  off
-        5 "SHA-256"    off
-        6 "BLAKE2"     off
-        7 "SHA-3 224"  off
+        1 "SHA-3 512"  on
+        2 "SHA-512"    on
+        3 "SHA-3 384"  on
+        4 "SHA-3 256"  on
+        5 "SHA-256"    on
+        6 "BLAKE2"     on
+        7 "SHA-3 224"  on
         8 "Whirlpool"  off
-        9 "RIPEMD-160" off
-       10 "SHA-1"      off
+        9 "RIPEMD-160" on
+       10 "SHA-1"      on
        11 "Tiger"      off
-       12 "MD5"        off
-       13 "CRC32"      off
+       12 "MD5"        on
+       13 "CRC32"      on
        14 "Adler-32"   off
       )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
