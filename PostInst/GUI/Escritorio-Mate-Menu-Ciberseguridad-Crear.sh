@@ -124,46 +124,54 @@
               echo '  <Name>Applications</Name>'                                                  >> /.config/menus/mate-applications.menu
               echo '  <MergeFile type="parent">/etc/xdg/menus/mate-applications.menu</MergeFile>' >> /.config/menus/mate-applications.menu
               echo '  <DefaultLayout inline="false"/>'                                            >> /.config/menus/mate-applications.menu
+              echo ''                                                                             >> /.config/menus/mate-applications.menu
               echo '  <Menu>'                                                                     >> /.config/menus/mate-applications.menu
               echo '    <Name>Cybersecurity</Name>'                                               >> /.config/menus/mate-applications.menu
               echo '    <Directory>cybersecurity.directory</Directory>'                           >> /.config/menus/mate-applications.menu
+              echo ''                                                                             >> /.config/menus/mate-applications.menu
               echo '    <Menu>'                                                                   >> /.config/menus/mate-applications.menu
               echo '      <Name>cybersecurity-forensics</Name>'                                   >> /.config/menus/mate-applications.menu
               echo '      <Directory>cybersecurity-forensics.directory</Directory>'               >> /.config/menus/mate-applications.menu
+              echo ''                                                                             >> /.config/menus/mate-applications.menu
               echo '      <Include>'                                                              >> /.config/menus/mate-applications.menu
-              echo '        <Filename>mozo-made-5.desktop</Filename>'                             >> /.config/menus/mate-applications.menu
+              echo '        <Filename>dd.desktop</Filename>'                                      >> /.config/menus/mate-applications.menu
               echo '      </Include>'                                                             >> /.config/menus/mate-applications.menu
               echo '      <Layout>'                                                               >> /.config/menus/mate-applications.menu
               echo '        <Merge type="menus"/>'                                                >> /.config/menus/mate-applications.menu
-              echo '        <Filename>mozo-made-5.desktop</Filename>'                             >> /.config/menus/mate-applications.menu
+              echo '        <Filename>dd.desktop</Filename>'                                      >> /.config/menus/mate-applications.menu
               echo '        <Merge type="files"/>'                                                >> /.config/menus/mate-applications.menu
               echo '      </Layout>'                                                              >> /.config/menus/mate-applications.menu
+              echo ''                                                                             >> /.config/menus/mate-applications.menu
               echo '    </Menu>'                                                                  >> /.config/menus/mate-applications.menu
               echo '    <DefaultLayout inline="false"/>'                                          >> /.config/menus/mate-applications.menu
+              echo ''                                                                             >> /.config/menus/mate-applications.menu
               echo '    <Menu>'                                                                   >> /.config/menus/mate-applications.menu
               echo '      <Name>cybersecurity-datarecovery</Name>'                                >> /.config/menus/mate-applications.menu
               echo '      <Directory>cybersecurity-datarecovery.directory</Directory>'            >> /.config/menus/mate-applications.menu
+              echo ''                                                                             >> /.config/menus/mate-applications.menu
               echo '      <Include>'                                                              >> /.config/menus/mate-applications.menu
-              echo '        <Filename>mozo-made-6.desktop</Filename>'                             >> /.config/menus/mate-applications.menu
+              echo '        <Filename>testdisk.desktop</Filename>'                                >> /.config/menus/mate-applications.menu
               echo '      </Include>'                                                             >> /.config/menus/mate-applications.menu
               echo '      <Layout>'                                                               >> /.config/menus/mate-applications.menu
               echo '        <Merge type="menus"/>'                                                >> /.config/menus/mate-applications.menu
-              echo '        <Filename>mozo-made-6.desktop</Filename>'                             >> /.config/menus/mate-applications.menu
+              echo '        <Filename>testdisk.desktop</Filename>'                                >> /.config/menus/mate-applications.menu
               echo '        <Merge type="files"/>'                                                >> /.config/menus/mate-applications.menu
               echo '      </Layout>'                                                              >> /.config/menus/mate-applications.menu
+              echo ''                                                                             >> /.config/menus/mate-applications.menu
               echo '    </Menu>'                                                                  >> /.config/menus/mate-applications.menu
               echo '    <Include>'                                                                >> /.config/menus/mate-applications.menu
-              echo '      <Filename>mozo-made-4.desktop</Filename>'                               >> /.config/menus/mate-applications.menu
+              echo '      <Filename>gparted.desktop</Filename>'                                   >> /.config/menus/mate-applications.menu
               echo '    </Include>'                                                               >> /.config/menus/mate-applications.menu
               echo '    <Layout>'                                                                 >> /.config/menus/mate-applications.menu
               echo '      <Merge type="menus"/>'                                                  >> /.config/menus/mate-applications.menu
               echo '      <Menuname>cybersecurity-forensics</Menuname>'                           >> /.config/menus/mate-applications.menu
               echo '      <Menuname>cybersecurity-datarecovery</Menuname>'                        >> /.config/menus/mate-applications.menu
-              echo '      <Filename>mozo-made-4.desktop</Filename>'                               >> /.config/menus/mate-applications.menu
+              echo '      <Filename>gparted.desktop</Filename>'                                   >> /.config/menus/mate-applications.menu
               echo '      <Merge type="files"/>'                                                  >> /.config/menus/mate-applications.menu
               echo '    </Layout>'                                                                >> /.config/menus/mate-applications.menu
-              echo '    </Menu>'                                                                  >> /.config/menus/mate-applications.menu
-              echo '    <Layout>'                                                                 >> /.config/menus/mate-applications.menu
+              echo ''                                                                             >> /.config/menus/mate-applications.menu
+              echo '  </Menu>'                                                                    >> /.config/menus/mate-applications.menu
+              echo '  <Layout>'                                                                   >> /.config/menus/mate-applications.menu
               echo '    <Merge type="menus"/>'                                                    >> /.config/menus/mate-applications.menu
               echo '    <Menuname>Universal Access</Menuname>'                                    >> /.config/menus/mate-applications.menu
               echo '    <Menuname>Accessories</Menuname>'                                         >> /.config/menus/mate-applications.menu
