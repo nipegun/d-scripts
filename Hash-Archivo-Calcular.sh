@@ -11,6 +11,9 @@
 # Ejecución remota con parámetros:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Hash-Archivo-Calcular.sh | bash -s RutaAlArchivo
 #
+# Ejecución remota con parámetros y parseado:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Hash-Archivo-Calcular.sh | bash -s RutaAlArchivo | grep -v "es:"
+#
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Hash-Archivo-Calcular.sh | nano -
 # ----------
