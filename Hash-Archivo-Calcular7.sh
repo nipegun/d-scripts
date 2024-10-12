@@ -86,6 +86,7 @@ if [ $# -ne $cCantArgumEsperados ]
                 echo ""
               fi
             vHashSHA3_512=$(openssl dgst -sha3-512 "$1" | cut -d'=' -f2 | sed 's- --g')
+            echo -e "    El hash SHA-3 512 es: ${cColorAzulClaro} $vHashSHA3_512 ${cFinColor}"
             echo "    El hash SHA-3 512 es: $vHashSHA3_512"
 
           ;;
