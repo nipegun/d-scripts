@@ -95,7 +95,8 @@ if [ $# -ne $cCantArgumEsperados ]
             echo ""
             echo "  Calculando el hash SHA-512 del archivo $1..."
             echo ""
-            sha512sum "$1"
+            vHashSHA_512=$(sha512sum "$1" | cut -d' ' -f1)
+            echo "    El hash SHA-512 es: $vHashSHA_512"
 
           ;;
 
@@ -140,6 +141,8 @@ if [ $# -ne $cCantArgumEsperados ]
             echo ""
             echo "  Calculando el hash SHA-256 del archivo $1..."
             echo ""
+            vHashSHA_256=$(sha256sum "$1" | cut -d' ' -f1)
+            echo "    El hash SHA-256 es: $vHashSHA_256"
             sha256sum "$1"
 
           ;;
