@@ -239,8 +239,9 @@
       apt-get -y install mate-tweaks
       apt-get -y install caja-open-terminal
       apt-get -y install caja-admin
-      #apt-get -y install caja-share     # Para compartir carpetas desde el propio caja
-      #apt-get -y install gvfs-backends  # Para poder ver las comparticiones de red usando samba
+      apt-get -y install mozo                # Editor del menúde mate
+      #apt-get -y install caja-share         # Para compartir carpetas desde el propio caja
+      #apt-get -y install gvfs-backends      # Para poder ver las comparticiones de red usando samba
 
   elif [ $cVerSO == "11" ]; then
 
