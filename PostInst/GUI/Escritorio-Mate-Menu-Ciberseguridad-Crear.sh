@@ -69,9 +69,9 @@
             # testdisk
               echo '[Desktop Entry]'                          > ~/.local/share/applications/testdisk.desktop
               echo 'Type=Application'                        >> ~/.local/share/applications/testdisk.desktop
-              echo 'Name=Nombre de la Aplicación'            >> ~/.local/share/applications/testdisk.desktop
-              echo 'Exec=/ruta/al/ejecutable'                >> ~/.local/share/applications/testdisk.desktop
-              echo 'Icon=/ruta/al/icono.png'                 >> ~/.local/share/applications/testdisk.desktop
+              echo 'Name=testdisk'                           >> ~/.local/share/applications/testdisk.desktop
+              echo 'Exec=/bin/testdisk'                      >> ~/.local/share/applications/testdisk.desktop
+              echo 'Icon=utilities-terminal'                 >> ~/.local/share/applications/testdisk.desktop
               echo 'Categories=Cybersecurity;Data recovery;' >> ~/.local/share/applications/testdisk.desktop
 
           ;;
@@ -89,6 +89,7 @@
               echo 'Type=Directory'             >> ~/.local/share/desktop-directories/cybersecurity.directory
               echo 'Name[es_ES]=Ciberseguridad' >> ~/.local/share/desktop-directories/cybersecurity.directory
               echo 'Name=Cybersecurity'         >> ~/.local/share/desktop-directories/cybersecurity.directory
+              echo 'Icon=security'              >> ~/.local/share/desktop-directories/cybersecurity.directory
 
               # Subcarpeta Forensicsú
                 echo '#!/usr/bin/env xdg-open'  > ~/.local/share/desktop-directories/cybersecurity-forensics.directory
@@ -193,7 +194,10 @@
               echo '</Menu>'                                                                      >> ~/.config/menus/mate-applications.menu
 
               # Copiar la primera app para que se muestre el menú
-              cp '/usr/share/applications/gparted.desktop' ~/.local/share/applications/
+                cp '/usr/share/applications/gparted.desktop' ~/.local/share/applications/
+
+              # Re-lanzar el panel
+                mate-panel --replace &
 
           ;;
 
