@@ -228,7 +228,6 @@ if [ $# -ne $cCantArgumEsperados ]
               fi
             vHashRIPEMD_160=$(openssl dgst -rmd160 "$1" | cut -d'=' -f2 | sed 's- --g')
             echo -e "    El hash RIPEMD-160 es: ${cColorAzulClaro}$vHashRIPEMD_160${cFinColor}"
-            openssl dgst -rmd160 "$1"
 
           ;;
 
@@ -275,8 +274,7 @@ if [ $# -ne $cCantArgumEsperados ]
             echo "  Calculando el hash CRC32 del archivo $1..."
             echo ""
             vHashCRC32=$(cksum "$1")
-            echo "    El hash CRC32 es: $vHashCRC32"
-            cksum "$1"
+            echo -e "    El hash CRC32 es: ${cColorAzulClaro}$vHashCRC32${cFinColor}"
 
           ;;
 
