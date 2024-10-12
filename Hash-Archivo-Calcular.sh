@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Hash-Archivo-Calcular.sh | bash -s RutaAlArchivo
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Hash-Archivo-Calcular.sh | nano -
 # ----------
 
 # Definir constantes de color
