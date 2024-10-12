@@ -49,7 +49,7 @@ if [ $# -ne $cCantArgumEsperados ]
     fi
 
   # Crear el menú
-    menu=(dialog --checklist "Marca los hashes que deseas calcular:" 22 96 16)
+    menu=(dialog --checklist "Marca los hashes que deseas calcular:" 22 60 16)
       opciones=(
         1 "SHA-512"    off
         2 "SHA-3"      off
