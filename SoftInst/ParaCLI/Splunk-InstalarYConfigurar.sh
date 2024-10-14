@@ -243,3 +243,10 @@
     echo ""
 
   fi
+
+echo ""
+echo "  Instalación finalizada."
+echo ""
+echo "    Más info y documentación aquí: https://docs.splunk.com/Documentation/Splunk"
+echo ""
+
