@@ -101,12 +101,13 @@
     # Crear el menú
       menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
         opciones=(
-          1 "Instalar desde la web oficial" on
+          1 "Instalar Splunk Enterprise v9.3.1 Trial" on
           2 "Splunk SOAR On-Prem Unprivileged v6.3.0 (Centos/RHEL 8)" off
           3 "Splunk SOAR On-Prem Unprivileged v6.3.0 (Centos/RHEL 7)" off
           4 "Splunk SOAR On-Prem Privileged v5.3.6 (CentOS/RHEL 7)" off
           5 "Splunk SOAR Cloud - Automation Broker v6.3.0" off
           6 "Splunk SOAR Diagnostic tool backport v6.3.0 (CentOS/RHEL 7 y 8)" off
+          7 "Splunk Universal Forwarder v9.3.1" off
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -117,8 +118,9 @@
             1)
 
               echo ""
-              echo "  Instalando Splunk desde la web oficial..."
+              echo "  Instalando Splunk enterprise v9.3.1 Free Trial..."
               echo ""
+              wget -O splunk-9.3.1-0b8d769cb912-linux-2.6-amd64.deb "https://download.splunk.com/products/splunk/releases/9.3.1/linux/splunk-9.3.1-0b8d769cb912-linux-2.6-amd64.deb"
 
             ;;
 
@@ -165,6 +167,24 @@
               echo "  Splunk SOAR Diagnostic tool backport v6.3.0 (CentOS/RHEL 7 y 8)..."
               echo ""
               wget -O soar_diag_backport-6.3.0.718.tar.gz "https://download.splunk.com/products/soar_diag_backport/releases/6.3.0/linux/soar_diag_backport-6.3.0.718.tar.gz"
+
+            ;;
+
+            7)
+
+              echo ""
+              echo "  Splunk Universarl Forwarder v9.3.1 (amd64)..."
+              echo ""
+              wget -O splunkforwarder-9.3.1-0b8d769cb912-linux-2.6-amd64.deb "https://download.splunk.com/products/universalforwarder/releases/9.3.1/linux/splunkforwarder-9.3.1-0b8d769cb912-linux-2.6-amd64.deb"
+
+           ;;
+
+            8)
+
+              echo ""
+              echo "  Splunk Universarl Forwarder v9.3.1 (ARM)..."
+              echo ""
+              wget -O splunkforwarder-9.3.1-0b8d769cb912-Linux-armv8.deb "https://download.splunk.com/products/universalforwarder/releases/9.3.1/linux/splunkforwarder-9.3.1-0b8d769cb912-Linux-armv8.deb"
 
            ;;
 
