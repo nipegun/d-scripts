@@ -102,10 +102,11 @@
       menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
         opciones=(
           1 "Instalar desde la web oficial" on
-          2 "Opción 2" off
-          3 "Opción 3" off
-          4 "Opción 4" off
-          5 "Opción 5" off
+          2 "Splunk SOAR On-Prem Unprivileged v6.3.0 (Centos/RHEL 8)" off
+          3 "Splunk SOAR On-Prem Unprivileged v6.3.0 (Centos/RHEL 7)" off
+          4 "Splunk SOAR On-Prem Privileged v5.3.6 (CentOS/RHEL 7)" off
+          5 "Splunk SOAR Cloud - Automation Broker v6.3.0" off
+          6 "Splunk SOAR Diagnostic tool backport v6.3.0 (CentOS/RHEL 7 y 8)" off
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -124,34 +125,48 @@
             2)
 
               echo ""
-              echo "  Opción 2..."
+              echo " Instalando Splunk SOAR On-Prem Unprivileged v6.3.0 (Centos/RHEL 8)..."
               echo ""
+              wget -O splunk_soar-unpriv-6.3.0.718-90256164-el8-x86_64.tgz "https://download.splunk.com/products/splunk_soar-unpriv/releases/6.3.0/linux/splunk_soar-unpriv-6.3.0.718-90256164-el8-x86_64.tgz"
 
             ;;
 
             3)
 
               echo ""
-              echo "  Opción 3..."
+              echo "  Instalando Splunk SOAR On-Prem Unprivileged v6.3.0 (Centos/RHEL 7)..."
               echo ""
+              wget -O splunk_soar-unpriv-6.3.0.718-90256164-el7-x86_64.tgz "https://download.splunk.com/products/splunk_soar-unpriv/releases/6.3.0/linux/splunk_soar-unpriv-6.3.0.718-90256164-el7-x86_64.tgz"
 
             ;;
 
             4)
 
               echo ""
-              echo "  Opción 4..."
+              echo "  Instalando Splunk SOAR On-Prem Privileged v5.3.6 (CentOS/RHEL 7)..."
               echo ""
+              wget -O splunk_soar-priv-5.3.6.136158-836acbdb-el7-x86_64.tgz "https://download.splunk.com/products/splunk_soar-priv/releases/5.3.6/linux/splunk_soar-priv-5.3.6.136158-836acbdb-el7-x86_64.tgz"
+
 
             ;;
 
             5)
 
               echo ""
-              echo "  Opción 5..."
+              echo "  Instalando Splunk SOAR Cloud - Automation Broker v6.3.0..."
               echo ""
+              wget -O automation_broker_6.3.0.718.tar.gz "https://download.splunk.com/products/automation_broker/releases/6.3.0/linux/automation_broker_6.3.0.718.tar.gz"
 
             ;;
+
+            6)
+
+              echo ""
+              echo "  Splunk SOAR Diagnostic tool backport v6.3.0 (CentOS/RHEL 7 y 8)..."
+              echo ""
+              wget -O soar_diag_backport-6.3.0.718.tar.gz "https://download.splunk.com/products/soar_diag_backport/releases/6.3.0/linux/soar_diag_backport-6.3.0.718.tar.gz"
+
+           ;;
 
         esac
 
