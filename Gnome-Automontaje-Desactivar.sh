@@ -9,7 +9,7 @@
 # Script de NiPeGun para desactivar el auto-montaje de unidades en Gnome
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Gnome-Automontaje-Desactivar.sh | bash
 # ----------
 
 gsettings set org.gnome.desktop.media-handling automount false
