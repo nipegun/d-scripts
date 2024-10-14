@@ -9,7 +9,7 @@
 # Script de NiPeGun para activar el auto-montaje de unidades en Gnome
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Gnome-Automontaje-Activar.sh | bash
 # ----------
 
 gsettings set org.gnome.desktop.media-handling automount true
