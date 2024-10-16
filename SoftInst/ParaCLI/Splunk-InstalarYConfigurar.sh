@@ -121,7 +121,7 @@
                   echo ""
                 fi
               wget "https://download.splunk.com/products/splunk/releases/9.3.1/linux/splunk-9.3.1-0b8d769cb912-linux-2.6-amd64.deb" -O /root/SoftInst/Splunk/splunk.deb
-              apt install splunk.deb
+              apt install /root/SoftInst/Splunk/splunk.deb
               # Iniciar y aceptar licencia
                 /opt/splunk/bin/splunk start --accept-license
               # Hacer que se auto-inicie
