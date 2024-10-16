@@ -127,10 +127,10 @@
               # Hacer que se auto-inicie
                 /opt/splunk/bin/splunk enable boot-start
               # Permitir que la web se acceda desde cualquier IP
-                echo ""                          >> /opt/splunk/etc/system/local/web.conf
-                echo "[settings]"                >> /opt/splunk/etc/system/local/web.conf
-                echo "httpServer = 0.0.0.0:8000" >> /opt/splunk/etc/system/local/web.conf
-                echo ""                          >> /opt/splunk/etc/system/local/web.conf
+                echo ""                             >> /opt/splunk/etc/system/local/web.conf
+                echo "[settings]"                   >> /opt/splunk/etc/system/local/web.conf
+                echo "server.socket_host = 0.0.0.0" >> /opt/splunk/etc/system/local/web.conf
+                echo ""                             >> /opt/splunk/etc/system/local/web.conf
               # Reiniciar
                 /opt/splunk/bin/splunk restart
 
