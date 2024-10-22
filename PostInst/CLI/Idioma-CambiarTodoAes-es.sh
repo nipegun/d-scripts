@@ -62,6 +62,7 @@ elif [ $cVerSO == "8" ]; then
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales
+    rm -f  /etc/locale.gen
     echo "es_ES.UTF-8 UTF-8" > /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el español de España
