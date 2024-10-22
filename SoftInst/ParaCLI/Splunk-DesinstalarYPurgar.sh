@@ -9,7 +9,7 @@
 # Script de NiPeGun para desinstalar y purgar Splunk
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Splunk-InstalarYConfigurar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Splunk-DesinstalarYPurgar.sh | bash
 # ----------
 
 # Definir constantes de color
