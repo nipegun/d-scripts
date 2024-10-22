@@ -42,7 +42,9 @@
   rm -rf /etc/splunk
   deluser splunk
   delgroup splunk
-  /etc/systemd/system/splunk.service
-  systemctl daemon-reload
-  find / -name "*splunk*"
   apt purge splunk
+  rm -f /etc/systemd/system/splunk.service
+  systemctl daemon-reload
+  find / -name "*splunk*" -exec rm -f {} \;
+  rm -rf /root/.splunk
+  
