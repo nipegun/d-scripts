@@ -32,7 +32,7 @@
 
 # Notificar inicio de ejecución del script
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de splunk para Debian 13 (x)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de desinstalación y purgado de Splunk...${cFinColor}"
   echo ""
 
 #
@@ -47,4 +47,4 @@
   systemctl daemon-reload
   find / -name "*splunk*" -exec rm -f {} \;
   rm -rf /root/.splunk
-  
+
