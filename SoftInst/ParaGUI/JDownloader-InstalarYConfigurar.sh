@@ -6,11 +6,47 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para instalar y configurar jDownloader en Debian
+# Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/JDownloader-InstalarYConfigurar.sh | bash
+#   curl -sL x | bash
+#
+# Ejecución remota sin caché:
+#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#
+# Ejecución remota con parámetros:
+#   curl -sL x | bash -s Parámetro1 Parámetro2
+#
+# Bajar y editar directamente el archivo en nano
+#   curl -sL x | nano -
 # ----------
+
+# Definir constantes de color
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
+  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
+    echo ""
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
+    echo ""
+    exit
+  fi
+
+# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+    echo ""
+    apt-get -y update && apt-get -y install curl
+    echo ""
+  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -32,58 +68,79 @@
     cVerSO=$(uname -r)
   fi
 
+# Ejecutar comandos dependiendo de la versión de Debian detectada
 
-if [ $cVerSO == "7" ]; then
+  if [ $cVerSO == "13" ]; then
 
-  echo ""
-  echo "  Iniciando el script de instalación de jDownloader para Debian 7 (Wheezy)..."  
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de jDownloader para Debian 13 (x)...${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "8" ]; then
+  elif [ $cVerSO == "12" ]; then
 
-  echo ""
-  echo "  Iniciando el script de instalación de jDownloader para Debian 8 (Jessie)..."  
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de jDownloader para Debian 12 (Bookworm)...${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    # Instalar JRE
+      apt-get -y update && apt-get -y install default-jre
+    # Ejecutar script original de instalación (alojado en hacks4geeks.com)
+      curl -sL http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/jDownloader/JD2Setup_x64nuevo.sh | sudo bash
 
-elif [ $cVerSO == "9" ]; then
+  elif [ $cVerSO == "11" ]; then
 
-  echo ""
-  echo "  Iniciando el script de instalación de jDownloader para Debian 9 (Stretch)..."  
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de jDownloader para Debian 11 (Bullseye)...${cFinColor}"
+    echo ""
 
-  mkdir -p /root/SoftInst/jdownloader
-  cd /root/SoftInst/jDdownloader
-  wget hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/jdownloader/JD2Setup_x64.sh
-  chmod +x /root/SoftInst/jdownloader/JD2Setup_x64.sh
-  /root/SoftInst/jdownloader/JD2Setup_x64.sh
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "10" ]; then
+  elif [ $cVerSO == "10" ]; then
 
-  echo ""
-  echo "  Iniciando el script de instalación de jDownloader para Debian 10 (Buster)..."  
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de jDownloader para Debian 10 (Buster)...${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "11" ]; then
+  elif [ $cVerSO == "9" ]; then
 
-  echo ""
-  echo "  Iniciando el script de instalación de jDownloader para Debian 11 (Bullseye)..."  
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de jDownloader para Debian 9 (Stretch)...${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    mkdir -p /root/SoftInst/jdownloader
+    cd /root/SoftInst/jDdownloader
+    wget hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/jdownloader/JD2Setup_x64.sh
+    chmod +x /root/SoftInst/jdownloader/JD2Setup_x64.sh
+    /root/SoftInst/jdownloader/JD2Setup_x64.sh
 
-fi
+  elif [ $cVerSO == "8" ]; then
 
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de jDownloader para Debian 8 (Jessie)...${cFinColor}"
+    echo ""
+
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
+
+  elif [ $cVerSO == "7" ]; then
+
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de jDownloader para Debian 7 (Wheezy)...${cFinColor}"
+    echo ""
+
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
+
+  fi
