@@ -82,7 +82,7 @@
           apt-get -y update && apt-get -y install curl
           echo ""
         fi
-      curl -sL http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/jDownloader/JD2Setup_x64nuevo.sh | sudo bash
+      curl -sL http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/jDownloader/JD2Setup_SinJRE.sh | sudo bash
 
   elif [ $cVerSO == "11" ]; then
 
