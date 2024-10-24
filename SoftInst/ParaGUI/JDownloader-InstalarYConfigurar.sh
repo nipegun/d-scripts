@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
+# Script de NiPeGun para instalar y configurar jDownloader en Debian
 #
 # Ejecución remota:
 #   curl -sL x | bash
@@ -37,15 +37,6 @@
     echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
     echo ""
     exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update && apt-get -y install curl
-    echo ""
   fi
 
 # Determinar la versión de Debian
@@ -89,6 +80,14 @@
     # Instalar JRE
       apt-get -y update && apt-get -y install default-jre
     # Ejecutar script original de instalación (alojado en hacks4geeks.com)
+      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update && apt-get -y install curl
+          echo ""
+        fi
       curl -sL http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/jDownloader/JD2Setup_x64nuevo.sh | sudo bash
 
   elif [ $cVerSO == "11" ]; then
