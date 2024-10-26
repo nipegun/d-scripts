@@ -20,9 +20,7 @@ ColorAzul="\033[0;34m"
 cFinColor="\033[0m"
 
 echo ""
-echo -e "${cColorVerde}-----------------------------------------------${cFinColor}"
 echo -e "${cColorVerde}  Iniciando el script de borrado de rastro...${cFinColor}"
-echo -e "${cColorVerde}-----------------------------------------------${cFinColor}"
 echo ""
 
 echo ""
@@ -47,9 +45,11 @@ echo ""
 
   # Comandos ejecutados en bash por el root
      find /root/ -type f -name ".bash_history" -print -exec truncate -s 0 {} \;
+     find /root/ -type f -name ".zsh_history"  -print -exec truncate -s 0 {} \;
 
   # Comandos ejecutados en bash por otros usuarios
      find /home/ -type f -name ".bash_history" -print -exec truncate -s 0 {} \;
+     find /home/ -type f -name ".zsh_history"  -print -exec truncate -s 0 {} \;
 
   # Comandos ejecutados en Midnight Commander por el root
      find /root/.local/share/mc/ -type f -name "history" -print -exec truncate -s 0 {} \;
@@ -104,12 +104,10 @@ echo ""
     find /var/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
 
 echo ""
-echo -e "${cColorVerde}----------------------------------------------------${cFinColor}"
 echo -e "${cColorVerde}  Script finalizado. Vuelve a ejecutar:${cFinColor}"
 echo ""
-echo -e "${cColorVerde}history -c${cFinColor}"
+echo -e "${cColorVerde}    history -c${cFinColor}"
 echo ""
-echo -e "${cColorVerde}manualmente para borrar la ejecución de este script.${cFinColor}"
-echo -e "${cColorVerde}----------------------------------------------------${cFinColor}"
+echo -e "${cColorVerde}    manualmente para borrar la ejecución de este script.${cFinColor}"
 echo ""
 
