@@ -7,12 +7,10 @@
 
 # ----------
 # Script de NiPeGun para borrar el rastro de acceso a un sistema
-# ----------
-
-# ----------
+# 
 # Ejecución remota:
 #
-#  curl --silent https://raw.githubusercontent.com/nipegun/d-scripts/master/BorrarRastro.sh | bash
+#   curl --silent https://raw.githubusercontent.com/nipegun/d-scripts/master/BorrarRastro.sh | bash
 # ----------
 
 cColorVerde="\033[1;32m"
