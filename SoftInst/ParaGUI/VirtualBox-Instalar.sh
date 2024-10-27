@@ -207,7 +207,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     mkdir -p /root/SoftInst/VirtualBox/
     cd /root/SoftInst/VirtualBox/
-    VersDeVBoxInstalada=$(virtualbox -h | grep elector | cut -d'v' -f2)
+    VersDeVBoxInstalada=$(virtualbox -h | grep "VirtualBox Manager" | cut -d'v' -f2)
     wget https://download.virtualbox.org/virtualbox/$VersDeVBoxInstalada/Oracle_VM_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
     vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VM_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
 
