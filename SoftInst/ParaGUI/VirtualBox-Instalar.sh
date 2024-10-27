@@ -208,7 +208,8 @@ elif [ $cVerSO == "12" ]; then
     mkdir -p /root/SoftInst/VirtualBox/
     cd /root/SoftInst/VirtualBox/
     VersDeVBoxInstalada=$(virtualbox -h | grep "VirtualBox Manager" | cut -d'v' -f2)
-    wget https://download.virtualbox.org/virtualbox/$VersDeVBoxInstalada/Oracle_VM_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
+    wget http://download.virtualbox.org/virtualbox/$VersDeVBoxInstalada/Oracle_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack -O /tmp/VBoxExtPack
+    
     vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VM_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
 
    # Agregar el usuario 1000 al grupo virtualbox
