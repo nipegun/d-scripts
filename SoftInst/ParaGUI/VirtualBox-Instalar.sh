@@ -48,61 +48,164 @@
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+
+
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de VirtualBox para Debian 7 (Wheezy)..."  
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  echo "  Iniciando el script de instalación de VirtualBox para Debian 8 (Jessie)..."  
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 13 (x)..."  
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $cVerSO == "9" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de VirtualBox para Debian 9 (Stretch)..."  
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 12 (Bookworm)..." 
   echo ""
 
-  echo ""
-  echo "  AGREGANDO EL REPOSITORIO"
-  echo ""
-  echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+      echo ""
+      apt-get -y update && apt-get -y install dialog
+      echo ""
+    fi
 
-  echo ""
-  echo "  AGREGANDO LA LLAVE"
-  echo ""
-  wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
+  # Crear el menú
+    menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+      opciones=(
+        1 "Instalar la versión disponible en el repositorio de Debian" off
+        2 "Instalar última versión desde la web" off
+      )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
-  echo ""
-  echo "  ACTUALIZANDO EL SISTEMA"
-  echo ""
-  apt-get update
+    for choice in $choices
+      do
+        case $choice in
 
-  echo ""
-  echo "  INSTALANDO EL PAQUETE"
-  echo ""
-  apt-get -y install virtualbox-5.1
+          1)
 
-elif [ $cVerSO == "10" ]; then
+            echo ""
+            echo "  Instalando la última versión de VirtualBox disponible en los repositorios de Debian..."
+            echo ""
 
-  echo ""
-  echo "  Iniciando el script de instalación de VirtualBox para Debian 10 (Buster)..."  
-  echo ""
+            # Instalar paquetes necesarios
+               echo ""
+               echo "  Instalando paquetes necesarios..."
+               echo ""
+               apt-get -y update
+               apt-get -y install linux-headers-$(uname -r)
+               apt-get -y install dkms
 
-  echo ""
-  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+             # Agregar repositorio
+               echo ""
+               echo "  Agregando repositorio de VirtualBox..."
+               echo ""
+               apt-get -y install gnupg2
+               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                   echo ""
+                   echo "    El paquete wget no está instalado. Iniciando su instalación..."
+                   echo ""
+                   apt-get -y update && apt-get -y install wget
+                   echo ""
+                 fi
+               wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
+               wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
+               echo "deb [arch=$(dpkg --print-architecture)] http://download.virtualbox.org/virtualbox/debian bookworm contrib" > /etc/apt/sources.list.d/virtualbox.list
+               apt-get -y update
+
+             # Instalar virtualbox
+               echo ""
+               echo "  Instalando el paquete virtualbox..."
+               echo ""
+               PaqueteAInstalar=$(apt-cache search virtualbox | grep "virtualbox-" | tail -n1 | cut -d' ' -f1)
+               apt-get -y install $PaqueteAInstalar
+
+             # Instalar el pack de extensiones
+               echo ""
+               echo "  Instalando el pack de extensiones..."
+               echo ""
+               mkdir -p /root/SoftInst/VirtualBox/
+               cd /root/SoftInst/VirtualBox/
+               VersDeVBoxInstalada=$(virtualbox -h | grep "VirtualBox Manager" | cut -d'v' -f2)
+               wget http://download.virtualbox.org/virtualbox/$VersDeVBoxInstalada/Oracle_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
+               vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
+
+             # Agregar el usuario 1000 al grupo virtualbox
+               echo ""
+               echo "  Agregando el usuario 1000 en el grupo virtualbox..."
+               echo ""
+               Usuario1000=$(id 1000 | cut -d'(' -f2 | cut -d')' -f1)
+               usermod -a -G vboxusers $Usuario1000
+
+          ;;
+
+          2)
+
+            echo ""
+            echo "  Instalando la última versión disponible en la web..."
+            echo ""
+
+            # Instalar paquetes necesarios
+               echo ""
+               echo "  Instalando paquetes necesarios..."
+               echo ""
+               apt-get -y update
+               apt-get -y install linux-headers-$(uname -r)
+               apt-get -y install dkms
+
+             # Agregar repositorio
+               echo ""
+               echo "  Agregando repositorio de VirtualBox..."
+               echo ""
+               apt-get -y install gnupg2
+               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                   echo ""
+                   echo "    El paquete wget no está instalado. Iniciando su instalación..."
+                   echo ""
+                   apt-get -y update && apt-get -y install wget
+                   echo ""
+                 fi
+               wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
+               wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
+               echo "deb [arch=$(dpkg --print-architecture)] http://download.virtualbox.org/virtualbox/debian bookworm contrib" > /etc/apt/sources.list.d/virtualbox.list
+               apt-get -y update
+
+             # Instalar virtualbox
+               echo ""
+               echo "  Instalando el paquete virtualbox..."
+               echo ""
+               PaqueteAInstalar=$(apt-cache search virtualbox | grep "virtualbox-" | tail -n1 | cut -d' ' -f1)
+               apt-get -y install $PaqueteAInstalar
+
+             # Instalar el pack de extensiones
+               echo ""
+               echo "  Instalando el pack de extensiones..."
+               echo ""
+               mkdir -p /root/SoftInst/VirtualBox/
+               cd /root/SoftInst/VirtualBox/
+               VersDeVBoxInstalada=$(virtualbox -h | grep "VirtualBox Manager" | cut -d'v' -f2)
+               wget http://download.virtualbox.org/virtualbox/$VersDeVBoxInstalada/Oracle_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
+               vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
+
+             # Agregar el usuario 1000 al grupo virtualbox
+               echo ""
+               echo "  Agregando el usuario 1000 en el grupo virtualbox..."
+               echo ""
+               Usuario1000=$(id 1000 | cut -d'(' -f2 | cut -d')' -f1)
+               usermod -a -G vboxusers $Usuario1000
+
+          ;;
+
+      esac
+
+  done
 
 elif [ $cVerSO == "11" ]; then
 
@@ -161,62 +264,61 @@ elif [ $cVerSO == "11" ]; then
       Usuario1000=$(id 1000 | cut -d'(' -f2 | cut -d')' -f1)
       usermod -a -G vboxusers $Usuario1000
 
-elif [ $cVerSO == "12" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de VirtualBox para Debian 12 (Bookworm)..." 
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 10 (Buster)..."  
   echo ""
 
-  # Instalar paquetes necesarios
-    echo ""
-    echo "  Instalando paquetes necesarios..."
-    echo ""
-    apt-get -y update
-    apt-get -y install linux-headers-$(uname -r)
-    apt-get -y install dkms
+  echo ""
+  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
 
-  # Agregar repositorio
-    echo ""
-    echo "  Agregando repositorio de VirtualBox..."
-    echo ""
-    apt-get -y install gnupg2
-    # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo "  wget no está instalado. Iniciando su instalación..."
-        echo ""
-        apt-get -y update > /dev/null
-        apt-get -y install wget
-        echo ""
-      fi
-    wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
-    wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
-    echo "deb [arch=$(dpkg --print-architecture)] http://download.virtualbox.org/virtualbox/debian bookworm contrib" > /etc/apt/sources.list.d/virtualbox.list
-    apt-get -y update
+elif [ $cVerSO == "9" ]; then
 
-  # Instalar virtualbox
-    echo ""
-    echo "  Instalando el paquete virtualbox..."
-    echo ""
-    PaqueteAInstalar=$(apt-cache search virtualbox | grep "virtualbox-" | tail -n1 | cut -d' ' -f1)
-    apt-get -y install $PaqueteAInstalar
+  echo ""
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 9 (Stretch)..."  
+  echo ""
 
-  # Instalar el pack de extensiones
-    echo ""
-    echo "  Instalando el pack de extensiones..."
-    echo ""
-    mkdir -p /root/SoftInst/VirtualBox/
-    cd /root/SoftInst/VirtualBox/
-    VersDeVBoxInstalada=$(virtualbox -h | grep "VirtualBox Manager" | cut -d'v' -f2)
-    wget http://download.virtualbox.org/virtualbox/$VersDeVBoxInstalada/Oracle_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
-    vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
+  echo ""
+  echo "  AGREGANDO EL REPOSITORIO"
+  echo ""
+  echo "deb http://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list
 
-   # Agregar el usuario 1000 al grupo virtualbox
-     echo ""
-     echo "  Agregando el usuario 1000 en el grupo virtualbox..."
-     echo ""
-     Usuario1000=$(id 1000 | cut -d'(' -f2 | cut -d')' -f1)
-     usermod -a -G vboxusers $Usuario1000
+  echo ""
+  echo "  AGREGANDO LA LLAVE"
+  echo ""
+  wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
+
+  echo ""
+  echo "  ACTUALIZANDO EL SISTEMA"
+  echo ""
+  apt-get update
+
+  echo ""
+  echo "  INSTALANDO EL PAQUETE"
+  echo ""
+  apt-get -y install virtualbox-5.1
+
+elif [ $cVerSO == "8" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 8 (Jessie)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de VirtualBox para Debian 7 (Wheezy)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
 
 fi
 
