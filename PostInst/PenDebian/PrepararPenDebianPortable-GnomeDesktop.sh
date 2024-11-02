@@ -127,7 +127,7 @@ elif [ $cVerSO == "12" ]; then
     apt-get -y install firmware-ti-connectivity
     apt-get -y install firmware-zd1211
 
-  # Herramientas para analizar hardware
+  # Herramientas para listar hardware
     apt-get -y install lstopo
 
   # Otros cambios
