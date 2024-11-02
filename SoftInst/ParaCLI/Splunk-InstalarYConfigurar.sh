@@ -137,6 +137,7 @@
               # Notificar fin de la instalación
                 echo ""
                 echo "  La instalación ha finalizado."
+                echo "    La web de Splunk está accesible en el puerto 8000."
                 echo ""
                 echo "    Para configurar la escucha:"
                 echo "      Acceder a la interfaz web y loguearse con la cuenta creada."
