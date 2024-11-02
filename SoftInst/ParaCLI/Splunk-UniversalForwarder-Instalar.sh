@@ -112,7 +112,7 @@
                  echo ""
                fi
              wget -O splunkforwarder-Linux-amd64.deb "https://download.splunk.com/products/universalforwarder/releases/9.3.1/linux/splunkforwarder-9.3.1-0b8d769cb912-linux-2.6-amd64.deb"
-             apt -y install /root/SoftInst/Splunk/splunkforwarder-Linux-x.deb
+             apt -y install /root/SoftInst/Splunk/splunkforwarder-Linux-amd64.deb
 
            ;;
 
@@ -132,7 +132,7 @@
                  echo ""
                fi
              wget -O splunkforwarder-Linux-armv8.deb "https://download.splunk.com/products/universalforwarder/releases/9.3.1/linux/splunkforwarder-9.3.1-0b8d769cb912-Linux-armv8.deb"
-             apt -y install /root/SoftInst/Splunk/splunkforwarder-Linux-x.deb
+             apt -y install /root/SoftInst/Splunk/splunkforwarder-Linux-armv8.deb
 
            ;;
 
