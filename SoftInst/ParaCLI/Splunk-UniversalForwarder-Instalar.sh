@@ -113,6 +113,31 @@
                fi
              wget -O splunkforwarder-Linux-amd64.deb "https://download.splunk.com/products/universalforwarder/releases/9.3.1/linux/splunkforwarder-9.3.1-0b8d769cb912-linux-2.6-amd64.deb"
              apt -y install /root/SoftInst/Splunk/splunkforwarder-Linux-amd64.deb
+             /opt/splunkforwarder/bin/splunk start --accept-license --answer-yes --seed-passwd "UsuarioX"
+             /opt/splunkforwarder/bin/splunk stop
+             /opt/splunkforwarder/bin/splunk enable boot-start
+             /opt/splunkforwarder/bin/splunk start
+
+             # Notificar fin de ejecución del script
+               echo ""
+               echo "    Instalación de Splunk Universal Forwarder, finalizada."
+               echo ""
+               echo "      Para indicar el servidor Splunk al que reenviar logs:"
+               echo ""
+               echo "        /opt/splunkforwarder/bin/splunk add forward-server IPDelSIEM:PuertoDelSIEM"
+               echo "          por ejemplo:"
+               echo "        /opt/splunkforwarder/bin/splunk add forward-server 192.168.1.10:9997"
+               echo ""
+               echo "      Para indicar que archivo de logs es el que se va a reenviar:"
+               echo ""
+               echo "        /opt/splunkforwarder/bin/splunk add monitor /Ruta/Al/Archivo.log"
+               echo "          por ejemplo:"
+               echo "        /opt/splunkforwarder/bin/splunk add monitor /var/log/syslog"
+               echo ""
+               echo "      Después de cada cambio se debe reiniciar el servicio del forwarder con:"
+               echo ""
+               echo "        /opt/splunkforwarder/bin/splunk restart"
+               echo ""
 
            ;;
 
@@ -133,6 +158,31 @@
                fi
              wget -O splunkforwarder-Linux-armv8.deb "https://download.splunk.com/products/universalforwarder/releases/9.3.1/linux/splunkforwarder-9.3.1-0b8d769cb912-Linux-armv8.deb"
              apt -y install /root/SoftInst/Splunk/splunkforwarder-Linux-armv8.deb
+             /opt/splunkforwarder/bin/splunk start --accept-license --answer-yes --seed-passwd "UsuarioX"
+             /opt/splunkforwarder/bin/splunk stop
+             /opt/splunkforwarder/bin/splunk enable boot-start
+             /opt/splunkforwarder/bin/splunk start
+
+             # Notificar fin de ejecución del script
+               echo ""
+               echo "    Instalación de Splunk Universal Forwarder, finalizada."
+               echo ""
+               echo "      Para indicar el servidor Splunk al que reenviar logs:"
+               echo ""
+               echo "        /opt/splunkforwarder/bin/splunk add forward-server IPDelSIEM:PuertoDelSIEM"
+               echo "          por ejemplo:"
+               echo "        /opt/splunkforwarder/bin/splunk add forward-server 192.168.1.10:9997"
+               echo ""
+               echo "      Para indicar que archivo de logs es el que se va a reenviar:"
+               echo ""
+               echo "        /opt/splunkforwarder/bin/splunk add monitor /Ruta/Al/Archivo.log"
+               echo "          por ejemplo:"
+               echo "        /opt/splunkforwarder/bin/splunk add monitor /var/log/syslog"
+               echo ""
+               echo "      Después de cada cambio se debe reiniciar el servicio del forwarder con:"
+               echo ""
+               echo "        /opt/splunkforwarder/bin/splunk restart"
+               echo ""
 
            ;;
 
@@ -153,6 +203,31 @@
                fi
              wget -O splunkforwarder-Linux-x.deb "https://download.splunk.com/products/universalforwarder/releases/9.3.1/linux/splunkforwarder-9.3.1-0b8d769cb912-Linux-armv8.deb"
              apt -y install /root/SoftInst/Splunk/splunkforwarder-Linux-x.deb
+             /opt/splunkforwarder/bin/splunk start --accept-license --answer-yes --seed-passwd "UsuarioX"
+             /opt/splunkforwarder/bin/splunk stop
+             /opt/splunkforwarder/bin/splunk enable boot-start
+             /opt/splunkforwarder/bin/splunk start
+
+             # Notificar fin de ejecución del script
+               echo ""
+               echo "    Instalación de Splunk Universal Forwarder, finalizada."
+               echo ""
+               echo "      Para indicar el servidor Splunk al que reenviar logs:"
+               echo ""
+               echo "        /opt/splunkforwarder/bin/splunk add forward-server IPDelSIEM:PuertoDelSIEM"
+               echo "          por ejemplo:"
+               echo "        /opt/splunkforwarder/bin/splunk add forward-server 192.168.1.10:9997"
+               echo ""
+               echo "      Para indicar que archivo de logs es el que se va a reenviar:"
+               echo ""
+               echo "        /opt/splunkforwarder/bin/splunk add monitor /Ruta/Al/Archivo.log"
+               echo "          por ejemplo:"
+               echo "        /opt/splunkforwarder/bin/splunk add monitor /var/log/syslog"
+               echo ""
+               echo "      Después de cada cambio se debe reiniciar el servicio del forwarder con:"
+               echo ""
+               echo "        /opt/splunkforwarder/bin/splunk restart"
+               echo ""
 
            ;;
 
