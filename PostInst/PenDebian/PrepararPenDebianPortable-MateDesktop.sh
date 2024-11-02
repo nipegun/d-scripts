@@ -168,7 +168,7 @@ elif [ $cVerSO == "12" ]; then
     apt-get -y install firmware-zd1211
 
   # Herramientas para listar hardware
-    apt-get -y install lstopo
+    apt-get -y install hwloc # Tiene el comando lstopo
 
   # Otros cambios
     mkdir -p /Particiones/LVM/G1/            2> /dev/null
