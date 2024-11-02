@@ -36,54 +36,14 @@ cFinColor='\033[0m'
       cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo "  Iniciando el script de preparación del Pendrive con Debian 7 (Wheezy) Portable..." 
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  echo "  Iniciando el script de preparación del Pendrive con Debian 8 (Jessie) Portable..." 
+  echo "  Iniciando el script de preparación del Pendrive con Debian 13 (x) Portable..." 
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "9" ]; then
-
-  echo ""
-  echo "  Iniciando el script de preparación del Pendrive con Debian 9 (Stretch) Portable..." 
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "10" ]; then
-
-  echo ""
-  echo "  Iniciando el script de preparación del Pendrive con Debian 10 (Buster) Portable..." 
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
-  
-elif [ $cVerSO == "11" ]; then
-
-  echo ""
-  echo "  Iniciando el script de preparación del Pendrive con Debian 11 (Bullseye) Portable..." 
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $cVerSO == "12" ]; then
@@ -100,7 +60,7 @@ elif [ $cVerSO == "12" ]; then
 
   # Instalar software
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-InstalarSoftware.sh | bash
-  
+
   # Desinstalar software extra instalado
     apt-get -y autoremove subtitleeditor
     apt-get -y autoremove easytag
@@ -166,6 +126,9 @@ elif [ $cVerSO == "12" ]; then
     apt-get -y install firmware-realtek
     apt-get -y install firmware-ti-connectivity
     apt-get -y install firmware-zd1211
+
+  # Herramientas para analizar hardware
+    apt-get -y install lstopo
 
   # Otros cambios
     mkdir -p /Particiones/LVM/G1/            2> /dev/null
@@ -253,4 +216,55 @@ elif [ $cVerSO == "12" ]; then
 
   # Agregar el usuario a sudo
     echo "usuariox ALL=(ALL:ALL) ALL" >> /etc/sudoers
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo "  Iniciando el script de preparación del Pendrive con Debian 11 (Bullseye) Portable..." 
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo "  Iniciando el script de preparación del Pendrive con Debian 10 (Buster) Portable..." 
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "9" ]; then
+
+  echo ""
+  echo "  Iniciando el script de preparación del Pendrive con Debian 9 (Stretch) Portable..." 
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "8" ]; then
+
+  echo ""
+  echo "  Iniciando el script de preparación del Pendrive con Debian 8 (Jessie) Portable..." 
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo "  Iniciando el script de preparación del Pendrive con Debian 7 (Wheezy) Portable..." 
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
 fi
