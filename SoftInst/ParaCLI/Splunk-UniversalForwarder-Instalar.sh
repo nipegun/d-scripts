@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar el Splunk Universal Forwarder en Debian
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Splunk-InstalarYConfigurar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Splunk-UniversalForwarder-Instalar.sh | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Splunk-InstalarYConfigurar.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Splunk-UniversalForwarder-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -101,6 +101,8 @@
              echo ""
              echo "  Splunk Universal Forwarder v9.3.1 (amd64)..."
              echo ""
+             mkdir -p /root/SoftInst/Splunk/ 2> /dev/null
+             cd /root/SoftInst/Splunk/
              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                  echo ""
@@ -110,6 +112,7 @@
                  echo ""
                fi
              wget -O splunkforwarder-Linux-amd64.deb "https://download.splunk.com/products/universalforwarder/releases/9.3.1/linux/splunkforwarder-9.3.1-0b8d769cb912-linux-2.6-amd64.deb"
+             apt -y install /root/SoftInst/Splunk/splunkforwarder-Linux-x.deb
 
            ;;
 
@@ -118,7 +121,18 @@
              echo ""
              echo "  Splunk Universal Forwarder v9.3.1 (ARMv8)..."
              echo ""
+             mkdir -p /root/SoftInst/Splunk/ 2> /dev/null
+             cd /root/SoftInst/Splunk/
+             # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+               if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                 echo ""
+                 echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+                 echo ""
+                 apt-get -y update && apt-get -y install wget
+                 echo ""
+               fi
              wget -O splunkforwarder-Linux-armv8.deb "https://download.splunk.com/products/universalforwarder/releases/9.3.1/linux/splunkforwarder-9.3.1-0b8d769cb912-Linux-armv8.deb"
+             apt -y install /root/SoftInst/Splunk/splunkforwarder-Linux-x.deb
 
            ;;
 
@@ -127,7 +141,18 @@
              echo ""
              echo "  Splunk Universal Forwarder v9.3.1 (x)..."
              echo ""
+             mkdir -p /root/SoftInst/Splunk/ 2> /dev/null
+             cd /root/SoftInst/Splunk/
+             # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+               if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                 echo ""
+                 echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+                 echo ""
+                 apt-get -y update && apt-get -y install wget
+                 echo ""
+               fi
              wget -O splunkforwarder-Linux-x.deb "https://download.splunk.com/products/universalforwarder/releases/9.3.1/linux/splunkforwarder-9.3.1-0b8d769cb912-Linux-armv8.deb"
+             apt -y install /root/SoftInst/Splunk/splunkforwarder-Linux-x.deb
 
            ;;
 
