@@ -141,8 +141,8 @@
                 echo ""
                 echo "    Para configurar la escucha:"
                 echo "      Acceder a la interfaz web y loguearse con la cuenta creada."
-                echo "      Luego ir a Settings >> Add Data >> Forwarding and receiving"
-                echo '      En "Configure receiving" hacer clñick en "Add new".'
+                echo '      Luego ir a "Settings" >> "Add Data" >> "Forwarding and receiving".'
+                echo '      En "Configure receiving" hacer click en "Add new".'
                 echo '      Indicad, por ejemplo, el puerto 9997 y Salvar.'
                 echo ''
 
