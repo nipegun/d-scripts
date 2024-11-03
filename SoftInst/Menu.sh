@@ -5,76 +5,76 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-  # Definir fecha de ejecución del script
-    cFechaDeEjec=$(date +a%Ym%md%d@%T)
+    # Definir fecha de ejecución del script
+      cFechaDeEjec=$(date +a%Ym%md%d@%T)
 
-  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
-      echo ""
-      echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
-      echo ""
-      apt-get -y update && apt-get -y install dialog
-      echo ""
-    fi
+    # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install dialog
+        echo ""
+      fi
 
-  # Crear el menú
-    #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
-    menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
-      opciones=(
-        1 "Opción 1" on
-        2 "Opción 2" off
-        3 "Opción 3" off
-        4 "Opción 4" off
-        5 "Opción 5" off
-      )
-    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-    #clear
+    # Crear el menú
+      #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+        opciones=(
+          1 "Opción 1" on
+          2 "Opción 2" off
+          3 "Opción 3" off
+          4 "Opción 4" off
+          5 "Opción 5" off
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+      #clear
 
-    for choice in $choices
-      do
-        case $choice in
+      for choice in $choices
+        do
+          case $choice in
 
-          1)
+            1)
 
-            echo ""
-            echo "  Opción 1..."
-            echo ""
+              echo ""
+              echo "  Opción 1..."
+              echo ""
 
-          ;;
+            ;;
 
-          2)
+            2)
 
-            echo ""
-            echo "  Opción 2..."
-            echo ""
+              echo ""
+              echo "  Opción 2..."
+              echo ""
 
-          ;;
+            ;;
 
-          3)
+            3)
 
-            echo ""
-            echo "  Opción 3..."
-            echo ""
+              echo ""
+              echo "  Opción 3..."
+              echo ""
 
-          ;;
+            ;;
 
-          4)
+            4)
 
-            echo ""
-            echo "  Opción 4..."
-            echo ""
+              echo ""
+              echo "  Opción 4..."
+              echo ""
 
-          ;;
+            ;;
 
-          5)
+            5)
 
-            echo ""
-            echo "  Opción 5..."
-            echo ""
+              echo ""
+              echo "  Opción 5..."
+              echo ""
 
-          ;;
+            ;;
 
-      esac
+        esac
 
-  done
+    done
 
