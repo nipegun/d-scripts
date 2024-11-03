@@ -9,10 +9,10 @@
 # Script de NiPeGun para borrar logs del SIEM Splunk
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Splunk-Logs-Borrar.sh | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Splunk-Logs-Borrar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -46,11 +46,11 @@
 # Crear el menú
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
-      1 "Borrar todos los logs"             off
-      2 "Borrar sólo los logs del índice x" off
-      3 "Borrar sólo los logs del índice x" off
-      4 "Borrar sólo los logs del índice x" off
-      5 "Borrar sólo los logs del índice x" off
+      1 "Borrar todos los logs"                      off
+      2 "Borrar sólo los logs del índice main"       off 
+      3 "Borrar sólo los logs del índice web_logs"   off
+      4 "Borrar sólo los logs del índice security"   off
+      5 "Borrar sólo los logs del índice error_logs" off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -72,9 +72,9 @@
         2)
 
           echo ""
-          echo "  Borrando sólo los logs del índice x..."
+          echo "  Borrando sólo los logs del índice main..."
           echo ""
-          /opt/splunk/bin/splunk clean eventdata -index <nombre_del_indice>
+          /opt/splunk/bin/splunk clean eventdata -index main
           /opt/splunk/bin/splunk restart
 
         ;;
@@ -82,9 +82,9 @@
         3)
 
           echo ""
-          echo "  Borrando sólo los logs del índice x..."
+          echo "  Borrando sólo los logs del índice web_logs..."
           echo ""
-          /opt/splunk/bin/splunk clean eventdata -index <nombre_del_indice>
+          /opt/splunk/bin/splunk clean eventdata -index web_logs
           /opt/splunk/bin/splunk restart
 
         ;;
@@ -92,9 +92,9 @@
         4)
 
           echo ""
-          echo "  Borrando sólo los logs del índice x..."
+          echo "  Borrando sólo los logs del índice security..."
           echo ""
-          /opt/splunk/bin/splunk clean eventdata -index <nombre_del_indice>
+          /opt/splunk/bin/splunk clean eventdata -index security
           /opt/splunk/bin/splunk restart
 
         ;;
@@ -102,9 +102,9 @@
         5)
 
           echo ""
-          echo "  Borrando sólo los logs del índice x..."
+          echo "  Borrando sólo los logs del índice error_logs..."
           echo ""
-          /opt/splunk/bin/splunk clean eventdata -index <nombre_del_indice>
+          /opt/splunk/bin/splunk clean eventdata -index error_logs
           /opt/splunk/bin/splunk restart
 
         ;;
