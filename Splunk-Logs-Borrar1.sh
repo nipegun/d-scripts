@@ -64,8 +64,9 @@
           echo ""
           echo "  Borrando todos los logs que hay en el SIEM Splunk..."
           echo ""
+          /opt/splunk/bin/splunk stop
           /opt/splunk/bin/splunk clean eventdata
-          /opt/splunk/bin/splunk restart
+          /opt/splunk/bin/splunk start
 
         ;;
 
@@ -74,8 +75,9 @@
           echo ""
           echo "  Borrando sólo los logs del índice main..."
           echo ""
+          /opt/splunk/bin/splunk stop
           /opt/splunk/bin/splunk clean eventdata -index main
-          /opt/splunk/bin/splunk restart
+          /opt/splunk/bin/splunk start
 
         ;;
 
@@ -84,8 +86,9 @@
           echo ""
           echo "  Borrando sólo los logs del índice web_logs..."
           echo ""
+          /opt/splunk/bin/splunk stop
           /opt/splunk/bin/splunk clean eventdata -index web_logs
-          /opt/splunk/bin/splunk restart
+          /opt/splunk/bin/splunk start
 
         ;;
 
@@ -94,8 +97,9 @@
           echo ""
           echo "  Borrando sólo los logs del índice security..."
           echo ""
+          /opt/splunk/bin/splunk stop
           /opt/splunk/bin/splunk clean eventdata -index security
-          /opt/splunk/bin/splunk restart
+          /opt/splunk/bin/splunk start
 
         ;;
 
@@ -104,8 +108,9 @@
           echo ""
           echo "  Borrando sólo los logs del índice error_logs..."
           echo ""
+          /opt/splunk/bin/splunk stop
           /opt/splunk/bin/splunk clean eventdata -index error_logs
-          /opt/splunk/bin/splunk restart
+          /opt/splunk/bin/splunk start
 
         ;;
 
