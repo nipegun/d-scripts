@@ -159,17 +159,17 @@
     # Discos duros
 
       # OpenWrt
-        cd ~"/VirtualBox VMs/openwrtlab/"
+        cd ~/"VirtualBox VMs/openwrtlab/"
         wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/openwrtlab.vmdk
         VBoxManage storageattach "openwrtlab" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/openwrtlab/openwrtlab.vmdk"
 
       # Kali
-        cd ~"/VirtualBox VMs/kali/"
+        cd ~/"VirtualBox VMs/kali/"
         wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/kali.vmdk
         VBoxManage storageattach "kali" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/kali/kali.vmdk"
 
       # Sift
-        cd ~"/VirtualBox VMs/sift/"
+        cd ~/"VirtualBox VMs/sift/"
         wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/sift.vmdk
         VBoxManage storageattach "sift" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/sift/sift.vmdk"
 
