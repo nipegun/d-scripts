@@ -88,7 +88,7 @@
           VBoxManage storagectl "openwrtlab" --name "SATA Controller" --add sata --controller IntelAhci --portcount 1
           VBoxManage storageattach "openwrtlab" --storagectl "SATA Controller" --port 0 --device 0 --type dvddrive --medium emptydrive
         # Controladora de disco duro
-          VBoxManage.exe storagectl "openwrtlab" --name "VirtIO" --add "VirtIO" --bootable on --portcount 1
+          VBoxManage storagectl "openwrtlab" --name "VirtIO" --add "VirtIO" --bootable on --portcount 1
 
     # Crear máquina virtual de Kali
       echo ""
