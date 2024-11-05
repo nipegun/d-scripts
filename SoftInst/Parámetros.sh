@@ -15,13 +15,13 @@
   cFinColor='\033[0m'
 
 # Definir la cantidad de argumentos esperados
-  cCantArgumEsperados=2
+  cCantParamEsperados=2
 
-if [ $# -ne $cCantArgumEsperados ]
+if [ $# -ne $cCantParamEsperados ]
   then
     echo ""
     echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
-    echo "    $0 [Argumento1] [Argumento2]"
+    echo "    $0 [Parámetro1] [Parámetro2]"
     echo ""
     echo "  Ejemplo:"
     echo "    $0 'Hola' 'Mundo'"
