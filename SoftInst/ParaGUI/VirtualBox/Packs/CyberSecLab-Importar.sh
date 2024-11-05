@@ -37,7 +37,7 @@
     echo ""
     echo -e "${cColorRojo}      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox-Instalar.sh | sudo bash${cFinColor}"
     echo ""
-    exit
+    #exit
   fi
 
 # Determinar la versión de Debian
