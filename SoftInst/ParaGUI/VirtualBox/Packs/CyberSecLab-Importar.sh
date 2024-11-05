@@ -24,15 +24,6 @@
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
-# Comprobar si el script está corriendo como root
-  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
-  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
-    echo ""
-    exit
-  fi
-
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
@@ -71,183 +62,125 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de importación del pack CyberSecLab para el VirtualBox de Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    # Definir fecha de ejecución del script
-      cFechaDeEjec=$(date +a%Ym%md%d@%T)
+    # Crear máquina virtual de OpenWrt
+      echo ""
+      echo "    Creando máquina virtual de OpenWrt..."
+      echo ""
+      VBoxManage createvm --name "openwrtlab" --ostype "Linux_64" --register
+      VBoxManage modifyvm "openwrtlab" --firmware efi
+      # Procesador
+        VBoxManage modifyvm "openwrtlab" --cpus 2
+      # RAM
+        VBoxManage modifyvm "openwrtlab" --memory 2048
+      # Gráfica
+        VBoxManage modifyvm "openwrtlab" --graphicscontroller vmsvga --vram 16 
+      # Audio
+        VBoxManage modifyvm "openwrtlab" --audio none
+      # Red
+        VBoxManage modifyvm "openwrtlab" --nictype1 virtio
+          VBoxManage modifyvm "openwrtlab" --nic1 "NAT"
+        VBoxManage modifyvm "openwrtlab" --nictype2 virtio
+          VBoxManage modifyvm "openwrtlab" --nic2 intnet --intnet2 "redintlan"
+        VBoxManage modifyvm "openwrtlab" --nictype3 virtio
+          VBoxManage modifyvm "openwrtlab" --nic3 intnet --intnet3 "redintlab"
+      # Almacenamiento
+        # CD
+          VBoxManage storagectl "openwrtlab" --name "SATA Controller" --add sata --controller IntelAhci --portcount 1
+          VBoxManage storageattach "openwrtlab" --storagectl "SATA Controller" --port 0 --device 0 --type dvddrive --medium emptydrive
+        # Controladora de disco duro
+          VBoxManage.exe storagectl "openwrtlab" --name "VirtIO" --add "VirtIO" --bootable on --portcount 1
 
-    # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
-        echo ""
-        apt-get -y update && apt-get -y install dialog
-        echo ""
-      fi
+    # Crear máquina virtual de Kali
+      echo ""
+      echo "    Creando máquina virtual de Kali..."
+      echo ""
+      VBoxManage createvm --name "kali" --ostype "Debian_64" --register
+      VBoxManage modifyvm "kali" --firmware efi
+      # Procesador
+        VBoxManage modifyvm "kali" --cpus 4
+      # RAM
+        VBoxManage modifyvm "kali" --memory 4096
+      # Gráfica
+        VBoxManage modifyvm "kali" --graphicscontroller vmsvga --vram 128 --accelerate3d on
+      # Red
+        VBoxManage modifyvm "kali" --nictype1 virtio
+        VBoxManage modifyvm "kali" --nic1 intnet --intnet1 "redintlan"
+      # Almacenamiento
+        # CD
+          VBoxManage storagectl "kali" --name "SATA Controller" --add sata --controller IntelAhci --portcount 1
+          VBoxManage storageattach "kali" --storagectl "SATA Controller" --port 0 --device 0 --type dvddrive --medium emptydrive
+        # Controladora de disco duro
+          VBoxManage storagectl "kali" --name "VirtIO" --add "VirtIO" --bootable on --portcount 1
 
-    # Crear el menú
-      #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
-      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
-        opciones=(
-          1 "Instalar VirtualBox" off
-          2 "Instalar laboratorio completo en VirtualBox" on
-        )
-      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-      #clear
+    # Crear máquina virtual de Sift
+      echo ""
+      echo "    Creando máquina virtual de Sift..."
+      echo ""
+      VBoxManage createvm --name "sift" --ostype "Ubuntu_64" --register
+      VBoxManage modifyvm "sift" --firmware efi
+      # Procesador
+        VBoxManage modifyvm "sift" --cpus 4
+      # RAM
+        VBoxManage modifyvm "sift" --memory 4096
+      # Gráfica
+        VBoxManage modifyvm "sift" --graphicscontroller vmsvga --vram 128 --accelerate3d on
+      # Red
+        VBoxManage modifyvm "sift" --nictype1 virtio
+        VBoxManage modifyvm "sift" --nic1 intnet --intnet1 "redintlan"
+      # Almacenamiento
+        # CD
+          VBoxManage storagectl "sift" --name "SATA Controller" --add sata --controller IntelAhci --portcount 1
+          VBoxManage storageattach "sift" --storagectl "SATA Controller" --port 0 --device 0 --type dvddrive --medium emptydrive
+        # Controladora de disco duro
+          VBoxManage storagectl "sift" --name "VirtIO" --add "VirtIO" --bootable on --portcount 1
 
-      for choice in $choices
-        do
-          case $choice in
+    # Crear máquina virtual de Pruebas
+      echo ""
+      echo "    Creando máquina virtual de Pruebas..."
+      echo ""
+      VBoxManage createvm --name "pruebas" --ostype "Other_64" --register
+      VBoxManage modifyvm "pruebas" --firmware efi
+      # Procesador
+        VBoxManage modifyvm "pruebas" --cpus 4
+      # RAM
+        VBoxManage modifyvm "pruebas" --memory 4096
+      # Gráfica
+        VBoxManage modifyvm "pruebas" --graphicscontroller vmsvga --vram 128 --accelerate3d on
+      # Red
+        VBoxManage modifyvm "pruebas" --nictype1 virtio
+        VBoxManage modifyvm "pruebas" --nic1 intnet --intnet1 "redintlab"
+      # Almacenamiento
+        # CD
+          VBoxManage storagectl "pruebas" --name "SATA Controller" --add sata --controller IntelAhci --portcount 1
+          VBoxManage storageattach "pruebas" --storagectl "SATA Controller" --port 0 --device 0 --type dvddrive --medium emptydrive
+        # Controladora de disco duro
+          VBoxManage storagectl "pruebas" --name "VirtIO" --add "VirtIO" --bootable on --portcount 1
 
-            1)
+    # Discos duros
 
-              echo ""
-              echo "  Lanzando el script de instalación de VirtualBox..."
-              echo ""
-              # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-                if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-                  echo ""
-                  echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-                  echo ""
-                  apt-get -y update && apt-get -y install curl
-                  echo ""
-                fi
-              curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox-Instalar.sh | bash
+      # OpenWrt
+        cd "~/VirtualBox VMs/openwrtlab/"
+        wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/openwrtlab.vmdk
+        VBoxManage storageattach "openwrtlab" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/openwrtlab/openwrtlab.vmdk"
 
-            ;;
+      # Kali
+        cd "~/VirtualBox VMs/kali/"
+        wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/kali.vmdk
+        VBoxManage storageattach "kali" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/kali/kali.vmdk"
 
-            2)
+      # Sift
+        cd "~/VirtualBox VMs/sift/"
+        wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/sift.vmdk
+        VBoxManage storageattach "sift" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/sift/sift.vmdk"
 
-              echo ""
-              echo "  Creando laboratorio completo de ciberseguridad en VirtualBox..."
-              echo ""
-
-              # Crear máquina virtual de OpenWrt
-                echo ""
-                echo "    Creando máquina virtual de OpenWrt..."
-                echo ""
-                VBoxManage createvm --name "openwrtlab" --ostype "Linux_64" --register
-                VBoxManage modifyvm "openwrtlab" --firmware efi
-                # Procesador
-                  VBoxManage modifyvm "openwrtlab" --cpus 2
-                # RAM
-                  VBoxManage modifyvm "openwrtlab" --memory 2048
-                # Gráfica
-                  VBoxManage modifyvm "openwrtlab" --graphicscontroller vmsvga --vram 16 
-                # Audio
-                  VBoxManage modifyvm "openwrtlab" --audio none
-                # Red
-                  VBoxManage modifyvm "openwrtlab" --nictype1 virtio
-                    VBoxManage modifyvm "openwrtlab" --nic1 "NAT"
-                  VBoxManage modifyvm "openwrtlab" --nictype2 virtio
-                    VBoxManage modifyvm "openwrtlab" --nic2 intnet --intnet2 "redintlan"
-                  VBoxManage modifyvm "openwrtlab" --nictype3 virtio
-                    VBoxManage modifyvm "openwrtlab" --nic3 intnet --intnet3 "redintlab"
-                # Almacenamiento
-                  # CD
-                    VBoxManage storagectl "openwrtlab" --name "SATA Controller" --add sata --controller IntelAhci --portcount 1
-                    VBoxManage storageattach "openwrtlab" --storagectl "SATA Controller" --port 0 --device 0 --type dvddrive --medium emptydrive
-                  # Controladora de disco duro
-                    VBoxManage.exe storagectl "openwrtlab" --name "VirtIO" --add "VirtIO" --bootable on --portcount 1
-
-              # Crear máquina virtual de Kali
-                echo ""
-                echo "    Creando máquina virtual de Kali..."
-                echo ""
-                VBoxManage createvm --name "kali" --ostype "Debian_64" --register
-                VBoxManage modifyvm "kali" --firmware efi
-                # Procesador
-                  VBoxManage modifyvm "kali" --cpus 4
-                # RAM
-                  VBoxManage modifyvm "kali" --memory 4096
-                # Gráfica
-                  VBoxManage modifyvm "kali" --graphicscontroller vmsvga --vram 128 --accelerate3d on
-                # Red
-                  VBoxManage modifyvm "kali" --nictype1 virtio
-                    VBoxManage modifyvm "kali" --nic1 intnet --intnet1 "redintlan"
-                # Almacenamiento
-                  # CD
-                    VBoxManage storagectl "kali" --name "SATA Controller" --add sata --controller IntelAhci --portcount 1
-                    VBoxManage storageattach "kali" --storagectl "SATA Controller" --port 0 --device 0 --type dvddrive --medium emptydrive
-                  # Controladora de disco duro
-                    VBoxManage storagectl "kali" --name "VirtIO" --add "VirtIO" --bootable on --portcount 1
-
-
-              # Crear máquina virtual de Sift
-                echo ""
-                echo "    Creando máquina virtual de Sift..."
-                echo ""
-                VBoxManage createvm --name "sift" --ostype "Ubuntu_64" --register
-                VBoxManage modifyvm "sift" --firmware efi
-                # Procesador
-                  VBoxManage modifyvm "sift" --cpus 4
-                # RAM
-                  VBoxManage modifyvm "sift" --memory 4096
-                # Gráfica
-                  VBoxManage modifyvm "sift" --graphicscontroller vmsvga --vram 128 --accelerate3d on
-                # Red
-                  VBoxManage modifyvm "sift" --nictype1 virtio
-                    VBoxManage modifyvm "sift" --nic1 intnet --intnet1 "redintlan"
-                # Almacenamiento
-                  # CD
-                    VBoxManage storagectl "sift" --name "SATA Controller" --add sata --controller IntelAhci --portcount 1
-                    VBoxManage storageattach "sift" --storagectl "SATA Controller" --port 0 --device 0 --type dvddrive --medium emptydrive
-                  # Controladora de disco duro
-                    VBoxManage storagectl "sift" --name "VirtIO" --add "VirtIO" --bootable on --portcount 1
-
-              # Crear máquina virtual de Pruebas
-                echo ""
-                echo "    Creando máquina virtual de Pruebas..."
-                echo ""
-                VBoxManage createvm --name "pruebas" --ostype "Other_64" --register
-                VBoxManage modifyvm "pruebas" --firmware efi
-                # Procesador
-                  VBoxManage modifyvm "pruebas" --cpus 4
-                # RAM
-                  VBoxManage modifyvm "pruebas" --memory 4096
-                # Gráfica
-                  VBoxManage modifyvm "pruebas" --graphicscontroller vmsvga --vram 128 --accelerate3d on
-                # Red
-                  VBoxManage modifyvm "pruebas" --nictype1 virtio
-                    VBoxManage modifyvm "pruebas" --nic1 intnet --intnet1 "redintlab"
-                # Almacenamiento
-                  # CD
-                    VBoxManage storagectl "pruebas" --name "SATA Controller" --add sata --controller IntelAhci --portcount 1
-                    VBoxManage storageattach "pruebas" --storagectl "SATA Controller" --port 0 --device 0 --type dvddrive --medium emptydrive
-                  # Controladora de disco duro
-                    VBoxManage storagectl "pruebas" --name "VirtIO" --add "VirtIO" --bootable on --portcount 1
-
-
-              # Discos duros
-              
-                # OpenWrt
-                  cd "~/VirtualBox VMs/openwrtlab/"
-                  wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/openwrtlab.vmdk
-                  VBoxManage storageattach "openwrtlab" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/openwrtlab/openwrtlab.vmdk"
-
-                # Kali
-                  cd "~/VirtualBox VMs/kali/"
-                  wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/kali.vmdk
-                  VBoxManage storageattach "kali" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/kali/kali.vmdk"
-
-                # Sift
-                  cd "~/VirtualBox VMs/sift/"
-                  wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/sift.vmdk
-                  VBoxManage storageattach "sift" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/sift/sift.vmdk"
-
-
-              # Agrupar las máquinas virtuales
-                echo ""
-                echo "    Agrupando las máquinas virtuales"
-                echo ""
-                VBoxManage modifyvm "openwrtlab" --groups "/CyberSecLab"
-                VBoxManage modifyvm "kali"       --groups "/CyberSecLab"
-                VBoxManage modifyvm "sift"       --groups "/CyberSecLab"
-                VBoxManage modifyvm "pruebas"    --groups "/CyberSecLab"
-
-            ;;
-
-        esac
-
-    done
+    # Agrupar las máquinas virtuales
+      echo ""
+      echo "    Agrupando las máquinas virtuales"
+      echo ""
+      VBoxManage modifyvm "openwrtlab" --groups "/CyberSecLab"
+      VBoxManage modifyvm "kali"       --groups "/CyberSecLab"
+      VBoxManage modifyvm "sift"       --groups "/CyberSecLab"
+      VBoxManage modifyvm "pruebas"    --groups "/CyberSecLab"
 
   elif [ $cVerSO == "11" ]; then
 
