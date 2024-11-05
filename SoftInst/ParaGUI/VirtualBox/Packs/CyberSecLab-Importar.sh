@@ -9,10 +9,10 @@
 # Script de NiPeGun para importar el pack CyberSecLab para VirtualBox en Debian
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/dh-scripts/refs/heads/main/SoftInst/VirtualBox/Packs/CyberSecLab-Crear.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox/Packs/CyberSecLab-Importar.sh | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/dh-scripts/refs/heads/main/SoftInst/VirtualBox/Packs/CyberSecLab-Crear.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox/Packs/CyberSecLab-Importar.sh | nano -
 # ----------
 
 # Definir constantes de color
