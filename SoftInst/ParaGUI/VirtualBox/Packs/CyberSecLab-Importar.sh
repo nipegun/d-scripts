@@ -24,14 +24,8 @@
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
-if command -v virtualbox &> /dev/null; then
-    echo "VirtualBox está instalado"
-else
-    echo "VirtualBox no está instalado"
-fi
-
-# Comprobar si el paquete virtualbox está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s virtualbox 2>/dev/null | grep installed) == "" ]]; then
+# Comprobar si el paquete virtualbox está instalado.
+  if ! command -v virtualbox &> /dev/null; then
     echo ""
     echo -e "${cColorRojo}  VirtualBox no está instalado.${cFinColor}"
     echo ""
