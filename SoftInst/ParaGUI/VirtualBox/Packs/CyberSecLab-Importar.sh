@@ -24,6 +24,22 @@
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
+# Comprobar si el paquete virtualbox está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s virtualbox 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo -e "${cColorRojo}  VirtualBox no está instalado.${cFinColor}"
+    echo ""
+    echo -e "${cColorRojo}    Para instalarlo ejecuta como root:${cFinColor}"
+    echo ""
+    echo -e "${cColorRojo}      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox-Instalar.sh | bash${cFinColor}"
+    echo ""
+    echo -e "${cColorRojo}    ...o como usuario con permisos sudo:${cFinColor}"
+    echo ""
+    echo -e "${cColorRojo}      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox-Instalar.sh | sudo bash${cFinColor}"
+    echo ""
+    exit
+  fi
+
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
