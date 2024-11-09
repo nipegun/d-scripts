@@ -9,10 +9,10 @@
 # Script de NiPeGun para mostrar la temperatura de los discos duros SATA en Debian
 #
 # Ejecución remota:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Hardware-Discos-SATA-Temperatura-Mostrar.sh | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Hardware-Discos-SATA-Temperatura-Mostrar.sh | nano -
 # ----------
 
 # Definir constantes de color
