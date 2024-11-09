@@ -17,7 +17,8 @@ echo -e "${cColorVerde}  Mostrando información de salud de discos SSD SATA...${
 echo ""
 
 echo ""
-echo "  Identificando que discos SATA son SSD..."echo ""
+echo "  Identificando que discos SATA son SSD..."
+echo ""
 
 # Obtener la cantidad de discos SSD SATA que hay instalados en el sistema
    for LetraDiscoSATA in {a..x}
@@ -33,9 +34,9 @@ echo "  Mostrando estado de salud de todos los discos SSD SATA instalados en el 
 # Comprobar si el paquete hdparm está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s hdparm 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "hdparm no está instalado. Iniciando su instalación..."     echo ""
-     apt-get -y update
-     apt-get -y install hdparm
+     echo "hdparm no está instalado. Iniciando su instalación..."
+     echo ""
+     apt-get -y update && apt-get -y install hdparm
      echo ""
    fi
 
