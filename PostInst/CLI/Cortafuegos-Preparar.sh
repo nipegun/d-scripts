@@ -45,45 +45,20 @@
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 7 (Wheezy)...${cFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 13 (x)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
-elif [ $cVerSO == "9" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 9 (Stretch)...${cFinColor}"
-  echo ""
-
-  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-  echo '#!/bin/bash'                                                                         > /root/scripts/ParaEsteDebian/ComandosIPTables.sh
-  echo ""                                                                                   >> /root/scripts/ParaEsteDebian/ComandosIPTables.sh
-  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE IPTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/ParaEsteDebian/ComandosIPTables.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ParaEsteDebian/ComandosIPTables.sh
-  echo ""                                                                                   >> /root/scripts/ParaEsteDebian/ComandosIPTables.sh
-  chmod 700                                                                                    /root/scripts/ParaEsteDebian/ComandosIPTables.sh
-  echo "/root/scripts/ParaEsteDebian/ComandosIPTables.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-
-elif [ $cVerSO == "10" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
@@ -110,10 +85,10 @@ elif [ $cVerSO == "11" ]; then
   chmod 700                                                                                    /root/scripts/ParaEsteDebian/ComandosNFTables.sh
   echo "/root/scripts/ParaEsteDebian/ComandosNFTables.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
-elif [ $cVerSO == "12" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 12 (Bookworm)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
@@ -124,6 +99,41 @@ elif [ $cVerSO == "12" ]; then
   echo ""                                                                                   >> /root/scripts/ParaEsteDebian/ComandosNFTables.sh
   chmod 700                                                                                    /root/scripts/ParaEsteDebian/ComandosNFTables.sh
   echo "/root/scripts/ParaEsteDebian/ComandosNFTables.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+elif [ $cVerSO == "9" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 9 (Stretch)...${cFinColor}"
+  echo ""
+
+  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                         > /root/scripts/ParaEsteDebian/ComandosIPTables.sh
+  echo ""                                                                                   >> /root/scripts/ParaEsteDebian/ComandosIPTables.sh
+  echo "#  ESCRIBE ABAJO, UNO POR LÍNEA, LOS COMANDOS DE IPTABLES A EJECUTAR AL ARRANQUE"   >> /root/scripts/ParaEsteDebian/ComandosIPTables.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼" >> /root/scripts/ParaEsteDebian/ComandosIPTables.sh
+  echo ""                                                                                   >> /root/scripts/ParaEsteDebian/ComandosIPTables.sh
+  chmod 700                                                                                    /root/scripts/ParaEsteDebian/ComandosIPTables.sh
+  echo "/root/scripts/ParaEsteDebian/ComandosIPTables.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+elif [ $cVerSO == "8" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 8 (Jessie)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script para preparar el cortafuegos de Debian 7 (Wheezy)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
 
 fi
 
