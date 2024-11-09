@@ -15,7 +15,6 @@ cCantArgumEsperados=1
 if [ $# -ne $EXPECTED_ARGS ]
   then
     echo ""
-    
     echo "Mal uso del script."
     echo ""
     echo "El uso correcto sería: $0 Dispositivo"
@@ -27,66 +26,56 @@ if [ $# -ne $EXPECTED_ARGS ]
     exit
   else
     echo ""
-    echo "----------------------------------------"
-    echo "  ACTIVANDO SMART EN EL DISPOSITIVO..."    echo "----------------------------------------"
+    echo "  ACTIVANDO SMART EN EL DISPOSITIVO..."
     echo ""
     smartctl -s on $1
 
     echo ""
-    echo "-------------------------------------"
-    echo "  OBTENIENDO INFORMACIÓN GENERAL..."    echo "-------------------------------------"
+    echo "  OBTENIENDO INFORMACIÓN GENERAL..."
     echo ""
     smartctl -x $1
 
     echo ""
-    echo "---------------------------"
-    echo "  CORRIENDO TEST CORTO..."    echo "---------------------------"
+    echo "  CORRIENDO TEST CORTO..."
     echo ""
     #smartctl -t short $1
     
     echo ""
-    echo "---------------------------"
-    echo "  CORRIENDO TEST LARGO..."    echo "---------------------------"
+    echo "  CORRIENDO TEST LARGO..."
     echo ""
     #smartctl -t long $1
     
     echo ""
-    echo "-----------------------------------------"
-    echo "  COMPROBANDO RESULTADO DE LOS TESTS..."    echo "-----------------------------------------"
+    echo "  COMPROBANDO RESULTADO DE LOS TESTS..."
     echo ""
     smartctl -l selftest $1
 
     echo ""
-    echo "--------------------"
     echo "  ESTADO DE SALUD:"
-    echo "--------------------"
+    echo ""
     smartctl -H $1 | grep overall-health
     
     echo ""
-    echo "---------------------"
     echo "  HORAS ENCENDIDO:"
-    echo "---------------------"
+    echo ""
     smartctl -x $1 | grep ATTRIBUTE_NAME 
     smartctl -x $1 | grep Power_On_Hours
 
     echo ""
-    echo "--------------------------------------"
     echo "  PORCENTAJE DE VIDA ÚTIL CONSUMIDO:"
-    echo "--------------------------------------"
+    echo ""
     smartctl -x $1 | grep ATTRIBUTE_NAME 
     smartctl -x $1 | grep Percent_Lifetime_Used
 
     echo ""
-    echo "--------------------------------------"
     echo "  PORCENTAJE DE VIDA ÚTIL RESTANTE:"
-    echo "--------------------------------------"
+    echo ""
     smartctl -x $1 | grep ATTRIBUTE_NAME
     smartctl -x $1 | grep Remaining_Lifetime_Perc
     
     echo ""
-    echo "--------------------------------------"
     echo "  :"
-    echo "--------------------------------------"
+    echo ""
     smartctl -x $1 | grep ATTRIBUTE_NAME 
     smartctl -x $1 | grep Media_Wearout_Indicator
     
