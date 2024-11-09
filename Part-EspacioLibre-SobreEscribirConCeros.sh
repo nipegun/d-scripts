@@ -8,11 +8,14 @@
 # ----------
 # Script de NiPeGun para sobreescribir con ceros todo el espacio libre de una partición en Debian
 #
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 
+# Ejecución remota para sobre-escribir con ceros la partición raiz:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Part-EspacioLibre-SobreEscribirConCeros.sh | bash
+#
+# Ejecución indicando la partición a sobre-escribir con ceros:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Part-EspacioLibre-SobreEscribirConCeros.sh | bash -s /mnt/Windows/ 
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Part-EspacioLibre-SobreEscribirConCeros.sh | nano -
 # ----------
 
 
@@ -25,7 +28,7 @@
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
-# Comprobar si el script está corriendo como root
+# Comprobar si el script está corriendo con privilegios root o sudo
   #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
   if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
     echo ""
