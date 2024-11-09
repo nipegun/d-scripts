@@ -8,18 +8,13 @@
 # ----------
 # Script de NiPeGun para sobreescribir con ceros todo el espacio libre de una partición en Debian
 #
-# Ejecución remota:
-#   curl -sL x | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL x | bash -s Parámetro1 
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL x | nano -
 # ----------
+
 
 # Definir constantes de color
   cColorAzul="\033[0;34m"
@@ -39,25 +34,10 @@
     exit
   fi
 
-# Definir la cantidad de argumentos esperados
-  cCantParamEsperados=1
-
-if [ $# -ne $cCantParamEsperados ]
-  then
-    echo ""
-    echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
-    echo "    $0 [PuntoDeMontajeFinalizadoEnBarra]"
-    echo ""
-    echo "  Ejemplo:"
-    echo "    $0 '/'  (Debe acabar con /)"
-    echo "      o"
-    echo "    $0 '/mnt/Windows/' (Debe acabar con /)"
-    echo ""
-    exit
+# Comprobar si se le pasó un parámetro al scrupt o no
+  if [ -z "$1" ]; then
+    dd if=/dev/zero of=/ArchivoTemporal bs=1M status=progress || rm /ArchivoTemporal
   else
-    echo ""
-    echo ""
-    echo ""
     dd if=/dev/zero of="$PuntoDeMontaje"ArchivoTemporal bs=1M status=progress || rm "$PuntoDeMontaje"ArchivoTemporal
-fi
+  fi
 
