@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
 #
-# Ejecución remota:
-#   curl -sL x | bash
+# Ejecución remota con sudo:
+#   curl -sL x | sudo bash
+#
+# Ejecución remota como root:
+#   curl -sL x | sudo bash
 #
 # Ejecución remota sin caché:
 #   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
