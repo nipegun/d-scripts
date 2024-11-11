@@ -8,7 +8,10 @@
 # ----------
 # Script de NiPeGun para instalar y configurar VirtualBox en Debian
 #
-# Ejecución remota:
+# Ejecución remota con sudo:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox-Instalar.sh | sudo bash
+#
+# Ejecución remota como root:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox-Instalar.sh | bash
 # ----------
 
