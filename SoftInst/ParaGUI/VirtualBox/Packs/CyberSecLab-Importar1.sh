@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para importar el pack CyberSecLab para VirtualBox en Debian
 #
-# Ejecución remota con sudo:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox/Packs/CyberSecLab-Importar.sh | sudo bash
+# Pre-ejecución remota:
+#   sudo apt-get -y update && sudo apt-get -y install dialog wget
+#
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox/Packs/CyberSecLab-Importar.sh | bash (No se debe hacer sudo bash)
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox/Packs/CyberSecLab-Importar.sh | nano -
@@ -81,18 +84,6 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de importación del pack CyberSecLab para el VirtualBox de Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    # Definir fecha de ejecución del script
-      cFechaDeEjec=$(date +a%Ym%md%d@%T)
-
-    # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
-        echo ""
-        apt-get -y update && apt-get -y install dialog
-        echo ""
-      fi
-
     # Crear el menú
       #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
       menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
@@ -154,14 +145,6 @@
               echo "    Importando .vmdk de OpenWrt..."
               echo ""
               cd "$vCarpetaDeMVs"/openwrtlab/
-              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-                  echo ""
-                  echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
-                  echo ""
-                  apt-get -y update && apt-get -y install wget
-                  echo ""
-                fi
               wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/openwrtlab.vmdk
               VBoxManage storageattach "openwrtlab" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium "$vCarpetaDeMVs"/openwrtlab/openwrtlab.vmdk
 
@@ -198,14 +181,6 @@
               echo "    Importando .vmdk de Kali..."
               echo ""
               cd "$vCarpetaDeMVs"/kali/
-              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-                  echo ""
-                  echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
-                  echo ""
-                  apt-get -y update && apt-get -y install wget
-                  echo ""
-                fi
               wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/kali.vmdk
               VBoxManage storageattach "kali" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium "$vCarpetaDeMVs"/kali/kali.vmdk
 
@@ -243,14 +218,6 @@
               echo "    Importando .vmdk de Sift..."
               echo ""
               cd "$vCarpetaDeMVs"/sift/
-              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-                  echo ""
-                  echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
-                  echo ""
-                  apt-get -y update && apt-get -y install wget
-                  echo ""
-                fi
               wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/sift.vmdk
               VBoxManage storageattach "sift" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium "$vCarpetaDeMVs"/sift/sift.vmdk
 
@@ -270,14 +237,6 @@
               echo "    Importando .vmdk de Windows Server 22..."
               echo ""
               cd "$vCarpetaDeMVs"/winserver22/
-              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-                  echo ""
-                  echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
-                  echo ""
-                  apt-get -y update && apt-get -y install wget
-                  echo ""
-                fi
               wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/winserver22.vmdk
               VBoxManage storageattach "winserver22" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/winserver22/winserver22.vmdk"
 
@@ -297,14 +256,6 @@
               echo "    Importando .vmdk de Windows 11 Pro..."
               echo ""
               cd "$vCarpetaDeMVs"/win11pro/
-              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-                  echo ""
-                  echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
-                  echo ""
-                  apt-get -y update && apt-get -y install wget
-                  echo ""
-                fi
               wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/win11pro.vmdk
               VBoxManage storageattach "win11pro" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium "$vCarpetaDeMVs"/win11pro/win11pro.vmdk
 
