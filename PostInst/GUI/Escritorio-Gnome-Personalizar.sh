@@ -73,6 +73,8 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de personalización del escritorio Gnome en Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Software-Desinstalar.sh | bash
+
     echo ""
     echo "    Instalando la app de retoques (gnome-tweaks)..."
     echo ""
