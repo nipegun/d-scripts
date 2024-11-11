@@ -201,7 +201,7 @@ elif [ $cVerSO == "12" ]; then
               echo ""
               cd /root/SoftInst/VirtualBox/
               wget http://download.virtualbox.org/virtualbox/$vUltVersEnWeb/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
-              vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
+              echo -y | vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
 
           ;;
 
