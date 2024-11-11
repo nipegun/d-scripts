@@ -8,14 +8,15 @@
 # ----------
 # Script de NiPeGun para desinstalar software en el escritorio Gnome de Debian
 #
-# Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-InstalarSoftware.sh | bash
+# Ejecución remota con sudo:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Software-Desinstalar.sh | sudo bash
+#
+# Ejecución remota como root:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Software-Desinstalar.sh | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-InstalarSoftware.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Software-Desinstalar.sh | nano -
 # ----------
-
-
 
 # Definir constantes de color
   cColorAzul="\033[0;34m"
