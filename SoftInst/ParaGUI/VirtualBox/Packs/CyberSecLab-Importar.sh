@@ -8,12 +8,15 @@
 # ----------
 # Script de NiPeGun para importar el pack CyberSecLab para VirtualBox en Debian
 #
-# Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox/Packs/CyberSecLab-Importar.sh | bash
+# Ejecución remota con sudo:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox/Packs/CyberSecLab-Importar.sh | sudo bash
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox/Packs/CyberSecLab-Importar.sh | nano -
 # ----------
+
+# Definir la carpeta donde están las máquinas virtuales (normalmente "/home/usuarios/VirtualBox VMs/" )
+  vCarpetaDeMVs='~/VirtualBox VMs'
 
 # Definir constantes de color
   cColorAzul="\033[0;34m"
@@ -150,7 +153,7 @@
               echo ""
               echo "    Importando .vmdk de OpenWrt..."
               echo ""
-              cd ~/"VirtualBox VMs/openwrtlab/"
+              cd "$vCarpetaDeMVs"/openwrtlab/
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -160,7 +163,7 @@
                   echo ""
                 fi
               wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/openwrtlab.vmdk
-              VBoxManage storageattach "openwrtlab" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/openwrtlab/openwrtlab.vmdk"
+              VBoxManage storageattach "openwrtlab" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium "$vCarpetaDeMVs"/openwrtlab/openwrtlab.vmdk
 
             ;;
 
@@ -194,7 +197,7 @@
               echo ""
               echo "    Importando .vmdk de Kali..."
               echo ""
-              cd ~/"VirtualBox VMs/kali/"
+              cd "$vCarpetaDeMVs"/kali/
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -204,7 +207,7 @@
                   echo ""
                 fi
               wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/kali.vmdk
-              VBoxManage storageattach "kali" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/kali/kali.vmdk"
+              VBoxManage storageattach "kali" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium "$vCarpetaDeMVs"/kali/kali.vmdk
 
             ;;
 
@@ -239,7 +242,7 @@
               echo ""
               echo "    Importando .vmdk de Sift..."
               echo ""
-              cd ~/"VirtualBox VMs/sift/"
+              cd "$vCarpetaDeMVs"/sift/
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -249,7 +252,7 @@
                   echo ""
                 fi
               wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/sift.vmdk
-              VBoxManage storageattach "sift" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/sift/sift.vmdk"
+              VBoxManage storageattach "sift" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium "$vCarpetaDeMVs"/sift/sift.vmdk
 
             ;;
 
@@ -266,7 +269,7 @@
               echo ""
               echo "    Importando .vmdk de Windows Server 22..."
               echo ""
-              cd ~/"VirtualBox VMs/winserver22/"
+              cd "$vCarpetaDeMVs"/winserver22/
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -293,7 +296,7 @@
               echo ""
               echo "    Importando .vmdk de Windows 11 Pro..."
               echo ""
-              cd ~/"VirtualBox VMs/win11pro/"
+              cd "$vCarpetaDeMVs"/win11pro/
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -303,7 +306,7 @@
                   echo ""
                 fi
               wget http://hacks4geeks.com/_/descargas/MVs/Discos/Packs/CyberSecLab/win11pro.vmdk
-              VBoxManage storageattach "win11pro" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium ~/"VirtualBox VMs/win11pro/win11pro.vmdk"
+              VBoxManage storageattach "win11pro" --storagectl "VirtIO" --port 0 --device 0 --type hdd --medium "$vCarpetaDeMVs"/win11pro/win11pro.vmdk
 
             ;;
 
