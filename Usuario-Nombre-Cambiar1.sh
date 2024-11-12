@@ -48,7 +48,7 @@ if [ $# -ne $cCantArgumEsperados ]
     echo ""
     exit
   else
-    if [ $(who | grep -q ^"$1") == "$1" ]; then
+    if [ $(who | grep ^"$1") == "$1" ]; then
       echo ""
       echo -e "${cColorRojo}    El usuario $1 tiene una sesión iniciada.${cFinColor}"
       echo ""
