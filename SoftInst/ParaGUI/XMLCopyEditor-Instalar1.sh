@@ -30,15 +30,6 @@
     exit
   fi
 
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update && apt-get -y install curl
-    echo ""
-  fi
-
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
@@ -76,12 +67,21 @@ elif [ $cVerSO == "12" ]; then
   echo ""
 
   # Descargar paquete
-    vURLArchivo=$(curl -sL https://xml-copy-editor.sourceforge.io/ | grep .deb | grep href | cut -d'"' -f2 | head -n1)
-    mkdir-p /root/SoftInst/XMLCopyEditor/ 2> /dev/null
-    curl -sL -L $vURLArchivo --output /root/SoftInst/XMLCopyEditor/XMLCopyEditor.deb
+    # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        apt-get -y update && apt-get -y install curl
+        echo ""
+      fi
+    vURLArchivo=$(curl -sL http://xml-copy-editor.sourceforge.io/ | grep .deb | grep href | cut -d'"' -f2 | head -n1 | sed 's-//--g' | sed 's-/download--g')
+    mkdir -p /root/SoftInst/XMLCopyEditor/ 2> /dev/null
+    rm -rf /root/SoftInst/XMLCopyEditor/* 2> /dev/null
+    curl -L http://$vURLArchivo -o /root/SoftInst/XMLCopyEditor/XMLCopyEditor.deb
 
   # Instalar paquete
-    apt -y install -i /root/SoftInst/XMLCopyEditor/XMLCopyEditor.deb
+    apt -y install /root/SoftInst/XMLCopyEditor/XMLCopyEditor.deb
 
 elif [ $cVerSO == "11" ]; then
 
