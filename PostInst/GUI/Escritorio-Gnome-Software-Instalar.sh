@@ -176,6 +176,8 @@
       echo "  Instalando apps de programación..."
       echo ""
       apt-get -y install ghex
+      apt-get -y install dia
+      apt-get -y install xmlcopyeditor
 
     # Antivirus
       echo ""
