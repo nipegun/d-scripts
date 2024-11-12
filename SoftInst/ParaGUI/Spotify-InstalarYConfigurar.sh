@@ -78,7 +78,7 @@
       echo ''
       echo '    Agregando el repositorio...'
       echo ''
-      echo 'deb http://repository.spotify.com stable non-free' >> /etc/apt/sources.list.d/spotify.list
+      echo 'deb http://repository.spotify.com stable non-free' > /etc/apt/sources.list.d/spotify.list
 
     # Agregar la clave para firmar el repositorio
       echo ''
@@ -92,7 +92,7 @@
           apt-get -y update && apt-get -y install curl
           echo ""
         fi
-      curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg >> /tmp/Spotify.gpg
+      curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg > /tmp/Spotify.gpg
 
     # Convertir la clave al formato apt
       echo ''
