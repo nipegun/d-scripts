@@ -76,42 +76,6 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de software para el escritorio Gnome en Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    # Desinstalar cosas específicas de gnome
-      echo ""
-      echo "  Desinstalando escoria de Gnome..."
-      echo ""
-      apt-get -y remove xterm
-      #apt-get -y remove reportbug
-      #apt-get -y remove blender
-      #apt-get -y remove imagemagick
-      #apt-get -y remove inkscape
-      apt-get -y remove rhythmbox
-      apt-get -y remove evolution
-      apt-get -y remove gnome-2048
-      apt-get -y remove five-or-more
-      apt-get -y remove four-in-a-row
-      apt-get -y remove kasumi
-      #apt-get -y remove ghcal
-      apt-get -y remove hitori
-      apt-get -y remove gnome-klotski
-      apt-get -y remove lightsoff
-      apt-get -y remove gnome-mahjongg
-      apt-get -y remove gnome-mines
-      apt-get -y remove mlterm
-      apt-get -y remove gnome-music
-      apt-get -y remove gnome-nibbles
-      apt-get -y remove quadrapassel
-      apt-get -y remove iagno
-      apt-get -y remove gnome-robots
-      apt-get -y remove gnome-sudoku
-      apt-get -y remove swell-foop
-      apt-get -y remove gnome-tetravex
-      apt-get -y remove gnome-taquin
-      apt-get -y remove aisleriot
-      apt-get -y remove tali
-      apt-get -y remove totem
-      apt-get -y autoremove
-
     # Actualizar la lista de paquetes disponibles en los repositorios...
       echo ""
       echo "  Actualizando la lista de paquetes disponibles en los repositorios..."
