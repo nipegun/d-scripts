@@ -66,16 +66,16 @@ elif [ $cVerSO == "12" ]; then
   echo "  Iniciando el script de instalación de Discord para Debian 12 (Bookworm)..."  
   echo ""
 
-  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+  # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+      echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
-      apt-get -y update && apt-get -y install wget
+      apt-get -y update && apt-get -y install curl
       echo ""
     fi
   mkdir -p /root/SoftInst/Discord
-  wget -q --no-check-certificate -O /root/SoftInst/Discord/discord.deb https://discordapp.com/api/download?platform=linux&format=deb
+  curl -L https://discordapp.com/api/download?platform=linux&format=deb -o /root/SoftInst/Discord/discord.deb 
   apt-get -y install libappindicator1
   apt -y install /root/SoftInst/Discord/discord.deb
 
