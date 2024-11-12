@@ -19,7 +19,7 @@
 # ----------
 
 # Definir la carpeta donde están las máquinas virtuales (normalmente "/home/usuarios/VirtualBox VMs/" )
-  vCarpetaDeMVs='~/VirtualBox VMs'
+  vCarpetaDeMVs="/home/$USER/VirtualBox VMs"
 
 # Definir constantes de color
   cColorAzul="\033[0;34m"
