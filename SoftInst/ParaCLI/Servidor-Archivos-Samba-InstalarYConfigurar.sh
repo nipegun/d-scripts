@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar y configurar el servidor Samba en Debian
 #
 # Ejecución remota:
-#    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Archivos-Samba-InstalarYConfigurar.sh | bash -s NombreDeGrupo NombreDeEquipo nipegun
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Archivos-Samba-InstalarYConfigurar.sh | bash -s NombreDeGrupo NombreDeEquipo nipegun
 #
 #  Para que los usuarios puedan utilizar samba es necesario crearles una contraseña para samba al usuario con:
 #  smbpasswd -a NombreDeUsuario
