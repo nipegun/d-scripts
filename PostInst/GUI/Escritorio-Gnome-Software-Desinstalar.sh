@@ -110,7 +110,7 @@
       apt-get -y remove totem
       apt-get -y remove gnome-chess
       apt-get -y remove gnome-maps
-      apt-get -y gnome-weather
+      apt-get -y remove gnome-weather
       apt-get -y autoremove
 
   elif [ $cVerSO == "11" ]; then
