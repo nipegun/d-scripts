@@ -16,9 +16,23 @@
 #  La contraseña samba puede ser distinta a la de la propia cuenta de usuario
 # ----------
 
-cColorRojo='\033[1;31m'
-cColorVerde='\033[1;32m'
-cFinColor='\033[0m'
+# Definir constantes de color
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
+  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
+    echo ""
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
+    echo ""
+    exit
+  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then              # Para systemd y freedesktop.org
@@ -53,7 +67,7 @@ if [ $cVerSO == "13" ]; then
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de Samba para Debian 11 (Bookworm)..."  
+  echo "  Iniciando el script de instalación de Samba para Debian 12 (Bookworm)..."  
   echo ""
 
   ArgumentosRequeridos=3
@@ -88,6 +102,7 @@ elif [ $cVerSO == "12" ]; then
           case $choice in
 
             1)
+
               echo ""
               echo -e "${cColorVerde}  Instalando los paquetes necesarios...${cFinColor}"
               echo ""
@@ -96,9 +111,11 @@ elif [ $cVerSO == "12" ]; then
               apt-get -y install samba-common
               apt-get -y install cups
               cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
+              
             ;;
 
             2)
+
               echo ""
               echo -e "${cColorVerde}  Configurando las opciones globales...${cFinColor}"
               echo ""
@@ -116,9 +133,11 @@ elif [ $cVerSO == "12" ]; then
               echo "  #interfaces = lo eth1 wlan0 br0"                           >> /etc/samba/smb.conf
               echo "  #bind interfaces only = yes"                               >> /etc/samba/smb.conf
               echo ""                                                            >> /etc/samba/smb.conf
+
             ;;
 
             3)
+
               echo ""
               echo -e "${cColorVerde}  Creando la compartición para la carpeta pública...${cFinColor}"
               echo ""
@@ -133,9 +152,11 @@ elif [ $cVerSO == "12" ]; then
               echo "  writeable = no"                              >> /etc/samba/smb.conf
               echo "  guest ok = yes"                              >> /etc/samba/smb.conf
               echo ""                                              >> /etc/samba/smb.conf
+
             ;;
 
             4)
+
               echo ""
               echo -e "${cColorVerde}  Creando la compartición para la carpeta del usuario...${cFinColor}"
               echo ""
@@ -145,9 +166,11 @@ elif [ $cVerSO == "12" ]; then
               echo "  browseable = yes"                  >> /etc/samba/smb.conf
               echo "  read only = no"                   >> /etc/samba/smb.conf
               echo "  valid users = $3"                 >> /etc/samba/smb.conf
+
             ;;
 
             5)
+
               echo ""
               echo -e "${cColorVerde}  Creando la compartición de una carpeta Multimedia...${cFinColor}"
               echo ""
@@ -159,9 +182,11 @@ elif [ $cVerSO == "12" ]; then
               echo "  guest ok = no"                                >> /etc/samba/smb.conf
               echo "  write list = $1"                              >> /etc/samba/smb.conf
               echo ""                                               >> /etc/samba/smb.conf
+
             ;;
 
             6)
+
               echo ""
               echo -e "${cColorVerde}  Creando la compartición de la carpeta de las Webs...${cFinColor}"
               echo ""
@@ -173,9 +198,11 @@ elif [ $cVerSO == "12" ]; then
               echo "  guest ok = no"         >> /etc/samba/smb.conf
               echo "  write list = www-data" >> /etc/samba/smb.conf
               echo ""                        >> /etc/samba/smb.conf
+
             ;;
 
             7)
+
               echo ""
               echo "  AHORA DEBERÁS INGRESAR 2 VECES LA NUEVA CONTRASEÑA SAMBA PARA EL USUARIO $3."
               echo "  PUEDE SER DISTINTA A LA DE LA PROPIA CUENTA DE USUARIO PERO SI PONES UNA"
@@ -187,6 +214,7 @@ elif [ $cVerSO == "12" ]; then
               sleep 5
               service smbd status
               echo ""
+
             ;;
 
           esac
