@@ -113,22 +113,7 @@
         sed -i -e 's|# SHARELATEX_RIGHT_FOOTER=[{"text":"Hello I am on the Right"}]|# SHARELATEX_RIGHT_FOOTER=[{"text":"Hello I am on the Right"}]|g' /opt/overleaf/config/variables.env
         sed -i -e 's|# SHARELATEX_LEFT_FOOTER=[{"text":"Powered by Overleaf © 2021", "url": "https://www.overleaf.com"}, {"text": "Contact your support team", "url": "mailto:support@example.com"} ]||g' /opt/overleaf/config/variables.env
 
-
-
-
-# SHARELATEX_HEADER_IMAGE_URL=http://somewhere.com/mylogo.png
-# SHARELATEX_ADMIN_EMAIL=support@example.com
-
-# SHARELATEX_LEFT_FOOTER=[{"text":"Powered by Overleaf © 2021", "url": "https://www.overleaf.com"}, {"text": "Contact your support team", "url": "mailto:support@example.com"} ]
-# SHARELATEX_RIGHT_FOOTER=[{"text":"Hello I am on the Right"}]
-
-# SHARELATEX_SITE_URL=http://overleaf.example.com
-# SHARELATEX_NAV_TITLE=Our Overleaf Instance
-# SHARELATEX_HEADER_IMAGE_URL=http://somewhere.com/mylogo.png
-# SHARELATEX_ADMIN_EMAIL=support@example.com
-
-# SHARELATEX_LEFT_FOOTER=[{"text":"Powered by Overleaf © 2021", "url": "https://www.overleaf.com"}, {"text": "Contact your support team", "url": "mailto:support@example.com"} ]
-# SHARELATEX_RIGHT_FOOTER=[{"text":"Hello I am on the Right"}]
+https://docs.vultr.com/how-to-install-overleaf-community-edition-on-ubuntu-20-04-lts
 
   elif [ $cVerSO == "11" ]; then
 
