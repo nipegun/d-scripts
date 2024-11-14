@@ -229,6 +229,24 @@
               echo "  Creando la máquina virtual de Windows Server 22..."
               echo ""
 
+              VBoxManage createvm --name "winserver22" --ostype "Ubuntu_64" --register
+              VBoxManage modifyvm "winserver22" --firmware efi
+              # Procesador
+                VBoxManage modifyvm "winserver22" --cpus 4
+              # RAM
+                VBoxManage modifyvm "winserver22" --memory 4096
+              # Gráfica
+                VBoxManage modifyvm "winserver22" --graphicscontroller vmsvga --vram 128 --accelerate3d on
+              # Red
+                VBoxManage modifyvm "winserver22" --nictype1 virtio
+                VBoxManage modifyvm "winserver22" --nic1 intnet --intnet1 "redintlan"
+              # Almacenamiento
+                # CD
+                  VBoxManage storagectl "winserver22" --name "SATA Controller" --add sata --controller IntelAhci --portcount 1
+                  VBoxManage storageattach "winserver22" --storagectl "SATA Controller" --port 0 --device 0 --type dvddrive --medium emptydrive
+                # Controladora de disco duro
+                  VBoxManage storagectl "winserver22" --name "VirtIO" --add "VirtIO" --bootable on --portcount 1
+
             ;;
 
             8)
@@ -247,6 +265,24 @@
               echo ""
               echo "  Creando la máquina virtual de Windows 11 Pro..."
               echo ""
+
+              VBoxManage createvm --name "win11pro" --ostype "Windows11_64" --register
+              VBoxManage modifyvm "win11pro" --firmware efi
+              # Procesador
+                VBoxManage modifyvm "win11pro" --cpus 4
+              # RAM
+                VBoxManage modifyvm "win11pro" --memory 4096
+              # Gráfica
+                VBoxManage modifyvm "win11pro" --graphicscontroller vmsvga --vram 128 --accelerate3d on
+              # Red
+                VBoxManage modifyvm "win11pro" --nictype1 virtio
+                VBoxManage modifyvm "win11pro" --nic1 intnet --intnet1 "redintlan"
+              # Almacenamiento
+                # CD
+                  VBoxManage storagectl "win11pro" --name "SATA Controller" --add sata --controller IntelAhci --portcount 1
+                  VBoxManage storageattach "win11pro" --storagectl "SATA Controller" --port 0 --device 0 --type dvddrive --medium emptydrive
+                # Controladora de disco duro
+                  VBoxManage storagectl "win11pro" --name "VirtIO" --add "VirtIO" --bootable on --portcount 1
 
             ;;
 
