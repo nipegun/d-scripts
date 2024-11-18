@@ -17,20 +17,21 @@
 # Definir la cantidad de argumentos esperados
   cCantParamEsperados=2
 
-if [ $# -ne $cCantParamEsperados ]
-  then
-    echo ""
-    echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
-    echo "    $0 [Parámetro1] [Parámetro2]"
-    echo ""
-    echo "  Ejemplo:"
-    echo "    $0 'Hola' 'Mundo'"
-    echo ""
-    exit
-  else
-    echo ""
-    echo ""
-    echo ""
-    cat $1$2
-fi
+# Comprobar que se hayan pasado la cantidad de parámetros correctos y proceder
+  if [ $# -ne $cCantParamEsperados ]
+    then
+      echo ""
+      echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
+      echo "    $0 [Parámetro1] [Parámetro2]"
+      echo ""
+      echo "  Ejemplo:"
+      echo "    $0 'Hola' 'Mundo'"
+      echo ""
+      exit
+    else
+      echo ""
+      echo ""
+      echo ""
+      cat $1$2
+  fi
 
