@@ -6,22 +6,16 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para agregar un usuario al grupo sudo
+# Script de NiPeGun para conceder permisos sudo a un usuario específico
 #
 # Ejecución remota con sudo:
-#   curl -sL x | sudo bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Usuario-Sudo-Conceder.sh | sudo bash -s [NombreDeUsuario]
 #
 # Ejecución remota como root:
-#   curl -sL x | sudo bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Usuario-Sudo-Conceder.sh | bash -s [NombreDeUsuario]
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Usuario-Sudo-Conceder.sh | nano -
 # ----------
 
 # Definir constantes de color
