@@ -39,42 +39,43 @@
 # Definir la cantidad de argumentos esperados
   cCantParamEsperados=1
 
-if [ $# -ne $cCantParamEsperados ]
-  then
-    echo ""
-    echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
-    echo "    $0 [Parámetro1] [Parámetro2]"
-    echo ""
-    echo "  Ejemplo:"
-    echo "    $0 'Hola' 'Mundo'"
-    echo ""
-    exit
-  else
-    # Comprobar si el paquete sudo está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s sudo 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo -e "${cColorRojo}  El paquete sudo no está instalado. Iniciando su instalación...${cFinColor}"
-        echo ""
-        apt-get -y update && apt-get -y install sudo
-        echo ""
-      fi
-    # Comprobar si el usuario existe. Si no existe, crearlo y agregarlo al grupo sudo
-      if grep -q "^$1:" /etc/passwd; then
-        echo ""
-        echo "  Asignando permisos sudo al usuario $1..."
-        echo ""
-        usermod -aG sudo "$1"
-        newgrp sudo
-      else
-        echo ""
-        echo "  El usuario $1 no existe. Se procederá a crearlo."
-        echo ""
-        useradd -m -s /bin/bash "$1" && echo "$1:$1" | chpasswd && echo "    Se ha creado el usuario $1 con contraseña $1"
-        echo ""
-        echo "  Asignando permisos sudo al usuario recién creado..."
-        echo ""
-        usermod -aG sudo "$1"
-        newgrp sudo
-        echo ""
-      fi
-fi
+# Comprobar que se hayan pasado la cantidad de parámetros correctos y proceder
+  if [ $# -ne $cCantParamEsperados ]
+    then
+      echo ""
+      echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
+      echo "    $0 [Parámetro1] [Parámetro2]"
+      echo ""
+      echo "  Ejemplo:"
+      echo "    $0 'Hola' 'Mundo'"
+      echo ""
+      exit
+    else
+      # Comprobar si el paquete sudo está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s sudo 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete sudo no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update && apt-get -y install sudo
+          echo ""
+        fi
+      # Comprobar si el usuario existe. Si no existe, crearlo y agregarlo al grupo sudo
+        if grep -q "^$1:" /etc/passwd; then
+          echo ""
+          echo "  Asignando permisos sudo al usuario $1..."
+          echo ""
+          usermod -aG sudo "$1"
+          newgrp sudo
+        else
+          echo ""
+          echo "  El usuario $1 no existe. Se procederá a crearlo."
+          echo ""
+          useradd -m -s /bin/bash "$1" && echo "$1:$1" | chpasswd && echo "    Se ha creado el usuario $1 con contraseña $1"
+          echo ""
+          echo "  Asignando permisos sudo al usuario recién creado..."
+          echo ""
+          usermod -aG sudo "$1"
+          newgrp sudo
+          echo ""
+        fi
+  fi
