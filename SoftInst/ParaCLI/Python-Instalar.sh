@@ -9,19 +9,19 @@
 # Script de NiPeGun para instalar y configurar python en Debian
 #
 # Ejecución remota con sudo:
-#   curl -sL x | sudo bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Instalar.sh | sudo bash
 #
 # Ejecución remota como root:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Instalar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Instalar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Instalar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -89,9 +89,165 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de python para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Definir fecha de ejecución del script
+      cFechaDeEjec=$(date +a%Ym%md%d@%T)
+
+    # Crear el menú
+      # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update && apt-get -y install dialog
+          echo ""
+        fi
+      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+        opciones=(
+          1 "Instalar la versión de Python del repo de Debian 12" on
+          2 "Bajar, compilar e instalar Python 2.7" off
+          3 "Bajar, compilar y preparar un .deb de Python 2.7 para Debian12" off
+          4 "Opción 4" off
+          5 "Opción 5" off
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+      #clear
+
+      for choice in $choices
+        do
+          case $choice in
+
+            1)
+
+              echo ""
+              echo "  Instalando la versión de python del repo de Debian 12..."
+              echo ""
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Bajando, compilando e instalando Python 2.7..."
+              echo ""
+
+              # Instalar paquetes necesarios para compilar
+                apt-get -y update
+                apt-get -y install build-essential
+                apt-get -y install zlib1g-dev
+                apt-get -y install libssl-dev
+                apt-get -y install libncurses5-dev
+                apt-get -y install libffi-dev
+                apt-get -y install libsqlite3-dev
+                apt-get -y install libncursesw5-dev
+                apt-get -y install libreadline-dev
+                apt-get -y install libsqlite3-dev
+                apt-get -y install libgdbm-dev
+                apt-get -y install libdb5.3-dev
+                apt-get -y install libbz2-dev
+                apt-get -y install libexpat1-dev
+                apt-get -y install liblzma-dev
+                apt-get -y install zlib1g-dev
+
+              # Descargar el código fuente
+                # Determinar la última versión
+                  echo ""
+                  echo "    Determinando la última versión de Python 2..."
+                  echo ""
+                  # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                    echo ""
+                    apt-get -y update && apt-get -y install curl
+                    echo ""
+                  fi
+                  vUltVersPython2=$(curl -sL https://www.python.org/ftp/python/ | grep href | cut -d'"' -f2 | cut -d'/' -f1 | grep ^[0-9] | sort -n | grep ^2 | tail -n1)
+                  echo "      La última versión es la $vUltVersPython2"
+                # Descargando la última versión
+                  rm -rf ~/SoftInst/Python2
+                  mkdir -p ~/SoftInst/
+                  curl -L https://www.python.org/ftp/python/$vUltVersPython2/Python-$vUltVersPython2.tgz -o /tmp/python2.tgz
+                  tar -xzf /tmp/python2.tgz -C ~/SoftInst/
+                  mv ~/SoftInst/Python-$vUltVersPython2 ~/SoftInst/Python2
+                  cd ~/SoftInst/Python2
+                  ./configure --enable-optimizations
+                  make -j $(nproc)
+                  make altinstall
+
+            ;;
+
+            3)
+
+              echo ""
+              echo "  Bajar, compilar y preparar un .deb de Python 2.7 para Debian12..."
+              echo ""
+
+              # Instalar paquetes necesarios para compilar
+                apt-get -y update
+                apt-get -y install build-essential
+                apt-get -y install zlib1g-dev
+                apt-get -y install libssl-dev
+                apt-get -y install libncurses5-dev
+                apt-get -y install libffi-dev
+                apt-get -y install libsqlite3-dev
+                apt-get -y install libncursesw5-dev
+                apt-get -y install libreadline-dev
+                apt-get -y install libsqlite3-dev
+                apt-get -y install libgdbm-dev
+                apt-get -y install libdb5.3-dev
+                apt-get -y install libbz2-dev
+                apt-get -y install libexpat1-dev
+                apt-get -y install liblzma-dev
+                apt-get -y install zlib1g-dev
+                apt-get -y install checkinstall
+
+              # Descargar el código fuente
+                # Determinar la última versión
+                  echo ""
+                  echo "    Determinando la última versión de Python 2..."
+                  echo ""
+                  # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                    echo ""
+                    apt-get -y update && apt-get -y install curl
+                    echo ""
+                  fi
+                  vUltVersPython2=$(curl -sL https://www.python.org/ftp/python/ | grep href | cut -d'"' -f2 | cut -d'/' -f1 | grep ^[0-9] | sort -n | grep ^2 | tail -n1)
+                  echo "      La última versión es la $vUltVersPython2"
+                # Descargando la última versión
+                  rm -rf ~/SoftInst/Python2
+                  mkdir -p ~/SoftInst/
+                  curl -L https://www.python.org/ftp/python/$vUltVersPython2/Python-$vUltVersPython2.tgz -o /tmp/python2.tgz
+                  tar -xzf /tmp/python2.tgz -C ~/SoftInst/
+                  mv ~/SoftInst/Python-$vUltVersPython2 ~/SoftInst/Python2
+                  cd ~/SoftInst/Python2
+                  ./configure --prefix=/usr/local --enable-optimizations
+                  make -j $(nproc)
+                  checkinstall
+
+            ;;
+
+            4)
+
+              echo ""
+              echo "  Opción 4..."
+              echo ""
+
+            ;;
+
+            5)
+
+              echo ""
+              echo "  Opción 5..."
+              echo ""
+
+            ;;
+
+        esac
+
+    done
 
   elif [ $cVerSO == "11" ]; then
 
