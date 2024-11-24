@@ -38,24 +38,209 @@ CarpetaAlternativa="/Discos/HDD-Datos/Plex"
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación del servidor Plex para Debian 7 (Wheezy)..."
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  echo "  Iniciando el script de instalación del servidor Plex para Debian 8 (Jessie)..."
+  echo "  Iniciando el script de instalación del servidor Plex para Debian 13 (x)..."
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+if [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación del servidor Plex para Debian 12 (Bookworm)..."
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación del servidor Plex para Debian 11 (Bullseye)..."
+  echo ""
+
+  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+       echo ""
+       echo "  El paquete dialog no está instalado. Iniciando su instalación..."
+       echo ""
+       apt-get -y update && apt-get -y install dialog
+       echo ""
+     fi
+
+  menu=(dialog --checklist "Elección de la arquitectura:" 22 76 16)
+    opciones=(
+      1 "Instalar o actualizar versión x86 de 32 bits" off
+      2 "Instalar o actualizar versión x86 de 64 bits" off
+      3 "Instalar o actualizar versión ARMv7" off
+      4 "Instalar o actualizar versión ARMv8" off
+      5 "Cambiar la carpeta por defecto de Plex" off
+    )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+
+      for choice in $choices
+
+        do
+
+          case $choice in
+
+          1)
+
+            echo ""
+            echo -e "${cColorVerde}  Instalando Plex para arquitectura x86 de 32 bits...${cFinColor}"
+            echo ""
+            mkdir -p /root/SoftInst/Plex/ 2> /dev/null
+            cd /root/SoftInst/Plex/
+            rm -f /root/SoftInst/Plex/Plex32x86.deb
+
+            echo ""
+            echo -e "${cColorVerde}  Descargando el paquete de instalación...${cFinColor}"
+            echo ""
+            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Plex/Plex32x86.deb
+
+            echo ""
+            echo -e "${cColorVerde}  Deteniendo el servicio plexmediaserver (si es que está activo)...${cFinColor}"
+            echo ""
+            service plexmediaserver stop
+
+            echo ""
+            echo -e "${cColorVerde}  Instalando el paquete...${cFinColor}"
+            echo ""
+            apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
+            dpkg -i /root/SoftInst/Plex/Plex32x86.deb
+          
+            echo ""
+            echo -e "${cColorVerde}  Arrancando el servicio plexediaserver...${cFinColor}"
+            echo ""
+            service plexmediaserver start
+
+          ;;
+
+          2)
+
+            echo ""
+            echo -e "${cColorVerde}  Instalando Plex para arquitectura x86 de 64 bits...${cFinColor}"
+            echo ""
+            mkdir -p /root/SoftInst/Plex/ 2> /dev/null
+            cd /root/SoftInst/Plex/
+            rm -f /root/SoftInst/Plex/Plex64x86.deb
+
+            echo ""
+            echo -e "${cColorVerde}  Descargando el paquete de instalación...${cFinColor}"
+            echo ""
+            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Plex/Plex64x86.deb
+
+            echo ""
+            echo -e "${cColorVerde}  Deteniendo el servicio plexmediaserver (si es que está activo)...${cFinColor}"
+            echo ""
+            service plexmediaserver stop
+
+            echo ""
+            echo -e "${cColorVerde}  Instalando el paquete...${cFinColor}"
+            echo ""
+            apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
+            dpkg -i /root/SoftInst/Plex/Plex64x86.deb
+          
+            echo ""
+            echo -e "${cColorVerde}  Arrancando el servicio plexediaserver...${cFinColor}"
+            echo ""
+            service plexmediaserver start
+
+          ;;
+
+          3)
+
+            echo ""
+            echo -e "${cColorVerde}  Instalando Plex para arquitectura ARMv7 (armhf)...${cFinColor}"
+            echo ""
+            mkdir -p /root/SoftInst/Plex/ 2> /dev/null
+            cd /root/SoftInst/Plex/
+            rm -f /root/SoftInst/Plex/PlexARMv7.deb
+
+            echo ""
+            echo "Descargando el paquete de instalación..."
+            echo ""
+            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Plex/PlexARMv7.deb
+
+            echo ""
+            echo -e "${cColorVerde}  Deteniendo el servicio plexmediaserver (si es que está activo)...${cFinColor}"
+            echo ""
+            service plexmediaserver stop
+
+            echo ""
+            echo -e "${cColorVerde}  Instalando el paquete...${cFinColor}"
+            echo ""
+            apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
+            dpkg -i /root/SoftInst/Plex/PlexARMv7.deb
+          
+            echo ""
+            echo -e "${cColorVerde}  Arrancando el servicio plexediaserver...${cFinColor}"
+            echo ""
+            service plexmediaserver start
+
+          ;;
+
+          4)
+
+            echo ""
+            echo -e "${cColorVerde}  Instalando Plex para arquitectura ARMv7 (arm64)...${cFinColor}"
+            echo ""
+            mkdir /root/SoftInst/Plex/ 2> /dev/null
+            cd /root/SoftInst/Plex/
+            rm -f /root/SoftInst/Plex/PlexARMv8.deb
+
+            echo ""
+            echo -e "${cColorVerde}  Descargando el paquete de instalación...${cFinColor}"
+            echo ""
+            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Plex/PlexARMv8.deb
+
+            echo ""
+            echo -e "${cColorVerde}  Deteniendo el servicio plexmediaserver (si es que está activo)...${cFinColor}"
+            echo ""
+            service plexmediaserver stop
+
+            echo ""
+            echo -e "${cColorVerde}  Instalando el paquete...${cFinColor}"
+            echo ""
+            apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
+            dpkg -i /root/SoftInst/Plex/PlexARMv8.deb
+          
+            echo ""
+            echo -e "${cColorVerde}  Arrancando el servicio plexediaserver...${cFinColor}"
+            echo ""
+            service plexmediaserver start
+
+          ;;
+
+          5)
+           systemctl stop plexmediaserver.service
+           mkdir -p /etc/systemd/system/plexmediaserver.service.d/ 2> /dev/null
+           touch /etc/systemd/system/plexmediaserver.service.d/override.conf
+           echo "[Service]" > /etc/systemd/system/plexmediaserver.service.d/override.conf
+           echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=$CarpetaAlternativa"' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
+           systemctl daemon-reload
+           systemctl start plexmediaserver.service
+           systemctl status plexmediaserver.service
+
+          ;;
+
+        esac
+
+      done
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación del servidor Plex para Debian 10 (Buster)..."
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $cVerSO == "9" ]; then
@@ -87,12 +272,12 @@ elif [ $cVerSO == "9" ]; then
             echo ""
             mkdir -p /root/SoftInst/Plex/ 2> /dev/null
             cd /root/SoftInst/Plex/
-            rm -f /root/SoftInst/Plex/plex32x86.deb
+            rm -f /root/SoftInst/Plex/Plex32x86.deb
 
             echo ""
             echo -e "${cColorVerde}  Descargando el paquete de instalación...${cFinColor}"
             echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plex32x86.deb
+            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Plex/Plex32x86.deb
 
             echo ""
             echo -e "${cColorVerde}  Deteniendo el servicio plexmediaserver (si es que está activo)...${cFinColor}"
@@ -102,7 +287,7 @@ elif [ $cVerSO == "9" ]; then
             echo ""
             echo -e "${cColorVerde}  Instalando el paquete...${cFinColor}"
             echo ""
-            dpkg -i /root/SoftInst/Plex/plex32x86.deb
+            dpkg -i /root/SoftInst/Plex/Plex32x86.deb
           
             echo ""
             echo -e "${cColorVerde}  Arrancando el servicio plexediaserver...${cFinColor}"
@@ -116,12 +301,12 @@ elif [ $cVerSO == "9" ]; then
             echo ""
             mkdir -p /root/SoftInst/Plex/ 2> /dev/null
             cd /root/SoftInst/Plex/
-            rm -f /root/SoftInst/Plex/plex64x86.deb
+            rm -f /root/SoftInst/Plex/Plex64x86.deb
 
             echo ""
             echo -e "${cColorVerde}  Descargando el paquete de instalación...${cFinColor}"
             echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plex64x86.deb
+            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Plex/Plex64x86.deb
 
             echo ""
             echo -e "${cColorVerde}  Deteniendo el servicio plexmediaserver (si es que está activo)...${cFinColor}"
@@ -131,7 +316,7 @@ elif [ $cVerSO == "9" ]; then
             echo ""
             echo -e "${cColorVerde}  Instalando el paquete...${cFinColor}"
             echo ""
-            dpkg -i /root/SoftInst/Plex/plex64x86.deb
+            dpkg -i /root/SoftInst/Plex/Plex64x86.deb
           
             echo ""
             echo -e "${cColorVerde}  Arrancando el servicio plexediaserver...${cFinColor}"
@@ -145,12 +330,12 @@ elif [ $cVerSO == "9" ]; then
             echo ""
             mkdir -p /root/SoftInst/Plex/ 2> /dev/null
             cd /root/SoftInst/Plex/
-            rm -f /root/SoftInst/Plex/plexARMv7.deb
+            rm -f /root/SoftInst/Plex/PlexARMv7.deb
 
             echo ""
             echo "Descargando el paquete de instalación..."
             echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plexARMv7.deb
+            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Plex/PlexARMv7.deb
 
             echo ""
             echo -e "${cColorVerde}  Deteniendo el servicio plexmediaserver (si es que está activo)...${cFinColor}"
@@ -160,7 +345,7 @@ elif [ $cVerSO == "9" ]; then
             echo ""
             echo -e "${cColorVerde}  Instalando el paquete...${cFinColor}"
             echo ""
-            dpkg -i /root/SoftInst/Plex/plexARMv7.deb
+            dpkg -i /root/SoftInst/Plex/PlexARMv7.deb
 
             echo ""
             echo -e "${cColorVerde}  Arrancando el servicio plexediaserver...${cFinColor}"
@@ -174,12 +359,12 @@ elif [ $cVerSO == "9" ]; then
             echo ""
             mkdir -p /root/SoftInst/Plex/ 2> /dev/null
             cd /root/SoftInst/Plex/
-            rm -f /root/SoftInst/Plex/plexARMv8.deb
+            rm -f /root/SoftInst/Plex/PlexARMv8.deb
 
             echo ""
             echo -e "${cColorVerde}  Descargando el paquete de instalación...${cFinColor}"
             echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plexARMv8.deb
+            wget http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/Plex/PlexARMv8.deb
 
             echo ""
             echo -e "${cColorVerde}  Deteniendo el servicio plexmediaserver (si es que está activo)...${cFinColor}"
@@ -189,7 +374,7 @@ elif [ $cVerSO == "9" ]; then
             echo ""
             echo -e "${cColorVerde}  Instalando el paquete...${cFinColor}"
             echo ""
-            dpkg -i /root/SoftInst/Plex/plexARMv8.deb
+            dpkg -i /root/SoftInst/Plex/PlexARMv8.deb
           
             echo ""
             echo -e "${cColorVerde}  Arrancando el servicio plexediaserver...${cFinColor}"
@@ -201,191 +386,24 @@ elif [ $cVerSO == "9" ]; then
 
   done
 
-elif [ $cVerSO == "10" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación del servidor Plex para Debian 10 (Buster)..."
+  echo "  Iniciando el script de instalación del servidor Plex para Debian 8 (Jessie)..."
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $cVerSO == "11" ]; then
+elif [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación del servidor Plex para Debian 11 (Bullseye)..."
+  echo "  Iniciando el script de instalación del servidor Plex para Debian 7 (Wheezy)..."
   echo ""
 
-  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
-     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
-       echo ""
-       echo "  dialog no está instalado. Iniciando su instalación..."       echo ""
-       apt-get -y update
-       apt-get -y install dialog
-       echo ""
-     fi
-
-  menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
-    opciones=(
-  1 "Instalar o actualizar versión x86 de 32 bits" off
-              2 "Instalar o actualizar versión x86 de 64 bits" off
-              3 "Instalar o actualizar versión ARMv7" off
-              4 "Instalar o actualizar versión ARMv8" off
-              5 "Cambiar la carpeta por defecto de Plex" off
-)
-      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-      clear
-
-      for choice in $choices
-
-        do
-
-          case $choice in
-
-          1)
-
-            echo ""
-            echo -e "${cColorVerde}  Instalando Plex para arquitectura x86 de 32 bits...${cFinColor}"
-            echo ""
-            mkdir -p /root/SoftInst/Plex/ 2> /dev/null
-            cd /root/SoftInst/Plex/
-            rm -f /root/SoftInst/Plex/plex32x86.deb
-
-            echo ""
-            echo -e "${cColorVerde}  Descargando el paquete de instalación...${cFinColor}"
-            echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plex32x86.deb
-
-            echo ""
-            echo -e "${cColorVerde}  Deteniendo el servicio plexmediaserver (si es que está activo)...${cFinColor}"
-            echo ""
-            service plexmediaserver stop
-
-            echo ""
-            echo -e "${cColorVerde}  Instalando el paquete...${cFinColor}"
-            echo ""
-            apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
-            dpkg -i /root/SoftInst/Plex/plex32x86.deb
-          
-            echo ""
-            echo -e "${cColorVerde}  Arrancando el servicio plexediaserver...${cFinColor}"
-            echo ""
-            service plexmediaserver start
-
-          ;;
-
-          2)
-
-            echo ""
-            echo -e "${cColorVerde}  Instalando Plex para arquitectura x86 de 64 bits...${cFinColor}"
-            echo ""
-            mkdir -p /root/SoftInst/Plex/ 2> /dev/null
-            cd /root/SoftInst/Plex/
-            rm -f /root/SoftInst/Plex/plex64x86.deb
-
-            echo ""
-            echo -e "${cColorVerde}  Descargando el paquete de instalación...${cFinColor}"
-            echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plex64x86.deb
-
-            echo ""
-            echo -e "${cColorVerde}  Deteniendo el servicio plexmediaserver (si es que está activo)...${cFinColor}"
-            echo ""
-            service plexmediaserver stop
-
-            echo ""
-            echo -e "${cColorVerde}  Instalando el paquete...${cFinColor}"
-            echo ""
-            apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
-            dpkg -i /root/SoftInst/Plex/plex64x86.deb
-          
-            echo ""
-            echo -e "${cColorVerde}  Arrancando el servicio plexediaserver...${cFinColor}"
-            echo ""
-            service plexmediaserver start
-
-          ;;
-
-          3)
-
-            echo ""
-            echo -e "${cColorVerde}  Instalando Plex para arquitectura ARMv7 (armhf)...${cFinColor}"
-            echo ""
-            mkdir -p /root/SoftInst/Plex/ 2> /dev/null
-            cd /root/SoftInst/Plex/
-            rm -f /root/SoftInst/Plex/plexARMv7.deb
-
-            echo ""
-            echo "Descargando el paquete de instalación..."
-            echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plexARMv7.deb
-
-            echo ""
-            echo -e "${cColorVerde}  Deteniendo el servicio plexmediaserver (si es que está activo)...${cFinColor}"
-            echo ""
-            service plexmediaserver stop
-
-            echo ""
-            echo -e "${cColorVerde}  Instalando el paquete...${cFinColor}"
-            echo ""
-            apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
-            dpkg -i /root/SoftInst/Plex/plexARMv7.deb
-          
-            echo ""
-            echo -e "${cColorVerde}  Arrancando el servicio plexediaserver...${cFinColor}"
-            echo ""
-            service plexmediaserver start
-
-          ;;
-
-          4)
-
-            echo ""
-            echo -e "${cColorVerde}  Instalando Plex para arquitectura ARMv7 (arm64)...${cFinColor}"
-            echo ""
-            mkdir /root/SoftInst/Plex/ 2> /dev/null
-            cd /root/SoftInst/Plex/
-            rm -f /root/SoftInst/Plex/plexARMv8.deb
-
-            echo ""
-            echo -e "${cColorVerde}  Descargando el paquete de instalación...${cFinColor}"
-            echo ""
-            wget http://hacks4geeks.com/_/premium/descargas/debian/root/softinst/plex/plexARMv8.deb
-
-            echo ""
-            echo -e "${cColorVerde}  Deteniendo el servicio plexmediaserver (si es que está activo)...${cFinColor}"
-            echo ""
-            service plexmediaserver stop
-
-            echo ""
-            echo -e "${cColorVerde}  Instalando el paquete...${cFinColor}"
-            echo ""
-            apt-get -y install beignet-opencl-icd ocl-icd-libopencl1
-            dpkg -i /root/SoftInst/Plex/plexARMv8.deb
-          
-            echo ""
-            echo -e "${cColorVerde}  Arrancando el servicio plexediaserver...${cFinColor}"
-            echo ""
-            service plexmediaserver start
-
-          ;;
-
-          5)
-           systemctl stop plexmediaserver.service
-           mkdir -p /etc/systemd/system/plexmediaserver.service.d/ 2> /dev/null
-           touch /etc/systemd/system/plexmediaserver.service.d/override.conf
-           echo "[Service]" > /etc/systemd/system/plexmediaserver.service.d/override.conf
-           echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=$CarpetaAlternativa"' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
-           systemctl daemon-reload
-           systemctl start plexmediaserver.service
-           systemctl status plexmediaserver.service
-
-          ;;
-
-        esac
-
-      done
+  echo ""
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
 
 fi
-
