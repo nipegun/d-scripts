@@ -103,11 +103,9 @@
         fi
       menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
         opciones=(
-          1 "Instalar la versión de Python del repo de Debian 12"            off
-          2 "Bajar, compilar e instalar Python 2.7"                          off
-          3 "Bajar, compilar y preparar un .deb de Python 2.7 para Debian12" off
-          4 "Opción 4"                                                       off
-          5 "Opción 5"                                                       off
+          1 "Instalar la versión de Python del repo de Debian 12"             off
+          2 "Bajar, compilar e instalar Python 2.7"                           off
+          3 "Bajar, compilar y preparar un .deb de Python 2.7 para Debian 12" off
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       #clear
@@ -121,6 +119,8 @@
               echo ""
               echo "  Instalando la versión de python del repo de Debian 12..."
               echo ""
+
+              apt-get -y update && apt-get -y install python3
 
             ;;
 
@@ -170,7 +170,7 @@
                   tar -xzf /tmp/python2.tgz -C ~/SoftInst/
                   mv ~/SoftInst/Python-$vUltVersPython2 ~/SoftInst/Python2
                   cd ~/SoftInst/Python2
-                  ./configure --enable-optimizations
+                  ./configure --prefix=/usr/local --enable-optimizations
                   make -j $(nproc)
                   make altinstall
 
@@ -226,22 +226,6 @@
                   ./configure --prefix=/usr/local --enable-optimizations
                   make -j $(nproc)
                   checkinstall
-
-            ;;
-
-            4)
-
-              echo ""
-              echo "  Opción 4..."
-              echo ""
-
-            ;;
-
-            5)
-
-              echo ""
-              echo "  Opción 5..."
-              echo ""
 
             ;;
 
