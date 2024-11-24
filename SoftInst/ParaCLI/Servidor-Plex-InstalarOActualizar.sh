@@ -48,7 +48,7 @@ if [ $cVerSO == "13" ]; then
   echo "  Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-if [ $cVerSO == "12" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación del servidor Plex para Debian 12 (Bookworm)..."
@@ -77,9 +77,9 @@ elif [ $cVerSO == "11" ]; then
     opciones=(
       1 "Instalar o actualizar versión x86 de 32 bits" off
       2 "Instalar o actualizar versión x86 de 64 bits" off
-      3 "Instalar o actualizar versión ARMv7" off
-      4 "Instalar o actualizar versión ARMv8" off
-      5 "Cambiar la carpeta por defecto de Plex" off
+      3 "Instalar o actualizar versión ARMv7"          off
+      4 "Instalar o actualizar versión ARMv8"          off
+      5 "Cambiar la carpeta por defecto de Plex"       off
     )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -254,13 +254,12 @@ elif [ $cVerSO == "9" ]; then
 
   menu=(dialog --timeout 5 --checklist "Elección de la arquitectura:" 22 76 16)
     opciones=(
-  1 "Instalar o actualizar versión x86 de 32 bits" off
-              2 "Instalar o actualizar versión x86 de 64 bits" off
-              3 "Instalar o actualizar versión ARMv7" off
-              4 "Instalar o actualizar versión ARMv8" off
-)
+      1 "Instalar o actualizar versión x86 de 32 bits" off
+      2 "Instalar o actualizar versión x86 de 64 bits" off
+      3 "Instalar o actualizar versión ARMv7" off
+      4 "Instalar o actualizar versión ARMv8" off
+    )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-    clear
 
     for choice in $choices
       do
