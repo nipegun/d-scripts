@@ -9,10 +9,10 @@
 # Script de NiPeGun para enviar archivos a la papelera desde la CLI de Debian
 #
 # Ejecución remota con parámetros:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Archivo-Borrar-APapelera.sh | bash -s [RutaAlArchivoABorrar]
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Archivo-Borrar.sh | bash -s [RutaAlArchivoABorrar]
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Archivo-Borrar-APapelera.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Archivo-Borrar.sh | nano -
 # ----------
 
 # Definir constantes de color
