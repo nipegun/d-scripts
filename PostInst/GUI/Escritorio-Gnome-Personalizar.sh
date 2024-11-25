@@ -9,9 +9,6 @@
 # Script de NiPeGun para personalizar el escritorio Gnome en Debian
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Personalizar.sh | sudo bash
-#
-# Ejecución remota como root:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Personalizar.sh | bash
 #
 # Bajar y editar directamente el archivo en nano
@@ -76,22 +73,22 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de personalización del escritorio Gnome en Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Software-Desinstalar.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Software-Desinstalar.sh | sudo bash
 
     echo ""
     echo "    Instalando la app de retoques (gnome-tweaks)..."
     echo ""
-    apt-get -y install gnome-tweaks
+    sudo apt-get -y install gnome-tweaks
 
     echo ""
     echo "    Instalando la app de extensiones y algunas extensiones..."
     echo ""
-    apt-get -y install gnome-shell-extensions
-    apt-get -y install gnome-shell-extension-desktop-icons-ng
-    apt-get -y install gnome-shell-extension-impatience
-    apt-get -y install gnome-shell-extension-hide-activities
-    apt-get -y install gnome-shell-extension-easyscreencast
-    apt-get -y install gnome-shell-extension-dashtodock
+    sudo apt-get -y install gnome-shell-extensions
+    sudo apt-get -y install gnome-shell-extension-desktop-icons-ng
+    sudo apt-get -y install gnome-shell-extension-impatience
+    sudo apt-get -y install gnome-shell-extension-hide-activities
+    sudo apt-get -y install gnome-shell-extension-easyscreencast
+    sudo apt-get -y install gnome-shell-extension-dashtodock
 
     echo ""
     echo "    Instalando atajos de teclado personalizados..."
@@ -101,11 +98,17 @@
         echo ""
         echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
-        apt-get -y update && apt-get -y install curl
+        sudo apt-get -y update && sudo apt-get -y install curl
         echo ""
       fi
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-AtajosDeTeclado.txt -o /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
     dconf load /org/gnome/settings-daemon/plugins/media-keys/ < /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
+
+    # Reiniciar el sistema
+      echo ""
+      echo "  Reiniciando el sistema..."
+      echo ""
+      sudo shutdown -r now
 
   elif [ $cVerSO == "11" ]; then
 
