@@ -5,30 +5,14 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-#!/bin/bash
-
-# Pongo a disposición pública este script bajo el término de "software de dominio público".
-# Puedes hacer lo que quieras con él porque es libre de verdad; no libre con condiciones como las licencias GNU y otras patrañas similares.
-# Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
-# No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
-
 # ----------
-# Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
-#
-# Ejecución remota con sudo:
-#   curl -sL x | sudo bash
-#
-# Ejecución remota como root:
-#   curl -sL x | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+# Script de NiPeGun para enviar archivos a la papelera desde la CLI de Debian
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Archivo-Borrar-APapelera.sh | bash -s [RutaAlArchivoABorrar]
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Archivo-Borrar-APapelera.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -63,7 +47,7 @@
           apt-get -y update && apt-get -y install trash-cli
           echo ""
         fi
-      trash-cli "$1"
+      trash-cli "$1" && echo "\n  El archivo $1 ha sido movido a la papelera. \n"
 
       # Enviar registro al siemp (opcional)
 
