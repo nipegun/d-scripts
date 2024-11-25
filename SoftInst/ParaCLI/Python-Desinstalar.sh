@@ -90,7 +90,27 @@
     echo ""
 
     apt-get -y autoremove python3-dev
-    
+    apt-get autoremove python3-anyio
+    apt-get autoremove python3-asttokens
+    apt-get autoremove python3-attr
+    apt-get autoremove python3-brotli
+    apt-get autoremove python3-bs4
+    apt-get autoremove python3-capstone
+    apt-get autoremove python3-yara
+    apt-get autoremove python3-wheel
+    apt-get autoremove python3-venv
+    apt-get autoremove python3-yaml
+    apt-get autoremove python3-setuptools
+    apt-get autoremove python3-pycryptodome
+    apt-get autoremove python3-distorm3
+    apt-get autoremove python3-distutils
+    apt-get autoremove 
+    apt-get autoremove 
+    apt-get autoremove 
+    apt-get autoremove 
+    apt-get autoremove 
+    apt-get autoremove 
+    apt-get autoremove 
     apt-get -y autoremove python2*
 
   elif [ $cVerSO == "11" ]; then
