@@ -65,7 +65,7 @@
           echo "  Asignando permisos sudo al usuario $1..."
           echo ""
           usermod -aG sudo "$1"
-          newgrp sudo
+          #newgrp sudo
         else
           echo ""
           echo "  El usuario $1 no existe. Se procederá a crearlo."
@@ -75,7 +75,7 @@
           echo "  Asignando permisos sudo al usuario recién creado..."
           echo ""
           usermod -aG sudo "$1"
-          newgrp sudo
+          #newgrp sudo
           echo ""
         fi
   fi
