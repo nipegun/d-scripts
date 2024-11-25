@@ -22,6 +22,7 @@ echo ""
 ln -s /root/scripts/d-scripts/Externos/VelocidadDeInternet.sh                      /root/scripts/d-scripts/Alias/vdi
 
 ln -s /root/scripts/d-scripts/RepararPartición.sh                                  /root/scripts/d-scripts/Alias/rp
+ln -s /root/scripts/d-scripts/Archivo-Borrar.sh                                    /root/scripts/d-scripts/Alias/del
 ln -s /root/scripts/d-scripts/EditarInterfacesDeRed.sh                             /root/scripts/d-scripts/Alias/eidr
 ln -s /root/scripts/d-scripts/ZeroTier.sh                                          /root/scripts/d-scripts/Alias/zt
 ln -s /root/scripts/d-scripts/MumbleServer-Editar.sh                               /root/scripts/d-scripts/Alias/emumble
