@@ -147,7 +147,8 @@
                 apt-get -y install libexpat1-dev
                 apt-get -y install liblzma-dev
                 apt-get -y install zlib1g-dev
-
+                apt-get -y install tk-dev
+                apt-get -y install tcl-dev
               # Descargar el código fuente
                 # Determinar la última versión
                   echo ""
@@ -162,7 +163,7 @@
                     echo ""
                   fi
                   vUltVersPython2=$(curl -sL https://www.python.org/ftp/python/ | grep href | cut -d'"' -f2 | cut -d'/' -f1 | grep ^[0-9] | sort -n | grep ^2 | tail -n1)
-                  echo "      La última versión es la $vUltVersPython2"
+                  echo "\n      La última versión es la $vUltVersPython2 \n"
                 # Descargando la última versión
                   rm -rf ~/SoftInst/Python2
                   mkdir -p ~/SoftInst/
@@ -171,8 +172,18 @@
                   mv ~/SoftInst/Python-$vUltVersPython2 ~/SoftInst/Python2
                   cd ~/SoftInst/Python2
                   ./configure --prefix=/usr/local --enable-optimizations
+                   # Es un error frecuente en compilaciones de Python 2 debido a problemas de compatibilidad con bibliotecas SSL modernas
+                   #Asegurarte de tener las dependencias correctas: Python 2 puede fallar al trabajar con versiones modernas de OpenSSL. Verifica la versión instalada:
+                   #  openssl version
+                   #  Si usas una versión moderna, intenta instalar una versión más antigua (por ejemplo, 1.0.2 o 1.1.1). Esto puede requerir compilación manual o instalación desde fuentes externas.
+                   #./configure --prefix=/usr/local/python2 --with-ssl=/path/to/openssl
                   make -j $(nproc)
                   make altinstall
+                # Notificar fin de ejecución del script
+                  echo ""
+                  echo "    Python 2.7 se ha instalado en:"
+                  echo "      /usr/local/bin/python2.7"
+                  echo ""
 
             ;;
 
