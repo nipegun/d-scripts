@@ -53,10 +53,10 @@ elif [ $cVerSO == "12" ]; then
   echo ""
 
   apt-get -y update && apt-get -y install wget
-  mkdir -p /root/Softinst/Steam
+  mkdir -p /root/SoftInst/Steam
   cd /root/Softinst/Steam
   wget https://cdn.fastly.steamstatic.com/client/installer/steam.deb
-  apt -y install /root/Softinst/Steam
+  apt -y install /root/SoftInst/Steam/Steam.deb
   dpkg --add-architecture i386
   apt-get -y update
   apt-get -y install libgl1-mesa-dri:i386
