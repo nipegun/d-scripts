@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar y configurar Steam en Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Steam-Instalar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Steam-Instalar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
@@ -36,34 +36,41 @@ cFinColor='\033[0m'
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de Steam para Debian 7 (Wheezy)..."  
+  echo "  Iniciando el script de instalación de Steam para Debian 13 (x)..."  
   echo ""
 
   echo ""
   echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $cVerSO == "8" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de Steam para Debian 8 (Jessie)..."  
+  echo "  Iniciando el script de instalación de Steam para Debian 12 (Bookworm)..."  
+  echo ""
+
+  apt-get -y update && apt-get -y install wget
+  mkdir -p /root/Softinst/Steam
+  cd /root/Softinst/Steam
+  wget https://cdn.fastly.steamstatic.com/client/installer/steam.deb
+  apt -y install /root/Softinst/Steam
+  dpkg --add-architecture i386
+  apt-get -y update
+  apt-get -y install libgl1-mesa-dri:i386
+  apt-get -y install libgl1-mesa-glx:i386
+  apt-get -y install libc6:i386
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de Steam para Debian 11 (Bullseye)..."  
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "9" ]; then
-
-  echo ""
-  echo "  Iniciando el script de instalación de Steam para Debian 9 (Stretch)..."  
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $cVerSO == "10" ]; then
@@ -82,14 +89,34 @@ elif [ $cVerSO == "10" ]; then
   apt-get update
   apt-get -y install libgl1-mesa-dri:i386 libgl1-mesa-glx:i386 libc6:i386
 
-elif [ $cVerSO == "11" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de Steam para Debian 11 (Bullseye)..."  
+  echo "  Iniciando el script de instalación de Steam para Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "8" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de Steam para Debian 8 (Jessie)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de Steam para Debian 7 (Wheezy)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 fi
