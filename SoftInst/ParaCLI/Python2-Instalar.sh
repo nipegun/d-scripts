@@ -8,20 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar y configurar python en Debian
 #
-# Ejecución remota con sudo:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Instalar.sh | sudo bash
-#
-# Ejecución remota como root:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Instalar.sh | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Instalar.sh | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Instalar.sh | bash -s Parámetro1 Parámetro2
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python2-Instalar.sh | bash (No debe ejecutarse con sudo)
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Instalar.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python2-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -101,10 +92,10 @@
           apt-get -y update && apt-get -y install dialog
           echo ""
         fi
-      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+      menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
         opciones=(
-          1 "Bajar, compilar e instalar Python 2.7"                           on
-          2 "Bajar, compilar y preparar un .deb de Python 2.7 para Debian 12" off
+          1 "Bajar, compilar e instalar Python 2.7"           on
+          2 "  Preparar un .deb de Python 2.7 para Debian 12" off
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       #clear
@@ -120,24 +111,24 @@
               echo ""
 
               # Instalar paquetes necesarios para compilar
-                apt-get -y update
-                apt-get -y install build-essential
-                apt-get -y install zlib1g-dev
-                apt-get -y install libssl-dev
-                apt-get -y install libncurses5-dev
-                apt-get -y install libffi-dev
-                apt-get -y install libsqlite3-dev
-                apt-get -y install libncursesw5-dev
-                apt-get -y install libreadline-dev
-                apt-get -y install libsqlite3-dev
-                apt-get -y install libgdbm-dev
-                apt-get -y install libdb5.3-dev
-                apt-get -y install libbz2-dev
-                apt-get -y install libexpat1-dev
-                apt-get -y install liblzma-dev
-                apt-get -y install zlib1g-dev
-                apt-get -y install tk-dev
-                apt-get -y install tcl-dev
+                sudo apt-get -y update
+                sudo apt-get -y install build-essential
+                sudo apt-get -y install zlib1g-dev
+                sudo apt-get -y install libssl-dev
+                sudo apt-get -y install libncurses5-dev
+                sudo apt-get -y install libffi-dev
+                sudo apt-get -y install libsqlite3-dev
+                sudo apt-get -y install libncursesw5-dev
+                sudo apt-get -y install libreadline-dev
+                sudo apt-get -y install libsqlite3-dev
+                sudo apt-get -y install libgdbm-dev
+                sudo apt-get -y install libdb5.3-dev
+                sudo apt-get -y install libbz2-dev
+                sudo apt-get -y install libexpat1-dev
+                sudo apt-get -y install liblzma-dev
+                sudo apt-get -y install zlib1g-dev
+                sudo apt-get -y install tk-dev
+                sudo apt-get -y install tcl-dev
               # Descargar el código fuente
                 # Determinar la última versión
                   echo ""
@@ -148,17 +139,20 @@
                     echo ""
                     echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
                     echo ""
-                    apt-get -y update && apt-get -y install curl
+                    sudo apt-get -y update && sudo apt-get -y install curl
                     echo ""
                   fi
                   vUltVersPython2=$(curl -sL https://www.python.org/ftp/python/ | grep href | cut -d'"' -f2 | cut -d'/' -f1 | grep ^[0-9] | sort -n | grep ^2 | tail -n1)
-                  echo "\n      La última versión es la $vUltVersPython2 \n"
+                  echo ""
+                  echo "      La última versión es la $vUltVersPython2"
+                  echo ""
                 # Descargando la última versión
-                  rm -rf ~/SoftInst/Python2
-                  mkdir -p ~/SoftInst/
+                  sudo rm -rf ~/SoftInst/Python2
+                  sudo mkdir -p ~/SoftInst/
                   curl -L https://www.python.org/ftp/python/$vUltVersPython2/Python-$vUltVersPython2.tgz -o /tmp/python2.tgz
-                  tar -xzf /tmp/python2.tgz -C ~/SoftInst/
-                  mv ~/SoftInst/Python-$vUltVersPython2 ~/SoftInst/Python2
+                  sudo tar -xzf /tmp/python2.tgz -C ~/SoftInst/
+                  sudo mv ~/SoftInst/Python-$vUltVersPython2 ~/SoftInst/Python2
+                  sudo chown $USER:$USER ~/SoftInst/Python2 -R
                   cd ~/SoftInst/Python2
                   ./configure --prefix=/usr/local --enable-optimizations
                    # Es un error frecuente en compilaciones de Python 2 debido a problemas de compatibilidad con bibliotecas SSL modernas
@@ -167,7 +161,7 @@
                    #  Si usas una versión moderna, intenta instalar una versión más antigua (por ejemplo, 1.0.2 o 1.1.1). Esto puede requerir compilación manual o instalación desde fuentes externas.
                    #./configure --prefix=/usr/local/python2 --with-ssl=/path/to/openssl
                   make -j $(nproc)
-                  make altinstall
+                  sudo make altinstall
                 # Notificar fin de ejecución del script
                   echo ""
                   echo "    Python 2.7 se ha instalado en:"
@@ -179,53 +173,16 @@
             2)
 
               echo ""
-              echo "  Bajar, compilar y preparar un .deb de Python 2.7 para Debian12..."
+              echo "    Prepararando un .deb de Python 2.7 para Debian 12..."
               echo ""
 
               # Instalar paquetes necesarios para compilar
-                apt-get -y update
-                apt-get -y install build-essential
-                apt-get -y install zlib1g-dev
-                apt-get -y install libssl-dev
-                apt-get -y install libncurses5-dev
-                apt-get -y install libffi-dev
-                apt-get -y install libsqlite3-dev
-                apt-get -y install libncursesw5-dev
-                apt-get -y install libreadline-dev
-                apt-get -y install libsqlite3-dev
-                apt-get -y install libgdbm-dev
-                apt-get -y install libdb5.3-dev
-                apt-get -y install libbz2-dev
-                apt-get -y install libexpat1-dev
-                apt-get -y install liblzma-dev
-                apt-get -y install zlib1g-dev
-                apt-get -y install checkinstall
+                sudo apt-get -y update
+                sudo apt-get -y install checkinstall
 
-              # Descargar el código fuente
-                # Determinar la última versión
-                  echo ""
-                  echo "    Determinando la última versión de Python 2..."
-                  echo ""
-                  # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-                  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-                    echo ""
-                    echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-                    echo ""
-                    apt-get -y update && apt-get -y install curl
-                    echo ""
-                  fi
-                  vUltVersPython2=$(curl -sL https://www.python.org/ftp/python/ | grep href | cut -d'"' -f2 | cut -d'/' -f1 | grep ^[0-9] | sort -n | grep ^2 | tail -n1)
-                  echo "      La última versión es la $vUltVersPython2"
-                # Descargando la última versión
-                  rm -rf ~/SoftInst/Python2
-                  mkdir -p ~/SoftInst/
-                  curl -L https://www.python.org/ftp/python/$vUltVersPython2/Python-$vUltVersPython2.tgz -o /tmp/python2.tgz
-                  tar -xzf /tmp/python2.tgz -C ~/SoftInst/
-                  mv ~/SoftInst/Python-$vUltVersPython2 ~/SoftInst/Python2
-                  cd ~/SoftInst/Python2
-                  ./configure --prefix=/usr/local --enable-optimizations
-                  make -j $(nproc)
-                  checkinstall
+              # Compilar
+                cd ~/SoftInst/Python2
+                checkinstall
 
             ;;
 
