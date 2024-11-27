@@ -4,7 +4,7 @@
 # Puedes hacer lo que quieras con él porque es libre de verdad; no libre con condiciones como las licencias GNU y otras patrañas similares.
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
-
+https://docs.vultr.com/how-to-install-overleaf-community-edition-on-ubuntu-20-04-lts
 # ----------
 # Script de NiPeGun para instalar y configurar Overleaf en Debian
 #
