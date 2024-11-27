@@ -95,7 +95,7 @@
           apt-get -y update && apt-get -y install dialog
           echo ""
         fi
-      menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
         opciones=(
           1 "Bajar, compilar e instalar Python 2.7"           on
           2 "  Preparar un .deb de Python 2.7 para Debian 12" off
