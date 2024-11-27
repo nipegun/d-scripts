@@ -14,12 +14,6 @@
 # Ejecución remota como root:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Desinstalar.sh | bash
 #
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Desinstalar.sh | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Desinstalar.sh | bash -s Parámetro1 Parámetro2
-#
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python-Desinstalar.sh | nano -
 # ----------
@@ -89,29 +83,24 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de desinstalación de python para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    apt-get -y autoremove python3-dev
-    apt-get autoremove python3-anyio
-    apt-get autoremove python3-asttokens
-    apt-get autoremove python3-attr
-    apt-get autoremove python3-brotli
-    apt-get autoremove python3-bs4
-    apt-get autoremove python3-capstone
-    apt-get autoremove python3-yara
-    apt-get autoremove python3-wheel
-    apt-get autoremove python3-venv
-    apt-get autoremove python3-yaml
-    apt-get autoremove python3-setuptools
-    apt-get autoremove python3-pycryptodome
-    apt-get autoremove python3-distorm3
-    apt-get autoremove python3-distutils
-    apt-get autoremove 
-    apt-get autoremove 
-    apt-get autoremove 
-    apt-get autoremove 
-    apt-get autoremove 
-    apt-get autoremove 
-    apt-get autoremove 
-    apt-get -y autoremove python2*
+    # Desinstalar python2
+      apt-get -y autoremove python2*
+    # Desintalar python3
+      #apt-get -y autoremove python3-dev
+      #apt-get autoremove python3-anyio
+      #apt-get autoremove python3-asttokens
+      #apt-get autoremove python3-attr
+      #apt-get autoremove python3-brotli
+      #apt-get autoremove python3-bs4
+      #apt-get autoremove python3-capstone
+      #apt-get autoremove python3-yara
+      #apt-get autoremove python3-wheel
+      #apt-get autoremove python3-venv
+      #apt-get autoremove python3-yaml
+      #apt-get autoremove python3-setuptools
+      #apt-get autoremove python3-pycryptodome
+      #apt-get autoremove python3-distorm3
+      #apt-get autoremove python3-distutils
 
   elif [ $cVerSO == "11" ]; then
 
