@@ -103,9 +103,8 @@
         fi
       menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
         opciones=(
-          1 "Instalar la versión de Python del repo de Debian 12"             off
-          2 "Bajar, compilar e instalar Python 2.7"                           off
-          3 "Bajar, compilar y preparar un .deb de Python 2.7 para Debian 12" off
+          1 "Bajar, compilar e instalar Python 2.7"                           on
+          2 "Bajar, compilar y preparar un .deb de Python 2.7 para Debian 12" off
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       #clear
@@ -115,16 +114,6 @@
           case $choice in
 
             1)
-
-              echo ""
-              echo "  Instalando la versión de python del repo de Debian 12..."
-              echo ""
-
-              apt-get -y update && apt-get -y install python3
-
-            ;;
-
-            2)
 
               echo ""
               echo "  Bajando, compilando e instalando Python 2.7..."
@@ -187,7 +176,7 @@
 
             ;;
 
-            3)
+            2)
 
               echo ""
               echo "  Bajar, compilar y preparar un .deb de Python 2.7 para Debian12..."
