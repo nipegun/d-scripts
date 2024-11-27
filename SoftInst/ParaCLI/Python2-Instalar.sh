@@ -83,114 +83,62 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de python para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    # Definir fecha de ejecución del script
-      cFechaDeEjec=$(date +a%Ym%md%d@%T)
-
-    # Crear el menú
-      # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
-          echo ""
-          echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
-          echo ""
-          apt-get -y update && apt-get -y install dialog
-          echo ""
-        fi
-      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
-        opciones=(
-          1 "Bajar, compilar e instalar Python 2.7"           on
-          2 "  Preparar un .deb de Python 2.7 para Debian 12" off
-        )
-      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-      #clear
-
-      for choice in $choices
-        do
-          case $choice in
-
-            1)
-
-              echo ""
-              echo "  Bajando, compilando e instalando Python 2.7..."
-              echo ""
-
-              # Instalar paquetes necesarios para compilar
-                apt-get -y update
-                apt-get -y install build-essential
-                apt-get -y install zlib1g-dev
-                apt-get -y install libssl-dev
-                apt-get -y install libncurses5-dev
-                apt-get -y install libffi-dev
-                apt-get -y install libsqlite3-dev
-                apt-get -y install libncursesw5-dev
-                apt-get -y install libreadline-dev
-                apt-get -y install libsqlite3-dev
-                apt-get -y install libgdbm-dev
-                apt-get -y install libdb5.3-dev
-                apt-get -y install libbz2-dev
-                apt-get -y install libexpat1-dev
-                apt-get -y install liblzma-dev
-                apt-get -y install zlib1g-dev
-                apt-get -y install tk-dev
-                apt-get -y install tcl-dev
-              # Descargar el código fuente
-                # Determinar la última versión
-                  echo ""
-                  echo "    Determinando la última versión de Python 2..."
-                  echo ""
-                  # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-                  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-                    echo ""
-                    echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-                    echo ""
-                    apt-get -y update && apt-get -y install curl
-                    echo ""
-                  fi
-                  vUltVersPython2=$(curl -sL https://www.python.org/ftp/python/ | grep href | cut -d'"' -f2 | cut -d'/' -f1 | grep ^[0-9] | sort -n | grep ^2 | tail -n1)
-                  echo ""
-                  echo "      La última versión es la $vUltVersPython2"
-                  echo ""
-                # Descargando la última versión
-                  rm -rf /root/SoftInst/Python2
-                  mkdir -p /root/SoftInst/
-                  curl -L https://www.python.org/ftp/python/$vUltVersPython2/Python-$vUltVersPython2.tgz -o /tmp/python2.tgz
-                  tar -xzf /tmp/python2.tgz -C /root/SoftInst/
-                  mv /root/SoftInst/Python-$vUltVersPython2 /root/SoftInst/Python2
-                  cd /root/SoftInst/Python2
-                  ./configure --prefix=/usr/local --enable-optimizations
-                   # Es un error frecuente en compilaciones de Python 2 debido a problemas de compatibilidad con bibliotecas SSL modernas
-                   #Asegurarte de tener las dependencias correctas: Python 2 puede fallar al trabajar con versiones modernas de OpenSSL. Verifica la versión instalada:
-                   #  openssl version
-                   #  Si usas una versión moderna, intenta instalar una versión más antigua (por ejemplo, 1.0.2 o 1.1.1). Esto puede requerir compilación manual o instalación desde fuentes externas.
-                   #./configure --prefix=/usr/local/python2 --with-ssl=/path/to/openssl
-                  make -j $(nproc)
-                  #make altinstall
-                # Notificar fin de ejecución del script
-                  echo ""
-                  echo "    Python 2.7 se ha instalado en:"
-                  echo "      /usr/local/bin/python2.7"
-                  echo ""
-
-            ;;
-
-            2)
-
-              echo ""
-              echo "    Prepararando un .deb de Python 2.7 para Debian 12..."
-              echo ""
-
-              # Instalar paquetes necesarios para compilar
-                apt-get -y update
-                apt-get -y install checkinstall
-
-              # Compilar
-                cd /root/SoftInst/Python2
-                checkinstall
-
-            ;;
-
-        esac
-
-    done
+    # Instalar paquetes necesarios para compilar
+      apt-get -y update
+      apt-get -y install build-essential
+      apt-get -y install zlib1g-dev
+      apt-get -y install libssl-dev
+      apt-get -y install libncurses5-dev
+      apt-get -y install libffi-dev
+      apt-get -y install libsqlite3-dev
+      apt-get -y install libncursesw5-dev
+      apt-get -y install libreadline-dev
+      apt-get -y install libsqlite3-dev
+      apt-get -y install libgdbm-dev
+      apt-get -y install libdb5.3-dev
+      apt-get -y install libbz2-dev
+      apt-get -y install libexpat1-dev
+      apt-get -y install liblzma-dev
+      apt-get -y install zlib1g-dev
+      apt-get -y install tk-dev
+      apt-get -y install tcl-dev
+    # Descargar el código fuente
+      # Determinar la última versión
+        echo ""
+        echo "    Determinando la última versión de Python 2..."
+        echo ""
+        # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+          if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+            echo ""
+            echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+            echo ""
+            apt-get -y update && apt-get -y install curl
+            echo ""
+          fi
+        vUltVersPython2=$(curl -sL https://www.python.org/ftp/python/ | grep href | cut -d'"' -f2 | cut -d'/' -f1 | grep ^[0-9] | sort -n | grep ^2 | tail -n1)
+        echo ""
+        echo "      La última versión es la $vUltVersPython2"
+        echo ""
+    # Descargando la última versión
+      rm -rf /root/SoftInst/Python2
+      mkdir -p /root/SoftInst/
+      curl -L https://www.python.org/ftp/python/$vUltVersPython2/Python-$vUltVersPython2.tgz -o /tmp/python2.tgz
+      tar -xzf /tmp/python2.tgz -C /root/SoftInst/
+      mv /root/SoftInst/Python-$vUltVersPython2 /root/SoftInst/Python2
+      cd /root/SoftInst/Python2
+      ./configure --prefix=/usr/local --enable-optimizations
+      # Es un error frecuente en compilaciones de Python 2 debido a problemas de compatibilidad con bibliotecas SSL modernas
+      #Asegurarte de tener las dependencias correctas: Python 2 puede fallar al trabajar con versiones modernas de OpenSSL. Verifica la versión instalada:
+      #  openssl version
+      #  Si usas una versión moderna, intenta instalar una versión más antigua (por ejemplo, 1.0.2 o 1.1.1). Esto puede requerir compilación manual o instalación desde fuentes externas.
+      #./configure --prefix=/usr/local/python2 --with-ssl=/path/to/openssl
+      make -j $(nproc)
+      make altinstall # No se usa install para no sobreescribir la instalación de Python3
+    # Notificar fin de ejecución del script
+      echo ""
+      echo "    Python 2.7 se ha instalado en:"
+      echo "      /usr/local/bin/python2.7"
+      echo ""
 
   elif [ $cVerSO == "11" ]; then
 
