@@ -150,13 +150,12 @@
                   echo "      La última versión es la $vUltVersPython2"
                   echo ""
                 # Descargando la última versión
-                  rm -rf ~/SoftInst/Python2
-                  mkdir -p ~/SoftInst/
+                  rm -rf /root/SoftInst/Python2
+                  mkdir -p /root/SoftInst/
                   curl -L https://www.python.org/ftp/python/$vUltVersPython2/Python-$vUltVersPython2.tgz -o /tmp/python2.tgz
-                  tar -xzf /tmp/python2.tgz -C ~/SoftInst/
-                  mv ~/SoftInst/Python-$vUltVersPython2 ~/SoftInst/Python2
-                  chown $USER:$USER ~/SoftInst/Python2 -R
-                  cd ~/SoftInst/Python2
+                  tar -xzf /tmp/python2.tgz -C /root/SoftInst/
+                  mv /root/SoftInst/Python-$vUltVersPython2 /root/SoftInst/Python2
+                  cd /root/SoftInst/Python2
                   ./configure --prefix=/usr/local --enable-optimizations
                    # Es un error frecuente en compilaciones de Python 2 debido a problemas de compatibilidad con bibliotecas SSL modernas
                    #Asegurarte de tener las dependencias correctas: Python 2 puede fallar al trabajar con versiones modernas de OpenSSL. Verifica la versión instalada:
@@ -184,7 +183,7 @@
                 apt-get -y install checkinstall
 
               # Compilar
-                cd ~/SoftInst/Python2
+                cd /root/SoftInst/Python2
                 checkinstall
 
             ;;
