@@ -9,19 +9,19 @@
 # Script de NiPeGun para instalar y configurar RTIR en Debian
 #
 # Ejecución remota con sudo:
-#   curl -sL x | sudo bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/RTIR-Instalar.sh | sudo bash
 #
 # Ejecución remota como root:
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/RTIR-Instalar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/RTIR-Instalar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/RTIR-Instalar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/RTIR-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -40,15 +40,6 @@
     echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
     echo ""
     exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update && apt-get -y install curl
-    echo ""
   fi
 
 # Determinar la versión de Debian
@@ -89,9 +80,32 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de RTIR para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Clonar el repo
+      mkdir -p ~/repos/perl/
+      cd ~/repos/perl/
+      rm -rf ~/repos/perl/rtir/
+      # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete git no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update && sudo apt-get -y install git
+          echo ""
+        fi
+      git clone https://github.com/bestpractical/rtir.git
+
+
+    # Instalar
+      # Comprobar si el paquete perl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s perl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete perl no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update && sudo apt-get -y install perl
+          echo ""
+        fi
+      cd ~/repos/perl/rtir/
+      perl Makefile.PL
 
   elif [ $cVerSO == "11" ]; then
 
