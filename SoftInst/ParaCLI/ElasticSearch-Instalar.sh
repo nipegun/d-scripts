@@ -84,14 +84,30 @@
       apt-get -y update && apt-get -y upgrade
 
     # Instalar Elasticsearch:
-      # Agregar la clave para firmar el repo
-        wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+      # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update && apt-get -y install wget
+          echo ""
+        fi
+      # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete gnupg2 no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update && apt-get -y install gnupg2
+          echo ""
+        fi
+        wget -qO- https://artifacts.elastic.co/GPG-KEY-elasticsearch | gpg --dearmor | tee /usr/share/keyrings/elasticsearch-keyring.gpg > /dev/null
       # Agregar el repo
-        echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
+        echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | tee /etc/apt/sources.list.d/elasticsearch-8.x.list
       # Instalar
         apt-get -y update && apt-get -y install elasticsearch
 
     # Habilitar e iniciar
+      systemctl daemon-reload
       systemctl enable elasticsearch --now
 
   elif [ $cVerSO == "11" ]; then
