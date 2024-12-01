@@ -170,6 +170,12 @@ elif [ $cVerSO == "11" ]; then
           echo ""
           /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
 
+          echo ""
+          echo "  Datos de acceso por defecto:"
+          echo "    Usuario: admin@thehive.local"
+          echo "    Contraseña: secret"
+          echo ""
+
         ;;
 
         3)
