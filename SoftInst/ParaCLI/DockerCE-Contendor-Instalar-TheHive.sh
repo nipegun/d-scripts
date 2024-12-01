@@ -61,8 +61,7 @@ elif [ $cVerSO == "8" ]; then
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "---------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de OracleLinux en el DockerCE de Debian 9 (Stretch)..."  echo "---------------------------------------------------------------------------------------------"
+  echo "  Iniciando el script de instalación de OracleLinux en el DockerCE de Debian 9 (Stretch)..."
   echo ""
 
   echo ""
@@ -157,9 +156,7 @@ elif [ $cVerSO == "11" ]; then
           echo "  --name TheHive                               \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
           echo "  -v /Host/TheHive/data:/data                  \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
-          echo "  -p 22001:22                                  \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
-          echo "  -p 1521:9444                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
-          echo "  -p 1630:1630                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
+          echo "  -p 9000:9000                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
           echo "  strangebee/thehive:5.4"                          >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
           chmod +x                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
 
