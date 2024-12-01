@@ -36,35 +36,91 @@ cFinColor='\033[0m'
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de DockerCE para Debian 7 (Wheezy)..."
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  echo "  Iniciando el script de instalación de DockerCE para Debian 8 (Jessie)..."
+  echo "  Iniciando el script de instalación de DockerCE para Debian 13 (x)..."
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
+  echo "  Comandos para Debian 13 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
   echo ""
 
-elif [ $cVerSO == "9" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de DockerCE para Debian 9 (Stretch)..."
+  echo "  Iniciando el script de instalación de DockerCE para Debian 12 (Bookworm)..."
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
+  echo "  Instalando paquetes necesarios..."
   echo ""
+  apt-get -y install wget
+  apt-get -y install apt-transport-https
+  apt-get -y install ca-certificates
+  apt-get -y install curl
+  apt-get -y install gnupg2
+  apt-get -y install software-properties-common
+
+  echo ""
+  echo "  Descargando la clave PGP del KeyRing..."
+  echo ""
+  wget -O- https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+  echo ""
+  echo "  Agregando el repositorio..."
+  echo ""
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+  apt-get -y update
+
+  echo ""
+  echo "  Instalando docker-ce..."
+  echo ""
+  apt-get -y install docker-ce
+
+  echo ""
+  echo "  Activando y arrancando el servicio de docker..."
+  echo ""
+  systemctl enable docker
+  systemctl start docker
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de DockerCE para Debian 11 (Bullseye)..."
+  echo ""
+
+  echo ""
+  echo "  Instalando paquetes necesarios..."
+  echo ""
+  apt-get -y install wget
+  apt-get -y install apt-transport-https
+  apt-get -y install ca-certificates
+  apt-get -y install curl
+  apt-get -y install gnupg2
+  apt-get -y install software-properties-common
+
+  echo ""
+  echo "  Descargando la clave PGP del KeyRing..."
+  echo ""
+  wget -O- https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+  echo ""
+  echo "  Agregando el repositorio..."
+  echo ""
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+  apt-get update
+
+  echo ""
+  echo "  Instalando docker-ce..."
+  echo ""
+  apt-get -y install docker-ce
+
+  echo ""
+  echo "  Activando y arrancando el servicio de docker..."
+  echo ""
+  systemctl enable docker
+  systemctl start docker
 
 elif [ $cVerSO == "10" ]; then
 
@@ -81,43 +137,35 @@ elif [ $cVerSO == "10" ]; then
   systemctl enable docker
   systemctl start docker
 
-elif [ $cVerSO == "11" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de DockerCE para Debian 11 (Bullseye)..."
+  echo "  Iniciando el script de instalación de DockerCE para Debian 9 (Stretch)..."
   echo ""
 
   echo ""
-  echo "  Instalando paquetes necesarios..."
-echo ""
-  apt-get -y install wget
-  apt-get -y install apt-transport-https
-  apt-get -y install ca-certificates
-  apt-get -y install curl
-  apt-get -y install gnupg2
-  apt-get -y install software-properties-common
+  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "  Descargando la clave PGP del KeyRing..."
-echo ""
-  wget -O- https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  echo "  Iniciando el script de instalación de DockerCE para Debian 8 (Jessie)..."
+  echo ""
 
   echo ""
-  echo "  Agregando el repositorio..."
-echo ""
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
-  apt-get update
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "  Instalando docker-ce..."
-echo ""
-  apt-get -y install docker-ce
+  echo "  Iniciando el script de instalación de DockerCE para Debian 7 (Wheezy)..."
+  echo ""
 
   echo ""
-  echo "  Activando y arrancando el servicio de docker..."
-echo ""
-  systemctl enable docker
-  systemctl start docker
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
+  echo ""
 
 fi
 
