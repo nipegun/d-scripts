@@ -21,7 +21,6 @@
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
-
 # Notificar el inicio de ejecución del script
   echo ""
   echo "  Iniciando el script de instalación de TheHive en DockerCE..." 
