@@ -55,7 +55,7 @@
         1)
 
           echo ""
-          echo -e "${cColorVerde}  Instalando OracleLinux en un ordenador o máquina virtual...${cFinColor}"
+          echo -e "${cColorVerde}  Instalando TheHive en un ordenador o máquina virtual...${cFinColor}"
           echo ""
           mkdir -p /Contenedores/TheHive/data 2> /dev/null
 
