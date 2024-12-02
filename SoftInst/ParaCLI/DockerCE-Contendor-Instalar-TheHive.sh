@@ -62,15 +62,15 @@
           echo ""
           echo "  Creando el comando para iniciar el contenedor docker..."
           echo ""
-          echo '#!/bin/bash'                                             > /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
-          echo ""                                                       >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
-          echo "docker run -d --restart=always                      \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
-          echo "  --name TheHive                                    \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
-          echo "  -v /Contenedores/TheHive/data:/data               \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock      \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
-          echo "  -p 9000:9000                                      \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
-          echo "  strangebee/thehive:5.4"                               >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
-          chmod +x                                                         /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
+          echo '#!/bin/bash'                                        > /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
+          echo ""                                                  >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
+          echo "docker run -d --restart=always                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
+          echo "  --name TheHive                               \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
+          echo "  -v /Contenedores/TheHive/data:/data          \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
+          echo "  -p 9000:9000                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
+          echo "  strangebee/thehive:5.4"                          >> /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
+          chmod +x                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
 
           echo ""
           echo "  Creando el comando post arranque..."
