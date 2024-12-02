@@ -34,11 +34,12 @@
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "  dialog no está instalado. Iniciando su instalación..."     echo ""
+     echo "  El paquete dialog no está instalado. Iniciando su instalación..."
+     echo ""
      apt-get -y update && apt-get -y install dialog
      echo ""
    fi
-  menu=(dialog --timeout 5 --checklist "¿Donde quieres instalar OracleLinux?:" 22 76 16)
+  menu=(dialog --timeout 5 --checklist "¿Donde quieres instalar CTFd?:" 22 76 16)
     opciones=(
       1 "En un ordenador o máquina virtual" on
       2 "En un contenedor LXC de Proxmox" off
