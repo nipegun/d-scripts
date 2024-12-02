@@ -21,6 +21,11 @@
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
+# Notificar el inicio de ejecución del script
+  echo ""
+  echo "  Iniciando el script de instalación de CTFd en DockerCE..." 
+  echo ""
+
 # Comprobar si el script está corriendo como root
   #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
   if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
