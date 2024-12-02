@@ -66,9 +66,9 @@
           echo ""                                                  >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
           echo "docker run -d --restart=always                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
           echo "  --name CTFd                                  \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "  -p 8000:8000                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
           echo "  -v /Contenedores/CTFd/data:/data             \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
+          echo "  -p 8000:8000                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
           echo "  ctfd/ctfd:latest"                                >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
           chmod +x                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
 
@@ -96,10 +96,10 @@
           echo ""
           echo '#!/bin/bash'                                        > /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
           echo ""                                                  >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "docker run -d --restart=always -it                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
+          echo "docker run -d --restart=always -it             \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
           echo "  --name CTFd                                  \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
           echo "  -v /Host/CTFd/data:/data                     \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
           echo "  -p 8000:8000                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
           echo "  ctfd/ctfd:latest"                                >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
           chmod +x                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
