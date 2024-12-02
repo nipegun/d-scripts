@@ -44,12 +44,12 @@
       apt-get -y update && apt-get -y install dialog
       echo ""
     fi
-  menu=(dialog --timeout 5 --checklist "¿Donde quieres instalar CTFd?:" 22 76 16)
+  menu=(dialog --checklist "¿Donde quieres instalar CTFd?:" 22 76 16)
     opciones=(
-      1 "En un ordenador o máquina virtual" on
-      2 "En un contenedor LXC de Proxmox" off
-      3 "..." off
-      4 "..." off
+      1 "Versión sin AppArmor, en un ordenador o máquina virtual" on
+      2 "Versión sin AppArmor, en un contenedor LXC de Proxmox"   off
+      3 "Versión con AppArmor, en un ordenador o máquina virtual" off
+      4 "Versión con AppArmor, en un contenedor LXC de Proxmox"   off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -60,80 +60,128 @@
         1)
 
           echo ""
-          echo -e "${cColorVerde}  Instalando CTFd en un ordenador o máquina virtual...${cFinColor}"
+          echo -e "${cColorVerde}  Instalando CTFd (versión sin AppArmor) en un ordenador o máquina virtual...${cFinColor}"
           echo ""
           mkdir -p /Contenedores/CTFd/data 2> /dev/null
 
           echo ""
           echo "  Creando el comando para iniciar el contenedor docker..."
           echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo ""                                                  >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "  --name CTFd                                  \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "  -v /Contenedores/CTFd/data:/data             \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "  -p 8000:8000                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "  ctfd/ctfd:latest"                                >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          chmod +x                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
+          echo '#!/bin/bash'                                                               > /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo ""                                                                         >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo "docker run -d --restart=always -it --security-opt apparmor=unconfined \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo "  --name CTFd                                                         \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo "  -v /Contenedores/CTFd/data:/data                                    \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock                        \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo "  -p 8000:8000                                                        \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo "  ctfd/ctfd:latest"                                                       >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          chmod +x                                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
 
           echo ""
           echo "  Creando el comando post arranque..."
           echo ""
-          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
           echo ""
           echo "  Iniciando el container por primera vez..."
           echo ""
-          /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
+          /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
 
         ;;
 
         2)
 
           echo ""
-          echo -e "${cColorVerde}  Instalando CTFd en un contenedor LXC...${cFinColor}"
+          echo -e "${cColorVerde}  Instalando CTFd (versión sin AppArmor) en un contenedor LXC...${cFinColor}"
           echo ""
           mkdir -p /Host/CTFd/data 2> /dev/null
 
           echo ""
           echo "  Creando el comando para iniciar el contenedor docker..."
           echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo ""                                                  >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "docker run -d --restart=always -it             \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "  --name CTFd                                  \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "  -v /Host/CTFd/data:/data                     \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "  -p 8000:8000                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          echo "  ctfd/ctfd:latest"                                >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
-          chmod +x                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
+          echo '#!/bin/bash'                                                               > /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo ""                                                                         >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo "docker run -d --restart=always -it --security-opt apparmor=unconfined \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo "  --name CTFd                                                         \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo "  -v /Host/CTFd/data:/data                                            \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock                        \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo "  -p 8000:8000                                                        \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          echo "  ctfd/ctfd:latest"                                                       >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+          chmod +x                                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
 
           echo ""
           echo "  Creando el comando post arranque..."
           echo ""
-          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
           echo ""
           echo "  Iniciando el container por primera vez..."
           echo ""
-          /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-Iniciar.sh
+          /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
 
         ;;
 
         3)
 
           echo ""
-          echo -e "${cColorVerde}  ...${cFinColor}"
+          echo -e "${cColorVerde}  Instalando CTFd (versión con App Armor) en un ordenador o máquina virtual...${cFinColor}"
           echo ""
+          mkdir -p /Contenedores/CTFd/data 2> /dev/null
+
+          echo ""
+          echo "  Creando el comando para iniciar el contenedor docker..."
+          echo ""
+          echo '#!/bin/bash'                                        > /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo ""                                                  >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo "docker run -d --restart=always -it             \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo "  --name CTFd                                  \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo "  -v /Contenedores/CTFd/data:/data             \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo "  -p 8000:8000                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo "  ctfd/ctfd:latest"                                >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          chmod +x                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+
+          echo ""
+          echo "  Creando el comando post arranque..."
+          echo ""
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+          echo ""
+          echo "  Iniciando el container por primera vez..."
+          echo ""
+          /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
 
         ;;
 
         4)
 
           echo ""
-          echo -e "${cColorVerde}  ...${cFinColor}"
+          echo -e "${cColorVerde}  Instalando CTFd (versión con AppArmor) en un contenedor LXC...${cFinColor}"
           echo ""
+          mkdir -p /Host/CTFd/data 2> /dev/null
+
+          echo ""
+          echo "  Creando el comando para iniciar el contenedor docker..."
+          echo ""
+          echo '#!/bin/bash'                                        > /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo ""                                                  >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo "docker run -d --restart=always -it             \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo "  --name CTFd                                  \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo "  -v /Host/CTFd/data:/data                     \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo "  -p 8000:8000                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          echo "  ctfd/ctfd:latest"                                >> /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+          chmod +x                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+
+          echo ""
+          echo "  Creando el comando post arranque..."
+          echo ""
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+          echo ""
+          echo "  Iniciando el container por primera vez..."
+          echo ""
+          /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
 
         ;;
         
