@@ -23,7 +23,7 @@
 
 # Notificar el inicio de ejecución del script
   echo ""
-  echo "  Iniciando el script de instalación de PortainerCE en el DockerCE..." 
+  echo "  Iniciando el script de instalación de PortainerCE en DockerCE..." 
   echo ""
 
 # Comprobar si el script está corriendo como root
