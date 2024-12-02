@@ -10,6 +10,8 @@
 #
 # Ejecución remota:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-CTFd.sh | bash
+#
+# Enlace: https://github.com/CTFd/CTFd
 # ----------
 
 # Definir constantes de color
