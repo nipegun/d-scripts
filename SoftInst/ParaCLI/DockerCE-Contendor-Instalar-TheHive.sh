@@ -75,7 +75,7 @@
           echo ""
           echo "  Creando el comando post arranque..."
           echo ""
-          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
           echo ""
           echo "  Iniciando el container por primera vez..."
