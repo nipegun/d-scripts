@@ -129,7 +129,7 @@ elif [ $cVerSO == "12" ]; then
             2)
 
               echo ""
-              echo "  Instalado desde la web..."
+              echo "  Instalando desde la web..."
               echo ""
               dpkg --add-architecture i386
               mkdir -p /root/SoftInst/Steam/ 2> /dev/null
@@ -154,6 +154,16 @@ elif [ $cVerSO == "12" ]; then
                 apt-get -y install libgtk2.0-0:i386
                 apt-get -y install libgl1-mesa-glx:i386
                 apt-get -y install libc6:i386
+                apt-get -y install libc6:amd64
+                apt-get -y install libegl1:amd64
+                apt-get -y install libegl1:i386
+                apt-get -y install libgbm1:amd64
+                apt-get -y install libgbm1:i386
+                apt-get -y install libgl1-mesa-dri:amd64
+                apt-get -y install libgl1-mesa-dri:i386
+                apt-get -y install libgl1:amd64
+                apt-get -y install libgl1:i386
+                apt-get -y install steam-libs-amd64:amd64
               # Instlar paquete
                 apt -y install /root/SoftInst/Steam/Steam.deb
 
