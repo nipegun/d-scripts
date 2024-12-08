@@ -84,7 +84,7 @@ elif [ $cVerSO == "12" ]; then
   echo "  Cuando acabe, y llegues a la ventana de inicio de sesión, no te loguees y cierra la ventana."
   echo ""
   read -p "  Presiona Enter para continuar..." < /dev/tty
-  steam
+  /usr/games/steam
 
   # Borrar las librerías que tienen conflicto con debian
     rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.6
