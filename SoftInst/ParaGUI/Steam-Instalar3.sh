@@ -94,15 +94,30 @@ elif [ $cVerSO == "12" ]; then
               echo ""
               dpkg --add-architecture i386
               curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-Todos-Poner.sh | bash
-              apt-get -y update
-              apt-get -y install mesa-vulkan-drivers
-              apt-get -y install libglx-mesa0:i386
-              apt-get -y install mesa-vulkan-drivers:i386
-              apt-get -y install libgl1-mesa-dri:i386
-              apt-get -y install libgtk2.0-0:i386
-              apt-get -y install libgl1-mesa-glx:i386
-              apt-get -y install libc6:i386
-              apt-get -y install steam-installer
+              # Instalar dependencias
+                apt-get -y update
+                # Paquetes i386
+                  apt-get -y install libc6:i386
+                  apt-get -y install libegl1:i386
+                  apt-get -y install libgbm1:i386
+                  apt-get -y install libgl1:i386
+                  apt-get -y install libgl1-mesa-dri:i386
+                  apt-get -y install libgl1-mesa-glx:i386
+                  apt-get -y install libglx-mesa0:i386
+                  apt-get -y install libgtk2.0-0:i386
+                  apt-get -y install mesa-vulkan-drivers:i386
+                  apt-get -y install steam-libs-i386
+                # Paquetes amd64
+                  apt-get -y install libc6:amd6
+                  apt-get -y install libegl1:amd64
+                  apt-get -y install libgbm1:amd64
+                  apt-get -y install libgl1:amd64
+                  apt-get -y install libgl1-mesa-dri:amd64
+                  apt-get -y install libgl1-mesa-glx:amd64
+                  apt-get -y install libglx-mesa0:amd64
+                  apt-get -y install libgtk2.0-0:amd64
+                  apt-get -y install mesa-vulkan-drivers:amd64
+                  apt-get -y install steam-libs-amd64:amd64
               echo ""
               echo "  Se procederá ahora con la instalación de steam."
               echo "  Cuando acabe, y llegues a la ventana de inicio de sesión, no te loguees y cierra la ventana."
@@ -147,25 +162,56 @@ elif [ $cVerSO == "12" ]; then
                 curl -sL https://cdn.fastly.steamstatic.com/client/installer/steam.deb -o /root/SoftInst/Steam/Steam.deb
               # Instalar dependencias
                 apt-get -y update
-                apt-get -y install mesa-vulkan-drivers
-                apt-get -y install libglx-mesa0:i386
-                apt-get -y install mesa-vulkan-drivers:i386
-                apt-get -y install libgl1-mesa-dri:i386
-                apt-get -y install libgtk2.0-0:i386
-                apt-get -y install libgl1-mesa-glx:i386
-                apt-get -y install libc6:i386
-                apt-get -y install libc6:amd64
-                apt-get -y install libegl1:amd64
-                apt-get -y install libegl1:i386
-                apt-get -y install libgbm1:amd64
-                apt-get -y install libgbm1:i386
-                apt-get -y install libgl1-mesa-dri:amd64
-                apt-get -y install libgl1-mesa-dri:i386
-                apt-get -y install libgl1:amd64
-                apt-get -y install libgl1:i386
-                apt-get -y install steam-libs-amd64:amd64
+                # Paquetes i386
+                  apt-get -y install libc6:i386
+                  apt-get -y install libegl1:i386
+                  apt-get -y install libgbm1:i386
+                  apt-get -y install libgl1:i386
+                  apt-get -y install libgl1-mesa-dri:i386
+                  apt-get -y install libgl1-mesa-glx:i386
+                  apt-get -y install libglx-mesa0:i386
+                  apt-get -y install libgtk2.0-0:i386
+                  apt-get -y install mesa-vulkan-drivers:i386
+                  apt-get -y install steam-libs-i386
+                # Paquetes amd64
+                  apt-get -y install libc6:amd6
+                  apt-get -y install libegl1:amd64
+                  apt-get -y install libgbm1:amd64
+                  apt-get -y install libgl1:amd64
+                  apt-get -y install libgl1-mesa-dri:amd64
+                  apt-get -y install libgl1-mesa-glx:amd64
+                  apt-get -y install libglx-mesa0:amd64
+                  apt-get -y install libgtk2.0-0:amd64
+                  apt-get -y install mesa-vulkan-drivers:amd64
+                  apt-get -y install steam-libs-amd64:amd64
+
+              echo ""
+              echo "  Se procederá ahora con la instalación del .deb de steam."
+              echo "  Cuando acabe, y llegues a la ventana de inicio de sesión, no te loguees y cierra la ventana."
+              echo ""
+              read -p "  Presiona Enter para continuar..." < /dev/tty
+
               # Instlar paquete
                 apt -y install /root/SoftInst/Steam/Steam.deb
+
+              # Borrar las librerías que tienen conflicto con debian
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.6
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/lib/i386-linux-gnu/libgcc_s.so.1
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libgcc_s.so.1
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libxcb.so.1
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/lib/i386-linux-gnu/libgpg-error.so.0
+
+              # Borrar archivos que puedan hacer que no haya sonido en los juegos
+                rm -rf ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/alsa-lib
+                rm -rf ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/alsa-lib
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libasound.so.*
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libasound.so.*
+
+              # Notificar fin de ejecución del script
+                echo ""
+                echo -e "${cColorRojo}  Steam instalado correctamente. Ya puedes ejecutarlo normalmente.${cFinColor}"
+                echo ""
 
             ;;
 
