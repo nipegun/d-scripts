@@ -41,7 +41,8 @@
     echo ""
     echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
-    apt-get -y update && apt-get -y install curl
+    apt-get -y update
+    apt-get -y install curl
     echo ""
   fi
 
@@ -112,7 +113,8 @@
             echo ""
             echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
             echo ""
-            apt-get -y update && apt-get -y install curl
+            apt-get -y update
+            apt-get -y install curl
             echo ""
           fi
         vUltVersPython2=$(curl -sL https://www.python.org/ftp/python/ | grep href | cut -d'"' -f2 | cut -d'/' -f1 | grep ^[0-9] | sort -n | grep ^2 | tail -n1)
