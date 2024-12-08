@@ -132,7 +132,8 @@ elif [ $cVerSO == "12" ]; then
               echo "  Instalado desde la web..."
               echo ""
               dpkg --add-architecture i386
-              mkdir -p /root/SoftInst/Steam/
+              mkdir -p /root/SoftInst/Steam/ 2> /dev/null
+              rm -rf /root/SoftInst/Steam/*  2> /dev/null
               # Descargar el .deb
                 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
