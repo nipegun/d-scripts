@@ -65,40 +65,102 @@ if [ $cVerSO == "13" ]; then
 
 elif [ $cVerSO == "12" ]; then
 
-  echo ""
-  echo "  Iniciando el script de instalación de Steam para Debian 12 (Bookworm)..."  
-  echo ""
-  dpkg --add-architecture i386
-  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-Todos-Poner.sh | bash
-  apt-get -y update
-  apt-get -y install mesa-vulkan-drivers
-  apt-get -y install libglx-mesa0:i386
-  apt-get -y install mesa-vulkan-drivers:i386
-  apt-get -y install libgl1-mesa-dri:i386
-  apt-get -y install libgtk2.0-0:i386
-  apt-get -y install libgl1-mesa-glx:i386
-  apt-get -y install libc6:i386
-  apt-get -y install steam-installer
-  echo ""
-  echo "  Se procederá ahora con la instalación de steam."
-  echo "  Cuando acabe, y llegues a la ventana de inicio de sesión, no te loguees y cierra la ventana."
-  echo ""
-  read -p "  Presiona Enter para continuar..." < /dev/tty
-  /usr/games/steam
+  # Crear el menú
+    # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        apt-get -y update
+        apt-get -y install dialog
+        echo ""
+      fi
+    menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+      opciones=(
+        1 "Instalar desde repos (forma oficial de debian)" off
+        2 "Instalar desde web"                              on
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+      #clear
 
-  # Borrar las librerías que tienen conflicto con debian
-    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.6
-    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/lib/i386-linux-gnu/libgcc_s.so.1
-    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libgcc_s.so.1
-    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libstdc++.so.6
-    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libxcb.so.1
-    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/lib/i386-linux-gnu/libgpg-error.so.0
+      for choice in $choices
+        do
+          case $choice in
 
-  # Borrar archivos que puedan hacer que no haya sonido en los juegos
-    rm -rf ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/alsa-lib
-    rm -rf ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/alsa-lib
-    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libasound.so.*
-    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libasound.so.*
+            1)
+
+              echo ""
+              echo "  Instalando desde repos..."
+              echo ""
+              dpkg --add-architecture i386
+              curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-Todos-Poner.sh | bash
+              apt-get -y update
+              apt-get -y install mesa-vulkan-drivers
+              apt-get -y install libglx-mesa0:i386
+              apt-get -y install mesa-vulkan-drivers:i386
+              apt-get -y install libgl1-mesa-dri:i386
+              apt-get -y install libgtk2.0-0:i386
+              apt-get -y install libgl1-mesa-glx:i386
+              apt-get -y install libc6:i386
+              apt-get -y install steam-installer
+              echo ""
+              echo "  Se procederá ahora con la instalación de steam."
+              echo "  Cuando acabe, y llegues a la ventana de inicio de sesión, no te loguees y cierra la ventana."
+              echo ""
+              read -p "  Presiona Enter para continuar..." < /dev/tty
+              /usr/games/steam
+
+              # Borrar las librerías que tienen conflicto con debian
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.6
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/lib/i386-linux-gnu/libgcc_s.so.1
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libgcc_s.so.1
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libxcb.so.1
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/lib/i386-linux-gnu/libgpg-error.so.0
+
+              # Borrar archivos que puedan hacer que no haya sonido en los juegos
+                rm -rf ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/alsa-lib
+                rm -rf ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/alsa-lib
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libasound.so.*
+                rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libasound.so.*
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Instalado desde la web..."
+              echo ""
+              dpkg --add-architecture i386
+              mkdir -p /root/SoftInst/Steam/
+              # Descargar el .deb
+                # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                    echo ""
+                    apt-get -y update
+                    apt-get -y install curl
+                    echo ""
+                  fi
+                curl -sL https://cdn.fastly.steamstatic.com/client/installer/steam.deb -o /root/SoftInst/Steam/Steam.deb
+              # Instalar dependencias
+                apt-get -y update
+                apt-get -y install mesa-vulkan-drivers
+                apt-get -y install libglx-mesa0:i386
+                apt-get -y install mesa-vulkan-drivers:i386
+                apt-get -y install libgl1-mesa-dri:i386
+                apt-get -y install libgtk2.0-0:i386
+                apt-get -y install libgl1-mesa-glx:i386
+                apt-get -y install libc6:i386
+              # Instlar paquete
+                apt -y install /root/SoftInst/Steam/Steam.deb
+
+            ;;
+
+        esac
+
+    done
 
 elif [ $cVerSO == "11" ]; then
 
