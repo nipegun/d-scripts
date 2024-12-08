@@ -8,13 +8,30 @@
 # ----------
 # Script de NiPeGun para instalar y configurar Steam en Debian
 #
-# Ejecución remota:
+# Ejecución remota con sudo:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Steam-Instalar.sh | sudo bash
+#
+# Ejecución remota con root:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Steam-Instalar.sh | bash
 # ----------
 
-cColorRojo='\033[1;31m'
-cColorVerde='\033[1;32m'
-cFinColor='\033[0m'
+# Definir constantes de color
+  cColorAzul="\033[0;34m"
+  cColorAzulClaro="\033[1;34m"
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
+
+# Comprobar si el script está corriendo como root
+  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
+  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
+    echo ""
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
+    echo ""
+    exit
+  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -51,17 +68,37 @@ elif [ $cVerSO == "12" ]; then
   echo ""
   echo "  Iniciando el script de instalación de Steam para Debian 12 (Bookworm)..."  
   echo ""
-
-  apt-get -y update && apt-get -y install wget
-  mkdir -p /root/SoftInst/Steam
-  cd /root/Softinst/Steam
-  wget https://cdn.fastly.steamstatic.com/client/installer/steam.deb
-  apt -y install /root/SoftInst/Steam/Steam.deb
   dpkg --add-architecture i386
+  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-Todos-Poner.sh | bash
   apt-get -y update
+  apt-get -y install mesa-vulkan-drivers
+  apt-get -y install libglx-mesa0:i386
+  apt-get -y install mesa-vulkan-drivers:i386
   apt-get -y install libgl1-mesa-dri:i386
+  apt-get -y install libgtk2.0-0:i386
   apt-get -y install libgl1-mesa-glx:i386
   apt-get -y install libc6:i386
+  apt-get -y install steam-installer
+  echo ""
+  echo "  Se procederá ahora con la instalación de steam."
+  echo "  Cuando acabe, y llegues a la ventana de inicio de sesión, no te loguees y cierra la ventana."
+  echo ""
+  read -p "  Presiona Enter para continuar..."
+  steam
+
+  # Borrar las librerías que tienen conflicto con debian
+    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.6
+    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/lib/i386-linux-gnu/libgcc_s.so.1
+    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/lib/x86_64-linux-gnu/libgcc_s.so.1
+    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libxcb.so.1
+    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/lib/i386-linux-gnu/libgpg-error.so.0
+
+  # Borrar archivos que puedan hacer que no haya sonido en los juegos
+    rm -rf ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/alsa-lib
+    rm -rf ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/alsa-lib
+    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libasound.so.*
+    rm ~/.steam/debian-installation/ubuntu12_32/steam-runtime/amd64/usr/lib/x86_64-linux-gnu/libasound.so.*
 
 elif [ $cVerSO == "11" ]; then
 
