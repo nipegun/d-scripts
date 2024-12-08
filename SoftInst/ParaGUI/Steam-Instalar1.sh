@@ -83,7 +83,7 @@ elif [ $cVerSO == "12" ]; then
   echo "  Se procederá ahora con la instalación de steam."
   echo "  Cuando acabe, y llegues a la ventana de inicio de sesión, no te loguees y cierra la ventana."
   echo ""
-  read -p "  Presiona Enter para continuar..."
+  read -p "  Presiona Enter para continuar..." < /dev/tty
   steam
 
   # Borrar las librerías que tienen conflicto con debian
