@@ -14,7 +14,8 @@
           echo ""
           echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
-          apt-get -y update && apt-get -y install dialog
+          apt-get -y update
+          apt-get -y install dialog
           echo ""
         fi
       #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
