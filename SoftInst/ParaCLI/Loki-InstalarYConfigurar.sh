@@ -126,11 +126,18 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Creando el archivo de configuración..."
     echo ""
-    curl -L https://raw.githubusercontent.com/grafana/loki/refs/heads/main/cmd/loki/loki-local-config.yaml -o /etc/loki/loki-config.yaml
-    cp /etc/loki/loki-config.yaml /etc/loki/loki-config.yaml.bak.ori
-    # Reemplazar la IP de localhost por la IP privada del debian
-      vIPLocal=$(hostname -I | cut -d' ' -f1 | tr -d '[:space:]')
-      sed -i -e "s|127.0.0.1|$vIPLocal|g" /etc/loki/loki-config.yaml
+    curl -L https://raw.githubusercontent.com/grafana/loki/refs/heads/main/cmd/loki/loki-local-config.yaml           -o /etc/loki/loki-local-config.yaml
+    curl -L https://raw.githubusercontent.com/grafana/loki/refs/heads/main/examples/getting-started/loki-config.yaml -o /etc/loki/loki-config.yaml
+    # Configurar el archivo local
+      # Hacer copia de seguridad
+        cp /etc/loki/loki-local-config.yaml /etc/loki/loki-local-config.yaml.bak.ori
+      # Reemplazar la IP de localhost por la IP privada del debian
+        vIPLocal=$(hostname -I | cut -d' ' -f1 | tr -d '[:space:]')
+        sed -i -e "s|127.0.0.1|$vIPLocal|g" /etc/loki/loki-local-config.yaml
+    # Configurar el archivo general
+      # Hacer copia de seguridad
+        cp /etc/loki/loki-config.yaml /etc/loki/loki-config.yaml.bak.ori
+      # 
     # Reparar permisos
       chown -R loki:loki /etc/loki
 
@@ -141,7 +148,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""                                                                             >> /etc/systemd/system/loki.service
     echo "[Service]"                                                                    >> /etc/systemd/system/loki.service
     echo "Type=simple"                                                                  >> /etc/systemd/system/loki.service
-    echo "ExecStart=/usr/bin/loki-linux-amd64 --config.file=/etc/loki/loki-config.yaml" >> /etc/systemd/system/loki.service
+    echo "ExecStart=/usr/bin/loki-linux-amd64 --config.file=/etc/loki/loki-local-config.yaml" >> /etc/systemd/system/loki.service
     echo "Restart=always"                                                               >> /etc/systemd/system/loki.service
     echo "RestartSec=5"                                                                 >> /etc/systemd/system/loki.service
     echo "User=loki"                                                                    >> /etc/systemd/system/loki.service
