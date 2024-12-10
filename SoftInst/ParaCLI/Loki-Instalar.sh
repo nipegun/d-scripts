@@ -66,8 +66,9 @@ elif [ $cVerSO == "12" ]; then
   echo "  Iniciando el script de instalación de Loki para Debian 12 (Bullseye)..."  
   echo ""
 
-  apt-get update
-  apt-get install loki promtail
+  apt-get -y update
+  apt-get -y install loki
+  apt-get -y install promtail
 
 elif [ $cVerSO == "11" ]; then
 
