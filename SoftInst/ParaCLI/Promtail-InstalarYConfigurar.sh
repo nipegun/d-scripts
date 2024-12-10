@@ -12,6 +12,10 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Promtail-InstalarYConfigurar.sh | bash
 # ----------
 
+vIPServLoki=xxx.xxx.xxx.xxx
+
+# ----------
+
 # Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
