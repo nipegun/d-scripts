@@ -120,7 +120,8 @@ elif [ $cVerSO == "12" ]; then
     cp -fv /root/SoftInst/Promtail/promtail-linux-amd64 /usr/bin/
 
   # Crear el usuario sin privilegios para utilizar loki
-    useradd --no-create-home --shell /bin/false promtail
+    #useradd --no-create-home --shell /bin/false promtail
+    useradd --system promtail
     mkdir -p /etc/promtail
     chown -R promtail:promtail /etc/promtail
     mkdir -p /var/lib/promtail
