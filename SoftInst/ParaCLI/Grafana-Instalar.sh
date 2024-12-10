@@ -63,7 +63,7 @@ if [ $cVerSO == "13" ]; then
 elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de Grafana para Debian 11 (Bullseye)..."  
+  echo "  Iniciando el script de instalación de Grafana para Debian 12 (Bullseye)..."  
   echo ""
 
   echo ""
