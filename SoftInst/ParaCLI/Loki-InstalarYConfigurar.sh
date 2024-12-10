@@ -178,6 +178,15 @@ elif [ $cVerSO == "12" ]; then
     echo "    Puedes instalarlo en cada servidor Linux con:"
     echo "      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Promtail-InstalarYConfigurar.sh | bash"
     echo ""
+    echo "    URLs del servidor Loki:"
+    echo ""
+    echo "      http://$vIPLocal:3100"
+    echo "      http://$vIPLocal:3100/config"
+    echo "      http://$vIPLocal:3100/memberlist"
+    echo "      http://$vIPLocal:3100/metrics"
+    echo "      http://$vIPLocal:3100/ready"
+    echo "      http://$vIPLocal:3100/services"
+    echo ""
 
 elif [ $cVerSO == "11" ]; then
 
