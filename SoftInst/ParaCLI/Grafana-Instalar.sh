@@ -98,41 +98,176 @@ elif [ $cVerSO == "12" ]; then
   echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | tee -a /etc/apt/sources.list.d/grafana.list
 
   echo ""
-  echo "  Instalando paquetes..." 
+  echo "  Lanzando instalador..." 
   echo ""
-  apt-get update
-  apt-get -y install grafana-enterprise
+    # Crear el menú
+      # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update
+          apt-get -y install dialog
+          echo ""
+        fi
+      menu=(dialog --checklist "Que versión quieres instalar:" 22 96 16)
+        opciones=(
+          1 "Grafana OSS"                           on
+          2 "Grafana OSS (con opción https)"        off
+          3 "Grafana Enterprise"                    on
+          4 "Grafana Enterprise (con opción https)" off
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+      #clear
 
-  # Preparar para https
-     #cd /etc/grafana
-     #openssl genrsa -out grafana.key 2048
-     #openssl req -new -key grafana.key -out grafana.csr
-     #openssl x509 -req -days 365 -in grafana.csr -signkey grafana.key -out grafana.crt
-     #chown grafana:grafana grafana.crt
-     #chown grafana:grafana grafana.key
-     #chmod 400 grafana.key grafana.crt
-     #sed -i -e 's|;protocol = http|protocol = https|g'                 /etc/grafana/grafana.ini
-     #sed -i -e 's|;cert_file =|cert_key = /etc/grafana/grafana.key|g'  /etc/grafana/grafana.ini
-     #sed -i -e 's|;key_file =|cert_file = /etc/grafana/grafana.crt|g'  /etc/grafana/grafana.ini
+      for choice in $choices
+        do
+          case $choice in
+
+            1)
+
+              echo ""
+              echo "  Instalando Grafana OSS..."
+              echo ""
+              apt-get -y update
+              apt-get -y install grafana
      
-  # Permitir embedded
-     sed -i -e 's|;allow_embedding = false|allow_embedding = true|g'   /etc/grafana/grafana.ini
-     sed -i -e 's|;cookie_samesite = lax|cookie_samesite = disabled|g' /etc/grafana/grafana.ini
+              # Permitir embedded
+                sed -i -e 's|;allow_embedding = false|allow_embedding = true|g'   /etc/grafana/grafana.ini
+                sed -i -e 's|;cookie_samesite = lax|cookie_samesite = disabled|g' /etc/grafana/grafana.ini
 
-  echo ""
-  echo "  Activando el servicio..." 
-  echo ""
-  systemctl enable grafana-server --now
+              echo ""
+              echo "  Activando el servicio..." 
+              echo ""
+              systemctl enable grafana-server --now
 
-  echo ""
-  echo "  Instalando el plugin grafana-image-renderer..." 
-  echo ""
-  grafana-cli plugins install grafana-image-renderer
+              echo ""
+              echo "  Instalando el plugin grafana-image-renderer..." 
+              echo ""
+              grafana-cli plugins install grafana-image-renderer
 
-  echo ""
-  echo "  Reiniciando el servicio..." 
-  echo ""
-  systemctl restart grafana-server
+              echo ""
+              echo "  Reiniciando el servicio..." 
+              echo ""
+              systemctl restart grafana-server
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Instalando Grafana OSS (con opción https)..."
+              echo ""
+              apt-get -y update
+              apt-get -y install grafana
+
+              # Preparar para https
+                cd /etc/grafana
+                openssl genrsa -out grafana.key 2048
+                openssl req -new -key grafana.key -out grafana.csr
+                openssl x509 -req -days 365 -in grafana.csr -signkey grafana.key -out grafana.crt
+                chown grafana:grafana grafana.crt
+                chown grafana:grafana grafana.key
+                chmod 400 grafana.key grafana.crt
+                sed -i -e 's|;protocol = http|protocol = https|g'                 /etc/grafana/grafana.ini
+                sed -i -e 's|;cert_file =|cert_key = /etc/grafana/grafana.key|g'  /etc/grafana/grafana.ini
+                sed -i -e 's|;key_file =|cert_file = /etc/grafana/grafana.crt|g'  /etc/grafana/grafana.ini
+     
+              # Permitir embedded
+                sed -i -e 's|;allow_embedding = false|allow_embedding = true|g'   /etc/grafana/grafana.ini
+                sed -i -e 's|;cookie_samesite = lax|cookie_samesite = disabled|g' /etc/grafana/grafana.ini
+
+              echo ""
+              echo "  Activando el servicio..." 
+              echo ""
+              systemctl enable grafana-server --now
+
+              echo ""
+              echo "  Instalando el plugin grafana-image-renderer..." 
+              echo ""
+              grafana-cli plugins install grafana-image-renderer
+
+              echo ""
+              echo "  Reiniciando el servicio..." 
+              echo ""
+              systemctl restart grafana-server
+
+            ;;
+
+            3)
+
+              echo ""
+              echo "  Instalando Grafana Enterprise..."
+              echo ""
+              apt-get -y update
+              apt-get -y install grafana-enterprise
+     
+              # Permitir embedded
+                sed -i -e 's|;allow_embedding = false|allow_embedding = true|g'   /etc/grafana/grafana.ini
+                sed -i -e 's|;cookie_samesite = lax|cookie_samesite = disabled|g' /etc/grafana/grafana.ini
+
+              echo ""
+              echo "  Activando el servicio..." 
+              echo ""
+              systemctl enable grafana-server --now
+
+              echo ""
+              echo "  Instalando el plugin grafana-image-renderer..." 
+              echo ""
+              grafana-cli plugins install grafana-image-renderer
+
+              echo ""
+              echo "  Reiniciando el servicio..." 
+              echo ""
+              systemctl restart grafana-server
+
+            ;;
+
+            4)
+
+              echo ""
+              echo "  Instalando Grafana Enterprise (con opcion https)..."
+              echo ""
+              apt-get -y update
+              apt-get -y install grafana-enterprise
+
+              # Preparar para https
+                cd /etc/grafana
+                openssl genrsa -out grafana.key 2048
+                openssl req -new -key grafana.key -out grafana.csr
+                openssl x509 -req -days 365 -in grafana.csr -signkey grafana.key -out grafana.crt
+                chown grafana:grafana grafana.crt
+                chown grafana:grafana grafana.key
+                chmod 400 grafana.key grafana.crt
+                sed -i -e 's|;protocol = http|protocol = https|g'                 /etc/grafana/grafana.ini
+                sed -i -e 's|;cert_file =|cert_key = /etc/grafana/grafana.key|g'  /etc/grafana/grafana.ini
+                sed -i -e 's|;key_file =|cert_file = /etc/grafana/grafana.crt|g'  /etc/grafana/grafana.ini
+     
+              # Permitir embedded
+                sed -i -e 's|;allow_embedding = false|allow_embedding = true|g'   /etc/grafana/grafana.ini
+                sed -i -e 's|;cookie_samesite = lax|cookie_samesite = disabled|g' /etc/grafana/grafana.ini
+
+              echo ""
+              echo "  Activando el servicio..." 
+              echo ""
+              systemctl enable grafana-server --now
+
+              echo ""
+              echo "  Instalando el plugin grafana-image-renderer..." 
+              echo ""
+              grafana-cli plugins install grafana-image-renderer
+
+              echo ""
+              echo "  Reiniciando el servicio..." 
+              echo ""
+              systemctl restart grafana-server
+
+            ;;
+
+        esac
+
+    done
+
 
 elif [ $cVerSO == "11" ]; then
 
