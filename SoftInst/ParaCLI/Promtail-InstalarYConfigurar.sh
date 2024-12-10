@@ -158,7 +158,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""                                                                                         >> /etc/systemd/system/promtail.service
     echo "[Service]"                                                                                >> /etc/systemd/system/promtail.service
     echo "Type=simple"                                                                              >> /etc/systemd/system/promtail.service
-    echo "ExecStart=/usr/bin/promtail-linux-amd64 --config.file=/etc/promtail/promtail-config.yaml" >> /etc/systemd/system/promtail.service
+    echo "ExecStart=/usr/bin/promtail-linux-amd64 --config.file /etc/promtail/promtail-config.yaml" >> /etc/systemd/system/promtail.service
     echo "Restart=always"                                                                           >> /etc/systemd/system/promtail.service
     echo "RestartSec=5"                                                                             >> /etc/systemd/system/promtail.service
     echo "User=promtail"                                                                            >> /etc/systemd/system/promtail.service
