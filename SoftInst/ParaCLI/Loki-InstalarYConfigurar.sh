@@ -164,8 +164,8 @@ elif [ $cVerSO == "12" ]; then
     echo "    La ejecución de Loki ha finalizado."
     echo ""
     echo "    Recuerda instalar el forwarder promtail en cada máquina que enviará logs al servidor loki"
-    echo "    Puedes instalarlo con"
-    echo ""
+    echo "    Puedes instalarlo en cada servidor Linux con:"
+    echo "      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Promtail-InstalarYConfigurar.sh | bash"
     echo ""
 
 elif [ $cVerSO == "11" ]; then
