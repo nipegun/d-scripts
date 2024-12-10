@@ -112,7 +112,7 @@ elif [ $cVerSO == "12" ]; then
         fi
       menu=(dialog --checklist "Que versión quieres instalar:" 22 96 16)
         opciones=(
-          1 "Grafana OSS"                           on
+          1 "Grafana OSS"                           off
           2 "Grafana OSS (con opción https)"        off
           3 "Grafana Enterprise"                    on
           4 "Grafana Enterprise (con opción https)" off
