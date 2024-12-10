@@ -69,9 +69,9 @@ elif [ $cVerSO == "12" ]; then
   # Actualizar la lista de paquetes disponibles en los repositorios
     apt-get -y update
 
-  # Determinar la última versión de loki
+  # Determinar la última versión de promtail
     echo ""
-    echo "    Determinando la última versión de Loki disponible en github"
+    echo "    Determinando la última versión de Promtail disponible en github"
     echo ""
     # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
@@ -82,22 +82,22 @@ elif [ $cVerSO == "12" ]; then
         apt-get -y install curl
         echo ""
       fi
-    vUltVersLokiGitHub=$(curl -sL https://github.com/grafana/loki/releases/latest/ | grep -oP 'href="/grafana/loki/releases/tag/\K[^"]+' | head -n1 | cut -d'v' -f2)
-    echo "  La última versión es la $vUltVersLokiGitHub"
+    vUltVersPromtailGitHub=$(curl -sL https://github.com/grafana/loki/releases/latest/ | grep -oP 'href="/grafana/loki/releases/tag/\K[^"]+' | head -n1 | cut -d'v' -f2)
+    echo "  La última versión es la $vUltVersPromtailGitHub"
     echo ""
 
   # Descargar el paquete con la última versión
     echo ""
     echo "    Descargando el paquete con la última versión..."
     echo ""
-    mkdir -p /root/SoftInst/Loki/
-    curl -L https://github.com/grafana/loki/releases/download/v$vUltVersLokiGitHub/loki-linux-amd64.zip -o /root/SoftInst/Loki/loki.zip
+    mkdir -p /root/SoftInst/Promtail/
+    curl -L https://github.com/grafana/loki/releases/download/v$vUltVersPromtailGitHub/promtail-linux-amd64.zip -o /root/SoftInst/Promtail/promtail.zip
 
   # Descomprimir el paquete
     echo ""
     echo "    Descomprimiendo el paquete..."
     echo ""
-    cd /root/SoftInst/Loki/
+    cd /root/SoftInst/Promtail/
     # Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
         echo ""
@@ -107,65 +107,76 @@ elif [ $cVerSO == "12" ]; then
         apt-get -y install unzip
         echo ""
       fi
-    unzip loki.zip
+    unzip promtail.zip
 
   # Copiar el binario a /bin/
     echo ""
     echo "  Copiando el binario a /usr/bin"
     echo ""
-    cp -fv /root/SoftInst/Loki/loki-linux-amd64 /usr/bin/
+    cp -fv /root/SoftInst/Promtail/promtail-linux-amd64 /usr/bin/
 
   # Crear el usuario sin privilegios para utilizar loki
-    useradd --no-create-home --shell /bin/false loki
-    mkdir -p /etc/loki
-    chown -R loki:loki /etc/loki
-    mkdir -p /var/lib/loki
-    chown -R loki:loki /var/lib/loki
+    useradd --no-create-home --shell /bin/false promtail
+    mkdir -p /etc/promtail
+    chown -R promtail:promtail /etc/promtail
+    mkdir -p /var/lib/promtail
+    chown -R promtail:promtail /var/lib/promtail
 
   # Crear el archivo de configuración
     echo ""
     echo "    Creando el archivo de configuración..."
     echo ""
-    curl -L https://raw.githubusercontent.com/grafana/loki/refs/heads/main/cmd/loki/loki-local-config.yaml -o /etc/loki/loki-config.yaml
-    cp /etc/loki/loki-config.yaml /etc/loki/loki-config.yaml.bak.ori
-    # Reemplazar la IP de localhost por la IP privada del debian
-      vIPLocal=$(hostname -I | cut -d' ' -f1 | tr -d '[:space:]')
-      sed -i -e "s|127.0.0.1|$vIPLocal|g" /etc/loki/loki-config.yaml
-    # Reparar permisos
-      chown -R loki:loki /etc/loki
+    echo "server:"                                                                                            > /etc/promtail/promtail-config.yaml
+    echo "  http_listen_port: 9080  # Puerto local para métricas y estado de Promtail"                       >> /etc/promtail/promtail-config.yaml
+    echo "  log_level: info"                                                                                 >> /etc/promtail/promtail-config.yaml
+    echo ""                                                                                                  >> /etc/promtail/promtail-config.yaml
+    echo "positions:"                                                                                        >> /etc/promtail/promtail-config.yaml
+    echo "  filename: /var/lib/promtail/positions.yaml  # Archivo con las posiciones de lectura de los logs" >> /etc/promtail/promtail-config.yaml
+    echo ""                                                                                                  >> /etc/promtail/promtail-config.yaml
+    echo "clients:"                                                                                          >> /etc/promtail/promtail-config.yaml
+    echo "  - url: http://$vIPServLoki:3100/loki/api/v1/push  # Dirección del servidor Loki"                 >> /etc/promtail/promtail-config.yaml
+    echo ""                                                                                                  >> /etc/promtail/promtail-config.yaml
+    echo "scrape_configs:"                                                                                   >> /etc/promtail/promtail-config.yaml
+    echo "  - job_name: system_logs  # Nombre del trabajo"                                                   >> /etc/promtail/promtail-config.yaml
+    echo "    static_configs:"                                                                               >> /etc/promtail/promtail-config.yaml
+    echo "      - targets:"                                                                                  >> /etc/promtail/promtail-config.yaml
+    echo "          - localhost  # Promtail no necesita targets reales; esto es simbólico"                   >> /etc/promtail/promtail-config.yaml
+    echo "        labels:"                                                                                   >> /etc/promtail/promtail-config.yaml
+    echo "          job: varlogs  # Etiqueta para identificar estos logs en Loki"                            >> /etc/promtail/promtail-config.yaml
+    echo '          host: ${HOSTNAME}  # Etiqueta con el nombre del servidor donde se ejecuta Promtail'      >> /etc/promtail/promtail-config.yaml
+    echo "          __path__: /var/log/*.log  # Ruta a los archivos de log que se quieren procesar"          >> /etc/promtail/promtail-config.yaml
 
   # Crear el servicio de systemd
-    echo "[Unit]"                                                                        > /etc/systemd/system/loki.service
-    echo "Description=Loki Service"                                                     >> /etc/systemd/system/loki.service
-    echo "After=network.target"                                                         >> /etc/systemd/system/loki.service
-    echo ""                                                                             >> /etc/systemd/system/loki.service
-    echo "[Service]"                                                                    >> /etc/systemd/system/loki.service
-    echo "Type=simple"                                                                  >> /etc/systemd/system/loki.service
-    echo "ExecStart=/usr/bin/loki-linux-amd64 --config.file=/etc/loki/loki-config.yaml" >> /etc/systemd/system/loki.service
-    echo "Restart=always"                                                               >> /etc/systemd/system/loki.service
-    echo "RestartSec=5"                                                                 >> /etc/systemd/system/loki.service
-    echo "User=loki"                                                                    >> /etc/systemd/system/loki.service
-    echo "Group=loki"                                                                   >> /etc/systemd/system/loki.service
-    echo ""                                                                             >> /etc/systemd/system/loki.service
-    echo "[Install]"                                                                    >> /etc/systemd/system/loki.service
-    echo "WantedBy=multi-user.target"                                                   >> /etc/systemd/system/loki.service
+    echo "[Unit]"                                                                                    > /etc/systemd/system/promtail.service
+    echo "Description=Promtail Service"                                                             >> /etc/systemd/system/promtail.service
+    echo "After=network.target"                                                                     >> /etc/systemd/system/promtail.service
+    echo ""                                                                                         >> /etc/systemd/system/promtail.service
+    echo "[Service]"                                                                                >> /etc/systemd/system/promtail.service
+    echo "Type=simple"                                                                              >> /etc/systemd/system/promtail.service
+    echo "ExecStart=/usr/bin/promtail-linux-amd64 --config.file=/etc/promtail/promtail-config.yaml" >> /etc/systemd/system/promtail.service
+    echo "Restart=always"                                                                           >> /etc/systemd/system/promtail.service
+    echo "RestartSec=5"                                                                             >> /etc/systemd/system/promtail.service
+    echo "User=promtail"                                                                            >> /etc/systemd/system/promtail.service
+    echo "Group=promtail"                                                                           >> /etc/systemd/system/promtail.service
+    echo ""                                                                                         >> /etc/systemd/system/promtail.service
+    echo "[Install]"                                                                                >> /etc/systemd/system/promtail.service
+    echo "WantedBy=multi-user.target"                                                               >> /etc/systemd/system/promtail.service
 
   # Recargar los daemons
     systemctl daemon-reload
 
   # Habilitar e iniciar loki
-    systemctl enable loki --now
+    systemctl enable promtail --now
 
   # Comprobar estado
-    systemctl status loki.service --no-pager
+    systemctl status promtail.service --no-pager
 
   # Notificar fin de ejecución del script
     echo ""
-    echo "    La ejecución de Loki ha finalizado."
+    echo "    La instalación de promtail ha finalizado."
     echo ""
-    echo "    Recuerda instalar el forwarder promtail en cada máquina que enviará logs al servidor loki"
-    echo "    Puedes instalarlo en cada servidor Linux con:"
-    echo "      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Promtail-InstalarYConfigurar.sh | bash"
+    echo "    Para ver los logs del servicio, ejecuta:"
+    echo "      tail -f /var/log/promtail.log"
     echo ""
 
 elif [ $cVerSO == "11" ]; then
