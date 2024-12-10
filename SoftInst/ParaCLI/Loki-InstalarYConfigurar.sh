@@ -98,6 +98,7 @@ elif [ $cVerSO == "12" ]; then
     echo "    Descomprimiendo el paquete..."
     echo ""
     cd /root/SoftInst/Loki/
+    rm -f /root/SoftInst/Loki/loki.zip
     # Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
         echo ""
@@ -113,6 +114,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "  Copiando el binario a /usr/bin"
     echo ""
+    rm -f /usr/bin/loki-linux-amd64
     cp -fv /root/SoftInst/Loki/loki-linux-amd64 /usr/bin/
 
   # Crear el usuario sin privilegios para utilizar loki
@@ -126,6 +128,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Creando el archivo de configuración..."
     echo ""
+    rm -f /etc/loki/*
     curl -L https://raw.githubusercontent.com/grafana/loki/refs/heads/main/cmd/loki/loki-local-config.yaml           -o /etc/loki/loki-local-config.yaml
     curl -L https://raw.githubusercontent.com/grafana/loki/refs/heads/main/examples/getting-started/loki-config.yaml -o /etc/loki/loki-config.yaml
     # Configurar el archivo local
