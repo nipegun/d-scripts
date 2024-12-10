@@ -118,7 +118,6 @@ elif [ $cVerSO == "12" ]; then
           4 "Grafana Enterprise (con opción https)" off
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-      #clear
 
       for choice in $choices
         do
@@ -150,6 +149,13 @@ elif [ $cVerSO == "12" ]; then
               echo "  Reiniciando el servicio..." 
               echo ""
               systemctl restart grafana-server
+
+              # Indicar fin de ejecución del script
+                echo ""
+                echo "    Ejecución del script, finalizada."
+                echo ""
+                echo "      El usuario por defecto es admin y la contraseña, también admin."
+                echo ""
 
             ;;
 
@@ -192,6 +198,13 @@ elif [ $cVerSO == "12" ]; then
               echo ""
               systemctl restart grafana-server
 
+              # Indicar fin de ejecución del script
+                echo ""
+                echo "    Ejecución del script, finalizada."
+                echo ""
+                echo "      El usuario por defecto es admin y la contraseña, también admin."
+                echo ""
+
             ;;
 
             3)
@@ -220,6 +233,13 @@ elif [ $cVerSO == "12" ]; then
               echo "  Reiniciando el servicio..." 
               echo ""
               systemctl restart grafana-server
+
+              # Indicar fin de ejecución del script
+                echo ""
+                echo "    Ejecución del script, finalizada."
+                echo ""
+                echo "      El usuario por defecto es admin y la contraseña, también admin."
+                echo ""
 
             ;;
 
@@ -261,6 +281,13 @@ elif [ $cVerSO == "12" ]; then
               echo "  Reiniciando el servicio..." 
               echo ""
               systemctl restart grafana-server
+
+              # Indicar fin de ejecución del script
+                echo ""
+                echo "    Ejecución del script, finalizada."
+                echo ""
+                echo "      El usuario por defecto es admin y la contraseña, también admin."
+                echo ""
 
             ;;
 
