@@ -118,7 +118,8 @@ elif [ $cVerSO == "12" ]; then
     cp -fv /root/SoftInst/Loki/loki-linux-amd64 /usr/bin/
 
   # Crear el usuario sin privilegios para utilizar loki
-    useradd --no-create-home --shell /bin/false loki
+    #useradd --no-create-home --shell /bin/false loki
+    useradd --system loki
     mkdir -p /etc/loki
     chown -R loki:loki /etc/loki
     mkdir -p /var/lib/loki
