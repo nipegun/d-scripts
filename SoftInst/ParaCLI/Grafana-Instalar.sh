@@ -30,16 +30,6 @@
     exit
   fi
 
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update
-    apt-get -y install curl
-    echo ""
-  fi
-
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
@@ -77,33 +67,35 @@ elif [ $cVerSO == "12" ]; then
   echo ""
 
   echo ""
-  echo "  Instalando dependencias o paquetes necesarios para el script..." 
-  echo ""
-  apt-get update
-  apt-get -y insall wget
-  apt-get -y install gnupg
-  #apt-get -y install apt-transport-https
-  #apt-get -y install software-properties-common
-
-  echo ""
   echo "  Importando clave del repositorio.."
   echo ""
   mkdir -p /root/aptkeys/
+  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+      echo ""
+      apt-get -y update
+      apt-get -y install wget
+      echo ""
+    fi
   wget -q -O- https://packages.grafana.com/gpg.key > /root/aptkeys/grafana.key
+  # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${cColorRojo}  El paquete gnupg2 no está instalado. Iniciando su instalación...${cFinColor}"
+      echo ""
+      apt-get -y update
+      apt-get -y install gnupg2
+      echo ""
+    fi
   gpg --dearmor /root/aptkeys/grafana.key
-  cp /root/aptkeys/grafana.key.gpg /usr/share/keyrings/grafana.gpg
-
-     
-   wget -q -O - https://packages.grafana.com/gpg.key | apt-key add -
-
-wget -q -O /usr/share/keyrings/grafana-archive-keyring.gpg https://packages.grafana.com/gpg.key
-echo "deb [signed-by=/usr/share/keyrings/grafana-archive-keyring.gpg] https://packages.grafana.com/oss/deb stable main" | tee /etc/apt/sources.list.d/grafana.list
-apt update
+  cp /root/aptkeys/grafana.key.gpg /etc/apt/keyrings/grafana.gpg
 
   echo ""
   echo "  Agregando repositorio..." 
   echo ""
-  echo "deb https://packages.grafana.com/enterprise/deb stable main" > /etc/apt/sources.list.d/grafana.list
+  echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | tee -a /etc/apt/sources.list.d/grafana.list
 
   echo ""
   echo "  Instalando paquetes..." 
