@@ -8,7 +8,7 @@
 # ----------
 # Script de NiPeGun para mostrar directorios y archivos de forma similar a como lo hace el dir de Windows
 # ----------
-vParam=" -lha1FXi --author --group-directories-first --color=always --time-style=long-iso"
+vParam=" -lha1FXis --author --group-directories-first --color=always --time-style=long-iso"
 
 if [ $# -eq 1 ]
   then
