@@ -8,13 +8,18 @@
 # ----------
 # Script de NiPeGun para mostrar directorios y archivos de forma similar a como lo hace el dir de Windows
 #
-#   -1: Muestra un archivo por línea
-#   -a: No oculta las entradas que comienzan por .
-#   -A: No muestra las entradas . y .. implícitas
+#   
+#   --all:                     No oculta las entradas que comienzan por .
+#   --almost-all:              No muestra las entradas . y .. implícitas
+#   --author:                  Usando en conjunto con -l imprime el autor de cada fichero
+#   --color:                   Colorea la salida. Puede ser 'always' (por defecto si se omite), 'auto', o 'never'.
+#   --group-directories-first: Agrupa directorios antes que los ficheros; se puede añadir una opción --sort, pero cualquier uso de --sort=none (-U) desactiva la agrupación
+#
+#-1: Muestra un archivo por línea
 # ----------
 
 vParam=" -lha1FXis --author --group-directories-first --color=always --time-style=long-iso"
-vParam=" -a -A --author --group-directories-first --color=always --time-style=long-iso"
+vParam=" --all --almost-all --author --color=always --group-directories-first -F --time-style=long-iso"
 
 if [ $# -eq 1 ]
   then
