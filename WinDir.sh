@@ -35,31 +35,16 @@ vParam=" --all \
          --group-directories-first \
          --human-readable \
          --hyperlink=always \
-         --inode \
-         --sort=extension "
+         --sort=extension #--inode"
 
 if [ $# -eq 1 ]
   then
     echo ""
     ls $vParam | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*(2^(8-i)));if(k)printf("%0o ",k); print}' "$1"
-    #ls $vParam "$1"
     echo ""
   else
     echo ""
     ls $vParam | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*(2^(8-i)));if(k)printf("%0o ",k); print}'
-    ls $vParam | awk '{
-    # Extraer los permisos en texto desde la segunda columna
-    perms = $2;
-
-    # Calcular los permisos octales
-    k = 0;
-    for (i = 0; i <= 8; i++) 
-        k += ((substr(perms, i + 2, 1) ~ /[rwx]/) * (2 ^ (8 - i)));
-
-    # Reconstruir la línea con los permisos octales después de la columna de permisos
-    printf("%s %s %0o %s\n", $1, perms, k, substr($0, index($0, $3)));
-}'
-    #ls $vParam
     echo ""
 fi
 
