@@ -20,8 +20,10 @@
 #   --group-directories-first: Agrupa directorios antes que los ficheros
 #   --human-readable:          Imprime el tamaño de  los archivos en KB, MB y GB
 #   --hyperlink=auto:          Crea enlaces a los archivos. Acepta 'always' (por defecto si se omite), 'auto' y 'never'
-#   --inode:                   Imprime el número de índice de cada archivo
 #   --sort=extension           Admite none (-U), size (-S), time (-t), version (-v), extension (-X)
+#
+# Sin usar:
+#   --inode:                   Imprime el número de índice de cada archivo
 # ----------
 
 vParam=" --all \
@@ -35,7 +37,7 @@ vParam=" --all \
          --group-directories-first \
          --human-readable \
          --hyperlink=always \
-         --sort=extension #--inode"
+         --sort=extension"
 
 if [ $# -eq 1 ]
   then
