@@ -26,21 +26,9 @@
 #-1: Muestra un archivo por línea
 # ----------
 
-#vParam=" --all --almost-all --author --classify --color=auto --context --format=verbose --full-time --group-directories-first --human-readable --hyperlink=auto --inode --sort=extension "
+vParam=" --all --almost-all --author --classify --color=auto --context --format=verbose --full-time --group-directories-first --human-readable --hyperlink=auto --inode --sort=extension "
 
-vParam=" --all \
-         --almost-all \
-         --author \
-         --classify \
-         --color=auto \
-         --context \
-         --format=verbose \
-         --full-time \
-         --group-directories-first \
-         --human-readable \
-         --hyperlink=auto \
-         --inode \
-         --sort=extension "
+
 
 if [ $# -eq 1 ]
   then
