@@ -56,7 +56,7 @@
       echo ""
     # Crear los alias
       mkdir -p ~/scripts/d-scripts/Alias/
-      ~/scripts/d-scripts/DScripts-CrearAlias.sh
+      ~/scripts/d-scripts/DScripts-CrearAliasEnHome.sh
       find ~/scripts/d-scripts/Alias -type f -exec chmod +x {} \;
   else
     echo ""
