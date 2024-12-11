@@ -126,6 +126,8 @@ elif [ $cVerSO == "12" ]; then
     chown -R promtail:promtail /etc/promtail
     mkdir -p /var/lib/promtail
     chown -R promtail:promtail /var/lib/promtail
+    # agregar promtail al grupo adm para que tenga permisos de lectura sobre los archivos de log
+      usermod -aG adm promtail
 
   # Crear el archivo de configuración
     echo ""
