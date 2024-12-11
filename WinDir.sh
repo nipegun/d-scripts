@@ -14,7 +14,7 @@
 # ----------
 
 vParam=" -lha1FXis --author --group-directories-first --color=always --time-style=long-iso"
-vParam=" -a -A -l -C -1FXis -Z --author --group-directories-first --color=always --time-style=long-iso"
+vParam=" -a -A -l  --author --group-directories-first --color=always --time-style=long-iso"
 
 if [ $# -eq 1 ]
   then
