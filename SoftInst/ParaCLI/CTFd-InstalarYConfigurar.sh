@@ -199,7 +199,8 @@
               echo ""
 
               # Crear el usuario
-                adduser --system --group --no-create-home ctfd
+                #useradd --system --no-create-home --shell /bin/false ctfd
+                useradd --system --no-create-home ctfd
                 mkdir -p /opt/ctfd
                 chown -R ctfd:ctfd /opt/ctfd
 
