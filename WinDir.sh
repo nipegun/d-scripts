@@ -36,7 +36,7 @@ vParam=" --all \
          --full-time \
          --group-directories-first \
          --human-readable \
-         --hyperlink=always \
+         --hyperlink=auto \
          --sort=extension"
 
 if [ $# -eq 1 ]
