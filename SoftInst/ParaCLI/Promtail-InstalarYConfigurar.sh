@@ -131,25 +131,33 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Creando el archivo de configuración..."
     echo ""
-    echo "server:"                                                                                            > /etc/promtail/promtail-config.yaml
-    echo "  http_listen_port: 9080  # Puerto local para métricas y estado de Promtail"                       >> /etc/promtail/promtail-config.yaml
-    echo "  log_level: info"                                                                                 >> /etc/promtail/promtail-config.yaml
-    echo ""                                                                                                  >> /etc/promtail/promtail-config.yaml
-    echo "positions:"                                                                                        >> /etc/promtail/promtail-config.yaml
-    echo "  filename: /var/lib/promtail/positions.yaml  # Archivo con las posiciones de lectura de los logs" >> /etc/promtail/promtail-config.yaml
-    echo ""                                                                                                  >> /etc/promtail/promtail-config.yaml
-    echo "clients:"                                                                                          >> /etc/promtail/promtail-config.yaml
-    echo "  - url: http://$vIPServLoki:3100/loki/api/v1/push  # Dirección del servidor Loki"                 >> /etc/promtail/promtail-config.yaml
-    echo ""                                                                                                  >> /etc/promtail/promtail-config.yaml
-    echo "scrape_configs:"                                                                                   >> /etc/promtail/promtail-config.yaml
-    echo "  - job_name: system_logs  # Nombre del trabajo"                                                   >> /etc/promtail/promtail-config.yaml
-    echo "    static_configs:"                                                                               >> /etc/promtail/promtail-config.yaml
-    echo "      - targets:"                                                                                  >> /etc/promtail/promtail-config.yaml
-    echo "          - localhost  # Promtail no necesita targets reales; esto es simbólico"                   >> /etc/promtail/promtail-config.yaml
-    echo "        labels:"                                                                                   >> /etc/promtail/promtail-config.yaml
-    echo "          job: varlogs  # Etiqueta para identificar estos logs en Loki"                            >> /etc/promtail/promtail-config.yaml
-    echo '          host: ${HOSTNAME}  # Etiqueta con el nombre del servidor donde se ejecuta Promtail'      >> /etc/promtail/promtail-config.yaml
-    echo "          __path__: /var/log/*.log  # Ruta a los archivos de log que se quieren procesar"          >> /etc/promtail/promtail-config.yaml
+    echo "server:"                                                                    > /etc/promtail/promtail-config.yaml
+    echo "  # Puerto local para métricas y estado de Promtail"                       >> /etc/promtail/promtail-config.yaml
+    echo "  http_listen_port: 9080"                                                  >> /etc/promtail/promtail-config.yaml
+    echo "  log_level: info"                                                         >> /etc/promtail/promtail-config.yaml
+    echo ""                                                                          >> /etc/promtail/promtail-config.yaml
+    echo "positions:"                                                                >> /etc/promtail/promtail-config.yaml
+    echo "  # Archivo con las posiciones de lectura de los logs"                     >> /etc/promtail/promtail-config.yaml
+    echo "  filename: /var/lib/promtail/positions.yaml"                              >> /etc/promtail/promtail-config.yaml
+    echo ""                                                                          >> /etc/promtail/promtail-config.yaml
+    echo "clients:"                                                                  >> /etc/promtail/promtail-config.yaml
+    echo "  # Dirección del servidor Loki"                                           >> /etc/promtail/promtail-config.yaml
+    echo "  - url: http://$vIPServLoki:3100/loki/api/v1/push"                        >> /etc/promtail/promtail-config.yaml
+    echo ""                                                                          >> /etc/promtail/promtail-config.yaml
+    echo "scrape_configs:"                                                           >> /etc/promtail/promtail-config.yaml
+    echo "  # Nombre del trabajo"                                                    >> /etc/promtail/promtail-config.yaml
+    echo "  - job_name: system_logs"                                                 >> /etc/promtail/promtail-config.yaml
+    echo "    static_configs:"                                                       >> /etc/promtail/promtail-config.yaml
+    echo "      - targets:"                                                          >> /etc/promtail/promtail-config.yaml
+    echo "          # Promtail no necesita targets reales; esto es simbólico"        >> /etc/promtail/promtail-config.yaml
+    echo "          - localhost"                                                     >> /etc/promtail/promtail-config.yaml
+    echo "        labels:"                                                           >> /etc/promtail/promtail-config.yaml
+    echo "          # Etiqueta para identificar estos logs en Loki"                  >> /etc/promtail/promtail-config.yaml
+    echo "          job: varlogs"                                                    >> /etc/promtail/promtail-config.yaml
+    echo '          # Etiqueta con el nombre del servidor donde se ejecuta Promtail' >> /etc/promtail/promtail-config.yaml
+    echo '          host: ${HOSTNAME}'                                               >> /etc/promtail/promtail-config.yaml
+    echo "          # Ruta a los archivos de log que se quieren procesar"            >> /etc/promtail/promtail-config.yaml
+    echo "          __path__: /var/log/*.log"                                        >> /etc/promtail/promtail-config.yaml
 
   # Crear el servicio de systemd
     echo "[Unit]"                                                                                    > /etc/systemd/system/promtail.service
