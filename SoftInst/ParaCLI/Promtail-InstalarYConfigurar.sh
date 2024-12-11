@@ -121,7 +121,7 @@ elif [ $cVerSO == "12" ]; then
 
   # Crear el usuario sin privilegios para utilizar loki
     #useradd --no-create-home --shell /bin/false promtail
-    useradd --system promtail
+    useradd --system --group --no-create-home promtail
     mkdir -p /etc/promtail
     chown -R promtail:promtail /etc/promtail
     mkdir -p /var/lib/promtail
