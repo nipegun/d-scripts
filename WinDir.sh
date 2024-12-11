@@ -35,7 +35,7 @@ vParam=" --all \
          --group-directories-first \
          --human-readable \
          --hyperlink=always \
-          \
+         --inode \
          --sort=extension "
 
 if [ $# -eq 1 ]
