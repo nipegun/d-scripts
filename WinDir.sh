@@ -24,9 +24,7 @@
 #   --sort=extension           Admite none (-U), size (-S), time (-t), version (-v), extension (-X)
 # ----------
 
-#vParam=" --all --almost-all --author --classify --color=auto --context --format=verbose --full-time --group-directories-first --human-readable --hyperlink=auto --inode --sort=extension "
-
-vParam=" --all \                     #  No oculta las entradas que comienzan por .
+vParam=" --all \
          --almost-all \
          --author \
          --classify \
