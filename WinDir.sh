@@ -7,9 +7,14 @@
 
 # ----------
 # Script de NiPeGun para mostrar directorios y archivos de forma similar a como lo hace el dir de Windows
+#
+#   -1: Muestra un archivo por línea
+#   -a: No oculta las entradas que comienzan por .
+#   -A: No muestra las entradas . y .. implícitas
 # ----------
+
 vParam=" -lha1FXis --author --group-directories-first --color=always --time-style=long-iso"
-vParam=" -l -h -a -A -1FXis -Z --author --group-directories-first --color=always --time-style=long-iso"
+vParam=" -a -A -l -C -1FXis -Z --author --group-directories-first --color=always --time-style=long-iso"
 
 if [ $# -eq 1 ]
   then
