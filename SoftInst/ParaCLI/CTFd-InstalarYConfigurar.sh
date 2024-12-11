@@ -220,10 +220,12 @@ WantedBy=multi-user.target
               # Instalar el proxy inverso
                 apt-get -y update
                 apt-get -y install nginx
+                # Deshabilitar el sitio por defecto
+                  rm /etc/nginx/sites-enabled/default
                 # Crear el archivo del sistio
                   echo "server {"                                      > /etc/nginx/sites-available/ctfd
                   echo "    listen 80;"                               >> /etc/nginx/sites-available/ctfd
-                  echo "server_name cftd.zubirimanteo.com;"           >> /etc/nginx/sites-available/ctfd
+                  echo "server_name cftd.dominio.com;"                >> /etc/nginx/sites-available/ctfd
                   echo ""                                             >> /etc/nginx/sites-available/ctfd
                   echo "  location / {"                               >> /etc/nginx/sites-available/ctfd
                   echo "    proxy_pass http://127.0.0.1:8000;"        >> /etc/nginx/sites-available/ctfd
