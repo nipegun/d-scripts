@@ -42,7 +42,7 @@ vParam=" --all \
 if [ $# -eq 1 ]
   then
     echo ""
-    ls $vParam | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*(2^(8-i)));if(k)printf("%0o ",k); print}' "$1"
+    ls $vParam "$1" | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*(2^(8-i)));if(k)printf("%0o ",k); print}' 
     echo ""
   else
     echo ""
