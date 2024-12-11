@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar CTFd en Debian
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-CTFd.sh | bash
+#   https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/CTFd-InstalarYConfigurar.sh | bash
 #
 # Enlace: https://github.com/CTFd/CTFd
 # ----------
