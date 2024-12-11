@@ -119,7 +119,7 @@ elif [ $cVerSO == "12" ]; then
 
   # Crear el usuario sin privilegios para utilizar loki
     #useradd --no-create-home --shell /bin/false loki
-    useradd --system loki
+    useradd --system --group --no-create-home loki
     mkdir -p /etc/loki
     chown -R loki:loki /etc/loki
     mkdir -p /var/lib/loki
