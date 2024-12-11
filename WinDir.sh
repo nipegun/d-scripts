@@ -23,7 +23,6 @@
 #   --inode:                   Imprime el número de índice de cada archivo
 #   --sort=extension           Admite none (-U), size (-S), time (-t), version (-v), extension (-X)
 #   -l:                        Utiliza el formato de listado largo
-#-1: Muestra un archivo por línea
 # ----------
 
 #vParam=" --all --almost-all --author --classify --color=auto --context --format=verbose --full-time --group-directories-first --human-readable --hyperlink=auto --inode --sort=extension "
