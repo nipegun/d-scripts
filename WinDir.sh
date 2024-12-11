@@ -19,7 +19,7 @@
 # ----------
 
 vParam=" -lha1FXis --author --group-directories-first --color=always --time-style=long-iso"
-vParam=" --all --almost-all --author --color=always --group-directories-first -l -F --time-style=long-iso"
+vParam=" --all --almost-all --author --color=always --group-directories-first --sort -l -F --time-style=long-iso"
 
 if [ $# -eq 1 ]
   then
