@@ -28,7 +28,7 @@
 
 vParam=" --all \
          --almost-all \
-          \
+         --author \
          --classify \
          --color=always \
          --context \
