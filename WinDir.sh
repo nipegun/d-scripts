@@ -14,12 +14,12 @@
 #   --author:                  Usando en conjunto con -l imprime el autor de cada fichero
 #   --color:                   Colorea la salida. Puede ser 'always' (por defecto si se omite), 'auto', o 'never'.
 #   --group-directories-first: Agrupa directorios antes que los ficheros; se puede añadir una opción --sort, pero cualquier uso de --sort=none (-U) desactiva la agrupación
-#
+#   -l:                        Utiliza el formato de listado largo
 #-1: Muestra un archivo por línea
 # ----------
 
 vParam=" -lha1FXis --author --group-directories-first --color=always --time-style=long-iso"
-vParam=" --all --almost-all --author --color=always --group-directories-first -F --time-style=long-iso"
+vParam=" --all --almost-all --author --color=always --group-directories-first -l -F --time-style=long-iso"
 
 if [ $# -eq 1 ]
   then
