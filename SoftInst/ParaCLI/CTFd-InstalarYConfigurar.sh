@@ -91,6 +91,7 @@
               echo ""
               echo "  Instalando requerimientos de sistema..."
               echo ""
+              apt-get -y update
               apt-get -y install python3
               apt-get -y install python3-venv
               apt-get -y install python3-pip
