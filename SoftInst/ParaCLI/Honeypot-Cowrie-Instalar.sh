@@ -89,10 +89,8 @@
     echo ""
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Cowrie para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
-
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    #echo -e "cowrie\ncowrie" | adduser cowrie
+    adduser --disabled-password cowrie
 
   elif [ $cVerSO == "11" ]; then
 
