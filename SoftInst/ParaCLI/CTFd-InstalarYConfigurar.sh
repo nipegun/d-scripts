@@ -76,10 +76,9 @@
           2 "  Crear la base de datos"                                         on
           3 "  Clonar el repo de Github"                                       on
           4 "    Crear el entorno virtual de python e instalar requerimientos" on
-          5 "  Crear el usuario para ejecutar el servicio en systemd"         off
-          6 "  Crear el servicio en systemd"                                  off
-          7 "    Agregar /home/$USER/.local/bin/ al path"                     off
-          8 "Clonar repo, crear venv, compilar e instalar a nivel de sistema" off
+          5 "      Crear el servicio en systemd"                               on
+          6 "        Crear el usuario para ejecutar el servicio en systemd"    on
+          7 "Instalar el proxy inverso"                                        on
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -186,7 +185,7 @@
             5)
 
               echo ""
-              echo "  Crear el servicio de systemd..."
+              echo "  Creando el usuario para ejecutar el servicio en systemd..."
               echo ""
 
               # Crear el usuario
@@ -195,224 +194,54 @@
                 mkdir -p /opt/ctfd
                 chown -R ctfd:ctfd /opt/ctfd
 
-              # Crear el servicio
-                echo "[Unit]"                                                                                        > /etc/systemd/system/ctfd.service
-                echo "Description=CTFd Service"                                                                     >> /etc/systemd/system/ctfd.service
-                echo "After=network.target"                                                                         >> /etc/systemd/system/ctfd.service
-                echo ""                                                                                             >> /etc/systemd/system/ctfd.service
-                echo "[Service]"                                                                                    >> /etc/systemd/system/ctfd.service
-                echo "User=ctfd"                                                                                    >> /etc/systemd/system/ctfd.service
-                echo "Group=ctfd"                                                                                   >> /etc/systemd/system/ctfd.service
-                echo "WorkingDirectory=/ruta/al/directorio/CTFd"                                                    >> /etc/systemd/system/ctfd.service
-                echo "Environment="FLASK_ENV=production""                                                           >> /etc/systemd/system/ctfd.service
-                echo 'ExecStart=/ruta/al/directorio/CTFd/env/bin/gunicorn -w 4 -b 0.0.0.0:8000 "CTFd:create_app()"' >> /etc/systemd/system/ctfd.service
-                echo "Restart=always"                                                                               >> /etc/systemd/system/ctfd.service
-                echo ""                                                                                             >> /etc/systemd/system/ctfd.service
-                echo "[Install]"                                                                                    >> /etc/systemd/system/ctfd.service
-                echo "WantedBy=multi-user.target"                                                                   >> /etc/systemd/system/ctfd.service
-
-
-# Instalar Green Unicorn, que es un servidor WSGI (Web Server Gateway Interface) para aplicaciones Python. 
-
-              # Instalar el proxy inverso
-                apt-get -y update
-                apt-get -y install nginx
-                # Deshabilitar el sitio por defecto
-                  rm /etc/nginx/sites-enabled/default
-                # Crear el archivo del sistio
-                  echo "server {"                                      > /etc/nginx/sites-available/ctfd
-                  echo "    listen 80;"                               >> /etc/nginx/sites-available/ctfd
-                  echo "server_name cftd.dominio.com;"                >> /etc/nginx/sites-available/ctfd
-                  echo ""                                             >> /etc/nginx/sites-available/ctfd
-                  echo "  location / {"                               >> /etc/nginx/sites-available/ctfd
-                  echo "    proxy_pass http://127.0.0.1:8000;"        >> /etc/nginx/sites-available/ctfd
-                  echo '    proxy_set_header Host $host;'             >> /etc/nginx/sites-available/ctfd
-                  echo '    proxy_set_header X-Real-IP $remote_addr;' >> /etc/nginx/sites-available/ctfd
-                  echo "  }"                                          >> /etc/nginx/sites-available/ctfd
-                  echo "}"                                            >> /etc/nginx/sites-available/ctfd
-                # Habilitar la configuración
-                  ln -s /etc/nginx/sites-available/ctfd /etc/nginx/sites-enabled/
-                  systemctl restart nginx
-
-
             ;;
 
-            4)
-
-              echo ""
-              echo "  Instalando en /home/$USER/.local/bin/..."
-              echo ""
-
-              # Comprobar si el paquete python3-setuptools está instalado. Si no lo está, instalarlo.
-                if [[ $(dpkg-query -s python3-setuptools 2>/dev/null | grep installed) == "" ]]; then
-                  echo ""
-                  echo -e "${cColorRojo}  El paquete python3-setuptools no está instalado. Iniciando su instalación...${cFinColor}"
-                  echo ""
-                  sudo apt-get -y update
-                  sudo apt-get -y install python3-setuptools
-                  echo ""
-                fi
-              cd ~/repos/python/volatility3/
-              python3 setup.py install --user
-              cd ~
-
-              # Notificar fin de ejecución del script
-                echo ""
-                echo -e "${cColorVerde}    Para ejecutar volatility3 instalado en /home/$USER/.local/bin/:${cFinColor}"
-                echo ""
-                echo -e "${cColorVerde}      Si al instalar has marcado 'Agregar /home/$USER/.local/bin/ al path', simplemente ejecuta:${cFinColor}"
-                echo ""
-                echo -e "${cColorVerde}        vol [Parámetros]${cFinColor}"
-                echo ""
-                echo -e "${cColorVerde}      Si al instalar NO has marcado 'Agregar /home/$USER/.local/bin/ al path', ejecuta:${cFinColor}"
-                echo ""
-                echo -e "${cColorVerde}       ~/.local/bin/vol [Parámetros]${cFinColor}"
-                echo ""
-
-            ;;
-
-            5)
-
-              echo ""
-              echo "  Agregando /home/$USER/.local/bin al path..."
-              echo ""
-              echo 'export PATH=/home/'"$USER"'/.local/bin:$PATH' >> ~/.bashrc
-
-            ;;
 
             6)
 
               echo ""
-              echo "  Clonando repo, creando venv, compilando e instalando a nivel de sistema..."
+              echo "  Creando y activando el servicio de systemd..."
               echo ""
+              echo "[Unit]"                                                                                        > /etc/systemd/system/ctfd.service
+              echo "Description=CTFd Service"                                                                     >> /etc/systemd/system/ctfd.service
+              echo "After=network.target"                                                                         >> /etc/systemd/system/ctfd.service
+              echo ""                                                                                             >> /etc/systemd/system/ctfd.service
+              echo "[Service]"                                                                                    >> /etc/systemd/system/ctfd.service
+              echo "User=ctfd"                                                                                    >> /etc/systemd/system/ctfd.service
+              echo "Group=ctfd"                                                                                   >> /etc/systemd/system/ctfd.service
+              echo "WorkingDirectory=/ruta/al/directorio/CTFd"                                                    >> /etc/systemd/system/ctfd.service
+              echo "Environment="FLASK_ENV=production""                                                           >> /etc/systemd/system/ctfd.service
+              echo 'ExecStart=/ruta/al/directorio/CTFd/env/bin/gunicorn -w 4 -b 0.0.0.0:8000 "CTFd:create_app()"' >> /etc/systemd/system/ctfd.service
+              echo "Restart=always"                                                                               >> /etc/systemd/system/ctfd.service
+              echo ""                                                                                             >> /etc/systemd/system/ctfd.service
+              echo "[Install]"                                                                                    >> /etc/systemd/system/ctfd.service
+              echo "WantedBy=multi-user.target"                                                                   >> /etc/systemd/system/ctfd.service
 
-              # Preparar el entorno virtual de python
-                echo ""
-                echo "    Preparando el entorno virtual de python..."
-                echo ""
-                mkdir -p /tmp/PythonVirtualEnvironments/ 2> /dev/null
-                rm -rf /tmp/PythonVirtualEnvironments/volatility3/
-                cd /tmp/PythonVirtualEnvironments/
-              # Comprobar si el paquete python3-venv está instalado. Si no lo está, instalarlo.
-                if [[ $(dpkg-query -s python3-venv 2>/dev/null | grep installed) == "" ]]; then
-                  echo ""
-                  echo -e "${cColorRojo}  El paquete python3-venv no está instalado. Iniciando su instalación...${cFinColor}"
-                  echo ""
-                  sudo apt-get -y update
-                  sudo apt-get -y install python3-venv
-                  echo ""
-                fi
-                python3 -m venv volatility3
+            ;;
 
-              # Ingresar en el entorno virtual e instalar
-                echo ""
-                echo "    Ingresando en el entorno virtual e instalando..."
-                echo ""
-                source /tmp/PythonVirtualEnvironments/volatility3/bin/activate
+            7)
 
-              # Clonar el repo
-                echo ""
-                echo "  Clonando el repo..."
-                echo ""
-                cd /tmp/PythonVirtualEnvironments/volatility3/
-                # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
-                  if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
-                    echo ""
-                    echo -e "${cColorRojo}  El paquete git no está instalado. Iniciando su instalación...${cFinColor}"
-                    echo ""
-                    sudo apt-get -y update
-                    sudo apt-get -y install git
-                    echo ""
-                  fi
-                git clone https://github.com/volatilityfoundation/volatility3.git
-                mv volatility3 code
-                cd code
-
-              # Compilar
-                echo ""
-                echo "    Compilando..."
-                echo ""
-                
-                sudo apt-get -y install build-essential
-                sudo apt-get -y install python3-dev
-
-                python3 -m pip install wheel
-                python3 -m pip install setuptools
-                python3 -m pip install pyinstaller
-                
-                python3 -m pip install distorm3
-                python3 -m pip install pycryptodome
-                python3 -m pip install pillow
-                python3 -m pip install openpyxl
-                python3 -m pip install ujson
-                python3 -m pip install pytz
-                python3 -m pip install ipython
-                python3 -m pip install capstone
-                python3 -m pip install yara-python
-                
-                python3 -m pip install .
-
-                pyinstaller --onefile --collect-all=vol.py vol.py
-                pyinstaller --onefile --collect-all=volshell.py volshell.py
-
-                #pyinstaller --onefile --hidden-import=importlib.metadata --collect-all=volatility3 volatility3.py
-
-              # Instalar paquetes necesarios
-                #echo ""
-                #echo "    Instalando paquetes necesarios..."
-                #echo ""
-                #sudo apt-get -y update
-                #sudo apt-get -y install python3
-                #sudo apt-get -y install python3-pip
-                #sudo apt-get -y install python3-setuptools
-                #sudo apt-get -y install python3-dev
-                #sudo apt-get -y install python3-venv
-                #sudo apt-get -y install python3-wheel
-                #sudo apt-get -y install python3-distorm3
-                #sudo apt-get -y install python3-yara
-                #sudo apt-get -y install python3-pillow
-                #sudo apt-get -y install python3-openpyxl
-                #sudo apt-get -y install python3-ujson
-                #sudo apt-get -y install python3-ipython
-                #sudo apt-get -y install python3-capstone
-                #sudo apt-get -y install python3-pycryptodome          # Anterior pycrypto
-                #sudo apt-get -y install python3-pytz-deprecation-shim # Anterior python3-pytz                sudo apt-get -y install build-essential
-
-                
-                #sudo apt-get -y install liblzma-dev
-
-                #sudo apt-get -y install git
-                #sudo apt-get -y install libraw1394-11
-                #sudo apt-get -y install libcapstone-dev
-                #sudo apt-get -y install capstone-tool
-                #sudo apt-get -y install tzdata
-
-
-                #sudo apt-get -y install libpython3-dev
-
-              # Desactivar el entorno virtual
-                echo ""
-                echo "    Desactivando el entorno virtual..."
-                echo ""
-                deactivate
-
-              # Copiar los binarios compilados a la carpeta de binarios del usuario
-                echo ""
-                echo "    Copiando los binarios a la carpeta /usr/bin/"
-                echo ""
-                sudo rm -f /usr/bin/volatility3
-                sudo cp -vf /tmp/PythonVirtualEnvironments/volatility3/code/dist/vol      /usr/bin/volatility3
-                sudo rm -f /usr/bin/volatility3shell
-                sudo cp -vf /tmp/PythonVirtualEnvironments/volatility3/code/dist/volshell /usr/bin/volatility3shell
-                cd ~
-
-              # Notificar fin de ejecución del script
-                echo ""
-                echo -e "${cColorVerde}    La instalación ha finalizado. Se han copiado las herramientas a /usr/bin/ ${cFinColor}"
-                echo -e "${cColorVerde}    Puedes ejecutarlas de la siguiente forma: ${cFinColor}"
-                echo ""
-                echo -e "${cColorVerde}      volatility3 [Parámetros]${cFinColor}"
-                echo ""
+              echo ""
+              echo "  Instalando el proxy inverso..."
+              echo ""
+              apt-get -y update
+              apt-get -y install nginx
+              # Deshabilitar el sitio por defecto
+                rm /etc/nginx/sites-enabled/default
+              # Crear el archivo del sistio
+                echo "server {"                                      > /etc/nginx/sites-available/ctfd
+                echo "    listen 80;"                               >> /etc/nginx/sites-available/ctfd
+                echo "server_name cftd.dominio.com;"                >> /etc/nginx/sites-available/ctfd
+                echo ""                                             >> /etc/nginx/sites-available/ctfd
+                echo "  location / {"                               >> /etc/nginx/sites-available/ctfd
+                echo "    proxy_pass http://127.0.0.1:8000;"        >> /etc/nginx/sites-available/ctfd
+                echo '    proxy_set_header Host $host;'             >> /etc/nginx/sites-available/ctfd
+                echo '    proxy_set_header X-Real-IP $remote_addr;' >> /etc/nginx/sites-available/ctfd
+                echo "  }"                                          >> /etc/nginx/sites-available/ctfd
+                echo "}"                                            >> /etc/nginx/sites-available/ctfd
+              # Habilitar la configuración
+                ln -s /etc/nginx/sites-available/ctfd /etc/nginx/sites-enabled/
+                systemctl restart nginx
 
             ;;
 
