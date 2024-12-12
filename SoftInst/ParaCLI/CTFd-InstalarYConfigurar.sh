@@ -131,15 +131,6 @@
               echo "  Creando el entorno virtual de python e instalando requerimientos..."
               echo ""
               cd ~/repos/python/CTFd/
-              # Comprobar si el paquete python3-venv está instalado. Si no lo está, instalarlo.
-                if [[ $(dpkg-query -s python3-venv 2>/dev/null | grep installed) == "" ]]; then
-                  echo ""
-                  echo -e "${cColorRojo}  El paquete python3-venv no está instalado. Iniciando su instalación...${cFinColor}"
-                  echo ""
-                  sudo apt-get -y update
-                  sudo apt-get -y install python3-venv
-                  echo ""
-                fi
               python3 -m venv venv
               # Crear el mensaje para mostrar cuando se entra al entorno virtual
                 echo ''                                                         >> ~/repos/python/CTFd/venv/bin/activate
