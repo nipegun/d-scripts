@@ -91,8 +91,11 @@
     echo ""
     #echo -e "P@ssw0rd\nP@ssw0rd" | adduser cowrie
     #adduser --disabled-password cowrie <<< ""
-    echo -e "\n" | adduser --disabled-password cowries
-    
+    cd /opt/
+    git clone https://github.com/cowrie/cowrie.git
+    python3 -m venv cowrie
+    echo -e "\n" | adduser --disabled-password --home /opt/cowrie cowrie
+    chown cowrie:cowrie /opt/cowrie -R
 
   elif [ $cVerSO == "11" ]; then
 
