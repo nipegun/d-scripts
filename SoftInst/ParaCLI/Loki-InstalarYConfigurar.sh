@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar Loki en Debian
 #
 # Ejecución remota
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Grafana-InstalarYConfigurar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Loki-InstalarYConfigurar.sh | bash
 # ----------
 
 # Definir constantes de color
