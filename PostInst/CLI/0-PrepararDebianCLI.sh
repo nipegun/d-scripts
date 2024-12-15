@@ -47,4 +47,4 @@
 
   apt-get -y update && apt-get -y install curl
   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar.sh | bash
-  sh -c "echo 'export PATH=$PATH:/root/scripts/d-scripts/Alias/' >> /root/.bashrc"
+  sh -c "echo 'export PATH=$PATH:~/scripts/d-scripts/Alias/' >> ~/.bashrc"
