@@ -9,11 +9,14 @@
 # Script de NiPeGun para crear los alias de los d-scripts 
 # ----------
 
-cColorAzul="\033[0;34m"
-cColorAzulClaro="\033[1;34m"
-cColorVerde='\033[1;32m'
-cColorRojo='\033[1;31m'
-cFinColor='\033[0m'
+# Definir constantes de color
+  cColorAzul='\033[0;34m'
+  cColorAzulClaro='\033[1;34m'
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
 
 echo ""
 echo -e "${cColorAzulClaro}  Creando alias para los d-scripts...${cFinColor}"
