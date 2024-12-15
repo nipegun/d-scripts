@@ -29,6 +29,9 @@ apt-get -y install cockpit
 # Cockpit Web Service
   apt-get -y install cockpit-ws
 
+# Instalar soporte NFS
+  apt-get -y install nfs-common
+
 # Permitir el acceso root
   echo "auth sufficient pam_rootok.so" >> /etc/pam.d/cockpit
 
