@@ -26,7 +26,8 @@
     echo ""
     echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
-    apt-get -y update && apt-get -y install wget
+    apt-get -y update
+    apt-get -y install wget
     echo ""
   fi
 
@@ -37,9 +38,9 @@
       echo ""
       echo -e "${cColorAzulClaro}  Sincronizando los d-scripts con las últimas versiones y descargando nuevos d-scripts (si es que existen)...${cFinColor}"
       echo ""
-      rm /root/scripts/d-scripts -R 2> /dev/null
-      mkdir /root/scripts 2> /dev/null
-      cd /root/scripts
+      rm ~/scripts/d-scripts -R 2> /dev/null
+      mkdir ~/scripts 2> /dev/null
+      cd ~/scripts
       # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
           echo ""
@@ -50,15 +51,15 @@
           echo ""
         fi
       git clone --depth=1 https://github.com/nipegun/d-scripts
-      rm /root/scripts/d-scripts/.git -R 2> /dev/null
-      find /root/scripts/d-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+      rm ~/scripts/d-scripts/.git -R 2> /dev/null
+      find ~/scripts/d-scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
       echo ""
       echo -e "${cColorVerde}    d-scripts sincronizados correctamente.${cFinColor}"
       echo ""
     # Crear los alias
-      mkdir -p /root/scripts/d-scripts/Alias/
-      /root/scripts/d-scripts/DScripts-CrearAlias.sh
-      find /root/scripts/d-scripts/Alias -type f -exec chmod +x {} \;
+      mkdir -p ~/scripts/d-scripts/Alias/
+      ~/scripts/d-scripts/DScripts-CrearAlias.sh
+      find ~/scripts/d-scripts/Alias -type f -exec chmod +x {} \;
   else
     echo ""
     echo -e "${cColorRojo}  No se pudo iniciar la sincronización de los d-scripts porque no se detectó conexión a Internet.${cFinColor}"
