@@ -91,6 +91,7 @@ elif [ $cVerSO == "12" ]; then
     echo "    Descargando el paquete con la última versión..."
     echo ""
     mkdir -p /root/SoftInst/Loki/
+    rm -f /root/SoftInst/Loki/loki.zip
     curl -L https://github.com/grafana/loki/releases/download/v$vUltVersLokiGitHub/loki-linux-amd64.zip -o /root/SoftInst/Loki/loki.zip
 
   # Descomprimir el paquete
@@ -98,7 +99,6 @@ elif [ $cVerSO == "12" ]; then
     echo "    Descomprimiendo el paquete..."
     echo ""
     cd /root/SoftInst/Loki/
-    rm -f /root/SoftInst/Loki/loki.zip
     # Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
         echo ""
