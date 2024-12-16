@@ -164,7 +164,7 @@ elif [ $cVerSO == "12" ]; then
     echo "          # Etiqueta para identificar estos logs en Loki"                  >> /etc/promtail/promtail-config.yaml
     echo "          job: varlogs"                                                    >> /etc/promtail/promtail-config.yaml
     echo '          # Etiqueta con el nombre del servidor donde se ejecuta Promtail' >> /etc/promtail/promtail-config.yaml
-    echo '          host: ${HOSTNAME}'                                               >> /etc/promtail/promtail-config.yaml
+    echo "          host: "$HOSTNAME""                                               >> /etc/promtail/promtail-config.yaml
     echo "          # Ruta a los archivos de log que se quieren procesar"            >> /etc/promtail/promtail-config.yaml
     echo "          __path__: /var/log/*.log"                                        >> /etc/promtail/promtail-config.yaml
 
