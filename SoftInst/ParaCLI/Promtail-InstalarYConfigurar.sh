@@ -12,7 +12,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Promtail-InstalarYConfigurar.sh | bash
 # ----------
 
-vIPServLoki=xxx.xxx.xxx.xxx
+vIPServLoki="xxx.xxx.xxx.xxx"
 
 # ----------
 
@@ -122,10 +122,17 @@ elif [ $cVerSO == "12" ]; then
   # Crear el usuario sin privilegios para utilizar loki
     #useradd --system --no-create-home --shell /bin/false promtail
     useradd --system --no-create-home promtail
-    mkdir -p /etc/promtail
-    chown -R promtail:promtail /etc/promtail
-    mkdir -p /var/lib/promtail
-    chown -R promtail:promtail /var/lib/promtail
+    # Configuración
+      mkdir -p /etc/promtail
+      chown -R promtail:promtail /etc/promtail
+    # Librerías
+      mkdir -p /var/lib/promtail
+      chown -R promtail:promtail /var/lib/promtail
+    # Logs
+      mkdir -p /var/log/promtail
+      touch /var/log/promtail/promtail.log
+      chown -R promtail:promtail /var/log/promtail
+    
     # agregar promtail al grupo adm para que tenga permisos de lectura sobre los archivos de log
       usermod -aG adm promtail
 
@@ -168,6 +175,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""                                                                                         >> /etc/systemd/system/promtail.service
     echo "[Service]"                                                                                >> /etc/systemd/system/promtail.service
     echo "Type=simple"                                                                              >> /etc/systemd/system/promtail.service
+#   echo "ExecStart=/usr/bin/promtail-linux-amd64 --config.file /etc/promtail/promtail-config.yaml --log-output=file=/var/log/promtail/promtail.log " >> /etc/systemd/system/promtail.service
     echo "ExecStart=/usr/bin/promtail-linux-amd64 --config.file /etc/promtail/promtail-config.yaml" >> /etc/systemd/system/promtail.service
     echo "Restart=always"                                                                           >> /etc/systemd/system/promtail.service
     echo "RestartSec=5"                                                                             >> /etc/systemd/system/promtail.service
@@ -191,7 +199,15 @@ elif [ $cVerSO == "12" ]; then
     echo "    La instalación de promtail ha finalizado."
     echo ""
     echo "    Para ver los logs del servicio, ejecuta:"
-    echo "      tail -f /var/log/promtail.log"
+    echo ""
+    echo "      Si los logs se guardan en systemd"
+    echo ""
+    echo "        journalctl -u promtail -f"
+    echo ""
+    echo "      Si has configurado los logs para ser guardados en un archivo:"
+    echo ""
+    echo "        tail -f /var/log/promtail.log"
+    echo ""
     echo ""
 
 elif [ $cVerSO == "11" ]; then
