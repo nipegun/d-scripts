@@ -272,6 +272,8 @@
       echo "  Instalando TOR browser..."
       echo ""
       apt-get -y install torbrowser-launcher
+      
+      apt-get -y install keepassxc
 
   elif [ $cVerSO == "11" ]; then
 
