@@ -7,18 +7,23 @@
 
 # ----------
 # Script de NiPeGun para editar la configuración de haproxy
+#
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Soft/HAProxy-Editar.sh | bash
 # ----------
 
 echo ""
-echo "Editando el archivo de configuración..."echo ""
+echo "  Editando el archivo de configuración..."
+echo ""
 nano /etc/haproxy/haproxy.cfg
 
 echo ""
-echo "Indicando al servicio que vuelva a cargar el archivo de configuración..."echo ""
+echo "  Indicando al servicio que vuelva a cargar el archivo de configuración..."
+echo ""
 service haproxy reload
 
 echo ""
-echo "Estado del servicio:"
+echo "  Estado del servicio:"
 echo ""
-service haproxy status
+service haproxy status --no-pager
 
