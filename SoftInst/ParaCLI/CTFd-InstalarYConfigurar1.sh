@@ -175,7 +175,7 @@
                 echo ""
                 echo -e "${cColorVerde}      source ~/repos/python/CTFd/venv/bin/activate${cFinColor}"
                 echo ""
-                echo -e "${cColorVerde}        gunicorn -w 4 -b 0.0.0.0:8000 "CTFd:create_app()"${cFinColor}"
+                echo -e "${cColorVerde}        gunicorn -w 4 -b 0.0.0.0:8000 'CTFd:create_app()'${cFinColor}"
                 echo ""
                 echo -e "${cColorVerde}      deactivate${cFinColor}"
                 echo ""
