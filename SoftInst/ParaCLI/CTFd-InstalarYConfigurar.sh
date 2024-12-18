@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar CTFd en Debian
 #
 # Ejecución remota:
-#   https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/CTFd-InstalarYConfigurar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/CTFd-InstalarYConfigurar.sh | bash
 #
 # Enlace: https://github.com/CTFd/CTFd
 # ----------
