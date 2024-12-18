@@ -209,10 +209,10 @@
               echo "After=network.target"                                                                         >> /etc/systemd/system/ctfd.service
               echo ""                                                                                             >> /etc/systemd/system/ctfd.service
               echo "[Service]"                                                                                    >> /etc/systemd/system/ctfd.service
-              echo "User=ctfd"                                                                                    >> /etc/systemd/system/ctfd.service
-              echo "Group=ctfd"                                                                                   >> /etc/systemd/system/ctfd.service
+              echo "User=root"                                                                                    >> /etc/systemd/system/ctfd.service
+              echo "Group=root"                                                                                   >> /etc/systemd/system/ctfd.service
               echo "WorkingDirectory=/ruta/al/directorio/CTFd"                                                    >> /etc/systemd/system/ctfd.service
-              echo "Environment="FLASK_ENV=production""                                                           >> /etc/systemd/system/ctfd.service
+              echo 'Environment="FLASK_ENV=production"'                                                           >> /etc/systemd/system/ctfd.service
               echo 'ExecStart=/ruta/al/directorio/CTFd/env/bin/gunicorn -w 4 -b 0.0.0.0:8000 "CTFd:create_app()"' >> /etc/systemd/system/ctfd.service
               echo "Restart=always"                                                                               >> /etc/systemd/system/ctfd.service
               echo ""                                                                                             >> /etc/systemd/system/ctfd.service
