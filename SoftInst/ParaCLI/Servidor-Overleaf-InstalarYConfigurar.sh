@@ -9,19 +9,19 @@ https://docs.vultr.com/how-to-install-overleaf-community-edition-on-ubuntu-20-04
 # Script de NiPeGun para instalar y configurar Overleaf en Debian
 #
 # Ejecución remota con sudo:
-#   curl -sL x | sudo bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Servidor-Overleaf-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root:
-#   curl -sL x | sudo bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Servidor-Overleaf-InstalarYConfigurar.sh | sudo bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Servidor-Overleaf-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Servidor-Overleaf-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Servidor-Overleaf-InstalarYConfigurar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -90,7 +90,7 @@ https://docs.vultr.com/how-to-install-overleaf-community-edition-on-ubuntu-20-04
         echo ""
       fi
       git clone https://github.com/overleaf/toolkit.git ./overleaf
-      adduser overleaf
+      echo -e "overleaf|overleaf" | adduser overleaf
       chown -R overleaf:overleaf /opt/overleaf
       
       # Initialize Overleaf local environment with the --tls flag to enable Transport Layer Security (TLS):
@@ -101,17 +101,22 @@ https://docs.vultr.com/how-to-install-overleaf-community-edition-on-ubuntu-20-04
         echo "  Clave pública correspondiente guardada como /opt/overleaf/config/nginx/certs/overleaf_key.pem"
 
       # Set environment variables for running Overleaf Community Edition behind the Nginx TLS proxy:
-        sed -i -e 's|# SHARELATEX_BEHIND_PROXY=true|SHARELATEX_BEHIND_PROXY=true|g'   /opt/overleaf/config/variables.env
-        sed -i -e 's|# SHARELATEX_SECURE_COOKIE=true|SHARELATEX_SECURE_COOKIE=true|g' /opt/overleaf/config/variables.env
+        sed -i -e 's|# OVERLEAF_BEHIND_PROXY=true|OVERLEAF_BEHIND_PROXY=true|g'   /opt/overleaf/config/variables.env
+        sed -i -e 's|# OVERLEAF_SECURE_COOKIE=true|OVERLEAF_SECURE_COOKIE=true|g' /opt/overleaf/config/variables.env
 
       # Personalización
-        sed -i -e 's|SHARELATEX_APP_NAME=Our Overleaf Instance|SHARELATEX_APP_NAME=Mi overleaf|g' /opt/overleaf/config/variables.env
-        sed -i -e 's|# SHARELATEX_SITE_URL=http://overleaf.example.com|SHARELATEX_SITE_URL=http://overleaf.example.com|g'                        /opt/overleaf/config/variables.env
-        sed -i -e 's|# SHARELATEX_NAV_TITLE=Our Overleaf Instance|# SHARELATEX_NAV_TITLE=Our Overleaf Instance|g' /opt/overleaf/config/variables.env
-        sed -i -e 's|# SHARELATEX_HEADER_IMAGE_URL=http://somewhere.com/mylogo.png|SHARELATEX_HEADER_IMAGE_URL=http://somewhere.com/mylogo.png|g' /opt/overleaf/config/variables.env
-        sed -i -e 's|# SHARELATEX_ADMIN_EMAIL=support@example.com|# SHARELATEX_ADMIN_EMAIL=support@example.com|g' /opt/overleaf/config/variables.env
-        sed -i -e 's|# SHARELATEX_RIGHT_FOOTER=[{"text":"Hello I am on the Right"}]|# SHARELATEX_RIGHT_FOOTER=[{"text":"Hello I am on the Right"}]|g' /opt/overleaf/config/variables.env
-        sed -i -e 's|# SHARELATEX_LEFT_FOOTER=[{"text":"Powered by Overleaf © 2021", "url": "https://www.overleaf.com"}, {"text": "Contact your support team", "url": "mailto:support@example.com"} ]||g' /opt/overleaf/config/variables.env
+        sed -i -e 's|OVERLEAF_APP_NAME="Our Overleaf Instance"|OVERLEAF_APP_NAME="Mi overleaf"|g'                                               /opt/overleaf/config/variables.env
+        sed -i -e 's|# OVERLEAF_SITE_URL=http://overleaf.example.com|OVERLEAF_SITE_URL=http://overleaf.example.com|g'                           /opt/overleaf/config/variables.env
+        sed -i -e 's|# OVERLEAF_NAV_TITLE=Our Overleaf Instance|OVERLEAF_NAV_TITLE=Nuestra instancia de Overleaf|g'                             /opt/overleaf/config/variables.env
+        sed -i -e 's|# OVERLEAF_HEADER_IMAGE_URL=http://somewhere.com/mylogo.png|OVERLEAF_HEADER_IMAGE_URL=https://es.overleaf.com/logo.png|g'  /opt/overleaf/config/variables.env
+        sed -i -e 's|# OVERLEAF_ADMIN_EMAIL=support@example.com|OVERLEAF_ADMIN_EMAIL=support@example.com|g'                                     /opt/overleaf/config/variables.env
+
+      # NGINX
+        vIPHost=$(hostname -I)
+        sed -i -e 's|NGINX_ENABLED=false|NGINX_ENABLED=true|g'                       /opt/overleaf/config/overleaf.rc
+        sed -i -e "s|NGINX_HTTP_LISTEN_IP=127.0.1.1|NGINX_HTTP_LISTEN_IP=$vIPHost|g" /opt/overleaf/config/overleaf.rc
+        sed -i -e "s|NGINX_TLS_LISTEN_IP=127.0.1.1|NGINX_TLS_LISTEN_IP=$vIPHost|g"   /opt/overleaf/config/overleaf.rc
+
 
 https://docs.vultr.com/how-to-install-overleaf-community-edition-on-ubuntu-20-04-lts
 
