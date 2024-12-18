@@ -4,7 +4,7 @@
 # Puedes hacer lo que quieras con él porque es libre de verdad; no libre con condiciones como las licencias GNU y otras patrañas similares.
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
-https://docs.vultr.com/how-to-install-overleaf-community-edition-on-ubuntu-20-04-lts
+
 # ----------
 # Script de NiPeGun para instalar y configurar Overleaf en Debian
 #
@@ -86,7 +86,8 @@ https://docs.vultr.com/how-to-install-overleaf-community-edition-on-ubuntu-20-04
         echo ""
         echo -e "${cColorRojo}  El paquete git no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
-        apt-get -y update && apt-get -y install git
+        apt-get -y update
+        apt-get -y install git
         echo ""
       fi
       git clone https://github.com/overleaf/toolkit.git ./overleaf
@@ -117,8 +118,60 @@ https://docs.vultr.com/how-to-install-overleaf-community-edition-on-ubuntu-20-04
         sed -i -e "s|NGINX_HTTP_LISTEN_IP=127.0.1.1|NGINX_HTTP_LISTEN_IP=$vIPHost|g" /opt/overleaf/config/overleaf.rc
         sed -i -e "s|NGINX_TLS_LISTEN_IP=127.0.1.1|NGINX_TLS_LISTEN_IP=$vIPHost|g"   /opt/overleaf/config/overleaf.rc
 
+      # Levantar todos los servicios en background
+        cd /opt/overleaf
+        # Comprobar si el paquete docker-compose está instalado. Si no lo está, instalarlo.
+          if [[ $(dpkg-query -s docker-compose 2>/dev/null | grep installed) == "" ]]; then
+            echo ""
+            echo -e "${cColorRojo}    El paquete docker-compose no está instalado. Iniciando su instalación...${cFinColor}"
+            echo ""
+            apt-get -y update
+            apt-get -y install docker-compose
+            echo ""
+          fi
+        bin/up -d
 
-https://docs.vultr.com/how-to-install-overleaf-community-edition-on-ubuntu-20-04-lts
+      # Notificar fin de ejecución del script
+        echo ""
+        echo "  Ejecución del script, finalizada."
+        echo ""
+        echo "  Conéctate a la web https://$vIPHost/launchpad para crear la cuenta de administrador"
+        echo ""
+        
+
+      # Actualizar Overleaf
+        # Posicionarse en la carpeta
+          #cd /opt/overleaf
+        # Entrar a la shell del container
+          #bin/shell
+        # Actualizar la lista de paquetes disponibles en el repo
+        # apt-get update && apt-get install --reinstall texlive-full
+          #tlmgr update --self
+        # Actualizar Overleaf
+          #nohup tlmgr install scheme-full &
+          #tlmgr install scheme-full
+          #tlmgr update --self --all
+        # Salir de la shell
+          #exit
+        # Hacer los cambios persistentes
+          #docker commit overleaf overleaf/overleaf:with-texlive-full
+        # Set up an overriding Docker Compose configuration file to reflect the changes:
+           # nano /opt/overleaf/lib/docker-compose.override.yml
+           # Populate the file with:
+           # ---
+           # version: '2.2'
+           # services:
+           #   sharelatex:
+           #     image: sharelatex/sharelatex:with-texlive-full
+           #
+           # Nota: The version number, which is 2.2 in this case, must be the same as the version number in other Docker Compose configuration files, such as /opt/overleaf/lib/docker-compose.base.yml.
+           #        Do not use tabs for indents when dealing a .yml file. Use 2 or 4 spaces for 1 indent.
+
+# Finalmente, parar the running Docker services, delete the former ShareLaTeX container, and then restart the Overleaf Docker services:
+
+# cd /opt/overleaf
+# bin/stop && bin/docker-compose rm -f sharelatex && bin/up -d
+
 
   elif [ $cVerSO == "11" ]; then
 
