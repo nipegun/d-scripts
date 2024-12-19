@@ -93,6 +93,17 @@
     # Actualizar la lista de paquetes:
       apt update
 
+    # Disable the 'systemd-resolved' service. On the Debian system, the DNS configuration is managed by the NetworkManager and systemd-resolved service.
+      systemctl disable --now systemd-resolved
+      systemctl stop systemd-resolved
+
+    # Remove the link file of DNS resolver configuration '/etc/resolv.conf' via the following command.
+      unlink /etc/resolv.conf
+
+    # Create a new DNS resolver config file '/etc/resolv.conf' using the below nano editor command.
+      echo "nameserver 9.9.9.9"  > /etc/resolv.conf
+      echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+
     # Instalar dnsmasq:
       apt install dnsmasq
 
@@ -100,12 +111,19 @@
       systemctl enable dnsmasq --now
       systemctl status dnsmasq --nopager
 
-    # Configurar dnsmasq:
-      echo "server=8.8.8.8" >> /etc/dnsmasq.conf
-      echo "server=8.8.4.4" >> /etc/dnsmasq.conf
+    # Hacer copia de seguridad del archivo de configuración
+      cp /etc/dnsmasq.conf cp /etc/dnsmasq.conf.bak.ori
 
+    # Configuración
+      vIPHost=$(hostname -I)
+      echo "port=53"                            > /etc/dnsmasq.conf
+      echo "listen-address=127.0.0.1,$vIPHost" >> /etc/dnsmasq.conf
+      echo "server=9.9.9.9"                    >> /etc/dnsmasq.conf
+      echo "server=8.8.8.8"                    >> /etc/dnsmasq.conf
+      echo "no-dhcp-interface="                >> /etc/dnsmasq.conf
+      
     # Poner el nombre de un host
-      echo "192.168.100.10 pepito.home.arpa" >> /etc/dnsmasq.conf
+      echo "192.168.100.10 pepito.home.arpa" >> /etc/hosts
 
     # Reiniciar
       systemctl restart dnsmasq
