@@ -90,9 +90,25 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de dnsmasq para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Actualizar la lista de paquetes:
+      apt update
+
+    # Instalar dnsmasq:
+      apt install dnsmasq
+
+    # Activar e iniciar el servicio
+      systemctl enable dnsmasq --now
+      systemctl status dnsmasq --nopager
+
+    # Configurar dnsmasq:
+      echo "server=8.8.8.8" >> /etc/dnsmasq.conf
+      echo "server=8.8.4.4" >> /etc/dnsmasq.conf
+
+    # Poner el nombre de un host
+      echo "192.168.100.10 pepito.home.arpa" >> /etc/dnsmasq.conf
+
+    # Reiniciar
+      systemctl restart dnsmasq
 
   elif [ $cVerSO == "11" ]; then
 
