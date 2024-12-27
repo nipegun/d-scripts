@@ -42,15 +42,7 @@
     exit
   fi
 
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update
-    apt-get -y install curl
-    echo ""
-  fi
+
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -90,9 +82,48 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de DaVinci Resolve para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Determinar la última versión
+      vUltVers="19.1.2"
+
+    # Descargar el archivo .zip
+      echo ""
+      echo "    Descargando el archivo .zip con la última versión..."
+      echo ""
+      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update
+          apt-get -y install curl
+          echo ""
+        fi
+      curl -sL https://swr.cloud.blackmagicdesign.com/DaVinciResolve/v"$vUltVers"/DaVinci_Resolve_Studio_"$vUltVers"_Linux.zip -o /tmp/DaVinciResolve.zip
+
+    # Descomprimir el archivo .zip
+      echo ""
+      echo "    Descomprimiendo el archivo .zip..."
+      echo ""
+      # Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}      El paquete unzip no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update
+          apt-get -y install unzip
+          echo ""
+        fi
+      unzip 
+
+    # Instalar
+      echo ""
+      echo "    Instalando..."
+      echo ""
+      apt-get -y update
+      apt-get -y install libxcb-cursor0
+      cd /tmp/
+      chmod +x DaVinci_Resolve_"$vUltVers"_Linux.run 
+      ./DaVinci_Resolve_19.1.2_Linux.run -i
 
   elif [ $cVerSO == "11" ]; then
 
