@@ -82,7 +82,8 @@
         echo ""
         echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
-        apt-get -y update && apt-get -y install dialog
+        apt-get -y update
+        apt-get -y install dialog
         echo ""
       fi
 
@@ -107,9 +108,10 @@
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
-                  echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo -e "${cColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
                   echo ""
-                  apt-get -y update && apt-get -y install wget
+                  apt-get -y update
+                  apt-get -y install wget
                   echo ""
                 fi
 
@@ -119,14 +121,14 @@
                 echo ""
                 cd /tmp/
                 wget -q https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb
-                dpkg -i packages-microsoft-prod.deb
+                apt -y install packages-microsoft-prod.deb
                 rm packages-microsoft-prod.deb
 
               # Actualizar la lista de paquetes disponibles en los repositorios
                 echo ""
                 echo "  Actualizando la lista de paquetes disponibles en los repositorios..."
                 echo ""
-                apt-get update
+                apt-get -y update
 
               # Instalar el paquete
                 echo ""
@@ -160,7 +162,8 @@
                   echo ""
                   echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
                   echo ""
-                  apt-get -y update && apt-get -y install wget
+                  apt-get -y update
+                  apt-get -y install wget
                   echo ""
                 fi
 
@@ -187,7 +190,7 @@
                 echo ""
                 echo "  Instalando el paquete..."
                 echo ""
-                apt install /tmp/powershell.deb
+                apt -y install /tmp/powershell.deb
 
               # Notificar fin de ejecución del script
                 echo ""
