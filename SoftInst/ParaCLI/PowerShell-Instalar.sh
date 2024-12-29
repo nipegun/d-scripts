@@ -105,24 +105,22 @@
               echo "  Intentando instalar PowerShell agregando el repositorio..."
               echo ""
 
-              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
-                  echo ""
-                  echo -e "${cColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
-                  echo ""
-                  apt-get -y update
-                  apt-get -y install wget
-                  echo ""
-                fi
-
               # Instalar el repositorio
                 echo ""
                 echo "  Instalando el repositorio de PowerShell..."
                 echo ""
                 cd /tmp/
-                wget -q https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb
-                apt -y install packages-microsoft-prod.deb
-                rm packages-microsoft-prod.deb
+                # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                    echo ""
+                    apt-get -y update
+                    apt-get -y install curl
+                    echo ""
+                  fi
+                curl -L https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -o /tmp/PowerShellRepo.deb
+                apt -y install /tmp/PowerShellRepo.deb
 
               # Actualizar la lista de paquetes disponibles en los repositorios
                 echo ""
@@ -134,7 +132,7 @@
                 echo ""
                 echo "  Instalar el paquete powershell..."
                 echo ""
-                apt-get -y install powershell
+                apt-get -y install powershell-lts
 
               # Notificar fin de ejecución del script
                 echo ""
@@ -144,7 +142,7 @@
                 echo "      pwsh"
                 echo ""
                 echo "    Para borrarlo:"
-                echo "      apt-get -y autoremove powershell"
+                echo "      apt-get -y autoremove powershell-lts"
                 echo "      apt remove packages-microsoft-prod"
                 echo "      apt-get update"
                 echo ""
