@@ -21,6 +21,8 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Splunk-InstalarYConfigurar.sh | nano -
 # ----------
 
+vSplunk="9.3.1"
+
 # Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
@@ -85,20 +87,21 @@
         echo ""
         echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
-        apt-get -y update && apt-get -y install dialog
+        apt-get -y update
+        apt-get -y install dialog
         echo ""
       fi
 
     # Crear el menú
       menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
         opciones=(
-          1 "Instalar Splunk Enterprise v9.3.1 Trial" on
+          1 "Instalar Splunk Enterprise v"$vSplunk" Trial" on
           2 "Splunk SOAR On-Prem Unprivileged v6.3.0 (Centos/RHEL 8)" off
           3 "Splunk SOAR On-Prem Unprivileged v6.3.0 (Centos/RHEL 7)" off
           4 "Splunk SOAR On-Prem Privileged v5.3.6 (CentOS/RHEL 7)" off
           5 "Splunk SOAR Cloud - Automation Broker v6.3.0" off
           6 "Splunk SOAR Diagnostic tool backport v6.3.0 (CentOS/RHEL 7 y 8)" off
-          7 "Splunk Universal Forwarder v9.3.1" off
+          7 "Splunk Universal Forwarder v"$vSplunk"" off
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -117,11 +120,12 @@
                   echo ""
                   echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
                   echo ""
-                  apt-get -y update && apt-get -y install curl
+                  apt-get -y update
+                  apt-get -y install curl
                   echo ""
                 fi
-              wget "https://download.splunk.com/products/splunk/releases/9.3.1/linux/splunk-9.3.1-0b8d769cb912-linux-2.6-amd64.deb" -O /root/SoftInst/Splunk/splunk.deb
-              apt install /root/SoftInst/Splunk/splunk.deb
+              wget "https://download.splunk.com/products/splunk/releases/"$vSplunk"/linux/splunk-"$vSplunk"-0b8d769cb912-linux-2.6-amd64.deb" -O /root/SoftInst/Splunk/splunk.deb
+              apt -y install /root/SoftInst/Splunk/splunk.deb
               # Iniciar y aceptar licencia
                 /opt/splunk/bin/splunk start --accept-license
               # Hacer que se auto-inicie
@@ -132,7 +136,7 @@
                 #echo "server.socket_host = 0.0.0.0" >> /opt/splunk/etc/system/local/web.conf
                 #echo ""                             >> /opt/splunk/etc/system/local/web.conf
               # Reiniciar
-                /opt/splunk/bin/splunk restart
+                #/opt/splunk/bin/splunk restart
 
               # Notificar fin de la instalación
                 echo ""
