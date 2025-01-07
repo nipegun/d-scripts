@@ -118,7 +118,16 @@
         # Actualiza GRUB y reinicia:
         # sudo update-grub
         # sudo reboot
-https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=dd-smartbutton&utm_location=module
+    # Descargar el paquete .deb
+      mkdir -p /root/SoftInst/DockerDesktop/ 
+      curl -sL https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb
+
+?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64
+    https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64
+
+    https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=dd-smartbutton&utm_location=module
+
+
   elif [ $cVerSO == "11" ]; then
 
     echo ""
