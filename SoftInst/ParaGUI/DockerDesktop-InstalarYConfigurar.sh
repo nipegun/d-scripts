@@ -90,9 +90,24 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Docker Desktop para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Instalar dependencias
+      echo ""
+      echo "    Instalando dependencias..."
+      echo ""
+      apt-get -y update
+      apt -y install apt-transport-https
+      apt -y install ca-certificates
+      apt -y install curl
+      apt -y install software-properties-common
+      apt -y install libvirt-daemon-system
+      apt -y install libvirt-clients
+      apt -y install bridge-utils
+      apt -y install qemu-kvm
+
+    # Habilitar y arrancar el servicio de libvirt:
+      systemctl enable libvirtd
+      systemctl start libvirtd
+      systemctl status libvirtd --no-pager
 
   elif [ $cVerSO == "11" ]; then
 
