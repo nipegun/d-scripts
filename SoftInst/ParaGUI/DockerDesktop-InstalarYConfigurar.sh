@@ -104,11 +104,21 @@
       apt -y install bridge-utils
       apt -y install qemu-kvm
 
-    # Habilitar y arrancar el servicio de libvirt:
+    # Habilitar y arrancar el servicio de libvirt
       systemctl enable libvirtd
       systemctl start libvirtd
       systemctl status libvirtd --no-pager
 
+    # cgroup v2
+      # Comprobar cgroup
+        mount | grep cgroup
+        #Agrega o modifica la línea que empieza con GRUB_CMDLINE_LINUX_DEFAULT para incluir:
+        # systemd.unified_cgroup_hierarchy=1
+        # GRUB_CMDLINE_LINUX_DEFAULT="quiet splash systemd.unified_cgroup_hierarchy=1"
+        # Actualiza GRUB y reinicia:
+        # sudo update-grub
+        # sudo reboot
+https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=dd-smartbutton&utm_location=module
   elif [ $cVerSO == "11" ]; then
 
     echo ""
