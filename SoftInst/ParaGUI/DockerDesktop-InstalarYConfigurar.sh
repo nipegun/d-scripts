@@ -119,13 +119,13 @@
         # sudo update-grub
         # sudo reboot
     # Descargar el paquete .deb
-      mkdir -p /root/SoftInst/DockerDesktop/ 
-      curl -sL https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb
-
-?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64
-    https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64
-
-    https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=dd-smartbutton&utm_location=module
+      mkdir -p /root/SoftInst/DockerDesktop/
+      curl -L https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb -o /root/SoftInst/DockerDesktop/docker-desktop-amd64.deb
+    # Desintalar todos los paquetes anteriores
+      apt -y autoremove docker*
+      apt -y purge docker*
+    # Instalar el paquete
+      apt -y install /root/SoftInst/DockerDesktop/docker-desktop-amd64.deb
 
 
   elif [ $cVerSO == "11" ]; then
