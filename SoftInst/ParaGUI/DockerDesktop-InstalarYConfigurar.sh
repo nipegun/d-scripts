@@ -109,6 +109,28 @@
       systemctl start libvirtd
       systemctl status libvirtd --no-pager
 
+
+  # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${cColorRojo}  El paquete gnupg2 no está instalado. Iniciando su instalación...${cFinColor}"
+      echo ""
+      apt-get -y update
+      apt-get -y install gnupg2
+      echo ""
+    fi
+
+  echo ""
+  echo "  Descargando la clave PGP del KeyRing..."
+  echo ""
+  wget -O- https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+  echo ""
+  echo "  Agregando el repositorio..."
+  echo ""
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+  apt-get -y update
+
     # cgroup v2
       if mount | grep -q "cgroup2"; then
         # Descargar el paquete .deb
