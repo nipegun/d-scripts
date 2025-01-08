@@ -110,23 +110,26 @@
       systemctl status libvirtd --no-pager
 
     # cgroup v2
-      # Comprobar cgroup
-        mount | grep cgroup
+      if mount | grep -q "cgroup2"; then
+        # Descargar el paquete .deb
+          mkdir -p /root/SoftInst/DockerDesktop/
+          curl -L https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb -o /root/SoftInst/DockerDesktop/docker-desktop-amd64.deb
+        # Desintalar todos los paquetes anteriores
+          apt -y autoremove docker*
+          apt -y purge docker*
+        # Instalar el paquete
+          apt -y install /root/SoftInst/DockerDesktop/docker-desktop-amd64.deb
+      else
+        echo ""
+        echo "  cgroup2 no está habilitado y es necesario para la ejecución de Docker Desktop..."
+        echo ""
         #Agrega o modifica la línea que empieza con GRUB_CMDLINE_LINUX_DEFAULT para incluir:
         # systemd.unified_cgroup_hierarchy=1
         # GRUB_CMDLINE_LINUX_DEFAULT="quiet splash systemd.unified_cgroup_hierarchy=1"
         # Actualiza GRUB y reinicia:
         # sudo update-grub
         # sudo reboot
-    # Descargar el paquete .deb
-      mkdir -p /root/SoftInst/DockerDesktop/
-      curl -L https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb -o /root/SoftInst/DockerDesktop/docker-desktop-amd64.deb
-    # Desintalar todos los paquetes anteriores
-      apt -y autoremove docker*
-      apt -y purge docker*
-    # Instalar el paquete
-      apt -y install /root/SoftInst/DockerDesktop/docker-desktop-amd64.deb
-
+      fi
 
   elif [ $cVerSO == "11" ]; then
 
