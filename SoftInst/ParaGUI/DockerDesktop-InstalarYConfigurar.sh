@@ -94,53 +94,70 @@
       echo ""
       echo "    Instalando dependencias..."
       echo ""
-      apt-get -y update
-      apt -y install apt-transport-https
-      apt -y install ca-certificates
-      apt -y install curl
-      apt -y install software-properties-common
-      apt -y install libvirt-daemon-system
-      apt -y install libvirt-clients
-      apt -y install bridge-utils
-      apt -y install qemu-kvm
+      #apt-get -y update
+      #apt -y install apt-transport-https
+      #apt -y install ca-certificates
+      #apt -y install curl
+      #apt -y install software-properties-common
+      #apt -y install libvirt-daemon-system
+      #apt -y install libvirt-clients
+      #apt -y install bridge-utils
+      #apt -y install qemu-kvm
 
     # Habilitar y arrancar el servicio de libvirt
-      systemctl enable libvirtd
-      systemctl start libvirtd
-      systemctl status libvirtd --no-pager
+      #systemctl enable libvirtd
+      #systemctl start libvirtd
+      #systemctl status libvirtd --no-pager
 
+    # Agregar el repositorio
+      # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update
+          apt-get -y install wget
+          echo ""
+        fi
+      # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}    El paquete gnupg2 no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update
+          apt-get -y install gnupg2
+          echo ""
+        fi
+      # Descargar la clave PGP del keyring
+        echo ""
+        echo "  Descargando la clave PGP del KeyRing..."
+        echo ""
+        wget -O- https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+      # Agregar el repo
+        echo ""
+        echo "  Agregando el repositorio..."
+        echo ""
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+      # Actualizar la lista de paquetes disponibles en los repositorios
+        echo ""
+        echo "  Actualizando la lista de paquetes disponibles en los repositorios..."
+        echo ""
+        apt-get -y update
 
-  # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
-      echo ""
-      echo -e "${cColorRojo}  El paquete gnupg2 no está instalado. Iniciando su instalación...${cFinColor}"
-      echo ""
-      apt-get -y update
-      apt-get -y install gnupg2
-      echo ""
-    fi
-
-  echo ""
-  echo "  Descargando la clave PGP del KeyRing..."
-  echo ""
-  wget -O- https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
-  echo ""
-  echo "  Agregando el repositorio..."
-  echo ""
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
-  apt-get -y update
-
-    # cgroup v2
+      # Comprobar que cgroup v2 esté habilitado y proceder con la instalación
       if mount | grep -q "cgroup2"; then
+        echo ""
+        echo "  Instalando DockerDesktop..."
+        echo ""
+        apt -y install docker-desktop
         # Descargar el paquete .deb
-          mkdir -p /root/SoftInst/DockerDesktop/
-          curl -L https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb -o /root/SoftInst/DockerDesktop/docker-desktop-amd64.deb
+          #mkdir -p /root/SoftInst/DockerDesktop/
+          #curl -L https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb -o /root/SoftInst/DockerDesktop/docker-desktop-amd64.deb
         # Desintalar todos los paquetes anteriores
-          apt -y autoremove docker*
-          apt -y purge docker*
+          #apt -y autoremove docker*
+          #apt -y purge docker*
         # Instalar el paquete
-          apt -y install /root/SoftInst/DockerDesktop/docker-desktop-amd64.deb
+          #apt -y install /root/SoftInst/DockerDesktop/docker-desktop-amd64.deb
       else
         echo ""
         echo "  cgroup2 no está habilitado y es necesario para la ejecución de Docker Desktop..."
