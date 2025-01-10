@@ -133,6 +133,11 @@
     # Permitir el acceso root
       echo "auth sufficient pam_rootok.so" >> /etc/pam.d/cockpit
 
+    # Notificar fin de ejecución del script
+      echo ""
+      echo "    La ejecución del script ha finalizado."
+      echo ""
+
   elif [ $cVerSO == "11" ]; then
 
     echo ""
