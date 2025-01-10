@@ -8,20 +8,14 @@
 # ----------
 # Script de NiPeGun para instalar y configurar Cockpit en Debian
 #
-# Ejecución remota con sudo:
-#   curl -sL x | sudo bash
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Cockpit-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root:
-#   curl -sL x | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Cockpit-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Cockpit-InstalarYConfigurar.sh | nano -
 # ----------
 
 # Definir constantes de color
