@@ -119,7 +119,8 @@
         sudo bin/up -d
 
       # Actualizar todo
-        sudo docker exec -it sharelatex bash -c "apt-get -y update && apt-get -y dist-upgrade && apt-get -y install --reinstall texlive-full && tlmgr install scheme-full && tlmgr update --self --all"
+        #sudo docker exec -it sharelatex bash -c "apt-get -y update && apt-get -y dist-upgrade && apt-get -y install --reinstall texlive-full && tlmgr install scheme-full && tlmgr update --self --all"
+        sudo docker exec -it sharelatex bash -c "apt-get -y update && apt-get -y dist-upgrade && tlmgr install scheme-full && tlmgr update --self --all"
 
       # Hacer los cambios persistentes
         sudo docker commit sharelatex sharelatex/sharelatex:with-texlive-full
