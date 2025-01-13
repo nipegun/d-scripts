@@ -42,16 +42,6 @@
     exit
   fi
 
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update
-    apt-get -y install curl
-    echo ""
-  fi
-
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
@@ -90,9 +80,32 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de WebGoat para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Obtener la etiqueta de la última versión
+      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update
+          apt-get -y install curl
+          echo ""
+        fi
+      vEtiquetaUltVers=$(curl -sL https://github.com/WebGoat/WebGoat/releases/latest | sed 's->->\n-g' | grep 'tag/v' | head -n 1 | sed 's|tag/|\n|g' |  grep ^v | cut -d'"' -f1)
+      echo ""
+      echo "    La última versión es: $vEtiquetaUltVers"
+      echo ""
+      vNumUltVers=$(curl -sL https://github.com/WebGoat/WebGoat/releases/latest | sed 's->->\n-g' | grep 'tag/v' | head -n 1 | sed 's|tag/|\n|g' |  grep ^v | cut -d'"' -f1 | cut -d'v' -f2)
+
+    # Descargar el archivo.jar
+      echo ""
+      echo "    Descargando el archivo .jar con al última versión..."
+      echo ""
+      sudo mkdir -p ~/bin/java/
+      sudo curl -sL https://github.com/WebGoat/WebGoat/releases/download/$vEtiquetaUltVers/webgoat-$vNumUltVers.jar -o ~/bin/java/webgoat-$vNumUltVers.jar
+
+export TZ=Europe/Madrid
+java -Dfile.encoding=UTF-8 -jar webgoat-2023.8.jar
+
 
   elif [ $cVerSO == "11" ]; then
 
