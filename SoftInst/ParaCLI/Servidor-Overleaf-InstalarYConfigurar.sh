@@ -8,7 +8,7 @@
 # ----------
 # Script de NiPeGun para instalar y configurar Overleaf en Debian
 #
-# Ejecución remota con sudo:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Servidor-Overleaf-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root:
