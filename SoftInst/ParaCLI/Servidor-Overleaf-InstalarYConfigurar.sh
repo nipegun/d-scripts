@@ -100,7 +100,7 @@
 
       # NGINX
         vIPHost=$(hostname -I | sed 's- --g')
-        sudo sed -i -e 's|# OVERLEAF_IMAGE_NAME=sharelatex/sharelatex|OVERLEAF_IMAGE_NAME=overleaf/overleaf|g' /opt/overleaf/config/overleaf.rc
+        #sudo sed -i -e 's|# OVERLEAF_IMAGE_NAME=sharelatex/sharelatex|OVERLEAF_IMAGE_NAME=overleaf/overleaf|g' /opt/overleaf/config/overleaf.rc
         sudo sed -i -e 's|NGINX_ENABLED=false|NGINX_ENABLED=true|g'                                            /opt/overleaf/config/overleaf.rc
         sudo sed -i -e "s|NGINX_HTTP_LISTEN_IP=127.0.1.1|NGINX_HTTP_LISTEN_IP=$vIPHost|g"                      /opt/overleaf/config/overleaf.rc
         sudo sed -i -e "s|NGINX_TLS_LISTEN_IP=127.0.1.1|NGINX_TLS_LISTEN_IP=$vIPHost|g"                        /opt/overleaf/config/overleaf.rc
@@ -118,49 +118,28 @@
           fi
         sudo bin/up -d
 
+      # Actualizar todo
+        sudo docker exec -it sharelatex bash -c "apt-get -y update && apt-get -y dist-upgrade && apt-get -y install --reinstall texlive-full && tlmgr install scheme-full && tlmgr update --self --all"
+
+      # Hacer los cambios persistentes
+        sudo docker commit sharelatex sharelatex/sharelatex:with-texlive-full
+          
+      # Set up an overriding Docker Compose configuration file to reflect the changes:
+        echo "---"                                                 > /opt/overleaf/lib/docker-compose.override.yml
+        echo "services:"                                          >> /opt/overleaf/lib/docker-compose.override.yml
+        echo "  sharelatex:"                                      >> /opt/overleaf/lib/docker-compose.override.yml
+        echo "    image: sharelatex/sharelatex:with-texlive-full" >> /opt/overleaf/lib/docker-compose.override.yml
+
+      # Finalmente, parar the running Docker services, delete the former ShareLaTeX container, and then restart the Overleaf Docker services:
+        cd /opt/overleaf
+        bin/stop && bin/docker-compose rm -f sharelatex && bin/up -d
+
       # Notificar fin de ejecución del script
         echo ""
         echo "  Ejecución del script, finalizada."
         echo ""
         echo "  Conéctate a la web https://$vIPHost/launchpad para crear la cuenta de administrador"
         echo ""
-
-      # Actualizar Overleaf a la versión completa
-        # Posicionarse en la carpeta
-          cd /opt/overleaf
-        # Entrar a la shell del container
-          #sudo usermod -aG docker $USER
-          sudo bin/shell
-        # Actualizar la lista de paquetes disponibles en el repo
-          apt-get -y update
-        # Actualizar el ubuntu a la última versión
-          #apt-get -y dist-upgrade
-        # Reinstalar textlive-full indicando Europe/Madrid
-          apt-get -y install --reinstall texlive-full
-        # Actualizar tlmgr a la última versión 
-          tlmgr update --self
-        # Actualizar Overleaf
-          tlmgr install scheme-full
-          tlmgr update --self --all
-        # Salir de la shell
-          exit
-        # Hacer los cambios persistentes
-          sudo docker commit overleaf overleaf/overleaf:with-texlive-full
-        # Set up an overriding Docker Compose configuration file to reflect the changes:
-          echo "---"                                                 > /opt/overleaf/lib/docker-compose.override.yml
-          echo "version: '2.2'"                                     >> /opt/overleaf/lib/docker-compose.override.yml
-          echo "services:"                                          >> /opt/overleaf/lib/docker-compose.override.yml
-          echo "  sharelatex:"                                      >> /opt/overleaf/lib/docker-compose.override.yml
-          echo "    image: sharelatex/sharelatex:with-texlive-full" >> /opt/overleaf/lib/docker-compose.override.yml
-           #
-           # Nota: The version number, which is 2.2 in this case, must be the same as the version number in other Docker Compose configuration files,
-           #such as /opt/overleaf/lib/docker-compose.base.yml.
-           #        Do not use tabs for indents when dealing a .yml file. Use 2 or 4 spaces for 1 indent.
-
-# Finalmente, parar the running Docker services, delete the former ShareLaTeX container, and then restart the Overleaf Docker services:
-
-# cd /opt/overleaf
-# bin/stop && bin/docker-compose rm -f sharelatex && bin/up -d
 
   elif [ $cVerSO == "11" ]; then
 
