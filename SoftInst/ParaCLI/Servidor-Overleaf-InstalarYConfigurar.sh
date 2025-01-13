@@ -66,6 +66,7 @@
     echo ""
 
     cd /opt
+    sudo rm -rf /opt/overleaf
     # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
         echo ""
@@ -75,7 +76,7 @@
         sudo apt-get -y install git
         echo ""
       fi
-      sudo git clone https://github.com/overleaf/toolkit.git ./overleaf
+      sudo git clone --branch master https://github.com/overleaf/toolkit.git ./overleaf
       echo -e "overleaf|overleaf" | sudo adduser overleaf
       sudo chown -R overleaf:overleaf /opt/overleaf
       
@@ -123,7 +124,7 @@
         echo "  Conéctate a la web https://$vIPHost/launchpad para crear la cuenta de administrador"
         echo ""
 
-      # Actualizar Overleaf
+      # Actualizar Overleaf a la versión completa
         # Posicionarse en la carpeta
           #cd /opt/overleaf
         # Entrar a la shell del container
@@ -155,7 +156,6 @@
 
 # cd /opt/overleaf
 # bin/stop && bin/docker-compose rm -f sharelatex && bin/up -d
-
 
   elif [ $cVerSO == "11" ]; then
 
