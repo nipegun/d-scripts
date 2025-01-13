@@ -103,9 +103,31 @@
       sudo mkdir -p ~/bin/java/
       sudo curl -sL https://github.com/WebGoat/WebGoat/releases/download/$vEtiquetaUltVers/webgoat-$vNumUltVers.jar -o ~/bin/java/webgoat-$vNumUltVers.jar
 
-export TZ=Europe/Madrid
-java -Dfile.encoding=UTF-8 -jar webgoat-2023.8.jar
+    # Instalar java
+      echo ""
+      echo "    Instalando java..."
+      echo ""
+      sudo apt-get -y install openjdk-17-jre
 
+    # Crear el script para ejecutar WebGoat
+      echo ""
+      echo "    Creando el script para ejecutar WebGoat..."
+      echo ""
+      mkdir -p ~/scripts/
+      echo '#!/bin/bash'                                                          > ~/scripts/WebGoat-Ejecutar.sh
+      echo ""                                                                    >> ~/scripts/WebGoat-Ejecutar.sh
+      echo 'export TZ=Europe/Madrid'                                             >> ~/scripts/WebGoat-Ejecutar.sh
+      echo "java -Dfile.encoding=UTF-8 -jar ~/bin/java/webgoat-$vNumUltVers.jar" >> ~/scripts/WebGoat-Ejecutar.sh
+      chmod +x                                                                      ~/scripts/WebGoat-Ejecutar.sh
+
+    # Notificar fin de ejecución del script
+      echo ""
+      echo "    Ejecución del script de instalación de WebGoat, finalizada. Para lanzarlo, ejecuta:"
+      echo ""
+      echo "      ~/scripts/WebGoat-Ejecutar.sh"
+      echo ""
+      echo "    La primera vez tendrás que registrar un usuario nuevo."
+      echo ""
 
   elif [ $cVerSO == "11" ]; then
 
