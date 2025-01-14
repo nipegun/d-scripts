@@ -118,18 +118,18 @@
           fi
         sudo bin/up -d
 
-      # Actualizar todo
-        #sudo docker exec -it sharelatex bash -c "apt-get -y update && apt-get -y dist-upgrade && apt-get -y install --reinstall texlive-full && tlmgr install scheme-full && tlmgr update --self --all"
-        sudo docker exec -it sharelatex bash -c "apt-get -y update && apt-get -y dist-upgrade && tlmgr install scheme-full && tlmgr update --self --all"
+      # Instalar todos los paquetes faltantes
+       sudo docker exec -it sharelatex bash -c "tlmgr install scheme-full && tlmgr update --self --all"
 
-      # Hacer los cambios persistentes
-        sudo docker commit sharelatex sharelatex/sharelatex:with-texlive-full
-          
+
+      # Guuardar los cambios en una nueva imagen
+        sudo docker commit sharelatex overleaf:scheme-full
+
       # Set up an overriding Docker Compose configuration file to reflect the changes:
-        echo "---"                                                 > /opt/overleaf/lib/docker-compose.override.yml
-        echo "services:"                                          >> /opt/overleaf/lib/docker-compose.override.yml
-        echo "  sharelatex:"                                      >> /opt/overleaf/lib/docker-compose.override.yml
-        echo "    image: sharelatex/sharelatex:with-texlive-full" >> /opt/overleaf/lib/docker-compose.override.yml
+        echo "---"                              > /opt/overleaf/lib/docker-compose.override.yml
+        echo "services:"                       >> /opt/overleaf/lib/docker-compose.override.yml
+        echo "  sharelatex:"                   >> /opt/overleaf/lib/docker-compose.override.yml
+        echo "    image: overleaf:scheme-full" >> /opt/overleaf/lib/docker-compose.override.yml
 
       # Finalmente, parar the running Docker services, delete the former ShareLaTeX container, and then restart the Overleaf Docker services:
         cd /opt/overleaf
