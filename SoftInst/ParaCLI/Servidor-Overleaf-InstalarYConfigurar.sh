@@ -75,7 +75,7 @@
           sudo apt-get -y install dialog
           echo ""
         fi
-      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 80 16)
         opciones=(
           1 "Instalar con los paquetes básicos"                           on
           2 "  Agregar algunos paquetes extra"                            off
