@@ -149,6 +149,7 @@
 
 
               # Notificar fin de ejecución del script
+                sleep 5
                 echo ""
                 echo "  Ejecución del script, finalizada."
                 echo ""
