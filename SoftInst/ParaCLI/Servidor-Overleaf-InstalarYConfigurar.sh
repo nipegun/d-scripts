@@ -197,7 +197,7 @@
                 echo ""
                 echo "  Ejecución del script, finalizada."
                 echo ""
-                vIPHost=$(hostname -I | sed 's- --g')
+                vIPHost=$(ip -4 addr show eth0 | grep inet | cut -d' ' -f6 | cut -d/ -f1 | sed 's- --g')
                 echo "  Conéctate a la web https://$vIPHost/launchpad para crear la cuenta de administrador"
                 echo ""
 
