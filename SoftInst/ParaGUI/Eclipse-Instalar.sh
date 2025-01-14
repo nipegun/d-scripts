@@ -27,25 +27,6 @@
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
-# Comprobar si el script está corriendo como root
-  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
-  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
-    echo ""
-    exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update
-    apt-get -y install curl
-    echo ""
-  fi
-
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
@@ -84,9 +65,132 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Eclipse para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Crear el menú
+      # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update
+          apt-get -y install dialog
+          echo ""
+        fi
+      #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+        opciones=(
+          1 "Eclipse IDE for Enterprise Java and Web Developers" off
+          2 "Eclipse IDE for Java Developers"                    off
+          3 "Eclipse IDE for C/C++ Developers"                   off
+          4 "Eclipse IDE for Eclipse Committers"                 off
+          5 "Eclipse IDE for Java and DSL Developers"            off
+          6 "Eclipse IDE for PHP Developers"                     off
+          7 "Eclipse IDE for Embedded C/C++ Developers"          off
+          8 "Eclipse IDE for RCP and RAP Developers"             off
+          9 "Eclipse Modeling Tools"                             off
+         10 "Eclipse IDE for Scout Developers"                   off
+          
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+      #clear
+
+      for choice in $choices
+        do
+          case $choice in
+
+            1)
+
+              echo ""
+              echo "  Instalando Eclipse IDE for Enterprise Java and Web Developers..."
+              echo ""
+              sudo mkdir -p /root/SoftInst/EclipseIDE
+              # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  sudo apt-get -y update
+                  sudo apt-get -y install curl
+                  echo ""
+               fi
+              sudo curl -L https://eclipse.mirror.liteserver.nl/technology/epp/downloads/release/2024-12/R/eclipse-jee-2024-12-R-linux-gtk-x86_64.tar.gz -o /root/SoftInst/EclipseIDE/eclipse.tar.gz
+    
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Opción 2..."
+              echo ""
+
+            ;;
+
+            3)
+
+              echo ""
+              echo "  Opción 3..."
+              echo ""
+
+            ;;
+
+            4)
+
+              echo ""
+              echo "  Opción 4..."
+              echo ""
+
+            ;;
+
+            5)
+
+              echo ""
+              echo "  Opción 5..."
+              echo ""
+
+            ;;
+
+            6)
+
+              echo ""
+              echo "  Opción 1..."
+              echo ""
+
+            ;;
+
+            7)
+
+              echo ""
+              echo "  Opción 2..."
+              echo ""
+
+            ;;
+
+            8)
+
+              echo ""
+              echo "  Opción 3..."
+              echo ""
+
+            ;;
+
+            9)
+
+              echo ""
+              echo "  Opción 4..."
+              echo ""
+
+            ;;
+
+           10)
+
+              echo ""
+              echo "  Opción 5..."
+              echo ""
+
+            ;;
+
+        esac
+
+    done
 
   elif [ $cVerSO == "11" ]; then
 
