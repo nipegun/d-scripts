@@ -179,13 +179,13 @@
                # Guuardar los cambios en una nueva imagen
                  sudo docker commit sharelatex overleaf:scheme-full
 
-               # Set up an overriding Docker Compose configuration file to reflect the changes:
+               # Crear el archivo override para que docker compose cargue la nueva imagen, en vez de la vieja
                  echo "---"                              > /opt/overleaf/lib/docker-compose.override.yml
                  echo "services:"                       >> /opt/overleaf/lib/docker-compose.override.yml
                  echo "  sharelatex:"                   >> /opt/overleaf/lib/docker-compose.override.yml
                  echo "    image: overleaf:scheme-full" >> /opt/overleaf/lib/docker-compose.override.yml
 
-               # Finalmente, parar the running Docker services, delete the former ShareLaTeX container, and then restart the Overleaf Docker services:
+               # Finalmente, parar todas las imagenes de overlead, borrar el contenedor original y re-arrancar con la imagen nueva
                  cd /opt/overleaf
                  bin/stop && bin/docker-compose rm -f sharelatex && bin/up -d
                  bin/stop
