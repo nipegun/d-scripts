@@ -65,82 +65,82 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Overleaf para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    cd /opt
-    sudo rm -rf /opt/overleaf
-    # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo -e "${cColorRojo}  El paquete git no está instalado. Iniciando su instalación...${cFinColor}"
-        echo ""
-        sudo apt-get -y update
-        sudo apt-get -y install git
-        echo ""
-      fi
+    # Clonar el repositorio
+      cd /opt
+      sudo rm -rf /opt/overleaf
+      # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete git no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install git
+          echo ""
+        fi
       sudo git clone --branch master https://github.com/overleaf/toolkit.git ./overleaf
       echo -e "overleaf|overleaf" | sudo adduser overleaf
       sudo chown -R overleaf:overleaf /opt/overleaf
       
-      # Initialize Overleaf local environment with the --tls flag to enable Transport Layer Security (TLS):
-        cd /opt/overleaf
-        sudo bin/init --tls
-        echo ""
-        echo "  Certificado autofirmado guardado como       /opt/overleaf/config/nginx/certs/overleaf_certificate.pem"
-        echo "  Clave pública correspondiente guardada como /opt/overleaf/config/nginx/certs/overleaf_key.pem"
+    # Inicializar el entorno local de Overleaf con la opción --tls para habilitar TLS:
+      cd /opt/overleaf
+      sudo bin/init --tls
+      echo ""
+      echo "  Certificado autofirmado guardado como       /opt/overleaf/config/nginx/certs/overleaf_certificate.pem"
+      echo "  Clave pública correspondiente guardada como /opt/overleaf/config/nginx/certs/overleaf_key.pem"
 
-      # Set environment variables for running Overleaf Community Edition behind the Nginx TLS proxy:
-        sudo sed -i -e 's|# OVERLEAF_BEHIND_PROXY=true|OVERLEAF_BEHIND_PROXY=true|g'   /opt/overleaf/config/variables.env
-        sudo sed -i -e 's|# OVERLEAF_SECURE_COOKIE=true|OVERLEAF_SECURE_COOKIE=true|g' /opt/overleaf/config/variables.env
+    # Configura las variables de entorno para ejecutar Overleaf Community Edition detrás del proxy TLS de Nginx
+      sudo sed -i -e 's|# OVERLEAF_BEHIND_PROXY=true|OVERLEAF_BEHIND_PROXY=true|g'   /opt/overleaf/config/variables.env
+      sudo sed -i -e 's|# OVERLEAF_SECURE_COOKIE=true|OVERLEAF_SECURE_COOKIE=true|g' /opt/overleaf/config/variables.env
 
-      # Personalización
-        sudo sed -i -e 's|OVERLEAF_APP_NAME="Our Overleaf Instance"|OVERLEAF_APP_NAME="Overleaf"|g'                                                  /opt/overleaf/config/variables.env
-        sudo sed -i -e 's|# OVERLEAF_SITE_URL=http://overleaf.example.com|OVERLEAF_SITE_URL=http://overleaf.example.com|g'                           /opt/overleaf/config/variables.env
-        sudo sed -i -e 's|# OVERLEAF_NAV_TITLE=Our Overleaf Instance|OVERLEAF_NAV_TITLE=Nuestra instancia de Overleaf|g'                             /opt/overleaf/config/variables.env
-        sudo sed -i -e 's|# OVERLEAF_HEADER_IMAGE_URL=http://somewhere.com/mylogo.png|OVERLEAF_HEADER_IMAGE_URL=https://es.overleaf.com/logo.png|g'  /opt/overleaf/config/variables.env
-        sudo sed -i -e 's|# OVERLEAF_ADMIN_EMAIL=support@example.com|OVERLEAF_ADMIN_EMAIL=support@example.com|g'                                     /opt/overleaf/config/variables.env
+    # NGINX
+      vIPHost=$(hostname -I | sed 's- --g')
+      #sudo sed -i -e 's|# OVERLEAF_IMAGE_NAME=sharelatex/sharelatex|OVERLEAF_IMAGE_NAME=overleaf/overleaf|g' /opt/overleaf/config/overleaf.rc
+      sudo sed -i -e 's|NGINX_ENABLED=false|NGINX_ENABLED=true|g'                                            /opt/overleaf/config/overleaf.rc
+      sudo sed -i -e "s|NGINX_HTTP_LISTEN_IP=127.0.1.1|NGINX_HTTP_LISTEN_IP=$vIPHost|g"                      /opt/overleaf/config/overleaf.rc
+      sudo sed -i -e "s|NGINX_TLS_LISTEN_IP=127.0.1.1|NGINX_TLS_LISTEN_IP=$vIPHost|g"                        /opt/overleaf/config/overleaf.rc
 
-      # NGINX
-        vIPHost=$(hostname -I | sed 's- --g')
-        #sudo sed -i -e 's|# OVERLEAF_IMAGE_NAME=sharelatex/sharelatex|OVERLEAF_IMAGE_NAME=overleaf/overleaf|g' /opt/overleaf/config/overleaf.rc
-        sudo sed -i -e 's|NGINX_ENABLED=false|NGINX_ENABLED=true|g'                                            /opt/overleaf/config/overleaf.rc
-        sudo sed -i -e "s|NGINX_HTTP_LISTEN_IP=127.0.1.1|NGINX_HTTP_LISTEN_IP=$vIPHost|g"                      /opt/overleaf/config/overleaf.rc
-        sudo sed -i -e "s|NGINX_TLS_LISTEN_IP=127.0.1.1|NGINX_TLS_LISTEN_IP=$vIPHost|g"                        /opt/overleaf/config/overleaf.rc
+    # Personalización
+      sudo sed -i -e 's|OVERLEAF_APP_NAME="Our Overleaf Instance"|OVERLEAF_APP_NAME="Overleaf"|g'                                                  /opt/overleaf/config/variables.env
+      sudo sed -i -e 's|# OVERLEAF_SITE_URL=http://overleaf.example.com|OVERLEAF_SITE_URL=http://overleaf.example.com|g'                           /opt/overleaf/config/variables.env
+      sudo sed -i -e 's|# OVERLEAF_NAV_TITLE=Our Overleaf Instance|OVERLEAF_NAV_TITLE=Nuestra instancia de Overleaf|g'                             /opt/overleaf/config/variables.env
+      sudo sed -i -e 's|# OVERLEAF_HEADER_IMAGE_URL=http://somewhere.com/mylogo.png|OVERLEAF_HEADER_IMAGE_URL=https://es.overleaf.com/logo.png|g'  /opt/overleaf/config/variables.env
+      sudo sed -i -e 's|# OVERLEAF_ADMIN_EMAIL=support@example.com|OVERLEAF_ADMIN_EMAIL=support@example.com|g'                                     /opt/overleaf/config/variables.env
 
-      # Levantar todos los servicios en background
-        cd /opt/overleaf
-        # Comprobar si el paquete docker-compose está instalado. Si no lo está, instalarlo.
-          if [[ $(dpkg-query -s docker-compose 2>/dev/null | grep installed) == "" ]]; then
-            echo ""
-            echo -e "${cColorRojo}    El paquete docker-compose no está instalado. Iniciando su instalación...${cFinColor}"
-            echo ""
-            sudo apt-get -y update
-            sudo apt-get -y install docker-compose
-            echo ""
-          fi
-        sudo bin/up -d
+    # Levantar todos los servicios en background
+      cd /opt/overleaf
+      # Comprobar si el paquete docker-compose está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s docker-compose 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}    El paquete docker-compose no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install docker-compose
+          echo ""
+        fi
+      sudo bin/up -d
 
-      # Instalar todos los paquetes faltantes
-       sudo docker exec -it sharelatex bash -c "tlmgr install scheme-full && tlmgr update --self --all"
+    # Instalar todos los paquetes faltantes
+     sudo docker exec -it sharelatex bash -c "tlmgr install scheme-full && tlmgr update --self --all"
 
+    # Guuardar los cambios en una nueva imagen
+      sudo docker commit sharelatex overleaf:scheme-full
 
-      # Guuardar los cambios en una nueva imagen
-        sudo docker commit sharelatex overleaf:scheme-full
+    # Set up an overriding Docker Compose configuration file to reflect the changes:
+      echo "---"                              > /opt/overleaf/lib/docker-compose.override.yml
+      echo "services:"                       >> /opt/overleaf/lib/docker-compose.override.yml
+      echo "  sharelatex:"                   >> /opt/overleaf/lib/docker-compose.override.yml
+      echo "    image: overleaf:scheme-full" >> /opt/overleaf/lib/docker-compose.override.yml
 
-      # Set up an overriding Docker Compose configuration file to reflect the changes:
-        echo "---"                              > /opt/overleaf/lib/docker-compose.override.yml
-        echo "services:"                       >> /opt/overleaf/lib/docker-compose.override.yml
-        echo "  sharelatex:"                   >> /opt/overleaf/lib/docker-compose.override.yml
-        echo "    image: overleaf:scheme-full" >> /opt/overleaf/lib/docker-compose.override.yml
+    # Finalmente, parar the running Docker services, delete the former ShareLaTeX container, and then restart the Overleaf Docker services:
+      cd /opt/overleaf
+      bin/stop && bin/docker-compose rm -f sharelatex && bin/up -d
 
-      # Finalmente, parar the running Docker services, delete the former ShareLaTeX container, and then restart the Overleaf Docker services:
-        cd /opt/overleaf
-        bin/stop && bin/docker-compose rm -f sharelatex && bin/up -d
-
-      # Notificar fin de ejecución del script
-        echo ""
-        echo "  Ejecución del script, finalizada."
-        echo ""
-        echo "  Conéctate a la web https://$vIPHost/launchpad para crear la cuenta de administrador"
-        echo ""
+    # Notificar fin de ejecución del script
+      echo ""
+      echo "  Ejecución del script, finalizada."
+      echo ""
+      echo "  Conéctate a la web https://$vIPHost/launchpad para crear la cuenta de administrador"
+      echo ""
 
   elif [ $cVerSO == "11" ]; then
 
