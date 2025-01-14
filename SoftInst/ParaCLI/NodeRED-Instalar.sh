@@ -9,19 +9,13 @@
 # Script de NiPeGun para instalar y configurar NodeRED en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/NodeRED-Instalar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/NodeRED-Instalar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/NodeRED-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -90,9 +84,18 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de NodeRED para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    sudo apt-get -y update
+    sudo apt-get -y install nodejs
+    sudo apt-get -y install npm
+    sudo npm install -g grunt-cli
+    git clone https://github.com/node-red/node-red.git
+    cd node-red
+    git checkout master
+    npm install
+    # Construir NodeRED
+      grunt build
+    # Iniciar
+      npm start -- <args>
 
   elif [ $cVerSO == "11" ]; then
 
