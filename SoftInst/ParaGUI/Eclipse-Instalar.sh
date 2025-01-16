@@ -124,7 +124,7 @@
                     sudo apt-get -y update
                     sudo apt-get -y install tar
                     echo ""
-                 fi
+                  fi
                 tar -xzvf /tmp/eclipse.tar.gz -C ~/EclipseIDE
     
             ;;
