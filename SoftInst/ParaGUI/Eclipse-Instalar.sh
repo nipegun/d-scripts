@@ -102,7 +102,7 @@
               echo ""
               echo "  Instalando Eclipse IDE for Enterprise Java and Web Developers..."
               echo ""
-              sudo mkdir -p /root/SoftInst/EclipseIDE
+              mkdir -p ~/EclipseIDE
               # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
@@ -112,7 +112,7 @@
                   sudo apt-get -y install curl
                   echo ""
                fi
-              sudo curl -L https://eclipse.mirror.liteserver.nl/technology/epp/downloads/release/2024-12/R/eclipse-jee-2024-12-R-linux-gtk-x86_64.tar.gz -o /root/SoftInst/EclipseIDE/eclipse.tar.gz
+              curl -L https://eclipse.mirror.liteserver.nl/technology/epp/downloads/release/2024-12/R/eclipse-jee-2024-12-R-linux-gtk-x86_64.tar.gz -o /tmp/eclipse.tar.gz
     
             ;;
 
