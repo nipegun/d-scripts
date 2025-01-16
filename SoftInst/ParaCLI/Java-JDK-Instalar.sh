@@ -114,8 +114,8 @@
                     echo ""
                     echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
                     echo ""
-                    apt-get -y update
-                    apt-get -y install curl
+                    sudo apt-get -y update
+                    sudo apt-get -y install curl
                     echo ""
                   fi
                 vUltVersDispJDK=$(curl -sL download.oracle.com/java/23/latest/)
@@ -132,7 +132,7 @@
                 echo ""
                 echo "    Instalando el paquete .deb..."
                 echo ""
-                apt -y install /tmp/jdk.deb
+                sudo apt -y install /tmp/jdk.deb
 
             ;;
 
