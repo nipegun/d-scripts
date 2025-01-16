@@ -102,17 +102,30 @@
               echo ""
               echo "  Instalando Eclipse IDE for Enterprise Java and Web Developers..."
               echo ""
-              mkdir -p ~/EclipseIDE
-              # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-                if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-                  echo ""
-                  echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-                  echo ""
-                  sudo apt-get -y update
-                  sudo apt-get -y install curl
-                  echo ""
-               fi
-              curl -L https://eclipse.mirror.liteserver.nl/technology/epp/downloads/release/2024-12/R/eclipse-jee-2024-12-R-linux-gtk-x86_64.tar.gz -o /tmp/eclipse.tar.gz
+              # Descargar la última versión
+                # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+                    echo ""
+                    sudo apt-get -y update
+                    sudo apt-get -y install curl
+                    echo ""
+                  fi
+                curl -L https://eclipse.mirror.liteserver.nl/technology/epp/downloads/release/2024-12/R/eclipse-jee-2024-12-R-linux-gtk-x86_64.tar.gz -o /tmp/eclipse.tar.gz
+              # Descomprimir el archivo
+                # Crear la carpeta donde se descomprimirá
+                  mkdir -p ~/EclipseIDE
+                # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo -e "${cColorRojo}  El paquete tar no está instalado. Iniciando su instalación...${cFinColor}"
+                    echo ""
+                    sudo apt-get -y update
+                    sudo apt-get -y install tar
+                    echo ""
+                 fi
+                tar -xzvf /tmp/eclipse.tar.gz -C ~/EclipseIDE
     
             ;;
 
