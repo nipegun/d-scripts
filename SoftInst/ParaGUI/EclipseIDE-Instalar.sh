@@ -9,13 +9,13 @@
 # Script de NiPeGun para instalar y configurar Eclipse en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/Eclipse-Instalar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/EclipseIDE-Instalar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/Eclipse-Instalar.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/EclipseIDE-Instalar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/Eclipse-Instalar.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/EclipseIDE-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -52,7 +52,7 @@
   if [ $cVerSO == "13" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Eclipse para Debian 13 (x)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de EclipseIDE para Debian 13 (x)...${cFinColor}"
     echo ""
 
     echo ""
@@ -62,7 +62,7 @@
   elif [ $cVerSO == "12" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Eclipse para Debian 12 (Bookworm)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de EclipseIDE para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
     # Crear el menú
@@ -126,6 +126,20 @@
                 tar -xzvf /tmp/eclipse.tar.gz -C ~/
               # Renombrar la carpeta
                 mv ~/eclipse ~/EclipseIDE
+
+              # Crear el icono para lanzar la aplicación desde el menú gráfico
+                echo ""
+                echo "    Creando el lanzador gráfico..."
+                echo ""
+                mkdir -p ~/.local/share/applications
+                echo '[Desktop Entry]'                 > ~/.local/share/applications/EclipseIDE.desktop
+                echo 'Name=EclipseIDE'                >> ~/.local/share/applications/EclipseIDE.desktop
+                echo 'Categories=Development'         >> ~/.local/share/applications/EclipseIDE.desktop
+                echo "Exec=$HOME/EclipseIDE/eclipse"  >> ~/.local/share/applications/EclipseIDE.desktop
+                echo "Icon=$HOME/EclipseIDE/icon.xpm" >> ~/.local/share/applications/EclipseIDE.desktop
+                echo 'Type=Application'               >> ~/.local/share/applications/EclipseIDE.desktop
+                echo 'Terminal=false'                 >> ~/.local/share/applications/EclipseIDE.desktop
+
             ;;
 
             2)
@@ -207,7 +221,7 @@
   elif [ $cVerSO == "11" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Eclipse para Debian 11 (Bullseye)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de EclipseIDE para Debian 11 (Bullseye)...${cFinColor}"
     echo ""
 
     echo ""
@@ -217,7 +231,7 @@
   elif [ $cVerSO == "10" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Eclipse para Debian 10 (Buster)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de EclipseIDE para Debian 10 (Buster)...${cFinColor}"
     echo ""
 
     echo ""
@@ -227,7 +241,7 @@
   elif [ $cVerSO == "9" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Eclipse para Debian 9 (Stretch)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de EclipseIDE para Debian 9 (Stretch)...${cFinColor}"
     echo ""
 
     echo ""
@@ -237,7 +251,7 @@
   elif [ $cVerSO == "8" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Eclipse para Debian 8 (Jessie)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de EclipseIDE para Debian 8 (Jessie)...${cFinColor}"
     echo ""
 
     echo ""
@@ -247,7 +261,7 @@
   elif [ $cVerSO == "7" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Eclipse para Debian 7 (Wheezy)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de EclipseIDE para Debian 7 (Wheezy)...${cFinColor}"
     echo ""
 
     echo ""
