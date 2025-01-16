@@ -118,7 +118,7 @@
                     sudo apt-get -y install curl
                     echo ""
                   fi
-                vUltVersDispJDK=$(curl -sL download.oracle.com/java/23/latest/)
+                vUltVersDispJDK=$(curl -sL https://www.oracle.com/java/technologies/downloads/ | sed 's->->\n-g' | grep '#java' | head -n1 | cut -d'#' -f2 | cut -d'"' -f1 | sed 's/[^0-9]//g')
                 echo "      La última versión disponible es la $vUltVersDispJDK"
                 echo ""
 
