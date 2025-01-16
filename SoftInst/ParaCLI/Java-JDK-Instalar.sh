@@ -126,7 +126,7 @@
                 echo ""
                 echo "    Descargando el paquete.deb..."
                 echo ""
-                curl -L https://download.oracle.com/java/23/latest/jdk-23_linux-x64_bin.deb -o /tmp/jdk.deb
+                curl -L https://download.oracle.com/java/$vUltVersDispJDK/latest/jdk-$vUltVersDispJDK_linux-x64_bin.deb -o /tmp/jdk.deb
 
               # Instalar el paquete .deb
                 echo ""
