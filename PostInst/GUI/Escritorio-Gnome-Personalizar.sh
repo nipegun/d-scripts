@@ -98,7 +98,8 @@
         echo ""
         echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
-        sudo apt-get -y update && sudo apt-get -y install curl
+        sudo apt-get -y update
+        sudo apt-get -y install curl
         echo ""
       fi
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-AtajosDeTeclado.txt -o /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
