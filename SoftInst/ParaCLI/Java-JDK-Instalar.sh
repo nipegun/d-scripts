@@ -95,7 +95,7 @@
               echo "  Instalando la versión de Java JDK disponible en los repositorios de Debian 12..."
               echo ""
               sudo apt-get -y update
-              sudo apt-get -y install openjdk-17-jdk
+              sudo apt-get -y install default-jdk
 
             ;;
 
