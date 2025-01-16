@@ -114,8 +114,6 @@
                   fi
                 curl -L https://eclipse.mirror.liteserver.nl/technology/epp/downloads/release/2024-12/R/eclipse-jee-2024-12-R-linux-gtk-x86_64.tar.gz -o /tmp/eclipse.tar.gz
               # Descomprimir el archivo
-                # Crear la carpeta donde se descomprimirá
-                  mkdir -p ~/EclipseIDE
                 # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
@@ -125,8 +123,9 @@
                     sudo apt-get -y install tar
                     echo ""
                   fi
-                tar -xzvf /tmp/eclipse.tar.gz -C ~/EclipseIDE
-    
+                tar -xzvf /tmp/eclipse.tar.gz -C ~/
+              # Renombrar la carpeta
+                mv ~/eclipse ~/EclipseIDE
             ;;
 
             2)
