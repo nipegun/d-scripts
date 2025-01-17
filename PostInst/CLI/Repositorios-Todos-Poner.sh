@@ -48,71 +48,33 @@
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 13 (x)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
-elif [ $cVerSO == "8" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 8 (Jessie)...${cFinColor}"
-  echo ""
-
-  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
-
-  echo "deb http://ftp.debian.org/debian/ jessie main contrib non-free"              > /etc/apt/sources.list
-  echo "deb-src http://ftp.debian.org/debian/ jessie main contrib non-free"         >> /etc/apt/sources.list
-  echo ""                                                                           >> /etc/apt/sources.list
-  echo "deb http://ftp.debian.org/debian/ jessie-updates main contrib non-free"     >> /etc/apt/sources.list
-  echo "deb-src http://ftp.debian.org/debian/ jessie-updates main contrib non-free" >> /etc/apt/sources.list
-  echo ""                                                                           >> /etc/apt/sources.list
-  echo "deb http://security.debian.org/ jessie/updates main contrib non-free"       >> /etc/apt/sources.list
-  echo "deb-src http://security.debian.org/ jessie/updates main contrib non-free"   >> /etc/apt/sources.list
-  echo ""                                                                           >> /etc/apt/sources.list
-  echo ""
-
-elif [ $cVerSO == "9" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
   cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
-  echo "deb http://ftp.debian.org/debian/ stretch main contrib non-free"              > /etc/apt/sources.list
-  echo "deb-src http://ftp.debian.org/debian/ stretch main contrib non-free"         >> /etc/apt/sources.list
-  echo ""                                                                            >> /etc/apt/sources.list
-  echo "deb http://ftp.debian.org/debian/ stretch-updates main contrib non-free"     >> /etc/apt/sources.list
-  echo "deb-src http://ftp.debian.org/debian/ stretch-updates main contrib non-free" >> /etc/apt/sources.list
-  echo ""                                                                            >> /etc/apt/sources.list
-  echo "deb http://security.debian.org/ stretch/updates main contrib non-free"       >> /etc/apt/sources.list
-  echo "deb-src http://security.debian.org/ stretch/updates main contrib non-free"   >> /etc/apt/sources.list
-  echo ""                                                                            >> /etc/apt/sources.list
-  echo ""
-
-elif [ $cVerSO == "10" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 10 (Buster)...${cFinColor}"
-  echo ""
-
-  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
-
-  echo "deb http://deb.debian.org/debian/ buster main contrib non-free"              > /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian/ buster main contrib non-free"         >> /etc/apt/sources.list
-  echo ""                                                                           >> /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian/ buster-updates main contrib non-free"     >> /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian/ buster-updates main contrib non-free" >> /etc/apt/sources.list
-  echo ""                                                                           >> /etc/apt/sources.list
-  echo "deb http://security.debian.org/ buster/updates main contrib non-free"       >> /etc/apt/sources.list
-  echo "deb-src http://security.debian.org/ buster/updates main contrib non-free"   >> /etc/apt/sources.list
-  echo ""                                                                           >> /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware"                         > /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware"                    >> /etc/apt/sources.list
+  echo ""                                                                                                         >> /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware"     >> /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list
+  echo ""                                                                                                         >> /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"                >> /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"            >> /etc/apt/sources.list
+  echo ""                                                                                                         >> /etc/apt/sources.list
   echo ""
 
 elif [ $cVerSO == "11" ]; then
@@ -134,24 +96,57 @@ elif [ $cVerSO == "11" ]; then
   echo ""                                                                                       >> /etc/apt/sources.list
   echo ""
 
-elif [ $cVerSO == "12" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 12 (Bookworm)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
-  echo "deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware"                         > /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware"                    >> /etc/apt/sources.list
-  echo ""                                                                                                         >> /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware"     >> /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list
-  echo ""                                                                                                         >> /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"                >> /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"            >> /etc/apt/sources.list
-  echo ""                                                                                                         >> /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian/ buster main contrib non-free"              > /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian/ buster main contrib non-free"         >> /etc/apt/sources.list
+  echo ""                                                                           >> /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian/ buster-updates main contrib non-free"     >> /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian/ buster-updates main contrib non-free" >> /etc/apt/sources.list
+  echo ""                                                                           >> /etc/apt/sources.list
+  echo "deb http://security.debian.org/ buster/updates main contrib non-free"       >> /etc/apt/sources.list
+  echo "deb-src http://security.debian.org/ buster/updates main contrib non-free"   >> /etc/apt/sources.list
+  echo ""                                                                           >> /etc/apt/sources.list
   echo ""
+
+elif [ $cVerSO == "9" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 9 (Stretch)...${cFinColor}"
+  echo ""
+
+  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
+
+  echo "deb http://archive.debian.org/debian/ stretch main contrib non-free"      > /etc/apt/sources.list
+  echo "deb-src http://archive.debian.org/debian/ stretch main contrib non-free" >> /etc/apt/sources.list
+
+elif [ $cVerSO == "8" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 8 (Jessie)...${cFinColor}"
+  echo ""
+
+  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
+
+  echo "deb http://archive.debian.org/debian/ jessie main contrib non-free"      > /etc/apt/sources.list
+  echo "deb-src http://archive.debian.org/debian/ jessie main contrib non-free" >> /etc/apt/sources.list
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 7 (Wheezy)...${cFinColor}"
+  echo ""
+
+  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
+
+  echo "deb http://archive.debian.org/debian/ wheezy main contrib non-free"      > /etc/apt/sources.list
+  echo "deb-src http://archive.debian.org/debian/ wheezy main contrib non-free" >> /etc/apt/sources.list
 
 fi
 
