@@ -43,3 +43,11 @@
 # Instalar shellcheck
   apt-get -y install shellcheck
 
+# jp2a (Pasar visualizar imagenes en código ascii
+  apt-get -y install jp2a
+  # Uso:
+  #   Para ver en terminal:
+  #     jp2a --color ~/Descargas/Imagen.jpg
+  #   Para exportar a un archivo:
+  #     jp2a --width=200 ~/Descargas/Imagen.jpg > Archivo.txt
+
