@@ -9,19 +9,13 @@
 # Script de NiPeGun para instalar y configurar IPFS Desktop en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/IPFS-Desktop-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/IPFS-Desktop-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/IPFS-Desktop-InstalarYConfigurar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -32,25 +26,6 @@
   # Para el color rojo también:
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
-
-# Comprobar si el script está corriendo como root
-  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
-  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
-    echo ""
-    exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    sudo apt-get -y update
-    sudo apt-get -y install curl
-    echo ""
-  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -90,9 +65,35 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de IPFS Desktop para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Determinar el número de la última versión
+      echo ""
+      echo "  Determinando el número de la última versión..."
+      echo ""
+      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install curl
+          echo ""
+        fi
+      vUltVers=$(curl -sL https://github.com/ipfs/ipfs-desktop/releases/latest | sed 's->->\n-g' | grep '/tag/v' | sed 's-/tag/v-\n-g' | grep ^[0-9] | cut -d'"' -f1 | head -n1)
+      echo ""
+      echo "    El número de la última versión es la $vUltVers"
+      echo ""
+
+    # Descargar el paquete .deb
+      echo ""
+      echo "  Descargando el paquete .deb"
+      echo ""
+      curl -L https://github.com/ipfs/ipfs-desktop/releases/download/v$vUltVers/ipfs-desktop-$vUltVers-linux-amd64.deb -o /tmp/IPFS-Desktop.deb
+
+    # Instalar el paquete .deb
+      echo ""
+      echo "  Instalando el paquete .deb"
+      echo ""
+      sudo apt -y install /tmp/IPFS-Desktop.deb
 
   elif [ $cVerSO == "11" ]; then
 
