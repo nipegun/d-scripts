@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para poner todos los repos en Debian
 #
-# Ejecución remota con sudo root:
+# Ejecución remota (puede requeerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-Todos-Poner.sh | sudo bash
+#
+# Ejecución remota como root:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-Todos-Poner.sh | sed 's-sudo--g' | bash
 #
 # Ejecución remota como root:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-Todos-Poner.sh | bash
@@ -21,12 +24,6 @@
   cColorVerde='\033[1;32m'
   cColorRojo='\033[1;31m'
   cFinColor='\033[0m'
-
-# Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
-    exit
-  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
@@ -64,18 +61,17 @@ elif [ $cVerSO == "12" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
-  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
+  sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
-  echo "deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware"                         > /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware"                    >> /etc/apt/sources.list
-  echo ""                                                                                                         >> /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware"     >> /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list
-  echo ""                                                                                                         >> /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"                >> /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"            >> /etc/apt/sources.list
-  echo ""                                                                                                         >> /etc/apt/sources.list
-  echo ""
+  echo "deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware"                        | sudo tee    /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware"                    | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                                                         | sudo tee -a /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware"     | sudo tee -a /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware" | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                                                         | sudo tee -a /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"                | sudo tee -a /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"            | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                                                         | sudo tee -a /etc/apt/sources.list
 
 elif [ $cVerSO == "11" ]; then
 
@@ -83,18 +79,17 @@ elif [ $cVerSO == "11" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
-  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
+  sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
-  echo "deb http://deb.debian.org/debian bullseye main contrib non-free"                         > /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian bullseye main contrib non-free"                    >> /etc/apt/sources.list
-  echo ""                                                                                       >> /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian-security/ bullseye-security main contrib non-free"     >> /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian-security/ bullseye-security main contrib non-free" >> /etc/apt/sources.list
-  echo ""                                                                                       >> /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian bullseye-updates main contrib non-free"                >> /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free"            >> /etc/apt/sources.list
-  echo ""                                                                                       >> /etc/apt/sources.list
-  echo ""
+  echo "deb http://deb.debian.org/debian bullseye main contrib non-free"                        | sudo tee    /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian bullseye main contrib non-free"                    | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                                       | sudo tee -a /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian-security/ bullseye-security main contrib non-free"     | sudo tee -a /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian-security/ bullseye-security main contrib non-free" | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                                       | sudo tee -a /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian bullseye-updates main contrib non-free"                | sudo tee -a /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free"            | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                                       | sudo tee -a /etc/apt/sources.list
 
 elif [ $cVerSO == "10" ]; then
 
@@ -102,18 +97,20 @@ elif [ $cVerSO == "10" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 10 (Buster)...${cFinColor}"
   echo ""
 
-  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
+  sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
-  echo "deb http://deb.debian.org/debian/ buster main contrib non-free"              > /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian/ buster main contrib non-free"         >> /etc/apt/sources.list
-  echo ""                                                                           >> /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian/ buster-updates main contrib non-free"     >> /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian/ buster-updates main contrib non-free" >> /etc/apt/sources.list
-  echo ""                                                                           >> /etc/apt/sources.list
-  echo "deb http://security.debian.org/ buster/updates main contrib non-free"       >> /etc/apt/sources.list
-  echo "deb-src http://security.debian.org/ buster/updates main contrib non-free"   >> /etc/apt/sources.list
-  echo ""                                                                           >> /etc/apt/sources.list
-  echo ""
+  echo "deb http://deb.debian.org/debian/ buster main contrib non-free"             | sudo tee    /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian/ buster main contrib non-free"         | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                           | sudo tee -a /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian/ buster-updates main contrib non-free"     | sudo tee -a /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian/ buster-updates main contrib non-free" | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                           | sudo tee -a /etc/apt/sources.list
+  echo "deb http://security.debian.org/ buster/updates main contrib non-free"       | sudo tee -a /etc/apt/sources.list
+  echo "deb-src http://security.debian.org/ buster/updates main contrib non-free"   | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                           | sudo tee -a /etc/apt/sources.list
+
+  sudo apt update --allow-releaseinfo-change
+  sudo apt-get -y update
 
 elif [ $cVerSO == "9" ]; then
 
@@ -121,10 +118,10 @@ elif [ $cVerSO == "9" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
-  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
+  sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
-  echo "deb http://archive.debian.org/debian/ stretch main contrib non-free"      > /etc/apt/sources.list
-  echo "deb-src http://archive.debian.org/debian/ stretch main contrib non-free" >> /etc/apt/sources.list
+  echo "deb http://archive.debian.org/debian/ stretch main contrib non-free"     | sudo tee    /etc/apt/sources.list
+  echo "deb-src http://archive.debian.org/debian/ stretch main contrib non-free" | sudo tee -a /etc/apt/sources.list
 
 elif [ $cVerSO == "8" ]; then
 
@@ -132,10 +129,10 @@ elif [ $cVerSO == "8" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
-  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
+  sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
-  echo "deb http://archive.debian.org/debian/ jessie main contrib non-free"      > /etc/apt/sources.list
-  echo "deb-src http://archive.debian.org/debian/ jessie main contrib non-free" >> /etc/apt/sources.list
+  echo "deb http://archive.debian.org/debian/ jessie main contrib non-free"     | sudo tee    /etc/apt/sources.list
+  echo "deb-src http://archive.debian.org/debian/ jessie main contrib non-free" | sudo tee -a /etc/apt/sources.list
 
 elif [ $cVerSO == "7" ]; then
 
@@ -143,10 +140,10 @@ elif [ $cVerSO == "7" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
-  cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
+  sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
-  echo "deb http://archive.debian.org/debian/ wheezy main contrib non-free"      > /etc/apt/sources.list
-  echo "deb-src http://archive.debian.org/debian/ wheezy main contrib non-free" >> /etc/apt/sources.list
+  echo "deb http://archive.debian.org/debian/ wheezy main contrib non-free"     | sudo tee    /etc/apt/sources.list
+  echo "deb-src http://archive.debian.org/debian/ wheezy main contrib non-free" | sudo tee -a /etc/apt/sources.list
 
 fi
 
