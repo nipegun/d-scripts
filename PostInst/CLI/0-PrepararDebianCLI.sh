@@ -45,6 +45,8 @@
 # Poner todos los repositorios
   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-Todos-Poner.sh | bash
 
-  apt-get -y update && apt-get -y install curl
+# Instalar d-scripts
+  apt-get -y update
+  apt-get -y install curl
   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar.sh | bash
   sh -c "echo 'export PATH=$PATH:~/scripts/d-scripts/Alias/' >> ~/.bashrc"
