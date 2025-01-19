@@ -28,7 +28,6 @@ echo ""
 echo "    Intentando actualización..."
 echo ""
 apt-get -o Acquire::Check-Valid-Until=false update
-apt-get -y --allow-downgrades upgrade
 apt-get -y --allow-downgrades dist-upgrade
 apt-get -y autoremove
-
+apt-get -y autoclean
