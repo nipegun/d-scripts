@@ -67,6 +67,12 @@
   echo ""
   apt-get -y autoremove
 
+# Borrar la cache de paquetes
+  echo ""
+  echo "    Ejecutando apt-get -y autoclean..."
+  echo ""
+  apt-get -y autoclean
+
 # Notificar fin de ejecución del script
   echo ""
   echo -e "${cColorVerde}    Script para actualizar el sistema operativo, finalizado.${cFinColor}"
