@@ -76,9 +76,9 @@ elif [ $cVerSO == "9" ]; then
   cp /etc/apt/sources.list /etc/apt/sources.list.deb9
   sed -i -e 's|stretch|buster|g' /etc/apt/sources.list
   apt-get -y update
-  apt-get -y upgrade
   apt-get -y dist-upgrade
-  apt-get autoremove
+  apt-get -y autoremove
+  apt-get -y autoclean
   shutdown -r now
 
 elif [ $cVerSO == "10" ]; then
