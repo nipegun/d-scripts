@@ -72,17 +72,19 @@
     echo ""
 
     # Instalar JRE
-      apt-get -y update && apt-get -y install default-jre
+      apt-get -y update
+      apt-get -y install default-jre
     # Ejecutar script original de instalación (alojado en hacks4geeks.com)
       # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
           echo ""
           echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
-          apt-get -y update && apt-get -y install curl
+          apt-get -y update
+          apt-get -y install curl
           echo ""
         fi
-      curl -sL http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/jDownloader/JD2Setup_SinJRE.sh | sudo bash
+      curl -sL http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/jDownloader/JDownloader2Setup_unix_nojre.sh | sudo bash
 
   elif [ $cVerSO == "11" ]; then
 
