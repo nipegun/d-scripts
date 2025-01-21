@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar y configurar jDownloader en Debian
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/JDownloader-InstalarYConfigurar.sh | bash
+#
+# Ejecución remota como root:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/JDownloader-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/JDownloader-InstalarYConfigurar.sh | nano -
@@ -23,15 +26,6 @@
   # Para el color rojo también:
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
-
-# Comprobar si el script está corriendo como root
-  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
-  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
-    echo ""
-    exit
-  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -72,19 +66,21 @@
     echo ""
 
     # Instalar JRE
-      apt-get -y update
-      apt-get -y install default-jre
+      sudo apt-get -y update
+      sudo apt-get -y install default-jre
     # Ejecutar script original de instalación (alojado en hacks4geeks.com)
       # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
           echo ""
           echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
-          apt-get -y update
-          apt-get -y install curl
+          sudo apt-get -y update
+          sudo apt-get -y install curl
           echo ""
         fi
-      curl -sL http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/jDownloader/JDownloader2Setup_unix_nojre.sh | sudo bash
+      curl -L http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/jDownloader/JDownloader2Setup_unix_nojre.sh -o /tmp/jdownloader.sh
+      chmod +x /tmp/jdownloader.sh
+      sudo /tmp/jdownloader.sh
 
   elif [ $cVerSO == "11" ]; then
 
