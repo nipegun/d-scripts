@@ -194,13 +194,15 @@
       rm -rf /var/log/clamav/freshclam.log
       freshclam
 
-    # Otros
+    # Herramientas de documentos
       apt-get -y install libreoffice-l10n-es
+      apt-get -y install pdfarranger
+
+    # Otros
       apt-get -y install unrar
       apt-get -y install htop
       apt-get -y install simple-scan
-      apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
-      apt-get -y install android-tools-fastboot
+
       #apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
       #apt-get -y install comix
 
