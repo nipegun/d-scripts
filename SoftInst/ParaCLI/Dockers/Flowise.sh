@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar Flowise en el DockerCE de Debian
 #
-# Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-Flowise.sh | bash
+# Ejecución remota (puede requerir permisos sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/Flowise.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/Flowise.sh | sed 's-sudo--g' | bash
 # ----------
 
 cColorRojo='\033[1;31m'
@@ -58,8 +61,8 @@ elif [ $cVerSO == "12" ]; then
         echo ""
         echo "    El paquete dialog no está instalado. Iniciando su instalación..."
         echo ""
-        apt-get -y update
-        apt-get -y install dialog
+        sudo apt-get -y update
+        sudo apt-get -y install dialog
         echo ""
       fi
     menu=(dialog --checklist "¿Donde quieres instalar MediaWiki?:" 22 76 16)
@@ -78,29 +81,29 @@ elif [ $cVerSO == "12" ]; then
           echo ""
           echo -e "${cColorVerde}  Instalando Flowise en un ordenador o máquina virtual...${cFinColor}"
           echo ""
-          mkdir -p /Contenedores/Flowise/data 2> /dev/null
+          sudo mkdir -p /Contenedores/Flowise/data 2> /dev/null
 
           echo ""
           echo "  Creando el comando para iniciar el contenedor docker..."
           echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo ""                                                  >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo "  --name Flowise                               \\" >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo "  -p 3000:3000                                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo "  -v /Contenedores/Flowise/data:/data          \\" >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo "  flowiseai/flowise:latest"                        >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          chmod +x                                                    /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo ""                                                  | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo "  --name Flowise                               \\" | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo "  -v /Contenedores/Flowise/data:/data          \\" | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo "  flowiseai/flowise:latest"                        | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          sudo chmod +x                                                          /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
               
           echo ""
           echo "  Creando el comando post arranque..."
           echo ""
-          echo "/root/scripts/DockerCE-Cont-Iniciar-Flowise.sh" >> /root/scripts/ComandosPostArranque.sh
+          echo "/root/scripts/DockerCE-Cont-Iniciar-Flowise.sh" | sudo tee -a /root/scripts/ComandosPostArranque.sh
           echo ""
           echo "  Iniciando el container por primera vez..."
           echo ""
-          /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          sudo /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
 
         ;;
 
@@ -109,30 +112,30 @@ elif [ $cVerSO == "12" ]; then
           echo ""
           echo -e "${cColorVerde}  Instalando Flowise en un contenedor LXC...${cFinColor}"
           echo ""
-          mkdir -p /Host/Flowise/data 2> /dev/null
+          sudo mkdir -p /Host/Flowise/data 2> /dev/null
 
           echo ""
           echo "  Creando el comando para iniciar el contenedor docker..."
           echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo ""                                                  >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo "  --name Flowise                               \\" >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo "  -p 3000:3000                                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo "  -v /Host/Flowise/data:/data                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          echo "  flowiseai/flowise:latest"                        >> /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
-          chmod +x                                                    /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo ""                                                  | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo "  --name Flowise                               \\" | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo "  -v /Host/Flowise/data:/data                  \\" | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          echo "  flowiseai/flowise:latest"                        | sudo tee -a /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          sudo chmod +x                                                          /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
 
           echo ""
           echo "  Creando el comando post arranque..."
           echo ""
-          echo "/root/scripts/DockerCE-Cont-Iniciar-Flowise.sh" >> /root/scripts/ComandosPostArranque.sh
+          echo "/root/scripts/DockerCE-Cont-Iniciar-Flowise.sh" | sudo tee -a /root/scripts/ComandosPostArranque.sh
 
           echo ""
           echo "  Iniciando el container por primera vez..."
           echo ""
-          /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
+          sudo /root/scripts/DockerCE-Cont-Iniciar-Flowise.sh
 
         ;;
         
