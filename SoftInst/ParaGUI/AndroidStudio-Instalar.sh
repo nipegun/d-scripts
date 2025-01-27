@@ -84,9 +84,9 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Android Studio para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    vEnlace="https://r1---sn-vg5obxn25po-cpvs.gvt1.com/edgedl/android/studio/ide-zips/2024.2.2.13/android-studio-2024.2.2.13-linux.tar.gz"
+    # Determinar la última versión
+      cu
 
   elif [ $cVerSO == "11" ]; then
 
