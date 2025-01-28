@@ -276,7 +276,10 @@
       apt-get -y install torbrowser-launcher
       
       apt-get -y install keepassxc
+
+    # Tarjetas AMD
       apt-get -y install radeontop # Para ver la utilización de proceso y VRAM de las tarjetas amd, en vivo
+      apt-get -y install rocm-smi  # Para lo mismo que radeontop, pero con drivers rocm instalados
 
   elif [ $cVerSO == "11" ]; then
 
