@@ -276,6 +276,7 @@
       apt-get -y install torbrowser-launcher
       
       apt-get -y install keepassxc
+      apt-get -y install radeontop # Para ver la utilización de proceso y VRAM de las tarjetas amd, en vivo
 
   elif [ $cVerSO == "11" ]; then
 
