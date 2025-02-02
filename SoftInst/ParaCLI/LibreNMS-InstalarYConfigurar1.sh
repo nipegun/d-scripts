@@ -82,41 +82,71 @@
     echo ""
   fi
 
-    sudo apt-get -y update
-    sudo apt-get -y install acl
-    sudo apt-get -y install curl
-    sudo apt-get -y install fping
-    sudo apt-get -y install git
-    sudo apt-get -y install graphviz
-    sudo apt-get -y install imagemagick
-    sudo apt-get -y install mariadb-client
-    sudo apt-get -y install mariadb-server
-    sudo apt-get -y install mtr-tiny nginx-full
-    sudo apt-get -y install nmap php-cli
-    sudo apt-get -y install php-curl
-    sudo apt-get -y install php-fpm
-    sudo apt-get -y install php-gd
-    sudo apt-get -y install php-gmp
-    sudo apt-get -y install php-json
-    sudo apt-get -y install php-mbstring
-    sudo apt-get -y install php-mysql
-    sudo apt-get -y install php-snmp
-    sudo apt-get -y install php-xml
-    sudo apt-get -y install php-zip
-    sudo apt-get -y install rrdtool
-    sudo apt-get -y install snmp
-    sudo apt-get -y install snmpd unzip
-    sudo apt-get -y install python3-pymysql
-    sudo apt-get -y install python3-dotenv
-    sudo apt-get -y install python3-redis
-    sudo apt-get -y install python3-setuptools
-    sudo apt-get -y install python3-psutil
-    sudo apt-get -y install python3-systemd
-    sudo apt-get -y install python3-pip
-    sudo apt-get -y install whois
-    sudo apt-get -y install traceroute
 
+    # Instalar paquetes necesarios
+      sudo apt-get -y update
+      sudo apt-get -y install acl
+      sudo apt-get -y install curl
+      sudo apt-get -y install fping
+      sudo apt-get -y install git
+      sudo apt-get -y install graphviz
+      sudo apt-get -y install imagemagick
+      sudo apt-get -y install mariadb-client
+      sudo apt-get -y install mariadb-server
+      sudo apt-get -y install mtr-tiny nginx-full
+      sudo apt-get -y install nmap php-cli
+      sudo apt-get -y install php-curl
+      sudo apt-get -y install php-fpm
+      sudo apt-get -y install php-gd
+      sudo apt-get -y install php-gmp
+      sudo apt-get -y install php-json
+      sudo apt-get -y install php-mbstring
+      sudo apt-get -y install php-mysql
+      sudo apt-get -y install php-snmp
+      sudo apt-get -y install php-xml
+      sudo apt-get -y install php-zip
+      sudo apt-get -y install rrdtool
+      sudo apt-get -y install snmp
+      sudo apt-get -y install snmpd unzip
+      sudo apt-get -y install python3-pymysql
+      sudo apt-get -y install python3-dotenv
+      sudo apt-get -y install python3-redis
+      sudo apt-get -y install python3-setuptools
+      sudo apt-get -y install python3-psutil
+      sudo apt-get -y install python3-systemd
+      sudo apt-get -y install python3-pip
+      sudo apt-get -y install whois
+      sudo apt-get -y install traceroute
 
+    # Crear el usuario
+      sudo useradd librenms -d /opt/librenms -M -r -s "$(which bash)"
+
+    # Clonar el repo
+      cd /opt
+      git clone https://github.com/librenms/librenms.git
+
+    # Configurar permisos
+      chown -R librenms:librenms /opt/librenms
+      chmod 771 /opt/librenms
+      setfacl -d -m g::rwx /opt/librenms/rrd /opt/librenms/logs /opt/librenms/bootstrap/cache/ /opt/librenms/storage/
+      setfacl -R -m g::rwx /opt/librenms/rrd /opt/librenms/logs /opt/librenms/bootstrap/cache/ /opt/librenms/storage/
+
+    # Instalar dependencias de PHP
+      su - librenms
+        ./scripts/composer_wrapper.php install --no-dev
+      exit
+
+    # Instalar composer Wrapper
+      wget https://getcomposer.org/composer-stable.phar
+      mv composer-stable.phar /usr/bin/composer
+      chmod +x /usr/bin/composer
+
+    # Configurar la zona horaria en php
+      sed -i -e 's|;date.timezone =|date.timezone = Europe/Madrid|g' /etc/php/8.2/fpm/php.ini
+      sed -i -e 's|;date.timezone =|date.timezone = Europe/Madrid|g' /etc/php/8.2/cli/php.ini
+
+    # Configurar la zona horaria en el sistema
+      timedatectl set-timezone Etc/UTC
 
   elif [ $cVerSO == "11" ]; then
 
