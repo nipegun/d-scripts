@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar y configurar Zabbix en Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Zabbix-InstalarYConfigurar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Red-Zabbix-InstalarYConfigurar.sh | bash
 # ----------
 
 cColorAzul="\033[0;34m"
