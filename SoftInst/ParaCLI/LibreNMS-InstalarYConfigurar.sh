@@ -33,25 +33,6 @@
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
-# Comprobar si el script está corriendo como root
-  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
-  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
-    echo ""
-    exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    sudo apt-get -y update
-    sudo apt-get -y install curl
-    echo ""
-  fi
-
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
@@ -90,9 +71,53 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de LibreNMS para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
+
+# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
+    sudo apt-get -y update
+    sudo apt-get -y install curl
+    echo ""
+  fi
+
+    sudo apt-get -y update
+    sudo apt-get -y install
+    sudo apt-get -y acl
+    sudo apt-get -y curl
+    sudo apt-get -y fping
+    sudo apt-get -y git
+    sudo apt-get -y graphviz
+    sudo apt-get -y imagemagick
+    sudo apt-get -y mariadb-client
+    sudo apt-get -y mariadb-server
+    sudo apt-get -y mtr-tiny nginx-full
+    sudo apt-get -y nmap php-cli
+    sudo apt-get -y php-curl
+    sudo apt-get -y php-fpm
+    sudo apt-get -y php-gd
+    sudo apt-get -y php-gmp
+    sudo apt-get -y php-json
+    sudo apt-get -y php-mbstring
+    sudo apt-get -y php-mysql
+    sudo apt-get -y php-snmp
+    sudo apt-get -y php-xml
+    sudo apt-get -y php-zip
+    sudo apt-get -y rrdtool
+    sudo apt-get -y snmp
+    sudo apt-get -y snmpd unzip
+    sudo apt-get -y python3-pymysql
+    sudo apt-get -y python3-dotenv
+    sudo apt-get -y python3-redis
+    sudo apt-get -y python3-setuptools
+    sudo apt-get -y python3-psutil
+    sudo apt-get -y python3-systemd
+    sudo apt-get -y python3-pip
+    sudo apt-get -y whois
+    sudo apt-get -y traceroute
+
+
 
   elif [ $cVerSO == "11" ]; then
 
