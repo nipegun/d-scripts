@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar y configurar Nagios Core en Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Nagios-InstalarYConfigurar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/MonRed-Nagios-InstalarYConfigurar.sh | bash
 # ----------
 
 NagiosAdmin="nagiosadmin"
