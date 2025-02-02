@@ -54,45 +54,281 @@ cFinColor='\033[0m'
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Zabbix para Debian 7 (Wheezy)...${cFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Zabbix para Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Zabbix para Debian 13 ()...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
-elif [ $cVerSO == "9" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Zabbix para Debian 9 (Stretch)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Zabbix para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+  # Obtener el númer de la última versión LTS de Zabbix
+    echo ""
+    echo "    Obteniendo el número de la última versión LTS de Zabbix..."
+    echo ""
+    # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install curl
+        echo ""
+      fi
+    vUltVerLTS=""
 
-elif [ $cVerSO == "10" ]; then
+  # Crear el menú
+    # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install dialog
+        echo ""
+      fi
+    menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+      opciones=(
+        1 "Zabbix LTS con base de datos MariaDB y servidor web apache2." off
+        2 "Zabbix LTS con base de datos MariaDB y servidor web nginx." off
+        3 "Zabbix (última versión) con base de datos MariaDB y servidor web apache2." off
+        4 "Zabbix (última versión) con base de datos MariaDB y servidor web nginx." off
+      )
+    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Zabbix para Debian 10 (Buster)...${cFinColor}"
-  echo ""
+    for choice in $choices
+      do
+        case $choice in
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+          1)
+
+            echo ""
+            echo "  Instalando Zabbix LTS con base de datos MariaDB y servidor web apache2..."
+            echo ""
+
+            # Agregar el repositorio
+              echo ""
+              echo "    Agregando el repositorio..."
+              echo ""
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  sudo apt-get -y update
+                  sudo apt-get -y install wget
+                  echo ""
+                fi
+              sudo mkdir -p /root/SoftInst/Zabbix/
+              sudo wget https://repo.zabbix.com/zabbix/7.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_7.0+debian12_all.deb  -O /root/SoftInst/Zabbix/ZabbixRepo.deb             
+              sudo apt -y install /root/SoftInst/Zabbix/ZabbixRepo.deb
+              sudo apt-get -y update
+
+            # Instalar el frontend y el agente
+              echo ""
+              echo "    Instalando el frontend y el repositorio..."
+              echo ""
+              apt-get -y install zabbix-server-mysql
+              apt-get -y install zabbix-frontend-php
+              apt-get -y install zabbix-apache-conf
+              apt-get -y install zabbix-sql-scripts
+              apt-get -y install zabbix-agent
+              apt-get -y install mariadb-server
+
+            # Crear la base de datos
+              echo ""
+              echo "    Creando la base de datos..."
+              echo ""
+              mysql -uroot -prootMySQL -e "create database zabbix character set utf8mb4 collate utf8mb4_bin"
+              mysql -uroot -prootMySQL -e "create user zabbix@localhost identified by 'Pass123'"
+              mysql -uroot -prootMySQL -e "grant all privileges on zabbix.* to zabbix@localhost"
+              mysql -uroot -prootMySQL -e "set global log_bin_trust_function_creators = 1"
+
+            # Importando el esquema y los datos iniciales
+              # Comprobar si el paquete gzip está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s gzip 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}    El paquete gzip no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  sudo apt-get -y update
+                  sudo apt-get -y install gzip
+                  echo ""
+                fi
+              zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -pPass123 zabbix
+              # Deshabilitar log_bin_trust_function_creators
+                mysql -uroot -prootMySQL -e "set global log_bin_trust_function_creators = 0"
+ 
+            # Indicar el password de la base de datos en el archivo de configuración
+              sed -i -e 's|DBPassword=.*|\nDBPassword=Pass123|g' /etc/zabbix/zabbix_server.conf
+
+            # Asegurarse que la configuración locale del Debian sea la correcta
+              echo "es_ES.UTF-8 UTF-8"  > /etc/locale.gen
+              echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+              apt-get -y update
+              apt-get -y install locales
+              locale-gen --purge es_ES.UTF-8 en_US.UTF-8
+              # Cambiar de false a true la línea que tenga como idioma es_ES
+                sed -i -e '/es_ES/s/false/true/g' /usr/share/zabbix/include/locales.inc.php
+
+            # Iniciar el servidor y el agente
+              #systemctl restart zabbix-server
+              #systemctl restart zabbix-agent
+              #systemctl restart apache2
+              systemctl enable zabbix-server --now
+              systemctl enable zabbix-agent  --now
+              systemctl enable apache2       --now
+
+            # Mostrar mensaje de fin
+              vIPHostZabbix=$(hostname -I)
+              echo ""
+              echo "  Instalación de Zabbix LTS con servidor Web apache2 y base de datos MySQL, finalizada."
+              echo ""
+              echo "    Para conectarte a la web del servidor accede a la siguiente URL:"
+              echo "      http://$vIPHostZabbix/zabbix"
+              echo ""
+              echo "      El usuario por defecto es Admin y la contraseña zabbix."
+              echo ""
+
+          ;;
+
+          2)
+
+            echo ""
+            echo "  Instalando Zabbix LTS con base de datos MariaDB y servidor web nginx..."
+            echo ""
+
+            # Agregar el repositorio
+              echo ""
+              echo "    Agregando el repositorio..."
+              echo ""
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  sudo apt-get -y update
+                  sudo apt-get -y install wget
+                  echo ""
+                fi
+              sudo mkdir -p /root/SoftInst/Zabbix/
+              sudo wget https://repo.zabbix.com/zabbix/7.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_7.0+debian12_all.deb  -O /root/SoftInst/Zabbix/ZabbixRepo.deb             
+              sudo apt -y install /root/SoftInst/Zabbix/ZabbixRepo.deb
+              sudo apt-get -y update
+
+            # Instalar el frontend y el agente
+              echo ""
+              echo "    Instalando el frontend y el repositorio..."
+              echo ""
+              sudo apt-get -y install zabbix-server-mysql
+              sudo apt-get -y install zabbix-frontend-php
+              sudo apt-get -y install zabbix-nginx-conf
+              sudo apt-get -y install zabbix-sql-scripts
+              sudo apt-get -y install zabbix-agent
+
+            # Crear la base de datos
+              echo ""
+              echo "    Creando la base de datos..."
+              echo ""
+              mysql -uroot -prootMySQL -e "create database zabbix character set utf8mb4 collate utf8mb4_bin"
+              mysql -uroot -prootMySQL -e "create user zabbix@localhost identified by 'Pass123'"
+              mysql -uroot -prootMySQL -e "grant all privileges on zabbix.* to zabbix@localhost"
+              mysql -uroot -prootMySQL -e "set global log_bin_trust_function_creators = 1"
+
+            # Importando el esquema y los datos iniciales
+              # Comprobar si el paquete gzip está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s gzip 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}    El paquete gzip no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  sudo apt-get -y update
+                  sudo apt-get -y install gzip
+                  echo ""
+                fi
+              zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -pPass123 zabbix
+              # Deshabilitar log_bin_trust_function_creators
+                mysql -uroot -prootMySQL -e "set global log_bin_trust_function_creators = 0"
+ 
+            # Indicar el password de la base de datos en el archivo de configuración
+              sed -i -e 's|DBPassword=.*|\nDBPassword=Pass123|g' /etc/zabbix/zabbix_server.conf
+
+            # Modificar conf de nginx
+              sed -i -e 's|8080;|\n  listen 8080;|g'                     /etc/zabbix/nginx.conf
+              sed -i -e 's|example.com;|\n  server_name example.com; |g' /etc/zabbix/nginx.conf
+              sed -i -e 's|^#.*||g'                                      /etc/zabbix/nginx.conf
+
+            # Asegurarse que la configuración locale del Debian sea la correcta
+              echo "es_ES.UTF-8 UTF-8"  > /etc/locale.gen
+              echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+              apt-get -y update && apt-get -y install locales
+              locale-gen --purge es_ES.UTF-8 en_US.UTF-8
+              # Cambiar de false a true la línea que tenga como idioma es_ES
+                sed -i -e '/es_ES/s/false/true/g' /usr/share/zabbix/include/locales.inc.php
+
+            # Desinstalar apache2, por si está instalado
+              sudo apt-get -y autoremove apache2
+              sudo apt-get -y purge apache2
+
+            # Quitar el sitio por defecto de nginx
+              sudo unlink /etc/nginx/sites-enabled/default
+
+            # Iniciar el servidor y el agente
+              sudo systemctl restart zabbix-server
+              sudo systemctl restart zabbix-agent
+              sudo systemctl restart nginx
+              sudo systemctl restart php8.2-fpm
+              sudo systemctl enable zabbix-server --now
+              sudo systemctl enable zabbix-agent  --now
+              sudo systemctl enable nginx         --now
+              sudo systemctl enable php8.2-fpm    --now
+
+            # Mostrar mensaje de fin
+              vIPHostZabbix=$(hostname -I | sed 's- --g')
+              echo ""
+              echo "  Instalación de Zabbix LTS con servidor Web apache2 y base de datos MySQL, finalizada."
+              echo ""
+              echo "    Para conectarte a la web del servidor accede a la siguiente URL:"
+              echo "      http://$vIPHostZabbix:8080"
+              echo ""
+              echo "      El usuario por defecto es Admin y la contraseña zabbix."
+              echo ""
+
+          ;;
+
+          3)
+
+            echo ""
+            echo "  Instalando Zabbix (última versión) con base de datos MariaDB y servidor web apache2..."
+            echo ""
+
+            echo ""
+            echo -e "${cColorRojo}    Comandos todavía no preparados...${cFinColor}"
+            echo ""
+
+          ;;
+
+          4)
+
+            echo ""
+            echo "  Instalando Zabbix (última versión) con base de datos MariaDB y servidor web nginx..."
+            echo ""
+
+            echo ""
+            echo -e "${cColorRojo}    Comandos todavía no preparados...${cFinColor}"
+            echo ""
+
+          ;;
+
+      esac
+
+  done
 
 elif [ $cVerSO == "11" ]; then
 
@@ -357,6 +593,46 @@ elif [ $cVerSO == "11" ]; then
       esac
 
   done
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Zabbix para Debian 10 (Buster)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "9" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Zabbix para Debian 9 (Stretch)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "8" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Zabbix para Debian 8 (Jessie)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Zabbix para Debian 7 (Wheezy)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
 
 fi
 
