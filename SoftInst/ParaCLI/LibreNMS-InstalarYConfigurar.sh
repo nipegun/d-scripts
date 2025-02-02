@@ -123,6 +123,7 @@
       su - librenms
         ./scripts/composer_wrapper.php install --no-dev
       exit
+      su librenms -c "pip3 install -r /opt/librenms/requirements.txt --break-system-packages"
 
     # Configurar la zona horaria en php
       sudo sed -i -e 's|;date.timezone =|date.timezone = Europe/Madrid|g' /etc/php/8.2/fpm/php.ini
