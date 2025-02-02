@@ -120,14 +120,9 @@
       sudo setfacl -R -m g::rwx /opt/librenms/rrd /opt/librenms/logs /opt/librenms/bootstrap/cache/ /opt/librenms/storage/
 
     # Instalar dependencias de PHP
-      #su - librenms
-      #  ./scripts/composer_wrapper.php install --no-dev
-      #exit
-
-    # Instalar composer Wrapper
-      sudo wget https://getcomposer.org/composer-stable.phar
-      sudo mv composer-stable.phar /usr/bin/composer
-      sudo chmod +x /usr/bin/composer
+      su - librenms
+        ./scripts/composer_wrapper.php install --no-dev
+      exit
 
     # Configurar la zona horaria en php
       sudo sed -i -e 's|;date.timezone =|date.timezone = Europe/Madrid|g' /etc/php/8.2/fpm/php.ini
@@ -158,33 +153,30 @@
       sudo sed -i -e 's|group = www-data|group = librenms|g'                                            /etc/php/8.2/fpm/pool.d/librenms.conf
       sudo sed -i -e 's|listen = /run/php/php8.2-fpm.sock|listen = /run/php/php8.2-fpm-librenms.sock|g' /etc/php/8.2/fpm/pool.d/librenms.conf
 
-    #Change listen to a unique path that must match your webserver's config (fastcgi_pass for NGINX and SetHandler for Apache) :
-    # listen = /run/php-fpm-librenms.sock
-
     # Al ser LibreNMS la única app PHP borramos la www por defecto
       sudo mv /etc/php/8.2/fpm/pool.d/www.conf /etc/php/8.2/fpm/pool.d/www.conf.bak
 
     # Crear la web en nginx
-      echo 'server {'                                       | sudo tee    /etc/nginx/conf.d/librenms.conf
-      echo 'listen      80;'                                | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo 'server_name librenms.example.com;'              | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo 'root        /opt/librenms/html;'                | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo 'index       index.php;'                         | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo 'charset utf-8;'                                 | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo 'gzip on;'                                       | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'server {'                                             | sudo tee    /etc/nginx/conf.d/librenms.conf
+      echo 'listen      80;'                                      | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'server_name librenms.example.com;'                    | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'root        /opt/librenms/html;'                      | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'index       index.php;'                               | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'charset utf-8;'                                       | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'gzip on;'                                             | sudo tee -a /etc/nginx/conf.d/librenms.conf
       echo 'gzip_types text/css application/javascript text/javascript application/x-javascript image/svg+xml text/plain text/xsd text/xsl text/xml image/x-icon;' | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo 'location / {'                                   | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo 'try_files $uri $uri/ /index.php?$query_string;' | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo '}'                                              | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo 'location ~ [^/]\.php(/|$) {'                    | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo 'fastcgi_pass unix:/run/php-fpm-librenms.sock;'  | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo 'fastcgi_split_path_info ^(.+\.php)(/.+)$;'      | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo 'include fastcgi.conf;'                          | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo '}'                                              | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo 'location ~ /\.(?!well-known).* {'               | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo 'deny all;'                                      | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo '}'                                              | sudo tee -a /etc/nginx/conf.d/librenms.conf
-      echo '}'                                              | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'location / {'                                         | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'try_files $uri $uri/ /index.php?$query_string;'       | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo '}'                                                    | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'location ~ [^/]\.php(/|$) {'                          | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'fastcgi_pass unix:/run/php/php8.2-fpm-librenms.sock;' | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'fastcgi_split_path_info ^(.+\.php)(/.+)$;'            | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'include fastcgi.conf;'                                | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo '}'                                                    | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'location ~ /\.(?!well-known).* {'                     | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'deny all;'                                            | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo '}'                                                    | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo '}'                                                    | sudo tee -a /etc/nginx/conf.d/librenms.conf
     sudo rm /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
     sudo systemctl restart nginx
     sudo systemctl restart php8.2-fpm
