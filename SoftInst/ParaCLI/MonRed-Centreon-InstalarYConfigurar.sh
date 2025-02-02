@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar y configurar Centreon en Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Centreon-InstalarYConfigurar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/MonRed-Centreon-InstalarYConfigurar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
