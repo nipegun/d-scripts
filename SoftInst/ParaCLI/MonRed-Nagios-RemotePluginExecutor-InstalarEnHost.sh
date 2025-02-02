@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar y configurar el servidor nrpe de Nagios Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Nagios-RemotePluginExecutor-InstalarEnHost.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/MonRed-Nagios-RemotePluginExecutor-InstalarEnHost.sh | bash
 # ----------
 
 ColorAzul="\033[0;34m"
