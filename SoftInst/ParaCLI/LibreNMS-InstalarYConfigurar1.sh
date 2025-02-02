@@ -83,39 +83,38 @@
   fi
 
     sudo apt-get -y update
-    sudo apt-get -y install
-    sudo apt-get -y acl
-    sudo apt-get -y curl
-    sudo apt-get -y fping
-    sudo apt-get -y git
-    sudo apt-get -y graphviz
-    sudo apt-get -y imagemagick
-    sudo apt-get -y mariadb-client
-    sudo apt-get -y mariadb-server
-    sudo apt-get -y mtr-tiny nginx-full
-    sudo apt-get -y nmap php-cli
-    sudo apt-get -y php-curl
-    sudo apt-get -y php-fpm
-    sudo apt-get -y php-gd
-    sudo apt-get -y php-gmp
-    sudo apt-get -y php-json
-    sudo apt-get -y php-mbstring
-    sudo apt-get -y php-mysql
-    sudo apt-get -y php-snmp
-    sudo apt-get -y php-xml
-    sudo apt-get -y php-zip
-    sudo apt-get -y rrdtool
-    sudo apt-get -y snmp
-    sudo apt-get -y snmpd unzip
-    sudo apt-get -y python3-pymysql
-    sudo apt-get -y python3-dotenv
-    sudo apt-get -y python3-redis
-    sudo apt-get -y python3-setuptools
-    sudo apt-get -y python3-psutil
-    sudo apt-get -y python3-systemd
-    sudo apt-get -y python3-pip
-    sudo apt-get -y whois
-    sudo apt-get -y traceroute
+    sudo apt-get -y install acl
+    sudo apt-get -y install curl
+    sudo apt-get -y install fping
+    sudo apt-get -y install git
+    sudo apt-get -y install graphviz
+    sudo apt-get -y install imagemagick
+    sudo apt-get -y install mariadb-client
+    sudo apt-get -y install mariadb-server
+    sudo apt-get -y install mtr-tiny nginx-full
+    sudo apt-get -y install nmap php-cli
+    sudo apt-get -y install php-curl
+    sudo apt-get -y install php-fpm
+    sudo apt-get -y install php-gd
+    sudo apt-get -y install php-gmp
+    sudo apt-get -y install php-json
+    sudo apt-get -y install php-mbstring
+    sudo apt-get -y install php-mysql
+    sudo apt-get -y install php-snmp
+    sudo apt-get -y install php-xml
+    sudo apt-get -y install php-zip
+    sudo apt-get -y install rrdtool
+    sudo apt-get -y install snmp
+    sudo apt-get -y install snmpd unzip
+    sudo apt-get -y install python3-pymysql
+    sudo apt-get -y install python3-dotenv
+    sudo apt-get -y install python3-redis
+    sudo apt-get -y install python3-setuptools
+    sudo apt-get -y install python3-psutil
+    sudo apt-get -y install python3-systemd
+    sudo apt-get -y install python3-pip
+    sudo apt-get -y install whois
+    sudo apt-get -y install traceroute
 
 
 
