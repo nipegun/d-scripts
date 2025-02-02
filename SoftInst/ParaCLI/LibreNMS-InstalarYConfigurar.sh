@@ -71,18 +71,6 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de LibreNMS para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    sudo apt-get -y update
-    sudo apt-get -y install curl
-    echo ""
-  fi
-
-
     # Instalar paquetes necesarios
       sudo apt-get -y update
       sudo apt-get -y install acl
@@ -123,13 +111,13 @@
 
     # Clonar el repo
       cd /opt
-      git clone https://github.com/librenms/librenms.git
+      sudo git clone https://github.com/librenms/librenms.git
 
     # Configurar permisos
-      chown -R librenms:librenms /opt/librenms
-      chmod 771 /opt/librenms
-      setfacl -d -m g::rwx /opt/librenms/rrd /opt/librenms/logs /opt/librenms/bootstrap/cache/ /opt/librenms/storage/
-      setfacl -R -m g::rwx /opt/librenms/rrd /opt/librenms/logs /opt/librenms/bootstrap/cache/ /opt/librenms/storage/
+      sudo chown -R librenms:librenms /opt/librenms
+      sudo chmod 771 /opt/librenms
+      sudo setfacl -d -m g::rwx /opt/librenms/rrd /opt/librenms/logs /opt/librenms/bootstrap/cache/ /opt/librenms/storage/
+      sudo setfacl -R -m g::rwx /opt/librenms/rrd /opt/librenms/logs /opt/librenms/bootstrap/cache/ /opt/librenms/storage/
 
     # Instalar dependencias de PHP
       #su - librenms
@@ -137,20 +125,105 @@
       #exit
 
     # Instalar composer Wrapper
-      wget https://getcomposer.org/composer-stable.phar
-      mv composer-stable.phar /usr/bin/composer
-      chmod +x /usr/bin/composer
+      sudo wget https://getcomposer.org/composer-stable.phar
+      sudo mv composer-stable.phar /usr/bin/composer
+      sudo chmod +x /usr/bin/composer
 
     # Configurar la zona horaria en php
-      sed -i -e 's|;date.timezone =|date.timezone = Europe/Madrid|g' /etc/php/8.2/fpm/php.ini
-      sed -i -e 's|;date.timezone =|date.timezone = Europe/Madrid|g' /etc/php/8.2/cli/php.ini
+      sudo sed -i -e 's|;date.timezone =|date.timezone = Europe/Madrid|g' /etc/php/8.2/fpm/php.ini
+      sudo sed -i -e 's|;date.timezone =|date.timezone = Europe/Madrid|g' /etc/php/8.2/cli/php.ini
 
     # Configurar la zona horaria en el sistema
-      timedatectl set-timezone Europe/Madrid
+      sudo timedatectl set-timezone Europe/Madrid
 
     # Modificar la configuración de servidor mariadb
-      cp /etc/mysql/mariadb.conf.d/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf.bak.ori
-      sed -i '/^\[mysqld\]/a\innodb_file_per_table=1\nlower_case_table_names=0' /etc/mysql/mariadb.conf.d/50-server.cnf
+      sudo cp /etc/mysql/mariadb.conf.d/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf.bak.ori
+      sudo sed -i '/^\[mysqld\]/a\innodb_file_per_table=1\nlower_case_table_names=0' /etc/mysql/mariadb.conf.d/50-server.cnf
+      sudo systemctl enable mariadb
+      sudo systemctl restart mariadb
+
+    # Cambiar el password del root
+      echo ""
+      echo "  Se procederá a cambiar el password del root de MariaDB."
+      echo "  Si nunca has cambiado el password antes, simplemente presiona Enter."
+      echo ""
+      sudo mariadb -u root -p -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'rootMySQL'; FLUSH PRIVILEGES;"
+
+    # Efectuar cambios en el servidor MariaDB
+      sudo mariadb -u root -prootMySQL -e "CREATE DATABASE librenms CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; CREATE USER 'librenms'@'localhost' IDENTIFIED BY 'password'; GRANT ALL PRIVILEGES ON librenms.* TO 'librenms'@'localhost'; FLUSH PRIVILEGES;"
+
+    # Configurar PHP-FPM
+      sudo cp /etc/php/8.2/fpm/pool.d/www.conf /etc/php/8.2/fpm/pool.d/librenms.conf
+      sudo sed -i -e 's|user = www-data|user = librenms|g'   /etc/php/8.2/fpm/pool.d/librenms.conf
+      sudo sed -i -e 's|group = www-data|group = librenms|g' /etc/php/8.2/fpm/pool.d/librenms.conf
+
+    #Change listen to a unique path that must match your webserver's config (fastcgi_pass for NGINX and SetHandler for Apache) :
+    # listen = /run/php-fpm-librenms.sock
+
+    # Al ser LibreNMS la única app PHP borramos la www por defecto
+      sudo mv /etc/php/8.2/fpm/pool.d/www.conf /etc/php/8.2/fpm/pool.d/www.conf.bak
+
+    # Crear la web en nginx
+      echo 'server {'                                       | sudo tee    /etc/nginx/conf.d/librenms.conf
+      echo 'listen      80;'                                | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'server_name librenms.example.com;'              | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'root        /opt/librenms/html;'                | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'index       index.php;'                         | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'charset utf-8;'                                 | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'gzip on;'                                       | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'gzip_types text/css application/javascript text/javascript application/x-javascript image/svg+xml text/plain text/xsd text/xsl text/xml image/x-icon;' | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'location / {'                                   | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'try_files $uri $uri/ /index.php?$query_string;' | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo '}'                                              | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'location ~ [^/]\.php(/|$) {'                    | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'fastcgi_pass unix:/run/php-fpm-librenms.sock;'  | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'fastcgi_split_path_info ^(.+\.php)(/.+)$;'      | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'include fastcgi.conf;'                          | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo '}'                                              | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'location ~ /\.(?!well-known).* {'               | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo 'deny all;'                                      | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo '}'                                              | sudo tee -a /etc/nginx/conf.d/librenms.conf
+      echo '}'                                              | sudo tee -a /etc/nginx/conf.d/librenms.conf
+    sudo rm /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default
+    sudo systemctl restart nginx
+    sudo systemctl restart php8.2-fpm
+
+    # Activar el completado de comandos usando tab
+      sudo ln -s /opt/librenms/lnms /usr/bin/lnms
+      sudo cp /opt/librenms/misc/lnms-completion.bash /etc/bash_completion.d/
+
+    # Configurar snmpd
+      sudo cp /opt/librenms/snmpd.conf.example /etc/snmp/snmpd.conf
+      sudo sed -i -e 's|RANDOMSTRINGGOESHERE|PonerLaComunidadSNMPAqui|g' /etc/snmp/snmpd.conf
+      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install curl
+          echo ""
+        fi
+      sudo curl -L https://raw.githubusercontent.com/librenms/librenms-agent/master/snmp/distro -o /usr/bin/distro
+      sudo chmod +x /usr/bin/distro
+      sudo systemctl enable snmpd
+      sudo systemctl restart snmpd
+
+    # Tareas Cron
+      sudo cp /opt/librenms/dist/librenms.cron /etc/cron.d/librenms
+
+    # Activar el programador
+      sudo cp /opt/librenms/dist/librenms-scheduler.service /opt/librenms/dist/librenms-scheduler.timer /etc/systemd/system/
+      sudo systemctl enable librenms-scheduler.timer
+      sudo systemctl start librenms-scheduler.timer
+
+    # Copiar la configuración de logrotate
+      sudo cp /opt/librenms/misc/librenms.logrotate /etc/logrotate.d/librenms
+
+    # Notificar fin de ejecución del script
+      echo ""
+      echo "  El script de instalación de LibreNMS para Debian ha finalizado."
+      echo ""
 
   elif [ $cVerSO == "11" ]; then
 
