@@ -154,8 +154,9 @@
 
     # Configurar PHP-FPM
       sudo cp /etc/php/8.2/fpm/pool.d/www.conf /etc/php/8.2/fpm/pool.d/librenms.conf
-      sudo sed -i -e 's|user = www-data|user = librenms|g'   /etc/php/8.2/fpm/pool.d/librenms.conf
-      sudo sed -i -e 's|group = www-data|group = librenms|g' /etc/php/8.2/fpm/pool.d/librenms.conf
+      sudo sed -i -e 's|user = www-data|user = librenms|g'                                              /etc/php/8.2/fpm/pool.d/librenms.conf
+      sudo sed -i -e 's|group = www-data|group = librenms|g'                                            /etc/php/8.2/fpm/pool.d/librenms.conf
+      sudo sed -i -e 's|listen = /run/php/php8.2-fpm.sock|listen = /run/php/php8.2-fpm-librenms.sock|g' /etc/php/8.2/fpm/pool.d/librenms.conf
 
     #Change listen to a unique path that must match your webserver's config (fastcgi_pass for NGINX and SetHandler for Apache) :
     # listen = /run/php-fpm-librenms.sock
