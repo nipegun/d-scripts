@@ -132,9 +132,9 @@
       setfacl -R -m g::rwx /opt/librenms/rrd /opt/librenms/logs /opt/librenms/bootstrap/cache/ /opt/librenms/storage/
 
     # Instalar dependencias de PHP
-      su - librenms
-        ./scripts/composer_wrapper.php install --no-dev
-      exit
+      #su - librenms
+      #  ./scripts/composer_wrapper.php install --no-dev
+      #exit
 
     # Instalar composer Wrapper
       wget https://getcomposer.org/composer-stable.phar
@@ -146,7 +146,11 @@
       sed -i -e 's|;date.timezone =|date.timezone = Europe/Madrid|g' /etc/php/8.2/cli/php.ini
 
     # Configurar la zona horaria en el sistema
-      timedatectl set-timezone Etc/UTC
+      timedatectl set-timezone Europe/Madrid
+
+    # Modificar la configuración de servidor mariadb
+      cp /etc/mysql/mariadb.conf.d/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf.bak.ori
+      sed -i '/^\[mysqld\]/a\innodb_file_per_table=1\nlower_case_table_names=0' /etc/mysql/mariadb.conf.d/50-server.cnf
 
   elif [ $cVerSO == "11" ]; then
 
