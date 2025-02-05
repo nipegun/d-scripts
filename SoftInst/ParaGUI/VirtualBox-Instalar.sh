@@ -72,7 +72,8 @@ elif [ $cVerSO == "12" ]; then
       echo ""
       echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
-      apt-get -y update && apt-get -y install dialog
+      apt-get -y update
+      apt-get -y install dialog
       echo ""
     fi
 
@@ -161,7 +162,8 @@ elif [ $cVerSO == "12" ]; then
                   echo ""
                   echo "    El paquete curl no está instalado. Iniciando su instalación..."
                   echo ""
-                  apt-get -y update && apt-get -y install curl
+                  sudo apt-get -y update
+                  sudo apt-get -y install curl
                   echo ""
                 fi
               vUltVersEnWeb=$(curl -sL http://download.virtualbox.org/virtualbox/LATEST.TXT)
@@ -180,14 +182,14 @@ elif [ $cVerSO == "12" ]; then
               echo ""
               echo "  Descargando archivo .deb..."
               echo ""
-              mkdir -p /root/SoftInst/VirtualBox/
-              cd /root/SoftInst/VirtualBox/
+              cd /tmp/
               # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
                   echo "    El paquete wget no está instalado. Iniciando su instalación..."
                   echo ""
-                  apt-get -y update && apt-get -y install wget
+                  sudo apt-get -y update
+                  sudo apt-get -y install wget
                   echo ""
                 fi
               wget https://download.virtualbox.org/virtualbox/$vUltVersEnWeb/$vEnlaceArchivoDeb
@@ -196,15 +198,15 @@ elif [ $cVerSO == "12" ]; then
               echo ""
               echo "  Instalando el paquete .deb..."
               echo ""
-              apt -y install /root/SoftInst/VirtualBox/$vEnlaceArchivoDeb
+              sudo apt -y install /tmp/$vEnlaceArchivoDeb
 
             # Instalar el pack de extensiones
               echo ""
               echo "  Instalando el pack de extensiones..."
               echo ""
-              cd /root/SoftInst/VirtualBox/
+              cd /tmp/
               wget http://download.virtualbox.org/virtualbox/$vUltVersEnWeb/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
-              echo y | vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
+              echo y | sudo vboxmanage extpack install --replace /tmp/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
 
           ;;
 
