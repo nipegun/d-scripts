@@ -71,13 +71,13 @@ elif [ $cVerSO == "12" ]; then
       echo ""
       echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
-      apt-get -y update && apt-get -y install curl
+      sudo apt-get -y update
+      sudo apt-get -y install curl
       echo ""
     fi
-  mkdir -p /root/SoftInst/Discord
-  curl -L https://discordapp.com/api/download?platform=linux&format=deb -o /root/SoftInst/Discord/discord.deb 
-  apt-get -y install libappindicator1
-  apt -y install /root/SoftInst/Discord/discord.deb
+  curl -L "https://discordapp.com/api/download?platform=linux&format=deb" -o /tmp/discord.deb
+  sudo apt-get -y install libappindicator1
+  sudo apt -y install /tmp/discord.deb
 
 elif [ $cVerSO == "11" ]; then
 
