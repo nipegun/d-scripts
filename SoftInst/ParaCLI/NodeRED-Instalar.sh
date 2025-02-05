@@ -88,6 +88,8 @@
     sudo apt-get -y install nodejs
     sudo apt-get -y install npm
     sudo npm install -g grunt-cli
+    mkdir ~/repos/
+    cd ~/repos/
     git clone https://github.com/node-red/node-red.git
     cd node-red
     git checkout master
@@ -95,7 +97,10 @@
     # Construir NodeRED
       grunt build
     # Iniciar
-      npm start -- <args>
+      echo ""
+      echo "  Lanzando NodeRED..."
+      echo ""
+      npm start &
 
   elif [ $cVerSO == "11" ]; then
 
