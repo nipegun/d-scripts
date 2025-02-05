@@ -100,7 +100,7 @@
       echo ""
       echo "  Lanzando NodeRED..."
       echo ""
-      npm start &
+      npm start
 
   elif [ $cVerSO == "11" ]; then
 
