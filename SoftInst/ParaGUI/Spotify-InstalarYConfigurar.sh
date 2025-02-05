@@ -61,7 +61,7 @@
   if [ $cVerSO == "13" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 13 (x)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Spotify para Debian 13 (x)...${cFinColor}"
     echo ""
 
     echo ""
@@ -71,14 +71,14 @@
   elif [ $cVerSO == "12" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 12 (Bookworm)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Spotify para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
     # Agregar el repositorio
       echo ''
       echo '    Agregando el repositorio...'
       echo ''
-      echo 'deb http://repository.spotify.com stable non-free' > /etc/apt/sources.list.d/spotify.list
+      echo 'deb http://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list
 
     # Agregar la clave para firmar el repositorio
       echo ''
@@ -89,7 +89,8 @@
           echo ""
           echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
-          apt-get -y update && apt-get -y install curl
+          sudo apt-get -y update
+          sudo apt-get -y install curl
           echo ""
         fi
       curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg > /tmp/Spotify.gpg
@@ -103,27 +104,28 @@
           echo ""
           echo -e "${cColorRojo}      El paquete gpg no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
-          apt-get -y update && apt-get -y install gpg
+          sudo apt-get -y update
+          sudo apt-get -y install gpg
           echo ""
         fi
-      gpg --yes -o /etc/apt/trusted.gpg.d/spotify.gpg --dearmor /tmp/Spotify.gpg
+      sudo gpg --yes -o /etc/apt/trusted.gpg.d/spotify.gpg --dearmor /tmp/Spotify.gpg
 
     # Actualizar la lista de los paquetes disponibles en los repositorios instalados
       echo ''
       echo '    Actualizando la lista de los paquetes disponibles en los repositorios instalados...'
       echo ''
-      apt-get -y update
+      sudo apt-get -y update
 
     # Instalar el paquete
       echo ''
       echo '    Instalando el paquete...'
       echo ''
-      apt-get -y install spotify-client
+      sudo apt-get -y install spotify-client
 
   elif [ $cVerSO == "11" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Spotify para Debian 11 (Bullseye)...${cFinColor}"
     echo ""
 
     echo ""
@@ -133,7 +135,7 @@
   elif [ $cVerSO == "10" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Spotify para Debian 10 (Buster)...${cFinColor}"
     echo ""
 
     echo ""
@@ -143,7 +145,7 @@
   elif [ $cVerSO == "9" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Spotify para Debian 9 (Stretch)...${cFinColor}"
     echo ""
 
     echo ""
@@ -153,7 +155,7 @@
   elif [ $cVerSO == "8" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Spotify para Debian 8 (Jessie)...${cFinColor}"
     echo ""
 
     echo ""
@@ -163,7 +165,7 @@
   elif [ $cVerSO == "7" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Spotify para Debian 7 (Wheezy)...${cFinColor}"
     echo ""
 
     echo ""
