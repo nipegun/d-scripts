@@ -8,100 +8,44 @@
 # ----------
 # Script de NiPeGun para instalar OracleLinux en el DockerCE de Debian
 #
-# Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-OracleLinux.sh | bash
+# Ejecución remota (puede requerir permisos sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/OracleLinux.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/OracleLinux.sh | sed 's-sudo--g' | bash
 # ----------
 
 VerOLDeseada=8
 
-cColorRojo='\033[1;31m'
-cColorVerde='\033[1;32m'
-cFinColor='\033[0m'
+# Definir constantes de color
+  cColorAzul='\033[0;34m'
+  cColorAzulClaro='\033[1;34m'
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
 
-# Determinar la versión de Debian
-  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
-    . /etc/os-release
-    cNomSO=$NAME
-    cVerSO=$VERSION_ID
-  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
-    cNomSO=$(lsb_release -si)
-    cVerSO=$(lsb_release -sr)
-  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
-    . /etc/lsb-release
-    cNomSO=$DISTRIB_ID
-    cVerSO=$DISTRIB_RELEASE
-  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
-    cNomSO=Debian
-    cVerSO=$(cat /etc/debian_version)
-  else                                        # Para el viejo uname (También funciona para BSD).
-    cNomSO=$(uname -s)
-    cVerSO=$(uname -r)
-  fi
-
-if [ $cVerSO == "7" ]; then
-
+# Notificar inicio de ejecución del script
   echo ""
-  
-  echo "  Iniciando el script de instalación de OracleLinux en el DockerCE de Debian 7 (Wheezy)..."  
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de OracleLinux en el DockerCE de Debian...${cFinColor}"
   echo ""
 
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  
-  echo "  Iniciando el script de instalación de OracleLinux en el DockerCE de Debian 8 (Jessie)..."  
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "9" ]; then
-
-  echo ""
-  echo "---------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de OracleLinux en el DockerCE de Debian 9 (Stretch)..."  echo "---------------------------------------------------------------------------------------------"
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "10" ]; then
-
-  echo ""
-  echo "---------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de OracleLinux en el DockerCE de Debian 10 (Buster)..."  echo "---------------------------------------------------------------------------------------------"
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
-  echo ""
- 
-elif [ $cVerSO == "11" ]; then
-
-  echo ""
-  echo "-----------------------------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de OracleLinux en el DockerCE de Debian 11 (Bullseye)..."  echo "-----------------------------------------------------------------------------------------------"
-  echo ""
-
+# Crear el menú
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
-     echo ""
-     echo "  dialog no está instalado. Iniciando su instalación..."     echo ""
-     apt-get -y update && apt-get -y install dialog
-     echo ""
-   fi
-  menu=(dialog --timeout 5 --checklist "¿Donde quieres instalar OracleLinux?:" 22 76 16)
+      echo ""
+      echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+      echo "   "
+      echo ""
+      sudo apt-get -y update
+      sudo apt-get -y install dialog
+      echo ""
+    fi
+  menu=(dialog --checklist "¿Donde quieres instalar OracleLinux?:" 22 76 16)
     opciones=(
-      1 "En un ordenador o máquina virtual" on
-      2 "En un contenedor LXC de Proxmox" off
-      3 "..." off
-      4 "..." off
+      1 "En un ordenador o máquina virtual" off
+      2 "En un contenedor LXC de Proxmox"   off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -114,10 +58,11 @@ elif [ $cVerSO == "11" ]; then
           echo ""
           echo -e "${cColorVerde}  Instalando OracleLinux en un ordenador o máquina virtual...${cFinColor}"
           echo ""
-          mkdir -p /Contenedores/OracleLinux/data 2> /dev/null
+          sudo mkdir -p /Contenedores/OracleLinux/data 2> /dev/null
 
           echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."          echo ""
+          echo "  Creando el comando para iniciar el contenedor docker..."
+          echo ""
           echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo ""                                                  >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
@@ -131,11 +76,13 @@ elif [ $cVerSO == "11" ]; then
           chmod +x                                                    /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
 
           echo ""
-          echo "  Creando el comando post arranque..."          echo ""
+          echo "  Creando el comando post arranque..."
+          echo ""
           echo "/root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh" >> /root/scripts/ComandosPostArranque.sh
 
           echo ""
-          echo "  Iniciando el container por primera vez..."          echo ""
+          echo "  Iniciando el container por primera vez..."
+          echo ""
           /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
 
         ;;
@@ -148,7 +95,8 @@ elif [ $cVerSO == "11" ]; then
           mkdir -p /Host/OracleLinux/data 2> /dev/null
 
           echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."          echo ""
+          echo "  Creando el comando para iniciar el contenedor docker..."
+          echo ""
           echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo ""                                                  >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
@@ -162,34 +110,18 @@ elif [ $cVerSO == "11" ]; then
           chmod +x                                                    /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
 
           echo ""
-          echo "  Creando el comando post arranque..."          echo ""
+          echo "  Creando el comando post arranque..."
+          echo ""
           echo "/root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh" >> /root/scripts/ComandosPostArranque.sh
 
           echo ""
-          echo "  Iniciando el container por primera vez..."          echo ""
+          echo "  Iniciando el container por primera vez..."
+          echo ""
           /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-
-        ;;
-
-        3)
-
-          echo ""
-          echo -e "${cColorVerde}  ...${cFinColor}"
-          echo ""
-
-        ;;
-
-        4)
-
-          echo ""
-          echo -e "${cColorVerde}  ...${cFinColor}"
-          echo ""
 
         ;;
         
       esac
 
     done
-
-fi
 
