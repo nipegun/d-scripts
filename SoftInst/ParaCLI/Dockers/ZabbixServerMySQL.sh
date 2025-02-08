@@ -51,75 +51,98 @@
     do
       case $choice in
 
-        1)
+      1)
 
-          echo ""
-          echo -e "${cColorVerde}  Instalando Zabbix Server MySQL en un ordenador o máquina virtual...${cFinColor}"
-          echo ""
-          sudo mkdir -p /Contenedores/ZabbixServerMySQL/data 2> /dev/null
+        echo ""
+        echo -e "${cColorVerde}  Instalando ZabbixServerMySQL en un ordenador o máquina virtual...${cFinColor}"
+        echo ""
 
-          echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."
-          echo ""
-          echo '#!/bin/bash'                                         > /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo ""                                                   >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "docker run -d --restart=always                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "  --name ZabbixServerMySQL                      \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "  -p 8001:8001                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "  -p 9444:9444                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock  \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "  -v /Contenedores/ZabbixServerMySQL/data:/data \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "  docker.io/zabbix/zabbix-server-mysql"             >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          chmod +x                                                     /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-              
-          echo ""
-          echo "  Creando el comando post arranque..."
-          echo ""
-          echo "/root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh" >> /root/scripts/ComandosPostArranque.sh
-          echo ""
-          echo "  Iniciando el container por primera vez..."
-          echo ""
-          /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/ZabbixServerMySQL/data/   2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
-        ;;
+        # Crear el script iniciador
+          echo ""
+          echo "    Creando el script iniciador..."
+          echo ""
+          echo '#!/bin/bash'                                        | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo ""                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "docker run -d --restart=always                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  --name ZabbixServerMySQL                      \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  -p 8001:8001                                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  -p 9444:9444                                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  -v /Contenedores/ZabbixServerMySQL/data:/data \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  docker.io/zabbix/zabbix-server-mysql"             | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
 
-        2)
+        # Insertar el script iniciador en los comandos post arranque
+          echo ""
+          echo "    Insertando el script iniciador en los ComandosPostArranque..."
+          echo ""
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
+        # Iniciar el docker por primera vez
           echo ""
-          echo -e "${cColorVerde}  Instalando Zabbix Server MySQL en un contenedor LXC...${cFinColor}"
+          echo "    Iniciando el container por primera vez..."
           echo ""
-          mkdir -p /Host/ZabbixServerMySQL/data 2> /dev/null
+          sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
 
+        # Notificar fin de ejecución del script
           echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."
+          echo "  Script de instalación del Docker de ZabbixServerMySQL, finalizado."
           echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo ""                                                  >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "  --name ZabbixServerMySQL                     \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo '-e DB_SERVER_HOST="some-mysql-server"          \\' >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo '-e MYSQL_USER="some-user"                      \\' >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo '-e MYSQL_PASSWORD="some-password"              \\' >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          #echo "  -p 8001:8001                                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          #echo "  -p 9444:9444                                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "  -v /Host/ZabbixServerMySQL/data:/data        \\" >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          echo "  docker.io/zabbix/zabbix-server-mysql"            >> /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
-          chmod +x                                                    /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
 
-          echo ""
-          echo "  Creando el comando post arranque..."
-          echo ""
-          echo "/root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh" >> /root/scripts/ComandosPostArranque.sh
+      ;;
 
-          echo ""
-          echo "  Iniciando el container por primera vez..."
-          echo ""
-          /root/scripts/DockerCE-Cont-Iniciar-ZabbixServerMySQL.sh
+      2)
 
-        ;;
+        echo ""
+        echo -e "${cColorVerde}  Instalando ZabbixServerMySQL en un contenedor LXC...${cFinColor}"
+        echo ""
+
+        # Crear carpetas
+          sudo mkdir -p /Host/ZabbixServerMySQL/data 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+
+        # Crear el script iniciador
+          echo ""
+          echo "  Creando el script iniciador..."
+          echo ""
+          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  --name ZabbixServerMySQL                     \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '-e DB_SERVER_HOST="some-mysql-server"          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '-e MYSQL_USER="some-user"                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '-e MYSQL_PASSWORD="some-password"              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          #echo "  -p 8001:8001                                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          #echo "  -p 9444:9444                                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  -v /Host/ZabbixServerMySQL/data:/data        \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo "  docker.io/zabbix/zabbix-server-mysql"            | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+
+        # Insertar el script iniciador en los comandos post arranque
+          echo ""
+          echo "    Insertando el script iniciador en los ComandosPostArranque..."
+          echo ""
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+        # Iniciar el docker por primera vez
+          echo ""
+          echo "    Iniciando el container por primera vez..."
+          echo ""
+          sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+
+        # Notificar fin de ejecución del script
+          echo ""
+          echo "  Script de instalación del Docker de ZabbixServerMySQL, finalizado."
+          echo ""
+
+      ;;
         
-      esac
+    esac
 
-    done
+  done
 
