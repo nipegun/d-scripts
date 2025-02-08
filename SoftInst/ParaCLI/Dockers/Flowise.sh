@@ -13,6 +13,8 @@
 #
 # Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/Flowise.sh | sed 's-sudo--g' | bash
+#
+# Comando: docker run -d --restart=always --name Flowise -p 3000:3000 flowiseai/flowise:latest
 # ----------
 
 # Definir constantes de color
