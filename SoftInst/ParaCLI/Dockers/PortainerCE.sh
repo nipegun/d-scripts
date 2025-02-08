@@ -51,72 +51,95 @@
     do
       case $choice in
 
-        1)
+      1)
 
-          echo ""
-          echo -e "${cColorVerde}  Instalando PortainerCE en un ordenador o máquina virtual...${cFinColor}"
-          echo ""
-          sudo mkdir -p /Contenedores/PortainerCE/data 2> /dev/null
+        echo ""
+        echo -e "${cColorVerde}  Instalando PortainerCE en un ordenador o máquina virtual...${cFinColor}"
+        echo ""
 
-          echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."
-          echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo ""                                                  >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "docker run -d --restart=always                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "  --name PortainerCE                           \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "  -v /Contenedores/PortainerCE/data:/data      \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "  -p 8000:8000                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "  -p 9443:9443                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "  cr.portainer.io/portainer/portainer-ce"          >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          chmod +x                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/PortainerCE/data/   2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
+        # Crear el script iniciador
           echo ""
-          echo "  Creando el comando post arranque..."
+          echo "    Creando el script iniciador..."
           echo ""
-          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-          echo ""
-          echo "  Iniciando el container por primera vez..."
-          echo ""
-          /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
+          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  --name PortainerCE                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  -p 8000:8000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  -p 9443:9443                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  -v /Contenedores/PortainerCE/data:/data          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  cr.portainer.io/portainer/portainer-ce"          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
 
-        ;;
+        # Insertar el script iniciador en los comandos post arranque
+          echo ""
+          echo "    Insertando el script iniciador en los ComandosPostArranque..."
+          echo ""
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
-        2)
+        # Iniciar el docker por primera vez
+          echo ""
+          echo "    Iniciando el container por primera vez..."
+          echo ""
+          sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
 
+        # Notificar fin de ejecución del script
           echo ""
-          echo -e "${cColorVerde}  Instalando PortainerCE en un contenedor LXC...${cFinColor}"
+          echo "  Script de instalación del Docker de PortainerCE, finalizado."
           echo ""
-          mkdir -p /Host/PortainerCE/data 2> /dev/null
 
-          echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."
-          echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo ""                                                  >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "docker run -d --restart=always                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "  --name PortainerCE                           \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "  -v /Host/PortainerCE/data:/data              \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "  -p 8000:8000                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "  -p 9443:9443                                 \\" >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          echo "  cr.portainer.io/portainer/portainer-ce"          >> /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-          chmod +x                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
+      ;;
 
-          echo ""
-          echo "  Creando el comando post arranque..."
-          echo ""
-          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh" >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+      2)
 
-          echo ""
-          echo "  Iniciando el container por primera vez..."
-          echo ""
-          /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
+        echo ""
+        echo -e "${cColorVerde}  Instalando PortainerCE en un contenedor LXC...${cFinColor}"
+        echo ""
 
-        ;;
-        
-      esac
+        # Crear carpetas
+          sudo mkdir -p /Host/PortainerCE/data 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
-    done
+        # Crear el script iniciador
+          echo ""
+          echo "  Creando el script iniciador..."
+          echo ""
+          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  --name PortainerCE                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  -p 8000:8000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  -p 9443:9443                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  -v /Host/PortainerCE/data:/data                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  cr.portainer.io/portainer/portainer-ce"          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+
+        # Insertar el script iniciador en los comandos post arranque
+          echo ""
+          echo "    Insertando el script iniciador en los ComandosPostArranque..."
+          echo ""
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+        # Iniciar el docker por primera vez
+          echo ""
+          echo "    Iniciando el container por primera vez..."
+          echo ""
+          sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+
+        # Notificar fin de ejecución del script
+          echo ""
+          echo "  Script de instalación del Docker de PortainerCE, finalizado."
+          echo ""
+
+      ;;
+
+    esac
+
+  done
 
