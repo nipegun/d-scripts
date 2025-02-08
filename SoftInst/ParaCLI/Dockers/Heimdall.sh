@@ -13,6 +13,8 @@
 #
 # Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/Heimdall.sh | sed 's-sudo--g' | bash
+#
+# Comando: docker run -d --restart=always --name Heimdall -p 80:80 -p 443:443 -e PUID=1000 -e PGID=1000 -e TZ=Europe/Madrid lscr.io/linuxserver/heimdall:latest
 # ----------
 
 # Definir constantes de color
