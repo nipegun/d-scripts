@@ -51,69 +51,93 @@
     do
       case $choice in
 
-        1)
+      1)
 
-          echo ""
-          echo -e "${cColorVerde}  Instalando MediaWiki en un ordenador o máquina virtual...${cFinColor}"
-          echo ""
-          sudo mkdir -p /Contenedores/MediaWiki/data 2> /dev/null
+        echo ""
+        echo -e "${cColorVerde}  Instalando MediaWiki en un ordenador o máquina virtual...${cFinColor}"
+        echo ""
 
-          echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."
-          echo ""
-          echo '#!/bin/bash'                                         > /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo ""                                                   >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo "docker run -d --restart=always                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo "  --name MediaWiki                              \\" >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo "  -p 8080:80                                    \\" >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock  \\" >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo "  -v /Contenedores/MediaWiki/data:/data         \\" >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo "  mediawiki:latest"                                 >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          chmod +x                                                     /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-              
-          echo ""
-          echo "  Creando el comando post arranque..."
-          echo ""
-          echo "/root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh" >> /root/scripts/ComandosPostArranque.sh
-          echo ""
-          echo "  Iniciando el container por primera vez..."
-          echo ""
-          /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/MediaWiki/data/   2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
-        ;;
+        # Crear el script iniciador
+          echo ""
+          echo "    Creando el script iniciador..."
+          echo ""
+          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo "  --name MediaWiki                             \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo "  -p 8080:80                                   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo "  -v /Contenedores/MediaWiki/data:/data        \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo "  mediawiki:latest"                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
 
-        2)
+        # Insertar el script iniciador en los comandos post arranque
+          echo ""
+          echo "    Insertando el script iniciador en los ComandosPostArranque..."
+          echo ""
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
+        # Iniciar el docker por primera vez
           echo ""
-          echo -e "${cColorVerde}  Instalando MediaWiki en un contenedor LXC...${cFinColor}"
+          echo "    Iniciando el container por primera vez..."
           echo ""
-          mkdir -p /Host/MediaWiki/data 2> /dev/null
+          sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
 
+        # Notificar fin de ejecución del script
           echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."
+          echo "  Script de instalación del Docker de MediaWiki, finalizado."
           echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo ""                                                  >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo "  --name MediaWiki                             \\" >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo "  -p 8080:80                                   \\" >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo "  -v /Host/MediaWiki/data:/data                \\" >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          echo "  mediawiki:latest"                                >> /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
-          chmod +x                                                    /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
 
-          echo ""
-          echo "  Creando el comando post arranque..."
-          echo ""
-          echo "/root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh" >> /root/scripts/ComandosPostArranque.sh
+      ;;
 
-          echo ""
-          echo "  Iniciando el container por primera vez..."
-          echo ""
-          /root/scripts/DockerCE-Cont-Iniciar-MediaWiki.sh
+      2)
 
-        ;;
+        echo ""
+        echo -e "${cColorVerde}  Instalando MediaWiki en un contenedor LXC...${cFinColor}"
+        echo ""
+
+        # Crear carpetas
+          sudo mkdir -p /Host/MediaWiki/data 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+
+        # Crear el script iniciador
+          echo ""
+          echo "  Creando el script iniciador..."
+          echo ""
+          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo "  --name MediaWiki                             \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo "  -p 8080:80                                   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo "  -v /Host/MediaWiki/data:/data                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo "  mediawiki:latest"                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+
+        # Insertar el script iniciador en los comandos post arranque
+          echo ""
+          echo "    Insertando el script iniciador en los ComandosPostArranque..."
+          echo ""
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+        # Iniciar el docker por primera vez
+          echo ""
+          echo "    Iniciando el container por primera vez..."
+          echo ""
+          sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+
+        # Notificar fin de ejecución del script
+          echo ""
+          echo "  Script de instalación del Docker de MediaWiki, finalizado."
+          echo ""
+
+      ;;
         
-      esac
+    esac
 
-    done
+  done
+
