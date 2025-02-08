@@ -73,11 +73,11 @@
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
-          echo "  --name OpenWebUI                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
+          echo "  --name OpenWebUI                             \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
-          echo "  -v /Contenedores/OpenWebUI/data:/data          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
-          echo "  OpenWebUIai/OpenWebUI:latest"                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
+          echo "  -v /Contenedores/OpenWebUI/data:/data        \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
+          echo "  ghcr.io/open-webui/open-webui:main"              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
 
         # Insertar el script iniciador en los comandos post arranque
@@ -116,11 +116,11 @@
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
-          echo "  --name OpenWebUI                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
+          echo "  --name OpenWebUI                             \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
-          echo "  -v /Host/OpenWebUI/data:/data                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
-          echo "  OpenWebUIai/OpenWebUI:latest"                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
+          echo "  -v /Host/OpenWebUI/data:/data                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
+          echo "  ghcr.io/open-webui/open-webui:main"              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
 
         # Insertar el script iniciador en los comandos post arranque
