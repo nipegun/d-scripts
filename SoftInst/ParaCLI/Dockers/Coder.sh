@@ -51,71 +51,93 @@
     do
       case $choice in
 
-        1)
+      1)
 
-          echo ""
-          echo -e "${cColorVerde}  Instalando Coder en un ordenador o máquina virtual...${cFinColor}"
-          echo ""
-          sudo mkdir -p /Contenedores/Coder/data 2> /dev/null
+        echo ""
+        echo -e "${cColorVerde}  Instalando Coder en un ordenador o máquina virtual...${cFinColor}"
+        echo ""
 
-          echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."
-          echo ""
-          echo '#!/bin/bash'                                         > /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          echo ""                                                   >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          echo "docker run -d --restart=always                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          echo "  --name Coder                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          #echo "  -p 3000:3000                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          #echo "  -p 3001:3001                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          echo "  -v /Contenedores/Coder/data:/data             \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          echo "  ghcr.io/coder/coder:latest"                       >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          chmod +x                                                     /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-              
-          echo ""
-          echo "  Creando el comando post arranque..."
-          echo ""
-          echo "/root/scripts/DockerCE-Cont-Iniciar-Coder.sh" >> /root/scripts/ComandosPostArranque.sh
-          echo ""
-          echo "  Iniciando el container por primera vez..."
-          echo ""
-          /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/Coder/data/   2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
-        ;;
+        # Crear el script iniciador
+          echo ""
+          echo "    Creando el script iniciador..."
+          echo ""
+          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  --name Coder                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  -v /Contenedores/Coder/data:/data          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  ghcr.io/coder/coder:latest"                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
 
-        2)
+        # Insertar el script iniciador en los comandos post arranque
+          echo ""
+          echo "    Insertando el script iniciador en los ComandosPostArranque..."
+          echo ""
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
+        # Iniciar el docker por primera vez
           echo ""
-          echo -e "${cColorVerde}  Instalando Coder en un contenedor LXC...${cFinColor}"
+          echo "    Iniciando el container por primera vez..."
           echo ""
-          mkdir -p /Host/Coder/data 2> /dev/null
+          sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
 
+        # Notificar fin de ejecución del script
           echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."
+          echo "  Script de instalación del Docker de Coder, finalizado."
           echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          echo ""                                                  >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          echo "  --name Coder                                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          #echo "  -p 3000:3000                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          #echo "  -p 3001:3001                                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          echo "  -v /Host/Coder/data:/data                    \\" >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          echo "  ghcr.io/coder/coder:latest"                      >> /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
-          chmod +x                                                    /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
 
-          echo ""
-          echo "  Creando el comando post arranque..."
-          echo ""
-          echo "/root/scripts/DockerCE-Cont-Iniciar-Coder.sh" >> /root/scripts/ComandosPostArranque.sh
+      ;;
 
-          echo ""
-          echo "  Iniciando el container por primera vez..."
-          echo ""
-          /root/scripts/DockerCE-Cont-Iniciar-Coder.sh
+      2)
 
-        ;;
-        
-      esac
+        echo ""
+        echo -e "${cColorVerde}  Instalando Coder en un contenedor LXC...${cFinColor}"
+        echo ""
 
-    done
+        # Crear carpetas
+          sudo mkdir -p /Host/Coder/data 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+
+        # Crear el script iniciador
+          echo ""
+          echo "  Creando el script iniciador..."
+          echo ""
+          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  --name Coder                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  -v /Host/Coder/data:/data                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  ghcr.io/coder/coder:latest"                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+
+        # Insertar el script iniciador en los comandos post arranque
+          echo ""
+          echo "    Insertando el script iniciador en los ComandosPostArranque..."
+          echo ""
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+        # Iniciar el docker por primera vez
+          echo ""
+          echo "    Iniciando el container por primera vez..."
+          echo ""
+          sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+
+        # Notificar fin de ejecución del script
+          echo ""
+          echo "  Script de instalación del Docker de Coder, finalizado."
+          echo ""
+
+      ;;
+
+    esac
+
+  done
+
