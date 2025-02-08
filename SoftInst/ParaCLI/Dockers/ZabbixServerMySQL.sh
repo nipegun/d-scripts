@@ -13,6 +13,8 @@
 #
 # Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/ZabbixServerMySQL.sh | sed 's-sudo--g' | bash
+#
+# Comando: docker run -d --restart=always --name ZabbixServerMySQL -p 8001:8001 -p 9444:9444 docker.io/zabbix/zabbix-server-mysql
 # ----------
 
 # Definir constantes de color
