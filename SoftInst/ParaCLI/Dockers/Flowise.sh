@@ -89,7 +89,7 @@
 
         # Notificar fin de ejecución del script
           echo ""
-          echo "  Script de instalación del Docker de TteHive, finalizado."
+          echo "  Script de instalación del Docker de Flowise, finalizado."
           echo ""
 
       ;;
@@ -132,7 +132,7 @@
 
         # Notificar fin de ejecución del script
           echo ""
-          echo "  Script de instalación del Docker de TteHive, finalizado."
+          echo "  Script de instalación del Docker de Flowise, finalizado."
           echo ""
 
       ;;
