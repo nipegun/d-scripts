@@ -14,7 +14,7 @@
 # Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/OracleLinux.sh | sed 's-sudo--g' | bash
 #
-# Comando: docker run -d --restart=always --name OracleLinux -p 22001:22 -p 1521:9444 -p 1630:1630 oraclelinux:$VerOLDeseada             
+# Comando: docker run -d --restart=always --name OracleLinux -p 22001:22 -p 1521:9444 -p 1630:1630 oraclelinux:$VerOLDeseada
 # ----------
 
 VerOLDeseada=8
