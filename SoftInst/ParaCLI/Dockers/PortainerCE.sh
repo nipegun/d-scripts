@@ -8,48 +8,42 @@
 # ----------
 # Script de NiPeGun para instalar PortainerCE en el DockerCE de Debian
 #
-# Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/DockerCE-Contenedor-Instalar-PortainerCE.sh | bash
+# Ejecución remota (puede requerir permisos sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/PortainerCE.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/PortainerCE.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
-  cColorAzul="\033[0;34m"
-  cColorAzulClaro="\033[1;34m"
+  cColorAzul='\033[0;34m'
+  cColorAzulClaro='\033[1;34m'
   cColorVerde='\033[1;32m'
   cColorRojo='\033[1;31m'
   # Para el color rojo también:
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
-# Notificar el inicio de ejecución del script
+# Notificar inicio de ejecución del script
   echo ""
-  echo "  Iniciando el script de instalación de PortainerCE en DockerCE..." 
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de PortaincerCE en el DockerCE de Debian...${cFinColor}"
   echo ""
-
-# Comprobar si el script está corriendo como root
-  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
-  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
-    echo ""
-    exit
-  fi
 
 # Crear el menú
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo "    El paquete dialog no está instalado. Iniciando su instalación..."
+      echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+      echo "   "
       echo ""
-      apt-get -y update && apt-get -y install dialog
+      sudo apt-get -y update
+      sudo apt-get -y install dialog
       echo ""
     fi
   menu=(dialog --checklist "¿Donde quieres instalar PortainerCE?:" 22 76 16)
     opciones=(
       1 "En un ordenador o máquina virtual" off
-      2 "En un contenedor LXC de Proxmox" off
-      3 "..." off
-      4 "..." off
+      2 "En un contenedor LXC de Proxmox"   off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -62,7 +56,7 @@
           echo ""
           echo -e "${cColorVerde}  Instalando PortainerCE en un ordenador o máquina virtual...${cFinColor}"
           echo ""
-          mkdir -p /Contenedores/PortainerCE/data 2> /dev/null
+          sudo mkdir -p /Contenedores/PortainerCE/data 2> /dev/null
 
           echo ""
           echo "  Creando el comando para iniciar el contenedor docker..."
@@ -119,22 +113,6 @@
           echo "  Iniciando el container por primera vez..."
           echo ""
           /root/scripts/ParaEsteDebian/DockerCE-Cont-Iniciar-PortainerCE.sh
-
-        ;;
-
-        3)
-
-          echo ""
-          echo -e "${cColorVerde}  ...${cFinColor}"
-          echo ""
-
-        ;;
-
-        4)
-
-          echo ""
-          echo -e "${cColorVerde}  ...${cFinColor}"
-          echo ""
 
         ;;
         
