@@ -51,74 +51,97 @@
     do
       case $choice in
 
-        1)
+      1)
 
-          echo ""
-          echo -e "${cColorVerde}  Instalando MariaDB en un ordenador o máquina virtual...${cFinColor}"
-          echo ""
-          sudo mkdir -p /Contenedores/MariaDB/data 2> /dev/null
+        echo ""
+        echo -e "${cColorVerde}  Instalando MariaDB en un ordenador o máquina virtual...${cFinColor}"
+        echo ""
 
-          echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."
-          echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo ""                                                  >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --name MariaDB                               \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --env MARIADB_USER=usuariox                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --env MARIADB_PASSWORD=UsuarioX              \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --env MARIADB_ROOT_PASSWORD=raizraiz         \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  -v /Contenedores/MariaDB/data:/data          \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  mariadb:latest"                                  >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          chmod +x                                                    /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-              
-          echo ""
-          echo "  Creando el comando post arranque..."
-          echo ""
-          echo "/root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh" >> /root/scripts/ComandosPostArranque.sh
-          echo ""
-          echo "  Iniciando el container por primera vez..."
-          echo ""
-          /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/MariaDB/data/   2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
-        ;;
+        # Crear el script iniciador
+          echo ""
+          echo "    Creando el script iniciador..."
+          echo ""
+          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  --name MariaDB                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  --env MARIADB_USER=usuariox                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  --env MARIADB_PASSWORD=UsuarioX              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  --env MARIADB_ROOT_PASSWORD=raizraiz         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  -v /Contenedores/MariaDB/data:/data          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  mariadb:latest"                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
 
-        2)
+        # Insertar el script iniciador en los comandos post arranque
+          echo ""
+          echo "    Insertando el script iniciador en los ComandosPostArranque..."
+          echo ""
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
+        # Iniciar el docker por primera vez
           echo ""
-          echo -e "${cColorVerde}  Instalando MariaDB en un contenedor LXC...${cFinColor}"
+          echo "    Iniciando el container por primera vez..."
           echo ""
-          mkdir -p /Host/MariaDB/data 2> /dev/null
+          sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
 
+        # Notificar fin de ejecución del script
           echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."
+          echo "  Script de instalación del Docker de MariaDB, finalizado."
           echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo ""                                                  >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --name MariaDB                               \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --env MARIADB_USER=usuariox                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --env MARIADB_PASSWORD=UsuarioX              \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  --env MARIADB_ROOT_PASSWORD=raizraiz         \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  -v /Host/MariaDB/data:/data                  \\" >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          echo "  mariadb:latest"                                  >> /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
-          chmod +x                                                    /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
 
-          echo ""
-          echo "  Creando el comando post arranque..."
-          echo ""
-          echo "/root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh" >> /root/scripts/ComandosPostArranque.sh
+      ;;
 
-          echo ""
-          echo "  Iniciando el container por primera vez..."
-          echo ""
-          /root/scripts/DockerCE-Cont-Iniciar-MariaDB.sh
+      2)
 
-        ;;
-        
-      esac
+        echo ""
+        echo -e "${cColorVerde}  Instalando MariaDB en un contenedor LXC...${cFinColor}"
+        echo ""
 
-    done
+        # Crear carpetas
+          sudo mkdir -p /Host/MariaDB/data 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+
+        # Crear el script iniciador
+          echo ""
+          echo "  Creando el script iniciador..."
+          echo ""
+          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  --name MariaDB                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  --env MARIADB_USER=usuariox                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  --env MARIADB_PASSWORD=UsuarioX              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  --env MARIADB_ROOT_PASSWORD=raizraiz         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  -v /Host/MariaDB/data:/data                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo "  mariadb:latest"                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+
+        # Insertar el script iniciador en los comandos post arranque
+          echo ""
+          echo "    Insertando el script iniciador en los ComandosPostArranque..."
+          echo ""
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+        # Iniciar el docker por primera vez
+          echo ""
+          echo "    Iniciando el container por primera vez..."
+          echo ""
+          sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+
+        # Notificar fin de ejecución del script
+          echo ""
+          echo "  Script de instalación del Docker de MariaDB, finalizado."
+          echo ""
+
+      ;;
+
+    esac
+
+  done
 
