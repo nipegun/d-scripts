@@ -13,6 +13,8 @@
 #
 # Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/VaultWarden.sh | sed 's-sudo--g' | bash
+#
+# Comando: docker run -d --restart=always --name VaultWarden -p 8080:80 vaultwarden:latest
 # ----------
 
 # Definir constantes de color
