@@ -13,6 +13,8 @@
 #
 # Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/Coder.sh | sed 's-sudo--g' | bash
+#
+# Comando: docker run -d --restart=always --name Coder -p 3000:3000 ghcr.io/coder/coder:latest
 # ----------
 
 # Definir constantes de color
@@ -68,11 +70,11 @@
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  --name Coder                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  --name Coder                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  -v /Contenedores/Coder/data:/data          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  ghcr.io/coder/coder:latest"                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  -v /Contenedores/Coder/data:/data            \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  ghcr.io/coder/coder:latest"                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
 
         # Insertar el script iniciador en los comandos post arranque
@@ -111,11 +113,11 @@
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  --name Coder                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  --name Coder                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  -v /Host/Coder/data:/data                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  ghcr.io/coder/coder:latest"                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  -v /Host/Coder/data:/data                    \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo "  ghcr.io/coder/coder:latest"                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
 
         # Insertar el script iniciador en los comandos post arranque
