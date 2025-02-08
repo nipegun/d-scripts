@@ -15,6 +15,9 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/CTFd.sh | sed 's-sudo--g' | bash
 #
 # Enlace: https://github.com/CTFd/CTFd
+#
+# Comando:                docker run -d --restart=always -it --name CTFd -p 8000:8000 ctfd/ctfd:latest
+# Comando (Sin AppArmor): docker run -d --restart=always -it --security-opt apparmor=unconfined --name CTFd -p 8000:8000 ctfd/ctfd:latest
 # ----------
 
 # Definir constantes de color
