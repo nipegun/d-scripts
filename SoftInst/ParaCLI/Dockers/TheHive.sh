@@ -13,6 +13,8 @@
 #
 # Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/TheHive.sh | sed 's-sudo--g' | bash
+#
+# Comando: docker run -d --restart=always --name TheHive -p 9000:9000 strangebee/thehive:5.4
 # ----------
 
 # Definir constantes de color
