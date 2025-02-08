@@ -53,75 +53,97 @@ VerOLDeseada=8
     do
       case $choice in
 
-        1)
+      1)
 
-          echo ""
-          echo -e "${cColorVerde}  Instalando OracleLinux en un ordenador o máquina virtual...${cFinColor}"
-          echo ""
-          sudo mkdir -p /Contenedores/OracleLinux/data 2> /dev/null
+        echo ""
+        echo -e "${cColorVerde}  Instalando Flowise en un ordenador o máquina virtual...${cFinColor}"
+        echo ""
 
-          echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."
-          echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo ""                                                  >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  --name OracleLinux                           \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -p 22001:22                                  \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -p 1521:9444                                 \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -p 1630:1630                                 \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -v /Contenedores/OracleLinux/data:/data      \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  oraclelinux:$VerOLDeseada"                       >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          chmod +x                                                    /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/Flowise/data/   2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
+        # Crear el script iniciador
           echo ""
-          echo "  Creando el comando post arranque..."
+          echo "    Creando el script iniciador..."
           echo ""
-          echo "/root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh" >> /root/scripts/ComandosPostArranque.sh
+          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  --name Flowise                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  -p 22001:22                                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  -p 1521:9444                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  -p 1630:1630                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  -v /Contenedores/Flowise/data:/data          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  oraclelinux:$VerOLDeseada"                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
 
+        # Insertar el script iniciador en los comandos post arranque
           echo ""
-          echo "  Iniciando el container por primera vez..."
+          echo "    Insertando el script iniciador en los ComandosPostArranque..."
           echo ""
-          /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
-        ;;
+        # Iniciar el docker por primera vez
+          echo ""
+          echo "    Iniciando el container por primera vez..."
+          echo ""
+          sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
 
-        2)
+        # Notificar fin de ejecución del script
+          echo ""
+          echo "  Script de instalación del Docker de Flowise, finalizado."
+          echo ""
 
-          echo ""
-          echo -e "${cColorVerde}  Instalando OracleLinux en un contenedor LXC...${cFinColor}"
-          echo ""
-          mkdir -p /Host/OracleLinux/data 2> /dev/null
+      ;;
 
-          echo ""
-          echo "  Creando el comando para iniciar el contenedor docker..."
-          echo ""
-          echo '#!/bin/bash'                                        > /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo ""                                                  >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  --name OracleLinux                           \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -v /Host/OracleLinux/data:/data              \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -p 22001:22                                  \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -p 1521:9444                                 \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -p 1630:1630                                 \\" >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  oraclelinux:$VerOLDeseada"                       >> /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
-          chmod +x                                                    /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+      2)
 
-          echo ""
-          echo "  Creando el comando post arranque..."
-          echo ""
-          echo "/root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh" >> /root/scripts/ComandosPostArranque.sh
+        echo ""
+        echo -e "${cColorVerde}  Instalando Flowise en un contenedor LXC...${cFinColor}"
+        echo ""
 
-          echo ""
-          echo "  Iniciando el container por primera vez..."
-          echo ""
-          /root/scripts/DockerCE-Cont-OracleLinux-Iniciar.sh
+        # Crear carpetas
+          sudo mkdir -p /Host/Flowise/data 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
-        ;;
+        # Crear el script iniciador
+          echo ""
+          echo "  Creando el script iniciador..."
+          echo ""
+          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  --name Flowise                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  -p 22001:22                                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  -p 1521:9444                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  -p 1630:1630                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  -v /Host/Flowise/data:/data                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  oraclelinux:$VerOLDeseada"                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+
+        # Insertar el script iniciador en los comandos post arranque
+          echo ""
+          echo "    Insertando el script iniciador en los ComandosPostArranque..."
+          echo ""
+          echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+        # Iniciar el docker por primera vez
+          echo ""
+          echo "    Iniciando el container por primera vez..."
+          echo ""
+          sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+
+        # Notificar fin de ejecución del script
+          echo ""
+          echo "  Script de instalación del Docker de Flowise, finalizado."
+          echo ""
+
+      ;;
         
-      esac
+    esac
 
-    done
+  done
 
