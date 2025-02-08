@@ -13,6 +13,8 @@
 #
 # Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/MariaDB.sh | sed 's-sudo--g' | bash
+#
+# Comando: docker run -d --restart=always --name MariaDB --env MARIADB_USER=usuariox --env MARIADB_PASSWORD=UsuarioX --env MARIADB_ROOT_PASSWORD=raizraiz mariadb:latest
 # ----------
 
 # Definir constantes de color
