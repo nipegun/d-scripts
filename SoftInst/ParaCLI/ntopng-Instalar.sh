@@ -9,19 +9,13 @@
 # Script de NiPeGun para instalar y configurar ntopng en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/ntopng-Instalar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/ntopng-Instalar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/ntopng-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -40,16 +34,6 @@
     echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
     echo ""
     exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    sudo apt-get -y update
-    sudo apt-get -y install curl
-    echo ""
   fi
 
 # Determinar la versión de Debian
@@ -90,9 +74,52 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ntopng para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Descargar el archivo para instalar el repositorio
+      echo ""
+      echo "    Descargando el archivo para instalar el repositorio..."
+      echo ""
+      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install curl
+          echo ""
+        fi
+      curl -L https://packages.ntop.org/apt-stable/bookworm/all/apt-ntop-stable.deb -o /tmp/ntopngRepo.deb
+
+    # Instalar el repositorio
+      echo ""
+      echo "    Descargando el archivo para instalar el repositorio..."
+      echo ""
+      sudo apt -y install /tmp/ntopngRepo.deb
+      sudo apt -y update
+
+    # Instalar los paquetes
+      echo ""
+      echo "    Instalando los paquetes..."
+      echo ""
+      sudo apt-get -y clean all
+      sudo apt-get -y update
+      sudo apt-get -y install pfring-dkms
+      sudo apt-get -y install nprobe
+      sudo apt-get -y install ntopng
+      sudo apt-get -y install n2disk
+      sudo apt-get -y install cento
+
+    # Instalar los drivers ZC
+      echo ""
+      echo "    Instalando los drivers ZC..."
+      echo ""
+      sudo apt-get -y install pfring-drivers-zc-dkms
+
+    # Instalar nedge
+      echo ""
+      echo "    Instalando nedge..."
+      echo ""
+      #sudo apt-get -y install nedge
+      #Note that ntopng must not be installed together with nedge. Remove ntopng before installing nedge.
 
   elif [ $cVerSO == "11" ]; then
 
