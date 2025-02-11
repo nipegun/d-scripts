@@ -77,11 +77,11 @@
         fi
       menu=(dialog --checklist "Elige que versión de Java quieres instalar:" 22 96 16)
         opciones=(
-          1 "Versión disponible en los repositorios de Debian 12" on
-          2 "Última versión disponible en la web oficial" off
-          3 "Opción 3" off
-          4 "Opción 4" off
-          5 "Opción 5" off
+          1 "Versión disponible en los repositorios de Debian 12" off
+          2 "Última versión disponible en la web oficial"         off
+          3 "Opción 3"                                            off
+          4 "Opción 4"                                            off
+          5 "Opción 5"                                            off
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
