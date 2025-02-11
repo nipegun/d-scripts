@@ -127,7 +127,7 @@
                 echo "    Descargando el paquete.deb..."
                 echo ""
                 sudo rm -f /tmp/jdk.deb
-                curl -L https://download.oracle.com/java/$vUltVersDispJDK/latest/jdk-$vUltVersDispJDK_linux-x64_bin.deb -o /tmp/jdk.deb
+                curl -L https://download.oracle.com/java/"$vUltVersDispJDK"/latest/jdk-"$vUltVersDispJDK"_linux-x64_bin.deb -o /tmp/jdk.deb
 
               # Instalar el paquete .deb
                 echo ""
