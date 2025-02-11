@@ -28,10 +28,4 @@
       echo "    $0 'Hola' 'Mundo'"
       echo ""
       exit
-    else
-      echo ""
-      echo ""
-      echo ""
-      cat $1$2
   fi
-
