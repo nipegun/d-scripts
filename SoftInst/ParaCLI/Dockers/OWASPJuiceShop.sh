@@ -14,7 +14,7 @@
 # Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/OWASPJuiceShop.sh | sed 's-sudo--g' | bash
 #
-# Comando: docker run -d --restart=always --name OWASPJuiceShop -p 3000:3000 OWASPJuiceShopai/OWASPJuiceShop:latest
+# Comando: docker run -d --restart=always --name OWASPJuiceShop -p 127.0.0.1:3000:3000 bkimminich/juice-shop:latest:latest
 # ----------
 
 # Definir constantes de color
