@@ -8,7 +8,7 @@
 # ----------
 # Script de NiPeGun para instalar y configurar Docker Desktop en Debian
 #
-# Ejecución remota con sudo:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/DockerDesktop-InstalarYConfigurar.sh | sudo bash
 #
 # Ejecución remota como root:
@@ -40,16 +40,6 @@
     echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
     echo ""
     exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update
-    apt-get -y install curl
-    echo ""
   fi
 
 # Determinar la versión de Debian
@@ -115,8 +105,8 @@
           echo ""
           echo -e "${cColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
-          apt-get -y update
-          apt-get -y install wget
+          sudo apt-get -y update
+          sudo apt-get -y install wget
           echo ""
         fi
       # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
@@ -124,50 +114,68 @@
           echo ""
           echo -e "${cColorRojo}    El paquete gnupg2 no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
-          apt-get -y update
-          apt-get -y install gnupg2
+          sudo apt-get -y update
+          sudo apt-get -y install gnupg2
           echo ""
         fi
       # Descargar la clave PGP del keyring
         echo ""
         echo "  Descargando la clave PGP del KeyRing..."
         echo ""
-        wget -O- https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+        sudo rm -f /usr/share/keyrings/docker-archive-keyring.gpg
+        # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+          if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+            echo ""
+            echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+            echo ""
+            apt-get -y update
+            apt-get -y install wget
+            echo ""
+          fi
+        wget -O- https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
       # Agregar el repo
         echo ""
         echo "  Agregando el repositorio..."
         echo ""
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+        sudo rm -f /etc/apt/sources.list.d/docker.list
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
       # Actualizar la lista de paquetes disponibles en los repositorios
         echo ""
         echo "  Actualizando la lista de paquetes disponibles en los repositorios..."
         echo ""
-        apt-get -y update
+        sudo apt-get -y update
 
       # Comprobar que cgroup v2 esté habilitado y proceder con la instalación
       if mount | grep -q "cgroup2"; then
         echo ""
         echo "  Instalando DockerDesktop..."
         echo ""
-        apt -y install docker-desktop
         # Descargar el paquete .deb
-          #mkdir -p /root/SoftInst/DockerDesktop/
-          #curl -L https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb -o /root/SoftInst/DockerDesktop/docker-desktop-amd64.deb
+          # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+              echo ""
+              apt-get -y update
+              apt-get -y install curl
+              echo ""
+            fi
+          curl -L https://desktop.docker.com/linux/main/amd64/docker-desktop-amd64.deb -o /tmp/docker-desktop-amd64.deb
         # Desintalar todos los paquetes anteriores
-          #apt -y autoremove docker*
-          #apt -y purge docker*
+          sudo apt -y autoremove docker*
+          sudo apt -y purge docker*
         # Instalar el paquete
-          #apt -y install /root/SoftInst/DockerDesktop/docker-desktop-amd64.deb
+          sudo apt -y install /tmp/docker-desktop-amd64.deb
       else
         echo ""
         echo "  cgroup2 no está habilitado y es necesario para la ejecución de Docker Desktop..."
         echo ""
-        #Agrega o modifica la línea que empieza con GRUB_CMDLINE_LINUX_DEFAULT para incluir:
-        # systemd.unified_cgroup_hierarchy=1
-        # GRUB_CMDLINE_LINUX_DEFAULT="quiet splash systemd.unified_cgroup_hierarchy=1"
-        # Actualiza GRUB y reinicia:
-        # sudo update-grub
-        # sudo reboot
+        echo "#Agrega o modifica la línea que empieza con GRUB_CMDLINE_LINUX_DEFAULT para incluir:"
+        echo "# systemd.unified_cgroup_hierarchy=1"
+        echo "# GRUB_CMDLINE_LINUX_DEFAULT="quiet splash systemd.unified_cgroup_hierarchy=1""
+        echo "# Actualiza GRUB y reinicia:"
+        echo "# sudo update-grub"
+        echo "# sudo reboot"
       fi
 
   elif [ $cVerSO == "11" ]; then
