@@ -14,7 +14,7 @@
 # Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/OWASPJuiceShop.sh | sed 's-sudo--g' | bash
 #
-# Comando: docker run -d --restart=always --name OWASPJuiceShop -p 127.0.0.1:3000:3000 bkimminich/juice-shop:latest
+# Comando: docker run -d --restart=always --name OWASPJuiceShop -p 3010:3000 bkimminich/juice-shop:latest
 # ----------
 
 # Definir constantes de color
@@ -71,7 +71,7 @@
           echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           echo "  --name OWASPJuiceShop                        \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo "  -p 127.0.0.1:3000:3000                       \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo "  -p 3010:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           echo "  -v /Contenedores/OWASPJuiceShop/data:/data   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           echo "  bkimminich/juice-shop:latest"                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
@@ -114,7 +114,7 @@
           echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           echo "  --name OWASPJuiceShop                        \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo "  127.0.0.1:3000:3000                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo "  -p 3010:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           echo "  -v /Host/OWASPJuiceShop/data:/data           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           echo "  bkimminich/juice-shop:latest"                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
