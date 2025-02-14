@@ -8,22 +8,21 @@
 # ----------
 # Script de NiPeGun para instalar el servidor de bases InfluxDB en Debian
 #
-# Ejecución remota
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-InfluxDB-Instalar.sh | bash
+#
+# Ejecución remota con root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-BBDD-InfluxDB-Instalar.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
-  cColorAzul="\033[0;34m"
-  cColorAzulClaro="\033[1;34m"
+  cColorAzul='\033[0;34m'
+  cColorAzulClaro='\033[1;34m'
   cColorVerde='\033[1;32m'
   cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
-
-# Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
-    exit
-  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org
@@ -45,14 +44,111 @@
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor InfluxDB para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor InfluxDB para Debian 13 (x)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${cFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor InfluxDB para Debian 12 (Bookworm)...${cFinColor}"
+  echo ""
+
+  # Paquetes influx
+    echo ""
+    echo "    Instalando paquetes influx..."
+    echo ""
+    sudo apt-get -y update
+    sudo apt-get -y install influxdb
+    sudo apt-get -y install influxdb-client
+
+  # Paquetes 
+    echo ""
+    echo "    Instalando paquetes de Python..."
+    echo ""
+    sudo apt-get -y install python3-dev
+    sudo apt-get -y install python3-pip
+    sudo apt-get -y install python3-influxdb
+    #pip3 install influxdb --upgrade --break-system-packages
+
+  # Activar el servicio
+    echo ""
+    echo "    Activando el servicio"
+    echo ""
+    systemctl enable influxdb.service --now
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor InfluxDB para Debian 11 (Bullseye)...${cFinColor}"
+  echo ""
+
+  # Paquetes influx
+    echo ""
+    echo "    Instalando paquetes influx..."
+    echo ""
+    sudo apt-get -y update
+    sudo apt-get -y install influxdb
+    sudo apt-get -y install influxdb-client
+
+  # Paquetes 
+    echo ""
+    echo "    Instalando paquetes de Python..."
+    echo ""
+    sudo apt-get -y install python3-dev
+    sudo apt-get -y install python3-pip
+    sudo apt-get -y install python3-influxdb
+    #pip3 install influxdb --upgrade --break-system-packages
+
+  # Activar el servicio
+    echo ""
+    echo "    Activando el servicio"
+    echo ""
+    systemctl enable influxdb.service --now
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor InfluxDB para Debian 10 (Buster)...${cFinColor}"
+  echo ""
+
+  # Paquetes influx
+    echo ""
+    echo "    Instalando paquetes influx..."
+    echo ""
+    sudo apt-get -y update
+    sudo apt-get -y install influxdb
+    sudo apt-get -y install influxdb-client
+
+  # Paquetes 
+    echo ""
+    echo "    Instalando paquetes de Python..."
+    echo ""
+    sudo apt-get -y install python3-dev
+    sudo apt-get -y install python3-pip
+    sudo apt-get -y install python3-influxdb
+    #pip3 install influxdb --upgrade --break-system-packages
+
+  # Activar el servicio
+    echo ""
+    echo "    Activando el servicio"
+    echo ""
+    systemctl enable influxdb.service --now
+
+elif [ $cVerSO == "9" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor InfluxDB para Debian 9 (Stretch)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${cFinColor}"
   echo ""
 
 elif [ $cVerSO == "8" ]; then
@@ -65,60 +161,15 @@ elif [ $cVerSO == "8" ]; then
   echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${cFinColor}"
   echo ""
 
-elif [ $cVerSO == "9" ]; then
+elif [ $cVerSO == "7" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor InfluxDB para Debian 9 (Stretch)...${cFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${cFinColor}"
-  echo ""
-
-elif [ $cVerSO == "10" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor InfluxDB para Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor InfluxDB para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   echo ""
-  echo "    Instalando paquetes..."
+  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutar el script en otra versión de Debian.${cFinColor}"
   echo ""
-  apt-get -y update
-  apt-get -y install influxdb
-  apt-get -y install influxdb-client
-  apt-get -y install python3-influxdb
-
-  echo ""
-  echo "    Activando el servicio"
-  echo ""
-  systemctl enable influxdb.service --now
-
-elif [ $cVerSO == "11" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor InfluxDB para Debian 11 (Bullseye)...${cFinColor}"
-  echo ""
-
-  echo ""
-  echo "    Instalando paquetes de InfluxDB..."
-  echo ""
-  apt-get -y update
-  apt-get -y install influxdb
-  apt-get -y install influxdb-client
-
-  echo ""
-  echo "    Instalando paquetes de Python..."
-  echo ""
-  apt-get -y install python3-dev
-  apt-get -y install python3-pip
-  apt-get -y install python3-influxdb
-  pip3 install influxdb
-
-  echo ""
-  echo "    Activando el servicio"
-  echo ""
-  systemctl enable influxdb.service --now
 
 fi
 
