@@ -14,7 +14,7 @@
 # Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/OpenVAS.sh | sed 's-sudo--g' | bash
 #
-# Comando: docker run -d --restart=always --name OpenVAS -p 9392:9392 greenbone/openvas-scanner:latest
+# Comando: docker run -d --restart=always --name OpenVAS -p 9392:9392 -p 5432:5432 -e "USERNAME=admin" -e "PASSWORD=admin"  greenbone/openvas-scanner:latest
 # ----------
 
 # Definir constantes de color
@@ -72,6 +72,9 @@
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  --name OpenVAS                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  -p 9392:9392                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
+          echo "  -p 5432:5432                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
+          echo "  -e "USERNAME=admin"                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
+          echo "  -e "PASSWORD=admin"                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  -v /Contenedores/OpenVAS/data:/data          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  greenbone/openvas-scanner:latest"                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
@@ -115,6 +118,9 @@
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  --name OpenVAS                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  -p 9392:9392                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
+          echo "  -p 5432:5432                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
+          echo "  -e "USERNAME=admin"                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
+          echo "  -e "PASSWORD=admin"                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  -v /Host/OpenVAS/data:/data                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  greenbone/openvas-scanner:latest"                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
