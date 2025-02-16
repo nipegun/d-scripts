@@ -63,34 +63,38 @@ elif [ $cVerSO == "12" ]; then
   echo ""
   echo "  Instalando paquetes necesarios..."
   echo ""
-  apt-get -y install wget
-  apt-get -y install apt-transport-https
-  apt-get -y install ca-certificates
-  apt-get -y install curl
-  apt-get -y install gnupg2
-  apt-get -y install software-properties-common
+  sudo apt-get -y install wget
+  sudo apt-get -y install apt-transport-https
+  sudo apt-get -y install ca-certificates
+  sudo apt-get -y install curl
+  sudo apt-get -y install gnupg2
+  sudo apt-get -y install software-properties-common
 
   echo ""
   echo "  Descargando la clave PGP del KeyRing..."
   echo ""
-  wget -O- https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  wget -O- https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
   echo ""
   echo "  Agregando el repositorio..."
   echo ""
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
-  apt-get -y update
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
+  sudo apt-get -y update
 
   echo ""
   echo "  Instalando docker-ce..."
   echo ""
-  apt-get -y install docker-ce
+  sudo apt-get -y install docker-ce
 
   echo ""
-  echo "  Activando y arrancando el servicio de docker..."
+  echo "  Activando e iniciando el servicio de docker..."
   echo ""
-  systemctl enable docker
-  systemctl start docker
+  sudo systemctl enable docker --now
+
+  echo ""
+  echo "  Mostrando el estado del servicio de docker..."
+  echo ""
+  sudo systemctl status docker --no-pager
 
 elif [ $cVerSO == "11" ]; then
 
