@@ -14,7 +14,7 @@
 # Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/OpenVAS.sh | sed 's-sudo--g' | bash
 #
-# Comando: docker run -d --restart=always --name OpenVAS -p 9392:9392 greenbone/openvas-scanner:latest" 
+# Comando: docker run -d --restart=always --name OpenVAS -p 9392:9392 greenbone/openvas-scanner:latest
 # ----------
 
 # Definir constantes de color
