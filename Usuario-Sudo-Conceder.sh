@@ -37,17 +37,17 @@
   fi
 
 # Definir la cantidad de argumentos esperados
-  cCantParamEsperados=1
+  cCantParamEsperados=2
 
 # Comprobar que se hayan pasado la cantidad de parámetros correctos y proceder
   if [ $# -ne $cCantParamEsperados ]
     then
       echo ""
       echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
-      echo "    $0 [Parámetro1] [Parámetro2]"
+      echo "    $0 [Usuario] [Contraseña]"
       echo ""
       echo "  Ejemplo:"
-      echo "    $0 'Hola' 'Mundo'"
+      echo "    $0 'usuariox' 'UsuarioX'"
       echo ""
       exit
     else
@@ -56,7 +56,8 @@
           echo ""
           echo -e "${cColorRojo}  El paquete sudo no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
-          apt-get -y update && apt-get -y install sudo
+          apt-get -y update 
+          apt-get -y install sudo
           echo ""
         fi
       # Comprobar si el usuario existe. Si no existe, crearlo y agregarlo al grupo sudo
@@ -70,7 +71,7 @@
           echo ""
           echo "  El usuario $1 no existe. Se procederá a crearlo."
           echo ""
-          useradd -m -s /bin/bash "$1" && echo "$1:$1" | chpasswd && echo "    Se ha creado el usuario $1 con contraseña $1"
+          useradd -m -s /bin/bash "$1" && echo "$2:$2" | chpasswd && echo "    Se ha creado el usuario $1 con contraseña $2"
           echo ""
           echo "  Asignando permisos sudo al usuario recién creado..."
           echo ""
