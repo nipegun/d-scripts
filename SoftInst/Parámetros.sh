@@ -17,7 +17,7 @@
 # Definir la cantidad de argumentos esperados
   cCantParamEsperados=2
 
-# Comprobar que se hayan pasado la cantidad de parámetros correctos y proceder
+# Comprobar que se hayan pasado la cantidad de parámetros correctos. Abortar el script si no.
   if [ $# -ne $cCantParamEsperados ]
     then
       echo ""
