@@ -41,7 +41,7 @@
   echo ""
   echo "    Reparando permisos de la carpeta /tmp/ ..."
   echo ""
-  chmod 1777 /tmp
+  chmod 1777 /tmp -R
 
 # Actualizar lista de paquetes disponibles en los repositorios
   echo ""
