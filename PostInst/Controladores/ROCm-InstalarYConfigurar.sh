@@ -9,19 +9,19 @@
 # Script de NiPeGun para instalar y configurar ROCm en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/Controladores/ROCm-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/Controladores/ROCm-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/Controladores/ROCm-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/Controladores/ROCm-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/Controladores/ROCm-InstalarYConfigurar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -90,9 +90,25 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ROCm para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Descargar el paquete del repo
+      sudo apt update
+      sudo apt -y install "linux-headers-$(uname -r)" || vVerHeaders=$(uname -r); sudo apt -y install proxmox-headers-"$vVerHeaders"
+      sudo apt -y install python3-setuptools python3-wheel libpython3.11
+      sudo usermod -a -G render,video $LOGNAME # Add the current user to the render and video groups
+      wget https://repo.radeon.com/amdgpu-install/6.3.1/ubuntu/jammy/amdgpu-install_6.3.60301-1_all.deb
+
+    # Instalar repo
+      sudo apt install ./amdgpu-install_6.3.60301-1_all.deb
+      sudo apt update
+
+    # Instalar paquetes
+      sudo apt install amdgpu-dkms
+      sudo apt install rocm
+
+    # Instalar ROCm y también driver de pantalla
+      sudo amdgpu-install --usecase=hip,rocm
+    # Instalar sólo rocm, sin el driver de pantalla
+      sudo amdgpu-install --no-dkms --usecase=hip,rocm
 
   elif [ $cVerSO == "11" ]; then
 
