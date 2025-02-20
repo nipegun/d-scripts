@@ -106,9 +106,9 @@
       sudo apt install rocm
 
     # Instalar ROCm y también driver de pantalla
-      sudo amdgpu-install --usecase=hip,rocm
+      #sudo amdgpu-install --usecase=hip,rocm
     # Instalar sólo rocm, sin el driver de pantalla
-      sudo amdgpu-install --no-dkms --usecase=hip,rocm
+      #sudo amdgpu-install --no-dkms --usecase=hip,rocm
 
   elif [ $cVerSO == "11" ]; then
 
