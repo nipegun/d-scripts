@@ -5,16 +5,52 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-
+# ----------
 # Script de NiPeGun para instalar y configurar ROCm en Debian
 #
-# Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/ROCm-InstalarYConfigurar.sh | bash
+# Ejecución remota (puede requerir permisos sudo):
+#   curl -sL x | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL x | sed 's-sudo--g' | bash
+#
+# Ejecución remota sin caché:
+#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#
+# Ejecución remota con parámetros:
+#   curl -sL x | bash -s Parámetro1 Parámetro2
+#
+# Bajar y editar directamente el archivo en nano
+#   curl -sL x | nano -
+# ----------
 
+# Definir constantes de color
+  cColorAzul='\033[0;34m'
+  cColorAzulClaro='\033[1;34m'
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
 
-cColorRojo='\033[1;31m'
-cColorVerde='\033[1;32m'
-cFinColor='\033[0m'
+# Comprobar si el script está corriendo como root
+  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
+  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
+    echo ""
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
+    echo ""
+    exit
+  fi
+
+# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+    echo ""
+    sudo apt-get -y update
+    sudo apt-get -y install curl
+    echo ""
+  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -36,155 +72,76 @@ cFinColor='\033[0m'
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+# Ejecutar comandos dependiendo de la versión de Debian detectada
 
-  echo ""
-  echo "  Iniciando el script de instalación de ROCm para Debian 7 (Wheezy)..."
-  echo ""
+  if [ $cVerSO == "13" ]; then
 
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ROCm para Debian 13 (x)...${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "8" ]; then
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "  Iniciando el script de instalación de ROCm para Debian 8 (Jessie)..."
-  echo ""
+  elif [ $cVerSO == "12" ]; then
 
-  echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ROCm para Debian 12 (Bookworm)...${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "9" ]; then
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "  Iniciando el script de instalación de ROCm para Debian 9 (Stretch)..."
-  echo ""
+  elif [ $cVerSO == "11" ]; then
 
-  echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ROCm para Debian 11 (Bullseye)...${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "10" ]; then
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "  Iniciando el script de instalación de ROCm para Debian 10 (Buster)..."
-  echo ""
+  elif [ $cVerSO == "10" ]; then
 
-  echo ""
-  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ROCm para Debian 10 (Buster)...${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "11" ]; then
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "  Iniciando el script de instalación de ROCm para Debian 11 (Bullseye)..."
-  echo ""
+  elif [ $cVerSO == "9" ]; then
 
-  echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ROCm para Debian 9 (Stretch)...${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "12" ]; then
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-  vFechaDeEjec=$(date +a%Ym%md%d@%T)
+  elif [ $cVerSO == "8" ]; then
 
-  # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
-    if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
-      echo ""
-      echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
-      echo ""
-      apt-get -y update
-      apt-get -y install dialog
-      echo ""
-    fi
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ROCm para Debian 8 (Jessie)...${cFinColor}"
+    echo ""
 
-  menu=(dialog --checklist "Marca la opción que quieras instalar:" 22 96 16)
-    opciones=(
-      1 "Instalar desde los repositorios oficiales de Debian" on
-      2 "Instalar desde fuente externa" off
-    )
-  choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-  #clear
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-    for choice in $choices
-      do
-        case $choice in
+  elif [ $cVerSO == "7" ]; then
 
-          1)
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ROCm para Debian 7 (Wheezy)...${cFinColor}"
+    echo ""
 
-            echo ""
-            echo "  Instalando ROCm desde los repositorios oficiales de Debian..."
-            echo ""
-            apt-get -y install librocm-smi-dev
-            apt-get -y install librocm-smi64-1
-            apt-get -y install rocm-cmake
-            apt-get -y install rocm-device-libs
-            apt-get -y install rocm-smi
-            apt-get -y install rocminfo
-            apt-get -y install libamd-comgr2
-            apt-get -y install librocsparse0
-            apt-get -y install libspfft1
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-            # Desinstalar
-              #apt-get -y remove librocm-smi-dev
-              #apt-get -y remove librocm-smi64-1
-              #apt-get -y remove rocm-cmake
-              #apt-get -y remove rocm-device-libs
-              #apt-get -y remove rocm-smi
-              #apt-get -y remove rocminfo
-              #apt-get -y remove libamd-comgr2
-              #apt-get -y remove librocsparse0
-              #apt-get -y remove libspfft1
-
-          ;;
-
-          2)
-
-            echo ""
-            echo "  Instalando ROCm desde una fuente externa..."
-            echo ""
-
-            # Agregar el repositorio
-              echo ""
-              echo "    Agregando el repositorio"
-              echo ""
-              apt-get -y update
-              apt-get -y install curl
-              apt-get -y install gnupg2
-              curl -fsSL https://repo.radeon.com/rocm/rocm.gpg.key | gpg --dearmor -o /etc/apt/trusted.gpg.d/rocm-keyring.gpg
-              echo 'deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/rocm-keyring.gpg] https://repo.radeon.com/rocm/apt/5.7/ jammy main' > /etc/apt/sources.list.d/rocm.list
-            
-            # Instalar paquetes
-              echo ""
-              echo "    Instalando paquetes necesarios..."
-              echo ""
-              apt-get -y update
-              apt-get -y install wget
-              apt-get -y install gawk
-              apt-get -y install linux-headers-amd64
-              apt-get -y install clinfo
-
-            # Instalar ROCm
-              echo ""
-              echo "    Instalando el paquete rocm-opencl-runtime..."
-              echo ""
-              apt-get -y install rocm-opencl-runtime
-
-
-            # Desinstalar
-              # apt-get -y remove rocm-opencl-runtime
-              # apt-get -y remove clinfo
-              # apt-get -y remove gawk
-              # rm -f /etc/apt/sources.list.d/rocm.list
-              # rm -f /etc/apt/trusted.gpg.d/rocm-keyring.gpg
-              # apt-get -y update
-
-          ;;
-
-      esac
-
-  done
-
-fi
+  fi
