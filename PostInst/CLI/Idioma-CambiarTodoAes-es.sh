@@ -8,7 +8,10 @@
 # ----------
 # Script de NiPeGun para cambiar el idioma del sistema y del teclado a sólo español
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Idioma-CambiarTodoAes-es.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Idioma-CambiarTodoAes-es.sh | bash
 # ----------
 
@@ -45,50 +48,48 @@
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 13 (x)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 8 (Jessie)...${cFinColor}"
-  echo ""
+elif [ $cVerSO == "12" ]; then
 
   # Poner que sólo se genere el español de España cuando se creen locales
-    rm -f  /etc/locale.gen
-    echo "es_ES.UTF-8 UTF-8" > /etc/locale.gen
+    sudo rm -f  /etc/locale.gen
+    echo "es_ES.UTF-8 UTF-8" | sudo tee /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el español de España
-    apt-get -y update && apt-get -y install locales
-    locale-gen --purge es_ES.UTF-8
+    sudo apt-get -y update
+    sudo apt-get -y install locales
+    sudo locale-gen --purge es_ES.UTF-8
 
   # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="es_ES.UTF-8"'   > /etc/default/locale
-    echo 'LANGUAGE="es_ES:es"' >> /etc/default/locale
+    echo 'LANG="es_ES.UTF-8"'  | sudo tee    /etc/default/locale
+    echo 'LANGUAGE="es_ES:es"' | sudo tee -a /etc/default/locale
 
   # Poner el teclado en español de España
-    echo 'XKBMODEL="pc105"'   > /etc/default/keyboard
-    echo 'XKBLAYOUT="es"'    >> /etc/default/keyboard
-    echo 'XKBVARIANT=""'     >> /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     >> /etc/default/keyboard
-    echo ''                  >> /etc/default/keyboard
-    echo 'BACKSPACE="guess"' >> /etc/default/keyboard
-    echo ''                  >> /etc/default/keyboard
+    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="es"'    | sudo tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
 
   # Indicar idioma español de España para todos los usuarios
-    echo ""                                                      >> /etc/profile
-    echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
-    echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
-    echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
-    echo '  export LANG=es_ES.UTF-8'                             >> /etc/skel/.bashrc
-    echo '  export LANGUAGE=es_ES:es'                            >> /etc/skel/.bashrc
+    echo ""                                                      | sudo tee    /etc/profile
+    echo '# Poner idioma español de España a todos los usuarios' | sudo tee -a /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/profile
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/profile
+    
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/skel/.bashrc
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/skel/.bashrc
 
   # Notificar cambios
     echo ""
@@ -96,39 +97,38 @@ elif [ $cVerSO == "8" ]; then
     echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
 
-elif [ $cVerSO == "9" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 9 (Stretch)...${cFinColor}"
-  echo ""
+elif [ $cVerSO == "11" ]; then
 
   # Poner que sólo se genere el español de España cuando se creen locales
-    echo "es_ES.UTF-8 UTF-8" > /etc/locale.gen
+    sudo rm -f  /etc/locale.gen
+    echo "es_ES.UTF-8 UTF-8" | sudo tee /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el español de España
-    apt-get -y update && apt-get -y install locales
-    locale-gen --purge es_ES.UTF-8
+    sudo apt-get -y update
+    sudo apt-get -y install locales
+    sudo locale-gen --purge es_ES.UTF-8
 
   # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="es_ES.UTF-8"'   > /etc/default/locale
-    echo 'LANGUAGE="es_ES:es"' >> /etc/default/locale
+    echo 'LANG="es_ES.UTF-8"'  | sudo tee    /etc/default/locale
+    echo 'LANGUAGE="es_ES:es"' | sudo tee -a /etc/default/locale
 
   # Poner el teclado en español de España
-    echo 'XKBMODEL="pc105"'   > /etc/default/keyboard
-    echo 'XKBLAYOUT="es"'    >> /etc/default/keyboard
-    echo 'XKBVARIANT=""'     >> /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     >> /etc/default/keyboard
-    echo ''                  >> /etc/default/keyboard
-    echo 'BACKSPACE="guess"' >> /etc/default/keyboard
-    echo ''                  >> /etc/default/keyboard
+    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="es"'    | sudo tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
 
   # Indicar idioma español de España para todos los usuarios
-    echo ""                                                      >> /etc/profile
-    echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
-    echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
-    echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
-    echo '  export LANG=es_ES.UTF-8'                             >> /etc/skel/.bashrc
-    echo '  export LANGUAGE=es_ES:es'                            >> /etc/skel/.bashrc
+    echo ""                                                      | sudo tee    /etc/profile
+    echo '# Poner idioma español de España a todos los usuarios' | sudo tee -a /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/profile
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/profile
+    
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/skel/.bashrc
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/skel/.bashrc
 
   # Notificar cambios
     echo ""
@@ -143,119 +143,169 @@ elif [ $cVerSO == "10" ]; then
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales
-    echo "es_ES.UTF-8 UTF-8" > /etc/locale.gen
+    sudo rm -f  /etc/locale.gen
+    echo "es_ES.UTF-8 UTF-8" | sudo tee /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el español de España
-    apt-get -y update && apt-get -y install locales
-    locale-gen --purge es_ES.UTF-8
+    sudo apt-get -y update
+    sudo apt-get -y install locales
+    sudo locale-gen --purge es_ES.UTF-8
 
   # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="es_ES.UTF-8"'   > /etc/default/locale
-    echo 'LANGUAGE="es_ES:es"' >> /etc/default/locale
+    echo 'LANG="es_ES.UTF-8"'  | sudo tee    /etc/default/locale
+    echo 'LANGUAGE="es_ES:es"' | sudo tee -a /etc/default/locale
 
   # Poner el teclado en español de España
-    echo 'XKBMODEL="pc105"'   > /etc/default/keyboard
-    echo 'XKBLAYOUT="es"'    >> /etc/default/keyboard
-    echo 'XKBVARIANT=""'     >> /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     >> /etc/default/keyboard
-    echo ''                  >> /etc/default/keyboard
-    echo 'BACKSPACE="guess"' >> /etc/default/keyboard
-    echo ''                  >> /etc/default/keyboard
+    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="es"'    | sudo tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
 
   # Indicar idioma español de España para todos los usuarios
-    echo ""                                                      >> /etc/profile
-    echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
-    echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
-    echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
-    echo '  export LANG=es_ES.UTF-8'                             >> /etc/skel/.bashrc
-    echo '  export LANGUAGE=es_ES:es'                            >> /etc/skel/.bashrc
+    echo ""                                                      | sudo tee    /etc/profile
+    echo '# Poner idioma español de España a todos los usuarios' | sudo tee -a /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/profile
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/profile
+    
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/skel/.bashrc
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/skel/.bashrc
 
   # Notificar cambios
     echo ""
-    echo -e "${cColorVerde}    Cambios realizados.${cFinColor}"
-    echo -e "${cColorVerde}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
+    echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
+    echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
 
-elif [ $cVerSO == "11" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales
-    echo "es_ES.UTF-8 UTF-8" > /etc/locale.gen
+    sudo rm -f  /etc/locale.gen
+    echo "es_ES.UTF-8 UTF-8" | sudo tee /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el español de España
-    apt-get -y update && apt-get -y install locales
-    locale-gen --purge es_ES.UTF-8
+    sudo apt-get -y update
+    sudo apt-get -y install locales
+    sudo locale-gen --purge es_ES.UTF-8
 
   # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="es_ES.UTF-8"'   > /etc/default/locale
-    echo 'LANGUAGE="es_ES:es"' >> /etc/default/locale
+    echo 'LANG="es_ES.UTF-8"'  | sudo tee    /etc/default/locale
+    echo 'LANGUAGE="es_ES:es"' | sudo tee -a /etc/default/locale
 
   # Poner el teclado en español de España
-    echo 'XKBMODEL="pc105"'   > /etc/default/keyboard
-    echo 'XKBLAYOUT="es"'    >> /etc/default/keyboard
-    echo 'XKBVARIANT=""'     >> /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     >> /etc/default/keyboard
-    echo ''                  >> /etc/default/keyboard
-    echo 'BACKSPACE="guess"' >> /etc/default/keyboard
-    echo ''                  >> /etc/default/keyboard
+    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="es"'    | sudo tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
 
   # Indicar idioma español de España para todos los usuarios
-    echo ""                                                      >> /etc/profile
-    echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
-    echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
-    echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
-    echo '  export LANG=es_ES.UTF-8'                             >> /etc/skel/.bashrc
-    echo '  export LANGUAGE=es_ES:es'                            >> /etc/skel/.bashrc
+    echo ""                                                      | sudo tee    /etc/profile
+    echo '# Poner idioma español de España a todos los usuarios' | sudo tee -a /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/profile
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/profile
+    
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/skel/.bashrc
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/skel/.bashrc
 
   # Notificar cambios
     echo ""
-    echo -e "${cColorVerde}    Cambios realizados.${cFinColor}"
-    echo -e "${cColorVerde}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
+    echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
+    echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
 
-elif [ $cVerSO == "12" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 12 (Bookworm)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   # Poner que sólo se genere el español de España cuando se creen locales
-    rm -f /etc/locale.gen
-    echo "es_ES.UTF-8 UTF-8" > /etc/locale.gen
+    sudo rm -f  /etc/locale.gen
+    echo "es_ES.UTF-8 UTF-8" | sudo tee /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el español de España
-    apt-get -y update
-    apt-get -y install locales
-    locale-gen --purge es_ES.UTF-8
+    sudo apt-get -y update
+    sudo apt-get -y install locales
+    sudo locale-gen --purge es_ES.UTF-8
 
   # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="es_ES.UTF-8"'   > /etc/default/locale
-    echo 'LANGUAGE="es_ES:es"' >> /etc/default/locale
+    echo 'LANG="es_ES.UTF-8"'  | sudo tee    /etc/default/locale
+    echo 'LANGUAGE="es_ES:es"' | sudo tee -a /etc/default/locale
 
   # Poner el teclado en español de España
-    echo 'XKBMODEL="pc105"'   > /etc/default/keyboard
-    echo 'XKBLAYOUT="es"'    >> /etc/default/keyboard
-    echo 'XKBVARIANT=""'     >> /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     >> /etc/default/keyboard
-    echo ''                  >> /etc/default/keyboard
-    echo 'BACKSPACE="guess"' >> /etc/default/keyboard
-    echo ''                  >> /etc/default/keyboard
+    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="es"'    | sudo tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
 
   # Indicar idioma español de España para todos los usuarios
-    echo ""                                                      >> /etc/profile
-    echo '# Poner idioma español de España a todos los usuarios' >> /etc/profile
-    echo '  export LANG=es_ES.UTF-8'                             >> /etc/profile
-    echo '  export LANGUAGE=es_ES:es'                            >> /etc/profile
-    echo '  export LANG=es_ES.UTF-8'                             >> /etc/skel/.bashrc
-    echo '  export LANGUAGE=es_ES:es'                            >> /etc/skel/.bashrc
+    echo ""                                                      | sudo tee    /etc/profile
+    echo '# Poner idioma español de España a todos los usuarios' | sudo tee -a /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/profile
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/profile
+    
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/skel/.bashrc
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/skel/.bashrc
 
   # Notificar cambios
     echo ""
-    echo -e "${cColorVerde}    Cambios realizados.${cFinColor}"
-    echo -e "${cColorVerde}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
+    echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
+    echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
+    echo ""
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 7 (Wheezy)...${cFinColor}"
+  echo ""
+
+  # Poner que sólo se genere el español de España cuando se creen locales
+    sudo rm -f  /etc/locale.gen
+    echo "es_ES.UTF-8 UTF-8" | sudo tee /etc/locale.gen
+
+  # Compilar los locales borrando primero los existentes y dejando nada más que el español de España
+    sudo apt-get -y update
+    sudo apt-get -y install locales
+    sudo locale-gen --purge es_ES.UTF-8
+
+  # Modificar el archivo /etc/default/locale reflejando los cambios
+    echo 'LANG="es_ES.UTF-8"'  | sudo tee    /etc/default/locale
+    echo 'LANGUAGE="es_ES:es"' | sudo tee -a /etc/default/locale
+
+  # Poner el teclado en español de España
+    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="es"'    | sudo tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
+
+  # Indicar idioma español de España para todos los usuarios
+    echo ""                                                      | sudo tee    /etc/profile
+    echo '# Poner idioma español de España a todos los usuarios' | sudo tee -a /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/profile
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/profile
+    
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/skel/.bashrc
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/skel/.bashrc
+
+  # Notificar cambios
+    echo ""
+    echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
+    echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
 
 fi
