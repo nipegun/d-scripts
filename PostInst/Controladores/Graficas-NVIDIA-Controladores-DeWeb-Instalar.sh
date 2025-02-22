@@ -71,7 +71,12 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Instalando paquetes para compilar..."
     echo ""
-    sudo apt install -y build-essential dkms linux-headers-$(uname -r)
+    sudo apt-get -y update
+    sudo apt-get -y install build-essential
+    sudo apt-get -y install linux-headers-$(uname -r)
+    sudo apt-get -y install dkms
+    sudo apt-get -y install pkg-config
+    sudo apt-get -y install libglvnd-dev
 
   # Blacklistear nouveau
     echo ""
@@ -102,6 +107,8 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     chmod +x /tmp/nVidiaWebDriverInstall.run
     sudo /tmp/nVidiaWebDriverInstall.run
+
+nvidia-smi
 
 elif [ $cVerSO == "11" ]; then
 
