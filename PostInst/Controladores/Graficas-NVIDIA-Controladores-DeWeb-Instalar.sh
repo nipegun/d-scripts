@@ -110,6 +110,12 @@ elif [ $cVerSO == "12" ]; then
 
 nvidia-smi
 
+#  # Instalar CUDA
+#    echo ""
+#    echo "    Instalando CUDA..."
+#    echo ""
+#    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-CUDA-DeWeb-Instalar.sh | bash
+
 elif [ $cVerSO == "11" ]; then
 
   echo ""
