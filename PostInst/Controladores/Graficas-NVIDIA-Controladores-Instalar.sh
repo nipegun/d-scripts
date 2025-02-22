@@ -9,8 +9,11 @@
 # Script de NiPeGun para instalar y configurar los controladores de NVIDIA en Debian
 # de forma que se pueda dar uso a los núcleos CUDA de la tarjeta gráfica
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-Instalar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-Instalar.sh | sudo 's---g' | bash
 #
 # Ejecución remota sin caché:
 #   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-Instalar.sh | bash
@@ -27,14 +30,6 @@
   # Para el color rojo también:
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
-
-# Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
-    echo ""
-    exit
-  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -81,8 +76,8 @@ elif [ $cVerSO == "12" ]; then
         echo ""
         echo -e "${cColorRojo}      El paquete nvidia-detect no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
-        apt-get -y update
-        apt-get -y install nvidia-detect
+        sudo apt-get -y update
+        sudo apt-get -y install nvidia-detect
         echo ""
       fi
     cPaqueteControlador=$(nvidia-detect | grep "^ " | sed 's- --g')
@@ -94,13 +89,19 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Instalando el paquete del controlador..."
     echo ""
-    apt-get -y install $cPaqueteControlador
+    sudo apt-get -y install $cPaqueteControlador
 
   # Instalar el firmware
     echo ""
     echo "    Instalando el firmware..."
     echo ""
-    apt-get -y install firmware-misc-nonfree
+    sudo apt-get -y install firmware-misc-nonfree
+
+  # Instalar CUDA toolkit
+    echo ""
+    echo "    Instalando CUDA toolkit..."
+    echo ""
+    sudo apt-get -y install nvidia-cuda-toolkit
 
 elif [ $cVerSO == "11" ]; then
 
