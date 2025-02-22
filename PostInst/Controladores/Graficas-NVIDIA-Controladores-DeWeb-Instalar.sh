@@ -67,41 +67,41 @@ elif [ $cVerSO == "12" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de los controladores NVIDIA para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
-  # Determinar el controlador a instalar
+  # Instalar paquetes para compilar
     echo ""
-    echo "    Determinando el controlador a instalar..."
+    echo "    Instalando paquetes para compilar..."
     echo ""
-    # Comprobar si el paquete nvidia-detect está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s nvidia-detect 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo -e "${cColorRojo}      El paquete nvidia-detect no está instalado. Iniciando su instalación...${cFinColor}"
-        echo ""
-        sudo apt-get -y update
-        sudo apt-get -y install nvidia-detect
-        echo ""
-      fi
-    cPaqueteControlador=$(nvidia-detect | grep "^ " | sed 's- --g')
-    echo ""
-    echo "      El paquete con el controlador a instalar es: $cPaqueteControlador"
-    echo ""
+    sudo apt install -y build-essential dkms linux-headers-$(uname -r)
 
-  # Instalar el paquete del controlador
+  # Blacklistear nouveau
     echo ""
-    echo "    Instalando el paquete del controlador..."
+    echo "    Blacklistear nouveau..."
     echo ""
-    sudo apt-get -y install $cPaqueteControlador
+    echo "blacklist nouveau"         | sudo tee    /etc/modprobe.d/blacklist-nouveau.conf
+    echo "options nouveau modeset=0" | sudo tee -a /etc/modprobe.d/blacklist-nouveau.conf
+    sudo update-initramfs -u -k all
+    #sudo reboot
 
-  # Instalar el firmware
+  # Descargar el instalador
     echo ""
-    echo "    Instalando el firmware..."
+    echo "    Descargando el instalador..."
     echo ""
-    sudo apt-get -y install firmware-misc-nonfree
+    curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/550.144.03/NVIDIA-Linux-x86_64-550.144.03.run -o /tmp/nVidiaWebDriverInstall.run
 
-  # Instalar CUDA toolkit
+  # Parar entorno gráfico
     echo ""
-    echo "    Instalando CUDA toolkit..."
+    echo "    Parando entorno gráfico..."
     echo ""
-    sudo apt-get -y install nvidia-cuda-toolkit
+    sudo systemctl stop gdm
+    sudo systemctl stop sddm
+    sudo systemctl stop lightdm
+
+  # Ejecutar el instalador
+    echo ""
+    echo "    Ejecutando el instalador..."
+    echo ""
+    chmod +x /tmp/nVidiaWebDriverInstall.run
+    sudo /tmp/nVidiaWebDriverInstall.run
 
 elif [ $cVerSO == "11" ]; then
 
