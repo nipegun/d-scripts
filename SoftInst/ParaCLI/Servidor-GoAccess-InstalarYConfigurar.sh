@@ -12,6 +12,17 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-GoAccess-InstalarYConfigurar.sh
 # ----------
 
+apt -y install gcc autoconf gettext autopoint build-essential libmaxminddb-dev libncurses-dev
+wget https://tar.goaccess.io/goaccess-1.9.3.tar.gz
+tar -xzvf goaccess-1.9.3.tar.gz
+cd goaccess-1.9.3/
+./configure --enable-utf8 --enable-geoip=mmdb
+make
+make install
+
+
+
+
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
@@ -53,7 +64,7 @@ elif [ $cVerSO == "8" ]; then
   echo ""
 
   cCantArgumEsperados=2
-  
+   You may need to install build tools like gcc, autoconf, gettext, autopoint etc for compiling/building software from source. e.g., base-devel, build-essential, "Development Tools".
 
   if [ $# -ne $cCantArgumEsperados ]
     then
