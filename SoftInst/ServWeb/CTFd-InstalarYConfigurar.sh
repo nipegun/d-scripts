@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar CTFd en Debian
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/CTFd-InstalarYConfigurar.sh | bash
+#
+# Ejecución remota como root (para permisos sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/CTFd-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Enlace: https://github.com/CTFd/CTFd
 # ----------
@@ -67,8 +70,8 @@
           echo ""
           echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
-          apt-get -y update
-          apt-get -y install dialog
+          sudo apt-get -y update
+          sudo apt-get -y install dialog
           echo ""
         fi
       menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
@@ -77,8 +80,8 @@
           2 "  Crear la base de datos"                                         on
           3 "  Clonar el repo de Github"                                       on
           4 "    Crear el entorno virtual de python e instalar requerimientos" on
-          5 "      Crear el servicio en systemd"                               on
-          6 "        Crear el usuario para ejecutar el servicio en systemd"    on
+          5 "      Crear el usuario para ejecutar el servicio en systemd"      on
+          6 "        Crear el servicio en systemd"                             on
           7 "Instalar el proxy inverso"                                        on
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -92,15 +95,15 @@
               echo ""
               echo "  Instalando requerimientos de sistema..."
               echo ""
-              apt-get -y update
-              apt-get -y install python3
-              apt-get -y install python3-venv
-              apt-get -y install python3-pip
-              apt-get -y install git
-              apt-get -y install mariadb-server
-              apt-get -y install mariadb-client
-              apt-get -y install libmariadb-dev
-              apt-get -y install build-essential
+              sudo apt-get -y update
+              sudo apt-get -y install python3
+              sudo apt-get -y install python3-venv
+              sudo apt-get -y install python3-pip
+              sudo apt-get -y install git
+              sudo apt-get -y install mariadb-server
+              sudo apt-get -y install mariadb-client
+              sudo apt-get -y install libmariadb-dev
+              sudo apt-get -y install build-essential
 
             ;;
 
@@ -109,7 +112,8 @@
               echo ""
               echo "  Creando la base de datos..."
               echo ""
-              mysql -u root -e "CREATE DATABASE ctfd; CREATE USER 'ctfd'@'localhost' IDENTIFIED BY 'P@ssw0rd'; GRANT ALL PRIVILEGES ON ctfd.* TO 'ctfd'@'localhost'; FLUSH PRIVILEGES;"
+              echo -e "" | sudo mysql -uroot -p -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'P@ssw0rd'; FLUSH PRIVILEGES;"
+              sudo mysql -uroot -pP@ssw0rd -e "CREATE DATABASE ctfd; CREATE USER 'ctfd'@'localhost' IDENTIFIED BY 'P@ssw0rd'; GRANT ALL PRIVILEGES ON ctfd.* TO 'ctfd'@'localhost'; FLUSH PRIVILEGES;"
 
             ;;
 
@@ -119,10 +123,9 @@
               echo "  Clonando el repo de Github..."
               echo ""
 
-              mkdir -p ~/repos/python/
-              cd ~/repos/python/
-              rm -rf ~/repos/python/CTFd/
-              git clone https://github.com/CTFd/CTFd.git
+              cd /opt/
+              sudo rm -rf /opt/CTFd/
+              sudo git clone https://github.com/CTFd/CTFd.git
 
             ;;
 
@@ -131,50 +134,50 @@
               echo ""
               echo "  Creando el entorno virtual de python e instalando requerimientos..."
               echo ""
-              cd ~/repos/python/CTFd/
-              python3 -m venv venv
+              cd /opt/CTFd/
+              sudo python3 -m venv venv
               # Crear el mensaje para mostrar cuando se entra al entorno virtual
-                echo ''                                                         >> ~/repos/python/CTFd/venv/bin/activate
-                echo 'echo -e "\n  Activando el entorno virtual de CTFd... \n"' >> ~/repos/python/CTFd/venv/bin/activate
-                echo 'echo -e "    Forma de uso:\n"'                            >> ~/repos/python/CTFd/venv/bin/activate
-                echo 'echo -e "      x\n"'                                      >> ~/repos/python/CTFd/venv/bin/activate
+                echo ''                                                         | sudo tee -a /opt/CTFd/venv/bin/activate
+                echo 'echo -e "\n  Activando el entorno virtual de CTFd... \n"' | sudo tee -a /opt/CTFd/venv/bin/activate
+                echo 'echo -e "    Forma de uso:\n"'                            | sudo tee -a /opt/CTFd/venv/bin/activate
+                echo 'echo -e "      x\n"'                                      | sudo tee -a /opt/CTFd/venv/bin/activate
               # Entrar al entorno virtual
-                source ~/repos/python/CTFd/venv/bin/activate
+                sudo source /opt/CTFd/venv/bin/activate
               # Instalar requerimientos
-                pip install -r requirements.txt
+                pip3 install -r requirements.txt
               # Instalar el conector mysql
-                python3 -m pip install wheel
-                python3 -m pip install pymysql
+                pip3 install wheel
+                pip3 install pymysql
               # Generar una llave única para la app flask
                 vLlaveFlask=$(python3 -c "import secrets; print(secrets.token_hex(32))")
               # Crear el archivo de configuración
-                echo "FLASK_ENV=production"                                       > ~/repos/python/CTFd/.ctfd.env
-                echo "DATABASE_URL=mysql+pymysql://ctfd:P@ssw0rd@localhost/ctfd" >> ~/repos/python/CTFd/.ctfd.env
-                echo "SECRET_KEY=$vLlaveFlask"                                   >> ~/repos/python/CTFd/.ctfd.env
-                echo "MAIL_SERVER=localhost"                                     >> ~/repos/python/CTFd/.ctfd.env
-                echo "MAIL_PORT=25"                                              >> ~/repos/python/CTFd/.ctfd.env
-                echo "MAIL_USE_TLS=false"                                        >> ~/repos/python/CTFd/.ctfd.env
-                echo "MAIL_USERNAME="                                            >> ~/repos/python/CTFd/.ctfd.env
-                echo "MAIL_PASSWORD="                                            >> ~/repos/python/CTFd/.ctfd.env
+                echo "FLASK_ENV=production"                                      | sudo tee    /opt/CTFd/.ctfd.env
+                echo "DATABASE_URL=mysql+pymysql://ctfd:P@ssw0rd@localhost/ctfd" | sudo tee -a /opt/CTFd/.ctfd.env
+                echo "SECRET_KEY=$vLlaveFlask"                                   | sudo tee -a /opt/CTFd/.ctfd.env
+                echo "MAIL_SERVER=localhost"                                     | sudo tee -a /opt/CTFd/.ctfd.env
+                echo "MAIL_PORT=25"                                              | sudo tee -a /opt/CTFd/.ctfd.env
+                echo "MAIL_USE_TLS=false"                                        | sudo tee -a /opt/CTFd/.ctfd.env
+                echo "MAIL_USERNAME="                                            | sudo tee -a /opt/CTFd/.ctfd.env
+                echo "MAIL_PASSWORD="                                            | sudo tee -a /opt/CTFd/.ctfd.env
               # Inicializar la base de datos
                 flask db upgrade
               # Instalar Green Unicorn (para la web más rápida en producción)
-                pip install gunicorn
+                pip3 install gunicorn
               # Salir del entorno virtual
                 deactivate
               # Notificar fin de instalación en el entorno virtual
                 echo ""
                 echo -e "${cColorVerde}    Entorno virtual preparado. CTFd se puede ejecutar desde el venv de la siguientes formas:${cFinColor}"
                 echo ""
-                echo -e "${cColorVerde}      source ~/repos/python/CTFd/venv/bin/activate${cFinColor}"
+                echo -e "${cColorVerde}      source /opt/CTFd/venv/bin/activate${cFinColor}"
                 echo ""
                 echo -e "${cColorVerde}        flask run --host=0.0.0.0${cFinColor}"
                 echo ""
                 echo -e "${cColorVerde}      deactivate${cFinColor}"
                 echo ""
-                echo -e "${cColorVerde}      o${cFinColor}"
+                echo -e "${cColorVerde}        o${cFinColor}"
                 echo ""
-                echo -e "${cColorVerde}      source ~/repos/python/CTFd/venv/bin/activate${cFinColor}"
+                echo -e "${cColorVerde}      source /opt/CTFd/venv/bin/activate${cFinColor}"
                 echo ""
                 echo -e "${cColorVerde}        gunicorn -w 4 -b 0.0.0.0:8000 'CTFd:create_app()'${cFinColor}"
                 echo ""
@@ -182,6 +185,7 @@
                 echo ""
                 echo -e "${cColorVerde}      Para un entorno de producción, con mucho tráfico, se aconseja la segunda forma.${cFinColor}"
                 echo ""
+
             ;;
 
             5)
@@ -192,9 +196,9 @@
 
               # Crear el usuario
                 #useradd --system --no-create-home --shell /bin/false ctfd
-                useradd --system --no-create-home ctfd
-                mkdir -p /opt/ctfd
-                chown -R ctfd:ctfd /opt/ctfd
+                sudo useradd --system --no-create-home ctfd
+                sudo mkdir -p /opt/CTFd 2> /dev/null
+                sudo chown -R ctfd:ctfd /opt/CTFd -R
 
             ;;
 
@@ -209,11 +213,11 @@
               echo "After=network.target"                                                                         >> /etc/systemd/system/ctfd.service
               echo ""                                                                                             >> /etc/systemd/system/ctfd.service
               echo "[Service]"                                                                                    >> /etc/systemd/system/ctfd.service
-              echo "User=root"                                                                                    >> /etc/systemd/system/ctfd.service
-              echo "Group=root"                                                                                   >> /etc/systemd/system/ctfd.service
-              echo "WorkingDirectory=/ruta/al/directorio/CTFd"                                                    >> /etc/systemd/system/ctfd.service
+              echo "User=ctfd"                                                                                    >> /etc/systemd/system/ctfd.service
+              echo "Group=ctfs"                                                                                   >> /etc/systemd/system/ctfd.service
+              echo "WorkingDirectory=/opt/CTFd/"                                                                  >> /etc/systemd/system/ctfd.service
               echo 'Environment="FLASK_ENV=production"'                                                           >> /etc/systemd/system/ctfd.service
-              echo 'ExecStart=/ruta/al/directorio/CTFd/env/bin/gunicorn -w 4 -b 0.0.0.0:8000 "CTFd:create_app()"' >> /etc/systemd/system/ctfd.service
+              echo 'ExecStart=/opt/CTFd/venv/bin/gunicorn -w 4 -b 0.0.0.0:8000 "CTFd:create_app()"' >> /etc/systemd/system/ctfd.service
               echo "Restart=always"                                                                               >> /etc/systemd/system/ctfd.service
               echo ""                                                                                             >> /etc/systemd/system/ctfd.service
               echo "[Install]"                                                                                    >> /etc/systemd/system/ctfd.service
