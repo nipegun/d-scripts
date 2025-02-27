@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar Heimdall en el DockerCE de Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/Heimdall.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Dockers/Heimdall.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/Heimdall.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Dockers/Heimdall.sh | sed 's-sudo--g' | bash
 #
 # Comando: docker run -d --restart=always --name Heimdall -p 80:80 -p 443:443 -e PUID=1000 -e PGID=1000 -e TZ=Europe/Madrid lscr.io/linuxserver/heimdall:latest
 # ----------
