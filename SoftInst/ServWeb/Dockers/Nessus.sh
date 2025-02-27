@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar Nessus en el DockerCE de Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/Nessus.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Dockers/Nessus.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Dockers/Nessus.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Dockers/Nessus.sh | sed 's-sudo--g' | bash
 #
 # Comando: docker run -d --restart=always --name Nessus -p 8834:8834 tenable/nessus:latest-ubuntu
 # ----------
