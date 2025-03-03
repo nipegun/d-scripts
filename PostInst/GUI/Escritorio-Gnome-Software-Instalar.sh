@@ -197,6 +197,7 @@
     # Herramientas de documentos
       apt-get -y install libreoffice-l10n-es
       apt-get -y install pdfarranger
+      apt-get -y install foliate             # Para leer libros en ePub
 
     # Otros
       apt-get -y install unrar
