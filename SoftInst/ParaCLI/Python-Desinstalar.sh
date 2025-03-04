@@ -36,15 +36,6 @@
     exit
   fi
 
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update && apt-get -y install curl
-    echo ""
-  fi
-
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
@@ -84,23 +75,25 @@
     echo ""
 
     # Desinstalar python2
-      apt-get -y autoremove python2*
+      sudo apt-get -y autoremove python2*
     # Desintalar python3
-      #apt-get -y autoremove python3-dev
-      #apt-get autoremove python3-anyio
-      #apt-get autoremove python3-asttokens
-      #apt-get autoremove python3-attr
-      #apt-get autoremove python3-brotli
-      #apt-get autoremove python3-bs4
-      #apt-get autoremove python3-capstone
-      #apt-get autoremove python3-yara
-      #apt-get autoremove python3-wheel
-      #apt-get autoremove python3-venv
-      #apt-get autoremove python3-yaml
-      #apt-get autoremove python3-setuptools
-      #apt-get autoremove python3-pycryptodome
-      #apt-get autoremove python3-distorm3
-      #apt-get autoremove python3-distutils
+      sudo apt-get -y autoremove python3-dev
+      sudo apt-get -y autoremove python3-anyio
+      sudo apt-get -y autoremove python3-asttokens
+      sudo apt-get -y autoremove python3-attr
+      sudo apt-get -y autoremove python3-brotli
+      sudo apt-get -y autoremove python3-bs4
+      sudo apt-get -y autoremove python3-capstone
+      sudo apt-get -y autoremove python3-yara
+      sudo apt-get -y autoremove python3-venv
+      sudo apt-get -y autoremove python3-pycryptodome
+      sudo apt-get -y autoremove python3-distorm3
+      sudo apt-get -y autoremove python3-wheel # También borra ROCm y archivos asociados
+      #sudo apt-get autoremove python3-yaml         # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-setuptools   # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-distutils   # No se puede borrar en proxmox
+
+
 
   elif [ $cVerSO == "11" ]; then
 
