@@ -76,7 +76,7 @@
 
     # Desinstalar python2
       sudo apt-get -y autoremove python2*
-    # Desintalar python3
+    # Desinstalar python3
       sudo apt-get -y autoremove python3-dev
       sudo apt-get -y autoremove python3-anyio
       sudo apt-get -y autoremove python3-asttokens
@@ -88,12 +88,115 @@
       sudo apt-get -y autoremove python3-venv
       sudo apt-get -y autoremove python3-pycryptodome
       sudo apt-get -y autoremove python3-distorm3
-      sudo apt-get -y autoremove python3-wheel # También borra ROCm y archivos asociados
-      #sudo apt-get autoremove python3-yaml         # No se puede borrar en proxmox
-      #sudo apt-get autoremove python3-setuptools   # No se puede borrar en proxmox
-      #sudo apt-get autoremove python3-distutils   # No se puede borrar en proxmox
+      sudo apt-get -y autoremove python3-pip
+      sudo apt-get -y autoremove python3-argcomplete
+      sudo apt-get -y autoremove python3-psutil
+      sudo apt-get -y autoremove python3-pyelftools
+      sudo apt-get -y autoremove python3-pygments
+      sudo apt-get -y autoremove python3-pymodbus
+      sudo apt-get -y autoremove python3-pymysql
+      sudo apt-get -y autoremove python3-pyqt5
+      sudo apt-get -y autoremove python3-pyqt5.qtsvg
+      sudo apt-get -y autoremove python3-pyqt5.qtwebsockets
+      sudo apt-get -y autoremove python3-pyzbar
+      sudo apt-get -y autoremove python3-regex
+      sudo apt-get -y autoremove python3-requests-toolbelt
+      sudo apt-get -y autoremove python3-samba
+      sudo apt-get -y autoremove python3-scapy
+      sudo apt-get -y autoremove python3-serial
+      sudo apt-get -y autoremove python3-serial-asyncio
+      sudo apt-get -y autoremove python3-setuptools-whl
+      sudo apt-get -y autoremove python3-smbc
+      sudo apt-get -y autoremove python3-sniffio
+      sudo apt-get -y autoremove python3-sympy
+      sudo apt-get -y autoremove python3-talloc
+      sudo apt-get -y autoremove python3-tdb
+      sudo apt-get -y autoremove python3-tk
+      sudo apt-get -y autoremove python3-typer
+      sudo apt-get -y autoremove python3-ujson
+      sudo apt-get -y autoremove python3-uno
+      sudo apt-get -y autoremove python3-webencodings
+      sudo apt-get -y autoremove python3-wrapt
+      sudo apt-get -y autoremove python3-xdg
+      sudo apt-get -y autoremove python3-xlib
+      sudo apt-get -y autoremove python3-construct
+      sudo apt-get -y autoremove python3-cups
+      sudo apt-get -y autoremove python3-cupshelpers
+      sudo apt-get -y autoremove python3-dnspython
+      sudo apt-get -y autoremove python3-et-xmlfile
+      sudo apt-get -y autoremove python3-gpg
+      sudo apt-get -y autoremove python3-h2
+      sudo apt-get -y autoremove python3-hpack
+      sudo apt-get -y autoremove python3-hyperframe
+      sudo apt-get -y autoremove python3-ibus-1.0
+      sudo apt-get -y autoremove python3-jdcal
+      sudo apt-get -y autoremove python3-json-pointer
+      sudo apt-get -y autoremove python3-jsonschema
+      sudo apt-get -y autoremove python3-ldb
+      sudo apt-get -y autoremove python3-libvirt
+      sudo apt-get -y autoremove python3-libxml2
+      sudo apt-get -y autoremove python3-lxml
+      sudo apt-get -y autoremove python3-mako
+      sudo apt-get -y autoremove python3-markdown
+      sudo apt-get -y autoremove python3-markupsafe
+      sudo apt-get -y autoremove python3-numpy
+      sudo apt-get -y autoremove python3-olefile
+      sudo apt-get -y autoremove python3-opencv
+      sudo apt-get -y autoremove python3-openpyxl
+      sudo apt-get -y autoremove python3-openssl
+      sudo apt-get -y autoremove python3-packaging
+      sudo apt-get -y autoremove python3-pil
+      sudo apt-get -y autoremove python3-pil.imagetk
+      sudo apt-get -y autoremove python3-pip-whl
 
+      sudo apt-get -y autoremove python3-wheel     # También borra ROCm y archivos asociados
+      sudo apt-get -y autoremove python3-socks     # También borra TOR browser-launcher
+      sudo apt-get -y autoremove python3-pyqt5.sip # También borra TOR browser-launcher
+      sudo apt-get -y autoremove python3-binwalk   # También borra binwalk y mtd-utils
+      sudo apt-get -y autoremove python3-cairo     # Tambien borra system-config-printer
 
+      #sudo apt-get autoremove python3-wadllib             # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-software-properties # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-pyparsing           # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-apt                 # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-blinker             # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-cffi-backend        # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-cryptography        # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-dateutil            # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-dbus                # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-distro              # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-distro-info         # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-gi                  # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-httplib2            # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-lazr.restfulclient  # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-lazr.uri            # No se puede borrar en gnome
+      #sudo apt-get autoremove python3-oauthlib            # No se puede borrar en gnome
+
+      #sudo apt-get autoremove python3-pyvmomi            # No es aconsejable borrar en proxmox porque borra pve-esxi-import-tools
+      #sudo apt-get autoremove python3-requests           # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-six                # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-systemd            # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-urllib3            # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-wcwidth            # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-yaml               # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-setuptools         # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-distutils          # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-rbd                # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-rados              # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-protobuf           # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-ceph-argparse      # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-ceph-common        # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-cephfs             # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-certifi            # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-chardet            # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-charset-normalizer # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-distutils          # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-idna               # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-jwt                # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-lib2to3            # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-minimal            # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-pkg-resources      # No se puede borrar en proxmox
+      #sudo apt-get autoremove python3-prettytable        # No se puede borrar en proxmox
 
   elif [ $cVerSO == "11" ]; then
 
