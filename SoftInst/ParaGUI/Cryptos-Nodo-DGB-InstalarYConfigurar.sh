@@ -62,7 +62,8 @@ echo ""
 # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
    if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
      echo ""
-     echo "      El paquete tar no está instalado. Iniciando su instalación..."     echo ""
+     echo "      El paquete tar no está instalado. Iniciando su instalación..."
+     echo ""
      apt-get -y update
      apt-get -y install tar
      echo ""
@@ -100,6 +101,13 @@ echo ""
   find /home/$vUsuarioNoRoot/Cryptos/DGB/ -type f -exec chmod 664 {} \;
   find /home/$vUsuarioNoRoot/Cryptos/DGB/bin -type f -exec chmod +x {} \;
 
+
+# Instalar paquetes necesarios
+  sudo apt-get -y install libxcb-icccm4
+  sudo apt-get -y install libxcb-image0
+  sudo apt-get -y install libxcb-keysyms1
+  sudo apt-get -y install libxcb-render-util0
+  sudo apt-get -y install libxcb-xinerama0
 ## Arrancar el nodo
 #  echo ""
 #  echo "    Arrancando digibyted..."
