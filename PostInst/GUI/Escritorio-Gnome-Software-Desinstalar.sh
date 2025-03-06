@@ -111,6 +111,8 @@
       apt-get -y remove gnome-chess
       apt-get -y remove gnome-maps
       apt-get -y remove gnome-weather
+　　　sudo apt-get -y autoremove --purge mozc*
+
       apt-get -y autoremove
 
   elif [ $cVerSO == "11" ]; then
