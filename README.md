@@ -4,7 +4,7 @@ Los "d-scripts" son scripts en bash que, o he ido creado para paliar necesidades
 
 Si bien están pensados para ser ejecutados en Debian es probable que puedan ser ejecutados sin errores en derivados como Ubuntu, Mint u otros.
 
-# INSTALACIÓN
+## INSTALACIÓN
 
 Para instalar los d-scripts en la ubicación aconsejada sigue las instrucciones de este artículo: http://hacks4geeks.com/d-scripts
 
