@@ -78,42 +78,42 @@
       echo ""
       echo "  Desinstalando escoria de Gnome..."
       echo ""
-      apt-get -y remove xterm
-      #apt-get -y remove reportbug
-      #apt-get -y remove blender
-      #apt-get -y remove imagemagick
-      #apt-get -y remove inkscape
-      apt-get -y remove rhythmbox
-      apt-get -y remove evolution
-      apt-get -y remove gnome-2048
-      apt-get -y remove five-or-more
-      apt-get -y remove four-in-a-row
-      apt-get -y remove kasumi
-      #apt-get -y remove ghcal
-      apt-get -y remove hitori
-      apt-get -y remove gnome-klotski
-      apt-get -y remove lightsoff
-      apt-get -y remove gnome-mahjongg
-      apt-get -y remove gnome-mines
-      apt-get -y remove mlterm
-      apt-get -y remove gnome-music
-      apt-get -y remove gnome-nibbles
-      apt-get -y remove quadrapassel
-      apt-get -y remove iagno
-      apt-get -y remove gnome-robots
-      apt-get -y remove gnome-sudoku
-      apt-get -y remove swell-foop
-      apt-get -y remove gnome-tetravex
-      apt-get -y remove gnome-taquin
-      apt-get -y remove aisleriot
-      apt-get -y remove tali
-      apt-get -y remove totem
-      apt-get -y remove gnome-chess
-      apt-get -y remove gnome-maps
-      apt-get -y remove gnome-weather
-　　　sudo apt-get -y autoremove --purge mozc*
-
-      apt-get -y autoremove
+      sudo apt-get -y autoremove --purge xterm
+      sudo apt-get -y autoremove --purge reportbug
+      sudo apt-get -y autoremove --purge blender
+      sudo apt-get -y autoremove --purge imagemagick
+      sudo apt-get -y autoremove --purge inkscape
+      sudo apt-get -y autoremove --purge rhythmbox
+      sudo apt-get -y autoremove --purge evolution
+      sudo apt-get -y autoremove --purge gnome-2048
+      sudo apt-get -y autoremove --purge five-or-more
+      sudo apt-get -y autoremove --purge four-in-a-row
+      sudo apt-get -y autoremove --purge kasumi
+      sudo apt-get -y autoremove --purge ghcal
+      sudo apt-get -y autoremove --purge hitori
+      sudo apt-get -y autoremove --purge gnome-klotski
+      sudo apt-get -y autoremove --purge lightsoff
+      sudo apt-get -y autoremove --purge gnome-mahjongg
+      sudo apt-get -y autoremove --purge gnome-mines
+      sudo apt-get -y autoremove --purge mlterm
+      sudo apt-get -y autoremove --purge gnome-music
+      sudo apt-get -y autoremove --purge gnome-nibbles
+      sudo apt-get -y autoremove --purge quadrapassel
+      sudo apt-get -y autoremove --purge iagno
+      sudo apt-get -y autoremove --purge gnome-robots
+      sudo apt-get -y autoremove --purge gnome-sudoku
+      sudo apt-get -y autoremove --purge swell-foop
+      sudo apt-get -y autoremove --purge gnome-tetravex
+      sudo apt-get -y autoremove --purge gnome-taquin
+      sudo apt-get -y autoremove --purge aisleriot
+      sudo apt-get -y autoremove --purge tali
+      sudo apt-get -y autoremove --purge totem
+      sudo apt-get -y autoremove --purge gnome-chess
+      sudo apt-get -y autoremove --purge gnome-maps
+      sudo apt-get -y autoremove --purge gnome-weather
+　　　 sudo apt-get -y autoremove --purge mozc*
+      sudo apt-get -y autoremove --purge uim-gtk3
+      sudo apt-get -y autoremove
 
   elif [ $cVerSO == "11" ]; then
 
