@@ -8,11 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar Visual Studio Code en Debian
 #
-# Ejecución remota con sudo:
+# Ejecución remota (puede requerir permisos sudo):
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/VisualStudioCode-Instalar.sh | sudo bash
 #
-# Ejecución remota como root:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/VisualStudioCode-Instalar.sh | bash
+# Ejecución remota como $HOME:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/VisualStudioCode-Instalar.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Determinar la versión de Debian
@@ -61,8 +61,8 @@ elif [ $cVerSO == "12" ]; then
        echo ""
        echo "  dialog no está instalado. Iniciando su instalación..."
        echo ""
-       apt-get -y update > /dev/null
-       apt-get -y install dialog
+       sudo apt-get -y update > /dev/null
+       sudo apt-get -y install dialog
        echo ""
      fi
   menu=(dialog --timeout 5 --checklist "Instalación de Visual Studio Code:" 22 76 16)
@@ -101,42 +101,40 @@ elif [ $cVerSO == "12" ]; then
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
                       echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
+                      sudo apt-get -y update > /dev/null
+                      sudo apt-get -y install wget
                       echo ""
                     fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 wget $URLDelPaquete -O /tmp/VisualStudioCode.deb
 
               # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                  echo ""
-                 echo "  Creando el lanzador para el root"
+                 echo "  Creando el lanzador gráfico..."
                  echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                 mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                 echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Name=Visual Studio Code)"                                          >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                 gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -158,42 +156,40 @@ elif [ $cVerSO == "12" ]; then
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
                       echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
+                      sudo apt-get -y update > /dev/null
+                      sudo apt-get -y install wget
                       echo ""
                     fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 wget $URLDelPaquete -O /tmp/VisualStudioCode.deb
 
               # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                  echo ""
-                 echo "  Creando el lanzador para el root"
+                 echo "  Creando el lanzador gráfico..."
                  echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                 mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                 echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                 gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -215,42 +211,40 @@ elif [ $cVerSO == "12" ]; then
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
                       echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
+                      sudo apt-get -y update > /dev/null
+                      sudo apt-get -y install wget
                       echo ""
                     fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                  echo ""
-                 echo "  Creando el lanzador para el root"
+                 echo "  Creando el lanzador gráfico..."
                  echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                 mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                 echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                 gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -272,42 +266,40 @@ elif [ $cVerSO == "12" ]; then
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
                       echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
+                      sudo apt-get -y update > /dev/null
+                      sudo apt-get -y install wget
                       echo ""
                     fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                  echo ""
-                 echo "  Creando el lanzador para el root"
+                 echo "  Creando el lanzador gráfico..."
                  echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                 mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                 echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                 gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -329,42 +321,40 @@ elif [ $cVerSO == "12" ]; then
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
                       echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
+                      sudo apt-get -y update > /dev/null
+                      sudo apt-get -y install wget
                       echo ""
                     fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                  echo ""
-                 echo "  Creando el lanzador para el root"
+                 echo "  Creando el lanzador gráfico..."
                  echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                 mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                 echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                 gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -386,42 +376,40 @@ elif [ $cVerSO == "12" ]; then
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
                       echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
+                      sudo apt-get -y update > /dev/null
+                      sudo apt-get -y install wget
                       echo ""
                     fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                  echo ""
-                 echo "  Creando el lanzador para el root"
+                 echo "  Creando el lanzador gráfico..."
                  echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                 mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                 echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                 gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -443,42 +431,40 @@ elif [ $cVerSO == "12" ]; then
                 echo ""
                 echo "  Descargando el paquete..."
                 echo ""
-                mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                cd /root/SoftInst/Microsoft/VisualStudioCode/
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
                     echo "  wget no está instalado. Iniciando su instalación..."
                     echo ""
-                    apt-get -y update > /dev/null
-                    apt-get -y install wget
+                    sudo apt-get -y update > /dev/null
+                    sudo apt-get -y install wget
                     echo ""
                   fi
-                wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                 echo ""
                 echo "  Instalando el paquete .deb..."
                 echo ""
-                apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                 echo ""
-                echo "  Creando el lanzador para el root"
+                echo "  Creando el lanzador gráfico..."
                 echo ""
-                mkdir -p /root/.local/share/applications/ 2> /dev/null
-                echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -500,42 +486,40 @@ elif [ $cVerSO == "12" ]; then
                 echo ""
                 echo "  Descargando el paquete..."
                 echo ""
-                mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                cd /root/SoftInst/Microsoft/VisualStudioCode/
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
                     echo "  wget no está instalado. Iniciando su instalación..."
                     echo ""
-                    apt-get -y update > /dev/null
-                    apt-get -y install wget
+                    sudo apt-get -y update > /dev/null
+                    sudo apt-get -y install wget
                     echo ""
                   fi
-                wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                 echo ""
                 echo "  Instalando el paquete .deb..."
                 echo ""
-                apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                 echo ""
-                echo "  Creando el lanzador para el root"
+                echo "  Creando el lanzador gráfico..."
                 echo ""
-                mkdir -p /root/.local/share/applications/ 2> /dev/null
-                echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -554,8 +538,8 @@ elif [ $cVerSO == "11" ]; then
        echo ""
        echo "  dialog no está instalado. Iniciando su instalación..."
        echo ""
-       apt-get -y update > /dev/null
-       apt-get -y install dialog
+       sudo apt-get -y update > /dev/null
+       sudo apt-get -y install dialog
        echo ""
      fi
   menu=(dialog --timeout 5 --checklist "Instalación de Visual Studio Code:" 22 76 16)
@@ -594,42 +578,40 @@ elif [ $cVerSO == "11" ]; then
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
                       echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
+                      sudo apt-get -y update > /dev/null
+                      sudo apt-get -y install wget
                       echo ""
                     fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                  echo ""
-                 echo "  Creando el lanzador para el root"
+                 echo "  Creando el lanzador gráfico..."
                  echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                 mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                 echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                 gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -651,42 +633,40 @@ elif [ $cVerSO == "11" ]; then
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
                       echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
+                      sudo apt-get -y update > /dev/null
+                      sudo apt-get -y install wget
                       echo ""
                     fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                  echo ""
-                 echo "  Creando el lanzador para el root"
+                 echo "  Creando el lanzador gráfico..."
                  echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                 mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                 echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                 gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -708,42 +688,40 @@ elif [ $cVerSO == "11" ]; then
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
                       echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
+                      sudo apt-get -y update > /dev/null
+                      sudo apt-get -y install wget
                       echo ""
                     fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                  echo ""
-                 echo "  Creando el lanzador para el root"
+                 echo "  Creando el lanzador gráfico..."
                  echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                 mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                 echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                 gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -765,42 +743,40 @@ elif [ $cVerSO == "11" ]; then
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
                       echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
+                      sudo apt-get -y update > /dev/null
+                      sudo apt-get -y install wget
                       echo ""
                     fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                  echo ""
-                 echo "  Creando el lanzador para el root"
+                 echo "  Creando el lanzador gráfico..."
                  echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                 mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                 echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                 gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -822,42 +798,40 @@ elif [ $cVerSO == "11" ]; then
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
                       echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
+                      sudo apt-get -y update > /dev/null
+                      sudo apt-get -y install wget
                       echo ""
                     fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                  echo ""
-                 echo "  Creando el lanzador para el root"
+                 echo "  Creando el lanzador gráfico..."
                  echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                 mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                 echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                 gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -879,42 +853,40 @@ elif [ $cVerSO == "11" ]; then
                  echo ""
                  echo "  Descargando el paquete..."
                  echo ""
-                 mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                 cd /root/SoftInst/Microsoft/VisualStudioCode/
                  # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                     if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                       echo ""
                       echo "  wget no está instalado. Iniciando su instalación..."
                       echo ""
-                      apt-get -y update > /dev/null
-                      apt-get -y install wget
+                      sudo apt-get -y update > /dev/null
+                      sudo apt-get -y install wget
                       echo ""
                     fi
-                 wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                  echo ""
                  echo "  Instalando el paquete .deb..."
                  echo ""
-                 apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                 sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                  echo ""
-                 echo "  Creando el lanzador para el root"
+                 echo "  Creando el lanzador gráfico..."
                  echo ""
-                 mkdir -p /root/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                 gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                 mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                 echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                 gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -936,42 +908,40 @@ elif [ $cVerSO == "11" ]; then
                 echo ""
                 echo "  Descargando el paquete..."
                 echo ""
-                mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                cd /root/SoftInst/Microsoft/VisualStudioCode/
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
                     echo "  wget no está instalado. Iniciando su instalación..."
                     echo ""
-                    apt-get -y update > /dev/null
-                    apt-get -y install wget
+                    sudo apt-get -y update > /dev/null
+                    sudo apt-get -y install wget
                     echo ""
                   fi
-                wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                 echo ""
                 echo "  Instalando el paquete .deb..."
                 echo ""
-                apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                 echo ""
-                echo "  Creando el lanzador para el root"
+                echo "  Creando el lanzador gráfico..."
                 echo ""
-                mkdir -p /root/.local/share/applications/ 2> /dev/null
-                echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
@@ -993,42 +963,40 @@ elif [ $cVerSO == "11" ]; then
                 echo ""
                 echo "  Descargando el paquete..."
                 echo ""
-                mkdir -p /root/SoftInst/Microsoft/VisualStudioCode/ 2> /dev/null
-                cd /root/SoftInst/Microsoft/VisualStudioCode/
                 # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
                     echo "  wget no está instalado. Iniciando su instalación..."
                     echo ""
-                    apt-get -y update > /dev/null
-                    apt-get -y install wget
+                    sudo apt-get -y update > /dev/null
+                    sudo apt-get -y install wget
                     echo ""
                   fi
-                wget $URLDelPaquete -O /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                wget $URLDelPaquete -O /tmp/VisualStudioCode/VisualStudioCode.deb
 
               # Instalar el paquete
                 echo ""
                 echo "  Instalando el paquete .deb..."
                 echo ""
-                apt -y install /root/SoftInst/Microsoft/VisualStudioCode/VisualStudioCode.deb
+                sudo apt -y install /tmp/VisualStudioCode.deb
                  
-              # Crear el lanzador para el usuario root
+              # Crear el lanzador para el usuario $HOME
                 echo ""
-                echo "  Creando el lanzador para el root"
+                echo "  Creando el lanzador gráfico..."
                 echo ""
-                mkdir -p /root/.local/share/applications/ 2> /dev/null
-                echo "[Desktop Entry]"                                                    > /root/.local/share/applications/visualstudioroot.desktop
-                echo "Name=Visual Studio Code (para root)"                               >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Comment=Code Editing. Redefined."                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "GenericName=Text Editor"                                           >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Icon=com.visualstudio.code"                                        >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Type=Application"                                                  >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "StartupNotify=false"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "StartupWMClass=Code"                                               >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "Categories=Utility;TextEditor;Development;IDE;"                    >> /root/.local/share/applications/visualstudioroot.desktop
-                echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> /root/.local/share/applications/visualstudioroot.desktop
-                gio set /root/.local/share/applications/visualstudioroot.desktop "metadata::trusted" yes
+                mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                echo "Name=Visual Studio Code"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
