@@ -105,6 +105,11 @@
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-AtajosDeTeclado.txt -o /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
     dconf load /org/gnome/settings-daemon/plugins/media-keys/ < /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
 
+      echo ""
+      echo "  Haciendo que el editor de texto abra cada archivo en una nueva ventana, en vez de una nueva pestaña..."
+      echo ""
+      sed -i -e 's|||g' /usr/share/applications/org.gnome.TextEditor.desktop
+
     # Reiniciar el sistema
       echo ""
       echo "  Reiniciando el sistema..."
