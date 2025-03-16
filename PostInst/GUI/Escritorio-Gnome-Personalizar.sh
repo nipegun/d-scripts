@@ -108,7 +108,7 @@
       echo ""
       echo "  Haciendo que el editor de texto abra cada archivo en una nueva ventana, en vez de una nueva pestaña..."
       echo ""
-      sed -i -e 's|||g' /usr/share/applications/org.gnome.TextEditor.desktop
+      sed -i -e 's|Exec=gnome-text-editor %U|Exec=gnome-text-editor --new-window %U|g' /usr/share/applications/org.gnome.TextEditor.desktop
 
     # Reiniciar el sistema
       echo ""
