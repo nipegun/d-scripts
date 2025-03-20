@@ -79,7 +79,7 @@
         opciones=(
           1 "Instalar con los paquetes básicos"                           on
           2 "  Agregar algunos paquetes extra"                            on
-          3 "  Agregar absolutamente todos los paquetes (tarda bastante)" on
+          3 "  Agregar absolutamente todos los paquetes (tarda bastante)" off
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
