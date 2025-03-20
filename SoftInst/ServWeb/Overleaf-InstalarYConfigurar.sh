@@ -80,7 +80,6 @@
           1 "Instalar con los paquetes básicos"                           on
           2 "  Agregar algunos paquetes extra"                            on
           3 "  Agregar absolutamente todos los paquetes (tarda bastante)" on
-          4 "  Actualizar todo"                                           on
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -175,7 +174,11 @@
               echo ""
 
               # Instalar el esquema de paquetes completo
-                sudo docker exec -it sharelatex bash -c "tlmgr install scheme-full && tlmgr update --self --all"
+                sudo docker exec -it sharelatex bash -c "wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh"
+                sudo docker exec -it sharelatex bash -c "sh update-tlmgr-latest.sh"
+                sudo docker exec -it sharelatex bash -c "tlmgr --version"
+                sudo docker exec -it sharelatex bash -c "tlmgr update --self --all"
+                sudo docker exec -it sharelatex bash -c "tlmgr install scheme-full"
 
               # Guuardar los cambios en una nueva imagen
                 sudo docker commit sharelatex overleaf:scheme-full
@@ -192,36 +195,6 @@
                 sudo bin/stop
                 sudo bin/docker-compose rm -f sharelatex
                 sudo bin/up -d
-
-              # Notificar fin de ejecución del script
-                sleep 5
-                echo ""
-                echo "  Ejecución del script, finalizada."
-                echo ""
-                vIPHost=$(ip -4 addr show eth0 | grep inet | cut -d' ' -f6 | cut -d/ -f1 | sed 's- --g')
-                echo "  Conéctate a la web https://$vIPHost/launchpad para crear la cuenta de administrador"
-                echo ""
-
-            ;;
-
-            4)
-
-              echo ""
-              echo "  Actualizando todo..."
-              echo ""
-
-              # Acceder al contenedor
-                docker exec -it sharelatex bash
-              # Descargar la última versión de update-tlmgr-latest.sh
-                wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
-              # Ejecutar el script de actualización de tlmgr
-                sh update-tlmgr-latest.sh
-              # Verificar que tlmgr se ha actualizado correctamente
-                tlmgr --version
-              # Actualizar todos los paquetes
-                tlmgr update --self --all
-              # Instala scheme-full si sigue siendo necesario:
-                tlmgr install scheme-full
 
               # Notificar fin de ejecución del script
                 sleep 5
