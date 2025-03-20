@@ -177,8 +177,8 @@
                 sudo docker exec -it sharelatex bash -c "wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh"
                 sudo docker exec -it sharelatex bash -c "sh update-tlmgr-latest.sh"
                 sudo docker exec -it sharelatex bash -c "tlmgr --version"
-                sudo docker exec -it sharelatex bash -c "tlmgr update --self --all"
                 sudo docker exec -it sharelatex bash -c "tlmgr install scheme-full"
+                sudo docker exec -it sharelatex bash -c "tlmgr update --self --all"
 
               # Guuardar los cambios en una nueva imagen
                 sudo docker commit sharelatex overleaf:scheme-full
