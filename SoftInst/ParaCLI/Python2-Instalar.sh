@@ -109,17 +109,23 @@
       curl -L https://www.python.org/ftp/python/$vUltVersPython2/Python-$vUltVersPython2.tgz -o /tmp/python2.tgz
       sudo tar -xzf /tmp/python2.tgz -C /tmp/SoftInst/
       cd /tmp/SoftInst/Python-$vUltVersPython2/
-      # sudo ./configure --prefix=/opt/python2 --with-ssl=/path/to/openssl
-      sudo ./configure --prefix=/opt/python2 --with-ensurepip=install --enable-optimizations
+      # sudo ./configure --prefix=/usr/local --with-ssl=/path/to/openssl
+      # sudo ./configure --prefix=/opt/python2 --with-ensurepip=install --enable-optimizations   # Instala también /opt/python2/bin/pip2.7
+      sudo ./configure --prefix=/opt/python2 --enable-optimizations
       sudo make -j $(nproc)
       sudo make altinstall       # No se usa install para no sobreescribir la instalación de Python3
+      # Instalar pip2
+      # curl -L https://bootstrap.pypa.io/pip/2.7/get-pip.py -o /tmp/get-pip.py
+      # sudo /opt/python2/bin/python2 /tmp/get-pip.py
+      # Instalar virtualenv
+      # sudo /opt/python2/bin/pip2 install virtualenv
+
     # Notificar fin de ejecución del script
       echo ""
       echo "    Python $vUltVersPython2 se ha instalado en /opt/python2/"
       echo ""
       echo "      El binario está en /opt/python2/bin/python2.7"
       echo ""
-      /opt/python2/bin/pip2.7
 
   elif [ $cVerSO == "11" ]; then
 
