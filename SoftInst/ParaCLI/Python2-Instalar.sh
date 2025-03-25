@@ -115,16 +115,17 @@
       sudo make -j $(nproc)
       sudo make altinstall       # No se usa install para no sobreescribir la instalación de Python3
       # Instalar pip2
-      # curl -L https://bootstrap.pypa.io/pip/2.7/get-pip.py -o /tmp/get-pip.py
-      # sudo /opt/python2/bin/python2 /tmp/get-pip.py
+        vVersBinario=$(ls /opt/python2/bin/ | grep python | grep -v config | sed 's-python--g')
+        curl -L https://bootstrap.pypa.io/pip/$vVersBinario/get-pip.py -o /tmp/get-pip.py
+        sudo /opt/python2/bin/python$vVersBinario /tmp/get-pip.py
       # Instalar virtualenv
-      # sudo /opt/python2/bin/pip2 install virtualenv
+        sudo /opt/python2/bin/pip2 install virtualenv
 
     # Notificar fin de ejecución del script
       echo ""
       echo "    Python $vUltVersPython2 se ha instalado en /opt/python2/"
       echo ""
-      echo "      El binario está en /opt/python2/bin/python2.7"
+      echo "      El binario está en /opt/python2/bin/python$vVersBinario"
       echo ""
 
   elif [ $cVerSO == "11" ]; then
