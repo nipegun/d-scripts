@@ -111,9 +111,8 @@
       cd /tmp/SoftInst/Python-$vUltVersPython2/
       # sudo ./configure --prefix=/opt/python2 --with-ssl=/path/to/openssl
       sudo ./configure --prefix=/opt/python2 --with-ensurepip=install --enable-optimizations
-
       sudo make -j $(nproc)
-      sudo make altinstall # No se usa install para no sobreescribir la instalación de Python3
+      sudo make altinstall       # No se usa install para no sobreescribir la instalación de Python3
     # Notificar fin de ejecución del script
       echo ""
       echo "    Python $vUltVersPython2 se ha instalado en /opt/python2/"
