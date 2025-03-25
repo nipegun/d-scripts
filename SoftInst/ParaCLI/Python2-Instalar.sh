@@ -8,11 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar y configurar python2 en Debian
 #
-# Ejecución remota con sudo:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python2-Instalar.sh | sudo bash
-#
-# Ejecución remota como root:
+# Ejecución remota (puede requierir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python2-Instalar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python2-Instalar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Python2-Instalar.sh | nano -
@@ -26,25 +26,6 @@
   # Para el color rojo también:
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
-
-# Comprobar si el script está corriendo como root
-  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
-  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
-    echo ""
-    exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update
-    apt-get -y install curl
-    echo ""
-  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -85,24 +66,24 @@
     echo ""
 
     # Instalar paquetes necesarios para compilar
-      apt-get -y update
-      apt-get -y install build-essential
-      apt-get -y install zlib1g-dev
-      apt-get -y install libssl-dev
-      apt-get -y install libncurses5-dev
-      apt-get -y install libffi-dev
-      apt-get -y install libsqlite3-dev
-      apt-get -y install libncursesw5-dev
-      apt-get -y install libreadline-dev
-      apt-get -y install libsqlite3-dev
-      apt-get -y install libgdbm-dev
-      apt-get -y install libdb5.3-dev
-      apt-get -y install libbz2-dev
-      apt-get -y install libexpat1-dev
-      apt-get -y install liblzma-dev
-      apt-get -y install zlib1g-dev
-      apt-get -y install tk-dev
-      apt-get -y install tcl-dev
+      sudo apt-get -y update
+      sudo apt-get -y install build-essential
+      sudo apt-get -y install zlib1g-dev
+      sudo apt-get -y install libssl-dev
+      sudo apt-get -y install libncurses5-dev
+      sudo apt-get -y install libffi-dev
+      sudo apt-get -y install libsqlite3-dev
+      sudo apt-get -y install libncursesw5-dev
+      sudo apt-get -y install libreadline-dev
+      sudo apt-get -y install libsqlite3-dev
+      sudo apt-get -y install libgdbm-dev
+      sudo apt-get -y install libdb5.3-dev
+      sudo apt-get -y install libbz2-dev
+      sudo apt-get -y install libexpat1-dev
+      sudo apt-get -y install liblzma-dev
+      sudo apt-get -y install zlib1g-dev
+      sudo apt-get -y install tk-dev
+      sudo apt-get -y install tcl-dev
     # Descargar el código fuente
       # Determinar la última versión
         echo ""
@@ -113,8 +94,8 @@
             echo ""
             echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
             echo ""
-            apt-get -y update
-            apt-get -y install curl
+            sudo apt-get -y update
+            sudo apt-get -y install curl
             echo ""
           fi
         vUltVersPython2=$(curl -sL https://www.python.org/ftp/python/ | grep href | cut -d'"' -f2 | cut -d'/' -f1 | grep ^[0-9] | sort -n | grep ^2 | tail -n1)
@@ -122,25 +103,24 @@
         echo "      La última versión es la $vUltVersPython2"
         echo ""
     # Descargando la última versión
-      rm -rf /root/SoftInst/Python2
-      mkdir -p /root/SoftInst/
+      sudo rm -rf /tmp/SoftInst/Python-$vUltVersPython2/
+      sudo mkdir -p /tmp/SoftInst/
+      sudo rm -f /tmp/python2.tgz
       curl -L https://www.python.org/ftp/python/$vUltVersPython2/Python-$vUltVersPython2.tgz -o /tmp/python2.tgz
-      tar -xzf /tmp/python2.tgz -C /root/SoftInst/
-      mv /root/SoftInst/Python-$vUltVersPython2 /root/SoftInst/Python2
-      cd /root/SoftInst/Python2
-      ./configure --prefix=/usr/local --enable-optimizations
-      # Es un error frecuente en compilaciones de Python 2 debido a problemas de compatibilidad con bibliotecas SSL modernas
-      #Asegurarte de tener las dependencias correctas: Python 2 puede fallar al trabajar con versiones modernas de OpenSSL. Verifica la versión instalada:
-      #  openssl version
-      #  Si usas una versión moderna, intenta instalar una versión más antigua (por ejemplo, 1.0.2 o 1.1.1). Esto puede requerir compilación manual o instalación desde fuentes externas.
-      #./configure --prefix=/usr/local/python2 --with-ssl=/path/to/openssl
-      make -j $(nproc)
-      make altinstall # No se usa install para no sobreescribir la instalación de Python3
+      sudo tar -xzf /tmp/python2.tgz -C /tmp/SoftInst/
+      cd /tmp/SoftInst/Python-$vUltVersPython2/
+      # sudo ./configure --prefix=/opt/python2 --with-ssl=/path/to/openssl
+      sudo ./configure --prefix=/opt/python2 --with-ensurepip=install --enable-optimizations
+
+      sudo make -j $(nproc)
+      sudo make altinstall # No se usa install para no sobreescribir la instalación de Python3
     # Notificar fin de ejecución del script
       echo ""
-      echo "    Python 2.7 se ha instalado en:"
-      echo "      /usr/local/bin/python2.7"
+      echo "    Python $vUltVersPython2 se ha instalado en /opt/python2/"
       echo ""
+      echo "      El binario está en /opt/python2/bin/python2.7"
+      echo ""
+      /opt/python2/bin/pip2.7
 
   elif [ $cVerSO == "11" ]; then
 
