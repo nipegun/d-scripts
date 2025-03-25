@@ -9,7 +9,7 @@
 # Script de NiPeGun para sincronizar los d-scripts en las carpetas home de los usuarios
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar-EnHome.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/DScripts-Sincronizar-EnHome.sh | bash
 # ----------
 
 # Definir constantes de color
