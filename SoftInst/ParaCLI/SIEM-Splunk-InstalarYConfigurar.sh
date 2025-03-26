@@ -160,7 +160,7 @@ vComp="e3bdab203ac8"
               echo ""
               echo "  Splunk Universal Forwarder v$vSplunk (ARM)..."
               echo ""
-              wget -O splunkforwarder-"$vSplunk"-"$vComp"-Linux-armv8.deb "https://download.splunk.com/products/universalforwarder/releases/"$vSplunk"/linux/splunkforwarder-"$vSplunk"-"$vComp"-Linux-armv8.deb"
+              wget -O splunkforwarder-"$vSplunk"-"$vComp"-Linux-armv8.deb "https://download.splunk.com/products/universalforwarder/releases/"$vSplunk"/linux/splunkforwarder-"$vSplunk"-"$vComp"-Linux-arm64.deb"
 
            ;;
 
