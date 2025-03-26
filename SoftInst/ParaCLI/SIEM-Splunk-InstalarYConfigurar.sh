@@ -8,20 +8,18 @@
 # ----------
 # Script de NiPeGun para instalar y configurar splunk en Debian
 #
-# Ejecución remota:
+# Ejecución remota (puede requierir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Splunk-InstalarYConfigurar.sh | bash
 #
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Splunk-InstalarYConfigurar.sh | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Splunk-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Splunk-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Splunk-InstalarYConfigurar.sh | nano -
 # ----------
 
-vSplunk="9.3.1"
+vSplunk="9.4.1"
+vComp="e3bdab203ac8"
 
 # Definir constantes de color
   cColorAzul="\033[0;34m"
@@ -96,12 +94,8 @@ vSplunk="9.3.1"
       menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
         opciones=(
           1 "Instalar Splunk Enterprise v"$vSplunk" Trial" on
-          2 "Splunk SOAR On-Prem Unprivileged v6.3.0 (Centos/RHEL 8)" off
-          3 "Splunk SOAR On-Prem Unprivileged v6.3.0 (Centos/RHEL 7)" off
-          4 "Splunk SOAR On-Prem Privileged v5.3.6 (CentOS/RHEL 7)" off
-          5 "Splunk SOAR Cloud - Automation Broker v6.3.0" off
-          6 "Splunk SOAR Diagnostic tool backport v6.3.0 (CentOS/RHEL 7 y 8)" off
-          7 "Splunk Universal Forwarder v"$vSplunk"" off
+          2 "Splunk Universal Forwarder v"$vSplunk" amd64" off
+          3 "Splunk Universal Forwarder v"$vSplunk" arm" off
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -112,7 +106,7 @@ vSplunk="9.3.1"
             1)
 
               echo ""
-              echo "  Instalando Splunk enterprise v9.3.1 Free Trial..."
+              echo "  Instalando Splunk enterprise v$vSplunk Free Trial..."
               echo ""
               mkdir -p /root/SoftInst/Splunk
               # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
@@ -124,7 +118,7 @@ vSplunk="9.3.1"
                   apt-get -y install curl
                   echo ""
                 fi
-              wget "https://download.splunk.com/products/splunk/releases/"$vSplunk"/linux/splunk-"$vSplunk"-0b8d769cb912-linux-2.6-amd64.deb" -O /root/SoftInst/Splunk/splunk.deb
+              wget "https://download.splunk.com/products/splunk/releases/"$vSplunk"/linux/splunk-"$vSplunk"-"$vComp"-linux-amd64.deb" -O /root/SoftInst/Splunk/splunk.deb
               apt -y install /root/SoftInst/Splunk/splunk.deb
               # Iniciar y aceptar licencia
                 /opt/splunk/bin/splunk start --accept-license
@@ -155,64 +149,18 @@ vSplunk="9.3.1"
             2)
 
               echo ""
-              echo " Instalando Splunk SOAR On-Prem Unprivileged v6.3.0 (Centos/RHEL 8)..."
+              echo "  Splunk Universal Forwarder v$vSplunk (amd64)..."
               echo ""
-              wget -O splunk_soar-unpriv-6.3.0.718-90256164-el8-x86_64.tgz "https://download.splunk.com/products/splunk_soar-unpriv/releases/6.3.0/linux/splunk_soar-unpriv-6.3.0.718-90256164-el8-x86_64.tgz"
+              wget -O splunkforwarder-"$vSplunk"-"$vComp"-linux-amd64.deb "https://download.splunk.com/products/universalforwarder/releases/"$vSplunk"/linux/splunkforwarder-"$vSplunk"-"$vComp"-linux-amd64.deb"
 
-            ;;
+           ;;
 
             3)
 
               echo ""
-              echo "  Instalando Splunk SOAR On-Prem Unprivileged v6.3.0 (Centos/RHEL 7)..."
+              echo "  Splunk Universal Forwarder v$vSplunk (ARM)..."
               echo ""
-              wget -O splunk_soar-unpriv-6.3.0.718-90256164-el7-x86_64.tgz "https://download.splunk.com/products/splunk_soar-unpriv/releases/6.3.0/linux/splunk_soar-unpriv-6.3.0.718-90256164-el7-x86_64.tgz"
-
-            ;;
-
-            4)
-
-              echo ""
-              echo "  Instalando Splunk SOAR On-Prem Privileged v5.3.6 (CentOS/RHEL 7)..."
-              echo ""
-              wget -O splunk_soar-priv-5.3.6.136158-836acbdb-el7-x86_64.tgz "https://download.splunk.com/products/splunk_soar-priv/releases/5.3.6/linux/splunk_soar-priv-5.3.6.136158-836acbdb-el7-x86_64.tgz"
-
-
-            ;;
-
-            5)
-
-              echo ""
-              echo "  Instalando Splunk SOAR Cloud - Automation Broker v6.3.0..."
-              echo ""
-              wget -O automation_broker_6.3.0.718.tar.gz "https://download.splunk.com/products/automation_broker/releases/6.3.0/linux/automation_broker_6.3.0.718.tar.gz"
-
-            ;;
-
-            6)
-
-              echo ""
-              echo "  Splunk SOAR Diagnostic tool backport v6.3.0 (CentOS/RHEL 7 y 8)..."
-              echo ""
-              wget -O soar_diag_backport-6.3.0.718.tar.gz "https://download.splunk.com/products/soar_diag_backport/releases/6.3.0/linux/soar_diag_backport-6.3.0.718.tar.gz"
-
-            ;;
-
-            7)
-
-              echo ""
-              echo "  Splunk Universarl Forwarder v9.3.1 (amd64)..."
-              echo ""
-              wget -O splunkforwarder-9.3.1-0b8d769cb912-linux-2.6-amd64.deb "https://download.splunk.com/products/universalforwarder/releases/9.3.1/linux/splunkforwarder-9.3.1-0b8d769cb912-linux-2.6-amd64.deb"
-
-           ;;
-
-            8)
-
-              echo ""
-              echo "  Splunk Universarl Forwarder v9.3.1 (ARM)..."
-              echo ""
-              wget -O splunkforwarder-9.3.1-0b8d769cb912-Linux-armv8.deb "https://download.splunk.com/products/universalforwarder/releases/9.3.1/linux/splunkforwarder-9.3.1-0b8d769cb912-Linux-armv8.deb"
+              wget -O splunkforwarder-"$vSplunk"-"$vComp"-Linux-armv8.deb "https://download.splunk.com/products/universalforwarder/releases/"$vSplunk"/linux/splunkforwarder-"$vSplunk"-"$vComp"-Linux-armv8.deb"
 
            ;;
 
