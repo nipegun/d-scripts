@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar y configurar ProxmoxVE en Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Proxmox-VirtualizationEnvironment-Instalar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Proxmox-VirtualizationEnvironment-Instalar.sh | bash
 # ---------
 
 # IP Local
@@ -200,7 +200,7 @@ elif [ $cVerSO == "12" ]; then
       echo "  bridge-ports eth0"            >> /etc/network/interfaces
       echo "  bridge-stp off"               >> /etc/network/interfaces
       echo "  bridge-fd 0"                  >> /etc/network/interfaces
-      echo "  #hwaddress 00:00:00:00:02:00" >> /etc/network/interfaces
+      echo "  #hwaddress 00:00:00:00:02:10" >> /etc/network/interfaces
       echo ""                               >> /etc/network/interfaces
       echo "auto vmbr1"                     >> /etc/network/interfaces
       echo "iface vmbr1 inet manual"        >> /etc/network/interfaces
