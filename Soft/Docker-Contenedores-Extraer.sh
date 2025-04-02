@@ -6,22 +6,22 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
+# Script de NiPeGun para extraer contenedores Docker de un Host específico
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Soft/Docker-Contenedores-Extraer.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Soft/Docker-Contenedores-Extraer.sh | sed 's-sudo--g' | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Soft/Docker-Contenedores-Extraer.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Soft/Docker-Contenedores-Extraer.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Soft/Docker-Contenedores-Extraer.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -47,9 +47,9 @@
     fi
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
-      1 "Clonado sin detener" on
-      2 "Opción 2" off
-      3 "Opción 3" off
+      1 "Clonado sin detener contenedores" on
+      2 "Clonado exacto con estado en RAM (requiere detener contenedor)" off
+      3 "Volúmenes y datos persistentes" off
       4 "Opción 4" off
       5 "Opción 5" off
     )
