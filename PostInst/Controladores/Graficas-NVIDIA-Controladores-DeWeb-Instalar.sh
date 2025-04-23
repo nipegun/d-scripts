@@ -92,6 +92,7 @@ elif [ $cVerSO == "12" ]; then
     echo "    Descargando el instalador..."
     echo ""
     curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/550.144.03/NVIDIA-Linux-x86_64-550.144.03.run -o /tmp/nVidiaWebDriverInstall.run
+    chmod +x /tmp/nVidiaWebDriverInstall.run
 
   # Parar entorno gráfico
     echo ""
@@ -105,7 +106,6 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Ejecutando el instalador..."
     echo ""
-    chmod +x /tmp/nVidiaWebDriverInstall.run
     sudo /tmp/nVidiaWebDriverInstall.run
 
 nvidia-smi
