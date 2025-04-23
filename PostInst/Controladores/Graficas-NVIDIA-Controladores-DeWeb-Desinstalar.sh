@@ -77,7 +77,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Ejecutando el desinstalador..."
     echo ""
-    sudo /tmp/nVidiaWebDriverInstall.run
+    sudo /tmp/nVidiaWebDriverInstall.run --uninstall
 
   # Notificar fin de ejecución del script
     echo ""
