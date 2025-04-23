@@ -23,6 +23,8 @@
     cat /tmp/PaquetesADesinstalar.txt.sh | sed 's|^|apt-get -y autoremove |' > /tmp/DesinstalarControladoresNvidia.sh
   # Insertar el shebang al principio del script
     sed -i '1s|^|#!/bin/bash\n|' /tmp/DesinstalarControladoresNvidia.sh
+  # Insertar la línea para borrar cuda-toolkit
+    echo "apt-get -y autoremove nvidia-cuda-toolkit"  >> /tmp/DesinstalarControladoresNvidia.sh
   # Insertar la línea para purgar paquetes:
     echo "apt-get -y purge"     >> /tmp/DesinstalarControladoresNvidia.sh
   # Insertar la línea para autoclean:
@@ -33,3 +35,7 @@
 # Ejecutar script
   sudo /tmp/DesinstalarControladoresNvidia.sh
   /tmp/DesinstalarControladoresNvidia.sh
+
+# Borrar controladores web
+  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-DeWeb-Desinstalar.sh | bash
+  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-CUDAToolkit-DeWeb-Desinstalar.sh | bash
