@@ -163,7 +163,8 @@
               echo "  Agregando algunos paquetes extra..."
               echo ""
               # ragged2e
-                sudo docker exec -it sharelatex bash -c "tlmgr install ragged2e && tlmgr update --self --all"
+                #sudo docker exec -it sharelatex bash -c "tlmgr install ragged2e && tlmgr update --self --all"
+                sudo docker exec -i sharelatex bash -c "tlmgr install ragged2e && tlmgr update --self --all"
 
             ;;
 
