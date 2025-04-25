@@ -180,11 +180,11 @@
                 #sudo docker exec -it sharelatex bash -c "tlmgr --version"
                 #sudo docker exec -it sharelatex bash -c "tlmgr install scheme-full"
                 #sudo docker exec -it sharelatex bash -c "tlmgr update --self --all"
-                sudo docker exec -it sharelatex bash -c "wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh"
-                sudo docker exec -it sharelatex bash -c "sh update-tlmgr-latest.sh"
-                sudo docker exec -it sharelatex bash -c "tlmgr --version"
-                sudo docker exec -it sharelatex bash -c "tlmgr install scheme-full"
-                sudo docker exec -it sharelatex bash -c "tlmgr update --self --all"
+                sudo docker exec -i sharelatex bash -c "wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh"
+                sudo docker exec -i sharelatex bash -c "sh update-tlmgr-latest.sh"
+                sudo docker exec -i sharelatex bash -c "tlmgr --version"
+                sudo docker exec -i sharelatex bash -c "tlmgr install scheme-full"
+                sudo docker exec -i sharelatex bash -c "tlmgr update --self --all"
 
               # Guuardar los cambios en una nueva imagen
                 sudo docker commit sharelatex overleaf:scheme-full
@@ -194,7 +194,7 @@
                 echo "services:"                       | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
                 echo "  sharelatex:"                   | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
                 echo "    image: overleaf:scheme-full" | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
-                sudo chown -R overleaf:overleaf /opt/overleaf
+                sudo chown overleaf:overleaf /opt/overleaf -R
 
               # Finalmente, parar todas las imagenes de overlead, borrar el contenedor original y re-arrancar con la imagen nueva
                 cd /opt/overleaf
