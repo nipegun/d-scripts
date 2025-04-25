@@ -8,11 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar y configurar VirtualBox en Debian
 #
-# Ejecución remota con sudo:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox-Instalar.sh | sudo bash
 #
-# Ejecución remota como root:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox-Instalar.sh | bash
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/VirtualBox-Instalar.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
@@ -21,15 +21,6 @@
   cColorVerde='\033[1;32m'
   cColorRojo='\033[1;31m'
   cFinColor='\033[0m'
-
-# Comprobar si el script está corriendo como root
-  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
-  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
-    echo ""
-    exit
-  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -72,8 +63,8 @@ elif [ $cVerSO == "12" ]; then
       echo ""
       echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
-      apt-get -y update
-      apt-get -y install dialog
+      sudo apt-get -y update
+      sudo apt-get -y install dialog
       echo ""
     fi
 
@@ -99,51 +90,51 @@ elif [ $cVerSO == "12" ]; then
                echo ""
                echo "    Instalando paquetes necesarios..."
                echo ""
-               apt-get -y update
-               apt-get -y install linux-headers-$(uname -r)
-               apt-get -y install dkms
+               sudo apt-get -y update
+               sudo apt-get -y install linux-headers-$(uname -r)
+               sudo apt-get -y install dkms
 
              # Agregar repositorio
                echo ""
                echo "    Agregando repositorio de VirtualBox..."
                echo ""
-               apt-get -y install gnupg2
+               sudo apt-get -y install gnupg2
                # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
                  if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
                    echo ""
                    echo "      El paquete wget no está instalado. Iniciando su instalación..."
                    echo ""
-                   apt-get -y update && apt-get -y install wget
+                   sudo apt-get -y update
+                   sudo apt-get -y install wget
                    echo ""
                  fi
-               wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
-               wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
-               echo "deb [arch=$(dpkg --print-architecture)] http://download.virtualbox.org/virtualbox/debian bookworm contrib" > /etc/apt/sources.list.d/virtualbox.list
-               apt-get -y update
+               wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+               wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+               sudo echo "deb [arch=$(dpkg --print-architecture)] http://download.virtualbox.org/virtualbox/debian bookworm contrib" > /etc/apt/sources.list.d/virtualbox.list
+               sudo apt-get -y update
 
              # Instalar virtualbox
                echo ""
                echo "    Instalando el paquete virtualbox..."
                echo ""
                PaqueteAInstalar=$(apt-cache search virtualbox | grep "virtualbox-" | tail -n1 | cut -d' ' -f1)
-               apt-get -y install $PaqueteAInstalar
+               sudo apt-get -y install $PaqueteAInstalar
 
              # Instalar el pack de extensiones
                echo ""
                echo "    Instalando el pack de extensiones..."
                echo ""
-               mkdir -p /root/SoftInst/VirtualBox/
-               cd /root/SoftInst/VirtualBox/
+               sudo mkdir -p /root/SoftInst/VirtualBox/
                VersDeVBoxInstalada=$(virtualbox -h | grep "VirtualBox Manager" | cut -d'v' -f2)
-               wget http://download.virtualbox.org/virtualbox/$VersDeVBoxInstalada/Oracle_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
-               echo y | vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
+               sudo wget http://download.virtualbox.org/virtualbox/$VersDeVBoxInstalada/Oracle_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack -O /root/SoftInst/VirtualBox/Oracle_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
+               echo y | sudo vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VirtualBox_Extension_Pack-$VersDeVBoxInstalada.vbox-extpack
 
              # Agregar el usuario 1000 al grupo virtualbox
                echo ""
                echo "    Agregando el usuario 1000 en el grupo virtualbox..."
                echo ""
                Usuario1000=$(id 1000 | cut -d'(' -f2 | cut -d')' -f1)
-               usermod -a -G vboxusers $Usuario1000
+               sudo usermod -a -G vboxusers $Usuario1000
 
           ;;
 
