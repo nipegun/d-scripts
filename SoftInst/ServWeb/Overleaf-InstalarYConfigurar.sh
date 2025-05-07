@@ -187,20 +187,20 @@
                 sudo docker exec -i sharelatex bash -c "tlmgr update --self --all"
 
               # Guuardar los cambios en una nueva imagen
-                sudo docker commit sharelatex overleaf:scheme-full
+#                sudo docker commit sharelatex overleaf:scheme-full
 
               # Crear el archivo override para que docker compose cargue la nueva imagen, en vez de la vieja
-                echo "---"                             | sudo tee    /opt/overleaf/lib/docker-compose.override.yml
-                echo "services:"                       | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
-                echo "  sharelatex:"                   | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
-                echo "    image: overleaf:scheme-full" | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
-                sudo chown overleaf:overleaf /opt/overleaf -R
+#                echo "---"                             | sudo tee    /opt/overleaf/lib/docker-compose.override.yml
+#                echo "services:"                       | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
+#                echo "  sharelatex:"                   | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
+#                echo "    image: overleaf:scheme-full" | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
+#                sudo chown overleaf:overleaf /opt/overleaf -R
 
               # Finalmente, parar todas las imagenes de overlead, borrar el contenedor original y re-arrancar con la imagen nueva
-                cd /opt/overleaf
-                sudo bin/stop
-                sudo bin/docker-compose rm -f sharelatex
-                sudo bin/up -d
+#                cd /opt/overleaf
+#                sudo bin/stop
+#                sudo bin/docker-compose rm -f sharelatex
+#                sudo bin/up -d
 
               # Notificar fin de ejecución del script
                 sleep 5
