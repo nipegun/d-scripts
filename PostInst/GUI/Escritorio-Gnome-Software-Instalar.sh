@@ -89,7 +89,6 @@
       sudo apt-get -y install mc
       sudo apt-get -y install smartmontools
       sudo apt-get -y install coreutils
-      sudo apt-get -y install sshpass
       sudo apt-get -y install unrar
 
     # Instalar herramientas para poder conectar dispositivos Android
