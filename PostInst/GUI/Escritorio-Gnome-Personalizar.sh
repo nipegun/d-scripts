@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para personalizar el escritorio Gnome en Debian
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Personalizar.sh | bash
+#
+# Ejecución remota como root:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Personalizar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Personalizar.sh | nano -
