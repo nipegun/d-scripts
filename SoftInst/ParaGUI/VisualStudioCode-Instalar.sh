@@ -119,22 +119,22 @@ elif [ $cVerSO == "12" ]; then
                  sudo apt -y install /tmp/VisualStudioCode.deb
                  
               # Crear el lanzador para el usuario $HOME
-                 echo ""
-                 echo "  Creando el lanzador gráfico..."
-                 echo ""
-                 mkdir -p $HOME/.local/share/applications/ 2> /dev/null
-                 echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
-                 echo "Name=Visual Studio Code)"                                          >> $HOME/.local/share/applications/visualstudio.desktop
-                 echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
-                 echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
-                 echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
-                 echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
-                 echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
-                 echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
-                 echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
-                 echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
-                 echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
-                 gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
+                 #echo ""
+                 #echo "  Creando el lanzador gráfico..."
+                 #echo ""
+                 #mkdir -p $HOME/.local/share/applications/ 2> /dev/null
+                 #echo "[Desktop Entry]"                                                    > $HOME/.local/share/applications/visualstudio.desktop
+                 #echo "Name=Visual Studio Code)"                                          >> $HOME/.local/share/applications/visualstudio.desktop
+                 #echo "Comment=Code Editing. Redefined."                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 #echo "GenericName=Text Editor"                                           >> $HOME/.local/share/applications/visualstudio.desktop
+                 #echo "Exec=/usr/share/code/code --unity-launch --no-sandbox"             >> $HOME/.local/share/applications/visualstudio.desktop
+                 #echo "Icon=com.visualstudio.code"                                        >> $HOME/.local/share/applications/visualstudio.desktop
+                 #echo "Type=Application"                                                  >> $HOME/.local/share/applications/visualstudio.desktop
+                 #echo "StartupNotify=false"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 #echo "StartupWMClass=Code"                                               >> $HOME/.local/share/applications/visualstudio.desktop
+                 #echo "Categories=Utility;TextEditor;Development;IDE;"                    >> $HOME/.local/share/applications/visualstudio.desktop
+                 #echo "MimeType=text/plain;inode/directory;application/x-code-workspace;" >> $HOME/.local/share/applications/visualstudio.desktop
+                 #gio set $HOME/.local/share/applications/visualstudio.desktop "metadata::trusted" yes
 
             ;;
 
