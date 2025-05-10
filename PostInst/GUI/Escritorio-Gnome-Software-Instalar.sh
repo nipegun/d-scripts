@@ -122,6 +122,7 @@
       echo "  Instalando aplicaciones de redes e internet..."
       echo ""
       sudo apt-get -y install wireshark
+        sudo dpkg-reconfigure wireshark-common
       sudo apt-get -y install etherape
         sudo setcap CAP_NET_RAW=pe /usr/bin/etherape 
       sudo apt-get -y install virt-viewer
