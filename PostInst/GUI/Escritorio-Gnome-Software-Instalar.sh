@@ -8,11 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar software en el escritorio Gnome de Debian
 #
-# Ejecución remota con sudo:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Software-Instalar.sh | sudo bash
+# Ejecución remota (Puede requeriir permisos sudo:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Software-Instalar.sh | bash
 #
 # Ejecución remota como root:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Software-Instalar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Software-Instalar.sh | sudo 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/GUI/Escritorio-Gnome-Software-Instalar.sh | nano -
@@ -80,140 +80,139 @@
       echo ""
       echo "  Actualizando la lista de paquetes disponibles en los repositorios..."
       echo ""
-      apt-get -y update
+      sudo apt-get -y update
 
     # Herramientas para la CLI
       echo ""
       echo "  Instalando herramientas para la CLI..."
       echo ""
-      apt-get -y install openssh-server
-      apt-get -y install sshpass
-      apt-get -y install virt-viewer
-      apt-get -y install whois
-      apt-get -y install shellcheck
-      apt-get -y install grub2
-      apt-get -y install wget
-      apt-get -y install curl
-      apt-get -y install nmap
-      apt-get -y install mc
-      apt-get -y install smartmontools
-      apt-get -y install coreutils
-      apt-get -y install sshpass
-      apt-get -y install unrar
+      sudo apt-get -y install openssh-server
+      sudo apt-get -y install sshpass
+      sudo apt-get -y install whois
+      sudo apt-get -y install shellcheck
+      sudo apt-get -y install grub2
+      sudo apt-get -y install wget
+      sudo apt-get -y install curl
+      sudo apt-get -y install nmap
+      sudo apt-get -y install mc
+      sudo apt-get -y install smartmontools
+      sudo apt-get -y install coreutils
+      sudo apt-get -y install sshpass
+      sudo apt-get -y install unrar
 
     # Instalar herramientas para poder conectar dispositivos Android
       echo ""
       echo "  Instalando herramientas para poder conectar dispositivos Android..."
       echo ""
-      apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
-      apt-get -y install android-tools-fastboot
+      sudo apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
+      sudo apt-get -y install android-tools-fastboot
 
     # Apps de Sistema
       echo ""
       echo "  Instalando aplicaciones de sistema..."
       echo ""
-      apt-get -y install gparted
-      apt-get -y install hardinfo
-      apt-get -y install bleachbit
+      sudo apt-get -y install gparted
+      sudo apt-get -y install hardinfo
+      sudo apt-get -y install bleachbit
 
     # Apps Multimedia
       echo ""
       echo "  Instalando aplicaciones multimedia..."
       echo ""
-      apt-get -y install vlc
-      #apt-get -y install vlc-plugin-vlsub
-      apt-get -y install audacity
-      apt-get -y install subtitleeditor
-      apt-get -y install easytag
-      #apt-get -y install openshot
+      sudo apt-get -y install vlc
+      #sudo apt-get -y install vlc-plugin-vlsub
+      sudo apt-get -y install audacity
+      sudo apt-get -y install subtitleeditor
+      sudo apt-get -y install easytag
+      #sudo apt-get -y install openshot
 
     # Apps de redes e internet
       echo ""
       echo "  Instalando aplicaciones de redes e internet..."
       echo ""
-      apt-get -y install wireshark
-      apt-get -y install etherape
-        setcap CAP_NET_RAW=pe /usr/bin/etherape 
-      apt-get -y install virt-viewer
-      apt-get -y install remmina
-      apt-get -y install firefox-esr-l10n-es-es
-      apt-get -y install thunderbird
-      apt-get -y install thunderbird-l10n-es-es
-      #apt-get -y install lightning-l10n-es-es
-      apt-get -y install eiskaltdcpp
-      apt-get -y install amule
-      apt-get -y install chromium
-      apt-get -y install chromium-l10n
-      apt-get -y install filezilla
-      apt-get -y install mumble
-      apt-get -y install obs-studio
-      apt-get -y install telegram-desktop
-      #apt-get -y install discord
+      sudo apt-get -y install wireshark
+      sudo apt-get -y install etherape
+        sudo setcap CAP_NET_RAW=pe /usr/bin/etherape 
+      sudo apt-get -y install virt-viewer
+      sudo apt-get -y install remmina
+      sudo apt-get -y install firefox-esr-l10n-es-es
+      sudo apt-get -y install thunderbird
+      sudo apt-get -y install thunderbird-l10n-es-es
+      #sudo apt-get -y install lightning-l10n-es-es
+      sudo apt-get -y install eiskaltdcpp
+      sudo apt-get -y install amule
+      sudo apt-get -y install chromium
+      sudo apt-get -y install chromium-l10n
+      sudo apt-get -y install filezilla
+      sudo apt-get -y install mumble
+      sudo apt-get -y install obs-studio
+      sudo apt-get -y install telegram-desktop
+      #sudo apt-get -y install discord
 
     # Juegos
       echo ""
       echo "  Instalando juegos..."
       echo ""
-      apt-get -y install scid
-      apt-get -y install scid-rating-data
-      apt-get -y install scid-spell-data
-      apt-get -y install stockfish
-      apt-get -y install dosbox
-      apt-get -y install scummvm
+      sudo apt-get -y install scid
+      sudo apt-get -y install scid-rating-data
+      sudo apt-get -y install scid-spell-data
+      sudo apt-get -y install stockfish
+      sudo apt-get -y install dosbox
+      sudo apt-get -y install scummvm
 
     # Fuentes
       echo ""
       echo "  Instalando fuentes..."
       echo ""
-      apt-get -y install fonts-ubuntu
-      apt-get -y install fonts-ubuntu-console
-      apt-get -y install fonts-freefont-ttf
-      apt-get -y install fonts-freefont-otf
-      apt-get -y install ttf-mscorefonts-installer
+      sudo apt-get -y install fonts-ubuntu
+      sudo apt-get -y install fonts-ubuntu-console
+      sudo apt-get -y install fonts-freefont-ttf
+      sudo apt-get -y install fonts-freefont-otf
+      sudo apt-get -y install ttf-mscorefonts-installer
 
     # apps de programación
       echo ""
       echo "  Instalando apps de programación..."
       echo ""
-      apt-get -y install ghex
-      apt-get -y install dia
-      apt-get -y install xmlcopyeditor
+      sudo apt-get -y install ghex
+      sudo apt-get -y install dia
+      sudo apt-get -y install xmlcopyeditor
 
     # Antivirus
       echo ""
       echo "  Instalando anti-virus ClamAV..."
       echo ""
-      apt-get -y install clamtk
-      apt-get -y install clamav
-      apt-get -y install clamav-freshclam
-      apt-get -y install clamav-daemon
-      mkdir /var/log/clamav/ 2> /dev/null
-      #touch /var/log/clamav/freshclam.log
-      #chown clamav:clamav /var/log/clamav/freshclam.log
-      #chmod 640 /var/log/clamav/freshclam.log
-      rm -rf /var/log/clamav/freshclam.log
-      freshclam
+      sudo apt-get -y install clamtk
+      sudo apt-get -y install clamav
+      sudo apt-get -y install clamav-freshclam
+      sudo apt-get -y install clamav-daemon
+      sudo mkdir /var/log/clamav/ 2> /dev/null
+      #sudo touch /var/log/clamav/freshclam.log
+      #sudo chown clamav:clamav /var/log/clamav/freshclam.log
+      #sudo chmod 640 /var/log/clamav/freshclam.log
+      sudo rm -rf /var/log/clamav/freshclam.log
+      sudo freshclam
 
     # Herramientas de documentos
-      apt-get -y install libreoffice-l10n-es
-      apt-get -y install pdfarranger
-      apt-get -y install foliate             # Para leer libros en ePub
+      sudo apt-get -y install libreoffice-l10n-es
+      sudo apt-get -y install pdfarranger
+      sudo apt-get -y install foliate             # Para leer libros en ePub
 
     # Otros
-      apt-get -y install unrar
-      apt-get -y install htop
-      apt-get -y install simple-scan
+      sudo apt-get -y install unrar
+      sudo apt-get -y install htop
+      sudo apt-get -y install simple-scan
 
-      #apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
-      #apt-get -y install comix
+      #sudo apt-get -y install pyrenamer         # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
+      #sudo apt-get -y install comix
 
     # SmartCards
-      apt-get -y install pcscd
-      apt-get -y install opensc-pkcs11 
-      apt-get -y install libpam-pkcs11
+      sudo apt-get -y install pcscd
+      sudo apt-get -y install opensc-pkcs11 
+      sudo apt-get -y install libpam-pkcs11
 
     # Huellas dactilares
-      #apt-get -y install libpam-fprintd
+      #sudo apt-get -y install libpam-fprintd
       # Borrar todas las huellas registradas en el usuario root (por las dudas)
         #echo ""
         #echo "    Borrando todas las huellas digitales registradas para el usuario root..."
@@ -246,41 +245,41 @@
         #echo ""
         #echo "    Activando la autenticación PAM mediante huellas digitales..."
         #echo ""
-        #pam-auth-update # Marcar fingerprint authentication
+        #sud pam-auth-update # Marcar fingerprint authentication
         # Comprobar que la autenticación por huella se activó correctamente
         #grep fprint /etc/pam.d/common-auth
         # En caso de que no funcione la autenticación por huella habría entrar como root y purgar fprint 
-        # apt-get purge fprintd
+        # sudo apt-get purge fprintd
 
     # Lanzador de chromium para el root
       echo ""
       echo "  Preparando el lanzador de chromium para el root..."
       echo ""
-      mkdir -p /root/.local/share/applications/ 2> /dev/null
-      echo "[Desktop Entry]"                                                                                                            > /root/.local/share/applications/chromiumroot.desktop
-      echo "Name=Chromium (para root)"                                                                                                 >> /root/.local/share/applications/chromiumroot.desktop
-      echo "Comment=Accede a Internet"                                                                                                 >> /root/.local/share/applications/chromiumroot.desktop
-      echo "GenericName=Navegador web"                                                                                                 >> /root/.local/share/applications/chromiumroot.desktop
-      echo "Exec=/usr/bin/chromium --no-sandbox"                                                                                       >> /root/.local/share/applications/chromiumroot.desktop
-      echo "Icon=chromium"                                                                                                             >> /root/.local/share/applications/chromiumroot.desktop
-      echo "Type=Application"                                                                                                          >> /root/.local/share/applications/chromiumroot.desktop
-      echo "StartupNotify=false"                                                                                                       >> /root/.local/share/applications/chromiumroot.desktop
-      echo "StartupWMClass=Code"                                                                                                       >> /root/.local/share/applications/chromiumroot.desktop
-      echo "Categories=Network;WebBrowser;"                                                                                            >> /root/.local/share/applications/chromiumroot.desktop
-      echo "MimeType=text/html;text/xml;application/xhtml_xml;application/x-mimearchive;x-scheme-handler/http;x-scheme-handler/https;" >> /root/.local/share/applications/chromiumroot.desktop
-      gio set /root/.local/share/applications/chromiumroot.desktop "metadata::trusted" yes
+      sudo mkdir -p /root/.local/share/applications/ 2> /dev/null
+      echo "[Desktop Entry]"                                                                                                           | sudo tee    /root/.local/share/applications/chromiumroot.desktop
+      echo "Name=Chromium (para root)"                                                                                                 | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "Comment=Accede a Internet"                                                                                                 | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "GenericName=Navegador web"                                                                                                 | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "Exec=/usr/bin/chromium --no-sandbox"                                                                                       | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "Icon=chromium"                                                                                                             | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "Type=Application"                                                                                                          | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "StartupNotify=false"                                                                                                       | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "StartupWMClass=Code"                                                                                                       | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "Categories=Network;WebBrowser;"                                                                                            | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "MimeType=text/html;text/xml;application/xhtml_xml;application/x-mimearchive;x-scheme-handler/http;x-scheme-handler/https;" | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      sudo gio set /root/.local/share/applications/chromiumroot.desktop "metadata::trusted" yes
 
     # Tor browser
       echo ""
       echo "  Instalando TOR browser..."
       echo ""
-      apt-get -y install torbrowser-launcher
+      sudo apt-get -y install torbrowser-launcher
       
-      apt-get -y install keepassxc
+      sudo apt-get -y install keepassxc
 
     # Tarjetas AMD
-      apt-get -y install radeontop # Para ver la utilización de proceso y VRAM de las tarjetas amd, en vivo
-      apt-get -y install rocm-smi  # Para lo mismo que radeontop, pero con drivers rocm instalados
+      sudo apt-get -y install radeontop  # Para ver la utilización de proceso y VRAM de las tarjetas amd, en vivo
+      sudo apt-get -y install rocm-smi   # Para lo mismo que radeontop, pero con drivers rocm instalados
 
   elif [ $cVerSO == "11" ]; then
 
