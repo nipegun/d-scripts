@@ -6,7 +6,7 @@
 # You don't have to accept any terms of use or license to use or modify it, because it comes with no CopyLeft.
 
 # ----------
-# NiPeGun's script to install and configure SkillSelector on Debian
+# NiPeGun's script to install and configure xxxxxxxxx on Debian
 #
 # Remote execution (may require sudo privileges):
 #   curl -sL x | bash
