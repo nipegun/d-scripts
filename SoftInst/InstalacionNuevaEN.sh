@@ -51,21 +51,21 @@
   fi
 
 # Determine the Debian version
-  if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
+  if [ -f /etc/os-release ]; then             # For systemd and freedesktop.org.
     . /etc/os-release
     cOSName=$NAME
     cOSVersion=$VERSION_ID
-  elif type lsb_release >/dev/null 2>&1; then # Para linuxbase.org.
+  elif type lsb_release >/dev/null 2>&1; then # For linuxbase.org.
     cOSName=$(lsb_release -si)
     cOSVersion=$(lsb_release -sr)
-  elif [ -f /etc/lsb-release ]; then          # Para algunas versiones de Debian sin el comando lsb_release.
+  elif [ -f /etc/lsb-release ]; then          # For some Debian version without the lsb_release command.
     . /etc/lsb-release
     cOSName=$DISTRIB_ID
     cOSVersion=$DISTRIB_RELEASE
-  elif [ -f /etc/debian_version ]; then       # Para versiones viejas de Debian.
+  elif [ -f /etc/debian_version ]; then       # For old versions of Debian.
     cOSName=Debian
     cOSVersion=$(cat /etc/debian_version)
-  else                                        # Para el viejo uname (También funciona para BSD).
+  else                                        # For the old uname (also works for BSD).
     cOSName=$(uname -s)
     cOSVersion=$(uname -r)
   fi
