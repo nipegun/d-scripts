@@ -8,11 +8,11 @@
 # ----------
 # Script de NiPeGun para conceder permisos sudo a un usuario específico
 #
-# Ejecución remota con sudo:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Usuario-Sudo-Conceder.sh | sudo bash -s [NombreDeUsuario]
+# Ejecución remota (puede requerir permisos sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Usuario-Sudo-Conceder.sh | bash -s [NombreDeUsuario] [Contraseña]
 #
-# Ejecución remota como root:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Usuario-Sudo-Conceder.sh | bash -s [NombreDeUsuario]
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Usuario-Sudo-Conceder.sh | sed 's-sudo--g' | bash -s [NombreDeUsuario] [Contraseña]
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Usuario-Sudo-Conceder.sh | nano -
