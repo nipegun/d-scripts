@@ -50,3 +50,7 @@
   apt-get -y install curl
   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar.sh | bash
   sh -c "echo 'export PATH=$PATH:~/scripts/d-scripts/Alias/' >> ~/.bashrc"
+
+# Modificar .bashrc a nivel de sistema
+  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc >> /etc/bash.bashrc
+
