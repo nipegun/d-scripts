@@ -5,12 +5,9 @@
 # blanco = usuarios sin privilegios sudo, y sin ser root
 
 if [ "$UID" -eq 0 ]; then
-  # Root → rojo
-  PS1='\[\e[1;31m\]\u\[\e[0m\]@\h\$ '
+  PS1='\[\e[31m\]\u\[\e[0m\]@\h\$ '       # Root → rojo
 elif id -nG "$USER" | grep -qw sudo; then
-  # Usuario con sudo → naranja (código 38;5;208 = naranja en 256 colores)
-  PS1='\[\e[38;5;208m\]\u\[\e[0m\]@\h\$ '
+  PS1='\[\e[38;5;208m\]\u\[\e[0m\]@\h\$ ' # Usuario con sudo → naranja
 else
-  # Usuario sin sudo → sin color
-  PS1='\u@\h\$ '
+  PS1='\u@\h\$ '                          # Usuario sin  → sin color
 fi
