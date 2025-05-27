@@ -9,6 +9,6 @@ elif id -nG "$USER" | grep -qw sudo; then
   # Usuario con sudo → naranja (código 38;5;208 = naranja en 256 colores)
   PS1='\[\e[38;5;208m\]\u\[\e[0m\]@\h\$ '
 else
-  # Usuario sin sudo → blanco brillante
-  PS1='\[\e[1;37m\]\u\[\e[0m\]@\h\$ '
+  # Usuario sin sudo → sin color
+  PS1='\u@\h\$ '
 fi
