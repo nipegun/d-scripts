@@ -31,26 +31,28 @@
   echo ""
 
 # Preparar ComandosPostArranque (rc.local)
-  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
+  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/ComandosPostArranque-Preparar.sh | sed 's-sudo--g' | bash
 
 # Preparar tareas Cron
-  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/TareasCron-Preparar.sh | bash
+  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/TareasCron-Preparar.sh | sed 's-sudo--g' | bash
 
 # Preparar cortafuegos
-  #curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Cortafuegos-Preparar.sh | bash
+  #curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Cortafuegos-Preparar.sh | sed 's-sudo--g' | bash
 
 # Poner idioma sólo en español
-  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Idioma-CambiarTodoAes-es.sh | bash
+  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Idioma-CambiarTodoAes-es.sh | sed 's-sudo--g' | bash
 
 # Poner todos los repositorios
   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-Todos-Poner.sh | sed 's-sudo--g' | bash
+
+# Modificar .bashrc a nivel de sistema
+  # /root/.bashrc
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | sed 's-sudo--g' | tee    /etc/bash.bashrc
+  # Plantilla de skel
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | sed 's-sudo--g' | tee -a /etc/skel/.bashrc
 
 # Instalar d-scripts
   apt-get -y update
   apt-get -y install curl
   curl -s https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar.sh | bash
   sh -c "echo 'export PATH=$PATH:~/scripts/d-scripts/Alias/' >> ~/.bashrc"
-
-# Modificar .bashrc a nivel de sistema
-  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc >> /etc/bash.bashrc
-  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | tee -a /etc/skel/.bashrc
