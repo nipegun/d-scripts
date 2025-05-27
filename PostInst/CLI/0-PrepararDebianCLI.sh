@@ -47,7 +47,7 @@
 
 # Modificar .bashrc a nivel de sistema
   # /root/.bashrc
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | sed 's-sudo--g' | tee    /etc/bash.bashrc
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | sed 's-sudo--g' | tee    /root/.bashrc
   # Plantilla de skel
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | sed 's-sudo--g' | tee -a /etc/skel/.bashrc
 
