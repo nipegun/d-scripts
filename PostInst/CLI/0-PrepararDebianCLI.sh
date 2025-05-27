@@ -53,4 +53,4 @@
 
 # Modificar .bashrc a nivel de sistema
   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc >> /etc/bash.bashrc
-
+  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | tee -a /etc/skel/.bashrc
