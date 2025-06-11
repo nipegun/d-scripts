@@ -428,6 +428,29 @@
                 echo ""
                 echo "    Creando el servicio de systemd..."
                 echo ""
+                echo '[Unit]'                                  | sudo tee    /etc/systemd/system/flectra.service
+                echo 'Description=Flectra ERP'                 | sudo tee -a /etc/systemd/system/flectra.service
+                echo 'After=network.target postgresql.service' | sudo tee -a /etc/systemd/system/flectra.service
+                echo ''                                        | sudo tee -a /etc/systemd/system/flectra.service
+                echo '[Service]'                               | sudo tee -a /etc/systemd/system/flectra.service
+                echo 'Type=simple'                             | sudo tee -a /etc/systemd/system/flectra.service
+                echo 'User=flectra'                            | sudo tee -a /etc/systemd/system/flectra.service
+                echo 'Group=flectra'                           | sudo tee -a /etc/systemd/system/flectra.service
+                echo 'ExecStart=/opt/flectra/flectra.py'       | sudo tee -a /etc/systemd/system/flectra.service
+                echo 'WorkingDirectory=/opt/flectra'           | sudo tee -a /etc/systemd/system/flectra.service
+                echo 'StandardOutput=journal'                  | sudo tee -a /etc/systemd/system/flectra.service
+                echo 'StandardError=inherit'                   | sudo tee -a /etc/systemd/system/flectra.service
+                echo 'Restart=on-failure'                      | sudo tee -a /etc/systemd/system/flectra.service
+                echo 'SyslogIdentifier=flectra'                | sudo tee -a /etc/systemd/system/flectra.service
+                echo ''                                        | sudo tee -a /etc/systemd/system/flectra.service
+                echo '[Install]'                               | sudo tee -a /etc/systemd/system/flectra.service
+                echo 'WantedBy=multi-user.target'              | sudo tee -a /etc/systemd/system/flectra.service
+
+              # Activar y lanzar el servicio
+                echo ""
+                echo "    Activando y lanzando el servicio..."
+                echo ""
+                sudo systemctl enable flectra.service --now
 
               # Notificar fin de ejecución del script
                 echo ""
