@@ -104,6 +104,8 @@
         opciones=(
           1 "Agregando el repositorio de la última versión"                 off
           2 "Descargando directamente el archivo .deb de la última versión" off
+          3 "Descargando el código fuente"                                  off
+          4 "Clonando el repo oficial de GitLab"                            on
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       #clear
@@ -126,6 +128,9 @@
                 sudo apt-get -y install curl
                 sudo apt-get -y install gpg
                 sudo apt-get -y install wget
+                sudo apt-get -y install gsfonts
+                sudo apt-get -y install fonts-freefont-ttf
+                sudo apt-get -y install fonts-dejavu
 
               # Determinar la última versión disponible de Flectra
                 echo ""
@@ -167,6 +172,9 @@
                 sudo apt-get -y install curl
                 sudo apt-get -y install gpg
                 sudo apt-get -y install wget
+                sudo apt-get -y install gsfonts
+                sudo apt-get -y install fonts-freefont-ttf
+                sudo apt-get -y install fonts-dejavu
 
               # Determinar la última versión disponible de Flectra
                 echo ""
@@ -188,6 +196,218 @@
                 echo "    Instalando el archivo .deb..."
                 echo ""
                 sudo apt -y install /tmp/flectra.deb
+
+              # Notificar fin de ejecución del script
+                echo ""
+                echo "    La ejecución del script ha finalizado."
+                echo "    Flectra está instalada y configurada."
+
+
+
+            ;;
+
+            3)
+
+              echo ""
+              echo "  Instalando Flectra descargando el código fuente..."
+              echo ""
+
+              # Descargar paquetes necesarios para la correcta ejecución del script
+                echo ""
+                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
+                echo ""
+                sudo apt-get -y update
+                sudo apt-get -y install curl
+                sudo apt-get -y install gpg
+                sudo apt-get -y install wget
+                sudo apt-get -y install gsfonts
+                sudo apt-get -y install fonts-freefont-ttf
+                sudo apt-get -y install fonts-dejavu
+                sudo apt-get -y install postgresql
+                sudo apt-get -y install postgresql-server-dev-all
+                sudo apt-get -y install build-essential
+                sudo apt-get -y install python3-dev
+                sudo apt-get -y install python3-pip
+                sudo apt-get -y install python3-venv
+                sudo apt-get -y install npm
+                sudo apt-get -y install nodejs
+                sudo apt-get -y install git
+                sudo apt-get -y install libldap2-dev
+                sudo apt-get -y install libxml2-dev
+                sudo apt-get -y install libxslt1-dev
+                sudo apt-get -y install libjpeg-dev
+                sudo apt-get -y install unzip
+                sudo apt-get -y install libsasl2-dev
+                sudo apt-get -y install libldap2-dev
+                sudo apt-get -y install libssl-dev
+
+              # Crear el usuario
+                echo ""
+                echo "    Creando el usuario del sistema..."
+                echo ""
+                sudo adduser --system --group --home /opt/flectra flectra
+                sudo su - postgres -c "createuser -s flectra"
+
+              # Determinar la última versión disponible de Flectra
+                echo ""
+                echo "    Determinando la última versión disponible..."
+                echo ""
+                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep zip | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
+                echo "      La última versión disponible es la $vUltVersFlectra"
+                echo ""
+
+              # Descargar el .zip
+                echo ""
+                echo "    Descargando el archivo .zip..."
+                echo ""
+                vURLIntermediaArchivo=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep zip | head -n1 | cut -d '"' -f2)
+                curl -kL https://download.flectrahq.com/"$vURLIntermediaArchivo" -o /tmp/flectra.zip
+
+              # Descomprimir el .zip
+                echo ""
+                echo "    Descomprimiendo el archivo .zip..."
+                echo ""
+                cd /tmp
+                unzip /tmp/flectra.zip
+                sudo cp -r /tmp/flectra-"$vUltVersFlectra"/* /opt/flectra
+                sudo chown flectra:flectra /opt/flectra -R
+
+              # Crear el entorno virtual
+                echo ""
+                echo "    Creando el entorno virtual..."
+                echo ""
+                sudo -u flectra bash -c '\
+                  mkdir /opt/flectra/VirtualEnvironment/              && \
+                  python3 -m venv /opt/flectra/VirtualEnvironment/    && \
+                  source /opt/flectra/VirtualEnvironment/bin/activate && \
+                  pip install wheel                                   && \
+                  pip install -r /opt/flectra/requirements.txt        && \
+                  deactivate \
+                '
+
+            ;;
+
+            4)
+
+              echo ""
+              echo "  Instalando Flectra clonando el repo oficial de gitlab..."
+              echo ""
+
+              # Descargar paquetes necesarios para la correcta ejecución del script
+                echo ""
+                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
+                echo ""
+                sudo apt-get -y update
+                sudo apt-get -y install curl
+                sudo apt-get -y install gpg
+                sudo apt-get -y install wget
+                sudo apt-get -y install gsfonts
+                sudo apt-get -y install fonts-freefont-ttf
+                sudo apt-get -y install fonts-dejavu
+                sudo apt-get -y install postgresql
+                sudo apt-get -y install postgresql-server-dev-all
+                sudo apt-get -y install build-essential
+                sudo apt-get -y install python3-dev
+                sudo apt-get -y install python3-pip
+                sudo apt-get -y install python3-venv
+                sudo apt-get -y install npm
+                sudo apt-get -y install nodejs
+                sudo apt-get -y install git
+                sudo apt-get -y install libldap2-dev
+                sudo apt-get -y install libxml2-dev
+                sudo apt-get -y install libxslt1-dev
+                sudo apt-get -y install libjpeg-dev
+                sudo apt-get -y install unzip
+                sudo apt-get -y install libsasl2-dev
+                sudo apt-get -y install libldap2-dev
+                sudo apt-get -y install libssl-dev
+
+              # Crear el usuario
+                echo ""
+                echo "    Creando el usuario del sistema..."
+                echo ""
+                sudo adduser --system --group --home /opt/flectra flectra
+                sudo su - postgres -c "createuser -s flectra"
+
+              # Determinar la última versión disponible de Flectra
+                echo ""
+                echo "    Determinando la última versión disponible..."
+                echo ""
+                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep zip | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
+                echo "      La última versión disponible es la $vUltVersFlectra"
+                echo ""
+
+              # Clonar el repo
+                echo ""
+                echo "    Clonando el repo..."
+                echo ""
+                sudo -u flectra bash -c "\
+                  cd /opt/flectra/                                                                        && \
+                  git clone --depth=1 --branch=$vUltVersFlectra https://gitlab.com/flectra-hq/flectra.git && \
+                  mv /opt/flectra/flectra /opt/flectra/Code
+                "
+
+              # Crear el entorno virtual
+                echo ""
+                echo "    Creando el entorno virtual..."
+                echo ""
+                sudo -u flectra bash -c '\
+                  mkdir /opt/flectra/VirtualEnvironment/              && \
+                  python3 -m venv /opt/flectra/VirtualEnvironment/    && \
+                  source /opt/flectra/VirtualEnvironment/bin/activate && \
+                  pip install wheel                                   && \
+                  pip install -r /opt/flectra/Code/requirements.txt   && \
+                  deactivate \
+                '
+
+              # Crear el archivo de configuración
+                echo ""
+                echo "    Creando el archivo de configuración..."
+                echo ""
+                echo '[options]'                              | sudo tee    /opt/flectra/flectra.conf
+                echo 'admin_passwd = admin'                   | sudo tee -a /opt/flectra/flectra.conf
+                echo 'db_host = False'                        | sudo tee -a /opt/flectra/flectra.conf
+                echo 'db_port = False'                        | sudo tee -a /opt/flectra/flectra.conf
+                echo 'db_user = flectra'                      | sudo tee -a /opt/flectra/flectra.conf
+                echo 'db_password = False'                    | sudo tee -a /opt/flectra/flectra.conf
+                echo 'addons_path = /opt/flectra/code/addons' | sudo tee -a /opt/flectra/flectra.conf
+                echo 'default_productivity_apps = True'       | sudo tee -a /opt/flectra/flectra.conf
+                echo 'logfile = /var/log/flectra/flectra.log' | sudo tee -a /opt/flectra/flectra.conf
+                sudo chown flectra:flectra /opt/flectra/flectra.conf
+
+              # Crear el lanzador
+                echo ""
+                echo "    Creando el lanzador..."
+                echo ""
+                echo '#!/usr/bin/env python3'                                       | sudo tee    /opt/flectra/flectra.py
+                echo ''                                                             | sudo tee -a /opt/flectra/flectra.py
+                echo 'import sys'                                                   | sudo tee -a /opt/flectra/flectra.py
+                echo 'import os'                                                    | sudo tee -a /opt/flectra/flectra.py
+                echo ''                                                             | sudo tee -a /opt/flectra/flectra.py
+                echo '# Agrega el paquete flectra al path'                          | sudo tee -a /opt/flectra/flectra.py
+                echo 'sys.path.insert(0, "/opt/flectra/code")'                      | sudo tee -a /opt/flectra/flectra.py
+                echo ''                                                             | sudo tee -a /opt/flectra/flectra.py
+                echo 'import flectra'                                               | sudo tee -a /opt/flectra/flectra.py
+                echo ''                                                             | sudo tee -a /opt/flectra/flectra.py
+                echo 'if __name__ == "__main__":'                                   | sudo tee -a /opt/flectra/flectra.py
+                echo '  flectra.cli.main(args=["-c", "/opt/flectra/flectra.conf"])' | sudo tee -a /opt/flectra/flectra.py
+                sudo chmod +x /opt/flectra/flectra.py
+                sudo chown flectra:flectra /opt/flectra/flectra.py
+
+              # Ejecutar Flectra por primera vez
+                #echo ""
+                #echo "    Ejecutando Flectra por primera vez..."
+                #echo ""
+                #sudo -u flectra bash -c '\
+                #  source /opt/flectra/VirtualEnvironment/bin/activate                                                         && \
+                #  /opt/flectra/VirtualEnvironment/bin/python3 /opt/flectra/code/flectra-bin --config /opt/flectra/flectra.conf \
+                #'
+
+              # Crear el servicio de systemd
+                echo ""
+                echo "    Creando el servicio de systemd..."
+                echo ""
+
 
             ;;
 
