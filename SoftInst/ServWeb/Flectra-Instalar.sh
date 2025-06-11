@@ -379,7 +379,7 @@
                 echo 'db_port = False'                        | sudo tee -a /opt/flectra/flectra.conf
                 echo 'db_user = flectra'                      | sudo tee -a /opt/flectra/flectra.conf
                 echo 'db_password = False'                    | sudo tee -a /opt/flectra/flectra.conf
-                echo 'addons_path = /opt/flectra/code/addons' | sudo tee -a /opt/flectra/flectra.conf
+                echo 'addons_path = /opt/flectra/Code/addons' | sudo tee -a /opt/flectra/flectra.conf
                 echo 'default_productivity_apps = True'       | sudo tee -a /opt/flectra/flectra.conf
                 echo 'logfile = /var/log/flectra/flectra.log' | sudo tee -a /opt/flectra/flectra.conf
                 sudo chown flectra:flectra /opt/flectra/flectra.conf
@@ -395,22 +395,22 @@
                 echo ""
                 echo "    Creando el lanzador..."
                 echo ""
-                echo '#!/opt/flectra/VirtualEnvironment/bin/python3'               | sudo tee    /opt/flectra/flectra.py
-                echo ''                                                            | sudo tee -a /opt/flectra/flectra.py
-                echo 'import sys'                                                  | sudo tee -a /opt/flectra/flectra.py
-                echo 'import os'                                                   | sudo tee -a /opt/flectra/flectra.py
-                echo ''                                                            | sudo tee -a /opt/flectra/flectra.py
-                echo '# Agrega el paquete flectra al path'                         | sudo tee -a /opt/flectra/flectra.py
-                echo 'sys.path.insert(0, "/opt/flectra/code")'                     | sudo tee -a /opt/flectra/flectra.py
-                echo ''                                                            | sudo tee -a /opt/flectra/flectra.py
-                echo 'import flectra'                                              | sudo tee -a /opt/flectra/flectra.py
-                echo ''                                                            | sudo tee -a /opt/flectra/flectra.py
-                echo 'if __name__ == "__main__":'                                  | sudo tee -a /opt/flectra/flectra.py
-                echo '  # Simula sys.argv como si ejecutaras desde consola'        | sudo tee -a /opt/flectra/flectra.py
-                echo '  sys.argv = ["flectra", "-c", "/opt/flectra/flectra.conf"]' | sudo tee -a /opt/flectra/flectra.py
-                echo '  flectra.cli.main()'                                        | sudo tee -a /opt/flectra/flectra.py
-                sudo chmod +x /opt/flectra/flectra.py
-                sudo chown flectra:flectra /opt/flectra/flectra.py
+                echo '#!/opt/flectra/VirtualEnvironment/bin/python3'               | sudo tee    /opt/flectra/flectra-start.py
+                echo ''                                                            | sudo tee -a /opt/flectra/flectra-start.py
+                echo 'import sys'                                                  | sudo tee -a /opt/flectra/flectra-start.py
+                echo 'import os'                                                   | sudo tee -a /opt/flectra/flectra-start.py
+                echo ''                                                            | sudo tee -a /opt/flectra/flectra-start.py
+                echo '# Agrega el paquete flectra al path'                         | sudo tee -a /opt/flectra/flectra-start.py
+                echo 'sys.path.insert(0, "/opt/flectra/Code")'                     | sudo tee -a /opt/flectra/flectra-start.py
+                echo ''                                                            | sudo tee -a /opt/flectra/flectra-start.py
+                echo 'import flectra'                                              | sudo tee -a /opt/flectra/flectra-start.py
+                echo ''                                                            | sudo tee -a /opt/flectra/flectra-start.py
+                echo 'if __name__ == "__main__":'                                  | sudo tee -a /opt/flectra/flectra-start.py
+                echo '  # Simula sys.argv como si ejecutaras desde consola'        | sudo tee -a /opt/flectra/flectra-start.py
+                echo '  sys.argv = ["flectra", "-c", "/opt/flectra/flectra.conf"]' | sudo tee -a /opt/flectra/flectra-start.py
+                echo '  flectra.cli.main()'                                        | sudo tee -a /opt/flectra/flectra-start.py
+                sudo chmod +x /opt/flectra/flectra-start.py
+                sudo chown flectra:flectra /opt/flectra/flectra-start.py
 
               # Ejecutar Flectra por primera vez
                 #echo ""
@@ -436,7 +436,7 @@
                 echo 'Type=simple'                             | sudo tee -a /etc/systemd/system/flectra.service
                 echo 'User=flectra'                            | sudo tee -a /etc/systemd/system/flectra.service
                 echo 'Group=flectra'                           | sudo tee -a /etc/systemd/system/flectra.service
-                echo 'ExecStart=/opt/flectra/flectra.py'       | sudo tee -a /etc/systemd/system/flectra.service
+                echo 'ExecStart=/opt/flectra/flectra-start.py' | sudo tee -a /etc/systemd/system/flectra.service
                 echo 'WorkingDirectory=/opt/flectra'           | sudo tee -a /etc/systemd/system/flectra.service
                 echo 'StandardOutput=journal'                  | sudo tee -a /etc/systemd/system/flectra.service
                 echo 'StandardError=inherit'                   | sudo tee -a /etc/systemd/system/flectra.service
