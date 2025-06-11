@@ -9,19 +9,19 @@
 # Script de NiPeGun para instalar y configurar Flectra en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Flectra-Instalar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Flectra-Instalar.sh | sed 's-sudo--g' | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Flectra-Instalar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Flectra-Instalar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Flectra-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -90,9 +90,112 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Flectra para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Crear el menú
+      # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install dialog
+          echo ""
+        fi
+      menu=(dialog --checklist "Cómo quieres instalar Flectra:" 22 80 16)
+        opciones=(
+          1 "Agregando el repositorio de la última versión"                 off
+          2 "Descargando directamente el archivo .deb de la última versión" off
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+      #clear
+
+      for choice in $choices
+        do
+          case $choice in
+
+            1)
+
+              echo ""
+              echo "  Instalando Flectra desde el repositorio oficial para Debian..."
+              echo ""
+
+              # Descargar paquetes necesarios para la correcta ejecución del script
+                echo ""
+                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
+                echo ""
+                sudo apt-get -y update
+                sudo apt-get -y install curl
+                sudo apt-get -y install gpg
+                sudo apt-get -y install wget
+
+              # Determinar la última versión disponible de Flectra
+                echo ""
+                echo "    Determinando la última versión disponible..."
+                echo ""
+                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
+                echo "      La última versión disponible es la $vUltVersFlectra"
+                echo ""
+
+              # Agregar el repositorio
+                echo ""
+                echo "    Agregando el repositorio..."
+                echo ""
+                cd /tmp
+                sudo rm -f /etc/apt/trusted.gpg.d/flectra.gpg 2> /dev/null
+                wget --no-check-certificate https://download.flectrahq.com/flectra.key -O - | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/flectra.gpg
+                echo "deb [trusted=yes] http://download.flectrahq.com/"$vUltVersFlectra"/pub/deb ./" | sudo tee /etc/apt/sources.list.d/flectra.list
+                sudo apt-get -y update
+
+              # Instalar
+                echo ""
+                echo "    Instalando..."
+                echo ""
+                apt-get install flectra
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Instalando Flectra desde el .deb de la última versión..."
+              echo ""
+
+              # Descargar paquetes necesarios para la correcta ejecución del script
+                echo ""
+                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
+                echo ""
+                sudo apt-get -y update
+                sudo apt-get -y install curl
+                sudo apt-get -y install gpg
+                sudo apt-get -y install wget
+
+              # Determinar la última versión disponible de Flectra
+                echo ""
+                echo "    Determinando la última versión disponible..."
+                echo ""
+                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
+                echo "      La última versión disponible es la $vUltVersFlectra"
+                echo ""
+
+              # Descargar el .deb
+                echo ""
+                echo "    Descargando el archivo .deb..."
+                echo ""
+                vURLIntermediaArchivo=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep deb | head -n1 | cut -d '"' -f2)
+                curl -kL https://download.flectrahq.com/"$vURLIntermediaArchivo" -o /tmp/flectra.deb
+
+              # Instalar el archivo .deb
+                echo ""
+                echo "    Instalando el archivo .deb..."
+                echo ""
+                sudo apt -y install /tmp/flectra.deb
+
+            ;;
+
+        esac
+
+    done
+
+ 
 
   elif [ $cVerSO == "11" ]; then
 
