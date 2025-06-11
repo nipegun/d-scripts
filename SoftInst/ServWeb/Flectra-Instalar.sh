@@ -450,7 +450,10 @@
                 echo ""
                 echo "    Activando y lanzando el servicio..."
                 echo ""
-                sudo systemctl enable flectra.service --now
+                sudo systemctl daemon-reload
+                sudo systemctl enable flectra
+                sudo systemctl start flectra
+
 
               # Notificar fin de ejecución del script
                 echo ""
