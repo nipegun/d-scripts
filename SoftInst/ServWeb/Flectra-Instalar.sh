@@ -329,6 +329,13 @@
                 sudo adduser --system --group --home /opt/flectra flectra
                 sudo su - postgres -c "createuser -s flectra"
 
+              # Asignar bash como terminal del usuario del sistema
+                echo ""
+                echo "    Asignando bash como terminal del usuario de sistema..."
+                echo ""
+                sudo usermod -s /bin/bash flectra
+                #sudo getent passwd flectra
+
               # Determinar la última versión disponible de Flectra
                 echo ""
                 echo "    Determinando la última versión disponible..."
@@ -341,17 +348,19 @@
                 echo ""
                 echo "    Clonando el repo..."
                 echo ""
-                sudo -u flectra bash -c "\
+                sudo rm -rf /opt/flectra/Code/
+                su -s /bin/bash -c "\
                   cd /opt/flectra/                                                                        && \
                   git clone --depth=1 --branch=$vUltVersFlectra https://gitlab.com/flectra-hq/flectra.git && \
                   mv /opt/flectra/flectra /opt/flectra/Code
-                "
+                " flectra
 
               # Crear el entorno virtual
                 echo ""
                 echo "    Creando el entorno virtual..."
                 echo ""
-                sudo -u flectra bash -c '\
+                sudo rm -rf /opt/flectra/VirtualEnvironment/
+                su -s /bin/bash -c '\
                   mkdir /opt/flectra/VirtualEnvironment/              && \
                   python3 -m venv /opt/flectra/VirtualEnvironment/    && \
                   source /opt/flectra/VirtualEnvironment/bin/activate && \
@@ -375,22 +384,31 @@
                 echo 'logfile = /var/log/flectra/flectra.log' | sudo tee -a /opt/flectra/flectra.conf
                 sudo chown flectra:flectra /opt/flectra/flectra.conf
 
+              # Crear las carpetas para los logs
+                echo ""
+                echo "    Creando las carpetas para los logs..."
+                echo ""
+                sudo mkdir -p /var/log/flectra/
+                sudo chown flectra:flectra /var/log/flectra/
+
               # Crear el lanzador
                 echo ""
                 echo "    Creando el lanzador..."
                 echo ""
-                echo '#!/usr/bin/env python3'                                       | sudo tee    /opt/flectra/flectra.py
-                echo ''                                                             | sudo tee -a /opt/flectra/flectra.py
-                echo 'import sys'                                                   | sudo tee -a /opt/flectra/flectra.py
-                echo 'import os'                                                    | sudo tee -a /opt/flectra/flectra.py
-                echo ''                                                             | sudo tee -a /opt/flectra/flectra.py
-                echo '# Agrega el paquete flectra al path'                          | sudo tee -a /opt/flectra/flectra.py
-                echo 'sys.path.insert(0, "/opt/flectra/code")'                      | sudo tee -a /opt/flectra/flectra.py
-                echo ''                                                             | sudo tee -a /opt/flectra/flectra.py
-                echo 'import flectra'                                               | sudo tee -a /opt/flectra/flectra.py
-                echo ''                                                             | sudo tee -a /opt/flectra/flectra.py
-                echo 'if __name__ == "__main__":'                                   | sudo tee -a /opt/flectra/flectra.py
-                echo '  flectra.cli.main(args=["-c", "/opt/flectra/flectra.conf"])' | sudo tee -a /opt/flectra/flectra.py
+                echo '#!/opt/flectra/VirtualEnvironment/bin/python3'               | sudo tee    /opt/flectra/flectra.py
+                echo ''                                                            | sudo tee -a /opt/flectra/flectra.py
+                echo 'import sys'                                                  | sudo tee -a /opt/flectra/flectra.py
+                echo 'import os'                                                   | sudo tee -a /opt/flectra/flectra.py
+                echo ''                                                            | sudo tee -a /opt/flectra/flectra.py
+                echo '# Agrega el paquete flectra al path'                         | sudo tee -a /opt/flectra/flectra.py
+                echo 'sys.path.insert(0, "/opt/flectra/code")'                     | sudo tee -a /opt/flectra/flectra.py
+                echo ''                                                            | sudo tee -a /opt/flectra/flectra.py
+                echo 'import flectra'                                              | sudo tee -a /opt/flectra/flectra.py
+                echo ''                                                            | sudo tee -a /opt/flectra/flectra.py
+                echo 'if __name__ == "__main__":'                                  | sudo tee -a /opt/flectra/flectra.py
+                echo '  # Simula sys.argv como si ejecutaras desde consola'        | sudo tee -a /opt/flectra/flectra.py
+                echo '  sys.argv = ["flectra", "-c", "/opt/flectra/flectra.conf"]' | sudo tee -a /opt/flectra/flectra.py
+                echo '  flectra.cli.main()'                                        | sudo tee -a /opt/flectra/flectra.py
                 sudo chmod +x /opt/flectra/flectra.py
                 sudo chown flectra:flectra /opt/flectra/flectra.py
 
@@ -398,16 +416,31 @@
                 #echo ""
                 #echo "    Ejecutando Flectra por primera vez..."
                 #echo ""
-                #sudo -u flectra bash -c '\
-                #  source /opt/flectra/VirtualEnvironment/bin/activate                                                         && \
-                #  /opt/flectra/VirtualEnvironment/bin/python3 /opt/flectra/code/flectra-bin --config /opt/flectra/flectra.conf \
-                #'
+                #sudo -u flectra bash -c '/opt/flectra/flectra.py'
+
+              # Quitar la terminal de bash asignada al usuario del sistema
+                echo ""
+                echo "    Quitando la terminal de bash asignada al usuario de sistema...."
+                echo ""
+                sudo usermod -s /usr/sbin/nologin flectra
 
               # Crear el servicio de systemd
                 echo ""
                 echo "    Creando el servicio de systemd..."
                 echo ""
 
+              # Notificar fin de ejecución del script
+                echo ""
+                echo "    Ejecución del script, finalizada."
+                echo ""
+                echo "      Flectra se ha instalado y configurado. Se ha creado e iniciado el servicio en systemd. El estado actual del servicio es:"
+                echo ""
+                sudo systemctl status flectra.service --no-pager
+                echo ""
+                vIPLocal=$(hostname -I | sed 's- --g')
+                echo ""
+                echo "      Para configurar la base de datos accede a http://$vIPLocal:7073"
+                echo ""
 
             ;;
 
