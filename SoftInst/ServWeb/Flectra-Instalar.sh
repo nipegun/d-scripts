@@ -277,6 +277,10 @@
                 echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
                 echo ""
                 sudo apt-get -y update
+                sudo apt-get -y dist-upgrade
+                sudo apt-get -y autoremove
+                sudo apt-get -y autoclean
+
                 sudo apt-get -y install curl
                 sudo apt-get -y install gpg
                 sudo apt-get -y install wget
