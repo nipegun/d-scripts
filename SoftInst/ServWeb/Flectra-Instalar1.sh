@@ -330,7 +330,7 @@
                 echo "    Clonando el repo..."
                 echo ""
                 sudo rm -rf /opt/flectra/Code/
-                su -s /bin/bash -c "\
+                sudo su -s /bin/bash -c "\
                   cd /opt/flectra/                                                                        && \
                   git clone --depth=1 --branch=$vUltVersFlectra https://gitlab.com/flectra-hq/flectra.git && \
                   mv /opt/flectra/flectra /opt/flectra/Code
@@ -341,14 +341,14 @@
                 echo "    Creando el entorno virtual..."
                 echo ""
                 sudo rm -rf /opt/flectra/VirtualEnvironment/
-                su -s /bin/bash -c '\
+                sudo su -s /bin/bash -c '\
                   mkdir /opt/flectra/VirtualEnvironment/              && \
                   python3 -m venv /opt/flectra/VirtualEnvironment/    && \
                   source /opt/flectra/VirtualEnvironment/bin/activate && \
                   pip install wheel                                   && \
                   pip install -r /opt/flectra/Code/requirements.txt   && \
                   deactivate \
-                '
+                ' flectra
 
               # Crear el archivo de configuración
                 echo ""
