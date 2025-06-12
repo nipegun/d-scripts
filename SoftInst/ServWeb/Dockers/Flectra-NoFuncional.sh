@@ -16,6 +16,8 @@
 #
 # Comando 1: docker run -d --restart=always --name db -e POSTGRES_USER=flectra -e POSTGRES_PASSWORD=flectra postgres:14
 # Comando 2: docker run -d --restart=always --name Flectra -p 7073:7073 -v /path/to/config:/etc/flectra --link db:db -t flectrahq/flectra:latest"
+#
+# Enlace: https://hub.docker.com/r/flectrahq/flectra
 # ----------
 
 # Definir constantes de color
