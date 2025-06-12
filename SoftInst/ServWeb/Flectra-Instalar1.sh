@@ -183,8 +183,6 @@
                 echo "    La ejecución del script ha finalizado."
                 echo "    Flectra está instalada y configurada."
 
-
-
             ;;
 
             3)
@@ -454,8 +452,6 @@
         esac
 
     done
-
- 
 
   elif [ $cVerSO == "11" ]; then
 
