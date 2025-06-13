@@ -99,12 +99,23 @@
           fi
         sudo /tmp/wazuh-install.sh -a
 
+    # Deshabilitar actualizaciones
+      echo ""
+      echo "    Deshabilitando actualizaciones..."
+      echo ""
+      sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
+      apt update
+
     # Notificar fin de ejecución del script
       echo ""
       echo "    Ejecución del script, finalizada. Accede al panel de Wazuh en:"
       echo ""
       vIPLocal=$(hostname -I | sed 's- --g')
       echo "      https://$vIPLocal"
+      echo ""
+      echo "    Si quieres ver las contraseñas de todos los usuarios de Wazuh indexer y Wazuh API puedes hacerlo de la siguiente manera:"
+      echo ""
+      echo "      sudo tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt"
       echo ""
 
   elif [ $cVerSO == "11" ]; then
