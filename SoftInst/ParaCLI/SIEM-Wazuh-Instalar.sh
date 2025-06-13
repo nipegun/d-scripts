@@ -8,17 +8,8 @@
 # ----------
 # Script de NiPeGun para instalar y configurar Wazuh en Debian
 #
-# Ejecución remota (puede requerir permisos sudo):
+# Ejecución remota:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | bash
-#
-# Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | nano -
@@ -34,22 +25,11 @@
   cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
-  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
   if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
     echo ""
     echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
     echo ""
     exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    sudo apt-get -y update
-    sudo apt-get -y install curl
-    echo ""
   fi
 
 # Determinar la versión de Debian
@@ -90,9 +70,42 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Wazuh para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Determinar la última versión disppnible
+      echo ""
+      echo "    Determinando la última versión disponible..."
+      echo ""
+      vUltVersWazuh=$(curl -sL https://documentation.wazuh.com/current/release-notes/index.html | sed 's->->\n-g' | grep href | grep release | grep internal | head -n1 | sed 's|release-||g' | cut -d'.' -f1 | cut -d'"' -f4 | sed 's|-|.|g')
+      echo "      La última versión disponible es la $vUltVersWazuh"
+      echo ""
+
+    # Instalar
+      vUltVersSanitizada=$(echo "$vUltVersWazuh" | cut -d. -f1-2)
+      echo ""
+      echo "    Instalando la versión $vUltVersSanitizada..."
+      echo ""
+      cd /tmp
+      rm -f wazuh-install*.sh* 2> /dev/null
+      curl -sLO https://packages.wazuh.com/"$vUltVersSanitizada"/wazuh-install.sh
+      chmod +x /tmp/wazuh-install.sh
+      # Instalar
+        # Comprobar si el paquete sudo está instalado. Si no lo está, instalarlo.
+          if [[ $(dpkg-query -s sudo 2>/dev/null | grep installed) == "" ]]; then
+            echo ""
+            echo -e "${cColorRojo}  El paquete sudo no está instalado. Iniciando su instalación...${cFinColor}"
+            echo ""
+            apt-get -y update
+            apt-get -y install sudo
+            echo ""
+          fi
+        sudo /tmp/wazuh-install.sh -a
+
+    # Notificar fin de ejecución del script
+      echo ""
+      echo "    Ejecución del script, finalizada. Accede al panel de Wazuh en:"
+      echo ""
+      vIPLocal=$(hostname -I | sed 's- --g')
+      echo "      https://$vIPLocal"
+      echo ""
 
   elif [ $cVerSO == "11" ]; then
 
