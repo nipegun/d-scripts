@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar CTFd en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/CTFd-InstalarYConfigurar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/CTFd-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root (para permisos sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/CTFd-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/CTFd-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Enlace: https://github.com/CTFd/CTFd
 # ----------
@@ -137,10 +137,13 @@
               cd /opt/CTFd/
               sudo python3 -m venv venv
               # Crear el mensaje para mostrar cuando se entra al entorno virtual
-                echo ''                                                         | sudo tee -a /opt/CTFd/venv/bin/activate
-                echo 'echo -e "\n  Activando el entorno virtual de CTFd... \n"' | sudo tee -a /opt/CTFd/venv/bin/activate
-                echo 'echo -e "    Forma de uso:\n"'                            | sudo tee -a /opt/CTFd/venv/bin/activate
-                echo 'echo -e "      x\n"'                                      | sudo tee -a /opt/CTFd/venv/bin/activate
+                echo ''                                                                                | sudo tee -a /opt/CTFd/venv/bin/activate
+                echo 'echo -e "\n  Activando el entorno virtual de CTFd... \n"'                        | sudo tee -a /opt/CTFd/venv/bin/activate
+                echo 'echo -e "    Forma de uso:\n"'                                                   | sudo tee -a /opt/CTFd/venv/bin/activate
+                echo 'echo -e "      cd /opt/CTFd\nflask run --host=0.0.0.0"'                          | sudo tee -a /opt/CTFd/venv/bin/activate
+                echo 'echo -e "      o"'                                                               | sudo tee -a /opt/CTFd/venv/bin/activate
+                echo 'echo -e ""'                                                                      | sudo tee -a /opt/CTFd/venv/bin/activate
+                echo 'echo -e "      cd /opt/CTFd\ngunicorn -w 4 -b 0.0.0.0:4000 'CTFd:create_app()'"' | sudo tee -a /opt/CTFd/venv/bin/activate
               # Entrar al entorno virtual
                 sudo source /opt/CTFd/venv/bin/activate
               # Instalar requerimientos
@@ -171,6 +174,7 @@
                 echo ""
                 echo -e "${cColorVerde}      source /opt/CTFd/venv/bin/activate${cFinColor}"
                 echo ""
+                echo -e "${cColorVerde}        cd /opt/CTFd/'${cFinColor}"
                 echo -e "${cColorVerde}        flask run --host=0.0.0.0${cFinColor}"
                 echo ""
                 echo -e "${cColorVerde}      deactivate${cFinColor}"
@@ -179,7 +183,8 @@
                 echo ""
                 echo -e "${cColorVerde}      source /opt/CTFd/venv/bin/activate${cFinColor}"
                 echo ""
-                echo -e "${cColorVerde}        gunicorn -w 4 -b 0.0.0.0:8000 'CTFd:create_app()'${cFinColor}"
+                echo -e "${cColorVerde}        cd /opt/CTFd/'${cFinColor}"
+                echo -e "${cColorVerde}        gunicorn -w 4 -b 0.0.0.0:4000 'CTFd:create_app()'${cFinColor}"
                 echo ""
                 echo -e "${cColorVerde}      deactivate${cFinColor}"
                 echo ""
