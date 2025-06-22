@@ -73,6 +73,7 @@ elif [ $cVerSO == "12" ]; then
   echo ""
   echo "  Descargando la clave PGP del KeyRing..."
   echo ""
+  sudo rm -f /usr/share/keyrings/docker-archive-keyring.gpg
   wget -O- https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
   echo ""
