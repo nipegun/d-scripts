@@ -100,6 +100,13 @@
         python3 -m pip install jupyterlab
         #jupyter lab --generate-config
         #nano ~/.jupyter/jupyter_lab_config.py
+      # Poner en español
+        pip install jupyterlab-language-pack-es-ES
+        mkdir -p "$HOME"/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/'
+        echo '{'                   | sudo tee -a "$HOME"/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
+        echo '  "locale": "es_ES"' | sudo tee -a "$HOME"/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
+        echo '}'                   | sudo tee -a "$HOME"'/.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
+        sudo chown $USER:$USER "$HOME"'/.jupyter/' -R
       # Instalar notebook
         python3 -m pip install notebook
         echo ""
