@@ -9,19 +9,19 @@
 # Script de NiPeGun para instalar y configurar JupyterLab en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/JupyterLab-Instalar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/JupyterLab-Instalar.sh | sed 's-sudo--g' | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/JupyterLab-Instalar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/JupyterLab-Instalar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/JupyterLab-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -32,25 +32,6 @@
   # Para el color rojo también:
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
-
-# Comprobar si el script está corriendo como root
-  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
-  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
-    echo ""
-    exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    sudo apt-get -y update
-    sudo apt-get -y install curl
-    echo ""
-  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -90,9 +71,56 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de JupyterLab para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Crear el entorno virtual
+      echo ""
+      echo "  Creando el entorno virtual de python..."
+      echo ""
+      mkdir -p "$HOME"/PythonVirtualEnvironments/
+      cd "$HOME"/PythonVirtualEnvironments/
+      # Comprobar si el paquete python3-venv está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s python3-venv 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete python3-venv no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install python3-venv
+          echo ""
+        fi
+      python3 -m venv JupyterLab
+      # Crear el mensaje para mostrar cuando se entra al entorno virtual
+        echo 'echo -e "\n  Activando el entorno virtual de JupyterLab... \n"' >> "$HOME"/PythonVirtualEnvironments/JupyterLab/bin/activate
+
+    # Entrar al entorno virtual e instalar dentro
+      echo ""
+      echo "  Entrando al entorno virtual e instalando dentro..."
+      echo ""
+      # Entrar al entorno virtual
+        source "$HOME"/PythonVirtualEnvironments/JupyterLab/bin/activate
+      # Instalar jupyterlab
+        python3 -m pip install jupyterlab
+        #jupyter lab --generate-config
+        #nano ~/.jupyter/jupyter_lab_config.py
+      # Instalar notebook
+        python3 -m pip install notebook
+        echo ""
+        echo "    Crea una contraseña para Jupyter notebook:"
+        echo ""
+        jupyter notebook password
+      # Instalar voilá
+        python3 -m pip install voila
+      # Salir del entorno virtual
+        deactivate
+
+      # Notificar creación del entorno virtual
+        echo ""
+        echo -e "${cColorVerde}    Entorno virtual preparado. JubypterLab se puede iniciar de la siguiente forma:${cFinColor}"
+        echo ""
+        echo -e "${cColorVerde}      source "$HOME"/PythonVirtualEnvironments/JupyterLab/bin/activate${cFinColor}"
+        echo ""
+        echo -e "${cColorVerde}        jupyter lab --ip=0.0.0.0 --no-browser${cFinColor}" # Esto hará que JupyterLab escuche en todas las IPs (LAN, WiFi, etc.) y no intente abrir un navegador local.
+        echo ""
+        echo -e "${cColorVerde}      deactivate${cFinColor}"
+        echo ""
 
   elif [ $cVerSO == "11" ]; then
 
