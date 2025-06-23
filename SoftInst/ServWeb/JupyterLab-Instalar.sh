@@ -73,7 +73,7 @@
 
     # Crear el usuario para ejecutar jupyterlab
       echo ""
-      echo "    Creando el usuario para ejecutar JupiterLab..."
+      echo "    Creando el usuario para ejecutar JupyterLab..."
       echo ""
       sudo adduser jupyterlab --system --home /opt/JupyterLab
 
@@ -123,11 +123,23 @@
         echo '}'                   | sudo tee -a /opt/JupyterLab'/.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
         sudo chown jupyterlab /opt/JupyterLab/ -R
 
+      # Crear el archivo para ejecutar
+        echo ""
+        echo "    Creando el archivo para ejecutar..."
+        echo ""
+        echo '#!/bin/bash'                                                  | sudo tee    /opt/JupyterLab/JupyterLab.sh
+        echo ''                                                             | sudo tee -a /opt/JupyterLab/JupyterLab.sh
+        echo 'source /opt/JupyterLab/PythonVirtualEnvironment/bin/activate' | sudo tee -a /opt/JupyterLab/JupyterLab.sh
+        echo '  jupyter lab --ip=0.0.0.0 --no-browser'                      | sudo tee -a /opt/JupyterLab/JupyterLab.sh
+        echo 'deactivate'                                                   | sudo tee -a /opt/JupyterLab/JupyterLab.sh
+        sudo chmod +x /opt/JupyterLab/JupyterLab.sh
+        sudo chown jupyterlab /opt/JupyterLab/JupyterLab.sh
+
       # Notificar creación del entorno virtual
         echo ""
         echo -e "${cColorVerde}    Entorno virtual preparado. JubypterLab se puede iniciar de la siguiente forma:${cFinColor}"
         echo ""
-        echo -e "${cColorVerde}      source "$HOME"/PythonVirtualEnvironments/JupyterLab/bin/activate${cFinColor}"
+        echo -e "${cColorVerde}      source /opt/JupyterLab/PythonVirtualEnvironments/bin/activate${cFinColor}"
         echo ""
         echo -e "${cColorVerde}        jupyter lab --ip=0.0.0.0 --no-browser${cFinColor}" # Esto hará que JupyterLab escuche en todas las IPs (LAN, WiFi, etc.) y no intente abrir un navegador local.
         echo ""
