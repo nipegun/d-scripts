@@ -71,6 +71,73 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de JupyterLab para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
+    # Crear el usuario para ejecutar jupyterlab
+      echo ""
+      echo "    Creando el usuario para ejecutar JupiterLab..."
+      echo ""
+      sudo adduser jupyterlab --system --home /opt/JupyterLab
+
+    # Crear el entorno virtual
+      echo ""
+      echo "  Creando el entorno virtual de python..."
+      echo ""
+      cd /opt/JupyterLab/
+      # Comprobar si el paquete python3-venv está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s python3-venv 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete python3-venv no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install python3-venv
+          echo ""
+        fi
+      sudo python3 -m venv PythonVirtualEnvironment
+      # Crear el mensaje para mostrar cuando se entra al entorno virtual
+        echo 'echo -e "\n  Activando el entorno virtual de JupyterLab... \n"' | sudo tee -a /opt/JupyterLab/PythonVirtualEnvironment/bin/activate
+
+    # Entrar al entorno virtual e instalar dentro
+      echo ""
+      echo "  Entrando al entorno virtual e instalando dentro..."
+      echo ""
+      # Corregir permisos
+        sudo chown jupyterlab /opt/JupyterLab/ -R
+      # Asignar shell a jupyterlab
+        sudo chsh -s /bin/bash jupyterlab
+      # Entrar al entorno virtual
+        sudo su jupyterlab -c '\
+        source /opt/JupyterLab/PythonVirtualEnvironment/bin/activate && \
+        python3 -m pip install jupyterlab                            && \
+        python3 -m pip install jupyterlab-language-pack-es-ES        && \
+        python3 -m pip install notebook                              && \
+        echo ""                                                      && \
+        echo "    Crea una contraseña para Jupyter notebook:"        && \
+        echo ""                                                      && \
+        jupyter notebook password                                    && \
+        python3 -m pip install voila                                 && \
+        deactivate                                                      \
+        '
+      # Poner en español
+        sudo mkdir -p /opt/JupyterLab/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/'
+        echo '{'                   | sudo tee -a /opt/JupyterLab/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
+        echo '  "locale": "es_ES"' | sudo tee -a /opt/JupyterLab/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
+        echo '}'                   | sudo tee -a /opt/JupyterLab'/.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
+        sudo chown jupyterlab /opt/JupyterLab/ -R
+
+      # Notificar creación del entorno virtual
+        echo ""
+        echo -e "${cColorVerde}    Entorno virtual preparado. JubypterLab se puede iniciar de la siguiente forma:${cFinColor}"
+        echo ""
+        echo -e "${cColorVerde}      source "$HOME"/PythonVirtualEnvironments/JupyterLab/bin/activate${cFinColor}"
+        echo ""
+        echo -e "${cColorVerde}        jupyter lab --ip=0.0.0.0 --no-browser${cFinColor}" # Esto hará que JupyterLab escuche en todas las IPs (LAN, WiFi, etc.) y no intente abrir un navegador local.
+        echo ""
+        echo -e "${cColorVerde}      deactivate${cFinColor}"
+        echo ""
+
+⚠️ Si no quieres que el usuario mantenga ese shell, puedes volver a desactivarlo con:
+
+sudo chsh -s /usr/sbin/nologin jupyterlab
+
     # Crear el entorno virtual
       echo ""
       echo "  Creando el entorno virtual de python..."
