@@ -71,142 +71,197 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de JupyterLab para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    # Crear el usuario para ejecutar jupyterlab
-      echo ""
-      echo "    Creando el usuario para ejecutar JupyterLab..."
-      echo ""
-      sudo adduser jupyterlab --system --home /opt/JupyterLab
-
-    # Crear el entorno virtual
-      echo ""
-      echo "  Creando el entorno virtual de python..."
-      echo ""
-      cd /opt/JupyterLab/
-      # Comprobar si el paquete python3-venv está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s python3-venv 2>/dev/null | grep installed) == "" ]]; then
+    # Crear el menú
+      # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
           echo ""
-          echo -e "${cColorRojo}  El paquete python3-venv no está instalado. Iniciando su instalación...${cFinColor}"
+          echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
           sudo apt-get -y update
-          sudo apt-get -y install python3-venv
+          sudo apt-get -y install dialog
           echo ""
         fi
-      sudo python3 -m venv PythonVirtualEnvironment
-      # Crear el mensaje para mostrar cuando se entra al entorno virtual
-        echo 'echo -e "\n  Activando el entorno virtual de JupyterLab... \n"' | sudo tee -a /opt/JupyterLab/PythonVirtualEnvironment/bin/activate
+      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+        opciones=(
+          1 "Instalar en la carpeta de usuario (para ejecutar manualmente)" off
+          2 "Instalar como servicio a nivel de sistema (en /opt)"           off
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
-    # Entrar al entorno virtual e instalar dentro
-      echo ""
-      echo "  Entrando al entorno virtual e instalando dentro..."
-      echo ""
-      # Corregir permisos
-        sudo chown jupyterlab /opt/JupyterLab/ -R
-      # Asignar shell a jupyterlab
-        sudo chsh -s /bin/bash jupyterlab
-      # Entrar al entorno virtual
-        sudo su jupyterlab -c '\
-        source /opt/JupyterLab/PythonVirtualEnvironment/bin/activate && \
-        python3 -m pip install jupyterlab                            && \
-        python3 -m pip install jupyterlab-language-pack-es-ES        && \
-        python3 -m pip install notebook                              && \
-        echo ""                                                      && \
-        echo "    Crea una contraseña para Jupyter notebook:"        && \
-        echo ""                                                      && \
-        jupyter notebook password                                    && \
-        python3 -m pip install voila                                 && \
-        deactivate                                                      \
-        '
-      # Poner en español
-        sudo mkdir -p /opt/JupyterLab/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/'
-        echo '{'                   | sudo tee -a /opt/JupyterLab/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
-        echo '  "locale": "es_ES"' | sudo tee -a /opt/JupyterLab/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
-        echo '}'                   | sudo tee -a /opt/JupyterLab'/.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
-        sudo chown jupyterlab /opt/JupyterLab/ -R
+      for choice in $choices
+        do
+          case $choice in
 
-      # Crear el archivo para ejecutar
-        echo ""
-        echo "    Creando el archivo para ejecutar..."
-        echo ""
-        echo '#!/bin/bash'                                                  | sudo tee    /opt/JupyterLab/JupyterLab.sh
-        echo ''                                                             | sudo tee -a /opt/JupyterLab/JupyterLab.sh
-        echo 'source /opt/JupyterLab/PythonVirtualEnvironment/bin/activate' | sudo tee -a /opt/JupyterLab/JupyterLab.sh
-        echo '  jupyter lab --ip=0.0.0.0 --no-browser'                      | sudo tee -a /opt/JupyterLab/JupyterLab.sh
-        echo 'deactivate'                                                   | sudo tee -a /opt/JupyterLab/JupyterLab.sh
-        sudo chmod +x /opt/JupyterLab/JupyterLab.sh
-        sudo chown jupyterlab /opt/JupyterLab/JupyterLab.sh
+            1)
 
-      # Notificar creación del entorno virtual
-        echo ""
-        echo -e "${cColorVerde}    Entorno virtual preparado. JubypterLab se puede iniciar de la siguiente forma:${cFinColor}"
-        echo ""
-        echo -e "${cColorVerde}      source /opt/JupyterLab/PythonVirtualEnvironments/bin/activate${cFinColor}"
-        echo ""
-        echo -e "${cColorVerde}        jupyter lab --ip=0.0.0.0 --no-browser${cFinColor}" # Esto hará que JupyterLab escuche en todas las IPs (LAN, WiFi, etc.) y no intente abrir un navegador local.
-        echo ""
-        echo -e "${cColorVerde}      deactivate${cFinColor}"
-        echo ""
+              echo ""
+              echo "  Instalando en la carpeta de usuario (para ejecutar manualmente)..."
+              echo ""
 
-⚠️ Si no quieres que el usuario mantenga ese shell, puedes volver a desactivarlo con:
 
-sudo chsh -s /usr/sbin/nologin jupyterlab
+              # Crear el entorno virtual
+                echo ""
+                echo "  Creando el entorno virtual de python..."
+                echo ""
+                mkdir -p "$HOME"/PythonVirtualEnvironments/
+                cd "$HOME"/PythonVirtualEnvironments/
+                # Comprobar si el paquete python3-venv está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s python3-venv 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo -e "${cColorRojo}  El paquete python3-venv no está instalado. Iniciando su instalación...${cFinColor}"
+                    echo ""
+                    sudo apt-get -y update
+                    sudo apt-get -y install python3-venv
+                    echo ""
+                  fi
+                sudo rm -rf "$HOME"/PythonVirtualEnvironments/JupyterLab/
+                python3 -m venv JupyterLab
+                # Crear el mensaje para mostrar cuando se entra al entorno virtual
+                  echo 'echo -e "\n  Activando el entorno virtual de JupyterLab... \n"' | tee -a "$HOME"/PythonVirtualEnvironments/JupyterLab/bin/activate
 
-    # Crear el entorno virtual
-      echo ""
-      echo "  Creando el entorno virtual de python..."
-      echo ""
-      mkdir -p "$HOME"/PythonVirtualEnvironments/
-      cd "$HOME"/PythonVirtualEnvironments/
-      # Comprobar si el paquete python3-venv está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s python3-venv 2>/dev/null | grep installed) == "" ]]; then
-          echo ""
-          echo -e "${cColorRojo}  El paquete python3-venv no está instalado. Iniciando su instalación...${cFinColor}"
-          echo ""
-          sudo apt-get -y update
-          sudo apt-get -y install python3-venv
-          echo ""
-        fi
-      python3 -m venv JupyterLab
-      # Crear el mensaje para mostrar cuando se entra al entorno virtual
-        echo 'echo -e "\n  Activando el entorno virtual de JupyterLab... \n"' >> "$HOME"/PythonVirtualEnvironments/JupyterLab/bin/activate
+              # Entrar al entorno virtual e instalar dentro
+                echo ""
+                echo "  Entrando al entorno virtual e instalando dentro..."
+                echo ""
+                # Entrar al entorno virtual
+                  source "$HOME"/PythonVirtualEnvironments/JupyterLab/bin/activate
+                # Instalar jupyterlab
+                  python3 -m pip install jupyterlab
+                  #jupyter lab --generate-config
+                  #nano ~/.jupyter/jupyter_lab_config.py
+                # Poner en español
+                  python3 -m pip install jupyterlab-language-pack-es-ES
+                  mkdir -p "$HOME"/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/'
+                  echo '{'                   | tee -a "$HOME"/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
+                  echo '  "locale": "es_ES"' | tee -a "$HOME"/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
+                  echo '}'                   | tee -a "$HOME"'/.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
 
-    # Entrar al entorno virtual e instalar dentro
-      echo ""
-      echo "  Entrando al entorno virtual e instalando dentro..."
-      echo ""
-      # Entrar al entorno virtual
-        source "$HOME"/PythonVirtualEnvironments/JupyterLab/bin/activate
-      # Instalar jupyterlab
-        python3 -m pip install jupyterlab
-        #jupyter lab --generate-config
-        #nano ~/.jupyter/jupyter_lab_config.py
-      # Poner en español
-        pip install jupyterlab-language-pack-es-ES
-        mkdir -p "$HOME"/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/'
-        echo '{'                   | sudo tee -a "$HOME"/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
-        echo '  "locale": "es_ES"' | sudo tee -a "$HOME"/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
-        echo '}'                   | sudo tee -a "$HOME"'/.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
-        sudo chown $USER:$USER "$HOME"'/.jupyter/' -R
-      # Instalar notebook
-        python3 -m pip install notebook
-        echo ""
-        echo "    Crea una contraseña para Jupyter notebook:"
-        echo ""
-        jupyter notebook password
-      # Instalar voilá
-        python3 -m pip install voila
-      # Salir del entorno virtual
-        deactivate
+                # Instalar notebook
+                  python3 -m pip install notebook
+                  echo ""
+                  echo "    Crea una contraseña para Jupyter notebook:"
+                  echo ""
+                  jupyter notebook password
+                # Instalar voilá
+                  python3 -m pip install voila
+                # Instalar los language servers
+                  python3 -m pip install 'python-lsp-server[all]'
+                  python3 -m pip install jedi-language-server
+                # Salir del entorno virtual
+                  deactivate
 
-      # Notificar creación del entorno virtual
-        echo ""
-        echo -e "${cColorVerde}    Entorno virtual preparado. JubypterLab se puede iniciar de la siguiente forma:${cFinColor}"
-        echo ""
-        echo -e "${cColorVerde}      source "$HOME"/PythonVirtualEnvironments/JupyterLab/bin/activate${cFinColor}"
-        echo ""
-        echo -e "${cColorVerde}        jupyter lab --ip=0.0.0.0 --no-browser${cFinColor}" # Esto hará que JupyterLab escuche en todas las IPs (LAN, WiFi, etc.) y no intente abrir un navegador local.
-        echo ""
-        echo -e "${cColorVerde}      deactivate${cFinColor}"
-        echo ""
+                # Crear el script para ejecutar el servicio
+                  echo ""
+                  echo "    Creando el script para ejecutar el servicio..."
+                  echo ""
+                  echo '#!/bin/bash'                                                      | tee    "$HOME"/PythonVirtualEnvironments/JupyterLab/JupyterLab.sh
+                  echo ''                                                                 | tee -a "$HOME"/PythonVirtualEnvironments/JupyterLab/JupyterLab.sh
+                  echo 'source "$HOME"/PythonVirtualEnvironments/JupyterLab/bin/activate' | tee -a "$HOME"/PythonVirtualEnvironments/JupyterLab/JupyterLab.sh
+                  echo "  jupyter lab --notebook-dir=$HOME"                               | tee -a "$HOME"/PythonVirtualEnvironments/JupyterLab/JupyterLab.sh
+                  echo 'deactivate'                                                       | tee -a "$HOME"/PythonVirtualEnvironments/JupyterLab/JupyterLab.sh
+                  chmod +x "$HOME"/PythonVirtualEnvironments/JupyterLab/JupyterLab.sh
+
+
+                # Notificar creación del entorno virtual
+                  echo ""
+                  echo -e "${cColorVerde}    JupyterLab instalado. Para ejecutarlo, lanza el siguiente script:${cFinColor}"
+                  echo ""
+                  echo -e "${cColorVerde}      "$HOME"/PythonVirtualEnvironments/JupyterLab/JupyterLab.sh${cFinColor}"
+                  echo ""
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Instalando como servicio a nivel de sistema (en /opt/)..."
+              echo ""
+
+                  # Crear el usuario para ejecutar jupyterlab
+                    echo ""
+                    echo "    Creando el usuario para ejecutar JupyterLab..."
+                    echo ""
+                    sudo adduser jupyterlab --system --home /opt/JupyterLab
+
+                  # Crear el entorno virtual
+                    echo ""
+                    echo "  Creando el entorno virtual de python..."
+                    echo ""
+                    cd /opt/JupyterLab/
+                    # Comprobar si el paquete python3-venv está instalado. Si no lo está, instalarlo.
+                      if [[ $(dpkg-query -s python3-venv 2>/dev/null | grep installed) == "" ]]; then
+                        echo ""
+                        echo -e "${cColorRojo}  El paquete python3-venv no está instalado. Iniciando su instalación...${cFinColor}"
+                        echo ""
+                        sudo apt-get -y update
+                        sudo apt-get -y install python3-venv
+                        echo ""
+                      fi
+                    sudo python3 -m venv PythonVirtualEnvironment
+                    # Crear el mensaje para mostrar cuando se entra al entorno virtual
+                      echo 'echo -e "\n  Activando el entorno virtual de JupyterLab... \n"' | sudo tee -a /opt/JupyterLab/PythonVirtualEnvironment/bin/activate
+
+                  # Entrar al entorno virtual e instalar dentro
+                    echo ""
+                    echo "  Entrando al entorno virtual e instalando dentro..."
+                    echo ""
+                    # Corregir permisos
+                      sudo chown jupyterlab /opt/JupyterLab/ -R
+                    # Asignar shell a jupyterlab
+                      sudo chsh -s /bin/bash jupyterlab
+                    # Entrar al entorno virtual
+                      sudo su jupyterlab -c '                                           \
+                      source /opt/JupyterLab/PythonVirtualEnvironment/bin/activate   && \
+                        python3 -m pip install jupyterlab                            && \
+                        python3 -m pip install jupyterlab-language-pack-es-ES        && \
+                        python3 -m pip install notebook                              && \
+                        echo ""                                                      && \
+                        echo "    Crea una contraseña para Jupyter notebook:"        && \
+                        echo ""                                                      && \
+                        jupyter notebook password                                    && \
+                        python3 -m pip install voila                                 && \
+                        python3 -m pip install "python-lsp-server[all]"              && \
+                        python3 -m pip install jedi-language-server                  && \
+                      deactivate                                                        \
+                      '
+                    # Desactivar la shell
+                      sudo chsh -s /usr/sbin/nologin jupyterlab
+                    # Poner en español
+                      sudo mkdir -p /opt/JupyterLab/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/'
+                      echo '{'                   | sudo tee -a /opt/JupyterLab/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
+                      echo '  "locale": "es_ES"' | sudo tee -a /opt/JupyterLab/'.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
+                      echo '}'                   | sudo tee -a /opt/JupyterLab'/.jupyter/lab/user-settings/@jupyterlab/translation-extension/plugin.jupyterlab-settings'
+                      sudo chown jupyterlab /opt/JupyterLab/ -R
+
+                    # Crear el archivo para ejecutar
+                      echo ""
+                      echo "    Creando el archivo para ejecutar..."
+                      echo ""
+                      echo '#!/bin/bash'                                                                       | sudo tee    /opt/JupyterLab/JupyterLab.sh
+                      echo ''                                                                                  | sudo tee -a /opt/JupyterLab/JupyterLab.sh
+                      echo 'source /opt/JupyterLab/PythonVirtualEnvironment/bin/activate'                      | sudo tee -a /opt/JupyterLab/JupyterLab.sh
+                      echo '  jupyter lab --ip=0.0.0.0 --no-browser --notebook-dir=/opt/JupyterLab/Notebooks/' | sudo tee -a /opt/JupyterLab/JupyterLab.sh
+                      echo 'deactivate'                                                                        | sudo tee -a /opt/JupyterLab/JupyterLab.sh
+                      sudo chmod +x /opt/JupyterLab/JupyterLab.sh
+                      sudo chown jupyterlab /opt/JupyterLab/JupyterLab.sh
+
+                    # Notificar creación del entorno virtual
+                      echo ""
+                      echo -e "${cColorVerde}    Entorno virtual preparado. JubypterLab se puede iniciar de la siguiente forma:${cFinColor}"
+                      echo ""
+                      echo -e "${cColorVerde}      source /opt/JupyterLab/PythonVirtualEnvironments/bin/activate${cFinColor}"
+                      echo ""
+                      echo -e "${cColorVerde}        jupyter lab --ip=0.0.0.0 --no-browser${cFinColor}" # Esto hará que JupyterLab escuche en todas las IPs (LAN, WiFi, etc.) y no intente abrir un navegador local.
+                      echo ""
+                      echo -e "${cColorVerde}      deactivate${cFinColor}"
+                      echo ""
+
+            ;;
+
+        esac
+
+    done
+
 
   elif [ $cVerSO == "11" ]; then
 
