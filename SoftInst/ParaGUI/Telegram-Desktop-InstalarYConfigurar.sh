@@ -8,7 +8,10 @@
 # ----------
 # Script de NiPeGun para instalar y configurar Telegram-Desktop en Debian
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Telegram-Desktop-InstalarYConfigurar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Telegram-Desktop-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota sin caché:
