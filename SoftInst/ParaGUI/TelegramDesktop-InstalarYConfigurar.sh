@@ -63,9 +63,50 @@ elif [ $cVerSO == "12" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Telegram-Desktop para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+  # Descargar el archivo comprimido
+    echo ""
+    echo "    Descargando el archivo comprimido"
+    echo ""
+    # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install curl
+        echo ""
+      fi
+    curl -L https://telegram.org/dl/desktop/linux -o /tmp/telegram-desktop.tar.xz
+
+    # Descomprimir el archivo
+      echo ""
+      echo "    Descomprimiendo el archivo..."
+      echo ""
+      # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}      El paquete tar no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install tar
+          echo ""
+        fi
+      cd /tmp
+      sudo tar -xvf telegram-desktop.tar.xz
+
+    # Mover a la carpeta de usuario
+      echo ""
+      echo "    Moviendo a la carpeta de usuario..."
+      echo ""
+      mkdir -p $HOME/AppsPortables/TelegramDesktop/ 2> /dev/null
+      cp -rv /tmp/Telegram/* $HOME/AppsPortables/TelegramDesktop/
+
+    # Notificar fin de ejecución del script
+      echo ""
+      echo "  Script de instalación de telegram-desktop, finalizado."
+      echo ""
+      echo "    Puedes ejecutar telegram-desktop haciendo doble click en $HOME/AppsPortables/TelegramDesktop/Telegram"
+      echo ""
 
 elif [ $cVerSO == "11" ]; then
 
