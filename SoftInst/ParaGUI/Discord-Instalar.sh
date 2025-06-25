@@ -79,13 +79,13 @@ elif [ $cVerSO == "11" ]; then
   echo "  Iniciando el script de instalación de Discord para Debian 11 (Bullseye)..."  
   echo ""
 
-  apt-get -y update
-  apt-get -y install gdebi
-  apt-get -y install wget
-  mkdir -p /root/SoftInst/Discord
-  wget -q --no-check-certificate -O /root/SoftInst/Discord/discord.deb https://discordapp.com/api/download?platform=linux&format=deb
-  apt-get -y install libappindicator1
-  gdebi /root/SoftInst/Discord/discord.deb
+  sudo apt-get -y update
+  sudo apt-get -y install gdebi
+  sudo apt-get -y install wget
+  sudo mkdir -p /root/SoftInst/Discord
+  sudo wget -q --no-check-certificate -O /root/SoftInst/Discord/discord.deb https://discordapp.com/api/download?platform=linux&format=deb
+  sudo apt-get -y install libappindicator1
+  sudo gdebi /root/SoftInst/Discord/discord.deb
 
 elif [ $cVerSO == "10" ]; then
 
@@ -93,13 +93,13 @@ elif [ $cVerSO == "10" ]; then
   echo "  Iniciando el script de instalación de Discord para Debian 10 (Buster)..."  
   echo ""
 
-  apt-get -y update
-  apt-get -y install gdebi
-  apt-get -y install wget
-  mkdir -p /root/SoftInst/Discord
-  wget -q --no-check-certificate -O /root/SoftInst/Discord/discord.deb https://discordapp.com/api/download?platform=linux&format=deb
-  apt-get -y install libappindicator1
-  gdebi /root/SoftInst/Discord/discord.deb
+  sudo apt-get -y update
+  sudo apt-get -y install gdebi
+  sudo apt-get -y install wget
+  sudo mkdir -p /root/SoftInst/Discord
+  sudo wget -q --no-check-certificate -O /root/SoftInst/Discord/discord.deb https://discordapp.com/api/download?platform=linux&format=deb
+  sudo apt-get -y install libappindicator1
+  sudo gdebi /root/SoftInst/Discord/discord.deb
 
 elif [ $cVerSO == "9" ]; then
 
