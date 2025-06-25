@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar y configurar Discord en Debian
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Discord-Instalar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/Discord-Instalar.sh | sed 's--sudo-g' | bash
 # ----------
 
 # Definir constantes de color
