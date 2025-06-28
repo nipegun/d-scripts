@@ -22,10 +22,17 @@
     then
       echo ""
       echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
-      echo "    $0 [Parámetro1] [Parámetro2]"
+      echo ""
+      if [[ "$0" == "bash" ]]; then
+        vNombreDelScript="script.sh"
+      else
+        vNombreDelScript="$0"
+      fi
+      echo "    $vNombreDelScript [IPServSamba] [UsuarioConocido] [PassDelUsuario]"
       echo ""
       echo "  Ejemplo:"
-      echo "    $0 'Hola' 'Mundo'"
+      echo ""
+      echo "    $vNombreDelScript '10.10.76.111' 'arlina' 'Default_2025!'"
       echo ""
       exit
   fi
