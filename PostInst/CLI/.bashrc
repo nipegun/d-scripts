@@ -50,7 +50,7 @@
   }
 
 # Definir prompt final con ruta azul suave
-  PS1="\${debian_chroot:+(\$debian_chroot)}${vTextColor}\u\[\e[0m\]@\h\[\e[38;5;39m\][\$(vPromptPath)]\[\e[0m\]$vPromptSymbol "
+  PS1="┌─\${debian_chroot:+(\$debian_chroot)}${vTextColor}\u\[\e[0m\]@\h\[\e[38;5;39m\][\$(vPromptPath)]\[\e[0m\]\n└─$vPromptSymbol "
 
 # Indicar que los alias personales están en ~/.bash_aliases
   if [ -f ~/.bash_aliases ]; then
