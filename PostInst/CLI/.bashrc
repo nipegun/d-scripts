@@ -8,7 +8,7 @@
 # Aumentar a 5000 el límite de comandos almacenados en memoria RAM
   HISTSIZE=5000
 
-# Aumentar a 5000 el número de líneas a guardar en el archivo ~/.bash_history en disco.  
+# Aumentar a 5000 el número de líneas a guardar en el archivo ~/.bash_history en disco.
   HISTFILESIZE=5000
 
 # Escribir en el historial inmediatamente y recargar el externo (útil para que lo que lo se escriba en una terminal se vea al instante en otra.
