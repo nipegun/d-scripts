@@ -27,4 +27,3 @@ vPathDelPrompt() {
 
 # Definir el prompt con evaluación dinámica y colores
 PS1="${COLOR}\u\[\e[0m\]@\h\[\e[36m\][\$(vPathDelPrompt)]\[\e[0m\]: "
-
