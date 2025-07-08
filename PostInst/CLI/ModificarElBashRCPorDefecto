@@ -8,6 +8,28 @@
 # ----------
 # Script de NiPeGun para preparar Debian sin entorno gráfico a gusto de NiPeGun
 #
-# Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/0-PrepararDebianCLI.sh | bash
+# Ejecución remota (puede requerir privilegios sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/ModificarElBashRCPorDefecto | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/ModificarElBashRCPorDefecto | sed 's-sudo--g' | bash
 # ----------
+
+  # /root/.bashrc
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | sudo tee /root/.bashrc
+    #echo 'export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' | sudo tee -a /root/.bashrc
+    sudo su root -c "echo 'export PATH=$PATH' | sudo tee -a /root/.bashrc"
+    echo "" | sudo tee -a /root/.bashrc
+  # Plantilla de skel
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | sudo tee /etc/skel/.bashrc
+  # 50 primeros usuarios
+    for vIDdeUsuario in {1000..1050}; do
+      vNombreDelUsuario=$(getent passwd $vIDdeUsuario | cut -d: -f1)
+      if [ -f /home/"$vNombreDelUsuario"/.bashrc ]; then
+        echo -e "\n  Modificando /home/"$vNombreDelUsuario"/.bashrc ...\n"
+        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | sudo tee /home/"$vNombreDelUsuario"/.bashrc 2> /dev/null
+        sudo chown "$vNombreDelUsuario":"$vNombreDelUsuario" /home/"$vNombreDelUsuario"/.bashrc
+      fi
+    done
+    
+    
