@@ -4,17 +4,25 @@
 # naranja = usuarios con permisos sudo, sin ser el root
 # blanco = usuarios sin privilegios sudo, y sin ser root
 
-# Prompt personalizado según privilegios y ruta
-if [ "$UID" -eq 0 ]; then
-  COLOR='\[\e[31m\]'  # Root → rojo
-elif id -nG "$USER" | grep -qw sudo; then
-  COLOR='\[\e[38;5;208m\]'  # Usuario con sudo → naranja
-else
-  COLOR='\[\e[37m\]'  # Usuario sin sudo → gris claro
+# Detectar entorno chroot (opcional)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+  debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# Función para calcular ruta relativa o absoluta
-vPathDelPrompt() {
+# Asignar color según privilegios (256 colors)
+if [ "$UID" -eq 0 ]; then
+  vTextColor='\[\e[38;5;196m\]'  # Root → rojo
+  vPromptSymbol="#"
+elif id -nG "$USER" | grep -qw sudo; then
+  vTextColor='\[\e[38;5;226m\]'  # Usuario con sudo → amarillo
+  vPromptSymbol="$"
+else
+  vTextColor='\[\e[38;5;46m\]'   # Usuario sin sudo → verde
+  vPromptSymbol="$"
+fi
+
+# Función para mostrar ruta relativa o absoluta
+prompt_path() {
   local pwd="$PWD"
   if [[ "$pwd" == "$HOME" ]]; then
     echo "~"
@@ -25,5 +33,13 @@ vPathDelPrompt() {
   fi
 }
 
-# Definir el prompt con evaluación dinámica y colores
-PS1="${COLOR}\u\[\e[0m\]@\h\[\e[36m\][\$(vPathDelPrompt)]\[\e[0m\]: "
+# Definir prompt final con ruta azul suave
+PS1="\${debian_chroot:+(\$debian_chroot)}-${vTextColor}\u\[\e[0m\]@\h-\[\e[38;5;39m\][\$(prompt_path)]\[\e[0m\]\n$vPromptSymbol "
+
+
+# Inficar que los alias personales están en ~/.bash_aliases
+  if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+  fi
+
+
