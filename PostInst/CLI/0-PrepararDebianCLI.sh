@@ -46,10 +46,7 @@
   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-Todos-Poner.sh | sed 's-sudo--g' | bash
 
 # Modificar .bashrc a nivel de sistema
-  # /root/.bashrc
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | sed 's-sudo--g' | tee    /root/.bashrc
-  # Plantilla de skel
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | sed 's-sudo--g' | tee -a /etc/skel/.bashrc
+  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/ModificarElBashRCPorDefecto | sed 's-sudo--g' | bash
 
 # Instalar d-scripts
   apt-get -y update
