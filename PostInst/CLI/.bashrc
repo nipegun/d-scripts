@@ -4,10 +4,27 @@
 # naranja = usuarios con permisos sudo, sin ser el root
 # blanco = usuarios sin privilegios sudo, y sin ser root
 
+# Prompt personalizado según privilegios y ruta
 if [ "$UID" -eq 0 ]; then
-  PS1='\[\e[31m\]\u\[\e[0m\]@\h\$ '       # Root → rojo
+  COLOR='\[\e[31m\]'  # Root → rojo
 elif id -nG "$USER" | grep -qw sudo; then
-  PS1='\[\e[38;5;208m\]\u\[\e[0m\]@\h\$ ' # Usuario con sudo → naranja
+  COLOR='\[\e[38;5;208m\]'  # Usuario con sudo → naranja
 else
-  PS1='\u@\h\$ '                          # Usuario sin  → sin color
+  COLOR='\[\e[37m\]'  # Usuario sin sudo → gris claro
 fi
+
+# Función para calcular ruta relativa o absoluta
+vPathDelPrompt() {
+  local pwd="$PWD"
+  if [[ "$pwd" == "$HOME" ]]; then
+    echo "~"
+  elif [[ "$pwd" == "$HOME/"* ]]; then
+    echo "~${pwd#$HOME}"
+  else
+    echo "$pwd"
+  fi
+}
+
+# Definir el prompt con evaluación dinámica y colores
+PS1="${COLOR}\u\[\e[0m\]@\h\[\e[36m\][\$(vPathDelPrompt)]\[\e[0m\]: "
+
