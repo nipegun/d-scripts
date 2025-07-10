@@ -89,10 +89,10 @@
   # Crear el menú
     menu=(dialog --checklist "Instalando Node.js - Marca la versión deseada:" 22 96 16)
       opciones=(
-        1 "Versión disponible en los repositorios oficiales de Debian" on
-        2 "Última versión LTS"                                         off
-        3 "Versión Current"                                            off
-        4 "x"                                                          off
+        1 "Versión disponible en los repositorios oficiales de Debian" off
+        2 "Última versión LTS, directamente"                           on
+        3 "Última versión LTS, mediante nvm"                           off
+        4 "Versión Current"                                            off
         5 "x"                                                          off
       )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -141,23 +141,61 @@
           2)
 
             echo ""
-            echo "  Instalando la versión LTS de Node.js..."
+            echo "  Instalando la versión LTS de Node.js directamente..."
             echo ""
+
+            # Instalar paquetes necesarios para la correcta ejecución del script
+              sudo apt-get -y update
+              sudo apt-get -y install curl 2> /dev/null
+              sudo apt-get -y install jq   2> /dev/null
+
+            # Determinar la última versión LTS de Node.js
+              vUltVersLTSdeNodeJS=$(curl -s https://nodejs.org/dist/index.json | jq -r 'map(select(.lts != null)) | .[] | select(.lts == "Jod") | .version' | head -n1)
+
+            # Descargar el archivo comprimido
+              cd /tmp
+              curl -L https://nodejs.org/dist/"$vUltVersLTSdeNodeJS"/node-"$vUltVersLTSdeNodeJS"-linux-x64.tar.xz -O
+
+            # Descomprimir el archivo
+              tar -vxJf node-"$vUltVersLTSdeNodeJS"-linux-x64.tar.xz
+
+            # Mover carpeta descomprimida
+              sudo mv node-"$vUltVersLTSdeNodeJS"-linux-x64 /usr/local/nodejs
+
+            # Crear los enlaces simbólicos
+              sudo ln -s /usr/local/nodejs/bin/node /usr/bin/node
+              sudo ln -s /usr/local/nodejs/bin/npm  /usr/bin/npm
+
+            # Comprobando instalación
+              node -v
+              npm -v
 
           ;;
 
           3)
 
             echo ""
-            echo "  Instalando la versión Current de Node.js..."
+            echo "  Instalando la versión LTS de Node.js mediante nvm..."
             echo ""
+
+            # Instalar nvm
+              echo ""
+              echo "    Instalando nvm..."
+              echo ""
+              curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/NodeVersionManager-Instalar.sh | sudo bash
+
+            # Cargar las opciones de shell de nvm
+              \. "$HOME/.nvm/nvm.sh"
+
+            # Instalar Node.js LTS
+              nvm install 22
 
           ;;
 
           4)
 
             echo ""
-            echo "  Opción 4..."
+            echo "  Instalando la versión Current de Node.js..."
             echo ""
 
           ;;
