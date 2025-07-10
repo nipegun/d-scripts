@@ -66,7 +66,7 @@ elif [ $cVerSO == "12" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de los controladores NVIDIA para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
-  # Instalar CUDA
+  # Instalar CUDA Toolkit
     echo ""
     echo "    Instalando CUDA Toolkit..."
     echo ""
@@ -75,6 +75,11 @@ elif [ $cVerSO == "12" ]; then
     sudo cp -v /var/cuda-repo-debian12-12-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
     sudo apt-get update
     sudo apt-get -y install cuda-toolkit-12-8
+
+  # Notificar fin de ejecución del script
+    echo ""
+    echo "    Script de instalación de CUDA Toolkit, finalizado."
+    echo ""
 
 elif [ $cVerSO == "11" ]; then
 
