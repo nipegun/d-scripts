@@ -163,12 +163,14 @@
               sudo mv node-"$vUltVersLTSdeNodeJS"-linux-x64 /usr/local/nodejs
 
             # Crear los enlaces simbólicos
-              sudo ln -s /usr/local/nodejs/bin/node /usr/bin/node
-              sudo ln -s /usr/local/nodejs/bin/npm  /usr/bin/npm
+              sudo ln -sf /usr/local/nodejs/bin/node /usr/bin/node
+              sudo ln -sf /usr/local/nodejs/bin/npm  /usr/bin/npm
+              sudo ln -sf /usr/local/nodejs/bin/npx  /usr/bin/npx
 
             # Comprobando instalación
               node -v
               npm -v
+              npx -v
 
           ;;
 
