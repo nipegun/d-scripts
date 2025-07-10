@@ -68,7 +68,7 @@ elif [ $cVerSO == "12" ]; then
 
   # Instalar CUDA
     echo ""
-    echo "    Instalando CUDA..."
+    echo "    Instalando CUDA Toolkit..."
     echo ""
     curl -L https://developer.download.nvidia.com/compute/cuda/12.8.0/local_installers/cuda-repo-debian12-12-8-local_12.8.0-570.86.10-1_amd64.deb -o /tmp/CudaRepo.deb
     sudo apt -y install /tmp/CudaRepo.deb
