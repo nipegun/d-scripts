@@ -106,15 +106,13 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Ejecutando el instalador..."
     echo ""
-    sudo /tmp/nVidiaWebDriverInstall.run
+    sudo sh /tmp/nVidiaWebDriverInstall.run
 
-nvidia-smi
+  # Comprobar la grñafica
+    nvidia-smi
 
-#  # Instalar CUDA
-#    echo ""
-#    echo "    Instalando CUDA..."
-#    echo ""
-#    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-CUDA-DeWeb-Instalar.sh | bash
+  # Instalar CUDA Toolkit
+    #curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-CUDAToolkit-DeWeb-Instalar.sh | sudo bash
 
 elif [ $cVerSO == "11" ]; then
 
