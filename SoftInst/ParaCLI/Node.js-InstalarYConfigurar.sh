@@ -90,10 +90,10 @@
     menu=(dialog --checklist "Instalando Node.js - Marca la versión deseada:" 22 96 16)
       opciones=(
         1 "Versión disponible en los repositorios oficiales de Debian" on
-        2 "Última versión LTS" off
-        3 "Versión Current" off
-        4 "x" off
-        5 "x" off
+        2 "Última versión LTS"                                         off
+        3 "Versión Current"                                            off
+        4 "x"                                                          off
+        5 "x"                                                          off
       )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -106,9 +106,9 @@
             echo ""
             echo "  Instalando la versión de Node.js disponible en los repositorios oficiales de Debian..."
             echo ""
-            apt-get -y update
-            apt-get -y install nodejs
-            apt-get -y install npm
+            sudo apt-get -y update
+            sudo apt-get -y install nodejs
+            sudo apt-get -y install npm
 
             # Notificar fin de instalación
               vNodeJS=$(node -v | cut  -d'v' -f2)
@@ -123,13 +123,13 @@
                echo "var server = http.createServer(function(req, res) {"  >> /tmp/ServidorPrueba.js
                echo 'res.write("Servidor http Node.js de prueba!\n");'     >> /tmp/ServidorPrueba.js
                echo "res.end();"                                           >> /tmp/ServidorPrueba.js
-               echo "}).listen(8080);"                                     >> /tmp/ServidorPrueba.js
+               echo "}).listen(8081);"                                     >> /tmp/ServidorPrueba.js
              # Lanzar el servidor
                node /tmp/ServidorPrueba.js &
              # Notificar el servidor de pruebas corriendo
                echo ""
                echo "      Se ha creado y ejecutado el servidor http de prueba en /tmp/ServidorPrueba.js."
-               echo "        Para acceder: http://localhost:8080"
+               echo "        Para acceder: http://localhost:8081"
                vNumProcSP=$(jobs | grep "/tmp/ServidorPrueba.js" | cut -d'[' -f2 | cut -d']' -f1)
                echo "        Para detenerlo: kill %$vNumProcSP"
                echo ""
