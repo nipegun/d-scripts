@@ -111,8 +111,8 @@
       echo ""
       echo "  Haciendo que el editor de texto abra cada archivo en una nueva ventana, en vez de una nueva pestaña..."
       echo ""
-      sed -i -e 's|Exec=gnome-text-editor %U|Exec=gnome-text-editor --new-window %U|g' /usr/share/applications/org.gnome.TextEditor.desktop
-      cp /usr/share/applications/org.gnome.TextEditor.desktop ~/.local/share/applications/
+      sudo sed -i -e 's|Exec=gnome-text-editor %U|Exec=gnome-text-editor --new-window %U|g' /usr/share/applications/org.gnome.TextEditor.desktop
+      cp -fv /usr/share/applications/org.gnome.TextEditor.desktop ~/.local/share/applications/
       update-desktop-database ~/.local/share/applications/
 
     # Reiniciar el sistema
