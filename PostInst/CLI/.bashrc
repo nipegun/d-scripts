@@ -54,6 +54,6 @@
 
 # Indicar que los alias personales están en ~/.bash_aliases
   if [ -f ~/.bash_aliases ]; then
-  . ~/.bash_aliases
+    . ~/.bash_aliases
   fi
 
