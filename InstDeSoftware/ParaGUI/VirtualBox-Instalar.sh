@@ -72,7 +72,7 @@ elif [ $cVerSO == "12" ]; then
     menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
       opciones=(
         1 "Instalar la versión disponible en el repositorio de Debian" off
-        2 "Instalar la última versión desde la web" off
+        2 "Instalar la última versión desde la web"                    off
       )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -216,7 +216,8 @@ elif [ $cVerSO == "11" ]; then
       echo ""
       echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
-      apt-get -y update && apt-get -y install dialog
+      sudo apt-get -y update
+      sudo apt-get -y install dialog
       echo ""
     fi
 
@@ -224,7 +225,8 @@ elif [ $cVerSO == "11" ]; then
     menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
       opciones=(
         1 "Instalar la versión disponible en el repositorio de Debian" off
-        2 "Instalar la última versión desde la web" off
+        2 "Instalar la última versión desde la web"                    off
+        3 "Instalar la versión 7.0 desde la web oficial"               off
       )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -341,6 +343,61 @@ elif [ $cVerSO == "11" ]; then
               echo "  Instalando el paquete .deb..."
               echo ""
               apt -y install /root/SoftInst/VirtualBox/$vEnlaceArchivoDeb
+
+            # Instalar el pack de extensiones
+              echo ""
+              echo "  Instalando el pack de extensiones..."
+              echo ""
+              cd /root/SoftInst/VirtualBox/
+              wget http://download.virtualbox.org/virtualbox/$vUltVersEnWeb/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
+              echo y | vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
+
+          ;;
+
+          3)
+
+            vUltVersEnWeb="7.0.0"
+            echo ""
+            echo "  Instalando la versión $vUltVersEnWeb desde la web oficial..."
+            echo ""
+            # Determinar el enlace de descarga del archivo .deb
+              echo ""
+              echo "  Determinando el enlace de descarga del archivo .deb..."
+              echo ""
+              
+              # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo "    El paquete curl no está instalado. Iniciando su instalación..."
+                  echo ""
+                  sudo apt-get -y update
+                  sudo apt-get -y install curl
+                  echo ""
+                fi
+              vEnlaceArchivoDeb=$(curl -sL https://download.virtualbox.org/virtualbox/$vUltVersEnWeb/ | grep ullseye | cut -d'"' -f2)
+              echo "    En enlace de descarga es: https://download.virtualbox.org/virtualbox/$vUltVersEnWeb/$vEnlaceArchivoDeb"
+              echo ""
+
+            # Descargar archivo .deb
+              echo ""
+              echo "  Descargando archivo .deb..."
+              echo ""
+              cd /tmp
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo "    El paquete wget no está instalado. Iniciando su instalación..."
+                  echo ""
+                  apt-get -y update && apt-get -y install wget
+                  echo ""
+                fi
+              wget https://download.virtualbox.org/virtualbox/$vUltVersEnWeb/$vEnlaceArchivoDeb
+
+            # Instalar el paquete
+              echo ""
+              echo "  Instalando el paquete .deb..."
+              echo ""
+              sudo apt -y install /tmp/$vEnlaceArchivoDeb
 
             # Instalar el pack de extensiones
               echo ""
