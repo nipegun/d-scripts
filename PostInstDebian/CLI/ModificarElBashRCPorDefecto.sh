@@ -32,5 +32,4 @@
         sudo chown "$vNombreDelUsuario":"$vNombreDelUsuario" /home/"$vNombreDelUsuario"/.bashrc
       fi
     done
-    
-    
+
