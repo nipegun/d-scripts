@@ -16,18 +16,18 @@
 # ----------
 
   # /root/.bashrc
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | sudo tee /root/.bashrc
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/.bashrc | sudo tee /root/.bashrc
     echo 'export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' | sudo tee -a /root/.bashrc
     #sudo su root -c "echo 'export PATH=$PATH' | sudo tee -a /root/.bashrc"
     echo "" | sudo tee -a /root/.bashrc
   # Plantilla de skel
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | sudo tee /etc/skel/.bashrc
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/.bashrc | sudo tee /etc/skel/.bashrc
   # 50 primeros usuarios
     for vIDdeUsuario in {1000..1050}; do
       vNombreDelUsuario=$(getent passwd $vIDdeUsuario | cut -d: -f1)
       if [ -f /home/"$vNombreDelUsuario"/.bashrc ]; then
         echo -e "\n  Modificando /home/"$vNombreDelUsuario"/.bashrc ...\n"
-        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/.bashrc | sudo tee /home/"$vNombreDelUsuario"/.bashrc 2> /dev/null
+        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/.bashrc | sudo tee /home/"$vNombreDelUsuario"/.bashrc 2> /dev/null
         echo 'export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games' | sudo tee -a /home/"$vNombreDelUsuario"/.bashrc 2> /dev/null
         sudo chown "$vNombreDelUsuario":"$vNombreDelUsuario" /home/"$vNombreDelUsuario"/.bashrc
       fi
