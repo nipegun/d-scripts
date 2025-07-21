@@ -9,10 +9,10 @@
 # Script de NiPeGun para preparar Debian sin entorno gráfico a gusto de NiPeGun
 #
 # Ejecución remota (puede requerir privilegios sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/ModificarElBashRCPorDefecto | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/ModificarElBashRCPorDefecto.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/ModificarElBashRCPorDefecto | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/CLI/ModificarElBashRCPorDefecto.sh | sed 's-sudo--g' | bash
 # ----------
 
   # /root/.bashrc
