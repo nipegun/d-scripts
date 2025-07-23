@@ -9,7 +9,7 @@
 # Script de NiPeGun para preparar el cortafuegos
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Cortafuegos-Preparar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Cortafuegos-Preparar.sh | bash
 # ----------
 
 # Definir constantes de color
