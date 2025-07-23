@@ -10,7 +10,7 @@
 # Script de NiPeGun para preparar las tareas cron
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/TareasCron-Preparar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/TareasCron-Preparar.sh | bash
 # ----------
 
 # Definir constantes de color
@@ -34,7 +34,7 @@
 # Preparar el script de tareas cada minuto
   echo ""
   echo "    Creando el archivo para las tareas de cada minuto..." 
-echo ""
+  echo ""
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                                 > /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
   echo ""                                                                                                           >> /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
@@ -46,11 +46,11 @@ echo ""
   echo ""                                                                                                           >> /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..." 
-echo ""
+  echo ""
   chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
   echo ""
   echo "      Instalando la tarea en crontab..." 
-echo ""
+  echo ""
   crontab -l > /tmp/CronTemporal
   echo "* * * * * /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh" >> /tmp/CronTemporal
   crontab /tmp/CronTemporal
@@ -59,7 +59,7 @@ echo ""
 # Preparar el script de tareas cada hora
   echo ""
   echo "    Creando el archivo para las tareas de cada hora..." 
-echo ""
+  echo ""
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                             > /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
   echo ""                                                                                                       >> /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
@@ -71,17 +71,17 @@ echo ""
   echo ""                                                                                                       >> /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..." 
-echo ""
+  echo ""
   chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
   echo ""
   echo "      Creando enlace hacia el archivo en /etc/cron.hourly/ ..." 
-echo ""
+  echo ""
   ln -s /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh /etc/cron.hourly/TareasCronCadaHora
 
 # Preparar el script de tareas cada hora impar
   echo ""
   echo "    Creando el archivo para las tareas de cada hora impar..." 
-echo ""
+  echo ""
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                                        > /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
   echo ""                                                                                                                  >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
@@ -93,11 +93,11 @@ echo ""
   echo ""                                                                                                                  >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..." 
-echo ""
+   echo ""
   chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
   echo ""
   echo "      Instalando la tarea en crontab..." 
-echo ""
+  echo ""
   crontab -l > /tmp/CronTemporal
   echo "0 1-23/2 * * * /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh" >> /tmp/CronTemporal
   crontab /tmp/CronTemporal
@@ -106,7 +106,7 @@ echo ""
 # Preparar el script de tareas cada hora par
   echo ""
   echo "    Creando el archivo para las tareas de cada hora par..." 
-echo ""
+  echo ""
   mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                                    > /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
   echo ""                                                                                                              >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
@@ -118,11 +118,11 @@ echo ""
   echo ""                                                                                                              >> /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..." 
-echo ""
+  echo ""
   chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
   echo ""
   echo "      Instalando la tarea en crontab..." 
-echo ""
+  echo ""
   crontab -l > /tmp/CronTemporal
   echo "0 */2 * * * /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh" >> /tmp/CronTemporal
   crontab /tmp/CronTemporal
@@ -131,7 +131,7 @@ echo ""
 # Preparar el script de tareas cada día
   echo ""
   echo "    Creando el archivo para las tareas de cada día..." 
-echo ""
+  echo ""
   echo '#!/bin/bash'                                                                                           > /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
   echo ""                                                                                                     >> /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                   >> /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
@@ -142,17 +142,17 @@ echo ""
   echo ""                                                                                                     >> /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..." 
-echo ""
+  echo ""
   chmod +x /root/scripts/TareasCronCadaDía.sh
   echo ""
   echo "      Creando enlace hacia el archivo en /etc/cron.daily/ ..." 
-echo ""
+  echo ""
   ln -s /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh /etc/cron.daily/TareasCronCadaDía
 
 # Preparar el script de tareas cada semana
   echo ""
   echo "    Creando el archivo para las tareas de cada semana..." 
-echo ""
+  echo ""
   echo '#!/bin/bash'                                                                                                 > /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
   echo ""                                                                                                           >> /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                         >> /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
@@ -163,17 +163,17 @@ echo ""
   echo ""                                                                                                           >> /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..." 
-echo ""
+  echo ""
   chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
   echo ""
   echo "      Creando enlace hacia el archivo en /etc/cron.weekly/ ..." 
-echo ""
+  echo ""
   ln -s /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh /etc/cron.weekly/TareasCronCadaSemana
 
 # Preparar el script de tareas cada mes
   echo ""
   echo "    Creando el archivo para las tareas de cada mes..." 
-echo ""
+  echo ""
   echo '#!/bin/bash'                                                                                           > /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
   echo ""                                                                                                     >> /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                   >> /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
@@ -184,17 +184,17 @@ echo ""
   echo ""                                                                                                     >> /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
   echo ""
   echo "      Dando permiso de ejecución al archivo..." 
-echo ""
+  echo ""
   chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
   echo ""
   echo "      Creando enlace hacia el archivo en /etc/cron.monthly/ ..." 
-echo ""
+  echo ""
   ln -s /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh /etc/cron.monthly/TareasCronCadaMes
 
 # Dar permisos de lectura y ejecución sólo al propietario de los scripts
   echo ""
   echo "  Dando permisos de lectura y ejecución solo al propietario de los scripts..." 
-echo ""
+  echo ""
   # Si esto no se hace las tareas no se ejecutarán.
   chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
   chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
