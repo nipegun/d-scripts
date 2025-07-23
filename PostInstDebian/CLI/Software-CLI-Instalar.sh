@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar software para modo CLI en Debian
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Sensores-InstalarYDetectar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Sensores-InstalarYDetectar.sh | bash
 # ----------
 
 # Definir constantes de color
