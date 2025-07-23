@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar software en el escritorio Mate de Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Mate-InstalarSoftware.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Mate-InstalarSoftware.sh | bash
 # ----------
 
 # Definir constantes de color
