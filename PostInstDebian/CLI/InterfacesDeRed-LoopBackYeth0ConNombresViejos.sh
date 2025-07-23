@@ -9,7 +9,7 @@
 # Script de NiPeGun para re-escribir /etc/network/interfaceds con los nombres antiguos de las interfaces de red
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/InterfacesDeRed-LoopBackYeth0ConNombresViejos.sh
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/InterfacesDeRed-LoopBackYeth0ConNombresViejos.sh
 # ----------
 
 # Definir constantes de color
@@ -33,7 +33,7 @@
 # Modificar /etc/network/interfaces
   echo ""
   echo "    Modificando /etc/network/interfaces..." 
-echo ""
+  echo ""
   echo "auto lo"                   > /etc/network/interfaces
   echo "  iface lo inet loopback" >> /etc/network/interfaces
   echo ""                         >> /etc/network/interfaces
