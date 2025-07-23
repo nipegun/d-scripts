@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar y configurar el controlador AMDGPU-Pro en Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Grafica-AMDGPU-Pro-Instalar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/Controladores/Grafica-AMDGPU-Pro-Instalar.sh | bash
 
 
 cColorRojo='\033[1;31m'
