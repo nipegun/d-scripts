@@ -9,7 +9,7 @@
 # Script de NiPeGun para preparar los comandos post-arranque (antiguo rc.local)
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
+#   curl -sLhttps://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/ComandosPostArranque-Preparar.sh | bash
 # ----------
 
 # Definir constantes de color
