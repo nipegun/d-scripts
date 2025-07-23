@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar el controlador de la tarjeta ethernet Realtek 10ec-8125
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Controladores/Ethernet-Realtek10ec-8125.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/Controladores/Ethernet-Realtek10ec-8125.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
