@@ -9,7 +9,7 @@
 # Script de NiPeGun para preparar el Pendrive de Debian Portable con el escritorio Gnome
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/PenDebian/PrepararPenDebianPortable-GnomeDesktop.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/PenDebian/PrepararPenDebianPortable-GnomeDesktop.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
@@ -53,13 +53,13 @@ elif [ $cVerSO == "12" ]; then
   echo ""
 
   # Poner nomenclatura antigua de nombre de interfaces de red
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/InterfacesDeRed-ViejaNomenclatura.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/InterfacesDeRed-ViejaNomenclatura.sh | bash
 
   # Agregar repositorios
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Repositorios-PonerTodos.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Repositorios-PonerTodos.sh | bash
 
   # Instalar software
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-InstalarSoftware.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Gnome-InstalarSoftware.sh | bash
 
   # Desinstalar software extra instalado
     apt-get -y autoremove subtitleeditor
@@ -137,13 +137,13 @@ elif [ $cVerSO == "12" ]; then
     mkdir -p /Particiones/LVM/G4/            2> /dev/null
 
   # ComandosPostArranque
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/ComandosPostArranque-Preparar.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/ComandosPostArranque-Preparar.sh | bash
 
   # Cortafuegos
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Cortafuegos-Preparar.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Cortafuegos-Preparar.sh | bash
 
   # Tareas cron
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/TareasCron-Preparar.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/TareasCron-Preparar.sh | bash
 
   # Agregar automontaje de particiones
     echo '# Automontaje de todas las particiones'               >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
@@ -158,7 +158,7 @@ elif [ $cVerSO == "12" ]; then
     echo '  mount -t auto /dev/$vLVMg1/root /Particiones/LVM/G1/root/' >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
   # d-scripts
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/DScripts-Sincronizar.sh | bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/DScripts-Sincronizar.sh | bash
 
   # Permitir caja como root
     mkdir -p /root/.config/autostart/ 2> /dev/null
@@ -212,7 +212,7 @@ elif [ $cVerSO == "12" ]; then
     apt-get -y dist-upgrade
 
   # Personalizar escritorio gnome
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/Escritorio/EscritorioGnome-Personalizar.sh| bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/EscritorioGnome-Personalizar.sh| bash
 
   # Agregar el usuario a sudo
     echo "usuariox ALL=(ALL:ALL) ALL" >> /etc/sudoers
