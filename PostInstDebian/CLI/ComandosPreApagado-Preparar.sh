@@ -9,7 +9,7 @@
 # Script de NiPeGun para preparar los comandos pre-apagado
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/ComandosPreApagado-Preparar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/ComandosPreApagado-Preparar.sh | bash
 # ----------
 
 # Definir constantes de color
