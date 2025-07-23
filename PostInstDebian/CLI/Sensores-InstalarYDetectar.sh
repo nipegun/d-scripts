@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar y configurar los sensores de hardware
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/CLI/Sensores-InstalarYDetectar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Sensores-InstalarYDetectar.sh | bash
 # ----------
 
 # Definir constantes de color
@@ -83,24 +83,24 @@ elif [ $cVerSO == "10" ]; then
 
   echo ""
   echo "    Instalando el paquete lm-sensors..." 
-echo ""
+  echo ""
   apt-get -y update
   apt-get -y install lm-sensors
 
   echo ""
   echo "    Instalando el paquete hddtemp..." 
-echo ""
+  echo ""
   apt-get -y update
   apt-get -y install hddtemp
 
   echo ""
   echo "    Detectando los sensores..." 
-echo ""
+  echo ""
   /usr/bin/yes YES | /usr/sbin/sensors-detect
 
   echo ""
   echo "    Activando el módulo del kernel..." 
-echo ""
+  echo ""
   /etc/init.d/kmod start
 
 elif [ $cVerSO == "11" ]; then
@@ -111,24 +111,24 @@ elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "    Instalando el paquete lm-sensors..." 
-echo ""
+  echo ""
   apt-get -y update
   apt-get -y install lm-sensors
 
   echo ""
   echo "    Instalando el paquete hddtemp..." 
-echo ""
+  echo ""
   apt-get -y update
   apt-get -y install hddtemp
 
   echo ""
   echo "    Detectando los sensores..." 
-echo ""
+  echo ""
   /usr/bin/yes YES | /usr/sbin/sensors-detect
 
   echo ""
   echo "    Activando el módulo del kernel..." 
-echo ""
+  echo ""
   /etc/init.d/kmod start
 
 elif [ $cVerSO == "12" ]; then
