@@ -9,7 +9,7 @@
 # Script de NiPeGun para personalizar el escritorio Mate al acabar de instalarlo
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Mate-Personalizar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Mate-Personalizar.sh | bash
 # ----------
 
 # Definir constantes de color
@@ -173,7 +173,7 @@
           apt-get -y install curl
           echo ""
         fi
-      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/LightDMWallpaper.jpg --output /usr/share/pixmaps/LightDMWallpaper.jpg
+      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/LightDMWallpaper.jpg --output /usr/share/pixmaps/LightDMWallpaper.jpg
       chmod 777 /usr/share/pixmaps/LightDMWallpaper.jpg
       sed -i -e 's|#background=|#background=#000000\nbackground=/usr/share/pixmaps/LightDMWallpaper.jpg|g' /etc/lightdm/lightdm-gtk-greeter.conf
     # Cambiar la fuente
@@ -300,7 +300,7 @@
           apt-get -y install curl
           echo ""
         fi
-      curl --silent https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/LightDMWallpaper.jpg --output /usr/share/pixmaps/LightDMWallpaper.jpg
+      curl --silent https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/LightDMWallpaper.jpg --output /usr/share/pixmaps/LightDMWallpaper.jpg
       chmod 777 /usr/share/pixmaps/LightDMWallpaper.jpg
       sed -i -e 's|#background=|#background=#000000\nbackground=/usr/share/pixmaps/LightDMWallpaper.jpg|g' /etc/lightdm/lightdm-gtk-greeter.conf
     # Cambiar la fuente
