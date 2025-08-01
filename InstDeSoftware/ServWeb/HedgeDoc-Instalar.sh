@@ -9,19 +9,19 @@
 # Script de NiPeGun para instalar y configurar HedgeDoc en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/HedgeDoc-Instalar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/HedgeDoc-Instalar.sh | sed 's-sudo--g' | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/HedgeDoc-Instalar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/HedgeDoc-Instalar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/HedgeDoc-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -90,9 +90,66 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de HedgeDoc para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Dependencias
+      sudo apt -y update
+      sudo apt -y install git
+      sudo apt -y install curl
+      sudo apt -y install build-essential
+      sudo apt -y install libpq-dev
+
+    # Instalar Node.js
+      # Detertminar la última versión
+        vVersNodeJSrecomendado='18'
+      curl -fsSL https://deb.nodesource.com/setup_"$vVersNodeJSrecomendado".x | sudo bash -
+      sudo apt-get install -y nodejs
+
+    # Instalar yarn
+      sudo npm install -g yarn
+
+    # Instalar PostgreSQL
+      sudo apt install -y postgresql
+      sudo apt install -y postgresql-contrib
+
+    # Crear base de datos y usuario:
+      sudo -u postgres psql
+CREATE DATABASE hedgedoc;
+CREATE USER hedgedoc WITH PASSWORD 'hedgedocpass';
+GRANT ALL PRIVILEGES ON DATABASE hedgedoc TO hedgedoc;
+\q
+
+    # Clonar HedgeDoc y preparar entorno
+      cd /opt
+      sudo git clone https://github.com/hedgedoc/hedgedoc.git
+      sudo chown -R $USER:$USER hedgedoc
+      cd hedgedoc
+      yarn install
+      yarn build
+      yarn start
+
+    # Crear el usuario hedgedoc
+      sudo adduser --system --no-create-home --group --shell /usr/sbin/nologin hedgedoc
+
+    # Crear el servicio de systemd
+      echo '[Unit]'                                               | sudo tee    /etc/systemd/system/HedgeDoc.service
+      echo 'Description=HedgeDoc - Collaborative Markdown Editor' | sudo tee -a /etc/systemd/system/HedgeDoc.service
+      echo 'After=network.target'                                 | sudo tee -a /etc/systemd/system/HedgeDoc.service
+      echo ''                                                     | sudo tee -a /etc/systemd/system/HedgeDoc.service
+      echo '[Service]'                                            | sudo tee -a /etc/systemd/system/HedgeDoc.service
+      echo 'Type=simple'                                          | sudo tee -a /etc/systemd/system/HedgeDoc.service
+      echo 'User=hedgedoc'                                        | sudo tee -a /etc/systemd/system/HedgeDoc.service
+      echo 'WorkingDirectory=/opt/hedgedoc'                       | sudo tee -a /etc/systemd/system/HedgeDoc.service
+      echo 'ExecStart=/usr/bin/yarn start'                        | sudo tee -a /etc/systemd/system/HedgeDoc.service
+      echo 'Environment=NODE_ENV=production'                      | sudo tee -a /etc/systemd/system/HedgeDoc.service
+      echo 'Restart=always'                                       | sudo tee -a /etc/systemd/system/HedgeDoc.service
+      echo 'RestartSec=10'                                        | sudo tee -a /etc/systemd/system/HedgeDoc.service
+      echo ''                                                     | sudo tee -a /etc/systemd/system/HedgeDoc.service
+      echo '[Install]'                                            | sudo tee -a /etc/systemd/system/HedgeDoc.service
+      echo 'WantedBy=multi-user.target'                           | sudo tee -a /etc/systemd/system/HedgeDoc.service
+
+    # .
+      sudo systemctl daemon-reexec
+      sudo systemctl daemon-reload
+      sudo systemctl enable --now hedgedoc
 
   elif [ $cVerSO == "11" ]; then
 
