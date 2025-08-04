@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar Visual Studio Code en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/VisualStudioCode-Instalar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaGUI/VisualStudioCode-Instalar.sh | bash
 #
 # Ejecución remota como $HOME:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaGUI/VisualStudioCode-Instalar.sh | sed 's-sudo--g' | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaGUI/VisualStudioCode-Instalar.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Determinar la versión de Debian
