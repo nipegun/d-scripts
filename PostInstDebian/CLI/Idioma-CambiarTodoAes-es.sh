@@ -54,9 +54,42 @@ if [ $cVerSO == "13" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a español en Debian 13 (x)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+  # Poner que sólo se genere el español de España cuando se creen locales
+    sudo rm -f  /etc/locale.gen
+    echo "es_ES.UTF-8 UTF-8" | sudo tee /etc/locale.gen
+
+  # Compilar los locales borrando primero los existentes y dejando nada más que el español de España
+    sudo apt-get -y update
+    sudo apt-get -y install locales
+    sudo locale-gen --purge es_ES.UTF-8
+
+  # Modificar el archivo /etc/default/locale reflejando los cambios
+    echo 'LANG="es_ES.UTF-8"'  | sudo tee    /etc/default/locale
+    echo 'LANGUAGE="es_ES:es"' | sudo tee -a /etc/default/locale
+
+  # Poner el teclado en español de España
+    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="es"'    | sudo tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
+    echo ''                  | sudo tee -a /etc/default/keyboard
+
+  # Indicar idioma español de España para todos los usuarios
+    echo ""                                                      | sudo tee    /etc/profile
+    echo '# Poner idioma español de España a todos los usuarios' | sudo tee -a /etc/profile
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/profile
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/profile
+    
+    echo '  export LANG=es_ES.UTF-8'                             | sudo tee -a /etc/skel/.bashrc
+    echo '  export LANGUAGE=es_ES:es'                            | sudo tee -a /etc/skel/.bashrc
+
+  # Notificar cambios
+    echo ""
+    echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
+    echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
+    echo ""
 
 elif [ $cVerSO == "12" ]; then
 
