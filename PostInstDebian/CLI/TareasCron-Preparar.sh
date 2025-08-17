@@ -10,7 +10,7 @@
 # Script de NiPeGun para preparar las tareas cron
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/TareasCron-Preparar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/TareasCron-Preparar.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
