@@ -54,20 +54,20 @@ if [ $cVerSO == "13" ]; then
   echo ""
   echo "    Configurando el servicio..."
   echo ""
-  echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
-  echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
-  echo "ConditionPathExists=/etc/rc.local"       >> /etc/systemd/system/rc-local.service
-  echo ""                                        >> /etc/systemd/system/rc-local.service
-  echo "[Service]"                               >> /etc/systemd/system/rc-local.service
-  echo "Type=forking"                            >> /etc/systemd/system/rc-local.service
-  echo "ExecStart=/etc/rc.local start"           >> /etc/systemd/system/rc-local.service
-  echo "TimeoutSec=0"                            >> /etc/systemd/system/rc-local.service
-  echo "StandardOutput=tty"                      >> /etc/systemd/system/rc-local.service
-  echo "RemainAfterExit=yes"                     >> /etc/systemd/system/rc-local.service
-  echo "SysVStartPriority=99"                    >> /etc/systemd/system/rc-local.service
-  echo ""                                        >> /etc/systemd/system/rc-local.service
-  echo "[Install]"                               >> /etc/systemd/system/rc-local.service
-  echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
+  echo "[Unit]"                                  | sudo tee    /etc/systemd/system/rc-local.service
+  echo "Description=/etc/rc.local Compatibility" | sudo tee -a /etc/systemd/system/rc-local.service
+  echo "ConditionPathExists=/etc/rc.local"       | sudo tee -a /etc/systemd/system/rc-local.service
+  echo ""                                        | sudo tee -a /etc/systemd/system/rc-local.service
+  echo "[Service]"                               | sudo tee -a /etc/systemd/system/rc-local.service
+  echo "Type=forking"                            | sudo tee -a /etc/systemd/system/rc-local.service
+  echo "ExecStart=/etc/rc.local start"           | sudo tee -a /etc/systemd/system/rc-local.service
+  echo "TimeoutSec=0"                            | sudo tee -a /etc/systemd/system/rc-local.service
+  echo "StandardOutput=tty"                      | sudo tee -a /etc/systemd/system/rc-local.service
+  echo "RemainAfterExit=yes"                     | sudo tee -a /etc/systemd/system/rc-local.service
+  echo "SysVStartPriority=99"                    | sudo tee -a /etc/systemd/system/rc-local.service
+  echo ""                                        | sudo tee -a /etc/systemd/system/rc-local.service
+  echo "[Install]"                               | sudo tee -a /etc/systemd/system/rc-local.service
+  echo "WantedBy=multi-user.target"              | sudo tee -a /etc/systemd/system/rc-local.service
 
   echo ""
   echo "    Creando el archivo /etc/rc.local ..."
