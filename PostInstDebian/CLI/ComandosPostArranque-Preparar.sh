@@ -81,23 +81,23 @@ if [ $cVerSO == "13" ]; then
   echo ""
   echo "    Creando el archivo para meter los comandos..."
   echo ""
-  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-  echo '#!/bin/bash'                                                                                          > /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                  >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  chmod 700                                                                                                     /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                         | sudo tee    /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                  | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  sudo chmod 700                                                                                                           /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
   echo ""
   echo "    Activando y arrancando el servicio..."
   echo ""
-  systemctl enable rc-local
-  systemctl start rc-local.service
+  sudo systemctl enable rc-local
+  sudo systemctl start rc-local.service
 
 elif [ $cVerSO == "12" ]; then
 
