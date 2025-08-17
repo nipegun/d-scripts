@@ -72,11 +72,11 @@ if [ $cVerSO == "13" ]; then
   echo ""
   echo "    Creando el archivo /etc/rc.local ..."
   echo ""
-  echo '#!/bin/bash'                                           > /etc/rc.local
-  echo ""                                                     >> /etc/rc.local
-  echo "/root/scripts/ParaEsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
-  echo "exit 0"                                               >> /etc/rc.local
-  chmod +x                                                       /etc/rc.local
+  echo '#!/bin/bash'                                          | sudo tee    /etc/rc.local
+  echo ""                                                     | sudo tee -a /etc/rc.local
+  echo "/root/scripts/ParaEsteDebian/ComandosPostArranque.sh" | sudo tee -a /etc/rc.local
+  echo "exit 0"                                               | sudo tee -a /etc/rc.local
+  chmod +x                                                                  /etc/rc.local
 
   echo ""
   echo "    Creando el archivo para meter los comandos..."
