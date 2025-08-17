@@ -45,30 +45,118 @@
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 7 (Wheezy)...${cFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 8 (Jessie)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 13 (Trixie)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo "    Configurando el servicio..."
+  echo ""
+  echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
+  echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
+  echo "ConditionPathExists=/etc/rc.local"       >> /etc/systemd/system/rc-local.service
+  echo ""                                        >> /etc/systemd/system/rc-local.service
+  echo "[Service]"                               >> /etc/systemd/system/rc-local.service
+  echo "Type=forking"                            >> /etc/systemd/system/rc-local.service
+  echo "ExecStart=/etc/rc.local start"           >> /etc/systemd/system/rc-local.service
+  echo "TimeoutSec=0"                            >> /etc/systemd/system/rc-local.service
+  echo "StandardOutput=tty"                      >> /etc/systemd/system/rc-local.service
+  echo "RemainAfterExit=yes"                     >> /etc/systemd/system/rc-local.service
+  echo "SysVStartPriority=99"                    >> /etc/systemd/system/rc-local.service
+  echo ""                                        >> /etc/systemd/system/rc-local.service
+  echo "[Install]"                               >> /etc/systemd/system/rc-local.service
+  echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
+
+  echo ""
+  echo "    Creando el archivo /etc/rc.local ..."
+  echo ""
+  echo '#!/bin/bash'                                           > /etc/rc.local
+  echo ""                                                     >> /etc/rc.local
+  echo "/root/scripts/ParaEsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
+  echo "exit 0"                                               >> /etc/rc.local
+  chmod +x                                                       /etc/rc.local
+
+  echo ""
+  echo "    Creando el archivo para meter los comandos..."
+  echo ""
+  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                          > /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                  >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  chmod 700                                                                                                     /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+  echo ""
+  echo "    Activando y arrancando el servicio..."
+  echo ""
+  systemctl enable rc-local
+  systemctl start rc-local.service
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 12 (Bookworm)...${cFinColor}"
   echo ""
 
-elif [ $cVerSO == "9" ]; then
+  echo ""
+  echo "    Configurando el servicio..."
+  echo ""
+  echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
+  echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
+  echo "ConditionPathExists=/etc/rc.local"       >> /etc/systemd/system/rc-local.service
+  echo ""                                        >> /etc/systemd/system/rc-local.service
+  echo "[Service]"                               >> /etc/systemd/system/rc-local.service
+  echo "Type=forking"                            >> /etc/systemd/system/rc-local.service
+  echo "ExecStart=/etc/rc.local start"           >> /etc/systemd/system/rc-local.service
+  echo "TimeoutSec=0"                            >> /etc/systemd/system/rc-local.service
+  echo "StandardOutput=tty"                      >> /etc/systemd/system/rc-local.service
+  echo "RemainAfterExit=yes"                     >> /etc/systemd/system/rc-local.service
+  echo "SysVStartPriority=99"                    >> /etc/systemd/system/rc-local.service
+  echo ""                                        >> /etc/systemd/system/rc-local.service
+  echo "[Install]"                               >> /etc/systemd/system/rc-local.service
+  echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 9 (Stretch)...${cFinColor}"
+  echo "    Creando el archivo /etc/rc.local ..."
+  echo ""
+  echo '#!/bin/bash'                                           > /etc/rc.local
+  echo ""                                                     >> /etc/rc.local
+  echo "/root/scripts/ParaEsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
+  echo "exit 0"                                               >> /etc/rc.local
+  chmod +x                                                       /etc/rc.local
+
+  echo ""
+  echo "    Creando el archivo para meter los comandos..."
+  echo ""
+  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+  echo '#!/bin/bash'                                                                                          > /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                  >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+  chmod 700                                                                                                     /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+  echo ""
+  echo "    Activando y arrancando el servicio..."
+  echo ""
+  systemctl enable rc-local
+  systemctl start rc-local.service
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 11 (Bullseye)...${cFinColor}"
   echo ""
 
   echo ""
@@ -92,7 +180,7 @@ elif [ $cVerSO == "9" ]; then
   echo ""
   echo "    Creando el archivo /etc/rc.local..."
   echo ""
-  echo '#!/bin/bash'                                           > /etc/rc.local
+  echo '#!/bin/bash'                                            > /etc/rc.local
   echo ""                                                     >> /etc/rc.local
   echo "/root/scripts/ParaEsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
   echo "exit 0"                                               >> /etc/rc.local
@@ -173,10 +261,10 @@ elif [ $cVerSO == "10" ]; then
   systemctl enable rc-local
   systemctl start rc-local.service
 
-elif [ $cVerSO == "11" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   echo ""
@@ -200,7 +288,7 @@ elif [ $cVerSO == "11" ]; then
   echo ""
   echo "    Creando el archivo /etc/rc.local..."
   echo ""
-  echo '#!/bin/bash'                                            > /etc/rc.local
+  echo '#!/bin/bash'                                           > /etc/rc.local
   echo ""                                                     >> /etc/rc.local
   echo "/root/scripts/ParaEsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
   echo "exit 0"                                               >> /etc/rc.local
@@ -227,59 +315,25 @@ elif [ $cVerSO == "11" ]; then
   systemctl enable rc-local
   systemctl start rc-local.service
 
-elif [ $cVerSO == "12" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 12 (Bookworm)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   echo ""
-  echo "    Configurando el servicio..."
+  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
-  echo "[Unit]"                                   > /etc/systemd/system/rc-local.service
-  echo "Description=/etc/rc.local Compatibility" >> /etc/systemd/system/rc-local.service
-  echo "ConditionPathExists=/etc/rc.local"       >> /etc/systemd/system/rc-local.service
-  echo ""                                        >> /etc/systemd/system/rc-local.service
-  echo "[Service]"                               >> /etc/systemd/system/rc-local.service
-  echo "Type=forking"                            >> /etc/systemd/system/rc-local.service
-  echo "ExecStart=/etc/rc.local start"           >> /etc/systemd/system/rc-local.service
-  echo "TimeoutSec=0"                            >> /etc/systemd/system/rc-local.service
-  echo "StandardOutput=tty"                      >> /etc/systemd/system/rc-local.service
-  echo "RemainAfterExit=yes"                     >> /etc/systemd/system/rc-local.service
-  echo "SysVStartPriority=99"                    >> /etc/systemd/system/rc-local.service
-  echo ""                                        >> /etc/systemd/system/rc-local.service
-  echo "[Install]"                               >> /etc/systemd/system/rc-local.service
-  echo "WantedBy=multi-user.target"              >> /etc/systemd/system/rc-local.service
+
+elif [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "    Creando el archivo /etc/rc.local ..."
+  echo -e "${cColorAzulClaro}  Iniciando el script para preparar los comandos post-arranque en Debian 7 (Wheezy)...${cFinColor}"
   echo ""
-  echo '#!/bin/bash'                                           > /etc/rc.local
-  echo ""                                                     >> /etc/rc.local
-  echo "/root/scripts/ParaEsteDebian/ComandosPostArranque.sh" >> /etc/rc.local
-  echo "exit 0"                                               >> /etc/rc.local
-  chmod +x                                                       /etc/rc.local
 
   echo ""
-  echo "    Creando el archivo para meter los comandos..."
+  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
-  mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-  echo '#!/bin/bash'                                                                                          > /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                  >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo 'echo "Iniciada la ejecución del script post-arranque el $vFechaDeEjec" >> /var/log/PostArranque.log' >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR DESPUÉS DE CADA ARRANQUE"                     >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                   >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  echo ""                                                                                                    >> /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-  chmod 700                                                                                                     /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-
-  echo ""
-  echo "    Activando y arrancando el servicio..."
-  echo ""
-  systemctl enable rc-local
-  systemctl start rc-local.service
 
 fi
 
