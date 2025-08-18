@@ -34,6 +34,6 @@
 
 # Comprobar que los d-scripts estén instalados
 
-/root/scripts/d-scripts/SistemaOperativo-Actualizar.sh
-/root/scripts/d-scripts/SistemaOperativo-Reiniciar.sh
+/root/scripts/d-scripts/Sistema/SistemaOperativo-Actualizar.sh
+/root/scripts/d-scripts/Sistema/SistemaOperativo-Reiniciar.sh
 
