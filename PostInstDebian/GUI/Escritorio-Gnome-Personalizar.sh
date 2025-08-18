@@ -66,9 +66,50 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de personalización del escritorio Gnome en Debian 13 (x)...${cFinColor}"
     echo ""
 
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Gnome-Software-Desinstalar.sh | sudo bash
+
     echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo "    Instalando la app de retoques (gnome-tweaks)..."
     echo ""
+    sudo apt-get -y install gnome-tweaks
+
+    echo ""
+    echo "    Instalando la app de extensiones y algunas extensiones..."
+    echo ""
+    sudo apt-get -y install gnome-shell-extensions
+    sudo apt-get -y install gnome-shell-extension-desktop-icons-ng
+    sudo apt-get -y install gnome-shell-extension-impatience
+    sudo apt-get -y install gnome-shell-extension-hide-activities
+    sudo apt-get -y install gnome-shell-extension-easyscreencast
+    sudo apt-get -y install gnome-shell-extension-dashtodock
+
+    echo ""
+    echo "    Instalando atajos de teclado personalizados..."
+    echo ""
+    # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install curl
+        echo ""
+      fi
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInst/GUI/Escritorio-Gnome-AtajosDeTeclado.txt -o /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
+    dconf load /org/gnome/settings-daemon/plugins/media-keys/ < /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
+
+      echo ""
+      echo "  Haciendo que el editor de texto abra cada archivo en una nueva ventana, en vez de una nueva pestaña..."
+      echo ""
+      sudo sed -i -e 's|Exec=gnome-text-editor %U|Exec=gnome-text-editor --new-window %U|g' /usr/share/applications/org.gnome.TextEditor.desktop
+      cp -fv /usr/share/applications/org.gnome.TextEditor.desktop ~/.local/share/applications/
+      update-desktop-database ~/.local/share/applications/
+
+    # Reiniciar el sistema
+      echo ""
+      echo "  Reiniciando el sistema..."
+      echo ""
+      sudo shutdown -r now
 
   elif [ $cVerSO == "12" ]; then
 
