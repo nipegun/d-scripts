@@ -56,7 +56,9 @@ if [ $cVerSO == "13" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de los controladores NVIDIA para Debian 13 (x)...${cFinColor}"
   echo ""
 
-
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Aunque la versión 13.0 del script para Debian 12 instala correctamente.${cFinColor}"
+  echo ""
 
 elif [ $cVerSO == "12" ]; then
 
