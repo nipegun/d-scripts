@@ -129,7 +129,7 @@
       sudo apt-get -y install filezilla
       sudo apt-get -y install mumble
       sudo apt-get -y install obs-studio
-      sudo apt-get -y install telegram-desktop
+      #sudo apt-get -y install telegram-desktop
       #sudo apt-get -y install discord
 
     # Juegos
