@@ -56,9 +56,20 @@ if [ $cVerSO == "13" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de los controladores NVIDIA para Debian 13 (x)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+  # Instalar CUDA Toolkit
+    echo ""
+    echo "    Instalando CUDA Toolkit..."
+    echo ""
+    curl -L https://developer.download.nvidia.com/compute/cuda/13.0.0/local_installers/cuda-repo-debian12-13-0-local_13.0.0-580.65.06-1_amd64.deb -o /tmp/CudaRepo.deb 
+    sudo apt -y install /tmp/CudaRepo.deb
+    sudo cp -v /var/cuda-repo-debian12-12-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
+    sudo apt-get update
+    sudo apt-get -y install cuda-toolkit-12-8
+
+  # Notificar fin de ejecución del script
+    echo ""
+    echo "    Script de instalación de CUDA Toolkit, finalizado."
+    echo ""
 
 elif [ $cVerSO == "12" ]; then
 
