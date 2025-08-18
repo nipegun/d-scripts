@@ -64,9 +64,46 @@
     echo -e "${cColorAzulClaro}  Iniciando el script instalación de software para el escritorio Gnome en Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Desinstalar escoria de gnome
+      echo ""
+      echo "  Desinstalando escoria de Gnome..."
+      echo ""
+      sudo apt-get -y autoremove --purge xterm
+      sudo apt-get -y autoremove --purge reportbug
+      sudo apt-get -y autoremove --purge blender
+      sudo apt-get -y autoremove --purge imagemagick
+      sudo apt-get -y autoremove --purge inkscape
+      sudo apt-get -y autoremove --purge rhythmbox
+      sudo apt-get -y autoremove --purge evolution
+      sudo apt-get -y autoremove --purge gnome-2048
+      sudo apt-get -y autoremove --purge five-or-more
+      sudo apt-get -y autoremove --purge four-in-a-row
+      sudo apt-get -y autoremove --purge kasumi
+      sudo apt-get -y autoremove --purge ghcal
+      sudo apt-get -y autoremove --purge hitori
+      sudo apt-get -y autoremove --purge gnome-klotski
+      sudo apt-get -y autoremove --purge lightsoff
+      sudo apt-get -y autoremove --purge gnome-mahjongg
+      sudo apt-get -y autoremove --purge gnome-mines
+      sudo apt-get -y autoremove --purge mlterm
+      sudo apt-get -y autoremove --purge gnome-music
+      sudo apt-get -y autoremove --purge gnome-nibbles
+      sudo apt-get -y autoremove --purge quadrapassel
+      sudo apt-get -y autoremove --purge iagno
+      sudo apt-get -y autoremove --purge gnome-robots
+      sudo apt-get -y autoremove --purge gnome-sudoku
+      sudo apt-get -y autoremove --purge swell-foop
+      sudo apt-get -y autoremove --purge gnome-tetravex
+      sudo apt-get -y autoremove --purge gnome-taquin
+      sudo apt-get -y autoremove --purge aisleriot
+      sudo apt-get -y autoremove --purge tali
+      sudo apt-get -y autoremove --purge totem
+      sudo apt-get -y autoremove --purge gnome-chess
+      sudo apt-get -y autoremove --purge gnome-maps
+      sudo apt-get -y autoremove --purge gnome-weather
+　　  sudo apt-get -y autoremove --purge mozc*
+      sudo apt-get -y autoremove --purge uim-gtk3
+      sudo apt-get -y autoremove
 
   elif [ $cVerSO == "12" ]; then
 
@@ -111,7 +148,7 @@
       sudo apt-get -y autoremove --purge gnome-chess
       sudo apt-get -y autoremove --purge gnome-maps
       sudo apt-get -y autoremove --purge gnome-weather
-　　　 sudo apt-get -y autoremove --purge mozc*
+　　　sudo apt-get -y autoremove --purge mozc*
       sudo apt-get -y autoremove --purge uim-gtk3
       sudo apt-get -y autoremove
 
