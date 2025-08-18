@@ -51,9 +51,22 @@ if [ $cVerSO == "13" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 13 (x)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+  sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
+
+  echo "deb http://deb.debian.org/debian trixie main contrib non-free non-free-firmware"                        | sudo tee    /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian trixie main contrib non-free non-free-firmware"                    | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                                                       | sudo tee -a /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian trixie-updates main contrib non-free non-free-firmware"                | sudo tee -a /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian trixie-updates main contrib non-free non-free-firmware"            | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                                                       | sudo tee -a /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian-security/ trixie-security main contrib non-free non-free-firmware"     | sudo tee -a /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian-security/ trixie-security main contrib non-free non-free-firmware" | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                                                       | sudo tee -a /etc/apt/sources.list
+  echo "deb http://deb.debian.org/debian trixie-backports main contrib non-free non-free-firmware"              | sudo tee -a /etc/apt/sources.list
+  echo "deb-src http://deb.debian.org/debian trixie-backports main contrib non-free non-free-firmware"          | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                                                       | sudo tee -a /etc/apt/sources.list
+
+  sudo apt-get -y update
 
 elif [ $cVerSO == "12" ]; then
 
