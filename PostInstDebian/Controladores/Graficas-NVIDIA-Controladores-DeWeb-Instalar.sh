@@ -57,9 +57,52 @@ if [ $cVerSO == "13" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de los controladores NVIDIA para Debian 13 (x)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+  # Instalar paquetes para compilar
+    echo ""
+    echo "    Instalando paquetes para compilar..."
+    echo ""
+    sudo apt-get -y update
+    sudo apt-get -y install build-essential
+    sudo apt-get -y install linux-headers-$(uname -r)
+    sudo apt-get -y install dkms
+    sudo apt-get -y install pkg-config
+    sudo apt-get -y install libglvnd-dev
+
+  # Blacklistear nouveau
+    echo ""
+    echo "    Blacklistear nouveau..."
+    echo ""
+    echo "blacklist nouveau"         | sudo tee    /etc/modprobe.d/blacklist-nouveau.conf
+    echo "options nouveau modeset=0" | sudo tee -a /etc/modprobe.d/blacklist-nouveau.conf
+    sudo update-initramfs -u -k all
+    #sudo reboot
+
+  # Descargar el instalador
+    echo ""
+    echo "    Descargando el instalador..."
+    echo ""
+    curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/550.144.03/NVIDIA-Linux-x86_64-550.144.03.run -o /tmp/nVidiaWebDriverInstall.run
+    chmod +x /tmp/nVidiaWebDriverInstall.run
+
+  # Parar entorno gráfico
+    echo ""
+    echo "    Parando entorno gráfico..."
+    echo ""
+    sudo systemctl stop gdm
+    sudo systemctl stop sddm
+    sudo systemctl stop lightdm
+
+  # Ejecutar el instalador
+    echo ""
+    echo "    Ejecutando el instalador..."
+    echo ""
+    sudo sh /tmp/nVidiaWebDriverInstall.run
+
+  # Comprobar la grñafica
+    nvidia-smi
+
+  # Instalar CUDA Toolkit
+    #curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInst/Controladores/Graficas-NVIDIA-Controladores-CUDAToolkit-DeWeb-Instalar.sh | sudo bash
 
 elif [ $cVerSO == "12" ]; then
 
