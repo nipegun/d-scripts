@@ -19,6 +19,8 @@
 #
 # Ejecución remota con parámetros:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/Controladores/Graficas-NVIDIA-Controladores-CUDAToolkit-DeWeb-Instalar.sh | bash -s Parámetro1 Parámetro2
+#
+# Enlaces relacionados: https://developer.nvidia.com/cuda-toolkit-archive
 # ----------
 
 # Definir constantes de color
