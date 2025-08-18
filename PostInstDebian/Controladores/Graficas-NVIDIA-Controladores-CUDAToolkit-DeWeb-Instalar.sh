@@ -62,9 +62,9 @@ if [ $cVerSO == "13" ]; then
     echo ""
     curl -L https://developer.download.nvidia.com/compute/cuda/13.0.0/local_installers/cuda-repo-debian12-13-0-local_13.0.0-580.65.06-1_amd64.deb -o /tmp/CudaRepo.deb 
     sudo apt -y install /tmp/CudaRepo.deb
-    sudo cp -v /var/cuda-repo-debian12-12-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
+    sudo cp -v /var/cuda-repo-debian12-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
     sudo apt-get update
-    sudo apt-get -y install cuda-toolkit-12-8
+    sudo apt-get -y install cuda-toolkit-13-0
 
   # Notificar fin de ejecución del script
     echo ""
