@@ -12,13 +12,13 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Node.js-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Node.js-InstalarYConfigurar.sh | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Node.js-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Node.js-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Node.js-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Node.js-InstalarYConfigurar.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Node.js-InstalarYConfigurar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -76,9 +76,148 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Node.js para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Crear el menú
+      menu=(dialog --checklist "Instalando Node.js - Marca la versión deseada:" 22 96 16)
+        opciones=(
+          1 "Versión disponible en los repositorios oficiales de Debian" off
+          2 "Última versión LTS, directamente"                           on
+          3 "Última versión LTS, mediante nvm"                           off
+          4 "Versión Current"                                            off
+          5 "x"                                                          off
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+
+      for choice in $choices
+        do
+          case $choice in
+
+            1)
+
+              echo ""
+              echo "  Instalando la versión de Node.js disponible en los repositorios oficiales de Debian..."
+              echo ""
+              sudo apt-get -y update
+              sudo apt-get -y install nodejs
+              sudo apt-get -y install npm
+
+              # Notificar fin de instalación
+                vNodeJS=$(node -v | cut  -d'v' -f2)
+                echo ""
+                echo "    Se ha instalado la versión $vNodeJS de Node.js."
+                echo ""
+
+             # Probar la instalación
+               # Crear el archivo de configuración del servidor
+                 echo ""                                                      > /tmp/ServidorPrueba.js 
+                 echo "var http = require('http');"                          >> /tmp/ServidorPrueba.js
+                 echo "var server = http.createServer(function(req, res) {"  >> /tmp/ServidorPrueba.js
+                 echo 'res.write("Servidor http Node.js de prueba!\n");'     >> /tmp/ServidorPrueba.js
+                 echo "res.end();"                                           >> /tmp/ServidorPrueba.js
+                 echo "}).listen(8081);"                                     >> /tmp/ServidorPrueba.js
+               # Lanzar el servidor
+                 node /tmp/ServidorPrueba.js &
+               # Notificar el servidor de pruebas corriendo
+                 echo ""
+                 echo "      Se ha creado y ejecutado el servidor http de prueba en /tmp/ServidorPrueba.js."
+                 echo "        Para acceder: http://localhost:8081"
+                 vNumProcSP=$(jobs | grep "/tmp/ServidorPrueba.js" | cut -d'[' -f2 | cut -d']' -f1)
+                 echo "        Para detenerlo: kill %$vNumProcSP"
+                 echo ""
+                 echo "      Si la web del servidor se ve, es que Node.js se ha instalado correctamente."
+                 echo ""
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Instalando la versión LTS de Node.js directamente..."
+              echo ""
+
+              # Instalar paquetes necesarios para la correcta ejecución del script
+                sudo apt-get -y update
+                sudo apt-get -y install curl 2> /dev/null
+                sudo apt-get -y install jq   2> /dev/null
+
+              # Determinar la última versión LTS de Node.js
+                vUltVersLTSdeNodeJS=$(curl -s https://nodejs.org/dist/index.json | jq -r 'map(select(.lts != null)) | .[] | select(.lts == "Jod") | .version' | head -n1)
+
+              # Descargar el archivo comprimido
+                cd /tmp
+                curl -L https://nodejs.org/dist/"$vUltVersLTSdeNodeJS"/node-"$vUltVersLTSdeNodeJS"-linux-x64.tar.xz -O
+
+              # Descomprimir el archivo
+                tar -vxJf node-"$vUltVersLTSdeNodeJS"-linux-x64.tar.xz
+
+              # Mover carpeta descomprimida
+                sudo mv node-"$vUltVersLTSdeNodeJS"-linux-x64 /usr/local/nodejs
+
+              # Crear los enlaces simbólicos
+                sudo ln -sf /usr/local/nodejs/bin/node /usr/bin/node
+                sudo ln -sf /usr/local/nodejs/bin/npm  /usr/bin/npm
+                sudo ln -sf /usr/local/nodejs/bin/npx  /usr/bin/npx
+
+              # Comprobando instalación
+                node -v
+                npm -v
+                npx -v
+
+              # Para desinstalar
+                # sudo rm -rf /usr/local/nodejs/ && sudo rm -f /usr/bin/node && sudo rm -f /usr/bin/npm && sudo rm -f /usr/bin/npx
+
+            ;;
+
+            3)
+
+              echo ""
+              echo "  Instalando la versión LTS de Node.js mediante nvm..."
+              echo ""
+
+              # Instalar nvm
+                echo ""
+                echo "    Instalando nvm..."
+                echo ""
+                curl -o- https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/NodeVersionManager-Instalar.sh | sudo bash
+
+              # Cargar las opciones de shell de nvm
+                \. "$HOME/.nvm/nvm.sh"
+
+              # Instalar Node.js LTS
+                nvm install 22
+
+            ;;
+
+            4)
+
+              echo ""
+              echo "  Instalando la versión Current de Node.js mediante nvm..."
+              echo ""
+
+              # Instalar nvm
+                echo ""
+                echo "    Instalando nvm..."
+                echo ""
+                curl -o- https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/NodeVersionManager-Instalar.sh | sudo bash
+
+              # Cargar las opciones de shell de nvm
+                \. "$HOME/.nvm/nvm.sh"
+
+              # Instalar Node.js LTS
+                nvm install 24
+
+            ;;
+
+            5)
+
+              echo ""
+              echo "  Opción 5..."
+              echo ""
+
+            ;;
+
+        esac
+
+    done
 
   elif [ $cVerSO == "12" ]; then
 
@@ -86,133 +225,148 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Node.js para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-  # Crear el menú
-    menu=(dialog --checklist "Instalando Node.js - Marca la versión deseada:" 22 96 16)
-      opciones=(
-        1 "Versión disponible en los repositorios oficiales de Debian" off
-        2 "Última versión LTS, directamente"                           on
-        3 "Última versión LTS, mediante nvm"                           off
-        4 "Versión Current"                                            off
-        5 "x"                                                          off
-      )
-    choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+    # Crear el menú
+      menu=(dialog --checklist "Instalando Node.js - Marca la versión deseada:" 22 96 16)
+        opciones=(
+          1 "Versión disponible en los repositorios oficiales de Debian" off
+          2 "Última versión LTS, directamente"                           on
+          3 "Última versión LTS, mediante nvm"                           off
+          4 "Versión Current"                                            off
+          5 "x"                                                          off
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
-    for choice in $choices
-      do
-        case $choice in
+      for choice in $choices
+        do
+          case $choice in
 
-          1)
+            1)
 
-            echo ""
-            echo "  Instalando la versión de Node.js disponible en los repositorios oficiales de Debian..."
-            echo ""
-            sudo apt-get -y update
-            sudo apt-get -y install nodejs
-            sudo apt-get -y install npm
-
-            # Notificar fin de instalación
-              vNodeJS=$(node -v | cut  -d'v' -f2)
               echo ""
-              echo "    Se ha instalado la versión $vNodeJS de Node.js."
+              echo "  Instalando la versión de Node.js disponible en los repositorios oficiales de Debian..."
               echo ""
-
-           # Probar la instalación
-             # Crear el archivo de configuración del servidor
-               echo ""                                                      > /tmp/ServidorPrueba.js 
-               echo "var http = require('http');"                          >> /tmp/ServidorPrueba.js
-               echo "var server = http.createServer(function(req, res) {"  >> /tmp/ServidorPrueba.js
-               echo 'res.write("Servidor http Node.js de prueba!\n");'     >> /tmp/ServidorPrueba.js
-               echo "res.end();"                                           >> /tmp/ServidorPrueba.js
-               echo "}).listen(8081);"                                     >> /tmp/ServidorPrueba.js
-             # Lanzar el servidor
-               node /tmp/ServidorPrueba.js &
-             # Notificar el servidor de pruebas corriendo
-               echo ""
-               echo "      Se ha creado y ejecutado el servidor http de prueba en /tmp/ServidorPrueba.js."
-               echo "        Para acceder: http://localhost:8081"
-               vNumProcSP=$(jobs | grep "/tmp/ServidorPrueba.js" | cut -d'[' -f2 | cut -d']' -f1)
-               echo "        Para detenerlo: kill %$vNumProcSP"
-               echo ""
-               echo "      Si la web del servidor se ve, es que Node.js se ha instalado correctamente."
-               echo ""
-
-          ;;
-
-          2)
-
-            echo ""
-            echo "  Instalando la versión LTS de Node.js directamente..."
-            echo ""
-
-            # Instalar paquetes necesarios para la correcta ejecución del script
               sudo apt-get -y update
-              sudo apt-get -y install curl 2> /dev/null
-              sudo apt-get -y install jq   2> /dev/null
+              sudo apt-get -y install nodejs
+              sudo apt-get -y install npm
 
-            # Determinar la última versión LTS de Node.js
-              vUltVersLTSdeNodeJS=$(curl -s https://nodejs.org/dist/index.json | jq -r 'map(select(.lts != null)) | .[] | select(.lts == "Jod") | .version' | head -n1)
+              # Notificar fin de instalación
+                vNodeJS=$(node -v | cut  -d'v' -f2)
+                echo ""
+                echo "    Se ha instalado la versión $vNodeJS de Node.js."
+                echo ""
 
-            # Descargar el archivo comprimido
-              cd /tmp
-              curl -L https://nodejs.org/dist/"$vUltVersLTSdeNodeJS"/node-"$vUltVersLTSdeNodeJS"-linux-x64.tar.xz -O
+             # Probar la instalación
+               # Crear el archivo de configuración del servidor
+                 echo ""                                                      > /tmp/ServidorPrueba.js 
+                 echo "var http = require('http');"                          >> /tmp/ServidorPrueba.js
+                 echo "var server = http.createServer(function(req, res) {"  >> /tmp/ServidorPrueba.js
+                 echo 'res.write("Servidor http Node.js de prueba!\n");'     >> /tmp/ServidorPrueba.js
+                 echo "res.end();"                                           >> /tmp/ServidorPrueba.js
+                 echo "}).listen(8081);"                                     >> /tmp/ServidorPrueba.js
+               # Lanzar el servidor
+                 node /tmp/ServidorPrueba.js &
+               # Notificar el servidor de pruebas corriendo
+                 echo ""
+                 echo "      Se ha creado y ejecutado el servidor http de prueba en /tmp/ServidorPrueba.js."
+                 echo "        Para acceder: http://localhost:8081"
+                 vNumProcSP=$(jobs | grep "/tmp/ServidorPrueba.js" | cut -d'[' -f2 | cut -d']' -f1)
+                 echo "        Para detenerlo: kill %$vNumProcSP"
+                 echo ""
+                 echo "      Si la web del servidor se ve, es que Node.js se ha instalado correctamente."
+                 echo ""
 
-            # Descomprimir el archivo
-              tar -vxJf node-"$vUltVersLTSdeNodeJS"-linux-x64.tar.xz
+            ;;
 
-            # Mover carpeta descomprimida
-              sudo mv node-"$vUltVersLTSdeNodeJS"-linux-x64 /usr/local/nodejs
+            2)
 
-            # Crear los enlaces simbólicos
-              sudo ln -sf /usr/local/nodejs/bin/node /usr/bin/node
-              sudo ln -sf /usr/local/nodejs/bin/npm  /usr/bin/npm
-              sudo ln -sf /usr/local/nodejs/bin/npx  /usr/bin/npx
-
-            # Comprobando instalación
-              node -v
-              npm -v
-              npx -v
-
-          ;;
-
-          3)
-
-            echo ""
-            echo "  Instalando la versión LTS de Node.js mediante nvm..."
-            echo ""
-
-            # Instalar nvm
               echo ""
-              echo "    Instalando nvm..."
+              echo "  Instalando la versión LTS de Node.js directamente..."
               echo ""
-              curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/NodeVersionManager-Instalar.sh | sudo bash
 
-            # Cargar las opciones de shell de nvm
-              \. "$HOME/.nvm/nvm.sh"
+              # Instalar paquetes necesarios para la correcta ejecución del script
+                sudo apt-get -y update
+                sudo apt-get -y install curl 2> /dev/null
+                sudo apt-get -y install jq   2> /dev/null
 
-            # Instalar Node.js LTS
-              nvm install 22
+              # Determinar la última versión LTS de Node.js
+                vUltVersLTSdeNodeJS=$(curl -s https://nodejs.org/dist/index.json | jq -r 'map(select(.lts != null)) | .[] | select(.lts == "Jod") | .version' | head -n1)
 
-          ;;
+              # Descargar el archivo comprimido
+                cd /tmp
+                curl -L https://nodejs.org/dist/"$vUltVersLTSdeNodeJS"/node-"$vUltVersLTSdeNodeJS"-linux-x64.tar.xz -O
 
-          4)
+              # Descomprimir el archivo
+                tar -vxJf node-"$vUltVersLTSdeNodeJS"-linux-x64.tar.xz
 
-            echo ""
-            echo "  Instalando la versión Current de Node.js..."
-            echo ""
+              # Mover carpeta descomprimida
+                sudo mv node-"$vUltVersLTSdeNodeJS"-linux-x64 /usr/local/nodejs
 
-          ;;
+              # Crear los enlaces simbólicos
+                sudo ln -sf /usr/local/nodejs/bin/node /usr/bin/node
+                sudo ln -sf /usr/local/nodejs/bin/npm  /usr/bin/npm
+                sudo ln -sf /usr/local/nodejs/bin/npx  /usr/bin/npx
 
-          5)
+              # Comprobando instalación
+                node -v
+                npm -v
+                npx -v
 
-            echo ""
-            echo "  Opción 5..."
-            echo ""
+              # Para desinstalar
+                # sudo rm -rf /usr/local/nodejs/ && sudo rm -f /usr/bin/node && sudo rm -f /usr/bin/npm && sudo rm -f /usr/bin/npx
 
-          ;;
+            ;;
 
-      esac
+            3)
 
-  done
+              echo ""
+              echo "  Instalando la versión LTS de Node.js mediante nvm..."
+              echo ""
+
+              # Instalar nvm
+                echo ""
+                echo "    Instalando nvm..."
+                echo ""
+                curl -o- https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/NodeVersionManager-Instalar.sh | sudo bash
+
+              # Cargar las opciones de shell de nvm
+                \. "$HOME/.nvm/nvm.sh"
+
+              # Instalar Node.js LTS
+                nvm install 22
+
+            ;;
+
+            4)
+
+              echo ""
+              echo "  Instalando la versión Current de Node.js mediante nvm..."
+              echo ""
+
+              # Instalar nvm
+                echo ""
+                echo "    Instalando nvm..."
+                echo ""
+                curl -o- https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/NodeVersionManager-Instalar.sh | sudo bash
+
+              # Cargar las opciones de shell de nvm
+                \. "$HOME/.nvm/nvm.sh"
+
+              # Instalar Node.js LTS
+                nvm install 24
+
+            ;;
+
+            5)
+
+              echo ""
+              echo "  Opción 5..."
+              echo ""
+
+            ;;
+
+        esac
+
+    done
 
   elif [ $cVerSO == "11" ]; then
 
