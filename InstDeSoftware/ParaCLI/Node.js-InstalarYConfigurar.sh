@@ -185,6 +185,14 @@
               # Instalar Node.js LTS
                 nvm install 22
 
+              # Para desinstalar:
+              #   nvm uninstall 24; rm -rf "$HOME/.nvm"
+              #   Y luego borrar las líneas:
+              #     export NVM_DIR="$HOME/.nvm"
+              #     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+              #     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+              #   ...de "$HOME/.bashrc"
+
             ;;
 
             4)
@@ -204,6 +212,15 @@
 
               # Instalar Node.js LTS
                 nvm install 24
+
+              # Para desinstalar:
+              #   nvm uninstall 24; rm -rf "$HOME/.nvm"
+              #   Y luego borrar las líneas:
+              #     export NVM_DIR="$HOME/.nvm"
+              #     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+              #     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+              #   ...de "$HOME/.bashrc"
+
 
             ;;
 
