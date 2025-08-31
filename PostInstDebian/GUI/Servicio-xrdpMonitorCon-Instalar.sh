@@ -103,10 +103,10 @@
       echo "WantedBy=default.target"                                                                 | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
 
     # Recargar cambios
-      systemctl daemon-reload
+      sudo systemctl daemon-reload
 
     # Activar e iniciar el servicio
-      systemctl enable xrdpMonitorCon.service --now
+      sudo systemctl enable xrdpMonitorCon.service --now
 
   elif [ $cVerSO == "11" ]; then
 
