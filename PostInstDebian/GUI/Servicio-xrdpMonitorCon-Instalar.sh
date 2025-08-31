@@ -8,8 +8,11 @@
 # ----------
 # Servicio de NiPeGun para monitorizar las conexiones xrdp
 #
-# Ejecución remota:
+# Ejecución remota (puewde requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorCon-Instalar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorCon-Instalar.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
@@ -50,15 +53,33 @@
   fi
 
 # Ejecutar comandos dependiendo de la versión de Debian detectada
+
   if [ $cVerSO == "13" ]; then
 
     echo ""
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de la monitorización de conexiones al servidor xrdp para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Crear el servicio
+      echo "[Unit]"                                                                                  | sudo tee    /etc/systemd/system/xrdpMonitorCon.service
+      echo "Description=Monitor de conexiones xrdp"                                                  | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "After=network.target"                                                                    | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo ""                                                                                        | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "[Service]"                                                                               | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "Type=simple"                                                                             | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "ExecStart=/bin/bash /root/scripts/d-scripts/ParaSoftware/xrdp-Conexiones-Monitorizar.sh" | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "TimeoutStartSec=0"                                                                       | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "StartLimitInterval=0"                                                                    | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "Restart=always"                                                                          | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo ""                                                                                        | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "[Install]"                                                                               | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "WantedBy=default.target"                                                                 | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+
+    # Recargar cambios
+      sudo systemctl daemon-reload
+
+    # Activar e iniciar el servicio
+      sudo systemctl enable xrdpMonitorCon.service --now
 
   elif [ $cVerSO == "12" ]; then
 
@@ -67,19 +88,19 @@
     echo ""
 
     # Crear el servicio
-      echo "[Unit]"                                                                      > /etc/systemd/system/xrdpMonitorCon.service
-      echo "Description=Monitor de conexiones xrdp"                                     >> /etc/systemd/system/xrdpMonitorCon.service
-      echo "After=network.target"                                                       >> /etc/systemd/system/xrdpMonitorCon.service
-      echo ""                                                                           >> /etc/systemd/system/xrdpMonitorCon.service
-      echo "[Service]"                                                                  >> /etc/systemd/system/xrdpMonitorCon.service
-      echo "Type=simple"                                                                >> /etc/systemd/system/xrdpMonitorCon.service
-      echo "ExecStart=/bin/bash /root/scripts/d-scripts/xrdp-Conexiones-Monitorizar.sh" >> /etc/systemd/system/xrdpMonitorCon.service
-      echo "TimeoutStartSec=0"                                                          >> /etc/systemd/system/xrdpMonitorCon.service
-      echo "StartLimitInterval=0"                                                       >> /etc/systemd/system/xrdpMonitorCon.service
-      echo "Restart=always"                                                             >> /etc/systemd/system/xrdpMonitorCon.service
-      echo ""                                                                           >> /etc/systemd/system/xrdpMonitorCon.service
-      echo "[Install]"                                                                  >> /etc/systemd/system/xrdpMonitorCon.service
-      echo "WantedBy=default.target"                                                    >> /etc/systemd/system/xrdpMonitorCon.service
+      echo "[Unit]"                                                                                  | sudo tee    /etc/systemd/system/xrdpMonitorCon.service
+      echo "Description=Monitor de conexiones xrdp"                                                  | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "After=network.target"                                                                    | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo ""                                                                                        | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "[Service]"                                                                               | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "Type=simple"                                                                             | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "ExecStart=/bin/bash /root/scripts/d-scripts/ParaSoftware/xrdp-Conexiones-Monitorizar.sh" | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "TimeoutStartSec=0"                                                                       | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "StartLimitInterval=0"                                                                    | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "Restart=always"                                                                          | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo ""                                                                                        | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "[Install]"                                                                               | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
+      echo "WantedBy=default.target"                                                                 | sudo tee -a /etc/systemd/system/xrdpMonitorCon.service
 
     # Recargar cambios
       systemctl daemon-reload
