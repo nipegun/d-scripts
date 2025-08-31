@@ -47,15 +47,95 @@ cFinColor='\033[0m'
   fi
 
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Telegram-Desktop para Debian 13 (x)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+  # Descargar el archivo comprimido
+    echo ""
+    echo "    Descargando el archivo comprimido"
+    echo ""
+    # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install curl
+        echo ""
+      fi
+    curl -L https://telegram.org/dl/desktop/linux -o /tmp/telegram-desktop.tar.xz
+
+    # Descomprimir el archivo
+      echo ""
+      echo "    Descomprimiendo el archivo..."
+      echo ""
+      # Comprobar si el paquete tar está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s tar 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}      El paquete tar no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install tar
+          echo ""
+        fi
+      cd /tmp
+      sudo tar -xvf telegram-desktop.tar.xz
+
+    # Mover a la carpeta de usuario
+      echo ""
+      echo "    Moviendo a la carpeta de usuario..."
+      echo ""
+      mkdir -p $HOME/AppsPortables/TelegramDesktop/ 2> /dev/null
+      cp -rv /tmp/Telegram/* $HOME/AppsPortables/TelegramDesktop/
+
+    # Descargar el icono
+      echo ""
+      echo "    Descargando el ícono..."
+      echo ""
+      # Descargar el archivo comprimido con los iconos
+        # Obtener la URL del archivo
+          vURLZIPIcono=$(curl -sL https://telegram.org/tour/screenshots | sed 's->->\n-g' | grep href | grep file | grep zip | cut -d'"' -f2)
+        # Descargar
+          sudo rm -f /tmp/TelegramLogos.zip
+          curl -L "$vURLZIPIcono" -o /tmp/TelegramLogos.zip
+      # Descomprimir el archivo con los iconos
+        # Comprobar si el paquete unzip está instalado. Si no lo está, instalarlo.
+          if [[ $(dpkg-query -s unzip 2>/dev/null | grep installed) == "" ]]; then
+            echo ""
+            echo -e "${cColorRojo}      El paquete unzip no está instalado. Iniciando su instalación...${cFinColor}"
+            echo ""
+            sudo apt-get -y update
+            sudo apt-get -y install unzip
+            echo ""
+          fi
+         sudo rm -rf /tmp/TelegramLogos/
+         unzip /tmp/TelegramLogos.zip -d /tmp/TelegramLogos/
+      # Copiar el ícono a la carpeta final
+        mv -vf /tmp/TelegramLogos/Logo.png $HOME/AppsPortables/TelegramDesktop/TelegramLogo.png
+
+    # Crear el lanzador gráfico
+      echo ""
+      echo "    Creando el lanzador gráfico..."
+      echo ""
+      mkdir -p ~/.local/share/applications
+      echo '[Desktop Entry]'                                            | tee    ~/.local/share/applications/Telegram.desktop
+      echo 'Name=Telegram'                                              | tee -a ~/.local/share/applications/Telegram.desktop
+      echo 'Categories=Network;InstantMessaging;'                       | tee -a ~/.local/share/applications/Telegram.desktop
+      echo "Exec=$HOME//AppsPortables/TelegramDesktop/Telegram"         | tee -a ~/.local/share/applications/Telegram.desktop
+      echo "Icon=$HOME//AppsPortables/TelegramDesktop/TelegramLogo.png" | tee -a ~/.local/share/applications/Telegram.desktop
+      echo 'Type=Application'                                           | tee -a ~/.local/share/applications/Telegram.desktop
+      echo 'Terminal=false'                                             | tee -a ~/.local/share/applications/Telegram.desktop
+
+    # Notificar fin de ejecución del script
+      echo ""
+      echo "  Script de instalación de telegram-desktop, finalizado."
+      echo ""
+      echo "    Puedes ejecutar telegram-desktop haciendo doble click en $HOME/AppsPortables/TelegramDesktop/Telegram"
+      echo "    o lanzándolo desde su correspondiente lanzador gráfico."
+      echo ""
 
 elif [ $cVerSO == "12" ]; then
 
