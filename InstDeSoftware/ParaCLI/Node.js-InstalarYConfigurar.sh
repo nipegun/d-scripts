@@ -186,7 +186,7 @@
                 nvm install 22
 
               # Para desinstalar:
-              #   nvm uninstall 24; rm -rf "$HOME/.nvm"
+              #   nvm deactivate && nvm uninstall 22; rm -rf "$HOME/.nvm"
               #   Y luego borrar las líneas:
               #     export NVM_DIR="$HOME/.nvm"
               #     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -214,7 +214,7 @@
                 nvm install 24
 
               # Para desinstalar:
-              #   nvm uninstall 24; rm -rf "$HOME/.nvm"
+              #   nvm deactivate && nvm uninstall 24; rm -rf "$HOME/.nvm"
               #   Y luego borrar las líneas:
               #     export NVM_DIR="$HOME/.nvm"
               #     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
