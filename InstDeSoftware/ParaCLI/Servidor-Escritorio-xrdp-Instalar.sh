@@ -38,25 +38,61 @@ cFinColor='\033[0m'
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 13 (x)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian...${cFinColor}"
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
+  apt-get -y update 2> /dev/null
+  apt-get -y install xrdp
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 8 (Jessie)...${cFinColor}"
+  echo "    Activando XRDP como servicio..." 
   echo ""
+  systemctl enable xrdp --now
+
+elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 12 (Bookworm)...${cFinColor}"
   echo ""
+
+  apt-get -y update 2> /dev/null
+  apt-get -y install xrdp
+
+  echo ""
+  echo "    Activando XRDP como servicio..." 
+  echo ""
+  systemctl enable xrdp --now
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 11 (Bullseye)...${cFinColor}"
+  echo ""
+
+  apt-get -y update 2> /dev/null
+  apt-get -y install xrdp
+
+  echo ""
+  echo "    Activando XRDP como servicio..." 
+  echo ""
+  systemctl enable xrdp --now
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 10 (Buster)...${cFinColor}"
+  echo ""
+
+  apt-get -y update 2> /dev/null
+  apt-get -y install xrdp
+
+  echo ""
+  echo "    Activando XRDP como servicio..." 
+  echo ""
+  systemctl enable xrdp --now
 
 elif [ $cVerSO == "9" ]; then
 
@@ -74,50 +110,28 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "    Activando XRDP como servicio..." 
-echo ""
+  echo ""
   systemctl enable xrdp
 
-elif [ $cVerSO == "10" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
-  apt-get -y update 2> /dev/null
-  apt-get -y install xrdp
-
   echo ""
-  echo "    Activando XRDP como servicio..." 
-echo ""
-  systemctl enable xrdp --now
-
-elif [ $cVerSO == "11" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 11 (Bullseye)...${cFinColor}"
+  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian...${cFinColor}"
   echo ""
 
-  apt-get -y update 2> /dev/null
-  apt-get -y install xrdp
+elif [ $cVerSO == "7" ]; then
 
   echo ""
-  echo "    Activando XRDP como servicio..." 
-echo ""
-  systemctl enable xrdp --now
-
-elif [ $cVerSO == "12" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 12 (Bookworm)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xrdp para Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
-  apt-get -y update 2> /dev/null
-  apt-get -y install xrdp
-
   echo ""
-  echo "    Activando XRDP como servicio..." 
-echo ""
-  systemctl enable xrdp --now
+  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian...${cFinColor}"
+  echo ""
 
 fi
 
