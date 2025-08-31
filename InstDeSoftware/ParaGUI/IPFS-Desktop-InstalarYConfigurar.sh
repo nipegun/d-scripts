@@ -55,9 +55,35 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de IPFS Desktop para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Determinar el número de la última versión
+      echo ""
+      echo "  Determinando el número de la última versión..."
+      echo ""
+      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install curl
+          echo ""
+        fi
+      vUltVers=$(curl -sL https://github.com/ipfs/ipfs-desktop/releases/latest | sed 's->->\n-g' | grep '/tag/v' | sed 's-/tag/v-\n-g' | grep ^[0-9] | cut -d'"' -f1 | head -n1)
+      echo ""
+      echo "    El número de la última versión es la $vUltVers"
+      echo ""
+
+    # Descargar el paquete .deb
+      echo ""
+      echo "  Descargando el paquete .deb"
+      echo ""
+      curl -L https://github.com/ipfs/ipfs-desktop/releases/download/v$vUltVers/ipfs-desktop-$vUltVers-linux-amd64.deb -o /tmp/IPFS-Desktop.deb
+
+    # Instalar el paquete .deb
+      echo ""
+      echo "  Instalando el paquete .deb"
+      echo ""
+      sudo apt -y install /tmp/IPFS-Desktop.deb
 
   elif [ $cVerSO == "12" ]; then
 
