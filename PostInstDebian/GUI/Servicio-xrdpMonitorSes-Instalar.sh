@@ -8,10 +8,12 @@
 # ----------
 # Servicio de NiPeGun para monitorizar las sesiones xrdp
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorSes-Instalar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorSes-Instalar.sh | sed 's-sudo--g' | bash
 # ----------
-
 
 # Definir constantes de color
   cColorAzul="\033[0;34m"
@@ -21,24 +23,6 @@
   # Para el color rojo también:
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
-
-# Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
-    echo ""
-    exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    apt-get -y update
-    apt-get -y install curl
-    echo ""
-  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -61,15 +45,33 @@
   fi
 
 # Ejecutar comandos dependiendo de la versión de Debian detectada
+
   if [ $cVerSO == "13" ]; then
 
     echo ""
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Crear el servicio
+      echo "[Unit]"                                                                                | sudo tee    /etc/systemd/system/xrdpMonitorSes.service
+      echo "Description=Monitor de sesiones xrdp"                                                  | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "After=network.target"                                                                  | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo ""                                                                                      | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "[Service]"                                                                             | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "Type=simple"                                                                           | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "ExecStart=/bin/bash /root/scripts/d-scripts/ParaSoftware/xrdp-Sesiones-Monitorizar.sh" | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "TimeoutStartSec=0"                                                                     | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "StartLimitInterval=0"                                                                  | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "Restart=always"                                                                        | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo ""                                                                                      | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "[Install]"                                                                             | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "WantedBy=default.target"                                                               | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+
+    # Recargar cambios
+      sudo systemctl daemon-reload
+
+    # Activar e iniciar el servicio
+      sudo systemctl enable xrdpMonitorSes.service --now
 
   elif [ $cVerSO == "12" ]; then
 
@@ -78,25 +80,25 @@
     echo ""
 
     # Crear el servicio
-      echo "[Unit]"                                                                    > /etc/systemd/system/xrdpMonitorSes.service
-      echo "Description=Monitor de sesiones xrdp"                                     >> /etc/systemd/system/xrdpMonitorSes.service
-      echo "After=network.target"                                                     >> /etc/systemd/system/xrdpMonitorSes.service
-      echo ""                                                                         >> /etc/systemd/system/xrdpMonitorSes.service
-      echo "[Service]"                                                                >> /etc/systemd/system/xrdpMonitorSes.service
-      echo "Type=simple"                                                              >> /etc/systemd/system/xrdpMonitorSes.service
-      echo "ExecStart=/bin/bash /root/scripts/d-scripts/xrdp-Sesiones-Monitorizar.sh" >> /etc/systemd/system/xrdpMonitorSes.service
-      echo "TimeoutStartSec=0"                                                        >> /etc/systemd/system/xrdpMonitorSes.service
-      echo "StartLimitInterval=0"                                                     >> /etc/systemd/system/xrdpMonitorSes.service
-      echo "Restart=always"                                                           >> /etc/systemd/system/xrdpMonitorSes.service
-      echo ""                                                                         >> /etc/systemd/system/xrdpMonitorSes.service
-      echo "[Install]"                                                                >> /etc/systemd/system/xrdpMonitorSes.service
-      echo "WantedBy=default.target"                                                  >> /etc/systemd/system/xrdpMonitorSes.service
+      echo "[Unit]"                                                                                | sudo tee    /etc/systemd/system/xrdpMonitorSes.service
+      echo "Description=Monitor de sesiones xrdp"                                                  | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "After=network.target"                                                                  | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo ""                                                                                      | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "[Service]"                                                                             | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "Type=simple"                                                                           | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "ExecStart=/bin/bash /root/scripts/d-scripts/ParaSoftware/xrdp-Sesiones-Monitorizar.sh" | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "TimeoutStartSec=0"                                                                     | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "StartLimitInterval=0"                                                                  | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "Restart=always"                                                                        | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo ""                                                                                      | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "[Install]"                                                                             | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
+      echo "WantedBy=default.target"                                                               | sudo tee -a /etc/systemd/system/xrdpMonitorSes.service
 
     # Recargar cambios
-      systemctl daemon-reload
+      sudo systemctl daemon-reload
 
     # Activar e iniciar el servicio
-      systemctl enable xrdpMonitorSes.service --now
+      sudo systemctl enable xrdpMonitorSes.service --now
 
   elif [ $cVerSO == "11" ]; then
 
