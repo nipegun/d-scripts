@@ -82,6 +82,12 @@
         sudo apt-get -y install libvirt-clients
       # Utilidades para redes en modo puente
         sudo apt-get -y install bridge-utils
+      # Virt Manager
+        sudo apt-get -y install virt-manger
+
+    # Agregar el usuario a los grupos libvirt y kvm
+      sudo adduser `id -un` libvirt
+      sudo adduser `id -un` kvm
 
     # Determinar la última versión
       vEnlace=$(curl -s https://developer.android.com/studio | grep -oP 'https:[^"]*android-studio-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+-linux\.tar\.gz' | head -1)
@@ -107,7 +113,7 @@
       echo 'Version=1.0'                            | sudo tee -a /usr/share/applications/android-studio.desktop
       echo 'Type=Application'                       | sudo tee -a /usr/share/applications/android-studio.desktop
       echo 'Name=Android Studio'                    | sudo tee -a /usr/share/applications/android-studio.desktop
-      echo 'Exec=/opt/AndroidStudio/bin/studio.sh'  | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Exec=/opt/AndroidStudio/bin/studio'     | sudo tee -a /usr/share/applications/android-studio.desktop
       echo 'Icon=/opt/AndroidStudio/bin/studio.png' | sudo tee -a /usr/share/applications/android-studio.desktop
       echo 'Categories=Development;IDE;'            | sudo tee -a /usr/share/applications/android-studio.desktop
       echo 'Terminal=false'                         | sudo tee -a /usr/share/applications/android-studio.desktop
@@ -127,6 +133,12 @@
         sudo apt-get -y install libvirt-clients
       # Utilidades para redes en modo puente
         sudo apt-get -y install bridge-utils
+      # Virt Manager
+        sudo apt-get -y install virt-manger
+
+    # Agregar el usuario a los grupos libvirt y kvm
+      sudo adduser `id -un` libvirt
+      sudo adduser `id -un` kvm
 
     # Determinar la última versión
       vEnlace=$(curl -s https://developer.android.com/studio | grep -oP 'https:[^"]*android-studio-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+-linux\.tar\.gz' | head -1)
@@ -152,7 +164,7 @@
       echo 'Version=1.0'                            | sudo tee -a /usr/share/applications/android-studio.desktop
       echo 'Type=Application'                       | sudo tee -a /usr/share/applications/android-studio.desktop
       echo 'Name=Android Studio'                    | sudo tee -a /usr/share/applications/android-studio.desktop
-      echo 'Exec=/opt/AndroidStudio/bin/studio.sh'  | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Exec=/opt/AndroidStudio/bin/studio   '  | sudo tee -a /usr/share/applications/android-studio.desktop
       echo 'Icon=/opt/AndroidStudio/bin/studio.png' | sudo tee -a /usr/share/applications/android-studio.desktop
       echo 'Categories=Development;IDE;'            | sudo tee -a /usr/share/applications/android-studio.desktop
       echo 'Terminal=false'                         | sudo tee -a /usr/share/applications/android-studio.desktop
