@@ -74,6 +74,15 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Android Studio para Debian 13 (x)...${cFinColor}"
     echo ""
 
+    # Instalar requisitos
+      sudo apt-get -y update
+      # QEMU-KVM para aceleración
+        sudo apt-get -y install qemu-kvm 
+        sudo apt-get -y install libvirt-daemon-system
+        sudo apt-get -y install libvirt-clients
+      # Utilidades para redes en modo puente
+        sudo apt-get -y install bridge-utils
+
     # Determinar la última versión
       vEnlace=$(curl -s https://developer.android.com/studio | grep -oP 'https:[^"]*android-studio-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+-linux\.tar\.gz' | head -1)
 
@@ -109,6 +118,15 @@
     echo ""
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Android Studio para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
+
+    # Instalar requisitos
+      sudo apt-get -y update
+      # QEMU-KVM para aceleración
+        sudo apt-get -y install qemu-kvm 
+        sudo apt-get -y install libvirt-daemon-system
+        sudo apt-get -y install libvirt-clients
+      # Utilidades para redes en modo puente
+        sudo apt-get -y install bridge-utils
 
     # Determinar la última versión
       vEnlace=$(curl -s https://developer.android.com/studio | grep -oP 'https:[^"]*android-studio-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+-linux\.tar\.gz' | head -1)
