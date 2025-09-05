@@ -74,9 +74,35 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Android Studio para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Determinar la última versión
+      vEnlace=$(curl -s https://developer.android.com/studio | grep -oP 'https:[^"]*android-studio-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+-linux\.tar\.gz' | head -1)
+
+    # Descargar
+      echo ""
+      echo "    Descargando el archivo comprimido con la última versión..."
+      echo ""
+      curl -L "$vEnlace" --progress-bar -o /tmp/AndroidStudio.tar.gz
+
+    # Descomprimir
+      echo ""
+      echo "    Descomprimiendo..."
+      echo ""
+      sudo mkdir -p /opt/AndroidStudio/
+      sudo tar -xvzf /tmp/AndroidStudio.tar.gz -C /opt/AndroidStudio/ --strip-components=1
+
+    # Crear el lanzador gráfico
+      echo ""
+      echo "    Creando el lanzador gráfico..."
+      echo ""
+      echo '[Desktop Entry]'                        | sudo tee    /usr/share/applications/android-studio.desktop
+      echo 'Version=1.0'                            | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Type=Application'                       | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Name=Android Studio'                    | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Exec=/opt/AndroidStudio/bin/studio.sh'  | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Icon=/opt/AndroidStudio/bin/studio.png' | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Categories=Development;IDE;'            | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Terminal=false'                         | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'StartupNotify=true'                     | sudo tee -a /usr/share/applications/android-studio.desktop
 
   elif [ $cVerSO == "12" ]; then
 
@@ -84,9 +110,36 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Android Studio para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    vEnlace="https://r1---sn-vg5obxn25po-cpvs.gvt1.com/edgedl/android/studio/ide-zips/2024.2.2.13/android-studio-2024.2.2.13-linux.tar.gz"
     # Determinar la última versión
-      cu
+      vEnlace=$(curl -s https://developer.android.com/studio | grep -oP 'https:[^"]*android-studio-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+-linux\.tar\.gz' | head -1)
+
+    # Descargar
+      echo ""
+      echo "    Descargando el archivo comprimido con la última versión..."
+      echo ""
+      curl -L "$vEnlace" --progress-bar -o /tmp/AndroidStudio.tar.gz
+
+    # Descomprimir
+      echo ""
+      echo "    Descompriomiendo...."
+      echo ""
+      sudo mkdir -p /opt/AndroidStudio/
+      sudo tar -xvzf /tmp/AndroidStudio.tar.gz -C /opt/AndroidStudio/ --strip-components=1
+
+    # Crear el lanzador gráfico
+      echo ""
+      echo "    Creando el lanzador gráfico..."
+      echo ""
+      echo '[Desktop Entry]'                        | sudo tee    /usr/share/applications/android-studio.desktop
+      echo 'Version=1.0'                            | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Type=Application'                       | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Name=Android Studio'                    | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Exec=/opt/AndroidStudio/bin/studio.sh'  | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Icon=/opt/AndroidStudio/bin/studio.png' | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Categories=Development;IDE;'            | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'Terminal=false'                         | sudo tee -a /usr/share/applications/android-studio.desktop
+      echo 'StartupNotify=true'                     | sudo tee -a /usr/share/applications/android-studio.desktop
+
 
   elif [ $cVerSO == "11" ]; then
 
