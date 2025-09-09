@@ -40,10 +40,10 @@
     exit
   fi
 
-# Check if the curl package is installed. If it's not, install it:
+# Check if curl package is installed. If not, install it:
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
-    echo -e "${cColorRed}  The curl package is not installed. Starting installation...${cColorEnd}"
+    echo -e "${cColorRed}  curl package is not installed. Starting installation...${cColorEnd}"
     echo ""
     sudo apt-get -y update
     sudo apt-get -y install curl
