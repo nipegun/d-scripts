@@ -19,7 +19,7 @@ vPuertoInflux="8086"
 vBaseDeDatos="hardware"
 vHost=$(cat /etc/hostname)
 vSensor="procesador"
-vTemperatura=$(/root/scripts/d-scripts/Hardware-Procesador-Temperatura-Medir.sh)
+vTemperatura=$(/root/scripts/d-scripts/Sistema/Hardware-Procesador-Temperatura-Medir.sh)
 vFecha=$(date +%s%N)
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
