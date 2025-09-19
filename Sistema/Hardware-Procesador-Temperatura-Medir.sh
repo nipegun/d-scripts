@@ -42,7 +42,7 @@
 # Mostrar una información si el procesador es AMD, otra si es Intel y otra si es cualquier otra arquitectura
   if [[ "$vProc" == "AuthenticAMD" ]]; then
     # watch -n 1 'sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6'
-    vTemp=$(sensors | grep -e Tctl | cut -d'+' -f2 | cut -d'.' -f1)
+    vTemp=$(sensors 2> /dev/null | grep -e Tctl | cut -d'+' -f2 | cut -d'.' -f1)
     echo $(( $vTemp + 1 ))
   elif [[ "$vProc" == "GenuineIntel" ]]; then
     # watch -n 1 'sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6'
