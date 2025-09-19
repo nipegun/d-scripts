@@ -47,7 +47,7 @@ cFinColor='\033[0m'
     echo -e "${cColorAzulClaro}  Mostrando temperatura del procesador $vModeloProc...${cFinColor}"
     echo ""
     # watch -n 1 'sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6'
-    sensors | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6
+    sensors 2> /dev/null | grep -e Tctl -e Tccd1 -e Tccd2 -e Tccd3 -e Tccd4 -e Tccd5 -e Tccd6
     echo ""
   elif [[ "$vProc" == "GenuineIntel" ]]; then
     echo ""
