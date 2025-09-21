@@ -45,63 +45,49 @@
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 7 (Wheezy)...${cFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 8 (Jessie)...${cFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
-
-elif [ $cVerSO == "9" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 9 (Stretch)...${cFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
-
-elif [ $cVerSO == "10" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 10 (Buster)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 13 (x)...${cFinColor}"
   echo ""
 
   echo ""
   echo "    Instalando el paquete lm-sensors..." 
   echo ""
-  apt-get -y update
-  apt-get -y install lm-sensors
-
-  echo ""
-  echo "    Instalando el paquete hddtemp..." 
-  echo ""
-  apt-get -y update
-  apt-get -y install hddtemp
+  sudo apt-get -y update
+  sudo apt-get -y install lm-sensors
 
   echo ""
   echo "    Detectando los sensores..." 
   echo ""
-  /usr/bin/yes YES | /usr/sbin/sensors-detect
+  /usr/bin/yes YES | sudo /usr/sbin/sensors-detect
 
   echo ""
   echo "    Activando el módulo del kernel..." 
   echo ""
-  /etc/init.d/kmod start
+  sudo systemctl restart systemd-modules-load.service
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 12 (Bookworm)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo "    Instalando el paquete lm-sensors..." 
+  echo ""
+  sudo apt-get -y update
+  sudo apt-get -y install lm-sensors
+
+  echo ""
+  echo "    Detectando los sensores..." 
+  echo ""
+  /usr/bin/yes YES | sudo /usr/sbin/sensors-detect
+
+  echo ""
+  echo "    Activando el módulo del kernel..." 
+  echo ""
+  sudo systemctl restart systemd-modules-load.service
 
 elif [ $cVerSO == "11" ]; then
 
@@ -131,14 +117,62 @@ elif [ $cVerSO == "11" ]; then
   echo ""
   /etc/init.d/kmod start
 
-elif [ $cVerSO == "12" ]; then
+elif [ $cVerSO == "10" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 12 (Bookworm)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo "    Instalando el paquete lm-sensors..." 
+  echo ""
+  apt-get -y update
+  apt-get -y install lm-sensors
+
+  echo ""
+  echo "    Instalando el paquete hddtemp..." 
+  echo ""
+  apt-get -y update
+  apt-get -y install hddtemp
+
+  echo ""
+  echo "    Detectando los sensores..." 
+  echo ""
+  /usr/bin/yes YES | /usr/sbin/sensors-detect
+
+  echo ""
+  echo "    Activando el módulo del kernel..." 
+  echo ""
+  /etc/init.d/kmod start
+
+elif [ $cVerSO == "9" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 9 (Stretch)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "8" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 8 (Jessie)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación y configuración de sensores de hardware en Debian 7 (Wheezy)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
   echo ""
 
 fi
