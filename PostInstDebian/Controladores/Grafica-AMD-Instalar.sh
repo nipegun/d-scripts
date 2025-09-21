@@ -36,43 +36,39 @@ cFinColor='\033[0m'
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  
-  echo "  Iniciando el script de instalación del controlador de las gráficas AMD en Debian 7 (Wheezy)..."  
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  
-  echo "  Iniciando el script de instalación del controlador de las gráficas AMD en Debian 8 (Jessie)..."  
+  echo "  Iniciando el script de instalación del controlador de las gráficas AMD en Debian 13 (x)..."  
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $cVerSO == "9" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
-  
-  echo "  Iniciando el script de instalación del controlador de las gráficas AMD en Debian 9 (Stretch)..."  
+  echo "  Iniciando el script de instalación del controlador de las gráficas AMD en Debian 12 (Bookworm)..."  
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación del controlador de las gráficas AMD en Debian 11 (Bullseye)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $cVerSO == "10" ]; then
 
   echo ""
-  
   echo "  Iniciando el script de instalación del controlador de las gráficas AMD en Debian 10 (Buster)..."  
   echo ""
 
@@ -112,15 +108,34 @@ elif [ $cVerSO == "10" ]; then
   # OpenCL
   #apt-get -y remove mesa-opencl-icd
 
-elif [ $cVerSO == "11" ]; then
+elif [ $cVerSO == "9" ]; then
 
   echo ""
-  
-  echo "  Iniciando el script de instalación del controlador de las gráficas AMD en Debian 11 (Bullseye)..."  
+  echo "  Iniciando el script de instalación del controlador de las gráficas AMD en Debian 9 (Stretch)..."  
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "8" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación del controlador de las gráficas AMD en Debian 8 (Jessie)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación del controlador de las gráficas AMD en Debian 7 (Wheezy)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 fi
