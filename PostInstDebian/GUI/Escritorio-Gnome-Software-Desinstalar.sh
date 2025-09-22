@@ -101,8 +101,9 @@
 #     sudo apt-get -y autoremove --purge gnome-chess
       sudo apt-get -y autoremove --purge gnome-maps
       sudo apt-get -y autoremove --purge gnome-weather
-　　  sudo apt-get -y autoremove --purge mozc*
+　　   sudo apt-get -y autoremove --purge mozc*
       sudo apt-get -y autoremove --purge uim-gtk3
+      sudo apt-get -y autoremove --purge showtime
       sudo apt-get -y autoremove
 
   elif [ $cVerSO == "12" ]; then
