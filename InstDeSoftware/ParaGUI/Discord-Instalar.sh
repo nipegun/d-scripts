@@ -50,9 +50,17 @@ if [ $cVerSO == "13" ]; then
   echo "  Iniciando el script de instalación de Discord para Debian 13 (x)..."  
   echo ""
 
-  echo ""
-  echo "  Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+  # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+      echo ""
+      sudo apt-get -y update
+      sudo apt-get -y install curl
+      echo ""
+    fi
+  curl -L "https://discordapp.com/api/download?platform=linux&format=deb" -o /tmp/discord.deb
+  sudo apt -y install /tmp/discord.deb
 
 elif [ $cVerSO == "12" ]; then
 
