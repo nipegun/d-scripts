@@ -55,9 +55,22 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de jDownloader para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Instalar JRE
+      sudo apt-get -y update
+      sudo apt-get -y install default-jre
+    # Ejecutar script original de instalación (alojado en hacks4geeks.com)
+      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install curl
+          echo ""
+        fi
+      curl -L http://hacks4geeks.com/_/premium/descargas/Debian/root/SoftInst/jDownloader/JDownloader2Setup_unix_nojre.sh -o /tmp/jdownloader.sh
+      chmod +x /tmp/jdownloader.sh
+      sudo /tmp/jdownloader.sh
 
   elif [ $cVerSO == "12" ]; then
 
