@@ -9,13 +9,13 @@
 # Script de NiPeGun para instalar y configurar TelegramDesktop en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/TelegramDesktop-InstalarYConfigurar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaGUI/TelegramDesktop-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/TelegramDesktop-InstalarYConfigurar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaGUI/TelegramDesktop-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota sin caché:
-#  curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaGUI/TelegramDesktop-InstalarYConfigurar.sh | bash
+#  curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaGUI/TelegramDesktop-InstalarYConfigurar.sh | bash
 # ----------
 
 vUsuarioNoRoot="nipegun"
