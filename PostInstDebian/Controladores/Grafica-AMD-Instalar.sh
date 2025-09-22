@@ -42,9 +42,26 @@ if [ $cVerSO == "13" ]; then
   echo "  Iniciando el script de instalación del controlador de las gráficas AMD en Debian 13 (x)..."  
   echo ""
 
-  echo ""
-  echo "  Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+  # Drivers
+    apt-get -y update
+    apt-get -y install firmware-amd-graphics
+    apt-get -y install firmware-linux
+    apt-get -y install firmware-linux-free
+    apt-get -y install firmware-linux-nonfree
+    apt-get -y install libdrm-amdgpu1
+
+  # Mesa
+    apt-get -y install mesa-utils
+
+  # Vulkan
+    apt-get -y install mesa-vulkan-drivers
+    apt-get -y install libvulkan1
+    apt-get -y install vulkan-tools
+    apt-get -y install vulkan-utils
+    apt-get -y install vulkan-validationlayers
+
+  # OpenCL
+    apt-get -y install mesa-opencl-icd
 
 elif [ $cVerSO == "12" ]; then
 
@@ -73,40 +90,22 @@ elif [ $cVerSO == "10" ]; then
   echo ""
 
   # Drivers
-  apt-get -y update
-  apt-get -y install firmware-amd-graphics
-  apt-get -y install firmware-linux
-  apt-get -y install firmware-linux-free
-  apt-get -y install firmware-linux-nonfree
-  apt-get -y install libdrm-amdgpu1
+    apt-get -y update
+    apt-get -y install firmware-amd-graphics
+    apt-get -y install firmware-linux
+    apt-get -y install firmware-linux-free
+    apt-get -y install firmware-linux-nonfree
+    apt-get -y install libdrm-amdgpu1
 
   # Vulkan
-  apt-get -y install mesa-vulkan-drivers
-  apt-get -y install libvulkan1
-  apt-get -y install vulkan-tools
-  apt-get -y install vulkan-utils
-  apt-get -y install vulkan-validationlayers
+    apt-get -y install mesa-vulkan-drivers
+    apt-get -y install libvulkan1
+    apt-get -y install vulkan-tools
+    apt-get -y install vulkan-utils
+    apt-get -y install vulkan-validationlayers
 
   # OpenCL
-  apt-get -y install mesa-opencl-icd
-
-  # Drivers
-  #apt-get -y update
-  #apt-get -y remove firmware-amd-graphics
-  #apt-get -y remove firmware-linux
-  #apt-get -y remove firmware-linux-free
-  #apt-get -y remove firmware-linux-nonfree
-  #apt-get -y remove libdrm-amdgpu1
-
-  # Vulkan
-  #apt-get -y remove mesa-vulkan-drivers
-  #apt-get -y remove libvulkan1
-  #apt-get -y remove vulkan-tools
-  #apt-get -y remove vulkan-utils
-  #apt-get -y remove vulkan-validationlayers
-
-  # OpenCL
-  #apt-get -y remove mesa-opencl-icd
+    apt-get -y install mesa-opencl-icd
 
 elif [ $cVerSO == "9" ]; then
 
