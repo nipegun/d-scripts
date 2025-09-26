@@ -95,7 +95,7 @@
         sudo apt-get -y install curl
         echo ""
       fi
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/PostInstDebian/GUI/Escritorio-Gnome-AtajosDeTeclado.txt -o /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Gnome-AtajosDeTeclado.txt -o /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
     dconf load /org/gnome/settings-daemon/plugins/media-keys/ < /tmp/Escritorio-Gnome-AtajosDeTeclado.txt
 
       echo ""
