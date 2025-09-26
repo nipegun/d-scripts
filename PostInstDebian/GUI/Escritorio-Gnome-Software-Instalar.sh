@@ -131,6 +131,7 @@
       sudo apt-get -y install obs-studio
       #sudo apt-get -y install telegram-desktop
       #sudo apt-get -y install discord
+      sudo apt-get -y install transmission-gtk
 
     # Juegos
       echo ""
@@ -343,6 +344,7 @@
       sudo apt-get -y install obs-studio
       sudo apt-get -y install telegram-desktop
       #sudo apt-get -y install discord
+      sudo apt-get -y install transmission-gtk
 
     # Juegos
       echo ""
