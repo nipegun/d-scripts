@@ -105,6 +105,13 @@
       sed -i -e 's|Exec=gnome-text-editor %U|Exec=gnome-text-editor --new-window %U|g' ~/.local/share/applications/org.gnome.TextEditor.desktop
       update-desktop-database ~/.local/share/applications/
 
+    # Theme de íconos
+      echo ""
+      echo "  Instalando y activando el theme de íconos Papirus..."
+      echo ""
+      sudo apt-get -y install papirus-icon-theme
+      gsettings set org.gnome.desktop.interface icon-theme "Papirus"
+
     # Reiniciar el sistema
       echo ""
       echo "  Reiniciando el sistema..."
@@ -155,6 +162,13 @@
       sudo sed -i -e 's|Exec=gnome-text-editor %U|Exec=gnome-text-editor --new-window %U|g' /usr/share/applications/org.gnome.TextEditor.desktop
       cp -fv /usr/share/applications/org.gnome.TextEditor.desktop ~/.local/share/applications/
       update-desktop-database ~/.local/share/applications/
+
+    # Theme de íconos
+      echo ""
+      echo "  Instalando y activando el theme de íconos Papirus..."
+      echo ""
+      sudo apt-get -y install papirus-icon-theme
+      gsettings set org.gnome.desktop.interface icon-theme "Papirus"
 
     # Reiniciar el sistema
       echo ""
