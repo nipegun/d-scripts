@@ -93,7 +93,8 @@ if [ $cVerSO == "13" ]; then
       echo ""
       echo "    Actualizar la lista de paquetes disponibles en los repositorios activados..."
       echo ""
-      apt-get -y update
+      apt -y modernize-sources
+      apt -y full-upgrade
 
     # Configurar el archivo /etc/hosts
       echo ""
