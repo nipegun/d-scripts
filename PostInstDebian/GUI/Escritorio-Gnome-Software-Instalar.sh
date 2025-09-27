@@ -329,7 +329,6 @@
         sudo usermod -aG wireshark $USER
       sudo apt-get -y install etherape
         sudo setcap CAP_NET_RAW=pe /usr/bin/etherape 
-      sudo apt-get -y install virt-viewer
       sudo apt-get -y install remmina
       sudo apt-get -y install firefox-esr-l10n-es-es
       sudo apt-get -y install thunderbird
@@ -345,6 +344,13 @@
       sudo apt-get -y install telegram-desktop
       #sudo apt-get -y install discord
       sudo apt-get -y install transmission-gtk
+
+    # virt-viewer
+      sudo apt-get -y install virt-viewer
+      # Deshabilitar KVM para que funcione VirtualBox
+        echo "blacklist kvm"       | sudo tee    /etc/modprobe.d/disable-kvm.conf
+        echo "blacklist kvm_intel" | sudo tee -a /etc/modprobe.d/disable-kvm.conf
+        sudo update-initramfs -u -k all
 
     # Juegos
       echo ""
