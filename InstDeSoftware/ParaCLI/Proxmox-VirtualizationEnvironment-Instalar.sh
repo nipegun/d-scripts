@@ -147,6 +147,7 @@ if [ $cVerSO == "13" ]; then
       echo ""
       apt-get -y remove linux-image-amd64
       apt-get -y remove linux-image-[5-6]*
+      apt-get -y remove os-prober
 
     # Actualizar grub
       echo ""
@@ -171,12 +172,6 @@ if [ $cVerSO == "13" ]; then
       echo "    Instalando las cabeceras del kernel..."
       echo ""
       apt-get -y install pve-headers
-
-    # Desinstalar OSProber
-      #echo ""
-      #echo "    Desinstalando OSProber..."
-      #echo ""
-      #apt-get -y remove os-prober
 
     # Configurar la red
       echo ""
