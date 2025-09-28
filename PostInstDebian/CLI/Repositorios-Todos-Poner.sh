@@ -51,41 +51,42 @@ if [ $cVerSO == "13" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script para agregar todos los repos de Debian 13 (x)...${cFinColor}"
   echo ""
 
-  sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
-
-  echo "deb http://deb.debian.org/debian trixie main contrib non-free non-free-firmware"                        | sudo tee    /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian trixie main contrib non-free non-free-firmware"                    | sudo tee -a /etc/apt/sources.list
-  echo ""                                                                                                       | sudo tee -a /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian trixie-updates main contrib non-free non-free-firmware"                | sudo tee -a /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian trixie-updates main contrib non-free non-free-firmware"            | sudo tee -a /etc/apt/sources.list
-  echo ""                                                                                                       | sudo tee -a /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian-security/ trixie-security main contrib non-free non-free-firmware"     | sudo tee -a /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian-security/ trixie-security main contrib non-free non-free-firmware" | sudo tee -a /etc/apt/sources.list
-  echo ""                                                                                                       | sudo tee -a /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian trixie-backports main contrib non-free non-free-firmware"              | sudo tee -a /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian trixie-backports main contrib non-free non-free-firmware"          | sudo tee -a /etc/apt/sources.list
-  echo ""                                                                                                       | sudo tee -a /etc/apt/sources.list
-
-  sudo apt-get -y update
+  # Forma antigua
+    sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak.ori
+    #echo "deb http://deb.debian.org/debian trixie main contrib non-free non-free-firmware"                        | sudo tee    /etc/apt/sources.list
+    #echo "deb-src http://deb.debian.org/debian trixie main contrib non-free non-free-firmware"                    | sudo tee -a /etc/apt/sources.list
+    #echo ""                                                                                                       | sudo tee -a /etc/apt/sources.list
+    #echo "deb http://deb.debian.org/debian trixie-updates main contrib non-free non-free-firmware"                | sudo tee -a /etc/apt/sources.list
+    #echo "deb-src http://deb.debian.org/debian trixie-updates main contrib non-free non-free-firmware"            | sudo tee -a /etc/apt/sources.list
+    #echo ""                                                                                                       | sudo tee -a /etc/apt/sources.list
+    #echo "deb http://deb.debian.org/debian-security/ trixie-security main contrib non-free non-free-firmware"     | sudo tee -a /etc/apt/sources.list
+    #echo "deb-src http://deb.debian.org/debian-security/ trixie-security main contrib non-free non-free-firmware" | sudo tee -a /etc/apt/sources.list
+    #echo ""                                                                                                       | sudo tee -a /etc/apt/sources.list
+    #echo "deb http://deb.debian.org/debian trixie-backports main contrib non-free non-free-firmware"              | sudo tee -a /etc/apt/sources.list
+    #echo "deb-src http://deb.debian.org/debian trixie-backports main contrib non-free non-free-firmware"          | sudo tee -a /etc/apt/sources.list
+    #echo ""                                                                                                       | sudo tee -a /etc/apt/sources.list
 
   # Forma moderna
-    #echo 'Types: deb deb-src'                                        | sudo tee    /etc/apt/sources.list.d/debian.sources
-    #echo 'URIs: http://deb.debian.org/debian/'                       | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo 'Suites: trixie'                                            | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo 'Components: main contrib non-free non-free-firmware'       | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo 'Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg' | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo ''                                                          | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo 'Types: deb deb-src'                                        | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo 'URIs: http://deb.debian.org/debian/'                       | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo 'Suites: trixie-updates'                                    | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo 'Components: main contrib non-free non-free-firmware'       | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo 'Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg' | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo ''                                                          | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo 'Types: deb deb-src'                                        | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo 'URIs: http://deb.debian.org/debian-security/'              | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo 'Suites: trixie-security'                                   | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo 'Components: main contrib non-free non-free-firmware'       | sudo tee -a /etc/apt/sources.list.d/debian.sources
-    #echo 'Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg' | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'Types: deb deb-src'                                        | sudo tee    /etc/apt/sources.list.d/debian.sources
+    echo 'URIs: http://deb.debian.org/debian/'                       | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'Suites: trixie'                                            | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'Components: main contrib non-free non-free-firmware'       | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg' | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo ''                                                          | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'Types: deb deb-src'                                        | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'URIs: http://deb.debian.org/debian/'                       | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'Suites: trixie-updates'                                    | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'Components: main contrib non-free non-free-firmware'       | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg' | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo ''                                                          | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'Types: deb deb-src'                                        | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'URIs: http://deb.debian.org/debian-security/'              | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'Suites: trixie-security'                                   | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'Components: main contrib non-free non-free-firmware'       | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    echo 'Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg' | sudo tee -a /etc/apt/sources.list.d/debian.sources
+
+  # Actualizar la lista de paquetes disponibles en los nuevos repositorios
+    sudo apt-get -y update
 
 elif [ $cVerSO == "12" ]; then
 
