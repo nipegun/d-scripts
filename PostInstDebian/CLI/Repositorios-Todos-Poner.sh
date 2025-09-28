@@ -68,6 +68,25 @@ if [ $cVerSO == "13" ]; then
 
   sudo apt-get -y update
 
+  # Forma moderna
+    #echo 'Types: deb deb-src'                                        | sudo tee    /etc/apt/sources.list.d/debian.sources
+    #echo 'URIs: http://deb.debian.org/debian/'                       | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo 'Suites: trixie'                                            | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo 'Components: main contrib non-free non-free-firmware'       | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo 'Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg' | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo ''                                                          | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo 'Types: deb deb-src'                                        | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo 'URIs: http://deb.debian.org/debian/'                       | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo 'Suites: trixie-updates'                                    | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo 'Components: main contrib non-free non-free-firmware'       | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo 'Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg' | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo ''                                                          | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo 'Types: deb deb-src'                                        | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo 'URIs: http://deb.debian.org/debian-security/'              | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo 'Suites: trixie-security'                                   | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo 'Components: main contrib non-free non-free-firmware'       | sudo tee -a /etc/apt/sources.list.d/debian.sources
+    #echo 'Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg' | sudo tee -a /etc/apt/sources.list.d/debian.sources
+
 elif [ $cVerSO == "12" ]; then
 
   echo ""
