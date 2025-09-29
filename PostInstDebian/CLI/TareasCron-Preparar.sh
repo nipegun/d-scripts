@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Pongo a disposición pública este script bajo el término de "software de dominio público".
@@ -7,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para preparar las tareas cron
+# Script de NiPeGun para preparar las tareas cron en Debian
 #
 # Ejecución remota:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/TareasCron-Preparar.sh | sed 's-sudo--g' | bash
@@ -27,174 +26,132 @@
   fi
 
 # Notificar inicio de ejecución del script
-  echo ""
+  echo ''
   echo -e "${cColorAzulClaro}  Iniciando script para preparar las tareas cron...${cFinColor}"
-  echo ""
+  echo ''
 
 # Preparar el script de tareas cada minuto
-  echo ""
+  echo ''
   echo "    Creando el archivo para las tareas de cada minuto..." 
-  echo ""
+  echo ''
   sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                                | sudo tee    /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
-  echo ""                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
+  echo ''                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                         | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
   echo 'echo "Iniciada la ejecución del cron de cada minuto el $vFechaDeEjec" >> /var/log/TareasCronCadaMinuto.log' | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
-  echo ""                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA MINUTO"                                         | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                       | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
-  echo ""                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
-  echo ""
-  echo "      Dando permiso de ejecución al archivo..." 
-  echo ""
+  echo ''                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA MINUTO'                                         | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                       | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
+  echo ''                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
   sudo chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
-  echo ""
-  echo "      Instalando la tarea en crontab..." 
-  echo ""
   sudo crontab -l > /tmp/CronTemporal
   echo "* * * * * /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh" | sudo tee -a /tmp/CronTemporal
   sudo crontab /tmp/CronTemporal
   sudo rm /tmp/CronTemporal
 
 # Preparar el script de tareas cada hora
-  echo ""
+  echo ''
   echo "    Creando el archivo para las tareas de cada hora..." 
-  echo ""
+  echo ''
   sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                            | sudo tee    /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
-  echo ""                                                                                                       | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
+  echo ''                                                                                                       | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
   echo 'echo "Iniciada la ejecución del cron de cada hora el $vFechaDeEjec" >> /var/log/TareasCronCadaHora.log' | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
-  echo ""                                                                                                       | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA"                                       | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
-  echo ""                                                                                                       | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
-  echo ""
-  echo "      Dando permiso de ejecución al archivo..." 
-  echo ""
+  echo ''                                                                                                       | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA'                                       | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
+  echo ''                                                                                                       | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
   sudo chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
-  echo ""
-  echo "      Creando enlace hacia el archivo en /etc/cron.hourly/ ..." 
-  echo ""
   sudo ln -s /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh /etc/cron.hourly/TareasCronCadaHora
 
 # Preparar el script de tareas cada hora impar
-  echo ""
+  echo ''
   echo "    Creando el archivo para las tareas de cada hora impar..." 
-  echo ""
+  echo ''
   sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                                       | sudo tee    /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
-  echo ""                                                                                                                  | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
+  echo ''                                                                                                                  | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                                | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
   echo 'echo "Iniciada la ejecución del cron de cada hora impar el $vFechaDeEjec" >> /var/log/TareasCronCadaHoraImpar.log' | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
-  echo ""                                                                                                                  | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA IMPAR"                                            | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                          | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
-  echo ""                                                                                                                  | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
-  echo ""
-  echo "      Dando permiso de ejecución al archivo..." 
-  echo ""
+  echo ''                                                                                                                  | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA IMPAR'                                            | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                          | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
+  echo ''                                                                                                                  | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
   sudo chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh
-  echo ""
-  echo "      Instalando la tarea en crontab..." 
-  echo ""
   sudo crontab -l > /tmp/CronTemporal
   echo "0 1-23/2 * * * /root/scripts/ParaEsteDebian/TareasCronCadaHoraImpar.sh" | sudo tee -a /tmp/CronTemporal
   sudo crontab /tmp/CronTemporal
   sudo rm /tmp/CronTemporal
 
 # Preparar el script de tareas cada hora par
-  echo ""
+  echo ''
   echo "    Creando el archivo para las tareas de cada hora par..." 
-  echo ""
+  echo ''
   sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
   echo '#!/bin/bash'                                                                                                   | sudo tee    /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
-  echo ""                                                                                                              | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
+  echo ''                                                                                                              | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                            | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
   echo 'echo "Iniciada la ejecución del cron de cada hora par el $vFechaDeEjec" >> /var/log/TareasCronCadaHoraPar.log' | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
-  echo ""                                                                                                              | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA PAR"                                          | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                        | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
-  echo ""                                                                                                              | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
-  echo ""
-  echo "      Dando permiso de ejecución al archivo..." 
-  echo ""
+  echo ''                                                                                                              | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA HORA PAR'                                          | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                        | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
+  echo ''                                                                                                              | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
   sudo chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh
-  echo ""
-  echo "      Instalando la tarea en crontab..." 
-  echo ""
   sudo crontab -l > /tmp/CronTemporal
   echo "0 */2 * * * /root/scripts/ParaEsteDebian/TareasCronCadaHoraPar.sh" | sudo tee -a /tmp/CronTemporal
   sudo crontab /tmp/CronTemporal
   sudo rm /tmp/CronTemporal
 
 # Preparar el script de tareas cada día
-  echo ""
+  echo ''
   echo "    Creando el archivo para las tareas de cada día..." 
-  echo ""
+  echo ''
   echo '#!/bin/bash'                                                                                          | sudo tee    /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
-  echo ""                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
+  echo ''                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                   | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
   echo 'echo "Iniciada la ejecución del cron de cada día el $vFechaDeEjec" >> /var/log/TareasCronCadaDía.log' | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
-  echo ""                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA DÍA"                                      | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                    | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
-  echo ""                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
-  echo ""
-  echo "      Dando permiso de ejecución al archivo..." 
-  echo ""
+  echo ''                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA DÍA'                                      | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                    | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
+  echo ''                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
   sudo chmod +x /root/scripts/TareasCronCadaDía.sh
-  echo ""
-  echo "      Creando enlace hacia el archivo en /etc/cron.daily/ ..." 
-  echo ""
   sudo ln -s /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh /etc/cron.daily/TareasCronCadaDía
 
 # Preparar el script de tareas cada semana
-  echo ""
+  echo ''
   echo "    Creando el archivo para las tareas de cada semana..." 
-  echo ""
+  echo ''
   echo '#!/bin/bash'                                                                                                | sudo tee    /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
-  echo ""                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
+  echo ''                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                         | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
   echo 'echo "Iniciada la ejecución del cron de cada semana el $vFechaDeEjec" >> /var/log/TareasCronCadaSemana.log' | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
-  echo ""                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA SEMANA"                                         | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                       | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
-  echo ""                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
-  echo ""
-  echo "      Dando permiso de ejecución al archivo..." 
-  echo ""
+  echo ''                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA SEMANA'                                         | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                       | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
+  echo ''                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
   sudo chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
-  echo ""
-  echo "      Creando enlace hacia el archivo en /etc/cron.weekly/ ..." 
-  echo ""
   sudo ln -s /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh /etc/cron.weekly/TareasCronCadaSemana
 
 # Preparar el script de tareas cada mes
-  echo ""
+  echo ''
   echo "    Creando el archivo para las tareas de cada mes..." 
-  echo ""
+  echo ''
   echo '#!/bin/bash'                                                                                          | sudo tee    /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
-  echo ""                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
+  echo ''                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
   echo 'vFechaDeEjec=$(date +a%Ym%md%d@%T)'                                                                   | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
   echo 'echo "Iniciada la ejecución del cron de cada mes el $vFechaDeEjec" >> /var/log/TareasCronCadaMes.log' | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
-  echo ""                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
-  echo "#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA MES"                                      | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
-  echo "#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼"                                    | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
-  echo ""                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
-  echo ""
-  echo "      Dando permiso de ejecución al archivo..." 
-  echo ""
+  echo ''                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
+  echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA MES'                                      | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
+  echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                    | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
+  echo ''                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
   sudo chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
-  echo ""
-  echo "      Creando enlace hacia el archivo en /etc/cron.monthly/ ..." 
-  echo ""
   sudo ln -s /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh /etc/cron.monthly/TareasCronCadaMes
 
 # Dar permisos de lectura y ejecución sólo al propietario de los scripts
-  echo ""
+  echo ''
   echo "  Dando permisos de lectura y ejecución solo al propietario de los scripts..." 
-  echo ""
+  echo ''
   # Si esto no se hace las tareas no se ejecutarán.
   sudo chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaMinuto.sh
   sudo chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaHora.sh
