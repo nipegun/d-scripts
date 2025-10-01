@@ -94,6 +94,7 @@ if [ $cVerSO == "13" ]; then
       echo "    Actualizar la lista de paquetes disponibles en los repositorios activados..."
       echo ""
       apt -y modernize-sources
+      apt-get -y update
       apt -y full-upgrade
 
     # Configurar el archivo /etc/hosts
@@ -155,11 +156,16 @@ if [ $cVerSO == "13" ]; then
       echo ""
       update-grub
 
-    # Borrar el repositorio enterprise
+    # Desactivar el repositorio enterprise
       echo ""
       echo "    Desactivando el repositorio enterprise..."
       echo ""
-      mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak
+      mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak 2> /dev/null
+      echo '#Types: deb'                                                  | sudo tee    /etc/apt/sources.list.d/pve-enterprise.sources
+      echo '#URIs: https://enterprise.proxmox.com/debian/pve'             | sudo tee -a /etc/apt/sources.list.d/pve-enterprise.sources
+      echo '#Suites: trixie'                                              | sudo tee -a /etc/apt/sources.list.d/pve-enterprise.sources
+      echo '#Components: pve-enterprise'                                  | sudo tee -a /etc/apt/sources.list.d/pve-enterprise.sources
+      echo '#Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg'  | sudo tee -a /etc/apt/sources.list.d/pve-enterprise.sources
 
     # Volver a actualizar la lista de paquetes disponibles en los repositorios activados
       echo ""
