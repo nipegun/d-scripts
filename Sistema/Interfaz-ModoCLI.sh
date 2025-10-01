@@ -9,10 +9,10 @@
 # Script de NiPeGun para hacer que Debian arranque en modo texto
 #
 # Ejecución remota (puede requerir permisos sudo):
-#  https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Interfaz-ModoCLI.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Interfaz-ModoCLI.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#  https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Interfaz-ModoCLI.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Interfaz-ModoCLI.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
