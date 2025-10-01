@@ -45,144 +45,15 @@
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 7 (Wheezy)...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 13 (Trixie)...${cFinColor}"
   echo ""
-
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 8 (Jessie)...${cFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
-
-elif [ $cVerSO == "9" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 9 (Stretch)...${cFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
-
-
-elif [ $cVerSO == "10" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 10 (Buster)...${cFinColor}"
-  echo ""
-
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
-
-elif [ $cVerSO == "11" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 11 (Bullseye)...${cFinColor}"
-  echo ""
-
   echo ""
   echo "  Instalando paquetes..." 
-echo ""
-  apt-get -y update
-  apt-get -y install fail2ban
-  #apt-get -y install sendmail
-
-  # Crear el archivo de configuración
-    echo "[INCLUDES]"                                             > /etc/fail2ban/filter.d/JaulaInCrescendo.conf
-    echo "before = common.conf"                                  >> /etc/fail2ban/filter.d/JaulaInCrescendo.conf
-    echo "[Definition]"                                          >> /etc/fail2ban/filter.d/JaulaInCrescendo.conf
-    echo "failregex = \]\s+Unban\s+<HOST>"                       >> /etc/fail2ban/filter.d/JaulaInCrescendo.conf
-    echo "ignoreregex = \[JaulaInCrescendo.*\]\s+Unban\s+<HOST>" >> /etc/fail2ban/filter.d/JaulaInCrescendo.conf
-  # Crear la jaula
-    echo "[DEFAULT]"                                                                          > /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "# 3 contraseñas erróneas en 1 minuto, crear un baneo de 1 minuto"                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "maxretry = 3"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "findtime = 1m"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "bantime = 1m"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "[JaulaInCrescendo2]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "# Si ocurren 2 baneos de 1 minuto en 5 minutos, crear un nuevo baneo de 5 minutos" >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "findtime = 5m"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "bantime = 5m"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "[JaulaInCrescendo3]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "# Si ocurren 2 baneos de 5 minutos en 30 minutos, crear un nuevo baneo 30 minutos" >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "findtime = 30m"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "bantime = 30m"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "[JaulaInCrescendo4]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "# Si ocurren 2 baneos de 30 minutos en 1 día, crear un nuevo baneo de 1 día"       >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "findtime = 1d"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "bantime = 1d"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "[JaulaInCrescendo5]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "# Si ocurren 2 baneos de 1 día en 1 semana, crear un nuevo baneo de 1 semana"      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "findtime = 1w"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "bantime = 1w"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "[JaulaInCrescendo6]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "# Si ocurren 2 baneos de 1 semana en 1 mes, crear un nuevo baneo de 1 mes"         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "findtime = 1mo"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "bantime = 1mo"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
-
-  # Modificar debian defaults
-    #echo "ignoreip = 127.0.0.1"        >> /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "maxretry = 3"                >> /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "bantime = 10m"               >> /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "findtime = 5m"               >> /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo ""                            >> /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "# Mail"                      >> /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "#destemail = mail@gmail.com" >> /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "#sender = mail@gmail.com"    >> /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "#sendername = Fail2Ban"      >> /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "#mta = sendmail"             >> /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "#action = %(action_mwl)s"    >> /etc/fail2ban/jail.d/defaults-debian.conf
-
-  # Reiniciar el servicio
-    service fail2ban reload
-    service fail2ban restart
-    # tail -f /var/log/fail2ban.log
-
-elif [ $cVerSO == "12" ]; then
-
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 12 (Bookworm)...${cFinColor}"
-  echo ""
-
-  echo ""
-  echo "  Instalando paquetes..." 
-echo ""
   apt-get -y update
   apt-get -y install fail2ban
   #apt-get -y install sendmail
@@ -266,6 +137,227 @@ echo ""
     systemctl restart fail2ban
     systemctl --no-pager status fail2ban
     # tail -f /var/log/fail2ban.log
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 12 (Bookworm)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo "  Instalando paquetes..." 
+  echo ""
+  apt-get -y update
+  apt-get -y install fail2ban
+  #apt-get -y install sendmail
+
+  # Crear el archivo de configuración
+    echo "[INCLUDES]"                                             > /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+    echo "before = common.conf"                                  >> /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+    echo "[Definition]"                                          >> /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+    echo "failregex = \]\s+Unban\s+<HOST>"                       >> /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+    echo "ignoreregex = \[JaulaInCrescendo.*\]\s+Unban\s+<HOST>" >> /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+  # Crear la jaula
+    echo "[DEFAULT]"                                                                          > /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "# 3 contraseñas erróneas en 1 minuto, crear un baneo de 1 minuto"                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "maxretry = 3"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "findtime = 1m"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "bantime = 1m"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "[JaulaInCrescendo2]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "# Si ocurren 2 baneos de 1 minuto en 5 minutos, crear un nuevo baneo de 5 minutos" >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "findtime = 5m"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "bantime = 5m"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "[JaulaInCrescendo3]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "# Si ocurren 2 baneos de 5 minutos en 30 minutos, crear un nuevo baneo 30 minutos" >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "findtime = 30m"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "bantime = 30m"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "[JaulaInCrescendo4]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "# Si ocurren 2 baneos de 30 minutos en 1 día, crear un nuevo baneo de 1 día"       >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "findtime = 1d"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "bantime = 1d"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "[JaulaInCrescendo5]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "# Si ocurren 2 baneos de 1 día en 1 semana, crear un nuevo baneo de 1 semana"      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "findtime = 1w"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "bantime = 1w"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "[JaulaInCrescendo6]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "# Si ocurren 2 baneos de 1 semana en 1 mes, crear un nuevo baneo de 1 mes"         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "findtime = 1mo"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "bantime = 1mo"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+
+  # Modificar debian defaults
+    #echo "ignoreip = 127.0.0.1"        >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "maxretry = 3"                >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "bantime = 10m"               >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "findtime = 5m"               >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo ""                            >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "# Mail"                      >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "#destemail = mail@gmail.com" >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "#sender = mail@gmail.com"    >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "#sendername = Fail2Ban"      >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "#mta = sendmail"             >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "#action = %(action_mwl)s"    >> /etc/fail2ban/jail.d/defaults-debian.conf
+
+  # Crear los archivos de logs
+    touch /var/log/auth.log      # Necesario para que inicie el servicio
+    touch /var/log/fail2ban.log
+
+  # Reiniciar el servicio
+    systemctl restart fail2ban
+    systemctl --no-pager status fail2ban
+    # tail -f /var/log/fail2ban.log
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 11 (Bullseye)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo "  Instalando paquetes..." 
+  echo ""
+  apt-get -y update
+  apt-get -y install fail2ban
+  #apt-get -y install sendmail
+
+  # Crear el archivo de configuración
+    echo "[INCLUDES]"                                             > /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+    echo "before = common.conf"                                  >> /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+    echo "[Definition]"                                          >> /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+    echo "failregex = \]\s+Unban\s+<HOST>"                       >> /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+    echo "ignoreregex = \[JaulaInCrescendo.*\]\s+Unban\s+<HOST>" >> /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+  # Crear la jaula
+    echo "[DEFAULT]"                                                                          > /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "# 3 contraseñas erróneas en 1 minuto, crear un baneo de 1 minuto"                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "maxretry = 3"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "findtime = 1m"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "bantime = 1m"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "[JaulaInCrescendo2]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "# Si ocurren 2 baneos de 1 minuto en 5 minutos, crear un nuevo baneo de 5 minutos" >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "findtime = 5m"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "bantime = 5m"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "[JaulaInCrescendo3]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "# Si ocurren 2 baneos de 5 minutos en 30 minutos, crear un nuevo baneo 30 minutos" >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "findtime = 30m"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "bantime = 30m"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "[JaulaInCrescendo4]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "# Si ocurren 2 baneos de 30 minutos en 1 día, crear un nuevo baneo de 1 día"       >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "findtime = 1d"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "bantime = 1d"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo ""                                                                                  >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "[JaulaInCrescendo5]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "# Si ocurren 2 baneos de 1 día en 1 semana, crear un nuevo baneo de 1 semana"      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "findtime = 1w"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "bantime = 1w"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "[JaulaInCrescendo6]"                                                               >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "# Si ocurren 2 baneos de 1 semana en 1 mes, crear un nuevo baneo de 1 mes"         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "enabled = true"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "filter = JaulaInCrescendo"                                                         >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "maxretry = 2"                                                                      >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "findtime = 1mo"                                                                    >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "bantime = 1mo"                                                                     >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    echo "logpath = /var/log/fail2ban.log"                                                   >> /etc/fail2ban/jail.d/JaulaInCrescendo.local
+
+  # Modificar debian defaults
+    #echo "ignoreip = 127.0.0.1"        >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "maxretry = 3"                >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "bantime = 10m"               >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "findtime = 5m"               >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo ""                            >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "# Mail"                      >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "#destemail = mail@gmail.com" >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "#sender = mail@gmail.com"    >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "#sendername = Fail2Ban"      >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "#mta = sendmail"             >> /etc/fail2ban/jail.d/defaults-debian.conf
+    #echo "#action = %(action_mwl)s"    >> /etc/fail2ban/jail.d/defaults-debian.conf
+
+  # Reiniciar el servicio
+    service fail2ban reload
+    service fail2ban restart
+    # tail -f /var/log/fail2ban.log
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 10 (Buster)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "9" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 9 (Stretch)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "8" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 8 (Jessie)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 7 (Wheezy)...${cFinColor}"
+  echo ""
+
+  echo ""
+  echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+  echo ""
 
 fi
 
