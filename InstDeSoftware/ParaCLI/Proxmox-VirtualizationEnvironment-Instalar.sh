@@ -68,11 +68,11 @@ if [ $cVerSO == "13" ]; then
       echo ""
       echo "    Agregando el repositorio de Proxmox..."
       echo ""
-      echo 'Types: deb'                                                  > /etc/apt/sources.list.d/pve-no-subscription.sources
-      echo 'URIs: http://download.proxmox.com/debian/pve'               >> /etc/apt/sources.list.d/pve-no-subscription.sources
-      echo 'Suites: trixie'                                             >> /etc/apt/sources.list.d/pve-no-subscription.sources
-      echo 'Components: pve-no-subscription'                            >> /etc/apt/sources.list.d/pve-no-subscription.sources
-      echo 'Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg' >> /etc/apt/sources.list.d/pve-no-subscription.sources
+      echo 'Types: deb'                                                 | sudo tee    /etc/apt/sources.list.d/pve-no-subscription.sources
+      echo 'URIs: http://download.proxmox.com/debian/pve'               | sudo tee -a /etc/apt/sources.list.d/pve-no-subscription.sources
+      echo 'Suites: trixie'                                             | sudo tee -a /etc/apt/sources.list.d/pve-no-subscription.sources
+      echo 'Components: pve-no-subscription'                            | sudo tee -a /etc/apt/sources.list.d/pve-no-subscription.sources
+      echo 'Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg' | sudo tee -a /etc/apt/sources.list.d/pve-no-subscription.sources
 
     # Agregar a llave para firmar las descargas desde el repositorio de Proxmox
       echo ""
