@@ -116,6 +116,9 @@ if [ $cVerSO == "13" ]; then
       echo ""
       apt-get -y install proxmox-default-kernel
 
+    # Personalizar mate-desktop
+       curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Mate-Personalizar.sh | sed 's-sudo--g' | bash
+
     # Crear el archivo de Fase1 Completa
       echo ""
       echo "    Creando el archivo de fase 1 completa..."
@@ -230,6 +233,44 @@ if [ $cVerSO == "13" ]; then
       echo "    Reiniciando el servicio de red.."
       echo ""
       service networking restart
+
+    # Evitar que proxmox se suspenda al cerrar la tapa del portátil
+      echo '[Login]'                      | sudo tee -a /etc/systemd/logind.conf
+      echo 'HandleLidSwitch=ignore'       | sudo tee -a /etc/systemd/logind.conf
+      echo 'HandleLidSwitchDocked=ignore' | sudo tee -a /etc/systemd/logind.conf
+      sudo systemctl restart systemd-logind.service
+
+  # Deshabilitar el suspenso y al hibernación
+    systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+    # Para volver a habilitarlo:
+    #   systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
+  # Configurar la fecha y hora correctas
+    timedatectl set-timezone Europe/Madrid
+    apt-get -y install chrony
+
+    # Instalar el servicio de escritorio remoto
+      echo ""
+      echo "  Instalando XRDP con sus correspondientes servicios de monitorización..."
+      echo ""
+      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Escritorio-xrdp-Instalar.sh | sed 's-sudo--g' | bash
+      # Instalar también la monitorización
+        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorCon-Instalar.sh | bash
+        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorSes-Instalar.sh | bash
+
+  # Instalar ssh y fail2ban
+    sudo tasksel install ssh-server
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Fail2Ban-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
+
+  # Ignorar msrs para evitar el loop de arranque de las máquinas virtuales de macOS.
+    echo "options kvm ignore_msrs=Y" | sudo tee -a /etc/modprobe.d/macos.conf
+    sudo update-initramfs -u -k all
+
+  # Dismonuir el uso de Swap
+    echo "vm.swappiness=0" | sudo tee -a /etc/sysctl.conf
+
+  # Volver a reinciar, pero esta vez ya en modo texto
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Interfaz-ModoCLI.sh | sed 's-sudo--g' | bash
 
   fi
 
