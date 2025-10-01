@@ -119,6 +119,20 @@ if [ $cVerSO == "13" ]; then
     # Personalizar mate-desktop
        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Mate-Personalizar.sh | sed 's-sudo--g' | bash
 
+    # Activar PCI-PassThrough
+      # Para procesadores Intel:
+        #sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT="quiet|GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt"|g' /etc/default/grub
+      # Para procesadores AMD:
+        #sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT="quiet|GRUB_CMDLINE_LINUX_DEFAULT="quiet amd_iommu=on iommu=pt"|g' /etc/default/grub
+      # Agregar módulos
+        echo '# PCIPassThrough' | sudo tee -a /etc/modules
+        echo 'vfio'             | sudo tee -a /etc/modules
+        echo 'vfio_iommu_type1' | sudo tee -a /etc/modules
+        echo 'vfio_pci'         | sudo tee -a /etc/modules
+        echo 'vfio_virqfd'      | sudo tee -a /etc/modules
+      sudo apt-get -y install driverctl
+      
+
     # Crear el archivo de Fase1 Completa
       echo ""
       echo "    Creando el archivo de fase 1 completa..."
