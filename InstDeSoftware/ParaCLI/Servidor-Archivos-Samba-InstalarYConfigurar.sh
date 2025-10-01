@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar y configurar el servidor Samba en Debian
 #
-# Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Archivos-Samba-InstalarYConfigurar.sh | bash -s NombreDeGrupo NombreDeEquipo nipegun
+# Ejecución remota (puede requerir permisos sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Archivos-Samba-InstalarYConfigurar.sh | bash -s NombreDeGrupo NombreDeEquipo nipegun
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Archivos-Samba-InstalarYConfigurar.sh | sed 's-sudo--g' | bash -s NombreDeGrupo NombreDeEquipo nipegun
 #
 #  Para que los usuarios puedan utilizar samba es necesario crearles una contraseña para samba al usuario con:
 #  smbpasswd -a NombreDeUsuario
@@ -60,9 +63,157 @@ if [ $cVerSO == "13" ]; then
   echo "  Iniciando el script de instalación de Samba para Debian 13 (x)..."  
   echo ""
 
-  echo ""
-  echo "  Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+  ArgumentosRequeridos=3
+
+  if [ $# -ne $ArgumentosRequeridos ]
+    then
+      echo ""
+      echo -e "${cColorRojo}Mal uso del script.${cFinColor} El uso correcto sería:"
+      echo -e "$0 ${cColorVerde}[GrupoDeTrabajo] [NombreNetBios] [Usuario]${cFinColor}"
+      echo ""
+      echo "Ejemplo:"
+      echo "$0 oficina ordenador pepe"
+      echo ""
+      exit
+    else
+      apt-get update && apt-get -y install dialog
+      menu=(dialog --timeout 5 --checklist "Instalación de la compartición Samba:" 22 76 16)
+      opciones=(
+        1 "Instalar los paquetes necesarios" on
+        2 "Configurar las opciones globales" on
+        3 "Configurar la compartición Pública anónima" off
+        4 "Configurar la compartición de la carpeta del usuario" off
+        5 "Configurar la compartición Multimedia" off
+        6 "Configurar la compartición de Webs" off
+        7 "Reiniciar el demonio y mostrar el estado" on
+      )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+      clear
+
+      for choice in $choices
+        do
+          case $choice in
+
+            1)
+
+              echo ""
+              echo -e "${cColorVerde}  Instalando los paquetes necesarios...${cFinColor}"
+              echo ""
+              sudo apt-get -y install libcups2
+              sudo apt-get -y install samba
+              sudo apt-get -y install samba-common
+              sudo apt-get -y install cups
+              sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
+              
+            ;;
+
+            2)
+
+              echo ""
+              echo -e "${cColorVerde}  Configurando las opciones globales...${cFinColor}"
+              echo ""
+              echo "[global]"                                                    | sudo tee    /etc/samba/smb.conf
+              echo "  workgroup = $1"                                            | sudo tee -a /etc/samba/smb.conf
+              echo "  server string = Servidor Samba %v"                         | sudo tee -a /etc/samba/smb.conf
+              echo "  wins support = yes"                                        | sudo tee -a /etc/samba/smb.conf
+              echo "  netbios name = $2"                                         | sudo tee -a /etc/samba/smb.conf
+              echo "  security = user"                                           | sudo tee -a /etc/samba/smb.conf
+              echo "  guest account = nobody"                                    | sudo tee -a /etc/samba/smb.conf
+              echo "  map to guest = bad user"                                   | sudo tee -a /etc/samba/smb.conf
+              echo "  dns proxy = no"                                            | sudo tee -a /etc/samba/smb.conf
+              echo "  hosts allow = 192.168.0. 192.168.1. 192.168.2. 192.168.3." | sudo tee -a /etc/samba/smb.conf
+              echo "  hosts deny = 192.168.1.254"                                | sudo tee -a /etc/samba/smb.conf
+              echo "  #interfaces = lo eth1 wlan0 br0"                           | sudo tee -a /etc/samba/smb.conf
+              echo "  #bind interfaces only = yes"                               | sudo tee -a /etc/samba/smb.conf
+              echo ""                                                            | sudo tee -a /etc/samba/smb.conf
+
+            ;;
+
+            3)
+
+              echo ""
+              echo -e "${cColorVerde}  Creando la compartición para la carpeta pública...${cFinColor}"
+              echo ""
+              mkdir /publica/
+              chown nobody:nogroup /publica/
+              chmod -Rv 777 /publica/
+              echo "[publica]"                                     | sudo tee -a /etc/samba/smb.conf
+              echo "  path = /publica/"                            | sudo tee -a /etc/samba/smb.conf
+              echo "  comment = Compartida para usuarios anónimos" | sudo tee -a /etc/samba/smb.conf
+              echo "  browseable = yes"                            | sudo tee -a /etc/samba/smb.conf
+              echo "  public = yes"                                | sudo tee -a /etc/samba/smb.conf
+              echo "  writeable = no"                              | sudo tee -a /etc/samba/smb.conf
+              echo "  guest ok = yes"                              | sudo tee -a /etc/samba/smb.conf
+              echo ""                                              | sudo tee -a /etc/samba/smb.conf
+
+            ;;
+
+            4)
+
+              echo ""
+              echo -e "${cColorVerde}  Creando la compartición para la carpeta del usuario...${cFinColor}"
+              echo ""
+              echo "[Usuario $3]"                       | sudo tee -a /etc/samba/smb.conf
+              echo "  path = /home/$3/"                 | sudo tee -a /etc/samba/smb.conf
+              echo "  comment = Carpeta del usuario $3" | sudo tee -a /etc/samba/smb.conf
+              echo "  browseable = yes"                 | sudo tee -a /etc/samba/smb.conf
+              echo "  read only = no"                   | sudo tee -a /etc/samba/smb.conf
+              echo "  valid users = $3"                 | sudo tee -a /etc/samba/smb.conf
+
+            ;;
+
+            5)
+
+              echo ""
+              echo -e "${cColorVerde}  Creando la compartición de una carpeta Multimedia...${cFinColor}"
+              echo ""
+              echo "[Multimedia]"                                   | sudo tee -a /etc/samba/smb.conf
+              echo "  path = /Discos/HDD-Multimedia/"               | sudo tee -a /etc/samba/smb.conf
+              echo "  comment = Pelis, series, música, libros, etc" | sudo tee -a /etc/samba/smb.conf
+              echo "  browseable = yes"                             | sudo tee -a /etc/samba/smb.conf
+              echo "  public = no"                                  | sudo tee -a /etc/samba/smb.conf
+              echo "  guest ok = no"                                | sudo tee -a /etc/samba/smb.conf
+              echo "  write list = $1"                              | sudo tee -a /etc/samba/smb.conf
+              echo ""                                               | sudo tee -a /etc/samba/smb.conf
+
+            ;;
+
+            6)
+
+              echo ""
+              echo -e "${cColorVerde}  Creando la compartición de la carpeta de las Webs...${cFinColor}"
+              echo ""
+              echo "[Webs]"                  | sudo tee -a /etc/samba/smb.conf
+              echo "  path = /var/www/"      | sudo tee -a /etc/samba/smb.conf
+              echo "  comment = Webs"        | sudo tee -a /etc/samba/smb.conf
+              echo "  browseable = yes"      | sudo tee -a /etc/samba/smb.conf
+              echo "  public = no"           | sudo tee -a /etc/samba/smb.conf
+              echo "  guest ok = no"         | sudo tee -a /etc/samba/smb.conf
+              echo "  write list = www-data" | sudo tee -a /etc/samba/smb.conf
+              echo ""                        | sudo tee -a /etc/samba/smb.conf
+
+            ;;
+
+            7)
+
+              echo ""
+              echo "  AHORA DEBERÁS INGRESAR 2 VECES LA NUEVA CONTRASEÑA SAMBA PARA EL USUARIO $3."
+              echo "  PUEDE SER DISTINTA A LA DE LA PROPIA CUENTA DE USUARIO PERO SI PONES UNA"
+              echo "  DISTINTA, CUANDO TE CONECTES A LA CARPETA COMPARTIDA, ACUÉRDATE DE UTILIZAR"
+              echo "  LA CONTRASEÑA QUE PONGAS AHORA Y NO LA DE LA CUENTA DE USUARIO."
+              echo ""
+              sudo smbpasswd -a $3
+              sudo systemctl restart smbd.service
+              sleep 5
+              sudo systemctl status smbd.service
+              echo ""
+
+            ;;
+
+          esac
+
+        done
+  fi
 
 elif [ $cVerSO == "12" ]; then
 
