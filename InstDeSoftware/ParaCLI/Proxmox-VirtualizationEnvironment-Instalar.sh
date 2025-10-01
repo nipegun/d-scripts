@@ -8,8 +8,11 @@
 # ---------
 # Script de NiPeGun para instalar y configurar ProxmoxVE en Debian
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Proxmox-VirtualizationEnvironment-Instalar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Proxmox-VirtualizationEnvironment-Instalar.sh | sed 's-sudo--g' | bash
 # ---------
 
 # IP Local
@@ -254,14 +257,14 @@ if [ $cVerSO == "13" ]; then
       echo 'HandleLidSwitchDocked=ignore' | sudo tee -a /etc/systemd/logind.conf
       sudo systemctl restart systemd-logind.service
 
-  # Deshabilitar el suspenso y al hibernación
-    systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
-    # Para volver a habilitarlo:
-    #   systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target
+    # Deshabilitar el suspenso y al hibernación
+      systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+      # Para volver a habilitarlo:
+      #   systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
-  # Configurar la fecha y hora correctas
-    timedatectl set-timezone Europe/Madrid
-    apt-get -y install chrony
+    # Configurar la fecha y hora correctas
+      timedatectl set-timezone Europe/Madrid
+      apt-get -y install chrony
 
     # Instalar el servicio de escritorio remoto
       echo ""
@@ -272,22 +275,25 @@ if [ $cVerSO == "13" ]; then
         curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorCon-Instalar.sh | sed 's-sudo--g' | bash
         curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorSes-Instalar.sh | sed 's-sudo--g' | bash
 
-  # Instalar ssh y fail2ban
-    sudo tasksel install ssh-server
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Fail2Ban-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
+    # Instalar ssh y fail2ban
+      sudo tasksel install ssh-server
+      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Fail2Ban-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 
-  # Ignorar msrs para evitar el loop de arranque de las máquinas virtuales de macOS.
-    echo "options kvm ignore_msrs=Y" | sudo tee -a /etc/modprobe.d/macos.conf
-    sudo update-initramfs -u -k all
+    # Ignorar msrs para evitar el loop de arranque de las máquinas virtuales de macOS.
+      echo "options kvm ignore_msrs=Y" | sudo tee -a /etc/modprobe.d/macos.conf
+      sudo update-initramfs -u -k all
 
-  # Dismonuir el uso de Swap
-    echo "vm.swappiness=0" | sudo tee -a /etc/sysctl.conf
+    # Dismonuir el uso de Swap
+      echo "vm.swappiness=0" | sudo tee -a /etc/sysctl.conf
 
-  # Indicar partición de intercambio en /etc/fstab
-    #echo "/dev/disk/by-partlabel/PartSwap none swap defaults 0 0" | sudo tee -a /etc/fstab
+    # Indicar partición de intercambio en /etc/fstab
+      #echo "/dev/disk/by-partlabel/PartSwap none swap defaults 0 0" | sudo tee -a /etc/fstab
 
-  # Volver a reinciar, pero esta vez ya en modo texto
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Interfaz-ModoCLI.sh | sed 's-sudo--g' | bash
+    # Desinstalar sudo
+      #
+
+    # Volver a reinciar, pero esta vez ya en modo texto
+      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Interfaz-ModoCLI.sh | sed 's-sudo--g' | bash
 
   fi
 
