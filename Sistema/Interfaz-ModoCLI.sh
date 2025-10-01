@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para hacer que Debian arranque en modo texto
 #
-# Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Interfaz-ModoCLI.sh | bash
+# Ejecución remota (puede requerir permisos sudo):
+#  https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Interfaz-ModoCLI.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#  https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Interfaz-ModoCLI.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
@@ -28,10 +31,10 @@
 echo ""
 echo -e "${cColorAzulClaro}  Iniciando script de configuración de inicio en modo CLI para Debian...${cFinColor}"
 echo ""
-systemctl set-default -f multi-user.target
+sudo systemctl set-default -f multi-user.target
 
 echo ""
 echo -e "${cColorVerde}    Cambios realizados. En el próximo inicio Debian iniciará en modo CLI multi-usuario.${cFinColor}"
 echo ""
-shutdown -r now
+sudo shutdown -r now
 
