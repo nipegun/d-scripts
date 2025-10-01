@@ -255,8 +255,8 @@ if [ $cVerSO == "13" ]; then
       echo ""
       curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Escritorio-xrdp-Instalar.sh | sed 's-sudo--g' | bash
       # Instalar también la monitorización
-        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorCon-Instalar.sh | bash
-        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorSes-Instalar.sh | bash
+        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorCon-Instalar.sh | sed 's-sudo--g' | bash
+        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorSes-Instalar.sh | sed 's-sudo--g' | bash
 
   # Instalar ssh y fail2ban
     sudo tasksel install ssh-server
@@ -268,6 +268,9 @@ if [ $cVerSO == "13" ]; then
 
   # Dismonuir el uso de Swap
     echo "vm.swappiness=0" | sudo tee -a /etc/sysctl.conf
+
+  # Indicar partición de intercambio en /etc/fstab
+    #echo "/dev/disk/by-partlabel/PartSwap none swap defaults 0 0" | sudo tee -a /etc/fstab
 
   # Volver a reinciar, pero esta vez ya en modo texto
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Interfaz-ModoCLI.sh | sed 's-sudo--g' | bash
