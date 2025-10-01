@@ -257,7 +257,7 @@ if [ $cVerSO == "13" ]; then
       echo 'HandleLidSwitchDocked=ignore' | sudo tee -a /etc/systemd/logind.conf
       sudo systemctl restart systemd-logind.service
 
-    # Deshabilitar el suspenso y al hibernación
+    # Deshabilitar el suspenso y la hibernación
       systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
       # Para volver a habilitarlo:
       #   systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target
