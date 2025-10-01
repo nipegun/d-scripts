@@ -107,25 +107,24 @@
                 echo ""
                 echo "    Determinando la última versión disponible..."
                 echo ""
-                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
-                echo "      La última versión disponible es la $vUltVersFlectra"
+                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f2)
+                vCanalUltVers=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f3)
+                echo "      La última versión disponible es la $vUltVersFlectra del canal $vCanalUltVers"
                 echo ""
-
+                
               # Agregar el repositorio
                 echo ""
                 echo "    Agregando el repositorio..."
                 echo ""
-                cd /tmp
-                sudo rm -f /etc/apt/trusted.gpg.d/flectra.gpg 2> /dev/null
-                wget --no-check-certificate https://download.flectrahq.com/flectra.key -O - | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/flectra.gpg
-                echo "deb [trusted=yes] http://download.flectrahq.com/"$vUltVersFlectra"/pub/deb ./" | sudo tee /etc/apt/sources.list.d/flectra.list
+                wget -q -O - https://nightly.flectra.com/flectra.key | sudo gpg --dearmor -o /usr/share/keyrings/flectra-archive-keyring.gpg
+                echo "deb [signed-by=/usr/share/keyrings/flectra-archive-keyring.gpg] https://nightly.flectra.com/$vUltVersFlectra/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/flectra.list
                 sudo apt-get -y update
 
               # Instalar
                 echo ""
                 echo "    Instalando..."
                 echo ""
-                apt-get install flectra
+                sudo apt-get -y install flectra
 
             ;;
 
@@ -151,16 +150,16 @@
                 echo ""
                 echo "    Determinando la última versión disponible..."
                 echo ""
-                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
-                echo "      La última versión disponible es la $vUltVersFlectra"
+                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f2)
+                vCanalUltVers=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f3)
+                echo "      La última versión disponible es la $vUltVersFlectra del canal $vCanalUltVers"
                 echo ""
 
               # Descargar el .deb
                 echo ""
                 echo "    Descargando el archivo .deb..."
                 echo ""
-                vURLIntermediaArchivo=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep deb | head -n1 | cut -d '"' -f2)
-                curl -kL https://download.flectrahq.com/"$vURLIntermediaArchivo" -o /tmp/flectra.deb
+                curl -L https://download.flectrahq.com/"$vUltVersFlectra"/"$vCanalUltVers"/deb/flectra_"$vUltVersFlectra".latest_all.deb -o /tmp/flectra.deb
 
               # Instalar el archivo .deb
                 echo ""
@@ -221,24 +220,25 @@
                 echo ""
                 echo "    Determinando la última versión disponible..."
                 echo ""
-                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep zip | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
-                echo "      La última versión disponible es la $vUltVersFlectra"
+                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f2)
+                vCanalUltVers=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f3)
+                echo "      La última versión disponible es la $vUltVersFlectra del canal $vCanalUltVers"
                 echo ""
 
               # Descargar el .zip
                 echo ""
                 echo "    Descargando el archivo .zip..."
                 echo ""
-                vURLIntermediaArchivo=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep zip | head -n1 | cut -d '"' -f2)
-                curl -kL https://download.flectrahq.com/"$vURLIntermediaArchivo" -o /tmp/flectra.zip
+                curl -L https://download.flectrahq.com/"$vUltVersFlectra"/"$vCanalUltVers"/tgz/flectra_"$vUltVersFlectra".latest.zip -o /tmp/flectra-source.zip
 
               # Descomprimir el .zip
                 echo ""
                 echo "    Descomprimiendo el archivo .zip..."
                 echo ""
                 cd /tmp
-                unzip /tmp/flectra.zip
-                sudo cp -r /tmp/flectra-"$vUltVersFlectra"/* /opt/flectra
+                unzip /tmp/flectra-source.zip
+                sudo mkdir /opt/flectra/
+                sudo cp -rv /tmp/flectra-"$vUltVersFlectra"/* /opt/flectra/
                 sudo chown flectra:flectra /opt/flectra -R
 
               # Crear el entorno virtual
@@ -246,11 +246,11 @@
                 echo "    Creando el entorno virtual..."
                 echo ""
                 sudo -u flectra bash -c '\
-                  mkdir /opt/flectra/VirtualEnvironment/              && \
-                  python3 -m venv /opt/flectra/VirtualEnvironment/    && \
-                  source /opt/flectra/VirtualEnvironment/bin/activate && \
-                  pip install wheel                                   && \
-                  pip install -r /opt/flectra/requirements.txt        && \
+                  mkdir /opt/flectra/venv/                     && \
+                  python3 -m venv /opt/flectra/venv/           && \
+                  source /opt/flectra/venv/bin/activate        && \
+                  pip install wheel                            && \
+                  pip install -r /opt/flectra/requirements.txt && \
                   deactivate \
                 '
 
@@ -313,8 +313,9 @@
                 echo ""
                 echo "    Determinando la última versión disponible..."
                 echo ""
-                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep zip | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
-                echo "      La última versión disponible es la $vUltVersFlectra"
+                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f2)
+                vCanalUltVers=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f3)
+                echo "      La última versión disponible es la $vUltVersFlectra del canal $vCanalUltVers"
                 echo ""
 
               # Clonar el repo
@@ -332,11 +333,11 @@
                 echo ""
                 echo "    Creando el entorno virtual..."
                 echo ""
-                sudo rm -rf /opt/flectra/VirtualEnvironment/
+                sudo rm -rf /opt/flectra/venv/
                 sudo su -s /bin/bash -c '\
-                  mkdir /opt/flectra/VirtualEnvironment/              && \
-                  python3 -m venv /opt/flectra/VirtualEnvironment/    && \
-                  source /opt/flectra/VirtualEnvironment/bin/activate && \
+                  mkdir /opt/flectra/venv/              && \
+                  python3 -m venv /opt/flectra/venv/    && \
+                  source /opt/flectra/venv/bin/activate && \
                   pip install wheel                                   && \
                   pip install -r /opt/flectra/Code/requirements.txt   && \
                   deactivate \
@@ -368,7 +369,7 @@
                 echo ""
                 echo "    Creando el lanzador..."
                 echo ""
-                echo '#!/opt/flectra/VirtualEnvironment/bin/python3'               | sudo tee    /opt/flectra/flectra-start.py
+                echo '#!/opt/flectra/venv/bin/python3'                             | sudo tee    /opt/flectra/flectra-start.py
                 echo ''                                                            | sudo tee -a /opt/flectra/flectra-start.py
                 echo 'import sys'                                                  | sudo tee -a /opt/flectra/flectra-start.py
                 echo 'import os'                                                   | sudo tee -a /opt/flectra/flectra-start.py
@@ -426,6 +427,7 @@
                 sudo systemctl daemon-reload
                 sudo systemctl enable flectra
                 sudo systemctl start flectra
+                sudo systemctl status flectra --no-pager
 
               # Notificar fin de ejecución del script
                 echo ""
