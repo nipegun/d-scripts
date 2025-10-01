@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar y configurar XRDP en Debian
 #
-# Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Escritorio-xrdp-Instalar.sh | bash
+# Ejecución remota (puede requerir permisos sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Escritorio-xrdp-Instalar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Escritorio-xrdp-Instalar.sh | sed 's-sudo--g' | bash
 # ----------
 
 cColorAzul="\033[0;34m"
