@@ -188,7 +188,7 @@
           echo ""
           for ((vNum=1; vNum<=vCantidadDeParticiones; vNum++)); do
             vPart="${vDisco}${vSep}${vNum}"
-            vFS="$(fTipoFS "$vPart")"
+            vFS="$(blkid -o value -s TYPE "$1" 2>/dev/null "$vPart")"
             vBin="$(fBinPartclone "$vFS")"
             vArchivo="$vDir/part${vNum}-${vFS}.img"
 
@@ -204,10 +204,10 @@
               $vBin -c -s "$vPart" -o "$vArchivo" -N -q
               echo "[LOG] Clonado $vPart con $vBin a $vArchivo" >> "$vLog"
               vTam="$(du -h "$vArchivo" | awk '{print $1}')"
-              echo "[LOG] Tamaño final de $vArchivo: $vTam" >> "$vLog"
+              echo "[LOG] Tamaño final de $vArchivo: $vTam" | sudo tee -a "$vLog"
             else
               echo "[!] No hay soporte partclone para FS $vFS en $vPart"
-              echo "[ERROR] Sin soporte partclone para $vFS" >> "$vLog"
+              echo "[ERROR] Sin soporte partclone para $vFS" | sudo tee -a "$vLog"
             fi
           done
 
