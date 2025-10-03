@@ -59,6 +59,30 @@
   vDisco="${1:-}"
   vCantidadDeParticiones="${2:-}"
 
+# Calcular si hay espacio libre suficiente
+  echo ""
+  echo "    Comprobando espacio libre en la carpeta actual antes de continuar..."
+  echo ""
+  vTotalNecesario=0
+  for ((vNum=1; vNum<=vCantidadDeParticiones; vNum++)); do
+    vPart="${vDisco}${vSep}${vNum}"
+    if [ -b "$vPart" ]; then
+      vUsado=$(df -B1 --output=used "$vPart" 2>/dev/null | tail -n1)
+      vTotalNecesario=$((vTotalNecesario + vUsado))
+    fi
+  done
+  vLibre=$(df -B1 --output=avail . | tail -n1)
+  echo "      Espacio necesario (estimado): $((vTotalNecesario/1024/1024)) MB"
+  echo "      Espacio libre disponible:     $((vLibre/1024/1024)) MB"
+  if [ "$vLibre" -lt "$vTotalNecesario" ]; then
+    echo ""
+    echo "      [!] No hay suficiente espacio libre en la carpeta actual para guardar todas las particiones."
+    echo "          Se necesitan al menos $((vTotalNecesario/1024/1024)) MB, pero solo hay $((vLibre/1024/1024)) MB."
+    echo ""
+    exit 1
+  fi
+  echo "      [OK] Espacio suficiente detectado."
+
 # Directorio de salida
   cFecha="$(date +"y%Ym%md%dh%Hm%Ms%S")"
   vDir="backups-$(basename "$vDisco")-$cFecha"
@@ -246,8 +270,8 @@ done
 
 # Notificar fin de ejecución del script
   echo ""
-  echo -e "${cColorVerde}    [✓] Proceso completado.${cFinColor}"
+  echo -e "${cColorVerde}    Proceso completado.${cFinColor}"
   echo ""
-  echo -e "${cColorVerde}      Archivos creados en la carpeta: $vDir ${cFinColor}"
+  echo -e "${cColorVerde}      Archivos creados en la carpeta: $vDir/ ${cFinColor}"
   echo ""
 
