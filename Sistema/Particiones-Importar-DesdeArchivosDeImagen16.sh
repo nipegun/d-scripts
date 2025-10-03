@@ -66,8 +66,8 @@
   echo ""
   echo "  Borrando todas las firmas de particiones existentes en el disco de destino ($vDiscoDestino)..."
   echo ""
-  sudo wipefs -a "$vDiscoDestino"
-  sudo dd if=/dev/zero of="$vDiscoDestino" bs=1M count=8
+  #sudo wipefs -a "$vDiscoDestino"
+  #sudo dd if=/dev/zero of="$vDiscoDestino" bs=1M count=8
   echo ""
   echo "  Restaurando tabla de particiones en $vDiscoDestino..."
   echo ""
