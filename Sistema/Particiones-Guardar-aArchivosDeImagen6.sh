@@ -93,12 +93,17 @@
   }
 
   fRellenarCeros() {
-    local vPart="$1"; local vNum="$2"; local vPunto="/mnt/tmp-clone-p${vNum}"
+    local vPart="$1"
+    local vNum="$2"
+    local vPunto="/mnt/tmp-clone-p${vNum}"
     mkdir -p "$vPunto"
     if mount "$vPart" "$vPunto"; then
-      dd if=/dev/zero of="$vPunto/ceros.tmp" bs=1M status=progress || true
-      sync; rm -f "$vPunto/ceros.tmp"; sync
-      umount "$vPunto"; rmdir "$vPunto"
+      sudo dd if=/dev/zero of="$vPunto/ceros.tmp" bs=1M status=progress || true
+      sudo sync
+      sudo rm -f "$vPunto/ceros.tmp"
+      sudo sync
+      sudo umount "$vPunto"
+      sudo rmdir "$vPunto"
     fi
   }
 
@@ -123,7 +128,7 @@
       2 "Corregir posibles errores en las particiones a clonar"                on
       3 "Borrar espacio libre en las particiones a clonar (Relleno con ceros)" off
       4 "Clonar hacia archivos de imagen"                                      on
-      5 "Comprimir xon xz los archivos resultantes"                            off
+      5 "Comprimir con xz los archivos resultantes"                            off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -172,7 +177,6 @@
           for ((vNum=1; vNum<=vCantidadDeParticiones; vNum++)); do
             vPart="${vDisco}${vSep}${vNum}"
             fRellenarCeros "$vPart" "$vNum"
-            echo "[LOG] Relleno con ceros en $vPart" >> "$vLog"
           done
 
         ;;
