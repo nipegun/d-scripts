@@ -146,8 +146,8 @@
               sudo apt-get -y install util-linux
               echo ""
             fi
-          sudo sfdisk -d "$vDisco" > "$vDir/tabla.txt"
-          echo "[LOG] Tabla de particiones guardada en tabla.txt" | sudo tee -a "$vLog"
+          sudo sfdisk -d "$vDisco" > "$vDir/TablaDeParticiones.txt"
+          echo "[LOG] Tabla de particiones guardada en TablaDeParticiones.txt" | sudo tee -a "$vLog"
 
         ;;
 
@@ -159,7 +159,7 @@
           for ((vNum=1; vNum<=vCantidadDeParticiones; vNum++)); do
             vPart="${vDisco}${vSep}${vNum}"
             vFS="$(fTipoFS "$vPart")"
-            fCheckFS "$vPart" "$vFS" >> "$vLog" 2>&1
+            sudo fCheckFS "$vPart" "$vFS" | sudo tee -a "$vLog" 2>&1
           done
 
         ;;
