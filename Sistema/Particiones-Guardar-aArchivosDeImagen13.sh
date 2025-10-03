@@ -96,7 +96,7 @@
     local vPart="$1"
     local vNum="$2"
     local vPunto="/mnt/tmp-clone-p${vNum}"
-    mkdir -p "$vPunto"
+    sudo mkdir -p "$vPunto"
     if mount "$vPart" "$vPunto"; then
       sudo dd if=/dev/zero of="$vPunto/ceros.tmp" bs=1M status=progress || true
       sudo sync
