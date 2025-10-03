@@ -188,7 +188,7 @@
           echo ""
           for ((vNum=1; vNum<=vCantidadDeParticiones; vNum++)); do
             vPart="${vDisco}${vSep}${vNum}"
-            vFS="$(blkid -o value -s TYPE "$1" 2>/dev/null "$vPart")"
+            vFS="$(sudo blkid -o value -s TYPE "$1" 2>/dev/null "$vPart")"
             vBin="$(fBinPartclone "$vFS")"
             vArchivo="$vDir/part${vNum}-${vFS}.img"
 
