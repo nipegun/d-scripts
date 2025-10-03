@@ -41,3 +41,71 @@
       exit
   fi
 
+# Parámetros
+  vDiscoDestino="${1:-}"
+  vArchivoImagen="${2:-}"
+  vArchivoTabla="${3:-}"
+
+# Preparar directorio de logs
+  cFecha="$(date +"y%Ym%md%dh%Hm%Ms%S")"
+  vDir="restore-$(basename "$vDiscoDestino")-$cFecha"
+  mkdir -p "$vDir"
+  vLog="$vDir/log.txt"
+
+# Funciones auxiliares
+  fBinPartclone() {
+    case "$1" in
+      ext2|ext3|ext4) echo "partclone.extfs" ;;
+      vfat|fat|fat32) echo "partclone.vfat" ;;
+      ntfs) echo "partclone.ntfs" ;;
+      xfs) echo "partclone.xfs" ;;
+      btrfs) echo "partclone.btrfs" ;;
+     f2fs) echo "partclone.f2fs" ;;
+      reiserfs) echo "partclone.reiserfs" ;;
+      hfsplus|hfs+) echo "partclone.hfsp" ;;
+      exfat) echo "partclone.exfat" ;;
+      *) echo "" ;;
+    esac
+  }
+
+# 1. Restaurar tabla de particiones
+  echo "  Restaurando tabla de particiones en $vDiscoDestino..."
+  sfdisk "$vDiscoDestino" < "$vArchivoTabla"
+  echo "[LOG] Tabla de particiones restaurada en $vDiscoDestino desde $vArchivoTabla" >> "$vLog"
+
+# 2. Preparar imagen
+  vArchivoTmp="$vArchivoImagen"
+  if [[ "$vArchivoImagen" == *.xz ]]; then
+    echo "  Descomprimiendo $vArchivoImagen..."
+    vArchivoTmp="$vDir/$(basename "${vArchivoImagen%.xz}")"
+    xz -dkc "$vArchivoImagen" > "$vArchivoTmp"
+    echo "[LOG] Imagen $vArchivoImagen descomprimida a $vArchivoTmp" >> "$vLog"
+  fi
+
+# 3. Determinar número de partición
+  vNum=$(echo "$vArchivoTmp" | sed -E 's/[^0-9]*([0-9]+).*/\1/')
+  vPart="${vDiscoDestino}${vNum}"
+
+# 4. Detectar FS en el nombre del archivo
+  vFS=$(echo "$vArchivoTmp" | sed -nE 's/.*-([a-z0-9]+)\.img/\1/p')
+  vBin="$(fBinPartclone "$vFS")"
+
+  if [ -z "$vBin" ]; then
+    echo "[!] No se pudo determinar binario de partclone para FS '$vFS'"
+    echo "[ERROR] No hay binario partclone para FS '$vFS'" >> "$vLog"
+    exit 1
+  fi
+
+# 5. Restaurar con partclone
+  echo "  Restaurando $vArchivoTmp en $vPart con $vBin..."
+  $vBin -r -s "$vArchivoTmp" -o "$vPart" -N -q
+  if [ $? -eq 0 ]; then
+    echo "[LOG] Restaurada $vArchivoTmp en $vPart con $vBin" >> "$vLog"
+  else
+    echo "[!] Error restaurando $vArchivoTmp en $vPart"
+    echo "[ERROR] Fallo en restauración de $vArchivoTmp con $vBin" >> "$vLog"
+    exit 1
+  fi
+
+echo ""
+echo "[✓] Proceso de restauración completado. Log en $vLog"
