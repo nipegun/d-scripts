@@ -158,7 +158,7 @@
           for ((vNum=1; vNum<=vCantidadDeParticiones; vNum++)); do
             vPart="${vDisco}${vSep}${vNum}"
             vFS="$(sudo blkid -o value -s TYPE "$1" 2>/dev/null "$vPart")"
-            fCheckFS "$vPart" "$vFS" | sudo tee -a "$vLog" 2>&1
+            fCheckFS "$vPart" "$vFS"
             echo ""
           done
 
@@ -199,19 +199,14 @@
             vMontadaEn="$(findmnt -no TARGET "$vPart" 2>/dev/null)"
             if [ -n "$vMontadaEn" ]; then
               echo "[!] $vPart está montada en $vMontadaEn. Aborto."
-              echo "[ERROR] $vPart montada en $vMontadaEn" >> "$vLog"
               exit 1
             fi
 
             if [ -n "$vBin" ]; then
               echo "    $vPart -> $vArchivo"
               sudo $vBin -c -s "$vPart" -o "$vArchivo" -N -q
-              echo "[LOG] Clonado $vPart con $vBin a $vArchivo" >> "$vLog"
-              vTam="$(du -h "$vArchivo" | awk '{print $1}')"
-              echo "[LOG] Tamaño final de $vArchivo: $vTam" | sudo tee -a "$vLog"
             else
               echo "[!] No hay soporte partclone para FS $vFS en $vPart"
-              echo "[ERROR] Sin soporte partclone para $vFS" | sudo tee -a "$vLog"
             fi
           done
 
@@ -224,10 +219,7 @@
           echo ""
           for vArchivo in "$vDir"/*.img; do
             if [ -f "$vArchivo" ]; then
-              echo "    Comprimiendo $vArchivo..."
               xz -T0 -9 "$vArchivo"
-              vTam="$(du -h "${vArchivo}.xz" | awk '{print $1}')"
-              echo "[LOG] Comprimido ${vArchivo}.xz, tamaño final: $vTam" >> "$vLog"
             fi
           done
 
@@ -238,6 +230,5 @@
 done
 
 echo ""
-echo "[✓]  Proceso completado. Archivos en $vDir"
+echo -e "${cColorVerde}  [✓]  Proceso completado. Archivos en $vDir ${cFinColor}"
 echo ""
-
