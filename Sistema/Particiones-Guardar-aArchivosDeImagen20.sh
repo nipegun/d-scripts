@@ -18,6 +18,15 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Guardar-aArchivosDeImagen.sh | nano -
 # ----------
 
+# Definir constantes de color
+  cColorAzul='\033[0;34m'
+  cColorAzulClaro='\033[1;34m'
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
+
 # Definir la cantidad de argumentos esperados
   cCantArgsEsperados=2
 
@@ -202,7 +211,7 @@
 
             if [ -n "$vBin" ]; then
               echo ""
-              sudo $vBin -c -s "$vPart" -o "$vArchivo" -N -q && echo "    $vPart -> $vArchivo"
+              sudo $vBin -c -s "$vPart" -o "$vArchivo" -N -q && echo -e "\n    $vPart -> $vArchivo"
               echo ""
             else
               echo "[!] No hay soporte de partclone para FS $vFS en $vPart"
