@@ -89,7 +89,7 @@
   vNum=$(echo "$vArchivoImagen" | sed -E 's/[^0-9]*([0-9]+).*/\1/')
 
   # Detectar tipo de dispositivo
-  if [[ "$vDiscoDestino" =~ nvme ]] || [[ "$vDiscoDestino" =~ vd[a-z] ]] || [[ "$vDiscoDestino" =~ mmcblk[0-9] ]]; then
+  if [[ "$vDiscoDestino" =~ nvme ]] || [[ "$vDiscoDestino" =~ vd[a-z] ]] || [[ "$vDiscoDestino" =~ mmcblk ]]; then
     vPart="${vDiscoDestino}p${vNum}"
   else
     vPart="${vDiscoDestino}${vNum}"
