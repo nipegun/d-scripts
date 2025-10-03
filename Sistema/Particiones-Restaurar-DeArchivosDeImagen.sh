@@ -8,20 +8,14 @@
 # ----------
 # Script de NiPeGun para restaurar a disco, particiones guardadas en archivos de imagen
 #
-# Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Salvar-aArchivos.sh | bash
+# Ejecución remota con argumentos (puede requerir permisos sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Restaurar-DeArchivosDeImagen.sh | bash -s [Argumento1] [Argumento2] [Argumento3]
 #
-# Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Salvar-aArchivos.sh | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Salvar-aArchivos.sh | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Salvar-aArchivos.sh | bash -s Parámetro1 Parámetro2
+# Ejecución remota con argumentos como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Restaurar-DeArchivosDeImagen.sh | sed 's-sudo--g' | bash -s [Argumento1] [Argumento2] [Argumento3]
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Salvar-aArchivos.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Restaurar-DeArchivosDeImagen.sh | nano -
 # ----------
 
 # Definir la cantidad de argumentos esperados
@@ -46,3 +40,4 @@
       echo ""
       exit
   fi
+
