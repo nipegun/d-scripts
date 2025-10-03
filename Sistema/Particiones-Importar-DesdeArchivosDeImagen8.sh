@@ -106,8 +106,10 @@
   fi
 
 # 4. Restaurar con partclone
+  echo ""
   echo "  Restaurando $vArchivoImagen en $vPart con $vBin..."
-  sudo $vBin -r -s "$vArchivoImagen" -o "$vPart" -N
+  echo ""
+  sudo $vBin -r -s "$vArchivoImagen" -O "$vPart" -N
   if [ $? -eq 0 ]; then
     echo "[LOG] Restaurada $vArchivoImagen en $vPart con $vBin" >> "$vLog"
   else
