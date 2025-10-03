@@ -73,6 +73,17 @@
   echo "  Restaurando tabla de particiones en $vDiscoDestino..."
   echo ""
   sudo sfdisk "$vDiscoDestino" < "$vArchivoTabla"
+  # Ajustar la GPT al tamaño real del disco (evita el aviso de GParted)
+    # Comprobar si el paquete gdisk está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s gdisk 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}  El paquete gdisk no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install gdisk
+        echo ""
+      fi
+    sudo sgdisk -e "$vDiscoDestino"
 
 # 2. Determinar número de partición
   vNum=$(echo "$vArchivoImagen" | sed -E 's/[^0-9]*([0-9]+).*/\1/')
