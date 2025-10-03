@@ -107,4 +107,6 @@
 echo ""
 echo "[✓] Proceso de restauración completado. Log en $vLog"
 echo ""
-
+echo "  Ya puedes proceder con el archivo de imagen de la partición inmediatamente posterior."
+echo "    Simplemente vuelve a ejecutar el mismo comando pero indicando el nombre del siguiente archivo de imagen."
+echo ""
