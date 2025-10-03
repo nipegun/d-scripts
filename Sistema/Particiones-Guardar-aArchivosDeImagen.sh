@@ -48,7 +48,7 @@
 # Directorio de salida
   cFecha="$(date +"y%Ym%md%dh%Hm%Ms%S")"
   vDir="backups-$(basename "$vDisco")-$cFecha"
-  mkdir -p "$vDir"
+  sudo mkdir -p "$vDir"
   vLog="$vDir/log.txt"
 
 # Separador de partición
