@@ -59,6 +59,12 @@
   vDisco="${1:-}"
   vCantidadDeParticiones="${2:-}"
 
+# Separador de partición
+  vSep=""
+  case "$vDisco" in
+    *[0-9]) vSep="p" ;;
+  esac
+
 # Calcular si hay espacio libre suficiente
   echo ""
   echo "    Comprobando espacio libre en la carpeta actual antes de continuar..."
@@ -88,12 +94,6 @@
   vDir="backups-$(basename "$vDisco")-$cFecha"
   sudo mkdir -p "$vDir"
   vLog="$vDir/log.txt"
-
-# Separador de partición
-  vSep=""
-  case "$vDisco" in
-    *[0-9]) vSep="p" ;;
-  esac
 
 # Funciones
 
