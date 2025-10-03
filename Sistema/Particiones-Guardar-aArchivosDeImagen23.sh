@@ -129,7 +129,7 @@
       sudo apt-get -y install dialog
       echo ""
     fi
-  menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+  menu=(dialog --checklist "Marca las tareas a ejecutar:" 22 80 16)
     opciones=(
       1 "Guardar tabla de particiones"                                         on
       2 "Corregir posibles errores en las particiones a clonar"                on
