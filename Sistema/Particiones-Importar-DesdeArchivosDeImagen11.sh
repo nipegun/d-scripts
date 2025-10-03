@@ -72,6 +72,7 @@
   echo ""
   echo "  Restaurando tabla de particiones en $vDiscoDestino..."
   echo ""
+  sudo wipefs -a "$vDiscoDestino"
   sudo sfdisk --force "$vDiscoDestino" < "$vArchivoTabla"
   # Ajustar la GPT al tamaño real del disco (evita el aviso de GParted)
     # Comprobar si el paquete gdisk está instalado. Si no lo está, instalarlo.
@@ -109,7 +110,6 @@
   echo ""
   echo "  Restaurando $vArchivoImagen en $vPart con $vBin..."
   echo ""
-  sudo wipefs -a "$vDiscoDestino"
   sudo $vBin -r -s "$vArchivoImagen" -O "$vPart" -N
   if [ $? -eq 0 ]; then
     echo "[LOG] Restaurada $vArchivoImagen en $vPart con $vBin" >> "$vLog"
