@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para guardar las particiones de un disco hacia archivos de imagen
+# Script de NiPeGun para guardar las particiones de un disco hacia archivos de imagen (NO ES VÁLIDO PARA FORÉNSICA!!)
 #
 # Ejecución remota con argumentos (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Guardar-aArchivosDeImagen.sh | bash -s [RutaAlDeviceDeLaUnidad] [CantDeParticiones]
@@ -121,7 +121,7 @@
       2 "Corregir posibles errores en las particiones a clonar"                on
       3 "Borrar espacio libre en las particiones a clonar (Relleno con ceros)" on
       4 "Clonar hacia archivos de imagen"                                      on
-      5 "Comprimir con xz los archivos resultantes"                            on
+      5 "Comprimir los archivos resultantes con xz"                            off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -201,11 +201,11 @@
             fi
 
             if [ -n "$vBin" ]; then
-              echo "    $vPart -> $vArchivo"
               echo ""
-              sudo $vBin -c -s "$vPart" -o "$vArchivo" -N -q
+              sudo $vBin -c -s "$vPart" -o "$vArchivo" -N -q && echo "    $vPart -> $vArchivo"
+              echo ""
             else
-              echo "[!] No hay soporte partclone para FS $vFS en $vPart"
+              echo "[!] No hay soporte de partclone para FS $vFS en $vPart"
             fi
           done
 
@@ -214,7 +214,7 @@
         5)
 
           echo ""
-          echo "  Comprimiendo con xz los archivos resultantes..."
+          echo "  Comprimiendo los archivos resultantes con xz usando $(nproc) hilos..."
           echo ""
           for vArchivo in "$vDir"/*.img; do
             if [ -f "$vArchivo" ]; then
@@ -228,6 +228,11 @@
 
 done
 
-echo ""
-echo -e "${cColorVerde}  [✓]  Proceso completado. Archivos en $vDir ${cFinColor}"
-echo ""
+# Reparar permisos de archivos
+  sudo chown $USER:$USER "$vDir"/ -R
+
+# Notificar fin de ejecución del script
+  echo ""
+  echo -e "${cColorVerde}  [✓]  Proceso completado. Archivos en $vDir ${cFinColor}"
+  echo ""
+
