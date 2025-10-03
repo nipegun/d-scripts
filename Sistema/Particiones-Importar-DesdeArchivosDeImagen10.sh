@@ -109,6 +109,7 @@
   echo ""
   echo "  Restaurando $vArchivoImagen en $vPart con $vBin..."
   echo ""
+  sudo wipefs -a "$vDiscoDestino"
   sudo $vBin -r -s "$vArchivoImagen" -O "$vPart" -N
   if [ $? -eq 0 ]; then
     echo "[LOG] Restaurada $vArchivoImagen en $vPart con $vBin" >> "$vLog"
