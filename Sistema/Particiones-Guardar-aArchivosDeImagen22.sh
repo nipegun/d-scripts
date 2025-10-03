@@ -110,7 +110,7 @@
     local vPunto="/mnt/tmp-clone-p${vNum}"
     sudo mkdir -p "$vPunto"
     if sudo mount "$vPart" "$vPunto"; then
-      sudo dd if=/dev/zero of="$vPunto/ceros.tmp" bs=1M status=progress || true
+      sudo dd if=/dev/zero of="$vPunto/ceros.tmp" bs=1M status=progress 2> /dev/null || true
       sudo sync
       sudo rm -f "$vPunto/ceros.tmp"
       sudo sync
@@ -217,7 +217,6 @@
             if [ -n "$vBin" ]; then
               echo ""
               sudo $vBin -c -s "$vPart" -o "$vArchivo" -N -q && echo -e "\n    $vPart -> $vArchivo"
-              echo ""
             else
               echo "      [!] No hay soporte de partclone para FS $vFS en $vPart"
             fi
