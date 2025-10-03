@@ -41,7 +41,7 @@
       exit
   fi
 
-# Parámetros
+# Argumentos
   vArchivoImagen="${1:-}"
   vDiscoDestino="${2:-}"
   vArchivoTabla="${3:-}"
@@ -74,20 +74,12 @@
   echo ""
   sudo sfdisk "$vDiscoDestino" < "$vArchivoTabla"
 
-# 2. Preparar imagen
-  vArchivoTmp="$vArchivoImagen"
-  if [[ "$vArchivoImagen" == *.xz ]]; then
-    echo "  Descomprimiendo $vArchivoImagen..."
-    vArchivoTmp="$vDir/$(basename "${vArchivoImagen%.xz}")"
-    sudo xz -dkc "$vArchivoImagen" > "$vArchivoTmp"
-  fi
-
-# 3. Determinar número de partición
-  vNum=$(echo "$vArchivoTmp" | sed -E 's/[^0-9]*([0-9]+).*/\1/')
+# 2. Determinar número de partición
+  vNum=$(echo "$vArchivoImagen" | sed -E 's/[^0-9]*([0-9]+).*/\1/')
   vPart="${vDiscoDestino}${vNum}"
 
-# 4. Detectar FS en el nombre del archivo
-  vFS=$(echo "$vArchivoTmp" | sed -nE 's/.*-([a-z0-9]+)\.img/\1/p')
+# 3. Detectar FS en el nombre del archivo
+  vFS=$(echo "$vArchivoImagen" | sed -nE 's/.*-([a-z0-9]+)\.img/\1/p')
   vBin="$(fBinPartclone "$vFS")"
 
   if [ -z "$vBin" ]; then
@@ -96,17 +88,16 @@
     exit 1
   fi
 
-# 5. Restaurar con partclone
-  echo "  Restaurando $vArchivoTmp en $vPart con $vBin..."
-  sudo $vBin -r -s "$vArchivoTmp" -o "$vPart" -N -q
+# 4. Restaurar con partclone
+  echo "  Restaurando $vArchivoImagen en $vPart con $vBin..."
+  sudo $vBin -r -s "$vArchivoImagen" -o "$vPart" -N -q
   if [ $? -eq 0 ]; then
-    echo "[LOG] Restaurada $vArchivoTmp en $vPart con $vBin" >> "$vLog"
+    echo "[LOG] Restaurada $vArchivoImagen en $vPart con $vBin" >> "$vLog"
   else
-    echo "[!] Error restaurando $vArchivoTmp en $vPart"
+    echo "[!] Error restaurando $vArchivoImagen en $vPart"
     exit 1
   fi
 
 echo ""
 echo "[✓] Proceso de restauración completado. Log en $vLog"
 echo ""
-
