@@ -258,7 +258,8 @@
           echo ""
           for vArchivo in "$vDir"/*.img; do
             if [ -f "$vArchivo" ]; then
-              sudo xz -9 -e -T$(nproc) -v -k "$vArchivo"
+              #sudo xz -9 -e -T$(nproc) -v -k "$vArchivo"
+              sudo xz -9 -e -T2 -v -k "$vArchivo"
             fi
           done
 
