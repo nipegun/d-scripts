@@ -16,6 +16,10 @@
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Guardar-aArchivosDeImagen.sh | nano -
+#
+#  NOTAS:
+#    El script guardará los datos en una subcarpeta de la carpeta en la que se ejecute.
+#    El nombre de esa subcarpeta será determinado por la fecha y hora de ejecución del script.
 # ----------
 
 # Definir constantes de color
