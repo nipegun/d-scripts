@@ -27,6 +27,11 @@
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
+# Notificar inicio de ejecución del script
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de guardado de particiones hacia archivos de imagen...${cFinColor}"
+  echo ""
+
 # Definir la cantidad de argumentos esperados
   cCantArgsEsperados=2
 
@@ -34,18 +39,18 @@
   if [ $# -ne $cCantArgsEsperados ]
     then
       echo ""
-      echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
+      echo -e "${cColorRojo}    Mal uso del script. El uso correcto sería: ${cFinColor}"
       echo ""
       if [[ "$0" == "bash" ]]; then
         vNombreDelScript="script.sh"
       else
         vNombreDelScript="$0"
       fi
-      echo "    $vNombreDelScript [RutaAlDeviceDeLaUnidad] [CantDeParticiones]"
+      echo "      $vNombreDelScript [RutaAlDeviceDeLaUnidad] [CantDeParticiones]"
       echo ""
-      echo "  Ejemplo:"
+      echo "    Ejemplo:"
       echo ""
-      echo "    $vNombreDelScript /dev/nvme0n1 2"
+      echo "      $vNombreDelScript /dev/nvme0n1 2"
       echo ""
       exit
   fi
@@ -118,7 +123,7 @@
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
       echo ""
-      echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+      echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
       sudo apt-get -y update
       sudo apt-get -y install dialog
@@ -142,12 +147,12 @@
         1)
 
           echo ""
-          echo "  Guardando tabla de particiones..."
+          echo "    Guardando tabla de particiones..."
           echo ""
           # Comprobar si el paquete util-linux está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s util-linux 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${cColorRojo}  El paquete util-linux no está instalado. Iniciando su instalación...${cFinColor}"
+              echo -e "${cColorRojo}      El paquete util-linux no está instalado. Iniciando su instalación...${cFinColor}"
               echo ""
               sudo apt-get -y update
               sudo apt-get -y install util-linux
@@ -160,7 +165,7 @@
         2)
 
           echo ""
-          echo "  Corrigiendo posibles errores en las particiones a clonar..."
+          echo "    Corrigiendo posibles errores en las particiones a clonar..."
           echo ""
           for ((vNum=1; vNum<=vCantidadDeParticiones; vNum++)); do
             vPart="${vDisco}${vSep}${vNum}"
@@ -174,7 +179,7 @@
         3)
 
           echo ""
-          echo "  Borrando espacio libre en las particiones a clonar..."
+          echo "    Borrando espacio libre en las particiones a clonar..."
           echo ""
           for ((vNum=1; vNum<=vCantidadDeParticiones; vNum++)); do
             vPart="${vDisco}${vSep}${vNum}"
@@ -186,12 +191,12 @@
         4)
 
           echo ""
-          echo "  Clonando hacia archivos de imagen..."
+          echo "    Clonando hacia archivos de imagen..."
           echo ""
           # Comprobar si el paquete partclone está instalado. Si no lo está, instalarlo.
             if [[ $(dpkg-query -s partclone 2>/dev/null | grep installed) == "" ]]; then
               echo ""
-              echo -e "${cColorRojo}    El paquete partclone no está instalado. Iniciando su instalación...${cFinColor}"
+              echo -e "${cColorRojo}      El paquete partclone no está instalado. Iniciando su instalación...${cFinColor}"
               echo ""
               sudo apt-get -y update
               sudo apt-get -y install partclone
@@ -205,7 +210,7 @@
 
             vMontadaEn="$(findmnt -no TARGET "$vPart" 2>/dev/null)"
             if [ -n "$vMontadaEn" ]; then
-              echo "[!] $vPart está montada en $vMontadaEn. Aborto."
+              echo "      [!] $vPart está montada en $vMontadaEn. Aborto."
               exit 1
             fi
 
@@ -214,7 +219,7 @@
               sudo $vBin -c -s "$vPart" -o "$vArchivo" -N -q && echo -e "\n    $vPart -> $vArchivo"
               echo ""
             else
-              echo "[!] No hay soporte de partclone para FS $vFS en $vPart"
+              echo "      [!] No hay soporte de partclone para FS $vFS en $vPart"
             fi
           done
 
@@ -223,7 +228,7 @@
         5)
 
           echo ""
-          echo "  Comprimiendo los archivos resultantes con xz usando $(nproc) hilos..."
+          echo "    Comprimiendo los archivos resultantes con xz usando $(nproc) hilos..."
           echo ""
           for vArchivo in "$vDir"/*.img; do
             if [ -f "$vArchivo" ]; then
@@ -242,6 +247,6 @@ done
 
 # Notificar fin de ejecución del script
   echo ""
-  echo -e "${cColorVerde}  [✓]  Proceso completado. Archivos en $vDir ${cFinColor}"
+  echo -e "${cColorVerde}    [✓] Proceso completado. Archivos en $vDir ${cFinColor}"
   echo ""
 
