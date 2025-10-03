@@ -79,15 +79,15 @@
   fCheckFS() {
     local vPart="$1"; local vFS="$2"
     case "$vFS" in
-      ext2|ext3|ext4) e2fsck -p "$vPart" ;;
-      xfs)            xfs_repair -L "$vPart" ;;
-      btrfs)          btrfs check --repair "$vPart" ;;
-      vfat|fat|fat32) fsck.vfat -a "$vPart" ;;
-      ntfs)           ntfsfix "$vPart" ;;
-      f2fs)           fsck.f2fs -a "$vPart" ;;
-      reiserfs)       reiserfsck --fix-fixable "$vPart" ;;
-      hfsplus|hfs+)   fsck.hfsplus -y "$vPart" ;;
-      exfat)          fsck.exfat -a "$vPart" ;;
+      ext2|ext3|ext4) sudo e2fsck -p "$vPart" ;;
+      xfs)            sudo xfs_repair -L "$vPart" ;;
+      btrfs)          sudo btrfs check --repair "$vPart" ;;
+      vfat|fat|fat32) sudo fsck.vfat -a "$vPart" ;;
+      ntfs)           sudo ntfsfix "$vPart" ;;
+      f2fs)           sudo fsck.f2fs -a "$vPart" ;;
+      reiserfs)       sudo reiserfsck --fix-fixable "$vPart" ;;
+      hfsplus|hfs+)   sudo fsck.hfsplus -y "$vPart" ;;
+      exfat)          sudo fsck.exfat -a "$vPart" ;;
       *) echo "No hay comprobador para $vFS"; return 0 ;;
     esac
   }
