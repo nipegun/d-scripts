@@ -15,10 +15,10 @@
   cFinColor='\033[0m'
 
 # Definir la cantidad de argumentos esperados
-  cCantParamEsperados=2
+  cCantArgsEsperados=2
 
-# Comprobar que se hayan pasado la cantidad de parámetros correctos. Abortar el script si no.
-  if [ $# -ne $cCantParamEsperados ]
+# Comprobar que se hayan pasado la cantidad de argumentos esperados. Abortar el script si no.
+  if [ $# -ne $cCantArgsEsperados ]
     then
       echo ""
       echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
@@ -28,11 +28,11 @@
       else
         vNombreDelScript="$0"
       fi
-      echo "    $vNombreDelScript [IPServSamba] [UsuarioConocido] [PassDelUsuario]"
+      echo "    $vNombreDelScript [Argumento1] [Argumentos2"
       echo ""
       echo "  Ejemplo:"
       echo ""
-      echo "    $vNombreDelScript '10.10.76.111' 'arlina' 'Default_2025!'"
+      echo "    $vNombreDelScript '10.10.76.111' 'arlina'"
       echo ""
       exit
   fi
