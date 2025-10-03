@@ -147,7 +147,6 @@
               echo ""
             fi
           sudo sfdisk -d "$vDisco" | sudo tee "$vDir/TablaDeParticiones.txt"
-          echo "[LOG] Tabla de particiones guardada en TablaDeParticiones.txt" | sudo tee -a "$vLog"
 
         ;;
 
@@ -230,4 +229,6 @@
 done
 
 echo ""
-echo "[✓] Proceso completado. Archivos en $vDir"
+echo "[✓]  Proceso completado. Archivos en $vDir"
+echo ""
+
