@@ -6,22 +6,16 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para salvar las particiones de un disco hacia archivos de imagen
+# Script de NiPeGun para guardar las particiones de un disco hacia archivos de imagen
 #
-# Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Salvar-aArchivos.sh | bash
+# Ejecución remota con argumentos (puede requerir permisos sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Guardar-aArchivos.sh | bash -s [RutaAlDeviceDeLaUnidad] [CantDeParticiones]
 #
-# Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Salvar-aArchivos.sh | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Salvar-aArchivos.sh | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Salvar-aArchivos.sh | bash -s Parámetro1 Parámetro2
+# Ejecución remota con argumentos como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Guardar-aArchivos.sh | sed 's-sudo--g' | bash -s [RutaAlDeviceDeLaUnidad] [CantDeParticiones]
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Salvar-aArchivos.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Guardar-aArchivos.sh | nano -
 # ----------
 
 # Definir la cantidad de argumentos esperados
