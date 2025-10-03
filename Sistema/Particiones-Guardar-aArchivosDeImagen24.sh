@@ -246,6 +246,8 @@ done
 
 # Notificar fin de ejecución del script
   echo ""
-  echo -e "${cColorVerde}    [✓] Proceso completado. Archivos en $vDir ${cFinColor}"
+  echo -e "${cColorVerde}    [✓] Proceso completado.${cFinColor}"
+  echo ""
+  echo -e "${cColorVerde}      Archivos creados en la carpeta: $vDir ${cFinColor}"
   echo ""
 
