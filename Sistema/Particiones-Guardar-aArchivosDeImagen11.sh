@@ -205,7 +205,7 @@
 
             if [ -n "$vBin" ]; then
               echo "    $vPart -> $vArchivo"
-              $vBin -c -s "$vPart" -o "$vArchivo" -N -q
+              sudo $vBin -c -s "$vPart" -o "$vArchivo" -N -q
               echo "[LOG] Clonado $vPart con $vBin a $vArchivo" >> "$vLog"
               vTam="$(du -h "$vArchivo" | awk '{print $1}')"
               echo "[LOG] Tamaño final de $vArchivo: $vTam" | sudo tee -a "$vLog"
