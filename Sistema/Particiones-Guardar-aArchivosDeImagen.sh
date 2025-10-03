@@ -119,7 +119,7 @@
     fi
   menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
     opciones=(
-      1 "Guardar tabla de particoines"                                         on
+      1 "Guardar tabla de particiones"                                         on
       2 "Corregir posibles errores en las particiones a clonar"                on
       3 "Borrar espacio libre en las particiones a clonar (Relleno con ceros)" off
       4 "Clonar hacia archivos de imagen"                                      on
@@ -146,8 +146,8 @@
               sudo apt-get -y install util-linux
               echo ""
             fi
-          sfdisk -d "$vDisco" > "$vDir/tabla.txt"
-          echo "[LOG] Tabla de particiones guardada en tabla.txt" >> "$vLog"
+          sudo sfdisk -d "$vDisco" > "$vDir/tabla.txt"
+          echo "[LOG] Tabla de particiones guardada en tabla.txt" | sudo tee -a "$vLog"
 
         ;;
 
