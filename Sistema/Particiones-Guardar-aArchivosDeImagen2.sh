@@ -158,7 +158,7 @@
           for ((vNum=1; vNum<=vCantidadDeParticiones; vNum++)); do
             vPart="${vDisco}${vSep}${vNum}"
             vFS="$(fTipoFS "$vPart")"
-            sudo fCheckFS "$vPart" "$vFS" | sudo tee -a "$vLog" 2>&1
+            fCheckFS "$vPart" "$vFS" | sudo tee -a "$vLog" 2>&1
           done
 
         ;;
