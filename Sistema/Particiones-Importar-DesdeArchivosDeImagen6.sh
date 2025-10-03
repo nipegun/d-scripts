@@ -72,7 +72,7 @@
   echo ""
   echo "  Restaurando tabla de particiones en $vDiscoDestino..."
   echo ""
-  sudo sfdisk "$vDiscoDestino" < "$vArchivoTabla"
+  sudo sfdisk --force "$vDiscoDestino" < "$vArchivoTabla"
   # Ajustar la GPT al tamaño real del disco (evita el aviso de GParted)
     # Comprobar si el paquete gdisk está instalado. Si no lo está, instalarlo.
       if [[ $(dpkg-query -s gdisk 2>/dev/null | grep installed) == "" ]]; then
@@ -107,7 +107,7 @@
 
 # 4. Restaurar con partclone
   echo "  Restaurando $vArchivoImagen en $vPart con $vBin..."
-  sudo $vBin -r -s "$vArchivoImagen" -o "$vPart" -N -q
+  sudo $vBin -r -s "$vArchivoImagen" -o "$vPart" -N -q --overwrite
   if [ $? -eq 0 ]; then
     echo "[LOG] Restaurada $vArchivoImagen en $vPart con $vBin" >> "$vLog"
   else
