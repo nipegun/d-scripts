@@ -9,10 +9,10 @@
 # Script de NiPeGun para restaurar a disco, particiones guardadas en archivos de imagen
 #
 # Ejecución remota con argumentos (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Importar-DesdeArchivosDeImagen.sh | bash -s  [ArchivoDeImagenDeDisco] [RutaAlDeviceDeLaUnidadDeDestino] [ArchivoConTablaDePartic]
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Importar-DesdeArchivosDeImagen.sh | bash -s [ArchivoDeImagenDeDisco] [RutaAlDeviceDeLaUnidadDeDestino] [ArchivoConTablaDeParticiones]
 #
 # Ejecución remota con argumentos como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Importar-DesdeArchivosDeImagen.sh | sed 's-sudo--g' | bash -s  [ArchivoDeImagenDeDisco] [RutaAlDeviceDeLaUnidadDeDestino] [ArchivoConTablaDePartic]
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Importar-DesdeArchivosDeImagen.sh | sed 's-sudo--g' | bash -s [ArchivoDeImagenDeDisco] [RutaAlDeviceDeLaUnidadDeDestino] [ArchivoConTablaDeParticiones]
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Importar-DesdeArchivosDeImagen.sh | nano -
@@ -32,11 +32,11 @@
       else
         vNombreDelScript="$0"
       fi
-      echo "    $vNombreDelScript [ArchivoDeImagenDeDisco] [RutaAlDeviceDeLaUnidadDeDestino] [ArchivoConTablaDePartic]"
+      echo "    $vNombreDelScript [ArchivoDeImagenDeDisco] [RutaAlDeviceDeLaUnidadDeDestino] [ArchivoConTablaDeParticiones]"
       echo ""
       echo "  Ejemplo:"
       echo ""
-      echo "    $vNombreDelScript /dev/nvme0n1 2"
+      echo "    $vNombreDelScript part1-vfat.img /dev/nvme0n1 TablaDeParticiones.txt"
       echo ""
       exit
   fi
@@ -55,31 +55,29 @@
 # Funciones auxiliares
   fBinPartclone() {
     case "$1" in
-      ext2|ext3|ext4) echo "partclone.extfs" ;;
-      vfat|fat|fat32) echo "partclone.vfat" ;;
-      ntfs) echo "partclone.ntfs" ;;
-      xfs) echo "partclone.xfs" ;;
-      btrfs) echo "partclone.btrfs" ;;
-     f2fs) echo "partclone.f2fs" ;;
-      reiserfs) echo "partclone.reiserfs" ;;
-      hfsplus|hfs+) echo "partclone.hfsp" ;;
-      exfat) echo "partclone.exfat" ;;
-      *) echo "" ;;
+      ext2|ext3|ext4) echo "partclone.extfs"    ;;
+      vfat|fat|fat32) echo "partclone.vfat"     ;;
+      ntfs)           echo "partclone.ntfs"     ;;
+      xfs)            echo "partclone.xfs"      ;;
+      btrfs)          echo "partclone.btrfs"    ;;
+      f2fs)           echo "partclone.f2fs"     ;;
+      reiserfs)       echo "partclone.reiserfs" ;;
+      hfsplus|hfs+)   echo "partclone.hfsp"     ;;
+      exfat)          echo "partclone.exfat"    ;;
+      *)              echo ""                   ;;
     esac
   }
 
 # 1. Restaurar tabla de particiones
   echo "  Restaurando tabla de particiones en $vDiscoDestino..."
-  sfdisk "$vDiscoDestino" < "$vArchivoTabla"
-  echo "[LOG] Tabla de particiones restaurada en $vDiscoDestino desde $vArchivoTabla" >> "$vLog"
+  sudo sfdisk "$vDiscoDestino" < "$vArchivoTabla"
 
 # 2. Preparar imagen
   vArchivoTmp="$vArchivoImagen"
   if [[ "$vArchivoImagen" == *.xz ]]; then
     echo "  Descomprimiendo $vArchivoImagen..."
     vArchivoTmp="$vDir/$(basename "${vArchivoImagen%.xz}")"
-    xz -dkc "$vArchivoImagen" > "$vArchivoTmp"
-    echo "[LOG] Imagen $vArchivoImagen descomprimida a $vArchivoTmp" >> "$vLog"
+    sudo xz -dkc "$vArchivoImagen" > "$vArchivoTmp"
   fi
 
 # 3. Determinar número de partición
@@ -98,14 +96,15 @@
 
 # 5. Restaurar con partclone
   echo "  Restaurando $vArchivoTmp en $vPart con $vBin..."
-  $vBin -r -s "$vArchivoTmp" -o "$vPart" -N -q
+  sudo $vBin -r -s "$vArchivoTmp" -o "$vPart" -N -q
   if [ $? -eq 0 ]; then
     echo "[LOG] Restaurada $vArchivoTmp en $vPart con $vBin" >> "$vLog"
   else
     echo "[!] Error restaurando $vArchivoTmp en $vPart"
-    echo "[ERROR] Fallo en restauración de $vArchivoTmp con $vBin" >> "$vLog"
     exit 1
   fi
 
 echo ""
 echo "[✓] Proceso de restauración completado. Log en $vLog"
+echo ""
+
