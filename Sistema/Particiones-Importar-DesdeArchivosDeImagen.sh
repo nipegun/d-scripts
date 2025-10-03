@@ -9,17 +9,17 @@
 # Script de NiPeGun para restaurar a disco, particiones guardadas en archivos de imagen
 #
 # Ejecución remota con argumentos (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Importar-DesdeArchivosDeImagen.sh | bash -s [Argumento1] [Argumento2] [Argumento3]
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Importar-DesdeArchivosDeImagen.sh | bash -s  [ArchivoDeImagenDeDisco] [RutaAlDeviceDeLaUnidadDeDestino] [ArchivoConTablaDePartic]
 #
 # Ejecución remota con argumentos como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Importar-DesdeArchivosDeImagen.sh | sed 's-sudo--g' | bash -s [Argumento1] [Argumento2] [Argumento3]
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Importar-DesdeArchivosDeImagen.sh | sed 's-sudo--g' | bash -s  [ArchivoDeImagenDeDisco] [RutaAlDeviceDeLaUnidadDeDestino] [ArchivoConTablaDePartic]
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Importar-DesdeArchivosDeImagen.sh | nano -
 # ----------
 
 # Definir la cantidad de argumentos esperados
-  cCantArgsEsperados=2
+  cCantArgsEsperados=3
 
 # Comprobar que se hayan pasado la cantidad de argumentos esperados. Abortar el script si no.
   if [ $# -ne $cCantArgsEsperados ]
@@ -32,7 +32,7 @@
       else
         vNombreDelScript="$0"
       fi
-      echo "    $vNombreDelScript [RutaAlDeviceDeLaUnidad] [CantDeParticiones]"
+      echo "    $vNombreDelScript [ArchivoDeImagenDeDisco] [RutaAlDeviceDeLaUnidadDeDestino] [ArchivoConTablaDePartic]"
       echo ""
       echo "  Ejemplo:"
       echo ""
@@ -42,8 +42,8 @@
   fi
 
 # Parámetros
-  vDiscoDestino="${1:-}"
-  vArchivoImagen="${2:-}"
+  vArchivoImagen="${1:-}"
+  vDiscoDestino="${2:-}"
   vArchivoTabla="${3:-}"
 
 # Preparar directorio de logs
