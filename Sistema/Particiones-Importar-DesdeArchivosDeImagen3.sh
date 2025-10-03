@@ -77,8 +77,8 @@
 # 2. Determinar número de partición
   vNum=$(echo "$vArchivoImagen" | sed -E 's/[^0-9]*([0-9]+).*/\1/')
 
-  # Detectar si el disco es de tipo nvme o virtio (vda, vdb, etc) → requieren "p"
-  if [[ "$vDiscoDestino" =~ nvme ]] || [[ "$vDiscoDestino" =~ vd[a-z] ]]; then
+  # Detectar tipo de dispositivo
+  if [[ "$vDiscoDestino" =~ nvme ]] || [[ "$vDiscoDestino" =~ vd[a-z] ]] || [[ "$vDiscoDestino" =~ mmcblk[0-9] ]]; then
     vPart="${vDiscoDestino}p${vNum}"
   else
     vPart="${vDiscoDestino}${vNum}"
