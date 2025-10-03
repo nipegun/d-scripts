@@ -87,7 +87,6 @@
     echo ""
     exit 1
   fi
-  echo "      [OK] Espacio suficiente detectado."
 
 # Directorio de salida
   cFecha="$(date +"y%Ym%md%dh%Hm%Ms%S")"
