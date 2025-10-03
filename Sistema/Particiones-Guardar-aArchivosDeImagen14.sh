@@ -59,8 +59,6 @@
 
 # Funciones
 
-  fTipoFS() { blkid -o value -s TYPE "$1" 2>/dev/null || echo ""; }
-
   fBinPartclone() {
     case "$1" in
       ext2|ext3|ext4) echo "partclone.extfs"    ;;
@@ -97,7 +95,7 @@
     local vNum="$2"
     local vPunto="/mnt/tmp-clone-p${vNum}"
     sudo mkdir -p "$vPunto"
-    if mount "$vPart" "$vPunto"; then
+    if sudo mount "$vPart" "$vPunto"; then
       sudo dd if=/dev/zero of="$vPunto/ceros.tmp" bs=1M status=progress || true
       sudo sync
       sudo rm -f "$vPunto/ceros.tmp"
@@ -219,7 +217,7 @@
           echo ""
           for vArchivo in "$vDir"/*.img; do
             if [ -f "$vArchivo" ]; then
-              xz -T0 -9 "$vArchivo"
+              sudo xz -T0 -9 "$vArchivo"
             fi
           done
 
