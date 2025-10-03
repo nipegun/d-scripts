@@ -46,12 +46,6 @@
   vDiscoDestino="${2:-}"
   vArchivoTabla="${3:-}"
 
-# Preparar directorio de logs
-  cFecha="$(date +"y%Ym%md%dh%Hm%Ms%S")"
-  vDir="restore-$(basename "$vDiscoDestino")-$cFecha"
-  mkdir -p "$vDir"
-  vLog="$vDir/log.txt"
-
 # Funciones auxiliares
   fBinPartclone() {
     case "$1" in
@@ -106,7 +100,6 @@
 
   if [ -z "$vBin" ]; then
     echo "[!] No se pudo determinar binario de partclone para FS '$vFS'"
-    echo "[ERROR] No hay binario partclone para FS '$vFS'" >> "$vLog"
     exit 1
   fi
 
@@ -116,14 +109,14 @@
   echo ""
   sudo $vBin -r -s "$vArchivoImagen" -O "$vPart" -N
   if [ $? -eq 0 ]; then
-    echo "[LOG] Restaurada $vArchivoImagen en $vPart con $vBin" >> "$vLog"
+    echo "[LOG] Restaurada $vArchivoImagen en $vPart con $vBin"
   else
     echo "[!] Error restaurando $vArchivoImagen en $vPart"
     exit 1
   fi
 
 echo ""
-echo "[✓] Proceso de restauración completado. Log en $vLog"
+echo "[✓] Proceso de restauración completado."
 echo ""
 echo "  Ya puedes proceder con el archivo de imagen de la partición inmediatamente posterior."
 echo "    Simplemente vuelve a ejecutar el mismo comando pero indicando el nombre del siguiente archivo de imagen."
