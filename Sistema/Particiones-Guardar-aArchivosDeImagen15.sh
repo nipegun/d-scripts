@@ -119,9 +119,9 @@
     opciones=(
       1 "Guardar tabla de particiones"                                         on
       2 "Corregir posibles errores en las particiones a clonar"                on
-      3 "Borrar espacio libre en las particiones a clonar (Relleno con ceros)" off
+      3 "Borrar espacio libre en las particiones a clonar (Relleno con ceros)" on
       4 "Clonar hacia archivos de imagen"                                      on
-      5 "Comprimir con xz los archivos resultantes"                            off
+      5 "Comprimir con xz los archivos resultantes"                            on
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -217,7 +217,7 @@
           echo ""
           for vArchivo in "$vDir"/*.img; do
             if [ -f "$vArchivo" ]; then
-              sudo xz -T0 -9 "$vArchivo"
+              sudo xz -9 -e -T$(nproc) -v -k "$vArchivo"
             fi
           done
 
