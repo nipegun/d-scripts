@@ -202,6 +202,7 @@
 
             if [ -n "$vBin" ]; then
               echo "    $vPart -> $vArchivo"
+              echo ""
               sudo $vBin -c -s "$vPart" -o "$vArchivo" -N -q
             else
               echo "[!] No hay soporte partclone para FS $vFS en $vPart"
