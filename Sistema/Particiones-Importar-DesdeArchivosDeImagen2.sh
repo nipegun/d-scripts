@@ -76,7 +76,13 @@
 
 # 2. Determinar número de partición
   vNum=$(echo "$vArchivoImagen" | sed -E 's/[^0-9]*([0-9]+).*/\1/')
-  vPart="${vDiscoDestino}${vNum}"
+
+  # Detectar si el disco es de tipo nvme o virtio (vda, vdb, etc) → requieren "p"
+  if [[ "$vDiscoDestino" =~ nvme ]] || [[ "$vDiscoDestino" =~ vd[a-z] ]]; then
+    vPart="${vDiscoDestino}p${vNum}"
+  else
+    vPart="${vDiscoDestino}${vNum}"
+  fi
 
 # 3. Detectar FS en el nombre del archivo
   vFS=$(echo "$vArchivoImagen" | sed -nE 's/.*-([a-z0-9]+)\.img/\1/p')
@@ -101,3 +107,4 @@
 echo ""
 echo "[✓] Proceso de restauración completado. Log en $vLog"
 echo ""
+
