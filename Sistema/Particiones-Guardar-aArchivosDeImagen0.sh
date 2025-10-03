@@ -9,13 +9,13 @@
 # Script de NiPeGun para guardar las particiones de un disco hacia archivos de imagen
 #
 # Ejecución remota con argumentos (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Guardar-aArchivos.sh | bash -s [RutaAlDeviceDeLaUnidad] [CantDeParticiones]
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Guardar-aArchivosDeImagen.sh | bash -s [RutaAlDeviceDeLaUnidad] [CantDeParticiones]
 #
 # Ejecución remota con argumentos como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Guardar-aArchivos.sh | sed 's-sudo--g' | bash -s [RutaAlDeviceDeLaUnidad] [CantDeParticiones]
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Guardar-aArchivosDeImagen.sh | sed 's-sudo--g' | bash -s [RutaAlDeviceDeLaUnidad] [CantDeParticiones]
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Guardar-aArchivos.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Particiones-Guardar-aArchivosDeImagen.sh | nano -
 # ----------
 
 # Definir la cantidad de argumentos esperados
@@ -146,7 +146,7 @@
               sudo apt-get -y install util-linux
               echo ""
             fi
-          sudo sfdisk -d "$vDisco" > "$vDir/TablaDeParticiones.txt"
+          sudo sfdisk -d "$vDisco" | sudo tee "$vDir/TablaDeParticiones.txt"
           echo "[LOG] Tabla de particiones guardada en TablaDeParticiones.txt" | sudo tee -a "$vLog"
 
         ;;
