@@ -63,16 +63,16 @@
 
   fBinPartclone() {
     case "$1" in
-      ext2|ext3|ext4) echo "partclone.extfs" ;;
-      vfat|fat|fat32) echo "partclone.vfat" ;;
-      ntfs) echo "partclone.ntfs" ;;
-      xfs) echo "partclone.xfs" ;;
-      btrfs) echo "partclone.btrfs" ;;
-      f2fs) echo "partclone.f2fs" ;;
-      reiserfs) echo "partclone.reiserfs" ;;
-      hfsplus|hfs+) echo "partclone.hfsp" ;;
-      exfat) echo "partclone.exfat" ;;
-      *) echo "" ;;
+      ext2|ext3|ext4) echo "partclone.extfs"    ;;
+      vfat|fat|fat32) echo "partclone.vfat"     ;;
+      ntfs)           echo "partclone.ntfs"     ;;
+      xfs)            echo "partclone.xfs"      ;;
+      btrfs)          echo "partclone.btrfs"    ;;
+      f2fs)           echo "partclone.f2fs"     ;;
+      reiserfs)       echo "partclone.reiserfs" ;;
+      hfsplus|hfs+)   echo "partclone.hfsp"     ;;
+      exfat)          echo "partclone.exfat"    ;;
+      *)              echo "" ;;
     esac
   }
 
@@ -105,11 +105,6 @@
       sudo umount "$vPunto"
       sudo rmdir "$vPunto"
     fi
-  }
-
-  fEstaMontada() {
-    local vPart="$1"
-    findmnt -no TARGET "$vPart" 2>/dev/null || true
   }
 
 # Crear el menú
@@ -186,13 +181,22 @@
           echo ""
           echo "  Clonando hacia archivos de imagen..."
           echo ""
+          # Comprobar si el paquete partclone está instalado. Si no lo está, instalarlo.
+            if [[ $(dpkg-query -s partclone 2>/dev/null | grep installed) == "" ]]; then
+              echo ""
+              echo -e "${cColorRojo}    El paquete partclone no está instalado. Iniciando su instalación...${cFinColor}"
+              echo ""
+              sudo apt-get -y update
+              sudo apt-get -y install partclone
+              echo ""
+            fi
           for ((vNum=1; vNum<=vCantidadDeParticiones; vNum++)); do
             vPart="${vDisco}${vSep}${vNum}"
             vFS="$(sudo blkid -o value -s TYPE "$1" 2>/dev/null "$vPart")"
             vBin="$(fBinPartclone "$vFS")"
             vArchivo="$vDir/part${vNum}-${vFS}.img"
 
-            vMontadaEn="$(fEstaMontada "$vPart")"
+            vMontadaEn="$(findmnt -no TARGET "$vPart" 2>/dev/null)"
             if [ -n "$vMontadaEn" ]; then
               echo "[!] $vPart está montada en $vMontadaEn. Aborto."
               echo "[ERROR] $vPart montada en $vMontadaEn" >> "$vLog"
