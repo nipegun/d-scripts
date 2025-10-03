@@ -39,8 +39,8 @@
 
 # Comprobar si se le pasó un parámetro al scrupt o no
   if [ -z "$1" ]; then
-    dd if=/dev/zero of=/ArchivoTemporal bs=1M status=progress || rm /ArchivoTemporal
+    dd if=/dev/zero of=/ArchivoTemporal bs=1M status=progress oflag=direct || rm /ArchivoTemporal
   else
-    dd if=/dev/zero of="$PuntoDeMontaje"ArchivoTemporal bs=1M status=progress || rm "$PuntoDeMontaje"ArchivoTemporal
+    dd if=/dev/zero of="$PuntoDeMontaje"ArchivoTemporal bs=1M status=progress oflag=direct || rm "$PuntoDeMontaje"ArchivoTemporal
   fi
 
