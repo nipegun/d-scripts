@@ -73,7 +73,7 @@
   for ((vNum=1; vNum<=vCantidadDeParticiones; vNum++)); do
     vPart="${vDisco}${vSep}${vNum}"
     if [ -b "$vPart" ]; then
-      vUsado=$(df -B1 --output=used "$vPart" 2>/dev/null | tail -n1)
+      vUsado=$(sudo blockdev --getsize64 "$vPart" 2>/dev/null)
       vTotalNecesario=$((vTotalNecesario + vUsado))
     fi
   done
