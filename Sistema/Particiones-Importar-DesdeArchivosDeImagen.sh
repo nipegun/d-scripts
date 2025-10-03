@@ -69,7 +69,9 @@
   }
 
 # 1. Restaurar tabla de particiones
+  echo ""
   echo "  Restaurando tabla de particiones en $vDiscoDestino..."
+  echo ""
   sudo sfdisk "$vDiscoDestino" < "$vArchivoTabla"
 
 # 2. Preparar imagen
