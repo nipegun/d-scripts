@@ -70,9 +70,12 @@
 
 # 1. Restaurar tabla de particiones
   echo ""
-  echo "  Restaurando tabla de particiones en $vDiscoDestino..."
+  echo "  Borrando todas las firmas de particiones existentes en el disco de destino ( $vDiscoDestino )"
   echo ""
   sudo wipefs -a "$vDiscoDestino"
+  echo ""
+  echo "  Restaurando tabla de particiones en $vDiscoDestino..."
+  echo ""
   sudo sfdisk --force "$vDiscoDestino" < "$vArchivoTabla"
   # Ajustar la GPT al tamaño real del disco (evita el aviso de GParted)
     # Comprobar si el paquete gdisk está instalado. Si no lo está, instalarlo.
