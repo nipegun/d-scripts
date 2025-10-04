@@ -105,6 +105,20 @@
     # Instalar Odoo
       sudo apt-get install odoo
 
+    # Notificar fin de ejecución del script
+      echo ""
+      echo "  La ejecución del script ha finalizado."
+      echo ""
+      echo "    Conéctate a la web en:"
+      echo ""
+      echo "      http://localhost:8069"
+      echo ""
+      echo "        o en:"
+      echo ""
+      vIPLocal=$(hostname -I)
+      echo "      http://$vIPLocal:8069"
+      echo ""
+
   elif [ $cVerSO == "12" ]; then
 
     echo ""
