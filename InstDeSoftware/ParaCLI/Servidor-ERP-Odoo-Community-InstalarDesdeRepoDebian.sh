@@ -85,45 +85,7 @@ elif [ $cVerSO == "10" ]; then
 
 elif [ $cVerSO == "11" ]; then
 
-  echo ""
-  echo "---------------------------------------------------------------------------"
-  echo "  Iniciando el script de instalación de Odoo para Debian 11 (Bullseye)..."  echo "---------------------------------------------------------------------------"
-  echo ""
-  apt-get -y update 2> /dev/null
-  vVersPostgre=$(apt-cache depends postgresql | grep pen | cut -d '-' -f2)
-  vVersWkHTMLtoPDF=$(apt-cache policy wkhtmltopdf | grep and | cut -d':' -f2 | sed 's- --g')
-  vVersOdoo=$(apt-cache search odoo | grep -v Voo | grep -v python | grep odoo | cut -d '-' -f2)
-  echo "Este script instalará el siguiente software:"
-  echo "  PostgreSQL v$vVersPostgre"
-  echo "  wkhtmltopdf v$vVersWkHTMLtoPDF"
-  echo "  Odoo v$vVersOdoo"
-  echo ""
-  sleep 5
 
-  echo ""
-  echo "  Instalando la base de datos PostgreSQL..." 
-echo ""
-  apt-get -y install postgresql
-
-  echo ""
-  echo "  Instalando wkhtmltopdf..." 
-echo ""
-  apt-get -y install wkhtmltopdf
-
-  echo ""
-  echo "  Instalando odoo..." 
-echo ""
-  apt-get -y install odoo
-
-  echo ""
-  echo "  Activando el servicio"
-  echo ""
-  systemctl enable --now odoo
-
-  echo ""
-  echo "  Información de puerto:"
-  echo ""
-  ss -tunelp | grep 8069
 
 fi
 
