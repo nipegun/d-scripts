@@ -9,19 +9,19 @@
 # Script de NiPeGun para instalar y configurar snipe-it en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/SnipeIt-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/SnipeIt-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/SnipeIt-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/SnipeIt-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/SnipeIt-InstalarYConfigurar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -40,16 +40,6 @@
     echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
     echo ""
     exit
-  fi
-
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    sudo apt-get -y update
-    sudo apt-get -y install curl
-    echo ""
   fi
 
 # Determinar la versión de Debian
@@ -80,9 +70,36 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de snipe-it para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Obtener el tag de la última release del repo de Github
+      echo ""
+      echo "    Obteniendo el tag de la última release del repo de Github..."
+      echo ""
+      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}      El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install curl
+          echo ""
+        fi
+      # Comprobar si el paquete jq está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s jq 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}      El paquete jq no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install jq
+          echo ""
+        fi
+      vTagUltRelGithub=$(curl -s https://api.github.com/repos/grokability/snipe-it/releases/latest | jq -r '.tag_name')
+      echo "      El tag de la última release es $vTagUltRelGithub"
+      echo ""
+
+    # Descargar el archivo
+      echo ""
+      echo "    Descargando el archivo comprimido..."
+      echo ""
 
   elif [ $cVerSO == "12" ]; then
 
