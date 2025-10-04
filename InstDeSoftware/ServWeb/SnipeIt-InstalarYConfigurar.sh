@@ -100,6 +100,16 @@
       echo ""
       echo "    Descargando el archivo comprimido..."
       echo ""
+      curl -L https://github.com/grokability/snipe-it/archive/refs/tags/"$vTagUltRelGithub".tar.gz -o /tmp/snipeit.tar.gz
+
+    # Descargar el archivo
+      echo ""
+      echo "    Descomprimiendo el código..."
+      echo ""
+      tar -xvzf /tmp/snipeit.tar.gz -C /tmp/
+      # Mover a nueva carpeta
+        vNumVers=$(echo $vTagUltRelGithub | cut -d'v' -f2)
+        mv -f "/tmp/snipe-it-$vNumVers/" "/tmp/SnipeItSource/"
 
   elif [ $cVerSO == "12" ]; then
 
@@ -107,9 +117,37 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de snipe-it para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Descargar el script oficial de instalación
+      echo ""
+      echo "    Descargando el script oficial de instalación..."
+      echo ""
+      cd /tmp/
+      # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}      El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install wget
+          echo ""
+        fi
+      wget https://raw.githubusercontent.com/grokability/snipe-it/master/install.sh
+
+    # Ejecutar script oficial de instalación
+      chmod 744 install.sh
+      # Comprobar si el paquete lsb-release está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s lsb-release 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}      El paquete lsb-release no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install lsb-release
+          echo ""
+        fi
+      sudo ./install.sh
+
+    #
+
 
   elif [ $cVerSO == "11" ]; then
 
