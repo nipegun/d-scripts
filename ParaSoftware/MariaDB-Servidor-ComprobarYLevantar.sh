@@ -6,13 +6,10 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para comprobar si un servidor MariaDB está caido y, si eso, 
+# Script de NiPeGun para comprobar si un servidor MariaDB está caido y, si eso, levantarlo
 #
 # Ejecución remota:
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/MariaDB-Servidor-ComprobarYLevantar.sh | bash -s URL Servicio
-#
-#  Ejemplo:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/MariaDB-Servidor-ComprobarYLevantar.sh | bash -s https://nightly.odoo.com/odoo.key Odoo
 # ----------
 
 vEstadoServBD=$(systemctl status mariadb.service | grep "atus:" | cut -d'"' -f2)
@@ -20,7 +17,7 @@ vEstadoServBD=$(systemctl status mariadb.service | grep "atus:" | cut -d'"' -f2)
 if [[ $vEstadoServBD == "MariaDB server is down" ]]; then
   echo ""
   echo "  El servidor MariaDB está caido. Intentando levantarlo..." 
-echo ""
+  echo ""
   systemctl start mariadb
 fi
 
