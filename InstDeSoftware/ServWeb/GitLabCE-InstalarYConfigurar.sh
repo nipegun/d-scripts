@@ -92,6 +92,9 @@ if [ $cVerSO == "13" ]; then
         echo "alertmanager['enable'] = false"          | sudo tee -a /etc/gitlab/gitlab.rb
     sudo gitlab-ctl reconfigure
 
+  # Poner en español
+    sudo sed -i 's|config.i18n.fallbacks = [:en]|config.i18n.fallbacks = [:es]|g' /opt/gitlab/embedded/service/gitlab-rails/config/application.rb
+
   # Notificar password
     echo ""
     echo "    Para loguearte usa el usuario root y el password que está en el archivo /etc/gitlab/initial_root_password."
