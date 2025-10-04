@@ -26,7 +26,7 @@
 
 vVersWazuh='4.x'
 vArchivoDeb='wazuh-agent_4.13.1-1_amd64.deb'
-vWazuhServerIP=''
+vWazuhServerIP='192.168.1.147'
 
 # Definir constantes de color
   cColorAzul='\033[0;34m'
