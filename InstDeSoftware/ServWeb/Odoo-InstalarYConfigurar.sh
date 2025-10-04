@@ -115,7 +115,7 @@
       echo ""
       echo "        o en:"
       echo ""
-      vIPLocal=$(hostname -I)
+      vIPLocal=$(hostname -I | sed 's- --g')
       echo "      http://$vIPLocal:8069"
       echo ""
 
