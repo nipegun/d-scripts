@@ -12,6 +12,8 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Git-GitLabCE-InstalarYConfigurar.sh | bash
 # ----------
 
+vFQDNGitLab="gitlab.home.arpa"
+
 cColorAzul="\033[0;34m"
 cColorAzulClaro="\033[1;34m"
 cColorVerde='\033[1;32m'
@@ -60,9 +62,56 @@ if [ $cVerSO == "13" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de GitLabCE para Debian 13 (Trixie)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+  # Actualizar el sistema
+    sudo apt-get -y update
+    sudo apt-get -y upgrade
+
+  # Instalar paquetes necesarios
+    sudo apt-get -y install curl
+    sudo apt-get -y install ca-certificates
+    sudo apt-get -y install gnupg2
+    sudo apt-get -y install lsb-release
+
+  # Instalar postfix para el sistema de mails
+    apt-get -y install postfix
+
+  # Añadir el repo
+    curl -fsSL https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash
+    # Cambiar repo trixie por bookworm (temporal haasta que haya uno oficial)
+      sudo sed -i 's-trixie-bookworm-g' /etc/apt/sources.list.d/gitlab_gitlab-ce.list
+    # Actualizar lista de paquetes del repo
+      sudo apt-get -y update
+
+  # Instlar paquete principal
+    sudo apt-get -y install gitlab-ce
+
+  # Configurar el DNS
+    echo "127.0.0.1 $vFQDNGitLab" | sudo tee -a /etc/hosts
+    #sed -i -e "s|external_url 'http://gitlab.example.com'|'http://gitlab.example.com'|g" /etc/gitlab/gitlab.rb
+
+  # Reconfigurar gitlab
+    # Cambios para contenedor LXC sin privilegios
+      sudo sed -i '/^package\[\x27modify_kernel_parameters\x27\]/d' /etc/gitlab/gitlab.rb
+      echo "package['modify_kernel_parameters'] = false" | sudo tee -a /etc/gitlab/gitlab.rb
+      # Desactivar el stack de monitorización
+        echo "prometheus_monitoring['enable'] = false" | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "node_exporter['enable'] = false"         | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "redis_exporter['enable'] = false"        | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "postgres_exporter['enable'] = false"     | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "gitlab_exporter['enable'] = false"       | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "alertmanager['enable'] = false"          | sudo tee -a /etc/gitlab/gitlab.rb
+    sudo gitlab-ctl reconfigure
+
+  # Notificar password
+    echo ""
+    echo "    Para loguearte usa el usuario root y el password que está en el archivo /etc/gitlab/initial_root_password."
+    echo ""
+    echo "    Mostrando el contenido del archivo /etc/gitlab/initial_root_password..."
+    echo ""
+    cat /etc/gitlab/initial_root_password
+
+  # Más info aquí:
+    # https://about.gitlab.com/install/#debian
 
 elif [ $cVerSO == "12" ]; then
 
@@ -109,7 +158,8 @@ elif [ $cVerSO == "11" ]; then
     echo ""
     echo "    Para loguearte usa el usuario root y el password que está en el archivo /etc/gitlab/initial_root_password."
     echo ""
-    echo "    Mostrando el contenido del archivo /etc/gitlab/initial_root_password..."    echo ""
+    echo "    Mostrando el contenido del archivo /etc/gitlab/initial_root_password..."
+    echo ""
     cat /etc/gitlab/initial_root_password
 
   # Más info aquí:
