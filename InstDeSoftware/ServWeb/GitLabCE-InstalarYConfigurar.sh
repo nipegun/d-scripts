@@ -13,6 +13,9 @@
 #
 # Ejecución remota como root (para sistemas sin sudo):
 #  https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/GitLabCE-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
+#
+# NOTAS:
+#   Más info aquí: https://about.gitlab.com/install/#debian
 # ----------
 
 vFQDNGitLab="gitlab.home.arpa"
@@ -97,8 +100,19 @@ if [ $cVerSO == "13" ]; then
     echo ""
     sudo cat /etc/gitlab/initial_root_password
 
-  # Más info aquí:
-    # https://about.gitlab.com/install/#debian
+  # Notificar fin de ejecución del script
+    echo ""
+    echo "    Ejecución del script, finalizada."
+    echo ""
+    vIPLocal=$(hostname -I | sed 's- --g' )
+    echo "      Para acceder a la web:"
+    echo ""
+    echo "        http://$vIPLocal:80"
+    echo ""
+    echo "          o"
+    echo ""
+    echo "        http://$vIPLocal:443"
+    echo ""
 
 elif [ $cVerSO == "12" ]; then
 
@@ -149,8 +163,7 @@ elif [ $cVerSO == "11" ]; then
     echo ""
     cat /etc/gitlab/initial_root_password
 
-  # Más info aquí:
-    # https://about.gitlab.com/install/#debian
+
 
 elif [ $cVerSO == "10" ]; then
 
