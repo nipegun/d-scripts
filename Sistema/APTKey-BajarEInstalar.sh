@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar nueva llave para firmar repositorios en Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/APTKey-BajarEInstalar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/APTKey-BajarEInstalar.sh | bash
 # ----------
 
 vURLKey="$1"
