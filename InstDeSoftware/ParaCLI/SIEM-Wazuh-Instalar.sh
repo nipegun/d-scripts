@@ -9,13 +9,13 @@
 # Script de NiPeGun para instalar y configurar Wazuh en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-InstalarYConfigurar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -96,8 +96,8 @@
             echo ""
             echo -e "${cColorRojo}      El paquete sudo no está instalado. Iniciando su instalación...${cFinColor}"
             echo ""
-            sudo apt-get -y update
-            sudo apt-get -y install sudo
+            apt-get -y update
+            apt-get -y install sudo
             echo ""
           fi
         sudo /tmp/wazuh-install.sh -a
@@ -107,7 +107,7 @@
       echo "    Deshabilitando actualizaciones..."
       echo ""
       sudo sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
-      sudo apt-get -y update 2> /dev/null
+      sudo apt-get -y update > /dev/null
 
     # Notificar fin de ejecución del script
       echo ""
