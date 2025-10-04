@@ -74,8 +74,21 @@ vWazuhServerIP='192.168.1.147'
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación del agente de Wazuh para Debian 13 (x)...${cFinColor}"
     echo ""
 
+    # Instalar paquetes necesarios para el correcto funcionamiento del agente
+      sudo apt-get -y update
+      sudo apt-get -y install net-tools
+
     # Descargar el script de instalación
       cd /tmp/
+      # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          apt-get -y update
+          apt-get -y install wget
+          echo ""
+        fi
       wget https://packages.wazuh.com/"$vVersWazuh"/apt/pool/main/w/wazuh-agent/"$vArchivoDeb"
 
     # Lanzar el script de instalación
