@@ -101,6 +101,7 @@
       #curl -L http://snapshot.debian.org/archive/debian/20221107T202155Z/pool/main/p/pypdf2/python3-pypdf2_1.26.0-4_all.deb          -o /tmp/python3-pypdf2-v1.deb
       curl -L http://snapshot.debian.org/archive/debian/20251004T022838Z/pool/main/p/pypdf2/python3-pypdf2_2.12.1-3%2Bdeb12u1_all.deb -o /tmp/python3-pypdf2-v2.deb
       sudo apt -y install /tmp/python3-pypdf2-v2.deb
+      sudo apt-get -y install python3-phonenumbers
 
     # Instalar Odoo
       sudo apt-get install odoo
