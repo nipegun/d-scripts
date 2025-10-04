@@ -8,11 +8,8 @@
 # ----------
 # Script de NiPeGun para preparar Debian sin entorno gráfico a gusto de NiPeGun
 #
-# Ejecución remota (puede requerir permisos sudo):
+# Ejecución remota únicamente como root:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/0-PrepararDebianCLI.sh | bash
-#
-# Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/0-PrepararDebianCLI.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
