@@ -9,7 +9,7 @@
 # Script de NiPeGun para comprobar si un servidor MariaDB está caido y, si eso, levantarlo
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/MariaDB-Servidor-ComprobarYLevantar.sh | bash -s URL Servicio
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/MariaDB-Servidor-ComprobarYLevantar.sh | bash -s URL Servicio
 # ----------
 
 vEstadoServBD=$(systemctl status mariadb.service | grep "atus:" | cut -d'"' -f2)
