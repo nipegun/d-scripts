@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar y configurar GitLabCE en Debian
 #
-# Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Git-GitLabCE-InstalarYConfigurar.sh | bash
+# Ejecución remota (puede requerir permisos sudo):
+#  https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/GitLabCE-InstalarYConfigurar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#  https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/GitLabCE-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 # ----------
 
 vFQDNGitLab="gitlab.home.arpa"
