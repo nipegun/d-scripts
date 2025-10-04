@@ -67,6 +67,15 @@
     echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
     echo ""
 
+sudo mkdir -p /mnt/PartWazuh/logs
+sudo systemctl stop wazuh-manager
+sudo rsync -avh /var/ossec/logs/ /mnt/PartWazuh/logs/
+sudo mount --bind /mnt/PartWazuh/logs /var/ossec/logs
+sudo df -h /var/ossec/logs
+echo "/mnt/PartWazuh/logs   /var/ossec/logs   none   bind   0   0" | sudo tee -a /etc/fstab
+sudo mount -a
+sudo systemctl start wazuh-manager
+
   elif [ $cVerSO == "12" ]; then
 
     echo ""
