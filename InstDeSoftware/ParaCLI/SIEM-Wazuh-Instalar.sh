@@ -67,16 +67,6 @@
     echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
     echo ""
 
-    # Cambiar carpeta de logs
-      sudo mkdir -p /mnt/PartWazuh/logs
-      sudo systemctl stop wazuh-manager
-      sudo rsync -avh /var/ossec/logs/ /mnt/PartWazuh/logs/
-      sudo mount --bind /mnt/PartWazuh/logs /var/ossec/logs
-      sudo df -h /var/ossec/logs
-      echo "/mnt/PartWazuh/logs   /var/ossec/logs   none   bind   0   0" | sudo tee -a /etc/fstab
-      sudo mount -a
-      sudo systemctl start wazuh-manager
-
   elif [ $cVerSO == "12" ]; then
 
     echo ""
@@ -119,6 +109,9 @@
       sudo sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
       sudo apt-get -y update > /dev/null
 
+    # Extraer la carpeta comprimida resultante de la instalación
+      sudo tar -xvf /tmp/wazuh-install-files.tar -C /root
+
     # Notificar fin de ejecución del script
       echo ""
       echo "    Ejecución del script, finalizada. Accede al panel de Wazuh en:"
@@ -126,10 +119,24 @@
       vIPLocal=$(hostname -I | sed 's- --g')
       echo "      https://$vIPLocal"
       echo ""
-      echo "    Si quieres ver las contraseñas de todos los usuarios de Wazuh indexer y Wazuh API puedes hacerlo de la siguiente manera:"
+      echo "    Se han guardado los certificados del servidor y las contraseñas de todos los usuarios de Wazuh indexer y Wazuh API en la carpeta:"
       echo ""
-      echo "      sudo tar -O -xvf wazuh-install-files.tar wazuh-install-files/wazuh-passwords.txt"
+      echo "      /root/wazuh-install-files/"
       echo ""
+      echo "    También se ha guardado un backup de los usuarios internos en: /etc/wazuh-indexer/internalusers-backup"
+      echo ""
+      echo "    Puedes ver la contraseña del usuario admin desplazando la terminal hacia arriba."
+      echo ""
+
+    # Cambiar carpeta de logs
+      #sudo mkdir -p /mnt/PartWazuh/logs
+      #sudo systemctl stop wazuh-manager
+      #sudo rsync -avh /var/ossec/logs/ /mnt/PartWazuh/logs/
+      #sudo mount --bind /mnt/PartWazuh/logs /var/ossec/logs
+      #sudo df -h /var/ossec/logs
+      #echo "/mnt/PartWazuh/logs   /var/ossec/logs   none   bind   0   0" | sudo tee -a /etc/fstab
+      #sudo mount -a
+      #sudo systemctl start wazuh-manager
 
   elif [ $cVerSO == "11" ]; then
 
