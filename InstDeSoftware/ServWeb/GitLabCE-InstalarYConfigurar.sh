@@ -79,8 +79,8 @@ if [ $cVerSO == "13" ]; then
     echo "127.0.0.1 $vFQDNGitLab" | sudo tee -a /etc/hosts
     #sed -i -e "s|external_url 'http://gitlab.example.com'|'http://gitlab.example.com'|g" /etc/gitlab/gitlab.rb
 
-  # Reconfigurar gitlab
-    # Cambios para contenedor LXC sin privilegios
+  # Detectar si el script se está ejecutando dentro de un contendor LXC
+    if [ "$(systemd-detect-virt)" = "lxc" ]; then
       sudo sed -i '/^package\[\x27modify_kernel_parameters\x27\]/d' /etc/gitlab/gitlab.rb
       echo "package['modify_kernel_parameters'] = false" | sudo tee -a /etc/gitlab/gitlab.rb
       # Desactivar el stack de monitorización
@@ -90,6 +90,9 @@ if [ $cVerSO == "13" ]; then
         echo "postgres_exporter['enable'] = false"     | sudo tee -a /etc/gitlab/gitlab.rb
         echo "gitlab_exporter['enable'] = false"       | sudo tee -a /etc/gitlab/gitlab.rb
         echo "alertmanager['enable'] = false"          | sudo tee -a /etc/gitlab/gitlab.rb
+    fi
+
+  # Reconfigurar gitlab
     sudo gitlab-ctl reconfigure
 
   # Poner en español
