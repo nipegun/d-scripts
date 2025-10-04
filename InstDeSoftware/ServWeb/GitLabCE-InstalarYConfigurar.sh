@@ -95,7 +95,7 @@ if [ $cVerSO == "13" ]; then
     echo ""
     echo "    Mostrando el contenido del archivo /etc/gitlab/initial_root_password..."
     echo ""
-    cat /etc/gitlab/initial_root_password
+    sudo cat /etc/gitlab/initial_root_password
 
   # Más info aquí:
     # https://about.gitlab.com/install/#debian
