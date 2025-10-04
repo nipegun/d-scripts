@@ -113,6 +113,12 @@ if [ $cVerSO == "13" ]; then
     echo ""
     echo "        http://$vIPLocal:443"
     echo ""
+    echo "      Para desactivar la recolección y el envío de eventos a la gente de GitLab:"
+    echo ""
+    echo "        - Despliega la barra lateral izquierda (si no estña desplegada) y abajo a la derecha haz click en Admin"
+    echo "        - Pasa el ratón por Settings y haz click en Metrics and profiling."
+    echo "        - Expande Event tracking, deselecciona Enable event tracking y haz clock en el botón Save changes."
+    echo ""
 
 elif [ $cVerSO == "12" ]; then
 
