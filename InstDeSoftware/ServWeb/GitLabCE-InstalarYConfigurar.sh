@@ -119,6 +119,9 @@ if [ $cVerSO == "13" ]; then
     echo "        - Pasa el ratón por Settings y haz click en Metrics and profiling."
     echo "        - Expande Event tracking, deselecciona Enable event tracking y haz clock en el botón Save changes."
     echo ""
+    echo "      Para cambiar la web de puerto hay que modificar el archivo /etc/gitlab/gitlab.rb"
+    echo "        y cambiar external_url 'http://gitlab.ejemplo.com por external_url 'https://gitlab.ejemplo.com:8443"
+    echo ""
 
 elif [ $cVerSO == "12" ]; then
 
