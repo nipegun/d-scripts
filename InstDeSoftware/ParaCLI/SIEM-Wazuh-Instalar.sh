@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar y configurar Wazuh en Debian
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/SIEM-Wazuh-Instalar.sh | nano -
@@ -70,7 +73,7 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Wazuh para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    # Determinar la última versión disppnible
+    # Determinar la última versión disponible
       echo ""
       echo "    Determinando la última versión disponible..."
       echo ""
@@ -84,17 +87,17 @@
       echo "    Instalando la versión $vUltVersSanitizada..."
       echo ""
       cd /tmp
-      rm -f wazuh-install*.sh* 2> /dev/null
+      sudo rm -f wazuh-install*.sh* 2> /dev/null
       curl -sLO https://packages.wazuh.com/"$vUltVersSanitizada"/wazuh-install.sh
       chmod +x /tmp/wazuh-install.sh
       # Instalar
         # Comprobar si el paquete sudo está instalado. Si no lo está, instalarlo.
           if [[ $(dpkg-query -s sudo 2>/dev/null | grep installed) == "" ]]; then
             echo ""
-            echo -e "${cColorRojo}  El paquete sudo no está instalado. Iniciando su instalación...${cFinColor}"
+            echo -e "${cColorRojo}      El paquete sudo no está instalado. Iniciando su instalación...${cFinColor}"
             echo ""
-            apt-get -y update
-            apt-get -y install sudo
+            sudo apt-get -y update
+            sudo apt-get -y install sudo
             echo ""
           fi
         sudo /tmp/wazuh-install.sh -a
@@ -103,8 +106,8 @@
       echo ""
       echo "    Deshabilitando actualizaciones..."
       echo ""
-      sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
-      apt update
+      sudo sed -i "s/^deb /#deb /" /etc/apt/sources.list.d/wazuh.list
+      sudo apt-get -y update 2> /dev/null
 
     # Notificar fin de ejecución del script
       echo ""
