@@ -122,6 +122,8 @@ if [ $cVerSO == "13" ]; then
     echo "      Para cambiar la web de puerto hay que modificar el archivo /etc/gitlab/gitlab.rb"
     echo "        y cambiar external_url 'http://gitlab.ejemplo.com por external_url 'https://gitlab.ejemplo.com:8443"
     echo ""
+    echo "      Para cambiar ajustes de localización: Admin > Settings > Preferences > Localization"
+    echo ""
 
 elif [ $cVerSO == "12" ]; then
 
