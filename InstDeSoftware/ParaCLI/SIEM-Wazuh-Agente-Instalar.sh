@@ -24,6 +24,10 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/SIEM-Wazuh-Agente-Instalar.sh | nano -
 # ----------
 
+vVersWazuh='4.x'
+vArchivoDeb='wazuh-agent_4.13.1-1_amd64.deb'
+vWazuhServerIP=''
+
 # Definir constantes de color
   cColorAzul='\033[0;34m'
   cColorAzulClaro='\033[1;34m'
@@ -80,9 +84,19 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación del agente de Wazuh para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Descargar el script de instalación
+      cd /tmp/
+      wget https://packages.wazuh.com/"$vVersWazuh"/apt/pool/main/w/wazuh-agent/"$vArchivoDeb"
+
+    # Lanzar el script de instalación
+      sudo WAZUH_MANAGER="$vWazuhServerIP" apt -y install ./"$vArchivoDeb"
+
+    # Iniciar el servicio
+      sudo systemctl daemon-reload
+      sudo systemctl enable wazuh-agent
+      sudo systemctl start wazuh-agent
+      sleep 3
+      sudo systemctl status wazuh-agent --no-pager
 
   elif [ $cVerSO == "12" ]; then
 
