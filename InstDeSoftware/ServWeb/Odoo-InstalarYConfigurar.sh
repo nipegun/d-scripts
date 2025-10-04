@@ -42,16 +42,6 @@
     exit
   fi
 
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    sudo apt-get -y update
-    sudo apt-get -y install curl
-    echo ""
-  fi
-
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
@@ -80,9 +70,40 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Odoo para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Instalar postgres
+      sudo apt-get -y update
+      sudo apt-get -y install postgresql
+
+    # Agregar repositorio
+      # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}    El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install wget
+          echo ""
+        fi
+      # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}    El paquete gnupg2 no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install gnupg2
+          echo ""
+        fi
+      wget -q -O - https://nightly.odoo.com/odoo.key | sudo gpg --dearmor -o /usr/share/keyrings/odoo-archive-keyring.gpg
+      echo 'deb [signed-by=/usr/share/keyrings/odoo-archive-keyring.gpg] https://nightly.odoo.com/19.0/nightly/deb/ ./' | sudo tee /etc/apt/sources.list.d/odoo.list
+      sudo apt-get -y update
+
+    # Corregir error de dependencia del paquete python3-pypdf2
+      #curl -L http://snapshot.debian.org/archive/debian/20221107T202155Z/pool/main/p/pypdf2/python3-pypdf2_1.26.0-4_all.deb          -o /tmp/python3-pypdf2-v1.deb
+      curl -L http://snapshot.debian.org/archive/debian/20251004T022838Z/pool/main/p/pypdf2/python3-pypdf2_2.12.1-3%2Bdeb12u1_all.deb -o /tmp/python3-pypdf2-v2.deb
+      sudo apt -y install /tmp/python3-pypdf2-v2.deb
+
+    # Instalar Odoo
+      sudo apt-get install odoo
 
   elif [ $cVerSO == "12" ]; then
 
