@@ -100,9 +100,177 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Odoo para Debian 11 (Bullseye)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Definir fecha de ejecución del script
+      cFechaDeEjec=$(date +a%Ym%md%d@%T)
+
+    # Crear el menú
+      # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install dialog
+          echo ""
+        fi
+      #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+        opciones=(
+          1 "Versión Community (desde la web oficial)"    on
+          2 "Versión Community (desde repos de Debian) 2" off
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+      #clear
+
+      for choice in $choices
+        do
+          case $choice in
+
+            1)
+
+              echo ""
+              echo "  Instalando versión Community desde la web..."
+              echo ""
+
+              echo ""
+              echo "  Instalando la base de datos PostgreSQL..." 
+              echo ""
+              # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo "  wget no está instalado. Iniciando su instalación..."
+                  echo ""
+                  apt-get -y update > /dev/null
+                  apt-get -y install wget
+                  echo ""
+                fi
+              # Descargar la llave para firmar el repositorio
+                mkdir -p /root/aptkeys/ 2> /dev/null
+                wget -q -O- https://www.postgresql.org/media/keys/ACCC4CF8.asc -O /root/aptkeys/postgresql.key
+                # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo "  gnupg2 no está instalado. Iniciando su instalación..."
+                    echo ""
+                    apt-get -y update > /dev/null
+                    apt-get -y install gnupg2
+                    echo ""
+                  fi
+                gpg --dearmor /root/aptkeys/postgresql.key
+                cp /root/aptkeys/postgresql.key.gpg /usr/share/keyrings/postgresql.gpg
+              # Crear el archivo de repositorio
+                echo "deb [arch=amd64 signed-by=/usr/share/keyrings/postgresql.gpg] http://apt.postgresql.org/pub/repos/apt bullseye-pgdg main" > /etc/apt/sources.list.d/postgresql.list
+              # Actualizar el cache de paquetes
+                apt-get -y update
+              # Instalar la última versión de PostreSQL
+                apt-get -y install postgresql
+              # Crear usuario
+                #su - postgres -c "createuser $UsuarioPSQL"
+              # Crear base de datos
+                #su - postgres -c "createdb $BaseDeDatosPSQL"
+
+              echo ""
+              echo "  Instalando wkhtmltopdf..." 
+              echo ""
+              # Instalar paquetes necesarios
+                apt-get -y install fontconfig
+                apt-get -y install libjpeg62-turbo
+                apt-get -y install xfonts-75dpi
+                apt-get -y install xfonts-base
+              # Determinar la URL del archivo a bajar
+                # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+                   echo ""
+                    echo "  El paquete curl no está instalado. Iniciando su instalación..."
+                    echo ""
+                    sudo apt-get -y update > /dev/null
+                    sudo apt-get -y install curl
+                    echo ""
+                  fi
+                vSubURL=$(curl -sL https://github.com/wkhtmltopdf/packaging/releases | grep href | grep .deb | grep amd64 | grep buster | head -n1 | cut -d '"' -f2)
+                rm -rf /root/SoftInst/wkhtmltopdf/
+                mkdir -p /root/SoftInst/wkhtmltopdf/ 2> /dev/null
+                cd /root/SoftInst/wkhtmltopdf/
+                wget https://github.com/$vSubURL -O wkhtmltopdf.deb
+                dpkg -i /root/SoftInst/wkhtmltopdf/wkhtmltopdf.deb
+
+              echo ""
+              echo "  Iniciando la instalación de Odoo..." 
+              echo ""
+              # Agregar llave para firmar repositorio
+                mkdir -p /root/aptkeys/ 2> /dev/null
+                wget -q -O- https://nightly.odoo.com/odoo.key -O /root/aptkeys/odoo.key
+                gpg --dearmor /root/aptkeys/odoo.key
+                cp /root/aptkeys/odoo.key.gpg /usr/share/keyrings/odoo.gpg
+              # Agregar repositorio
+                # Comprobar si el paquete gnupg2 está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s gnupg2 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo "  gnupg2 no está instalado. Iniciando su instalación..."
+                    echo ""
+                    apt-get -y update > /dev/null
+                    apt-get -y install gnupg2
+                    echo ""
+                  fi
+                vUltVersOdoo=$(curl -sL http://nightly.odoo.com/ | grep blob | grep -v master | head -n1 | cut -d '"' -f2 | sed 's-blob/-\n-g' | grep -v http | cut -d '/' -f1)
+                echo "deb [arch=amd64 signed-by=/usr/share/keyrings/odoo.gpg] http://nightly.odoo.com/$vUltVersOdoo/nightly/deb/ ./" > /etc/apt/sources.list.d/odoo.list
+              # Actualizar el cache de paquetes
+                apt-get -y update
+              # Instalar la última versión de Odoo
+                apt-get -y install odoo
+                systemctl enable --now odoo
+                echo ""
+                ss -tunelp | grep 8069
+                echo ""
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Instalando versión Community desde repos de Debian..."
+              echo ""
+              apt-get -y update 2> /dev/null
+              vVersPostgre=$(apt-cache depends postgresql | grep pen | cut -d '-' -f2)
+              vVersWkHTMLtoPDF=$(apt-cache policy wkhtmltopdf | grep and | cut -d':' -f2 | sed 's- --g')
+              vVersOdoo=$(apt-cache search odoo | grep -v Voo | grep -v python | grep odoo | cut -d '-' -f2)
+              echo "Este script instalará el siguiente software:"
+              echo "  PostgreSQL v$vVersPostgre"
+              echo "  wkhtmltopdf v$vVersWkHTMLtoPDF"
+              echo "  Odoo v$vVersOdoo"
+              echo ""
+              sleep 5
+
+              echo ""
+              echo "  Instalando la base de datos PostgreSQL..." 
+              echo ""
+              apt-get -y install postgresql
+
+              echo ""
+              echo "  Instalando wkhtmltopdf..." 
+              echo ""
+              apt-get -y install wkhtmltopdf
+
+              echo ""
+              echo "  Instalando odoo..." 
+              echo ""
+              apt-get -y install odoo
+
+              echo ""
+              echo "  Activando el servicio"
+              echo ""
+              systemctl enable --now odoo
+
+              echo ""
+              echo "  Información de puerto:"
+              echo ""
+              ss -tunelp | grep 8069
+
+            ;;
+
+        esac
+
+    done
 
   elif [ $cVerSO == "10" ]; then
 
