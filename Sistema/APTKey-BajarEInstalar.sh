@@ -9,10 +9,7 @@
 # Script de NiPeGun para instalar nueva llave para firmar repositorios en Debian
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/APTKey-BajarEInstalar.sh | bash -s URL Servicio
-#
-#  Ejemplo:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/APTKey-BajarEInstalar.sh | bash -s https://nightly.odoo.com/odoo.key Odoo
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/APTKey-BajarEInstalar.sh | bash
 # ----------
 
 vURLKey="$1"
@@ -44,56 +41,76 @@ vNombreServicio="$2"
       cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de nueva llave apt para Debian 7 (Wheezy)..." 
-echo ""
-
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Iniciando el script de instalación de nueva llave apt para Debian 13 (Trixie)..." 
   echo ""
 
-elif [ $cVerSO == "8" ]; then
-
   echo ""
-  echo "  Iniciando el script de instalación de nueva llave apt para Debian 8 (Jessie)..." 
-echo ""
-
-  echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $cVerSO == "9" ]; then
+elif [ $cVerSO == "12" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de nueva llave apt para Debian 9 (Stretch)..." 
-echo ""
-
-  echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Iniciando el script de instalación de nueva llave apt para Debian 12 (Bookworm)..." 
   echo ""
 
-elif [ $cVerSO == "10" ]; then
-
   echo ""
-  echo "  Iniciando el script de instalación de nueva llave apt para Debian 10 (Buster)..." 
-echo ""
-
-  echo ""
-  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $cVerSO == "11" ]; then
 
   echo ""
   echo "  Iniciando el script de instalación de nueva llave apt para Debian 11 (Bullseye)..." 
-echo ""
+  echo ""
 
-  mkdir -p /root/aptkeys/ 2> /dev/null
-  wget -q -O- $vURLKey -O /root/aptkeys/$vNombreServicio.key
-  gpg --dearmor /root/aptkeys/$vNombreServicio.key
-  cp /root/aptkeys/$vNombreServicio.key.gpg /usr/share/keyrings/$vNombreServicio.key.gpg
+  sudo mkdir -p /root/aptkeys/ 2> /dev/null
+  sudo wget -q -O- $vURLKey -O /root/aptkeys/$vNombreServicio.key
+  sudo gpg --dearmor /root/aptkeys/$vNombreServicio.key
+  sudo cp -f /root/aptkeys/$vNombreServicio.key.gpg /usr/share/keyrings/$vNombreServicio.key.gpg
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de nueva llave apt para Debian 10 (Buster)..." 
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "9" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de nueva llave apt para Debian 9 (Stretch)..." 
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "8" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de nueva llave apt para Debian 8 (Jessie)..." 
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de nueva llave apt para Debian 7 (Wheezy)..." 
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
 
 fi
 
