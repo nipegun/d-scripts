@@ -704,8 +704,9 @@
                 echo ""
                 echo "    Determinando la última versión disponible..."
                 echo ""
-                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep zip | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
-                echo "      La última versión disponible es la $vUltVersFlectra"
+                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f2)
+                vCanalUltVers=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f3)
+                echo "      La última versión disponible es la $vUltVersFlectra del canal $vCanalUltVers"
                 echo ""
 
               # Clonar el repo
@@ -820,7 +821,6 @@
                 sudo systemctl daemon-reload
                 sudo systemctl enable flectra
                 sudo systemctl start flectra
-
 
               # Notificar fin de ejecución del script
                 echo ""
