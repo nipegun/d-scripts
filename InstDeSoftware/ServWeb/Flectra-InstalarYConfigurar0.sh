@@ -67,10 +67,10 @@
         fi
       menu=(dialog --checklist "Cómo quieres instalar Flectra:" 22 80 16)
         opciones=(
-          1 "Agregando el repositorio de la última versión"                 off
-          2 "Descargando directamente el archivo .deb de la última versión" off
-          3 "Descargando el código fuente"                                  off
-          4 "Clonando el repo oficial de GitLab"                            on
+          1 "Clonando el repo oficial de GitLab"                            on
+          2 "Agregando el repositorio de la última versión"                 off
+          3 "Descargando directamente el archivo .deb de la última versión" off
+
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       #clear
@@ -80,177 +80,6 @@
           case $choice in
 
             1)
-
-              echo ""
-              echo "  Instalando Flectra desde el repositorio oficial para Debian..."
-              echo ""
-
-              # Descargar paquetes necesarios para la correcta ejecución del script
-                echo ""
-                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
-                echo ""
-                sudo apt-get -y update
-                sudo apt-get -y install curl
-                sudo apt-get -y install gpg
-                sudo apt-get -y install wget
-                sudo apt-get -y install gsfonts
-                sudo apt-get -y install fonts-freefont-ttf
-                sudo apt-get -y install fonts-dejavu
-
-              # Determinar la última versión disponible de Flectra
-                echo ""
-                echo "    Determinando la última versión disponible..."
-                echo ""
-                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f2)
-                vCanalUltVers=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f3)
-                echo "      La última versión disponible es la $vUltVersFlectra del canal $vCanalUltVers"
-                echo ""
-                
-              # Agregar el repositorio
-                echo ""
-                echo "    Agregando el repositorio..."
-                echo ""
-                wget -q -O - https://nightly.flectra.com/flectra.key | sudo gpg --dearmor -o /usr/share/keyrings/flectra-archive-keyring.gpg
-                echo "deb [signed-by=/usr/share/keyrings/flectra-archive-keyring.gpg] https://nightly.flectra.com/$vUltVersFlectra/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/flectra.list
-                sudo apt-get -y update
-
-              # Instalar
-                echo ""
-                echo "    Instalando..."
-                echo ""
-                sudo apt-get -y install flectra
-
-            ;;
-
-            2)
-
-              echo ""
-              echo "  Instalando Flectra desde el .deb de la última versión..."
-              echo ""
-
-              # Descargar paquetes necesarios para la correcta ejecución del script
-                echo ""
-                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
-                echo ""
-                sudo apt-get -y update
-                sudo apt-get -y install curl
-                sudo apt-get -y install gpg
-                sudo apt-get -y install wget
-                sudo apt-get -y install gsfonts
-                sudo apt-get -y install fonts-freefont-ttf
-                sudo apt-get -y install fonts-dejavu
-
-              # Determinar la última versión disponible de Flectra
-                echo ""
-                echo "    Determinando la última versión disponible..."
-                echo ""
-                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f2)
-                vCanalUltVers=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f3)
-                echo "      La última versión disponible es la $vUltVersFlectra del canal $vCanalUltVers"
-                echo ""
-
-              # Descargar el .deb
-                echo ""
-                echo "    Descargando el archivo .deb..."
-                echo ""
-                curl -L https://download.flectrahq.com/"$vUltVersFlectra"/"$vCanalUltVers"/deb/flectra_"$vUltVersFlectra".latest_all.deb -o /tmp/flectra.deb
-
-              # Instalar el archivo .deb
-                echo ""
-                echo "    Instalando el archivo .deb..."
-                echo ""
-                sudo apt -y install /tmp/flectra.deb
-
-              # Notificar fin de ejecución del script
-                echo ""
-                echo "    La ejecución del script ha finalizado."
-                echo "    Flectra está instalada y configurada."
-
-            ;;
-
-            3)
-
-              echo ""
-              echo "  Instalando Flectra descargando el código fuente..."
-              echo ""
-
-              # Descargar paquetes necesarios para la correcta ejecución del script
-                echo ""
-                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
-                echo ""
-                sudo apt-get -y update
-                sudo apt-get -y install curl
-                sudo apt-get -y install gpg
-                sudo apt-get -y install wget
-                sudo apt-get -y install gsfonts
-                sudo apt-get -y install fonts-freefont-ttf
-                sudo apt-get -y install fonts-dejavu
-                sudo apt-get -y install postgresql
-                sudo apt-get -y install postgresql-server-dev-all
-                sudo apt-get -y install build-essential
-                sudo apt-get -y install python3-dev
-                sudo apt-get -y install python3-pip
-                sudo apt-get -y install python3-venv
-                sudo apt-get -y install npm
-                sudo apt-get -y install nodejs
-                sudo apt-get -y install git
-                sudo apt-get -y install libldap2-dev
-                sudo apt-get -y install libxml2-dev
-                sudo apt-get -y install libxslt1-dev
-                sudo apt-get -y install libjpeg-dev
-                sudo apt-get -y install unzip
-                sudo apt-get -y install libsasl2-dev
-                sudo apt-get -y install libldap2-dev
-                sudo apt-get -y install libssl-dev
-
-              # Crear el usuario
-                echo ""
-                echo "    Creando el usuario del sistema..."
-                echo ""
-                sudo adduser --system --group --home /opt/flectra flectra
-                sudo su - postgres -c "createuser -s flectra"
-
-              # Determinar la última versión disponible de Flectra
-                echo ""
-                echo "    Determinando la última versión disponible..."
-                echo ""
-                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f2)
-                vCanalUltVers=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f3)
-                echo "      La última versión disponible es la $vUltVersFlectra del canal $vCanalUltVers"
-                echo ""
-
-              # Descargar el .zip
-                echo ""
-                echo "    Descargando el archivo .zip..."
-                echo ""
-                curl -L https://download.flectrahq.com/"$vUltVersFlectra"/"$vCanalUltVers"/tgz/flectra_"$vUltVersFlectra".latest.zip -o /tmp/flectra-source.zip
-
-              # Descomprimir el .zip
-                echo ""
-                echo "    Descomprimiendo el archivo .zip..."
-                echo ""
-                cd /tmp
-                unzip /tmp/flectra-source.zip
-                sudo mkdir /opt/flectra/
-                sudo cp -rv /tmp/flectra-"$vUltVersFlectra"/* /opt/flectra/
-                sudo chown flectra:flectra /opt/flectra -R
-
-              # Crear el entorno virtual
-                echo ""
-                echo "    Creando el entorno virtual..."
-                echo ""
-                sudo -u flectra bash -c '\
-                  mkdir /opt/flectra/venv/                     && \
-                  python3 -m venv /opt/flectra/venv/           && \
-                  source /opt/flectra/venv/bin/activate        && \
-                  pip install wheel                            && \
-                  pip install -r /opt/flectra/requirements.txt && \
-                  deactivate \
-                '
-
-            ;;
-
-            4)
 
               echo ""
               echo "  Instalando Flectra clonando el repo oficial de gitlab..."
@@ -425,7 +254,7 @@
                 sudo systemctl daemon-reload
                 sudo systemctl enable flectra
                 sudo systemctl start flectra
-                sudo systemctl status flectra --no-pager
+                sudo systemctl status flectra --no-pager -l
 
               # Notificar fin de ejecución del script
                 echo ""
@@ -439,6 +268,95 @@
                 echo ""
                 echo "      Para configurar la base de datos accede a http://$vIPLocal:7073"
                 echo ""
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Instalando Flectra desde el repositorio oficial para Debian..."
+              echo ""
+
+              # Descargar paquetes necesarios para la correcta ejecución del script
+                echo ""
+                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
+                echo ""
+                sudo apt-get -y update
+                sudo apt-get -y install curl
+                sudo apt-get -y install gpg
+                sudo apt-get -y install wget
+                sudo apt-get -y install gsfonts
+                sudo apt-get -y install fonts-freefont-ttf
+                sudo apt-get -y install fonts-dejavu
+
+              # Determinar la última versión disponible de Flectra
+                echo ""
+                echo "    Determinando la última versión disponible..."
+                echo ""
+                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f2)
+                vCanalUltVers=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f3)
+                echo "      La última versión disponible es la $vUltVersFlectra del canal $vCanalUltVers"
+                echo ""
+                
+              # Agregar el repositorio
+                echo ""
+                echo "    Agregando el repositorio..."
+                echo ""
+                wget -q -O - https://nightly.flectra.com/flectra.key | sudo gpg --dearmor -o /usr/share/keyrings/flectra-archive-keyring.gpg
+                echo "deb [signed-by=/usr/share/keyrings/flectra-archive-keyring.gpg] https://nightly.flectra.com/$vUltVersFlectra/nightly/deb/ ./" | sudo tee /etc/apt/sources.list.d/flectra.list
+                sudo apt-get -y update
+
+              # Instalar
+                echo ""
+                echo "    Instalando..."
+                echo ""
+                sudo apt-get -y install flectra
+
+            ;;
+
+            3)
+
+              echo ""
+              echo "  Instalando Flectra desde el .deb de la última versión..."
+              echo ""
+
+              # Descargar paquetes necesarios para la correcta ejecución del script
+                echo ""
+                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
+                echo ""
+                sudo apt-get -y update
+                sudo apt-get -y install curl
+                sudo apt-get -y install gpg
+                sudo apt-get -y install wget
+                sudo apt-get -y install gsfonts
+                sudo apt-get -y install fonts-freefont-ttf
+                sudo apt-get -y install fonts-dejavu
+
+              # Determinar la última versión disponible de Flectra
+                echo ""
+                echo "    Determinando la última versión disponible..."
+                echo ""
+                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f2)
+                vCanalUltVers=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f3)
+                echo "      La última versión disponible es la $vUltVersFlectra del canal $vCanalUltVers"
+                echo ""
+
+              # Descargar el .deb
+                echo ""
+                echo "    Descargando el archivo .deb..."
+                echo ""
+                curl -L https://download.flectrahq.com/"$vUltVersFlectra"/"$vCanalUltVers"/deb/flectra_"$vUltVersFlectra".latest_all.deb -o /tmp/flectra.deb
+
+              # Instalar el archivo .deb
+                echo ""
+                echo "    Instalando el archivo .deb..."
+                echo ""
+                sudo apt -y install /tmp/flectra.deb
+
+              # Notificar fin de ejecución del script
+                echo ""
+                echo "    La ejecución del script ha finalizado."
+                echo "    Flectra está instalada y configurada."
 
             ;;
 
@@ -464,10 +382,9 @@
         fi
       menu=(dialog --checklist "Cómo quieres instalar Flectra:" 22 80 16)
         opciones=(
-          1 "Agregando el repositorio de la última versión"                 off
-          2 "Descargando directamente el archivo .deb de la última versión" off
-          3 "Descargando el código fuente"                                  off
-          4 "Clonando el repo oficial de GitLab"                            on
+          1 "Clonando el repo oficial de GitLab"                            on
+          2 "Agregando el repositorio de la última versión"                 off
+          3 "Descargando directamente el archivo .deb de la última versión" off
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       #clear
@@ -477,177 +394,6 @@
           case $choice in
 
             1)
-
-              echo ""
-              echo "  Instalando Flectra desde el repositorio oficial para Debian..."
-              echo ""
-
-              # Descargar paquetes necesarios para la correcta ejecución del script
-                echo ""
-                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
-                echo ""
-                sudo apt-get -y update
-                sudo apt-get -y install curl
-                sudo apt-get -y install gpg
-                sudo apt-get -y install wget
-                sudo apt-get -y install gsfonts
-                sudo apt-get -y install fonts-freefont-ttf
-                sudo apt-get -y install fonts-dejavu
-
-              # Determinar la última versión disponible de Flectra
-                echo ""
-                echo "    Determinando la última versión disponible..."
-                echo ""
-                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
-                echo "      La última versión disponible es la $vUltVersFlectra"
-                echo ""
-
-              # Agregar el repositorio
-                echo ""
-                echo "    Agregando el repositorio..."
-                echo ""
-                cd /tmp
-                sudo rm -f /etc/apt/trusted.gpg.d/flectra.gpg 2> /dev/null
-                wget --no-check-certificate https://download.flectrahq.com/flectra.key -O - | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/flectra.gpg
-                echo "deb [trusted=yes] http://download.flectrahq.com/"$vUltVersFlectra"/pub/deb ./" | sudo tee /etc/apt/sources.list.d/flectra.list
-                sudo apt-get -y update
-
-              # Instalar
-                echo ""
-                echo "    Instalando..."
-                echo ""
-                apt-get install flectra
-
-            ;;
-
-            2)
-
-              echo ""
-              echo "  Instalando Flectra desde el .deb de la última versión..."
-              echo ""
-
-              # Descargar paquetes necesarios para la correcta ejecución del script
-                echo ""
-                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
-                echo ""
-                sudo apt-get -y update
-                sudo apt-get -y install curl
-                sudo apt-get -y install gpg
-                sudo apt-get -y install wget
-                sudo apt-get -y install gsfonts
-                sudo apt-get -y install fonts-freefont-ttf
-                sudo apt-get -y install fonts-dejavu
-
-              # Determinar la última versión disponible de Flectra
-                echo ""
-                echo "    Determinando la última versión disponible..."
-                echo ""
-                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
-                echo "      La última versión disponible es la $vUltVersFlectra"
-                echo ""
-
-              # Descargar el .deb
-                echo ""
-                echo "    Descargando el archivo .deb..."
-                echo ""
-                vURLIntermediaArchivo=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep deb | head -n1 | cut -d '"' -f2)
-                curl -kL https://download.flectrahq.com/"$vURLIntermediaArchivo" -o /tmp/flectra.deb
-
-              # Instalar el archivo .deb
-                echo ""
-                echo "    Instalando el archivo .deb..."
-                echo ""
-                sudo apt -y install /tmp/flectra.deb
-
-              # Notificar fin de ejecución del script
-                echo ""
-                echo "    La ejecución del script ha finalizado."
-                echo "    Flectra está instalada y configurada."
-
-            ;;
-
-            3)
-
-              echo ""
-              echo "  Instalando Flectra descargando el código fuente..."
-              echo ""
-
-              # Descargar paquetes necesarios para la correcta ejecución del script
-                echo ""
-                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
-                echo ""
-                sudo apt-get -y update
-                sudo apt-get -y install curl
-                sudo apt-get -y install gpg
-                sudo apt-get -y install wget
-                sudo apt-get -y install gsfonts
-                sudo apt-get -y install fonts-freefont-ttf
-                sudo apt-get -y install fonts-dejavu
-                sudo apt-get -y install postgresql
-                sudo apt-get -y install postgresql-server-dev-all
-                sudo apt-get -y install build-essential
-                sudo apt-get -y install python3-dev
-                sudo apt-get -y install python3-pip
-                sudo apt-get -y install python3-venv
-                sudo apt-get -y install npm
-                sudo apt-get -y install nodejs
-                sudo apt-get -y install git
-                sudo apt-get -y install libldap2-dev
-                sudo apt-get -y install libxml2-dev
-                sudo apt-get -y install libxslt1-dev
-                sudo apt-get -y install libjpeg-dev
-                sudo apt-get -y install unzip
-                sudo apt-get -y install libsasl2-dev
-                sudo apt-get -y install libldap2-dev
-                sudo apt-get -y install libssl-dev
-
-              # Crear el usuario
-                echo ""
-                echo "    Creando el usuario del sistema..."
-                echo ""
-                sudo adduser --system --group --home /opt/flectra flectra
-                sudo su - postgres -c "createuser -s flectra"
-
-              # Determinar la última versión disponible de Flectra
-                echo ""
-                echo "    Determinando la última versión disponible..."
-                echo ""
-                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep zip | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
-                echo "      La última versión disponible es la $vUltVersFlectra"
-                echo ""
-
-              # Descargar el .zip
-                echo ""
-                echo "    Descargando el archivo .zip..."
-                echo ""
-                vURLIntermediaArchivo=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep zip | head -n1 | cut -d '"' -f2)
-                curl -kL https://download.flectrahq.com/"$vURLIntermediaArchivo" -o /tmp/flectra.zip
-
-              # Descomprimir el .zip
-                echo ""
-                echo "    Descomprimiendo el archivo .zip..."
-                echo ""
-                cd /tmp
-                unzip /tmp/flectra.zip
-                sudo cp -r /tmp/flectra-"$vUltVersFlectra"/* /opt/flectra
-                sudo chown flectra:flectra /opt/flectra -R
-
-              # Crear el entorno virtual
-                echo ""
-                echo "    Creando el entorno virtual..."
-                echo ""
-                sudo -u flectra bash -c '\
-                  mkdir /opt/flectra/VirtualEnvironment/              && \
-                  python3 -m venv /opt/flectra/VirtualEnvironment/    && \
-                  source /opt/flectra/VirtualEnvironment/bin/activate && \
-                  pip install wheel                                   && \
-                  pip install -r /opt/flectra/requirements.txt        && \
-                  deactivate \
-                '
-
-            ;;
-
-            4)
 
               echo ""
               echo "  Instalando Flectra clonando el repo oficial de gitlab..."
@@ -821,6 +567,7 @@
                 sudo systemctl daemon-reload
                 sudo systemctl enable flectra
                 sudo systemctl start flectra
+                sudo systemctl status flectra --no-pager -l
 
               # Notificar fin de ejecución del script
                 echo ""
@@ -834,6 +581,96 @@
                 echo ""
                 echo "      Para configurar la base de datos accede a http://$vIPLocal:7073"
                 echo ""
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Instalando Flectra desde el repositorio oficial para Debian..."
+              echo ""
+
+              # Descargar paquetes necesarios para la correcta ejecución del script
+                echo ""
+                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
+                echo ""
+                sudo apt-get -y update
+                sudo apt-get -y install curl
+                sudo apt-get -y install gpg
+                sudo apt-get -y install wget
+                sudo apt-get -y install gsfonts
+                sudo apt-get -y install fonts-freefont-ttf
+                sudo apt-get -y install fonts-dejavu
+
+              # Determinar la última versión disponible de Flectra
+                echo ""
+                echo "    Determinando la última versión disponible..."
+                echo ""
+                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
+                echo "      La última versión disponible es la $vUltVersFlectra"
+                echo ""
+
+              # Agregar el repositorio
+                echo ""
+                echo "    Agregando el repositorio..."
+                echo ""
+                cd /tmp
+                sudo rm -f /etc/apt/trusted.gpg.d/flectra.gpg 2> /dev/null
+                wget --no-check-certificate https://download.flectrahq.com/flectra.key -O - | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/flectra.gpg
+                echo "deb [trusted=yes] http://download.flectrahq.com/"$vUltVersFlectra"/pub/deb ./" | sudo tee /etc/apt/sources.list.d/flectra.list
+                sudo apt-get -y update
+
+              # Instalar
+                echo ""
+                echo "    Instalando..."
+                echo ""
+                apt-get install flectra
+
+            ;;
+
+            3)
+
+              echo ""
+              echo "  Instalando Flectra desde el .deb de la última versión..."
+              echo ""
+
+              # Descargar paquetes necesarios para la correcta ejecución del script
+                echo ""
+                echo "    Descargando paquetes necesarios para la correcta ejecución del script..."
+                echo ""
+                sudo apt-get -y update
+                sudo apt-get -y install curl
+                sudo apt-get -y install gpg
+                sudo apt-get -y install wget
+                sudo apt-get -y install gsfonts
+                sudo apt-get -y install fonts-freefont-ttf
+                sudo apt-get -y install fonts-dejavu
+
+              # Determinar la última versión disponible de Flectra
+                echo ""
+                echo "    Determinando la última versión disponible..."
+                echo ""
+                vUltVersFlectra=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep deb | head -n1 | cut -d '"' -f2 | cut -d '/' -f1)
+                echo "      La última versión disponible es la $vUltVersFlectra"
+                echo ""
+
+              # Descargar el .deb
+                echo ""
+                echo "    Descargando el archivo .deb..."
+                echo ""
+                vURLIntermediaArchivo=$(curl -ksL download.flectrahq.com | sed 's->->\n-g' | grep href | grep latest | grep deb | head -n1 | cut -d '"' -f2)
+                curl -kL https://download.flectrahq.com/"$vURLIntermediaArchivo" -o /tmp/flectra.deb
+
+              # Instalar el archivo .deb
+                echo ""
+                echo "    Instalando el archivo .deb..."
+                echo ""
+                sudo apt -y install /tmp/flectra.deb
+
+              # Notificar fin de ejecución del script
+                echo ""
+                echo "    La ejecución del script ha finalizado."
+                echo "    Flectra está instalada y configurada."
 
             ;;
 
