@@ -92,9 +92,32 @@ vWazuhServerIP="$1"
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación del agente de Wazuh para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+   # Instalar paquetes necesarios para el correcto funcionamiento del agente
+      sudo apt-get -y update
+      sudo apt-get -y install net-tools
+
+    # Descargar el script de instalación
+      cd /tmp/
+      # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install wget
+          echo ""
+        fi
+      wget https://packages.wazuh.com/"$vVersWazuh"/apt/pool/main/w/wazuh-agent/"$vArchivoDeb"
+
+    # Lanzar el script de instalación
+      sudo WAZUH_MANAGER="$vWazuhServerIP" apt -y install ./"$vArchivoDeb"
+
+    # Iniciar el servicio
+      sudo systemctl daemon-reload
+      sudo systemctl enable wazuh-agent
+      sudo systemctl start wazuh-agent
+      sleep 3
+      sudo systemctl status wazuh-agent --no-pager
 
   elif [ $cVerSO == "11" ]; then
 
