@@ -34,10 +34,9 @@
   cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
-  #if [ $(id -u) -ne 0 ]; then     # Sólo comprueba si es root
-  if [[ $EUID -ne 0 ]]; then       # Comprueba si es root o sudo
+  if [ $(id -u) -ne 0 ]; then # Sólo comprueba si es root
     echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse con privilegios de administrador (como root o con sudo).${cFinColor}"
+    echo -e "${cColorRojo}  Este script está preparado para ejecutarse úniocamente como root.${cFinColor}"
     echo ""
     exit
   fi
@@ -47,8 +46,8 @@
     echo ""
     echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
     echo ""
-    sudo apt-get -y update
-    sudo apt-get -y install curl
+    apt-get -y update
+    apt-get -y install curl
     echo ""
   fi
 
@@ -80,18 +79,27 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de desinstalación de Wayland para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    sudo apt-get -y autoremove --purge libqt5waylandclient5
-    sudo apt-get -y autoremove --purge libqt5waylandcompositor5
-    sudo apt-get -y autoremove --purge libqt6waylandclient6
-    sudo apt-get -y autoremove --purge libqt6waylandcompositor6
-    sudo apt-get -y autoremove --purge libva-wayland2
-    sudo apt-get -y autoremove --purge libwayland-client0
-    sudo apt-get -y autoremove --purge libwayland-cursor0
-    sudo apt-get -y autoremove --purge libwayland-egl1
-    sudo apt-get -y autoremove --purge libwayland-server0
-    sudo apt-get -y autoremove --purge qt6-wayland
-    sudo apt-get -y autoremove --purge qtwayland5
-    sudo apt-get -y autoremove --purge xwayland
+    # Desinstalar todos los paquetes instalados que contengan wayland
+      apt-get -y autoremove --purge libqt5waylandclient5
+      apt-get -y autoremove --purge libqt5waylandcompositor5
+      apt-get -y autoremove --purge libqt6waylandclient6
+      apt-get -y autoremove --purge libqt6waylandcompositor6
+      apt-get -y autoremove --purge libva-wayland2
+      apt-get -y autoremove --purge libwayland-client0
+      apt-get -y autoremove --purge libwayland-cursor0
+      apt-get -y autoremove --purge libwayland-egl1
+      apt-get -y autoremove --purge libwayland-server0
+      apt-get -y autoremove --purge qt6-wayland
+      apt-get -y autoremove --purge qtwayland5
+      apt-get -y autoremove --purge xwayland
+
+    # Asegurarse de que quede bien instalado Xorg
+      apt-get -y install --reinstall xorg
+      apt-get -y install --reinstall xserver-xorg-core
+      apt-get -y install --reinstall xinit
+      apt-get -y install --reinstall x11-xserver-utils
+      apt-get -y install --reinstall xterm
+
 
   elif [ $cVerSO == "12" ]; then
 
