@@ -108,6 +108,8 @@
       apt-get -y install --no-install-recommends gnome-terminal
       apt-get -y install --no-install-recommends nautilus
       apt-get -y install --no-install-recommends sudo
+      apt-get -y install firefox-esr-l10n-es-es
+      
 
     # Asegurarse de que gnome no intente iniciar wayland
       sed -i 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/daemon.conf
