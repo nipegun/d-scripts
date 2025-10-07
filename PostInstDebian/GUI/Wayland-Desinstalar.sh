@@ -80,9 +80,18 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de desinstalación de Wayland para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    sudo apt-get -y autoremove --purge libqt5waylandclient5
+    sudo apt-get -y autoremove --purge libqt5waylandcompositor5
+    sudo apt-get -y autoremove --purge libqt6waylandclient6
+    sudo apt-get -y autoremove --purge libqt6waylandcompositor6
+    sudo apt-get -y autoremove --purge libva-wayland2
+    sudo apt-get -y autoremove --purge libwayland-client0
+    sudo apt-get -y autoremove --purge libwayland-cursor0
+    sudo apt-get -y autoremove --purge libwayland-egl1
+    sudo apt-get -y autoremove --purge libwayland-server0
+    sudo apt-get -y autoremove --purge qt6-wayland
+    sudo apt-get -y autoremove --purge qtwayland5
+    sudo apt-get -y autoremove --purge xwayland
 
   elif [ $cVerSO == "12" ]; then
 
