@@ -100,6 +100,20 @@
       apt-get -y install --reinstall x11-xserver-utils
       apt-get -y install --reinstall xterm
 
+    # Reinstalar gnome y algunos paquetes que se desinstalaron al quitar wayland
+      apt-get -y install --no-install-recommends gdm3
+      apt-get -y install --no-install-recommends gnome-shell
+      apt-get -y install --no-install-recommends gnome-session-xsession
+      apt-get -y install --no-install-recommends gnome-control-center
+      apt-get -y install --no-install-recommends gnome-terminal
+      apt-get -y install --no-install-recommends nautilus
+      apt-get -y install --no-install-recommends sudo
+
+    # Asegurarse de que gnome no intente iniciar wayland
+      sed -i 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/daemon.conf
+
+    # Reiniciar el sistema
+      shutdown -r now
 
   elif [ $cVerSO == "12" ]; then
 
