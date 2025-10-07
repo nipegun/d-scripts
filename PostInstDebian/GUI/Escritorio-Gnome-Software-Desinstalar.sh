@@ -106,6 +106,9 @@
       sudo apt-get -y autoremove --purge showtime
       sudo apt-get -y autoremove
 
+    # Desinstalar el gestor de ventanas awesome
+      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Awesome-Desinstalar.sh | bash
+
   elif [ $cVerSO == "12" ]; then
 
     echo ""
