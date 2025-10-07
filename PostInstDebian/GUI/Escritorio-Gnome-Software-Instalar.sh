@@ -262,8 +262,8 @@
       sudo apt-get -y install keepassxc
 
     # Tarjetas AMD
-      sudo apt-get -y install radeontop  # Para ver la utilización de proceso y VRAM de las tarjetas amd, en vivo
-      sudo apt-get -y install rocm-smi   # Para lo mismo que radeontop, pero con drivers rocm instalados
+      #sudo apt-get -y install radeontop  # Para ver la utilización de proceso y VRAM de las tarjetas amd, en vivo
+      #sudo apt-get -y install rocm-smi   # Para lo mismo que radeontop, pero con drivers rocm instalados
 
   elif [ $cVerSO == "12" ]; then
 
