@@ -84,6 +84,12 @@
       sudo apt-get -y autoremove --purge awesome-doc
       sudo apt-get -y autoremove --purge awesome-extra
 
+    # Borrar configuración de awesome
+      rm -rf ~/.config/awesome
+
+    # Actualizar el menú de inicio de sesión para que no aparezca la opción “Awesome”
+      sudo update-alternatives --remove x-session-manager /usr/bin/awesome
+
   elif [ $cVerSO == "12" ]; then
 
     echo ""
