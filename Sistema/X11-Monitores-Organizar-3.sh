@@ -9,7 +9,7 @@
 # Script de NiPeGun para re organizar la ubicación y resolución del triple monitor en X11
 #
 # Ejecución remota para resolución nativa de los monitores:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/X11-Monitores-Organizar-3.sh | bash -s 1920 1080
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/X11-Monitores-Organizar-3.sh | bash
 #
 # Ejecución remota pasando resolución personalizada:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/X11-Monitores-Organizar-3.sh | bash -s 1920 1080
