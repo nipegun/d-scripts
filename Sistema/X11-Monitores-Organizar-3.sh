@@ -8,20 +8,14 @@
 # ----------
 # Script de NiPeGun para re organizar la ubicación y resolución del triple monitor en X11
 #
-# Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+# Ejecución remota para resolución nativa de los monitores:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/X11-Monitores-Organizar-3.sh | bash -s 1920 1080
 #
-# Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+# Ejecución remota pasando resolución personalizada:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/X11-Monitores-Organizar-3.sh | bash -s 1920 1080
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/X11-Monitores-Organizar-3.sh | nano -
 #
 # NOTAS:
 #   Funciona tanto con MST (daisy chain) como con salidas independientes.
