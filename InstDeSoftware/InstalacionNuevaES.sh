@@ -42,6 +42,11 @@
     exit
   fi
 
+# Detectar si el script se está ejecutando dentro de un contendor LXC
+  if [ "$(systemd-detect-virt)" = "lxc" ]; then
+    echo "Contenedor LXC detectado"
+  fi
+
 # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
   if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
     echo ""
