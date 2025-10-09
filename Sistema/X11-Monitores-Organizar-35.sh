@@ -98,19 +98,21 @@ fAplicarModo "$vCentral" "$vAncho" "$vAlto"
 echo ""
 
 # Posicionar monitores
-echo "Organizando posiciones..."
-if [ -n "$vIzquierda" ]; then
-  xrandr --output "$vIzquierda" --pos 0x0
-  echo "    $vIzquierda ← posición 0x0"
-fi
-if [ -n "$vCentral" ]; then
-  xrandr --output "$vCentral" --pos 2560x0
-  echo "    $vCentral ← posición 2560x0"
-fi
-if [ -n "$vDerecha" ]; then
-  xrandr --output "$vDerecha" --pos 5120x0
-  echo "    $vDerecha ← posición 5120x0"
-fi
+  echo "Organizando posiciones..."
+  if [ -n "$vIzquierda" ]; then
+    xrandr --output "$vIzquierda" --pos 0x0
+    echo "    $vIzquierda ← posición 0x0"
+  fi
+  if [ -n "$vCentral" ]; then
+    xrandr --output "$vCentral" --pos 2560x0
+    echo "    $vCentral ← posición 2560x0"
+  fi
+  if [ -n "$vDerecha" ]; then
+    xrandr --output "$vDerecha" --pos 5120x0
+    echo "    $vDerecha ← posición 5120x0"
+  fi
+  # Hacer principal la pantalla central
+    xrandr --output "$vCentral" --primary
 
 echo ""
 echo "  Organización completada:"
