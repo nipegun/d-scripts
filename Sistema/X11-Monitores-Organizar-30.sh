@@ -49,7 +49,7 @@ echo "Hecho."
 echo ""
 
 # Detectar salidas conectadas
-aSalidasConectadas=($(xrandr | grep " connected" | grep -E "^(DisplayPort|HDMI|eDP)" | awk '{print $1}' | sort -V))
+aSalidasConectadas=($(xrandr | grep " connected" | grep -E "^(DP|HDMI|eDP|DisplayPort)" | awk '{print $1}' | sort -V))
 
 if [ ${#aSalidasConectadas[@]} -eq 0 ]; then
   echo "  No se detectaron monitores conectados."
