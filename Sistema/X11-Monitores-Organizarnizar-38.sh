@@ -48,10 +48,8 @@ if [[ "$vDriver" == *"amdgpu"* ]]; then
   echo "Usando lógica MST nativa (AMD/AMDGPU)..."
   aSalidasConectadas=($(xrandr | grep " connected" | grep -E "^(DisplayPort|HDMI|eDP)" | awk '{print $1}' | sort -V))
 elif [[ "$vDriver" == *"nvidia"* ]]; then
-  echo "Usando lógica propietaria NVIDIA (orden real por coordenadas actuales)..."
-  aSalidasConectadas=($(xrandr | grep " connected" | grep -E "^(DP|HDMI|eDP|DisplayPort)" | \
-    sed -E 's/.* ([0-9]+)x[0-9]+\+([0-9]+)\+.*/\2 \1/' | sort -n | awk '{print $2}' | \
-    while read salida; do echo "$(xrandr | grep "^$salida connected" | awk '{print $1}')"; done))
+  echo "Usando lógica propietaria NVIDIA (orden por coordenadas)..."
+  aSalidasConectadas=($(xrandr | grep " connected" | grep -E "^(DP|HDMI|eDP|DisplayPort)" | sed -E 's/.* ([0-9]+)x[0-9]+\+([0-9]+)\+.*/\2 \0/' | sort -n | awk '{print $2}' | cut -d' ' -f1))
 else
   echo "Driver no reconocido. Usando detección genérica."
   aSalidasConectadas=($(xrandr | grep " connected" | awk '{print $1}' | sort -V))
