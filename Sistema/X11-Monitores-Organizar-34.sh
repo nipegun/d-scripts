@@ -60,9 +60,10 @@ echo "Detectados ${#aSalidasConectadas[@]} monitores conectados:"
 printf '   %s\n' "${aSalidasConectadas[@]}"
 echo ""
 
-# Identificar posiciones
-vCentral="${aSalidasConectadas[0]}"
+# Identificar posiciones correctas por número de monitor en GNOME
+# Se asume: monitor 1 = centro, monitor 2 = izquierda, monitor 3 = derecha
 vIzquierda="${aSalidasConectadas[1]}"
+vCentral="${aSalidasConectadas[0]}"
 vDerecha="${aSalidasConectadas[2]}"
 
 # Función para aplicar resolución
