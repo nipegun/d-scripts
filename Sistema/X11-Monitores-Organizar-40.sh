@@ -49,7 +49,7 @@ if [[ "$vDriver" == *"amdgpu"* ]]; then
   aSalidasConectadas=($(xrandr | grep " connected" | grep -E "^(DisplayPort|HDMI|eDP)" | awk '{print $1}' | sort -V))
 elif [[ "$vDriver" == *"nvidia"* ]]; then
   echo "Usando lógica propietaria NVIDIA (orden por coordenadas)..."
-  aSalidasConectadas=($(xrandr | grep " connected" | grep -E "^(DP|HDMI|eDP|DisplayPort)" | sed -E 's/.* ([0-9]+)x[0-9]+\+([0-9]+)\+.*/\2 \0/' | sort -n | awk '{print $2}' | cut -d' ' -f1))
+  aSalidasConectadas=($(xrandr | grep " connected" | grep -E "^(DP|HDMI|eDP|DisplayPort)" | sed -E 's/.* ([0-9]+)x[0-9]+\+([0-9]+)\+.*/\2 \0/' | sort -V | awk '{print $2}' | cut -d' ' -f1))
 else
   echo "Driver no reconocido. Usando detección genérica."
   aSalidasConectadas=($(xrandr | grep " connected" | awk '{print $1}' | sort -V))
@@ -59,6 +59,9 @@ if [ ${#aSalidasConectadas[@]} -eq 0 ]; then
   echo "No se detectaron monitores conectados."
   exit 1
 fi
+
+
+
 
 echo "Detectados ${#aSalidasConectadas[@]} monitores conectados:"
 printf '   %s\n' "${aSalidasConectadas[@]}"
