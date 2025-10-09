@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para re organizar la ubicación y resolución del triple monitor en X11
+# Script de NiPeGun para reorganizar la ubicación y resolución del triple monitor en X11
 #
 # Ejecución remota para resolución nativa de los monitores:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/X11-Monitores-Organizar-3.sh | bash
@@ -14,22 +14,12 @@
 # Ejecución remota pasando resolución personalizada:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/X11-Monitores-Organizar-3.sh | bash -s 1920 1080
 #
-# Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/X11-Monitores-Organizar-3.sh | nano -
-#
 # NOTAS:
-#   Funciona tanto con MST (daisy chain) como con salidas independientes.
-#   Detecta DisplayPort, HDMI y eDP.
-#   El primer monitor detectado se coloca al centro, el segundo a la izquierda y el tercero a la derecha.
-#
-# Uso:
-#   ./OrganizarMonitores.sh [ANCHO] [ALTO]
-#
-#   Ejemplos:
-#     ./OrganizarMonitores.sh 1280 720
-#     ./OrganizarMonitores.sh   ← usa resolución nativa
+#   - Funciona tanto con MST (daisy chain) como con salidas independientes.
+#   - Detecta DisplayPort, HDMI y eDP.
+#   - En AMD usa el orden físico MST.
+#   - En NVIDIA usa las coordenadas absolutas para determinar el orden.
 # ----------
-
 
 vAncho=$1
 vAlto=$2
@@ -48,11 +38,25 @@ xrandr --fb 0x0
 echo "Hecho."
 echo ""
 
-# Detectar salidas conectadas
-aSalidasConectadas=($(xrandr | grep " connected" | grep -E "^(DP|HDMI|eDP|DisplayPort)" | sed -E 's/.* ([0-9]+)x[0-9]+\+([0-9]+)\+.*/\2 \0/' | sort -n | awk '{print $2}' | cut -d' ' -f1))
+# Detectar driver de GPU
+vDriver=$(lspci -k | grep -A2 VGA | grep "Kernel driver in use" | awk '{print $5}')
+echo "Driver gráfico detectado: $vDriver"
+echo ""
+
+# Detectar salidas conectadas según tipo de driver
+if [[ "$vDriver" == *"amdgpu"* ]]; then
+  echo "Usando lógica MST nativa (AMD/AMDGPU)..."
+  aSalidasConectadas=($(xrandr | grep " connected" | grep -E "^(DisplayPort|HDMI|eDP)" | awk '{print $1}' | sort -V))
+elif [[ "$vDriver" == *"nvidia"* ]]; then
+  echo "Usando lógica propietaria NVIDIA (orden por coordenadas)..."
+  aSalidasConectadas=($(xrandr | grep " connected" | grep -E "^(DP|HDMI|eDP|DisplayPort)" | sed -E 's/.* ([0-9]+)x[0-9]+\+([0-9]+)\+.*/\2 \0/' | sort -n | awk '{print $2}' | cut -d' ' -f1))
+else
+  echo "Driver no reconocido. Usando detección genérica."
+  aSalidasConectadas=($(xrandr | grep " connected" | awk '{print $1}' | sort -V))
+fi
 
 if [ ${#aSalidasConectadas[@]} -eq 0 ]; then
-  echo "  No se detectaron monitores conectados."
+  echo "No se detectaron monitores conectados."
   exit 1
 fi
 
@@ -60,10 +64,9 @@ echo "Detectados ${#aSalidasConectadas[@]} monitores conectados:"
 printf '   %s\n' "${aSalidasConectadas[@]}"
 echo ""
 
-# Identificar posiciones correctas por número de monitor en GNOME
-# Se asume: monitor 1 = centro, monitor 2 = izquierda, monitor 3 = derecha
-vIzquierda="${aSalidasConectadas[1]}"
-vCentral="${aSalidasConectadas[0]}"
+# Asignar posiciones: izquierda, centro, derecha
+vIzquierda="${aSalidasConectadas[0]}"
+vCentral="${aSalidasConectadas[1]}"
 vDerecha="${aSalidasConectadas[2]}"
 
 # Función para aplicar resolución
@@ -98,21 +101,24 @@ fAplicarModo "$vCentral" "$vAncho" "$vAlto"
 echo ""
 
 # Posicionar monitores
-  echo "Organizando posiciones..."
-  if [ -n "$vIzquierda" ]; then
-    xrandr --output "$vIzquierda" --pos 0x0
-    echo "    $vIzquierda ← posición 0x0"
-  fi
-  if [ -n "$vCentral" ]; then
-    xrandr --output "$vCentral" --pos 2560x0
-    echo "    $vCentral ← posición 2560x0"
-  fi
-  if [ -n "$vDerecha" ]; then
-    xrandr --output "$vDerecha" --pos 5120x0
-    echo "    $vDerecha ← posición 5120x0"
-  fi
-  # Hacer principal la pantalla central
-    xrandr --output "$vCentral" --primary
+echo "Organizando posiciones..."
+if [ -n "$vIzquierda" ]; then
+  xrandr --output "$vIzquierda" --pos 0x0
+  echo "    $vIzquierda ← posición 0x0"
+fi
+
+if [ -n "$vCentral" ]; then
+  xrandr --output "$vCentral" --pos 2560x0
+  echo "    $vCentral ← posición 2560x0"
+fi
+
+if [ -n "$vDerecha" ]; then
+  xrandr --output "$vDerecha" --pos 5120x0
+  echo "    $vDerecha ← posición 5120x0"
+fi
+
+# Marcar la pantalla central como principal
+xrandr --output "$vCentral" --primary
 
 echo ""
 echo "  Organización completada:"
