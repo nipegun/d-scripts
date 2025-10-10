@@ -86,6 +86,43 @@ vWazuhServerIP="$1"
       sleep 3
       sudo systemctl status wazuh-agent --no-pager
 
+    # Conectar con auditd
+      sudo mkdir -p /var/ossec/etc/rules/ 2> /dev/null
+      echo '<group name="auditd,">'                                          | sudo tee    /var/ossec/etc/rules/local_rules.xml
+      echo '  <rule id="100501" level="10">'                                 | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <if_sid>80700</if_sid>'                                      | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <field name="audit.key">lectura_passwd</field>'              | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <description>Lectura del archivo /etc/passwd</description>'  | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '  </rule>'                                                       | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo ''                                                                | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '  <rule id="100502" level="12">'                                 | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <if_sid>80700</if_sid>'                                      | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <field name="audit.key">lectura_shadow</field>'              | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <description>Lectura del archivo /etc/shadow</description>'  | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '  </rule>'                                                       | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo ''                                                                | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '  <rule id="100503" level="8">'                                  | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <if_sid>80700</if_sid>'                                      | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <field name="audit.key">listado_home</field>'                | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <description>Intento de listado de /home (ls)</description>' | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '  </rule>'                                                       | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo ''                                                                | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '  <rule id="100504" level="5">'                                  | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <if_sid>80700</if_sid>'                                      | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <field name="audit.key">ejecucion_pwd</field>'               | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <description>Ejecución del comando pwd</description>'        | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '  </rule>'                                                       | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo ''                                                                | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '  <rule id="100505" level="5">'                                  | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <if_sid>80700</if_sid>'                                      | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <field name="audit.key">ejecucion_whoami</field>'            | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '    <description>Ejecución del comando whoami</description>'     | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '  </rule>'                                                       | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+      echo '</group>'                                                        | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+
+    # Reinciar wazuh-manager
+      systemctl restart wazuh-manager
+
   elif [ $cVerSO == "12" ]; then
 
     echo ""
