@@ -120,6 +120,9 @@ vWazuhServerIP="$1"
       echo '  </rule>'                                                       | sudo tee -a /var/ossec/etc/rules/local_rules.xml
       echo '</group>'                                                        | sudo tee -a /var/ossec/etc/rules/local_rules.xml
 
+    # Agregar el archivo de log de audit
+      sudo sed -i -e s'|</ossec_config>|  <localfile>\n    <log_format>audit</log_format>\n    <location>/var/log/audit/audit.log</location>\n  </localfile>\n\n</ossec_config>|' /var/ossec/etc/ossec.conf
+
     # Reinciar wazuh-manager
       systemctl restart wazuh-agent
 
