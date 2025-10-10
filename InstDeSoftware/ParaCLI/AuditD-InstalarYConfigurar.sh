@@ -42,16 +42,6 @@
     exit
   fi
 
-# Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
-  if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
-    echo ""
-    echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
-    echo ""
-    sudo apt-get -y update
-    sudo apt-get -y install curl
-    echo ""
-  fi
-
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
@@ -80,9 +70,43 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de auditd para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Comprobar si el paquete auditd está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s auditd 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}    El paquete auditd no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install auditd
+        echo ""
+      fi
+
+    echo '# --- Archivos sensibles ---'                                        | sudo tee -a /etc/audit/rules.d/extra.rules
+    echo '-w /etc/passwd -p r -k lectura_passwd'                               | sudo tee -a /etc/audit/rules.d/extra.rules
+    echo '-w /etc/shadow -p r -k lectura_shadow'                               | sudo tee -a /etc/audit/rules.d/extra.rules
+    echo ''                                                                    | sudo tee -a /etc/audit/rules.d/extra.rules
+    echo '# --- Carpeta /home ---'                                             | sudo tee -a /etc/audit/rules.d/extra.rules
+    echo '-w /home -p r -k listado_home'                                       | sudo tee -a /etc/audit/rules.d/extra.rules
+    echo ''                                                                    | sudo tee -a /etc/audit/rules.d/extra.rules
+    echo '# --- Comandos específicos ---'                                      | sudo tee -a /etc/audit/rules.d/extra.rules
+    echo '-a always,exit -F path=/usr/bin/pwd -F perm=x -k ejecucion_pwd'      | sudo tee -a /etc/audit/rules.d/extra.rules
+    echo '-a always,exit -F path=/usr/bin/whoami -F perm=x -k ejecucion_whoami'| sudo tee -a /etc/audit/rules.d/extra.rules
+
+    # -w             = watch (vigilar archivo o carpeta)
+    # -p r           = permiso a vigilar (read)
+    # -a always,exit = registrar cada ejecución del binario
+    # -k             = etiqueta (clave) para identificar el evento en los logs
+
+    # Regargar auditd
+      echo ""
+      echo "    Recargando auditd..."
+      echo ""
+      sudo augenrules --load && sudo systemctl restart auditd
+
+    # Verificar que las reglas estén cargadas
+      echo ""
+      echo "    Las siguientes reglas de auditd están cargadas:"
+      echo ""
+      sudo auditctl -l
 
   elif [ $cVerSO == "12" ]; then
 
