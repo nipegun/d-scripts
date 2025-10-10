@@ -121,7 +121,7 @@ vWazuhServerIP="$1"
       echo '</group>'                                                        | sudo tee -a /var/ossec/etc/rules/local_rules.xml
 
     # Reinciar wazuh-manager
-      systemctl restart wazuh-manager
+      systemctl restart wazuh-agent
 
   elif [ $cVerSO == "12" ]; then
 
