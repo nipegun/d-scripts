@@ -84,14 +84,12 @@ vWazuhServerIP="$1"
             sudo sed -i 's|<queue_size>5000</queue_size>|<queue_size>100000</queue_size>|g'                          /var/ossec/etc/ossec.conf
             sudo sed -i 's|<events_per_second>500</events_per_second>|<events_per_second>1000</events_per_second>|g' /var/ossec/etc/ossec.conf
 
+          # Modificar el servicio
+            #sudo sed -i -e 's|\[Install]|User=wazuh\nGroup=wazuh\n\n\[Install]|g' /usr/lib/systemd/system/wazuh-agent.service
 
-
-sudo usermod -aG systemd-journal wazuh
-sudo chown -R wazuh:wazuh /var/ossec
-
-User=ossec
-Group=ossec
-
+          # Reparar permisos
+            #sudo chown wazuh:wazuh /var/ossec/ -Rv
+            #sudo chmod -R 750 /var/ossec
 
           # Iniciar el servicio
             sudo systemctl daemon-reload
