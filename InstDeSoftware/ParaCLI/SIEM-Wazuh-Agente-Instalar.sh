@@ -75,14 +75,23 @@ vWazuhServerIP="$1"
                 sudo apt-get -y install wget
                 echo ""
               fi
-            wget https://packages.wazuh.com/"$vVersWazuh"/apt/pool/main/w/wazuh-agent/"$vArchivoDeb"
+            curl -L https://packages.wazuh.com/"$vVersWazuh"/apt/pool/main/w/wazuh-agent/"$vArchivoDeb" -o /tmp/wazuh-agent.deb
 
           # Lanzar el script de instalación
-            sudo WAZUH_MANAGER="$vWazuhServerIP" apt -y install ./"$vArchivoDeb"
+            sudo WAZUH_MANAGER="$vWazuhServerIP" apt -y install /tmp/wazuh-agent.deb
 
           # Aumentar el tamaño del buffer
             sudo sed -i 's|<queue_size>5000</queue_size>|<queue_size>100000</queue_size>|g'                          /var/ossec/etc/ossec.conf
             sudo sed -i 's|<events_per_second>500</events_per_second>|<events_per_second>1000</events_per_second>|g' /var/ossec/etc/ossec.conf
+
+
+
+sudo usermod -aG systemd-journal wazuh
+sudo chown -R wazuh:wazuh /var/ossec
+
+User=ossec
+Group=ossec
+
 
           # Iniciar el servicio
             sudo systemctl daemon-reload
