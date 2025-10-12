@@ -119,6 +119,9 @@
         echo '-w /usr/sbin/userdel -p x -k userdel'                                             | sudo tee -a /etc/audit/rules.d/debian-base.rules
         echo '-w /usr/sbin/usermod -p x -k usermod'                                             | sudo tee -a /etc/audit/rules.d/debian-base.rules
         echo ''                                                                                 | sudo tee -a /etc/audit/rules.d/debian-base.rules
+        echo '# Ejecución de comandos como root'                                                | sudo tee -a /etc/audit/rules.d/debian-base.rules
+        echo '-a exit,always -F arch=b64 -F euid=0 -S execve -k ejecucion_comomroot'            | sudo tee -a /etc/audit/rules.d/debian-base.rules
+        echo ''                                                                                 | sudo tee -a /etc/audit/rules.d/debian-base.rules
 
       ;;
 
