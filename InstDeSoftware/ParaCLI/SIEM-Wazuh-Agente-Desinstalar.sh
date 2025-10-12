@@ -33,4 +33,4 @@
 # Borrar paquete
   sudo apt-get -y autoremove --purge wazuh-agent
 # Borrar carpetas
-  sudo rm -rf /var/ossec/
+  sudo rm -rfv /var/ossec/
