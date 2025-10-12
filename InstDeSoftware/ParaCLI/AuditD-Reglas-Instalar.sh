@@ -61,6 +61,17 @@
           echo "  Instalando reglas de auditd para Debian Server..."
           echo ""
 
+          echo '# --- Archivos sensibles ---'                                        | sudo tee -a /etc/audit/rules.d/debian-server.rules
+          echo '-w /etc/passwd -p r -k lectura_passwd'                               | sudo tee -a /etc/audit/rules.d/debian-server.rules
+          echo '-w /etc/shadow -p r -k lectura_shadow'                               | sudo tee -a /etc/audit/rules.d/debian-server.rules
+          echo ''                                                                    | sudo tee -a /etc/audit/rules.d/debian-server.rules
+          echo '# --- Carpeta /home ---'                                             | sudo tee -a /etc/audit/rules.d/debian-server.rules
+          echo '-w /home -p r -k listado_home'                                       | sudo tee -a /etc/audit/rules.d/debian-server.rules
+          echo ''                                                                    | sudo tee -a /etc/audit/rules.d/debian-server.rules
+          echo '# --- Comandos específicos ---'                                      | sudo tee -a /etc/audit/rules.d/debian-server.rules
+          echo '-a always,exit -F path=/usr/bin/pwd -F perm=x -k ejecucion_pwd'      | sudo tee -a /etc/audit/rules.d/debian-server.rules
+          echo '-a always,exit -F path=/usr/bin/whoami -F perm=x -k ejecucion_whoami'| sudo tee -a /etc/audit/rules.d/debian-server.rules
+
         ;;
 
         2)
