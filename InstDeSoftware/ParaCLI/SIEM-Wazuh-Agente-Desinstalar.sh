@@ -36,3 +36,15 @@
   sudo apt-get -y autoremove --purge wazuh-agent
 # Borrar carpetas
   sudo rm -rfv /var/ossec/
+  sudo rm -fv /usr/share/lintian/overrides/wazuh-agent
+  sudo rm -fv /usr/lib/systemd/system/wazuh-agent.service
+  sudo rm -fv /etc/systemd/system/wazuh-agent.service
+  sudo rm -fv /var/lib/dpkg/info/wazuh-agent.list
+  sudo rm -fv /var/lib/dpkg/info/wazuh-agent.md5sums
+  sudo rm -fv /var/lib/dpkg/info/wazuh-agent.prerm
+  sudo rm -fv /var/lib/dpkg/info/wazuh-agent.postrm
+  sudo rm -fv /var/lib/dpkg/info/wazuh-agent.postinst
+  sudo rm -fv /var/lib/dpkg/info/wazuh-agent.shlibs
+  sudo rm -fv /var/lib/dpkg/info/wazuh-agent.preinst
+  sudo rm -fv /var/lib/dpkg/info/wazuh-agent.conffiles
+  sudo rm -fv /var/lib/dpkg/info/wazuh-agent.templates
