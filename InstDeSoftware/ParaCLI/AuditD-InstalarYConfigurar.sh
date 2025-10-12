@@ -77,21 +77,25 @@
         echo ""
       fi
 
-    echo '# --- Archivos sensibles ---'                                        | sudo tee -a /etc/audit/rules.d/extra.rules
-    echo '-w /etc/passwd -p r -k lectura_passwd'                               | sudo tee -a /etc/audit/rules.d/extra.rules
-    echo '-w /etc/shadow -p r -k lectura_shadow'                               | sudo tee -a /etc/audit/rules.d/extra.rules
-    echo ''                                                                    | sudo tee -a /etc/audit/rules.d/extra.rules
-    echo '# --- Carpeta /home ---'                                             | sudo tee -a /etc/audit/rules.d/extra.rules
-    echo '-w /home -p r -k listado_home'                                       | sudo tee -a /etc/audit/rules.d/extra.rules
-    echo ''                                                                    | sudo tee -a /etc/audit/rules.d/extra.rules
-    echo '# --- Comandos específicos ---'                                      | sudo tee -a /etc/audit/rules.d/extra.rules
-    echo '-a always,exit -F path=/usr/bin/pwd -F perm=x -k ejecucion_pwd'      | sudo tee -a /etc/audit/rules.d/extra.rules
-    echo '-a always,exit -F path=/usr/bin/whoami -F perm=x -k ejecucion_whoami'| sudo tee -a /etc/audit/rules.d/extra.rules
+    # Determinar si se está en un contenedor LXC y hacer cambios para que auditd se pueda ejecutar
+      if [ "$(systemd-detect-virt)" = "lxc" ]; then
+        sudo sed -i 's|local_events = yes|local_events = no|g'  /etc/audit/auditd.conf
+        sudo sed -i 's|priority_boost = 4|priority_boost = 0|g' /etc/audit/auditd.conf
+      fi
 
-    # -w             = watch (vigilar archivo o carpeta)
-    # -p r           = permiso a vigilar (read)
-    # -a always,exit = registrar cada ejecución del binario
-    # -k             = etiqueta (clave) para identificar el evento en los logs
+    # Activar el servicio
+      sudo systemctl daemon-reload
+      sudo systemctl enable auditd.service --now
+      sudo systemctl status auditd.service --no-pager
+
+    # Instalar reglas
+      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/AuditD-Reglas-Instalar.sh | bash
+
+    # Borrar reglas no compatibles con contenedores LXC
+      if [ "$(systemd-detect-virt)" = "lxc" ]; then
+        sudo sed -i '/^-a always,exit/s/^/#/' /etc/audit/rules.d/*.rules
+        sudo sed -i '/^-w /s/^/#/'            /etc/audit/rules.d/*.rules
+      fi
 
     # Regargar auditd
       echo ""
