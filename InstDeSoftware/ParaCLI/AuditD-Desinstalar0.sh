@@ -58,16 +58,6 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de auditd para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    # Comprobar si el paquete auditd está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s auditd 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo -e "${cColorRojo}    El paquete auditd no está instalado. Iniciando su instalación...${cFinColor}"
-        echo ""
-        sudo apt-get -y update
-        sudo apt-get -y install auditd
-        echo ""
-      fi
-
     # Parar y desactivar el servicio
       sudo systemctl stop auditd.service
       sudo systemctl disable auditd.service --now
@@ -87,16 +77,6 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de auditd para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    # Comprobar si el paquete auditd está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s auditd 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo -e "${cColorRojo}    El paquete auditd no está instalado. Iniciando su instalación...${cFinColor}"
-        echo ""
-        sudo apt-get -y update
-        sudo apt-get -y install auditd
-        echo ""
-      fi
-
     # Parar y desactivar el servicio
       sudo systemctl stop auditd.service
       sudo systemctl disable auditd.service --now
@@ -115,16 +95,6 @@
     echo ""
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de auditd para Debian 11 (Bullseye)...${cFinColor}"
     echo ""
-
-    # Comprobar si el paquete auditd está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s auditd 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo -e "${cColorRojo}    El paquete auditd no está instalado. Iniciando su instalación...${cFinColor}"
-        echo ""
-        sudo apt-get -y update
-        sudo apt-get -y install auditd
-        echo ""
-      fi
 
     # Parar y desactivar el servicio
       sudo systemctl stop auditd.service
