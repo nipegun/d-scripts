@@ -67,6 +67,7 @@
       5 "Reglas para observación de mate-desktop"            off
       6 "Reglas para observación de escalada de privilegios" off
       7 "Reglas para observación de apache2"                 off
+      8 "Reglas de exlusión (para no saturar el buffer)"     on      
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -174,18 +175,18 @@
         echo ""
         echo "  Instalando reglas para Debian GNOME Desktop..."
         echo ""
-        echo ''                                              | sudo tee    /etc/audit/rules.d/debian-gnome.rules
-        echo '# Autenticación y sudo'                        | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
-        echo '-w /var/log/faillog  -p wa -k auth'            | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
-        echo '-w /var/log/lastlog  -p wa -k auth'            | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
-        echo '-w /var/log/tallylog -p wa -k auth'            | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
-        echo ''                                              | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
-        echo '# Configuración de GNOME'                      | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
-        echo '-w /etc/gdm3/           -p wa -k gdm'          | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
-        echo '-w /etc/NetworkManager/ -p wa -k netcfg'       | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
-        echo '-w /etc/pam.d/          -p wa -k pam'          | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
-        echo '-w /usr/share/gnome/    -p wa -k gnome_config' | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
-        echo '-w /etc/dconf/          -p wa -k dconf'        | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
+        echo ''                                                      | sudo tee    /etc/audit/rules.d/debian-gnome.rules
+        echo '# Autenticación y sudo'                                | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
+        echo '-w /var/log/faillog  -p wa -k auth'                    | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
+        echo '-w /var/log/lastlog  -p wa -k auth'                    | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
+        echo '-w /var/log/tallylog -p wa -k auth'                    | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
+        echo ''                                                      | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
+        echo '# Configuración de GNOME'                              | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
+        echo '-w /etc/gdm3/           -p wa -k gdm'                  | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
+        echo '-w /etc/NetworkManager/ -p wa -k netcfg'               | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
+        echo '-w /etc/pam.d/          -p wa -k pam'                  | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
+        echo '-w /usr/share/gnome/    -p wa -k gnome_config'         | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
+        echo '-w /etc/dconf/          -p wa -k dconf'                | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
 
       ;;
 
@@ -246,6 +247,24 @@
         echo '# Apache y webroot'                            | sudo tee -a /etc/audit/rules.d/debian-apache2.rules
         echo '-w /etc/apache2/ -p wa -k cambios_apache_conf' | sudo tee -a /etc/audit/rules.d/debian-apache2.rules
         echo '-w /var/www/     -p wa -k cambios_webroot'     | sudo tee -a /etc/audit/rules.d/debian-apache2.rules
+
+      ;;
+
+      8)
+
+        echo ""
+        echo "  Instalando reglas de exclusión (para no saturar el buffer)..."
+        echo ""
+
+        echo ''                                                             | sudo tee    /etc/audit/rules.d/debian-exclude.rules
+        echo '# Evitar registrar las ejecuciones internas del agente Wazuh' | sudo tee -a /etc/audit/rules.d/debian-exclude.rules
+        echo '-a never,exit -F exe=/var/ossec/bin/wazuh-syscheckd'          | sudo tee -a /etc/audit/rules.d/debian-exclude.rules
+        echo '-a never,exit -F exe=/var/ossec/bin/wazuh-logcollector'       | sudo tee -a /etc/audit/rules.d/debian-exclude.rules
+        echo '-a never,exit -F exe=/var/ossec/bin/wazuh-agentd'             | sudo tee -a /etc/audit/rules.d/debian-exclude.rules
+        echo '-a never,exit -F exe=/var/ossec/bin/wazuh-execd'              | sudo tee -a /etc/audit/rules.d/debian-exclude.rules
+        echo ''                                                             | sudo tee -a /etc/audit/rules.d/debian-exclude.rules
+        echo '# Excluir Firefox del registro de auditd'                     | sudo tee -a /etc/audit/rules.d/debian-exclude.rules
+        echo '-a never,exit -F exe=/usr/lib/firefox-esr/firefox-esr'        | sudo tee -a /etc/audit/rules.d/debian-exclude.rules
 
       ;;
 
