@@ -161,59 +161,221 @@ vWazuhServerIP="$1"
             sudo systemctl status wazuh-agent --no-pager
 
           # Preparar el archivo de configuraciópn para contenedores LXC
-            vArchivoConf="/var/ossec/etc/ossec.conf"
-            # Desactivar rootcheck
-              sudo sed -i '/<rootcheck>/,/<\/rootcheck>/s|<disabled>no</disabled>|<disabled>yes</disabled>|' "$vArchivoConf"
-            # Desactivar SCA
-              sudo sed -i '/<sca>/,/<\/sca>/s|<enabled>yes</enabled>|<enabled>no</enabled>|' "$vArchivoConf"
-            # Mantener syscollector activo y sin hardware
-              sed -i '/<wodle name="syscollector">/,/<\/wodle>/{
-                s|<disabled>yes</disabled>|<disabled>no</disabled>|
-                s|<hardware>yes</hardware>|<hardware>no</hardware>|
-              }' "$vArchivoConf"
-            # Eliminar cualquier bloque <localfile> con /var/log/audit/audit.log
-              sed -i '/<localfile>/,/<\/localfile>/{
-                /<location>\/var\/log\/audit\/audit.log<\/location>/,/<\/localfile>/d
-              }' "$vArchivoConf"
-            # Reescribir sección syscheck completa
-              sed -i '/<syscheck>/,/<\/syscheck>/c\
-                <syscheck>\n\
-                  <disabled>no</disabled>\n\
-                  <frequency>3600</frequency>\n\
-                  <scan_on_start>yes</scan_on_start>\n\
-                  <directories>/etc,/var/www,/home</directories>\n\
-                  <ignore type="sregex">.log$|.swp$</ignore>\n\
-                  <skip_nfs>yes</skip_nfs>\n\
-                  <skip_dev>yes</skip_dev>\n\
-                  <skip_proc>yes</skip_proc>\n\
-                  <skip_sys>yes</skip_sys>\n\
-                  <process_priority>10</process_priority>\n\
-                  <max_eps>50</max_eps>\n\
-                </syscheck>' "$vArchivoConf"
-            # Asegurar que active-response quede habilitado
-              sed -i '/<active-response>/,/<\/active-response>/s|<disabled>yes</disabled>|<disabled>no</disabled>|' "$vArchivoConf"
-            # Añadir logs básicos si no existen
-              if ! grep -q '/var/log/syslog' "$vArchivoConf"; then
-                echo "  <localfile>"                              | sudo tee -a "$vArchivoConf"
-                echo "    <log_format>syslog</log_format>"        | sudo tee -a "$vArchivoConf"
-                echo "    <location>/var/log/syslog</location>"   | sudo tee -a "$vArchivoConf"
-                echo "  </localfile>"                             | sudo tee -a "$vArchivoConf"
-                echo ""                                           | sudo tee -a "$vArchivoConf"
-                echo "  <localfile>"                              | sudo tee -a "$vArchivoConf"
-                echo "    <log_format>syslog</log_format>"        | sudo tee -a "$vArchivoConf"
-                echo "    <location>/var/log/auth.log</location>" | sudo tee -a "$vArchivoConf"
-                echo "  </localfile>"                             | sudo tee -a "$vArchivoConf"
-                echo ""                                           | sudo tee -a "$vArchivoConf"
-              fi
-            # Limpiar líneas vacías repetidas
-              sed -i '/^[[:space:]]*$/N;/^\n$/D' "$vArchivoConf"
+            sudo cp -v /var/ossec/etc/ossec.conf /var/ossec/etc/ossec.conf.bak
+            sudo tee /var/ossec/etc/ossec.conf > /dev/null <<-'EOF'
+<!--
+  Wazuh - Agent - Configuración optimizada para contenedores LXC sin privilegios
+  NiPeGun - Debian 12/13
+-->
+
+<ossec_config>
+  <client>
+    <server>
+      <address>10.10.0.250</address>
+      <port>1514</port>
+      <protocol>tcp</protocol>
+    </server>
+    <config-profile>debian, debian12</config-profile>
+    <notify_time>20</notify_time>
+    <time-reconnect>60</time-reconnect>
+    <auto_restart>yes</auto_restart>
+    <crypto_method>aes</crypto_method>
+  </client>
+
+  <client_buffer>
+    <disabled>no</disabled>
+    <queue_size>5000</queue_size>
+    <events_per_second>500</events_per_second>
+  </client_buffer>
+
+  <rootcheck>
+    <disabled>yes</disabled>
+  </rootcheck>
+
+  <wodle name="osquery">
+    <disabled>yes</disabled>
+  </wodle>
+
+  <wodle name="syscollector">
+    <disabled>no</disabled>
+    <interval>1h</interval>
+    <scan_on_start>yes</scan_on_start>
+    <hardware>no</hardware>
+    <os>yes</os>
+    <network>yes</network>
+    <packages>yes</packages>
+    <ports all="yes">yes</ports>
+    <processes>yes</processes>
+    <synchronization>
+      <max_eps>10</max_eps>
+    </synchronization>
+  </wodle>
+
+  <sca>
+    <enabled>no</enabled>
+  </sca>
+
+  <syscheck>
+    <disabled>no</disabled>
+    <frequency>3600</frequency>
+    <scan_on_start>yes</scan_on_start>
+    <directories>/etc,/var/www,/home</directories>
+    <ignore>/etc/mtab</ignore>
+    <ignore>/etc/hosts.deny</ignore>
+    <ignore>/etc/adjtime</ignore>
+    <ignore type="sregex">.log$|.swp$</ignore>
+    <skip_nfs>yes</skip_nfs>
+    <skip_dev>yes</skip_dev>
+    <skip_proc>yes</skip_proc>
+    <skip_sys>yes</skip_sys>
+    <process_priority>10</process_priority>
+    <max_eps>50</max_eps>
+    <synchronization>
+      <enabled>yes</enabled>
+      <interval>5m</interval>
+      <max_eps>10</max_eps>
+    </synchronization>
+  </syscheck>
+
+  <localfile>
+    <log_format>journald</log_format>
+    <location>journald</location>
+  </localfile>
+
+  <localfile>
+    <log_format>syslog</log_format>
+    <location>/var/log/auth.log</location>
+  </localfile>
+
+  <localfile>
+    <log_format>syslog</log_format>
+    <location>/var/log/syslog</location>
+  </localfile>
+
+  <localfile>
+    <log_format>apache</log_format>
+    <location>/var/log/apache2/error.log</location>
+  </localfile>
+
+  <localfile>
+    <log_format>apache</log_format>
+    <location>/var/log/apache2/access.log</location>
+  </localfile>
+
+  <active-response>
+    <disabled>no</disabled>
+    <ca_store>etc/wpk_root.pem</ca_store>
+    <ca_verification>yes</ca_verification>
+  </active-response>
+
+  <logging>
+    <log_format>plain</log_format>
+  </logging>
+</ossec_config>
+EOF
 
           # Crear nuevas reglas
-            /var/ossec/etc/rules/lxc_rules.xml
+            sudo mkdir -p /var/ossec/etc/rules/
+            sudo tee /var/ossec/etc/rules/lxc_rules.xml > /dev/null <<-'EOF'
+<!--
+  Reglas personalizadas para agente Wazuh en contenedor LXC Debian sin privilegios
+  NiPeGun - 2025
+-->
+
+<group name="local,">
+  
+  <!-- ========================================= -->
+  <!--  SSH: intentos fallidos y fuerza bruta    -->
+  <!-- ========================================= -->
+  <group name="ssh,authentication,">
+    <rule id="100100" level="5">
+      <if_sid>5710</if_sid>
+      <description>SSH: intento fallido de inicio de sesión dentro del contenedor LXC</description>
+      <group>ssh,authentication,invalid_login,</group>
+    </rule>
+
+    <rule id="100101" level="8" frequency="5" timeframe="300">
+      <if_matched_sid>5710</if_matched_sid>
+      <description>SSH: múltiples intentos fallidos de inicio de sesión dentro del contenedor LXC</description>
+      <group>ssh,authentication,bruteforce,</group>
+    </rule>
+  </group>
+
+  <!-- ========================================= -->
+  <!--  Dpkg / APT: instalación y eliminación    -->
+  <!-- ========================================= -->
+  <group name="apt,dpkg,">
+    <rule id="100110" level="4">
+      <decoded_as>syslog</decoded_as>
+      <match>install</match>
+      <description>Paquete instalado dentro del contenedor Debian</description>
+    </rule>
+
+    <rule id="100111" level="4">
+      <decoded_as>syslog</decoded_as>
+      <match>upgrade</match>
+      <description>Paquete actualizado dentro del contenedor Debian</description>
+    </rule>
+
+    <rule id="100112" level="7">
+      <decoded_as>syslog</decoded_as>
+      <match>remove</match>
+      <description>Paquete desinstalado dentro del contenedor Debian</description>
+    </rule>
+  </group>
+
+  <!-- ========================================= -->
+  <!--  Sistema: reinicio detectado              -->
+  <!-- ========================================= -->
+  <group name="system,">
+    <rule id="100120" level="5">
+      <match>systemd.*Starting.*hostname.service</match>
+      <description>El contenedor LXC Debian se está reiniciando (hostname.service)</description>
+    </rule>
+  </group>
+
+  <!-- ========================================= -->
+  <!--  Red: nuevos puertos en escucha           -->
+  <!-- ========================================= -->
+  <group name="network,ports,">
+    <rule id="100130" level="7">
+      <match>LISTEN</match>
+      <description>Nuevo puerto en escucha detectado dentro del contenedor LXC</description>
+    </rule>
+  </group>
+
+  <!-- ========================================= -->
+  <!--  Procesos sospechosos o shell abierta     -->
+  <!-- ========================================= -->
+  <group name="process,">
+    <rule id="100140" level="8">
+      <match>bash</match>
+      <description>Shell interactiva iniciada dentro del contenedor LXC</description>
+    </rule>
+
+    <rule id="100141" level="10">
+      <match>nc\ |netcat|nmap|masscan|socat</match>
+      <description>Herramienta de red potencialmente maliciosa detectada dentro del contenedor LXC</description>
+    </rule>
+  </group>
+
+  <!-- ========================================= -->
+  <!--  Integridad de archivos del contenedor    -->
+  <!-- ========================================= -->
+  <group name="syscheck,integrity,">
+    <rule id="100150" level="7">
+      <if_sid>550</if_sid>
+      <description>Archivo de configuración modificado dentro del contenedor LXC</description>
+    </rule>
+  </group>
+
+</group>
+EOF
+
 
           # Reinciar wazuh-manager
             sudo systemctl restart wazuh-agent
-
+            sudo systemctl status wazuh-agent --no-pager
 
         ;;
 
