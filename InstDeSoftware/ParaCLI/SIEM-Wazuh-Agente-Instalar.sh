@@ -78,15 +78,9 @@ vWazuhServerIP="$1"
           # Lanzar el script de instalación
             sudo WAZUH_MANAGER="$vWazuhServerIP" apt -y install ./"$vArchivoDeb"
 
-          # Activar el módulo para auditd
-            echo ''                                     | sudo tee -a /var/ossec/etc/ossec.conf
-            echo '<ossec_config>'                       | sudo tee -a /var/ossec/etc/ossec.conf
-            echo '  <wodle name="audit">'               | sudo tee -a /var/ossec/etc/ossec.conf
-            echo '    <disabled>no</disabled>'          | sudo tee -a /var/ossec/etc/ossec.conf
-            echo '    <interval>1m</interval>'          | sudo tee -a /var/ossec/etc/ossec.conf
-            echo '    <run_on_start>yes</run_on_start>' | sudo tee -a /var/ossec/etc/ossec.conf
-            echo '  </wodle>'                           | sudo tee -a /var/ossec/etc/ossec.conf
-            echo '</ossec_config>'                      | sudo tee -a /var/ossec/etc/ossec.conf
+          # Aumentar el tamaño del buffer
+            sudo sed -i 's|<queue_size>5000</queue_size>|<queue_size>100000</queue_size>|g'                          /var/ossec/etc/ossec.conf
+            sudo sed -i 's|<events_per_second>500</events_per_second>|<events_per_second>1000</events_per_second>|g' /var/ossec/etc/ossec.conf
 
           # Iniciar el servicio
             sudo systemctl daemon-reload
@@ -166,6 +160,10 @@ vWazuhServerIP="$1"
 
           # Lanzar el script de instalación
             sudo WAZUH_MANAGER="$vWazuhServerIP" apt -y install ./"$vArchivoDeb"
+
+          # Aumentar el tamaño del buffer
+            sudo sed -i 's|<queue_size>5000</queue_size>|<queue_size>100000</queue_size>|g'                          /var/ossec/etc/ossec.conf
+            sudo sed -i 's|<events_per_second>500</events_per_second>|<events_per_second>1000</events_per_second>|g' /var/ossec/etc/ossec.conf
 
           # Iniciar el servicio
             sudo systemctl daemon-reload
