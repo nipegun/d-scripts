@@ -38,11 +38,9 @@
   echo ""
   sudo systemctl stop wazuh-manager
 
-
-
 # Borrar todos los eventos de todos los agneetes
   echo ""
-  echo "    Borrando los archivos que almacenan los agentes..."
+  echo "    Borrando todos los archivos de eventos del servidor..."
   echo ""
   sudo rm -rfv /var/ossec/logs/alerts/*
   sudo rm -rfv /var/ossec/logs/archives/*
