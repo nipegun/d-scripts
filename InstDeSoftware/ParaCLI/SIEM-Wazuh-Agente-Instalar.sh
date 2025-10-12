@@ -80,16 +80,14 @@ vWazuhServerIP="$1"
           # Lanzar el script de instalación
             sudo WAZUH_MANAGER="$vWazuhServerIP" apt -y install /tmp/wazuh-agent.deb
 
-          # Aumentar el tamaño del buffer
-            sudo sed -i 's|<queue_size>5000</queue_size>|<queue_size>100000</queue_size>|g'                          /var/ossec/etc/ossec.conf
-            sudo sed -i 's|<events_per_second>500</events_per_second>|<events_per_second>1000</events_per_second>|g' /var/ossec/etc/ossec.conf
-
-          # Modificar el servicio
-            #sudo sed -i -e 's|\[Install]|User=wazuh\nGroup=wazuh\n\n\[Install]|g' /usr/lib/systemd/system/wazuh-agent.service
-
-          # Reparar permisos
-            #sudo chown wazuh:wazuh /var/ossec/ -Rv
-            #sudo chmod -R 750 /var/ossec
+          # Modificar el archivo de configuración
+            # Hacer copia de seguridad del archivo
+              sudo cp -fv /var/ossec/etc/ossec.conf
+            # Aumentar el tamaño del buffer
+              sudo sed -i 's|<queue_size>5000</queue_size>|<queue_size>100000</queue_size>|g'                          /var/ossec/etc/ossec.conf
+              sudo sed -i 's|<events_per_second>500</events_per_second>|<events_per_second>1000</events_per_second>|g' /var/ossec/etc/ossec.conf
+            # Disminuir la cantidad de logs de journald a registrar
+              sudo sed -i 's|<location>journald</location>|<location>!journalctl --priority=3</location>|' /var/ossec/etc/ossec.conf
 
           # Iniciar el servicio
             sudo systemctl daemon-reload
@@ -130,9 +128,14 @@ vWazuhServerIP="$1"
           # Lanzar el script de instalación
             sudo WAZUH_MANAGER="$vWazuhServerIP" apt -y install ./"$vArchivoDeb"
 
-          # Aumentar el tamaño del buffer
-            sudo sed -i 's|<queue_size>5000</queue_size>|<queue_size>100000</queue_size>|g'                          /var/ossec/etc/ossec.conf
-            sudo sed -i 's|<events_per_second>500</events_per_second>|<events_per_second>1000</events_per_second>|g' /var/ossec/etc/ossec.conf
+          # Modificar el archivo de configuración
+            # Hacer copia de seguridad del archivo
+              sudo cp -fv /var/ossec/etc/ossec.conf
+            # Aumentar el tamaño del buffer
+              sudo sed -i 's|<queue_size>5000</queue_size>|<queue_size>100000</queue_size>|g'                          /var/ossec/etc/ossec.conf
+              sudo sed -i 's|<events_per_second>500</events_per_second>|<events_per_second>1000</events_per_second>|g' /var/ossec/etc/ossec.conf
+            # Disminuir la cantidad de logs de journald a registrar
+              sudo sed -i 's|<location>journald</location>|<location>!journalctl --priority=3</location>|' /var/ossec/etc/ossec.conf
 
           # Preparar el archivo de configuración para contenedores LXC
             sudo cp -v /var/ossec/etc/ossec.conf /var/ossec/etc/ossec.conf.bak
@@ -346,12 +349,6 @@ EOF
 </group>
 EOF
 
-          # Modificar el servicio
-            #sudo sed -i -e 's|\[Install]|User=wazuh\nGroup=wazuh\n\n\[Install]|g' /usr/lib/systemd/system/wazuh-agent.service
-
-          # Reparar permisos
-            #sudo chown wazuh:wazuh /var/ossec/ -Rv
-            #sudo chmod -R 750 /var/ossec
 
           # Iniciar el servicio
             sudo systemctl daemon-reload
