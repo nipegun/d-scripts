@@ -55,7 +55,7 @@ vWazuhServerIP="$1"
         1)
 
           echo ""
-          echo "  Instalando wazuh-agent en un Debain Baremetal o MV de Debian..."
+          echo "  Instalando wazuh-agent en un Debian Baremetal o MV de Debian..."
           echo ""
 
           # Instalar paquetes necesarios para el correcto funcionamiento del agente
@@ -77,6 +77,16 @@ vWazuhServerIP="$1"
 
           # Lanzar el script de instalación
             sudo WAZUH_MANAGER="$vWazuhServerIP" apt -y install ./"$vArchivoDeb"
+
+          # Activar el módulo para auditd
+            echo ''                                     | sudo tee -a /var/ossec/etc/ossec.conf
+            echo '<ossec_config>'                       | sudo tee -a /var/ossec/etc/ossec.conf
+            echo '  <wodle name="audit">'               | sudo tee -a /var/ossec/etc/ossec.conf
+            echo '    <disabled>no</disabled>'          | sudo tee -a /var/ossec/etc/ossec.conf
+            echo '    <interval>1m</interval>'          | sudo tee -a /var/ossec/etc/ossec.conf
+            echo '    <run_on_start>yes</run_on_start>' | sudo tee -a /var/ossec/etc/ossec.conf
+            echo '  </wodle>'                           | sudo tee -a /var/ossec/etc/ossec.conf
+            echo '</ossec_config>'                      | sudo tee -a /var/ossec/etc/ossec.conf
 
           # Iniciar el servicio
             sudo systemctl daemon-reload
