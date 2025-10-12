@@ -76,6 +76,53 @@
           echo ""
           echo "  Instalando reglas de auditd para Debian Firewall..."
           echo ""
+          echo '# Cambios en iptables'                                                                     | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /sbin/iptables -p x -k firewall'                                                        | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /usr/sbin/iptables -p x -k firewall'                                                    | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /usr/sbin/ip6tables -p x -k firewall'                                                   | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo ''                                                                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '# Cambios en nftables'                                                                     | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /usr/sbin/nft -p x -k firewall'                                                         | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /etc/nftables.conf -p wa -k firewall'                                                   | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo ''                                                                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '# Cambios en reglas persistentes'                                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /etc/iptables/ -p wa -k firewall'                                                       | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo ''                                                                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '# Cambios de interfaces de red'                                                            | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /etc/network/interfaces -p wa -k network'                                               | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /etc/network/interfaces.d/ -p wa -k network'                                            | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo ''                                                                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '# Cambios de configuración de resolv.conf'                                                 | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /etc/resolv.conf -p wa -k network'                                                      | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo ''                                                                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '# Modificación de rutas y ajustes de red'                                                  | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-a always,exit -F arch=b64 -S sethostname,setdomainname -k netconfig'                      | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-a always,exit -F arch=b64 -S socket,connect,bind,accept -F exe=/usr/sbin/sshd -k netconn' | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo ''                                                                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '# Cambios en sysctl que alteran el forwarding o parámetros de red'                         | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /etc/sysctl.conf -p wa -k sysctl'                                                       | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /etc/sysctl.d/ -p wa -k sysctl'                                                         | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo ''                                                                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '# Cambios en modprobe (carga de módulos como nf_conntrack)'                                | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /etc/modprobe.d/ -p wa -k modules'                                                      | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo ''                                                                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '# Binarios de red y administración'                                                        | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /sbin/ifconfig -p x -k nettools'                                                        | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /sbin/ip -p x -k nettools'                                                              | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /usr/bin/nmap -p x -k scanner'                                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /usr/bin/netcat -p x -k scanner'                                                        | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /bin/nc -p x -k scanner'                                                                | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo ''                                                                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '# Cambios de privilegios o escaladas (root)'                                               | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k privilege'                  | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-a always,exit -F arch=b64 -S execve -F euid=0 -k exec_root'                               | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /etc/sudoers -p wa -k sudo'                                                             | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /etc/sudoers.d/ -p wa -k sudo'                                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo ''                                                                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '# Ficheros de logs y auditoría del propio auditd'                                          | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /var/log/audit/ -p wa -k auditlog'                                                      | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /etc/audit/ -p wa -k auditconfig'                                                       | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
+          echo '-w /etc/audit/rules.d/ -p wa -k auditconfig'                                               | sudo tee -a /etc/audit/rules.d/debianfirewall.rules
 
         ;;
 
