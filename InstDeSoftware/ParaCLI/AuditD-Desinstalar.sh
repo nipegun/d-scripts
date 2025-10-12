@@ -73,10 +73,10 @@
       sudo systemctl disable auditd.service --now
 
     # Borrar el archivo del servicio
-      rm -vf /etc/systemd/system/auditd.service
+      sudo rm -vf /etc/systemd/system/auditd.service
 
     # Borrar las reglas
-      rm -rvf /etc/audit/rules.d/
+      sudo rm -rvf /etc/audit/rules.d/
 
     # Borrar y purgar el paquete
       sudo apt-get -y autoremove --purge auditd
@@ -87,9 +87,28 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de auditd para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Comprobar si el paquete auditd está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s auditd 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}    El paquete auditd no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install auditd
+        echo ""
+      fi
+
+    # Parar y desactivar el servicio
+      sudo systemctl stop auditd.service
+      sudo systemctl disable auditd.service --now
+
+    # Borrar el archivo del servicio
+      sudo rm -vf /etc/systemd/system/auditd.service
+
+    # Borrar las reglas
+      sudo rm -rvf /etc/audit/rules.d/
+
+    # Borrar y purgar el paquete
+      sudo apt-get -y autoremove --purge auditd
 
   elif [ $cVerSO == "11" ]; then
 
@@ -97,9 +116,28 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de auditd para Debian 11 (Bullseye)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Comprobar si el paquete auditd está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s auditd 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}    El paquete auditd no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install auditd
+        echo ""
+      fi
+
+    # Parar y desactivar el servicio
+      sudo systemctl stop auditd.service
+      sudo systemctl disable auditd.service --now
+
+    # Borrar el archivo del servicio
+      sudo rm -vf /etc/systemd/system/auditd.service
+
+    # Borrar las reglas
+      sudo rm -rvf /etc/audit/rules.d/
+
+    # Borrar y purgar el paquete
+      sudo apt-get -y autoremove --purge auditd
 
   elif [ $cVerSO == "10" ]; then
 
