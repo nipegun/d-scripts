@@ -171,11 +171,13 @@
         ;;
 
         4)
+
         # Apache
           echo '# Configuración de apache'                                                        | sudo tee -a /etc/audit/rules.d/debian-server.rules
           echo '-w /etc/apache2/ -p wa -k cambios_apache_conf'                                    | sudo tee -a /etc/audit/rules.d/debian-server.rules
           echo '-w /var/www/ -p wa -k cambios_webroot'                                            | sudo tee -a /etc/audit/rules.d/debian-server.rules
         ;;
+
     esac
 
 done
