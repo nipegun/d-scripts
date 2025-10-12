@@ -33,13 +33,23 @@
   echo ""
 
 # Parar el servicio
+  echo ""
+  echo "    Parando el servicio wazuh-manager"
+  echo ""
   sudo systemctl stop wazuh-manager
 
-# Borrar los archivos que almacenan los agentes:
+# Borrar los archivos que almacenan los agentes
+  echo ""
+  echo "    Borrando los archivos que almacenan los agentes..."
+  echo ""
   sudo rm -fv /var/ossec/etc/client.keys
   sudo rm -rfv /var/ossec/queue/agent-info/*
   sudo rm -rfv /var/ossec/queue/rids/*
 
-# Iniciar el servicio nuevamente:
+# Iniciar el servicio nuevamente
+  echo ""
+  echo "    Volviendo a iniciar el servicio..."
+  echo ""
   sudo systemctl start wazuh-manager
+
 
