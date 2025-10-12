@@ -51,6 +51,17 @@
   sudo rm -rfv /var/ossec/etc/shared/*
   sudo rm -rf /var/lib/wazuh-indexer/nodes/0/_state/*
   sudo rm -rf /var/lib/wazuh-indexer/nodes/0/indices/*
+  # Eliminar todo el almacenamiento del indexador
+    sudo rm -rfv /var/lib/wazuh-indexer/*
+    sudo rm -rfv /var/lib/elasticsearch/*
+  # Borrar cachés del dashboard
+    sudo rm -rfv /usr/share/wazuh-dashboard/data/*
+  # Limpieza del manager
+    sudo rm -rfv /var/ossec/logs/*
+    sudo rm -rfv /var/ossec/queue/*
+    sudo rm -rfv /var/ossec/var/*
+    sudo rm -rfv /var/ossec/etc/client.keys
+    sudo rm -rfv /var/ossec/etc/shared/*
 
 # Iniciar el servicio nuevamente
   echo ""
