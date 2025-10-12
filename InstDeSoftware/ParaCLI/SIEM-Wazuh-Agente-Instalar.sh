@@ -346,6 +346,13 @@ EOF
 </group>
 EOF
 
+          # Modificar el servicio
+            #sudo sed -i -e 's|\[Install]|User=wazuh\nGroup=wazuh\n\n\[Install]|g' /usr/lib/systemd/system/wazuh-agent.service
+
+          # Reparar permisos
+            #sudo chown wazuh:wazuh /var/ossec/ -Rv
+            #sudo chmod -R 750 /var/ossec
+
           # Iniciar el servicio
             sudo systemctl daemon-reload
             sudo systemctl enable wazuh-agent
