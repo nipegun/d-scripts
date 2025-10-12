@@ -136,6 +136,10 @@ vWazuhServerIP="$1"
           # Instalar paquetes necesarios para el correcto funcionamiento del agente
             sudo apt-get -y update
             sudo apt-get -y install net-tools
+            sudo apt-get -y install curl
+
+          # Desinstalar auditd
+            curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/AuditD-Desinstalar.sh | sed 's-sudo--g' | bash
 
           # Descargar el script de instalación
             cd /tmp/
