@@ -9,13 +9,13 @@
 # Script de NiPeGun para borrar todos los logs de un servidor Wazuh
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Wazuh-Server-Eventos-BorrarTodos.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Wazuh-Server-Logs-BorrarTodos.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Wazuh-Server-Eventos-BorrarTodos.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Wazuh-Server-Logs-BorrarTodos.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Wazuh-Server-Eventos-BorrarTodos.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Wazuh-Server-Logs-BorrarTodos.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -32,21 +32,30 @@
   echo -e "${cColorAzulClaro}  Iniciando el script para borrar todos los agentes agregados al servidor Wazuh...${cFinColor}"
   echo ""
 
-# Parar el servicio
+# Parar todos los servicios
   echo ""
-  echo "    Parando el servicio wazuh-manager"
+  echo "    Parando todos los servicios de Wazuh..."
   echo ""
   sudo systemctl stop wazuh-manager
+  sudo systemctl stop wazuh-indexer
+  sudo systemctl stop wazuh-dashboard
 
-# Borrar todos los eventos de todos los agneetes
+# Borrar todos los archivos de logs
   echo ""
-  echo "    Borrando todos los archivos de eventos del servidor..."
+  echo "    Borrando todos los archivos de logs..."
   echo ""
-  sudo rm -rfv /var/ossec/logs/alerts/*
-  sudo rm -rfv /var/ossec/logs/archives/*
+  sudo rm -rfv /var/ossec/logs/*
+  sudo rm -rfv /var/ossec/queue/*
+  sudo rm -rfv /var/ossec/var/*
+  sudo rm -rfv /var/ossec/etc/client.keys
+  sudo rm -rfv /var/ossec/etc/shared/*
+  sudo rm -rf /var/lib/wazuh-indexer/nodes/0/_state/*
+  sudo rm -rf /var/lib/wazuh-indexer/nodes/0/indices/*
 
 # Iniciar el servicio nuevamente
   echo ""
   echo "    Volviendo a iniciar el servicio..."
   echo ""
+  sudo systemctl start wazuh-indexer
   sudo systemctl start wazuh-manager
+  sudo systemctl start wazuh-dashboard
