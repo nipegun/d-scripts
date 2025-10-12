@@ -30,6 +30,8 @@
 # Reinciar wazuh-manager
   sudo systemctl stop wazuh-agent
   sudo systemctl disable wazuh-agent --now
+# Parar todos los procesos
+  sudo ps aux | grep -i wazuh | grep var | sed 's-  - -g'| sed 's-  - -g' | sed 's-  - -g' | cut -d' ' -f11 | cut -d'/' -f5 | xargs sudo killall -9
 # Borrar paquete
   sudo apt-get -y autoremove --purge wazuh-agent
 # Borrar carpetas
