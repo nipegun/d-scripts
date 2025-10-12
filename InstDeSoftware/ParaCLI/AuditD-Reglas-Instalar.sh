@@ -22,6 +22,12 @@
 #
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/AuditD-Reglas-Instalar.sh | nano -
+#
+# NOTAS:
+#   -w             = watch (vigilar archivo o carpeta)
+#   -p r           = permiso a vigilar (read)
+#   -a always,exit = registrar cada ejecución del binario
+#   -k             = etiqueta (clave) para identificar el evento en los logs
 # ----------
 
 # Definir constantes de color
