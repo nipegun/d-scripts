@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar Promtail en Debian
 #
 # Ejecución remota
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Promtail-InstalarYConfigurar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/SIEM-Loki-Agente-Instalar.sh | bash
 # ----------
 
 vIPServLoki="xxx.xxx.xxx.xxx"
