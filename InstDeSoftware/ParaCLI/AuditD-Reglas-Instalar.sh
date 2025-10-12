@@ -51,10 +51,11 @@
     fi
   menu=(dialog --checklist "Marca las reglas que quieras instalar:" 22 80 16)
     opciones=(
-      1 "Reglas para Debian Base"          on
-      2 "Reglas para Debian Desktop"       off
-      3 "Reglas para Debian Firewall"      off
-      4 "Reglas para Debian Server Apache" off
+      1 "Reglas de integridad para los archivos de auditd" on
+      2 "Reglas para Debian Base"                          on
+      3 "Reglas para Debian con Gnome Desktop"             off
+      4 "Reglas para Debian Firewall"                      off
+      5 "Reglas para Debian Server Apache"                 off
     )
   choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -65,9 +66,20 @@
         1)
 
           echo ""
-          echo "  Instalando reglas de auditd para Debian Server..."
+          echo "  Instalando reglas para controlar la integridad de los archivos de auditd..."
           echo ""
 
+          echo ''                                            | sudo tee    /etc/audit/rules.d/debian-auditd.rules
+          echo '-w /etc/audit/         -p wa -k auditconfig' | sudo tee -a /etc/audit/rules.d/debian-auditd.rules
+          echo '-w /etc/audit/rules.d/ -p wa -k auditrules'  | sudo tee -a /etc/audit/rules.d/debian-auditd.rules
+
+        ;;
+
+        2)
+
+          echo ""
+          echo "  Instalando reglas de auditd para Debian Base..."
+          echo ""
 
           echo ''                                                                                 | sudo tee    /etc/audit/rules.d/debian-base.rules
           echo '# Integridad del sistema'                                                         | sudo tee -a /etc/audit/rules.d/debian-base.rules
@@ -77,6 +89,11 @@
           echo '-w /etc/ssh/sshd_config -p wa -k cambios_sshd'                                    | sudo tee -a /etc/audit/rules.d/debian-base.rules
           echo '-w /etc/audit/ -p wa -k cambios_audit'                                            | sudo tee -a /etc/audit/rules.d/debian-base.rules
           echo '-w /etc/systemd/ -p wa -k cambios_systemd'                                        | sudo tee -a /etc/audit/rules.d/debian-base.rules
+          echo '-w /etc/passwd -p wa -k usermgmt'                                                 | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /etc/group -p wa -k usermgmt'                                                  | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /etc/shadow -p wa -k usermgmt'                                                 | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          
+          
           echo ''                                                                                 | sudo tee -a /etc/audit/rules.d/debian-base.rules
           echo '#   Cambios de atributos o permisos'                                              | sudo tee -a /etc/audit/rules.d/debian-base.rules
           echo '-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -k cambios_permisos'    | sudo tee -a /etc/audit/rules.d/debian-base.rules
@@ -117,15 +134,16 @@
 
         ;;
 
-        2)
+        3)
 
           echo ""
           echo "  Instalando reglas de auditd para Debian Desktop..."
           echo ""
-
+          
+          echo '-w /etc/audit/rules.d/ -p wa -k auditconfig'                                      | sudo tee -a /etc/audit/rules.d/debian-base.rules
         ;;
 
-        3)
+        4)
 
           echo ""
           echo "  Instalando reglas de auditd para Debian Firewall..."
@@ -170,12 +188,42 @@
 
         ;;
 
-        4)
+        5)
 
         # Apache
           echo '# Configuración de apache'                                                        | sudo tee -a /etc/audit/rules.d/debian-server.rules
           echo '-w /etc/apache2/ -p wa -k cambios_apache_conf'                                    | sudo tee -a /etc/audit/rules.d/debian-server.rules
           echo '-w /var/www/ -p wa -k cambios_webroot'                                            | sudo tee -a /etc/audit/rules.d/debian-server.rules
+
+        ;;
+
+        6)
+
+          echo ""
+          echo "    Creando reglas para gnome desktop..."
+          echo ""
+          echo ''                                                                | sudo tee    /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '# Eventos de autenticación y sesiones'                           | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /var/log/faillog -p wa -k auth'                               | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /var/log/lastlog -p wa -k auth'                               | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /var/log/tallylog -p wa -k auth'                              | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /etc/sudoers -p wa -k sudo'                                   | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /etc/sudoers.d/ -p wa -k sudo'                                | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /var/log/auth.log -p wa -k auth'                              | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-a always,exit -F arch=b64 -S execve -C uid!=euid -k uid_change' | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo ''                                                                | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '# Cambios en la configuración del sistema'                       | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /etc/gdm3/ -p wa -k gdm'                                      | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /etc/NetworkManager/ -p wa -k netcfg'                         | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /etc/pam.d/ -p wa -k pam'                                     | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo ''                                                                | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '# Eventos del entorno de escritorio de gnome'                    | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /home/ -p rwa -k home_activity'                               | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /usr/share/gnome/ -p wa -k gnome_config'                      | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /usr/share/glib-2.0/schemas/ -p wa -k gsettings'              | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /etc/dconf/ -p wa -k dconf'                                   | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+          echo '-w /usr/bin/gnome-shell -p x -k gnome_shell_exec'                | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+
         ;;
 
     esac
