@@ -74,6 +74,7 @@
         echo ""
         sudo apt-get -y update
         sudo apt-get -y install auditd
+        sudo apt-get -y install audispd-plugins
         echo ""
       fi
 
