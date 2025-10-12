@@ -9,7 +9,7 @@
 # Script de NiPeGun para instalar Loki en Debian
 #
 # Ejecución remota
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/SIEM-Loki-InstalarYConfigurar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/SIEM-Loki-Instalar.sh | bash
 # ----------
 
 # Definir constantes de color
