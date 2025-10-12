@@ -39,6 +39,15 @@
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
+# Ver si auditd está instalado
+  if ! systemctl list-unit-files | grep -q auditd.service; then
+    echo ""
+    echo -e "${cColorRojo}  El servicio auditd no está instalado. Iniciando su instalación...${cFinColor}"
+    echo ""
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/AuditD-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
+    echo ""
+  fi
+
 # Crear el menú
   # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
@@ -127,7 +136,7 @@
         echo '-w /etc/nftables.conf -p wa -k firewall'                                                   | sudo tee -a /etc/audit/rules.d/debian-firewall.rules
         echo ''                                                                                          | sudo tee -a /etc/audit/rules.d/debian-firewall.rules
         echo '# Cambios de interfaces de red'                                                            | sudo tee -a /etc/audit/rules.d/debian-firewall.rules
-        echo '-w /etc/network/interfaces -   p wa -k network'                                            | sudo tee -a /etc/audit/rules.d/debian-firewall.rules
+        echo '-w /etc/network/interfaces    -p wa -k network'                                            | sudo tee -a /etc/audit/rules.d/debian-firewall.rules
         echo '-w /etc/network/interfaces.d/ -p wa -k network'                                            | sudo tee -a /etc/audit/rules.d/debian-firewall.rules
         echo ''                                                                                          | sudo tee -a /etc/audit/rules.d/debian-firewall.rules
         echo '# Cambios de configuración de resolv.conf'                                                 | sudo tee -a /etc/audit/rules.d/debian-firewall.rules
@@ -162,7 +171,7 @@
         echo '# Autenticación y sudo'                        | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
         echo '-w /var/log/faillog  -p wa -k auth'            | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
         echo '-w /var/log/lastlog  -p wa -k auth'            | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
-        echo '-w /var/log/tallylog -p wa -k auth'            | sudo tee -a /etc/audit/rules.d/debian-gnome-desktop.rules
+        echo '-w /var/log/tallylog -p wa -k auth'            | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
         echo ''                                              | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
         echo '# Configuración de GNOME'                      | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
         echo '-w /etc/gdm3/           -p wa -k gdm'          | sudo tee -a /etc/audit/rules.d/debian-gnome.rules
@@ -246,5 +255,5 @@
   echo -e "${cColorVerde}Las reglas se han aplicado correctamente.${cFinColor}"
   echo ""
   echo -e "${cColorAzulClaro}Archivos de reglas generados:${cFinColor}"
-  ls -1 /etc/audit/rules.d/ | grep debian-
+  ls -1 /etc/audit/rules.d/ | grep debian- | sort
   echo ""
