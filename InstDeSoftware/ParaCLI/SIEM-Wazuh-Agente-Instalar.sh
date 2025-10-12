@@ -18,7 +18,9 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/SIEM-Wazuh-Agente-Instalar.sh | nano -
 # ----------
 
-vVersWazuh='4.x'
+#vVersWazuh='4.x'
+vVersWazuh="$(curl -sL https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html | grep release-notes | grep index- | cut -d'>' -f3 | cut -d '<' -f1 | head -n1)"
+
 vArchivoDeb='wazuh-agent_4.13.1-1_amd64.deb'
 vWazuhServerIP="$1"
 
