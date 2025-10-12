@@ -160,42 +160,56 @@ vWazuhServerIP="$1"
             sleep 3
             sudo systemctl status wazuh-agent --no-pager
 
-          # Conectar con auditd
-            sudo mkdir -p /var/ossec/etc/rules/ 2> /dev/null
-            echo '<group name="auditd,">'                                          | sudo tee    /var/ossec/etc/rules/local_rules.xml
-            echo '  <rule id="100501" level="10">'                                 | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <if_sid>80700</if_sid>'                                      | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <field name="audit.key">lectura_passwd</field>'              | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <description>Lectura del archivo /etc/passwd</description>'  | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '  </rule>'                                                       | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo ''                                                                | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '  <rule id="100502" level="12">'                                 | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <if_sid>80700</if_sid>'                                      | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <field name="audit.key">lectura_shadow</field>'              | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <description>Lectura del archivo /etc/shadow</description>'  | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '  </rule>'                                                       | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo ''                                                                | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '  <rule id="100503" level="8">'                                  | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <if_sid>80700</if_sid>'                                      | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <field name="audit.key">listado_home</field>'                | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <description>Intento de listado de /home (ls)</description>' | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '  </rule>'                                                       | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo ''                                                                | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '  <rule id="100504" level="5">'                                  | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <if_sid>80700</if_sid>'                                      | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <field name="audit.key">ejecucion_pwd</field>'               | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <description>Ejecución del comando pwd</description>'        | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '  </rule>'                                                       | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo ''                                                                | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '  <rule id="100505" level="5">'                                  | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <if_sid>80700</if_sid>'                                      | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <field name="audit.key">ejecucion_whoami</field>'            | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '    <description>Ejecución del comando whoami</description>'     | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '  </rule>'                                                       | sudo tee -a /var/ossec/etc/rules/local_rules.xml
-            echo '</group>'                                                        | sudo tee -a /var/ossec/etc/rules/local_rules.xml
+          # Preparar el archivo de configuraciópn para contenedores LXC
+            vArchivoConf="/var/ossec/etc/ossec.conf"
+            # Desactivar rootcheck
+              sudo sed -i '/<rootcheck>/,/<\/rootcheck>/s|<disabled>no</disabled>|<disabled>yes</disabled>|' "$vArchivoConf"
+            # Desactivar SCA
+              sudo sed -i '/<sca>/,/<\/sca>/s|<enabled>yes</enabled>|<enabled>no</enabled>|' "$vArchivoConf"
+            # Mantener syscollector activo y sin hardware
+              sed -i '/<wodle name="syscollector">/,/<\/wodle>/{
+                s|<disabled>yes</disabled>|<disabled>no</disabled>|
+                s|<hardware>yes</hardware>|<hardware>no</hardware>|
+              }' "$vArchivoConf"
+            # Eliminar cualquier bloque <localfile> con /var/log/audit/audit.log
+              sed -i '/<localfile>/,/<\/localfile>/{
+                /<location>\/var\/log\/audit\/audit.log<\/location>/,/<\/localfile>/d
+              }' "$vArchivoConf"
+            # Reescribir sección syscheck completa
+              sed -i '/<syscheck>/,/<\/syscheck>/c\
+                <syscheck>\n\
+                  <disabled>no</disabled>\n\
+                  <frequency>3600</frequency>\n\
+                  <scan_on_start>yes</scan_on_start>\n\
+                  <directories>/etc,/var/www,/home</directories>\n\
+                  <ignore type="sregex">.log$|.swp$</ignore>\n\
+                  <skip_nfs>yes</skip_nfs>\n\
+                  <skip_dev>yes</skip_dev>\n\
+                  <skip_proc>yes</skip_proc>\n\
+                  <skip_sys>yes</skip_sys>\n\
+                  <process_priority>10</process_priority>\n\
+                  <max_eps>50</max_eps>\n\
+                </syscheck>' "$vArchivoConf"
+            # Asegurar que active-response quede habilitado
+              sed -i '/<active-response>/,/<\/active-response>/s|<disabled>yes</disabled>|<disabled>no</disabled>|' "$vArchivoConf"
+            # Añadir logs básicos si no existen
+              if ! grep -q '/var/log/syslog' "$vArchivoConf"; then
+                echo "  <localfile>"                              | sudo tee -a "$vArchivoConf"
+                echo "    <log_format>syslog</log_format>"        | sudo tee -a "$vArchivoConf"
+                echo "    <location>/var/log/syslog</location>"   | sudo tee -a "$vArchivoConf"
+                echo "  </localfile>"                             | sudo tee -a "$vArchivoConf"
+                echo ""                                           | sudo tee -a "$vArchivoConf"
+                echo "  <localfile>"                              | sudo tee -a "$vArchivoConf"
+                echo "    <log_format>syslog</log_format>"        | sudo tee -a "$vArchivoConf"
+                echo "    <location>/var/log/auth.log</location>" | sudo tee -a "$vArchivoConf"
+                echo "  </localfile>"                             | sudo tee -a "$vArchivoConf"
+                echo ""                                           | sudo tee -a "$vArchivoConf"
+              fi
+            # Limpiar líneas vacías repetidas
+              sed -i '/^[[:space:]]*$/N;/^\n$/D' "$vArchivoConf"
 
-          # Agregar el archivo de log de audit
-            sudo sed -i -e s'|</ossec_config>|  <localfile>\n    <log_format>audit</log_format>\n    <location>/var/log/audit/audit.log</location>\n  </localfile>\n\n</ossec_config>|' /var/ossec/etc/ossec.conf
+          # Crear nuevas reglas
+            /var/ossec/etc/rules/lxc_rules.xml
 
           # Reinciar wazuh-manager
             sudo systemctl restart wazuh-agent
