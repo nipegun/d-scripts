@@ -85,6 +85,10 @@
         echo '-w /etc/audit/         -p wa -k auditconfig' | sudo tee -a /etc/audit/rules.d/debian-auditd.rules
         echo '-w /etc/audit/rules.d/ -p wa -k auditrules'  | sudo tee -a /etc/audit/rules.d/debian-auditd.rules
 
+        echo ""
+        echo "    El archivo /etc/audit/rules.d/debian-auditd.rules ha quedado así"
+        echo ""
+
       ;;
 
       2)
@@ -247,13 +251,14 @@
 
 # Aplicar las reglas
   echo ""
-  echo -e "${cColorVerde}Aplicando las reglas seleccionadas...${cFinColor}"
+  echo -e "${cColorVerde}  Aplicando las reglas seleccionadas...${cFinColor}"
   echo ""
   sudo augenrules --load
   sudo systemctl restart auditd
   echo ""
-  echo -e "${cColorVerde}Las reglas se han aplicado correctamente.${cFinColor}"
+  echo -e "${cColorVerde}  Las reglas se han aplicado correctamente.${cFinColor}"
   echo ""
-  echo -e "${cColorAzulClaro}Archivos de reglas generados:${cFinColor}"
+  echo "    Archivos de reglas generados:"
+  echo ""
   ls -1 /etc/audit/rules.d/ | grep debian- | sort
   echo ""
