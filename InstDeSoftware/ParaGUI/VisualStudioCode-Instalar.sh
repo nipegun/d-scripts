@@ -162,7 +162,8 @@ if [ $cVerSO == "13" ]; then
                  echo "  Instalando el paquete .deb..."
                  echo ""
                  sudo apt -y install /tmp/VisualStudioCode.deb
-                 
+                 sudo DEBIAN_FRONTEND=noninteractive apt -y install /tmp/VisualStudioCode.deb <<< "yes"
+
               # Crear el lanzador para el usuario $HOME
                  echo ""
                  echo "  Creando el lanzador gráfico..."
