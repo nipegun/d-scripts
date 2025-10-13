@@ -178,7 +178,7 @@
       sudo freshclam
 
     # Herramientas de documentos
-      sudo apt-get -y install libreoffice-l10n-es
+      #sudo apt-get -y install libreoffice-l10n-es
       sudo apt-get -y install pdfarranger
       sudo apt-get -y install foliate             # Para leer libros en ePub
 
@@ -201,35 +201,35 @@
         #echo ""
         #echo "    Borrando todas las huellas digitales registradas para el usuario root..."
         #echo ""
-        #fprintd-delete root --finger right-index-finger
-        #fprintd-delete root --finger right-thumb
-        #fprintd-delete root --finger right-middle-finger
-        #fprintd-delete root --finger right-ring-finger
-        #fprintd-delete root --finger right-little-finger
-        #fprintd-delete root --finger left-index-finger
-        #fprintd-delete root --finger left-thumb
-        #fprintd-delete root --finger left-middle-finger
-        #fprintd-delete root --finger left-ring-finger
-        #fprintd-delete root --finger left-little-finger
+        #sudo fprintd-delete root --finger right-index-finger
+        #sudo fprintd-delete root --finger right-thumb
+        #sudo fprintd-delete root --finger right-middle-finger
+        #sudo fprintd-delete root --finger right-ring-finger
+        #sudo fprintd-delete root --finger right-little-finger
+        #sudo fprintd-delete root --finger left-index-finger
+        #sudo fprintd-delete root --finger left-thumb
+        #sudo fprintd-delete root --finger left-middle-finger
+        #sudo fprintd-delete root --finger left-ring-finger
+        #sudo fprintd-delete root --finger left-little-finger
       # Registrar las huellas nuevas
         #echo ""
         #echo "    Registrando nuevas huellas digitales..."
         #echo ""
-        #fprintd-enroll -f right-index-finger
-        #fprintd-enroll -f right-thumb
-        #fprintd-enroll -f right-middle-finger
-        #fprintd-enroll -f right-ring-finger
-        #fprintd-enroll -f right-little-finger
-        #fprintd-enroll -f left-index-finger
-        #fprintd-enroll -f left-thumb
-        #fprintd-enroll -f left-middle-finger
-        #fprintd-enroll -f left-ring-finger
-        #fprintd-enroll -f left-little-finger
+        #sudo fprintd-enroll -f right-index-finger
+        #sudo fprintd-enroll -f right-thumb
+        #sudo fprintd-enroll -f right-middle-finger
+        #sudo fprintd-enroll -f right-ring-finger
+        #sudo fprintd-enroll -f right-little-finger
+        #sudo fprintd-enroll -f left-index-finger
+        #sudo fprintd-enroll -f left-thumb
+        #sudo fprintd-enroll -f left-middle-finger
+        #sudo fprintd-enroll -f left-ring-finger
+        #sudo fprintd-enroll -f left-little-finger
       # Activar autenticación PAM con huella dactilar
         #echo ""
         #echo "    Activando la autenticación PAM mediante huellas digitales..."
         #echo ""
-        #sud pam-auth-update # Marcar fingerprint authentication
+        #sudo pam-auth-update # Marcar fingerprint authentication
         # Comprobar que la autenticación por huella se activó correctamente
         #grep fprint /etc/pam.d/common-auth
         # En caso de que no funcione la autenticación por huella habría entrar como root y purgar fprint 
