@@ -64,22 +64,8 @@
       echo ""
       sudo apt-get -y update
 
-    # Herramientas para la CLI
-      echo ""
-      echo "  Instalando herramientas para la CLI..."
-      echo ""
-      sudo apt-get -y install openssh-server
-      sudo apt-get -y install sshpass
-      sudo apt-get -y install whois
-      sudo apt-get -y install shellcheck
-      sudo apt-get -y install grub2
-      sudo apt-get -y install wget
-      sudo apt-get -y install curl
-      sudo apt-get -y install nmap
-      sudo apt-get -y install mc
-      sudo apt-get -y install smartmontools
-      sudo apt-get -y install coreutils
-      sudo apt-get -y install unrar
+    # Instalar herramientas de terminal
+      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Software-CLI-Instalar.sh | bash
 
     # Instalar herramientas para poder conectar dispositivos Android
       echo ""
