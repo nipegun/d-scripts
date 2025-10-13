@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar software para modo CLI en Debian
 #
-# Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Sensores-InstalarYDetectar.sh | bash
+# Ejecución remota (puede requerir permisos sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Software-CLI-Instalar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Software-CLI-Instalar.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
@@ -19,35 +22,44 @@
   cColorRojo='\033[1;31m'
   cFinColor='\033[0m'
 
-# Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
-    exit
-  fi
-
 # Notificar inicio de ejecución del script
   echo ""
   echo -e "${cColorAzulClaro}  Iniciando el script para instalar software para modo CLI en Debian...${cFinColor}"
   echo ""
 
-# Actualizar lista de paquetes disponibles
-  apt-get -y update
+# Actualizar lista de paquetes disponibles en los repositorios
+  sudo apt-get -y update
 
 # Instalar nano
-  apt-get -y install nano
+  sudo apt-get -y install nano
   sed -i -e 's|# set linenumbers|set linenumbers|g' /etc/nanorc
 
 # Instalar Midnight Commander
-  apt-get -y install mc
+  sudo apt-get -y install mc
 
 # Instalar shellcheck
-  apt-get -y install shellcheck
+  sudo apt-get -y install shellcheck
 
 # jp2a (Pasar visualizar imagenes en código ascii
-  apt-get -y install jp2a
+  sudo apt-get -y install jp2a
   # Uso:
   #   Para ver en terminal:
   #     jp2a --color ~/Descargas/Imagen.jpg
   #   Para exportar a un archivo:
   #     jp2a --width=200 ~/Descargas/Imagen.jpg > Archivo.txt
 
+# Servidor SSH
+  sudo apt-get -y install openssh-server
+
+# Otras
+  sudo apt-get -y install sshpass
+  sudo apt-get -y install whois
+  sudo apt-get -y install shellcheck
+  sudo apt-get -y install grub2
+  sudo apt-get -y install wget
+  sudo apt-get -y install curl
+  sudo apt-get -y install nmap
+  sudo apt-get -y install smartmontools
+  sudo apt-get -y install coreutils
+  sudo apt-get -y install unrar
+  sudo apt-get -y install usbutils
