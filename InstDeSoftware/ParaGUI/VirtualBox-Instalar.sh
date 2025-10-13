@@ -126,6 +126,9 @@ if [ $cVerSO == "13" ]; then
                Usuario1000=$(id 1000 | cut -d'(' -f2 | cut -d')' -f1)
                sudo usermod -a -G vboxusers $Usuario1000
 
+             # Desactivar y blacklistear kvm
+               curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/KVM-DesactivarYBlacklistear.sh | bash
+
           ;;
 
           2)
@@ -188,6 +191,9 @@ if [ $cVerSO == "13" ]; then
               cd /tmp/
               wget http://download.virtualbox.org/virtualbox/$vUltVersEnWeb/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
               echo y | sudo vboxmanage extpack install --replace /tmp/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
+
+             # Desactivar y blacklistear kvm
+               curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/KVM-DesactivarYBlacklistear.sh | bash
 
           ;;
 
@@ -279,6 +285,9 @@ elif [ $cVerSO == "12" ]; then
                Usuario1000=$(id 1000 | cut -d'(' -f2 | cut -d')' -f1)
                sudo usermod -a -G vboxusers $Usuario1000
 
+             # Desactivar y blacklistear kvm
+               curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/KVM-DesactivarYBlacklistear.sh | bash
+
           ;;
 
           2)
@@ -341,6 +350,9 @@ elif [ $cVerSO == "12" ]; then
               cd /tmp/
               wget http://download.virtualbox.org/virtualbox/$vUltVersEnWeb/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
               echo y | sudo vboxmanage extpack install --replace /tmp/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
+
+             # Desactivar y blacklistear kvm
+               curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/KVM-DesactivarYBlacklistear.sh | bash
 
           ;;
 
@@ -433,6 +445,9 @@ elif [ $cVerSO == "11" ]; then
                Usuario1000=$(id 1000 | cut -d'(' -f2 | cut -d')' -f1)
                usermod -a -G vboxusers $Usuario1000
 
+             # Desactivar y blacklistear kvm
+               curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/KVM-DesactivarYBlacklistear.sh | bash
+
           ;;
 
           2)
@@ -495,6 +510,9 @@ elif [ $cVerSO == "11" ]; then
               wget http://download.virtualbox.org/virtualbox/$vUltVersEnWeb/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
               echo y | vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
 
+             # Desactivar y blacklistear kvm
+               curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/KVM-DesactivarYBlacklistear.sh | bash
+
           ;;
 
           3)
@@ -549,6 +567,9 @@ elif [ $cVerSO == "11" ]; then
               cd /root/SoftInst/VirtualBox/
               wget http://download.virtualbox.org/virtualbox/$vUltVersEnWeb/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
               echo y | vboxmanage extpack install --replace /root/SoftInst/VirtualBox/Oracle_VirtualBox_Extension_Pack-$vUltVersEnWeb.vbox-extpack
+
+             # Desactivar y blacklistear kvm
+               curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/KVM-DesactivarYBlacklistear.sh | bash
 
           ;;
 
