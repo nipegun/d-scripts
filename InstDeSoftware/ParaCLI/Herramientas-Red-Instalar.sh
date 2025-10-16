@@ -47,11 +47,11 @@ if [ $cVerSO == "13" ]; then
 
   sudo apt-get -y update
   sudo apt-get -y install whois
-  sudo apt-get -y nmap
-  sudo apt-get -y nbtscan
-  sudo apt-get -y mailutils
-  sudo apt-get -y wireless-tools
-  sudo apt-get -y wpasupplicant
+  sudo apt-get -y install nmap
+  sudo apt-get -y install nbtscan
+  sudo apt-get -y install mailutils
+  sudo apt-get -y install wireless-tools
+  sudo apt-get -y install wpasupplicant
   sudo apt-get -y install tshark # WireShark para terminal
   sudo apt-get -y install arp-scan
   # Crear alias para arp-scan
@@ -96,11 +96,11 @@ elif [ $cVerSO == "9" ]; then
 
   sudo apt-get -y update
   sudo apt-get -y install whois
-  sudo apt-get -y nmap
-  sudo apt-get -y nbtscan
-  sudo apt-get -y mailutils
-  sudo apt-get -y wireless-tools
-  sudo apt-get -y wpasupplicant
+  sudo apt-get -y install nmap
+  sudo apt-get -y install nbtscan
+  sudo apt-get -y install mailutils
+  sudo apt-get -y install wireless-tools
+  sudo apt-get -y install wpasupplicant
   sudo apt-get -y install tshark # WireShark para terminal
   sudo apt-get -y install arp-scan
   # Crear alias para arp-scan
