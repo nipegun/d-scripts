@@ -55,7 +55,10 @@ if [ $cVerSO == "13" ]; then
   sudo apt-get -y install tshark # WireShark para terminal
   sudo apt-get -y install arp-scan
   # Crear alias para arp-scan
-    echo "alias arpscan='sudo arp-scan --ouifile=/usr/share/arp-scan/ieee-oui.txt --macfile=/etc/arp-scan/mac-vendor.txt '" | tee -a ~/.bashrc
+    echo "alias arpscan='sudo arp-scan --ouifile=/usr/share/arp-scan/ieee-oui.txt --macfile=/etc/arp-scan/mac-vendor.txt '"                     | tee -a ~/.bashrc
+    echo "alias arpscanw='sudo arp-scan --ouifile=/usr/share/arp-scan/ieee-oui.txt --macfile=/etc/arp-scan/mac-vendor.txt -I wlan0 --localnet'" | tee -a ~/.bashrc
+    echo "alias arpscane='sudo arp-scan --ouifile=/usr/share/arp-scan/ieee-oui.txt --macfile=/etc/arp-scan/mac-vendor.txt -I eth0 --localnet'"  | tee -a ~/.bashrc
+
     source ~/.bashrc
 
 elif [ $cVerSO == "12" ]; then
@@ -104,7 +107,10 @@ elif [ $cVerSO == "9" ]; then
   sudo apt-get -y install tshark # WireShark para terminal
   sudo apt-get -y install arp-scan
   # Crear alias para arp-scan
-    echo "alias arpscan='sudo arp-scan --ouifile=/usr/share/arp-scan/ieee-oui.txt --macfile=/etc/arp-scan/mac-vendor.txt '" | tee -a ~/.bashrc
+    echo "alias arpscan='sudo arp-scan --ouifile=/usr/share/arp-scan/ieee-oui.txt --macfile=/etc/arp-scan/mac-vendor.txt '"                     | tee -a ~/.bashrc
+    echo "alias arpscanw='sudo arp-scan --ouifile=/usr/share/arp-scan/ieee-oui.txt --macfile=/etc/arp-scan/mac-vendor.txt -I wlan0 --localnet'" | tee -a ~/.bashrc
+    echo "alias arpscane='sudo arp-scan --ouifile=/usr/share/arp-scan/ieee-oui.txt --macfile=/etc/arp-scan/mac-vendor.txt -I eth0 --localnet'"  | tee -a ~/.bashrc
+
     source ~/.bashrc
 
 elif [ $cVerSO == "8" ]; then
