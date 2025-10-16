@@ -9,7 +9,10 @@
 # Script de NiPeGun para instalar herramientas de red en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Herramientas-Red-Instalar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Herramientas-Red-Instalar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Herramientas-Red-Instalar.sh | sed 's-sudo--g' | bash
 # ----------
 
 cColorRojo='\033[1;31m'
