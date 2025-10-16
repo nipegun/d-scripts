@@ -36,30 +36,59 @@ cFinColor='\033[0m'
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)..."  
+  echo "  Iniciando el script de instalación de Herramientas de red para CLI en Debian 13 (Trixie)..."  
+  echo ""
+
+  sudo apt-get -y update
+  sudo apt-get -y install whois
+  sudo apt-get -y nmap
+  sudo apt-get -y nbtscan
+  sudo apt-get -y mailutils
+  sudo apt-get -y wireless-tools
+  sudo apt-get -y wpasupplicant
+  sudo apt-get -y install tshark # WireShark para terminal
+  sudo apt-get -y install arp-scan
+  # Crear alias para arp-scan
+    echo "alias arpscan='sudo arp-scan --ouifile=/usr/share/arp-scan/ieee-oui.txt --macfile=/usr/share/arp-scan/mac-vendor.txt '" | tee -a ~/.bashrc
+    source ~/.bashrc
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de Herramientas de red para CLI en Debian 12 (Bookworm)..."  
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
-elif [ $cVerSO == "8" ]; then
+elif [ $cVerSO == "11" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)..."  
+  echo "  Iniciando el script de instalación de Herramientas de red para CLI en Debian Debian 11 (Bullseye)..."  
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de Herramientas de red para CLI en Debian Debian 10 (Buster)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 elif [ $cVerSO == "9" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)..."  
+  echo "  Iniciando el script de instalación de Herramientas de red para CLI en Debian Debian 9 (Stretch)..."  
   echo ""
 
   apt-get -y install whois
@@ -69,26 +98,30 @@ elif [ $cVerSO == "9" ]; then
   apt-get -y wireless-tools
   apt-get -y wpasupplicant
   apt-get -y install arp-scan
+  # Crear alias para arp-scan
+    echo "alias arpscan='sudo arp-scan --ouifile=/usr/share/arp-scan/ieee-oui.txt --macfile=/usr/share/arp-scan/mac-vendor.txt'" >> ~/.bashrc
+    source ~/.bashrc
+
   apt-get -y install tshark # WireShark para terminal
 
-elif [ $cVerSO == "10" ]; then
+elif [ $cVerSO == "8" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)..."  
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "11" ]; then
-
-  echo ""
-  echo "  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)..."  
+  echo "  Iniciando el script de instalación de Herramientas de red para CLI en Debian Debian 8 (Jessie)..."  
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de Herramientas de red para CLI en Debian ebian 7 (Wheezy)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
   echo ""
 
 fi
