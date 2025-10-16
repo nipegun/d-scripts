@@ -8,7 +8,7 @@
 # ----------
 # Script de NiPeGun para instalar herramientas de red en Debian
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Herramientas-Red-Instalar.sh | bash
 # ----------
 
@@ -91,18 +91,18 @@ elif [ $cVerSO == "9" ]; then
   echo "  Iniciando el script de instalación de Herramientas de red para CLI en Debian Debian 9 (Stretch)..."  
   echo ""
 
-  apt-get -y install whois
-  apt-get -y nmap
-  apt-get -y nbtscan
-  apt-get -y mailutils
-  apt-get -y wireless-tools
-  apt-get -y wpasupplicant
-  apt-get -y install arp-scan
+  sudo apt-get -y update
+  sudo apt-get -y install whois
+  sudo apt-get -y nmap
+  sudo apt-get -y nbtscan
+  sudo apt-get -y mailutils
+  sudo apt-get -y wireless-tools
+  sudo apt-get -y wpasupplicant
+  sudo apt-get -y install tshark # WireShark para terminal
+  sudo apt-get -y install arp-scan
   # Crear alias para arp-scan
-    echo "alias arpscan='sudo arp-scan --ouifile=/usr/share/arp-scan/ieee-oui.txt --macfile=/usr/share/arp-scan/mac-vendor.txt'" >> ~/.bashrc
+    echo "alias arpscan='sudo arp-scan --ouifile=/usr/share/arp-scan/ieee-oui.txt --macfile=/usr/share/arp-scan/mac-vendor.txt '" | tee -a ~/.bashrc
     source ~/.bashrc
-
-  apt-get -y install tshark # WireShark para terminal
 
 elif [ $cVerSO == "8" ]; then
 
