@@ -70,9 +70,40 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de TheHive para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+apt update
+apt install -y curl gnupg apt-transport-https openjdk-17-jre-headless
+echo "deb [trusted=yes] https://deb.strangebee.com stable main" | tee /etc/apt/sources.list.d/strangebee.list
+apt update
+apt install -y thehive
+apt install -y postgresql
+sudo -u postgres psql <<'EOF'
+CREATE DATABASE thehive;
+CREATE USER thehive WITH PASSWORD 'thehivee';
+GRANT ALL PRIVILEGES ON DATABASE thehive TO thehive;
+EOF
+Edita /etc/thehive/application.conf y configura:
+db {
+  provider = "org.postgresql.Driver"
+  url = "jdbc:postgresql://127.0.0.1:5432/thehive"
+  user = "thehive"
+  password = "thehive"
+}
+echo "  Ve a: https://community.strangebee.com/licenses/"
+echo "  Crea una cuenta gratuita y solicita la licencia TheHive Community."
+echo "Recibirás un archivo .lic o un bloque de texto"
+echo "Guárdalo en /etc/thehive/license.lic"
+
+systemctl enable thehive
+systemctl start thehive
+# Verificar el log
+  journalctl -fu thehive
+
+# Notificar fin de ejecución del script
+  echo "Puedes ir a http://TU_IP:9000"
+  echo ""
+  echo "  Usuario por defecto: admin@thehive.local"
+  echo "  Contraseña por defecto: secret (te pedirá cambiarla la primera vez que te conectes)"
+  echo ""
 
   elif [ $cVerSO == "12" ]; then
 
