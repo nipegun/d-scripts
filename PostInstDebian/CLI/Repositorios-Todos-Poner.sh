@@ -96,15 +96,15 @@ elif [ $cVerSO == "12" ]; then
 
   sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak.ori
 
-  echo "deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware"                        | sudo tee    /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware"                    | sudo tee -a /etc/apt/sources.list
-  echo ""                                                                                                         | sudo tee -a /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware"     | sudo tee -a /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware" | sudo tee -a /etc/apt/sources.list
-  echo ""                                                                                                         | sudo tee -a /etc/apt/sources.list
-  echo "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"                | sudo tee -a /etc/apt/sources.list
-  echo "deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"            | sudo tee -a /etc/apt/sources.list
-  echo ""                                                                                                         | sudo tee -a /etc/apt/sources.list
+  echo "deb http://ftp.es.debian.org/debian bookworm main contrib non-free non-free-firmware"                         | sudo tee    /etc/apt/sources.list
+  echo "deb-src http://ftp.es.debian.org/debian bookworm main contrib non-free non-free-firmware"                     | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                                                             | sudo tee -a /etc/apt/sources.list
+  echo "deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware"     | sudo tee -a /etc/apt/sources.list
+  echo "deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware" | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                                                             | sudo tee -a /etc/apt/sources.list
+  echo "deb http://ftp.es.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"                 | sudo tee -a /etc/apt/sources.list
+  echo "deb-src http://ftp.es.debian.org/debian bookworm-updates main contrib non-free non-free-firmware"             | sudo tee -a /etc/apt/sources.list
+  echo ""                                                                                                             | sudo tee -a /etc/apt/sources.list
 
 elif [ $cVerSO == "11" ]; then
 
