@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar el escritorio Mate al acabar de instalar Debian standard
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Mate-Instalar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Mate-Instalar.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
@@ -20,14 +23,6 @@
   # Para el color rojo también:
     #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
-
-# Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
-    echo ""
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
-    echo ""
-    exit
-  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -55,10 +50,27 @@
     echo ""
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación del escritorio Mate en Debian 13 (x)...${cFinColor}"
     echo ""
+    sudo apt-get -y update
+    sudo apt-get -y install tasksel
+    sudo tasksel -y install mate-desktop
+    sudo apt-get -y install caja-open-terminal
+    sudo apt-get -y install caja-admin
+    sudo apt-get -y install firefox-esr-l10n-es-es
+    sudo apt-get -y install libreoffice-l10n-es
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Permitir caja como root
+      sudo mkdir -p /root/.config/autostart/ 2> /dev/null
+      echo "[Desktop Entry]"               | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Type=Application"              | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Exec=caja --force-desktop"     | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Hidden=false"                  | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "X-MATE-Autostart-enabled=true" | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Name[es_ES]=Caja"              | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Name=Caja"                     | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Comment[es_ES]="               | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Comment="                      | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "X-MATE-Autostart-Delay=0"      | sudo tee -a /root/.config/autostart/caja.desktop
+      gio set /root/.config/autostart/caja.desktop "metadata::trusted" yes
 
   elif [ $cVerSO == "12" ]; then
 
@@ -66,26 +78,29 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación del escritorio Mate en Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    apt-get -y update
-    apt-get -y install tasksel
-    tasksel install mate-desktop
-    apt-get -y install caja-open-terminal
-    apt-get -y install caja-admin
-    apt-get -y install firefox-esr-l10n-es-es
-    apt-get -y install libreoffice-l10n-es
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación del escritorio Mate en Debian 13 (x)...${cFinColor}"
+    echo ""
+    sudo apt-get -y update
+    sudo apt-get -y install tasksel
+    sudo tasksel -y install mate-desktop
+    sudo apt-get -y install caja-open-terminal
+    sudo apt-get -y install caja-admin
+    sudo apt-get -y install firefox-esr-l10n-es-es
+    sudo apt-get -y install libreoffice-l10n-es
 
     # Permitir caja como root
-      mkdir -p /root/.config/autostart/ 2> /dev/null
-      echo "[Desktop Entry]"                > /root/.config/autostart/caja.desktop
-      echo "Type=Application"              >> /root/.config/autostart/caja.desktop
-      echo "Exec=caja --force-desktop"     >> /root/.config/autostart/caja.desktop
-      echo "Hidden=false"                  >> /root/.config/autostart/caja.desktop
-      echo "X-MATE-Autostart-enabled=true" >> /root/.config/autostart/caja.desktop
-      echo "Name[es_ES]=Caja"              >> /root/.config/autostart/caja.desktop
-      echo "Name=Caja"                     >> /root/.config/autostart/caja.desktop
-      echo "Comment[es_ES]="               >> /root/.config/autostart/caja.desktop
-      echo "Comment="                      >> /root/.config/autostart/caja.desktop
-      echo "X-MATE-Autostart-Delay=0"      >> /root/.config/autostart/caja.desktop
+      sudo mkdir -p /root/.config/autostart/ 2> /dev/null
+      echo "[Desktop Entry]"               | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Type=Application"              | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Exec=caja --force-desktop"     | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Hidden=false"                  | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "X-MATE-Autostart-enabled=true" | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Name[es_ES]=Caja"              | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Name=Caja"                     | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Comment[es_ES]="               | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "Comment="                      | sudo tee -a /root/.config/autostart/caja.desktop
+      echo "X-MATE-Autostart-Delay=0"      | sudo tee -a /root/.config/autostart/caja.desktop
       gio set /root/.config/autostart/caja.desktop "metadata::trusted" yes
 
   elif [ $cVerSO == "11" ]; then
