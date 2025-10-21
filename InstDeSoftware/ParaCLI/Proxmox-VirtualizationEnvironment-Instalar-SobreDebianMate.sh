@@ -62,7 +62,7 @@
 if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ProxmoxVE para Debian 13 (x)...${cFinColor}"  
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ProxmoxVE para Debian 13 (Trixie)...${cFinColor}"  
   echo ""
 
   if [[ ! -f "/root/Fase1Completa.txt" ]]; then
@@ -86,27 +86,27 @@ if [ $cVerSO == "13" ]; then
           echo ""
           echo -e "${cColorRojo}      El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
-          apt-get -y update
-          apt-get -y install wget
+          sudo apt-get -y update
+          sudo apt-get -y install wget
           echo ""
         fi
-      wget https://enterprise.proxmox.com/debian/proxmox-archive-keyring-trixie.gpg -O /usr/share/keyrings/proxmox-archive-keyring.gpg
+      sudo wget https://enterprise.proxmox.com/debian/proxmox-archive-keyring-trixie.gpg -O /usr/share/keyrings/proxmox-archive-keyring.gpg
 
     # Actualizar la lista de paquetes disponibles en los repositorios activados
       echo ""
       echo "    Actualizar la lista de paquetes disponibles en los repositorios activados..."
       echo ""
-      apt -y modernize-sources
-      apt-get -y update
-      apt -y full-upgrade
+      sudo apt -y modernize-sources
+      sudo apt-get -y update
+      sudo apt -y full-upgrade
 
     # Configurar el archivo /etc/hosts
       echo ""
       echo "      Editando el archivo /etc/hosts..."
       echo ""
-      cp /etc/hosts /etc/hosts.bak.$cFechaDeEjec
-      echo "127.0.0.1 localhost localhost.localdomain" > /etc/hosts
-      echo "$cIPLocal $HOSTNAME $HOSTNAME.home.arpa"  >> /etc/hosts
+      sudo cp /etc/hosts /etc/hosts.bak.$cFechaDeEjec
+      echo "127.0.0.1 localhost localhost.localdomain" | sudo tee    /etc/hosts
+      echo "$cIPLocal $HOSTNAME $HOSTNAME.home.arpa"   | sudo tee -a /etc/hosts
       echo ""
       echo "        El archivo /etc/hosts ha quedado así:"
       echo ""
@@ -117,16 +117,28 @@ if [ $cVerSO == "13" ]; then
       echo ""
       echo "    Instalando el kernel por defecto..."
       echo ""
-      apt-get -y install proxmox-default-kernel
+      sudo apt-get -y install proxmox-default-kernel
 
     # Personalizar mate-desktop
        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Mate-Personalizar.sh | sed 's-sudo--g' | bash
 
     # Activar PCI-PassThrough
-      # Para procesadores Intel:
-        #sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT="quiet|GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt"|g' /etc/default/grub
-      # Para procesadores AMD:
-        #sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT="quiet|GRUB_CMDLINE_LINUX_DEFAULT="quiet amd_iommu=on iommu=pt"|g' /etc/default/grub
+      vFabricante=$(lscpu | grep -i "vendor id" | awk '{print $3}')
+      if [[ "$vFabricante" == "GenuineIntel" ]]; then
+        echo ""
+        echo "    Activando iommu en grub para procesadores Intel..."
+        echo ""
+        sudo sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT="quiet|GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt"|g' /etc/default/grub
+        sudo update-grub
+      elif [[ "$vFabricante" == "AuthenticAMD" ]]; then
+        echo ""
+        echo "    Activando iommu en grub  para procesadores AMD..."
+        echo ""
+        sudosed -i 's|GRUB_CMDLINE_LINUX_DEFAULT="quiet|GRUB_CMDLINE_LINUX_DEFAULT="quiet amd_iommu=on iommu=pt"|g' /etc/default/grub
+        sudo update-grub
+      else
+        echo "    El fabricante del procesador con es ni Intel ni AMD. Omitiendo activación de iommu en grub...."
+      fi
       # Agregar módulos
         echo '# PCIPassThrough' | sudo tee -a /etc/modules
         echo 'vfio'             | sudo tee -a /etc/modules
@@ -134,19 +146,18 @@ if [ $cVerSO == "13" ]; then
         echo 'vfio_pci'         | sudo tee -a /etc/modules
         echo 'vfio_virqfd'      | sudo tee -a /etc/modules
       sudo apt-get -y install driverctl
-      
 
     # Crear el archivo de Fase1 Completa
       echo ""
       echo "    Creando el archivo de fase 1 completa..."
       echo ""
-      touch /root/Fase1Completa.txt
+      sudo touch /root/Fase1Completa.txt
 
     # Reiniciar Debian
       echo ""
       echo "    Reiniciando Debian..."
       echo ""
-      shutdown -r now
+      sudo shutdown -r now
 
   fi
 
@@ -156,31 +167,31 @@ if [ $cVerSO == "13" ]; then
       echo ""
       echo "    Instalando paquetes..."
       echo ""
-      apt-get -y update
-      apt-get -y install proxmox-ve
-      apt-get -y install postfix
-      apt-get -y install open-iscsi
-      apt-get -y install chrony
+      sudo apt-get -y update
+      sudo apt-get -y install proxmox-ve
+      sudo apt-get -y install postfix
+      sudo apt-get -y install open-iscsi
+      sudo apt-get -y install chrony
 
     # Desinstalar el kernel de Debian
       echo ""
       echo "    Desinstalando el kernel de Debian..."
       echo ""
-      apt-get -y remove linux-image-amd64
-      apt-get -y remove linux-image-[5-6]*
-      apt-get -y remove os-prober
+      sudo apt-get -y remove --purge linux-image-amd64
+      sudo apt-get -y remove --purge linux-image-[5-6]*
+      sudo apt-get -y remove --purge os-prober
 
     # Actualizar grub
       echo ""
       echo "    Actualizando grub..."
       echo ""
-      update-grub
+      sudo update-grub
 
     # Desactivar el repositorio enterprise
       echo ""
       echo "    Desactivando el repositorio enterprise..."
       echo ""
-      mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak 2> /dev/null
+      sudo mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.list.bak 2> /dev/null
       echo '#Types: deb'                                                  | sudo tee    /etc/apt/sources.list.d/pve-enterprise.sources
       echo '#URIs: https://enterprise.proxmox.com/debian/pve'             | sudo tee -a /etc/apt/sources.list.d/pve-enterprise.sources
       echo '#Suites: trixie'                                              | sudo tee -a /etc/apt/sources.list.d/pve-enterprise.sources
@@ -191,39 +202,39 @@ if [ $cVerSO == "13" ]; then
       echo ""
       echo "    Volviendo a actualizar la lista de paquetes disponibles en los repositorios activados..."
       echo ""
-      apt-get -y update
+      sudo apt-get -y update
 
     # Instalar las cabeceras del kernel
       echo ""
       echo "    Instalando las cabeceras del kernel..."
       echo ""
-      apt-get -y install pve-headers
+      sudo apt-get -y install pve-headers
 
     # Configurar la red
       echo ""
       echo "      Editando el archivo /etc/network/interfaces..."
       echo ""
-      cp /etc/network/interfaces /etc/network/interfaces.bak.$cFechaDeEjec
-      echo "auto lo"                         > /etc/network/interfaces
-      echo "iface lo inet loopback"         >> /etc/network/interfaces
-      echo ""                               >> /etc/network/interfaces
-      echo "iface eth0 inet manual"         >> /etc/network/interfaces
-      echo ""                               >> /etc/network/interfaces
-      echo "auto vmbr0"                     >> /etc/network/interfaces
-      echo "iface vmbr0 inet static"        >> /etc/network/interfaces
-      echo "  address $cIPLocal/$cCIDR"     >> /etc/network/interfaces
-      echo "  gateway $cIPGateway"          >> /etc/network/interfaces
-      echo "  bridge-ports eth0"            >> /etc/network/interfaces
-      echo "  bridge-stp off"               >> /etc/network/interfaces
-      echo "  bridge-fd 0"                  >> /etc/network/interfaces
-      echo "  #hwaddress 00:00:00:00:02:10" >> /etc/network/interfaces
-      echo ""                               >> /etc/network/interfaces
-      echo "auto vmbr1"                     >> /etc/network/interfaces
-      echo "iface vmbr1 inet manual"        >> /etc/network/interfaces
-      echo "bridge-ports none"              >> /etc/network/interfaces
-      echo "  bridge-stp off"               >> /etc/network/interfaces
-      echo "  bridge-fd 0"                  >> /etc/network/interfaces
-      echo "  #Switch 1"                    >> /etc/network/interfaces
+      sudo cp /etc/network/interfaces /etc/network/interfaces.bak.$cFechaDeEjec
+      echo "auto lo"                        | sudo tee    /etc/network/interfaces
+      echo "iface lo inet loopback"         | sudo tee -a /etc/network/interfaces
+      echo ""                               | sudo tee -a /etc/network/interfaces
+      echo "iface eth0 inet manual"         | sudo tee -a /etc/network/interfaces
+      echo ""                               | sudo tee -a /etc/network/interfaces
+      echo "auto vmbr0"                     | sudo tee -a /etc/network/interfaces
+      echo "iface vmbr0 inet static"        | sudo tee -a /etc/network/interfaces
+      echo "  address $cIPLocal/$cCIDR"     | sudo tee -a /etc/network/interfaces
+      echo "  gateway $cIPGateway"          | sudo tee -a /etc/network/interfaces
+      echo "  bridge-ports eth0"            | sudo tee -a /etc/network/interfaces
+      echo "  bridge-stp off"               | sudo tee -a /etc/network/interfaces
+      echo "  bridge-fd 0"                  | sudo tee -a /etc/network/interfaces
+      echo "  #hwaddress 00:00:00:00:02:10" | sudo tee -a /etc/network/interfaces
+      echo ""                               | sudo tee -a /etc/network/interfaces
+      echo "auto vmbr1"                     | sudo tee -a /etc/network/interfaces
+      echo "iface vmbr1 inet manual"        | sudo tee -a /etc/network/interfaces
+      echo "bridge-ports none"              | sudo tee -a /etc/network/interfaces
+      echo "  bridge-stp off"               | sudo tee -a /etc/network/interfaces
+      echo "  bridge-fd 0"                  | sudo tee -a /etc/network/interfaces
+      echo "  #Switch 1"                    | sudo tee -a /etc/network/interfaces
       echo ""
       echo "        El archivo /etc/network/interfaces ha quedado así:"
       echo ""
@@ -232,9 +243,9 @@ if [ $cVerSO == "13" ]; then
         echo ""
         echo "      Editando el archivo /etc/resolv.conf..."
         echo ""
-        echo "nameserver $cIPGateway"      > /etc/resolv.conf
-        echo "nameserver 9.9.9.9"         >> /etc/resolv.conf
-        echo "nameserver 149.112.112.112" >> /etc/resolv.conf
+        echo "nameserver $cIPGateway"     | sudo tee    /etc/resolv.conf
+        echo "nameserver 9.9.9.9"         | sudo tee -a /etc/resolv.conf
+        echo "nameserver 149.112.112.112" | sudo tee -a /etc/resolv.conf
 
     # Notificar fin de la instalación
       echo ""
@@ -249,7 +260,7 @@ if [ $cVerSO == "13" ]; then
       echo ""
       echo "    Reiniciando el servicio de red.."
       echo ""
-      service networking restart
+      sudo service networking restart
 
     # Evitar que proxmox se suspenda al cerrar la tapa del portátil
       echo '[Login]'                      | sudo tee -a /etc/systemd/logind.conf
@@ -258,26 +269,26 @@ if [ $cVerSO == "13" ]; then
       sudo systemctl restart systemd-logind.service
 
     # Deshabilitar el suspenso y la hibernación
-      systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+      sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
       # Para volver a habilitarlo:
-      #   systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target
+      #   sudo systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
     # Configurar la fecha y hora correctas
-      timedatectl set-timezone Europe/Madrid
-      apt-get -y install chrony
+      sudo timedatectl set-timezone Europe/Madrid
+      sudo apt-get -y install chrony
 
     # Instalar el servicio de escritorio remoto
       echo ""
       echo "  Instalando XRDP con sus correspondientes servicios de monitorización..."
       echo ""
-      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Escritorio-xrdp-Instalar.sh | sed 's-sudo--g' | bash
+      #curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Escritorio-xrdp-Instalar.sh | sed 's-sudo--g' | bash
       # Instalar también la monitorización
-        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorCon-Instalar.sh | sed 's-sudo--g' | bash
-        curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorSes-Instalar.sh | sed 's-sudo--g' | bash
+        #curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorCon-Instalar.sh | sed 's-sudo--g' | bash
+        #curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Servicio-xrdpMonitorSes-Instalar.sh | sed 's-sudo--g' | bash
 
     # Instalar ssh y fail2ban
-      sudo tasksel install ssh-server
-      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Fail2Ban-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
+      #sudo tasksel install ssh-server
+      #curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Fail2Ban-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 
     # Ignorar msrs para evitar el loop de arranque de las máquinas virtuales de macOS.
       echo "options kvm ignore_msrs=Y" | sudo tee -a /etc/modprobe.d/macos.conf
@@ -293,7 +304,7 @@ if [ $cVerSO == "13" ]; then
       #
 
     # Volver a reinciar, pero esta vez ya en modo texto
-      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Interfaz-ModoCLI.sh | sed 's-sudo--g' | bash
+      #curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Interfaz-ModoCLI.sh | sed 's-sudo--g' | bash
 
   fi
 
