@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar software en el escritorio Mate de Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Mate-Software-Instalar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Mate-Software-3-Instalar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Mate-Software-Instalar.sh | sed 's-sudo--g' | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Mate-Software-3-Instalar.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
