@@ -11,7 +11,7 @@
 # Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Gnome-Personalizar.sh | bash
 #
-# Ejecución remota como root:
+# Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Gnome-Personalizar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
