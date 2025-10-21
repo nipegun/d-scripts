@@ -59,6 +59,11 @@
       sudo apt-get -y autoremove --purge inkscape
       sudo apt-get -y autoremove --purge gnome-disk-utility
       sudo apt-get -y autoremove --purge libreoffice-draw
+      sudo apt-get -y autoremove --purge libreoffice-math
+      sudo apt-get -y autoremove --purge goldendict-ng
+      sudo apt-get -y autoremove --purge *fcitx5*
+      sudo apt-get -y autoremove --purge xiterm+thai
+      sudo apt-get -y autoremove --purge calamares*
       sudo apt-get -y autoremove
       sudo apt-get -y autoclean
 
@@ -76,6 +81,11 @@
       sudo apt-get -y autoremove --purge inkscape
       sudo apt-get -y autoremove --purge gnome-disk-utility
       sudo apt-get -y autoremove --purge libreoffice-draw
+      sudo apt-get -y autoremove --purge libreoffice-math
+      sudo apt-get -y autoremove --purge goldendict-ng
+      sudo apt-get -y autoremove --purge *fcitx5*
+      sudo apt-get -y autoremove --purge xiterm+thai
+      sudo apt-get -y autoremove --purge calamares*
       sudo apt-get -y autoremove
       sudo apt-get -y autoclean
 
