@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar y configurar ProxmoxVE sobre Debian instalado con Mate Desktop
 #
 # Ejecución remota (puede requerir permisos sudo):
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Proxmox-VirtualizationEnvironment-Instalar-SobreDebianMate.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Proxmox-VirtualizationEnvironment-Instalar-SobreDebianMate.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ParaCLI/Proxmox-VirtualizationEnvironment-Instalar-SobreDebianMate.sh | sed 's-sudo--g' | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Proxmox-VirtualizationEnvironment-Instalar-SobreDebianMate.sh | sed 's-sudo--g' | bash
 # ---------
 
 # IP Local
