@@ -13,3 +13,8 @@ Scripts para instalar cualquier solución informatica pensada para ejecutar en e
 ## ServWeb
 
 Scripts para instalar cualquier solución informática que exponga un servicio web.
+
+## _
+
+Scripts que uso como base para instlar otros scripts de esta sección del repo.
+
