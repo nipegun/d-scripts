@@ -2,14 +2,14 @@
 
 En esta sección del repo encontrarás scripts para instalar diferentes soluciones informáticas en Debian.
 
-## En ParaCLI
+## ParaCLI
 
-Encontrarás scripts para instalar programas que se ejecuten únicamente desde terminal.
+Scripts para instalar programas que se ejecuten únicamente desde terminal.
 
-## En ParaGUI
+## ParaGUI
 
-Encontrarás scripts para instalar cualquier solución informatica pensada para ejecutar en entorno gráfico.
+Scripts para instalar cualquier solución informatica pensada para ejecutar en entorno gráfico.
 
-## En ServWeb
+## ServWeb
 
-Encontrarás scripts para instalar cualquier solución informática que exponga un servicio web.
+Scripts para instalar cualquier solución informática que exponga un servicio web.
