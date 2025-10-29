@@ -37,6 +37,9 @@
 # Instalar Midnight Commander
   sudo apt-get -y install mc
 
+# Permitir que el sistema sin NetworkManager pueda pedir configuración por DHCP
+  sudo apt-get -y install isc-dhcp-client
+
 # Instalar shellcheck
   sudo apt-get -y install shellcheck
 
