@@ -7,8 +7,6 @@
 # Requisitos opcionales: lspci, glxinfo, bc
 # Instalación rápida: sudo apt install pciutils mesa-utils bc -y
 
-echo "=== Detección de GPUs y VRAM ==="
-
 # Verificar que lspci existe
 if ! command -v lspci >/dev/null 2>&1; then
   echo "Error: no se encuentra el comando 'lspci'. Instalá el paquete 'pciutils'."
@@ -64,8 +62,4 @@ echo "$vGPUs" | while read -r vLinea; do
     echo "Tipo: desconocido o no soportado."
   fi
 done
-
-echo
-echo "=== Fin del informe ==="
-
 
