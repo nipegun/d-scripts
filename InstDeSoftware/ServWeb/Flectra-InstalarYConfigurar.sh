@@ -266,7 +266,7 @@
                 echo ""
                 vIPLocal=$(hostname -I | sed 's- --g')
                 echo ""
-                echo "      Para configurar la base de datos accede a http://$vIPLocal:7073"
+                echo "      Para configurar la base de datos accede a http://"$vIPLocal":7073"
                 echo ""
 
             ;;
@@ -579,7 +579,7 @@
                 echo ""
                 vIPLocal=$(hostname -I | sed 's- --g')
                 echo ""
-                echo "      Para configurar la base de datos accede a http://$vIPLocal:7073"
+                echo "      Para configurar la base de datos accede a http://"$vIPLocal":7073"
                 echo ""
 
             ;;
