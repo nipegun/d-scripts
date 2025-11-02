@@ -65,7 +65,7 @@
           sudo apt-get -y install dialog
           echo ""
         fi
-      menu=(dialog --checklist "Cómo quieres instalar Flectra:" 22 80 16)
+      menu=(dialog --radiolist "Cómo quieres instalar Flectra:" 22 80 16)
         opciones=(
           1 "Clonando el repo oficial de GitLab"                            on
           2 "Agregando el repositorio de la última versión"                 off
