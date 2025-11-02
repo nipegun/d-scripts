@@ -67,6 +67,9 @@
     # Instalar herramientas de terminal
       curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Software-CLI-Instalar.sh | bash
 
+    # Ofimática
+      apt-get -y install xpad # Para sticky notes
+
     # Instalar herramientas para poder conectar dispositivos Android
       echo ""
       echo "  Instalando herramientas para poder conectar dispositivos Android..."
