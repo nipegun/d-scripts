@@ -1,7 +1,8 @@
 #!/bin/bash
-# Script: detectar-vram.sh
-# Propósito: Detectar todas las GPUs y mostrar su VRAM total.
-# Compatible con AMD, NVIDIA e Intel.
+
+# Script de NiPeGun para etectar todas las GPUs y mostrar su VRAM total (Compatible con AMD, NVIDIA e Intel)
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Hardware-VRAM-Info.sh | bash
 
 # Requisitos opcionales: lspci, glxinfo, bc
 # Instalación rápida: sudo apt install pciutils mesa-utils bc -y
@@ -45,9 +46,9 @@ echo "$vGPUs" | while read -r vLinea; do
 
   elif echo "$vModelo" | grep -iq "amd\|radeon"; then
     echo "Tipo: AMD"
-    for vCard in /sys/class/drm/card*/device/mem_info_vram_total 2>/dev/null; do
+    for vCard in /sys/class/drm/card*/device/mem_info_vram_total; do
       if [ -f "$vCard" ]; then
-        vBytes=$(cat "$vCard")
+        vBytes=$(cat "$vCard" 2>/dev/null)
         vMiB=$((vBytes / 1024 / 1024))
         vGiB=$(echo "scale=2; $vMiB / 1024" | bc)
         vCardName=$(echo "$vCard" | sed 's|/sys/class/drm/||; s|/device/mem_info_vram_total||')
@@ -66,3 +67,5 @@ done
 
 echo
 echo "=== Fin del informe ==="
+
+
