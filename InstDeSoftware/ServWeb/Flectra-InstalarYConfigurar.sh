@@ -247,6 +247,9 @@
               # Reparar permisos
                 sudo chown flectra:flectra /opt/flectra/ -R
 
+              # Cambiar el logo de la web
+                # El logo de la web está en  /opt/flectra/Code/flectra/addons/base/static/img/res_company_logo.png
+
               # Activar y lanzar el servicio
                 echo ""
                 echo "    Activando y lanzando el servicio..."
