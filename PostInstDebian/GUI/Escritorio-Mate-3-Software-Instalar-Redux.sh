@@ -58,7 +58,7 @@
       sudo apt-get -y update
 
     # Instalar herramientas de terminal
-      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Software-CLI-Instalar.sh | bash
+      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Software-CLI-Instalar-Redux.sh | bash
 
     # Ofimática y documentos
       sudo apt-get -y install libreoffice-help-es
