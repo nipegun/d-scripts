@@ -51,66 +51,21 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de software para el escritorio mate en Debian 13 (x)...${cFinColor}"
     echo ""
 
-    # Actualizar el cache de los paquetes
+    # Actualizar la lista de paquetes disponibles en los repositorios...
+      echo ""
+      echo "  Actualizando la lista de paquetes disponibles en los repositorios..."
+      echo ""
       sudo apt-get -y update
 
-    # Herramientas de terminal
-      sudo apt-get -y install openssh-server
-      sudo apt-get -y install sshpass
-      sudo apt-get -y install whois
-      sudo apt-get -y install shellcheck
-      sudo apt-get -y install grub2
-      sudo apt-get -y install wget
-      sudo apt-get -y install curl
-      sudo apt-get -y install nmap
-      sudo apt-get -y install mc
-      sudo apt-get -y install smartmontools
-      sudo apt-get -y install coreutils
-      sudo apt-get -y install sshpass
-      sudo apt-get -y install unrar
-      sudo apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
-      sudo apt-get -y install android-tools-fastboot
+    # Instalar herramientas de terminal
+      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Software-CLI-Instalar.sh | bash
 
-    # Sistema
-      sudo apt-get -y install gparted
-      sudo apt-get -y install hardinfo
-      sudo apt-get -y install bleachbit
-
-    # Multimedia
-      sudo apt-get -y install vlc
-      #sudo apt-get -y install vlc-plugin-vlsub
-      sudo apt-get -y install audacity
-      sudo apt-get -y install subtitleeditor
-      sudo apt-get -y install easytag
-      sudo apt-get -y install openshot
-
-    # Redes e internet
-      sudo apt-get -y install wireshark
-      sudo apt-get -y install etherape
-        setcap CAP_NET_RAW=pe /usr/bin/etherape
-      sudo apt-get -y install virt-viewer
-      sudo apt-get -y install remmina
-      sudo apt-get -y install firefox-esr-l10n-es-es
-      sudo apt-get -y install thunderbird
-      sudo apt-get -y install thunderbird-l10n-es-es
-      sudo apt-get -y install lightning-l10n-es-es
-      sudo apt-get -y install eiskaltdcpp
-      sudo apt-get -y install amule
-      sudo apt-get -y install chromium
-      sudo apt-get -y install chromium-l10n
-      sudo apt-get -y install filezilla
-      sudo apt-get -y install mumble
-      sudo apt-get -y install obs-studio
-      #sudo apt-get -y install telegram-desktop
-      sudo apt-get -y install discord
-
-    # Juegos
-      sudo apt-get -y install scid
-      sudo apt-get -y install scid-rating-data
-      sudo apt-get -y install scid-spell-data
-      sudo apt-get -y install stockfish
-      sudo apt-get -y install dosbox
-      sudo apt-get -y install scummvm
+    # Ofimática y documentos
+      sudo apt-get -y install libreoffice-help-es
+      sudo apt-get -y install pdfarranger
+      sudo apt-get -y install foliate              # Para leer libros en ePub
+      sudo apt-get -y install xpad                 # Para sticky notes
+      sudo apt-get -y install simple-scan
 
     # Fuentes
       sudo apt-get -y install fonts-ubuntu
@@ -119,10 +74,87 @@
       sudo apt-get -y install fonts-freefont-otf
       sudo apt-get -y install ttf-mscorefonts-installer
 
-    # Programación
+    # Instalar herramientas para poder conectar dispositivos Android
+      echo ""
+      echo "  Instalando herramientas para poder conectar dispositivos Android..."
+      echo ""
+      sudo apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
+      sudo apt-get -y install android-tools-fastboot
+
+    # Apps de Sistema
+      echo ""
+      echo "  Instalando aplicaciones de sistema..."
+      echo ""
+      sudo apt-get -y install gparted
+      sudo apt-get -y install hardinfo
+      sudo apt-get -y install bleachbit
+
+    # Apps de seguridad
+      echo ""
+      echo "  Instalando aplicaciones de seguridad..."
+      echo ""
+      sudo apt-get -y install keepassxc
+
+    # Apps Multimedia
+      echo ""
+      echo "  Instalando aplicaciones multimedia..."
+      echo ""
+      sudo apt-get -y install vlc
+      #sudo apt-get -y install vlc-plugin-vlsub
+      sudo apt-get -y install audacity
+      sudo apt-get -y install subtitleeditor
+      sudo apt-get -y install easytag
+      #sudo apt-get -y install openshot
+
+    # Apps de redes e internet
+      echo ""
+      echo "  Instalando aplicaciones de redes e internet..."
+      echo ""
+      sudo apt-get -y install wireshark
+        #sudo dpkg-reconfigure wireshark-common
+        sudo usermod -aG wireshark $USER
+      sudo apt-get -y install etherape
+        sudo setcap CAP_NET_RAW=pe /usr/bin/etherape 
+      sudo apt-get -y install virt-viewer
+      sudo apt-get -y install remmina
+      sudo apt-get -y install firefox-esr-l10n-es-es
+      sudo apt-get -y install thunderbird
+      sudo apt-get -y install thunderbird-l10n-es-es
+      #sudo apt-get -y install lightning-l10n-es-es
+      sudo apt-get -y install eiskaltdcpp
+      sudo apt-get -y install amule
+      sudo apt-get -y install chromium
+      sudo apt-get -y install chromium-l10n
+      sudo apt-get -y install filezilla
+      sudo apt-get -y install mumble
+      sudo apt-get -y install obs-studio
+      #sudo apt-get -y install telegram-desktop
+      #sudo apt-get -y install discord
+      sudo apt-get -y install transmission-gtk
+
+    # Juegos
+      echo ""
+      echo "  Instalando juegos..."
+      echo ""
+      sudo apt-get -y install scid
+      sudo apt-get -y install scid-rating-data
+      sudo apt-get -y install scid-spell-data
+      sudo apt-get -y install stockfish
+      sudo apt-get -y install dosbox
+      sudo apt-get -y install scummvm
+
+    # apps de programación
+      echo ""
+      echo "  Instalando apps de programación..."
+      echo ""
       sudo apt-get -y install ghex
+      sudo apt-get -y install dia
+      sudo apt-get -y install xmlcopyeditor
 
     # Antivirus
+      echo ""
+      echo "  Instalando anti-virus ClamAV..."
+      echo ""
       sudo apt-get -y install clamtk
       sudo apt-get -y install clamav
       sudo apt-get -y install clamav-freshclam
@@ -133,16 +165,6 @@
       #sudo chmod 640 /var/log/clamav/freshclam.log
       sudo rm -rf /var/log/clamav/freshclam.log
       sudo freshclam
-
-    # Otros
-      sudo apt-get -y install libreoffice-help-es
-      sudo apt-get -y install unrar
-      sudo apt-get -y install htop
-      sudo apt-get -y install simple-scan
-      sudo apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
-      sudo apt-get -y install android-tools-fastboot
-      #sudo apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
-      #sudo apt-get -y install comix
 
     # SmartCards
       sudo apt-get -y install pcscd
@@ -165,7 +187,7 @@
         #sudo fprintd-delete root --finger left-middle-finger
         #sudo fprintd-delete root --finger left-ring-finger
         #sudo fprintd-delete root --finger left-little-finger
-        # Registrar las huellas nuevas
+      # Registrar las huellas nuevas
         #echo ""
         #echo "    Registrando nuevas huellas digitales..."
         #echo ""
@@ -184,28 +206,38 @@
         #echo "    Activando la autenticación PAM mediante huellas digitales..."
         #echo ""
         #sudo pam-auth-update # Marcar fingerprint authentication
-      # Comprobar que la autenticación por huella se activó correctamente
-        #sudo grep fprint /etc/pam.d/common-auth
+        # Comprobar que la autenticación por huella se activó correctamente
+        #grep fprint /etc/pam.d/common-auth
         # En caso de que no funcione la autenticación por huella habría entrar como root y purgar fprint 
         # sudo apt-get purge fprintd
 
     # Lanzador de chromium para el root
+      echo ""
+      echo "  Preparando el lanzador de chromium para el root..."
+      echo ""
       sudo mkdir -p /root/.local/share/applications/ 2> /dev/null
-      echo "[Desktop Entry]"                     | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "Name=Chromium (para root)"           | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "Comment=Accede a Internet"           | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "GenericName=Navegador web"           | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "Exec=/usr/bin/chromium --no-sandbox" | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "Icon=chromium"                       | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "Type=Application"                    | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "StartupNotify=false"                 | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "StartupWMClass=Code"                 | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "Categories=Network;WebBrowser;"      | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "[Desktop Entry]"                                                                                                           | sudo tee    /root/.local/share/applications/chromiumroot.desktop
+      echo "Name=Chromium (para root)"                                                                                                 | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "Comment=Accede a Internet"                                                                                                 | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "GenericName=Navegador web"                                                                                                 | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "Exec=/usr/bin/chromium --no-sandbox"                                                                                       | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "Icon=chromium"                                                                                                             | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "Type=Application"                                                                                                          | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "StartupNotify=false"                                                                                                       | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "StartupWMClass=Code"                                                                                                       | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
+      echo "Categories=Network;WebBrowser;"                                                                                            | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
       echo "MimeType=text/html;text/xml;application/xhtml_xml;application/x-mimearchive;x-scheme-handler/http;x-scheme-handler/https;" | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
       sudo gio set /root/.local/share/applications/chromiumroot.desktop "metadata::trusted" yes
 
     # Tor browser
+      echo ""
+      echo "  Instalando TOR browser..."
+      echo ""
       sudo apt-get -y install torbrowser-launcher
+
+    # Tarjetas AMD
+      #sudo apt-get -y install radeontop  # Para ver la utilización de proceso y VRAM de las tarjetas amd, en vivo
+      #sudo apt-get -y install rocm-smi   # Para lo mismo que radeontop, pero con drivers rocm instalados
 
     # Específicas para mate-desktop
       sudo apt-get -y install mate-tweaks
@@ -221,172 +253,9 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de software para el escritorio mate en Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    # Deesinstalar software primero
-      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Mate-Software-Desinstalar.sh | bash
-
-    # Actualizar el cache de los paquetes
-      sudo apt-get -y update
-
-    # Herramientas de terminal
-      sudo apt-get -y install openssh-server
-      sudo apt-get -y install sshpass
-      sudo apt-get -y install whois
-      sudo apt-get -y install shellcheck
-      sudo apt-get -y install grub2
-      sudo apt-get -y install wget
-      sudo apt-get -y install curl
-      sudo apt-get -y install nmap
-      sudo apt-get -y install mc
-      sudo apt-get -y install smartmontools
-      sudo apt-get -y install coreutils
-      sudo apt-get -y install sshpass
-      sudo apt-get -y install unrar
-      sudo apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
-      sudo apt-get -y install android-tools-fastboot
-
-    # Sistema
-      sudo apt-get -y install gparted
-      sudo apt-get -y install hardinfo
-      sudo apt-get -y install bleachbit
-
-    # Multimedia
-      sudo apt-get -y install vlc
-      #sudo apt-get -y install vlc-plugin-vlsub
-      sudo apt-get -y install audacity
-      sudo apt-get -y install subtitleeditor
-      sudo apt-get -y install easytag
-      sudo apt-get -y install openshot
-
-    # Redes e internet
-      sudo apt-get -y install wireshark
-      sudo apt-get -y install etherape
-        setcap CAP_NET_RAW=pe /usr/bin/etherape
-      sudo apt-get -y install virt-viewer
-      sudo apt-get -y install remmina
-      sudo apt-get -y install firefox-esr-l10n-es-es
-      sudo apt-get -y install thunderbird
-      sudo apt-get -y install thunderbird-l10n-es-es
-      sudo apt-get -y install lightning-l10n-es-es
-      sudo apt-get -y install eiskaltdcpp
-      sudo apt-get -y install amule
-      sudo apt-get -y install chromium
-      sudo apt-get -y install chromium-l10n
-      sudo apt-get -y install filezilla
-      sudo apt-get -y install mumble
-      sudo apt-get -y install obs-studio
-      #sudo apt-get -y install telegram-desktop
-      sudo apt-get -y install discord
-
-    # Juegos
-      sudo apt-get -y install scid
-      sudo apt-get -y install scid-rating-data
-      sudo apt-get -y install scid-spell-data
-      sudo apt-get -y install stockfish
-      sudo apt-get -y install dosbox
-      sudo apt-get -y install scummvm
-
-    # Fuentes
-      sudo apt-get -y install fonts-ubuntu
-      sudo apt-get -y install fonts-ubuntu-console
-      sudo apt-get -y install fonts-freefont-ttf
-      sudo apt-get -y install fonts-freefont-otf
-      sudo apt-get -y install ttf-mscorefonts-installer
-
-    # Programación
-      sudo apt-get -y install ghex
-
-    # Antivirus
-      sudo apt-get -y install clamtk
-      sudo apt-get -y install clamav
-      sudo apt-get -y install clamav-freshclam
-      sudo apt-get -y install clamav-daemon
-      sudo mkdir /var/log/clamav/ 2> /dev/null
-      #sudo touch /var/log/clamav/freshclam.log
-      #sudo chown clamav:clamav /var/log/clamav/freshclam.log
-      #sudo chmod 640 /var/log/clamav/freshclam.log
-      sudo rm -rf /var/log/clamav/freshclam.log
-      sudo freshclam
-
-    # Otros
-      sudo apt-get -y install libreoffice-help-es
-      sudo apt-get -y install unrar
-      sudo apt-get -y install htop
-      sudo apt-get -y install simple-scan
-      sudo apt-get -y install android-tools-adb # Para poder operar con el contenido de los móviles y relojes android
-      sudo apt-get -y install android-tools-fastboot
-      #sudo apt-get -y install pyrenamer # Hay que agregar el repositorio de stretch antes, o instalar gprename, como reemplazo
-      #sudo apt-get -y install comix
-
-    # SmartCards
-      sudo apt-get -y install pcscd
-      sudo apt-get -y install opensc-pkcs11 
-      sudo apt-get -y install libpam-pkcs11
-
-    # Huellas dactilares
-      #sudo apt-get -y install libpam-fprintd
-      # Borrar todas las huellas registradas en el usuario root (por las dudas)
-        #echo ""
-        #echo "    Borrando todas las huellas digitales registradas para el usuario root..."
-        #echo ""
-        #sudo fprintd-delete root --finger right-index-finger
-        #sudo fprintd-delete root --finger right-thumb
-        #sudo fprintd-delete root --finger right-middle-finger
-        #sudo fprintd-delete root --finger right-ring-finger
-        #sudo fprintd-delete root --finger right-little-finger
-        #sudo fprintd-delete root --finger left-index-finger
-        #sudo fprintd-delete root --finger left-thumb
-        #sudo fprintd-delete root --finger left-middle-finger
-        #sudo fprintd-delete root --finger left-ring-finger
-        #sudo fprintd-delete root --finger left-little-finger
-        # Registrar las huellas nuevas
-        #echo ""
-        #echo "    Registrando nuevas huellas digitales..."
-        #echo ""
-        #sudo fprintd-enroll -f right-index-finger
-        #sudo fprintd-enroll -f right-thumb
-        #sudo fprintd-enroll -f right-middle-finger
-        #sudo fprintd-enroll -f right-ring-finger
-        #sudo fprintd-enroll -f right-little-finger
-        #sudo fprintd-enroll -f left-index-finger
-        #sudo fprintd-enroll -f left-thumb
-        #sudo fprintd-enroll -f left-middle-finger
-        #sudo fprintd-enroll -f left-ring-finger
-        #sudo fprintd-enroll -f left-little-finger
-      # Activar autenticación PAM con huella dactilar
-        #echo ""
-        #echo "    Activando la autenticación PAM mediante huellas digitales..."
-        #echo ""
-        #sudo pam-auth-update # Marcar fingerprint authentication
-      # Comprobar que la autenticación por huella se activó correctamente
-        #sudo grep fprint /etc/pam.d/common-auth
-        # En caso de que no funcione la autenticación por huella habría entrar como root y purgar fprint 
-        # sudo apt-get purge fprintd
-
-    # Lanzador de chromium para el root
-      sudo mkdir -p /root/.local/share/applications/ 2> /dev/null
-      echo "[Desktop Entry]"                     | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "Name=Chromium (para root)"           | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "Comment=Accede a Internet"           | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "GenericName=Navegador web"           | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "Exec=/usr/bin/chromium --no-sandbox" | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "Icon=chromium"                       | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "Type=Application"                    | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "StartupNotify=false"                 | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "StartupWMClass=Code"                 | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "Categories=Network;WebBrowser;"      | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      echo "MimeType=text/html;text/xml;application/xhtml_xml;application/x-mimearchive;x-scheme-handler/http;x-scheme-handler/https;" | sudo tee -a /root/.local/share/applications/chromiumroot.desktop
-      sudo gio set /root/.local/share/applications/chromiumroot.desktop "metadata::trusted" yes
-
-    # Tor browser
-      sudo apt-get -y install torbrowser-launcher
-
-    # Específicas para mate-desktop
-      sudo apt-get -y install mate-tweaks
-      sudo apt-get -y install caja-open-terminal
-      sudo apt-get -y install caja-admin
-      sudo apt-get -y install mozo                # Editor del menúde mate
-      #sudo apt-get -y install caja-share         # Para compartir carpetas desde el propio caja
-      #sudo apt-get -y install gvfs-backends      # Para poder ver las comparticiones de red usando samba
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
   elif [ $cVerSO == "11" ]; then
 
