@@ -71,7 +71,7 @@ if [ $# -ne $cCantArgumEsperados ]
       echo ""
       echo "    Intentando modificar $1 por $2 en todos los archivos del sistema..."
       echo ""
-      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Texto-BuscarYReemplazar-EnArchivos-DeTodoElSistema.sh | bash -s "$1" "$2"
+      curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Texto-BuscarYReemplazar-EnArchivos-DeTodoElSistema.sh | bash -s "$1" "$2"
       echo ""
     fi
 fi
