@@ -57,7 +57,7 @@
 # Otras
   sudo apt-get -y install sshpass
   sudo apt-get -y install whois
-  sudo apt-get -y install shellcheck
+
   sudo apt-get -y install grub2
   sudo apt-get -y install wget
   sudo apt-get -y install curl
@@ -66,3 +66,4 @@
   sudo apt-get -y install coreutils
   sudo apt-get -y install unrar
   sudo apt-get -y install usbutils
+  sudo apt-get -y install htop
