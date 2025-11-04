@@ -9,7 +9,7 @@
 # Script de NiPeGun para mostrar información sobre el/los procesador/es
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Hardware-Discos-NVMe-Temperatura.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Hardware-Discos-NVMe-Temperatura-Registrar-en-InfluxDB.sh | bash
 # ----------
 
 vHostInflux="x.x.x.x"
