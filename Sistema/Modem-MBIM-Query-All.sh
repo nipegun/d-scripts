@@ -9,7 +9,7 @@
 # Script de NiPeGun para obtener información del modem 4G mediante el protocolo MBIM
 #
 # Ejecución remota:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Modem-MBIM-Query-All.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Modem-MBIM-Query-All.sh | bash
 # ----------
 
 cColorAzul="\033[0;34m"
