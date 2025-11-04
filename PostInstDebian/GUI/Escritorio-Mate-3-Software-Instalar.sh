@@ -308,7 +308,7 @@
       sudo freshclam
 
     # Otros
-      sudo apt-get -y install libreoffice-l10n-es
+      sudo apt-get -y install libreoffice-help-es
       sudo apt-get -y install unrar
       sudo apt-get -y install htop
       sudo apt-get -y install simple-scan
