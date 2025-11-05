@@ -54,92 +54,147 @@ if [ $cVerSO == "13" ]; then
   echo ""
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Fail2Ban para Debian 13 (Trixie)...${cFinColor}"
   echo ""
-  echo ""
-  echo "  Instalando paquetes..." 
-  echo ""
-  sudo apt-get -y update
-  sudo apt-get -y install fail2ban
-  #sudo apt-get -y install sendmail
 
-  # Crear el archivo de configuración
-    echo "[INCLUDES]"                                            | sudo tee    /etc/fail2ban/filter.d/JaulaInCrescendo.conf
-    echo "before = common.conf"                                  | sudo tee -a /etc/fail2ban/filter.d/JaulaInCrescendo.conf
-    echo "[Definition]"                                          | sudo tee -a /etc/fail2ban/filter.d/JaulaInCrescendo.conf
-    echo "failregex = \]\s+Unban\s+<HOST>"                       | sudo tee -a /etc/fail2ban/filter.d/JaulaInCrescendo.conf
-    echo "ignoreregex = \[JaulaInCrescendo.*\]\s+Unban\s+<HOST>" | sudo tee -a /etc/fail2ban/filter.d/JaulaInCrescendo.conf
-  # Crear la jaula
-    echo "[DEFAULT]"                                                                         | sudo tee    /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "# 3 contraseñas erróneas en 1 minuto, crear un baneo de 1 minuto"                  | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "maxretry = 3"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "findtime = 1m"                                                                     | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "bantime = 1m"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo ""                                                                                  | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "[JaulaInCrescendo2]"                                                               | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "# Si ocurren 2 baneos de 1 minuto en 5 minutos, crear un nuevo baneo de 5 minutos" | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "enabled = true"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "filter = JaulaInCrescendo"                                                         | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "maxretry = 2"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "findtime = 5m"                                                                     | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "bantime = 5m"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "logpath = /var/log/fail2ban.log"                                                   | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo ""                                                                                  | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "[JaulaInCrescendo3]"                                                               | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "# Si ocurren 2 baneos de 5 minutos en 30 minutos, crear un nuevo baneo 30 minutos" | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "enabled = true"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "filter = JaulaInCrescendo"                                                         | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "maxretry = 2"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "findtime = 30m"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "bantime = 30m"                                                                     | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "logpath = /var/log/fail2ban.log"                                                   | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo ""                                                                                  | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "[JaulaInCrescendo4]"                                                               | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "# Si ocurren 2 baneos de 30 minutos en 1 día, crear un nuevo baneo de 1 día"       | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "enabled = true"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "filter = JaulaInCrescendo"                                                         | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "maxretry = 2"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "findtime = 1d"                                                                     | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "bantime = 1d"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "logpath = /var/log/fail2ban.log"                                                   | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo ""                                                                                  | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "[JaulaInCrescendo5]"                                                               | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "# Si ocurren 2 baneos de 1 día en 1 semana, crear un nuevo baneo de 1 semana"      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "enabled = true"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "filter = JaulaInCrescendo"                                                         | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "maxretry = 2"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "findtime = 1w"                                                                     | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "bantime = 1w"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "logpath = /var/log/fail2ban.log"                                                   | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo ""                                                                                  | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "[JaulaInCrescendo6]"                                                               | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "# Si ocurren 2 baneos de 1 semana en 1 mes, crear un nuevo baneo de 1 mes"         | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "enabled = true"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "filter = JaulaInCrescendo"                                                         | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "maxretry = 2"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "findtime = 1mo"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "bantime = 1mo"                                                                     | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
-    echo "logpath = /var/log/fail2ban.log"                                                   | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+    # Crear el menú
+      # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install dialog
+          echo ""
+        fi
+      #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
+      #menu=(dialog --radiolist "Marca las opciones que quieras instalar:" 22 80 16)      # Selección única
+      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 80 16)
+        opciones=(
+          1 "Instalar fail2ban"                   on
+          2 "  Aplicar configuración nipeguniana" on
+          3 "  Activar notificaciones por email"  off
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+      #clear
 
-  # Modificar debian defaults
-    #echo "ignoreip = 127.0.0.1"        | sudo tee    /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "maxretry = 3"                | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "bantime = 10m"               | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "findtime = 5m"               | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo ""                            | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "# Mail"                      | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "#destemail = mail@gmail.com" | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "#sender = mail@gmail.com"    | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "#sendername = Fail2Ban"      | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "#mta = sendmail"             | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-    #echo "#action = %(action_mwl)s"    | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+      for choice in $choices
+        do
+          case $choice in
 
-  # Crear los archivos de logs
-    sudo touch /var/log/auth.log      # Necesario para que inicie el servicio
-    sudo touch /var/log/fail2ban.log
+            1)
 
-  # Reiniciar el servicio
-    sudo systemctl restart fail2ban
-    sudo systemctl status fail2ban --no-pager
-    # tail -f /var/log/fail2ban.log
+              echo ""
+              echo "  Instalando paquetes de fail2ban..."
+              echo ""
+              sudo apt-get -y update
+              sudo apt-get -y install fail2ban
+
+              # Crear el archivo de log de autenticaciones (Necesario para que inicie el servicio)
+                sudo touch /var/log/auth.log
+
+              # Reiniciar el servicio
+                sudo systemctl restart fail2ban
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Aplicando configuración nipeguniana..."
+              echo ""
+              # Crear el archivo de configuración
+              echo "[INCLUDES]"                                            | sudo tee    /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+              echo "before = common.conf"                                  | sudo tee -a /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+              echo "[Definition]"                                          | sudo tee -a /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+              echo "failregex = \]\s+Unban\s+<HOST>"                       | sudo tee -a /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+              echo "ignoreregex = \[JaulaInCrescendo.*\]\s+Unban\s+<HOST>" | sudo tee -a /etc/fail2ban/filter.d/JaulaInCrescendo.conf
+              # Crear la jaula
+              echo "[DEFAULT]"                                                                         | sudo tee    /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "# 3 contraseñas erróneas en 1 minuto, crear un baneo de 1 minuto"                  | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "maxretry = 3"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "findtime = 1m"                                                                     | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "bantime = 1m"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo ""                                                                                  | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "[JaulaInCrescendo2]"                                                               | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "# Si ocurren 2 baneos de 1 minuto en 5 minutos, crear un nuevo baneo de 5 minutos" | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "enabled = true"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "filter = JaulaInCrescendo"                                                         | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "maxretry = 2"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "findtime = 5m"                                                                     | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "bantime = 5m"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "logpath = /var/log/fail2ban.log"                                                   | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo ""                                                                                  | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "[JaulaInCrescendo3]"                                                               | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "# Si ocurren 2 baneos de 5 minutos en 30 minutos, crear un nuevo baneo 30 minutos" | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "enabled = true"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "filter = JaulaInCrescendo"                                                         | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "maxretry = 2"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "findtime = 30m"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "bantime = 30m"                                                                     | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "logpath = /var/log/fail2ban.log"                                                   | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo ""                                                                                  | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "[JaulaInCrescendo4]"                                                               | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "# Si ocurren 2 baneos de 30 minutos en 1 día, crear un nuevo baneo de 1 día"       | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "enabled = true"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "filter = JaulaInCrescendo"                                                         | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "maxretry = 2"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "findtime = 1d"                                                                     | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "bantime = 1d"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "logpath = /var/log/fail2ban.log"                                                   | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo ""                                                                                  | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "[JaulaInCrescendo5]"                                                               | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "# Si ocurren 2 baneos de 1 día en 1 semana, crear un nuevo baneo de 1 semana"      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "enabled = true"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "filter = JaulaInCrescendo"                                                         | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "maxretry = 2"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "findtime = 1w"                                                                     | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "bantime = 1w"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "logpath = /var/log/fail2ban.log"                                                   | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo ""                                                                                  | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "[JaulaInCrescendo6]"                                                               | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "# Si ocurren 2 baneos de 1 semana en 1 mes, crear un nuevo baneo de 1 mes"         | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "enabled = true"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "filter = JaulaInCrescendo"                                                         | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "maxretry = 2"                                                                      | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "findtime = 1mo"                                                                    | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "bantime = 1mo"                                                                     | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+              echo "logpath = /var/log/fail2ban.log"                                                   | sudo tee -a /etc/fail2ban/jail.d/JaulaInCrescendo.local
+
+              # Crear el archivo de log de jaulas (Necesario para que inicie el servicio)
+                sudo touch /var/log/fail2ban.log
+
+              # Reiniciar el servicio
+                sudo systemctl restart fail2ban
+
+            ;;
+
+            3)
+
+              echo ""
+              echo "  Activando notificaciones por email..."
+              echo ""
+              sudo apt-get -y install sendmail
+
+              # Modificar debian defaults
+                echo "ignoreip = 127.0.0.1"        | sudo tee    /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "maxretry = 3"                | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "bantime = 10m"               | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "findtime = 5m"               | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo ""                            | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "# Mail"                      | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "#destemail = mail@gmail.com" | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "#sender = mail@gmail.com"    | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "#sendername = Fail2Ban"      | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "#mta = sendmail"             | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "#action = %(action_mwl)s"    | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+
+              # Reiniciar el servicio
+                sudo systemctl restart fail2ban
+
+            ;;
+
+        esac
+
+    done
 
 elif [ $cVerSO == "12" ]; then
 
