@@ -9,7 +9,7 @@
 # Script de NiPeGun para preparar Debian sin entorno gráfico a gusto de NiPeGun
 #
 # Ejecución remota únicamente como root:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/0-PrepararDebianCLI.sh | bash
+#   curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/0-PrepararDebianCLI.sh | bash
 # ----------
 
 # Definir constantes de color
@@ -31,22 +31,22 @@
   echo ""
 
 # Preparar ComandosPostArranque (rc.local)
-  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/ComandosPostArranque-Preparar.sh | sed 's-sudo--g' | bash
+  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/ComandosPostArranque-Preparar.sh | sed 's-sudo--g' | bash
 
 # Preparar tareas Cron
-  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/TareasCron-Preparar.sh | sed 's-sudo--g' | bash
+  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/TareasCron-Preparar.sh | sed 's-sudo--g' | bash
 
 # Preparar cortafuegos
-  #curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Cortafuegos-Preparar.sh | sed 's-sudo--g' | bash
+  #curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Cortafuegos-Preparar.sh | sed 's-sudo--g' | bash
 
 # Poner idioma sólo en español
-  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Idioma-CambiarTodoAes-es.sh | sed 's-sudo--g' | bash
+  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Idioma-CambiarTodoAes-es.sh | sed 's-sudo--g' | bash
 
 # Poner todos los repositorios
-  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Repositorios-Todos-Poner.sh | sed 's-sudo--g' | bash
+  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Repositorios-Todos-Poner.sh | sed 's-sudo--g' | bash
 
 # Modificar .bashrc a nivel de sistema
-  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/ModificarElBashRCPorDefecto.sh | sed 's-sudo--g' | bash
+  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/ModificarElBashRCPorDefecto.sh | sed 's-sudo--g' | bash
 
 # Instalar d-scripts
   apt-get -y update
