@@ -78,11 +78,11 @@ if [ $cVerSO == "13" ]; then
     sudo apt-get -y install gitlab-ce
 
   # Modificar el puerto
-    #sed -i "s|external_url 'http://gitlab.example.com'|external_url 'http://gitlab.home.arpa:10080'|g" /etc/gitlab/gitlab.rb
-    #sed -i -e "s|^# nginx\['listen_port'\] = nil|nginx['listen_port'] = 10080|"                        /etc/gitlab/gitlab.rb
-    #sed -i -e "s|^# nginx\['listen_https'\] = nil|nginx['listen_https'] = false|"                      /etc/gitlab/gitlab.rb
-    #sed -i "s|xxx|nginx['ssl_certificate'] = "/etc/gitlab/ssl/tu-dominio.crt"|g"                       /etc/gitlab/gitlab.rb
-    #sed -i "s|xxx|nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/tu-dominio.key"|g"                   /etc/gitlab/gitlab.rb
+    #sed -i "s|external_url 'http://gitlab.example.com'|external_url 'http://gitlab.home.arpa:8081'|g" /etc/gitlab/gitlab.rb
+    #sed -i -e "s|^# nginx\['listen_port'\] = nil|nginx['listen_port'] = 8081|"                        /etc/gitlab/gitlab.rb
+    #sed -i -e "s|^# nginx\['listen_https'\] = nil|nginx['listen_https'] = false|"                     /etc/gitlab/gitlab.rb
+    #sed -i "s|xxx|nginx['ssl_certificate'] = "/etc/gitlab/ssl/tu-dominio.crt"|g"                      /etc/gitlab/gitlab.rb
+    #sed -i "s|xxx|nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/tu-dominio.key"|g"                  /etc/gitlab/gitlab.rb
 
   # Configurar el DNS
     echo "127.0.0.1 $vFQDNGitLab" | sudo tee -a /etc/hosts
