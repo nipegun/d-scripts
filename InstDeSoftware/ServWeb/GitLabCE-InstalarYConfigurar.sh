@@ -111,11 +111,14 @@ if [ $cVerSO == "13" ]; then
         echo "alertmanager['enable'] = false"          | sudo tee -a /etc/gitlab/gitlab.rb
     fi
 
+  # Poner en español
+    sudo sed -i -e 's|config.i18n.fallbacks = \[:en]|config.i18n.fallbacks = \[:es]|g' /opt/gitlab/embedded/service/gitlab-rails/config/application.rb
+
   # Reconfigurar gitlab
     sudo gitlab-ctl reconfigure
 
-  # Poner en español
-    sudo sed -i -e 's|config.i18n.fallbacks = \[:en]|config.i18n.fallbacks = \[:es]|g' /opt/gitlab/embedded/service/gitlab-rails/config/application.rb
+  # Reinciar
+    sudo gitlab-ctl restart
 
   # Notificar password
     echo ""
