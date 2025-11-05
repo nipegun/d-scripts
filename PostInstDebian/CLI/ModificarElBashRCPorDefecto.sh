@@ -15,6 +15,9 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/ModificarElBashRCPorDefecto.sh | sed 's-sudo--g' | bash
 # ----------
 
+echo ""
+echo "  Iniciando el script de modificación de .bashrc..."
+echo ""
   # /root/.bashrc
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/.bashrc | sudo tee /root/.bashrc
     echo 'export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' | sudo tee -a /root/.bashrc
