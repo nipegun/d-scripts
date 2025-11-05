@@ -202,8 +202,6 @@ elif [ $cVerSO == "11" ]; then
     echo ""
     cat /etc/gitlab/initial_root_password
 
-
-
 elif [ $cVerSO == "10" ]; then
 
   echo ""
