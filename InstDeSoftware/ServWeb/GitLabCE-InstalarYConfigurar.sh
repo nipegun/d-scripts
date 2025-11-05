@@ -66,14 +66,23 @@ if [ $cVerSO == "13" ]; then
     sudo apt-get -y install postfix
 
   # Añadir el repo
-    curl -fsSL https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash
+    curl -fsSLk https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash
     # Cambiar repo trixie por bookworm (temporal haasta que haya uno oficial)
       sudo sed -i 's-trixie-bookworm-g' /etc/apt/sources.list.d/gitlab_gitlab-ce.list
+    #
+      curl -fsSLk https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg
     # Actualizar lista de paquetes del repo
       sudo apt-get -y update
 
   # Instlar paquete principal
     sudo apt-get -y install gitlab-ce
+
+  # Modificar el puerto
+    #sed -i "s|external_url 'http://gitlab.example.com'|external_url 'http://gitlab.home.arpa:10080'|g" /etc/gitlab/gitlab.rb
+    #sed -i -e "s|^# nginx\['listen_port'\] = nil|nginx['listen_port'] = 10080|"                        /etc/gitlab/gitlab.rb
+    #sed -i -e "s|^# nginx\['listen_https'\] = nil|nginx['listen_https'] = false|"                      /etc/gitlab/gitlab.rb
+    #sed -i "s|xxx|nginx['ssl_certificate'] = "/etc/gitlab/ssl/tu-dominio.crt"|g"                       /etc/gitlab/gitlab.rb
+    #sed -i "s|xxx|nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/tu-dominio.key"|g"                   /etc/gitlab/gitlab.rb
 
   # Configurar el DNS
     echo "127.0.0.1 $vFQDNGitLab" | sudo tee -a /etc/hosts
@@ -90,13 +99,23 @@ if [ $cVerSO == "13" ]; then
         echo "postgres_exporter['enable'] = false"     | sudo tee -a /etc/gitlab/gitlab.rb
         echo "gitlab_exporter['enable'] = false"       | sudo tee -a /etc/gitlab/gitlab.rb
         echo "alertmanager['enable'] = false"          | sudo tee -a /etc/gitlab/gitlab.rb
+    elif [ "$(systemd-detect-virt)" = "systemd-nspawn" ]; then
+      sudo sed -i '/^package\[\x27modify_kernel_parameters\x27\]/d' /etc/gitlab/gitlab.rb
+      echo "package['modify_kernel_parameters'] = false" | sudo tee -a /etc/gitlab/gitlab.rb
+      # Desactivar el stack de monitorización
+        echo "prometheus_monitoring['enable'] = false" | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "node_exporter['enable'] = false"         | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "redis_exporter['enable'] = false"        | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "postgres_exporter['enable'] = false"     | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "gitlab_exporter['enable'] = false"       | sudo tee -a /etc/gitlab/gitlab.rb
+        echo "alertmanager['enable'] = false"          | sudo tee -a /etc/gitlab/gitlab.rb
     fi
 
   # Reconfigurar gitlab
     sudo gitlab-ctl reconfigure
 
   # Poner en español
-    sudo sed -i 's|config.i18n.fallbacks = [:en]|config.i18n.fallbacks = [:es]|g' /opt/gitlab/embedded/service/gitlab-rails/config/application.rb
+    sudo sed -i -e 's|config.i18n.fallbacks = \[:en]|config.i18n.fallbacks = \[:es]|g' /opt/gitlab/embedded/service/gitlab-rails/config/application.rb
 
   # Notificar password
     echo ""
