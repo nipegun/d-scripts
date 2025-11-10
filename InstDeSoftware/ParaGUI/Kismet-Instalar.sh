@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# ----------
+# Script de niPeGun para instalar kismet
+#
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaGUI/Kismet-Instalar.sh | bash
+
+
 # Borrar paques viejos
   sudo rm -rfv /usr/local/bin/kismet* /usr/local/share/kismet* /usr/local/etc/kismet*
 
