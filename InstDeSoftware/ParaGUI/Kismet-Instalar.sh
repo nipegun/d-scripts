@@ -55,10 +55,6 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de kismet para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
-
     # Borrar paques viejos
       sudo rm -rfv /usr/local/bin/kismet* /usr/local/share/kismet* /usr/local/etc/kismet*
 
