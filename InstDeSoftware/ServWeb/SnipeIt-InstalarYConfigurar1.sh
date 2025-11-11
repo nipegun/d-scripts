@@ -24,7 +24,7 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/SnipeIt-InstalarYConfigurar.sh | nano -
 # ----------
 
-vFQDN='snipeit.dominio.com'
+vFQDN="${1:-snipeit.dominio.com}"
 
 # Definir constantes de color
   cColorAzul='\033[0;34m'
@@ -156,8 +156,8 @@ vFQDN='snipeit.dominio.com'
           sudo apt-get -y install lsb-release
           echo ""
         fi
-      #printf "%s\ny\n" "$vFQDN" | sudo ./install.sh
-      printf "%s\ny\nn\n" "$vFQDN" | sudo ./install.sh
+      # Lanzar el instalador respondiendo a la primera pregunta con el fqdn, a la segunda con "y" y a la tercera con "n"
+        printf "%s\ny\nn\n" "$vFQDN" | sudo ./install.sh
 
     # Notificar fin de ejecución del script
       echo ""
