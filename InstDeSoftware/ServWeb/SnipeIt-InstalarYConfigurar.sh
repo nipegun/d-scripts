@@ -24,6 +24,8 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/SnipeIt-InstalarYConfigurar.sh | nano -
 # ----------
 
+vFQDN='snipeit.dominio.com'
+
 # Definir constantes de color
   cColorAzul='\033[0;34m'
   cColorAzulClaro='\033[1;34m'
@@ -117,6 +119,16 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de snipe-it para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
+    # Comprobar si el paquete sudo está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}      El paquete sudo  no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        apt-get -y update
+        apt-get -y install sudo
+        echo ""
+      fi
+
     # Descargar el script oficial de instalación
       echo ""
       echo "    Descargando el script oficial de instalación..."
@@ -144,10 +156,7 @@
           sudo apt-get -y install lsb-release
           echo ""
         fi
-      sudo ./install.sh
-
-    #
-
+      printf "%s\ny\n" "$vFQDN" | sudo ./install.sh
 
   elif [ $cVerSO == "11" ]; then
 
