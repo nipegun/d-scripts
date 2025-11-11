@@ -150,6 +150,12 @@ vFQDN="${1:-snipeit.dominio.com}"
       # Lanzar el instalador respondiendo a la primera pregunta con el fqdn, a la segunda con "y" y a la tercera con "n"
         printf "%s\ny\nn\n" "$vFQDN" | sudo ./install.sh
 
+    # Modificar idioma
+      sudo sed -i "s|APP_LOCALE='en-US'|APP_LOCALE='es-ES'|g" /var/www/html/snipeit/.env
+
+    # Modificar timezone
+      sudo sed -i 's|APP_TIMEZONE=Etc/UTC|APP_TIMEZONE=Europe/Madrid|g' /var/www/html/snipeit/.env
+
     # Notificar fin de ejecución del script
       echo ""
       echo "  Script de instalación de snipe-it, finalizado."
