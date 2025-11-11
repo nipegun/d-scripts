@@ -159,6 +159,21 @@ vFQDN='snipeit.dominio.com'
       #printf "%s\ny\n" "$vFQDN" | sudo ./install.sh
       printf "%s\ny\nn\n" "$vFQDN" | sudo ./install.sh
 
+    # Notificar fin de ejecución del script
+      echo ""
+      echo "  Script de instalación de snipe-it, finalizado."
+      echo ""
+      echo "    SnipeIt se instaló con el FQDN snipeit.tudominio.com. Para cambiarlo modifica el archivo:"
+      echo ""
+      echo "      /etc/"
+      echo ""
+      echo "    y luego reinicia el servicio con:"
+      echo ""
+      echo "      systemctl restart snipeit"
+      echo ""
+      echo "    Para configurar el servidor de correo:"
+      echo ""
+
   elif [ $cVerSO == "11" ]; then
 
     echo ""
