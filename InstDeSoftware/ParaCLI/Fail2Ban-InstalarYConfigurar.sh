@@ -22,12 +22,6 @@
   cColorRojo='\033[1;31m'
   cFinColor='\033[0m'
 
-# Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
-    exit
-  fi
-
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
     . /etc/os-release
@@ -175,17 +169,25 @@ if [ $cVerSO == "13" ]; then
               sudo apt-get -y install sendmail
 
               # Modificar debian defaults
-                echo "ignoreip = 127.0.0.1"        | sudo tee    /etc/fail2ban/jail.d/defaults-debian.conf
-                echo "maxretry = 3"                | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-                echo "bantime = 10m"               | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-                echo "findtime = 5m"               | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-                echo ""                            | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-                echo "# Mail"                      | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-                echo "#destemail = mail@gmail.com" | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-                echo "#sender = mail@gmail.com"    | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-                echo "#sendername = Fail2Ban"      | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-                echo "#mta = sendmail"             | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
-                echo "#action = %(action_mwl)s"    | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "[DEFAULT]"                                             | sudo tee    /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "banaction = nftables"                                  | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "banaction_allports = nftables[type=allports]"          | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo ""                                                      | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "ignoreip = 127.0.0.1"                                  | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "maxretry = 3"                                          | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "bantime = 10m"                                         | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "findtime = 5m"                                         | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo ""                                                      | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "destemail = tu_correo@gmail.com"                       | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "sender = tu_correo@gmail.com"                          | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "sendername = Fail2Ban"                                 | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "mta = sendmail"                                        | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "action = %(action_mwl)s"                               | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo ""                                                      | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "[sshd]"                                                | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "backend = systemd"                                     | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "journalmatch = _SYSTEMD_UNIT=ssh.service + _COMM=sshd" | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
+                echo "enabled = true"                                        | sudo tee -a /etc/fail2ban/jail.d/defaults-debian.conf
 
               # Reiniciar el servicio
                 sudo systemctl restart fail2ban
