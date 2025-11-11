@@ -156,7 +156,8 @@ vFQDN='snipeit.dominio.com'
           sudo apt-get -y install lsb-release
           echo ""
         fi
-      printf "%s\ny\n" "$vFQDN" | sudo ./install.sh
+      #printf "%s\ny\n" "$vFQDN" | sudo ./install.sh
+      printf "%s\ny\nn\n" "$vFQDN" | sudo ./install.sh
 
   elif [ $cVerSO == "11" ]; then
 
