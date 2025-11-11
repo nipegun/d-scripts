@@ -120,7 +120,7 @@ vFQDN='snipeit.dominio.com'
     echo ""
 
     # Comprobar si el paquete sudo está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+      if [[ $(dpkg-query -s sudo 2>/dev/null | grep installed) == "" ]]; then
         echo ""
         echo -e "${cColorRojo}      El paquete sudo  no está instalado. Iniciando su instalación...${cFinColor}"
         echo ""
