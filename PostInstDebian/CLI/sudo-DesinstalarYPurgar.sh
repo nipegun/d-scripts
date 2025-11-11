@@ -24,7 +24,17 @@
     exit
   fi
 
-apt-get -y purge sudo
-apt-get -y autoremove --purge
-apt-get -y clean
+# Desinstalar
+  apt-get -y autoremove --purge sudo
+
+# Limpiar
+  apt-get -y autoclean
+
+# Borrar carpetas restantes manualemnte
+  rm -rfv /etc/sudoers.d/
+
+# Corregir polkit para el entorno gráfico
+  #mkdir -p /etc/polkit-1/rules.d/
+  #echo 'polkit.addRule(function(action, subject) {return polkit.Result.AUTH_ADMIN;});' | tee /etc/polkit-1/rules.d/01-usar-root.rules
+  #systemctl restart polkit
 
