@@ -110,67 +110,135 @@ vFQDN="${1:-snipeit.dominio.com}"
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de snipe-it para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    # Comprobar si el paquete sudo está instalado. Si no lo está, instalarlo.
-      if [[ $(dpkg-query -s sudo 2>/dev/null | grep installed) == "" ]]; then
-        echo ""
-        echo -e "${cColorRojo}      El paquete sudo  no está instalado. Iniciando su instalación...${cFinColor}"
-        echo ""
-        apt-get -y update
-        apt-get -y install sudo
-        echo ""
-      fi
+    # Definir fecha de ejecución del script
+      cFechaDeEjec=$(date +a%Ym%md%d@%T)
 
-    # Descargar el script oficial de instalación
-      echo ""
-      echo "    Descargando el script oficial de instalación..."
-      echo ""
-      cd /tmp/
-      # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+    # Crear el menú
+      # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
           echo ""
-          echo -e "${cColorRojo}      El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+          echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
           sudo apt-get -y update
-          sudo apt-get -y install wget
+          sudo apt-get -y install dialog
           echo ""
         fi
-      wget https://raw.githubusercontent.com/grokability/snipe-it/master/install.sh
+      menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 80 16)
+        opciones=(
+          1 "Instalar con configuración básica"    on
+          2 "Traducir a español de España"         on
+          3 "Modificar timezone a Europa/Madrid"   on
+          4 "Redirigir a https"                    off
+          5 "Instalar certificados de letsencrypt" off
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+      #clear
 
-    # Ejecutar script oficial de instalación
-      chmod 744 install.sh
-      # Comprobar si el paquete lsb-release está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s lsb-release 2>/dev/null | grep installed) == "" ]]; then
-          echo ""
-          echo -e "${cColorRojo}      El paquete lsb-release no está instalado. Iniciando su instalación...${cFinColor}"
-          echo ""
-          sudo apt-get -y update
-          sudo apt-get -y install lsb-release
-          echo ""
-        fi
-      # Lanzar el instalador respondiendo a la primera pregunta con el fqdn, a la segunda con "y" y a la tercera con "n"
-        printf "%s\ny\nn\n" "$vFQDN" | sudo ./install.sh
+      for choice in $choices
+        do
+          case $choice in
 
-    # Modificar idioma
-      sudo sed -i "s|APP_LOCALE='en-US'|APP_LOCALE='es-ES'|g" /var/www/html/snipeit/.env
+            1)
 
-    # Modificar timezone
-      sudo sed -i 's|APP_TIMEZONE=Etc/UTC|APP_TIMEZONE=Europe/Madrid|g' /var/www/html/snipeit/.env
+              echo ""
+              echo "  Instalando con configuración básica..."
+              echo ""
 
-    # Notificar fin de ejecución del script
-      echo ""
-      echo "  Script de instalación de snipe-it, finalizado."
-      echo ""
-      echo "    SnipeIt se instaló con el FQDN $vFQDN. Para cambiarlo modifica los archivos:"
-      echo ""
-      echo "      /etc/apache2/sites-available/snipeit.conf"
-      echo "      /etc/hosts"
-      echo ""
-      echo "    y luego reinicia el servicio con:"
-      echo ""
-      echo "      systemctl restart snipeit"
-      echo ""
-      echo "    Para configurar el servidor de correo:"
-      echo ""
+              # Comprobar si el paquete sudo está instalado. Si no lo está, instalarlo.
+                if [[ $(dpkg-query -s sudo 2>/dev/null | grep installed) == "" ]]; then
+                  echo ""
+                  echo -e "${cColorRojo}      El paquete sudo  no está instalado. Iniciando su instalación...${cFinColor}"
+                  echo ""
+                  apt-get -y update
+                  apt-get -y install sudo
+                  echo ""
+                fi
+
+              # Descargar el script oficial de instalación
+                echo ""
+                echo "    Descargando el script oficial de instalación..."
+                echo ""
+                cd /tmp/
+                # Comprobar si el paquete wget está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s wget 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo -e "${cColorRojo}      El paquete wget no está instalado. Iniciando su instalación...${cFinColor}"
+                    echo ""
+                    sudo apt-get -y update
+                    sudo apt-get -y install wget
+                    echo ""
+                  fi
+                wget https://raw.githubusercontent.com/grokability/snipe-it/master/install.sh
+
+              # Ejecutar script oficial de instalación
+                chmod 744 install.sh
+                # Comprobar si el paquete lsb-release está instalado. Si no lo está, instalarlo.
+                  if [[ $(dpkg-query -s lsb-release 2>/dev/null | grep installed) == "" ]]; then
+                    echo ""
+                    echo -e "${cColorRojo}      El paquete lsb-release no está instalado. Iniciando su instalación...${cFinColor}"
+                    echo ""
+                    sudo apt-get -y update
+                    sudo apt-get -y install lsb-release
+                    echo ""
+                  fi
+                # Lanzar el instalador respondiendo a la primera pregunta con el fqdn, a la segunda con "y" y a la tercera con "n"
+                  printf "%s\ny\nn\n" "$vFQDN" | sudo ./install.sh
+
+              # Notificar fin de ejecución del script
+                echo ""
+                echo "  Script de instalación de snipe-it, finalizado."
+                echo ""
+                echo "    SnipeIt se instaló con el FQDN $vFQDN. Para cambiarlo modifica los archivos:"
+                echo ""
+                echo "      /etc/apache2/sites-available/snipeit.conf"
+                echo "      /etc/hosts"
+                echo ""
+                echo "    y luego reinicia el servicio con:"
+                echo ""
+                echo "      systemctl restart snipeit"
+                echo ""
+                echo "    Para configurar el servidor de correo:"
+                echo ""
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Traduciendo a español de España..."
+              echo ""
+              sudo sed -i "s|APP_LOCALE='en-US'|APP_LOCALE='es-ES'|g" /var/www/html/snipeit/.env
+
+            ;;
+
+            3)
+
+              echo ""
+              echo "  Modificando timezone a Europa/Madrid..."
+              echo ""
+              sudo sed -i 's|APP_TIMEZONE=Etc/UTC|APP_TIMEZONE=Europe/Madrid|g' /var/www/html/snipeit/.env
+
+            ;;
+
+            4)
+
+              echo ""
+              echo "  Redirigiendo a https..."
+              echo ""
+
+            ;;
+
+            5)
+
+              echo ""
+              echo "  Instalando certificados de letsencrypt..."
+              echo ""
+
+            ;;
+
+        esac
+
+    done
 
   elif [ $cVerSO == "11" ]; then
 
