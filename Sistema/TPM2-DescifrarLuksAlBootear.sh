@@ -36,10 +36,17 @@ fi
   sudo apt-get -y install tpm2-tools
 
 # Versión de LUKS
-  vVersLUKS=$(sudo cryptsetup luksDump /dev/nvme0n1p2 | grep -i "Version" | cut -d':' -f2 | sed 's-  - -g' |  sed 's-  --g')
+  vVersLUKS=$(sudo cryptsetup luksDump "$vDisco" | grep -i "Version" | cut -d':' -f2 | xargs)
 
-# Hacer copia de seguridad del header
-  sudo cryptsetup luksHeaderBackup /dev/nvme0n1p2 --header-backup-file /root/backup_header_nvme0n1p2.bin
+# Comprobar si LUKS es la versión 1
+  if [[ $vVersLUKS == '1' ]]; then
+    echo ""
+    echo "  El sistema está utilizando LUKS 1. Se procederá a hacer una copia de seguridad del header luks."
+    echo ""
+    sudo mkdir -p /root/LUKS/
+    vDiscoSinRuta=$(echo "$vDisco" | cut -d '/' -f3)
+    sudo cryptsetup luksHeaderBackup "$vDisco" --header-backup-file /root/LUKS/backup_header_luks_"$vDiscoSinRuta".bin && sudo cryptsetup convert "$vDisco" --type luks2
+  fi
 
 # Pedir la contraseña de cifrado de la partición
   echo ""
@@ -52,7 +59,7 @@ fi
   echo ""
   echo "Vinculando LUKS con TPM2..."
   echo ""
-  echo "$vClaveLUKS" | clevis luks bind -d "$vDisco" tpm2 '{"pcr_bank":"sha256"}'
+  echo "$vClaveLUKS" | sudo clevis luks bind -d "$vDisco" tpm2 '{"pcr_bank":"sha256"}'
 
 # Actualizar el initramfs
   echo ""
