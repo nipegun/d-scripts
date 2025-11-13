@@ -35,6 +35,12 @@ fi
   sudo apt-get -y install initramfs-tools
   sudo apt-get -y install tpm2-tools
 
+# Versión de LUKS
+  vVersLUKS=$(sudo cryptsetup luksDump /dev/nvme0n1p2 | grep -i "Version" | cut -d':' -f2 | sed 's-  - -g' |  sed 's-  --g')
+
+# Hacer copia de seguridad del header
+  sudo cryptsetup luksHeaderBackup /dev/nvme0n1p2 --header-backup-file /root/backup_header_nvme0n1p2.bin
+
 # Pedir la contraseña de cifrado de la partición
   echo ""
   echo -n "Introduce la contraseña LUKS de $vDisco: "
