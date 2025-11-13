@@ -4,7 +4,7 @@
 # Script de NiPeGun para configurar desbloqueo automático de la partición Luks mediante TPM2 al iniciar el sistema
 #
 # Ejecución remota:
-#   cusl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/TPM2-DescifrarLuksAlBootear.sh | bash -s [Partición]
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/TPM2-DescifrarLuksAlBootear.sh | bash -s [Partición]
 #
 # Para ver particiones luks, con el sistema desbloqueado:
 #   sudo lsblk -o NAME,TYPE,FSTYPE,MOUNTPOINT | grep crypt
