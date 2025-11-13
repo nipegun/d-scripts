@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# Configurar-DesbloqueoAutomaticoTPM2.sh
-# Autor: NiPeGun adaptado a Debian 13
-# Permite que el rootfs cifrado con LUKS se desbloquee automáticamente con TPM2
-
+# ----------
+# Script de NiPeGun para configurar desbloqueo automático de la partición Luks mediante TPM2 al iniciar el sistema
+#
+# Ejecución remota:
+#   cusl -sL x | bash -s [Partición]
 #
 # Para ver particiones luks, con el sistema desbloqueado:
 #   sudo lsblk -o NAME,TYPE,FSTYPE,MOUNTPOINT | grep crypt
