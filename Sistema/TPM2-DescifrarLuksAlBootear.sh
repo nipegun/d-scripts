@@ -34,7 +34,6 @@ fi
   sudo apt-get -y install clevis-initramfs
   sudo apt-get -y install initramfs-tools
   sudo apt-get -y install tpm2-tools
-  sudo apt-get -y install tpm2-tss-engine
 
 # Pedir la contraseña de cifrado de la partición
   echo ""
