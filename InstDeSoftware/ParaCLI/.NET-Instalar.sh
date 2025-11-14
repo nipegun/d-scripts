@@ -58,12 +58,38 @@
   if [ $cVerSO == "13" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de .NET para Debian 13 (x)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de .NET para Debian 13 (Trixie)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install curl
+        echo ""
+      fi
+
+    # Instalar desde script oficial
+
+      #rm -f /tmp/dotnet-install.sh 2> /dev/null
+      #curl -L https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
+      #chmod +x /tmp/dotnet-install.sh
+      #/tmp/dotnet-install.sh
+
+    # Instalar desde paquete .deb
+
+      # Agregar el repositorio
+        curl -L https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb -o /tmp/packages-microsoft-prod.deb
+        sudo apt -y install /tmp/packages-microsoft-prod.deb
+        sudo apt-get -y update
+
+      # Determinar el paquete con la última versión
+        vPaqUltVers=$(apt-cache search dotnet-sdk | sort -V | cut -d' ' -f1 | tail -n1)
+
+      # Instalar el paquete final
+        sudo apt-get -y install "$vPaqUltVers"
 
   elif [ $cVerSO == "12" ]; then
 
