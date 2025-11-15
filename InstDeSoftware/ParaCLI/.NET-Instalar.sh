@@ -81,22 +81,42 @@
     # Instalar desde paquete .deb
 
       # Agregar el repositorio
+        echo ""
+        echo "  Agregando el repositorio..."
+        echo ""
         curl -L https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb -o /tmp/packages-microsoft-prod.deb
         sudo apt -y install /tmp/packages-microsoft-prod.deb
         sudo apt-get -y update
 
       # Determinar el paquete con la última versión
+        echo ""
+        echo "  Determinando cual es el paquete con la última versión disponible en el repositorio recién agregado..."
+        echo ""
         vPaqUltVers=$(apt-cache search dotnet-sdk | sort -V | cut -d' ' -f1 | tail -n1)
+        echo "    El paquete con la última versión es $vPaqUltVers"
 
       # Instalar el paquete final
+        echo ""
+        echo "  Instalando el paquete $vPaqUltVers ..."
+        echo ""
         sudo apt-get -y install "$vPaqUltVers"
 
-    # instalar ASP.NET core
+    # instalar ASP.NET Core
+      echo ""
+      echo "  Instalando ASP.NET Core"
+      echo ""
 
       # Determinar el paquete con la última versión
+        echo ""
+        echo "  Determinando cual es el paquete con la última versión disponible en el repositorio recién agregado..."
+        echo ""
         vPaqUltVers=$( apt-cache search aspnetcore-runtime | cut -d' ' -f1 | sort -V | tail -n1)
+        echo "    El paquete con la última versión es $vPaqUltVers"
 
       # Instalar el paquete final
+        echo ""
+        echo "  Instalando el paquete $vPaqUltVers ..."
+        echo ""
         sudo apt-get -y install "$vPaqUltVers"
 
   elif [ $cVerSO == "12" ]; then
@@ -105,9 +125,46 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de .NET para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Instalar desde paquete .deb
+
+      # Agregar el repositorio
+        echo ""
+        echo "  Agregando el repositorio..."
+        echo ""
+        curl -L https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -o /tmp/packages-microsoft-prod.deb
+        sudo apt -y install /tmp/packages-microsoft-prod.deb
+        sudo apt-get -y update
+
+      # Determinar el paquete con la última versión
+        echo ""
+        echo "  Determinando cual es el paquete con la última versión disponible en el repositorio recién agregado..."
+        echo ""
+        vPaqUltVers=$(apt-cache search dotnet-sdk | sort -V | cut -d' ' -f1 | tail -n1)
+        echo "    El paquete con la última versión es $vPaqUltVers"
+
+      # Instalar el paquete final
+        echo ""
+        echo "  Instalando el paquete $vPaqUltVers ..."
+        echo ""
+        sudo apt-get -y install "$vPaqUltVers"
+
+    # instalar ASP.NET Core
+      echo ""
+      echo "  Instalando ASP.NET Core"
+      echo ""
+
+      # Determinar el paquete con la última versión
+        echo ""
+        echo "  Determinando cual es el paquete con la última versión disponible en el repositorio recién agregado..."
+        echo ""
+        vPaqUltVers=$( apt-cache search aspnetcore-runtime | cut -d' ' -f1 | sort -V | tail -n1)
+        echo "    El paquete con la última versión es $vPaqUltVers"
+
+      # Instalar el paquete final
+        echo ""
+        echo "  Instalando el paquete $vPaqUltVers ..."
+        echo ""
+        sudo apt-get -y install "$vPaqUltVers"
 
   elif [ $cVerSO == "11" ]; then
 
