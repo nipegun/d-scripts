@@ -91,6 +91,14 @@
       # Instalar el paquete final
         sudo apt-get -y install "$vPaqUltVers"
 
+    # instalar ASP.NET core
+
+      # Determinar el paquete con la última versión
+        vPaqUltVers=$( apt-cache search aspnetcore-runtime | cut -d' ' -f1 | sort -V | tail -n1)
+
+      # Instalar el paquete final
+        sudo apt-get -y install "$vPaqUltVers"
+
   elif [ $cVerSO == "12" ]; then
 
     echo ""
