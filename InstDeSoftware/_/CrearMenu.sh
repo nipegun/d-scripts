@@ -5,9 +5,6 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
-    # Definir fecha de ejecución del script
-      cFechaDeEjec=$(date +a%Ym%md%d@%T)
-
     # Crear el menú
       # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
