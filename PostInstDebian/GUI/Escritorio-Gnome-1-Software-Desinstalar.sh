@@ -111,7 +111,6 @@
       sudo apt-get -y autoremove --purge blender
       sudo apt-get -y autoremove --purge imagemagick
       sudo apt-get -y autoremove --purge inkscape
-      sudo apt-get -y autoremove --purge gnome-disk-utility
       sudo apt-get -y autoremove --purge libreoffice-draw
       sudo apt-get -y autoremove --purge libreoffice-math
       sudo apt-get -y autoremove --purge goldendict-ng
@@ -175,7 +174,6 @@
       sudo apt-get -y autoremove --purge blender
       sudo apt-get -y autoremove --purge imagemagick
       sudo apt-get -y autoremove --purge inkscape
-      sudo apt-get -y autoremove --purge gnome-disk-utility
       sudo apt-get -y autoremove --purge libreoffice-draw
       sudo apt-get -y autoremove --purge libreoffice-math
       sudo apt-get -y autoremove --purge goldendict-ng
