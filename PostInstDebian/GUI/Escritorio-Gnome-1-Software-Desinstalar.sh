@@ -104,6 +104,7 @@
 　　   sudo apt-get -y autoremove --purge mozc*
       sudo apt-get -y autoremove --purge uim-gtk3
       sudo apt-get -y autoremove --purge showtime
+      sudo apt-get -y autoremove --purge hdate-applet
       sudo apt-get -y autoremove
 
       sudo apt-get -y autoremove --purge xterm
@@ -167,6 +168,7 @@
       sudo apt-get -y autoremove --purge gnome-weather
  　　　sudo apt-get -y autoremove --purge mozc*
       sudo apt-get -y autoremove --purge uim-gtk3
+      sudo apt-get -y autoremove --purge hdate-applet
       sudo apt-get -y autoremove
 
       sudo apt-get -y autoremove --purge xterm
@@ -225,7 +227,21 @@
       apt-get -y remove gnome-chess
       apt-get -y remove gnome-maps
       apt-get -y gnome-weather
-      apt-get -y autoremove
+      sudo apt-get -y autoremove --purge hdate-applet
+      sudo apt-get -y autoremove
+
+      sudo apt-get -y autoremove --purge xterm
+      sudo apt-get -y autoremove --purge reportbug
+      sudo apt-get -y autoremove --purge blender
+      sudo apt-get -y autoremove --purge imagemagick
+      sudo apt-get -y autoremove --purge inkscape
+      sudo apt-get -y autoremove --purge libreoffice-draw
+      sudo apt-get -y autoremove --purge libreoffice-math
+      sudo apt-get -y autoremove --purge goldendict-ng
+      sudo apt-get -y autoremove --purge *fcitx5*
+      sudo apt-get -y autoremove --purge xiterm+thai
+      sudo apt-get -y autoremove
+      sudo apt-get -y autoclean
 
   elif [ $cVerSO == "10" ]; then
 
