@@ -58,7 +58,7 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de personalización del escritorio Gnome en Debian 13 (x)...${cFinColor}"
     echo ""
 
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Gnome-Software-Desinstalar.sh | sudo bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Gnome-1-Software-Desinstalar.sh | sudo bash
 
     echo ""
     echo "    Instalando la app de retoques (gnome-tweaks)..."
@@ -116,7 +116,7 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de personalización del escritorio Gnome en Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Gnome-Software-Desinstalar.sh | sudo bash
+    curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/GUI/Escritorio-Gnome-1-Software-Desinstalar.sh | sudo bash
 
     echo ""
     echo "    Instalando la app de retoques (gnome-tweaks)..."
