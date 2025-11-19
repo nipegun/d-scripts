@@ -81,7 +81,7 @@ if [ $cVerSO == "13" ]; then
     echo ""
     echo "    Descargando el instalador..."
     echo ""
-    curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/580.76.05/NVIDIA-Linux-x86_64-580.76.05.run -o /tmp/nVidiaWebDriverInstall.run
+    curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/580.105.08/NVIDIA-Linux-x86_64-580.105.08.run -o /tmp/nVidiaWebDriverInstall.run
     chmod +x /tmp/nVidiaWebDriverInstall.run
 
   # Parar entorno gráfico
