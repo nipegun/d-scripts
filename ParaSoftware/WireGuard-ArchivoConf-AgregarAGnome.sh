@@ -56,7 +56,7 @@
 
 
 # Importar y activar la conexión
-  nmcli connection import type wireguard file "$vArchivoConf" || echo "  Algo anda mal con el archivo .conf. Puede ser su contenido o su nombre, dado que el nombre del archivo se utilizará como nombre de la interfaz."
+  nmcli connection import type wireguard file "$vArchivoConf" || echo "\n  Algo anda mal con el archivo .conf.\n   Puede ser su contenido o su nombre, dado que el nombre del archivo se utilizará como nombre de la interfaz."
 
 # Desactivar el auto-inicio de la conexión
   nmcli connection modify "$vNomConex" connection.autoconnect no
