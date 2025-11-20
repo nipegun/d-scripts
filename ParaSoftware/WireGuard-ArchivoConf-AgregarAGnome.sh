@@ -52,7 +52,7 @@
 
 #Definir variables
   vArchivoConf="$1"
-  vNomConex=$(basename -s .txt "$vArchivoConf")
+  vNomConex=$(basename -s .conf "$vArchivoConf")
 
 
 # Importar y activar la conexión
