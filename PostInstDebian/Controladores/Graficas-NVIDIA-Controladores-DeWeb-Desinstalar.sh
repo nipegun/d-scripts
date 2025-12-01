@@ -69,6 +69,14 @@ if [ $cVerSO == "13" ]; then
     echo ""
     sudo /tmp/nVidiaWebDriverInstall.run --uninstall
 
+  # Borrar directorios extras
+    sudo rm -rf /usr/share/egl/egl_external_platform.d/
+    sudo rm -rf /usr/lib/x86_64-linux-gnu/nvidia/wine/
+    sudo rm -rf /usr/lib/x86_64-linux-gnu/nvidia/
+    sudo rm -rf /usr/share/nvidia/
+    sudo rm -rf /usr/lib/nvidia/
+    sudo rm -rf /usr/share/egl/
+
   # Notificar fin de ejecución del script
     echo ""
     echo "    Ejecución del script, finalizada. Para aplicar los cambios reinicia el sistema con:"
