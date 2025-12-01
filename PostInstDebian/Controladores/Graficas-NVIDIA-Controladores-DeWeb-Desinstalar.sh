@@ -56,9 +56,25 @@ if [ $cVerSO == "13" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de los controladores NVIDIA para Debian 13 (x)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+  # Descargar el instalador
+    echo ""
+    echo "    Descargando el instalador..."
+    echo ""
+    curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/580.105.08/NVIDIA-Linux-x86_64-580.105.08.run -o /tmp/nVidiaWebDriverInstall.run
+    chmod +x /tmp/nVidiaWebDriverInstall.run
+
+  # Ejecutar el desinstalador
+    echo ""
+    echo "    Ejecutando el desinstalador..."
+    echo ""
+    sudo /tmp/nVidiaWebDriverInstall.run --uninstall
+
+  # Notificar fin de ejecución del script
+    echo ""
+    echo "    Ejecución del script, finalizada. Para aplicar los cambios reinicia el sistema con:"
+    echo ""
+    echo "      shutdown -r now"
+    echo ""
 
 elif [ $cVerSO == "12" ]; then
 
