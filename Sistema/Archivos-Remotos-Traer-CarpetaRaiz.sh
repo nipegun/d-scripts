@@ -6,7 +6,7 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para traer la carpeta /root de un sistema remoto mediante rsync en Debian
+# Script de NiPeGun para traer la carpeta / de un sistema remoto mediante rsync en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Archivos-Remotos-Traer-CarpetaRaiz.sh | bash -s [IPRemota] [UsuarioRemoto]
