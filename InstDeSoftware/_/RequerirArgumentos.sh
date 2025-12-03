@@ -28,7 +28,7 @@
       else
         vNombreDelScript="$0"
       fi
-      echo "    $vNombreDelScript [Argumento1] [Argumentos2"
+      echo "    $vNombreDelScript [Argumento1] [Argumento2]"
       echo ""
       echo "  Ejemplo:"
       echo ""
