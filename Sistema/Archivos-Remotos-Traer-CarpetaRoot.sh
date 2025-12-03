@@ -53,6 +53,16 @@ vUsuario="$2"
       exit
   fi
 
+# Comprobar si el paquete rsync está instalado. Si no lo está, instalarlo.
+  if [[ $(dpkg-query -s rsync 2>/dev/null | grep installed) == "" ]]; then
+    echo ""
+    echo -e "${cColorRojo}  El paquete rsync no está instalado. Iniciando su instalación...${cFinColor}"
+    echo ""
+    sudo apt-get -y update
+    sudo apt-get -y install rsync
+    echo ""
+  fi
+
 # Traer todas las carpetas de dentro de /root
   # rsync -avz --progress --exclude=".cache" "$vUsuario"@"$vIPRemota":/root/ .
 
