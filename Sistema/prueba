@@ -1,6 +1,0 @@
-#!/bin/bash
-
-vUsuario='root'
-vIPRemota='10.80.177.202'
-
-rsync -avz --progress --exclude=".cache" "$vUsuario"@"$vIPRemota":/root/ .
