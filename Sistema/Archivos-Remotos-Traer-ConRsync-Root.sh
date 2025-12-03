@@ -9,19 +9,13 @@
 # Script de NiPeGun para traer la carpeta /root de un sistema remoto mediante rsync en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Archivos-Remotos-Traer-ConRsync-Root.sh | bash -s [IPRemota] [UsuarioRemoto]
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Archivos-Remotos-Traer-ConRsync-Root.sh | sed 's-sudo--g' | bash -s [IPRemota] [UsuarioRemoto]
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Archivos-Remotos-Traer-ConRsync-Root.sh | nano -
 # ----------
 
 vIPRemota="$1"
@@ -50,7 +44,7 @@ vUsuario="$2"
       else
         vNombreDelScript="$0"
       fi
-      echo "    $vNombreDelScript [Argumento1] [Argumentos2"
+      echo "    $vNombreDelScript [IPRemota] [UsuarioRemoto]"
       echo ""
       echo "  Ejemplo:"
       echo ""
