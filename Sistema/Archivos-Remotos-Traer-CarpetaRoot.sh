@@ -9,13 +9,13 @@
 # Script de NiPeGun para traer la carpeta /root de un sistema remoto mediante rsync en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Archivos-Remotos-Traer-ConRsync-Root.sh | bash -s [IPRemota] [UsuarioRemoto]
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Archivos-Remotos-Traer-CarpetaRoot.sh | bash -s [IPRemota] [UsuarioRemoto]
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Archivos-Remotos-Traer-ConRsync-Root.sh | sed 's-sudo--g' | bash -s [IPRemota] [UsuarioRemoto]
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Archivos-Remotos-Traer-CarpetaRoot.sh | sed 's-sudo--g' | bash -s [IPRemota] [UsuarioRemoto]
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Archivos-Remotos-Traer-ConRsync-Root.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Archivos-Remotos-Traer-CarpetaRoot.sh | nano -
 # ----------
 
 vIPRemota="$1"
