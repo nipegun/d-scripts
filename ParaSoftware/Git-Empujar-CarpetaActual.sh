@@ -9,19 +9,13 @@
 # Script de NiPeGun para enviar los commits locales a su repo correspondiente en Internet usando Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Git-Empujar-CarpetaActual.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Git-Empujar-CarpetaActual.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Git-Empujar-CarpetaActual.sh | nano -
 # ----------
 
 # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
@@ -37,8 +31,8 @@
  # Añadir todos los archivos nuevos o modificados del directorio actual al staging area (preparar para el commit).
   git add .
 
-# Crear un commit con los cambios que estaban en el staging area, asignándole el mensaje "x".
-  git commit -m "x"
+# Crear un commit con los cambios que estaban en el staging area, asignándole el mensaje "edición en local".
+  git commit -m "Edición en local"
 
 # Empujar los commits locales hacia repositorio remoto (subir los cambios al servidor).
   git push
