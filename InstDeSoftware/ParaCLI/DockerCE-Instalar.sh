@@ -51,8 +51,45 @@ if [ $cVerSO == "13" ]; then
   echo ""
 
   echo ""
-  echo "  Comandos para Debian 13 todavía no preparados. Prueba ejecutar el script en otra versión de Debian."
+  echo "  Iniciando el script de instalación de DockerCE para Debian 12 (Bookworm)..."
   echo ""
+
+  echo ""
+  echo "  Instalando paquetes necesarios..."
+  echo ""
+  sudo apt-get -y install wget
+  sudo apt-get -y install apt-transport-https
+  sudo apt-get -y install ca-certificates
+  sudo apt-get -y install curl
+  sudo apt-get -y install gnupg2
+  sudo apt-get -y install software-properties-common
+
+  echo ""
+  echo "  Descargando la clave PGP del KeyRing..."
+  echo ""
+  sudo rm -f /usr/share/keyrings/docker-archive-keyring.gpg 2> /dev/null
+  wget -O- https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+  echo ""
+  echo "  Agregando el repositorio..."
+  echo ""
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
+  sudo apt-get -y update
+
+  echo ""
+  echo "  Instalando docker-ce..."
+  echo ""
+  sudo apt-get -y install docker-ce
+
+  echo ""
+  echo "  Activando e iniciando el servicio de docker..."
+  echo ""
+  sudo systemctl enable docker --now
+
+  echo ""
+  echo "  Mostrando el estado del servicio de docker..."
+  echo ""
+  sudo systemctl status docker --no-pager
 
 elif [ $cVerSO == "12" ]; then
 
@@ -73,7 +110,7 @@ elif [ $cVerSO == "12" ]; then
   echo ""
   echo "  Descargando la clave PGP del KeyRing..."
   echo ""
-  sudo rm -f /usr/share/keyrings/docker-archive-keyring.gpg
+  sudo rm -f /usr/share/keyrings/docker-archive-keyring.gpg 2> /dev/null
   wget -O- https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
   echo ""
