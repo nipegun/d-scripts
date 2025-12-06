@@ -66,6 +66,7 @@
       sudo apt-get -y install foliate              # Para leer libros en ePub
       sudo apt-get -y install xpad                 # Para sticky notes
       sudo apt-get -y install simple-scan
+      sudo apt-get -y install apostrophe           # Para markdown y otros formatos
 
     # Fuentes
       sudo apt-get -y install fonts-ubuntu
