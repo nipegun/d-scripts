@@ -42,7 +42,7 @@
       sudo apt-get -y install dialog
       echo ""
     fi
-  menu=(dialog --checklist "¿Donde quieres instalar OpenVAS?:" 22 76 16)
+  menu=(dialog --checklist "¿Donde quieres instalar Frigate?:" 22 76 16)
     opciones=(
       1 "En un ordenador o máquina virtual" off
       2 "En un contenedor LXC de Proxmox"   off
@@ -56,29 +56,79 @@
       1)
 
         echo ""
-        echo -e "${cColorVerde}  Instalando OpenVAS en un ordenador o máquina virtual...${cFinColor}"
+        echo -e "${cColorVerde}  Instalando Frigate en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
         # Crear carpetas
-          sudo mkdir -p /Contenedores/Frigate/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+          sudo mkdir -p /Contenedores/Frigate/config   2> /dev/null
+          sudo mkdir -p /Contenedores/Frigate/storage  2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/  2> /dev/null
+
+        # Crear config mínima (si no existe)
+          if [[ ! -f /Contenedores/Frigate/config/config.yml ]]; then
+            echo ""
+            echo "    Creando config.yml mínima..."
+            echo ""
+            echo "mqtt:"                                                 | sudo tee    /Contenedores/Frigate/config/config.yml
+            echo "  enabled: False"                                      | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "cameras:"                                              | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "  dummy_camera:"                                       | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "    enabled: False"                                    | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "    ffmpeg:"                                           | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "      inputs:"                                         | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "        - path: rtsp://127.0.0.1:554/rtsp"             | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "          roles:"                                      | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "            - detect"                                  | sudo tee -a /Contenedores/Frigate/config/config.yml
+          else
+            echo ""
+            echo "    Ya existe /Contenedores/Frigate/config/config.yml (no lo modifico)."
+            echo ""
+          fi
+
+            echo "mqtt:"
+            echo "  enabled: False"
+            echo ""
+            echo "cameras:"
+            echo "  cam_192_168_1_105:"
+            echo "    ffmpeg:"
+            echo "      inputs:"
+            echo "        - path: rtsp://ubnt:ubnt@192.168.1.105:554/s0"
+            echo "          roles:"
+            echo "            - detect"
+            echo "            - record"
+            echo "    record:"
+            echo "      enabled: True"
+            echo "      retain:"
+            echo "        days: 3"
+            echo "        mode: motion"
+
 
         # Crear el script iniciador
           echo ""
           echo "    Creando el script iniciador..."
           echo ""
-          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  --name Frigate                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  -p 9392:9392                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  -p 5432:5432                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  -e "USERNAME=admin"                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  -e "PASSWORD=admin"                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  -v /Contenedores/OpenVAS/data:/data          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  greenbone/openvas-scanner:latest"                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo '#!/bin/bash'                                                                      | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo ""                                                                                 | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "docker rm -f frigate 2>/dev/null"                                                 | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "docker run -d                                                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  --name frigate                                                              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  --restart=unless-stopped                                                    \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  --stop-timeout 30                                                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  --mount type=tmpfs,target=/tmp/cache,tmpfs-size=1000000000                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  --device /dev/bus/usb:/dev/bus/usb                                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  --device /dev/dri/renderD128                                                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  --shm-size=64m                                                              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  -v /Contenedores/Frigate/storage:/media/frigate                             \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  -v /Contenedores/Frigate/config:/config                                     \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  -v /etc/localtime:/etc/localtime:ro                                         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  -e FRIGATE_RTSP_PASSWORD='password'                                         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  -p 8971:8971                                                                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  -p 8554:8554                                                                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  -p 8555:8555/tcp                                                            \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  -p 8555:8555/udp                                                            \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo "  ghcr.io/blakeblackshear/frigate:stable"                                         | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          sudo chmod +x /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -102,29 +152,58 @@
       2)
 
         echo ""
-        echo -e "${cColorVerde}  Instalando OpenVAS en un contenedor LXC...${cFinColor}"
+        echo -e "${cColorVerde}  Instalando Frigate en un contenedor LXC...${cFinColor}"
         echo ""
 
         # Crear carpetas
-          sudo mkdir -p /Host/Frigate/data 2> /dev/null
+          sudo mkdir -p /Host/Frigate/config   2> /dev/null
+          sudo mkdir -p /Host/Frigate/storage  2> /dev/null
           sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+
+        # Crear config mínima (si no existe)
+          if [[ ! -f /Host/Frigate/config/config.yml ]]; then
+            echo ""
+            echo "    Creando config.yml mínima..."
+            echo ""
+            echo "mqtt:"                                     | sudo tee    /Host/Frigate/config/config.yml >/dev/null
+            echo "  enabled: False"                          | sudo tee -a /Host/Frigate/config/config.yml >/dev/null
+            echo ""                                          | sudo tee -a /Host/Frigate/config/config.yml >/dev/null
+            echo "cameras:"                                  | sudo tee -a /Host/Frigate/config/config.yml >/dev/null
+            echo "  dummy_camera:"                           | sudo tee -a /Host/Frigate/config/config.yml >/dev/null
+            echo "    enabled: False"                        | sudo tee -a /Host/Frigate/config/config.yml >/dev/null
+            echo "    ffmpeg:"                               | sudo tee -a /Host/Frigate/config/config.yml >/dev/null
+            echo "      inputs:"                             | sudo tee -a /Host/Frigate/config/config.yml >/dev/null
+            echo "        - path: rtsp://127.0.0.1:554/rtsp" | sudo tee -a /Host/Frigate/config/config.yml >/dev/null
+            echo "          roles:"                          | sudo tee -a /Host/Frigate/config/config.yml >/dev/null
+            echo "            - detect"                      | sudo tee -a /Host/Frigate/config/config.yml >/dev/null
+          fi
 
         # Crear el script iniciador
           echo ""
-          echo "  Creando el script iniciador..."
+          echo "    Creando el script iniciador..."
           echo ""
-          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  --name OpenVAS                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  -p 9392:9392                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  -p 5432:5432                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  -e "USERNAME=admin"                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  -e "PASSWORD=admin"                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  -v /Host/Frigate/data:/data                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          echo "  greenbone/openvas-scanner:latest"                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          echo '#!/bin/bash'                                                     | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo ""                                                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "docker rm -f frigate 2>/dev/null"                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "docker run -d                                                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  --name frigate                                             \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  --restart=unless-stopped                                   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  --stop-timeout 30                                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  --mount type=tmpfs,target=/tmp/cache,tmpfs-size=1000000000 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  --device /dev/bus/usb:/dev/bus/usb                         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  --device /dev/dri/renderD128                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  --shm-size=64m                                             \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  -v /Host/Frigate/storage:/media/frigate                    \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  -v /Host/Frigate/config:/config                            \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  -v /etc/localtime:/etc/localtime:ro                        \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  -e FRIGATE_RTSP_PASSWORD='password'                        \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  -p 8971:8971                                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  -p 8554:8554                                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  -p 8555:8555/tcp                                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  -p 8555:8555/udp                                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          echo "  ghcr.io/blakeblackshear/frigate:stable"                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          sudo chmod +x /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
