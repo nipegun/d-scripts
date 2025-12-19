@@ -9,19 +9,19 @@
 # Script de NiPeGun para instalar y configurar LibreWolf en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaGUI/LibreWolf-Instalar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaGUI/LibreWolf-Instalar.sh | sed 's-sudo--g' | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaGUI/LibreWolf-Instalar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaGUI/LibreWolf-Instalar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaGUI/LibreWolf-Instalar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -61,9 +61,18 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de LibreWolf para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Actualizar la lista de paquetes disponibles en los repositorios
+      sudo apt-get -y update
+
+    # Instalar extrepo
+      sudo apt-get -y install extrepo
+
+    # Activar el repo de LibreWolf
+      sudo extrepo enable librewolf
+      sudo apt-get -y update
+
+    # Instalar
+      sudo apt-get -y install librewolf
 
   elif [ $cVerSO == "12" ]; then
 
