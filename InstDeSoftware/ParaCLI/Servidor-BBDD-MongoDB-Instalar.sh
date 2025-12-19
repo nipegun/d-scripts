@@ -145,10 +145,9 @@ elif [ $cVerSO == "12" ]; then
                   sudo apt-get -y install gnupg
                   echo ""
                 fi
-              curl -fsSL https://www.mongodb.org/static/pgp/server-"$vUltVersMainMongoDBCommunity".asc | gpg -o /usr/share/keyrings/mongodb-server-"$vUltVersMainMongoDBCommunity".gpg --dearmor
+              curl -fsSL https://www.mongodb.org/static/pgp/server-"$vUltVersMainMongoDBCommunity".asc | sudo gpg -o /usr/share/keyrings/mongodb-server-"$vUltVersMainMongoDBCommunity".gpg --dearmor
 
             # Instalar la llave para firmar el repositorio
-              # echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-$vUltVersMainMongoDBCommunity.gpg ] http://repo.mongodb.org/apt/debian trixie/mongodb-org/$vUltVersMainMongoDBCommunity main" | sudo tee /etc/apt/sources.list.d/mongodb-org-$vUltVersMainMongoDBCommunity.list
               echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-$vUltVersMainMongoDBCommunity.gpg ] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/$vUltVersMainMongoDBCommunity main" | sudo tee /etc/apt/sources.list.d/mongodb-org-$vUltVersMainMongoDBCommunity.list
 
             # Actualizar la lista de paquetes disponibles en todos los repositorios instalados en el sistema
