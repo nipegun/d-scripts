@@ -79,6 +79,18 @@
             echo "        - path: rtsp://127.0.0.1:554/rtsp"             | sudo tee -a /Contenedores/Frigate/config/config.yml
             echo "          roles:"                                      | sudo tee -a /Contenedores/Frigate/config/config.yml
             echo "            - detect"                                  | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "  cam_192_168_1_105:"                                  | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "    ffmpeg:"                                           | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "      inputs:"                                         | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "        - path: rtsp://ubnt:ubnt@192.168.1.105:554/s0" | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "          roles:"                                      | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "            - detect"                                  | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "            - record"                                  | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "    record:"                                           | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "      enabled: True"                                   | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "      retain:"                                         | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "        days: 3"                                       | sudo tee -a /Contenedores/Frigate/config/config.yml
+            echo "        mode: motion"                                  | sudo tee -a /Contenedores/Frigate/config/config.yml
           else
             echo ""
             echo "    Ya existe /Contenedores/Frigate/config/config.yml (no lo modifico)."
@@ -89,18 +101,7 @@
             echo "  enabled: False"
             echo ""
             echo "cameras:"
-            echo "  cam_192_168_1_105:"
-            echo "    ffmpeg:"
-            echo "      inputs:"
-            echo "        - path: rtsp://ubnt:ubnt@192.168.1.105:554/s0"
-            echo "          roles:"
-            echo "            - detect"
-            echo "            - record"
-            echo "    record:"
-            echo "      enabled: True"
-            echo "      retain:"
-            echo "        days: 3"
-            echo "        mode: motion"
+
 
 
         # Crear el script iniciador
@@ -161,6 +162,38 @@
           sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Crear config mínima (si no existe)
+          if [[ ! -f /Contenedores/Frigate/config/config.yml ]]; then
+            echo ""
+            echo "    Creando config.yml mínima..."
+            echo ""
+            echo "mqtt:"                                                 | sudo tee    /Host/Frigate/config/config.yml
+            echo "  enabled: False"                                      | sudo tee -a /Host/Frigate/config/config.yml
+            echo "cameras:"                                              | sudo tee -a /Host/Frigate/config/config.yml
+            echo "  dummy_camera:"                                       | sudo tee -a /Host/Frigate/config/config.yml
+            echo "    enabled: False"                                    | sudo tee -a /Host/Frigate/config/config.yml
+            echo "    ffmpeg:"                                           | sudo tee -a /Host/Frigate/config/config.yml
+            echo "      inputs:"                                         | sudo tee -a /Host/Frigate/config/config.yml
+            echo "        - path: rtsp://127.0.0.1:554/rtsp"             | sudo tee -a /Host/Frigate/config/config.yml
+            echo "          roles:"                                      | sudo tee -a /Host/Frigate/config/config.yml
+            echo "            - detect"                                  | sudo tee -a /Host/Frigate/config/config.yml
+            echo "  cam_192_168_1_105:"                                  | sudo tee -a /Host/Frigate/config/config.yml
+            echo "    ffmpeg:"                                           | sudo tee -a /Host/Frigate/config/config.yml
+            echo "      inputs:"                                         | sudo tee -a /Host/Frigate/config/config.yml
+            echo "        - path: rtsp://ubnt:ubnt@192.168.1.105:554/s0" | sudo tee -a /Host/Frigate/config/config.yml
+            echo "          roles:"                                      | sudo tee -a /Host/Frigate/config/config.yml
+            echo "            - detect"                                  | sudo tee -a /Host/Frigate/config/config.yml
+            echo "            - record"                                  | sudo tee -a /Host/Frigate/config/config.yml
+            echo "    record:"                                           | sudo tee -a /Host/Frigate/config/config.yml
+            echo "      enabled: True"                                   | sudo tee -a /Host/Frigate/config/config.yml
+            echo "      retain:"                                         | sudo tee -a /Host/Frigate/config/config.yml
+            echo "        days: 3"                                       | sudo tee -a /Host/Frigate/config/config.yml
+            echo "        mode: motion"                                  | sudo tee -a /Host/Frigate/config/config.yml
+          else
+            echo ""
+            echo "    Ya existe /Contenedores/Frigate/config/config.yml (no lo modifico)."
+            echo ""
+          fi
+        
           if [[ ! -f /Host/Frigate/config/config.yml ]]; then
             echo ""
             echo "    Creando config.yml mínima..."
