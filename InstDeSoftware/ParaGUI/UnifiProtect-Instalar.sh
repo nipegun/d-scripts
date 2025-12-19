@@ -61,6 +61,26 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Unifi Protect para Debian 13 (x)...${cFinColor}"
     echo ""
 
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Unifi Protect corre mejor en Debian 11.${cFinColor}"
+    echo ""
+
+  elif [ $cVerSO == "12" ]; then
+
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Unifi Protect para Debian 12 (Bookworm)...${cFinColor}"
+    echo ""
+
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Unifi Protect corre mejor en Debian 11.${cFinColor}"
+    echo ""
+
+  elif [ $cVerSO == "11" ]; then
+
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Unifi Protect para Debian 11 (Bullseye)...${cFinColor}"
+    echo ""
+
     # Actualizar la lista de paquetes disponibles en los repositorios
       sudo apt-get -y update
 
@@ -81,28 +101,6 @@
     # Instalar NodeJS 16
       curl -fsSL https://deb.nodesource.com/setup_16.x | sudo bash -
       sudo apt-get -y install nodejs
-
-
-
-  elif [ $cVerSO == "12" ]; then
-
-    echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Unifi Protect para Debian 12 (Bookworm)...${cFinColor}"
-    echo ""
-
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
-
-  elif [ $cVerSO == "11" ]; then
-
-    echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Unifi Protect para Debian 11 (Bullseye)...${cFinColor}"
-    echo ""
-
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
 
   elif [ $cVerSO == "10" ]; then
 
