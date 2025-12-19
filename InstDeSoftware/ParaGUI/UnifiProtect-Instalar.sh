@@ -92,11 +92,38 @@
       sudo apt-get -y install ffmpeg
 
     # Instalar MongoDB 4.4
-      vUltVersMainMongoDBCommunity='4.4'
-      curl -fsSL https://pgp.mongodb.com/server-"$vUltVersMainMongoDBCommunity".asc| sudo gpg -o /usr/share/keyrings/mongodb-server-"$vUltVersMainMongoDBCommunity".gpg --dearmor
-      echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-$vUltVersMainMongoDBCommunity.gpg ] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/$vUltVersMainMongoDBCommunity main" | sudo tee /etc/apt/sources.list.d/mongodb-org-$vUltVersMainMongoDBCommunity.list
-      sudo apt-get -y update
-      sudo apt-get -y install mongodb-org
+      # Descargar binario de mongodb
+        cd /opt
+        curl -LO https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-debian10-4.4.29.tgz
+      # Desempaquetar
+        sudo tar -xzf /opt/mongodb-linux-x86_64-debian10-4.4.29.tgz -C /opt
+      # Crear rutas y enlazar binarios de MongoDB
+        sudo ln -s /opt/mongodb-linux-x86_64-debian10-4.4.29/bin/* /usr/local/bin/
+      # Crear usuario, directorios y permisos para MongoDB
+        sudo useradd -r -s /usr/sbin/nologin mongodb
+        sudo mkdir -p /var/lib/mongodb /var/log/mongodb
+        sudo chown -R mongodb:mongodb /var/lib/mongodb /var/log/mongodb
+      # Crear el servidio de systemd
+        echo '[Unit]'                                                                                                              | sudo tee    /etc/systemd/system/mongod.service
+        echo 'Description=MongoDB Database Server'                                                                                 | sudo tee -a /etc/systemd/system/mongod.service
+        echo 'After=network.target'                                                                                                | sudo tee -a /etc/systemd/system/mongod.service
+        echo ''                                                                                                                    | sudo tee -a /etc/systemd/system/mongod.service
+        echo '[Service]'                                                                                                           | sudo tee -a /etc/systemd/system/mongod.service
+        echo 'User=mongodb'                                                                                                        | sudo tee -a /etc/systemd/system/mongod.service
+        echo 'Group=mongodb'                                                                                                       | sudo tee -a /etc/systemd/system/mongod.service
+        echo 'ExecStart=/usr/local/bin/mongod --dbpath /var/lib/mongodb --logpath /var/log/mongodb/mongod.log --bind_ip 127.0.0.1' | sudo tee -a /etc/systemd/system/mongod.service
+        echo 'Restart=always'                                                                                                      | sudo tee -a /etc/systemd/system/mongod.service
+        echo 'LimitNOFILE=64000'                                                                                                   | sudo tee -a /etc/systemd/system/mongod.service
+        echo ''                                                                                                                    | sudo tee -a /etc/systemd/system/mongod.service
+        echo '[Install]'                                                                                                           | sudo tee -a /etc/systemd/system/mongod.service
+        echo 'WantedBy=multi-user.target'                                                                                          | sudo tee -a /etc/systemd/system/mongod.service
+      # Arrancar MongoDB y verificar versión
+        sudo systemctl daemon-reexec
+        sudo systemctl daemon-reload
+        sudo systemctl enable --now mongod
+        sudo mongod --version
+
+
 
     # Instalar NodeJS 16
       curl -fsSL https://deb.nodesource.com/setup_16.x | sudo bash -
