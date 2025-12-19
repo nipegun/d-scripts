@@ -61,9 +61,28 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Unifi Protect para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Actualizar la lista de paquetes disponibles en los repositorios
+      sudo apt-get -y update
+
+    # Instalar paquetes necesarios
+      sudo apt-get -y install ca-certificates
+      sudo apt-get -y install curl
+      sudo apt-get -y install gnupg
+      sudo apt-get -y install lsb-release
+      sudo apt-get -y install ffmpeg
+
+    # Instalar MongoDB 4.4
+      vUltVersMainMongoDBCommunity='4.4'
+      curl -fsSL https://pgp.mongodb.com/server-"$vUltVersMainMongoDBCommunity".asc| sudo gpg -o /usr/share/keyrings/mongodb-server-"$vUltVersMainMongoDBCommunity".gpg --dearmor
+      echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-$vUltVersMainMongoDBCommunity.gpg ] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/$vUltVersMainMongoDBCommunity main" | sudo tee /etc/apt/sources.list.d/mongodb-org-$vUltVersMainMongoDBCommunity.list
+      sudo apt-get -y update
+      sudo apt-get -y install mongodb-org
+
+    # Instalar NodeJS 16
+      curl -fsSL https://deb.nodesource.com/setup_16.x | sudo bash -
+      sudo apt-get -y install nodejs
+
+
 
   elif [ $cVerSO == "12" ]; then
 
