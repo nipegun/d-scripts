@@ -82,7 +82,11 @@ fMostrarMenu() {
 
   echo
   echo "Seleccione números separados por espacios (ej: 1 3 5):"
-  read -r vSeleccion < /dev/tty
+  if [ -n "$1" ]; then
+    vSeleccion="$1"
+  else
+    read -r vSeleccion < /dev/tty
+  fi
 }
 
 
