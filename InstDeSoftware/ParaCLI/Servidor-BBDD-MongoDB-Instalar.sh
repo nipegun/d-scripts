@@ -70,11 +70,12 @@ if [ $cVerSO == "13" ]; then
      echo ""
      echo -e "${cColorRojo}      El paquete jq no está instalado. Iniciando su instalación...${cFinColor}"
      echo ""
-     apt-get -y update && apt-get -y install jq
+     sudo apt-get -y update
+     sudo apt-get -y install jq
      echo ""
    fi
   curl -sL http://downloads.mongodb.org.s3.amazonaws.com/current.json | jq -r '.versions[].downloads[] | select(.arch == "x86_64" and .edition == "targeted" and .target == "debian12") | .packages' > /tmp/PaquetesDebianMondoDBCommunity.json
-  vUltSubVersMongoDBCommunity=$(cat /tmp/PaquetesDebianMondoDBCommunity.json | grep server | grep -vE 'velopment|esting' | cut -d'"' -f2 | cut -d'_' -f2)
+  vUltSubVersMongoDBCommunity=$(cat /tmp/PaquetesDebianMondoDBCommunity.json | grep server | grep -vE 'velopment|esting' | cut -d'"' -f2 | cut -d'_' -f2 | head -n1)
   echo ""
   echo "      La última versión estable de MongoDB Community es la $vUltSubVersMongoDBCommunity"
   echo ""
@@ -86,7 +87,8 @@ if [ $cVerSO == "13" ]; then
       echo ""
       echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
-      apt-get -y update && apt-get -y install dialog
+      sudo apt-get -y update
+      sudo apt-get -y install dialog
       echo ""
     fi
 
@@ -118,7 +120,8 @@ if [ $cVerSO == "13" ]; then
                   echo ""
                   echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
                   echo ""
-                  apt-get -y update && apt-get -y install curl
+                  sudo apt-get -y update
+                  sudo apt-get -y install curl
                   echo ""
                 fi
               # Comprobar si el paquete gnupg está instalado. Si no lo está, instalarlo.
@@ -126,19 +129,21 @@ if [ $cVerSO == "13" ]; then
                   echo ""
                   echo -e "${cColorRojo}    El paquete gnupg no está instalado. Iniciando su instalación...${cFinColor}"
                   echo ""
-                  apt-get -y update && apt-get -y install gnupg
+                  sudo apt-get -y update
+                  sudo apt-get -y install gnupg
                   echo ""
                 fi
               curl -fsSL https://www.mongodb.org/static/pgp/server-"$vUltVersMainMongoDBCommunity".asc | gpg -o /usr/share/keyrings/mongodb-server-"$vUltVersMainMongoDBCommunity".gpg --dearmor
+https://pgp.mongodb.com/server-8.0.asc
 
             # Instalar la llave para firmar el repositorio
-              echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-$vUltVersMainMongoDBCommunity.gpg ] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/$vUltVersMainMongoDBCommunity main" | tee /etc/apt/sources.list.d/mongodb-org-$vUltVersMainMongoDBCommunity.list
+              echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-$vUltVersMainMongoDBCommunity.gpg ] http://repo.mongodb.org/apt/debian trixie/mongodb-org/$vUltVersMainMongoDBCommunity main" | sudo tee /etc/apt/sources.list.d/mongodb-org-$vUltVersMainMongoDBCommunity.list
 
             # Actualizar la lista de paquetes disponibles en todos los repositorios instalados en el sistema
-              apt-get -y update
+              sudo apt-get -y update
 
             # Instalar el servidor MondoDB
-              apt-get -y install mongodb-org
+              sudo apt-get -y install mongodb-org
 
             # Activar y ejecutar el servicio
               echo ""
