@@ -95,12 +95,12 @@ if [ $cVerSO == "13" ]; then
   # Crear el menú
     menu=(dialog --checklist "Instalación de MongoDB - Indica la versión:" 22 96 16)
       opciones=(
-        1 "Instalar la versión $vUltSubVersMongoDBCommunity desde el repositorio de MongoDB" on
-        2 "Instalar la versión $vUltSubVersMongoDBCommunity desde el archivo .deb" off
-        3 "Instalar la última versión disponible en los repositorios de Debian" off
-        4 "  Verificar el estado de la conexión con la base de datos" off
-        5 "  Activar el acceso desde todas las IPs" off
-        6 "  Securizar la instalación" off
+        1 "Instalar la versión $vUltSubVersMongoDBCommunity desde el repositorio de MongoDB (por ahora única opcion para trixie)" on
+        #2 "Instalar la versión $vUltSubVersMongoDBCommunity desde el archivo .deb"           off
+        #3 "Instalar la última versión disponible en los repositorios de Debian"              off
+        #4 "  Verificar el estado de la conexión con la base de datos"                        off
+        #5 "  Activar el acceso desde todas las IPs"                                          off
+        #6 "  Securizar la instalación"                                                       off
       )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -178,7 +178,7 @@ if [ $cVerSO == "13" ]; then
               echo "" 
               echo "    Obteniendo el enlace de descarga del paquete.deb..."
               echo ""
-              vEnlaceDescargaPaqueteDeb=$(cat /tmp/PaquetesDebianMondoDBCommunity.json | grep server | grep -vE 'velopment|esting' | cut -d'"' -f2)
+              vEnlaceDescargaPaqueteDeb=$(cat /tmp/PaquetesDebianMondoDBCommunity.json | grep server | grep -vE 'velopment|esting' | cut -d'"' -f2 | head -n1)
               echo ""
               echo "      En enlace de descarga del paquete .deb es: $vEnlaceDescargaPaqueteDeb"
               echo ""
@@ -190,38 +190,38 @@ if [ $cVerSO == "13" ]; then
               echo ""
               echo "    Descargando el paquete..."
               echo ""
-              mkdir -p /root/SoftInst/MongoDBCommunity/ 2> /dev/null
-              cd /root/SoftInst/MongoDBCommunity/
+              sudo mkdir -p /root/SoftInst/MongoDBCommunity/ 2> /dev/null
+              sudo cd /root/SoftInst/MongoDBCommunity/
               # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
                   echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
                   echo ""
-                  apt-get -y update && apt-get -y install curl
+                  sudo apt-get -y update
+                  sudo apt-get -y install curl
                   echo ""
                 fi
-              curl -L $vEnlaceDescargaPaqueteDeb -o /root/SoftInst/MongoDBCommunity/MondoDBCommunityServer.deb
+              sudo curl -L $vEnlaceDescargaPaqueteDeb -o /root/SoftInst/MongoDBCommunity/MondoDBCommunityServer.deb
 
             # Instalar el paquete
               echo ""
               echo "    Instalando el paquete .deb..."
               echo ""
-              apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityServer.deb
+              sudo apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityServer.deb
 
-          #  # Instalar Mongo Community Shell
-          #    echo ""
-          #    echo "    Descargando e instalando Mongo Community Shell"
-          #    echo ""
-          #    curl -L https://repo.mongodb.org/apt/debian/dists/bookworm/mongodb-org/$vUltVersMainMongoDBCommunity/main/binary-amd64/mongodb-org-shell_"$vUltSubVersMongoDBCommunity"_amd64.deb -o /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb 
-          #    echo ""
-          #    apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb
+            # Instalar Mongo Community Shell
+              echo ""
+              echo "    Descargando e instalando Mongo Community Shell"
+              echo ""
+              sudo curl -L https://repo.mongodb.org/apt/debian/dists/bookworm/mongodb-org/$vUltVersMainMongoDBCommunity/main/binary-amd64/mongodb-org-shell_"$vUltSubVersMongoDBCommunity"_amd64.deb -o /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb 
+              echo ""
+              sudo apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb
 
           # Activar y ejecutar el servicio
             echo ""
             echo "  Activando el servicio..." 
             echo ""
             systemctl enable mongod.service --now
-
 
           ;;
 
@@ -330,11 +330,12 @@ elif [ $cVerSO == "12" ]; then
      echo ""
      echo -e "${cColorRojo}      El paquete jq no está instalado. Iniciando su instalación...${cFinColor}"
      echo ""
-     apt-get -y update && apt-get -y install jq
+     sudo apt-get -y update
+     sudo apt-get -y install jq
      echo ""
    fi
   curl -sL http://downloads.mongodb.org.s3.amazonaws.com/current.json | jq -r '.versions[].downloads[] | select(.arch == "x86_64" and .edition == "targeted" and .target == "debian12") | .packages' > /tmp/PaquetesDebianMondoDBCommunity.json
-  vUltSubVersMongoDBCommunity=$(cat /tmp/PaquetesDebianMondoDBCommunity.json | grep server | grep -vE 'velopment|esting' | cut -d'"' -f2 | cut -d'_' -f2)
+  vUltSubVersMongoDBCommunity=$(cat /tmp/PaquetesDebianMondoDBCommunity.json | grep server | grep -vE 'velopment|esting' | cut -d'"' -f2 | cut -d'_' -f2 | head -n1)
   echo ""
   echo "      La última versión estable de MongoDB Community es la $vUltSubVersMongoDBCommunity"
   echo ""
@@ -346,7 +347,8 @@ elif [ $cVerSO == "12" ]; then
       echo ""
       echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
       echo ""
-      apt-get -y update && apt-get -y install dialog
+      sudo apt-get -y update
+      sudo apt-get -y install dialog
       echo ""
     fi
 
@@ -354,11 +356,11 @@ elif [ $cVerSO == "12" ]; then
     menu=(dialog --checklist "Instalación de MongoDB - Indica la versión:" 22 96 16)
       opciones=(
         1 "Instalar la versión $vUltSubVersMongoDBCommunity desde el repositorio de MongoDB" on
-        2 "Instalar la versión $vUltSubVersMongoDBCommunity desde el archivo .deb" off
-        3 "Instalar la última versión disponible en los repositorios de Debian" off
-        4 "  Verificar el estado de la conexión con la base de datos" off
-        5 "  Activar el acceso desde todas las IPs" off
-        6 "  Securizar la instalación" off
+        2 "Instalar la versión $vUltSubVersMongoDBCommunity desde el archivo .deb"           off
+        3 "Instalar la última versión disponible en los repositorios de Debian"              off
+        4 "  Verificar el estado de la conexión con la base de datos"                        off
+        5 "  Activar el acceso desde todas las IPs"                                          off
+        6 "  Securizar la instalación"                                                       off
       )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -372,13 +374,16 @@ elif [ $cVerSO == "12" ]; then
             echo "    Instalando la versión $vUltSubVersMongoDBCommunity desde el repositorio de MongoDB..."
             echo ""
 
+            vUltVersMainMongoDBCommunity='8.0'
+
             # Instalar el repositorio
               # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
                   echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
                   echo ""
-                  apt-get -y update && apt-get -y install curl
+                  sudo apt-get -y update
+                  sudo apt-get -y install curl
                   echo ""
                 fi
               # Comprobar si el paquete gnupg está instalado. Si no lo está, instalarlo.
@@ -386,25 +391,27 @@ elif [ $cVerSO == "12" ]; then
                   echo ""
                   echo -e "${cColorRojo}    El paquete gnupg no está instalado. Iniciando su instalación...${cFinColor}"
                   echo ""
-                  apt-get -y update && apt-get -y install gnupg
+                  sudo apt-get -y update
+                  sudo apt-get -y install gnupg
                   echo ""
                 fi
               curl -fsSL https://www.mongodb.org/static/pgp/server-"$vUltVersMainMongoDBCommunity".asc | gpg -o /usr/share/keyrings/mongodb-server-"$vUltVersMainMongoDBCommunity".gpg --dearmor
 
             # Instalar la llave para firmar el repositorio
-              echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-$vUltVersMainMongoDBCommunity.gpg ] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/$vUltVersMainMongoDBCommunity main" | tee /etc/apt/sources.list.d/mongodb-org-$vUltVersMainMongoDBCommunity.list
+              # echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-$vUltVersMainMongoDBCommunity.gpg ] http://repo.mongodb.org/apt/debian trixie/mongodb-org/$vUltVersMainMongoDBCommunity main" | sudo tee /etc/apt/sources.list.d/mongodb-org-$vUltVersMainMongoDBCommunity.list
+              echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-$vUltVersMainMongoDBCommunity.gpg ] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/$vUltVersMainMongoDBCommunity main" | sudo tee /etc/apt/sources.list.d/mongodb-org-$vUltVersMainMongoDBCommunity.list
 
             # Actualizar la lista de paquetes disponibles en todos los repositorios instalados en el sistema
-              apt-get -y update
+              sudo apt-get -y update
 
             # Instalar el servidor MondoDB
-              apt-get -y install mongodb-org
+              sudo apt-get -y install mongodb-org
 
             # Activar y ejecutar el servicio
               echo ""
               echo "  Activando el servicio..." 
               echo ""
-              systemctl enable mongod.service --now
+              sudo systemctl enable mongod.service --now
 
             # Notificar el fin de la instalación
               echo ""
@@ -412,6 +419,12 @@ elif [ $cVerSO == "12" ]; then
               echo "      Los archivos se guardan en: /var/lib/mongodb"
               echo "      Los logs se guardan en: /var/log/mongodb"
               echo ""
+
+            # Mostrar estado del servicio
+              echo ""
+              echo "  Mostrando estado del servicio..."
+              echo ""
+              systemctl status mongod.service --no-pager
 
           ;;
 
@@ -425,7 +438,7 @@ elif [ $cVerSO == "12" ]; then
               echo "" 
               echo "    Obteniendo el enlace de descarga del paquete.deb..."
               echo ""
-              vEnlaceDescargaPaqueteDeb=$(cat /tmp/PaquetesDebianMondoDBCommunity.json | grep server | grep -vE 'velopment|esting' | cut -d'"' -f2)
+              vEnlaceDescargaPaqueteDeb=$(cat /tmp/PaquetesDebianMondoDBCommunity.json | grep server | grep -vE 'velopment|esting' | cut -d'"' -f2 | head -n1)
               echo ""
               echo "      En enlace de descarga del paquete .deb es: $vEnlaceDescargaPaqueteDeb"
               echo ""
@@ -437,38 +450,38 @@ elif [ $cVerSO == "12" ]; then
               echo ""
               echo "    Descargando el paquete..."
               echo ""
-              mkdir -p /root/SoftInst/MongoDBCommunity/ 2> /dev/null
-              cd /root/SoftInst/MongoDBCommunity/
+              sudo mkdir -p /root/SoftInst/MongoDBCommunity/ 2> /dev/null
+              sudo cd /root/SoftInst/MongoDBCommunity/
               # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
                   echo ""
                   echo -e "${cColorRojo}    El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
                   echo ""
-                  apt-get -y update && apt-get -y install curl
+                  sudo apt-get -y update
+                  sudo apt-get -y install curl
                   echo ""
                 fi
-              curl -L $vEnlaceDescargaPaqueteDeb -o /root/SoftInst/MongoDBCommunity/MondoDBCommunityServer.deb
+              sudo curl -L $vEnlaceDescargaPaqueteDeb -o /root/SoftInst/MongoDBCommunity/MondoDBCommunityServer.deb
 
             # Instalar el paquete
               echo ""
               echo "    Instalando el paquete .deb..."
               echo ""
-              apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityServer.deb
+              sudo apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityServer.deb
 
-          #  # Instalar Mongo Community Shell
-          #    echo ""
-          #    echo "    Descargando e instalando Mongo Community Shell"
-          #    echo ""
-          #    curl -L https://repo.mongodb.org/apt/debian/dists/bookworm/mongodb-org/$vUltVersMainMongoDBCommunity/main/binary-amd64/mongodb-org-shell_"$vUltSubVersMongoDBCommunity"_amd64.deb -o /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb 
-          #    echo ""
-          #    apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb
+            # Instalar Mongo Community Shell
+              echo ""
+              echo "    Descargando e instalando Mongo Community Shell"
+              echo ""
+              sudo curl -L https://repo.mongodb.org/apt/debian/dists/bookworm/mongodb-org/$vUltVersMainMongoDBCommunity/main/binary-amd64/mongodb-org-shell_"$vUltSubVersMongoDBCommunity"_amd64.deb -o /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb 
+              echo ""
+              sudo apt -y install /root/SoftInst/MongoDBCommunity/MongoDBCommunityShell.deb
 
           # Activar y ejecutar el servicio
             echo ""
             echo "  Activando el servicio..." 
             echo ""
             systemctl enable mongod.service --now
-
 
           ;;
 
