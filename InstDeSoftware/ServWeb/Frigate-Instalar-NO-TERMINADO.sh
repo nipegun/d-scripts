@@ -79,6 +79,53 @@
       sudo mkdir -p /opt/frigate
       sudo chown frigate:frigate /opt/frigate
 
+    # Clonar repo
+      cd /opt/frigate
+      git clone https://github.com/blakeblackshear/frigate.git src
+      sudo chown frigate:frigate /opt/frigate
+
+    # Crear la configuración para la primera camara
+      sudo mkdir /etc/frigate
+      echo 'mqtt:'                                                 | sudo tee    /etc/frigate/config.yml
+      echo '  host: 127.0.0.1'                                     | sudo tee -a /etc/frigate/config.yml
+      echo ''                                                      | sudo tee -a /etc/frigate/config.yml
+      echo 'ffmpeg:'                                               | sudo tee -a /etc/frigate/config.yml
+      echo '  path: /usr/bin/ffmpeg'                               | sudo tee -a /etc/frigate/config.yml
+      echo ''                                                      | sudo tee -a /etc/frigate/config.yml
+      echo 'cameras:'                                              | sudo tee -a /etc/frigate/config.yml
+      echo '  g3flex:'                                             | sudo tee -a /etc/frigate/config.yml
+      echo '    ffmpeg:'                                           | sudo tee -a /etc/frigate/config.yml
+      echo '      inputs:'                                         | sudo tee -a /etc/frigate/config.yml
+      echo '        - path: rtsp://ubnt:ubnt@192.168.1.105:554/s0' | sudo tee -a /etc/frigate/config.yml
+      echo '          roles:'                                      | sudo tee -a /etc/frigate/config.yml
+      echo '            - detect'                                  | sudo tee -a /etc/frigate/config.yml
+      echo '            - record'                                  | sudo tee -a /etc/frigate/config.yml
+      echo '    detect:'                                           | sudo tee -a /etc/frigate/config.yml
+      echo '      width: 1920'                                     | sudo tee -a /etc/frigate/config.yml
+      echo '      height: 1080'                                    | sudo tee -a /etc/frigate/config.yml
+      echo '      fps: 5'                                          | sudo tee -a /etc/frigate/config.yml
+
+mkdir -p /config
+cp -v /etc/frigate/config.yml /config/config.yml
+cp -v /opt/frigate/src/labelmap.txt /labelmap.txt
+sudo chown frigate:frigate /config -Rv
+
+        # Crear módulo onvif falso
+          echo 'class ONVIFError(Exception):'             | sudo tee    /opt/frigate/src/onvif.py
+          echo '  pass'                                   | sudo tee -a /opt/frigate/src/onvif.py
+          echo ''                                         | sudo tee -a /opt/frigate/src/onvif.py
+          echo 'class ONVIFService:'                      | sudo tee -a /opt/frigate/src/onvif.py
+          echo '  def __init__(self, *args, **kwargs):'   | sudo tee -a /opt/frigate/src/onvif.py
+          echo '    raise RuntimeError("ONVIF disabled")' | sudo tee -a /opt/frigate/src/onvif.py
+          echo ''                                         | sudo tee -a /opt/frigate/src/onvif.py
+          echo 'class ONVIFCamera:'                       | sudo tee -a /opt/frigate/src/onvif.py
+          echo '  def __init__(self, *args, **kwargs):'   | sudo tee -a /opt/frigate/src/onvif.py
+          echo '    raise RuntimeError("ONVIF disabled")' | sudo tee -a /opt/frigate/src/onvif.py
+
+        sudo echo 'VERSION = "manual"' > /opt/frigate/src/frigate/version.py
+
+sudo chown frigate:frigate /opt/frigate -Rv
+
     # Crear el entorno virtual e instalar dentro
       su -s /bin/bash frigate
       cd /opt/frigate
@@ -93,8 +140,7 @@
         pip install requests
         pip install opencv-python-headless
         pip install py3nvml
-        pip install frigate.version
-        sudo echo 'VERSION = "manual"' > /opt/frigate/src/frigate/version.py
+
         pip install unidecode
         pip install starlette_context
         pip install aiofiles
@@ -103,13 +149,6 @@
         pip install pytz
         pip install tzlocal
         pip install httpx
-        # Crear módulo onvif falso
-          echo 'class ONVIFCamera:'                       | sudo tee    /opt/frigate/src/onvif.py
-          echo '  def __init__(self, *args, **kwargs):'   | sudo tee -a /opt/frigate/src/onvif.py
-          echo '    raise RuntimeError("ONVIF disabled")' | sudo tee -a /opt/frigate/src/onvif.py
-          echo ''                                         | sudo tee -a /opt/frigate/src/onvif.py
-          echo 'class ONVIFError(Exception):'             | sudo tee -a /opt/frigate/src/onvif.py
-          echo '  pass'                                   | sudo tee -a /opt/frigate/src/onvif.py
         pip install tensorflow
         pip install onnxruntime
         pip install openvino
@@ -126,10 +165,32 @@
         pip install transformers
         pip install python-multipart
         pip install norfair
+        pip install py_vapid
+        pip install pywebpush
+        pip install pandas
+        pip install paho-mqtt
+        pip install ws4py
+        pip install ruamel.yaml
 
 
-cd /opt/frigate
-git clone https://github.com/blakeblackshear/frigate.git src
+cd /opt/frigate/src
+python3 -m frigate.app
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -137,23 +198,6 @@ git clone https://github.com/blakeblackshear/frigate.git src
 
 PYTHONPATH=/opt/frigate/src FRIGATE_CONFIG_FILE=/etc/frigate/config.yml /opt/frigate/venv/bin/python3 -m frigate.app
 
-    # Crear la configuración para la primera camara
-      sudo mkdir /etc/frigate
-      echo 'mqtt:'                                                 | sudo tee    /etc/frigate/config.yml
-      echo '  host: 127.0.0.1'                                     | sudo tee -a /etc/frigate/config.yml
-      echo ''                                                      | sudo tee -a /etc/frigate/config.yml
-      echo 'cameras:'                                              | sudo tee -a /etc/frigate/config.yml
-      echo '  g3flex:'                                             | sudo tee -a /etc/frigate/config.yml
-      echo '    ffmpeg:'                                           | sudo tee -a /etc/frigate/config.yml
-      echo '      inputs:'                                         | sudo tee -a /etc/frigate/config.yml
-      echo '        - path: rtsp://ubnt:ubnt@192.168.1.105:554/s0' | sudo tee -a /etc/frigate/config.yml
-      echo '          roles:'                                      | sudo tee -a /etc/frigate/config.yml
-      echo '            - detect'                                  | sudo tee -a /etc/frigate/config.yml
-      echo '            - record'                                  | sudo tee -a /etc/frigate/config.yml
-      echo '    detect:'                                           | sudo tee -a /etc/frigate/config.yml
-      echo '      width: 1920'                                     | sudo tee -a /etc/frigate/config.yml
-      echo '      height: 1080'                                    | sudo tee -a /etc/frigate/config.yml
-      echo '      fps: 5'                                          | sudo tee -a /etc/frigate/config.yml
 
 
   elif [ $cVerSO == "12" ]; then
