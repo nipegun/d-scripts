@@ -123,11 +123,212 @@
         sudo systemctl enable --now mongod
         sudo mongod --version
 
-
-
     # Instalar NodeJS 16
       curl -fsSL https://deb.nodesource.com/setup_16.x | sudo bash -
       sudo apt-get -y install nodejs
+
+    # Descargar protect
+      sudo mkdir -p /opt/unifi-protec
+
+rm -f /opt/unifi-protect/unifi-protect.deb
+curl -L -A "Mozilla/5.0" https://fw-download.ubnt.com/data/unifi-protect/unifi-protect_2.11.13_amd64.deb -o /opt/unifi-protect/unifi-protect.deb
+
+curl -fsSL https://dl.ui.com/unifi/unifi-repo.gpg | gpg --dearmor -o /usr/share/keyrings/unifi.gpg
+echo "deb [signed-by=/usr/share/keyrings/unifi.gpg] https://www.ui.com/downloads/unifi/debian stable ubiquiti" > /etc/apt/sources.list.d/unifi.list
+
+
+
+
+
+
+
+sudo docker run --privileged --rm tonistiigi/binfmt --install all
+
+sudo docker run -d --name unifi-protect  \
+    --privileged                         \
+    --tmpfs /run                         \
+    --tmpfs /run/lock                    \
+    --tmpfs /tmp                         \
+    -v /sys/fs/cgroup:/sys/fs/cgroup:ro  \
+    -v /storage/srv:/srv                 \
+    -v /storage/data:/data               \
+    -v /storage/persistent:/persistent   \
+    --network host                       \
+    -e STORAGE_DISK=/dev/sda1            \
+    markdegroot/unifi-protect-arm64:latest
+
+
+
+
+sudo docker run -d --name unifi-protect \
+  --privileged                              \
+  --network host                            \
+  --tmpfs /run                              \
+  --tmpfs /run/lock                         \
+  --tmpfs /tmp                              \
+  -v unifi-protect:/srv                     \
+  -v unifi-protect-data:/data               \
+  markdegroot/unifi-protect-arm64:latest
+
+echo "  entrar a http://localhost:3000"
+
+
+
+sudo docker stop unifi-protect
+sudo docker rm unifi-protect
+sudo docker volume rm unifi-protect unifi-protect-data
+
+sudo mkdir -p /mnt/DiscoGrabaciones/{srv,data,persistent}
+sudo chown -R root:root /mnt/DiscoGrabaciones
+sudo chmod -R 755 /mnt/DiscoGrabaciones
+
+
+sudo docker run -d --name unifi-protect \
+  --privileged \
+  --tmpfs /run \
+  --tmpfs /run/lock \
+  --tmpfs /tmp \
+  -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+  -v /mnt/DiscoGrabaciones/srv:/srv \
+  -v /mnt/DiscoGrabaciones/data:/data \
+  -v /mnt/DiscoGrabaciones/persistent:/persistent \
+  --network host \
+  markdegroot/unifi-protect-arm64:latest
+
+
+
+
+
+
+
+
+
+
+
+# x86
+
+sudo docker run -d --name unifi-protect-x86         \
+    --tmpfs /srv/unifi-protect/temp                 \
+    -p 7080:7080                                    \
+    -p 7443:7443                                    \
+    -p 7444:7444                                    \
+    -p 7447:7447                                    \
+    -p 7550:7550                                    \
+    -p 7442:7442                                    \
+    -m 2048m                                        \
+    -v unifi-protect-db:/var/lib/postgresql/10/main \
+    -v unifi-protect:/srv/unifi-protect             \
+    markdegroot/unifi-protect-x86:latest
+
+
+
+
+
+
+
+
+sudo docker run -d --name unifi-protect-x86 \
+  -p 7080:7080 \
+  -p 7443:7443 \
+  -p 7444:7444 \
+  -p 7447:7447 \
+  -p 7550:7550 \
+  -p 7442:7442 \
+  -m 2048m \
+  -v unifi-protect-db:/var/lib/postgresql/10/main \
+  -v unifi-protect:/srv/unifi-protect \
+  markdegroot/unifi-protect-x86:latest
+
+
+sudo docker rm unifi-protect-x86
+
+sudo docker run -d --name unifi-protect-x86 \
+  --user 0 \
+  -p 7080:7080 \
+  -p 7443:7443 \
+  -p 7444:7444 \
+  -p 7447:7447 \
+  -p 7550:7550 \
+  -p 7442:7442 \
+  -m 2048m \
+  -v unifi-protect-db:/var/lib/postgresql/10/main \
+  -v unifi-protect:/srv/unifi-protect \
+  markdegroot/unifi-protect-x86:latest
+
+
+
+
+
+sudo docker rm unifi-protect-x86
+
+sudo docker run --rm -v unifi-protect:/srv/unifi-protect busybox sh -c '
+mkdir -p /srv/unifi-protect/temp /srv/unifi-protect/logs /srv/unifi-protect/data &&
+chmod -R 777 /srv/unifi-protect
+'
+
+sudo docker run -d --name unifi-protect-x86 \
+  --privileged \
+  --tmpfs /run \
+  --tmpfs /run/lock \
+  --tmpfs /tmp \
+  -p 7080:7080 \
+  -p 7443:7443 \
+  -p 7444:7444 \
+  -p 7447:7447 \
+  -p 7550:7550 \
+  -p 7442:7442 \
+  -m 2048m \
+  -v unifi-protect-db:/var/lib/postgresql/10/main \
+  -v unifi-protect:/srv/unifi-protect \
+  markdegroot/unifi-protect-x86:latest
+
+
+
+
+
+sudo docker run -d --name unifi-protect \
+  --privileged \
+  --network host \
+  --tmpfs /run \
+  --tmpfs /run/lock \
+  --tmpfs /tmp \
+  -v unifi-protect:/srv \
+  -v unifi-protect-data:/data \
+  markdegroot/unifi-protect-arm64
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Después del setup UniFi Protect cerrará 3000 moverá todo a HTTPS Y entonces entrarás por:3000
+
+UniFi Protect needs a lot of storage to record video. Protect will fail to start if there is not at least 100GB disk space available, so make sure to store your Docker volumes on a disk with some space (/storage in the above run command).
+Optional: Update the env variable STORAGE_DISK to your disk to see disk usage inside UniFi Protect.
+
+Issues with remote access
+There is a known issue that remote access to your UNVR (via the Ubnt cloud) will not work with the console unless the primary network interface is named enp0s2. To achieve this, on your host machine create the file /etc/systemd/network/98-enp0s2.link with the content below, replacing xx:xx:xx:xx:xx:xx with your actual MAC address.
+
+[Match]
+MACAddress=xx:xx:xx:xx:xx:xx
+
+[Link]
+Name=enp0s2
+Make sure to update your network settings to reflect the new interface name. To apply the settings, run sudo update-initramfs -u and reboot your host machine.
+
+
+
+
+    # Instalar
+      sudo apt -y install /opt/unifi-protect/unifi-protect.deb
 
   elif [ $cVerSO == "10" ]; then
 
