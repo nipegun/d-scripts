@@ -114,6 +114,8 @@ if [ $cVerSO == "13" ]; then
             echo "    Instalando la versión $vUltSubVersMongoDBCommunity desde el repositorio de MongoDB..."
             echo ""
 
+            vUltVersMainMongoDBCommunity='8.0'
+
             # Instalar el repositorio
               # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
                 if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
@@ -134,10 +136,10 @@ if [ $cVerSO == "13" ]; then
                   echo ""
                 fi
               curl -fsSL https://www.mongodb.org/static/pgp/server-"$vUltVersMainMongoDBCommunity".asc | gpg -o /usr/share/keyrings/mongodb-server-"$vUltVersMainMongoDBCommunity".gpg --dearmor
-https://pgp.mongodb.com/server-8.0.asc
 
             # Instalar la llave para firmar el repositorio
-              echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-$vUltVersMainMongoDBCommunity.gpg ] http://repo.mongodb.org/apt/debian trixie/mongodb-org/$vUltVersMainMongoDBCommunity main" | sudo tee /etc/apt/sources.list.d/mongodb-org-$vUltVersMainMongoDBCommunity.list
+              # echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-$vUltVersMainMongoDBCommunity.gpg ] http://repo.mongodb.org/apt/debian trixie/mongodb-org/$vUltVersMainMongoDBCommunity main" | sudo tee /etc/apt/sources.list.d/mongodb-org-$vUltVersMainMongoDBCommunity.list
+              echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-$vUltVersMainMongoDBCommunity.gpg ] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/$vUltVersMainMongoDBCommunity main" | sudo tee /etc/apt/sources.list.d/mongodb-org-$vUltVersMainMongoDBCommunity.list
 
             # Actualizar la lista de paquetes disponibles en todos los repositorios instalados en el sistema
               sudo apt-get -y update
@@ -149,7 +151,7 @@ https://pgp.mongodb.com/server-8.0.asc
               echo ""
               echo "  Activando el servicio..." 
               echo ""
-              systemctl enable mongod.service --now
+              sudo systemctl enable mongod.service --now
 
             # Notificar el fin de la instalación
               echo ""
@@ -157,6 +159,12 @@ https://pgp.mongodb.com/server-8.0.asc
               echo "      Los archivos se guardan en: /var/lib/mongodb"
               echo "      Los logs se guardan en: /var/log/mongodb"
               echo ""
+
+            # Mostrar estado del servicio
+              echo ""
+              echo "  Mostrando estado del servicio..."
+              echo ""
+              systemctl status mongod.service --no-pager
 
           ;;
 
