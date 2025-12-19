@@ -9,19 +9,19 @@
 # Script de NiPeGun para instalar y configurar Frigate en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Frigate-Instalar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Frigate-Instalar.sh | sed 's-sudo--g' | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Frigate-Instalar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Frigate-Instalar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Frigate-Instalar.shv | nano -
 # ----------
 
 # Definir constantes de color
@@ -61,9 +61,100 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Frigate para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    sudo apt-get -y update
+    sudo apt-get -y install python3
+    sudo apt-get -y install python3-venv
+    sudo apt-get -y install python3-pip
+    sudo apt-get -y install ffmpeg
+    sudo apt-get -y install libgl1
+    sudo apt-get -y install libglib2.0-0
+    sudo apt-get -y install mosquitto
+    sudo apt-get -y install mosquitto-clients
+
+    # Activar e iniciar mosquito
+      sudo systemctl enable mosquitto --now
+
+    # Usuario y estructura
+      sudo useradd -r -s /usr/sbin/nologin frigate
+      sudo mkdir -p /opt/frigate
+      sudo chown frigate:frigate /opt/frigate
+
+    # Crear el entorno virtual e instalar dentro
+      su -s /bin/bash frigate
+      cd /opt/frigate
+      python3 -m venv venv
+      source venv/bin/activate
+        pip install psutil
+        pip install uvicorn
+        pip install peewee_migrate
+        pip install fastapi
+        pip install joserfc
+        pip install slowapi
+        pip install requests
+        pip install opencv-python-headless
+        pip install py3nvml
+        pip install frigate.version
+        sudo echo 'VERSION = "manual"' > /opt/frigate/src/frigate/version.py
+        pip install unidecode
+        pip install starlette_context
+        pip install aiofiles
+        pip install zmq
+        pip install prometheus_client
+        pip install pytz
+        pip install tzlocal
+        pip install httpx
+        # Crear módulo onvif falso
+          echo 'class ONVIFCamera:'                       | sudo tee    /opt/frigate/src/onvif.py
+          echo '  def __init__(self, *args, **kwargs):'   | sudo tee -a /opt/frigate/src/onvif.py
+          echo '    raise RuntimeError("ONVIF disabled")' | sudo tee -a /opt/frigate/src/onvif.py
+          echo ''                                         | sudo tee -a /opt/frigate/src/onvif.py
+          echo 'class ONVIFError(Exception):'             | sudo tee -a /opt/frigate/src/onvif.py
+          echo '  pass'                                   | sudo tee -a /opt/frigate/src/onvif.py
+        pip install tensorflow
+        pip install onnxruntime
+        pip install openvino
+        pip install zeep
+        pip install pathvalidate
+        pip install regex
+        pip install sherpa_onnx
+        pip install librosa
+        pip install setproctitle
+        pip install pyclipper
+        pip install rapidfuzz
+        pip install shapely
+        pip install titlecase
+        pip install transformers
+        pip install python-multipart
+        pip install norfair
+
+
+cd /opt/frigate
+git clone https://github.com/blakeblackshear/frigate.git src
+
+
+
+
+
+PYTHONPATH=/opt/frigate/src FRIGATE_CONFIG_FILE=/etc/frigate/config.yml /opt/frigate/venv/bin/python3 -m frigate.app
+
+    # Crear la configuración para la primera camara
+      sudo mkdir /etc/frigate
+      echo 'mqtt:'                                                 | sudo tee    /etc/frigate/config.yml
+      echo '  host: 127.0.0.1'                                     | sudo tee -a /etc/frigate/config.yml
+      echo ''                                                      | sudo tee -a /etc/frigate/config.yml
+      echo 'cameras:'                                              | sudo tee -a /etc/frigate/config.yml
+      echo '  g3flex:'                                             | sudo tee -a /etc/frigate/config.yml
+      echo '    ffmpeg:'                                           | sudo tee -a /etc/frigate/config.yml
+      echo '      inputs:'                                         | sudo tee -a /etc/frigate/config.yml
+      echo '        - path: rtsp://ubnt:ubnt@192.168.1.105:554/s0' | sudo tee -a /etc/frigate/config.yml
+      echo '          roles:'                                      | sudo tee -a /etc/frigate/config.yml
+      echo '            - detect'                                  | sudo tee -a /etc/frigate/config.yml
+      echo '            - record'                                  | sudo tee -a /etc/frigate/config.yml
+      echo '    detect:'                                           | sudo tee -a /etc/frigate/config.yml
+      echo '      width: 1920'                                     | sudo tee -a /etc/frigate/config.yml
+      echo '      height: 1080'                                    | sudo tee -a /etc/frigate/config.yml
+      echo '      fps: 5'                                          | sudo tee -a /etc/frigate/config.yml
+
 
   elif [ $cVerSO == "12" ]; then
 
