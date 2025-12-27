@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar Heimdall en el DockerCE de Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Dockers/Heimdall.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Dockers/10010-10011-Heimdall.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Dockers/Heimdall.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Dockers/10010-10011-Heimdall.sh | sed 's-sudo--g' | bash
 #
 # Comando: docker run -d --restart=always --name Heimdall -p 80:80 -p 443:443 -e PUID=1000 -e PGID=1000 -e TZ=Europe/Madrid lscr.io/linuxserver/heimdall:latest
 # ----------
@@ -71,8 +71,8 @@
           echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo "  --name Heimdall                              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
-          echo "  -p 80:80                                     \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
-          echo "  -p 443:443                                   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
+          echo "  -p 10010:80                                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
+          echo "  -p 10011:443                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo "  -e PUID=1000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo "  -e PGID=1000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo "  -e TZ=Europe/Madrid                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
@@ -118,8 +118,8 @@
           echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo "  --name Heimdall                              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
-          echo "  -p 80:80                                     \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
-          echo "  -p 443:443                                   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
+          echo "  -p 10010:80                                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
+          echo "  -p 10011:443                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo "  -e PUID=1000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo "  -e PGID=1000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo "  -e TZ=Europe/Madrid                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
