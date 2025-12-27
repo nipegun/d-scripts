@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar PortainerCE en el DockerCE de Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Dockers/10000-10011-PortainerCE.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Dockers/10000-10011-PortainerCE.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Dockers/10000-10011-PortainerCE.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Dockers/10000-10011-PortainerCE.sh | sed 's-sudo--g' | bash
 #
 # Comando: docker run -d --restart=always --name PortainerCE -p 8000:8000 -p 9443:9443 cr.portainer.io/portainer/portainer-ce
 # ----------
