@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar PortainerCE en el DockerCE de Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Dockers/PortainerCE.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Dockers/10000-10011-PortainerCE.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Dockers/PortainerCE.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Dockers/10000-10011-PortainerCE.sh | sed 's-sudo--g' | bash
 #
 # Comando: docker run -d --restart=always --name PortainerCE -p 8000:8000 -p 9443:9443 cr.portainer.io/portainer/portainer-ce
 # ----------
@@ -71,8 +71,8 @@
           echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo "  --name PortainerCE                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
-          echo "  -p 8000:8000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
-          echo "  -p 9443:9443                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  -p 10000:8000                                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  -p 10001:9443                                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo "  -v /Contenedores/PortainerCE/data:/data      \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo "  cr.portainer.io/portainer/portainer-ce"          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
@@ -115,8 +115,8 @@
           echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo "  --name PortainerCE                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
-          echo "  -p 8000:8000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
-          echo "  -p 9443:9443                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  -p 10000:8000                                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          echo "  -p 10001:9443                                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo "  -v /Host/PortainerCE/data:/data              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo "  cr.portainer.io/portainer/portainer-ce"          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
