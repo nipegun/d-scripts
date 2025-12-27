@@ -6,30 +6,45 @@
 set -e
 
 fPararContenedores() {
+  echo ""
+  echo "  Intentando parar todos los contenedores Docker..."
+  echo ""
   sudo docker ps -q | while read vContenedor; do
     sudo docker stop "$vContenedor"
   done
 }
 
 fBorrarContenedores() {
+  echo ""
+  echo "  Intentando borrar todos los contenedores Docker..."
+  echo ""
   sudo docker ps -aq | while read vContenedor; do
     sudo docker rm "$vContenedor"
   done
 }
 
 fBorrarImagenes() {
+  echo ""
+  echo "  Intentando borrar todas las imagenes de contenedores Docker..."
+  echo ""
   sudo docker images -q | sort -u | while read vImagen; do
     sudo docker rmi -f "$vImagen"
   done
 }
 
 fBorrarVolumenes() {
+  echo ""
+  echo "  Intentando borrar todos los volúmenes de contenedores Docker..."
+  echo ""
   sudo docker volume ls -q | while read vVolumen; do
     sudo docker volume rm -f "$vVolumen"
   done
 }
 
 fBorrarRedes() {
+  echo ""
+  echo "  Intentando borrar todas las redes de Docker..."
+  echo ""
   sudo docker network ls -q | while read vRed; do
     case "$vRed" in
       bridge|host|none) ;;
@@ -43,4 +58,3 @@ fBorrarContenedores
 fBorrarImagenes
 fBorrarVolumenes
 fBorrarRedes
-
