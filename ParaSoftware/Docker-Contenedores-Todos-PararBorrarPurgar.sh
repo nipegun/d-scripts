@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Docker-Contenedores-Todos-PararBorrarPurgar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Docker-Contenedores-Todos-PararBorrarPurgar.sh | sed 's-sudo--g' | bash
 
 set -e
 
