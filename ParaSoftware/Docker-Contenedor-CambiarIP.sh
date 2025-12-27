@@ -9,7 +9,7 @@
 # Script de NiPeGun para cambiar la IP de un container de Docker
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Docker-Contenedor-CambiarIP.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Docker-Contenedor-CambiarIP.sh | bash
 # ----------
 
 NombreContenedor="portainer"
