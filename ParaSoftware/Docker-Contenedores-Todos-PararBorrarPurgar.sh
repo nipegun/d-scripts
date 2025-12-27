@@ -1,36 +1,39 @@
 #!/bin/bash
 
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Docker-Contenedores-Todos-PararBorrarPurgar.sh | bash
+
 set -e
 
 fPararContenedores() {
-  docker ps -q | while read vContenedor; do
-    docker stop "$vContenedor"
+  sudo docker ps -q | while read vContenedor; do
+    sudo docker stop "$vContenedor"
   done
 }
 
 fBorrarContenedores() {
-  docker ps -aq | while read vContenedor; do
-    docker rm "$vContenedor"
+  sudo docker ps -aq | while read vContenedor; do
+    sudo docker rm "$vContenedor"
   done
 }
 
 fBorrarImagenes() {
-  docker images -q | sort -u | while read vImagen; do
-    docker rmi -f "$vImagen"
+  sudo docker images -q | sort -u | while read vImagen; do
+    sudo docker rmi -f "$vImagen"
   done
 }
 
 fBorrarVolumenes() {
-  docker volume ls -q | while read vVolumen; do
-    docker volume rm -f "$vVolumen"
+  sudo docker volume ls -q | while read vVolumen; do
+    sudo docker volume rm -f "$vVolumen"
   done
 }
 
 fBorrarRedes() {
-  docker network ls -q | while read vRed; do
+  sudo docker network ls -q | while read vRed; do
     case "$vRed" in
       bridge|host|none) ;;
-      *) docker network rm "$vRed" ;;
+      *) sudo docker network rm "$vRed" ;;
     esac
   done
 }
@@ -40,3 +43,4 @@ fBorrarContenedores
 fBorrarImagenes
 fBorrarVolumenes
 fBorrarRedes
+
