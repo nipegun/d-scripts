@@ -1,5 +1,19 @@
 #!/usr/bin/env python3
 
+# Definir dependencias ANTES de importar nada que las necesite
+dPaquetesPython = {
+  "flask": "flask",
+  "requests": "requests",
+  "Pillow": "PIL",
+  "python-nmap": "nmap",
+}
+
+# Importar e instalar dependencias
+from dependencias import fInstalarDependencias
+fInstalarDependencias(dPaquetesPython)
+
+
+
 import importlib.util
 import subprocess
 import sys
