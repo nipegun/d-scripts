@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# Este script se podría llamar checkrequirements.py y debería
+#
+
 import importlib.util
 import subprocess
 import sys
