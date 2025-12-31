@@ -51,10 +51,6 @@ if [ $cVerSO == "13" ]; then
   echo ""
 
   echo ""
-  echo "  Iniciando el script de instalación de DockerCE para Debian 12 (Bookworm)..."
-  echo ""
-
-  echo ""
   echo "  Instalando paquetes necesarios..."
   echo ""
   sudo apt-get -y install wget
