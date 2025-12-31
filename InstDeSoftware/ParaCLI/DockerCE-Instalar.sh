@@ -59,6 +59,7 @@ if [ $cVerSO == "13" ]; then
   sudo apt-get -y install curl
   sudo apt-get -y install gnupg2
   sudo apt-get -y install software-properties-common
+  sudo apt-get -y install lsb-release
 
   echo ""
   echo "  Descargando la clave PGP del KeyRing..."
