@@ -73,13 +73,13 @@
             echo "    Creando el script iniciador..."
             echo ""
             echo '#!/bin/bash'                                                              | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo ""                                                                         | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo "docker run -d --restart=always -it --security-opt apparmor=unconfined \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo "  --name CTFd                                                         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo "  -v /Contenedores/CTFd/data:/data                                    \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo "  -v /var/run/docker.sock:/var/run/docker.sock                        \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo "  -p 8000:8000                                                        \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo "  ctfd/ctfd:latest"                                                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo ''                                                                         | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo 'docker run -d --restart=always -it --security-opt apparmor=unconfined \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo '  --name CTFd                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo '  -v /Contenedores/CTFd/data:/data                                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo '  -v /var/run/docker.sock:/var/run/docker.sock                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo '  -p 8000:8000                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo '  ctfd/ctfd:latest'                                                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
             sudo chmod +x                                                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
 
           # Insertar el script iniciador en los comandos post arranque
@@ -116,13 +116,13 @@
             echo "    Creando el script iniciador..."
             echo ""
             echo '#!/bin/bash'                                                              | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo ""                                                                         | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo "docker run -d --restart=always -it --security-opt apparmor=unconfined \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo "  --name CTFd                                                         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo "  -v /Host/CTFd/data:/data                                            \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo "  -v /var/run/docker.sock:/var/run/docker.sock                        \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo "  -p 8000:8000                                                        \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
-            echo "  ctfd/ctfd:latest"                                                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo ''                                                                         | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo 'docker run -d --restart=always -it --security-opt apparmor=unconfined \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo '  --name CTFd                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo '  -v /Host/CTFd/data:/data                                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo '  -v /var/run/docker.sock:/var/run/docker.sock                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo '  -p 8000:8000                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            echo '  ctfd/ctfd:latest'                                                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
             sudo chmod +x                                                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
 
           # Insertar el script iniciador en los comandos post arranque
@@ -159,13 +159,13 @@
             echo "    Creando el script iniciador..."
             echo ""
             echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo "docker run -d --restart=always -it             \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo "  --name CTFd                                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo "  -v /Contenedores/CTFd/data:/data             \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo "  -p 8000:8000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo "  ctfd/ctfd:latest"                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo 'docker run -d --restart=always -it             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo '  --name CTFd                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo '  -v /Contenedores/CTFd/data:/data             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo '  -v /var/run/docker.sock:/var/run/docker.sock \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo '  -p 8000:8000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo '  ctfd/ctfd:latest'                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
             chmod +x                                                               /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
 
           # Insertar el script iniciador en los comandos post arranque
@@ -202,13 +202,13 @@
             echo "    Creando el script iniciador..."
             echo ""
             echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo "docker run -d --restart=always -it             \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo "  --name CTFd                                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo "  -v /Host/CTFd/data:/data                     \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo "  -p 8000:8000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
-            echo "  ctfd/ctfd:latest"                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo 'docker run -d --restart=always -it             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo '  --name CTFd                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo '  -v /Host/CTFd/data:/data                     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo '  -v /var/run/docker.sock:/var/run/docker.sock \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo '  -p 8000:8000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            echo '  ctfd/ctfd:latest'                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
             sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
 
           # Insertar el script iniciador en los comandos post arranque
