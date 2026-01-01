@@ -87,6 +87,9 @@
           echo ""
           echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
+        # Asignar permisos correctos para que n8n se inicie
+          chown -R 1000:1000 /Contenedores/n8n
+
         # Iniciar el docker por primera vez
           echo ""
           echo "    Iniciando el container por primera vez..."
@@ -133,6 +136,9 @@
           echo "    Insertando el script iniciador en los ComandosPostArranque..."
           echo ""
           echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+        # Asignar permisos correctos para que n8n se inicie
+          chown -R 1000:1000 /Host/n8n
 
         # Iniciar el docker por primera vez
           echo ""
