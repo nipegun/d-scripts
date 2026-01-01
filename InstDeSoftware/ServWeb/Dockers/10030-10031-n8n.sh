@@ -3,7 +3,7 @@
 # Pongo a disposición pública este script bajo el término de "software de dominio público".
 # Puedes hacer lo que quieras con él porque es libre de verdad; no libre con condiciones como las licencias GNU y otras patrañas similares.
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
-# No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
+# No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.http://10.5.20.2:10030/
 
 # ----------
 # Script de NiPeGun para instalar n8n en el DockerCE de Debian
@@ -77,6 +77,7 @@
           echo '  -e TZ="Europe/Madrid"                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  -e N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  -e N8N_RUNNERS_ENABLED=true                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo '  -e N8N_SECURE_COOKIE=false                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  -v /Contenedores/n8n/data:/home/node/.n8n     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  docker.n8n.io/n8nio/n8n:latest'                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
@@ -127,6 +128,7 @@
           echo '  -e TZ="Europe/Madrid"                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  -e N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  -e N8N_RUNNERS_ENABLED=true                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo '  -e N8N_SECURE_COOKIE=false                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  -v /Host/n8n/data:/home/node/.n8n             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  docker.n8n.io/n8nio/n8n:latest'                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
