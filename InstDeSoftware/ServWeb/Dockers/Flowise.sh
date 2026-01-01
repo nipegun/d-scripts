@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar Flowise en el DockerCE de Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Dockers/Flowise.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Dockers/Flowise.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/Dockers/Flowise.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Dockers/Flowise.sh | sed 's-sudo--g' | bash
 #
 # Comando: docker run -d --restart=always --name Flowise -p 3000:3000 flowiseai/flowise:latest
 # ----------
@@ -71,7 +71,7 @@
           echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo "  --name Flowise                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  -p 10020:3000                                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo "  -v /Contenedores/Flowise/data:/data          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo "  flowiseai/flowise:latest"                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
@@ -114,7 +114,7 @@
           echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo "  --name Flowise                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo "  -p 10020:3000                                \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo "  -v /Host/Flowise/data:/data                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo "  flowiseai/flowise:latest"                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
