@@ -67,15 +67,15 @@
           echo ""
           echo "    Creando el script iniciador..."
           echo ""
-          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo '  --name MediaWiki                             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo '  -p 8080:80                                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo '  -v /var/run/docker.sock:/var/run/docker.sock \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo '  -v /Contenedores/MediaWiki/data:/data        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo '  mediawiki:latest'                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo '#!/bin/bash'                                                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo ''                                                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo 'docker run -d --restart=always                                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo '  --name MediaWiki                                                             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo '  -p 8080:80                                                                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo '  -v /Contenedores/MediaWiki/images:/var/www/html/images                       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo '  -v /Contenedores/MediaWiki/LocalSettings.php:/var/www/html/LocalSettings.php \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo '  mediawiki:latest'                                                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          sudo chmod +x                                                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -110,15 +110,15 @@
           echo ""
           echo "  Creando el script iniciador..."
           echo ""
-          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo '  --name MediaWiki                             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo '  -p 8080:80                                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo '  -v /var/run/docker.sock:/var/run/docker.sock \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo '  -v /Host/MediaWiki/data:/data                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          echo '  mediawiki:latest'                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
-          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo '#!/bin/bash'                                                               | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo ''                                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo 'docker run -d --restart=always                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo '  --name MediaWiki                                                     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo '  -p 8080:80                                                           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo '  -v /Host/MediaWiki/images:/var/www/html/images                       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo '  -v /Host/MediaWiki/LocalSettings.php:/var/www/html/LocalSettings.php \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          echo '  mediawiki:latest'                                                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          sudo chmod +x                                                                                  /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
