@@ -82,6 +82,10 @@
           echo ""
           echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
+        # Reparar permisos
+          sudo mkdir -p /Contenedores/Grafana/data
+          sudo chown 472:472 /Contenedores/Grafana/data -R
+
         # Iniciar el docker por primera vez
           echo ""
           echo "    Iniciando el container por primera vez..."
@@ -123,6 +127,10 @@
           echo "    Insertando el script iniciador en los ComandosPostArranque..."
           echo ""
           echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+        # Reparar permisos
+          sudo mkdir -p /Host/Grafana/data
+          sudo chown 472:472 /Host/Grafana/data -R
 
         # Iniciar el docker por primera vez
           echo ""
