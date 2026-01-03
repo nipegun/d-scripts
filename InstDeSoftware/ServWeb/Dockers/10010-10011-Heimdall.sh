@@ -76,8 +76,7 @@
           echo '  -e PUID=1000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo '  -e PGID=1000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo '  -e TZ=Europe/Madrid                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
-          echo '  -v /var/run/docker.sock:/var/run/docker.sock \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
-          echo '  -v /Contenedores/Heimdall/data:/data         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
+          echo '  -v /Contenedores/Heimdall/config:/config     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo '  lscr.io/linuxserver/heimdall:latest'             | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
 
@@ -123,8 +122,7 @@
           echo '  -e PUID=1000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo '  -e PGID=1000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo '  -e TZ=Europe/Madrid                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
-          echo '  -v /var/run/docker.sock:/var/run/docker.sock \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
-          echo '  -v /Host/Heimdall/data:/data                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
+          echo '  -v /Host/Heimdall/config:/config             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo '  lscr.io/linuxserver/heimdall:latest'             | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
 
