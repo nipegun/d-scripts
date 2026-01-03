@@ -70,13 +70,28 @@
           echo '#!/bin/bash'                                        | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo ''                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo 'docker run -d --restart=always                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  --name ZabbixMySQL                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_DATABASE=zabbix                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_USER=zabbix                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_PASSWORD=zabbixpass                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_ROOT_PASSWORD=rootpass               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -v /Contenedores/Zabbix/MySQL:/var/lib/mysql  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  mysql:8'                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo ''                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo 'docker run -d --restart=always                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo '  --name ZabbixServerMySQL                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e DB_SERVER_HOST=ZabbixMySQL                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_DATABASE=zabbix                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_USER=zabbix                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_PASSWORD=zabbixpass                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo '  -p 8001:8001                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo '  -p 9444:9444                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo '  -v /var/run/docker.sock:/var/run/docker.sock  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo '  -v /Contenedores/ZabbixServerMySQL/data:/data \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo '  docker.io/zabbix/zabbix-server-mysql:latest'      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+
+
+  zabbix/zabbix-server-mysql:latest
+
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -107,23 +122,32 @@
           sudo mkdir -p /Host/ZabbixServerMySQL/data 2> /dev/null
           sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
+
         # Crear el script iniciador
           echo ""
-          echo "  Creando el script iniciador..."
+          echo "    Creando el script iniciador..."
           echo ""
-          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo '  --name ZabbixServerMySQL                     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo '-e DB_SERVER_HOST="some-mysql-server"          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo '-e MYSQL_USER="some-user"                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo '-e MYSQL_PASSWORD="some-password"              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          #echo '  -p 8001:8001                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          #echo '  -p 9444:9444                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo '  -v /var/run/docker.sock:/var/run/docker.sock \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo '  -v /Host/ZabbixServerMySQL/data:/data        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          echo '  docker.io/zabbix/zabbix-server-mysql:latest'     | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '#!/bin/bash'                                        | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo ''                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo 'docker run -d --restart=always                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  --name ZabbixMySQL                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_DATABASE=zabbix                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_USER=zabbix                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_PASSWORD=zabbixpass                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_ROOT_PASSWORD=rootpass               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -v /Host/Zabbix/MySQL:/var/lib/mysql          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  mysql:8'                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo ''                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo 'docker run -d --restart=always                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  --name ZabbixServerMySQL                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e DB_SERVER_HOST=ZabbixMySQL                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_DATABASE=zabbix                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_USER=zabbix                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -e MYSQL_PASSWORD=zabbixpass                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -p 8001:8001                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  -p 9444:9444                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          echo '  docker.io/zabbix/zabbix-server-mysql:latest'      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
