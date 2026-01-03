@@ -67,15 +67,14 @@
           echo ""
           echo "    Creando el script iniciador..."
           echo ""
-          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo '  --name Nessus                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo '  -p 8834:8834                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo '  -v /var/run/docker.sock:/var/run/docker.sock \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo '  -v /Contenedores/Nessus/data:/data           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo '  tenable/nessus:latest-ubuntu'                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo '#!/bin/bash'                                  | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo ''                                             | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo 'docker run -d --restart=always            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo '  --name Nessus                           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo '  -p 8834:8834                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo '  -v /Contenedores/Nessus/opt:/opt/nessus \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo '  tenable/nessus:latest-ubuntu'               | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          sudo chmod +x                                                     /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -110,15 +109,14 @@
           echo ""
           echo "  Creando el script iniciador..."
           echo ""
-          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo '  --name Nessus                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo '  -p 8834:8834                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo '  -v /var/run/docker.sock:/var/run/docker.sock \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo '  -v /Host/Nessus/data:/data                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          echo '  tenable/nessus:latest-ubuntu'                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
-          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo '#!/bin/bash'                          | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo ''                                     | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo 'docker run -d --restart=always    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo '  --name Nessus                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo '  -p 8834:8834                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo '  -v /Host/Nessus/opt:/opt/nessus \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          echo '  tenable/nessus:latest-ubuntu'       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          sudo chmod +x                                             /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
