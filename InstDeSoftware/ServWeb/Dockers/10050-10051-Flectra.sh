@@ -102,7 +102,7 @@
           echo ""
           sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           sleep 10
-          docker exec -it Flectra /opt/flectra/server/flectra-bin -d flectra -i base --stop-after-init --db_host=db --db_port=5432 --db_user=flectra --db_password=flectra
+          docker exec Flectra /opt/flectra/server/flectra-bin -d flectra -i base --stop-after-init --db_host=db --db_port=5432 --db_user=flectra --db_password=flectra
           docker restart Flectra
 
         # Notificar fin de ejecución del script
@@ -158,7 +158,7 @@
           echo ""
           sudo /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           sleep 10
-          docker exec -it Flectra /opt/flectra/server/flectra-bin -d flectra -i base --stop-after-init --db_host=db --db_port=5432 --db_user=flectra --db_password=flectra
+          docker exec Flectra /opt/flectra/server/flectra-bin -d flectra -i base --stop-after-init --db_host=db --db_port=5432 --db_user=flectra --db_password=flectra
           docker restart Flectra
 
         # Notificar fin de ejecución del script
