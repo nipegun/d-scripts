@@ -82,7 +82,7 @@
           echo ''                                                               | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           echo 'docker run -d --restart=always                               \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           echo '  --name Flectra                                             \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -p 7073:7073                                               \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -p 10050:7073                                              \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           echo '  -e TZ=Europe/Madrid                                        \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           echo '  -v /Contenedores/Flectra/config:/etc/flectra               \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           echo '  -v /Contenedores/Flectra/filestore:/var/lib/flectra        \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
@@ -138,7 +138,7 @@
           echo ''                                                               | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           echo 'docker run -d --restart=always                               \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           echo '  --name Flectra                                             \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -p 7073:7073                                               \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -p 10050:7073                                              \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           echo '  -e TZ=Europe/Madrid                                        \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           echo '  -v /Host/Flectra/config:/etc/flectra                       \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           echo '  -v /Host/Flectra/filestore:/var/lib/flectra                \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
