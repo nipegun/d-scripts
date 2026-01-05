@@ -71,6 +71,7 @@
           echo '  -v /Contenedores/Coder/data:/data            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo '  ghcr.io/coder/coder:latest'                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/Coder/data/     2> /dev/null
@@ -113,6 +114,7 @@
           echo '  -v /Host/Coder/data:/data                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo '  ghcr.io/coder/coder:latest'                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/Coder/data              2> /dev/null
