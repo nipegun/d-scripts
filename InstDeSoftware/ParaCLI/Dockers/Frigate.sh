@@ -59,11 +59,6 @@
         echo -e "${cColorVerde}  Instalando Frigate en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Contenedores/Frigate/config   2> /dev/null
-          sudo mkdir -p /Contenedores/Frigate/storage  2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/  2> /dev/null
-
         # Crear config mínima (si no existe)
           if [[ ! -f /Contenedores/Frigate/config/config.yml ]]; then
             echo ""
@@ -102,8 +97,6 @@
             echo ""
             echo "cameras:"
 
-
-
         # Crear el script iniciador
           echo ""
           echo "    Creando el script iniciador..."
@@ -130,6 +123,10 @@
           echo "  ghcr.io/blakeblackshear/frigate:stable"                                         | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
           sudo chmod +x /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
 
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/Frigate/config   2> /dev/null
+          sudo mkdir -p /Contenedores/Frigate/storage  2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/  2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -155,11 +152,6 @@
         echo ""
         echo -e "${cColorVerde}  Instalando Frigate en un contenedor LXC...${cFinColor}"
         echo ""
-
-        # Crear carpetas
-          sudo mkdir -p /Host/Frigate/config   2> /dev/null
-          sudo mkdir -p /Host/Frigate/storage  2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Crear config mínima (si no existe)
           if [[ ! -f /Contenedores/Frigate/config/config.yml ]]; then
@@ -237,6 +229,10 @@
           echo "  ghcr.io/blakeblackshear/frigate:stable"                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
           sudo chmod +x /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
 
+        # Crear carpetas
+          sudo mkdir -p /Host/Frigate/config          2> /dev/null
+          sudo mkdir -p /Host/Frigate/storage         2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
