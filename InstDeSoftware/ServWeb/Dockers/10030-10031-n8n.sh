@@ -59,10 +59,6 @@
         echo -e "${cColorVerde}  Instalando n8n en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Contenedores/n8n/data/       2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
           echo ''
           echo '    Creando el script iniciador...'
@@ -82,6 +78,10 @@
           echo '  docker.n8n.io/n8nio/n8n:latest'                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           sed -i 's|\\\\|\\|g'                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/n8n/data       2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian 2> /dev/null
  
         # Insertar el script iniciador en los comandos post arranque
           echo ""
