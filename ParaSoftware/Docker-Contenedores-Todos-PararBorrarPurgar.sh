@@ -61,3 +61,6 @@ fBorrarContenedores
 fBorrarImagenes
 fBorrarVolumenes
 fBorrarRedes
+
+sudo rm -f /root/scripts/ParaEsteDebian/DockerCE-Cont-*
+
