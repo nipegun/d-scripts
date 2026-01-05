@@ -121,7 +121,8 @@
           echo '  -p 8555:8555/tcp                                                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
           echo '  -p 8555:8555/udp                                                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
           echo '  ghcr.io/blakeblackshear/frigate:stable'                                         | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
-          sudo chmod +x /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          sudo chmod +x                                                                                         /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                                                  /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/Frigate/config   2> /dev/null
@@ -227,7 +228,8 @@
           echo '  -p 8555:8555/tcp                                           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
           echo '  -p 8555:8555/udp                                           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
           echo '  ghcr.io/blakeblackshear/frigate:stable'                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
-          sudo chmod +x /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
+          sudo chmod +x                                                                        /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh >/dev/null
+          sed -i 's|\\\\|\\|g'                                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-Frigate-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/Frigate/config          2> /dev/null
