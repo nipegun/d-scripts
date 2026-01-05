@@ -74,8 +74,8 @@
           sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Contenedores/Flowise/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+          sudo mkdir -p /Contenedores/Flowise/data   2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -117,8 +117,8 @@
           sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Host/Flowise/data            2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+          sudo mkdir -p /Host/Flowise/data           2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
