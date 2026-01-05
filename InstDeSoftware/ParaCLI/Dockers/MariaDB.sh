@@ -73,6 +73,7 @@
           echo '  -v /Contenedores/MariaDB/data:/data          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           echo '  mariadb:latest'                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/MariaDB/data/   2> /dev/null
@@ -117,6 +118,7 @@
           echo '  -v /Host/MariaDB/data:/data                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           echo '  mariadb:latest'                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/MariaDB/data            2> /dev/null
