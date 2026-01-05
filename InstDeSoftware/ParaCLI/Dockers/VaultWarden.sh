@@ -71,6 +71,7 @@
           echo '  -v /Contenedores/VaultWarden/data:/data      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
           echo '  vaultwarden:latest'                              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/VaultWarden/data/ 2> /dev/null
@@ -113,6 +114,7 @@
           echo '  -v /Host/VaultWarden/data:/data              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
           echo '  vaultwarden:latest'                              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/VaultWarden/data        2> /dev/null
