@@ -60,9 +60,9 @@
         echo ""
 
         # Crear el script iniciador
-          echo ""
-          echo "    Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '    Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                          | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
           echo ''                                                     | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
           echo 'docker run -d --restart=always                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
@@ -76,7 +76,7 @@
         # Crear carpetas
           sudo mkdir -p /Contenedores/InfluxDB3Core/data      2> /dev/null
           sudo mkdir -p /Contenedores/InfluxDB3Core/plugins   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/         2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -104,9 +104,9 @@
         echo ""
 
         # Crear el script iniciador
-          echo ""
-          echo "  Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '  Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                  | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
           echo ''                                             | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
           echo 'docker run -d --restart=always            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
@@ -114,7 +114,7 @@
           echo '  -p 20010:8181                           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
           echo '  -v /Host/InfluxDB3Core/data:/.data      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
           echo '  -v /Host/InfluxDB3Core/plugins:/plugins \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
-          echo '  influxdb:3-core                             | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
+          echo '  influxdb:3-core'                            | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
           sudo chmod +x                                                     /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
 
         # Crear carpetas
