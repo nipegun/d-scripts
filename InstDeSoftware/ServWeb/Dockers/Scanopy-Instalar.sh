@@ -82,6 +82,8 @@
           echo '  -v /var/run/docker.sock:/var/run/docker.sock:ro                                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
           echo '  ghcr.io/scanopy/scanopy/daemon:latest'                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
           echo ''                                                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo 'sleep 5'                                                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo ''                                                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
           echo 'docker run -d  --restart=always                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
           echo '  --name scanopy-postgres                                                              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
           echo '  --network scanopy                                                                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
@@ -90,6 +92,8 @@
           echo '  -e POSTGRES_PASSWORD=password                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
           echo '  -v /Contenedores/Scanopy/var/lib/postgresql/data:/var/lib/postgresql/data            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
           echo '  postgres:17-alpine'                                                                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo ''                                                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo 'sleep 5'                                                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
           echo ''                                                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
           echo 'docker run -d  --restart=always                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
           echo '  --name scanopy-server                                                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
@@ -112,12 +116,17 @@
           sudo mkdir -p /Contenedores/Scanopy/var/lib/postgresql/data 2> /dev/null
           sudo mkdir -p /Contenedores/Scanopy/data                    2> /dev/null
           sudo mkdir -p /root/scripts/ParaEsteDebian                  2> /dev/null
+          # Corregir permisos
+            chown -R 999:999 /Contenedores/Scanopy/var/lib/postgresql/data
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
           echo "    Insertando el script iniciador en los ComandosPostArranque..."
           echo ""
           echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+        # Crar red scanopy
+          docker network inspect scanopy >/dev/null 2>&1 || docker network create scanopy
 
         # Iniciar el docker por primera vez
           echo ""
@@ -191,12 +200,17 @@
           sudo mkdir -p /Host/Scanopy/var/lib/postgresql/data 2> /dev/null
           sudo mkdir -p /Host/Scanopy/data                    2> /dev/null
           sudo mkdir -p /root/scripts/ParaEsteDebian          2> /dev/null
+          # Corregir permisos
+            chown -R 999:999 /Contenedores/Scanopy/var/lib/postgresql/data
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
           echo "    Insertando el script iniciador en los ComandosPostArranque..."
           echo ""
           echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+
+        # Crar red scanopy
+          docker network inspect scanopy >/dev/null 2>&1 || docker network create scanopy
 
         # Iniciar el docker por primera vez
           echo ""
