@@ -59,10 +59,6 @@
         echo -e "${cColorVerde}  Instalando Coder en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Contenedores/Coder/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
           echo ""
           echo "    Creando el script iniciador..."
@@ -72,10 +68,13 @@
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "  --name Coder                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "  -v /Contenedores/Coder/data:/data            \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "  ghcr.io/coder/coder:latest"                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/Coder/data/     2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -102,10 +101,6 @@
         echo -e "${cColorVerde}  Instalando Coder en un contenedor LXC...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Host/Coder/data 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
           echo ""
           echo "  Creando el script iniciador..."
@@ -115,10 +110,13 @@
           echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "  --name Coder                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "  -v /Host/Coder/data:/data                    \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           echo "  ghcr.io/coder/coder:latest"                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Host/Coder/data              2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
