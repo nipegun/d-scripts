@@ -63,25 +63,24 @@
           echo ''
           echo '    Creando el script iniciador...'
           echo ''
-          echo '#!/bin/bash'                                        | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo ''                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo 'docker run -d --restart=always                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo '  --name n8n                                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo '  -p 10030:5678                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo '  -v /var/run/docker.sock:/var/run/docker.sock  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo '  -e GENERIC_TIMEZONE="Europe/Madrid"           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo '  -e TZ="Europe/Madrid"                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo '  -e N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo '  -e N8N_RUNNERS_ENABLED=true                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo '  -e N8N_SECURE_COOKIE=false                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo '  -v /Contenedores/n8n/.n8n:/home/node/.n8n     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo '  docker.n8n.io/n8nio/n8n:latest'                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          sed -i 's|\\\\|\\|g'                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo '#!/bin/bash'                                              | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo ''                                                         | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo 'docker run -d --restart=always                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo '  --name n8n                                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo '  -p 10030:5678                                       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo '  -e GENERIC_TIMEZONE="Europe/Madrid"                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo '  -e TZ="Europe/Madrid"                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo '  -e N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo '  -e N8N_RUNNERS_ENABLED=true                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo '  -e N8N_SECURE_COOKIE=false                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo '  -v /Contenedores/n8n/home/node/.n8n:/home/node/.n8n \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo '  docker.n8n.io/n8nio/n8n:latest'                         | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          sudo chmod +x                                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Contenedores/n8n/.n8n       2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian 2> /dev/null
+          sudo mkdir -p /Contenedores/n8n/home/node/.n8n 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian     2> /dev/null
  
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -90,7 +89,7 @@
           echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
         # Asignar permisos correctos para que n8n se inicie
-          chown -R 1000:1000 /Contenedores/n8n
+          chown -R 1000:1000 /Contenedores/n8n/
 
         # Iniciar el docker por primera vez
           echo ""
@@ -120,19 +119,18 @@
           echo 'docker run -d --restart=always                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  --name n8n                                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  -p 10030:5678                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo '  -v /var/run/docker.sock:/var/run/docker.sock  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  -e GENERIC_TIMEZONE="Europe/Madrid"           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  -e TZ="Europe/Madrid"                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  -e N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  -e N8N_RUNNERS_ENABLED=true                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  -e N8N_SECURE_COOKIE=false                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
-          echo '  -v /Host/n8n/.n8n:/home/node/.n8n             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          echo '  -v /Host/n8n/home/node/.n8n:/home/node/.n8n   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  docker.n8n.io/n8nio/n8n:latest'                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           sed -i 's|\\\\|\\|g'                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Host/n8n/.n8n                2> /dev/null
+          sudo mkdir -p /Host/n8n/home/node/.n8n      2> /dev/null
           sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
@@ -142,7 +140,7 @@
           echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
         # Asignar permisos correctos para que n8n se inicie
-          chown -R 1000:1000 /Host/n8n
+          chown -R 1000:1000 /Host/n8n/
 
         # Iniciar el docker por primera vez
           echo ""
