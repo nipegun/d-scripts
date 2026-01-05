@@ -59,10 +59,6 @@
         echo -e "${cColorVerde}  Instalando InfluxDB2 en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Contenedores/InfluxDB2/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
           echo ""
           echo "    Creando el script iniciador..."
@@ -75,6 +71,10 @@
           echo '   -v /Contenedores/InfluxDB2/data:/var/lib/influxdb2 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
           echo '  influxdb:2'                                             | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
           sudo chmod +x                                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/InfluxDB2/data/ 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -101,10 +101,6 @@
         echo -e "${cColorVerde}  Instalando InfluxDB2 en un contenedor LXC...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Host/InfluxDB2/data 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
           echo ""
           echo "  Creando el script iniciador..."
@@ -117,6 +113,10 @@
           echo '  -v /Host/InfluxDB2/data:/var/lib/influxdb2 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
           echo '  influxdb:2'                                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
           sudo chmod +x                                                        /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Host/InfluxDB2/data          2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
