@@ -61,10 +61,6 @@ VerOLDeseada=8
         echo -e "${cColorVerde}  Instalando OracleLinux en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Contenedores/OracleLinux/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
           echo ""
           echo "    Creando el script iniciador..."
@@ -76,10 +72,13 @@ VerOLDeseada=8
           echo "  -p 22001:22                                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "  -p 1521:9444                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "  -p 1630:1630                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "  -v /Contenedores/OracleLinux/data:/data      \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "  oraclelinux:$VerOLDeseada"                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/OracleLinux/data/ 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/   2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -106,10 +105,6 @@ VerOLDeseada=8
         echo -e "${cColorVerde}  Instalando OracleLinux en un contenedor LXC...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Host/OracleLinux/data 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
           echo ""
           echo "  Creando el script iniciador..."
@@ -121,10 +116,13 @@ VerOLDeseada=8
           echo "  -p 22001:22                                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "  -p 1521:9444                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "  -p 1630:1630                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "  -v /Host/OracleLinux/data:/data              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "  oraclelinux:$VerOLDeseada"                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Host/OracleLinux/data        2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
