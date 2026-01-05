@@ -75,6 +75,7 @@
           echo '  -v /Contenedores/Heimdall/config:/config     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo '  lscr.io/linuxserver/heimdall:latest'             | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/Heimdall/data/  2> /dev/null
@@ -121,6 +122,7 @@
           echo '  -v /Host/Heimdall/config:/config             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           echo '  lscr.io/linuxserver/heimdall:latest'             | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-Heimdall-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/Heimdall/data           2> /dev/null
