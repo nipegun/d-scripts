@@ -45,7 +45,7 @@
       sudo apt-get -y install dialog
       echo ""
     fi
-  menu=(dialog --checklist "¿Donde quieres instalar CTFd?:" 22 76 16)
+  menu=(dialog --radiolist "¿Donde quieres instalar CTFd?:" 22 76 16)
     opciones=(
       1 "Versión sin AppArmor, en un ordenador o máquina virtual" off
       2 "Versión sin AppArmor, en un contenedor LXC de Proxmox"   off
