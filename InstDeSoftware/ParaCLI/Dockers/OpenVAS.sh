@@ -74,6 +74,7 @@
           echo '  -v /Contenedores/OpenVAS/data:/data          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo '  greenbone/openvas-scanner:latest'                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/OpenVAS/data/   2> /dev/null
@@ -119,6 +120,7 @@
           echo '  -v /Host/OpenVAS/data:/data                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo '  greenbone/openvas-scanner:latest'                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/OpenVAS/data            2> /dev/null
