@@ -43,7 +43,7 @@
       sudo apt-get -y install dialog
       echo ""
     fi
-  menu=(dialog --checklist "¿Donde quieres instalar el docker de OpenWebUI con Ollama?:" 22 76 16)
+  menu=(dialog --radiolist "¿Donde quieres instalar el docker de OpenWebUI con Ollama?:" 22 76 16)
     opciones=(
       1 "En un ordenador o máquina virtual (con compatibilidad para gráficas)" off
       2 "En un ordenador o máquina virtual (para uso sólo con CPU)"            off
