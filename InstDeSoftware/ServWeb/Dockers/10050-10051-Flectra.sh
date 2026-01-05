@@ -61,34 +61,34 @@
         echo ""
         echo -e "${cColorVerde}  Instalando Flectra en un ordenador o máquina virtual...${cFinColor}"
         echo ""
+ 
+        # Crear el script iniciador
+          echo ''
+          echo '    Creando el script iniciador...'
+          echo ''
+          echo '#!/bin/bash'                                                     | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo ''                                                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo 'docker run -d --restart=always                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  --name FlectraDB                                           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -e POSTGRES_DB=flectra                                     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -e POSTGRES_USER=flectra                                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -e POSTGRES_PASSWORD=flectra                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -v /Contenedores/Flectra/postgres:/var/lib/postgresql/data \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  postgres:14'                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo ''                                                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo 'docker run -d --restart=always                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  --name Flectra                                             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -p 10050:7073                                              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -e TZ=Europe/Madrid                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -v /Contenedores/Flectra/config:/etc/flectra               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -v /Contenedores/Flectra/filestore:/var/lib/flectra        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  --link FlectraDB:db                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  flectrahq/flectra:latest'                                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          sudo chmod +x                                                                        /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/Flectra/data/   2> /dev/null
           sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
- 
-        # Crear el script iniciador
-          echo ""
-          echo "    Creando el script iniciador..."
-          echo ""
-          echo '#!/bin/bash'                                                    | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo ''                                                               | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo 'docker run -d --restart=always                               \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  --name FlectraDB                                           \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -e POSTGRES_DB=flectra                                     \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -e POSTGRES_USER=flectra                                   \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -e POSTGRES_PASSWORD=flectra                               \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -v /Contenedores/Flectra/postgres:/var/lib/postgresql/data \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  postgres:14'                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo ''                                                               | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo 'docker run -d --restart=always                               \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  --name Flectra                                             \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -p 10050:7073                                              \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -e TZ=Europe/Madrid                                        \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -v /Contenedores/Flectra/config:/etc/flectra               \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -v /Contenedores/Flectra/filestore:/var/lib/flectra        \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  --link FlectraDB:db                                        \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  flectrahq/flectra:latest'                                     | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          sudo chmod +x                                                                       /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -118,33 +118,33 @@
         echo -e "${cColorVerde}  Instalando Flectra en un contenedor LXC...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Host/Flectra/data 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
-          echo ""
-          echo "    Creando el script iniciador..."
-          echo ""
-          echo '#!/bin/bash'                                                    | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo ''                                                               | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo 'docker run -d --restart=always                               \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  --name FlectraDB                                           \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -e POSTGRES_DB=flectra                                     \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -e POSTGRES_USER=flectra                                   \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -e POSTGRES_PASSWORD=flectra                               \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -v /Contenedores/Flectra/postgres:/var/lib/postgresql/data \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  postgres:14'                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo ''                                                               | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo 'docker run -d --restart=always                               \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  --name Flectra                                             \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -p 10050:7073                                              \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -e TZ=Europe/Madrid                                        \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -v /Host/Flectra/config:/etc/flectra                       \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  -v /Host/Flectra/filestore:/var/lib/flectra                \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  --link FlectraDB:db                                        \' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          echo '  flectrahq/flectra:latest'                                     | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
-          sudo chmod +x                                                                       /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo ''
+          echo '    Creando el script iniciador...'
+          echo ''
+          echo '#!/bin/bash'                                                     | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo ''                                                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo 'docker run -d --restart=always                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  --name FlectraDB                                           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -e POSTGRES_DB=flectra                                     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -e POSTGRES_USER=flectra                                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -e POSTGRES_PASSWORD=flectra                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -v /Contenedores/Flectra/postgres:/var/lib/postgresql/data \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  postgres:14'                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo ''                                                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo 'docker run -d --restart=always                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  --name Flectra                                             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -p 10050:7073                                              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -e TZ=Europe/Madrid                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -v /Host/Flectra/config:/etc/flectra                       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  -v /Host/Flectra/filestore:/var/lib/flectra                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  --link FlectraDB:db                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          echo '  flectrahq/flectra:latest'                                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          sudo chmod +x                                                                        /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Host/Flectra/data            2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
