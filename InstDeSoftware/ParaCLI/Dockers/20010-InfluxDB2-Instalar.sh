@@ -71,6 +71,7 @@
           echo '   -v /Contenedores/InfluxDB2/data:/var/lib/influxdb2 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
           echo '  influxdb:2'                                             | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
           sudo chmod +x                                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/InfluxDB2/data/ 2> /dev/null
@@ -113,6 +114,7 @@
           echo '  -v /Host/InfluxDB2/data:/var/lib/influxdb2 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
           echo '  influxdb:2'                                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
           sudo chmod +x                                                        /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/InfluxDB2/data          2> /dev/null
