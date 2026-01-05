@@ -63,19 +63,55 @@
           echo ''
           echo '    Creando el script iniciador...'
           echo ''
-          echo '#!/bin/bash'                                                | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          echo ''                                                           | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          echo 'docker run -d --restart=always                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          echo '  --name Scanopy                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          echo '  -p 10020:3000                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          echo '  -v /Contenedores/Scanopy/root/.scanopy:/root/.scanopy \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          echo '  scanopyai/scanopy:latest'                                 | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          sudo chmod +x                                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          sed -i 's|\\\\|\\|g'                                                            /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '#!/bin/bash'                                                                               | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo ''                                                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo 'docker run -d  --restart=always                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --name scanopy-daemon                                                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --network host                                                                       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --privileged                                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_LOG_LEVEL=info                                                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_SERVER_PORT=60072                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_DAEMON_PORT=60073                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_SERVER_URL=http://127.0.0.1:60072                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_PORT=60073                                                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_BIND_ADDRESS=0.0.0.0                                                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_NAME=scanopy-daemon                                                       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_HEARTBEAT_INTERVAL=30                                                     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_MODE=Push                                                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -v /Contenedores/Scanopy/root/.config/daemon:/root/.config/daemon                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -v /var/run/docker.sock:/var/run/docker.sock:ro                                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  ghcr.io/scanopy/scanopy/daemon:latest'                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo ''                                                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo 'docker run -d  --restart=always                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --name scanopy-postgres                                                              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --network scanopy                                                                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e POSTGRES_DB=scanopy                                                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e POSTGRES_USER=postgres                                                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e POSTGRES_PASSWORD=password                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -v /Contenedores/Scanopy/var/lib/postgresql/data:/var/lib/postgresql/data            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  postgres:17-alpine'                                                                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo ''                                                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo 'docker run -d  --restart=always                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --name scanopy-server                                                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --network scanopy                                                                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -p 60072:60072                                                                       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_LOG_LEVEL=info                                                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_SERVER_PORT=60072                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_DAEMON_PORT=60073                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_DATABASE_URL=postgresql://postgres:password@scanopy-postgres:5432/scanopy \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_WEB_EXTERNAL_PATH=/app/static                                             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_PUBLIC_URL=http://localhost:60072                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_INTEGRATED_DAEMON_URL=http://172.17.0.1:60073                             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -v /Contenedores/Scanopy/data:/data                                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  ghcr.io/scanopy/scanopy/server:latest'                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          sudo chmod +x                                                                                                  /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Contenedores/Scanopy/root/.scanopy 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian        2> /dev/null
+          sudo mkdir -p /Contenedores/Scanopy/root/.config/daemon     2> /dev/null
+          sudo mkdir -p /Contenedores/Scanopy/var/lib/postgresql/data 2> /dev/null
+          sudo mkdir -p /Contenedores/Scanopy/data                    2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian                  2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -104,21 +140,57 @@
 
         # Crear el script iniciador
           echo ''
-          echo '  Creando el script iniciador...'
+          echo '    Creando el script iniciador...'
           echo ''
-          echo '#!/bin/bash'                                        | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          echo ''                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          echo 'docker run -d --restart=always                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          echo '  --name Scanopy                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          echo '  -p 10020:3000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          echo '  -v /Host/Scanopy/root/.scanopy:/root/.scanopy \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          echo '  scanopyai/scanopy:latest'                         | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
-          sed -i 's|\\\\|\\|g'                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '#!/bin/bash'                                                                               | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo ''                                                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo 'docker run -d  --restart=always                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --name scanopy-daemon                                                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --network host                                                                       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --privileged                                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_LOG_LEVEL=info                                                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_SERVER_PORT=60072                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_DAEMON_PORT=60073                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_SERVER_URL=http://127.0.0.1:60072                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_PORT=60073                                                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_BIND_ADDRESS=0.0.0.0                                                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_NAME=scanopy-daemon                                                       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_HEARTBEAT_INTERVAL=30                                                     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_MODE=Push                                                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -v /Host/Scanopy/root/.config/daemon:/root/.config/daemon                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -v /var/run/docker.sock:/var/run/docker.sock:ro                                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  ghcr.io/scanopy/scanopy/daemon:latest'                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo ''                                                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo 'docker run -d  --restart=always                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --name scanopy-postgres                                                              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --network scanopy                                                                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e POSTGRES_DB=scanopy                                                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e POSTGRES_USER=postgres                                                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e POSTGRES_PASSWORD=password                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -v /Host/Scanopy/var/lib/postgresql/data:/var/lib/postgresql/data                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  postgres:17-alpine'                                                                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo ''                                                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo 'docker run -d  --restart=always                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --name scanopy-server                                                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  --network scanopy                                                                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -p 60072:60072                                                                       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_LOG_LEVEL=info                                                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_SERVER_PORT=60072                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_DAEMON_PORT=60073                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_DATABASE_URL=postgresql://postgres:password@scanopy-postgres:5432/scanopy \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_WEB_EXTERNAL_PATH=/app/static                                             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_PUBLIC_URL=http://localhost:60072                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -e SCANOPY_INTEGRATED_DAEMON_URL=http://172.17.0.1:60073                             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  -v /Host/Scanopy/data:/data                                                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          echo '  ghcr.io/scanopy/scanopy/server:latest'                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          sudo chmod +x                                                                                                  /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-Scanopy-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Host/Scanopy/root/.scanopy  2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian 2> /dev/null
+          sudo mkdir -p /Host/Scanopy/root/.config/daemon     2> /dev/null
+          sudo mkdir -p /Host/Scanopy/var/lib/postgresql/data 2> /dev/null
+          sudo mkdir -p /Host/Scanopy/data                    2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian          2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
