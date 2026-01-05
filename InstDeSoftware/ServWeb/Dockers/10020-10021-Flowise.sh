@@ -59,14 +59,10 @@
         echo -e "${cColorVerde}  Instalando Flowise en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Contenedores/Flowise/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
-          echo ""
-          echo "    Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '    Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
@@ -75,6 +71,10 @@
           echo '  -v /Contenedores/Flowise/data:/root/.flowise \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo '  flowiseai/flowise:latest'                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/Flowise/data/   2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -101,14 +101,10 @@
         echo -e "${cColorVerde}  Instalando Flowise en un contenedor LXC...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Host/Flowise/data 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
-          echo ""
-          echo "  Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '  Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
@@ -117,6 +113,10 @@
           echo '  -v /Host/Flowise/data:/root/.flowise         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo '  flowiseai/flowise:latest'                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Host/Flowise/data            2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
