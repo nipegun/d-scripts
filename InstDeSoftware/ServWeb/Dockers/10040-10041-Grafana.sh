@@ -63,29 +63,27 @@
           echo ''
           echo '    Creando el script iniciador...'
           echo ''
-          echo '#!/bin/bash'                                         | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          echo ''                                                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          echo 'docker run -d --restart=always                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          echo '  --name Grafana                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          echo '  -p 10040:3000                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          echo '  -v /Contenedores/Grafana/grafana:/var/lib/grafana \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          echo '  grafana/grafana:latest'                            | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          sudo chmod +x                                                            /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          sed -i 's|\\\\|\\|g'                                                     /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo '#!/bin/bash'                                                    | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo ''                                                               | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo 'docker run -d --restart=always                              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo '  --name Grafana                                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo '  -p 10040:3000                                             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo '  -v /Contenedores/Grafana/var/lib/grafana:/var/lib/grafana \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo '  grafana/grafana:latest'                                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          sudo chmod +x                                                                       /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                                /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/Grafana/grafana   2> /dev/null
           sudo mkdir -p /root/scripts/ParaEsteDebian 2> /dev/null
+          # Reparar permisos
+            sudo chown 472:472 /Contenedores/Grafana/var/lib/grafana -R 2>/dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
           echo "    Insertando el script iniciador en los ComandosPostArranque..."
           echo ""
           echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-
-        # Reparar permisos
-          sudo mkdir -p /Contenedores/Grafana/data
-          sudo chown 472:472 /Contenedores/Grafana/data -R
 
         # Iniciar el docker por primera vez
           echo ""
@@ -110,29 +108,27 @@
           echo ''
           echo '  Creando el script iniciador...'
           echo ''
-          echo '#!/bin/bash'                                    | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          echo ''                                               | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          echo 'docker run -d --restart=always              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          echo '  --name Grafana                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          echo '  -p 10040:3000                             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          echo '  -v /Host/Grafana/grafana:/var/lib/grafana \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          echo '  grafana/grafana:latest'                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          sudo chmod +x                                                       /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
-          sed -i 's|\\\\|\\|g'                                                /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo '#!/bin/bash'                                            | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo ''                                                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo 'docker run -d --restart=always                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo '  --name Grafana                                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo '  -p 10040:3000                                     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo '  -v /Host/Grafana/var/lib/grafana:/var/lib/grafana \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          echo '  grafana/grafana:latest'                               | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          sudo chmod +x                                                               /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                        /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Host/Grafana/grafana           2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian 2> /dev/null
+          sudo mkdir -p /Host/Grafana/var/lib/grafana 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian  2> /dev/null
+          # Reparar permisos
+            sudo chown 472:472 /Host/Grafana/var/lib/grafana -R 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
           echo "    Insertando el script iniciador en los ComandosPostArranque..."
           echo ""
           echo "/root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh" | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
-
-        # Reparar permisos
-          sudo mkdir -p /Host/Grafana/data
-          sudo chown 472:472 /Host/Grafana/data -R
 
         # Iniciar el docker por primera vez
           echo ""
