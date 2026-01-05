@@ -71,6 +71,7 @@
           echo '  -v /Contenedores/Nessus/opt:/opt/nessus \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
           echo '  tenable/nessus:latest-ubuntu'               | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
           sudo chmod +x                                                     /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                              /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/Nessus/data/    2> /dev/null
@@ -113,6 +114,7 @@
           echo '  -v /Host/Nessus/opt:/opt/nessus \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
           echo '  tenable/nessus:latest-ubuntu'       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
           sudo chmod +x                                             /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                      /root/scripts/ParaEsteDebian/DockerCE-Cont-Nessus-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/Nessus/data             2> /dev/null
