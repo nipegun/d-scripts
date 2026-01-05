@@ -60,16 +60,16 @@
         echo ""
 
         # Crear el script iniciador
-          echo ""
-          echo "    Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '    Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
-          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
-          echo "  --name VaultWarden                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
-          echo "  -p 8080:80                                   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
-          echo "  -v /Contenedores/VaultWarden/data:/data      \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
-          echo "  vaultwarden:latest"                              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          echo '  --name VaultWarden                           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          echo '  -p 8080:80                                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          echo '  -v /Contenedores/VaultWarden/data:/data      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          echo '  vaultwarden:latest'                              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
 
         # Crear carpetas
@@ -102,16 +102,16 @@
         echo ""
 
         # Crear el script iniciador
-          echo ""
-          echo "  Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '  Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
-          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
-          echo "  --name VaultWarden                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
-          echo "  -p 8080:80                                   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
-          echo "  -v /Host/VaultWarden/data:/data              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
-          echo "  vaultwarden:latest"                              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          echo '  --name VaultWarden                           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          echo '  -p 8080:80                                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          echo '  -v /Host/VaultWarden/data:/data              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
+          echo '  vaultwarden:latest'                              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-VaultWarden-Iniciar.sh
 
         # Crear carpetas
