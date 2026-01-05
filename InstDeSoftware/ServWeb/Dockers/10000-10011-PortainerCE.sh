@@ -59,14 +59,10 @@
         echo -e "${cColorVerde}  Instalando PortainerCE en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Contenedores/PortainerCE/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
-          echo ""
-          echo "    Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '    Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                         | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo ''                                                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo 'docker run -d --restart=always                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
@@ -77,6 +73,10 @@
           echo '  -v /Contenedores/PortainerCE/data:/data        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo '  cr.portainer.io/portainer/portainer-ce:latest'     | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           sudo chmod +x                                                            /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/PortainerCE/data/ 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/   2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -103,14 +103,10 @@
         echo -e "${cColorVerde}  Instalando PortainerCE en un contenedor LXC...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Host/PortainerCE/data 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
-          echo ""
-          echo "  Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '  Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                         | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo ''                                                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo 'docker run -d --restart=always                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
@@ -121,6 +117,10 @@
           echo '  -v /Host/PortainerCE/data:/data                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo '  cr.portainer.io/portainer/portainer-ce:latest'     | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           sudo chmod +x                                                            /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Host/PortainerCE/data        2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
