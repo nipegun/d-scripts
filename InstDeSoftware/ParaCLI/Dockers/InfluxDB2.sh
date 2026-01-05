@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar InfluxDB2 en el DockerCE de Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Dockers/InfluxDB2.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Dockers/InfluxDB2.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Dockers/InfluxDB2.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Dockers/InfluxDB2.sh | sed 's-sudo--g' | bash
 #
 # Comando: docker run -d --restart=always --name InfluxDB2 -p 3000:3000 InfluxDB2/InfluxDB2:latest
 # ----------
