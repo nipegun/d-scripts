@@ -81,6 +81,7 @@
           echo '  -v /Contenedores/n8n/data:/home/node/.n8n     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  docker.n8n.io/n8nio/n8n:latest'                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
  
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -128,6 +129,7 @@
           echo '  -v /Host/n8n/data:/home/node/.n8n             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           echo '  docker.n8n.io/n8nio/n8n:latest'                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
           sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-n8n-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/n8n/data                2> /dev/null
