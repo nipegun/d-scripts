@@ -71,6 +71,7 @@
           echo '  -v /Contenedores/OWASPJuiceShop/data:/data   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           echo '  bkimminich/juice-shop:latest'                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/OWASPJuiceShop/data/ 2> /dev/null
@@ -113,6 +114,7 @@
           echo '  -v /Host/OWASPJuiceShop/data:/data           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           echo '  bkimminich/juice-shop:latest'                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/OWASPJuiceShop/data     2> /dev/null
