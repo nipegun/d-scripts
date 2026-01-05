@@ -59,10 +59,6 @@
         echo -e "${cColorVerde}  Instalando MariaDB en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Contenedores/MariaDB/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
           echo ""
           echo "    Creando el script iniciador..."
@@ -74,10 +70,13 @@
           echo "  --env MARIADB_USER=usuariox                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           echo "  --env MARIADB_PASSWORD=UsuarioX              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           echo "  --env MARIADB_ROOT_PASSWORD=raizraiz         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           echo "  -v /Contenedores/MariaDB/data:/data          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           echo "  mariadb:latest"                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/MariaDB/data/   2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -104,10 +103,6 @@
         echo -e "${cColorVerde}  Instalando MariaDB en un contenedor LXC...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Host/MariaDB/data 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
           echo ""
           echo "  Creando el script iniciador..."
@@ -119,10 +114,13 @@
           echo "  --env MARIADB_USER=usuariox                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           echo "  --env MARIADB_PASSWORD=UsuarioX              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           echo "  --env MARIADB_ROOT_PASSWORD=raizraiz         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           echo "  -v /Host/MariaDB/data:/data                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           echo "  mariadb:latest"                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Host/MariaDB/data            2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
