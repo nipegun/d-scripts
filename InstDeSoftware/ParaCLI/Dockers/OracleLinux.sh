@@ -62,17 +62,17 @@ VerOLDeseada=8
         echo ""
 
         # Crear el script iniciador
-          echo ""
-          echo "    Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '    Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  --name OracleLinux                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -p 22001:22                                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -p 1521:9444                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -p 1630:1630                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -v /Contenedores/OracleLinux/data:/data      \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo '  --name OracleLinux                           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo '  -p 22001:22                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo '  -p 1521:9444                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo '  -p 1630:1630                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo '  -v /Contenedores/OracleLinux/data:/data      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "  oraclelinux:$VerOLDeseada"                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
 
@@ -106,17 +106,17 @@ VerOLDeseada=8
         echo ""
 
         # Crear el script iniciador
-          echo ""
-          echo "  Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '  Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  --name OracleLinux                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -p 22001:22                                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -p 1521:9444                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -p 1630:1630                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
-          echo "  -v /Host/OracleLinux/data:/data              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo '  --name OracleLinux                           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo '  -p 22001:22                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo '  -p 1521:9444                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo '  -p 1630:1630                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          echo '  -v /Host/OracleLinux/data:/data              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "  oraclelinux:$VerOLDeseada"                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
 
