@@ -71,6 +71,7 @@
           echo '  -v /Contenedores/Flowise/data:/root/.flowise \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo '  flowiseai/flowise:latest'                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/Flowise/data/   2> /dev/null
@@ -113,6 +114,7 @@
           echo '  -v /Host/Flowise/data:/root/.flowise         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           echo '  flowiseai/flowise:latest'                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/Flowise/data            2> /dev/null
