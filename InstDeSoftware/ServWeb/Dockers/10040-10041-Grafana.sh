@@ -59,14 +59,10 @@
         echo -e "${cColorVerde}  Instalando Grafana en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Contenedores/Grafana/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
-          echo ""
-          echo "    Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '    Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                         | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
           echo ''                                                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
           echo 'docker run -d --restart=always                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
@@ -75,6 +71,10 @@
           echo '  -v /Contenedores/Grafana/data:/var/lib/grafana \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
           echo '  grafana/grafana:latest'                            | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
           sudo chmod +x                                                            /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/Grafana/data/   2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -105,14 +105,10 @@
         echo -e "${cColorVerde}  Instalando Grafana en un contenedor LXC...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Host/Grafana/data 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
-          echo ""
-          echo "  Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '  Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                 | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
           echo ''                                            | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
           echo 'docker run -d --restart=always           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
@@ -121,6 +117,10 @@
           echo '  -v /Host/Grafana/data:/var/lib/grafana \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
           echo '  grafana/grafana:latest'                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
           sudo chmod +x                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Host/Grafana/data            2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
