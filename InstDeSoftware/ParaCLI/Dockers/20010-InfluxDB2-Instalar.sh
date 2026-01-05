@@ -63,19 +63,19 @@
           echo ""
           echo "    Creando el script iniciador..."
           echo ""
-          echo '#!/bin/bash'                                              | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          echo ''                                                         | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          echo 'docker run -d --restart=always                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          echo '  --name InfluxDB2                                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          echo '  -p 20010:8086                                       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          echo '   -v /Contenedores/InfluxDB2/data:/var/lib/influxdb2 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          echo '  influxdb:2'                                             | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          sudo chmod +x                                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          sed -i 's|\\\\|\\|g'                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo '#!/bin/bash'                                                           | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo ''                                                                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo 'docker run -d --restart=always                                     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo '  --name InfluxDB2                                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo '  -p 20010:8086                                                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo '   -v /Contenedores/InfluxDB2/var/lib/influxdb2:/var/lib/influxdb2 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo '  influxdb:2'                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          sudo chmod +x                                                                              /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                                       /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Contenedores/InfluxDB2/data/ 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+          sudo mkdir -p /Contenedores/InfluxDB2/var/lib/influxdb2 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/             2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -106,19 +106,19 @@
           echo ""
           echo "  Creando el script iniciador..."
           echo ""
-          echo '#!/bin/bash'                                     | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          echo ''                                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          echo 'docker run -d --restart=always               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          echo '  --name InfluxDB2                           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          echo '  -p 20010:8086                              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          echo '  -v /Host/InfluxDB2/data:/var/lib/influxdb2 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          echo '  influxdb:2'                                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          sudo chmod +x                                                        /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
-          sed -i 's|\\\\|\\|g'                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo '#!/bin/bash'                                                  | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo ''                                                             | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo 'docker run -d --restart=always                            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo '  --name InfluxDB2                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo '  -p 20010:8086                                           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo '  -v /Host/InfluxDB2/var/lib/influxdb2:/var/lib/influxdb2 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          echo '  influxdb:2'                                                 | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          sudo chmod +x                                                                     /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                              /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB2-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Host/InfluxDB2/data          2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+          sudo mkdir -p /Host/InfluxDB2/var/lib/influxdb2 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/     2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
