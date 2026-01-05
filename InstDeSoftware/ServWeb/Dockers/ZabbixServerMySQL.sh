@@ -84,8 +84,7 @@
           echo '  -p 9444:9444                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo '  docker.io/zabbix/zabbix-server-mysql:latest'      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
-
-  zabbix/zabbix-server-mysql:latest
+          sed -i 's|\\\\|\\|g'                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
   
         # Crear carpetas
           sudo mkdir -p /Contenedores/ZabbixServerMySQL/data/ 2> /dev/null
@@ -141,6 +140,7 @@
           echo '  -p 9444:9444                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo '  docker.io/zabbix/zabbix-server-mysql:latest'      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/ZabbixServerMySQL/data  2> /dev/null
