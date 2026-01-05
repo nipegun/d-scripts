@@ -201,7 +201,7 @@
           sudo mkdir -p /Host/Scanopy/data                    2> /dev/null
           sudo mkdir -p /root/scripts/ParaEsteDebian          2> /dev/null
           # Corregir permisos
-            chown -R 999:999 /Contenedores/Scanopy/var/lib/postgresql/data
+            chown -R 999:999 /Host/Scanopy/var/lib/postgresql/data
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
