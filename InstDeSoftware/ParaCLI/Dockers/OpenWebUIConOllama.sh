@@ -62,11 +62,6 @@
         echo -e "${cColorVerde}  Instalando OpenWebUI con Ollama en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Contenedores/OpenWebUIConOllama/root/.ollama     2> /dev/null
-          sudo mkdir -p /Contenedores/OpenWebUIConOllama/app/backend/data 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/                     2> /dev/null
-
         # Crear el script iniciador
           echo ""
           echo "    Creando el script iniciador..."
@@ -77,11 +72,15 @@
           echo "  --name OpenWebUIConOllama                                              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  -p 3000:3000                                                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  --gpus=all                                                             \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  -v /Contenedores/OpenWebUIConOllama/root/.ollama:/root/.ollama         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  -v /Contenedores/OpenWebUIConOllama/app/backend/data:/app/backend/data \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  ghcr.io/open-webui/open-webui:ollama"                                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           sudo chmod +x                                                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/OpenWebUIConOllama/root/.ollama     2> /dev/null
+          sudo mkdir -p /Contenedores/OpenWebUIConOllama/app/backend/data 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/                     2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -108,11 +107,6 @@
         echo -e "${cColorVerde}  Instalando OpenWebUI con Ollama en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Contenedores/OpenWebUIConOllama/root/.ollama     2> /dev/null
-          sudo mkdir -p /Contenedores/OpenWebUIConOllama/app/backend/data 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/                     2> /dev/null
-
         # Crear el script iniciador
           echo ""
           echo "    Creando el script iniciador..."
@@ -122,11 +116,15 @@
           echo "docker run -d --restart=always                                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  --name OpenWebUIConOllama                                              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  -p 3000:3000                                                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock                           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  -v /Contenedores/OpenWebUIConOllama/root/.ollama:/root/.ollama         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  -v /Contenedores/OpenWebUIConOllama/app/backend/data:/app/backend/data \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  ghcr.io/open-webui/open-webui:ollama"                                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           sudo chmod +x                                                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/OpenWebUIConOllama/root/.ollama     2> /dev/null
+          sudo mkdir -p /Contenedores/OpenWebUIConOllama/app/backend/data 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/                     2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -153,11 +151,6 @@
         echo -e "${cColorVerde}  Instalando OpenWebUI con Ollama en un contenedor LXC...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Host/OpenWebUIConOllama/root/.ollama     2> /dev/null
-          sudo mkdir -p /Host/OpenWebUIConOllama/app/backend/data 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/             2> /dev/null
-
         # Crear el script iniciador
           echo ""
           echo "  Creando el script iniciador..."
@@ -168,11 +161,15 @@
           echo "  --name OpenWebUIConOllama                                      \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  -p 3000:3000                                                   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  --gpus=all                                                     \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock                   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  -v /Host/OpenWebUIConOllama/root/.ollama:/root/.ollama         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  -v /Host/OpenWebUIConOllama/app/backend/data:/app/backend/data \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  ghcr.io/open-webui/open-webui:ollama"                              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           sudo chmod +x                                                                            /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Host/OpenWebUIConOllama/root/.ollama     2> /dev/null
+          sudo mkdir -p /Host/OpenWebUIConOllama/app/backend/data 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/             2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -213,7 +210,6 @@
           echo "docker run -d --restart=always                                   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  --name OpenWebUIConOllama                                      \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  -p 3000:3000                                                   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock                   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  -v /Host/OpenWebUIConOllama/root/.ollama:/root/.ollama         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  -v /Host/OpenWebUIConOllama/app/backend/data:/app/backend/data \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
           echo "  ghcr.io/open-webui/open-webui:ollama"                              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUIConOllama-Iniciar.sh
