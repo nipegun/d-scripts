@@ -85,12 +85,11 @@
           echo '  docker.io/zabbix/zabbix-server-mysql:latest'      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
 
-
   zabbix/zabbix-server-mysql:latest
   
         # Crear carpetas
-          sudo mkdir -p /Contenedores/ZabbixServerMySQL/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+          sudo mkdir -p /Contenedores/ZabbixServerMySQL/data/ 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/         2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
