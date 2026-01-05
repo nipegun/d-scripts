@@ -74,6 +74,15 @@
           sudo chmod +x                                                             /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
           sed -i 's|\\\\|\\|g'                                                      /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
 
+docker run --rm -p 8181:8181 \
+  -v $PWD/data:/var/lib/influxdb3/data \
+  -v $PWD/plugins:/var/lib/influxdb3/plugins \
+  influxdb:3-core influxdb3 serve \
+    --node-id=my-node-0 \
+    --object-store=file \
+    --data-dir=/var/lib/influxdb3/data \
+    --plugin-dir=/var/lib/influxdb3/plugins
+
         # Crear carpetas
           sudo mkdir -p /Contenedores/InfluxDB3Core/.data   2> /dev/null
           sudo mkdir -p /Contenedores/InfluxDB3Core/plugins 2> /dev/null
