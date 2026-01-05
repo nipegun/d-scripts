@@ -75,6 +75,7 @@ VerOLDeseada=8
           echo '  -v /Contenedores/OracleLinux/data:/data      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "  oraclelinux:$VerOLDeseada"                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/OracleLinux/data/ 2> /dev/null
@@ -119,6 +120,7 @@ VerOLDeseada=8
           echo '  -v /Host/OracleLinux/data:/data              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           echo "  oraclelinux:$VerOLDeseada"                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-OracleLinux-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/OracleLinux/data        2> /dev/null
