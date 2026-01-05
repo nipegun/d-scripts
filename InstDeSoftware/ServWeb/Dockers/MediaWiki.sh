@@ -72,6 +72,7 @@
           echo '  -v /Contenedores/MediaWiki/LocalSettings.php:/var/www/html/LocalSettings.php \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
           echo '  mediawiki:latest'                                                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
           sudo chmod +x                                                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/MediaWiki/data/ 2> /dev/null
@@ -115,6 +116,7 @@
           echo '  -v /Host/MediaWiki/LocalSettings.php:/var/www/html/LocalSettings.php \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
           echo '  mediawiki:latest'                                                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
           sudo chmod +x                                                                                  /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-MediaWiki-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/MediaWiki/data          2> /dev/null
