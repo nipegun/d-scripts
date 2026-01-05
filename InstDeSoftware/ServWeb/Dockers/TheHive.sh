@@ -72,6 +72,7 @@
           echo '  -v /Contenedores/TheHive/data:/opt/thp/thehive \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
           echo '  strangebee/thehive:5.4'                            | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
           sudo chmod +x                                                            /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                     /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/TheHive/data/   2> /dev/null
@@ -119,6 +120,7 @@
           echo '  -v /Host/TheHive/data:/opt/thp/thehive \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
           echo '  strangebee/thehive:5.4'                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
           sudo chmod +x                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                             /root/scripts/ParaEsteDebian/DockerCE-Cont-TheHive-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/TheHive/data            2> /dev/null
