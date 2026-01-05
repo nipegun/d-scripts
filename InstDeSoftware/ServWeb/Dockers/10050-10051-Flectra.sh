@@ -85,6 +85,7 @@
           echo '  --link FlectraDB:db                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           echo '  flectrahq/flectra:latest'                                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           sudo chmod +x                                                                        /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/Flectra/data/   2> /dev/null
@@ -141,6 +142,7 @@
           echo '  --link FlectraDB:db                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           echo '  flectrahq/flectra:latest'                                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
           sudo chmod +x                                                                        /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/Flectra/data            2> /dev/null
