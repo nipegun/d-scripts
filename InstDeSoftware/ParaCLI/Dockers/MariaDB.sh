@@ -60,18 +60,18 @@
         echo ""
 
         # Crear el script iniciador
-          echo ""
-          echo "    Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '    Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  --name MariaDB                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  --env MARIADB_USER=usuariox                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  --env MARIADB_PASSWORD=UsuarioX              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  --env MARIADB_ROOT_PASSWORD=raizraiz         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  -v /Contenedores/MariaDB/data:/data          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  mariadb:latest"                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo '  --name MariaDB                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo '  --env MARIADB_USER=usuariox                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo '  --env MARIADB_PASSWORD=UsuarioX              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo '  --env MARIADB_ROOT_PASSWORD=raizraiz         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo '  -v /Contenedores/MariaDB/data:/data          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo '  mariadb:latest'                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
 
         # Crear carpetas
@@ -104,18 +104,18 @@
         echo ""
 
         # Crear el script iniciador
-          echo ""
-          echo "  Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '  Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  --name MariaDB                               \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  --env MARIADB_USER=usuariox                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  --env MARIADB_PASSWORD=UsuarioX              \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  --env MARIADB_ROOT_PASSWORD=raizraiz         \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  -v /Host/MariaDB/data:/data                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
-          echo "  mariadb:latest"                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo '  --name MariaDB                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo '  --env MARIADB_USER=usuariox                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo '  --env MARIADB_PASSWORD=UsuarioX              \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo '  --env MARIADB_ROOT_PASSWORD=raizraiz         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo '  -v /Host/MariaDB/data:/data                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
+          echo '  mariadb:latest'                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-MariaDB-Iniciar.sh
 
         # Crear carpetas
