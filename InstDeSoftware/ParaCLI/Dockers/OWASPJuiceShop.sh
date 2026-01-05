@@ -60,16 +60,16 @@
         echo ""
 
         # Crear el script iniciador
-          echo ""
-          echo "    Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '    Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo "  --name OWASPJuiceShop                        \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo "  -p 3010:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo "  -v /Contenedores/OWASPJuiceShop/data:/data   \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo "  bkimminich/juice-shop:latest"                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo '  --name OWASPJuiceShop                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo '  -p 3010:3000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo '  -v /Contenedores/OWASPJuiceShop/data:/data   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo '  bkimminich/juice-shop:latest'                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
 
         # Crear carpetas
@@ -102,16 +102,16 @@
         echo ""
 
         # Crear el script iniciador
-          echo ""
-          echo "  Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '  Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo "  --name OWASPJuiceShop                        \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo "  -p 3010:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo "  -v /Host/OWASPJuiceShop/data:/data           \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
-          echo "  bkimminich/juice-shop:latest"                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo '  --name OWASPJuiceShop                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo '  -p 3010:3000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo '  -v /Host/OWASPJuiceShop/data:/data           \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
+          echo '  bkimminich/juice-shop:latest'                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OWASPJuiceShop-Iniciar.sh
 
         # Crear carpetas
