@@ -59,14 +59,10 @@
         echo -e "${cColorVerde}  Instalando ZabbixServerMySQL en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Contenedores/ZabbixServerMySQL/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
-          echo ""
-          echo "    Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '    Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                        | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo ''                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo 'docker run -d --restart=always                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
@@ -91,7 +87,10 @@
 
 
   zabbix/zabbix-server-mysql:latest
-
+  
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/ZabbixServerMySQL/data/   2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -118,15 +117,10 @@
         echo -e "${cColorVerde}  Instalando ZabbixServerMySQL en un contenedor LXC...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Host/ZabbixServerMySQL/data 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
-
         # Crear el script iniciador
-          echo ""
-          echo "    Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '    Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                        | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo ''                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo 'docker run -d --restart=always                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
@@ -148,6 +142,10 @@
           echo '  -p 9444:9444                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           echo '  docker.io/zabbix/zabbix-server-mysql:latest'      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
           sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-ZabbixServerMySQL-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Host/ZabbixServerMySQL/data  2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
