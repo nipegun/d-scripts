@@ -60,16 +60,16 @@
         echo ""
 
         # Crear el script iniciador
-          echo ""
-          echo "    Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '    Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  --name Coder                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  -v /Contenedores/Coder/data:/data            \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  ghcr.io/coder/coder:latest"                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo '  --name Coder                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo '  -p 3000:3000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo '  -v /Contenedores/Coder/data:/data            \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo '  ghcr.io/coder/coder:latest'                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
 
         # Crear carpetas
@@ -102,16 +102,16 @@
         echo ""
 
         # Crear el script iniciador
-          echo ""
-          echo "  Creando el script iniciador..."
-          echo ""
+          echo ''
+          echo '  Creando el script iniciador...'
+          echo ''
           echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo ""                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "docker run -d --restart=always                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  --name Coder                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  -p 3000:3000                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  -v /Host/Coder/data:/data                    \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
-          echo "  ghcr.io/coder/coder:latest"                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo '  --name Coder                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo '  -p 3000:3000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo '  -v /Host/Coder/data:/data                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
+          echo '  ghcr.io/coder/coder:latest'                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Coder-Iniciar.sh
 
         # Crear carpetas
