@@ -73,6 +73,7 @@
           echo '  -v /Contenedores/PortainerCE/data:/data        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo '  cr.portainer.io/portainer/portainer-ce:latest'     | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           sudo chmod +x                                                            /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                     /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/PortainerCE/data/ 2> /dev/null
@@ -117,6 +118,7 @@
           echo '  -v /Host/PortainerCE/data:/data                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           echo '  cr.portainer.io/portainer/portainer-ce:latest'     | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
           sudo chmod +x                                                            /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                     /root/scripts/ParaEsteDebian/DockerCE-Cont-PortainerCE-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/PortainerCE/data        2> /dev/null
