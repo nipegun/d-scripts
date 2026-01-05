@@ -74,6 +74,7 @@
           echo '  -v /Contenedores/OpenWebUI/data:/data        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           echo '  ghcr.io/open-webui/open-webui:main'              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/OpenWebUI/data/ 2> /dev/null
@@ -116,6 +117,7 @@
           echo '  -v /Host/OpenWebUI/data:/data                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           echo '  ghcr.io/open-webui/open-webui:main'              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenWebUI-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/OpenWebUI/data          2> /dev/null
