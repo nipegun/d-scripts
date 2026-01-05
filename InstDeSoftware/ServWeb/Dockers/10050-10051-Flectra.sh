@@ -88,8 +88,10 @@
           sed -i 's|\\\\|\\|g'                                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Contenedores/Flectra/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+          sudo mkdir -p /Contenedores/Flectra/postgres  2> /dev/null
+          sudo mkdir -p /Contenedores/Flectra/config    2> /dev/null
+          sudo mkdir -p /Contenedores/Flectra/filestore 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian   2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -145,8 +147,10 @@
           sed -i 's|\\\\|\\|g'                                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-Flectra-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Host/Flectra/data            2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+          sudo mkdir -p /Host/Flectra/postgres       2> /dev/null
+          sudo mkdir -p /Host/Flectra/config         2> /dev/null
+          sudo mkdir -p /Host/Flectra/filestore      2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
