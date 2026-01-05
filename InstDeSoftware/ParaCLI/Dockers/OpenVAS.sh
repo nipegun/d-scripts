@@ -59,10 +59,6 @@
         echo -e "${cColorVerde}  Instalando OpenVAS en un ordenador o máquina virtual...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Contenedores/OpenVAS/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
           echo ""
           echo "    Creando el script iniciador..."
@@ -75,10 +71,13 @@
           echo "  -p 5432:5432                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  -e "USERNAME=admin"                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  -e "PASSWORD=admin"                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  -v /Contenedores/OpenVAS/data:/data          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  greenbone/openvas-scanner:latest"                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Contenedores/OpenVAS/data/   2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -105,10 +104,6 @@
         echo -e "${cColorVerde}  Instalando OpenVAS en un contenedor LXC...${cFinColor}"
         echo ""
 
-        # Crear carpetas
-          sudo mkdir -p /Host/OpenVAS/data 2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
-
         # Crear el script iniciador
           echo ""
           echo "  Creando el script iniciador..."
@@ -121,10 +116,13 @@
           echo "  -p 5432:5432                                 \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  -e "USERNAME=admin"                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  -e "PASSWORD=admin"                          \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
-          echo "  -v /var/run/docker.sock:/var/run/docker.sock \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  -v /Host/OpenVAS/data:/data                  \\" | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           echo "  greenbone/openvas-scanner:latest"                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-OpenVAS-Iniciar.sh
+
+        # Crear carpetas
+          sudo mkdir -p /Host/OpenVAS/data            2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
