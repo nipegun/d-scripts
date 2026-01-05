@@ -42,7 +42,7 @@
       sudo apt-get -y install dialog
       echo ""
     fi
-  menu=(dialog --checklist "¿Donde quieres instalar InfluxDB?:" 22 76 16)
+  menu=(dialog --radiolist "¿Donde quieres instalar InfluxDB?:" 22 76 16)
     opciones=(
       1 "En un ordenador o máquina virtual" off
       2 "En un contenedor LXC de Proxmox"   off
@@ -67,14 +67,14 @@
           echo ""
           echo "    Creando el script iniciador..."
           echo ""
-          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
-          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
-          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
-          echo '  --name InfluxDB                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
-          echo '  -p 10020:3000                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
-          echo '  -v /Contenedores/InfluxDB/data:/root/.influxdb \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
-          echo '  influxdb/influxdb:latest'                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
-          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
+          echo '#!/bin/bash'                                         | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
+          echo ''                                                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
+          echo 'docker run -d --restart=always                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
+          echo '  --name InfluxDB                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
+          echo '  -p 20010:8086                                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
+          echo '   -v /Contenedores/InfluxDB/data:/var/lib/influxdb2 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
+          echo '  influxdb:2'                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
+          sudo chmod +x                                                            /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -113,9 +113,9 @@
           echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
           echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
           echo '  --name InfluxDB                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
-          echo '  -p 10020:3000                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
-          echo '  -v /Host/InfluxDB/data:/root/.influxdb         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
-          echo '  influxdb/influxdb:latest'                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
+          echo '  -p 20010:8086                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
+          echo '  -v /Host/InfluxDB/data:/var/lib/influxdb2         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
+          echo '  influxdb:2'                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
           sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB-Iniciar.sh
 
         # Insertar el script iniciador en los comandos post arranque
