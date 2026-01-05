@@ -44,7 +44,7 @@ VerOLDeseada=8
       sudo apt-get -y install dialog
       echo ""
     fi
-  menu=(dialog --checklist "¿Donde quieres instalar OracleLinux?:" 22 76 16)
+  menu=(dialog --radiolist "¿Donde quieres instalar OracleLinux?:" 22 76 16)
     opciones=(
       1 "En un ordenador o máquina virtual" off
       2 "En un contenedor LXC de Proxmox"   off
