@@ -76,6 +76,7 @@
             echo '  -p 8000:8000                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
             echo '  ctfd/ctfd:latest'                                                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
             sudo chmod +x                                                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            sed -i 's|\\\\|\\|g'                                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
 
           # Crear carpetas
             sudo mkdir -p /Contenedores/CTFd/data       2> /dev/null
@@ -118,6 +119,7 @@
             echo '  -p 8000:8000                                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
             echo '  ctfd/ctfd:latest'                                                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
             sudo chmod +x                                                                                 /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
+            sed -i 's|\\\\|\\|g'                                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-SinAppArmor-Iniciar.sh
 
           # Crear carpetas
             sudo mkdir -p /Host/CTFd/data 2> /dev/null
@@ -160,6 +162,7 @@
             echo '  -p 8000:8000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
             echo '  ctfd/ctfd:latest'                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
             chmod +x                                                               /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
 
           # Crear carpetas
             sudo mkdir -p /Contenedores/CTFd/data       2> /dev/null
@@ -202,6 +205,7 @@
             echo '  -p 8000:8000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
             echo '  ctfd/ctfd:latest'                                | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
             sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
+            sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-CTFd-ConAppArmor-Iniciar.sh
 
           # Crear carpetas
             sudo mkdir -p /Host/CTFd/data 2> /dev/null
