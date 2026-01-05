@@ -72,6 +72,7 @@
           echo '  -v /Contenedores/InfluxDB3Core/plugins:/plugins \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
           echo '  influxdb:3-core'                                    | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
           sudo chmod +x                                                             /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                      /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Contenedores/InfluxDB3Core/data      2> /dev/null
@@ -116,6 +117,7 @@
           echo '  -v /Host/InfluxDB3Core/plugins:/plugins \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
           echo '  influxdb:3-core'                            | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
           sudo chmod +x                                                     /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                              /root/scripts/ParaEsteDebian/DockerCE-Cont-InfluxDB3Core-Iniciar.sh
 
         # Crear carpetas
           sudo mkdir -p /Host/InfluxDB3Core/data      2> /dev/null
