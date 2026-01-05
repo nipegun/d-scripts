@@ -63,19 +63,19 @@
           echo ''
           echo '    Creando el script iniciador...'
           echo ''
-          echo '#!/bin/bash'                                           | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo ''                                                      | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo 'docker run -d --restart=always                     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo '  --name Flowise                                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo '  -p 10020:3000                                    \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo '  -v /Contenedores/Flowise/.flowise:/root/.flowise \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo '  flowiseai/flowise:latest'                            | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          sudo chmod +x                                                              /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          sed -i 's|\\\\|\\|g'                                                       /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo '#!/bin/bash'                                                | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo ''                                                           | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo 'docker run -d --restart=always                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo '  --name Flowise                                        \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo '  -p 10020:3000                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo '  -v /Contenedores/Flowise/root/.flowise:/root/.flowise \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo '  flowiseai/flowise:latest'                                 | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          sudo chmod +x                                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                            /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Contenedores/Flowise/.flowise   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian 2> /dev/null
+          sudo mkdir -p /Contenedores/Flowise/root/.flowise 2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian        2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -106,18 +106,18 @@
           echo ''
           echo '  Creando el script iniciador...'
           echo ''
-          echo '#!/bin/bash'                                       | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo ''                                                  | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo 'docker run -d --restart=always                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo '  --name Flowise                               \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo '  -p 10020:3000                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo '  -v /Host/Flowise/.flowise:/root/.flowise     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          echo '  flowiseai/flowise:latest'                        | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          sudo chmod +x                                                          /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
-          sed -i 's|\\\\|\\|g'                                                   /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo '#!/bin/bash'                                        | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo ''                                                   | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo 'docker run -d --restart=always                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo '  --name Flowise                                \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo '  -p 10020:3000                                 \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo '  -v /Host/Flowise/root/.flowise:/root/.flowise \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          echo '  flowiseai/flowise:latest'                         | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          sudo chmod +x                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                    /root/scripts/ParaEsteDebian/DockerCE-Cont-Flowise-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Host/Flowise/.flowise       2> /dev/null
+          sudo mkdir -p /Host/Flowise/root/.flowise  2> /dev/null
           sudo mkdir -p /root/scripts/ParaEsteDebian 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
