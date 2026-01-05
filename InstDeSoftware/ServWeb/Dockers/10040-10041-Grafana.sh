@@ -74,8 +74,8 @@
           sed -i 's|\\\\|\\|g'                                                     /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Contenedores/Grafana/data/   2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+          sudo mkdir -p /Contenedores/Grafana/data   2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
@@ -121,8 +121,8 @@
           sed -i 's|\\\\|\\|g'                                             /root/scripts/ParaEsteDebian/DockerCE-Cont-Grafana-Iniciar.sh
 
         # Crear carpetas
-          sudo mkdir -p /Host/Grafana/data            2> /dev/null
-          sudo mkdir -p /root/scripts/ParaEsteDebian/ 2> /dev/null
+          sudo mkdir -p /Host/Grafana/data           2> /dev/null
+          sudo mkdir -p /root/scripts/ParaEsteDebian 2> /dev/null
 
         # Insertar el script iniciador en los comandos post arranque
           echo ""
