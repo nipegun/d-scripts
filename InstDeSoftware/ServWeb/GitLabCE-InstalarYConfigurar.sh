@@ -14,6 +14,9 @@
 # Ejecución remota como root (para sistemas sin sudo):
 #  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/GitLabCE-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
+# Ejecución remota como root (para sistemas sin sudo):
+#  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/GitLabCE-InstalarYConfigurar.sh | sed 's-sudo--g' | sed 's-gitlab.home.arpa-gitlab.dominio.com-g' | | bash
+#
 # NOTAS:
 #   Más info aquí: https://about.gitlab.com/install/#debian
 # ----------
@@ -114,11 +117,14 @@ if [ $cVerSO == "13" ]; then
   # Poner en español
     sudo sed -i -e 's|config.i18n.fallbacks = \[:en]|config.i18n.fallbacks = \[:es]|g' /opt/gitlab/embedded/service/gitlab-rails/config/application.rb
 
-  # Reconfigurar gitlab
-    sudo gitlab-ctl reconfigure
+  # Parar gitlab
+    sudo gitlab-ctl stop
 
   # Reemplazar fqdn en todo el sistema
     /root/scripts/d-scripts/Sistema/Texto-BuscarYReemplazar-EnArchivos-DeTodoElSistema.sh gitlab.example.com "$vFQDNGitLab"
+
+  # Reconfigurar gitlab
+    sudo gitlab-ctl reconfigure
 
   # Reinciar
     sudo gitlab-ctl restart
@@ -196,6 +202,12 @@ elif [ $cVerSO == "11" ]; then
   # Configurar el DNS
     echo "127.0.0.1 gitlab.example.com" >> /etc/hosts
     #sed -i -e "s|external_url 'http://gitlab.example.com'|'http://gitlab.example.com'|g" /etc/gitlab/gitlab.rb
+
+  # Parar gitlab
+    sudo gitlab-ctl stop
+
+  # Reemplazar fqdn en todo el sistema
+    /root/scripts/d-scripts/Sistema/Texto-BuscarYReemplazar-EnArchivos-DeTodoElSistema.sh gitlab.example.com "$vFQDNGitLab"
 
   # Reconfigurar girlab
     gitlab-ctl reconfigure
