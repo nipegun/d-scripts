@@ -67,7 +67,7 @@ if [ $cVerSO == "13" ]; then
 
   # Añadir el repo
     curl -fsSLk https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash
-    # Cambiar repo trixie por bookworm (temporal haasta que haya uno oficial)
+    # Cambiar repo trixie por bookworm (temporal hasta que haya uno oficial)
       sudo sed -i 's-trixie-bookworm-g' /etc/apt/sources.list.d/gitlab_gitlab-ce.list
     #
       curl -fsSLk https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/gitlab_gitlab-ce-archive-keyring.gpg
@@ -143,7 +143,7 @@ if [ $cVerSO == "13" ]; then
     echo ""
     echo "      Para desactivar la recolección y el envío de eventos a la gente de GitLab:"
     echo ""
-    echo "        - Despliega la barra lateral izquierda (si no estña desplegada) y abajo a la derecha haz click en Admin"
+    echo "        - Despliega la barra lateral izquierda (si no está desplegada) y abajo a la derecha haz click en Admin"
     echo "        - Pasa el ratón por Settings y haz click en Metrics and profiling."
     echo "        - Expande Event tracking, deselecciona Enable event tracking y haz clock en el botón Save changes."
     echo ""
@@ -151,6 +151,9 @@ if [ $cVerSO == "13" ]; then
     echo "        y cambiar external_url 'http://gitlab.ejemplo.com por external_url 'https://gitlab.ejemplo.com:8443"
     echo ""
     echo "      Para cambiar ajustes de localización: Admin > Settings > Preferences > Localization"
+    echo ""
+    vGitlabRootPass=$(cat /etc/gitlab/initial_root_password | grep ^Password | cut -d':' -f2 | sed 's- --g')
+    echo "      La primera vez que te conectes hazlo con el usuario root y el password $vGitlabRootPass"
     echo ""
 
 elif [ $cVerSO == "12" ]; then
