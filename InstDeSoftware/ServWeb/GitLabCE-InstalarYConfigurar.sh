@@ -15,7 +15,7 @@
 #  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/GitLabCE-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/GitLabCE-InstalarYConfigurar.sh | sed 's-sudo--g' | sed 's-gitlab.home.arpa-gitlab.dominio.com-g' | | bash
+#  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/GitLabCE-InstalarYConfigurar.sh | sed 's-sudo--g' | sed 's-gitlab.home.arpa-gitlab.dominio.com-g' | bash
 #
 # NOTAS:
 #   Más info aquí: https://about.gitlab.com/install/#debian
