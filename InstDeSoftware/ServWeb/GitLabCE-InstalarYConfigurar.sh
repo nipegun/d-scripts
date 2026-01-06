@@ -11,10 +11,13 @@
 # Ejecución remota (puede requerir permisos sudo):
 #  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/GitLabCE-InstalarYConfigurar.sh | bash
 #
+# Ejecución remota cambiando el FQDN (puede requerir permisos sudo):
+#  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/GitLabCE-InstalarYConfigurar.sh | bash | sed 's-gitlab.home.arpa-gitlab.dominio.com-g' | bash
+#
 # Ejecución remota como root (para sistemas sin sudo):
 #  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/GitLabCE-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
-# Ejecución remota como root (para sistemas sin sudo):
+# Ejecución remota como root cambiando el FQDN (para sistemas sin sudo):
 #  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/GitLabCE-InstalarYConfigurar.sh | sed 's-sudo--g' | sed 's-gitlab.home.arpa-gitlab.dominio.com-g' | bash
 #
 # NOTAS:
