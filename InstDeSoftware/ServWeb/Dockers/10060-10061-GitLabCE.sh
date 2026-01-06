@@ -63,19 +63,19 @@
           echo ''
           echo '    Creando el script iniciador...'
           echo ''
-          echo '#!/bin/bash'                                                               | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo ''                                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo 'docker run -d --restart=always                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  --name GitLabCE                                                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  -p 10060:80                                                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  -p 10061:443                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  -e GITLAB_OMNIBUS_CONFIG="external_url '"'http://localhost:10060'"'" \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  -v /Contenedores/GitLabCE/etc/gitlab:/etc/gitlab                     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  -v /Contenedores/GitLabCE/var/log/gitlab:/var/log/gitlab             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  -v /Contenedores/GitLabCE/var/opt/gitlab:/var/opt/gitlab             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  gitlab/gitlab-ce:latest'                                                 | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          sudo chmod +x                                                                                  /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          sed -i 's|\\\\|\\|g'                                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '#!/bin/bash'                                                            | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo ''                                                                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo 'docker run -d --restart=always                                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  --name GitLabCE                                                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  -p 10060:80                                                       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  -p 10061:443                                                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  -e GITLAB_OMNIBUS_CONFIG="external_url '"'http://localhost:80'"'" \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  -v /Contenedores/GitLabCE/etc/gitlab:/etc/gitlab                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  -v /Contenedores/GitLabCE/var/log/gitlab:/var/log/gitlab          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  -v /Contenedores/GitLabCE/var/opt/gitlab:/var/opt/gitlab          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  gitlab/gitlab-ce:latest'                                              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          sudo chmod +x                                                                               /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                                        /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
 
         # Crear carpetas  
           sudo mkdir -p /Contenedores/GitLabCE/etc/gitlab     2> /dev/null
@@ -112,19 +112,19 @@
           echo ''
           echo '    Creando el script iniciador...'
           echo ''
-          echo '#!/bin/bash'                                                               | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo ''                                                                          | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo 'docker run -d --restart=always                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  --name GitLabCE                                                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  -p 10060:80                                                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  -p 10061:443                                                         \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  -e GITLAB_OMNIBUS_CONFIG="external_url '"'http://localhost:10060'"'" \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  -v /Host/GitLabCE/etc/gitlab:/etc/gitlab                             \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  -v /Host/GitLabCE/var/log/gitlab:/var/log/gitlab                     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  -v /Host/GitLabCE/var/opt/gitlab:/var/opt/gitlab                     \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          echo '  gitlab/gitlab-ce:latest'                                                 | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          sudo chmod +x                                                                                  /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
-          sed -i 's|\\\\|\\|g'                                                                           /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '#!/bin/bash'                                                            | sudo tee    /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo ''                                                                       | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo 'docker run -d --restart=always                                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  --name GitLabCE                                                   \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  -p 10060:80                                                       \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  -p 10061:443                                                      \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  -e GITLAB_OMNIBUS_CONFIG="external_url '"'http://localhost:80'"'" \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  -v /Host/GitLabCE/etc/gitlab:/etc/gitlab                          \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  -v /Host/GitLabCE/var/log/gitlab:/var/log/gitlab                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  -v /Host/GitLabCE/var/opt/gitlab:/var/opt/gitlab                  \\' | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          echo '  gitlab/gitlab-ce:latest'                                              | sudo tee -a /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          sudo chmod +x                                                                               /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
+          sed -i 's|\\\\|\\|g'                                                                        /root/scripts/ParaEsteDebian/DockerCE-Cont-GitLabCE-Iniciar.sh
 
         # Crear carpetas  
           sudo mkdir -p /Host/GitLabCE/etc/gitlab     2> /dev/null
