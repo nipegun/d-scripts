@@ -117,6 +117,9 @@ if [ $cVerSO == "13" ]; then
   # Reconfigurar gitlab
     sudo gitlab-ctl reconfigure
 
+  # Reemplazar fqdn en todo el sistema
+    /root/scripts/d-scripts/Sistema/Texto-BuscarYReemplazar-EnArchivos-DeTodoElSistema.sh gitlab.example.com "$vFQDNGitLab"
+
   # Reinciar
     sudo gitlab-ctl restart
 
