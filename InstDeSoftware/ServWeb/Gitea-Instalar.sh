@@ -24,6 +24,8 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Gitea-Instalar.sh | nano -
 # ----------
 
+vPassRootMariaDB='P@ssw0rd'
+
 # Definir constantes de color
   cColorAzul='\033[0;34m'
   cColorAzulClaro='\033[1;34m'
@@ -61,9 +63,86 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Gitea para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Instalar dependencias
+      sudo apt-get -y update
+      sudo apt-get -y install mariadb-server 
+
+    # Crear la base de datos
+      # Cambiar la contraseña del usuario root de MariaDB
+        sudo mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${vPassRootMariaDB}'; FLUSH PRIVILEGES;"
+      # Borrar la base de datos existente
+        sudo mysql -uroot -p"${vPassRootMariaDB}" -e "DROP DATABASE IF EXISTS Gitea;"
+      # Borrar el usuario existente
+        sudo mysql -uroot -p"${vPassRootMariaDB}" -e "DROP USER IF EXISTS 'gitea'@'localhost';"
+      # Crear el usuario y la base de datos
+        sudo mysql -uroot -p"$vPassRootMariaDB" -e "CREATE DATABASE Gitea;"
+        sudo mysql -uroot -p"$vPassRootMariaDB" -e "CREATE USER 'gitea'@'localhost' IDENTIFIED BY 'gitea';"
+        sudo mysql -uroot -p"$vPassRootMariaDB" -e "GRANT ALL PRIVILEGES ON Gitea.* TO 'gitea'@'localhost';"
+        sudo mysql -uroot -p"$vPassRootMariaDB" -e "FLUSH PRIVILEGES;"
+
+    # Descargar el binario de Gitea
+      # Determinar el número de la última versión
+        echo ""
+        echo "    Determinando el número de la última versión..."
+        echo ""
+        vNroUltVers=$(curl -sL http://dl.gitea.com/gitea/ | sed 's->->\n-g'| grep href | grep gitea | cut -d'"' -f2 | head -n1 | cut -d'/' -f3)
+        echo "      La última versión es la $vNroUltVers"
+        echo ""
+      # Descargar el archivo de instalación de la última versión
+        echo ""
+        echo "    Descargando el archivo de instalación de la última versión..."
+        echo ""
+        curl -L https://dl.gitea.com/gitea/"$vNroUltVers"/gitea-"$vNroUltVers"-linux-amd64 -o /tmp/gitea
+
+    # Crear el usuario
+      sudo adduser --disabled-password --gecos "" gitea
+      echo "gitea:gitea" | sudo chpasswd
+
+    # Preparar la carpeta /opt
+      echo ""
+      echo "    Creando la carpeta /opt"
+      echo ""
+      sudo mkdir -p /opt/gitea/
+      sudo mv /tmp/gitea /opt/gitea/
+      chmod +x /opt/gitea/gitea
+      chown gitea:gitea /opt/gitea/ -R
+
+    # Crear el servicio de systemd
+      echo ""
+      echo "    Creando el servicio de systemd..."
+      echo ""
+      echo '[Unit]'                                | sudo tee    /etc/systemd/system/gitea.service
+      echo 'Description=Gitea'                     | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'After=network.target mariadb.service'  | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'Requires=mariadb.service'              | sudo tee -a /etc/systemd/system/gitea.service
+      echo ''                                      | sudo tee -a /etc/systemd/system/gitea.service
+      echo '[Service]'                             | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'Type=simple'                           | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'User=gitea'                            | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'Group=gitea'                           | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'WorkingDirectory=/opt/gitea'           | sudo tee -a /etc/systemd/system/gitea.service
+      echo ''                                      | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'ExecStart=/opt/gitea/gitea web'        | sudo tee -a /etc/systemd/system/gitea.service
+      echo ''                                      | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'Restart=always'                        | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'RestartSec=2s'                         | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'LimitNOFILE=1048576'                   | sudo tee -a /etc/systemd/system/gitea.service
+      echo ''                                      | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'Environment=USER=gitea'                | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'Environment=HOME=/opt/gitea'           | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'Environment=GITEA_WORK_DIR=/opt/gitea' | sudo tee -a /etc/systemd/system/gitea.service
+      echo ''                                      | sudo tee -a /etc/systemd/system/gitea.service
+      echo '[Install]'                             | sudo tee -a /etc/systemd/system/gitea.service
+      echo 'WantedBy=multi-user.target'            | sudo tee -a /etc/systemd/system/gitea.service
+
+    # Activar y ejecutar el servicio
+      echo ""
+      echo "    Activando y ejecutando el servicio..."
+      echo ""
+      sudo systemctl daemon-reexec
+      sudo systemctl daemon-reload
+      sudo systemctl enable gitea
+      sudo systemctl start gitea
 
   elif [ $cVerSO == "12" ]; then
 
