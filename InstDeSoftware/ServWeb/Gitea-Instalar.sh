@@ -158,7 +158,7 @@ vPassRootMariaDB='P@ssw0rd'
       echo "      Para desactivar el registro de nuevos usuarios:"
       echo ""
       echo "       sed -i 's|DISABLE_REGISTRATION = false|DISABLE_REGISTRATION = true|g' /opt/gitea/custom/conf/app.ini"
-      echo "       sudo systemctl restart gitea"
+      echo "       systemctl restart gitea"
       echo ""
 
   elif [ $cVerSO == "12" ]; then
