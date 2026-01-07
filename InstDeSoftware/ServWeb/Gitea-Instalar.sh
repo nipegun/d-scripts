@@ -157,8 +157,13 @@ vPassRootMariaDB='P@ssw0rd'
       echo ""
       echo "      Para desactivar el registro de nuevos usuarios:"
       echo ""
-      echo "       sed -i 's|DISABLE_REGISTRATION = false|DISABLE_REGISTRATION = true|g' /opt/gitea/custom/conf/app.ini"
-      echo "       systemctl restart gitea"
+      echo "        sed -i 's|DISABLE_REGISTRATION = false|DISABLE_REGISTRATION = true|g' /opt/gitea/custom/conf/app.ini"
+      echo "        systemctl restart gitea"
+      echo ""
+      echo "      Para cambiar la dirección en la que se sirve gitea:"
+      echo ""
+      echo "        sed -i 's|ROOT_URL = http://$vIPLocal:3000/|ROOT_URL = http://gitea.home.arpa/|g' /opt/gitea/custom/conf/app.ini"
+      echo "        systemctl restart gitea"
       echo ""
 
   elif [ $cVerSO == "12" ]; then
