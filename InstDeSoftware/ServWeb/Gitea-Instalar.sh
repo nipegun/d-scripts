@@ -144,6 +144,23 @@ vPassRootMariaDB='P@ssw0rd'
       sudo systemctl enable gitea
       sudo systemctl start gitea
 
+    # Notificar fin de ejecución del script
+      echo ""
+      echo "    Script de instalación de Gitea, finalizado."
+      echo ""
+      echo "      Para proceder con la configuración de la instalación accede a:"
+      echo ""
+      vIPLocal=$(hostname -I | sed 's- --g')
+      echo "        http://$vIPLocal:3000"
+      echo ""
+      echo "      El primer usuario registrado será el admin."
+      echo ""
+      echo "      Para desactivar el registro de nuevos usuarios:"
+      echo ""
+      echo "       sed -i 's|DISABLE_REGISTRATION = false|DISABLE_REGISTRATION = true|g' /opt/gitea/custom/conf/app.ini"
+      echo "       sudo systemctl restart gitea"
+      echo ""
+
   elif [ $cVerSO == "12" ]; then
 
     echo ""
