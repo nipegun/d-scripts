@@ -117,6 +117,9 @@
       sudo apt-get -y autoremove --purge goldendict-ng
       sudo apt-get -y autoremove --purge *fcitx5*
       sudo apt-get -y autoremove --purge xiterm+thai
+
+      sudo apt-get -y autoremove --purge gnome-text-editor && sudo apt-get -y install gedit
+
       sudo apt-get -y autoremove
       sudo apt-get -y autoclean
 
