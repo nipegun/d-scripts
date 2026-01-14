@@ -54,12 +54,10 @@
     echo ""
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de python2 para Debian 13 (x)...${cFinColor}"
     echo ""
-
     # Instalar paquetes necesarios para compilar
       sudo apt-get -y update
       sudo apt-get -y install build-essential
       sudo apt-get -y install zlib1g-dev
-      #sudo apt-get -y install libssl-dev
       sudo apt-get -y install libncurses5-dev
       sudo apt-get -y install libffi-dev
       sudo apt-get -y install libsqlite3-dev
@@ -74,6 +72,15 @@
       sudo apt-get -y install zlib1g-dev
       sudo apt-get -y install tk-dev
       sudo apt-get -y install tcl-dev
+    # Compilar SSL compatible
+      rm -rf /tmp/openssl-1.1.1w/
+      cd /tmp
+      wget https://www.openssl.org/source/old/1.1.1/openssl-1.1.1w.tar.gz
+      tar xf openssl-1.1.1w.tar.gz
+      cd openssl-1.1.1w
+      ./config --prefix=/opt/openssl-1.1 no-shared
+      make -j$(nproc)
+      sudo make install
     # Descargar el código fuente
       # Determinar la última versión
         echo ""
@@ -99,11 +106,10 @@
       curl -L https://www.python.org/ftp/python/$vUltVersPython2/Python-$vUltVersPython2.tgz -o /tmp/python2.tgz
       sudo tar -xzf /tmp/python2.tgz -C /tmp/SoftInst/
       cd /tmp/SoftInst/Python-$vUltVersPython2/
-      # sudo ./configure --prefix=/usr/local --with-ssl=/path/to/openssl
-      # sudo ./configure --prefix=/opt/python2 --with-ensurepip=install --enable-optimizations   # Instala también /opt/python2/bin/pip2.7
-      sudo ./configure --prefix=/opt/python2 --enable-optimizations
-      sudo make -j $(nproc)
+      CPPFLAGS="-I/opt/openssl-1.1/include" LDFLAGS="-L/opt/openssl-1.1/lib" sudo ./configure --prefix=/opt/python2
+      make -j $(nproc)
       sudo make altinstall       # No se usa install para no sobreescribir la instalación de Python3
+
       # Instalar pip2
         vVersBinario=$(ls /opt/python2/bin/ | grep python | grep -v config | sed 's-python--g')
         curl -L https://bootstrap.pypa.io/pip/$vVersBinario/get-pip.py -o /tmp/get-pip.py
@@ -128,7 +134,6 @@
       sudo apt-get -y update
       sudo apt-get -y install build-essential
       sudo apt-get -y install zlib1g-dev
-      #sudo apt-get -y install libssl-dev
       sudo apt-get -y install libncurses5-dev
       sudo apt-get -y install libffi-dev
       sudo apt-get -y install libsqlite3-dev
@@ -143,6 +148,15 @@
       sudo apt-get -y install zlib1g-dev
       sudo apt-get -y install tk-dev
       sudo apt-get -y install tcl-dev
+    # Compilar SSL compatible
+      rm -rf /tmp/openssl-1.1.1w/
+      cd /tmp
+      wget https://www.openssl.org/source/old/1.1.1/openssl-1.1.1w.tar.gz
+      tar xf openssl-1.1.1w.tar.gz
+      cd openssl-1.1.1w
+      ./config --prefix=/opt/openssl-1.1 no-shared
+      make -j$(nproc)
+      sudo make install
     # Descargar el código fuente
       # Determinar la última versión
         echo ""
@@ -168,11 +182,10 @@
       curl -L https://www.python.org/ftp/python/$vUltVersPython2/Python-$vUltVersPython2.tgz -o /tmp/python2.tgz
       sudo tar -xzf /tmp/python2.tgz -C /tmp/SoftInst/
       cd /tmp/SoftInst/Python-$vUltVersPython2/
-      # sudo ./configure --prefix=/usr/local --with-ssl=/path/to/openssl
-      # sudo ./configure --prefix=/opt/python2 --with-ensurepip=install --enable-optimizations   # Instala también /opt/python2/bin/pip2.7
-      sudo ./configure --prefix=/opt/python2 --enable-optimizations
-      sudo make -j $(nproc)
+      CPPFLAGS="-I/opt/openssl-1.1/include" LDFLAGS="-L/opt/openssl-1.1/lib" sudo ./configure --prefix=/opt/python2
+      make -j $(nproc)
       sudo make altinstall       # No se usa install para no sobreescribir la instalación de Python3
+
       # Instalar pip2
         vVersBinario=$(ls /opt/python2/bin/ | grep python | grep -v config | sed 's-python--g')
         curl -L https://bootstrap.pypa.io/pip/$vVersBinario/get-pip.py -o /tmp/get-pip.py
