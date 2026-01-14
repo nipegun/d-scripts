@@ -59,7 +59,7 @@
       sudo apt-get -y update
       sudo apt-get -y install build-essential
       sudo apt-get -y install zlib1g-dev
-      sudo apt-get -y install libssl-dev
+      #sudo apt-get -y install libssl-dev
       sudo apt-get -y install libncurses5-dev
       sudo apt-get -y install libffi-dev
       sudo apt-get -y install libsqlite3-dev
@@ -128,7 +128,7 @@
       sudo apt-get -y update
       sudo apt-get -y install build-essential
       sudo apt-get -y install zlib1g-dev
-      sudo apt-get -y install libssl-dev
+      #sudo apt-get -y install libssl-dev
       sudo apt-get -y install libncurses5-dev
       sudo apt-get -y install libffi-dev
       sudo apt-get -y install libsqlite3-dev
