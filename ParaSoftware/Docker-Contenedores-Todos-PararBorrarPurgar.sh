@@ -64,3 +64,6 @@ fBorrarRedes
 
 sudo rm -f /root/scripts/ParaEsteDebian/DockerCE-Cont-*
 
+# Eliminar todos los puentes
+# sudo ip link show type bridge | awk -F': ' '/^[0-9]+:/{print $2}' | grep '^br-' | xargs -I {} sudo ip link delete {}
+
