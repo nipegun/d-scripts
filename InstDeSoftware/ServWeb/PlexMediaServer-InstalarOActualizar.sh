@@ -6,13 +6,13 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para instalar y configurar el servidor Plex en Debian
+# Script de NiPeGun para instalar y configurar el servidor PlexMediaServer en Debian
 #
 # Ejecución remota (puede requerir permisos sido):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Plex-InstalarOActualizar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/PlexMediaServer-InstalarOActualizar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Plex-InstalarOActualizar.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/PlexMediaServer-InstalarOActualizar.sh | sed 's-sudo--g' | bash
 # ----------
 
 cColorRojo='\033[1;31m'
