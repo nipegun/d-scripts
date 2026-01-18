@@ -71,7 +71,7 @@
           echo ""
           echo "  El usuario $1 no existe. Se procederá a crearlo."
           echo ""
-          useradd -m -s /bin/bash "$1" && echo "$2:$2" | chpasswd && echo "    Se ha creado el usuario $1 con contraseña $2"
+          useradd -m -s /bin/bash "$1" && echo "$1:$2" | chpasswd && echo "    Se ha creado el usuario $1 con contraseña $2"
           echo ""
           echo "  Asignando permisos sudo al usuario recién creado..."
           echo ""
