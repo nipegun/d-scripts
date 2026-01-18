@@ -135,7 +135,6 @@ if [ $cVerSO == "13" ]; then
             # sudo mkdir -p /etc/systemd/system/plexmediaserver.service.d/
             # echo '[Service]'                                                     | sudo tee    /etc/systemd/system/plexmediaserver.service.d/override.conf
             # echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/Host"' | sudo tee -a /etc/systemd/system/plexmediaserver.service.d/override.conf
-            # echo 'Environment="PLEX_CLAIM=claim-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"' | sudo tee -a /etc/systemd/system/plexmediaserver.service.d/override.conf
             sudo systemctl daemon-reload
             sudo apt -y install /root/SoftInst/PlexMediaServer/Plex64x86.deb
 
