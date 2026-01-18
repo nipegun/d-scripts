@@ -9,7 +9,7 @@
 # Script de NiPeGun para desinstalar Plex de Debian, por completo
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Plex-Desinstalar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/PlexMediaServer-Desinstalar.sh | bash
 # ----------
 
 cColorRojo='\033[1;31m'
@@ -69,7 +69,7 @@ elif [ $cVerSO == "9" ]; then
 
   echo ""
   echo "  Borrando la carpeta Plex Media Server..." 
-echo ""
+  echo ""
   rm -R /var/lib/plexmediaserver/
 
   echo ""
