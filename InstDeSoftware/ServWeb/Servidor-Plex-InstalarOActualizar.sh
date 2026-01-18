@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar y configurar el servidor Plex en Debian
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sido):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Plex-InstalarOActualizar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Plex-InstalarOActualizar.sh | sed 's-sudo--g' | bash
 # ----------
 
 cColorRojo='\033[1;31m'
@@ -126,10 +129,14 @@ if [ $cVerSO == "13" ]; then
             echo ""
             echo -e "${cColorVerde}  Instalando el paquete...${cFinColor}"
             echo ""
-            sudo apt-get -y install beignet-opencl-icd
+            sudo apt-get -y update
             sudo apt-get -y install ocl-icd-libopencl1
+            sudo apt-get -y install gnupg2
+            # sudo mkdir -p /etc/systemd/system/plexmediaserver.service.d/
+            # echo '[Service]'                                                     | sudo tee    /etc/systemd/system/plexmediaserver.service.d/override.conf
+            # echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=/Host"' | sudo tee -a /etc/systemd/system/plexmediaserver.service.d/override.conf
             sudo apt -y install /root/SoftInst/Plex/Plex64x86.deb
-          
+
             echo ""
             echo -e "${cColorVerde}  Arrancando el servicio plexediaserver...${cFinColor}"
             echo ""
