@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para poner a cero todos los logs de /var/log
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Logs-Todos-PonerACero.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Logs-Todos-PonerACero.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
@@ -33,50 +36,56 @@
 # Borrar archivos comprimidos de logs viejos
   echo ""
   echo "    Borrando archivos comprimidos de logs viejos..." 
-echo ""
-  find /bin/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /boot/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /dev/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \; 2> /dev/null
-  find /etc/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /home/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /lib/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /lib64/      -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /lost+found/ -type f -name "*.log.gz" -print -exec truncate -s 0 {} \; 2> /dev/null
-  find /media/      -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /mnt/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /opt/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /root/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /run/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /sbin/       -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /srv/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /tmp/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /usr/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
-  find /var/        -type f -name "*.log.gz" -print -exec truncate -s 0 {} \;
+  echo ""
+  find /bin/        -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /boot/       -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /dev/        -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \; 2> /dev/null
+  find /etc/        -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /home/       -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /lib/        -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /lib64/      -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /lost+found/ -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \; 2> /dev/null
+  find /media/      -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /mnt/        -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /opt/        -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /root/       -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /run/        -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /sbin/       -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /srv/        -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /tmp/        -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /usr/        -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
+  find /var/        -type f -name "*.log.gz" -print -exec sudo truncate -s 0 {} \;
 
 # Truncar logs activos
   echo ""
   echo "    Truncando archivos de logs activos..." 
-echo ""
-  find /bin/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /boot/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /dev/        -type f -name "*.log" -print -exec truncate -s 0 {} \; 2> /dev/null
-  find /etc/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /home/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /lib/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /lib64/      -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /lost+found/ -type f -name "*.log" -print -exec truncate -s 0 {} \; 2> /dev/null
-  find /media/      -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /mnt/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /opt/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /root/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /run/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /sbin/       -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /srv/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /tmp/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /usr/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
-  find /var/        -type f -name "*.log" -print -exec truncate -s 0 {} \;
+  echo ""
+  find /bin/        -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /boot/       -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /dev/        -type f -name "*.log" -print -exec sudo truncate -s 0 {} \; 2> /dev/null
+  find /etc/        -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /home/       -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /lib/        -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /lib64/      -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /lost+found/ -type f -name "*.log" -print -exec sudo truncate -s 0 {} \; 2> /dev/null
+  find /media/      -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /mnt/        -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /opt/        -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /root/       -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /run/        -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /sbin/       -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /srv/        -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /tmp/        -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /usr/        -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
+  find /var/        -type f -name "*.log" -print -exec sudo truncate -s 0 {} \;
 
-# Notificar inicio de ejecución del script
+# Vaciar journal
+  echo ""
+  echo ""
+  echo ""
+  find /var/        -type f -name "*.journal" -print -exec sudo truncate -s 0 {} \;
+
+# Notificar fin de ejecución del script
   echo ""
   echo -e "${cColorVerde}    Ejecución del script, finalizada.${cFinColor}"
   echo ""
