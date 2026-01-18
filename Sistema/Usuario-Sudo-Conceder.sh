@@ -9,13 +9,13 @@
 # Script de NiPeGun para conceder permisos sudo a un usuario específico
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Usuario-Sudo-Conceder.sh | bash -s [NombreDeUsuario] [Contraseña]
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Usuario-Sudo-Conceder.sh | bash -s [NombreDeUsuario] [Contraseña]
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Usuario-Sudo-Conceder.sh | sed 's-sudo--g' | bash -s [NombreDeUsuario] [Contraseña]
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Usuario-Sudo-Conceder.sh | sed 's-sudo--g' | bash -s [NombreDeUsuario] [Contraseña]
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Usuario-Sudo-Conceder.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Usuario-Sudo-Conceder.sh | nano -
 # ----------
 
 # Definir constantes de color
