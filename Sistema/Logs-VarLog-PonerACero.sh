@@ -9,10 +9,10 @@
 # Script de NiPeGun para poner a cero todos los logs de /var/log
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Logs-VarLog-PonerACero.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Logs-VarLog-PonerACero.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Logs-VarLog-PonerACero.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Logs-VarLog-PonerACero.sh | sed 's-sudo--g' | bash
 
 # ----------
 
@@ -51,6 +51,12 @@
   echo -e "${cColorVerde}    Ejecución del script, finalizada.${cFinColor}"
   echo ""
 
+# Vaciar journal
+  echo ""
+  echo ""
+  echo ""
+  find /var/log/ -type f -name "*.journal" -print -exec sudo truncate -s 0 {} \;
+
 # Listar el contenido de la carpeta /var/log
   echo ""
   echo "    Estado en el que quedaron los logs de /var/log/:"
@@ -58,8 +64,3 @@
   ls -ln /var/log/
   echo ""
 
-# Vaciar journal
-  echo ""
-  echo ""
-  echo ""
-  sudo journalctl --vacuum-time=1s
