@@ -83,7 +83,7 @@
   echo ""
   echo ""
   echo ""
-  find /var/        -type f -name "*.journal" -print -exec sudo truncate -s 0 {} \;
+  sudo journalctl --vacuum-time=1s
 
 # Notificar fin de ejecución del script
   echo ""
