@@ -15,12 +15,11 @@
 # Ejecución remota como root (para sistemas sin sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/Controladores/Graficas-NVIDIA-Controladores-DeWeb-Instalar.sh | sudo 's---g' | bash
 #
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/Controladores/Controladores/Graficas-NVIDIA-Controladores-DeWeb-Instalar.sh | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/Controladores/Graficas-NVIDIA-Controladores-DeWeb-Instalar.sh | bash -s Parámetro1 Parámetro2
+# Para ver el número de la última versión disponible:
+#  https://www.nvidia.com/es-es/drivers/unix/
 # ----------
+
+vNroUltVersEstable='580.126.09'
 
 # Definir constantes de color
   cColorAzul="\033[0;34m"
@@ -81,7 +80,7 @@ if [ $cVerSO == "13" ]; then
     echo ""
     echo "    Descargando el instalador..."
     echo ""
-    curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/580.105.08/NVIDIA-Linux-x86_64-580.105.08.run -o /tmp/nVidiaWebDriverInstall.run
+    curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/"$vNroUltVersEstable"/NVIDIA-Linux-x86_64-"$vNroUltVersEstable".run -o /tmp/nVidiaWebDriverInstall.run
     chmod +x /tmp/nVidiaWebDriverInstall.run
 
   # Parar entorno gráfico
@@ -98,7 +97,7 @@ if [ $cVerSO == "13" ]; then
     echo ""
     sudo sh /tmp/nVidiaWebDriverInstall.run
 
-  # Comprobar la grñafica
+  # Comprobar la gráfica
     nvidia-smi
 
   # Instalar CUDA Toolkit
@@ -134,7 +133,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Descargando el instalador..."
     echo ""
-    curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/580.76.05/NVIDIA-Linux-x86_64-580.76.05.run -o /tmp/nVidiaWebDriverInstall.run
+    curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/"$vNroUltVersEstable"/NVIDIA-Linux-x86_64-"$vNroUltVersEstable".run -o /tmp/nVidiaWebDriverInstall.run
     chmod +x /tmp/nVidiaWebDriverInstall.run
 
   # Parar entorno gráfico
