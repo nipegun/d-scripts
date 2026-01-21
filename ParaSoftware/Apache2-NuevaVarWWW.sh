@@ -86,7 +86,7 @@
       1 "Crear las carpetas de la web"                         on
       2 "Crear y activar la configuración de la web en Apache" on
       3 "Mejorar la seguridad"                                 off
-      4 "Creando la base de datos con su usuario"              off
+      4 "Crear la base de datos con su usuario"                off
       5 "Crear el certificado SSL de letsencrypt"              off
     )
     choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
@@ -131,87 +131,58 @@
               echo "  Mejorando la seguridad..."
               echo ""
               # Crear el archivo .htaccess con algunas opciones
-                echo "# BEGIN Medidas de seguridad"                                             | sudo tee    /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "  # IMPEDIR ACCESO NO AUTORIZADO AL ARCHIVO .HTACCESS"                    | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo '    <files ~ "^.*\.([Hh][Tt][Aa])">'                                      | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      order allow,deny"                                                   | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      deny from all"                                                      | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      satisfy all"                                                        | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "    </files>"                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "  # DESHABILITAR LA NAVEGACIÓN POR CARPETAS QUE NO TENGAN INDEX"          | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "    Options -Indexes"                                                     | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "  # IMPEDIR EL ACCESO DE CIERTAS IPS"                                     | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "    <Limit GET POST>"                                                     | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      order allow,deny"                                                   | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      deny from 45.45.45.45"                                              | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      allow from all"                                                     | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "    </Limit>"                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "  # PROTEGER EL ARCHIVO DE CONFIGURACIÓN DE WORDPRESS"                    | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "    <files wp-config.php>"                                                | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      order allow,deny"                                                   | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      deny from all"                                                      | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "    </files>"                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "  <IfModule mod_rewrite.c>"                                               | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "    RewriteEngine On"                                                     | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "    RewriteBase /"                                                        | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "    # BLOQUEAR EL ESCANEO DE AUTORES EN WORDPRESS"                        | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      RewriteCond %{QUERY_STRING} (author=\d+) [NC]"                      | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      RewriteRule .* - [F]"                                               | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "    # IMPEDIR EL HOTLINKING DE IMÁGENES"                                  | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      RewriteCond %{HTTP_REFERER} !^$"                                    | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?nuevaweb.com [NC]" | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?google.com [NC]"   | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      RewriteRule \.(jpg|jpeg|png|gif)$ – [NC,F,L]"                       | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "  </IfModule>"                                                            | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "# END Medidas de seguridad"                                               | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "# BEGIN Redirigir www. a sin www."                                        | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "  <IfModule mod_rewrite.c>"                                               | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      RewriteEngine On"                                                   | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      RewriteBase /"                                                      | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"                          | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "      RewriteRule ^(.*)$ http://%1/"$cExt" [R=301,L]"                     | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "  </IfModule>"                                                            | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo "# END Redirigir www. a sin www."                                          | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
-                echo ""                                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "# BEGIN Medidas de seguridad"                                                 | sudo tee    /var/www/"$cDominio""$cExt"/.htaccess
+                echo ""                                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "# Proteger .htaccess"                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "<FilesMatch \"^.*\\.([Hh][Tt][Aa])\">"                                        | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  Require all denied"                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "</FilesMatch>"                                                                | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo ""                                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "# Deshabilitar indexado"                                                      | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "Options -Indexes"                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo ""                                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "# Bloquear IPs"                                                               | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "<Limit GET POST>"                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  Require all granted"                                                        | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  Require not ip 45.45.45.45"                                                 | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "</Limit>"                                                                     | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo ""                                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "# Proteger wp-config.php"                                                     | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "<Files wp-config.php>"                                                        | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  Require all denied"                                                         | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "</Files>"                                                                     | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo ""                                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "<IfModule mod_rewrite.c>"                                                     | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  RewriteEngine On"                                                           | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  RewriteBase /"                                                              | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo ""                                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  # Bloquear enumeración de autores"                                          | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  RewriteCond %{QUERY_STRING} (^|&)author=\\d+ [NC]"                          | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  RewriteRule .* - [F]"                                                       | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo ""                                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  # Anti-hotlinking de imágenes"                                              | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  RewriteCond %{HTTP_REFERER} !^$"                                            | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  RewriteCond %{HTTP_REFERER} !^https\\?://(www\\.)?"$cDominio""$cExt"/ [NC]" | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  RewriteCond %{HTTP_REFERER} !^https\\?://(www\\.)?google\\.com/ [NC]"       | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo '  RewriteRule \.(jpg|jpeg|png|gif)$ - [F,NC,L]'                               | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "</IfModule>"                                                                  | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo ""                                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "# Redirigir www a sin www"                                                    | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "<IfModule mod_rewrite.c>"                                                     | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  RewriteEngine On"                                                           | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo '  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]'                                  | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]"                           | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "</IfModule>"                                                                  | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo ""                                                                             | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+                echo "# END Medidas de seguridad"                                                   | sudo tee -a /var/www/"$cDominio""$cExt"/.htaccess
+
 
               # Proteger los logs para que sólo se puedan ver con la sesión en WordPress iniciada
-                echo "#<Files *>"                                                                 | sudo tee    /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "#"                                                                          | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "#  Order Deny,Allow"                                                        | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "#  #Allow from 127.0.0.1"                                                   | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "#  Deny from all"                                                           | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "#"                                                                          | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "#</Files>"                                                                  | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo ""                                                                           | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "RewriteEngine On"                                                           | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo ""                                                                           | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "# Si alguien llega a la web desde otro lugar que no sea "$cDominio""$cExt"" | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?"$cDominio"\\"$cExt"/ [NC]"    | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo ""                                                                           | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "#, pide directamente por un archivo con extension log"                      | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]"                            | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo ""                                                                           | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "# y no tiene la sesion iniciada en WordPress"                               | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in.*$ [NC]"                 | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo ""                                                                           | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "# Redirigirlo a google.com"                                                 | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
-                echo "RewriteRule .*\.(log)$ http://google.com/ [NC]"                             | sudo tee -a /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+                echo "RewriteEngine On"                                      | sudo tee    /var/www/"$cDominio""$cExt"-logs/.htaccess
+                echo ""                                                      | sudo tee -a /var/www/"$cDominio""$cExt"-logs/.htaccess
+                echo "# Bloquear acceso a logs sin sesión WordPress"         | sudo tee -a /var/www/"$cDominio""$cExt"-logs/.htaccess
+                echo "RewriteCond %{HTTP_COOKIE} !wordpress_logged_in_ [NC]" | sudo tee -a /var/www/"$cDominio""$cExt"-logs/.htaccess
+                echo 'RewriteRule \.log$ https://google.com/ [R=302,L]'      | sudo tee -a /var/www/"$cDominio""$cExt"-logs/.htaccess
 
               # Reparar permisos y propietario de la carpeta
                 sudo chown www-data:www-data /var/www/"$cDominio""$cExt"/ -R
