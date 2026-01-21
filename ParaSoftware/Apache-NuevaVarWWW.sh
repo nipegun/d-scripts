@@ -8,9 +8,16 @@
 # ----------
 # Script de NiPeGun para crear nuevas webs en /var/www
 #
-# Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Web-Apache-NuevaVarWWW.sh | bash -s Extension Dominio Password
+# Ejecución remota (puede requerir permisos sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Apache-NuevaVarWWW.sh | bash -s Extension Dominio Password
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/Apache-NuevaVarWWW.sh | sed 's-sudo--g' | bash -s Extension Dominio Password
 # ----------
+
+cPassBD=""
+cDominio=""
+cExt=""
 
 vCantParamCorr=3
 
@@ -20,9 +27,9 @@ cFinColor='\033[0m'
 
 if [ $# -ne $vCantParamCorr ]; then
   echo ""
-  echo -e "${cColorRojo}Mal uso del script. Se le deben pasar tres parámetros obligatorios:${cFinColor}"
+  echo -e "${cColorRojo}  Mal uso del script. Se le deben pasar tres parámetros obligatorios:${cFinColor}"
   echo ""
-  echo -e "${cColorVerde}[ExtensionDelDominio] [NombreDeLaWeb] y [Password]${cFinColor}"
+  echo -e "${cColorVerde}[ExtensionDelDominio] [Dominio] y [Password]${cFinColor}"
   echo ""
   echo "Ejemplo:"
   echo ""
@@ -33,7 +40,7 @@ if [ $# -ne $vCantParamCorr ]; then
   exit
 else
   # Comprobar si el nombre de usuario MySQL deseado tiene mas de 16 caracteres
-    nombre_mysql_deseado=$2
+    nombre_mysql_deseado="$cDominio"
 
   if [ ${#nombre_mysql_deseado} -gt 16 ]; then
 
@@ -52,21 +59,21 @@ else
       echo ""
       echo "$(tput setaf 1)Creando la base de datos con su usuario... $(tput sgr 0)"
       echo ""
-      /root/scripts/d-scripts/MySQL-BaseDeDatos-Crear.sh $2 $nombre_mysql_ok $3
+      /root/scripts/d-scripts/MySQL-BaseDeDatos-Crear.sh "$cDominio" $nombre_mysql_ok "$cPassBD"
 
     # Crear las carpetas de la web
-      mkdir -p /var/www/$2$1/_/logs/
-      echo "WEB OK" > /var/www/$2$1/index.html
+      mkdir -p /var/www/"$cDominio""$cExt"/_/logs/
+      echo "WEB OK" > /var/www/"$cDominio""$cExt"/index.html
 
     # Crear la web en Apache
-      cp /etc/apache2/sites-available/nuevawebvar.conf /etc/apache2/sites-available/$2$1.conf
-      sed -i -e "s/nuevawebvar.com/$2$1/g" /etc/apache2/sites-available/$2$1.conf
+      cp /etc/apache2/sites-available/nuevawebvar.conf /etc/apache2/sites-available/"$cDominio""$cExt".conf
+      sed -i -e "s/nuevawebvar.com/"$cDominio""$cExt"/g" /etc/apache2/sites-available/"$cDominio""$cExt".conf
 
     # Activar la configuración de la nueva Web en Apache
       echo ""
       echo "$(tput setaf 1)Activando la web en apache... $(tput sgr 0)"
       echo ""
-      a2ensite $2$1
+      a2ensite "$cDominio""$cExt"
 
     # Crear el certificado SSL, deteninendo Apache
       echo ""
@@ -78,7 +85,7 @@ else
       apt-get -y install
       apt-get -y install certbot
       apt-get -y install python3-certbot-apache
-      certbot --apache -d $2$1 -d www.$2$1
+      certbot --apache -d "$cDominio""$cExt" -d www."$cDominio""$cExt"
 
     # Volver a arrancar Apache
       echo ""
@@ -87,92 +94,92 @@ else
       service apache2 start
 
     # Crear el archivo .htaccess con algunas opciones
-      echo "# BEGIN Medidas de seguridad"                                              > /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  # IMPEDIR ACCESO NO AUTORIZADO AL ARCHIVO .HTACCESS"                    >> /var/www/$2$1/.htaccess
-      echo '    <files ~ "^.*\.([Hh][Tt][Aa])">'                                      >> /var/www/$2$1/.htaccess
-      echo "      order allow,deny"                                                   >> /var/www/$2$1/.htaccess
-      echo "      deny from all"                                                      >> /var/www/$2$1/.htaccess
-      echo "      satisfy all"                                                        >> /var/www/$2$1/.htaccess
-      echo "    </files>"                                                             >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  # DESHABILITAR LA NAVEGACIÓN POR CARPETAS QUE NO TENGAN INDEX"          >> /var/www/$2$1/.htaccess
-      echo "    Options -Indexes"                                                     >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  # IMPEDIR EL ACCESO DE CIERTAS IPS"                                     >> /var/www/$2$1/.htaccess
-      echo "    <Limit GET POST>"                                                     >> /var/www/$2$1/.htaccess
-      echo "      order allow,deny"                                                   >> /var/www/$2$1/.htaccess
-      echo "      deny from 45.45.45.45"                                              >> /var/www/$2$1/.htaccess
-      echo "      allow from all"                                                     >> /var/www/$2$1/.htaccess
-      echo "    </Limit>"                                                             >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  # PROTEGER EL ARCHIVO DE CONFIGURACIÓN DE WORDPRESS"                    >> /var/www/$2$1/.htaccess
-      echo "    <files wp-config.php>"                                                >> /var/www/$2$1/.htaccess
-      echo "      order allow,deny"                                                   >> /var/www/$2$1/.htaccess
-      echo "      deny from all"                                                      >> /var/www/$2$1/.htaccess
-      echo "    </files>"                                                             >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  <IfModule mod_rewrite.c>"                                               >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "    RewriteEngine On"                                                     >> /var/www/$2$1/.htaccess
-      echo "    RewriteBase /"                                                        >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "    # BLOQUEAR EL ESCANEO DE AUTORES EN WORDPRESS"                        >> /var/www/$2$1/.htaccess
-      echo "      RewriteCond %{QUERY_STRING} (author=\d+) [NC]"                      >> /var/www/$2$1/.htaccess
-      echo "      RewriteRule .* - [F]"                                               >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "    # IMPEDIR EL HOTLINKING DE IMÁGENES"                                  >> /var/www/$2$1/.htaccess
-      echo "      RewriteCond %{HTTP_REFERER} !^$"                                    >> /var/www/$2$1/.htaccess
-      echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?nuevaweb.com [NC]" >> /var/www/$2$1/.htaccess
-      echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?google.com [NC]"   >> /var/www/$2$1/.htaccess
-      echo "      RewriteRule \.(jpg|jpeg|png|gif)$ – [NC,F,L]"                       >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  </IfModule>"                                                            >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "# END Medidas de seguridad"                                               >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "# BEGIN Redirigir www. a sin www."                                        >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  <IfModule mod_rewrite.c>"                                               >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "      RewriteEngine On"                                                   >> /var/www/$2$1/.htaccess
-      echo "      RewriteBase /"                                                      >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "      RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"                          >> /var/www/$2$1/.htaccess
-      echo "      RewriteRule ^(.*)$ http://%1/$1 [R=301,L]"                          >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  </IfModule>"                                                            >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "# END Redirigir www. a sin www."                                          >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
+      echo "# BEGIN Medidas de seguridad"                                              > /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  # IMPEDIR ACCESO NO AUTORIZADO AL ARCHIVO .HTACCESS"                    >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo '    <files ~ "^.*\.([Hh][Tt][Aa])">'                                      >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      order allow,deny"                                                   >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      deny from all"                                                      >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      satisfy all"                                                        >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    </files>"                                                             >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  # DESHABILITAR LA NAVEGACIÓN POR CARPETAS QUE NO TENGAN INDEX"          >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    Options -Indexes"                                                     >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  # IMPEDIR EL ACCESO DE CIERTAS IPS"                                     >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    <Limit GET POST>"                                                     >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      order allow,deny"                                                   >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      deny from 45.45.45.45"                                              >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      allow from all"                                                     >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    </Limit>"                                                             >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  # PROTEGER EL ARCHIVO DE CONFIGURACIÓN DE WORDPRESS"                    >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    <files wp-config.php>"                                                >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      order allow,deny"                                                   >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      deny from all"                                                      >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    </files>"                                                             >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  <IfModule mod_rewrite.c>"                                               >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    RewriteEngine On"                                                     >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    RewriteBase /"                                                        >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    # BLOQUEAR EL ESCANEO DE AUTORES EN WORDPRESS"                        >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteCond %{QUERY_STRING} (author=\d+) [NC]"                      >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteRule .* - [F]"                                               >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    # IMPEDIR EL HOTLINKING DE IMÁGENES"                                  >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteCond %{HTTP_REFERER} !^$"                                    >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?nuevaweb.com [NC]" >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?google.com [NC]"   >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteRule \.(jpg|jpeg|png|gif)$ – [NC,F,L]"                       >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  </IfModule>"                                                            >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "# END Medidas de seguridad"                                               >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "# BEGIN Redirigir www. a sin www."                                        >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  <IfModule mod_rewrite.c>"                                               >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteEngine On"                                                   >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteBase /"                                                      >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"                          >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteRule ^(.*)$ http://%1/"$cExt" [R=301,L]"                          >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  </IfModule>"                                                            >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "# END Redirigir www. a sin www."                                          >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
 
     # Proteger los logs para que sólo se puedan ver con la sesión en WordPress iniciada
-      echo "#<Files *>"                                                    > /var/www/$2$1/_/logs/.htaccess
-      echo "#"                                                            >> /var/www/$2$1/_/logs/.htaccess
-      echo "#  Order Deny,Allow"                                          >> /var/www/$2$1/_/logs/.htaccess
-      echo "#  #Allow from 127.0.0.1"                                     >> /var/www/$2$1/_/logs/.htaccess
-      echo "#  Deny from all"                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo "#"                                                            >> /var/www/$2$1/_/logs/.htaccess
-      echo "#</Files>"                                                    >> /var/www/$2$1/_/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo "RewriteEngine On"                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo "# Si alguien llega a la web desde otro lugar que no sea $2$1" >> /var/www/$2$1/_/logs/.htaccess
-      echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?$2\\$1/ [NC]"    >> /var/www/$2$1/_/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo "#, pide directamente por un archivo con extension log"        >> /var/www/$2$1/_/logs/.htaccess
-      echo "RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]"              >> /var/www/$2$1/_/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo "# y no tiene la sesion iniciada en WordPress"                 >> /var/www/$2$1/_/logs/.htaccess
-      echo "RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in.*$ [NC]"   >> /var/www/$2$1/_/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo "# Redirigirlo a google.com"                                   >> /var/www/$2$1/_/logs/.htaccess
-      echo "RewriteRule .*\.(log)$ http://google.com/ [NC]"               >> /var/www/$2$1/_/logs/.htaccess
+      echo "#<Files *>"                                                    > /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#"                                                            >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#  Order Deny,Allow"                                          >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#  #Allow from 127.0.0.1"                                     >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#  Deny from all"                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#"                                                            >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#</Files>"                                                    >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo ""                                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "RewriteEngine On"                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo ""                                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "# Si alguien llega a la web desde otro lugar que no sea "$cDominio""$cExt"" >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?"$cDominio"\\"$cExt"/ [NC]"    >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo ""                                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#, pide directamente por un archivo con extension log"        >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]"              >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo ""                                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "# y no tiene la sesion iniciada en WordPress"                 >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in.*$ [NC]"   >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo ""                                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "# Redirigirlo a google.com"                                   >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "RewriteRule .*\.(log)$ http://google.com/ [NC]"               >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
 
     # Reparar permisos y propietario de la carpeta
-      chown www-data:www-data /var/www/$2$1/ -R
-      find /var/www/$2$1/ -type d -exec chmod 755 {} \;
-      find /var/www/$2$1/ -type f -exec chmod 644 {} \;
+      chown www-data:www-data /var/www/"$cDominio""$cExt"/ -R
+      find /var/www/"$cDominio""$cExt"/ -type d -exec chmod 755 {} \;
+      find /var/www/"$cDominio""$cExt"/ -type f -exec chmod 644 {} \;
       chown -v root:root /var/www
 
     # Mostrar el resultado de la operacion
@@ -181,9 +188,9 @@ else
       echo "Toda La operación de agregar una nueva web se completó correctamente. Los datos son los siguientes:"
       echo ""
       echo "BASE DE DATOS MYSQL:"
-      echo "Nombre: $2"
+      echo "Nombre: "$cDominio""
       echo "Usuario: $nombre_mysql_ok"
-      echo "Contraseña: $3"
+      echo "Contraseña: "$cPassBD""
       echo ""
       echo "--------------------------------"
       echo ""
@@ -195,21 +202,21 @@ else
       echo ""
       echo "$(tput setaf 1)Creando la base de datos con su usuario... $(tput sgr 0)"
       echo ""
-      /root/scripts/d-scripts/MySQL-BaseDeDatos-Crear.sh $2 $2 $3
+      /root/scripts/d-scripts/MySQL-BaseDeDatos-Crear.sh "$cDominio" "$cDominio" "$cPassBD"
 
     # Crear las carpetas de la web
-      mkdir -p /var/www/$2$1/_/logs/
-      echo "WEB OK" > /var/www/$2$1/index.html
+      mkdir -p /var/www/"$cDominio""$cExt"/_/logs/
+      echo "WEB OK" > /var/www/"$cDominio""$cExt"/index.html
 
     # Crear la web en Apache
-      cp /etc/apache2/sites-available/nuevawebvar.conf /etc/apache2/sites-available/$2$1.conf
-      sed -i -e "s/nuevawebvar.com/$2$1/g" /etc/apache2/sites-available/$2$1.conf
+      cp /etc/apache2/sites-available/nuevawebvar.conf /etc/apache2/sites-available/"$cDominio""$cExt".conf
+      sed -i -e "s/nuevawebvar.com/"$cDominio""$cExt"/g" /etc/apache2/sites-available/"$cDominio""$cExt".conf
 
     # Activar la configuración de la nueva Web en Apache
       echo ""
       echo "$(tput setaf 1)Activando la web en apache... $(tput sgr 0)"
       echo ""
-      a2ensite $2$1
+      a2ensite "$cDominio""$cExt"
 
     # Crear el certificado SSL, deteninendo Apache
       echo ""
@@ -220,7 +227,7 @@ else
       apt-get update
       apt-get -y install certbot
       apt-get -y install python3-certbot-apache
-      certbot --apache -d $2$1 -d www.$2$1
+      certbot --apache -d "$cDominio""$cExt" -d www."$cDominio""$cExt"
 
     # Volver a arrancar Apache
       echo ""
@@ -229,92 +236,92 @@ else
       service apache2 start
 
     # Crear el archivo .htaccess con algunas opciones
-      echo "# BEGIN Medidas de seguridad"                                              > /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  # IMPEDIR ACCESO NO AUTORIZADO AL ARCHIVO .HTACCESS"                    >> /var/www/$2$1/.htaccess
-      echo '    <files ~ "^.*\.([Hh][Tt][Aa])">'                                      >> /var/www/$2$1/.htaccess
-      echo "      order allow,deny"                                                   >> /var/www/$2$1/.htaccess
-      echo "      deny from all"                                                      >> /var/www/$2$1/.htaccess
-      echo "      satisfy all"                                                        >> /var/www/$2$1/.htaccess
-      echo "    </files>"                                                             >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  # DESHABILITAR LA NAVEGACIÓN POR CARPETAS QUE NO TENGAN INDEX"          >> /var/www/$2$1/.htaccess
-      echo "    Options -Indexes"                                                     >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  # IMPEDIR EL ACCESO DE CIERTAS IPS"                                     >> /var/www/$2$1/.htaccess
-      echo "    <Limit GET POST>"                                                     >> /var/www/$2$1/.htaccess
-      echo "      order allow,deny"                                                   >> /var/www/$2$1/.htaccess
-      echo "      deny from 45.45.45.45"                                              >> /var/www/$2$1/.htaccess
-      echo "      allow from all"                                                     >> /var/www/$2$1/.htaccess
-      echo "    </Limit>"                                                             >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  # PROTEGER EL ARCHIVO DE CONFIGURACIÓN DE WORDPRESS"                    >> /var/www/$2$1/.htaccess
-      echo "    <files wp-config.php>"                                                >> /var/www/$2$1/.htaccess
-      echo "      order allow,deny"                                                   >> /var/www/$2$1/.htaccess
-      echo "      deny from all"                                                      >> /var/www/$2$1/.htaccess
-      echo "    </files>"                                                             >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  <IfModule mod_rewrite.c>"                                               >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "    RewriteEngine On"                                                     >> /var/www/$2$1/.htaccess
-      echo "    RewriteBase /"                                                        >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "    # BLOQUEAR EL ESCANEO DE AUTORES EN WORDPRESS"                        >> /var/www/$2$1/.htaccess
-      echo "      RewriteCond %{QUERY_STRING} (author=\d+) [NC]"                      >> /var/www/$2$1/.htaccess
-      echo "      RewriteRule .* - [F]"                                               >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "    # IMPEDIR EL HOTLINKING DE IMÁGENES"                                  >> /var/www/$2$1/.htaccess
-      echo "      RewriteCond %{HTTP_REFERER} !^$"                                    >> /var/www/$2$1/.htaccess
-      echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?nuevaweb.com [NC]" >> /var/www/$2$1/.htaccess
-      echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?google.com [NC]"   >> /var/www/$2$1/.htaccess
-      echo "      RewriteRule \.(jpg|jpeg|png|gif)$ – [NC,F,L]"                       >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  </IfModule>"                                                            >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "# END Medidas de seguridad"                                               >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "# BEGIN Redirigir www. a sin www."                                        >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  <IfModule mod_rewrite.c>"                                               >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "      RewriteEngine On"                                                   >> /var/www/$2$1/.htaccess
-      echo "      RewriteBase /"                                                      >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "      RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"                          >> /var/www/$2$1/.htaccess
-      echo "      RewriteRule ^(.*)$ http://%1/$1 [R=301,L]"                          >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "  </IfModule>"                                                            >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
-      echo "# END Redirigir www. a sin www."                                          >> /var/www/$2$1/.htaccess
-      echo ""                                                                         >> /var/www/$2$1/.htaccess
+      echo "# BEGIN Medidas de seguridad"                                              > /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  # IMPEDIR ACCESO NO AUTORIZADO AL ARCHIVO .HTACCESS"                    >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo '    <files ~ "^.*\.([Hh][Tt][Aa])">'                                      >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      order allow,deny"                                                   >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      deny from all"                                                      >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      satisfy all"                                                        >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    </files>"                                                             >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  # DESHABILITAR LA NAVEGACIÓN POR CARPETAS QUE NO TENGAN INDEX"          >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    Options -Indexes"                                                     >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  # IMPEDIR EL ACCESO DE CIERTAS IPS"                                     >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    <Limit GET POST>"                                                     >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      order allow,deny"                                                   >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      deny from 45.45.45.45"                                              >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      allow from all"                                                     >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    </Limit>"                                                             >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  # PROTEGER EL ARCHIVO DE CONFIGURACIÓN DE WORDPRESS"                    >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    <files wp-config.php>"                                                >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      order allow,deny"                                                   >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      deny from all"                                                      >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    </files>"                                                             >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  <IfModule mod_rewrite.c>"                                               >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    RewriteEngine On"                                                     >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    RewriteBase /"                                                        >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    # BLOQUEAR EL ESCANEO DE AUTORES EN WORDPRESS"                        >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteCond %{QUERY_STRING} (author=\d+) [NC]"                      >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteRule .* - [F]"                                               >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "    # IMPEDIR EL HOTLINKING DE IMÁGENES"                                  >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteCond %{HTTP_REFERER} !^$"                                    >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?nuevaweb.com [NC]" >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?google.com [NC]"   >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteRule \.(jpg|jpeg|png|gif)$ – [NC,F,L]"                       >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  </IfModule>"                                                            >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "# END Medidas de seguridad"                                               >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "# BEGIN Redirigir www. a sin www."                                        >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  <IfModule mod_rewrite.c>"                                               >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteEngine On"                                                   >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteBase /"                                                      >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"                          >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteRule ^(.*)$ http://%1/"$cExt" [R=301,L]"                          >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "  </IfModule>"                                                            >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "# END Redirigir www. a sin www."                                          >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
 
     # Proteger los logs para que sólo se puedan ver con la sesión en WordPress iniciada
-      echo "#<Files *>"                                                    > /var/www/$2$1/_/logs/.htaccess
-      echo "#"                                                            >> /var/www/$2$1/_/logs/.htaccess
-      echo "#  Order Deny,Allow"                                          >> /var/www/$2$1/_/logs/.htaccess
-      echo "#  #Allow from 127.0.0.1"                                     >> /var/www/$2$1/_/logs/.htaccess
-      echo "#  Deny from all"                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo "#"                                                            >> /var/www/$2$1/_/logs/.htaccess
-      echo "#</Files>"                                                    >> /var/www/$2$1/_/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo "RewriteEngine On"                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo "# Si alguien llega a la web desde otro lugar que no sea $2$1" >> /var/www/$2$1/_/logs/.htaccess
-      echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?$2\\$1/ [NC]"    >> /var/www/$2$1/_/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo "#, pide directamente por un archivo con extension log"        >> /var/www/$2$1/_/logs/.htaccess
-      echo "RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]"              >> /var/www/$2$1/_/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo "# y no tiene la sesion iniciada en WordPress"                 >> /var/www/$2$1/_/logs/.htaccess
-      echo "RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in.*$ [NC]"   >> /var/www/$2$1/_/logs/.htaccess
-      echo ""                                                             >> /var/www/$2$1/_/logs/.htaccess
-      echo "# Redirigirlo a google.com"                                   >> /var/www/$2$1/_/logs/.htaccess
-      echo "RewriteRule .*\.(log)$ http://google.com/ [NC]"               >> /var/www/$2$1/_/logs/.htaccess
+      echo "#<Files *>"                                                    > /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#"                                                            >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#  Order Deny,Allow"                                          >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#  #Allow from 127.0.0.1"                                     >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#  Deny from all"                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#"                                                            >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#</Files>"                                                    >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo ""                                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "RewriteEngine On"                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo ""                                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "# Si alguien llega a la web desde otro lugar que no sea "$cDominio""$cExt"" >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "RewriteCond %{HTTP_REFERER} !^http://(www\.)?"$cDominio"\\"$cExt"/ [NC]"    >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo ""                                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "#, pide directamente por un archivo con extension log"        >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]"              >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo ""                                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "# y no tiene la sesion iniciada en WordPress"                 >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in.*$ [NC]"   >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo ""                                                             >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "# Redirigirlo a google.com"                                   >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
+      echo "RewriteRule .*\.(log)$ http://google.com/ [NC]"               >> /var/www/"$cDominio""$cExt"/_/logs/.htaccess
 
     # Reparar permisos y propietario de la carpeta
-      chown www-data:www-data /var/www/$2$1/ -R
-      find /var/www/$2$1/ -type d -exec chmod 755 {} \;
-      find /var/www/$2$1/ -type f -exec chmod 644 {} \;
+      chown www-data:www-data /var/www/"$cDominio""$cExt"/ -R
+      find /var/www/"$cDominio""$cExt"/ -type d -exec chmod 755 {} \;
+      find /var/www/"$cDominio""$cExt"/ -type f -exec chmod 644 {} \;
       chown -v root:root /var/www
 
     # Mostrar el resultado de la operacion
@@ -324,9 +331,9 @@ else
       echo "Toda La operación de agregar una nueva web se completó correctamente. Los datos son los siguientes:"
       echo ""
       echo "BASE DE DATOS MYSQL:"
-      echo "Nombre: $2"
-      echo "Usuario: $2"
-      echo "Contraseña: $3"
+      echo "Nombre: "$cDominio""
+      echo "Usuario: "$cDominio""
+      echo "Contraseña: "$cPassBD""
       echo ""
       echo "--------------------------------"
       echo ""
