@@ -8,8 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar el servidor web con apache2 en Debian
 #
-# Ejecución remota
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Web-apache2-InstalarYConfigurar.sh | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Web-apache2-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes
@@ -84,9 +87,6 @@ if [ $cVerSO == "13" ]; then
               sudo apt-get -y upgrade
               sudo apt-get -y dist-upgrade
               sudo apt-get -y autoremove
-
-            # Determinar la última versión de PHP
-              vUltVersPHP=$(apt-cache search php | grep etapackage | grep php | cut -d' ' -f1 | sed 's|[^0-9.]*||g')
         
             # Instalar paquetes de apache y relacionados
               echo ""
@@ -125,20 +125,23 @@ if [ $cVerSO == "13" ]; then
               echo ""
               echo "      Instalando paquetes de PHP $vUltVersPHP..."
               echo ""
-              sudo apt-get -y install php"$vUltVersPHP"-common
-              sudo apt-get -y install php"$vUltVersPHP"-gd
-              sudo apt-get -y install php"$vUltVersPHP"-curl
-              sudo apt-get -y install php"$vUltVersPHP"-cli
-              sudo apt-get -y install php"$vUltVersPHP"-dev
-              sudo apt-get -y install php"$vUltVersPHP"-mysql
-              sudo apt-get -y install php"$vUltVersPHP"-mcrypt
-              sudo apt-get -y install php"$vUltVersPHP"-mbstring
-              sudo apt-get -y install php-json
-              sudo apt-get -y install php-intl
-              sudo apt-get -y install php-redis
-              sudo apt-get -y install php-imagick
-              sudo apt-get -y install php-pear
-              sudo apt-get -y install libapache2-mod-php"$vUltVersPHP"
+              # Determinar la última versión de PHP
+                vUltVersPHP=$(apt-cache search php | grep etapackage | grep php | cut -d' ' -f1 | sed 's|[^0-9.]*||g')
+              # Instalar paquetes
+                sudo apt-get -y install php"$vUltVersPHP"-common
+                sudo apt-get -y install php"$vUltVersPHP"-gd
+                sudo apt-get -y install php"$vUltVersPHP"-curl
+                sudo apt-get -y install php"$vUltVersPHP"-cli
+                sudo apt-get -y install php"$vUltVersPHP"-dev
+                sudo apt-get -y install php"$vUltVersPHP"-mysql
+                sudo apt-get -y install php"$vUltVersPHP"-mcrypt
+                sudo apt-get -y install php"$vUltVersPHP"-mbstring
+                sudo apt-get -y install php-json
+                sudo apt-get -y install php-intl
+                sudo apt-get -y install php-redis
+                sudo apt-get -y install php-imagick
+                sudo apt-get -y install php-pear
+                sudo apt-get -y install libapache2-mod-php"$vUltVersPHP"
             # Activar módulos de PHP
               echo ""
               echo "      Activando módulos de PHP..."
@@ -170,8 +173,8 @@ if [ $cVerSO == "13" ]; then
               echo ""
               echo "      Modificando el servidor SSH..."
               echo ""
-              #apt-get -y install tasksel
-              #tasksel install ssh-server
+              sudo apt-get -y install tasksel
+              sudo tasksel install ssh-server
               sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak.ori
               echo ""                             | sudo tee -a /etc/ssh/sshd_config
               echo "Match Group webmasters"       | sudo tee -a /etc/ssh/sshd_config
