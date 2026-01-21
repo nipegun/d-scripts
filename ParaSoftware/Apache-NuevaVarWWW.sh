@@ -19,29 +19,37 @@ cPassBD=""
 cDominio=""
 cExt=""
 
-vCantParamCorr=3
-
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-if [ $# -ne $vCantParamCorr ]; then
-  echo ""
-  echo -e "${cColorRojo}  Mal uso del script. Se le deben pasar tres parámetros obligatorios:${cFinColor}"
-  echo ""
-  echo -e "${cColorVerde}[ExtensionDelDominio] [Dominio] y [Password]${cFinColor}"
-  echo ""
-  echo "Ejemplo:"
-  echo ""
-  echo -e "$0 ${cColorVerde}.org unawebcualquiera 12345678${cFinColor}"
-  echo ""
-  echo "NOTA: El nombre de la Web también se utilizará como nombre de usuario MySQL."
-  echo ""
-  exit
-else
-  # Comprobar si el nombre de usuario MySQL deseado tiene mas de 16 caracteres
-    nombre_mysql_deseado="$cDominio"
+# Definir la cantidad de argumentos esperados
+  cCantArgsEsperados=3
 
+# Comprobar que se hayan pasado la cantidad de argumentos esperados. Abortar el script si no.
+  if [ $# -ne $cCantArgsEsperados ]
+    then
+      echo ""
+      echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
+      echo ""
+      if [[ "$0" == "bash" ]]; then
+        vNombreDelScript="script.sh"
+      else
+        vNombreDelScript="$0"
+      fi
+      echo "    $vNombreDelScript [ExtensionDelDominio] [Dominio] y [Password]"
+      echo ""
+      echo "  Ejemplo:"
+      echo ""
+      echo "    $vNombreDelScript '.org' 'unawebcualquiera' '12345678'"
+      echo ""
+      echo "  NOTA: El nombre de la Web también se utilizará como nombre de usuario MySQL."
+      echo ""
+      exit
+  fi
+
+# Comprobar si el nombre de usuario MySQL deseado tiene mas de 16 caracteres
+  nombre_mysql_deseado="$cDominio"
   if [ ${#nombre_mysql_deseado} -gt 16 ]; then
 
     # Acortar nombre de usuario MySQL a 16 caracteres
@@ -57,7 +65,7 @@ else
 
     # Crear la base de datos
       echo ""
-      echo "$(tput setaf 1)Creando la base de datos con su usuario... $(tput sgr 0)"
+      echo "    Creando la base de datos con su usuario..."
       echo ""
       /root/scripts/d-scripts/MySQL-BaseDeDatos-Crear.sh "$cDominio" $nombre_mysql_ok "$cPassBD"
 
@@ -71,13 +79,13 @@ else
 
     # Activar la configuración de la nueva Web en Apache
       echo ""
-      echo "$(tput setaf 1)Activando la web en apache... $(tput sgr 0)"
+      echo "    Activando la web en apache..."
       echo ""
       a2ensite "$cDominio""$cExt"
 
     # Crear el certificado SSL, deteninendo Apache
       echo ""
-      echo "$(tput setaf 1)Creando el certificado SSL... $(tput sgr 0)"
+      echo "    Creando el certificado SSL..."
       echo ""
       iptables -A INPUT -p tcp --dport 443 -j ACCEPT
       service apache2 stop
@@ -89,7 +97,7 @@ else
 
     # Volver a arrancar Apache
       echo ""
-      echo "$(tput setaf 1)Re-arrancando Apache... $(tput sgr 0)"
+      echo "  Re-arrancando Apache..."
       echo ""
       service apache2 start
 
@@ -146,7 +154,7 @@ else
       echo "      RewriteBase /"                                                      >> /var/www/"$cDominio""$cExt"/.htaccess
       echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
       echo "      RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]"                          >> /var/www/"$cDominio""$cExt"/.htaccess
-      echo "      RewriteRule ^(.*)$ http://%1/"$cExt" [R=301,L]"                          >> /var/www/"$cDominio""$cExt"/.htaccess
+      echo "      RewriteRule ^(.*)$ http://%1/"$cExt" [R=301,L]"                     >> /var/www/"$cDominio""$cExt"/.htaccess
       echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
       echo "  </IfModule>"                                                            >> /var/www/"$cDominio""$cExt"/.htaccess
       echo ""                                                                         >> /var/www/"$cDominio""$cExt"/.htaccess
@@ -200,7 +208,7 @@ else
 
     # Crear la base de datos
       echo ""
-      echo "$(tput setaf 1)Creando la base de datos con su usuario... $(tput sgr 0)"
+      echo "    Creando la base de datos con su usuario..."
       echo ""
       /root/scripts/d-scripts/MySQL-BaseDeDatos-Crear.sh "$cDominio" "$cDominio" "$cPassBD"
 
@@ -214,13 +222,13 @@ else
 
     # Activar la configuración de la nueva Web en Apache
       echo ""
-      echo "$(tput setaf 1)Activando la web en apache... $(tput sgr 0)"
+      echo "    Activando la web en apache..."
       echo ""
       a2ensite "$cDominio""$cExt"
 
     # Crear el certificado SSL, deteninendo Apache
       echo ""
-      echo "$(tput setaf 1)Creando el certificado SSL... $(tput sgr 0)"
+      echo "    Creando el certificado SSL..."
       echo ""
       iptables -A INPUT -p tcp --dport 443 -j ACCEPT
       service apache2 stop
@@ -231,7 +239,7 @@ else
 
     # Volver a arrancar Apache
       echo ""
-      echo "$(tput setaf 1)Re-arrancando Apache... $(tput sgr 0)"
+      echo "    Re-arrancando Apache..."
       echo ""
       service apache2 start
 
@@ -338,5 +346,3 @@ else
       echo "--------------------------------"
       echo ""
   fi
-fi
-
