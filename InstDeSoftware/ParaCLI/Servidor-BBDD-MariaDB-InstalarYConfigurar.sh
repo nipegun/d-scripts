@@ -8,11 +8,11 @@
 # ----------
 # Script de NiPeGun para instalar y configurar MariaDB en Debian
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-BBDD-MariaDB-InstalarYConfigurar.sh | bash
 #
-# Ejecución remota con parámetros:
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-BBDD-MariaDB-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
+# Ejecución remota como root (para permisos sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-BBDD-MariaDB-InstalarYConfigurar.sh | sed 's-sudo--g'| bash
 # ----------
 
 vMariaDBRootPass='P@ssw0rd'
@@ -26,12 +26,6 @@ vMariaDBRootPass='P@ssw0rd'
  
 # Registrar la fecha de ejecución del script
   vFecha=$(date +a%Ym%md%d@%T)
-
-# Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
-    echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
-    exit
-  fi
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
