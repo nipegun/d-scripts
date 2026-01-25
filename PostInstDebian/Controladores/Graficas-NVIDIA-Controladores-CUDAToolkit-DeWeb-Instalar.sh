@@ -58,34 +58,22 @@ if [ $cVerSO == "13" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de los controladores NVIDIA para Debian 13 (x)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Aunque la versión 13.0 del script para Debian 12 instala correctamente.${cFinColor}"
-  echo ""
-
-elif [ $cVerSO == "12" ]; then
-
-  echo ""
-  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de los controladores NVIDIA para Debian 12 (Bookworm)...${cFinColor}"
-  echo ""
-
-    # Crear el menú
-      # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
-        if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
-          echo ""
-          echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
-          echo ""
-          sudo apt-get -y update
-          sudo apt-get -y install dialog
-          echo ""
-        fi
-      #menu=(dialog --timeout 5 --checklist "Marca las opciones que quieras instalar:" 22 96 16)
-      menu=(dialog --checklist "Marca la versión de CUDA Toolkit que quieres instalar:" 22 96 16)
-        opciones=(
-          1 "13.0" on
-          2 "12.8" off
-        )
+  # Crear el menú
+    # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install dialog
+        echo ""
+      fi
+    menu=(dialog --checklist "Marca la versión de CUDA Toolkit que quieres instalar:" 22 96 16)
+      opciones=(
+        1 "13.1" on
+        2 "12.8" off
+      )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
-      #clear
 
       for choice in $choices
         do
@@ -101,11 +89,88 @@ elif [ $cVerSO == "12" ]; then
                 echo ""
                 echo "    Instalando CUDA Toolkit..."
                 echo ""
-                curl -L https://developer.download.nvidia.com/compute/cuda/13.0.0/local_installers/cuda-repo-debian12-13-0-local_13.0.0-580.65.06-1_amd64.deb -o /tmp/CudaRepo.deb 
+                curl -L https://developer.download.nvidia.com/compute/cuda/13.1.1/local_installers/cuda-repo-debian13-13-1-local_13.1.1-590.48.01-1_amd64.deb -o /tmp/CudaRepo.deb
                 sudo apt -y install /tmp/CudaRepo.deb
-                sudo cp -v /var/cuda-repo-debian12-13-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
+                sudo cp /var/cuda-repo-debian13-13-1-local/cuda-*-keyring.gpg /usr/share/keyrings/
                 sudo apt-get update
-                sudo apt-get -y install cuda-toolkit-13-0
+                sudo apt-get -y install cuda-toolkit-13-1
+
+              # Notificar fin de ejecución del script
+                echo ""
+                echo "    Script de instalación de CUDA Toolkit, finalizado."
+                echo ""
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Instalando CUDA Toolkit 12.8..."
+              echo ""
+
+              # Instalar CUDA Toolkit
+                echo ""
+                echo "    Instalando CUDA Toolkit..."
+                echo ""
+                curl -L https://developer.download.nvidia.com/compute/cuda/12.8.0/local_installers/cuda-repo-debian12-12-8-local_12.8.0-570.86.10-1_amd64.deb -o /tmp/CudaRepo.deb
+                sudo apt -y install /tmp/CudaRepo.deb
+                sudo cp -v /var/cuda-repo-debian12-12-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
+                sudo apt-get update
+                sudo apt-get -y install cuda-toolkit-12-8
+
+              # Notificar fin de ejecución del script
+                echo ""
+                echo "    Script de instalación de CUDA Toolkit, finalizado."
+                echo ""
+
+            ;;
+
+        esac
+
+    done
+
+elif [ $cVerSO == "12" ]; then
+
+  echo ""
+  echo -e "${cColorAzulClaro}  Iniciando el script de instalación de los controladores NVIDIA para Debian 12 (Bookworm)...${cFinColor}"
+  echo ""
+
+  # Crear el menú
+    # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install dialog
+        echo ""
+      fi
+    menu=(dialog --checklist "Marca la versión de CUDA Toolkit que quieres instalar:" 22 96 16)
+      opciones=(
+        1 "13.1" on
+        2 "12.8" off
+      )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+
+      for choice in $choices
+        do
+          case $choice in
+
+            1)
+
+              echo ""
+              echo "  Instalando CUDA Toolkit 13.0..."
+              echo ""
+
+              # Instalar CUDA Toolkit
+                echo ""
+                echo "    Instalando CUDA Toolkit..."
+                echo ""
+                curl -L https://developer.download.nvidia.com/compute/cuda/13.1.1/local_installers/cuda-repo-debian12-13-1-local_13.1.1-590.48.01-1_amd64.deb -o /tmp/CudaRepo.deb
+                sudo apt -y install /tmp/CudaRepo.deb
+                sudo cp /var/cuda-repo-debian12-13-1-local/cuda-*-keyring.gpg /usr/share/keyrings/
+                sudo apt-get update
+                sudo apt-get -y install cuda-toolkit-13-1
 
               # Notificar fin de ejecución del script
                 echo ""
