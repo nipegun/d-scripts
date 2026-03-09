@@ -19,7 +19,7 @@
 #  https://www.nvidia.com/es-es/drivers/unix/
 # ----------
 
-vNroUltVersEstable='580.126.09'
+vNroUltVersEstable='580.126.18'
 
 # Definir constantes de color
   cColorAzul="\033[0;34m"
