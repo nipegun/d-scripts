@@ -162,9 +162,9 @@
                 echo ""                                                                                    | sudo tee -a /var/www/"$cDominio""$cExtDominio"/.htaccess
                 echo "  # Anti-hotlinking de imágenes"                                                     | sudo tee -a /var/www/"$cDominio""$cExtDominio"/.htaccess
                 echo "  RewriteCond %{HTTP_REFERER} !^$"                                                   | sudo tee -a /var/www/"$cDominio""$cExtDominio"/.htaccess
-                echo "  RewriteCond %{HTTP_REFERER} !^https\\?://(www\\.)?"$cDominio""$cExtDominio"/ [NC]" | sudo tee -a /var/www/"$cDominio""$cExtDominio"/.htaccess
+                echo "  RewriteCond %{HTTP_REFERER} !^https?://(www\.)?$cDominio\\$cExtDominio [NC]"       | sudo tee -a /var/www/"$cDominio""$cExtDominio"/.htaccess
                 echo "  RewriteCond %{HTTP_REFERER} !^https\\?://(www\\.)?google\\.com/ [NC]"              | sudo tee -a /var/www/"$cDominio""$cExtDominio"/.htaccess
-                echo '  RewriteRule \.(jpg|jpeg|png|gif)$ - [F,NC,L]'                                      | sudo tee -a /var/www/"$cDominio""$cExtDominio"/.htaccess
+                echo '  RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F,NC,L]'                                 | sudo tee -a /var/www/"$cDominio""$cExtDominio"/.htaccess
                 echo "</IfModule>"                                                                         | sudo tee -a /var/www/"$cDominio""$cExtDominio"/.htaccess
                 echo ""                                                                                    | sudo tee -a /var/www/"$cDominio""$cExtDominio"/.htaccess
                 echo "# Redirigir www a sin www"                                                           | sudo tee -a /var/www/"$cDominio""$cExtDominio"/.htaccess
