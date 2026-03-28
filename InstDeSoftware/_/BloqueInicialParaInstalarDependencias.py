@@ -5,6 +5,7 @@
 # Definir los paquetes python que necesita este script siguiendo la convención de ciccionario: nombre_del_modulo -> nombre_paquete_pip (para casos donde difieren)
 dPaquetesPython = {
   "flask": "flask",
+  "paramiko": "paramiko==2.4.1",
   "requests": "requests",
   "PIL": "Pillow",
   "nmap": "python-nmap",
