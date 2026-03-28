@@ -129,8 +129,8 @@
       sudo apt-get -y install caja-open-terminal
       sudo apt-get -y install caja-admin
       sudo apt-get -y install mozo                # Editor del menúde mate
-      #sudo apt-get -y install caja-share         # Para compartir carpetas desde el propio caja
-      #sudo apt-get -y install gvfs-backends      # Para poder ver las comparticiones de red usando samba
+      sudo apt-get -y install caja-share         # Para compartir carpetas desde el propio caja
+      sudo apt-get -y install gvfs-backends      # Para poder ver las comparticiones de red usando samba
 
   elif [ $cVerSO == "12" ]; then
 
