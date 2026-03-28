@@ -9,13 +9,10 @@
 # Script de NiPeGun para x
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/dh-scripts/refs/heads/main/Recursos/Software/ParaCLI/MetasploitFramework-Instalar.sh | python3 - "Cadena"
-#
-# Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/dh-scripts/refs/heads/main/Recursos/Software/ParaCLI/MetasploitFramework-Instalar.sh | sed 's-sudo--g' | python3 - "Cadena"
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/_/Python-BloqueInicialParaInstalarDependencias.py | python3 - "Cadena"
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL https://raw.githubusercontent.com/nipegun/dh-scripts/refs/heads/main/Recursos/Software/ParaCLI/MetasploitFramework-Instalar.sh | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/_/Python-BloqueInicialParaInstalarDependencias.py | nano -
 # ----------
 
 # ------ Inicio del bloque de instalación de dependencias de paquetes python ------
