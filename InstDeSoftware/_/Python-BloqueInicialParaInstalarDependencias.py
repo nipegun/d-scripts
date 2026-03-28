@@ -110,6 +110,5 @@ if aErrores:
 else:
   print("[✓] Todas las dependencias instaladas correctamente")
 
-
 # ------ Fin del bloque de instalación de dependencias. A partir de aquí va el código real del script ------
 
