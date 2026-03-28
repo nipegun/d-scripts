@@ -2,12 +2,12 @@
 
 # ------ Inicio del bloque de instalación de dependencias de paquetes python ------
 
-# Definir los paquetes python que necesita este script siguiendo la convención de ciccionario: nombre_pip -> nombre_modulo (para casos donde difieren)
+# Definir los paquetes python que necesita este script siguiendo la convención de ciccionario: nombre_del_modulo -> nombre_paquete_pip (para casos donde difieren)
 dPaquetesPython = {
   "flask": "flask",
   "requests": "requests",
-  "Pillow": "PIL",
-  "python-nmap": "nmap",
+  "PIL": "Pillow",
+  "nmap": "python-nmap",
 }
 
 import importlib.util
@@ -68,7 +68,7 @@ def fInstalarPaquetePython(pNombreDelPaquete):
 def fComprobarEInstalarPaquetes(pdPaquetesPython):
   """Comprueba e instala los paquetes Python necesarios."""
   aErrores = []
-  for vNombrePip, vNombreModulo in pdPaquetesPython.items():
+  for vNombreModulo, vNombrePip in pdPaquetesPython.items():
     if fModuloPythonEstaInstalado(vNombreModulo):
       print(f"[✓] {vNombrePip} ya está instalado")
     else:
@@ -93,6 +93,7 @@ if aErrores:
   sys.exit(1)
 else:
   print("[✓] Todas las dependencias instaladas correctamente")
+
 
 # ------ Fin del bloque de instalación de dependencias. A partir de aquí va el código real del script ------
 
