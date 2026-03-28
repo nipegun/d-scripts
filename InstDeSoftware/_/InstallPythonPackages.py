@@ -1,6 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S PYTHONDONTWRITEBYTECODE=1 python3
 
-# Definir dependencias ANTES de importar nada que las necesite
+# ------ Inicio del bloque de instalación de dependencias de paquetes python ------
+
+# Definir los paquetes python que necesita este script siguiendo la convención de ciccionario: nombre_pip -> nombre_modulo (para casos donde difieren)
 dPaquetesPython = {
   "flask": "flask",
   "requests": "requests",
@@ -8,17 +10,10 @@ dPaquetesPython = {
   "python-nmap": "nmap",
 }
 
-# Importar e instalar dependencias
-from dependencias import fInstalarDependencias
-fInstalarDependencias(dPaquetesPython)
-
-
-
 import importlib.util
 import subprocess
 import sys
 
-# Paquete apt necesario para instalar paquetes python
 cNombreDelPaqueteApt = "python3-pip"
 
 def fPaqueteAptEstaInstalado(pNombreDelPaqueteApt):
@@ -81,42 +76,23 @@ def fComprobarEInstalarPaquetes(pdPaquetesPython):
         aErrores.append(vNombrePip)
   return aErrores
 
-def fInstalarDependencias(pdPaquetesPython):
-  """
-  Función principal para instalar dependencias.
-  
-  Args:
-    pdPaquetesPython: Diccionario {nombre_pip: nombre_modulo}
-  
-  Returns:
-    True si todo OK, False si hubo errores
-  """
-  print("=== Comprobando dependencias ===\n")
-  
-  # Verificar pip
-  if not fPaqueteAptEstaInstalado(cNombreDelPaqueteApt):
-    fInstalarPaqueteApt(cNombreDelPaqueteApt)
-  else:
-    print(f"[✓] {cNombreDelPaqueteApt} ya está instalado")
-  
-  print()
-  
-  # Instalar paquetes Python
-  aErrores = fComprobarEInstalarPaquetes(pdPaquetesPython)
-  
-  print("\n=== Resumen ===")
-  if aErrores:
-    print(f"[!] Paquetes con errores: {', '.join(aErrores)}")
-    return False
-  else:
-    print("[✓] Todas las dependencias instaladas correctamente")
-    return True
+print("=== Comprobando dependencias ===\n")
 
-# Solo para pruebas directas del módulo
-if __name__ == "__main__":
-  dPaquetesEjemplo = {
-    "flask": "flask",
-    "requests": "requests",
-  }
-  if not fInstalarDependencias(dPaquetesEjemplo):
-    sys.exit(1)
+if not fPaqueteAptEstaInstalado(cNombreDelPaqueteApt):
+  fInstalarPaqueteApt(cNombreDelPaqueteApt)
+else:
+  print(f"[✓] {cNombreDelPaqueteApt} ya está instalado")
+
+print()
+
+aErrores = fComprobarEInstalarPaquetes(dPaquetesPython)
+
+print("\n=== Resumen ===")
+if aErrores:
+  print(f"[!] Paquetes con errores: {', '.join(aErrores)}")
+  sys.exit(1)
+else:
+  print("[✓] Todas las dependencias instaladas correctamente")
+
+# ------ Fin del bloque de instalación de dependencias. A partir de aquí va el código real del script ------
+
