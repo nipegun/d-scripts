@@ -36,40 +36,10 @@ cFinColor='\033[0m'
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+if [ $cVerSO == "13" ]; then
 
   echo ""
-  echo "  Iniciando el script de instalación de DDClient para Debian 7 (Wheezy)..."  
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "8" ]; then
-
-  echo ""
-  echo "  Iniciando el script de instalación de DDClient para Debian 8 (Jessie)..."  
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "9" ]; then
-
-  echo ""
-  echo "  Iniciando el script de instalación de DDClient para Debian 9 (Stretch)..."  
-  echo ""
-
-  echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
-
-elif [ $cVerSO == "10" ]; then
-
-  echo ""
-  echo "  Iniciando el script de instalación de DDClient para Debian 10 (Buster)..."  
+  echo "  Iniciando el script de instalación de DDClient para Debian 3 (Trixie)..."  
   echo ""
 
   echo 'run_dhclient="true"'   > /etc/default/ddclient
@@ -78,48 +48,8 @@ elif [ $cVerSO == "10" ]; then
   echo 'daemon_interval="60"' >> /etc/default/ddclient
 
   touch /etc/ddclient.conf
-  echo "protocol=dyndns2"                      > /etc/ddclient.conf
-  echo "#use=if, if=eth0"                     >> /etc/ddclient.conf
-  echo "#use=if, if=vmbr0"                    >> /etc/ddclient.conf
-  echo "#use=web, web=checkip.dyndns.org"     >> /etc/ddclient.conf
-  echo "use=web"                              >> /etc/ddclient.conf
-  echo "ssl=yes"                              >> /etc/ddclient.conf
-  echo "server=dyndns.strato.com/nic/update"  >> /etc/ddclient.conf
-  echo "login=dominio.com"                    >> /etc/ddclient.conf
-  echo "password='x'"                         >> /etc/ddclient.conf
-  echo "web.com"                              >> /etc/ddclient.conf
-          
-  apt-get -y install ddclient
-          
-  echo ""
-  echo "  Instalación finalizada."
-  echo "  Edita el archivo /etc/ddclient.conf para indicar tus credenciales."
-  echo ""
-  echo "  Para probar la configuración ejecuta:"
-  echo "  ddclient -query"
-  echo "  o"
-  echo "  ddclient "
-  echo ""
-  echo "  Para ver las actualizaciones en tiempo real, ejecuta:"
-  echo "  tail -f /var/log/syslog | grep ddclient"
-  echo ""
-  echo "  Si no lo has instalado para Strato, reconfigúralo con:"
-  echo "  dpkg-reconfigure ddclient"
-  echo "" 
-
-elif [ $cVerSO == "11" ]; then
-
-  echo ""
-  echo "  Iniciando el script de instalación de DDClient para Debian 11 (Bullseye)..."  
-  echo ""
-
-  echo 'run_dhclient="true"'   > /etc/default/ddclient
-  echo 'run_ipup="true"'      >> /etc/default/ddclient
-  echo 'run_daemon="true"'    >> /etc/default/ddclient
-  echo 'daemon_interval="60"' >> /etc/default/ddclient
-
-  touch /etc/ddclient.conf
-  echo "protocol=dyndns2"                      > /etc/ddclient.conf
+  echo "pid=/var/run/ddclient.pid"             > /etc/ddclient.conf
+  echo "protocol=dyndns2"                     >> /etc/ddclient.conf
   echo "#use=if, if=eth0"                     >> /etc/ddclient.conf
   echo "#use=if, if=vmbr0"                    >> /etc/ddclient.conf
   echo "#use=web, web=checkip.dyndns.org"     >> /etc/ddclient.conf
@@ -195,6 +125,121 @@ elif [ $cVerSO == "12" ]; then
   echo "  Si no lo has instalado para Strato, reconfigúralo con:"
   echo "  dpkg-reconfigure ddclient"
   echo "" 
+
+elif [ $cVerSO == "11" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de DDClient para Debian 11 (Bullseye)..."  
+  echo ""
+
+  echo 'run_dhclient="true"'   > /etc/default/ddclient
+  echo 'run_ipup="true"'      >> /etc/default/ddclient
+  echo 'run_daemon="true"'    >> /etc/default/ddclient
+  echo 'daemon_interval="60"' >> /etc/default/ddclient
+
+  touch /etc/ddclient.conf
+  echo "protocol=dyndns2"                      > /etc/ddclient.conf
+  echo "#use=if, if=eth0"                     >> /etc/ddclient.conf
+  echo "#use=if, if=vmbr0"                    >> /etc/ddclient.conf
+  echo "#use=web, web=checkip.dyndns.org"     >> /etc/ddclient.conf
+  echo "use=web"                              >> /etc/ddclient.conf
+  echo "ssl=yes"                              >> /etc/ddclient.conf
+  echo "server=dyndns.strato.com/nic/update"  >> /etc/ddclient.conf
+  echo "login=dominio.com"                    >> /etc/ddclient.conf
+  echo "password='x'"                         >> /etc/ddclient.conf
+  echo "web.com"                              >> /etc/ddclient.conf
+          
+  apt-get -y install net-tools
+  apt-get -y install ddclient
+          
+  echo ""
+  echo "  Instalación finalizada."
+  echo "  Edita el archivo /etc/ddclient.conf para indicar tus credenciales."
+  echo ""
+  echo "  Para probar la configuración ejecuta:"
+  echo "  ddclient -query"
+  echo "  o"
+  echo "  ddclient"
+  echo "  o"
+  echo "  ddclient -daemon=0 -debug -verbose -noquiet"
+  echo ""
+  echo "  Para ver las actualizaciones en tiempo real, ejecuta:"
+  echo "  tail -f /var/log/syslog | grep ddclient"
+  echo ""
+  echo "  Si no lo has instalado para Strato, reconfigúralo con:"
+  echo "  dpkg-reconfigure ddclient"
+  echo "" 
+
+elif [ $cVerSO == "10" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de DDClient para Debian 10 (Buster)..."  
+  echo ""
+
+  echo 'run_dhclient="true"'   > /etc/default/ddclient
+  echo 'run_ipup="true"'      >> /etc/default/ddclient
+  echo 'run_daemon="true"'    >> /etc/default/ddclient
+  echo 'daemon_interval="60"' >> /etc/default/ddclient
+
+  touch /etc/ddclient.conf
+  echo "protocol=dyndns2"                      > /etc/ddclient.conf
+  echo "#use=if, if=eth0"                     >> /etc/ddclient.conf
+  echo "#use=if, if=vmbr0"                    >> /etc/ddclient.conf
+  echo "#use=web, web=checkip.dyndns.org"     >> /etc/ddclient.conf
+  echo "use=web"                              >> /etc/ddclient.conf
+  echo "ssl=yes"                              >> /etc/ddclient.conf
+  echo "server=dyndns.strato.com/nic/update"  >> /etc/ddclient.conf
+  echo "login=dominio.com"                    >> /etc/ddclient.conf
+  echo "password='x'"                         >> /etc/ddclient.conf
+  echo "web.com"                              >> /etc/ddclient.conf
+          
+  apt-get -y install ddclient
+          
+  echo ""
+  echo "  Instalación finalizada."
+  echo "  Edita el archivo /etc/ddclient.conf para indicar tus credenciales."
+  echo ""
+  echo "  Para probar la configuración ejecuta:"
+  echo "  ddclient -query"
+  echo "  o"
+  echo "  ddclient "
+  echo ""
+  echo "  Para ver las actualizaciones en tiempo real, ejecuta:"
+  echo "  tail -f /var/log/syslog | grep ddclient"
+  echo ""
+  echo "  Si no lo has instalado para Strato, reconfigúralo con:"
+  echo "  dpkg-reconfigure ddclient"
+  echo "" 
+
+elif [ $cVerSO == "9" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de DDClient para Debian 9 (Stretch)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "8" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de DDClient para Debian 8 (Jessie)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
+
+elif [ $cVerSO == "7" ]; then
+
+  echo ""
+  echo "  Iniciando el script de instalación de DDClient para Debian 7 (Wheezy)..."  
+  echo ""
+
+  echo ""
+  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
+  echo ""
 
 fi
 
