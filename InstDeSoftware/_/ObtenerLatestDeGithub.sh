@@ -4,6 +4,8 @@
       echo ""
       echo "    Obteniendo el tag de la última release del repo de Github..."
       echo ""
+      vUsuario=''
+      vNombreDelRepo=''
       # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
           echo ""
@@ -22,10 +24,10 @@
           sudo apt-get -y install jq
           echo ""
         fi
-      curl -s https://api.github.com/repos/USUARIO/NOMBREDELREPO/releases/latest | jq -r '.tag_name'
+      vTagName=$(curl -s https://api.github.com/repos/"$vUsuario"/"$vNombreDelRepo"/releases/latest | jq -r '.tag_name')
 
     # Obtener assets
-      curl -sL https://api.github.com/repos/USUARIO/NOMBREDELREPO/releases/tags/25.12.1 | jq -r '.assets[].browser_download_url' | grep '\.zip$'
+      vURLDelAsset=$(curl -sL https://api.github.com/repos/"$vUsuario"/"$vNombreDelRepo"/releases/tags/"$vTagName" | jq -r '.assets[].browser_download_url' | grep '\.zip$')
       # Descargar todos los assets que acaban en .zip
         cd /tmp/
-        curl -sL https://api.github.com/repos/USUARIO/NOMBREDELREPO/releases/tags/25.12.1 | jq -r '.assets[] | select(.name | endswith(".zip")) | .browser_download_url' | xargs -n1 wget -c
+        curl -sL https://api.github.com/repos/"$vUsuario"/"$vNombreDelRepo"/releases/tags/"$vTagName" | jq -r '.assets[] | select(.name | endswith(".zip")) | .browser_download_url' | xargs -n1 wget -c
