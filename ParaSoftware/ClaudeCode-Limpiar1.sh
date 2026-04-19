@@ -45,18 +45,15 @@
 
 # Borrado de archivos
 
-  # Definir el array con el nombre de los archivos a borrar
-    aArchivosABorrar=(
-      "history.jsonl"
-      "mcp-needs-auth-cache.json"
-      "stats-cache.json"
-    )
+  aArchivosABorrar=(
+    "history.jsonl"
+    "mcp-needs-auth-cache.json"
+    "stats-cache.json"
+  )
 
-  # Ejecutar el bucle de borrado
-    for vArchivo in "${aArchivosABorrar[@]}"; do
-      vRutaAlArchivo="$cBaseDir/$vArchivo"
-      if [ -d "$vRutaAlArchivo" ]; then
-        rm -fv "$vRutaAlArchivo"
-      fi
-    done
-
+  for vArchivo in "${aArchivosABorrar[@]}"; do
+    vRutaAlArchivo="$cBaseDir/$vArchivo"
+    if [ -f "$vRutaAlArchivo" ]; then
+      rm -fv "$vRutaAlArchivo"
+    fi
+  done
