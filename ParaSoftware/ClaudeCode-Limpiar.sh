@@ -9,7 +9,7 @@ set -euo pipefail
 # ----------
 # Script de NiPeGun para limpiar Claude Code en Debian
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/ClaudeCode-Limpiar.sh | bash
 #
 # Bajar y editar directamente el archivo en nano
@@ -58,3 +58,15 @@ set -euo pipefail
       rm -fv "$vRutaAlArchivo"
     fi
   done
+
+# Configurar el modelo por defecto y el idioma
+  # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+    if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+      echo ""
+      echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+      echo ""
+      sudo apt-get -y update
+      sudo apt-get -y install curl
+      echo ""
+    fi
+  jq '.model="opus" | .language="Español" | .effortLevel="max"' "$HOME"/.claude/settings.json > /tmp/claude-settings.json && mv /tmp/claude-settings.json "$HOME"/.claude/settings.json
