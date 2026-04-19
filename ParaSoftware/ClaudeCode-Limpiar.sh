@@ -59,7 +59,7 @@ set -euo pipefail
     fi
   done
 
-# Configurar el modelo por defecto y el idioma
+# Configurar parámetros por defecto (idioma, modelo y fuerza de razonamiento)
   # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
     if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
       echo ""
@@ -69,4 +69,4 @@ set -euo pipefail
       sudo apt-get -y install curl
       echo ""
     fi
-  jq '.model="opus" | .language="Español" | .effortLevel="max"' "$HOME"/.claude/settings.json > /tmp/claude-settings.json && mv /tmp/claude-settings.json "$HOME"/.claude/settings.json
+  jq '.language="Español" | .model="opus" | .effortLevel="max"' "$HOME"/.claude/settings.json > /tmp/claude-settings.json && mv /tmp/claude-settings.json "$HOME"/.claude/settings.json
