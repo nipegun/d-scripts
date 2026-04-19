@@ -8,18 +8,36 @@
 # ----------
 # Script de NiPeGun para limpiar Claude Code en Debian
 #
-# Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
-#
-# Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+# Ejecución remota:
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/ClaudeCode-Limpiar.sh | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/ClaudeCode-Limpiar.sh | nano -
 # ----------
+
+# Definir la constante con la carpeta base
+  cBaseDir="$HOME/.claude"
+
+# Definir el array con el nombre de las carpetas a borrar
+  aCarpetas=(
+    "backups"
+    "cache"
+    "file-history"
+    "ide"
+    "paste-cache"
+    "projects"
+    "session-env"
+    "sessions"
+    "shell-snapshots"
+    "tasks"
+    "telemetry"
+  )
+
+# Ejecutar el bucle de borrado
+  for vCarpeta in "${aCarpetas[@]}"; do
+    vRuta="$cBaseDir/$vCarpeta"
+    if [ -d "$vRuta" ]; then
+      rm -rfv "$vRuta"
+    fi
+  done
+
