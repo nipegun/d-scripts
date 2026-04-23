@@ -23,7 +23,7 @@ dPaquetesPython = {
   "paramiko": "paramiko==2.4.1",
   "requests": "requests",
   "PIL": "Pillow",
-  "nmap": "python-nmap",
+  "nmap": "python-nmap"
 }
 
 import importlib.util
