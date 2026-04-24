@@ -15,3 +15,5 @@ set -euo pipefail
 # Bajar y editar directamente el archivo en nano
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/ClaudeCode-RestaurarCredenciales.sh | nano -
 # ----------
+
+vCarpetaConSubCarpetasConCredenciales='x'
