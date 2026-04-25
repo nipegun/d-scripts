@@ -47,6 +47,8 @@ set -euo pipefail
 # Borrado de archivos
 
   aArchivosABorrar=(
+    "../.claude.json"
+    "../.claude.json.backup"
     "history.jsonl"
     "mcp-needs-auth-cache.json"
     "stats-cache.json"
