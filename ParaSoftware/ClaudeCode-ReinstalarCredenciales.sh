@@ -17,7 +17,7 @@ set -euo pipefail
 # ----------
 
 # Directorio donde buscar los backups
-cBackupDir="/Git"
+cBackupDir="${1:-/Git}"
 
 # Directorio destino
 cDestDir="$HOME/.claude"
