@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -euo pipefail
 
 # Pongo a disposición pública este script bajo el término de "software de dominio público".
@@ -70,8 +71,8 @@ fMain() {
   echo ""
   echo "========================================"
 
-  # Pedir opción al usuario
-  read -rp "Elige una opción: " vOpcion
+  # Pedir opción al usuario (leer desde la terminal real para soportar `curl ... | bash`)
+  read -rp "Elige una opción: " vOpcion < /dev/tty
 
   # Validar que sea un número
   if ! [[ "$vOpcion" =~ ^[0-9]+$ ]]; then
