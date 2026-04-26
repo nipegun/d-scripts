@@ -128,3 +128,5 @@ fMain() {
 if ! fMain; then
   echo "error"
 fi
+
+curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/ClaudeCode-Limpiar.sh | bash
