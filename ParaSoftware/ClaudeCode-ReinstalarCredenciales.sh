@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -euo pipefail
 
 # Pongo a disposición pública este script bajo el término de "software de dominio público".
