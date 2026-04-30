@@ -8,6 +8,12 @@ from datetime import datetime, timezone
 
 cDbPath = os.path.expanduser("~/.local/share/opencode/opencode.db")
 
+cCyan    = "\033[36m"
+cVerde   = "\033[32m"
+cAmarillo = "\033[33m"
+cGris    = "\033[90m"
+cReset   = "\033[0m"
+
 def fObtenerPrompts():
   if not os.path.exists(cDbPath):
     print(f"Base de datos no encontrada: {cDbPath}", file=sys.stderr)
@@ -57,14 +63,17 @@ def fObtenerPrompts():
 
       vPrompt = "\n".join(vTextos) if vTextos else "(sin texto)"
 
-      print(f"{'='*80}")
-      print(f"Prompt #{vIdx}  |  {vFecha}")
-      print(f"Directorio : {vRow['session_directory']}")
-      print(f"Sesión     : {vRow['session_title']}")
-      print(f"Session ID : {vRow['session_id']}")
-      print(f"Message ID : {vRow['message_id']}")
-      print(f"{'-'*80}")
-      print(vPrompt)
+      vCabecera = f"┌─ Prompt #{vIdx} ── {vFecha} ─"
+      vPadding = 80 - len(vCabecera) - 1
+      print(f"{cCyan}{vCabecera}{'─' * vPadding}┐{cReset}")
+      print(f"{cCyan}│{cReset} {cGris}Proyecto  :{cReset} {vRow['session_directory']}")
+      print(f"{cCyan}│{cReset} {cGris}Sesión    :{cReset} {vRow['session_title']}")
+      print(f"{cCyan}│{cReset} {cGris}Session ID:{cReset} {vRow['session_id']}")
+      print(f"{cCyan}│{cReset} {cGris}Message ID:{cReset} {vRow['message_id']}")
+      print(f"{cCyan}├{'─' * 78}┤{cReset}")
+      for vLinea in vPrompt.split("\n"):
+        print(f"{cCyan}│{cReset} {cAmarillo}{vLinea}{cReset}")
+      print(f"{cCyan}└{'─' * 78}┘{cReset}")
 
   finally:
     vConn.close()
