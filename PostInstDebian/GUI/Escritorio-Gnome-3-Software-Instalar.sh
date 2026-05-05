@@ -75,6 +75,10 @@
       sudo apt-get -y install simple-scan
       sudo apt-get -y install apostrophe           # Para markdown y otros formatos
 
+    # Eliminación de archivos duplicados
+      sudo apt-get -y install czkawka-gui
+      sudo apt-get -y install dupeguru
+
     # Fuentes
       sudo apt-get -y install fonts-ubuntu
       sudo apt-get -y install fonts-ubuntu-console
