@@ -91,6 +91,8 @@
       echo "  Instalando aplicaciones de sistema..."
       echo ""
       sudo apt-get -y install gparted
+        sudo apt-get -y install dosfstools
+        sudo apt-get -y install mtools
       sudo apt-get -y install hardinfo
       sudo apt-get -y install bleachbit
 
