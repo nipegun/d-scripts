@@ -19,7 +19,8 @@
 #  https://www.nvidia.com/es-es/drivers/unix/
 # ----------
 
-vNroUltVersEstable='580.142'
+#vNroUltVersEstable='595.71.05'
+vNroUltVersEstable=$(curl -fsSL 'https://www.nvidia.com/es-es/drivers/unix/' | grep -m2 'Linux x86_64/AMD64/EM64T' | grep roducc | grep -oP '<span class="PB">.*?<a[^>]*>\K[0-9]+(\.[0-9]+)+')
 
 # Definir constantes de color
   cColorAzul="\033[0;34m"
