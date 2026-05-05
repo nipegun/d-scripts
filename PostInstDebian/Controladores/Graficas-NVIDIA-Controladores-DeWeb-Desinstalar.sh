@@ -21,6 +21,9 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/Controladores/Graficas-NVIDIA-Controladores-DeWeb-Desinstalar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
+#vNroUltVersEstable='595.71.05'
+vNroUltVersEstable=$(curl -fsSL 'https://www.nvidia.com/es-es/drivers/unix/' | grep -m2 'Linux x86_64/AMD64/EM64T' | grep roducc | grep -oP '<span class="PB">.*?<a[^>]*>\K[0-9]+(\.[0-9]+)+')
+
 # Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
@@ -60,7 +63,7 @@ if [ $cVerSO == "13" ]; then
     echo ""
     echo "    Descargando el instalador..."
     echo ""
-    curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/580.105.08/NVIDIA-Linux-x86_64-580.105.08.run -o /tmp/nVidiaWebDriverInstall.run
+    curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/"$vNroUltVersEstable"/NVIDIA-Linux-x86_64-"$vNroUltVersEstable".run -o /tmp/nVidiaWebDriverInstall.run
     chmod +x /tmp/nVidiaWebDriverInstall.run
 
   # Ejecutar el desinstalador
@@ -94,7 +97,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     echo "    Descargando el instalador..."
     echo ""
-    curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/550.144.03/NVIDIA-Linux-x86_64-550.144.03.run -o /tmp/nVidiaWebDriverInstall.run
+    curl -L https://es.download.nvidia.com/XFree86/Linux-x86_64/"$vNroUltVersEstable"/NVIDIA-Linux-x86_64-"$vNroUltVersEstable".run -o /tmp/nVidiaWebDriverInstall.run
     chmod +x /tmp/nVidiaWebDriverInstall.run
 
   # Ejecutar el desinstalador
