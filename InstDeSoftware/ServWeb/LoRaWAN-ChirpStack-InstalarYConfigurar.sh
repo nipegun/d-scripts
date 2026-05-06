@@ -113,6 +113,13 @@
       sudo ss -lntp | grep -E ':8080|:3001|:1883|:5432|:6379'
 
     # Credenciales iniciales admin:adin
+      vIPLocal=$(hostname -I | sed 's- --g')
+      echo ""
+      echo "  En este punto la web debería estar disponible en: http://$vIPLocal:8080"
+      echo ''
+      echo '    La credencial por defecto es admin:admin'
+      echo '    Para cambiarla, arriba a a la derecha: "admin" > "Change password"'
+      echo ''
 
   elif [ $cVerSO == "12" ]; then
 
