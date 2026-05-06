@@ -9,19 +9,19 @@
 # Script de NiPeGun para instalar y configurar ChirpStack en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/LoRaWAN-ChirpStack-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/LoRaWAN-ChirpStack-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/LoRaWAN-ChirpStack-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/LoRaWAN-ChirpStack-InstalarYConfigurar.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/LoRaWAN-ChirpStack-InstalarYConfigurar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -61,9 +61,58 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de ChirpStack para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Actualizar la lista de paquetes disponibles en los repositorios
+      sudo apt-get -y update
+      sudo apt-get -y install gpg
+      sudo apt-get -y install wget
+      sudo apt-get -y install ca-certificates
+      sudo apt-get -y install apt-transport-https
+
+    # Añadir la clave
+      sudo mkdir -p /etc/apt/keyrings
+      wget -q -O - https://artifacts.chirpstack.io/packages/chirpstack.key | sudo gpg --dearmor > /etc/apt/keyrings/chirpstack.gpg
+
+    # Añadir el repo
+      sudo echo "deb [signed-by=/etc/apt/keyrings/chirpstack.gpg] https://artifacts.chirpstack.io/packages/4.x/deb stable main" > /etc/apt/sources.list.d/chirpstack.list
+      sudo apt-get -y update
+
+    # Instalar paquetes
+      sudo apt-get -y install mosquitto
+      sudo apt-get -y install mosquitto-clients
+      sudo apt-get -y install redis-server
+      sudo apt-get -y install redis-tools postgresql
+
+    #
+      if [ "$(id -u)" -eq 0 ]; then
+        runuser -u postgres -- psql -d postgres -v ON_ERROR_STOP=1 \
+          -c "create role chirpstack with login password 'chirpstack';" \
+          -c "create database chirpstack with owner chirpstack;" && \
+        runuser -u postgres -- psql -d chirpstack -v ON_ERROR_STOP=1 \
+          -c "create extension pg_trgm;"
+      else
+        sudo -u postgres psql -d postgres -v ON_ERROR_STOP=1 \
+          -c "create role chirpstack with login password 'chirpstack';" \
+          -c "create database chirpstack with owner chirpstack;" && \
+        sudo -u postgres psql -d chirpstack -v ON_ERROR_STOP=1 \
+          -c "create extension pg_trgm;"
+      fi
+
+    # 
+      sudo apt-get -y install chirpstack-gateway-bridge
+      cp /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml.bak
+      sed -i 's/^type="semtech_udp"$/type="basic_station"/' /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml
+
+    #
+      sudo apt-get -y install chirpstack
+      vSecret="$(head -c 32 /dev/urandom | base64)"
+      sudo sed -i "s|secret = \"you-must-replace-this\"|secret = \"$vSecret\"|" /etc/chirpstack/chirpstack.toml
+      sudo systemctl restart postgresql redis-server mosquitto chirpstack chirpstack-gateway-bridge
+
+    # Comprobar servicios
+      sudo systemctl --no-pager --full status postgresql redis-server mosquitto chirpstack chirpstack-gateway-bridge
+      sudo ss -lntp | grep -E ':8080|:3001|:1883|:5432|:6379'
+
+    # Credenciales iniciales admin:adin
 
   elif [ $cVerSO == "12" ]; then
 
