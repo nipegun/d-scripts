@@ -114,8 +114,30 @@
 
     # 
       sed -i 's|event_topic_template="gateway/{{ .GatewayID }}/event/{{ .EventType }}"|event_topic_template="eu868/gateway/{{ .GatewayID }}/event/{{ .EventType }}"|' /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml
-      sed -i 's|command_topic_template="gateway/{{ .GatewayID }}/command/#"|command_topic_template="eu868/gateway/{{ .GatewayID }}/command/#"|' /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml
-      grep -nE 'event_topic_template|command_topic_template' /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml
+      sed -i 's|command_topic_template="gateway/{{ .GatewayID }}/command/#"|command_topic_template="eu868/gateway/{{ .GatewayID }}/command/#"|'                       /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml
+      grep -nE 'event_topic_template|command_topic_template'                                                                                                          /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml
+      echo ""                                                                                                                                                | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "[[backend.basic_station.concentrators]]"                                                                                                         | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo ""                                                                                                                                                | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "  [backend.basic_station.concentrators.multi_sf]"                                                                                                | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "  frequencies=["                                                                                                                                 | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "    868100000,"                                                                                                                                  | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "    868300000,"                                                                                                                                  | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "    868500000,"                                                                                                                                  | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "    867100000,"                                                                                                                                  | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "    867300000,"                                                                                                                                  | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "    867500000,"                                                                                                                                  | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "    867700000,"                                                                                                                                  | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "    867900000,"                                                                                                                                  | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "  ]"                                                                                                                                             | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo ""                                                                                                                                                | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "  [backend.basic_station.concentrators.lora_std]"                                                                                                | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "  frequency=868300000"                                                                                                                           | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "  bandwidth=250000"                                                                                                                              | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "  spreading_factor=7"                                                                                                                            | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo ""                                                                                                                                                | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "  [backend.basic_station.concentrators.fsk]"                                                                                                     | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
+      echo "  frequency=868800000"                                                                                                                           | tee -a /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml >/dev/null
       systemctl restart chirpstack-gateway-bridge
       journalctl -u chirpstack-gateway-bridge -n 50 --no-pager
 
