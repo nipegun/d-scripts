@@ -112,6 +112,13 @@
       sudo systemctl --no-pager --full status postgresql redis-server mosquitto chirpstack chirpstack-gateway-bridge
       sudo ss -lntp | grep -E ':8080|:3001|:1883|:5432|:6379'
 
+    # 
+      sed -i 's|event_topic_template="gateway/{{ .GatewayID }}/event/{{ .EventType }}"|event_topic_template="eu868/gateway/{{ .GatewayID }}/event/{{ .EventType }}"|' /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml
+      sed -i 's|command_topic_template="gateway/{{ .GatewayID }}/command/#"|command_topic_template="eu868/gateway/{{ .GatewayID }}/command/#"|' /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml
+      grep -nE 'event_topic_template|command_topic_template' /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml
+      systemctl restart chirpstack-gateway-bridge
+      journalctl -u chirpstack-gateway-bridge -n 50 --no-pager
+
     # Credenciales iniciales admin:adin
       vIPLocal=$(hostname -I | sed 's- --g')
       echo ""
@@ -120,6 +127,8 @@
       echo '    La credencial por defecto es admin:admin'
       echo '    Para cambiarla, arriba a a la derecha: "admin" > "Change password"'
       echo ''
+      echo '    Para crear el tenant:'
+      echo '      "Network servers" > "Tenants" > "Add tenant"'
 
   elif [ $cVerSO == "12" ]; then
 
