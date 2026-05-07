@@ -164,6 +164,11 @@
       echo '        Description: Gateway LoRaWAN OpenWrt routerx'
       echo '        Gateway ID: xxxxxxxxxxxx (es la mac del station id de openwrt, toda junta, sin dos puntos)'
       echo '      Al terminar de agregar el gateway ya se puede configurar BasicStation en OpenWrt'
+      echo ''
+      echo '    Para crear una aplicación:'
+      echo '      "Applications" > "Add application"'
+      echo '        Name: sensores'
+      echo '        Description: Sensores LoRaWAN PymeHackers'
 
   elif [ $cVerSO == "12" ]; then
 
