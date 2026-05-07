@@ -129,6 +129,12 @@
       echo ''
       echo '    Para crear el tenant:'
       echo '      "Network servers" > "Tenants" > "Add tenant"'
+      echo '      Name: ElQueQuieras'
+      echo '      Tenant can have gateways: activado'
+      echo '      Gateways are private (uplink): desactivado'
+      echo '      Gateways are private (downlink): desactivado'
+      echo '      Max. gateway count: 10'
+      echo '      Max. device count: 1000'
 
   elif [ $cVerSO == "12" ]; then
 
