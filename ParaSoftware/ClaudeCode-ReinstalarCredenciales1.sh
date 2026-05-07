@@ -17,7 +17,7 @@ set -euo pipefail
 # ----------
 
 # Directorio donde buscar los backups
-cBackupDir="${1:-/Git}"
+cBackupDir="${1:-/Git/_Claude}"
 
 # Directorio destino
 cDestDir="$HOME/.claude"
@@ -119,6 +119,7 @@ fMain() {
     echo "   Origen:  $vArchivoOrigen"
     echo "   Destino: $cDestDir/$cArchivo"
     curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/ClaudeCode-Limpiar.sh | bash
+    cp -fv "$cBackupDir"/.claude.json "$HOME"/.claude.json
   else
     echo ""
     echo "❌ Error: No se pudo copiar el archivo."
