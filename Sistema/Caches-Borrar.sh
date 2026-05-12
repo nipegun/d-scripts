@@ -9,13 +9,13 @@
 # Script de NiPeGun para borrar todos los caches de Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Caches-Borrar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Caches-Borrar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Caches-Borrar.sh | nano -
 # ----------
 
 # /apt
