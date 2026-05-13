@@ -200,7 +200,7 @@
       echo '            Supports Class-C: desactivado'
       echo '          Pestaña Payload codec'
       echo '            Javascript functions'
-      echo '             En el form pegamos el código de https://raw.githubusercontent.com/dragino/dragino-end-node-decoder/refs/heads/main/LHT52/LHT52%20Decoder%20Chirpstack%20V4%20.txt'
+      echo '             En el form pegamos el código de https://raw.githubusercontent.com/nipegun/LoRaWAN/refs/heads/main/ChirpStack/v4/PayloadCodecs/JavascriptFunctions/Sensor-DraginoLHT52.js'
       echo '      Luego agregamos la aplicación:'
       echo '        "Applications" > "sensores" > "Devices" > "Add device"'
       echo '          Pestaña "Device"'
