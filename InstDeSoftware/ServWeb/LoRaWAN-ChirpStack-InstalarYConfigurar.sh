@@ -113,7 +113,11 @@
       sudo apt-get -y install chirpstack
       vSecret="$(head -c 32 /dev/urandom | base64)"
       sudo sed -i "s|secret = \"you-must-replace-this\"|secret = \"$vSecret\"|" /etc/chirpstack/chirpstack.toml
-      sudo systemctl restart postgresql redis-server mosquitto chirpstack chirpstack-gateway-bridge
+      sudo systemctl reset-failed redis-server chirpstack
+      sudo systemctl restart postgresql redis-server mosquitto
+      sleep 3
+      sudo systemctl restart chirpstack-gateway-bridge
+      sudo systemctl restart chirpstack
 
     # Comprobar servicios
       sudo systemctl --no-pager --full status postgresql redis-server mosquitto chirpstack chirpstack-gateway-bridge
