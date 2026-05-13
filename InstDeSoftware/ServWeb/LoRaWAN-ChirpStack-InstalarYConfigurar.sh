@@ -115,7 +115,7 @@
       sudo sed -i "s|secret = \"you-must-replace-this\"|secret = \"$vSecret\"|" /etc/chirpstack/chirpstack.toml
       sudo systemctl reset-failed redis-server chirpstack
       sudo systemctl restart postgresql redis-server mosquitto
-      sleep 3
+      sleep 5
       sudo systemctl restart chirpstack-gateway-bridge
       sudo systemctl restart chirpstack
 
