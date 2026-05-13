@@ -28,28 +28,40 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 echo "Configurando zona horaria: ${vZonaHoraria}"
-timedatectl set-timezone "${vZonaHoraria}"
 
-echo "Activando sincronización NTP"
-timedatectl set-ntp true
-
-if systemctl list-unit-files systemd-timesyncd.service >/dev/null 2>&1; then
-  echo "Reiniciando systemd-timesyncd"
-  systemctl restart systemd-timesyncd.service || true
+if command -v timedatectl >/dev/null 2>&1; then
+  timedatectl set-timezone "${vZonaHoraria}"
+else
+  ln -snf "/usr/share/zoneinfo/${vZonaHoraria}" /etc/localtime
+  echo "${vZonaHoraria}" > /etc/timezone
 fi
 
-if command -v chronyc >/dev/null 2>&1; then
-  echo "Forzando sincronización con chrony"
-  chronyc -a makestep || true
-fi
+if systemd-detect-virt -q --container 2>/dev/null; then
+  echo "Detectado contenedor LXC: se omite NTP porque el reloj lo controla el host."
+else
+  echo "Activando sincronización NTP"
 
-if command -v ntpdig >/dev/null 2>&1; then
-  echo "Forzando sincronización con ntpdig"
-  ntpdig -S 0.debian.pool.ntp.org || true
+  if timedatectl set-ntp true 2>/dev/null; then
+    echo "NTP activado correctamente."
+  else
+    echo "NTP no soportado por timedatectl en este sistema."
+  fi
+
+  if systemctl list-unit-files systemd-timesyncd.service >/dev/null 2>&1; then
+    systemctl restart systemd-timesyncd.service || true
+  fi
+
+  if command -v chronyc >/dev/null 2>&1; then
+    chronyc -a makestep || true
+  fi
+
+  if command -v ntpdig >/dev/null 2>&1; then
+    ntpdig -S 0.debian.pool.ntp.org || true
+  fi
 fi
 
 echo
-timedatectl
+timedatectl || true
 echo
 date
 
