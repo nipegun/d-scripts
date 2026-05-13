@@ -80,7 +80,14 @@
       sudo apt-get -y install mosquitto
       sudo apt-get -y install mosquitto-clients
       sudo apt-get -y install redis-server
-      sudo apt-get -y install redis-tools postgresql
+      # Corregir Redis en ARM64 dentro de LXC si no puede comprobar ARM64-COW-BUG
+        if [ "$(uname -m)" = "aarch64" ] || [ "$(uname -m)" = "arm64" ]; then
+          if [ -f /etc/redis/redis.conf ]; then
+            grep -q '^ignore-warnings ARM64-COW-BUG$' /etc/redis/redis.conf || echo 'ignore-warnings ARM64-COW-BUG' | sudo tee -a /etc/redis/redis.conf >/dev/null
+          fi
+        fi
+      sudo apt-get -y install redis-tools
+      sudo apt-get -y install postgresql
 
     #
       if [ "$(id -u)" -eq 0 ]; then
