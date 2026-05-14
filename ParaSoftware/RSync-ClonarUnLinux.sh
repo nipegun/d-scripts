@@ -9,26 +9,19 @@
 # Script de NiPeGun para clonar un linux con RSync en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/RSync-ClonarUnLinux.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/RSync-ClonarUnLinux.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/RSync-ClonarUnLinux.sh | nano -
 # ----------
-
 
 vCarpetaLinuxOrigen='/mnt/ibpve1PartLocal/'     # La / final es mandatoria
 vCarpetaLinuxDestino='/mnt/ibpve1PartLocalExt/' # La / final es mandatoria
 
-rsync -aAXHv --numeric-ids --info=progress2 --bwlimit=10M \
+sudo rsync -aAXHv --numeric-ids --info=progress2 --bwlimit=10M \
   --exclude='/dev/*'                        \
   --exclude='/proc/*'                       \
   --exclude='/sys/*'                        \
