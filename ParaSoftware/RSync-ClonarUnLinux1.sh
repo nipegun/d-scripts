@@ -21,6 +21,12 @@
 vCarpetaLinuxOrigen='/mnt/ibpve1PartLocal/'     # La / final es mandatoria
 vCarpetaLinuxDestino='/mnt/ibpve1PartLocalExt/' # La / final es mandatoria
 
+echo ""
+echo "  Intentando clonación con RSync..."
+echo "    Origen: $vCarpetaLinuxOrigen"
+echo "    Destino: $vCarpetaLinuxDestino"
+echo ""
+
 sudo rsync -aAXHv --numeric-ids --info=progress2 --bwlimit=10M \
   --exclude='/dev/*'                        \
   --exclude='/proc/*'                       \
