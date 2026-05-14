@@ -27,7 +27,7 @@ echo "    Origen: $vCarpetaLinuxOrigen"
 echo "    Destino: $vCarpetaLinuxDestino"
 echo ""
 
-sudo rsync -aAXHv --numeric-ids --info=progress2 --bwlimit=10M \
+sudo nice -n 19 ionice -c3 rsync -aAXHv --numeric-ids --info=progress2 --bwlimit=10M \
   --exclude='/dev/*'                        \
   --exclude='/proc/*'                       \
   --exclude='/sys/*'                        \
