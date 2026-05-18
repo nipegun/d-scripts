@@ -60,7 +60,7 @@
       curl --proto '=https' --tlsv1.2 -sSf https://get.stalw.art/install.sh -o install.sh
 
     # Ejecutar el script
-      sudo sh install.sh
+      sudo sh install.sh /opt/stalwart
 
     #
       echo ''
