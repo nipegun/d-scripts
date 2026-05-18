@@ -62,6 +62,20 @@
     # Ejecutar el script
       sudo sh install.sh
 
+    #
+      echo ''
+      echo '  Este password que ves aquí:'
+      echo ''
+      journalctl -u stalwart -n 200 | grep -A8 'bootstrap mode' | grep 'assword:'
+      echo ''
+      echo '    es el password del usuario admin.'
+      echo ''
+      vIPLocal=$(hostname -I | sed 's- --g')
+      echo '  Loguéate en la web:'
+      echo "    http://$vIPLocal:8080/admin"
+      echo '  con el usuario admin y esa contraseña y empieza a configurar el servidor.'
+      echo '' 
+
   elif [ $cVerSO == "12" ]; then
 
     echo ""
