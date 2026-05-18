@@ -55,9 +55,12 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Stalwart Mail Server para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Descargar el script de instalación
+      cd /tmp
+      curl --proto '=https' --tlsv1.2 -sSf https://get.stalw.art/install.sh -o install.sh
+
+    # Ejecutar el script
+      sudo sh install.sh
 
   elif [ $cVerSO == "12" ]; then
 
