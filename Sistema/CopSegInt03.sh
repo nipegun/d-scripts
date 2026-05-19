@@ -83,7 +83,7 @@
         continue
       fi
 
-      echo -e "${cColorAzul}    Copiando carpeta: $vLinea${cFinColor}"
+      echo "    Copiando carpeta: $vLinea$"
       if ! sudo cp -a --parents "$vLinea" "$cCarpetaDestino/"; then
         echo -e "${cColorRojo}    Error copiando: $vLinea${cFinColor}"
         continue
@@ -96,7 +96,7 @@
         continue
       fi
 
-      echo -e "${cColorAzul}    Copiando archivo: $vLinea${cFinColor}"
+      echo "    Copiando archivo: $vLinea$"
       if ! sudo cp -a --parents "$vLinea" "$cCarpetaDestino/"; then
         echo -e "${cColorRojo}    Error copiando: $vLinea${cFinColor}"
         continue
