@@ -46,7 +46,7 @@
   fi
 
 # Crear la carpeta de copia de seguridad
-  mkdir -p "$cCarpetaDestino"
+  sudo mkdir -p "$cCarpetaDestino"
 
 # Leer el archivo línea por línea
   while IFS= read -r vLinea || [ -n "$vLinea" ]; do
@@ -78,7 +78,7 @@
       fi
 
       echo -e "${cColorAzul}  Copiando carpeta: $vLinea${cFinColor}"
-      cp -a --parents "$vLinea" "$cCarpetaDestino/"
+      sudo cp -a --parents "$vLinea" "$cCarpetaDestino/"
 
   # Si no termina en /, debe ser un archivo existente
     else
@@ -88,13 +88,13 @@
       fi
 
       echo -e "${cColorAzul}  Copiando archivo: $vLinea${cFinColor}"
-      cp -a --parents "$vLinea" "$cCarpetaDestino/"
+      sudo cp -a --parents "$vLinea" "$cCarpetaDestino/"
     fi
 
   done < "$cArchivoConDatosACopiar"
 
 # Loguear tarea
-  echo "$cFechaDeEjec - Terminada la copia de seguridad interna." >> /var/log/CopiasDeSeguridad.log
+  echo "$cFechaDeEjec - Terminada la copia de seguridad interna." | sudo tee -a /var/log/CopiasDeSeguridad.log > /dev/null
 
 # Notificar fin de ejecución del script
   echo ""
