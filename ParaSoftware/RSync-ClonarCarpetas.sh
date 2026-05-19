@@ -80,7 +80,7 @@ echo "    Origen: $vCarpetaLinuxOrigen"
 echo "    Destino: $vCarpetaLinuxDestino"
 echo ""
 
-#sudo nice -n 19 ionice -c3 rsync -aAXHv --numeric-ids --info=progress2 --bwlimit=10M \
-#sudo rsync -aAXHv --numeric-ids --info=progress2 --bwlimit=40M \
-sudo rsync -aAXHv --numeric-ids --info=progress2 \
+#sudo nice -n 19 ionice -c3 rsync -aAHv --numeric-ids --info=progress2 --bwlimit=10M \
+#sudo rsync -aAHv --numeric-ids --info=progress2 --bwlimit=40M \
+sudo rsync -aAHv --numeric-ids --info=progress2 \
   "$vCarpetaLinuxOrigen" "$vCarpetaLinuxDestino"
