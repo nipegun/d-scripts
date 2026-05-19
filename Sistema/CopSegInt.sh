@@ -26,25 +26,77 @@
   cColorAzulClaro='\033[1;34m'
   cColorVerde='\033[1;32m'
   cColorRojo='\033[1;31m'
-  # Para el color rojo también:
-    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
   cFinColor='\033[0m'
 
 # Definir el momento de ejecución del script
   cFechaDeEjec=$(date +a%Ym%md%dh%Hm%Ms%S)
 
+# Definir carpeta de destino
+  cCarpetaDestino="/CopSegInt/$cFechaDeEjec"
+
 # Notificar inicio de ejecución del script
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando la copia de seguridad interna el $cFechaDeEjec...${FinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando la copia de seguridad interna el $cFechaDeEjec...${cFinColor}"
   echo ""
 
+# Comprobar si existe el archivo con datos a copiar
+  if [ ! -f "$cArchivoConDatosACopiar" ]; then
+    echo -e "${cColorRojo}  El archivo $cArchivoConDatosACopiar no existe.${cFinColor}"
+    exit 1
+  fi
+
 # Crear la carpeta de copia de seguridad
-  sudo mkdir -p /CopSegInt/"$cFechaDeEjec"/
+  mkdir -p "$cCarpetaDestino"
+
+# Leer el archivo línea por línea
+  while IFS= read -r vLinea || [ -n "$vLinea" ]; do
+
+  # Eliminar retorno de carro si el archivo viene de Windows
+    vLinea="${vLinea%$'\r'}"
+
+  # Ignorar líneas vacías
+    if [ -z "$vLinea" ]; then
+      continue
+    fi
+
+  # Ignorar líneas que empiezan por #
+    if [[ "$vLinea" == \#* ]]; then
+      continue
+    fi
+
+  # Comprobar que sea una ruta absoluta
+    if [[ "$vLinea" != /* ]]; then
+      echo -e "${cColorRojo}  Ruta ignorada porque no es absoluta: $vLinea${cFinColor}"
+      continue
+    fi
+
+  # Si termina en /, debe ser una carpeta existente
+    if [[ "$vLinea" == */ ]]; then
+      if [ ! -d "$vLinea" ]; then
+        echo -e "${cColorRojo}  Carpeta inexistente, ignorada: $vLinea${cFinColor}"
+        continue
+      fi
+
+      echo -e "${cColorAzul}  Copiando carpeta: $vLinea${cFinColor}"
+      cp -a --parents "$vLinea" "$cCarpetaDestino/"
+
+  # Si no termina en /, debe ser un archivo existente
+    else
+      if [ ! -f "$vLinea" ]; then
+        echo -e "${cColorRojo}  Archivo inexistente, ignorado: $vLinea${cFinColor}"
+        continue
+      fi
+
+      echo -e "${cColorAzul}  Copiando archivo: $vLinea${cFinColor}"
+      cp -a --parents "$vLinea" "$cCarpetaDestino/"
+    fi
+
+  done < "$cArchivoConDatosACopiar"
 
 # Loguear tarea
   echo "$cFechaDeEjec - Terminada la copia de seguridad interna." >> /var/log/CopiasDeSeguridad.log
 
 # Notificar fin de ejecución del script
   echo ""
-  echo -e "${ColorVerde}  Ejecución del script, finalizada.${FinColor}"
+  echo -e "${cColorVerde}  Ejecución del script finalizada.${cFinColor}"
   echo ""
