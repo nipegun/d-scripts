@@ -18,7 +18,8 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/CopSegInt.sh | nano -
 # ----------
 
-# Definir el archivo que contiene los datos a copiar
+# Definir ubicaciones
+  cCarpetaRaizDeCopias='/CopSegInt'
   cArchivoConDatosACopiar='/root/DataToBackup.txt'
 
 # Definir constantes de color
@@ -32,7 +33,7 @@
   cFechaDeEjec=$(date +a%Ym%md%dh%Hm%Ms%S)
 
 # Definir carpeta de destino
-  cCarpetaDestino="/CopSegInt/$cFechaDeEjec"
+  cCarpetaDestino="$cCarpetaRaizDeCopias"/"$cFechaDeEjec"
 
 # Notificar inicio de ejecución del script
   echo ""
@@ -47,7 +48,11 @@
   fi
 
 # Crear la carpeta de copia de seguridad
-  sudo mkdir -p "$cCarpetaDestino"
+  if ! sudo mkdir -p "$cCarpetaDestino"; then
+    echo -e "${cColorRojo}  No se pudo crear la carpeta de destino: $cCarpetaDestino${cFinColor}"
+    echo ''
+    exit 1
+  fi
 
 # Leer el archivo línea por línea
   sudo cat "$cArchivoConDatosACopiar" | while IFS= read -r vLinea || [ -n "$vLinea" ]; do
@@ -73,23 +78,29 @@
 
   # Si termina en /, debe ser una carpeta existente
     if [[ "$vLinea" == */ ]]; then
-      if [ ! -d "$vLinea" ]; then
+      if ! sudo test -d "$vLinea"; then
         echo -e "${cColorRojo}  Carpeta inexistente, ignorada: $vLinea${cFinColor}"
         continue
       fi
 
       echo -e "${cColorAzul}  Copiando carpeta: $vLinea${cFinColor}"
-      sudo cp -a --parents "$vLinea" "$cCarpetaDestino/"
+      if ! sudo cp -a --parents "$vLinea" "$cCarpetaDestino/"; then
+        echo -e "${cColorRojo}  Error copiando: $vLinea${cFinColor}"
+        continue
+      fi
 
   # Si no termina en /, debe ser un archivo existente
     else
-      if [ ! -f "$vLinea" ]; then
+      if ! sudo test -f "$vLinea"; then
         echo -e "${cColorRojo}  Archivo inexistente, ignorado: $vLinea${cFinColor}"
         continue
       fi
 
       echo -e "${cColorAzul}  Copiando archivo: $vLinea${cFinColor}"
-      sudo cp -a --parents "$vLinea" "$cCarpetaDestino/"
+      if ! sudo cp -a --parents "$vLinea" "$cCarpetaDestino/"; then
+        echo -e "${cColorRojo}  Error copiando: $vLinea${cFinColor}"
+        continue
+      fi
     fi
 
   done
