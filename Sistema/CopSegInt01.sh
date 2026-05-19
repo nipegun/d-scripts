@@ -40,8 +40,9 @@
   echo ""
 
 # Comprobar si existe el archivo con datos a copiar
-  if [ ! -f "$cArchivoConDatosACopiar" ]; then
-    echo -e "${cColorRojo}  El archivo $cArchivoConDatosACopiar no existe.${cFinColor}"
+  if ! sudo test -f "$cArchivoConDatosACopiar"; then
+    echo -e "${cColorRojo}    El archivo $cArchivoConDatosACopiar no existe.${cFinColor}"
+    echo ''
     exit 1
   fi
 
@@ -49,7 +50,7 @@
   sudo mkdir -p "$cCarpetaDestino"
 
 # Leer el archivo línea por línea
-  while IFS= read -r vLinea || [ -n "$vLinea" ]; do
+  sudo cat "$cArchivoConDatosACopiar" | while IFS= read -r vLinea || [ -n "$vLinea" ]; do
 
   # Eliminar retorno de carro si el archivo viene de Windows
     vLinea="${vLinea%$'\r'}"
@@ -91,7 +92,7 @@
       sudo cp -a --parents "$vLinea" "$cCarpetaDestino/"
     fi
 
-  done < "$cArchivoConDatosACopiar"
+  done
 
 # Loguear tarea
   echo "$cFechaDeEjec - Terminada la copia de seguridad interna." | sudo tee -a /var/log/CopiasDeSeguridad.log > /dev/null
