@@ -45,7 +45,7 @@
       echo ""
       echo "  Ejemplo:"
       echo ""
-      echo "    $vNombreDelScript '10.10.76.111' 'arlina'"
+      echo "    $vNombreDelScript '/mnt/Origen/' '/mnt/Destino/'"
       echo ""
       exit 1
   fi
