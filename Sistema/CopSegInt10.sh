@@ -37,7 +37,9 @@
 
 # Notificar inicio de ejecución del script
   echo ""
-  echo -e "${cColorAzulClaro}  Iniciando la copia de seguridad interna el $cFechaDeEjec...${cFinColor}"
+  echo -e "${cColorAzulClaro}  Iniciando el script de copia de seguridad interna el $cFechaDeEjec...${cFinColor}"
+  echo ''
+  echo "    Carpeta final de copias: $cCarpetaDestino"
   echo ""
 
 # Comprobar si existe el archivo con datos a copiar
@@ -83,7 +85,7 @@
         continue
       fi
 
-      echo "    Copiando carpeta: $vLinea$"
+      echo "    Copiando carpeta: $vLinea"
       if ! sudo cp -a --parents "$vLinea" "$cCarpetaDestino/"; then
         echo -e "${cColorRojo}      Error copiando: $vLinea${cFinColor}"
         continue
@@ -96,7 +98,7 @@
         continue
       fi
 
-      echo "    Copiando archivo: $vLinea$"
+      echo "    Copiando archivo: $vLinea"
       if ! sudo cp -a --parents "$vLinea" "$cCarpetaDestino/"; then
         echo -e "${cColorRojo}      Error copiando: $vLinea${cFinColor}"
         continue
