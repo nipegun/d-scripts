@@ -39,7 +39,7 @@
   echo ""
   echo -e "${cColorAzulClaro}  Iniciando el script de copia de seguridad interna el $cFechaDeEjec...${cFinColor}"
   echo ''
-  echo "    Carpeta final de copias: $cCarpetaDestino"
+  echo "    Carpeta destino de la copia: $cCarpetaDestino"
   echo ""
 
 # Comprobar si existe el archivo con datos a copiar
