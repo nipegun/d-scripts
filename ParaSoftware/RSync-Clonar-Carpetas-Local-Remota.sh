@@ -6,15 +6,18 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para clonar un linux con RSync en Debian
+# Script de NiPeGun para clonar una carpeta local hacia una carpeta remota con RSync en Debian
+#
+# Ejecución:
+#   ./RSync-ClonarCarpetas.sh '/Carpeta/De/Origen/' 'root@10.20.30.40:/Carpeta/Remota/'
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/RSync-Clonar-Carpetas-Local-Remota.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/RSync-Clonar-Carpetas-Local-Remota.sh | bash -s --  '/Carpeta/De/Origen/' 'root@10.20.30.40:/Carpeta/Remota/'
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/RSync-Clonar-Carpetas-Local-Remota.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/RSync-Clonar-Carpetas-Local-Remota.sh | sed 's-sudo--g' | bash -s --  '/Carpeta/De/Origen/' 'root@10.20.30.40:/Carpeta/Remota/'
 #
-# Bajar y editar directamente el archivo en nano
+# Bajar y editar directamente el archivo en nano:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/RSync-Clonar-Carpetas-Local-Remota.sh | nano -
 # ----------
 
@@ -34,53 +37,81 @@
   if [ $# -ne $cCantArgsEsperados ]
     then
       echo ""
-      echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería: ${cFinColor}"
+      echo -e "${cColorRojo}  Mal uso del script. El uso correcto sería:${cFinColor}"
       echo ""
       if [[ "$0" == "bash" ]]; then
         vNombreDelScript="script.sh"
       else
         vNombreDelScript="$0"
       fi
-      echo "    $vNombreDelScript [Argumento1] [Argumento2]"
+      echo "    $vNombreDelScript [CarpetaLocalOrigen/] [Usuario@Host:/CarpetaRemotaDestino/]"
       echo ""
       echo "  Ejemplo:"
       echo ""
-      echo "    $vNombreDelScript '/mnt/Origen/' '/mnt/Destino/'"
+      echo "    $vNombreDelScript '/mnt/PartDatos/' 'root@10.10.10.20:/mnt/BackupDatos/'"
       echo ""
       exit 1
   fi
 
-vCarpetaLinuxOrigen="$1"  # La / final es mandatoria
-vCarpetaLinuxDestino="$2" # La / final es mandatoria
+vCarpetaLocalOrigen="$1"   # La / final es mandatoria
+vCarpetaRemotaDestino="$2" # La / final es mandatoria. Formato: usuario@servidor:/ruta/remota/
 
-# Comprobar que las dos carpetas terminen en /
-if [[ "$vCarpetaLinuxOrigen" != */ ]]
-  then
-    echo ""
-    echo -e "${cColorRojo}  La carpeta de origen debe terminar con /.${cFinColor}"
-    echo ""
-    echo "    Origen recibido: $vCarpetaLinuxOrigen"
-    echo ""
-    exit 1
-fi
+# Comprobar que la carpeta local de origen termine en /
+  if [[ "$vCarpetaLocalOrigen" != */ ]]
+    then
+      echo ""
+      echo -e "${cColorRojo}  La carpeta local de origen debe terminar con /.${cFinColor}"
+      echo ""
+      echo "    Origen recibido: $vCarpetaLocalOrigen"
+      echo ""
+      exit 1
+  fi
 
-if [[ "$vCarpetaLinuxDestino" != */ ]]
-  then
-    echo ""
-    echo -e "${cColorRojo}  La carpeta de destino debe terminar con /.${cFinColor}"
-    echo ""
-    echo "    Destino recibido: $vCarpetaLinuxDestino"
-    echo ""
-    exit 1
-fi
+# Comprobar que la carpeta remota de destino termine en /
+  if [[ "$vCarpetaRemotaDestino" != */ ]]
+    then
+      echo ""
+      echo -e "${cColorRojo}  La carpeta remota de destino debe terminar con /.${cFinColor}"
+      echo ""
+      echo "    Destino recibido: $vCarpetaRemotaDestino"
+      echo ""
+      exit 1
+  fi
+
+# Comprobar que la carpeta local de origen exista
+  if [ ! -d "$vCarpetaLocalOrigen" ]
+    then
+      echo ""
+      echo -e "${cColorRojo}  La carpeta local de origen no existe.${cFinColor}"
+      echo ""
+      echo "    Origen recibido: $vCarpetaLocalOrigen"
+      echo ""
+      exit 1
+  fi
+
+# Comprobar que el destino tenga formato remoto usuario@servidor:/ruta/
+  if [[ "$vCarpetaRemotaDestino" != *@*:/* ]]
+    then
+      echo ""
+      echo -e "${cColorRojo}  El destino debe tener formato remoto.${cFinColor}"
+      echo ""
+      echo "  Formato esperado:"
+      echo ""
+      echo "    usuario@servidor:/ruta/remota/"
+      echo ""
+      echo "  Destino recibido:"
+      echo ""
+      echo "    $vCarpetaRemotaDestino"
+      echo ""
+      exit 1
+  fi
 
 echo ""
-echo "  Intentando clonación con RSync..."
-echo "    Origen: $vCarpetaLinuxOrigen"
-echo "    Destino: $vCarpetaLinuxDestino"
+echo "  Intentando clonación con RSync hacia destino remoto..."
+echo ""
+echo "    Origen local:    $vCarpetaLocalOrigen"
+echo "    Destino remoto:  $vCarpetaRemotaDestino"
 echo ""
 
-#sudo nice -n 19 ionice -c3 rsync -aAHv --numeric-ids --info=progress2 --bwlimit=10M \
-#sudo rsync -aAHv --numeric-ids --info=progress2 --bwlimit=40M \
-sudo rsync -aAHv --numeric-ids --info=progress2 \
-  "$vCarpetaLinuxOrigen" "$vCarpetaLinuxDestino"
+sudo rsync -aAHv --numeric-ids --info=progress2 -e ssh \
+  "$vCarpetaLocalOrigen" "$vCarpetaRemotaDestino"
