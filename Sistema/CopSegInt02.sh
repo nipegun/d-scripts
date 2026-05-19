@@ -72,33 +72,33 @@
 
   # Comprobar que sea una ruta absoluta
     if [[ "$vLinea" != /* ]]; then
-      echo -e "${cColorRojo}  Ruta ignorada porque no es absoluta: $vLinea${cFinColor}"
+      echo -e "${cColorRojo}    Ruta ignorada porque no es absoluta: $vLinea${cFinColor}"
       continue
     fi
 
   # Si termina en /, debe ser una carpeta existente
     if [[ "$vLinea" == */ ]]; then
       if ! sudo test -d "$vLinea"; then
-        echo -e "${cColorRojo}  Carpeta inexistente, ignorada: $vLinea${cFinColor}"
+        echo -e "${cColorRojo}    Carpeta inexistente, ignorada: $vLinea${cFinColor}"
         continue
       fi
 
-      echo -e "${cColorAzul}  Copiando carpeta: $vLinea${cFinColor}"
+      echo -e "${cColorAzul}    Copiando carpeta: $vLinea${cFinColor}"
       if ! sudo cp -a --parents "$vLinea" "$cCarpetaDestino/"; then
-        echo -e "${cColorRojo}  Error copiando: $vLinea${cFinColor}"
+        echo -e "${cColorRojo}    Error copiando: $vLinea${cFinColor}"
         continue
       fi
 
   # Si no termina en /, debe ser un archivo existente
     else
       if ! sudo test -f "$vLinea"; then
-        echo -e "${cColorRojo}  Archivo inexistente, ignorado: $vLinea${cFinColor}"
+        echo -e "${cColorRojo}    Archivo inexistente, ignorado: $vLinea${cFinColor}"
         continue
       fi
 
-      echo -e "${cColorAzul}  Copiando archivo: $vLinea${cFinColor}"
+      echo -e "${cColorAzul}    Copiando archivo: $vLinea${cFinColor}"
       if ! sudo cp -a --parents "$vLinea" "$cCarpetaDestino/"; then
-        echo -e "${cColorRojo}  Error copiando: $vLinea${cFinColor}"
+        echo -e "${cColorRojo}    Error copiando: $vLinea${cFinColor}"
         continue
       fi
     fi
