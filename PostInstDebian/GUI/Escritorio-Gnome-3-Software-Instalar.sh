@@ -179,6 +179,7 @@
       #sudo chmod 640 /var/log/clamav/freshclam.log
       sudo rm -rf /var/log/clamav/freshclam.log
       sudo freshclam
+      sudo systemctl enable --now clamav-freshclam
 
     # SmartCards
       sudo apt-get -y install pcscd
