@@ -238,8 +238,20 @@ if [ $cVerSO == "13" ]; then
               echo ""
               echo "      Instalando el servidor de bases de datos..."
               echo ""
-              curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-BBDD-MariaDB-InstalarYConfigurar.sh | sed 's-sudo--g'| bash
-
+              sudo apt-get -y install mariadb-server
+            # Instalar phpmyadmin
+              echo ""
+              echo "      Instalando phpmyadmin..."
+              echo ""
+              vPhpMyAdminPass='P@ssw0rd'
+              echo 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2'        | sudo debconf-set-selections
+              echo 'phpmyadmin phpmyadmin/dbconfig-install boolean true'                    | sudo debconf-set-selections
+              echo "phpmyadmin phpmyadmin/mysql/app-pass password ${vPhpMyAdminPass}"       | sudo debconf-set-selections
+              echo "phpmyadmin phpmyadmin/app-password-confirm password ${vPhpMyAdminPass}" | sudo debconf-set-selections
+              sudo DEBIAN_FRONTEND=noninteractive apt-get install -y phpmyadmin
+              echo ''
+              echo "        Se ha instalado phpmyadmin. La contraseña admin que se puso es: $vPhpMyAdminPass"
+              echo ''
             # Instalar memcached
               echo ""
               echo "      Instalando MemCacheD..."
@@ -266,7 +278,7 @@ if [ $cVerSO == "13" ]; then
 
           2)
 
-            # Instalar el cortafuegos NFTables
+            # Agregar el certificado de letsencrypt
               echo ""
               echo "    Agregando el certificado SSL de letsencrypt y configurando Apache para que lo use..."
               echo ""
@@ -316,11 +328,17 @@ if [ $cVerSO == "13" ]; then
             # Modificar la configuración de apache
               echo ""
               echo "    Modificando el archivo remoteip.conf en Apache..."
-              echo ""
-              echo "RemoteIPHeader X-Forwarded-For"                                                    | sudo tee    /etc/apache2/conf-available/remoteip.conf
-              echo "#RemoteIPInternalProxy 0.0.0.0"                                                    | sudo tee -a /etc/apache2/conf-available/remoteip.conf
-              echo "#RemoteIPTrustedProxy 0.0.0.0"                                                     | sudo tee -a /etc/apache2/conf-available/remoteip.conf
-              echo 'LogFormat "%a %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined' | sudo tee -a /etc/apache2/conf-available/remoteip.conf
+              echo ''
+              echo '<IfModule remoteip_module>'                                                                 | sudo tee    /etc/apache2/conf-available/remoteip.conf
+              echo '  RemoteIPHeader X-Forwarded-For'                                                           | sudo tee -a /etc/apache2/conf-available/remoteip.conf
+              echo '  #RemoteIPInternalProxy 0.0.0.0'                                                           | sudo tee -a /etc/apache2/conf-available/remoteip.conf
+              echo '  #RemoteIPTrustedProxy 0.0.0.0'                                                            | sudo tee -a /etc/apache2/conf-available/remoteip.conf
+              echo '  LogFormat "%a %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" remote_combined' | sudo tee -a /etc/apache2/conf-available/remoteip.conf
+              echo '</IfModule>'                                                                                | sudo tee -a /etc/apache2/conf-available/remoteip.conf
+              # Modificar los logs
+                sudo sed -i -e 's| combined| remote_combined|g' /etc/apache2/sites-available/000-default.conf
+                sudo sed -i -e 's| combined| remote_combined|g' /etc/apache2/sites-available/default-ssl.conf
+
             # Activar la configuración de remoteip
               echo ""
               echo "    Activando la configuración de apache de remoteip..."
