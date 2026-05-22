@@ -134,6 +134,11 @@
                 sudo sed -i -e 's|# OVERLEAF_HEADER_IMAGE_URL=http://somewhere.com/mylogo.png|OVERLEAF_HEADER_IMAGE_URL=https://es.overleaf.com/logo.png|g'  /opt/overleaf/config/variables.env
                 sudo sed -i -e 's|# OVERLEAF_ADMIN_EMAIL=support@example.com|OVERLEAF_ADMIN_EMAIL=support@example.com|g'                                     /opt/overleaf/config/variables.env
 
+              # Instalar y activar docker
+                sudo apt-get -y install docker.io
+                sudo systemctl enable docker
+                sudo systemctl start docker
+
               # Levantar todos los servicios en background
                 cd /opt/overleaf
                 # Comprobar si el paquete docker-compose está instalado. Si no lo está, instalarlo.
