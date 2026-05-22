@@ -111,11 +111,12 @@ if [ $cVerSO == "13" ]; then
               echo "      Activando sitio SSL por defecto en Apache..."
               echo ""
               sudo a2ensite default-ssl
+              sudo systemctl reload apache2
             # Configurar carpeta de logs del sitio por defecto
               echo ""
               echo "      Configurando carpeta de logs del sitio por defecto..."
               echo ""
-              sudo cp /etc/apache2/sites-available/000-default.conf     /etc/apache2/sites-available/000-default.conf..bak.ori
+              sudo cp /etc/apache2/sites-available/000-default.conf     /etc/apache2/sites-available/000-default.conf.bak.ori
               sudo mkdir -p "$cCarpetaDeLogs"
               sudo sed -i -e 's|${APACHE_LOG_DIR}|'"$cCarpetaDeLogs"'|g' /etc/apache2/sites-available/000-default.conf
               echo "RewriteEngine On"                                  | sudo tee    "$cCarpetaDeLogs"/.htaccess
@@ -173,8 +174,7 @@ if [ $cVerSO == "13" ]; then
               echo ""
               echo "      Modificando el servidor SSH..."
               echo ""
-              sudo apt-get -y install tasksel
-              sudo tasksel install ssh-server
+              sudo apt-get -y install openssh-server
               sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak.ori
               echo ""                             | sudo tee -a /etc/ssh/sshd_config
               echo "Match Group webmasters"       | sudo tee -a /etc/ssh/sshd_config
