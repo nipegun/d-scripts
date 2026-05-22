@@ -241,12 +241,12 @@
                     sudo nft add chain inet filter input { type filter hook input priority 0 \; }
                     sudo nft add rule inet filter input tcp dport { 80, 443 } accept
 
-                  sudo systemctl apache2 stop
+                  sudo systemctl stop apache2
                   sudo apt-get -y update
                   sudo apt-get -y install certbot
                   sudo apt-get -y install python3-certbot-apache
-                  sudo certbot --apache -d "$cDominio""$cExtDominio" -d www."$cDominio""$cExtDominio"
-                  sudo systemctl apache2 start
+                  sudo certbot --apache --non-interactive --agree-tos --no-eff-email -m "admin@$cDominio$cExtDominio" -d "$cDominio""$cExtDominio" -d www."$cDominio""$cExtDominio"
+                  sudo systemctl start apache2
 
                 elif [ $cVerSO == "12" ]; then
 
