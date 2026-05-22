@@ -139,7 +139,15 @@ if [ $cVerSO == "13" ]; then
             echo ""
             echo "  Instalando phpmyadmin..."
             echo ""
-            sudo apt-get -y install phpmyadmin
+            vPhpMyAdminPass='P@ssw0rd'
+            echo 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2'        | sudo debconf-set-selections
+            echo 'phpmyadmin phpmyadmin/dbconfig-install boolean true'                    | sudo debconf-set-selections
+            echo "phpmyadmin phpmyadmin/mysql/app-pass password ${vPhpMyAdminPass}"       | sudo debconf-set-selections
+            echo "phpmyadmin phpmyadmin/app-password-confirm password ${vPhpMyAdminPass}" | sudo debconf-set-selections
+            sudo DEBIAN_FRONTEND=noninteractive apt-get install -y phpmyadmin
+            echo ''
+            echo "    Se ha instalado phpmyadmin. La contraseña admin que se puso es: $vPhpMyAdminPass"
+            echo ''
 
         ;;
 
