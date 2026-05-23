@@ -240,6 +240,11 @@
                 echo "  Conéctate a la web https://$vIPHost/launchpad para crear la cuenta de administrador"
                 echo ""
 
+              # Una vez instalado y configurado, para cambiar el siteurl:
+                # Modifica: /opt/overleaf/config/variables.env
+                # y luego: cd /opt/overleaf && bin/up -d
+                #
+
             ;;
 
         esac
