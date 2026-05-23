@@ -226,10 +226,10 @@
                 sudo bin/docker-compose up -d --force-recreate sharelatex
 
               # Verificar que sharelatex está usando la imagen personalizada
-                #sudo docker inspect sharelatex --format 'Image={{.Config.Image}}'
+                sudo docker inspect sharelatex --format 'Image={{.Config.Image}}'
 
               # Verificar que scheme-full sigue instalado dentro del nuevo contenedor
-                #sudo docker exec -i sharelatex bash -lc 'tlmgr info scheme-full | grep -E "package:|installed:"'
+                sudo docker exec -i sharelatex bash -lc 'tlmgr info scheme-full | grep -E "package:|installed:"'
 
               # Notificar fin de ejecución del script
                 sleep 5
@@ -245,7 +245,6 @@
         esac
 
     done
-
 
   elif [ $cVerSO == "12" ]; then
 
@@ -309,7 +308,8 @@
                 sudo sed -i -e 's|# OVERLEAF_SECURE_COOKIE=true|OVERLEAF_SECURE_COOKIE=true|g' /opt/overleaf/config/variables.env
 
               # NGINX
-                vIPHost=$(hostname -I | sed 's- --g')
+                #vIPHost=$(hostname -I | sed 's- --g')
+                vIPHost="$(ip -4 route get 1.1.1.1 | sed -n 's/.* src \([0-9.]*\).*/\1/p' | head -n 1)"
                 #sudo sed -i -e 's|# OVERLEAF_IMAGE_NAME=sharelatex/sharelatex|OVERLEAF_IMAGE_NAME=overleaf/overleaf|g' /opt/overleaf/config/overleaf.rc
                 sudo sed -i -e 's|NGINX_ENABLED=false|NGINX_ENABLED=true|g'                                            /opt/overleaf/config/overleaf.rc
                 sudo sed -i -e "s|NGINX_HTTP_LISTEN_IP=127.0.1.1|NGINX_HTTP_LISTEN_IP=$vIPHost|g"                      /opt/overleaf/config/overleaf.rc
@@ -328,7 +328,6 @@
                 sudo systemctl start docker
 
               # Levantar todos los servicios en background
-                cd /opt/overleaf
                 # Comprobar si el paquete docker-compose está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s docker-compose 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
@@ -338,7 +337,45 @@
                     sudo apt-get -y install docker-compose
                     echo ""
                   fi
-                sudo bin/up -d
+                # Detectar si se está dentro de un contenedor systemd-nspawn
+                  if [[ "$(systemd-detect-virt 2>/dev/null)" == "systemd-nspawn" ]]; then
+                    echo ""
+                    echo "  Detectado contenedor systemd-nspawn. Procediendo con las modificaciones..."
+                    echo ""
+                    sudo mkdir -p /etc/systemd/system/docker.service.d/
+                    echo '[Service]'                                         | sudo tee    /etc/systemd/system/docker.service.d/override.conf
+                    echo 'Environment=DOCKER_ALLOW_IPV6_ON_IPV4_INTERFACE=1' | sudo tee -a /etc/systemd/system/docker.service.d/override.conf
+                    sudo systemctl daemon-reload
+                    sudo systemctl restart docker
+                    sed -i "s#test: echo 'db.stats().ok' | \${MONGOSH} localhost:27017/test --quiet#test: \${MONGOSH} localhost:27017/test --quiet --eval 'db.stats().ok'#" /opt/overleaf/lib/docker-compose.mongo.yml
+                    grep -q '^SIBLING_CONTAINERS_ENABLED=' /opt/overleaf/config/overleaf.rc && sed -i 's/^SIBLING_CONTAINERS_ENABLED=.*/SIBLING_CONTAINERS_ENABLED=false/' /opt/overleaf/config/overleaf.rc || echo 'SIBLING_CONTAINERS_ENABLED=false' >> /opt/overleaf/config/overleaf.rc
+                    # Corregir forwarding y hacerlo persistente
+                      sudo mkdir -p /root/scripts/ParaEsteDebian
+                      echo '#!/bin/bash'                                                                                                                                                                                                                                                     | sudo tee    /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo ''                                                                                                                                                                                                                                                                | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'set -euo pipefail'                                                                                                                                                                                                                                               | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo ''                                                                                                                                                                                                                                                                | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'vBridge="$(docker network inspect overleaf_default --format "{{.Id}}" | cut -c1-12)"'                                                                                                                                                                            | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'vInterface="$(ip -o -4 route show default | sed -n "s/^default.* dev \([^ ]*\).*/\1/p" | head -n 1)"'                                                                                                                                                            | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo ''                                                                                                                                                                                                                                                                | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'if [[ -z "$vBridge" ]]; then'                                                                                                                                                                                                                                    | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo '  echo "No se pudo detectar la bridge de Docker para overleaf_default"'                                                                                                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo '  exit 1'                                                                                                                                                                                                                                                        | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'fi'                                                                                                                                                                                                                                                              | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo ''                                                                                                                                                                                                                                                                | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'if [[ -z "$vInterface" ]]; then'                                                                                                                                                                                                                                 | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo '  echo "No se pudo detectar la interfaz de salida por defecto"'                                                                                                                                                                                                   | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo '  exit 1'                                                                                                                                                                                                                                                        | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'fi'                                                                                                                                                                                                                                                              | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo ''                                                                                                                                                                                                                                                                | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'nft list chain inet filter forward | grep -Fq "iifname \"br-${vBridge}\" oifname \"${vInterface}\" accept" || nft insert rule inet filter forward iifname "br-${vBridge}" oifname "${vInterface}" accept'                                                        | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'nft list chain inet filter forward | grep -Fq "iifname \"${vInterface}\" oifname \"br-${vBridge}\" ct state established,related accept" || nft insert rule inet filter forward iifname "${vInterface}" oifname "br-${vBridge}" ct state related,established accept' | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'nft list chain inet filter forward | grep -Fq "iifname \"br-${vBridge}\" oifname \"br-${vBridge}\" accept" || nft insert rule inet filter forward iifname "br-${vBridge}" oifname "br-${vBridge}" accept'                                                        | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      sudo chmod +x /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      sudo /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo /root/scripts/ParaEsteDebian/CorregirForwarding.sh | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
+                  fi
+                cd /opt/overleaf && sudo bin/up -d
 
               # Notificar fin de ejecución del script
                 sleep 5
@@ -356,8 +393,7 @@
               echo "  Agregando algunos paquetes extra..."
               echo ""
               # ragged2e
-                #sudo docker exec -it sharelatex bash -c "tlmgr install ragged2e && tlmgr update --self --all"
-                sudo docker exec -i sharelatex bash -c "tlmgr install ragged2e && tlmgr update --self --all"
+                docker exec -i sharelatex bash -lc 'vAnioTeXLive="$(basename "$(kpsewhich -var-value=SELFAUTOPARENT)")"; tlmgr option repository "https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/${vAnioTeXLive}/tlnet-final" && tlmgr install ragged2e'
 
             ;;
 
@@ -368,32 +404,29 @@
               echo ""
 
               # Instalar el esquema de paquetes completo
-                #sudo docker exec -it sharelatex bash -c "wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh"
-                #sudo docker exec -it sharelatex bash -c "sh update-tlmgr-latest.sh"
-                #sudo docker exec -it sharelatex bash -c "tlmgr --version"
-                #sudo docker exec -it sharelatex bash -c "tlmgr install scheme-full"
-                #sudo docker exec -it sharelatex bash -c "tlmgr update --self --all"
-                sudo docker exec -i sharelatex bash -c "wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh"
-                sudo docker exec -i sharelatex bash -c "sh update-tlmgr-latest.sh"
-                sudo docker exec -i sharelatex bash -c "tlmgr --version"
-                sudo docker exec -i sharelatex bash -c "tlmgr install scheme-full"
-                sudo docker exec -i sharelatex bash -c "tlmgr update --self --all"
+                sudo docker exec -i sharelatex bash -lc 'vAnioTeXLive="$(basename "$(kpsewhich -var-value=SELFAUTOPARENT)")"; tlmgr option repository "https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/${vAnioTeXLive}/tlnet-final"; tlmgr install scheme-full'
 
-              # Guuardar los cambios en una nueva imagen
-#                sudo docker commit sharelatex overleaf:scheme-full
+              # Guardar los cambios en una nueva imagen
+                vAnioTeXLive="$(sudo docker exec -i sharelatex bash -lc 'basename "$(kpsewhich -var-value=SELFAUTOPARENT)"')"
+                vImagenOverleafPersonalizada="overleaf:texlive-full-${vAnioTeXLive}"
+                sudo docker commit sharelatex "$vImagenOverleafPersonalizada"
 
               # Crear el archivo override para que docker compose cargue la nueva imagen, en vez de la vieja
-#                echo "---"                             | sudo tee    /opt/overleaf/lib/docker-compose.override.yml
-#                echo "services:"                       | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
-#                echo "  sharelatex:"                   | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
-#                echo "    image: overleaf:scheme-full" | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
-#                sudo chown overleaf:overleaf /opt/overleaf -R
+                echo "---"                                      | sudo tee    /opt/overleaf/config/docker-compose.override.yml
+                echo "services:"                                | sudo tee -a /opt/overleaf/config/docker-compose.override.yml
+                echo "  sharelatex:"                            | sudo tee -a /opt/overleaf/config/docker-compose.override.yml
+                echo "    image: $vImagenOverleafPersonalizada" | sudo tee -a /opt/overleaf/config/docker-compose.override.yml
+                sudo chown overleaf:overleaf /opt/overleaf/config/docker-compose.override.yml
 
-              # Finalmente, parar todas las imagenes de overlead, borrar el contenedor original y re-arrancar con la imagen nueva
-#                cd /opt/overleaf
-#                sudo bin/stop
-#                sudo bin/docker-compose rm -f sharelatex
-#                sudo bin/up -d
+              # Recrear únicamente el contenedor sharelatex con la imagen nueva
+                cd /opt/overleaf
+                sudo bin/docker-compose up -d --force-recreate sharelatex
+
+              # Verificar que sharelatex está usando la imagen personalizada
+                sudo docker inspect sharelatex --format 'Image={{.Config.Image}}'
+
+              # Verificar que scheme-full sigue instalado dentro del nuevo contenedor
+                sudo docker exec -i sharelatex bash -lc 'tlmgr info scheme-full | grep -E "package:|installed:"'
 
               # Notificar fin de ejecución del script
                 sleep 5
