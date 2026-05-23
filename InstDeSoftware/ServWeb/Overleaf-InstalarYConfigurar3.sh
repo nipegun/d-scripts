@@ -113,7 +113,7 @@
               # NGINX
                 #vIPHost=$(hostname -I | sed 's- --g')
                 vIPHost="$(ip -4 route get 1.1.1.1 | sed -n 's/.* src \([0-9.]*\).*/\1/p' | head -n 1)"
-                sudo sed -i -e 's|# OVERLEAF_IMAGE_NAME=sharelatex/sharelatex|OVERLEAF_IMAGE_NAME=overleaf/overleaf|g' /opt/overleaf/config/overleaf.rc
+                #sudo sed -i -e 's|# OVERLEAF_IMAGE_NAME=sharelatex/sharelatex|OVERLEAF_IMAGE_NAME=overleaf/overleaf|g' /opt/overleaf/config/overleaf.rc
                 sudo sed -i -e 's|NGINX_ENABLED=false|NGINX_ENABLED=true|g'                                            /opt/overleaf/config/overleaf.rc
                 sudo sed -i -e "s|NGINX_HTTP_LISTEN_IP=127.0.1.1|NGINX_HTTP_LISTEN_IP=$vIPHost|g"                      /opt/overleaf/config/overleaf.rc
                 sudo sed -i -e "s|NGINX_TLS_LISTEN_IP=127.0.1.1|NGINX_TLS_LISTEN_IP=$vIPHost|g"                        /opt/overleaf/config/overleaf.rc
@@ -149,6 +149,11 @@
                     sudo systemctl restart docker
                     sed -i "s#test: echo 'db.stats().ok' | \${MONGOSH} localhost:27017/test --quiet#test: \${MONGOSH} localhost:27017/test --quiet --eval 'db.stats().ok'#" /opt/overleaf/lib/docker-compose.mongo.yml
                     grep -q '^SIBLING_CONTAINERS_ENABLED=' /opt/overleaf/config/overleaf.rc && sed -i 's/^SIBLING_CONTAINERS_ENABLED=.*/SIBLING_CONTAINERS_ENABLED=false/' /opt/overleaf/config/overleaf.rc || echo 'SIBLING_CONTAINERS_ENABLED=false' >> /opt/overleaf/config/overleaf.rc
+                    vBridge="$(docker network inspect overleaf_default --format '{{.Id}}' | cut -c1-12)"
+                    IFACE=$(ip -o -4 route show default | awk '{print $5}')
+                    nft add rule inet filter forward iifname "br-${vBridge}" oifname "${IFACE}" accept
+                    nft add rule inet filter forward iifname "${IFACE}" oifname "br-${vBridge}" ct state related,established accept
+                    nft add rule inet filter forward iifname "br-${vBridge}" oifname "br-${vBridge}" accept
                   fi
                 cd /opt/overleaf && sudo bin/up -d
 
@@ -168,8 +173,7 @@
               echo "  Agregando algunos paquetes extra..."
               echo ""
               # ragged2e
-                #sudo docker exec -it sharelatex bash -c "tlmgr install ragged2e && tlmgr update --self --all"
-                sudo docker exec -i sharelatex bash -c "tlmgr install ragged2e && tlmgr update --self --all"
+                docker exec -i sharelatex bash -lc 'vAnioTeXLive="$(basename "$(kpsewhich -var-value=SELFAUTOPARENT)")"; tlmgr option repository "https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/${vAnioTeXLive}/tlnet-final" && tlmgr install ragged2e'
 
             ;;
 
@@ -180,32 +184,29 @@
               echo ""
 
               # Instalar el esquema de paquetes completo
-                #sudo docker exec -it sharelatex bash -c "wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh"
-                #sudo docker exec -it sharelatex bash -c "sh update-tlmgr-latest.sh"
-                #sudo docker exec -it sharelatex bash -c "tlmgr --version"
-                #sudo docker exec -it sharelatex bash -c "tlmgr install scheme-full"
-                #sudo docker exec -it sharelatex bash -c "tlmgr update --self --all"
-                sudo docker exec -i sharelatex bash -c "wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh"
-                sudo docker exec -i sharelatex bash -c "sh update-tlmgr-latest.sh"
-                sudo docker exec -i sharelatex bash -c "tlmgr --version"
-                sudo docker exec -i sharelatex bash -c "tlmgr install scheme-full"
-                sudo docker exec -i sharelatex bash -c "tlmgr update --self --all"
+                sudo docker exec -i sharelatex bash -lc 'vAnioTeXLive="$(basename "$(kpsewhich -var-value=SELFAUTOPARENT)")"; tlmgr option repository "https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/${vAnioTeXLive}/tlnet-final"; tlmgr install scheme-full'
 
-              # Guuardar los cambios en una nueva imagen
-#                sudo docker commit sharelatex overleaf:scheme-full
+              # Guardar los cambios en una nueva imagen
+                vAnioTeXLive="$(sudo docker exec -i sharelatex bash -lc 'basename "$(kpsewhich -var-value=SELFAUTOPARENT)"')"
+                vImagenOverleafPersonalizada="overleaf:texlive-full-${vAnioTeXLive}"
+                sudo docker commit sharelatex "$vImagenOverleafPersonalizada"
 
               # Crear el archivo override para que docker compose cargue la nueva imagen, en vez de la vieja
-#                echo "---"                             | sudo tee    /opt/overleaf/lib/docker-compose.override.yml
-#                echo "services:"                       | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
-#                echo "  sharelatex:"                   | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
-#                echo "    image: overleaf:scheme-full" | sudo tee -a /opt/overleaf/lib/docker-compose.override.yml
-#                sudo chown overleaf:overleaf /opt/overleaf -R
+                echo "---"                                      | sudo tee    /opt/overleaf/config/docker-compose.override.yml
+                echo "services:"                                | sudo tee -a /opt/overleaf/config/docker-compose.override.yml
+                echo "  sharelatex:"                            | sudo tee -a /opt/overleaf/config/docker-compose.override.yml
+                echo "    image: $vImagenOverleafPersonalizada" | sudo tee -a /opt/overleaf/config/docker-compose.override.yml
+                sudo chown overleaf:overleaf /opt/overleaf/config/docker-compose.override.yml
 
-              # Finalmente, parar todas las imagenes de overlead, borrar el contenedor original y re-arrancar con la imagen nueva
-#                cd /opt/overleaf
-#                sudo bin/stop
-#                sudo bin/docker-compose rm -f sharelatex
-#                sudo bin/up -d
+              # Recrear únicamente el contenedor sharelatex con la imagen nueva
+                cd /opt/overleaf
+                sudo bin/docker-compose up -d --force-recreate sharelatex
+
+              # Verificar que sharelatex está usando la imagen personalizada
+                sudo docker inspect sharelatex --format 'Image={{.Config.Image}}'
+
+              # Verificar que scheme-full sigue instalado dentro del nuevo contenedor
+                sudo docker exec -i sharelatex bash -lc 'tlmgr info scheme-full | grep -E "package:|installed:"'
 
               # Notificar fin de ejecución del script
                 sleep 5
