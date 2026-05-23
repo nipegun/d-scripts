@@ -6,23 +6,19 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
+# Script de NiPeGun para instalar y configurar Heimdall en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Heimdall-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Heimdall-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/Heimdall-InstalarYConfigurar.sh | nano -
 # ----------
+
+cPuerto='11080'
 
 # Definir constantes de color
   cColorAzul='\033[0;34m'
@@ -143,31 +139,37 @@
       echo ""
       echo "    Creando el servicio en SystemD..."
       echo ""
-      echo "[Unit]"                                                            | sudo tee    /etc/systemd/system/heimdall.service
-      echo "Description=Heimdall"                                              | sudo tee -a /etc/systemd/system/heimdall.service
-      echo "After=network.target"                                              | sudo tee -a /etc/systemd/system/heimdall.service
-      echo ""                                                                  | sudo tee -a /etc/systemd/system/heimdall.service
-      echo "[Service]"                                                         | sudo tee -a /etc/systemd/system/heimdall.service
-      echo "Restart=always"                                                    | sudo tee -a /etc/systemd/system/heimdall.service
-      echo "RestartSec=5"                                                      | sudo tee -a /etc/systemd/system/heimdall.service
-      echo "Type=simple"                                                       | sudo tee -a /etc/systemd/system/heimdall.service
-      echo "User=www-data"                                                     | sudo tee -a /etc/systemd/system/heimdall.service
-      echo "Group=www-data"                                                    | sudo tee -a /etc/systemd/system/heimdall.service
-      echo "WorkingDirectory=/var/www/heimdall"                                | sudo tee -a /etc/systemd/system/heimdall.service
-      echo 'ExecStart="/usr/bin/php" artisan serve --port 7889 --host 0.0.0.0' | sudo tee -a /etc/systemd/system/heimdall.service
-      echo "TimeoutStopSec=30"                                                 | sudo tee -a /etc/systemd/system/heimdall.service
-      echo ""                                                                  | sudo tee -a /etc/systemd/system/heimdall.service
-      echo "[Install]"                                                         | sudo tee -a /etc/systemd/system/heimdall.service
-      echo "WantedBy=multi-user.target"                                        | sudo tee -a /etc/systemd/system/heimdall.service
+      echo "[Unit]"                                                                | sudo tee    /etc/systemd/system/heimdall.service
+      echo "Description=Heimdall"                                                  | sudo tee -a /etc/systemd/system/heimdall.service
+      echo "After=network.target"                                                  | sudo tee -a /etc/systemd/system/heimdall.service
+      echo ""                                                                      | sudo tee -a /etc/systemd/system/heimdall.service
+      echo "[Service]"                                                             | sudo tee -a /etc/systemd/system/heimdall.service
+      echo "Restart=always"                                                        | sudo tee -a /etc/systemd/system/heimdall.service
+      echo "RestartSec=5"                                                          | sudo tee -a /etc/systemd/system/heimdall.service
+      echo "Type=simple"                                                           | sudo tee -a /etc/systemd/system/heimdall.service
+      echo "User=www-data"                                                         | sudo tee -a /etc/systemd/system/heimdall.service
+      echo "Group=www-data"                                                        | sudo tee -a /etc/systemd/system/heimdall.service
+      echo "WorkingDirectory=/var/www/heimdall"                                    | sudo tee -a /etc/systemd/system/heimdall.service
+      echo "ExecStart='/usr/bin/php' artisan serve --port $cPuerto --host 0.0.0.0" | sudo tee -a /etc/systemd/system/heimdall.service
+      echo "TimeoutStopSec=30"                                                     | sudo tee -a /etc/systemd/system/heimdall.service
+      echo ""                                                                      | sudo tee -a /etc/systemd/system/heimdall.service
+      echo "[Install]"                                                             | sudo tee -a /etc/systemd/system/heimdall.service
+      echo "WantedBy=multi-user.target"                                            | sudo tee -a /etc/systemd/system/heimdall.service
       sudo systemctl enable --now heimdall.service
       sudo cd /var/www/heimdall/
       sudo /usr/bin/php artisan key:generate
       sudo rm -rf /var/www/heimdall/storage/framework/sessions/* 2> /dev/null
-    # Reiniciar el sistema
-      echo ""
-      echo "    Reiniciando el sistema..."
-      echo ""
-      sudo shutdown -r now
+      sudo chown -R www-data:www-data /var/www/heimdall/storage
+      sudo chown -R www-data:www-data /var/www/heimdall/bootstrap/cache
+      sudo systemctl restart heimdall.service
+    # Notificar fin de la instalación
+      vIPDelHost="$(ip -4 route get 1.1.1.1 | sed -n 's/.* src \([0-9.]*\).*/\1/p' | head -n 1)"
+      echo ''
+      echo '    Script de instalación de Heimdall, finalizado.'
+      echo ''
+      echo '      Para conectarte a la web:'
+      echo "        http://$vIPDelHost:$cPuerto"
+      echo ''
 
   elif [ $cVerSO == "12" ]; then
 
