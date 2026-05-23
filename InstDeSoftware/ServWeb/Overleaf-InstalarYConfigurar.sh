@@ -142,6 +142,9 @@
                   fi
                 # Detectar si se está dentro de un contenedor systemd-nspawn
                   if [[ "$(systemd-detect-virt 2>/dev/null)" == "systemd-nspawn" ]]; then
+                    echo ""
+                    echo "  Detectado contenedor systemd-nspawn. Procediendo con las modificaciones..."
+                    echo ""
                     sudo mkdir -p /etc/systemd/system/docker.service.d/
                     echo '[Service]'                                         | sudo tee    /etc/systemd/system/docker.service.d/override.conf
                     echo 'Environment=DOCKER_ALLOW_IPV6_ON_IPV4_INTERFACE=1' | sudo tee -a /etc/systemd/system/docker.service.d/override.conf
