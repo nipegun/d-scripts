@@ -140,15 +140,16 @@
                     sudo apt-get -y install docker-compose
                     echo ""
                   fi
-                sudo mkdir -p /etc/systemd/system/docker.service.d/
-                echo '[Service]'                                         | sudo tee    /etc/systemd/system/docker.service.d/override.conf
-                echo 'Environment=DOCKER_ALLOW_IPV6_ON_IPV4_INTERFACE=1' | sudo tee -a /etc/systemd/system/docker.service.d/override.conf
-                sudo systemctl daemon-reload
-                sudo systemctl restart docker
-                sed -i "s#test: echo 'db.stats().ok' | \${MONGOSH} localhost:27017/test --quiet#test: \${MONGOSH} localhost:27017/test --quiet --eval 'db.stats().ok'#" /opt/overleaf/lib/docker-compose.mongo.yml
-                grep -q '^SIBLING_CONTAINERS_ENABLED=' /opt/overleaf/config/overleaf.rc && sed -i 's/^SIBLING_CONTAINERS_ENABLED=.*/SIBLING_CONTAINERS_ENABLED=false/' /opt/overleaf/config/overleaf.rc || echo 'SIBLING_CONTAINERS_ENABLED=false' >> /opt/overleaf/config/overleaf.rc
-                #cd /opt/overleaf && bin/up -d --force-recreate mongo
-                #cd /opt/overleaf && bin/up -d
+                # Detectar si se está dentro de un contenedor systemd-nspawn
+                  if [[ "$(systemd-detect-virt 2>/dev/null)" == "systemd-nspawn" ]]; then
+                    sudo mkdir -p /etc/systemd/system/docker.service.d/
+                    echo '[Service]'                                         | sudo tee    /etc/systemd/system/docker.service.d/override.conf
+                    echo 'Environment=DOCKER_ALLOW_IPV6_ON_IPV4_INTERFACE=1' | sudo tee -a /etc/systemd/system/docker.service.d/override.conf
+                    sudo systemctl daemon-reload
+                    sudo systemctl restart docker
+                    sed -i "s#test: echo 'db.stats().ok' | \${MONGOSH} localhost:27017/test --quiet#test: \${MONGOSH} localhost:27017/test --quiet --eval 'db.stats().ok'#" /opt/overleaf/lib/docker-compose.mongo.yml
+                    grep -q '^SIBLING_CONTAINERS_ENABLED=' /opt/overleaf/config/overleaf.rc && sed -i 's/^SIBLING_CONTAINERS_ENABLED=.*/SIBLING_CONTAINERS_ENABLED=false/' /opt/overleaf/config/overleaf.rc || echo 'SIBLING_CONTAINERS_ENABLED=false' >> /opt/overleaf/config/overleaf.rc
+                  fi
                 sudo bin/up -d
 
               # Notificar fin de ejecución del script
