@@ -111,8 +111,9 @@
                 sudo sed -i -e 's|# OVERLEAF_SECURE_COOKIE=true|OVERLEAF_SECURE_COOKIE=true|g' /opt/overleaf/config/variables.env
 
               # NGINX
-                vIPHost=$(hostname -I | sed 's- --g')
-                #sudo sed -i -e 's|# OVERLEAF_IMAGE_NAME=sharelatex/sharelatex|OVERLEAF_IMAGE_NAME=overleaf/overleaf|g' /opt/overleaf/config/overleaf.rc
+                #vIPHost=$(hostname -I | sed 's- --g')
+                vIPHost="$(ip -4 route get 1.1.1.1 | sed -n 's/.* src \([0-9.]*\).*/\1/p' | head -n 1)"
+                sudo sed -i -e 's|# OVERLEAF_IMAGE_NAME=sharelatex/sharelatex|OVERLEAF_IMAGE_NAME=overleaf/overleaf|g' /opt/overleaf/config/overleaf.rc
                 sudo sed -i -e 's|NGINX_ENABLED=false|NGINX_ENABLED=true|g'                                            /opt/overleaf/config/overleaf.rc
                 sudo sed -i -e "s|NGINX_HTTP_LISTEN_IP=127.0.1.1|NGINX_HTTP_LISTEN_IP=$vIPHost|g"                      /opt/overleaf/config/overleaf.rc
                 sudo sed -i -e "s|NGINX_TLS_LISTEN_IP=127.0.1.1|NGINX_TLS_LISTEN_IP=$vIPHost|g"                        /opt/overleaf/config/overleaf.rc
@@ -130,7 +131,6 @@
                 sudo systemctl start docker
 
               # Levantar todos los servicios en background
-                cd /opt/overleaf
                 # Comprobar si el paquete docker-compose está instalado. Si no lo está, instalarlo.
                   if [[ $(dpkg-query -s docker-compose 2>/dev/null | grep installed) == "" ]]; then
                     echo ""
@@ -150,7 +150,7 @@
                     sed -i "s#test: echo 'db.stats().ok' | \${MONGOSH} localhost:27017/test --quiet#test: \${MONGOSH} localhost:27017/test --quiet --eval 'db.stats().ok'#" /opt/overleaf/lib/docker-compose.mongo.yml
                     grep -q '^SIBLING_CONTAINERS_ENABLED=' /opt/overleaf/config/overleaf.rc && sed -i 's/^SIBLING_CONTAINERS_ENABLED=.*/SIBLING_CONTAINERS_ENABLED=false/' /opt/overleaf/config/overleaf.rc || echo 'SIBLING_CONTAINERS_ENABLED=false' >> /opt/overleaf/config/overleaf.rc
                   fi
-                sudo bin/up -d
+                cd /opt/overleaf && sudo bin/up -d
 
               # Notificar fin de ejecución del script
                 sleep 5
