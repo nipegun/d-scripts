@@ -210,10 +210,10 @@
                 sudo bin/docker-compose up -d --force-recreate sharelatex
 
               # Verificar que sharelatex está usando la imagen personalizada
-                sudo docker inspect sharelatex --format 'Image={{.Config.Image}}'
+                #sudo docker inspect sharelatex --format 'Image={{.Config.Image}}'
 
               # Verificar que scheme-full sigue instalado dentro del nuevo contenedor
-                sudo docker exec -i sharelatex bash -lc 'tlmgr info scheme-full | grep -E "package:|installed:"'
+                #sudo docker exec -i sharelatex bash -lc 'tlmgr info scheme-full | grep -E "package:|installed:"'
 
               # Notificar fin de ejecución del script
                 sleep 5
