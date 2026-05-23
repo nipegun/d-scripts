@@ -149,11 +149,18 @@
                     sudo systemctl restart docker
                     sed -i "s#test: echo 'db.stats().ok' | \${MONGOSH} localhost:27017/test --quiet#test: \${MONGOSH} localhost:27017/test --quiet --eval 'db.stats().ok'#" /opt/overleaf/lib/docker-compose.mongo.yml
                     grep -q '^SIBLING_CONTAINERS_ENABLED=' /opt/overleaf/config/overleaf.rc && sed -i 's/^SIBLING_CONTAINERS_ENABLED=.*/SIBLING_CONTAINERS_ENABLED=false/' /opt/overleaf/config/overleaf.rc || echo 'SIBLING_CONTAINERS_ENABLED=false' >> /opt/overleaf/config/overleaf.rc
-                    vBridge="$(docker network inspect overleaf_default --format '{{.Id}}' | cut -c1-12)"
-                    IFACE=$(ip -o -4 route show default | awk '{print $5}')
-                    nft add rule inet filter forward iifname "br-${vBridge}" oifname "${IFACE}" accept
-                    nft add rule inet filter forward iifname "${IFACE}" oifname "br-${vBridge}" ct state related,established accept
-                    nft add rule inet filter forward iifname "br-${vBridge}" oifname "br-${vBridge}" accept
+                    # Corregir forwarding y hacerlo persistente
+                      sudo mkdir -p /root/scripts/ParaEsteDebian
+                      echo '#!/bin/bash'                                                                                                                                                                                                                                                     | sudo tee    /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo ''                                                                                                                                                                                                                                                                | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'vBridge="$(docker network inspect overleaf_default --format "{{.Id}}" | cut -c1-12)"'                                                                                                                                                                            | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'vInterface="$(ip -o -4 route show default | sed -n "s/^default.* dev \([^ ]*\).*/\1/p" | head -n 1)"'                                                                                                                                                            | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'nft list chain inet filter forward | grep -Fq "iifname \"br-${vBridge}\" oifname \"${vInterface}\" accept" || nft add rule inet filter forward iifname "br-${vBridge}" oifname "${vInterface}" accept'                                                           | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'nft list chain inet filter forward | grep -Fq "iifname \"${vInterface}\" oifname \"br-${vBridge}\" ct state established,related accept" || nft add rule inet filter forward iifname "${vInterface}" oifname "br-${vBridge}" ct state related,established accept' | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo 'nft list chain inet filter forward | grep -Fq "iifname \"br-${vBridge}\" oifname \"br-${vBridge}\" accept" || nft add rule inet filter forward iifname "br-${vBridge}" oifname "br-${vBridge}" accept'                                                           | sudo tee -a /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      sudo chmod +x /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      sudo /root/scripts/ParaEsteDebian/CorregirForwarding.sh
+                      echo /root/scripts/ParaEsteDebian/CorregirForwarding.sh | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
                   fi
                 cd /opt/overleaf && sudo bin/up -d
 
