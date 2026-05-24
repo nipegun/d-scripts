@@ -77,7 +77,7 @@ if [ $cVerSO == "13" ]; then
       exit
     else
       apt-get update && apt-get -y install dialog
-      menu=(dialog --timeout 5 --checklist "Instalación de la compartición Samba:" 22 76 16)
+      menu=(dialog --checklist "Instalación de la compartición Samba:" 22 76 16)
       opciones=(
         1 "Instalar los paquetes necesarios" on
         2 "Configurar las opciones globales" on
