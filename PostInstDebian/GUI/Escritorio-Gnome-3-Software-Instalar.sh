@@ -146,6 +146,10 @@
       #sudo apt-get -y install discord
       sudo apt-get -y install transmission-gtk
 
+    # Aplicaciones de módems y telefonía
+      sudo apt-get -y install gnome-calls
+      sudo apt-get -y install modem-manager-gui
+
     # Juegos
       echo ""
       echo "  Instalando juegos..."
