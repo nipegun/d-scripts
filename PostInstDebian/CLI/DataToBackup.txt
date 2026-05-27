@@ -15,3 +15,9 @@
 /root/.config/mc/
 /root/.local/share/mc/
 /root/.local/share/mc/bashrc
+
+# /home/usuario/
+/home/usuario/.bash_history
+/home/usuario/.bashrc
+/home/usuario/.claude.json
+/home/usuario/.claude/skills/
