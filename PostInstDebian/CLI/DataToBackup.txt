@@ -1,0 +1,17 @@
+# /etc/
+/etc/NetworkManager/system-connections/
+/etc/default/grub
+/etc/network/interfaces
+/etc/udev/rules.d/70-persistent-net.rules
+/etc/crontab
+/etc/fstab
+/etc/resolv.conf
+/etc/sysctl.conf
+
+# /root/
+/root/DataToBackup.txt
+/root/scripts/ParaEsteDebian/
+/root/.bashrc
+/root/.config/mc/
+/root/.local/share/mc/
+/root/.local/share/mc/bashrc
