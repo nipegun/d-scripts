@@ -112,6 +112,7 @@
       sudo apt-get -y install subtitleeditor
       sudo apt-get -y install easytag
       #sudo apt-get -y install openshot
+      sudo apt-get -y install gnome-network-displays
 
     # Apps de redes e internet
       echo ""
