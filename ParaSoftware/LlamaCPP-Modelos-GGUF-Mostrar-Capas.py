@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Ejecución remota
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/LlamaCPP-Modelos-GGUF-Mostrar-Capas.py | python3 - -- [ArchivoGGUF]
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/LlamaCPP-Modelos-GGUF-Mostrar-Capas.py | python3 - [ArchivoGGUF]
 
 import argparse
 import os
