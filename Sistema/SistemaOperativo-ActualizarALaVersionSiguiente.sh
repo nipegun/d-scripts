@@ -7,11 +7,31 @@
 
 # ----------
 # Script de NiPeGun para actualizar Debian a la versión inmediatamente posterior
+#
+# Ejecución remota (puede requerir permisos sudo):
+#   curl -sL x | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL x | sed 's-sudo--g' | bash
+#
+# Ejecución remota sin caché:
+#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#
+# Ejecución remota con parámetros:
+#   curl -sL x | bash -s Parámetro1 Parámetro2
+#
+# Bajar y editar directamente el archivo en nano
+#   curl -sL x | nano -
 # ----------
 
-cColorRojo='\033[1;31m'
-cColorVerde='\033[1;32m'
-cFinColor='\033[0m'
+# Definir constantes de color
+  cColorAzul='\033[0;34m'
+  cColorAzulClaro='\033[1;34m'
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -33,72 +53,131 @@ cFinColor='\033[0m'
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+# Ejecutar comandos dependiendo de la versión de Debian detectada
 
-  echo ""
-  echo "  Iniciando el script para actualizar Debian 7 (Wheezy) a Debian 8 (Jessie)..."  
-  echo ""
+  if [ $cVerSO == "13" ]; then
 
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script para actualizar Debian 13 (Trixie) a Debian 14 (x)...${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "8" ]; then
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "  Iniciando el script para actualizar Debian 8 (Jessie) a Debian 9 (Stretch)..."
-  echo ""
+  elif [ $cVerSO == "12" ]; then
 
-  apt-get -y update
-  apt-get -y upgrade
-  apt-get -y dist-upgrade
-  dpkg -C
-  apt-mark showhold
-  cp /etc/apt/sources.list /etc/apt/sources.list.deb8
-  sed -i -e 's|jessie|stretch|g' /etc/apt/sources.list
-  apt-get -y update
-  apt-get -y upgrade
-  apt-get -y dist-upgrade
-  apt-get autoremove
-  shutdown -r now
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script para actualizar Debian 12 (Bookworm) a Debian 13 (Trixie)...${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "9" ]; then
+    apt-get -y update
+    apt-get -y upgrade
+    apt-get -y dist-upgrade
+    dpkg -C
+    apt-mark showhold
+    cp /etc/apt/sources.list /etc/apt/sources.list.deb9
+    sed -i -e 's|bookworm|trixie|g' /etc/apt/sources.list
+    apt-get -y update
+    apt-get -y dist-upgrade
+    apt-get -y autoremove
+    apt-get -y autoclean
+    shutdown -r now
 
-  echo ""
-  echo "  Iniciando el script para actualizar Debian 9 (Stretch) a Debian 10 (Buster)..."
-  echo ""
+  elif [ $cVerSO == "11" ]; then
 
-  apt-get -y update
-  apt-get -y upgrade
-  apt-get -y dist-upgrade
-  dpkg -C
-  apt-mark showhold
-  cp /etc/apt/sources.list /etc/apt/sources.list.deb9
-  sed -i -e 's|stretch|buster|g' /etc/apt/sources.list
-  apt-get -y update
-  apt-get -y dist-upgrade
-  apt-get -y autoremove
-  apt-get -y autoclean
-  shutdown -r now
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script para actualizar Debian 11 (Bullseye) a Debian 12 (Bookworm)...${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "10" ]; then
+    apt-get -y update
+    apt-get -y upgrade
+    apt-get -y dist-upgrade
+    dpkg -C
+    apt-mark showhold
+    cp /etc/apt/sources.list /etc/apt/sources.list.deb9
+    sed -i -e 's|bullseye|bookworm|g' /etc/apt/sources.list
+    apt-get -y update
+    apt-get -y dist-upgrade
+    apt-get -y autoremove
+    apt-get -y autoclean
+    shutdown -r now
 
-  echo ""
-  echo "  Iniciando el script para actualizar Debian 10 (Buster) a Debian 11 (Bullseye)..."
-  echo ""
+  elif [ $cVerSO == "10" ]; then
 
-  echo ""
-  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script para actualizar Debian 10 (Buster) a Debian 11 (Bullseye)...${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "11" ]; then
+    apt-get -y update
+    apt-get -y upgrade
+    apt-get -y dist-upgrade
+    dpkg -C
+    apt-mark showhold
+    cp /etc/apt/sources.list /etc/apt/sources.list.deb9
+    sed -i -e 's|buster|bullseye|g' /etc/apt/sources.list
+    apt-get -y update
+    apt-get -y dist-upgrade
+    apt-get -y autoremove
+    apt-get -y autoclean
+    shutdown -r now
 
-  echo ""
-  echo "  Iniciando el script para actualizar Debian 11 (Bullseye) a Debian 12..."  
-  echo ""
+  elif [ $cVerSO == "9" ]; then
 
-  echo ""
-  echo "  Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script para actualizar Debian 9 (Stretch) a Debian 10 (Buster)...${cFinColor}"
+    echo ""
 
-fi
+    apt-get -y update
+    apt-get -y upgrade
+    apt-get -y dist-upgrade
+    dpkg -C
+    apt-mark showhold
+    cp /etc/apt/sources.list /etc/apt/sources.list.deb9
+    sed -i -e 's|stretch|buster|g' /etc/apt/sources.list
+    apt-get -y update
+    apt-get -y dist-upgrade
+    apt-get -y autoremove
+    apt-get -y autoclean
+    shutdown -r now
+
+  elif [ $cVerSO == "8" ]; then
+
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script para actualizar Debian 8 (Jessie) a Debian 9 (Stretch)..${cFinColor}"
+    echo ""
+
+    apt-get -y update
+    apt-get -y upgrade
+    apt-get -y dist-upgrade
+    dpkg -C
+    apt-mark showhold
+    cp /etc/apt/sources.list /etc/apt/sources.list.deb8
+    sed -i -e 's|jessie|stretch|g' /etc/apt/sources.list
+    apt-get -y update
+    apt-get -y upgrade
+    apt-get -y dist-upgrade
+    apt-get autoremove
+    shutdown -r now
+
+  elif [ $cVerSO == "7" ]; then
+
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script para actualizar Debian 7 (Wheezy) a Debian 8 (Jessie)...${cFinColor}"
+    echo ""
+
+    apt-get -y update
+    apt-get -y upgrade
+    apt-get -y dist-upgrade
+    dpkg -C
+    apt-mark showhold
+    cp /etc/apt/sources.list /etc/apt/sources.list.deb8
+    sed -i -e 's|wheezy|jessie|g' /etc/apt/sources.list
+    apt-get -y update
+    apt-get -y upgrade
+    apt-get -y dist-upgrade
+    apt-get autoremove
+    shutdown -r now
+
+  fi
+
