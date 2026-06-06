@@ -62,7 +62,7 @@
     echo ""
 
     # Actualizar la lista de paquetes disponibles en los repositorios
-      sudo apt-get -y update
+      sudo rm -rf /var/lib/apt/lists/* && sudo apt-get clean && sudo apt-get update
 
     # Instalar extrepo
       sudo apt-get -y install extrepo
