@@ -8,11 +8,12 @@
 # ----------
 # Script de NiPeGun para actualizar Debian
 #
-# Ejecución remota:
+# Ejecución remota (puede requerir permisos sudo):
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SistemaOperativo-Actualizar.sh | bash
 #
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/master/SistemaOperativo-Actualizar.sh | bash
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SistemaOperativo-Actualizar.sh | sed 's-sudo--g' | bash
+#
 # ----------
 
 # Definir constantes de color
@@ -47,7 +48,9 @@
   echo ""
   echo "    Actualizando lista de paquetes disponibles en los repositorios..."
   echo ""
-  apt-get -y update
+  rm -rf /var/lib/apt/lists/*
+  apt-get clean
+  apt-get update
 
 # Ejecutar upgrade
   echo ""
