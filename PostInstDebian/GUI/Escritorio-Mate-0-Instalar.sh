@@ -59,18 +59,20 @@
     sudo apt-get -y install libreoffice-l10n-es
 
     # Permitir caja como root
-      sudo mkdir -p /root/.config/autostart/ 2> /dev/null
-      echo "[Desktop Entry]"               | sudo tee -a /root/.config/autostart/caja.desktop
-      echo "Type=Application"              | sudo tee -a /root/.config/autostart/caja.desktop
-      echo "Exec=caja --force-desktop"     | sudo tee -a /root/.config/autostart/caja.desktop
-      echo "Hidden=false"                  | sudo tee -a /root/.config/autostart/caja.desktop
-      echo "X-MATE-Autostart-enabled=true" | sudo tee -a /root/.config/autostart/caja.desktop
-      echo "Name[es_ES]=Caja"              | sudo tee -a /root/.config/autostart/caja.desktop
-      echo "Name=Caja"                     | sudo tee -a /root/.config/autostart/caja.desktop
-      echo "Comment[es_ES]="               | sudo tee -a /root/.config/autostart/caja.desktop
-      echo "Comment="                      | sudo tee -a /root/.config/autostart/caja.desktop
-      echo "X-MATE-Autostart-Delay=0"      | sudo tee -a /root/.config/autostart/caja.desktop
-      gio set /root/.config/autostart/caja.desktop "metadata::trusted" yes
+      sudo rm -f /root/.config/autostart/caja.desktop
+      sudo mkdir -p /root/.config/autostart/
+      echo "[Desktop Entry]"                    | sudo tee /root/.config/autostart/caja.desktop > /dev/null
+      echo "Type=Application"                   | sudo tee -a /root/.config/autostart/caja.desktop > /dev/null
+      echo "Name=Caja"                          | sudo tee -a /root/.config/autostart/caja.desktop > /dev/null
+      echo "Comment=Gestor de archivos de MATE" | sudo tee -a /root/.config/autostart/caja.desktop > /dev/null
+      echo "Exec=caja -n --force-desktop"       | sudo tee -a /root/.config/autostart/caja.desktop > /dev/null
+      echo "OnlyShowIn=MATE;"                   | sudo tee -a /root/.config/autostart/caja.desktop > /dev/null
+      echo "Terminal=false"                     | sudo tee -a /root/.config/autostart/caja.desktop > /dev/null
+      echo "StartupNotify=false"                | sudo tee -a /root/.config/autostart/caja.desktop > /dev/null
+      echo "Hidden=false"                       | sudo tee -a /root/.config/autostart/caja.desktop > /dev/null
+      echo "X-MATE-Autostart-enabled=true"      | sudo tee -a /root/.config/autostart/caja.desktop > /dev/null
+      echo "X-MATE-Autostart-Delay=2"           | sudo tee -a /root/.config/autostart/caja.desktop > /dev/null
+      sudo chmod 644 /root/.config/autostart/caja.desktop
 
   elif [ $cVerSO == "12" ]; then
 
