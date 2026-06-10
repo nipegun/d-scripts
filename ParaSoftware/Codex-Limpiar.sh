@@ -56,6 +56,8 @@ set -euo pipefail
     ".personality_migration"
     "goals_1.sqlite"
     "memories_1.sqlite"
+    "state_5.sqlite-shm"
+    "state_5.sqlite-wal"
   )
 
   for vArchivo in "${aArchivosABorrar[@]}"; do
