@@ -58,6 +58,10 @@ set -euo pipefail
     "memories_1.sqlite"
     "state_5.sqlite-shm"
     "state_5.sqlite-wal"
+    "goals_1.sqlite-shm"
+    "goals_1.sqlite-wal"
+    "memories_1.sqlite-shm"
+    "memories_1.sqlite-wal"
   )
 
   for vArchivo in "${aArchivosABorrar[@]}"; do
