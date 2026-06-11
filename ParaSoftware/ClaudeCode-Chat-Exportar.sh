@@ -2,6 +2,7 @@
 
 # Ejecución remota:
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/ClaudeCode-Chat-Exportar.sh | bash -s IDHexadecimalDelChat
+
 # Validar parámetro
 if [ -z "$1" ]; then
   echo "Uso: bash ClaudeCode-Chat-Exportar.sh <ID_DEL_CHAT>"
