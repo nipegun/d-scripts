@@ -51,6 +51,8 @@ set -euo pipefail
     "history.jsonl"
     "mcp-needs-auth-cache.json"
     "stats-cache.json"
+    ".last-cleanup"
+    ".last-update-result.json"
   )
 
   for vArchivo in "${aArchivosABorrar[@]}"; do
