@@ -32,3 +32,8 @@ fi
   echo "    cp /home/NombreDeUsuario/Descargas/"$vIdDelChat".jsonl /home/NombreDeUsuario/.claude/projects/$vIdDelChat/"
   echo "    claude --resume $vIdDelChat"
   echo ""
+  echo "  Para exportar directamente a otro ordenador:"
+  echo ""
+  echo "    ssh usuario@hostdestino 'mkdir -p $HOME/.claude/projects/nuevo/'"
+  echo '    scp $HOME/.claude/projects/pro/'$vIdDelChat'.jsonl usuario@hostdestino:$HOME/.claude/projects/nuevo/'
+  echo ""
