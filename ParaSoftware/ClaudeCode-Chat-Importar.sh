@@ -24,3 +24,7 @@ fi
   fi
 # Cargar el chat
   claude --resume $vIdDelChat
+
+# Extraer directamente de otro ordenador
+#  mkdir -p $HOME/.claude/projects/nuevo/ && scp root@192.168.1.20:/root/.claude/projects/pruebas/c1ae9e4a-f4b1-abca-b132-a1b2c3d4e5f6.jsonl  $HOME/.claude/projects/nuevo/
+
