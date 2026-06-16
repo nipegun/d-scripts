@@ -5,6 +5,9 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
+# Definir el disco al que borrar
+  cDisco="${1:-/dev/null}"
+
 # Definir constantes de color
   cColorAzul="\033[0;34m"
   cColorAzulClaro="\033[1;34m"
@@ -37,3 +40,6 @@
       exit
   fi
 
+badblocks -wsv -b 4096 -t 0x00 -o /root/badblocks.txt "$cDisco"
+smartctl -a "$cDisco"
+mkfs.ext4 -l /root/badblocks.txt "$cDisco"1
