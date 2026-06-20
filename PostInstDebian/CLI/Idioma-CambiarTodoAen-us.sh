@@ -88,6 +88,18 @@ if [ "$cVerSO" = "13" ]; then
       echo 'export LANGUAGE=en_US:en'                         | tee -a /etc/skel/.bashrc
     fi
 
+  # Restaurar /etc/profile original
+    vDirTrabajo="/tmp/base-files-profile-restore"
+    rm -rf "$vDirTrabajo"
+    mkdir -p "$vDirTrabajo"
+    cd "$vDirTrabajo" || exit 1
+    apt-get download "base-files=$(dpkg-query -W -f='${Version}' base-files)"
+    vArchivoDeb=$(find "$vDirTrabajo" -maxdepth 1 -type f -name 'base-files_*.deb' | head -n 1)
+    mkdir -p "$vDirTrabajo/extraido"
+    dpkg-deb -x "$vArchivoDeb" "$vDirTrabajo/extraido"
+    cp -a /etc/profile "/etc/profile.machacado.$(date +%Y%m%d-%H%M%S)"
+    install -o root -g root -m 0644 "$vDirTrabajo/extraido/etc/profile" /etc/profile
+
   # Notificar cambios
     echo ""
     echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
@@ -133,6 +145,18 @@ elif [ "$cVerSO" = "12" ]; then
       echo 'export LANGUAGE=en_US:en'                         | tee -a /etc/skel/.bashrc
     fi
 
+  # Restaurar /etc/profile original
+    vDirTrabajo="/tmp/base-files-profile-restore"
+    rm -rf "$vDirTrabajo"
+    mkdir -p "$vDirTrabajo"
+    cd "$vDirTrabajo" || exit 1
+    apt-get download "base-files=$(dpkg-query -W -f='${Version}' base-files)"
+    vArchivoDeb=$(find "$vDirTrabajo" -maxdepth 1 -type f -name 'base-files_*.deb' | head -n 1)
+    mkdir -p "$vDirTrabajo/extraido"
+    dpkg-deb -x "$vArchivoDeb" "$vDirTrabajo/extraido"
+    cp -a /etc/profile "/etc/profile.machacado.$(date +%Y%m%d-%H%M%S)"
+    install -o root -g root -m 0644 "$vDirTrabajo/extraido/etc/profile" /etc/profile
+
   # Notificar cambios
     echo ""
     echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
@@ -177,6 +201,18 @@ elif [ "$cVerSO" = "11" ]; then
     if ! grep -q '^export LANGUAGE=en_US:en$' /etc/skel/.bashrc 2> /dev/null; then
       echo 'export LANGUAGE=en_US:en'                         | tee -a /etc/skel/.bashrc
     fi
+
+  # Restaurar /etc/profile original
+    vDirTrabajo="/tmp/base-files-profile-restore"
+    rm -rf "$vDirTrabajo"
+    mkdir -p "$vDirTrabajo"
+    cd "$vDirTrabajo" || exit 1
+    apt-get download "base-files=$(dpkg-query -W -f='${Version}' base-files)"
+    vArchivoDeb=$(find "$vDirTrabajo" -maxdepth 1 -type f -name 'base-files_*.deb' | head -n 1)
+    mkdir -p "$vDirTrabajo/extraido"
+    dpkg-deb -x "$vArchivoDeb" "$vDirTrabajo/extraido"
+    cp -a /etc/profile "/etc/profile.machacado.$(date +%Y%m%d-%H%M%S)"
+    install -o root -g root -m 0644 "$vDirTrabajo/extraido/etc/profile" /etc/profile
 
   # Notificar cambios
     echo ""
@@ -227,6 +263,18 @@ elif [ "$cVerSO" = "10" ]; then
       echo 'export LANGUAGE=en_US:en'                         | tee -a /etc/skel/.bashrc
     fi
 
+  # Restaurar /etc/profile original
+    vDirTrabajo="/tmp/base-files-profile-restore"
+    rm -rf "$vDirTrabajo"
+    mkdir -p "$vDirTrabajo"
+    cd "$vDirTrabajo" || exit 1
+    apt-get download "base-files=$(dpkg-query -W -f='${Version}' base-files)"
+    vArchivoDeb=$(find "$vDirTrabajo" -maxdepth 1 -type f -name 'base-files_*.deb' | head -n 1)
+    mkdir -p "$vDirTrabajo/extraido"
+    dpkg-deb -x "$vArchivoDeb" "$vDirTrabajo/extraido"
+    cp -a /etc/profile "/etc/profile.machacado.$(date +%Y%m%d-%H%M%S)"
+    install -o root -g root -m 0644 "$vDirTrabajo/extraido/etc/profile" /etc/profile
+
   # Notificar cambios
     echo ""
     echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
@@ -276,6 +324,18 @@ elif [ "$cVerSO" = "9" ]; then
       echo 'export LANGUAGE=en_US:en'                         | tee -a /etc/skel/.bashrc
     fi
 
+  # Restaurar /etc/profile original
+    vDirTrabajo="/tmp/base-files-profile-restore"
+    rm -rf "$vDirTrabajo"
+    mkdir -p "$vDirTrabajo"
+    cd "$vDirTrabajo" || exit 1
+    apt-get download "base-files=$(dpkg-query -W -f='${Version}' base-files)"
+    vArchivoDeb=$(find "$vDirTrabajo" -maxdepth 1 -type f -name 'base-files_*.deb' | head -n 1)
+    mkdir -p "$vDirTrabajo/extraido"
+    dpkg-deb -x "$vArchivoDeb" "$vDirTrabajo/extraido"
+    cp -a /etc/profile "/etc/profile.machacado.$(date +%Y%m%d-%H%M%S)"
+    install -o root -g root -m 0644 "$vDirTrabajo/extraido/etc/profile" /etc/profile
+
   # Notificar cambios
     echo ""
     echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
@@ -324,6 +384,18 @@ elif [ "$cVerSO" = "8" ]; then
     if ! grep -q '^export LANGUAGE=en_US:en$' /etc/skel/.bashrc 2> /dev/null; then
       echo 'export LANGUAGE=en_US:en'                         | tee -a /etc/skel/.bashrc
     fi
+
+  # Restaurar /etc/profile original
+    vDirTrabajo="/tmp/base-files-profile-restore"
+    rm -rf "$vDirTrabajo"
+    mkdir -p "$vDirTrabajo"
+    cd "$vDirTrabajo" || exit 1
+    apt-get download "base-files=$(dpkg-query -W -f='${Version}' base-files)"
+    vArchivoDeb=$(find "$vDirTrabajo" -maxdepth 1 -type f -name 'base-files_*.deb' | head -n 1)
+    mkdir -p "$vDirTrabajo/extraido"
+    dpkg-deb -x "$vArchivoDeb" "$vDirTrabajo/extraido"
+    cp -a /etc/profile "/etc/profile.machacado.$(date +%Y%m%d-%H%M%S)"
+    install -o root -g root -m 0644 "$vDirTrabajo/extraido/etc/profile" /etc/profile
 
   # Notificar cambios
     echo ""
