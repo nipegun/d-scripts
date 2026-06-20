@@ -8,11 +8,8 @@
 # ----------
 # Script de NiPeGun para cambiar el idioma del sistema y del teclado a sólo inglés de USA
 #
-# Ejecución remota (puede requerir permisos sudo):
+# Ejecución remota como root:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Idioma-CambiarTodoAen-us.sh | bash
-#
-# Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Idioma-CambiarTodoAen-us.sh | sed 's-sudo--g' | bash
 # ----------
 
 # Definir constantes de color
@@ -23,9 +20,9 @@
   cFinColor='\033[0m'
 
 # Comprobar si el script está corriendo como root
-  if [ $(id -u) -ne 0 ]; then
+  if [ "$(id -u)" -ne 0 ]; then
     echo -e "${cColorRojo}  Este script está preparado para ejecutarse como root y no lo has ejecutado como root...${cFinColor}"
-    exit
+    exit 1
   fi
 
 # Determinar la versión de Debian
@@ -48,42 +45,48 @@
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "13" ]; then
+if [ "$cVerSO" = "13" ]; then
 
   echo ""
   echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a inglés en Debian 13 (x)...${cFinColor}"
   echo ""
 
   # Poner que sólo se genere el inglés de USA cuando se creen locales
-    sudo rm -f  /etc/locale.gen
-    echo "en_US.UTF-8 UTF-8" | sudo tee /etc/locale.gen
+    rm -f  /etc/locale.gen
+    echo "en_US.UTF-8 UTF-8" | tee /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el inglés de USA
-    sudo apt-get -y update
-    sudo apt-get -y install locales
-    sudo locale-gen --purge en_US.UTF-8
+    apt-get -y update
+    apt-get -y install locales
+    locale-gen --purge en_US.UTF-8
 
   # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="en_US.UTF-8"'  | sudo tee    /etc/default/locale
-    echo 'LANGUAGE="en_US:en"' | sudo tee -a /etc/default/locale
+    echo 'LANG="en_US.UTF-8"'  | tee    /etc/default/locale
+    echo 'LANGUAGE="en_US:en"' | tee -a /etc/default/locale
+    update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
 
   # Poner el teclado en inglés de USA
-    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
-    echo 'XKBLAYOUT="en"'    | sudo tee -a /etc/default/keyboard
-    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
-    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'XKBMODEL="pc105"'  | tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="us"'    | tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
 
   # Indicar idioma inglés de USA para todos los usuarios
-    echo ""                                                  | sudo tee    /etc/profile
-    echo '# Poner idioma inglés de USA a todos los usuarios' | sudo tee -a /etc/profile
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/profile
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/profile
-    
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/skel/.bashrc
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/skel/.bashrc
+    echo '# Poner idioma inglés de USA a todos los usuarios' | tee    /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANG=en_US.UTF-8'                           | tee -a /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANGUAGE=en_US:en'                          | tee -a /etc/profile.d/00-idioma-en-us.sh
+    chmod 644 /etc/profile.d/00-idioma-en-us.sh
+
+    if ! grep -q '^export LANG=en_US.UTF-8$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANG=en_US.UTF-8'                          | tee -a /etc/skel/.bashrc
+    fi
+
+    if ! grep -q '^export LANGUAGE=en_US:en$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANGUAGE=en_US:en'                         | tee -a /etc/skel/.bashrc
+    fi
 
   # Notificar cambios
     echo ""
@@ -91,38 +94,44 @@ if [ $cVerSO == "13" ]; then
     echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
 
-elif [ $cVerSO == "12" ]; then
+elif [ "$cVerSO" = "12" ]; then
 
   # Poner que sólo se genere el inglés de USA cuando se creen locales
-    sudo rm -f  /etc/locale.gen
-    echo "en_US.UTF-8 UTF-8" | sudo tee /etc/locale.gen
+    rm -f  /etc/locale.gen
+    echo "en_US.UTF-8 UTF-8" | tee /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el inglés de USA
-    sudo apt-get -y update
-    sudo apt-get -y install locales
-    sudo locale-gen --purge en_US.UTF-8
+    apt-get -y update
+    apt-get -y install locales
+    locale-gen --purge en_US.UTF-8
 
   # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="en_US.UTF-8"'  | sudo tee    /etc/default/locale
-    echo 'LANGUAGE="en_US:en"' | sudo tee -a /etc/default/locale
+    echo 'LANG="en_US.UTF-8"'  | tee    /etc/default/locale
+    echo 'LANGUAGE="en_US:en"' | tee -a /etc/default/locale
+    update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
 
   # Poner el teclado en inglés de USA
-    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
-    echo 'XKBLAYOUT="en"'    | sudo tee -a /etc/default/keyboard
-    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
-    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'XKBMODEL="pc105"'  | tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="us"'    | tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
 
   # Indicar idioma inglés de USA para todos los usuarios
-    echo ""                                                  | sudo tee    /etc/profile
-    echo '# Poner idioma inglés de USA a todos los usuarios' | sudo tee -a /etc/profile
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/profile
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/profile
-    
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/skel/.bashrc
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/skel/.bashrc
+    echo '# Poner idioma inglés de USA a todos los usuarios' | tee    /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANG=en_US.UTF-8'                           | tee -a /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANGUAGE=en_US:en'                          | tee -a /etc/profile.d/00-idioma-en-us.sh
+    chmod 644 /etc/profile.d/00-idioma-en-us.sh
+
+    if ! grep -q '^export LANG=en_US.UTF-8$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANG=en_US.UTF-8'                          | tee -a /etc/skel/.bashrc
+    fi
+
+    if ! grep -q '^export LANGUAGE=en_US:en$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANGUAGE=en_US:en'                         | tee -a /etc/skel/.bashrc
+    fi
 
   # Notificar cambios
     echo ""
@@ -130,38 +139,44 @@ elif [ $cVerSO == "12" ]; then
     echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
 
-elif [ $cVerSO == "11" ]; then
+elif [ "$cVerSO" = "11" ]; then
 
   # Poner que sólo se genere el inglés de USA cuando se creen locales
-    sudo rm -f  /etc/locale.gen
-    echo "en_US.UTF-8 UTF-8" | sudo tee /etc/locale.gen
+    rm -f  /etc/locale.gen
+    echo "en_US.UTF-8 UTF-8" | tee /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el inglés de USA
-    sudo apt-get -y update
-    sudo apt-get -y install locales
-    sudo locale-gen --purge en_US.UTF-8
+    apt-get -y update
+    apt-get -y install locales
+    locale-gen --purge en_US.UTF-8
 
   # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="en_US.UTF-8"'  | sudo tee    /etc/default/locale
-    echo 'LANGUAGE="en_US:en"' | sudo tee -a /etc/default/locale
+    echo 'LANG="en_US.UTF-8"'  | tee    /etc/default/locale
+    echo 'LANGUAGE="en_US:en"' | tee -a /etc/default/locale
+    update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
 
   # Poner el teclado en inglés de USA
-    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
-    echo 'XKBLAYOUT="en"'    | sudo tee -a /etc/default/keyboard
-    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
-    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'XKBMODEL="pc105"'  | tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="us"'    | tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
 
   # Indicar idioma inglés de USA para todos los usuarios
-    echo ""                                                  | sudo tee    /etc/profile
-    echo '# Poner idioma inglés de USA a todos los usuarios' | sudo tee -a /etc/profile
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/profile
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/profile
-    
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/skel/.bashrc
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/skel/.bashrc
+    echo '# Poner idioma inglés de USA a todos los usuarios' | tee    /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANG=en_US.UTF-8'                           | tee -a /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANGUAGE=en_US:en'                          | tee -a /etc/profile.d/00-idioma-en-us.sh
+    chmod 644 /etc/profile.d/00-idioma-en-us.sh
+
+    if ! grep -q '^export LANG=en_US.UTF-8$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANG=en_US.UTF-8'                          | tee -a /etc/skel/.bashrc
+    fi
+
+    if ! grep -q '^export LANGUAGE=en_US:en$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANGUAGE=en_US:en'                         | tee -a /etc/skel/.bashrc
+    fi
 
   # Notificar cambios
     echo ""
@@ -169,42 +184,48 @@ elif [ $cVerSO == "11" ]; then
     echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
 
-elif [ $cVerSO == "10" ]; then
+elif [ "$cVerSO" = "10" ]; then
 
   echo ""
   echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a inglés en Debian 10 (Buster)...${cFinColor}"
   echo ""
 
   # Poner que sólo se genere el inglés de USA cuando se creen locales
-    sudo rm -f  /etc/locale.gen
-    echo "en_US.UTF-8 UTF-8" | sudo tee /etc/locale.gen
+    rm -f  /etc/locale.gen
+    echo "en_US.UTF-8 UTF-8" | tee /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el inglés de USA
-    sudo apt-get -y update
-    sudo apt-get -y install locales
-    sudo locale-gen --purge en_US.UTF-8
+    apt-get -y update
+    apt-get -y install locales
+    locale-gen --purge en_US.UTF-8
 
   # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="en_US.UTF-8"'  | sudo tee    /etc/default/locale
-    echo 'LANGUAGE="en_US:en"' | sudo tee -a /etc/default/locale
+    echo 'LANG="en_US.UTF-8"'  | tee    /etc/default/locale
+    echo 'LANGUAGE="en_US:en"' | tee -a /etc/default/locale
+    update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
 
   # Poner el teclado en inglés de USA
-    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
-    echo 'XKBLAYOUT="en"'    | sudo tee -a /etc/default/keyboard
-    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
-    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'XKBMODEL="pc105"'  | tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="us"'    | tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
 
   # Indicar idioma inglés de USA para todos los usuarios
-    echo ""                                                  | sudo tee    /etc/profile
-    echo '# Poner idioma inglés de USA a todos los usuarios' | sudo tee -a /etc/profile
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/profile
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/profile
-    
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/skel/.bashrc
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/skel/.bashrc
+    echo '# Poner idioma inglés de USA a todos los usuarios' | tee    /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANG=en_US.UTF-8'                           | tee -a /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANGUAGE=en_US:en'                          | tee -a /etc/profile.d/00-idioma-en-us.sh
+    chmod 644 /etc/profile.d/00-idioma-en-us.sh
+
+    if ! grep -q '^export LANG=en_US.UTF-8$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANG=en_US.UTF-8'                          | tee -a /etc/skel/.bashrc
+    fi
+
+    if ! grep -q '^export LANGUAGE=en_US:en$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANGUAGE=en_US:en'                         | tee -a /etc/skel/.bashrc
+    fi
 
   # Notificar cambios
     echo ""
@@ -212,42 +233,48 @@ elif [ $cVerSO == "10" ]; then
     echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
 
-elif [ $cVerSO == "9" ]; then
+elif [ "$cVerSO" = "9" ]; then
 
   echo ""
   echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a inglés en Debian 9 (Stretch)...${cFinColor}"
   echo ""
 
   # Poner que sólo se genere el inglés de USA cuando se creen locales
-    sudo rm -f  /etc/locale.gen
-    echo "en_US.UTF-8 UTF-8" | sudo tee /etc/locale.gen
+    rm -f  /etc/locale.gen
+    echo "en_US.UTF-8 UTF-8" | tee /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el inglés de USA
-    sudo apt-get -y update
-    sudo apt-get -y install locales
-    sudo locale-gen --purge en_US.UTF-8
+    apt-get -y update
+    apt-get -y install locales
+    locale-gen --purge en_US.UTF-8
 
   # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="en_US.UTF-8"'  | sudo tee    /etc/default/locale
-    echo 'LANGUAGE="en_US:en"' | sudo tee -a /etc/default/locale
+    echo 'LANG="en_US.UTF-8"'  | tee    /etc/default/locale
+    echo 'LANGUAGE="en_US:en"' | tee -a /etc/default/locale
+    update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
 
   # Poner el teclado en inglés de USA
-    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
-    echo 'XKBLAYOUT="en"'    | sudo tee -a /etc/default/keyboard
-    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
-    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'XKBMODEL="pc105"'  | tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="us"'    | tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
 
   # Indicar idioma inglés de USA para todos los usuarios
-    echo ""                                                  | sudo tee    /etc/profile
-    echo '# Poner idioma inglés de USA a todos los usuarios' | sudo tee -a /etc/profile
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/profile
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/profile
-    
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/skel/.bashrc
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/skel/.bashrc
+    echo '# Poner idioma inglés de USA a todos los usuarios' | tee    /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANG=en_US.UTF-8'                           | tee -a /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANGUAGE=en_US:en'                          | tee -a /etc/profile.d/00-idioma-en-us.sh
+    chmod 644 /etc/profile.d/00-idioma-en-us.sh
+
+    if ! grep -q '^export LANG=en_US.UTF-8$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANG=en_US.UTF-8'                          | tee -a /etc/skel/.bashrc
+    fi
+
+    if ! grep -q '^export LANGUAGE=en_US:en$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANGUAGE=en_US:en'                         | tee -a /etc/skel/.bashrc
+    fi
 
   # Notificar cambios
     echo ""
@@ -255,42 +282,48 @@ elif [ $cVerSO == "9" ]; then
     echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
 
-elif [ $cVerSO == "8" ]; then
+elif [ "$cVerSO" = "8" ]; then
 
   echo ""
   echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a inglés en Debian 8 (Jessie)...${cFinColor}"
   echo ""
 
   # Poner que sólo se genere el inglés de USA cuando se creen locales
-    sudo rm -f  /etc/locale.gen
-    echo "en_US.UTF-8 UTF-8" | sudo tee /etc/locale.gen
+    rm -f  /etc/locale.gen
+    echo "en_US.UTF-8 UTF-8" | tee /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el inglés de USA
-    sudo apt-get -y update
-    sudo apt-get -y install locales
-    sudo locale-gen --purge en_US.UTF-8
+    apt-get -y update
+    apt-get -y install locales
+    locale-gen --purge en_US.UTF-8
 
   # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="en_US.UTF-8"'  | sudo tee    /etc/default/locale
-    echo 'LANGUAGE="en_US:en"' | sudo tee -a /etc/default/locale
+    echo 'LANG="en_US.UTF-8"'  | tee    /etc/default/locale
+    echo 'LANGUAGE="en_US:en"' | tee -a /etc/default/locale
+    update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
 
   # Poner el teclado en inglés de USA
-    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
-    echo 'XKBLAYOUT="en"'    | sudo tee -a /etc/default/keyboard
-    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
-    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'XKBMODEL="pc105"'  | tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="us"'    | tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
 
   # Indicar idioma inglés de USA para todos los usuarios
-    echo ""                                                  | sudo tee    /etc/profile
-    echo '# Poner idioma inglés de USA a todos los usuarios' | sudo tee -a /etc/profile
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/profile
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/profile
-    
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/skel/.bashrc
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/skel/.bashrc
+    echo '# Poner idioma inglés de USA a todos los usuarios' | tee    /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANG=en_US.UTF-8'                           | tee -a /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANGUAGE=en_US:en'                          | tee -a /etc/profile.d/00-idioma-en-us.sh
+    chmod 644 /etc/profile.d/00-idioma-en-us.sh
+
+    if ! grep -q '^export LANG=en_US.UTF-8$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANG=en_US.UTF-8'                          | tee -a /etc/skel/.bashrc
+    fi
+
+    if ! grep -q '^export LANGUAGE=en_US:en$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANGUAGE=en_US:en'                         | tee -a /etc/skel/.bashrc
+    fi
 
   # Notificar cambios
     echo ""
@@ -298,47 +331,60 @@ elif [ $cVerSO == "8" ]; then
     echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
 
-elif [ $cVerSO == "7" ]; then
+elif [ "$cVerSO" = "7" ]; then
 
   echo ""
   echo -e "${cColorAzulClaro}  Iniciando el script de cambio de idioma a inglés en Debian 7 (Wheezy)...${cFinColor}"
   echo ""
 
   # Poner que sólo se genere el inglés de USA cuando se creen locales
-    sudo rm -f  /etc/locale.gen
-    echo "en_US.UTF-8 UTF-8" | sudo tee /etc/locale.gen
+    rm -f  /etc/locale.gen
+    echo "en_US.UTF-8 UTF-8" | tee /etc/locale.gen
 
   # Compilar los locales borrando primero los existentes y dejando nada más que el inglés de USA
-    sudo apt-get -y update
-    sudo apt-get -y install locales
-    sudo locale-gen --purge en_US.UTF-8
+    apt-get -y update
+    apt-get -y install locales
+    locale-gen --purge en_US.UTF-8
 
   # Modificar el archivo /etc/default/locale reflejando los cambios
-    echo 'LANG="en_US.UTF-8"'  | sudo tee    /etc/default/locale
-    echo 'LANGUAGE="en_US:en"' | sudo tee -a /etc/default/locale
+    echo 'LANG="en_US.UTF-8"'  | tee    /etc/default/locale
+    echo 'LANGUAGE="en_US:en"' | tee -a /etc/default/locale
+    update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
 
   # Poner el teclado en inglés de USA
-    echo 'XKBMODEL="pc105"'  | sudo tee    /etc/default/keyboard
-    echo 'XKBLAYOUT="en"'    | sudo tee -a /etc/default/keyboard
-    echo 'XKBVARIANT=""'     | sudo tee -a /etc/default/keyboard
-    echo 'XKBOPTIONS=""'     | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
-    echo 'BACKSPACE="guess"' | sudo tee -a /etc/default/keyboard
-    echo ''                  | sudo tee -a /etc/default/keyboard
+    echo 'XKBMODEL="pc105"'  | tee    /etc/default/keyboard
+    echo 'XKBLAYOUT="us"'    | tee -a /etc/default/keyboard
+    echo 'XKBVARIANT=""'     | tee -a /etc/default/keyboard
+    echo 'XKBOPTIONS=""'     | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
+    echo 'BACKSPACE="guess"' | tee -a /etc/default/keyboard
+    echo ''                  | tee -a /etc/default/keyboard
 
   # Indicar idioma inglés de USA para todos los usuarios
-    echo ""                                                  | sudo tee    /etc/profile
-    echo '# Poner idioma inglés de USA a todos los usuarios' | sudo tee -a /etc/profile
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/profile
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/profile
-    
-    echo '  export LANG=en_US.UTF-8'                         | sudo tee -a /etc/skel/.bashrc
-    echo '  export LANGUAGE=en_US:en'                        | sudo tee -a /etc/skel/.bashrc
+    echo '# Poner idioma inglés de USA a todos los usuarios' | tee    /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANG=en_US.UTF-8'                           | tee -a /etc/profile.d/00-idioma-en-us.sh
+    echo 'export LANGUAGE=en_US:en'                          | tee -a /etc/profile.d/00-idioma-en-us.sh
+    chmod 644 /etc/profile.d/00-idioma-en-us.sh
+
+    if ! grep -q '^export LANG=en_US.UTF-8$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANG=en_US.UTF-8'                          | tee -a /etc/skel/.bashrc
+    fi
+
+    if ! grep -q '^export LANGUAGE=en_US:en$' /etc/skel/.bashrc 2> /dev/null; then
+      echo 'export LANGUAGE=en_US:en'                         | tee -a /etc/skel/.bashrc
+    fi
 
   # Notificar cambios
     echo ""
     echo -e "${cColorAzulClaro}    Cambios realizados.${cFinColor}"
     echo -e "${cColorAzulClaro}    Debes reiniciar el sistema para que los cambios tengan efecto.${cFinColor}"
     echo ""
+
+else
+
+  echo ""
+  echo -e "${cColorRojo}  Esta versión de Debian no está contemplada por este script: ${cVerSO}${cFinColor}"
+  echo ""
+  exit 1
 
 fi
