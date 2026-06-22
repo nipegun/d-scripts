@@ -39,8 +39,8 @@
 # Preparar cortafuegos
   #curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Cortafuegos-Preparar.sh | sed 's-sudo--g' | bash
 
-# Poner idioma sólo en español
-  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Idioma-CambiarTodoAes-es.sh | sed 's-sudo--g' | bash
+# Agregar idioma español
+  curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Idioma-CambiarTodoA-en-us-es-es.sh | sed 's-sudo--g' | bash
 
 # Poner todos los repositorios
   curl -sLk https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/CLI/Repositorios-Todos-Poner.sh | sed 's-sudo--g' | bash
