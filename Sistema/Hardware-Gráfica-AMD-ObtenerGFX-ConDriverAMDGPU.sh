@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Ejecución remota:
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Hardware-Gr%C3%A1fica-AMD-ObtenerGFX-ConDriverAMDGPU.sh | bash
+
 set -e
 
 fEsGfxValido() {
