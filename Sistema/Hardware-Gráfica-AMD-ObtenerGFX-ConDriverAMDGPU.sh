@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Hardware-Gr%C3%A1fica-AMD-ObtenerGFX-ConDriverAMDGPU.sh | bash
+# curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Hardware-Gr%C3%A1fica-AMD-ObtenerGFX-ConDriverAMDGPU.sh | bash
 
 set -e
 
@@ -97,10 +97,76 @@ fConvertirDecimalAHexUnDigito() {
   esac
 }
 
+fObtenerDriverDeDispositivoPci() {
+  local vDispositivo
+
+  vDispositivo="$1"
+
+  [ -L "${vDispositivo}/driver" ] || {
+    echo ""
+    return 0
+  }
+
+  basename "$(readlink -f "${vDispositivo}/driver")"
+}
+
+fEsDispositivoGpuAmd() {
+  local vDispositivo
+  local vVendorId
+  local vClassId
+
+  vDispositivo="$1"
+
+  [ -f "${vDispositivo}/vendor" ] || return 1
+  [ -f "${vDispositivo}/class" ] || return 1
+
+  vVendorId="$(sed 's/^0x//' "${vDispositivo}/vendor")"
+  vClassId="$(cat "${vDispositivo}/class")"
+
+  [ "${vVendorId}" = "1002" ] || return 1
+
+  case "${vClassId}" in
+    0x03*)
+      return 0
+    ;;
+    *)
+      return 1
+    ;;
+  esac
+}
+
+fEsDispositivoGpuAmdControladoPorAmdgpu() {
+  local vDispositivo
+  local vDriver
+
+  vDispositivo="$1"
+
+  fEsDispositivoGpuAmd "${vDispositivo}" || return 1
+
+  vDriver="$(fObtenerDriverDeDispositivoPci "${vDispositivo}")"
+
+  [ "${vDriver}" = "amdgpu" ] || return 1
+
+  return 0
+}
+
+fHayGpuAmdControladaPorAmdgpu() {
+  local vDispositivo
+
+  for vDispositivo in /sys/class/drm/card*/device; do
+    [ -e "${vDispositivo}" ] || continue
+
+    if fEsDispositivoGpuAmdControladoPorAmdgpu "${vDispositivo}"; then
+      return 0
+    fi
+  done
+
+  return 1
+}
+
 fDetectarConSysfsIpDiscovery() {
   local vDispositivo
   local vRutaGc
-  local vVendorId
   local vMajor
   local vMinor
   local vRevision
@@ -109,11 +175,8 @@ fDetectarConSysfsIpDiscovery() {
 
   for vDispositivo in /sys/class/drm/card*/device; do
     [ -e "${vDispositivo}" ] || continue
-    [ -f "${vDispositivo}/vendor" ] || continue
 
-    vVendorId="$(sed 's/^0x//' "${vDispositivo}/vendor")"
-
-    [ "${vVendorId}" = "1002" ] || continue
+    fEsDispositivoGpuAmdControladoPorAmdgpu "${vDispositivo}" || continue
 
     for vRutaGc in "${vDispositivo}"/ip_discovery/die/*/GC/*; do
       [ -d "${vRutaGc}" ] || continue
@@ -200,30 +263,40 @@ fListarGpuAmdDetectadas() {
   local vClassId
   local vPciId
   local vNombre
+  local vDriver
 
   for vDispositivo in /sys/bus/pci/devices/*; do
     [ -f "${vDispositivo}/vendor" ] || continue
     [ -f "${vDispositivo}/device" ] || continue
     [ -f "${vDispositivo}/class" ] || continue
 
+    fEsDispositivoGpuAmd "${vDispositivo}" || continue
+
     vVendorId="$(sed 's/^0x//' "${vDispositivo}/vendor")"
     vDeviceId="$(sed 's/^0x//' "${vDispositivo}/device")"
     vClassId="$(cat "${vDispositivo}/class")"
+    vPciId="${vVendorId}:${vDeviceId}"
+    vNombre="$(basename "${vDispositivo}")"
+    vDriver="$(fObtenerDriverDeDispositivoPci "${vDispositivo}")"
 
-    [ "${vVendorId}" = "1002" ] || continue
+    [ -n "${vDriver}" ] || vDriver="sin-driver"
 
-    case "${vClassId}" in
-      0x03*)
-        vPciId="${vVendorId}:${vDeviceId}"
-        vNombre="$(basename "${vDispositivo}")"
-        echo "${vNombre} ${vPciId}" >&2
-      ;;
-    esac
+    echo "${vNombre} ${vPciId} clase=${vClassId} driver=${vDriver}" >&2
   done
 }
 
 fDetectarGfxName() {
   local vGfxName
+
+  if ! fHayGpuAmdControladaPorAmdgpu; then
+    echo "No hay ninguna GPU AMD controlada por el driver amdgpu." >&2
+    echo "" >&2
+    echo "GPUs AMD PCI detectadas:" >&2
+    fListarGpuAmdDetectadas
+    echo "" >&2
+    echo "No se puede devolver un target GFX válido usando este método." >&2
+    exit 1
+  fi
 
   vGfxName="$(fDetectarConSysfsIpDiscovery)"
 
@@ -255,7 +328,7 @@ fDetectarGfxName() {
   echo "- El driver amdgpu no expone ip_discovery para esta GPU o este kernel." >&2
   echo "- ROCm está demasiado viejo y devuelve gfx000 o no reconoce la GPU." >&2
   echo "- La GPU AMD es demasiado antigua para este método." >&2
-  echo "- La GPU no está usando el driver amdgpu." >&2
+  echo "- La GPU AMD está usando amdgpu, pero no se ha podido calcular el target GFX." >&2
 
   exit 1
 }
