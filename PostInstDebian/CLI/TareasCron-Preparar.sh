@@ -118,8 +118,12 @@
   echo '#  ESCRIBE ABAJO, UNA POR LÍNEA, LAS TAREAS A EJECUTAR CADA DÍA'                                      | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
   echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                    | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
   echo ''                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
-  sudo chmod +x /root/scripts/TareasCronCadaDía.sh
-  sudo ln -s /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh /etc/cron.daily/TareasCronCadaDía
+  sudo chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
+  sudo crontab -l > /tmp/CronTemporal
+  sudo sed -i '/TareasCronCadaDía.sh/d' /tmp/CronTemporal
+  echo '50 23 * * * /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh' | sudo tee -a /tmp/CronTemporal
+  sudo crontab /tmp/CronTemporal
+  sudo rm /tmp/CronTemporal
 
 # Preparar el script de tareas cada semana
   echo ''
@@ -134,7 +138,11 @@
   echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                       | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
   echo ''                                                                                                           | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
   sudo chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
-  sudo ln -s /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh /etc/cron.weekly/TareasCronCadaSemana
+  sudo crontab -l > /tmp/CronTemporal
+  sudo sed -i '/TareasCronCadaSemana.sh/d' /tmp/CronTemporal
+  echo '40 23 * * 0 /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh' | sudo tee -a /tmp/CronTemporal
+  sudo crontab /tmp/CronTemporal
+  sudo rm /tmp/CronTemporal
 
 # Preparar el script de tareas cada mes
   echo ''
@@ -149,7 +157,11 @@
   echo '#▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼'                                    | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
   echo ''                                                                                                     | sudo tee -a /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
   sudo chmod +x /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
-  sudo ln -s /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh /etc/cron.monthly/TareasCronCadaMes
+  sudo crontab -l > /tmp/CronTemporal
+  sudo sed -i '/TareasCronCadaMes.sh/d' /tmp/CronTemporal
+  echo '30 23 28-31 * * [ "$(date -d tomorrow +\%d)" = "01" ] && /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh' | sudo tee -a /tmp/CronTemporal
+  sudo crontab /tmp/CronTemporal
+  sudo rm /tmp/CronTemporal
 
 # Dar permisos de lectura y ejecución sólo al propietario de los scripts
   echo ''
@@ -163,3 +175,32 @@
   sudo chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh
   sudo chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh
   sudo chmod 700 /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh
+
+exit
+
+# Arreglar anteriores ejecuciones con sudo
+  sudo rm -f /etc/cron.daily/TareasCronCadaDía
+  sudo rm -f /etc/cron.weekly/TareasCronCadaSemana
+  sudo rm -f /etc/cron.monthly/TareasCronCadaMes
+  sudo crontab -l > /tmp/CronTemporal
+  sudo sed -i '/TareasCronCadaDía.sh/d' /tmp/CronTemporal
+  sudo sed -i '/TareasCronCadaSemana.sh/d' /tmp/CronTemporal
+  sudo sed -i '/TareasCronCadaMes.sh/d' /tmp/CronTemporal
+  echo '50 23 * * * /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh'                                              | sudo tee -a /tmp/CronTemporal
+  echo '40 23 * * 0 /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh'                                           | sudo tee -a /tmp/CronTemporal
+  echo '30 23 28-31 * * [ "$(date -d tomorrow +\%d)" = "01" ] && /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh' | sudo tee -a /tmp/CronTemporal
+  sudo crontab /tmp/CronTemporal
+  sudo rm /tmp/CronTemporal
+# Arreglar anteriores ejecuciones sin sudo
+  rm -f /etc/cron.daily/TareasCronCadaDía
+  rm -f /etc/cron.weekly/TareasCronCadaSemana
+  rm -f /etc/cron.monthly/TareasCronCadaMes
+  crontab -l > /tmp/CronTemporal
+  sed -i '/TareasCronCadaDía.sh/d' /tmp/CronTemporal
+  sed -i '/TareasCronCadaSemana.sh/d' /tmp/CronTemporal
+  sed -i '/TareasCronCadaMes.sh/d' /tmp/CronTemporal
+  echo '50 23 * * * /root/scripts/ParaEsteDebian/TareasCronCadaDía.sh'                                              | tee -a /tmp/CronTemporal
+  echo '40 23 * * 0 /root/scripts/ParaEsteDebian/TareasCronCadaSemana.sh'                                           | tee -a /tmp/CronTemporal
+  echo '30 23 28-31 * * [ "$(date -d tomorrow +\%d)" = "01" ] && /root/scripts/ParaEsteDebian/TareasCronCadaMes.sh' | tee -a /tmp/CronTemporal
+  crontab /tmp/CronTemporal
+  rm /tmp/CronTemporal
