@@ -21,7 +21,6 @@
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/Controladores/Graficas-NVIDIA-Controladores-DeWeb-Desinstalar.sh | bash -s Parámetro1 Parámetro2
 # ----------
 
-#vNroUltVersEstable='595.71.05'
 vNroUltVersEstable=$(curl -fsSL 'https://www.nvidia.com/es-es/drivers/unix/' | grep -m2 'Linux x86_64/AMD64/EM64T' | grep roducc | grep -oP '<span class="PB">.*?<a[^>]*>\K[0-9]+(\.[0-9]+)+')
 
 # Definir constantes de color
@@ -70,7 +69,7 @@ if [ $cVerSO == "13" ]; then
     echo ""
     echo "    Ejecutando el desinstalador..."
     echo ""
-    sudo /tmp/nVidiaWebDriverInstall.run --uninstall
+    sudo /tmp/nVidiaWebDriverInstall.run --uninstall --silent
 
   # Borrar directorios extras
     sudo rm -rf /usr/share/egl/egl_external_platform.d/
