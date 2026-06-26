@@ -19,7 +19,6 @@
 #  https://www.nvidia.com/es-es/drivers/unix/
 # ----------
 
-#vNroUltVersEstable='595.71.05'
 vNroUltVersEstable=$(curl -fsSL 'https://www.nvidia.com/es-es/drivers/unix/' | grep -m2 'Linux x86_64/AMD64/EM64T' | grep roducc | grep -oP '<span class="PB">.*?<a[^>]*>\K[0-9]+(\.[0-9]+)+')
 
 # Definir constantes de color
@@ -96,7 +95,7 @@ if [ $cVerSO == "13" ]; then
     echo ""
     echo "    Ejecutando el instalador..."
     echo ""
-    sudo sh /tmp/nVidiaWebDriverInstall.run
+    sudo sh /tmp/nVidiaWebDriverInstall.run --ui=none --no-questions --accept-license --disable-nouveau --rebuild-initramfs --dmks --no-install-compat32-libs
 
   # Comprobar la gráfica
     nvidia-smi
