@@ -95,7 +95,49 @@ if [ $cVerSO == "13" ]; then
     echo ""
     echo "    Ejecutando el instalador..."
     echo ""
-    sudo sh /tmp/nVidiaWebDriverInstall.run --ui=none --no-questions --accept-license --disable-nouveau --rebuild-initramfs --dmks --no-install-compat32-libs
+    # Crear el menú
+      # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install dialog
+          echo ""
+        fi
+      menu=(dialog --radiolist "Marca las opciones que quieras instalar:" 22 90 16)
+        opciones=(
+          1 "Propietario           (Obligatorio para GPUs Maxwell, Pascal y Volta antiguas, opcional para tarjetas nuevas)" off
+          2 "Abierto, Dual MIT/GPL (Sólo funciona con GPUs Touring y superiores: RTX 20xx en adelante)"                     off
+        )
+      choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
+      #clear
+
+      for choice in $choices
+        do
+          case $choice in
+
+            1)
+
+              echo ""
+              echo "  Instalando el driver propietario..."
+              echo ""
+              sudo sh /tmp/nVidiaWebDriverInstall.run --ui=none --no-questions --accept-license --disable-nouveau --rebuild-initramfs --dkms --no-install-compat32-libs --kernel-module-type=proprietary
+
+            ;;
+
+            2)
+
+              echo ""
+              echo "  Instalando el driver Abierto, Dual MIT/GPL..."
+              echo ""
+              sudo sh /tmp/nVidiaWebDriverInstall.run --ui=none --no-questions --accept-license --disable-nouveau --rebuild-initramfs --dkms --no-install-compat32-libs --kernel-module-type=open
+
+            ;;
+
+        esac
+
+    done
 
   # Comprobar la gráfica
     nvidia-smi
