@@ -28,6 +28,7 @@ set -euo pipefail
       "file-history"
       "ide"
       "paste-cache"
+      "plans"
       "plugins"
       "projects"
       "session-env"
