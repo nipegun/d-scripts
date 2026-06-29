@@ -73,4 +73,21 @@ set -euo pipefail
       sudo apt-get -y install curl
       echo ""
     fi
-  jq '.language="Español" | .model="opus" | .effortLevel="max"' "$HOME"/.claude/settings.json > /tmp/claude-settings.json && mv /tmp/claude-settings.json "$HOME"/.claude/settings.json
+  mkdir -p "$HOME"/.claude
+  if [ -f "$HOME"/.claude/settings.json ]; then
+    jq '."$schema"="https://json.schemastore.org/claude-code-settings.json" | .attribution.coauthored=false | .language="spanish" | .model="opus" | .effortLevel="xhigh" | .showTips=false | .permissions.defaultMode="auto"' "$HOME"/.claude/settings.json > /tmp/claude-settings.json && mv /tmp/claude-settings.json "$HOME"/.claude/settings.json
+  else
+    echo '{'                                                                      | tee    "$HOME"/.claude/settings.json
+    echo '  "$schema": "https://json.schemastore.org/claude-code-settings.json",' | tee -a "$HOME"/.claude/settings.json
+    echo '  "attribution": {'                                                     | tee -a "$HOME"/.claude/settings.json
+    echo '    "coauthored": false'                                                | tee -a "$HOME"/.claude/settings.json
+    echo '  },'                                                                   | tee -a "$HOME"/.claude/settings.json
+    echo '  "language": "spanish",'                                               | tee -a "$HOME"/.claude/settings.json
+    echo '  "model": "opus",'                                                     | tee -a "$HOME"/.claude/settings.json
+    echo '  "effortLevel": "xhigh",'                                              | tee -a "$HOME"/.claude/settings.json
+    echo '  "showTips": false,'                                                   | tee -a "$HOME"/.claude/settings.json
+    echo '  "permissions": {'                                                     | tee -a "$HOME"/.claude/settings.json
+    echo '    "defaultMode": "auto"'                                              | tee -a "$HOME"/.claude/settings.json
+    echo '  }'                                                                    | tee -a "$HOME"/.claude/settings.json
+    echo '}'                                                                      | tee -a "$HOME"/.claude/settings.json
+  fi
