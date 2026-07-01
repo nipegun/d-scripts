@@ -8,13 +8,22 @@
 # ----------
 # Script de NiPeGun para instalar y configurar BookStack en Debian
 #
-# Ejecución remota (puede requerir permisos sudo):
+# Ejecución remota interactiva (puede requerir permisos sudo):
 # curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/BookStack-InstalarYConfigurar.sh | bash
 #
-# Ejecución remota como root (para sistemas sin sudo):
+# Ejecución remota indicando dominio/IP (puede requerir permisos sudo):
+# curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/BookStack-InstalarYConfigurar.sh | bash -s -- docs.midominio.com
+#
+# Ejecución remota como root interactiva (para sistemas sin sudo):
 # curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/BookStack-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
-# Bajar y editar directamente el archivo en nano
+# Ejecución remota como root indicando dominio/IP (para sistemas sin sudo):
+# curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/BookStack-InstalarYConfigurar.sh | sed 's-sudo--g' | bash -s -- docs.midominio.com
+#
+# Ejecución remota usando variable de entorno:
+# BOOKSTACK_DOMINIO="docs.midominio.com" bash <(curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/BookStack-InstalarYConfigurar.sh)
+#
+# Bajar y editar directamente el archivo en nano:
 # curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/BookStack-InstalarYConfigurar.sh | nano -
 # ----------
 
@@ -58,7 +67,7 @@ if [ "$cVerSO" == "13" ]; then
   vScriptUser="${SUDO_USER:-${USER:-root}}"
   vCurrentIp="$(ip -4 addr show scope global up | sed -n 's/.*inet \([0-9.]*\)\/.*/\1/p' | head -n 1)"
   vDbPass="$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 13)"
-  vDominio="${1:-}"
+  vDominio="${1:-${BOOKSTACK_DOMINIO:-}}"
   cBookstackDir="/var/www/bookstack"
   cDbName="bookstack"
   cDbUser="bookstack"
@@ -93,7 +102,7 @@ if [ "$cVerSO" == "13" ]; then
     if [ "$(id -u)" -ne 0 ]; then
 
       if ! command -v sudo >/dev/null 2>&1; then
-        fErrorOut "sudo no está instalado. Ejecuta el script como root usando la segunda forma indicada al principio del script."
+        fErrorOut "sudo no está instalado. Ejecuta el script como root usando la forma con sed indicada al principio del script."
       fi
 
       if ! sudo -v; then
@@ -116,7 +125,14 @@ if [ "$cVerSO" == "13" ]; then
       fInfoMsg ""
       fInfoMsg "Introduce el dominio o IP donde se alojará BookStack y pulsa [ENTER]."
       fInfoMsg "Ejemplos: mi-sitio.com, docs.mi-sitio.com o ${vCurrentIp}"
-      read -r vDominio
+
+      if [ -e /dev/tty ]; then
+        if ! read -r vDominio < /dev/tty; then
+          fErrorOut "No se ha podido leer el dominio/IP desde la TTY. Ejecuta el script pasando el dominio/IP con: bash -s -- docs.midominio.com"
+        fi
+      else
+        fErrorOut "No hay TTY disponible. Ejecuta el script pasando el dominio/IP con: bash -s -- docs.midominio.com"
+      fi
     fi
 
     if [ -z "$vDominio" ]; then
