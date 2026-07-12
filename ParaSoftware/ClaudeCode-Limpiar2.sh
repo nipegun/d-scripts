@@ -52,6 +52,9 @@ set -euo pipefail
 # Borrado de archivos
 
   aArchivosABorrar=(
+    "daemon.lock"
+    "daemon.log"
+    "daemon.status.json"
     "history.jsonl"
     "mcp-needs-auth-cache.json"
     "stats-cache.json"
