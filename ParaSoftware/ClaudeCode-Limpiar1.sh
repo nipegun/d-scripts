@@ -25,8 +25,10 @@ set -euo pipefail
     aCarpetasABorrar=(
       "backups"
       "cache"
+      "daemon"
       "file-history"
       "ide"
+      "jobs"
       "paste-cache"
       "plans"
       "plugins"
@@ -34,6 +36,7 @@ set -euo pipefail
       "session-env"
       "sessions"
       "shell-snapshots"
+      "skills"
       "tasks"
       "telemetry"
     )
