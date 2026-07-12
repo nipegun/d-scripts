@@ -90,6 +90,7 @@ set -euo pipefail
     echo '  },'                                                                   | tee -a "$HOME"/.claude/settings.json
     echo '  "language": "spanish",'                                               | tee -a "$HOME"/.claude/settings.json
     echo '  "model": "opus",'                                                     | tee -a "$HOME"/.claude/settings.json
+    #echo '  "model": "claude-fable-5[1m]",'                                      | tee -a "$HOME"/.claude/settings.json
     echo '  "effortLevel": "xhigh",'                                              | tee -a "$HOME"/.claude/settings.json
     echo '  "showTips": false,'                                                   | tee -a "$HOME"/.claude/settings.json
     echo '  "permissions": {'                                                     | tee -a "$HOME"/.claude/settings.json
