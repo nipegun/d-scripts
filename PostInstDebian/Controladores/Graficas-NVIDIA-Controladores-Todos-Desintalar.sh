@@ -39,3 +39,11 @@
 # Borrar controladores web
   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/Controladores/Graficas-NVIDIA-Controladores-DeWeb-Desinstalar.sh | bash
   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/Controladores/Graficas-NVIDIA-Controladores-DeWeb-CUDAToolkit-Desinstalar.sh | bash
+
+# Desinstalar nouveau
+  sudo apt-get -y autoremove --purge xserver-xorg-video-nouveau
+  sudo apt-get -y autoremove --purge libdrm-nouveau2
+  sudo apt-get -y autoremove --purge firmware-nvidia-*
+  #echo 'blacklist nouveau' | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+  #sudo update-initramfs -u
+
