@@ -49,6 +49,10 @@
   sudo find / -xdev -depth -type d -iname '*cuda*' -exec rm -rf -- {} +
   sudo find / -xdev \( -type f -o -type l \) -iname '*cuda*' -exec rm -f -- {} +
 
+# Re-instalar International Components for Unicode (Obligatorio porque se borran algunos archivos con nombre cuda antes)
+  cNomPaquete=$(apt-cache search libicu | grep '\- International Components for Unicode' | cut -d ' ' -f1)
+  sudo apt-get -y install --reinstall "$cNomPaquete"
+
 # Notificar fin de ejecución del script
   echo ""
   echo "  Ejecución del script, finalizada."
