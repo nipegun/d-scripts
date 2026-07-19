@@ -56,6 +56,13 @@ if [ $cVerSO == "13" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de los controladores NVIDIA para Debian 13 (x)...${cFinColor}"
   echo ""
 
+  # Desinstalar nouveau
+    sudo apt-get -y autoremove --purge xserver-xorg-video-nouveau
+    sudo apt-get -y autoremove --purge libdrm-nouveau2
+    sudo apt-get -y autoremove --purge firmware-nvidia-*
+    echo 'blacklist nouveau' | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+    sudo update-initramfs -u
+
   # Determinar el controlador a instalar
     echo ""
     echo "    Determinando el controlador a instalar..."
