@@ -56,9 +56,41 @@ if [ $cVerSO == "13" ]; then
   echo -e "${cColorAzulClaro}  Iniciando el script de instalación de los controladores NVIDIA para Debian 13 (x)...${cFinColor}"
   echo ""
 
-  echo ""
-  echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-  echo ""
+  # Determinar el controlador a instalar
+    echo ""
+    echo "    Determinando el controlador a instalar..."
+    echo ""
+    # Comprobar si el paquete nvidia-detect está instalado. Si no lo está, instalarlo.
+      if [[ $(dpkg-query -s nvidia-detect 2>/dev/null | grep installed) == "" ]]; then
+        echo ""
+        echo -e "${cColorRojo}      El paquete nvidia-detect no está instalado. Iniciando su instalación...${cFinColor}"
+        echo ""
+        sudo apt-get -y update
+        sudo apt-get -y install nvidia-detect
+        echo ""
+      fi
+    cPaqueteControlador=$(nvidia-detect | grep "^ " | sed 's- --g')
+    echo ""
+    echo "      El paquete con el controlador a instalar es: $cPaqueteControlador"
+    echo ""
+
+  # Instalar el paquete del controlador
+    echo ""
+    echo "    Instalando el paquete del controlador..."
+    echo ""
+    sudo apt-get -y install $cPaqueteControlador
+
+  # Instalar el firmware
+    echo ""
+    echo "    Instalando el firmware..."
+    echo ""
+    sudo apt-get -y install firmware-misc-nonfree
+
+  # Instalar CUDA toolkit
+    echo ""
+    echo "    Instalando CUDA toolkit..."
+    echo ""
+    sudo apt-get -y install nvidia-cuda-toolkit
 
 elif [ $cVerSO == "12" ]; then
 
