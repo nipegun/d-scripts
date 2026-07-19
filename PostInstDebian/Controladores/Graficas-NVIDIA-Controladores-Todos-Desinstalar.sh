@@ -50,6 +50,19 @@
   sudo find / -xdev \( -type f -o -type l \) -iname '*cuda*' -exec rm -f -- {} +
 
 # Reinstalar paquetes cuyos archivos se hayan podido desinstalar
+  # Crear la lista de paquetes que tienen archivos faltantes
+    sudo dpkg -V 2>&1 \
+      | tee "$HOME/Verificacion-DPKG-Completa.txt" \
+      | sed -n 's/^missing[[:space:]]\+\(c[[:space:]]\+\)\?//p' \
+      | while IFS= read -r vRuta; do
+          dpkg-query -S "$vRuta" 2>/dev/null | sed 's/: \/.*$//'
+        done \
+      | sort -u \
+      | tee "$HOME/Paquetes-Dañados-DPKG.txt"
+  # Limpiar la lista
+    sed 's/,[[:space:]]*/\n/g' "$HOME/Paquetes-Dañados-DPKG.txt" | sed '/^[[:space:]]*$/d' | sort -u > "$HOME/Paquetes-Dañados-DPKG-Limpio.txt"
+  # Reinstalar paquetes
+    xargs -r sudo apt-get -o Dpkg::Options::="--force-confmiss" install --reinstall -- < "$HOME/Paquetes-Dañados-DPKG-Limpio.txt"
   # Re-instalar International Components for Unicode (Obligatorio porque se borran algunos archivos con nombre cuda antes)
     cNomPaquete=$(apt-cache search libicu | grep '\- International Components for Unicode' | cut -d ' ' -f1)
     sudo apt-get -y install --reinstall "$cNomPaquete"
