@@ -20,6 +20,7 @@
 # Ejecución remota con parámetros:
 #   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/PostInstDebian/Controladores/Graficas-NVIDIA-Controladores-DeWeb-CUDAToolkit-Instalar.sh | bash -s Parámetro1 Parámetro2
 #
+#
 # Enlaces relacionados: https://developer.nvidia.com/cuda-toolkit-archive
 # ----------
 
@@ -70,8 +71,8 @@ if [ $cVerSO == "13" ]; then
       fi
     menu=(dialog --checklist "Marca la versión de CUDA Toolkit que quieres instalar:" 22 96 16)
       opciones=(
-        1 "13.1" on
-        2 "12.8" off
+        1 "13.3.1" on
+        2 "12.9.2" off
       )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -82,18 +83,19 @@ if [ $cVerSO == "13" ]; then
             1)
 
               echo ""
-              echo "  Instalando CUDA Toolkit 13.0..."
+              echo "  Instalando CUDA Toolkit..."
               echo ""
 
-              # Instalar CUDA Toolkit
+              # Descargar
+                cVers='13.3.1'
                 echo ""
-                echo "    Instalando CUDA Toolkit..."
+                echo "    Descargando versión $cVers..."
                 echo ""
-                curl -L https://developer.download.nvidia.com/compute/cuda/13.1.1/local_installers/cuda-repo-debian13-13-1-local_13.1.1-590.48.01-1_amd64.deb -o /tmp/CudaRepo.deb
+                curl -L https://developer.download.nvidia.com/compute/cuda/"$cVers"/local_installers/cuda-repo-debian13-13-3-local_"$cVers"-610.43.02-1_amd64.deb -o /tmp/CudaRepo.deb
                 sudo apt -y install /tmp/CudaRepo.deb
-                sudo cp /var/cuda-repo-debian13-13-1-local/cuda-*-keyring.gpg /usr/share/keyrings/
-                sudo apt-get update
-                sudo apt-get -y install cuda-toolkit-13-1
+                sudo cp -v /var/cuda-repo-debian13-13-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
+                sudo apt-get -y update
+                sudo apt-get -y install cuda-toolkit-13-3
 
               # Notificar fin de ejecución del script
                 echo ""
@@ -105,18 +107,18 @@ if [ $cVerSO == "13" ]; then
             2)
 
               echo ""
-              echo "  Instalando CUDA Toolkit 12.8..."
+              echo "  Instalando CUDA Toolkit..."
               echo ""
 
-              # Instalar CUDA Toolkit
+                cVers='12.9.2'
                 echo ""
-                echo "    Instalando CUDA Toolkit..."
+                echo "    Descargando versión $cVers..."
                 echo ""
-                curl -L https://developer.download.nvidia.com/compute/cuda/12.8.0/local_installers/cuda-repo-debian12-12-8-local_12.8.0-570.86.10-1_amd64.deb -o /tmp/CudaRepo.deb
+                curl -L https://developer.download.nvidia.com/compute/cuda/12.9.2/local_installers/cuda-repo-debian12-12-9-local_12.9.2-575.57.08-1_amd64.deb -o /tmp/CudaRepo.deb
                 sudo apt -y install /tmp/CudaRepo.deb
-                sudo cp -v /var/cuda-repo-debian12-12-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
+                sudo cp -v /var/cuda-repo-debian12-12-9-local/cuda-*-keyring.gpg /usr/share/keyrings/
                 sudo apt-get update
-                sudo apt-get -y install cuda-toolkit-12-8
+                sudo apt-get -y install cuda-toolkit-12-9
 
               # Notificar fin de ejecución del script
                 echo ""
