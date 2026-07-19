@@ -63,6 +63,10 @@
     sed 's/,[[:space:]]*/\n/g' "$HOME/Paquetes-Dañados-DPKG.txt" | sed '/^[[:space:]]*$/d' | sort -u > "$HOME/Paquetes-Dañados-DPKG-Limpio.txt"
   # Reinstalar paquetes
     xargs -r sudo apt-get -o Dpkg::Options::="--force-confmiss" install --reinstall -- < "$HOME/Paquetes-Dañados-DPKG-Limpio.txt"
+  # Borrar archivos ya no útiles
+    rm -f "$HOME/Verificacion-DPKG-Completa.txt"
+    rm -f "$HOME/Paquetes-Dañados-DPKG.txt"
+    rm -f "$HOME/Paquetes-Dañados-DPKG-Limpio.txt"
   # Re-instalar International Components for Unicode (Obligatorio porque se borran algunos archivos con nombre cuda antes)
     cNomPaquete=$(apt-cache search libicu | grep '\- International Components for Unicode' | cut -d ' ' -f1)
     sudo apt-get -y install --reinstall "$cNomPaquete"
