@@ -46,6 +46,7 @@ set -euo pipefail
 # Borrado de archivos
 
   aArchivosABorrar=(
+    "config.toml"
     "goals_1.sqlite"
     "goals_1.sqlite-shm"
     "goals_1.sqlite-wal"
@@ -72,3 +73,10 @@ set -euo pipefail
       rm -fv "$vRutaAlArchivo"
     fi
   done
+
+# Recrear el archivo config.toml
+  echo 'model = "gpt-5.6-sol"'              | tee    $HOME/.codex/config.toml
+  echo 'model_reasoning_effort = "max"'     | tee -a $HOME/.codex/config.toml
+  echo 'plan_mode_reasoning_effort = "max"' | tee -a $HOME/.codex/config.toml
+  echo 'service_tier = "default"'           | tee -a $HOME/.codex/config.toml
+
