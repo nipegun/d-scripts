@@ -46,23 +46,24 @@ set -euo pipefail
 # Borrado de archivos
 
   aArchivosABorrar=(
+    "goals_1.sqlite"
+    "goals_1.sqlite-shm"
+    "goals_1.sqlite-wal"
     "history.jsonl"
     "installation_id"
     "logs_2.sqlite"
     "logs_2.sqlite-shm"
     "logs_2.sqlite-wal"
-    "models_cache.json"
-    "state_5.sqlite"
-    "version.json"
-    ".personality_migration"
-    "goals_1.sqlite"
     "memories_1.sqlite"
-    "state_5.sqlite-shm"
-    "state_5.sqlite-wal"
-    "goals_1.sqlite-shm"
-    "goals_1.sqlite-wal"
     "memories_1.sqlite-shm"
     "memories_1.sqlite-wal"
+    "models_cache.json"
+    "state_5.sqlite"
+    "state_5.sqlite-shm"
+    "state_5.sqlite-wal"
+    "version.json"
+    ".personality_migration"
+    ".sandbox_migration"
   )
 
   for vArchivo in "${aArchivosABorrar[@]}"; do
