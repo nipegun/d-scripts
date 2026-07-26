@@ -62,7 +62,7 @@ if [ $cVerSO == "13" ]; then
     echo ""
     sudo apt-get -y update
     sudo apt-get -y install build-essential
-    sudo apt-get -y install linux-headers-$(uname -r)
+    sudo apt-get -y install linux-headers-$(dpkg --print-architecture)
     sudo apt-get -y install dkms
     sudo apt-get -y install pkg-config
     sudo apt-get -y install libglvnd-dev
@@ -157,7 +157,7 @@ elif [ $cVerSO == "12" ]; then
     echo ""
     sudo apt-get -y update
     sudo apt-get -y install build-essential
-    sudo apt-get -y install linux-headers-$(uname -r)
+    sudo apt-get -y install linux-headers-$(dpkg --print-architecture)
     sudo apt-get -y install dkms
     sudo apt-get -y install pkg-config
     sudo apt-get -y install libglvnd-dev
