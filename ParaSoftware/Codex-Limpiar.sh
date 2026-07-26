@@ -24,6 +24,7 @@ set -euo pipefail
   # Definir el array con el nombre de las carpetas a borrar
     aCarpetasABorrar=(
       "cache"
+      "generated_images"
       "log"
       "memories"
       "plugins"
