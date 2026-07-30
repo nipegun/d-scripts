@@ -61,9 +61,19 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Claude Desktop para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Instalar paquetes necesarios
+      sudo apt-get -y update
+      sudo apt-get -y install curl
+      sudo apt-get -y install gnupg
+
+    # Agregar repositorio de Anthropic
+      sudo curl -fsSLo /usr/share/keyrings/claude-desktop-archive-keyring.asc https://downloads.claude.ai/claude-desktop/key.asc
+      gpg --show-keys /usr/share/keyrings/claude-desktop-archive-keyring.asc
+      echo "deb [arch=amd64 signed-by=/usr/share/keyrings/claude-desktop-archive-keyring.asc] https://downloads.claude.ai/claude-desktop/apt/stable stable main" | sudo tee /etc/apt/sources.list.d/claude-desktop.list
+      sudo apt-get -y update
+
+    # Instalar el paquete
+      sudo apt-get -y install claude-desktop
 
   elif [ $cVerSO == "12" ]; then
 
@@ -71,9 +81,19 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Claude Desktop para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Instalar paquetes necesarios
+      sudo apt-get -y update
+      sudo apt-get -y install curl
+      sudo apt-get -y install gnupg
+
+    # Agregar repositorio de Anthropic
+      sudo curl -fsSLo /usr/share/keyrings/claude-desktop-archive-keyring.asc https://downloads.claude.ai/claude-desktop/key.asc
+      gpg --show-keys /usr/share/keyrings/claude-desktop-archive-keyring.asc
+      echo "deb [arch=amd64 signed-by=/usr/share/keyrings/claude-desktop-archive-keyring.asc] https://downloads.claude.ai/claude-desktop/apt/stable stable main" | sudo tee /etc/apt/sources.list.d/claude-desktop.list
+      sudo apt-get -y update
+
+    # Instalar el paquete
+      sudo apt-get -y install claude-desktop
 
   elif [ $cVerSO == "11" ]; then
 
