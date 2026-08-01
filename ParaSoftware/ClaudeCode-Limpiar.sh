@@ -26,6 +26,8 @@ set -euo pipefail
       "backups"
       "cache"
       "daemon"
+      "debug"
+      "downloads"
       "file-history"
       "ide"
       "jobs"
