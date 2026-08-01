@@ -31,6 +31,7 @@ set -euo pipefail
       "rules"
       "sessions"
       "shell_snapshots"
+      "skills"
       "tmp"
       ".tmp"
     )
