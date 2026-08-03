@@ -108,7 +108,8 @@
   done
 
 # Corregir permisos de la carpeta
-  sudo chown root:root /CopSegInt -R
+  sudo chown root:root /CopSegInt
+  sudo chmod 700 /CopSegInt
 
 # Loguear tarea
   echo "$cFechaDeEjec - Terminada la copia de seguridad interna." | sudo tee -a /var/log/CopiasDeSeguridad.log > /dev/null
