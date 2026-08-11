@@ -23,6 +23,7 @@ set -euo pipefail
 
   # Definir el array con el nombre de las carpetas a borrar
     aCarpetasABorrar=(
+      "thread-writer-locks"
       "cache"
       "generated_images"
       "log"
@@ -61,9 +62,15 @@ set -euo pipefail
       "memories_1.sqlite-shm"
       "memories_1.sqlite-wal"
       "models_cache.json"
+      "queue_1.sqlite"
+      "queue_1.sqlite-shm"
+      "queue_1.sqlite-wal"
       "state_5.sqlite"
       "state_5.sqlite-shm"
       "state_5.sqlite-wal"
+      "thread_history_1.sqlite"
+      "thread_history_1.sqlite-shm"
+      "thread_history_1.sqlite-wal"
       "version.json"
       ".personality_migration"
       ".sandbox_migration"
