@@ -33,20 +33,26 @@ fAgregarAutologinRoot() {
   local vExecStartLimpio
   local vExecStartNuevo
 
-  # Eliminar cualquier autologin configurado previamente para evitar
-  # argumentos duplicados o un autologin dirigido a otro usuario.
+  # Eliminar cualquier --login-options/-o existente. Esa opción sustituye
+  # los argumentos automáticos de login e impide que --autologin añada
+  # automáticamente "-f root".
+  #
+  # También eliminamos cualquier autologin anterior para evitar duplicados.
   vExecStartLimpio="$(
     echo "$pExecStart" \
       | sed -E \
+        -e "s/[[:space:]]+(-o|--login-options)(=|[[:space:]]+)'[^']*'//g" \
+        -e 's/[[:space:]]+(-o|--login-options)(=|[[:space:]]+)"[^"]*"//g' \
+        -e 's/[[:space:]]+(-o|--login-options)(=|[[:space:]]+)[^[:space:]]+//g' \
         -e 's/[[:space:]]+--autologin(=|[[:space:]]+)[^[:space:]]+//g' \
         -e 's/[[:space:]]+-a[[:space:]]+[^[:space:]]+//g'
   )"
 
-  # Insertar el autologin inmediatamente después de agetty,
-  # conservando el resto de argumentos de la unidad original.
+  # Insertar el autologin inmediatamente después de agetty.
+  # Al no existir --login-options, agetty ejecutará "login -f root".
   vExecStartNuevo="$(
     echo "$vExecStartLimpio" \
-      | sed 's|agetty[[:space:]][[:space:]]*|agetty --autologin root |'
+      | sed -E 's|(agetty)([[:space:]]+)|\1 --autologin root\2|'
   )"
 
   if [ "$vExecStartNuevo" = "$vExecStartLimpio" ]; then
