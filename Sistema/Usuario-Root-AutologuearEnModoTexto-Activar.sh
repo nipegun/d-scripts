@@ -9,7 +9,7 @@
 # Script de NiPeGun para activar el logueo automático del root en modo texto (terminal no gráfico)
 #
 # Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/Usuario-Root-AutologuearEnModoTexto-Activar.sh | bash
+#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/Sistema/Usuario-Root-AutologuearEnModoTexto-Activar.sh | bash
 # ----------
 
 # Se debe reemplazar la línea
