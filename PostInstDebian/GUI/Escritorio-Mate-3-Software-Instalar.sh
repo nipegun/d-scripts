@@ -63,6 +63,7 @@
     # Ofimática y documentos
       sudo apt-get -y install libreoffice-help-es
       sudo apt-get -y install pdfarranger
+      sudo apt-get -y install papers
       sudo apt-get -y install foliate              # Para leer libros en ePub
       sudo apt-get -y install xpad                 # Para sticky notes
       sudo apt-get -y install simple-scan
