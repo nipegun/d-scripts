@@ -23,9 +23,10 @@ set -euo pipefail
 
   # Definir el array con el nombre de las carpetas a borrar
     aCarpetasABorrar=(
-      "thread-writer-locks"
+      "dictation-history"
       "cache"
       "generated_images"
+      "ipc"
       "log"
       "memories"
       "plugins"
@@ -33,7 +34,10 @@ set -euo pipefail
       "sessions"
       "shell_snapshots"
       "skills"
+      "sqlite"
+      "thread-writer-locks"
       "tmp"
+      "vendor_imports"
       ".tmp"
     )
 
@@ -71,7 +75,10 @@ set -euo pipefail
       "thread_history_1.sqlite"
       "thread_history_1.sqlite-shm"
       "thread_history_1.sqlite-wal"
+      "transcription-history.jsonl"
       "version.json"
+      ".codex-global-state.json"
+      ".codex-global-state.json.bak"
       ".personality_migration"
       ".sandbox_migration"
     )
