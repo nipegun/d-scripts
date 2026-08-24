@@ -25,6 +25,7 @@ set -euo pipefail
     aCarpetasABorrar=(
       "backups"
       "cache"
+      "chrome"
       "daemon"
       "debug"
       "downloads"
