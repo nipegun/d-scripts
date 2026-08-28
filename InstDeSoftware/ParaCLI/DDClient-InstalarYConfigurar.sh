@@ -61,6 +61,7 @@ if [ $cVerSO == "13" ]; then
   echo "web.com"                              >> /etc/ddclient.conf
           
   apt-get -y install net-tools
+  apt-get -y install libwww-curl-perl
   apt-get -y install ddclient
           
   echo ""
@@ -106,6 +107,7 @@ elif [ $cVerSO == "12" ]; then
   echo "web.com"                              >> /etc/ddclient.conf
           
   apt-get -y install net-tools
+  apt-get -y install libwww-curl-perl
   apt-get -y install ddclient
           
   echo ""
@@ -150,6 +152,7 @@ elif [ $cVerSO == "11" ]; then
   echo "web.com"                              >> /etc/ddclient.conf
           
   apt-get -y install net-tools
+  apt-get -y install libwww-curl-perl
   apt-get -y install ddclient
           
   echo ""
@@ -193,6 +196,8 @@ elif [ $cVerSO == "10" ]; then
   echo "password='x'"                         >> /etc/ddclient.conf
   echo "web.com"                              >> /etc/ddclient.conf
           
+  apt-get -y install net-tools
+  apt-get -y install libwww-curl-perl
   apt-get -y install ddclient
           
   echo ""
