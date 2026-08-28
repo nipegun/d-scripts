@@ -69,6 +69,7 @@ set -euo pipefail
       "queue_1.sqlite"
       "queue_1.sqlite-shm"
       "queue_1.sqlite-wal"
+      "session_index.jsonl"
       "state_5.sqlite"
       "state_5.sqlite-shm"
       "state_5.sqlite-wal"
