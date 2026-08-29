@@ -42,6 +42,7 @@ set -euo pipefail
       "skills"
       "tasks"
       "telemetry"
+      ".cc-writes"
     )
 
   # Ejecutar el bucle de borrado
