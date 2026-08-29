@@ -101,6 +101,9 @@ set -euo pipefail
     echo '  "effortLevel": "xhigh",'                                              | tee -a "$HOME"/.claude/settings.json
     echo '  "language": "spanish",'                                               | tee -a "$HOME"/.claude/settings.json
     echo '  "skipDangerousModePermissionPrompt": true,'                           | tee -a "$HOME"/.claude/settings.json
+    echo '  "switchModelsOnFlag": false,'                                         | tee -a "$HOME"/.claude/settings.json
+    echo '  "autoContinueAtUsageLimit": false,'                                   | tee -a "$HOME"/.claude/settings.json
+    echo '  "remoteControlAtStartup": false,'                                     | tee -a "$HOME"/.claude/settings.json
     echo '  "showTips": false,'                                                   | tee -a "$HOME"/.claude/settings.json
     echo '}'                                                                      | tee -a "$HOME"/.claude/settings.json
   fi
