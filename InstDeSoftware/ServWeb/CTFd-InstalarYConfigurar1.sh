@@ -261,31 +261,39 @@
               fi
 
               # Deshabilitar el sitio por defecto
-              sudo rm -f /etc/nginx/sites-enabled/default
-
+                sudo rm -f /etc/nginx/sites-enabled/default
               # Crear la configuración de Nginx
-              echo "server {"                                                         | sudo tee    /etc/nginx/sites-available/ctfd
-              echo "  listen 80 default_server;"                                      | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo "  listen [::]:80 default_server;"                                 | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo "  listen 443 ssl default_server;"                                 | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo "  listen [::]:443 ssl default_server;"                            | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo ""                                                                 | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo "  server_name _;"                                                 | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo ""                                                                 | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo "  ssl_certificate /etc/ssl/certs/ctfd.crt;"                       | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo "  ssl_certificate_key /etc/ssl/private/ctfd.key;"                 | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo "  ssl_protocols TLSv1.2 TLSv1.3;"                                 | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo ""                                                                 | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo "  location / {"                                                   | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo "    proxy_pass http://127.0.0.1:4000;"                            | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo '    proxy_set_header Host $host;'                                 | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo '    proxy_set_header X-Real-IP $remote_addr;'                     | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo '    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;' | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo '    proxy_set_header X-Forwarded-Host $host;'                     | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo '    proxy_set_header X-Forwarded-Proto $scheme;'                  | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo '    proxy_set_header X-Forwarded-Port $server_port;'              | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo "  }"                                                              | sudo tee -a /etc/nginx/sites-available/ctfd
-              echo "}"                                                                | sudo tee -a /etc/nginx/sites-available/ctfd
+                # HTTP -> HTTPS
+                  echo "server {"                                                      | sudo tee    /etc/nginx/sites-available/ctfd
+                  echo " listen 80 default_server;"                                    | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo " listen [::]:80 default_server;"                               | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo ""                                                              | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo " server_name _;"                                               | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo ""                                                              | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo ' return 301 https://$host$request_uri;'                        | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo "}"                                                             | sudo tee -a /etc/nginx/sites-available/ctfd
+                # HTTPS
+                  echo ""                                                              | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo "server {"                                                      | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo " listen 443 ssl default_server;"                               | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo " listen [::]:443 ssl default_server;"                          | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo ""                                                              | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo " server_name _;"                                               | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo ""                                                              | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo " ssl_certificate /etc/ssl/certs/ctfd.crt;"                     | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo " ssl_certificate_key /etc/ssl/private/ctfd.key;"               | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo " ssl_protocols TLSv1.2 TLSv1.3;"                               | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo ""                                                              | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo " location / {"                                                 | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo " proxy_pass http://127.0.0.1:4000;"                            | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo ' proxy_set_header Host $host;'                                 | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo ' proxy_set_header X-Real-IP $remote_addr;'                     | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo ' proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;' | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo ' proxy_set_header X-Forwarded-Host $host;'                     | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo ' proxy_set_header X-Forwarded-Proto $scheme;'                  | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo ' proxy_set_header X-Forwarded-Port $server_port;'              | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo " }"                                                            | sudo tee -a /etc/nginx/sites-available/ctfd
+                  echo "}"                                                             | sudo tee -a /etc/nginx/sites-available/ctfd
 
               # Habilitar la configuración
               sudo ln -sfn /etc/nginx/sites-available/ctfd /etc/nginx/sites-enabled/ctfd
