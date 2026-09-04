@@ -130,7 +130,7 @@
               echo "  Creando el servicio de systemd..."
               echo ""
               # Crear primero el script
-                echo '!/bin/bash'                                          | sudo tee    /opt/CTFd/Lanzar.sh
+                echo '#!/bin/bash'                                         | sudo tee    /opt/CTFd/Lanzar.sh
                 echo ""                                                    | sudo tee -a /opt/CTFd/Lanzar.sh
                 echo "source /opt/CTFd/venv/bin/activate"                  | sudo tee -a /opt/CTFd/Lanzar.sh
                 echo "  cd /opt/CTFd/"                                     | sudo tee -a /opt/CTFd/Lanzar.sh
@@ -145,7 +145,6 @@
                 echo ""                                   | sudo tee -a /etc/systemd/system/ctfd.service
                 echo "[Service]"                          | sudo tee -a /etc/systemd/system/ctfd.service
                 echo "User=ctfd"                          | sudo tee -a /etc/systemd/system/ctfd.service
-                echo "Group=ctfs"                         | sudo tee -a /etc/systemd/system/ctfd.service
                 echo "WorkingDirectory=/opt/CTFd/"        | sudo tee -a /etc/systemd/system/ctfd.service
                 echo 'Environment="FLASK_ENV=production"' | sudo tee -a /etc/systemd/system/ctfd.service
                 echo 'ExecStart=/opt/CTFd/Lanzar.sh'      | sudo tee -a /etc/systemd/system/ctfd.service
@@ -179,8 +178,9 @@
                 echo 'echo -e "        o"'                                                                  | sudo tee -a /opt/CTFd/venv/bin/activate
                 echo "echo -e \"      cd /opt/CTFd/ && gunicorn -w 4 -b 0.0.0.0:4000 'CTFd:create_app()'\"" | sudo tee -a /opt/CTFd/venv/bin/activate
                 echo "echo -e ''"                                                                           | sudo tee -a /opt/CTFd/venv/bin/activate
+                sudo chown -R ctfd:ctfd /opt/CTFd/ -R
               # Entrar al entorno virtual
-                sudo source /opt/CTFd/venv/bin/activate
+                source /opt/CTFd/venv/bin/activate
               # Instalar requerimientos
                 pip3 install -r requirements.txt
               # Instalar el conector mysql
@@ -243,7 +243,7 @@
                 echo "server_name cftd.dominio.com;"                | sudo tee -a /etc/nginx/sites-available/ctfd
                 echo ""                                             | sudo tee -a /etc/nginx/sites-available/ctfd
                 echo "  location / {"                               | sudo tee -a /etc/nginx/sites-available/ctfd
-                echo "    proxy_pass http://127.0.0.1:8000;"        | sudo tee -a /etc/nginx/sites-available/ctfd
+                echo "    proxy_pass http://127.0.0.1:4000;"        | sudo tee -a /etc/nginx/sites-available/ctfd
                 echo '    proxy_set_header Host $host;'             | sudo tee -a /etc/nginx/sites-available/ctfd
                 echo '    proxy_set_header X-Real-IP $remote_addr;' | sudo tee -a /etc/nginx/sites-available/ctfd
                 echo "  }"                                          | sudo tee -a /etc/nginx/sites-available/ctfd
