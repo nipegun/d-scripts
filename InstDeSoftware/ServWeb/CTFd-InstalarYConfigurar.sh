@@ -73,8 +73,7 @@
           5 "Crear la base de datos"                                       on
           6 "Crear el entorno virtual de python e instalar requerimientos" on
           7 "Instalar el proxy inverso"                                    on
-          8 "Agregar certificado auto-firmado"                             on
-          9 "Mostrar mensaje de fin de instalación"                        on
+          8 "Mostrar mensaje de fin de instalación"                        on
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -131,12 +130,12 @@
               echo "  Creando el servicio de systemd..."
               echo ""
               # Crear primero el script
-                echo '#!/bin/bash'                                         | sudo tee    /opt/CTFd/Lanzar.sh
-                echo ""                                                    | sudo tee -a /opt/CTFd/Lanzar.sh
-                echo "source /opt/CTFd/venv/bin/activate"                  | sudo tee -a /opt/CTFd/Lanzar.sh
-                echo "  cd /opt/CTFd/"                                     | sudo tee -a /opt/CTFd/Lanzar.sh
-                echo "  gunicorn -w 4 -b 0.0.0.0:4000 'CTFd:create_app()'" | sudo tee -a /opt/CTFd/Lanzar.sh
-                echo "deactivate"                                          | sudo tee -a /opt/CTFd/Lanzar.sh
+                echo '#!/bin/bash'                                           | sudo tee    /opt/CTFd/Lanzar.sh
+                echo ""                                                      | sudo tee -a /opt/CTFd/Lanzar.sh
+                echo "source /opt/CTFd/venv/bin/activate"                    | sudo tee -a /opt/CTFd/Lanzar.sh
+                echo "  cd /opt/CTFd/"                                       | sudo tee -a /opt/CTFd/Lanzar.sh
+                echo "  gunicorn -w 4 -b 127.0.0.1:4000 'CTFd:create_app()'" | sudo tee -a /opt/CTFd/Lanzar.sh
+                echo "deactivate"                                            | sudo tee -a /opt/CTFd/Lanzar.sh
                 sudo chmod +x /opt/CTFd/Lanzar.sh
                 sudo chown -R ctfd:ctfd /opt/CTFd/ -R
               # Crear el servicio
@@ -153,6 +152,8 @@
                 echo ""                                   | sudo tee -a /etc/systemd/system/ctfd.service
                 echo "[Install]"                          | sudo tee -a /etc/systemd/system/ctfd.service
                 echo "WantedBy=multi-user.target"         | sudo tee -a /etc/systemd/system/ctfd.service
+
+            ;;
 
             5)
 
@@ -193,6 +194,7 @@
                 echo "FLASK_ENV=production"                                      | sudo tee    /opt/CTFd/.ctfd.env
                 echo "DATABASE_URL=mysql+pymysql://ctfd:P@ssw0rd@localhost/ctfd" | sudo tee -a /opt/CTFd/.ctfd.env
                 echo "SECRET_KEY=$vLlaveFlask"                                   | sudo tee -a /opt/CTFd/.ctfd.env
+                echo "REVERSE_PROXY=true"                                        | sudo tee -a /opt/CTFd/.ctfd.env
                 echo "MAIL_SERVER=localhost"                                     | sudo tee -a /opt/CTFd/.ctfd.env
                 echo "MAIL_PORT=25"                                              | sudo tee -a /opt/CTFd/.ctfd.env
                 echo "MAIL_USE_TLS=false"                                        | sudo tee -a /opt/CTFd/.ctfd.env
@@ -206,25 +208,7 @@
                 deactivate
               # Notificar fin de instalación en el entorno virtual
                 echo ""
-                echo -e "${cColorVerde}    Entorno virtual preparado. CTFd se puede ejecutar desde el venv de la siguientes formas:${cFinColor}"
-                echo ""
-                echo -e "${cColorVerde}      source /opt/CTFd/venv/bin/activate${cFinColor}"
-                echo ""
-                echo -e "${cColorVerde}        cd /opt/CTFd/'${cFinColor}"
-                echo -e "${cColorVerde}        flask run --host=0.0.0.0${cFinColor}"
-                echo ""
-                echo -e "${cColorVerde}      deactivate${cFinColor}"
-                echo ""
-                echo -e "${cColorVerde}        o${cFinColor}"
-                echo ""
-                echo -e "${cColorVerde}      source /opt/CTFd/venv/bin/activate${cFinColor}"
-                echo ""
-                echo -e "${cColorVerde}        cd /opt/CTFd/'${cFinColor}"
-                echo -e "${cColorVerde}        gunicorn -w 4 -b 0.0.0.0:4000 'CTFd:create_app()'${cFinColor}"
-                echo ""
-                echo -e "${cColorVerde}      deactivate${cFinColor}"
-                echo ""
-                echo -e "${cColorVerde}      Para un entorno de producción, con mucho tráfico, se aconseja la segunda forma.${cFinColor}"
+                echo -e "${cColorVerde}    Entorno virtual preparado.${cFinColor}"
                 echo ""
 
             ;;
@@ -232,38 +216,96 @@
             7)
 
               echo ""
-              echo "  Instalando el proxy inverso..."
+              echo "  Instalando el proxy inverso HTTP/HTTPS..."
               echo ""
-              apt-get -y update
-              apt-get -y install nginx
+
+              sudo apt-get -y update
+              sudo apt-get -y install nginx openssl
+
+              # Obtener nombre DNS e IP del servidor
+              vNombreDNS=$(hostname -f 2>/dev/null)
+              if [ -z "$vNombreDNS" ]; then
+                vNombreDNS=$(hostname)
+              fi
+
+              vIPServidor=$(hostname -I 2>/dev/null | sed 's/ .*//')
+
+              # Crear SAN para el certificado
+              if [ -n "$vIPServidor" ]; then
+                vSAN="DNS:$vNombreDNS,IP:$vIPServidor"
+              else
+                vSAN="DNS:$vNombreDNS"
+              fi
+
+              # Crear certificado autofirmado
+              if [ ! -f /etc/ssl/certs/ctfd.crt ] || [ ! -f /etc/ssl/private/ctfd.key ]; then
+
+                echo ""
+                echo "  Generando certificado HTTPS autofirmado..."
+                echo ""
+
+                sudo openssl req \
+                  -x509 \
+                  -nodes \
+                  -newkey rsa:4096 \
+                  -sha256 \
+                  -days 3650 \
+                  -keyout /etc/ssl/private/ctfd.key \
+                  -out /etc/ssl/certs/ctfd.crt \
+                  -subj "/CN=$vNombreDNS" \
+                  -addext "subjectAltName=$vSAN"
+
+                sudo chmod 600 /etc/ssl/private/ctfd.key
+                sudo chmod 644 /etc/ssl/certs/ctfd.crt
+
+              fi
+
               # Deshabilitar el sitio por defecto
-                rm /etc/nginx/sites-enabled/default
-              # Crear el archivo del sistio
-                echo "server {"                                     | sudo tee    /etc/nginx/sites-available/ctfd
-                echo "    listen 80;"                               | sudo tee -a /etc/nginx/sites-available/ctfd
-                echo "server_name cftd.dominio.com;"                | sudo tee -a /etc/nginx/sites-available/ctfd
-                echo ""                                             | sudo tee -a /etc/nginx/sites-available/ctfd
-                echo "  location / {"                               | sudo tee -a /etc/nginx/sites-available/ctfd
-                echo "    proxy_pass http://127.0.0.1:4000;"        | sudo tee -a /etc/nginx/sites-available/ctfd
-                echo '    proxy_set_header Host $host;'             | sudo tee -a /etc/nginx/sites-available/ctfd
-                echo '    proxy_set_header X-Real-IP $remote_addr;' | sudo tee -a /etc/nginx/sites-available/ctfd
-                echo "  }"                                          | sudo tee -a /etc/nginx/sites-available/ctfd
-                echo "}"                                            | sudo tee -a /etc/nginx/sites-available/ctfd
+              sudo rm -f /etc/nginx/sites-enabled/default
+
+              # Crear la configuración de Nginx
+              echo "server {"                                              | sudo tee    /etc/nginx/sites-available/ctfd
+              echo "  listen 80 default_server;"                           | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo "  listen [::]:80 default_server;"                      | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo "  listen 443 ssl default_server;"                      | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo "  listen [::]:443 ssl default_server;"                 | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo ""                                                      | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo "  server_name _;"                                      | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo ""                                                      | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo "  ssl_certificate /etc/ssl/certs/ctfd.crt;"            | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo "  ssl_certificate_key /etc/ssl/private/ctfd.key;"      | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo "  ssl_protocols TLSv1.2 TLSv1.3;"                      | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo ""                                                      | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo "  location / {"                                        | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo "    proxy_pass http://127.0.0.1:4000;"                 | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo '    proxy_set_header Host $host;'                      | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo '    proxy_set_header X-Real-IP $remote_addr;'          | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo '    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;' | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo '    proxy_set_header X-Forwarded-Host $host;'          | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo '    proxy_set_header X-Forwarded-Proto $scheme;'       | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo '    proxy_set_header X-Forwarded-Port $server_port;'   | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo "  }"                                                   | sudo tee -a /etc/nginx/sites-available/ctfd
+              echo "}"                                                     | sudo tee -a /etc/nginx/sites-available/ctfd
+
               # Habilitar la configuración
-                ln -s /etc/nginx/sites-available/ctfd /etc/nginx/sites-enabled/
-                systemctl restart nginx
+              sudo ln -sfn /etc/nginx/sites-available/ctfd /etc/nginx/sites-enabled/ctfd
+
+              # Comprobar la configuración
+              sudo nginx -t
+
+              # Reiniciar Nginx
+              sudo systemctl restart nginx
+
+              echo ""
+              echo "  CTFd disponible mediante:"
+              echo ""
+              echo "    http://$vIPServidor/"
+              echo "    https://$vIPServidor/"
+              echo ""
 
             ;;
 
             8)
-
-              echo ""
-              echo "  Agregando certificado auto-firmado..."
-              echo ""
-
-            ;;
-
-            9)
 
               echo ""
               echo "  Instalación finalizada"
