@@ -72,8 +72,9 @@
           4 "Crear el servicio en systemd"                                 on
           5 "Crear la base de datos"                                       on
           6 "Crear el entorno virtual de python e instalar requerimientos" on
-          7 "Instalar el proxy inverso"                                    on
-          8 "Mostrar mensaje de fin de instalación"                        on
+          7 "Instalar el proxy inverso con nginx"                          off
+          8 "Instalar el proxy inverso con haproxy"                        off
+          9 "Mostrar mensaje de fin de instalación"                        on
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -218,7 +219,7 @@
             7)
 
               echo ""
-              echo "  Instalando el proxy inverso HTTP/HTTPS..."
+              echo "  Instalando el proxy inverso con nginx..."
               echo ""
 
               sudo apt-get -y update
@@ -318,11 +319,20 @@
             8)
 
               echo ""
+              echo "  Instalando el proxy inverso con haproxy..."
+              echo ""
+
+            ;;
+
+            9)
+
+              echo ""
               echo "  Instalación finalizada. Para activar el servicio y lanzar la app, ejecuta:"
               echo ""
               echo "    sudo systemctl enable ctfd --now && systemctl status ctfd --no-pager"
               echo ""
               sudo chown -R ctfd:ctfd /opt/CTFd/ -R
+
             ;;
 
         esac
