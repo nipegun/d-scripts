@@ -9,10 +9,10 @@
 # Script de NiPeGun para instalar CTFd en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/CTFd-InstalarYConfigurar.sh | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/CTFd-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root (para permisos sin sudo):
-#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/SoftInst/ServWeb/CTFd-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ServWeb/CTFd-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Enlace: https://github.com/CTFd/CTFd
 # ----------
