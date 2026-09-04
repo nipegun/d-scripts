@@ -66,14 +66,15 @@
         fi
       menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
         opciones=(
-          1 "Instalar requerimientos de sistema"                               on
-          2 "  Clonar el repo de Github"                                       on
-          3 "Crear el usuario para correrá la app"                             on
-          4 "  Crear el servicio en systemd"                                   on
-          5 "Crear la base de datos"                                           on
-          6 "    Crear el entorno virtual de python e instalar requerimientos" on
-          7 "Instalar el proxy inverso"                                        on
-          8 "Mostrar mensaje de fin de instalación"                            on
+          1 "Instalar requerimientos de sistema"                           on
+          2 "Clonar el repo de Github"                                     on
+          3 "Crear el usuario para correrá la app"                         on
+          4 "Crear el servicio en systemd"                                 on
+          5 "Crear la base de datos"                                       on
+          6 "Crear el entorno virtual de python e instalar requerimientos" on
+          7 "Instalar el proxy inverso"                                    on
+          8 "Agregar certificado auto-firmado"                             on
+          9 "Mostrar mensaje de fin de instalación"                        on
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -257,9 +258,17 @@
             8)
 
               echo ""
-              echo "  Instalación finalizada"
-              sudo chown -R ctfd:ctfd /opt/CTFd/ -R
+              echo "  Agregando certificado auto-firmado..."
               echo ""
+
+            ;;
+
+            9)
+
+              echo ""
+              echo "  Instalación finalizada"
+              echo ""
+              sudo chown -R ctfd:ctfd /opt/CTFd/ -R
               echo "    Para activar el servicio y lanzar la app, ejecuta:"
               echo ""
               echo "      sudo systemctl enable ctfd --now"
