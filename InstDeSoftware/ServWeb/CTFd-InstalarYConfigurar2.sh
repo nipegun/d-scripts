@@ -318,9 +318,100 @@
 
             8)
 
-              echo ""
-              echo "  Instalando el proxy inverso con haproxy..."
-              echo ""
+            echo ""
+            echo " Instalando el proxy inverso con haproxy..."
+            echo ""
+            sudo apt-get -y update
+            sudo apt-get -y install haproxy openssl
+            # Obtener nombre DNS e IP del servidor
+              vNombreDNS=$(hostname -f 2>/dev/null)
+              if [ -z "$vNombreDNS" ]; then
+                vNombreDNS=$(hostname)
+              fi
+              vIPServidor=$(hostname -I 2>/dev/null | sed 's/ .*//')
+            # Crear SAN para el certificado
+              if [ -n "$vIPServidor" ]; then
+                vSAN="DNS:$vNombreDNS,IP:$vIPServidor"
+              else
+                vSAN="DNS:$vNombreDNS"
+              fi
+
+            # Crear certificado autofirmado
+              if [ ! -f /etc/ssl/certs/ctfd.crt ] || [ ! -f /etc/ssl/private/ctfd.key ]; then
+                echo ""
+                echo " Generando certificado HTTPS autofirmado..."
+                echo ""
+                sudo openssl req \
+                  -x509 \
+                  -nodes \
+                  -newkey rsa:4096 \
+                  -sha256 \
+                  -days 3650 \
+                  -keyout /etc/ssl/private/ctfd.key \
+                  -out /etc/ssl/certs/ctfd.crt \
+                  -subj "/CN=$vNombreDNS" \
+                  -addext "subjectAltName=$vSAN"
+                sudo chmod 600 /etc/ssl/private/ctfd.key
+                sudo chmod 644 /etc/ssl/certs/ctfd.crt
+              fi
+
+            # Crear el PEM que necesita HAProxy
+              sudo mkdir -p /etc/haproxy/certs/
+              sudo cat /etc/ssl/certs/ctfd.crt /etc/ssl/private/ctfd.key | sudo tee /etc/haproxy/certs/ctfd.pem > /dev/null
+              sudo chmod 600 /etc/haproxy/certs/ctfd.pem
+
+            # Crear la configuración de HAProxy
+              echo "global"          | sudo tee    /etc/haproxy/haproxy.cfg
+              echo "  user haproxy"  | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "  group haproxy" | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "" | sudo tee -a                /etc/haproxy/haproxy.cfg
+
+              echo "defaults"              | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "  mode http"           | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "  timeout connect 60s" | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "  timeout client 60s"  | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "  timeout server 60s"  | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "" | sudo tee -a                      /etc/haproxy/haproxy.cfg
+
+            # HTTP y HTTPS
+              echo "frontend ctfd"                                                                                      | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "  bind 0.0.0.0:80"                                                                                  | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "  bind [::]:80 v6only"                                                                              | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "  bind 0.0.0.0:443 ssl crt /etc/haproxy/certs/ctfd.pem ssl-min-ver TLSv1.2 ssl-max-ver TLSv1.3"     | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "  bind [::]:443 v6only ssl crt /etc/haproxy/certs/ctfd.pem ssl-min-ver TLSv1.2 ssl-max-ver TLSv1.3" | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "" | sudo tee -a                                                                                                   /etc/haproxy/haproxy.cfg
+
+            # HTTP -> HTTPS
+              echo "  http-request redirect scheme https code 301 unless { ssl_fc }" | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo ""                                                                | sudo tee -a /etc/haproxy/haproxy.cfg
+
+            # Cabeceras del proxy inverso
+              echo "  option forwardfor"                                         | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo '  http-request set-header Host %[req.hdr(host)]'             | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo '  http-request set-header X-Real-IP %[src]'                  | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo '  http-request set-header X-Forwarded-Host %[req.hdr(host)]' | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "  http-request set-header X-Forwarded-Proto https"           | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "  http-request set-header X-Forwarded-Port 443"              | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo ""                                                            | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "  default_backend ctfd_backend"                              | sudo tee -a /etc/haproxy/haproxy.cfg
+              echo ""                                                            | sudo tee -a /etc/haproxy/haproxy.cfg
+
+            # Backend CTFd
+              echo "backend ctfd_backend" |         sudo tee -a /etc/haproxy/haproxy.cfg
+              echo "  server ctfd 127.0.0.1:4000" | sudo tee -a /etc/haproxy/haproxy.cfg
+
+            # Comprobar la configuración
+              sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+
+            # Reiniciar HAProxy
+              sudo systemctl restart haproxy
+
+            echo ""
+            echo " CTFd disponible mediante:"
+            echo ""
+            echo " http://$vIPServidor/"
+            echo " https://$vIPServidor/"
+            echo ""
 
             ;;
 
