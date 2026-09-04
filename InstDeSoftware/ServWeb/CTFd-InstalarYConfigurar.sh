@@ -58,7 +58,7 @@
       # Comprobar si el paquete dialog está instalado. Si no lo está, instalarlo.
         if [[ $(dpkg-query -s dialog 2>/dev/null | grep installed) == "" ]]; then
           echo ""
-          echo -e "${cColorRojo}  El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
+          echo -e "${cColorRojo}    El paquete dialog no está instalado. Iniciando su instalación...${cFinColor}"
           echo ""
           sudo apt-get -y update
           sudo apt-get -y install dialog
@@ -159,6 +159,8 @@
 
               echo ""
               echo "  Creando la base de datos..."
+              echo ""
+              echo "    Cuando te pida password, simplemente presiona Enter."
               echo ""
               echo -e "" | sudo mysql -uroot -p -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'P@ssw0rd'; FLUSH PRIVILEGES;"
               sudo mysql -uroot -pP@ssw0rd -e "CREATE DATABASE ctfd; CREATE USER 'ctfd'@'localhost' IDENTIFIED BY 'P@ssw0rd'; GRANT ALL PRIVILEGES ON ctfd.* TO 'ctfd'@'localhost'; FLUSH PRIVILEGES;"
@@ -316,14 +318,11 @@
             8)
 
               echo ""
-              echo "  Instalación finalizada"
+              echo "  Instalación finalizada. Para activar el servicio y lanzar la app, ejecuta:"
+              echo ""
+              echo "    sudo systemctl enable ctfd --now && systemctl status ctfd --no-pager"
               echo ""
               sudo chown -R ctfd:ctfd /opt/CTFd/ -R
-              echo "    Para activar el servicio y lanzar la app, ejecuta:"
-              echo ""
-              echo "      sudo systemctl enable ctfd --now"
-              echo ""
-
             ;;
 
         esac
