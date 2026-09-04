@@ -67,12 +67,13 @@
       menu=(dialog --checklist "Marca las opciones que quieras instalar:" 22 96 16)
         opciones=(
           1 "Instalar requerimientos de sistema"                               on
-          2 "  Crear la base de datos"                                         on
-          3 "  Clonar el repo de Github"                                       on
-          4 "    Crear el entorno virtual de python e instalar requerimientos" on
-          5 "      Crear el usuario para ejecutar el servicio en systemd"      on
-          6 "        Crear el servicio en systemd"                             on
+          2 "  Clonar el repo de Github"                                       on
+          3 "Crear el usuario para correrá la app"                             on
+          4 "  Crear el servicio en systemd"                                   on
+          5 "Crear la base de datos"                                           on
+          6 "    Crear el entorno virtual de python e instalar requerimientos" on
           7 "Instalar el proxy inverso"                                        on
+          8 "Mostrar mensaje de fin de instalación"                            on
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
 
@@ -100,6 +101,62 @@
             2)
 
               echo ""
+              echo "  Clonando el repo de Github..."
+              echo ""
+
+              cd /opt/
+              sudo rm -rf /opt/CTFd/
+              sudo git clone https://github.com/CTFd/CTFd.git
+              sudo chown -R ctfd:ctfd /opt/CTFd/ -R
+
+            ;;
+
+            3)
+
+              echo ""
+              echo "  Creando el usuario para ejecutar la app..."
+              echo ""
+
+              # Crear el usuario
+                #useradd --system --no-create-home --shell /bin/false ctfd
+                sudo useradd --system --no-create-home ctfd
+                sudo chown -R ctfd:ctfd /opt/CTFd/ -R
+
+            ;;
+
+            4)
+
+              echo ""
+              echo "  Creando el servicio de systemd..."
+              echo ""
+              # Crear primero el script
+                echo '!/bin/bash'                                          | sudo tee    /opt/CTFd/Lanzar.sh
+                echo ""                                                    | sudo tee -a /opt/CTFd/Lanzar.sh
+                echo "source /opt/CTFd/venv/bin/activate"                  | sudo tee -a /opt/CTFd/Lanzar.sh
+                echo "  cd /opt/CTFd/"                                     | sudo tee -a /opt/CTFd/Lanzar.sh
+                echo "  gunicorn -w 4 -b 0.0.0.0:4000 'CTFd:create_app()'" | sudo tee -a /opt/CTFd/Lanzar.sh
+                echo "deactivate"                                          | sudo tee -a /opt/CTFd/Lanzar.sh
+                sudo chmod +x /opt/CTFd/Lanzar.sh
+                sudo chown -R ctfd:ctfd /opt/CTFd/ -R
+              # Crear el servicio
+                echo "[Unit]"                             | sudo tee    /etc/systemd/system/ctfd.service
+                echo "Description=CTFd Service"           | sudo tee -a /etc/systemd/system/ctfd.service
+                echo "After=network.target"               | sudo tee -a /etc/systemd/system/ctfd.service
+                echo ""                                   | sudo tee -a /etc/systemd/system/ctfd.service
+                echo "[Service]"                          | sudo tee -a /etc/systemd/system/ctfd.service
+                echo "User=ctfd"                          | sudo tee -a /etc/systemd/system/ctfd.service
+                echo "Group=ctfs"                         | sudo tee -a /etc/systemd/system/ctfd.service
+                echo "WorkingDirectory=/opt/CTFd/"        | sudo tee -a /etc/systemd/system/ctfd.service
+                echo 'Environment="FLASK_ENV=production"' | sudo tee -a /etc/systemd/system/ctfd.service
+                echo 'ExecStart=/opt/CTFd/Lanzar.sh'      | sudo tee -a /etc/systemd/system/ctfd.service
+                echo "Restart=always"                     | sudo tee -a /etc/systemd/system/ctfd.service
+                echo ""                                   | sudo tee -a /etc/systemd/system/ctfd.service
+                echo "[Install]"                          | sudo tee -a /etc/systemd/system/ctfd.service
+                echo "WantedBy=multi-user.target"         | sudo tee -a /etc/systemd/system/ctfd.service
+
+            5)
+
+              echo ""
               echo "  Creando la base de datos..."
               echo ""
               echo -e "" | sudo mysql -uroot -p -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'P@ssw0rd'; FLUSH PRIVILEGES;"
@@ -107,19 +164,7 @@
 
             ;;
 
-            3)
-
-              echo ""
-              echo "  Clonando el repo de Github..."
-              echo ""
-
-              cd /opt/
-              sudo rm -rf /opt/CTFd/
-              sudo git clone https://github.com/CTFd/CTFd.git
-
-            ;;
-
-            4)
+            6)
 
               echo ""
               echo "  Creando el entorno virtual de python e instalando requerimientos..."
@@ -183,44 +228,6 @@
 
             ;;
 
-            5)
-
-              echo ""
-              echo "  Creando el usuario para ejecutar el servicio en systemd..."
-              echo ""
-
-              # Crear el usuario
-                #useradd --system --no-create-home --shell /bin/false ctfd
-                sudo useradd --system --no-create-home ctfd
-                sudo mkdir -p /opt/CTFd 2> /dev/null
-                sudo chown -R ctfd:ctfd /opt/CTFd -R
-
-            ;;
-
-
-            6)
-
-              echo ""
-              echo "  Creando y activando el servicio de systemd..."
-              echo ""
-              echo "[Unit]"                                                                         | sudo tee    /etc/systemd/system/ctfd.service
-              echo "Description=CTFd Service"                                                       | sudo tee -a /etc/systemd/system/ctfd.service
-              echo "After=network.target"                                                           | sudo tee -a /etc/systemd/system/ctfd.service
-              echo ""                                                                               | sudo tee -a /etc/systemd/system/ctfd.service
-              echo "[Service]"                                                                      | sudo tee -a /etc/systemd/system/ctfd.service
-              echo "User=ctfd"                                                                      | sudo tee -a /etc/systemd/system/ctfd.service
-              echo "Group=ctfs"                                                                     | sudo tee -a /etc/systemd/system/ctfd.service
-              echo "WorkingDirectory=/opt/CTFd/"                                                    | sudo tee -a /etc/systemd/system/ctfd.service
-              echo 'Environment="FLASK_ENV=production"'                                             | sudo tee -a /etc/systemd/system/ctfd.service
-              echo 'ExecStart=/opt/CTFd/venv/bin/gunicorn -w 4 -b 0.0.0.0:8000 "CTFd:create_app()"' | sudo tee -a /etc/systemd/system/ctfd.service
-              echo "Restart=always"                                                                 | sudo tee -a /etc/systemd/system/ctfd.service
-              echo ""                                                                               | sudo tee -a /etc/systemd/system/ctfd.service
-              echo "[Install]"                                                                      | sudo tee -a /etc/systemd/system/ctfd.service
-              echo "WantedBy=multi-user.target"                                                     | sudo tee -a /etc/systemd/system/ctfd.service
-              sudo systemctl enable ctfd --now
-
-            ;;
-
             7)
 
               echo ""
@@ -244,6 +251,19 @@
               # Habilitar la configuración
                 ln -s /etc/nginx/sites-available/ctfd /etc/nginx/sites-enabled/
                 systemctl restart nginx
+
+            ;;
+
+            8)
+
+              echo ""
+              echo "  Instalación finalizada"
+              sudo chown -R ctfd:ctfd /opt/CTFd/ -R
+              echo ""
+              echo "    Para activar el servicio y lanzar la app, ejecuta:"
+              echo ""
+              echo "      sudo systemctl enable ctfd --now"
+              echo ""
 
             ;;
 
