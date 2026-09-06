@@ -9,19 +9,13 @@
 # Script de NiPeGun para instalar el servidor gaming de MinecraftJE (mcserver) en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Gaming-MinecraftJE-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Gaming-MinecraftJE-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Gaming-MinecraftJE-InstalarYConfigurar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -64,51 +58,73 @@
     echo ""
     echo "  Instalando dependencias..." 
     echo ""
-    dpkg --add-architecture i386
-    apt-get -y update
-    apt-get -y install mailutils
-    apt-get -y install postfix
-    apt-get -y install curl
-    apt-get -y install wget
-    apt-get -y install file
-    apt-get -y install tar
-    apt-get -y install bzip2
-    apt-get -y install gzip
-    apt-get -y install unzip
-    apt-get -y install bsdmainutils
-    apt-get -y install python
-    apt-get -y install util-linux
-    apt-get -y install ca-certificates
-    apt-get -y install binutils
-    apt-get -y install bc
-    apt-get -y install jq
-    apt-get -y install tmux
-    apt-get -y install netcat
-    apt-get -y install distro-info
+    sudo dpkg --add-architecture i386
+    sudo apt-get -y update
+    sudo apt-get -y install mailutils
+    sudo apt-get -y install postfix
+    sudo apt-get -y install curl
+    sudo apt-get -y install wget
+    sudo apt-get -y install file
+    sudo apt-get -y install tar
+    sudo apt-get -y install bzip2
+    sudo apt-get -y install gzip
+    sudo apt-get -y install unzip
+    sudo apt-get -y install bsdmainutils
+    sudo apt-get -y install python3
+    sudo apt-get -y install util-linux
+    sudo apt-get -y install ca-certificates
+    sudo apt-get -y install binutils
+    sudo apt-get -y install bc
+    sudo apt-get -y install jq
+    sudo apt-get -y install tmux
+    sudo apt-get -y install netcat-openbsd
+    sudo apt-get -y install distro-info
+    sudo apt-get -y install lib32gcc-s1
+    sudo apt-get -y install pigz
+    sudo apt-get -y install uuid-runtime
+    sudo apt-get -y install 'lib32stdc++6'
+
     # Instalar la última versión de java
-      # apt-get -y install default-jre # No es suficiente porque instala java 11 en Bullseye
       # Determinar la última versión
         vUltVersJava=$(apt-cache search openjdk | grep jre | grep runtime | grep -v nvidia | grep -v headless | tail -n1 | cut -d' ' -f1)
-        apt-get -y install $vUltVersJava
+      sudo apt-get -y install $vUltVersJava
 
     echo ""
     echo "  Dependencias instaladas."
-    echo "  Revisa el script porque hay comandos que tendrás que ejecutar manualmente"
-    echo "  para terminar de instalar el servidor de MinecraftJE."
+    echo "  Revisa el script porque hay comandos que tendrás que ejecutar manualmente para terminar de instalar el servidor de MinecraftJE."
     echo ""
 
    # Crear usuario mcserver
-      adduser mcserver
+      sudo useradd -m -d /opt/mcserver mcserver
+
+    # Crear la carpeta
+      sudo mkdir /opt/mcserver/
+      sudo chown mcserver:mcserver /opt/mcserver/
 
     # Bajar script de instalación
-      su - mcserver -c "wget -O  /home/mcserver/linuxgsm.sh https://linuxgsm.sh"
-      su - mcserver -c "chmod +x /home/mcserver/linuxgsm.sh"
+      su - mcserver -c "wget -O  /opt/mcserver/linuxgsm.sh https://linuxgsm.sh"
+
 
     # Ejecutar selector de script
-      su - mcserver -c "bash     /home/mcserver/linuxgsm.sh mcserver"
+      su - mcserver -c "chmod +x /opt/mcserver/linuxgsm.sh"
+      su - mcserver -c "bash     /opt/mcserver/linuxgsm.sh mcserver"
 
     # Instalar servidor
-      su - mcserver -c "bash     /home/mcserver/mcserver install"
+      su - mcserver -c "bash     /opt/mcserver/mcserver install"
+
+    # Creando el script para lanzar
+      echo '#!/bash'                       | sudo tee    /home/mcserver/LanzarServidor.sh
+      echo ""                              | sudo tee -a /home/mcserver/LanzarServidor.sh
+      echo "/home/mcserver/mcserver start" | sudo tee -a /home/mcserver/LanzarServidor.sh
+      sudo chmod +x /home/mcserver/LanzarServidor.sh
+
+    # Reparar permisos
+      chown mcserver:mcserver /opt/mcserver/ -Rv
+
+    # Notificar fin del script
+     echo ""
+     echo "  Ejecución del script, finalizada."
+     echo ""
 
   elif [ $cVerSO == "12" ]; then
 
