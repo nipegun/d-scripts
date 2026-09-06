@@ -5,16 +5,33 @@
 # Si se te llena la boca hablando de libertad entonces hazlo realmente libre.
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
---------------
-# Script de NiPeGun para instalar el servidor gaming de MinecraftJE (mcserver)
+# ----------
+# Script de NiPeGun para instalar el servidor gaming de MinecraftJE (mcserver) en Debian
 #
-# Ejecución remota:
-#  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/SoftInst/ParaCLI/Servidor-Gaming-MinecraftJE-InstalarYConfigurar.sh | bash
---------------
+# Ejecución remota (puede requerir permisos sudo):
+#   curl -sL x | bash
+#
+# Ejecución remota como root (para sistemas sin sudo):
+#   curl -sL x | sed 's-sudo--g' | bash
+#
+# Ejecución remota sin caché:
+#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#
+# Ejecución remota con parámetros:
+#   curl -sL x | bash -s Parámetro1 Parámetro2
+#
+# Bajar y editar directamente el archivo en nano
+#   curl -sL x | nano -
+# ----------
 
-cColorRojo='\033[1;31m'
-cColorVerde='\033[1;32m'
-cFinColor='\033[0m'
+# Definir constantes de color
+  cColorAzul='\033[0;34m'
+  cColorAzulClaro='\033[1;34m'
+  cColorVerde='\033[1;32m'
+  cColorRojo='\033[1;31m'
+  # Para el color rojo también:
+    #echo "$(tput setaf 1)Mensaje en color rojo. $(tput sgr 0)"
+  cFinColor='\033[0m'
 
 # Determinar la versión de Debian
   if [ -f /etc/os-release ]; then             # Para systemd y freedesktop.org.
@@ -36,166 +53,122 @@ cFinColor='\033[0m'
     cVerSO=$(uname -r)
   fi
 
-if [ $cVerSO == "7" ]; then
+# Ejecutar comandos dependiendo de la versión de Debian detectada
 
-  echo ""
-  
-  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 7 (Wheezy)..."  
-  echo ""
+  if [ $cVerSO == "13" ]; then
 
-  echo ""
-  echo "  Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 13 (x)...${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "8" ]; then
+    echo ""
+    echo "  Instalando dependencias..." 
+    echo ""
+    dpkg --add-architecture i386
+    apt-get -y update
+    apt-get -y install mailutils
+    apt-get -y install postfix
+    apt-get -y install curl
+    apt-get -y install wget
+    apt-get -y install file
+    apt-get -y install tar
+    apt-get -y install bzip2
+    apt-get -y install gzip
+    apt-get -y install unzip
+    apt-get -y install bsdmainutils
+    apt-get -y install python
+    apt-get -y install util-linux
+    apt-get -y install ca-certificates
+    apt-get -y install binutils
+    apt-get -y install bc
+    apt-get -y install jq
+    apt-get -y install tmux
+    apt-get -y install netcat
+    apt-get -y install distro-info
+    # Instalar la última versión de java
+      # apt-get -y install default-jre # No es suficiente porque instala java 11 en Bullseye
+      # Determinar la última versión
+        vUltVersJava=$(apt-cache search openjdk | grep jre | grep runtime | grep -v nvidia | grep -v headless | tail -n1 | cut -d' ' -f1)
+        apt-get -y install $vUltVersJava
 
-  echo ""
-  
-  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 8 (Jessie)..."  
-  echo ""
+    echo ""
+    echo "  Dependencias instaladas."
+    echo "  Revisa el script porque hay comandos que tendrás que ejecutar manualmente"
+    echo "  para terminar de instalar el servidor de MinecraftJE."
+    echo ""
 
-  echo ""
-  echo "  Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+   # Crear usuario mcserver
+      adduser mcserver
 
-elif [ $cVerSO == "9" ]; then
+    # Bajar script de instalación
+      su - mcserver -c "wget -O  /home/mcserver/linuxgsm.sh https://linuxgsm.sh"
+      su - mcserver -c "chmod +x /home/mcserver/linuxgsm.sh"
 
-  echo ""
-  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 9 (Stretch)..."
-  echo ""
+    # Ejecutar selector de script
+      su - mcserver -c "bash     /home/mcserver/linuxgsm.sh mcserver"
 
-  echo ""
-  echo "  Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    # Instalar servidor
+      su - mcserver -c "bash     /home/mcserver/mcserver install"
 
-elif [ $cVerSO == "10" ]; then
+  elif [ $cVerSO == "12" ]; then
 
-  echo ""
-  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 10 (Buster)..."
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 12 (Bookworm)...${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "  Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian."
-  echo ""
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 12 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "11" ]; then
+  elif [ $cVerSO == "11" ]; then
 
-  echo ""
-  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 11 (Bullseye)..."
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${cFinColor}"
+    echo ""
 
-  echo ""
-  echo -e "${cColorVerde}  Instalando el servidor mcserver...${cFinColor}"
-  echo ""
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 11 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "  Instalando dependencias..." 
-  echo ""
-  dpkg --add-architecture i386
-  apt-get -y update
-  apt-get -y install mailutils
-  apt-get -y install postfix
-  apt-get -y install curl
-  apt-get -y install wget
-  apt-get -y install file
-  apt-get -y install tar
-  apt-get -y install bzip2
-  apt-get -y install gzip
-  apt-get -y install unzip
-  apt-get -y install bsdmainutils
-  apt-get -y install python
-  apt-get -y install util-linux
-  apt-get -y install ca-certificates
-  apt-get -y install binutils
-  apt-get -y install bc
-  apt-get -y install jq
-  apt-get -y install tmux
-  apt-get -y install netcat
-  apt-get -y install distro-info
-  # Instalar la última versión de java
-    # apt-get -y install default-jre # No es suficiente porque instala java 11 en Bullseye
-    # Determinar la última versión
-      vUltVersJava=$(apt-cache search openjdk | grep jre | grep runtime | grep -v nvidia | grep -v headless | tail -n1 | cut -d' ' -f1)
-    apt-get -y install $vUltVersJava
+  elif [ $cVerSO == "10" ]; then
 
-  echo ""
-  echo "  Dependencias instaladas."
-  echo "  Revisa el script porque hay comandos que tendrás que ejecutar manualmente"
-  echo "  para terminar de instalar el servidor de MinecraftJE."
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${cFinColor}"
+    echo ""
 
- # Crear usuario mcserver
-    adduser mcserver
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 10 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-  # Bajar script de instalación
-    su - mcserver -c "wget -O  /home/mcserver/linuxgsm.sh https://linuxgsm.sh"
-    su - mcserver -c "chmod +x /home/mcserver/linuxgsm.sh"
+  elif [ $cVerSO == "9" ]; then
 
-  # Ejecutar selector de script
-    su - mcserver -c "bash     /home/mcserver/linuxgsm.sh mcserver"
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${cFinColor}"
+    echo ""
 
-  # Instalar servidor
-    su - mcserver -c "bash     /home/mcserver/mcserver install"
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 9 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-elif [ $cVerSO == "12" ]; then
+  elif [ $cVerSO == "8" ]; then
 
-  echo ""
-  echo "  Iniciando el script de instalación del servidor gaming de MinecraftJE para Debian 12 (Bookworm)..."
-  echo ""
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${cFinColor}"
+    echo ""
 
-  echo ""
-  echo -e "${cColorVerde}  Instalando el servidor mcserver...${cFinColor}"
-  echo ""
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 8 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-  echo ""
-  echo "  Instalando dependencias..." 
-  echo ""
-  dpkg --add-architecture i386
-  apt-get -y update
-  apt-get -y install bc
-  apt-get -y install binutils
-  apt-get -y install bsdmainutils
-  apt-get -y install bzip2
-  apt-get -y install ca-certificates
-  apt-get -y install cpio
-  apt-get -y install curl
-  apt-get -y install distro-info
-  apt-get -y install file
-  apt-get -y install gzip
-  apt-get -y install hostname
-  apt-get -y install jq
-  apt-get -y install lib32gcc-s1
-  apt-get -y install lib32stdc++6
-  apt-get -y install libsdl2-2.0-0:i386
-  apt-get -y install netcat-openbsd
-  apt-get -y install pigz
-  apt-get -y install python3
-  apt-get -y install tar
-  apt-get -y install tmux
-  apt-get -y install unzip
-  apt-get -y install util-linux
-  apt-get -y install uuid-runtime
-  apt-get -y install wget
-  apt-get -y install xz-utils
-  
-  # Instalar la última versión de java
-    # apt-get -y install default-jre # No es suficiente porque instala java 11 en Bullseye
-    # Determinar la última versión
-      vUltVersJava=$(apt-cache search openjdk | grep jre | grep runtime | grep -v nvidia | grep -v headless | tail -n1 | cut -d' ' -f1)
-    apt-get -y install $vUltVersJava
+  elif [ $cVerSO == "7" ]; then
 
-  # Crear usuario mcserver
-    adduser mcserver
+    echo ""
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${cFinColor}"
+    echo ""
 
-  # Bajar script de instalación
-    su - mcserver -c "wget -O  /home/mcserver/linuxgsm.sh https://linuxgsm.sh"
-    su - mcserver -c "chmod +x /home/mcserver/linuxgsm.sh"
+    echo ""
+    echo -e "${cColorRojo}    Comandos para Debian 7 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
+    echo ""
 
-  # Ejecutar selector de script
-    su - mcserver -c "bash     /home/mcserver/linuxgsm.sh mcserver"
-
-  # Instalar servidor
-    su - mcserver -c "bash     /home/mcserver/mcserver install"
-
-fi
+  fi
 
