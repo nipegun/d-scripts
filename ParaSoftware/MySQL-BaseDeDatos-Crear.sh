@@ -12,7 +12,7 @@
 #  curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/master/MySQL-BaseDeDatos-Crear.sh | bash -s NombreBD UsuarioBD PasswordBD
 # ----------
 
-cCantArgumEsperados=3
+cCantArgsEsperados=3
 
 
 cColorRojo='\033[1;31m'
