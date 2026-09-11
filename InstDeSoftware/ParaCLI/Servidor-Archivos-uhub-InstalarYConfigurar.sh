@@ -209,10 +209,10 @@
             sudo mkdir /etc/uhub/
             sudo openssl genrsa -out /etc/uhub/sslpriv.key 8192
             sudo openssl req -new -x509 -nodes -sha512 -days 365 -key /etc/uhub/sslpriv.key > /etc/uhub/sslown.crt
-            echo 'tls_private_key="/etc/uhub/sslpriv.key"' | sudo tee -a /usr/local/etc/uhub/uhub.conf
-            echo 'tls_certificate="/etc/uhub/sslown.crt"'  | sudo tee -a /usr/local/etc/uhub/uhub.conf
-            echo 'tls_enable=1'                            | sudo tee -a /usr/local/etc/uhub/uhub.conf
-            echo '#tls_require=0'                          | sudo tee -a /usr/local/etc/uhub/uhub.conf
+            sudo sed -i -e 's|# tls_enable=1|tls_enable=1|g'                                                    /usr/local/etc/uhub/uhub.conf
+            sudo sed -i -e 's|# tls_require=0|tls_require=0|g'                                                  /usr/local/etc/uhub/uhub.conf
+            sudo sed -i -e 's|# tls_certificate=/etc/uhub/server.crt|tls_certificate="/etc/uhub/sslown.crt"|g'  /usr/local/etc/uhub/uhub.conf
+            sudo sed -i -e 's|# tls_private_key=/etc/uhub/server.key|tls_private_key="/etc/uhub/sslpriv.key"|g' /usr/local/etc/uhub/uhub.conf
 
             echo ""
             echo "  Creando el servicio..."
