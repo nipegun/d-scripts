@@ -6,22 +6,16 @@
 # No tienes que aceptar ningún tipo de términos de uso o licencia para utilizarlo o modificarlo porque va sin CopyLeft.
 
 # ----------
-# Script de NiPeGun para instalar y configurar xxxxxxxxx en Debian
+# Script de NiPeGun para instalar y configurar uhub en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Archivos-uhub-InstalarYConfigurar.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
-#
-# Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
-#
-# Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Archivos-uhub-InstalarYConfigurar.sh | sed 's-sudo--g' | bash
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/InstDeSoftware/ParaCLI/Servidor-Archivos-uhub-InstalarYConfigurar.sh | nano -
 # ----------
 
 # Definir constantes de color
@@ -58,7 +52,7 @@
   if [ $cVerSO == "13" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 13 (x)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de uhub para Debian 13 (x)...${cFinColor}"
     echo ""
 
     # Crear el menú
@@ -163,41 +157,42 @@
             echo ""
             echo "  Instalando dependencias y paquetes necesarios..."
             echo ""
-            apt-get -y install cmake
-            apt-get -y install make
-            apt-get -y install gcc
-            apt-get -y install git
-            apt-get -y install libsqlite3-dev
-            apt-get -y install libssl-dev
+            sudo apt-get -y update
+            sudo apt-get -y install cmake
+            sudo apt-get -y install make
+            sudo apt-get -y install gcc
+            sudo apt-get -y install git
+            sudo apt-get -y install libsqlite3-dev
+            sudo apt-get -y install libssl-dev
 
             echo ""
             echo "  Bajando el código fuente..."
             echo ""
-            mkdir -p /root/SoftInst/ 2> /dev/null
-            cd /root/SoftInst/
-            rm /root/SoftInst/uhub/ -R 2> /dev/null
+            sudo mkdir -p /root/SoftInst/ 2> /dev/null
+            sudo cd /root/SoftInst/
+            sudo rm -rf /root/SoftInst/uhub/ -R 2> /dev/null
             # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
                if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
                  echo ""
                  echo "  El paquete git no está instalado. Iniciando su instalación..."
                  echo ""
-                 apt-get -y update > /dev/null
-                 apt-get -y install git
+                 sudo apt-get -y update > /dev/null
+                 sudo apt-get -y install git
                  echo ""
                fi
-            git clone https://github.com/janvidar/uhub.git
+            sudo git clone https://github.com/janvidar/uhub.git
 
             echo ""
             echo "  Compilando ..."
             echo ""
             cd /root/SoftInst/uhub/
-            cmake .
-            make
+            sudo cmake .
+            sudo make
 
             echo ""
             echo "  Instalando..."
             echo ""
-            make install
+            sudo make install
 
             echo ""
             echo "  Personalizando..."
@@ -222,17 +217,17 @@
             echo ""
             echo "  Creando el servicio..."
             echo ""
-            echo "[Unit]"                         > /etc/systemd/system/uHub.service
-            echo "Description=Servidor ADC uHub" >> /etc/systemd/system/uHub.service
-            echo "After=network.target"          >> /etc/systemd/system/uHub.service
-            echo ""                              >> /etc/systemd/system/uHub.service
-            echo "[Service]"                     >> /etc/systemd/system/uHub.service
-            echo "Type=simple"                   >> /etc/systemd/system/uHub.service
-            echo "Restart=always"                >> /etc/systemd/system/uHub.service
-            echo "ExecStart=/usr/local/bin/uhub" >> /etc/systemd/system/uHub.service
-            echo ""                              >> /etc/systemd/system/uHub.service
-            echo "[Install]"                     >> /etc/systemd/system/uHub.service
-            echo "WantedBy=multi-user.target"    >> /etc/systemd/system/uHub.service
+            echo "[Unit]"                        | sudo tee    /etc/systemd/system/uhub.service
+            echo "Description=Servidor ADC uhub" | sudo tee -a /etc/systemd/system/uhub.service
+            echo "After=network.target"          | sudo tee -a /etc/systemd/system/uhub.service
+            echo ""                              | sudo tee -a /etc/systemd/system/uhub.service
+            echo "[Service]"                     | sudo tee -a /etc/systemd/system/uhub.service
+            echo "Type=simple"                   | sudo tee -a /etc/systemd/system/uhub.service
+            echo "Restart=always"                | sudo tee -a /etc/systemd/system/uhub.service
+            echo "ExecStart=/usr/local/bin/uhub" | sudo tee -a /etc/systemd/system/uhub.service
+            echo ""                              | sudo tee -a /etc/systemd/system/uhub.service
+            echo "[Install]"                     | sudo tee -a /etc/systemd/system/uhub.service
+            echo "WantedBy=multi-user.target"    | sudo tee -a /etc/systemd/system/uhub.service
 
             echo ""
             echo "  Creando la base de datos de usuarios..."
@@ -245,7 +240,7 @@
             sudo systemctl enable uhub.service
             sudo systemctl start uhub.service
             sleep 5
-            sudo systemctl status uHub.service --no-pager
+            sudo systemctl status uhub.service --no-pager
 
           ;;
 
@@ -256,7 +251,7 @@
   elif [ $cVerSO == "12" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 12 (Bookworm)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de uhub para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
     echo ""
@@ -266,7 +261,7 @@
   elif [ $cVerSO == "11" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de uhub para Debian 11 (Bullseye)...${cFinColor}"
     echo ""
 
     echo ""
@@ -276,7 +271,7 @@
   elif [ $cVerSO == "10" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de uhub para Debian 10 (Buster)...${cFinColor}"
     echo ""
 
     echo ""
@@ -286,7 +281,7 @@
   elif [ $cVerSO == "9" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de uhub para Debian 9 (Stretch)...${cFinColor}"
     echo ""
 
     echo ""
@@ -296,7 +291,7 @@
   elif [ $cVerSO == "8" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de uhub para Debian 8 (Jessie)...${cFinColor}"
     echo ""
 
     echo ""
@@ -306,7 +301,7 @@
   elif [ $cVerSO == "7" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de uhub para Debian 7 (Wheezy)...${cFinColor}"
     echo ""
 
     echo ""
