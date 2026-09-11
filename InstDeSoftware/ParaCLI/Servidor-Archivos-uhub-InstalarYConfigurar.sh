@@ -65,10 +65,10 @@
           sudo apt-get -y install dialog
           echo ""
         fi
-      menu=(dialog --timeout 5 --checklist "Elige como instalar:" 22 76 16)
+      menu=(dialog --radiolist "Elige como instalar:" 22 76 16)
         opciones=(
-          1 "Instalar desde los repos de Debian -- normalmente la 0.4.1 --" off
-          2 "Bajar, compilar e instalar la última versión de GitHub"        on
+          1 "Instalar desde los repos de Debian (normalmente la 0.4.1)" off
+          2 "Bajar, compilar e instalar la última versión de GitHub"    on
         )
       choices=$("${menu[@]}" "${opciones[@]}" 2>&1 >/dev/tty)
       for choice in $choices
