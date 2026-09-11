@@ -52,7 +52,7 @@
   if [ $cVerSO == "13" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 13 (x)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de MinecraftJE para Debian 13 (x)...${cFinColor}"
     echo ""
 
     echo ""
@@ -104,7 +104,6 @@
     # Bajar script de instalación
       su - mcserver -c "wget -O  /opt/mcserver/linuxgsm.sh https://linuxgsm.sh"
 
-
     # Ejecutar selector de script
       su - mcserver -c "chmod +x /opt/mcserver/linuxgsm.sh"
       su - mcserver -c "bash     /opt/mcserver/linuxgsm.sh mcserver"
@@ -113,13 +112,16 @@
       su - mcserver -c "bash     /opt/mcserver/mcserver install"
 
     # Creando el script para lanzar
-      echo '#!/bash'                       | sudo tee    /home/mcserver/LanzarServidor.sh
-      echo ""                              | sudo tee -a /home/mcserver/LanzarServidor.sh
-      echo "/home/mcserver/mcserver start" | sudo tee -a /home/mcserver/LanzarServidor.sh
-      sudo chmod +x /home/mcserver/LanzarServidor.sh
+      echo '#!/bash'                      | sudo tee    /opt/mcserver/ServidorMC-Iniciar.sh
+      echo ""                             | sudo tee -a /opt/mcserver/ServidorMC-Iniciar.sh
+      echo "/opt/mcserver/mcserver start" | sudo tee -a /opt/mcserver/ServidorMC-Iniciar.sh
+      sudo chmod +x /opt/mcserver/ServidorMC-Iniciar.sh
 
     # Reparar permisos
       chown mcserver:mcserver /opt/mcserver/ -Rv
+
+    # Agregar el lanzador a los comandospost arranque
+      echo 'su - mcserver -c /opt/mcserver/ServidorMC-Iniciar.sh' | sudo tee -a /root/scripts/ParaEsteDebian/ComandosPostArranque.sh
 
     # Notificar fin del script
      echo ""
@@ -129,7 +131,7 @@
   elif [ $cVerSO == "12" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 12 (Bookworm)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de MinecraftJE para Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
     echo ""
@@ -139,7 +141,7 @@
   elif [ $cVerSO == "11" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 11 (Bullseye)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de MinecraftJE para Debian 11 (Bullseye)...${cFinColor}"
     echo ""
 
     echo ""
@@ -149,7 +151,7 @@
   elif [ $cVerSO == "10" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 10 (Buster)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de MinecraftJE para Debian 10 (Buster)...${cFinColor}"
     echo ""
 
     echo ""
@@ -159,7 +161,7 @@
   elif [ $cVerSO == "9" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 9 (Stretch)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de MinecraftJE para Debian 9 (Stretch)...${cFinColor}"
     echo ""
 
     echo ""
@@ -169,7 +171,7 @@
   elif [ $cVerSO == "8" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 8 (Jessie)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de MinecraftJE para Debian 8 (Jessie)...${cFinColor}"
     echo ""
 
     echo ""
@@ -179,7 +181,7 @@
   elif [ $cVerSO == "7" ]; then
 
     echo ""
-    echo -e "${cColorAzulClaro}  Iniciando el script de instalación de xxxxxxxxx para Debian 7 (Wheezy)...${cFinColor}"
+    echo -e "${cColorAzulClaro}  Iniciando el script de instalación del servidor de MinecraftJE para Debian 7 (Wheezy)...${cFinColor}"
     echo ""
 
     echo ""
