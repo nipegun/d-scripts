@@ -164,13 +164,15 @@
             sudo apt-get -y install git
             sudo apt-get -y install libsqlite3-dev
             sudo apt-get -y install libssl-dev
+            sudo apt-get -y install build-essential
+            sudo apt-get -y install perl 
 
             echo ""
             echo "  Bajando el código fuente..."
             echo ""
-            sudo mkdir -p /root/SoftInst/ 2> /dev/null
-            sudo cd /root/SoftInst/
-            sudo rm -rf /root/SoftInst/uhub/ -R 2> /dev/null
+            mkdir -p /tmp/git/ 2> /dev/null
+            cd /tmp/git/
+            sudo rm -rf /tmp/git/uhub/ -R 2> /dev/null
             # Comprobar si el paquete git está instalado. Si no lo está, instalarlo.
                if [[ $(dpkg-query -s git 2>/dev/null | grep installed) == "" ]]; then
                  echo ""
@@ -180,14 +182,15 @@
                  sudo apt-get -y install git
                  echo ""
                fi
-            sudo git clone https://github.com/janvidar/uhub.git
+            git clone --recursive https://github.com/janvidar/uhub.git
 
             echo ""
             echo "  Compilando ..."
             echo ""
-            cd /root/SoftInst/uhub/
-            sudo cmake .
-            sudo make
+            cd /tmp/git/uhub/
+            mkdir -p build && cd build
+            cmake ..
+            make -j
 
             echo ""
             echo "  Instalando..."
@@ -203,19 +206,19 @@
             sed -i -e 's|hub_name=my hub|hub_name=Servidor ADC de X|g'                               /usr/local/etc/uhub/uhub.conf
             sed -i -e 's|hub_description=Powered by uhub|hub_description=Para compartir archivos!|g' /usr/local/etc/uhub/uhub.conf
 
-            echo ''                                                                                                                                                  | sudo tee    /usr/local/etc/uhub/motd.txt
-            echo '--------------------------------------------'                                                                                                      | sudo tee -a /usr/local/etc/uhub/motd.txt
-            echo ' Bienvenido al servidor ADC de hacks4geeks'                                                                                                        | sudo tee -a /usr/local/etc/uhub/motd.txt
-            echo '--------------------------------------------'                                                                                                      | sudo tee -a /usr/local/etc/uhub/motd.txt
-            echo ''                                                                                                                                                  | sudo tee -a /usr/local/etc/uhub/motd.txt
-            echo 'Para configurar el programa sigue las siguientes instrucciones:'                                                                                   | sudo tee -a /usr/local/etc/uhub/motd.txt
-            echo ''                                                                                                                                                  | sudo tee -a /usr/local/etc/uhub/motd.txt
-            echo 'Ve a "Menú >> Preferencias >> Personales", agrega tu Nick y tu correo electrónico e indica que velocidad de subida tienes en el internet de casa.' | sudo tee -a /usr/local/etc/uhub/motd.txt
-            echo ''                                                                                                                                                  | sudo tee -a /usr/local/etc/uhub/motd.txt
-            echo 'Ve a "Menú >> Preferencias >> Conexión" y marca la casilla "Detectar la conexión automáticamente".'                                                | sudo tee -a /usr/local/etc/uhub/motd.txt
-            echo ''                                                                                                                                                  | sudo tee -a /usr/local/etc/uhub/motd.txt
-            echo 'Ve a "Menú >> Preferencias >> Descargas" y configura el directorio para descargas y el directorio para archivos incompletos.'                      | sudo tee -a /usr/local/etc/uhub/motd.txt
-            echo ''                                                                                                                                                  | sudo tee -a /usr/local/etc/uhub/motd.txt
+            echo ''                                                                                                                                                  | sudo tee    /etc/uhub/motd.txt
+            echo '--------------------------------------------'                                                                                                      | sudo tee -a /etc/uhub/motd.txt
+            echo ' Bienvenido al servidor ADC de hacks4geeks'                                                                                                        | sudo tee -a /etc/uhub/motd.txt
+            echo '--------------------------------------------'                                                                                                      | sudo tee -a /etc/uhub/motd.txt
+            echo ''                                                                                                                                                  | sudo tee -a /etc/uhub/motd.txt
+            echo 'Para configurar el programa sigue las siguientes instrucciones:'                                                                                   | sudo tee -a /etc/uhub/motd.txt
+            echo ''                                                                                                                                                  | sudo tee -a /etc/uhub/motd.txt
+            echo 'Ve a "Menú >> Preferencias >> Personales", agrega tu Nick y tu correo electrónico e indica que velocidad de subida tienes en el internet de casa.' | sudo tee -a /etc/uhub/motd.txt
+            echo ''                                                                                                                                                  | sudo tee -a /etc/uhub/motd.txt
+            echo 'Ve a "Menú >> Preferencias >> Conexión" y marca la casilla "Detectar la conexión automáticamente".'                                                | sudo tee -a /etc/uhub/motd.txt
+            echo ''                                                                                                                                                  | sudo tee -a /etc/uhub/motd.txt
+            echo 'Ve a "Menú >> Preferencias >> Descargas" y configura el directorio para descargas y el directorio para archivos incompletos.'                      | sudo tee -a /etc/uhub/motd.txt
+            echo ''                                                                                                                                                  | sudo tee -a /etc/uhub/motd.txt
 
             echo ""
             echo "  Creando el certificado SSL..."
