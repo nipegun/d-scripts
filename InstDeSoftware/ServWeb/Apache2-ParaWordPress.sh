@@ -123,11 +123,11 @@ if [ $cVerSO == "13" ]; then
               echo '  RewriteCond %{REQUEST_URI} !hotlink\.(log) [NC]' | sudo tee -a "$cCarpetaDeLogs"/.htaccess
               echo "  RewriteRule .*\.(log)$ http://google.com [NC]"   | sudo tee -a "$cCarpetaDeLogs"/.htaccess
             # Instalar paquetes de PHP
+              # Determinar la última versión de PHP
+                vUltVersPHP=$(apt-cache search php | grep etapackage | grep php | cut -d' ' -f1 | sed 's|[^0-9.]*||g')
               echo ""
               echo "      Instalando paquetes de PHP $vUltVersPHP..."
               echo ""
-              # Determinar la última versión de PHP
-                vUltVersPHP=$(apt-cache search php | grep etapackage | grep php | cut -d' ' -f1 | sed 's|[^0-9.]*||g')
               # Instalar paquetes
                 sudo apt-get -y install php"$vUltVersPHP"-common
                 sudo apt-get -y install php"$vUltVersPHP"-gd
