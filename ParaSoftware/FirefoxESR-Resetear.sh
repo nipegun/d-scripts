@@ -9,20 +9,22 @@
 # Script de NiPeGun para resetear Firefox ESR en Debian
 #
 # Ejecución remota (puede requerir permisos sudo):
-#   curl -sL x | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/FirefoxESR-Resetear.sh | bash
 #
 # Ejecución remota como root (para sistemas sin sudo):
-#   curl -sL x | sed 's-sudo--g' | bash
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/FirefoxESR-Resetear.sh | sed 's-sudo--g' | bash
 #
 # Ejecución remota sin caché:
-#   curl -sL -H 'Cache-Control: no-cache, no-store' x | bash
+#   curl -sL -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/FirefoxESR-Resetear.sh | bash
 #
 # Ejecución remota con parámetros:
-#   curl -sL x | bash -s Parámetro1 Parámetro2
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/FirefoxESR-Resetear.sh | bash -s Parámetro1 Parámetro2
 #
 # Bajar y editar directamente el archivo en nano
-#   curl -sL x | nano -
+#   curl -sL https://raw.githubusercontent.com/nipegun/d-scripts/refs/heads/master/ParaSoftware/FirefoxESR-Resetear.sh | nano -
 # ----------
+
+set -Eeuo pipefail
 
 # Definir constantes de color
   cColorAzul='\033[0;34m'
@@ -61,9 +63,211 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de reseteo de Firefox ESR en Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    cUid="$(id -u)"
+    cUsuario="$(id -un)"
+    cHome="$HOME"
+
+    vXdgCache="${XDG_CACHE_HOME:-$cHome/.cache}"
+    vXdgConfig="${XDG_CONFIG_HOME:-$cHome/.config}"
+    vXdgData="${XDG_DATA_HOME:-$cHome/.local/share}"
+    vXdgState="${XDG_STATE_HOME:-$cHome/.local/state}"
+    vXdgRuntime="${XDG_RUNTIME_DIR:-/run/user/$cUid}"
+
+    if [ "$cUid" -eq 0 ]; then
+      echo "ERROR: Ejecuta este script como el usuario normal, sin sudo."
+      exit 1
+    fi
+
+    fObtenerPidsFirefox() {
+      local vProc
+      local vPid
+      local vProcUid
+      local vExe
+      local vBase
+      local vComm
+      local vCmd
+
+      for vProc in /proc/[0-9]*; do
+        vPid="${vProc##*/}"
+
+        if [ "$vPid" -eq "$$" ]; then
+          continue
+        fi
+
+        vProcUid="$(stat -c '%u' "$vProc" 2>/dev/null)" || continue
+
+        if [ "$vProcUid" != "$cUid" ]; then
+          continue
+        fi
+
+        vExe="$(readlink -f "$vProc/exe" 2>/dev/null || true)"
+        vBase="${vExe##*/}"
+        vComm="$(cat "$vProc/comm" 2>/dev/null || true)"
+        vCmd="$(tr '\0' ' ' < "$vProc/cmdline" 2>/dev/null || true)"
+
+        case "$vExe" in
+          */firefox-esr/*|*/firefox/*|*/firefox-esr|*/firefox|*/firefox-bin)
+            echo "$vPid"
+            continue
+            ;;
+        esac
+
+        case "$vBase" in
+          firefox|firefox-esr|firefox-bin)
+            echo "$vPid"
+            continue
+            ;;
+        esac
+
+        case "$vComm" in
+          firefox|firefox-esr|firefox-bin)
+            echo "$vPid"
+            continue
+            ;;
+        esac
+
+        case "$vCmd" in
+          *org.mozilla.firefox*)
+            echo "$vPid"
+            ;;
+        esac
+      done
+    }
+
+    fTerminarFirefox() {
+      local vPids
+      local vIntento
+
+      vPids="$(fObtenerPidsFirefox | sort -nu)"
+
+      if [ -n "$vPids" ]; then
+        echo "Terminando procesos de Firefox con SIGTERM:"
+        echo "$vPids"
+        kill -TERM $vPids 2>/dev/null || true
+      fi
+
+      for ((vIntento = 0; vIntento < 30; vIntento++)); do
+        sleep 0.1
+
+        vPids="$(fObtenerPidsFirefox | sort -nu)"
+
+        if [ -z "$vPids" ]; then
+          break
+        fi
+      done
+
+      vPids="$(fObtenerPidsFirefox | sort -nu)"
+
+      if [ -n "$vPids" ]; then
+        echo "Firefox no terminó limpiamente. Forzando SIGKILL:"
+        echo "$vPids"
+        kill -KILL $vPids 2>/dev/null || true
+        sleep 0.5
+      fi
+
+      vPids="$(fObtenerPidsFirefox | sort -nu)"
+
+      if [ -n "$vPids" ]; then
+        echo "ERROR: Todavía quedan procesos relacionados con Firefox:"
+        echo "$vPids"
+        return 1
+      fi
+
+      echo "Comprobación correcta: no queda ningún proceso de Firefox del usuario $cUsuario."
+    }
+
+    fBorrarRuta() {
+      local pRuta="$1"
+
+      if [ -z "$pRuta" ] || [ "$pRuta" = "/" ]; then
+        echo "ERROR: Ruta de borrado no válida: '$pRuta'"
+        return 1
+      fi
+
+      if [ -e "$pRuta" ] || [ -L "$pRuta" ]; then
+        echo "Borrando: $pRuta"
+        rm -rf -- "$pRuta"
+      fi
+    }
+
+    fLimpiarTemporales() {
+      if [ -d /tmp ]; then
+        find /tmp -xdev -mindepth 1 -maxdepth 1 -uid "$cUid" \
+          \( -name "mozilla_${cUsuario}[0-9]*" \
+          -o -name 'mozilla-temp-*' \
+          -o -name '.org.mozilla.firefox.*' \
+          -o -name 'org.mozilla.firefox.*' \) \
+          -exec rm -rf -- {} + 2>/dev/null || true
+      fi
+
+      if [ -d "$vXdgRuntime" ]; then
+        find "$vXdgRuntime" -xdev -mindepth 1 -maxdepth 1 -uid "$cUid" \
+          \( -iname '*firefox*' -o -iname '*mozilla*' \) \
+          -exec rm -rf -- {} + 2>/dev/null || true
+      fi
+    }
+
+    fComprobarRutas() {
+      local pRuta
+      local vRestos=0
+
+      for pRuta in "$@"; do
+        if [ -e "$pRuta" ] || [ -L "$pRuta" ]; then
+          echo "ERROR: Sigue existiendo: $pRuta"
+          vRestos=1
+        fi
+      done
+
+      return "$vRestos"
+    }
+
+    aRutasFirefox=(
+      "$cHome/.mozilla/firefox"
+      "$cHome/.mozilla/extensions"
+
+      "$vXdgCache/mozilla/firefox"
+      "$vXdgConfig/mozilla/firefox"
+      "$vXdgData/mozilla/firefox"
+      "$vXdgState/mozilla/firefox"
+
+      "$vXdgCache/firefox"
+      "$vXdgConfig/firefox"
+      "$vXdgData/firefox"
+      "$vXdgState/firefox"
+
+      "$cHome/.var/app/org.mozilla.firefox"
+      "$cHome/snap/firefox"
+    )
+
+    echo "Usuario: $cUsuario"
+    echo "HOME: $cHome"
+    echo
+
+    fTerminarFirefox
+
+    echo
+
+    for vRuta in "${aRutasFirefox[@]}"; do
+      fBorrarRuta "$vRuta"
+    done
+
+    fLimpiarTemporales
+
+    rmdir -- "$cHome/.mozilla" 2>/dev/null || true
+    rmdir -- "$vXdgCache/mozilla" 2>/dev/null || true
+    rmdir -- "$vXdgConfig/mozilla" 2>/dev/null || true
+    rmdir -- "$vXdgData/mozilla" 2>/dev/null || true
+    rmdir -- "$vXdgState/mozilla" 2>/dev/null || true
+
+    echo
+
+    if ! fComprobarRutas "${aRutasFirefox[@]}"; then
+      echo "ERROR: La limpieza no ha sido completa."
+      exit 1
+    fi
+
+    echo "Limpieza terminada."
+    echo "Firefox ESR arrancará con un perfil nuevo en la próxima ejecución."
 
   elif [ $cVerSO == "12" ]; then
 
