@@ -61,9 +61,22 @@
     echo -e "${cColorAzulClaro}  Iniciando el script de instalación de Slack para Debian 13 (x)...${cFinColor}"
     echo ""
 
-    echo ""
-    echo -e "${cColorRojo}    Comandos para Debian 13 todavía no preparados. Prueba ejecutarlo en otra versión de Debian.${cFinColor}"
-    echo ""
+    # Determinar cual es la última versión
+      # Comprobar si el paquete curl está instalado. Si no lo está, instalarlo.
+        if [[ $(dpkg-query -s curl 2>/dev/null | grep installed) == "" ]]; then
+          echo ""
+          echo -e "${cColorRojo}  El paquete curl no está instalado. Iniciando su instalación...${cFinColor}"
+          echo ""
+          sudo apt-get -y update
+          sudo apt-get -y install curl
+          echo ""
+        fi
+      vUltVerSlack=$(curl -sL https://slack.com/intl/es-es/downloads/linux | sed 's->->\n-g' | grep 'Versión' | cut -d' ' -f2 | cut -d '<' -f1)
+      # echo $vUltVerSlack
+    # Descargar
+      curl -L https://downloads.slack-edge.com/desktop-releases/linux/x64/"$vUltVerSlack"/slack-desktop-"$vUltVerSlack"-amd64.deb -o /tmp/slack-"$vUltVerSlack".deb
+    # Instalar
+      sudo apt -y install /tmp/slack-"$vUltVerSlack".deb
 
   elif [ $cVerSO == "12" ]; then
 
