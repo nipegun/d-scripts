@@ -65,18 +65,25 @@
     echo -e "${cColorAzulClaro}  Iniciando el script para actualizar Debian 12 (Bookworm) a Debian 13 (Trixie)...${cFinColor}"
     echo ""
 
-    apt-get -y update
-    apt-get -y upgrade
-    apt-get -y dist-upgrade
-    dpkg -C
-    apt-mark showhold
-    cp /etc/apt/sources.list /etc/apt/sources.list.deb9
-    sed -i -e 's|bookworm|trixie|g' /etc/apt/sources.list
-    apt-get -y update
-    apt-get -y dist-upgrade
-    apt-get -y autoremove
-    apt-get -y autoclean
-    shutdown -r now
+    sudo apt-get -y update
+    sudo apt-get -y upgrade
+    sudo apt-get -y dist-upgrade
+    sudo dpkg -C
+    sudo apt-mark showhold
+    sudo cp /etc/apt/sources.list /etc/apt/sources.list.deb11
+    echo 'deb     http://deb.debian.org/debian trixie main contrib non-free non-free-firmware'                        | sudo tee    /etc/apt/sources.list
+    echo 'deb-src http://deb.debian.org/debian trixie main contrib non-free non-free-firmware'                        | sudo tee -a /etc/apt/sources.list
+    echo ''                                                                                                           | sudo tee -a /etc/apt/sources.list
+    echo 'deb     http://deb.debian.org/debian trixie-updates main contrib non-free non-free-firmware'                | sudo tee -a /etc/apt/sources.list
+    echo 'deb-src http://deb.debian.org/debian trixie-updates main contrib non-free non-free-firmware'                | sudo tee -a /etc/apt/sources.list
+    echo ''                                                                                                           | sudo tee -a /etc/apt/sources.list
+    echo 'deb     http://security.debian.org/debian-security trixie-security main contrib non-free non-free-firmware' | sudo tee -a /etc/apt/sources.list
+    echo 'deb-src http://security.debian.org/debian-security trixie-security main contrib non-free non-free-firmware' | sudo tee -a /etc/apt/sources.list
+    sudo apt-get -y update
+    sudo apt-get -y dist-upgrade
+    sudo apt-get -y autoremove
+    sudo apt-get -y autoclean
+    sudo shutdown -r now
 
   elif [ $cVerSO == "11" ]; then
 
@@ -84,18 +91,25 @@
     echo -e "${cColorAzulClaro}  Iniciando el script para actualizar Debian 11 (Bullseye) a Debian 12 (Bookworm)...${cFinColor}"
     echo ""
 
-    apt-get -y update
-    apt-get -y upgrade
-    apt-get -y dist-upgrade
-    dpkg -C
-    apt-mark showhold
-    cp /etc/apt/sources.list /etc/apt/sources.list.deb9
-    sed -i -e 's|bullseye|bookworm|g' /etc/apt/sources.list
-    apt-get -y update
-    apt-get -y dist-upgrade
-    apt-get -y autoremove
-    apt-get -y autoclean
-    shutdown -r now
+    sudo apt-get -y update
+    sudo apt-get -y upgrade
+    sudo apt-get -y dist-upgrade
+    sudo dpkg -C
+    sudo apt-mark showhold
+    sudo cp /etc/apt/sources.list /etc/apt/sources.list.deb11
+    echo 'deb     http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware'                        | sudo tee    /etc/apt/sources.list
+    echo 'deb-src http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware'                        | sudo tee -a /etc/apt/sources.list
+    echo ''                                                                                                             | sudo tee -a /etc/apt/sources.list
+    echo 'deb     http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware'                | sudo tee -a /etc/apt/sources.list
+    echo 'deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware'                | sudo tee -a /etc/apt/sources.list
+    echo ''                                                                                                             | sudo tee -a /etc/apt/sources.list
+    echo 'deb     http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware' | sudo tee -a /etc/apt/sources.list
+    echo 'deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware' | sudo tee -a /etc/apt/sources.list
+    sudo apt-get -y update
+    sudo apt-get -y dist-upgrade
+    sudo apt-get -y autoremove
+    sudo apt-get -y autoclean
+    sudo shutdown -r now
 
   elif [ $cVerSO == "10" ]; then
 
@@ -103,18 +117,25 @@
     echo -e "${cColorAzulClaro}  Iniciando el script para actualizar Debian 10 (Buster) a Debian 11 (Bullseye)...${cFinColor}"
     echo ""
 
-    apt-get -y update
-    apt-get -y upgrade
-    apt-get -y dist-upgrade
-    dpkg -C
-    apt-mark showhold
-    cp /etc/apt/sources.list /etc/apt/sources.list.deb9
-    sed -i -e 's|buster|bullseye|g' /etc/apt/sources.list
-    apt-get -y update
-    apt-get -y dist-upgrade
-    apt-get -y autoremove
-    apt-get -y autoclean
-    shutdown -r now
+    sudo apt-get -y update
+    sudo apt-get -y upgrade
+    sudo apt-get -y dist-upgrade
+    sudo dpkg -C
+    sudo apt-mark showhold
+    sudo cp /etc/apt/sources.list /etc/apt/sources.list.deb10
+    echo 'deb     http://archive.debian.org/debian bullseye main contrib non-free'                   | sudo tee    /etc/apt/sources.list
+    echo 'deb-src http://archive.debian.org/debian bullseye main contrib non-free'                   | sudo tee -a /etc/apt/sources.list
+    echo ''                                                                                          | sudo tee -a /etc/apt/sources.list
+    echo 'deb     http://archive.debian.org/debian bullseye-updates main contrib non-free'           | sudo tee -a /etc/apt/sources.list
+    echo 'deb-src http://archive.debian.org/debian bullseye-updates main contrib non-free'           | sudo tee -a /etc/apt/sources.list
+    echo ''                                                                                          | sudo tee -a /etc/apt/sources.list
+    echo 'deb     http://security.debian.org/debian-bullseye stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
+    echo 'deb-src http://security.debian.org/debian-bullseye stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
+    sudo apt-get -y update
+    sudo apt-get -y dist-upgrade
+    sudo apt-get -y autoremove
+    sudo apt-get -y autoclean
+    sudo shutdown -r now
 
   elif [ $cVerSO == "9" ]; then
 
@@ -122,18 +143,25 @@
     echo -e "${cColorAzulClaro}  Iniciando el script para actualizar Debian 9 (Stretch) a Debian 10 (Buster)...${cFinColor}"
     echo ""
 
-    apt-get -y update
-    apt-get -y upgrade
-    apt-get -y dist-upgrade
-    dpkg -C
-    apt-mark showhold
-    cp /etc/apt/sources.list /etc/apt/sources.list.deb9
-    sed -i -e 's|stretch|buster|g' /etc/apt/sources.list
-    apt-get -y update
-    apt-get -y dist-upgrade
-    apt-get -y autoremove
-    apt-get -y autoclean
-    shutdown -r now
+    sudo apt-get -y update
+    sudo apt-get -y upgrade
+    sudo apt-get -y dist-upgrade
+    sudo dpkg -C
+    sudo apt-mark showhold
+    sudo cp /etc/apt/sources.list /etc/apt/sources.list.deb9
+    echo 'deb     http://archive.debian.org/debian buster main contrib non-free'                   | sudo tee    /etc/apt/sources.list
+    echo 'deb-src http://archive.debian.org/debian buster main contrib non-free'                   | sudo tee -a /etc/apt/sources.list
+    echo ''                                                                                        | sudo tee -a /etc/apt/sources.list
+    echo 'deb     http://archive.debian.org/debian buster-updates main contrib non-free'           | sudo tee -a /etc/apt/sources.list
+    echo 'deb-src http://archive.debian.org/debian buster-updates main contrib non-free'           | sudo tee -a /etc/apt/sources.list
+    echo ''                                                                                        | sudo tee -a /etc/apt/sources.list
+    echo 'deb     http://security.debian.org/debian-buster stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
+    echo 'deb-src http://security.debian.org/debian-buster stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
+    sudo apt-get -y update
+    sudo apt-get -y dist-upgrade
+    sudo apt-get -y autoremove
+    sudo apt-get -y autoclean
+    sudo shutdown -r now
 
   elif [ $cVerSO == "8" ]; then
 
@@ -141,18 +169,25 @@
     echo -e "${cColorAzulClaro}  Iniciando el script para actualizar Debian 8 (Jessie) a Debian 9 (Stretch)..${cFinColor}"
     echo ""
 
-    apt-get -y update
-    apt-get -y upgrade
-    apt-get -y dist-upgrade
-    dpkg -C
-    apt-mark showhold
-    cp /etc/apt/sources.list /etc/apt/sources.list.deb8
-    sed -i -e 's|jessie|stretch|g' /etc/apt/sources.list
-    apt-get -y update
-    apt-get -y upgrade
-    apt-get -y dist-upgrade
-    apt-get autoremove
-    shutdown -r now
+    sudo apt-get -y update
+    sudo apt-get -y upgrade
+    sudo apt-get -y dist-upgrade
+    sudo dpkg -C
+    sudo apt-mark showhold
+    sudo cp /etc/apt/sources.list /etc/apt/sources.list.deb8
+    echo 'deb     http://archive.debian.org/debian stretch main contrib non-free'                    | sudo tee    /etc/apt/sources.list
+    echo 'deb-src http://archive.debian.org/debian stretch main contrib non-free'                    | sudo tee -a /etc/apt/sources.list
+    echo ''                                                                                          | sudo tee -a /etc/apt/sources.list
+    echo 'deb     http://archive.debian.org/debian stretch-updates main contrib non-free'            | sudo tee -a /etc/apt/sources.list
+    echo 'deb-src http://archive.debian.org/debian stretch-updates main contrib non-free'            | sudo tee -a /etc/apt/sources.list
+    echo ''                                                                                          | sudo tee -a /etc/apt/sources.list
+    echo 'deb     http://security.debian.org/debian-security stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
+    echo 'deb-src http://security.debian.org/debian-security stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
+    sudo apt-get -y update
+    sudo apt-get -y dist-upgrade
+    sudo apt-get -y autoremove
+    sudo apt-get -y autoclean
+    sudo shutdown -r now
 
   elif [ $cVerSO == "7" ]; then
 
@@ -160,18 +195,25 @@
     echo -e "${cColorAzulClaro}  Iniciando el script para actualizar Debian 7 (Wheezy) a Debian 8 (Jessie)...${cFinColor}"
     echo ""
 
-    apt-get -y update
-    apt-get -y upgrade
-    apt-get -y dist-upgrade
-    dpkg -C
-    apt-mark showhold
-    cp /etc/apt/sources.list /etc/apt/sources.list.deb8
-    sed -i -e 's|wheezy|jessie|g' /etc/apt/sources.list
-    apt-get -y update
-    apt-get -y upgrade
-    apt-get -y dist-upgrade
-    apt-get autoremove
-    shutdown -r now
+    sudo apt-get -y update
+    sudo apt-get -y upgrade
+    sudo apt-get -y dist-upgrade
+    sudo dpkg -C
+    sudo apt-mark showhold
+    sudo cp /etc/apt/sources.list /etc/apt/sources.list.deb7
+    echo 'deb     http://archive.debian.org/debian jessie main contrib non-free'                    | sudo tee    /etc/apt/sources.list
+    echo 'deb-src http://archive.debian.org/debian jessie main contrib non-free'                    | sudo tee -a /etc/apt/sources.list
+    echo ''                                                                                         | sudo tee -a /etc/apt/sources.list
+    echo 'deb     http://archive.debian.org/debian jessie-updates main contrib non-free'            | sudo tee -a /etc/apt/sources.list
+    echo 'deb-src http://archive.debian.org/debian jessie-updates main contrib non-free'            | sudo tee -a /etc/apt/sources.list
+    echo ''                                                                                         | sudo tee -a /etc/apt/sources.list
+    echo 'deb     http://security.debian.org/debian-security jessie-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
+    echo 'deb-src http://security.debian.org/debian-security jessie-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
+    sudo apt-get -y update
+    sudo apt-get -y dist-upgrade
+    sudo apt-get -y autoremove
+    sudo apt-get -y autoclean
+    sudo shutdown -r now
 
   fi
 
