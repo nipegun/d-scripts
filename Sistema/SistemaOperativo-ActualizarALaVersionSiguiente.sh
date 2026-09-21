@@ -81,9 +81,10 @@
     echo 'deb-src http://security.debian.org/debian-security trixie-security main contrib non-free non-free-firmware' | sudo tee -a /etc/apt/sources.list
     sudo apt-get -y update
     sudo apt-get -y dist-upgrade
-    sudo apt-get -y autoremove
-    sudo apt-get -y autoclean
-    sudo shutdown -r now
+    # Fase 2
+      sudo apt-get -y autoremove
+      sudo apt-get -y autoclean
+      sudo shutdown -r now
 
   elif [ $cVerSO == "11" ]; then
 
@@ -107,9 +108,10 @@
     echo 'deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware' | sudo tee -a /etc/apt/sources.list
     sudo apt-get -y update
     sudo apt-get -y dist-upgrade
-    sudo apt-get -y autoremove
-    sudo apt-get -y autoclean
-    sudo shutdown -r now
+    # Fase 2
+      sudo apt-get -y autoremove
+      sudo apt-get -y autoclean
+      sudo shutdown -r now
 
   elif [ $cVerSO == "10" ]; then
 
@@ -133,9 +135,10 @@
     echo 'deb-src http://security.debian.org/debian-bullseye stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
     sudo apt-get -y update
     sudo apt-get -y dist-upgrade
-    sudo apt-get -y autoremove
-    sudo apt-get -y autoclean
-    sudo shutdown -r now
+    # Fase 2
+      sudo apt-get -y autoremove
+      sudo apt-get -y autoclean
+      sudo shutdown -r now
 
   elif [ $cVerSO == "9" ]; then
 
@@ -159,9 +162,10 @@
     echo 'deb-src http://security.debian.org/debian-buster stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
     sudo apt-get -y update
     sudo apt-get -y dist-upgrade
-    sudo apt-get -y autoremove
-    sudo apt-get -y autoclean
-    sudo shutdown -r now
+    # Fase 2
+      sudo apt-get -y autoremove
+      sudo apt-get -y autoclean
+      sudo shutdown -r now
 
   elif [ $cVerSO == "8" ]; then
 
@@ -185,9 +189,10 @@
     echo 'deb-src http://security.debian.org/debian-security stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
     sudo apt-get -y update
     sudo apt-get -y dist-upgrade
-    sudo apt-get -y autoremove
-    sudo apt-get -y autoclean
-    sudo shutdown -r now
+    # Fase 2
+      sudo apt-get -y autoremove
+      sudo apt-get -y autoclean
+      sudo shutdown -r now
 
   elif [ $cVerSO == "7" ]; then
 
@@ -211,9 +216,10 @@
     echo 'deb-src http://security.debian.org/debian-security jessie-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
     sudo apt-get -y update
     sudo apt-get -y dist-upgrade
-    sudo apt-get -y autoremove
-    sudo apt-get -y autoclean
-    sudo shutdown -r now
+    # Fase 2
+      sudo apt-get -y autoremove
+      sudo apt-get -y autoclean
+      sudo shutdown -r now
 
   fi
 
