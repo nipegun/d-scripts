@@ -70,7 +70,7 @@
     sudo apt-get -y dist-upgrade
     sudo dpkg -C
     sudo apt-mark showhold
-    sudo cp /etc/apt/sources.list /etc/apt/sources.list.deb11
+    sudo cp /etc/apt/sources.list /etc/apt/sources.list.deb12
     echo 'deb     http://deb.debian.org/debian trixie main contrib non-free non-free-firmware'                        | sudo tee    /etc/apt/sources.list
     echo 'deb-src http://deb.debian.org/debian trixie main contrib non-free non-free-firmware'                        | sudo tee -a /etc/apt/sources.list
     echo ''                                                                                                           | sudo tee -a /etc/apt/sources.list
