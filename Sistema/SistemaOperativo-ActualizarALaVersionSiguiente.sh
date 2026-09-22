@@ -80,6 +80,7 @@
     echo 'deb     http://security.debian.org/debian-security trixie-security main contrib non-free non-free-firmware' | sudo tee -a /etc/apt/sources.list
     echo 'deb-src http://security.debian.org/debian-security trixie-security main contrib non-free non-free-firmware' | sudo tee -a /etc/apt/sources.list
     sudo apt-get -y update
+    sudo apt-get -y upgrade
     sudo apt-get -y dist-upgrade
     # Fase 2
       sudo apt-get -y autoremove
@@ -107,6 +108,7 @@
     echo 'deb     http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware' | sudo tee -a /etc/apt/sources.list
     echo 'deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware' | sudo tee -a /etc/apt/sources.list
     sudo apt-get -y update
+    sudo apt-get -y upgrade
     sudo apt-get -y dist-upgrade
     # Fase 2
       sudo apt-get -y autoremove
@@ -134,6 +136,7 @@
     echo 'deb     http://security.debian.org/debian-bullseye stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
     echo 'deb-src http://security.debian.org/debian-bullseye stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
     sudo apt-get -y update
+    sudo apt-get -y upgrade
     sudo apt-get -y dist-upgrade
     # Fase 2
       sudo apt-get -y autoremove
@@ -161,6 +164,7 @@
     echo 'deb     http://security.debian.org/debian-buster stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
     echo 'deb-src http://security.debian.org/debian-buster stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
     sudo apt-get -y update
+    sudo apt-get -y upgrade
     sudo apt-get -y dist-upgrade
     # Fase 2
       sudo apt-get -y autoremove
@@ -188,6 +192,7 @@
     echo 'deb     http://security.debian.org/debian-security stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
     echo 'deb-src http://security.debian.org/debian-security stretch-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
     sudo apt-get -y update
+    sudo apt-get -y upgrade
     sudo apt-get -y dist-upgrade
     # Fase 2
       sudo apt-get -y autoremove
@@ -215,6 +220,7 @@
     echo 'deb     http://security.debian.org/debian-security jessie-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
     echo 'deb-src http://security.debian.org/debian-security jessie-security main contrib non-free' | sudo tee -a /etc/apt/sources.list
     sudo apt-get -y update
+    sudo apt-get -y upgrade
     sudo apt-get -y dist-upgrade
     # Fase 2
       sudo apt-get -y autoremove
