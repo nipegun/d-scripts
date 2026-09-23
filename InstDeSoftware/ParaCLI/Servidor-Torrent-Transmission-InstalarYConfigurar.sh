@@ -80,54 +80,54 @@
         echo ""
         echo -e "${cColorVerde}  Creando las carpetas para las descargas...${cFinColor}"
         echo ""
-        mkdir -p $1
-        mkdir -p $2
+        sudo mkdir -p $1
+        sudo mkdir -p $2
     
         echo ""
         echo -e "${cColorVerde}  Instalando el paquete transission-daemon...${cFinColor}"
         echo ""
-        apt-get -y install transmission-daemon
+        sudo apt-get -y update
+        sudo apt-get -y install transmission-daemon
 
         echo ""
         echo -e "${cColorVerde}  Deteniendo el servicio transmission-daemon${cFinColor}"
         echo ""
-        service transmission-daemon stop
+        sudo systemctl stop transmission-daemon
 
         echo ""
         echo -e "${cColorVerde}  Realizando cambios en la configuración...${cFinColor}"
         echo ""
-        cp /etc/transmission-daemon/settings.json /etc/transmission-daemon/settings.json.bak
-        sed -i -e 's|"download-dir": "/var/lib/transmission-daemon/downloads",|"download-dir": "'$1'",|g'     /etc/transmission-daemon/settings.json
-        sed -i -e 's|"incomplete-dir": "/var/lib/transmission-daemon/Downloads",|"incomplete-dir": "'$2'",|g' /etc/transmission-daemon/settings.json
-        sed -i -e 's|"incomplete-dir-enabled": false,|"incomplete-dir-enabled": true,|g'                      /etc/transmission-daemon/settings.json
-        sed -i -e 's|"ratio-limit-enabled": false,|"ratio-limit-enabled": true,|g'                            /etc/transmission-daemon/settings.json
-        sed -i -e 's|^.*"rpc-password":.*|    "rpc-password": "'$3'",|g'                                      /etc/transmission-daemon/settings.json
-        sed -i -e 's|"rpc-whitelist": "127.0.0.1",|"rpc-whitelist": "127.0.0.1, 192.168.*.*, 10.0.*.*",|g'    /etc/transmission-daemon/settings.json
-        sed -i -e 's|"trash-original-torrent-files": false,|"trash-original-torrent-files": true,|g'          /etc/transmission-daemon/settings.json
-        sed -i -e 's|"umask": 18,|"umask": 2,|g'                                                              /etc/transmission-daemon/settings.json
+        sudo cp /etc/transmission-daemon/settings.json /etc/transmission-daemon/settings.json.bak
+        sudo sed -i -e 's|"download-dir": "/var/lib/transmission-daemon/downloads",|"download-dir": "'$1'",|g'     /etc/transmission-daemon/settings.json
+        sudo sed -i -e 's|"incomplete-dir": "/var/lib/transmission-daemon/Downloads",|"incomplete-dir": "'$2'",|g' /etc/transmission-daemon/settings.json
+        sudo sed -i -e 's|"incomplete-dir-enabled": false,|"incomplete-dir-enabled": true,|g'                      /etc/transmission-daemon/settings.json
+        sudo sed -i -e 's|"ratio-limit-enabled": false,|"ratio-limit-enabled": true,|g'                            /etc/transmission-daemon/settings.json
+        sudo sed -i -e 's|^.*"rpc-password":.*|    "rpc-password": "'$3'",|g'                                      /etc/transmission-daemon/settings.json
+        sudo sed -i -e 's|"rpc-whitelist": "127.0.0.1",|"rpc-whitelist": "127.0.0.1, 192.168.*.*, 10.0.*.*",|g'    /etc/transmission-daemon/settings.json
+        sudo sed -i -e 's|"trash-original-torrent-files": false,|"trash-original-torrent-files": true,|g'          /etc/transmission-daemon/settings.json
+        sudo sed -i -e 's|"umask": 18,|"umask": 2,|g'                                                              /etc/transmission-daemon/settings.json
 
         echo ""
         echo -e "${cColorVerde}  Agregando el usuario al grupo transmission-daemon...${cFinColor}"
         echo ""
-        usermod -a -G debian-transmission $4
+        sudo usermod -a -G debian-transmission $4
 
         echo ""
         echo -e "${cColorVerde}  Cambiando el grupo propietario de lsa carpetas $1 y $2...${cFinColor}"
         echo ""
-        chgrp debian-transmission $1
-        chgrp debian-transmission $2
+        sudo chgrp debian-transmission $1
+        sudo chgrp debian-transmission $2
     
         echo ""
         echo -e "${cColorVerde}  Dando permisos de escritura al grupo...${cFinColor}"
         echo ""
-        chmod 770 $1
-        chmod 770 $2
+        sudo chmod 770 $1
+        sudo chmod 770 $2
 
         echo ""
         echo -e "${cColorVerde}  Iniciando el servicio transmission-daemon...${cFinColor}"
         echo ""
-        service transmission-daemon start
-
+        sudo systemctl start transmission-daemon
         echo ""
       
         echo "  EL DEMONIO TRANSMISSION HA SIDO INSTALADO E INICIADO."
@@ -139,7 +139,6 @@
         echo ""
         echo "  Nombre de usuario: transmission"
         echo "  Contraseña: $3"
-      
         echo ""
 
     fi
