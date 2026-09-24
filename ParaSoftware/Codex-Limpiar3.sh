@@ -95,7 +95,7 @@ set -euo pipefail
     done
 
 # Recrear el archivo config.toml
-  echo 'model = "gpt-6-sol"'                    | tee    $cBaseDir/config.toml
+  echo 'model = "gpt-6-astra"'                    | tee    $cBaseDir/config.toml
 
   echo 'model_reasoning_effort = "max"'           | tee -a $cBaseDir/config.toml
   echo 'plan_mode_reasoning_effort = "max"'       | tee -a $cBaseDir/config.toml
