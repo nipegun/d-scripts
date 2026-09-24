@@ -88,23 +88,38 @@ set -euo pipefail
   if [ -f "$HOME"/.claude/settings.json ]; then
     jq '."$schema"="https://json.schemastore.org/claude-code-settings.json" | .attribution.coauthored=false | .language="spanish" | .model="opus" | .effortLevel="xhigh" | .showTips=false | .permissions.defaultMode="auto"' "$HOME"/.claude/settings.json > /tmp/claude-settings.json && mv /tmp/claude-settings.json "$HOME"/.claude/settings.json
   else
-    echo '{'                                                                      | tee    "$HOME"/.claude/settings.json
-    echo '  "$schema": "https://json.schemastore.org/claude-code-settings.json",' | tee -a "$HOME"/.claude/settings.json
-    echo '  "attribution": {'                                                     | tee -a "$HOME"/.claude/settings.json
-    echo '    "coauthored": false'                                                | tee -a "$HOME"/.claude/settings.json
-    echo '  },'                                                                   | tee -a "$HOME"/.claude/settings.json
-    echo '  "permissions": {'                                                     | tee -a "$HOME"/.claude/settings.json
-    echo '    "defaultMode": "auto"'                                              | tee -a "$HOME"/.claude/settings.json
-    echo '  },'                                                                   | tee -a "$HOME"/.claude/settings.json
-    #echo '  "model": "sonnet",'                                                  | tee -a "$HOME"/.claude/settings.json
-    #echo '  "model": "claude-fable-5[1m]",'                                      | tee -a "$HOME"/.claude/settings.json
-    echo '  "model": "opus[1m]",'                                                 | tee -a "$HOME"/.claude/settings.json
-    echo '  "effortLevel": "xhigh",'                                              | tee -a "$HOME"/.claude/settings.json
-    echo '  "language": "spanish",'                                               | tee -a "$HOME"/.claude/settings.json
-    echo '  "skipDangerousModePermissionPrompt": true,'                           | tee -a "$HOME"/.claude/settings.json
-    echo '  "switchModelsOnFlag": false,'                                         | tee -a "$HOME"/.claude/settings.json
-    echo '  "autoContinueAtUsageLimit": false,'                                   | tee -a "$HOME"/.claude/settings.json
-    echo '  "remoteControlAtStartup": false,'                                     | tee -a "$HOME"/.claude/settings.json
-    echo '  "showTips": false'                                                    | tee -a "$HOME"/.claude/settings.json
-    echo '}'                                                                      | tee -a "$HOME"/.claude/settings.json
+    echo '{'                                            | tee    "$HOME"/.claude/settings.json
+    echo '  "attribution": {'                           | tee -a "$HOME"/.claude/settings.json
+    echo '    "coauthored": false'                      | tee -a "$HOME"/.claude/settings.json
+    echo '  },'                                         | tee -a "$HOME"/.claude/settings.json
+    echo '  "permissions": {'                           | tee -a "$HOME"/.claude/settings.json
+    echo '    "defaultMode": "auto"'                    | tee -a "$HOME"/.claude/settings.json
+    echo '  },'                                         | tee -a "$HOME"/.claude/settings.json
+    echo '  "model": "opus[1m]",'                       | tee -a "$HOME"/.claude/settings.json
+    echo '  "language": "Spanish",'                     | tee -a "$HOME"/.claude/settings.json
+    echo '  "modelSettings": {'                         | tee -a "$HOME"/.claude/settings.json
+    echo '    "claude-opus-5-5": {'                     | tee -a "$HOME"/.claude/settings.json
+    echo '      "effortLevel": "xhigh"'                 | tee -a "$HOME"/.claude/settings.json
+    echo '    },'                                       | tee -a "$HOME"/.claude/settings.json
+    echo '    "claude-fable-5-1": {'                    | tee -a "$HOME"/.claude/settings.json
+    echo '      "effortLevel": "xhigh"'                 | tee -a "$HOME"/.claude/settings.json
+    echo '    },'                                       | tee -a "$HOME"/.claude/settings.json
+    echo '    "claude-sonnet-5": {'                     | tee -a "$HOME"/.claude/settings.json
+    echo '      "effortLevel": "xhigh"'                 | tee -a "$HOME"/.claude/settings.json
+    echo '    },'                                       | tee -a "$HOME"/.claude/settings.json
+    echo '    "claude-haiku-4-5": {'                    | tee -a "$HOME"/.claude/settings.json
+    echo '      "effortLevel": "xhigh"'                 | tee -a "$HOME"/.claude/settings.json
+    echo '    }'                                        | tee -a "$HOME"/.claude/settings.json
+    echo '  },'                                         | tee -a "$HOME"/.claude/settings.json
+    echo '  "promptSuggestionEnabled": false,'          | tee -a "$HOME"/.claude/settings.json
+    echo '  "awaySummaryEnabled": false,'               | tee -a "$HOME"/.claude/settings.json
+    echo '  "timeFormat": "24-hour",'                   | tee -a "$HOME"/.claude/settings.json
+    echo '  "editorMode": "normal",'                    | tee -a "$HOME"/.claude/settings.json
+    echo '  "switchModelsOnFlag": false,'               | tee -a "$HOME"/.claude/settings.json
+    echo '  "agentPushNotifEnabled": true,'             | tee -a "$HOME"/.claude/settings.json
+    echo '  "skipDangerousModePermissionPrompt": true,' | tee -a "$HOME"/.claude/settings.json
+    echo '  "autoContinueAtUsageLimit": false,'         | tee -a "$HOME"/.claude/settings.json
+    echo '  "remoteControlAtStartup": false,'           | tee -a "$HOME"/.claude/settings.json
+    echo '  "showTips": false'                          | tee -a "$HOME"/.claude/settings.json
+    echo '}'                                            | tee -a "$HOME"/.claude/settings.json
   fi
