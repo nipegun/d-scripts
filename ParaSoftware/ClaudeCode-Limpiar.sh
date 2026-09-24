@@ -40,6 +40,7 @@ set -euo pipefail
       "sessions"
       "shell-snapshots"
       "skills"
+      "state"
       "tasks"
       "telemetry"
       ".cc-writes"
