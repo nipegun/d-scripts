@@ -23,8 +23,10 @@ set -euo pipefail
 
   # Definir el array con el nombre de las carpetas a borrar
     aCarpetasABorrar=(
-      "dictation-history"
+      "attachments"
       "cache"
+      "computer-use"
+      "dictation-history"
       "generated_images"
       "ipc"
       "log"
@@ -38,6 +40,7 @@ set -euo pipefail
       "thread-writer-locks"
       "tmp"
       "vendor_imports"
+      "visualizations"
       ".tmp"
     )
 
@@ -78,7 +81,6 @@ set -euo pipefail
       "thread_history_1.sqlite-wal"
       "transcription-history.jsonl"
       "version.json"
-      ".codex-global-state.json"
       ".codex-global-state.json.bak"
       ".personality_migration"
       ".sandbox_migration"
@@ -93,7 +95,7 @@ set -euo pipefail
     done
 
 # Recrear el archivo config.toml
-  echo 'model = "gpt-5.6-sol"'                    | tee    $cBaseDir/config.toml
+  echo 'model = "gpt-6-sol"'                    | tee    $cBaseDir/config.toml
 
   echo 'model_reasoning_effort = "max"'           | tee -a $cBaseDir/config.toml
   echo 'plan_mode_reasoning_effort = "max"'       | tee -a $cBaseDir/config.toml
