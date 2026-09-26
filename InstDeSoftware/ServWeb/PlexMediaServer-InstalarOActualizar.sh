@@ -216,14 +216,14 @@ if [ $cVerSO == "13" ]; then
 
           5)
 
-           systemctl stop plexmediaserver.service
-           mkdir -p /etc/systemd/system/plexmediaserver.service.d/ 2> /dev/null
-           touch /etc/systemd/system/plexmediaserver.service.d/override.conf
-           echo "[Service]" > /etc/systemd/system/plexmediaserver.service.d/override.conf
-           echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=$CarpetaAlternativa"' >> /etc/systemd/system/plexmediaserver.service.d/override.conf
-           systemctl daemon-reload
-           systemctl start plexmediaserver.service
-           systemctl status plexmediaserver.service
+           sudo systemctl stop plexmediaserver.service
+           sudo mkdir -p /etc/systemd/system/plexmediaserver.service.d/ 2> /dev/null
+           sudo touch /etc/systemd/system/plexmediaserver.service.d/override.conf
+           echo "[Service]"                                                                   | sudo tee    /etc/systemd/system/plexmediaserver.service.d/override.conf
+           echo 'Environment="PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR=$CarpetaAlternativa"' | sudo tee -a /etc/systemd/system/plexmediaserver.service.d/override.conf
+           sudo systemctl daemon-reload
+           sudo systemctl start plexmediaserver.service
+           sudo systemctl status plexmediaserver.service
 
           ;;
 
