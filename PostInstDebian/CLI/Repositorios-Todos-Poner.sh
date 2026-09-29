@@ -67,6 +67,7 @@ if [ $cVerSO == "13" ]; then
     #echo ""                                                                                                       | sudo tee -a /etc/apt/sources.list
 
   # Forma moderna
+    sudo mv /etc/apt/sources.list.d/0000debian.sources /etc/apt/sources.list.d/000debian.sources.bak.ori
     echo 'Types: deb deb-src'                                        | sudo tee    /etc/apt/sources.list.d/debian.sources
     echo 'URIs: http://deb.debian.org/debian/'                       | sudo tee -a /etc/apt/sources.list.d/debian.sources
     echo 'Suites: trixie'                                            | sudo tee -a /etc/apt/sources.list.d/debian.sources
