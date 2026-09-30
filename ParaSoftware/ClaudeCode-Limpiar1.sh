@@ -123,3 +123,10 @@ set -euo pipefail
     echo '  "showTips": false'                          | tee -a "$HOME"/.claude/settings.json
     echo '}'                                            | tee -a "$HOME"/.claude/settings.json
   fi
+
+# Listar los archivos remanentes de la carpeta
+  echo ""
+  echo "  Archivos remanentes en la carpeta $HOME/.claude/ :"
+  echo ""
+  ls -lha "$HOME"/.claude/
+  echo ""
