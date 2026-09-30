@@ -98,12 +98,16 @@ set -euo pipefail
     done
 
 # Recrear el archivo config.toml
-  echo 'model = "gpt-6-astra"'                    | tee    $cBaseDir/config.toml
+  echo 'model = "gpt-6-astra"'                    | tee    "$cBaseDir"/config.toml
+  echo 'model_reasoning_effort = "xhigh"'         | tee -a "$cBaseDir"/config.toml
+  echo 'plan_mode_reasoning_effort = "max"'       | tee -a "$cBaseDir"/config.toml
+  echo 'model_context_window = 1000000'           | tee -a "$cBaseDir"/config.toml
+  echo 'model_auto_compact_token_limit = 900000'  | tee -a "$cBaseDir"/config.toml
+  echo 'service_tier = "default"'                 | tee -a "$cBaseDir"/config.toml
 
-  echo 'model_reasoning_effort = "xhigh"'         | tee -a $cBaseDir/config.toml
-  echo 'plan_mode_reasoning_effort = "max"'       | tee -a $cBaseDir/config.toml
-
-  echo 'model_context_window = 1000000'           | tee -a $cBaseDir/config.toml
-  echo 'model_auto_compact_token_limit = 900000'  | tee -a $cBaseDir/config.toml
-
-  echo 'service_tier = "default"'                 | tee -a $cBaseDir/config.toml
+# Listar los archivos remanentes de la carpeta
+  echo ""
+  echo "  Archivos remanentes en la carpeta "
+  echo ""
+  ls -lha "$cBaseDir"/
+  echo ""
