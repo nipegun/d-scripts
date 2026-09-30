@@ -23,6 +23,8 @@ set -euo pipefail
 
   # Definir el array con el nombre de las carpetas a borrar
     aCarpetasABorrar=(
+      "app-server-control"
+      "app-server-daemon"
       "attachments"
       "cache"
       "computer-use"
@@ -31,6 +33,7 @@ set -euo pipefail
       "ipc"
       "log"
       "memories"
+      "packages"
       "plugins"
       "rules"
       "sessions"
