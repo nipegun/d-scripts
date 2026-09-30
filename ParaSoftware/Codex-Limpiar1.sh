@@ -107,7 +107,7 @@ set -euo pipefail
 
 # Listar los archivos remanentes de la carpeta
   echo ""
-  echo "  Archivos remanentes en la carpeta "
+  echo "  Archivos remanentes en la carpeta $cBaseDir/ :"
   echo ""
   ls -lha "$cBaseDir"/
   echo ""
